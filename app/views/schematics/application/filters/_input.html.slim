@@ -1,0 +1,3 @@
+.input-group.mr-sm-2.mb-2
+  - if params["by_#{field.name}".to_sym].present?
+  = text_field_tag "by_#{field.name}".to_sym, params["by_#{field.name}".to_sym], placeholder: "Filtrer par #{field.name.humanize}", class: "form-control #{'border-primary' if params["by_#{field.name}".to_sym].present?}"

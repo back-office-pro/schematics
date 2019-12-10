@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  designation: 64485856f3a159d06252f979e0efcccf
+  description: MyString
+  price: 9.99
+  vat: 1.5
+  in_stock: false
+  state: 1
+  sub_category: one
+
+two:
+  designation: 8852fb38ea6c3bfd995f584074ac0b58
+  description: MyString
+  price: 9.99
+  vat: 1.5
+  in_stock: false
+  state: 1
+  sub_category: two

@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id          :integer          not null, primary key
+#  deleted_at  :datetime
+#  designation :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_categories_on_designation  (designation) UNIQUE
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  designation: e7f882e57c7a5d2d3e45c708484fa242
+
+two:
+  designation: cd2d2035d886fd0152641e5db258e566

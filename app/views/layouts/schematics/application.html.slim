@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title Schematics
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "schematics/application", media: "all"
+    = javascript_include_tag "schematics/application"
+  body
+    nav.navbar.navbar-expand-lg.fixed-top.bg-white.flex-md-nowrap.p-0.shadow
+      = link_to "Foo", '/', class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
+      button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNav" data-toggle="collapse" type="button" 
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav.ml-3.p-3
+          = form_tag schematics.search_path, method: :get, class: "form-inline" do
+            .input-group
+              = text_field_tag :query, params[:query], required: true, placeholder: "Rechercher...", class: "form-control bg-light border-0 search" 
+              .input-group-append
+                = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
+        ul.navbar-nav.ml-auto.p-3
+          li.nav-item.mr-2.d-flex.align-items-center
+            = fa_icon :bell, class: "text-secondary"
+            .badge.badge-danger.badge-sm 3
+          li.nav-item.mr-2.d-flex.align-items-center
+            = fa_icon :envelope, class: "text-secondary"
+            .badge.badge-danger 7
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center
+            a#navbarDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+              | maxence.derous@gmail.com              
+              = fa_icon :user_circle, size: "2x", class: "ml-2 align-middle"
+            .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown" 
+              a.dropdown-item data-target="#editRegistrationModal" data-toggle="modal" href="#" 
+                = fa_icon :user, class: "mr-2"
+                | Editer profil
+              .dropdown-divider
+              = link_to '/', method: :delete, class: "dropdown-item" do
+                = fa_icon :sign_out_alt, class: "mr-2"
+                | Déconnexion
+    .container-fluid.h-100.bg-light
+      .row
+        nav.col-md-2.d-none.d-md-block.bg-gradient-primary.sidebar
+          .sidebar-sticky
+            .container
+                ul.nav.flex-column
+                  - Schematics::SCHEMA.entities.each do |entity|
+                    li.nav-item
+                      = link_to entity.type.pluralize.titleize, main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link"
+                      - if url_for.start_with? main_app.polymorphic_path(entity.type.pluralize.to_sym)
+                        = render 'menu'
+                      hr
+        main.col-md-10.ml-sm-auto.col-lg-10.px-4 role="main" 
+          = yield

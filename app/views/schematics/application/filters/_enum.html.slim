@@ -1,0 +1,7 @@
+.input-group.mr-sm-2.mb-2
+  - if params["by_#{field.name}".to_sym].present?
+    .input-group-prepend
+      .input-group-text
+        = button_tag onclick: "this.form.by_#{field.name}.value = ''", class: "btn p-0" do
+          = fa_icon :eraser
+  = select_tag "by_#{field.name}".to_sym, options_for_select(table_entity.type.camelize.constantize.send(field.name.pluralize.to_sym).keys.map(&:to_sym), params["by_#{field.name}".to_sym]), prompt: "Filtrer par #{field.name.humanize}", onchange: "this.form.submit()", class: "form-control #{'border-primary' if params["by_#{field.name}".to_sym].present?}"

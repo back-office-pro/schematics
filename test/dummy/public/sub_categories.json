@@ -1,0 +1,279 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "sub_categories",
+  "apis": [
+    {
+      "path": "/sub_categories.json",
+      "operations": [
+        {
+          "summary": "Fetches all sub category items",
+          "notes": "This lists all the sub categories",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page number",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "type": "SubCategory",
+          "nickname": "SubCategories#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/sub_categories.json",
+      "operations": [
+        {
+          "summary": "Creates a new sub category",
+          "notes": "This creates a new sub category",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "subCategory[designation]",
+              "type": "string",
+              "description": "Designation",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "subCategory[category]",
+              "type": "integer",
+              "description": "Category",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "SubCategories#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/sub_categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Fetches a single sub category item",
+          "notes": "This returns a single sub category",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Sub category Id",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "type": "SubCategory",
+          "nickname": "SubCategories#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/sub_categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Updates an existing sub category",
+          "notes": "This updates an existing sub category",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Sub category Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "subCategory[designation]",
+              "type": "string",
+              "description": "Designation",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "subCategory[category]",
+              "type": "integer",
+              "description": "Category",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "SubCategories#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/sub_categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Deletes an existing sub category item",
+          "notes": "This deletes an existing sub category",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Sub category Id",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "really",
+              "type": "boolean",
+              "description": "Really destroy sub category item (without soft delete)",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "SubCategories#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null,
+  "models": {
+    "SubCategory": {
+      "id": "SubCategory",
+      "required": [
+        "designation",
+        "category"
+      ],
+      "properties": {
+        "designation": {
+          "type": "string",
+          "description": "Designation"
+        },
+        "category": {
+          "type": "Category",
+          "description": "Category"
+        }
+      },
+      "description": "A SubCategory object"
+    }
+  }
+}

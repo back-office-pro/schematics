@@ -1,0 +1,120 @@
+module Schematics
+  module Tests
+    class Model < ::ActiveSupport::TestCase
+      class << self
+        def inherited(subclass)
+          super
+          subclass.class_eval do
+            setup do
+              @record = send(subclass.fixture_name, :one)
+              @other_record = send(subclass.fixture_name, :two)
+            end
+          
+            test "valid #{subclass.entity_name}" do
+              assert @record.valid?
+            end
+
+            entity = SCHEMA.find_entity_by_type(subclass.entity_name)
+
+            entity.attributes.select(&:required?).each do |attribute|
+              test "invalid without #{attribute.name}" do
+                @record.send("#{attribute.name}=", nil)
+                refute @record.valid?
+                assert_not_nil @record.errors[attribute.name.to_sym]
+              end
+            end
+
+            entity.attributes.select(&:unique?).each do |attribute|
+              test "invalid without unique #{attribute.name}" do
+                @record.send("#{attribute.name}=", @other_record.send(attribute.name))
+                refute @record.valid?
+                assert_not_nil @record.errors[attribute.name.to_sym]
+              end
+            end
+
+            entity.virtuals.each do |virtual|
+              test "should have virtual #{virtual.name}" do
+                assert @record.respond_to?(virtual.name.to_sym)
+                assert @record.send(virtual.name.to_sym)
+              end
+            end
+
+            entity.references.each do |reference|
+              test "should belongs_to #{reference.name}" do
+                reflection = @record.class.reflect_on_association(reference.name.to_sym)
+                assert reflection.macro === :belongs_to
+                assert reflection.class_name === reference.model_property_type
+                assert reflection.options[:optional] === true unless reference.required?
+              end
+            end
+
+            entity.has_many_associations.each do |association|
+              test "should have many #{association.name}" do
+                reflection = @record.class.reflect_on_association(association.name.to_sym)
+                assert reflection.macro === :has_many
+                assert reflection.class_name === association.class_name
+                assert reflection.options[:dependent] === association.required? ? :destroy : :nullify
+              end
+            end
+
+            entity.has_one_associations.each do |association|
+              test "should have one #{association.name}" do
+                reflection = @record.class.reflect_on_association(association.name.to_sym)
+                assert reflection.macro === :has_one
+                assert reflection.class_name === association.class_name
+              end
+            end
+
+            entity.has_many_through_associations.each do |association|
+              test "should have many #{association.name} through #{association.through.name}" do
+                reflection = @record.class.reflect_on_association(association.name.to_sym)
+                assert reflection.macro === :has_many
+                assert reflection.class_name === association.class_name
+                assert reflection.options[:through] === association.through.name.to_sym
+              end
+            end
+
+            entity.has_one_through_associations.each do |association|
+              test "should have one #{association.name} through #{association.through.name}" do
+                reflection = @record.class.reflect_on_association(association.name.to_sym)
+                assert reflection.macro === :has_one
+                assert reflection.class_name === association.class_name
+                assert reflection.options[:through] === association.through.name.to_sym
+              end
+            end
+
+            (entity.attributes + entity.virtuals + entity.has_one_associations + entity.has_one_through_associations).each do |scopable|
+              scope = "by_#{scopable.name}".to_sym
+              test "should have scope #{scope}" do
+                assert @record.class.respond_to?(scope)
+              end
+            end
+
+            entity.attributes.select_is_a?(Attributes::Enum).each do |enum|
+              test "should have enum #{enum.name}" do
+                @record.respond_to?(enum.name.to_sym)
+                enum.values.map(&:to_sym).each do |value|
+                  assert @record.class.respond_to?(value)
+                end
+              end
+            end
+          end
+        end
+      end
+
+      protected
+      
+      def self.model_name
+        self.name.chomp('Test')
+      end
+
+      def self.entity_name
+        self.model_name.underscore
+      end
+
+      def self.fixture_name
+        self.entity_name.pluralize
+      end
+    end
+  end
+end

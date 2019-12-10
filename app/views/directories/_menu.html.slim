@@ -1,0 +1,6 @@
+- (directories ||= Directory.by_parent(nil)).each do |directory|
+  li.nav-item
+    = link_to directory, class: "nav-link text-truncate p-0", style: "margin-left: #{10 * (indent ||= 0)}px" do
+      = fa_icon (url_for === url_for(directory) ? :folder_open : :folder), class: "mr-2"
+      = directory.name
+  = render 'menu', directories: directory.sub_directories, indent: indent + 2

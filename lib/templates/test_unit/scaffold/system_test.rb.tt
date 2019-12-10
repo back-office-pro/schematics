@@ -1,0 +1,6 @@
+require 'application_system_test_case'
+
+<% module_namespacing do -%>
+class <%= class_name.pluralize %>Test < Schematics::Tests::System
+end
+<% end -%>

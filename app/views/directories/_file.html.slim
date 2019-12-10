@@ -1,0 +1,6 @@
+.col.text-center
+  = link_to fa_icon(:trash), file, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger pl-5 ml-5 position-absolute"
+  = link_to file do
+    = fa_icon file_icon(file), size: '2x', type: :solid
+    h6.mt-2
+      = file.filename

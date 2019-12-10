@@ -1,0 +1,4 @@
+<% module_namespacing do -%>
+class <%= controller_class_name %>Controller < Schematics::ApplicationController
+end
+<% end -%>

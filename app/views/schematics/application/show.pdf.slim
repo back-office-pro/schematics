@@ -1,0 +1,30 @@
+.table-responsive
+  table.table.table-bordered.table-striped
+    tbody
+      - (entity.attributes - entity.references + entity.virtuals).each do |field|
+        tr
+          th
+            = fa_icon field_icon(field), class: "mr-2 text-muted"
+            = field.name.humanize
+          td= @resource.instance_eval(field.name)
+      - entity.references.each do |reference|
+        tr
+          th
+            = fa_icon :link, class: "mr-2 text-muted"
+            = reference.name.humanize
+          td
+            = link_to @resource.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}"), @resource.instance_eval(reference.name)
+      - (entity.has_one_associations + entity.has_one_through_associations).each do |association|
+        tr
+          th
+            = fa_icon :link, class: "mr-2 text-muted"
+            = association.name.humanize
+          td= link_to @resource.instance_eval("#{association.name}.#{association.entity.descriptor.name}"), @resource.instance_eval(association.name)
+      - (entity.has_many_associations + entity.has_many_through_associations).each do |association|
+        tr
+          th
+            = fa_icon :link, class: "mr-2 text-muted"
+            = association.name.humanize
+          td
+            - @resource.instance_eval(association.name).each do |resource|
+              = link_to resource.instance_eval(association.entity.descriptor.name), resource

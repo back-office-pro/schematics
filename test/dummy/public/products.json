@@ -1,0 +1,411 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "products",
+  "apis": [
+    {
+      "path": "/products.json",
+      "operations": [
+        {
+          "summary": "Fetches all product items",
+          "notes": "This lists all the products",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page number",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "type": "Product",
+          "nickname": "Products#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/products.json",
+      "operations": [
+        {
+          "summary": "Creates a new product",
+          "notes": "This creates a new product",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "product[designation]",
+              "type": "string",
+              "description": "Designation",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "product[description]",
+              "type": "string",
+              "description": "Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[price]",
+              "type": "double",
+              "description": "Price",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[vat]",
+              "type": "float",
+              "description": "Vat",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[inStock]",
+              "type": "boolean",
+              "description": "In stock",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[logo]",
+              "type": "file",
+              "description": "Logo",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[state]",
+              "type": "string",
+              "description": "State",
+              "required": false,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "available",
+                  "not_available",
+                  "available_soon"
+                ]
+              }
+            },
+            {
+              "paramType": "form",
+              "name": "product[subCategory]",
+              "type": "integer",
+              "description": "Sub category",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Products#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/products/{id}.json",
+      "operations": [
+        {
+          "summary": "Fetches a single product item",
+          "notes": "This returns a single product",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "type": "Product",
+          "nickname": "Products#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/products/{id}.json",
+      "operations": [
+        {
+          "summary": "Updates an existing product",
+          "notes": "This updates an existing product",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "product[designation]",
+              "type": "string",
+              "description": "Designation",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "product[description]",
+              "type": "string",
+              "description": "Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[price]",
+              "type": "double",
+              "description": "Price",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[vat]",
+              "type": "float",
+              "description": "Vat",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[inStock]",
+              "type": "boolean",
+              "description": "In stock",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[logo]",
+              "type": "file",
+              "description": "Logo",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[state]",
+              "type": "string",
+              "description": "State",
+              "required": false,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "available",
+                  "not_available",
+                  "available_soon"
+                ]
+              }
+            },
+            {
+              "paramType": "form",
+              "name": "product[subCategory]",
+              "type": "integer",
+              "description": "Sub category",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Products#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/products/{id}.json",
+      "operations": [
+        {
+          "summary": "Deletes an existing product item",
+          "notes": "This deletes an existing product",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "really",
+              "type": "boolean",
+              "description": "Really destroy product item (without soft delete)",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Products#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null,
+  "models": {
+    "Product": {
+      "id": "Product",
+      "required": [
+        "designation",
+        "subCategory"
+      ],
+      "properties": {
+        "designation": {
+          "type": "string",
+          "description": "Designation"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "price": {
+          "type": "decimal",
+          "description": "Price"
+        },
+        "vat": {
+          "type": "float",
+          "description": "Vat"
+        },
+        "inStock": {
+          "type": "boolean",
+          "description": "In stock"
+        },
+        "logo": {
+          "type": "attachment",
+          "description": "Logo"
+        },
+        "state": {
+          "type": "string",
+          "description": "State",
+          "allowableValues": {
+            "valueType": "LIST",
+            "values": [
+              "available",
+              "not_available",
+              "available_soon"
+            ]
+          }
+        },
+        "subCategory": {
+          "type": "SubCategory",
+          "description": "Sub category"
+        }
+      },
+      "description": "A Product object"
+    }
+  }
+}

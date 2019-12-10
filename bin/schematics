@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+rails new $1 --database postgresql --skip-keeps --skip-action-cable --skip-bundle --skip-webpack-install --template template.rb

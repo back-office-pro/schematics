@@ -1,0 +1,7 @@
+.card.shadow
+  .card-header
+    h5.m-0.text-primary.font-weight-bold
+      = fa_icon :plus, class: "mr-2"
+      | Ajouter un nouveau #{entity.type.titleize}
+  .card-body
+    = render 'form', resource: @resource

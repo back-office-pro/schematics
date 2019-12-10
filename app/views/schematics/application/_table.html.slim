@@ -1,0 +1,78 @@
+.table-responsive
+  table.table.table-striped.table-hover class=('with-actions' if actions)
+    thead
+      tr
+        - (table_entity.attributes - table_entity.references + table_entity.virtuals).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+          th.text-truncate.text-center
+            = fa_icon field_icon(field), class: "mr-2 text-muted"
+            = actions ? sort_link_to(field) : field.name.titleize
+        - table_entity.references.each do |reference|
+          th.text-truncate.text-center
+            = fa_icon :link, class: "mr-2 text-muted"
+            = actions ? sort_link_to(reference) : reference.name.titleize
+        - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
+          th.text-truncate.text-center
+            = fa_icon :link, class: "mr-2 text-muted"
+            = actions ? sort_link_to(association) : association.name.titleize
+        - if actions
+          th.text-truncate.text-center
+      - if actions
+        tr
+          - (table_entity.attributes - table_entity.references + table_entity.virtuals).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+            th.align-middle.text-center.px-0
+              - if field.is_a?(Schematics::Attributes::Boolean)
+                = render 'schematics/application/filters/boolean', field: field
+              - elsif field.is_a?(Schematics::Attributes::Enum)
+                = render 'schematics/application/filters/enum', field: field, table_entity: table_entity
+              - else
+                = render 'schematics/application/filters/input', field: field
+          - table_entity.references.each do |reference|
+            th.align-middle.text-center.px-0
+              = render 'schematics/application/filters/reference', reference: reference
+          - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
+            th.align-middle.text-center.px-0
+              = render 'schematics/application/filters/association', association: association
+          th.text-truncate.align-middle.px-0
+            = render 'schematics/application/filters/with_deleted'
+      tbody
+        - if resources.empty?
+          tr
+            td.text-center.pt-5.bg-white colspan="100%"
+              = render 'empty'
+        - else
+          - resources.each do |resource|
+            tr onclick="window.location = '#{main_app.url_for(resource)}'"
+              - (table_entity.attributes - table_entity.references + table_entity.virtuals).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+                td.text-truncate.text-center
+                  - if field.is_a?(Schematics::Attributes::Text) && !actions
+                    = highlight(resource.instance_eval(field.name), params[:query])
+                  - else
+                    - if field.is_a?(Schematics::Attributes::Boolean)
+                      - if resource.instance_eval(field.name)
+                        = fa_icon :check, class: "text-success"
+                      - else
+                        = fa_icon :times, class: "text-danger"
+                    - else
+                      = resource.instance_eval(field.name)
+              - table_entity.references.each do |reference|
+                td.text-truncate.text-center
+                  - unless resource.instance_eval(reference.name).nil?
+                    = link_to resource.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
+              - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
+                td.text-truncate.text-center
+                  - unless resource.instance_eval(association.name).nil?
+                    = link_to resource.instance_eval("#{association.name}.#{association.entity.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(association.name))
+              - if actions
+                td.text-truncate.text-right
+                  .btn-group
+                    = link_to main_app.edit_polymorphic_path(resource), class: "btn btn-primary" do
+                      = fa_icon :edit, class: 'mr-2'
+                      .d-none.d-lg-inline Editer
+                    = link_to main_app.polymorphic_path(resource), method: :delete, class: "btn btn-danger" do
+                      - if resource.deleted?
+                        = fa_icon :trash_restore, class: 'mr-2'
+                        .d-none.d-lg-inline Restaurer
+                      - else
+                        = fa_icon :archive, class: 'mr-2'
+                        .d-none.d-lg-inline Archiver
+                      

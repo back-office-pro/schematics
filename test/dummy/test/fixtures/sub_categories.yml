@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  designation: 580c947f4e6e3dbb83460fed5cebcc8e
+  category: one
+
+two:
+  designation: 72ff52b2617b23d3a6fcac4158518348
+  category: two

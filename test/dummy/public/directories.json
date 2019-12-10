@@ -1,0 +1,296 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "directories",
+  "apis": [
+    {
+      "path": "/directories.json",
+      "operations": [
+        {
+          "summary": "Fetches all directory items",
+          "notes": "This lists all the directories",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page number",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "type": "Directory",
+          "nickname": "Directories#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/directories.json",
+      "operations": [
+        {
+          "summary": "Creates a new directory",
+          "notes": "This creates a new directory",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "directory[name]",
+              "type": "string",
+              "description": "Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "directory[parent]",
+              "type": "integer",
+              "description": "Parent",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "directory[files]",
+              "type": "array",
+              "description": "Files",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Directories#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/directories/{id}.json",
+      "operations": [
+        {
+          "summary": "Fetches a single directory item",
+          "notes": "This returns a single directory",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Directory Id",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "type": "Directory",
+          "nickname": "Directories#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/directories/{id}.json",
+      "operations": [
+        {
+          "summary": "Updates an existing directory",
+          "notes": "This updates an existing directory",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Directory Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "directory[name]",
+              "type": "string",
+              "description": "Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "directory[parent]",
+              "type": "integer",
+              "description": "Parent",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "directory[files]",
+              "type": "array",
+              "description": "Files",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Directories#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/directories/{id}.json",
+      "operations": [
+        {
+          "summary": "Deletes an existing directory item",
+          "notes": "This deletes an existing directory",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authentication-Token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Directory Id",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "really",
+              "type": "boolean",
+              "description": "Really destroy directory item (without soft delete)",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Directories#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null,
+  "models": {
+    "Directory": {
+      "id": "Directory",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "parent": {
+          "type": "Directory",
+          "description": "Parent"
+        },
+        "files": {
+          "type": "attachments",
+          "description": "Files"
+        }
+      },
+      "description": "A Directory object"
+    }
+  }
+}
