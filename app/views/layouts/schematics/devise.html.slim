@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title Schematics
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "schematics/application", media: "all"
+    = javascript_include_tag "schematics/application"
+  body.bg-light
+    .jumbotron.d-flex.align-items-center.min-vh-100
+      .container
+        .card.shadow
+          .card-body
+            = yield

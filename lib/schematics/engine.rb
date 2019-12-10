@@ -39,6 +39,15 @@ module Schematics
       end
     end
 
+    # Devise
+    config.to_prepare do
+      Devise::SessionsController.layout       "layouts/schematics/devise"
+      Devise::RegistrationsController.layout  proc { |controller| user_signed_in? ? "layouts/schematics/application" : "layouts/schematics/devise" }
+      Devise::ConfirmationsController.layout  "layouts/schematics/devise"
+      Devise::UnlocksController.layout        "layouts/schematics/devise"
+      Devise::PasswordsController.layout      "layouts/schematics/devise"
+    end
+
     initializer "schematics.cors" do
       Rails.application.config.middleware.insert_before 0, Rack::Cors do
         allow do
