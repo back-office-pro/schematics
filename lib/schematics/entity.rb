@@ -59,12 +59,17 @@ module Schematics
     end
 
     def modelize(subclass)
+      #subclass.class_eval(friendly_id)
       (@attributes + associations + scopes + validates + virtuals).each { |modelizable| subclass.class_eval(modelizable) }
     end
     
     def controllerize(subclass)
       subclass.class_eval(api)
       has_scopes.each { |controllerizable| subclass.class_eval(controllerizable) }
+    end
+
+    def friendly_id
+      %Q[friendly_id :#{descriptor.name}, use: [:slugged, :finders]]
     end
 
     def api
