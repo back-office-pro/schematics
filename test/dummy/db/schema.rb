@@ -10,16 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_151240) do
+ActiveRecord::Schema.define(version: 2019_12_10_121345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -56,12 +67,24 @@ ActiveRecord::Schema.define(version: 2019_12_06_151240) do
 
   create_table "directories", force: :cascade do |t|
     t.string "name"
-    t.integer "parent_id"
+    t.bigint "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.index ["name"], name: "index_directories_on_name", unique: true
     t.index ["parent_id"], name: "index_directories_on_parent_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "subject", null: false
+    t.bigint "author_id", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["subject"], name: "index_messages_on_subject"
   end
 
   create_table "products", force: :cascade do |t|
@@ -71,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_151240) do
     t.float "vat", default: 19.6
     t.boolean "in_stock", default: false
     t.integer "state", default: 0
-    t.integer "sub_category_id", null: false
+    t.bigint "sub_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
@@ -86,12 +109,25 @@ ActiveRecord::Schema.define(version: 2019_12_06_151240) do
 
   create_table "sub_categories", force: :cascade do |t|
     t.string "designation"
-    t.integer "category_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.index ["category_id"], name: "index_sub_categories_on_category_id"
     t.index ["designation"], name: "index_sub_categories_on_designation", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "versions", force: :cascade do |t|
@@ -107,6 +143,8 @@ ActiveRecord::Schema.define(version: 2019_12_06_151240) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "directories", "directories", column: "parent_id"
+  add_foreign_key "messages", "users", column: "author_id"
+  add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "products", "sub_categories"
   add_foreign_key "sub_categories", "categories"
 end

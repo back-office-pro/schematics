@@ -1,6 +1,8 @@
 = simple_form_for(resource) do |f|
   - (entity.attributes - entity.references).each do |attribute|
-    - if attribute.is_a?(Schematics::Attributes::Enum)
+    - if attribute.is_a?(Schematics::Attributes::RichText)
+      = f.input attribute.name.to_sym, as: :rich_text_area
+    - elsif attribute.is_a?(Schematics::Attributes::Enum)
       = f.input attribute.name.to_sym, collection: model_class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym), include_blank: false
     - elsif attribute.is_a?(Schematics::Attributes::Attachments)
       = f.input attribute.name.to_sym, as: :file, input_html: { multiple: true }

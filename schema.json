@@ -1,4 +1,16 @@
 {
+    "user": {
+        "descriptor": "email",
+        "attributes": [
+            {
+                "name": "email",
+                "type": "string",
+                "options": {
+                    "unique": true
+                }
+            }
+        ]
+    },
     "message": {
         "descriptor": "subject",
         "attributes": [

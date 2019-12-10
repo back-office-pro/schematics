@@ -2,7 +2,7 @@
 #
 # Table name: categories
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  deleted_at  :datetime
 #  designation :string           not null
 #  created_at  :datetime         not null
@@ -16,7 +16,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  designation: e7f882e57c7a5d2d3e45c708484fa242
+  designation: d316345debcc0e84e8406bde9e1a7512
 
 two:
-  designation: cd2d2035d886fd0152641e5db258e566
+  designation: fd51af2d768c9ef9d91dfcf98992e12e

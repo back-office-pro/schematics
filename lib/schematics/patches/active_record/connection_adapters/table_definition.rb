@@ -5,7 +5,7 @@ module Schematics
         module TableDefinition
           def timestamps(**options)
             super(**options)
-            column(:deleted_at, :datetime, **options)
+            column(:deleted_at, :datetime)
           end
         end
       end

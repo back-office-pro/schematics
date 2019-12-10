@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pagy", "~> 3.5"
   spec.add_dependency "paranoia", "~> 2.4.2"
   spec.add_dependency "paper_trail", "~> 10.3.1"
-  spec.add_dependency "devise_token_auth", "~> 1.1.3"
   spec.add_dependency "has_scope", "~> 0.7.2"
   spec.add_dependency "rack-attack", "~> 6.2.0"
   spec.add_dependency "olive_branch", "~> 3.0.0"
@@ -37,6 +36,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "friendly_id", "~> 5.3.0"
   spec.add_dependency "jquery-rails", "~> 4.3.5"
   spec.add_dependency "sprockets", "~> 3.7.2"
+  spec.add_dependency "devise", "~> 4.7.1"
+  spec.add_dependency "devise-i18n", "~> 1.9.0"
+  spec.add_dependency "devise-bootstrap-views", "~> 1.1.0"
+  spec.add_dependency "devise_token_auth", "~> 1.1.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]
 end

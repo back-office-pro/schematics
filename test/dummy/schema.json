@@ -1,4 +1,57 @@
 {
+    "user": {
+        "descriptor": "email",
+        "attributes": [
+            {
+                "name": "email",
+                "type": "string",
+                "options": {
+                    "unique": true
+                }
+            }
+        ]
+    },
+    "message": {
+        "descriptor": "subject",
+        "attributes": [
+            {
+                "name": "subject",
+                "type": "string",
+                "options": {
+                    "required": true
+                }
+            },
+            {
+                "name": "content",
+                "type": "rich_text",
+                "options": {
+                    "required": true
+                }
+            },
+            {
+                "name": "author",
+                "type": "belongs_to",
+                "options": {
+                    "required": true,
+                    "type": "user",
+                    "inverse": {
+                        "type": "has_many"
+                    }
+                }
+            },
+            {
+                "name": "recipient",
+                "type": "belongs_to",
+                "options": {
+                    "required": true,
+                    "type": "user",
+                    "inverse": {
+                        "type": "has_many"
+                    }
+                }
+            }
+        ]
+    },
     "directory": {
         "descriptor": "name",
         "attributes": [

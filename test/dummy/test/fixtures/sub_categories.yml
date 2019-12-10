@@ -1,9 +1,30 @@
+# == Schema Information
+#
+# Table name: sub_categories
+#
+#  id          :bigint           not null, primary key
+#  deleted_at  :datetime
+#  designation :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :bigint           not null
+#
+# Indexes
+#
+#  index_sub_categories_on_category_id  (category_id)
+#  index_sub_categories_on_designation  (designation) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (category_id => categories.id)
+#
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  designation: 580c947f4e6e3dbb83460fed5cebcc8e
+  designation: 574f1c32c1b880012f07562bd295a82d
   category: one
 
 two:
-  designation: 72ff52b2617b23d3a6fcac4158518348
+  designation: c5eb4f51d834ea8c4d277b676f8c3396
   category: two

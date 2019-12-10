@@ -1,7 +1,38 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id              :bigint           not null, primary key
+#  deleted_at      :datetime
+#  description     :string
+#  designation     :string(100)
+#  in_stock        :boolean          default(FALSE)
+#  price           :decimal(5, 2)
+#  state           :integer          default("available")
+#  vat             :float            default(19.6)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  sub_category_id :bigint           not null
+#
+# Indexes
+#
+#  index_products_on_description      (description)
+#  index_products_on_designation      (designation) UNIQUE
+#  index_products_on_in_stock         (in_stock)
+#  index_products_on_price            (price)
+#  index_products_on_state            (state)
+#  index_products_on_sub_category_id  (sub_category_id)
+#  index_products_on_vat              (vat)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (sub_category_id => sub_categories.id)
+#
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  designation: 64485856f3a159d06252f979e0efcccf
+  designation: 5bd43e2d6523cfeaa03bc8d0c6a98ef8
   description: MyString
   price: 9.99
   vat: 1.5
@@ -10,7 +41,7 @@ one:
   sub_category: one
 
 two:
-  designation: 8852fb38ea6c3bfd995f584074ac0b58
+  designation: 4af4cb2904147cd753b5c51afa292529
   description: MyString
   price: 9.99
   vat: 1.5
