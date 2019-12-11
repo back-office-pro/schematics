@@ -15,7 +15,9 @@ module Schematics
     config.i18n.available_locales = [:fr, :en]
 
     # OliveBranch
-    config.app_middleware.use OliveBranch::Middleware, inflection: "camel", content_type_check: -> (content_type) { true }
+    config.after_initialize do
+      config.app_middleware.use OliveBranch::Middleware, inflection: "camel", content_type_check: -> (content_type) { true }
+    end
     
     # Bullet
     config.after_initialize do
