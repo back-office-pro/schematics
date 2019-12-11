@@ -5,8 +5,8 @@ html
     title Schematics
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "schematics/application", media: "all"
-    = javascript_include_tag "schematics/application"
+    = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
     nav.navbar.navbar-expand-lg.fixed-top.bg-white.flex-md-nowrap.p-0.shadow
       = link_to "Foo", '/', class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
