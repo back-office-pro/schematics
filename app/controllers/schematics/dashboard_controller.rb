@@ -1,9 +1,13 @@
 module Schematics
-  class SearchController < ::ApplicationController
+  class DashboardController < ::ApplicationController
     layout "schematics/application"
     helper Schematics::ApplicationHelper
+    before_action :authenticate_user!
+    
+    def home
+    end
 
-    def query
+    def search
       @results = {}
       SCHEMA.entities.each do |entity|
         entity.attributes.select_is_a?(Schematics::Attributes::Text).each do |attribute|
@@ -17,6 +21,11 @@ module Schematics
         format.html
         format.json { render json: @results }
       end
+    end
+
+    def timeline
+      @versions = PaperTrail::Version.where('whodunnit IS NOT ?', nil).order(created_at: :desc).limit(20).includes(:item)
+      render json: @versions
     end
   end
 end

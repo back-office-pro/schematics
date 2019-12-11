@@ -51,6 +51,6 @@ html
                         = render 'menu'
                       hr
         main.col-md-10.ml-sm-auto.col-lg-10.px-4 role="main" 
-          = render 'notice' if notice.present?
-          = render 'alert' if alert.present?
+          = render 'schematics/application/notice' if notice.present?
+          = render 'schematics/application/alert' if alert.present?
           = yield

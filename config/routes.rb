@@ -1,5 +1,6 @@
 Schematics::Engine.routes.draw do
-  get 'search',   to: 'search#query',   as: :search
-  get 'timeline', to: 'timeline#index', as: :timeline
+  root 'dashboard#home'
+  get 'search',   to: 'dashboard#search',   as: :search
+  get 'timeline', to: 'dashboard#timeline', as: :timeline
   resources :files, except: [:index, :show]
 end
