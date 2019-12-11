@@ -1,5 +1,5 @@
 module Schematics
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
     include Pagy::Backend
     protect_from_forgery unless: -> { request.format.json? }
     before_action :set_paper_trail_whodunnit

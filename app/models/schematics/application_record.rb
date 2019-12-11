@@ -1,5 +1,5 @@
 module Schematics
-  class ApplicationRecord < ActiveRecord::Base
+  class ApplicationRecord < ::ApplicationRecord
     self.abstract_class = true
     acts_as_paranoid
     has_paper_trail
@@ -8,10 +8,11 @@ module Schematics
     class << self
       def inherited(subclass)
         super
+        subclass.extend(FriendlyId)
         subclass.entity.modelize(subclass)
       end
     end
-    
+
     private
     
     def self.entity_name

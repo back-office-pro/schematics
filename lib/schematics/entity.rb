@@ -59,7 +59,7 @@ module Schematics
     end
 
     def modelize(subclass)
-      #subclass.class_eval(friendly_id)
+      subclass.class_eval(friendly_id)
       (@attributes + associations + scopes + validates + virtuals).each { |modelizable| subclass.class_eval(modelizable) }
     end
     

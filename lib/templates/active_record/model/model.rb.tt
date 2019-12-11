@@ -1,5 +1,4 @@
 <% module_namespacing do -%>
 class <%= class_name %> < Schematics::ApplicationRecord
-  extend FriendlyId
 end
 <% end -%>
