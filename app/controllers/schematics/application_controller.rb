@@ -93,7 +93,7 @@ module Schematics
 
     def not_found
       respond_to do |format|
-        format.html { render file: Rails.root.join('public', '404'), layout: false, status: :not_found }
+        format.html { render :not_found }
         format.json { head :not_found }
       end
     end
