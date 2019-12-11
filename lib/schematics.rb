@@ -129,5 +129,5 @@ module Schematics
     autoload :Virtual,      'schematics/virtuals/virtual'
   end
 
-  SCHEMA = Schema.new('schema.json').freeze
+  SCHEMA = Schema.new('/Users/max/bitbucket/schematics/schema.json').freeze
 end
