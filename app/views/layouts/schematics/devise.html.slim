@@ -7,9 +7,11 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "schematics/application", media: "all"
     = javascript_include_tag "schematics/application"
-  body.bg-light
-    .jumbotron.d-flex.align-items-center.min-vh-100
+  body.bg-primary
+    .jumbotron.d-flex.align-items-center.min-vh-100.bg-primary
       .container
+        = render 'schematics/application/notice' if notice.present?
+        = render 'schematics/application/alert' if alert.present?
         .card.shadow
           .card-body
             = yield
