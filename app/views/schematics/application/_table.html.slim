@@ -4,18 +4,20 @@
       tr
         - (table_entity.attributes - table_entity.references + table_entity.virtuals).reject_is_a?(Schematics::Attributes::Attachment).reject_is_a?(Schematics::Attributes::Digest).each do |field|
           th.text-truncate.text-center
-            = fa_icon field_icon(field), class: "mr-2 text-muted"
+            = fa_icon field_icon(field), class: "mr-2 text-dark"
             = actions ? sort_link_to(field) : field.name.titleize
         - table_entity.references.each do |reference|
           th.text-truncate.text-center
-            = fa_icon :link, class: "mr-2 text-muted"
+            = fa_icon :link, class: "mr-2 text-dark"
             = actions ? sort_link_to(reference) : reference.name.titleize
         - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
           th.text-truncate.text-center
-            = fa_icon :link, class: "mr-2 text-muted"
+            = fa_icon :link, class: "mr-2 text-dark"
             = actions ? sort_link_to(association) : association.name.titleize
         - if actions
           th.text-truncate.text-center
+            = fa_icon :archive, class: "mr-2 text-dark"
+            | Archives
       - if actions
         tr
           - (table_entity.attributes - table_entity.references + table_entity.virtuals).reject_is_a?(Schematics::Attributes::Attachment).reject_is_a?(Schematics::Attributes::Digest).each do |field|
