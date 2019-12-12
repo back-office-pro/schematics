@@ -3,6 +3,7 @@ module Schematics
     layout "schematics/application"
     helper Schematics::ApplicationHelper
     before_action :authenticate_user!
+    helper_method :current_user
     
     def home
     end
@@ -26,6 +27,20 @@ module Schematics
     def timeline
       @versions = PaperTrail::Version.where('whodunnit IS NOT ?', nil).order(created_at: :desc).limit(20).includes(:item)
       render json: @versions
+    end
+    
+    private
+
+    def current_user
+      if session[:user_id]
+        @current_user ||= User.find(session[:user_id])
+      else
+        @current_user = nil
+      end
+    end
+
+    def authenticate_user!
+      redirect_to login_url, alert: "Not authorized" if current_user.nil?
     end
   end
 end

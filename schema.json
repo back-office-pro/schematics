@@ -8,6 +8,13 @@
                 "options": {
                     "unique": true
                 }
+            },
+            {
+                "name": "password",
+                "type": "digest", 
+                "options": {
+                    "min": 6
+                }
             }
         ]
     },

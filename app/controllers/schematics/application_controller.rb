@@ -2,14 +2,15 @@ module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
     protect_from_forgery unless: -> { request.format.json? }
-    before_action :set_paper_trail_whodunnit
+    #before_action :set_paper_trail_whodunnit
     before_action :authenticate_user!
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
     after_action { pagy_headers_merge(@pagy) if @pagy }
     has_scope :with_deleted, type: :boolean, only: :index
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     helper_method :model_class
-
+    helper_method :current_user
+    
     class << self
       Swagger::Docs::Generator::set_real_methods
       def inherited(subclass)
@@ -143,6 +144,18 @@ module Schematics
       self.class.entity.references.map(&:name).map(&:to_sym) + 
       self.class.entity.has_one_through_associations.map(&:name).map(&:to_sym) +
       self.class.entity.has_one_associations.map(&:name).map(&:to_sym)
+    end
+
+    def current_user
+      if session[:user_id]
+        @current_user ||= User.find(session[:user_id])
+      else
+        @current_user = nil
+      end
+    end
+
+    def authenticate_user!
+      redirect_to login_url, alert: "Not authorized" if current_user.nil?
     end
   end
 end

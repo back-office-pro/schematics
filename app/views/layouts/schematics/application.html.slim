@@ -9,7 +9,7 @@ html
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
     nav.navbar.navbar-expand-lg.fixed-top.bg-white.flex-md-nowrap.p-0.shadow
-      = link_to "Foo", '/', class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
+      = link_to "Dummy", schematics.root_path, class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNav" data-toggle="collapse" type="button" 
         span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
@@ -31,11 +31,11 @@ html
               = current_user.email             
               = fa_icon :user_circle, size: "2x", class: "ml-2 align-middle"
             .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown" 
-              = link_to main_app.edit_user_registration_path, class: "dropdown-item" do
+              = link_to main_app.edit_user_path(current_user), class: "dropdown-item" do
                 = fa_icon :user, class: "mr-2"
                 | Editer profil
               .dropdown-divider
-              = link_to main_app.destroy_user_session_path, method: :delete, class: "dropdown-item" do
+              = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                 = fa_icon :sign_out_alt, class: "mr-2"
                 | Déconnexion
     .container-fluid.h-100.bg-light
