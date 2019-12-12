@@ -88,7 +88,7 @@ module Schematics
       end
       class Swagger::Docs::Config
         def self.base_api_controller
-          Schematics::ApplicationController 
+          Schematics::SchemaController 
         end
       end
       Swagger::Docs::Config.register_apis({

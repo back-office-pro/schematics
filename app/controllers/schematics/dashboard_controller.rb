@@ -1,9 +1,6 @@
 module Schematics
-  class DashboardController < ::ApplicationController
+  class DashboardController < ApplicationController
     layout "schematics/application"
-    helper Schematics::ApplicationHelper
-    before_action :authenticate_user!
-    helper_method :current_user
     
     def home
     end
@@ -11,7 +8,7 @@ module Schematics
     def search
       @results = {}
       SCHEMA.entities.each do |entity|
-        entity.attributes.select_is_a?(Schematics::Attributes::Text).each do |attribute|
+        entity.attributes.select_is_a?(Schematics::Attributes::Text).reject_is_a?(Schematics::Attributes::Digest).each do |attribute|
           records = entity.type.camelize.constantize.send("by_#{attribute.name}", params[:query])
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
         end
