@@ -9,6 +9,6 @@ cd ./schematics
 rm ./test/dummy/README.md
 #rm ./test/dummy/Gemfile
 #rm ./test/dummy/Gemfile.lock
-rm ./test/dummy/db/seeds.rb
+echo "Schematics::Engine.load_seed" >> ./test/dummy/db/seeds.rb
 rm ./test/dummy/public/robots.txt
 rm -rf ./test/dummy/vendor

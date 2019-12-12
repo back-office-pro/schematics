@@ -12,7 +12,7 @@ module Schematics
           end
 
           def has_index?
-            !virtual?
+            !virtual? && type != :digest
           end
 
           def options_for_migration
