@@ -1,10 +1,9 @@
 = form_tag sessions_path do |form|
-  .field
+  .form-group
     = label_tag :email
-    = text_field_tag :email
-  .field
+    = text_field_tag :email, nil, class: "form-control bg-light border-0"
+  .form-group
     = label_tag :password
-    = password_field_tag :password
-  .actions
-    = submit_tag 'Login'
+    = password_field_tag :password, nil, class: "form-control bg-light border-0"
+  = submit_tag "Connexion", class: "btn btn-primary"
   

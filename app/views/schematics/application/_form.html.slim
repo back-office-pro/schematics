@@ -1,4 +1,4 @@
-= simple_form_for(resource) do |f|
+= simple_form_for(resource, defaults: { :input_html => { class: "bg-light border-0" } }) do |f|
   - (entity.attributes - entity.references).each do |attribute|
     - if attribute.is_a?(Schematics::Attributes::RichText)
       = f.input attribute.name.to_sym, as: :rich_text_area
@@ -6,6 +6,9 @@
       = f.input attribute.name.to_sym, collection: model_class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym), include_blank: false
     - elsif attribute.is_a?(Schematics::Attributes::Attachments)
       = f.input attribute.name.to_sym, as: :file, input_html: { multiple: true }
+    - elsif attribute.is_a?(Schematics::Attributes::Digest)
+      = f.input attribute.name.to_sym
+      = f.input "#{attribute.name}_confirmation".to_sym
     - else
       = f.input attribute.name.to_sym
   - entity.references.each do |reference|

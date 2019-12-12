@@ -1,7 +1,3 @@
 .input-group.mr-sm-2.mb-2
-  - if params["by_#{reference.name}".to_sym].present?
-    .input-group-prepend
-      .input-group-text
-        = button_tag onclick: "this.form.by_#{reference.name}.value = ''", class: "btn p-0" do
-          = fa_icon :eraser
-  = select_tag "by_#{reference.name}".to_sym, options_from_collection_for_select(reference.association_type.camelize.constantize.all, "id", find_descriptor_by_reference(reference).name, params["by_#{reference.name}".to_sym]), prompt: "Filtrer par #{reference.name.humanize}", onchange: "this.form.submit()", class: "form-control #{'border-primary' if params["by_#{reference.name}".to_sym].present?}"
+  = render 'schematics/application/filters/eraser', field: reference
+  = select_tag "by_#{reference.name}".to_sym, options_from_collection_for_select(reference.association_type.camelize.constantize.all, "id", find_descriptor_by_reference(reference).name, params["by_#{reference.name}".to_sym]), prompt: "Filtrer par #{reference.name.humanize}", onchange: "this.form.submit()", class: "form-control bg-light #{'border-0' unless params["by_#{reference.name}".to_sym].present?}"

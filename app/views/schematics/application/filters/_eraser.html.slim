@@ -1,0 +1,5 @@
+- if params["by_#{field.name}".to_sym].present?
+  .input-group-prepend
+    .input-group-text.bg-transparent.border-0
+      = button_tag onclick: "this.form.by_#{field.name}.value = ''", class: "btn text-dark p-0" do
+        = fa_icon :eraser
