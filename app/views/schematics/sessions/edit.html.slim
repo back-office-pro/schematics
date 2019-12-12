@@ -1,0 +1,13 @@
+.card.shadow
+  .card-header
+    h5.m-0.text-primary.font-weight-bold
+      = fa_icon :user, class: "mr-2"
+      | Editer mon profil
+  .card-body
+    = simple_form_for(current_user, url: sessions_path, defaults: { :input_html => { class: "bg-light border-0" } }) do |f|
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+      = f.input :current_password
+      = f.button :submit, "Valider", class: "btn-primary mr-2"
+      = link_to "Annuler", root_path, class: "btn btn-link mr-2"
