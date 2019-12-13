@@ -3,7 +3,7 @@ module Schematics
     include Pagy::Backend
     protect_from_forgery unless: -> { request.format.json? }
     before_action :set_paper_trail_whodunnit
-    before_action :authenticate_user!
+    before_action :authorize
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
     after_action { pagy_headers_merge(@pagy) if @pagy }
     has_scope :with_deleted, type: :boolean, only: :index
@@ -98,7 +98,7 @@ module Schematics
       end
     end
 
-    private
+    protected
 
     def self.model_name
       controller_name.classify

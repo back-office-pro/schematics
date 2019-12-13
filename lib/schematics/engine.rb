@@ -10,6 +10,9 @@ module Schematics
       g.jbuilder        false
     end
 
+    # Mailer
+    config.action_mailer.delivery_method = :sendmail
+
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]

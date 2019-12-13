@@ -13,8 +13,12 @@ module Schematics
         nil
       end
 
+      def validators
+        super.merge(allow_nil: true)
+      end
+
       def to_str
-        %Q[has_secure_password]
+        %Q[has_secure_password :#{@name}]
       end
     end
   end

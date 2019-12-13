@@ -1,0 +1,11 @@
+.card.shadow
+  .card-header
+    h5.m-0.text-primary.font-weight-bold
+      = fa_icon :unlock, class: "mr-2"
+      | Mot de passe oublié
+  .card-body
+    = simple_form_for @user, url: password_reset_path(params[:id]), defaults: { input_html: { class: "bg-light border-0" } } do |f|
+      = f.input :password
+      = f.input :password_confirmation
+      = f.button :submit, "Valider", class: "btn-primary mr-2"
+      = link_to "Annuler", login_path, class: "btn btn-link"

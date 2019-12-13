@@ -12,3 +12,5 @@ rm ./test/dummy/README.md
 echo "Schematics::Engine.load_seed" >> ./test/dummy/db/seeds.rb
 rm ./test/dummy/public/robots.txt
 rm -rf ./test/dummy/vendor
+rake db:fixtures:load
+rails db:seed

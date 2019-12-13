@@ -12,6 +12,4 @@ html
       .container
         = render 'schematics/application/notice' if notice.present?
         = render 'schematics/application/alert' if alert.present?
-        .card.shadow
-          .card-body
-            = yield
+        = yield

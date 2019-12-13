@@ -12,7 +12,7 @@ module Schematics
           end
 
           def has_index?
-            !virtual? && type != :digest
+            !virtual? && !token? && !password_digest?
           end
 
           def options_for_migration

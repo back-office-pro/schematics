@@ -1,7 +1,7 @@
 module Schematics
   class SessionsController < ApplicationController
-    before_action :authenticate_user!, only: [:edit, :update]
-    layout "schematics/auth", only: :new
+    before_action :authorize, only: [:edit, :update]
+    layout "schematics/auth", only: [:new, :create]
 
     def new
     end
@@ -12,8 +12,12 @@ module Schematics
     def create
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect_to root_url, notice: "Logged in!"
+        if params[:remember_me]
+          cookies.permanent[:auth_token] = user.auth_token
+        else
+          cookies[:auth_token] = user.auth_token
+        end
+        redirect_to root_path, notice: "Logged in!"
       else
         flash.now[:alert] = "Email or password is invalid"
         render :new
@@ -34,22 +38,14 @@ module Schematics
     end
 
     def destroy
-      session[:user_id] = nil
-      redirect_to root_url, notice: "Logged out!"
+      cookies.delete(:auth_token)
+      redirect_to login_path, notice: "Logged out!"
     end
 
     private
 
-    def entity_name
-      "user"
-    end
-
-    def entity
-      SCHEMA.find_entity_by_type(entity_name)
-    end
-
     def user_params
-      params.require(entity_name.to_sym).permit(*entity.permitted_params)
+      params.require(:user).permit(*SCHEMA.find_entity_by_type('user').permitted_params)
     end
   end
 end

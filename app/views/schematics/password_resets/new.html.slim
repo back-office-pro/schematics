@@ -1,0 +1,12 @@
+.card.shadow
+  .card-header
+    h5.m-0.text-primary.font-weight-bold
+      = fa_icon :key, class: "mr-2"
+      | Mot de passe oublié
+  .card-body
+    = form_tag password_resets_path, method: :post do
+      .form-group
+        = label_tag :email
+        = email_field_tag :email, params[:email], required: true, class: "form-control bg-light border-0"
+      = submit_tag "Reset Password", class: "btn btn-primary"
+      = link_to "Annuler", login_path, class: "btn btn-link"
