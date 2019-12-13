@@ -8,7 +8,7 @@
             = fa_icon :table, class: "mr-2"
             | Liste des #{entity.type.pluralize}
         li.nav-item.ml-auto
-          = select_tag :per_page, options_for_select([10, 20, 50, 100], params[:per_page]), prompt: "#{entity.type.pluralize.humanize} par page", onchange: "this.form.submit()", class: "form-control d-inline mr-2"
+          = select_tag :per_page, options_for_select([10, 20, 50, 100], params[:per_page]), prompt: "#{entity.type.pluralize.humanize} par page", onchange: "this.form.submit()", class: "form-control border-0 d-inline mr-2"
           = link_to url_for(action: :index, format: :csv), class: "btn btn-success mr-2" do
             = fa_icon :file_csv, class: "mr-2"
             .d-none.d-lg-inline Télécharger au format CSV

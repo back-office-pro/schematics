@@ -39,7 +39,7 @@ module Schematics
     end
 
     def permitted_params
-      @attributes.map(&:permitted_param).flatten
+      @attributes.map(&:permitted_param).flatten.compact
     end
 
     def scopes

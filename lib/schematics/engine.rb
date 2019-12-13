@@ -10,6 +10,9 @@ module Schematics
       g.jbuilder        false
     end
 
+    # Mailer
+    config.action_mailer.delivery_method = :sendmail
+
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
@@ -28,6 +31,7 @@ module Schematics
     # SimpleForm custom bootstrap components
     config.after_initialize do
       SimpleForm.setup do |config|
+        config.browser_validations = true
         config.wrapper_mappings = {
           boolean:       :custom_boolean_switch,
           check_boxes:   :custom_collection,
@@ -39,15 +43,6 @@ module Schematics
           time:          :custom_multi_select
         }
       end
-    end
-
-    # Devise
-    config.to_prepare do
-      Devise::SessionsController.layout       "layouts/schematics/auth"
-      Devise::RegistrationsController.layout  proc { |controller| user_signed_in? ? "layouts/schematics/application" : "layouts/schematics/auth" }
-      Devise::ConfirmationsController.layout  "layouts/schematics/auth"
-      Devise::UnlocksController.layout        "layouts/schematics/auth"
-      Devise::PasswordsController.layout      "layouts/schematics/auth"
     end
 
     initializer "schematics.cors" do
@@ -97,7 +92,7 @@ module Schematics
       end
       class Swagger::Docs::Config
         def self.base_api_controller
-          Schematics::ApplicationController 
+          Schematics::SchemaController 
         end
       end
       Swagger::Docs::Config.register_apis({

@@ -9,7 +9,7 @@ html
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
     nav.navbar.navbar-expand-lg.fixed-top.bg-white.flex-md-nowrap.p-0.shadow
-      = link_to "Foo", '/', class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
+      = link_to "Dummy", schematics.root_path, class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNav" data-toggle="collapse" type="button" 
         span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
@@ -20,22 +20,36 @@ html
               .input-group-append
                 = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
         ul.navbar-nav.ml-auto.p-3
-          li.nav-item.mr-2.d-flex.align-items-center
-            = fa_icon :bell, class: "text-secondary"
-            .badge.badge-danger.badge-sm 3
-          li.nav-item.mr-2.d-flex.align-items-center
-            = fa_icon :envelope, class: "text-secondary"
-            .badge.badge-danger 7
-          li.nav-item.dropdown.no-arrow.d-flex.align-items-center
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-2
+            a#notificationsDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+              = fa_icon :bell, class: "text-secondary fa-lg"
+              .badge.badge-danger 3
+            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="notificationsDropdown" 
+              h6.dropdown-header Header
+              .dropdown-item.d-flex.align-items-center
+                | Test
+              .dropdown-divider
+              = link_to "Voir toutes les notifications", main_app.messages_path, class: "dropdown-item text-muted small"
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.pr-2.border-left.border-light
+            a#messagesDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+              = fa_icon :envelope, class: "text-secondary fa-lg"
+              .badge.badge-danger 7
+            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="messagesDropdown" 
+              h6.dropdown-header Header
+              .dropdown-item.d-flex.align-items-center
+                | Test
+              .dropdown-divider
+              = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted small"
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
             a#navbarDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-              = current_user.email             
+              = current_user.email
               = fa_icon :user_circle, size: "2x", class: "ml-2 align-middle"
-            .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown" 
-              = link_to main_app.edit_user_registration_path, class: "dropdown-item" do
+            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="navbarDropdown" 
+              = link_to schematics.profile_path, class: "dropdown-item" do
                 = fa_icon :user, class: "mr-2"
                 | Editer profil
               .dropdown-divider
-              = link_to main_app.destroy_user_session_path, method: :delete, class: "dropdown-item" do
+              = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                 = fa_icon :sign_out_alt, class: "mr-2"
                 | Déconnexion
     .container-fluid.h-100.bg-light

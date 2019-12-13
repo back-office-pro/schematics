@@ -1,0 +1,6 @@
+- range ||= nil
+- if range && params.dig("by_#{name}", range).present? || !range && params["by_#{name}"].present?
+  .input-group-prepend
+    .input-group-text.bg-transparent.border-0
+      = button_tag onclick: "this.form.by_#{name}#{"_#{range}" if range.present?}.value = ''", class: "btn text-dark p-0" do
+        = fa_icon :eraser

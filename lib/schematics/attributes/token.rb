@@ -1,6 +1,10 @@
 module Schematics
   module Attributes
     class Token < Attribute
+      def permitted_param
+        nil
+      end
+      
       def scope
         nil
       end

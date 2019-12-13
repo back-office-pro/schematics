@@ -14,11 +14,10 @@ rails_command "generate paper_trail:install --with-changes"
 rails_command "active_storage:install"
 rails_command "action_text:install"
 rails_command "generate annotate:install"
-rails_command "generate devise:install"
-run "rails generate devise User"
 rails_command "generate friendly_id"
 rails_command "db:environment:set RAILS_ENV=development"
 rails_command "db:migrate:reset"
+rails_command "db:seed"
 rails_command "swagger:docs"
 
 # Devise config

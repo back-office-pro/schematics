@@ -1,3 +1,3 @@
-.custom-control.custom-switch.mr-sm-2.mb-2
+.custom-control.custom-switch.mx-auto.w-0.mb-2
   = check_box_tag "by_#{field.name}".to_sym, "true", params["by_#{field.name}".to_sym] === "true", onchange: "this.form.submit()", class: "custom-control-input"
   = label_tag "by_#{field.name}".to_sym, "", class: "custom-control-label"

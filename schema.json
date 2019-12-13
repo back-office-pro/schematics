@@ -1,12 +1,53 @@
 {
     "user": {
-        "descriptor": "email",
+        "descriptor": "full_name",
+        "virtuals": [
+            {
+                "name": "full_name",
+                "function": "$first_name $last_name"
+            }
+        ],
         "attributes": [
             {
                 "name": "email",
                 "type": "string",
                 "options": {
                     "unique": true
+                }
+            },
+            {
+                "name": "password",
+                "type": "digest", 
+                "options": {
+                    "min": 6
+                }
+            },
+            {
+                "name": "auth_token",
+                "type": "token",
+                "options": {
+                    "unique": true
+                }
+            },
+            {
+                "name": "password_reset_token",
+                "type": "token",
+                "options": {
+                    "unique": true
+                }
+            },
+            {
+                "name": "first_name",
+                "type": "string",
+                "options": {
+                    "required": true
+                }
+            },
+            {
+                "name": "last_name",
+                "type": "string",
+                "options": {
+                    "required": true
                 }
             }
         ]

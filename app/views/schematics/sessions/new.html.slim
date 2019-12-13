@@ -1,0 +1,19 @@
+.card.shadow
+  .card-header
+    h5.m-0.text-primary.font-weight-bold
+      = fa_icon :sign_in_alt, class: "mr-2"
+      | Se connecter
+  .card-body
+    = form_tag sessions_path do |form|
+      .form-group
+        = label_tag :email
+        = email_field_tag :email, nil, class: "form-control bg-light border-0"
+      .form-group
+        = label_tag :password
+        = password_field_tag :password, nil, class: "form-control bg-light border-0"
+      .form-group
+        .custom-control.custom-switch
+          = check_box_tag :remember_me, nil, false, class: "custom-control-input"
+          = label_tag :remember_me, "Se souvenir de moi", class: "custom-control-label"
+      = submit_tag "Connexion", class: "btn btn-primary"
+      = link_to 'Mot de passe oublié ?', password_lost_path, class: "btn btn-link"
