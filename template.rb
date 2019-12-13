@@ -20,9 +20,6 @@ rails_command "db:migrate:reset"
 rails_command "db:seed"
 rails_command "swagger:docs"
 
-# Devise config
-gsub_file "config/routes.rb", "devise_for :users", "devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout' }"
-
 # Git
 run "git add -A"
 run "git commit -m 'initial commit'"
