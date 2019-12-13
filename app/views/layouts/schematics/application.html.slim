@@ -20,17 +20,31 @@ html
               .input-group-append
                 = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
         ul.navbar-nav.ml-auto.p-3
-          li.nav-item.mr-2.d-flex.align-items-center
-            = fa_icon :bell, class: "text-secondary"
-            .badge.badge-danger.badge-sm 3
-          li.nav-item.mr-2.d-flex.align-items-center
-            = fa_icon :envelope, class: "text-secondary"
-            .badge.badge-danger 7
-          li.nav-item.dropdown.no-arrow.d-flex.align-items-center
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-2
+            a#notificationsDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+              = fa_icon :bell, class: "text-secondary fa-lg"
+              .badge.badge-danger 3
+            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="notificationsDropdown" 
+              h6.dropdown-header Header
+              .dropdown-item.d-flex.align-items-center
+                | Test
+              .dropdown-divider
+              = link_to "Voir toutes les notifications", main_app.messages_path, class: "dropdown-item text-muted small"
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.pr-2.border-left.border-light
+            a#messagesDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+              = fa_icon :envelope, class: "text-secondary fa-lg"
+              .badge.badge-danger 7
+            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="messagesDropdown" 
+              h6.dropdown-header Header
+              .dropdown-item.d-flex.align-items-center
+                | Test
+              .dropdown-divider
+              = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted small"
+          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
             a#navbarDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-              = current_user.email             
+              = current_user.email
               = fa_icon :user_circle, size: "2x", class: "ml-2 align-middle"
-            .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown" 
+            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="navbarDropdown" 
               = link_to schematics.profile_path, class: "dropdown-item" do
                 = fa_icon :user, class: "mr-2"
                 | Editer profil
