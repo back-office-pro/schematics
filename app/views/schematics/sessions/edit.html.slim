@@ -4,7 +4,7 @@
       = fa_icon :user, class: "mr-2"
       | Editer mon profil
   .card-body
-    = simple_form_for(current_user, url: sessions_path, defaults: { :input_html => { class: "bg-light border-0" } }) do |f|
+    = simple_form_for current_user, url: sessions_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :email
       = f.input :password
       = f.input :password_confirmation
