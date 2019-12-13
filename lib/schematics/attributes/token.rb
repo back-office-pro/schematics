@@ -1,6 +1,10 @@
 module Schematics
   module Attributes
     class Token < Attribute
+      def api_param_type
+        "string"
+      end
+
       def permitted_param
         nil
       end

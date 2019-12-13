@@ -1,6 +1,10 @@
 module Schematics
   module Attributes
     class Digest < String
+      def api_param_type
+        "string"
+      end
+
       def permitted_param
         [super, "#{super}_confirmation"]
       end

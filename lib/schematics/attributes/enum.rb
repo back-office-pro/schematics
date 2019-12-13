@@ -15,11 +15,7 @@ module Schematics
       def type
         "integer"
       end
-
-      def model_property_type
-        "string"
-      end
-
+      
       def api_param_type
         "string"
       end

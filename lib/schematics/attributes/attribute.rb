@@ -39,7 +39,7 @@ module Schematics
       end
 
       def model_property_type
-        type
+        api_param_type
       end
 
       def api_param_type
