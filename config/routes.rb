@@ -8,7 +8,7 @@ Schematics::Engine.routes.draw do
   get 'profile',            to: 'sessions#edit',        as: :profile
   delete 'logout',          to: 'sessions#destroy',     as: :logout
   get 'password_lost',      to: 'password_resets#new',  as: :password_lost
-  get 'password_reset/:id', to: 'password_resets#edit', as: :password_reset
+  get 'password_lost/:id',  to: 'password_resets#edit'
   resource  :sessions, except: [:index, :show]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :files, only: [:create, :update, :destroy]

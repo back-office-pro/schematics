@@ -31,6 +31,7 @@ module Schematics
     # SimpleForm custom bootstrap components
     config.after_initialize do
       SimpleForm.setup do |config|
+        config.browser_validations = true
         config.wrapper_mappings = {
           boolean:       :custom_boolean_switch,
           check_boxes:   :custom_collection,
