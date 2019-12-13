@@ -31,11 +31,11 @@ module Schematics
     end
 
     def model_properties
-      @attributes.map(&:model_property)
+      @attributes.select(&:permitted_param).map(&:model_property)
     end
 
     def api_params
-      @attributes.map(&:api_param)
+      @attributes.select(&:permitted_param).map(&:api_param)
     end
 
     def permitted_params
