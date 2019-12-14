@@ -12,7 +12,8 @@
                 "name": "email",
                 "type": "string",
                 "options": {
-                    "unique": true
+                    "unique": true,
+                    "email": true
                 }
             },
             {
