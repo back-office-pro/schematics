@@ -6,16 +6,16 @@
           = fa_icon :eye, class: "mr-2"
           = @resource.send(entity.descriptor.name.to_sym)
       li.nav-item.ml-auto
-        = link_to 'Retour', url_for(action: :index), class: "btn btn-link"
+        = link_to 'Retour', url_for(action: :index), class: "btn btn-link d-none d-lg-inline"
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary mr-2" do
-          = fa_icon :edit, class: "mr-2"
-          | Editer
+          = fa_icon :edit
+          .d-none.d-lg-inline.ml-2 Editer
         = link_to url_for(action: :show, id: @resource.id, format: :pdf), class: "btn btn-info mr-2" do
-          = fa_icon :file_pdf, class: "mr-2"
-          | Télécharger au format PDF
+          = fa_icon :file_pdf
+          .d-none.d-lg-inline.ml-2 Télécharger au format PDF
         = link_to @resource, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" do
-          = fa_icon :trash, class: "mr-2"
-          | Supprimer définitivement
+          = fa_icon :trash
+          .d-none.d-lg-inline.ml-2 Supprimer définitivement
   .card-body
     = render template: 'schematics/application/show.pdf'
 - (entity.has_many_associations + entity.has_many_through_associations).each do |association|
