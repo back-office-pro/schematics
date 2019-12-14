@@ -10,21 +10,7 @@ module Schematics
     def find_descriptor_by_reference(reference)
       Schematics::SCHEMA.find_descriptor_by_reference(reference)
     end
-
-    def field_icon(field)
-      case field
-      when Schematics::Attributes::Boolean    then :toggle_on
-      when Schematics::Attributes::Float      then :sort_numeric_up
-      when Schematics::Attributes::Date       then :calendar_alt
-      when Schematics::Attributes::Text       then :align_justify
-      when Schematics::Attributes::Attachment then :paperclip
-      when Schematics::Attributes::Enum       then :list_ol
-      when Schematics::Virtuals::Calculation  then :square_root_alt
-      else
-        :align_justify
-      end 
-    end
-
+    
     def sort_link_to(field)
       if params[:sort].nil?
         sort_params = [field.name]

@@ -48,6 +48,10 @@ module Schematics
       def create_inverse_association
         "Schematics::Associations::#{inverse_association[:type].camelize}".constantize.new(self)
       end
+
+      def icon
+        :link
+      end
     end
   end
 end

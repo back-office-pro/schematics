@@ -1,6 +1,8 @@
 module Schematics
   module Virtuals
     class Virtual
+      include Renderable
+      
       attr_accessor :name
 
       def initialize(entity, name, tokens)

@@ -8,6 +8,10 @@ module Schematics
       def has_scope
         super + %Q[, type: :boolean]
       end
+
+      def icon
+        :toggle_on
+      end
     end
   end
 end

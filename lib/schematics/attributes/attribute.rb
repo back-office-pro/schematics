@@ -1,6 +1,8 @@
 module Schematics
   module Attributes
     class Attribute
+      include Renderable
+      
       attr_accessor :entity, :name
 
       def initialize(entity, name, options = nil)

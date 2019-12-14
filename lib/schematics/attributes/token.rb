@@ -20,6 +20,10 @@ module Schematics
       def to_str
         %Q[has_secure_token :#{@name}]
       end
+      
+      def visible?
+        false
+      end
     end
   end
 end

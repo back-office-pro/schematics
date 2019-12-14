@@ -21,7 +21,7 @@ module Schematics
       end
 
       def attributes
-        @entity.attributes - @entity.references
+        @entity.attributes.select(&:visible?) - @entity.references
       end
 
       def virtuals

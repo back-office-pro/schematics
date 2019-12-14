@@ -32,6 +32,7 @@ module Schematics
   autoload :Schema,       'schematics/schema'
   autoload :Entity,       'schematics/entity'
   autoload :JsonWebToken, 'schematics/json_web_token'
+  autoload :Renderable,   'schematics/renderable'
 
   module Associations
     autoload :Association,        'schematics/associations/association'

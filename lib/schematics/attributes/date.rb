@@ -8,6 +8,10 @@ module Schematics
       def has_scope
         super + %Q[, using: [:from, :to]]
       end
+
+      def icon
+        :calendar_alt
+      end
     end
   end
 end

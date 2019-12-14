@@ -12,6 +12,10 @@ module Schematics
       def has_scope
         super + %Q[, using: [:from, :to]] 
       end
+
+      def icon
+        :square_root_alt
+      end
     end
   end
 end

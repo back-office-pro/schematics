@@ -12,6 +12,10 @@ module Schematics
       def to_str
         %Q[has_one_attached :#{@name}]
       end
+
+      def icon
+        :paperclip
+      end
     end
   end
 end

@@ -24,6 +24,14 @@ module Schematics
       def to_str
         %Q[has_secure_password :#{@name}]
       end
+
+      def visible?
+        false
+      end
+
+      def searchable?
+        false
+      end
     end
   end
 end

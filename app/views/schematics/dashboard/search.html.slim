@@ -12,7 +12,7 @@
       a.card-header href="#collapse-#{type}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.font-weight-bold
           = fa_icon :search, class: "mr-2"
-          = type.titleize
+          = type.pluralize(resources.size).titleize
           |  (#{resources.size})
       .collapse.show id="collapse-#{type}"
         .card-body

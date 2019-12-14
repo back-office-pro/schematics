@@ -1,6 +1,8 @@
 module Schematics
   module Associations
     class Association
+      include Renderable
+
       attr_accessor :reference
       
       def initialize(reference)
@@ -37,6 +39,10 @@ module Schematics
 
       def to_str
         "#{type} :#{name}, class_name: '#{class_name}', foreign_key: '#{reference.column_name}'"
+      end
+
+      def icon
+        :link
       end
     end
   end

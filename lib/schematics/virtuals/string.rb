@@ -8,6 +8,10 @@ module Schematics
       def scope
         super + %Q[#{@name} { where("CONCAT(#{concat}) ILIKE ?", "%#\{#{@name}}%") }]
       end
+      
+      def searchable?
+        true
+      end
     end
   end
 end

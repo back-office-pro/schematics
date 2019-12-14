@@ -13,7 +13,7 @@ module Schematics
       end
 
       def fields
-        @entity.attributes - @entity.references + @entity.virtuals + @entity.references + @entity.has_one_associations + @entity.has_one_through_associations
+        @entity.attributes.select(&:visible?) - @entity.references + @entity.virtuals + @entity.references + @entity.has_one_associations + @entity.has_one_through_associations
       end
 
       def attributes

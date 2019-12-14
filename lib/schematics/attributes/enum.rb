@@ -35,6 +35,10 @@ module Schematics
       def to_str
         %Q[enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}]
       end
+
+      def icon
+        :list_ol
+      end
     end
   end
 end
