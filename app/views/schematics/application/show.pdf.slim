@@ -1,5 +1,5 @@
 .table-responsive
-  table.table.table-bordered.table-striped
+  table.table.table-striped
     tbody
       - (entity.attributes - entity.references + entity.virtuals).select(&:visible?).each do |field|
         tr
@@ -20,11 +20,3 @@
             = fa_icon association.icon, class: "mr-2 text-muted"
             = association.name.humanize
           td= link_to @resource.instance_eval("#{association.name}.#{association.entity.descriptor.name}"), @resource.instance_eval(association.name)
-      - (entity.has_many_associations + entity.has_many_through_associations).each do |association|
-        tr
-          th
-            = fa_icon association.icon, class: "mr-2 text-muted"
-            = association.name.humanize
-          td
-            - @resource.instance_eval(association.name).each do |resource|
-              = link_to resource.instance_eval(association.entity.descriptor.name), resource

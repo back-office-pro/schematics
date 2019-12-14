@@ -6,6 +6,7 @@
           = fa_icon :eye, class: "mr-2"
           = @resource.send(entity.descriptor.name.to_sym)
       li.nav-item.ml-auto
+        = link_to 'Retour', url_for(action: :index), class: "btn btn-link"
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary mr-2" do
           = fa_icon :edit, class: "mr-2"
           | Editer
@@ -17,4 +18,15 @@
           | Supprimer définitivement
   .card-body
     = render template: 'schematics/application/show.pdf'
-    = link_to 'Retour', url_for(action: :index), class: "btn btn-link"
+- (entity.has_many_associations + entity.has_many_through_associations).each do |association|
+  - resources = @resource.instance_eval(association.name)
+  - unless resources.empty?
+    .card.shadow.mt-4
+      a.card-header.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
+        h5.m-0.text-primary.font-weight-bold.card-header-title
+          = fa_icon association.icon, class: "mr-2"
+          = association.name.humanize
+          |  (#{resources.size})
+      .collapse.hide id="collapse-#{association.name}"
+        .card-body
+          = render 'schematics/application/table', resources: resources, table_entity: association.entity, actions: false
