@@ -3,8 +3,8 @@ module Schematics
     class Enum < Attribute
       attr_accessor :values
       
-      def initialize(entity, name, options, renderer)
-        super(entity, name, { default: 0 }, renderer)
+      def initialize(entity, name, options)
+        super(entity, name, { default: 0 })
         @values = options
       end
 

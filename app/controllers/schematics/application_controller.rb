@@ -8,8 +8,8 @@ module Schematics
 
     def current_user
       respond_to do |format|
-        format.html { @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token] }
         format.json { @current_user ||= User.find_by_auth_token!(auth_token[:auth_token]) if auth_token }
+        format.any  { @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token] }
       end
     end
 
@@ -22,8 +22,8 @@ module Schematics
     def authorize
       if current_user.nil?
         respond_to do |format|
-          format.html { redirect_to login_path, alert: "Not authorized" }
           format.json { head :unauthorized }
+          format.any  { redirect_to login_path, alert: "Not authorized" }
         end
       end
     end

@@ -79,25 +79,6 @@ module Schematics
     end
   end
 
-  module Renderers
-    module CSV
-      autoload :BelongsTo,  'schematics/renderers/csv/belongs_to'
-      autoload :Default,    'schematics/renderers/csv/default'
-    end
-    module JSON
-      autoload :BelongsTo,  'schematics/renderers/json/belongs_to'
-      autoload :Default,    'schematics/renderers/json/default'
-    end
-    module PDF
-      autoload :Attachment,   'schematics/renderers/pdf/attachment'
-      autoload :Attachments,  'schematics/renderers/pdf/attachments'
-      autoload :BelongsTo,    'schematics/renderers/pdf/belongs_to'
-      autoload :Default,      'schematics/renderers/pdf/default'
-    end
-    autoload :Factory,  'schematics/renderers/factory'
-    autoload :Renderer, 'schematics/renderers/renderer'
-  end
-
   module Serializers
     autoload :CSV,        'schematics/serializers/csv'
     autoload :JSON,       'schematics/serializers/json'

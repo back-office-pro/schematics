@@ -2,17 +2,42 @@ module Schematics
   module Serializers
     class CSV < Serializer
       def serialize(records, separator = ',')
-        eager_loading(records)
+        super(records)
         ::CSV.generate(headers: true, col_sep: separator) do |file|
-          file << @entity.attributes.map(&:name).map(&:humanize)
+          file << fields.map(&:name).map(&:humanize)
           records.each do |record|
-            file << attributes.map { |field| field.render(record) }
+            @record = record
+            file << attributes + virtuals + references + has_one_associations + has_one_through_associations
           end
         end
       end
 
-      def eager_loading(records)
-        records = records.includes(@entity.references.map(&:name).map(&:to_sym)) unless @entity.references.empty?
+      def fields
+        @entity.attributes - @entity.references + @entity.virtuals + @entity.references + @entity.has_one_associations + @entity.has_one_through_associations
+      end
+
+      def attributes
+        super.map { |attribute| @record.instance_eval(attribute.name) }
+      end
+
+      def virtuals
+        super.map { |virtual| @record.instance_eval(virtual.name) }
+      end
+
+      def references
+        super.map { |reference| @record.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}") }
+      end
+
+      def has_one_associations
+        super.map(&method(:has_associations))
+      end
+
+      def has_one_through_associations
+        super.map(&method(:has_associations))
+      end
+
+      def has_associations(association)
+        @record.instance_eval("#{association.name}.#{association.entity.descriptor.name}")
       end
     end
   end

@@ -2,28 +2,48 @@ module Schematics
   module Serializers
     class JSON < Serializer
       def serialize(records)
-        fields = (attributes - references).map(&:render)
-        methods = virtuals.map(&:render)
-        includes = references.map { |reference| reference.render(@schema.find_descriptor_by_reference(reference.renderable)) }
-        unless records.is_a?(Enumerable)
-          includes += includes(@entity.has_one_through_associations) 
-          includes += includes(@entity.has_many_associations) 
-          includes += includes(@entity.has_many_through_associations)
-        else
-          eager_loading(records, includes)
-        end
-        records.as_json only: [:id] + fields, methods: methods, include: includes.to_h
+        super(records)
+        includes = references + has_one_associations + has_one_through_associations
+        includes += has_many_associations + has_many_through_associations unless records.is_a?(Enumerable)
+        records.as_json only: [:id] + attributes, methods: virtuals, include: includes.to_h
       end
 
-      def includes(associations)
-        associations.map do |association|
-          descriptor = association.entity.descriptor.name.to_sym
-          [association.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
+      protected
+
+      def attributes
+        super.map(&:name).map(&:to_sym)
+      end
+
+      def virtuals
+        super.map(&:name).map(&:to_sym)
+      end
+
+      def references
+        super.map do |reference|
+          descriptor = find_descriptor_by_reference(reference).name.to_sym
+          [reference.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
         end
       end
 
-      def eager_loading(records, includes)
-        records = records.includes(includes.to_h.keys) unless includes.empty?
+      def has_one_associations
+        super.map(&method(:has_associations))
+      end
+
+      def has_one_through_associations
+        super.map(&method(:has_associations))
+      end
+
+      def has_many_associations
+        super.map(&method(:has_associations))
+      end
+
+      def has_many_through_associations
+        super.map(&method(:has_associations))
+      end
+
+      def has_associations(association)
+        descriptor = association.entity.descriptor.name.to_sym
+        [association.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
       end
     end
   end

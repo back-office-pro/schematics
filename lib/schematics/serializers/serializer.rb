@@ -5,21 +5,47 @@ module Schematics
         @schema = schema
         @entity = entity
       end
+
+      def serialize(records)
+        eager_loading(records) if records.is_a?(Enumerable)
+      end
       
-      def type
-        self.class.name.demodulize.downcase.to_sym
+      protected
+
+      def find_descriptor_by_reference(reference)
+        @schema.find_descriptor_by_reference(reference)
+      end
+      
+      def eager_loading(records)
+        records = records.includes(@entity.references.map(&:name).map(&:to_sym)) unless @entity.references.empty?
       end
 
       def attributes
-        @entity.attributes.map { |field| field.renderer[type] }.compact.select(&:visible?).sort_by(&:order)
+        @entity.attributes - @entity.references
       end
 
       def virtuals
-        @entity.virtuals.map { |field| field.renderer[type] }.compact.select(&:visible?).sort_by(&:order)
+        @entity.virtuals
       end
 
       def references
-        @entity.references.map { |field| field.renderer[type] }.compact.select(&:visible?).sort_by(&:order)
+        @entity.references
+      end
+
+      def has_one_associations
+        @entity.has_one_associations
+      end
+
+      def has_one_through_associations
+        @entity.has_one_through_associations
+      end
+
+      def has_many_associations
+        @entity.has_many_associations
+      end
+
+      def has_many_through_associations
+        @entity.has_many_through_associations
       end
     end
   end

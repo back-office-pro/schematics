@@ -1,13 +1,12 @@
 module Schematics
   module Virtuals
     class Virtual
-      attr_accessor :name, :renderer
+      attr_accessor :name
 
-      def initialize(entity, name, tokens, renderer = nil)
+      def initialize(entity, name, tokens)
         @entity = entity
         @name = name
         @tokens = tokens
-        @renderer = Renderers::Factory.create(self, renderer || {})
       end
       
       def parse

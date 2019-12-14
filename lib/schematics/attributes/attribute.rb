@@ -1,13 +1,12 @@
 module Schematics
   module Attributes
     class Attribute
-      attr_accessor :entity, :name, :renderer
+      attr_accessor :entity, :name
 
-      def initialize(entity, name, options = nil, renderer = nil)
+      def initialize(entity, name, options = nil)
         @entity = entity 
         @name = name
         @options = options || {}
-        @renderer = Renderers::Factory.create_custom(self, renderer || {})
       end
 
       def type

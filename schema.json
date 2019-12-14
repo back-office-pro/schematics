@@ -104,16 +104,6 @@
                 "type": "string",
                 "options": {
                     "unique": true
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 1
-                    }
                 }
             },
             {
@@ -125,31 +115,11 @@
                         "name": "sub_directories",
                         "type": "has_many"
                     }
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 2
-                    }
                 }
             },
             {
                 "name": "files",
-                "type": "attachments",
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 3
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 3
-                    }
-                }
+                "type": "attachments"
             }
         ]
     },
@@ -158,21 +128,7 @@
         "virtuals": [
             {
                 "name": "full_name",
-                "function": "$first_name $last_name",
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 1
-                    }
-                }
+                "function": "$first_name $last_name"
             }
         ],
         "attributes": [
@@ -181,20 +137,6 @@
                 "type": "string",
                 "options": {
                     "required": true
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 2
-                    }
                 }
             },
             {
@@ -202,20 +144,6 @@
                 "type": "string",
                 "options": {
                     "required": true
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 3
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 3
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 3
-                    }
                 }
             }
         ]
@@ -228,20 +156,6 @@
                 "type": "string",
                 "options": {
                     "unique": true
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 1
-                    }
                 }
             },
             {
@@ -251,20 +165,6 @@
                     "required": true,
                     "inverse": {
                         "type": "has_many"
-                    }
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 2
                     }
                 }
             }
@@ -279,20 +179,6 @@
                 "options": {
                     "unique": true,
                     "required": true
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 1
-                    }
                 }
             }
         ]
@@ -302,40 +188,11 @@
         "virtuals": [
             {
                 "name": "tax_inclusive_price",
-                "function": "$price * $vat",
-                "renderer": {
-                    "formatter": "$VAL €",
-                    "json": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 1
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 1
-                    }
-                }
+                "function": "$price * $vat"
             },
             {
                 "name": "reference",
-                "function": "ref-$id-$sub_category.id",
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 2
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 2
-                    }
-                }
+                "function": "ref-$id-$sub_category.id"
             }
         ],
         "attributes": [
@@ -345,39 +202,11 @@
                 "options": {
                     "unique": true,
                     "limit": 100
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 3
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 3
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 3
-                    }
                 }
             },
             {
                 "name": "description",
-                "type": "string",
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 5
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 5
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 5
-                    }
-                }
+                "type": "string"
             },
             {
                 "name": "price",
@@ -385,21 +214,6 @@
                 "options": {
                     "precision": 5,
                     "scale": 2
-                },
-                "renderer": {
-                    "formatter": "$VAL €",
-                    "json": {
-                        "visible": true,
-                        "order": 4
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 4
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 4
-                    }
                 }
             },
             {
@@ -407,20 +221,6 @@
                 "type": "float",
                 "options": {
                     "default": 19.6
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 6
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 6
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 6
-                    }
                 }
             },
             {
@@ -428,37 +228,11 @@
                 "type": "boolean",
                 "options": {
                     "default": false
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 7
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 7
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 7
-                    }
                 }
             },
             {
                 "name": "logo",
-                "type": "attachment",
-                "renderer": {
-                    "json": {
-                        "visible": false
-                    },
-                    "csv": {
-                        "visible": false
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 9
-                    }
-                }
+                "type": "attachment"
             },
             {
                 "name": "state",
@@ -467,21 +241,7 @@
                     "available",
                     "not_available",
                     "available_soon"
-                ],
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 10
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 10
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 10
-                    }
-                }
+                ]
             },
             {
                 "name": "sub_category",
@@ -490,20 +250,6 @@
                     "required": true,
                     "inverse": {
                         "type": "has_many"
-                    }
-                },
-                "renderer": {
-                    "json": {
-                        "visible": true,
-                        "order": 8
-                    },
-                    "csv": {
-                        "visible": true,
-                        "order": 8
-                    },
-                    "pdf": {
-                        "visible": true,
-                        "order": 8
                     }
                 }
             }

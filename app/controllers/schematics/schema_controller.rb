@@ -1,7 +1,6 @@
 module Schematics
   class SchemaController < ApplicationController
     include Pagy::Backend
-    protect_from_forgery unless: -> { request.format.json? }
     before_action :set_paper_trail_whodunnit
     before_action :authorize
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
