@@ -24,6 +24,7 @@ require 'rails-i18n'
 require 'font_awesome5_rails'
 require 'friendly_id'
 require 'jquery-rails'
+require 'jwt'
 require 'schematics/engine'
 require 'schematics/array'
 
