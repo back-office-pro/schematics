@@ -16,11 +16,6 @@ module Schematics
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
-
-    # OliveBranch
-    config.after_initialize do
-      config.app_middleware.use OliveBranch::Middleware, inflection: "camel", content_type_check: -> (content_type) { true }
-    end
     
     # Bullet
     config.after_initialize do
@@ -43,6 +38,10 @@ module Schematics
           time:          :custom_multi_select
         }
       end
+    end
+
+    initializer "schematics.olive_branch" do |app|
+      app.middleware.use OliveBranch::Middleware, inflection: "camel", content_type_check: -> (content_type) { true }
     end
 
     initializer "schematics.cors" do
