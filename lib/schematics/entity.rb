@@ -84,7 +84,7 @@ module Schematics
         swagger_api :index do
           summary "Fetches all #{@type.humanize.downcase} items"
           notes "This lists all the #{@type.pluralize.humanize.downcase}"
-          param :header, "Authentication-Token", :string, :required, "Authentication token"
+          param :header, "Authorization", :string, :required, "Authorization token"
           param :query, :page, :integer, :optional, "Page number"
           response :unauthorized
           response :success
@@ -94,7 +94,7 @@ module Schematics
         swagger_api :show do
           summary "Fetches a single #{@type.humanize.downcase} item"
           notes "This returns a single #{@type.humanize.downcase}"
-          param :header, "Authentication-Token", :string, :required, "Authentication token"
+          param :header, "Authorization", :string, :required, "Authorization token"
           param :path, :id, :integer, :required, "#{@type.humanize} Id"
           response :unauthorized
           response :success
@@ -105,7 +105,7 @@ module Schematics
         swagger_api :create do |api|
           summary "Creates a new #{@type.humanize.downcase}"
           notes "This creates a new #{@type.humanize.downcase}"
-          param :header, "Authentication-Token", :string, :required, "Authentication token"
+          param :header, "Authorization", :string, :required, "Authorization token"
           #{api_params.join("\n\t")}
           response :unauthorized
           response :success
@@ -115,7 +115,7 @@ module Schematics
         swagger_api :update do |api|
           summary "Updates an existing #{@type.humanize.downcase}"
           notes "This updates an existing #{@type.humanize.downcase}"
-          param :header, "Authentication-Token", :string, :required, "Authentication token"
+          param :header, "Authorization", :string, :required, "Authorization token"
           param :path, :id, :integer, :required, "#{@type.humanize} Id"
           #{api_params.join("\n\t")}
           response :unauthorized
@@ -127,7 +127,7 @@ module Schematics
         swagger_api :destroy do
           summary "Deletes an existing #{@type.humanize.downcase} item"
           notes "This deletes an existing #{@type.humanize.downcase}"
-          param :header, "Authentication-Token", :string, :required, "Authentication token"
+          param :header, "Authorization", :string, :required, "Authorization token"
           param :path, :id, :integer, :required, "#{@type.humanize} Id"
           param :query, :really, :boolean, :optional, "Really destroy #{@type.humanize.downcase} item (without soft delete)"
           response :unauthorized

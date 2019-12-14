@@ -29,8 +29,9 @@ require 'schematics/engine'
 require 'schematics/array'
 
 module Schematics
-  autoload :Schema, 'schematics/schema'
-  autoload :Entity, 'schematics/entity'
+  autoload :Schema,       'schematics/schema'
+  autoload :Entity,       'schematics/entity'
+  autoload :JsonWebToken, 'schematics/json_web_token'
 
   module Associations
     autoload :Association,        'schematics/associations/association'
