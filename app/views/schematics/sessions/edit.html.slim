@@ -9,5 +9,7 @@
       = f.input :password
       = f.input :password_confirmation
       = f.input :current_password
-      = f.button :submit, "Valider", class: "btn-primary mr-2"
+      = f.button :button, class: "btn-primary btn-icon-split mr-2" do
+        span.icon= fa_icon :check
+        span.text Valider
       = link_to "Annuler", root_path, class: "btn btn-link"

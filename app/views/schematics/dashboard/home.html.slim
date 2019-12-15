@@ -1,1 +1,7 @@
-h1 Home
+.row
+  - Schematics::SCHEMA.entities.each do |entity|
+    .col-3.mb-4
+      .card.shadow
+        .card-body
+          = pluralize(entity.type.camelize.constantize.count, entity.type.humanize, locale: :en)
+

@@ -69,14 +69,14 @@
               - if actions
                 td.text-truncate.text-right
                   .btn-group
-                    = link_to main_app.edit_polymorphic_path(resource), class: "btn btn-primary" do
-                      = fa_icon :edit
-                      .d-none.d-lg-inline.ml-2 Editer
-                    = link_to main_app.polymorphic_path(resource), method: :delete, class: "btn btn-danger" do
+                    = link_to main_app.edit_polymorphic_path(resource), class: "btn btn-primary btn-icon-split" do
+                      span.icon= fa_icon :edit
+                      span.text.d-none.d-lg-inline Editer
+                    = link_to main_app.polymorphic_path(resource), method: :delete, class: "btn btn-danger btn-icon-split" do
                       - if resource.deleted?
-                        = fa_icon :trash_restore
-                        .d-none.d-lg-inline.ml-2 Restaurer
+                        span.icon= fa_icon :trash_restore
+                        span.text.d-none.d-lg-inline Restaurer
                       - else
-                        = fa_icon :archive
-                        .d-none.d-lg-inline.ml-2 Archiver
+                        span.icon= fa_icon :archive
+                        span.text.d-none.d-lg-inline Archiver
                       

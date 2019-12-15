@@ -15,5 +15,7 @@
         .custom-control.custom-switch
           = check_box_tag :remember_me, nil, false, class: "custom-control-input"
           = label_tag :remember_me, "Se souvenir de moi", class: "custom-control-label"
-      = submit_tag "Connexion", class: "btn btn-primary"
+      = button_tag class: "btn btn-primary btn-icon-split" do
+        span.icon= fa_icon :check
+        span.text Connexion
       = link_to 'Mot de passe oublié ?', password_lost_path, class: "btn btn-link"

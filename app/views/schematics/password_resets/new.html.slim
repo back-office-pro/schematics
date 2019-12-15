@@ -8,5 +8,7 @@
       .form-group
         = label_tag :email
         = email_field_tag :email, params[:email], required: true, class: "form-control bg-light border-0"
-      = submit_tag "Reset Password", class: "btn btn-primary"
+      = button_tag class: "btn btn-primary btn-icon-split" do
+        span.icon= fa_icon :check
+        span.text Valider
       = link_to "Annuler", login_path, class: "btn btn-link"
