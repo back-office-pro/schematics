@@ -4,7 +4,7 @@
         "virtuals": [
             {
                 "name": "full_name",
-                "function": "$last_name.upcase $first_name"
+                "function": "$last_name $first_name"
             }
         ],
         "attributes": [
