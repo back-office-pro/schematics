@@ -28,6 +28,7 @@ require 'jwt'
 require 'phonelib'
 require 'valid_email'
 require 'validate_url'
+require 'active_storage_validations'
 require 'schematics/engine'
 require 'schematics/array'
 
