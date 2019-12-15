@@ -17,11 +17,11 @@ module Schematics
       end
 
       def attributes
-        super.map { |attribute| @record.instance_eval(attribute.name) }
+        super.map { |attribute| attribute.format(@record.instance_eval(attribute.name)) }
       end
 
       def virtuals
-        super.map { |virtual| @record.instance_eval(virtual.name) }
+        super.map { |virtual| virtual.format(@record.instance_eval(virtual.name)) }
       end
 
       def references

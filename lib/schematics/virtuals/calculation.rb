@@ -13,6 +13,18 @@ module Schematics
         super + %Q[, using: [:from, :to]] 
       end
 
+      def unit
+        @options[:unit]
+      end
+
+      def scale
+        @options[:scale]
+      end
+
+      def format(value)
+        [scale.nil? ? value : value.round(scale), unit].compact.join(' ')
+      end
+
       def icon
         :square_root_alt
       end

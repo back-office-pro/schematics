@@ -11,5 +11,9 @@ module Schematics
     def searchable?
       false
     end
+
+    def format(value)
+      value
+    end
   end
 end

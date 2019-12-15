@@ -4,6 +4,14 @@ module Schematics
       def validators
         super.merge(numericality: true)
       end
+      
+      def unit
+        @options[:unit]
+      end
+
+      def format(value)
+        [value, unit].compact.join(' ')
+      end
 
       def icon
         :sort_numeric_up

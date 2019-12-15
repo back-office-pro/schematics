@@ -6,7 +6,7 @@
           th
             = fa_icon field.icon, class: "mr-2 text-muted"
             = field.name.humanize
-          td= @resource.instance_eval(field.name)
+          td= field.format(@resource.instance_eval(field.name))
       - entity.references.each do |reference|
         tr
           th

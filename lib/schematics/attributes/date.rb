@@ -9,6 +9,10 @@ module Schematics
         super + %Q[, using: [:from, :to]]
       end
 
+      def format(value)
+        I18n.l(value, format: "%A %d %B %Y")
+      end
+
       def icon
         :calendar_alt
       end

@@ -57,7 +57,7 @@
                       - else
                         = fa_icon :times, class: "text-danger"
                     - else
-                      = resource.instance_eval(field.name)
+                      = field.format(resource.instance_eval(field.name))
               - table_entity.references.each do |reference|
                 td.text-truncate.text-center
                   - unless resource.instance_eval(reference.name).nil?

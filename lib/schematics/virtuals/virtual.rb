@@ -5,10 +5,11 @@ module Schematics
       
       attr_accessor :name
 
-      def initialize(entity, name, tokens)
+      def initialize(entity, name, tokens, options = nil)
         @entity = entity
         @name = name
         @tokens = tokens
+        @options = options || {}
       end
       
       def parse
