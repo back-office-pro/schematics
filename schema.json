@@ -4,7 +4,7 @@
         "virtuals": [
             {
                 "name": "full_name",
-                "function": "$first_name $last_name"
+                "function": "$last_name.upcase $first_name"
             }
         ],
         "attributes": [
@@ -188,7 +188,11 @@
         "virtuals": [
             {
                 "name": "tax_inclusive_price",
-                "function": "$price * $vat"
+                "function": "$price * (1 + $vat / 100)",
+                "options": {
+                    "scale": 2,
+                    "unit": "€"
+                }
             },
             {
                 "name": "reference",
@@ -213,14 +217,16 @@
                 "type": "decimal",
                 "options": {
                     "precision": 5,
-                    "scale": 2
+                    "scale": 2,
+                    "unit": "€"
                 }
             },
             {
                 "name": "vat",
                 "type": "float",
                 "options": {
-                    "default": 19.6
+                    "default": 19.6,
+                    "unit": "%"
                 }
             },
             {
