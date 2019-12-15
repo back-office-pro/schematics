@@ -8,7 +8,9 @@
       .form-group
         = label_tag :email
         = email_field_tag :email, params[:email], required: true, class: "form-control bg-light border-0"
-      = button_tag class: "btn btn-primary btn-icon-split" do
+      = button_tag class: "btn btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
         span.text Valider
-      = link_to "Annuler", login_path, class: "btn btn-link"
+      = link_to login_path, class: "btn btn-danger btn-icon-split" do
+        span.icon= fa_icon :times
+        span.text Annuler

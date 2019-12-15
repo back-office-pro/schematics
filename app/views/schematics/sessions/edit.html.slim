@@ -11,5 +11,7 @@
       = f.input :current_password
       = f.button :button, class: "btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
-        span.text Valider
-      = link_to "Annuler", root_path, class: "btn btn-link"
+        span.text Valider  
+      = link_to root_path, class: "btn btn-danger btn-icon-split" do
+        span.icon= fa_icon :times
+        span.text Annuler

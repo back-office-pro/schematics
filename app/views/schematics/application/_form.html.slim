@@ -16,4 +16,7 @@
   = f.button :button, class: "btn-primary btn-icon-split mr-2" do
     span.icon= fa_icon :check
     span.text Valider
-  = link_to 'Annuler', url_for(action: :index), class: "btn btn-link"
+  = link_to url_for(action: :index), class: "btn btn-danger btn-icon-split" do
+    span.icon= fa_icon :times
+    span.text Annuler
+  
