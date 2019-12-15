@@ -6,7 +6,11 @@ module Schematics
       end
 
       def scope
-        super + %Q[(from, to) { where("#{parse} >= ? AND #{parse} <= ?", from, to) }]
+        super + %Q[(from, to) {
+          return where("#{parse} <= ?", to) if from.nil? 
+          return where("#{parse} >= ?", from) if to.nil?
+          where("#{parse} >= ? AND #{parse} <= ?", from, to)
+        }]
       end
       
       def has_scope

@@ -2,7 +2,11 @@ module Schematics
   module Attributes
     class Date < Attribute
       def scope
-        super + %Q[(from, to) { where("#{@name} >= ? AND #{@name} <= ?", from, to) }]
+        super + %Q[(from, to) {
+          return where("#{@name} <= ?", to) if from.nil? 
+          return where("#{@name} >= ?", from) if to.nil?
+          where("#{@name} >= ? AND #{@name} <= ?", from, to)
+        }]
       end
 
       def has_scope
