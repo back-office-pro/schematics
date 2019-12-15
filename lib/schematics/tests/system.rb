@@ -49,7 +49,7 @@ module Schematics
                 elsif attribute.is_a?(Attributes::BelongsTo)
                   select @record.instance_eval("#{attribute.name}.#{SCHEMA.find_descriptor_by_reference(attribute).name}"), from: attribute.name.humanize
                 else
-                  fill_in attribute.name.humanize, with: attribute.unique? ? SecureRandom.hex : @record.send(attribute.name)
+                  fill_in attribute.name.humanize, with: attribute.unique? ? SecureRandom.base58 : @record.send(attribute.name)
                 end
               end
             end
