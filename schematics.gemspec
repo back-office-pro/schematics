@@ -36,6 +36,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "friendly_id", "~> 5.3.0"
   spec.add_dependency "jquery-rails", "~> 4.3.5"
   spec.add_dependency "jwt", "~> 2.2.1"
+  spec.add_dependency "phonelib", "~> 0.6.40"
+  spec.add_dependency "valid_email2", "~> 3.1.3"
+  spec.add_dependency "validate_url", "~> 1.0.8"
   spec.add_dependency "sprockets", "~> 3.7.2"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]
