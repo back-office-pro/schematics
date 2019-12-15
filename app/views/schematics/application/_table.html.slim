@@ -24,8 +24,10 @@
             th.align-middle.text-center.px-0
               - if field.is_a?(Schematics::Attributes::Boolean)
                 = render 'schematics/application/filters/boolean', field: field
-              - elsif field.is_a?(Schematics::Virtuals::Calculation) || field.is_a?(Schematics::Attributes::Date)
+              - elsif field.is_a?(Schematics::Virtuals::Calculation) || field.is_a?(Schematics::Attributes::Float)
                 = render 'schematics/application/filters/range', field: field
+              - elsif field.is_a?(Schematics::Attributes::Date)
+                = render 'schematics/application/filters/date', field: field
               - elsif field.is_a?(Schematics::Attributes::Enum)
                 = render 'schematics/application/filters/enum', field: field, table_entity: table_entity
               - else

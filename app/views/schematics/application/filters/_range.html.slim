@@ -1,9 +1,9 @@
 .input-group.mr-sm-2.mb-2
   = render 'schematics/application/filters/unit', field: field, range: :from
   = render 'schematics/application/filters/eraser', name: field.name, range: :from
-  = number_field_tag "by_#{field.name}[from]".to_sym, params.dig("by_#{field.name}".to_sym, :from), placeholder: "...", class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :from).present?}"
+  = number_field_tag "by_#{field.name}[from]".to_sym, params.dig("by_#{field.name}".to_sym, :from), placeholder: "De", class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :from).present?}"
   .mr-2
-  = number_field_tag "by_#{field.name}[to]".to_sym, params.dig("by_#{field.name}".to_sym, :to), placeholder: "...", class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :to).present?}"
+  = number_field_tag "by_#{field.name}[to]".to_sym, params.dig("by_#{field.name}".to_sym, :to), placeholder: "A", class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :to).present?}"
   = render 'schematics/application/filters/eraser', name: field.name, range: :to
   = render 'schematics/application/filters/unit', field: field, range: :to
   
