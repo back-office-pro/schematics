@@ -7,10 +7,10 @@
           = "#{@resource.parent&.name} > #{@resource.name}"
       li.nav-item.ml-auto
         = link_to url_for(action: :new), class: "btn btn-primary btn-icon-split mr-2" do
-          span.icon= fa_icon :folder, class: "mr-2"
+          span.icon= fa_icon :folder
           span.text.d-none.d-lg-inline Ajouter un nouveau dossier
         = link_to url_for(action: :new), class: "btn btn-primary btn-icon-split" do
-          span.icon= fa_icon :file, class: "mr-2"
+          span.icon= fa_icon :file
           span.text.d-none.d-lg-inline Ajouter des fichiers
   .card-body
     .row

@@ -60,10 +60,10 @@ html
                 ul.nav.flex-column
                   - Schematics::SCHEMA.entities.each do |entity|
                     li.nav-item
-                      = link_to entity.type.pluralize.titleize, main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link"
+                      = link_to entity.type.pluralize.titleize, main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link text-white"
                       - if url_for.start_with? main_app.polymorphic_path(entity.type.pluralize.to_sym)
                         = render 'menu'
-                      hr
+                      hr.border-white
         main.col-md-10.ml-sm-auto.col-lg-10.px-4 role="main" 
           = render 'schematics/application/notice' if notice.present?
           = render 'schematics/application/alert' if alert.present?
