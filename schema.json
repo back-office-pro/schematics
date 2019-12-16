@@ -1,5 +1,6 @@
 {
     "user": {
+        "icon": "users",
         "descriptor": "full_name",
         "virtuals": [
             {
@@ -54,6 +55,7 @@
         ]
     },
     "message": {
+        "icon": "inbox",
         "descriptor": "subject",
         "attributes": [
             {
@@ -97,6 +99,7 @@
         ]
     },
     "directory": {
+        "icon": "folder",
         "descriptor": "name",
         "attributes": [
             {
@@ -124,6 +127,7 @@
         ]
     },
     "client": {
+        "icon": "user_tie",
         "descriptor": "full_name",
         "virtuals": [
             {
@@ -149,6 +153,7 @@
         ]
     },
     "sub_category": {
+        "icon": "box",
         "descriptor": "designation",
         "attributes": [
             {
@@ -171,6 +176,7 @@
         ]
     },
     "category": {
+        "icon": "box",
         "descriptor": "designation",
         "attributes": [
             {

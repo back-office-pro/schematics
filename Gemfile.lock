@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     schematics (0.1.0)
+      active_link_to (~> 1.0.5)
       active_storage_validations (~> 0.8.5)
       annotate (~> 3.0.3)
       bcrypt (~> 3.1.13)
@@ -71,6 +72,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     active_storage_validations (0.8.5)
       rails (>= 5.2.0)
     activejob (6.0.2)
@@ -92,6 +96,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     annotate (3.0.3)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)

@@ -8,63 +8,64 @@ html
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
-    nav.navbar.navbar-expand-lg.fixed-top.bg-white.flex-md-nowrap.p-0.shadow
-      = link_to "Dummy", schematics.root_path, class: "navbar-brand bg-primary col-sm-3 col-md-2 mr-0 text-center"
-      button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNav" data-toggle="collapse" type="button" 
-        span.navbar-toggler-icon
-      #navbarNav.collapse.navbar-collapse
-        ul.navbar-nav.ml-3.p-3
-          = form_tag schematics.search_path, method: :get, class: "form-inline" do
-            .input-group
-              = text_field_tag :query, params[:query], required: true, placeholder: "Rechercher...", class: "form-control bg-light border-0 search" 
-              .input-group-append
-                = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
-        ul.navbar-nav.ml-auto.p-3
-          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-2
-            a#notificationsDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-              = fa_icon :bell, class: "text-secondary fa-lg"
-              .badge.badge-danger 3
-            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="notificationsDropdown" 
-              h6.dropdown-header Header
-              .dropdown-item.d-flex.align-items-center
-                | Test
-              .dropdown-divider
-              = link_to "Voir toutes les notifications", main_app.messages_path, class: "dropdown-item text-muted small"
-          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.pr-2.border-left.border-light
-            a#messagesDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-              = fa_icon :envelope, class: "text-secondary fa-lg"
-              .badge.badge-danger 7
-            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="messagesDropdown" 
-              h6.dropdown-header Header
-              .dropdown-item.d-flex.align-items-center
-                | Test
-              .dropdown-divider
-              = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted small"
-          li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
-            a#navbarDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-              = current_user.email
-              = fa_icon :user_circle, size: "2x", class: "ml-2 align-middle"
-            .dropdown-menu.dropdown-menu-right.shadow aria-labelledby="navbarDropdown" 
-              = link_to schematics.profile_path, class: "dropdown-item" do
-                = fa_icon :user, class: "mr-2"
-                | Editer profil
-              .dropdown-divider
-              = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
-                = fa_icon :sign_out_alt, class: "mr-2"
-                | Déconnexion
-    .container-fluid.h-100.bg-light
-      .row
-        nav.col-md-2.d-none.d-md-block.bg-gradient-primary.sidebar
-          .sidebar-sticky
-            .container
-                ul.nav.flex-column
-                  - Schematics::SCHEMA.entities.each do |entity|
-                    li.nav-item
-                      = link_to entity.type.pluralize.titleize, main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link text-white"
-                      - if url_for.start_with? main_app.polymorphic_path(entity.type.pluralize.to_sym)
-                        = render 'menu'
-                      hr.border-white
-        main.col-md-10.ml-sm-auto.col-lg-10.px-4 role="main" 
-          = render 'schematics/application/notice' if notice.present?
-          = render 'schematics/application/alert' if alert.present?
-          = yield
+    .container-fluid.p-0.h-100
+      .row.no-gutters.h-100
+        .col.bg-gradient-primary.sidebar
+          ul.nav.flex-column.sidebar-sticky
+            li.nav-item.mb-4
+              = link_to "Dummy", schematics.root_path, class: "sidebar-brand d-flex align-items-center justify-content-center text-white"
+            - Schematics::SCHEMA.entities.each do |entity|
+              li.nav-item.text-center.mw-100.mb-4
+                = active_link_to main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link p-0 m-0 text-dark text-truncate" do
+                  = fa_icon entity.icon, size: "2x"
+                  .mt-2.d-none.d-md-block= entity.type.pluralize.titleize
+            li.nav-item.text-center.text-center.mw-100
+              = link_to "/api", class: "nav-link p-0 m-0 text-dark text-truncate" do
+                = fa_icon :project_diagram, size: "2x"
+                .mt-2.d-none.d-md-block API
+        .col.bg-light.content
+          nav.navbar.navbar-expand.bg-white.p-0.shadow.sticky-top
+            = form_tag schematics.search_path, method: :get, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do
+              .input-group
+                = text_field_tag :query, params[:query], required: true, placeholder: "Rechercher...", class: "form-control bg-light border-0 search" 
+                .input-group-append
+                  = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
+            ul.navbar-nav.ml-auto.p-3
+              li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-2
+                a#notificationsDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                  = fa_icon :bell, class: "text-secondary fa-lg"
+                  .badge.badge-danger 3
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow aria-labelledby="notificationsDropdown" 
+                  h6.dropdown-header Header
+                  .dropdown-item.d-flex.align-items-center
+                    | Test
+                  .dropdown-divider
+                  = link_to "Voir toutes les notifications", main_app.messages_path, class: "dropdown-item text-muted small"
+              li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.pr-2.border-left.border-light
+                a#messagesDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                  = fa_icon :envelope, class: "text-secondary fa-lg"
+                  .badge.badge-danger 7
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow aria-labelledby="messagesDropdown" 
+                  h6.dropdown-header Header
+                  .dropdown-item.d-flex.align-items-center
+                    | Test
+                  .dropdown-divider
+                  = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted small"
+              li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
+                a#navbarDropdown.nav-link.dropdown-toggle.text-secondary aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                  span.d-none.d-lg-inline.mr-2= current_user.email
+                  = fa_icon :user_circle, size: "2x", class: "align-middle"
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow aria-labelledby="navbarDropdown" 
+                  = link_to schematics.profile_path, class: "dropdown-item" do
+                    = fa_icon :user, class: "mr-2"
+                    | Editer profil
+                  .dropdown-divider
+                  = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
+                    = fa_icon :sign_out_alt, class: "mr-2"
+                    | Déconnexion
+          .container-fluid.mt-4.mb-4
+            = render 'schematics/application/notice' if notice.present?
+            = render 'schematics/application/alert' if alert.present?
+            = yield
+          footer.text-center.mb-4
+            | &copy; #{Time.zone.now.year}

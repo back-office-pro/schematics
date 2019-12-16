@@ -1,10 +1,11 @@
 module Schematics
   class Entity
-    attr_accessor :type, :attributes, :virtuals, :has_one_associations, 
+    attr_accessor :type, :icon, :attributes, :virtuals, :has_one_associations, 
       :has_many_associations, :has_many_through_associations, :has_one_through_associations
 
-    def initialize(type, descriptor, attributes, virtuals)
+    def initialize(type, icon, descriptor, attributes, virtuals)
       @type = type
+      @icon = icon || :caret_square_right
       @descriptor = descriptor
       @attributes = attributes.map { |attribute| Attributes::Factory.create(self, attribute) }
       @virtuals = virtuals.map { |virtual| Virtuals::Factory.create(self, virtual) }
@@ -137,8 +138,8 @@ module Schematics
       RUBY
     end
 
-    def self.create(type, descriptor: nil, attributes: nil, virtuals: nil)
-      Entity.new(type.to_s, descriptor, attributes || [], virtuals || [])
+    def self.create(type, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
+      Entity.new(type.to_s, icon&.to_sym, descriptor, attributes || [], virtuals || [])
     end
   end
 end
