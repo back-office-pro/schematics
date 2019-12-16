@@ -40,6 +40,13 @@ module Schematics
       end
     end
 
+    # Breadcrumbs
+    config.after_initialize do
+      Loaf.configure do |config|
+        config.match = :exact
+      end
+    end
+
     initializer "schematics.olive_branch" do |app|
       app.middleware.use OliveBranch::Middleware, inflection: "camel", content_type_check: -> (content_type) { true }
     end
@@ -97,7 +104,7 @@ module Schematics
       Swagger::Docs::Config.register_apis({
         "1.0" => {
           api_extension_type: :json,
-          api_file_path: "public",
+          api_file_path: "public/api/v1/",
           base_path: "http://localhost:3000",
           clean_directory: true,
           camelize_model_properties: true,

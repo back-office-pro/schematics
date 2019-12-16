@@ -1,12 +1,12 @@
+- breadcrumb title, @resource
 .card.shadow
   .card-header
     ul.nav
       li.nav-item
         h5.m-0.text-primary.font-weight-bold.card-header-title
           = fa_icon :eye, class: "mr-2"
-          = @resource.send(entity.descriptor.name.to_sym)
+          = title
       li.nav-item.ml-auto
-        = link_to 'Retour', url_for(action: :index), class: "btn btn-link d-none d-lg-inline"
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-icon-split mr-2" do
           span.icon= fa_icon :edit
           span.text.d-none.d-lg-inline Editer

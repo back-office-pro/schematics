@@ -8,11 +8,12 @@ module Schematics
     has_scope :with_deleted, type: :boolean, only: :index
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     helper_method :model_class
-    
+
     class << self
       Swagger::Docs::Generator::set_real_methods
       def inherited(subclass)
         super
+        subclass.breadcrumb "Liste des #{subclass.entity_name.pluralize}", "#{subclass.entity_name.pluralize}_path".to_sym
         subclass.entity.controllerize(subclass)
       end
     end

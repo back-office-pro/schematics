@@ -43,7 +43,8 @@
       tbody
         - if resources.empty?
           tr
-            td.text-center.pt-5.bg-white colspan="100%"
+          tr
+            td.text-center.pt-5 colspan="100%"
               = render 'empty'
         - else
           - resources.each do |resource|

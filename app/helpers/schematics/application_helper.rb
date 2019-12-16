@@ -3,6 +3,17 @@ module Schematics
     include Pagy::Frontend
     include FontAwesome5::Rails::IconHelper
 
+    def title
+      case action_name.to_sym
+      when :index then "Liste des #{entity.type.pluralize}"
+      when :new   then "Ajouter un nouveau #{entity.type}"
+      when :edit  then "Editer #{@resource.send(entity.descriptor.name)}"
+      when :show  then @resource.send(entity.descriptor.name)
+      else
+        nil
+      end
+    end
+
     def entity
       controller.class.entity
     end

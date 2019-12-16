@@ -1,7 +1,8 @@
+- breadcrumb title, new_polymorphic_path(@resource)
 .card.shadow
   .card-header
     h5.m-0.text-primary.font-weight-bold
       = fa_icon :plus, class: "mr-2"
-      | Ajouter un nouveau #{entity.type.titleize}
+      = title
   .card-body
     = render 'form', resource: @resource

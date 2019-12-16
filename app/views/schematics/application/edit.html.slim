@@ -1,7 +1,8 @@
+- breadcrumb title, edit_polymorphic_path(@resource)
 .card.shadow
   .card-header
     h5.m-0.text-primary.font-weight-bold
       = fa_icon :edit, class: "mr-2"
-      | Editer un #{entity.type.titleize}
+      = title
   .card-body
     = render 'form', resource: @resource

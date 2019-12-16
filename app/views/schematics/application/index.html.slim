@@ -5,8 +5,8 @@
       ul.nav
         li.nav-item
           h5.m-0.text-primary.font-weight-bold.card-header-title
-            = fa_icon :table
-            span.ml-2 Liste des #{entity.type.pluralize}
+            = fa_icon :table, class: "mr-2"
+            = title
         li.nav-item.ml-auto
           = select_tag :per_page, options_for_select([10, 20, 50, 100], params[:per_page]), prompt: "#{entity.type.pluralize.humanize} par page", onchange: "this.form.submit()", class: "form-control border-0 d-none d-md-inline mr-2"
           = link_to url_for(action: :index, format: :csv), class: "btn btn-success btn-icon-split mr-2" do
