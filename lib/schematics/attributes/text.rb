@@ -6,7 +6,7 @@ module Schematics
       end
 
       def scope
-        super + %Q[#{@name} { where("#{@name} ILIKE ?", "%#\{#{@name}}%") }]
+        super + %Q[#{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }]
       end
       
       def searchable?

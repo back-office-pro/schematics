@@ -3,9 +3,9 @@ module Schematics
     class Date < Attribute
       def scope
         super + %Q[(from, to) {
-          return where("#{@name} <= ?", to) if from.nil? 
-          return where("#{@name} >= ?", from) if to.nil?
-          where("#{@name} >= ? AND #{@name} <= ?", from, to)
+          return where("#{@entity.type.pluralize}.#{@name} <= ?", to) if from.nil? 
+          return where("#{@entity.type.pluralize}.#{@name} >= ?", from) if to.nil?
+          where("#{@entity.type.pluralize}.#{@name} >= ? AND #{@entity.type.pluralize}.#{@name} <= ?", from, to)
         }]
       end
 
