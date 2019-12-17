@@ -7,9 +7,10 @@ module Schematics
     private
 
     def current_user
-      respond_to do |format|
-        format.json { @current_user ||= User.find_by_auth_token!(auth_token[:auth_token]) if auth_token }
-        format.any  { @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token] }
+      if cookies[:auth_token]
+        @current_user ||= User.find_by_auth_token!(cookies[:auth_token])
+      elsif auth_token
+        @current_user ||= User.find_by_auth_token!(auth_token[:auth_token])
       end
     end
 
