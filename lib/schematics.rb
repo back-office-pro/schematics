@@ -31,6 +31,7 @@ require 'validate_url'
 require 'active_storage_validations'
 require 'active_link_to'
 require 'loaf'
+require 'twitter-typeahead-rails'
 require 'schematics/engine'
 require 'schematics/array'
 
