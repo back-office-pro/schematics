@@ -4,6 +4,8 @@
 //= require popper
 //= require bootstrap
 //= require twitter/typeahead
+//= require chartkick
+//= require Chart.bundle
 //= require_tree .
 
 $(function() {

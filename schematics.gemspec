@@ -43,6 +43,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "active_link_to", "~> 1.0.5"
   spec.add_dependency "loaf", "~> 0.8.1"
   spec.add_dependency "twitter-typeahead-rails", "~> 0.11.1"
+  spec.add_dependency "groupdate", "~> 4.2.0"
+  spec.add_dependency "chartkick", "~> 3.3.0"
   spec.add_dependency "sprockets", "~> 3.7.2"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]

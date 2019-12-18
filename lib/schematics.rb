@@ -32,6 +32,8 @@ require 'active_storage_validations'
 require 'active_link_to'
 require 'loaf'
 require 'twitter-typeahead-rails'
+require 'groupdate'
+require 'chartkick'
 require 'schematics/engine'
 require 'schematics/array'
 
