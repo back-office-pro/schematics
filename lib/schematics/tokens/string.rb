@@ -1,6 +1,9 @@
 module Schematics
   module Tokens
     class String < Token
-    end
+      def to_sql
+        "'#{super}'"
+      end
+    end      
   end
 end

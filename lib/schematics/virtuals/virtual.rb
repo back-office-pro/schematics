@@ -12,12 +12,22 @@ module Schematics
         @options = options || {}
       end
       
-      def parse
-        @tokens.map(&:parsed_value).join.taint
+      def function
+        @tokens.map(&:value).join.taint
       end
 
-      def concat
-        @tokens.map(&:concatenated_value).join(", ")
+      def to_sql
+        @tokens.map(&:to_sql)
+      end
+
+      def column_definition
+        "#{to_sql} AS #{@name}"
+      end
+
+      def joins
+        @tokens.select_is_a?(Tokens::Reference).map do |reference|
+          reference.value.split('.')[0...-1].map { |value| value.prepend(':') }
+        end.flatten.uniq.join(', ')
       end
 
       def scope
@@ -32,7 +42,7 @@ module Schematics
         <<-RUBY
           def #{@name}
             begin
-              #{parse}
+              #{function}
             rescue NameError => e
               "SchemaError: \#{e.name\} not defined"
             rescue TypeError => e

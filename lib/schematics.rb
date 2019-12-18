@@ -102,21 +102,22 @@ module Schematics
   end
   
   module Tokens
-    autoload :Operator,   'schematics/tokens/operator'
-    autoload :Reference,  'schematics/tokens/reference'
-    autoload :String,     'schematics/tokens/string'
-    autoload :Token,      'schematics/tokens/token'
-    autoload :Tokenizer,  'schematics/tokens/tokenizer'
-    autoload :Variable,   'schematics/tokens/variable'
-    autoload :Whitespace, 'schematics/tokens/whitespace'
+    autoload :Number,       'schematics/tokens/number'
+    autoload :Operator,     'schematics/tokens/operator'
+    autoload :Parenthesis,  'schematics/tokens/parenthesis'
+    autoload :Reference,    'schematics/tokens/reference'
+    autoload :String,       'schematics/tokens/string'
+    autoload :Token,        'schematics/tokens/token'
+    autoload :Tokenizer,    'schematics/tokens/tokenizer'
+    autoload :Variable,     'schematics/tokens/variable'
+    autoload :Whitespace,   'schematics/tokens/whitespace'
   end
 
   module Virtuals
-    autoload :Calculation,  'schematics/virtuals/calculation'
-    autoload :Factory,      'schematics/virtuals/factory'
-    autoload :Reference,    'schematics/virtuals/reference'
-    autoload :String,       'schematics/virtuals/string'
-    autoload :Virtual,      'schematics/virtuals/virtual'
+    autoload :Calculation,    'schematics/virtuals/calculation'
+    autoload :Concatenation,  'schematics/virtuals/concatenation'
+    autoload :Factory,        'schematics/virtuals/factory'
+    autoload :Virtual,        'schematics/virtuals/virtual'
   end
 
   SCHEMA = Schema.new('/Users/max/bitbucket/schematics/schema.json').freeze

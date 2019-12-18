@@ -6,12 +6,12 @@ module Schematics
       def initialize(value)
         @value = value
       end
-
-      def concatenated_value
-        "'#{@value}'"
+      
+      def to_sql
+        @value
       end
 
-      def parsed_value
+      def to_str
         @value
       end
     end

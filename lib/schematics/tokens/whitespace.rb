@@ -4,6 +4,10 @@ module Schematics
       def initialize
         super(" ")
       end
+      
+      def to_sql
+        "' '"
+      end
     end
   end
 end

@@ -1,16 +1,24 @@
 module Schematics
   module Virtuals
     class Calculation < Virtual
-      def parse
-        @tokens.map(&:value).join.taint
+      def to_sql
+        super.join
       end
-
+      
       def scope
-        super + %Q[(from, to) {
-          return where("#{parse} <= ?", to) if from.nil? 
-          return where("#{parse} >= ?", from) if to.nil?
-          where("#{parse} >= ? AND #{parse} <= ?", from, to)
-        }]
+        if joins.empty?
+          super + %Q[(from, to) {
+            return where("#{to_sql} <= ?", to) if from.nil? 
+            return where("#{to_sql} >= ?", from) if to.nil?
+            where("#{to_sql} >= ? AND #{to_sql} <= ?", from, to)
+          }]
+        else
+          super + %Q[(from, to) {
+            return joins(#{joins}).where("#{to_sql} <= ?", to) if from.nil? 
+            return joins(#{joins}).where("#{to_sql} >= ?", from) if to.nil?
+            joins(#{joins}).where("#{to_sql} >= ? AND #{to_sql} <= ?", from, to)
+          }]
+        end
       end
       
       def has_scope

@@ -1,11 +1,11 @@
 module Schematics
   module Tokens
     class Reference < Token
-      def concatenated_value
+      def to_sql
         [@value.split(".")[0...-1].map { |variable| variable.pluralize }, @value.split(".").last].join(".")
       end
 
-      def parsed_value
+      def to_str
         "#\{#{@value}}"
       end
     end
