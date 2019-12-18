@@ -9,9 +9,9 @@ module Schematics
         (entity.attributes + entity.virtuals).select(&:searchable?).each do |field|
           records = entity.type.camelize.constantize.send("by_#{field.name}", params[:query])
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
+          @results[entity.type]&.uniq!
         end
-        #@results[entity.name].map! { |result| Schematics::Serializers::JSON.new(SCHEMA, entity).serialize(result) }.uniq! unless @results[entity.name].nil?
-        @results[entity.type].uniq! unless @results[entity.type].nil?
+        @results[entity.type]&.map! { |result| Schematics::Serializers::JSON.new(SCHEMA, entity).serialize(result) } if request.format.json?
       end
       respond_to do |format|
         format.html

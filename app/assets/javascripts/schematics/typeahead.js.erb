@@ -1,0 +1,87 @@
+const icons = {};
+const descriptors = {};
+const urls = {};
+
+<% Schematics::SCHEMA.entities.each do |entity| %>
+    icons.<%= entity.type %>        = "<%= entity.icon.to_s.dasherize %>";
+    descriptors.<%= entity.type %>  = "<%= entity.descriptor.name.camelize(:lower) %>";
+    urls.<%= entity.type %>         = "/<%= entity.type.pluralize %>";
+<% end %>
+
+$(function() {
+    const filterSource = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: `${window.location.pathname}?__FIELD__=%QUERY`,
+            wildcard: "%QUERY",
+            transport: function (options, onSuccess, onError) {
+                const scope = $(document.activeElement).attr('name');
+                const searchParams = new URLSearchParams(window.location.search);
+                const [url, query] = options.url.split('?__FIELD__=');
+                searchParams.set(scope, query);
+                options.url = url + '?' + searchParams;
+                $.ajax(options)
+                    .done(function(data, textStatus, request) { onSuccess(data); })
+                    .fail(function(request, textStatus, errorThrown) { onError(errorThrown); });
+            },
+            transform: function(response) {
+                const name = $(document.activeElement).attr('id');
+                return response.map(field => ({ __FIELD__: field[name] }));
+            }
+        }
+    });
+
+    const searchSource = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: `/search?query=%QUERY`,
+            wildcard: "%QUERY",
+            transform: function(response) {
+                const results = [];
+                Object.entries(response).map(([key, value]) => {
+                    value.forEach(result => {
+                        results.push({
+                            url: [urls[key], result.id].join('/'),
+                            icon: icons[key],
+                            descriptor: result[descriptors[key]]
+                        })
+                    })
+                });
+                return results;
+            }
+        }
+    });
+
+    $('input.typeahead-search')
+        .on('typeahead:selected', (event, item) => {
+            window.location.href = item.url;
+        })
+        .typeahead(null, {
+            source: searchSource,
+            display: 'descriptor',
+            limit: 10,
+            templates: {
+                notFound: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-exclamation text-dark fa-fw mr-2"></i>Aucun résultat</div>`,
+                pending: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>Recherche en cours...</div>`,
+                suggestion: (item) => `<div class="tt-suggestion tt-selectable"><i class="fa fa-${item.icon} fa-fw text-dark mr-2"></i>${item.descriptor}</div>`
+            }
+        });
+
+    $('input.typeahead-filter')
+        .on('typeahead:selected', function() { 
+            this.form.submit();
+        })
+        .typeahead(null, {
+            display: '__FIELD__',
+            limit: 10,
+            source: filterSource,
+            limit: 10,
+            templates: {
+                notFound: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-exclamation text-dark fa-fw mr-2"></i>Aucun résultat</div>`,
+                pending: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>Recherche en cours...</div>`,
+                suggestion: (item) => `<div class="tt-suggestion tt-selectable"><i class="fa fa-search fa-fw text-dark mr-2"></i>${item.__FIELD__}</div>`
+            }
+        });
+});
