@@ -6,11 +6,11 @@ module Schematics
       end
 
       def filter_scope
-        super + %Q[filename { ActiveStorage::Attachment.joins(:blob).where(record_type: "#{@entity.type.camelize}").where("filename ILIKE ?", "%#\{filename}%") }]
+        super + %Q[filename { joins(:active_storage_attachment, :active_storage_blob).where(record_type: "#{@entity.type.camelize}").where("filename ILIKE ?", "%#\{filename}%") }]
       end
 
       def sort_scope
-        nil
+        super + %Q[sort_direction { joins(:active_storage_attachment, :active_storage_blob).where(record_type: "#{@entity.type.camelize}").order(filename: sort_direction) }]
       end
 
       def to_str
