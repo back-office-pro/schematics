@@ -13,18 +13,18 @@ html
         .col.bg-gradient-primary.sidebar
           ul.nav.nav-light.flex-column.sidebar-sticky
             li.nav-item.mb-4
-              = link_to "My Company", schematics.root_path, class: "sidebar-brand d-flex align-items-center text-white text-truncate justify-content-center"
+              = link_to "My Company", schematics.root_path, class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|
               li.nav-item.text-center.mw-100.mb-4
-                = active_link_to main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link p-0 m-0 text-secondary text-truncate" do
+                = active_link_to main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                   = fa_icon entity.icon, size: "2x"
                   .mt-2.d-none.d-md-block= entity.type.pluralize.titleize
             li.nav-item.text-center.text-center.mw-100.mb-4
-              = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-truncate" do
+              = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                 = fa_icon :project_diagram, size: "2x"
                 .mt-2.d-none.d-md-block API
             li.nav-item.text-center.text-center.mw-100.mb-4
-              = link_to "/", class: "nav-link p-0 m-0 text-secondary text-truncate" do
+              = link_to "/", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                 = fa_icon :cog, size: "2x"
                 .mt-2.d-none.d-md-block Paramètres
         .col.bg-light.content
