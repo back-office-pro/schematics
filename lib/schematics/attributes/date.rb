@@ -1,7 +1,7 @@
 module Schematics
   module Attributes
     class Date < Attribute
-      def scope
+      def filter_scope
         super + %Q[(from, to) {
           return where("#{@entity.type.pluralize}.#{@name} <= ?", to) if from.nil? 
           return where("#{@entity.type.pluralize}.#{@name} >= ?", from) if to.nil?
@@ -9,7 +9,11 @@ module Schematics
         }]
       end
 
-      def has_scope
+      def sort_scope
+        super + %Q[sort_direction { order(#{@name}: sort_direction) }]
+      end
+
+      def has_filter_scope
         super + %Q[, using: [:from, :to]]
       end
 

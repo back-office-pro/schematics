@@ -2,25 +2,34 @@
   table.table.table-striped.table-hover class=('with-actions' if actions)
     thead
       tr
-        - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).each do |field|
-          th.text-truncate.text-center
-            = fa_icon field.icon, class: "mr-2 text-dark"
-            = actions ? sort_link_to(field) : field.name.titleize
+        - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+          th.text-nowrap.text-center
+            - if actions 
+              = sort_link_to(field) 
+            - else
+              = fa_icon field.icon, class: "mr-2 text-dark"
+              = field.name.titleize
         - table_entity.references.each do |reference|
-          th.text-truncate.text-center
-            = fa_icon :link, class: "mr-2 text-dark"
-            = actions ? sort_link_to(reference) : reference.name.titleize
+          th.text-nowrap.text-center
+            - if actions 
+              = sort_link_to(reference) 
+            - else
+              = fa_icon reference.icon, class: "mr-2 text-dark"
+              = reference.name.titleize
         - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
-          th.text-truncate.text-center
-            = fa_icon :link, class: "mr-2 text-dark"
-            = actions ? sort_link_to(association) : association.name.titleize
+          th.text-nowrap.text-center
+            - if actions 
+              = sort_link_to(association) 
+            - else
+              = fa_icon association.icon, class: "mr-2 text-dark"
+              = association.name.titleize
         - if actions
-          th.text-truncate.text-center
+          th.text-nowrap.text-center
             = fa_icon :archive, class: "mr-2 text-dark"
             | Archives
       - if actions
         tr
-          - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).each do |field|
+          - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
             th.align-middle.text-center.px-0
               - if field.is_a?(Schematics::Attributes::Boolean)
                 = render 'schematics/application/filters/boolean', field: field
@@ -38,7 +47,7 @@
           - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
             th.align-middle.text-center.px-0
               = render 'schematics/application/filters/association', association: association
-          th.text-truncate.align-middle.px-0
+          th.text-nowrap.align-middle.px-0
             = render 'schematics/application/filters/with_deleted'
       tbody
         - if resources.empty?
@@ -49,8 +58,8 @@
         - else
           - resources.each do |resource|
             tr onclick="window.location = '#{main_app.url_for(resource)}'"
-              - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).each do |field|
-                td.text-truncate.text-center
+              - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+                td.text-nowrap.text-center
                   - if field.searchable? && !actions
                     = highlight(resource.instance_eval(field.name), params[:query])
                   - else
@@ -62,15 +71,15 @@
                     - else
                       = field.format(resource.instance_eval(field.name))
               - table_entity.references.each do |reference|
-                td.text-truncate.text-center
+                td.text-nowrap.text-center
                   - unless resource.instance_eval(reference.name).nil?
                     = link_to resource.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
               - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
-                td.text-truncate.text-center
+                td.text-nowrap.text-center
                   - unless resource.instance_eval(association.name).nil?
                     = link_to resource.instance_eval("#{association.name}.#{association.entity.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(association.name))
               - if actions
-                td.text-truncate.text-right
+                td.text-nowrap.text-right
                   .btn-group
                     = link_to main_app.edit_polymorphic_path(resource), class: "btn btn-primary btn-icon-split" do
                       span.icon= fa_icon :edit

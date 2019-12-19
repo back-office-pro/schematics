@@ -13,7 +13,7 @@ module Schematics
         "CONCAT(#{super.join(', ')})"
       end
 
-      def scope
+      def filter_scope
         if joins.empty?
           super + %Q[#{@name} { where("#{to_sql} ILIKE ?", "%#\{#{@name}}%") }]
         else

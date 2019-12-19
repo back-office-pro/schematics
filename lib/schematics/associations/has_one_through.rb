@@ -9,8 +9,12 @@ module Schematics
         name.camelize
       end
 
-      def scope
+      def filter_scope
         super + %Q[#{name} { joins(:#{entity.type}).where(#{name}: #{name}) }]
+      end
+      
+      def sort_scope
+        super + %Q[sort_direction { joins(:#{entity.type}, :#{name}).merge(#{name.camelize}.order(#{entity.descriptor.name}: sort_direction)) }]
       end
     end
   end

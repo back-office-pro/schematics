@@ -40,29 +40,20 @@ module Schematics
     end
 
     def sort_link_to(field)
-      if params[:sort].nil?
-        sort_params = [field.name]
-      else
-        sort_params = params[:sort].split(',')
-        found = false
-        sort_params.map! do |param|
-          if param === field.name
-            found = true
-            "-#{field.name}"
-          elsif param === "-#{field.name}"
-            found = true
-            field.name
+      scope = "sort_by_#{field.name}".to_sym
+      sort_direction = request.parameters[scope]&.to_sym === :asc ? :desc : :asc
+      icon = sort_direction === :asc ? :sort_down : :sort_up
+      content_tag(:div, nil, class: "row no-gutters") do
+        content_tag(:div, nil, class: "col") do
+          content = []
+          if request.parameters[scope].nil?
+            content << fa_icon(field.icon, class: "mr-2 text-dark")
           else
-            param
+            content << fa_icon(icon, class: "mr-2 text-primary")
           end
+          content << link_to(field.name.humanize, request.parameters.merge(scope => sort_direction))
+          content.join.html_safe
         end
-        unless found
-          sort_params << [field.name]
-        end
-      end
-      link_to sort: sort_params.join(',') do
-       "#{field.name.humanize}"
-       #fa_icon :sort_up
       end
     end
   end

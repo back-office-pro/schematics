@@ -5,10 +5,14 @@ module Schematics
         super + [:limit]
       end
 
-      def scope
+      def filter_scope
         super + %Q[#{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }]
       end
-      
+
+      def sort_scope
+        super + %Q[sort_direction { order(#{@name}: sort_direction) }]
+      end
+
       def searchable?
         true
       end

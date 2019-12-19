@@ -9,11 +9,19 @@ module Schematics
         nil
       end
       
-      def scope
+      def filter_scope
         nil
       end
 
-      def has_scope
+      def sort_scope
+        nil
+      end
+
+      def has_filter_scope
+        nil
+      end
+
+      def has_sort_scope
         nil
       end
 

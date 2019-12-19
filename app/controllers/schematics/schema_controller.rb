@@ -19,7 +19,7 @@ module Schematics
     end
 
     def index
-      @pagy, @resources = pagy(apply_scopes(model_class).includes(eager_loading).order(ordering_params).all, items: params[:per_page] || 10)
+      @pagy, @resources = pagy(apply_scopes(model_class).includes(eager_loading), items: params[:per_page] || 10)
       respond_to do |format|
         format.html
         format.json { render schema: @resources }
@@ -124,25 +124,8 @@ module Schematics
       params.require(self.class.entity_name.to_sym).send(:permit, *self.class.entity.permitted_params)
     end
 
-    def ordering_params
-      ordering = {}
-      if params[:sort]
-        sort_order = { '+' => :asc, '-' => :desc }
-        sorted_params = params[:sort].split(',')
-        sorted_params.each do |attr|
-          sort_sign = (attr =~ /\A[+-]/) ? attr.slice!(0) : '+'
-          if model_class.attribute_names.include?(attr)
-            ordering[attr] = sort_order[sort_sign]
-          end
-        end
-      end
-      return ordering
-    end
-
     def eager_loading
-      self.class.entity.references.map(&:name).map(&:to_sym) + 
-      self.class.entity.has_one_through_associations.map(&:name).map(&:to_sym) +
-      self.class.entity.has_one_associations.map(&:name).map(&:to_sym)
+      (self.class.entity.references + self.class.entity.has_one_through_associations + self.class.entity.has_one_associations).map(&:name).map(&:to_sym)
     end
   end
 end

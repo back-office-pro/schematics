@@ -1,3 +1,3 @@
 .input-group.mr-sm-2.mb-2
   = render 'schematics/application/filters/eraser', name: field.name
-  = select_tag "by_#{field.name}".to_sym, options_for_select(table_entity.type.camelize.constantize.send(field.name.pluralize.to_sym).keys.map(&:to_sym), params["by_#{field.name}".to_sym]), prompt: "Filtrer par #{field.name.humanize}", onchange: "this.form.submit()", class: "form-control bg-light #{'border-0' unless params["by_#{field.name}".to_sym].present?}"
+  = select_tag "by_#{field.name}".to_sym, options_for_select(table_entity.type.camelize.constantize.send(field.name.pluralize.to_sym).keys.map(&:to_sym), params["by_#{field.name}".to_sym]), prompt: "Filtrer par #{field.name.humanize}", onchange: "$(this.form).submit()", class: "form-control bg-light #{'border-0' unless params["by_#{field.name}".to_sym].present?}"

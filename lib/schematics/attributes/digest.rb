@@ -9,14 +9,22 @@ module Schematics
         [super, "#{super}_confirmation"]
       end
 
-      def scope
+      def filter_scope
         nil
       end
 
-      def has_scope
+      def sort_scope
         nil
       end
 
+      def has_filter_scope
+        nil
+      end
+
+      def has_sort_scope
+        nil
+      end
+      
       def validators
         super.merge(allow_nil: true)
       end

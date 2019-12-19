@@ -12,6 +12,14 @@ module Schematics
       add_has_one_through_associations
     end
     
+    def add_descriptor_references
+      @entities.each do |entity|
+        entity.references.each do |reference|
+          reference.descriptor = find_entity_by_type(reference.association_type).descriptor
+        end
+      end
+    end
+
     def add_has_many_associations
       @entities.each do |entity|
         entity.references.select(&:inverse_of_has_many?).each do |reference|

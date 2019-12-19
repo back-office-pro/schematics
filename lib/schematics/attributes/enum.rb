@@ -28,8 +28,12 @@ module Schematics
         [super.sub('param', 'param_list'), @values.to_s].join(', ')
       end
 
-      def scope
+      def filter_scope
         super + %Q[#{@name} { where(#{@name}: #{@name}) }]
+      end
+
+      def sort_scope
+        super + %Q[sort_direction { order(#{@name}: sort_direction) }]
       end
 
       def to_str

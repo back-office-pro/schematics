@@ -43,12 +43,20 @@ module Schematics
       @attributes.map(&:permitted_param).flatten.compact
     end
 
-    def scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:scope).compact
+    def filter_scopes
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:filter_scope).compact
     end
 
-    def has_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:has_scope).compact
+    def sort_scopes
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:sort_scope).compact
+    end
+
+    def has_filter_scopes
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:has_filter_scope).compact
+    end
+
+    def has_sort_scopes
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:has_sort_scope).compact
     end
 
     def validates
@@ -61,12 +69,12 @@ module Schematics
 
     def modelize(subclass)
       subclass.class_eval(friendly_id)
-      (@attributes + associations + scopes + validates + virtuals).each { |modelizable| subclass.class_eval(modelizable) }
+      (@attributes + associations + filter_scopes + sort_scopes + validates + virtuals).each { |modelizable| subclass.class_eval(modelizable) }
     end
     
     def controllerize(subclass)
       subclass.class_eval(api)
-      has_scopes.each { |controllerizable| subclass.class_eval(controllerizable) }
+      (has_filter_scopes + has_sort_scopes).each { |controllerizable| subclass.class_eval(controllerizable) }
     end
 
     def friendly_id

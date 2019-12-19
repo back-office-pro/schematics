@@ -10,19 +10,35 @@ module Schematics
             
             setup do
               @record = send(subclass.fixture_name, :one)
-              @params = entity.attributes.map do |attribute|
-                param = [attribute.column_name]
-                attachment = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
-                if attribute.unique?
-                  param << SecureRandom.hex
-                elsif attribute.is_a?(Attributes::Attachments)
-                  param << [attachment]
-                elsif attribute.is_a?(Attributes::Attachment)
-                  param << attachment
+              @params = {}
+              attachment = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+              entity.attributes.select(&:permitted_param).each do |attribute|
+                case attribute
+                when Attributes::Attachments
+                  @params = @params.merge(attribute.permitted_param.symbolize_keys)
+                  @params[attribute.column_name.to_sym] << attachment
+                when Attributes::Attachment
+                  @params[attribute.permitted_param.to_sym] = attachment
+                when Attributes::Digest
+                  @params[attribute.permitted_param.first.to_sym] = @params[attribute.permitted_param.last.to_sym] = SecureRandom.base58
+                when Attributes::String
+                  if attribute.email?
+                    @params[attribute.permitted_param.to_sym] = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
+                  elsif attribute.phone?
+                    @params[attribute.permitted_param.to_sym] = Array.new(10) { rand(10) }
+                  elsif attribute.url?
+                    @params[attribute.permitted_param.to_sym] = "www.#{SecureRandom.base58}.com"
+                  elsif attribute.unique?
+                    @params[attribute.permitted_param.to_sym] = SecureRandom.base58
+                  else
+                    @params[attribute.permitted_param.to_sym] = @record.send(attribute.column_name)
+                  end
+                when Attributes::RichText, proc(&:unique?)
+                  @params[attribute.permitted_param.to_sym] = SecureRandom.base58
                 else
-                  param << @record.send(attribute.column_name)
+                  @params[attribute.permitted_param.to_sym] = @record.send(attribute.column_name)
                 end
-              end.to_h
+              end
             end
           
             test "should have scope with_deleted" do
@@ -31,7 +47,7 @@ module Schematics
               assert scopes[:with_deleted][:type] === :boolean
             end
             
-            entity.attributes.each do |attribute|
+            entity.attributes.select(&:has_filter_scope).each do |attribute|
               scope = "by_#{attribute.name}".to_sym
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
@@ -59,49 +75,58 @@ module Schematics
             end
 
             test "should get API index" do
-              get subclass.url_helper, as: :json
+              login_json
+              get subclass.url_helper, headers: authorization_header, as: :json
               assert_response :success
             end
 
             test "should get index" do
+              login
               get subclass.url_helper
               assert_response :success
             end
 
             test "should get new" do
+              login
               get subclass.url_helper('new')
               assert_response :success
             end
 
             test "should show API #{subclass.entity_name}" do
-              get subclass.url_helper(@record.id), as: :json
+              login_json
+              get subclass.url_helper(@record.id), headers: authorization_header, as: :json
               assert_response :success
             end
 
             test "should show #{subclass.entity_name}" do
+              login
               get subclass.url_helper(@record.id)
               assert_response :success
             end
 
             test "should throw API #{subclass.entity_name} not found" do
-              get subclass.url_helper(0), as: :json
+              login_json
+              get subclass.url_helper(0), headers: authorization_header, as: :json
               assert_response :not_found
             end
 
             test "should throw #{subclass.entity_name} not found" do
+              login
               get subclass.url_helper(0)
               assert_response :not_found
             end
 
             test "should really destroy API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count", -1) do
-                delete subclass.url_helper(@record.id), params: { really: true }, as: :json
+                login_json
+                delete subclass.url_helper(@record.id), headers: authorization_header, params: { really: true }, as: :json
               end
               assert_response :no_content
             end
 
             test "should really destroy #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count", -1) do
+                login
                 delete subclass.url_helper(@record.id), params: { really: true }
               end
               assert_redirected_to subclass.url_helper
@@ -111,7 +136,8 @@ module Schematics
               @record.destroy
               assert @record.deleted?
               assert_difference("#{subclass.model_name}.count") do
-                delete subclass.url_helper(@record.id), as: :json
+                login_json
+                delete subclass.url_helper(@record.id), headers: authorization_header, as: :json
               end
               assert_response :no_content
             end
@@ -120,6 +146,7 @@ module Schematics
               @record.destroy
               assert @record.deleted?
               assert_difference("#{subclass.model_name}.count") do
+                login
                 delete subclass.url_helper(@record.id)
               end
               assert_redirected_to subclass.url_helper
@@ -129,7 +156,8 @@ module Schematics
               @record.restore
               refute @record.deleted?
               assert_difference("#{subclass.model_name}.count", -1) do
-                delete subclass.url_helper(@record.id), as: :json
+                login_json
+                delete subclass.url_helper(@record.id), headers: authorization_header, as: :json
               end
               assert_response :no_content
             end
@@ -138,33 +166,38 @@ module Schematics
               @record.restore
               refute @record.deleted?
               assert_difference("#{subclass.model_name}.count", -1) do
+                login
                 delete subclass.url_helper(@record.id)
               end
               assert_redirected_to subclass.url_helper
             end
 
             test "should update API #{subclass.entity_name}" do
-              patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }, as: :json
+              login_json
+              patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
               assert_response :no_content
             end 
 
             test "should update #{subclass.entity_name}" do
+              login
               patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }
-              assert_redirected_to subclass.url_helper(@record.id)
+              assert_redirected_to subclass.url_helper(@record.reload.slug)
             end
 
             test "should create API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count") do
-                post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }, as: :json
+                login_json
+                post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
               end
               assert_response :created
             end
 
             test "should create #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count") do
+                login
                 post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }
               end
-              assert_redirected_to subclass.url_helper(subclass.model_name.constantize.first.id)
+              assert_redirected_to subclass.url_helper(subclass.model_name.constantize.first.slug)
             end
           end
         end
@@ -172,6 +205,18 @@ module Schematics
 
       protected
       
+      def login(format = :html)
+        post '/sessions', params: { email: users(:two).email, password: "secret" }, as: format
+      end
+
+      def login_json
+        login(:json)
+      end
+
+      def authorization_header
+        { Authorization: JSON.parse(@response.body)['authToken'] }
+      end
+
       def self.controller_name
         self.name.chomp('Test')
       end

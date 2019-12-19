@@ -29,12 +29,20 @@ module Schematics
         @reference.required?
       end
 
-      def scope
+      def filter_scope
         %Q[scope :by_#{name}, -> ]
       end
-      
-      def has_scope
+
+      def sort_scope
+        %Q[scope :sort_by_#{name}, -> ]
+      end
+
+      def has_filter_scope
         %Q[has_scope :by_#{name}, only: :index]
+      end
+
+      def has_sort_scope
+        %Q[has_scope :sort_by_#{name}, only: :index]
       end
 
       def to_str

@@ -8,14 +8,14 @@
             = fa_icon :table, class: "mr-2"
             = title
         li.nav-item.ml-auto
-          = select_tag :per_page, options_for_select([10, 20, 50, 100], params[:per_page]), prompt: "#{entity.type.pluralize.humanize} par page", onchange: "this.form.submit()", class: "form-control border-0 d-none d-md-inline mr-2"
+          = select_tag :per_page, options_for_select([10, 20, 50, 100], params[:per_page]), prompt: "#{entity.type.pluralize.humanize} par page", onchange: "$(this.form).submit()", class: "form-control border-0 d-none d-md-inline mr-2"
           = link_to url_for(action: :index, format: :csv), class: "btn btn-success btn-icon-split mr-2" do
             span.icon= fa_icon :file_csv
             span.text.d-none.d-lg-inline Télécharger au format CSV
           = link_to url_for(action: :new), class: "btn btn-primary btn-icon-split" do
             span.icon= fa_icon :plus
             span.text.d-none.d-lg-inline Ajouter un nouveau #{entity.type.titleize}
-          - unless params.except(:controller, :action, :page, :per_page, :sort).reject{ |_,  v| v.blank? }.empty?
+          - unless params.except(:controller, :action, :page, :per_page).empty?
             = link_to url_for(action: :index), class: "btn btn-danger btn-icon-split ml-2" do
               span.icon= fa_icon :eraser
               span.text.d-none.d-lg-inline Réinitialiser tous les filtres

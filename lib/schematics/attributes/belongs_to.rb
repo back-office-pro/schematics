@@ -21,8 +21,12 @@ module Schematics
         @options[:inverse]
       end
 
-      def scope
+      def filter_scope
         super + %Q[#{@name} { where(#{@name}: #{@name}) }]
+      end
+
+      def sort_scope
+        super + %Q[(sort_direction, field) { joins(:#{association_type}).merge(#{association_type.camelize}.order({ field => sort_direction })) }]
       end
 
       def model_property_type

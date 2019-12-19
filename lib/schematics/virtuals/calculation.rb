@@ -5,7 +5,7 @@ module Schematics
         super.join
       end
       
-      def scope
+      def filter_scope
         if joins.empty?
           super + %Q[(from, to) {
             return where("#{to_sql} <= ?", to) if from.nil? 
@@ -21,7 +21,7 @@ module Schematics
         end
       end
       
-      def has_scope
+      def has_filter_scope
         super + %Q[, using: [:from, :to]] 
       end
 

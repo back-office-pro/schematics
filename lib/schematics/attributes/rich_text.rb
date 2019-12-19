@@ -5,7 +5,7 @@ module Schematics
         "string"
       end
 
-      def scope
+      def filter_scope
         super + %Q[body { ActionText::where(record: self).where("body ILIKE ?", "%#\{body}%") }]
       end
 

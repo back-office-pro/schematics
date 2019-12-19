@@ -4,7 +4,24 @@ module Schematics
       module Generators
         module GeneratedAttribute
           def default
-            has_uniq_index? && type === :string ? SecureRandom.hex : super
+            case type
+            when :token
+              SecureRandom.base58
+            when :string
+              if attr_options[:email] 
+                "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
+              elsif attr_options[:phone]
+                Array.new(10) { rand(10) }
+              elsif attr_options[:url]
+                "www.#{SecureRandom.base58}.com"
+              elsif has_uniq_index? 
+                SecureRandom.base58
+              else
+                super
+              end
+            else
+              super
+            end
           end
 
           def required?
@@ -16,7 +33,7 @@ module Schematics
           end
 
           def options_for_migration
-            options = super.except(:required, :type)
+            options = super.except(:required, :type, :email, :url, :phone)
             options[:foreign_key] = { to_table: attr_options[:type].pluralize.to_sym } if options.key?(:foreign_key) && attr_options.key?(:type)
             options
           end

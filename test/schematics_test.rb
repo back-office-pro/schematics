@@ -15,9 +15,11 @@ class Schematics::Test < ActiveSupport::TestCase
       puts "------------------------------------"
       puts entity.validates
       puts "------------------------------------"
-      puts entity.scopes
+      puts entity.filter_scopes
+      puts entity.sort_scopes
       puts "------------------------------------"
-      puts entity.has_scopes
+      puts entity.has_filter_scopes
+      puts entity.has_sort_scopes
       puts "------------------------------------"
       puts entity.api
       puts 
