@@ -71,7 +71,7 @@ $(function() {
 
     $('input.typeahead-filter')
         .on('typeahead:selected', function() { 
-            this.form.submit();
+            $(this.form).submit();
         })
         .typeahead(null, {
             display: '__FIELD__',

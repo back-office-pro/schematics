@@ -12,4 +12,7 @@ $(function() {
     $('.custom-file-input').on('change', function () {
         $(this).siblings('.custom-file-label').addClass('selected').html(Array.from($(this).get(0).files).map(_ => _.name).join(', '));
     });
+    $('form.form-inline').on('submit', function() {
+        return $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', true);
+    });
 });
