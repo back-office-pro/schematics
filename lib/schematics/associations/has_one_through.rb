@@ -14,7 +14,7 @@ module Schematics
       end
       
       def sort_scope
-        super + %Q[sort_direction { joins(:#{entity.type}, :#{name}).merge(#{name.camelize}.order(#{entity.descriptor.name}: sort_direction)) }]
+        super + %Q[sort_direction { joins(:#{entity.type}, :#{name}).merge(#{name.camelize}.order(#{descriptor.name}: sort_direction)) }]
       end
     end
   end

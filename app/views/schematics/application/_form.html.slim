@@ -12,7 +12,7 @@
     - else
       = f.input attribute.name.to_sym
   - entity.references.each do |reference|
-    = f.association reference.name.to_sym, label_method: find_descriptor_by_reference(reference).name.to_sym, prompt: "Please select"
+    = f.association reference.name.to_sym, label_method: reference.descriptor.name.to_sym, prompt: "Please select"
   = f.button :button, class: "btn-primary btn-icon-split mr-2" do
     span.icon= fa_icon :check
     span.text Valider

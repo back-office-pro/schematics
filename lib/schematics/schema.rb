@@ -6,6 +6,7 @@ module Schematics
       @file = File.read(filename)
       @data = JSON.parse(@file, symbolize_names: true)
       @entities = @data.map { |type, entity| Entity.create(type, entity) }
+      add_descriptor_references
       add_has_many_associations
       add_has_one_associations
       add_has_many_through_associations
@@ -62,10 +63,6 @@ module Schematics
 
     def find_entity_by_type(type)
       @entities.find { |entity| entity.type === type }
-    end
-    
-    def find_descriptor_by_reference(reference)
-      find_entity_by_type(reference.association_type).descriptor
     end
 
     def generate

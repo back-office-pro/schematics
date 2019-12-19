@@ -25,7 +25,7 @@ module Schematics
       end
 
       def references
-        super.map { |reference| @record.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}") }
+        super.map { |reference| @record.instance_eval("#{reference.name}.#{reference.descriptor.name}") }
       end
 
       def has_one_associations
@@ -37,7 +37,7 @@ module Schematics
       end
 
       def has_associations(association)
-        @record.instance_eval("#{association.name}.#{association.entity.descriptor.name}")
+        @record.instance_eval("#{association.name}.#{association.descriptor.name}")
       end
     end
   end

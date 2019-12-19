@@ -13,10 +13,10 @@
             = fa_icon reference.icon, class: "mr-2 text-muted"
             = reference.name.humanize
           td
-            = link_to @resource.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}"), @resource.instance_eval(reference.name)
+            = link_to @resource.instance_eval("#{reference.name}.#{reference.descriptor.name}"), @resource.instance_eval(reference.name)
       - (entity.has_one_associations + entity.has_one_through_associations).each do |association|
         tr
           th
             = fa_icon association.icon, class: "mr-2 text-muted"
             = association.name.humanize
-          td= link_to @resource.instance_eval("#{association.name}.#{association.entity.descriptor.name}"), @resource.instance_eval(association.name)
+          td= link_to @resource.instance_eval("#{association.name}.#{association.descriptor.name}"), @resource.instance_eval(association.name)

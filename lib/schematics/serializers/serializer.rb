@@ -11,10 +11,6 @@ module Schematics
       end
       
       protected
-
-      def find_descriptor_by_reference(reference)
-        @schema.find_descriptor_by_reference(reference)
-      end
       
       def eager_loading(records)
         records = records.includes(@entity.references.map(&:name).map(&:to_sym)) unless @entity.references.empty?

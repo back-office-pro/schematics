@@ -73,11 +73,11 @@
               - table_entity.references.each do |reference|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(reference.name).nil?
-                    = link_to resource.instance_eval("#{reference.name}.#{find_descriptor_by_reference(reference).name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
+                    = link_to resource.instance_eval("#{reference.name}.#{reference.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
               - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(association.name).nil?
-                    = link_to resource.instance_eval("#{association.name}.#{association.entity.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(association.name))
+                    = link_to resource.instance_eval("#{association.name}.#{association.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(association.name))
               - if actions
                 td.text-nowrap.text-right
                   .btn-group

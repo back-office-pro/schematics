@@ -29,6 +29,10 @@ module Schematics
         @reference.required?
       end
 
+      def descriptor
+        entity.descriptor
+      end
+
       def filter_scope
         %Q[scope :by_#{name}, -> ]
       end

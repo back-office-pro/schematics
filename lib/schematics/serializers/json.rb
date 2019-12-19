@@ -20,7 +20,7 @@ module Schematics
 
       def references
         super.map do |reference|
-          descriptor = find_descriptor_by_reference(reference).name.to_sym
+          descriptor = reference.descriptor.name.to_sym
           [reference.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
         end
       end
@@ -42,7 +42,7 @@ module Schematics
       end
 
       def has_associations(association)
-        descriptor = association.entity.descriptor.name.to_sym
+        descriptor = association.descriptor.name.to_sym
         [association.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
       end
     end

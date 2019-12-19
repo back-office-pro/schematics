@@ -1,6 +1,8 @@
 module Schematics
   module Attributes
     class BelongsTo < Attribute
+      attr_accessor :descriptor
+
       def migration_options
         super + [:polymorphic, :type]
       end
@@ -26,7 +28,7 @@ module Schematics
       end
 
       def sort_scope
-        super + %Q[(sort_direction, field) { joins(:#{association_type}).merge(#{association_type.camelize}.order({ field => sort_direction })) }]
+        super + %Q[sort_direction { joins(:#{association_type}).merge(#{association_type.camelize}.order(#{descriptor.name}: sort_direction)) }]
       end
 
       def model_property_type

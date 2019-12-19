@@ -17,10 +17,6 @@ module Schematics
     def entity
       controller.class.entity
     end
-
-    def find_descriptor_by_reference(reference)
-      Schematics::SCHEMA.find_descriptor_by_reference(reference)
-    end
     
     def file_icon(file)
       case file.filename.extension.downcase
