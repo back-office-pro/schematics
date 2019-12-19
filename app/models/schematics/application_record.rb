@@ -3,7 +3,6 @@ module Schematics
     self.abstract_class = true
     acts_as_paranoid
     has_paper_trail
-    default_scope { order(created_at: :desc) }
 
     class << self
       def inherited(subclass)

@@ -19,4 +19,4 @@
             = fa_icon :chart_line, class: "mr-2"
             | #{entity.type.pluralize.humanize} par mois
         .card-body
-          = line_chart entity.type.camelize.constantize.unscope(:order).group_by_day(:created_at).count
+          = line_chart entity.type.camelize.constantize.group_by_day(:created_at).count
