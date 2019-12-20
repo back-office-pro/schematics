@@ -1,22 +1,24 @@
 module Schematics
   class Schema
-    attr_accessor :entities
+    attr_accessor :entities, :charts, :stats
 
     def initialize(filename)
       @file = File.read(filename)
       @data = JSON.parse(@file, symbolize_names: true)
-      @entities = @data.map { |type, entity| Entity.create(type, entity) }
-      add_descriptor_references
+      @entities = @data[:entities].map { |entity| Entity.create(entity) }
+      @charts = @data[:charts].map { |chart| Chart.create(self, chart) }
+      @stats = @data[:stats].map { |stat| Stat.create(self, stat) }
+      add_inverse_descriptor_to_references
       add_has_many_associations
       add_has_one_associations
       add_has_many_through_associations
       add_has_one_through_associations
     end
     
-    def add_descriptor_references
+    def add_inverse_descriptor_to_references
       @entities.each do |entity|
         entity.references.each do |reference|
-          reference.descriptor = find_entity_by_type(reference.association_type).descriptor
+          reference.inverse_descriptor = find_entity_by_type(reference.association_type).descriptor
         end
       end
     end

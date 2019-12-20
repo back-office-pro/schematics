@@ -1,22 +1,22 @@
 .row
-  - Schematics::SCHEMA.entities.each do |entity|
+  - Schematics::SCHEMA.stats.each do |stat|
     .col-xl-3.col-md-6.mb-4
-      .card.shadow
+      .card.shadow-lg
         .card-body
           .row.no-gutters.align-items-center
             .col
               small.text-uppercase.text-primary.font-weight-bold
-                = entity.type.pluralize.humanize
+                = stat.title
               h5.mb-0.text-dark.font-weight-bold
-                = entity.type.camelize.constantize.count
+                = stat
             .col-auto.text-light
-              = fa_icon entity.icon, size: "2x"
-  - Schematics::SCHEMA.entities.each do |entity|
+              = fa_icon stat.icon, size: "2x"
+  - Schematics::SCHEMA.charts.each do |chart|
     .col-xl-6.col-md-12.mb-4
-      .card.shadow
+      .card.shadow-lg
         .card-header
           h5.m-0.text-primary.font-weight-bold
             = fa_icon :chart_line, class: "mr-2"
-            | #{entity.type.pluralize.humanize} par mois
+            = chart.title.titleize
         .card-body
-          = line_chart entity.type.camelize.constantize.group_by_day(:created_at).count
+          = eval(chart)

@@ -38,7 +38,9 @@ require 'schematics/engine'
 require 'schematics/array'
 
 module Schematics
+  autoload :Chart,        'schematics/chart'
   autoload :Schema,       'schematics/schema'
+  autoload :Stat,         'schematics/stat'
   autoload :Entity,       'schematics/entity'
   autoload :JsonWebToken, 'schematics/json_web_token'
   autoload :Renderable,   'schematics/renderable'

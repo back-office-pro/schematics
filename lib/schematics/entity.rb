@@ -15,8 +15,12 @@ module Schematics
       @has_one_through_associations = []
     end
 
+    def find_field_by_name(name)
+      (@attributes + @virtuals).find { |field| field.name === name }
+    end
+
     def descriptor
-      (@attributes + @virtuals).find { |param| param.name === @descriptor }
+      find_field_by_name(@descriptor)
     end
 
     def weight
@@ -146,8 +150,8 @@ module Schematics
       RUBY
     end
 
-    def self.create(type, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
-      Entity.new(type.to_s, icon&.to_sym, descriptor, attributes || [], virtuals || [])
+    def self.create(type:, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
+      Entity.new(type, icon&.to_sym, descriptor, attributes || [], virtuals || [])
     end
   end
 end

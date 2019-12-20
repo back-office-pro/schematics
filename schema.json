@@ -1,270 +1,320 @@
 {
-    "user": {
-        "icon": "users",
-        "descriptor": "full_name",
-        "virtuals": [
-            {
-                "name": "full_name",
-                "function": "$last_name $first_name"
+    "stats": [
+        {
+            "entity": "user",
+            "agregate": "count"
+        },
+        {
+            "entity": "product",
+            "agregate": "sum",
+            "field": "price"
+        },
+        {
+            "entity": "product",
+            "agregate": "sum",
+            "field": "tax_inclusive_price"
+        }
+    ],
+    "charts": [
+        {
+            "type": "line",
+            "entity": "category",
+            "x": {
+                "agregate": "group_by_day",
+                "field": "created_at"
+            },
+            "y": {
+                "agregate": "count"
             }
-        ],
-        "attributes": [
-            {
-                "name": "email",
-                "type": "string",
-                "options": {
-                    "unique": true,
-                    "email": true
-                }
+        },
+        {
+            "type": "pie",
+            "entity": "product",
+            "x": {
+                "agregate": "group",
+                "field": "state"
             },
-            {
-                "name": "password",
-                "type": "digest", 
-                "options": {
-                    "min": 6
-                }
-            },
-            {
-                "name": "auth_token",
-                "type": "token",
-                "options": {
-                    "unique": true
-                }
-            },
-            {
-                "name": "password_reset_token",
-                "type": "token",
-                "options": {
-                    "unique": true
-                }
-            },
-            {
-                "name": "first_name",
-                "type": "string",
-                "options": {
-                    "required": true
-                }
-            },
-            {
-                "name": "last_name",
-                "type": "string",
-                "options": {
-                    "required": true
-                }
+            "y": {
+                "agregate": "sum",
+                "field": "tax_inclusive_price"
             }
-        ]
-    },
-    "message": {
-        "icon": "inbox",
-        "descriptor": "subject",
-        "attributes": [
-            {
-                "name": "subject",
-                "type": "string",
-                "options": {
-                    "required": true
+        }
+    ],
+    "entities": [
+        {
+            "type": "user",
+            "icon": "users",
+            "descriptor": "full_name",
+            "virtuals": [
+                {
+                    "name": "full_name",
+                    "function": "$last_name $first_name"
                 }
-            },
-            {
-                "name": "content",
-                "type": "rich_text",
-                "options": {
-                    "required": true
-                }
-            },
-            {
-                "name": "author",
-                "type": "belongs_to",
-                "options": {
-                    "required": true,
-                    "type": "user",
-                    "inverse": {
-                        "name": "sent_messages",
-                        "type": "has_many"
+            ],
+            "attributes": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "options": {
+                        "unique": true,
+                        "email": true
+                    }
+                },
+                {
+                    "name": "password",
+                    "type": "digest",
+                    "options": {
+                        "min": 6
+                    }
+                },
+                {
+                    "name": "auth_token",
+                    "type": "token",
+                    "options": {
+                        "unique": true
+                    }
+                },
+                {
+                    "name": "password_reset_token",
+                    "type": "token",
+                    "options": {
+                        "unique": true
+                    }
+                },
+                {
+                    "name": "first_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "last_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
                     }
                 }
-            },
-            {
-                "name": "recipient",
-                "type": "belongs_to",
-                "options": {
-                    "required": true,
-                    "type": "user",
-                    "inverse": {
-                        "name": "received_messages",
-                        "type": "has_many"
+            ]
+        },
+        {
+            "type": "message",
+            "icon": "inbox",
+            "descriptor": "subject",
+            "attributes": [
+                {
+                    "name": "subject",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "content",
+                    "type": "rich_text",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "author",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "type": "user",
+                        "inverse": {
+                            "name": "sent_messages",
+                            "type": "has_many"
+                        }
+                    }
+                },
+                {
+                    "name": "recipient",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "type": "user",
+                        "inverse": {
+                            "name": "received_messages",
+                            "type": "has_many"
+                        }
                     }
                 }
-            }
-        ]
-    },
-    "directory": {
-        "icon": "folder",
-        "descriptor": "name",
-        "attributes": [
-            {
-                "name": "name",
-                "type": "string",
-                "options": {
-                    "unique": true
+            ]
+        },
+        {
+            "type": "directory",
+            "icon": "folder",
+            "descriptor": "name",
+            "attributes": [
+                {
+                    "name": "name",
+                    "type": "string",
+                    "options": {
+                        "unique": true
+                    }
+                },
+                {
+                    "name": "parent",
+                    "type": "belongs_to",
+                    "options": {
+                        "type": "directory",
+                        "inverse": {
+                            "name": "sub_directories",
+                            "type": "has_many"
+                        }
+                    }
+                },
+                {
+                    "name": "files",
+                    "type": "attachments"
                 }
-            },
-            {
-                "name": "parent",
-                "type": "belongs_to",
-                "options": {
-                    "type": "directory",
-                    "inverse": {
-                        "name": "sub_directories",
-                        "type": "has_many"
+            ]
+        },
+        {
+            "type": "client",
+            "icon": "user_tie",
+            "descriptor": "full_name",
+            "virtuals": [
+                {
+                    "name": "full_name",
+                    "function": "$first_name $last_name"
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "first_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "last_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
                     }
                 }
-            },
-            {
-                "name": "files",
-                "type": "attachments"
-            }
-        ]
-    },
-    "client": {
-        "icon": "user_tie",
-        "descriptor": "full_name",
-        "virtuals": [
-            {
-                "name": "full_name",
-                "function": "$first_name $last_name"
-            }
-        ],
-        "attributes": [
-            {
-                "name": "first_name",
-                "type": "string",
-                "options": {
-                    "required": true
-                }
-            },
-            {
-                "name": "last_name",
-                "type": "string",
-                "options": {
-                    "required": true
-                }
-            }
-        ]
-    },
-    "sub_category": {
-        "icon": "box",
-        "descriptor": "designation",
-        "attributes": [
-            {
-                "name": "designation",
-                "type": "string",
-                "options": {
-                    "unique": true
-                }
-            },
-            {
-                "name": "category",
-                "type": "belongs_to",
-                "options": {
-                    "required": true,
-                    "inverse": {
-                        "type": "has_many"
+            ]
+        },
+        {
+            "type": "sub_category",
+            "icon": "box",
+            "descriptor": "designation",
+            "attributes": [
+                {
+                    "name": "designation",
+                    "type": "string",
+                    "options": {
+                        "unique": true
+                    }
+                },
+                {
+                    "name": "category",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
                     }
                 }
-            }
-        ]
-    },
-    "category": {
-        "icon": "box",
-        "descriptor": "designation",
-        "attributes": [
-            {
-                "name": "designation",
-                "type": "string",
-                "options": {
-                    "unique": true,
-                    "required": true
-                }
-            }
-        ]
-    },
-    "product": {
-        "descriptor": "reference",
-        "virtuals": [
-            {
-                "name": "tax_inclusive_price",
-                "function": "$price * (1 + $vat / 100)",
-                "options": {
-                    "scale": 2,
-                    "unit": "€"
-                }
-            },
-            {
-                "name": "reference",
-                "function": "ref-$id-$sub_category.id"
-            }
-        ],
-        "attributes": [
-            {
-                "name": "designation",
-                "type": "string",
-                "options": {
-                    "unique": true,
-                    "limit": 100
-                }
-            },
-            {
-                "name": "description",
-                "type": "string"
-            },
-            {
-                "name": "price",
-                "type": "decimal",
-                "options": {
-                    "precision": 5,
-                    "scale": 2,
-                    "unit": "€"
-                }
-            },
-            {
-                "name": "vat",
-                "type": "float",
-                "options": {
-                    "default": 19.6,
-                    "unit": "%"
-                }
-            },
-            {
-                "name": "in_stock",
-                "type": "boolean",
-                "options": {
-                    "default": false
-                }
-            },
-            {
-                "name": "logo",
-                "type": "attachment"
-            },
-            {
-                "name": "state",
-                "type": "enum",
-                "options": [
-                    "available",
-                    "not_available",
-                    "available_soon"
-                ]
-            },
-            {
-                "name": "sub_category",
-                "type": "belongs_to",
-                "options": {
-                    "required": true,
-                    "inverse": {
-                        "type": "has_many"
+            ]
+        },
+        {
+            "type": "category",
+            "icon": "box",
+            "descriptor": "designation",
+            "attributes": [
+                {
+                    "name": "designation",
+                    "type": "string",
+                    "options": {
+                        "unique": true,
+                        "required": true
                     }
                 }
-            }
-        ]
-    }
+            ]
+        },
+        {
+            "type": "product",
+            "descriptor": "reference",
+            "virtuals": [
+                {
+                    "name": "tax_inclusive_price",
+                    "function": "$price * (1 + $vat / 100)",
+                    "options": {
+                        "scale": 2,
+                        "unit": "€"
+                    }
+                },
+                {
+                    "name": "reference",
+                    "function": "ref-$id-$sub_category.id"
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "designation",
+                    "type": "string",
+                    "options": {
+                        "unique": true,
+                        "limit": 100
+                    }
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "name": "price",
+                    "type": "decimal",
+                    "options": {
+                        "precision": 5,
+                        "scale": 2,
+                        "unit": "€"
+                    }
+                },
+                {
+                    "name": "vat",
+                    "type": "float",
+                    "options": {
+                        "default": 19.6,
+                        "unit": "%"
+                    }
+                },
+                {
+                    "name": "in_stock",
+                    "type": "boolean",
+                    "options": {
+                        "default": false
+                    }
+                },
+                {
+                    "name": "logo",
+                    "type": "attachment"
+                },
+                {
+                    "name": "state",
+                    "type": "enum",
+                    "options": [
+                        "available",
+                        "not_available",
+                        "available_soon"
+                    ]
+                },
+                {
+                    "name": "sub_category",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
 }

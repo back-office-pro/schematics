@@ -73,7 +73,7 @@
               - table_entity.references.each do |reference|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(reference.name).nil?
-                    = link_to resource.instance_eval("#{reference.name}.#{reference.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
+                    = link_to resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
               - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(association.name).nil?

@@ -20,7 +20,7 @@ module Schematics
 
       def references
         super.map do |reference|
-          descriptor = reference.descriptor.name.to_sym
+          descriptor = reference.inverse_descriptor.name.to_sym
           [reference.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
         end
       end

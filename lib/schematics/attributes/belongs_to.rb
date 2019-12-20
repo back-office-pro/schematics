@@ -1,7 +1,7 @@
 module Schematics
   module Attributes
     class BelongsTo < Attribute
-      attr_accessor :descriptor
+      attr_accessor :inverse_descriptor
 
       def migration_options
         super + [:polymorphic, :type]
@@ -28,7 +28,7 @@ module Schematics
       end
 
       def sort_scope
-        super + %Q[sort_direction { joins(:#{association_type}).merge(#{association_type.camelize}.order(#{descriptor.name}: sort_direction)) }]
+        super + %Q[sort_direction { joins(:#{association_type}).merge(#{association_type.camelize}.order(#{inverse_descriptor.name}: sort_direction)) }]
       end
 
       def model_property_type

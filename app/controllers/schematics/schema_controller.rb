@@ -19,7 +19,7 @@ module Schematics
     end
 
     def index
-      @pagy, @resources = pagy(apply_scopes(model_class).includes(eager_loading), items: params[:per_page] || 10)
+      @pagy, @resources = pagy(apply_scopes(model_class).includes(eager_loading).order(created_at: :desc), items: params[:per_page] || 10)
       respond_to do |format|
         format.html
         format.json { render schema: @resources }
