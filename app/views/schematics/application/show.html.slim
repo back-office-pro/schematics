@@ -1,5 +1,5 @@
 - breadcrumb title, @resource
-.card.shadow
+.card.shadow-lg
   .card-header
     ul.nav
       li.nav-item
@@ -21,7 +21,7 @@
 - (entity.has_many_associations + entity.has_many_through_associations).each do |association|
   - resources = @resource.instance_eval(association.name)
   - unless resources.empty?
-    .card.shadow.mt-4
+    .card.shadow-lg.mt-4
       a.card-header.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.font-weight-bold.card-header-title
           = fa_icon association.icon, class: "mr-2"

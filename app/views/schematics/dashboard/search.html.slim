@@ -1,6 +1,6 @@
 - breadcrumb "Recherche \"#{params[:query]}\"", :search_path, match: :inclusive
 - if @results.empty?
-  .card.shadow.mb-4
+  .card.shadow-lg.mb-4
     .card-header
       h5.m-0.text-primary.font-weight-bold
         = fa_icon :search, class: "mr-2"
@@ -9,7 +9,7 @@
       = render 'schematics/application/empty'
 - else
   - @results.each do |type, resources|
-    .card.shadow.mb-4
+    .card.shadow-lg.mb-4
       a.card-header href="#collapse-#{type}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.font-weight-bold
           = fa_icon :search, class: "mr-2"

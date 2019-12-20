@@ -37,9 +37,9 @@ html
             ul.navbar-nav.ml-auto.p-3
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-3
                 a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                  = fa_icon :bell, class: "fa-lg"
+                  = fa_icon :bell, type: :regular, class: "fa-lg"
                   .badge.badge-danger 3
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow aria-labelledby="notificationsDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="notificationsDropdown" 
                   h6.dropdown-header Header
                   .dropdown-item.d-flex.align-items-center
                     | Test
@@ -47,9 +47,9 @@ html
                   = link_to "Voir toutes les notifications", main_app.messages_path, class: "dropdown-item text-muted small"
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-3.pr-3.border-left.border-light
                 a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                  = fa_icon :envelope, class: "fa-lg"
+                  = fa_icon :envelope, type: :regular, class: "fa-lg"
                   .badge.badge-danger 7
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow aria-labelledby="messagesDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="messagesDropdown" 
                   h6.dropdown-header Header
                   .dropdown-item.d-flex.align-items-center
                     | Test
@@ -59,7 +59,7 @@ html
                 a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.email
                   = fa_icon :user_circle, size: "2x", class: "align-middle"
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow aria-labelledby="navbarDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="navbarDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-2"
                     | Editer profil
@@ -68,9 +68,9 @@ html
                     = fa_icon :sign_out_alt, class: "mr-2"
                     | Déconnexion
           .container-fluid.mt-4.mb-4
-            = render 'schematics/application/breadcrumbs'
             = render 'schematics/application/notice' if notice.present?
             = render 'schematics/application/alert' if alert.present?
+            = render 'schematics/application/breadcrumbs' unless current_page?(schematics.root_path)
             = yield
           footer.text-center.mb-4
             | &copy; #{Time.zone.now.year}
