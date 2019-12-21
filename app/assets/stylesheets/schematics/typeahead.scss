@@ -7,7 +7,6 @@ span.twitter-typeahead .tt-dropdown-menu {
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 160px;
   padding: 5px 0;
   margin: 2px 0 0;
   list-style: none;
@@ -18,7 +17,7 @@ span.twitter-typeahead .tt-dropdown-menu {
   border-radius: 4px;
   box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
   background-clip: padding-box;
-  min-width: 100%;
+  width: 100%;
   font-weight: 200;
 }
 

@@ -63,9 +63,9 @@ $(function() {
             display: 'descriptor',
             limit: 10,
             templates: {
-                notFound: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-exclamation text-dark fa-fw mr-2"></i>Aucun résultat</div>`,
-                pending: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>Recherche en cours...</div>`,
-                suggestion: (item) => `<div class="tt-suggestion tt-selectable"><i class="fa fa-${item.icon} fa-fw text-dark mr-2"></i>${item.descriptor}</div>`
+                notFound: () => `<div class="tt-suggestion tt-selectable text-truncate"><i class="fa fa-exclamation text-dark fa-fw mr-2"></i>Aucun résultat</div>`,
+                pending: () => `<div class="tt-suggestion tt-selectable text-truncate"><i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>Recherche en cours...</div>`,
+                suggestion: (item) => `<div class="tt-suggestion tt-selectable text-truncate"><i class="fa fa-${item.icon} fa-fw text-dark mr-2"></i>${item.descriptor}</div>`
             }
         });
 
@@ -79,9 +79,9 @@ $(function() {
             source: filterSource,
             limit: 10,
             templates: {
-                notFound: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-exclamation text-dark fa-fw mr-2"></i>Aucun résultat</div>`,
-                pending: () => `<div class="tt-suggestion tt-selectable"><i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>Recherche en cours...</div>`,
-                suggestion: (item) => `<div class="tt-suggestion tt-selectable"><i class="fa fa-search fa-fw text-dark mr-2"></i>${item.__FIELD__}</div>`
+                notFound: () => `<div class="tt-suggestion tt-selectable text-truncate"><i class="fa fa-exclamation text-dark fa-fw mr-2"></i>Aucun résultat</div>`,
+                pending: () => `<div class="tt-suggestion tt-selectable text-truncate"><i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>Recherche en cours...</div>`,
+                suggestion: (item) => `<div class="tt-suggestion tt-selectable text-truncate"><i class="fa fa-search fa-fw text-dark mr-2"></i>${item.__FIELD__}</div>`
             }
         });
 });
