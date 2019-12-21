@@ -1,12 +1,20 @@
 = simple_form_for resource, defaults: { input_html: { class: "bg-light border-0" } } do |f|
   - (entity.attributes - entity.references).reject_is_a?(Schematics::Attributes::Token).each do |attribute|
-    - if attribute.is_a?(Schematics::Attributes::RichText)
+    - case attribute
+    - when Schematics::Attributes::String
+      = f.input attribute.name.to_sym, maxlength: true, minlength: true, pattern: true
+    - when Schematics::Attributes::Decimal
+      = f.input attribute.name.to_sym, min_max: true
+    - when Schematics::Attributes::RichText
       = f.input attribute.name.to_sym, as: :rich_text_area
-    - elsif attribute.is_a?(Schematics::Attributes::Enum)
+    - when Schematics::Attributes::Enum
       = f.input attribute.name.to_sym, collection: model_class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym), include_blank: false
-    - elsif attribute.is_a?(Schematics::Attributes::Attachments)
-      = f.input attribute.name.to_sym, as: :file, input_html: { multiple: true }
-    - elsif attribute.is_a?(Schematics::Attributes::Digest)
+    - when Schematics::Attributes::Attachment
+      = f.input attribute.name.to_sym, as: :file, required: resource.new_record?, wrapper_html: { class: "mb-2", }, input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
+      small.form-text.text-muted.mb-2
+        = fa_icon :info_circle, class: "mr-1"
+        = humanize_attachment_validators(attribute.validators)
+    - when Schematics::Attributes::Digest
       = f.input attribute.name.to_sym
       = f.input "#{attribute.name}_confirmation".to_sym
     - else

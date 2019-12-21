@@ -293,7 +293,12 @@
                 },
                 {
                     "name": "logo",
-                    "type": "attachment"
+                    "type": "attachment",
+                    "options": {
+                        "required": true,
+                        "content_type": ["png"],
+                        "size": 1
+                    }
                 },
                 {
                     "name": "state",

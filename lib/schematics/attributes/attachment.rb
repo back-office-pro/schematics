@@ -22,6 +22,13 @@ module Schematics
         validators[:attached] = true if required?
         validators[:content_type] = @options[:content_type].map(&:to_sym) if @options.key?(:content_type)
         validators[:size] = { less_than: @options[:size].megabytes } if @options.key?(:size)
+        validators[:aspect_ratio] = @options[:aspect_ratio] if @options.key?(:aspect_ratio)
+        validators[:limit] = { min: @options[:min] } if @options.key?(:min)
+        validators[:limit] = { max: @options[:max] } if @options.key?(:max)
+        validators[:limit] = { min: @options[:min], max: @options[:max] } if @options.key?(:min) && @options.key?(:max)
+        validators[:dimension] = { width: @options[:width] } if @options.key?(:width)
+        validators[:dimension] = { height: @options[:height] } if @options.key?(:height)
+        validators[:dimension] = { width: @options[:width], height: @options[:height] } if @options.key?(:width) && @options.key?(:height)
         validators
       end
 

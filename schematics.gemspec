@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "valid_email", "~> 0.1.3"
   spec.add_dependency "validate_url", "~> 1.0.8"
   spec.add_dependency "active_storage_validations", "~> 0.8.5"
+  spec.add_dependency "mini_magick", ">= 4.9.5"
   spec.add_dependency "active_link_to", "~> 1.0.5"
   spec.add_dependency "loaf", "~> 0.8.1"
   spec.add_dependency "twitter-typeahead-rails", "~> 0.11.1"

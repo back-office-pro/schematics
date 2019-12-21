@@ -1,0 +1,9 @@
+en:
+  layouts:
+    schematics:
+      application:
+        search:
+          placeholder: Search...
+          not_found: No result
+          pending: Loading...
+          

@@ -5,10 +5,10 @@ module Schematics
 
     def title
       case action_name.to_sym
-      when :index then "Liste des #{entity.type.pluralize}"
-      when :new   then "Ajouter un nouveau #{entity.type}"
-      when :edit  then "Editer #{@resource.send(entity.descriptor.name)}"
-      when :show  then @resource.send(entity.descriptor.name)
+      when :index           then "Liste des #{entity.type.pluralize}"
+      when :new, :create    then "Ajouter un nouveau #{entity.type}"
+      when :edit, :update   then "Editer #{@resource.send(entity.descriptor.name)}"
+      when :show            then @resource.send(entity.descriptor.name)
       else
         nil
       end
@@ -51,6 +51,23 @@ module Schematics
           content.join.html_safe
         end
       end
+    end
+
+    def humanize_attachment_validators(validators)
+      content = []
+      validators.except(:presence, :attached).each do |key, value|
+        content << I18n.t(".forms.attachment.validators.#{key}") + " " + case value
+          when Array
+            value.map(&:to_s).map(&:upcase).join(" ")
+          when Hash
+            humanize_attachment_validators(value)
+          when Numeric
+            "#{value / (1024.0 * 1024.0)} #{I18n.t(".forms.attachment.validators.mb")}"
+          else
+            value.humanize
+          end
+      end
+      content.join(" - ").html_safe
     end
   end
 end

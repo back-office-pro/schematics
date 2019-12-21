@@ -6,7 +6,16 @@
           th
             = fa_icon field.icon, class: "mr-2 text-muted"
             = field.name.humanize
-          td= field.format(@resource.instance_eval(field.name))
+          td
+            - value = @resource.instance_eval(field.name)
+            - case field
+            - when Schematics::Attributes::Attachments
+              - value.each do |attachment|
+                = image_tag(attachment)
+            - when Schematics::Attributes::Attachment
+              = image_tag(value)
+            - else
+              = field.format(value)
       - entity.references.each do |reference|
         tr
           th

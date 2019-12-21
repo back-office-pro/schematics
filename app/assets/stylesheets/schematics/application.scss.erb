@@ -7,14 +7,14 @@ $input-btn-focus-box-shadow: none;
 @import "font_awesome5_webfont";
 @import "typeahead";
 
-html, body {
-  height: 100%;
-}
-
 /**
  * Layout
  */
  
+html, body {
+  height: 100%;
+}
+
 .sidebar-sticky {
   position: sticky;
   top: 0;
@@ -78,7 +78,7 @@ html, body {
  * Tables
  */ 
 
-.table td {
+.table tr[onclick] {
   cursor: pointer;
 }
 
@@ -182,4 +182,27 @@ html, body {
 .btn-icon-split .text {
   display: inline-block;
   padding: .375rem .75rem;
+}
+
+/**
+ * Forms
+ */
+
+label.custom-file-label {
+  background: $light;
+  border: 0;
+}
+
+label.custom-file-label::after {
+  @include gradient-bg($primary);
+  color: white;
+  content: "<%= I18n.t('.forms.attachment.browse') %>";
+}
+
+input.custom-file-input.is-valid + label.custom-file-label::after {
+  @include gradient-bg($success);
+}
+
+input.custom-file-input.is-invalid + label.custom-file-label::after {
+  @include gradient-bg($danger);
 }

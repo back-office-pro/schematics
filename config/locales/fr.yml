@@ -1,0 +1,41 @@
+fr:
+  forms:
+    attachment:
+      browse: Explorer
+      validators:
+        content_type: "Formats fichiers acceptés :"
+        size: "Taille fichier :"
+        less_than: moins de
+        mb: Mo
+        dimension: Dimension
+        width: largeur
+        height: hauteur
+  layouts:
+    schematics:
+      application:
+        search:
+          placeholder: Rechercher...
+          not_found: Aucun résultat
+          pending: Recherche en cours...
+  errors:
+    messages:
+      content_type_invalid: "a un type de fichier non valide"
+      file_size_out_of_range: "a un poids de %{file_size} qui n'entre pas dans les limites requises"
+      limit_out_of_range: "a un nombre de fichiers en dehors des limites"
+      image_metadata_missing: "n'est pas une image valide"
+      dimension_min_inclusion: "doit avoir des dimensions supérieures ou égales à %{width} x %{height} pixels"
+      dimension_max_inclusion: "doit avoir des dimensions inférieures ou égales à %{width} x %{height} pixels"
+      dimension_width_inclusion: "doit avoir une largeur comprise entre %{min} et %{max} pixels"
+      dimension_height_inclusion: "doit avoir une hauteur comprise entre %{min} et %{max} pixels"
+      dimension_width_greater_than_or_equal_to: "doit avoir une largeur supérieure ou égale à %{length} pixels"
+      dimension_height_greater_than_or_equal_to: "doit avoir une hauteur supérieure ou égale à %{length} pixels"
+      dimension_width_less_than_or_equal_to: "doit avoir une largeur inférieure ou égale à %{length} pixels"
+      dimension_height_less_than_or_equal_to: "doit avoir une hauteur inférieure ou égale à %{length} pixels"
+      dimension_width_equal_to: "doit avoir une largeur égale à %{length} pixels"
+      dimension_height_equal_to: "doit avoir une hauteur égale à %{length} pixels"
+      aspect_ratio_not_square: "doit être une image carrée"
+      aspect_ratio_not_portrait: "doit être une image de type portait"
+      aspect_ratio_not_landscape: "doit être une image de type paysage"
+      aspect_ratio_is_not: "doit avoir un ratio d'aspect de %{aspect_ratio}"
+      aspect_ratio_unknown: "a un ratio d'aspect inconnu"
+      
