@@ -9,6 +9,7 @@
 //= require_tree .
 
 $(function() {
+    $('.toast').toast({ delay: 5000 }).toast('show');
     $('[data-toggle="tooltip"]').tooltip();
     $('.custom-file-input').on('change', function () {
         $(this).siblings('.custom-file-label').addClass('selected').html(Array.from($(this).get(0).files).map(_ => _.name).join(', '));

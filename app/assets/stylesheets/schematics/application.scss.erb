@@ -206,3 +206,14 @@ input.custom-file-input.is-valid + label.custom-file-label::after {
 input.custom-file-input.is-invalid + label.custom-file-label::after {
   @include gradient-bg($danger);
 }
+
+/**
+ * Toasts
+ */
+
+.toast {
+  position: fixed; 
+  z-index: 3; 
+  right: 1rem; 
+  top: 1rem;
+}

@@ -1,4 +1,9 @@
-.alert.alert-danger
-  = alert
-  button.close aria-label="Close" data-dismiss="alert" type="button" 
-    span aria-hidden="true" ×
+.toast.shadow-lg.border-danger.w-50 aria-atomic="true" aria-live="assertive" role="alert"
+  .toast-header.bg-gradient-danger.text-white
+    span
+      = fa_icon :bell
+    strong.mr-auto.ml-2.align-middle Notification
+    button.ml-2.mb-1.close aria-label="Close" data-dismiss="toast" type="button" 
+      = fa_icon :times, class: "fa-xs"
+  .toast-body
+    = alert
