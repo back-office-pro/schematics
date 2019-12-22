@@ -94,6 +94,14 @@
                     "options": {
                         "required": true
                     }
+                },
+                {
+                    "name": "locale",
+                    "type": "enum",
+                    "options": [
+                        "Français",
+                        "English"
+                    ]
                 }
             ]
         },
@@ -296,7 +304,9 @@
                     "type": "attachment",
                     "options": {
                         "required": true,
-                        "content_type": ["pdf"],
+                        "content_type": [
+                            "pdf"
+                        ],
                         "size": 1
                     }
                 },
