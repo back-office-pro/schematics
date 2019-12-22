@@ -1,4 +1,9 @@
-en:
+en:  
+  schematics:
+    application:
+      unauthorized_access: Unauthorized access
+      index:
+        download_as_csv: Download as CSV
   layouts:
     schematics:
       application:

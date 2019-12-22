@@ -10,6 +10,12 @@ fr:
         dimension: Dimension
         width: largeur
         height: hauteur
+  schematics:
+    application:
+      unauthorized_access: Accès non autorisé
+      index:
+        download_as_csv: Télécharger au format CSV
+        reset_filters: Réinitialiser les filtres
   layouts:
     schematics:
       application:
