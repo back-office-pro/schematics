@@ -1,5 +1,5 @@
 .table-responsive
-  table.table.table-striped.table-hover class=('with-actions' if actions)
+  table.table class=('with-actions' if actions) class=(['table-striped', 'table-hover'] unless resources.empty?)
     thead
       tr
         - if actions
@@ -51,7 +51,6 @@
               = render 'schematics/application/filters/association', association: association
       tbody
         - if resources.empty?
-          tr
           tr
             td.text-center.pt-5 colspan="100%"
               = render 'empty'

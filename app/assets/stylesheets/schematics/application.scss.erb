@@ -38,8 +38,8 @@ html, body {
 
 .sidebar {
   z-index: 1;
-  flex: 0 0 10rem;
-  max-width: 10rem;
+  flex: 0 0 12rem;
+  max-width: 12rem;
   box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.3);
   .sidebar-brand {
     height: 4.375rem;
@@ -59,14 +59,21 @@ html, body {
 }
 
 .content {
-  flex: 0 0 calc(100% - 10rem);
-  max-width: calc(100% - 10rem);
+  flex: 0 0 calc(100% - 12rem);
+  max-width: calc(100% - 12rem);
 }
 
 @include media-breakpoint-down(sm) {
   .sidebar {
     flex: 0 0 6rem;
     max-width: 6rem;
+    .sidebar-brand {
+      position: absolute;
+      left: -0.75rem;
+      top: 1rem;
+      transform-origin: bottom;
+      transform: rotate(-90deg);
+    }
   }
   .content {
     flex: 0 0 calc(100% - 6rem);
