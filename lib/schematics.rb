@@ -35,6 +35,7 @@ require 'loaf'
 require 'twitter-typeahead-rails'
 require 'groupdate'
 require 'chartkick'
+require 'humanize'
 require 'schematics/engine'
 require 'schematics/array'
 

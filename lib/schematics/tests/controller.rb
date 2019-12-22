@@ -11,8 +11,9 @@ module Schematics
             setup do
               @record = send(subclass.fixture_name, :one)
               @params = {}
-              attachment = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
               entity.attributes.select(&:permitted_param).each do |attribute|
+                content_type = attribute.validators[:content_type]&.first
+                attachment = fixture_file_upload("files/dummy.#{content_type || "png"}", Mime[content_type] || "image/png")
                 case attribute
                 when Attributes::Attachments
                   @params = @params.merge(attribute.permitted_param.symbolize_keys)
@@ -75,7 +76,7 @@ module Schematics
             end
 
             test "should get API index" do
-              login_json
+              login as: :json
               get subclass.url_helper, headers: authorization_header, as: :json
               assert_response :success
             end
@@ -93,7 +94,7 @@ module Schematics
             end
 
             test "should show API #{subclass.entity_name}" do
-              login_json
+              login as: :json
               get subclass.url_helper(@record.id), headers: authorization_header, as: :json
               assert_response :success
             end
@@ -105,7 +106,7 @@ module Schematics
             end
 
             test "should throw API #{subclass.entity_name} not found" do
-              login_json
+              login as: :json
               get subclass.url_helper(0), headers: authorization_header, as: :json
               assert_response :not_found
             end
@@ -118,7 +119,7 @@ module Schematics
 
             test "should really destroy API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count", -1) do
-                login_json
+                login as: :json
                 delete subclass.url_helper(@record.id), headers: authorization_header, params: { really: true }, as: :json
               end
               assert_response :no_content
@@ -136,7 +137,7 @@ module Schematics
               @record.destroy
               assert @record.deleted?
               assert_difference("#{subclass.model_name}.count") do
-                login_json
+                login as: :json
                 delete subclass.url_helper(@record.id), headers: authorization_header, as: :json
               end
               assert_response :no_content
@@ -156,7 +157,7 @@ module Schematics
               @record.restore
               refute @record.deleted?
               assert_difference("#{subclass.model_name}.count", -1) do
-                login_json
+                login as: :json
                 delete subclass.url_helper(@record.id), headers: authorization_header, as: :json
               end
               assert_response :no_content
@@ -173,7 +174,7 @@ module Schematics
             end
 
             test "should update API #{subclass.entity_name}" do
-              login_json
+              login as: :json
               patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
               assert_response :no_content
             end 
@@ -186,7 +187,7 @@ module Schematics
 
             test "should create API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count") do
-                login_json
+                login as: :json
                 post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
               end
               assert_response :created
@@ -197,7 +198,7 @@ module Schematics
                 login
                 post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }
               end
-              assert_redirected_to subclass.url_helper(subclass.model_name.constantize.first.slug)
+              assert_redirected_to subclass.url_helper(subclass.model_name.constantize.last.slug)
             end
           end
         end
@@ -205,12 +206,8 @@ module Schematics
 
       protected
       
-      def login(format = :html)
-        post '/sessions', params: { email: users(:two).email, password: "secret" }, as: format
-      end
-
-      def login_json
-        login(:json)
+      def login(as: nil)
+        post '/sessions', params: { email: users(:two).email, password: "secret" }, as: as
       end
 
       def authorization_header

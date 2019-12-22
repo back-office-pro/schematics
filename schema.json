@@ -296,7 +296,7 @@
                     "type": "attachment",
                     "options": {
                         "required": true,
-                        "content_type": ["png"],
+                        "content_type": ["pdf"],
                         "size": 1
                     }
                 },
