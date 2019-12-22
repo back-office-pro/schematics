@@ -15,10 +15,21 @@ html
             li.nav-item.mb-4
               = link_to "My Company", schematics.root_path, class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|
-              li.nav-item.text-center.mw-100.mb-4
+              li.nav-item.text-center.mw-100.mb-2
                 = active_link_to main_app.polymorphic_path(entity.type.pluralize.to_sym), class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                   = fa_icon entity.icon, size: "2x"
                   .mt-2.d-none.d-md-block= entity.type.pluralize.titleize
+              - if is_active_link? main_app.polymorphic_path(entity.type.pluralize.to_sym)
+                - entity.attributes.select_is_a?(Schematics::Attributes::Enum).each do |attribute|
+                  li.nav-item.text-center.mw-100.mb-2.pl-3.pr-3.d-none.d-md-block
+                    ul.list-group
+                      - attribute.values.each do |value|
+                        li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center.px-2.py-1.bg-transparent.border-0
+                          = link_to main_app.polymorphic_path(entity.type.pluralize.to_sym, "by_#{attribute.name}": value), class: "nav-link p-0 m-0 text-secondary text-truncate" do
+                            = fa_icon :caret_right, class: "mr-2"
+                            = value.humanize
+                          span.badge.badge-secondary.text-primary.badge-pill= entity.type.camelize.constantize.send(value).count
+              li.nav-item.mb-2
             li.nav-item.text-center.text-center.mw-100.mb-4
               = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                 = fa_icon :project_diagram, size: "2x"
@@ -56,10 +67,10 @@ html
                   .dropdown-divider
                   = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted small"
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
-                a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.email
                   = fa_icon :user_circle, size: "2x", class: "align-middle"
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="navbarDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="accountDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-2"
                     = t('.edit_profile')
