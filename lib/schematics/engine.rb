@@ -94,7 +94,7 @@ module Schematics
 
     initializer "schematics.swagger" do
       SwaggerUiEngine.configure do |config|
-        config.swagger_url = "/api-docs.json"
+        config.swagger_url = "/api/v1/api-docs.json"
       end
       class Swagger::Docs::Config
         def self.base_api_controller
