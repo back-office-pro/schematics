@@ -61,11 +61,15 @@ html
                   = fa_icon :envelope, type: :regular, class: "fa-lg"
                   .badge.badge-danger 7
                 .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="messagesDropdown" 
-                  h6.dropdown-header Header
-                  .dropdown-item.d-flex.align-items-center
-                    | Test
+                  h6.dropdown-header= t('.message_center')
+                  - current_user.received_messages.each do |message|
+                    = link_to main_app.message_path(message), class: "dropdown-item d-flex align-items-center" do
+                      = fa_icon :user_circle, size: "2x", class: "mr-2"
+                      div
+                        .text-truncate= message.content
+                        .text-muted.small #{message.author.full_name} - #{time_ago_in_words(message.created_at)}
                   .dropdown-divider
-                  = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted small"
+                  = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted text-center small"
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.email
