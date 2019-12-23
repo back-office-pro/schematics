@@ -64,7 +64,7 @@ html
                   h6.dropdown-header= t('.message_center')
                   - current_user.received_messages.each do |message|
                     = link_to main_app.message_path(message), class: "dropdown-item d-flex align-items-center" do
-                      = fa_icon :user_circle, size: "2x", class: "mr-2"
+                      = fa_icon :user_circle, size: "2x", class: "mr-3"
                       div
                         .text-truncate= message.content
                         .text-muted.small #{message.author.full_name} - #{time_ago_in_words(message.created_at)}
