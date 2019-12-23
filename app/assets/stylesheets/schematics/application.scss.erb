@@ -24,16 +24,24 @@ html, body {
 
 .navbar {
   z-index: 2;
-  height: 4.375rem;
+  height: 4rem;
+  .navbar-nav {
+    height: 4rem;
+  }
   .navbar-search {
     width: 25rem;
   }
   .badge.badge-danger {
     position: absolute;
-    top: 0.25rem;
+    top: -0.25rem;
     right: 0.75rem;
     border-radius: 1rem;
   }
+}
+
+nav.sticky-top[aria-label="breadcrumb"] {
+  top: 4rem;
+  z-index: 1;
 }
 
 .sidebar {
@@ -42,8 +50,8 @@ html, body {
   max-width: 12rem;
   box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.3);
   .sidebar-brand {
-    height: 4.375rem;
-    line-height: 4.375rem;
+    height: 4rem;
+    line-height: 4rem;
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: .05rem;
