@@ -20,9 +20,9 @@ module Schematics
             else
               cookies[:auth_token] = user.auth_token
             end
-            redirect_to root_path, notice: "Logged in!"
+            redirect_to root_path, notice: t('.logged_in')
           else
-            flash.now[:alert] = "Email or password is invalid"
+            flash.now[:alert] = t('.invalid_credentials')
             render :new
           end
         end
@@ -39,19 +39,19 @@ module Schematics
     def update
       if current_user.authenticate(params[:user][:current_password]) 
         if current_user.update(user_params)
-          redirect_to profile_path, notice: "Your profile was successfully updated"
+          redirect_to profile_path, notice: t('.profile_updated')
         else
           render :edit
         end
       else
-        flash.now[:alert] = "Wrong password"
+        flash.now[:alert] = t('.wrong_password')
         render :edit
       end
     end
 
     def destroy
       cookies.delete(:auth_token)
-      redirect_to login_path, notice: "Logged out!"
+      redirect_to login_path, notice: t('.logged_out')
     end
 
     private

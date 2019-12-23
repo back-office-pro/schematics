@@ -11,6 +11,15 @@ fr:
         width: largeur
         height: hauteur
   schematics:
+    sessions:
+      update:
+        profile_updated: Votre profil a été mis à jour avec succès
+        wrong_password: Mauvais mot de passe
+      destroy:
+        logged_out: Déconnecté !
+      create:
+        logged_in: Connecté !
+        invalid_credentials: L'e-mail ou le mot de passe est invalide
     application:
       unauthorized_access: Accès non autorisé
       index:

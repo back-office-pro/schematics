@@ -1,5 +1,14 @@
 en:  
   schematics:
+    sessions:
+      update:
+        profile_updated: Your profile was successfully updated
+        wrong_password: Wrong password
+      destroy:
+        logged_out: Logged out!
+      create:
+        logged_in: Logged in!
+        invalid_credentials: Email or password is invalid
     application:
       unauthorized_access: Unauthorized access
       index:
