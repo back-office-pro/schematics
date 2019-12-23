@@ -10,6 +10,9 @@ module Schematics
       g.jbuilder        false
     end
 
+    # Add node_modules to assets paths
+    config.assets.paths << 'node_modules'
+
     # Mailer
     config.action_mailer.delivery_method = :sendmail
 

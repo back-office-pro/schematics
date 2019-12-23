@@ -6,6 +6,7 @@
 //= require twitter/typeahead
 //= require chartkick
 //= require Chart.bundle
+//= require trix/dist/trix
 //= require_tree .
 
 $(function() {
