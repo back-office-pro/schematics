@@ -14,6 +14,8 @@
                 = image_tag(attachment)
             - when Schematics::Attributes::Attachment
               = image_tag(value)
+            - when Schematics::Attributes::RichText
+              == value
             - else
               = field.format(value)
       - entity.references.each do |reference|

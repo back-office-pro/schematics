@@ -71,13 +71,14 @@
                   - if field.searchable? && !actions
                     = highlight(resource.instance_eval(field.name), params[:query])
                   - else
-                    - if field.is_a?(Schematics::Attributes::Boolean)
-                      - if resource.instance_eval(field.name)
-                        = fa_icon :check, class: "text-success"
-                      - else
-                        = fa_icon :times, class: "text-danger"
+                    - value = resource.instance_eval(field.name)
+                    - case field
+                    - when Schematics::Attributes::Boolean
+                      = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
+                    - when Schematics::Attributes::RichText
+                      = strip_tags(value.to_s)
                     - else
-                      = field.format(resource.instance_eval(field.name))
+                      = field.format(value)
               - table_entity.references.each do |reference|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(reference.name).nil?
