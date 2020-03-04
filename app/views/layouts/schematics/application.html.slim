@@ -50,7 +50,7 @@ html
                 a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   = fa_icon :bell, type: :regular, class: "fa-lg"
                   .badge.badge-danger 3
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="notificationsDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="notificationsDropdown" 
                   h6.dropdown-header Header
                   .dropdown-item.d-flex.align-items-center
                     | Test
@@ -60,7 +60,7 @@ html
                 a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   = fa_icon :envelope, type: :regular, class: "fa-lg"
                   .badge.badge-danger 7
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="messagesDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="messagesDropdown" 
                   h6.dropdown-header= t('.message_center')
                   - current_user.received_messages.each do |message|
                     = link_to main_app.message_path(message), class: "dropdown-item d-flex align-items-center" do
@@ -74,7 +74,7 @@ html
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.email
                   = fa_icon :user_circle, size: "2x", class: "align-middle"
-                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-lg aria-labelledby="accountDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="accountDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-2"
                     = t('.edit_profile')

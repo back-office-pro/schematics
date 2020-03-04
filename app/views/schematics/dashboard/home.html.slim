@@ -1,7 +1,7 @@
 .row
   - Schematics::SCHEMA.stats.each do |stat|
     .col-xl-3.col-md-6.mb-4
-      .card.shadow-lg
+      .card.shadow-sm
         .card-body
           .row.no-gutters.align-items-center
             .col
@@ -13,7 +13,7 @@
               = fa_icon stat.icon, size: "2x"
   - Schematics::SCHEMA.charts.each do |chart|
     .col-xl-6.col-md-12.mb-4
-      .card.shadow-lg
+      .card.shadow-sm
         .card-header
           h5.m-0.text-primary.font-weight-bold
             = fa_icon :chart_line, class: "mr-2"
