@@ -46,7 +46,7 @@ module Schematics
     end
 
     def create
-      @resource = model_class.new(record_params)
+      @resource = model_class.new(resource_params)
       if @resource.save
         respond_to do |format|
           format.html { redirect_to @resource, notice: "#{self.class.entity_name.humanize} was successfully created" }
@@ -55,13 +55,13 @@ module Schematics
       else
         respond_to do |format|
           format.html { render :new }
-          format.json { render json: @record.errors, status: :unprocessable_entity }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
 
     def update
-      if @resource.update(record_params)
+      if @resource.update(resource_params)
         respond_to do |format|
           format.html { redirect_to @resource, notice: "#{self.class.entity_name.humanize} was successfully updated" }
           format.json
@@ -69,7 +69,7 @@ module Schematics
       else
         respond_to do |format|
           format.html { render :edit }
-          format.json { render json: @record.errors, status: :unprocessable_entity }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -120,7 +120,7 @@ module Schematics
       @resource = (action_name.to_sym === :destroy ? model_class.with_deleted : model_class).find(params[:id])
     end
 
-    def record_params
+    def resource_params
       params.require(self.class.entity_name.to_sym).send(:permit, *self.class.entity.permitted_params)
     end
 
