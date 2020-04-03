@@ -1,5 +1,7 @@
 module Schematics
   class Stat
+    delegate :icon, to: :@entity
+
     def initialize(entity, agregate, field)
       @entity = entity
       @agregate = agregate
@@ -8,10 +10,6 @@ module Schematics
 
     def title
       "#{@agregate} #{@field&.name} of #{@entity.type.pluralize}"
-    end
-
-    def icon
-      @entity.icon
     end
 
     def field
