@@ -3,9 +3,9 @@ module Schematics
     class Serializer
       delegate :virtuals,
                :references,
-               :has_one_associations, 
+               :has_one_associations,
                :has_one_through_associations,
-               :has_many_associations, 
+               :has_many_associations,
                :has_many_through_associations,
                to: :@entity
 

@@ -2,7 +2,7 @@ module Schematics
   module Attributes
     class Enum < Attribute
       attr_accessor :values
-      
+
       def initialize(entity, name, options)
         super(entity, name, { default: 0 })
         @values = options
@@ -15,7 +15,7 @@ module Schematics
       def type
         "integer"
       end
-      
+
       def api_param_type
         "string"
       end
@@ -37,7 +37,7 @@ module Schematics
       end
 
       def to_str
-        %Q[enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}]
+        %Q(enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h})
       end
 
       def icon

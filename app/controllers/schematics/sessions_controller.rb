@@ -8,7 +8,7 @@ module Schematics
 
     def edit
     end
-    
+
     def create
       user = User.find_by_email(params[:email])
       authenticated = user&.authenticate(params[:password])
@@ -37,7 +37,7 @@ module Schematics
     end
 
     def update
-      if current_user.authenticate(params[:user][:current_password]) 
+      if current_user.authenticate(params[:user][:current_password])
         if current_user.update(user_params)
           redirect_to profile_path, notice: t('.profile_updated')
         else

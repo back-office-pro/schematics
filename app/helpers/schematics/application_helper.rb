@@ -17,7 +17,7 @@ module Schematics
     def entity
       controller.class.entity
     end
-    
+
     def file_icon(file)
       case file.filename.extension.downcase
       when 'doc', 'docx'                                            then :file_word
@@ -56,16 +56,18 @@ module Schematics
     def humanize_attachment_validators(validators)
       content = []
       validators.except(:presence, :attached).each do |key, value|
-        content << I18n.t(".forms.attachment.validators.#{key}") + " " + case value
-          when Array
-            value.map(&:to_s).map(&:upcase).join(" ")
-          when Hash
-            humanize_attachment_validators(value)
-          when Numeric
-            "#{value / (1024.0 * 1024.0)} #{I18n.t(".forms.attachment.validators.mb")}"
-          else
-            value.humanize
-          end
+        content << I18n.t(".forms.attachment.validators.#{key}")
+        content << " "
+        content << case value
+                   when Array
+                     value.map(&:to_s).map(&:upcase).join(" ")
+                   when Hash
+                     humanize_attachment_validators(value)
+                   when Numeric
+                     "#{value / (1024.0 * 1024.0)} #{I18n.t(".forms.attachment.validators.mb")}"
+                   else
+                     value.humanize
+                   end
       end
       content.join(" - ").html_safe
     end

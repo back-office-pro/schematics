@@ -22,7 +22,7 @@ class Schematics::Test < ActiveSupport::TestCase
       puts entity.has_sort_scopes
       puts "------------------------------------"
       puts entity.api
-      puts 
+      puts
     end
   end
 end

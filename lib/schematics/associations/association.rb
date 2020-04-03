@@ -24,19 +24,19 @@ module Schematics
       end
 
       def filter_scope
-        %Q[scope :by_#{name}, -> ]
+        %Q(scope :by_#{name}, -> )
       end
 
       def sort_scope
-        %Q[scope :sort_by_#{name}, -> ]
+        %Q(scope :sort_by_#{name}, -> )
       end
 
       def has_filter_scope
-        %Q[has_scope :by_#{name}, only: :index]
+        %Q(has_scope :by_#{name}, only: :index)
       end
 
       def has_sort_scope
-        %Q[has_scope :sort_by_#{name}, only: :index]
+        %Q(has_scope :sort_by_#{name}, only: :index)
       end
 
       def to_str

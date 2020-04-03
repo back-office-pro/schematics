@@ -1,7 +1,7 @@
 module Schematics
   module Tokens
     class Tokenizer
-      REGEX = /\$(\w+\.?\w+)|(\s\W\s)|([a-zA-Z_-]+)|(\d*\.?\d+)|(\(|\))|(\s+)/
+      REGEX = /\$(\w+\.?\w+)|(\s\W\s)|([a-zA-Z_-]+)|(\d*\.?\d+)|(\(|\))|(\s+)/.freeze
 
       def self.tokenize(function, table_name)
         tokens = []

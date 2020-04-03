@@ -10,7 +10,7 @@ module Schematics
     helper_method :model_class
 
     class << self
-      Swagger::Docs::Generator::set_real_methods
+      Swagger::Docs::Generator.set_real_methods
       def inherited(subclass)
         super
         subclass.breadcrumb "Liste des #{subclass.entity_name.pluralize}", "#{subclass.entity_name.pluralize}_path".to_sym
@@ -32,9 +32,9 @@ module Schematics
       respond_to do |format|
         format.html
         format.json { render schema: @resource }
-        format.pdf  { 
+        format.pdf do
           render pdf: "#{self.class.entity_name.dasherize}-#{@resource.id}.pdf", template: 'schematics/application/show', layout: 'layouts/schematics/pdf.html'
-        }
+        end
       end
     end
 
@@ -75,10 +75,10 @@ module Schematics
     end
 
     def destroy
-      if params[:really] 
-        @resource.really_destroy! 
+      if params[:really]
+        @resource.really_destroy!
         notice = "#{self.class.entity_name.humanize} was successfully destroyed"
-      elsif @resource.deleted? 
+      elsif @resource.deleted?
         @resource.restore(recursive: true)
         notice = "#{self.class.entity_name.humanize} was successfully restored"
       else
@@ -105,11 +105,11 @@ module Schematics
     end
 
     def self.entity_name
-      self.model_name.underscore
+      model_name.underscore
     end
 
     def self.entity
-      SCHEMA.find_entity_by_type(self.entity_name)
+      SCHEMA.find_entity_by_type(entity_name)
     end
 
     def model_class

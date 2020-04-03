@@ -3,7 +3,7 @@ module Schematics
     isolate_namespace Schematics
 
     config.app_generators do |g|
-      g.templates.unshift(File::expand_path('../../templates', __FILE__))
+      g.templates.unshift(File.expand_path('../../templates', __FILE__))
       g.assets          false
       g.template_engine false
       g.helper          false
@@ -19,7 +19,7 @@ module Schematics
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
-    
+
     # Bullet
     config.after_initialize do
       Bullet.enable = true
@@ -31,14 +31,14 @@ module Schematics
       SimpleForm.setup do |config|
         config.browser_validations = true
         config.wrapper_mappings = {
-          boolean:       :custom_boolean_switch,
-          check_boxes:   :custom_collection,
-          date:          :custom_multi_select,
-          datetime:      :custom_multi_select,
-          file:          :custom_file,
+          boolean: :custom_boolean_switch,
+          check_boxes: :custom_collection,
+          date: :custom_multi_select,
+          datetime: :custom_multi_select,
+          file: :custom_file,
           radio_buttons: :custom_collection,
-          range:         :custom_range,
-          time:          :custom_multi_select
+          range: :custom_range,
+          time: :custom_multi_select,
         }
       end
     end
@@ -51,9 +51,12 @@ module Schematics
     end
 
     initializer "schematics.olive_branch" do |app|
-      app.middleware.use OliveBranch::Middleware, inflection: "camel", content_type_check: -> (content_type) { true }, exclude_response: -> (env) {
-        env['PATH_INFO'].match(/^\/rails\/active_storage\/direct_uploads/)
-      }
+      app.middleware.use OliveBranch::Middleware,
+                         inflection: "camel",
+                         content_type_check: -> (content_type) { true },
+                         exclude_response: -> (env) {
+                           env['PATH_INFO'].match(/^\/rails\/active_storage\/direct_uploads/)
+                         }
     end
 
     initializer "schematics.cors" do
@@ -61,8 +64,8 @@ module Schematics
         allow do
           origins '*'
           resource '*',
-            headers: :any,
-            methods: [:get, :post, :put, :patch, :delete, :options, :head]
+                   headers: :any,
+                   methods: [:get, :post, :put, :patch, :delete, :options, :head]
         end
       end
     end
@@ -92,8 +95,8 @@ module Schematics
       Rack::Attack.throttle("requests by ip", limit: 5, period: 2) do |request|
         request.ip
       end
-      ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload| 
-        Rails.logger.info "Throttled IP: #{payload[:request].ip}" 
+      ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload|
+        Rails.logger.info "Throttled IP: #{payload[:request].ip}"
       end
     end
 
@@ -103,7 +106,7 @@ module Schematics
       end
       class Swagger::Docs::Config
         def self.base_api_controller
-          Schematics::SchemaController 
+          Schematics::SchemaController
         end
       end
       Swagger::Docs::Config.register_apis({
@@ -118,10 +121,10 @@ module Schematics
               title: "Public API Documentation",
               description: "Developper documentation to link your business application with this API.",
               license: "Apache 2.0",
-              licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.html"
-            }
-          }
-        }
+              licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.html",
+            },
+          },
+        },
       })
     end
 
@@ -135,10 +138,12 @@ module Schematics
           render json: Schematics::Serializers::JSON.new(SCHEMA, self.class.entity).serialize(records)
         end
         ActionController::Renderers.add(:csv) do |records, options|
-          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records), filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.csv"
+          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records),
+                    filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.csv"
         end
         ActionController::Renderers.add(:xls) do |records, options|
-          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records, '/t'), filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.xls"
+          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records, '/t'),
+                    filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.xls"
         end
       end
     end

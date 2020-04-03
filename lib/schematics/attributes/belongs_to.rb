@@ -40,7 +40,7 @@ module Schematics
       end
 
       def to_str
-        %Q[belongs_to :#{@name}, class_name: '#{model_property_type}', optional: #{!required?}] 
+        %Q(belongs_to :#{@name}, class_name: '#{model_property_type}', optional: #{!required?})
       end
 
       def inverse_of_has_one?

@@ -8,7 +8,7 @@ module Schematics
       def permitted_param
         nil
       end
-      
+
       def filter_scope
         nil
       end
@@ -26,9 +26,9 @@ module Schematics
       end
 
       def to_str
-        %Q[has_secure_token :#{@name}]
+        %Q(has_secure_token :#{@name})
       end
-      
+
       def visible?
         false
       end

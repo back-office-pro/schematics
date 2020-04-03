@@ -14,7 +14,7 @@ module Schematics
       add_has_many_through_associations
       add_has_one_through_associations
     end
-    
+
     def add_inverse_descriptor_to_references
       @entities.each do |entity|
         entity.references.each do |reference|

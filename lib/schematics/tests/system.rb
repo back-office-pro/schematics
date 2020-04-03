@@ -8,9 +8,9 @@ module Schematics
             setup do
               @record = send(subclass.fixture_name, :one)
             end
-          
+
             entity = SCHEMA.find_entity_by_type(subclass.entity_name)
-            
+
             test "visiting the index" do
               visit subclass.fixture_name
               assert_selector "h1", text: subclass.model_name.pluralize.titleize
@@ -60,15 +60,15 @@ module Schematics
       protected
 
       def self.model_name
-        self.name.chomp('Test').singularize
+        name.chomp('Test').singularize
       end
 
       def self.entity_name
-        self.model_name.underscore
+        model_name.underscore
       end
 
       def self.fixture_name
-        self.entity_name.pluralize
+        entity_name.pluralize
       end
     end
   end

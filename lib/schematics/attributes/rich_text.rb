@@ -14,7 +14,7 @@ module Schematics
       end
 
       def to_str
-        %Q[has_rich_text :#{@name}]
+        %Q(has_rich_text :#{@name})
       end
     end
   end

@@ -4,7 +4,7 @@ module Schematics
       def migration_options
         super + [:limit]
       end
-      
+
       def validators
         super.merge(numericality: { only_integer: true })
       end

@@ -4,25 +4,25 @@ module Schematics
       def to_sql
         super.join
       end
-      
+
       def filter_scope
         if joins.empty?
           super + %Q[(from, to) {
-            return where("#{to_sql} <= ?", to) if from.nil? 
+            return where("#{to_sql} <= ?", to) if from.nil?
             return where("#{to_sql} >= ?", from) if to.nil?
             where("#{to_sql} >= ? AND #{to_sql} <= ?", from, to)
           }]
         else
           super + %Q[(from, to) {
-            return joins(#{joins}).where("#{to_sql} <= ?", to) if from.nil? 
+            return joins(#{joins}).where("#{to_sql} <= ?", to) if from.nil?
             return joins(#{joins}).where("#{to_sql} >= ?", from) if to.nil?
             joins(#{joins}).where("#{to_sql} >= ? AND #{to_sql} <= ?", from, to)
           }]
         end
       end
-      
+
       def has_filter_scope
-        super + %Q[, using: [:from, :to]] 
+        super + %Q(, using: [:from, :to])
       end
 
       def unit

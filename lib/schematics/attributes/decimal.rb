@@ -14,11 +14,11 @@ module Schematics
       end
 
       def scale
-        @options[:scale] || 0
+        @options[:scale] || 0
       end
 
       def bound
-        10 ** (precision - scale)
+        10**(precision - scale)
       end
 
       def validators

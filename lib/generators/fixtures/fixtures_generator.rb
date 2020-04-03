@@ -5,7 +5,7 @@ class FixturesGenerator < Rails::Generators::Base
     Schematics::SCHEMA.entities.map(&:attributes).flatten.select_is_a?(Schematics::Attributes::RichText).each_with_index do |attribute, index|
       index = (index + 1).humanize
       append_file "test/fixtures/action_text/rich_texts.yml" do
-<<-YAML
+        <<-YAML
 #{index}:
   record: one (#{attribute.entity.type.camelize})
   name: #{attribute.name}
@@ -21,7 +21,7 @@ YAML
     Schematics::SCHEMA.entities.map(&:attributes).flatten.select_is_a?(Schematics::Attributes::Attachment).each_with_index do |attribute, index|
       index = (index + 1).humanize
       append_to_file "test/fixtures/active_storage/attachments.yml" do
-<<-YAML
+        <<-YAML
 #{index}:
   record: one (#{attribute.entity.type.camelize})
   name: #{attribute.name}
@@ -38,7 +38,7 @@ YAML
       index = (index + 1).humanize
       content_type = attribute.validators[:content_type]&.first
       append_to_file "test/fixtures/active_storage/blobs.yml" do
-<<-YAML
+        <<-YAML
 #{index}:
   key: #{SecureRandom.base58}
   filename: #{SecureRandom.base58}.#{content_type || "png"}

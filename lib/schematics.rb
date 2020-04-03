@@ -104,7 +104,7 @@ module Schematics
     autoload :Model,      'schematics/tests/model'
     autoload :System,     'schematics/tests/system'
   end
-  
+
   module Tokens
     autoload :Number,       'schematics/tokens/number'
     autoload :Operator,     'schematics/tokens/operator'

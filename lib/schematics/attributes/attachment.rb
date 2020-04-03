@@ -14,7 +14,7 @@ module Schematics
       end
 
       def to_str
-        %Q[has_one_attached :#{@name}]
+        %Q(has_one_attached :#{@name})
       end
 
       def validators

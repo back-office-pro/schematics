@@ -9,7 +9,8 @@ module Schematics
     end
 
     def create
-      if user = User.find_by_email(params[:email])
+      user = User.find_by_email(params[:email])
+      if user
         user.regenerate_password_reset_token
         UserMailer.password_reset(user).deliver_now
         redirect_to login_path, notice: "Email sent with password reset instructions."
@@ -18,10 +19,10 @@ module Schematics
         render :new
       end
     end
-    
+
     def edit
     end
-    
+
     def update
       if @user.updated_at < 2.hours.ago
         redirect_to password_lost_path, alert: "Password reset has expired."

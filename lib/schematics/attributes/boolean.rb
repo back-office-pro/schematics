@@ -10,7 +10,7 @@ module Schematics
       end
 
       def has_filter_scope
-        super + %Q[, type: :boolean]
+        super + %Q(, type: :boolean)
       end
 
       def icon

@@ -2,11 +2,11 @@ module Schematics
   module Attributes
     class Attribute
       include Renderable
-      
+
       attr_accessor :entity, :name
 
       def initialize(entity, name, options = nil)
-        @entity = entity 
+        @entity = entity
         @name = name
         @options = options || {}
       end
@@ -48,11 +48,11 @@ module Schematics
       end
 
       def model_property
-        %Q[property :#{@name.camelize(:lower)}, :#{model_property_type}, #{(unique? || required?) ? ":required" : ":optional"}, "#{@name.humanize}"]
+        %Q(property :#{@name.camelize(:lower)}, :#{model_property_type}, #{(unique? || required?) ? ":required" : ":optional"}, "#{@name.humanize}")
       end
 
       def api_param
-        %Q[param :form, "#{@entity.type.camelize(:lower)}[#{@name.camelize(:lower)}]", :#{api_param_type}, #{(unique? || required?) ? ":required" : ":optional"}, "#{@name.humanize}"]
+        %Q(param :form, "#{@entity.type.camelize(:lower)}[#{@name.camelize(:lower)}]", :#{api_param_type}, #{(unique? || required?) ? ":required" : ":optional"}, "#{@name.humanize}")
       end
 
       def validators
@@ -63,23 +63,23 @@ module Schematics
       end
 
       def filter_scope
-        %Q[scope :by_#{@name}, -> ]
+        %Q(scope :by_#{@name}, -> )
       end
 
       def sort_scope
-        %Q[scope :sort_by_#{@name}, -> ]
+        %Q(scope :sort_by_#{@name}, -> )
       end
 
       def has_filter_scope
-        %Q[has_scope :by_#{@name}, only: :index]
+        %Q(has_scope :by_#{@name}, only: :index)
       end
 
       def has_sort_scope
-        %Q[has_scope :sort_by_#{@name}, only: :index]
+        %Q(has_scope :sort_by_#{@name}, only: :index)
       end
 
       def validate
-        %Q[validates :#{@name}, #{validators.to_s[1...-1]}] unless validators.empty?
+        %Q(validates :#{@name}, #{validators.to_s[1...-1]}) unless validators.empty?
       end
 
       def to_str

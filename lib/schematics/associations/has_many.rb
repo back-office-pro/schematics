@@ -6,7 +6,7 @@ module Schematics
       end
 
       def to_str
-        super + %Q[, dependent: :#{required? ? "destroy" : "nullify"}]
+        super + %Q(, dependent: :#{required? ? "destroy" : "nullify"})
       end
     end
   end

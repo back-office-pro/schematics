@@ -4,7 +4,7 @@ module Schematics
       def validators
         super.merge(numericality: true)
       end
-      
+
       def unit
         @options[:unit]
       end

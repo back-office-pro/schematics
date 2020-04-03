@@ -7,7 +7,7 @@ module Schematics
           subclass.class_eval do
             entity = SCHEMA.find_entity_by_type(subclass.entity_name)
             scopes = subclass.controller_name.constantize.scopes_configuration
-            
+
             setup do
               @record = send(subclass.fixture_name, :one)
               @params = {}
@@ -41,13 +41,13 @@ module Schematics
                 end
               end
             end
-          
+
             test "should have scope with_deleted" do
               assert scopes.include?(:with_deleted)
               assert scopes[:with_deleted][:only] === [:index]
               assert scopes[:with_deleted][:type] === :boolean
             end
-            
+
             entity.attributes.select(&:has_filter_scope).each do |attribute|
               scope = "by_#{attribute.name}".to_sym
               test "should have scope #{scope}" do
@@ -177,7 +177,7 @@ module Schematics
               login as: :json
               patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
               assert_response :no_content
-            end 
+            end
 
             test "should update #{subclass.entity_name}" do
               login
@@ -205,7 +205,7 @@ module Schematics
       end
 
       protected
-      
+
       def login(as: nil)
         post '/sessions', params: { email: users(:two).email, password: "secret" }, as: as
       end
@@ -215,23 +215,23 @@ module Schematics
       end
 
       def self.controller_name
-        self.name.chomp('Test')
+        name.chomp('Test')
       end
 
       def self.model_name
-        self.name.chomp('ControllerTest').singularize
+        name.chomp('ControllerTest').singularize
       end
 
       def self.entity_name
-        self.model_name.underscore
+        model_name.underscore
       end
 
       def self.fixture_name
-        self.entity_name.pluralize
+        entity_name.pluralize
       end
 
       def self.url_helper(param = nil)
-        [self.fixture_name, param].compact.join('/').prepend('/')
+        [fixture_name, param].compact.join('/').prepend('/')
       end
     end
   end

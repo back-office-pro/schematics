@@ -2,7 +2,7 @@ module Schematics
   module Virtuals
     class Virtual
       include Renderable
-      
+
       attr_accessor :name
 
       def initialize(entity, name, tokens, options = nil)
@@ -11,7 +11,7 @@ module Schematics
         @tokens = tokens
         @options = options || {}
       end
-      
+
       def function
         @tokens.map(&:value).join.taint
       end
@@ -31,7 +31,7 @@ module Schematics
       end
 
       def filter_scope
-        %Q[scope :by_#{@name}, -> ]
+        %Q(scope :by_#{@name}, -> )
       end
 
       def sort_scope
@@ -43,11 +43,11 @@ module Schematics
       end
 
       def has_filter_scope
-        %Q[has_scope :by_#{@name}, only: :index]
+        %Q(has_scope :by_#{@name}, only: :index)
       end
 
       def has_sort_scope
-        %Q[has_scope :sort_by_#{@name}, only: :index]
+        %Q(has_scope :sort_by_#{@name}, only: :index)
       end
 
       def to_str

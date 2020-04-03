@@ -24,13 +24,13 @@ module Schematics
       def has_sort_scope
         nil
       end
-      
+
       def validators
         super.merge(allow_nil: true)
       end
 
       def to_str
-        %Q[has_secure_password :#{@name}]
+        %Q(has_secure_password :#{@name})
       end
 
       def visible?

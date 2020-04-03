@@ -13,13 +13,13 @@ module Schematics
     end
 
     private
-    
+
     def self.entity_name
-      self.name.underscore
+      name.underscore
     end
 
     def self.entity
-      SCHEMA.find_entity_by_type(self.entity_name)
+      SCHEMA.find_entity_by_type(entity_name)
     end
   end
 end

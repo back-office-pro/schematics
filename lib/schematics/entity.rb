@@ -1,7 +1,13 @@
 module Schematics
   class Entity
-    attr_accessor :type, :icon, :attributes, :virtuals, :has_one_associations, 
-      :has_many_associations, :has_many_through_associations, :has_one_through_associations
+    attr_accessor :type,
+                  :icon,
+                  :attributes,
+                  :virtuals,
+                  :has_one_associations,
+                  :has_many_associations,
+                  :has_many_through_associations,
+                  :has_one_through_associations
 
     def initialize(type, icon, descriptor, attributes, virtuals)
       @type = type
@@ -48,19 +54,27 @@ module Schematics
     end
 
     def filter_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:filter_scope).compact
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
+        map(&:filter_scope).
+        compact
     end
 
     def sort_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:sort_scope).compact
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
+        map(&:sort_scope).
+        compact
     end
 
     def has_filter_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:has_filter_scope).compact
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
+        map(&:has_filter_scope).
+        compact
     end
 
     def has_sort_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).map(&:has_sort_scope).compact
+      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
+        map(&:has_sort_scope).
+        compact
     end
 
     def validates
@@ -68,21 +82,26 @@ module Schematics
     end
 
     def associations
-      @has_one_associations + @has_many_associations + @has_many_through_associations + @has_one_through_associations
+      @has_one_associations +
+      @has_many_associations +
+      @has_many_through_associations +
+      @has_one_through_associations
     end
 
     def modelize(subclass)
       subclass.class_eval(friendly_id)
-      (@attributes + associations + filter_scopes + sort_scopes + validates + virtuals).each { |modelizable| subclass.class_eval(modelizable) }
+      (@attributes + associations + filter_scopes + sort_scopes + validates + virtuals).
+        each { |modelizable| subclass.class_eval(modelizable) }
     end
-    
+
     def controllerize(subclass)
       subclass.class_eval(api)
-      (has_filter_scopes + has_sort_scopes).each { |controllerizable| subclass.class_eval(controllerizable) }
+      (has_filter_scopes + has_sort_scopes).
+        each { |controllerizable| subclass.class_eval(controllerizable) }
     end
 
     def friendly_id
-      %Q[friendly_id :#{descriptor.name}, use: [:slugged, :finders]]
+      %Q(friendly_id :#{descriptor.name}, use: [:slugged, :finders])
     end
 
     def api
@@ -124,7 +143,7 @@ module Schematics
           response :success
           response :unprocessable_entity
         end
-        
+
         swagger_api :update do |api|
           summary "Updates an existing #{@type.humanize.downcase}"
           notes "This updates an existing #{@type.humanize.downcase}"

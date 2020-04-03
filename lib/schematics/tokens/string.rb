@@ -4,6 +4,6 @@ module Schematics
       def to_sql
         "'#{super}'"
       end
-    end      
+    end
   end
 end

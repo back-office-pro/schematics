@@ -9,7 +9,7 @@ module Schematics
               @record = send(subclass.fixture_name, :one)
               @other_record = send(subclass.fixture_name, :two)
             end
-          
+
             test "valid #{subclass.entity_name}" do
               assert @record.valid?
             end
@@ -103,17 +103,17 @@ module Schematics
       end
 
       protected
-      
+
       def self.model_name
-        self.name.chomp('Test')
+        name.chomp('Test')
       end
 
       def self.entity_name
-        self.model_name.underscore
+        model_name.underscore
       end
 
       def self.fixture_name
-        self.entity_name.pluralize
+        entity_name.pluralize
       end
     end
   end
