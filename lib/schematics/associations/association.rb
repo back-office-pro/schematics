@@ -2,9 +2,11 @@ module Schematics
   module Associations
     class Association
       include Renderable
-
       attr_accessor :reference
-      
+
+      delegate :entity, :required?, to: :@reference
+      delegate :descriptor, to: :entity
+
       def initialize(reference)
         @reference = reference
       end
@@ -19,18 +21,6 @@ module Schematics
 
       def class_name
         entity.type.camelize
-      end
-
-      def entity
-        @reference.entity
-      end
-
-      def required?
-        @reference.required?
-      end
-
-      def descriptor
-        entity.descriptor
       end
 
       def filter_scope
