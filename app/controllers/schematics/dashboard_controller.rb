@@ -11,7 +11,11 @@ module Schematics
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
           @results[entity.type]&.uniq!
         end
-        @results[entity.type]&.map! { |result| Schematics::Serializers::JSON.new(SCHEMA, entity).serialize(result) } if request.format.json?
+        if request.format.json?
+          @results[entity.type]&.map! do |result|
+            Schematics::Serializers::JSON.new(SCHEMA, entity).serialize(result)
+          end
+        end
       end
       respond_to do |format|
         format.html
@@ -20,7 +24,11 @@ module Schematics
     end
 
     def timeline
-      @versions = PaperTrail::Version.where('whodunnit IS NOT ?', nil).order(created_at: :desc).limit(20).includes(:item)
+      @versions = PaperTrail::Version.
+        where('whodunnit IS NOT ?', nil).
+        order(created_at: :desc).
+        limit(20).
+        includes(:item)
       render json: @versions
     end
   end

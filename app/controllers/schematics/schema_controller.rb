@@ -13,13 +13,21 @@ module Schematics
       Swagger::Docs::Generator.set_real_methods
       def inherited(subclass)
         super
-        subclass.breadcrumb "Liste des #{subclass.entity_name.pluralize}", "#{subclass.entity_name.pluralize}_path".to_sym
+        subclass.breadcrumb(
+          "Liste des #{subclass.entity_name.pluralize}",
+          "#{subclass.entity_name.pluralize}_path".to_sym
+        )
         subclass.entity.controllerize(subclass)
       end
     end
 
     def index
-      @pagy, @resources = pagy(apply_scopes(model_class).includes(eager_loading).order(created_at: :desc), items: params[:per_page] || 10)
+      @pagy, @resources = pagy(
+        apply_scopes(model_class).
+        includes(eager_loading).
+        order(created_at: :desc),
+        items: params[:per_page] || 10
+      )
       respond_to do |format|
         format.html
         format.json { render schema: @resources }
@@ -33,7 +41,9 @@ module Schematics
         format.html
         format.json { render schema: @resource }
         format.pdf do
-          render pdf: "#{self.class.entity_name.dasherize}-#{@resource.id}.pdf", template: 'schematics/application/show', layout: 'layouts/schematics/pdf.html'
+          render pdf: "#{self.class.entity_name.dasherize}-#{@resource.id}.pdf",
+                 template: 'schematics/application/show',
+                 layout: 'layouts/schematics/pdf.html'
         end
       end
     end

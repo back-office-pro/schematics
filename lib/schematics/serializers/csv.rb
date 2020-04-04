@@ -7,13 +7,22 @@ module Schematics
           file << fields.map(&:name).map(&:humanize)
           records.each do |record|
             @record = record
-            file << attributes + virtuals + references + has_one_associations + has_one_through_associations
+            file << attributes +
+              virtuals +
+              references +
+              has_one_associations +
+              has_one_through_associations
           end
         end
       end
 
       def fields
-        @entity.attributes.select(&:visible?) - @entity.references + @entity.virtuals + @entity.references + @entity.has_one_associations + @entity.has_one_through_associations
+        @entity.attributes.select(&:visible?) -
+        @entity.references +
+        @entity.virtuals +
+        @entity.references +
+        @entity.has_one_associations +
+        @entity.has_one_through_associations
       end
 
       def attributes
@@ -25,7 +34,9 @@ module Schematics
       end
 
       def references
-        super.map { |reference| @record.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}") }
+        super.map do |reference|
+          @record.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}")
+        end
       end
 
       def has_one_associations
