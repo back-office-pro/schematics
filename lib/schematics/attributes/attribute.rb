@@ -106,7 +106,7 @@ module Schematics
       end
 
       def to_str
-        nil
+        ""
       end
     end
   end
