@@ -22,5 +22,3 @@ cd ./schematics
 rm -rf ./test/dummy/README.md \
        ./test/dummy/public/robots.txt \
        ./test/dummy/vendor
-# load test fixtures
-rake db:fixtures:load
