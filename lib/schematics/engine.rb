@@ -3,6 +3,7 @@ module Schematics
     isolate_namespace Schematics
 
     config.app_generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
       g.templates.unshift(File.expand_path('../../templates', __FILE__))
       g.assets          false
       g.template_engine false

@@ -9,6 +9,7 @@ gem "schematics", path: "/Users/max/bitbucket/schematics"
 
 # Rails commands
 rails_command "generate simple_form:install --bootstrap"
+rails_command "schematics:install:migrations"
 rails_command "schematics:generate"
 rails_command "generate paper_trail:install --with-changes"
 rails_command "active_storage:install"
