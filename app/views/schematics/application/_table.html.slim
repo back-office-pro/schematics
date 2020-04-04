@@ -6,7 +6,10 @@
           th.text-nowrap.text-center
             = fa_icon :archive, class: "mr-2 text-dark"
             | Archives
-        - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+        - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
+          select(&:visible?). \
+          reject_is_a?(Schematics::Attributes::Attachment). \
+          each do |field|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(field) 
@@ -31,7 +34,10 @@
         tr
           th.text-nowrap.align-middle.px-0
             = render 'schematics/application/filters/with_deleted'
-          - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+          - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
+            select(&:visible?). \
+            reject_is_a?(Schematics::Attributes::Attachment). \
+            each do |field|
             th.align-middle.text-center.px-0
               - if field.is_a?(Schematics::Attributes::Boolean)
                 = render 'schematics/application/filters/boolean', field: field
@@ -60,13 +66,26 @@
               - if actions
                 td.text-nowrap.text-right
                   .btn-group
-                    = link_to main_app.edit_polymorphic_path(resource), class: "btn btn-primary btn-sm", data: { toggle: "tooltip", placement: "top", title: "Editer" } do
+                    = link_to main_app.edit_polymorphic_path(resource),
+                      class: "btn btn-primary btn-sm",
+                      data: { toggle: "tooltip", placement: "top", title: "Editer" } do
                       = fa_icon :edit
                     - if resource.deleted?
-                      = link_to fa_icon(:trash_restore), main_app.polymorphic_path(resource), method: :delete, class: "btn btn-danger btn-sm", data: { toggle: "tooltip", placement: "top", title: "Restaurer" }
+                      = link_to fa_icon(:trash_restore),
+                        main_app.polymorphic_path(resource),
+                        method: :delete,
+                        class: "btn btn-danger btn-sm",
+                        data: { toggle: "tooltip", placement: "top", title: "Restaurer" }
                     - else
-                      = link_to fa_icon(:archive), main_app.polymorphic_path(resource), method: :delete, class: "btn btn-danger btn-sm", data: { toggle: "tooltip", placement: "top", title: "Archiver" }
-              - (table_entity.attributes - table_entity.references + table_entity.virtuals).select(&:visible?).reject_is_a?(Schematics::Attributes::Attachment).each do |field|
+                      = link_to fa_icon(:archive),
+                        main_app.polymorphic_path(resource),
+                        method: :delete,
+                        class: "btn btn-danger btn-sm",
+                        data: { toggle: "tooltip", placement: "top", title: "Archiver" }
+              - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
+                select(&:visible?). \
+                reject_is_a?(Schematics::Attributes::Attachment). \
+                each do |field|
                 td.text-nowrap.text-center
                   - if field.searchable? && !actions
                     = highlight(resource.instance_eval(field.name), params[:query])
@@ -82,8 +101,10 @@
               - table_entity.references.each do |reference|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(reference.name).nil?
-                    = link_to resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(reference.name))
+                    = link_to resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"),
+                      main_app.polymorphic_path(resource.instance_eval(reference.name))
               - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
                 td.text-nowrap.text-center
                   - unless resource.instance_eval(association.name).nil?
-                    = link_to resource.instance_eval("#{association.name}.#{association.descriptor.name}"), main_app.polymorphic_path(resource.instance_eval(association.name))
+                    = link_to resource.instance_eval("#{association.name}.#{association.descriptor.name}"),
+                      main_app.polymorphic_path(resource.instance_eval(association.name))

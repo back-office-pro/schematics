@@ -17,4 +17,7 @@
           |  (#{resources.size})
       .collapse.show id="collapse-#{type}"
         .card-body
-          = render 'schematics/application/table', resources: resources, table_entity: Schematics::SCHEMA.find_entity_by_type(type), actions: false
+          = render 'schematics/application/table',
+            resources: resources,
+            table_entity: Schematics::SCHEMA.find_entity_by_type(type),
+            actions: false
