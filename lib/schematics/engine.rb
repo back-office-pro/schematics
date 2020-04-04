@@ -54,9 +54,9 @@ module Schematics
       app.middleware.use OliveBranch::Middleware,
                          inflection: "camel",
                          content_type_check: -> (content_type) { true },
-                         exclude_response: -> (env) {
+                         exclude_response: -> (env) do
                            env['PATH_INFO'].match(/^\/rails\/active_storage\/direct_uploads/)
-                         }
+                         end
     end
 
     initializer "schematics.cors" do

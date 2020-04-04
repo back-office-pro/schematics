@@ -20,10 +20,6 @@ module Schematics
         @tokens.map(&:to_sql)
       end
 
-      def column_definition
-        "#{to_sql} AS #{@name}"
-      end
-
       def joins
         @tokens.select_is_a?(Tokens::Reference).map do |reference|
           reference.value.split('.')[0...-1].map { |value| value.prepend(':') }
@@ -31,27 +27,42 @@ module Schematics
       end
 
       def filter_scope
-        %Q(scope :by_#{@name}, -> )
+        <<~RUBY
+          scope :by_#{@name}, ->
+        RUBY
       end
 
       def sort_scope
         if joins.empty?
-          %Q[scope :sort_by_#{@name}, -> sort_direction { order({ Arel.sql("#{to_sql}") => sort_direction }) }]
+          <<~RUBY
+            scope :sort_by_#{@name}, -> sort_direction do
+              order({ Arel.sql("#{to_sql}") => sort_direction })
+            end
+          RUBY
         else
-          %Q[scope :sort_by_#{@name}, -> sort_direction { joins(#{joins}).order({ Arel.sql("#{to_sql}") => sort_direction }) }]
+          <<~RUBY
+            scope :sort_by_#{@name}, -> sort_direction do
+              joins(#{joins}).
+              order({ Arel.sql("#{to_sql}") => sort_direction })
+            end
+          RUBY
         end
       end
 
       def has_filter_scope
-        %Q(has_scope :by_#{@name}, only: :index)
+        <<~RUBY
+          has_scope :by_#{@name}, only: :index
+        RUBY
       end
 
       def has_sort_scope
-        %Q(has_scope :sort_by_#{@name}, only: :index)
+        <<~RUBY
+          has_scope :sort_by_#{@name}, only: :index
+        RUBY
       end
 
       def to_str
-        <<-RUBY
+        <<~RUBY
           def #{@name}
             begin
               #{function}

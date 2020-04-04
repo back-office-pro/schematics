@@ -6,15 +6,28 @@ module Schematics
       end
 
       def filter_scope
-        super + %Q[filename { joins(:active_storage_attachment, :active_storage_blob).where(record_type: "#{@entity.type.camelize}").where("filename ILIKE ?", "%#\{filename}%") }]
+        super.extends <<~RUBY
+          filename do
+            joins(:active_storage_attachment, :active_storage_blob).
+            where(record_type: "#{@entity.type.camelize}").
+            where("filename ILIKE ?", "%#\{filename}%")
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { joins(:active_storage_attachment, :active_storage_blob).where(record_type: "#{@entity.type.camelize}").order(filename: sort_direction) }]
+        super.extends <<~RUBY
+          sort_direction do
+            joins(:active_storage_attachment, :active_storage_blob).
+            where(record_type: "#{@entity.type.camelize}").
+            order(filename: sort_direction)
+          end
+        RUBY
       end
 
       def to_str
-        %Q(has_one_attached :#{@name})
+        <<~RUBY
+          has_one_attached :#{@name}
+        RUBY
       end
 
       def validators

@@ -2,11 +2,18 @@ module Schematics
   module Associations
     class HasOne < Association
       def filter_scope
-        super + %Q[#{name} { where(#{entity.type}: #{name}) }]
+        super.extends <<~RUBY
+          #{name} { where(#{entity.type}: #{name}) }
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { joins(:#{@entity.type}).merge(#{@entity.type.camelize}.order(#{descriptor.name}: sort_direction })) }]
+        super.extends <<~RUBY
+          sort_direction do
+            joins(:#{@entity.type}).
+            merge(#{@entity.type.camelize}.order(#{descriptor.name}: sort_direction }))
+          end
+        RUBY
       end
     end
   end

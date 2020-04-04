@@ -15,9 +15,18 @@ module Schematics
 
       def filter_scope
         if joins.empty?
-          super + %Q[#{@name} { where("#{to_sql} ILIKE ?", "%#\{#{@name}}%") }]
+          super.extends <<~RUBY
+            #{@name} do
+              where("#{to_sql} ILIKE ?", "%#\{#{@name}}%")
+            end
+          RUBY
         else
-          super + %Q[#{@name} { joins(#{joins}).where("#{to_sql} ILIKE ?", "%#\{#{@name}}%") }]
+          super.extends <<~RUBY
+            #{@name} do
+              joins(#{joins}).
+              where("#{to_sql} ILIKE ?", "%#\{#{@name}}%")
+            end
+          RUBY
         end
       end
     end

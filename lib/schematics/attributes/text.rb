@@ -6,11 +6,15 @@ module Schematics
       end
 
       def filter_scope
-        super + %Q[#{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }]
+        super.extends <<~RUBY
+          #{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { order(#{@name}: sort_direction) }]
+        super.extends <<~RUBY
+          sort_direction { order(#{@name}: sort_direction) }
+        RUBY
       end
 
       def searchable?

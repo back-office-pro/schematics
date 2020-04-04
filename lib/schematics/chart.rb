@@ -40,7 +40,12 @@ module Schematics
     end
 
     def to_str
-      %Q[#{@type}_chart #{@entity.type.camelize}.#{@x_agregate}(#{x_field}).#{@y_agregate}(#{y_field}), xtitle: "#{x_title}", ytitle: "#{y_title}"]
+      <<~RUBY
+        #{@type}_chart
+          #{@entity.type.camelize}.#{@x_agregate}(#{x_field}).#{@y_agregate}(#{y_field}),
+          xtitle: "#{x_title}",
+          ytitle: "#{y_title}"
+      RUBY
     end
 
     def self.create(schema, entity:, type:, x:, y:)

@@ -29,15 +29,21 @@ module Schematics
       end
 
       def filter_scope
-        super + %Q[#{@name} { where(#{@name}: #{@name}) }]
+        super.extends <<~RUBY
+          #{@name} { where(#{@name}: #{@name}) }
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { order(#{@name}: sort_direction) }]
+        super.extends <<~RUBY
+          sort_direction { order(#{@name}: sort_direction) }
+        RUBY
       end
 
       def to_str
-        %Q(enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h})
+        <<~RUBY
+          enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}
+        RUBY
       end
 
       def icon

@@ -24,23 +24,35 @@ module Schematics
       end
 
       def filter_scope
-        %Q(scope :by_#{name}, -> )
+        <<~RUBY
+          scope :by_#{name}, ->
+        RUBY
       end
 
       def sort_scope
-        %Q(scope :sort_by_#{name}, -> )
+        <<~RUBY
+          scope :sort_by_#{name}, ->
+        RUBY
       end
 
       def has_filter_scope
-        %Q(has_scope :by_#{name}, only: :index)
+        <<~RUBY
+          has_scope :by_#{name}, only: :index
+        RUBY
       end
 
       def has_sort_scope
-        %Q(has_scope :sort_by_#{name}, only: :index)
+        <<~RUBY
+          has_scope :sort_by_#{name}, only: :index
+        RUBY
       end
 
       def to_str
-        "#{type} :#{name}, class_name: '#{class_name}', foreign_key: '#{reference.column_name}'"
+        <<~RUBY
+          #{type} :#{name},
+                  class_name: '#{class_name}',
+                  foreign_key: '#{reference.column_name}'
+        RUBY
       end
 
       def icon

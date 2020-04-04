@@ -2,15 +2,21 @@ module Schematics
   module Attributes
     class Boolean < Attribute
       def filter_scope
-        super + %Q[{ where(#{@name}: true) }]
+        super.extends <<~RUBY
+          { where(#{@name}: true) }
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { order(#{@name}: sort_direction) }]
+        super.extends <<~RUBY
+          sort_direction { order(#{@name}: sort_direction) }
+        RUBY
       end
 
       def has_filter_scope
-        super + %Q(, type: :boolean)
+        super.extends_with_comma <<~RUBY
+          type: :boolean
+        RUBY
       end
 
       def icon

@@ -13,7 +13,7 @@ module Schematics
       end
 
       def to_str
-        super + %Q(, through: :#{@through.name})
+        super.squish + ", through: :#{@through.name}"
       end
     end
   end

@@ -24,11 +24,18 @@ module Schematics
       end
 
       def filter_scope
-        super + %Q[#{@name} { where(#{@name}: #{@name}) }]
+        super.extends <<~RUBY
+          #{@name} { where(#{@name}: #{@name})
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { joins(:#{association_type}).merge(#{association_type.camelize}.order(#{inverse_descriptor.name}: sort_direction)) }]
+        super.extends <<~RUBY
+          sort_direction do
+            joins(:#{association_type}).
+            merge(#{association_type.camelize}.order(#{inverse_descriptor.name}: sort_direction))
+          end
+        RUBY
       end
 
       def model_property_type
@@ -40,7 +47,9 @@ module Schematics
       end
 
       def to_str
-        %Q(belongs_to :#{@name}, class_name: '#{model_property_type}', optional: #{!required?})
+        <<~RUBY
+          belongs_to :#{@name}, class_name: '#{model_property_type}', optional: #{!required?}
+        RUBY
       end
 
       def inverse_of_has_one?

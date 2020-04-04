@@ -6,7 +6,9 @@ module Schematics
       end
 
       def to_str
-        super + %Q(, dependent: :#{required? ? "destroy" : "nullify"})
+        super.extends_with_comma <<~RUBY
+          dependent: :#{required? ? "destroy" : "nullify"}
+        RUBY
       end
     end
   end

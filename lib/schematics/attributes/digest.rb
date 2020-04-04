@@ -30,7 +30,9 @@ module Schematics
       end
 
       def to_str
-        %Q(has_secure_password :#{@name})
+        <<~RUBY
+          has_secure_password :#{@name}
+        RUBY
       end
 
       def visible?

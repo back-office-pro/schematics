@@ -48,11 +48,22 @@ module Schematics
       end
 
       def model_property
-        %Q(property :#{@name.camelize(:lower)}, :#{model_property_type}, #{(unique? || required?) ? ":required" : ":optional"}, "#{@name.humanize}")
+        <<~RUBY
+          property :#{@name.camelize(:lower)},
+                   :#{model_property_type},
+                   #{(unique? || required?) ? ":required" : ":optional"},
+                   "#{@name.humanize}"
+        RUBY
       end
 
       def api_param
-        %Q(param :form, "#{@entity.type.camelize(:lower)}[#{@name.camelize(:lower)}]", :#{api_param_type}, #{(unique? || required?) ? ":required" : ":optional"}, "#{@name.humanize}")
+        <<~RUBY
+          param :form,
+          "#{@entity.type.camelize(:lower)}[#{@name.camelize(:lower)}]",
+          :#{api_param_type},
+          #{(unique? || required?) ? ":required" : ":optional"},
+          "#{@name.humanize}"
+        RUBY
       end
 
       def validators
@@ -63,27 +74,39 @@ module Schematics
       end
 
       def filter_scope
-        %Q(scope :by_#{@name}, -> )
+        <<~RUBY
+          scope :by_#{@name}, ->
+        RUBY
       end
 
       def sort_scope
-        %Q(scope :sort_by_#{@name}, -> )
+        <<~RUBY
+          scope :sort_by_#{@name}, ->
+        RUBY
       end
 
       def has_filter_scope
-        %Q(has_scope :by_#{@name}, only: :index)
+        <<~RUBY
+          has_scope :by_#{@name}, only: :index
+        RUBY
       end
 
       def has_sort_scope
-        %Q(has_scope :sort_by_#{@name}, only: :index)
+        <<~RUBY
+          has_scope :sort_by_#{@name}, only: :index
+        RUBY
       end
 
       def validate
-        %Q(validates :#{@name}, #{validators.to_s[1...-1]}) unless validators.empty?
+        unless validators.empty?
+          <<~RUBY
+            validates :#{@name}, #{validators.to_s[1...-1]}
+          RUBY
+        end
       end
 
       def to_str
-        ""
+        nil
       end
     end
   end

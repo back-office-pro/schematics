@@ -101,16 +101,18 @@ module Schematics
     end
 
     def friendly_id
-      %Q(friendly_id :#{descriptor.name}, use: [:slugged, :finders])
+      <<~RUBY
+        friendly_id :#{descriptor.name}, use: [:slugged, :finders]
+      RUBY
     end
 
     def api
-      <<-RUBY
+      <<~RUBY
         swagger_controller :#{@type.pluralize}, "#{@type.camelize} Management"
 
         swagger_model :#{@type.camelize} do |model|
           description "A #{@type.camelize} object"
-          #{model_properties.join("\n\t")}
+          #{model_properties.map(&:squish).join("\n\s\s")}
         end
 
         swagger_api :index do
@@ -138,7 +140,7 @@ module Schematics
           summary "Creates a new #{@type.humanize.downcase}"
           notes "This creates a new #{@type.humanize.downcase}"
           param :header, "Authorization", :string, :required, "Authorization token"
-          #{api_params.join("\n\t")}
+          #{api_params.map(&:squish).join("\n\s\s")}
           response :unauthorized
           response :success
           response :unprocessable_entity
@@ -149,7 +151,7 @@ module Schematics
           notes "This updates an existing #{@type.humanize.downcase}"
           param :header, "Authorization", :string, :required, "Authorization token"
           param :path, :id, :integer, :required, "#{@type.humanize} Id"
-          #{api_params.join("\n\t")}
+          #{api_params.map(&:squish).join("\n\s\s")}
           response :unauthorized
           response :success
           response :unprocessable_entity

@@ -7,7 +7,7 @@ class Schematics::Test < ActiveSupport::TestCase
       puts "------------------------------------"
       puts entity.attributes
       puts "------------------------------------"
-      puts entity.attributes.map(&:to_str).reject(&:empty?)
+      puts entity.attributes.map(&:to_str).compact
       puts "------------------------------------"
       puts entity.associations.map(&:to_str)
       puts "------------------------------------"

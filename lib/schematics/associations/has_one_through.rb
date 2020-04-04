@@ -10,11 +10,18 @@ module Schematics
       end
 
       def filter_scope
-        super + %Q[#{name} { joins(:#{entity.type}).where(#{name}: #{name}) }]
+        super.extends <<~RUBY
+          #{name} { joins(:#{entity.type}).where(#{name}: #{name}) }
+        RUBY
       end
 
       def sort_scope
-        super + %Q[sort_direction { joins(:#{entity.type}, :#{name}).merge(#{name.camelize}.order(#{descriptor.name}: sort_direction)) }]
+        super.extends <<~RUBY
+          sort_direction do
+            joins(:#{entity.type}, :#{name}).
+            merge(#{name.camelize}.order(#{descriptor.name}: sort_direction))
+          end
+        RUBY
       end
     end
   end

@@ -10,7 +10,9 @@ module Schematics
       end
 
       def to_str
-        %Q(has_many_attached :#{@name})
+        <<~RUBY
+          has_many_attached :#{@name}
+        RUBY
       end
     end
   end

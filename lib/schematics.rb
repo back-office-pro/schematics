@@ -38,6 +38,7 @@ require 'chartkick'
 require 'humanize'
 require 'schematics/engine'
 require 'schematics/array'
+require 'schematics/string'
 
 module Schematics
   autoload :Chart,        'schematics/chart'
