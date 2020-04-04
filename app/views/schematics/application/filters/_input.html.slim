@@ -1,3 +1,7 @@
 .input-group.ml-1.mr-1.mb-2
   = render 'schematics/application/filters/eraser', name: field.name
-  = text_field_tag "by_#{field.name}".to_sym, params["by_#{field.name}".to_sym], id: field.name.camelize(:lower), placeholder: "Filtrer par #{field.name.humanize}", class: "form-control typeahead-filter bg-light #{'border-0' unless params["by_#{field.name}".to_sym].present?}"
+  = text_field_tag "by_#{field.name}".to_sym,
+    params["by_#{field.name}".to_sym],
+    id: field.name.camelize(:lower),
+    placeholder: "Filtrer par #{field.name.humanize}",
+    class: "form-control typeahead-filter bg-light #{'border-0' unless params["by_#{field.name}".to_sym].present?}"

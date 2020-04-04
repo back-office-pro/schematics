@@ -1,3 +1,7 @@
 .input-group.ml-1.mr-1.mb-2
   = render 'schematics/application/filters/eraser', name: reference.name
-  = select_tag "by_#{reference.name}".to_sym, options_from_collection_for_select(reference.association_type.camelize.constantize.all, "id", reference.inverse_descriptor.name, params["by_#{reference.name}".to_sym]), prompt: "Filtrer par #{reference.name.humanize}", onchange: "$(this.form).submit()", class: "form-control bg-light #{'border-0' unless params["by_#{reference.name}".to_sym].present?}"
+  = select_tag "by_#{reference.name}".to_sym,
+    options_from_collection_for_select(reference.association_type.camelize.constantize.all, "id", reference.inverse_descriptor.name, params["by_#{reference.name}".to_sym]),
+    prompt: "Filtrer par #{reference.name.humanize}",
+    onchange: "$(this.form).submit()",
+    class: "form-control bg-light #{'border-0' unless params["by_#{reference.name}".to_sym].present?}"

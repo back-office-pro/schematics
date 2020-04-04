@@ -8,9 +8,15 @@
     - when Schematics::Attributes::RichText
       = f.input attribute.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
-      = f.input attribute.name.to_sym, collection: model_class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym), include_blank: false
+      = f.input attribute.name.to_sym,
+        collection: model_class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym),
+        include_blank: false
     - when Schematics::Attributes::Attachment
-      = f.input attribute.name.to_sym, as: :file, required: resource.new_record?, wrapper_html: { class: "mb-2", }, input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
+      = f.input attribute.name.to_sym,
+        as: :file,
+        required: resource.new_record?,
+        wrapper_html: { class: "mb-2", },
+        input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
       small.form-text.text-muted.mb-2
         = fa_icon :info_circle, class: "mr-1"
         = humanize_attachment_validators(attribute.validators)

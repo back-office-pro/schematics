@@ -1,5 +1,9 @@
 .col.text-center
-  = link_to fa_icon(:trash), directory, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger pl-5 ml-5 position-absolute"
+  = link_to fa_icon(:trash),
+    directory,
+    method: :delete,
+    data: { confirm: 'Are you sure?' },
+    class: "text-danger pl-5 ml-5 position-absolute"
   = link_to directory do
     = fa_icon :folder, size: '1x', type: :solid
     h5.mt-2= directory.name
