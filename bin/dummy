@@ -20,8 +20,6 @@ rm -rf ./dummy
 cd ./schematics
 # clean dummy
 rm -rf ./test/dummy/README.md \
-       ./test/dummy/Gemfile \
-       ./test/dummy/Gemfile.lock \
        ./test/dummy/public/robots.txt \
        ./test/dummy/vendor
 # load test fixtures
