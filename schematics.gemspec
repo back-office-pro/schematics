@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pg", "~> 1.2.3"
   spec.add_development_dependency "rubocop", "~> 0.76.0"
   spec.add_development_dependency "rubocop-airbnb", "~> 3.0.1"
-  spec.add_dependency "rails", "~> 6.0.1"
+  spec.add_dependency "rails", "~> 6.0.2.2"
   spec.add_dependency "pagy", "~> 3.5"
   spec.add_dependency "paranoia", "~> 2.4.2"
   spec.add_dependency "paper_trail", "~> 10.3.1"
@@ -50,6 +50,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "chartkick", "~> 3.3.0"
   spec.add_dependency "humanize", "~> 2.4.0"
   spec.add_dependency "sprockets", "~> 3.7.2"
+  spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]
 end
