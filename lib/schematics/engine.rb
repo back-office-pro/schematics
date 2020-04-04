@@ -102,7 +102,7 @@ module Schematics
 
     initializer "schematics.swagger" do
       SwaggerUiEngine.configure do |config|
-        config.swagger_url = "/api/v1/api-docs.json"
+        config.swagger_url = "/api-docs.json"
       end
       class Swagger::Docs::Config
         def self.base_api_controller
@@ -112,7 +112,7 @@ module Schematics
       Swagger::Docs::Config.register_apis({
         "1.0" => {
           api_extension_type: :json,
-          api_file_path: "public/api/v1/",
+          api_file_path: "public",
           base_path: "http://localhost:3000",
           clean_directory: true,
           camelize_model_properties: true,
