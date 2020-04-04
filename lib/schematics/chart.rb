@@ -41,10 +41,11 @@ module Schematics
 
     def to_str
       <<~RUBY
-        #{@type}_chart
+        #{@type}_chart(
           #{@entity.type.camelize}.#{@x_agregate}(#{x_field}).#{@y_agregate}(#{y_field}),
           xtitle: "#{x_title}",
           ytitle: "#{y_title}"
+        )
       RUBY
     end
 

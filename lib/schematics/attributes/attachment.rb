@@ -11,6 +11,7 @@ module Schematics
             joins(:active_storage_attachment, :active_storage_blob).
             where(record_type: "#{@entity.type.camelize}").
             where("filename ILIKE ?", "%#\{filename}%")
+          end
         RUBY
       end
 
