@@ -56,9 +56,9 @@ module Schematics
     def humanize_attachment_validators(validators)
       content = []
       validators.except(:presence, :attached).each do |key, value|
-        content << I18n.t(".forms.attachment.validators.#{key}")
-        content << " "
-        content << case value
+        content << I18n.t(".forms.attachment.validators.#{key}") +
+                   " " +
+                   case value
                    when Array
                      value.map(&:to_s).map(&:upcase).join(" ")
                    when Hash
