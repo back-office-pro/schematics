@@ -69,17 +69,11 @@
                 },
                 {
                     "name": "auth_token",
-                    "type": "token",
-                    "options": {
-                        "unique": true
-                    }
+                    "type": "token"
                 },
                 {
                     "name": "password_reset_token",
-                    "type": "token",
-                    "options": {
-                        "unique": true
-                    }
+                    "type": "token"
                 },
                 {
                     "name": "first_name",
