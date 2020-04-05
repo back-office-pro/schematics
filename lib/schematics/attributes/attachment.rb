@@ -5,6 +5,10 @@ module Schematics
         "file"
       end
 
+      def permitted_json_param
+        { super => [:data, :filename, :content_type] }
+      end
+
       def filter_scope
         super.extends <<~RUBY
           filename do
@@ -28,6 +32,7 @@ module Schematics
       def to_str
         <<~RUBY
           has_one_attached :#{@name}
+          has_one_base64_attached :#{@name}
         RUBY
       end
 

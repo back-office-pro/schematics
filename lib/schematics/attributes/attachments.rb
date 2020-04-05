@@ -6,12 +6,17 @@ module Schematics
       end
 
       def permitted_param
-        Hash[super, []]
+        { super => [] }
+      end
+
+      def permitted_json_param
+        permitted_param
       end
 
       def to_str
         <<~RUBY
           has_many_attached :#{@name}
+          has_many_base64_attached :#{@name}
         RUBY
       end
     end

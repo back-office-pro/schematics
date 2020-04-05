@@ -13,15 +13,19 @@ module Schematics
               @params = {}
               entity.attributes.select(&:permitted_param).each do |attribute|
                 content_type = attribute.validators[:content_type]&.first
-                attachment = fixture_file_upload("files/dummy.#{content_type || "png"}", Mime[content_type] || "image/png")
+                attachment = fixture_file_upload(
+                  "files/dummy.#{content_type || "png"}",
+                  Mime[content_type] || "image/png"
+                )
                 case attribute
                 when Attributes::Attachments
                   @params = @params.merge(attribute.permitted_param.symbolize_keys)
                   @params[attribute.column_name.to_sym] << attachment
                 when Attributes::Attachment
-                  @params[attribute.permitted_param.to_sym] = attachment
+                  @params[attribute.column_name.to_sym] = attachment
                 when Attributes::Digest
-                  @params[attribute.permitted_param.first.to_sym] = @params[attribute.permitted_param.last.to_sym] = SecureRandom.base58
+                  @params[attribute.permitted_param.first.to_sym] =
+                    @params[attribute.permitted_param.last.to_sym] = SecureRandom.base58
                 when Attributes::String
                   if attribute.email?
                     @params[attribute.permitted_param.to_sym] = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
@@ -38,6 +42,50 @@ module Schematics
                   @params[attribute.permitted_param.to_sym] = SecureRandom.base58
                 else
                   @params[attribute.permitted_param.to_sym] = @record.send(attribute.column_name)
+                end
+              end
+              @json_params = {}
+              entity.attributes.select(&:permitted_json_param).each do |attribute|
+                content_type = attribute.validators[:content_type]&.first
+                attachment = fixture_file_upload(
+                  "files/dummy.#{content_type || "png"}",
+                  Mime[content_type] || "image/png"
+                )
+                case attribute
+                when Attributes::Attachments
+                  @json_params = @json_params.merge(attribute.permitted_json_param.symbolize_keys)
+                  json = {}
+                  file = File.read(attachment.path)
+                  json["filename"] = attachment.original_filename
+                  json["content_type"] = attachment.content_type
+                  json["data"] = "data:image/png;base64," + Base64.encode64(file)
+                  @json_params[attribute.column_name.to_sym] << json
+                when Attributes::Attachment
+                  json = {}
+                  file = File.read(attachment.path)
+                  json["filename"] = attachment.original_filename
+                  json["content_type"] = attachment.content_type
+                  json["data"] = "data:image/png;base64," + Base64.encode64(file)
+                  @json_params[attribute.column_name.to_sym] = json
+                when Attributes::Digest
+                  @json_params[attribute.permitted_json_param.first.to_sym] =
+                    @json_params[attribute.permitted_json_param.last.to_sym] = SecureRandom.base58
+                when Attributes::String
+                  if attribute.email?
+                    @json_params[attribute.permitted_json_param.to_sym] = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
+                  elsif attribute.phone?
+                    @json_params[attribute.permitted_json_param.to_sym] = Array.new(10) { rand(10) }
+                  elsif attribute.url?
+                    @json_params[attribute.permitted_json_param.to_sym] = "www.#{SecureRandom.base58}.com"
+                  elsif attribute.unique?
+                    @json_params[attribute.permitted_json_param.to_sym] = SecureRandom.base58
+                  else
+                    @json_params[attribute.permitted_json_param.to_sym] = @record.send(attribute.column_name)
+                  end
+                when Attributes::RichText, proc(&:unique?)
+                  @json_params[attribute.permitted_json_param.to_sym] = SecureRandom.base58
+                else
+                  @json_params[attribute.permitted_json_param.to_sym] = @record.send(attribute.column_name)
                 end
               end
             end
@@ -120,7 +168,10 @@ module Schematics
             test "should really destroy API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count", -1) do
                 login as: :json
-                delete subclass.url_helper(@record.id), headers: authorization_header, params: { really: true }, as: :json
+                delete subclass.url_helper(@record.id),
+                       headers: authorization_header,
+                       params: { really: true },
+                       as: :json
               end
               assert_response :no_content
             end
@@ -175,20 +226,27 @@ module Schematics
 
             test "should update API #{subclass.entity_name}" do
               login as: :json
-              patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
+              patch subclass.url_helper(@record.id),
+                    params: { subclass.entity_name.to_sym => @json_params },
+                    headers: authorization_header,
+                    as: :json
               assert_response :no_content
             end
 
             test "should update #{subclass.entity_name}" do
               login
-              patch subclass.url_helper(@record.id), params: { subclass.entity_name.to_sym => @params }
+              patch subclass.url_helper(@record.id),
+                    params: { subclass.entity_name.to_sym => @params }
               assert_redirected_to subclass.url_helper(@record.reload.slug)
             end
 
             test "should create API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count") do
                 login as: :json
-                post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }, headers: authorization_header, as: :json
+                post subclass.url_helper,
+                     params: { subclass.entity_name.to_sym => @json_params },
+                     headers: authorization_header,
+                     as: :json
               end
               assert_response :created
             end
