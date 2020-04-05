@@ -53,7 +53,7 @@ module Schematics
       entity = schema.find_entity_by_type(entity)
       x_field = entity.find_field_by_name(x[:field]) || x[:field] unless x[:field].nil?
       y_field = entity.find_field_by_name(y[:field]) || y[:field] unless y[:field].nil?
-      Chart.new(entity, type, x[:agregate], x_field, y[:agregate], y_field)
+      new(entity, type, x[:agregate], x_field, y[:agregate], y_field)
     end
   end
 end

@@ -28,7 +28,7 @@ module Schematics
     def self.create(schema, entity:, agregate:, field: nil)
       entity = schema.find_entity_by_type(entity)
       field = entity.find_field_by_name(field) unless field.nil?
-      Stat.new(entity, agregate.to_sym, field)
+      new(entity, agregate.to_sym, field)
     end
   end
 end
