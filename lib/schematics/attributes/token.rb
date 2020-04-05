@@ -1,6 +1,10 @@
 module Schematics
   module Attributes
     class Token < Attribute
+      def unique?
+        true
+      end
+
       def api_param_type
         "string"
       end
