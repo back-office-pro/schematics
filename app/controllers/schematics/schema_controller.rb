@@ -131,11 +131,18 @@ module Schematics
     end
 
     def resource_params
-      params.require(self.class.entity_name.to_sym).send(:permit, *self.class.entity.permitted_params)
+      root = self.class.entity_name.to_sym
+      entity = self.class.entity
+      keys = request.format.json? ? entity.permitted_json_params : entity.permitted_params
+      params.require(root).send(:permit, *keys)
     end
 
     def eager_loading
-      (self.class.entity.references + self.class.entity.has_one_through_associations + self.class.entity.has_one_associations).map(&:name).map(&:to_sym)
+      (
+        self.class.entity.references +
+        self.class.entity.has_one_through_associations +
+        self.class.entity.has_one_associations
+      ).map(&:name).map(&:to_sym)
     end
   end
 end

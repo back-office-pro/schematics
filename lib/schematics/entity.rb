@@ -53,6 +53,10 @@ module Schematics
       @attributes.map(&:permitted_param).flatten.compact
     end
 
+    def permitted_json_params
+      @attributes.map(&:permitted_json_param).flatten.compact
+    end
+
     def filter_scopes
       (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
         map(&:filter_scope).
@@ -190,6 +194,7 @@ module Schematics
         class #{type.camelize}Controller
           ###
           # #{permitted_params.join(", ")}
+          # #{permitted_json_params.join(", ")}
           ###
 
           #{has_filter_scopes.join("\s\s")}
