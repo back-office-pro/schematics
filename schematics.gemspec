@@ -52,5 +52,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sprockets", "~> 3.7.2"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
-  spec.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,db,lib}/**/*", "README.md"]
 end
