@@ -9,6 +9,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.extend(FriendlyId)
+        subclass.include(ActiveStorageSupport::SupportForBase64)
         subclass.entity.modelize(subclass)
       end
     end
