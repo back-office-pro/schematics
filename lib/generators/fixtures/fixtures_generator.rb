@@ -43,20 +43,27 @@ class FixturesGenerator < Rails::Generators::Base
       each_with_index do |attribute, index|
       index = (index + 1).humanize
       content_type = attribute.validators[:content_type]&.first
+      filename = ["dummy", content_type || "png"].join(".")
       append_to_file "test/fixtures/active_storage/blobs.yml" do
         <<~YAML
         #{index}:
-          key: #{SecureRandom.base58}
-          filename: #{SecureRandom.base58}.#{content_type || "png"}
+          key: #{ActiveStorage::Blob.generate_unique_secure_token}
+          filename: #{filename}
           content_type: #{Mime[content_type] || "image/png"}
-          byte_size: 2000
-          checksum: #{SecureRandom.base58}
+          byte_size: <%= File.size('#{fixture_files_path}/#{filename}') %>
+          checksum: <%= Digest::MD5.file('#{fixture_files_path}/#{filename}').base64digest %>
         YAML
       end
     end
   end
 
   def copy_fixture_files
-    directory ".", "test/fixtures/files"
+    directory ".", fixture_files_path
+  end
+
+  private
+
+  def fixture_files_path
+    "test/fixtures/files"
   end
 end
