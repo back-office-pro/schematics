@@ -175,10 +175,10 @@ module Schematics
       <<~RUBY
         class #{type.camelize}
           ###
-          # Descriptor: #{descriptor.name}
-          #{attributes.map { |attribute| '# ' + attribute }.join("\s\s")}
+          #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
           ###
 
+          #{friendly_id}
           #{validates.join("\s\s")}
           #{filter_scopes.join("\s\s")}
           #{sort_scopes.join("\s\s")}
@@ -188,6 +188,10 @@ module Schematics
         end
 
         class #{type.camelize}Controller
+          ###
+          # #{permitted_params.join(", ")}
+          ###
+
           #{has_filter_scopes.join("\s\s")}
           #{has_sort_scopes.join("\s\s")}
           #{api}
