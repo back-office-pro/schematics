@@ -1,0 +1,167 @@
+{
+    "definitions": {
+        "stat": {
+            "definitions": {
+                "entity": {
+                    "type": "string"
+                },
+                "agregate": {
+                    "type": "string"
+                },
+                "field": {
+                    "type": "string"
+                }
+            },
+            "required": ["entity", "agregate"],
+            "type": "object"
+        },        
+        "chart": {
+            "definitions": {
+                "type": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "x": {
+                    "type": "object"
+                },
+                "y": {
+                    "type": "object"
+                }
+            },
+            "required": ["type", "entity", "x", "y"],
+            "type": "object"
+        },
+        "entity": {
+            "definitions": {
+                "type": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "descriptor": {
+                    "type": "string"
+                },
+                "virtuals": {
+                    "items": {
+                        "$ref": "#/definitions/virtual"
+                    },
+                    "type": "array"
+                },
+                "attributes": {
+                    "items": {
+                        "$ref": "#/definitions/attribute"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": ["type", "descriptor", "attributes"],
+            "type": "object"
+        },        
+        "virtual_option": {
+            "definitions": {
+                "scale": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                }
+            }
+        },
+        "virtual": {
+            "definitions": {
+                "name": {
+                    "type": "string"
+                },
+                "function": {
+                    "type": "string"
+                },
+                "options": {
+                    "$ref": "#/definitions/virtual_option",
+                    "type": "object"
+                }
+            },
+            "required": ["name", "function"],
+            "type": "object"
+        },    
+        "attribute_option": {
+            "definitions": {
+                "unique": {
+                    "type": "boolean"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "email": {
+                    "type": "boolean"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "inverse": {
+                    "type": "object"
+                },
+                "precision": {
+                    "type": "integer"
+                },
+                "scale": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "default": {
+                },
+                "content_type": {
+                    "type": "array"
+                },
+                "size": {
+                    "type": "integer"
+                }
+            }
+        },
+        "attribute": {
+            "definitions": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "options": {
+                    "$ref": "#/definitions/attribute_option",
+                    "type": ["object", "array"]
+                }
+            },
+            "required": ["name", "type"],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "stats": {
+            "items": {
+                "$ref": "#/definitions/stat"
+            },
+            "type": "array"
+        },
+        "charts": {
+            "items": {
+                "$ref": "#/definitions/chart"
+            },
+            "type": "array"
+        },
+        "entities": {
+            "items": {
+                "$ref": "#/definitions/entity"
+            },
+            "type": "array"
+        }
+    },
+    "required": ["stats", "charts", "entities"],
+    "type": "object"
+}

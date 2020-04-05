@@ -5,7 +5,7 @@ gem "schematics", path: "/Users/max/bitbucket/schematics"
 # run "bundle install"
 
 # Schema
-# copy_file "#{Dir.pwd}/../schema.json", "schema.json"
+# copy_file "#{Dir.pwd}/../test/data.json", "data.json"
 
 # Rails commands
 rails_command "generate simple_form:install --bootstrap"
