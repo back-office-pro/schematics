@@ -1,0 +1,136 @@
+{
+    "entities": [
+        {
+            "type": "user",
+            "icon": "users",
+            "descriptor": "full_name",
+            "virtuals": [
+                {
+                    "name": "full_name",
+                    "function": "$last_name $first_name"
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "options": {
+                        "unique": true,
+                        "email": true
+                    }
+                },
+                {
+                    "name": "password",
+                    "type": "digest",
+                    "options": {
+                        "min": 6
+                    }
+                },
+                {
+                    "name": "auth_token",
+                    "type": "token"
+                },
+                {
+                    "name": "password_reset_token",
+                    "type": "token"
+                },
+                {
+                    "name": "first_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "last_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "locale",
+                    "type": "enum",
+                    "options": [
+                        "Français",
+                        "English"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "message",
+            "icon": "inbox",
+            "descriptor": "subject",
+            "attributes": [
+                {
+                    "name": "subject",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "content",
+                    "type": "rich_text",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "author",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "type": "user",
+                        "inverse": {
+                            "name": "sent_messages",
+                            "type": "has_many"
+                        }
+                    }
+                },
+                {
+                    "name": "recipient",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "type": "user",
+                        "inverse": {
+                            "name": "received_messages",
+                            "type": "has_many"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "directory",
+            "icon": "folder",
+            "descriptor": "name",
+            "attributes": [
+                {
+                    "name": "name",
+                    "type": "string",
+                    "options": {
+                        "unique": true
+                    }
+                },
+                {
+                    "name": "parent",
+                    "type": "belongs_to",
+                    "options": {
+                        "type": "directory",
+                        "inverse": {
+                            "name": "sub_directories",
+                            "type": "has_many"
+                        }
+                    }
+                },
+                {
+                    "name": "files",
+                    "type": "attachments"
+                }
+            ]
+        }
+    ]
+}

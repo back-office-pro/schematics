@@ -162,6 +162,6 @@
             "type": "array"
         }
     },
-    "required": ["stats", "charts", "entities"],
+    "required": ["entities"],
     "type": "object"
 }

@@ -1,19 +1,32 @@
 module Schematics
   class Schema
+    include Singleton
     attr_accessor :entities, :charts, :stats
 
-    def initialize(filename)
-      @file = File.read(filename)
-      @data = JSON.parse(@file, symbolize_names: true)
-      @entities = @data[:entities].map { |entity| Entity.create(entity) }
-      @charts = @data[:charts].map { |chart| Chart.create(self, chart) }
-      @stats = @data[:stats].map { |stat| Stat.create(self, stat) }
+    def initialize
+      @entities = data[:entities].map { |entity| Entity.create(entity) }
+      @charts = data[:charts].map { |chart| Chart.create(self, chart) }
+      @stats = data[:stats].map { |stat| Stat.create(self, stat) }
       add_inverse_descriptor_to_references
       add_has_many_associations
       add_has_one_associations
       add_has_many_through_associations
       add_has_one_through_associations
     end
+
+    def find_entity_by_type(type)
+      @entities.find { |entity| entity.type === type }
+    end
+
+    def generate
+      @entities.sort_by(&:weight).reverse.each(&:generate)
+    end
+
+    def to_s
+      @entities.sort_by(&:weight).reverse.map(&:to_s).join("\n")
+    end
+
+    private
 
     def add_inverse_descriptor_to_references
       @entities.each do |entity|
@@ -63,16 +76,32 @@ module Schematics
       end
     end
 
-    def find_entity_by_type(type)
-      @entities.find { |entity| entity.type === type }
+    def app_data_file_path
+      File.expand_path("../app.json", __dir__)
     end
 
-    def generate
-      @entities.sort_by(&:weight).reverse.each(&:generate)
+    def app_data_file
+      File.read(app_data_file_path)
     end
 
-    def to_s
-      @entities.sort_by(&:weight).reverse.map(&:to_s).join("\n")
+    def app_json_data_file
+      JSON.parse(app_data_file, symbolize_names: true)
+    end
+
+    def data_file_path
+      "/Users/max/bitbucket/schematics/test/data.json"
+    end
+
+    def data_file
+      File.read(data_file_path)
+    end
+
+    def json_data_file
+      JSON.parse(data_file, symbolize_names: true)
+    end
+
+    def data
+      @data ||= json_data_file.merge(app_json_data_file) { |key, left, right| left + right }
     end
   end
 end
