@@ -108,6 +108,12 @@ module Schematics
       def to_str
         ""
       end
+
+      class << self
+        def create(entity, name:, type:, options: nil)
+          "Schematics::Attributes::#{type.underscore.camelize}".constantize.new(entity, name, options)
+        end
+      end
     end
   end
 end

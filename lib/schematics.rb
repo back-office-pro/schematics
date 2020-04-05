@@ -68,7 +68,6 @@ module Schematics
     autoload :Decimal,      'schematics/attributes/decimal'
     autoload :Digest,       'schematics/attributes/digest'
     autoload :Enum,         'schematics/attributes/enum'
-    autoload :Factory,      'schematics/attributes/factory'
     autoload :Float,        'schematics/attributes/float'
     autoload :Integer,      'schematics/attributes/integer'
     autoload :References,   'schematics/attributes/references'
@@ -121,7 +120,6 @@ module Schematics
   module Virtuals
     autoload :Calculation,    'schematics/virtuals/calculation'
     autoload :Concatenation,  'schematics/virtuals/concatenation'
-    autoload :Factory,        'schematics/virtuals/factory'
     autoload :Virtual,        'schematics/virtuals/virtual'
   end
 

@@ -13,8 +13,8 @@ module Schematics
       @type = type
       @icon = icon || :caret_square_right
       @descriptor = descriptor
-      @attributes = attributes.map { |attribute| Attributes::Factory.create(self, attribute) }
-      @virtuals = virtuals.map { |virtual| Virtuals::Factory.create(self, virtual) }
+      @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
+      @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
       @has_one_associations = []
       @has_many_associations = []
       @has_many_through_associations = []
@@ -199,8 +199,10 @@ module Schematics
       RUBY
     end
 
-    def self.create(type:, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
-      new(type, icon&.to_sym, descriptor, attributes || [], virtuals || [])
+    class << self
+      def create(type:, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
+        new(type, icon&.to_sym, descriptor, attributes || [], virtuals || [])
+      end
     end
   end
 end
