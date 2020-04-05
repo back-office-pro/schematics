@@ -13,6 +13,14 @@ module Schematics
         permitted_param
       end
 
+      def default
+        [super]
+      end
+
+      def json_default
+        [super]
+      end
+
       def to_str
         <<~RUBY
           has_many_attached :#{@name}

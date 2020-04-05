@@ -10,84 +10,12 @@ module Schematics
 
             setup do
               @record = send(subclass.fixture_name, :one)
-              @params = {}
-              entity.attributes.select(&:permitted_param).each do |attribute|
-                content_type = attribute.validators[:content_type]&.first
-                attachment = fixture_file_upload(
-                  "files/dummy.#{content_type || "png"}",
-                  Mime[content_type] || "image/png"
-                )
-                case attribute
-                when Attributes::Attachments
-                  @params = @params.merge(attribute.permitted_param.symbolize_keys)
-                  @params[attribute.column_name.to_sym] << attachment
-                when Attributes::Attachment
-                  @params[attribute.column_name.to_sym] = attachment
-                when Attributes::Digest
-                  @params[attribute.permitted_param.first.to_sym] =
-                    @params[attribute.permitted_param.last.to_sym] = SecureRandom.base58
-                when Attributes::String
-                  if attribute.email?
-                    @params[attribute.permitted_param.to_sym] = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
-                  elsif attribute.phone?
-                    @params[attribute.permitted_param.to_sym] = Array.new(10) { rand(10) }
-                  elsif attribute.url?
-                    @params[attribute.permitted_param.to_sym] = "www.#{SecureRandom.base58}.com"
-                  elsif attribute.unique?
-                    @params[attribute.permitted_param.to_sym] = SecureRandom.base58
-                  else
-                    @params[attribute.permitted_param.to_sym] = @record.send(attribute.column_name)
-                  end
-                when Attributes::RichText, proc(&:unique?)
-                  @params[attribute.permitted_param.to_sym] = SecureRandom.base58
-                else
-                  @params[attribute.permitted_param.to_sym] = @record.send(attribute.column_name)
-                end
-              end
-              @json_params = {}
-              entity.attributes.select(&:permitted_json_param).each do |attribute|
-                content_type = attribute.validators[:content_type]&.first
-                attachment = fixture_file_upload(
-                  "files/dummy.#{content_type || "png"}",
-                  Mime[content_type] || "image/png"
-                )
-                case attribute
-                when Attributes::Attachments
-                  @json_params = @json_params.merge(attribute.permitted_json_param.symbolize_keys)
-                  json = {}
-                  file = File.read(attachment.path)
-                  json["filename"] = attachment.original_filename
-                  json["content_type"] = attachment.content_type
-                  json["data"] = "data:image/png;base64," + Base64.encode64(file)
-                  @json_params[attribute.column_name.to_sym] << json
-                when Attributes::Attachment
-                  json = {}
-                  file = File.read(attachment.path)
-                  json["filename"] = attachment.original_filename
-                  json["content_type"] = attachment.content_type
-                  json["data"] = "data:image/png;base64," + Base64.encode64(file)
-                  @json_params[attribute.column_name.to_sym] = json
-                when Attributes::Digest
-                  @json_params[attribute.permitted_json_param.first.to_sym] =
-                    @json_params[attribute.permitted_json_param.last.to_sym] = SecureRandom.base58
-                when Attributes::String
-                  if attribute.email?
-                    @json_params[attribute.permitted_json_param.to_sym] = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
-                  elsif attribute.phone?
-                    @json_params[attribute.permitted_json_param.to_sym] = Array.new(10) { rand(10) }
-                  elsif attribute.url?
-                    @json_params[attribute.permitted_json_param.to_sym] = "www.#{SecureRandom.base58}.com"
-                  elsif attribute.unique?
-                    @json_params[attribute.permitted_json_param.to_sym] = SecureRandom.base58
-                  else
-                    @json_params[attribute.permitted_json_param.to_sym] = @record.send(attribute.column_name)
-                  end
-                when Attributes::RichText, proc(&:unique?)
-                  @json_params[attribute.permitted_json_param.to_sym] = SecureRandom.base58
-                else
-                  @json_params[attribute.permitted_json_param.to_sym] = @record.send(attribute.column_name)
-                end
-              end
+              @params = entity.attributes.select(&:permitted_param).map do |attribute|
+                [attribute.column_name.to_sym, attribute.default || @record.send(attribute.column_name)]
+              end.to_h
+              @json_params = entity.attributes.select(&:permitted_json_param).map do |attribute|
+                [attribute.column_name.to_sym, attribute.json_default || @record.send(attribute.column_name)]
+              end.to_h
             end
 
             test "should have scope with_deleted" do

@@ -23,6 +23,10 @@ module Schematics
         RUBY
       end
 
+      def default
+        SecureRandom.base58
+      end
+
       def to_str
         <<~RUBY
           has_rich_text :#{@name}

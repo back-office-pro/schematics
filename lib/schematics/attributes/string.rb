@@ -28,6 +28,13 @@ module Schematics
         validators[:url]    = true if url?
         validators
       end
+
+      def default
+        return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if email?
+        return Array.new(10) { rand(10) } if phone?
+        return "www.#{SecureRandom.base58}.com" if url?
+        super
+      end
     end
   end
 end

@@ -42,6 +42,10 @@ module Schematics
       def searchable?
         false
       end
+
+      def default
+        SecureRandom.base58
+      end
     end
   end
 end

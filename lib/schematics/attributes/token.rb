@@ -29,6 +29,10 @@ module Schematics
         nil
       end
 
+      def default
+        SecureRandom.base58
+      end
+
       def to_str
         <<~RUBY
           has_secure_token :#{@name}

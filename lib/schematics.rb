@@ -38,8 +38,8 @@ require 'chartkick'
 require 'humanize'
 require 'active_storage_base64'
 require 'schematics/engine'
-require 'schematics/array'
-require 'schematics/string'
+require 'schematics/patches/array'
+require 'schematics/patches/string'
 
 module Schematics
   autoload :Chart,        'schematics/chart'
