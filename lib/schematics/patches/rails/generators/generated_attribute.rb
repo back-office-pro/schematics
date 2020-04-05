@@ -39,7 +39,7 @@ module Schematics
             end
             # TODO remove when https://github.com/rails/rails/pull/37583 is published
             # Fix this issue: https://github.com/rails/rails/issues/23422
-            options[:type] = :uuid if reference?
+            # options[:type] = :uuid if reference?
             options
           end
 
