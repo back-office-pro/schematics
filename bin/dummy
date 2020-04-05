@@ -12,7 +12,7 @@ rails new dummy \
     --skip-listen \
     --skip-bootsnap \
     --dummy-app=true \
-    --template /Users/max/bitbucket/schematics/template.rb
+    --template ./schematics/template.rb
 # move dummy in /test directory
 mkdir ./schematics/test/dummy
 mv ./dummy/* ./schematics/test/dummy
