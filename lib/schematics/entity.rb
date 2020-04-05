@@ -171,8 +171,32 @@ module Schematics
       RUBY
     end
 
+    def to_s
+      <<~RUBY
+        class #{type.camelize}
+          ###
+          # Descriptor: #{descriptor.name}
+          #{attributes.map { |attribute| '# ' + attribute }.join("\s\s")}
+          ###
+
+          #{validates.join("\s\s")}
+          #{filter_scopes.join("\s\s")}
+          #{sort_scopes.join("\s\s")}
+          #{attributes.map(&:to_str).compact.join("\s\s")}
+          #{associations.map(&:to_str).join("\s\s")}
+          #{virtuals.map(&:to_str).join("\s\s")}
+        end
+
+        class #{type.camelize}Controller
+          #{has_filter_scopes.join("\s\s")}
+          #{has_sort_scopes.join("\s\s")}
+          #{api}
+        end
+      RUBY
+    end
+
     def self.create(type:, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
-      Entity.new(type, icon&.to_sym, descriptor, attributes || [], virtuals || [])
+      new(type, icon&.to_sym, descriptor, attributes || [], virtuals || [])
     end
   end
 end

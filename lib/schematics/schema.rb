@@ -71,8 +71,8 @@ module Schematics
       @entities.sort_by(&:weight).reverse.each(&:generate)
     end
 
-    def print
-      @entities.sort_by(&:weight).reverse.map(&:print)
+    def to_s
+      @entities.sort_by(&:weight).reverse.map(&:to_s).join("\n")
     end
   end
 end
