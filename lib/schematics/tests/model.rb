@@ -2,6 +2,8 @@ module Schematics
   module Tests
     class Model < ::ActiveSupport::TestCase
       class << self
+        delegate :entity, :fixture_name, :entity_name, to: :model_class
+
         def inherited(subclass)
           super
           subclass.class_eval do
@@ -10,11 +12,9 @@ module Schematics
               @other_record = send(subclass.fixture_name, :two)
             end
 
-            test "valid #{subclass.entity_name}" do
+            test "valid #{entity_name}" do
               assert @record.valid?
             end
-
-            entity = SCHEMA.find_entity_by_type(subclass.entity_name)
 
             entity.attributes.select(&:required?).each do |attribute|
               test "invalid without #{attribute.name}" do
@@ -102,20 +102,12 @@ module Schematics
             end
           end
         end
-      end
 
-      protected
+        protected
 
-      def self.model_name
-        name.chomp('Test')
-      end
-
-      def self.entity_name
-        model_name.underscore
-      end
-
-      def self.fixture_name
-        entity_name.pluralize
+        def model_class
+          name.chomp('Test').constantize
+        end
       end
     end
   end

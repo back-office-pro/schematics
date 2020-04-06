@@ -8,20 +8,24 @@ module Schematics
     class << self
       def inherited(subclass)
         super
-        subclass.extend(FriendlyId)
-        subclass.include(ActiveStorageSupport::SupportForBase64)
-        subclass.entity.modelize(subclass)
+        subclass.class_eval do
+          extend(FriendlyId)
+          include(ActiveStorageSupport::SupportForBase64)
+          entity.modelize(subclass)
+        end
       end
-    end
 
-    private
+      def entity_name
+        name.underscore
+      end
 
-    def self.entity_name
-      name.underscore
-    end
+      def entity
+        SCHEMA.find_entity_by_type(entity_name)
+      end
 
-    def self.entity
-      SCHEMA.find_entity_by_type(entity_name)
+      def fixture_name
+        entity_name.pluralize
+      end
     end
   end
 end
