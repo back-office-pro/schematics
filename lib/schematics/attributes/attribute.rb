@@ -5,7 +5,7 @@ module Schematics
 
       attr_accessor :entity, :name
 
-      def initialize(entity, name, options = nil)
+      def initialize(entity, name, options)
         @entity = entity
         @name = name
         @options = options || {}
@@ -122,7 +122,7 @@ module Schematics
       end
 
       class << self
-        def create(entity, name:, type:, options: nil)
+        def create(entity, name:, type:, options: {})
           "Schematics::Attributes::#{type.underscore.camelize}".constantize.new(entity, name, options)
         end
       end

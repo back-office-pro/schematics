@@ -11,7 +11,7 @@ module Schematics
 
     def initialize(type, icon, descriptor, attributes, virtuals)
       @type = type
-      @icon = icon || :caret_square_right
+      @icon = icon
       @descriptor = descriptor
       @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
       @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
@@ -205,8 +205,8 @@ module Schematics
     end
 
     class << self
-      def create(type:, icon: nil, descriptor: nil, attributes: nil, virtuals: nil)
-        new(type, icon&.to_sym, descriptor, attributes || [], virtuals || [])
+      def create(type:, icon: 'caret_square_right', descriptor:, attributes: [], virtuals: [])
+        new(type, icon.to_sym, descriptor, attributes, virtuals)
       end
     end
   end

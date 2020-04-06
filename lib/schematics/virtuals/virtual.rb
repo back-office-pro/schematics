@@ -5,11 +5,11 @@ module Schematics
 
       attr_accessor :name
 
-      def initialize(entity, name, tokens, options = nil)
+      def initialize(entity, name, tokens, options)
         @entity = entity
         @name = name
         @tokens = tokens
-        @options = options || {}
+        @options = options
       end
 
       def function
@@ -76,7 +76,7 @@ module Schematics
       end
 
       class << self
-        def create(entity, name:, function:, options: nil)
+        def create(entity, name:, function:, options: {})
           tokens = Tokens::Tokenizer.tokenize(function, entity.type.pluralize)
           if tokens.any_is_a?(Tokens::Operator)
             Virtuals::Calculation.new(entity, name, tokens, options)
