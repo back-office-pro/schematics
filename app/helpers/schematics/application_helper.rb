@@ -3,12 +3,12 @@ module Schematics
     include Pagy::Frontend
     include FontAwesome5::Rails::IconHelper
 
-    def title
+    def title(resource: nil)
       case action_name.to_sym
       when :index           then "Liste des #{entity.type.pluralize}"
       when :new, :create    then "Ajouter un nouveau #{entity.type}"
-      when :edit, :update   then "Editer #{@resource.send(entity.descriptor.name)}"
-      when :show            then @resource.send(entity.descriptor.name)
+      when :edit, :update   then "Editer #{resource.send(entity.descriptor.name)}"
+      when :show            then resource.send(entity.descriptor.name)
       else
         nil
       end
