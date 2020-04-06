@@ -84,7 +84,8 @@ module Schematics
         entity.has_many_associations.each do |association|
           association.entity.has_many_associations.each do |has_many_association|
             if has_many_association.entity != association.entity # prevent self association
-              entity.has_many_through_associations << Associations::HasManyThrough.new(has_many_association.reference, association)
+              association = Associations::HasManyThrough.new(has_many_association.reference, association)
+              entity.has_many_through_associations << association
             end
           end
         end
@@ -96,7 +97,8 @@ module Schematics
         entity.references.each do |reference|
           find_entity_by_type(reference.association_type).references.each do |parent_reference|
             if parent_reference.entity != reference.entity # prevent self association
-              entity.has_one_through_associations << Associations::HasOneThrough.new(parent_reference, reference)
+              association = Associations::HasOneThrough.new(parent_reference, reference)
+              entity.has_one_through_associations << association
             end
           end
         end

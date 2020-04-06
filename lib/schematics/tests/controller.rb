@@ -65,38 +65,38 @@ module Schematics
 
             test "should get new" do
               login
-              get subclass.url_helper('new')
+              get subclass.url_helper(param: 'new')
               assert_response :success
             end
 
             test "should show API #{subclass.entity_name}" do
               login as: :json
-              get subclass.url_helper(@record.id), headers: authorization_header, as: :json
+              get subclass.url_helper(param: @record.id), headers: authorization_header, as: :json
               assert_response :success
             end
 
             test "should show #{subclass.entity_name}" do
               login
-              get subclass.url_helper(@record.id)
+              get subclass.url_helper(param: @record.id)
               assert_response :success
             end
 
             test "should throw API #{subclass.entity_name} not found" do
               login as: :json
-              get subclass.url_helper(0), headers: authorization_header, as: :json
+              get subclass.url_helper(param: 0), headers: authorization_header, as: :json
               assert_response :not_found
             end
 
             test "should throw #{subclass.entity_name} not found" do
               login
-              get subclass.url_helper(0)
+              get subclass.url_helper(param: 0)
               assert_response :not_found
             end
 
             test "should really destroy API #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count", -1) do
                 login as: :json
-                delete subclass.url_helper(@record.id),
+                delete subclass.url_helper(param: @record.id),
                        headers: authorization_header,
                        params: { really: true },
                        as: :json
@@ -107,7 +107,7 @@ module Schematics
             test "should really destroy #{subclass.entity_name}" do
               assert_difference("#{subclass.model_name}.count", -1) do
                 login
-                delete subclass.url_helper(@record.id), params: { really: true }
+                delete subclass.url_helper(param: @record.id), params: { really: true }
               end
               assert_redirected_to subclass.url_helper
             end
@@ -117,7 +117,7 @@ module Schematics
               assert @record.deleted?
               assert_difference("#{subclass.model_name}.count") do
                 login as: :json
-                delete subclass.url_helper(@record.id), headers: authorization_header, as: :json
+                delete subclass.url_helper(param: @record.id), headers: authorization_header, as: :json
               end
               assert_response :no_content
             end
@@ -127,7 +127,7 @@ module Schematics
               assert @record.deleted?
               assert_difference("#{subclass.model_name}.count") do
                 login
-                delete subclass.url_helper(@record.id)
+                delete subclass.url_helper(param: @record.id)
               end
               assert_redirected_to subclass.url_helper
             end
@@ -137,7 +137,7 @@ module Schematics
               refute @record.deleted?
               assert_difference("#{subclass.model_name}.count", -1) do
                 login as: :json
-                delete subclass.url_helper(@record.id), headers: authorization_header, as: :json
+                delete subclass.url_helper(param: @record.id), headers: authorization_header, as: :json
               end
               assert_response :no_content
             end
@@ -147,14 +147,14 @@ module Schematics
               refute @record.deleted?
               assert_difference("#{subclass.model_name}.count", -1) do
                 login
-                delete subclass.url_helper(@record.id)
+                delete subclass.url_helper(param: @record.id)
               end
               assert_redirected_to subclass.url_helper
             end
 
             test "should update API #{subclass.entity_name}" do
               login as: :json
-              patch subclass.url_helper(@record.id),
+              patch subclass.url_helper(param: @record.id),
                     params: { subclass.entity_name.to_sym => @json_params },
                     headers: authorization_header,
                     as: :json
@@ -163,9 +163,9 @@ module Schematics
 
             test "should update #{subclass.entity_name}" do
               login
-              patch subclass.url_helper(@record.id),
+              patch subclass.url_helper(param: @record.id),
                     params: { subclass.entity_name.to_sym => @params }
-              assert_redirected_to subclass.url_helper(@record.reload.slug)
+              assert_redirected_to subclass.url_helper(param: @record.reload.slug)
             end
 
             test "should create API #{subclass.entity_name}" do
@@ -184,7 +184,7 @@ module Schematics
                 login
                 post subclass.url_helper, params: { subclass.entity_name.to_sym => @params }
               end
-              assert_redirected_to subclass.url_helper(subclass.model_name.constantize.last.slug)
+              assert_redirected_to subclass.url_helper(param: subclass.model_name.constantize.last.slug)
             end
           end
         end
@@ -216,7 +216,7 @@ module Schematics
         entity_name.pluralize
       end
 
-      def self.url_helper(param = nil)
+      def self.url_helper(param: nil)
         [fixture_name, param].compact.join('/').prepend('/')
       end
     end

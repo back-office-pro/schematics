@@ -44,10 +44,14 @@ module Schematics
         validators[:aspect_ratio] = @options[:aspect_ratio] if @options.key?(:aspect_ratio)
         validators[:limit] = { min: @options[:min] } if @options.key?(:min)
         validators[:limit] = { max: @options[:max] } if @options.key?(:max)
-        validators[:limit] = { min: @options[:min], max: @options[:max] } if @options.key?(:min) && @options.key?(:max)
+        if @options.key?(:min) && @options.key?(:max)
+          validators[:limit] = { min: @options[:min], max: @options[:max] }
+        end
         validators[:dimension] = { width: @options[:width] } if @options.key?(:width)
         validators[:dimension] = { height: @options[:height] } if @options.key?(:height)
-        validators[:dimension] = { width: @options[:width], height: @options[:height] } if @options.key?(:width) && @options.key?(:height)
+        if @options.key?(:width) && @options.key?(:height)
+          validators[:dimension] = { width: @options[:width], height: @options[:height] }
+        end
         validators
       end
 

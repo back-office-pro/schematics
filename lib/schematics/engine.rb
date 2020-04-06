@@ -82,10 +82,13 @@ module Schematics
       require 'rails/generators/generated_attribute'
       require 'rails/generators/actions'
       require 'active_record/connection_adapters/abstract/schema_definitions'
-      Rails::Generators::GeneratedAttribute.singleton_class.prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
+      Rails::Generators::GeneratedAttribute.
+        singleton_class.
+        prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
       Rails::Generators::GeneratedAttribute.prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
       Rails::Generators::Actions.prepend(Schematics::Patches::Rails::Generators::Actions)
-      ActiveRecord::ConnectionAdapters::TableDefinition.prepend(Schematics::Patches::ActiveRecord::ConnectionAdapters::TableDefinition)
+      ActiveRecord::ConnectionAdapters::TableDefinition.
+        prepend(Schematics::Patches::ActiveRecord::ConnectionAdapters::TableDefinition)
     end
 
     initializer "schematics.rack_attack" do
@@ -105,11 +108,7 @@ module Schematics
       SwaggerUiEngine.configure do |config|
         config.swagger_url = "/api-docs.json"
       end
-      class Swagger::Docs::Config
-        def self.base_api_controller
-          Schematics::SchemaController
-        end
-      end
+      Swagger::Docs::Config.base_api_controller = Schematics::SchemaController
       Swagger::Docs::Config.register_apis({
         "1.0" => {
           api_extension_type: :json,
