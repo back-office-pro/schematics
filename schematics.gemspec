@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bootstrap", "~> 4.4.1"
   spec.add_dependency "bootswatch", "~> 4.3.1"
   spec.add_dependency "wkhtmltopdf-binary", "~> 0.12.5"
-  spec.add_dependency "wicked_pdf", "~> 1.4.0"
+  spec.add_dependency "wicked_pdf", "~> 2.0.2"
   spec.add_dependency "slim", "~> 4.0.1"
   spec.add_dependency "rails-i18n", "~> 6.0.0"
   spec.add_dependency "font_awesome5_rails", "~> 0.9.0"
