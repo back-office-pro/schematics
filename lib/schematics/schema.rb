@@ -2,6 +2,7 @@ module Schematics
   class Schema
     include Singleton
     attr_accessor :entities, :charts, :stats
+    delegate :valid?, :data, to: self
 
     def initialize
       @entities = data[:entities].map { |entity| Entity.create(entity) }
@@ -24,6 +25,32 @@ module Schematics
 
     def to_s
       @entities.sort_by(&:weight).reverse.map(&:to_s).join("\n")
+    end
+
+    class << self
+      delegate :validate, to: :schemer
+
+      def data
+        @data ||= data_json.merge(app_json) { |key, left, right| left + right }
+      end
+
+      def valid?
+        schemer.valid?(data)
+      end
+
+      private
+
+      def schemer
+        @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path("../schema.json", __dir__)))
+      end
+
+      def app_json
+        JSON.parse(File.read(File.expand_path("../app.json", __dir__)), symbolize_names: true)
+      end
+
+      def data_json
+        JSON.parse(File.read(File.expand_path("../../test/data.json", __dir__)), symbolize_names: true)
+      end
     end
 
     private
@@ -74,34 +101,6 @@ module Schematics
           end
         end
       end
-    end
-
-    def app_data_file_path
-      File.expand_path("../app.json", __dir__)
-    end
-
-    def app_data_file
-      File.read(app_data_file_path)
-    end
-
-    def app_json_data_file
-      JSON.parse(app_data_file, symbolize_names: true)
-    end
-
-    def data_file_path
-      "/Users/max/bitbucket/schematics/test/data.json"
-    end
-
-    def data_file
-      File.read(data_file_path)
-    end
-
-    def json_data_file
-      JSON.parse(data_file, symbolize_names: true)
-    end
-
-    def data
-      @data ||= json_data_file.merge(app_json_data_file) { |key, left, right| left + right }
     end
   end
 end
