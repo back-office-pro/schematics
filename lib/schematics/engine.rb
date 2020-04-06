@@ -51,6 +51,31 @@ module Schematics
       end
     end
 
+    # Swagger::Docs
+    config.before_eager_load do
+      SwaggerUiEngine.configure do |config|
+        config.swagger_url = "/api-docs.json"
+      end
+      Swagger::Docs::Config.base_api_controller = Schematics::SchemaController
+      Swagger::Docs::Config.register_apis({
+        "1.0" => {
+          api_extension_type: :json,
+          api_file_path: "public",
+          base_path: "http://localhost:3000",
+          clean_directory: true,
+          camelize_model_properties: true,
+          attributes: {
+            info: {
+              title: "Public API Documentation",
+              description: "Developper documentation to link your business application with this API.",
+              license: "Apache 2.0",
+              licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.html",
+            },
+          },
+        },
+      })
+    end
+
     initializer "schematics.olive_branch" do |app|
       app.middleware.use OliveBranch::Middleware,
                          inflection: "camel",
@@ -101,34 +126,6 @@ module Schematics
       end
       ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload|
         Rails.logger.info "Throttled IP: #{payload[:request].ip}"
-      end
-    end
-
-    initializer "schematics.swagger" do
-      ActiveSupport.on_load(:action_controller) do
-        SwaggerUiEngine.configure do |config|
-          config.swagger_url = "/api-docs.json"
-        end
-        Swagger::Docs::Config.define_singleton_method(:base_application) do
-          Schematics::SchemaController
-        end
-        Swagger::Docs::Config.register_apis({
-          "1.0" => {
-            api_extension_type: :json,
-            api_file_path: "public",
-            base_path: "http://localhost:3000",
-            clean_directory: true,
-            camelize_model_properties: true,
-            attributes: {
-              info: {
-                title: "Public API Documentation",
-                description: "Developper documentation to link your business application with this API.",
-                license: "Apache 2.0",
-                licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.html",
-              },
-            },
-          },
-        })
       end
     end
 
