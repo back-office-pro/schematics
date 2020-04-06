@@ -2,8 +2,13 @@ module Schematics
   module Attributes
     class Attribute
       include Renderable
-
       attr_accessor :entity, :name
+
+      class << self
+        def create(entity, name:, type:, options: {})
+          "Schematics::Attributes::#{type.underscore.camelize}".constantize.new(entity, name, options)
+        end
+      end
 
       def initialize(entity, name, options)
         @entity = entity
@@ -119,12 +124,6 @@ module Schematics
 
       def to_str
         ""
-      end
-
-      class << self
-        def create(entity, name:, type:, options: {})
-          "Schematics::Attributes::#{type.underscore.camelize}".constantize.new(entity, name, options)
-        end
       end
     end
   end

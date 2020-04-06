@@ -2,8 +2,18 @@ module Schematics
   module Virtuals
     class Virtual
       include Renderable
-
       attr_accessor :name
+
+      class << self
+        def create(entity, name:, function:, options: {})
+          tokens = Tokens::Tokenizer.tokenize(function, entity.type.pluralize)
+          if tokens.any_is_a?(Tokens::Operator)
+            Virtuals::Calculation.new(entity, name, tokens, options)
+          else
+            Virtuals::Concatenation.new(entity, name, tokens, options)
+          end
+        end
+      end
 
       def initialize(entity, name, tokens, options)
         @entity = entity
@@ -73,17 +83,6 @@ module Schematics
             end
           end
         RUBY
-      end
-
-      class << self
-        def create(entity, name:, function:, options: {})
-          tokens = Tokens::Tokenizer.tokenize(function, entity.type.pluralize)
-          if tokens.any_is_a?(Tokens::Operator)
-            Virtuals::Calculation.new(entity, name, tokens, options)
-          else
-            Virtuals::Concatenation.new(entity, name, tokens, options)
-          end
-        end
       end
     end
   end

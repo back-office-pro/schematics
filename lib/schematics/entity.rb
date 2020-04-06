@@ -9,6 +9,12 @@ module Schematics
                   :has_many_through_associations,
                   :has_one_through_associations
 
+    class << self
+      def create(type:, icon: :caret_square_right, descriptor:, attributes: [], virtuals: [])
+        new(type, icon.to_sym, descriptor, attributes, virtuals)
+      end
+    end
+
     def initialize(type, icon, descriptor, attributes, virtuals)
       @type = type
       @icon = icon
@@ -202,12 +208,6 @@ module Schematics
           #{api}
         end
       RUBY
-    end
-
-    class << self
-      def create(type:, icon: :caret_square_right, descriptor:, attributes: [], virtuals: [])
-        new(type, icon.to_sym, descriptor, attributes, virtuals)
-      end
     end
   end
 end
