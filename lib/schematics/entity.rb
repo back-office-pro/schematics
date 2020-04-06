@@ -205,7 +205,7 @@ module Schematics
     end
 
     class << self
-      def create(type:, icon: 'caret_square_right', descriptor:, attributes: [], virtuals: [])
+      def create(type:, icon: :caret_square_right, descriptor:, attributes: [], virtuals: [])
         new(type, icon.to_sym, descriptor, attributes, virtuals)
       end
     end
