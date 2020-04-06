@@ -2,7 +2,15 @@ module Schematics
   class Schema
     include Singleton
     attr_accessor :entities, :charts, :stats
-    delegate :validate, to: :schemer
+    delegate :schemer, to: self
+
+    class << self
+      delegate :validate, to: :schemer
+
+      def schemer
+        @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path("../schema.json", __dir__)))
+      end
+    end
 
     def initialize
       @entities = data[:entities].map { |entity| Entity.create(entity) }
@@ -32,10 +40,6 @@ module Schematics
     end
 
     private
-
-    def schemer
-      @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path("../schema.json", __dir__)))
-    end
 
     def data
       @data ||= data_json.merge(app_json) { |key, left, right| left + right }
