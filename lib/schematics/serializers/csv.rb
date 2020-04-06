@@ -1,7 +1,7 @@
 module Schematics
   module Serializers
     class CSV < Serializer
-      def serialize(records, separator = ',')
+      def serialize(records, separator: ',')
         super(records)
         ::CSV.generate(headers: true, col_sep: separator) do |file|
           file << fields.map(&:name).map(&:humanize)

@@ -47,9 +47,11 @@ module Schematics
                 elsif attribute.is_a?(Attributes::Attachment)
                   attach_file attribute.name.humanize, Rails.root.join('public', 'apple-touch-icon.png')
                 elsif attribute.is_a?(Attributes::BelongsTo)
-                  select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"), from: attribute.name.humanize
+                  select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
+                         from: attribute.name.humanize
                 else
-                  fill_in attribute.name.humanize, with: attribute.unique? ? SecureRandom.base58 : @record.send(attribute.name)
+                  fill_in attribute.name.humanize,
+                          with: attribute.unique? ? SecureRandom.base58 : @record.send(attribute.name)
                 end
               end
             end

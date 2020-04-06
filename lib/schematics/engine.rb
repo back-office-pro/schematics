@@ -143,7 +143,7 @@ module Schematics
                     filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.csv"
         end
         ActionController::Renderers.add(:xls) do |records, options|
-          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records, '/t'),
+          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records, separator: '/t'),
                     filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.xls"
         end
       end
