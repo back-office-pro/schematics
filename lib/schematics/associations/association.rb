@@ -3,7 +3,6 @@ module Schematics
     class Association
       include Renderable
       attr_accessor :reference
-
       delegate :entity, :required?, to: :@reference
       delegate :descriptor, to: :entity
 
