@@ -201,6 +201,38 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "order",
+            "descriptor": "id",
+            "attributes": [
+                {
+                    "name": "start_at",
+                    "type": "datetime",
+                    "options": {
+                        "required": true,
+                        "before": "ends_at"
+                    }
+                },
+                {
+                    "name": "ends_at",
+                    "type": "datetime",
+                    "options": {
+                        "required": true,
+                        "after": "start_at"
+                    }
+                },
+                {
+                    "name": "product",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
+                    }
+                }
+            ]
         }
     ]
 }
