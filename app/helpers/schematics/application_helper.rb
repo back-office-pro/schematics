@@ -2,8 +2,13 @@ module Schematics
   module ApplicationHelper
     include Pagy::Frontend
     include FontAwesome5::Rails::IconHelper
+    delegate :entity, :resource, to: :controller
 
-    def title(resource: nil)
+    def app_name
+      Rails.application.class.parent_name
+    end
+
+    def title
       case action_name.to_sym
       when :index           then "Liste des #{entity.type.pluralize}"
       when :new, :create    then "Ajouter un nouveau #{entity.type}"
@@ -12,10 +17,6 @@ module Schematics
       else
         nil
       end
-    end
-
-    def entity
-      controller.class.entity
     end
 
     def file_icon(file)

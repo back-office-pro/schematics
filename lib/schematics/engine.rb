@@ -136,15 +136,15 @@ module Schematics
     initializer "schematics.renderers" do
       ActiveSupport.on_load(:action_controller) do
         ActionController::Renderers.add(:schema) do |records, options|
-          render json: Schematics::Serializers::JSON.new(SCHEMA, self.class.entity).serialize(records)
+          render json: Schematics::Serializers::JSON.new(SCHEMA, entity).serialize(records)
         end
         ActionController::Renderers.add(:csv) do |records, options|
-          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records),
-                    filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.csv"
+          send_data Schematics::Serializers::CSV.new(SCHEMA, entity).serialize(records),
+                    filename: "#{entity.type.pluralize.dasherize}-#{I18n.l(Date.today)}.csv"
         end
         ActionController::Renderers.add(:xls) do |records, options|
-          send_data Schematics::Serializers::CSV.new(SCHEMA, self.class.entity).serialize(records, separator: '/t'),
-                    filename: "#{self.class.entity_name.pluralize.dasherize}-#{I18n.l(Date.today)}.xls"
+          send_data Schematics::Serializers::CSV.new(SCHEMA, entity).serialize(records, separator: '/t'),
+                    filename: "#{entity.type.pluralize.dasherize}-#{I18n.l(Date.today)}.xls"
         end
       end
     end

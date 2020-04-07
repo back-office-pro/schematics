@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="utf-8"
-    title Schematics
+    title #{app_name} - #{title}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -13,7 +13,7 @@ html
         .col.bg-gradient-primary.sidebar
           ul.nav.nav-light.flex-column.sidebar-sticky
             li.nav-item.mb-4
-              = link_to "My Company",
+              = link_to app_name,
                 schematics.root_path,
                 class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|

@@ -1,11 +1,11 @@
-- breadcrumb title(resource: @resource), @resource
+- breadcrumb title, @resource
 .card.shadow-sm
   .card-header
     ul.nav
       li.nav-item
         h5.m-0.text-primary.font-weight-bold.card-header-title
           = fa_icon :eye, class: "mr-2"
-          = title(resource: @resource)
+          = title
       li.nav-item.ml-auto
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-icon-split mr-2" do
           span.icon= fa_icon :edit
