@@ -9,6 +9,7 @@ module Schematics
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     delegate :model_class, to: :class
     delegate :entity, to: :model_class
+    attr_reader :resource
 
     class << self
       delegate :entity, to: :model_class
