@@ -7,17 +7,23 @@ module Schematics
     after_action { pagy_headers_merge(@pagy) if @pagy }
     has_scope :with_deleted, type: :boolean, only: :index
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    helper_method :model_class
+    delegate :model_class, to: :class
+    delegate :entity, to: :model_class
 
     class << self
+      delegate :entity, to: :model_class
       Swagger::Docs::Generator.set_real_methods
+
       def inherited(subclass)
         super
-        subclass.breadcrumb(
-          "Liste des #{subclass.entity_name.pluralize}",
-          "#{subclass.entity_name.pluralize}_path".to_sym
-        )
-        subclass.entity.controllerize(subclass)
+        subclass.class_eval do
+          breadcrumb "Liste des #{entity.type.pluralize}", "#{entity.type.pluralize}_path".to_sym
+          entity.controllerize(subclass)
+        end
+      end
+
+      def model_class
+        controller_name.classify.constantize
       end
     end
 
@@ -31,8 +37,8 @@ module Schematics
       respond_to do |format|
         format.html
         format.json { render schema: @resources }
-        format.csv  { render csv:   @resources }
-        format.xls  { render xls:   @resources }
+        format.csv  { render csv:    @resources }
+        format.xls  { render xls:    @resources }
       end
     end
 
@@ -41,7 +47,7 @@ module Schematics
         format.html
         format.json { render schema: @resource }
         format.pdf do
-          render pdf: "#{self.class.entity_name.dasherize}-#{@resource.id}.pdf",
+          render pdf: "#{entity.type.dasherize}-#{@resource.id}.pdf",
                  template: 'schematics/application/show',
                  layout: 'layouts/schematics/pdf.html'
         end
@@ -59,7 +65,7 @@ module Schematics
       @resource = model_class.new(resource_params)
       if @resource.save
         respond_to do |format|
-          format.html { redirect_to @resource, notice: "#{self.class.entity_name.humanize} was successfully created" }
+          format.html { redirect_to @resource, notice: "#{entity.type.humanize} was successfully created" }
           format.json { head :created }
         end
       else
@@ -73,7 +79,7 @@ module Schematics
     def update
       if @resource.update(resource_params)
         respond_to do |format|
-          format.html { redirect_to @resource, notice: "#{self.class.entity_name.humanize} was successfully updated" }
+          format.html { redirect_to @resource, notice: "#{entity.type.humanize} was successfully updated" }
           format.json
         end
       else
@@ -87,13 +93,13 @@ module Schematics
     def destroy
       if params[:really]
         @resource.really_destroy!
-        notice = "#{self.class.entity_name.humanize} was successfully destroyed"
+        notice = "#{entity.type.humanize} was successfully destroyed"
       elsif @resource.deleted?
         @resource.restore(recursive: true)
-        notice = "#{self.class.entity_name.humanize} was successfully restored"
+        notice = "#{entity.type.humanize} was successfully restored"
       else
         @resource.destroy
-        notice = "#{self.class.entity_name.humanize} was successfully archived"
+        notice = "#{entity.type.humanize} was successfully archived"
       end
       respond_to do |format|
         format.html { redirect_back fallback_location: url_for(action: :index), notice: notice }
@@ -110,39 +116,17 @@ module Schematics
 
     protected
 
-    def self.model_name
-      controller_name.classify
-    end
-
-    def self.entity_name
-      model_name.underscore
-    end
-
-    def self.entity
-      SCHEMA.find_entity_by_type(entity_name)
-    end
-
-    def model_class
-      self.class.model_name.constantize
-    end
-
     def set_resource
       @resource = (action_name.to_sym === :destroy ? model_class.with_deleted : model_class).find(params[:id])
     end
 
     def resource_params
-      root = self.class.entity_name.to_sym
-      entity = self.class.entity
       keys = request.format.json? ? entity.permitted_json_params : entity.permitted_params
-      params.require(root).send(:permit, *keys)
+      params.require(entity.type.to_sym).send(:permit, *keys)
     end
 
     def eager_loading
-      (
-        self.class.entity.references +
-        self.class.entity.has_one_through_associations +
-        self.class.entity.has_one_associations
-      ).map(&:name).map(&:to_sym)
+      (entity.references + entity.has_one_through_associations + entity.has_one_associations).map(&:name).map(&:to_sym)
     end
   end
 end

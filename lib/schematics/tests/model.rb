@@ -1,18 +1,21 @@
 module Schematics
   module Tests
     class Model < ::ActiveSupport::TestCase
+      delegate :model_class, to: :class
+      delegate :entity, to: :model_class
+
       class << self
-        delegate :entity, :fixture_name, :entity_name, to: :model_class
+        delegate :entity, to: :model_class
 
         def inherited(subclass)
           super
           subclass.class_eval do
             setup do
-              @record = send(subclass.fixture_name, :one)
-              @other_record = send(subclass.fixture_name, :two)
+              @record = send(entity.type.pluralize, :one)
+              @other_record = send(entity.type.pluralize, :two)
             end
 
-            test "valid #{entity_name}" do
+            test "valid #{entity.type}" do
               assert @record.valid?
             end
 
@@ -102,8 +105,6 @@ module Schematics
             end
           end
         end
-
-        protected
 
         def model_class
           name.chomp('Test').constantize
