@@ -11,6 +11,16 @@ module Schematics
         value && I18n.l(value, format: "%A %d %B %Y")
       end
 
+      def validators
+        validators = super
+        validators[:date] = {}
+        [:equal_to, :before, :after, :before_or_equal_to, :after_or_equal_to].each do |key|
+          validators[:date][key] = @options[key].to_sym if @options.key?(key)
+        end
+        validators[:date] = true if validators[:date].empty?
+        validators
+      end
+
       def icon
         :calendar_alt
       end
