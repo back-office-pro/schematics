@@ -52,7 +52,7 @@ module Schematics
     end
 
     def api_params
-      @attributes.select(&:permitted_param).map(&:api_param)
+      @attributes.select(&:permitted_json_param).map(&:api_param)
     end
 
     def permitted_params
@@ -65,26 +65,22 @@ module Schematics
 
     def filter_scopes
       (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        map(&:filter_scope).
-        compact
+        select(&:visible?).map(&:filter_scope)
     end
 
     def sort_scopes
       (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        map(&:sort_scope).
-        compact
+        select(&:visible?).map(&:sort_scope)
     end
 
     def has_filter_scopes
       (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        map(&:has_filter_scope).
-        compact
+        select(&:visible?).map(&:has_filter_scope)
     end
 
     def has_sort_scopes
       (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        map(&:has_sort_scope).
-        compact
+        select(&:visible?).map(&:has_sort_scope)
     end
 
     def validates
@@ -192,7 +188,7 @@ module Schematics
           #{validates.join("\s\s")}
           #{filter_scopes.join("\s\s")}
           #{sort_scopes.join("\s\s")}
-          #{attributes.map(&:to_str).compact.join("\s\s")}
+          #{attributes.map(&:to_str).join("\s\s")}
           #{associations.map(&:to_str).join("\s\s")}
           #{virtuals.map(&:to_str).join("\s\s")}
         end
