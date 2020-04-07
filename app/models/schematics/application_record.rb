@@ -15,16 +15,8 @@ module Schematics
         end
       end
 
-      def entity_name
-        name.underscore
-      end
-
       def entity
-        SCHEMA.find_entity_by_type(entity_name)
-      end
-
-      def fixture_name
-        entity_name.pluralize
+        SCHEMA.find_entity_by_type(name.underscore)
       end
     end
   end
