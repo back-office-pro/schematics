@@ -2,6 +2,16 @@ module Schematics
   class FilesController < ApplicationController
     before_action :set_file, only: [:update, :destroy]
 
+    class << self
+      def model_properties(model)
+        model.property(:filename, :string, :required, "Filename")
+      end
+
+      def api_params(api)
+        api.param(:form, "file[filename]", :string, :required, "Filename")
+      end
+    end
+
     def create
       @directory = Directory.find(params[:directory_id])
       @directory.files.attach(params[:files])
@@ -17,14 +27,6 @@ module Schematics
     end
 
     private
-
-    def self.model_properties(model)
-      model.property :filename, :string, :required, "Filename"
-    end
-
-    def self.api_params(api)
-      api.param :form, "file[filename]", :string, :required, "Filename"
-    end
 
     def set_file
       @file = ActiveStorage::Attachment.where(record_type: "Directory", record_id: params[:id])
