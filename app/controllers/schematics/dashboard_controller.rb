@@ -13,7 +13,7 @@ module Schematics
         end
         if request.format.json?
           @results[entity.type]&.map! do |result|
-            Schematics::Serializers::JSON.new(SCHEMA, entity).serialize(result)
+            Schematics::Serializers::JSON.new(entity).serialize(result)
           end
         end
       end

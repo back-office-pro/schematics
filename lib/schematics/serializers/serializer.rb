@@ -1,13 +1,7 @@
 module Schematics
   module Serializers
     class Serializer
-      delegate :virtuals,
-               :references,
-               :has_one_associations,
-               :has_one_through_associations,
-               :has_many_associations,
-               :has_many_through_associations,
-               to: :@entity
+      delegate_missing_to :@entity
 
       def initialize(schema, entity)
         @schema = schema
