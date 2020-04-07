@@ -7,8 +7,8 @@ module Schematics
       case action_name.to_sym
       when :index           then "Liste des #{entity.type.pluralize}"
       when :new, :create    then "Ajouter un nouveau #{entity.type}"
-      when :edit, :update   then "Editer #{resource.send(entity.descriptor.name)}"
-      when :show            then resource.send(entity.descriptor.name)
+      when :edit, :update   then "Editer #{resource&.send(entity.descriptor.name)}"
+      when :show            then resource&.send(entity.descriptor.name)
       else
         super
       end
