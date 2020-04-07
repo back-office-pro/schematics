@@ -2,7 +2,7 @@ module Schematics
   class Schema
     include Singleton
     attr_accessor :entities, :charts, :stats
-    delegate :schemer, to: self
+    delegate :schemer, to: :class
 
     class << self
       delegate :validate, to: :schemer
