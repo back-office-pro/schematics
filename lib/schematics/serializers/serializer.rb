@@ -3,8 +3,7 @@ module Schematics
     class Serializer
       delegate_missing_to :@entity
 
-      def initialize(schema, entity)
-        @schema = schema
+      def initialize(entity)
         @entity = entity
       end
 
