@@ -9,7 +9,7 @@
       = f.input attribute.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
       = f.input attribute.name.to_sym,
-        collection: model_class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym),
+        collection: resource.class.send(attribute.name.pluralize.to_sym).keys.map(&:to_sym),
         include_blank: false
     - when Schematics::Attributes::Attachment
       = f.input attribute.name.to_sym,
