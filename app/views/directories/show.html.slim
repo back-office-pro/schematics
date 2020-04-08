@@ -2,7 +2,7 @@
   .card-header
     ul.nav
       li.nav-item
-        h5.m-0.text-primary.font-weight-bold.card-header-title
+        h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
           = fa_icon :folder_open, class: "mr-2"
           = "#{@resource.parent&.name} > #{@resource.name}"
       li.nav-item.ml-auto

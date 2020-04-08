@@ -7,7 +7,7 @@
             .col
               small.text-uppercase.text-primary.font-weight-bold
                 = stat.title
-              h5.mb-0.text-dark.font-weight-bold
+              h5.mb-0.text-dark.text-truncate.font-weight-bold
                 = stat
             .col-auto.text-light
               = fa_icon stat.icon, size: "2x"
@@ -15,7 +15,7 @@
     .col-xl-6.col-md-12.mb-4
       .card.shadow-sm
         .card-header
-          h5.m-0.text-primary.font-weight-bold
+          h5.m-0.text-primary.text-truncate.font-weight-bold
             = fa_icon :chart_line, class: "mr-2"
             = chart.title.titleize
         .card-body
