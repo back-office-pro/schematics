@@ -2,9 +2,9 @@
   = fa_icon :door_closed, size: "7x"
 .card.shadow-sm
   .card-header
-    h5.m-0.text-primary.font-weight-bold
+    h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :key, class: "mr-2"
-      | Mot de passe oublié
+      = t('.title')
   .card-body
     = form_tag password_resets_path, method: :post do
       .form-group
@@ -12,7 +12,7 @@
         = email_field_tag :email, params[:email], required: true, class: "form-control bg-light border-0"
       = button_tag class: "btn btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
-        span.text Valider
+        span.text= t('schematics.application.form.buttons.confirm')
       = link_to login_path, class: "btn btn-danger btn-icon-split" do
         span.icon= fa_icon :times
-        span.text Annuler
+        span.text= t('schematics.application.form.buttons.cancel')

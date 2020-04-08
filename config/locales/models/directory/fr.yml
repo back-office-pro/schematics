@@ -1,0 +1,9 @@
+fr:
+  activerecord:
+    models:
+      directory: Dossier
+    attributes:
+      directory:
+        name: Nom
+        parent: Parent
+        files: Fichiers

@@ -7,7 +7,7 @@ module Schematics
     end
 
     def title
-      "Home"
+      I18n.t(:title, scope: [:schematics, controller_name.to_sym, action_name.to_sym])
     end
   end
 end

@@ -17,11 +17,12 @@ html
                 schematics.root_path,
                 class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|
+              - model_class = entity.type.classify.constantize
               li.nav-item.text-center.mw-100.mb-2
                 = active_link_to main_app.polymorphic_path(entity.type.pluralize.to_sym),
                   class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                   = fa_icon entity.icon, size: "2x"
-                  .mt-2.d-none.d-md-block= entity.type.pluralize.titleize
+                  .mt-2.d-none.d-md-block= model_class.model_name.human.pluralize
               - if is_active_link? main_app.polymorphic_path(entity.type.pluralize.to_sym)
                 - entity.attributes.select_is_a?(Schematics::Attributes::Enum).each do |attribute|
                   li.nav-item.text-center.mw-100.mb-2.pl-3.pr-3.d-none.d-md-block
@@ -32,7 +33,7 @@ html
                             class: "nav-link p-0 m-0 text-secondary text-truncate" do
                             = fa_icon :caret_right, class: "mr-2"
                             = value.humanize
-                          span.badge.badge-secondary.text-primary.badge-pill= entity.type.camelize.constantize.send(value).count
+                          span.badge.badge-secondary.text-primary.badge-pill= model_class.send(value).count
               li.nav-item.mb-2
             li.nav-item.text-center.text-center.mw-100.mb-4
               = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
@@ -85,11 +86,11 @@ html
                 .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="accountDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-2"
-                    = t('.edit_profile')
+                    = t('.dropdown.edit_profile')
                   .dropdown-divider
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                     = fa_icon :sign_out_alt, class: "mr-2"
-                    = t('.logout')
+                    = t('.dropdown.logout')
           = render 'schematics/application/breadcrumbs'
           .container-fluid.mt-4.mb-4
             = render 'schematics/application/notice' if notice.present?

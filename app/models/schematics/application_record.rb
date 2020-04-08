@@ -18,6 +18,11 @@ module Schematics
       def entity
         SCHEMA.find_entity_by_type(name.underscore)
       end
+
+      def human_enum_name(enum_name, enum_value)
+        I18n.t(enum_value.to_sym,
+               scope: [:activerecord, :attributes, model_name.i18n_key.to_sym, enum_name.to_s.pluralize.to_sym])
+      end
     end
   end
 end

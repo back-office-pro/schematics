@@ -1,0 +1,8 @@
+fr:  
+  schematics:
+    application:
+      index:
+        buttons:
+          add: Ajouter un %{model_name}
+          download_as_csv: Télécharger au format CSV
+          reset_filters: Réinitialiser les filtres

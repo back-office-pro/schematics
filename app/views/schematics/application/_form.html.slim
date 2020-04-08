@@ -29,8 +29,7 @@
     = f.association reference.name.to_sym, label_method: reference.inverse_descriptor.name.to_sym, prompt: "Please select"
   = f.button :button, class: "btn-primary btn-icon-split mr-2" do
     span.icon= fa_icon :check
-    span.text Valider
+    span.text= t('.buttons.confirm')
   = link_to url_for(action: :index), class: "btn btn-danger btn-icon-split" do
     span.icon= fa_icon :times
-    span.text Annuler
-  
+    span.text= t('.buttons.cancel')

@@ -1,37 +1,4 @@
 fr:
-  forms:
-    attachment:
-      browse: Explorer
-      validators:
-        content_type: "Formats fichiers acceptés :"
-        size: "Taille fichier :"
-        less_than: moins de
-        mb: Mo
-        dimension: Dimension
-        width: largeur
-        height: hauteur
-  schematics:
-    sessions:
-      update:
-        profile_updated: Votre profil a été mis à jour avec succès
-        wrong_password: Mauvais mot de passe
-      destroy:
-        logged_out: Déconnecté !
-      create:
-        logged_in: Connecté !
-        invalid_credentials: L'e-mail ou le mot de passe est invalide
-    application:
-      unauthorized_access: Accès non autorisé
-      index:
-        download_as_csv: Télécharger au format CSV
-        reset_filters: Réinitialiser les filtres
-  layouts:
-    schematics:
-      application:
-        search:
-          placeholder: Rechercher...
-          not_found: Aucun résultat
-          pending: Recherche en cours...
   errors:
     messages:
       content_type_invalid: "a un type de fichier non valide"
@@ -53,4 +20,3 @@ fr:
       aspect_ratio_not_landscape: "doit être une image de type paysage"
       aspect_ratio_is_not: "doit avoir un ratio d'aspect de %{aspect_ratio}"
       aspect_ratio_unknown: "a un ratio d'aspect inconnu"
-      

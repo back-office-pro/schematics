@@ -4,7 +4,7 @@ module Schematics
 
     config.app_generators do |g|
       g.orm :active_record, primary_key_type: :uuid
-      g.templates.unshift(File.expand_path('../../templates', __FILE__))
+      g.templates.unshift(File.expand_path('../templates', __dir__))
       g.assets          false
       g.template_engine false
       g.helper          false
@@ -20,6 +20,7 @@ module Schematics
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
+    config.i18n.load_path += Dir.glob(File.expand_path('../../config/locales/**/*.yml', __dir__))
 
     # Bullet
     config.after_initialize do

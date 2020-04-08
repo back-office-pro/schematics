@@ -1,16 +1,14 @@
 module Schematics
   module SchemaHelper
     include Pagy::Frontend
-    delegate :entity, :resource, to: :controller
+    delegate :entity, :resource, :model_class, to: :controller
 
     def title
       case action_name.to_sym
-      when :index           then "Liste des #{entity.type.pluralize}"
-      when :new, :create    then "Ajouter un nouveau #{entity.type}"
+      when :index           then "Liste des #{model_class.model_name.human.pluralize.downcase}"
+      when :new, :create    then "Ajouter un nouveau #{model_class.model_name.human.downcase}"
       when :edit, :update   then "Editer #{resource&.send(entity.descriptor.name)}"
       when :show            then resource&.send(entity.descriptor.name)
-      else
-        super
       end
     end
 
@@ -32,9 +30,10 @@ module Schematics
     end
 
     def sort_link_to(field)
-      scope = "sort_by_#{field.name}".to_sym
+      scope = :"sort_by_#{field.name}"
       sort_direction = request.parameters[scope]&.to_sym === :asc ? :desc : :asc
       icon = sort_direction === :asc ? :sort_down : :sort_up
+      params = request.parameters.merge(scope => sort_direction)
       content_tag(:div, nil, class: "row no-gutters") do
         content_tag(:div, nil, class: "col") do
           content = []
@@ -43,7 +42,7 @@ module Schematics
           else
             content << fa_icon(icon, class: "mr-2 text-primary")
           end
-          content << link_to(field.name.humanize, request.parameters.merge(scope => sort_direction))
+          content << link_to(model_class.human_attribute_name(field.name), params)
           content.join.html_safe
         end
       end
@@ -52,7 +51,7 @@ module Schematics
     def humanize_attachment_validators(validators)
       content = []
       validators.except(:presence, :attached).each do |key, value|
-        content << I18n.t(".forms.attachment.validators.#{key}") +
+        content << I18n.t(key.to_sym, scope: [:schematics, :application, :form, :attachment, :validators]) +
                    " " +
                    case value
                    when Array
@@ -60,7 +59,7 @@ module Schematics
                    when Hash
                      humanize_attachment_validators(value)
                    when Numeric
-                     "#{value / (1024.0 * 1024.0)} #{I18n.t(".forms.attachment.validators.mb")}"
+                     "#{value / (1024.0 * 1024.0)} #{I18n.t('schematics.application.form.attachment.validators.mb')}"
                    else
                      value.humanize
                    end

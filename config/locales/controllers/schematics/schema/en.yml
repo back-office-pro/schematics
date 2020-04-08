@@ -1,0 +1,11 @@
+en:  
+  schematics:
+    schema:
+      create:
+        created: "%{model_name} was successfully created"
+      update:
+        updated: "%{model_name} was successfully updated"
+      destroy:
+        destroyed: "%{model_name} was successfully destroyed"
+        restored: "%{model_name} was successfully restored"
+        archived: "%{model_name} was successfully archived"

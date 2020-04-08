@@ -3,19 +3,19 @@
   .card-header
     ul.nav
       li.nav-item
-        h5.m-0.text-primary.font-weight-bold.card-header-title
+        h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
           = fa_icon :eye, class: "mr-2"
           = title
       li.nav-item.ml-auto
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-icon-split mr-2" do
           span.icon= fa_icon :edit
-          span.text.d-none.d-lg-inline Editer
+          span.text.d-none.d-lg-inline= t('.buttons.edit')
         = link_to url_for(action: :show, id: @resource.id, format: :pdf), class: "btn btn-info btn-icon-split mr-2" do
           span.icon= fa_icon :file_pdf
-          span.text.d-none.d-lg-inline Télécharger au format PDF
+          span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
         = link_to @resource, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon-split" do
           span.icon= fa_icon :trash
-          span.text.d-none.d-lg-inline Supprimer définitivement
+          span.text.d-none.d-lg-inline= t('.buttons.destroy')
   .card-body
     = render template: 'schematics/application/show.pdf'
 - (entity.has_many_associations + entity.has_many_through_associations).each do |association|
@@ -23,7 +23,7 @@
   - unless resources.empty?
     .card.shadow-sm.mt-4
       a.card-header.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
-        h5.m-0.text-primary.font-weight-bold.card-header-title
+        h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
           = fa_icon association.icon, class: "mr-2"
           = association.name.humanize
           |  (#{resources.size})

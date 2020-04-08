@@ -1,0 +1,8 @@
+fr:
+  schematics:
+    application:
+      show:
+        buttons:
+          edit: Editer
+          download_pdf: Télécharger au format PDF
+          destroy: Supprimer définitivement

@@ -13,9 +13,9 @@ module Schematics
       if user
         user.regenerate_password_reset_token
         UserMailer.password_reset(user).deliver_now
-        redirect_to login_path, notice: "Email sent with password reset instructions."
+        redirect_to login_path, notice: t('.email_sent')
       else
-        flash.now[:alert] = "E-mail inconnu."
+        flash.now[:alert] = t('.unknown_email')
         render :new
       end
     end
@@ -25,18 +25,18 @@ module Schematics
 
     def update
       if @user.updated_at < 2.hours.ago
-        redirect_to password_lost_path, alert: "Password reset has expired."
+        redirect_to password_lost_path, alert: t('.expired')
       elsif @user.update(user_params)
         @user.password_reset_token = nil
         @user.save!
-        redirect_to login_path, notice: "Password has been reset!"
+        redirect_to login_path, notice: t('.password_reset')
       else
         render :edit
       end
     end
 
     def not_found
-      redirect_to password_lost_path, alert: "User not found."
+      redirect_to password_lost_path, alert: t('.user_not_found')
     end
 
     private

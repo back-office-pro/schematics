@@ -2,16 +2,16 @@
   = fa_icon :door_closed, size: "7x"
 .card.shadow-sm
   .card-header
-    h5.m-0.text-primary.font-weight-bold
+    h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :unlock, class: "mr-2"
-      | Mot de passe oublié
+      = t('.title')
   .card-body
     = simple_form_for @user, url: password_reset_path(params[:id]), defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :password, required: true, input_html: { required: true }
       = f.input :password_confirmation, required: true, input_html: { required: true }  
       = f.button :button, class: "btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
-        span.text Valider
+        span.text= t('schematics.application.form.buttons.confirm')
       = link_to login_path, class: "btn btn-danger btn-icon-split" do
         span.icon= fa_icon :times
-        span.text Annuler
+        span.text= t('schematics.application.form.buttons.cancel')

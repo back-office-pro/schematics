@@ -2,9 +2,9 @@
   = fa_icon :door_open, size: "7x"
 .card.shadow-sm
   .card-header
-    h5.m-0.text-primary.font-weight-bold
+    h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :sign_in_alt, class: "mr-2"
-      | Se connecter
+      = t('.title')
   .card-body
     = form_tag sessions_path do |form|
       .form-group
@@ -19,5 +19,5 @@
           = label_tag :remember_me, "Se souvenir de moi", class: "custom-control-label"
       = button_tag class: "btn btn-primary btn-icon-split" do
         span.icon= fa_icon :check
-        span.text Connexion
+        span.text= t('schematics.application.form.buttons.confirm')
       = link_to 'Mot de passe oublié ?', password_lost_path, class: "btn btn-link"

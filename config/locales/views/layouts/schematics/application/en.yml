@@ -1,0 +1,11 @@
+en:
+  layouts:
+    schematics:
+      application:
+        dropdown:
+          logout: Logout
+          edit_profile: Edit my profile
+        search:
+          placeholder: Search...
+          not_found: No result
+          pending: Loading...

@@ -5,7 +5,7 @@
         - if actions
           th.text-nowrap.text-center
             = fa_icon :archive, class: "mr-2 text-dark"
-            | Archives
+            = t('.archives')
         - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
           select(&:visible?). \
           reject_is_a?(Schematics::Attributes::Attachment). \
@@ -15,21 +15,21 @@
               = sort_link_to(field) 
             - else
               = fa_icon field.icon, class: "mr-2 text-dark"
-              = field.name.titleize
+              = model_class.human_attribute_name(field.name)
         - table_entity.references.each do |reference|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(reference) 
             - else
               = fa_icon reference.icon, class: "mr-2 text-dark"
-              = reference.name.titleize
+              = model_class.human_attribute_name(reference.name)
         - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(association) 
             - else
               = fa_icon association.icon, class: "mr-2 text-dark"
-              = association.name.titleize
+              = model_class.human_attribute_name(association.name)
       - if actions
         tr
           th.text-nowrap.align-middle.px-0

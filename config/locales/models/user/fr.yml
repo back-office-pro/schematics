@@ -1,0 +1,14 @@
+fr:
+  activerecord:
+    models:
+      user: Utilisateur
+    attributes:
+      user:
+        email: E-mail
+        first_name: Prénom
+        full_name: Nom complet
+        last_name: Nom
+        locale: Langue
+        password: Mot de passe
+        password_confirmation: Confirmation mot de passe
+        current_password: Mot de passe actuel

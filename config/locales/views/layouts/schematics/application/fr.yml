@@ -1,0 +1,11 @@
+fr:
+  layouts:
+    schematics:
+      application:
+        dropdown:
+          logout: Déconnexion
+          edit_profile: Editer mon profil
+        search:
+          placeholder: Rechercher...
+          not_found: Aucun résultat
+          pending: Recherche en cours...

@@ -2,22 +2,25 @@
 - if @results.empty?
   .card.shadow-sm.mb-4
     .card-header
-      h5.m-0.text-primary.font-weight-bold
+      h5.m-0.text-primary.text-truncate.font-weight-bold
         = fa_icon :search, class: "mr-2"
         | Recherche "#{params[:query]}"
     .card-body.text-center
       = render 'schematics/application/empty'
 - else
   - @results.each do |type, resources|
+    - table_entity = Schematics::SCHEMA.find_entity_by_type(type)
+    - model_class = table_entity.type.classify.constantize
     .card.shadow-sm.mb-4
       a.card-header href="#collapse-#{type}" data-toggle="collapse" role="button"
-        h5.m-0.text-primary.font-weight-bold
+        h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon :search, class: "mr-2"
-          = type.pluralize(resources.size).titleize
+          = model_class.model_name.human(count: resources.size)
           |  (#{resources.size})
       .collapse.show id="collapse-#{type}"
         .card-body
           = render 'schematics/application/table',
             resources: resources,
-            table_entity: Schematics::SCHEMA.find_entity_by_type(type),
+            table_entity: table_entity,
+            model_class: model_class,
             actions: false

@@ -26,7 +26,7 @@ module Schematics
         respond_to do |format|
           format.json { head :unauthorized }
           format.any do
-            redirect_to login_path, alert: t('schematics.application.unauthorized_access')
+            redirect_to login_path, alert: t('schematics.application.authorize.unauthorized_access')
           end
         end
       end

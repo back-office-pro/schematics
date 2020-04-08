@@ -1,0 +1,5 @@
+en:  
+  schematics:
+    application:
+      authorize:
+        unauthorized_access: Unauthorized access

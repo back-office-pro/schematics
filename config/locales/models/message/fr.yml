@@ -1,0 +1,10 @@
+fr:
+  activerecord:
+    models:
+      message: Message
+    attributes:
+      message:
+        subject: Sujet
+        content: Contenu
+        author: Auteur
+        recipient: Destinataire

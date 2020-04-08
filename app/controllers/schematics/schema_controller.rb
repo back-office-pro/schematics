@@ -18,7 +18,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          breadcrumb "Liste des #{entity.type.pluralize}", "#{entity.type.pluralize}_path".to_sym
+          breadcrumb "Liste des #{model_class.model_name.human.downcase.pluralize}", :"#{entity.type.pluralize}_path"
           entity.controllerize(subclass)
         end
       end
@@ -66,7 +66,10 @@ module Schematics
       @resource = model_class.new(resource_params)
       if @resource.save
         respond_to do |format|
-          format.html { redirect_to @resource, notice: "#{entity.type.humanize} was successfully created" }
+          format.html do
+            redirect_to @resource,
+                        notice: t('schematics.schema.create.created', model_name: model_class.model_name.human)
+          end
           format.json { head :created }
         end
       else
@@ -80,7 +83,10 @@ module Schematics
     def update
       if @resource.update(resource_params)
         respond_to do |format|
-          format.html { redirect_to @resource, notice: "#{entity.type.humanize} was successfully updated" }
+          format.html do
+            redirect_to @resource,
+                        notice: t('schematics.schema.update.updated', model_name: model_class.model_name.human)
+          end
           format.json
         end
       else
@@ -94,13 +100,13 @@ module Schematics
     def destroy
       if params[:really]
         @resource.really_destroy!
-        notice = "#{entity.type.humanize} was successfully destroyed"
+        notice = t('schematics.schema.destroy.destroyed', model_name: model_class.model_name.human)
       elsif @resource.deleted?
         @resource.restore(recursive: true)
-        notice = "#{entity.type.humanize} was successfully restored"
+        notice = t('schematics.schema.destroy.restored', model_name: model_class.model_name.human)
       else
         @resource.destroy
-        notice = "#{entity.type.humanize} was successfully archived"
+        notice = t('schematics.schema.destroy.archived', model_name: model_class.model_name.human)
       end
       respond_to do |format|
         format.html { redirect_back fallback_location: url_for(action: :index), notice: notice }

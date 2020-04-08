@@ -1,0 +1,15 @@
+en:
+  schematics:
+    password_resets:
+      new:
+        title: Password reset
+      edit:
+        title: Password reset
+      create:
+        email_sent: Email sent with password reset instructions
+        unknown_email: Unknown email
+      update:
+        expired: Password reset has expired
+        password_reset: Password has been reset!
+      not_found:
+        user_not_found: User not found
