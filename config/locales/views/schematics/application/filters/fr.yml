@@ -1,0 +1,7 @@
+fr:
+  schematics:
+    application:
+      filters:
+        from: De
+        to: A
+        filter_by: Filtrer par %{attribute_name}

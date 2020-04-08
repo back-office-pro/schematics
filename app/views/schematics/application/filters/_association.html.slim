@@ -1,7 +1,7 @@
 .input-group.ml-1.mr-1.mb-2
   = render 'schematics/application/filters/eraser', name: association.name
-  = select_tag "by_#{association.name}".to_sym,
-    options_from_collection_for_select(association.name.camelize.constantize.all, "id", association.descriptor.name, params["by_#{association.name}".to_sym]), 
-    prompt: "Filtrer par #{association.name.humanize}", 
+  = select_tag :"by_#{association.name}",
+    options_from_collection_for_select(association.name.camelize.constantize.all, "id", association.descriptor.name, params[:"by_#{association.name}"]),
+    prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(association.name).downcase),
     onchange: "$(this.form).submit()", 
-    class: "form-control bg-light #{'border-0' unless params["by_#{association.name}".to_sym].present?}"
+    class: "form-control bg-light #{'border-0' unless params[:"by_#{association.name}"].present?}"
