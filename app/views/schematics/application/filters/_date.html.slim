@@ -1,11 +1,11 @@
 .input-group.ml-1.mr-1.mb-2
   = render 'schematics/application/filters/eraser', name: field.name, range: :from
-  = date_field_tag "by_#{field.name}[from]".to_sym,
-    params.dig("by_#{field.name}".to_sym, :from),
-    class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :from).present?}"
+  = date_field_tag :"by_#{field.name}[from]",
+    params.dig(:"by_#{field.name}", :from),
+    class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
   .mr-2
-  = date_field_tag "by_#{field.name}[to]".to_sym,
-    params.dig("by_#{field.name}".to_sym, :to),
-    class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :to).present?}"
+  = date_field_tag :"by_#{field.name}[to]",
+    params.dig(:"by_#{field.name}", :to),
+    class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
   = render 'schematics/application/filters/eraser', name: field.name, range: :to
   

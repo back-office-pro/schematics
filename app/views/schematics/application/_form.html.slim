@@ -22,7 +22,7 @@
         = humanize_attachment_validators(attribute.validators)
     - when Schematics::Attributes::Digest
       = f.input attribute.name.to_sym
-      = f.input "#{attribute.name}_confirmation".to_sym
+      = f.input :"#{attribute.name}_confirmation"
     - else
       = f.input attribute.name.to_sym
   - entity.references.each do |reference|

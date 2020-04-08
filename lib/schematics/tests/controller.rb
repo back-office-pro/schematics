@@ -31,7 +31,7 @@ module Schematics
             end
 
             entity.attributes.select(&:visible?).each do |attribute|
-              scope = "by_#{attribute.name}".to_sym
+              scope = :"by_#{attribute.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
                 assert scopes[scope][:only] === [:index]
@@ -41,7 +41,7 @@ module Schematics
             end
 
             entity.virtuals.each do |virtual|
-              scope = "by_#{virtual.name}".to_sym
+              scope = :"by_#{virtual.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
                 assert scopes[scope][:only] === [:index]
@@ -50,7 +50,7 @@ module Schematics
             end
 
             (entity.has_one_associations + entity.has_one_through_associations).each do |association|
-              scope = "by_#{association.name}".to_sym
+              scope = :"by_#{association.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
                 assert scopes[scope][:only] === [:index]

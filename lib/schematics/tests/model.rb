@@ -88,7 +88,7 @@ module Schematics
 
             (entity.attributes + entity.virtuals + entity.has_one_associations + entity.has_one_through_associations).
               select(&:visible?).each do |scopable|
-              scope = "by_#{scopable.name}".to_sym
+              scope = :"by_#{scopable.name}"
               test "should have scope #{scope}" do
                 assert @record.class.respond_to?(scope)
               end

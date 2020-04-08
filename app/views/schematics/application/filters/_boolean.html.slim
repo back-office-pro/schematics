@@ -1,7 +1,7 @@
 .custom-control.custom-switch.mx-auto.w-0.mb-2
-  = check_box_tag "by_#{field.name}".to_sym,
+  = check_box_tag :"by_#{field.name}",
     "true",
-    params["by_#{field.name}".to_sym] === "true",
+    params[:"by_#{field.name}"] === "true",
     onchange: "$(this.form).submit()",
     class: "custom-control-input"
-  = label_tag "by_#{field.name}".to_sym, "", class: "custom-control-label"
+  = label_tag :"by_#{field.name}", "", class: "custom-control-label"

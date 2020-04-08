@@ -1,15 +1,15 @@
 .input-group.ml-1.mr-1.mb-2
   = render 'schematics/application/filters/unit', field: field, range: :from
   = render 'schematics/application/filters/eraser', name: field.name, range: :from
-  = number_field_tag "by_#{field.name}[from]".to_sym,
-    params.dig("by_#{field.name}".to_sym, :from),
+  = number_field_tag :"by_#{field.name}[from]",
+    params.dig(:"by_#{field.name}", :from),
     placeholder: "De",
-    class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :from).present?}"
+    class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
   .mr-2
-  = number_field_tag "by_#{field.name}[to]".to_sym,
-    params.dig("by_#{field.name}".to_sym, :to),
+  = number_field_tag :"by_#{field.name}[to]",
+    params.dig(:"by_#{field.name}", :to),
     placeholder: "A",
-    class: "form-control bg-light #{'border-0' unless params.dig("by_#{field.name}".to_sym, :to).present?}"
+    class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
   = render 'schematics/application/filters/eraser', name: field.name, range: :to
   = render 'schematics/application/filters/unit', field: field, range: :to
   
