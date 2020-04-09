@@ -51,6 +51,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "humanize", "~> 2.4.0"
   spec.add_dependency "active_storage_base64", "~> 1.1.0"
   spec.add_dependency "json_schemer", "~> 0.2.11"
+  spec.add_dependency "route_translator", "~> 7.1.2"
   spec.add_dependency "sprockets", "~> 3.7.2"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
