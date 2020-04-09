@@ -105,6 +105,7 @@ module Schematics
 
   module Tests
     autoload :Controller, 'schematics/tests/controller'
+    autoload :Dummy,      'schematics/tests/dummy'
     autoload :Model,      'schematics/tests/model'
     autoload :System,     'schematics/tests/system'
   end

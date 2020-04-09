@@ -1,6 +1,4 @@
 class FixturesGenerator < Rails::Generators::Base
-  source_root File.expand_path('files', __dir__)
-
   def generate_action_text_rich_texts
     Schematics::SCHEMA.entities.map(&:attributes).flatten.
       select_is_a?(Schematics::Attributes::RichText).
@@ -42,28 +40,16 @@ class FixturesGenerator < Rails::Generators::Base
       select_is_a?(Schematics::Attributes::Attachment).
       each_with_index do |attribute, index|
       index = (index + 1).humanize
-      content_type = attribute.validators[:content_type]&.first
-      filename = ["dummy", content_type || "png"].join(".")
       append_to_file "test/fixtures/active_storage/blobs.yml" do
         <<~YAML
         #{index}:
           key: #{ActiveStorage::Blob.generate_unique_secure_token}
-          filename: #{filename}
-          content_type: #{Mime[content_type] || "image/png"}
-          byte_size: <%= File.size('#{fixture_files_path}/#{filename}') %>
-          checksum: <%= Digest::MD5.file('#{fixture_files_path}/#{filename}').base64digest %>
+          filename: dummy.#{attribute.extension}
+          content_type: #{Mime[attribute.extension]}
+          byte_size: 6381
+          checksum: XqaZqieypVz5akNq/VVJIg==
         YAML
       end
     end
-  end
-
-  def copy_fixture_files
-    directory ".", fixture_files_path
-  end
-
-  private
-
-  def fixture_files_path
-    "test/fixtures/files"
   end
 end

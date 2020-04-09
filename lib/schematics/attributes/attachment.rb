@@ -1,6 +1,8 @@
 module Schematics
   module Attributes
     class Attachment < Attribute
+      delegate :default, :json_default, to: :dummy
+
       def api_param_type
         "file"
       end
@@ -36,6 +38,10 @@ module Schematics
         RUBY
       end
 
+      def extension
+        @options[:content_type]&.first
+      end
+
       def validators
         validators = super
         validators[:attached] = true if required?
@@ -55,23 +61,14 @@ module Schematics
         validators
       end
 
-      def default
-        extension = @options[:content_type]&.first || "png"
-        path = File.join(ActionDispatch::IntegrationTest.fixture_path, "files/dummy.#{extension}")
-        @default ||= Rack::Test::UploadedFile.new(path, Mime[extension])
-      end
-
-      def json_default
-        file = Array.unwrap(default)
-        {
-          filename: file.original_filename,
-          content_type: file.content_type,
-          data: "data:#{file.content_type};base64,#{Base64.encode64(File.read(file.path))}",
-        }.stringify_keys
-      end
-
       def icon
         :paperclip
+      end
+
+      protected
+
+      def dummy
+        @dummy ||= Tests::Dummy.new(extension: extension)
       end
     end
   end
