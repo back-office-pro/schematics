@@ -9,9 +9,9 @@ module Schematics
 
     def current_user
       if cookies[:auth_token]
-        @current_user ||= User.find_by_auth_token!(cookies[:auth_token])
+        @current_user ||= User.find_by_auth_token(cookies[:auth_token])
       elsif auth_token
-        @current_user ||= User.find_by_auth_token!(auth_token[:auth_token])
+        @current_user ||= User.find_by_auth_token(auth_token[:auth_token])
       end
     end
 
