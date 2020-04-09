@@ -9,11 +9,11 @@ module Schematics
             end
 
             log :route, routing_code
-            sentinel = "\nend"
+            sentinel = "\n\s\send"
 
             in_root do
               inject_into_file "config/routes.rb",
-                               "\n#{optimize_indentation(routing_code, 2).gsub("\n", "")}",
+                               "\n#{optimize_indentation(routing_code, 4).gsub("\n", "")}",
                                before: sentinel,
                                verbose: false,
                                force: false

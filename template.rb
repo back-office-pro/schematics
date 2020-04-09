@@ -8,6 +8,7 @@ gem "schematics", path: "/Users/max/bitbucket/schematics"
 # copy_file "#{Dir.pwd}/../test/data.json", "data.json"
 
 # Rails commands
+rails_command "generate localized_routes"
 rails_command "generate simple_form:install --bootstrap"
 rails_command "schematics:install:migrations"
 rails_command "schematics:generate"
