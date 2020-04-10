@@ -4,7 +4,7 @@ class FixturesGenerator < Rails::Generators::Base
       select_is_a?(Schematics::Attributes::RichText).
       each_with_index do |attribute, index|
       index = (index + 1).humanize
-      append_file "test/fixtures/action_text/rich_texts.yml" do
+      append_file(rich_texts_file_path) do
         <<~YAML
         #{index}:
           record: one (#{attribute.entity.type.camelize})
@@ -15,14 +15,17 @@ class FixturesGenerator < Rails::Generators::Base
     end
   end
 
+  def create_active_storage_fixtures_directory
+    empty_directory(active_storage_path)
+  end
+
   def generate_active_storage_attachments
-    empty_directory "test/fixtures/active_storage"
-    create_file "test/fixtures/active_storage/attachments.yml"
+    create_file(attachments_file_path)
     Schematics::SCHEMA.entities.map(&:attributes).flatten.
       select_is_a?(Schematics::Attributes::Attachment).
       each_with_index do |attribute, index|
       index = (index + 1).humanize
-      append_to_file "test/fixtures/active_storage/attachments.yml" do
+      append_to_file(attachments_file_path) do
         <<~YAML
         #{index}:
           record: one (#{attribute.entity.type.camelize})
@@ -34,13 +37,12 @@ class FixturesGenerator < Rails::Generators::Base
   end
 
   def generate_active_storage_blobs
-    empty_directory "test/fixtures/active_storage"
-    create_file "test/fixtures/active_storage/blobs.yml"
+    create_file(blobs_file_path)
     Schematics::SCHEMA.entities.map(&:attributes).flatten.
       select_is_a?(Schematics::Attributes::Attachment).
       each_with_index do |attribute, index|
       index = (index + 1).humanize
-      append_to_file "test/fixtures/active_storage/blobs.yml" do
+      append_to_file(blobs_file_path) do
         <<~YAML
         #{index}:
           key: #{ActiveStorage::Blob.generate_unique_secure_token}
@@ -51,5 +53,27 @@ class FixturesGenerator < Rails::Generators::Base
         YAML
       end
     end
+  end
+
+  private
+
+  def fixtures_path
+    File.join("test", "fixtures")
+  end
+
+  def active_storage_path
+    File.join(fixtures_path, "active_storage")
+  end
+
+  def rich_texts_file_path
+    File.join(fixtures_path, "action_text", "rich_texts.yml")
+  end
+
+  def blobs_file_path
+    File.join(active_storage_path, "blobs.yml")
+  end
+
+  def attachments_file_path
+    File.join(active_storage_path, "attachments.yml")
   end
 end
