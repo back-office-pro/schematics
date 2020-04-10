@@ -100,16 +100,21 @@ module Schematics
     def destroy
       if params[:really]
         @resource.really_destroy!
-        notice = t('schematics.schema.destroy.destroyed', model_name: model_class.model_name.human)
+        action = :destroyed
       elsif @resource.deleted?
         @resource.restore(recursive: true)
-        notice = t('schematics.schema.destroy.restored', model_name: model_class.model_name.human)
+        action = :restored
       else
         @resource.destroy
-        notice = t('schematics.schema.destroy.archived', model_name: model_class.model_name.human)
+        action = :archived
       end
       respond_to do |format|
-        format.html { redirect_back fallback_location: url_for(action: :index), notice: notice }
+        format.html do
+          redirect_to polymorphic_path(model_class),
+                      notice: t(action,
+                                model_name: model_class.model_name.human,
+                                scope: [:schematics, :schema, :destroy])
+        end
         format.json
       end
     end
