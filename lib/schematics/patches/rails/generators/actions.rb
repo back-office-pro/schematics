@@ -4,6 +4,10 @@ module Schematics
       module Generators
         module Actions
           def route(routing_code, namespace: nil)
+            routing_code = routing_code.extends_with_comma <<~RUBY
+              path_names: { new: :new, edit: :edit }
+            RUBY
+
             routing_code = Array(namespace).reverse.reduce(routing_code) do |code, ns|
               "namespace :#{ns} do\n#{indent(code, 2)}\nend"
             end
