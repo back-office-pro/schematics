@@ -30,6 +30,6 @@
   = f.button :button, class: "btn-primary btn-icon-split mr-2" do
     span.icon= fa_icon :check
     span.text= t('.buttons.confirm')
-  = link_to url_for(action: :index), class: "btn btn-danger btn-icon-split" do
+  = link_to polymorphic_path(model_class), class: "btn btn-danger btn-icon-split" do
     span.icon= fa_icon :times
     span.text= t('.buttons.cancel')

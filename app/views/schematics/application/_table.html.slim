@@ -63,7 +63,7 @@
               = render 'empty'
         - else
           - resources.each do |resource|
-            tr onclick="window.location = '#{main_app.url_for(resource)}'"
+            tr onclick="window.location = '#{main_app.polymorphic_path(resource)}'"
               - if actions
                 td.text-nowrap.text-right
                   .btn-group

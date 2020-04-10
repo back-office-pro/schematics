@@ -10,7 +10,7 @@
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-icon-split mr-2" do
           span.icon= fa_icon :edit
           span.text.d-none.d-lg-inline= t('.buttons.edit')
-        = link_to url_for(action: :show, id: @resource.id, format: :pdf), class: "btn btn-info btn-icon-split mr-2" do
+        = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-info btn-icon-split mr-2" do
           span.icon= fa_icon :file_pdf
           span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
         = link_to @resource, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon-split" do

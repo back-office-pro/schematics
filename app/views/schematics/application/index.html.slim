@@ -13,14 +13,14 @@
             prompt: "#{model_class.model_name.human.pluralize} par page",
             onchange: "$(this.form).submit()",
             class: "form-control bg-light border-0 d-none d-md-inline mr-2"
-          = link_to url_for(action: :index, format: :csv), class: "btn btn-success btn-icon-split mr-2" do
+          = link_to polymorphic_path(model_class, format: :csv), class: "btn btn-success btn-icon-split mr-2" do
             span.icon= fa_icon :file_csv
             span.text.d-none.d-lg-inline= t('.buttons.download_as_csv')
-          = link_to url_for(action: :new), class: "btn btn-primary btn-icon-split" do
+          = link_to new_polymorphic_path(model_class), class: "btn btn-primary btn-icon-split" do
             span.icon= fa_icon :plus
             span.text.d-none.d-lg-inline= t('.buttons.add', model_name: model_class.model_name.human.downcase)
           - unless params.except(:controller, :action, :page, :per_page).empty?
-            = link_to url_for(action: :index), class: "btn btn-danger btn-icon-split ml-2" do
+            = link_to polymorphic_path(model_class), class: "btn btn-danger btn-icon-split ml-2" do
               span.icon= fa_icon :eraser
               span.text.d-none.d-lg-inline= t('.buttons.reset_filters')
     .card-body
