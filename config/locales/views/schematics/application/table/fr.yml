@@ -1,0 +1,8 @@
+fr:
+  schematics:
+    application:
+      table:
+        archives: Archives
+        restore: Restaurer
+        edit: Editer
+        archive: Archiver
