@@ -2,7 +2,7 @@ module Schematics
   class ApplicationController < ::ApplicationController
     protect_from_forgery unless: -> { request.format.json? }
     before_action :authorize
-    around_action :switch_locale
+    before_action :set_locale
     helper_method :current_user
 
     private
@@ -32,15 +32,10 @@ module Schematics
       end
     end
 
-    def switch_locale(&action)
-      locale = current_user&.locale&.first(2)&.downcase ||
-        extract_locale_from_accept_language_header ||
+    def set_locale
+      I18n.locale = current_user&.locale&.first(2)&.downcase ||
+        request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first ||
         I18n.default_locale
-      I18n.with_locale(locale, &action)
-    end
-
-    def extract_locale_from_accept_language_header
-      request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first
     end
   end
 end
