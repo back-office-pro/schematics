@@ -1,5 +1,5 @@
 en:
   schematics:
     application:
-      notice:
+      alert:
         title: Warning
