@@ -2,6 +2,8 @@ en:
   schematics:
     application:
       index:
+        dropdowns:
+          per_page: "%{model_name} per page"
         buttons:
           add: Add a new %{model_name}
           download_as_csv: Download as CSV
