@@ -1,11 +1,23 @@
 en:  
   schematics:
     schema:
+      index:
+        title: List of %{model_name}
+      new:
+        title: Add a new %{model_name}
       create:
+        title: "Add a new %{model_name}: new try"
         created: "%{model_name} was successfully created"
+      edit:
+        title: Edit %{model_name}
+      show:
+        title: "%{model_name}"
       update:
+        title: "Edit %{model_name}: new try"
         updated: "%{model_name} was successfully updated"
       destroy:
         destroyed: "%{model_name} was successfully destroyed"
         restored: "%{model_name} was successfully restored"
         archived: "%{model_name} was successfully archived"
+      not_found:
+        title: Resource not found

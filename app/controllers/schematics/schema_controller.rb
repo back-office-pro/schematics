@@ -18,7 +18,6 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          breadcrumb "Liste des #{model_class.model_name.human.downcase.pluralize}", :"#{entity.type.pluralize}_path"
           entity.controllerize(subclass)
         end
       end

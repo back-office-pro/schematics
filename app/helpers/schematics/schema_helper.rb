@@ -4,11 +4,15 @@ module Schematics
     delegate :entity, :resource, :model_class, to: :controller
 
     def title
-      case action_name.to_sym
-      when :index           then "Liste des #{model_class.model_name.human.pluralize.downcase}"
-      when :new, :create    then "Ajouter un nouveau #{model_class.model_name.human.downcase}"
-      when :edit, :update   then "Editer #{resource&.send(entity.descriptor.name)}"
-      when :show            then resource&.send(entity.descriptor.name)
+      model_name = case action_name.to_sym
+                   when :index then model_class.model_name.human.pluralize.downcase
+                   when :new, :create then model_class.model_name.human.downcase
+                   when :edit, :update, :show then resource&.send(entity.descriptor.name)
+                   end
+      if model_name.nil?
+        I18n.t('schematics.schema.not_found.title')
+      else
+        I18n.t(:title, model_name: model_name, scope: [:schematics, :schema, action_name.to_sym])
       end
     end
 
