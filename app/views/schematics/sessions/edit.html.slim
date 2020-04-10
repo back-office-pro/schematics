@@ -2,7 +2,7 @@
   .card-header
     h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :user, class: "mr-2"
-      = t('.title')
+      = title
   .card-body
     = simple_form_for current_user, url: sessions_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :email

@@ -4,7 +4,7 @@
   .card-header
     h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :unlock, class: "mr-2"
-      = t('.title')
+      = title
   .card-body
     = simple_form_for @user, url: password_reset_path(params[:id]), defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :password, required: true, input_html: { required: true }

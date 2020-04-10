@@ -4,7 +4,7 @@
   .card-header
     h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :key, class: "mr-2"
-      = t('.title')
+      = title
   .card-body
     = form_tag password_resets_path, method: :post do
       .form-group
