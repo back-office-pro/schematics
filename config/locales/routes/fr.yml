@@ -6,8 +6,6 @@ fr:
     profile: profil
     logout: deconnexion
     password_lost: mot_de_passe_perdu
-    sessions: sessions
-    password_resets: reinitialisations_mot_de_passe
     files: fichiers
     users: utilisateurs
     messages: messages
