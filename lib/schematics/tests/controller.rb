@@ -26,17 +26,17 @@ module Schematics
 
             test "should have scope with_deleted" do
               assert scopes.include?(:with_deleted)
-              assert scopes[:with_deleted][:only] === [:index]
-              assert scopes[:with_deleted][:type] === :boolean
+              assert scopes[:with_deleted][:only] == [:index]
+              assert scopes[:with_deleted][:type] == :boolean
             end
 
             entity.attributes.select(&:visible?).each do |attribute|
               scope = :"by_#{attribute.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
-                assert scopes[scope][:only] === [:index]
-                assert scopes[scope][:using] === [:from, :to] if attribute.is_a?(Attributes::Date)
-                assert scopes[scope][:type] === :boolean if attribute.is_a?(Attributes::Boolean)
+                assert scopes[scope][:only] == [:index]
+                assert scopes[scope][:using] == [:from, :to] if attribute.is_a?(Attributes::Date)
+                assert scopes[scope][:type] == :boolean if attribute.is_a?(Attributes::Boolean)
               end
             end
 
@@ -44,8 +44,8 @@ module Schematics
               scope = :"by_#{virtual.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
-                assert scopes[scope][:only] === [:index]
-                assert scopes[scope][:using] === [:from, :to] if virtual.is_a?(Virtuals::Calculation)
+                assert scopes[scope][:only] == [:index]
+                assert scopes[scope][:using] == [:from, :to] if virtual.is_a?(Virtuals::Calculation)
               end
             end
 
@@ -53,7 +53,7 @@ module Schematics
               scope = :"by_#{association.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)
-                assert scopes[scope][:only] === [:index]
+                assert scopes[scope][:only] == [:index]
               end
             end
 

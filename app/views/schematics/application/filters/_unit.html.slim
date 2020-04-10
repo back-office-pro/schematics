@@ -1,4 +1,4 @@
 - if field.unit.present? && !params.dig("by_#{field.name}", range).present?
-  div class="input-group-#{range === :to ? 'append' : 'prepend'}"
+  div class="input-group-#{range == :to ? 'append' : 'prepend'}"
     .input-group-text.border-0.bg-light.form-control
       = field.unit

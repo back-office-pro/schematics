@@ -28,7 +28,7 @@ module Schematics
     end
 
     def find_field_by_name(name)
-      (@attributes + @virtuals).find { |field| field.name === name }
+      (@attributes + @virtuals).find { |field| field.name == name }
     end
 
     def descriptor

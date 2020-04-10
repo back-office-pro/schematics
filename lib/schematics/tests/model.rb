@@ -45,44 +45,44 @@ module Schematics
             entity.references.each do |reference|
               test "should belongs_to #{reference.name}" do
                 reflection = @record.class.reflect_on_association(reference.name.to_sym)
-                assert reflection.macro === :belongs_to
-                assert reflection.class_name === reference.model_property_type
-                assert reflection.options[:optional] === true unless reference.required?
+                assert reflection.macro == :belongs_to
+                assert reflection.class_name == reference.model_property_type
+                assert reflection.options[:optional] == true unless reference.required?
               end
             end
 
             entity.has_many_associations.each do |association|
               test "should have many #{association.name}" do
                 reflection = @record.class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro === :has_many
-                assert reflection.class_name === association.class_name
-                assert reflection.options[:dependent] === association.required? ? :destroy : :nullify
+                assert reflection.macro == :has_many
+                assert reflection.class_name == association.class_name
+                assert reflection.options[:dependent] == association.required? ? :destroy : :nullify
               end
             end
 
             entity.has_one_associations.each do |association|
               test "should have one #{association.name}" do
                 reflection = @record.class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro === :has_one
-                assert reflection.class_name === association.class_name
+                assert reflection.macro == :has_one
+                assert reflection.class_name == association.class_name
               end
             end
 
             entity.has_many_through_associations.each do |association|
               test "should have many #{association.name} through #{association.through.name}" do
                 reflection = @record.class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro === :has_many
-                assert reflection.class_name === association.class_name
-                assert reflection.options[:through] === association.through.name.to_sym
+                assert reflection.macro == :has_many
+                assert reflection.class_name == association.class_name
+                assert reflection.options[:through] == association.through.name.to_sym
               end
             end
 
             entity.has_one_through_associations.each do |association|
               test "should have one #{association.name} through #{association.through.name}" do
                 reflection = @record.class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro === :has_one
-                assert reflection.class_name === association.class_name
-                assert reflection.options[:through] === association.through.name.to_sym
+                assert reflection.macro == :has_one
+                assert reflection.class_name == association.class_name
+                assert reflection.options[:through] == association.through.name.to_sym
               end
             end
 

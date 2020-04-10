@@ -53,11 +53,11 @@ module Schematics
       end
 
       def inverse_of_has_one?
-        inverse_association[:type] === 'has_one'
+        inverse_association[:type] == 'has_one'
       end
 
       def inverse_of_has_many?
-        inverse_association[:type] === 'has_many'
+        inverse_association[:type] == 'has_many'
       end
 
       def create_inverse_association

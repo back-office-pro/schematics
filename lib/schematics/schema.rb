@@ -24,7 +24,7 @@ module Schematics
     end
 
     def find_entity_by_type(type)
-      @entities.find { |entity| entity.type === type }
+      @entities.find { |entity| entity.type == type }
     end
 
     def generate
