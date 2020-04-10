@@ -77,6 +77,12 @@ module Schematics
       })
     end
 
+    initializer "schematics.route_translator" do
+      RouteTranslator.config do |config|
+        config.hide_locale = true
+      end
+    end
+
     initializer "schematics.olive_branch" do |app|
       app.middleware.use OliveBranch::Middleware,
                          inflection: "camel",
