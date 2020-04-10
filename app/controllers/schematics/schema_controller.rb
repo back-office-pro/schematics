@@ -137,7 +137,8 @@ module Schematics
     end
 
     def eager_loading
-      (entity.references + entity.has_one_through_associations + entity.has_one_associations).map(&:name).map(&:to_sym)
+      (entity.references + entity.has_one_through_associations + entity.has_one_associations).
+        map(&:name).map(&:to_sym)
     end
   end
 end

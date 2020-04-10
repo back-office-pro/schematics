@@ -95,7 +95,9 @@ module Schematics
 
             test "should throw API #{entity.type} not found" do
               login as: :json
-              get polymorphic_path(model_class).concat("/0"), headers: authorization_header, as: :json
+              get polymorphic_path(model_class).concat("/0"),
+                  headers: authorization_header,
+                  as: :json
               assert_response :not_found
             end
 
