@@ -63,14 +63,10 @@
               = render 'empty'
         - else
           - resources.each do |resource|
-            tr onclick="window.location = '#{main_app.polymorphic_path(resource)}'"
+            tr onclick=("window.location = '#{main_app.polymorphic_path(resource)}'" unless resource.deleted?)
               - if actions
-                td.text-nowrap.text-right
+                td.text-nowrap.text-left
                   .btn-group
-                    = link_to main_app.edit_polymorphic_path(resource),
-                      class: "btn btn-primary btn-sm",
-                      data: { toggle: "tooltip", placement: "top", title: "Editer" } do
-                      = fa_icon :edit
                     - if resource.deleted?
                       = link_to fa_icon(:trash_restore),
                         main_app.polymorphic_path(resource),
@@ -78,6 +74,10 @@
                         class: "btn btn-danger btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: "Restaurer" }
                     - else
+                      = link_to main_app.edit_polymorphic_path(resource),
+                        class: "btn btn-primary btn-sm",
+                        data: { toggle: "tooltip", placement: "top", title: "Editer" } do
+                        = fa_icon :edit
                       = link_to fa_icon(:archive),
                         main_app.polymorphic_path(resource),
                         method: :delete,
