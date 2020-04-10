@@ -32,7 +32,7 @@ PATH
       rails (~> 6.0.2.2)
       rails-i18n (~> 6.0.0)
       route_translator (~> 7.1.2)
-      simple_form (~> 5.0.1)
+      simple_form (~> 5.0.2)
       slim (~> 4.0.1)
       sprockets (~> 3.7.2)
       swagger-docs (~> 0.2.8)
