@@ -7,8 +7,8 @@
       = title
   .card-body
     = simple_form_for @user, url: password_reset_path(params[:id]), defaults: { input_html: { class: "bg-light border-0" } } do |f|
-      = f.input :password, required: true, input_html: { required: true }
-      = f.input :password_confirmation, required: true, input_html: { required: true }  
+      = f.input :password, required: true
+      = f.input :password_confirmation, required: true
       = f.button :button, class: "btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
         span.text= t('schematics.application.form.buttons.confirm')
