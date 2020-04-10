@@ -59,50 +59,56 @@ module Schematics
 
             test "should get API index" do
               login as: :json
-              get url_helper, headers: authorization_header, as: :json
+              get polymorphic_path(model_class), headers: authorization_header, as: :json
               assert_response :success
             end
 
             test "should get index" do
               login
-              get url_helper
+              get polymorphic_path(model_class)
               assert_response :success
             end
 
             test "should get new" do
               login
-              get url_helper(param: 'new')
+              get new_polymorphic_path(model_class)
+              assert_response :success
+            end
+
+            test "should get edit" do
+              login
+              get edit_polymorphic_path(@record)
               assert_response :success
             end
 
             test "should show API #{entity.type}" do
               login as: :json
-              get url_helper(param: @record.id), headers: authorization_header, as: :json
+              get polymorphic_path(@record), headers: authorization_header, as: :json
               assert_response :success
             end
 
             test "should show #{entity.type}" do
               login
-              get url_helper(param: @record.id)
+              get polymorphic_path(@record)
               assert_response :success
             end
 
             test "should throw API #{entity.type} not found" do
               login as: :json
-              get url_helper(param: 0), headers: authorization_header, as: :json
+              get polymorphic_path(model_class).concat("/0"), headers: authorization_header, as: :json
               assert_response :not_found
             end
 
             test "should throw #{entity.type} not found" do
               login
-              get url_helper(param: 0)
+              get polymorphic_path(model_class).concat("/0")
               assert_response :not_found
             end
 
             test "should really destroy API #{entity.type}" do
               assert_difference("#{model_class.name}.count", -1) do
                 login as: :json
-                delete url_helper(param: @record.id),
+                delete polymorphic_path(@record),
                        headers: authorization_header,
                        params: { really: true },
                        as: :json
@@ -113,9 +119,9 @@ module Schematics
             test "should really destroy #{entity.type}" do
               assert_difference("#{model_class.name}.count", -1) do
                 login
-                delete url_helper(param: @record.id), params: { really: true }
+                delete polymorphic_path(@record), params: { really: true }
               end
-              assert_redirected_to url_helper
+              assert_redirected_to polymorphic_path(model_class)
             end
 
             test "should unarchive API #{entity.type}" do
@@ -123,7 +129,7 @@ module Schematics
               assert @record.deleted?
               assert_difference("#{model_class.name}.count") do
                 login as: :json
-                delete url_helper(param: @record.id), headers: authorization_header, as: :json
+                delete polymorphic_path(@record), headers: authorization_header, as: :json
               end
               assert_response :no_content
             end
@@ -133,9 +139,9 @@ module Schematics
               assert @record.deleted?
               assert_difference("#{model_class.name}.count") do
                 login
-                delete url_helper(param: @record.id)
+                delete polymorphic_path(@record)
               end
-              assert_redirected_to url_helper
+              assert_redirected_to polymorphic_path(model_class)
             end
 
             test "should archive API #{entity.type}" do
@@ -143,7 +149,7 @@ module Schematics
               refute @record.deleted?
               assert_difference("#{model_class.name}.count", -1) do
                 login as: :json
-                delete url_helper(param: @record.id), headers: authorization_header, as: :json
+                delete polymorphic_path(@record), headers: authorization_header, as: :json
               end
               assert_response :no_content
             end
@@ -153,14 +159,14 @@ module Schematics
               refute @record.deleted?
               assert_difference("#{model_class.name}.count", -1) do
                 login
-                delete url_helper(param: @record.id)
+                delete polymorphic_path(@record)
               end
-              assert_redirected_to url_helper
+              assert_redirected_to polymorphic_path(model_class)
             end
 
             test "should update API #{entity.type}" do
               login as: :json
-              patch url_helper(param: @record.id),
+              patch polymorphic_path(@record),
                     params: { entity.type.to_sym => @json_params },
                     headers: authorization_header,
                     as: :json
@@ -169,15 +175,15 @@ module Schematics
 
             test "should update #{entity.type}" do
               login
-              patch url_helper(param: @record.id),
+              patch polymorphic_path(@record),
                     params: { entity.type.to_sym => @params }
-              assert_redirected_to url_helper(param: @record.reload.slug)
+              assert_redirected_to polymorphic_path(@record.reload)
             end
 
             test "should create API #{entity.type}" do
               assert_difference("#{model_class.name}.count") do
                 login as: :json
-                post url_helper,
+                post polymorphic_path(model_class),
                      params: { entity.type.to_sym => @json_params },
                      headers: authorization_header,
                      as: :json
@@ -188,9 +194,9 @@ module Schematics
             test "should create #{entity.type}" do
               assert_difference("#{model_class.name}.count") do
                 login
-                post url_helper, params: { entity.type.to_sym => @params }
+                post polymorphic_path(model_class), params: { entity.type.to_sym => @params }
               end
-              assert_redirected_to url_helper(param: model_class.last.slug)
+              assert_redirected_to polymorphic_path(model_class.last)
             end
           end
         end
@@ -208,10 +214,6 @@ module Schematics
 
       def authorization_header
         { Authorization: JSON.parse(@response.body)['authToken'] }
-      end
-
-      def url_helper(param: nil)
-        [entity.type.pluralize, param].compact.join('/').prepend('/')
       end
     end
   end
