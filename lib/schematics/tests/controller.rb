@@ -209,7 +209,7 @@ module Schematics
       protected
 
       def login(as: nil)
-        post '/sessions', params: { email: users(:two).email, password: "secret" }, as: as
+        post '/sessions', params: { user: { email: users(:two).email, password: "secret" } }, as: as
       end
 
       def authorization_header
