@@ -1,4 +1,10 @@
 fr:
+  simple_form:
+    labels:
+      user:
+        email: E-mail
+        password: Mot de passe
+        remember_me: Se souvenir de moi
   errors:
     messages:
       content_type_invalid: "a un type de fichier non valide"

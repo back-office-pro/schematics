@@ -10,12 +10,12 @@ module Schematics
     end
 
     def create
-      user = User.find_by_email(params[:email])
-      authenticated = user&.authenticate(params[:password])
+      user = User.find_by_email(user_params[:email])
+      authenticated = user&.authenticate(user_params[:password])
       respond_to do |format|
         format.html do
           if authenticated
-            if params[:remember_me]
+            if params[:user][:remember_me]
               cookies.permanent[:auth_token] = user.auth_token
             else
               cookies[:auth_token] = user.auth_token

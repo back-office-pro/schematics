@@ -6,11 +6,9 @@
       = fa_icon :key, class: "mr-2"
       = title
   .card-body
-    = form_tag password_resets_path, method: :post do
-      .form-group
-        = label_tag :email
-        = email_field_tag :email, params[:email], required: true, class: "form-control bg-light border-0"
-      = button_tag class: "btn btn-primary btn-icon-split mr-2" do
+    = simple_form_for :user, url: password_resets_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
+      = f.input :email
+      = f.button :button, class: "btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
         span.text= t('schematics.application.form.buttons.confirm')
       = link_to login_path, class: "btn btn-danger btn-icon-split" do
