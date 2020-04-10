@@ -1,10 +1,10 @@
-- breadcrumb "Recherche \"#{params[:query]}\"", :search_path, match: :inclusive
+- breadcrumb title, :search_path, match: :inclusive
 - if @results.empty?
   .card.shadow-sm.mb-4
     .card-header
       h5.m-0.text-primary.text-truncate.font-weight-bold
         = fa_icon :search, class: "mr-2"
-        | Recherche "#{params[:query]}"
+        = title
     .card-body.text-center
       = render 'schematics/application/empty'
 - else

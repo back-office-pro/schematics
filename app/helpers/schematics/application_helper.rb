@@ -7,7 +7,7 @@ module Schematics
     end
 
     def title
-      I18n.t(:title, scope: [:schematics, controller_name.to_sym, action_name.to_sym])
+      I18n.t(:title, query: params[:query], scope: [:schematics, controller_name.to_sym, action_name.to_sym])
     end
   end
 end
