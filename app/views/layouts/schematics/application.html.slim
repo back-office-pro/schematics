@@ -19,17 +19,17 @@ html
             - Schematics::SCHEMA.entities.each do |entity|
               - model_class = entity.type.classify.constantize
               li.nav-item.text-center.mw-100.mb-2
-                = active_link_to main_app.polymorphic_path(entity.type.pluralize.to_sym),
+                = active_link_to main_app.polymorphic_path(model_class),
                   class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                   = fa_icon entity.icon, size: "2x"
                   .mt-2.d-none.d-md-block= model_class.model_name.human.pluralize
-              - if is_active_link? main_app.polymorphic_path(entity.type.pluralize.to_sym)
+              - if is_active_link? main_app.polymorphic_path(model_class)
                 - entity.attributes.select_is_a?(Schematics::Attributes::Enum).each do |attribute|
                   li.nav-item.text-center.mw-100.mb-2.pl-3.pr-3.d-none.d-md-block
                     ul.list-group
                       - attribute.values.each do |value|
                         li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center.px-2.py-1.bg-transparent.border-0
-                          = link_to main_app.polymorphic_path(entity.type.pluralize.to_sym, "by_#{attribute.name}": value),
+                          = link_to main_app.polymorphic_path(model_class, "by_#{attribute.name}": value),
                             class: "nav-link p-0 m-0 text-secondary text-truncate" do
                             = fa_icon :caret_right, class: "mr-2"
                             = value.humanize
