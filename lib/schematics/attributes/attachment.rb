@@ -39,7 +39,7 @@ module Schematics
       end
 
       def extension
-        @options[:content_type]&.first
+        @options[:content_type]&.first || 'png'
       end
 
       def validators
@@ -68,7 +68,7 @@ module Schematics
       protected
 
       def dummy
-        @dummy ||= Tests::Dummy.new(extension: extension)
+        @dummy ||= Tests::Dummy.new(extension)
       end
     end
   end

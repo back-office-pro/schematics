@@ -1,7 +1,7 @@
 module Schematics
   module Tests
     class Dummy
-      def initialize(extension: 'png')
+      def initialize(extension)
         @extension = extension
       end
 
