@@ -6,6 +6,7 @@ en:
       edit:
         title: Password reset
       create:
+        title: "Password reset: new try"
         email_sent: Email sent with password reset instructions
         unknown_email: Unknown email
       update:

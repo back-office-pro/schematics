@@ -6,6 +6,7 @@ fr:
       edit:
         title: Mot de passe oublié
       create:
+        title: "Mot de passe oublié : nouvel essai"
         email_sent: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
         unknown_email: E-mail inconnu
       update:
