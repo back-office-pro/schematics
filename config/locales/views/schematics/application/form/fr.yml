@@ -2,6 +2,7 @@ fr:
   schematics:
     application:
       form:
+        prompt: Sélectionner un %{model_name}
         buttons:
           confirm: Valider
           cancel: Annuler

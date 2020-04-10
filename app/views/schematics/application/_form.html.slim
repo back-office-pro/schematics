@@ -15,18 +15,18 @@
       = f.input attribute.name.to_sym,
         as: :file,
         required: resource.new_record?,
-        wrapper_html: { class: "mb-2", },
+        hint: (fa_icon(:info_circle, class: "mr-1") + \
+          humanize_attachment_validators(attribute.validators) unless attribute.validators.empty?),
         input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
-      small.form-text.text-muted.mb-2
-        = fa_icon :info_circle, class: "mr-1"
-        = humanize_attachment_validators(attribute.validators)
     - when Schematics::Attributes::Digest
       = f.input attribute.name.to_sym
       = f.input :"#{attribute.name}_confirmation"
     - else
       = f.input attribute.name.to_sym
   - entity.references.each do |reference|
-    = f.association reference.name.to_sym, label_method: reference.inverse_descriptor.name.to_sym, prompt: "Please select"
+    = f.association reference.name.to_sym,
+                    label_method: reference.inverse_descriptor.name.to_sym,
+                    prompt: t('.prompt', model_name: model_class.model_name.human.downcase)
   = f.button :button, class: "btn-primary btn-icon-split mr-2" do
     span.icon= fa_icon :check
     span.text= t('.buttons.confirm')
