@@ -68,7 +68,7 @@ module Schematics
           attributes: {
             info: {
               title: "Public API Documentation",
-              description: "Developper documentation to link your business application with this API.",
+              description: "Developper documentation to link your application with this API.",
               license: "Apache 2.0",
               licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.html",
             },
@@ -114,11 +114,12 @@ module Schematics
       require 'rails/generators/generated_attribute'
       require 'rails/generators/actions'
       require 'active_record/connection_adapters/abstract/schema_definitions'
-      Rails::Generators::GeneratedAttribute.
-        singleton_class.
+      Rails::Generators::GeneratedAttribute.singleton_class.
         prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
-      Rails::Generators::GeneratedAttribute.prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
-      Rails::Generators::Actions.prepend(Schematics::Patches::Rails::Generators::Actions)
+      Rails::Generators::GeneratedAttribute.
+        prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
+      Rails::Generators::Actions.
+        prepend(Schematics::Patches::Rails::Generators::Actions)
       ActiveRecord::ConnectionAdapters::TableDefinition.
         prepend(Schematics::Patches::ActiveRecord::ConnectionAdapters::TableDefinition)
     end
@@ -131,9 +132,10 @@ module Schematics
       Rack::Attack.throttle("requests by ip", limit: 5, period: 2) do |request|
         request.ip
       end
-      ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload|
-        Rails.logger.info "Throttled IP: #{payload[:request].ip}"
-      end
+      ActiveSupport::Notifications.
+        subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload|
+          Rails.logger.info "Throttled IP: #{payload[:request].ip}"
+        end
     end
 
     initializer "schematics.mime_types" do

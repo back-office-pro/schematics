@@ -93,7 +93,8 @@ module Schematics
     end
     module ActiveRecord
       module ConnectionAdapters
-        autoload :TableDefinition, 'schematics/patches/active_record/connection_adapters/table_definition'
+        autoload :TableDefinition,
+                 'schematics/patches/active_record/connection_adapters/table_definition'
       end
     end
   end

@@ -46,11 +46,15 @@ module Schematics
     end
 
     def app_json
-      JSON.parse(File.read(File.expand_path("../app.json", __dir__)), symbolize_names: true)
+      file_path = File.expand_path("../app.json", __dir__)
+      file = File.read(file_path)
+      JSON.parse(file, symbolize_names: true)
     end
 
     def data_json
-      JSON.parse(File.read(File.expand_path("../../test/data.json", __dir__)), symbolize_names: true)
+      file_path = File.expand_path("../../test/data.json", __dir__)
+      file = File.read(file_path)
+      JSON.parse(file, symbolize_names: true)
     end
 
     def add_inverse_descriptor_to_references
@@ -64,7 +68,8 @@ module Schematics
     def add_has_many_associations
       @entities.each do |entity|
         entity.references.select(&:inverse_of_has_many?).each do |reference|
-          find_entity_by_type(reference.association_type).has_many_associations << reference.create_inverse_association
+          association = reference.create_inverse_association
+          find_entity_by_type(reference.association_type).has_many_associations << association
         end
       end
     end
@@ -72,7 +77,8 @@ module Schematics
     def add_has_one_associations
       @entities.each do |entity|
         entity.references.select(&:inverse_of_has_one?).each do |reference|
-          find_entity_by_type(reference.association_type).has_one_associations << reference.create_inverse_association
+          association = reference.create_inverse_association
+          find_entity_by_type(reference.association_type).has_one_associations << association
         end
       end
     end
@@ -82,8 +88,11 @@ module Schematics
         entity.has_many_associations.each do |association|
           association.entity.has_many_associations.each do |has_many_association|
             if has_many_association.entity != association.entity # prevent self association
-              association = Associations::HasManyThrough.new(has_many_association.reference, association)
-              entity.has_many_through_associations << association
+              has_many_through_association = Associations::HasManyThrough.new(
+                has_many_association.reference,
+                association
+              )
+              entity.has_many_through_associations << has_many_through_association
             end
           end
         end
