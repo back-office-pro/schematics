@@ -52,8 +52,8 @@
                     "name": "locale",
                     "type": "enum",
                     "options": [
-                        "Français",
-                        "English"
+                        "fr",
+                        "en"
                     ]
                 }
             ]

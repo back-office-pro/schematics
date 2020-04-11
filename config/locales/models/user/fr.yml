@@ -12,3 +12,6 @@ fr:
         password: Mot de passe
         password_confirmation: Confirmation mot de passe
         current_password: Mot de passe actuel
+        locales:
+          fr: Français
+          en: Anglais

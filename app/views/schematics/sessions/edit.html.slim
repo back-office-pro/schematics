@@ -6,7 +6,9 @@
   .card-body
     = simple_form_for current_user, url: sessions_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :email
-      = f.input :locale, collection: User.locales.keys.map(&:to_sym), include_blank: false
+      = f.input :locale,
+                collection: User.locales.keys.collect { |key| [User.human_enum_name(:locale, key), key] },
+                include_blank: false
       = f.input :password
       = f.input :password_confirmation
       = f.input :current_password

@@ -21,6 +21,7 @@ module Schematics
 
       def human_enum_name(enum_name, enum_value)
         I18n.t enum_value.to_sym,
+               default: enum_value.humanize,
                scope: [
                  :activerecord,
                  :attributes,

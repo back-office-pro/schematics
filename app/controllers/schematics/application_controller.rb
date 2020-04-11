@@ -33,7 +33,7 @@ module Schematics
     end
 
     def set_locale
-      I18n.locale = current_user&.locale&.first(2)&.downcase ||
+      I18n.locale = current_user&.locale&.to_sym ||
         request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first ||
         I18n.default_locale
     end

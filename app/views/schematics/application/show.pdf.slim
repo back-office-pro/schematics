@@ -16,6 +16,8 @@
               = image_tag(value)
             - when Schematics::Attributes::RichText
               == value
+            - when Schematics::Attributes::Enum
+              = model_class.human_enum_name(field.name.to_sym, value)
             - else
               = field.format(value)
       - entity.references.each do |reference|
