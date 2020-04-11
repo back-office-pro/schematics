@@ -130,8 +130,8 @@ module Schematics
     protected
 
     def set_resource
-      model_class = action_name.to_sym == :destroy ? model_class.with_deleted : model_class
-      @resource = model_class.find(params[:id])
+      scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
+      @resource = model_class.send(scope).find(params[:id])
     end
 
     def resource_params
