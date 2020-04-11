@@ -14,6 +14,8 @@
                 = image_tag(attachment)
             - when Schematics::Attributes::Attachment
               = image_tag(value)
+            - when Schematics::Attributes::Boolean
+              = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
             - when Schematics::Attributes::RichText
               == value
             - when Schematics::Attributes::Enum
