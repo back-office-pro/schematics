@@ -6,5 +6,3 @@ AllCops:
   TargetRubyVersion: 2.6.5
   Exclude:
     - 'test/dummy/**/*'
-Metrics/LineLength:
-  Max: 120
