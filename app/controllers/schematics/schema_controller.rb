@@ -47,7 +47,8 @@ module Schematics
         format.html
         format.json { render schema: @resource }
         format.pdf do
-          render pdf: "#{entity.type.dasherize}-#{@resource.id}.pdf",
+          render pdf: "#{model_class.model_name.human.downcase.dasherize}-#{@resource.slug}",
+                 disposition: 'attachment',
                  template: 'schematics/application/show',
                  layout: 'layouts/schematics/pdf.html'
         end

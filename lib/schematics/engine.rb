@@ -148,12 +148,16 @@ module Schematics
           render json: Schematics::Serializers::JSON.new(entity).serialize(records)
         end
         ActionController::Renderers.add(:csv) do |records, options|
+          today = I18n.l(Time.current)
+          filename = "#{model_class.model_name.human.downcase.pluralize.dasherize}-#{today}.csv"
           send_data Schematics::Serializers::CSV.new(entity).serialize(records),
-                    filename: "#{entity.type.pluralize.dasherize}-#{I18n.l(Date.today)}.csv"
+                    filename: filename
         end
         ActionController::Renderers.add(:xls) do |records, options|
+          today = I18n.l(Time.current)
+          filename = "#{model_class.model_name.human.downcase.pluralize.dasherize}-#{today}.xls"
           send_data Schematics::Serializers::CSV.new(entity).serialize(records, separator: '/t'),
-                    filename: "#{entity.type.pluralize.dasherize}-#{I18n.l(Date.today)}.xls"
+                    filename: filename
         end
       end
     end
