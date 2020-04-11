@@ -18,7 +18,7 @@
           span.text.d-none.d-lg-inline= t('.buttons.destroy')
   .card-body
     = render template: 'schematics/application/show.pdf'
-- (entity.has_many_associations + entity.has_many_through_associations).each do |association|
+- entity.has_many_and_through_associations.each do |association|
   - resources = @resource.instance_eval(association.name)
   - unless resources.empty?
     .card.shadow-sm.mt-4

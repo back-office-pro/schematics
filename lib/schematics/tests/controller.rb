@@ -17,10 +17,16 @@ module Schematics
             setup do
               @record = send(entity.type.pluralize, :one)
               @params = entity.attributes.select(&:permitted_param).map do |attribute|
-                [attribute.column_name.to_sym, attribute.default || @record.send(attribute.column_name)]
+                [
+                  attribute.column_name.to_sym,
+                  attribute.default || @record.send(attribute.column_name),
+                ]
               end.to_h
               @json_params = entity.attributes.select(&:permitted_json_param).map do |attribute|
-                [attribute.column_name.to_sym, attribute.json_default || @record.send(attribute.column_name)]
+                [
+                  attribute.column_name.to_sym,
+                  attribute.json_default || @record.send(attribute.column_name),
+                ]
               end.to_h
             end
 
@@ -49,7 +55,7 @@ module Schematics
               end
             end
 
-            (entity.has_one_associations + entity.has_one_through_associations).each do |association|
+            entity.has_one_and_through_associations.each do |association|
               scope = :"by_#{association.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)

@@ -6,7 +6,7 @@ module Schematics
     def search
       @results = {}
       SCHEMA.entities.each do |entity|
-        (entity.attributes + entity.virtuals).select(&:searchable?).each do |field|
+        entity.fields.select(&:searchable?).each do |field|
           records = entity.type.camelize.constantize.send("by_#{field.name}", params[:query])
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
           @results[entity.type]&.uniq!

@@ -67,7 +67,8 @@ module Schematics
         respond_to do |format|
           format.html do
             redirect_to @resource,
-                        notice: t('schematics.schema.create.created', model_name: model_class.model_name.human)
+                        notice: t('schematics.schema.create.created',
+                                  model_name: model_class.model_name.human)
           end
           format.json { head :created }
         end
@@ -84,7 +85,8 @@ module Schematics
         respond_to do |format|
           format.html do
             redirect_to @resource,
-                        notice: t('schematics.schema.update.updated', model_name: model_class.model_name.human)
+                        notice: t('schematics.schema.update.updated',
+                                  model_name: model_class.model_name.human)
           end
           format.json
         end
@@ -112,7 +114,7 @@ module Schematics
           redirect_to polymorphic_path(model_class),
                       notice: t(action,
                                 model_name: model_class.model_name.human,
-                                scope: [:schematics, :schema, :destroy])
+                                scope: 'schematics.schema.destroy')
         end
         format.json
       end
@@ -128,7 +130,8 @@ module Schematics
     protected
 
     def set_resource
-      @resource = (action_name.to_sym == :destroy ? model_class.with_deleted : model_class).find(params[:id])
+      model_class = action_name.to_sym == :destroy ? model_class.with_deleted : model_class
+      @resource = model_class.find(params[:id])
     end
 
     def resource_params
@@ -137,8 +140,7 @@ module Schematics
     end
 
     def eager_loading
-      (entity.references + entity.has_one_through_associations + entity.has_one_associations).
-        map(&:name).map(&:to_sym)
+      (entity.references + entity.has_one_and_through_associations).map(&:name).map(&:to_sym)
     end
   end
 end

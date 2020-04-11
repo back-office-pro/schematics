@@ -1,5 +1,5 @@
 = simple_form_for resource, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-  - (entity.attributes - entity.references).reject_is_a?(Schematics::Attributes::Token).each do |attribute|
+  - entity.attributes_without_references.select(&:permitted_param).each do |attribute|
     - case attribute
     - when Schematics::Attributes::String
       = f.input attribute.name.to_sym, maxlength: true, minlength: true, pattern: true

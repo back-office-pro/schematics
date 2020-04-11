@@ -4,33 +4,24 @@ module Schematics
       def serialize(records, separator: ',')
         super(records)
         ::CSV.generate(headers: true, col_sep: separator) do |file|
-          file << fields.map(&:name).map(&:humanize)
+          file << headers
           records.each do |record|
             @record = record
-            file << attributes +
-              virtuals +
-              references +
-              has_one_associations +
-              has_one_through_associations
+            file << fields_without_references + references + has_one_and_through_associations
           end
         end
       end
 
-      def fields
-        @entity.attributes.select(&:visible?) -
-        @entity.references +
-        @entity.virtuals +
-        @entity.references +
-        @entity.has_one_associations +
-        @entity.has_one_through_associations
+      def headers
+        (
+          @entity.fields_without_references.select(&:visible?) +
+          @entity.references +
+          @entity.has_one_and_through_associations
+        ).map(&:name).map(&:humanize)
       end
 
-      def attributes
-        super.map { |attribute| attribute.format(@record.instance_eval(attribute.name)) }
-      end
-
-      def virtuals
-        super.map { |virtual| virtual.format(@record.instance_eval(virtual.name)) }
+      def fields_without_references
+        super.select(&:visible?).map { |field| field.format(@record.instance_eval(field.name)) }
       end
 
       def references
@@ -39,16 +30,10 @@ module Schematics
         end
       end
 
-      def has_one_associations
-        super.map(&method(:has_associations))
-      end
-
-      def has_one_through_associations
-        super.map(&method(:has_associations))
-      end
-
-      def has_associations(association)
-        @record.instance_eval("#{association.name}.#{association.descriptor.name}")
+      def has_one_and_through_associations
+        super.map do |association|
+          @record.instance_eval("#{association.name}.#{association.descriptor.name}")
+        end
       end
     end
   end

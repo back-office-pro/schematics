@@ -18,10 +18,6 @@ module Schematics
           records.includes(@entity.references.map(&:name).map(&:to_sym))
         end
       end
-
-      def attributes
-        @entity.attributes.select(&:visible?) - @entity.references
-      end
     end
   end
 end

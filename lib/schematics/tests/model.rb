@@ -86,7 +86,7 @@ module Schematics
               end
             end
 
-            (entity.attributes + entity.virtuals + entity.has_one_associations + entity.has_one_through_associations).
+            (entity.fields + entity.has_one_and_through_associations).
               select(&:visible?).each do |scopable|
               scope = :"by_#{scopable.name}"
               test "should have scope #{scope}" do

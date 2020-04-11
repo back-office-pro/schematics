@@ -1,7 +1,7 @@
 .table-responsive
   table.table.table-striped
     tbody
-      - (entity.attributes - entity.references + entity.virtuals).select(&:visible?).each do |field|
+      - entity.fields_without_references.select(&:visible?).each do |field|
         tr
           th
             = fa_icon field.icon, class: "mr-2 text-muted"
@@ -26,7 +26,7 @@
           td
             - if @resource.instance_eval(reference.name).present?
               = link_to @resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"), @resource.instance_eval(reference.name)
-      - (entity.has_one_associations + entity.has_one_through_associations).each do |association|
+      - entity.has_one_and_through_associations.each do |association|
         tr
           th
             = fa_icon association.icon, class: "mr-2 text-muted"

@@ -37,7 +37,7 @@ class LocalesGenerator < Rails::Generators::Base
                 #{entity.type}:
           YAML
         end
-        (entity.attributes + entity.virtuals).each do |field|
+        entity.fields.each do |field|
           append_file locale_file_path(entity, locale) do
             indent <<~YAML, 8
               #{field.name}: #{translate(field.name, to: locale)}

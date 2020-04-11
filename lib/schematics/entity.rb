@@ -28,7 +28,7 @@ module Schematics
     end
 
     def find_field_by_name(name)
-      (@attributes + @virtuals).find { |field| field.name == name }
+      fields.find { |field| field.name == name }
     end
 
     def descriptor
@@ -36,11 +36,23 @@ module Schematics
     end
 
     def weight
-      @has_many_associations.size + @has_many_through_associations.size
+      has_many_and_through_associations.size
     end
 
     def generate
       system "rails generate scaffold #{@type} #{@attributes.map(&:to_s).join(' ')}"
+    end
+
+    def fields
+      @attributes + @virtuals
+    end
+
+    def fields_without_references
+      fields - references
+    end
+
+    def attributes_without_references
+      @attributes - references
     end
 
     def references
@@ -64,39 +76,40 @@ module Schematics
     end
 
     def filter_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        select(&:visible?).map(&:filter_scope)
+      (fields + has_one_and_through_associations).select(&:visible?).map(&:filter_scope)
     end
 
     def sort_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        select(&:visible?).map(&:sort_scope)
+      (fields + has_one_and_through_associations).select(&:visible?).map(&:sort_scope)
     end
 
     def has_filter_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        select(&:visible?).map(&:has_filter_scope)
+      (fields + has_one_and_through_associations).select(&:visible?).map(&:has_filter_scope)
     end
 
     def has_sort_scopes
-      (@attributes + @virtuals + @has_one_associations + @has_one_through_associations).
-        select(&:visible?).map(&:has_sort_scope)
+      (fields + has_one_and_through_associations).select(&:visible?).map(&:has_sort_scope)
     end
 
     def validates
       @attributes.map(&:validate).compact
     end
 
+    def has_one_and_through_associations
+      @has_one_associations + @has_one_through_associations
+    end
+
+    def has_many_and_through_associations
+      @has_many_associations + @has_many_through_associations
+    end
+
     def associations
-      @has_one_associations +
-      @has_many_associations +
-      @has_many_through_associations +
-      @has_one_through_associations
+      has_one_and_through_associations + has_many_and_through_associations
     end
 
     def modelize(subclass)
       subclass.class_eval(friendly_id)
-      (@attributes + associations + filter_scopes + sort_scopes + validates + virtuals).
+      (fields + associations + filter_scopes + sort_scopes + validates).
         each { |modelizable| subclass.class_eval(modelizable) }
     end
 

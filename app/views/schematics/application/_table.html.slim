@@ -6,7 +6,7 @@
           th.text-nowrap.text-center
             = fa_icon :archive, class: "mr-2 text-dark"
             = t('.archives')
-        - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
+        - table_entity.fields_without_references. \
           select(&:visible?). \
           reject_is_a?(Schematics::Attributes::Attachment). \
           each do |field|
@@ -23,7 +23,7 @@
             - else
               = fa_icon reference.icon, class: "mr-2 text-dark"
               = model_class.human_attribute_name(reference.name)
-        - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
+        - table_entity.has_one_and_through_associations.each do |association|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(association) 
@@ -34,7 +34,7 @@
         tr
           th.text-nowrap.align-middle.px-0
             = render 'schematics/application/filters/with_deleted'
-          - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
+          - table_entity.fields_without_references. \
             select(&:visible?). \
             reject_is_a?(Schematics::Attributes::Attachment). \
             each do |field|
@@ -53,7 +53,7 @@
           - table_entity.references.each do |reference|
             th.align-middle.text-center.px-0
               = render 'schematics/application/filters/reference', reference: reference
-          - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
+          - table_entity.has_one_and_through_associations.each do |association|
             th.align-middle.text-center.px-0
               = render 'schematics/application/filters/association', association: association
       tbody
@@ -83,7 +83,7 @@
                         method: :delete,
                         class: "btn btn-danger btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: t('.archive') }
-              - (table_entity.attributes - table_entity.references + table_entity.virtuals). \
+              - table_entity.fields_without_references. \
                 select(&:visible?). \
                 reject_is_a?(Schematics::Attributes::Attachment). \
                 each do |field|
@@ -104,7 +104,7 @@
                   - if resource.instance_eval(reference.name).present?
                     = link_to resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"),
                       main_app.polymorphic_path(resource.instance_eval(reference.name))
-              - (table_entity.has_one_associations + table_entity.has_one_through_associations).each do |association|
+              - table_entity.has_one_and_through_associations.each do |association|
                 td.text-nowrap.text-center
                   - if resource.instance_eval(association.name).present?
                     = link_to resource.instance_eval("#{association.name}.#{association.descriptor.name}"),
