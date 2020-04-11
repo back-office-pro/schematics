@@ -13,9 +13,12 @@
         = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-info btn-icon-split mr-2" do
           span.icon= fa_icon :file_pdf
           span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
-        = link_to polymorphic_path(@resource, really: true), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon-split" do
-          span.icon= fa_icon :trash
-          span.text.d-none.d-lg-inline= t('.buttons.destroy')
+        = link_to polymorphic_path(@resource, really: true),
+                  method: :delete,
+                  data: { confirm: t('.buttons.are_you_sure?') },
+                  class: "btn btn-danger btn-icon-split" do
+                    span.icon= fa_icon :trash
+                    span.text.d-none.d-lg-inline= t('.buttons.destroy')
   .card-body
     = render template: 'schematics/application/show.pdf'
 - entity.has_many_and_through_associations.each do |association|
