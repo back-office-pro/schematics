@@ -97,6 +97,8 @@
                       = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
                     - when Schematics::Attributes::RichText
                       = strip_tags(value.to_s)
+                    - when Schematics::Attributes::Enum
+                      = model_class.human_enum_name(field.name.to_sym, value)
                     - else
                       = field.format(value)
               - table_entity.references.each do |reference|
