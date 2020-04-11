@@ -2,20 +2,23 @@ module Schematics
   module Serializers
     class Serializer
       delegate_missing_to :@entity
+      delegate :model, to: :@records
 
-      def initialize(entity)
+      def initialize(entity, records)
         @entity = entity
-      end
-
-      def serialize(records)
-        eager_loading(records) if records.is_a?(Enumerable)
+        @records = records
+        eager_loading if enumerable?
       end
 
       protected
 
-      def eager_loading(records)
+      def enumerable?
+        @records.is_a?(Enumerable)
+      end
+
+      def eager_loading
         unless @entity.references.empty?
-          records.includes(@entity.references.map(&:name).map(&:to_sym))
+          @records.includes(@entity.references.map(&:name).map(&:to_sym))
         end
       end
     end

@@ -1,11 +1,10 @@
 module Schematics
   module Serializers
     class CSV < Serializer
-      def serialize(records, separator: ',')
-        super(records)
+      def serialize(separator: ',')
         ::CSV.generate(headers: true, col_sep: separator) do |file|
           file << headers
-          records.each do |record|
+          @records.each do |record|
             @record = record
             file << fields_without_references + references + has_one_and_through_associations
           end
@@ -13,11 +12,10 @@ module Schematics
       end
 
       def headers
-        (
-          @entity.fields_without_references.select(&:visible?) +
+        (@entity.fields_without_references.select(&:visible?) +
           @entity.references +
           @entity.has_one_and_through_associations
-        ).map(&:name).map(&:humanize)
+        ).map(&:name).map { |name| model.human_attribute_name(name) }
       end
 
       def fields_without_references

@@ -145,18 +145,18 @@ module Schematics
     initializer "schematics.renderers" do
       ActiveSupport.on_load(:action_controller) do
         ActionController::Renderers.add(:schema) do |records, options|
-          render json: Schematics::Serializers::JSON.new(entity).serialize(records)
+          render json: Schematics::Serializers::JSON.new(entity, records).serialize
         end
         ActionController::Renderers.add(:csv) do |records, options|
           today = I18n.l(Time.current)
           filename = "#{model_class.model_name.human.downcase.pluralize.dasherize}-#{today}.csv"
-          send_data Schematics::Serializers::CSV.new(entity).serialize(records),
+          send_data Schematics::Serializers::CSV.new(entity, records).serialize,
                     filename: filename
         end
         ActionController::Renderers.add(:xls) do |records, options|
           today = I18n.l(Time.current)
           filename = "#{model_class.model_name.human.downcase.pluralize.dasherize}-#{today}.xls"
-          send_data Schematics::Serializers::CSV.new(entity).serialize(records, separator: '/t'),
+          send_data Schematics::Serializers::CSV.new(entity, records).serialize(separator: '/t'),
                     filename: filename
         end
       end

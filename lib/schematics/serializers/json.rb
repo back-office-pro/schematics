@@ -1,13 +1,12 @@
 module Schematics
   module Serializers
     class JSON < Serializer
-      def serialize(records)
-        super(records)
+      def serialize
         includes = references + has_one_and_through_associations
-        includes += has_many_and_through_associations unless records.is_a?(Enumerable)
-        records.as_json only: [:id] + attributes_without_references,
-                        methods: virtuals,
-                        include: includes.to_h
+        includes += has_many_and_through_associations unless enumerable?
+        @records.as_json only: [:id] + attributes_without_references,
+                         methods: virtuals,
+                         include: includes.to_h
       end
 
       protected
