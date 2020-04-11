@@ -28,7 +28,7 @@
       a.card-header.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
           = fa_icon association.icon, class: "mr-2"
-          = association.name.classify.constantize.model_name.human(count: resources.size)
+          = association.class_name.constantize.model_name.human(count: resources.size)
           |  (#{resources.size})
       .collapse.hide id="collapse-#{association.name}"
         .card-body
