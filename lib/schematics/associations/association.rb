@@ -2,12 +2,12 @@ module Schematics
   module Associations
     class Association
       include Renderable
-      attr_accessor :reference
-      delegate :entity, :required?, to: :@reference
+      attr_accessor :belongs_to
+      delegate :entity, :required?, to: :@belongs_to
       delegate :descriptor, to: :entity
 
-      def initialize(reference)
-        @reference = reference
+      def initialize(belongs_to)
+        @belongs_to = belongs_to
       end
 
       def type
@@ -15,7 +15,7 @@ module Schematics
       end
 
       def name
-        reference.inverse_association_name
+        belongs_to.inverse_association_name
       end
 
       def class_name
@@ -50,7 +50,7 @@ module Schematics
         <<~RUBY
           #{type} :#{name},
                   class_name: '#{class_name}',
-                  foreign_key: '#{reference.column_name}'
+                  foreign_key: '#{belongs_to.column_name}'
         RUBY
       end
 

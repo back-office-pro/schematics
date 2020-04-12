@@ -3,8 +3,8 @@ module Schematics
     class AssociationThrough < Association
       attr_accessor :through
 
-      def initialize(reference, through)
-        super(reference)
+      def initialize(belongs_to, through)
+        super(belongs_to)
         @through = through
       end
 
@@ -13,7 +13,9 @@ module Schematics
       end
 
       def to_str
-        super.squish + ", through: :#{@through.name}"
+        super.extends_with_comma <<~RUBY
+          through: :#{@through.name}
+        RUBY
       end
     end
   end

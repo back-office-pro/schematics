@@ -1,7 +1,6 @@
 class FixturesGenerator < Rails::Generators::Base
   def generate_action_text_rich_texts
-    Schematics::SCHEMA.entities.map(&:attributes).flatten.
-      select_is_a?(Schematics::Attributes::RichText).
+    Schematics::SCHEMA.entities.map(&:rich_text_attributes).flatten.
       each_with_index do |attribute, index|
       index = (index + 1).humanize
       append_file(rich_texts_file_path) do
@@ -21,8 +20,7 @@ class FixturesGenerator < Rails::Generators::Base
 
   def generate_active_storage_attachments
     create_file(attachments_file_path)
-    Schematics::SCHEMA.entities.map(&:attributes).flatten.
-      select_is_a?(Schematics::Attributes::Attachment).
+    Schematics::SCHEMA.entities.map(&:attachment_attributes).flatten.
       each_with_index do |attribute, index|
       index = (index + 1).humanize
       append_to_file(attachments_file_path) do
@@ -38,8 +36,7 @@ class FixturesGenerator < Rails::Generators::Base
 
   def generate_active_storage_blobs
     create_file(blobs_file_path)
-    Schematics::SCHEMA.entities.map(&:attributes).flatten.
-      select_is_a?(Schematics::Attributes::Attachment).
+    Schematics::SCHEMA.entities.map(&:attachment_attributes).flatten.
       each_with_index do |attribute, index|
       index = (index + 1).humanize
       append_to_file(blobs_file_path) do

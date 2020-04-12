@@ -16,7 +16,7 @@ module Schematics
       @entities = data[:entities].map { |entity| Entity.create(entity) }
       @charts = data[:charts].map { |chart| Chart.create(self, chart) }
       @stats = data[:stats].map { |stat| Stat.create(self, stat) }
-      add_inverse_descriptor_to_references
+      add_inverse_descriptor_to_belongs_to_attributes
       add_has_many_associations
       add_has_one_associations
       add_has_many_through_associations
@@ -57,28 +57,28 @@ module Schematics
       JSON.parse(file, symbolize_names: true)
     end
 
-    def add_inverse_descriptor_to_references
+    def add_inverse_descriptor_to_belongs_to_attributes
       @entities.each do |entity|
-        entity.references.each do |reference|
-          reference.inverse_descriptor = find_entity_by_type(reference.association_type).descriptor
+        entity.belongs_to_attributes.each do |attribute|
+          attribute.inverse_descriptor = find_entity_by_type(attribute.association_type).descriptor
         end
       end
     end
 
     def add_has_many_associations
       @entities.each do |entity|
-        entity.references.select(&:inverse_of_has_many?).each do |reference|
-          association = reference.create_inverse_association
-          find_entity_by_type(reference.association_type).has_many_associations << association
+        entity.belongs_to_attributes.select(&:inverse_of_has_many?).each do |attribute|
+          association = attribute.create_inverse_association
+          find_entity_by_type(attribute.association_type).has_many_associations << association
         end
       end
     end
 
     def add_has_one_associations
       @entities.each do |entity|
-        entity.references.select(&:inverse_of_has_one?).each do |reference|
-          association = reference.create_inverse_association
-          find_entity_by_type(reference.association_type).has_one_associations << association
+        entity.belongs_to_attributes.select(&:inverse_of_has_one?).each do |attribute|
+          association = attribute.create_inverse_association
+          find_entity_by_type(attribute.association_type).has_one_associations << association
         end
       end
     end
@@ -89,7 +89,7 @@ module Schematics
           association.entity.has_many_associations.each do |has_many_association|
             if has_many_association.entity != association.entity # prevent self association
               has_many_through_association = Associations::HasManyThrough.new(
-                has_many_association.reference,
+                has_many_association.belongs_to,
                 association
               )
               entity.has_many_through_associations << has_many_through_association
@@ -101,10 +101,10 @@ module Schematics
 
     def add_has_one_through_associations
       @entities.each do |entity|
-        entity.references.each do |reference|
-          find_entity_by_type(reference.association_type).references.each do |parent_reference|
-            if parent_reference.entity != reference.entity # prevent self association
-              association = Associations::HasOneThrough.new(parent_reference, reference)
+        entity.belongs_to_attributes.each do |attribute|
+          find_entity_by_type(attribute.association_type).belongs_to_attributes.each do |parent|
+            if parent.entity != attribute.entity # prevent self association
+              association = Associations::HasOneThrough.new(parent, attribute)
               entity.has_one_through_associations << association
             end
           end

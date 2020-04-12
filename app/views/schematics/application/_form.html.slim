@@ -1,5 +1,5 @@
 = simple_form_for resource, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-  - entity.attributes_without_references.select(&:permitted_param).each do |attribute|
+  - (entity.attributes - entity.belongs_to_attributes).select(&:permitted_param).each do |attribute|
     - case attribute
     - when Schematics::Attributes::String
       = f.input attribute.name.to_sym, maxlength: true, minlength: true, pattern: true
@@ -15,7 +15,7 @@
     - when Schematics::Attributes::Attachment
       = f.input attribute.name.to_sym,
         as: :file,
-        required: resource.new_record?,
+        required: attribute.required? && resource.new_record?,
         hint: (fa_icon(:info_circle, class: "mr-1") + \
           humanize_attachment_validators(attribute.validators) unless attribute.validators.empty?),
         input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
@@ -24,10 +24,10 @@
       = f.input :"#{attribute.name}_confirmation"
     - else
       = f.input attribute.name.to_sym
-  - entity.references.each do |reference|
-    = f.association reference.name.to_sym,
-                    label_method: reference.inverse_descriptor.name.to_sym,
-                    prompt: t('.prompt', model_name: model_class.model_name.human.downcase)
+  - entity.belongs_to_attributes.each do |attribute|
+    = f.association attribute.name.to_sym,
+                    label_method: attribute.inverse_descriptor.name.to_sym,
+                    prompt: t('.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
   = f.button :button, class: "btn-primary btn-icon-split mr-2" do
     span.icon= fa_icon :check
     span.text= t('.buttons.confirm')

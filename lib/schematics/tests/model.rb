@@ -42,12 +42,12 @@ module Schematics
               end
             end
 
-            entity.references.each do |reference|
-              test "should belongs_to #{reference.name}" do
-                reflection = @record.class.reflect_on_association(reference.name.to_sym)
+            entity.belongs_to_attributes.each do |attribute|
+              test "should belongs_to #{attribute.name}" do
+                reflection = @record.class.reflect_on_association(attribute.name.to_sym)
                 assert reflection.macro == :belongs_to
-                assert reflection.class_name == reference.model_property_type
-                assert reflection.options[:optional] == true unless reference.required?
+                assert reflection.class_name == attribute.model_property_type
+                assert reflection.options[:optional] == true unless attribute.required?
               end
             end
 
@@ -94,7 +94,7 @@ module Schematics
               end
             end
 
-            entity.attributes.select_is_a?(Attributes::Enum).each do |enum|
+            entity.enum_attributes.each do |enum|
               test "should have enum #{enum.name}" do
                 @record.respond_to?(enum.name.to_sym)
                 enum.values.map(&:to_sym).each do |value|

@@ -1,7 +1,7 @@
 .table-responsive
   table.table.table-striped
     tbody
-      - entity.fields_without_references.select(&:visible?).each do |field|
+      - (entity.fields - entity.belongs_to_attributes).select(&:visible?).each do |field|
         tr
           th
             = fa_icon field.icon, class: "mr-2 text-muted"
@@ -10,10 +10,17 @@
             - value = @resource.instance_eval(field.name)
             - case field
             - when Schematics::Attributes::Attachments
-              - value.each do |attachment|
-                = image_tag(attachment)
+              - value.select(&:attached?).each do |attachment|
+                - if attachment.image?
+                  = image_tag attachment.variant(resize_to_limit: [100, 100])
+                - else
+                  = link_to attachment.filename, attachment
             - when Schematics::Attributes::Attachment
-              = image_tag(value)
+              - if value.attached?
+                - if value.image?
+                  = image_tag value.variant(resize_to_limit: [100, 100])
+                - else
+                  = link_to value.filename, value
             - when Schematics::Attributes::Boolean
               = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
             - when Schematics::Attributes::RichText
@@ -22,14 +29,15 @@
               = model_class.human_enum_name(field.name.to_sym, value)
             - else
               = field.format(value)
-      - entity.references.each do |reference|
+      - entity.belongs_to_attributes.each do |attribute|
         tr
           th
-            = fa_icon reference.icon, class: "mr-2 text-muted"
-            = model_class.human_attribute_name(reference.name)
+            = fa_icon attribute.icon, class: "mr-2 text-muted"
+            = model_class.human_attribute_name(attribute.name)
           td
-            - if @resource.instance_eval(reference.name).present?
-              = link_to @resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"), @resource.instance_eval(reference.name)
+            - if @resource.instance_eval(attribute.name).present?
+              = link_to @resource.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
+                        @resource.instance_eval(attribute.name)
       - entity.has_one_and_through_associations.each do |association|
         tr
           th
@@ -37,4 +45,5 @@
             = model_class.human_attribute_name(association.name)
           td
             - if resource.instance_eval(association.name).present?
-              = link_to @resource.instance_eval("#{association.name}.#{association.descriptor.name}"), @resource.instance_eval(association.name)
+              = link_to @resource.instance_eval("#{association.name}.#{association.descriptor.name}"),
+                        @resource.instance_eval(association.name)

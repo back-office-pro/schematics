@@ -17,14 +17,14 @@ html
                 schematics.root_path,
                 class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|
-              - model_class = entity.type.classify.constantize
+              - model_class = entity.type.camelize.constantize
               li.nav-item.text-center.mw-100.mb-2
                 = active_link_to main_app.polymorphic_path(model_class),
                   class: "nav-link p-0 m-0 text-secondary text-nowrap" do
                   = fa_icon entity.icon, size: "2x"
                   .mt-2.d-none.d-md-block= model_class.model_name.human.pluralize
               - if is_active_link? main_app.polymorphic_path(model_class)
-                - entity.attributes.select_is_a?(Schematics::Attributes::Enum).each do |attribute|
+                - entity.enum_attributes.each do |attribute|
                   li.nav-item.text-center.mw-100.mb-2.pl-3.pr-3.d-none.d-md-block
                     ul.list-group
                       - attribute.values.each do |value|

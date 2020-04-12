@@ -6,25 +6,29 @@ module Schematics
           file << headers
           @records.each do |record|
             @record = record
-            file << fields_without_references + references + has_one_and_through_associations
+            file << fields +
+                    belongs_to_attributes +
+                    has_one_and_through_associations
           end
         end
       end
 
       def headers
-        (@entity.fields_without_references.select(&:visible?) +
-          @entity.references +
-          @entity.has_one_and_through_associations
-        ).map(&:name).map { |name| model.human_attribute_name(name) }
+        ((@entity.fields - @entity.belongs_to_attributes).select(&:visible?) +
+          @entity.belongs_to_attributes +
+          @entity.has_one_and_through_associations).
+          map(&:name).map { |name| model.human_attribute_name(name) }
       end
 
-      def fields_without_references
-        super.select(&:visible?).map { |field| field.format(@record.instance_eval(field.name)) }
+      def fields
+        (super - @entity.belongs_to_attributes).
+          select(&:visible?).
+          map { |field| field.format(@record.instance_eval(field.name)) }
       end
 
-      def references
-        super.map do |reference|
-          @record.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}")
+      def belongs_to_attributes
+        super.map do |attribute|
+          @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}")
         end
       end
 

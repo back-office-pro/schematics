@@ -1,7 +1,0 @@
-.input-group.ml-1.mr-1.mb-2
-  = render 'schematics/application/filters/eraser', name: reference.name
-  = select_tag :"by_#{reference.name}",
-    options_from_collection_for_select(reference.association_type.camelize.constantize.all, "id", reference.inverse_descriptor.name, params[:"by_#{reference.name}"]),
-    prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(reference.name).downcase),
-    onchange: "$(this.form).submit()",
-    class: "form-control bg-light #{'border-0' unless params[:"by_#{reference.name}"].present?}"

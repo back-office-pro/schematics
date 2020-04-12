@@ -6,23 +6,20 @@
           th.text-nowrap.text-center
             = fa_icon :archive, class: "mr-2 text-dark"
             = t('.archives')
-        - table_entity.fields_without_references. \
-          select(&:visible?). \
-          reject_is_a?(Schematics::Attributes::Attachment). \
-          each do |field|
+        - (table_entity.fields - table_entity.belongs_to_attributes).select(&:visible?).each do |field|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(field) 
             - else
               = fa_icon field.icon, class: "mr-2 text-dark"
               = model_class.human_attribute_name(field.name)
-        - table_entity.references.each do |reference|
+        - table_entity.belongs_to_attributes.each do |attribute|
           th.text-nowrap.text-center
             - if actions 
-              = sort_link_to(reference) 
+              = sort_link_to(attribute) 
             - else
-              = fa_icon reference.icon, class: "mr-2 text-dark"
-              = model_class.human_attribute_name(reference.name)
+              = fa_icon attribute.icon, class: "mr-2 text-dark"
+              = model_class.human_attribute_name(attribute.name)
         - table_entity.has_one_and_through_associations.each do |association|
           th.text-nowrap.text-center
             - if actions 
@@ -34,10 +31,7 @@
         tr
           th.text-nowrap.align-middle.px-0
             = render 'schematics/application/filters/with_deleted'
-          - table_entity.fields_without_references. \
-            select(&:visible?). \
-            reject_is_a?(Schematics::Attributes::Attachment). \
-            each do |field|
+          - (table_entity.fields - table_entity.belongs_to_attributes).select(&:visible?).each do |field|
             th.align-middle.text-center.px-0
               - case field
               - when Schematics::Attributes::Boolean
@@ -50,9 +44,9 @@
                 = render 'schematics/application/filters/enum', field: field, table_entity: table_entity
               - else
                 = render 'schematics/application/filters/input', field: field
-          - table_entity.references.each do |reference|
+          - table_entity.belongs_to_attributes.each do |attribute|
             th.align-middle.text-center.px-0
-              = render 'schematics/application/filters/reference', reference: reference
+              = render 'schematics/application/filters/belongs_to', attribute: attribute
           - table_entity.has_one_and_through_associations.each do |association|
             th.align-middle.text-center.px-0
               = render 'schematics/application/filters/association', association: association
@@ -83,16 +77,18 @@
                         method: :delete,
                         class: "btn btn-danger btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: t('.archive') }
-              - table_entity.fields_without_references. \
-                select(&:visible?). \
-                reject_is_a?(Schematics::Attributes::Attachment). \
-                each do |field|
+              - (table_entity.fields - table_entity.belongs_to_attributes).select(&:visible?).each do |field|
                 td.text-nowrap.text-center
                   - if field.searchable? && !actions
                     = highlight(resource.instance_eval(field.name), params[:query])
                   - else
                     - value = resource.instance_eval(field.name)
                     - case field
+                    - when Schematics::Attributes::Attachments
+                      - value.select(&:attached?).each do |attachment|
+                        = link_to attachment.filename, main_app.url_for(attachment)
+                    - when Schematics::Attributes::Attachment
+                      = link_to value.filename, main_app.url_for(value) if value.attached?
                     - when Schematics::Attributes::Boolean
                       = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
                     - when Schematics::Attributes::RichText
@@ -101,11 +97,11 @@
                       = model_class.human_enum_name(field.name.to_sym, value)
                     - else
                       = field.format(value)
-              - table_entity.references.each do |reference|
+              - table_entity.belongs_to_attributes.each do |attribute|
                 td.text-nowrap.text-center
-                  - if resource.instance_eval(reference.name).present?
-                    = link_to resource.instance_eval("#{reference.name}.#{reference.inverse_descriptor.name}"),
-                      main_app.polymorphic_path(resource.instance_eval(reference.name))
+                  - if resource.instance_eval(attribute.name).present?
+                    = link_to resource.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
+                      main_app.polymorphic_path(resource.instance_eval(attribute.name))
               - table_entity.has_one_and_through_associations.each do |association|
                 td.text-nowrap.text-center
                   - if resource.instance_eval(association.name).present?
