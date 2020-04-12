@@ -7,4 +7,12 @@ fr:
         subject: Sujet
         content: Contenu
         author: Auteur
+        sent_messages:
+          zero: Aucun message envoyé
+          one: Message envoyé
+          other: Messages envoyés
         recipient: Destinataire
+        received_messages:
+          zero: Aucun message reçu
+          one: Message reçu
+          other: Messages reçus

@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      message: Message
+    attributes:
+      message:
+        subject: Subject
+        content: Content
+        author: Author
+        sent_messages:
+          zero: No message sent
+          one: Sent message
+          other: Sent messages
+        recipient: Recipient
+        received_messages:
+          zero: No message received
+          one: Received message
+          other: Received messages
