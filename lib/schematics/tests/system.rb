@@ -46,7 +46,7 @@ module Schematics
         end
 
         def model_class
-          name.chomp('Test').singularize.constantize
+          name.chomp('Test').classify.constantize
         end
       end
 
