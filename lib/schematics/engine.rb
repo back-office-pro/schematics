@@ -16,6 +16,7 @@ module Schematics
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
+    config.action_mailer.default_url_options = { host: "localhost:3000" }
 
     # i18n
     config.i18n.default_locale = :fr
@@ -25,7 +26,9 @@ module Schematics
     # Bullet
     config.after_initialize do
       Bullet.enable = true
-      Bullet.bullet_logger = true
+      Bullet.unused_eager_loading_enable = false
+      Bullet.raise = !Rails.env.production?
+      Bullet.bullet_logger = Rails.env.production?
     end
 
     # SimpleForm custom bootstrap components
@@ -92,8 +95,8 @@ module Schematics
                          end
     end
 
-    initializer "schematics.cors" do
-      Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    initializer "schematics.cors" do |app|
+      app.config.middleware.insert_before 0, Rack::Cors do
         allow do
           origins '*'
           resource '*',
@@ -103,8 +106,9 @@ module Schematics
       end
     end
 
-    initializer "schematics.routes" do
-      Rails.application.routes.append do
+    initializer "schematics.routes" do |app|
+      app.routes.default_url_options = app.config.action_mailer.default_url_options
+      app.routes.append do
         mount Schematics::Engine, at: "/"
         mount SwaggerUiEngine::Engine, at: "/api"
       end
