@@ -10,7 +10,7 @@
 - else
   - @results.each do |type, resources|
     - table_entity = Schematics::SCHEMA.find_entity_by_type(type)
-    - model_class = table_entity.type.classify.constantize
+    - model_class = table_entity.type.camelize.constantize
     .card.shadow-sm.mb-4
       a.card-header href="#collapse-#{type}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.text-truncate.font-weight-bold
