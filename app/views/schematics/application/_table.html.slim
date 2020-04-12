@@ -85,7 +85,7 @@
                     - value = resource.instance_eval(field.name)
                     - case field
                     - when Schematics::Attributes::Attachments
-                      - value.select(&:attached?).each do |attachment|
+                      - value.each do |attachment|
                         = link_to attachment.filename, main_app.url_for(attachment)
                     - when Schematics::Attributes::Attachment
                       = link_to value.filename, main_app.url_for(value) if value.attached?
