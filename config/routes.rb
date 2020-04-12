@@ -1,6 +1,4 @@
 Schematics::Engine.routes.draw do
-  default_url_options host: "localhost:3000"
-
   root 'dashboard#home'
 
   localized do
