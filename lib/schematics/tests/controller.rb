@@ -69,6 +69,12 @@ module Schematics
               assert_response :success
             end
 
+            test "should get CSV index" do
+              login
+              get polymorphic_path(model_class), as: :csv
+              assert_response :success
+            end
+
             test "should get index" do
               login
               get polymorphic_path(model_class)
@@ -90,6 +96,12 @@ module Schematics
             test "should show API #{entity.type}" do
               login as: :json
               get polymorphic_path(@record), headers: authorization_header, as: :json
+              assert_response :success
+            end
+
+            test "should show PDF #{entity.type}" do
+              login
+              get polymorphic_path(@record), as: :pdf
               assert_response :success
             end
 
