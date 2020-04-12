@@ -6,8 +6,7 @@ module Schematics
 
       class << self
         def create(entity, name:, type:, options: {})
-          klass = "Schematics::Attributes::#{type.underscore.camelize}".constantize
-          klass.new(entity, name, options)
+          Schematics::Attributes.const_get(type.camelize.to_sym).new(entity, name, options)
         end
       end
 
