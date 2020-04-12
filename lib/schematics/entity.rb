@@ -27,6 +27,20 @@ module Schematics
       @has_one_through_associations = []
     end
 
+    def method_missing(method, *args, &block)
+      method = method.to_s.chomp('_attributes').camelize.to_sym
+      if Schematics::Attributes.const_defined?(method)
+        @attributes.select_is_a?(Schematics::Attributes.const_get(method))
+      else
+        super
+      end
+    end
+
+    def respond_to_missing?(method, *args)
+      method = method.to_s.chomp('_attributes').camelize.to_sym
+      Schematics::Attributes.const_defined?(method) || super
+    end
+
     def find_field_by_name(name)
       fields.find { |field| field.name == name }
     end
@@ -45,18 +59,6 @@ module Schematics
 
     def fields
       @attributes + @virtuals
-    end
-
-    def fields_without_references
-      fields - references
-    end
-
-    def attributes_without_references
-      @attributes - references
-    end
-
-    def references
-      @attributes.select_is_a?(Attributes::BelongsTo)
     end
 
     def model_properties
