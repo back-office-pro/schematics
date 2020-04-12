@@ -104,6 +104,15 @@
                         "unique": true,
                         "required": true
                     }
+                },
+                {
+                    "name": "preview",
+                    "type": "attachment",
+                    "options": {
+                        "content_type": [
+                            "png"
+                        ]
+                    }
                 }
             ]
         },
