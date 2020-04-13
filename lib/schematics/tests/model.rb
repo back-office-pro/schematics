@@ -96,8 +96,8 @@ module Schematics
             entity.enum_attributes.each do |enum|
               test "should have enum #{enum.name}" do
                 @record.respond_to?(enum.name.to_sym)
-                enum.values.map(&:to_sym).each do |value|
-                  assert @record.class.respond_to?(value)
+                enum.values.each do |value|
+                  assert @record.class.respond_to?(:"#{enum.name}_#{value}")
                 end
               end
             end

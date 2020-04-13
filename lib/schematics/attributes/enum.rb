@@ -36,7 +36,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}
+          enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}, _prefix: true
         RUBY
       end
 

@@ -33,7 +33,7 @@ html
                             class: "nav-link p-0 m-0 text-secondary text-truncate" do
                             = fa_icon :caret_right, class: "mr-2"
                             = model_class.human_enum_name(attribute.name.to_sym, value)
-                          span.badge.badge-secondary.text-primary.badge-pill= model_class.send(value).count
+                          span.badge.badge-secondary.text-primary.badge-pill= model_class.send(:"#{attribute.name}_#{value}").count
               li.nav-item.mb-2
             li.nav-item.text-center.text-center.mw-100.mb-4
               = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
