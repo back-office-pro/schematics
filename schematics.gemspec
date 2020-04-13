@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop", "~> 0.76.0"
   spec.add_development_dependency "rubocop-airbnb", "~> 3.0.1"
   spec.add_dependency "rails", "~> 6.0.2.2"
+  spec.add_dependency "image_processing", "~> 1.2"
   spec.add_dependency "pagy", "~> 3.5"
   spec.add_dependency "paranoia", "~> 2.4.2"
   spec.add_dependency "paper_trail", "~> 10.3.1"
