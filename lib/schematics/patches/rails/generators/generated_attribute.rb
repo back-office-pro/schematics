@@ -19,6 +19,22 @@ module Schematics
               else
                 super
               end
+            when :date
+              if attr_options[:before]
+                Date.today.to_s(:db)
+              elsif attr_options[:after]
+                Date.tomorrow.to_s(:db)
+              else
+                super
+              end
+            when :datetime, :timestamp, :time
+              if attr_options[:before]
+                Time.now.yesterday.to_s(:db)
+              elsif attr_options[:after]
+                Time.now.tomorrow.to_s(:db)
+              else
+                super
+              end
             else
               super
             end
@@ -33,7 +49,7 @@ module Schematics
           end
 
           def options_for_migration
-            options = super.except(:required, :type, :email, :url, :phone)
+            options = super.except(:required, :type, :email, :url, :phone, :before, :after)
             if options.key?(:foreign_key) && attr_options.key?(:type)
               options[:foreign_key] = { to_table: attr_options[:type].pluralize.to_sym }
             end

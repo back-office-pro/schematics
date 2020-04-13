@@ -7,6 +7,10 @@ module Schematics
       include Behaviours::Range::Filterable
       include Behaviours::Default::Sortable
 
+      def migration_options
+        super + [:before, :after]
+      end
+
       def format(value)
         value && I18n.l(value, format: "%A %d %B %Y")
       end
