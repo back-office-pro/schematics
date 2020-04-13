@@ -1,15 +1,16 @@
 class FixturesGenerator < Rails::Generators::Base
   def generate_action_text_rich_texts
-    Schematics::SCHEMA.entities.map(&:rich_text_attributes).flatten.
-      each_with_index do |attribute, index|
-      index = (index + 1).humanize
-      append_file(rich_texts_file_path) do
-        <<~YAML
-        #{index}:
-          record: one (#{attribute.entity.type.camelize})
-          name: #{attribute.name}
-          body: <p>In a <i>million</i> stars!</p>
-        YAML
+    Schematics::SCHEMA.entities.map(&:rich_text_attributes).flatten.each.
+      with_index(1) do |attribute, root_index|
+      2.times do |index|
+        append_file(rich_texts_file_path) do
+          <<~YAML
+          #{human_root_index(root_index, index)}:
+            record: #{human_index(index)} (#{attribute.entity.type.camelize})
+            name: #{attribute.name}
+            body: <p>In a <i>million</i> stars!</p>
+          YAML
+        end
       end
     end
   end
@@ -20,39 +21,49 @@ class FixturesGenerator < Rails::Generators::Base
 
   def generate_active_storage_attachments
     create_file(attachments_file_path)
-    Schematics::SCHEMA.entities.map(&:attachment_attributes).flatten.
-      each_with_index do |attribute, index|
-      index = (index + 1).humanize
-      append_to_file(attachments_file_path) do
-        <<~YAML
-        #{index}:
-          record: one (#{attribute.entity.type.camelize})
-          name: #{attribute.name}
-          blob: #{index}
-        YAML
+    Schematics::SCHEMA.entities.map(&:attachment_attributes).flatten.each.
+      with_index(1) do |attribute, root_index|
+      2.times do |index|
+        append_to_file(attachments_file_path) do
+          <<~YAML
+          #{human_root_index(root_index, index)}:
+            record: #{human_index(index)} (#{attribute.entity.type.camelize})
+            name: #{attribute.name}
+            blob: #{human_index(index)}
+          YAML
+        end
       end
     end
   end
 
   def generate_active_storage_blobs
     create_file(blobs_file_path)
-    Schematics::SCHEMA.entities.map(&:attachment_attributes).flatten.
-      each_with_index do |attribute, index|
-      index = (index + 1).humanize
-      append_to_file(blobs_file_path) do
-        <<~YAML
-        #{index}:
-          key: #{ActiveStorage::Blob.generate_unique_secure_token}
-          filename: dummy.#{attribute.extension}
-          content_type: #{Mime[attribute.extension]}
-          byte_size: 6381
-          checksum: XqaZqieypVz5akNq/VVJIg==
-        YAML
+    Schematics::SCHEMA.entities.map(&:attachment_attributes).flatten.each.
+      with_index(1) do |attribute, root_index|
+      2.times do |index|
+        append_to_file(blobs_file_path) do
+          <<~YAML
+          #{human_root_index(root_index, index)}:
+            key: #{ActiveStorage::Blob.generate_unique_secure_token}
+            filename: dummy.#{attribute.extension}
+            content_type: #{Mime[attribute.extension]}
+            byte_size: 6381
+            checksum: XqaZqieypVz5akNq/VVJIg==
+          YAML
+        end
       end
     end
   end
 
   private
+
+  def human_root_index(root_index, index)
+    (root_index * 2 + (index - 1)).humanize
+  end
+
+  def human_index(index)
+    (index + 1).humanize
+  end
 
   def fixtures_path
     File.join("test", "fixtures")
