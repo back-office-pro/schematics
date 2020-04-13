@@ -4,10 +4,9 @@ module Schematics
                   :icon,
                   :attributes,
                   :virtuals,
-                  :has_one_associations,
-                  :has_many_associations,
-                  :has_many_through_associations,
-                  :has_one_through_associations
+                  :associations
+
+    MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
 
     class << self
       def create(type:, icon: :caret_square_right, descriptor:, attributes: [], virtuals: [])
@@ -21,24 +20,29 @@ module Schematics
       @descriptor = descriptor
       @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
       @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
-      @has_one_associations = []
-      @has_many_associations = []
-      @has_many_through_associations = []
-      @has_one_through_associations = []
+      @associations = []
     end
 
-    def method_missing(method, *args, &block)
-      method = method.to_s.chomp('_attributes').camelize.to_sym
-      if Schematics::Attributes.const_defined?(method)
-        @attributes.select_is_a?(Schematics::Attributes.const_get(method))
+    def method_missing(method_name, *args, &block)
+      constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+      constant = constant&.camelize&.to_sym
+      mod = method&.camelize&.to_sym
+      if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
+        send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
+      elsif Schematics::Behaviours.const_defined?(constant)
+        send(method.to_sym).select_is_a?(Schematics::Behaviours.const_get(constant))
       else
         super
       end
     end
 
-    def respond_to_missing?(method, *args)
-      method = method.to_s.chomp('_attributes').camelize.to_sym
-      Schematics::Attributes.const_defined?(method) || super
+    def respond_to_missing?(method_name, *args)
+      constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+      constant = constant&.camelize&.to_sym
+      mod = method&.camelize&.to_sym
+      Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant) ||
+      Schematics::Behaviours.const_defined?(constant) ||
+      super
     end
 
     def find_field_by_name(name)
@@ -61,6 +65,10 @@ module Schematics
       @attributes + @virtuals
     end
 
+    def elements
+      fields + associations
+    end
+
     def model_properties
       @attributes.select(&:permitted_param).map(&:model_property)
     end
@@ -78,28 +86,23 @@ module Schematics
     end
 
     def eager_loading
-      (
-        belongs_to_attributes +
-        attachment_attributes +
-        rich_text_attributes +
-        has_one_and_through_associations
-      ).map(&:joins)
+      preloadable_elements.map(&:joins)
     end
 
     def filter_scopes
-      (fields + has_one_and_through_associations).select(&:visible?).map(&:filter_scope)
+      filterable_elements.map(&:filter_scope)
     end
 
     def sort_scopes
-      (fields + has_one_and_through_associations).select(&:visible?).map(&:sort_scope)
+      sortable_elements.map(&:sort_scope)
     end
 
     def has_filter_scopes
-      (fields + has_one_and_through_associations).select(&:visible?).map(&:has_filter_scope)
+      filterable_elements.map(&:has_filter_scope)
     end
 
     def has_sort_scopes
-      (fields + has_one_and_through_associations).select(&:visible?).map(&:has_sort_scope)
+      sortable_elements.map(&:has_sort_scope)
     end
 
     def validates
@@ -107,27 +110,25 @@ module Schematics
     end
 
     def has_one_and_through_associations
-      @has_one_associations + @has_one_through_associations
+      has_one_associations + has_one_through_associations
     end
 
     def has_many_and_through_associations
-      @has_many_associations + @has_many_through_associations
-    end
-
-    def associations
-      has_one_and_through_associations + has_many_and_through_associations
+      has_many_associations + has_many_through_associations
     end
 
     def modelize(subclass)
       subclass.class_eval(friendly_id)
-      (fields + associations + filter_scopes + sort_scopes + validates).
-        each { |modelizable| subclass.class_eval(modelizable) }
+      (elements + filter_scopes + sort_scopes + validates).each do |modelizable|
+        subclass.class_eval(modelizable)
+      end
     end
 
     def controllerize(subclass)
       subclass.class_eval(api)
-      (has_filter_scopes + has_sort_scopes).
-        each { |controllerizable| subclass.class_eval(controllerizable) }
+      (has_filter_scopes + has_sort_scopes).each do |controllerizable|
+        subclass.class_eval(controllerizable)
+      end
     end
 
     def friendly_id

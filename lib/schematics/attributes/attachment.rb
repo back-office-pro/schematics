@@ -1,6 +1,11 @@
 module Schematics
   module Attributes
     class Attachment < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Preloadable
+
       delegate :default, :json_default, to: :dummy
 
       def api_param_type
@@ -12,7 +17,7 @@ module Schematics
       end
 
       def joins
-        { [@name, type].join("_").to_sym => :blob }
+        { [name, type].join("_").to_sym => :blob }
       end
 
       def filter_scope

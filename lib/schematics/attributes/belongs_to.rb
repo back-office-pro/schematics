@@ -1,6 +1,11 @@
 module Schematics
   module Attributes
     class BelongsTo < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Preloadable
+
       attr_accessor :inverse_descriptor
 
       def migration_options
@@ -21,10 +26,6 @@ module Schematics
 
       def inverse_association
         @options[:inverse]
-      end
-
-      def joins
-        @name.to_sym
       end
 
       def filter_scope

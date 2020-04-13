@@ -1,6 +1,10 @@
 module Schematics
   module Attributes
     class Enum < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+
       attr_accessor :values
 
       def initialize(entity, name, options)

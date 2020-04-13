@@ -6,7 +6,7 @@ module Schematics
     def search
       @results = {}
       SCHEMA.entities.each do |entity|
-        entity.fields.select(&:searchable?).each do |field|
+        entity.searchable_fields.each do |field|
           records = entity.type.camelize.constantize.
             includes(entity.eager_loading).
             send(:"by_#{field.name}", params[:query])

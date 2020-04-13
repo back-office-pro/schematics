@@ -1,6 +1,10 @@
 module Schematics
   module Attributes
     class Boolean < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+
       def filter_scope
         super.extends <<~RUBY
           { where(#{@name}: true) }

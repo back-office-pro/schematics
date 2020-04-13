@@ -47,11 +47,10 @@ require 'schematics/patches/string'
 
 module Schematics
   autoload :Chart,        'schematics/chart'
-  autoload :Schema,       'schematics/schema'
-  autoload :Stat,         'schematics/stat'
   autoload :Entity,       'schematics/entity'
   autoload :JsonWebToken, 'schematics/json_web_token'
-  autoload :Renderable,   'schematics/renderable'
+  autoload :Schema,       'schematics/schema'
+  autoload :Stat,         'schematics/stat'
 
   module Associations
     autoload :Association,        'schematics/associations/association'
@@ -82,6 +81,15 @@ module Schematics
     autoload :Time,        'schematics/attributes/time'
     autoload :Timestamp,   'schematics/attributes/timestamp'
     autoload :Token,       'schematics/attributes/token'
+  end
+
+  module Behaviours
+    autoload :Filterable,  'schematics/behaviours/filterable'
+    autoload :Preloadable, 'schematics/behaviours/preloadable'
+    autoload :Rangeable,   'schematics/behaviours/rangeable'
+    autoload :Renderable,  'schematics/behaviours/renderable'
+    autoload :Searchable,  'schematics/behaviours/searchable'
+    autoload :Sortable,    'schematics/behaviours/sortable'
   end
 
   module Patches

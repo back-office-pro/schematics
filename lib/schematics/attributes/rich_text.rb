@@ -1,12 +1,18 @@
 module Schematics
   module Attributes
     class RichText < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Searchable
+      include Behaviours::Preloadable
+
       def api_param_type
         "string"
       end
 
       def joins
-        [type, @name].join("_").to_sym
+        [type, name].join("_").to_sym
       end
 
       def filter_scope
@@ -33,10 +39,6 @@ module Schematics
 
       def default
         SecureRandom.base58
-      end
-
-      def searchable?
-        true
       end
 
       def to_str

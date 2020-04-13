@@ -36,7 +36,7 @@ module Schematics
               assert scopes[:with_deleted][:type] == :boolean
             end
 
-            entity.attributes.select(&:visible?).each do |attribute|
+            entity.renderable_attributes.each do |attribute|
               scope = :"by_#{attribute.name}"
               test "should have scope #{scope}" do
                 assert scopes.include?(scope)

@@ -9,7 +9,7 @@ module Schematics
         includes += has_many_and_through_associations unless @records.is_a?(Enumerable)
         Array.wrap(@records).map do |record|
           remove_nil_attachments(record, includes)
-          record.as_json only: [:id] + attributes,
+          record.as_json only: [:id] + renderable_attributes,
                          methods: virtuals,
                          include: includes.to_h
         end
@@ -17,9 +17,9 @@ module Schematics
 
       protected
 
-      def attributes
+      def renderable_attributes
         (super - belongs_to_attributes - attachment_attributes - rich_text_attributes).
-          select(&:visible?).map(&:name).map(&:to_sym)
+          map(&:name).map(&:to_sym)
       end
 
       def virtuals

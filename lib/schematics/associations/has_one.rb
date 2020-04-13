@@ -1,6 +1,11 @@
 module Schematics
   module Associations
     class HasOne < Association
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Preloadable
+
       def filter_scope
         super.extends <<~RUBY
           #{name} { where(#{entity.type}: #{name}) }

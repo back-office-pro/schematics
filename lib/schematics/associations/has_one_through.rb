@@ -1,16 +1,17 @@
 module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Preloadable
+
       def name
         belongs_to.name
       end
 
       def class_name
         name.camelize
-      end
-
-      def joins
-        name.to_sym
       end
 
       def filter_scope

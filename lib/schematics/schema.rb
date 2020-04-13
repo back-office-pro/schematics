@@ -69,7 +69,7 @@ module Schematics
       @entities.each do |entity|
         entity.belongs_to_attributes.select(&:inverse_of_has_many?).each do |attribute|
           association = attribute.create_inverse_association
-          find_entity_by_type(attribute.association_type).has_many_associations << association
+          find_entity_by_type(attribute.association_type).associations << association
         end
       end
     end
@@ -78,7 +78,7 @@ module Schematics
       @entities.each do |entity|
         entity.belongs_to_attributes.select(&:inverse_of_has_one?).each do |attribute|
           association = attribute.create_inverse_association
-          find_entity_by_type(attribute.association_type).has_one_associations << association
+          find_entity_by_type(attribute.association_type).associations << association
         end
       end
     end
@@ -92,7 +92,7 @@ module Schematics
                 has_many_association.belongs_to,
                 association
               )
-              entity.has_many_through_associations << has_many_through_association
+              entity.associations << has_many_through_association
             end
           end
         end
@@ -105,7 +105,7 @@ module Schematics
           find_entity_by_type(attribute.association_type).belongs_to_attributes.each do |parent|
             if parent.entity != attribute.entity # prevent self association
               association = Associations::HasOneThrough.new(parent, attribute)
-              entity.has_one_through_associations << association
+              entity.associations << association
             end
           end
         end

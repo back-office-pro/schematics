@@ -1,7 +1,7 @@
 .table-responsive
   table.table.table-striped
     tbody
-      - (entity.fields - entity.belongs_to_attributes).select(&:visible?).each do |field|
+      - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
         tr
           th
             = fa_icon field.icon, class: "mr-2 text-muted"

@@ -86,9 +86,8 @@ module Schematics
               end
             end
 
-            (entity.fields + entity.has_one_and_through_associations).
-              select(&:visible?).each do |scopable|
-              scope = :"by_#{scopable.name}"
+            entity.renderable_elements.each do |element|
+              scope = :"by_#{element.name}"
               test "should have scope #{scope}" do
                 assert @record.class.respond_to?(scope)
               end
