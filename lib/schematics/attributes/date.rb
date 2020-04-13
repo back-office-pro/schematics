@@ -24,7 +24,7 @@ module Schematics
       end
 
       def format(value)
-        I18n.l(value, format: "%A %d %B %Y")
+        value && I18n.l(value, format: "%A %d %B %Y")
       end
 
       def icon

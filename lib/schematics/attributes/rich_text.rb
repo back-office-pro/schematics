@@ -28,7 +28,7 @@ module Schematics
       end
 
       def format(value)
-        value.to_plain_text
+        value&.to_plain_text
       end
 
       def default

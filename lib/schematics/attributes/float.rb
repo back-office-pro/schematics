@@ -10,7 +10,7 @@ module Schematics
       end
 
       def format(value)
-        [value, unit].compact.join(' ')
+        value && [value, unit].compact.join(' ')
       end
 
       def icon
