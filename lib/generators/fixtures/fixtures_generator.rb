@@ -29,7 +29,7 @@ class FixturesGenerator < Rails::Generators::Base
           #{human_root_index(root_index, index)}:
             record: #{human_index(index)} (#{attribute.entity.type.camelize})
             name: #{attribute.name}
-            blob: #{human_index(index)}
+            blob: #{human_root_index(root_index, index)}
           YAML
         end
       end
