@@ -11,12 +11,15 @@ module Schematics
         { super => [:data, :filename, :content_type] }
       end
 
+      def joins
+        { [@name, type].join("_").to_sym => :blob }
+      end
+
       def filter_scope
         super.extends <<~RUBY
           filename do
-            joins(:active_storage_attachment, :active_storage_blob).
-            where(record_type: "#{@entity.type.camelize}").
-            where("filename ILIKE ?", "%#\{filename}%")
+            joins(:#{joins.keys.first}, :#{@name}_blob).
+            where("active_storage_blobs.filename ILIKE ?", "%#\{filename}%")
           end
         RUBY
       end
@@ -24,9 +27,8 @@ module Schematics
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            joins(:active_storage_attachment, :active_storage_blob).
-            where(record_type: "#{@entity.type.camelize}").
-            order(filename: sort_direction)
+            left_joins(:#{joins.keys.first}, :#{@name}_blob).
+            order("active_storage_blobs.filename": sort_direction)
           end
         RUBY
       end
@@ -61,6 +63,10 @@ module Schematics
           validators[:content_type] = @options[:content_type].map(&:to_sym)
         end
         validators
+      end
+
+      def format(value)
+        Rails.application.routes.url_helpers.url_for(value) if value.attached?
       end
 
       def icon

@@ -23,6 +23,10 @@ module Schematics
         @options[:inverse]
       end
 
+      def joins
+        @name.to_sym
+      end
+
       def filter_scope
         super.extends <<~RUBY
           #{@name} { where(#{@name}: #{@name}) }
@@ -61,7 +65,7 @@ module Schematics
       end
 
       def create_inverse_association
-        "Schematics::Associations::#{inverse_association[:type].camelize}".constantize.new(self)
+        Schematics::Associations.const_get(inverse_association[:type].camelize.to_sym).new(self)
       end
 
       def icon

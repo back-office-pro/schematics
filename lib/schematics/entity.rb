@@ -77,6 +77,15 @@ module Schematics
       @attributes.map(&:permitted_json_param).flatten.compact
     end
 
+    def eager_loading
+      (
+        belongs_to_attributes +
+        attachment_attributes +
+        rich_text_attributes +
+        has_one_and_through_associations
+      ).map(&:joins)
+    end
+
     def filter_scopes
       (fields + has_one_and_through_associations).select(&:visible?).map(&:filter_scope)
     end

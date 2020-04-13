@@ -30,7 +30,7 @@ module Schematics
     def index
       @pagy, @resources = pagy(
         apply_scopes(model_class).
-        includes(eager_loading).
+        includes(entity.eager_loading).
         order(created_at: :desc),
         items: params[:per_page] || 10
       )
@@ -138,10 +138,6 @@ module Schematics
     def resource_params
       keys = request.format.json? ? entity.permitted_json_params : entity.permitted_params
       params.require(entity.type.to_sym).send(:permit, *keys)
-    end
-
-    def eager_loading
-      (entity.references + entity.has_one_and_through_associations).map(&:name).map(&:to_sym)
     end
   end
 end

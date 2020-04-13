@@ -2,11 +2,15 @@ module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
       def name
-        reference.name
+        belongs_to.name
       end
 
       def class_name
         name.camelize
+      end
+
+      def joins
+        name.to_sym
       end
 
       def filter_scope
@@ -18,7 +22,7 @@ module Schematics
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            joins(:#{entity.type}, :#{name}).
+            joins(:#{entity.type}, :#{joins}).
             merge(#{name.camelize}.order(#{descriptor.name}: sort_direction))
           end
         RUBY

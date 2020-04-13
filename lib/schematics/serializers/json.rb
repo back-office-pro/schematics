@@ -2,27 +2,53 @@ module Schematics
   module Serializers
     class JSON < Serializer
       def serialize
-        includes = references + has_one_and_through_associations
+        includes = belongs_to_attributes +
+          attachment_attributes +
+          rich_text_attributes +
+          has_one_and_through_associations
         includes += has_many_and_through_associations unless @records.is_a?(Enumerable)
-        @records.as_json only: [:id] + attributes_without_references,
+        Array.wrap(@records).map do |record|
+          remove_nil_attachments(record, includes)
+          record.as_json only: [:id] + attributes,
                          methods: virtuals,
                          include: includes.to_h
+        end
       end
 
       protected
 
-      def attributes_without_references
-        super.select(&:visible?).map(&:name).map(&:to_sym)
+      def attributes
+        (super - belongs_to_attributes - attachment_attributes - rich_text_attributes).
+          select(&:visible?).map(&:name).map(&:to_sym)
       end
 
       def virtuals
         super.map(&:name).map(&:to_sym)
       end
 
-      def references
-        super.map do |reference|
-          descriptor = reference.inverse_descriptor.name.to_sym
-          [reference.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
+      def attachment_attributes
+        super.map do |attribute|
+          [attribute.name.to_sym, { only: [], methods: [:filename] }]
+        end
+      end
+
+      def rich_text_attributes
+        super.map do |attribute|
+          [attribute.name.to_sym, { only: [], methods: [:to_plain_text] }]
+        end
+      end
+
+      def belongs_to_attributes
+        super.map do |attribute|
+          descriptor = attribute.inverse_descriptor.name.to_sym
+          [attribute.name.to_sym, { only: [:id, descriptor], methods: [descriptor] }]
+        end
+      end
+
+      def remove_nil_attachments(record, includes)
+        attachment_attributes.reject { |attachment| record.send(attachment.first).attached? }.
+          each do |attachment|
+          includes.delete(attachment)
         end
       end
 

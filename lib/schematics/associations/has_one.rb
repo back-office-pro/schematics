@@ -7,11 +7,15 @@ module Schematics
         RUBY
       end
 
+      def joins
+        entity.type.to_sym
+      end
+
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            joins(:#{@entity.type}).
-            merge(#{@entity.type.camelize}.order(#{descriptor.name}: sort_direction }))
+            joins(:#{joins}).
+            merge(#{entity.type.camelize}.order(#{descriptor.name}: sort_direction }))
           end
         RUBY
       end

@@ -7,14 +7,16 @@ module Schematics
       @results = {}
       SCHEMA.entities.each do |entity|
         entity.fields.select(&:searchable?).each do |field|
-          records = entity.type.camelize.constantize.send("by_#{field.name}", params[:query])
+          records = entity.type.camelize.constantize.
+            includes(entity.eager_loading).
+            send(:"by_#{field.name}", params[:query])
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
           @results[entity.type]&.uniq!
         end
         if request.format.json?
-          @results[entity.type]&.map! do |result|
-            Schematics::Serializers::JSON.new(entity, result).serialize
-          end
+          @results[entity.type] = Schematics::Serializers::JSON.
+            new(entity, @results[entity.type]).
+            serialize
         end
       end
       respond_to do |format|
