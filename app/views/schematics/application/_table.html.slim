@@ -79,20 +79,20 @@
                         data: { toggle: "tooltip", placement: "top", title: t('.archive') }
               - (table_entity.fields - table_entity.belongs_to_attributes).select(&:visible?).each do |field|
                 td.text-nowrap.text-center
-                  - if field.searchable? && !actions
-                    = highlight(resource.instance_eval(field.name), params[:query])
+                  - value = resource.instance_eval(field.name)
+                  - case field
+                  - when Schematics::Attributes::Attachments
+                    - value.each do |attachment|
+                      = link_to attachment.filename, main_app.url_for(attachment)
+                  - when Schematics::Attributes::Attachment
+                    = link_to value.filename, main_app.url_for(value) if value.attached?
+                  - when Schematics::Attributes::Boolean
+                    = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
+                  - when Schematics::Attributes::Enum
+                    = model_class.human_enum_name(field.name.to_sym, value)
                   - else
-                    - value = resource.instance_eval(field.name)
-                    - case field
-                    - when Schematics::Attributes::Attachments
-                      - value.each do |attachment|
-                        = link_to attachment.filename, main_app.url_for(attachment)
-                    - when Schematics::Attributes::Attachment
-                      = link_to value.filename, main_app.url_for(value) if value.attached?
-                    - when Schematics::Attributes::Boolean
-                      = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
-                    - when Schematics::Attributes::Enum
-                      = model_class.human_enum_name(field.name.to_sym, value)
+                    - if field.searchable? && !actions
+                      = highlight(field.format(value), params[:query])
                     - else
                       = field.format(value)
               - table_entity.belongs_to_attributes.each do |attribute|
