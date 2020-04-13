@@ -4,16 +4,11 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Filterable
       include Behaviours::Sortable
+      include Behaviours::Default::Sortable
 
       def filter_scope
         super.extends <<~RUBY
           { where(#{@name}: true) }
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction { order(#{@name}: sort_direction) }
         RUBY
       end
 

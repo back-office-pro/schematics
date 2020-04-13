@@ -1,8 +1,14 @@
 module Schematics
   module Attributes
-    class Float < Date
+    class Float < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Range::Filterable
+      include Behaviours::Default::Sortable
+
       def validators
-        super.merge(numericality: true)
+        super.merge(numericality: { allow_nil: !required? })
       end
 
       def unit

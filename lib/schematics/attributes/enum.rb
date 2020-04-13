@@ -4,6 +4,8 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Filterable
       include Behaviours::Sortable
+      include Behaviours::Default::Sortable
+      include Behaviours::Default::Filterable
 
       attr_accessor :values
 
@@ -30,18 +32,6 @@ module Schematics
 
       def api_param
         [super.sub('param', 'param_list'), @values.to_s].join(', ')
-      end
-
-      def filter_scope
-        super.extends <<~RUBY
-          #{@name} { where(#{@name}: #{@name}) }
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction { order(#{@name}: sort_direction) }
-        RUBY
       end
 
       def to_str

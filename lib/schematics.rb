@@ -84,9 +84,15 @@ module Schematics
   end
 
   module Behaviours
+    module Default
+      autoload :Filterable, 'schematics/behaviours/default/filterable'
+      autoload :Sortable,   'schematics/behaviours/default/sortable'
+    end
+    module Range
+      autoload :Filterable, 'schematics/behaviours/range/filterable'
+    end
     autoload :Filterable,  'schematics/behaviours/filterable'
     autoload :Preloadable, 'schematics/behaviours/preloadable'
-    autoload :Rangeable,   'schematics/behaviours/rangeable'
     autoload :Renderable,  'schematics/behaviours/renderable'
     autoload :Searchable,  'schematics/behaviours/searchable'
     autoload :Sortable,    'schematics/behaviours/sortable'

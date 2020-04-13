@@ -23,7 +23,10 @@ module Schematics
 
       def validators
         validators = super
-        validators[:numericality] = { greater_than: -bound, less_than: bound } unless precision.nil?
+        unless precision.nil?
+          validators[:numericality][:greater_than] = -bound
+          validators[:numericality][:less_than] = bound
+        end
         validators
       end
     end

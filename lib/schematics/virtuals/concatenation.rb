@@ -1,9 +1,7 @@
 module Schematics
   module Virtuals
     class Concatenation < Virtual
-      def searchable?
-        true
-      end
+      include Behaviours::Searchable
 
       def function
         @tokens.map(&:to_str).join.taint.to_json
@@ -17,14 +15,14 @@ module Schematics
         if joins.empty?
           super.extends <<~RUBY
             #{@name} do
-              where("#{to_sql} ILIKE ?", "%#\{#{@name}}%")
+              where("#{to_sql} ILIKE ?", "%#\{#{name}}%")
             end
           RUBY
         else
           super.extends <<~RUBY
             #{@name} do
               joins(#{joins}).
-              where("#{to_sql} ILIKE ?", "%#\{#{@name}}%")
+              where("#{to_sql} ILIKE ?", "%#\{#{name}}%")
             end
           RUBY
         end

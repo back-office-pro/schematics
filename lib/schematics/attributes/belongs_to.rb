@@ -3,6 +3,7 @@ module Schematics
     class BelongsTo < Attribute
       include Behaviours::Renderable
       include Behaviours::Filterable
+      include Behaviours::Default::Filterable
       include Behaviours::Sortable
       include Behaviours::Preloadable
 
@@ -26,12 +27,6 @@ module Schematics
 
       def inverse_association
         @options[:inverse]
-      end
-
-      def filter_scope
-        super.extends <<~RUBY
-          #{@name} { where(#{@name}: #{@name}) }
-        RUBY
       end
 
       def sort_scope

@@ -1,8 +1,11 @@
 module Schematics
   module Virtuals
     class Virtual
-      include Renderable
-      attr_accessor :name
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+
+      attr_accessor :entity, :name
 
       class << self
         def create(entity, name:, function:, options: {})
@@ -36,39 +39,21 @@ module Schematics
         end.flatten.uniq.join(', ')
       end
 
-      def filter_scope
-        <<~RUBY
-          scope :by_#{@name}, ->
-        RUBY
-      end
-
       def sort_scope
         if joins.empty?
-          <<~RUBY
-            scope :sort_by_#{@name}, -> sort_direction do
+          super.extends <<~RUBY
+            sort_direction do
               order({ Arel.sql("#{to_sql}") => sort_direction })
             end
           RUBY
         else
-          <<~RUBY
-            scope :sort_by_#{@name}, -> sort_direction do
+          super.extends <<~RUBY
+            sort_direction do
               joins(#{joins}).
               order({ Arel.sql("#{to_sql}") => sort_direction })
             end
           RUBY
         end
-      end
-
-      def has_filter_scope
-        <<~RUBY
-          has_scope :by_#{@name}, only: :index
-        RUBY
-      end
-
-      def has_sort_scope
-        <<~RUBY
-          has_scope :sort_by_#{@name}, only: :index
-        RUBY
       end
 
       def to_str

@@ -1,7 +1,6 @@
 module Schematics
   module Attributes
     class Attribute
-      include Renderable
       attr_accessor :entity, :name
 
       class << self
@@ -29,7 +28,7 @@ module Schematics
       end
 
       def required?
-        @options[:required]
+        @options[:required] || unique?
       end
 
       def unique?
@@ -60,7 +59,7 @@ module Schematics
         <<~RUBY
           property :#{@name.camelize(:lower)},
                    :#{model_property_type},
-                   #{(unique? || required?) ? ":required" : ":optional"},
+                   #{required? ? ":required" : ":optional"},
                    "#{@name.humanize}"
         RUBY
       end
@@ -70,40 +69,16 @@ module Schematics
           param :form,
           "#{@entity.type.camelize(:lower)}[#{@name.camelize(:lower)}]",
           :#{api_param_type},
-          #{(unique? || required?) ? ":required" : ":optional"},
+          #{required? ? ":required" : ":optional"},
           "#{@name.humanize}"
         RUBY
       end
 
       def validators
         validators = {}
-        validators[:uniqueness] = { case_sensitive: false, allow_blank: !required? } if unique?
+        validators[:uniqueness] = { case_sensitive: false } if unique?
         validators[:presence] = true if required?
         validators
-      end
-
-      def filter_scope
-        <<~RUBY
-          scope :by_#{@name}, ->
-        RUBY
-      end
-
-      def sort_scope
-        <<~RUBY
-          scope :sort_by_#{@name}, ->
-        RUBY
-      end
-
-      def has_filter_scope
-        <<~RUBY
-          has_scope :by_#{@name}, only: :index
-        RUBY
-      end
-
-      def has_sort_scope
-        <<~RUBY
-          has_scope :sort_by_#{@name}, only: :index
-        RUBY
       end
 
       def validate

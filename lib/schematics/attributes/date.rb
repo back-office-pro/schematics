@@ -1,27 +1,11 @@
 module Schematics
   module Attributes
     class Date < Attribute
-      def filter_scope
-        super.extends <<~RUBY
-          (from, to) do
-            return where("#{@entity.type.pluralize}.#{@name} <= ?", to) if from.nil?
-            return where("#{@entity.type.pluralize}.#{@name} >= ?", from) if to.nil?
-            return where("#{@entity.type.pluralize}.#{@name} >= ? AND #{@entity.type.pluralize}.#{@name} <= ?", from, to)
-          end
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction { order(#{@name}: sort_direction) }
-        RUBY
-      end
-
-      def has_filter_scope
-        super.extends_with_comma <<~RUBY
-          using: [:from, :to]
-        RUBY
-      end
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Range::Filterable
+      include Behaviours::Default::Sortable
 
       def format(value)
         value && I18n.l(value, format: "%A %d %B %Y")
