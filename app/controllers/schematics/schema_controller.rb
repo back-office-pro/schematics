@@ -8,16 +8,19 @@ module Schematics
     has_scope :with_deleted, type: :boolean, only: :index
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     delegate :model_class, to: :class
-    delegate :entity, to: :model_class
+    delegate :entity, :model_name, to: :model_class
     attr_reader :resource
 
     class << self
-      delegate :entity, to: :model_class
+      delegate :entity, :model_name, to: :model_class
       Swagger::Docs::Generator.set_real_methods
 
       def inherited(subclass)
         super
         subclass.class_eval do
+          breadcrumb I18n.t('schematics.schema.index.title',
+                            model_name: model_name.human.pluralize.downcase),
+                     :"#{entity.type.pluralize}_path"
           entity.controllerize(subclass)
         end
       end
@@ -47,7 +50,7 @@ module Schematics
         format.html
         format.json { render schema: @resource }
         format.pdf do
-          render pdf: "#{model_class.model_name.human.downcase.dasherize}-#{@resource.slug}",
+          render pdf: "#{model_name.human.downcase.dasherize}-#{@resource.slug}",
                  disposition: 'attachment',
                  template: 'schematics/application/show',
                  layout: 'layouts/schematics/pdf.html'
@@ -67,9 +70,8 @@ module Schematics
       if @resource.save
         respond_to do |format|
           format.html do
-            redirect_to @resource,
-                        notice: t('schematics.schema.create.created',
-                                  model_name: model_class.model_name.human)
+            notice = t('schematics.schema.create.created', model_name: model_name.human)
+            redirect_to @resource, notice: notice
           end
           format.json { head :created }
         end
@@ -85,9 +87,8 @@ module Schematics
       if @resource.update(resource_params)
         respond_to do |format|
           format.html do
-            redirect_to @resource,
-                        notice: t('schematics.schema.update.updated',
-                                  model_name: model_class.model_name.human)
+            notice = t('schematics.schema.update.updated', model_name: model_name.human)
+            redirect_to @resource, notice: notice
           end
           format.json
         end
@@ -112,10 +113,8 @@ module Schematics
       end
       respond_to do |format|
         format.html do
-          redirect_to polymorphic_path(model_class),
-                      notice: t(action,
-                                model_name: model_class.model_name.human,
-                                scope: 'schematics.schema.destroy')
+          notice = t(action, model_name: model_name.human, scope: 'schematics.schema.destroy')
+          redirect_to polymorphic_path(model_class), notice: notice
         end
         format.json
       end

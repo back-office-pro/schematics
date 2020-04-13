@@ -153,13 +153,13 @@ module Schematics
         end
         ActionController::Renderers.add(:csv) do |records, options|
           today = I18n.l(Time.current)
-          filename = "#{model_class.model_name.human.downcase.pluralize.dasherize}-#{today}.csv"
+          filename = "#{model_name.human.downcase.pluralize.dasherize}-#{today}.csv"
           send_data Schematics::Serializers::CSV.new(entity, records).serialize,
                     filename: filename
         end
         ActionController::Renderers.add(:xls) do |records, options|
           today = I18n.l(Time.current)
-          filename = "#{model_class.model_name.human.downcase.pluralize.dasherize}-#{today}.xls"
+          filename = "#{model_name.human.downcase.pluralize.dasherize}-#{today}.xls"
           send_data Schematics::Serializers::CSV.new(entity, records).serialize(separator: '/t'),
                     filename: filename
         end
