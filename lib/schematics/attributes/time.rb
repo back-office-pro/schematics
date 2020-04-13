@@ -1,6 +1,6 @@
 module Schematics
   module Attributes
-    class Time < Date
+    class Time < Datetime
       def format(value)
         value && I18n.l(value, format: "%H:%M")
       end
