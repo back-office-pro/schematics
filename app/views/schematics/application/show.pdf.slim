@@ -11,14 +11,14 @@
             - case field
             - when Schematics::Attributes::Attachments
               - value.each do |attachment|
-                - if attachment.image?
-                  = image_tag attachment.variant(resize_to_limit: [100, 100])
+                - if attachment.representable?
+                  = image_tag attachment.representation(resize_to_limit: [800, 600])
                 - else
                   = link_to attachment.filename, attachment
             - when Schematics::Attributes::Attachment
               - if value.attached?
-                - if value.image?
-                  = image_tag value.variant(resize_to_limit: [100, 100])
+                - if value.representable?
+                  = image_tag value.representation(resize_to_limit: [800, 600])
                 - else
                   = link_to value.filename, value
             - when Schematics::Attributes::Boolean
