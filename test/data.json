@@ -204,8 +204,12 @@
         },
         {
             "type": "order",
-            "descriptor": "id",
+            "descriptor": "title",
             "attributes": [
+                {
+                    "name": "title",
+                    "type": "string"
+                },
                 {
                     "name": "start_at",
                     "type": "datetime",
