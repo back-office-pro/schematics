@@ -20,8 +20,8 @@
           humanize_attachment_validators(attribute.validators) unless attribute.validators.empty?),
         input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
     - when Schematics::Attributes::Digest
-      = f.input attribute.name.to_sym
-      = f.input :"#{attribute.name}_confirmation"
+      = f.input attribute.name.to_sym, required: resource.new_record?
+      = f.input :"#{attribute.name}_confirmation", required: resource.new_record?
     - else
       = f.input attribute.name.to_sym
   - entity.belongs_to_attributes.each do |attribute|
