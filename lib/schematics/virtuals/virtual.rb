@@ -77,9 +77,9 @@ module Schematics
             begin
               #{function}
             rescue NameError => e
-              "SchemaError: \#{e.name\} not defined"
+              Virtuals::Errors::NameError.new(e.message, e.name)
             rescue TypeError => e
-              "SchemaError: \#{e.message\}"
+              Virtuals::Errors::TypeError.new(e.message)
             end
           end
         RUBY

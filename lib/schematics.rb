@@ -63,25 +63,25 @@ module Schematics
   end
 
   module Attributes
-    autoload :Attachment,   'schematics/attributes/attachment'
-    autoload :Attachments,  'schematics/attributes/attachments'
-    autoload :Attribute,    'schematics/attributes/attribute'
-    autoload :BelongsTo,    'schematics/attributes/belongs_to'
-    autoload :Boolean,      'schematics/attributes/boolean'
-    autoload :Date,         'schematics/attributes/date'
-    autoload :Datetime,     'schematics/attributes/datetime'
-    autoload :Decimal,      'schematics/attributes/decimal'
-    autoload :Digest,       'schematics/attributes/digest'
-    autoload :Enum,         'schematics/attributes/enum'
-    autoload :Float,        'schematics/attributes/float'
-    autoload :Integer,      'schematics/attributes/integer'
-    autoload :References,   'schematics/attributes/references'
-    autoload :RichText,     'schematics/attributes/rich_text'
-    autoload :String,       'schematics/attributes/string'
-    autoload :Text,         'schematics/attributes/text'
-    autoload :Time,         'schematics/attributes/time'
-    autoload :Timestamp,    'schematics/attributes/timestamp'
-    autoload :Token,        'schematics/attributes/token'
+    autoload :Attachment,  'schematics/attributes/attachment'
+    autoload :Attachments, 'schematics/attributes/attachments'
+    autoload :Attribute,   'schematics/attributes/attribute'
+    autoload :BelongsTo,   'schematics/attributes/belongs_to'
+    autoload :Boolean,     'schematics/attributes/boolean'
+    autoload :Date,        'schematics/attributes/date'
+    autoload :Datetime,    'schematics/attributes/datetime'
+    autoload :Decimal,     'schematics/attributes/decimal'
+    autoload :Digest,      'schematics/attributes/digest'
+    autoload :Enum,        'schematics/attributes/enum'
+    autoload :Float,       'schematics/attributes/float'
+    autoload :Integer,     'schematics/attributes/integer'
+    autoload :References,  'schematics/attributes/references'
+    autoload :RichText,    'schematics/attributes/rich_text'
+    autoload :String,      'schematics/attributes/string'
+    autoload :Text,        'schematics/attributes/text'
+    autoload :Time,        'schematics/attributes/time'
+    autoload :Timestamp,   'schematics/attributes/timestamp'
+    autoload :Token,       'schematics/attributes/token'
   end
 
   module Patches
@@ -113,21 +113,25 @@ module Schematics
   end
 
   module Tokens
-    autoload :Number,       'schematics/tokens/number'
-    autoload :Operator,     'schematics/tokens/operator'
-    autoload :Parenthesis,  'schematics/tokens/parenthesis'
-    autoload :Reference,    'schematics/tokens/reference'
-    autoload :String,       'schematics/tokens/string'
-    autoload :Token,        'schematics/tokens/token'
-    autoload :Tokenizer,    'schematics/tokens/tokenizer'
-    autoload :Variable,     'schematics/tokens/variable'
-    autoload :Whitespace,   'schematics/tokens/whitespace'
+    autoload :Number,      'schematics/tokens/number'
+    autoload :Operator,    'schematics/tokens/operator'
+    autoload :Parenthesis, 'schematics/tokens/parenthesis'
+    autoload :Reference,   'schematics/tokens/reference'
+    autoload :String,      'schematics/tokens/string'
+    autoload :Token,       'schematics/tokens/token'
+    autoload :Tokenizer,   'schematics/tokens/tokenizer'
+    autoload :Variable,    'schematics/tokens/variable'
+    autoload :Whitespace,  'schematics/tokens/whitespace'
   end
 
   module Virtuals
-    autoload :Calculation,    'schematics/virtuals/calculation'
-    autoload :Concatenation,  'schematics/virtuals/concatenation'
-    autoload :Virtual,        'schematics/virtuals/virtual'
+    module Errors
+      autoload :NameError, 'schematics/virtuals/errors/name_error'
+      autoload :TypeError, 'schematics/virtuals/errors/type_error'
+    end
+    autoload :Calculation,   'schematics/virtuals/calculation'
+    autoload :Concatenation, 'schematics/virtuals/concatenation'
+    autoload :Virtual,       'schematics/virtuals/virtual'
   end
 
   SCHEMA = Schema.instance
