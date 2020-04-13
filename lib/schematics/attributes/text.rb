@@ -5,6 +5,10 @@ module Schematics
         super + [:limit]
       end
 
+      def api_param_type
+        "string"
+      end
+
       def filter_scope
         super.extends <<~RUBY
           #{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }
