@@ -36,30 +36,22 @@ module Schematics
               assert scopes[:with_deleted][:type] == :boolean
             end
 
-            entity.renderable_attributes.each do |attribute|
-              scope = :"by_#{attribute.name}"
-              test "should have scope #{scope}" do
+            entity.filterable_elements.each do |element|
+              scope = :"by_#{element.name}"
+              test "should have filter scope #{scope}" do
                 assert scopes.include?(scope)
                 assert scopes[scope][:only] == [:index]
-                assert scopes[scope][:using] == [:from, :to] if attribute.is_a?(Attributes::Date)
-                assert scopes[scope][:type] == :boolean if attribute.is_a?(Attributes::Boolean)
+                assert scopes[scope][:type] == :boolean if element.is_a?(Attributes::Boolean)
+                if element.is_a?(Behaviours::Range::Filterable) || element.is_a?(Virtuals::Calculation)
+                  assert scopes[scope][:using] == [:from, :to]
+                end
               end
             end
 
-            entity.virtuals.each do |virtual|
-              scope = :"by_#{virtual.name}"
-              test "should have scope #{scope}" do
+            entity.sortable_elements.each do |element|
+              scope = :"sort_by_#{element.name}"
+              test "should have sort scope #{scope}" do
                 assert scopes.include?(scope)
-                assert scopes[scope][:only] == [:index]
-                assert scopes[scope][:using] == [:from, :to] if virtual.is_a?(Virtuals::Calculation)
-              end
-            end
-
-            entity.has_one_and_through_associations.each do |association|
-              scope = :"by_#{association.name}"
-              test "should have scope #{scope}" do
-                assert scopes.include?(scope)
-                assert scopes[scope][:only] == [:index]
               end
             end
 
