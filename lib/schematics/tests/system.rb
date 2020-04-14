@@ -1,46 +1,64 @@
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
+      # include ActionText::SystemTestHelper
+
       delegate :model_class, to: :class
-      delegate :entity, to: :model_class
+      delegate :entity, :model_name, to: :model_class
+      delegate :email, to: :current_user
+      delegate :login_path, to: 'Schematics::Engine.routes.url_helpers'
 
       class << self
-        delegate :entity, to: :model_class
+        delegate :entity, :model_name, to: :model_class
 
         def inherited(subclass)
           super
           subclass.class_eval do
             setup do
               @record = send(entity.type.pluralize, :one)
+              login
             end
 
             test "visiting the index" do
-              visit(entity.type.pluralize)
-              assert_selector("h1", text: entity.type.pluralize.titleize)
+              visit polymorphic_path(model_class)
+              title = I18n.t('schematics.schema.index.title',
+                             model_name: model_name.human.pluralize.downcase)
+              assert_selector "h5", text: title
             end
 
             test "creating a #{entity.type}" do
-              visit(entity.type.pluralize)
-              click_on("New #{entity.type.titleize}")
+              visit polymorphic_path(model_class)
+              click_on I18n.t('schematics.application.index.buttons.add',
+                              model_name: model_name.human.downcase)
               fill_form(entity)
-              click_on("Create #{entity.type.humanize}")
-              assert_text("#{entity.type.humanize} was successfully created")
-              click_on("Back")
+              click_on I18n.t('schematics.application.form.buttons.confirm')
+              assert_text I18n.t('schematics.schema.create.created', model_name: model_name.human)
             end
 
             test "updating a #{entity.type}" do
-              visit(entity.type.pluralize)
-              click_on("Edit", match: :first)
+              visit polymorphic_path(model_class)
+              selector = "a[data-title='#{I18n.t('schematics.application.table.edit')}']"
+              find(selector, match: :first).click
               fill_form(entity)
-              click_on("Update #{entity.type.humanize}")
-              assert_text("#{entity.type.humanize} was successfully updated")
-              click_on("Back")
+              click_on I18n.t('schematics.application.form.buttons.confirm')
+              assert_text I18n.t('schematics.schema.update.updated', model_name: model_name.human)
+            end
+
+            test "archiving a #{entity.type}" do
+              visit polymorphic_path(model_class)
+              selector = "a[data-title='#{I18n.t('schematics.application.table.archive')}']"
+              find(selector, match: :first).click
+              assert_text I18n.t('schematics.schema.destroy.archived', model_name: model_name.human)
             end
 
             test "destroying a #{entity.type}" do
-              visit(entity.type.pluralize)
-              page.accept_confirm { click_on "Destroy", match: :first }
-              assert_text("#{entity.type.humanize} was successfully destroyed")
+              visit polymorphic_path(model_class)
+              find("tr[onclick]", match: :first).click
+              click_on I18n.t('schematics.application.show.buttons.destroy')
+              fill_in "input[type='text']", @record.send(attribute.descriptor.name)
+              click_on I18n.t('schematics.application.form.buttons.confirm')
+              assert_text I18n.t('schematics.schema.destroy.destroyed',
+                                 model_name: model_name.human)
             end
           end
         end
@@ -52,18 +70,36 @@ module Schematics
 
       protected
 
+      def current_user
+        @current_user ||= users(:two)
+      end
+
+      def login
+        visit login_path
+        fill_in I18n.t('simple_form.labels.user.email'), with: email
+        fill_in I18n.t('simple_form.labels.user.password'), with: "secret"
+        click_on I18n.t('schematics.application.form.buttons.confirm')
+        assert_text I18n.t('schematics.sessions.create.logged_in')
+      end
+
       def fill_form(entity)
-        entity.attributes.each do |attribute|
-          if attribute.is_a?(Attributes::Boolean)
-            check(attribute.name.humanize) if @record.send(attribute.name)
-          elsif attribute.is_a?(Attributes::Attachment)
-            attach_file(attribute.name.humanize, attribute.default)
-          elsif attribute.is_a?(Attributes::BelongsTo)
+        entity.fillable_attributes.each do |attribute|
+          input = model_class.human_attribute_name(attribute.name)
+          case attribute
+          when Attributes::Boolean
+            check(input) if @record.send(attribute.name)
+          when Attributes::Attachment
+            attach_file(input, attribute.default.path)
+          when Attributes::RichText
+            # TODO
+            # only available on Rails master
+            # https://github.com/rails/rails/blob/master/actiontext/lib/action_text/system_test_helper.rb
+            # fill_in_rich_text_area(input, with: attribute.default)
+          when Attributes::BelongsTo
             select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
-                   from: attribute.name.humanize
+                   from: input
           else
-            fill_in attribute.name.humanize,
-                    with: attribute.default || @record.send(attribute.name)
+            fill_in input, with: attribute.default || @record.send(attribute.name)
           end
         end
       end
