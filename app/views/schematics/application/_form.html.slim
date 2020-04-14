@@ -9,9 +9,9 @@
       = f.input attribute.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
       = f.input attribute.name.to_sym,
+                as: :radio_buttons,
                 collection: resource.class.send(attribute.name.pluralize.to_sym).keys. \
-                  collect { |key| [resource.class.human_enum_name(attribute.name.to_sym, key), key] },
-                include_blank: false
+                  collect { |key| [resource.class.human_enum_name(attribute.name.to_sym, key), key] }
     - when Schematics::Attributes::Attachment
       = f.input attribute.name.to_sym,
         as: :file,
