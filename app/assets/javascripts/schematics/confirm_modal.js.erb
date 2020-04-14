@@ -1,0 +1,9 @@
+//= require data-confirm-modal
+
+$(function() {
+    dataConfirmModal.setDefaults({
+        title:  "<%= I18n.t('schematics.application.show.modals.confirm.confirm_your_action') %>",
+        commit: "<%= I18n.t('schematics.application.form.buttons.confirm') %>",
+        cancel: "<%= I18n.t('schematics.application.form.buttons.cancel') %>"
+    });
+});

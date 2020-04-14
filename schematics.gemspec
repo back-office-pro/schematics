@@ -55,6 +55,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "route_translator", "~> 7.1.2"
   spec.add_dependency "google-cloud-translate", "~> 2.3.0"
   spec.add_dependency "date_validator", "~> 0.9.0"
+  spec.add_dependency "data-confirm-modal", "~> 1.6.3"
   spec.add_dependency "sprockets", "~> 3.7.2"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"

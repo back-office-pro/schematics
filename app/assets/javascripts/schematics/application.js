@@ -3,7 +3,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-//= require twitter/typeahead
 //= require chartkick
 //= require Chart.bundle
 //= require trix/dist/trix
