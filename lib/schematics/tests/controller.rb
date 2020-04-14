@@ -42,7 +42,8 @@ module Schematics
                 assert scopes.include?(scope)
                 assert scopes[scope][:only] == [:index]
                 assert scopes[scope][:type] == :boolean if element.is_a?(Attributes::Boolean)
-                if element.is_a?(Behaviours::Range::Filterable) || element.is_a?(Virtuals::Calculation)
+                if element.is_a?(Behaviours::Range::Filterable) ||
+                   element.is_a?(Virtuals::Calculation)
                   assert scopes[scope][:using] == [:from, :to]
                 end
               end
