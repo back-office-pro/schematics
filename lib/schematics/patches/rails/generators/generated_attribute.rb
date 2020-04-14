@@ -53,7 +53,8 @@ module Schematics
             if options.key?(:foreign_key) && attr_options.key?(:type)
               options[:foreign_key] = { to_table: attr_options[:type].pluralize.to_sym }
             end
-            # TODO remove when https://github.com/rails/rails/pull/37583 is published
+            # TODO
+            # Remove when https://github.com/rails/rails/pull/37583 is published
             # Fix this issue: https://github.com/rails/rails/issues/23422
             options[:type] = :uuid if reference?
             options
