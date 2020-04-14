@@ -1,5 +1,5 @@
 = simple_form_for resource, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-  - (entity.attributes - entity.belongs_to_attributes).select(&:permitted_param).each do |attribute|
+  - (entity.fillable_attributes - entity.belongs_to_attributes).each do |attribute|
     - case attribute
     - when Schematics::Attributes::String
       = f.input attribute.name.to_sym, maxlength: true, minlength: true, pattern: true

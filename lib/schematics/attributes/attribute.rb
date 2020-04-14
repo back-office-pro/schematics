@@ -39,14 +39,6 @@ module Schematics
         @name
       end
 
-      def permitted_param
-        column_name
-      end
-
-      def permitted_json_param
-        permitted_param
-      end
-
       def model_property_type
         api_param_type
       end

@@ -93,6 +93,7 @@ module Schematics
     module Range
       autoload :Filterable, 'schematics/behaviours/range/filterable'
     end
+    autoload :Fillable,    'schematics/behaviours/fillable'
     autoload :Filterable,  'schematics/behaviours/filterable'
     autoload :Preloadable, 'schematics/behaviours/preloadable'
     autoload :Renderable,  'schematics/behaviours/renderable'

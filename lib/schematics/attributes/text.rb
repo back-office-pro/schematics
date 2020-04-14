@@ -4,8 +4,9 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Filterable
       include Behaviours::Sortable
-      include Behaviours::Default::Sortable
       include Behaviours::Searchable
+      include Behaviours::Fillable
+      include Behaviours::Default::Sortable
 
       def migration_options
         super + [:limit]

@@ -6,6 +6,7 @@ module Schematics
       include Behaviours::Sortable
       include Behaviours::Searchable
       include Behaviours::Preloadable
+      include Behaviours::Fillable
 
       def api_param_type
         "string"

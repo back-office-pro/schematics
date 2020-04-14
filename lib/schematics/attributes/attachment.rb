@@ -5,6 +5,7 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
       include Behaviours::Preloadable
+      include Behaviours::Fillable
 
       delegate :default, :json_default, to: :dummy
 

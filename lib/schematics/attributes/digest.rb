@@ -1,6 +1,8 @@
 module Schematics
   module Attributes
     class Digest < Attribute
+      include Behaviours::Fillable
+
       def migration_options
         super + [:limit]
       end

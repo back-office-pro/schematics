@@ -5,10 +5,6 @@ module Schematics
         "string"
       end
 
-      def permitted_param
-        nil
-      end
-
       def to_str
         <<~RUBY
           has_secure_token :#{@name}

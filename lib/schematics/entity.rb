@@ -70,19 +70,19 @@ module Schematics
     end
 
     def model_properties
-      @attributes.select(&:permitted_param).map(&:model_property)
+      fillable_attributes.map(&:model_property)
     end
 
     def api_params
-      @attributes.select(&:permitted_json_param).map(&:api_param)
+      fillable_attributes.map(&:api_param)
     end
 
     def permitted_params
-      @attributes.map(&:permitted_param).flatten.compact
+      fillable_attributes.map(&:permitted_param).flatten.compact
     end
 
     def permitted_json_params
-      @attributes.map(&:permitted_json_param).flatten.compact
+      fillable_attributes.map(&:permitted_json_param).flatten.compact
     end
 
     def eager_loading

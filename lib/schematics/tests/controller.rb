@@ -18,13 +18,13 @@ module Schematics
 
             setup do
               @record = send(entity.type.pluralize, :one)
-              @params = entity.attributes.select(&:permitted_param).map do |attribute|
+              @params = entity.fillable_attributes.map do |attribute|
                 [
                   attribute.column_name.to_sym,
                   attribute.default || @record.send(attribute.column_name),
                 ]
               end.to_h
-              @json_params = entity.attributes.select(&:permitted_json_param).map do |attribute|
+              @json_params = entity.fillable_attributes.map do |attribute|
                 [
                   attribute.column_name.to_sym,
                   attribute.json_default || @record.send(attribute.column_name),
