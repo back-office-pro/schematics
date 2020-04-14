@@ -35,10 +35,15 @@ module Schematics
               end
             end
 
-            entity.virtuals.each do |virtual|
-              test "should have virtual #{virtual.name}" do
-                assert @record.respond_to?(virtual.name.to_sym)
-                assert @record.send(virtual.name.to_sym)
+            (entity.fields - entity.belongs_to_attributes - entity.digest_attributes).
+              each do |field|
+              test "should have field #{field.name}" do
+                assert @record.respond_to?(field.name.to_sym)
+                if field.is_a?(Attributes::Enum)
+                  field.values.each do |value|
+                    assert @record.class.respond_to?(:"#{field.name}_#{value}")
+                  end
+                end
               end
             end
 
@@ -86,19 +91,17 @@ module Schematics
               end
             end
 
-            entity.renderable_elements.each do |element|
+            entity.filterable_elements.each do |element|
               scope = :"by_#{element.name}"
-              test "should have scope #{scope}" do
+              test "should have filter scope #{scope}" do
                 assert @record.class.respond_to?(scope)
               end
             end
 
-            entity.enum_attributes.each do |enum|
-              test "should have enum #{enum.name}" do
-                @record.respond_to?(enum.name.to_sym)
-                enum.values.each do |value|
-                  assert @record.class.respond_to?(:"#{enum.name}_#{value}")
-                end
+            entity.sortable_elements.each do |element|
+              scope = :"sort_by_#{element.name}"
+              test "should have sort scope #{scope}" do
+                assert @record.class.respond_to?(scope)
               end
             end
           end
