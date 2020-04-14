@@ -19,6 +19,20 @@ module Schematics
               assert @record.valid?
             end
 
+            entity.filterable_elements.each do |element|
+              scope = :"by_#{element.name}"
+              test "should have filter scope #{scope}" do
+                assert model_class.respond_to?(scope)
+              end
+            end
+
+            entity.sortable_elements.each do |element|
+              scope = :"sort_by_#{element.name}"
+              test "should have sort scope #{scope}" do
+                assert model_class.respond_to?(scope)
+              end
+            end
+
             entity.attributes.select(&:required?).each do |attribute|
               test "invalid without #{attribute.name}" do
                 @record.send("#{attribute.name}=", nil)
@@ -32,6 +46,10 @@ module Schematics
                 @record.send("#{attribute.name}=", @other_record.send(attribute.name))
                 refute @record.valid?
                 assert_not_nil @record.errors[attribute.name.to_sym]
+              end
+
+              test "#{attribute} should be required when unique" do
+                assert attribute.required?
               end
             end
 
@@ -56,7 +74,7 @@ module Schematics
             entity.enum_attributes.each do |enum|
               test "#{enum.name} should have inclusion validator" do
                 keys = model_class.send(enum.name.pluralize.to_sym).keys
-                assert enum.validators[:inclusion][:in] = keys
+                assert enum.validators[:inclusion][:in] == keys
               end
               enum.values.each do |value|
                 test "should have enum value #{enum.name}_#{value}" do
@@ -67,7 +85,7 @@ module Schematics
 
             entity.float_attributes.each do |float|
               test "#{float.name} should have numericality validator" do
-                assert float.validators[:numericality][:allow_nil] = !float.required?
+                assert float.validators[:numericality][:allow_nil] == !float.required?
               end
             end
 
@@ -77,8 +95,7 @@ module Schematics
               end
             end
 
-            (entity.fields - entity.belongs_to_attributes - entity.digest_attributes).
-              each do |field|
+            (entity.fields - entity.digest_attributes).each do |field|
               test "should have field #{field.name}" do
                 assert @record.respond_to?(field.name.to_sym)
               end
@@ -125,20 +142,6 @@ module Schematics
                 assert reflection.macro == :has_one
                 assert reflection.class_name == association.class_name
                 assert reflection.options[:through] == association.through.name.to_sym
-              end
-            end
-
-            entity.filterable_elements.each do |element|
-              scope = :"by_#{element.name}"
-              test "should have filter scope #{scope}" do
-                assert model_class.respond_to?(scope)
-              end
-            end
-
-            entity.sortable_elements.each do |element|
-              scope = :"sort_by_#{element.name}"
-              test "should have sort scope #{scope}" do
-                assert model_class.respond_to?(scope)
               end
             end
           end
