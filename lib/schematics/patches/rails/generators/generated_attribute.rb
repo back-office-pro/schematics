@@ -5,6 +5,8 @@ module Schematics
         module GeneratedAttribute
           def default
             case type
+            when :integer, :float, :decimal, :boolean
+              attr_options[:default] || super
             when :token
               SecureRandom.base58
             when :string
