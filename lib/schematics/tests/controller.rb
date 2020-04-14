@@ -4,6 +4,7 @@ module Schematics
       delegate :controller_class, to: :class
       delegate :model_class, to: :controller_class
       delegate :entity, to: :model_class
+      delegate :sessions_path, to: 'Schematics::Engine.routes.url_helpers'
 
       class << self
         delegate :model_class, to: :controller_class
@@ -222,7 +223,9 @@ module Schematics
       protected
 
       def login(as: nil)
-        post '/sessions', params: { user: { email: users(:two).email, password: "secret" } }, as: as
+        post sessions_path,
+             params: { user: { email: users(:two).email, password: "secret" } },
+             as: as
       end
 
       def authorization_header
