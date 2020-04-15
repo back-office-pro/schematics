@@ -1,7 +1,9 @@
+require 'action_text/system_test_helper'
+
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
-      # include ActionText::SystemTestHelper
+      include ActionText::SystemTestHelper
 
       delegate :model_class, to: :class
       delegate :entity, :model_name, to: :model_class
@@ -55,8 +57,13 @@ module Schematics
               visit polymorphic_path(model_class)
               find("tr[onclick]", match: :first).click
               click_on I18n.t('schematics.application.show.buttons.destroy')
-              fill_in "input[type='text']", @record.send(attribute.descriptor.name)
-              click_on I18n.t('schematics.application.form.buttons.confirm')
+              sleep(2)
+              within('div.modal') do
+                fill_in "input[type='text']",
+                        with: @record.send(entity.descriptor.name)
+                click_on I18n.t('schematics.application.form.buttons.confirm')
+                sleep(2)
+              end
               assert_text I18n.t('schematics.schema.destroy.destroyed',
                                  model_name: model_name.human)
             end
@@ -86,18 +93,18 @@ module Schematics
         entity.fillable_attributes.each do |attribute|
           input = model_class.human_attribute_name(attribute.name)
           case attribute
+          when Attributes::Enum
+            choose(input, match: :first)
           when Attributes::Boolean
             check(input) if @record.send(attribute.name)
           when Attributes::Attachment
-            attach_file(input, attribute.default.path)
+            attach_file(input, attribute.default.path, make_visible: true)
           when Attributes::RichText
-            # TODO
-            # only available on Rails master
-            # https://github.com/rails/rails/blob/master/actiontext/lib/action_text/system_test_helper.rb
-            # fill_in_rich_text_area(input, with: attribute.default)
+            fill_in_rich_text_area("#{entity.type}[#{attribute.column_name}]", with: attribute.default)
           when Attributes::BelongsTo
             select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
-                   from: input
+                   from: input,
+                   match: :first
           else
             fill_in input, with: attribute.default || @record.send(attribute.name)
           end
