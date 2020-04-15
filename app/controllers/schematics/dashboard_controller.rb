@@ -14,9 +14,11 @@ module Schematics
           @results[entity.type]&.uniq!
         end
         if request.format.json?
-          @results[entity.type] = Schematics::Serializers::JSON.
-            new(entity, @results[entity.type]).
-            serialize
+          serializer = "#{entity.type.camelize}Serializer".constantize
+          @results[entity.type] = ActiveModelSerializers::SerializableResource.new(
+            @results[entity.type],
+            each_serializer: serializer
+          )
         end
       end
       respond_to do |format|

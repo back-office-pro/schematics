@@ -1,7 +1,15 @@
 module Schematics
   module Serializers
-    class CSV < Serializer
-      def serialize(separator: ',')
+    class CSV
+      delegate_missing_to :@entity
+      delegate :model, to: :@records
+
+      def initialize(entity, records)
+        @entity = entity
+        @records = records
+      end
+
+      def to_csv(separator: ',')
         ::CSV.generate(headers: true, col_sep: separator) do |file|
           file << headers
           @records.each do |record|
@@ -13,6 +21,12 @@ module Schematics
         end
       end
 
+      def to_xls
+        to_csv(separator: '/t')
+      end
+
+      private
+
       def headers
         ((@entity.renderable_fields - @entity.belongs_to_attributes) +
           @entity.belongs_to_attributes +
@@ -22,7 +36,7 @@ module Schematics
 
       def renderable_fields
         (super - @entity.belongs_to_attributes).map do |field|
-          field.format(@record.instance_eval(field.name))
+          Array.wrap(field.format(@record.instance_eval(field.name))).join(' ')
         end
       end
 

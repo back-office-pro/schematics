@@ -83,19 +83,20 @@ module Schematics
       })
     end
 
+    initializer "schematics.oj" do
+      Oj::Rails.set_encoder
+      Oj::Rails.set_decoder
+      Oj::Rails.optimize
+    end
+
+    initializer "schematics.active_model_serializers" do
+      ActiveModelSerializers.config.key_transform = :camel_lower
+    end
+
     initializer "schematics.route_translator" do
       RouteTranslator.config do |config|
         config.hide_locale = true
       end
-    end
-
-    initializer "schematics.olive_branch" do |app|
-      app.middleware.use OliveBranch::Middleware,
-                         inflection: "camel",
-                         content_type_check: -> (content_type) { true },
-                         exclude_response: -> (env) do
-                           env['PATH_INFO'].match(/^\/rails\/active_storage\/direct_uploads/)
-                         end
     end
 
     initializer "schematics.cors" do |app|
@@ -151,20 +152,13 @@ module Schematics
 
     initializer "schematics.renderers" do
       ActiveSupport.on_load(:action_controller) do
-        ActionController::Renderers.add(:schema) do |records, options|
-          render json: Schematics::Serializers::JSON.new(entity, records).serialize
-        end
         ActionController::Renderers.add(:csv) do |records, options|
-          today = I18n.l(Time.current)
-          filename = "#{model_name.human.downcase.pluralize.dasherize}-#{today}.csv"
-          send_data Schematics::Serializers::CSV.new(entity, records).serialize,
-                    filename: filename
+          filename = "#{model_name.human.downcase.pluralize.dasherize}-#{I18n.l(Time.current)}.csv"
+          send_data Schematics::CsvSerializer.new(entity, records).to_csv, filename: filename
         end
         ActionController::Renderers.add(:xls) do |records, options|
-          today = I18n.l(Time.current)
-          filename = "#{model_name.human.downcase.pluralize.dasherize}-#{today}.xls"
-          send_data Schematics::Serializers::CSV.new(entity, records).serialize(separator: '/t'),
-                    filename: filename
+          filename = "#{model_name.human.downcase.pluralize.dasherize}-#{I18n.l(Time.current)}.xls"
+          send_data Schematics::CsvSerializer.new(entity, records).to_xls, filename: filename
         end
       end
     end

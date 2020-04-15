@@ -39,16 +39,16 @@ module Schematics
       )
       respond_to do |format|
         format.html
-        format.json { render schema: @resources }
-        format.csv  { render csv:    @resources }
-        format.xls  { render xls:    @resources }
+        format.json { render json: @resources }
+        format.csv  { render csv:  @resources }
+        format.xls  { render xls:  @resources }
       end
     end
 
     def show
       respond_to do |format|
         format.html
-        format.json { render schema: @resource }
+        format.json { render json: @resource }
         format.pdf do
           render pdf: "#{model_name.human.downcase.dasherize}-#{@resource.slug}",
                  disposition: 'attachment',

@@ -12,7 +12,6 @@ require 'action_controller'
 require 'has_scope'
 require 'rack/attack'
 require 'swagger/docs'
-require 'olive_branch'
 require 'bullet'
 require 'rack/cors'
 require 'swagger_ui_engine'
@@ -43,6 +42,8 @@ require 'route_translator'
 require 'date_validator'
 require 'data-confirm-modal'
 require 'google/cloud/translate'
+require 'oj'
+require 'active_model_serializers'
 require 'schematics/engine'
 require 'schematics/patches/array'
 require 'schematics/patches/string'
@@ -114,12 +115,6 @@ module Schematics
                  'schematics/patches/active_record/connection_adapters/table_definition'
       end
     end
-  end
-
-  module Serializers
-    autoload :CSV,        'schematics/serializers/csv'
-    autoload :JSON,       'schematics/serializers/json'
-    autoload :Serializer, 'schematics/serializers/serializer'
   end
 
   module Tests

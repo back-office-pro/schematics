@@ -234,7 +234,7 @@ module Schematics
       end
 
       def authorization_header
-        { Authorization: JSON.parse(@response.body)['authToken'] }
+        { Authorization: JSON.parse(@response.body)['auth_token'] }
       end
     end
   end
