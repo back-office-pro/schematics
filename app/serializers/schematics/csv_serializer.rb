@@ -1,10 +1,10 @@
 module Schematics
   class CsvSerializer
-    delegate_missing_to :@entity
+    delegate_missing_to :entity
     delegate :model, to: :@records
+    delegate :entity, to: :model
 
-    def initialize(entity, records)
-      @entity = entity
+    def initialize(records)
       @records = records
     end
 
@@ -27,14 +27,14 @@ module Schematics
     private
 
     def headers
-      ((@entity.renderable_fields - @entity.belongs_to_attributes) +
-        @entity.belongs_to_attributes +
-        @entity.has_one_and_through_associations).
+      ((entity.renderable_fields - entity.belongs_to_attributes) +
+        entity.belongs_to_attributes +
+        entity.has_one_and_through_associations).
         map(&:name).map { |name| model.human_attribute_name(name) }
     end
 
     def renderable_fields
-      (super - @entity.belongs_to_attributes).map do |field|
+      (super - entity.belongs_to_attributes).map do |field|
         Array.wrap(field.format(@record.instance_eval(field.name))).join(' ')
       end
     end
