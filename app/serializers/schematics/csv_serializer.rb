@@ -9,7 +9,7 @@ module Schematics
     end
 
     def to_csv(separator: ',')
-      ::CSV.generate(headers: true, col_sep: separator) do |file|
+      CSV.generate(headers: true, col_sep: separator) do |file|
         file << headers
         @records.each do |record|
           @record = record
