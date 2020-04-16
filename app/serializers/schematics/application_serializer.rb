@@ -56,7 +56,7 @@ module Schematics
     end
 
     def should_render_has_many_associations
-      instance_options[:template].to_sym == :show
+      instance_options[:template]&.to_sym == :show
     end
   end
 end
