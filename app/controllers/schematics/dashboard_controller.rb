@@ -6,19 +6,17 @@ module Schematics
     def search
       @results = {}
       SCHEMA.entities.each do |entity|
+        model_class = entity.type.camelize.constantize
         entity.searchable_fields.each do |field|
-          records = entity.type.camelize.constantize.
+          records = model_class.
             includes(entity.eager_loading).
             send(:"by_#{field.name}", params[:query])
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
           @results[entity.type]&.uniq!
         end
         if request.format.json?
-          serializer = "#{entity.type.camelize}Serializer".constantize
-          @results[entity.type] = ActiveModelSerializers::SerializableResource.new(
-            @results[entity.type],
-            each_serializer: serializer
-          )
+          serializable = ActiveModelSerializers::SerializableResource.new(@results[entity.type])
+          @results[entity.type] = serializable
         end
       end
       respond_to do |format|
