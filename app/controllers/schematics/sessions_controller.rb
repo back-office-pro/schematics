@@ -58,7 +58,7 @@ module Schematics
     private
 
     def user_params
-      params.require(:user).permit(*SCHEMA.find_entity_by_type('user').permitted_params)
+      params.require(:user).permit(*User.entity.permitted_params)
     end
   end
 end
