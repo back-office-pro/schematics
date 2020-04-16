@@ -38,4 +38,8 @@
           |  (#{resources.size})
       .collapse.hide id="collapse-#{association.name}"
         .card-body
-          = render 'schematics/application/table', resources: resources, table_entity: association.entity, actions: false
+          = render 'schematics/application/table',
+                    resources: resources,
+                    entity: association.entity,
+                    model_class: association.class_name.constantize,
+                    actions: false

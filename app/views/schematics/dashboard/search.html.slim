@@ -9,8 +9,7 @@
       = render 'schematics/application/empty'
 - else
   - @results.each do |type, resources|
-    - table_entity = Schematics::SCHEMA.find_entity_by_type(type)
-    - model_class = table_entity.type.camelize.constantize
+    - model_class = resources.first.class
     .card.shadow-sm.mb-4
       a.card-header href="#collapse-#{type}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.text-truncate.font-weight-bold
@@ -21,6 +20,6 @@
         .card-body
           = render 'schematics/application/table',
             resources: resources,
-            table_entity: table_entity,
+            entity: model_class.entity,
             model_class: model_class,
             actions: false

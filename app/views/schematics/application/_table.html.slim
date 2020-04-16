@@ -6,21 +6,21 @@
           th.text-nowrap.text-center
             = fa_icon :archive, class: "mr-2 text-dark"
             = t('.archives')
-        - (table_entity.renderable_fields - table_entity.belongs_to_attributes).each do |field|
+        - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(field) 
             - else
               = fa_icon field.icon, class: "mr-2 text-dark"
               = model_class.human_attribute_name(field.name)
-        - table_entity.belongs_to_attributes.each do |attribute|
+        - entity.belongs_to_attributes.each do |attribute|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(attribute) 
             - else
               = fa_icon attribute.icon, class: "mr-2 text-dark"
               = model_class.human_attribute_name(attribute.name)
-        - table_entity.has_one_and_through_associations.each do |association|
+        - entity.has_one_and_through_associations.each do |association|
           th.text-nowrap.text-center
             - if actions 
               = sort_link_to(association) 
@@ -31,7 +31,7 @@
         tr
           th.text-nowrap.align-middle.px-0
             = render 'schematics/application/filters/with_deleted'
-          - (table_entity.renderable_fields - table_entity.belongs_to_attributes).each do |field|
+          - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
             th.align-middle.text-center.px-0
               - case field
               - when Schematics::Attributes::Boolean
@@ -41,13 +41,13 @@
               - when Schematics::Attributes::Date
                 = render 'schematics/application/filters/date', field: field
               - when Schematics::Attributes::Enum
-                = render 'schematics/application/filters/enum', field: field, table_entity: table_entity
+                = render 'schematics/application/filters/enum', field: field
               - else
                 = render 'schematics/application/filters/input', field: field
-          - table_entity.belongs_to_attributes.each do |attribute|
+          - entity.belongs_to_attributes.each do |attribute|
             th.align-middle.text-center.px-0
               = render 'schematics/application/filters/belongs_to', attribute: attribute
-          - table_entity.has_one_and_through_associations.each do |association|
+          - entity.has_one_and_through_associations.each do |association|
             th.align-middle.text-center.px-0
               = render 'schematics/application/filters/association', association: association
       tbody
@@ -77,7 +77,7 @@
                         method: :delete,
                         class: "btn btn-danger btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: t('.archive') }
-              - (table_entity.renderable_fields - table_entity.belongs_to_attributes).each do |field|
+              - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
                 td.text-nowrap.text-center
                   - value = resource.instance_eval(field.name)
                   - case field
@@ -94,12 +94,12 @@
                     = highlight field.format(value), params[:query]
                   - else
                     = field.format(value)
-              - table_entity.belongs_to_attributes.each do |attribute|
+              - entity.belongs_to_attributes.each do |attribute|
                 td.text-nowrap.text-center
                   - if resource.instance_eval(attribute.name).present?
                     = link_to resource.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
                       main_app.polymorphic_path(resource.instance_eval(attribute.name))
-              - table_entity.has_one_and_through_associations.each do |association|
+              - entity.has_one_and_through_associations.each do |association|
                 td.text-nowrap.text-center
                   - if resource.instance_eval(association.name).present?
                     = link_to resource.instance_eval("#{association.name}.#{association.descriptor.name}"),
