@@ -34,7 +34,7 @@ module Schematics
         super.extends <<~RUBY
           sort_direction do
             joins(:#{association_type}).
-            merge(#{association_type.camelize}.order(#{inverse_descriptor.name}: sort_direction))
+            merge(#{model_property_type}.order(#{inverse_descriptor.name}: sort_direction))
           end
         RUBY
       end
