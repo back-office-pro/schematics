@@ -12,7 +12,6 @@ en:
             content_type: "Allowed file formats:"
             size: "File size:"
             less_than: less than
-            mb: mb
             dimension: Dimension
             width: width
             height: height
