@@ -3,6 +3,8 @@ require 'action_text/system_test_helper'
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
+      # driven_by :selenium_headless
+
       include ActionText::SystemTestHelper
       include Engine.routes.url_helpers
 
@@ -55,13 +57,12 @@ module Schematics
 
             test "destroying a #{entity.type}" do
               visit polymorphic_path(model_class)
-              find("tr[onclick]", match: :first).click
+              find("tr[onclick] td:nth-child(2)", match: :first).click
               click_on I18n.t('schematics.application.show.buttons.destroy')
-              sleep(1)
+              page.execute_script("$('div.modal').removeClass('fade')") # remove modal fading delay
               within('div.modal') do
                 find("input[type='text']").set @record.send(entity.descriptor.name)
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                sleep(1)
               end
               assert_text I18n.t('schematics.schema.destroy.destroyed',
                                  model_name: model_name.human)
