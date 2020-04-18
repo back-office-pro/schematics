@@ -59,13 +59,11 @@ module Schematics
       def to_str
         <<~RUBY
           def #{@name}
-            begin
-              #{function}
-            rescue NameError => e
-              Virtuals::Errors::NameError.new(e.message, e.name)
-            rescue TypeError => e
-              Virtuals::Errors::TypeError.new(e.message)
-            end
+            #{function}
+          rescue NameError => e
+            Virtuals::Errors::NameError.new(e.message, e.name)
+          rescue TypeError => e
+            Virtuals::Errors::TypeError.new(e.message)
           end
         RUBY
       end
