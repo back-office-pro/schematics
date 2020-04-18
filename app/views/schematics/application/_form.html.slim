@@ -16,11 +16,11 @@
                   collect { |key| [resource.class.human_enum_name(attribute.name.to_sym, key), key] }
     - when Schematics::Attributes::Attachment
       = f.input attribute.name.to_sym,
-        as: :file,
-        required: attribute.required? && resource.new_record?,
-        hint: (fa_icon(:info_circle, class: "mr-1") + \
-          humanize_attachment_validators(attribute.validators) unless attribute.validators.empty?),
-        input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
+                as: :file,
+                required: attribute.required? && resource.new_record?,
+                hint: (fa_icon(:info_circle, class: "mr-1") + \
+                  humanize_attachment_validators(attribute.validators) unless attribute.validators.empty?),
+                input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
     - when Schematics::Attributes::Digest
       = f.input attribute.name.to_sym, required: resource.new_record?
       = f.input :"#{attribute.name}_confirmation", required: resource.new_record?
