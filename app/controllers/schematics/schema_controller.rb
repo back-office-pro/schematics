@@ -18,9 +18,6 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          breadcrumb I18n.t('schematics.schema.index.title',
-                            model_name: model_name.human.pluralize.downcase),
-                     :"#{entity.type.pluralize}_path"
           entity.controllerize(subclass)
         end
       end
@@ -130,6 +127,8 @@ module Schematics
     protected
 
     def set_resource
+      title = t('schematics.schema.index.title', model_name: model_name.human.pluralize.downcase)
+      breadcrumb title, :"#{entity.type.pluralize}_path"
       scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
       @resource = model_class.send(scope).find(params[:id])
     end
