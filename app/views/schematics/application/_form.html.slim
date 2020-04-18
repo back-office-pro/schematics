@@ -1,6 +1,8 @@
 = simple_form_for resource, defaults: { input_html: { class: "bg-light border-0" } } do |f|
   - (entity.fillable_attributes - entity.belongs_to_attributes).each do |attribute|
     - case attribute
+    - when Schematics::Attributes::Date
+      = f.input attribute.name.to_sym, as: :date, html5: true
     - when Schematics::Attributes::String
       = f.input attribute.name.to_sym, maxlength: true, minlength: true, pattern: true
     - when Schematics::Attributes::Decimal
