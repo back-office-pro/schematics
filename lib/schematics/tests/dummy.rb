@@ -5,14 +5,6 @@ module Schematics
         @extension = extension
       end
 
-      def filename
-        ["dummy", @extension].join(".")
-      end
-
-      def content_type
-        Mime[@extension]
-      end
-
       def default
         @default ||= Rack::Test::UploadedFile.new(file, content_type)
       end
@@ -29,8 +21,8 @@ module Schematics
 
       def file
         return @file if defined?(@file)
-        @file = Tempfile.new(filename)
-        @file.write("dummy")
+        @file = Tempfile.new(filename_array)
+        @file.write(content_type)
         @file.rewind
         @file
       end
@@ -45,6 +37,18 @@ module Schematics
 
       def data
         ["data:", content_type, ";base64,", base64_encoded].join
+      end
+
+      def filename_array
+        ["dummy", ".#{@extension}"]
+      end
+
+      def filename
+        filename_array.join
+      end
+
+      def content_type
+        Mime[@extension]
       end
     end
   end
