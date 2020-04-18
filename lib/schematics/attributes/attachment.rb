@@ -41,7 +41,6 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_one_attached :#{@name}
           has_one_base64_attached :#{@name}
         RUBY
       end
