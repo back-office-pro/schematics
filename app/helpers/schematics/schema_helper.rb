@@ -51,33 +51,5 @@ module Schematics
         end
       end
     end
-
-    def humanize_attachment_validators(validators)
-      content = []
-      validators.except(:presence, :attached).each do |key, value|
-        content << [
-          I18n.t(key.to_sym, scope: 'schematics.application.form.attachment.validators'),
-          case value
-          when Array
-            value.map(&:to_s).map(&:upcase).join(" ")
-          when Hash
-            humanize_attachment_validators(value)
-          when Numeric
-            number_to_human_size(value)
-          else
-            value.humanize
-          end,
-        ].join(" ")
-      end
-      content.join(" - ").html_safe
-    end
-
-    def image_tag_representation(attachment)
-      image_tag attachment.representation(resize_to_limit: [800, 600]).processed
-    rescue MiniMagick::Error
-      I18n.t('errors.messages.image_metadata_missing').humanize
-    rescue ActiveStorage::FileNotFoundError
-      I18n.t('schematics.schema.not_found.title')
-    end
   end
 end

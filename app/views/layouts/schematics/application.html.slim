@@ -82,7 +82,10 @@ html
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.email
-                  = fa_icon :user_circle, size: "2x", class: "align-middle"
+                  - if current_user.avatar.attached?
+                    = image_tag_representation(current_user.avatar, width: 50, height: 50, css_class: "rounded-circle border border-light")
+                  - else
+                    = fa_icon :user_circle, size: "2x", class: "align-middle"
                 .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="accountDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-2"

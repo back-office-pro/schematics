@@ -49,6 +49,18 @@
                     }
                 },
                 {
+                    "name": "avatar",
+                    "type": "attachment",
+                    "options": {
+                        "content_type": [
+                            "png",
+                            "jpeg",
+                            "jpg"
+                        ],
+                        "size": 2
+                    }
+                },
+                {
                     "name": "locale",
                     "type": "enum",
                     "options": [

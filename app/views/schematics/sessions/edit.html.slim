@@ -12,6 +12,10 @@
                 include_blank: false
       = f.input :password
       = f.input :password_confirmation
+      = f.input :avatar,
+                as: :file,
+                hint: fa_icon(:info_circle, class: "mr-1") + \
+                  humanize_attachment_validators(User.entity.attachment_attributes.first.validators)
       = f.input :current_password
       = f.button :button, class: "btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check
