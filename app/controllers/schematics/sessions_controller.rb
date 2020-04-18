@@ -48,8 +48,9 @@ module Schematics
     def update
       if current_user.authenticate(params[:user][:current_password])
         if current_user.update(user_params)
-          set_locale
-          redirect_to profile_path, notice: t('.profile_updated')
+          switch_locale do
+            redirect_to profile_path, notice: t('.profile_updated')
+          end
         else
           render :edit
         end
