@@ -45,9 +45,9 @@ require 'google/cloud/translate'
 require 'oj'
 require 'active_model_serializers'
 require 'json_web_token'
+require 'array'
+require 'string'
 require 'schematics/engine'
-require 'schematics/patches/array'
-require 'schematics/patches/string'
 
 module Schematics
   autoload :Chart,  'schematics/chart'
