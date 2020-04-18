@@ -57,12 +57,11 @@ module Schematics
               visit polymorphic_path(model_class)
               find("tr[onclick]", match: :first).click
               click_on I18n.t('schematics.application.show.buttons.destroy')
-              sleep(2)
+              sleep(1)
               within('div.modal') do
-                fill_in "input[type='text']",
-                        with: @record.send(entity.descriptor.name)
+                find("input[type='text']").set @record.send(entity.descriptor.name)
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                sleep(2)
+                sleep(1)
               end
               assert_text I18n.t('schematics.schema.destroy.destroyed',
                                  model_name: model_name.human)
@@ -91,21 +90,24 @@ module Schematics
 
       def fill_form(entity)
         entity.fillable_attributes.each do |attribute|
-          input = model_class.human_attribute_name(attribute.name)
+          input = "#{entity.type}[#{attribute.column_name}]"
           case attribute
           when Attributes::Enum
-            choose(input, match: :first)
+            choose(input, match: :first, allow_label_click: true)
           when Attributes::Boolean
             check(input) if @record.send(attribute.name)
           when Attributes::Attachment
             attach_file(input, attribute.default.path, make_visible: true)
           when Attributes::RichText
-            fill_in_rich_text_area "#{entity.type}[#{attribute.column_name}]",
-                                   with: attribute.default
+            fill_in_rich_text_area input, with: attribute.default
           when Attributes::BelongsTo
             select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
                    from: input,
                    match: :first
+          when Attributes::Digest
+            digest = attribute.default
+            fill_in input, with: digest
+            fill_in "#{entity.type}[#{attribute.column_name}_confirmation]", with: digest
           else
             fill_in input, with: attribute.default || @record.send(attribute.name)
           end
