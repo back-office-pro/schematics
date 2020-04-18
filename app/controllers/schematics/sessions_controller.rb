@@ -2,11 +2,20 @@ module Schematics
   class SessionsController < ApplicationController
     before_action :authorize, only: [:edit, :update]
     layout "schematics/auth", only: [:new, :create]
+    swagger_controller :sessions, "Sessions Management"
 
     def new
     end
 
     def edit
+    end
+
+    swagger_api :create do |api|
+      summary "User login"
+      param :form, "user[email]", :string, :required, "Email address"
+      param :form, "user[password]", :string, :required, "Password"
+      response :success
+      response :unauthorized
     end
 
     def create

@@ -1,6 +1,6 @@
 fr:
   routes:
-    search: recherche
+    searches: recherche
     timeline: historique
     login: connexion
     profile: profil

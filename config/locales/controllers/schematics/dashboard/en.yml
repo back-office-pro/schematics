@@ -3,7 +3,3 @@ fr:
     dashboard:
       home:
         title: Home
-      search:
-        title: Search "%{query}"
-      timeline:
-        title: Timeline

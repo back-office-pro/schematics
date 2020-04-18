@@ -95,10 +95,10 @@
         {
             "type": "category",
             "icon": "box",
-            "descriptor": "designation",
+            "descriptor": "label",
             "attributes": [
                 {
-                    "name": "designation",
+                    "name": "label",
                     "type": "string",
                     "options": {
                         "unique": true,

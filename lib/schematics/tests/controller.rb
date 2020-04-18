@@ -1,11 +1,12 @@
 module Schematics
   module Tests
     class Controller < ::ActionDispatch::IntegrationTest
+      include Engine.routes.url_helpers
+
       delegate :controller_class, to: :class
       delegate :model_class, to: :controller_class
       delegate :entity, to: :model_class
       delegate :email, to: :current_user
-      delegate :sessions_path, to: 'Schematics::Engine.routes.url_helpers'
 
       class << self
         delegate :model_class, to: :controller_class

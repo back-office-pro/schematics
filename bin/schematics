@@ -2,10 +2,10 @@
 
 if [ -z $1 ]
 then
-    app_name="test/dummy"
+    app_name="spec/dummy"
     disable=""
     dummy_app="true"
-    rm -rf ./test/dummy
+    rm -rf ./spec/dummy
 else
     app_name=$1
     disable="-no"

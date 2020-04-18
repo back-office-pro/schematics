@@ -2,10 +2,10 @@
 gem "schematics", path: "/Users/max/bitbucket/schematics"
 
 # Bundle
-# run "bundle install"
+run "bundle install"
 
 # Schema
-# copy_file "#{Dir.pwd}/../test/data.json", "data.json"
+# copy_file "#{Dir.pwd}/../spec/data.json", "data.json"
 
 # Rails commands
 rails_command "generate routes"

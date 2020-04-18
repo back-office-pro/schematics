@@ -3,7 +3,3 @@ fr:
     dashboard:
       home:
         title: Accueil
-      search:
-        title: Recherche "%{query}"
-      timeline:
-        title: Historique

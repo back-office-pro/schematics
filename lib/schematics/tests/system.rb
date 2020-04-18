@@ -4,11 +4,11 @@ module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
       include ActionText::SystemTestHelper
+      include Engine.routes.url_helpers
 
       delegate :model_class, to: :class
       delegate :entity, :model_name, to: :model_class
       delegate :email, to: :current_user
-      delegate :login_path, to: 'Schematics::Engine.routes.url_helpers'
 
       class << self
         delegate :entity, :model_name, to: :model_class
@@ -100,7 +100,8 @@ module Schematics
           when Attributes::Attachment
             attach_file(input, attribute.default.path, make_visible: true)
           when Attributes::RichText
-            fill_in_rich_text_area("#{entity.type}[#{attribute.column_name}]", with: attribute.default)
+            fill_in_rich_text_area "#{entity.type}[#{attribute.column_name}]",
+                                   with: attribute.default
           when Attributes::BelongsTo
             select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
                    from: input,

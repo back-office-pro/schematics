@@ -44,16 +44,16 @@ require 'data-confirm-modal'
 require 'google/cloud/translate'
 require 'oj'
 require 'active_model_serializers'
+require 'json_web_token'
 require 'schematics/engine'
 require 'schematics/patches/array'
 require 'schematics/patches/string'
 
 module Schematics
-  autoload :Chart,        'schematics/chart'
-  autoload :Entity,       'schematics/entity'
-  autoload :JsonWebToken, 'schematics/json_web_token'
-  autoload :Schema,       'schematics/schema'
-  autoload :Stat,         'schematics/stat'
+  autoload :Chart,  'schematics/chart'
+  autoload :Entity, 'schematics/entity'
+  autoload :Schema, 'schematics/schema'
+  autoload :Stat,   'schematics/stat'
 
   module Associations
     autoload :Association,        'schematics/associations/association'

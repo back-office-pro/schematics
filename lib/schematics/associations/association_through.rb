@@ -8,6 +8,10 @@ module Schematics
         @through = through
       end
 
+      def descriptor
+        @belongs_to.inverse_descriptor
+      end
+
       def type
         super.chomp('_through')
       end

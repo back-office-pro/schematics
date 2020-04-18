@@ -52,7 +52,7 @@ module Schematics
     end
 
     def data_json
-      file_path = File.expand_path("../../test/data.json", __dir__)
+      file_path = File.expand_path("../../spec/data.json", __dir__)
       file = File.read(file_path)
       JSON.parse(file, symbolize_names: true)
     end

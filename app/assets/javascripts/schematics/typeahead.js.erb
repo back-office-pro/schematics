@@ -5,9 +5,9 @@ const descriptors = {};
 const urls = {};
 
 <% Schematics::SCHEMA.entities.each do |entity| %>
-    icons.<%= entity.type.camelize(:lower) %>        = "<%= entity.icon.to_s.dasherize %>";
-    descriptors.<%= entity.type.camelize(:lower) %>  = "<%= entity.descriptor.name.camelize(:lower) %>";
-    urls.<%= entity.type.camelize(:lower) %>         = "/<%= entity.type.underscore.pluralize %>";
+    icons.<%= entity.type %>        = "<%= entity.icon.to_s.dasherize %>";
+    descriptors.<%= entity.type %>  = "<%= entity.descriptor.name.camelize(:lower) %>";
+    urls.<%= entity.type %>         = "/<%= entity.type.pluralize %>";
 <% end %>
 
 $(function() {
@@ -38,7 +38,7 @@ $(function() {
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: `/search?query=%QUERY`,
+            url: `/searches/%QUERY`,
             wildcard: "%QUERY",
             transform: function(response) {
                 const results = [];
@@ -91,9 +91,8 @@ $(function() {
             $(this.form).submit();
         })
         .typeahead(null, {
-            display: '__FIELD__',
-            limit: 10,
             source: filterSource,
+            display: '__FIELD__',
             limit: 10,
             templates: {
                 notFound: () => `

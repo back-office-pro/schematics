@@ -5,4 +5,4 @@ Style/Documentation:
 AllCops:
   TargetRubyVersion: 2.6.5
   Exclude:
-    - 'test/dummy/**/*'
+    - 'spec/dummy/**/*'

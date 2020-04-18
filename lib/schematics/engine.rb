@@ -16,7 +16,7 @@ module Schematics
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.default_url_options = { host: "localhost:3000" }
+    config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
     # i18n
     config.i18n.default_locale = :fr
@@ -59,11 +59,11 @@ module Schematics
     end
 
     # Swagger::Docs
-    config.before_eager_load do
+    config.after_initialize do
+      require_relative '../swagger/docs/config'
       SwaggerUiEngine.configure do |config|
         config.swagger_url = "/api-docs.json"
       end
-      Swagger::Docs::Config.base_api_controller = Schematics::SchemaController
       Swagger::Docs::Config.register_apis({
         "1.0" => {
           api_extension_type: :json,
