@@ -32,7 +32,7 @@ module Schematics
         apply_scopes(model_class).
         includes(entity.eager_loading).
         order(created_at: :desc),
-        items: params[:per_page] || 10
+        items: params.fetch(:per_page, 10)
       )
       respond_to do |format|
         format.html
