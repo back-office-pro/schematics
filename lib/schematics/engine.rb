@@ -140,6 +140,9 @@ module Schematics
       ActiveStorage::Attachment.class_eval do
         acts_as_paranoid
       end
+      ActiveStorage::Blob.class_eval do
+        acts_as_paranoid
+      end
     end
 
     initializer "schematics.rack_attack" do
