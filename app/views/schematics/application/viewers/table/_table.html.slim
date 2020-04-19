@@ -66,14 +66,18 @@
                   - value = resource.instance_eval(field.name)
                   - case field
                   - when Schematics::Attributes::Attachments
-                    - value.each do |attachment|
+                    - value.with_deleted.each do |attachment|
                       = link_to attachment.filename, main_app.url_for(attachment), class: "pr-2"
                   - when Schematics::Attributes::Attachment
-                    = link_to value.filename, main_app.url_for(value) if value.attached?
+                    - value = ActiveStorage::Attachment.with_deleted.find_by_record_id(resource.id)
+                    = link_to value.filename, main_app.url_for(value)
                   - when Schematics::Attributes::Boolean
                     = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
                   - when Schematics::Attributes::Enum
                     = model_class.human_enum_name(field.name.to_sym, value)
+                  - when Schematics::Attributes::RichText
+                    - value = ActionText::RichText.with_deleted.find_by_record_id(resource.id)
+                    = field.format(value)
                   - else
                     = field.format(value)
               - entity.belongs_to_attributes.each do |attribute|
