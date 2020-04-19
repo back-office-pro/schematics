@@ -4,5 +4,5 @@ nav.sticky-top aria-label="breadcrumb"
       = link_to schematics.root_path do
         = fa_icon :home, class: "fa-lg"
     - breadcrumb_trail do |crumb|
-      li class=("breadcrumb-item #{crumb.current? ? 'active' : ''}") 
+      li class=("breadcrumb-item text-truncate #{crumb.current? ? 'active' : ''}") 
         = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})
