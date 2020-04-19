@@ -1,16 +1,16 @@
 - breadcrumb title, @resource
 .card.shadow-sm
-  .card-header
-    ul.nav
+  .card-header.p-2
+    ul.nav.align-items-center
       li.nav-item
-        h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
-          = fa_icon :eye, class: "mr-2"
+        h5.m-0.text-primary.text-truncate.font-weight-bold
+          = fa_icon :eye, class: "mr-3 ml-3"
           = title
-      li.nav-item.ml-auto
-        = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-icon-split mr-2" do
+      li.nav-item.ml-auto.mr-1
+        = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :edit
           span.text.d-none.d-lg-inline= t('.buttons.edit')
-        = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-info btn-icon-split mr-2" do
+        = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-info btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :file_pdf
           span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
         = link_to polymorphic_path(@resource, really: true),
@@ -22,24 +22,49 @@
                                    descriptor: model_class.human_attribute_name(entity.descriptor.name).downcase,
                                    model_name: model_class.model_name.human.downcase) \
                   },
-                  class: "btn btn-danger btn-icon-split" do
+                  class: "btn btn-danger btn-sm btn-icon-split" do
                     span.icon= fa_icon :trash
                     span.text.d-none.d-lg-inline= t('.buttons.destroy')
-  .card-body
+  .card-body.p-0
     = render template: 'schematics/application/show.pdf'
+- entity.rich_text_attributes.each do |attribute|
+  - rich_text = @resource.instance_eval(attribute.name)
+  - if rich_text.present?
+    .card.shadow-sm.mt-4
+        a.card-header.p-2 href="#collapse-#{attribute.name}" data-toggle="collapse" role="button"
+          h5.m-0.text-primary.text-truncate.font-weight-bold
+            = fa_icon attribute.icon, class: "mr-3 ml-3"
+            = attribute.entity.type.camelize.constantize.human_attribute_name(attribute.name)
+        .collapse.show id="collapse-#{attribute.name}"
+          .card-body
+            == rich_text
+- entity.attachments_attributes.each do |attribute|
+  - attachments = @resource.instance_eval(attribute.name)
+  - unless attachments.empty?
+    .card.shadow-sm.mt-4
+      a.card-header.p-2.collapsed href="#collapse-#{attribute.name}" data-toggle="collapse" role="button"
+        h5.m-0.text-primary.text-truncate.font-weight-bold
+          = fa_icon attribute.icon, class: "mr-3 ml-3"
+          = attribute.entity.type.camelize.constantize.human_attribute_name(attribute.name, count: attachments.size)
+          |  (#{attachments.size})
+      .collapse.hide id="collapse-#{attribute.name}"
+        .card-body.p-0
+          = render 'schematics/application/viewers/table/attachments',
+                    attachments: attachments,
+                    entity: attribute.entity,
+                    model_class: attribute.entity.type.camelize.constantize
 - entity.has_many_and_through_associations.each do |association|
   - resources = @resource.instance_eval(association.name)
   - unless resources.empty?
     .card.shadow-sm.mt-4
-      a.card-header.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
-        h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
-          = fa_icon association.icon, class: "mr-2"
+      a.card-header.p-2.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
+        h5.m-0.text-primary.text-truncate.font-weight-bold
+          = fa_icon association.icon, class: "mr-3 ml-3"
           = association.class_name.constantize.human_attribute_name(association.name, count: resources.size)
           |  (#{resources.size})
       .collapse.hide id="collapse-#{association.name}"
-        .card-body
-          = render 'schematics/application/table',
+        .card-body.p-0
+          = render 'schematics/application/viewers/table/association',
                     resources: resources,
                     entity: association.entity,
-                    model_class: association.class_name.constantize,
-                    actions: false
+                    model_class: association.class_name.constantize

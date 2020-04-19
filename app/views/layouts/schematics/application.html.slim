@@ -10,12 +10,12 @@ html
   body
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
-        .col.bg-gradient-primary.sidebar
+        .col.bg-primary.sidebar
           ul.nav.nav-light.flex-column.sidebar-sticky
             li.nav-item.mb-4
               = link_to app_name,
                 schematics.root_path,
-                class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
+                class: "sidebar-brand border-bottom d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|
               - model_class = entity.type.camelize.constantize
               li.nav-item.text-center.mw-100.mb-2
@@ -28,12 +28,14 @@ html
                   li.nav-item.text-center.mw-100.mb-2.pl-3.pr-3.d-none.d-md-block
                     ul.list-group
                       - attribute.values.each do |value|
-                        li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center.px-2.py-1.bg-transparent.border-0
-                          = link_to main_app.polymorphic_path(model_class, "by_#{attribute.name}": value),
-                            class: "nav-link p-0 m-0 text-secondary text-truncate" do
-                            = fa_icon :caret_right, class: "mr-2"
-                            = model_class.human_enum_name(attribute.name.to_sym, value)
-                          span.badge.badge-secondary.text-primary.badge-pill= model_class.send(:"#{attribute.name}_#{value}").count
+                        = active_link_to main_app.polymorphic_path(model_class, "by_#{attribute.name}": value),
+                                          active: :exact,
+                                          class: "nav-link p-0 m-0 text-secondary text-truncate segment" do
+                          li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-transparent.rounded
+                            span
+                              = fa_icon :caret_right, class: "mr-2"
+                              = model_class.human_enum_name(attribute.name.to_sym, value)
+                            span.badge.badge-secondary.text-primary.badge-pill= model_class.send(:"#{attribute.name}_#{value}").count
               li.nav-item.mb-2
             li.nav-item.text-center.text-center.mw-100.mb-4
               = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
@@ -57,7 +59,7 @@ html
             ul.navbar-nav.ml-auto.p-3
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-3
                 a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                  = fa_icon :bell, type: :regular, class: "fa-lg"
+                  = fa_icon :bell, class: "fa-lg"
                   .badge.badge-danger 3
                 .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="notificationsDropdown" 
                   h6.dropdown-header Header
@@ -67,7 +69,7 @@ html
                   = link_to "Voir toutes les notifications", main_app.messages_path, class: "dropdown-item text-muted small"
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-3.pr-3.border-left.border-light
                 a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                  = fa_icon :envelope, type: :regular, class: "fa-lg"
+                  = fa_icon :envelope, class: "fa-lg"
                   .badge.badge-danger 7
                 .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="messagesDropdown" 
                   h6.dropdown-header= t('.message_center')
@@ -81,23 +83,23 @@ html
                   = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted text-center small"
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                  span.d-none.d-lg-inline.mr-2= current_user.email
+                  span.d-none.d-lg-inline.mr-2= current_user.full_name
                   - if current_user.avatar.attached?
-                    = image_tag_representation(current_user.avatar, width: 50, height: 50, css_class: "rounded-circle border border-light")
+                    = image_tag_representation(current_user.avatar, width: 30, height: 30, css_class: "rounded-circle border border-dark")
                   - else
                     = fa_icon :user_circle, size: "2x", class: "align-middle"
                 .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm aria-labelledby="accountDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
-                    = fa_icon :user, class: "mr-2"
+                    = fa_icon :user, class: "mr-3"
                     = t('.dropdown.edit_profile')
                   .dropdown-divider
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
-                    = fa_icon :sign_out_alt, class: "mr-2"
+                    = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')
           = render 'schematics/application/breadcrumbs'
-          .container-fluid.mt-4.mb-4
+          .container-fluid.mt-4.mb-4.pl-4.pr-4
             = render 'schematics/application/notice' if notice.present?
             = render 'schematics/application/alert' if alert.present?
             = yield
-          footer.text-center.mb-4
-            | &copy; #{Time.zone.now.year}
+          footer.mb-4.p-2.border-top
+            .ml-3 &copy; #{app_name} #{Time.zone.now.year}

@@ -1,4 +1,4 @@
-.input-group.ml-1.mr-1.mb-2
+.input-group.ml-1.mr-1.mb-2.mt-1
   = render 'schematics/application/filters/eraser', name: attribute.name
   = select_tag :"by_#{attribute.name}",
     options_from_collection_for_select(attribute.model_property_type.constantize.all, "id", attribute.inverse_descriptor.name, params[:"by_#{attribute.name}"]),

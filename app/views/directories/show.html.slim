@@ -1,11 +1,11 @@
 .card.shadow-sm
-  .card-header
+  .card-header.p-2
     ul.nav
       li.nav-item
-        h5.m-0.text-primary.text-truncate.font-weight-bold.card-header-title
-          = fa_icon :folder_open, class: "mr-2"
+        h5.m-0.text-primary.text-truncate.font-weight-bold
+          = fa_icon :folder_open, class: "mr-3 ml-3"
           = "#{@resource.parent&.name} > #{@resource.name}"
-      li.nav-item.ml-auto
+      li.nav-item.ml-auto.mr-1
         = link_to new_directory_path, class: "btn btn-primary btn-icon-split mr-2" do
           span.icon= fa_icon :folder
           span.text.d-none.d-lg-inline Ajouter un nouveau dossier

@@ -42,9 +42,9 @@ module Schematics
         content_tag(:div, nil, class: "col") do
           content = []
           if request.parameters[scope].nil?
-            content << fa_icon(field.icon, class: "mr-2 text-dark")
+            content << fa_icon(:sort, class: "mr-2 text-dark")
           else
-            content << fa_icon(icon, class: "mr-2 text-primary")
+            content << fa_icon(icon, class: "mr-2 text-success")
           end
           content << link_to(model_class.human_attribute_name(field.name), params)
           content.join.html_safe

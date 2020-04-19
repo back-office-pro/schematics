@@ -1,8 +1,8 @@
 - breadcrumb title, profile_path
 .card.shadow-sm
-  .card-header
+  .card-header.p-2
     h5.m-0.text-primary.text-truncate.font-weight-bold
-      = fa_icon :user, class: "mr-2"
+      = fa_icon :user, class: "mr-3 ml-3"
       = title
   .card-body
     = simple_form_for current_user, url: sessions_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|

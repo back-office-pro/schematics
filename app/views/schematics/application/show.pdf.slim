@@ -1,7 +1,11 @@
 .table-responsive
-  table.table.table-striped
-    tbody
-      - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
+  table.table.mb-0.table-striped
+    tbody.table-bordered.border-0
+      - (entity.renderable_fields - \
+         entity.rich_text_attributes - \
+         entity.attachments_attributes - \
+         entity.belongs_to_attributes). \
+         each do |field|
         tr
           th
             = fa_icon field.icon, class: "mr-2 text-muted"

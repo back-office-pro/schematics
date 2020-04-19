@@ -2,6 +2,12 @@ $enable-gradients: true;
 $enable-shadows: true;
 $input-btn-focus-box-shadow: none;
 @import "bootswatch/<%= "flatly" %>/variables";
+$link-color: $primary;
+$pagination-bg: $dark;
+$pagination-hover-bg: darken($dark, 15%);
+$pagination-disabled-bg: lighten($dark, 15%);
+$pagination-active-bg: $dark;
+$navbar-dark-hover-color: $primary;
 @import "bootstrap";
 @import "bootswatch/<%= "flatly" %>/bootswatch";
 @import "font_awesome5_webfont";
@@ -15,6 +21,7 @@ $input-btn-focus-box-shadow: none;
  
 html, body {
   height: 100%;
+  font-size: 0.9rem;
 }
 
 .sidebar-sticky {
@@ -48,9 +55,9 @@ nav.sticky-top[aria-label="breadcrumb"] {
 
 .sidebar {
   z-index: 1;
-  flex: 0 0 12rem;
-  max-width: 12rem;
-  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.3);
+  flex: 0 0 14rem;
+  max-width: 14rem;
+  box-shadow: 0 2px 2px 0 rgba(60 , 75, 100, 0.14), 0 3px 1px -2px rgba(60, 75, 100, 0.12), 0 1px 5px 0 rgba(60, 75, 100, 0.2);
   .sidebar-brand {
     height: 4rem;
     line-height: 4rem;
@@ -59,32 +66,25 @@ nav.sticky-top[aria-label="breadcrumb"] {
     letter-spacing: .05rem;
     font-weight: 800;
     text-decoration: none !important;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
   }
   .nav-link.active {
     color: white !important;
   }
-  i.fas {
-    text-shadow: -7px 8px 2px rgba(0,0,0,0.15), -3px 5px rgba(0,0,0,0.15);
+  a.segment.active > li {
+    background: rgba(0, 0, 0, 0.3) !important;
   }
 }
 
 .content {
-  flex: 0 0 calc(100% - 12rem);
-  max-width: calc(100% - 12rem);
+  flex: 0 0 calc(100% - 14rem);
+  max-width: calc(100% - 14rem);
 }
 
 @include media-breakpoint-down(sm) {
   .sidebar {
     flex: 0 0 6rem;
     max-width: 6rem;
-    .sidebar-brand {
-      position: absolute;
-      left: -0.75rem;
-      top: 1rem;
-      transform-origin: bottom;
-      transform: rotate(-90deg);
-    }
   }
   .content {
     flex: 0 0 calc(100% - 6rem);
@@ -102,18 +102,27 @@ nav.sticky-top[aria-label="breadcrumb"] {
 
 .table.with-actions {
   thead tr:first-child th {
-    padding: 0;
+    padding-bottom: 0;
   }
-  td:first-child {
-    position: sticky;
-    left: 0px;
-    width: 1%;
-  }
+}
+
+.table td:first-child {
+  position: sticky;
+  left: 0px;
+  width: 1%;
 }
 
 .table thead th {
   border-top-width: 0px !important;
   border-bottom-width: 0px !important;
+}
+
+.table tbody tr td:first-child, .table tbody tr th:first-child {
+  border-left-width: 0px !important;
+}
+
+.table tbody tr td:last-child, .table tbody tr th:last-child {
+  border-right-width: 0px !important;
 }
 
 .table tr.disabled {
@@ -124,17 +133,21 @@ nav.sticky-top[aria-label="breadcrumb"] {
   pointer-events: auto;
 }
 
+.table tr.filters th:last-child > div {
+  margin-right: 0.5rem !important;
+}
+
 .pagy-bootstrap-nav .pagination {
   justify-content: center;
-  font-size: 1rem;
 }
 
 /**
  * Cards
  */
- 
-.card-header-title {
-  line-height: 36px;
+
+.card h5 {
+  font-size: 1rem;
+  line-height: 2.1rem;
 }
 
 .card .card-header[data-toggle="collapse"] {
@@ -145,8 +158,9 @@ nav.sticky-top[aria-label="breadcrumb"] {
   position: absolute;
   right: 0;
   top: 0;
-  padding-right: 1.725rem;
-  line-height: 51px;
+  padding-right: 1.5rem;
+  line-height: 45px;
+  font-size: 1.25rem;
   font-weight: 900;
   content: '\f107';
   font-family: 'Font Awesome 5 Free';
@@ -214,6 +228,10 @@ nav.sticky-top[aria-label="breadcrumb"] {
  * Forms
  */
 
+.form-control {
+  font-size: 0.9rem;
+}
+
 label.custom-file-label {
   background: $light;
   border: 0;
@@ -230,7 +248,7 @@ input.custom-file-input.is-valid + label.custom-file-label::after {
 }
 
 input.custom-file-input.is-invalid + label.custom-file-label::after {
-  @include gradient-bg($danger);
+  @include gradient-bg($primary);
 }
 
 /**
