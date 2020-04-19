@@ -41,7 +41,7 @@ module Schematics
 
             test "updating a #{entity.type}" do
               visit polymorphic_path(model_class)
-              selector = "a[data-title='#{I18n.t('schematics.application.table.edit')}']"
+              selector = "a[data-title='#{I18n.t('schematics.application.viewers.table.edit')}']"
               find(selector, match: :first).click
               fill_form(entity)
               click_on I18n.t('schematics.application.form.buttons.confirm')
@@ -50,7 +50,7 @@ module Schematics
 
             test "archiving a #{entity.type}" do
               visit polymorphic_path(model_class)
-              selector = "a[data-title='#{I18n.t('schematics.application.table.archive')}']"
+              selector = "a[data-title='#{I18n.t('schematics.application.viewers.table.archive')}']"
               find(selector, match: :first).click
               assert_text I18n.t('schematics.schema.destroy.archived', model_name: model_name.human)
             end
@@ -97,6 +97,8 @@ module Schematics
             choose(input, match: :first, allow_label_click: true)
           when Attributes::Boolean
             check(input) if @record.send(attribute.name)
+          when Attributes::Attachments
+            attach_file(input + "[]", attribute.default.first.path, make_visible: true)
           when Attributes::Attachment
             attach_file(input, attribute.default.path, make_visible: true)
           when Attributes::RichText
