@@ -60,7 +60,6 @@ module Schematics
 
     # Swagger::Docs
     config.after_initialize do
-      require_relative '../swagger/docs/config'
       SwaggerUiEngine.configure do |config|
         config.swagger_url = "/api-docs.json"
       end
@@ -130,6 +129,17 @@ module Schematics
         prepend(Schematics::Patches::Rails::Generators::Actions)
       ActiveRecord::ConnectionAdapters::TableDefinition.
         prepend(Schematics::Patches::ActiveRecord::ConnectionAdapters::TableDefinition)
+    end
+
+    initializer "schematics.acts_as_paranoid" do
+      require 'action_text/rich_text'
+      require 'active_storage/attachment'
+      ActionText::RichText.class_eval do
+        acts_as_paranoid
+      end
+      ActiveStorage::Attachment.class_eval do
+        acts_as_paranoid
+      end
     end
 
     initializer "schematics.rack_attack" do

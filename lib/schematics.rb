@@ -48,6 +48,7 @@ require 'json_web_token'
 require 'array'
 require 'string'
 require 'schematics/engine'
+require_relative 'swagger/docs/config'
 
 module Schematics
   autoload :Chart,  'schematics/chart'
