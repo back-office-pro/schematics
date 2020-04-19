@@ -35,7 +35,7 @@ module Schematics
     end
 
     def image_tag_representation(attachment, width: 800, height: 600, css_class: nil)
-      representation = attachment.representation(resize_to_limit: [width, height]).processed
+      representation = attachment.representation(resize_to_fit: [width, height]).processed
       image_tag main_app.url_for(representation), class: css_class
     rescue MiniMagick::Error
       I18n.t('errors.messages.image_metadata_missing').humanize
