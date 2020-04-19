@@ -225,6 +225,10 @@
                         "required": true,
                         "after": "start_at"
                     }
+                },
+                {
+                    "name": "invoices",
+                    "type": "attachments"
                 }
             ]
         }
