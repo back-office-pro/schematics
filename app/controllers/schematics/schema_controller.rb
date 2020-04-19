@@ -130,7 +130,7 @@ module Schematics
       title = t('schematics.schema.index.title', model_name: model_name.human.pluralize.downcase)
       breadcrumb title, :"#{entity.type.pluralize}_path"
       scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
-      @resource = model_class.send(scope).find(params[:id])
+      @resource = model_class.send(scope).includes(entity.eager_loading).find(params[:id])
     end
 
     def resource_params
