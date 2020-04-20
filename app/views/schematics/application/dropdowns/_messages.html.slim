@@ -1,0 +1,15 @@
+li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-3.pr-3.border-left.border-light
+  a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+    = fa_icon :envelope, class: "fa-lg"
+    .badge.badge-danger 7
+  .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm.p-0 aria-labelledby="messagesDropdown" 
+    h5.dropdown-header.font-weight-bold.bg-light= t('.message_center')
+    - current_user.received_messages.with_rich_text_content.includes(:author, :recipient).each do |message|
+      = link_to main_app.message_path(message), class: "dropdown-item d-flex align-items-center" do
+        = user_avatar(current_user)
+        div.ml-3
+          .text-truncate= message.subject
+          .text-truncate= message.content.to_plain_text
+          .text-muted.small #{message.author.full_name} - #{time_ago_in_words(message.created_at)}
+    .dropdown-divider.mb-1
+    = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted text-center small pb-2"

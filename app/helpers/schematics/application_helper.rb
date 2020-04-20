@@ -42,5 +42,18 @@ module Schematics
     rescue ActiveStorage::FileNotFoundError
       I18n.t('schematics.schema.not_found.title')
     end
+
+    def user_avatar(user)
+      if user.avatar.attached?
+        image_tag_representation(
+          user.avatar,
+          width: 36,
+          height: 36,
+          css_class: "rounded-circle border border-dark"
+        )
+      else
+        fa_icon(:user_circle, size: "2x", class: "align-middle")
+      end
+    end
   end
 end
