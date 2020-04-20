@@ -6,10 +6,10 @@
           = fa_icon :folder_open, class: "mr-3 ml-3"
           = "#{@resource.parent&.name} > #{@resource.name}"
       li.nav-item.ml-auto.mr-1
-        = link_to new_directory_path, class: "btn btn-primary btn-icon-split mr-2" do
+        = link_to new_directory_path, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :folder
           span.text.d-none.d-lg-inline Ajouter un nouveau dossier
-        = link_to new_directory_path, class: "btn btn-primary btn-icon-split" do
+        = link_to new_directory_path, class: "btn btn-primary btn-sm btn-icon-split" do
           span.icon= fa_icon :file
           span.text.d-none.d-lg-inline Ajouter des fichiers
   .card-body

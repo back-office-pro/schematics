@@ -29,7 +29,7 @@
   - entity.belongs_to_attributes.each do |attribute|
     = f.association attribute.name.to_sym,
                     prompt: t('.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
-  = f.button :button, class: "btn-primary btn-sm btn-icon-split mr-2" do
+  = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
     span.icon= fa_icon :check
     span.text= t('.buttons.confirm')
   = link_to polymorphic_path(model_class), class: "btn btn-danger btn-sm btn-icon-split" do
