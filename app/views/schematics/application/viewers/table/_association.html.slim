@@ -2,17 +2,17 @@
   table.table.mb-0.table-striped.table-hover
     thead
       tr
-        th.text-nowrap.text-center
+        th.text-nowrap.text-center.align-middle
         - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
-          th.text-nowrap.text-center
+          th.text-nowrap.text-center.align-middle
             = fa_icon field.icon, class: "mr-2 text-dark"
             = model_class.human_attribute_name(field.name)
         - entity.belongs_to_attributes.each do |attribute|
-          th.text-nowrap.text-center
+          th.text-nowrap.text-center.align-middle
             = fa_icon attribute.icon, class: "mr-2 text-dark"
             = model_class.human_attribute_name(attribute.name)
         - entity.has_one_and_through_associations.each do |association|
-          th.text-nowrap.text-center
+          th.text-nowrap.text-center.align-middle
             = fa_icon association.icon, class: "mr-2 text-dark"
             = model_class.human_attribute_name(association.name)
       tbody.table-bordered.border-0
