@@ -59,7 +59,6 @@ nav.sticky-top[aria-label="breadcrumb"] {
   flex: 0 0 14rem;
   max-width: 14rem;
   box-shadow: 0 2px 2px 0 rgba(60 , 75, 100, 0.14), 0 3px 1px -2px rgba(60, 75, 100, 0.12), 0 1px 5px 0 rgba(60, 75, 100, 0.2);
-  border-right-width: 3px !important;
   .sidebar-brand {
     height: 4rem;
     line-height: 4rem;
@@ -102,12 +101,6 @@ nav.sticky-top[aria-label="breadcrumb"] {
   cursor: pointer;
 }
 
-.table.with-actions {
-  thead tr:first-child th {
-    padding-bottom: 0;
-  }
-}
-
 .table td:first-child {
   position: sticky;
   left: 0px;
@@ -121,6 +114,14 @@ nav.sticky-top[aria-label="breadcrumb"] {
 
 .table tbody tr td:first-child, .table tbody tr th:first-child {
   border-left-width: 0px !important;
+}
+
+.table tbody tr:not([onclick]):first-child td, .table tbody tr:not([onclick]):first-child th {
+  border-top-width: 0px !important;
+}
+
+.table tbody tr:last-child td, .table tbody tr:last-child th {
+  border-bottom-width: 0px !important;
 }
 
 .table tbody tr td:last-child, .table tbody tr th:last-child {
