@@ -1,7 +1,7 @@
 module Schematics
   module Tokens
     class Token
-      attr_accessor :value
+      attr_reader :value
 
       def initialize(value)
         @value = value

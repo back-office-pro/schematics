@@ -1,11 +1,11 @@
 module Schematics
   class Entity
-    attr_accessor :type,
-                  :icon,
-                  :descriptor,
-                  :attributes,
-                  :virtuals,
-                  :associations
+    attr_reader :type,
+                :icon,
+                :descriptor,
+                :attributes,
+                :virtuals,
+                :associations
 
     MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
 

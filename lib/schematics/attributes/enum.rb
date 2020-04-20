@@ -8,7 +8,7 @@ module Schematics
       include Behaviours::Default::Sortable
       include Behaviours::Default::Filterable
 
-      attr_accessor :values
+      attr_reader :values
 
       def initialize(entity, name, options)
         super(entity, name, { default: 0 })

@@ -1,7 +1,7 @@
 module Schematics
   module Associations
     class AssociationThrough < Association
-      attr_accessor :through
+      attr_reader :through
 
       def initialize(belongs_to, through)
         super(belongs_to)

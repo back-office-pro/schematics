@@ -1,7 +1,7 @@
 module Schematics
   module Associations
     class Association
-      attr_accessor :belongs_to
+      attr_reader :belongs_to
       delegate :entity, :required?, to: :@belongs_to
       delegate :descriptor, to: :entity
 

@@ -1,7 +1,7 @@
 module Schematics
   module Attributes
     class Attribute
-      attr_accessor :entity, :name
+      attr_reader :entity, :name
 
       class << self
         def create(entity, name:, type:, options: {})

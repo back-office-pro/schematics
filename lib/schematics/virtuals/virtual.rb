@@ -5,7 +5,7 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
 
-      attr_accessor :entity, :name
+      attr_reader :entity, :name
 
       class << self
         def create(entity, name:, function:, options: {})
