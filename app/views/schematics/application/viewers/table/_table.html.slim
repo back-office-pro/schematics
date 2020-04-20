@@ -1,17 +1,17 @@
 .table-responsive
-  table.table.mb-0.with-actions class=(['table-striped', 'table-hover'] unless resources.empty?)
+  table.table.mb-0 class=(['table-striped', 'table-hover'] unless resources.empty?)
     thead
       tr
-        th.text-nowrap.text-center
+        th.text-nowrap.text-center.pb-0
           = t('schematics.application.viewers.table.archives')
         - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
-          th.text-nowrap.text-center
+          th.text-nowrap.text-center.pb-0
             = sort_link_to(field)
         - entity.belongs_to_attributes.each do |attribute|
-          th.text-nowrap.text-center
+          th.text-nowrap.text-center.pb-0
             = sort_link_to(attribute)
         - entity.has_one_and_through_associations.each do |association|
-          th.text-nowrap.text-center
+          th.text-nowrap.text-center.pb-0
             = sort_link_to(association)
       tr.filters
         th.text-nowrap.align-middle.px-0.py-1
