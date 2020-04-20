@@ -1,5 +1,6 @@
 fr:
   routes:
+    settings: parametres
     searches: recherche
     timeline: historique
     login: connexion
