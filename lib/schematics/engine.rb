@@ -134,14 +134,20 @@ module Schematics
     initializer "schematics.acts_as_paranoid" do
       require 'action_text/rich_text'
       require 'active_storage/attachment'
-      ActionText::RichText.class_eval do
-        acts_as_paranoid
+      ActiveSupport.on_load(:action_text_rich_text) do
+        ActionText::RichText.class_eval do
+          acts_as_paranoid
+        end
       end
-      ActiveStorage::Attachment.class_eval do
-        acts_as_paranoid
+      ActiveSupport.on_load(:active_storage_attachment) do
+        ActiveStorage::Attachment.class_eval do
+          acts_as_paranoid
+        end
       end
-      ActiveStorage::Blob.class_eval do
-        acts_as_paranoid
+      ActiveSupport.on_load(:active_storage_blob) do
+        ActiveStorage::Blob.class_eval do
+          acts_as_paranoid
+        end
       end
     end
 
