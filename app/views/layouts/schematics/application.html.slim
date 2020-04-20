@@ -38,7 +38,7 @@ html
                             span.badge.badge-secondary.text-primary.badge-pill= model_class.send(:"#{attribute.name}_#{value}").count
               li.nav-item.mb-2
         .col.bg-light.content
-          nav.navbar.navbar-light.navbar-expand.bg-white.p-0.sticky-top
+          nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top
             = form_tag schematics.searches_path, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do
               .input-group
                 = text_field_tag :query,
