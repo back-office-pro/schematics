@@ -10,12 +10,12 @@ html
   body
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
-        .col.bg-primary.sidebar
+        .col.bg-primary.sidebar.border-right.border-white
           ul.nav.nav-light.flex-column.sidebar-sticky
             li.nav-item.mb-4
               = link_to app_name,
                 schematics.root_path,
-                class: "sidebar-brand border-bottom d-flex align-items-center text-white text-nowrap justify-content-center"
+                class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
             - Schematics::SCHEMA.entities.each do |entity|
               - model_class = entity.type.camelize.constantize
               li.nav-item.text-center.mw-100.mb-2
@@ -37,14 +37,6 @@ html
                               = model_class.human_enum_name(attribute.name.to_sym, value)
                             span.badge.badge-secondary.text-primary.badge-pill= model_class.send(:"#{attribute.name}_#{value}").count
               li.nav-item.mb-2
-            li.nav-item.text-center.text-center.mw-100.mb-4
-              = link_to "/api", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
-                = fa_icon :project_diagram, size: "2x"
-                .mt-2.d-none.d-md-block API
-            li.nav-item.text-center.text-center.mw-100.mb-4
-              = link_to "/", class: "nav-link p-0 m-0 text-secondary text-nowrap" do
-                = fa_icon :cog, size: "2x"
-                .mt-2.d-none.d-md-block= t('.settings')
         .col.bg-light.content
           nav.navbar.navbar-light.navbar-expand.bg-white.p-0.sticky-top
             = form_tag schematics.searches_path, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do

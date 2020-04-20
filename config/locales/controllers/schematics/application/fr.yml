@@ -1,5 +1,8 @@
 fr: 
   schematics:
     application:
+      breadcrumbs:
+        settings: Paramètres
+        api: API
       authorize:
         unauthorized_access: Accès non autorisé
