@@ -51,10 +51,11 @@ require 'schematics/engine'
 require_relative 'swagger/docs/config'
 
 module Schematics
-  autoload :Chart,  'schematics/chart'
-  autoload :Entity, 'schematics/entity'
-  autoload :Schema, 'schematics/schema'
-  autoload :Stat,   'schematics/stat'
+  autoload :Chart,      'schematics/chart'
+  autoload :Descriptor, 'schematics/descriptor'
+  autoload :Entity,     'schematics/entity'
+  autoload :Schema,     'schematics/schema'
+  autoload :Stat,       'schematics/stat'
 
   module Associations
     autoload :Association,        'schematics/associations/association'

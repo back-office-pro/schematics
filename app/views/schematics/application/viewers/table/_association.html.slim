@@ -48,11 +48,9 @@
                   = field.format(value)
             - entity.belongs_to_attributes.each do |attribute|
               td.text-nowrap.text-center.align-middle
-                - if resource.instance_eval(attribute.name).present?
-                  = link_to resource.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
-                    main_app.polymorphic_path(resource.instance_eval(attribute.name))
+                - value = resource.instance_eval(attribute.name)
+                = link_to value, main_app.polymorphic_path(value) if value
             - entity.has_one_and_through_associations.each do |association|
               td.text-nowrap.text-center.align-middle
-                - if resource.instance_eval(association.name).present?
-                  = link_to resource.instance_eval("#{association.name}.#{association.descriptor.name}"),
-                    main_app.polymorphic_path(resource.instance_eval(association.name))
+                - value = resource.instance_eval(association.name)
+                = link_to value, main_app.polymorphic_path(value) if value

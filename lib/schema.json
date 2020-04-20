@@ -57,7 +57,7 @@
                     "type": "array"
                 }
             },
-            "required": ["type", "descriptor", "attributes"],
+            "required": ["type", "attributes"],
             "type": "object"
         },        
         "virtual_option": {

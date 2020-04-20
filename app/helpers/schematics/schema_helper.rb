@@ -7,7 +7,7 @@ module Schematics
       model_name = case action_name.to_sym
                    when :index then model_class.model_name.human.pluralize.downcase
                    when :new, :create then model_class.model_name.human.downcase
-                   when :edit, :update, :show then resource&.send(entity.descriptor.name)
+                   when :edit, :update, :show then resource
                    end
       if model_name.nil?
         I18n.t('schematics.schema.not_found.title')

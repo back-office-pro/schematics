@@ -61,7 +61,7 @@ module Schematics
               click_on I18n.t('schematics.application.show.buttons.destroy')
               page.execute_script("$('div.modal').removeClass('fade')") # remove modal fading delay
               within('div.modal') do
-                find("input[type='text']").set @record.send(entity.descriptor.name)
+                find("input[type='text']").set(@record)
                 click_on I18n.t('schematics.application.form.buttons.confirm')
               end
               assert_text I18n.t('schematics.schema.destroy.destroyed',
@@ -104,9 +104,7 @@ module Schematics
           when Attributes::RichText
             fill_in_rich_text_area input, with: attribute.default
           when Attributes::BelongsTo
-            select @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
-                   from: input,
-                   match: :first
+            select @record.instance_eval(attribute.name), from: input, match: :first
           when Attributes::Digest
             digest = attribute.default
             fill_in input, with: digest

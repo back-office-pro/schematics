@@ -25,19 +25,18 @@ module Schematics
           end
 
           entity.belongs_to_attributes.each do |attribute|
-            serializer_class = descriptor_serializer_class(attribute.inverse_descriptor.name.to_sym)
-            belongs_to attribute.name.to_sym, serializer: serializer_class
+            belongs_to attribute.name.to_sym,
+                       serializer: attribute.inverse_descriptor.serializer_class
           end
 
           entity.has_one_and_through_associations.each do |association|
-            serializer_class = descriptor_serializer_class(association.descriptor.name.to_sym)
-            has_one association.name.to_sym, serializer: serializer_class
+            has_one association.name.to_sym,
+                    serializer: association.descriptor.serializer_class
           end
 
           entity.has_many_and_through_associations.each do |association|
-            serializer_class = descriptor_serializer_class(association.descriptor.name.to_sym)
             has_many association.name.to_sym,
-                     serializer: serializer_class,
+                     serializer: association.descriptor.serializer_class,
                      if: -> { should_render_has_many_associations }
           end
         end
@@ -45,13 +44,6 @@ module Schematics
 
       def model_class
         name.chomp('Serializer').constantize
-      end
-
-      def descriptor_serializer_class(descriptor)
-        Class.new ActiveModel::Serializer do
-          attribute :id
-          attribute descriptor
-        end
       end
     end
 

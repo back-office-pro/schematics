@@ -6,7 +6,7 @@ const urls = {};
 
 <% Schematics::SCHEMA.entities.each do |entity| %>
     icons.<%= entity.type %>        = "<%= entity.icon.to_s.dasherize %>";
-    descriptors.<%= entity.type %>  = "<%= entity.descriptor.name.camelize(:lower) %>";
+    descriptors.<%= entity.type %>  = "<%= entity.descriptor.to_s.camelize(:lower) %>";
     urls.<%= entity.type %>         = "/<%= entity.type.pluralize %>";
 <% end %>
 

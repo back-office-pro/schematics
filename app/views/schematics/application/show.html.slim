@@ -17,9 +17,9 @@
                   method: :delete,
                   data: { \
                     confirm: t('.buttons.are_you_sure?'), \
-                    verify: @resource.send(entity.descriptor.name), \
-                    verify_text: t('.modals.confirm.verify_text', 
-                                   descriptor: model_class.human_attribute_name(entity.descriptor.name).downcase,
+                    verify: @resource.to_s, \
+                    verify_text: t('.modals.confirm.verify_text',
+                                   descriptor: model_class.human_attribute_name(entity.descriptor).downcase,
                                    model_name: model_class.model_name.human.downcase) \
                   },
                   class: "btn btn-danger btn-sm btn-icon-split" do

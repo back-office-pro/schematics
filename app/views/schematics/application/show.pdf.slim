@@ -39,15 +39,13 @@
             = fa_icon attribute.icon, class: "mr-2 text-muted"
             = model_class.human_attribute_name(attribute.name)
           td
-            - if @resource.instance_eval(attribute.name).present?
-              = link_to @resource.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}"),
-                        @resource.instance_eval(attribute.name)
+            - value = @resource.instance_eval(attribute.name)
+            = link_to(value, value) if value
       - entity.has_one_and_through_associations.each do |association|
         tr
           th
             = fa_icon association.icon, class: "mr-2 text-muted"
             = model_class.human_attribute_name(association.name)
           td
-            - if resource.instance_eval(association.name).present?
-              = link_to @resource.instance_eval("#{association.name}.#{association.descriptor.name}"),
-                        @resource.instance_eval(association.name)
+            - value = @resource.instance_eval(association.name)
+            = link_to(value, value) if value

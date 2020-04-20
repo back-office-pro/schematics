@@ -24,7 +24,7 @@ module Schematics
         super.extends <<~RUBY
           sort_direction do
             joins(:#{entity.type}, :#{joins}).
-            merge(#{class_name}.order(#{descriptor.name}: sort_direction))
+            merge(#{class_name}.order(#{descriptor}: sort_direction))
           end
         RUBY
       end

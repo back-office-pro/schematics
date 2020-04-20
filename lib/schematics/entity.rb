@@ -2,6 +2,7 @@ module Schematics
   class Entity
     attr_accessor :type,
                   :icon,
+                  :descriptor,
                   :attributes,
                   :virtuals,
                   :associations
@@ -9,7 +10,7 @@ module Schematics
     MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
 
     class << self
-      def create(type:, icon: :caret_square_right, descriptor:, attributes: [], virtuals: [])
+      def create(type:, icon: :caret_square_right, descriptor: nil, attributes: [], virtuals: [])
         new(type, icon.to_sym, descriptor, attributes, virtuals)
       end
     end
@@ -17,7 +18,7 @@ module Schematics
     def initialize(type, icon, descriptor, attributes, virtuals)
       @type = type
       @icon = icon
-      @descriptor = descriptor
+      @descriptor = Descriptor.new(descriptor)
       @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
       @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
       @associations = []
@@ -47,10 +48,6 @@ module Schematics
 
     def find_field_by_name(name)
       fields.find { |field| field.name == name }
-    end
-
-    def descriptor
-      find_field_by_name(@descriptor)
     end
 
     def weight
@@ -118,7 +115,7 @@ module Schematics
     end
 
     def modelize(subclass)
-      subclass.class_eval(friendly_id)
+      subclass.class_eval(descriptor)
       (elements + filter_scopes + sort_scopes + validates).each do |modelizable|
         subclass.class_eval(modelizable)
       end
@@ -129,12 +126,6 @@ module Schematics
       (has_filter_scopes + has_sort_scopes).each do |controllerizable|
         subclass.class_eval(controllerizable)
       end
-    end
-
-    def friendly_id
-      <<~RUBY
-        friendly_id :#{descriptor.name}, use: [:slugged, :finders]
-      RUBY
     end
 
     def api

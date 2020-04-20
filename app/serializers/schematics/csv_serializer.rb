@@ -41,13 +41,13 @@ module Schematics
 
     def belongs_to_attributes
       super.map do |attribute|
-        @record.instance_eval("#{attribute.name}.#{attribute.inverse_descriptor.name}")
+        @record.instance_eval(attribute.name)
       end
     end
 
     def has_one_and_through_associations
       super.map do |association|
-        @record.instance_eval("#{association.name}.#{association.descriptor.name}")
+        @record.instance_eval(association.name)
       end
     end
   end
