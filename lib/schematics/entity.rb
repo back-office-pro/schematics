@@ -114,6 +114,10 @@ module Schematics
       has_many_associations + has_many_through_associations
     end
 
+    def class_name
+      @type.camelize
+    end
+
     def modelize(subclass)
       subclass.class_eval(descriptor)
       (elements + filter_scopes + sort_scopes + validates).each do |modelizable|
@@ -130,10 +134,10 @@ module Schematics
 
     def api
       <<~RUBY
-        swagger_controller :#{@type.pluralize}, "#{@type.camelize} Management"
+        swagger_controller :#{@type.pluralize}, "#{class_name} Management"
 
-        swagger_model :#{@type.camelize} do |model|
-          description "A #{@type.camelize} object"
+        swagger_model :#{class_name} do |model|
+          description "A #{class_name} object"
           #{model_properties.map(&:squish).join("\n\s\s")}
         end
 
@@ -144,7 +148,7 @@ module Schematics
           param :query, :page, :integer, :optional, "Page number"
           response :unauthorized
           response :success
-          type :#{@type.camelize}
+          type :#{class_name}
         end
 
         swagger_api :show do
@@ -155,7 +159,7 @@ module Schematics
           response :unauthorized
           response :success
           response :not_found
-          type :#{@type.camelize}
+          type :#{class_name}
         end
 
         swagger_api :create do |api|
@@ -195,7 +199,7 @@ module Schematics
 
     def to_s
       <<~RUBY
-        class #{type.camelize}
+        class #{class_name}
           ###
           #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
           ###
@@ -209,7 +213,7 @@ module Schematics
           #{virtuals.map(&:to_str).join("\s\s")}
         end
 
-        class #{type.camelize}Controller
+        class #{class_name}Controller
           ###
           # #{permitted_params.join(", ")}
           # #{permitted_json_params.join(", ")}

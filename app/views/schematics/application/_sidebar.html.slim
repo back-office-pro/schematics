@@ -4,7 +4,7 @@ ul.nav.nav-light.flex-column.sidebar-sticky
       schematics.root_path,
       class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
   - Schematics::SCHEMA.entities.each do |entity|
-    - model_class = entity.type.camelize.constantize
+    - model_class = entity.class_name.constantize
     li.nav-item.text-center.mw-100.mb-2
       = active_link_to main_app.polymorphic_path(model_class),
         class: "nav-link p-0 m-0 text-secondary text-nowrap" do

@@ -15,7 +15,7 @@ module Schematics
     def show
       @results = {}
       SCHEMA.entities.each do |entity|
-        model_class = entity.type.camelize.constantize
+        model_class = entity.class_name.constantize
         entity.searchable_fields.each do |field|
           records = model_class.
             includes(entity.eager_loading).

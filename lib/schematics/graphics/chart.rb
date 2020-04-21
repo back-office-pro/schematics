@@ -2,7 +2,7 @@ module Schematics
   module Graphics
     class Chart
       attr_reader :x, :y
-      delegate :icon, to: :@entity
+      delegate :icon, :class_name, to: :@entity
 
       class << self
         def create(schema, entity:, type:, x:, y:)
@@ -29,18 +29,12 @@ module Schematics
       end
 
       def to_h
-        model_class.
+        class_name.constantize.
           send(x.agregate.to_sym, x.to_sql).
           send(y.agregate.to_sym, y.to_sql).
           map do |key, value|
             [x.field&.format(key) || key, y.field&.format(value) || value]
           end.to_h
-      end
-
-      private
-
-      def model_class
-        @entity.type.camelize.constantize
       end
     end
   end

@@ -6,7 +6,7 @@ class FixturesGenerator < Rails::Generators::Base
         append_file(rich_texts_file_path) do
           <<~YAML
           #{human_root_index(root_index, index)}:
-            record: #{human_index(index)} (#{attribute.entity.type.camelize})
+            record: #{human_index(index)} (#{attribute.entity.class_name})
             name: #{attribute.name}
             body: <p>In a <i>million</i> stars!</p>
           YAML
@@ -27,7 +27,7 @@ class FixturesGenerator < Rails::Generators::Base
         append_to_file(attachments_file_path) do
           <<~YAML
           #{human_root_index(root_index, index)}:
-            record: #{human_index(index)} (#{attribute.entity.type.camelize})
+            record: #{human_index(index)} (#{attribute.entity.class_name})
             name: #{attribute.name}
             blob: #{human_root_index(root_index, index)}
           YAML

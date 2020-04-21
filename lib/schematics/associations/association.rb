@@ -3,7 +3,7 @@ module Schematics
     class Association
       attr_reader :belongs_to
       delegate :entity, :required?, to: :@belongs_to
-      delegate :descriptor, to: :entity
+      delegate :descriptor, :class_name, to: :entity
 
       def initialize(belongs_to)
         @belongs_to = belongs_to
@@ -15,10 +15,6 @@ module Schematics
 
       def name
         belongs_to.inverse_association_name
-      end
-
-      def class_name
-        entity.type.camelize
       end
 
       def to_str

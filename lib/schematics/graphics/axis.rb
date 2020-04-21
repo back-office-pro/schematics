@@ -3,6 +3,7 @@ module Schematics
     class Axis
       include Behaviours::Visualizable
       attr_reader :agregate, :field
+      delegate :class_name, to: :@entity
 
       class << self
         def create(entity, agregate:, field: nil)
@@ -32,16 +33,10 @@ module Schematics
       def title
         [
           I18n.t(@agregate.to_sym, scope: 'schematics.dashboard.home.graphics.agregate'),
-          (model_class.human_attribute_name(@field.name).downcase if @field.present?),
+          (class_name.constantize.human_attribute_name(@field.name).downcase if @field.present?),
           (I18n.t('schematics.dashboard.home.graphics.of') if @field.nil?),
-          (model_class.model_name.human.downcase.pluralize if @field.nil?),
+          (class_name.constantize.model_name.human.downcase.pluralize if @field.nil?),
         ].join(' ')
-      end
-
-      private
-
-      def model_class
-        @entity.type.camelize.constantize
       end
     end
   end

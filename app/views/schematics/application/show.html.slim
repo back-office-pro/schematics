@@ -34,7 +34,7 @@
         a.card-header.p-2 href="#collapse-#{attribute.name}" data-toggle="collapse" role="button"
           h5.m-0.text-primary.text-truncate.font-weight-bold
             = fa_icon attribute.icon, class: "mr-3 ml-3"
-            = attribute.entity.type.camelize.constantize.human_attribute_name(attribute.name)
+            = attribute.entity.class_name.constantize.human_attribute_name(attribute.name)
         .collapse.show id="collapse-#{attribute.name}"
           .card-body
             == rich_text
@@ -45,14 +45,14 @@
       a.card-header.p-2.collapsed href="#collapse-#{attribute.name}" data-toggle="collapse" role="button"
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon attribute.icon, class: "mr-3 ml-3"
-          = attribute.entity.type.camelize.constantize.human_attribute_name(attribute.name, count: attachments.size)
+          = attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size)
           |  (#{attachments.size})
       .collapse.hide id="collapse-#{attribute.name}"
         .card-body.p-0
           = render 'schematics/application/viewers/table/attachments',
                     attachments: attachments,
                     entity: attribute.entity,
-                    model_class: attribute.entity.type.camelize.constantize
+                    model_class: attribute.entity.class_name.constantize
 - entity.has_many_and_through_associations.each do |association|
   - resources = @resource.instance_eval(association.name)
   - unless resources.empty?
