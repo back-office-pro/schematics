@@ -12,7 +12,7 @@ module Schematics
       def initialize(entity, name, options)
         @entity = entity
         @name = name
-        @options = options || {}
+        @options = options
       end
 
       def type

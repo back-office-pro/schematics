@@ -14,8 +14,8 @@ module Schematics
 
     def initialize
       @entities = data[:entities].map { |entity| Entity.create(entity) }
-      @charts = data[:charts].map { |chart| Chart.create(self, chart) }
-      @stats = data[:stats].map { |stat| Stat.create(self, stat) }
+      @charts = data[:charts].map { |chart| Graphics::Chart.create(self, chart) }
+      @stats = data[:stats].map { |stat| Graphics::Stat.create(self, stat) }
       add_inverse_descriptor_to_belongs_to_attributes
       add_has_many_associations
       add_has_one_associations

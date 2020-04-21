@@ -6,7 +6,8 @@
                     "type": "string"
                 },
                 "agregate": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": ["count", "sum"]
                 },
                 "field": {
                     "type": "string"

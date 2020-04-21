@@ -51,11 +51,9 @@ require 'schematics/engine'
 require_relative 'swagger/docs/config'
 
 module Schematics
-  autoload :Chart,      'schematics/chart'
   autoload :Descriptor, 'schematics/descriptor'
   autoload :Entity,     'schematics/entity'
   autoload :Schema,     'schematics/schema'
-  autoload :Stat,       'schematics/stat'
 
   module Associations
     autoload :Association,        'schematics/associations/association'
@@ -96,12 +94,19 @@ module Schematics
     module Range
       autoload :Filterable, 'schematics/behaviours/range/filterable'
     end
-    autoload :Fillable,    'schematics/behaviours/fillable'
-    autoload :Filterable,  'schematics/behaviours/filterable'
-    autoload :Preloadable, 'schematics/behaviours/preloadable'
-    autoload :Renderable,  'schematics/behaviours/renderable'
-    autoload :Searchable,  'schematics/behaviours/searchable'
-    autoload :Sortable,    'schematics/behaviours/sortable'
+    autoload :Fillable,     'schematics/behaviours/fillable'
+    autoload :Filterable,   'schematics/behaviours/filterable'
+    autoload :Preloadable,  'schematics/behaviours/preloadable'
+    autoload :Renderable,   'schematics/behaviours/renderable'
+    autoload :Searchable,   'schematics/behaviours/searchable'
+    autoload :Sortable,     'schematics/behaviours/sortable'
+    autoload :Visualizable, 'schematics/behaviours/visualizable'
+  end
+
+  module Graphics
+    autoload :Axis,  'schematics/graphics/axis'
+    autoload :Chart, 'schematics/graphics/chart'
+    autoload :Stat,  'schematics/graphics/stat'
   end
 
   module Patches

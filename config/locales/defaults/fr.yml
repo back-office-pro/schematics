@@ -1,4 +1,6 @@
 fr:
+  attributes:
+    created_at: jour
   simple_form:
     labels:
       user:

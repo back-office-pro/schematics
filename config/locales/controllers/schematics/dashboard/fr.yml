@@ -2,4 +2,11 @@ fr:
   schematics:
     dashboard:
       home:
+        graphics:
+          of: des
+          agregate:
+            group: par
+            group_by_day: par
+            count: Nombre
+            sum: Somme des
         title: Accueil
