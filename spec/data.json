@@ -37,6 +37,18 @@
             "y": {
                 "agregate": "count"
             }
+        },
+        {
+            "type": "bar",
+            "entity": "product",
+            "x": {
+                "agregate": "group",
+                "field": "state"
+            },
+            "y": {
+                "agregate": "sum",
+                "field": "tax_inclusive_price"
+            }
         }
     ],
     "entities": [
