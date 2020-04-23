@@ -18,7 +18,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          entity.controllerize(subclass)
+          entity.controller_eval(subclass)
         end
       end
 

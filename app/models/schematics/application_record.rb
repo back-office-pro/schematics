@@ -11,7 +11,7 @@ module Schematics
         subclass.class_eval do
           extend FriendlyId
           include ActiveStorageSupport::SupportForBase64
-          entity.modelize(subclass)
+          entity.model_eval(subclass)
         end
       end
 
