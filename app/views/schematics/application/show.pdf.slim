@@ -29,8 +29,6 @@
               = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
             - when Schematics::Attributes::RichText
               == value
-            - when Schematics::Attributes::Enum
-              = model_class.human_enum_name(field.name.to_sym, value)
             - else
               = field.format(value)
       - entity.belongs_to_attributes.each do |attribute|

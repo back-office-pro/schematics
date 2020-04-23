@@ -7,16 +7,19 @@
   .card-body
     = simple_form_for current_user, url: sessions_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :email
-      = f.input :locale,
-                collection: User.locales.keys.collect { |key| [User.human_enum_name(:locale, key), key] },
-                include_blank: false
       = f.input :password
       = f.input :password_confirmation
+      = f.input :current_password
+      = f.input :first_name
+      = f.input :last_name
       = f.input :avatar,
                 as: :file,
                 hint: fa_icon(:info_circle, class: "mr-1") + \
-                  humanize_attachment_validators(User.entity.attachment_attributes.first.validators)
-      = f.input :current_password
+                  humanize_attachment_validators(User.entity.find_field_by_name('avatar').validators)
+      = f.input :locale,
+                as: :radio_buttons,
+                collection: User.locales.keys.collect { |key| [User.entity.find_field_by_name('locale').format(key), key] },
+                include_blank: false
       = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
         span.icon= fa_icon :check
         span.text= t('schematics.application.form.buttons.confirm')

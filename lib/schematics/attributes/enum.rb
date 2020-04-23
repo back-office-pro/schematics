@@ -41,6 +41,12 @@ module Schematics
         RUBY
       end
 
+      def format(value)
+        I18n.t value.to_sym,
+               default: value.humanize,
+               scope: [:activerecord, :attributes, @entity.class_name.underscore, @name.pluralize]
+      end
+
       def icon
         :list_ol
       end

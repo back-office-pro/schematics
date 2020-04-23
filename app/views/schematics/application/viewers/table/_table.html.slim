@@ -73,8 +73,6 @@
                     = link_to value.filename, main_app.url_for(value) if value
                   - when Schematics::Attributes::Boolean
                     = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
-                  - when Schematics::Attributes::Enum
-                    = model_class.human_enum_name(field.name.to_sym, value)
                   - when Schematics::Attributes::RichText
                     - value = ActionText::RichText.with_deleted.find_by_record_id(resource.id)
                     = field.format(value)
