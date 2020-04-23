@@ -82,6 +82,13 @@ module Schematics
       })
     end
 
+    initializer "schematics.chartkick" do
+      Chartkick.options = {
+        colors: ['#2C3E50', '#ecf0f1'],
+        height: '300px',
+      }
+    end
+
     initializer "schematics.oj" do
       Oj::Rails.set_encoder
       Oj::Rails.set_decoder
