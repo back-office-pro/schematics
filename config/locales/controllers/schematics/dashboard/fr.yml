@@ -3,10 +3,9 @@ fr:
     dashboard:
       home:
         graphics:
+          by: par
           of: des
           agregate:
-            group: par
-            group_by_day: par
-            count: Nombre
+            count: Total
             sum: Somme des
         title: Accueil

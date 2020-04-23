@@ -3,10 +3,9 @@ en:
     dashboard:
       home:
         graphics:
+          by: by
           of: of
           agregate:
-            group: by
-            group_by_day: by
             count: Count
             sum: Sum of
         title: Home

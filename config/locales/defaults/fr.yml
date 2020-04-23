@@ -1,6 +1,6 @@
 fr:
   attributes:
-    created_at: jour
+    created_at: date de création
   simple_form:
     labels:
       user:
