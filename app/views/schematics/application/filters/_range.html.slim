@@ -2,14 +2,14 @@
   = render 'schematics/application/filters/unit', field: field, range: :from
   = render 'schematics/application/filters/eraser', name: field.name, range: :from
   = number_field_tag :"by_#{field.name}[from]",
-    params.dig(:"by_#{field.name}", :from),
-    placeholder: t('schematics.application.filters.from'),
-    class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
+                     params.dig(:"by_#{field.name}", :from),
+                     placeholder: t('schematics.application.filters.from'),
+                     class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
   .mr-2
   = number_field_tag :"by_#{field.name}[to]",
-    params.dig(:"by_#{field.name}", :to),
-    placeholder: t('schematics.application.filters.to'),
-    class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
+                     params.dig(:"by_#{field.name}", :to),
+                     placeholder: t('schematics.application.filters.to'),
+                     class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
   = render 'schematics/application/filters/eraser', name: field.name, range: :to
   = render 'schematics/application/filters/unit', field: field, range: :to
   
