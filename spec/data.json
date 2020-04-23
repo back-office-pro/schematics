@@ -29,14 +29,13 @@
         },
         {
             "type": "pie",
-            "entity": "product",
+            "entity": "user",
             "x": {
                 "agregate": "group",
-                "field": "state"
+                "field": "locale"
             },
             "y": {
-                "agregate": "sum",
-                "field": "tax_inclusive_price"
+                "agregate": "count"
             }
         }
     ],
