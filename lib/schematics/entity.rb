@@ -47,6 +47,9 @@ module Schematics
     end
 
     def find_field_by_name(name)
+      # TODO
+      # Check how we handle :id, :created_at, :deleted_at, :slug...
+      return Attributes::Attribute.create(self, type: 'date', name: name) if name == 'created_at'
       fields.find { |field| field.name == name }
     end
 
@@ -118,18 +121,12 @@ module Schematics
       @type.camelize
     end
 
-    def modelize(subclass)
-      subclass.class_eval(descriptor)
-      (elements + filter_scopes + sort_scopes + validates).each do |modelizable|
-        subclass.class_eval(modelizable)
-      end
+    def model_elements
+      (elements + filter_scopes + sort_scopes + validates) << descriptor
     end
 
-    def controllerize(subclass)
-      subclass.class_eval(api)
-      (has_filter_scopes + has_sort_scopes).each do |controllerizable|
-        subclass.class_eval(controllerizable)
-      end
+    def controller_elements
+      (has_filter_scopes + has_sort_scopes) << api
     end
 
     def api

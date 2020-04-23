@@ -61,9 +61,9 @@ module Schematics
           def #{@name}
             #{function}
           rescue NameError => e
-            Virtuals::Errors::NameError.new(e.message, e.name)
+            Schematics::Virtuals::Errors::NameError.new(e.message, e.name)
           rescue TypeError => e
-            Virtuals::Errors::TypeError.new(e.message)
+            Schematics::Virtuals::Errors::TypeError.new(e.message)
           end
         RUBY
       end

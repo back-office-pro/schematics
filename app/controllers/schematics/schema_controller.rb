@@ -18,7 +18,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          entity.controller_eval(subclass)
+          entity.controller_elements.each(&method(:class_eval))
         end
       end
 
@@ -130,7 +130,7 @@ module Schematics
       title = t('schematics.schema.index.title', model_name: model_name.human.pluralize.downcase)
       breadcrumb title, :"#{entity.type.pluralize}_path"
       scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
-      @resource = model_class.send(scope).includes(entity.eager_loading).find(params[:id])
+      @resource = model_class.send(scope).find(params[:id])
     end
 
     def resource_params
