@@ -6,8 +6,3 @@ fr:
           edit: Editer
           download_pdf: Télécharger au format PDF
           destroy: Supprimer définitivement
-          are_you_sure?: Etes-vous sûr ?
-        modals:
-          confirm:
-            verify_text: "Tapez le %{descriptor} du %{model_name} pour confirmer :"
-            confirm_your_action: Confirmez votre action

@@ -6,8 +6,3 @@ en:
           edit: Edit
           download_pdf: Download PDF
           destroy: Delete permanently
-          are_you_sure?: Are you sure?
-        modals:
-          confirm:
-            verify_text: "Type the %{descriptor} of %{model_name} to confirm:"
-            confirm_your_action: Confirm your action

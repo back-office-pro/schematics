@@ -56,7 +56,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "route_translator", "~> 7.1.2"
   spec.add_dependency "google-cloud-translate", "~> 2.3.0"
   spec.add_dependency "date_validator", "~> 0.9.0"
-  spec.add_dependency "data-confirm-modal", "~> 1.6.3"
   spec.add_dependency "oj", "~> 3.10.6"
   spec.add_dependency "active_model_serializers", "~> 0.10.10"
   spec.add_dependency "sprockets", "~> 3.7.2"
