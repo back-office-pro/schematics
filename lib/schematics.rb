@@ -94,17 +94,20 @@ module Schematics
     module Range
       autoload :Filterable, 'schematics/behaviours/range/filterable'
     end
-    autoload :Fillable,     'schematics/behaviours/fillable'
-    autoload :Filterable,   'schematics/behaviours/filterable'
-    autoload :Preloadable,  'schematics/behaviours/preloadable'
-    autoload :Renderable,   'schematics/behaviours/renderable'
-    autoload :Searchable,   'schematics/behaviours/searchable'
-    autoload :Sortable,     'schematics/behaviours/sortable'
-    autoload :Visualizable, 'schematics/behaviours/visualizable'
+    autoload :Fillable,    'schematics/behaviours/fillable'
+    autoload :Filterable,  'schematics/behaviours/filterable'
+    autoload :Preloadable, 'schematics/behaviours/preloadable'
+    autoload :Renderable,  'schematics/behaviours/renderable'
+    autoload :Searchable,  'schematics/behaviours/searchable'
+    autoload :Sortable,    'schematics/behaviours/sortable'
   end
 
   module Graphics
-    autoload :Axis,  'schematics/graphics/axis'
+    module Axes
+      autoload :Axis, 'schematics/graphics/axes/axis'
+      autoload :X,    'schematics/graphics/axes/x'
+      autoload :Y,    'schematics/graphics/axes/y'
+    end
     autoload :Chart, 'schematics/graphics/chart'
     autoload :Stat,  'schematics/graphics/stat'
   end
