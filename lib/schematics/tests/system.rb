@@ -59,11 +59,7 @@ module Schematics
               visit polymorphic_path(model_class)
               find("tr[onclick] td:nth-child(2)", match: :first).click
               click_on I18n.t('schematics.application.show.buttons.destroy')
-              page.execute_script("$('div.modal').removeClass('fade')") # remove modal fading delay
-              within('div.modal') do
-                find("input[type='text']").set(@record)
-                click_on I18n.t('schematics.application.form.buttons.confirm')
-              end
+              click_on I18n.t('schematics.application.form.buttons.confirm')
               assert_text I18n.t('schematics.schema.destroy.destroyed',
                                  model_name: model_name.human)
             end
