@@ -1,0 +1,7 @@
+fr:  
+  schematics:
+    application:
+      modals:
+        destroy:
+          title: Etes-vous sûr ?
+          body: "La suppression du %{model_name} %{resource} entraînera également la suppression définitive des éléments suivants"

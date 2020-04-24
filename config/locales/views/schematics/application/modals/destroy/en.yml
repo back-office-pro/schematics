@@ -1,0 +1,7 @@
+en:  
+  schematics:
+    application:
+      modals:
+        destroy:
+          title: Are you sure?
+          body: "Removing the %{model_name} %{resource} will also result in the permanent removal of the following"
