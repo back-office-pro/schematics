@@ -239,6 +239,16 @@
                 {
                     "name": "invoices",
                     "type": "attachments"
+                },
+                {
+                    "name": "product",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
+                    }
                 }
             ]
         }
