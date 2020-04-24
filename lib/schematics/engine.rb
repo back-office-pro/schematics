@@ -84,7 +84,7 @@ module Schematics
 
     initializer "schematics.chartkick" do
       Chartkick.options = {
-        colors: ['#2C3E50', '#ecf0f1'],
+        # colors: ['#2C3E50', '#ecf0f1'],
         height: '300px',
       }
     end
