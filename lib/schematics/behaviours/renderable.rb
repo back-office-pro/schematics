@@ -4,10 +4,6 @@ module Schematics
       def format(value)
         value
       end
-
-      def icon
-        :align_justify
-      end
     end
   end
 end

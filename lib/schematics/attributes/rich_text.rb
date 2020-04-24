@@ -42,6 +42,10 @@ module Schematics
         SecureRandom.base58
       end
 
+      def icon
+        :align_justify
+      end
+
       def to_str
         <<~RUBY
           has_rich_text :#{@name}

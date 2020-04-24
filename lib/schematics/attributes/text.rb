@@ -21,6 +21,10 @@ module Schematics
           #{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }
         RUBY
       end
+
+      def icon
+        :align_justify
+      end
     end
   end
 end

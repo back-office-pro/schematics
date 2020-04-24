@@ -9,6 +9,7 @@ module Schematics
       include Behaviours::Default::Filterable
 
       attr_accessor :inverse_descriptor
+      delegate :icon, to: :entity
 
       def migration_options
         super + [:polymorphic, :type]
@@ -63,10 +64,6 @@ module Schematics
 
       def create_inverse_association
         Schematics::Associations.const_get(inverse_association[:type].camelize.to_sym).new(self)
-      end
-
-      def icon
-        :link
       end
     end
   end

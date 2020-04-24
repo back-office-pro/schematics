@@ -3,7 +3,7 @@ module Schematics
     class Association
       attr_reader :belongs_to
       delegate :entity, :required?, to: :@belongs_to
-      delegate :descriptor, :class_name, to: :entity
+      delegate :descriptor, :class_name, :icon, to: :entity
 
       def initialize(belongs_to)
         @belongs_to = belongs_to
@@ -23,10 +23,6 @@ module Schematics
                   class_name: '#{class_name}',
                   foreign_key: '#{belongs_to.column_name}'
         RUBY
-      end
-
-      def icon
-        :link
       end
     end
   end

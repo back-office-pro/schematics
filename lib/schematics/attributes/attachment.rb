@@ -75,7 +75,21 @@ module Schematics
       end
 
       def icon
-        :paperclip
+        case extension.to_sym
+        when :doc, :docx                   then :file_word
+        when :ppt, :pptx                   then :file_powerpoint
+        when :pdf                          then :file_pdf
+        when :png, :jpg, :jpeg, :gif, :bmp then :file_image
+        when :xls, :xlsx                   then :file_excel
+        when :zip, :rar, :tar              then :file_archive
+        when :csv                          then :file_csv
+        when :php, :rb, :py, :js, :java    then :file_code
+        when :mp3, :aac, :ogg              then :file_audio
+        when :webm, :mkv, :flv, :vob, :avi, :mov, :wmv, :mp4
+          :file_video
+        else
+          :file
+        end
       end
 
       protected
