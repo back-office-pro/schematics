@@ -3,6 +3,7 @@ module Schematics
     include Pagy::Backend
     before_action :set_paper_trail_whodunnit
     before_action :authorize
+    before_action :set_breadcrumb
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
     after_action { pagy_headers_merge(@pagy) if @pagy }
     has_scope :with_deleted, type: :boolean, only: :index
@@ -127,10 +128,13 @@ module Schematics
     protected
 
     def set_resource
-      title = t('schematics.schema.index.title', model_name: model_name.human.pluralize.downcase)
-      breadcrumb title, :"#{entity.type.pluralize}_path"
       scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
       @resource = model_class.send(scope).find(params[:id])
+    end
+
+    def set_breadcrumb
+      title = t('schematics.schema.index.title', model_name: model_name.human.pluralize.downcase)
+      breadcrumb title, :"#{entity.type.pluralize}_path"
     end
 
     def resource_params
