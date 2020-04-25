@@ -20,4 +20,8 @@ $(function() {
     $('form.form-inline').on('submit', function() {
         return $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', true);
     });
+    $('#sidebar-toggle').click(function() {
+        $('.sidebar, .content').toggleClass('toggled');
+        $('.sidebar .d-none').toggleClass('d-md-block');
+    });
 });

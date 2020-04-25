@@ -24,3 +24,7 @@ ul.nav.nav-light.flex-column.sidebar-sticky
                     = attribute.format(value)
                   span.badge.badge-secondary.text-primary= model_class.send(:"#{attribute.name}_#{value}").count
     li.nav-item.mb-2
+  li.nav-item.mt-4.text-center
+    button#sidebar-toggle.btn.btn-secondary.text-secondary.bg-transparent.border-0
+      .d-none.d-md-block= fa_icon :chevron_circle_left, size: "2x"
+      .d-none= fa_icon :chevron_circle_right, size: "2x"
