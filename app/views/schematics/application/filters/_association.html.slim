@@ -1,7 +1,7 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
   = render 'schematics/application/filters/eraser', name: association.name
   = select_tag :"by_#{association.name}",
-               options_from_collection_for_select(@resources.map(&association.name.to_sym), :id, :to_s, params[:"by_#{association.name}"]),
+               options_from_collection_for_select(@resources.unscope(:where, :limit).map(&association.name.to_sym), :id, :to_s, params[:"by_#{association.name}"]),
                prompt: t('schematics.application.filters.filter_by',
                attribute_name: model_class.human_attribute_name(association.name).downcase),
                onchange: "$(this.form).submit()",
