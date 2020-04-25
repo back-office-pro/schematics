@@ -1,14 +1,16 @@
 //= require rails-ujs
+//= require turbolinks
 //= require activestorage
+//= require trix/dist/trix
+//= require @rails/actiontext/app/javascript/actiontext
 //= require jquery3
 //= require popper
 //= require bootstrap
 //= require chartkick
 //= require Chart.bundle
-//= require trix/dist/trix
 //= require_tree .
 
-$(function() {
+$(document).on('turbolinks:load', function() {
     $('.toast').toast({ delay: 5000 }).toast('show');
     $('[data-toggle="tooltip"]').tooltip();
     $('.custom-file-input').on('change', function () {

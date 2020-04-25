@@ -17,7 +17,6 @@ rails new $app_name \
     --skip-keeps \
     --skip-action-cable \
     --skip-bundle \
-    --skip-javascript \
     --template template.rb \
     -$disable-skip-listen \
     -$disable-skip-bootsnap \
