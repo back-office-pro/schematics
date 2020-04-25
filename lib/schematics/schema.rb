@@ -85,29 +85,34 @@ module Schematics
 
     def add_has_many_through_associations
       @entities.each do |entity|
-        entity.has_many_associations.each do |association|
-          association.entity.has_many_associations.each do |has_many_association|
-            if has_many_association.entity != association.entity # prevent self association
-              has_many_through_association = Associations::HasManyThrough.new(
-                has_many_association.belongs_to,
-                association
-              )
-              entity.associations << has_many_through_association
-            end
-          end
+        entity.has_many_associations.each do |parent|
+          find_has_many_through_associations(entity, parent)
+        end
+      end
+    end
+
+    def find_has_many_through_associations(entity, parent)
+      parent.entity.has_many_associations.each do |child|
+        if child.entity != parent.entity # prevent self association
+          entity.associations << Associations::HasManyThrough.new(child.belongs_to, parent)
+          find_has_many_through_associations(entity, child)
         end
       end
     end
 
     def add_has_one_through_associations
       @entities.each do |entity|
-        entity.belongs_to_attributes.each do |attribute|
-          find_entity_by_type(attribute.association_type).belongs_to_attributes.each do |parent|
-            if parent.entity != attribute.entity # prevent self association
-              association = Associations::HasOneThrough.new(parent, attribute)
-              entity.associations << association
-            end
-          end
+        entity.belongs_to_attributes.each do |parent|
+          find_has_one_through_associations(entity, parent)
+        end
+      end
+    end
+
+    def find_has_one_through_associations(entity, parent)
+      find_entity_by_type(parent.association_type).belongs_to_attributes.each do |child|
+        if child.entity != parent.entity # prevent self association
+          entity.associations << Associations::HasOneThrough.new(child, parent)
+          find_has_one_through_associations(entity, child)
         end
       end
     end
