@@ -43,14 +43,14 @@ module Schematics
         if joins.empty?
           super.extends <<~RUBY
             sort_direction do
-              order({ Arel.sql("#{to_sql}") => sort_direction })
+              order(Arel.sql("#{to_sql}") => sort_direction)
             end
           RUBY
         else
           super.extends <<~RUBY
             sort_direction do
               joins(#{joins}).
-              order({ Arel.sql("#{to_sql}") => sort_direction })
+              order(Arel.sql("#{to_sql}") => sort_direction)
             end
           RUBY
         end
