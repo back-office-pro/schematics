@@ -1,6 +1,5 @@
-$enable-gradients: true;
-$enable-shadows: true;
-$input-btn-focus-box-shadow: none;
+$input-btn-focus-width: 0;
+$grid-gutter-width: 1.5rem !default;
 @import "bootswatch/<%= "flatly" %>/variables";
 $link-color: $primary;
 $pagination-bg: $primary;
@@ -52,6 +51,9 @@ html, body {
 nav.sticky-top[aria-label="breadcrumb"] {
   top: 4rem;
   z-index: 1;
+  .nav-item:not(.breadcrumb-item) a {
+    text-decoration: underline;
+  }
 }
 
 .sidebar {
@@ -71,9 +73,15 @@ nav.sticky-top[aria-label="breadcrumb"] {
   }
   .nav-link.active {
     color: white !important;
+    .list-group-item {
+      border: 1px solid $white !important;
+      .badge {
+        background: $white !important;
+      }
+    }
   }
-  a.segment.active > li {
-    background: rgba(0, 0, 0, 0.3) !important;
+  .nav-item.d-none {
+    background: rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -97,6 +105,15 @@ nav.sticky-top[aria-label="breadcrumb"] {
  * Tables
  */ 
 
+.table-bordered th, .table-bordered td {
+  border-left-style: dotted !important;
+  border-right-style: dotted !important;
+}
+
+.table thead tr:first-child th a {
+  text-decoration: underline;
+}
+
 .table tr[onclick] {
   cursor: pointer;
 }
@@ -112,7 +129,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   border-bottom-width: 0px !important;
 }
 
-.table tbody tr td:first-child, .table tbody tr th:first-child {
+.table tbody tr td:first-child, .table tbody tr td:nth-child(2), .table tbody tr th:first-child {
   border-left-width: 0px !important;
 }
 
@@ -124,7 +141,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   border-bottom-width: 0px !important;
 }
 
-.table tbody tr td:last-child, .table tbody tr th:last-child {
+.table tbody tr td:last-child, .table tbody tr td:first-child, .table tbody tr th:last-child {
   border-right-width: 0px !important;
 }
 
@@ -147,6 +164,13 @@ nav.sticky-top[aria-label="breadcrumb"] {
 /**
  * Cards
  */
+
+.modal {
+  .card {
+    box-shadow: none !important;
+    margin-top: 1rem !important;
+  }
+}
 
 .card h5 {
   font-size: 1rem;
@@ -241,17 +265,17 @@ label.custom-file-label {
 }
 
 label.custom-file-label::after {
-  @include gradient-bg($primary);
+  background: $primary;
   color: white;
   content: "<%= I18n.t('schematics.application.form.attachment.browse') %>";
 }
 
 input.custom-file-input.is-valid + label.custom-file-label::after {
-  @include gradient-bg($success);
+  background: $success;
 }
 
 input.custom-file-input.is-invalid + label.custom-file-label::after {
-  @include gradient-bg($primary);
+  background: $danger;
 }
 
 /**
