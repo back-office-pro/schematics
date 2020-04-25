@@ -16,6 +16,8 @@ module Schematics
       end
     end
 
+    # TODO
+    # remove when Directory is refactored
     def file_icon(file)
       case file.filename.extension.downcase
       when 'doc', 'docx'                                            then :file_word
