@@ -5,7 +5,7 @@
         .card-body
           .row.no-gutters.align-items-center
             .col
-              small.text-uppercase.text-primary.font-weight-bold
+              small.text-uppercase.text-truncate.text-primary.font-weight-bold
                 = stat.title
               h5.mb-0.text-dark.text-truncate.font-weight-bold
                 = stat
@@ -16,8 +16,8 @@
       .card.shadow-sm
         .card-header.p-2
           h5.m-0.text-primary.text-truncate.font-weight-bold
-            = fa_icon chart.icon, class: "mr-3 ml-3"
-            = chart.title
+            = fa_icon chart.icon, class: "mr-3 ml-3 fa-lg align-middle"
+            span.align-middle= chart.title
         .card-body
           = send chart.type,
                  chart.to_h,

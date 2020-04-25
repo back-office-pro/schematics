@@ -24,6 +24,10 @@ module Schematics
         :"#{@type}_chart"
       end
 
+      def icon
+        :"chart_#{@type}"
+      end
+
       def title
         [@y.title, I18n.t('schematics.dashboard.home.graphics.by'), @x.title].join(' ')
       end
