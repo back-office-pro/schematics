@@ -3,8 +3,8 @@
     ul.nav
       li.nav-item
         h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :folder_open, class: "mr-3 ml-3"
-          = "#{@resource.parent&.name} > #{@resource.name}"
+          = fa_icon :folder_open, class: "mr-3 ml-3 fa-lg align-middle"
+          span.align-middle= "#{@resource.parent&.name} > #{@resource.name}"
       li.nav-item.ml-auto.mr-1
         = link_to new_directory_path, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :folder
