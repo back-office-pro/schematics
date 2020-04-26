@@ -13,7 +13,7 @@ module Schematics
     end
 
     def initialize
-      @entities = data[:entities].map { |entity| Entity.create(entity) }
+      @entities = data[:entities].map { |entity| Entities::Entity.create(entity) }
       @charts = data[:charts].map { |chart| Graphics::Chart.create(self, chart) }
       @stats = data[:stats].map { |stat| Graphics::Stat.create(self, stat) }
       add_inverse_descriptor_to_belongs_to_attributes
@@ -28,7 +28,7 @@ module Schematics
     end
 
     def generate
-      @entities.sort_by(&:weight).reverse.each(&:generate)
+      @entities.sort_by(&:weight).reverse.map(&:generate).flatten.each(&method(:system))
     end
 
     def to_s

@@ -45,6 +45,7 @@ require 'date_validator'
 require 'google/cloud/translate'
 require 'oj'
 require 'active_model_serializers'
+require 'acts_as_singleton'
 require 'json_web_token'
 require 'array'
 require 'string'
@@ -52,10 +53,6 @@ require 'schematics/engine'
 require_relative 'swagger/docs/config'
 
 module Schematics
-  autoload :Descriptor, 'schematics/descriptor'
-  autoload :Entity,     'schematics/entity'
-  autoload :Schema,     'schematics/schema'
-
   module Associations
     autoload :Association,        'schematics/associations/association'
     autoload :AssociationThrough, 'schematics/associations/association_through'
@@ -101,6 +98,12 @@ module Schematics
     autoload :Renderable,  'schematics/behaviours/renderable'
     autoload :Searchable,  'schematics/behaviours/searchable'
     autoload :Sortable,    'schematics/behaviours/sortable'
+  end
+
+  module Entities
+    autoload :Descriptor, 'schematics/entities/descriptor'
+    autoload :Entity,     'schematics/entities/entity'
+    autoload :Singleton,  'schematics/entities/singleton'
   end
 
   module Graphics
@@ -156,6 +159,8 @@ module Schematics
     autoload :Concatenation, 'schematics/virtuals/concatenation'
     autoload :Virtual,       'schematics/virtuals/virtual'
   end
+
+  autoload :Schema, 'schematics/schema'
 
   SCHEMA = Schema.instance
 end

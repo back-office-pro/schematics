@@ -2,21 +2,21 @@ describe Schematics::Associations::HasManyThrough do
   subject(:association) { described_class.new(through, belongs_to.create_inverse_association) }
 
   let(:parent_entity) do
-    Schematics::Entity.create(
+    Schematics::Entities::Entity.create(
       type: "category",
       descriptor: "label",
       attributes: [{ name: "label", type: "string" }]
     )
   end
   let(:through_entity) do
-    Schematics::Entity.create(
+    Schematics::Entities::Entity.create(
       type: "sub_category",
       descriptor: "designation",
       attributes: [{ name: "designation", type: "string" }]
     )
   end
   let(:entity) do
-    Schematics::Entity.create(
+    Schematics::Entities::Entity.create(
       type: "product",
       descriptor: "reference",
       attributes: [{ name: "reference", type: "string" }]

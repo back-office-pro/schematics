@@ -148,6 +148,7 @@
             "type": "setting",
             "icon": "cog",
             "descriptor": "company_name",
+            "singleton": true,
             "attributes": [
                 {
                     "name": "company_name",
@@ -180,6 +181,7 @@
                     "name": "theme",
                     "type": "enum",
                     "options": [
+                        "default",
                         "cerulean",
                         "darkly",
                         "litera",

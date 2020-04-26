@@ -129,7 +129,12 @@ module Schematics
 
     def set_resource
       scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
-      @resource = model_class.send(scope).find(params[:id])
+      @resource = case entity
+                  when Entities::Singleton
+                    model_class.instance
+                  when Entities::Entity
+                    model_class.send(scope).find(params[:id])
+                  end
     end
 
     def set_breadcrumb

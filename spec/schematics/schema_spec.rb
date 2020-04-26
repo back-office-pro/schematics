@@ -4,7 +4,7 @@ describe Schematics::Schema do
   describe "#find_entity_by_type" do
     subject { schema.find_entity_by_type('user') }
 
-    it { is_expected.to be_a(Schematics::Entity) }
+    it { is_expected.to be_a(Schematics::Entities::Entity) }
   end
 
   describe "#valid?" do
