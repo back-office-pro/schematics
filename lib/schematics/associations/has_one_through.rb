@@ -14,6 +14,10 @@ module Schematics
         name.camelize
       end
 
+      def descriptor
+        @belongs_to.inverse_descriptor
+      end
+
       def filter_scope
         super.extends <<~RUBY
           #{name} { joins(:#{entity.type}).where(#{name}: #{name}) }
@@ -24,7 +28,7 @@ module Schematics
         super.extends <<~RUBY
           sort_direction do
             joins(:#{entity.type}, :#{joins}).
-            merge(#{class_name}.order(#{descriptor}: sort_direction))
+            merge(#{class_name}.order(Arel.sql("#{descriptor.to_sql}") => sort_direction))
           end
         RUBY
       end

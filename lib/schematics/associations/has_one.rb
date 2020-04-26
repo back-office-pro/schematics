@@ -20,7 +20,7 @@ module Schematics
         super.extends <<~RUBY
           sort_direction do
             joins(:#{joins}).
-            merge(#{class_name}.order(#{descriptor}: sort_direction }))
+            merge(#{class_name}.order(Arel.sql("#{descriptor.to_sql}") => sort_direction))
           end
         RUBY
       end

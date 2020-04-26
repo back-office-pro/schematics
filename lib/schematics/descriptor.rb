@@ -1,7 +1,25 @@
 module Schematics
   class Descriptor
-    def initialize(name)
-      @name = name || 'id'
+    delegate :name, to: :@field
+
+    class << self
+      def create(entity, descriptor)
+        field = entity.find_field_by_name(descriptor)
+        new(field)
+      end
+    end
+
+    def initialize(field)
+      @field = field
+    end
+
+    def to_sql
+      case @field
+      when Virtuals::Virtual
+        @field.to_sql
+      else
+        name
+      end
     end
 
     def to_s
@@ -10,13 +28,19 @@ module Schematics
 
     def to_str
       <<~RUBY
-        friendly_id :#{@name}, use: [:slugged, :finders]
-        alias_attribute :to_s, :#{@name}
+        extend FriendlyId
+
+        friendly_id :#{name}, use: [:slugged, :finders]
+        alias_attribute :to_s, :#{name}
+
+        def should_generate_new_friendly_id?
+          true
+        end
       RUBY
     end
 
     def serializer_class
-      descriptor = @name
+      descriptor = name
       Class.new ActiveModel::Serializer do
         attribute :id
         attribute descriptor if descriptor != 'id'

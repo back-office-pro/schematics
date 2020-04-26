@@ -10,7 +10,7 @@ module Schematics
     MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
 
     class << self
-      def create(type:, icon: :caret_square_right, descriptor: nil, attributes: [], virtuals: [])
+      def create(type:, icon: :caret_square_right, descriptor: 'id', attributes: [], virtuals: [])
         new(type, icon.to_sym, descriptor, attributes, virtuals)
       end
     end
@@ -18,9 +18,9 @@ module Schematics
     def initialize(type, icon, descriptor, attributes, virtuals)
       @type = type
       @icon = icon
-      @descriptor = Descriptor.new(descriptor)
       @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
       @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
+      @descriptor = Descriptor.create(self, descriptor)
       @associations = []
     end
 
@@ -50,6 +50,7 @@ module Schematics
       # TODO
       # Check how we handle :id, :created_at, :deleted_at, :slug...
       return Attributes::Attribute.create(self, type: 'date', name: name) if name == 'created_at'
+      return Attributes::Attribute.create(self, type: 'integer', name: name) if name == 'id'
       fields.find { |field| field.name == name }
     end
 
@@ -201,7 +202,7 @@ module Schematics
           #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
           ###
 
-          #{friendly_id}
+          #{descriptor.to_str}
           #{validates.join("\s\s")}
           #{filter_scopes.join("\s\s")}
           #{sort_scopes.join("\s\s")}

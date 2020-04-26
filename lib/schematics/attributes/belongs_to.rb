@@ -34,8 +34,8 @@ module Schematics
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            joins(:#{association_type}).
-            merge(#{model_property_type}.order(#{inverse_descriptor}: sort_direction))
+            joins(:#{joins}).
+            merge(#{model_property_type}.order(Arel.sql("#{inverse_descriptor.to_sql}") => sort_direction))
           end
         RUBY
       end

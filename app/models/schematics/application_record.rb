@@ -2,6 +2,7 @@ module Schematics
   class ApplicationRecord < ::ApplicationRecord
     self.abstract_class = true
     self.implicit_order_column = "created_at"
+    include ActiveStorageSupport::SupportForBase64
     acts_as_paranoid
     has_paper_trail
 
@@ -9,8 +10,6 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          extend FriendlyId
-          include ActiveStorageSupport::SupportForBase64
           entity.model_elements.each(&method(:class_eval))
         end
       end
