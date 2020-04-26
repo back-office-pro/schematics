@@ -25,7 +25,6 @@ span.twitter-typeahead .tt-suggestion {
   padding: 3px 10px;
   clear: both;
   line-height: 1.42857143;
-  color: $primary;
   white-space: nowrap;
 }
 
@@ -35,7 +34,6 @@ span.twitter-typeahead .tt-suggestion:focus {
   color: #ffffff;
   text-decoration: none;
   outline: 0;
-  background: $primary;
 }
 
 .input-group span.twitter-typeahead {

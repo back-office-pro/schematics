@@ -20,6 +20,9 @@ module Schematics
     config.i18n.available_locales = [:fr, :en]
     config.i18n.load_path += Dir.glob(File.expand_path('../../config/locales/**/*.yml', __dir__))
 
+    # Assets
+    config.assets.precompile += %w(schematics/themes/*.css)
+
     # Bullet
     config.after_initialize do
       Bullet.enable = true

@@ -1,18 +1,5 @@
-$input-btn-focus-width: 0;
-$grid-gutter-width: 1.5rem !default;
-@import "bootswatch/<%= "flatly" %>/variables";
-$link-color: $primary;
-$pagination-bg: $primary;
-$pagination-hover-bg: darken($primary, 15%);
-$pagination-disabled-bg: lighten($primary, 15%);
-$pagination-active-bg: $primary;
-$navbar-dark-hover-color: $primary;
-@import "bootstrap";
-@import "bootswatch/<%= "flatly" %>/bootswatch";
 @import "font_awesome5_webfont";
 @import "typeahead";
-@import "trix/dist/trix";
-@import "actiontext";
 
 /**
  * Layout
@@ -75,9 +62,9 @@ nav.sticky-top[aria-label="breadcrumb"] {
   .nav-link.active {
     color: white !important;
     .list-group-item {
-      border: 1px solid $white !important;
+      border: 1px solid #fff !important;
       .badge {
-        background: $white !important;
+        background: #fff !important;
       }
     }
   }
@@ -102,7 +89,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   max-width: calc(100% - 6rem);
 }
 
-@include media-breakpoint-down(sm) {
+@media (max-width: 575.98px) {
   .sidebar {
     flex: 0 0 6rem;
     max-width: 6rem;
@@ -272,22 +259,14 @@ nav.sticky-top[aria-label="breadcrumb"] {
 }
 
 label.custom-file-label {
-  background: $light;
   border: 0;
 }
 
 label.custom-file-label::after {
-  background: $primary;
-  color: white;
-  content: "<%= I18n.t('schematics.application.form.attachment.browse') %>";
-}
-
-input.custom-file-input.is-valid + label.custom-file-label::after {
-  background: $success;
-}
-
-input.custom-file-input.is-invalid + label.custom-file-label::after {
-  background: $danger;
+  color: #fff;
+  font-weight: 900;
+  content: '\f07c';
+  font-family: 'Font Awesome 5 Free';
 }
 
 /**
@@ -302,9 +281,9 @@ input.custom-file-input.is-invalid + label.custom-file-label::after {
 }
 
 /**
- * Turbolinks
+ * Trix
  */
 
-.turbolinks-progress-bar {
-  background: $primary;
+trix-editor.form-control {
+  height: auto;
 }
