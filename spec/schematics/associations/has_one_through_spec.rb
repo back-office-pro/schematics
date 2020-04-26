@@ -66,6 +66,12 @@ describe Schematics::Associations::HasOneThrough do
     it { is_expected.to eq("Category") }
   end
 
+  describe "#descriptor" do
+    subject { association.descriptor.name }
+
+    it { is_expected.to eq("label") }
+  end
+
   describe "#filter_scope" do
     subject { association.filter_scope }
 
