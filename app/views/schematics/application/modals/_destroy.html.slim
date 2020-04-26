@@ -1,0 +1,41 @@
+#destroyModal.modal class=('fade' unless Rails.env.test?) aria-hidden="true" aria-labelledby="destroyModalTitle" role="dialog" tabindex="-1" 
+  .modal-dialog.modal-dialog-centered class=(resources.any? || attachments.any? ? 'modal-lg' : 'modal-sm') role="document" 
+    .modal-content.shadow-sm
+      .modal-header.bg-primary
+        h5#destroyModalTitle.m-0.text-white.text-truncate.font-weight-bold
+          = fa_icon :exclamation_triangle, class: "mr-3 ml-2"
+          = t('.title')
+      - if resources.any? || attachments.any?
+        .modal-body
+          .alert.alert-danger.mb-0
+            = fa_icon :trash, class: "mr-2"
+            = t('.body', model_name: model_class.model_name.human.downcase, resource: @resource)
+          - entity.attachments_attributes.each do |attribute|
+            - if attachments[attribute.name].any?
+              = render 'schematics/application/viewers/attachments',
+                        attachments: attachments[attribute.name],
+                        title: attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size),
+                        icon: attribute.icon,
+                        entity: attribute.entity,
+                        model_class: attribute.entity.class_name.constantize,
+                        collapsed: false
+          - entity.has_many_and_through_associations.each do |association|
+            - break unless association.required?
+            - if resources[association.name].any?
+              = render 'schematics/application/viewers/association',
+                        resources: resources[association.name],
+                        title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
+                        icon: association.icon,
+                        entity: association.entity,
+                        model_class: association.class_name.constantize,
+                        collapsed: false
+      .modal-footer.bg-light class=(resources.any? || attachments.any? ? 'justify-content-start' : 'justify-content-center')
+        = link_to polymorphic_path(@resource, really: true),
+                  method: :delete,
+                  class: "btn btn-primary btn-sm btn-icon-split" do
+                    span.icon= fa_icon :check
+                    span.text= t('schematics.application.form.buttons.confirm')
+        = button_tag data: { dismiss: "modal" },
+                     class: "btn btn-danger btn-sm btn-icon-split" do
+                       span.icon= fa_icon :times
+                       span.text= t('schematics.application.form.buttons.cancel')

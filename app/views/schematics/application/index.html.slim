@@ -1,4 +1,3 @@
-- breadcrumb title, polymorphic_path(model_class)
 = form_tag '', method: :get, class: "form-inline mb-4" do
   = submit_tag "Filtrer", name: nil, class: "d-none"
   .card.shadow-sm.w-100
@@ -6,15 +5,15 @@
       ul.nav.align-items-center
         li.nav-item
           h5.m-0.text-primary.text-truncate.font-weight-bold
-            = fa_icon :table, class: "mr-3 ml-3"
-            = title
+            = fa_icon :table, class: "mr-3 ml-3 fa-lg align-middle"
+            span.align-middle= title
         li.nav-item.ml-auto.mr-1
           = select_tag :per_page,
             options_for_select([10, 20, 50, 100], params[:per_page]),
             prompt: t('.dropdowns.per_page', model_name: model_class.model_name.human.pluralize),
             onchange: "$(this.form).submit()",
             class: "form-control form-control-sm bg-light border-0 d-none d-md-inline mr-2"
-          = link_to polymorphic_path(model_class, format: :csv), class: "btn btn-success btn-sm btn-icon-split mr-2" do
+          = link_to polymorphic_path(model_class, format: :csv), class: "btn btn-light btn-sm btn-icon-split mr-2" do
             span.icon= fa_icon :file_csv
             span.text.d-none.d-lg-inline= t('.buttons.download_as_csv')
           = link_to new_polymorphic_path(model_class), class: "btn btn-primary btn-sm btn-icon-split" do
@@ -25,5 +24,5 @@
               span.icon= fa_icon :eraser
               span.text.d-none.d-lg-inline= t('.buttons.reset_filters')
     .card-body.p-0
-      = render 'schematics/application/viewers/table/table', resources: @resources
+      = render 'schematics/application/viewers/table'
 == pagy_bootstrap_nav(@pagy) if @resources.any?

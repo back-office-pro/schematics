@@ -1,5 +1,5 @@
 .table-responsive
-  table.table.mb-0 class=(['table-striped', 'table-hover'] unless resources.empty?)
+  table.table.mb-0 class=(['table-striped', 'table-hover'] if @resources.any?)
     thead
       tr
         th.text-nowrap.text-center.pb-0
@@ -35,13 +35,13 @@
         - entity.has_one_and_through_associations.each do |association|
           th.align-middle.text-center.px-0.py-1
             = render 'schematics/application/filters/association', association: association
-      tbody class=('table-bordered border-0' unless resources.empty?)
-        - if resources.empty?
+      tbody class=('table-bordered border-0' if @resources.any?)
+        - if @resources.empty?
           tr
             td.text-center.pt-5 colspan="100%"
               = render 'empty'
         - else
-          - resources.each do |resource|
+          - @resources.each do |resource|
             tr class=('disabled' if resource.deleted?) onclick=("window.location = '#{main_app.polymorphic_path(resource)}'" unless resource.deleted?)
               td.text-nowrap.text-center
                 .btn-group.enabled

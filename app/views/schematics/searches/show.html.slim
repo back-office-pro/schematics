@@ -3,22 +3,17 @@
   .card.shadow-sm.mb-4
     .card-header.p-2
       h5.m-0.text-primary.text-truncate.font-weight-bold
-        = fa_icon :search, class: "mr-3 ml-3"
-        = title
+        = fa_icon :search, class: "mr-3 ml-3 fa-lg align-middle"
+        span.align-middle= title
     .card-body.text-center
       = render 'schematics/application/empty'
 - else
   - @results.each do |type, resources|
     - model_class = resources.first.class
-    .card.shadow-sm.mb-4
-      a.card-header.p-2 href="#collapse-#{type}" data-toggle="collapse" role="button"
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :search, class: "mr-3 ml-3"
-          = model_class.model_name.human(count: resources.size)
-          |  (#{resources.size})
-      .collapse.show id="collapse-#{type}"
-        .card-body.p-0
-          = render 'schematics/application/viewers/table/association',
-            resources: resources,
-            entity: model_class.entity,
-            model_class: model_class
+    = render 'schematics/application/viewers/association',
+        resources: resources,
+        title: model_class.model_name.human(count: resources.size),
+        icon: model_class.entity.icon,
+        entity: model_class.entity,
+        model_class: model_class,
+        collapsed: false

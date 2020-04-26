@@ -1,30 +1,24 @@
 - breadcrumb title, @resource
+- all_resources = {}
+- all_attachments = {}
 .card.shadow-sm
   .card-header.p-2
     ul.nav.align-items-center
       li.nav-item
         h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :eye, class: "mr-3 ml-3"
-          = title
+          = fa_icon :eye, class: "mr-3 ml-3 fa-lg align-middle"
+          span.align-middle= title
       li.nav-item.ml-auto.mr-1
+        = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-light btn-sm btn-icon-split mr-2" do
+          span.icon= fa_icon :file_pdf
+          span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
         = link_to edit_polymorphic_path(@resource), class: "btn btn-primary btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :edit
           span.text.d-none.d-lg-inline= t('.buttons.edit')
-        = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-info btn-sm btn-icon-split mr-2" do
-          span.icon= fa_icon :file_pdf
-          span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
-        = link_to polymorphic_path(@resource, really: true),
-                  method: :delete,
-                  data: { \
-                    confirm: t('.buttons.are_you_sure?'), \
-                    verify: @resource.to_s, \
-                    verify_text: t('.modals.confirm.verify_text',
-                                   descriptor: model_class.human_attribute_name(entity.descriptor).downcase,
-                                   model_name: model_class.model_name.human.downcase) \
-                  },
-                  class: "btn btn-danger btn-sm btn-icon-split" do
-                    span.icon= fa_icon :trash
-                    span.text.d-none.d-lg-inline= t('.buttons.destroy')
+        = button_tag data: { toggle: "modal", target: "#destroyModal" },
+                     class: "btn btn-danger btn-sm btn-icon-split" do
+                       span.icon= fa_icon :trash
+                       span.text.d-none.d-lg-inline= t('.buttons.destroy')
   .card-body.p-0
     = render template: 'schematics/application/show.pdf'
 - entity.rich_text_attributes.each do |attribute|
@@ -33,38 +27,33 @@
     .card.shadow-sm.mt-4
         a.card-header.p-2 href="#collapse-#{attribute.name}" data-toggle="collapse" role="button"
           h5.m-0.text-primary.text-truncate.font-weight-bold
-            = fa_icon attribute.icon, class: "mr-3 ml-3"
+            = fa_icon attribute.icon, class: "mr-3 ml-3 fa-lg"
             = attribute.entity.class_name.constantize.human_attribute_name(attribute.name)
         .collapse.show id="collapse-#{attribute.name}"
           .card-body
             == rich_text
 - entity.attachments_attributes.each do |attribute|
   - attachments = @resource.instance_eval(attribute.name)
-  - unless attachments.empty?
-    .card.shadow-sm.mt-4
-      a.card-header.p-2.collapsed href="#collapse-#{attribute.name}" data-toggle="collapse" role="button"
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon attribute.icon, class: "mr-3 ml-3"
-          = attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size)
-          |  (#{attachments.size})
-      .collapse.hide id="collapse-#{attribute.name}"
-        .card-body.p-0
-          = render 'schematics/application/viewers/table/attachments',
-                    attachments: attachments,
-                    entity: attribute.entity,
-                    model_class: attribute.entity.class_name.constantize
+  - if attachments.any?
+    - all_attachments[attribute.name] = attachments
+    = render 'schematics/application/viewers/attachments',
+              attachments: attachments,
+              title: attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size),
+              icon: attribute.icon,
+              entity: attribute.entity,
+              model_class: attribute.entity.class_name.constantize,
+              collapsed: true
 - entity.has_many_and_through_associations.each do |association|
-  - resources = @resource.instance_eval(association.name)
-  - unless resources.empty?
-    .card.shadow-sm.mt-4
-      a.card-header.p-2.collapsed href="#collapse-#{association.name}" data-toggle="collapse" role="button"
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon association.icon, class: "mr-3 ml-3"
-          = association.class_name.constantize.human_attribute_name(association.name, count: resources.size)
-          |  (#{resources.size})
-      .collapse.hide id="collapse-#{association.name}"
-        .card-body.p-0
-          = render 'schematics/application/viewers/table/association',
-                    resources: resources,
-                    entity: association.entity,
-                    model_class: association.class_name.constantize
+  - resources = @resource.instance_eval(association.name).includes(association.entity.eager_loading)
+  - if resources.any?
+    - all_resources[association.name] = resources
+    = render 'schematics/application/viewers/association',
+              resources: resources,
+              title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
+              icon: association.icon,
+              entity: association.entity,
+              model_class: association.class_name.constantize,
+              collapsed: true
+= render "schematics/application/modals/destroy",
+         resources: all_resources,
+         attachments: all_attachments
