@@ -1,4 +1,4 @@
-= simple_form_for resource, defaults: { input_html: { class: "bg-light border-0" } } do |f|
+= simple_form_for resource, validate: true, defaults: { input_html: { class: "bg-light border-0" } } do |f|
   - (entity.fillable_attributes - entity.belongs_to_attributes).each do |attribute|
     - case attribute
     - when Schematics::Attributes::Date

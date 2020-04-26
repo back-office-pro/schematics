@@ -30,6 +30,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "swagger_ui_engine", "~> 1.1.1"
   spec.add_dependency "swagger-docs", "~> 0.2.8"
   spec.add_dependency "simple_form", "~> 5.0.2"
+  spec.add_dependency "client_side_validations", "~> 16.2.0"
+  spec.add_dependency "client_side_validations-simple_form", "~> 10.1.0"
   spec.add_dependency "bootstrap", "~> 4.4.1"
   spec.add_dependency "bootswatch", "~> 4.3.1"
   spec.add_dependency "wkhtmltopdf-binary", "~> 0.12.5"
