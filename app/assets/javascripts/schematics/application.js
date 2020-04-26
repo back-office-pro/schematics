@@ -1,8 +1,3 @@
-//= require rails-ujs
-//= require turbolinks
-//= require activestorage
-//= require trix/dist/trix
-//= require @rails/actiontext/app/javascript/actiontext
 //= require jquery3
 //= require popper
 //= require bootstrap
