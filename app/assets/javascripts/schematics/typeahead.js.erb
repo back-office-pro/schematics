@@ -10,7 +10,7 @@ const urls = {};
     urls.<%= entity.type %>         = "/<%= entity.type.pluralize %>";
 <% end %>
 
-$(function() {
+$(document).on('turbolinks:load', function() {
     const filterSource = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
