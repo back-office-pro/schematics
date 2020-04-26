@@ -3,7 +3,9 @@ module Schematics
     include FontAwesome5::Rails::IconHelper
 
     def setting(key)
-      Setting.instance.send(key)
+      Rails.cache.fetch("settings_#{key}") do
+        Setting.instance.send(key)
+      end
     end
 
     def title
