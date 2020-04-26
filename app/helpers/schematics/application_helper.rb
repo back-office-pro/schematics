@@ -2,8 +2,12 @@ module Schematics
   module ApplicationHelper
     include FontAwesome5::Rails::IconHelper
 
-    def app_name
-      Rails.application.class.module_parent_name
+    def settings
+      Setting.last
+    end
+
+    def setting(key)
+      settings.send(key)
     end
 
     def title

@@ -2,10 +2,13 @@ doctype html
 html
   head
     meta charset="utf-8"
-    title #{app_name} - #{title}
+    title #{setting(:company_name)} - #{title}
     = csrf_meta_tags
     = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "schematics/themes/#{setting(:theme)}", media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
     .container-fluid.p-0.h-100
@@ -44,4 +47,4 @@ html
             = render 'schematics/application/alert' if alert.present?
             = yield
           footer.mb-4.p-2.border-top
-            .ml-3 &copy; #{app_name} #{Time.zone.now.year}
+            .ml-3 &copy; #{setting(:company_name)} #{Time.zone.now.year}

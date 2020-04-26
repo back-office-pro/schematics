@@ -1,0 +1,34 @@
+en:
+  activerecord:
+    models:
+      setting: Setting
+    attributes:
+      setting:
+        company_name: Company name
+        company_address: Company address
+        company_registration_number: Company registration number
+        company_logo: Company logo
+        theme: Application theme
+        themes:
+          default: Default
+          cerulean: Cerulean
+          darkly: Darkly
+          litera: Litera
+          materia: Materia
+          sandstone: Sandstone
+          slate: Slate
+          superhero: Superhero
+          cosmo: Cosmo
+          flatly: Flaty
+          lumen: Lumen
+          minty: Minty
+          simplex: Simplex
+          solar: Solar
+          united: United
+          cyborg: Cyborg
+          journal: Journal
+          lux: Lux
+          pulse: Pulse
+          sketchy: Sketchy
+          spacelab: Spacelab
+          yeti: Yeti

@@ -10,6 +10,6 @@ nav.sticky-top aria-label="breadcrumb"
       = link_to main_app.swagger_ui_engine_path, class: "mr-3" do
         = fa_icon :project_diagram
         span.d-none.d-sm-inline.ml-2= t('.api')
-      = link_to "/" do
+      = link_to main_app.edit_setting_path(settings) do
         = fa_icon :cog
         span.d-none.d-sm-inline.ml-2= t('.settings')

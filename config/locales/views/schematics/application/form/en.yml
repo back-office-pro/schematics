@@ -7,7 +7,6 @@ en:
           confirm: Confirm
           cancel: Cancel
         attachment:
-          browse: Browse
           validators:
             content_type: "Allowed file formats:"
             size: "File size:"

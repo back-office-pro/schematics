@@ -143,6 +143,67 @@
                     "type": "attachments"
                 }
             ]
+        },
+        {
+            "type": "setting",
+            "icon": "cog",
+            "descriptor": "company_name",
+            "attributes": [
+                {
+                    "name": "company_name",
+                    "type": "string",
+                    "options": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "company_address",
+                    "type": "string"
+                },
+                {
+                    "name": "company_registration_number",
+                    "type": "string"
+                },
+                {
+                    "name": "company_logo",
+                    "type": "attachment",
+                    "options": {
+                        "content_type": [
+                            "png",
+                            "jpeg",
+                            "jpg"
+                        ],
+                        "size": 2
+                    }
+                },
+                {
+                    "name": "theme",
+                    "type": "enum",
+                    "options": [
+                        "cerulean",
+                        "darkly",
+                        "litera",
+                        "materia",
+                        "sandstone",
+                        "slate",
+                        "superhero",
+                        "cosmo",
+                        "flatly",
+                        "lumen",
+                        "minty",
+                        "simplex",
+                        "solar",
+                        "united",
+                        "cyborg",
+                        "journal",
+                        "lux",
+                        "pulse",
+                        "sketchy",
+                        "spacelab",
+                        "yeti"
+                    ]
+                }
+            ]
         }
     ]
 }

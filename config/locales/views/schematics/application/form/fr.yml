@@ -7,7 +7,6 @@ fr:
           confirm: Valider
           cancel: Annuler
         attachment:
-          browse: Explorer
           validators:
             content_type: "Formats fichiers acceptés :"
             size: "Taille fichier :"

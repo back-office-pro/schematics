@@ -6,8 +6,9 @@ html
     = wicked_pdf_javascript_include_tag "pdf"
   body
     #header
-      | Ma Société test
+      = setting(:company_name)
     #content
       = yield
     #footer
-      | Ma Société test
+      = setting(:company_address)
+      = setting(:company_siret)
