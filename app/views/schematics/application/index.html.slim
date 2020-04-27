@@ -18,7 +18,7 @@
           = link_to new_polymorphic_path(model_class), class: "btn btn-primary btn-sm btn-icon-split" do
             span.icon= fa_icon :plus
             span.text.d-none.d-lg-inline= t('.buttons.add', model_name: model_class.model_name.human.downcase)
-          - unless params.except(:controller, :action, :page, :per_page).empty?
+          - unless params.except(:controller, :action, :locale, :page, :per_page).empty?
             = link_to polymorphic_path(model_class), class: "btn btn-danger btn-sm btn-icon-split ml-2" do
               span.icon= fa_icon :eraser
               span.text.d-none.d-lg-inline= t('.buttons.reset_filters')
