@@ -3,7 +3,7 @@ require 'action_text/system_test_helper'
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
-      # driven_by :selenium_headless
+      driven_by :selenium_headless
 
       include ActionText::SystemTestHelper
       include Engine.routes.url_helpers
@@ -57,7 +57,7 @@ module Schematics
 
             test "destroying a #{entity.type}" do
               visit polymorphic_path(model_class)
-              find("tr[onclick] td:nth-child(2)", match: :first).click
+              find("tr[data-href] td:nth-child(2)", match: :first).click
               click_on I18n.t('schematics.application.show.buttons.destroy')
               click_on I18n.t('schematics.application.form.buttons.confirm')
               assert_text I18n.t('schematics.schema.destroy.destroyed',

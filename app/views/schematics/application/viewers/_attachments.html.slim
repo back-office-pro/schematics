@@ -26,9 +26,9 @@
                 = t('schematics.application.viewers.table.size')
             tbody.table-bordered.border-0
               - attachments.each do |attachment|
-                tr onclick="window.location = '#{main_app.polymorphic_path(attachment)}'"
+                tr data-href=main_app.polymorphic_path(attachment)
                   td.text-nowrap.text-center
-                    .btn-group onclick="event.stopPropagation()"
+                    .btn-group
                       = link_to fa_icon(:trash),
                         main_app.polymorphic_path(attachment),
                         method: :delete,

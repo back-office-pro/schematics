@@ -42,9 +42,9 @@
               = render 'empty'
         - else
           - @resources.each do |resource|
-            tr class=('disabled' if resource.deleted?) onclick=("window.location = '#{main_app.polymorphic_path(resource)}'" unless resource.deleted?)
+            tr class=('disabled' if resource.deleted?) data-href=(main_app.polymorphic_path(resource) unless resource.deleted?)
               td.text-nowrap.text-center
-                .btn-group.enabled onclick="event.stopPropagation()"
+                .btn-group.enabled
                   - if resource.deleted?
                     = link_to fa_icon(:trash_restore),
                       main_app.polymorphic_path(resource),

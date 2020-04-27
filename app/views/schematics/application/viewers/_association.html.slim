@@ -29,9 +29,9 @@
                   = model_class.human_attribute_name(association.name)
             tbody.table-bordered.border-0
               - resources.each do |resource|
-                tr onclick="window.location = '#{main_app.polymorphic_path(resource)}'"
+                tr data-href=main_app.polymorphic_path(resource)
                   td.text-nowrap.text-center
-                    .btn-group onclick="event.stopPropagation()"
+                    .btn-group
                       = link_to main_app.edit_polymorphic_path(resource),
                         class: "btn btn-primary btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.edit') } do
