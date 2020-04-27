@@ -7,8 +7,9 @@ html
   body
     #header
       = setting(:company_name)
+      = image_tag setting(:company_logo)
     #content
       = yield
     #footer
-      = setting(:company_address)
-      = setting(:company_siret)
+      p= setting(:company_address)
+      p= setting(:company_registration_number)
