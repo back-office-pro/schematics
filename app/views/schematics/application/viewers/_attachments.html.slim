@@ -28,7 +28,7 @@
               - attachments.each do |attachment|
                 tr onclick="window.location = '#{main_app.polymorphic_path(attachment)}'"
                   td.text-nowrap.text-center
-                    .btn-group
+                    .btn-group onclick="event.stopPropagation()"
                       = link_to fa_icon(:trash),
                         main_app.polymorphic_path(attachment),
                         method: :delete,
