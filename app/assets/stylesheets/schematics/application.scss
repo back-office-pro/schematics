@@ -9,7 +9,6 @@
 html, body {
   height: 100%;
   font-size: 0.9rem;
-  animation-duration: 0.3s !important;
 }
 
 .sidebar-sticky {
@@ -100,6 +99,10 @@ nav.sticky-top[aria-label="breadcrumb"] {
     flex: 0 0 calc(100% - 6rem);
     max-width: calc(100% - 6rem);
   }
+}
+
+.content .container-fluid {
+  animation-duration: 0.3s !important;
 }
 
 /**
