@@ -101,7 +101,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   }
 }
 
-.content .container-fluid {
+* {
   animation-duration: 0.3s !important;
 }
 
@@ -220,12 +220,6 @@ nav.sticky-top[aria-label="breadcrumb"] {
     transform: scale(1);
     opacity: 1
   }
-}
-
-.animated--grow-in {
-  animation-name: growIn;
-  animation-duration: .2s;
-  animation-timing-function: transform cubic-bezier(0.18, 1.25, 0.4, 1), opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
 /**

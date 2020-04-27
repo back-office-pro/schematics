@@ -12,8 +12,8 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
+    = render 'schematics/application/notice' if notice.present?
+    = render 'schematics/application/alert' if alert.present?
     .jumbotron.p-0.m-0.rounded-0.d-flex.align-items-center.min-vh-100.bg-primary
-      .container
-        = render 'schematics/application/notice' if notice.present?
-        = render 'schematics/application/alert' if alert.present?
+      .container.animated.slideInDown
         = yield

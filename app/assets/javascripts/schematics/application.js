@@ -8,7 +8,6 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-    $('.content .container-fluid').addClass('animated slideInDown');
     $('.toast').toast({ delay: 5000 }).toast('show');
     $('[data-toggle="tooltip"]').tooltip();
     $('.custom-file-input').on('change', function () {

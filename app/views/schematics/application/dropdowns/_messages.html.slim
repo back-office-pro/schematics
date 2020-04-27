@@ -2,7 +2,7 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-3.pr-3.border-left.bo
   a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
     = fa_icon :envelope, class: "fa-lg"
     .badge.badge-danger 7
-  .dropdown-menu.dropdown-menu-right.animated--grow-in.shadow-sm.p-0 aria-labelledby="messagesDropdown" 
+  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="messagesDropdown" 
     h5.dropdown-header.font-weight-bold.bg-light= t('.message_center')
     - current_user.received_messages.includes(Message.entity.eager_loading).each do |message|
       = link_to main_app.message_path(message), class: "dropdown-item d-flex align-items-center" do
