@@ -3,7 +3,7 @@ fr:
     application:
       index:
         dropdowns:
-          per_page: "%{model_name} par page"
+          per_page: "%{size} %{model_name} par page"
         buttons:
           add: Ajouter un %{model_name}
           download_as_csv: Télécharger au format CSV
