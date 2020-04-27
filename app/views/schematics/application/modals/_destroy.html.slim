@@ -11,7 +11,7 @@
             = fa_icon :trash, class: "mr-2"
             = t('.body', model_name: model_class.model_name.human.downcase, resource: @resource)
           - entity.attachments_attributes.each do |attribute|
-            - if attachments[attribute.name].any?
+            - if attachments.key?(attribute.name)
               = render 'schematics/application/viewers/attachments',
                         attachments: attachments[attribute.name],
                         title: attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size),
@@ -21,7 +21,7 @@
                         collapsed: false
           - entity.has_many_and_through_associations.each do |association|
             - break unless association.required?
-            - if resources[association.name].any?
+            - if resources.key?(association.name)
               = render 'schematics/application/viewers/association',
                         resources: resources[association.name],
                         title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
