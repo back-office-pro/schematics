@@ -45,7 +45,7 @@ $(document).on('turbolinks:load', function() {
                 Object.entries(response).map(([key, value]) => {
                     value.forEach(result => {
                         results.push({
-                            url: [urls[key], result.id].join('/'),
+                            url: [urls[key], result.id].filter(Boolean).join('/'),
                             icon: icons[key],
                             descriptor: result[descriptors[key]]
                         })

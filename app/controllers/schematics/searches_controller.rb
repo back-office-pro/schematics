@@ -17,9 +17,9 @@ module Schematics
       SCHEMA.entities.each do |entity|
         model_class = entity.class_name.constantize
         entity.searchable_fields.each do |field|
-          records = model_class.
-            includes(entity.eager_loading).
-            send(:"by_#{field.name}", params[:query])
+          records = model_class
+          records = records.includes(entity.eager_loading) unless entity.is_a?(Entities::Singleton)
+          records = records.send(:"by_#{field.name}", params[:query])
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
           @results[entity.type]&.uniq!
         end

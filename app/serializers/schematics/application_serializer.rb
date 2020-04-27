@@ -9,7 +9,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          attribute :id
+          attribute :id unless entity.is_a?(Entities::Singleton)
 
           (entity.renderable_fields -
             entity.belongs_to_attributes -

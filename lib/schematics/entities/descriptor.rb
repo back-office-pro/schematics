@@ -1,7 +1,7 @@
 module Schematics
   module Entities
     class Descriptor
-      delegate :name, to: :@field
+      delegate :name, :entity, to: :@field
 
       class << self
         def create(entity, descriptor)
@@ -42,9 +42,16 @@ module Schematics
 
       def serializer_class
         descriptor = name
-        Class.new ActiveModel::Serializer do
-          attribute :id
-          attribute descriptor if descriptor != 'id'
+        case entity
+        when Singleton
+          Class.new ActiveModel::Serializer do
+            attribute descriptor
+          end
+        when Entity
+          Class.new ActiveModel::Serializer do
+            attribute :id
+            attribute descriptor if descriptor != 'id'
+          end
         end
       end
     end
