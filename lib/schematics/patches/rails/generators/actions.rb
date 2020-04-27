@@ -3,11 +3,7 @@ module Schematics
     module Rails
       module Generators
         module Actions
-          def route(routing_code, namespace: nil)
-            routing_code = Array(namespace).reverse.reduce(routing_code) do |code, ns|
-              "namespace :#{ns} do\n#{indent(code, 2)}\nend"
-            end
-
+          def route(routing_code)
             log :route, routing_code
             sentinel = "\n\s\send"
 

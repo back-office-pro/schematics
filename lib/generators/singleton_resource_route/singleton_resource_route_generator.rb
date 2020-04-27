@@ -1,7 +1,6 @@
 class SingletonResourceRouteGenerator < Rails::Generators::NamedBase
   def add_singleton_resource_route
-    return if options[:actions].present?
-    route <<~RUBY, namespace: regular_class_path
+    route <<~RUBY
       resource :#{file_name.pluralize}, only: [:show, :edit, :update]
     RUBY
     route <<~RUBY
