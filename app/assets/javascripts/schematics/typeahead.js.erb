@@ -22,6 +22,8 @@ $(document).on('turbolinks:load', function() {
                 const searchParams = new URLSearchParams(window.location.search);
                 const [url, query] = options.url.split('?__FIELD__=');
                 searchParams.set(scope, query);
+                searchParams.delete('page');
+                searchParams.delete('per_page');
                 options.url = url + '?' + searchParams;
                 $.ajax(options)
                     .done(function(data, textStatus, request) { onSuccess(data); })
@@ -88,7 +90,7 @@ $(document).on('turbolinks:load', function() {
 
     $('input.typeahead-filter')
         .on('typeahead:selected', function() { 
-            $(this.form).submit();
+            this.form.submit();
         })
         .typeahead(null, {
             source: filterSource,
