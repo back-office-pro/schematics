@@ -5,9 +5,11 @@
 //= require Chart.bundle
 //= require rails.validations
 //= require rails.validations.simple_form.bootstrap4
+//= require pagy
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
+    Pagy.init();
     $('.toast').toast({ delay: 5000 }).toast('show');
     $('[data-toggle="tooltip"]').tooltip();
     $('.custom-file-input').on('change', function () {

@@ -22,6 +22,7 @@ module Schematics
 
     # Assets
     config.assets.precompile += %w(schematics/themes/*.css)
+    config.assets.paths << Pagy.root.join('javascripts')
 
     # Bullet
     config.after_initialize do
