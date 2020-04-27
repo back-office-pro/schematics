@@ -89,7 +89,7 @@ describe Schematics::Associations::HasOneThrough do
       is_expected.to eq <<~RUBY
         scope :sort_by_category, -> sort_direction do
           joins(:sub_category, :category).
-          merge(Category.order(label: sort_direction))
+          merge(Category.order(Arel.sql("label") => sort_direction))
         end
       RUBY
     end
