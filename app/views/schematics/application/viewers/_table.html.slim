@@ -35,7 +35,7 @@
         - entity.has_one_and_through_associations.each do |association|
           th.align-middle.text-center.px-0.py-1
             = render 'schematics/application/filters/association', association: association
-      tbody class=('table-bordered border-0' if @resources.any?)
+      tbody class=('table-bordered border-0' if @resources.any?) class=('slideInRight' if params[:page].present?)
         - if @resources.empty?
           tr
             td.text-center.pt-5 colspan="100%"
