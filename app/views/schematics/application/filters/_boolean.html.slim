@@ -2,6 +2,6 @@
   = check_box_tag :"by_#{field.name}",
                   "true",
                   params[:"by_#{field.name}"] == "true",
-                  onchange: "$(this.form).submit()",
+                  onchange: "this.form.submit()",
                   class: "custom-control-input"
   = label_tag :"by_#{field.name}", "", class: "custom-control-label"

@@ -11,7 +11,7 @@
           = select_tag :per_page,
             options_for_select([10, 20, 50, 100], params[:per_page]),
             prompt: t('.dropdowns.per_page', model_name: model_class.model_name.human.pluralize),
-            onchange: "$(this.form).submit()",
+            onchange: "this.form.submit()",
             class: "form-control form-control-sm bg-light border-0 d-none d-md-inline mr-2"
           = link_to polymorphic_path(model_class, format: :csv), class: "btn btn-light btn-sm btn-icon-split mr-2" do
             span.icon= fa_icon :file_csv

@@ -4,5 +4,5 @@
                options_for_select(model_class.send(field.name.pluralize.to_sym).keys.collect { |key| [field.format(key), key] }, params[:"by_#{field.name}"]),
                prompt: t('schematics.application.filters.filter_by',
                attribute_name: model_class.human_attribute_name(field.name).downcase),
-               onchange: "$(this.form).submit()",
+               onchange: "this.form.submit()",
                class: "form-control bg-light #{'border-0' unless params[:"by_#{field.name}"].present?}"

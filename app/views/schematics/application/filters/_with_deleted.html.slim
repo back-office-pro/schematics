@@ -2,6 +2,6 @@
   = check_box_tag :with_deleted,
                   "true",
                   params[:with_deleted] == "true",
-                  onchange: "$(this.form).submit()",
+                  onchange: "this.form.submit()",
                   class: "custom-control-input"
   = label_tag :with_deleted, "", class: "custom-control-label"
