@@ -1,4 +1,5 @@
 @import "font_awesome5_webfont";
+@import "animate";
 @import "typeahead";
 
 /**
@@ -8,6 +9,7 @@
 html, body {
   height: 100%;
   font-size: 0.9rem;
+  animation-duration: 0.3s !important;
 }
 
 .sidebar-sticky {
@@ -113,7 +115,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   text-decoration: underline;
 }
 
-.table tr[onclick] {
+.table tr[data-href] {
   cursor: pointer;
 }
 
@@ -132,7 +134,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   border-left-width: 0px !important;
 }
 
-.table tbody tr:not([onclick]):first-child td, .table tbody tr:not([onclick]):first-child th {
+.table tbody tr:not([data-href]):first-child td, .table tbody tr:not([data-href]):first-child th {
   border-top-width: 0px !important;
 }
 

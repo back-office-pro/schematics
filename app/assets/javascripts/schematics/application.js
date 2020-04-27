@@ -8,6 +8,7 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
+    $('body').addClass('animated fadeIn');
     $('.toast').toast({ delay: 5000 }).toast('show');
     $('[data-toggle="tooltip"]').tooltip();
     $('.custom-file-input').on('change', function () {
@@ -18,6 +19,12 @@ $(document).on('turbolinks:load', function() {
     });
     $('form.form-inline').on('submit', function() {
         return $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', true);
+    });
+    $('tr[data-href]').click(function(e) {
+        const target = $(e.target);
+        if (!target.is('a') && !target.parent().is('a')) {
+            window.location = $(this).data('href');
+        }
     });
     $('#sidebar-toggle').click(function() {
         $('.sidebar, .content').toggleClass('toggled');

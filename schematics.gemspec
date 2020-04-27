@@ -61,6 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "oj", "~> 3.10.6"
   spec.add_dependency "active_model_serializers", "~> 0.10.10"
   spec.add_dependency "acts_as_singleton", "~> 0.0.8"
+  spec.add_dependency "animate-rails", "~> 1.0.10"
   spec.add_dependency "sprockets", "~> 3.7.2"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
