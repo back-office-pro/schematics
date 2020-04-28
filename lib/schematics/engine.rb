@@ -90,6 +90,12 @@ module Schematics
       Chartkick.options = {
         # colors: ['#2C3E50', '#ecf0f1'],
         height: '300px',
+        library: {
+          animation: {
+            duration: 1000,
+            easing: 'easeOutQuad',
+          },
+        },
       }
     end
 
