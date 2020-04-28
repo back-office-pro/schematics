@@ -12,7 +12,7 @@ module Schematics
           attribute :id unless entity.is_a?(Entities::Singleton)
 
           (entity.renderable_fields -
-            entity.belongs_to_attributes -
+            entity.association_attributes -
             entity.rich_text_attributes -
             entity.attachment_attributes).each do |field|
             attribute field.name.to_sym
@@ -24,12 +24,12 @@ module Schematics
             end
           end
 
-          entity.belongs_to_attributes.each do |attribute|
+          entity.association_attributes.each do |attribute|
             belongs_to attribute.name.to_sym,
                        serializer: attribute.inverse_descriptor.serializer_class
           end
 
-          entity.has_one_and_through_associations.each do |association|
+          entity.renderable_associations.each do |association|
             has_one association.name.to_sym,
                     serializer: association.descriptor.serializer_class
           end

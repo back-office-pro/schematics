@@ -91,10 +91,9 @@
                 },
                 {
                     "name": "author",
-                    "type": "belongs_to",
+                    "type": "references",
                     "options": {
                         "required": true,
-                        "type": "user",
                         "inverse": {
                             "name": "sent_messages",
                             "type": "has_many"

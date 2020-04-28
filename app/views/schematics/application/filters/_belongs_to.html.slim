@@ -1,8 +1,0 @@
-.input-group.ml-1.mr-1.mb-2.mt-1
-  = render 'schematics/application/filters/eraser', name: attribute.name
-  = select_tag :"by_#{attribute.name}",
-               options_from_collection_for_select(@resources.unscope(:where, :limit).map(&attribute.name.to_sym).compact, :id, :to_s, params[:"by_#{attribute.name}"]),
-               prompt: t('schematics.application.filters.filter_by',
-               attribute_name: model_class.human_attribute_name(attribute.name).downcase),
-               onchange: "$(this.form).submit()",
-               class: "form-control bg-light #{'border-0' unless params[:"by_#{attribute.name}"].present?}"

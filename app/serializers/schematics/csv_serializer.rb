@@ -13,9 +13,7 @@ module Schematics
         file << headers
         @records.each do |record|
           @record = record
-          file << renderable_fields +
-                  belongs_to_attributes +
-                  has_one_and_through_associations
+          file << renderable_fields + renderable_associations
         end
       end
     end
@@ -27,26 +25,20 @@ module Schematics
     private
 
     def headers
-      ((entity.renderable_fields - entity.belongs_to_attributes) +
-        entity.belongs_to_attributes +
-        entity.has_one_and_through_associations).
+      ((entity.renderable_fields - entity.association_attributes) +
+        entity.association_attributes +
+        entity.renderable_associations).
         map(&:name).map { |name| model.human_attribute_name(name) }
     end
 
     def renderable_fields
-      (super - entity.belongs_to_attributes).map do |field|
+      (super - association_attributes).map do |field|
         Array.wrap(field.format(@record.instance_eval(field.name))).join(' ')
       end
     end
 
-    def belongs_to_attributes
-      super.map do |attribute|
-        @record.instance_eval(attribute.name)
-      end
-    end
-
-    def has_one_and_through_associations
-      super.map do |association|
+    def renderable_associations
+      (association_attributes + super).map do |association|
         @record.instance_eval(association.name)
       end
     end

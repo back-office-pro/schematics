@@ -55,8 +55,8 @@ require_relative 'swagger/docs/config'
 
 module Schematics
   module Associations
-    autoload :Association,        'schematics/associations/association'
     autoload :AssociationThrough, 'schematics/associations/association_through'
+    autoload :Association,        'schematics/associations/association'
     autoload :HasManyThrough,     'schematics/associations/has_many_through'
     autoload :HasMany,            'schematics/associations/has_many'
     autoload :HasOneThrough,      'schematics/associations/has_one_through'
@@ -64,6 +64,7 @@ module Schematics
   end
 
   module Attributes
+    autoload :Association, 'schematics/attributes/association'
     autoload :Attachment,  'schematics/attributes/attachment'
     autoload :Attachments, 'schematics/attributes/attachments'
     autoload :Attribute,   'schematics/attributes/attribute'

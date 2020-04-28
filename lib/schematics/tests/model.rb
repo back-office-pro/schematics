@@ -101,7 +101,7 @@ module Schematics
               end
             end
 
-            entity.belongs_to_attributes.each do |attribute|
+            entity.association_attributes.each do |attribute|
               test "should belongs_to #{attribute.name}" do
                 reflection = model_class.reflect_on_association(attribute.name.to_sym)
                 assert reflection.macro == :belongs_to

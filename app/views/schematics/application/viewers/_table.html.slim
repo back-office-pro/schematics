@@ -4,19 +4,16 @@
       tr
         th.text-nowrap.text-center.pb-0
           = t('schematics.application.viewers.table.archives')
-        - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
+        - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.text-nowrap.text-center.pb-0
             = sort_link_to(field)
-        - entity.belongs_to_attributes.each do |attribute|
-          th.text-nowrap.text-center.pb-0
-            = sort_link_to(attribute)
-        - entity.has_one_and_through_associations.each do |association|
+        - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.text-nowrap.text-center.pb-0
             = sort_link_to(association)
       tr.filters
         th.text-nowrap.align-middle.px-0.py-1
           = render 'schematics/application/filters/with_deleted'
-        - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
+        - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.align-middle.text-center.px-0.py-1
             - case field
             - when Schematics::Attributes::Boolean
@@ -29,10 +26,7 @@
               = render 'schematics/application/filters/enum', field: field
             - else
               = render 'schematics/application/filters/input', field: field
-        - entity.belongs_to_attributes.each do |attribute|
-          th.align-middle.text-center.px-0.py-1
-            = render 'schematics/application/filters/belongs_to', attribute: attribute
-        - entity.has_one_and_through_associations.each do |association|
+        - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.align-middle.text-center.px-0.py-1
             = render 'schematics/application/filters/association', association: association
       tbody class=('table-bordered border-0' if @resources.any?) class=('slideInRight' if params[:page].present?)
@@ -61,7 +55,7 @@
                       method: :delete,
                       class: "btn btn-danger btn-sm",
                       data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.archive') }
-              - (entity.renderable_fields - entity.belongs_to_attributes).each do |field|
+              - (entity.renderable_fields - entity.association_attributes).each do |field|
                 td.text-nowrap.text-center.align-middle
                   - value = resource.instance_eval(field.name)
                   - case field
@@ -78,11 +72,7 @@
                     = field.format(value)
                   - else
                     = field.format(value)
-              - entity.belongs_to_attributes.each do |attribute|
-                td.text-nowrap.text-center.align-middle
-                  - value = resource.instance_eval(attribute.name)
-                  = link_to value, main_app.polymorphic_path(value) if value
-              - entity.has_one_and_through_associations.each do |association|
+              - (entity.association_attributes + entity.renderable_associations).each do |association|
                 td.text-nowrap.text-center.align-middle
                   - value = resource.instance_eval(association.name)
                   = link_to value, main_app.polymorphic_path(value) if value

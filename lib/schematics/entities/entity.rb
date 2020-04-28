@@ -117,10 +117,6 @@ module Schematics
         @attributes.map(&:validate).compact
       end
 
-      def has_one_and_through_associations
-        has_one_associations + has_one_through_associations
-      end
-
       def has_many_and_through_associations
         has_many_associations + has_many_through_associations
       end

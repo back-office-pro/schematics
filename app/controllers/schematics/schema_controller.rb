@@ -144,7 +144,8 @@ module Schematics
 
     def resource_params
       keys = request.format.json? ? entity.permitted_json_params : entity.permitted_params
-      params.require(entity.type.to_sym).send(:permit, *keys)
+      defaults = entity.references_attributes.map { |attribute| [attribute.name, current_user] }
+      params.require(entity.type.to_sym).permit(keys).with_defaults(defaults)
     end
   end
 end

@@ -1,0 +1,69 @@
+module Schematics
+  module Attributes
+    class Association < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Filterable
+      include Behaviours::Sortable
+      include Behaviours::Preloadable
+      include Behaviours::Default::Filterable
+
+      attr_accessor :inverse_descriptor
+      delegate :icon, to: :entity
+
+      def migration_options
+        super + [:polymorphic, :type]
+      end
+
+      def column_name
+        super + "_id"
+      end
+
+      def association_type
+        @options[:type] || @name
+      end
+
+      def inverse_association_name
+        inverse_association[:name] || @entity.type
+      end
+
+      def inverse_association
+        @options[:inverse]
+      end
+
+      def sort_scope
+        super.extends <<~RUBY
+          sort_direction do
+            joins(:#{joins}).
+            merge(#{model_property_type}.order(Arel.sql("#{inverse_descriptor.to_sql}") => sort_direction))
+          end
+        RUBY
+      end
+
+      def model_property_type
+        association_type.camelize
+      end
+
+      def api_param_type
+        "integer"
+      end
+
+      def to_str
+        <<~RUBY
+          belongs_to :#{@name}, class_name: '#{model_property_type}', optional: #{!required?}
+        RUBY
+      end
+
+      def inverse_of_has_one?
+        inverse_association[:type] == 'has_one'
+      end
+
+      def inverse_of_has_many?
+        inverse_association[:type] == 'has_many'
+      end
+
+      def create_inverse_association
+        Schematics::Associations.const_get(inverse_association[:type].camelize.to_sym).new(self)
+      end
+    end
+  end
+end
