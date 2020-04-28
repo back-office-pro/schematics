@@ -32,7 +32,7 @@ module Schematics
         [@y.title, I18n.t('schematics.dashboard.home.graphics.by'), @x.title].join(' ')
       end
 
-      def to_h
+      def as_json
         class_name.constantize.
           send(x.agregate.to_sym, x.to_sql).
           send(y.agregate.to_sym, y.to_sql).

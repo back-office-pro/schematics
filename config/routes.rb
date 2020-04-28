@@ -1,5 +1,6 @@
 Schematics::Engine.routes.draw do
   root 'dashboard#home'
+  get 'chart/:id', to: 'dashboard#chart', as: :chart
 
   localized do
     get 'login',             to: 'sessions#new',         as: :login
