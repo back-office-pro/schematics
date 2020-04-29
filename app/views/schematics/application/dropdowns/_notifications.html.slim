@@ -1,10 +1,13 @@
+- versions = PaperTrail::Version.where(whodunnit: current_user.id, created_at: current_user.updated_at...).order(created_at: :desc).includes(:item)
+- users = User.where(id: versions.collect(&:whodunnit).uniq)
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-3
   a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
     = fa_icon :bell, class: "fa-lg"
-    .badge.badge-danger 3
-  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm aria-labelledby="notificationsDropdown" 
-    h6.dropdown-header Header
-    .dropdown-item.d-flex.align-items-center
-      | Test
+    .badge.badge-danger= versions.size if versions.any?
+  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="notificationsDropdown" 
+    h5.dropdown-header.font-weight-bold.bg-light= t('.message_center')
+    - versions.each do |version|
+      .dropdown-item.d-flex.align-items-center
+        = render 'schematics/timeline/version', version: version, user: users.find_by_id(version.whodunnit)
     .dropdown-divider
     = link_to "Voir toutes les notifications", schematics.timeline_path, class: "dropdown-item text-muted small"
