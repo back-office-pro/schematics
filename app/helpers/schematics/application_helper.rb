@@ -52,7 +52,7 @@ module Schematics
           user.avatar,
           width: 36,
           height: 36,
-          css_class: "rounded-circle border border-dark"
+          css_class: "rounded-circle border shadow-sm"
         )
       else
         fa_icon(:user_circle, size: "2x", class: "align-middle")
