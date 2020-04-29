@@ -1,5 +1,6 @@
 module Schematics
   module ApplicationHelper
+    include Pagy::Frontend
     include FontAwesome5::Rails::IconHelper
 
     def setting(key)

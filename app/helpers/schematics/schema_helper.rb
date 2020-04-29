@@ -1,6 +1,5 @@
 module Schematics
   module SchemaHelper
-    include Pagy::Frontend
     delegate :entity, :resource, :model_class, to: :controller
 
     def title

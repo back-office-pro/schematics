@@ -1,5 +1,6 @@
 module Schematics
   class ApplicationController < ::ApplicationController
+    include Pagy::Backend
     protect_from_forgery unless: -> { request.format.json? }
     before_action :authorize
     around_action :switch_locale

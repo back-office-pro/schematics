@@ -4,13 +4,9 @@
     ul.timeline.list-unstyled
       - @versions.each do |version|
         li
-          .timeline-icon.bg-primary.text-light.border.shadow-sm
-            = fa_icon version.item.class.entity.icon, size: "2x"
+          .timeline-icon.bg-primary.border.shadow-sm
+            = link_to fa_icon(version.item.class.entity.icon, size: "2x"), main_app.url_for(version.item.class), class: "text-light"
           .card.shadow-sm
             .card-body
-              .float-left.mr-2
-                = user_avatar @users.find_by_id(version.whodunnit)
-              div
-                = version.event
-                = link_to version.item, main_app.url_for(version.item)
-              div= t 'layouts.schematics.application.ago', time: time_ago_in_words(version.created_at)
+              = render 'version', version: version, user: @users.find_by_id(version.whodunnit)
+== pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1

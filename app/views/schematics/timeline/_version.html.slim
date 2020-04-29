@@ -1,0 +1,6 @@
+.float-left.mr-3
+  = link_to user_avatar(user), main_app.url_for(user)
+div
+  = version.event
+  = link_to version.item, main_app.url_for(version.item)
+div.text-muted= t 'layouts.schematics.application.ago', time: time_ago_in_words(version.created_at)
