@@ -1,0 +1,12 @@
+.row.justify-content-center
+  .col-xl-9.col-md-12
+    ul.timeline.list-unstyled
+      - versions.each do |version|
+        li
+          .timeline-icon.bg-primary.border.shadow-sm
+            = link_to fa_icon(version.item_type.constantize.entity.icon, size: "2x"),
+                      main_app.url_for(version.item_type.constantize),
+                      class: "text-light"
+          .card.shadow-sm
+            .card-body
+              = render 'schematics/timeline/version', version: version
