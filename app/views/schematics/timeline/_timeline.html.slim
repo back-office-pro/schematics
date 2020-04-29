@@ -8,5 +8,6 @@
                       main_app.url_for(version.item_type.constantize),
                       class: "text-light"
           .card.shadow-sm
-            .card-body
+            .card-body data-target="#diffModal-#{version.id}"
+              = render 'schematics/timeline/diff', version: version
               = render 'schematics/timeline/version', version: version

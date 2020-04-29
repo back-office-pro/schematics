@@ -207,6 +207,10 @@ nav.sticky-top[aria-label="breadcrumb"] {
   content: '\f105';
 }
 
+.card .card-body[data-target] {
+  cursor: pointer;
+}
+
 /**
  * Dropdowns
  */

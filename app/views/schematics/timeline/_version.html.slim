@@ -3,4 +3,4 @@
 div
   = version.event
   = link_to version.item, main_app.url_for(version.item) if version.item.present?
-div.text-muted= t 'layouts.schematics.application.ago', time: time_ago_in_words(version.created_at)
+  div.text-muted= t('layouts.schematics.application.ago', time: time_ago_in_words(version.created_at))

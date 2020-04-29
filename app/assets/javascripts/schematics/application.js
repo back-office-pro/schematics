@@ -27,6 +27,12 @@ $(document).on('turbolinks:load', function() {
             window.location = $(this).data('href');
         }
     });
+    $('.card-body[data-target]').click(function(e) {
+        const target = $(e.target);
+        if (!target.is('a') && !target.parent().is('a')) {
+            $($(this).data('target')).modal('show');
+        }
+    });
     $('#sidebar-toggle').click(function() {
         $('.sidebar, .content').toggleClass('toggled');
         $('.sidebar .d-none').toggleClass('d-md-block');
