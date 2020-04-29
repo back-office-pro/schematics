@@ -55,7 +55,7 @@
               model_class: association.class_name.constantize,
               collapsed: true
 .mt-4
-  = render 'schematics/timeline/timeline', versions: @resource.versions
+  = render 'schematics/timeline/timeline', versions: @resource.versions.with_user.with_item.reorder(created_at: :desc)
 = render "schematics/application/modals/destroy",
          resources: all_resources,
          attachments: all_attachments
