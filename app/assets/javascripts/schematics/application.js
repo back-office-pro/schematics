@@ -32,3 +32,7 @@ $(document).on('turbolinks:load', function() {
         $('.sidebar .d-none').toggleClass('d-md-block');
     });
 });
+
+$(document).on('show.bs.modal', '.modal', function() {
+    $(this).appendTo('body');
+});
