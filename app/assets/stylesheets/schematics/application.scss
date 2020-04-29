@@ -1,6 +1,7 @@
 @import "font_awesome5_webfont";
 @import "animate";
 @import "typeahead";
+@import "timeline";
 
 /**
  * Layout
@@ -90,7 +91,7 @@ nav.sticky-top[aria-label="breadcrumb"] {
   max-width: calc(100% - 6rem);
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 768px) {
   .sidebar {
     flex: 0 0 6rem;
     max-width: 6rem;
