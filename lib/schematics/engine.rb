@@ -19,9 +19,5 @@ module Schematics
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
     config.i18n.load_path += Dir.glob(File.expand_path('../../config/locales/**/*.yml', __dir__))
-
-    # Assets
-    config.assets.precompile += %w(schematics/themes/*.css)
-    config.assets.paths << Pagy.root.join('javascripts')
   end
 end
