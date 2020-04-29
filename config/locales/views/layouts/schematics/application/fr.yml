@@ -2,6 +2,7 @@ fr:
   layouts:
     schematics:
       application:
+        ago: "il y a %{time}"
         dropdown:
           logout: Déconnexion
           edit_profile: Editer mon profil
