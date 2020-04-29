@@ -1,15 +1,16 @@
 - breadcrumb title, :timeline_path
-.card.shadow-sm
-  .card-header.p-2
-    ul.nav.align-items-center
-      li.nav-item
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :stream, class: "mr-3 ml-3 fa-lg align-middle"
-          span.align-middle= title
-  .card-body
-    - @versions.each do |version|
-      p= link_to version.item, main_app.url_for(version.item)
-      = fa_icon version.item.class.entity.icon
-      p= version.event
-      p= time_ago_in_words(version.created_at)
-      p= user_avatar @users.find_by_id(version.whodunnit)
+.row.justify-content-center
+  .col-xl-9.col-md-12
+    ul.timeline.list-unstyled
+      - @versions.each do |version|
+        li
+          .timeline-icon.bg-primary.text-light.border.shadow-sm
+            = fa_icon version.item.class.entity.icon, size: "2x"
+          .card.shadow-sm
+            .card-body
+              .float-left.mr-2
+                = user_avatar @users.find_by_id(version.whodunnit)
+              div
+                = version.event
+                = link_to version.item, main_app.url_for(version.item)
+              div= t 'layouts.schematics.application.ago', time: time_ago_in_words(version.created_at)
