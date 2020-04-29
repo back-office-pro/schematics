@@ -54,6 +54,8 @@
               entity: association.entity,
               model_class: association.class_name.constantize,
               collapsed: true
+.mt-4
+  = render 'schematics/timeline/timeline', versions: @resource.versions
 = render "schematics/application/modals/destroy",
          resources: all_resources,
          attachments: all_attachments
