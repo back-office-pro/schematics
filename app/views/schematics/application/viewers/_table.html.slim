@@ -63,13 +63,9 @@
                     - value.with_deleted.each do |attachment|
                       = link_to attachment.filename, main_app.url_for(attachment), class: "pr-2"
                   - when Schematics::Attributes::Attachment
-                    - value = ActiveStorage::Attachment.with_deleted.find_by_record_id(resource.id)
-                    = link_to value.filename, main_app.url_for(value) if value
+                    = link_to value.filename, main_app.url_for(value) if value.attached?
                   - when Schematics::Attributes::Boolean
                     = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
-                  - when Schematics::Attributes::RichText
-                    - value = ActionText::RichText.with_deleted.find_by_record_id(resource.id)
-                    = field.format(value)
                   - else
                     = field.format(value)
               - (entity.association_attributes + entity.renderable_associations).each do |association|
