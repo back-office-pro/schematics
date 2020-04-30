@@ -17,14 +17,18 @@ module Schematics
         { super => [:data, :filename, :content_type] }
       end
 
-      def joins
+      def includes
         { [name, type].join("_").to_sym => :blob }
+      end
+
+      def joins
+        [includes.keys.first, :"#{name}_blob"]
       end
 
       def filter_scope
         super.extends <<~RUBY
           filename do
-            joins(:#{joins.keys.first}, :#{@name}_blob).
+            joins(#{joins}).
             where("active_storage_blobs.filename ILIKE ?", "%#\{filename}%")
           end
         RUBY
@@ -33,7 +37,7 @@ module Schematics
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            left_joins(:#{joins.keys.first}, :#{@name}_blob).
+            left_joins(#{joins}).
             order("active_storage_blobs.filename": sort_direction)
           end
         RUBY

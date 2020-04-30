@@ -12,14 +12,14 @@ module Schematics
         "string"
       end
 
-      def joins
-        [type, name].join("_").to_sym
+      def includes
+        [[type, name].join("_").to_sym]
       end
 
       def filter_scope
         super.extends <<~RUBY
           body do
-            joins(:#{joins}).
+            joins(#{joins}).
             where("action_text_rich_texts.body ILIKE ?", "%#\{body}%")
           end
         RUBY
@@ -28,7 +28,7 @@ module Schematics
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            left_joins(:#{joins}).
+            left_joins(#{joins}).
             order("action_text_rich_texts.body": sort_direction)
           end
         RUBY

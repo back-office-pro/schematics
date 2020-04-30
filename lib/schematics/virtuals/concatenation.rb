@@ -12,20 +12,12 @@ module Schematics
       end
 
       def filter_scope
-        if joins.empty?
-          super.extends <<~RUBY
-            #{@name} do
-              where("#{to_sql} ILIKE ?", "%#\{#{name}}%")
-            end
-          RUBY
-        else
-          super.extends <<~RUBY
-            #{@name} do
-              joins(#{joins}).
-              where("#{to_sql} ILIKE ?", "%#\{#{name}}%")
-            end
-          RUBY
-        end
+        super.extends <<~RUBY
+          #{@name} do
+            joins(#{joins}).
+            where("#{to_sql} ILIKE ?", "%#\{#{name}}%")
+          end
+        RUBY
       end
 
       def icon

@@ -4,6 +4,7 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Filterable
       include Behaviours::Sortable
+      include Behaviours::Preloadable
 
       attr_reader :entity, :name
 
@@ -33,27 +34,19 @@ module Schematics
         @tokens.map(&:to_sql)
       end
 
-      def joins
+      def includes
         @tokens.select_is_a?(Tokens::Reference).map do |reference|
-          reference.value.split('.')[0...-1].map { |value| value.prepend(':') }
-        end.flatten.uniq.join(', ')
+          reference.value.split('.')[0...-1].map(&:to_sym)
+        end.flatten.uniq
       end
 
       def sort_scope
-        if joins.empty?
-          super.extends <<~RUBY
-            sort_direction do
-              order(Arel.sql("#{to_sql}") => sort_direction)
-            end
-          RUBY
-        else
-          super.extends <<~RUBY
-            sort_direction do
-              joins(#{joins}).
-              order(Arel.sql("#{to_sql}") => sort_direction)
-            end
-          RUBY
-        end
+        super.extends <<~RUBY
+          sort_direction do
+            joins(#{joins}).
+            order(Arel.sql("#{to_sql}") => sort_direction)
+          end
+        RUBY
       end
 
       def to_str

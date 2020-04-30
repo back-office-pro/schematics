@@ -86,15 +86,15 @@ module Schematics
       end
 
       def permitted_params
-        fillable_attributes.map(&:permitted_param).flatten.compact
+        fillable_attributes.map(&:permitted_param).flatten
       end
 
       def permitted_json_params
-        fillable_attributes.map(&:permitted_json_param).flatten.compact
+        fillable_attributes.map(&:permitted_json_param).flatten
       end
 
-      def eager_loading
-        preloadable_elements.map(&:joins)
+      def default_scopes
+        preloadable_elements.map(&:default_scope).uniq.compact
       end
 
       def filter_scopes
@@ -126,7 +126,7 @@ module Schematics
       end
 
       def model_elements
-        (elements + filter_scopes + sort_scopes + validates) << descriptor
+        (elements + default_scopes + filter_scopes + sort_scopes + validates) << descriptor
       end
 
       def controller_elements
@@ -207,6 +207,7 @@ module Schematics
 
             #{descriptor.to_str}
             #{validates.join("\s\s")}
+            #{default_scopes.join("\s\s")}
             #{filter_scopes.join("\s\s")}
             #{sort_scopes.join("\s\s")}
             #{attributes.map(&:to_str).join("\s\s")}

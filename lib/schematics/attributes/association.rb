@@ -30,10 +30,15 @@ module Schematics
         @options[:inverse]
       end
 
+      def includes
+        return [] if association_type == @entity.type # prevent self inclusion
+        super
+      end
+
       def sort_scope
         super.extends <<~RUBY
           sort_direction do
-            joins(:#{joins}).
+            joins(#{joins}).
             merge(#{model_property_type}.order(Arel.sql("#{inverse_descriptor.to_sql}") => sort_direction))
           end
         RUBY
