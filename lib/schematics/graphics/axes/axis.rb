@@ -42,8 +42,6 @@ module Schematics
           end
         end
 
-        protected
-
         def model_class
           class_name.constantize
         end
