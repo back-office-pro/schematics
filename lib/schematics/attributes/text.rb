@@ -18,7 +18,9 @@ module Schematics
 
       def filter_scope
         super.extends <<~RUBY
-          #{@name} { where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%") }
+          #{@name} do
+            where("#{@entity.type.pluralize}.#{@name} ILIKE ?", "%#\{#{@name}}%")
+          end
         RUBY
       end
 
