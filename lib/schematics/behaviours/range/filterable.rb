@@ -5,9 +5,9 @@ module Schematics
         def filter_scope
           super.extends <<~RUBY
             (from, to) do
-              return where("#{entity.type.pluralize}.#{name} <= ?", to) if from.nil?
-              return where("#{entity.type.pluralize}.#{name} >= ?", from) if to.nil?
-              return where("#{entity.type.pluralize}.#{name} >= ? AND #{entity.type.pluralize}.#{name} <= ?", from, to)
+              return where("#{to_sql} <= ?", to) if from.nil?
+              return where("#{to_sql} >= ?", from) if to.nil?
+              return where("#{to_sql} >= ? AND #{to_sql} <= ?", from, to)
             end
           RUBY
         end
