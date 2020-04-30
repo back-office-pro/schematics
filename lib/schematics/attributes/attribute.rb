@@ -74,9 +74,9 @@ module Schematics
       end
 
       def validate
-        unless validators.empty?
+        if validators.any?
           <<~RUBY
-            validates :#{@name}, #{validators.to_s[1...-1]}
+            validates :#{@name}, #{validators}
           RUBY
         end
       end
