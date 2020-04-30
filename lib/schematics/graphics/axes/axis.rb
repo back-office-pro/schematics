@@ -4,6 +4,7 @@ module Schematics
       class Axis
         attr_reader :agregate, :field
         delegate :icon, :class_name, to: :@entity
+        delegate :to_sql, to: :field
 
         class << self
           def create(entity, agregate:, field: nil)
@@ -32,14 +33,7 @@ module Schematics
         end
 
         def to_sql
-          case field
-          when Virtuals::Virtual
-            field.to_sql
-          when nil
-            :all
-          else
-            field.name.to_sym
-          end
+          @field&.to_sql || :all
         end
 
         def model_class

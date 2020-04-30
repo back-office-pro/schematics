@@ -2,6 +2,7 @@ module Schematics
   module Attributes
     class Attribute
       attr_reader :entity, :name
+      alias to_sql name
 
       class << self
         def create(entity, name:, type:, options: {})

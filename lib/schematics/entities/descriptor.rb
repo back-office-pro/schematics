@@ -1,7 +1,7 @@
 module Schematics
   module Entities
     class Descriptor
-      delegate :name, :entity, to: :@field
+      delegate :name, :entity, :to_sql, to: :@field
 
       class << self
         def create(entity, descriptor)
@@ -12,15 +12,6 @@ module Schematics
 
       def initialize(field)
         @field = field
-      end
-
-      def to_sql
-        case @field
-        when Virtuals::Virtual
-          @field.to_sql
-        else
-          name
-        end
       end
 
       def to_s
