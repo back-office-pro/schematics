@@ -44,7 +44,7 @@
               model_class: attribute.entity.class_name.constantize,
               collapsed: true
 - entity.has_many_and_through_associations.each do |association|
-  - resources = @resource.instance_eval(association.name).includes(association.entity.eager_loading)
+  - resources = @resource.instance_eval(association.name)
   - if resources.any?
     - all_resources[association.name] = resources
     = render 'schematics/application/viewers/association',

@@ -30,7 +30,6 @@ module Schematics
     def index
       @pagy, @resources = pagy(
         apply_scopes(model_class).
-        includes(entity.eager_loading).
         order(created_at: :desc),
         items: params.fetch(:per_page, 25)
       )
