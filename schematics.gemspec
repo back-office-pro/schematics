@@ -16,6 +16,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec_api_documentation", "~> 6.1.0"
   spec.add_development_dependency "rubocop", "~> 0.76.0"
   spec.add_development_dependency "rubocop-airbnb", "~> 3.0.1"
+  spec.add_development_dependency "better_errors", "~> 2.6.0"
+  spec.add_development_dependency "binding_of_caller", "~> 0.8.0"
   spec.add_dependency "rails", "~> 6.0.2.2"
   spec.add_dependency "image_processing", "~> 1.2"
   spec.add_dependency "pagy", "~> 3.5"

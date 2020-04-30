@@ -441,8 +441,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  better_errors
-  binding_of_caller
+  better_errors (~> 2.6.0)
+  binding_of_caller (~> 0.8.0)
   pg (~> 1.2.3)
   rspec-rails (~> 3.9.0)
   rspec_api_documentation (~> 6.1.0)
