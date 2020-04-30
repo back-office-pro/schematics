@@ -1,0 +1,5 @@
+en:
+  schematics:
+    user_mailer:
+      password_reset:
+        subject: Password reset

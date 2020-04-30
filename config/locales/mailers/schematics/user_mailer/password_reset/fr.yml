@@ -1,0 +1,5 @@
+fr:
+  schematics:
+    user_mailer:
+      password_reset:
+        subject: Récupération mot de passe perdu
