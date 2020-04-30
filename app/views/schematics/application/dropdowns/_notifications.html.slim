@@ -1,4 +1,4 @@
-- versions = PaperTrail::Version.with_user.with_item.where(user: current_user, created_at: current_user.updated_at...).order(created_at: :desc)
+- versions = PaperTrail::Version.with_user.with_item.where(created_at: current_user.updated_at...).order(created_at: :desc)
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-3
   a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
     = fa_icon :bell, class: "fa-lg"
