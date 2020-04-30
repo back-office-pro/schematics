@@ -134,6 +134,9 @@ module Schematics
                   when Entities::Entity
                     model_class.send(scope).find(params[:id])
                   end
+      unless request.path.start_with? polymorphic_path(@resource)
+        return redirect_to @resource, status: :moved_permanently
+      end
     end
 
     def set_breadcrumb

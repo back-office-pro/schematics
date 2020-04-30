@@ -30,13 +30,8 @@ module Schematics
       def to_str
         <<~RUBY
           extend FriendlyId
-
-          friendly_id :#{name}, use: [:slugged, :finders]
+          friendly_id :#{name}
           alias_attribute :to_s, :#{name}
-
-          def should_generate_new_friendly_id?
-            true
-          end
         RUBY
       end
 
