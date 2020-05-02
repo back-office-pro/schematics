@@ -129,7 +129,7 @@ module Schematics
                        params: { really: true },
                        as: :json
               end
-              assert_response :no_content
+              assert_response :success
             end
 
             test "should really destroy #{entity.type}" do
@@ -147,7 +147,7 @@ module Schematics
                 login as: :json
                 delete polymorphic_path(@record), headers: authorization_header, as: :json
               end
-              assert_response :no_content
+              assert_response :success
             end
 
             test "should unarchive #{entity.type}" do
@@ -167,7 +167,7 @@ module Schematics
                 login as: :json
                 delete polymorphic_path(@record), headers: authorization_header, as: :json
               end
-              assert_response :no_content
+              assert_response :success
             end
 
             test "should archive #{entity.type}" do
