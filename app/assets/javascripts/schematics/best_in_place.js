@@ -5,6 +5,7 @@
 //= require best_in_place.jquery-ui
 
 $(document).on('turbolinks:load', function() {
+    $('textarea').autosize();
     $('.best_in_place').best_in_place();
     $('.best_in_place').on('ajax:success', function() {
         $(this).closest('td').effect('highlight');
