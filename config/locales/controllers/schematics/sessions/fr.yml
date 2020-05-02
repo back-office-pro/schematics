@@ -1,16 +1,10 @@
 fr:
   schematics:
     sessions:
-      new:
-        title: Se connecter
-      edit:
-        title: Editer mon profil
       create:
-        title: "Se connecter : nouvel essai"
         logged_in: Connecté !
         invalid_credentials: L'e-mail ou le mot de passe est invalide
       update:
-        title: "Editer mon profil : nouvel essai"
         profile_updated: Votre profil a été mis à jour avec succès
         wrong_password: Mauvais mot de passe
       destroy:

@@ -14,11 +14,12 @@ module Schematics
 
     def show
       @results = {}
+      @query = params[:query]
       SCHEMA.entities.each do |entity|
         model_class = entity.class_name.constantize
         entity.searchable_fields.each do |field|
           records = model_class
-          records = records.send(:"by_#{field.name}", params[:query])
+          records = records.send(:"by_#{field.name}", @query)
           @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
           @results[entity.type]&.uniq!
         end

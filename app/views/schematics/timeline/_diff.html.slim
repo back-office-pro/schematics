@@ -9,7 +9,7 @@
         .table-responsive
           table.table.mb-0.table-striped
             tbody.table-bordered.border-0
-              - new_version = version.next&.reify || resource
+              - new_version = version.next&.reify || @resource
               - (version.entity.renderable_fields - version.entity.association_attributes).each do |field|
                 tr
                   th

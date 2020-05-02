@@ -1,16 +1,11 @@
 fr:
   schematics:
     password_resets:
-      new:
-        title: Mot de passe oublié
       edit:
-        title: Mot de passe oublié
         user_not_found: Utilisateur non trouvé
       create:
-        title: "Mot de passe oublié : nouvel essai"
         email_sent: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
         unknown_email: E-mail inconnu
       update:
-        title: "Mot de passe oublié : nouvel essai"
         expired: La requête de réinitialisation a expirée
         password_reset: Votre mot de passe a été réinitialisé !

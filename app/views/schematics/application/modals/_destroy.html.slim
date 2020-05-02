@@ -9,7 +9,7 @@
         .modal-body
           .alert.alert-danger.mb-0
             = fa_icon :trash, class: "mr-2"
-            = t('.body', model_name: model_class.model_name.human.downcase, resource: @resource)
+            = t('.body', model_name: @model_name, resource: @resource)
           - entity.attachments_attributes.each do |attribute|
             - if attachments.key?(attribute.name)
               = render 'schematics/application/viewers/attachments',

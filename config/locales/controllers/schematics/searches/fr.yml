@@ -1,5 +1,0 @@
-fr: 
-  schematics:
-    searches:
-      show:
-        title: Recherche "%{query}"

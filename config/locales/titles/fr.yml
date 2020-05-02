@@ -1,0 +1,21 @@
+fr:
+  titles:
+    schematics:
+      dashboard:
+        home: Tableau de bord
+      searches:
+        show: Recherche "%{query}"
+      sessions:
+        new: Se connecter
+        edit: Editer mon profil
+      timeline:
+        show: Historique
+      password_resets:
+        new: Mot de passe oublié
+        edit: Mot de passe oublié
+      schema:
+        index: Liste des %{model_name_plural}
+        new: Ajouter un %{model_name}
+        edit: Editer %{resource}
+        show: "%{resource}"
+        not_found: Ressource non trouvée

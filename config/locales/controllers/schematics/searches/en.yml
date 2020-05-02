@@ -1,5 +1,0 @@
-en: 
-  schematics:
-    searches:
-      show:
-        title: Search "%{query}"

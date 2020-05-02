@@ -1,23 +1,11 @@
 fr:  
   schematics:
     schema:
-      index:
-        title: Liste des %{model_name}
-      new:
-        title: Ajouter un %{model_name}
       create:
-        title: "Ajouter un %{model_name} : nouvel essai"
         created: "%{model_name} a été créé avec succès"
-      edit:
-        title: Editer %{model_name}
-      show:
-        title: "%{model_name}"
       update:
-        title: "Editer %{model_name} : nouvel essai"
         updated: "%{model_name} a été modifié avec succès"
       destroy:
         destroyed: "%{model_name} a été supprimé avec succès"
         restored: "%{model_name} a été restauré avec succès"
         archived: "%{model_name} a été archivé avec succès"
-      not_found:
-        title: Ressource non trouvée

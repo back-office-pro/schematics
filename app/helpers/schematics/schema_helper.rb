@@ -1,20 +1,5 @@
 module Schematics
   module SchemaHelper
-    delegate :entity, :resource, :model_class, to: :controller
-
-    def title
-      model_name = case action_name.to_sym
-                   when :index then model_class.model_name.human.pluralize.downcase
-                   when :new, :create then model_class.model_name.human.downcase
-                   when :edit, :update, :show then resource
-                   end
-      if model_name.nil?
-        I18n.t('schematics.schema.not_found.title')
-      else
-        I18n.t(:title, model_name: model_name, scope: [:schematics, :schema, action_name.to_sym])
-      end
-    end
-
     # TODO
     # remove when Directory is refactored
     def file_icon(file)

@@ -9,7 +9,7 @@ module Schematics
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     delegate :model_class, to: :class
     delegate :entity, :model_name, to: :model_class
-    attr_reader :resource
+    helper_method :entity, :model_class
 
     class << self
       delegate :entity, :model_name, to: :model_class
@@ -24,6 +24,10 @@ module Schematics
 
       def model_class
         controller_name.classify.constantize
+      end
+
+      def controller_path
+        "schematics/schema"
       end
     end
 
@@ -117,10 +121,18 @@ module Schematics
     end
 
     def not_found
+      self.action_name = :not_found
       respond_to do |format|
         format.html { render :not_found, status: :not_found }
         format.json { head :not_found }
       end
+    end
+
+    def view_assigns
+      super.merge(
+        model_name_plural: model_name.human.pluralize.downcase,
+        model_name: model_name.human.downcase
+      )
     end
 
     protected
@@ -139,7 +151,8 @@ module Schematics
     end
 
     def set_breadcrumb
-      title = t('schematics.schema.index.title', model_name: model_name.human.pluralize.downcase)
+      title = t('titles.schematics.schema.index',
+                model_name_plural: model_name.human.pluralize.downcase)
       breadcrumb title, :"#{entity.type.pluralize}_path"
     end
 

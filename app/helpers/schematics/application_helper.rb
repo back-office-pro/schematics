@@ -9,14 +9,6 @@ module Schematics
       end
     end
 
-    def title
-      I18n.t :title, query: params[:query], scope: [
-        :schematics,
-        controller_name.to_sym,
-        action_name.to_sym,
-      ]
-    end
-
     def humanize_attachment_validators(validators)
       content = []
       validators.except(:presence, :attached).each do |key, value|
@@ -43,7 +35,7 @@ module Schematics
     rescue MiniMagick::Error
       I18n.t('errors.messages.image_metadata_missing').humanize
     rescue ActiveStorage::FileNotFoundError
-      I18n.t('schematics.schema.not_found.title')
+      I18n.t('titles.schematics.schema.not_found')
     end
 
     def user_avatar(user)

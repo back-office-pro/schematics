@@ -1,0 +1,21 @@
+en:
+  titles:
+    schematics:
+      dashboard:
+        home: Dashboard
+      searches:
+        show: Search "%{query}"
+      sessions:
+        new: Login
+        edit: Edit my profile
+      timeline:
+        show: Timeline
+      password_resets:
+        new: Password reset
+        edit: Password reset
+      schema:
+        index: List of %{resources}
+        new: Add a new %{resource}
+        edit: Edit %{resource}
+        show: "%{resource}"
+        not_found: Resource not found

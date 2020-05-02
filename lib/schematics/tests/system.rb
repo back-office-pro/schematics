@@ -25,8 +25,8 @@ module Schematics
 
             test "visiting the index" do
               visit polymorphic_path(model_class)
-              title = I18n.t('schematics.schema.index.title',
-                             model_name: model_name.human.pluralize.downcase)
+              title = I18n.t('titles.schematics.schema.index',
+                             model_name_plural: model_name.human.pluralize.downcase)
               assert_selector "h5", text: title
             end
 
@@ -100,7 +100,7 @@ module Schematics
           when Attributes::RichText
             fill_in_rich_text_area input, with: attribute.default
           when Attributes::BelongsTo
-            select @record.instance_eval(attribute.name), from: input, match: :first
+            select @record.instance_eval(attribute.name).to_s, from: input, match: :first
           when Attributes::Digest
             digest = attribute.default
             fill_in input, with: digest
