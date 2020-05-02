@@ -5,6 +5,8 @@
       = fa_icon :user, class: "mr-3 ml-3 fa-lg align-middle"
       span.align-middle= title
   .card-body
+    - avatar = entity.find_field_by_name('avatar')
+    - locale = entity.find_field_by_name('locale')
     = simple_form_for current_user, url: sessions_path, validate: true, defaults: { input_html: { class: "bg-light border-0" } } do |f|
       = f.input :email
       = f.input :password
@@ -14,11 +16,10 @@
       = f.input :last_name
       = f.input :avatar,
                 as: :file,
-                hint: fa_icon(:info_circle, class: "mr-1") + \
-                  humanize_attachment_validators(User.entity.find_field_by_name('avatar').validators)
+                hint: fa_icon(:info_circle, class: "mr-1") + humanize_attachment_validators(avatar.validators)
       = f.input :locale,
                 as: :radio_buttons,
-                collection: User.locales.keys.collect { |key| [User.entity.find_field_by_name('locale').format(key), key] }
+                collection: locale.values.collect { |value| [locale.format(value), value] }
       = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
         span.icon= fa_icon :check
         span.text= t('schematics.application.form.buttons.confirm')

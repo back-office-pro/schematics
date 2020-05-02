@@ -3,6 +3,7 @@ module Schematics
     before_action :authorize, only: [:edit, :update]
     layout "schematics/auth", only: [:new, :create]
     swagger_controller :sessions, "Sessions Management"
+    helper_method :entity
 
     def new
     end
@@ -68,7 +69,11 @@ module Schematics
     private
 
     def user_params
-      params.require(:user).permit(*User.entity.permitted_params)
+      params.require(:user).permit(*entity.permitted_params)
+    end
+
+    def entity
+      User.entity
     end
   end
 end
