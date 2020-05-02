@@ -14,8 +14,8 @@ en:
         new: Password reset
         edit: Password reset
       schema:
-        index: List of %{resources}
-        new: Add a new %{resource}
+        index: List of %{model_name_plural}
+        new: Add a new %{model_name}
         edit: Edit %{resource}
         show: "%{resource}"
         not_found: Resource not found
