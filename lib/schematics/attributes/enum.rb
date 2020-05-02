@@ -5,6 +5,7 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
       include Behaviours::Fillable
+      include Behaviours::Editable
       include Behaviours::Default::Sortable
       include Behaviours::Default::Filterable
 
@@ -49,6 +50,14 @@ module Schematics
 
       def icon
         :list_ol
+      end
+
+      def input_type
+        :select
+      end
+
+      def input_collection
+        @values.collect { |value| [value, format(value)] }
       end
     end
   end

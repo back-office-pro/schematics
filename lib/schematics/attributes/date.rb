@@ -5,6 +5,7 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
       include Behaviours::Fillable
+      include Behaviours::Editable
       include Behaviours::Range::Filterable
       include Behaviours::Default::Sortable
 
@@ -27,6 +28,10 @@ module Schematics
 
       def icon
         :calendar_alt
+      end
+
+      def input_type
+        :date
       end
     end
   end

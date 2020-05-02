@@ -1,0 +1,17 @@
+@import "jquery-ui/theme";
+@import "jquery-ui/datepicker";
+
+.best_in_place .form-control {
+  height: 1.8rem;
+  width: auto;
+}
+
+.best_in_place:hover {
+  background: #fcf8e3;
+}
+
+.table tr {
+  .best_in_place {
+    cursor: copy;
+  }
+}

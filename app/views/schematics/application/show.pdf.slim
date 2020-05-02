@@ -13,6 +13,13 @@
           td
             - value = @resource.instance_eval(field.name)
             - case field
+            - when Schematics::Behaviours::Editable
+              = best_in_place @resource,
+                              field.name.to_sym,
+                              as: field.input_type,
+                              inner_class: "form-control border p-0",
+                              collection: field.try(:input_collection),
+                              display_with: lambda { |value| field.format(value) }
             - when Schematics::Attributes::Attachments
               - value.each do |attachment|
                 - if attachment.representable?
@@ -31,7 +38,18 @@
               == value
             - else
               = field.format(value)
-      - (entity.association_attributes + entity.renderable_associations).each do |association|
+      - entity.association_attributes.each do |attribute|
+        tr
+          th
+            = fa_icon attribute.icon, class: "mr-2 text-muted"
+            = model_class.human_attribute_name(attribute.name)
+          td
+            = best_in_place @resource,
+                            :id,
+                            as: attribute.input_type,
+                            collection: attribute.input_collection,
+                            inner_class: "form-control border p-0"
+      - entity.renderable_associations.each do |association|
         tr
           th
             = fa_icon association.icon, class: "mr-2 text-muted"

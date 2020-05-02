@@ -12,8 +12,7 @@
     - when Schematics::Attributes::Enum
       = f.input attribute.name.to_sym,
                 as: :radio_buttons,
-                collection: resource.class.send(attribute.name.pluralize.to_sym).keys. \
-                  collect { |key| [attribute.format(key), key] }
+                collection: attribute.input_collection.map(&:reverse)
     - when Schematics::Attributes::Attachment
       = f.input attribute.name.to_sym,
                 as: :file,

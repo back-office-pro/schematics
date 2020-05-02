@@ -57,7 +57,7 @@ module Schematics
 
             test "destroying a #{entity.type}" do
               visit polymorphic_path(model_class)
-              find("tr[data-href] td:nth-child(2)", match: :first).click
+              page.execute_script("$('tr[data-href]').first().click()")
               click_on I18n.t('schematics.application.show.buttons.destroy')
               click_on I18n.t('schematics.application.form.buttons.confirm')
               assert_text I18n.t('schematics.schema.destroy.destroyed',

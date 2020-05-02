@@ -48,6 +48,8 @@ require 'active_model_serializers'
 require 'acts_as_singleton'
 require 'animate-rails'
 require 'title'
+require 'best_in_place'
+require 'jquery-ui-rails'
 require 'json_web_token'
 require 'array'
 require 'string'
@@ -95,6 +97,7 @@ module Schematics
     module Range
       autoload :Filterable, 'schematics/behaviours/range/filterable'
     end
+    autoload :Editable,    'schematics/behaviours/editable'
     autoload :Fillable,    'schematics/behaviours/fillable'
     autoload :Filterable,  'schematics/behaviours/filterable'
     autoload :Preloadable, 'schematics/behaviours/preloadable'

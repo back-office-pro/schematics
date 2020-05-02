@@ -5,6 +5,7 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
       include Behaviours::Preloadable
+      include Behaviours::Editable
       include Behaviours::Default::Filterable
 
       attr_accessor :inverse_descriptor
@@ -68,6 +69,16 @@ module Schematics
 
       def create_inverse_association
         Schematics::Associations.const_get(inverse_association[:type].camelize.to_sym).new(self)
+      end
+
+      def input_type
+        :select
+      end
+
+      def input_collection
+        association_type.camelize.constantize.all.collect do |association|
+          [association.id, association.to_s]
+        end
       end
     end
   end

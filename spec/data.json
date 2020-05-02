@@ -218,7 +218,7 @@
             "attributes": [
                 {
                     "name": "title",
-                    "type": "string"
+                    "type": "text"
                 },
                 {
                     "name": "start_at",

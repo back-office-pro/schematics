@@ -90,7 +90,7 @@ module Schematics
             notice = t('schematics.schema.update.updated', model_name: model_name.human)
             redirect_to @resource, notice: notice
           end
-          format.json
+          format.json { respond_with_bip(@resource) }
         end
       else
         respond_to do |format|

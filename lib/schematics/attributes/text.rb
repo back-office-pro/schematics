@@ -6,6 +6,7 @@ module Schematics
       include Behaviours::Sortable
       include Behaviours::Searchable
       include Behaviours::Fillable
+      include Behaviours::Editable
       include Behaviours::Default::Sortable
 
       def migration_options
@@ -26,6 +27,10 @@ module Schematics
 
       def icon
         :align_justify
+      end
+
+      def input_type
+        :textarea
       end
     end
   end

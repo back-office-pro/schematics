@@ -29,7 +29,7 @@
         - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.align-middle.text-center.px-0.py-1
             = render 'schematics/application/filters/association', association: association
-      tbody class=('table-bordered border-0' if @resources.any?) class=('slideInRight' if params[:page].present?)
+      tbody class=('table-bordered border-0' if @resources.any?) class=('animated slideInRight' if params[:page].present?)
         - if @resources.empty?
           tr
             td.text-center.pt-5 colspan="100%"
@@ -59,6 +59,13 @@
                 td.text-nowrap.text-center.align-middle
                   - value = resource.instance_eval(field.name)
                   - case field
+                  - when Schematics::Behaviours::Editable
+                    = best_in_place resource,
+                                    field.name.to_sym,
+                                    as: field.input_type,
+                                    inner_class: "form-control border p-0",
+                                    collection: field.try(:input_collection),
+                                    display_with: lambda { |value| field.format(value) }
                   - when Schematics::Attributes::Attachments
                     - value.with_deleted.each do |attachment|
                       = link_to attachment.filename, main_app.url_for(attachment), class: "pr-2"
@@ -68,7 +75,14 @@
                     = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
                   - else
                     = field.format(value)
-              - (entity.association_attributes + entity.renderable_associations).each do |association|
+              - entity.association_attributes.each do |attribute|
+                td.text-nowrap.text-center.align-middle
+                  = best_in_place resource,
+                                  :id,
+                                  as: attribute.input_type,
+                                  collection: attribute.input_collection,
+                                  inner_class: "form-control border p-0"
+              - entity.renderable_associations.each do |association|
                 td.text-nowrap.text-center.align-middle
                   - value = resource.instance_eval(association.name)
                   = link_to value, main_app.polymorphic_path(value) if value

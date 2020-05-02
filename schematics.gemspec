@@ -67,6 +67,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "animate-rails", "~> 1.0.10"
   spec.add_dependency "title", "~> 0.0.7"
   spec.add_dependency "sprockets", "~> 3.7.2"
+  spec.add_dependency "best_in_place"
+  spec.add_dependency "jquery-ui-rails"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "README.md"]

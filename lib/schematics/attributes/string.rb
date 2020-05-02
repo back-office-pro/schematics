@@ -37,6 +37,10 @@ module Schematics
         return "www.#{SecureRandom.base58}.com" if url?
         super
       end
+
+      def input_type
+        :input
+      end
     end
   end
 end

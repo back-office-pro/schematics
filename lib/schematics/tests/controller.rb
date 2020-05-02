@@ -186,7 +186,7 @@ module Schematics
                     params: { entity.type.to_sym => @json_params },
                     headers: authorization_header,
                     as: :json
-              assert_response :no_content
+              assert_response :success
             end
 
             test "should update #{entity.type}" do

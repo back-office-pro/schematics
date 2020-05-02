@@ -23,7 +23,8 @@ $(document).on('turbolinks:load', function() {
     });
     $('tr[data-href]').click(function(e) {
         const target = $(e.target);
-        if (!target.is('a') && !target.parent().is('a')) {
+        if (!target.is('a') && !target.parent().is('a') && 
+            !target.hasClass('best_in_place') && !target.parents('.best_in_place').length) {
             window.location = $(this).data('href');
         }
     });
