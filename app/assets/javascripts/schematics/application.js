@@ -22,15 +22,15 @@ $(document).on('turbolinks:load', function() {
         return $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', true);
     });
     $('tr[data-href]').click(function(e) {
-        const target = $(e.target);
-        if (!target.is('a') && !target.parent().is('a') && 
-            !target.hasClass('best_in_place') && !target.parents('.best_in_place').length) {
-            window.location = $(this).data('href');
+        const $target = $(e.target);
+        if (!$target.is('a') && !$target.parent().is('a') && 
+            !$target.hasClass('best_in_place') && !$target.parents('.best_in_place').length) {
+            Turbolinks.visit($(this).data('href'));
         }
     });
     $('.card-body[data-target]').click(function(e) {
-        const target = $(e.target);
-        if (!target.is('a') && !target.parent().is('a')) {
+        const $target = $(e.target);
+        if (!$target.is('a') && !$target.parent().is('a')) {
             $($(this).data('target')).modal('show');
         }
     });
