@@ -60,7 +60,7 @@ $(document).on('turbolinks:load', function() {
 
     $('input.typeahead-search')
         .on('typeahead:selected', (event, item) => {
-            window.location.href = item.url;
+            Turbolinks.visit(item.url);
         })
         .typeahead(null, {
             source: searchSource,
