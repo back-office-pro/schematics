@@ -19,9 +19,9 @@
             - when Schematics::Attributes::Boolean
               = render 'schematics/application/filters/boolean', scope: :"by_#{field.name}"
             - when Schematics::Virtuals::Calculation, Schematics::Attributes::Float
-              = render 'schematics/application/filters/range', field: field
+              = render 'schematics/application/filters/range', field: field, type: :number
             - when Schematics::Attributes::Date
-              = render 'schematics/application/filters/date', field: field
+              = render 'schematics/application/filters/range', field: field, type: :date
             - when Schematics::Attributes::Enum
               = render 'schematics/application/filters/enum', field: field
             - else

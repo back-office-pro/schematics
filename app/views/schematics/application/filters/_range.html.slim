@@ -1,15 +1,20 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
-  = render 'schematics/application/filters/unit', field: field, range: :from
-  = render 'schematics/application/filters/eraser', name: field.name, range: :from
-  = number_field_tag :"by_#{field.name}[from]",
-                     params.dig(:"by_#{field.name}", :from),
-                     placeholder: t('schematics.application.filters.from'),
-                     class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
+  = send :"#{type}_field_tag", :"by_#{field.name}[from]",
+                               params.dig(:"by_#{field.name}", :from),
+                               placeholder: t('schematics.application.filters.from'),
+                               onchange: ("$(this.form).submit()" if type == :date),
+                               class: "form-control bg-light rounded border-success #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
+  - if field.try(:unit).present?
+    .input-group-append
+      .input-group-text.border-0.bg-transparent.p-0.pl-2
+        = field.unit
   .mr-2
-  = number_field_tag :"by_#{field.name}[to]",
-                     params.dig(:"by_#{field.name}", :to),
-                     placeholder: t('schematics.application.filters.to'),
-                     class: "form-control bg-light #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
-  = render 'schematics/application/filters/eraser', name: field.name, range: :to
-  = render 'schematics/application/filters/unit', field: field, range: :to
-  
+  = send :"#{type}_field_tag", :"by_#{field.name}[to]",
+                               params.dig(:"by_#{field.name}", :to),
+                               placeholder: t('schematics.application.filters.to'),
+                               onchange: ("$(this.form).submit()" if type == :date),
+                               class: "form-control bg-light rounded border-success #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
+  - if field.try(:unit).present?
+    .input-group-append
+      .input-group-text.border-0.bg-transparent.p-0.pl-2
+        = field.unit
