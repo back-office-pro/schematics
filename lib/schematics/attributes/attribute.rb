@@ -2,7 +2,6 @@ module Schematics
   module Attributes
     class Attribute
       attr_reader :entity, :name
-      alias to_sql name
 
       class << self
         def create(entity, name:, type:, options: {})
@@ -88,6 +87,10 @@ module Schematics
 
       def json_default
         default
+      end
+
+      def to_sql
+        [@entity.type.pluralize, @name].join('.')
       end
 
       def to_str
