@@ -1,7 +1,6 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
   = select_tag :"by_#{field.name}",
                options_for_select(field.input_collection.map(&:reverse), params[:"by_#{field.name}"]),
-               prompt: t('schematics.application.filters.filter_by',
-               attribute_name: model_class.human_attribute_name(field.name).downcase),
+               prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase),
                onchange: "$(this.form).submit()",
-               class: "form-control bg-light #{'border-0' unless params[:"by_#{field.name}"].present?}"
+               class: "form-control bg-light border-success #{'border-0' unless params[:"by_#{field.name}"].present?}"
