@@ -1,18 +1,20 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
   = search_form.search_field field.search_field.first,
                              placeholder: t('schematics.application.filters.from'),
+                             onchange: ("$(this.form).submit()" if type == :date),
                              class: "form-control bg-light border-0 rounded",
-                             type: "number"
-  - if field.unit.present?
-    .input-group
+                             type: type
+  - if field.try(:unit).present?
+    .input-group-append
       .input-group-text.border-0.bg-transparent.p-0.pl-2
         = field.unit
   .mr-2
   = search_form.search_field field.search_field.last,
                              placeholder: t('schematics.application.filters.to'),
+                             onchange: ("$(this.form).submit()" if type == :date),
                              class: "form-control bg-light border-0 rounded",
-                             type: "number"
-  - if field.unit.present?
-    .input-group
+                             type: type
+  - if field.try(:unit).present?
+    .input-group-append
       .input-group-text.border-0.bg-transparent.p-0.pl-2
         = field.unit
