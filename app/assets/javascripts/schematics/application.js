@@ -38,6 +38,13 @@ $(document).on('turbolinks:load', function() {
         $('.sidebar, .content').toggleClass('toggled');
         $('.sidebar .d-none').toggleClass('d-md-block');
     });
+    $('input[type=search]').on('search', function(e) {
+        const $target = $(e.target);
+        const scope = $target.attr('name');
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.delete(scope);
+        Turbolinks.visit(window.location.pathname + '?' + searchParams);
+    });
 });
 
 $(document).on('show.bs.modal', '.modal', function() {
