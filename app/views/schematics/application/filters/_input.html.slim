@@ -1,6 +1,5 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
-  = render 'schematics/application/filters/eraser', name: field.name
-  = text_field_tag :"by_#{field.name}",
+  = search_field_tag :"by_#{field.name}",
                    params[:"by_#{field.name}"],
                    id: field.name.camelize(:lower),
                    placeholder: t('schematics.application.filters.filter_by',
