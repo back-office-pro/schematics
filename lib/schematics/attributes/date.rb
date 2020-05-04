@@ -6,8 +6,6 @@ module Schematics
       include Behaviours::Sortable
       include Behaviours::Fillable
       include Behaviours::Editable
-      include Behaviours::Range::Filterable
-      include Behaviours::Default::Sortable
 
       def migration_options
         super + [:before, :after]
@@ -24,6 +22,10 @@ module Schematics
           validators[:date][key] = @options[key].to_sym if @options.key?(key)
         end
         validators
+      end
+
+      def search_field
+        [:"#{name}_gteq", :"#{name}_lteq"]
       end
 
       def icon

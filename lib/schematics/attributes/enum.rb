@@ -6,8 +6,6 @@ module Schematics
       include Behaviours::Sortable
       include Behaviours::Fillable
       include Behaviours::Editable
-      include Behaviours::Default::Sortable
-      include Behaviours::Default::Filterable
 
       attr_reader :values
 
@@ -34,6 +32,10 @@ module Schematics
 
       def api_param
         [super.sub('param', 'param_list'), @values.to_s].join(', ')
+      end
+
+      def search_field
+        :"#{name}_in"
       end
 
       def to_str

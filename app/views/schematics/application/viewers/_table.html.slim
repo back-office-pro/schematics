@@ -6,29 +6,29 @@
           = t('schematics.application.viewers.table.archives')
         - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.text-nowrap.text-center.pb-0
-            = sort_link_to(field)
+            = sort_link(@q, field.sort_field, model_class.human_attribute_name(field.name))
         - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.text-nowrap.text-center.pb-0
-            = sort_link_to(association)
+            = sort_link(@q, association.sort_field, model_class.human_attribute_name(association.name))
       tr.filters
         th.text-nowrap.align-middle.px-0.py-1
-              = render 'schematics/application/filters/boolean', scope: :with_deleted
+          = render 'schematics/application/filters/boolean', search_form: search_form, name: :with_deleted
         - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.align-middle.text-center.px-0.py-1
             - case field
             - when Schematics::Attributes::Boolean
-              = render 'schematics/application/filters/boolean', scope: :"by_#{field.name}"
+              = render 'schematics/application/filters/boolean', search_form: search_form, name: field.search_field
             - when Schematics::Virtuals::Calculation, Schematics::Attributes::Float
-              = render 'schematics/application/filters/range', field: field, type: :number
+              = render 'schematics/application/filters/range', search_form: search_form, field: field
             - when Schematics::Attributes::Date
-              = render 'schematics/application/filters/range', field: field, type: :date
+              = render 'schematics/application/filters/date', search_form: search_form, field: field
             - when Schematics::Attributes::Enum
-              = render 'schematics/application/filters/enum', field: field
+              = render 'schematics/application/filters/enum', search_form: search_form, field: field
             - else
-              = render 'schematics/application/filters/input', field: field
+              = render 'schematics/application/filters/input', search_form: search_form, field: field
         - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.align-middle.text-center.px-0.py-1
-            = render 'schematics/application/filters/association', association: association
+            = render 'schematics/application/filters/input', search_form: search_form, field: association
       tbody class=('table-bordered border-0' if @resources.any?) class=('animated slideInRight' if params[:page].present?)
         - if @resources.empty?
           tr

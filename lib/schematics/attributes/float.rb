@@ -5,8 +5,6 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
       include Behaviours::Fillable
-      include Behaviours::Range::Filterable
-      include Behaviours::Default::Sortable
 
       def validators
         super.merge(numericality: { allow_nil: !required? })
@@ -14,6 +12,10 @@ module Schematics
 
       def unit
         @options[:unit]
+      end
+
+      def search_field
+        [:"#{name}_gteq", :"#{name}_lteq"]
       end
 
       def format(value)

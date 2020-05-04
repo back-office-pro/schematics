@@ -17,6 +17,22 @@ module Schematics
       def entity
         SCHEMA.find_entity_by_type(name.underscore)
       end
+
+      def ransackable_attributes(auth_object)
+        entity.filterable_fields.map(&:name)
+      end
+
+      def ransackable_associations(auth_object)
+        super # entity.filterable_associations.map(&:name)
+      end
+
+      def ransortable_attributes(auth_object)
+        entity.sortable_fields.map(&:name)
+      end
+
+      def ransackable_scopes(auth_object)
+        [:with_deleted]
+      end
     end
   end
 end

@@ -11,13 +11,8 @@ module Schematics
         "CONCAT(#{super.join(', ')})"
       end
 
-      def filter_scope
-        super.extends <<~RUBY
-          #{@name} do
-            joins(#{joins}).
-            where("#{to_sql} ILIKE ?", "%#\{#{name}}%")
-          end
-        RUBY
+      def search_field
+        :"#{name}_cont"
       end
 
       def icon

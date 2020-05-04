@@ -5,10 +5,6 @@ module Schematics
         [name.to_sym]
       end
 
-      def joins
-        includes
-      end
-
       def default_scope
         if includes.any?
           <<~RUBY

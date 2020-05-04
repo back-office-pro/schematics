@@ -1,8 +1,6 @@
 module Schematics
   module Virtuals
     class Calculation < Virtual
-      include Behaviours::Range::Filterable
-
       def to_sql
         super.join
       end
@@ -13,6 +11,10 @@ module Schematics
 
       def scale
         @options[:scale]
+      end
+
+      def search_field
+        [:"#{name}_gteq", :"#{name}_lteq"]
       end
 
       def format(value)

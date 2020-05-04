@@ -97,22 +97,6 @@ module Schematics
         preloadable_elements.map(&:default_scope).uniq.compact
       end
 
-      def filter_scopes
-        filterable_elements.map(&:filter_scope)
-      end
-
-      def sort_scopes
-        sortable_elements.map(&:sort_scope)
-      end
-
-      def has_filter_scopes
-        filterable_elements.map(&:has_filter_scope)
-      end
-
-      def has_sort_scopes
-        sortable_elements.map(&:has_sort_scope)
-      end
-
       def validates
         @attributes.map(&:validate).compact
       end
@@ -126,11 +110,7 @@ module Schematics
       end
 
       def model_elements
-        (elements + default_scopes + filter_scopes + sort_scopes + validates) << descriptor
-      end
-
-      def controller_elements
-        (has_filter_scopes + has_sort_scopes) << api
+        (elements + default_scopes + validates) << descriptor
       end
 
       def api
@@ -208,8 +188,6 @@ module Schematics
             #{descriptor.to_str}
             #{validates.join("\s\s")}
             #{default_scopes.join("\s\s")}
-            #{filter_scopes.join("\s\s")}
-            #{sort_scopes.join("\s\s")}
             #{attributes.map(&:to_str).join("\s\s")}
             #{associations.map(&:to_str).join("\s\s")}
             #{virtuals.map(&:to_str).join("\s\s")}
@@ -221,8 +199,6 @@ module Schematics
             # #{permitted_json_params.join(", ")}
             ###
 
-            #{has_filter_scopes.join("\s\s")}
-            #{has_sort_scopes.join("\s\s")}
             #{api}
           end
         RUBY

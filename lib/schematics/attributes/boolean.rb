@@ -5,18 +5,9 @@ module Schematics
       include Behaviours::Filterable
       include Behaviours::Sortable
       include Behaviours::Fillable
-      include Behaviours::Default::Sortable
 
-      def filter_scope
-        super.extends <<~RUBY
-          { where(#{@name}: true) }
-        RUBY
-      end
-
-      def has_filter_scope
-        super.extends_with_comma <<~RUBY
-          type: :boolean
-        RUBY
+      def search_field
+        :"#{name}_true"
       end
 
       def icon

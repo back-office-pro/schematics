@@ -6,7 +6,6 @@ module Schematics
       include Behaviours::Sortable
       include Behaviours::Preloadable
       include Behaviours::Editable
-      include Behaviours::Default::Filterable
 
       attr_accessor :inverse_descriptor
       delegate :icon, to: :entity
@@ -36,13 +35,12 @@ module Schematics
         super
       end
 
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins}).
-            merge(#{model_property_type}.order(Arel.sql("#{inverse_descriptor.to_sql}") => sort_direction))
-          end
-        RUBY
+      def search_field
+        :"#{name}_#{inverse_descriptor.name}_cont"
+      end
+
+      def sort_field
+        :"#{name}_#{inverse_descriptor.name}"
       end
 
       def model_property_type

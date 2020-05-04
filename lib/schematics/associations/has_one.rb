@@ -6,23 +6,12 @@ module Schematics
       include Behaviours::Sortable
       include Behaviours::Preloadable
 
-      def joins
-        [entity.type.to_sym]
+      def search_field
+        :"#{name}_#{descriptor.name}_cont"
       end
 
-      def filter_scope
-        super.extends <<~RUBY
-          #{name} { where(#{entity.type}: #{name}) }
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins}).
-            merge(#{class_name}.order(Arel.sql("#{descriptor.to_sql}") => sort_direction))
-          end
-        RUBY
+      def sort_field
+        :"#{name}_#{descriptor.name}"
       end
     end
   end

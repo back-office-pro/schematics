@@ -7,7 +7,6 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
-      include Behaviours::Default::Sortable
 
       def migration_options
         super + [:limit]
@@ -17,12 +16,8 @@ module Schematics
         "string"
       end
 
-      def filter_scope
-        super.extends <<~RUBY
-          #{@name} do
-            where("#{to_sql} ILIKE ?", "%#\{#{@name}}%")
-          end
-        RUBY
+      def search_field
+        :"#{name}_cont"
       end
 
       def icon

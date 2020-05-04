@@ -5,7 +5,6 @@ module Schematics
     before_action :set_breadcrumb
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
     after_action { pagy_headers_merge(@pagy) if @pagy }
-    has_scope :with_deleted, type: :boolean, only: :index
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     delegate :model_class, to: :class
     delegate :entity, :model_name, to: :model_class
@@ -18,7 +17,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          entity.controller_elements.each(&method(:class_eval))
+          class_eval(entity.api)
         end
       end
 
@@ -32,11 +31,9 @@ module Schematics
     end
 
     def index
-      @pagy, @resources = pagy(
-        apply_scopes(model_class).
-        order(created_at: :desc),
-        items: params.fetch(:per_page, 25)
-      )
+      @q = model_class.ransack(params[:q])
+      @q.sorts = 'created_at desc' if @q.sorts.empty?
+      @pagy, @resources = pagy @q.result, items: params.fetch(:per_page, 25)
       respond_to do |format|
         format.html
         format.json { render json: @resources }

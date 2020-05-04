@@ -18,23 +18,12 @@ module Schematics
         @belongs_to.inverse_descriptor
       end
 
-      def joins
-        [entity.type.to_sym]
+      def search_field
+        :"#{name}_#{descriptor.name}_cont"
       end
 
-      def filter_scope
-        super.extends <<~RUBY
-          #{name} { joins(#{joins}).where(#{name}: #{name}) }
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins + includes}).
-            merge(#{class_name}.order(Arel.sql("#{descriptor.to_sql}") => sort_direction))
-          end
-        RUBY
+      def sort_field
+        :"#{name}_#{descriptor.name}"
       end
     end
   end

@@ -9,7 +9,8 @@ require 'paranoia'
 require 'paper_trail'
 require 'rails'
 require 'action_controller'
-require 'has_scope'
+require 'ransack'
+require 'ransack/enum'
 require 'rack/attack'
 require 'swagger/docs'
 require 'bullet'
@@ -90,13 +91,6 @@ module Schematics
   end
 
   module Behaviours
-    module Default
-      autoload :Filterable, 'schematics/behaviours/default/filterable'
-      autoload :Sortable,   'schematics/behaviours/default/sortable'
-    end
-    module Range
-      autoload :Filterable, 'schematics/behaviours/range/filterable'
-    end
     autoload :Editable,    'schematics/behaviours/editable'
     autoload :Fillable,    'schematics/behaviours/fillable'
     autoload :Filterable,  'schematics/behaviours/filterable'

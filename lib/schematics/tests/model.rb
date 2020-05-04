@@ -19,20 +19,6 @@ module Schematics
               assert @record.valid?
             end
 
-            entity.filterable_elements.each do |element|
-              scope = :"by_#{element.name}"
-              test "should have filter scope #{scope}" do
-                assert model_class.respond_to?(scope)
-              end
-            end
-
-            entity.sortable_elements.each do |element|
-              scope = :"sort_by_#{element.name}"
-              test "should have sort scope #{scope}" do
-                assert model_class.respond_to?(scope)
-              end
-            end
-
             entity.attributes.select(&:required?).each do |attribute|
               test "invalid without #{attribute.name}" do
                 @record.send("#{attribute.name}=", nil)

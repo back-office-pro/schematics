@@ -71,27 +71,4 @@ describe Schematics::Associations::HasOneThrough do
 
     it { is_expected.to eq("label") }
   end
-
-  describe "#filter_scope" do
-    subject { association.filter_scope }
-
-    it do
-      is_expected.to eq <<~RUBY
-        scope :by_category, -> category { joins([:sub_category]).where(category: category) }
-      RUBY
-    end
-  end
-
-  describe "#sort_scope" do
-    subject { association.sort_scope }
-
-    it do
-      is_expected.to eq <<~RUBY
-        scope :sort_by_category, -> sort_direction do
-          joins([:sub_category, :category]).
-          merge(Category.order(Arel.sql("label") => sort_direction))
-        end
-      RUBY
-    end
-  end
 end

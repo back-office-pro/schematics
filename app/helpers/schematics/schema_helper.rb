@@ -18,24 +18,5 @@ module Schematics
         :file
       end
     end
-
-    def sort_link_to(field)
-      scope = :"sort_by_#{field.name}"
-      sort_direction = request.parameters[scope]&.to_sym == :asc ? :desc : :asc
-      icon = sort_direction == :asc ? :sort_down : :sort_up
-      params = request.parameters.merge(scope => sort_direction)
-      content_tag(:div, nil, class: "row no-gutters") do
-        content_tag(:div, nil, class: "col") do
-          content = []
-          if request.parameters[scope].nil?
-            content << fa_icon(:sort, class: "mr-2 text-dark")
-          else
-            content << fa_icon(icon, class: "mr-2 text-success")
-          end
-          content << link_to(model_class.human_attribute_name(field.name), params)
-          content.join.html_safe
-        end
-      end
-    end
   end
 end

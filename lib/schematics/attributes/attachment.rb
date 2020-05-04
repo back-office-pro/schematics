@@ -21,26 +21,12 @@ module Schematics
         { [name, type].join("_").to_sym => :blob }
       end
 
-      def joins
-        [includes.keys.first, :"#{name}_blob"]
+      def search_field
+        :"#{name}_blob_filename_cont"
       end
 
-      def filter_scope
-        super.extends <<~RUBY
-          filename do
-            joins(#{joins}).
-            where("active_storage_blobs.filename ILIKE ?", "%#\{filename}%")
-          end
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            left_joins(#{joins}).
-            order("active_storage_blobs.filename": sort_direction)
-          end
-        RUBY
+      def sort_field
+        :"#{name}_blob_filename"
       end
 
       def to_str

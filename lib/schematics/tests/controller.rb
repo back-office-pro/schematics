@@ -15,8 +15,6 @@ module Schematics
         def inherited(subclass)
           super
           subclass.class_eval do
-            scopes = controller_class.scopes_configuration
-
             setup do
               @record = send(entity.type.pluralize, :one)
               @params = entity.fillable_attributes.map do |attribute|
@@ -31,32 +29,6 @@ module Schematics
                   attribute.json_default || @record.send(attribute.column_name),
                 ]
               end.to_h
-            end
-
-            test "should have scope with_deleted" do
-              assert scopes.include?(:with_deleted)
-              assert scopes[:with_deleted][:only] == [:index]
-              assert scopes[:with_deleted][:type] == :boolean
-            end
-
-            entity.filterable_elements.each do |element|
-              scope = :"by_#{element.name}"
-              test "should have filter scope #{scope}" do
-                assert scopes.include?(scope)
-                assert scopes[scope][:only] == [:index]
-                assert scopes[scope][:type] == :boolean if element.is_a?(Attributes::Boolean)
-                if element.is_a?(Behaviours::Range::Filterable) ||
-                   element.is_a?(Virtuals::Calculation)
-                  assert scopes[scope][:using] == [:from, :to]
-                end
-              end
-            end
-
-            entity.sortable_elements.each do |element|
-              scope = :"sort_by_#{element.name}"
-              test "should have sort scope #{scope}" do
-                assert scopes.include?(scope)
-              end
             end
 
             test "should get API index" do

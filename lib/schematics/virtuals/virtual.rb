@@ -40,15 +40,6 @@ module Schematics
         end.flatten.uniq
       end
 
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins}).
-            order(Arel.sql("#{to_sql}") => sort_direction)
-          end
-        RUBY
-      end
-
       def to_str
         <<~RUBY
           def #{@name}
@@ -57,6 +48,10 @@ module Schematics
             Schematics::Virtuals::Errors::NameError.new(e.message, e.name)
           rescue TypeError => e
             Schematics::Virtuals::Errors::TypeError.new(e.message)
+          end
+
+          ransacker :#{name} do
+            Arel.sql("#{to_sql}")
           end
         RUBY
       end

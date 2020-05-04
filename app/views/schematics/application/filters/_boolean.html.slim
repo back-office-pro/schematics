@@ -1,7 +1,5 @@
 .custom-control.custom-switch.mx-auto.w-0.mb-2.mt-1
-  = check_box_tag scope,
-                  "true",
-                  params[scope] == "true",
-                  onchange: "$(this.form).submit()",
-                  class: "custom-control-input"
-  = label_tag scope, "", class: "custom-control-label"
+  = search_form.check_box name,
+                          onchange: "$(this.form).submit()",
+                          class: "custom-control-input"
+  = search_form.label name, "", class: "custom-control-label", style:"font-size: 0"
