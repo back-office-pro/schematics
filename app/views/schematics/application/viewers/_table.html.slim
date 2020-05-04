@@ -78,7 +78,7 @@
               - entity.association_attributes.each do |attribute|
                 td.text-nowrap.text-center.align-middle
                   = best_in_place resource,
-                                  :id,
+                                  attribute.column_name.to_sym,
                                   as: attribute.input_type,
                                   collection: attribute.input_collection,
                                   inner_class: "form-control border p-0"
