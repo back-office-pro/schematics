@@ -15,6 +15,10 @@ module Schematics
       def to_str
         <<~RUBY
           acts_as_singleton
+
+          def self.all
+            super
+          end
         RUBY
       end
     end
