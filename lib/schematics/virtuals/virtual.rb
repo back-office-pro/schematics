@@ -40,6 +40,14 @@ module Schematics
         end.flatten.uniq
       end
 
+      def default_scope
+        if includes.any?
+          <<~RUBY
+            default_scope { joins(#{includes}) }
+          RUBY
+        end
+      end
+
       def to_str
         <<~RUBY
           def #{@name}
