@@ -15,9 +15,9 @@ module Schematics
       def to_str
         <<~RUBY
           acts_as_singleton
-
-          def self.all
-            super
+          class << self
+            # Make .all method public for ransack
+            public :all
           end
         RUBY
       end
