@@ -2,8 +2,7 @@ module Schematics
   module Virtuals
     class Virtual
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
 
       attr_reader :entity, :name

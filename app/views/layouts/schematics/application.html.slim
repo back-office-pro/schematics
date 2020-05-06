@@ -23,7 +23,7 @@ html
             = form_tag schematics.searches_path, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do
               .input-group
                 = text_field_tag :query,
-                  params[:query],
+                  @query,
                   required: true,
                   placeholder: t('.search.placeholder'),
                   class: "form-control typeahead-search bg-light border-0 search" 

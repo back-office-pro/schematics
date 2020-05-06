@@ -2,8 +2,7 @@ module Schematics
   module Attributes
     class Association < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Editable
 
@@ -36,10 +35,6 @@ module Schematics
       end
 
       def search_field
-        :"#{name}_#{inverse_descriptor.name}_cont"
-      end
-
-      def sort_field
         :"#{name}_#{inverse_descriptor.name}"
       end
 

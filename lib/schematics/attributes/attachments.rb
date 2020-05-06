@@ -22,10 +22,6 @@ module Schematics
       end
 
       def search_field
-        :"#{name}_blobs_filename_cont"
-      end
-
-      def sort_field
         :"#{name}_blobs_filename"
       end
 

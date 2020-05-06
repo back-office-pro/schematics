@@ -101,6 +101,10 @@ module Schematics
         @attributes.map(&:validate).compact
       end
 
+      def search_aliases
+        searchable_elements.map(&:search_alias)
+      end
+
       def has_many_and_through_associations
         has_many_associations + has_many_through_associations
       end
@@ -110,7 +114,7 @@ module Schematics
       end
 
       def model_elements
-        (elements + default_scopes + validates) << descriptor
+        (elements + default_scopes + validates + search_aliases) << descriptor
       end
 
       def api

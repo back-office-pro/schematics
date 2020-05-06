@@ -13,10 +13,6 @@ module Schematics
         @options[:scale]
       end
 
-      def search_field
-        [:"#{name}_gteq", :"#{name}_lteq"]
-      end
-
       def format(value)
         return value.to_s if value.is_a?(::StandardError)
         [scale.nil? ? value : value.round(scale), unit].compact.join(' ')

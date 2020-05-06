@@ -6,10 +6,10 @@
           = t('schematics.application.viewers.table.archives')
         - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.text-nowrap.text-center.pb-0
-            = sort_link(@q, field.sort_field, model_class.human_attribute_name(field.name))
+            = sort_link @q, field.name
         - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.text-nowrap.text-center.pb-0
-            = sort_link(@q, association.sort_field, model_class.human_attribute_name(association.name))
+            = sort_link @q, association.name
       tr.filters
         th.text-nowrap.align-middle.px-0.py-1
           = render 'schematics/application/filters/boolean', search_form: search_form, name: :with_deleted
@@ -17,7 +17,7 @@
           th.align-middle.text-center.px-0.py-1
             - case field
             - when Schematics::Attributes::Boolean
-              = render 'schematics/application/filters/boolean', search_form: search_form, name: field.search_field
+              = render 'schematics/application/filters/boolean', search_form: search_form, name: :"#{field.name}_true"
             - when Schematics::Virtuals::Calculation, Schematics::Attributes::Float
               = render 'schematics/application/filters/range', search_form: search_form, field: field, type: :number
             - when Schematics::Attributes::Date

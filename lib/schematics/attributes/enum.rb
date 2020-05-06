@@ -2,8 +2,7 @@ module Schematics
   module Attributes
     class Enum < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
 
@@ -32,10 +31,6 @@ module Schematics
 
       def api_param
         [super.sub('param', 'param_list'), @values.to_s].join(', ')
-      end
-
-      def search_field
-        :"#{name}_in"
       end
 
       def to_str

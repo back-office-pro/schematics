@@ -2,8 +2,7 @@ module Schematics
   module Attributes
     class Float < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Fillable
 
       def validators
@@ -12,10 +11,6 @@ module Schematics
 
       def unit
         @options[:unit]
-      end
-
-      def search_field
-        [:"#{name}_gteq", :"#{name}_lteq"]
       end
 
       def format(value)

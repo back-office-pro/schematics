@@ -2,8 +2,6 @@ module Schematics
   module Attributes
     class RichText < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
@@ -17,10 +15,6 @@ module Schematics
       end
 
       def search_field
-        :"rich_text_#{name}_body_cont"
-      end
-
-      def sort_field
         :"rich_text_#{name}_body"
       end
 

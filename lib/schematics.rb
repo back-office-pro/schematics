@@ -93,11 +93,9 @@ module Schematics
   module Behaviours
     autoload :Editable,    'schematics/behaviours/editable'
     autoload :Fillable,    'schematics/behaviours/fillable'
-    autoload :Filterable,  'schematics/behaviours/filterable'
     autoload :Preloadable, 'schematics/behaviours/preloadable'
     autoload :Renderable,  'schematics/behaviours/renderable'
     autoload :Searchable,  'schematics/behaviours/searchable'
-    autoload :Sortable,    'schematics/behaviours/sortable'
   end
 
   module Entities
@@ -117,16 +115,24 @@ module Schematics
   end
 
   module Patches
+    module ActiveRecord
+      module ConnectionAdapters
+        autoload :TableDefinition,
+                 'schematics/patches/active_record/connection_adapters/table_definition'
+      end
+    end
     module Rails
       module Generators
         autoload :Actions,            'schematics/patches/rails/generators/actions'
         autoload :GeneratedAttribute, 'schematics/patches/rails/generators/generated_attribute'
       end
     end
-    module ActiveRecord
-      module ConnectionAdapters
-        autoload :TableDefinition,
-                 'schematics/patches/active_record/connection_adapters/table_definition'
+    module Ransack
+      module Helpers
+        autoload :FormHelper, 'schematics/patches/ransack/helpers/form_helper'
+      end
+      module Nodes
+        autoload :Sort, 'schematics/patches/ransack/nodes/sort'
       end
     end
   end

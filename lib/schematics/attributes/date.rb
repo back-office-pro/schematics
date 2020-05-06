@@ -2,8 +2,7 @@ module Schematics
   module Attributes
     class Date < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
 
@@ -22,10 +21,6 @@ module Schematics
           validators[:date][key] = @options[key].to_sym if @options.key?(key)
         end
         validators
-      end
-
-      def search_field
-        [:"#{name}_gteq", :"#{name}_lteq"]
       end
 
       def icon

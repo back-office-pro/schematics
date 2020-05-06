@@ -24,9 +24,7 @@ module Schematics
       respond_to do |format|
         format.html
         format.json do
-          @results.map! do |type, result|
-            [type, ActiveModelSerializers::SerializableResource.new(result)]
-          end.to_h
+          @results.transform_values! { |v| ActiveModelSerializers::SerializableResource.new(v) }
           render json: @results
         end
       end

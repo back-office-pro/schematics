@@ -2,8 +2,7 @@ module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
 
       def name
@@ -19,10 +18,6 @@ module Schematics
       end
 
       def search_field
-        :"#{name}_#{descriptor.name}_cont"
-      end
-
-      def sort_field
         :"#{name}_#{descriptor.name}"
       end
     end

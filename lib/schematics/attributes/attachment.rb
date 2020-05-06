@@ -2,8 +2,7 @@ module Schematics
   module Attributes
     class Attachment < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
@@ -22,10 +21,6 @@ module Schematics
       end
 
       def search_field
-        :"#{name}_blob_filename_cont"
-      end
-
-      def sort_field
         :"#{name}_blob_filename"
       end
 
