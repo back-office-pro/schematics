@@ -19,12 +19,18 @@ module Schematics
         model_class = entity.class_name.constantize
         fields = entity.searchable_fields.map { |field| [field.search_field, @query] }.to_h
         records = model_class.ransack(fields.merge(m: 'or')).result(distinct: true)
-        @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
+        unless records.empty?
+          if request.format.json?
+            records = records.map do |record|
+              entity.descriptor.serializer_class.new(record)
+            end
+          end
+          (@results[entity.type.pluralize] ||= []).concat(records)
+        end
       end
       respond_to do |format|
         format.html
         format.json do
-          @results.transform_values! { |v| ActiveModelSerializers::SerializableResource.new(v) }
           render json: @results
         end
       end
