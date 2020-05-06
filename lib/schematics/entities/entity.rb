@@ -187,23 +187,17 @@ module Schematics
           class #{class_name}
             ###
             #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
+            # #{permitted_params.join(", ")}
+            # #{permitted_json_params.join(", ")}
             ###
 
             #{descriptor.to_str}
             #{validates.join("\s\s")}
             #{default_scopes.join("\s\s")}
+            #{search_aliases.join("\s\s")}
             #{attributes.map(&:to_str).join("\s\s")}
             #{associations.map(&:to_str).join("\s\s")}
             #{virtuals.map(&:to_str).join("\s\s")}
-          end
-
-          class #{class_name}Controller
-            ###
-            # #{permitted_params.join(", ")}
-            # #{permitted_json_params.join(", ")}
-            ###
-
-            #{api}
           end
         RUBY
       end
