@@ -42,8 +42,10 @@ $(document).on('turbolinks:load', function() {
         const $target = $(e.target);
         const scope = $target.attr('name');
         const searchParams = new URLSearchParams(window.location.search);
-        searchParams.delete(scope);
-        Turbolinks.visit(window.location.pathname + '?' + searchParams);
+        if (searchParams.has(scope)) {
+            searchParams.delete(scope);
+            Turbolinks.visit(window.location.pathname + '?' + searchParams);
+        }
     });
 });
 
