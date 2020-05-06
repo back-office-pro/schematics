@@ -43,6 +43,14 @@ module Schematics
         :joins
       end
 
+      def search_alias
+        <<~RUBY
+          ransacker :#{name} do
+            Arel.sql("#{to_sql}")
+          end
+        RUBY
+      end
+
       def to_str
         <<~RUBY
           def #{@name}
@@ -51,10 +59,6 @@ module Schematics
             Schematics::Virtuals::Errors::NameError.new(e.message, e.name)
           rescue TypeError => e
             Schematics::Virtuals::Errors::TypeError.new(e.message)
-          end
-
-          ransacker :#{name} do
-            Arel.sql("#{to_sql}")
           end
         RUBY
       end
