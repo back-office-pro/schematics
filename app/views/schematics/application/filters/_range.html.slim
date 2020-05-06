@@ -1,5 +1,6 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
   = search_form.search_field :"#{field.name}_gteq",
+                             value: params.dig(:q, :"#{field.name}_gteq"),
                              placeholder: t('schematics.application.filters.from'),
                              onchange: ("$(this.form).submit()" if type == :date),
                              class: "form-control bg-light border-0 rounded",
@@ -10,6 +11,7 @@
         = field.unit
   .mr-2
   = search_form.search_field :"#{field.name}_lteq",
+                             value: params.dig(:q, :"#{field.name}_lteq"),
                              placeholder: t('schematics.application.filters.to'),
                              onchange: ("$(this.form).submit()" if type == :date),
                              class: "form-control bg-light border-0 rounded",
