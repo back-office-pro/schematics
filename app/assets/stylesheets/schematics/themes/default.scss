@@ -34,10 +34,6 @@ input.custom-file-input.is-invalid + label.custom-file-label::after {
  * Typeahead
  */
 
-span.twitter-typeahead .tt-suggestion {
-  color: $primary;
-}
-
 span.twitter-typeahead .tt-suggestion.tt-cursor,
 span.twitter-typeahead .tt-suggestion:hover,
 span.twitter-typeahead .tt-suggestion:focus {
