@@ -34,8 +34,7 @@ describe Schematics::Associations::HasOneThrough do
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Filterable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Sortable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   describe "#type" do
@@ -70,5 +69,11 @@ describe Schematics::Associations::HasOneThrough do
     subject { association.descriptor.name }
 
     it { is_expected.to eq("label") }
+  end
+
+  describe "#search_field" do
+    subject { association.search_field }
+
+    it { is_expected.to eq(:category_label) }
   end
 end
