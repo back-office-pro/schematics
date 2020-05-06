@@ -3,4 +3,5 @@
                        field.input_collection.map(&:reverse),
                        { prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase) },
                        onchange: "$(this.form).submit()",
-                       class: "form-control bg-light border-0"
+                       class: "form-control bg-light border-success #{'border-0' if params.dig(:q, :"#{field.name}_in").nil?}"
+

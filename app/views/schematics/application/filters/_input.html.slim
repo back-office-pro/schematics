@@ -3,4 +3,4 @@
                              value: params.dig(:q, :"#{field.name}_cont"),
                              id: field.name.camelize(:lower),
                              placeholder: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase),
-                             class: "form-control typeahead-filter bg-light border-0"
+                             class: "form-control typeahead-filter bg-light border-success #{'border-0' if params.dig(:q, :"#{field.name}_cont").nil?}"
