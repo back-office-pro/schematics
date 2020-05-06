@@ -1,14 +1,18 @@
 //= require twitter/typeahead
 
 const icons = {};
-const descriptors = {};
-const urls = {};
 
 <% Schematics::SCHEMA.entities.each do |entity| %>
-    icons.<%= entity.type %>        = "<%= entity.icon.to_s.dasherize %>";
-    descriptors.<%= entity.type %>  = "<%= entity.descriptor.name.camelize(:lower) %>";
-    urls.<%= entity.type %>         = "/<%= entity.type.pluralize %>";
+    icons.<%= entity.type.pluralize %> = "<%= entity.icon.to_s.dasherize %>";
 <% end %>
+
+const findDescriptor = (result) => {
+    if ($.type(result) === 'object') {
+        const key = Object.keys(result).find(_ => _ !== 'id') || 'id';
+        return findDescriptor(result[key]);
+    }
+    return result;
+};
 
 $(document).on('turbolinks:load', function() {
     const filterSource = new Bloodhound({
@@ -31,7 +35,7 @@ $(document).on('turbolinks:load', function() {
             },
             transform: function(response) {
                 const name = $(document.activeElement).attr('id');
-                return response.map(field => ({ __FIELD__: field[name] }));
+                return response.map(field => ({ __FIELD__: findDescriptor(field[name]) }));
             }
         }
     });
@@ -47,9 +51,9 @@ $(document).on('turbolinks:load', function() {
                 Object.entries(response).map(([key, value]) => {
                     value.forEach(result => {
                         results.push({
-                            url: [urls[key], result.id].filter(Boolean).join('/'),
+                            url: '/' + [key, result.id].filter(Boolean).join('/'),
                             icon: icons[key],
-                            descriptor: result[descriptors[key]]
+                            descriptor: findDescriptor(result)
                         })
                     })
                 });
