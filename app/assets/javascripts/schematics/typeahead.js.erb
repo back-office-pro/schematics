@@ -21,7 +21,7 @@ $(document).on('turbolinks:load', function() {
                 const scope = $(document.activeElement).attr('name');
                 const searchParams = new URLSearchParams(window.location.search);
                 const [url, query] = options.url.split('?__FIELD__=');
-                searchParams.set(scope, query);
+                searchParams.set(scope, decodeURI(query));
                 searchParams.delete('page');
                 searchParams.delete('per_page');
                 options.url = url + '?' + searchParams;
