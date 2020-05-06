@@ -1,7 +1,9 @@
 fr:
   activerecord:
     models:
-      setting: Paramètre
+      setting: 
+        one: Paramètre
+        other: Paramètres
     attributes:
       setting:
         company_name: Nom de la société

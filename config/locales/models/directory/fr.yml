@@ -1,7 +1,9 @@
 fr:
   activerecord:
     models:
-      directory: Dossier
+      directory: 
+        one: Dossier
+        other: Dossiers
     attributes:
       directory:
         name: Nom
