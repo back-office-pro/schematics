@@ -29,7 +29,7 @@ module Schematics
         @options[:inverse]
       end
 
-      def includes
+      def preload
         return [] if association_type == @entity.type # prevent self inclusion
         super
       end

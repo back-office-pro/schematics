@@ -16,7 +16,7 @@ module Schematics
         { super => [:data, :filename, :content_type] }
       end
 
-      def includes
+      def preload
         { [name, type].join("_").to_sym => :blob }
       end
 

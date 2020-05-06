@@ -10,7 +10,7 @@ module Schematics
         "string"
       end
 
-      def includes
+      def preload
         [[type, name].join("_").to_sym]
       end
 

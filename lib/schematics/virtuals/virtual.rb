@@ -33,18 +33,14 @@ module Schematics
         @tokens.map(&:to_sql)
       end
 
-      def includes
+      def preload
         @tokens.select_is_a?(Tokens::Reference).map do |reference|
           reference.value.split('.')[0...-1].map(&:to_sym)
         end.flatten.uniq
       end
 
-      def default_scope
-        if includes.any?
-          <<~RUBY
-            default_scope { joins(#{includes}) }
-          RUBY
-        end
+      def default_scope_method
+        :joins
       end
 
       def to_str
