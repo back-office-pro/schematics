@@ -1,6 +1,5 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
   = search_form.search_field :"#{field.name}_cont",
                              id: field.name.camelize(:lower),
-                             placeholder: t('schematics.application.filters.filter_by',
-                             attribute_name: model_class.human_attribute_name(field.name).downcase),
+                             placeholder: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase),
                              class: "form-control typeahead-filter bg-light border-0"
