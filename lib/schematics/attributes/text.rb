@@ -3,6 +3,7 @@ module Schematics
     class Text < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
+      include Behaviours::MultiSearchable
       include Behaviours::Fillable
       include Behaviours::Editable
 

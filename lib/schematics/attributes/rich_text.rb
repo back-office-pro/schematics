@@ -3,6 +3,7 @@ module Schematics
     class RichText < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
+      include Behaviours::MultiSearchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 

@@ -91,11 +91,12 @@ module Schematics
   end
 
   module Behaviours
-    autoload :Editable,    'schematics/behaviours/editable'
-    autoload :Fillable,    'schematics/behaviours/fillable'
-    autoload :Preloadable, 'schematics/behaviours/preloadable'
-    autoload :Renderable,  'schematics/behaviours/renderable'
-    autoload :Searchable,  'schematics/behaviours/searchable'
+    autoload :Editable,        'schematics/behaviours/editable'
+    autoload :Fillable,        'schematics/behaviours/fillable'
+    autoload :MultiSearchable, 'schematics/behaviours/multi_searchable'
+    autoload :Preloadable,     'schematics/behaviours/preloadable'
+    autoload :Renderable,      'schematics/behaviours/renderable'
+    autoload :Searchable,      'schematics/behaviours/searchable'
   end
 
   module Entities

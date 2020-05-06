@@ -17,8 +17,10 @@ module Schematics
       @query = params[:query]
       SCHEMA.entities.each do |entity|
         model_class = entity.class_name.constantize
-        fields = entity.searchable_fields.map { |field| [field.search_field, @query] }.to_h
-        records = model_class.ransack(fields.merge(m: 'or')).result(distinct: true)
+        fields = entity.multi_searchable_fields.map do |field|
+          [:"#{field.name}_cont", @query]
+        end.to_h.merge(m: 'or')
+        records = model_class.ransack(fields).result(distinct: true)
         unless records.empty?
           if request.format.json?
             records = records.map do |record|
