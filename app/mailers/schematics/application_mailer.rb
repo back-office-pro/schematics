@@ -1,5 +1,6 @@
 module Schematics
   class ApplicationMailer < ActionMailer::Base
-    layout 'mailer'
+    layout 'schematics/mailer'
+    helper ApplicationHelper
   end
 end

@@ -3,3 +3,7 @@ fr:
     user_mailer:
       password_reset:
         subject: Récupération mot de passe perdu
+        body: 
+          first: Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous.
+          second: Si vous n'avez pas demandé de réinitialisation de votre mot de passe, ignorez cet e-mail et votre mot de passe ne sera pas modifié.
+          link: Cliquez ici

@@ -2,7 +2,7 @@ module Schematics
   class UserMailer < ApplicationMailer
     def password_reset(user)
       @user = user
-      mail to: user.email
+      make_bootstrap_mail to: user.email
     end
   end
 end

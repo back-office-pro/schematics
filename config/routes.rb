@@ -7,7 +7,7 @@ Schematics::Engine.routes.draw do
     get 'profile',           to: 'sessions#edit',        as: :profile
     delete 'logout',         to: 'sessions#destroy',     as: :logout
     get 'password_lost',     to: 'password_resets#new',  as: :password_lost
-    get 'password_lost/:id', to: 'password_resets#edit'
+    get 'password_lost/:id', to: 'password_resets#edit', as: :password_reset
     resource  :timeline, only: :show, controller: :timeline
     resource  :sessions, except: :show
     resources :searches, only: [:create, :show], param: :query
