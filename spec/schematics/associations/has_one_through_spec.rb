@@ -34,8 +34,7 @@ describe Schematics::Associations::HasOneThrough do
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Filterable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Sortable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   describe "#type" do
@@ -72,26 +71,9 @@ describe Schematics::Associations::HasOneThrough do
     it { is_expected.to eq("label") }
   end
 
-  describe "#filter_scope" do
-    subject { association.filter_scope }
+  describe "#search_field" do
+    subject { association.search_field }
 
-    it do
-      is_expected.to eq <<~RUBY
-        scope :by_category, -> category { joins([:sub_category]).where(category: category) }
-      RUBY
-    end
-  end
-
-  describe "#sort_scope" do
-    subject { association.sort_scope }
-
-    it do
-      is_expected.to eq <<~RUBY
-        scope :sort_by_category, -> sort_direction do
-          joins([:sub_category, :category]).
-          merge(Category.order(Arel.sql("label") => sort_direction))
-        end
-      RUBY
-    end
+    it { is_expected.to eq(:category_label) }
   end
 end

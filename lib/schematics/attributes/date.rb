@@ -2,12 +2,9 @@ module Schematics
   module Attributes
     class Date < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
-      include Behaviours::Range::Filterable
-      include Behaviours::Default::Sortable
 
       def migration_options
         super + [:before, :after]

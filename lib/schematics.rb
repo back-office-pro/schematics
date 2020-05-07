@@ -9,7 +9,8 @@ require 'paranoia'
 require 'paper_trail'
 require 'rails'
 require 'action_controller'
-require 'has_scope'
+require 'ransack'
+require 'ransack/enum'
 require 'rack/attack'
 require 'swagger/docs'
 require 'bullet'
@@ -90,20 +91,12 @@ module Schematics
   end
 
   module Behaviours
-    module Default
-      autoload :Filterable, 'schematics/behaviours/default/filterable'
-      autoload :Sortable,   'schematics/behaviours/default/sortable'
-    end
-    module Range
-      autoload :Filterable, 'schematics/behaviours/range/filterable'
-    end
-    autoload :Editable,    'schematics/behaviours/editable'
-    autoload :Fillable,    'schematics/behaviours/fillable'
-    autoload :Filterable,  'schematics/behaviours/filterable'
-    autoload :Preloadable, 'schematics/behaviours/preloadable'
-    autoload :Renderable,  'schematics/behaviours/renderable'
-    autoload :Searchable,  'schematics/behaviours/searchable'
-    autoload :Sortable,    'schematics/behaviours/sortable'
+    autoload :Editable,        'schematics/behaviours/editable'
+    autoload :Fillable,        'schematics/behaviours/fillable'
+    autoload :MultiSearchable, 'schematics/behaviours/multi_searchable'
+    autoload :Preloadable,     'schematics/behaviours/preloadable'
+    autoload :Renderable,      'schematics/behaviours/renderable'
+    autoload :Searchable,      'schematics/behaviours/searchable'
   end
 
   module Entities
@@ -123,16 +116,24 @@ module Schematics
   end
 
   module Patches
+    module ActiveRecord
+      module ConnectionAdapters
+        autoload :TableDefinition,
+                 'schematics/patches/active_record/connection_adapters/table_definition'
+      end
+    end
     module Rails
       module Generators
         autoload :Actions,            'schematics/patches/rails/generators/actions'
         autoload :GeneratedAttribute, 'schematics/patches/rails/generators/generated_attribute'
       end
     end
-    module ActiveRecord
-      module ConnectionAdapters
-        autoload :TableDefinition,
-                 'schematics/patches/active_record/connection_adapters/table_definition'
+    module Ransack
+      module Helpers
+        autoload :FormHelper, 'schematics/patches/ransack/helpers/form_helper'
+      end
+      module Nodes
+        autoload :Sort, 'schematics/patches/ransack/nodes/sort'
       end
     end
   end

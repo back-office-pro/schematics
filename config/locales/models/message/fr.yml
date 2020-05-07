@@ -1,7 +1,9 @@
 fr:
   activerecord:
     models:
-      message: Message
+      message: 
+        one: Message
+        other: Messages
     attributes:
       message:
         subject: Sujet

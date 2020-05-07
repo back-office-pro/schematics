@@ -1,19 +1,21 @@
 .input-group.ml-1.mr-1.mb-2.mt-1
-  = send :"#{type}_field_tag", :"by_#{field.name}[from]",
-                               params.dig(:"by_#{field.name}", :from),
-                               placeholder: t('schematics.application.filters.from'),
-                               onchange: ("$(this.form).submit()" if type == :date),
-                               class: "form-control bg-light rounded border-success #{'border-0' unless params.dig(:"by_#{field.name}", :from).present?}"
+  = search_form.search_field :"#{field.name}_gteq",
+                             value: params.dig(:q, :"#{field.name}_gteq"),
+                             placeholder: t('schematics.application.filters.from'),
+                             onchange: ("$(this.form).submit()" if field.input_type == :date),
+                             class: "form-control bg-light rounded border-success #{'border-0' if params.dig(:q, :"#{field.name}_gteq").nil?}",
+                             type: field.input_type || :number
   - if field.try(:unit).present?
     .input-group-append
       .input-group-text.border-0.bg-transparent.p-0.pl-2
         = field.unit
   .mr-2
-  = send :"#{type}_field_tag", :"by_#{field.name}[to]",
-                               params.dig(:"by_#{field.name}", :to),
-                               placeholder: t('schematics.application.filters.to'),
-                               onchange: ("$(this.form).submit()" if type == :date),
-                               class: "form-control bg-light rounded border-success #{'border-0' unless params.dig(:"by_#{field.name}", :to).present?}"
+  = search_form.search_field :"#{field.name}_lteq",
+                             value: params.dig(:q, :"#{field.name}_lteq"),
+                             placeholder: t('schematics.application.filters.to'),
+                             onchange: ("$(this.form).submit()" if field.input_type == :date),
+                             class: "form-control bg-light rounded border-success #{'border-0' if params.dig(:q, :"#{field.name}_lteq").nil?}",
+                             type: field.input_type || :number
   - if field.try(:unit).present?
     .input-group-append
       .input-group-text.border-0.bg-transparent.p-0.pl-2

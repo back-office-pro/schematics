@@ -97,24 +97,12 @@ module Schematics
         preloadable_elements.map(&:default_scope).uniq.compact
       end
 
-      def filter_scopes
-        filterable_elements.map(&:filter_scope)
-      end
-
-      def sort_scopes
-        sortable_elements.map(&:sort_scope)
-      end
-
-      def has_filter_scopes
-        filterable_elements.map(&:has_filter_scope)
-      end
-
-      def has_sort_scopes
-        sortable_elements.map(&:has_sort_scope)
-      end
-
       def validates
         @attributes.map(&:validate).compact
+      end
+
+      def search_aliases
+        searchable_elements.map(&:search_alias)
       end
 
       def has_many_and_through_associations
@@ -126,11 +114,7 @@ module Schematics
       end
 
       def model_elements
-        (elements + default_scopes + filter_scopes + sort_scopes + validates) << descriptor
-      end
-
-      def controller_elements
-        (has_filter_scopes + has_sort_scopes) << api
+        (elements + default_scopes + validates + search_aliases) << descriptor
       end
 
       def api
@@ -203,27 +187,17 @@ module Schematics
           class #{class_name}
             ###
             #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
+            # #{permitted_params.join(", ")}
+            # #{permitted_json_params.join(", ")}
             ###
 
             #{descriptor.to_str}
             #{validates.join("\s\s")}
             #{default_scopes.join("\s\s")}
-            #{filter_scopes.join("\s\s")}
-            #{sort_scopes.join("\s\s")}
+            #{search_aliases.join("\s\s")}
             #{attributes.map(&:to_str).join("\s\s")}
             #{associations.map(&:to_str).join("\s\s")}
             #{virtuals.map(&:to_str).join("\s\s")}
-          end
-
-          class #{class_name}Controller
-            ###
-            # #{permitted_params.join(", ")}
-            # #{permitted_json_params.join(", ")}
-            ###
-
-            #{has_filter_scopes.join("\s\s")}
-            #{has_sort_scopes.join("\s\s")}
-            #{api}
           end
         RUBY
       end

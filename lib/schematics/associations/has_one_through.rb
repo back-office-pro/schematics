@@ -2,8 +2,7 @@ module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
 
       def name
@@ -18,23 +17,8 @@ module Schematics
         @belongs_to.inverse_descriptor
       end
 
-      def joins
-        [entity.type.to_sym]
-      end
-
-      def filter_scope
-        super.extends <<~RUBY
-          #{name} { joins(#{joins}).where(#{name}: #{name}) }
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins + includes}).
-            merge(#{class_name}.order(Arel.sql("#{descriptor.to_sql}") => sort_direction))
-          end
-        RUBY
+      def search_field
+        :"#{name}_#{descriptor.name}"
       end
     end
   end

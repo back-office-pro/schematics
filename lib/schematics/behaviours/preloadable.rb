@@ -1,20 +1,20 @@
 module Schematics
   module Behaviours
     module Preloadable
-      def includes
+      def preload
         [name.to_sym]
       end
 
-      def joins
-        includes
-      end
-
       def default_scope
-        if includes.any?
+        if preload.any?
           <<~RUBY
-            default_scope { includes(#{includes}) }
+            default_scope { #{default_scope_method}(#{preload}) }
           RUBY
         end
+      end
+
+      def default_scope_method
+        :includes
       end
     end
   end

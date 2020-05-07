@@ -1,8 +1,6 @@
 module Schematics
   module Virtuals
     class Calculation < Virtual
-      include Behaviours::Range::Filterable
-
       def to_sql
         super.join
       end

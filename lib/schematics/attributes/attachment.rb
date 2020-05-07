@@ -2,8 +2,8 @@ module Schematics
   module Attributes
     class Attachment < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
+      include Behaviours::MultiSearchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
@@ -17,30 +17,12 @@ module Schematics
         { super => [:data, :filename, :content_type] }
       end
 
-      def includes
+      def preload
         { [name, type].join("_").to_sym => :blob }
       end
 
-      def joins
-        [includes.keys.first, :"#{name}_blob"]
-      end
-
-      def filter_scope
-        super.extends <<~RUBY
-          filename do
-            joins(#{joins}).
-            where("active_storage_blobs.filename ILIKE ?", "%#\{filename}%")
-          end
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            left_joins(#{joins}).
-            order("active_storage_blobs.filename": sort_direction)
-          end
-        RUBY
+      def search_field
+        :"#{name}_blob_filename"
       end
 
       def to_str

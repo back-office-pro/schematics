@@ -17,19 +17,23 @@ module Schematics
       @query = params[:query]
       SCHEMA.entities.each do |entity|
         model_class = entity.class_name.constantize
-        entity.searchable_fields.each do |field|
-          records = model_class
-          records = records.send(:"by_#{field.name}", @query)
-          @results[entity.type] = (@results[entity.type] || []) + records unless records.empty?
-          @results[entity.type]&.uniq!
+        fields = entity.multi_searchable_fields.map do |field|
+          [:"#{field.name}_cont", @query]
+        end.to_h.merge(m: 'or')
+        records = model_class.ransack(fields).result(distinct: true)
+        unless records.empty?
+          if request.format.json?
+            records = records.map do |record|
+              entity.descriptor.serializer_class.new(record)
+            end
+          end
+          (@results[entity.type.pluralize] ||= []).concat(records)
         end
       end
       respond_to do |format|
         format.html
         format.json do
-          render(json: @results.map do |type, result|
-            [type, ActiveModelSerializers::SerializableResource.new(result)]
-          end.to_h)
+          render json: @results
         end
       end
     end

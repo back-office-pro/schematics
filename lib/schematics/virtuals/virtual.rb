@@ -2,8 +2,7 @@ module Schematics
   module Virtuals
     class Virtual
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
 
       attr_reader :entity, :name
@@ -34,17 +33,20 @@ module Schematics
         @tokens.map(&:to_sql)
       end
 
-      def includes
+      def preload
         @tokens.select_is_a?(Tokens::Reference).map do |reference|
           reference.value.split('.')[0...-1].map(&:to_sym)
         end.flatten.uniq
       end
 
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins}).
-            order(Arel.sql("#{to_sql}") => sort_direction)
+      def default_scope_method
+        :joins
+      end
+
+      def search_alias
+        <<~RUBY
+          ransacker :#{name} do
+            Arel.sql("#{to_sql}")
           end
         RUBY
       end

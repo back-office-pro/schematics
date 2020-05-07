@@ -2,11 +2,8 @@ module Schematics
   module Attributes
     class Float < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Fillable
-      include Behaviours::Range::Filterable
-      include Behaviours::Default::Sortable
 
       def validators
         super.merge(numericality: { allow_nil: !required? })

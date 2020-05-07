@@ -2,12 +2,10 @@ module Schematics
   module Attributes
     class Text < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
       include Behaviours::Searchable
+      include Behaviours::MultiSearchable
       include Behaviours::Fillable
       include Behaviours::Editable
-      include Behaviours::Default::Sortable
 
       def migration_options
         super + [:limit]
@@ -15,14 +13,6 @@ module Schematics
 
       def api_param_type
         "string"
-      end
-
-      def filter_scope
-        super.extends <<~RUBY
-          #{@name} do
-            where("#{to_sql} ILIKE ?", "%#\{#{@name}}%")
-          end
-        RUBY
       end
 
       def icon

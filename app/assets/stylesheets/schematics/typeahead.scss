@@ -26,6 +26,10 @@ span.twitter-typeahead .tt-suggestion {
   clear: both;
   line-height: 1.42857143;
   white-space: nowrap;
+  .tt-highlight {
+    padding: 0.2em;
+    background-color: #fcf8e3;
+  }
 }
 
 span.twitter-typeahead .tt-suggestion.tt-cursor,

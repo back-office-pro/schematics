@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
             html(Array.from($(this).get(0).files).map(_ => _.name).join(', '));
     });
     $('form.form-inline').on('submit', function() {
-        return $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', true);
+        return $(this).find(':input').filter(function() { return this.value == false; }).attr('disabled', true);
     });
     $('tr[data-href]').click(function(e) {
         const $target = $(e.target);
@@ -42,8 +42,10 @@ $(document).on('turbolinks:load', function() {
         const $target = $(e.target);
         const scope = $target.attr('name');
         const searchParams = new URLSearchParams(window.location.search);
-        searchParams.delete(scope);
-        Turbolinks.visit(window.location.pathname + '?' + searchParams);
+        if (searchParams.has(scope)) {
+            searchParams.delete(scope);
+            Turbolinks.visit(window.location.pathname + '?' + searchParams);
+        }
     });
 });
 

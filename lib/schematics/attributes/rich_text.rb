@@ -2,9 +2,8 @@ module Schematics
   module Attributes
     class RichText < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
       include Behaviours::Searchable
+      include Behaviours::MultiSearchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
@@ -12,26 +11,12 @@ module Schematics
         "string"
       end
 
-      def includes
+      def preload
         [[type, name].join("_").to_sym]
       end
 
-      def filter_scope
-        super.extends <<~RUBY
-          body do
-            joins(#{joins}).
-            where("action_text_rich_texts.body ILIKE ?", "%#\{body}%")
-          end
-        RUBY
-      end
-
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            left_joins(#{joins}).
-            order("action_text_rich_texts.body": sort_direction)
-          end
-        RUBY
+      def search_field
+        :"rich_text_#{name}_body"
       end
 
       def format(value)

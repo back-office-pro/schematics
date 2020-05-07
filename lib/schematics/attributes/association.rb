@@ -2,11 +2,9 @@ module Schematics
   module Attributes
     class Association < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Editable
-      include Behaviours::Default::Filterable
 
       attr_accessor :inverse_descriptor
       delegate :icon, to: :entity
@@ -31,18 +29,13 @@ module Schematics
         @options[:inverse]
       end
 
-      def includes
+      def preload
         return [] if association_type == @entity.type # prevent self inclusion
         super
       end
 
-      def sort_scope
-        super.extends <<~RUBY
-          sort_direction do
-            joins(#{joins}).
-            merge(#{model_property_type}.order(Arel.sql("#{inverse_descriptor.to_sql}") => sort_direction))
-          end
-        RUBY
+      def search_field
+        :"#{name}_#{inverse_descriptor.name}"
       end
 
       def model_property_type

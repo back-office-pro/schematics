@@ -2,12 +2,9 @@ module Schematics
   module Attributes
     class Enum < Attribute
       include Behaviours::Renderable
-      include Behaviours::Filterable
-      include Behaviours::Sortable
+      include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
-      include Behaviours::Default::Sortable
-      include Behaviours::Default::Filterable
 
       attr_reader :values
 
