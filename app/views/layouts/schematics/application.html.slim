@@ -45,7 +45,7 @@ html
                     = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')
           = render 'schematics/application/breadcrumbs'
-          .container-fluid.mt-4.mb-4.pl-4.pr-4.animated class=('slideInDown' if params[:page].blank?)
+          .container-fluid.my-4.px-4.animated class=('slideInDown' if params[:page].blank?)
             = yield
           footer.mb-4.p-2.border-top
             .ml-3 &copy; #{setting(:company_name)} #{Time.zone.now.year}

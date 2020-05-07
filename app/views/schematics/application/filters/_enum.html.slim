@@ -1,4 +1,4 @@
-.input-group.ml-1.mr-1.mb-2.mt-1
+.input-group.mx-1.mb-2.mt-1
   = search_form.select :"#{field.name}_in",
                        field.input_collection.map(&:reverse),
                        { prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase) },

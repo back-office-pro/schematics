@@ -12,7 +12,7 @@ ul.nav.nav-light.flex-column.sidebar-sticky
         .mt-2.d-none.d-md-block= model_class.model_name.human.pluralize
     - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(main_app.polymorphic_path(model_class))
       - entity.enum_attributes.each do |attribute|
-        li.nav-item.text-center.mw-100.mb-2.pl-3.pr-3.d-none.d-md-block
+        li.nav-item.text-center.mw-100.mb-2.px-3.d-none.d-md-block
           ul.list-group
             - attribute.values.each do |value|
               = active_link_to main_app.polymorphic_path(model_class, "by_#{attribute.name}": value),

@@ -30,7 +30,7 @@
       tbody class=('table-bordered border-0' if @resources.any?) class=('animated slideInRight' if params[:page].present?)
         - if @resources.empty?
           tr
-            td.text-center.pt-5 colspan="100%"
+            td.text-center.pt-4 colspan="100%"
               = render 'empty'
         - else
           - @resources.each do |resource|
