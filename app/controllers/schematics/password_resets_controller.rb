@@ -12,7 +12,7 @@ module Schematics
       user = User.find_by_email(user_params[:email])
       if user
         user.regenerate_password_reset_token
-        UserMailer.password_reset(user).deliver_now
+        UserMailer.password_reset(user).deliver_later
         redirect_to login_path, notice: t('.email_sent')
       else
         flash.now[:alert] = t('.unknown_email')
