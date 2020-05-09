@@ -72,6 +72,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "jquery-ui-rails", "~> 6.0.1"
   spec.add_dependency "rails-erd", "~> 1.6.0"
   spec.add_dependency "bootstrap-email", "~> 0.3.1"
+  spec.add_dependency "interactor", "~> 3.1.2"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "README.md"]
