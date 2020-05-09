@@ -5,6 +5,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
+      include Behaviours::Rangeable
 
       def migration_options
         super + [:before, :after]

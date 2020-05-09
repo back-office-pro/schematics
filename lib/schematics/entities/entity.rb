@@ -106,16 +106,12 @@ module Schematics
         fillable_attributes.map(&:permitted_json_param).flatten
       end
 
-      def default_scopes
-        preloadable_elements.map(&:default_scope).uniq.compact
+      def includes
+        preloadable_elements.map(&:preload).flatten.compact.uniq
       end
 
       def validates
         @attributes.map(&:validate).compact
-      end
-
-      def search_aliases
-        searchable_elements.map(&:search_alias)
       end
 
       def has_many_and_through_associations
@@ -126,8 +122,23 @@ module Schematics
         name.camelize
       end
 
+      def search_data
+        <<~RUBY
+          def search_data
+            {
+              created_at: created_at,
+              #{
+                searchable_fields.map do |field|
+                  "#{field.name}: #{field.search_data.squish}"
+                end.join(', ')
+              }
+            }
+          end
+        RUBY
+      end
+
       def model_elements
-        [self, descriptor] + elements + default_scopes + validates + search_aliases
+        [self, descriptor, search_data] + elements + validates
       end
 
       def to_str
@@ -215,8 +226,7 @@ module Schematics
 
             #{descriptor.to_str}
             #{validates.join("\s\s")}
-            #{default_scopes.join("\s\s")}
-            #{search_aliases.join("\s\s")}
+            #{search_data}
             #{attributes.map(&:to_str).join("\s\s")}
             #{associations.map(&:to_str).join("\s\s")}
             #{virtuals.map(&:to_str).join("\s\s")}

@@ -6,4 +6,3 @@ AllCops:
   TargetRubyVersion: 2.6.5
   Exclude:
     - 'spec/dummy/**/*'
-    - 'lib/schematics/patches/**/*'

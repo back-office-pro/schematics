@@ -15,24 +15,29 @@ module Schematics
     def show
       @results = {}
       @query = params[:query]
-      SCHEMA.entities.each do |entity|
-        model_class = entity.class_name.constantize
-        fields = entity.multi_searchable_fields.map do |field|
-          [:"#{field.name}_cont", @query]
-        end.to_h.merge(m: 'or')
-        records = model_class.ransack(fields).result(distinct: true)
-        unless records.empty?
-          if request.format.json?
-            records = records.map do |record|
-              entity.descriptor.serializer_class.new(record)
-            end
-          end
-          (@results[entity.name.pluralize] ||= []).concat(records)
-        end
+      searches = SCHEMA.entities.map do |entity|
+        entity.class_name.constantize.search(
+          @query.searchize,
+          includes: entity.includes,
+          match: :word_middle,
+          suggest: true,
+          misspellings: false,
+          execute: false
+        )
+      end
+      @results = Searchkick.multi_search(searches)
+      @suggestions = @results.map(&:suggestions).flatten.uniq
+      @results = @results.map(&:results).flatten.group_by do |record|
+        record.class.entity.name.pluralize
       end
       respond_to do |format|
         format.html
         format.json do
+          @results.each do |name, result|
+            result.map! do |record|
+              record.class.entity.descriptor.serializer_class.new(record)
+            end
+          end
           render json: @results
         end
       end

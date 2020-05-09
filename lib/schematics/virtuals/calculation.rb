@@ -1,6 +1,8 @@
 module Schematics
   module Virtuals
     class Calculation < Virtual
+      include Behaviours::Rangeable
+
       def to_sql
         super.join
       end

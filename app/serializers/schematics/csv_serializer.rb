@@ -1,8 +1,8 @@
 module Schematics
   class CsvSerializer
     delegate_missing_to :entity
-    delegate :model, to: :@records
-    delegate :entity, to: :model
+    delegate :klass, to: :@records
+    delegate :entity, to: :klass
 
     def initialize(records)
       @records = records
@@ -28,7 +28,7 @@ module Schematics
       ((entity.renderable_fields - entity.association_attributes) +
         entity.association_attributes +
         entity.renderable_associations).
-        map(&:name).map { |name| model.human_attribute_name(name) }
+        map(&:name).map { |name| klass.human_attribute_name(name) }
     end
 
     def renderable_fields

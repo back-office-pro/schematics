@@ -4,6 +4,7 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Fillable
+      include Behaviours::Rangeable
 
       def validators
         super.merge(numericality: { allow_nil: !required? })

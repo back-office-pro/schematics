@@ -17,8 +17,10 @@ module Schematics
         @belongs_to.inverse_descriptor
       end
 
-      def search_field
-        :"#{name}_#{descriptor.name}"
+      def search_data
+        <<~RUBY
+          #{name}&.#{descriptor.name}&.searchize
+        RUBY
       end
     end
   end

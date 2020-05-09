@@ -5,8 +5,10 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      def search_field
-        :"#{name}_#{descriptor.name}"
+      def search_data
+        <<~RUBY
+          #{name}&.#{descriptor.name}&.searchize
+        RUBY
       end
     end
   end
