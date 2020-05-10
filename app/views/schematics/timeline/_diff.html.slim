@@ -21,13 +21,13 @@
                     - when Schematics::Attributes::Attachments
                       - value.each do |attachment|
                         - if attachment.representable?
-                          = image_tag_representation(attachment)
+                          = cell('schematics/attachment', attachment).()
                         - else
                           = link_to attachment.filename, attachment
                     - when Schematics::Attributes::Attachment
                       - if value.attached?
                         - if value.representable?
-                          = image_tag_representation(value)
+                          = cell('schematics/attachment', value).()
                         - else
                           = link_to value.filename, value
                     - when Schematics::Attributes::Boolean
@@ -42,13 +42,13 @@
                     - when Schematics::Attributes::Attachments
                       - value.each do |attachment|
                         - if attachment.representable?
-                          = image_tag_representation(attachment)
+                          = cell('schematics/attachment', attachment).()
                         - else
                           = link_to attachment.filename, attachment
                     - when Schematics::Attributes::Attachment
                       - if value.attached?
                         - if value.representable?
-                          = image_tag_representation(value)
+                          = cell('schematics/attachment', value).()
                         - else
                           = link_to value.filename, value
                     - when Schematics::Attributes::Boolean
