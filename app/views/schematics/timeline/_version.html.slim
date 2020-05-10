@@ -1,5 +1,5 @@
 .float-left.mr-3
-  = link_to user_avatar(version.user), main_app.url_for(version.user)
+  = link_to cell('schematics/avatar', version.user).(), main_app.url_for(version.user)
 div
   = version.event
   = link_to version.item.to_s, main_app.url_for(version.item) if version.item.present?
