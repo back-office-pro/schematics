@@ -16,7 +16,7 @@
       = f.input :last_name
       = f.input :avatar,
                 as: :file,
-                hint: fa_icon(:info_circle, class: "mr-1") + humanize_attachment_validators(avatar.validators)
+                hint: cell('schematics/validators', avatar).()
       = f.input :locale,
                 as: :radio_buttons,
                 collection: locale.input_collection.map(&:reverse)
