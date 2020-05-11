@@ -1,5 +1,5 @@
 - begin
-  = image_tag url_for(representation), class: css_class
+  = image_tag representation, class: css_class
 - rescue MiniMagick::Error
   = I18n.t('errors.messages.image_metadata_missing').humanize
 - rescue ActiveStorage::FileNotFoundError

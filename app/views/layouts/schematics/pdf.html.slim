@@ -7,7 +7,7 @@ html
   body
     #header
       = setting(:company_name)
-      = image_tag setting(:company_logo)
+      = cell('schematics/logo', setting(:company_logo)).()
     #content
       = yield
     #footer

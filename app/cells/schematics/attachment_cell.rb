@@ -1,6 +1,7 @@
 module Schematics
   class AttachmentCell < Cell::ViewModel
     self.view_paths = ["#{Schematics::Engine.root}/app/cells"]
+    include ActionView::Helpers::AssetTagHelper
 
     def css_class
       @options[:css_class]
