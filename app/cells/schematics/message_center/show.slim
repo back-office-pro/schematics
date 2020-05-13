@@ -1,15 +1,15 @@
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
   a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
     = fa_icon :envelope, class: "fa-lg"
-    .badge.badge-danger 7
+    .badge.badge-danger= messages.size if messages.any?
   .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="messagesDropdown" 
-    h5.dropdown-header.font-weight-bold.bg-light= t('.message_center')
-    - current_user.received_messages.each do |message|
-      = link_to main_app.message_path(message), class: "dropdown-item d-flex align-items-center" do
-        = cell('schematics/avatar', message.author).()
+    h5.dropdown-header.font-weight-bold.bg-light= I18n.t('.message_center')
+    - messages.each do |message|
+      .dropdown-item.d-flex.align-items-center
+        = link_to cell('schematics/avatar', message.author).(), message.author
         div.ml-3
-          .text-truncate= message.subject
+          .text-truncate= link_to message.subject, message
           .text-truncate= message.content.to_plain_text
           .text-muted.small #{message.author.full_name} - #{time_ago_in_words(message.created_at)}
     .dropdown-divider.mb-1
-    = link_to "Voir tous les messages", main_app.messages_path, class: "dropdown-item text-muted text-center small pb-2"
+    = link_to I18n.t('.show_all'), messages_path, class: "dropdown-item text-muted text-center small pb-2"
