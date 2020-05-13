@@ -1,6 +1,8 @@
 - begin
   = image_tag representation, class: css_class
 - rescue MiniMagick::Error
+  = fa_icon :exclamation_triangle, class: "mr-2"
   = I18n.t('errors.messages.image_metadata_missing').humanize
 - rescue ActiveStorage::FileNotFoundError
+  = fa_icon :exclamation_triangle, class: "mr-2"
   = I18n.t('titles.schematics.schema.not_found')
