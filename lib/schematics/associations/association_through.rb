@@ -13,7 +13,7 @@ module Schematics
       end
 
       def to_str
-        super.extends_with_comma <<~RUBY
+        super.squish + ', ' + <<~RUBY
           through: :#{@through.name}
         RUBY
       end
