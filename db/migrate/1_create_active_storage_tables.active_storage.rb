@@ -9,6 +9,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[6.0]
       t.string   :checksum,   null: false
 
       t.timestamps
+      t.datetime :deleted_at
 
       t.index [:key], unique: true
     end
@@ -19,6 +20,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[6.0]
       t.references :blob,     null: false, type: :uuid
 
       t.timestamps
+      t.datetime :deleted_at
 
       t.index [:record_type, :record_id, :name, :blob_id],
               name: "index_active_storage_attachments_uniqueness",

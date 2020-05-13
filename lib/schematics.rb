@@ -47,6 +47,7 @@ require 'google/cloud/translate'
 require 'oj'
 require 'active_model_serializers'
 require 'acts_as_singleton'
+require 'ancestry'
 require 'animate-rails'
 require 'title'
 require 'best_in_place'
@@ -108,6 +109,7 @@ module Schematics
     autoload :Descriptor, 'schematics/entities/descriptor'
     autoload :Entity,     'schematics/entities/entity'
     autoload :Singleton,  'schematics/entities/singleton'
+    autoload :Tree,       'schematics/entities/tree'
   end
 
   module Graphics
@@ -121,12 +123,6 @@ module Schematics
   end
 
   module Patches
-    module ActiveRecord
-      module ConnectionAdapters
-        autoload :TableDefinition,
-                 'schematics/patches/active_record/connection_adapters/table_definition'
-      end
-    end
     module Rails
       module Generators
         autoload :Actions,            'schematics/patches/rails/generators/actions'
