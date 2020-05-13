@@ -1,19 +1,16 @@
 module Schematics
   module Entities
     class Singleton < Entity
-      def generate
-        [
-          super + " --skip-resource-route --skip-test-framework",
-          "rails generate singleton_resource_route #{@type}",
-        ]
+      def generate_options
+        super << "--skip-resource-route"
       end
 
-      def model_elements
-        super << self
+      def generate
+        super << "rails generate singleton_resource_route #{name}"
       end
 
       def to_str
-        <<~RUBY
+        super + <<~RUBY
           acts_as_singleton
           class << self
             # Make .all method public for ransack

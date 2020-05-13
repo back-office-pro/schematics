@@ -3,8 +3,6 @@ module Schematics
     self.abstract_class = true
     self.implicit_order_column = "created_at"
     include ActiveStorageSupport::SupportForBase64
-    has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]
-    acts_as_paranoid
 
     class << self
       def inherited(subclass)
@@ -15,7 +13,7 @@ module Schematics
       end
 
       def entity
-        SCHEMA.find_entity_by_type(name.underscore)
+        SCHEMA.find_entity_by_name(name.underscore)
       end
 
       def ransackable_attributes(auth_object)

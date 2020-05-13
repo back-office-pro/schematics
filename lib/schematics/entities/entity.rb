@@ -1,7 +1,7 @@
 module Schematics
   module Entities
     class Entity
-      attr_reader :type,
+      attr_reader :name,
                   :icon,
                   :descriptor,
                   :attributes,
@@ -11,19 +11,21 @@ module Schematics
       MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
 
       class << self
-        def create(type:,
+        def create(name:,
+                   type: nil,
                    icon: :caret_square_right,
                    descriptor: 'id',
                    singleton: false,
                    attributes: [],
                    virtuals: [])
-          klass = singleton ? Singleton : self
-          klass.new(type, icon.to_sym, descriptor, attributes, virtuals)
+          args = [name, icon.to_sym, descriptor, attributes, virtuals]
+          return new(*args) if type.nil?
+          Schematics::Entities.const_get(type.camelize.to_sym).new(*args)
         end
       end
 
-      def initialize(type, icon, descriptor, attributes, virtuals)
-        @type = type
+      def initialize(name, icon, descriptor, attributes, virtuals)
+        @name = name
         @icon = icon
         @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
         @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
@@ -65,8 +67,19 @@ module Schematics
         has_many_and_through_associations.size
       end
 
+      def generate_options
+        []
+      end
+
       def generate
-        "rails generate scaffold #{@type} #{@attributes.map(&:to_s).join(' ')}"
+        [
+          "rails generate scaffold " \
+            "#{name} " \
+            "#{attributes.map(&:to_s).join(' ')} " \
+            "#{generate_options.join(' ')}",
+          "rails generate migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
+          "rails generate migration add_slug_to_#{name.pluralize} slug:string:unique:true",
+        ]
       end
 
       def fields
@@ -110,16 +123,23 @@ module Schematics
       end
 
       def class_name
-        @type.camelize
+        name.camelize
       end
 
       def model_elements
-        (elements + default_scopes + validates + search_aliases) << descriptor
+        [self, descriptor] + elements + default_scopes + validates + search_aliases
+      end
+
+      def to_str
+        <<~RUBY
+          has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]
+          acts_as_paranoid
+        RUBY
       end
 
       def api
         <<~RUBY
-          swagger_controller :#{@type.pluralize}, "#{class_name} Management"
+          swagger_controller :#{name.pluralize}, "#{class_name} Management"
 
           swagger_model :#{class_name} do |model|
             description "A #{class_name} object"
@@ -127,8 +147,8 @@ module Schematics
           end
 
           swagger_api :index do
-            summary "Fetches all #{@type.humanize.downcase} items"
-            notes "This lists all the #{@type.pluralize.humanize.downcase}"
+            summary "Fetches all #{name.humanize.downcase} items"
+            notes "This lists all the #{name.pluralize.humanize.downcase}"
             param :header, "Authorization", :string, :required, "Authorization token"
             param :query, :page, :integer, :optional, "Page number"
             response :unauthorized
@@ -137,10 +157,10 @@ module Schematics
           end
 
           swagger_api :show do
-            summary "Fetches a single #{@type.humanize.downcase} item"
-            notes "This returns a single #{@type.humanize.downcase}"
+            summary "Fetches a single #{name.humanize.downcase} item"
+            notes "This returns a single #{name.humanize.downcase}"
             param :header, "Authorization", :string, :required, "Authorization token"
-            param :path, :id, :integer, :required, "#{@type.humanize} Id"
+            param :path, :id, :integer, :required, "#{name.humanize} Id"
             response :unauthorized
             response :success
             response :not_found
@@ -148,8 +168,8 @@ module Schematics
           end
 
           swagger_api :create do |api|
-            summary "Creates a new #{@type.humanize.downcase}"
-            notes "This creates a new #{@type.humanize.downcase}"
+            summary "Creates a new #{name.humanize.downcase}"
+            notes "This creates a new #{name.humanize.downcase}"
             param :header, "Authorization", :string, :required, "Authorization token"
             #{api_params.map(&:squish).join("\n\s\s")}
             response :unauthorized
@@ -158,10 +178,10 @@ module Schematics
           end
 
           swagger_api :update do |api|
-            summary "Updates an existing #{@type.humanize.downcase}"
-            notes "This updates an existing #{@type.humanize.downcase}"
+            summary "Updates an existing #{name.humanize.downcase}"
+            notes "This updates an existing #{name.humanize.downcase}"
             param :header, "Authorization", :string, :required, "Authorization token"
-            param :path, :id, :integer, :required, "#{@type.humanize} Id"
+            param :path, :id, :integer, :required, "#{name.humanize} Id"
             #{api_params.map(&:squish).join("\n\s\s")}
             response :unauthorized
             response :success
@@ -170,11 +190,11 @@ module Schematics
           end
 
           swagger_api :destroy do
-            summary "Deletes an existing #{@type.humanize.downcase} item"
-            notes "This deletes an existing #{@type.humanize.downcase}"
+            summary "Deletes an existing #{name.humanize.downcase} item"
+            notes "This deletes an existing #{name.humanize.downcase}"
             param :header, "Authorization", :string, :required, "Authorization token"
-            param :path, :id, :integer, :required, "#{@type.humanize} Id"
-            param :query, :really, :boolean, :optional, "Really destroy #{@type.humanize.downcase} item (without soft delete)"
+            param :path, :id, :integer, :required, "#{name.humanize} Id"
+            param :query, :really, :boolean, :optional, "Really destroy #{name.humanize.downcase} item (without soft delete)"
             response :unauthorized
             response :success
             response :not_found
@@ -185,6 +205,8 @@ module Schematics
       def to_s
         <<~RUBY
           class #{class_name}
+            #{to_str}
+
             ###
             #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
             # #{permitted_params.join(", ")}
