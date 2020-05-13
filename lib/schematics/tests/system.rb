@@ -3,14 +3,13 @@ require 'action_text/system_test_helper'
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
-      driven_by :selenium_headless
-
       include ActionText::SystemTestHelper
-      include Engine.routes.url_helpers
+      driven_by :selenium_headless
 
       delegate :model_class, to: :class
       delegate :entity, :model_name, to: :model_class
       delegate :email, to: :current_user
+      delegate :login_path, to: 'Schematics::Engine.routes.url_helpers'
 
       class << self
         delegate :entity, :model_name, to: :model_class
@@ -19,49 +18,62 @@ module Schematics
           super
           subclass.class_eval do
             setup do
-              @record = send(entity.type.pluralize, :one)
+              @record = send(entity.name.pluralize, :two)
               login
             end
 
-            test "visiting the index" do
-              visit polymorphic_path(model_class)
-              title = I18n.t('titles.schematics.schema.index',
-                             model_name_plural: model_name.human.pluralize.downcase)
-              assert_selector "h5", text: title
-            end
+            case entity
+            when Entities::Singleton
+              test "updating a #{entity.name}" do
+                visit polymorphic_path(model_class)
+                click_on I18n.t('schematics.application.show.buttons.edit')
+                fill_form(entity)
+                click_on I18n.t('schematics.application.form.buttons.confirm')
+                assert_text I18n.t('schematics.schema.update.updated', model_name: model_name.human)
+              end
+            else
+              test "visiting the index" do
+                visit polymorphic_path(model_class)
+                title = I18n.t('titles.schematics.schema.index',
+                               model_name_plural: model_name.human.pluralize.downcase)
+                assert_selector "h5", text: title
+              end
 
-            test "creating a #{entity.type}" do
-              visit polymorphic_path(model_class)
-              click_on I18n.t('schematics.application.index.buttons.add',
-                              model_name: model_name.human.downcase)
-              fill_form(entity)
-              click_on I18n.t('schematics.application.form.buttons.confirm')
-              assert_text I18n.t('schematics.schema.create.created', model_name: model_name.human)
-            end
+              test "creating a #{entity.name}" do
+                visit polymorphic_path(model_class)
+                click_on I18n.t('schematics.application.index.buttons.add',
+                                model_name: model_name.human.downcase)
+                fill_form(entity)
+                click_on I18n.t('schematics.application.form.buttons.confirm')
+                assert_text I18n.t('schematics.schema.create.created', model_name: model_name.human)
+              end
 
-            test "updating a #{entity.type}" do
-              visit polymorphic_path(model_class)
-              selector = "a[data-title='#{I18n.t('schematics.application.viewers.table.edit')}']"
-              find(selector, match: :first).click
-              fill_form(entity)
-              click_on I18n.t('schematics.application.form.buttons.confirm')
-              assert_text I18n.t('schematics.schema.update.updated', model_name: model_name.human)
-            end
+              test "updating a #{entity.name}" do
+                visit polymorphic_path(model_class)
+                selector = "a[data-title='#{I18n.t('schematics.application.viewers.table.edit')}']"
+                find(selector, match: :first).click
+                fill_form(entity)
+                click_on I18n.t('schematics.application.form.buttons.confirm')
+                assert_text I18n.t('schematics.schema.update.updated', model_name: model_name.human)
+              end
 
-            test "archiving a #{entity.type}" do
-              visit polymorphic_path(model_class)
-              selector = "a[data-title='#{I18n.t('schematics.application.viewers.table.archive')}']"
-              find(selector, match: :first).click
-              assert_text I18n.t('schematics.schema.destroy.archived', model_name: model_name.human)
-            end
+              test "archiving a #{entity.name}" do
+                visit polymorphic_path(model_class)
+                title = I18n.t('schematics.application.viewers.table.archive')
+                selector = "a[data-title='#{title}']"
+                find(selector, match: :first).click
+                assert_text I18n.t('schematics.schema.destroy.archived',
+                                   model_name: model_name.human)
+              end
 
-            test "destroying a #{entity.type}" do
-              visit polymorphic_path(model_class)
-              page.execute_script("$('tr[data-href]').first().click()")
-              click_on I18n.t('schematics.application.show.buttons.destroy')
-              click_on I18n.t('schematics.application.form.buttons.confirm')
-              assert_text I18n.t('schematics.schema.destroy.destroyed',
-                                 model_name: model_name.human)
+              test "destroying a #{entity.name}" do
+                visit polymorphic_path(model_class)
+                page.execute_script("$('tr[data-href]').first().click()")
+                click_on I18n.t('schematics.application.show.buttons.destroy')
+                click_on I18n.t('schematics.application.form.buttons.confirm')
+                assert_text I18n.t('schematics.schema.destroy.destroyed',
+                                   model_name: model_name.human)
+              end
             end
           end
         end
@@ -74,7 +86,7 @@ module Schematics
       protected
 
       def current_user
-        @current_user ||= users(:two)
+        @current_user ||= users(:one)
       end
 
       def login
@@ -87,7 +99,7 @@ module Schematics
 
       def fill_form(entity)
         entity.fillable_attributes.each do |attribute|
-          input = "#{entity.type}[#{attribute.column_name}]"
+          input = "#{entity.name}[#{attribute.column_name}]"
           case attribute
           when Attributes::Enum
             choose(input, match: :first, allow_label_click: true)
@@ -104,7 +116,7 @@ module Schematics
           when Attributes::Digest
             digest = attribute.default
             fill_in input, with: digest
-            fill_in "#{entity.type}[#{attribute.column_name}_confirmation]", with: digest
+            fill_in "#{entity.name}[#{attribute.column_name}_confirmation]", with: digest
           else
             fill_in input, with: attribute.default || @record.send(attribute.name)
           end
