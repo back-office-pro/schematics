@@ -36,6 +36,9 @@
         },
         "entity": {
             "definitions": {
+                "name": {
+                    "type": "string"
+                },
                 "type": {
                     "type": "string"
                 },
@@ -58,7 +61,7 @@
                     "type": "array"
                 }
             },
-            "required": ["type", "attributes"],
+            "required": ["name", "attributes"],
             "type": "object"
         },        
         "virtual_option": {

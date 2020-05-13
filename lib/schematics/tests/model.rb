@@ -11,11 +11,11 @@ module Schematics
           super
           subclass.class_eval do
             setup do
-              @record = send(entity.type.pluralize, :one)
-              @other_record = send(entity.type.pluralize, :two)
+              @record = send(entity.name.pluralize, :one)
+              @other_record = send(entity.name.pluralize, :two)
             end
 
-            test "valid #{entity.type}" do
+            test "valid #{entity.name}" do
               assert @record.valid?
             end
 

@@ -9,7 +9,7 @@ module Schematics
 
       class << self
         def create(entity, name:, function:, options: {})
-          tokens = Tokens::Tokenizer.tokenize(function, entity.type.pluralize)
+          tokens = Tokens::Tokenizer.tokenize(function, entity.name.pluralize)
           if tokens.any_is_a?(Tokens::Operator)
             Virtuals::Calculation.new(entity, name, tokens, options)
           else

@@ -15,7 +15,7 @@ class LocalesGenerator < Rails::Generators::Base
       Schematics::SCHEMA.entities.each do |entity|
         append_file(route_file_path(locale)) do
           indent <<~YAML, 4
-            #{entity.type.pluralize}: #{translate(entity.type.pluralize, to: locale)}
+            #{entity.name.pluralize}: #{translate(entity.name.pluralize, to: locale)}
           YAML
         end
       end
@@ -32,9 +32,9 @@ class LocalesGenerator < Rails::Generators::Base
           fr:
             activerecord:
               models:
-                #{entity.type}: #{translate(entity.type, to: locale)}
+                #{entity.name}: #{translate(entity.name, to: locale)}
               attributes:
-                #{entity.type}:
+                #{entity.name}:
           YAML
         end
         entity.fields.each do |field|
@@ -72,7 +72,7 @@ class LocalesGenerator < Rails::Generators::Base
   end
 
   def locale_path(entity)
-    File.join(models_path, entity.type)
+    File.join(models_path, entity.name)
   end
 
   def locale_file_path(entity, locale)

@@ -22,7 +22,7 @@ module Schematics
       end
 
       def inverse_association_name
-        inverse_association[:name] || @entity.type
+        inverse_association[:name] || @entity.name
       end
 
       def inverse_association
@@ -30,7 +30,7 @@ module Schematics
       end
 
       def preload
-        return [] if association_type == @entity.type # prevent self inclusion
+        return [] if association_type == @entity.name # prevent self inclusion
         super
       end
 

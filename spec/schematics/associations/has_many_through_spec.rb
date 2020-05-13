@@ -3,21 +3,21 @@ describe Schematics::Associations::HasManyThrough do
 
   let(:parent_entity) do
     Schematics::Entities::Entity.create(
-      type: "category",
+      name: "category",
       descriptor: "label",
       attributes: [{ name: "label", type: "string" }]
     )
   end
   let(:through_entity) do
     Schematics::Entities::Entity.create(
-      type: "sub_category",
+      name: "sub_category",
       descriptor: "designation",
       attributes: [{ name: "designation", type: "string" }]
     )
   end
   let(:entity) do
     Schematics::Entities::Entity.create(
-      type: "product",
+      name: "product",
       descriptor: "reference",
       attributes: [{ name: "reference", type: "string" }]
     )

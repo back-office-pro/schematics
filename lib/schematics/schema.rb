@@ -23,8 +23,8 @@ module Schematics
       add_has_one_through_associations
     end
 
-    def find_entity_by_type(type)
-      @entities.find { |entity| entity.type == type }
+    def find_entity_by_name(name)
+      @entities.find { |entity| entity.name == name }
     end
 
     def generate
@@ -60,7 +60,7 @@ module Schematics
     def add_inverse_descriptor_to_association_attributes
       @entities.each do |entity|
         entity.association_attributes.each do |attribute|
-          attribute.inverse_descriptor = find_entity_by_type(attribute.association_type).descriptor
+          attribute.inverse_descriptor = find_entity_by_name(attribute.association_type).descriptor
         end
       end
     end
@@ -69,7 +69,7 @@ module Schematics
       @entities.each do |entity|
         entity.association_attributes.select(&:inverse_of_has_many?).each do |attribute|
           association = attribute.create_inverse_association
-          find_entity_by_type(attribute.association_type).associations << association
+          find_entity_by_name(attribute.association_type).associations << association
         end
       end
     end
@@ -78,7 +78,7 @@ module Schematics
       @entities.each do |entity|
         entity.association_attributes.select(&:inverse_of_has_one?).each do |attribute|
           association = attribute.create_inverse_association
-          find_entity_by_type(attribute.association_type).associations << association
+          find_entity_by_name(attribute.association_type).associations << association
         end
       end
     end
@@ -109,7 +109,7 @@ module Schematics
     end
 
     def find_has_one_through_associations(entity, parent)
-      find_entity_by_type(parent.association_type).association_attributes.each do |child|
+      find_entity_by_name(parent.association_type).association_attributes.each do |child|
         if child.entity != parent.entity # prevent self association
           entity.associations << Associations::HasOneThrough.new(child, parent)
           find_has_one_through_associations(entity, child)

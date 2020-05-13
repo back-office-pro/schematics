@@ -8,7 +8,7 @@
     .card-body.text-center
       = render 'schematics/application/empty'
 - else
-  - @results.each do |type, resources|
+  - @results.each do |name, resources|
     - model_class = resources.first.class
     = render 'schematics/application/viewers/association',
         resources: resources,

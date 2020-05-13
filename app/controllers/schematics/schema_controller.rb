@@ -150,13 +150,13 @@ module Schematics
     def set_breadcrumb
       title = t('titles.schematics.schema.index',
                 model_name_plural: model_name.human.pluralize.downcase)
-      breadcrumb title, :"#{entity.type.pluralize}_path"
+      breadcrumb title, :"#{entity.name.pluralize}_path"
     end
 
     def resource_params
       keys = request.format.json? ? entity.permitted_json_params : entity.permitted_params
       defaults = entity.references_attributes.map { |attribute| [attribute.name, current_user] }
-      params.require(entity.type.to_sym).permit(keys).with_defaults(defaults)
+      params.require(entity.name.to_sym).permit(keys).with_defaults(defaults)
     end
   end
 end

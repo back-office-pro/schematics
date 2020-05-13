@@ -27,7 +27,7 @@ module Schematics
               entity.descriptor.serializer_class.new(record)
             end
           end
-          (@results[entity.type.pluralize] ||= []).concat(records)
+          (@results[entity.name.pluralize] ||= []).concat(records)
         end
       end
       respond_to do |format|

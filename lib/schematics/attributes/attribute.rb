@@ -59,7 +59,7 @@ module Schematics
       def api_param
         <<~RUBY
           param :form,
-          "#{@entity.type.camelize(:lower)}[#{@name.camelize(:lower)}]",
+          "#{@entity.name.camelize(:lower)}[#{@name.camelize(:lower)}]",
           :#{api_param_type},
           #{required? ? ":required" : ":optional"},
           "#{@name.humanize}"
@@ -90,7 +90,7 @@ module Schematics
       end
 
       def to_sql
-        [@entity.type.pluralize, @name].join('.')
+        [@entity.name.pluralize, @name].join('.')
       end
 
       def to_str

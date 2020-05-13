@@ -1,7 +1,7 @@
 {
     "entities": [
         {
-            "type": "user",
+            "name": "user",
             "icon": "users",
             "descriptor": "full_name",
             "virtuals": [
@@ -71,7 +71,7 @@
             ]
         },
         {
-            "type": "message",
+            "name": "message",
             "icon": "inbox",
             "descriptor": "subject",
             "attributes": [
@@ -115,7 +115,8 @@
             ]
         },
         {
-            "type": "directory",
+            "name": "directory",
+            "type": "tree",
             "icon": "folder",
             "descriptor": "name",
             "attributes": [
@@ -127,27 +128,16 @@
                     }
                 },
                 {
-                    "name": "parent",
-                    "type": "belongs_to",
-                    "options": {
-                        "type": "directory",
-                        "inverse": {
-                            "name": "sub_directories",
-                            "type": "has_many"
-                        }
-                    }
-                },
-                {
                     "name": "files",
                     "type": "attachments"
                 }
             ]
         },
         {
-            "type": "setting",
+            "name": "setting",
+            "type": "singleton",
             "icon": "cog",
             "descriptor": "company_name",
-            "singleton": true,
             "attributes": [
                 {
                     "name": "company_name",

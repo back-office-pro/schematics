@@ -53,7 +53,7 @@
     ],
     "entities": [
         {
-            "type": "client",
+            "name": "client",
             "icon": "user_tie",
             "descriptor": "full_name",
             "virtuals": [
@@ -80,7 +80,7 @@
             ]
         },
         {
-            "type": "sub_category",
+            "name": "sub_category",
             "icon": "box",
             "descriptor": "designation",
             "attributes": [
@@ -104,7 +104,7 @@
             ]
         },
         {
-            "type": "category",
+            "name": "category",
             "icon": "box",
             "descriptor": "label",
             "attributes": [
@@ -128,7 +128,7 @@
             ]
         },
         {
-            "type": "product",
+            "name": "product",
             "descriptor": "reference",
             "virtuals": [
                 {
@@ -214,7 +214,7 @@
             ]
         },
         {
-            "type": "order",
+            "name": "order",
             "attributes": [
                 {
                     "name": "title",
