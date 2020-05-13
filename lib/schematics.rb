@@ -59,6 +59,7 @@ require 'cells-rails'
 require 'cells-slim'
 require 'json_web_token'
 require 'array'
+require 'string'
 require 'schematics/engine'
 require_relative 'swagger/docs/config'
 
