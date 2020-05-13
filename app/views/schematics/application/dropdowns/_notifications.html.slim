@@ -7,6 +7,6 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-3
     h5.dropdown-header.font-weight-bold.bg-light= t('.message_center')
     - versions.each do |version|
       .dropdown-item.d-flex.align-items-center
-        = render 'schematics/timeline/version', version: version
+        = cell('schematics/version', version).()
     .dropdown-divider
     = link_to "Voir toutes les notifications", schematics.timeline_path, class: "dropdown-item text-muted small"

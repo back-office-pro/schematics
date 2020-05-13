@@ -1,6 +1,0 @@
-.float-left.mr-3
-  = link_to cell('schematics/avatar', version.user).(), main_app.url_for(version.user)
-div
-  = version.event
-  = link_to version.item.to_s, main_app.url_for(version.item) if version.item.present?
-  div.text-muted= t('layouts.schematics.application.ago', time: time_ago_in_words(version.created_at))

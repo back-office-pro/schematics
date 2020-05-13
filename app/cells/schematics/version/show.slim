@@ -1,0 +1,6 @@
+.float-left.mr-3
+  = link_to cell('schematics/avatar', user).(), user
+div
+  = event
+  = link_to item.to_s, item if item.present?
+  div.text-muted= I18n.t 'layouts.schematics.application.ago', time: time_ago_in_words(created_at)

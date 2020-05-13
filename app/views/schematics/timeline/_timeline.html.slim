@@ -8,4 +8,4 @@
           .card.shadow-sm
             .card-body data-target=("#diffModal-#{version.id}" if version.event == "update")
               = render 'schematics/timeline/diff', version: version if version.event == "update"
-              = render 'schematics/timeline/version', version: version
+              = cell('schematics/version', version).()
