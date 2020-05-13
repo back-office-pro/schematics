@@ -30,8 +30,8 @@ html
                 .input-group-append
                   = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
             ul.navbar-nav.ml-auto.p-3
-              = render 'schematics/application/dropdowns/notifications'
-              = render 'schematics/application/dropdowns/messages'
+              = cell('schematics/notification_center', current_user).()
+              = cell('schematics/message_center', current_user).()
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
