@@ -62,7 +62,7 @@ require 'array'
 require 'string'
 require 'schematics/engine'
 require_relative 'swagger/docs/config'
-require_relative 'active_support/test_case'
+require_relative 'active_support/test_case' if Rails.env.test?
 
 module Schematics
   module Associations
