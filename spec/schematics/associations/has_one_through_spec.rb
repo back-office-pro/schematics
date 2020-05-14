@@ -71,9 +71,13 @@ describe Schematics::Associations::HasOneThrough do
     it { is_expected.to eq("label") }
   end
 
-  describe "#search_field" do
-    subject { association.search_field }
+  describe "#search_data" do
+    subject { association.search_data }
 
-    it { is_expected.to eq(:category_label) }
+    it do
+      is_expected.to eq <<~RUBY
+        category&.label&.searchize
+      RUBY
+    end
   end
 end

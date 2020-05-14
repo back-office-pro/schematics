@@ -6,7 +6,7 @@
         = fa_icon :search, class: "mr-3 ml-3 fa-lg align-middle"
         span.align-middle= title
     .card-body.text-center
-      = render 'schematics/application/empty'
+      = render 'schematics/application/empty', suggestions: @suggestions
 - else
   - @results.each do |name, resources|
     - model_class = resources.first.class

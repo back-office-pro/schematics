@@ -3,6 +3,7 @@ module Schematics
     self.abstract_class = true
     self.implicit_order_column = "created_at"
     include ActiveStorageSupport::SupportForBase64
+    scope :search_import, -> { with_deleted }
 
     class << self
       def inherited(subclass)
@@ -14,14 +15,6 @@ module Schematics
 
       def entity
         SCHEMA.find_entity_by_name(name.underscore)
-      end
-
-      def ransackable_attributes(auth_object)
-        entity.searchable_elements.map(&:name)
-      end
-
-      def ransackable_scopes(auth_object)
-        [:with_deleted]
       end
     end
   end

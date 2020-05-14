@@ -1,6 +1,6 @@
 module Schematics
   module Behaviours
-    module MultiSearchable
+    module Rangeable
     end
   end
 end

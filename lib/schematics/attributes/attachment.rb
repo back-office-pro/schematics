@@ -3,7 +3,6 @@ module Schematics
     class Attachment < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
-      include Behaviours::MultiSearchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
@@ -21,8 +20,10 @@ module Schematics
         { [name, type].join("_").to_sym => :blob }
       end
 
-      def search_field
-        :"#{name}_blob_filename"
+      def search_data
+        <<~RUBY
+          (#{name}.filename.to_s.searchize if #{name}.attached?)
+        RUBY
       end
 
       def to_str

@@ -17,6 +17,8 @@ module Schematics
         def inherited(subclass)
           super
           subclass.class_eval do
+            model_class.reindex
+
             setup do
               @record = send(entity.name.pluralize, :two)
               login

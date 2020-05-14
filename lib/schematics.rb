@@ -2,6 +2,7 @@ require 'active_support/inflector'
 require 'json'
 require 'csv'
 require 'pagy'
+require 'pagy/extras/searchkick'
 require 'pagy/extras/headers'
 require 'pagy/extras/bootstrap'
 require 'pagy/extras/i18n'
@@ -9,8 +10,7 @@ require 'paranoia'
 require 'paper_trail'
 require 'rails'
 require 'action_controller'
-require 'ransack'
-require 'ransack/enum'
+require 'searchkick'
 require 'rack/attack'
 require 'swagger/docs'
 require 'bullet'
@@ -59,8 +59,10 @@ require 'cells-rails'
 require 'cells-slim'
 require 'json_web_token'
 require 'array'
+require 'string'
 require 'schematics/engine'
 require_relative 'swagger/docs/config'
+require_relative 'active_support/test_case' if Rails.env.test?
 
 module Schematics
   module Associations
@@ -96,12 +98,12 @@ module Schematics
   end
 
   module Behaviours
-    autoload :Editable,        'schematics/behaviours/editable'
-    autoload :Fillable,        'schematics/behaviours/fillable'
-    autoload :MultiSearchable, 'schematics/behaviours/multi_searchable'
-    autoload :Preloadable,     'schematics/behaviours/preloadable'
-    autoload :Renderable,      'schematics/behaviours/renderable'
-    autoload :Searchable,      'schematics/behaviours/searchable'
+    autoload :Editable,    'schematics/behaviours/editable'
+    autoload :Fillable,    'schematics/behaviours/fillable'
+    autoload :Preloadable, 'schematics/behaviours/preloadable'
+    autoload :Rangeable,   'schematics/behaviours/rangeable'
+    autoload :Renderable,  'schematics/behaviours/renderable'
+    autoload :Searchable,  'schematics/behaviours/searchable'
   end
 
   module Entities
@@ -126,14 +128,6 @@ module Schematics
       module Generators
         autoload :Actions,            'schematics/patches/rails/generators/actions'
         autoload :GeneratedAttribute, 'schematics/patches/rails/generators/generated_attribute'
-      end
-    end
-    module Ransack
-      module Helpers
-        autoload :FormHelper, 'schematics/patches/ransack/helpers/form_helper'
-      end
-      module Nodes
-        autoload :Sort, 'schematics/patches/ransack/nodes/sort'
       end
     end
   end

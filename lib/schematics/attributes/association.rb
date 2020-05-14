@@ -30,12 +30,14 @@ module Schematics
       end
 
       def preload
-        return [] if association_type == @entity.name # prevent self inclusion
+        return if association_type == @entity.name # prevent self inclusion
         super
       end
 
-      def search_field
-        :"#{name}_#{inverse_descriptor.name}"
+      def search_data
+        <<~RUBY
+          #{name}&.#{inverse_descriptor.name}&.searchize
+        RUBY
       end
 
       def model_property_type

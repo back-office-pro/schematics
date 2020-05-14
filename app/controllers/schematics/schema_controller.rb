@@ -1,5 +1,8 @@
 module Schematics
   class SchemaController < ApplicationController
+    include Schematics::Sortable
+    include Schematics::Filterable
+    include Schematics::Fillable
     before_action :set_paper_trail_whodunnit
     before_action :authorize
     before_action :set_breadcrumb
@@ -31,9 +34,15 @@ module Schematics
     end
 
     def index
-      @q = model_class.ransack(params[:q])
-      @q.sorts = 'created_at desc' if @q.sorts.empty?
-      @pagy, @resources = pagy @q.result, items: params.fetch(:per_page, 25)
+      @resources = model_class.search(
+        includes: entity.includes,
+        where: filter_params.except(:with_deleted),
+        order: sorting_params,
+        page: params.fetch(:page, 1),
+        per_page: params.fetch(:per_page, 25),
+        scope_results: (-> (r) { r.with_deleted } if filter_params.key?(:with_deleted))
+      )
+      @pagy = Pagy.new_from_searchkick(@resources)
       respond_to do |format|
         format.html
         format.json { render json: @resources }
@@ -148,15 +157,9 @@ module Schematics
     end
 
     def set_breadcrumb
-      title = t('titles.schematics.schema.index',
-                model_name_plural: model_name.human.pluralize.downcase)
+      model_name_plural = model_name.human.pluralize.downcase
+      title = t('titles.schematics.schema.index', model_name_plural: model_name_plural)
       breadcrumb title, :"#{entity.name.pluralize}_path"
-    end
-
-    def resource_params
-      keys = request.format.json? ? entity.permitted_json_params : entity.permitted_params
-      defaults = entity.references_attributes.map { |attribute| [attribute.name, current_user] }
-      params.require(entity.name.to_sym).permit(keys).with_defaults(defaults)
     end
   end
 end

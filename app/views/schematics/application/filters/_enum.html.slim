@@ -1,7 +1,6 @@
 .input-group.mx-1.mb-2.mt-1
-  = search_form.select :"#{field.name}_in",
-                       field.input_collection.map(&:reverse),
-                       { prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase) },
-                       onchange: "$(this.form).submit()",
-                       class: "form-control bg-light border-success #{'border-0' if params.dig(:q, :"#{field.name}_in").nil?}"
-
+  = select_tag "filter[#{field.name}]",
+               options_for_select(field.input_collection.map(&:reverse), params.dig(:filter, field.name)),
+               prompt: t('schematics.application.filters.filter_by', attribute_name: model_class.human_attribute_name(field.name).downcase),
+               onchange: "$(this.form).submit()",
+               class: "form-control bg-light border-success #{'border-0' if params.dig(:filter, field.name).nil?}"

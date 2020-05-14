@@ -3,7 +3,6 @@ module Schematics
     class RichText < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
-      include Behaviours::MultiSearchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
@@ -12,11 +11,13 @@ module Schematics
       end
 
       def preload
-        [[type, name].join("_").to_sym]
+        [type, name].join("_").to_sym
       end
 
-      def search_field
-        :"rich_text_#{name}_body"
+      def search_data
+        <<~RUBY
+          #{name}&.to_plain_text&.searchize
+        RUBY
       end
 
       def format(value)

@@ -3,7 +3,6 @@ module Schematics
     class Text < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
-      include Behaviours::MultiSearchable
       include Behaviours::Fillable
       include Behaviours::Editable
 
@@ -13,6 +12,12 @@ module Schematics
 
       def api_param_type
         "string"
+      end
+
+      def search_data
+        <<~RUBY
+          #{name}&.searchize
+        RUBY
       end
 
       def icon

@@ -39,20 +39,10 @@ module Schematics
         end.flatten.uniq
       end
 
-      def default_scope_method
-        :joins
-      end
-
-      def search_alias
-        <<~RUBY
-          ransacker :#{name} do
-            Arel.sql("#{to_sql}")
-          end
-        RUBY
-      end
-
       def to_str
         <<~RUBY
+          default_scope { includes(#{preload}) }
+
           def #{@name}
             #{function}
           rescue NameError => e
