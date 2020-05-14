@@ -17,6 +17,7 @@ module Schematics
         def inherited(subclass)
           super
           subclass.class_eval do
+            PaperTrail.enabled = false
             model_class.reindex
 
             setup do
