@@ -62,6 +62,7 @@ require 'array'
 require 'string'
 require 'schematics/engine'
 require_relative 'swagger/docs/config'
+require_relative 'active_support/test_case'
 
 module Schematics
   module Associations
