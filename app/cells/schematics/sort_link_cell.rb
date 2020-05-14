@@ -4,10 +4,6 @@ module Schematics
     include FontAwesome5::Rails::IconHelper
     property :name
 
-    def model_class
-      @options[:model_class]
-    end
-
     def icon
       return :sort_down if asc?
       return :sort_up   if desc?
@@ -24,7 +20,15 @@ module Schematics
       request.parameters.merge sort: new_sorted_params
     end
 
+    def attribute_name
+      model_class.human_attribute_name(name)
+    end
+
     private
+
+    def model_class
+      @options[:model_class]
+    end
 
     def sorted_params
       params[:sort]&.split(',')
