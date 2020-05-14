@@ -9,12 +9,6 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          elements = entity.searchable_elements.map(&:name).map(&:to_sym)
-          searchkick searchable: elements,
-                     filterable: elements,
-                     word_middle: elements,
-                     suggest: elements,
-                     callbacks: :async
           entity.model_elements.each(&method(:class_eval))
         end
       end

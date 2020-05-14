@@ -145,6 +145,11 @@ module Schematics
         <<~RUBY
           has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]
           acts_as_paranoid
+          searchkick searchable: #{elasticsearchable_elements},
+                     filterable: #{elasticsearchable_elements},
+                     word_middle: #{elasticsearchable_elements},
+                     suggest: #{elasticsearchable_elements},
+                     callbacks: :async
         RUBY
       end
 
@@ -232,6 +237,12 @@ module Schematics
             #{virtuals.map(&:to_str).join("\s\s")}
           end
         RUBY
+      end
+
+      private
+
+      def elasticsearchable_elements
+        searchable_elements.map(&:name).map(&:to_sym)
       end
     end
   end
