@@ -7,7 +7,7 @@ module Schematics
     property :received_messages
 
     def messages
-      received_messages.order(created_at: :desc).limit(10)
+      received_messages.with_rich_text_content.includes(:author).order(created_at: :desc).limit(10)
     end
 
     def unread
