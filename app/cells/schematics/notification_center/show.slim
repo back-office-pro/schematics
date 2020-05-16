@@ -6,6 +6,6 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pr-3
     h5.dropdown-header.font-weight-bold.bg-light= I18n.t('.notification_center')
     - versions.each do |version|
       .dropdown-item.d-flex.align-items-center
-        = cell('schematics/version', version).()
+        = cell('schematics/timeline/version', version).()
     .dropdown-divider
     = link_to I18n.t('.show_all'), timeline_path, class: "dropdown-item text-muted small"
