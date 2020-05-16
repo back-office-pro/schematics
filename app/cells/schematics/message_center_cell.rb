@@ -7,7 +7,11 @@ module Schematics
     property :received_messages
 
     def messages
-      received_messages.where(created_at: updated_at...).order(created_at: :desc)
+      received_messages.order(created_at: :desc).limit(10)
+    end
+
+    def unread
+      received_messages.where(read_at: nil).count
     end
   end
 end
