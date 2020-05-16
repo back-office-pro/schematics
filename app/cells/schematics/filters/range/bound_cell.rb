@@ -2,8 +2,6 @@ module Schematics
   module Filters
     module Range
       class BoundCell < FilterCell
-        property :unit
-
         def field_tag
           :"#{type}_field_tag"
         end
@@ -22,6 +20,10 @@ module Schematics
 
         def placeholder
           I18n.t("schematics.application.filters.#{comparison}")
+        end
+
+        def unit
+          model.try(:unit)
         end
 
         def has_unit?
