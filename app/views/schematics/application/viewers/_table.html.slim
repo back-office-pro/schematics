@@ -12,21 +12,21 @@
             = cell('schematics/sort_link', association, model_class: model_class).()
       tr.filters
         th.text-nowrap.align-middle.px-0.py-1
-          = render 'schematics/application/filters/boolean', name: :with_deleted
+          = cell('schematics/filters/checkbox', :with_deleted).()
         - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.align-middle.text-center.px-0.py-1
             - case field
             - when Schematics::Attributes::Boolean
-              = render 'schematics/application/filters/boolean', name: field.name
+              = cell('schematics/filters/checkbox', field).()
             - when Schematics::Behaviours::Rangeable
-              = render 'schematics/application/filters/range', field: field
+              = cell('schematics/filters/range', field).()
             - when Schematics::Attributes::Enum
-              = render 'schematics/application/filters/enum', field: field
+              = cell('schematics/filters/dropdown', field, model_class: model_class).()
             - else
-              = render 'schematics/application/filters/input', field: field
+              = cell('schematics/filters/typeahead', field, model_class: model_class).()
         - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.align-middle.text-center.px-0.py-1
-            = render 'schematics/application/filters/input', field: association
+            = cell('schematics/filters/typeahead', association, model_class: model_class).()
       tbody class=('table-bordered border-0' if @resources.any?) class=('animated slideInRight' if params[:page].present?)
         - if @resources.empty?
           tr

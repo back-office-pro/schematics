@@ -1,7 +1,0 @@
-.custom-control.custom-switch.mx-auto.w-0.mb-2.mt-1
-  = check_box_tag "filter[#{name}]",
-                  "true",
-                  params.dig(:filter, name) == "true",
-                  onchange: "$(this.form).submit()",
-                  class: "custom-control-input"
-  = label_tag "filter[#{name}]", "", class: "custom-control-label"

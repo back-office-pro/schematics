@@ -2,6 +2,6 @@ fr:
   schematics:
     application:
       filters:
-        from: De
-        to: A
+        gte: De
+        lte: A
         filter_by: Filtrer par %{attribute_name}
