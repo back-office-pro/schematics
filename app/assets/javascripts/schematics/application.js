@@ -47,6 +47,15 @@ $(document).on('turbolinks:load', function() {
             Turbolinks.visit(window.location.pathname + '?' + searchParams);
         }
     });
+    $('#notificationsDropdown').has('.badge.badge-danger').click(function() {
+        const $badge = $(this).find('.badge.badge-danger');
+        $.ajax({
+            url: '/sessions',
+            dataType: 'json'
+        }).done(function() {
+            $badge.fadeOut();
+        });
+    });
 });
 
 $(document).on('show.bs.modal', '.modal', function() {

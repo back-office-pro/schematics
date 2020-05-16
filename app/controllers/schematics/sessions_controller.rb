@@ -1,6 +1,6 @@
 module Schematics
   class SessionsController < ApplicationController
-    before_action :authorize, only: [:edit, :update]
+    before_action :authorize, only: [:show, :edit, :update]
     layout "schematics/auth", only: [:new, :create]
     swagger_controller :sessions, "Sessions Management"
     helper_method :entity
@@ -9,6 +9,11 @@ module Schematics
     end
 
     def edit
+    end
+
+    def show
+      current_user.touch
+      render json: current_user
     end
 
     swagger_api :create do |api|

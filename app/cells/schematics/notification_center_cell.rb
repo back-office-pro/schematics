@@ -6,11 +6,11 @@ module Schematics
     property :updated_at
 
     def versions
-      PaperTrail::Version.
-        with_user.
-        with_item.
-        where(created_at: updated_at...).
-        order(created_at: :desc)
+      PaperTrail::Version.with_user.with_item.order(created_at: :desc).limit(10)
+    end
+
+    def unread
+      PaperTrail::Version.where(created_at: updated_at...).count
     end
   end
 end
