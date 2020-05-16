@@ -16,8 +16,8 @@ ul.nav.nav-light.flex-column.sidebar-sticky
           ul.list-group
             - attribute.values.each do |value|
               = active_link_to main_app.polymorphic_path(model_class, "by_#{attribute.name}": value),
-                                active: :exact,
-                                class: "nav-link p-0 m-0 text-secondary text-truncate segment" do
+                               active: :exact,
+                               class: "nav-link p-0 m-0 text-secondary text-truncate segment" do
                 li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-transparent
                   span
                     = fa_icon :caret_right, class: "mr-2"
