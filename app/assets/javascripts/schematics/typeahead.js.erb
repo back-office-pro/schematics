@@ -74,7 +74,6 @@ $(document).on('turbolinks:load', function() {
             {
                 source: searchSource,
                 display: 'descriptor',
-                limit: 10,
                 templates: {
                     notFound: () => `
                         <div class="tt-suggestion tt-selectable text-truncate">
@@ -110,7 +109,6 @@ $(document).on('turbolinks:load', function() {
             {
                 source: filterSource,
                 display: '__FIELD__',
-                limit: 10,
                 templates: {
                     notFound: () => `
                         <div class="tt-suggestion tt-selectable text-truncate">
