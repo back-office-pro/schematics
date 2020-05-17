@@ -1,8 +1,8 @@
 - begin
-  = image_tag representation, class: css_class
-- rescue MiniMagick::Error
-  = fa_icon :exclamation_triangle, class: "mr-2"
-  = I18n.t('errors.messages.image_metadata_missing').humanize
-- rescue ActiveStorage::FileNotFoundError
-  = fa_icon :exclamation_triangle, class: "mr-2"
-  = I18n.t('titles.schematics.schema.not_found')
+  = image_tag attachment, class: css_class
+- rescue StandardError => error
+  - if replacement.present?
+    = fa_icon replacement[:icon], size: replacement[:size], class: "align-middle"
+  - else
+    = fa_icon :exclamation_triangle, class: "mr-2"
+    = error_message(error)

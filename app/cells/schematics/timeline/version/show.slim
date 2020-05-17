@@ -1,5 +1,10 @@
 .float-left.mr-3
-  = link_to cell('schematics/avatar', user).(), user
+  = link_to cell('schematics/attachment',
+                 user.avatar,
+                 width: 36,
+                 height: 36,
+                 css_class: 'rounded-circle border shadow-sm',
+                 replacement: { icon: :user_circle, size: '2x' }).(), user
 div
   = event
   = link_to item.to_s, item if item.present?

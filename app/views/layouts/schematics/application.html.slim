@@ -35,7 +35,12 @@ html
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
-                  = cell('schematics/avatar', current_user).()
+                  = cell('schematics/attachment',
+                         current_user.avatar,
+                         width: 36,
+                         height: 36,
+                         css_class: 'rounded-circle border shadow-sm',
+                         replacement: { icon: :user_circle, size: '2x' }).()
                 .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm aria-labelledby="accountDropdown" 
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"
