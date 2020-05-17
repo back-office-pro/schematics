@@ -128,8 +128,8 @@ module Schematics
             {
               created_at: created_at,
               #{
-                searchable_fields.map do |field|
-                  "#{field.name}: #{field.search_data.squish}"
+                searchable_elements.map do |element|
+                  "#{element.name}: #{element.search_data.squish}"
                 end.join(', ')
               }
             }
