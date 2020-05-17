@@ -6,5 +6,6 @@ fr:
           per_page: "%{size} %{model_name} par page"
         buttons:
           add: Ajouter un %{model_name}
+          import: Importer des %{model_name}
           download_as_csv: Télécharger au format CSV
           reset_filters: Réinitialiser les filtres

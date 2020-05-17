@@ -16,6 +16,10 @@
           = link_to polymorphic_path(model_class, format: :csv), class: "btn btn-light btn-sm btn-icon-split mr-2" do
             span.icon= fa_icon :file_csv
             span.text.d-none.d-lg-inline= t('.buttons.download_as_csv')
+          = cell('schematics/import', model_class).()
+          = button_tag type: "button", data: { toggle: "modal", target: "#importModal" }, class: "btn btn-dark btn-sm btn-icon-split mr-2" do
+            span.icon= fa_icon :cloud_upload_alt
+            span.text.d-none.d-lg-inline= t('.buttons.import', model_name: @model_name_plural)
           = link_to new_polymorphic_path(model_class), class: "btn btn-primary btn-sm btn-icon-split" do
             span.icon= fa_icon :plus
             span.text.d-none.d-lg-inline= t('.buttons.add', model_name: @model_name)
