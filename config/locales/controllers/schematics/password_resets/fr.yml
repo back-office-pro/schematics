@@ -4,8 +4,9 @@ fr:
       edit:
         user_not_found: Utilisateur non trouvé
       create:
-        email_sent: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
-        unknown_email: E-mail inconnu
+        success: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
+        failure: E-mail inconnu
       update:
-        expired: La requête de réinitialisation a expirée
-        password_reset: Votre mot de passe a été réinitialisé !
+        success: Votre mot de passe a été réinitialisé !
+        failure: La requête de réinitialisation a expirée
+        error: Une erreur est survenue

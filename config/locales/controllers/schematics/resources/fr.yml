@@ -1,0 +1,15 @@
+fr:  
+  schematics:
+    resources:
+      create:
+        success: "%{model_name} a été créé avec succès"
+        failure: Une erreur est survenue
+      update:
+        success: "%{model_name} a été modifié avec succès"
+        failure: Une erreur est survenue
+      destroy:
+        success:
+          destroyed: "%{model_name} a été supprimé avec succès"
+          restored: "%{model_name} a été restauré avec succès"
+          archived: "%{model_name} a été archivé avec succès"
+        failure: Une erreur est survenue

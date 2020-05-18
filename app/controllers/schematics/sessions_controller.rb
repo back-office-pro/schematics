@@ -25,50 +25,60 @@ module Schematics
     end
 
     def create
-      user = User.find_by_email(user_params[:email])
-      authenticated = user&.authenticate(user_params[:password])
-      respond_to do |format|
-        format.html do
-          if authenticated
-            if params[:user][:remember_me]
-              cookies.permanent[:auth_token] = user.auth_token
-            else
-              cookies[:auth_token] = user.auth_token
-            end
-            redirect_to root_path, notice: t('.logged_in')
-          else
-            flash.now[:alert] = t('.invalid_credentials')
+      result = Sessions::Create.call(
+        user_params: user_params,
+        cookies: cookies,
+        remember_me: params[:user][:remember_me]
+      )
+      if result.success?
+        respond_to do |format|
+          format.html { redirect_to root_path, notice: t(result.message) }
+          format.json { render json: { auth_token: result.jwt } }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
             render :new
           end
-        end
-        format.json do
-          if authenticated
-            render json: { auth_token: JsonWebToken.encode(auth_token: user.auth_token) }
-          else
-            head :unauthorized
-          end
+          format.json { head :unauthorized }
         end
       end
     end
 
     def update
-      if current_user.authenticate(params[:user][:current_password])
-        if current_user.update(user_params)
-          switch_locale do
-            redirect_to profile_path, notice: t('.profile_updated')
+      result = Sessions::Update.call(
+        resource_params: user_params,
+        resource: current_user,
+        password: params[:user][:current_password]
+      )
+      if result.success?
+        respond_to do |format|
+          format.html do
+            switch_locale do
+              redirect_to profile_path, notice: t(result.message)
+            end
           end
-        else
-          render :edit
+          format.json
         end
       else
-        flash.now[:alert] = t('.wrong_password')
-        render :edit
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :edit
+          end
+          format.json { render json: current_user.errors, status: :unprocessable_entity }
+        end
       end
     end
 
     def destroy
-      cookies.delete(:auth_token)
-      redirect_to login_path, notice: t('.logged_out')
+      result = Sessions::Destroy.call(cookies: cookies)
+      if result.success?
+        redirect_to login_path, notice: t(result.message)
+      else
+        redirect_to root_path, alert: t(result.message)
+      end
     end
 
     private

@@ -32,12 +32,13 @@ module Schematics
                 click_on I18n.t('schematics.application.show.buttons.edit')
                 fill_form(entity)
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                assert_text I18n.t('schematics.schema.update.updated', model_name: model_name.human)
+                assert_text I18n.t('schematics.resources.update.success',
+                                   model_name: model_name.human)
               end
             else
               test "visiting the index" do
                 visit polymorphic_path(model_class)
-                title = I18n.t('titles.schematics.schema.index',
+                title = I18n.t('titles.schematics.resources.index',
                                model_name_plural: model_name.human.pluralize.downcase)
                 assert_selector "h5", text: title
               end
@@ -48,7 +49,8 @@ module Schematics
                                 model_name: model_name.human.downcase)
                 fill_form(entity)
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                assert_text I18n.t('schematics.schema.create.created', model_name: model_name.human)
+                assert_text I18n.t('schematics.resources.create.success',
+                                   model_name: model_name.human)
               end
 
               test "updating a #{entity.name}" do
@@ -57,7 +59,8 @@ module Schematics
                 find(selector, match: :first).click
                 fill_form(entity)
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                assert_text I18n.t('schematics.schema.update.updated', model_name: model_name.human)
+                assert_text I18n.t('schematics.resources.update.success',
+                                   model_name: model_name.human)
               end
 
               test "archiving a #{entity.name}" do
@@ -65,7 +68,7 @@ module Schematics
                 title = I18n.t('schematics.application.viewers.table.archive')
                 selector = "a[data-title='#{title}']"
                 find(selector, match: :first).click
-                assert_text I18n.t('schematics.schema.destroy.archived',
+                assert_text I18n.t('schematics.resources.destroy.success.archived',
                                    model_name: model_name.human)
               end
 
@@ -74,7 +77,7 @@ module Schematics
                 page.execute_script("$('tr[data-href]').first().click()")
                 click_on I18n.t('schematics.application.show.buttons.destroy')
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                assert_text I18n.t('schematics.schema.destroy.destroyed',
+                assert_text I18n.t('schematics.resources.destroy.success.destroyed',
                                    model_name: model_name.human)
               end
             end
@@ -97,7 +100,7 @@ module Schematics
         fill_in I18n.t('simple_form.labels.user.email'), with: email
         fill_in I18n.t('simple_form.labels.user.password'), with: "secret"
         click_on I18n.t('schematics.application.form.buttons.confirm')
-        assert_text I18n.t('schematics.sessions.create.logged_in')
+        assert_text I18n.t('schematics.sessions.create.success')
       end
 
       def fill_form(entity)

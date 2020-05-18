@@ -33,4 +33,37 @@ resource "Sessions" do
       end
     end
   end
+
+  put "/sessions" do
+    token_auth
+
+    with_options scope: :user, with_example: true do
+      parameter :email, "The user email"
+      parameter :password, "The user password"
+      parameter :password_confirmation, "The user password confirmation"
+      parameter :current_password, "The user current password", required: true
+      parameter :first_name, "The user first name"
+      parameter :last_name, "The user last name"
+      parameter :avatar, "The user avatar"
+      parameter :locale, "The user locale"
+    end
+
+    context "when current_password is right" do
+      let(:current_password) { "secret" }
+
+      example "update profile" do
+        do_request
+        expect(response_status).to eq(204)
+      end
+    end
+
+    context "when current_password is wrong" do
+      let(:current_password) { "qwerty" }
+
+      example "update profile" do
+        do_request
+        expect(response_status).to eq(422)
+      end
+    end
+  end
 end

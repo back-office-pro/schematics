@@ -13,7 +13,7 @@ en:
       password_resets:
         new: Password reset
         edit: Password reset
-      schema:
+      resources:
         index: List of %{model_name_plural}
         new: Add a new %{model_name}
         edit: Edit %{resource}

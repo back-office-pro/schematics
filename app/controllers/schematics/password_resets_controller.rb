@@ -9,14 +9,20 @@ module Schematics
     end
 
     def create
-      user = User.find_by_email(user_params[:email])
-      if user
-        user.regenerate_password_reset_token
-        UserMailer.password_reset(user).deliver_later
-        redirect_to login_path, notice: t('.email_sent')
+      result = PasswordResets::Create.call(user_params)
+      if result.success?
+        respond_to do |format|
+          format.html { redirect_to login_path, notice: t(result.message) }
+          format.json
+        end
       else
-        flash.now[:alert] = t('.unknown_email')
-        render :new
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :new
+          end
+          format.json { render json: t(result.message), status: :unprocessable_entity }
+        end
       end
     end
 
@@ -24,19 +30,25 @@ module Schematics
     end
 
     def update
-      if @user.updated_at < 2.hours.ago
-        redirect_to password_lost_path, alert: t('.expired')
-      elsif @user.update(user_params)
-        @user.password_reset_token = nil
-        @user.save!
-        redirect_to login_path, notice: t('.password_reset')
+      result = PasswordResets::Update.call(user: @user, user_params: user_params)
+      if result.success?
+        respond_to do |format|
+          format.html { redirect_to login_path, notice: t(result.message) }
+          format.json
+        end
       else
-        render :edit
+        respond_to do |format|
+          format.html { redirect_to password_lost_path, alert: t(result.message) }
+          format.json { render json: t(result.message), status: :unprocessable_entity }
+        end
       end
     end
 
     def not_found
-      redirect_to password_lost_path, alert: t('.user_not_found')
+      respond_to do |format|
+        format.html { redirect_to password_lost_path, alert: t('.user_not_found') }
+        format.json { head :not_found }
+      end
     end
 
     private

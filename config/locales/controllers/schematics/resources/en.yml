@@ -1,0 +1,15 @@
+en:  
+  schematics:
+    resources:
+      create:
+        success: "%{model_name} was successfully created"
+        failure: An error occured
+      update:
+        success: "%{model_name} was successfully updated"
+        failure: An error occured
+      destroy:
+        success:
+          destroyed: "%{model_name} was successfully destroyed"
+          restored: "%{model_name} was successfully restored"
+          archived: "%{model_name} was successfully archived"
+        failure: An error occured

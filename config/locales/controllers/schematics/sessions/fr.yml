@@ -2,10 +2,11 @@ fr:
   schematics:
     sessions:
       create:
-        logged_in: Connecté !
-        invalid_credentials: L'e-mail ou le mot de passe est invalide
+        success: Connecté !
+        failure: L'e-mail ou le mot de passe est invalide
       update:
-        profile_updated: Votre profil a été mis à jour avec succès
-        wrong_password: Mauvais mot de passe
+        success: Votre profil a été mis à jour avec succès
+        failure: Mauvais mot de passe
       destroy:
-        logged_out: Déconnecté !
+        success: Déconnecté !
+        failure: Une erreur est survenue

@@ -13,7 +13,7 @@ fr:
       password_resets:
         new: Mot de passe oublié
         edit: Mot de passe oublié
-      schema:
+      resources:
         index: Liste des %{model_name_plural}
         new: Ajouter un %{model_name}
         edit: Editer %{resource}

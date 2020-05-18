@@ -1,5 +1,5 @@
 module Schematics
-  class SchemaController < ApplicationController
+  class ResourcesController < ApplicationController
     include Schematics::Sortable
     include Schematics::Filterable
     include Schematics::Fillable
@@ -29,7 +29,7 @@ module Schematics
       end
 
       def controller_path
-        "schematics/schema"
+        "schematics/resources"
       end
     end
 
@@ -75,56 +75,58 @@ module Schematics
 
     def create
       @resource = model_class.new(resource_params)
-      if @resource.save
+      result = Resources::Create.call(resource: @resource)
+      if result.success?
         respond_to do |format|
           format.html do
-            notice = t('schematics.schema.create.created', model_name: model_name.human)
-            redirect_to @resource, notice: notice
+            redirect_to @resource, notice: t(result.message, model_name: model_name.human)
           end
           format.json { head :created }
         end
       else
         respond_to do |format|
-          format.html { render :new }
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :new
+          end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
 
     def update
-      if @resource.update(resource_params)
+      result = Resources::Update.call(resource: @resource, resource_params: resource_params)
+      if result.success?
         respond_to do |format|
           format.html do
-            notice = t('schematics.schema.update.updated', model_name: model_name.human)
-            redirect_to @resource, notice: notice
+            redirect_to @resource, notice: t(result.message, model_name: model_name.human)
           end
           format.json { respond_with_bip(@resource) }
         end
       else
         respond_to do |format|
-          format.html { render :edit }
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :edit
+          end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
 
     def destroy
-      if params[:really]
-        @resource.really_destroy!
-        action = :destroyed
-      elsif @resource.deleted?
-        @resource.restore(recursive: true)
-        action = :restored
-      else
-        @resource.destroy
-        action = :archived
-      end
-      respond_to do |format|
-        format.html do
-          notice = t(action, model_name: model_name.human, scope: 'schematics.schema.destroy')
-          redirect_to polymorphic_path(model_class), notice: notice
+      result = Resources::Destroy.call(resource: @resource, really: params[:really])
+      if result.success?
+        respond_to do |format|
+          notice = t(result.message, model_name: model_name.human)
+          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.json
         end
-        format.json
+      else
+        respond_to do |format|
+          format.html { redirect_to polymorphic_path(model_class), alert: t(result.message) }
+          format.json { render json: t(result.message), status: :server_error }
+        end
       end
     end
 
@@ -160,7 +162,7 @@ module Schematics
 
     def set_breadcrumb
       model_name_plural = model_name.human.pluralize.downcase
-      title = t('titles.schematics.schema.index', model_name_plural: model_name_plural)
+      title = t('titles.schematics.resources.index', model_name_plural: model_name_plural)
       breadcrumb title, :"#{entity.name.pluralize}_path"
     end
   end

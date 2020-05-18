@@ -4,8 +4,9 @@ en:
       edit:
         user_not_found: User not found
       create:
-        email_sent: Email sent with password reset instructions
-        unknown_email: Unknown email
+        success: Email sent with password reset instructions
+        failure: Unknown email
       update:
-        expired: Password reset has expired
-        password_reset: Password has been reset!
+        success: Password has been reset!
+        failure: Password reset has expired
+        error: An error occured
