@@ -61,7 +61,18 @@ module Schematics
           render pdf: "#{model_name.human.downcase.dasherize}-#{@resource.slug}",
                  disposition: 'attachment',
                  template: 'schematics/application/show',
-                 layout: 'layouts/schematics/pdf.html'
+                 layout: 'layouts/schematics/pdf',
+                 header: {
+                   font_size: 8,
+                   center: @resource,
+                   right: '[page] / [topage]',
+                 },
+                 footer: {
+                   font_size: 8,
+                   left: helpers.setting(:company_name),
+                   center: helpers.setting(:company_address),
+                   right: helpers.setting(:company_registration_number),
+                 }
         end
       end
     end
