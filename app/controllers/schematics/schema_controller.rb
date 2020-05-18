@@ -40,12 +40,14 @@ module Schematics
         order: sorting_params,
         page: params.fetch(:page, 1),
         per_page: params.fetch(:per_page, 25),
+        load: typeahead.nil?,
+        select: typeahead,
         scope_results: (-> (r) { r.with_deleted } if filter_params.key?(:with_deleted))
       )
       @pagy = Pagy.new_from_searchkick(@resources)
       respond_to do |format|
         format.html
-        format.json { render json: @resources }
+        format.json { render json: @resources.map(&typeahead).uniq }
         format.csv  { render csv:  @resources }
         format.xls  { render xls:  @resources }
       end

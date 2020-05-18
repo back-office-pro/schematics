@@ -1,10 +1,6 @@
 //= require twitter/typeahead
 
-const icons = {};
-
-<% Schematics::SCHEMA.entities.each do |entity| %>
-    icons.<%= entity.name.pluralize %> = "<%= entity.icon.to_s.dasherize %>";
-<% end %>
+const icons = { <%= Schematics::SCHEMA.entities.map { |entity| "#{entity.name.pluralize}: '#{entity.icon.to_s.dasherize}'"}.join(', ') %> };
 
 const findDescriptor = (result) => {
     if ($.type(result) === 'object') {
@@ -23,19 +19,17 @@ $(document).on('turbolinks:load', function() {
             wildcard: "%QUERY",
             transport: function (options, onSuccess, onError) {
                 const scope = $(document.activeElement).attr('name');
+                const element = scope.match(/filter\[(\w+)\]/)[1];
                 const searchParams = new URLSearchParams(window.location.search);
                 const [url, query] = options.url.split('?__FIELD__=');
                 searchParams.set(scope, decodeURI(query));
                 searchParams.delete('page');
                 searchParams.delete('per_page');
                 options.url = url + '?' + searchParams;
+                options.headers = { Typeahead: element };
                 $.ajax(options)
                     .done(function(data, textStatus, request) { onSuccess(data); })
                     .fail(function(request, textStatus, errorThrown) { onError(errorThrown); });
-            },
-            transform: function(response) {
-                const name = $(document.activeElement).attr('id');
-                return response.map(field => ({ __FIELD__: findDescriptor(field[name]) }));
             }
         }
     });
@@ -108,7 +102,6 @@ $(document).on('turbolinks:load', function() {
             },
             {
                 source: filterSource,
-                display: '__FIELD__',
                 templates: {
                     notFound: () => `
                         <div class="tt-suggestion tt-selectable text-truncate">
@@ -125,7 +118,7 @@ $(document).on('turbolinks:load', function() {
                     suggestion: (item) => `
                         <div class="tt-suggestion tt-selectable text-truncate">
                             <i class="fa fa-search fa-fw text-dark mr-2"></i>
-                            ${item.__FIELD__}
+                            ${item}
                         </div>
                     `
                 }
