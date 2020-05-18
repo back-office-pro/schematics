@@ -30,7 +30,7 @@ module Schematics
       when MiniMagick::Error
         I18n.t('errors.messages.image_metadata_missing').humanize
       when ActiveStorage::FileNotFoundError
-        I18n.t('titles.schematics.schema.not_found')
+        I18n.t('titles.schematics.resources.not_found')
       end
     end
   end
