@@ -10,6 +10,7 @@ require 'paranoia'
 require 'paper_trail'
 require 'rails'
 require 'action_controller'
+require 'binding_of_caller'
 require 'searchkick'
 require 'rack/attack'
 require 'swagger/docs'
@@ -126,7 +127,6 @@ module Schematics
   module Patches
     module Rails
       module Generators
-        autoload :Actions,            'schematics/patches/rails/generators/actions'
         autoload :GeneratedAttribute, 'schematics/patches/rails/generators/generated_attribute'
       end
     end
