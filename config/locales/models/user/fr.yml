@@ -10,6 +10,7 @@ fr:
         first_name: Prénom
         full_name: Nom complet
         last_name: Nom
+        avatar: Avatar
         locale: Langue
         password: Mot de passe
         password_confirmation: Confirmation mot de passe
