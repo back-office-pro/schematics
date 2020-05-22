@@ -27,6 +27,11 @@ module Schematics
       @entities.find { |entity| entity.name == name }
     end
 
+    def load_routes
+      context = binding.of_caller(2).method(:eval)
+      routes.each(&context)
+    end
+
     def generate
       @entities.sort_by(&:weight).reverse.map(&:generate).flatten.each(&method(:system))
     end
@@ -55,6 +60,10 @@ module Schematics
       file_path = File.expand_path("../../spec/data.json", __dir__)
       file = File.read(file_path)
       JSON.parse(file, symbolize_names: true)
+    end
+
+    def routes
+      @entities.sort_by(&:weight).reverse.map(&:route)
     end
 
     def add_inverse_descriptor_to_association_attributes
