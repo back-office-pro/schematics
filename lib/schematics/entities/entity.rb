@@ -67,18 +67,11 @@ module Schematics
         has_many_and_through_associations.size
       end
 
-      def generate_options
-        []
-      end
-
       def generate
         [
-          "rails generate scaffold " \
-            "#{name} " \
-            "#{attributes.map(&:to_s).join(' ')} " \
-            "#{generate_options.join(' ')}",
-          "rails generate migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
-          "rails generate migration add_slug_to_#{name.pluralize} slug:string:unique:true",
+          "rails g scaffold #{name} #{attributes.map(&:to_s).join(' ')} --skip-resource-route",
+          "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
+          "rails g migration add_slug_to_#{name.pluralize} slug:string:unique:true",
         ]
       end
 
@@ -122,6 +115,10 @@ module Schematics
         name.camelize
       end
 
+      def model_elements
+        [self, descriptor, search_data] + elements + validates
+      end
+
       def search_data
         <<~RUBY
           def search_data
@@ -137,8 +134,20 @@ module Schematics
         RUBY
       end
 
-      def model_elements
-        [self, descriptor, search_data] + elements + validates
+      def route
+        <<~RUBY
+          resources :#{name.pluralize} do
+            member do
+              delete :archive
+              delete :restore
+            end
+            collection do
+              post :bulk_insert
+              get :import
+              get :autocomplete
+            end
+          end
+        RUBY
       end
 
       def to_str

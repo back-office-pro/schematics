@@ -1,12 +1,11 @@
 module Schematics
   module Entities
     class Singleton < Entity
-      def generate_options
-        super << "--skip-resource-route"
-      end
-
-      def generate
-        super << "rails generate singleton_resource_route #{name}"
+      def route
+        <<~RUBY
+          resource :#{name.pluralize}, only: [:show, :edit, :update]
+          resolve("#{class_name}") { [:#{name}] }
+        RUBY
       end
 
       def to_str
