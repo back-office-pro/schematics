@@ -12,9 +12,5 @@ module Schematics
         value.try(:regexize) || value
       end
     end
-
-    def typeahead
-      request.headers['Typeahead']&.to_sym
-    end
   end
 end
