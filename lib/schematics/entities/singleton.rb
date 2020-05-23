@@ -4,7 +4,7 @@ module Schematics
       def route
         <<~RUBY
           resource :#{name.pluralize}, only: [:show, :edit, :update]
-          resolve("#{class_name}") { [:#{name}] }
+          resolve("#{class_name}") { [:#{name.pluralize}] }
         RUBY
       end
 
