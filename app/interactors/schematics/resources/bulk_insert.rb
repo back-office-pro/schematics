@@ -14,6 +14,7 @@ module Schematics
         CSV.foreach(@file, headers: true).with_index(1) do |row, line|
           row = row.to_h.transform_keys(&method(:get_attribute))#.transform_values(&method(:get_value))
           resource = @model_class.new(row)
+          resource.paper_trail_event = :import
           result = Create.call(resource: resource)
           next if result.success?
           @errors[line] = resource.errors

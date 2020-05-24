@@ -5,6 +5,7 @@ module Schematics
 
       before do
         @resource = context.resource
+        @resource.paper_trail_event = :restore
       end
 
       def call
