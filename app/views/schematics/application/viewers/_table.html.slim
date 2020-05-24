@@ -39,7 +39,7 @@
                 .btn-group.enabled
                   - if resource.deleted?
                     = link_to fa_icon(:trash_restore),
-                      main_app.polymorphic_path(resource),
+                      main_app.polymorphic_path(resource, action: :restore),
                       method: :delete,
                       class: "btn btn-danger btn-sm",
                       data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.restore') }
@@ -49,7 +49,7 @@
                       data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.edit') } do
                       = fa_icon :edit
                     = link_to fa_icon(:archive),
-                      main_app.polymorphic_path(resource),
+                      main_app.polymorphic_path(resource, action: :archive),
                       method: :delete,
                       class: "btn btn-danger btn-sm",
                       data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.archive') }

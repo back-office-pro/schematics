@@ -8,8 +8,14 @@ fr:
         success: "%{model_name} a été modifié avec succès"
         failure: Une erreur est survenue
       destroy:
-        success:
-          destroyed: "%{model_name} a été supprimé avec succès"
-          restored: "%{model_name} a été restauré avec succès"
-          archived: "%{model_name} a été archivé avec succès"
+        success: "%{model_name} a été supprimé avec succès"
         failure: Une erreur est survenue
+      archive:
+        success: "%{model_name} a été archivé avec succès"
+        failure: Une erreur est survenue
+      restore:
+        success: "%{model_name} a été restauré avec succès"
+        failure: Une erreur est survenue
+      import:
+        success: "Les %{model_name_plural} ont été importés avec succès"
+        failure: Une ou plusieurs erreurs sont survenus durant l'importation des %{model_name_plural}

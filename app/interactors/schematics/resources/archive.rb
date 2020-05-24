@@ -1,6 +1,6 @@
 module Schematics
   module Resources
-    class Destroy
+    class Archive
       include Interactor
 
       before do
@@ -8,7 +8,7 @@ module Schematics
       end
 
       def call
-        if @resource.really_destroy!
+        if @resource.destroy
           context.message = ".success"
         else
           context.fail!(message: ".failure")

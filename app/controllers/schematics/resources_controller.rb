@@ -1,12 +1,13 @@
 module Schematics
   class ResourcesController < ApplicationController
+    include Schematics::Fillable
     include Schematics::Sortable
     include Schematics::Filterable
-    include Schematics::Fillable
+    include Schematics::Searchable
     before_action :set_paper_trail_whodunnit
     before_action :authorize
     before_action :set_breadcrumb
-    before_action :set_resource, only: [:show, :edit, :update, :destroy]
+    before_action :set_resource, only: [:show, :edit, :update, :destroy, :archive, :restore]
     after_action { pagy_headers_merge(@pagy) if @pagy }
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     delegate :model_class, to: :class
@@ -34,20 +35,13 @@ module Schematics
     end
 
     def index
-      @resources = model_class.search(
-        includes: entity.includes,
-        where: filter_params.except(:with_deleted),
-        order: sorting_params,
-        page: params.fetch(:page, 1),
-        per_page: params.fetch(:per_page, 25),
-        load: typeahead.nil?,
-        select: typeahead,
-        scope_results: (-> (r) { r.with_deleted } if filter_params.key?(:with_deleted))
-      )
+      page = params.fetch(:page, 1)
+      per_page = params.fetch(:per_page, 25)
+      @resources = model_class.search search_params.merge(page: page, per_page: per_page)
       @pagy = Pagy.new_from_searchkick(@resources)
       respond_to do |format|
         format.html
-        format.json { render json: @resources.map(&typeahead).uniq }
+        format.json { render json: @resources }
         format.csv  { render csv:  @resources }
         format.xls  { render xls:  @resources }
       end
@@ -82,6 +76,32 @@ module Schematics
     end
 
     def edit
+    end
+
+    def import
+    end
+
+    def bulk_insert
+      file = params.require(:import).permit(:file)
+      result = Resources::BulkInsert.call(file: file, model_class: model_class)
+      @errors = result.errors
+      if result.success?
+        respond_to do |format|
+          format.html do
+            notice = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
+            redirect_to polymorphic_path(model_class), notice: notice
+          end
+          format.json { head :created }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :import
+          end
+          format.json { render json: @errors, status: :unprocessable_entity }
+        end
+      end
     end
 
     def create
@@ -126,7 +146,7 @@ module Schematics
     end
 
     def destroy
-      result = Resources::Destroy.call(resource: @resource, really: params[:really])
+      result = Resources::Destroy.call(resource: @resource)
       if result.success?
         respond_to do |format|
           notice = t(result.message, model_name: model_name.human)
@@ -139,6 +159,44 @@ module Schematics
           format.json { render json: t(result.message), status: :server_error }
         end
       end
+    end
+
+    def archive
+      result = Resources::Archive.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          notice = t(result.message, model_name: model_name.human)
+          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to polymorphic_path(model_class), alert: t(result.message) }
+          format.json { render json: t(result.message), status: :server_error }
+        end
+      end
+    end
+
+    def restore
+      result = Resources::Restore.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          notice = t(result.message, model_name: model_name.human)
+          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to polymorphic_path(model_class), alert: t(result.message) }
+          format.json { render json: t(result.message), status: :server_error }
+        end
+      end
+    end
+
+    def autocomplete
+      field = params[:field].to_sym
+      @resources = model_class.search search_params.merge(load: false, select: field)
+      render json: @resources.map(&field).uniq
     end
 
     def not_found
@@ -159,7 +217,7 @@ module Schematics
     protected
 
     def set_resource
-      scope = (action_name.to_sym == :destroy) ? :with_deleted : :unscoped
+      scope = request.delete? ? :with_deleted : :unscoped
       @resource = case entity
                   when Entities::Singleton
                     model_class.instance

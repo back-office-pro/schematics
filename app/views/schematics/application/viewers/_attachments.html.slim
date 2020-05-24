@@ -30,7 +30,7 @@
                   td.text-nowrap.text-center
                     .btn-group
                       = link_to fa_icon(:trash),
-                        main_app.polymorphic_path(attachment),
+                        main_app.polymorphic_path(attachment, action: :archive),
                         method: :delete,
                         class: "btn btn-danger btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: t('schematics.application.show.buttons.destroy') }

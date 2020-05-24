@@ -30,7 +30,7 @@
                         model_class: association.class_name.constantize,
                         collapsed: false
       .modal-footer.bg-light class=(resources.any? || attachments.any? ? 'justify-content-start' : 'justify-content-center')
-        = link_to polymorphic_path(@resource, really: true),
+        = link_to polymorphic_path(@resource),
                   method: :delete,
                   class: "btn btn-primary btn-sm btn-icon-split" do
                     span.icon= fa_icon :check

@@ -8,8 +8,14 @@ en:
         success: "%{model_name} was successfully updated"
         failure: An error occured
       destroy:
-        success:
-          destroyed: "%{model_name} was successfully destroyed"
-          restored: "%{model_name} was successfully restored"
-          archived: "%{model_name} was successfully archived"
+        success: "%{model_name} was successfully destroyed"
         failure: An error occured
+      archive:
+        success: "%{model_name} was successfully archived"
+        failure: An error occured
+      restore:
+        success: "%{model_name} was successfully restored"
+        failure: An error occured
+      import:
+        success: "%{model_name_plural} were successfully imported"
+        failure: One or more error occured during %{model_name_plural} import

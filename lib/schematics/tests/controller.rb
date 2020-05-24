@@ -112,41 +112,42 @@ module Schematics
                 assert_response :not_found
               end
 
-              test "should really destroy API #{entity.name}" do
+              test "should destroy API #{entity.name}" do
                 assert_difference("#{model_class.name}.count", -1) do
                   login as: :json
                   delete polymorphic_path(@record),
                          headers: authorization_header,
-                         params: { really: true },
                          as: :json
                 end
                 assert_response :success
               end
 
-              test "should really destroy #{entity.name}" do
+              test "should destroy #{entity.name}" do
                 assert_difference("#{model_class.name}.count", -1) do
                   login
-                  delete polymorphic_path(@record), params: { really: true }
+                  delete polymorphic_path(@record)
                 end
                 assert_redirected_to polymorphic_path(model_class)
               end
 
-              test "should unarchive API #{entity.name}" do
+              test "should restore API #{entity.name}" do
                 @record.destroy
                 assert @record.deleted?
                 assert_difference("#{model_class.name}.count") do
                   login as: :json
-                  delete polymorphic_path(@record), headers: authorization_header, as: :json
+                  delete polymorphic_path(@record, action: :restore),
+                         headers: authorization_header,
+                         as: :json
                 end
                 assert_response :success
               end
 
-              test "should unarchive #{entity.name}" do
+              test "should restore #{entity.name}" do
                 @record.destroy
                 assert @record.deleted?
                 assert_difference("#{model_class.name}.count") do
                   login
-                  delete polymorphic_path(@record)
+                  delete polymorphic_path(@record, action: :restore)
                 end
                 assert_redirected_to polymorphic_path(model_class)
               end
@@ -156,7 +157,9 @@ module Schematics
                 refute @record.deleted?
                 assert_difference("#{model_class.name}.count", -1) do
                   login as: :json
-                  delete polymorphic_path(@record), headers: authorization_header, as: :json
+                  delete polymorphic_path(@record, action: :archive),
+                         headers: authorization_header,
+                         as: :json
                 end
                 assert_response :success
               end
@@ -166,7 +169,7 @@ module Schematics
                 refute @record.deleted?
                 assert_difference("#{model_class.name}.count", -1) do
                   login
-                  delete polymorphic_path(@record)
+                  delete polymorphic_path(@record, action: :archive)
                 end
                 assert_redirected_to polymorphic_path(model_class)
               end

@@ -15,18 +15,20 @@ $(document).on('turbolinks:load', function() {
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: `${window.location.pathname}?__FIELD__=%QUERY`,
+            url: `${window.location.pathname}/autocomplete/?__FIELD__=%QUERY`,
             wildcard: "%QUERY",
             transport: function (options, onSuccess, onError) {
                 const scope = $(document.activeElement).attr('name');
                 const element = scope.match(/filter\[(\w+)\]/)[1];
                 const searchParams = new URLSearchParams(window.location.search);
                 const [url, query] = options.url.split('?__FIELD__=');
-                searchParams.set(scope, decodeURI(query));
                 searchParams.delete('page');
                 searchParams.delete('per_page');
+                searchParams.delete('sort');
+                searchParams.set('field', element);
+                searchParams.set(scope, decodeURI(query));
+                searchParams.set('sort', element);
                 options.url = url + '?' + searchParams;
-                options.headers = { Typeahead: element };
                 $.ajax(options)
                     .done(function(data, textStatus, request) { onSuccess(data); })
                     .fail(function(request, textStatus, errorThrown) { onError(errorThrown); });

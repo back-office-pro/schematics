@@ -219,7 +219,6 @@ module Schematics
             notes "This deletes an existing #{name.humanize.downcase}"
             param :header, "Authorization", :string, :required, "Authorization token"
             param :path, :id, :integer, :required, "#{name.humanize} Id"
-            param :query, :really, :boolean, :optional, "Really destroy #{name.humanize.downcase} item (without soft delete)"
             response :unauthorized
             response :success
             response :not_found
