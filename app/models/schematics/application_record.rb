@@ -9,7 +9,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          entity.model_elements.each(&method(:class_eval))
+          entity.load
         end
       end
 

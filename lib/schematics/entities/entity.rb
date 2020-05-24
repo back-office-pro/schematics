@@ -115,8 +115,9 @@ module Schematics
         name.camelize
       end
 
-      def model_elements
-        [self, descriptor, search_data] + elements + validates
+      def load
+        context = binding.of_caller(1).method(:eval)
+        model_elements.each(&context)
       end
 
       def search_data
@@ -248,6 +249,10 @@ module Schematics
       end
 
       private
+
+      def model_elements
+        [self, descriptor, search_data] + elements + validates
+      end
 
       def elasticsearchable_elements
         searchable_elements.map(&:name).map(&:to_sym)
