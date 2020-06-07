@@ -45,6 +45,7 @@ Dependencies choices details.
 + Most recent
 
 ~~kaminari~~
+
 ~~will_paginate~~
 
 ### API JSON
@@ -119,5 +120,7 @@ Dependencies choices details.
 - Not enough personalizable
 
 ~~cleareance~~
+
 ~~sorcery~~
+
 ~~knock~~
