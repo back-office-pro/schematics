@@ -3,6 +3,7 @@ en:
     application:
       viewers:
         table:
+          archives: Archives
           restore: Restore
           edit: Edit
           archive: Archive
