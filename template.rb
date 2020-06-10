@@ -8,7 +8,6 @@ run "bundle install"
 # copy_file "#{Dir.pwd}/../spec/data.json", "data.json"
 
 # Rails commands
-rails_command "generate routes"
 rails_command "generate simple_form:install --bootstrap"
 rails_command "schematics:install:migrations"
 rails_command "schematics:generate"
