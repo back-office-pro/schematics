@@ -56,11 +56,14 @@ module Schematics
       end
 
       def find_field_by_name(name)
-        # TODO
-        # Check how we handle :id, :created_at, :deleted_at, :slug...
-        return Attributes::Attribute.create(self, type: 'date', name: name) if name == 'created_at'
-        return Attributes::Attribute.create(self, type: 'integer', name: name) if name == 'id'
-        fields.find { |field| field.name == name }
+        case name
+        when 'created_at'
+          Attributes::Attribute.create(self, type: 'date', name: name)
+        when 'id'
+          Attributes::Attribute.create(self, type: 'integer', name: name)
+        else
+          fields.find { |field| field.name == name }
+        end
       end
 
       def weight
@@ -118,6 +121,11 @@ module Schematics
       def load
         context = binding.of_caller(1).method(:eval)
         model_elements.each(&context)
+      end
+
+      def viewer
+        return :grid if attachment_attributes.any?(&:image?)
+        :table
       end
 
       def search_data
