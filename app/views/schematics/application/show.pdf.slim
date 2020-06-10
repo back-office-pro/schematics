@@ -13,6 +13,8 @@
           td
             - value = @resource.instance_eval(field.name)
             - case field
+            - when Schematics::Attributes::Address
+              = cell('schematics/google_map', value).()
             - when Schematics::Behaviours::Editable
               = best_in_place @resource,
                               field.name.to_sym,

@@ -152,7 +152,7 @@
                 },
                 {
                     "name": "company_address",
-                    "type": "string"
+                    "type": "address"
                 },
                 {
                     "name": "company_registration_number",

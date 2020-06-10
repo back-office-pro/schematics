@@ -76,6 +76,7 @@ module Schematics
   end
 
   module Attributes
+    autoload :Address,     'schematics/attributes/address'
     autoload :Association, 'schematics/attributes/association'
     autoload :Attachment,  'schematics/attributes/attachment'
     autoload :Attachments, 'schematics/attributes/attachments'
