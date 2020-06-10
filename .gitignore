@@ -4,3 +4,4 @@ pkg/
 spec/dummy
 doc/
 coverage/
+/config/master.key
