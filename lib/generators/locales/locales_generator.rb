@@ -53,9 +53,7 @@ class LocalesGenerator < Rails::Generators::Base
   def client
     @client ||= Google::Cloud::Translate.new(
       version: :v2,
-      key: "AIzaSyDZq17OV7t46iVxVrVweZaPMuMa7tM67PI"
-      # project_id: "schematics-273718",
-      # credentials: File.expand_path('../../../config/google-cloud.json', __dir__),
+      key: "AIzaSyDZq17OV7t46iVxVrVweZaPMuMa7tM67PI" # TODO put in global config
     )
   end
 
