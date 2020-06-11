@@ -3,6 +3,8 @@ fr:
     created_at: date de création
   simple_form:
     labels:
+      defaults:
+        _destroy: Supprimer ?
       user:
         email: E-mail
         password: Mot de passe

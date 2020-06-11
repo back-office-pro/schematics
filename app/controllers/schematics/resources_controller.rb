@@ -222,7 +222,7 @@ module Schematics
                   when Entities::Singleton
                     model_class.instance
                   when Entities::Entity
-                    model_class.send(scope).find(params[:id])
+                    model_class.send(scope).includes(entity.includes).find(params[:id])
                   end
       unless request.path.start_with? polymorphic_path(@resource)
         return redirect_to @resource, status: :moved_permanently

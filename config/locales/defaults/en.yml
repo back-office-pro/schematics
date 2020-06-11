@@ -1,3 +1,7 @@
 en:
   attributes:
     created_at: creation date
+  simple_form:
+    labels:
+      defaults:
+        _destroy: Delete?

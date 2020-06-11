@@ -6,7 +6,10 @@ module Schematics
       end
 
       def permitted_param
-        { super => [] }
+        [
+          { super.first => [] },
+          super.second,
+        ]
       end
 
       def permitted_json_param
@@ -36,6 +39,7 @@ module Schematics
       def to_str
         <<~RUBY
           has_many_base64_attached :#{@name}
+          accepts_nested_attributes_for :#{association_name}, allow_destroy: true
         RUBY
       end
     end

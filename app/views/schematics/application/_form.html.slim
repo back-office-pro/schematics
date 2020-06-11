@@ -13,12 +13,22 @@
       = f.input attribute.name.to_sym,
                 as: :radio_buttons,
                 collection: attribute.input_collection.map(&:reverse)
-    - when Schematics::Attributes::Attachment
+    - when Schematics::Attributes::Attachments
       = f.input attribute.name.to_sym,
                 as: :file,
                 required: attribute.required? && resource.new_record?,
                 hint: cell('schematics/validators', attribute).(),
-                input_html: { multiple: attribute.is_a?(Schematics::Attributes::Attachments) }
+                input_html: { multiple: true }
+    - when Schematics::Attributes::Attachment
+      - attachment = resource.send(attribute.name.to_sym)
+      - if attachment.attached?
+        = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
+          = fields.hidden_field :id, value: attachment.id
+          = fields.input :_destroy, as: :boolean, wrapper_html: { class: "float-right m-0 text-dark" } 
+      = f.input attribute.name.to_sym,
+                as: :file,
+                required: attribute.required? && resource.new_record?,
+                hint: cell('schematics/validators', attribute).()
     - when Schematics::Attributes::Digest
       = f.input attribute.name.to_sym, required: resource.new_record?
       = f.input :"#{attribute.name}_confirmation", required: resource.new_record?

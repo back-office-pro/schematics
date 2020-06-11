@@ -29,11 +29,14 @@
                 tr data-href=main_app.polymorphic_path(attachment)
                   td.text-nowrap.text-center
                     .btn-group
-                      = link_to fa_icon(:trash),
-                        main_app.polymorphic_path(attachment, action: :archive),
-                        method: :delete,
-                        class: "btn btn-danger btn-sm",
-                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.show.buttons.destroy') }
+                      = form_for @resource do |f|
+                        = f.fields_for :"#{attachment.name}_attachments_attributes" do |fields|
+                          = fields.hidden_field :id, value: attachment.id
+                          = fields.hidden_field :_destroy, value: true
+                        = f.button :button,
+                                    class: "btn btn-danger btn-sm",
+                                    data: { toggle: "tooltip", placement: "top", title: I18n.t('schematics.application.show.buttons.destroy') } do
+                                      = fa_icon(:trash)
                   td.text-nowrap.text-center.align-middle
                     = attachment.filename
                   td.text-nowrap.text-center.align-middle

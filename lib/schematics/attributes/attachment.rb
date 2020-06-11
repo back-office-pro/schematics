@@ -5,19 +5,28 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
-
       delegate :default, :json_default, to: :dummy
 
       def api_param_type
         "file"
       end
 
+      def permitted_param
+        [
+          super,
+          :"#{association_name}_attributes" => [:id, :_destroy],
+        ]
+      end
+
       def permitted_json_param
-        { super => [:data, :filename, :content_type] }
+        [
+          { permitted_param.first => [:data, :filename, :content_type] },
+          permitted_param.second,
+        ]
       end
 
       def preload
-        { [name, type].join("_").to_sym => :blob }
+        { association_name => :blob }
       end
 
       def search_data
@@ -29,6 +38,7 @@ module Schematics
       def to_str
         <<~RUBY
           has_one_base64_attached :#{@name}
+          accepts_nested_attributes_for :#{association_name}, allow_destroy: true
         RUBY
       end
 
@@ -79,7 +89,15 @@ module Schematics
         end
       end
 
+      def image?
+        icon == :file_image
+      end
+
       protected
+
+      def association_name
+        [name, type].join('_').to_sym
+      end
 
       def dummy
         @dummy ||= Tests::Dummy.new(extension)
