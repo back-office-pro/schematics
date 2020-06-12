@@ -21,7 +21,7 @@
                 input_html: { multiple: true }
     - when Schematics::Attributes::Attachment
       - attachment = model.send(attribute.name.to_sym)
-      - if attachment.attached?
+      - if !new_record? && attachment.attached?
         = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy, as: :boolean, wrapper_html: { class: "float-right m-0 text-dark" } 
