@@ -21,7 +21,7 @@
                 input_html: { multiple: true }
     - when Schematics::Attributes::Attachment
       - attachment = model.send(attribute.name.to_sym)
-      - if !new_record? && attachment.attached?
+      - if attachment.attached? && attachment.persisted?
         = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy, as: :boolean, wrapper_html: { class: "float-right m-0 text-dark" } 
@@ -30,8 +30,8 @@
                 required: attribute.required? && new_record?,
                 hint: cell('schematics/validators', attribute).()
     - when Schematics::Attributes::Digest
-      = f.input attribute.name.to_sym, required: new_record?
-      = f.input :"#{attribute.name}_confirmation", required: new_record?
+      = f.input attribute.name.to_sym, required: new_record?, input_html: { autocomplete: "new-password" }
+      = f.input :"#{attribute.name}_confirmation", required: new_record?, input_html: { autocomplete: "new-password" }
     - else
       = f.input attribute.name.to_sym
   - entity.belongs_to_attributes.each do |attribute|

@@ -2,9 +2,10 @@ module Schematics
   class FormCell < Cell::ViewModel
     self.view_paths = ["#{Schematics::Engine.root}/app/cells"]
     include FontAwesome5::Rails::IconHelper
-    include SimpleForm::ActionViewExtensions::FormHelper
     include ActionView::Helpers::TranslationHelper
     include ActionView::Helpers::FormOptionsHelper
+    include SimpleForm::ActionViewExtensions::FormHelper
+    include ClientSideValidations::ActionView::Helpers::FormHelper
     property :new_record?
     delegate :class, to: :model, prefix: true
     delegate :entity, to: :model_class
