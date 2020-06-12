@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bootswatch", "~> 4.3.1"
   spec.add_dependency "wkhtmltopdf-binary", "~> 0.12.5"
   spec.add_dependency "wicked_pdf", "~> 2.0.2"
-  spec.add_dependency "slim", "~> 4.0.1"
+  spec.add_dependency "slim", "~> 3.0.9"
   spec.add_dependency "rails-i18n", "~> 6.0.0"
   spec.add_dependency "font_awesome5_rails", "~> 0.9.0"
   spec.add_dependency "friendly_id", "~> 5.3.0"
@@ -75,7 +75,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bootstrap-email", "~> 0.3.1"
   spec.add_dependency "interactor", "~> 3.1.2"
   spec.add_dependency "cells-rails", "~> 0.1.0"
-  spec.add_dependency "cells-slim", "~> 0.1.1"
+  spec.add_dependency "cells-slim", "~> 0.0.6"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "README.md"]
