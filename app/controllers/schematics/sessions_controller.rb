@@ -1,5 +1,6 @@
 module Schematics
   class SessionsController < ApplicationController
+    include Schematics::Fillable
     before_action :authorize, only: [:show, :edit, :update]
     layout "schematics/auth", only: [:new, :create]
     swagger_controller :sessions, "Sessions Management"
@@ -27,7 +28,7 @@ module Schematics
 
     def create
       result = Sessions::Create.call(
-        user_params: user_params,
+        user_params: resource_params,
         cookies: cookies,
         remember_me: params[:user][:remember_me]
       )
@@ -49,7 +50,7 @@ module Schematics
 
     def update
       result = Sessions::Update.call(
-        resource_params: user_params,
+        resource_params: resource_params,
         resource: current_user,
         password: params[:user][:current_password]
       )
@@ -83,10 +84,6 @@ module Schematics
     end
 
     private
-
-    def user_params
-      params.require(:user).permit(*entity.permitted_params)
-    end
 
     def model_class
       User

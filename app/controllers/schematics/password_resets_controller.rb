@@ -1,15 +1,17 @@
 module Schematics
   class PasswordResetsController < ApplicationController
+    include Schematics::Fillable
     skip_before_action :authorize
     before_action :set_user, only: [:edit, :update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     layout "schematics/auth"
+    delegate :entity, to: :model_class
 
     def new
     end
 
     def create
-      result = PasswordResets::Create.call(user_params)
+      result = PasswordResets::Create.call(resource_params)
       if result.success?
         respond_to do |format|
           format.html { redirect_to login_path, notice: t(result.message) }
@@ -30,7 +32,7 @@ module Schematics
     end
 
     def update
-      result = PasswordResets::Update.call(user: @user, user_params: user_params)
+      result = PasswordResets::Update.call(user: @user, user_params: resource_params)
       if result.success?
         respond_to do |format|
           format.html { redirect_to login_path, notice: t(result.message) }
@@ -53,12 +55,12 @@ module Schematics
 
     private
 
-    def set_user
-      @user = User.find_by_password_reset_token!(params[:id])
+    def model_class
+      User
     end
 
-    def user_params
-      params.require(:user).permit(*User.entity.permitted_params)
+    def set_user
+      @user = model_class.find_by_password_reset_token!(params[:id])
     end
   end
 end
