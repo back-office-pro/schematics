@@ -31,7 +31,7 @@
         - if @resources.empty?
           tr
             td.text-center.pt-4 colspan="100%"
-              = render 'empty'
+              = cell('schematics/empty').()
         - else
           - @resources.each do |resource|
             tr class=('disabled' if resource.deleted?) data-href=(main_app.polymorphic_path(resource) unless resource.deleted?)

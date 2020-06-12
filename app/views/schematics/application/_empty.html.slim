@@ -1,7 +1,0 @@
-= fa_icon :database, size: '6x'
-h4.mt-4= t('.title')
-- if defined?(suggestions) && suggestions.any?
-  h5.mt-2
-    = t('.did_you_mean')
-    - suggestions.each do |suggestion|
-      = link_to suggestion, search_path(suggestion), class: "ml-1 text-success font-italic font-weight-bold"
