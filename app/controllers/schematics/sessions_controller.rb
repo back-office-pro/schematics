@@ -3,7 +3,8 @@ module Schematics
     before_action :authorize, only: [:show, :edit, :update]
     layout "schematics/auth", only: [:new, :create]
     swagger_controller :sessions, "Sessions Management"
-    helper_method :entity
+    delegate :entity, to: :model_class
+    helper_method :attributes
 
     def new
     end
@@ -87,8 +88,16 @@ module Schematics
       params.require(:user).permit(*entity.permitted_params)
     end
 
-    def entity
-      User.entity
+    def model_class
+      User
+    end
+
+    def current_password_attribute
+      Schematics::Attributes::Attribute.create(entity, type: 'string', name: 'current_password')
+    end
+
+    def attributes
+      entity.fillable_attributes.insert(2, current_password_attribute)
     end
   end
 end

@@ -5,4 +5,4 @@
       = fa_icon :edit, class: "mr-3 ml-3 fa-lg align-middle"
       span.align-middle= title
   .card-body
-    = render 'form', resource: @resource
+    = cell('schematics/form', @resource).()

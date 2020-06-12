@@ -1,5 +1,5 @@
-= simple_form_for resource, validate: true, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-  - (entity.fillable_attributes - entity.belongs_to_attributes).each do |attribute|
+= simple_form_for model, url: url, validate: true, defaults: { input_html: { class: "bg-light border-0" } } do |f|
+  - (attributes - entity.belongs_to_attributes).each do |attribute|
     - case attribute
     - when Schematics::Attributes::Date
       = f.input attribute.name.to_sym, as: :date, html5: true
@@ -16,30 +16,30 @@
     - when Schematics::Attributes::Attachments
       = f.input attribute.name.to_sym,
                 as: :file,
-                required: attribute.required? && resource.new_record?,
+                required: attribute.required? && new_record?,
                 hint: cell('schematics/validators', attribute).(),
                 input_html: { multiple: true }
     - when Schematics::Attributes::Attachment
-      - attachment = resource.send(attribute.name.to_sym)
+      - attachment = model.send(attribute.name.to_sym)
       - if attachment.attached?
         = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy, as: :boolean, wrapper_html: { class: "float-right m-0 text-dark" } 
       = f.input attribute.name.to_sym,
                 as: :file,
-                required: attribute.required? && resource.new_record?,
+                required: attribute.required? && new_record?,
                 hint: cell('schematics/validators', attribute).()
     - when Schematics::Attributes::Digest
-      = f.input attribute.name.to_sym, required: resource.new_record?
-      = f.input :"#{attribute.name}_confirmation", required: resource.new_record?
+      = f.input attribute.name.to_sym, required: new_record?
+      = f.input :"#{attribute.name}_confirmation", required: new_record?
     - else
       = f.input attribute.name.to_sym
   - entity.belongs_to_attributes.each do |attribute|
     = f.association attribute.name.to_sym,
-                    prompt: t('.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
+                    prompt: t('schematics.application.form.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
   = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
     span.icon= fa_icon :check
-    span.text= t('.buttons.confirm')
-  = link_to polymorphic_path(model_class), class: "btn btn-danger btn-sm btn-icon-split" do
+    span.text= t('schematics.application.form.buttons.confirm')
+  = link_to cancel_path, class: "btn btn-danger btn-sm btn-icon-split" do
     span.icon= fa_icon :times
-    span.text= t('.buttons.cancel')
+    span.text= t('schematics.application.form.buttons.cancel')
