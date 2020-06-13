@@ -11,9 +11,9 @@ module Schematics
         def create(entity, name:, function:, options: {})
           tokens = Tokens::Tokenizer.tokenize(function, entity.name.pluralize)
           if tokens.any_is_a?(Tokens::Operator)
-            Virtuals::Calculation.new(entity, name, tokens, options)
+            Calculation.new(entity, name, tokens, options)
           else
-            Virtuals::Concatenation.new(entity, name, tokens, options)
+            Concatenation.new(entity, name, tokens, options)
           end
         end
       end
