@@ -5,6 +5,12 @@ module Schematics
       delegate :entity, :required?, to: :@belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
 
+      class << self
+        def create(belongs_to, type:, **args)
+          Associations.const_get(type.camelize.to_sym).new(belongs_to)
+        end
+      end
+
       def initialize(belongs_to)
         @belongs_to = belongs_to
       end

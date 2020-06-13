@@ -63,7 +63,7 @@ module Schematics
       end
 
       def create_inverse_association
-        Associations.const_get(inverse_association[:type].camelize.to_sym).new(self)
+        Associations::Association.create(self, inverse_association)
       end
 
       def input_type
