@@ -17,7 +17,7 @@ html
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
         .col.bg-primary.sidebar
-          = render 'sidebar'
+          = cell('schematics/sidebar').()
         .col.bg-light.content
           nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top
             = form_tag schematics.searches_path, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do

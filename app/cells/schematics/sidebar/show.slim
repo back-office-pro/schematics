@@ -1,21 +1,21 @@
 ul.nav.nav-light.flex-column.sidebar-sticky
   li.nav-item.mb-4
     = link_to setting(:company_name),
-      schematics.root_path,
+      root_path,
       class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
-  - Schematics::SCHEMA.entities.each do |entity|
+  - entities.each do |entity|
     - model_class = entity.class_name.constantize
     li.nav-item.text-center.mw-100.mb-2
-      = active_link_to main_app.polymorphic_path(model_class),
+      = active_link_to polymorphic_path(model_class),
         class: "nav-link p-0 m-0 text-secondary text-nowrap" do
         = fa_icon entity.icon, size: "2x"
         .mt-2.d-none.d-md-block= model_class.model_name.human.pluralize
-    - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(main_app.polymorphic_path(model_class))
+    - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(polymorphic_path(model_class))
       - entity.enum_attributes.each do |attribute|
         li.nav-item.text-center.mw-100.mb-2.px-3.d-none.d-md-block
           ul.list-group
             - attribute.values.each do |value|
-              = active_link_to main_app.polymorphic_path(model_class, "by_#{attribute.name}": value),
+              = active_link_to polymorphic_path(model_class, "by_#{attribute.name}": value),
                                active: :exact,
                                class: "nav-link p-0 m-0 text-secondary text-truncate segment" do
                 li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-transparent
