@@ -4,6 +4,8 @@ module Schematics
     include FontAwesome5::Rails::IconHelper
     include ActionView::Helpers::TranslationHelper
     include ActionView::Helpers::FormOptionsHelper
+    include ActionText::TagHelper
+    include ::Rails.application.routes.mounted_helpers
     include SimpleForm::ActionViewExtensions::FormHelper
     include ClientSideValidations::ActionView::Helpers::FormHelper
     property :new_record?
