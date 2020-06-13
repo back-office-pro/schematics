@@ -1,7 +1,7 @@
 module Schematics
   module Filters
     class FilterCell < Cell::ViewModel
-      self.view_paths = ["#{Schematics::Engine.root}/app/cells"]
+      self.view_paths = ["#{Engine.root}/app/cells"]
 
       def name
         model.try(:name) || model

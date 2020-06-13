@@ -1,6 +1,6 @@
 module Schematics
   class FormCell < Cell::ViewModel
-    self.view_paths = ["#{Schematics::Engine.root}/app/cells"]
+    self.view_paths = ["#{Engine.root}/app/cells"]
     include FontAwesome5::Rails::IconHelper
     include ActionView::Helpers::TranslationHelper
     include ActionView::Helpers::FormOptionsHelper

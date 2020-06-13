@@ -1,9 +1,9 @@
 module Schematics
   class ResourcesController < ApplicationController
-    include Schematics::Fillable
-    include Schematics::Sortable
-    include Schematics::Filterable
-    include Schematics::Searchable
+    include Fillable
+    include Sortable
+    include Filterable
+    include Searchable
     before_action :set_paper_trail_whodunnit
     before_action :authorize
     before_action :set_breadcrumb
@@ -222,7 +222,7 @@ module Schematics
                   when Entities::Singleton
                     model_class.instance
                   when Entities::Entity
-                    model_class.send(scope).includes(entity.includes).find(params[:id])
+                    model_class.send(scope).find(params[:id])
                   end
       unless request.path.start_with? polymorphic_path(@resource)
         return redirect_to @resource, status: :moved_permanently

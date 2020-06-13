@@ -20,7 +20,7 @@ module Schematics
                    virtuals: [])
           args = [name, icon.to_sym, descriptor, attributes, virtuals]
           return new(*args) if type.nil?
-          Schematics::Entities.const_get(type.camelize.to_sym).new(*args)
+          Entities.const_get(type.camelize.to_sym).new(*args)
         end
       end
 
@@ -39,8 +39,8 @@ module Schematics
         mod = method&.camelize&.to_sym
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
-        elsif Schematics::Behaviours.const_defined?(constant)
-          send(method.to_sym).select_is_a?(Schematics::Behaviours.const_get(constant))
+        elsif Behaviours.const_defined?(constant)
+          send(method.to_sym).select_is_a?(Behaviours.const_get(constant))
         else
           super
         end
@@ -51,7 +51,7 @@ module Schematics
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant) ||
-        Schematics::Behaviours.const_defined?(constant) ||
+        Behaviours.const_defined?(constant) ||
         super
       end
 

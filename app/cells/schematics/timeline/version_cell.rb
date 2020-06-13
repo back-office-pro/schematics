@@ -1,7 +1,7 @@
 module Schematics
   module Timeline
     class VersionCell < Cell::ViewModel
-      self.view_paths = ["#{Schematics::Engine.root}/app/cells"]
+      self.view_paths = ["#{Engine.root}/app/cells"]
       include ActionView::Helpers::DateHelper
       property :user
       property :event

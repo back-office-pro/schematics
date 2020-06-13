@@ -5,7 +5,7 @@ module Schematics
 
       class << self
         def create(entity, name:, type:, options: {})
-          Schematics::Attributes.const_get(type.camelize.to_sym).new(entity, name, options)
+          Attributes.const_get(type.camelize.to_sym).new(entity, name, options)
         end
       end
 

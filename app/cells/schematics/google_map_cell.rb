@@ -1,6 +1,6 @@
 module Schematics
   class GoogleMapCell < Cell::ViewModel
-    self.view_paths = ["#{Schematics::Engine.root}/app/cells"]
+    self.view_paths = ["#{Engine.root}/app/cells"]
 
     def url
       "https://www.google.com/maps/embed/v1/place?q=#{address}&key=#{api_key}"
@@ -13,7 +13,7 @@ module Schematics
     end
 
     def api_key
-      Schematics::Engine.credentials.gcloud[:api_key]
+      Engine.credentials.gcloud[:api_key]
     end
   end
 end

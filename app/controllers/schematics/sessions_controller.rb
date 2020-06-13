@@ -1,6 +1,6 @@
 module Schematics
   class SessionsController < ApplicationController
-    include Schematics::Fillable
+    include Fillable
     before_action :authorize, only: [:show, :edit, :update]
     layout "schematics/auth", only: [:new, :create]
     swagger_controller :sessions, "Sessions Management"
@@ -90,7 +90,7 @@ module Schematics
     end
 
     def current_password_attribute
-      Schematics::Attributes::Attribute.create(entity, type: 'string', name: 'current_password')
+      Attributes::Attribute.create(entity, type: 'string', name: 'current_password')
     end
 
     def attributes

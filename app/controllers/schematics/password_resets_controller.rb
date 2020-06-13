@@ -1,6 +1,6 @@
 module Schematics
   class PasswordResetsController < ApplicationController
-    include Schematics::Fillable
+    include Fillable
     skip_before_action :authorize
     before_action :set_user, only: [:edit, :update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found

@@ -16,7 +16,7 @@ module Schematics
     config.action_mailer.delivery_method = :sendmail
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
     config.action_mailer.default_options = { from: 'localhost' }
-    config.action_mailer.preview_path = Schematics::Engine.root.join('spec', 'mailers', 'previews')
+    config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
 
     # i18n
     config.i18n.default_locale = :fr
@@ -25,8 +25,8 @@ module Schematics
 
     def credentials
       ActiveSupport::EncryptedConfiguration.new(
-        config_path: Schematics::Engine.root.join('config', 'credentials.yml.enc'),
-        key_path: Schematics::Engine.root.join('config', 'master.key'),
+        config_path: root.join('config', 'credentials.yml.enc'),
+        key_path: root.join('config', 'master.key'),
         env_key: 'RAILS_MASTER_KEY',
         raise_if_missing_key: true
       )
