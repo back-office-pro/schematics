@@ -37,47 +37,18 @@ describe Schematics::Associations::HasOneThrough do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
-  describe "#type" do
-    subject { association.type }
-
-    it { is_expected.to eq("has_one") }
+  its(:type) { is_expected.to eq("has_one") }
+  its(:name) { is_expected.to eq("category") }
+  its(:class_name) { is_expected.to eq("Category") }
+  its("descriptor.name") { is_expected.to eq("label") }
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      category&.label&.searchize
+    RUBY
   end
-
-  describe "#to_str" do
-    subject { association.to_str }
-
-    it do
-      is_expected.to eq <<~RUBY
-        has_one :category, class_name: 'Category', foreign_key: 'category_id', through: :sub_category
-      RUBY
-    end
-  end
-
-  describe "#name" do
-    subject { association.name }
-
-    it { is_expected.to eq("category") }
-  end
-
-  describe "#class_name" do
-    subject { association.class_name }
-
-    it { is_expected.to eq("Category") }
-  end
-
-  describe "#descriptor" do
-    subject { association.descriptor.name }
-
-    it { is_expected.to eq("label") }
-  end
-
-  describe "#search_data" do
-    subject { association.search_data }
-
-    it do
-      is_expected.to eq <<~RUBY
-        category&.label&.searchize
-      RUBY
-    end
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      has_one :category, class_name: 'Category', foreign_key: 'category_id', through: :sub_category
+    RUBY
   end
 end

@@ -51,37 +51,13 @@ describe Schematics::Associations::HasManyThrough do
     through.inverse_descriptor = through_entity.descriptor
   end
 
-  describe "#type" do
-    subject { association.type }
-
-    it { is_expected.to eq("has_many") }
-  end
-
-  describe "#to_str" do
-    subject { association.to_str }
-
-    it do
-      is_expected.to eq <<~RUBY
-        has_many :products, class_name: 'Product', foreign_key: 'sub_category_id', through: :sub_categories
-      RUBY
-    end
-  end
-
-  describe "#name" do
-    subject { association.name }
-
-    it { is_expected.to eq("products") }
-  end
-
-  describe "#class_name" do
-    subject { association.class_name }
-
-    it { is_expected.to eq("Product") }
-  end
-
-  describe "#descriptor" do
-    subject { association.descriptor.name }
-
-    it { is_expected.to eq("reference") }
+  its(:type) { is_expected.to eq("has_many") }
+  its(:name) { is_expected.to eq("products") }
+  its(:class_name) { is_expected.to eq("Product") }
+  its("descriptor.name") { is_expected.to eq("reference") }
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      has_many :products, class_name: 'Product', foreign_key: 'sub_category_id', through: :sub_categories
+    RUBY
   end
 end
