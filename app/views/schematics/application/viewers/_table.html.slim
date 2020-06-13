@@ -15,15 +15,7 @@
           = cell('schematics/filters/checkbox', :with_deleted).()
         - (entity.renderable_fields - entity.association_attributes).each do |field|
           th.align-middle.text-center.px-0.py-1
-            - case field
-            - when Schematics::Attributes::Boolean
-              = cell('schematics/filters/checkbox', field).()
-            - when Schematics::Behaviours::Rangeable
-              = cell('schematics/filters/range', field).()
-            - when Schematics::Attributes::Enum
-              = cell('schematics/filters/dropdown', field, model_class: model_class).()
-            - else
-              = cell('schematics/filters/typeahead', field, model_class: model_class).()
+            = cell('schematics/filters/filter', field, model_class: model_class).()
         - (entity.association_attributes + entity.renderable_associations).each do |association|
           th.align-middle.text-center.px-0.py-1
             = cell('schematics/filters/typeahead', association, model_class: model_class).()

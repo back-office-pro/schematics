@@ -2,6 +2,20 @@ module Schematics
   module Filters
     class FilterCell < Cell::ViewModel
       self.view_paths = ["#{Engine.root}/app/cells"]
+      include Cell::Builder
+
+      builds do |field, options|
+        case field
+        when Attributes::Boolean
+          CheckboxCell
+        when Behaviours::Rangeable
+          RangeCell
+        when Attributes::Enum
+          DropdownCell
+        else
+          TypeaheadCell
+        end
+      end
 
       def name
         model.try(:name) || model
