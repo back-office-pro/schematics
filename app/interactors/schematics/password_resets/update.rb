@@ -9,7 +9,7 @@ module Schematics
       end
 
       def call
-        if @user.updated_at < 2.hours.ago
+        if @user.updated_at > 2.hours.ago
           if @user.update(@params)
             context.message = ".success"
           else
