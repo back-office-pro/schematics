@@ -1,4 +1,4 @@
-describe Schematics::Attributes::Boolean do
+describe Schematics::Attributes::Address do
   subject(:attribute) { described_class.new(entity, name, options) }
 
   let(:entity) do
@@ -8,13 +8,14 @@ describe Schematics::Attributes::Boolean do
       attributes: [{ name: "type", type: "string" }]
     )
   end
-  let(:name) { "toggle" }
+  let(:name) { "address" }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
 
-  its(:type) { is_expected.to eq("boolean") }
-  its(:icon) { is_expected.to eq(:toggle_on) }
+  its(:type) { is_expected.to eq("string") }
+  its(:icon) { is_expected.to eq(:map_marker_alt) }
 end

@@ -16,6 +16,7 @@ describe Schematics::Attributes::RichText do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
+  its(:type) { is_expected.to eq("rich_text") }
   its(:api_param_type) { is_expected.to eq("string") }
   its(:preload) { is_expected.to eq(:rich_text_summary) }
   its(:icon) { is_expected.to eq(:align_justify) }

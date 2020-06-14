@@ -20,6 +20,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
 
+  its(:type) { is_expected.to eq("text") }
   its(:migration_options) { is_expected.to eq([:unique, :required, :default, :limit]) }
   its(:api_param_type) { is_expected.to eq("string") }
   its(:icon) { is_expected.to eq(:align_justify) }

@@ -15,6 +15,7 @@ describe Schematics::Attributes::Digest do
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
+  its(:type) { is_expected.to eq("digest") }
   its(:migration_options) { is_expected.to eq([:unique, :required, :default, :limit]) }
   its(:api_param_type) { is_expected.to eq("string") }
   its(:permitted_param) { is_expected.to eq(["password", "password_confirmation"]) }

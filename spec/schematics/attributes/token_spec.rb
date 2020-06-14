@@ -16,6 +16,7 @@ describe Schematics::Attributes::Token do
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Editable) }
 
+  its(:type) { is_expected.to eq("token") }
   its(:api_param_type) { is_expected.to eq("string") }
   its(:to_str) do
     is_expected.to eq <<~RUBY
