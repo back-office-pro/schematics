@@ -5,7 +5,7 @@ module Schematics
 
       class << self
         def create((variable, operator, string, number, parenthesis, *whitespace), table_name)
-          return Variable.new(variable, table_name: table_name) if variable.present?
+          return Variable.new(variable, table_name) if variable.present?
           return Operator.new(operator) if operator.present?
           return String.new(string) if string.present?
           return Number.new(number) if number.present?

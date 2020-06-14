@@ -26,7 +26,7 @@ module Schematics
       end
 
       def function
-        @tokens.map(&:value).join.taint
+        @tokens.map(&:value).join
       end
 
       def to_sql
