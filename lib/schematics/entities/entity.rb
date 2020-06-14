@@ -95,11 +95,11 @@ module Schematics
       end
 
       def permitted_params
-        fillable_attributes.map(&:permitted_param).flatten
+        fillable_attributes.map(&:permitted_params).flatten
       end
 
       def permitted_json_params
-        fillable_attributes.map(&:permitted_json_param).flatten
+        fillable_attributes.map(&:permitted_json_params).flatten
       end
 
       def includes

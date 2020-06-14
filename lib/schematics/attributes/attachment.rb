@@ -11,17 +11,17 @@ module Schematics
         "file"
       end
 
-      def permitted_param
+      def permitted_params
         [
           super,
           :"#{association_name}_attributes" => [:id, :_destroy],
         ]
       end
 
-      def permitted_json_param
+      def permitted_json_params
         [
-          { permitted_param.first => [:data, :filename, :content_type] },
-          permitted_param.second,
+          { permitted_params.first => [:data, :filename, :content_type] },
+          permitted_params.second,
         ]
       end
 

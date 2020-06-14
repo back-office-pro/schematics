@@ -5,15 +5,15 @@ module Schematics
         "array"
       end
 
-      def permitted_param
+      def permitted_params
         [
           { super.first => [] },
           super.second,
         ]
       end
 
-      def permitted_json_param
-        permitted_param
+      def permitted_json_params
+        permitted_params
       end
 
       def default

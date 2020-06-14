@@ -11,7 +11,7 @@ module Schematics
         "string"
       end
 
-      def permitted_param
+      def permitted_params
         [super, "#{super}_confirmation"]
       end
 
