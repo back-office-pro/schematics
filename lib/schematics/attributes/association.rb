@@ -25,10 +25,6 @@ module Schematics
         inverse_association[:name] || @entity.name
       end
 
-      def inverse_association
-        @options[:inverse]
-      end
-
       def preload
         return if association_type == @entity.name # prevent self inclusion
         super
@@ -74,6 +70,12 @@ module Schematics
         association_type.camelize.constantize.all.collect do |association|
           [association.id, association.to_s]
         end
+      end
+
+      private
+
+      def inverse_association
+        @options[:inverse]
       end
     end
   end
