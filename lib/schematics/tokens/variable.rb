@@ -7,11 +7,18 @@ module Schematics
       end
 
       def to_sql
-        [@table_name, @value].join('.')
+        [
+          references.any? ? references.map(&:pluralize) : @table_name,
+          @value.split('.').last,
+        ].join('.')
       end
 
       def to_str
-        "#\{#{@value}}"
+        '#{' + @value + '}'
+      end
+
+      def references
+        @value.split('.').tap(&:pop)
       end
     end
   end

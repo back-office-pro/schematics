@@ -145,7 +145,6 @@ module Schematics
     autoload :Number,      'schematics/tokens/number'
     autoload :Operator,    'schematics/tokens/operator'
     autoload :Parenthesis, 'schematics/tokens/parenthesis'
-    autoload :Reference,   'schematics/tokens/reference'
     autoload :String,      'schematics/tokens/string'
     autoload :Token,       'schematics/tokens/token'
     autoload :Tokenizer,   'schematics/tokens/tokenizer'
