@@ -8,7 +8,7 @@ describe Schematics::Attributes::Text do
       attributes: [{ name: "type", type: "string" }]
     )
   end
-  let(:name) { "text" }
+  let(:name) { "content" }
   let(:options) do
     {
       limit: 100,
@@ -22,6 +22,7 @@ describe Schematics::Attributes::Text do
 
   its(:type) { is_expected.to eq("text") }
   its(:migration_options) { is_expected.to eq([:unique, :required, :default, :limit]) }
+  its(:column_name) { is_expected.to eq("content") }
   its(:api_param_type) { is_expected.to eq("string") }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:input_type) { is_expected.to eq(:textarea) }

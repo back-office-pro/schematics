@@ -16,5 +16,6 @@ describe Schematics::Attributes::Boolean do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq("boolean") }
+  its(:column_name) { is_expected.to eq("toggle") }
   its(:icon) { is_expected.to eq(:toggle_on) }
 end
