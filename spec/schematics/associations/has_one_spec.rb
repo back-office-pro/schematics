@@ -1,5 +1,5 @@
-describe Schematics::Associations::HasOneThrough do
-  subject(:association) { described_class.new(belongs_to, through) }
+describe Schematics::Associations::HasOne do
+  subject(:association) { described_class.new(belongs_to) }
 
   let(:parent_entity) do
     Schematics::Entities::Entity.create(
@@ -10,23 +10,25 @@ describe Schematics::Associations::HasOneThrough do
   end
   let(:entity) do
     Schematics::Entities::Entity.create(
-      name: "attribute",
-      descriptor: "name",
-      attributes: [{ name: "name", type: "string" }]
-    )
-  end
-  let(:through_entity) do
-    Schematics::Entities::Entity.create(
       name: "entity",
       descriptor: "type",
       attributes: [{ name: "type", type: "string" }]
     )
   end
-  let(:belongs_to) do
-    Schematics::Attributes::Attribute.create(through_entity, name: "schema", type: "belongs_to")
+  let(:options) do
+    {
+      "inverse": {
+        "type": "has_one",
+      },
+    }
   end
-  let(:through) do
-    Schematics::Attributes::Attribute.create(entity, name: "entity", type: "belongs_to")
+  let(:belongs_to) do
+    Schematics::Attributes::Attribute.create(
+      entity,
+      name: "schema",
+      type: "belongs_to",
+      options: options
+    )
   end
 
   before do
@@ -38,17 +40,19 @@ describe Schematics::Associations::HasOneThrough do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   its(:type) { is_expected.to eq("has_one") }
-  its(:name) { is_expected.to eq("schema") }
-  its(:class_name) { is_expected.to eq("Schema") }
-  its("descriptor.name") { is_expected.to eq("title") }
+  its(:name) { is_expected.to eq("entity") }
+  its(:class_name) { is_expected.to eq("Entity") }
+  its("descriptor.name") { is_expected.to eq("type") }
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      schema&.title&.searchize
+      entity&.type&.searchize
     RUBY
   end
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_one :schema, class_name: 'Schema', foreign_key: 'schema_id', through: :entity
+      has_one :entity,
+              class_name: 'Entity',
+              foreign_key: 'schema_id'
     RUBY
   end
 end
