@@ -1,0 +1,27 @@
+describe Schematics::Attributes::Digest do
+  subject(:attribute) { described_class.new(entity, name, options) }
+
+  let(:entity) do
+    Schematics::Entities::Entity.create(
+      name: "entity",
+      descriptor: "type",
+      attributes: [{ name: "type", type: "string" }]
+    )
+  end
+  let(:name) { "password" }
+  let(:options) { {} }
+
+  it { is_expected.not_to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+
+  its(:migration_options) { is_expected.to eq([:unique, :required, :default, :limit]) }
+  its(:api_param_type) { is_expected.to eq("string") }
+  its(:permitted_param) { is_expected.to eq(["password", "password_confirmation"]) }
+  its(:validators) { is_expected.to eq({ allow_nil: true }) }
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      has_secure_password :password
+    RUBY
+  end
+end
