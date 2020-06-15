@@ -15,7 +15,7 @@ module Schematics
       end
 
       def to_s
-        @name
+        name
       end
 
       def to_str
