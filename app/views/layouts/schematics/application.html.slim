@@ -52,5 +52,5 @@ html
           = render 'schematics/application/breadcrumbs'
           .container-fluid.my-4.px-4.animated class=('slideInDown' if params[:page].blank?)
             = yield
-          footer.mb-4.p-2.border-top
+          footer.p-3.border-top
             .ml-3 &copy; #{setting(:company_name)} #{Time.zone.now.year}

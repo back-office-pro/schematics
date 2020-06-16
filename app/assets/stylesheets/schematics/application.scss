@@ -83,6 +83,9 @@ nav.sticky-top[aria-label="breadcrumb"] {
   flex: 0 0 calc(100% - 14rem);
   max-width: calc(100% - 14rem);
   transition: ease-in-out 0.3s;
+  .container-fluid {
+    min-height: calc(100vh - 176px);
+  }
 }
 
 .sidebar.toggled {
