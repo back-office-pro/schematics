@@ -8,6 +8,7 @@ module Schematics
       property :entity
       property :model_class
       property :reify
+      delegate :test?, to: '::Rails.env'
 
       def new_version
         model.next&.reify || model.reify # TODO was @resource
