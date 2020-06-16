@@ -16,7 +16,7 @@
     - when Schematics::Attributes::Attachments
       = f.input attribute.name.to_sym,
                 as: :file,
-                required: attribute.required? && new_record?,
+                validate: { presence: attribute.required? && new_record? },
                 hint: cell('schematics/validators', attribute).(),
                 input_html: { multiple: true }
     - when Schematics::Attributes::Attachment
@@ -27,7 +27,7 @@
           = fields.input :_destroy, as: :boolean, wrapper_html: { class: "float-right m-0 text-dark" } 
       = f.input attribute.name.to_sym,
                 as: :file,
-                required: attribute.required? && new_record?,
+                validate: { presence: attribute.required? && new_record? },
                 hint: cell('schematics/validators', attribute).()
     - when Schematics::Attributes::Digest
       = f.input attribute.name.to_sym, required: new_record?, input_html: { autocomplete: "new-password" }
