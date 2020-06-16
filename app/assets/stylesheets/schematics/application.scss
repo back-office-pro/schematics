@@ -21,6 +21,9 @@ html, body {
   top: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  ul {
+    min-height: calc(100vh - 49px);
+  }
 }
 
 .navbar {
