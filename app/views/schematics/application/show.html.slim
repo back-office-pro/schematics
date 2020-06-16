@@ -39,7 +39,7 @@
           .card-body
             == rich_text
 - entity.attachments_attributes.each do |attribute|
-  - attachments = @resource.instance_eval(attribute.name)
+  - attachments = @resource.instance_eval(attribute.name).includes(:blob)
   - if attachments.any?
     - all_attachments[attribute.name] = attachments
     = render 'schematics/application/viewers/attachments',
