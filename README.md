@@ -83,7 +83,7 @@ Dependencies choices details.
 
 - Most popular
 
-~~discard~~
+~~audited~~
 
 - No metada to bind `ActionText` and `ActiveStorage`
 
