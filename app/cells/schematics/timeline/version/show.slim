@@ -1,11 +1,13 @@
-.float-left.mr-3
-  = link_to cell('schematics/attachment',
-                 user.avatar,
-                 width: 36,
-                 height: 36,
-                 css_class: 'rounded-circle border shadow-sm',
-                 replacement: { icon: :user_circle, size: '2x' }).(), user
-div
-  = event
-  = link_to item.to_s, item if item.present?
-  div.text-muted= I18n.t 'layouts.schematics.application.ago', time: time_ago_in_words(created_at)
+.row
+  .col-auto.align-self-center
+    = link_to cell('schematics/attachment',
+                  user.avatar,
+                  width: 36,
+                  height: 36,
+                  css_class: 'rounded-circle border shadow-sm',
+                  replacement: { icon: :user_circle, size: '2x' }).(), user
+  .col.text-truncate
+    = link_to item.to_s, item if item.present?
+    div.text-muted= t('layouts.schematics.application.ago', time: time_ago_in_words(created_at))
+  .col-auto.align-self-center
+    = fa_icon(icon, size: '2x', class: 'text-light')
