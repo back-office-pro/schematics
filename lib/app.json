@@ -90,10 +90,6 @@
                     }
                 },
                 {
-                    "name": "read_at",
-                    "type": "datetime"
-                },
-                {
                     "name": "author",
                     "type": "references",
                     "options": {
