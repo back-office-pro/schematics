@@ -36,7 +36,7 @@
                     = fields.hidden_field :_destroy, value: true
                   = f.button :button,
                               class: "btn btn-danger btn-sm float-right",
-                              data: { toggle: "tooltip", placement: "left", title: I18n.t('schematics.application.show.buttons.destroy') } do
+                              data: { toggle: "tooltip", placement: "left", title: t('schematics.application.show.buttons.destroy') } do
                                 = fa_icon(:trash)
                 - if value.representable?
                   = cell('schematics/attachment', value).()
