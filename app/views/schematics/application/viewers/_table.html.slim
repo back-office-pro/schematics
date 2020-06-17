@@ -57,7 +57,7 @@
                                     collection: field.try(:input_collection),
                                     display_with: lambda { |value| field.format(value) }
                   - when Schematics::Attributes::Attachments
-                    - value.with_deleted.each do |attachment|
+                    - value.with_deleted.includes(:blob).each do |attachment|
                       = link_to attachment.filename, main_app.url_for(attachment), class: "pr-2"
                   - when Schematics::Attributes::Attachment
                     = link_to value.filename, main_app.url_for(value) if value.attached?
