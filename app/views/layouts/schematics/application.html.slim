@@ -49,7 +49,7 @@ html
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                     = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')
-          = render 'schematics/application/breadcrumbs'
+          = cell('schematics/breadcrumbs', _breadcrumbs).()
           .container-fluid.my-4.px-4.animated class=('slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top
