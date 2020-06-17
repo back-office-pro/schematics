@@ -18,7 +18,7 @@
                     - value = reify.instance_eval(field.name)
                     - case field
                     - when Schematics::Attributes::Attachments
-                      - value.each do |attachment|
+                      - value.with_deleted.includes(:blob).each do |attachment|
                         - if attachment.representable?
                           = cell('schematics/attachment', attachment).()
                         - else
@@ -39,7 +39,7 @@
                     - value = new_version.instance_eval(field.name)
                     - case field
                     - when Schematics::Attributes::Attachments
-                      - value.each do |attachment|
+                      - value.with_deleted.includes(:blob).each do |attachment|
                         - if attachment.representable?
                           = cell('schematics/attachment', attachment).()
                         - else
