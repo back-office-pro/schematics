@@ -25,6 +25,6 @@
                       = attribute.format(value)
                     span.badge.badge-secondary.text-primary= model_class.send(:"#{attribute.name}_#{value}").count
       li.nav-item.mb-2
-  button#sidebar-toggle.btn.btn-block.btn-primary.rounded-0.border-0.text-right.py-3
+  button#sidebar-toggle.btn.btn-block.btn-primary.text-secondary.rounded-0.border-0.text-right.py-3
     .d-none.d-md-block.mr-3= fa_icon :chevron_left, class: "fa-lg"
     .d-none.mr-3= fa_icon :chevron_right, class: "fa-lg"
