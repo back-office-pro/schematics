@@ -11,7 +11,7 @@ module Schematics
     end
 
     def unread
-      received_messages.where(read_at: nil).count
+      received_messages.count
     end
   end
 end
