@@ -124,3 +124,13 @@ Dependencies choices details.
 ~~sorcery~~
 
 ~~knock~~
+
+### Roles & Permissions
+
+:star: **cancancan**
+
++ Most simple
+
+~~Pundit~~
+
+- No view helpers
