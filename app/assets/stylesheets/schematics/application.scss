@@ -22,11 +22,12 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   ul.nav {
-    min-height: calc(100vh - 50px);
+    height: calc(100vh - 50px - 4rem);
+    overflow-y: auto;
+    flex-wrap: nowrap;
   }
   #sidebar-toggle {
     height: 50px;
-    background: rgba(0, 0, 0, 0.2);
   }
 }
 
