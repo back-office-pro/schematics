@@ -43,13 +43,9 @@ module Schematics
 
     def revert_sorted_params
       sorted_params.map do |sorted_param|
-        if sorted_param == name
-          "-#{name}"
-        elsif sorted_param == "-#{name}"
-          name
-        else
-          sorted_param
-        end
+        next "-#{name}" if sorted_param == name
+        next name if sorted_param == "-#{name}"
+        sorted_param
       end
     end
 
