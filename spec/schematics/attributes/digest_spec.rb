@@ -21,6 +21,7 @@ describe Schematics::Attributes::Digest do
   its(:api_param_type) { is_expected.to eq("string") }
   its(:permitted_params) { is_expected.to eq(["password", "password_confirmation"]) }
   its(:validators) { is_expected.to eq({ allow_nil: true }) }
+  its(:icon) { is_expected.to eq(:key) }
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_secure_password :password

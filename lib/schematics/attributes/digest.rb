@@ -36,6 +36,10 @@ module Schematics
       def default
         SecureRandom.base58
       end
+
+      def icon
+        :key
+      end
     end
   end
 end
