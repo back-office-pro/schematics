@@ -7,7 +7,7 @@ module Schematics
     def icon
       return :sort_down if asc?
       return :sort_up   if desc?
-      :sort
+      model.icon
     end
 
     def icon_text_class
