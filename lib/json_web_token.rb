@@ -10,6 +10,7 @@ class JsonWebToken
     def decode(token)
       body, * = JWT.decode(token, secret_key_base)
       HashWithIndifferentAccess.new(body)
+    rescue
     end
   end
 end
