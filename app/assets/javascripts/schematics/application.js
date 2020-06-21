@@ -3,8 +3,6 @@
 //= require bootstrap
 //= require chartkick
 //= require Chart.bundle
-//= require rails.validations
-//= require rails.validations.simple_form.bootstrap4
 //= require pagy
 //= require font_awesome5
 //= require_tree .
