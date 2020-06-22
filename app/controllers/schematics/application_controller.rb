@@ -13,9 +13,7 @@ module Schematics
     end
 
     def current_user
-      @current_user ||= User.find_by_auth_token(
-        request.format.json? ? auth_token.try(:[], :auth_token) : cookies[:auth_token]
-      )
+      @current_user ||= User.find_by_auth_token cookies[:auth_token] || auth_token&.dig(:auth_token)
     end
 
     def auth_token
