@@ -10,9 +10,9 @@
       = fa_icon :sign_in_alt, class: "mr-3 ml-3 fa-lg align-middle"
       span.align-middle= title
   .card-body
-    = simple_form_for :user, url: sessions_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-      = f.input :email
-      = f.input :password
+    = simple_form_for :user, url: sessions_path, wrapper: :input_group, defaults: { input_html: { class: "bg-light border-0" } } do |f|
+      = f.input :email, prepend: fa_icon(:envelope)
+      = f.input :password, prepend: fa_icon(:key)
       = f.input :remember_me, as: :boolean
       = f.button :button, class: "btn-primary btn-icon-split mr-2" do
         span.icon= fa_icon :check

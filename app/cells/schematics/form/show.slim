@@ -4,9 +4,17 @@
     - when Schematics::Attributes::Date
       = f.input attribute.name.to_sym, as: :date, html5: true
     - when Schematics::Attributes::String
-      = f.input attribute.name.to_sym, maxlength: true, minlength: true, pattern: true
+      = f.input attribute.name.to_sym,
+                maxlength: true,
+                minlength: true,
+                pattern: true,
+                wrapper: :input_group,
+                prepend: fa_icon(attribute.icon)
     - when Schematics::Attributes::Decimal
-      = f.input attribute.name.to_sym, min_max: true
+      = f.input attribute.name.to_sym,
+                min_max: true,
+                wrapper: :input_group,
+                prepend: attribute.unit || fa_icon(attribute.icon)
     - when Schematics::Attributes::RichText
       = f.input attribute.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
@@ -30,14 +38,22 @@
                 validate: { presence: attribute.required? && new_record? },
                 hint: cell('schematics/validators', attribute).()
     - when Schematics::Attributes::Digest
-      = f.input attribute.name.to_sym, required: new_record?, input_html: { autocomplete: "new-password" }
-      = f.input :"#{attribute.name}_confirmation", required: new_record?, input_html: { autocomplete: "new-password" }
+      = f.input attribute.name.to_sym,
+                required: new_record?,
+                input_html: { autocomplete: "new-password" },
+                prepend: fa_icon(attribute.icon)
+      = f.input :"#{attribute.name}_confirmation",
+                required: new_record?,
+                input_html: { autocomplete: "new-password" },
+                prepend: fa_icon(attribute.icon)
     - else
-      = f.input attribute.name.to_sym
+      = f.input attribute.name.to_sym,
+                wrapper: :input_group,
+                prepend: attribute.try(:unit) || fa_icon(attribute.icon)
   - entity.belongs_to_attributes.each do |attribute|
     = f.association attribute.name.to_sym,
                     prompt: t('schematics.application.form.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
-  = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
+  = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2", disabled: new_record? do
     span.icon= fa_icon :check
     span.text= t('schematics.application.form.buttons.confirm')
   = link_to cancel_path, class: "btn btn-danger btn-sm btn-icon-split" do

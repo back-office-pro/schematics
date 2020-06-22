@@ -10,8 +10,8 @@
       = fa_icon :key, class: "mr-3 ml-3 fa-lg align-middle"
       span.align-middle= title
   .card-body
-    = simple_form_for :user, url: password_resets_path, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-      = f.input :email
+    = simple_form_for :user, url: password_resets_path, wrapper: :input_group, defaults: { input_html: { class: "bg-light border-0" } } do |f|
+      = f.input :email, prepend: fa_icon(:envelope)
       = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
         span.icon= fa_icon :check
         span.text= t('schematics.application.form.buttons.confirm')
