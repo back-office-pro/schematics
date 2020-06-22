@@ -22,7 +22,10 @@ module Schematics
           match: :word_middle,
           suggest: true,
           misspellings: false,
-          execute: false
+          execute: false,
+          scope_results: -> (results) do
+            results.accessible_by(current_ability)
+          end,
         )
       end
       @results = Searchkick.multi_search(searches)

@@ -1,0 +1,9 @@
+fr:
+  activerecord:
+    models:
+      role: 
+        one: Rôle
+        other: Rôles
+    attributes:
+      role:
+        name: Nom

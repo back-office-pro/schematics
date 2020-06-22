@@ -4,8 +4,9 @@
     class: "sidebar-brand d-flex align-items-center text-white text-nowrap justify-content-center"
   ul.nav.nav-light.flex-column
     li.nav-item.mb-4
-    - entities.each do |entity|
+    - entities.sort_by(&:name).each do |entity|
       - model_class = entity.class_name.constantize
+      - next if cannot?(:index, model_class)
       li.nav-item.text-center.mw-100.mb-2
         = active_link_to polymorphic_path(model_class),
           class: "nav-link p-0 m-0 text-secondary text-nowrap" do
@@ -25,6 +26,6 @@
                       = attribute.format(value)
                     span.badge.badge-secondary.text-primary= model_class.send(:"#{attribute.name}_#{value}").count
       li.nav-item.mb-2
-  button#sidebar-toggle.btn.btn-block.btn-primary.text-secondary.rounded-0.border-0.text-right.py-3
+  button#sidebar-toggle.btn.btn-block.text-secondary.rounded-0.border-0.text-right.py-3
     .d-none.d-md-block.mr-3= fa_icon :chevron_left, class: "fa-lg"
     .d-none.mr-3= fa_icon :chevron_right, class: "fa-lg"

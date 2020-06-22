@@ -3,6 +3,7 @@ require 'acceptance_helper'
 resource "Password Resets" do
   shared_setup
   fixtures :users
+  fixtures :roles
 
   let(:user) { users(:two) }
 

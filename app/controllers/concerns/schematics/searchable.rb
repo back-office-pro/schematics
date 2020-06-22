@@ -7,7 +7,10 @@ module Schematics
         includes: entity.includes,
         where: filter_params.except(:with_deleted),
         order: sorting_params,
-        scope_results: (-> (r) { r.with_deleted } if filter_params.key?(:with_deleted)),
+        scope_results: -> (results) do
+          results = results.with_deleted if filter_params.key?(:with_deleted)
+          results.accessible_by(current_ability)
+        end,
       }
     end
   end

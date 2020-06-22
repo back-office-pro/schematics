@@ -3,6 +3,7 @@ require 'acceptance_helper'
 resource "Sessions" do
   shared_setup
   fixtures :users
+  fixtures :roles
 
   let(:user) { users(:two) }
   let(:email) { user.email }
@@ -46,6 +47,7 @@ resource "Sessions" do
       parameter :last_name, "The user last name"
       parameter :avatar, "The user avatar"
       parameter :locale, "The user locale"
+      parameter :role, "The user role"
     end
 
     context "when current_password is right" do

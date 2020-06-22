@@ -7,9 +7,11 @@ nav.sticky-top aria-label="breadcrumb"
       lib.breadcrumb-item.text-truncate class=("#{crumb.current? ? 'active' : ''}") 
         = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})
     li.nav-item.ml-auto.pr-3
-      = link_to swagger_ui_engine_path, data: { turbolinks: false }, class: "mr-3" do
-        = fa_icon :project_diagram
-        span.d-none.d-sm-inline.ml-2= t('schematics.application.breadcrumbs.api')
-      = link_to edit_settings_path do
-        = fa_icon :cog
-        span.d-none.d-sm-inline.ml-2= t('schematics.application.breadcrumbs.settings')
+      - if admin?
+        = link_to swagger_ui_engine_path, data: { turbolinks: false }, class: "mr-3" do
+          = fa_icon :project_diagram
+          span.d-none.d-sm-inline.ml-2= t('schematics.application.breadcrumbs.api')
+      - if can?(:read, Setting)
+        = link_to edit_settings_path do
+          = fa_icon :cog
+          span.d-none.d-sm-inline.ml-2= t('schematics.application.breadcrumbs.settings')

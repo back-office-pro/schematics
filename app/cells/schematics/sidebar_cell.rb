@@ -4,6 +4,7 @@ module Schematics
     include FontAwesome5::Rails::IconHelper
     include ApplicationHelper
     include ActiveLinkTo
+    property :cannot?
     delegate :entities, to: 'Schematics::SCHEMA'
     delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
   end

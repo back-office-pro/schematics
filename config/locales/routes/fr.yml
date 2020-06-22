@@ -11,5 +11,6 @@ fr:
     users: utilisateurs
     messages: messages
     directories: dossiers
+    roles: roles
     new: nouveau
     edit: editer

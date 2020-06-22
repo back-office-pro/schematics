@@ -17,7 +17,7 @@ html
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
         .col.bg-primary.sidebar
-          = cell('schematics/sidebar').()
+          = cell('schematics/sidebar', current_ability).()
         .col.bg-light.content
           nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top
             = form_tag schematics.searches_path, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do
@@ -49,7 +49,7 @@ html
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                     = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')
-          = cell('schematics/breadcrumbs', _breadcrumbs).()
+          = cell('schematics/breadcrumbs', current_ability, breadcrumbs: _breadcrumbs).()
           .container-fluid.my-4.px-4.animated class=('slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top

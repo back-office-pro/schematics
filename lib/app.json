@@ -67,6 +67,16 @@
                         "fr",
                         "en"
                     ]
+                },
+                {
+                    "name": "role",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
+                    }
                 }
             ]
         },
@@ -193,6 +203,74 @@
                         "spacelab",
                         "yeti"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "role",
+            "icon": "user_lock",
+            "descriptor": "name",
+            "attributes": [
+                {
+                    "name": "name",
+                    "type": "string",
+                    "options": {
+                        "unique": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "role_permission",
+            "attributes": [
+                {
+                    "name": "role",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
+                    }
+                },
+                {
+                    "name": "permission",
+                    "type": "belongs_to",
+                    "options": {
+                        "required": true,
+                        "inverse": {
+                            "type": "has_many"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "permission",
+            "icon": "key",
+            "descriptor": "name",
+            "attributes": [
+                {
+                    "name": "model",
+                    "type": "string"
+                },
+                {
+                    "name": "action",
+                    "type": "enum",
+                    "options": [
+                        "read",
+                        "create",
+                        "update",
+                        "import",
+                        "destroy",
+                        "archive"
+                    ]
+                }
+            ],
+            "virtuals": [
+                {
+                    "name": "name",
+                    "function": "$action $model"
                 }
             ]
         }
