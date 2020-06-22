@@ -2,7 +2,7 @@ module Schematics
   module Resources
     class BulkInsert
       include Interactor
-      delegate :model_name, to: :@model_class
+      delegate :model_name, to: :@model_class, private: true
 
       before do
         @file = context.file # TODO validate content_type CSV

@@ -1,6 +1,6 @@
 class JsonWebToken
   class << self
-    delegate :secret_key_base, to: 'Rails.application.secrets'
+    delegate :secret_key_base, to: 'Rails.application.secrets', private: true
 
     def encode(payload, exp: 24.hours.from_now)
       payload[:exp] = exp.to_i

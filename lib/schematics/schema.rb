@@ -2,10 +2,10 @@ module Schematics
   class Schema
     include Singleton
     attr_reader :entities, :charts, :stats
-    delegate :schemer, to: :class
+    delegate :schemer, to: :class, private: true
 
     class << self
-      delegate :validate, to: :schemer
+      delegate :validate, to: :schemer, private: true
 
       def schemer
         @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path("../schema.json", __dir__)))

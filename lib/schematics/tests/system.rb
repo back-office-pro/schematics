@@ -5,14 +5,13 @@ module Schematics
     class System < ::ApplicationSystemTestCase
       include ActionText::SystemTestHelper
       driven_by :selenium_headless
-
-      delegate :model_class, to: :class
-      delegate :entity, :model_name, to: :model_class
-      delegate :email, to: :current_user
-      delegate :login_path, to: 'Schematics::Engine.routes.url_helpers'
+      delegate :model_class, to: :class, private: true
+      delegate :entity, :model_name, to: :model_class, private: true
+      delegate :email, to: :current_user, private: true
+      delegate :login_path, to: 'Schematics::Engine.routes.url_helpers', private: true
 
       class << self
-        delegate :entity, :model_name, to: :model_class
+        delegate :entity, :model_name, to: :model_class, private: true
 
         def inherited(subclass)
           super

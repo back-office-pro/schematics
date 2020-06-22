@@ -5,7 +5,7 @@ module Schematics
     before_action :set_user, only: [:edit, :update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     layout "schematics/auth"
-    delegate :entity, to: :model_class
+    delegate :entity, to: :model_class, private: true
 
     def new
     end

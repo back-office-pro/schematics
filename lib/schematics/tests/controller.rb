@@ -1,15 +1,15 @@
 module Schematics
   module Tests
     class Controller < ::ActionDispatch::IntegrationTest
-      delegate :controller_class, to: :class
-      delegate :model_class, to: :controller_class
-      delegate :entity, to: :model_class
-      delegate :email, to: :current_user
-      delegate :sessions_path, to: 'Schematics::Engine.routes.url_helpers'
+      delegate :controller_class, to: :class, private: true
+      delegate :model_class, to: :controller_class, private: true
+      delegate :entity, to: :model_class, private: true
+      delegate :email, to: :current_user, private: true
+      delegate :sessions_path, to: 'Schematics::Engine.routes.url_helpers', private: true
 
       class << self
-        delegate :model_class, to: :controller_class
-        delegate :entity, to: :model_class
+        delegate :model_class, to: :controller_class, private: true
+        delegate :entity, to: :model_class, private: true
 
         def inherited(subclass)
           super

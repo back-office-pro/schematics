@@ -3,7 +3,7 @@ module PaperTrail
     include PaperTrail::VersionConcern
     belongs_to :user, class_name: 'User', foreign_key: :whodunnit
 
-    delegate :entity, to: :model_class
+    delegate :entity, to: :model_class, private: true
     delegate :icon, to: :entity
 
     scope :with_user, -> { includes(:user) }

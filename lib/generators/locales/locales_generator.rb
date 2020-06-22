@@ -1,5 +1,5 @@
 class LocalesGenerator < Rails::Generators::Base
-  delegate :translate, to: :client
+  delegate :translate, to: :client, private: true
 
   LOCALES = [:fr].freeze
 

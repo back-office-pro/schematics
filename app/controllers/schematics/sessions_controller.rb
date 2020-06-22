@@ -4,7 +4,7 @@ module Schematics
     before_action :authorize, only: [:show, :edit, :update]
     layout "schematics/auth", only: [:new, :create]
     swagger_controller :sessions, "Sessions Management"
-    delegate :entity, to: :model_class
+    delegate :entity, to: :model_class, private: true
     helper_method :attributes
 
     def new
