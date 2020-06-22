@@ -8,8 +8,10 @@ module Schematics
     before_action :authorize
     before_action :set_breadcrumb
     before_action :set_resource, only: [:show, :edit, :update, :destroy, :archive, :restore]
+    authorize_resource
     after_action { pagy_headers_merge(@pagy) if @pagy }
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
+    rescue_from CanCan::AccessDenied, with: :forbidden
     delegate :model_class, to: :class
     delegate :entity, :model_name, to: :model_class
     helper_method :entity, :model_class
@@ -202,8 +204,19 @@ module Schematics
     def not_found
       self.action_name = :not_found
       respond_to do |format|
-        format.html { render :not_found, status: :not_found }
+        format.html do
+          redirect_to polymorphic_path(model_class),
+                      alert: t('.alert', model_name: model_name.human)
+        end
         format.json { head :not_found }
+      end
+    end
+
+    def forbidden
+      self.action_name = :forbidden
+      respond_to do |format|
+        format.html { redirect_to schematics.root_path, alert: t('.alert') }
+        format.json { head :forbidden }
       end
     end
 

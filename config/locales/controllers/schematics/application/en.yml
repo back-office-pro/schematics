@@ -4,5 +4,3 @@ en:
       breadcrumbs:
         settings: Settings
         api: API
-      authorize:
-        unauthorized_access: Unauthorized access

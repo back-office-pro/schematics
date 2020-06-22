@@ -18,5 +18,4 @@ en:
         new: Add a new %{model_name}
         edit: Edit %{resource}
         show: "%{resource}"
-        not_found: Resource not found
         import: Import %{model_name_plural}

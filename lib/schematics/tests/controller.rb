@@ -109,7 +109,7 @@ module Schematics
               test "should throw #{entity.name} not found" do
                 login
                 get polymorphic_path(model_class).concat("/0")
-                assert_response :not_found
+                assert_redirected_to polymorphic_path(model_class)
               end
 
               test "should destroy API #{entity.name}" do

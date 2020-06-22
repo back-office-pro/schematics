@@ -19,3 +19,7 @@ en:
       import:
         success: "%{model_name_plural} were successfully imported"
         failure: One or more error occured during %{model_name_plural} import
+      not_found: 
+        alert: "%{model_name} not found"
+      forbidden: 
+        alert: Forbidden access
