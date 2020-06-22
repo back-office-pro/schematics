@@ -3,6 +3,7 @@ require 'json'
 require 'csv'
 require 'pagy'
 require 'pagy/extras/searchkick'
+require 'pagy/extras/array'
 require 'pagy/extras/headers'
 require 'pagy/extras/bootstrap'
 require 'pagy/extras/i18n'
@@ -69,12 +70,13 @@ require_relative 'active_support/test_case' if Rails.env.test?
 
 module Schematics
   module Associations
-    autoload :AssociationThrough, 'schematics/associations/association_through'
-    autoload :Association,        'schematics/associations/association'
-    autoload :HasManyThrough,     'schematics/associations/has_many_through'
-    autoload :HasMany,            'schematics/associations/has_many'
-    autoload :HasOneThrough,      'schematics/associations/has_one_through'
-    autoload :HasOne,             'schematics/associations/has_one'
+    autoload :Association,         'schematics/associations/association'
+    autoload :AssociationThrough,  'schematics/associations/association_through'
+    autoload :HasAndBelongsToMany, 'schematics/associations/has_and_belongs_to_many'
+    autoload :HasMany,             'schematics/associations/has_many'
+    autoload :HasManyThrough,      'schematics/associations/has_many_through'
+    autoload :HasOne,              'schematics/associations/has_one'
+    autoload :HasOneThrough,       'schematics/associations/has_one_through'
   end
 
   module Attributes

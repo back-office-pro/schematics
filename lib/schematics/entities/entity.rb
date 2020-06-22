@@ -27,10 +27,10 @@ module Schematics
       def initialize(name, icon, descriptor, attributes, virtuals)
         @name = name
         @icon = icon
+        @associations = []
         @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
         @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
         @descriptor = Descriptor.create(self, descriptor)
-        @associations = []
       end
 
       def method_missing(method_name, *args, &block)
@@ -187,6 +187,7 @@ module Schematics
             param :header, "Authorization", :string, :required, "Authorization token"
             param :query, :page, :integer, :optional, "Page number"
             response :unauthorized
+            response :forbidden
             response :success
             type :#{class_name}
           end
@@ -197,6 +198,7 @@ module Schematics
             param :header, "Authorization", :string, :required, "Authorization token"
             param :path, :id, :integer, :required, "#{name.humanize} Id"
             response :unauthorized
+            response :forbidden
             response :success
             response :not_found
             type :#{class_name}
@@ -208,6 +210,7 @@ module Schematics
             param :header, "Authorization", :string, :required, "Authorization token"
             #{api_params.map(&:squish).join("\n\s\s")}
             response :unauthorized
+            response :forbidden
             response :success
             response :unprocessable_entity
           end
@@ -219,6 +222,7 @@ module Schematics
             param :path, :id, :integer, :required, "#{name.humanize} Id"
             #{api_params.map(&:squish).join("\n\s\s")}
             response :unauthorized
+            response :forbidden
             response :success
             response :unprocessable_entity
             response :not_found
@@ -230,6 +234,7 @@ module Schematics
             param :header, "Authorization", :string, :required, "Authorization token"
             param :path, :id, :integer, :required, "#{name.humanize} Id"
             response :unauthorized
+            response :forbidden
             response :success
             response :not_found
           end
