@@ -8,18 +8,18 @@ module Schematics
 
     private
 
+    def current_ability
+      @current_ability ||= Ability.new(current_user)
+    end
+
     def current_user
-      if cookies[:auth_token]
-        @current_user ||= User.find_by_auth_token(cookies[:auth_token])
-      elsif auth_token
-        @current_user ||= User.find_by_auth_token(auth_token[:auth_token])
-      end
+      @current_user ||= User.find_by_auth_token(
+        request.format.json? ? auth_token.try(:[], :auth_token) : cookies[:auth_token]
+      )
     end
 
     def auth_token
-      @auth_token ||= JsonWebToken.decode(request.headers['Authorization'].split(' ').last)
-    rescue
-      nil
+      @auth_token ||= JsonWebToken.decode(request.headers['Authorization']&.split(' ')&.last)
     end
 
     def authorize
@@ -27,7 +27,8 @@ module Schematics
         respond_to do |format|
           format.json { head :unauthorized }
           format.any do
-            redirect_to login_path, alert: t('schematics.application.authorize.unauthorized_access')
+            redirect_to schematics.login_path,
+                        alert: t('schematics.application.resources.forbidden.alert')
           end
         end
       end
