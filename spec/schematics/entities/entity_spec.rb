@@ -17,7 +17,7 @@ describe Schematics::Entities::Entity do
   its(:class_name) { is_expected.to eq('Entity') }
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
-  its(:generate) do
+  its(:generators) do
     is_expected.to eq([
       "rails g scaffold entity name:string --skip-resource-route",
       "rails g migration add_deleted_at_to_entities deleted_at:datetime",

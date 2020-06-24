@@ -13,7 +13,7 @@ describe Schematics::Entities::Tree do
     ]
   end
 
-  its(:generate) do
+  its(:generators) do
     is_expected.to eq([
       "rails g scaffold directory name:string --skip-resource-route",
       "rails g migration add_deleted_at_to_directories deleted_at:datetime",

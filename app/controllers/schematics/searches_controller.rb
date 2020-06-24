@@ -29,8 +29,8 @@ module Schematics
         )
       end
       @results = Searchkick.multi_search(searches)
-      @suggestions = @results.map(&:suggestions).flatten.uniq
-      @results = @results.map(&:results).flatten.group_by do |record|
+      @suggestions = @results.flat_map(&:suggestions).uniq
+      @results = @results.flat_map(&:results).group_by do |record|
         record.class.entity.name.pluralize
       end
       respond_to do |format|

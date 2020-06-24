@@ -210,37 +210,18 @@
             "name": "role",
             "icon": "user_lock",
             "descriptor": "name",
+            "associations": [
+                {
+                    "type": "has_and_belongs_to_many",
+                    "name": "permission"
+                }
+            ],
             "attributes": [
                 {
                     "name": "name",
                     "type": "string",
                     "options": {
                         "unique": true
-                    }
-                }
-            ]
-        },
-        {
-            "name": "role_permission",
-            "attributes": [
-                {
-                    "name": "role",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true,
-                        "inverse": {
-                            "type": "has_many"
-                        }
-                    }
-                },
-                {
-                    "name": "permission",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true,
-                        "inverse": {
-                            "type": "has_many"
-                        }
                     }
                 }
             ]

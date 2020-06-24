@@ -27,15 +27,14 @@ module Schematics
     end
 
     def default_abilities
-      cannot :manage, Permission
+      cannot [:create, :update, :destroy, :import, :archive], Permission
       cannot [:destroy, :archive], user
       cannot [:update, :destroy, :archive], Role.last
       can :read, Message, recipient_id: user.id
     end
 
     def user_abilities
-      # TODO @user.permissions (has_and_belongs_to_many)
-      @user.role.role_permissions.includes(:permission).map(&:permission).each do |permission|
+      @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
       end
     end
@@ -47,7 +46,7 @@ module Schematics
     end
 
     def reference_abilities
-      SCHEMA.entities.map(&:references_attributes).flatten.each do |attribute|
+      SCHEMA.entities.flat_map(&:references_attributes).each do |attribute|
         model_class = attribute.entity.class_name.constantize
         cannot [:read, :update, :destroy, :archive], model_class
         can [:read, :update, :destroy, :archive], model_class, attribute.column_name => @user.id

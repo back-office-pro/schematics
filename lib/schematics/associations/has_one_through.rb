@@ -14,7 +14,7 @@ module Schematics
       end
 
       def descriptor
-        @belongs_to.inverse_descriptor
+        belongs_to.inverse_descriptor
       end
 
       def search_data

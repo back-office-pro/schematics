@@ -6,7 +6,8 @@ module Schematics
                   :descriptor,
                   :attributes,
                   :virtuals,
-                  :associations
+                  :associations,
+                  :generators
 
       MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
 
@@ -16,21 +17,25 @@ module Schematics
                    icon: :caret_square_right,
                    descriptor: 'id',
                    singleton: false,
+                   associations: [],
                    attributes: [],
                    virtuals: [])
-          args = [name, icon.to_sym, descriptor, attributes, virtuals]
+          args = [name, icon.to_sym, descriptor, associations, attributes, virtuals]
           return new(*args) if type.nil?
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
       end
 
-      def initialize(name, icon, descriptor, attributes, virtuals)
+      def initialize(name, icon, descriptor, associations, attributes, virtuals)
         @name = name
         @icon = icon
-        @associations = []
+        @associations = associations.map do |association|
+          Associations::Association.create(self, association)
+        end
         @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
         @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
         @descriptor = Descriptor.create(self, descriptor)
+        @generators = default_generators + @associations.flat_map(&:generator)
       end
 
       def method_missing(method_name, *args, &block)
@@ -67,15 +72,7 @@ module Schematics
       end
 
       def weight
-        has_many_and_through_associations.size
-      end
-
-      def generate
-        [
-          "rails g scaffold #{name} #{attributes.map(&:to_s).join(' ')} --skip-resource-route",
-          "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
-          "rails g migration add_slug_to_#{name.pluralize} slug:string:unique:true",
-        ]
+        has_many_and_through_and_belongs_to_many_associations.size
       end
 
       def fields
@@ -87,31 +84,31 @@ module Schematics
       end
 
       def model_properties
-        fillable_attributes.map(&:model_property)
+        fillable_elements.map(&:model_property)
       end
 
       def api_params
-        fillable_attributes.map(&:api_param)
+        fillable_elements.map(&:api_param)
       end
 
       def permitted_params
-        fillable_attributes.map(&:permitted_params).flatten
+        fillable_elements.flat_map(&:permitted_params)
       end
 
       def permitted_json_params
-        fillable_attributes.map(&:permitted_json_params).flatten
+        fillable_elements.flat_map(&:permitted_json_params)
       end
 
       def includes
-        preloadable_elements.map(&:preload).flatten.compact.uniq
+        preloadable_elements.flat_map(&:preload).compact.uniq
       end
 
       def validates
         @attributes.map(&:validate).compact
       end
 
-      def has_many_and_through_associations
-        has_many_associations + has_many_through_associations
+      def has_many_and_through_and_belongs_to_many_associations
+        has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
       end
 
       def class_name
@@ -262,7 +259,7 @@ module Schematics
         RUBY
       end
 
-      private
+      protected
 
       def model_elements
         [self, descriptor, search_data] + elements + validates
@@ -270,6 +267,14 @@ module Schematics
 
       def elasticsearchable_elements
         searchable_elements.map(&:name).map(&:to_sym)
+      end
+
+      def default_generators
+        [
+          "rails g scaffold #{name} #{attributes.map(&:to_s).join(' ')} --skip-resource-route",
+          "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
+          "rails g migration add_slug_to_#{name.pluralize} slug:string:unique:true",
+        ]
       end
     end
   end

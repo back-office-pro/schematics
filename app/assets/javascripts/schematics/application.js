@@ -60,3 +60,12 @@ $(document).on('turbolinks:load', function() {
 $(document).on('show.bs.modal', '.modal', function() {
     $(this).appendTo('body');
 });
+
+$(document).on('scroll', function() {
+    $nav = $('nav.navbar');
+    if ($(window).scrollTop() > 50) {
+        $nav.addClass('scrolled');
+    } else {
+        $nav.removeClass('scrolled');
+    }
+});

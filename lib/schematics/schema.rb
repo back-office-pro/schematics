@@ -17,6 +17,7 @@ module Schematics
       @charts = data[:charts].map { |chart| Graphics::Chart.create(self, chart) }
       @stats = data[:stats].map { |stat| Graphics::Stat.create(self, stat) }
       add_inverse_descriptor_to_association_attributes
+      add_has_and_belongs_to_many_associations
       add_has_many_associations
       add_has_one_associations
       add_has_many_through_associations
@@ -33,7 +34,7 @@ module Schematics
     end
 
     def generate
-      @entities.sort_by(&:weight).reverse.map(&:generate).flatten.each(&method(:system))
+      @entities.sort_by(&:weight).reverse.flat_map(&:generators).each(&method(:system))
     end
 
     def to_s
@@ -71,6 +72,18 @@ module Schematics
         entity.association_attributes.each do |attribute|
           attribute.inverse_descriptor = find_entity_by_name(attribute.association_type).descriptor
         end
+      end
+    end
+
+    def add_has_and_belongs_to_many_associations
+      @entities.flat_map(&:has_and_belongs_to_many_associations).each do |habtm|
+        entity = find_entity_by_name(habtm.name.singularize)
+        association = Associations::Association.create(
+          entity,
+          name: habtm.entity.name,
+          type: 'has_and_belongs_to_many'
+        )
+        entity.associations << association
       end
     end
 

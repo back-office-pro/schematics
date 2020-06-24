@@ -34,7 +34,7 @@ module Schematics
       end
 
       def preload
-        @tokens.select_is_a?(Tokens::Variable).map(&:references).flatten.uniq.map(&:to_sym)
+        @tokens.select_is_a?(Tokens::Variable).flat_map(&:references).uniq.map(&:to_sym)
       end
 
       def to_str

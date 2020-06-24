@@ -34,7 +34,7 @@ module Schematics
                     serializer: association.descriptor.serializer_class
           end
 
-          entity.has_many_and_through_associations.each do |association|
+          entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
             has_many association.name.to_sym,
                      serializer: association.descriptor.serializer_class,
                      if: -> { should_render_has_many_associations }

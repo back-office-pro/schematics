@@ -19,7 +19,7 @@
                         entity: attribute.entity,
                         model_class: attribute.entity.class_name.constantize,
                         collapsed: false
-          - entity.has_many_and_through_associations.each do |association|
+          - entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
             - break unless association.required?
             - if resources.key?(association.name)
               = render 'schematics/application/viewers/association',

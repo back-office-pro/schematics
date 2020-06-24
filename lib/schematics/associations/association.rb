@@ -2,12 +2,30 @@ module Schematics
   module Associations
     class Association
       attr_reader :belongs_to
-      delegate :entity, :required?, to: :@belongs_to
+      delegate :entity, :required?, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
 
       class << self
-        def create(belongs_to, type:, **args)
+        def create(belongs_to, type:, name: nil)
+          unless belongs_to.is_a?(Attributes::Association)
+            belongs_to = create_belongs_to(belongs_to, name, type)
+          end
           Associations.const_get(type.camelize.to_sym).new(belongs_to)
+        end
+
+        private
+
+        def create_belongs_to(entity, name, type)
+          Attributes::BelongsTo.new(
+            entity,
+            name,
+            options: {
+              required: true,
+              inverse: {
+                type: type,
+              },
+            }
+          )
         end
       end
 

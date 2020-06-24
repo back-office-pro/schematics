@@ -53,6 +53,8 @@
   - entity.belongs_to_attributes.each do |attribute|
     = f.association attribute.name.to_sym,
                     prompt: t('schematics.application.form.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
+  - entity.has_and_belongs_to_many_associations.each do |association|
+    = f.association association.name.to_sym, as: :check_boxes
   = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2", disabled: new_record? do
     span.icon= fa_icon :check
     span.text= t('schematics.application.form.buttons.confirm')

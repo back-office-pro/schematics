@@ -1,0 +1,18 @@
+fr:
+  activerecord:
+    models:
+      permission: 
+        one: Permission
+        other: Permissions
+    attributes:
+      permission:
+        model: Donnée
+        action: Action
+        name: Nom
+        actions:
+          read: Lire
+          create: Ajouter
+          update: Editer
+          import: Importer
+          destroy: Supprimer
+          archive: Archiver

@@ -66,7 +66,12 @@ module Schematics
             name, type, *options = column_definition.split(":")
             options = Hash[*options].symbolize_keys
             has_index = 'uniq' if options[:unique]
-            new(name, type.to_sym, has_index, eval_options(options, type))
+            new(name, type&.to_sym, has_index, eval_options(options, type))
+          end
+
+          def plural_name
+            return "#{super}, column_options: { type: :uuid }" if type == :join_table_uuid
+            super
           end
 
           private
