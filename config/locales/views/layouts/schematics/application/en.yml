@@ -6,6 +6,8 @@ en:
         dropdown:
           logout: Logout
           edit_profile: Edit my profile
+          settings: Application settings
+          api: API access
         search:
           placeholder: Search...
           not_found: No result

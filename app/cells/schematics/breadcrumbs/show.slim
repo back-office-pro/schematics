@@ -1,17 +1,8 @@
-nav.sticky-top aria-label="breadcrumb" 
-  ol.nav.align-items-center.breadcrumb.bg-white.shadow-sm.border-0.pb-2.pt-0.pl-4.rounded-0
+nav.d-none.d-lg-block aria-label="breadcrumb"
+  ol.nav.align-items-center.pl-4
     li.nav-item.breadcrumb-item
       = link_to root_path do
         = fa_icon :home, class: "fa-lg"
     - breadcrumb_trail do |crumb|
-      lib.breadcrumb-item.text-truncate class=("#{crumb.current? ? 'active' : ''}") 
+      li.breadcrumb-item class=("#{crumb.current? ? 'active' : ''}")
         = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})
-    li.nav-item.ml-auto.pr-3
-      - if admin?
-        = link_to swagger_ui_engine_path, data: { turbolinks: false }, class: "mr-3" do
-          = fa_icon :project_diagram
-          span.d-none.d-sm-inline.ml-2= t('schematics.application.breadcrumbs.api')
-      - if can?(:read, Setting)
-        = link_to edit_settings_path do
-          = fa_icon :cog
-          span.d-none.d-sm-inline.ml-2= t('schematics.application.breadcrumbs.settings')

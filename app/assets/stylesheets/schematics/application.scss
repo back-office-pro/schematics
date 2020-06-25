@@ -24,18 +24,9 @@ html, body {
   ul.nav {
     height: calc(100vh - 50px - 3.5rem);
     overflow-y: auto;
-    flex-wrap: nowrap;
   }
   #sidebar-toggle {
     height: 50px;
-  }
-}
-
-nav.sticky-top[aria-label="breadcrumb"] {
-  top: 3.5rem;
-  z-index: 1;
-  .nav-item:not(.breadcrumb-item) a {
-    text-decoration: underline;
   }
 }
 
@@ -44,9 +35,6 @@ nav.sticky-top[aria-label="breadcrumb"] {
   height: 3.5rem;
   .navbar-nav {
     height: 3.5rem;
-  }
-  .navbar-search {
-    width: 25rem;
   }
   .badge.badge-danger {
     position: absolute;
@@ -71,7 +59,6 @@ nav.sticky-top[aria-label="breadcrumb"] {
   z-index: 3;
   flex: 0 0 14rem;
   max-width: 14rem;
-  box-shadow: inset -8px 0px 8px -4px rgba(0, 0, 0, 0.3);
   transition: ease-in-out 0.3s;
   .sidebar-brand {
     height: 3.5rem;
@@ -80,7 +67,6 @@ nav.sticky-top[aria-label="breadcrumb"] {
     text-transform: uppercase;
     letter-spacing: .05rem;
     font-weight: 800;
-    text-decoration: none !important;
     background: rgba(0, 0, 0, 0.2);
   }
   .nav-link.active {

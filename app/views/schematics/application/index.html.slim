@@ -2,12 +2,12 @@
   = submit_tag "Filtrer", name: nil, class: "d-none"
   .card.shadow-sm.w-100
     .card-header.p-2
-      ul.nav.align-items-center
-        li.nav-item
+      .row.align-items-center
+        .col.text-truncate
           h5.m-0.text-primary.text-truncate.font-weight-bold
             = fa_icon :table, class: "mr-3 ml-3 fa-lg align-middle"
             span.align-middle= title
-        li.nav-item.ml-auto.mr-1
+        .col-auto.mr-1
           - if @resources.size > 10
             = select_tag :per_page,
               options_for_select([10, 25, 50, 100].map { |size| [t('.dropdowns.per_page', size: size, model_name: @model_name_plural), size] }, params.fetch(:per_page, 25)),

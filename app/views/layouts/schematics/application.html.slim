@@ -19,17 +19,16 @@ html
         .col.bg-primary.sidebar
           = cell('schematics/sidebar', current_ability).()
         .col.bg-light.content
-          nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top
-            = form_tag schematics.searches_path, class: "d-sm-inline-block mw-100 ml-4 form-inline navbar-search" do
-              .input-group
-                = text_field_tag :query,
+          nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top.shadow-sm
+            = cell('schematics/breadcrumbs', _breadcrumbs).()
+            ul.navbar-nav.ml-auto.p-3
+              = form_tag schematics.searches_path, class: "form-inline flex-nowrap pr-3" do
+                = search_field_tag :query,
                   @query,
                   required: true,
                   placeholder: t('.search.placeholder'),
-                  class: "form-control typeahead-search bg-light border-0 search" 
-                .input-group-append
-                  = button_tag fa_icon(:search), name: nil, class: "btn btn-primary"
-            ul.navbar-nav.ml-auto.p-3
+                  class: "form-control typeahead-search border-0 rounded-0 search" 
+                = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
               = cell('schematics/notification_center', current_user).()
               = cell('schematics/message_center', current_user).()
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
@@ -45,11 +44,18 @@ html
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"
                     = t('.dropdown.edit_profile')
+                  - if can?(:read, Setting)
+                    = link_to main_app.edit_settings_path, class: "dropdown-item" do
+                      = fa_icon :cog, class: "mr-3"
+                      = t('.dropdown.settings')
+                  - if current_ability.admin?
+                    = link_to main_app.swagger_ui_engine_path, data: { turbolinks: false }, class: "dropdown-item" do
+                      = fa_icon :project_diagram, class: "mr-3"
+                      = t('.dropdown.api')
                   .dropdown-divider
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                     = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')
-          = cell('schematics/breadcrumbs', current_ability, breadcrumbs: _breadcrumbs).()
           .container-fluid.my-4.px-4.animated class=('slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top

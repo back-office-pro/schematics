@@ -3,12 +3,12 @@
 - all_attachments = {}
 .card.shadow-sm
   .card-header.p-2
-    ul.nav.align-items-center
-      li.nav-item
+    .row.align-items-center
+      .col.text-truncate
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon :eye, class: "mr-3 ml-3 fa-lg align-middle"
           span.align-middle= title
-      li.nav-item.ml-auto.mr-1
+      .col-auto.mr-1
         = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-light btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :file_pdf
           span.text.d-none.d-lg-inline= t('.buttons.download_pdf')

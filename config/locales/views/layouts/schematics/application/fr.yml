@@ -6,6 +6,8 @@ fr:
         dropdown:
           logout: Déconnexion
           edit_profile: Editer mon profil
+          settings: Paramètres application
+          api: Accès API
         search:
           placeholder: Rechercher...
           not_found: Aucun résultat
