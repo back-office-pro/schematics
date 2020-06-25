@@ -1,5 +1,5 @@
 Chartkick.options = {
-  # colors: ['#2C3E50', '#ecf0f1'],
+  colors: ['#2C3E50', '#95a5a6'],
   height: '300px',
   html: <<~HTML,
     <div id="%{id}"
