@@ -10,7 +10,7 @@ module Schematics
     end
 
     def unread
-      PaperTrail::Version.where(created_at: updated_at...).count
+      PaperTrail::Version.where(created_at: updated_at...).size
     end
   end
 end

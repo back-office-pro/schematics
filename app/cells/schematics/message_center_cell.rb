@@ -11,7 +11,7 @@ module Schematics
     end
 
     def unread
-      received_messages.count
+      received_messages.size
     end
   end
 end
