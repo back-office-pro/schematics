@@ -1,10 +1,10 @@
 module Schematics
   class ApplicationSerializer < ActiveModel::Serializer
-    delegate :model_class, to: :class
-    delegate :entity, to: :model_class
+    delegate :model_class, to: :class, private: true
+    delegate :entity, to: :model_class, private: true
 
     class << self
-      delegate :entity, to: :model_class
+      delegate :entity, to: :model_class, private: true
 
       def inherited(subclass)
         super

@@ -1,8 +1,8 @@
 module Schematics
   class CsvSerializer
     delegate_missing_to :entity
-    delegate :klass, to: :@records
-    delegate :entity, to: :klass
+    delegate :klass, to: :@records, private: true
+    delegate :entity, to: :klass, private: true
 
     def initialize(records)
       @records = records
