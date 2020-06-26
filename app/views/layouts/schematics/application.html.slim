@@ -27,7 +27,7 @@ html
                   @query,
                   required: true,
                   placeholder: t('.search.placeholder'),
-                  class: "form-control typeahead-search border-0 rounded-0 search" 
+                  class: "form-control typeahead-search border-0 rounded-0 bg-transparent search" 
                 = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
               = cell('schematics/notification_center', current_user).()
               = cell('schematics/message_center', current_user).()

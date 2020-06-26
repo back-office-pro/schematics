@@ -46,13 +46,11 @@ html, body {
 }
 
 .navbar.scrolled {
-  opacity: 0.8;
-  transition: opacity .2s;
+  background: rgba(255, 255, 255, 0.6) !important;
 }
 
 .navbar.scrolled:hover {
-  opacity: 1.0;
-  transition: opacity .2s;
+  background: white !important;
 }
 
 .sidebar {
