@@ -23,6 +23,9 @@ rails_command "db:fixtures:load" if options[:skip_listen]
 rails_command "schematics:db:seed"
 rails_command "swagger:docs"
 
+# Security
+run "brakeman"
+
 # Git
 run "git add -A"
 run "git commit -m 'initial commit'"
