@@ -94,11 +94,11 @@ $(document).on('turbolinks:load', function() {
         );
 
     $('input.typeahead-filter')
-        .on('typeahead:selected', function() { 
+        .on('typeahead:selected', function() {
             $(this.form).submit();
         })
         .typeahead(
-            { 
+            {
                 highlight: true,
                 minLength: 3
             },

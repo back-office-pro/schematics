@@ -27,12 +27,12 @@ html
                   @query,
                   required: true,
                   placeholder: t('.search.placeholder'),
-                  class: "form-control typeahead-search border-0 rounded-0 bg-transparent search" 
+                  class: "form-control typeahead-search border-0 rounded-0 bg-transparent search"
                 = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
               = cell('schematics/notification_center', current_user).()
               = cell('schematics/message_center', current_user).()
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
-                a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
                   = cell('schematics/attachment',
                          current_user.avatar,
@@ -40,7 +40,7 @@ html
                          height: 36,
                          css_class: 'rounded-circle border shadow-sm',
                          replacement: { icon: :user_circle, size: '2x' }).()
-                .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm aria-labelledby="accountDropdown" 
+                .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm aria-labelledby="accountDropdown"
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"
                     = t('.dropdown.edit_profile')

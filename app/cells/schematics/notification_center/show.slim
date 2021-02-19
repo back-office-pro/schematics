@@ -1,9 +1,9 @@
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
-  a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+  a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
     = fa_icon :bell, class: "fa-lg"
     - unless unread.zero?
       .badge.badge-danger.animated.zoomIn= unread
-  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="notificationsDropdown" 
+  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="notificationsDropdown"
     h5.dropdown-header.font-weight-bold.bg-light= I18n.t('.notification_center')
     - versions.each do |version|
       .dropdown-item.d-flex.align-items-center

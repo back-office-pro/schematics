@@ -1,9 +1,9 @@
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
-  a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+  a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
     = fa_icon :envelope, class: "fa-lg"
     - unless unread.zero?
       .badge.badge-danger.animated.zoomIn= unread
-  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="messagesDropdown" 
+  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="messagesDropdown"
     h5.dropdown-header.font-weight-bold.bg-light= I18n.t('.message_center')
     - messages.each do |message|
       = cell('schematics/message_modal', message).()
@@ -14,7 +14,7 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
                        height: 36,
                        css_class: 'rounded-circle border shadow-sm',
                        replacement: { icon: :user_circle, size: '2x' }).(), message.author
-        div.ml-3 data-toggle="modal" data-target="#messageModal-#{message.id}" 
+        div.ml-3 data-toggle="modal" data-target="#messageModal-#{message.id}"
           .text-truncate= link_to message.subject, message
           .text-truncate= message.content.to_plain_text
           .text-muted.small #{message.author.full_name} - #{time_ago_in_words(message.created_at)}
