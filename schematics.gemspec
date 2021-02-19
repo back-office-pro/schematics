@@ -80,6 +80,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "simple_calendar", "~> 2.4.0"
   spec.add_dependency "cancancan", "~> 3.1.0"
   spec.add_dependency "brakeman", "~> 4.9.1"
+  spec.add_dependency "rails_best_practices", "~> 1.20.0"
   spec.add_dependency "thor", "~> 0.20.3"
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   spec.files = Dir["{app,config,db,lib}/**/*", "README.md"]

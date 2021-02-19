@@ -26,6 +26,9 @@ rails_command "swagger:docs"
 # Security
 run "brakeman"
 
+# Best practices
+run "rails_best_practices"
+
 # Git
 run "git add -A"
 run "git commit -m 'initial commit'"
