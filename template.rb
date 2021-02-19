@@ -24,7 +24,7 @@ rails_command "schematics:db:seed"
 rails_command "swagger:docs"
 
 # Security
-run "brakeman"
+run "brakeman --no-pager"
 
 # Best practices
 run "rails_best_practices"
