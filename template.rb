@@ -17,7 +17,7 @@ rails_command "generate annotate:install"
 rails_command "generate fixtures"
 # rails_command "generate locales"
 rails_command "generate erd:install"
-rails_command "db:environment:set RAILS_ENV=development"
+# rails_command "db:environment:set RAILS_ENV=development"
 rails_command "db:migrate:reset"
 rails_command "db:fixtures:load" if options[:skip_listen]
 rails_command "schematics:db:seed"
