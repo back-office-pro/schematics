@@ -30,10 +30,10 @@ module Schematics
         @name = name
         @icon = icon
         @associations = associations.map do |association|
-          Associations::Association.create(self, association)
+          Associations::Association.create(self, **association)
         end
-        @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, attribute) }
-        @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, virtual) }
+        @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, **attribute) }
+        @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, **virtual) }
         @descriptor = Descriptor.create(self, descriptor)
         @generators = default_generators + @associations.flat_map(&:generator)
       end

@@ -7,7 +7,7 @@ resource "Sessions" do
 
   let(:user) { users(:two) }
   let(:email) { user.email }
-  let(:auth_token) { JsonWebToken.encode(auth_token: user.auth_token) }
+  let(:auth_token) { JsonWebToken.encode({ auth_token: user.auth_token }) }
 
   post "/sessions" do
     with_options scope: :user, with_example: true do

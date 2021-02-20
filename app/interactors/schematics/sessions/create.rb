@@ -13,7 +13,7 @@ module Schematics
       def call
         if @user&.authenticate(@password)
           context.token = @user.auth_token
-          context.jwt = JsonWebToken.encode(auth_token: context.token)
+          context.jwt = JsonWebToken.encode({ auth_token: context.token })
           context.message = ".success"
           if @cookies.present?
             if remember_me?

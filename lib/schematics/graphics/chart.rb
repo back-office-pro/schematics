@@ -7,8 +7,8 @@ module Schematics
       class << self
         def create(schema, entity:, type:, x:, y:)
           entity = schema.find_entity_by_name(entity)
-          x = Axes::X.create(entity, x)
-          y = Axes::Y.create(entity, y)
+          x = Axes::X.create(entity, **x)
+          y = Axes::Y.create(entity, **y)
           new(entity, type, x, y)
         end
       end

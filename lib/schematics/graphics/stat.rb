@@ -4,7 +4,7 @@ module Schematics
       class << self
         def create(schema, entity:, **args)
           entity = schema.find_entity_by_name(entity)
-          super(entity, args)
+          super(entity, **args)
         end
       end
 

@@ -59,7 +59,7 @@ module Schematics
       end
 
       def create_inverse_association
-        Associations::Association.create(self, inverse_association)
+        Associations::Association.create(self, **inverse_association)
       end
 
       def input_type
