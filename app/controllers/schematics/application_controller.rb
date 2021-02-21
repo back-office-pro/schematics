@@ -28,7 +28,7 @@ module Schematics
         format.json { head :unauthorized }
         format.any do
           redirect_to schematics.login_path,
-                      alert: t('schematics.application.resources.forbidden.alert')
+                      alert: t('schematics.resources.forbidden.alert')
         end
       end
     end
