@@ -9,7 +9,6 @@ module AcceptanceHelpers
 
   def token_auth
     header 'Authorization', :auth_token
-
     fixtures :users
 
     let(:user) { users(:two) }
