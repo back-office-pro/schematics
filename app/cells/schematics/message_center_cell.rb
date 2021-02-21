@@ -3,6 +3,7 @@ module Schematics
     self.view_paths = ["#{Engine.root}/app/cells"]
     include FontAwesome5::Rails::IconHelper
     include ActionView::Helpers::DateHelper
+    include ::Rails::Timeago::Helper
     property :updated_at
     property :received_messages
 
