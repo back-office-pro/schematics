@@ -22,7 +22,7 @@
                         span.icon= fa_icon :trash
                         span.text.d-none.d-lg-inline= t('.buttons.destroy')
   .card-body.p-0
-    = render template: 'schematics/application/show.pdf'
+    = render template: 'schematics/application/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|
   - rich_text = @resource.instance_eval(attribute.name)
   - if rich_text.present?
@@ -50,7 +50,7 @@
   - if resources.any?
     - all_resources[association.name] = resources
     = render 'schematics/application/viewers/association',
-              resources: resources,
+              resources: resources.includes(association.entity.includes),
               title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
               icon: association.icon,
               entity: association.entity,

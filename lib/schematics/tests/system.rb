@@ -3,7 +3,6 @@ require 'action_text/system_test_helper'
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
-      include ActionText::SystemTestHelper
       driven_by :selenium_headless
       delegate :model_class, to: :class, private: true
       delegate :entity, :model_name, to: :model_class, private: true

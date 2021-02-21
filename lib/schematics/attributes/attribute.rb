@@ -74,11 +74,10 @@ module Schematics
       end
 
       def validate
-        if validators.any?
-          <<~RUBY
-            validates :#{@name}, #{validators}
-          RUBY
-        end
+        return if validators.empty?
+        <<~RUBY
+          validates :#{@name}, #{validators}
+        RUBY
       end
 
       def default

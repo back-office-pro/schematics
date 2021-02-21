@@ -13,7 +13,9 @@ module Schematics
     end
 
     def current_user
-      @current_user ||= User.find_by_auth_token cookies[:auth_token] || auth_token&.dig(:auth_token)
+      @current_user ||= User
+        .includes(:avatar_attachment, role: [:permissions])
+        .find_by_auth_token(cookies[:auth_token] || auth_token&.dig(:auth_token))
     end
 
     def auth_token
@@ -21,13 +23,12 @@ module Schematics
     end
 
     def authorize
-      if current_user.nil?
-        respond_to do |format|
-          format.json { head :unauthorized }
-          format.any do
-            redirect_to schematics.login_path,
-                        alert: t('schematics.application.resources.forbidden.alert')
-          end
+      return if current_user.present?
+      respond_to do |format|
+        format.json { head :unauthorized }
+        format.any do
+          redirect_to schematics.login_path,
+                      alert: t('schematics.application.resources.forbidden.alert')
         end
       end
     end

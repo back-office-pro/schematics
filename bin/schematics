@@ -16,8 +16,8 @@ rails new $app_name \
     --database postgresql \
     --skip-keeps \
     --skip-action-cable \
-    --skip-bundle \
     --template template.rb \
     -$disable-skip-listen \
     -$disable-skip-bootsnap \
+    -$disable-skip-spring \
     --dummy-app=$dummy_app

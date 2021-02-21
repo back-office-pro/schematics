@@ -23,7 +23,7 @@
             - break unless association.required?
             - if resources.key?(association.name)
               = render 'schematics/application/viewers/association',
-                        resources: resources[association.name],
+                        resources: resources[association.name].includes(association.entity.includes),
                         title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
                         icon: association.icon,
                         entity: association.entity,

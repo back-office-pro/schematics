@@ -1,8 +1,15 @@
 inherit_from: 
   - .rubocop_airbnb.yml
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: leading
 Style/Documentation:
   Enabled: false
+Style/GuardClause:
+  Enabled: true
+Style/IfUnlessModifier:
+  Enabled: true
 AllCops:
   TargetRubyVersion: 2.7.1
   Exclude:
-    - 'spec/dummy/**/*'
+    - spec/dummy/**/*

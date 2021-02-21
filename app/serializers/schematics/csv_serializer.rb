@@ -27,8 +27,8 @@ module Schematics
     def headers
       ((entity.renderable_fields - entity.association_attributes) +
         entity.association_attributes +
-        entity.renderable_associations).
-        map(&:name).map { |name| klass.human_attribute_name(name) }
+        entity.renderable_associations)
+        .map(&:name).map { |name| klass.human_attribute_name(name) }
     end
 
     def renderable_fields

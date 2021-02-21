@@ -12,3 +12,9 @@ ActiveSupport.on_load(:active_storage_blob) do
     acts_as_paranoid
   end
 end
+
+ActiveSupport.on_load(:active_storage_variant) do
+  ActiveStorage::Variant.class_eval do
+    acts_as_paranoid
+  end
+end

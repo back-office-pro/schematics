@@ -231,15 +231,15 @@ module Schematics
 
     def set_resource
       scope = request.delete? ? :with_deleted : :unscoped
+      @resource = model_class.includes(entity.includes)
       @resource = case entity
                   when Entities::Singleton
-                    model_class.instance
+                    @resource.instance
                   when Entities::Entity
-                    model_class.send(scope).find(params[:id])
+                    @resource.send(scope).find(params[:id])
                   end
-      unless request.path.start_with? polymorphic_path(@resource)
-        return redirect_to @resource, status: :moved_permanently
-      end
+      return if request.path.start_with?(polymorphic_path(@resource))
+      redirect_to @resource, status: :moved_permanently
     end
 
     def set_breadcrumb

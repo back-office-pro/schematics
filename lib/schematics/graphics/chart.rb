@@ -33,12 +33,14 @@ module Schematics
       end
 
       def as_json
-        class_name.constantize.
-          send(x.agregate.to_sym, x.to_sql).
-          send(y.agregate.to_sym, y.to_sql).
-          map do |key, value|
+        class_name
+          .constantize
+          .send(x.agregate.to_sym, x.to_sql)
+          .send(y.agregate.to_sym, y.to_sql)
+          .map do |key, value|
             [x.field&.format(key) || key, y.field&.format(value) || value]
-          end.to_h
+          end
+          .to_h
       end
     end
   end
