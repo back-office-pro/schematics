@@ -5,6 +5,7 @@ module Schematics
       include FontAwesome5::Rails::IconHelper
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::TranslationHelper
+      include ::Rails::Timeago::Helper
       property :user
       property :event
       property :item

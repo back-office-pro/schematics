@@ -5,6 +5,8 @@
 //= require Chart.bundle
 //= require pagy
 //= require font_awesome5
+//= require rails-timeago
+//= require locales/jquery.timeago.fr.js
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {

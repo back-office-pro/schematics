@@ -8,6 +8,6 @@
                   replacement: { icon: :user_circle, size: '2x' }).(), user
   .col.text-truncate
     = link_to item.to_s, item if item.present?
-    div.text-muted= t('layouts.schematics.application.ago', time: time_ago_in_words(created_at))
+    div.text-muted= timeago_tag(created_at)
   .col-auto.align-self-center
     = fa_icon(icon, size: '2x', class: 'text-light')
