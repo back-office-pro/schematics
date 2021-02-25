@@ -48,6 +48,10 @@ module Schematics
                   foreign_key: '#{belongs_to.column_name}'
         RUBY
       end
+
+      def weight
+        3
+      end
     end
   end
 end

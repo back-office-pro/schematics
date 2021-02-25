@@ -9,64 +9,15 @@
         .table-responsive
           table.table.mb-0.table-striped
             tbody.table-bordered.border-0
-              - (entity.renderable_fields - entity.association_attributes).each do |field|
+              - entity.renderable_elements.sort_by(&:weight).each do |field|
                 tr
                   th
                     = fa_icon field.icon, class: "mr-2 text-muted"
                     = model_class.human_attribute_name(field.name)
                   td
-                    - value = reify.instance_eval(field.name)
-                    - case field
-                    - when Schematics::Attributes::Attachments
-                      - value.with_deleted.includes(:blob).each do |attachment|
-                        - if attachment.representable?
-                          = cell('schematics/attachment', attachment).()
-                        - else
-                          = link_to attachment.filename, attachment
-                    - when Schematics::Attributes::Attachment
-                      - if value.attached?
-                        - if value.representable?
-                          = cell('schematics/attachment', value).()
-                        - else
-                          = link_to value.filename, value
-                    - when Schematics::Attributes::Boolean
-                      = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
-                    - when Schematics::Attributes::RichText
-                      == value
-                    - else
-                      = field.format(value)
+                    = cell('schematics/resource', reify, field: field).()
                   td
-                    - value = new_version.instance_eval(field.name)
-                    - case field
-                    - when Schematics::Attributes::Attachments
-                      - value.with_deleted.includes(:blob).each do |attachment|
-                        - if attachment.representable?
-                          = cell('schematics/attachment', attachment).()
-                        - else
-                          = link_to attachment.filename, attachment
-                    - when Schematics::Attributes::Attachment
-                      - if value.attached?
-                        - if value.representable?
-                          = cell('schematics/attachment', value).()
-                        - else
-                          = link_to value.filename, value
-                    - when Schematics::Attributes::Boolean
-                      = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
-                    - when Schematics::Attributes::RichText
-                      == value
-                    - else
-                      = field.format(value)
-              - (entity.association_attributes + entity.renderable_associations).each do |association|
-                tr
-                  th
-                    = fa_icon association.icon, class: "mr-2 text-muted"
-                    = model_class.human_attribute_name(association.name)
-                  td
-                    - value = reify.instance_eval(association.name)
-                    = link_to(value, value) if value
-                  td
-                    - value = new_version.instance_eval(association.name)
-                    = link_to(value, value) if value
+                    = cell('schematics/resource', new_version, field: field).()
       .modal-footer.bg-light.justify-content-start
         = button_tag data: { dismiss: "modal" },
                      class: "btn btn-danger btn-sm btn-icon-split" do

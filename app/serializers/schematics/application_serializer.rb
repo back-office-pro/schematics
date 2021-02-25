@@ -10,34 +10,27 @@ module Schematics
         super
         subclass.class_eval do
           attribute :id unless entity.is_a?(Entities::Singleton)
-
-          (entity.renderable_fields -
-            entity.association_attributes -
-            entity.rich_text_attributes -
-            entity.attachment_attributes).each do |field|
-            attribute field.name.to_sym
-          end
-
-          (entity.attachment_attributes + entity.rich_text_attributes).each do |attribute|
-            attribute attribute.name.to_sym do
-              attribute.format object.send(attribute.name.to_sym)
+          entity.elements.sort_by(&:weight).each do |element|
+            case element
+            when Attributes::Attachment, Attributes::RichText
+              attribute element.name.to_sym do
+                element.format object.send(element.name.to_sym)
+              end
+            when Attributes::Association
+              belongs_to element.name.to_sym,
+                         serializer: element.inverse_descriptor.serializer_class
+            when Associations::HasOne, Associations::HasOneThrough
+              has_one element.name.to_sym,
+                      serializer: element.descriptor.serializer_class
+            when Associations::HasMany,
+                 Associations::HasManyThrough,
+                 Associations::HasAndBelongsToMany
+              has_many element.name.to_sym,
+                       serializer: element.descriptor.serializer_class,
+                       if: -> { should_render_has_many_associations }
+            else
+              attribute element.name.to_sym
             end
-          end
-
-          entity.association_attributes.each do |attribute|
-            belongs_to attribute.name.to_sym,
-                       serializer: attribute.inverse_descriptor.serializer_class
-          end
-
-          entity.renderable_associations.each do |association|
-            has_one association.name.to_sym,
-                    serializer: association.descriptor.serializer_class
-          end
-
-          entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
-            has_many association.name.to_sym,
-                     serializer: association.descriptor.serializer_class,
-                     if: -> { should_render_has_many_associations }
           end
         end
       end

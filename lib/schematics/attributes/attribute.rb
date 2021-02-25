@@ -95,6 +95,10 @@ module Schematics
       def to_str
         ""
       end
+
+      def weight
+        1
+      end
     end
   end
 end

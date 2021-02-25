@@ -1,0 +1,59 @@
+.table-responsive
+  table.table.mb-0 class=(['table-striped', 'table-hover'] if resources.any?)
+    = cell('schematics/viewers/filters', model_klass).()
+    /tbody class=('table-bordered border-0' if resources.any?) class=('animated slideInRight' if params[:page].present?)
+- if resources.empty?
+  = cell('schematics/empty').()
+- else
+  - resources.to_a.in_groups_of(3, false).each do |group|
+    .row
+      - group.each do |resource|
+        .col-lg-4
+          .table-responsive
+            table.table.mb-0.table-striped
+              tbody.table-bordered.border-0
+                tr
+                  td colspan="2"
+                    #carouselExampleControls.carousel.slide data-ride="carousel" 
+                      .carousel-inner
+                        .carousel-item.active
+                          img.d-block.w-100 alt=("First slide") src="..." /
+                        .carousel-item
+                          img.d-block.w-100 alt=("Second slide") src="..." /
+                        .carousel-item
+                          img.d-block.w-100 alt=("Third slide") src="..." /
+                      a.carousel-control-prev data-slide="prev" href="#carouselExampleControls" role="button" 
+                        span.carousel-control-prev-icon aria-hidden="true" 
+                        span.sr-only Previous
+                      a.carousel-control-next data-slide="next" href="#carouselExampleControls" role="button" 
+                        span.carousel-control-next-icon aria-hidden="true" 
+                        span.sr-only Next
+                - entity.renderable_elements.reject_is_a?(Schematics::Attributes::Attachment).sort_by(&:weight).each do |field|
+                  tr
+                    th
+                      = fa_icon field.icon, class: "mr-2 text-muted"
+                      = model_klass.human_attribute_name(field.name)
+                    td
+                      = cell('schematics/resource', resource, field: field, editable: true).()
+          /tr class=('disabled' if resource.deleted?) data-href=(polymorphic_path(resource) unless resource.deleted?)
+            td.text-nowrap.text-center
+              .btn-group.enabled
+                - if resource.deleted?
+                  - if can?(:restore, resource)
+                    = link_to fa_icon(:trash_restore),
+                      polymorphic_path(resource, action: :restore),
+                      method: :delete,
+                      class: "btn btn-danger btn-sm",
+                      data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.restore') }
+                - else
+                  - if can?(:update, resource)
+                    = link_to edit_polymorphic_path(resource),
+                      class: "btn btn-primary btn-sm",
+                      data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.edit') } do
+                      = fa_icon :edit
+                  - if can?(:archive, resource)
+                    = link_to fa_icon(:archive),
+                      polymorphic_path(resource, action: :archive),
+                      method: :delete,
+                      class: "btn btn-danger btn-sm",
+                      data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.archive') }

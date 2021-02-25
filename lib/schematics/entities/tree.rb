@@ -7,6 +7,10 @@ module Schematics
         RUBY
       end
 
+      def viewer
+        :tree
+      end
+
       protected
 
       def default_generators

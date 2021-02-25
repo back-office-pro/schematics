@@ -1,60 +1,62 @@
 = simple_form_for model, url: url, validate: true, defaults: { input_html: { class: "bg-light border-0" } } do |f|
-  - (attributes - entity.belongs_to_attributes).each do |attribute|
-    - case attribute
+  - attributes.sort_by(&:weight).each do |field|
+    - case field
+    - when Schematics::Associations::HasAndBelongsToMany
+      = f.association field.name.to_sym, as: :check_boxes 
+    - when Schematics::Attributes::BelongsTo
+      = f.association field.name.to_sym,
+                      prompt: t('schematics.application.form.prompt', model_name: model_class.human_attribute_name(field.name).downcase)
     - when Schematics::Attributes::Date
-      = f.input attribute.name.to_sym, as: :date, html5: true
+      = f.input field.name.to_sym, as: :date, html5: true
     - when Schematics::Attributes::String
-      = f.input attribute.name.to_sym,
+      = f.input field.name.to_sym,
                 maxlength: true,
                 minlength: true,
                 pattern: true,
                 wrapper: :input_group,
-                prepend: fa_icon(attribute.icon)
+                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Decimal
-      = f.input attribute.name.to_sym,
+      = f.input field.name.to_sym,
                 min_max: true,
                 wrapper: :input_group,
-                prepend: attribute.unit || fa_icon(attribute.icon)
+                prepend: field.unit || fa_icon(field.icon)
     - when Schematics::Attributes::RichText
-      = f.input attribute.name.to_sym, as: :rich_text_area
+      = f.input field.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
-      = f.input attribute.name.to_sym,
+      = f.input field.name.to_sym,
                 as: :radio_buttons,
-                collection: attribute.input_collection.map(&:reverse)
+                collection: field.input_collection.map(&:reverse)
     - when Schematics::Attributes::Attachments
-      = f.input attribute.name.to_sym,
+      = f.input field.name.to_sym,
                 as: :file,
-                validate: { presence: attribute.required? && new_record? },
-                hint: cell('schematics/validators', attribute).(),
+                validate: { presence: field.required? && new_record? },
+                hint: cell('schematics/validators', field).(),
                 input_html: { multiple: true }
     - when Schematics::Attributes::Attachment
-      - attachment = model.send(attribute.name.to_sym)
+      - attachment = model.send(field.name.to_sym)
       - if attachment.attached? && attachment.persisted?
         = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy, as: :boolean, wrapper_html: { class: "float-right m-0 text-dark" }
-      = f.input attribute.name.to_sym,
+      = f.input field.name.to_sym,
                 as: :file,
-                validate: { presence: attribute.required? && new_record? },
-                hint: cell('schematics/validators', attribute).()
+                validate: { presence: field.required? && new_record? },
+                hint: cell('schematics/validators', field).()
     - when Schematics::Attributes::Digest
-      = f.input attribute.name.to_sym,
+      = f.input field.name.to_sym,
                 required: new_record?,
                 input_html: { autocomplete: "new-password" },
-                prepend: fa_icon(attribute.icon)
-      = f.input :"#{attribute.name}_confirmation",
-                required: new_record?,
-                input_html: { autocomplete: "new-password" },
-                prepend: fa_icon(attribute.icon)
-    - else
-      = f.input attribute.name.to_sym,
                 wrapper: :input_group,
-                prepend: attribute.try(:unit) || fa_icon(attribute.icon)
-  - entity.belongs_to_attributes.each do |attribute|
-    = f.association attribute.name.to_sym,
-                    prompt: t('schematics.application.form.prompt', model_name: model_class.human_attribute_name(attribute.name).downcase)
-  - entity.has_and_belongs_to_many_associations.each do |association|
-    = f.association association.name.to_sym, as: :check_boxes
+                prepend: fa_icon(field.icon)
+      = f.input :"#{field.name}_confirmation",
+                required: new_record?,
+                input_html: { autocomplete: "new-password" },
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
+    - else
+      = f.input field.name.to_sym,
+                wrapper: :input_group,
+                prepend: field.try(:unit) || fa_icon(field.icon)
   = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2", disabled: new_record? do
     span.icon= fa_icon :check
     span.text= t('schematics.application.form.buttons.confirm')

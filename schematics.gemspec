@@ -76,7 +76,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "interactor", "~> 3.1.2"
   spec.add_dependency "cells-rails", "~> 0.1.3"
   spec.add_dependency "cells-slim", "~> 0.0.6"
-  spec.add_dependency "simple_calendar", "~> 2.4.1"
   spec.add_dependency "cancancan", "~> 3.2.1"
   spec.add_dependency "brakeman", "~> 5.0.0"
   spec.add_dependency "rails_best_practices", "~> 1.20.0"

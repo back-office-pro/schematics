@@ -1,0 +1,13 @@
+thead
+  tr
+    th.text-nowrap.text-center.pb-0
+      = t('schematics.application.viewers.table.archives')
+    - entity.renderable_elements.sort_by(&:weight).each do |field|
+          th.text-nowrap.text-center.pb-0
+            = cell('schematics/sort_link', field, model_class: model_class).()
+  tr.filters
+    th.text-nowrap.align-middle.px-0.py-1
+      = cell('schematics/filters/checkbox', :with_deleted).()
+    - entity.renderable_elements.sort_by(&:weight).each do |field|
+          th.align-middle.text-center.px-0.py-1
+            = cell('schematics/filters/filter', field, model_class: model_class).()

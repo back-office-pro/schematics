@@ -9,11 +9,4 @@
       = cell('schematics/empty', @suggestions).()
 - else
   - @results.each do |name, resources|
-    - model_class = resources.first.class
-    = render 'schematics/application/viewers/association',
-        resources: resources,
-        title: model_class.model_name.human(count: resources.size),
-        icon: model_class.entity.icon,
-        entity: model_class.entity,
-        model_class: model_class,
-        collapsed: false
+    = cell('schematics/viewers/association', resources, ability: current_ability).()

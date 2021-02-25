@@ -72,6 +72,10 @@ module Schematics
         end
       end
 
+      def weight
+        2
+      end
+
       private
 
       def inverse_association

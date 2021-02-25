@@ -50,6 +50,10 @@ module Schematics
           end
         RUBY
       end
+
+      def weight
+        1
+      end
     end
   end
 end

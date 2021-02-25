@@ -1,19 +1,18 @@
 module Schematics
   class CsvSerializer
-    delegate_missing_to :entity
-    delegate :klass, to: :@records, private: true
+    delegate :klass, to: :@resources, private: true
     delegate :entity, to: :klass, private: true
+    delegate :renderable_elements, to: :entity
 
-    def initialize(records)
-      @records = records
+    def initialize(resources)
+      @resources = resources
     end
 
     def to_csv(separator: ',')
       CSV.generate(headers: true, col_sep: separator) do |file|
         file << headers
-        @records.each do |record|
-          @record = record
-          file << renderable_fields + renderable_associations
+        @resources.each do |resource|
+          file << renderable_elements_of(resource)
         end
       end
     end
@@ -25,21 +24,15 @@ module Schematics
     private
 
     def headers
-      ((entity.renderable_fields - entity.association_attributes) +
-        entity.association_attributes +
-        entity.renderable_associations)
-        .map(&:name).map { |name| klass.human_attribute_name(name) }
+      renderable_elements
+        .sort_by(&:weight)
+        .map(&:name)
+        .map { |name| klass.human_attribute_name(name) }
     end
 
-    def renderable_fields
-      (super - association_attributes).map do |field|
-        Array.wrap(field.format(@record.instance_eval(field.name))).join(' ')
-      end
-    end
-
-    def renderable_associations
-      (association_attributes + super).map do |association|
-        @record.instance_eval(association.name)
+    def renderable_elements_of(resource)
+      renderable_elements.sort_by(&:weight).map do |element|
+        Array.wrap(element.format(resource.instance_eval(element.name))).join(' ')
       end
     end
   end

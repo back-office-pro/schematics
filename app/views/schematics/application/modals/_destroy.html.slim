@@ -12,23 +12,13 @@
             = t('.body', model_name: @model_name, resource: @resource)
           - entity.attachments_attributes.each do |attribute|
             - if attachments.key?(attribute.name)
-              = render 'schematics/application/viewers/attachments',
-                        attachments: attachments[attribute.name],
-                        title: attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size),
-                        icon: attribute.icon,
-                        entity: attribute.entity,
-                        model_class: attribute.entity.class_name.constantize,
-                        collapsed: false
+              = cell('schematics/viewers/association', attachments[attribute.name], ability: current_ability).()
           - entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
             - break unless association.required?
             - if resources.key?(association.name)
-              = render 'schematics/application/viewers/association',
-                        resources: resources[association.name].includes(association.entity.includes),
-                        title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
-                        icon: association.icon,
-                        entity: association.entity,
-                        model_class: association.class_name.constantize,
-                        collapsed: false
+              = cell('schematics/viewers/association',
+                     resources[association.name].includes(association.entity.includes),
+                     ability: current_ability).()
       .modal-footer.bg-light class=(resources.any? || attachments.any? ? 'justify-content-start' : 'justify-content-center')
         = link_to polymorphic_path(@resource),
                   method: :delete,

@@ -17,7 +17,7 @@ module Schematics
     end
 
     def attributes
-      @options[:attributes] || entity.fillable_attributes
+      @options[:attributes] || entity.fillable_elements
     end
 
     def cancel_path

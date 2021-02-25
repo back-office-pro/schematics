@@ -94,7 +94,10 @@ module Schematics
     end
 
     def attributes
-      entity.fillable_attributes.insert(2, current_password_attribute)
+      entity
+        .fillable_elements
+        .insert(2, current_password_attribute)
+        .reject_is_a?(Attributes::Association)
     end
   end
 end

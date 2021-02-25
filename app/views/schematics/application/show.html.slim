@@ -38,24 +38,14 @@
   - attachments = @resource.instance_eval(attribute.name).includes(:blob)
   - if attachments.any?
     - all_attachments[attribute.name] = attachments
-    = render 'schematics/application/viewers/attachments',
-              attachments: attachments,
-              title: attribute.entity.class_name.constantize.human_attribute_name(attribute.name, count: attachments.size),
-              icon: attribute.icon,
-              entity: attribute.entity,
-              model_class: attribute.entity.class_name.constantize,
-              collapsed: true
+    = cell('schematics/viewers/association', attachments, ability: current_ability).()
 - entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
   - resources = @resource.instance_eval(association.name).accessible_by(current_ability)
   - if resources.any?
     - all_resources[association.name] = resources
-    = render 'schematics/application/viewers/association',
-              resources: resources.includes(association.entity.includes),
-              title: association.class_name.constantize.human_attribute_name(association.name, count: resources.size),
-              icon: association.icon,
-              entity: association.entity,
-              model_class: association.class_name.constantize,
-              collapsed: true
+    = cell('schematics/viewers/association',
+           resources.includes(association.entity.includes),
+           ability: current_ability).()
 .mt-4
   = cell('schematics/timeline', @resource.versions.with_user.with_item.reorder(created_at: :desc).select { |version| version.item.class.accessible_by(current_ability) }).()
 = render "schematics/application/modals/destroy",
