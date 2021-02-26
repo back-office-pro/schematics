@@ -1,0 +1,30 @@
+module Schematics
+  module AttachmentValidators
+    class Component < ::ViewComponent::Base
+      delegate :fa_icon, :breadcrumb_trail, to: :helpers
+      BLACKLIST = [:presence, :attached].freeze
+
+      def initialize(validators:)
+        @validators = validators
+      end
+
+      def humanized_validators(validators: @validators)
+        validators.except(*BLACKLIST).map do |key, value|
+          [
+            t(key, scope: 'schematics.application.form.attachment.validators'),
+            case value
+            when Array
+              value.map(&:to_s).map(&:upcase).join(" ")
+            when Hash
+              humanized_validators(validators: value)
+            when Numeric
+              number_to_human_size(value)
+            else
+              value.humanize
+            end,
+          ]
+        end
+      end
+    end
+  end
+end

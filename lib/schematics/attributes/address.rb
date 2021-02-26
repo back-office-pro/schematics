@@ -1,6 +1,6 @@
 module Schematics
   module Attributes
-    class Address < Text
+    class Address < String
       def type
         "string"
       end

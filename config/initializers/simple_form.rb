@@ -2,6 +2,7 @@
 Rails.application.config.after_initialize do
   SimpleForm.include_component(Schematics::InputGroup)
   SimpleForm.setup do |config|
+    config.input_class = 'bg-light border-0'
     config.wrapper_mappings = {
       boolean: :custom_boolean_switch,
       check_boxes: :custom_collection,

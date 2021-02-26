@@ -6,7 +6,7 @@
         = fa_icon :search, class: "mr-3 ml-3 fa-lg align-middle"
         span.align-middle= title
     .card-body.text-center
-      = cell('schematics/empty', @suggestions).()
+      = render Schematics::EmptyResource::Component.new(suggestions: @suggestions)
 - else
   - @results.each do |name, resources|
-    = cell('schematics/viewers/association', resources, ability: current_ability).()
+    = render Schematics::Viewer::Association::Component.new(resources: resources)

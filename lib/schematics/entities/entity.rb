@@ -24,6 +24,31 @@ module Schematics
           return new(*args) if type.nil?
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
+
+        def active_storage_attachment(name:, icon:)
+          create(
+            name: name,
+            icon: icon,
+            descriptor: 'filename',
+            attributes: [
+              {
+                name: 'filename',
+                type: 'string',
+              },
+              {
+                name: 'content_type',
+                type: 'string',
+              },
+              {
+                name: 'byte_size',
+                type: 'float',
+                options: {
+                  unit: 'bytes',
+                },
+              },
+            ]
+          )
+        end
       end
 
       def initialize(name, icon, descriptor, associations, attributes, virtuals)
@@ -63,9 +88,9 @@ module Schematics
       def find_field_by_name(name)
         case name
         when 'created_at'
-          Attributes::Attribute.create(self, type: 'date', name: name)
+          Attributes::Attribute.created_at(self)
         when 'id'
-          Attributes::Attribute.create(self, type: 'integer', name: name)
+          Attributes::Attribute.id(self)
         else
           fields.find { |field| field.name == name }
         end

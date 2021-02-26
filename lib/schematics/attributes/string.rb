@@ -41,6 +41,10 @@ module Schematics
       def input_type
         :input
       end
+
+      def format(value)
+        value.to_s
+      end
     end
   end
 end

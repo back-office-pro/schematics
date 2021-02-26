@@ -1,6 +1,0 @@
-.input-group.mx-1.mb-2.mt-1
-  = select_tag filter_name,
-               options_for_select(collection, value),
-               prompt: placeholder,
-               onchange: "$(this.form).submit()",
-               class: "form-control bg-light border-success #{'border-0' unless active?}"

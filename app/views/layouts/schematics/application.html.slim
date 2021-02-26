@@ -13,15 +13,15 @@ html
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
     = timeago_script_tag
   body
-    - flash.each do |_flash|
-      = cell('schematics/toast', _flash).()
+    - flash.each do |f|
+      = render Schematics::Toast::Component.new(flash: f)
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
         .col.bg-primary.sidebar
-          = cell('schematics/sidebar', current_ability).()
+          = render Schematics::Sidebar::Component.new
         .col.bg-light.content
           nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top.shadow-sm
-            = cell('schematics/breadcrumbs', _breadcrumbs).()
+            = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
               = form_tag schematics.searches_path, class: "form-inline flex-nowrap pr-3" do
                 = search_field_tag :query,
@@ -30,17 +30,12 @@ html
                   placeholder: t('.search.placeholder'),
                   class: "form-control typeahead-search border-0 rounded-0 bg-transparent search"
                 = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
-              = cell('schematics/notification_center', current_user).()
-              = cell('schematics/message_center', current_user).()
+              = render Schematics::NotificationCenter::Component.new
+              = render Schematics::MessageCenter::Component.new
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
-                  = cell('schematics/attachment',
-                         current_user.avatar,
-                         width: 36,
-                         height: 36,
-                         css_class: 'rounded-circle border shadow-sm',
-                         replacement: { icon: :user_circle, size: '2x' }).()
+                  = render Schematics::Attachment::Component.create_avatar(attachment: current_user.avatar)
                 .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm aria-labelledby="accountDropdown"
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"

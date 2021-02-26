@@ -1,0 +1,17 @@
+li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
+  a#messagesDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+    = fa_icon :envelope, class: "fa-lg"
+    - unless unread_count.zero?
+      .badge.badge-danger.animated.zoomIn= unread_count
+  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="messagesDropdown"
+    h5.dropdown-header.font-weight-bold.bg-light= t('.message_center')
+    - messages.each do |message|
+      = render Schematics::MessageModal::Component.new(message: message)
+      .dropdown-item.d-flex.align-items-center
+        = link_to render(Schematics::Attachment::Component.create_avatar(attachment: message.author.avatar)), message.author
+        div.ml-3 data-toggle="modal" data-target="#messageModal-#{message.id}"
+          .text-truncate= link_to message.subject, message
+          .text-truncate= message.content.to_plain_text
+          .text-muted.small #{message.author.full_name} - #{timeago_tag(message.created_at)}
+    .dropdown-divider.mb-1
+    = link_to t('.show_all'), messages_path, class: "dropdown-item text-muted text-center small pb-2"

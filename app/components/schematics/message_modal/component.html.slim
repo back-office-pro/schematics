@@ -1,0 +1,13 @@
+.modal id="messageModal-#{id}" class=('fade' unless Rails.env.test?) aria-hidden="true" aria-labelledby="messageModalTitle" role="dialog" tabindex="-1"
+  .modal-dialog.modal-dialog-centered.modal-lg role="document"
+    .modal-content.shadow-sm
+      .modal-header.bg-primary
+        h5#messageModalTitle.m-0.text-white.text-truncate.font-weight-bold
+          = fa_icon :inbox, class: "mr-3 ml-2"
+          = subject
+      .modal-body.p-0
+        == content
+      .modal-footer.bg-light.justify-content-start
+        = button_tag data: { dismiss: "modal" }, class: "btn btn-danger btn-sm btn-icon-split" do
+            span.icon= fa_icon :times
+            span.text= t('schematics.application.form.buttons.cancel')

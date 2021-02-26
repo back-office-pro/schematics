@@ -12,8 +12,8 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
   body
-    - flash.each do |_flash|
-      = cell('schematics/toast', _flash).()
+    - flash.each do |f|
+      = render Schematics::Toast::Component.new(flash: f)
     .jumbotron.p-0.m-0.rounded-0.d-flex.align-items-center.min-vh-100.bg-primary
       .container.animated.slideInDown
         = yield

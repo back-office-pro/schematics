@@ -29,5 +29,5 @@
               span.icon= fa_icon :eraser
               span.text.d-none.d-lg-inline= t('.buttons.reset_filters')
     .card-body.p-0
-      = cell('schematics/viewers/viewer', @resources, ability: current_ability).()
+      = render Schematics::Viewer::Component.create(resources: @resources)
 == pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1

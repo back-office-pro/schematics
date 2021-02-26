@@ -27,7 +27,7 @@
       - @errors&.each do |line, error|
         = line
         = error
-      = simple_form_for :import, url: polymorphic_path(model_class, action: :bulk_insert), defaults: { input_html: { class: "bg-light border-0" } } do |f|
+      = simple_form_for :import, url: polymorphic_path(model_class, action: :bulk_insert) do |f|
         = f.input :file, as: :file
         = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :check

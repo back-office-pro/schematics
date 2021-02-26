@@ -38,16 +38,13 @@
   - attachments = @resource.instance_eval(attribute.name).includes(:blob)
   - if attachments.any?
     - all_attachments[attribute.name] = attachments
-    = cell('schematics/viewers/association', attachments, ability: current_ability).()
+    = render Schematics::Viewer::Association::Component.new(resources: attachments)
 - entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
   - resources = @resource.instance_eval(association.name).accessible_by(current_ability)
   - if resources.any?
     - all_resources[association.name] = resources
-    = cell('schematics/viewers/association',
-           resources.includes(association.entity.includes),
-           ability: current_ability).()
+    = render Schematics::Viewer::Association::Component.new(resources: resources.includes(association.entity.includes))
 .mt-4
-  = cell('schematics/timeline', @resource.versions.with_user.with_item.reorder(created_at: :desc).select { |version| version.item.class.accessible_by(current_ability) }).()
-= render "schematics/application/modals/destroy",
-         resources: all_resources,
-         attachments: all_attachments
+  - versions = PaperTrail::Version.timeline(versions: @resource.versions, ability: current_ability)
+  = render Schematics::Timeline::Component.new(versions: versions)
+= render Schematics::DestroyModal::Component.new(resource: @resource, resources: all_resources, attachments: all_attachments)

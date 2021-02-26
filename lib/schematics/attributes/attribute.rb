@@ -7,6 +7,14 @@ module Schematics
         def create(entity, name:, type:, options: {})
           Attributes.const_get(type.camelize.to_sym).new(entity, name, options)
         end
+
+        def created_at(entity)
+          create(entity, type: 'date', name: 'created_at')
+        end
+
+        def id(entity)
+          create(entity, type: 'integer', name: 'id')
+        end
       end
 
       def initialize(entity, name, options)

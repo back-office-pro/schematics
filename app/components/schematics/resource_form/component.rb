@@ -1,0 +1,18 @@
+module Schematics
+  module ResourceForm
+    class Component < ::ViewComponent::Base
+      delegate :fa_icon, :rich_text_area_tag, to: :helpers
+      delegate :new_record?, to: :resource
+      delegate :class, to: :resource, prefix: true
+      delegate :entity, to: :resource_class
+      attr_reader :resource
+
+      def initialize(resource:, url: nil, attributes: nil, cancel_path: nil)
+        @resource = resource
+        @url = url
+        @attributes = attributes || entity.fillable_elements
+        @cancel_path = cancel_path || resource_class
+      end
+    end
+  end
+end

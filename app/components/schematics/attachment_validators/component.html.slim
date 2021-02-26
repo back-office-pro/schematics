@@ -1,0 +1,2 @@
+= fa_icon :info_circle, class: "mr-1" if @validators.any?
+= humanized_validators.map { |validator| validator.join(' ') }.join(' - ')

@@ -1,16 +1,12 @@
 .d-flex.justify-content-center.text-white.mb-4.pb-4
-  = cell('schematics/attachment',
-         setting(:company_logo),
-         width: 300,
-         height: 150,
-         replacement: { icon: :door_open, size: "7x" }).()
+  = render Schematics::Attachment::Component.create_company_logo(attachment: setting(:company_logo), icon: :door_open)
 .card.shadow-sm
   .card-header.p-2
     h5.m-0.text-primary.text-truncate.font-weight-bold
       = fa_icon :sign_in_alt, class: "mr-3 ml-3 fa-lg align-middle"
       span.align-middle= title
   .card-body
-    = simple_form_for :user, url: sessions_path, wrapper: :input_group, defaults: { input_html: { class: "bg-light border-0" } } do |f|
+    = simple_form_for :user, url: sessions_path, wrapper: :input_group do |f|
       = f.input :email, prepend: fa_icon(:envelope)
       = f.input :password, prepend: fa_icon(:key)
       = f.input :remember_me, as: :boolean

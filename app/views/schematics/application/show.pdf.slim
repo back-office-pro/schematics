@@ -7,4 +7,4 @@
             = fa_icon field.icon, class: "mr-2 text-muted"
             = model_class.human_attribute_name(field.name)
           td
-            = cell('schematics/resource', @resource, field: field, editable: true).()
+            = render Schematics::Resource::Component.new(resource: @resource, field: field, editable: true)

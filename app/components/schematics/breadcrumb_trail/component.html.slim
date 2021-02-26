@@ -1,0 +1,8 @@
+nav.d-none.d-lg-block aria-label="breadcrumb"
+  ol.nav.align-items-center.pl-4
+    li.nav-item.breadcrumb-item
+      = link_to root_path do
+        = fa_icon :home, class: "fa-lg"
+    - breadcrumb_trail do |crumb|
+      li.breadcrumb-item class=("#{crumb.current? ? 'active' : ''}")
+        = link_to_unless(crumb.current?, crumb.name, crumb.url, crumb.current? ? {'aria-current' => 'page'} : {})

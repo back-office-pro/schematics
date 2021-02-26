@@ -5,8 +5,4 @@
       = fa_icon :user, class: "mr-3 ml-3 fa-lg align-middle"
       span.align-middle= title
   .card-body
-    = cell('schematics/form',
-           current_user,
-           url: sessions_path,
-           attributes: attributes,
-           cancel_path: root_path).()
+    = render Schematics::ResourceForm::Component.new(resource: current_user, url: sessions_path, attributes: attributes, cancel_path: root_path)

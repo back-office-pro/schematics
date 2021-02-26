@@ -1,0 +1,12 @@
+li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
+  a#notificationsDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+    = fa_icon :bell, class: "fa-lg"
+    - unless unread_count.zero?
+      .badge.badge-danger.animated.zoomIn= unread_count
+  .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm.p-0 aria-labelledby="notificationsDropdown"
+    h5.dropdown-header.font-weight-bold.bg-light= t('.notification_center')
+    - versions.each do |version|
+      .dropdown-item.d-flex.align-items-center
+        = render Schematics::Timeline::Version::Component.new(version: version)
+    .dropdown-divider
+    = link_to t('.show_all'), timeline_path, class: "dropdown-item text-muted small"

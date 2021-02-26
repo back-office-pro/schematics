@@ -1,0 +1,70 @@
+= simple_form_for resource, url: @url, validate: true do |f|
+  - @attributes.sort_by(&:weight).each do |field|
+    - case field
+    - when Schematics::Associations::HasAndBelongsToMany
+      = f.association field.name.to_sym, as: :check_boxes
+    - when Schematics::Attributes::BelongsTo
+      - model_name = resource_class.human_attribute_name(field.name).downcase
+      - prompt = t('schematics.application.form.prompt', model_name: model_name)
+      = f.association field.name.to_sym, prompt: prompt
+    - when Schematics::Attributes::Date
+      = f.input field.name.to_sym, as: :date, html5: true
+    - when Schematics::Attributes::String
+      = f.input field.name.to_sym,
+                maxlength: true,
+                minlength: true,
+                pattern: true,
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::Decimal
+      = f.input field.name.to_sym,
+                min_max: true,
+                wrapper: :input_group,
+                prepend: field.unit || fa_icon(field.icon)
+    - when Schematics::Attributes::RichText
+      = f.input field.name.to_sym, as: :rich_text_area
+    - when Schematics::Attributes::Enum
+      = f.input field.name.to_sym,
+                as: :radio_buttons,
+                collection: field.input_collection.map(&:reverse)
+    - when Schematics::Attributes::Attachments
+      - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
+      = f.input field.name.to_sym,
+                as: :file,
+                validate: { presence: field.required? && new_record? },
+                hint: hint,
+                input_html: { multiple: true }
+    - when Schematics::Attributes::Attachment
+      - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
+      - attachment = @resource.send(field.name.to_sym)
+      - if attachment.attached? && attachment.persisted?
+        = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
+          = fields.hidden_field :id, value: attachment.id
+          = fields.input :_destroy,
+                         as: :boolean,
+                         wrapper_html: { class: "float-right m-0 text-dark" }
+      = f.input field.name.to_sym,
+                as: :file,
+                validate: { presence: field.required? && new_record? },
+                hint: hint
+    - when Schematics::Attributes::Digest
+      = f.input field.name.to_sym,
+                required: new_record?,
+                input_html: { autocomplete: "new-password" },
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
+      = f.input :"#{field.name}_confirmation",
+                required: new_record?,
+                input_html: { autocomplete: "new-password" },
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
+    - else
+      = f.input field.name.to_sym,
+                wrapper: :input_group,
+                prepend: field.try(:unit) || fa_icon(field.icon)
+  = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2", disabled: new_record? do
+    span.icon= fa_icon :check
+    span.text= t('schematics.application.form.buttons.confirm')
+  = link_to @cancel_path, class: "btn btn-danger btn-sm btn-icon-split" do
+    span.icon= fa_icon :times
+    span.text= t('schematics.application.form.buttons.cancel')

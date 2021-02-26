@@ -26,7 +26,7 @@ module Schematics
       end
 
       def preload
-        { association_name => :blob }
+        { association_name => [blob: :variant_records] }
       end
 
       def search_data

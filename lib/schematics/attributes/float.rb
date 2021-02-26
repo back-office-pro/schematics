@@ -5,6 +5,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Rangeable
+      include ActionView::Helpers::NumberHelper
 
       def validators
         super.merge(numericality: { allow_nil: !required? })
@@ -15,7 +16,9 @@ module Schematics
       end
 
       def format(value)
-        value && [value, unit].compact.join(' ')
+        return if value.nil?
+        return number_to_human_size(value) if unit == 'bytes'
+        [value, unit].compact.join(' ')
       end
 
       def icon

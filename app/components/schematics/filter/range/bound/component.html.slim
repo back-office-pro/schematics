@@ -1,0 +1,9 @@
+= send field_tag, filter_name,
+                  value,
+                  placeholder: t(@comparison, scope: [:schematics, :application, :filters]),
+                  onchange: ("$(this.form).submit()" if date?),
+                  class: "form-control bg-light rounded border-success #{'border-0' unless active?}"
+- if has_unit?
+  .input-group-append
+    .input-group-text.border-0.bg-transparent.p-0.pl-2
+      = unit
