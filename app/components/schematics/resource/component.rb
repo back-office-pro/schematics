@@ -6,7 +6,7 @@ module Schematics
       def initialize(resource:, field:, editable: false)
         @resource = resource
         @field = field
-        @editable = false
+        @editable = editable
       end
 
       def value
