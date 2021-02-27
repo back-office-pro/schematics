@@ -23,17 +23,17 @@ module Schematics
               end
             when :date
               if attr_options[:before]
-                Date.today.to_s(:db)
+                Time.zone.today.to_s(:db)
               elsif attr_options[:after]
-                Date.tomorrow.to_s(:db)
+                Time.zone.tomorrow.to_s(:db)
               else
                 super
               end
             when :datetime, :timestamp, :time
               if attr_options[:before]
-                Time.now.yesterday.to_s(:db)
+                Time.current.yesterday.to_s(:db)
               elsif attr_options[:after]
-                Time.now.tomorrow.to_s(:db)
+                Time.current.tomorrow.to_s(:db)
               else
                 super
               end
