@@ -10,7 +10,7 @@ module Schematics
         super
         subclass.class_eval do
           attribute :id unless entity.is_a?(Entities::Singleton)
-          entity.elements.sort_by(&:weight).each do |element|
+          entity.renderable_elements.sort_by(&:weight).each do |element|
             case element
             when Attributes::Attachment, Attributes::RichText
               attribute element.name.to_sym do
