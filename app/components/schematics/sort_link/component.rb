@@ -14,7 +14,7 @@ module Schematics
         return :sort_up   if desc?
         @field.icon
       end
-  
+
       def icon_text_class
         return :danger  if asc?
         return :success if desc?
@@ -30,18 +30,18 @@ module Schematics
       end
 
       private
-  
+
       def sorted_params
         params[:sort]&.split(',')
       end
-  
+
       def new_sorted_params
         return name if sorted_params.nil?
         new_params = revert_sorted_params
         new_params << name if new_param?
         new_params.join(',')
       end
-  
+
       def revert_sorted_params
         sorted_params.map do |sorted_param|
           next "-#{name}" if sorted_param == name
@@ -49,15 +49,15 @@ module Schematics
           sorted_param
         end
       end
-  
+
       def new_param?
         !asc? && !desc?
       end
-  
+
       def asc?
         sorted_params&.include?(name)
       end
-  
+
       def desc?
         sorted_params&.include?("-#{name}")
       end

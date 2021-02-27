@@ -2,7 +2,7 @@ module Schematics
   module Filter
     class Component < ::ViewComponent::Base
       delegate :entity, to: :@model_class
-      
+
       class << self
         def create(field:, model_class:)
           case field

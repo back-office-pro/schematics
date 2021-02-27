@@ -10,11 +10,11 @@ module Schematics
         def title
           klass.human_attribute_name(entity.name, count: @resources.size)
         end
-  
+
         def random
           @random ||= SecureRandom.base58
         end
-  
+
         def collapsed?
           @collapsed
         end

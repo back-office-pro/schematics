@@ -11,27 +11,27 @@ module Schematics
           def field_tag
             :"#{type}_field_tag"
           end
-  
+
           def type
             @field.try(:input_type) || :number
           end
-  
+
           def filter_name
             super + "[#{@comparison}]"
           end
-  
+
           def value
             super&.dig(@comparison)
           end
-  
+
           def unit
             @field.try(:unit)
           end
-  
+
           def has_unit?
             unit.present?
           end
-  
+
           def date?
             type == :date
           end
