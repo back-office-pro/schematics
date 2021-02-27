@@ -28,10 +28,6 @@ module Schematics
             @field.try(:unit)
           end
 
-          def has_unit?
-            unit.present?
-          end
-
           def date?
             type == :date
           end

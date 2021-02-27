@@ -2,9 +2,9 @@ module Schematics
   class PasswordResetsController < ApplicationController
     include Fillable
     skip_before_action :authorize
-    before_action :set_user, only: [:edit, :update]
+    before_action :set_user, only: %i[edit update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    layout "schematics/auth"
+    layout 'schematics/auth'
     delegate :entity, to: :model_class, private: true
 
     def new
@@ -60,7 +60,7 @@ module Schematics
     end
 
     def set_user
-      @user = model_class.find_by_password_reset_token!(params[:id])
+      @user = model_class.find_by!(password_reset_token: params[:id])
     end
   end
 end

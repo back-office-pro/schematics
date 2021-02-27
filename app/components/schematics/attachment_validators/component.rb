@@ -2,9 +2,10 @@ module Schematics
   module AttachmentValidators
     class Component < ::ViewComponent::Base
       delegate :fa_icon, :breadcrumb_trail, to: :helpers
-      BLACKLIST = [:presence, :attached].freeze
+      BLACKLIST = %i[presence attached].freeze
 
       def initialize(validators:)
+        super
         @validators = validators
       end
 
@@ -14,7 +15,7 @@ module Schematics
             t(key, scope: 'schematics.application.form.attachment.validators'),
             case value
             when Array
-              value.map(&:to_s).map(&:upcase).join(" ")
+              value.map(&:to_s).map(&:upcase).join(' ')
             when Hash
               humanized_validators(validators: value)
             when Numeric

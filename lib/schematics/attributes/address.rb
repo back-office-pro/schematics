@@ -1,8 +1,10 @@
+require 'schematics/attributes/string'
+
 module Schematics
   module Attributes
     class Address < String
       def type
-        "string"
+        'string'
       end
 
       def icon

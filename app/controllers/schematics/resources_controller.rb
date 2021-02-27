@@ -7,7 +7,7 @@ module Schematics
     before_action :set_paper_trail_whodunnit
     before_action :authorize
     before_action :set_breadcrumb
-    before_action :set_resource, only: [:show, :edit, :update, :destroy, :archive, :restore]
+    before_action :set_resource, only: %i[show edit update destroy archive restore]
     authorize_resource
     after_action { pagy_headers_merge(@pagy) if @pagy }
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -32,7 +32,7 @@ module Schematics
       end
 
       def controller_path
-        "schematics/resources"
+        'schematics/resources'
       end
     end
 

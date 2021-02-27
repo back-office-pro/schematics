@@ -1,3 +1,4 @@
+# rubocop:disable Style/FormatStringToken
 Chartkick.options = {
   colors: ['#2C3E50', '#95a5a6'],
   height: '300px',
@@ -15,3 +16,4 @@ Chartkick.options = {
     },
   },
 }
+# rubocop:enable Style/FormatStringToken

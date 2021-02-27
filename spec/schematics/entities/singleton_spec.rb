@@ -1,3 +1,5 @@
+require 'schematics/entities/singleton'
+
 describe Schematics::Entities::Singleton do
   subject(:entity) do
     described_class.create(name: name, attributes: attributes)
@@ -7,8 +9,8 @@ describe Schematics::Entities::Singleton do
   let(:attributes) do
     [
       {
-        "name": "company_name",
-        "type": "string",
+        "name": 'company_name',
+        "type": 'string',
       },
     ]
   end
@@ -19,6 +21,7 @@ describe Schematics::Entities::Singleton do
       resolve("Setting") { [:settings] }
     RUBY
   end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]

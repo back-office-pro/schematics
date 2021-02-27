@@ -1,17 +1,21 @@
+require 'schematics/virtuals/concatenation'
+require 'schematics/entities/entity'
+require 'schematics/tokens/tokenizer'
+
 describe Schematics::Virtuals::Concatenation do
   subject(:virtual) { described_class.new(entity, name, tokens, options) }
 
   let(:entity) do
     Schematics::Entities::Entity.create(
-      name: "user",
-      descriptor: "full_name",
+      name: 'user',
+      descriptor: 'full_name',
       attributes: [
-        { name: "first_name", type: "string" },
-        { name: "last_name", type: "string" },
+        { name: 'first_name', type: 'string' },
+        { name: 'last_name', type: 'string' },
       ]
     )
   end
-  let(:name) { "full_name" }
+  let(:name) { 'full_name' }
   let(:options) { {} }
   let(:tokens) do
     Schematics::Tokens::Tokenizer.tokenize('$first_name $profile.last_name', 'users')
@@ -25,11 +29,13 @@ describe Schematics::Virtuals::Concatenation do
   its(:to_sql) { is_expected.to eq("CONCAT(users.first_name, ' ', profiles.last_name)") }
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
+
   its(:search_data) do
     is_expected.to eq <<~RUBY
       full_name&.searchize
     RUBY
   end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       default_scope { includes([:profile]) }

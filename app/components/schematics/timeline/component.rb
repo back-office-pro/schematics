@@ -4,6 +4,7 @@ module Schematics
       delegate :fa_icon, to: :helpers
 
       def initialize(versions:)
+        super
         @versions = versions
       end
     end

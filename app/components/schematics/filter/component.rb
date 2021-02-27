@@ -19,6 +19,7 @@ module Schematics
       end
 
       def initialize(field: nil, model_class: nil)
+        super
         @field = field
         @model_class = model_class
       end

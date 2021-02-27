@@ -1,3 +1,5 @@
+require 'schematics/tokens/number'
+
 describe Schematics::Tokens::Number do
   subject(:token) { described_class.new(value) }
 

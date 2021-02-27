@@ -1,9 +1,11 @@
+require 'active_support/core_ext/module/delegation'
+
 module Schematics
   module Associations
     class Association
-      attr_reader :belongs_to
       delegate :entity, :required?, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
+      attr_reader :belongs_to
 
       class << self
         def create(belongs_to, type:, name: nil)

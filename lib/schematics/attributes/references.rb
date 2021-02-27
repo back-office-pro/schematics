@@ -1,3 +1,5 @@
+require 'schematics/attributes/association'
+
 module Schematics
   module Attributes
     class References < Association

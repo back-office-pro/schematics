@@ -1,3 +1,9 @@
+require 'schematics/attributes/attribute'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+require 'schematics/behaviours/fillable'
+
 module Schematics
   module Attributes
     class RichText < Attribute
@@ -7,11 +13,11 @@ module Schematics
       include Behaviours::Fillable
 
       def api_param_type
-        "string"
+        'string'
       end
 
       def preload
-        [type, name].join("_").to_sym
+        [type, name].join('_').to_sym
       end
 
       def search_data

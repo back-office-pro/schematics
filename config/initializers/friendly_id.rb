@@ -1,6 +1,6 @@
 FriendlyId.defaults do |config|
   config.use :reserved
-  config.reserved_words = %w(new nouveau edit editer)
+  config.reserved_words = %w[new nouveau edit editer]
   config.treat_reserved_as_conflict = true
   config.use :finders
   config.use :history

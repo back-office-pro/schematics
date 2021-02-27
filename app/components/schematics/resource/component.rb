@@ -4,6 +4,7 @@ module Schematics
       delegate :fa_icon, to: :helpers
 
       def initialize(resource:, field:, editable: false)
+        super
         @resource = resource
         @field = field
         @editable = editable

@@ -46,7 +46,7 @@ module Schematics
             attr_options[:required]
           end
 
-          def has_index?
+          def has_index? # rubocop:disable Naming/PredicateName
             !virtual? && !token? && !password_digest?
           end
 
@@ -59,7 +59,7 @@ module Schematics
           end
 
           def parse(column_definition)
-            name, type, *options = column_definition.split(":")
+            name, type, *options = column_definition.split(':')
             options = Hash[*options].symbolize_keys
             has_index = 'uniq' if options[:unique]
             new(name, type&.to_sym, has_index, eval_options(options, type))
@@ -76,12 +76,12 @@ module Schematics
             options[:limit]       = options[:limit].to_i if options.key?(:limit)
             options[:precision]   = options[:precision].to_i if options.key?(:precision)
             options[:scale]       = options[:scale].to_i if options.key?(:scale)
-            options[:polymorphic] = options[:polymorphic] == "true" if options.key?(:polymorphic)
+            options[:polymorphic] = options[:polymorphic] == 'true' if options.key?(:polymorphic)
             if options.key?(:default)
               options[:default] = case type.to_sym
                                   when :integer then options[:default].to_i
                                   when :float   then options[:default].to_f
-                                  when :boolean then options[:default] == "true"
+                                  when :boolean then options[:default] == 'true'
                                   else
                                     options[:default].to_s
                                   end

@@ -1,7 +1,10 @@
 module PaperTrail
-  class Version < ActiveRecord::Base
+  class Version < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
     include PaperTrail::VersionConcern
-    belongs_to :user, class_name: 'User', foreign_key: :whodunnit
+    belongs_to :user,
+               class_name: 'User',
+               foreign_key: :whodunnit,
+               inverse_of: :versions
 
     delegate :class, to: :item, prefix: true
     delegate :entity, to: :item_class
@@ -11,7 +14,7 @@ module PaperTrail
     scope :with_item, -> { includes(:item) }
 
     class << self
-      def timeline(versions: self, ability:)
+      def timeline(ability:, versions: self)
         versions
           .with_user
           .with_item

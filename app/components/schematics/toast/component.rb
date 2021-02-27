@@ -7,6 +7,7 @@ module Schematics
       alias message second
 
       def initialize(flash:)
+        super
         @flash = flash
       end
 

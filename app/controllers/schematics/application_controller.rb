@@ -14,8 +14,8 @@ module Schematics
 
     def current_user
       @current_user ||= User
-        .includes(:avatar_attachment, role: [:permissions])
-        .find_by_auth_token(cookies[:auth_token] || auth_token&.dig(:auth_token))
+                        .includes(:avatar_attachment, role: [:permissions])
+                        .find_by(auth_token: cookies[:auth_token] || auth_token&.dig(:auth_token))
     end
 
     def auth_token
@@ -35,8 +35,8 @@ module Schematics
 
     def switch_locale(&action)
       locale = current_user&.locale&.downcase ||
-        extract_locale_from_accept_language_header ||
-        I18n.default_locale
+               extract_locale_from_accept_language_header ||
+               I18n.default_locale
       I18n.with_locale(locale, &action)
     end
 

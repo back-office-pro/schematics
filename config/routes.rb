@@ -10,7 +10,7 @@ Schematics::Engine.routes.draw do
     get 'password_lost/:id', to: 'password_resets#edit', as: :new_password
     resource  :sessions
     resource  :timeline, only: :show, controller: :timeline
-    resources :searches, only: [:create, :show], param: :query
-    resources :password_resets, only: [:new, :create, :edit, :update]
+    resources :searches, only: %i[create show], param: :query
+    resources :password_resets, only: %i[new create edit update]
   end
 end

@@ -6,12 +6,11 @@ module Schematics
     def initialize(user)
       @user = user
       aliases
-      # TODO improve tests with role/permissions
-      return can :manage, :all if Rails.env.test?
       user_abilities
       singleton_abilities
       reference_abilities
       default_abilities
+      can :manage, :all if Rails.env.test? # TODO: improve tests with role/permissions
     end
 
     def admin?
@@ -27,9 +26,9 @@ module Schematics
     end
 
     def default_abilities
-      cannot [:create, :update, :destroy, :import, :archive], Permission
-      cannot [:destroy, :archive], user
-      cannot [:update, :destroy, :archive], Role.last
+      cannot %i[create update destroy import archive], Permission
+      cannot %i[destroy archive], user
+      cannot %i[update destroy archive], Role.last
       can :read, Message, recipient_id: user.id
     end
 
@@ -41,15 +40,15 @@ module Schematics
 
     def singleton_abilities
       SCHEMA.entities.select_is_a?(Entities::Singleton).each do |entity|
-        cannot [:index, :create, :destroy, :archive], entity.class_name.constantize
+        cannot %i[index create destroy archive], entity.class_name.constantize
       end
     end
 
     def reference_abilities
       SCHEMA.entities.flat_map(&:references_attributes).each do |attribute|
         model_class = attribute.entity.class_name.constantize
-        cannot [:read, :update, :destroy, :archive], model_class
-        can [:read, :update, :destroy, :archive], model_class, attribute.column_name => @user.id
+        cannot %i[read update destroy archive], model_class
+        can %i[read update destroy archive], model_class, attribute.column_name => @user.id
       end
     end
   end

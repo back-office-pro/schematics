@@ -1,3 +1,9 @@
+require 'schematics/associations/association_through'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+require 'active_support/core_ext/module/delegation'
+
 module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
@@ -5,9 +11,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      def name
-        belongs_to.name
-      end
+      delegate :name, to: :belongs_to
 
       def class_name
         name.camelize

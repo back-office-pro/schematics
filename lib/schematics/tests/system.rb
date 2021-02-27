@@ -1,5 +1,3 @@
-require 'action_text/system_test_helper'
-
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
@@ -34,11 +32,11 @@ module Schematics
                                    model_name: model_name.human)
               end
             else
-              test "visiting the index" do
+              test 'visiting the index' do
                 visit polymorphic_path(model_class)
                 title = I18n.t('titles.schematics.resources.index',
                                model_name_plural: model_name.human.pluralize.downcase)
-                assert_selector "h5", text: title
+                assert_selector 'h5', text: title
               end
 
               test "creating a #{entity.name}" do
@@ -96,7 +94,7 @@ module Schematics
       def login
         visit login_path
         fill_in I18n.t('simple_form.labels.user.email'), with: email
-        fill_in I18n.t('simple_form.labels.user.password'), with: "secret"
+        fill_in I18n.t('simple_form.labels.user.password'), with: 'secret'
         click_on I18n.t('schematics.application.form.buttons.confirm')
         assert_text I18n.t('schematics.sessions.create.success')
       end
@@ -110,7 +108,7 @@ module Schematics
           when Attributes::Boolean
             check(input) if @record.send(attribute.name)
           when Attributes::Attachments
-            attach_file(input + "[]", attribute.default.first.path, make_visible: true)
+            attach_file("#{input}[]", attribute.default.first.path, make_visible: true)
           when Attributes::Attachment
             attach_file(input, attribute.default.path, make_visible: true)
           when Attributes::RichText

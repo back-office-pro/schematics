@@ -1,16 +1,16 @@
 module Schematics
   class SearchesController < ApplicationController
-    swagger_controller :searches, "Global Search"
+    # swagger_controller :searches, "Global Search"
 
     def create
       redirect_to search_path(query: params[:query])
     end
 
-    swagger_api :show do |api|
-      summary "Global search"
-      param :path, :query, :string, :required, "Query String"
-      response :success
-    end
+    # swagger_api :show do |api|
+    #   summary "Global search"
+    #   param :path, :query, :string, :required, "Query String"
+    #   response :success
+    # end
 
     def show
       @results = {}
@@ -23,9 +23,9 @@ module Schematics
           suggest: true,
           misspellings: false,
           execute: false,
-          scope_results: -> (results) do
+          scope_results: lambda do |results|
             results.accessible_by(current_ability)
-          end,
+          end
         )
       end
       @results = Searchkick.multi_search(searches)
@@ -36,7 +36,7 @@ module Schematics
       respond_to do |format|
         format.html
         format.json do
-          @results.each do |name, result|
+          @results.each do |_name, result|
             result.map! do |record|
               record.class.entity.descriptor.serializer_class.new(record)
             end

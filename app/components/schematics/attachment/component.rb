@@ -27,6 +27,7 @@ module Schematics
       end
 
       def initialize(attachment:, width: 800, height: 600, replacement: nil, css_class: nil)
+        super
         @attachment = attachment
         @width = width
         @height = height

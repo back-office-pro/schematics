@@ -7,14 +7,14 @@ module Schematics
         @params   = context.user_params
         @password = context.password || @params[:password]
         @cookies  = context.cookies
-        @user     = context.resource || User.find_by_email(@params[:email])
+        @user     = context.resource || User.find_by(email: @params[:email])
       end
 
       def call
         if @user&.authenticate(@password)
           context.token = @user.auth_token
           context.jwt = JsonWebToken.encode({ auth_token: context.token })
-          context.message = ".success"
+          context.message = '.success'
           if @cookies.present?
             if remember_me?
               @cookies.permanent[:auth_token] = context.token
@@ -23,7 +23,7 @@ module Schematics
             end
           end
         else
-          context.fail!(message: ".failure")
+          context.fail!(message: '.failure')
         end
       end
 

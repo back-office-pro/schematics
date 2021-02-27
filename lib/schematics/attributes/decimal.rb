@@ -1,12 +1,14 @@
+require 'schematics/attributes/float'
+
 module Schematics
   module Attributes
     class Decimal < Float
       def migration_options
-        super + [:precision, :scale]
+        super + %i[precision scale]
       end
 
       def api_param_type
-        "double"
+        'double'
       end
 
       def precision

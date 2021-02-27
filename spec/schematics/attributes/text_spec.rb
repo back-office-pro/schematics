@@ -1,14 +1,16 @@
+require 'schematics/attributes/text'
+
 describe Schematics::Attributes::Text do
   subject(:attribute) { described_class.new(entity, name, options) }
 
   let(:entity) do
     Schematics::Entities::Entity.create(
-      name: "entity",
-      descriptor: "type",
-      attributes: [{ name: "type", type: "string" }]
+      name: 'entity',
+      descriptor: 'type',
+      attributes: [{ name: 'type', type: 'string' }]
     )
   end
-  let(:name) { "content" }
+  let(:name) { 'content' }
   let(:options) do
     {
       limit: 100,
@@ -20,12 +22,13 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
 
-  its(:type) { is_expected.to eq("text") }
-  its(:migration_options) { is_expected.to eq([:unique, :required, :default, :limit]) }
-  its(:column_name) { is_expected.to eq("content") }
-  its(:api_param_type) { is_expected.to eq("string") }
+  its(:type) { is_expected.to eq('text') }
+  its(:migration_options) { is_expected.to eq(%i[unique required default limit]) }
+  its(:column_name) { is_expected.to eq('content') }
+  its(:api_param_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:input_type) { is_expected.to eq(:textarea) }
+
   its(:search_data) do
     is_expected.to eq <<~RUBY
       #{name}&.searchize

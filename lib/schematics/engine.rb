@@ -24,7 +24,7 @@ module Schematics
 
     # i18n
     config.i18n.default_locale = :fr
-    config.i18n.available_locales = [:fr, :en]
+    config.i18n.available_locales = %i[fr en]
     config.i18n.load_path += Dir.glob(File.expand_path('../../config/locales/**/*.yml', __dir__))
 
     def credentials

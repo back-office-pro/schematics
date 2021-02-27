@@ -1,3 +1,5 @@
+require 'schematics/tokens/variable'
+
 describe Schematics::Tokens::Variable do
   subject(:token) { described_class.new(value, table_name) }
 
@@ -7,13 +9,13 @@ describe Schematics::Tokens::Variable do
     let(:value) { 'type' }
 
     its(:to_sql) { is_expected.to eq('entities.type') }
-    its(:to_str) { is_expected.to eq('#{type}') }
+    its(:to_str) { is_expected.to eq('#{type}') }  # rubocop:disable Lint/InterpolationCheck
   end
 
   context 'when there is some reference' do
     let(:value) { 'schema.title' }
 
     its(:to_sql) { is_expected.to eq('schemas.title') }
-    its(:to_str) { is_expected.to eq('#{schema.title}') }
+    its(:to_str) { is_expected.to eq('#{schema.title}') } # rubocop:disable Lint/InterpolationCheck
   end
 end

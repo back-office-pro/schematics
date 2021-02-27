@@ -1,3 +1,6 @@
+require 'active_support/core_ext/module/delegation'
+require 'active_model_serializers'
+
 module Schematics
   module Entities
     class Descriptor

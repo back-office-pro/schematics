@@ -1,3 +1,5 @@
+require 'schematics/graphics/axes/axis'
+
 module Schematics
   module Graphics
     module Axes

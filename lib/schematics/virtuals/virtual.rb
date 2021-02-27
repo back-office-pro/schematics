@@ -1,3 +1,11 @@
+require 'schematics/tokens/tokenizer'
+require 'schematics/virtuals/errors/name_error'
+require 'schematics/virtuals/errors/type_error'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+require 'array'
+
 module Schematics
   module Virtuals
     class Virtual

@@ -1,3 +1,10 @@
+require 'schematics/attributes/attribute'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+require 'schematics/behaviours/fillable'
+require 'schematics/behaviours/rangeable'
+
 module Schematics
   module Attributes
     class Date < Attribute
@@ -8,17 +15,17 @@ module Schematics
       include Behaviours::Rangeable
 
       def migration_options
-        super + [:before, :after]
+        super + %i[before after]
       end
 
       def format(value)
-        value && I18n.l(value, format: "%A %d %B %Y")
+        value && I18n.l(value, format: '%A %d %B %Y')
       end
 
       def validators
         validators = super
         validators[:date] = { allow_blank: !required? }
-        [:equal_to, :before, :after, :before_or_equal_to, :after_or_equal_to].each do |key|
+        %i[equal_to before after before_or_equal_to after_or_equal_to].each do |key|
           validators[:date][key] = @options[key].to_sym if @options.key?(key)
         end
         validators

@@ -8,10 +8,10 @@ class FixturesGenerator < Rails::Generators::Base
         2.times do |index|
           append_file(rich_texts_file_path) do
             <<~YAML
-            #{human_root_index(root_index, index)}:
-              record: #{human_index(index)} (#{attribute.entity.class_name})
-              name: #{attribute.name}
-              body: <p>In a <i>million</i> stars!</p>
+              #{human_root_index(root_index, index)}:
+                record: #{human_index(index)} (#{attribute.entity.class_name})
+                name: #{attribute.name}
+                body: <p>In a <i>million</i> stars!</p>
             YAML
           end
         end
@@ -32,10 +32,10 @@ class FixturesGenerator < Rails::Generators::Base
         2.times do |index|
           append_to_file(attachments_file_path) do
             <<~YAML
-            #{human_root_index(root_index, index)}:
-              record: #{human_index(index)} (#{attribute.entity.class_name})
-              name: #{attribute.name}
-              blob: #{human_root_index(root_index, index)}
+              #{human_root_index(root_index, index)}:
+                record: #{human_index(index)} (#{attribute.entity.class_name})
+                name: #{attribute.name}
+                blob: #{human_root_index(root_index, index)}
             YAML
           end
         end
@@ -52,13 +52,13 @@ class FixturesGenerator < Rails::Generators::Base
         2.times do |index|
           append_to_file(blobs_file_path) do
             <<~YAML
-            #{human_root_index(root_index, index)}:
-              key: #{ActiveStorage::Blob.generate_unique_secure_token}
-              filename: dummy.#{attribute.extension}
-              content_type: #{Mime[attribute.extension]}
-              service_name: Disk
-              byte_size: 6381
-              checksum: XqaZqieypVz5akNq/VVJIg==
+              #{human_root_index(root_index, index)}:
+                key: #{ActiveStorage::Blob.generate_unique_secure_token}
+                filename: dummy.#{attribute.extension}
+                content_type: #{Mime[attribute.extension]}
+                service_name: Disk
+                byte_size: 6381
+                checksum: XqaZqieypVz5akNq/VVJIg==
             YAML
           end
         end
@@ -76,22 +76,22 @@ class FixturesGenerator < Rails::Generators::Base
   end
 
   def fixtures_path
-    File.join("test", "fixtures")
+    File.join('test', 'fixtures')
   end
 
   def active_storage_path
-    File.join(fixtures_path, "active_storage")
+    File.join(fixtures_path, 'active_storage')
   end
 
   def rich_texts_file_path
-    File.join(fixtures_path, "action_text", "rich_texts.yml")
+    File.join(fixtures_path, 'action_text', 'rich_texts.yml')
   end
 
   def blobs_file_path
-    File.join(active_storage_path, "blobs.yml")
+    File.join(active_storage_path, 'blobs.yml')
   end
 
   def attachments_file_path
-    File.join(active_storage_path, "attachments.yml")
+    File.join(active_storage_path, 'attachments.yml')
   end
 end

@@ -1,3 +1,5 @@
+require 'schematics/tokens/token'
+
 module Schematics
   module Tokens
     class Variable < Token
@@ -14,7 +16,7 @@ module Schematics
       end
 
       def to_str
-        '#{' + @value + '}'
+        '#{' + @value + '}' # rubocop:disable Style/StringConcatenation
       end
 
       def references

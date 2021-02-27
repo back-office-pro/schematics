@@ -1,3 +1,36 @@
+require 'schematics/attributes/attribute'
+require 'schematics/attributes/address'
+require 'schematics/attributes/association'
+require 'schematics/attributes/attachment'
+require 'schematics/attributes/attachments'
+require 'schematics/attributes/belongs_to'
+require 'schematics/attributes/boolean'
+require 'schematics/attributes/date'
+require 'schematics/attributes/datetime'
+require 'schematics/attributes/decimal'
+require 'schematics/attributes/digest'
+require 'schematics/attributes/enum'
+require 'schematics/attributes/float'
+require 'schematics/attributes/integer'
+require 'schematics/attributes/references'
+require 'schematics/attributes/rich_text'
+require 'schematics/attributes/string'
+require 'schematics/attributes/text'
+require 'schematics/attributes/time'
+require 'schematics/attributes/timestamp'
+require 'schematics/attributes/token'
+require 'schematics/entities/descriptor'
+require 'schematics/virtuals/virtual'
+require 'schematics/virtuals/concatenation'
+require 'schematics/virtuals/calculation'
+require 'schematics/associations/association'
+require 'schematics/associations/has_and_belongs_to_many'
+require 'schematics/associations/has_many_through'
+require 'schematics/associations/has_many'
+require 'schematics/associations/has_one_through'
+require 'schematics/associations/has_one'
+require 'active_support/core_ext/string/inflections'
+
 module Schematics
   module Entities
     class Entity
@@ -9,14 +42,13 @@ module Schematics
                   :associations,
                   :generators
 
-      MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/.freeze
+      MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/
 
       class << self
         def create(name:,
                    type: nil,
                    icon: :caret_square_right,
                    descriptor: 'id',
-                   singleton: false,
                    associations: [],
                    attributes: [],
                    virtuals: [])
@@ -81,8 +113,8 @@ module Schematics
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant) ||
-        Behaviours.const_defined?(constant) ||
-        super
+          Behaviours.const_defined?(constant) ||
+          super
       end
 
       def find_field_by_name(name)
@@ -132,7 +164,7 @@ module Schematics
         @attributes.map(&:validate).compact
       end
 
-      def has_many_and_through_and_belongs_to_many_associations
+      def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
         has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
       end
 
@@ -269,9 +301,9 @@ module Schematics
             #{to_str}
 
             ###
-            #{attributes.map { |attribute| '# ' + attribute.to_s }.join("\n\s\s")}
-            # #{permitted_params.join(", ")}
-            # #{permitted_json_params.join(", ")}
+            #{attributes.map { |attribute| "# #{attribute}" }.join("\n\s\s")}
+            # #{permitted_params.join(', ')}
+            # #{permitted_json_params.join(', ')}
             ###
 
             #{descriptor.to_str}

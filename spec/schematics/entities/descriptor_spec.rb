@@ -1,3 +1,5 @@
+require 'schematics/entities/descriptor'
+
 describe Schematics::Entities::Descriptor do
   subject(:descriptor) { described_class.create(entity, 'type') }
 
@@ -7,12 +9,13 @@ describe Schematics::Entities::Descriptor do
       descriptor: 'type',
       attributes: [
         { name: 'type', type: 'string' },
-      ],
+      ]
     )
   end
 
   its(:to_s) { is_expected.to eq('type') }
   its(:serializer_class) { is_expected.to be_a(Class) }
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       extend FriendlyId

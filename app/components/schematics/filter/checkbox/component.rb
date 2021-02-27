@@ -3,7 +3,7 @@ module Schematics
     module Checkbox
       class Component < Filter::Component
         def active?
-          value == "true"
+          value == 'true'
         end
       end
     end

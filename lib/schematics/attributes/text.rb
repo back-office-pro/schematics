@@ -1,3 +1,9 @@
+require 'schematics/attributes/attribute'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/fillable'
+require 'schematics/behaviours/editable'
+
 module Schematics
   module Attributes
     class Text < Attribute
@@ -11,7 +17,7 @@ module Schematics
       end
 
       def api_param_type
-        "string"
+        'string'
       end
 
       def search_data

@@ -14,7 +14,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'support/simplecov'
-require 'support/searchkick'
 require 'rspec/its'
 
 RSpec.configure do |config|

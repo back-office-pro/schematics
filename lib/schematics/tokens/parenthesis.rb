@@ -1,3 +1,5 @@
+require 'schematics/tokens/token'
+
 module Schematics
   module Tokens
     class Parenthesis < Token

@@ -8,8 +8,8 @@ class LocalesGenerator < Rails::Generators::Base
       empty_directory(routes_path)
       create_file(route_file_path(locale)) do
         <<~YAML
-        fr:
-          routes:
+          fr:
+            routes:
         YAML
       end
       Schematics::SCHEMA.entities.each do |entity|
@@ -29,12 +29,12 @@ class LocalesGenerator < Rails::Generators::Base
         empty_directory locale_path(entity)
         create_file locale_file_path(entity, locale) do
           <<~YAML
-          fr:
-            activerecord:
-              models:
-                #{entity.name}: #{translate(entity.name, to: locale)}
-              attributes:
-                #{entity.name}:
+            fr:
+              activerecord:
+                models:
+                  #{entity.name}: #{translate(entity.name, to: locale)}
+                attributes:
+                  #{entity.name}:
           YAML
         end
         entity.fields.each do |field|
@@ -58,15 +58,15 @@ class LocalesGenerator < Rails::Generators::Base
   end
 
   def locales_path
-    File.join("config", "locales")
+    File.join('config', 'locales')
   end
 
   def models_path
-    File.join(locales_path, "models")
+    File.join(locales_path, 'models')
   end
 
   def routes_path
-    File.join(locales_path, "routes")
+    File.join(locales_path, 'routes')
   end
 
   def locale_path(entity)

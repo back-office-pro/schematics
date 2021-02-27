@@ -1,3 +1,5 @@
+require 'schematics/tokens/tokenizer'
+
 describe Schematics::Tokens::Tokenizer do
   subject(:tokenizer) { described_class }
 

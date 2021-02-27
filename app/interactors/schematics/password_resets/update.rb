@@ -11,12 +11,12 @@ module Schematics
       def call
         if @user.updated_at > 2.hours.ago
           if @user.update(@params)
-            context.message = ".success"
+            context.message = '.success'
           else
-            context.fail!(message: ".error")
+            context.fail!(message: '.error')
           end
         else
-          context.fail!(message: ".failure")
+          context.fail!(message: '.failure')
         end
       end
     end

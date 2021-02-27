@@ -7,6 +7,7 @@ module Schematics
       attr_reader :resource
 
       def initialize(resource:, resources:, attachments:)
+        super
         @resource = resource
         @resources = resources
         @attachments = attachments

@@ -4,17 +4,17 @@ module Schematics
       include Interactor
 
       before do
-        @user = User.find_by_email(context.email)
+        @user = User.find_by(email: context.email)
       end
 
       def call
         if @user
-          context.message = ".success"
+          context.message = '.success'
           @user.regenerate_password_reset_token
-          @user.touch
+          @user.touch # rubocop:disable Rails/SkipsModelValidations
           UserMailer.password_reset(@user).deliver_later
         else
-          context.fail!(message: ".failure")
+          context.fail!(message: '.failure')
         end
       end
     end

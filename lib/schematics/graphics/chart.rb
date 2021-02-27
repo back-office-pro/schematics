@@ -1,23 +1,26 @@
+require 'schematics/graphics/axes/x'
+require 'schematics/graphics/axes/y'
+
 module Schematics
   module Graphics
     class Chart
-      attr_reader :x, :y
       delegate :icon, :class_name, to: :@entity
+      attr_reader :x, :y
 
       class << self
-        def create(schema, entity:, type:, x:, y:)
+        def create(schema, entity:, type:, x:, y:) # rubocop:disable Naming/MethodParameterName
           entity = schema.find_entity_by_name(entity)
-          x = Axes::X.create(entity, **x)
-          y = Axes::Y.create(entity, **y)
-          new(entity, type, x, y)
+          x_axis = Axes::X.create(entity, **x)
+          y_axis = Axes::Y.create(entity, **y)
+          new(entity, type, x_axis, y_axis)
         end
       end
 
-      def initialize(entity, type, x, y)
+      def initialize(entity, type, x_axis, y_axis)
         @entity = entity
         @type = type
-        @x = x
-        @y = y
+        @x = x_axis
+        @y = y_axis
       end
 
       def type

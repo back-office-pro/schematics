@@ -1,3 +1,10 @@
+require 'schematics/attributes/attribute'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+require 'schematics/behaviours/editable'
+require 'active_support/core_ext/module/delegation'
+
 module Schematics
   module Attributes
     class Association < Attribute
@@ -6,15 +13,15 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Editable
 
-      attr_accessor :inverse_descriptor
       delegate :icon, to: :entity
+      attr_accessor :inverse_descriptor
 
       def migration_options
-        super + [:polymorphic, :type]
+        super + %i[polymorphic type]
       end
 
       def column_name
-        super + "_id"
+        "#{super}_id"
       end
 
       def association_type
@@ -41,7 +48,7 @@ module Schematics
       end
 
       def api_param_type
-        "integer"
+        'integer'
       end
 
       def to_str

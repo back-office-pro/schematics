@@ -1,15 +1,48 @@
-inherit_from: 
-  - .rubocop_airbnb.yml
+require:
+  - rubocop-rails
+  - rubocop-rspec
 Layout/DotPosition:
   Enabled: true
   EnforcedStyle: leading
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Style/Documentation:
   Enabled: false
 Style/GuardClause:
   Enabled: true
 Style/IfUnlessModifier:
   Enabled: true
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Layout/LineLength:
+  Max: 100
+RSpec/ExampleLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
 AllCops:
-  TargetRubyVersion: 2.7.1
+  TargetRubyVersion: 3.0.0
   Exclude:
     - spec/dummy/**/*

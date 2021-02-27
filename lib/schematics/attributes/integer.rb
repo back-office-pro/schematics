@@ -1,3 +1,5 @@
+require 'schematics/attributes/float'
+
 module Schematics
   module Attributes
     class Integer < Float

@@ -2,9 +2,9 @@ module Schematics
   module Graphics
     module Axes
       class Axis
-        attr_reader :agregate, :field
         delegate :icon, :class_name, to: :@entity
         delegate :to_sql, to: :field
+        attr_reader :agregate, :field
 
         class << self
           def create(entity, agregate:, field: nil)

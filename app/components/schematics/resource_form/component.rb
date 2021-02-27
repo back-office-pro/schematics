@@ -8,6 +8,7 @@ module Schematics
       attr_reader :resource
 
       def initialize(resource:, url: nil, attributes: nil, cancel_path: nil)
+        super
         @resource = resource
         @url = url
         @attributes = attributes || entity.fillable_elements

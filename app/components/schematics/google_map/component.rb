@@ -2,6 +2,7 @@ module Schematics
   module GoogleMap
     class Component < ::ViewComponent::Base
       def initialize(address:)
+        super
         @address = address
       end
 

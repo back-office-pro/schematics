@@ -1,3 +1,8 @@
+require 'schematics/associations/association'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+
 module Schematics
   module Associations
     class HasOne < Association

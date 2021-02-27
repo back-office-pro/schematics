@@ -6,14 +6,15 @@ module Schematics
         delegate :user, :event, :item, :created_at, to: :@version
 
         def initialize(version:)
+          super
           @version = version
         end
 
         def icon
           {
-            'update'  => :edit,
-            'create'  => :plus,
-            'delete'  => :trash,
+            'update' => :edit,
+            'create' => :plus,
+            'delete' => :trash,
             'archive' => :archive,
             'restore' => :trash_restore,
           }[event]

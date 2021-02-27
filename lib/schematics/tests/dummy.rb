@@ -11,9 +11,9 @@ module Schematics
 
       def json_default
         {
-          "filename" => filename,
-          "content_type" => content_type,
-          "data" => data,
+          'filename' => filename,
+          'content_type' => content_type,
+          'data' => data,
         }
       end
 
@@ -36,11 +36,11 @@ module Schematics
       end
 
       def data
-        ["data:", content_type, ";base64,", base64_encoded].join
+        ['data:', content_type, ';base64,', base64_encoded].join
       end
 
       def filename_array
-        ["dummy", ".#{@extension}"]
+        ['dummy', ".#{@extension}"]
       end
 
       def filename

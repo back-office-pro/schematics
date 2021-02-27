@@ -1,3 +1,5 @@
+require 'schematics/associations/association'
+
 module Schematics
   module Associations
     class HasMany < Association
@@ -6,7 +8,7 @@ module Schematics
       end
 
       def to_str
-        super.squish + ', ' + <<~RUBY
+        super.squish + ', ' + <<~RUBY # rubocop:disable Style/StringConcatenation
           dependent: :#{dependent_method}
         RUBY
       end

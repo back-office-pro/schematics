@@ -1,13 +1,12 @@
 Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
 
 Rack::Attack.safelist('allow from localhost') do |req|
-  '127.0.0.1' == req.ip || '::1' == req.ip
+  req.ip == '127.0.0.1' || req.ip == '::1'
 end
 
-Rack::Attack.throttle("requests by ip", limit: 5, period: 2) do |request|
-  request.ip
-end
+Rack::Attack.throttle('requests by ip', limit: 5, period: 2, &:ip)
 
-ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |_, _, _, _, payload|
+ActiveSupport::Notifications
+  .subscribe('throttle.rack_attack') do |_name, _start, _finish, _request_id, payload|
   Rails.logger.info "Throttled IP: #{payload[:request].ip}"
 end

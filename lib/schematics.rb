@@ -1,4 +1,3 @@
-require 'active_support/inflector'
 require 'json'
 require 'csv'
 require 'pagy'
@@ -63,107 +62,16 @@ require 'array'
 require 'string'
 require 'view_component/engine'
 require 'schematics/engine'
+require 'schematics/schema'
+require 'schematics/patches/rails/generators/generated_attribute'
 require_relative 'swagger/docs/config'
-require_relative 'active_support/test_case' if Rails.env.test?
 
 module Schematics
-  module Associations
-    autoload :Association,         'schematics/associations/association'
-    autoload :AssociationThrough,  'schematics/associations/association_through'
-    autoload :HasAndBelongsToMany, 'schematics/associations/has_and_belongs_to_many'
-    autoload :HasMany,             'schematics/associations/has_many'
-    autoload :HasManyThrough,      'schematics/associations/has_many_through'
-    autoload :HasOne,              'schematics/associations/has_one'
-    autoload :HasOneThrough,       'schematics/associations/has_one_through'
-  end
-
-  module Attributes
-    autoload :Address,     'schematics/attributes/address'
-    autoload :Association, 'schematics/attributes/association'
-    autoload :Attachment,  'schematics/attributes/attachment'
-    autoload :Attachments, 'schematics/attributes/attachments'
-    autoload :Attribute,   'schematics/attributes/attribute'
-    autoload :BelongsTo,   'schematics/attributes/belongs_to'
-    autoload :Boolean,     'schematics/attributes/boolean'
-    autoload :Date,        'schematics/attributes/date'
-    autoload :Datetime,    'schematics/attributes/datetime'
-    autoload :Decimal,     'schematics/attributes/decimal'
-    autoload :Digest,      'schematics/attributes/digest'
-    autoload :Enum,        'schematics/attributes/enum'
-    autoload :Float,       'schematics/attributes/float'
-    autoload :Integer,     'schematics/attributes/integer'
-    autoload :References,  'schematics/attributes/references'
-    autoload :RichText,    'schematics/attributes/rich_text'
-    autoload :String,      'schematics/attributes/string'
-    autoload :Text,        'schematics/attributes/text'
-    autoload :Time,        'schematics/attributes/time'
-    autoload :Timestamp,   'schematics/attributes/timestamp'
-    autoload :Token,       'schematics/attributes/token'
-  end
-
-  module Behaviours
-    autoload :Editable,    'schematics/behaviours/editable'
-    autoload :Fillable,    'schematics/behaviours/fillable'
-    autoload :Preloadable, 'schematics/behaviours/preloadable'
-    autoload :Rangeable,   'schematics/behaviours/rangeable'
-    autoload :Renderable,  'schematics/behaviours/renderable'
-    autoload :Searchable,  'schematics/behaviours/searchable'
-  end
-
-  module Entities
-    autoload :Descriptor, 'schematics/entities/descriptor'
-    autoload :Entity,     'schematics/entities/entity'
-    autoload :Singleton,  'schematics/entities/singleton'
-    autoload :Tree,       'schematics/entities/tree'
-  end
-
-  module Graphics
-    module Axes
-      autoload :Axis, 'schematics/graphics/axes/axis'
-      autoload :X,    'schematics/graphics/axes/x'
-      autoload :Y,    'schematics/graphics/axes/y'
-    end
-    autoload :Chart, 'schematics/graphics/chart'
-    autoload :Stat,  'schematics/graphics/stat'
-  end
-
-  module Patches
-    module Rails
-      module Generators
-        autoload :GeneratedAttribute, 'schematics/patches/rails/generators/generated_attribute'
-      end
-    end
-  end
-
   module Tests
     autoload :Controller, 'schematics/tests/controller'
-    autoload :Dummy,      'schematics/tests/dummy'
     autoload :Model,      'schematics/tests/model'
     autoload :System,     'schematics/tests/system'
   end
-
-  module Tokens
-    autoload :Number,      'schematics/tokens/number'
-    autoload :Operator,    'schematics/tokens/operator'
-    autoload :Parenthesis, 'schematics/tokens/parenthesis'
-    autoload :String,      'schematics/tokens/string'
-    autoload :Token,       'schematics/tokens/token'
-    autoload :Tokenizer,   'schematics/tokens/tokenizer'
-    autoload :Variable,    'schematics/tokens/variable'
-    autoload :Whitespace,  'schematics/tokens/whitespace'
-  end
-
-  module Virtuals
-    module Errors
-      autoload :NameError, 'schematics/virtuals/errors/name_error'
-      autoload :TypeError, 'schematics/virtuals/errors/type_error'
-    end
-    autoload :Calculation,   'schematics/virtuals/calculation'
-    autoload :Concatenation, 'schematics/virtuals/concatenation'
-    autoload :Virtual,       'schematics/virtuals/virtual'
-  end
-
-  autoload :Schema, 'schematics/schema'
 
   SCHEMA = Schema.instance
 end

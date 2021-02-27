@@ -1,3 +1,5 @@
+require 'schematics/tokens/parenthesis'
+
 describe Schematics::Tokens::Parenthesis do
   subject(:token) { described_class.new(value) }
 

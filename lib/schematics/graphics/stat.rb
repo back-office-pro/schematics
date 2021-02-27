@@ -1,3 +1,5 @@
+require 'schematics/graphics/axes/y'
+
 module Schematics
   module Graphics
     class Stat < Axes::Y

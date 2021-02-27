@@ -33,14 +33,14 @@ module Schematics
               end.to_h
             end
 
-            test "should get edit" do
+            test 'should get edit' do
               login
               get edit_polymorphic_path(@record)
               assert_response :success
             end
 
             test "should show API #{entity.name}" do
-              login as: :json
+              login formats: :json
               get polymorphic_path(@record), headers: authorization_header, as: :json
               assert_response :success
             end
@@ -58,7 +58,7 @@ module Schematics
             end
 
             test "should update API #{entity.name}" do
-              login as: :json
+              login formats: :json
               patch polymorphic_path(@record),
                     params: { entity.name.to_sym => @json_params },
                     headers: authorization_header,
@@ -74,33 +74,33 @@ module Schematics
             end
 
             unless entity.is_a?(Entities::Singleton)
-              test "should get API index" do
-                login as: :json
+              test 'should get API index' do
+                login formats: :json
                 get polymorphic_path(model_class), headers: authorization_header, as: :json
                 assert_response :success
               end
 
-              test "should get CSV index" do
+              test 'should get CSV index' do
                 login
                 get polymorphic_path(model_class), as: :csv
                 assert_response :success
               end
 
-              test "should get index" do
+              test 'should get index' do
                 login
                 get polymorphic_path(model_class)
                 assert_response :success
               end
 
-              test "should get new" do
+              test 'should get new' do
                 login
                 get new_polymorphic_path(model_class)
                 assert_response :success
               end
 
               test "should throw API #{entity.name} not found" do
-                login as: :json
-                get polymorphic_path(model_class).concat("/0"),
+                login formats: :json
+                get polymorphic_path(model_class).concat('/0'),
                     headers: authorization_header,
                     as: :json
                 assert_response :not_found
@@ -108,13 +108,13 @@ module Schematics
 
               test "should throw #{entity.name} not found" do
                 login
-                get polymorphic_path(model_class).concat("/0")
+                get polymorphic_path(model_class).concat('/0')
                 assert_redirected_to polymorphic_path(model_class)
               end
 
               test "should destroy API #{entity.name}" do
                 assert_difference("#{model_class.name}.count", -1) do
-                  login as: :json
+                  login formats: :json
                   delete polymorphic_path(@record),
                          headers: authorization_header,
                          as: :json
@@ -134,7 +134,7 @@ module Schematics
                 @record.destroy
                 assert @record.deleted?
                 assert_difference("#{model_class.name}.count") do
-                  login as: :json
+                  login formats: :json
                   delete polymorphic_path(@record, action: :restore),
                          headers: authorization_header,
                          as: :json
@@ -156,7 +156,7 @@ module Schematics
                 @record.restore
                 refute @record.deleted?
                 assert_difference("#{model_class.name}.count", -1) do
-                  login as: :json
+                  login formats: :json
                   delete polymorphic_path(@record, action: :archive),
                          headers: authorization_header,
                          as: :json
@@ -176,7 +176,7 @@ module Schematics
 
               test "should create API #{entity.name}" do
                 assert_difference("#{model_class.name}.count") do
-                  login as: :json
+                  login formats: :json
                   post polymorphic_path(model_class),
                        params: { entity.name.to_sym => @json_params },
                        headers: authorization_header,
@@ -207,10 +207,10 @@ module Schematics
         @current_user ||= users(:two)
       end
 
-      def login(as: nil)
+      def login(formats: nil)
         post sessions_path,
-             params: { user: { email: email, password: "secret" } },
-             as: as
+             params: { user: { email: email, password: 'secret' } },
+             as: formats
       end
 
       def authorization_header

@@ -1,3 +1,5 @@
+require 'schematics/tokens/operator'
+
 describe Schematics::Tokens::Operator do
   subject(:token) { described_class.new(value) }
 

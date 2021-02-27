@@ -5,29 +5,30 @@ module Schematics
       delegate :model_name, to: :@model_class, private: true
 
       before do
-        @file = context.file # TODO validate content_type CSV
+        @file = context.file # TODO: validate content_type CSV
         @model_class = context.model_class
         @errors = {}
       end
 
       def call
         CSV.foreach(@file, headers: true).with_index(1) do |row, line|
-          row = row.to_h.transform_keys(&method(:get_attribute))#.transform_values(&method(:get_value))
+          row = row.to_h.transform_keys(&method(:get_attribute))
+          # .transform_values(&method(:get_value))
           resource = @model_class.new(row)
           resource.paper_trail_event = :import
           result = Create.call(resource: resource)
           next if result.success?
           @errors[line] = resource.errors
-        #rescue ActiveModel::UnknownAttributeError => e
+        # rescue ActiveModel::UnknownAttributeError => e
         #  @errors[line] = [e.message]
         rescue e
           @errors[line] = [e.message]
         end
         if @errors.empty?
-          context.message = ".success"
+          context.message = '.success'
         else
           context.errors = @errors
-          context.fail!(message: ".failure")
+          context.fail!(message: '.failure')
         end
       end
 
@@ -38,9 +39,10 @@ module Schematics
       end
 
       def get_value(value)
-        puts I18n.t(model_name.to_s.underscore.to_sym, scope: '.activerecord.attributes').key?(value.pluralize.to_sym)
-        return value unless I18n.t(model_name.to_s.underscore.to_sym, scope: '.activerecord.attributes').key?(value.pluralize.to_sym)
-        v = I18n.t([model_name.to_s.underscore, value.pluralize], scope: '.activerecord.attributes').invert
+        return value unless I18n.t(model_name.to_s.underscore.to_sym,
+                                   scope: '.activerecord.attributes').key?(value.pluralize.to_sym)
+        v = I18n.t([model_name.to_s.underscore, value.pluralize],
+                   scope: '.activerecord.attributes').invert
         v[value]
       end
 

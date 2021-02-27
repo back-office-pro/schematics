@@ -7,7 +7,7 @@ User.create!(email: 'admin@admin.com',
              role: admin_role)
 Setting.instance.update(company_name: Rails.application.class.module_parent_name, theme: 'flatly')
 Schematics::SCHEMA.entities.map(&:class_name).each do |model|
-  Permission.actions.keys.each do |action|
+  Permission.actions.each_key do |action|
     admin_role.permissions << Permission.create!(model: model, action: action)
   end
 end

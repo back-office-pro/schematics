@@ -1,85 +1,87 @@
-$LOAD_PATH.push File.expand_path("lib", __dir__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
-require "schematics/version"
+require 'schematics/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = "schematics"
-  spec.version     = Schematics::VERSION
-  spec.authors     = ["maxence.derous"]
-  spec.email       = ["maxence.derous@gmail.com"]
-  spec.homepage    = "http://mygemserver.com"
-  spec.summary     = "Summary of Schematics."
-  spec.description = "Description of Schematics."
-  spec.license     = "Private"
-  spec.add_development_dependency "pg", "~> 1.2.3"
-  spec.add_development_dependency "rspec_api_documentation", "~> 6.1.0"
-  spec.add_development_dependency "rspec-its", "~> 1.3.0"
-  spec.add_development_dependency "simplecov", "~> 0.21.2"
-  spec.add_development_dependency "rubocop", "~> 0.76.0"
-  spec.add_development_dependency "rubocop-airbnb", "~> 3.0.2"
-  spec.add_development_dependency "webpacker", "~> 5.2.1"
-  spec.add_dependency "rails", "~> 6.1.3"
-  spec.add_dependency "selenium-webdriver", "~> 4.0.0.beta1"
-  spec.add_dependency "rspec-rails", "~> 4.0.2"
-  spec.add_dependency "image_processing", "~> 1.12.1"
-  spec.add_dependency "better_errors", "~> 2.10.0beta2"
-  spec.add_dependency "binding_of_caller", "~> 1.0.0"
-  spec.add_dependency "pagy", "~> 3.11.0"
-  spec.add_dependency "paranoia", "~> 2.4.3"
-  spec.add_dependency "paper_trail", "~> 11.1.0"
-  spec.add_dependency "searchkick", "~> 4.4.3"
-  spec.add_dependency "rack-attack", "~> 6.5.0"
-  spec.add_dependency "annotate", "~> 3.1.1"
-  spec.add_dependency "rack-cors", "~> 1.1.1"
-  spec.add_dependency "bcrypt", "~> 3.1.16"
-  spec.add_dependency "swagger_ui_engine", "~> 1.1.1"
-  spec.add_dependency "swagger-docs", "~> 0.2.8"
-  spec.add_dependency "simple_form", "~> 5.1.0"
-  spec.add_dependency "client_side_validations", "~> 18.0.0"
-  spec.add_dependency "client_side_validations-simple_form", "~> 12.1.0"
-  spec.add_dependency "bootstrap", "~> 4.6.0"
-  spec.add_dependency "bootswatch", "~> 4.3.1"
-  spec.add_dependency "wkhtmltopdf-binary", "~> 0.12.6.5"
-  spec.add_dependency "wicked_pdf", "~> 2.1.0"
-  spec.add_dependency "slim", "~> 4.1.0"
-  spec.add_dependency "rails-i18n", "~> 6.0.0"
-  spec.add_dependency "font_awesome5_rails", "~> 1.3.0"
-  spec.add_dependency "friendly_id", "~> 5.4.2"
-  spec.add_dependency "jquery-rails", "~> 4.4.0"
-  spec.add_dependency "jwt", "~> 2.2.2"
-  spec.add_dependency "phonelib", "~> 0.6.48"
-  spec.add_dependency "valid_email", "~> 0.1.3"
-  spec.add_dependency "validate_url", "~> 1.0.13"
-  spec.add_dependency "active_storage_validations", "~> 0.9.2"
-  spec.add_dependency "mini_magick", ">= 4.11.0"
-  spec.add_dependency "active_link_to", "~> 1.0.5"
-  spec.add_dependency "loaf", "~> 0.10.0"
-  spec.add_dependency "twitter-typeahead-rails", "~> 0.11.1"
-  spec.add_dependency "groupdate", "~> 5.2.2"
-  spec.add_dependency "chartkick", "~> 3.4.2"
-  spec.add_dependency "humanize", "~> 2.5.1"
-  spec.add_dependency "active_storage_base64", "~> 1.2.0"
-  spec.add_dependency "json_schemer", "~> 0.2.17"
-  spec.add_dependency "route_translator", "~> 10.0.0"
-  spec.add_dependency "google-cloud-translate", "~> 3.0.3"
-  spec.add_dependency "date_validator", "~> 0.10.0"
-  spec.add_dependency "oj", "~> 3.11.2"
-  spec.add_dependency "active_model_serializers", "~> 0.10.12"
-  spec.add_dependency "acts_as_singleton", "~> 0.0.8"
-  spec.add_dependency "ancestry", "~> 3.2.1"
-  spec.add_dependency "animate-rails", "~> 1.0.10"
-  spec.add_dependency "title", "~> 0.0.8"
-  spec.add_dependency "sprockets", "~> 3.7.2"
-  spec.add_dependency "best_in_place", "~> 3.1.1"
-  spec.add_dependency "jquery-ui-rails", "~> 6.0.1"
-  spec.add_dependency "rails-erd", "~> 1.6.1"
-  spec.add_dependency "bootstrap-email", "~> 0.3.4"
-  spec.add_dependency "interactor", "~> 3.1.2"
-  spec.add_dependency "cancancan", "~> 3.2.1"
-  spec.add_dependency "brakeman", "~> 5.0.0"
-  spec.add_dependency "rails_best_practices", "~> 1.20.0"
-  spec.add_dependency "rails-timeago", "~> 2.19.1"
-  spec.add_dependency "view_component", "~> 2.26.1"
-  spec.metadata["allowed_push_host"] = "http://mygemserver.com"
-  spec.files = Dir["{app,config,db,lib}/**/*", "README.md"]
+  spec.name = 'schematics'
+  spec.version = Schematics::VERSION
+  spec.authors = ['maxence.derous']
+  spec.email = ['maxence.derous@gmail.com']
+  spec.homepage = 'http://mygemserver.com'
+  spec.summary = 'Summary of Schematics.'
+  spec.description = 'Description of Schematics.'
+  spec.license = 'Private'
+  spec.required_ruby_version = '>= 3.0.0'
+  spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
+  spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
+  spec.add_development_dependency 'pg', '~> 1.2.3'
+  spec.add_development_dependency 'rspec-its', '~> 1.3.0'
+  spec.add_development_dependency 'rubocop', '~> 1.10.0'
+  spec.add_development_dependency 'rubocop-rails', '~> 2.9.1'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.2.0'
+  spec.add_development_dependency 'simplecov', '~> 0.21.2'
+  spec.add_development_dependency 'webpacker', '~> 5.2.1'
+  spec.add_dependency 'active_link_to', '~> 1.0.5'
+  spec.add_dependency 'active_model_serializers', '~> 0.10.12'
+  spec.add_dependency 'active_storage_base64', '~> 1.2.0'
+  spec.add_dependency 'active_storage_validations', '~> 0.9.2'
+  spec.add_dependency 'acts_as_singleton', '~> 0.0.8'
+  spec.add_dependency 'ancestry', '~> 3.2.1'
+  spec.add_dependency 'animate-rails', '~> 1.0.10'
+  spec.add_dependency 'annotate', '~> 3.1.1'
+  spec.add_dependency 'bcrypt', '~> 3.1.16'
+  spec.add_dependency 'best_in_place', '~> 3.1.1'
+  spec.add_dependency 'better_errors', '~> 2.10.0beta2'
+  spec.add_dependency 'binding_of_caller', '~> 1.0.0'
+  spec.add_dependency 'bootstrap', '~> 4.6.0'
+  spec.add_dependency 'bootstrap-email', '~> 0.3.4'
+  spec.add_dependency 'bootswatch', '~> 4.3.1'
+  spec.add_dependency 'brakeman', '~> 5.0.0'
+  spec.add_dependency 'cancancan', '~> 3.2.1'
+  spec.add_dependency 'chartkick', '~> 3.4.2'
+  spec.add_dependency 'client_side_validations', '~> 18.0.0'
+  spec.add_dependency 'client_side_validations-simple_form', '~> 12.1.0'
+  spec.add_dependency 'date_validator', '~> 0.10.0'
+  spec.add_dependency 'font_awesome5_rails', '~> 1.3.0'
+  spec.add_dependency 'friendly_id', '~> 5.4.2'
+  spec.add_dependency 'google-cloud-translate', '~> 3.0.3'
+  spec.add_dependency 'groupdate', '~> 5.2.2'
+  spec.add_dependency 'humanize', '~> 2.5.1'
+  spec.add_dependency 'image_processing', '~> 1.12.1'
+  spec.add_dependency 'interactor', '~> 3.1.2'
+  spec.add_dependency 'jquery-rails', '~> 4.4.0'
+  spec.add_dependency 'jquery-ui-rails', '~> 6.0.1'
+  spec.add_dependency 'json_schemer', '~> 0.2.17'
+  spec.add_dependency 'jwt', '~> 2.2.2'
+  spec.add_dependency 'loaf', '~> 0.10.0'
+  spec.add_dependency 'mini_magick', '>= 4.11.0'
+  spec.add_dependency 'oj', '~> 3.11.2'
+  spec.add_dependency 'pagy', '~> 3.11.0'
+  spec.add_dependency 'paper_trail', '~> 11.1.0'
+  spec.add_dependency 'paranoia', '~> 2.4.3'
+  spec.add_dependency 'phonelib', '~> 0.6.48'
+  spec.add_dependency 'rack-attack', '~> 6.5.0'
+  spec.add_dependency 'rack-cors', '~> 1.1.1'
+  spec.add_dependency 'rails', '~> 6.1.3'
+  spec.add_dependency 'rails_best_practices', '~> 1.20.0'
+  spec.add_dependency 'rails-erd', '~> 1.6.1'
+  spec.add_dependency 'rails-i18n', '~> 6.0.0'
+  spec.add_dependency 'rails-timeago', '~> 2.19.1'
+  spec.add_dependency 'route_translator', '~> 10.0.0'
+  spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
+  spec.add_dependency 'rspec-rails', '~> 4.0.2'
+  spec.add_dependency 'searchkick', '~> 4.4.3'
+  spec.add_dependency 'selenium-webdriver', '~> 4.0.0.beta1'
+  spec.add_dependency 'simple_form', '~> 5.1.0'
+  spec.add_dependency 'slim', '~> 4.1.0'
+  spec.add_dependency 'sprockets', '~> 3.7.2'
+  spec.add_dependency 'swagger-docs', '~> 0.2.8'
+  spec.add_dependency 'swagger_ui_engine', '~> 1.1.1'
+  spec.add_dependency 'title', '~> 0.0.8'
+  spec.add_dependency 'twitter-typeahead-rails', '~> 0.11.1'
+  spec.add_dependency 'validate_url', '~> 1.0.13'
+  spec.add_dependency 'valid_email', '~> 0.1.3'
+  spec.add_dependency 'view_component', '~> 2.26.1'
+  spec.add_dependency 'wicked_pdf', '~> 2.1.0'
+  spec.add_dependency 'wkhtmltopdf-binary', '~> 0.12.6.5'
 end

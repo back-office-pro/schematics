@@ -1,8 +1,10 @@
+require 'schematics/attributes/text'
+
 module Schematics
   module Attributes
     class String < Text
       def migration_options
-        super + [:email, :url, :phone]
+        super + %i[email url phone]
       end
 
       def email?

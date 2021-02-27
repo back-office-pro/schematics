@@ -1,3 +1,5 @@
+require 'schematics/entities/entity'
+
 module Schematics
   module Entities
     class Singleton < Entity
@@ -9,7 +11,7 @@ module Schematics
       end
 
       def to_str
-        super + <<~RUBY
+        super + <<~RUBY # rubocop:disable Style/StringConcatenation
           acts_as_singleton
         RUBY
       end

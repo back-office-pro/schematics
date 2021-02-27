@@ -10,9 +10,9 @@ module Schematics
 
       def call
         if @resource.restore(recursive: true)
-          context.message = ".success"
+          context.message = '.success'
         else
-          context.fail!(message: ".failure")
+          context.fail!(message: '.failure')
         end
       end
     end

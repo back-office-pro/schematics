@@ -1,14 +1,22 @@
+require 'schematics/entities/entity'
+require 'schematics/entities/tree'
+require 'schematics/entities/singleton'
+require 'schematics/graphics/chart'
+require 'schematics/graphics/stat'
+require 'json_schemer'
+require 'singleton'
+
 module Schematics
   class Schema
     include Singleton
-    attr_reader :entities, :charts, :stats
     delegate :schemer, to: :class, private: true
+    attr_reader :entities, :charts, :stats
 
     class << self
       delegate :validate, to: :schemer, private: true
 
       def schemer
-        @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path("../schema.json", __dir__)))
+        @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path('../schema.json', __dir__)))
       end
     end
 
@@ -48,17 +56,17 @@ module Schematics
     private
 
     def data
-      @data ||= data_json.merge(app_json) { |key, left, right| left + right }
+      @data ||= data_json.merge(app_json) { |_key, left, right| left + right }
     end
 
     def app_json
-      file_path = File.expand_path("../app.json", __dir__)
+      file_path = File.expand_path('../app.json', __dir__)
       file = File.read(file_path)
       JSON.parse(file, symbolize_names: true)
     end
 
     def data_json
-      file_path = File.expand_path("../../spec/data.json", __dir__)
+      file_path = File.expand_path('../../spec/data.json', __dir__)
       file = File.read(file_path)
       JSON.parse(file, symbolize_names: true)
     end

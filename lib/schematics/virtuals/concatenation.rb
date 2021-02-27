@@ -1,3 +1,5 @@
+require 'schematics/virtuals/virtual'
+
 module Schematics
   module Virtuals
     class Concatenation < Virtual

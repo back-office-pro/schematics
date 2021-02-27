@@ -1,3 +1,7 @@
+require 'schematics/associations/association'
+require 'schematics/behaviours/fillable'
+require 'active_support/core_ext/module/delegation'
+
 module Schematics
   module Associations
     class HasAndBelongsToMany < Association
@@ -17,7 +21,7 @@ module Schematics
       end
 
       def api_param_type
-        "array"
+        'array'
       end
 
       def to_str

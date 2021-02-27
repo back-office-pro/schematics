@@ -6,6 +6,7 @@ module Schematics
         delegate :id, :entity, :item_class, :reify, to: :@version
 
         def initialize(version:)
+          super
           @version = version
         end
 

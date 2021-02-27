@@ -28,7 +28,7 @@ module Schematics
       end
 
       def migration_options
-        [:unique, :required, :default]
+        %i[unique required default]
       end
 
       def to_s
@@ -59,7 +59,7 @@ module Schematics
         <<~RUBY
           property :#{@name.camelize(:lower)},
                    :#{model_property_type},
-                   #{required? ? ":required" : ":optional"},
+                   #{required? ? ':required' : ':optional'},
                    "#{@name.humanize}"
         RUBY
       end
@@ -69,7 +69,7 @@ module Schematics
           param :form,
           "#{@entity.name.camelize(:lower)}[#{@name.camelize(:lower)}]",
           :#{api_param_type},
-          #{required? ? ":required" : ":optional"},
+          #{required? ? ':required' : ':optional'},
           "#{@name.humanize}"
         RUBY
       end
@@ -101,7 +101,7 @@ module Schematics
       end
 
       def to_str
-        ""
+        ''
       end
 
       def weight

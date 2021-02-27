@@ -1,3 +1,10 @@
+require 'schematics/attributes/attribute'
+require 'schematics/behaviours/renderable'
+require 'schematics/behaviours/searchable'
+require 'schematics/behaviours/preloadable'
+require 'schematics/behaviours/fillable'
+require 'schematics/tests/dummy'
+
 module Schematics
   module Attributes
     class Attachment < Attribute
@@ -8,19 +15,19 @@ module Schematics
       delegate :default, :json_default, to: :dummy
 
       def api_param_type
-        "file"
+        'file'
       end
 
       def permitted_params
         [
           super,
-          :"#{association_name}_attributes" => [:id, :_destroy],
+          { "#{association_name}_attributes": %i[id _destroy] },
         ]
       end
 
       def permitted_json_params
         [
-          { permitted_params.first => [:data, :filename, :content_type] },
+          { permitted_params.first => %i[data filename content_type] },
           permitted_params.second,
         ]
       end

@@ -8,8 +8,8 @@ class CreateActionTextTables < ActiveRecord::Migration[6.1]
       t.timestamps
       t.datetime :deleted_at
 
-      t.index [:record_type, :record_id, :name],
-              name: "index_action_text_rich_texts_uniqueness",
+      t.index %i[record_type record_id name],
+              name: 'index_action_text_rich_texts_uniqueness',
               unique: true
     end
   end

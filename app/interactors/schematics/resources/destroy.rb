@@ -9,9 +9,9 @@ module Schematics
 
       def call
         if @resource.really_destroy!
-          context.message = ".success"
+          context.message = '.success'
         else
-          context.fail!(message: ".failure")
+          context.fail!(message: '.failure')
         end
       end
     end

@@ -1,3 +1,5 @@
+require 'schematics/attributes/attribute'
+
 module Schematics
   module Attributes
     class Digest < Attribute
@@ -8,7 +10,7 @@ module Schematics
       end
 
       def api_param_type
-        "string"
+        'string'
       end
 
       def permitted_params

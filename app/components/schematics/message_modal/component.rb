@@ -5,6 +5,7 @@ module Schematics
       delegate :id, :subject, :content, to: :@message
 
       def initialize(message:)
+        super
         @message = message
       end
     end

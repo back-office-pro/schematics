@@ -5,6 +5,7 @@ module Schematics
       delegate :name, to: :@field
 
       def initialize(field:, model_class:)
+        super
         @field = field
         @model_class = model_class
       end

@@ -23,6 +23,7 @@ module Schematics
       end
 
       def initialize(resources:)
+        super
         @resources = resources
       end
     end

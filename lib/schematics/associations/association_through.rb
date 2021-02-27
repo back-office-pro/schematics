@@ -1,3 +1,5 @@
+require 'schematics/associations/association'
+
 module Schematics
   module Associations
     class AssociationThrough < Association
@@ -13,7 +15,7 @@ module Schematics
       end
 
       def to_str
-        super.squish + ', ' + <<~RUBY
+        super.squish + ', ' + <<~RUBY # rubocop:disable Style/StringConcatenation
           through: :#{@through.name}
         RUBY
       end
