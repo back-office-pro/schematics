@@ -27,18 +27,6 @@ module Schematics
         'integer'
       end
 
-      def api_param_type
-        'string'
-      end
-
-      def model_property
-        [super.sub('property', 'property_list'), @values.to_s].join(', ')
-      end
-
-      def api_param
-        [super.sub('param', 'param_list'), @values.to_s].join(', ')
-      end
-
       def to_str
         <<~RUBY
           enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}, _prefix: true

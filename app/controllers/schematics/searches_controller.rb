@@ -1,16 +1,8 @@
 module Schematics
   class SearchesController < ApplicationController
-    # swagger_controller :searches, "Global Search"
-
     def create
       redirect_to search_path(query: params[:query])
     end
-
-    # swagger_api :show do |api|
-    #   summary "Global search"
-    #   param :path, :query, :string, :required, "Query String"
-    #   response :success
-    # end
 
     def show
       @results = {}

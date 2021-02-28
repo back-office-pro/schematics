@@ -91,7 +91,7 @@ module Schematics
               test "should belongs_to #{attribute.name}" do
                 reflection = model_class.reflect_on_association(attribute.name.to_sym)
                 assert reflection.macro == :belongs_to
-                assert reflection.class_name == attribute.model_property_type
+                assert reflection.class_name == attribute.association_type.camelize
                 assert reflection.options[:optional] == true unless attribute.required?
               end
             end

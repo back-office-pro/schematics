@@ -14,10 +14,6 @@ module Schematics
       include Behaviours::Fillable
       delegate :default, :json_default, to: :dummy
 
-      def api_param_type
-        'file'
-      end
-
       def permitted_params
         [
           super,

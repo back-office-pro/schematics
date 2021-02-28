@@ -6,18 +6,20 @@ gem 'date_validator', git: 'https://github.com/codegram/date_validator', branch:
 after_bundle do
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
+  rails_command 'generate rspec:install'
   rails_command 'schematics:install:migrations'
   rails_command 'schematics:generate'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
   rails_command 'generate annotate:install'
   rails_command 'generate fixtures'
-  # rails_command "generate locales"
+  # rails_command 'generate locales'
   rails_command 'generate erd:install'
   rails_command 'db:migrate:reset'
   rails_command 'db:fixtures:load' if options[:skip_listen]
   rails_command 'schematics:db:seed'
-  rails_command 'swagger:docs'
+  rails_command 'generate open_api'
+  rails_command 'schematics:docs:generate'
 
   # Git
   run 'git add -A'

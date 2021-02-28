@@ -7,10 +7,6 @@ module Schematics
         super + %i[precision scale]
       end
 
-      def api_param_type
-        'double'
-      end
-
       def precision
         @options[:precision]
       end

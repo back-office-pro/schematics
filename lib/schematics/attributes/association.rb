@@ -43,17 +43,9 @@ module Schematics
         RUBY
       end
 
-      def model_property_type
-        association_type.camelize
-      end
-
-      def api_param_type
-        'integer'
-      end
-
       def to_str
         <<~RUBY
-          belongs_to :#{@name}, class_name: '#{model_property_type}', optional: #{!required?}
+          belongs_to :#{@name}, class_name: '#{association_type.camelize}', optional: #{!required?}
         RUBY
       end
 

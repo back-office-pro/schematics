@@ -1,6 +1,9 @@
-require 'acceptance_helper'
+require 'rails_helper'
+require 'rspec_api_documentation/dsl'
 
 resource 'Searches' do
+  extend Schematics::Specs::Helpers
+
   shared_setup
   token_auth
 

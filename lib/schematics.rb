@@ -13,9 +13,7 @@ require 'action_controller'
 require 'binding_of_caller'
 require 'searchkick'
 require 'rack/attack'
-require 'swagger/docs'
 require 'rack/cors'
-require 'swagger_ui_engine'
 require 'simple_form'
 require 'client_side_validations'
 require 'client_side_validations/simple_form'
@@ -57,6 +55,8 @@ require 'bootstrap-email'
 require 'interactor'
 require 'rails-timeago'
 require 'cancancan'
+require 'rspec_api_documentation'
+require 'grape-swagger-rails'
 require 'json_web_token'
 require 'array'
 require 'string'
@@ -64,9 +64,13 @@ require 'view_component/engine'
 require 'schematics/engine'
 require 'schematics/schema'
 require 'schematics/patches/rails/generators/generated_attribute'
-require_relative 'swagger/docs/config'
 
 module Schematics
+  module Specs
+    autoload :Acceptance, 'schematics/specs/acceptance'
+    autoload :Helpers,    'schematics/specs/helpers'
+  end
+
   module Tests
     autoload :Controller, 'schematics/tests/controller'
     autoload :Model,      'schematics/tests/model'

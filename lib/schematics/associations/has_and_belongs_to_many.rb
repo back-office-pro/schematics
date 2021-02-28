@@ -6,7 +6,7 @@ module Schematics
   module Associations
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
-      delegate :model_property, :api_param, :column_name, to: :belongs_to
+      delegate :column_name, to: :belongs_to
 
       def name
         belongs_to.name.pluralize
@@ -14,14 +14,6 @@ module Schematics
 
       def permitted_params
         { column_name.pluralize => [] }
-      end
-
-      def model_property_type
-        @name
-      end
-
-      def api_param_type
-        'array'
       end
 
       def to_str

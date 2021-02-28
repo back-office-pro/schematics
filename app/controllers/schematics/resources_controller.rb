@@ -17,16 +17,6 @@ module Schematics
     helper_method :entity, :model_class
 
     class << self
-      delegate :entity, :model_name, to: :model_class
-      Swagger::Docs::Generator.set_real_methods
-
-      def inherited(subclass)
-        super
-        subclass.class_eval do
-          class_eval(entity.api)
-        end
-      end
-
       def model_class
         controller_name.classify.constantize
       end

@@ -1,6 +1,9 @@
-require 'acceptance_helper'
+require 'rails_helper'
+require 'rspec_api_documentation/dsl'
 
 resource 'Password Resets' do
+  extend Schematics::Specs::Helpers
+
   shared_setup
   fixtures :users
   fixtures :roles

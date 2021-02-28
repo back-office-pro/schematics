@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.license = 'Private'
   spec.required_ruby_version = '>= 3.0.0'
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
-  spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
+  spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
   spec.add_development_dependency 'pg', '~> 1.2.3'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.10.0'
@@ -45,6 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'font_awesome5_rails', '~> 1.3.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
   spec.add_dependency 'google-cloud-translate', '~> 3.0.3'
+  spec.add_dependency 'grape-swagger-rails', '~> 0.3.1'
   spec.add_dependency 'groupdate', '~> 5.2.2'
   spec.add_dependency 'humanize', '~> 2.5.1'
   spec.add_dependency 'image_processing', '~> 1.12.1'
@@ -75,8 +76,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
   spec.add_dependency 'sprockets', '~> 3.7.2'
-  spec.add_dependency 'swagger-docs', '~> 0.2.8'
-  spec.add_dependency 'swagger_ui_engine', '~> 1.1.1'
   spec.add_dependency 'title', '~> 0.0.8'
   spec.add_dependency 'twitter-typeahead-rails', '~> 0.11.1'
   spec.add_dependency 'validate_url', '~> 1.0.13'

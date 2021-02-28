@@ -6,43 +6,53 @@ Dependencies choices details.
 
 :star: **searchkick**
 
-- We need the elasticsearch daemon
-- Most recent and popular solution
-- Most performant
-- Suggestions
-- Scalable
-- Easier eager loading, no need for joins
-- Enable search in *Text* and *RichText* without newlines and HTML tags
+:+1: Most recent and popular solution
+:+1: Most performant
+:+1: Suggestions
+:+1: Scalable
+:+1: Easier eager loading, no need for joins
+:+1: Enable search in *Text* and *RichText* without newlines and HTML tags
+
+:-1: We need the elasticsearch daemon
 
 ~~ransack~~
 
-+ More robust than has_scope
-+ More search patterns (_cont, _matches, _any...)
-- We can't sort by alias
-- Not maintained
+:+1: More robust than has_scope
+:+1: More search patterns (_cont, _matches, _any...)
+
+:-1: We need to monkey patch sorting by alias
+:-1: Not so much maintained
 
 ~~has_scope~~
 
 ~~pg_search~~
 
-- Only works with text fields (no range fields for ex)
+:-1: Only works with text fields (no range fields for ex)
 
 ### Testing
 
-:star: **rspec + factory_bot + rspec_api_documentation**
+:star: **rspec + rspec_api_documentation**
 
-- Rspec is the most popular testing framework
+:+1: Rspec is the most popular testing framework
+:+1: Better for gem testing
 
-~~minitest + fixtures + swagger-docs~~
+:star: **minitest + fixtures**
 
-- Swagger-docs is old and not maintained
+:+1: Built-in
+:+1: Suitable for generated application
+
+### API Documentation
+
+:star: **rspec_api_documentation + grape-swagger-rails**
+
+:+1: Open API documentation
 
 ### Pagination
 
 :star: **pagy**
 
-+ Most performant
-+ Most recent
+:+1: Most performant
+:+1: Most recent
 
 ~~kaminari~~
 
@@ -54,57 +64,62 @@ Dependencies choices details.
 
 ~~from scratch~~
 
-- Works badly with `ActionText` and `Attachment`
-- We need `olive_banch` to camelize keys
+:-1: Works badly with `ActionText` and `Attachment`
+:-1: We need `olive_banch` to camelize keys
 
 ~~fast_jsonapi~~
 
-+ Most performant
-- Only compatible with JSONAPI
+:+1: Most performant
+
+:-1: Only compatible with JSONAPI
 
 ### Soft deletes
 
 :star: **paranoia**
 
-- Most simple
+:+1: Most simple
+
+:-1: Does not work with Rails 6.1 *destroy_async*
 
 ~~act_as_paranoid~~
 
-- Older gem
+:-1: Older gem
 
 ~~discard~~
 
-+ Most recent gem
-- No support for recursive deletes
+:+1: Most recent gem
+
+:-1: No support for recursive deletes
 
 ### Model tracking & versioning
 
 :star: **paper_trail**
 
-- Most popular
+:+1: Most popular
 
 ~~audited~~
 
-- No metada to bind `ActionText` and `ActiveStorage`
+:-1: No metada to bind `ActionText` and `ActiveStorage`
 
 ~~public_activity~~
 
-- Shipped with default views
+:-1: Shipped with default views
 
 ~~logidze~~
 
-+ Most performant (database level tracking)
-- Not possible to have a global timeline
+:+1: Most performant (database level tracking)
+
+:-1: Not possible to have a global timeline
 
 ### PDF generation
 
 :star: **wkhtmltopdf**
 
-+ View system
+:+1: View system
 
 ~~prawn~~
 
-- No view system
+:-1: No view system
 
 ~~PDFKit~~
 
@@ -112,12 +127,12 @@ Dependencies choices details.
 
 :star: **from scratch**
 
-+ Most personalizable solution
-+ Generate `User` with from core system
+:+1: Most personalizable solution
+:+1: We can use `User` from core system
 
 ~~devise + devise_auth_token~~
 
-- Not enough personalizable
+:-1: Not enough personalizable
 
 ~~cleareance~~
 
@@ -129,8 +144,8 @@ Dependencies choices details.
 
 :star: **cancancan**
 
-+ Most simple
+:+1: Most simple
 
 ~~Pundit~~
 
-- No view helpers
+:-1: No view helpers

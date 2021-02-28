@@ -3,7 +3,6 @@ module Schematics
     include Fillable
     before_action :authorize, only: %i[show edit update]
     layout 'schematics/auth', only: %i[new create]
-    # swagger_controller :sessions, "Sessions Management"
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
 
@@ -17,14 +16,6 @@ module Schematics
       current_user.touch # rubocop:disable Rails/SkipsModelValidations
       render json: current_user
     end
-
-    # swagger_api :create do |api|
-    #   summary "User login"
-    #   param :form, "user[email]", :string, :required, "Email address"
-    #   param :form, "user[password]", :string, :required, "Password"
-    #   response :success
-    #   response :unauthorized
-    # end
 
     def create
       result = Sessions::Create.call(

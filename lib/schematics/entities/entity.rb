@@ -140,14 +140,6 @@ module Schematics
         fields + associations
       end
 
-      def model_properties
-        fillable_elements.map(&:model_property)
-      end
-
-      def api_params
-        fillable_elements.map(&:api_param)
-      end
-
       def permitted_params
         fillable_elements.flat_map(&:permitted_params)
       end
@@ -226,75 +218,6 @@ module Schematics
         RUBY
       end
 
-      def api
-        <<~RUBY
-          swagger_controller :#{name.pluralize}, "#{class_name} Management"
-
-          swagger_model :#{class_name} do |model|
-            description "A #{class_name} object"
-            #{model_properties.map(&:squish).join("\n\s\s")}
-          end
-
-          swagger_api :index do
-            summary "Fetches all #{name.humanize.downcase} items"
-            notes "This lists all the #{name.pluralize.humanize.downcase}"
-            param :header, "Authorization", :string, :required, "Authorization token"
-            param :query, :page, :integer, :optional, "Page number"
-            response :unauthorized
-            response :forbidden
-            response :success
-            type :#{class_name}
-          end
-
-          swagger_api :show do
-            summary "Fetches a single #{name.humanize.downcase} item"
-            notes "This returns a single #{name.humanize.downcase}"
-            param :header, "Authorization", :string, :required, "Authorization token"
-            param :path, :id, :integer, :required, "#{name.humanize} Id"
-            response :unauthorized
-            response :forbidden
-            response :success
-            response :not_found
-            type :#{class_name}
-          end
-
-          swagger_api :create do |api|
-            summary "Creates a new #{name.humanize.downcase}"
-            notes "This creates a new #{name.humanize.downcase}"
-            param :header, "Authorization", :string, :required, "Authorization token"
-            #{api_params.map(&:squish).join("\n\s\s")}
-            response :unauthorized
-            response :forbidden
-            response :success
-            response :unprocessable_entity
-          end
-
-          swagger_api :update do |api|
-            summary "Updates an existing #{name.humanize.downcase}"
-            notes "This updates an existing #{name.humanize.downcase}"
-            param :header, "Authorization", :string, :required, "Authorization token"
-            param :path, :id, :integer, :required, "#{name.humanize} Id"
-            #{api_params.map(&:squish).join("\n\s\s")}
-            response :unauthorized
-            response :forbidden
-            response :success
-            response :unprocessable_entity
-            response :not_found
-          end
-
-          swagger_api :destroy do
-            summary "Deletes an existing #{name.humanize.downcase} item"
-            notes "This deletes an existing #{name.humanize.downcase}"
-            param :header, "Authorization", :string, :required, "Authorization token"
-            param :path, :id, :integer, :required, "#{name.humanize} Id"
-            response :unauthorized
-            response :forbidden
-            response :success
-            response :not_found
-          end
-        RUBY
-      end
-
       def to_s
         <<~RUBY
           class #{class_name}
@@ -329,6 +252,7 @@ module Schematics
       def default_generators
         [
           "rails g scaffold #{name} #{attributes.map(&:to_s).join(' ')} --skip-resource-route",
+          "rails g rspec:acceptance #{name}",
           "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
           "rails g migration add_slug_to_#{name.pluralize} slug:string:unique:true",
         ]

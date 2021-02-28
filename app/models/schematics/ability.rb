@@ -6,11 +6,11 @@ module Schematics
     def initialize(user)
       @user = user
       aliases
+      return can :manage, :all if Rails.env.test? # rubocop:disable Lint/ReturnInVoidContext
       user_abilities
       singleton_abilities
       reference_abilities
       default_abilities
-      can :manage, :all if Rails.env.test? # TODO: improve tests with role/permissions
     end
 
     def admin?

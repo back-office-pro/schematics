@@ -9,10 +9,6 @@ module Schematics
         super + [:limit]
       end
 
-      def api_param_type
-        'string'
-      end
-
       def permitted_params
         [super, "#{super}_confirmation"]
       end

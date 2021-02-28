@@ -20,7 +20,6 @@ describe Schematics::Attributes::Digest do
   its(:type) { is_expected.to eq('digest') }
   its(:migration_options) { is_expected.to eq(%i[unique required default limit]) }
   its(:column_name) { is_expected.to eq('password') }
-  its(:api_param_type) { is_expected.to eq('string') }
   its(:permitted_params) { is_expected.to eq(%w[password password_confirmation]) }
   its(:validators) { is_expected.to eq({ allow_nil: true }) }
   its(:icon) { is_expected.to eq(:key) }

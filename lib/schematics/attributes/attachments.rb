@@ -3,10 +3,6 @@ require 'schematics/attributes/attachment'
 module Schematics
   module Attributes
     class Attachments < Attachment
-      def api_param_type
-        'array'
-      end
-
       def permitted_params
         [
           { super.first => [] },

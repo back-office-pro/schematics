@@ -16,10 +16,6 @@ module Schematics
         super + [:limit]
       end
 
-      def api_param_type
-        'string'
-      end
-
       def search_data
         <<~RUBY
           #{name}&.searchize

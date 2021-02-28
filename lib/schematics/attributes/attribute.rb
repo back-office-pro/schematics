@@ -47,33 +47,6 @@ module Schematics
         @name
       end
 
-      def model_property_type
-        api_param_type
-      end
-
-      def api_param_type
-        type
-      end
-
-      def model_property
-        <<~RUBY
-          property :#{@name.camelize(:lower)},
-                   :#{model_property_type},
-                   #{required? ? ':required' : ':optional'},
-                   "#{@name.humanize}"
-        RUBY
-      end
-
-      def api_param
-        <<~RUBY
-          param :form,
-          "#{@entity.name.camelize(:lower)}[#{@name.camelize(:lower)}]",
-          :#{api_param_type},
-          #{required? ? ':required' : ':optional'},
-          "#{@name.humanize}"
-        RUBY
-      end
-
       def validators
         validators = {}
         validators[:uniqueness] = { case_sensitive: false } if unique?

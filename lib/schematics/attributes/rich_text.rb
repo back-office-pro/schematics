@@ -12,10 +12,6 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
-      def api_param_type
-        'string'
-      end
-
       def preload
         [type, name].join('_').to_sym
       end

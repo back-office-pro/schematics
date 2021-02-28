@@ -45,7 +45,7 @@ html
                       = fa_icon :cog, class: "mr-3"
                       = t('.dropdown.settings')
                   - if current_ability.admin?
-                    = link_to main_app.swagger_ui_engine_path, data: { turbolinks: false }, class: "dropdown-item" do
+                    = link_to main_app.grape_swagger_rails_path, data: { turbolinks: false }, class: "dropdown-item" do
                       = fa_icon :project_diagram, class: "mr-3"
                       = t('.dropdown.api')
                   .dropdown-divider

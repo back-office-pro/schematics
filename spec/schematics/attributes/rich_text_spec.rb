@@ -20,7 +20,6 @@ describe Schematics::Attributes::RichText do
 
   its(:type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
-  its(:api_param_type) { is_expected.to eq('string') }
   its(:preload) { is_expected.to eq(:rich_text_summary) }
   its(:icon) { is_expected.to eq(:align_justify) }
 
