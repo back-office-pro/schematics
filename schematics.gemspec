@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
   spec.add_development_dependency 'pg', '~> 1.2.3'
+  spec.add_development_dependency 'reek', '~> 6.0.3'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.10.0'
   spec.add_development_dependency 'rubocop-rails', '~> 2.9.1'
