@@ -36,7 +36,7 @@ html
                 a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
                   = render Schematics::Attachment::Component.create_avatar(attachment: current_user.avatar)
-                .dropdown-menu.dropdown-menu-right.animated.zoomIn.shadow-sm aria-labelledby="accountDropdown"
+                .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm aria-labelledby="accountDropdown"
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"
                     = t('.dropdown.edit_profile')
@@ -52,7 +52,7 @@ html
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item" do
                     = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')
-          .container-fluid.my-4.px-4.animated class=('slideInDown' if params[:page].blank?)
+          .container-fluid.my-4.px-4.animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top
             .ml-3 &copy; #{setting(:company_name)} #{Time.zone.now.year}

@@ -21,6 +21,15 @@ after_bundle do
   rails_command 'generate open_api'
   rails_command 'schematics:docs:generate'
 
+  # Yarn packages
+  run 'yarn add animate.css@4.1.1'
+  run 'yarn add bootstrap@4.6.0'
+  run 'yarn add bootswatch@4.6.0'
+  run 'yarn add jquery@3.5.1'
+  run 'yarn add jquery-ui@^1.12.1'
+  run 'yarn add jquery-ujs@^1.2.2'
+  run 'yarn add typeahead.js@^0.11.1'
+
   # Git
   run 'git add -A'
   run "git commit -m 'initial commit'"

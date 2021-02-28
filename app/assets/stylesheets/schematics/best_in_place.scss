@@ -1,5 +1,5 @@
-@import "jquery-ui/theme";
-@import "jquery-ui/datepicker";
+@import "jquery-ui/themes/base/theme";
+@import "jquery-ui/themes/base/datepicker";
 
 .best_in_place .form-control {
   height: 1.8rem;
@@ -14,4 +14,8 @@
   .best_in_place {
     cursor: copy;
   }
+}
+
+.ui-datepicker {
+  z-index: 5 !important;
 }

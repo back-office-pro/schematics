@@ -1,4 +1,5 @@
 require 'rails/generators/generated_attribute'
+require 'schematics/patches/rails/generators/generated_attribute'
 
 Rails::Generators::GeneratedAttribute
   .singleton_class

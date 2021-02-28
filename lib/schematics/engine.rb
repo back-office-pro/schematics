@@ -22,6 +22,10 @@ module Schematics
     config.action_mailer.default_options = { from: 'localhost' }
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
 
+    # Assets
+    config.assets.paths << Pagy.root.join('javascripts')
+    config.assets.precompile += %w[schematics_manifest.js]
+
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = %i[fr en]

@@ -1,7 +1,8 @@
 //= require best_in_place
-//= require jquery-ui/effects/effect-highlight
-//= require jquery-ui/widgets/datepicker
-//= require jquery-ui/i18n/datepicker-fr
+//= require jquery-ui/ui/effect
+//= require jquery-ui/ui/effects/effect-highlight
+//= require jquery-ui/ui/widgets/datepicker
+//= require jquery-ui/ui/i18n/datepicker-fr
 //= require best_in_place.jquery-ui
 
 $(document).on('turbolinks:load', function() {

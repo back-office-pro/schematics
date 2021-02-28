@@ -15,5 +15,5 @@ html
     - flash.each do |f|
       = render Schematics::Toast::Component.new(flash: f)
     .jumbotron.p-0.m-0.rounded-0.d-flex.align-items-center.min-vh-100.bg-primary
-      .container.animated.slideInDown
+      .container.animated.animate__slideInDown
         = yield
