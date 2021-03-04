@@ -1,4 +1,5 @@
 require 'schematics/attributes/attribute'
+require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
 require 'schematics/behaviours/preloadable'
@@ -8,6 +9,7 @@ require 'schematics/behaviours/rangeable'
 module Schematics
   module Attributes
     class Date < Attribute
+      include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Fillable

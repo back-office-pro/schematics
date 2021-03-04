@@ -17,6 +17,7 @@ describe Schematics::Attributes::Text do
     }
   end
 
+  it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }

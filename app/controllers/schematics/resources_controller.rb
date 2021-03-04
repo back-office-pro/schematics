@@ -4,10 +4,12 @@ module Schematics
     include Sortable
     include Filterable
     include Searchable
-    before_action :set_paper_trail_whodunnit
+    include Readable
     before_action :authorize
-    before_action :set_breadcrumb
     before_action :set_resource, only: %i[show edit update destroy archive restore]
+    before_action :set_paper_trail_whodunnit
+    before_action :set_breadcrumb
+    before_action :update_timestamp_field?, only: :show
     authorize_resource
     after_action { pagy_headers_merge(@pagy) if @pagy }
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -220,13 +222,15 @@ module Schematics
     protected
 
     def set_resource
-      scope = request.delete? ? :with_deleted : :unscoped
-      @resource = model_class.includes(entity.includes)
+      @resource = model_class
+        .includes(entity.includes)
+        .includes(:slugs)
+      @resource = @resource.with_deleted if request.delete?
       @resource = case entity
                   when Entities::Singleton
                     @resource.instance
                   when Entities::Entity
-                    @resource.send(scope).find(params[:id])
+                    @resource.find(params[:id])
                   end
       return if request.path.start_with?(polymorphic_path(@resource))
       redirect_to @resource, status: :moved_permanently

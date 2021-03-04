@@ -1,8 +1,11 @@
 require 'schematics/attributes/text'
+require 'schematics/behaviours/listable'
 
 module Schematics
   module Attributes
     class String < Text
+      include Behaviours::Listable
+
       def migration_options
         super + %i[email url phone]
       end

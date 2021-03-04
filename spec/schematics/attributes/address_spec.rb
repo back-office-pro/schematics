@@ -13,6 +13,7 @@ describe Schematics::Attributes::Address do
   let(:name) { 'address' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }

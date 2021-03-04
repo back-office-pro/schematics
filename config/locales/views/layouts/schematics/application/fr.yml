@@ -3,6 +3,7 @@ fr:
     schematics:
       application:
         dropdown:
+          my_account: Mon compte
           logout: Déconnexion
           edit_profile: Editer mon profil
           settings: Paramètres application

@@ -15,7 +15,7 @@
             },
             "required": ["entity", "agregate"],
             "type": "object"
-        },        
+        },
         "chart": {
             "definitions": {
                 "type": {
@@ -63,7 +63,7 @@
             },
             "required": ["name", "attributes"],
             "type": "object"
-        },        
+        },
         "virtual_option": {
             "definitions": {
                 "scale": {
@@ -89,7 +89,7 @@
             },
             "required": ["name", "function"],
             "type": "object"
-        },    
+        },
         "attribute_option": {
             "definitions": {
                 "unique": {

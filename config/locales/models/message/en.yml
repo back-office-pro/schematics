@@ -1,12 +1,15 @@
 en:
   activerecord:
     models:
-      message: Message
+      message: 
+        one: Message
+        other: Messages
     attributes:
       message:
         subject: Subject
         content: Content
         author: Author
+        read_at: Read at
         sent_messages:
           zero: No message sent
           one: Sent message

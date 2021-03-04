@@ -30,6 +30,7 @@ describe Schematics::Attributes::BelongsTo do
     attribute.inverse_descriptor = parent_entity.descriptor
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }

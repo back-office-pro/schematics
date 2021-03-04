@@ -7,17 +7,21 @@ module Schematics
       @user = user
       aliases
       return can :manage, :all if Rails.env.test? # rubocop:disable Lint/ReturnInVoidContext
-      user_abilities
-      singleton_abilities
-      reference_abilities
-      default_abilities
+      user_permissions
+      singleton_restrictions
+      references_attributes_restrictions
+      default_restrictions
     end
 
     def admin?
-      @user.role == Role.last
+      @user.role == admin_role
     end
 
     private
+
+    def admin_role
+      @admin_role ||= Role.find_by(name: 'Admin')
+    end
 
     def aliases
       alias_action :autocomplete, to: :read
@@ -25,26 +29,29 @@ module Schematics
       alias_action :restore, to: :archive
     end
 
-    def default_abilities
-      cannot %i[create update destroy import archive], Permission
+    def default_restrictions
       cannot %i[destroy archive], user
-      cannot %i[update destroy archive], Role.last
+      cannot %i[update destroy archive], admin_role
+      cannot %i[create update destroy import archive], Permission
+      cannot %i[read update destroy archive], Message
       can :read, Message, recipient_id: user.id
+      can :read, Message, author_id: user.id
+      can %i[update destroy archive], Message, { read_at: nil }
     end
 
-    def user_abilities
+    def user_permissions
       @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
       end
     end
 
-    def singleton_abilities
+    def singleton_restrictions
       SCHEMA.entities.select_is_a?(Entities::Singleton).each do |entity|
         cannot %i[index create destroy archive], entity.class_name.constantize
       end
     end
 
-    def reference_abilities
+    def references_attributes_restrictions
       SCHEMA.entities.flat_map(&:references_attributes).each do |attribute|
         model_class = attribute.entity.class_name.constantize
         cannot %i[read update destroy archive], model_class

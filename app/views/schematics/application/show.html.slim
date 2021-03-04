@@ -44,7 +44,8 @@
   - if resources.any?
     - all_resources[association.name] = resources
     = render Schematics::Viewer::Association::Component.new(resources: resources.includes(association.entity.includes))
-.mt-4
-  - versions = PaperTrail::Version.timeline(versions: @resource.versions, ability: current_ability)
-  = render Schematics::Timeline::Component.new(versions: versions)
+- if can?(:update, @resource)
+  .mt-4
+    - versions = PaperTrail::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
+    = render Schematics::Timeline::Component.new(versions: versions)
 = render Schematics::DestroyModal::Component.new(resource: @resource, resources: all_resources, attachments: all_attachments)

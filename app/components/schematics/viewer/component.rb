@@ -18,6 +18,8 @@ module Schematics
             Calendar::Component.new(resources: resources)
           when :tree
             Tree::Component.new(resources: resources)
+          when :inbox
+            Inbox::Component.new(resources: resources)
           end
         end
       end

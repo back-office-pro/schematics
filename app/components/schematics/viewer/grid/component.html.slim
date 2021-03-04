@@ -25,7 +25,7 @@
                       a.carousel-control-next data-slide="next" href="#carouselWithControls" role="button"
                         span.carousel-control-next-icon aria-hidden="true"
                         span.sr-only Next
-                - entity.renderable_elements.reject_is_a?(Schematics::Attributes::Attachment).sort_by(&:weight).each do |field|
+                - entity.listable_elements.reject_is_a?(Schematics::Attributes::Attachment).sort_by(&:weight).each do |field|
                   tr
                     th
                       = fa_icon field.icon, class: "mr-2 text-muted"

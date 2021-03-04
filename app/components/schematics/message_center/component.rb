@@ -13,7 +13,7 @@ module Schematics
       end
 
       def unread_count
-        received_messages.size
+        received_messages.where(read_at: nil).size
       end
     end
   end

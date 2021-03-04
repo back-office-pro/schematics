@@ -24,14 +24,14 @@ module Schematics
     private
 
     def headers
-      renderable_elements
+      listable_elements
         .sort_by(&:weight)
         .map(&:name)
         .map { |name| klass.human_attribute_name(name) }
     end
 
     def renderable_elements_of(resource)
-      renderable_elements.sort_by(&:weight).map do |element|
+      listable_elements.sort_by(&:weight).map do |element|
         Array.wrap(element.format(resource.instance_eval(element.name))).join(' ')
       end
     end

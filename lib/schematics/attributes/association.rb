@@ -1,4 +1,5 @@
 require 'schematics/attributes/attribute'
+require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
 require 'schematics/behaviours/preloadable'
@@ -8,6 +9,7 @@ require 'active_support/core_ext/module/delegation'
 module Schematics
   module Attributes
     class Association < Attribute
+      include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable

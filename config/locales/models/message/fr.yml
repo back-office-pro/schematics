@@ -9,6 +9,7 @@ fr:
         subject: Sujet
         content: Contenu
         author: Auteur
+        read_at: Consulté le
         sent_messages:
           zero: Aucun message envoyé
           one: Message envoyé

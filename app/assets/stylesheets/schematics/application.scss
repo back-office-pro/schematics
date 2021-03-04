@@ -234,6 +234,10 @@ footer {
   display: none;
 }
 
+.dropdown-menu[aria-labelledby="notificationsDropdown"], .dropdown-menu[aria-labelledby="messagesDropdown"] {
+  min-width: 300px;
+}
+
 @keyframes growIn {
   0% {
     transform: scale(.9);

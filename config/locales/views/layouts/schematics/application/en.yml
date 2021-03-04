@@ -3,6 +3,7 @@ en:
     schematics:
       application:
         dropdown:
+          my_account: My account
           logout: Logout
           edit_profile: Edit my profile
           settings: Application settings

@@ -1,8 +1,18 @@
-require 'schematics/attributes/date'
+require 'schematics/attributes/attribute'
 
 module Schematics
   module Attributes
-    class Timestamp < Date
+    class Timestamp < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Rangeable
+
+      def format(value)
+        value && I18n.l(value, format: '%A %d %B %Y %H:%M')
+      end
+
+      def icon
+        :calendar_alt
+      end
     end
   end
 end

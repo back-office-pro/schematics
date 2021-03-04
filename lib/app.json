@@ -100,6 +100,10 @@
                     }
                 },
                 {
+                    "name": "read_at",
+                    "type": "timestamp"
+                },
+                {
                     "name": "author",
                     "type": "references",
                     "options": {
