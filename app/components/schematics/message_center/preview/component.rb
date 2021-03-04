@@ -3,6 +3,7 @@ module Schematics
     module Preview
       class Component < ::ViewComponent::Base
         def initialize(message:)
+          super
           @message = message
         end
       end

@@ -223,8 +223,8 @@ module Schematics
 
     def set_resource
       @resource = model_class
-        .includes(entity.includes)
-        .includes(:slugs)
+                  .includes(entity.includes)
+                  .includes(:slugs)
       @resource = @resource.with_deleted if request.delete?
       @resource = case entity
                   when Entities::Singleton
