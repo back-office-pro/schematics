@@ -1,6 +1,7 @@
 Schematics::Engine.routes.draw do
   root 'dashboard#home'
   get 'chart/:id', to: 'dashboard#chart', as: :chart
+  get 'open_api.json', to: 'dashboard#open_api', as: :open_api
 
   localized do
     get 'login',             to: 'sessions#new',         as: :login

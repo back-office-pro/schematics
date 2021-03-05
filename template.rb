@@ -21,6 +21,9 @@ after_bundle do
   rails_command 'generate open_api'
   rails_command 'schematics:docs:generate'
 
+  # Ignore /doc directory
+  append_to_file '.gitignore', '/doc'
+
   # Yarn packages
   run 'yarn add animate.css@4.1.1'
   run 'yarn add bootstrap@4.6.0'

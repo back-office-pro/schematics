@@ -8,6 +8,6 @@ class OpenApiGenerator < Rails::Generators::Base
   private
 
   def open_api_file_path
-    File.join('public', 'doc', 'configurations', 'api', 'open_api.yml')
+    RspecApiDocumentation.configuration.configurations_dir.join('open_api.yml')
   end
 end
