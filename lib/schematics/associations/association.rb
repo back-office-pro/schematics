@@ -3,7 +3,7 @@ require 'active_support/core_ext/module/delegation'
 module Schematics
   module Associations
     class Association
-      delegate :entity, :required?, to: :belongs_to
+      delegate :entity, :required?, :column_name, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
       attr_reader :belongs_to
 
@@ -47,7 +47,7 @@ module Schematics
         <<~RUBY
           #{type} :#{name},
                   class_name: '#{class_name}',
-                  foreign_key: '#{belongs_to.column_name}'
+                  foreign_key: '#{column_name}'
         RUBY
       end
 

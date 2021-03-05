@@ -97,7 +97,7 @@ module Schematics
     def add_has_many_associations
       @entities.each do |entity|
         entity.association_attributes.select(&:inverse_of_has_many?).each do |attribute|
-          association = attribute.create_inverse_association
+          association = attribute.inverse_association
           find_entity_by_name(attribute.association_type).associations << association
         end
       end
@@ -106,7 +106,7 @@ module Schematics
     def add_has_one_associations
       @entities.each do |entity|
         entity.association_attributes.select(&:inverse_of_has_one?).each do |attribute|
-          association = attribute.create_inverse_association
+          association = attribute.inverse_association
           find_entity_by_name(attribute.association_type).associations << association
         end
       end

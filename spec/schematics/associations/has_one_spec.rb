@@ -1,4 +1,5 @@
 require 'schematics/associations/has_one'
+require 'schematics/entities/entity'
 
 describe Schematics::Associations::HasOne do
   subject(:association) { described_class.new(belongs_to) }
@@ -52,11 +53,12 @@ describe Schematics::Associations::HasOne do
     RUBY
   end
 
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
+  its('to_str.squish') do
+    is_expected.to eq <<~RUBY.squish
       has_one :entity,
               class_name: 'Entity',
-              foreign_key: 'schema_id'
+              foreign_key: 'schema_id',
+              inverse_of: :schema
     RUBY
   end
 end

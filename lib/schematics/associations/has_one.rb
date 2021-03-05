@@ -10,6 +10,15 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
+      def to_str
+        super
+          .chomp
+          .concat(', ')
+          .concat <<~RUBY
+            inverse_of: :#{belongs_to.name}
+          RUBY
+      end
+
       def search_data
         <<~RUBY
           #{name}&.#{descriptor.name}&.searchize

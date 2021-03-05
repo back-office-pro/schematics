@@ -26,12 +26,16 @@ module Schematics
         "#{super}_id"
       end
 
+      def class_name
+        association_type.camelize
+      end
+
       def association_type
         @options[:type] || @name
       end
 
       def inverse_association_name
-        inverse_association[:name] || @entity.name
+        @options.dig(:inverse, :name) || @entity.name
       end
 
       def preload
@@ -47,20 +51,24 @@ module Schematics
 
       def to_str
         <<~RUBY
-          belongs_to :#{@name}, class_name: '#{association_type.camelize}', optional: #{!required?}
+          belongs_to :#{@name},
+                     class_name: '#{class_name}',
+                     foreign_key: '#{column_name}',
+                     inverse_of: :#{inverse_association.name},
+                     optional: #{!required?}
         RUBY
       end
 
       def inverse_of_has_one?
-        inverse_association[:type] == 'has_one'
+        @options.dig(:inverse, :type) == 'has_one'
       end
 
       def inverse_of_has_many?
-        inverse_association[:type] == 'has_many'
+        @options.dig(:inverse, :type) == 'has_many'
       end
 
-      def create_inverse_association
-        Associations::Association.create(self, **inverse_association)
+      def inverse_association
+        @inverse_association ||= Associations::Association.create(self, **@options[:inverse])
       end
 
       def input_type
@@ -68,19 +76,13 @@ module Schematics
       end
 
       def input_collection
-        association_type.camelize.constantize.all.collect do |association|
+        class_name.constantize.all.collect do |association|
           [association.id, association.to_s]
         end
       end
 
       def weight
         2
-      end
-
-      private
-
-      def inverse_association
-        @options[:inverse]
       end
     end
   end

@@ -91,7 +91,9 @@ module Schematics
               test "should belongs_to #{attribute.name}" do
                 reflection = model_class.reflect_on_association(attribute.name.to_sym)
                 assert reflection.macro == :belongs_to
-                assert reflection.class_name == attribute.association_type.camelize
+                assert reflection.class_name == attribute.class_name
+                assert reflection.foreign_key == attribute.column_name
+                assert reflection.options[:inverse_of] == attribute.inverse_association.name.to_sym
                 assert reflection.options[:optional] == true unless attribute.required?
               end
             end
@@ -99,8 +101,10 @@ module Schematics
             entity.has_many_associations.each do |association|
               test "should have many #{association.name}" do
                 reflection = model_class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro == :has_many
+                assert reflection.macro == association.type.to_sym
                 assert reflection.class_name == association.class_name
+                assert reflection.foreign_key == association.column_name
+                assert reflection.options[:inverse_of] == association.belongs_to.name.to_sym
                 assert reflection.options[:dependent] == association.required? ? :destroy : :nullify
               end
             end
@@ -108,16 +112,19 @@ module Schematics
             entity.has_one_associations.each do |association|
               test "should have one #{association.name}" do
                 reflection = model_class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro == :has_one
+                assert reflection.macro == association.type.to_sym
                 assert reflection.class_name == association.class_name
+                assert reflection.foreign_key == association.column_name
+                assert reflection.options[:inverse_of] == association.belongs_to.name.to_sym
               end
             end
 
             entity.has_many_through_associations.each do |association|
               test "should have many #{association.name} through #{association.through.name}" do
                 reflection = model_class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro == :has_many
+                assert reflection.macro == association.type.to_sym
                 assert reflection.class_name == association.class_name
+                assert reflection.foreign_key == association.column_name
                 assert reflection.options[:through] == association.through.name.to_sym
               end
             end
@@ -125,9 +132,18 @@ module Schematics
             entity.has_one_through_associations.each do |association|
               test "should have one #{association.name} through #{association.through.name}" do
                 reflection = model_class.reflect_on_association(association.name.to_sym)
-                assert reflection.macro == :has_one
+                assert reflection.macro == association.type.to_sym
                 assert reflection.class_name == association.class_name
+                assert reflection.foreign_key == association.column_name
                 assert reflection.options[:through] == association.through.name.to_sym
+              end
+            end
+
+            entity.has_and_belongs_to_many_associations.each do |association|
+              test "should have and belongs to many #{association.name}" do
+                reflection = model_class.reflect_on_association(association.name.to_sym)
+                assert reflection.macro == association.type.to_sym
+                assert reflection.options[:inverse_of] == association.entity.name.to_sym
               end
             end
           end

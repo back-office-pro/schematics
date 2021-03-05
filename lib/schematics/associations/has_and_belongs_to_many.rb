@@ -6,7 +6,6 @@ module Schematics
   module Associations
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
-      delegate :column_name, to: :belongs_to
 
       def name
         belongs_to.name.pluralize
@@ -18,7 +17,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          #{type} :#{name}
+          #{type} :#{name}, inverse_of: :#{entity.name}
         RUBY
       end
 

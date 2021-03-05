@@ -54,7 +54,7 @@ describe Schematics::Attributes::References do
   its(:preload) { is_expected.to eq(:user) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:caret_square_right) }
-  its(:create_inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
+  its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   it { is_expected.to be_inverse_of_has_many }
   it { is_expected.not_to be_inverse_of_has_one }
 
@@ -66,7 +66,11 @@ describe Schematics::Attributes::References do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      belongs_to :user, class_name: 'User', optional: true
+      belongs_to :user,
+                 class_name: 'User',
+                 foreign_key: 'user_id',
+                 inverse_of: :entities,
+                 optional: true
     RUBY
   end
 
@@ -74,12 +78,19 @@ describe Schematics::Attributes::References do
     let(:options) do
       {
         "required": true,
+        "inverse": {
+          "type": 'has_many',
+        },
       }
     end
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        belongs_to :user, class_name: 'User', optional: false
+        belongs_to :user,
+                   class_name: 'User',
+                   foreign_key: 'user_id',
+                   inverse_of: :entities,
+                   optional: false
       RUBY
     end
   end
@@ -95,6 +106,6 @@ describe Schematics::Attributes::References do
 
     it { is_expected.to be_inverse_of_has_one }
     it { is_expected.not_to be_inverse_of_has_many }
-    its(:create_inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
+    its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
   end
 end
