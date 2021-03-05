@@ -17,6 +17,7 @@ namespace :schematics do
     t.rspec_opts = [
       Gem::Specification.find_by_name('schematics').gem_dir,
       '--format RspecApiDocumentation::ApiFormatter',
+      '--order defined',
     ]
   end
 end
