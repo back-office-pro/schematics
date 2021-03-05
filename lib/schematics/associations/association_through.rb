@@ -15,9 +15,12 @@ module Schematics
       end
 
       def to_str
-        super.squish + ', ' + <<~RUBY # rubocop:disable Style/StringConcatenation
-          through: :#{@through.name}
-        RUBY
+        super
+          .chomp
+          .concat(', ')
+          .concat <<~RUBY
+            through: :#{@through.name}
+          RUBY
       end
     end
   end

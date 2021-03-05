@@ -8,15 +8,20 @@ module Schematics
       end
 
       def to_str
-        super.squish + ', ' + <<~RUBY # rubocop:disable Style/StringConcatenation
-          dependent: :#{dependent_method}
-        RUBY
+        super
+          .chomp
+          .concat(', ')
+          .concat <<~RUBY
+            inverse_of: :#{belongs_to.name},
+            dependent: :#{dependent}
+          RUBY
       end
 
       private
 
-      def dependent_method
-        required? ? :destroy : :nullify
+      def dependent
+        return :destroy if required?
+        :nullify
       end
     end
   end

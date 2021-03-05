@@ -1,7 +1,7 @@
 require 'schematics/associations/has_many_through'
 
 describe Schematics::Associations::HasManyThrough do
-  subject(:association) { described_class.new(through, belongs_to.create_inverse_association) }
+  subject(:association) { described_class.new(through, belongs_to.inverse_association) }
 
   let(:parent_entity) do
     Schematics::Entities::Entity.create(
@@ -58,9 +58,12 @@ describe Schematics::Associations::HasManyThrough do
   its(:class_name) { is_expected.to eq('Attribute') }
   its('descriptor.name') { is_expected.to eq('name') }
 
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      has_many :attributes, class_name: 'Attribute', foreign_key: 'entity_id', through: :entities
+  its('to_str.squish') do
+    is_expected.to eq <<~RUBY.squish
+      has_many :attributes,
+               class_name: 'Attribute',
+               foreign_key: 'entity_id',
+               through: :entities
     RUBY
   end
 end

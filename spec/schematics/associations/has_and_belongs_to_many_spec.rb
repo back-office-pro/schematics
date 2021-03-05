@@ -1,4 +1,5 @@
 require 'schematics/associations/has_and_belongs_to_many'
+require 'schematics/entities/entity'
 
 describe Schematics::Associations::HasAndBelongsToMany do
   subject(:association) { described_class.new(belongs_to) }
@@ -33,7 +34,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_and_belongs_to_many :permissions
+      has_and_belongs_to_many :permissions, inverse_of: :role
     RUBY
   end
 

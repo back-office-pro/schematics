@@ -50,9 +50,12 @@ describe Schematics::Associations::HasOneThrough do
     RUBY
   end
 
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      has_one :schema, class_name: 'Schema', foreign_key: 'schema_id', through: :entity
+  its('to_str.squish') do
+    is_expected.to eq <<~RUBY.squish
+      has_one :schema,
+              class_name: 'Schema',
+              foreign_key: 'schema_id',
+              through: :entity
     RUBY
   end
 end

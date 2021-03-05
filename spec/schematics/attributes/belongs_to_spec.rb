@@ -1,4 +1,5 @@
 require 'schematics/attributes/belongs_to'
+require 'schematics/entities/entity'
 
 describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity, name, options) }
@@ -45,7 +46,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:preload) { is_expected.to eq(:schema) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:caret_square_right) }
-  its(:create_inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
+  its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   it { is_expected.to be_inverse_of_has_many }
   it { is_expected.not_to be_inverse_of_has_one }
 
@@ -57,7 +58,11 @@ describe Schematics::Attributes::BelongsTo do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      belongs_to :schema, class_name: 'Schema', optional: true
+      belongs_to :schema,
+                 class_name: 'Schema',
+                 foreign_key: 'schema_id',
+                 inverse_of: :entities,
+                 optional: true
     RUBY
   end
 
@@ -65,12 +70,19 @@ describe Schematics::Attributes::BelongsTo do
     let(:options) do
       {
         "required": true,
+        "inverse": {
+          "type": 'has_many',
+        },
       }
     end
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        belongs_to :schema, class_name: 'Schema', optional: false
+        belongs_to :schema,
+                   class_name: 'Schema',
+                   foreign_key: 'schema_id',
+                   inverse_of: :entities,
+                   optional: false
       RUBY
     end
   end
@@ -86,6 +98,6 @@ describe Schematics::Attributes::BelongsTo do
 
     it { is_expected.to be_inverse_of_has_one }
     it { is_expected.not_to be_inverse_of_has_many }
-    its(:create_inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
+    its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
   end
 end
