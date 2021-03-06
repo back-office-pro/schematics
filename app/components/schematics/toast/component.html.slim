@@ -1,4 +1,4 @@
-.toast.shadow-sm.w-50 aria-atomic="true" aria-live="assertive" role="alert" class="border-#{css_class}"
+.toast.shadow-sm.w-50 aria-atomic="true" aria-live="assertive" role="alert" class="border-#{css_class}" data-animation="#{!Rails.env.test?}"
   .toast-header.text-white class="bg-#{css_class}"
     span
       = fa_icon :bell
