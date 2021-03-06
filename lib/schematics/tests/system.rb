@@ -14,11 +14,18 @@ module Schematics
           super
           subclass.class_eval do
             PaperTrail.enabled = false
+            Searchkick.disable_callbacks
             model_class.reindex
 
             setup do
+              Searchkick.enable_callbacks
               @record = send(entity.name.pluralize, :two)
               login
+            end
+
+            def teardown
+              model_class.search_index.refresh
+              Searchkick.disable_callbacks
             end
 
             case entity
@@ -64,7 +71,7 @@ module Schematics
                 title = I18n.t('schematics.application.viewers.table.archive')
                 selector = "a[data-title='#{title}']"
                 find(selector, match: :first).click
-                assert_text I18n.t('schematics.resources.destroy.success.archived',
+                assert_text I18n.t('schematics.resources.archive.success',
                                    model_name: model_name.human)
               end
 
@@ -73,7 +80,7 @@ module Schematics
                 page.execute_script("$('tr[data-href]').first().click()")
                 click_on I18n.t('schematics.application.show.buttons.destroy')
                 click_on I18n.t('schematics.application.form.buttons.confirm')
-                assert_text I18n.t('schematics.resources.destroy.success.destroyed',
+                assert_text I18n.t('schematics.resources.destroy.success',
                                    model_name: model_name.human)
               end
             end
@@ -100,27 +107,29 @@ module Schematics
       end
 
       def fill_form(entity)
-        entity.fillable_attributes.each do |attribute|
-          input = "#{entity.name}[#{attribute.column_name}]"
-          case attribute
+        entity.fillable_elements.each do |element|
+          input = "#{entity.name}[#{element.column_name}]"
+          case element
+          when Associations::HasAndBelongsToMany
+            check("#{input}[]", match: :first, allow_label_click: true)
           when Attributes::Enum
             choose(input, match: :first, allow_label_click: true)
           when Attributes::Boolean
-            check(input) if @record.send(attribute.name)
+            check(input) if @record.send(element.name)
           when Attributes::Attachments
-            attach_file("#{input}[]", attribute.default.first.path, make_visible: true)
+            attach_file("#{input}[]", element.default.first.path, make_visible: true)
           when Attributes::Attachment
-            attach_file(input, attribute.default.path, make_visible: true)
+            attach_file(input, element.default.path, make_visible: true)
           when Attributes::RichText
-            fill_in_rich_text_area input, with: attribute.default
+            fill_in_rich_text_area input, with: element.default
           when Attributes::BelongsTo
-            select @record.instance_eval(attribute.name).to_s, from: input, match: :first
+            select @record.instance_eval(element.name).to_s, from: input, match: :first
           when Attributes::Digest
-            digest = attribute.default
+            digest = element.default
             fill_in input, with: digest
-            fill_in "#{entity.name}[#{attribute.column_name}_confirmation]", with: digest
+            fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: digest
           else
-            fill_in input, with: attribute.default || @record.send(attribute.name)
+            fill_in input, with: element.default || @record.send(element.name)
           end
         end
       end

@@ -15,9 +15,11 @@ module Schematics
           super
           subclass.class_eval do
             PaperTrail.enabled = false
+            Searchkick.disable_callbacks
             model_class.reindex
 
             setup do
+              Searchkick.enable_callbacks
               @record = send(entity.name.pluralize, :one)
               @params = entity.fillable_attributes.map do |attribute|
                 [
@@ -31,6 +33,11 @@ module Schematics
                   attribute.json_default || @record.send(attribute.column_name),
                 ]
               end.to_h
+            end
+
+            def teardown
+              model_class.search_index.refresh
+              Searchkick.disable_callbacks
             end
 
             test 'should get edit' do
