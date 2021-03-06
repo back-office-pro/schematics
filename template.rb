@@ -42,4 +42,8 @@ after_bundle do
 
   # Best practices
   run 'rails_best_practices'
+
+  # Tests
+  run 'rake test'
+  run 'rake test:system'
 end
