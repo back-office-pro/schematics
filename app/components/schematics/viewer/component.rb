@@ -13,13 +13,13 @@ module Schematics
           when :table
             Table::Component.new(resources: resources)
           when :grid
-            Grid::Component.new(resources: resources)
+            Table::Component.new(resources: resources)
           when :calendar
-            Calendar::Component.new(resources: resources)
+            Table::Component.new(resources: resources)
           when :tree
-            Tree::Component.new(resources: resources)
+            Table::Component.new(resources: resources)
           when :inbox
-            Inbox::Component.new(resources: resources)
+            Table::Component.new(resources: resources)
           end
         end
       end
