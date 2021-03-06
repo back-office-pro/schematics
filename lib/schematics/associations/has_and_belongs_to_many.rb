@@ -11,8 +11,12 @@ module Schematics
         belongs_to.name.pluralize
       end
 
+      def column_name
+        super.pluralize
+      end
+
       def permitted_params
-        { column_name.pluralize => [] }
+        { super => [] }
       end
 
       def to_str
