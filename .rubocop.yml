@@ -42,6 +42,8 @@ Metrics/PerceivedComplexity:
   Enabled: false
 Metrics/ParameterLists:
   Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
 AllCops:
   TargetRubyVersion: 3.0.0
   Exclude:
