@@ -81,7 +81,7 @@ module Schematics
               fill_form
               click_on I18n.t('schematics.application.form.buttons.confirm')
               assert_text I18n.t('schematics.resources.update.success',
-                                model_name: model_name.human)
+                                 model_name: model_name.human)
             end
           end
         end
