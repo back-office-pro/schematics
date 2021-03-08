@@ -20,4 +20,5 @@ rails new $app_name \
     -$disable-skip-listen \
     -$disable-skip-bootsnap \
     -$disable-skip-spring \
-    --dummy-app=$dummy_app
+    --dummy-app=$dummy_app \
+    > log/build.log
