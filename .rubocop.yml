@@ -28,8 +28,6 @@ Metrics/BlockLength:
   Enabled: false
 Metrics/MethodLength:
   Enabled: false
-Metrics/ClassLength:
-  Enabled: false
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 RSpec/MultipleExpectations:
@@ -41,8 +39,6 @@ Metrics/AbcSize:
 Metrics/PerceivedComplexity:
   Enabled: false
 Metrics/ParameterLists:
-  Enabled: false
-Metrics/ModuleLength:
   Enabled: false
 AllCops:
   TargetRubyVersion: 3.0.0
