@@ -15,11 +15,19 @@ module Schematics
             token_auth
             fixtures entity.name.pluralize.to_sym
 
+            model_class.reindex
+
             let(:model_class) { self.class.name.split('::').third.singularize.constantize }
+            let(:entity) { model_class.entity }
             let(:record) { send(model_class.entity.name.pluralize, :one) }
             let(:other_record) { send(model_class.entity.name.pluralize, :two) }
-
-            explanation "#{entity.name.pluralize} resource"
+            let(:request) do
+              {
+                entity.name => entity.fillable_elements.map do |element|
+                  [element.column_name, element.json_default || record.send(element.column_name)]
+                end.to_h,
+              }
+            end
 
             test_index
             test_show
@@ -38,7 +46,7 @@ module Schematics
         name.split('::').third.singularize.constantize
       end
 
-      def not_authorized
+      def context401
         context '401' do
           let(:auth_token) { '' }
 
@@ -49,7 +57,7 @@ module Schematics
         end
       end
 
-      def not_found
+      def context404
         context '404' do
           example_request 'Not found' do
             expect(response_status).to eq(404)
@@ -58,27 +66,40 @@ module Schematics
         end
       end
 
+      def context422
+        context '422' do
+          let(:id) { record.id }
+
+          example 'Unprocessable entity' do
+            do_request
+            expect(response_status).to eq(422)
+          end
+        end
+      end
+
       def test_index
         return if entity.is_a?(Entities::Singleton)
         route_summary "#{entity.name.pluralize} list"
         get polymorphic_path(model_class) do
-          # with_options scope: :filter, with_example: true do
-          #   entity.searchable_elements.each do |element|
-          #     parameter element.name.to_sym, "Filter by #{element.name}"
-          #   end
-          # end
+          parameter :with_deleted, 'Display archives', with_example: true
+          entity.searchable_elements.each do |element|
+            parameter element.name.to_sym,
+                      "Filter by #{element.name}",
+                      with_example: true
+          end
 
-          not_authorized
+          context401
           context '200' do
             let(:expected_result) do
               ActiveModelSerializers::SerializableResource
                 .new([record, other_record])
-                .to_json
+                .as_json
+                .flat_map(&:as_json)
             end
 
             example_request "Getting a list of #{entity.name.pluralize}" do
               expect(response_status).to eq(200)
-              expect(response_body).to eq(expected_result)
+              expect(json_response).to contain_exactly(*expected_result)
             end
           end
         end
@@ -89,33 +110,39 @@ module Schematics
         case entity
         when Entities::Singleton
           get polymorphic_path(model_class) do
-            not_authorized
+            context401
             context '200' do
               let(:expected_result) do
                 ActiveModelSerializers::SerializableResource
                   .new(other_record)
-                  .to_json
+                  .as_json
+                  .deep_stringify_keys
+                  .transform_values(&:as_json)
               end
 
               example_request "Getting a #{entity.name}" do
                 expect(response_status).to eq(200)
-                expect(response_body).to eq(expected_result)
+                expect(json_response).to eq(expected_result)
               end
             end
           end
         else
           get "#{polymorphic_path(model_class)}/:id" do
-            not_authorized
-            not_found
+            context401
+            context404
             context '200' do
               let(:id) { record.id }
               let(:expected_result) do
-                ActiveModelSerializers::SerializableResource.new(record).to_json
+                ActiveModelSerializers::SerializableResource
+                  .new(record)
+                  .as_json
+                  .deep_stringify_keys
+                  .transform_values(&:as_json)
               end
 
               example_request "Getting a #{entity.name}" do
                 expect(response_status).to eq(200)
-                expect(response_body).to eq(expected_result)
+                expect(json_response).to eq(expected_result)
               end
             end
           end
@@ -124,18 +151,86 @@ module Schematics
 
       def test_create
         return if entity.is_a?(Entities::Singleton)
+        route_summary "Create #{entity.name}"
+        post polymorphic_path(model_class) do
+          entity.fillable_elements.each do |element|
+            parameter element.name.to_sym,
+                      type: element.type,
+                      default: element.json_default,
+                      with_example: true,
+                      required: element.required?,
+                      scope: entity.name.to_sym
+          end
+
+          context401
+          context422
+          context '200' do
+            example "Creating a #{entity.name}" do
+              do_request(request)
+              expect(response_status).to eq(201)
+              expect(response_body).to be_blank
+            end
+          end
+        end
       end
 
       def test_update
+        route_summary "Show #{entity.name.pluralize}"
+        case entity
+        when Entities::Singleton
+          put polymorphic_path(model_class) do
+            entity.fillable_elements.each do |element|
+              parameter element.name.to_sym,
+                        type: element.type,
+                        default: element.json_default,
+                        with_example: true,
+                        required: element.required?,
+                        scope: entity.name.to_sym
+            end
 
+            context401
+            context422
+            context '200' do
+              example "Updating a #{entity.name}" do
+                do_request(request)
+                expect(response_status).to eq(204)
+                expect(response_body).to be_blank
+              end
+            end
+          end
+        else
+          put "#{polymorphic_path(model_class)}/:id" do
+            entity.fillable_elements.each do |element|
+              parameter element.name.to_sym,
+                        type: element.type,
+                        default: element.json_default,
+                        with_example: true,
+                        required: element.required?,
+                        scope: entity.name.to_sym
+            end
+
+            context401
+            context404
+            context422
+            context '200' do
+              let(:id) { record.id }
+
+              example "Updating a #{entity.name}" do
+                do_request(request)
+                expect(response_status).to eq(204)
+                expect(response_body).to be_blank
+              end
+            end
+          end
+        end
       end
 
       def test_destroy
         return if entity.is_a?(Entities::Singleton)
         route_summary "Destroy #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id" do
-          not_authorized
-          not_found
+          context401
+          context404
           context '204' do
             let(:id) { record.id }
 
@@ -151,8 +246,8 @@ module Schematics
         return if entity.is_a?(Entities::Singleton)
         route_summary "Archive #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id/archive" do
-          not_authorized
-          not_found
+          context401
+          context404
           context '204' do
             let(:id) { record.id }
 
@@ -168,8 +263,8 @@ module Schematics
         return if entity.is_a?(Entities::Singleton)
         route_summary "Restore #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id/restore" do
-          not_authorized
-          not_found
+          context401
+          context404
           context '204' do
             let(:id) { record.id }
 
