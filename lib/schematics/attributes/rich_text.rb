@@ -27,7 +27,7 @@ module Schematics
       end
 
       def default
-        SecureRandom.base58
+        'MyRichText'
       end
 
       def icon

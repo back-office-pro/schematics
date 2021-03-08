@@ -8,6 +8,14 @@ module Schematics
       def permitted_json_params
         permitted_params
       end
+
+      def default
+        nil
+      end
+
+      def json_default
+        default
+      end
     end
   end
 end

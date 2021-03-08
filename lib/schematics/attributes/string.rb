@@ -40,6 +40,7 @@ module Schematics
         return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if email?
         return Array.new(10) { rand(10) } if phone?
         return "www.#{SecureRandom.base58}.com" if url?
+        return SecureRandom.base58 if unique?
         super
       end
 

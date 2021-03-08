@@ -61,14 +61,6 @@ module Schematics
         RUBY
       end
 
-      def default
-        SecureRandom.base58 if unique?
-      end
-
-      def json_default
-        default
-      end
-
       def to_sql
         [@entity.name.pluralize, @name].join('.')
       end
