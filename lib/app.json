@@ -72,10 +72,7 @@
                     "name": "role",
                     "type": "belongs_to",
                     "options": {
-                        "required": true,
-                        "inverse": {
-                            "type": "has_many"
-                        }
+                        "required": true
                     }
                 }
             ]
@@ -109,8 +106,7 @@
                     "options": {
                         "required": true,
                         "inverse": {
-                            "name": "sent_messages",
-                            "type": "has_many"
+                            "name": "sent_messages"
                         }
                     }
                 },
@@ -121,8 +117,7 @@
                         "required": true,
                         "type": "user",
                         "inverse": {
-                            "name": "received_messages",
-                            "type": "has_many"
+                            "name": "received_messages"
                         }
                     }
                 }

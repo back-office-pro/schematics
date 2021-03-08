@@ -95,10 +95,7 @@
                     "name": "category",
                     "type": "belongs_to",
                     "options": {
-                        "required": true,
-                        "inverse": {
-                            "type": "has_many"
-                        }
+                        "required": true
                     }
                 }
             ]
@@ -204,10 +201,7 @@
                     "name": "sub_category",
                     "type": "belongs_to",
                     "options": {
-                        "required": true,
-                        "inverse": {
-                            "type": "has_many"
-                        }
+                        "required": true
                     }
                 }
             ]
@@ -243,10 +237,7 @@
                     "name": "product",
                     "type": "belongs_to",
                     "options": {
-                        "required": true,
-                        "inverse": {
-                            "type": "has_many"
-                        }
+                        "required": true
                     }
                 }
             ]

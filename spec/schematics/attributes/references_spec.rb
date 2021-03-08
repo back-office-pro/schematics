@@ -55,8 +55,6 @@ describe Schematics::Attributes::References do
   its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:caret_square_right) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
-  it { is_expected.to be_inverse_of_has_many }
-  it { is_expected.not_to be_inverse_of_has_one }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -104,8 +102,6 @@ describe Schematics::Attributes::References do
       }
     end
 
-    it { is_expected.to be_inverse_of_has_one }
-    it { is_expected.not_to be_inverse_of_has_many }
     its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
   end
 end

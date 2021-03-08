@@ -35,7 +35,7 @@ module Schematics
       end
 
       def inverse_association_name
-        @options.dig(:inverse, :name) || @entity.name
+        inverse[:name] || @entity.name
       end
 
       def preload
@@ -59,16 +59,8 @@ module Schematics
         RUBY
       end
 
-      def inverse_of_has_one?
-        @options.dig(:inverse, :type) == 'has_one'
-      end
-
-      def inverse_of_has_many?
-        @options.dig(:inverse, :type) == 'has_many'
-      end
-
       def inverse_association
-        @inverse_association ||= Associations::Association.create(self, **@options[:inverse])
+        @inverse_association ||= Associations::Association.create(self, **inverse)
       end
 
       def input_type
@@ -83,6 +75,12 @@ module Schematics
 
       def weight
         2
+      end
+
+      protected
+
+      def inverse
+        @options[:inverse] || {}
       end
     end
   end

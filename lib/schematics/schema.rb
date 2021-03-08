@@ -26,8 +26,7 @@ module Schematics
       @stats = data[:stats].map { |stat| Graphics::Stat.create(self, **stat) }
       add_inverse_descriptor_to_association_attributes
       add_has_and_belongs_to_many_associations
-      add_has_many_associations
-      add_has_one_associations
+      add_inverse_associations
       add_has_many_through_associations
       add_has_one_through_associations
     end
@@ -94,20 +93,10 @@ module Schematics
       end
     end
 
-    def add_has_many_associations
+    def add_inverse_associations
       @entities.each do |entity|
-        entity.association_attributes.select(&:inverse_of_has_many?).each do |attribute|
-          association = attribute.inverse_association
-          find_entity_by_name(attribute.association_type).associations << association
-        end
-      end
-    end
-
-    def add_has_one_associations
-      @entities.each do |entity|
-        entity.association_attributes.select(&:inverse_of_has_one?).each do |attribute|
-          association = attribute.inverse_association
-          find_entity_by_name(attribute.association_type).associations << association
+        entity.association_attributes.map(&:inverse_association).each do |association|
+          find_entity_by_name(association.association_type).associations << association
         end
       end
     end
@@ -122,10 +111,9 @@ module Schematics
 
     def find_has_many_through_associations(entity, parent)
       parent.entity.has_many_associations.each do |child|
-        if child.entity != parent.entity # prevent self association
-          entity.associations << Associations::HasManyThrough.new(child.belongs_to, parent)
-          find_has_many_through_associations(entity, child)
-        end
+        next if child.entity == parent.entity # prevent self association
+        entity.associations << Associations::HasManyThrough.new(child.belongs_to, parent)
+        find_has_many_through_associations(entity, child)
       end
     end
 
@@ -139,10 +127,9 @@ module Schematics
 
     def find_has_one_through_associations(entity, parent)
       find_entity_by_name(parent.association_type).association_attributes.each do |child|
-        if child.entity != parent.entity # prevent self association
-          entity.associations << Associations::HasOneThrough.new(child, parent)
-          find_has_one_through_associations(entity, child)
-        end
+        next if child.entity == parent.entity # prevent self association
+        entity.associations << Associations::HasOneThrough.new(child, parent)
+        find_has_one_through_associations(entity, child)
       end
     end
   end

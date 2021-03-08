@@ -19,13 +19,7 @@ describe Schematics::Attributes::BelongsTo do
     )
   end
   let(:name) { 'schema' }
-  let(:options) do
-    {
-      "inverse": {
-        "type": 'has_many',
-      },
-    }
-  end
+  let(:options) { {} }
 
   before do
     attribute.inverse_descriptor = parent_entity.descriptor
@@ -47,8 +41,6 @@ describe Schematics::Attributes::BelongsTo do
   its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:caret_square_right) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
-  it { is_expected.to be_inverse_of_has_many }
-  it { is_expected.not_to be_inverse_of_has_one }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -69,10 +61,7 @@ describe Schematics::Attributes::BelongsTo do
   context 'when belongs_to is required' do
     let(:options) do
       {
-        "required": true,
-        "inverse": {
-          "type": 'has_many',
-        },
+        required: true,
       }
     end
 
@@ -90,14 +79,12 @@ describe Schematics::Attributes::BelongsTo do
   context 'when inverse association is has_one' do
     let(:options) do
       {
-        "inverse": {
-          "type": 'has_one',
+        inverse: {
+          type: 'has_one',
         },
       }
     end
 
-    it { is_expected.to be_inverse_of_has_one }
-    it { is_expected.not_to be_inverse_of_has_many }
     its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
   end
 end
