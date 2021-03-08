@@ -126,7 +126,7 @@ module Schematics
           test "should update API #{entity.name}" do
             login formats: :json
             patch polymorphic_path(record),
-                  params: { entity.name.to_sym => params(formats: :json) },
+                  params: params(formats: :json),
                   headers: authorization_header,
                   as: :json
             assert_response :success
@@ -136,8 +136,7 @@ module Schematics
         def test_update
           test "should update #{entity.name}" do
             login
-            patch polymorphic_path(record),
-                  params: { entity.name.to_sym => params }
+            patch polymorphic_path(record), params: params
             assert_redirected_to polymorphic_path(record.reload)
           end
         end
@@ -157,7 +156,7 @@ module Schematics
             assert_difference("#{model_class.name}.count") do
               login formats: :json
               post polymorphic_path(model_class),
-                   params: { entity.name.to_sym => params(formats: :json) },
+                   params: params(formats: :json),
                    headers: authorization_header,
                    as: :json
             end
@@ -170,7 +169,7 @@ module Schematics
           test "should create #{entity.name}" do
             assert_difference("#{model_class.name}.count") do
               login
-              post polymorphic_path(model_class), params: { entity.name.to_sym => params }
+              post polymorphic_path(model_class), params: params
             end
             assert_redirected_to polymorphic_path(model_class.last)
           end
@@ -279,12 +278,14 @@ module Schematics
 
       def params(formats: nil)
         default_attribute = [formats, 'default'].compact.join('_')
-        entity.fillable_attributes.map do |attribute|
-          [
-            attribute.column_name.to_sym,
-            attribute.send(default_attribute) || record.send(attribute.column_name),
-          ]
-        end.to_h
+        {
+          entity.name.to_sym => entity.fillable_elements.map do |element|
+            [
+              element.column_name.to_sym,
+              element.send(default_attribute) || record.send(element.column_name),
+            ]
+          end.to_h,
+        }
       end
     end
   end
