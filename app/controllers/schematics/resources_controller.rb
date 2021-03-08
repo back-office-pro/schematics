@@ -12,6 +12,7 @@ module Schematics
     before_action :update_timestamp_field?, only: :show
     authorize_resource
     after_action { pagy_headers_merge(@pagy) if @pagy }
+    rescue_from ActionController::ParameterMissing, with: :parameter_missing
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from CanCan::AccessDenied, with: :forbidden
     delegate :model_class, to: :class
@@ -191,6 +192,15 @@ module Schematics
       field = params[:field].to_sym
       @resources = model_class.search search_params.merge(load: false, select: field)
       render json: @resources.map(&field).uniq
+    end
+
+    def parameter_missing(exception)
+      respond_to do |format|
+        format.json do
+          render json: { errors: [{ exception.param => ['parameter is required'] }] },
+                 status: :unprocessable_entity
+        end
+      end
     end
 
     def not_found
