@@ -94,7 +94,7 @@ module Schematics
               ActiveModelSerializers::SerializableResource
                 .new([record, other_record])
                 .as_json
-                .flat_map(&:as_json)
+                .map(&:as_json)
             end
 
             example_request "Getting a list of #{entity.name.pluralize}" do
