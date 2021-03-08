@@ -28,6 +28,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
     )
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+
   its(:type) { is_expected.to eq('has_and_belongs_to_many') }
   its(:name) { is_expected.to eq('permissions') }
   its(:column_name) { is_expected.to eq('permission_ids') }
