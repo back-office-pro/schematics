@@ -14,7 +14,7 @@ module Schematics
           {
             'update' => :edit,
             'create' => :plus,
-            'delete' => :trash,
+            'destroy' => :trash,
             'archive' => :archive,
             'restore' => :trash_restore,
           }[event]
