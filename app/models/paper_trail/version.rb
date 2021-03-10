@@ -6,8 +6,7 @@ module PaperTrail
                foreign_key: :whodunnit,
                inverse_of: :versions
 
-    delegate :class, to: :item, prefix: true
-    delegate :entity, to: :item_class
+    delegate :entity, to: :model_class
     delegate :icon, to: :entity
 
     scope :with_user, -> { includes(:user) }
@@ -19,8 +18,12 @@ module PaperTrail
           .with_user
           .with_item
           .order(created_at: :desc)
-          .select { |version| version.item_class.accessible_by(ability) }
+          .select { |version| version.model_class.accessible_by(ability) }
       end
+    end
+
+    def model_class
+      item_type.constantize
     end
   end
 end

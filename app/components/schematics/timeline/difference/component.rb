@@ -3,7 +3,7 @@ module Schematics
     module Difference
       class Component < ::ViewComponent::Base
         delegate :fa_icon, to: :helpers
-        delegate :id, :entity, :item_class, :reify, to: :@version
+        delegate :id, :entity, :model_class, :reify, to: :@version
 
         def initialize(version:)
           super
