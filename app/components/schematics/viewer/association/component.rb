@@ -2,6 +2,8 @@ module Schematics
   module Viewer
     module Association
       class Component < Viewer::Component
+        delegate :confirm_data, to: :helpers
+
         def initialize(resources:, collapsed: false)
           super(resources: resources)
           @collapsed = collapsed
@@ -21,6 +23,10 @@ module Schematics
 
         def attachment?
           klass.try(:entity).nil?
+        end
+
+        def klass
+          @resources.first.class
         end
 
         def entity

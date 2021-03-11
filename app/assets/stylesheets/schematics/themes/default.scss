@@ -39,3 +39,23 @@ span.twitter-typeahead .tt-suggestion:hover,
 span.twitter-typeahead .tt-suggestion:focus {
   background: $primary;
 }
+
+/**
+ * Swal2
+ */
+
+.swal2-container.fade:not(.show) {
+  opacity: inherit !important;
+}
+
+button.swal2-confirm.styled {
+  background: $primary !important;
+}
+
+button.swal2-cancel.styled {
+  background: $danger !important;
+}
+
+.show-swal2.disable-animation {
+  animation: none !important;
+}

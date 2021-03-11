@@ -1,0 +1,7 @@
+en:  
+  schematics:
+    application:
+      delete:
+        title: Are you sure?
+        subtitle: This action is irreversible
+        warning: "Removing the %{model_name} %{resource} will also result in the permanent removal of the following:"

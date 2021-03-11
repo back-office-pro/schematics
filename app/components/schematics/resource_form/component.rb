@@ -12,7 +12,7 @@ module Schematics
         @resource = resource
         @url = url
         @attributes = attributes || entity.fillable_elements
-        @cancel_path = cancel_path || resource_class
+        @cancel_path = cancel_path || resource
       end
     end
   end

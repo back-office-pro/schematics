@@ -37,7 +37,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_and_belongs_to_many :permissions, inverse_of: :role
+      has_and_belongs_to_many :permissions
     RUBY
   end
 

@@ -1,6 +1,7 @@
 @import "font_awesome5";
 @import "font_awesome5_webfont";
 @import "animate.css/animate";
+@import "sweetalert2/dist/sweetalert2";
 @import "typeahead";
 @import "timeline";
 @import "trix";
@@ -69,14 +70,10 @@ html, body {
   .nav-link.active {
     color: white !important;
     .list-group-item {
-      border: 1px solid #fff !important;
       .badge {
         background: #fff !important;
       }
     }
-  }
-  .nav-item.d-none {
-    background: rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -188,13 +185,6 @@ footer {
 /**
  * Cards
  */
-
-.modal {
-  .card {
-    box-shadow: none !important;
-    margin-top: 1rem !important;
-  }
-}
 
 .card h5 {
   font-size: 1rem;

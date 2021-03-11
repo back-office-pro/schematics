@@ -1,6 +1,4 @@
 - breadcrumb title, @resource
-- all_resources = {}
-- all_attachments = {}
 .card.shadow-sm
   .card-header.p-2
     .row.align-items-center
@@ -17,10 +15,14 @@
             span.icon= fa_icon :edit
             span.text.d-none.d-lg-inline= t('.buttons.edit')
         - if can?(:destroy, @resource)
-          = button_tag data: { toggle: "modal", target: "#destroyModal" },
-                      class: "btn btn-danger btn-sm btn-icon-split" do
-                        span.icon= fa_icon :trash
-                        span.text.d-none.d-lg-inline= t('.buttons.destroy')
+          - if resource_associations.any?
+            = link_to polymorphic_path(@resource, action: :delete), class: "btn btn-danger btn-sm btn-icon-split" do
+                span.icon= fa_icon :trash
+                span.text.d-none.d-lg-inline= t('.buttons.destroy')
+          - else
+            = link_to polymorphic_path(@resource), method: :delete, class: "btn btn-danger btn-sm btn-icon-split", data: confirm_data do
+                span.icon= fa_icon :trash
+                span.text.d-none.d-lg-inline= t('.buttons.destroy')
   .card-body.p-0
     = render template: 'schematics/application/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|
@@ -34,18 +36,9 @@
         .collapse.show id="collapse-#{attribute.name}"
           .card-body
             == rich_text
-- entity.attachments_attributes.each do |attribute|
-  - attachments = @resource.instance_eval(attribute.name).includes(:blob)
-  - if attachments.any?
-    - all_attachments[attribute.name] = attachments
-    = render Schematics::Viewer::Association::Component.new(resources: attachments)
-- entity.has_many_and_through_and_belongs_to_many_associations.each do |association|
-  - resources = @resource.instance_eval(association.name).accessible_by(current_ability)
-  - if resources.any?
-    - all_resources[association.name] = resources
-    = render Schematics::Viewer::Association::Component.new(resources: resources.includes(association.entity.includes))
+- resource_associations.each do |resources|
+  = render Schematics::Viewer::Association::Component.new(resources: resources)
 - if can?(:update, @resource)
   .mt-4
     - versions = PaperTrail::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
     = render Schematics::Timeline::Component.new(versions: versions)
-= render Schematics::DestroyModal::Component.new(resource: @resource, resources: all_resources, attachments: all_attachments)

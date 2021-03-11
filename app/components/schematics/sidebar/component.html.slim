@@ -19,10 +19,8 @@
                 = active_link_to polymorphic_path(model_class, filter: { attribute.name => value }),
                                 active: :exact,
                                 class: "nav-link p-0 m-0 text-secondary text-truncate segment" do
-                  li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-transparent
-                    span
-                      = fa_icon :caret_right, class: "mr-2"
-                      = attribute.format(value)
+                  li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-primary
+                    span= attribute.format(value)
                     span.badge.badge-secondary.text-primary= model_class.send(:"#{attribute.name}_#{value}").size
       li.nav-item.mb-2
   button#sidebar-toggle.btn.btn-block.text-secondary.rounded-0.border-0.text-right.py-3

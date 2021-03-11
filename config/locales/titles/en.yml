@@ -17,5 +17,6 @@ en:
         index: List of %{model_name_plural}
         new: Add a new %{model_name}
         edit: Edit %{resource}
+        delete: Delete %{resource}
         show: "%{resource}"
         import: Import %{model_name_plural}

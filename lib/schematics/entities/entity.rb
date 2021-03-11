@@ -195,6 +195,7 @@ module Schematics
         <<~RUBY
           resources :#{name.pluralize} do
             member do
+              get :delete
               delete :archive
               delete :restore
             end

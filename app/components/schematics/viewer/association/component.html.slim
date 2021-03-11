@@ -19,7 +19,7 @@
                   = fa_icon field.icon, class: "mr-2 text-dark"
                   = klass.human_attribute_name(field.name)
           tbody.table-bordered.border-0
-            - @resources.includes(entity.includes).each do |resource|
+            - @resources.each do |resource|
               tr data-href=polymorphic_path(resource)
                 td.text-nowrap.text-center
                   .btn-group
@@ -35,12 +35,12 @@
                         class: "btn btn-danger btn-sm",
                         data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.archive') }
                     - if attachment?
-                      = form_for resource do |f|
+                      = form_for @resources.first.record do |f|
                         = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
                           = fields.hidden_field :id, value: resource.id
                           = fields.hidden_field :_destroy, value: true
-                        = f.button :button, class: "btn btn-danger btn-sm", data: { toggle: "tooltip", placement: "top", title: t('schematics.application.show.buttons.destroy') } do
+                        = f.button :button, class: "btn btn-danger btn-sm", data: confirm_data.merge({ toggle: "tooltip", placement: "top", title: t('schematics.application.show.buttons.destroy') }) do
                           = fa_icon(:trash)
                 - entity.listable_elements.sort_by(&:weight).each do |field|
-                      td.text-nowrap.text-center.align-middle
-                        = render Schematics::Resource::Component.new(resource: resource, field: field)
+                  td.text-nowrap.text-center.align-middle
+                    = render Schematics::Resource::Component.new(resource: resource, field: field)

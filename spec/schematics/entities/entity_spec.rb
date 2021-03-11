@@ -46,6 +46,7 @@ describe Schematics::Entities::Entity do
     is_expected.to eq <<~RUBY
       resources :entities do
         member do
+          get :delete
           delete :archive
           delete :restore
         end

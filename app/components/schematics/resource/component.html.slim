@@ -1,10 +1,10 @@
-
 - case @field
 - when Schematics::Associations::Association, Schematics::Attributes::Association
   = link_to(value, value) if value
 - when Schematics::Attributes::Address
   = render Schematics::GoogleMap::Component.new(address: value)
 - when Schematics::Attributes::Attachments
+  = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true)
 - when Schematics::Attributes::Attachment
   - if value.attached?
     = form_for @resource do |f|
@@ -13,7 +13,7 @@
         = fields.hidden_field :_destroy, value: true
       = f.button :button,
                   class: "btn btn-danger btn-sm float-right",
-                  data: { toggle: "tooltip", placement: "left", title: t('schematics.application.show.buttons.destroy') } do
+                  data: confirm_data.merge({ toggle: "tooltip", placement: "left", title: t('schematics.application.show.buttons.destroy') }) do
                     = fa_icon(:trash)
     - if value.representable?
       = render Schematics::Attachment::Component.new(attachment: value)

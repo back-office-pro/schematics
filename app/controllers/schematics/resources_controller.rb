@@ -6,7 +6,7 @@ module Schematics
     include Searchable
     include Readable
     before_action :authorize
-    before_action :set_resource, only: %i[show edit update destroy archive restore]
+    before_action :set_resource, only: %i[show edit delete update destroy archive restore]
     before_action :set_paper_trail_whodunnit
     before_action :set_breadcrumb
     before_action :update_timestamp_field?, only: :show
@@ -17,7 +17,8 @@ module Schematics
     rescue_from CanCan::AccessDenied, with: :forbidden
     delegate :model_class, to: :class
     delegate :entity, :model_name, to: :model_class
-    helper_method :entity, :model_class
+    helper_method :entity, :model_class, :resource
+    attr_reader :resource
 
     class << self
       def model_class
@@ -71,6 +72,9 @@ module Schematics
     end
 
     def edit
+    end
+
+    def delete
     end
 
     def import

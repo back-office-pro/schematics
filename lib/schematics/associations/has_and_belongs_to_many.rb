@@ -21,7 +21,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          #{type} :#{name}, inverse_of: :#{entity.name}
+          #{type} :#{name}
         RUBY
       end
 

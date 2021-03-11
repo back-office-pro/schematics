@@ -30,6 +30,7 @@ module Schematics
             test_new
             test_create_api
             test_create
+            test_delete
             test_destroy_api
             test_destroy
             test_restore_api
@@ -172,6 +173,15 @@ module Schematics
               post polymorphic_path(model_class), params: params
             end
             assert_redirected_to polymorphic_path(model_class.last)
+          end
+        end
+
+        def test_delete
+          return if entity.is_a?(Entities::Singleton)
+          test 'should get delete' do
+            login
+            get polymorphic_path(record, action: :delete)
+            assert_response :success
           end
         end
 

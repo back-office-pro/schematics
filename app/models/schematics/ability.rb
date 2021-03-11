@@ -27,6 +27,7 @@ module Schematics
       alias_action :autocomplete, to: :read
       alias_action :bulk_insert, to: :import
       alias_action :restore, to: :archive
+      alias_action :delete, to: :destroy
     end
 
     def default_restrictions

@@ -1,7 +1,7 @@
 module Schematics
   module Resource
     class Component < ::ViewComponent::Base
-      delegate :fa_icon, to: :helpers
+      delegate :fa_icon, :confirm_data, to: :helpers
 
       def initialize(resource:, field:, editable: false)
         super

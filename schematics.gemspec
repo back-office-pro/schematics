@@ -71,6 +71,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'selenium-webdriver', '~> 4.0.0.beta1'
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
+  spec.add_dependency 'sweet-alert2-rails', '~> 0.1.0'
   spec.add_dependency 'title', '~> 0.0.8'
   spec.add_dependency 'validate_url', '~> 1.0.13'
   spec.add_dependency 'valid_email', '~> 0.1.3'
