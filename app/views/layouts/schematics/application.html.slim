@@ -37,7 +37,7 @@ html
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
                   = render Schematics::Attachment::Component.create_avatar(attachment: current_user.avatar)
                 .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="accountDropdown"
-                  h5.dropdown-header.font-weight-bold.bg-light.mb-2= t('.dropdown.my_account')
+                  h5.dropdown-header.font-weight-bold.bg-light= t('.dropdown.my_account')
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"
                     = t('.dropdown.edit_profile')
@@ -49,7 +49,7 @@ html
                     = link_to main_app.grape_swagger_rails_path, data: { turbolinks: false }, class: "dropdown-item" do
                       = fa_icon :project_diagram, class: "mr-3"
                       = t('.dropdown.api')
-                  .dropdown-divider
+                  .dropdown-divider.m-0
                   = link_to schematics.logout_path, method: :delete, class: "dropdown-item pb-2" do
                     = fa_icon :sign_out_alt, class: "mr-3"
                     = t('.dropdown.logout')

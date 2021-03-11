@@ -9,5 +9,5 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
       - messages.each do |message|
         .dropdown-item.d-flex.align-items-center
           = render Schematics::MessageCenter::Preview::Component.new(message: message)
-    .dropdown-divider.mb-1
-    = link_to t('.show_all'), messages_path, class: "dropdown-item text-muted text-center small pb-2"
+    .dropdown-divider.m-0
+    = link_to t('.show_all'), messages_path, class: "dropdown-item text-muted text-center small p-2"
