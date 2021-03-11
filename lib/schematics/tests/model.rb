@@ -192,7 +192,6 @@ module Schematics
             test "should have and belongs to many #{association.name}" do
               reflection = model_class.reflect_on_association(association.name.to_sym)
               assert reflection.macro == association.type.to_sym
-              assert reflection.options[:inverse_of] == association.entity.name.to_sym
             end
           end
         end
