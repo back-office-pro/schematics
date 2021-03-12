@@ -25,5 +25,15 @@ module PaperTrail
     def model_class
       item_type.constantize
     end
+
+    def icon
+      {
+        'update' => :edit,
+        'create' => :plus,
+        'destroy' => :trash,
+        'archive' => :archive,
+        'restore' => :trash_restore,
+      }[event]
+    end
   end
 end
