@@ -1,3 +1,4 @@
+require 'active_support/core_ext/module/delegation'
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
