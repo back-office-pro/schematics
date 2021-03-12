@@ -1,6 +1,5 @@
 require 'schematics/associations/association'
 require 'schematics/behaviours/fillable'
-require 'active_support/core_ext/module/delegation'
 
 module Schematics
   module Associations
