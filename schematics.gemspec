@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chartkick', '~> 3.4.2'
   spec.add_dependency 'client_side_validations', '~> 18.0.0'
   spec.add_dependency 'client_side_validations-simple_form', '~> 12.1.0'
+  spec.add_dependency 'country_select', '~> 5.0.1'
   spec.add_dependency 'date_validator', '~> 0.10.0'
   spec.add_dependency 'font_awesome5_rails', '~> 1.3.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
