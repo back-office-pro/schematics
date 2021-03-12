@@ -49,6 +49,17 @@
                 "agregate": "sum",
                 "field": "tax_inclusive_price"
             }
+        },
+        {
+            "type": "geo",
+            "entity": "order",
+            "x": {
+                "agregate": "group",
+                "field": "country"
+            },
+            "y": {
+                "agregate": "count"
+            }
         }
     ],
     "entities": [
@@ -212,6 +223,10 @@
                 {
                     "name": "title",
                     "type": "text"
+                },
+                {
+                    "name": "country",
+                    "type": "country"
                 },
                 {
                     "name": "start_at",
