@@ -1,49 +1,34 @@
+require 'schematics/schema'
+
 module Schematics
   module Patches
     module Rails
       module Generators
         module GeneratedAttribute
+          OPTIONS_WHITELIST = %i[limit precision scale default polymorphic].freeze
+
+          def name
+            schema_attribute&.name || super
+          end
+
+          def type
+            schema_attribute&.type&.to_sym || super
+          end
+
           def default
-            case type
-            when :integer, :float, :decimal, :boolean
-              attr_options[:default] || super
-            when :token
-              SecureRandom.base58
-            when :string
-              if attr_options[:email]
-                "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
-              elsif attr_options[:phone]
-                Array.new(10) { rand(10) }
-              elsif attr_options[:url]
-                "www.#{SecureRandom.base58}.com"
-              elsif has_uniq_index?
-                SecureRandom.base58
-              else
-                super
-              end
-            when :date
-              if attr_options[:before]
-                Time.zone.today.to_s(:db)
-              elsif attr_options[:after]
-                Time.zone.tomorrow.to_s(:db)
-              else
-                super
-              end
-            when :datetime, :timestamp, :time
-              if attr_options[:before]
-                Time.current.yesterday.to_s(:db)
-              elsif attr_options[:after]
-                Time.current.tomorrow.to_s(:db)
-              else
-                super
-              end
-            else
-              super
-            end
+            attr_options[:default] || schema_attribute.try(:default) || super
           end
 
           def required?
-            attr_options[:required]
+            schema_attribute&.required? || super
+          end
+
+          def attr_options
+            schema_attribute&.options&.slice(*OPTIONS_WHITELIST) || super
+          end
+
+          def has_uniq_index? # rubocop:disable Naming/PredicateName
+            schema_attribute&.unique? || super
           end
 
           def has_index? # rubocop:disable Naming/PredicateName
@@ -51,42 +36,26 @@ module Schematics
           end
 
           def options_for_migration
-            options = super.except(:required, :type, :email, :url, :phone, :before, :after)
-            if options.key?(:foreign_key) && attr_options.key?(:type)
-              options[:foreign_key] = { to_table: attr_options[:type].pluralize.to_sym }
+            return super if schema_attribute.nil?
+            options = super.merge(attr_options)
+            foreign_key_type = schema_attribute.options[:type]
+            if options.key?(:foreign_key) && foreign_key_type.present?
+              options[:foreign_key] = { to_table: foreign_key_type.pluralize.to_sym }
             end
             options
           end
 
-          def parse(column_definition)
-            name, type, *options = column_definition.split(':')
-            options = Hash[*options].symbolize_keys
-            has_index = 'uniq' if options[:unique]
-            new(name, type&.to_sym, has_index, eval_options(options, type))
-          end
-
           def plural_name
-            return "#{super}, column_options: { type: :uuid }" if type == :join_table_uuid
+            return "#{super}, column_options: { type: :uuid }" if @type == :join_table_uuid
             super
           end
 
           private
 
-          def eval_options(options, type)
-            options[:limit]       = options[:limit].to_i if options.key?(:limit)
-            options[:precision]   = options[:precision].to_i if options.key?(:precision)
-            options[:scale]       = options[:scale].to_i if options.key?(:scale)
-            options[:polymorphic] = options[:polymorphic] == 'true' if options.key?(:polymorphic)
-            if options.key?(:default)
-              options[:default] = case type.to_sym
-                                  when :integer then options[:default].to_i
-                                  when :float   then options[:default].to_f
-                                  when :boolean then options[:default] == 'true'
-                                  else
-                                    options[:default].to_s
-                                  end
-            end
-            options.except(:unique)
+          def schema_attribute
+            @schema_attribute ||= Schematics::Schema
+                                  .instance
+                                  .find_attribute_by_id(@type.to_s)
           end
         end
       end
