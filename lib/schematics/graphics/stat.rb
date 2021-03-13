@@ -12,8 +12,7 @@ module Schematics
 
       def to_s
         value = model_class.send(@agregate.to_sym, to_sql)
-        return @field.format(value) if @field.present?
-        value.to_s
+        @field&.format(value) || value.to_s
       end
     end
   end
