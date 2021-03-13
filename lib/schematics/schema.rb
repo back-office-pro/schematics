@@ -32,7 +32,13 @@ module Schematics
     end
 
     def find_entity_by_name(name)
-      @entities.find { |entity| entity.name == name }
+      @entities.find { _1.name == name }
+    end
+
+    def find_attribute_by_id(id)
+      @entities
+        .flat_map(&:attributes)
+        .find { _1.id == id }
     end
 
     def load_routes
@@ -41,11 +47,19 @@ module Schematics
     end
 
     def generate
-      @entities.sort_by(&:weight).reverse.flat_map(&:generators).each(&method(:system))
+      @entities
+        .sort_by(&:weight)
+        .reverse
+        .flat_map(&:generators)
+        .each(&method(:system))
     end
 
     def to_s
-      @entities.sort_by(&:weight).reverse.map(&:to_s).join("\n")
+      @entities
+        .sort_by(&:weight)
+        .reverse
+        .map(&:to_s)
+        .join("\n")
     end
 
     def valid?
@@ -71,7 +85,10 @@ module Schematics
     end
 
     def routes
-      @entities.sort_by(&:weight).reverse.map(&:route)
+      @entities
+        .sort_by(&:weight)
+        .reverse
+        .map(&:route)
     end
 
     def add_inverse_descriptor_to_association_attributes
