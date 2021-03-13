@@ -47,7 +47,6 @@ describe Schematics::Attributes::References do
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('references') }
-  its(:migration_options) { is_expected.to eq(%i[unique required default polymorphic type]) }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }

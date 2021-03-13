@@ -23,10 +23,10 @@ describe Schematics::Entities::Entity do
   its(:generators) do
     is_expected.to eq(
       [
-        'rails g scaffold entity name:string --skip-resource-route',
+        'rails g scaffold entity schema:entity_name --skip-resource-route',
         'rails g rspec:acceptance entity',
         'rails g migration add_deleted_at_to_entities deleted_at:datetime',
-        'rails g migration add_slug_to_entities slug:string:unique:true',
+        'rails g migration add_slug_to_entities slug:string:uniq',
       ]
     )
   end

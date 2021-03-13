@@ -19,9 +19,8 @@ describe Schematics::Attributes::Digest do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('digest') }
-  its(:migration_options) { is_expected.to eq(%i[unique required default limit]) }
   its(:column_name) { is_expected.to eq('password') }
-  its(:permitted_params) { is_expected.to eq(%w[password password_confirmation]) }
+  its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
   its(:validators) { is_expected.to eq({ allow_nil: true }) }
   its(:icon) { is_expected.to eq(:key) }
 

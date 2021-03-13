@@ -33,7 +33,6 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('belongs_to') }
-  its(:migration_options) { is_expected.to eq(%i[unique required default polymorphic type]) }
   its(:column_name) { is_expected.to eq('schema_id') }
   its(:association_type) { is_expected.to eq('schema') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
