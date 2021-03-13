@@ -2,7 +2,7 @@ module Schematics
   module Behaviours
     module Fillable
       def permitted_params
-        column_name
+        column_name.to_sym
       end
 
       def permitted_json_params
