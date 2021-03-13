@@ -39,7 +39,7 @@ Metrics/AbcSize:
 Metrics/PerceivedComplexity:
   Enabled: false
 Metrics/ParameterLists:
-  Enabled: false
+  Max: 7
 Metrics/ModuleLength:
   Enabled: false
 AllCops:
