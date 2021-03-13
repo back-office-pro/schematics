@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'schematics/tests/model'
 
 <% module_namespacing do -%>
 class <%= class_name %>Test < Schematics::Tests::Model

@@ -58,19 +58,3 @@ require 'array'
 require 'string'
 require 'view_component/engine'
 require 'schematics/engine'
-require 'schematics/schema'
-
-module Schematics
-  module Specs
-    autoload :Acceptance, 'schematics/specs/acceptance'
-    autoload :Helpers,    'schematics/specs/helpers'
-  end
-
-  module Tests
-    autoload :Controller, 'schematics/tests/controller'
-    autoload :Model,      'schematics/tests/model'
-    autoload :System,     'schematics/tests/system'
-  end
-
-  SCHEMA = Schema.instance
-end

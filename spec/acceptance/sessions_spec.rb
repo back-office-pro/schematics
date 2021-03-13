@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'rspec_api_documentation/dsl'
+require 'schematics/specs/helpers'
 
 resource 'Sessions' do
   extend Schematics::Specs::Helpers
