@@ -30,8 +30,6 @@ Metrics/MethodLength:
   Enabled: false
 Metrics/ClassLength:
   Enabled: false
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
 Metrics/CyclomaticComplexity:

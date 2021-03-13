@@ -1,4 +1,5 @@
 require 'schematics/associations/has_many_through'
+require 'schematics/entities/entity'
 
 describe Schematics::Associations::HasManyThrough do
   subject(:association) { described_class.new(through, belongs_to.inverse_association) }
@@ -24,27 +25,18 @@ describe Schematics::Associations::HasManyThrough do
       attributes: [{ name: 'type', type: 'string' }]
     )
   end
-  let(:options) do
-    {
-      inverse: {
-        type: 'has_many',
-      },
-    }
-  end
   let(:belongs_to) do
     Schematics::Attributes::Attribute.create(
       through_entity,
       name: 'schema',
-      type: 'belongs_to',
-      options: options
+      type: 'belongs_to'
     )
   end
   let(:through) do
     Schematics::Attributes::Attribute.create(
       entity,
       name: 'entity',
-      type: 'belongs_to',
-      options: options
+      type: 'belongs_to'
     )
   end
 

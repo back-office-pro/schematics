@@ -18,13 +18,6 @@ describe Schematics::Associations::HasMany do
       attributes: [{ name: 'type', type: 'string' }]
     )
   end
-  let(:options) do
-    {
-      inverse: {
-        type: 'has_many',
-      },
-    }
-  end
   let(:belongs_to) do
     Schematics::Attributes::Attribute.create(
       entity,
@@ -33,6 +26,7 @@ describe Schematics::Associations::HasMany do
       options: options
     )
   end
+  let(:options) { {} }
 
   before do
     belongs_to.inverse_descriptor = parent_entity.descriptor
@@ -57,9 +51,6 @@ describe Schematics::Associations::HasMany do
     let(:options) do
       {
         required: true,
-        inverse: {
-          type: 'has_many',
-        },
       }
     end
 
