@@ -9,6 +9,19 @@
       = f.association field.name.to_sym, prompt: prompt
     - when Schematics::Attributes::Date
       = f.input field.name.to_sym, as: :date, html5: true
+    - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
+      = f.input field.name.to_sym,
+                as: field.class.name.demodulize.underscore,
+                maxlength: true,
+                minlength: true,
+                pattern: true,
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::Country
+      = f.input field.name.to_sym,
+                as: :country,
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
                 maxlength: true,
