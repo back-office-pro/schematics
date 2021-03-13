@@ -1,7 +1,7 @@
 module Schematics
   module Attributes
     class Attribute
-      attr_reader :entity, :name
+      attr_reader :entity, :name, :options
 
       class << self
         def create(entity, name:, type:, options: {})
@@ -27,12 +27,12 @@ module Schematics
         self.class.name.demodulize.underscore
       end
 
-      def migration_options
-        %i[unique required default]
+      def id
+        [@entity.name, @name].join('_')
       end
 
       def to_s
-        [@name, type, @options.slice(*migration_options).to_a].reject(&:empty?).join(':')
+        "schema:#{id}"
       end
 
       def required?
