@@ -16,10 +16,6 @@ module Schematics
       include Behaviours::Editable
       include Behaviours::Rangeable
 
-      def migration_options
-        super + %i[before after]
-      end
-
       def format(value)
         value && I18n.l(value, format: '%A %d %B %Y')
       end
@@ -31,6 +27,12 @@ module Schematics
           validators[:date][key] = @options[key].to_sym if @options.key?(key)
         end
         validators
+      end
+
+      def default
+        return ::Time.zone.today.to_s(:db) if @options.key?(:before)
+        return ::Time.zone.tomorrow.to_s(:db) if @options.key?(:after)
+        super
       end
 
       def icon
