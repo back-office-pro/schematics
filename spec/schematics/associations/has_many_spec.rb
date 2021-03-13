@@ -20,8 +20,8 @@ describe Schematics::Associations::HasMany do
   end
   let(:options) do
     {
-      "inverse": {
-        "type": 'has_many',
+      inverse: {
+        type: 'has_many',
       },
     }
   end
@@ -56,9 +56,9 @@ describe Schematics::Associations::HasMany do
   context 'when belongs_to is required' do
     let(:options) do
       {
-        "required": true,
-        "inverse": {
-          "type": 'has_many',
+        required: true,
+        inverse: {
+          type: 'has_many',
         },
       }
     end

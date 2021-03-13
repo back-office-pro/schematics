@@ -46,7 +46,7 @@ module Schematics
                   :associations,
                   :generators
 
-      MISSING_REGEX = /([a-zA-Z_]+)_([attributes|virtuals|associations|fields|elements]+)/
+      MISSING_REGEX = /([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
 
       class << self
         def create(name:,

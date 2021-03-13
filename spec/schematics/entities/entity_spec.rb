@@ -9,8 +9,8 @@ describe Schematics::Entities::Entity do
   let(:attributes) do
     [
       {
-        "name": 'name',
-        "type": 'string',
+        name: 'name',
+        type: 'string',
       },
     ]
   end

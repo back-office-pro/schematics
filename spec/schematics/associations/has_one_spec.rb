@@ -20,8 +20,8 @@ describe Schematics::Associations::HasOne do
   end
   let(:options) do
     {
-      "inverse": {
-        "type": 'has_one',
+      inverse: {
+        type: 'has_one',
       },
     }
   end

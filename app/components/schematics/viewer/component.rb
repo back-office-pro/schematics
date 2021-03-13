@@ -12,13 +12,13 @@ module Schematics
           case resources.klass.entity.viewer
           when :table
             Table::Component.new(resources: resources)
-          when :grid
+          when :grid # rubocop:disable Lint/DuplicateBranch
             Table::Component.new(resources: resources)
-          when :calendar
+          when :calendar # rubocop:disable Lint/DuplicateBranch
             Table::Component.new(resources: resources)
-          when :tree
+          when :tree # rubocop:disable Lint/DuplicateBranch
             Table::Component.new(resources: resources)
-          when :inbox
+          when :inbox # rubocop:disable Lint/DuplicateBranch
             Table::Component.new(resources: resources)
           end
         end

@@ -13,9 +13,9 @@ describe Schematics::Associations::HasAndBelongsToMany do
   end
   let(:options) do
     {
-      "inverse": {
-        "required": true,
-        "type": 'has_and_belongs_to_many',
+      inverse: {
+        required: true,
+        type: 'has_and_belongs_to_many',
       },
     }
   end

@@ -9,8 +9,8 @@ describe Schematics::Entities::Singleton do
   let(:attributes) do
     [
       {
-        "name": 'company_name',
-        "type": 'string',
+        name: 'company_name',
+        type: 'string',
       },
     ]
   end

@@ -26,8 +26,8 @@ describe Schematics::Associations::HasManyThrough do
   end
   let(:options) do
     {
-      "inverse": {
-        "type": 'has_many',
+      inverse: {
+        type: 'has_many',
       },
     }
   end

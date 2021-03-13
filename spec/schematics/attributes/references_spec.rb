@@ -29,8 +29,8 @@ describe Schematics::Attributes::References do
   let(:name) { 'user' }
   let(:options) do
     {
-      "inverse": {
-        "type": 'has_many',
+      inverse: {
+        type: 'has_many',
       },
     }
   end
@@ -74,9 +74,9 @@ describe Schematics::Attributes::References do
   context 'when references is required' do
     let(:options) do
       {
-        "required": true,
-        "inverse": {
-          "type": 'has_many',
+        required: true,
+        inverse: {
+          type: 'has_many',
         },
       }
     end
@@ -95,8 +95,8 @@ describe Schematics::Attributes::References do
   context 'when inverse association is has_one' do
     let(:options) do
       {
-        "inverse": {
-          "type": 'has_one',
+        inverse: {
+          type: 'has_one',
         },
       }
     end
