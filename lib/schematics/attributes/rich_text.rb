@@ -27,7 +27,8 @@ module Schematics
       end
 
       def default
-        'MyRichText'
+        return 'MyRichText' if required?
+        super
       end
 
       def icon
