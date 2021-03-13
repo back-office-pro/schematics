@@ -5,12 +5,8 @@ module Schematics
     class Digest < Attribute
       include Behaviours::Fillable
 
-      def migration_options
-        super + [:limit]
-      end
-
       def permitted_params
-        [super, "#{super}_confirmation"]
+        [super, :"#{super}_confirmation"]
       end
 
       def validators
@@ -32,7 +28,7 @@ module Schematics
       end
 
       def default
-        SecureRandom.base58
+        @default ||= SecureRandom.base58
       end
 
       def icon
