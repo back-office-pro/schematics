@@ -18,10 +18,6 @@ module Schematics
       delegate :icon, to: :entity
       attr_accessor :inverse_descriptor
 
-      def migration_options
-        super + %i[polymorphic type]
-      end
-
       def column_name
         "#{super}_id"
       end

@@ -12,10 +12,6 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Editable
 
-      def migration_options
-        super + [:limit]
-      end
-
       def search_data
         <<~RUBY
           #{name}&.searchize
