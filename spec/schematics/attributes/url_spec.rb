@@ -1,0 +1,75 @@
+require 'schematics/attributes/url'
+require 'schematics/entities/entity'
+
+describe Schematics::Attributes::Url do
+  subject(:attribute) { described_class.new(entity, name, options) }
+
+  let(:entity) do
+    Schematics::Entities::Entity.create(
+      name: 'user',
+      descriptor: 'first_name',
+      attributes: [{ name: 'first_name', type: 'string' }]
+    )
+  end
+  let(:name) { 'url' }
+  let(:options) { {} }
+
+  it { is_expected.to be_a(Schematics::Behaviours::Listable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
+
+  its(:type) { is_expected.to eq('string') }
+  its(:column_name) { is_expected.to eq('url') }
+  its(:icon) { is_expected.to eq(:chrome) }
+  its(:input_type) { is_expected.to eq(:input) }
+  its(:default) { is_expected.to be_nil }
+  its(:validators) { is_expected.to eq({ url: true }) }
+  its(:weight) { is_expected.to eq(1) }
+  its(:to_sql) { is_expected.to eq('users.url') }
+  its(:to_s) { is_expected.to eq('schema:user_url') }
+
+  its(:validate) do
+    is_expected.to eq <<~RUBY
+      validates :url, {:url=>true}
+    RUBY
+  end
+
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      url&.searchize
+    RUBY
+  end
+
+  context 'when url is unique' do
+    let(:options) { { unique: true } }
+
+    it { is_expected.to be_unique }
+    it { is_expected.to be_required }
+    its(:default) { is_expected.to match(/www\.\w+\.com/) }
+
+    its(:validators) do
+      is_expected.to eq({ uniqueness: { case_sensitive: false }, presence: true, url: true })
+    end
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :url, {:uniqueness=>{:case_sensitive=>false}, :presence=>true, :url=>true}
+      RUBY
+    end
+  end
+
+  context 'when url is required' do
+    let(:options) { { required: true } }
+
+    it { is_expected.to be_required }
+    its(:validators) { is_expected.to eq({ presence: true, url: true }) }
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :url, {:presence=>true, :url=>true}
+      RUBY
+    end
+  end
+end
