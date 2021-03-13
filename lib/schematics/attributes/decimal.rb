@@ -3,10 +3,6 @@ require 'schematics/attributes/float'
 module Schematics
   module Attributes
     class Decimal < Float
-      def migration_options
-        super + %i[precision scale]
-      end
-
       def precision
         @options[:precision]
       end

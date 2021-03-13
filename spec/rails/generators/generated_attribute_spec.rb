@@ -1,0 +1,93 @@
+require 'rails/generators/generated_attribute'
+require 'schematics/patches/rails/generators/generated_attribute'
+
+describe Rails::Generators::GeneratedAttribute do
+  subject(:generated_attribute) { described_class.parse(column_definition) }
+
+  before do
+    described_class
+      .singleton_class
+      .prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
+    described_class
+      .prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
+  end
+
+  context 'when column is string' do
+    let(:column_definition) { 'foo:string' }
+
+    its(:name) { is_expected.to eq('foo') }
+    its(:type) { is_expected.to eq(:string) }
+    its(:has_index?) { is_expected.to be_truthy }
+    its(:has_uniq_index?) { is_expected.to be_falsy }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to be_empty }
+    its(:default) { is_expected.to eq('MyString') }
+    it { is_expected.not_to be_required }
+  end
+
+  context 'when column is string and unique' do
+    let(:column_definition) { 'foo:string:uniq' }
+
+    its(:name) { is_expected.to eq('foo') }
+    its(:type) { is_expected.to eq(:string) }
+    its(:has_index?) { is_expected.to be_truthy }
+    its(:has_uniq_index?) { is_expected.to be_truthy }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to be_empty }
+    its(:default) { is_expected.to eq('MyString') }
+    it { is_expected.not_to be_required }
+  end
+
+  context 'when column is string and has index' do
+    let(:column_definition) { 'foo:string:index' }
+
+    its(:name) { is_expected.to eq('foo') }
+    its(:type) { is_expected.to eq(:string) }
+    its(:has_index?) { is_expected.to be_truthy }
+    its(:has_uniq_index?) { is_expected.to be_falsy }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to be_empty }
+    its(:default) { is_expected.to eq('MyString') }
+    it { is_expected.not_to be_required }
+  end
+
+  context 'when column is references' do
+    let(:column_definition) { 'foo:references' }
+
+    its(:name) { is_expected.to eq('foo') }
+    its(:type) { is_expected.to eq(:references) }
+    its(:has_index?) { is_expected.to be_truthy }
+    its(:has_uniq_index?) { is_expected.to be_falsy }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:default) { is_expected.to be_nil }
+  end
+
+  context 'when column is schema email' do
+    let(:column_definition) { 'schema:user_email' }
+
+    its(:name) { is_expected.to eq('email') }
+    its(:type) { is_expected.to eq(:string) }
+    its(:has_index?) { is_expected.to be_truthy }
+    its(:has_uniq_index?) { is_expected.to be_truthy }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to eq({ null: false }) }
+    its(:default) { is_expected.to match(/\w+@\w+\.com/) }
+    it { is_expected.to be_required }
+  end
+
+  context 'when column is schema references' do
+    let(:column_definition) { 'schema:message_author' }
+
+    its(:name) { is_expected.to eq('author') }
+    its(:type) { is_expected.to eq(:references) }
+    its(:has_index?) { is_expected.to be_truthy }
+    its(:has_uniq_index?) { is_expected.to be_falsy }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:default) { is_expected.to be_nil }
+    it { is_expected.to be_required }
+
+    its(:options_for_migration) do
+      is_expected.to eq({ null: false, foreign_key: { to_table: :users } })
+    end
+  end
+end

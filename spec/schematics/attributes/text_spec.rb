@@ -24,14 +24,13 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
 
   its(:type) { is_expected.to eq('text') }
-  its(:migration_options) { is_expected.to eq(%i[unique required default limit]) }
   its(:column_name) { is_expected.to eq('content') }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:input_type) { is_expected.to eq(:textarea) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      #{name}&.searchize
+      content&.searchize
     RUBY
   end
 end

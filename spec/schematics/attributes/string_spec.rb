@@ -1,0 +1,70 @@
+require 'schematics/attributes/string'
+require 'schematics/entities/entity'
+
+describe Schematics::Attributes::String do
+  subject(:attribute) { described_class.new(entity, name, options) }
+
+  let(:entity) do
+    Schematics::Entities::Entity.create(
+      name: 'user',
+      descriptor: 'first_name',
+      attributes: [{ name: 'first_name', type: 'string' }]
+    )
+  end
+  let(:name) { 'last_name' }
+  let(:options) { {} }
+
+  it { is_expected.to be_a(Schematics::Behaviours::Listable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
+
+  its(:type) { is_expected.to eq('string') }
+  its(:column_name) { is_expected.to eq('last_name') }
+  its(:icon) { is_expected.to eq(:align_justify) }
+  its(:input_type) { is_expected.to eq(:input) }
+  its(:default) { is_expected.to be_nil }
+  its(:validators) { is_expected.to be_empty }
+  its(:validate) { is_expected.to be_nil }
+  its(:weight) { is_expected.to eq(1) }
+  its(:to_sql) { is_expected.to eq('users.last_name') }
+  its(:to_s) { is_expected.to eq('schema:user_last_name') }
+
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      last_name&.searchize
+    RUBY
+  end
+
+  context 'when string is unique' do
+    let(:options) { { unique: true } }
+
+    it { is_expected.to be_unique }
+    it { is_expected.to be_required }
+    its(:default) { is_expected.not_to be_nil }
+
+    its(:validators) do
+      is_expected.to eq({ uniqueness: { case_sensitive: false }, presence: true })
+    end
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :last_name, {:uniqueness=>{:case_sensitive=>false}, :presence=>true}
+      RUBY
+    end
+  end
+
+  context 'when string is required' do
+    let(:options) { { required: true } }
+
+    it { is_expected.to be_required }
+    its(:validators) { is_expected.to eq({ presence: true }) }
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :last_name, {:presence=>true}
+      RUBY
+    end
+  end
+end

@@ -26,7 +26,7 @@ describe Schematics::Attributes::RichText do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      #{name}&.to_plain_text&.searchize
+      summary&.to_plain_text&.searchize
     RUBY
   end
 

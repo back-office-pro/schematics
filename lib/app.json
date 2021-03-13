@@ -13,10 +13,9 @@
             "attributes": [
                 {
                     "name": "email",
-                    "type": "string",
+                    "type": "email",
                     "options": {
-                        "unique": true,
-                        "email": true
+                        "unique": true
                     }
                 },
                 {

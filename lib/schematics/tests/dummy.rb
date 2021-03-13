@@ -1,3 +1,6 @@
+require 'rack/test/uploaded_file'
+require 'action_dispatch/http/mime_type'
+
 module Schematics
   module Tests
     class Dummy

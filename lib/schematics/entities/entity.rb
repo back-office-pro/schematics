@@ -5,13 +5,16 @@ require 'schematics/attributes/attachment'
 require 'schematics/attributes/attachments'
 require 'schematics/attributes/belongs_to'
 require 'schematics/attributes/boolean'
+require 'schematics/attributes/country'
 require 'schematics/attributes/date'
 require 'schematics/attributes/datetime'
 require 'schematics/attributes/decimal'
 require 'schematics/attributes/digest'
+require 'schematics/attributes/email'
 require 'schematics/attributes/enum'
 require 'schematics/attributes/float'
 require 'schematics/attributes/integer'
+require 'schematics/attributes/phone'
 require 'schematics/attributes/references'
 require 'schematics/attributes/rich_text'
 require 'schematics/attributes/string'
@@ -19,6 +22,7 @@ require 'schematics/attributes/text'
 require 'schematics/attributes/time'
 require 'schematics/attributes/timestamp'
 require 'schematics/attributes/token'
+require 'schematics/attributes/url'
 require 'schematics/entities/descriptor'
 require 'schematics/virtuals/virtual'
 require 'schematics/virtuals/concatenation'
@@ -256,7 +260,7 @@ module Schematics
           "rails g scaffold #{name} #{attributes.map(&:to_s).join(' ')} --skip-resource-route",
           "rails g rspec:acceptance #{name}",
           "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
-          "rails g migration add_slug_to_#{name.pluralize} slug:string:unique:true",
+          "rails g migration add_slug_to_#{name.pluralize} slug:string:uniq",
         ]
       end
     end

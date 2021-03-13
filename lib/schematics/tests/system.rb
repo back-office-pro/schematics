@@ -134,23 +134,38 @@ module Schematics
           input = "#{entity.name}[#{element.column_name}]"
           case element
           when Associations::HasAndBelongsToMany
-            check("#{input}[]", match: :first, allow_label_click: true)
+            check "#{input}[]",
+                  match: :first,
+                  allow_label_click: true
           when Attributes::Enum
-            choose(input, match: :first, allow_label_click: true)
+            choose input,
+                   match: :first,
+                   allow_label_click: true
           when Attributes::Boolean
             check(input) if record.send(element.name)
           when Attributes::Attachments
-            attach_file("#{input}[]", element.default.first.path, make_visible: true)
+            attach_file "#{input}[]",
+                        element.default.first.path,
+                        make_visible: true
           when Attributes::Attachment
-            attach_file(input, element.default.path, make_visible: true)
+            attach_file input,
+                        element.default.path,
+                        make_visible: true
           when Attributes::RichText
             fill_in_rich_text_area input, with: element.default
           when Attributes::BelongsTo
-            select record.instance_eval(element.name).to_s, from: input, match: :first
+            select record.instance_eval(element.name).to_s,
+                   from: input,
+                   match: :first
+          when Attributes::Country
+            select element.format(element.default),
+                   from: input,
+                   match: :first
           when Attributes::Digest
-            digest = element.default
-            fill_in input, with: digest
-            fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: digest
+            fill_in input, with: element.default
+            fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: element.default
+          when Attributes::Date
+            fill_in input, with: Date.parse(element.default)
           else
             fill_in input, with: element.default || record.send(element.name)
           end
