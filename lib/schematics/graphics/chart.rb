@@ -28,7 +28,15 @@ module Schematics
       end
 
       def icon
-        :"chart_#{@type}"
+        {
+          'line' => :chart_line,
+          'pie' => :chart_pie,
+          'bar' => :chart_bar,
+          'area' => :chart_area,
+          'scatter' => :chart_scatter,
+          'column' => :analytics,
+          'geo' => :globe,
+        }[@type]
       end
 
       def title
