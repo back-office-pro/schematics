@@ -14,7 +14,7 @@ module Schematics
       end
 
       def entity
-        SCHEMA.find_entity_by_name(name.underscore)
+        Schema.instance.find_entity_by_name(name.underscore)
       end
     end
   end

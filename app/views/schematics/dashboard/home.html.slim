@@ -1,5 +1,5 @@
 .row
-  - Schematics::SCHEMA.stats.each do |stat|
+  - Schematics::Schema.instance.stats.each do |stat|
     .col-xl-3.col-md-6.mb-4
       .card.shadow-sm
         .card-body
@@ -11,7 +11,7 @@
                 = stat
             .col-auto
               = link_to fa_icon(stat.icon, size: "2x"), main_app.url_for(stat.model_class), class: "text-light"
-  - Schematics::SCHEMA.charts.each.with_index(1) do |chart, id|
+  - Schematics::Schema.instance.charts.each.with_index(1) do |chart, id|
     .col-xl-6.col-md-12.mb-4
       .card.shadow-sm
         .card-header.p-2

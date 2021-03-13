@@ -7,7 +7,7 @@ module Schematics
     def show
       @results = {}
       @query = params[:query]
-      searches = SCHEMA.entities.map do |entity|
+      searches = Schema.instance.entities.map do |entity|
         entity.class_name.constantize.search(
           @query.searchize,
           includes: entity.includes,

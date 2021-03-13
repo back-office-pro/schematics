@@ -1,7 +1,7 @@
 namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do
-    Schematics::SCHEMA.generate
+    Schematics::Schema.instance.generate
   end
 
   namespace :db do

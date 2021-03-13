@@ -47,13 +47,13 @@ module Schematics
     end
 
     def singleton_restrictions
-      SCHEMA.entities.select_is_a?(Entities::Singleton).each do |entity|
+      Schema.instance.entities.select_is_a?(Entities::Singleton).each do |entity|
         cannot %i[index create destroy archive], entity.class_name.constantize
       end
     end
 
     def references_attributes_restrictions
-      SCHEMA.entities.flat_map(&:references_attributes).each do |attribute|
+      Schema.instance.entities.flat_map(&:references_attributes).each do |attribute|
         model_class = attribute.entity.class_name.constantize
         cannot %i[read update destroy archive], model_class
         can %i[read update destroy archive], model_class, attribute.column_name => @user.id

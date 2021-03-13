@@ -3,6 +3,6 @@ Rails.application.routes.prepend do
   mount Schematics::Engine, at: '/'
   mount GrapeSwaggerRails::Engine, at: '/api', constraints: Schematics::AuthConstraint
   localized do
-    Schematics::SCHEMA.load_routes
+    Schematics::Schema.instance.load_routes
   end
 end

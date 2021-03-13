@@ -1,6 +1,6 @@
 //= require typeahead.js/dist/typeahead.bundle
 
-const icons = { <%= Schematics::SCHEMA.entities.map { |entity| "#{entity.name.pluralize}: '#{entity.icon.to_s.dasherize}'"}.join(', ') %> };
+const icons = { <%= Schematics::Schema.instance.entities.map { |entity| "#{entity.name.pluralize}: '#{entity.icon.to_s.dasherize}'"}.join(', ') %> };
 
 const findDescriptor = (result) => {
     if ($.type(result) === 'object') {

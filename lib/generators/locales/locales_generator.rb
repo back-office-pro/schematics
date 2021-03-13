@@ -12,7 +12,7 @@ class LocalesGenerator < Rails::Generators::Base
             routes:
         YAML
       end
-      Schematics::SCHEMA.entities.each do |entity|
+      Schematics::Schema.instance.entities.each do |entity|
         append_file(route_file_path(locale)) do
           indent <<~YAML, 4
             #{entity.name.pluralize}: #{translate(entity.name.pluralize, to: locale)}
@@ -25,7 +25,7 @@ class LocalesGenerator < Rails::Generators::Base
   def generate_entity_locales
     LOCALES.each do |locale|
       empty_directory(models_path)
-      Schematics::SCHEMA.entities.each do |entity|
+      Schematics::Schema.instance.entities.each do |entity|
         empty_directory locale_path(entity)
         create_file locale_file_path(entity, locale) do
           <<~YAML

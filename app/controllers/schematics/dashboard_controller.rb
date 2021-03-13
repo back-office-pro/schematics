@@ -4,7 +4,7 @@ module Schematics
     end
 
     def chart
-      render json: SCHEMA.charts[params[:id].to_i - 1]
+      render json: Schema.instance.charts[params[:id].to_i - 1]
     end
 
     def open_api
