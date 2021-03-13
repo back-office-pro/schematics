@@ -3,8 +3,6 @@
 //= require bootstrap/dist/js/bootstrap.bundle
 //= require sweetalert2/dist/sweetalert2
 //= require sweet-alert2-rails
-//= require chartkick
-//= require Chart.bundle
 //= require pagy
 //= require font_awesome5
 //= require rails-timeago

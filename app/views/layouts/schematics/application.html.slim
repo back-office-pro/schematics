@@ -10,6 +10,7 @@ html
     = stylesheet_link_tag "schematics/themes/#{setting(:theme)}", media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
     = timeago_script_tag
   body
