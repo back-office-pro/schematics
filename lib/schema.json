@@ -98,9 +98,6 @@
                 "required": {
                     "type": "boolean"
                 },
-                "email": {
-                    "type": "boolean"
-                },
                 "limit": {
                     "type": "integer"
                 },
