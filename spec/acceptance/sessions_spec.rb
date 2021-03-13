@@ -21,7 +21,7 @@ resource 'Sessions' do
     context 'when credentials are correct' do
       let(:password) { 'secret' }
 
-      example 'login' do
+      example 'Success' do
         do_request
         expect(response_status).to eq(200)
         expect(json_response).to eq({ 'auth_token' => auth_token })
@@ -31,7 +31,7 @@ resource 'Sessions' do
     context 'when credentials are wrong' do
       let(:password) { 'qwerty' }
 
-      example 'login' do
+      example 'Not authorized' do
         do_request
         expect(response_status).to eq(401)
       end

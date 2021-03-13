@@ -18,7 +18,7 @@ resource 'Password Resets' do
     context 'when email exists' do
       let(:email) { user.email }
 
-      example 'ask for new password' do
+      example 'Creating a new password reset' do
         do_request
         expect(response_status).to eq(204)
       end
@@ -27,7 +27,7 @@ resource 'Password Resets' do
     context 'when email does not exist' do
       let(:email) { 'foo@foo.com' }
 
-      example 'ask for new password' do
+      example 'Unprocessable entity' do
         do_request
         expect(response_status).to eq(422)
       end
@@ -51,7 +51,7 @@ resource 'Password Resets' do
         let(:password) { 'azerty' }
         let(:password_confirmation) { 'azerty' }
 
-        example 'password reset' do
+        example 'Updating the password' do
           do_request
           expect(response_status).to eq(204)
         end
@@ -61,7 +61,7 @@ resource 'Password Resets' do
         let(:password) { 'azerty' }
         let(:password_confirmation) { 'qwerty' }
 
-        example 'password reset' do
+        example 'Unprocessable entity' do
           do_request
           expect(response_status).to eq(422)
         end
@@ -71,7 +71,7 @@ resource 'Password Resets' do
     context 'when token does not exist' do
       let(:token) { 'foo' }
 
-      example 'password reset' do
+      example 'Not found' do
         do_request
         expect(response_status).to eq(404)
       end

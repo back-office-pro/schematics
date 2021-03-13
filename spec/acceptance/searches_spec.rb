@@ -14,7 +14,8 @@ resource 'Searches' do
 
     let(:query) { 'admin' }
 
-    example_request 'search for admin' do
+    example 'Success' do
+      do_request
       expect(response_status).to eq(200)
     end
   end
