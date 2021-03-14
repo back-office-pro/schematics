@@ -14,15 +14,16 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Editable
 
-      attr_reader :values
+      def values
+        @options[:values]
+      end
 
-      def initialize(entity, name, options)
-        super(entity, name, { default: 0 })
-        @values = options
+      def default
+        @options[:default]
       end
 
       def validators
-        super.merge(inclusion: { in: @values })
+        super.merge(inclusion: { in: values })
       end
 
       def type
@@ -30,9 +31,15 @@ module Schematics
       end
 
       def to_str
-        <<~RUBY
-          enum #{@name}: #{@values.map(&:to_sym).map.with_index.to_h}, _prefix: true
-        RUBY
+        if default.nil?
+          <<~RUBY
+            enum #{@name}: #{to_h}, _prefix: true
+          RUBY
+        else
+          <<~RUBY
+            enum #{@name}: #{to_h}, _prefix: true, _default: "#{default}"
+          RUBY
+        end
       end
 
       def format(value)
@@ -50,7 +57,17 @@ module Schematics
       end
 
       def input_collection
-        @values.collect { |value| [value, format(value)] }
+        values.collect { |value| [value, format(value)] }
+      end
+
+      private
+
+      def to_h
+        values
+          .map(&:to_sym)
+          .map
+          .with_index
+          .to_h
       end
     end
   end
