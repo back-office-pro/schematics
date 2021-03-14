@@ -13,6 +13,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
+
       delegate :default, :json_default, to: :dummy
 
       def permitted_params
