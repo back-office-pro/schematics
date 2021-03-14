@@ -243,6 +243,7 @@
                     "name": "action",
                     "type": "enum",
                     "options": {
+                        "required": true,
                         "values": [
                             "read",
                             "create",
