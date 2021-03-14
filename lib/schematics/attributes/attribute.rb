@@ -1,6 +1,12 @@
+require 'schematics/behaviours/migratable'
+require 'schematics/behaviours/validatable'
+
 module Schematics
   module Attributes
     class Attribute
+      include Behaviours::Migratable
+      include Behaviours::Validatable
+
       attr_reader :entity, :name, :options
 
       class << self
@@ -21,44 +27,6 @@ module Schematics
         @entity = entity
         @name = name
         @options = options
-      end
-
-      def type
-        self.class.name.demodulize.underscore
-      end
-
-      def id
-        [@entity.name, @name].join('_')
-      end
-
-      def to_s
-        "schema:#{id}"
-      end
-
-      def required?
-        @options[:required] || unique?
-      end
-
-      def unique?
-        @options[:unique]
-      end
-
-      def column_name
-        @name
-      end
-
-      def validators
-        validators = {}
-        validators[:uniqueness] = { case_sensitive: false } if unique?
-        validators[:presence] = true if required?
-        validators
-      end
-
-      def validate
-        return if validators.empty?
-        <<~RUBY
-          validates :#{@name}, #{validators}
-        RUBY
       end
 
       def to_sql

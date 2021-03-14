@@ -16,7 +16,7 @@ module Schematics
       protected
 
       def default_generators
-        super << "rails g migration add_ancestry_to_#{name.pluralize} ancestry:string"
+        super.append "rails g migration add_ancestry_to_#{name.pluralize} ancestry:string"
       end
     end
   end

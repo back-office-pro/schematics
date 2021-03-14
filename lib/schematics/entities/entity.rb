@@ -157,7 +157,7 @@ module Schematics
       end
 
       def validates
-        @attributes.map(&:validate).compact
+        validatable_attributes.map(&:validate).compact
       end
 
       def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
@@ -257,7 +257,7 @@ module Schematics
 
       def default_generators
         [
-          "rails g scaffold #{name} #{attributes.map(&:to_s).join(' ')} --skip-resource-route",
+          "rails g scaffold #{name} #{migratable_attributes.map(&:to_s).join(' ')} --skip-resource-route", # rubocop:disable Layout/LineLength
           "rails g rspec:acceptance #{name}",
           "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
           "rails g migration add_slug_to_#{name.pluralize} slug:string:uniq",
