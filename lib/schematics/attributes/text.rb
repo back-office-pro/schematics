@@ -25,6 +25,12 @@ module Schematics
       def input_type
         :textarea
       end
+
+      protected
+
+      def migration_options
+        super.concat %i[default limit]
+      end
     end
   end
 end

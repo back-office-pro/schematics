@@ -5,8 +5,6 @@ module Schematics
     module Rails
       module Generators
         module GeneratedAttribute
-          OPTIONS_WHITELIST = %i[limit precision scale default polymorphic].freeze
-
           def name
             schema_attribute&.name || super
           end
@@ -24,7 +22,7 @@ module Schematics
           end
 
           def attr_options
-            schema_attribute&.options&.slice(*OPTIONS_WHITELIST) || super
+            schema_attribute&.options_for_migration || super
           end
 
           def has_uniq_index? # rubocop:disable Naming/PredicateName
@@ -36,13 +34,7 @@ module Schematics
           end
 
           def options_for_migration
-            return super if schema_attribute.nil?
-            options = super.merge(attr_options)
-            foreign_key_type = schema_attribute.options[:type]
-            if options.key?(:foreign_key) && foreign_key_type.present?
-              options[:foreign_key] = { to_table: foreign_key_type.pluralize.to_sym }
-            end
-            options
+            super.merge(attr_options)
           end
 
           def plural_name

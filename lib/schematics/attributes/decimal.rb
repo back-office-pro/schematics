@@ -24,5 +24,11 @@ module Schematics
         validators
       end
     end
+
+    protected
+
+    def migration_options
+      super.concat %i[precision scale]
+    end
   end
 end

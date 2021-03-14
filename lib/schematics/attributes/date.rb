@@ -42,6 +42,12 @@ module Schematics
       def input_type
         :date
       end
+
+      protected
+
+      def migration_options
+        super.concat %i[default]
+      end
     end
   end
 end

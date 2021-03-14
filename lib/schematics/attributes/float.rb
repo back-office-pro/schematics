@@ -35,6 +35,12 @@ module Schematics
       def icon
         :sort_numeric_up
       end
+
+      protected
+
+      def migration_options
+        super.concat %i[default]
+      end
     end
   end
 end

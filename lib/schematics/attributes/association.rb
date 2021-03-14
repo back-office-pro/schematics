@@ -18,12 +18,20 @@ module Schematics
       delegate :icon, to: :entity
       attr_accessor :inverse_descriptor
 
+      def options_for_migration
+        super.merge({ foreign_key: { to_table: association_type.pluralize.to_sym } })
+      end
+
       def column_name
         "#{super}_id"
       end
 
       def class_name
         association_type.camelize
+      end
+
+      def inverse
+        @options[:inverse] || {}
       end
 
       def association_type
@@ -75,8 +83,8 @@ module Schematics
 
       protected
 
-      def inverse
-        @options[:inverse] || {}
+      def migration_options
+        super.concat %i[polymorphic]
       end
     end
   end

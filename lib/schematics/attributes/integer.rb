@@ -8,6 +8,12 @@ module Schematics
         validators[:numericality][:only_integer] = true
         validators
       end
+
+      protected
+
+      def migration_options
+        super.concat %i[limit]
+      end
     end
   end
 end

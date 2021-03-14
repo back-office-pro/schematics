@@ -15,6 +15,12 @@ module Schematics
       def icon
         :toggle_on
       end
+
+      protected
+
+      def migration_options
+        super.concat %i[default]
+      end
     end
   end
 end
