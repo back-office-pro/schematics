@@ -1,18 +1,15 @@
 require 'schematics/attributes/boolean'
+require 'schematics/entities/entity'
 
 describe Schematics::Attributes::Boolean do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) do
-    Schematics::Entities::Entity.create(
-      name: 'entity',
-      descriptor: 'type',
-      attributes: [{ name: 'type', type: 'string' }]
-    )
-  end
+  let(:entity) { Schematics::Entities::Entity.create(name: 'entity') }
   let(:name) { 'toggle' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -21,4 +18,11 @@ describe Schematics::Attributes::Boolean do
   its(:type) { is_expected.to eq('boolean') }
   its(:column_name) { is_expected.to eq('toggle') }
   its(:icon) { is_expected.to eq(:toggle_on) }
+  its(:options_for_migration) { is_expected.to be_empty }
+
+  context 'when there is a default value' do
+    let(:options) { { default: true } }
+
+    its(:options_for_migration) { is_expected.to eq({ default: true }) }
+  end
 end

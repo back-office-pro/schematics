@@ -4,16 +4,12 @@ require 'schematics/entities/entity'
 describe Schematics::Attributes::String do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) do
-    Schematics::Entities::Entity.create(
-      name: 'user',
-      descriptor: 'first_name',
-      attributes: [{ name: 'first_name', type: 'string' }]
-    )
-  end
+  let(:entity) { Schematics::Entities::Entity.create(name: 'user') }
   let(:name) { 'last_name' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }

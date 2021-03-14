@@ -39,6 +39,8 @@ describe Schematics::Attributes::References do
     attribute.inverse_descriptor = parent_entity.descriptor
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }

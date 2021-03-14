@@ -4,16 +4,12 @@ require 'schematics/entities/entity'
 describe Schematics::Attributes::Attachments do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) do
-    Schematics::Entities::Entity.create(
-      name: 'directory',
-      descriptor: 'name',
-      attributes: [{ name: 'name', type: 'string' }]
-    )
-  end
+  let(:entity) { Schematics::Entities::Entity.create(name: 'directory') }
   let(:name) { 'files' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
