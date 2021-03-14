@@ -202,11 +202,14 @@
                 {
                     "name": "state",
                     "type": "enum",
-                    "options": [
-                        "available",
-                        "not_available",
-                        "available_soon"
-                    ]
+                    "options": {
+                        "default": "available",
+                        "values": [
+                            "available",
+                            "not_available",
+                            "available_soon"
+                        ]
+                    }
                 },
                 {
                     "name": "sub_category",

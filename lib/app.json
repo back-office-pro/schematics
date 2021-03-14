@@ -62,10 +62,13 @@
                 {
                     "name": "locale",
                     "type": "enum",
-                    "options": [
-                        "fr",
-                        "en"
-                    ]
+                    "options": {
+                        "default": "fr",
+                        "values": [
+                            "fr",
+                            "en"
+                        ]
+                    }
                 },
                 {
                     "name": "role",
@@ -177,30 +180,33 @@
                 {
                     "name": "theme",
                     "type": "enum",
-                    "options": [
-                        "default",
-                        "cerulean",
-                        "darkly",
-                        "litera",
-                        "materia",
-                        "sandstone",
-                        "slate",
-                        "superhero",
-                        "cosmo",
-                        "flatly",
-                        "lumen",
-                        "minty",
-                        "simplex",
-                        "solar",
-                        "united",
-                        "cyborg",
-                        "journal",
-                        "lux",
-                        "pulse",
-                        "sketchy",
-                        "spacelab",
-                        "yeti"
-                    ]
+                    "options": {
+                        "default": "flatly",
+                        "values": [
+                            "default",
+                            "cerulean",
+                            "darkly",
+                            "litera",
+                            "materia",
+                            "sandstone",
+                            "slate",
+                            "superhero",
+                            "cosmo",
+                            "flatly",
+                            "lumen",
+                            "minty",
+                            "simplex",
+                            "solar",
+                            "united",
+                            "cyborg",
+                            "journal",
+                            "lux",
+                            "pulse",
+                            "sketchy",
+                            "spacelab",
+                            "yeti"
+                        ]
+                    }
                 }
             ]
         },
@@ -236,14 +242,16 @@
                 {
                     "name": "action",
                     "type": "enum",
-                    "options": [
-                        "read",
-                        "create",
-                        "update",
-                        "import",
-                        "destroy",
-                        "archive"
-                    ]
+                    "options": {
+                        "values": [
+                            "read",
+                            "create",
+                            "update",
+                            "import",
+                            "destroy",
+                            "archive"
+                        ]
+                    }
                 }
             ],
             "virtuals": [
