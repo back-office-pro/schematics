@@ -15,7 +15,7 @@ module Schematics
           .chomp
           .concat(', ')
           .concat <<~RUBY
-            inverse_of: :#{belongs_to.name}
+            inverse_of: :#{inverse_of}
           RUBY
       end
 

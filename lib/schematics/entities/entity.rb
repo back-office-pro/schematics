@@ -132,6 +132,14 @@ module Schematics
         end
       end
 
+      def check_for_association_name_collisions
+        @associations.each do |association|
+          association.prefixed = @associations
+                                 .reject { _1 == association }
+                                 .any? { _1.source == association.source }
+        end
+      end
+
       def weight
         has_many_and_through_and_belongs_to_many_associations.size
       end

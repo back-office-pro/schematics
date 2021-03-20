@@ -19,7 +19,8 @@ module Schematics
           .chomp
           .concat(', ')
           .concat <<~RUBY
-            through: :#{@through.name}
+            through: :#{@through.name},
+            source: :#{source}
           RUBY
       end
     end

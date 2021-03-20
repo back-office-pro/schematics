@@ -55,7 +55,14 @@ describe Schematics::Associations::HasManyThrough do
       has_many :attributes,
                class_name: 'Attribute',
                foreign_key: 'entity_id',
-               through: :entities
+               through: :entities,
+               source: :attributes
     RUBY
+  end
+
+  context 'when association has a name collision' do
+    before { association.prefixed = true }
+
+    its(:name) { is_expected.to eq('entity_attributes') }
   end
 end

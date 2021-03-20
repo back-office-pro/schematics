@@ -1,4 +1,5 @@
 require 'schematics/associations/has_one_through'
+require 'schematics/entities/entity'
 
 describe Schematics::Associations::HasOneThrough do
   subject(:association) { described_class.new(belongs_to, through) }
@@ -55,7 +56,14 @@ describe Schematics::Associations::HasOneThrough do
       has_one :schema,
               class_name: 'Schema',
               foreign_key: 'schema_id',
-              through: :entity
+              through: :entity,
+              source: :schema
     RUBY
+  end
+
+  context 'when association has a name collision' do
+    before { association.prefixed = true }
+
+    its(:name) { is_expected.to eq('entity_schema') }
   end
 end

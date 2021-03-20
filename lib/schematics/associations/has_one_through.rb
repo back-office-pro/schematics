@@ -11,10 +11,12 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      delegate :name, to: :belongs_to
+      def source
+        belongs_to.name
+      end
 
       def class_name
-        name.camelize
+        source.camelize
       end
 
       def descriptor
@@ -25,6 +27,12 @@ module Schematics
         <<~RUBY
           #{name}&.#{descriptor.name}&.searchize
         RUBY
+      end
+
+      protected
+
+      def inverse_of
+        through.name
       end
     end
   end

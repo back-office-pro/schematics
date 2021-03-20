@@ -6,8 +6,8 @@ module Schematics
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
 
-      def name
-        belongs_to.name.pluralize
+      def source
+        inverse_of.pluralize
       end
 
       def column_name

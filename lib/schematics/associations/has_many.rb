@@ -3,7 +3,7 @@ require 'schematics/associations/association'
 module Schematics
   module Associations
     class HasMany < Association
-      def name
+      def source
         super.pluralize
       end
 
@@ -12,7 +12,7 @@ module Schematics
           .chomp
           .concat(', ')
           .concat <<~RUBY
-            inverse_of: :#{belongs_to.name},
+            inverse_of: :#{inverse_of},
             dependent: :#{dependent}
           RUBY
       end

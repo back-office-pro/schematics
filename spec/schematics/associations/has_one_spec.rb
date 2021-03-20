@@ -61,4 +61,10 @@ describe Schematics::Associations::HasOne do
               inverse_of: :schema
     RUBY
   end
+
+  context 'when association has a name collision' do
+    before { association.prefixed = true }
+
+    its(:name) { is_expected.to eq('schema_entity') }
+  end
 end

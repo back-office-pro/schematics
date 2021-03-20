@@ -64,4 +64,10 @@ describe Schematics::Associations::HasMany do
       RUBY
     end
   end
+
+  context 'when association has a name collision' do
+    before { association.prefixed = true }
+
+    its(:name) { is_expected.to eq('schema_entities') }
+  end
 end
