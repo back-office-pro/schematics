@@ -19,7 +19,7 @@ module Schematics
             test_enum_attributes
             test_float_attributes
             test_integer_attributes
-            test_fields
+            test_elements
             test_association_attributes
             test_has_many_associations
             test_has_one_associations
@@ -117,10 +117,10 @@ module Schematics
           end
         end
 
-        def test_fields
-          (entity.fields - entity.digest_attributes).each do |field|
-            test "should have field #{field.name}" do
-              assert record.respond_to?(field.name.to_sym)
+        def test_elements
+          entity.elements.each do |element|
+            test "should have element #{element.name}" do
+              assert record.respond_to?(element.name.to_sym)
             end
           end
         end
