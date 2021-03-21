@@ -10,6 +10,7 @@ Chartkick.options = {
     </div>
   HTML
   library: {
+    backgroundColor: 'transparent',
     animation: {
       duration: 1000,
       easing: 'easeOutQuad',
