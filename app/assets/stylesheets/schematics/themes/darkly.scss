@@ -1,3 +1,26 @@
 @import "bootswatch/dist/darkly/variables";
+$primary: #2c3e50;
+$link-color: $light;
+$card-bg: $secondary;
+$card-cap-bg: $dark;
+$secondary: $light;
+$navbar-light-color: $light;
+$navbar-light-hover-color: $light;
+$navbar-light-active-color: $light;
+$_light: $light;
+$light: $dark;
+$dark: $_light;
+$pagination-bg: $primary;
+$pagination-hover-bg: darken($primary, 15%);
+$pagination-disabled-bg: lighten($primary, 15%);
+$pagination-active-bg: $primary;
 @import "default";
 @import "bootswatch/dist/darkly/bootswatch";
+
+.navbar {
+  background: $light !important;
+}
+
+.text-primary {
+  color: $dark !important;
+}
