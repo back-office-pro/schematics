@@ -28,7 +28,14 @@ describe Schematics::Attributes::Enum do
   its(:options_for_migration) { is_expected.to be_empty }
 
   its(:validators) do
-    is_expected.to eq({ inclusion: { in: %w[available available_soon not_available] } })
+    is_expected.to eq(
+      {
+        inclusion: {
+          in: %w[available available_soon not_available],
+        },
+        allow_nil: true,
+      }
+    )
   end
 
   its(:input_collection) do
@@ -43,7 +50,7 @@ describe Schematics::Attributes::Enum do
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}}
+      validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_nil=>true}
     RUBY
   end
 

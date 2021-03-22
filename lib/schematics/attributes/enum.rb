@@ -23,7 +23,7 @@ module Schematics
       end
 
       def validators
-        super.merge(inclusion: { in: values })
+        super.merge(inclusion: { in: values }, allow_nil: !required?)
       end
 
       def type
@@ -43,6 +43,7 @@ module Schematics
       end
 
       def format(value)
+        return unless value
         I18n.t value.to_sym,
                default: value.humanize,
                scope: [:activerecord, :attributes, @entity.class_name.underscore, @name.pluralize]
