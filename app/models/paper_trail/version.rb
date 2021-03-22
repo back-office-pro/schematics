@@ -9,7 +9,7 @@ module PaperTrail
     delegate :entity, to: :model_class
     delegate :icon, to: :entity
 
-    scope :with_user, -> { includes(:user) }
+    scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { includes(:item) }
 
     class << self

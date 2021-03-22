@@ -7,7 +7,7 @@ module Schematics
       def messages
         received_messages
           .with_rich_text_content
-          .includes(author: :avatar_attachment)
+          .includes(author: [avatar_attachment: [blob: :variant_records]])
           .order(created_at: :desc)
           .limit(10)
       end
