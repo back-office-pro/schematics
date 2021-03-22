@@ -248,6 +248,19 @@ footer {
   width: 0px;
 }
 
+.btn {
+  border-style: solid;
+  border-width: 0 1px 4px 1px;
+  &:not(.disabled):hover {
+    margin-top: 1px;
+    border-bottom-width: 3px;
+  }
+  &:not(.disabled):active {
+    margin-top: 2px;
+    border-bottom-width: 2px;
+  }
+}
+
 .btn-icon-split {
   padding: 0;
   overflow: hidden;
