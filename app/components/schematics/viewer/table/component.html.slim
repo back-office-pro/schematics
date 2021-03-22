@@ -10,26 +10,7 @@
         - @resources.each do |resource|
           tr class=('disabled' if resource.deleted?) data-href=(polymorphic_path(resource) unless resource.deleted?)
             td.text-nowrap.text-center
-              .btn-group.enabled
-                - if resource.deleted?
-                  - if can?(:restore, resource)
-                    = link_to fa_icon(:trash_restore),
-                      polymorphic_path(resource, action: :restore),
-                      method: :delete,
-                      class: "btn btn-danger btn-sm",
-                      data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.restore') }
-                - else
-                  - if can?(:update, resource)
-                    = link_to edit_polymorphic_path(resource),
-                      class: "btn btn-primary btn-sm",
-                      data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.edit') } do
-                      = fa_icon :edit
-                  - if can?(:archive, resource)
-                    = link_to fa_icon(:archive),
-                      polymorphic_path(resource, action: :archive),
-                      method: :delete,
-                      class: "btn btn-danger btn-sm",
-                      data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.archive') }
+              = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
             - entity.listable_elements.sort_by(&:weight).each do |field|
               td.text-nowrap.text-center.align-middle
                 = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
