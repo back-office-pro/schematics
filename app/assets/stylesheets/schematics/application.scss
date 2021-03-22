@@ -2,6 +2,8 @@
 @import "font_awesome5_webfont";
 @import "animate.css/animate";
 @import "sweetalert2/dist/sweetalert2";
+$flag-icon-css-path: '../flag-icon-css/flags';
+@import "flag-icon-css/sass/flag-icon";
 @import "typeahead";
 @import "timeline";
 @import "trix";

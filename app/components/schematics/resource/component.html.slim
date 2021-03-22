@@ -23,6 +23,16 @@
   = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
 - when Schematics::Attributes::RichText
   == value
+- when Schematics::Attributes::Country
+  - if editable?
+    = best_in_place @resource,
+                    @field.column_name.to_sym,
+                    as: @field.input_type,
+                    inner_class: "form-control border p-0",
+                    collection: @field.input_collection,
+                    display_with: lambda { |value| tag.span(class: "flag-icon flag-icon-#{value.downcase}") }
+  - else
+    = tag.span(class: "flag-icon flag-icon-#{value.downcase}")
 - when editable? && Schematics::Behaviours::Editable
   = best_in_place @resource,
                   @field.column_name.to_sym,

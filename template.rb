@@ -33,6 +33,7 @@ after_bundle do
   run 'yarn add jquery-ujs@^1.2.2'
   run 'yarn add typeahead.js@^0.11.1'
   run 'yarn add sweetalert2@5.1.1'
+  run 'yarn add flag-icon-css@3.5.0'
 
   # Git
   run 'git add -A'
