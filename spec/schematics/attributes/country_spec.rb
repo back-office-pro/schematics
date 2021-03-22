@@ -25,7 +25,7 @@ describe Schematics::Attributes::Country do
   its(:icon) { is_expected.to eq(:globe_europe) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('FR') }
-  its(:validators) { is_expected.to eq({ inclusion: { in: ['FR'] } }) }
+  its(:validators) { is_expected.to eq({ inclusion: { in: ['FR'] }, allow_nil: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.country') }
   its(:to_s) { is_expected.to eq('schema:user_country') }
@@ -33,7 +33,7 @@ describe Schematics::Attributes::Country do
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :country, {:inclusion=>{:in=>["FR"]}}
+      validates :country, {:inclusion=>{:in=>["FR"]}, :allow_nil=>true}
     RUBY
   end
 

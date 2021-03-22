@@ -18,7 +18,7 @@ module Schematics
       end
 
       def validators
-        super.merge(inclusion: { in: ISO3166::Country.codes })
+        super.merge(inclusion: { in: ISO3166::Country.codes }, allow_nil: !required?)
       end
 
       def input_collection
@@ -30,7 +30,7 @@ module Schematics
       end
 
       def format(value)
-        ISO3166::Country[value].try(:translation, I18n.locale.to_s)
+        value && ISO3166::Country[value].try(:translation, I18n.locale.to_s)
       end
     end
   end
