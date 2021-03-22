@@ -1,6 +1,6 @@
 # rubocop:disable Style/FormatStringToken
 Chartkick.options = {
-  colors: ['#2C3E50', '#95a5a6'],
+  colors: ['#2c3e50'],
   height: '300px',
   html: <<~HTML,
     <div id="%{id}"
@@ -10,7 +10,9 @@ Chartkick.options = {
     </div>
   HTML
   library: {
+    # Google Charts
     backgroundColor: 'transparent',
+    # Charts.js
     animation: {
       duration: 1000,
       easing: 'easeOutQuad',
