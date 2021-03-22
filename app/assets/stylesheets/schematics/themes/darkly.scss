@@ -21,6 +21,10 @@ $pagination-active-bg: $primary;
   background: $light !important;
 }
 
-.text-primary {
+.text-primary, .text-light {
+  color: $dark !important;
+}
+
+.form-control {
   color: $dark !important;
 }
