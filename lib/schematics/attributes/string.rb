@@ -30,7 +30,7 @@ module Schematics
       end
 
       def format(value)
-        value.to_s
+        value&.to_s
       end
     end
   end
