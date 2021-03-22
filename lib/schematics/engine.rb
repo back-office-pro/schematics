@@ -5,11 +5,11 @@ module Schematics
     # Generators
     config.app_generators do |g|
       g.orm :active_record, primary_key_type: :uuid
-      g.templates.unshift(File.expand_path('../templates', __dir__))
-      g.assets          false
-      g.helper          false
+      g.templates.unshift root.join('lib', 'templates')
+      g.assets false
+      g.helper false
       g.template_engine nil
-      g.jbuilder        nil
+      g.jbuilder nil
     end
 
     # Active Record
@@ -29,7 +29,7 @@ module Schematics
     # i18n
     config.i18n.default_locale = :fr
     config.i18n.available_locales = %i[fr en]
-    config.i18n.load_path += Dir.glob(File.expand_path('../../config/locales/**/*.yml', __dir__))
+    config.i18n.load_path += Dir[root.join('config', 'locales', '**', '*.yml')]
 
     def credentials
       ActiveSupport::EncryptedConfiguration.new(
