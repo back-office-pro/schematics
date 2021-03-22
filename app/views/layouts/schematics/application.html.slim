@@ -21,7 +21,7 @@ html
         .col.bg-primary.sidebar
           = render Schematics::Sidebar::Component.new
         .col.bg-light.content
-          nav.navbar.navbar-light.navbar-expand.bg-white.border-0.p-0.sticky-top.shadow-sm
+          nav.navbar.navbar-light.navbar-expand.border-0.p-0.sticky-top.shadow-sm
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
               = form_tag schematics.searches_path, class: "form-inline flex-nowrap pr-3" do

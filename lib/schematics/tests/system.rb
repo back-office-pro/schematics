@@ -102,7 +102,7 @@ module Schematics
           return if entity.is_a?(Entities::Singleton)
           test "destroying a #{entity.name}" do
             visit polymorphic_path(model_class)
-            page.execute_script("$('tr[data-href]').first().click()")
+            page.execute_script("$('*[data-href]').first().click()")
             click_on I18n.t('schematics.application.show.buttons.destroy')
             click_on I18n.t('schematics.application.form.buttons.confirm')
             assert_text I18n.t('schematics.resources.destroy.success',

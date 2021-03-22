@@ -22,7 +22,7 @@ $(document).on('turbolinks:load', function() {
     $('form.form-inline').on('submit', function() {
         return $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', true);
     });
-    $('tr[data-href]').on('click', function(e) {
+    $('*[data-href]').on('click', function(e) {
         const $target = $(e.target);
         if (!$target.is('a') && !$target.parent().is('a') && 
             !$target.hasClass('best_in_place') && !$target.parents('.best_in_place').length) {
