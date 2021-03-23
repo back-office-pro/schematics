@@ -10,7 +10,7 @@ module Schematics
       end
 
       def default
-        nil
+        options[:default]
       end
 
       def json_default

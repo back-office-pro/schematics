@@ -1,7 +1,7 @@
 module Schematics
   class SessionsController < ApplicationController
     include Fillable
-    before_action :authorize, only: %i[show edit update]
+    before_action :authorize, only: %i[edit update]
     layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
@@ -10,11 +10,6 @@ module Schematics
     end
 
     def edit
-    end
-
-    def show
-      current_user.touch # rubocop:disable Rails/SkipsModelValidations
-      render json: current_user
     end
 
     def create

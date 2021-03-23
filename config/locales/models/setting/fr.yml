@@ -10,27 +10,3 @@ fr:
         company_address: Adresse de la société
         company_registration_number: Numéro SIRET de la société
         company_logo: Logo de la société
-        theme: Thème de l'application
-        themes:
-          default: Défaut
-          cerulean: Azur
-          darkly: Sombre
-          litera: Litera
-          materia: Materia
-          sandstone: Grès
-          slate: Ardoise
-          superhero: Super-Héros
-          cosmo: Cosmos
-          flatly: Flat
-          lumen: Lumineux
-          minty: Menthe
-          simplex: Simple
-          solar: Solaire
-          united: Unis
-          cyborg: Cyborg
-          journal: Journal
-          lux: Luxe
-          pulse: Impulsion
-          sketchy: Dessin
-          spacelab: Navette spatiale
-          yeti: Yéti

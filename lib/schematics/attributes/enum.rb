@@ -18,10 +18,6 @@ module Schematics
         @options[:values]
       end
 
-      def default
-        @options[:default]
-      end
-
       def validators
         super.merge(inclusion: { in: values }, allow_nil: !required?)
       end

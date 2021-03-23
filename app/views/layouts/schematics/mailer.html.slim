@@ -2,7 +2,8 @@ doctype html
 html
   head
     meta charset="utf-8"
-    = stylesheet_link_tag "schematics/themes/#{setting(:theme)}", media: 'all'
+    = stylesheet_link_tag 'schematics/themes/dark', media: '(prefers-color-scheme: dark)'
+    = stylesheet_link_tag 'schematics/themes/light', media: '(prefers-color-scheme: light)'
     = stylesheet_link_tag 'schematics/mailer', media: 'all'
   body
     = yield

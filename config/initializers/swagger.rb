@@ -1,4 +1,5 @@
-GrapeSwaggerRails.options.url = '/open_api.json'
+Rails.application.reload_routes!
+GrapeSwaggerRails.options.url = Schematics::Engine.routes.url_helpers.swagger_open_api_path
 GrapeSwaggerRails.options.app_url = 'http://localhost:3000'
 GrapeSwaggerRails.options.doc_expansion = 'list'
 GrapeSwaggerRails.options.hide_url_input = true

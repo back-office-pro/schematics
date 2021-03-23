@@ -10,10 +10,10 @@
         = active_link_to polymorphic_path(model_class),
           class: "nav-link p-0 m-0 text-secondary text-nowrap" do
           = fa_icon entity.icon, size: "2x"
-          .mt-2.d-none.d-md-block= model_class.model_name.human.pluralize
+          .mt-2.d-none class=('d-md-block' unless toggled?) = model_class.model_name.human.pluralize
       - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(polymorphic_path(model_class))
         - entity.enum_attributes.each do |attribute|
-          li.nav-item.text-center.mw-100.mb-2.px-3.d-none.d-md-block
+          li.nav-item.text-center.mw-100.mb-2.px-3.d-none class=('d-md-block' unless toggled?)
             ul.list-group
               - attribute.values.each do |value|
                 = active_link_to polymorphic_path(model_class, filter: { attribute.name => value }),
@@ -24,5 +24,5 @@
                     span.badge.badge-secondary.text-primary= model_class.send(:"#{attribute.name}_#{value}").size
       li.nav-item.mb-2
   button#sidebar-toggle.btn.btn-block.text-secondary.rounded-0.border-0.text-right.py-3
-    .d-none.d-md-block.mr-3= fa_icon :chevron_left, class: "fa-lg"
-    .d-none.mr-3= fa_icon :chevron_right, class: "fa-lg"
+    .d-none.mr-3 class=('d-md-block' unless toggled?) = fa_icon :chevron_left, class: "fa-lg"
+    .d-none.mr-3 class=('d-md-block' if toggled?) = fa_icon :chevron_right, class: "fa-lg"

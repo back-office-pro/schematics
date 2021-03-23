@@ -3,7 +3,7 @@ require 'active_support/core_ext/module/delegation'
 module Schematics
   module Associations
     class Association
-      delegate :entity, :required?, :column_name, :association_type, to: :belongs_to
+      delegate :entity, :required?, :column_name, :association_type, :options, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
       attr_reader :belongs_to
       attr_writer :prefixed

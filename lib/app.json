@@ -71,6 +71,16 @@
                     }
                 },
                 {
+                    "name": "preferences",
+                    "type": "jsonb",
+                    "options": {
+                        "default": {
+                            "theme": "light",
+                            "sidebar_toggled": false
+                        }
+                    }
+                },
+                {
                     "name": "role",
                     "type": "belongs_to",
                     "options": {
@@ -175,37 +185,6 @@
                             "jpg"
                         ],
                         "size": 2
-                    }
-                },
-                {
-                    "name": "theme",
-                    "type": "enum",
-                    "options": {
-                        "default": "flatly",
-                        "values": [
-                            "default",
-                            "cerulean",
-                            "darkly",
-                            "litera",
-                            "materia",
-                            "sandstone",
-                            "slate",
-                            "superhero",
-                            "cosmo",
-                            "flatly",
-                            "lumen",
-                            "minty",
-                            "simplex",
-                            "solar",
-                            "united",
-                            "cyborg",
-                            "journal",
-                            "lux",
-                            "pulse",
-                            "sketchy",
-                            "spacelab",
-                            "yeti"
-                        ]
                     }
                 }
             ]

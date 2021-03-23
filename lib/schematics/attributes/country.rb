@@ -14,7 +14,7 @@ module Schematics
       end
 
       def default
-        'FR'
+        super || 'FR'
       end
 
       def validators

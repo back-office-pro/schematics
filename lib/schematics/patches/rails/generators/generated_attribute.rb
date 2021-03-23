@@ -14,7 +14,7 @@ module Schematics
           end
 
           def default
-            attr_options[:default] || schema_attribute.try(:default) || super
+            schema_attribute.try(:default) || super
           end
 
           def required?

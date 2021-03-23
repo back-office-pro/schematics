@@ -21,10 +21,22 @@ $pagination-active-bg: $primary;
   background: $light !important;
 }
 
+.navbar.scrolled {
+  background: rgba(48, 48, 48, 0.6) !important;
+}
+
+.navbar.scrolled:hover {
+  background: $light !important;
+}
+
 .text-primary, .text-light {
   color: $dark !important;
 }
 
 .form-control {
   color: $dark !important;
+}
+
+.switch-theme.dark {
+  display: none;
 }

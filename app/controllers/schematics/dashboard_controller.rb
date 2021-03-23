@@ -7,14 +7,17 @@ module Schematics
       render json: Schema.instance.charts[params[:id].to_i - 1]
     end
 
-    def open_api
-      render json: File.read(open_api_file_path)
+    def read_notifications
+      current_user.touch # rubocop:disable Rails/SkipsModelValidations
     end
 
-    private
+    def toggle_sidebar
+      current_user.update(preferences_sidebar_toggled: !current_user.preferences_sidebar_toggled)
+    end
 
-    def open_api_file_path
-      RspecApiDocumentation.configuration.docs_dir.join('open_api.json')
+    def toggle_theme
+      new_theme = current_user.preferences_theme == 'light' ? 'dark' : 'light'
+      current_user.update(preferences_theme: new_theme)
     end
   end
 end

@@ -20,7 +20,7 @@
             span.align-middle= chart.title
         .card-body
           = send chart.type,
-                 chart_path(id),
+                 dashboard_chart_path(id),
                  xtitle: chart.x.title.humanize,
                  ytitle: chart.y.title.humanize,
                  suffix: chart.y.field&.try(:unit),

@@ -7,7 +7,8 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag "schematics/themes/#{setting(:theme)}", media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'schematics/themes/light', media: 'all', 'data-turbolinks-track': 'reload', disabled: user_setting(:theme) != 'light'
+    = stylesheet_link_tag 'schematics/themes/dark', media: 'all', 'data-turbolinks-track': 'reload', disabled: user_setting(:theme) != 'dark'
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
@@ -18,9 +19,9 @@ html
       = render Schematics::Toast::Component.new(flash: f)
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
-        .col.bg-primary.sidebar
+        .col.bg-primary.sidebar class=('toggled' if user_setting(:sidebar_toggled))
           = render Schematics::Sidebar::Component.new
-        .col.bg-light.content
+        .col.bg-light.content class=('toggled' if user_setting(:sidebar_toggled))
           nav.navbar.navbar-light.navbar-expand.border-0.p-0.sticky-top.shadow-sm
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
@@ -33,11 +34,16 @@ html
                 = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
               = render Schematics::NotificationCenter::Component.new
               = render Schematics::MessageCenter::Component.new
+              li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
+                a.nav-link.switch-theme.dark role="button"
+                  = fa_icon :moon, class: "fa-lg"
+                a.nav-link.switch-theme.light role="button"
+                  = fa_icon :lightbulb, class: "fa-lg"
               li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
-                a#accountDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+                a#account-dropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
                   span.d-none.d-lg-inline.mr-2= current_user.full_name
                   = render Schematics::Attachment::Component.create_avatar(attachment: current_user.avatar)
-                .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="accountDropdown"
+                .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="account-dropdown"
                   h5.dropdown-header.font-weight-bold.bg-light= t('.dropdown.my_account')
                   = link_to schematics.profile_path, class: "dropdown-item" do
                     = fa_icon :user, class: "mr-3"
