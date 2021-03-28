@@ -178,6 +178,12 @@ footer {
   margin-right: 0.5rem !important;
 }
 
+.table tr td[colspan="2"] .btn-group.enabled {
+  position: absolute;
+  right: 0.5rem;
+  z-index: 2;
+}
+
 .pagy-bootstrap-nav-js .pagination {
   justify-content: center;
 }
