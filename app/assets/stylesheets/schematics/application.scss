@@ -228,18 +228,6 @@ footer {
   min-width: 300px;
 }
 
-@keyframes growIn {
-  0% {
-    transform: scale(.9);
-    opacity: 0
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1
-  }
-}
-
 /**
  * Buttons
  */
