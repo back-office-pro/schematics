@@ -25,7 +25,14 @@ Layout/LineLength:
 RSpec/ExampleLength:
   Enabled: false
 Metrics/BlockLength:
-  Enabled: false
+  IgnoredMethods:
+    - describe
+    - resource
+    - after_bundle
+    - setup
+    - after_initialize
+    - put
+    - context
 Metrics/MethodLength:
   Enabled: false
 Metrics/ClassLength:
