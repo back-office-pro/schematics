@@ -35,7 +35,7 @@ describe Schematics::Associations::HasOne do
   end
 
   before do
-    belongs_to.inverse_descriptor = parent_entity.descriptor
+    belongs_to.inverse_entity = parent_entity
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }

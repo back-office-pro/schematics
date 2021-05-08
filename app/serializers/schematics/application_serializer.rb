@@ -16,10 +16,7 @@ module Schematics
               attribute element.name.to_sym do
                 element.format object.send(element.name.to_sym)
               end
-            when Attributes::Association
-              belongs_to element.name.to_sym,
-                         serializer: element.inverse_descriptor.serializer_class
-            when Associations::HasOne, Associations::HasOneThrough
+            when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
               has_one element.name.to_sym,
                       serializer: element.descriptor.serializer_class
             when Associations::HasMany,

@@ -36,7 +36,7 @@ describe Schematics::Attributes::References do
   end
 
   before do
-    attribute.inverse_descriptor = parent_entity.descriptor
+    attribute.inverse_entity = parent_entity
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }

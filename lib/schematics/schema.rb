@@ -24,7 +24,7 @@ module Schematics
       @entities = data[:entities].map { |entity| Entities::Entity.create(**entity) }
       @charts = data[:charts].map { |chart| Graphics::Chart.create(self, **chart) }
       @stats = data[:stats].map { |stat| Graphics::Stat.create(self, **stat) }
-      add_inverse_descriptor_to_association_attributes
+      add_inverse_entity_to_association_attributes
       add_has_and_belongs_to_many_associations
       add_inverse_associations
       add_has_many_through_associations
@@ -92,10 +92,10 @@ module Schematics
         .map(&:route)
     end
 
-    def add_inverse_descriptor_to_association_attributes
+    def add_inverse_entity_to_association_attributes
       @entities.each do |entity|
         entity.association_attributes.each do |attribute|
-          attribute.inverse_descriptor = find_entity_by_name(attribute.association_type).descriptor
+          attribute.inverse_entity = find_entity_by_name(attribute.association_type)
         end
       end
     end

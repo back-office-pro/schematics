@@ -29,7 +29,7 @@ describe Schematics::Associations::HasMany do
   let(:options) { {} }
 
   before do
-    belongs_to.inverse_descriptor = parent_entity.descriptor
+    belongs_to.inverse_entity = parent_entity
   end
 
   its(:type) { is_expected.to eq('has_many') }

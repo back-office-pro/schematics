@@ -11,16 +11,14 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
+      delegate :descriptor, to: :belongs_to
+
       def source
         belongs_to.name
       end
 
       def class_name
         source.camelize
-      end
-
-      def descriptor
-        belongs_to.inverse_descriptor
       end
 
       def search_data

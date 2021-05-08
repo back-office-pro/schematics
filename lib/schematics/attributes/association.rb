@@ -15,8 +15,8 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Editable
 
-      delegate :icon, to: :entity
-      attr_accessor :inverse_descriptor
+      delegate :icon, :descriptor, to: :inverse_entity
+      attr_accessor :inverse_entity
 
       def options_for_migration
         super.merge({ foreign_key: { to_table: association_type.pluralize.to_sym } })
@@ -49,7 +49,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}&.#{inverse_descriptor.name}&.searchize
+          #{name}&.#{descriptor.name}&.searchize
         RUBY
       end
 
