@@ -22,7 +22,7 @@ module Schematics
         end
 
         def attachment?
-          klass.try(:entity).nil?
+          klass.try(:entity)
         end
 
         def klass

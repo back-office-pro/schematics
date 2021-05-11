@@ -37,7 +37,7 @@ module Schematics
       end
 
       def new_sorted_params
-        return name if sorted_params.nil?
+        return name unless sorted_params
         new_params = revert_sorted_params
         new_params << name if new_param?
         new_params.join(',')

@@ -3,7 +3,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     def sorting_params
-      return { created_at: { order: :desc, unmapped_type: 'long' } } if params[:sort].nil?
+      return { created_at: { order: :desc, unmapped_type: 'long' } } unless params[:sort]
       ordering = {}
       sort_order = { '+' => :asc, '-' => :desc }
       sorted_params = params[:sort].split(',')

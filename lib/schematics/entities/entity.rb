@@ -58,7 +58,7 @@ module Schematics
                    attributes: [],
                    virtuals: [])
           args = [name, icon.to_sym, descriptor, associations, attributes, virtuals]
-          return new(*args) if type.nil?
+          return new(*args) unless type
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
 

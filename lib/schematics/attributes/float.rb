@@ -26,7 +26,7 @@ module Schematics
       end
 
       def format(value)
-        return if value.nil?
+        return unless value
         return number_to_human_size(value) if unit == 'bytes'
         [value, unit].compact.join(' ')
       end

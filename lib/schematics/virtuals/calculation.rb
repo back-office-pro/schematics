@@ -20,7 +20,7 @@ module Schematics
 
       def format(value)
         return value.to_s if value.is_a?(::StandardError)
-        [scale.nil? ? value : value.round(scale), unit].compact.join(' ')
+        [value.round(scale.to_i), unit].compact.join(' ')
       end
 
       def icon

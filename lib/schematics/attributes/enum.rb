@@ -27,13 +27,13 @@ module Schematics
       end
 
       def to_str
-        if default.nil?
+        if default
           <<~RUBY
-            enum #{@name}: #{to_h}, _prefix: true
+            enum #{@name}: #{to_h}, _prefix: true, _default: "#{default}"
           RUBY
         else
           <<~RUBY
-            enum #{@name}: #{to_h}, _prefix: true, _default: "#{default}"
+            enum #{@name}: #{to_h}, _prefix: true
           RUBY
         end
       end
