@@ -81,21 +81,40 @@ module Schematics
       end
 
       def icon
-        case extension.to_sym
-        when :doc, :docx                   then :file_word
-        when :ppt, :pptx                   then :file_powerpoint
-        when :pdf                          then :file_pdf
-        when :png, :jpg, :jpeg, :gif, :bmp then :file_image
-        when :xls, :xlsx                   then :file_excel
-        when :zip, :rar, :tar              then :file_archive
-        when :csv                          then :file_csv
-        when :php, :rb, :py, :js, :java    then :file_code
-        when :mp3, :aac, :ogg              then :file_audio
-        when :webm, :mkv, :flv, :vob, :avi, :mov, :wmv, :mp4
-          :file_video
-        else
-          :file
-        end
+        {
+          doc: :file_word,
+          docx: :file_word,
+          ppt: :file_powerpoint,
+          pptx: :file_powerpoint,
+          pdf: :file_pdf,
+          png: :file_image,
+          jpg: :file_image,
+          jpeg: :file_image,
+          gif: :file_image,
+          bmp: :file_image,
+          xls: :file_excel,
+          xlsx: :file_excel,
+          zip: :file_archive,
+          rar: :file_archive,
+          tar: :file_archive,
+          csv: :file_csv,
+          php: :file_code,
+          rb: :file_code,
+          py: :file_code,
+          js: :file_code,
+          java: :file_code,
+          mp3: :file_audio,
+          aac: :file_audio,
+          ogg: :file_audio,
+          webm: :file_video,
+          mkv: :file_video,
+          flv: :file_video,
+          vob: :file_video,
+          avi: :file_video,
+          mov: :file_video,
+          wmv: :file_video,
+          mp4: :file_video,
+        }[extension.to_sym] || :file
       end
 
       def image?

@@ -129,7 +129,7 @@ module Schematics
         assert_text I18n.t('schematics.sessions.create.success')
       end
 
-      def fill_form
+      def fill_form # rubocop:disable Metrics/CyclomaticComplexity
         entity.fillable_elements.each do |element| # rubocop:disable Metrics/BlockLength
           input = "#{entity.name}[#{element.column_name}]"
           case element
