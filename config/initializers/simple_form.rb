@@ -1,6 +1,8 @@
+require 'simple_form/components/input_group'
+
 # Make sure we override main app initializers config
 Rails.application.config.after_initialize do
-  SimpleForm.include_component(Schematics::InputGroup)
+  SimpleForm.include_component(SimpleForm::Components::InputGroup)
   SimpleForm.setup do |config|
     config.input_class = 'bg-light border-0'
     config.wrapper_mappings = {
