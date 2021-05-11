@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Phone < String
       def validators
-        super.merge({ phone: true })
+        super.merge(phone: true)
       end
 
       def default

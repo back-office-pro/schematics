@@ -19,7 +19,7 @@ module Schematics
       attr_accessor :inverse_entity
 
       def options_for_migration
-        super.merge({ foreign_key: { to_table: association_type.pluralize.to_sym } })
+        super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
       end
 
       def column_name

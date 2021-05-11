@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Url < String
       def validators
-        super.merge({ url: true })
+        super.merge(url: true)
       end
 
       def default

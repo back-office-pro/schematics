@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Email < String
       def validators
-        super.merge({ email: true })
+        super.merge(email: true)
       end
 
       def default
