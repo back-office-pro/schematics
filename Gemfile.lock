@@ -559,7 +559,7 @@ DEPENDENCIES
   reek (~> 6.0.3)
   rspec-its (~> 1.3.0)
   rubocop (~> 1.11.0)
-  rubocop-performance
+  rubocop-performance (~> 1.11.3)
   rubocop-rails (~> 2.9.1)
   rubocop-rspec (~> 2.2.0)
   schematics!
