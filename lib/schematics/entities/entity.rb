@@ -166,7 +166,7 @@ module Schematics
       end
 
       def validates
-        validatable_attributes.map(&:validate).compact
+        validatable_attributes.filter_map(&:validate)
       end
 
       def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName

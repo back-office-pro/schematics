@@ -1,6 +1,7 @@
 require:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-performance
 Layout/DotPosition:
   Enabled: true
   EnforcedStyle: leading
@@ -48,6 +49,8 @@ Metrics/PerceivedComplexity:
 Metrics/ParameterLists:
   Max: 7
 Metrics/ModuleLength:
+  Enabled: false
+Performance/MethodObjectAsBlock:
   Enabled: false
 AllCops:
   TargetRubyVersion: 3.0.0
