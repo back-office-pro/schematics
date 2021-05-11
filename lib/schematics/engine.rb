@@ -3,13 +3,13 @@ module Schematics
     isolate_namespace Schematics
 
     # Generators
-    config.app_generators do |g|
-      g.orm :active_record, primary_key_type: :uuid
-      g.templates.unshift root.join('lib', 'templates')
-      g.assets false
-      g.helper false
-      g.template_engine nil
-      g.jbuilder nil
+    config.app_generators do |generator|
+      generator.orm :active_record, primary_key_type: :uuid
+      generator.templates.unshift root.join('lib', 'templates')
+      generator.assets false
+      generator.helper false
+      generator.template_engine nil
+      generator.jbuilder nil
     end
 
     # Active Record
