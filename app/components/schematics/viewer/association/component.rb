@@ -21,8 +21,9 @@ module Schematics
           @collapsed
         end
 
+        # :reek:NilCheck
         def attachment?
-          klass.try(:entity)
+          klass.try(:entity).nil?
         end
 
         def klass
