@@ -105,12 +105,12 @@ module Schematics
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
-          send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
-        elsif Behaviours.const_defined?(constant)
-          send(method.to_sym).select_is_a?(Behaviours.const_get(constant))
-        else
-          super
+          return send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
         end
+        if Behaviours.const_defined?(constant)
+          return send(method.to_sym).select_is_a?(Behaviours.const_get(constant))
+        end
+        super
       end
 
       def respond_to_missing?(method_name, *args)
