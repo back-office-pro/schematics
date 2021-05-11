@@ -1,5 +1,6 @@
 require 'schematics/attributes/text'
 require 'schematics/behaviours/listable'
+require 'active_support/core_ext/securerandom'
 
 module Schematics
   module Attributes
@@ -11,13 +12,14 @@ module Schematics
       end
 
       def validators
-        validators = super
-        validators[:length] = { minimum: @options[:min] } if @options.key?(:min)
-        validators[:length] = { maximum: @options[:limit] } if @options.key?(:limit)
-        if @options.key?(:min) && @options.key?(:limit)
-          validators[:length] = { in: @options[:min]..@options[:limit] }
-        end
-        validators
+        super.merge(
+          {
+            length: {
+              minimum: @options[:min],
+              maximum: @options[:limit],
+            }.compact,
+          }.compact_blank
+        )
       end
 
       def default

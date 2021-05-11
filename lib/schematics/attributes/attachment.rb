@@ -1,4 +1,6 @@
 require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/array/access'
+require 'active_support/core_ext/numeric/bytes'
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
@@ -54,24 +56,24 @@ module Schematics
       end
 
       def validators
-        validators = super
-        validators[:attached] = true if required?
-        validators[:size] = { less_than: @options[:size].megabytes } if @options.key?(:size)
-        validators[:aspect_ratio] = @options[:aspect_ratio] if @options.key?(:aspect_ratio)
-        validators[:limit] = { min: @options[:min] } if @options.key?(:min)
-        validators[:limit] = { max: @options[:max] } if @options.key?(:max)
-        validators[:dimension] = { width: @options[:width] } if @options.key?(:width)
-        validators[:dimension] = { height: @options[:height] } if @options.key?(:height)
-        if @options.key?(:min) && @options.key?(:max)
-          validators[:limit] = { min: @options[:min], max: @options[:max] }
-        end
-        if @options.key?(:width) && @options.key?(:height)
-          validators[:dimension] = { width: @options[:width], height: @options[:height] }
-        end
-        if @options.key?(:content_type)
-          validators[:content_type] = @options[:content_type].map(&:to_sym)
-        end
-        validators
+        super.merge(
+          {
+            attached: required?,
+            size: {
+              less_than: @options[:size]&.megabytes,
+            }.compact,
+            aspect_ratio: @options[:aspect_ratio],
+            limit: {
+              min: @options[:min],
+              max: @options[:max],
+            }.compact,
+            dimension: {
+              width: @options[:width],
+              height: @options[:height],
+            }.compact,
+            content_type: @options[:content_type]&.map(&:to_sym),
+          }.compact_blank
+        )
       end
 
       def format(value)

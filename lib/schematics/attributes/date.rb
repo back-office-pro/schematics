@@ -5,6 +5,7 @@ require 'schematics/behaviours/searchable'
 require 'schematics/behaviours/preloadable'
 require 'schematics/behaviours/fillable'
 require 'schematics/behaviours/rangeable'
+require 'schematics/behaviours/editable'
 
 module Schematics
   module Attributes
@@ -21,12 +22,18 @@ module Schematics
       end
 
       def validators
-        validators = super
-        validators[:date] = { allow_blank: !required? }
-        %i[equal_to before after before_or_equal_to after_or_equal_to].each do |key|
-          validators[:date][key] = @options[key].to_sym if @options.key?(key)
-        end
-        validators
+        super.merge(
+          {
+            date: {
+              allow_blank: !required?,
+              equal_to: @options[:equal_to]&.to_sym,
+              before: @options[:before]&.to_sym,
+              after: @options[:after]&.to_sym,
+              before_or_equal_to: @options[:before_or_equal_to]&.to_sym,
+              after_or_equal_to: @options[:after_or_equal_to]&.to_sym,
+            }.compact,
+          }.compact_blank
+        )
       end
 
       def default

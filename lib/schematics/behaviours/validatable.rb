@@ -1,3 +1,5 @@
+require 'active_support/core_ext/enumerable'
+
 module Schematics
   module Behaviours
     module Validatable
@@ -17,10 +19,10 @@ module Schematics
       end
 
       def validators
-        validators = {}
-        validators[:uniqueness] = { case_sensitive: false } if unique?
-        validators[:presence] = true if required?
-        validators
+        {
+          uniqueness: ({ case_sensitive: false } if unique?),
+          presence: required?,
+        }.compact
       end
     end
   end

@@ -1,4 +1,5 @@
 require 'schematics/attributes/attribute'
+require 'schematics/behaviours/fillable'
 
 module Schematics
   module Attributes
@@ -10,15 +11,16 @@ module Schematics
       end
 
       def validators
-        validators = super
-        validators[:allow_nil] = true
-        validators[:length] = { minimum: @options[:min] } if @options.key?(:min)
-        validators[:length] = { maximum: @options[:limit] } if @options.key?(:limit)
-        if @options.key?(:min) && @options.key?(:limit)
-          validators[:length] = { in: @options[:min]..@options[:limit] }
-        end
-        validators[:length] = { is: @options[:length] } if @options.key?(:length)
-        validators
+        super.merge(
+          {
+            allow_nil: true,
+            length: {
+              minimum: @options[:min],
+              maximum: @options[:limit],
+              is: @options[:length],
+            }.compact,
+          }.compact_blank
+        )
       end
 
       def to_str

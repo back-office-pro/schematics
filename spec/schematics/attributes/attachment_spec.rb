@@ -73,4 +73,40 @@ describe Schematics::Attributes::Attachment do
       RUBY
     end
   end
+
+  context 'when size option is defined' do
+    let(:options) { { size: 10 } }
+
+    its(:validators) { is_expected.to eq(size: { less_than: 10.megabytes }) }
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :avatar, {:size=>{:less_than=>10485760}}
+      RUBY
+    end
+  end
+
+  context 'when aspect_ratio option is defined' do
+    let(:options) { { aspect_ratio: 10 } }
+
+    its(:validators) { is_expected.to eq(aspect_ratio: 10) }
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :avatar, {:aspect_ratio=>10}
+      RUBY
+    end
+  end
+
+  context 'when content_type option is defined' do
+    let(:options) { { content_type: %w[png jpg jpeg] } }
+
+    its(:validators) { is_expected.to eq(content_type: %i[png jpg jpeg]) }
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :avatar, {:content_type=>[:png, :jpg, :jpeg]}
+      RUBY
+    end
+  end
 end

@@ -42,4 +42,18 @@ describe Schematics::Attributes::Country do
       country&.searchize
     RUBY
   end
+
+  context 'when country is required' do
+    let(:options) { { required: true } }
+
+    its(:validators) do
+      is_expected.to eq({ inclusion: { in: ['FR'] }, presence: true, allow_nil: false })
+    end
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"]}, :allow_nil=>false}
+      RUBY
+    end
+  end
 end

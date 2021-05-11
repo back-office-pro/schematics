@@ -16,12 +16,14 @@ module Schematics
       end
 
       def validators
-        validators = super
-        unless precision.nil?
-          validators[:numericality][:greater_than] = -bound
-          validators[:numericality][:less_than] = bound
-        end
-        validators
+        super.merge(
+          {
+            numericality: {
+              greater_than: (-bound if precision),
+              less_than: (bound if precision),
+            }.compact,
+          }.compact_blank
+        )
       end
     end
 
