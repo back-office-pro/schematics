@@ -6,11 +6,9 @@ module Schematics
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
 
-    def new
-    end
+    def new; end
 
-    def edit
-    end
+    def edit; end
 
     def create
       result = Sessions::Create.call(

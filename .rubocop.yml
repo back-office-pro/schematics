@@ -19,8 +19,6 @@ Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/FrozenStringLiteralComment:
   Enabled: false
-Style/EmptyMethod:
-  Enabled: false
 Layout/LineLength:
   Max: 100
 RSpec/ExampleLength:
@@ -46,8 +44,6 @@ Metrics/AbcSize:
   Enabled: false
 Metrics/ParameterLists:
   Max: 7
-Metrics/ModuleLength:
-  Enabled: false
 Performance/MethodObjectAsBlock:
   Enabled: false
 AllCops:

@@ -71,14 +71,11 @@ module Schematics
       @resource = model_class.new
     end
 
-    def edit
-    end
+    def edit; end
 
-    def delete
-    end
+    def delete; end
 
-    def import
-    end
+    def import; end
 
     def bulk_insert
       file = params.require(:import).permit(:file)

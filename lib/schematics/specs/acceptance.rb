@@ -2,7 +2,7 @@ require 'schematics/specs/helpers'
 
 module Schematics
   module Specs
-    module Acceptance
+    module Acceptance # rubocop:disable Metrics/ModuleLength
       include Helpers
       delegate :polymorphic_path, to: 'Rails.application.routes.url_helpers', private: true
       delegate :entity, to: :model_class, private: true

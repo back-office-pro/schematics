@@ -1,7 +1,6 @@
 module Schematics
   class DashboardController < ApplicationController
-    def home
-    end
+    def home; end
 
     def chart
       render json: Schema.instance.charts[params[:id].to_i - 1]
