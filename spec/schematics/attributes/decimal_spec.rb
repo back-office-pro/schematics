@@ -1,0 +1,40 @@
+require 'schematics/attributes/decimal'
+require 'schematics/entities/entity'
+
+describe Schematics::Attributes::Decimal do
+  subject(:attribute) { described_class.new(entity, name, options) }
+
+  let(:entity) { Schematics::Entities::Entity.create(name: 'entity') }
+  let(:name) { 'price' }
+  let(:options) do
+    {
+      unit: '€',
+    }
+  end
+
+  it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Listable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
+
+  its(:type) { is_expected.to eq('decimal') }
+  its(:column_name) { is_expected.to eq('price') }
+  its(:unit) { is_expected.to eq('€') }
+  its(:validators) { is_expected.to eq({ numericality: { allow_nil: true } }) }
+  its(:icon) { is_expected.to eq(:sort_numeric_up) }
+
+  context 'when decimal has precision' do
+    let(:options) { { precision: 2 } }
+
+    its(:validators) { is_expected.to eq({ numericality: { greater_than: -100, less_than: 100 } }) }
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :price, {:numericality=>{:greater_than=>-100, :less_than=>100}}
+      RUBY
+    end
+  end
+end
