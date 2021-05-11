@@ -4,7 +4,9 @@ module Schematics
   module Attributes
     class Integer < Float
       def validators
-        super.merge(numericality: { only_integer: true })
+        validators = super
+        validators[:numericality][:only_integer] = true
+        validators
       end
 
       protected

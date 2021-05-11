@@ -29,11 +29,13 @@ describe Schematics::Attributes::Decimal do
   context 'when decimal has precision' do
     let(:options) { { precision: 2 } }
 
-    its(:validators) { is_expected.to eq({ numericality: { greater_than: -100, less_than: 100 } }) }
+    its(:validators) do
+      is_expected.to eq({ numericality: { allow_nil: true, greater_than: -100, less_than: 100 } })
+    end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :price, {:numericality=>{:greater_than=>-100, :less_than=>100}}
+        validates :price, {:numericality=>{:allow_nil=>true, :greater_than=>-100, :less_than=>100}}
       RUBY
     end
   end

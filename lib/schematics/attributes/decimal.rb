@@ -16,21 +16,17 @@ module Schematics
       end
 
       def validators
-        super.merge(
-          {
-            numericality: {
-              greater_than: (-bound if precision),
-              less_than: (bound if precision),
-            }.compact,
-          }.compact_blank
-        )
+        validators = super
+        validators[:numericality][:greater_than] = -bound if precision
+        validators[:numericality][:less_than] = bound if precision
+        validators
       end
-    end
 
-    protected
+      protected
 
-    def migration_options
-      super.concat %i[precision scale]
+      def migration_options
+        super.concat %i[precision scale]
+      end
     end
   end
 end
