@@ -5,7 +5,6 @@ require 'schematics/behaviours/searchable'
 require 'schematics/behaviours/fillable'
 require 'schematics/behaviours/rangeable'
 require 'active_support'
-require 'active_support/core_ext'
 require 'action_view/helpers/number_helper'
 
 module Schematics
