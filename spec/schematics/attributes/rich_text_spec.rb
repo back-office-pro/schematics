@@ -1,4 +1,5 @@
 require 'schematics/attributes/rich_text'
+require 'schematics/entities/entity'
 
 describe Schematics::Attributes::RichText do
   subject(:attribute) { described_class.new(entity, name, options) }

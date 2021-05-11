@@ -1,4 +1,5 @@
 require 'schematics/attributes/float'
+require 'schematics/entities/entity'
 
 describe Schematics::Attributes::Float do
   subject(:attribute) { described_class.new(entity, name, options) }
