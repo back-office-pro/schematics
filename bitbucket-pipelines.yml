@@ -23,7 +23,7 @@ pipelines:
             - bundler
           script:
             - bundle install --path .bundle
-            - bundle exec rspec
+            - bundle exec rspec ./spec/schematics
 definitions:
   caches:
     bundler: .bundle
