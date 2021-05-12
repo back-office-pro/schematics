@@ -8,21 +8,21 @@ pipelines:
           caches:
             - bundler
           script:
-            - bundle bundle install --path vendor/bundle
+            - bundle install --path vendor/bundle
             - bundle exec rubocop
       - step:
           name: Code smells
           caches:
             - bundler
           script:
-            - bundle bundle install --path vendor/bundle
+            - bundle install --path vendor/bundle
             - bundle exec reek
       - step:
           name: Test
           caches:
             - bundler
           script:
-            - bundle bundle install --path vendor/bundle
+            - bundle install --path vendor/bundle
             - bundle exec rspec
 definitions:
   caches:
