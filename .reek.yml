@@ -12,8 +12,6 @@ detectors:
     max_statements: 25
   UncommunicativeModuleName:
     enabled: false
-  DuplicateMethodCall:
-    max_calls: 2
   SubclassedFromCoreClass:
     enabled: false
   Attribute:
