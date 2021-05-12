@@ -1,0 +1,18 @@
+image: ruby:3.0
+
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Lint code
+          script:
+            - bundle exec rubocop
+      - step:
+          name: Code smells
+          script:
+            - bundle exec reek
+      - step:
+          name: Test
+          script:
+            - bundle install
+            - bundle exec rspec
