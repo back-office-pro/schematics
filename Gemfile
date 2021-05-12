@@ -15,4 +15,3 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
-gem 'date_validator', git: 'https://github.com/codegram/date_validator', branch: 'master'
