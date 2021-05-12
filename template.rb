@@ -1,7 +1,6 @@
 # Gems
 gem 'schematics', path: '/Users/max/bitbucket/schematics'
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
-gem 'date_validator', git: 'https://github.com/codegram/date_validator', branch: 'master'
 
 after_bundle do
   # Rails commands
@@ -15,11 +14,11 @@ after_bundle do
   rails_command 'generate fixtures'
   # rails_command 'generate locales'
   rails_command 'generate erd:install'
-  rails_command 'db:migrate:reset'
-  rails_command 'db:fixtures:load' if options[:skip_listen]
-  rails_command 'schematics:db:seed'
   rails_command 'generate open_api'
-  rails_command 'schematics:docs:generate'
+  rails_command 'db:migrate:reset', env: 'development'
+  rails_command 'db:fixtures:load', env: 'development' if options[:skip_listen]
+  rails_command 'schematics:db:seed', env: 'development'
+  rails_command 'schematics:docs:generate', env: 'test'
 
   # Ignore /doc directory
   append_to_file '.gitignore', '/doc'
@@ -36,8 +35,8 @@ after_bundle do
   run 'yarn add flag-icon-css@3.5.0'
 
   # Git
-  run 'git add -A'
-  run "git commit -m 'initial commit'"
+  git add: '-A'
+  git commit: "-m 'initial commit'"
 
   # Security
   run 'brakeman --no-pager'
@@ -47,5 +46,4 @@ after_bundle do
 
   # Tests
   run 'rake test'
-  run 'rake test:system'
 end
