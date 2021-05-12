@@ -5,14 +5,22 @@ pipelines:
     - parallel:
       - step:
           name: Lint code
+          caches:
+            - bundler
           script:
+            - bundle install
             - bundle exec rubocop
       - step:
           name: Code smells
+          caches:
+            - bundler
           script:
+            - bundle install
             - bundle exec reek
       - step:
           name: Test
+          caches:
+            - bundler
           script:
             - bundle install
             - bundle exec rspec
