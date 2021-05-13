@@ -12,12 +12,6 @@ module Schematics
       def viewer
         :tree
       end
-
-      protected
-
-      def default_generators
-        super.append "rails g migration add_ancestry_to_#{name.pluralize} ancestry:string"
-      end
     end
   end
 end

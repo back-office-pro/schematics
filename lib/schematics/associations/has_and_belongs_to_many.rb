@@ -23,12 +23,6 @@ module Schematics
           #{type} :#{name}
         RUBY
       end
-
-      def generator
-        <<~SHELL
-          rails g migration create_join_table_#{entity.name.pluralize}_#{name} #{entity.name.pluralize} #{name}:join_table_uuid
-        SHELL
-      end
     end
   end
 end

@@ -1,7 +1,13 @@
+require 'schematics/system'
+
 namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do
-    Schematics::Schema.instance.generate
+    Schematics::Schema
+      .instance
+      .sorted_entities
+      .flat_map(&Schematics::System.method(:generate))
+      .each(&method(:system))
   end
 
   namespace :db do

@@ -40,10 +40,4 @@ describe Schematics::Associations::HasAndBelongsToMany do
       has_and_belongs_to_many :permissions
     RUBY
   end
-
-  its(:generator) do
-    is_expected.to eq <<~SHELL
-      rails g migration create_join_table_roles_permissions roles permissions:join_table_uuid
-    SHELL
-  end
 end

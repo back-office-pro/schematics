@@ -15,18 +15,6 @@ describe Schematics::Entities::Tree do
     ]
   end
 
-  its(:generators) do
-    is_expected.to eq(
-      [
-        'rails g scaffold directory schema:directory_name --skip-resource-route',
-        'rails g rspec:acceptance directory',
-        'rails g migration add_deleted_at_to_directories deleted_at:datetime',
-        'rails g migration add_slug_to_directories slug:string:uniq',
-        'rails g migration add_ancestry_to_directories ancestry:string',
-      ]
-    )
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]

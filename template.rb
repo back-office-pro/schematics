@@ -15,10 +15,10 @@ after_bundle do
   # rails_command 'generate locales'
   rails_command 'generate erd:install'
   rails_command 'generate open_api'
-  rails_command 'db:migrate:reset', env: 'development'
-  rails_command 'db:fixtures:load', env: 'development' if options[:skip_listen]
-  rails_command 'schematics:db:seed', env: 'development'
-  rails_command 'schematics:docs:generate', env: 'test'
+  rails_command 'db:migrate:reset'
+  rails_command 'db:fixtures:load' if options[:skip_listen]
+  rails_command 'schematics:db:seed'
+  rails_command 'schematics:docs:generate'
 
   # Ignore /doc directory
   append_to_file '.gitignore', '/doc'

@@ -44,8 +44,7 @@ module Schematics
                   :descriptor,
                   :attributes,
                   :virtuals,
-                  :associations,
-                  :generators
+                  :associations
 
       MISSING_REGEX = /([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
 
@@ -97,7 +96,6 @@ module Schematics
         @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, **attribute) }
         @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, **virtual) }
         @descriptor = Descriptor.create(self, descriptor)
-        @generators = default_generators + @associations.flat_map(&:generator)
       end
 
       def method_missing(method_name, *args, &block)
@@ -262,15 +260,6 @@ module Schematics
 
       def elasticsearchable_elements
         searchable_elements.map(&:name).map(&:to_sym)
-      end
-
-      def default_generators
-        [
-          "rails g scaffold #{name} #{migratable_attributes.map(&:to_s).join(' ')} --skip-resource-route", # rubocop:disable Layout/LineLength
-          "rails g rspec:acceptance #{name}",
-          "rails g migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime",
-          "rails g migration add_slug_to_#{name.pluralize} slug:string:uniq",
-        ]
       end
     end
   end

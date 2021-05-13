@@ -44,27 +44,25 @@ module Schematics
 
     def load_routes
       context = binding.of_caller(2).method(:eval)
-      routes.each(&context)
-    end
-
-    def generate
-      @entities
-        .sort_by(&:weight)
-        .reverse
-        .flat_map(&:generators)
-        .each(&method(:system))
+      sorted_entities
+        .map(&:route)
+        .each(&context)
     end
 
     def to_s
-      @entities
-        .sort_by(&:weight)
-        .reverse
+      sorted_entities
         .map(&:to_s)
         .join("\n")
     end
 
     def valid?
       schemer.valid?(data)
+    end
+
+    def sorted_entities
+      @entities
+        .sort_by(&:weight)
+        .reverse
     end
 
     private
@@ -83,13 +81,6 @@ module Schematics
       file_path = File.expand_path('../../spec/data.json', __dir__)
       file = File.read(file_path)
       JSON.parse(file, symbolize_names: true)
-    end
-
-    def routes
-      @entities
-        .sort_by(&:weight)
-        .reverse
-        .map(&:route)
     end
 
     def add_inverse_entity_to_association_attributes
