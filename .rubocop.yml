@@ -6,23 +6,21 @@ Layout/DotPosition:
   Enabled: true
   EnforcedStyle: leading
 Layout/EmptyLineAfterGuardClause:
-  Enabled: false
+  Enabled: false # TODO enable
 Style/Documentation:
   Enabled: false
-Style/GuardClause:
-  Enabled: true
-Style/IfUnlessModifier:
+Style/ReturnNil:
   Enabled: true
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/FrozenStringLiteralComment:
-  Enabled: false
+  Enabled: false # TODO enable
 Layout/LineLength:
   Max: 100
 RSpec/ExampleLength:
-  Enabled: false
+  Max: 15
 Metrics/BlockLength:
   IgnoredMethods:
     - describe
@@ -33,15 +31,15 @@ Metrics/BlockLength:
     - put
     - context
 Metrics/MethodLength:
-  Enabled: false
+  Max: 45
 Metrics/ClassLength:
-  Enabled: false
+  Max: 270
 RSpec/MultipleExpectations:
   Max: 2
 Metrics/CyclomaticComplexity:
   Max: 8
 Metrics/AbcSize:
-  Enabled: false
+  Max: 72
 Metrics/ParameterLists:
   Max: 7
 Performance/MethodObjectAsBlock:
