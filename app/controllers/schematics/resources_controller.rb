@@ -33,7 +33,7 @@ module Schematics
     def index
       page = params.fetch(:page, 1)
       per_page = params.fetch(:per_page, 25)
-      @resources = model_class.search(**search_params.merge(page: page, per_page: per_page))
+      @resources = model_class.search **search_params.merge(page: page, per_page: per_page)
       @pagy = Pagy.new_from_searchkick(@resources)
       respond_to do |format|
         format.html
@@ -191,7 +191,7 @@ module Schematics
 
     def autocomplete
       field = params[:field].to_sym
-      @resources = model_class.search(**search_params.merge(load: false, select: field))
+      @resources = model_class.search **search_params.merge(load: false, select: field)
       render json: @resources.map(&field).uniq
     end
 
