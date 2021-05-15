@@ -17,7 +17,7 @@ module Schematics
                                   .map(&:squish)
       end
 
-      def destroy(entity)
+      def destroy_entity(entity)
         [
           destroy_scaffold(entity.name),
           destroy_rspec_acceptance(entity.name),

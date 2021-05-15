@@ -69,8 +69,8 @@ describe Schematics::System do
     end
   end
 
-  describe '.destroy' do
-    subject { system.destroy(entity) }
+  describe '.destroy_entity' do
+    subject { system.destroy_entity(entity) }
 
     let(:expected_command_lines) do
       [
