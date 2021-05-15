@@ -60,7 +60,7 @@ describe Schematics::Attributes::References do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      user&.full_name&.searchize
+      user&.full_name&.parameterize(separator: ' ')
     RUBY
   end
 

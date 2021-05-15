@@ -23,7 +23,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}&.#{descriptor.name}&.searchize
+          #{name}&.#{descriptor.name}&.parameterize(separator: ' ')
         RUBY
       end
 

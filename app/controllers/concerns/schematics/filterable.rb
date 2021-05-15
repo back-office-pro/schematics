@@ -35,7 +35,7 @@ module Schematics
       in lte:
         { lte: lte.to_f }
       else
-        /.*#{value.searchize}.*/
+        /.*#{value.parameterize(separator: ' ')}.*/
       end
     end
   end

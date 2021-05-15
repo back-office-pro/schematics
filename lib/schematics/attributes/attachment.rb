@@ -38,7 +38,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          (#{name}.filename.to_s.searchize if #{name}.attached?)
+          (#{name}.filename.to_s.parameterize(separator: ' ') if #{name}.attached?)
         RUBY
       end
 

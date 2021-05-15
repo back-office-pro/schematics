@@ -34,7 +34,7 @@ describe Schematics::Attributes::Email do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      email&.searchize
+      email&.parameterize(separator: ' ')
     RUBY
   end
 

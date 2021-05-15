@@ -27,7 +27,7 @@ describe Schematics::Attributes::Text do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      content&.searchize
+      content&.parameterize(separator: ' ')
     RUBY
   end
 end

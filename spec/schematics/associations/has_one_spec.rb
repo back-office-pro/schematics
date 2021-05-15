@@ -49,7 +49,7 @@ describe Schematics::Associations::HasOne do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      entity&.type&.searchize
+      entity&.type&.parameterize(separator: ' ')
     RUBY
   end
 

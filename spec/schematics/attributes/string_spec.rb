@@ -29,7 +29,7 @@ describe Schematics::Attributes::String do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      last_name&.searchize
+      last_name&.parameterize(separator: ' ')
     RUBY
   end
 

@@ -47,7 +47,7 @@ describe Schematics::Associations::HasOneThrough do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      schema&.title&.searchize
+      schema&.title&.parameterize(separator: ' ')
     RUBY
   end
 
