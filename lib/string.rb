@@ -1,9 +1,5 @@
 class String
   def searchize
-    squish.parameterize(separator: ' ')
-  end
-
-  def regexize
-    /.*#{searchize}.*/
+    parameterize(separator: ' ')
   end
 end
