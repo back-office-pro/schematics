@@ -260,5 +260,18 @@
                 }
             ]
         }
+    ],
+    "migrations": [
+        {
+            "action": "destroy_entity_attribute",
+            "entity": "product",
+            "attribute": "description",
+            "timestamp": 20210515130024
+        },
+        {
+            "action": "destroy_entity",
+            "entity": "client",
+            "timestamp": 20210515130024
+        }
     ]
 }

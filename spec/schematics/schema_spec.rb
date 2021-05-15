@@ -16,6 +16,7 @@ describe Schematics::Schema do
       {
         charts: [],
         stats: [],
+        migrations: [],
         entities: [
           {
             name: 'user',

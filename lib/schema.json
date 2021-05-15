@@ -64,6 +64,24 @@
             "required": ["name", "attributes"],
             "type": "object"
         },
+        "migration": {
+            "definitions": {
+                "action": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "attribute": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                }
+            },
+            "required": ["action", "entity", "timestamp"],
+            "type": "object"
+        },
         "virtual_option": {
             "definitions": {
                 "scale": {
@@ -159,6 +177,12 @@
         "entities": {
             "items": {
                 "$ref": "#/definitions/entity"
+            },
+            "type": "array"
+        },
+        "migrations": {
+            "items": {
+                "$ref": "#/definitions/migration"
             },
             "type": "array"
         }

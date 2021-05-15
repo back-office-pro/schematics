@@ -3,6 +3,7 @@ require 'schematics/entities/tree'
 require 'schematics/entities/singleton'
 require 'schematics/graphics/chart'
 require 'schematics/graphics/stat'
+require 'schematics/migration'
 require 'json_schemer'
 require 'singleton'
 
@@ -10,7 +11,7 @@ module Schematics
   class Schema
     include Singleton
     delegate :schemer, to: :class, private: true
-    attr_reader :entities, :charts, :stats
+    attr_reader :entities, :charts, :stats, :migrations
 
     class << self
       delegate :validate, to: :schemer, private: true
@@ -24,6 +25,7 @@ module Schematics
       @entities = data[:entities].map { |entity| Entities::Entity.create(**entity) }
       @charts = data[:charts].map { |chart| Graphics::Chart.create(self, **chart) }
       @stats = data[:stats].map { |stat| Graphics::Stat.create(self, **stat) }
+      @migrations = data[:migrations].map { |migration| Migration.create(self, **migration) }
       add_inverse_entity_to_association_attributes
       add_has_and_belongs_to_many_associations
       add_inverse_associations
