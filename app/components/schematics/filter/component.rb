@@ -10,7 +10,7 @@ module Schematics
             Checkbox::Component.new(field: field, model_class: model_class)
           when Behaviours::Rangeable
             Range::Component.new(field: field, model_class: model_class)
-          when Attributes::Enum
+          when Attributes::Enum, Attributes::Country
             Dropdown::Component.new(field: field, model_class: model_class)
           else
             Typeahead::Component.new(field: field, model_class: model_class)
