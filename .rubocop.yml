@@ -30,6 +30,7 @@ Metrics/BlockLength:
     - after_initialize
     - put
     - context
+    - namespace
 Metrics/MethodLength:
   Max: 45
 Metrics/ClassLength:
