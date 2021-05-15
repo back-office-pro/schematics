@@ -9,7 +9,7 @@ module Schematics
       @query = params[:query]
       searches = Schema.instance.entities.map do |entity|
         entity.class_name.constantize.search(
-          @query.searchize,
+          @query,
           includes: entity.includes,
           match: :word_middle,
           suggest: true,
