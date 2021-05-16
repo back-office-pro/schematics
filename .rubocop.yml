@@ -50,3 +50,4 @@ AllCops:
   NewCops: enable
   Exclude:
     - spec/dummy/**/*
+    - vendor/**/*

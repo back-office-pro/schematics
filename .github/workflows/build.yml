@@ -1,9 +1,7 @@
 name: Build
-
 on:
   - push
   - pull_request
-
 jobs:
   rubocop:
     name: Rubocop
@@ -25,7 +23,6 @@ jobs:
           bundler-cache: true
       - name: Run Reek
         run: bundle exec reek
-
   rspec:
     name: Rspec
     runs-on: ubuntu-latest
