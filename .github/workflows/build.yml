@@ -9,20 +9,20 @@ jobs:
     name: Rubocop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
       - name: Run Rubocop
         run: bundle exec rubocop
   reek:
     name: Reek
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
       - name: Run Reek
         run: bundle exec reek
 
@@ -30,9 +30,9 @@ jobs:
     name: Rspec
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
       - name: Run tests
         run: bundle exec rspec ./spec/schematics
