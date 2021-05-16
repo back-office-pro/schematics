@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Run Rubocop
+        run: bundle exec rubocop
+  reek:
+    name: Reek
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Run Reek
+        run: bundle exec reek
+
+  rspec:
+    name: Rspec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Run tests
+        run: bundle exec rspec ./spec/schematics
