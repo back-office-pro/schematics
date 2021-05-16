@@ -7,10 +7,15 @@ Dependencies choices details.
 :star: **searchkick**
 
 :+1: Most recent and popular solution
+
 :+1: Most performant
+
 :+1: Suggestions
+
 :+1: Scalable
+
 :+1: Easier eager loading, no need for joins
+
 :+1: Enable search in *Text* and *RichText* without newlines and HTML tags
 
 :-1: We need the elasticsearch daemon
@@ -18,9 +23,11 @@ Dependencies choices details.
 ~~ransack~~
 
 :+1: More robust than has_scope
+
 :+1: More search patterns (_cont, _matches, _any...)
 
 :-1: We need to monkey patch sorting by alias
+
 :-1: Not so much maintained
 
 ~~has_scope~~
@@ -34,11 +41,13 @@ Dependencies choices details.
 :star: **rspec + rspec_api_documentation**
 
 :+1: Rspec is the most popular testing framework
+
 :+1: Better for gem testing
 
 :star: **minitest + fixtures**
 
 :+1: Built-in
+
 :+1: Suitable for generated application
 
 ### API Documentation
@@ -52,6 +61,7 @@ Dependencies choices details.
 :star: **pagy**
 
 :+1: Most performant
+
 :+1: Most recent
 
 ~~kaminari~~
@@ -65,6 +75,7 @@ Dependencies choices details.
 ~~from scratch~~
 
 :-1: Works badly with `ActionText` and `Attachment`
+
 :-1: We need `olive_banch` to camelize keys
 
 ~~fast_jsonapi~~
@@ -128,6 +139,7 @@ Dependencies choices details.
 :star: **from scratch**
 
 :+1: Most personalizable solution
+
 :+1: We can use `User` from core system
 
 ~~devise + devise_auth_token~~
