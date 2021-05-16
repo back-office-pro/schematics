@@ -3,7 +3,7 @@ name: Linters
 on: [push]
 
 jobs:
-  build:
+  rubucop:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -12,4 +12,17 @@ jobs:
         with:
           action_config_path: '.github/config/rubocop_linter_action.yml'
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  reek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Reek
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+      - name: reek
+        uses: reviewdog/action-reek@v1
+        with:
+          REEK_VERSION: Gemfile
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
