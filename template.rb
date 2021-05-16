@@ -1,5 +1,5 @@
 # Gems
-gem 'schematics', path: '/Users/max/bitbucket/schematics'
+gem 'schematics', path: '/Users/max/github/schematics'
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
 
 after_bundle do
