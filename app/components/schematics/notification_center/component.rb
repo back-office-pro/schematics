@@ -4,6 +4,9 @@ module Schematics
       delegate :fa_icon, :current_user, :current_ability, to: :helpers
       delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :updated_at, to: :current_user
+      delegate :versions_path,
+               :preferences_versions_path,
+               to: 'Schematics::Engine.routes.url_helpers'
 
       def versions
         PaperTrail::Version.timeline(ability: current_ability).take(10)

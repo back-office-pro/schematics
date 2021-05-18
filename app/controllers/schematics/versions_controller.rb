@@ -15,5 +15,7 @@ module Schematics
       @version.reify&.save! || @version.item.really_destroy!
       redirect_to @version.item
     end
+
+    def preferences; end
   end
 end
