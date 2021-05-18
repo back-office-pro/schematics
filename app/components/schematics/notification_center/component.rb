@@ -5,7 +5,7 @@ module Schematics
       delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :updated_at, to: :current_user
       delegate :versions_path,
-               :versions_preferences_path,
+               :preferences_versions_path,
                to: 'Schematics::Engine.routes.url_helpers'
 
       def versions
