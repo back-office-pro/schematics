@@ -16,7 +16,7 @@ fr:
       restore:
         success: "%{model_name} a été restauré avec succès"
         failure: Une erreur est survenue
-      import:
+      bulk_insert:
         success: "Les %{model_name_plural} ont été importés avec succès"
         failure: Une ou plusieurs erreurs sont survenus durant l'importation des %{model_name_plural}
       not_found: 
