@@ -79,7 +79,11 @@ module Schematics
 
     def bulk_insert
       file = params.require(:import).permit(:file)
-      result = Resources::BulkInsert.call(file: file, model_class: model_class)
+      result = Resources::BulkInsert.call(
+        file: file[:file],
+        model_class: model_class,
+        current_user: current_user
+      )
       @errors = result.errors
       if result.success?
         respond_to do |format|
@@ -92,7 +96,8 @@ module Schematics
       else
         respond_to do |format|
           format.html do
-            flash.now[:alert] = t(result.message)
+            alert = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
+            flash.now[:alert] = alert
             render :import
           end
           format.json { render json: @errors, status: :unprocessable_entity }
