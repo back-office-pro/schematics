@@ -2,7 +2,7 @@ fr:
   routes:
     settings: parametres
     searches: recherche
-    timeline: historique
+    versions: historique
     login: connexion
     profile: profil
     logout: deconnexion
