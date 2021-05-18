@@ -30,6 +30,7 @@ module PaperTrail
       {
         'update' => :edit,
         'create' => :plus,
+        'import' => :cloud_upload_alt,
         'destroy' => :trash,
         'archive' => :archive,
         'restore' => :trash_restore,
