@@ -9,6 +9,7 @@ Schematics::Engine.routes.draw do
     resources :versions, only: %i[index show] do
       member do
         get :revert
+        get :preferences
       end
     end
   end
