@@ -5,7 +5,11 @@ Schematics::Engine.routes.draw do
   localized do
     draw :sessions
     draw :password_resets
-    resource  :timeline, only: :show, controller: :timeline
     resources :searches, only: %i[create show], param: :query
+    resources :versions, only: %i[index show] do
+      member do
+        get :revert
+      end
+    end
   end
 end
