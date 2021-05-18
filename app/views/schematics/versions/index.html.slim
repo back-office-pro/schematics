@@ -1,0 +1,12 @@
+- breadcrumb title, schematics.versions_path
+.row.justify-content-center
+  .col-xl-9.col-md-12
+    ul.timeline.list-unstyled
+      - @versions.each do |version|
+        li
+          .timeline-icon.bg-primary.border.shadow-sm
+            = link_to fa_icon(version.entity.icon, size: "2x"), main_app.polymorphic_path(version.model_class), class: "text-light"
+          .card.shadow-sm
+            .card-body
+              = render Schematics::Version::Component.new(version: version)
+== pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1

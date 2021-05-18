@@ -1,4 +1,4 @@
-.row
+.row data-href=version_path(@version)
   .col-auto.align-self-center
     = link_to render(Schematics::Attachment::Component.create_avatar(attachment: user.avatar)), user
   .col.text-truncate

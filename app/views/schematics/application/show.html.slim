@@ -41,4 +41,13 @@
 - if can?(:update, @resource)
   .mt-4
     - versions = PaperTrail::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
-    = render Schematics::Timeline::Component.new(versions: versions)
+    .row.justify-content-center
+      .col-xl-9.col-md-12
+        ul.timeline.list-unstyled
+          - versions.each do |version|
+            li
+              .timeline-icon.bg-primary.border.shadow-sm.text-light
+                = link_to render(Schematics::Attachment::Component.create_avatar(attachment: version.user.avatar)), version.user
+              .card.shadow-sm
+                .card-body
+                  = render Schematics::Version::Component.new(version: version)

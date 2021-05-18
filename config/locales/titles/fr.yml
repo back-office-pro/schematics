@@ -8,7 +8,8 @@ fr:
       sessions:
         new: Se connecter
         edit: Editer mon profil
-      timeline:
+      versions:
+        index: Historique
         show: Historique
       password_resets:
         new: Mot de passe oublié

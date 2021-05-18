@@ -6,18 +6,6 @@ module Schematics
                                  .reject(&:empty?)
     end
 
-    def confirm_data
-      {
-        confirm: t('schematics.application.delete.title'),
-        text: t('schematics.application.delete.subtitle'),
-        'confirm-button-text': t('schematics.application.form.buttons.confirm'),
-        'cancel-button-text': t('schematics.application.form.buttons.cancel'),
-        'sweet-alert-type': 'error',
-        'allow-outside-click': false,
-        'custom-class': ('disable-animation' if Rails.env.test?),
-      }
-    end
-
     private
 
     def attachments_attributes
