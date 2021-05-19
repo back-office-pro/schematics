@@ -5,3 +5,4 @@ spec/dummy
 doc/
 coverage/
 /config/master.key
+Gemfile.lock
