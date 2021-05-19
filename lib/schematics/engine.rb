@@ -11,6 +11,9 @@ module Schematics
       generator.template_engine nil
       generator.jbuilder nil
     end
+    
+    # Action View
+    config.action_view.raise_on_missing_translations = !Rails.env.production?
 
     # Active Record
     config.active_record.strict_loading_by_default = true
