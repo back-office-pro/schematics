@@ -44,7 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'date_validator', '~> 0.11.0'
   spec.add_dependency 'font_awesome5_rails', '~> 1.3.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
-  spec.add_dependency 'google-cloud-translate', '~> 3.0.3'
+  spec.add_dependency 'google-cloud-translate', '>= 3.0.3', '< 3.3.0'
   spec.add_dependency 'grape-swagger-rails', '~> 0.3.1'
   spec.add_dependency 'groupdate', '~> 5.2.2'
   spec.add_dependency 'humanize', '~> 2.5.1'
