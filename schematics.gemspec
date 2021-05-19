@@ -14,7 +14,6 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0.0'
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
-  spec.add_development_dependency 'rails', '~> 6.1.3.2'
   spec.add_development_dependency 'pg', '~> 1.2.3'
   spec.add_development_dependency 'reek', '~> 6.0.3'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
@@ -62,7 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'phonelib', '~> 0.6.48'
   spec.add_dependency 'rack-attack', '~> 6.5.0'
   spec.add_dependency 'rack-cors', '~> 1.1.1'
-  spec.add_dependency 'rails', '~> 6.1.3'
+  spec.add_dependency 'rails', '~> 6.1.3.2'
   spec.add_dependency 'rails_best_practices', '~> 1.20.1'
   spec.add_dependency 'rails-erd', '~> 1.6.1'
   spec.add_dependency 'rails-i18n', '~> 6.0.0'
