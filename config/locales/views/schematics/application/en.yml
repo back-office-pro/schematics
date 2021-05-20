@@ -1,0 +1,14 @@
+en:  
+  schematics:
+    application:
+      typeahead:
+        not_found: No result
+        pending: Loading...
+      button:
+        tooltip:
+          restore: Restore
+          edit: Edit
+          archive: Archive
+        destroy: Delete permanently
+        confirm: Confirm
+        cancel: Cancel

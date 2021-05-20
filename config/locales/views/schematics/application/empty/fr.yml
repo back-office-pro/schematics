@@ -1,6 +1,0 @@
-fr:
-  schematics:
-    application:
-      empty:
-        title: Aucune donnée disponible
-        did_you_mean: "Vouliez-vous dire :"

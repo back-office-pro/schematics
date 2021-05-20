@@ -1,9 +1,0 @@
-fr:
-  schematics:
-    application:
-      viewers:
-        table:
-          archives: Archives
-          restore: Restaurer
-          edit: Editer
-          archive: Archiver
