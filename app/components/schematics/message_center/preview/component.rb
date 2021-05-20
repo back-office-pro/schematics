@@ -1,7 +1,7 @@
 module Schematics
   module MessageCenter
     module Preview
-      class Component < ::ViewComponent::Base
+      class Component < ApplicationComponent
         def initialize(message:)
           super
           @message = message
