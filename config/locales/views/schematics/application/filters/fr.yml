@@ -1,7 +1,0 @@
-fr:
-  schematics:
-    application:
-      filters:
-        gte: De
-        lte: A
-        filter_by: Filtrer par %{attribute_name}

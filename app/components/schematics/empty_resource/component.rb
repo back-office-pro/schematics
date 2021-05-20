@@ -1,7 +1,6 @@
 module Schematics
   module EmptyResource
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, to: :helpers
+    class Component < ApplicationComponent
       delegate :search_path, to: 'Schematics::Engine.routes.url_helpers'
 
       def initialize(suggestions: [])

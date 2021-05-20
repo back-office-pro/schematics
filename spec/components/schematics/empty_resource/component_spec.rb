@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::EmptyResource::Component, type: :component do
-  subject { render_inline(described_class.new) }
+  subject { render_inline(component) }
 
-  let(:title) { I18n.t('schematics.application.empty.title') }
+  let(:component) { described_class.new }
+  let(:title) { component.translate('.title') }
 
   it { is_expected.to have_selector('h4', text: title) }
 end

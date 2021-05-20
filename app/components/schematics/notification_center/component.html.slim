@@ -4,11 +4,14 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
     - unless unread_count.zero?
       .badge.badge-danger.animated.animate__zoomIn= unread_count
   .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="notifications-dropdown"
-    h5.dropdown-header.font-weight-bold.bg-light= t('.notification_center')
+    h5.dropdown-header.font-weight-bold.bg-light= t('.title')
     .pre-scrollable
       - versions.each do |version|
         .dropdown-item.d-flex.align-items-center
           = render Schematics::Version::Component.new(version: version)
     .dropdown-divider.m-0
-    = link_to t('.edit_notification_preferences'), preferences_versions_path, class: "dropdown-item text-muted text-center small p-2"
-    = link_to t('.show_all'), versions_path, class: "dropdown-item text-muted text-center small p-2"
+    .row.no-gutters
+      .col
+        = link_to t('.edit_preferences'), notification_preferences_path, class: "dropdown-item text-muted text-center small p-2"
+      .col
+        = link_to t('.show_all'), versions_path, class: "dropdown-item text-muted text-center small p-2"

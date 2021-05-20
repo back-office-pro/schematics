@@ -10,7 +10,7 @@
       = f.input :email, prepend: fa_icon(:envelope)
       = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
         span.icon= fa_icon :check
-        span.text= t('schematics.application.form.buttons.confirm')
+        span.text= t('schematics.application.button.confirm')
       = link_to login_path, class: "btn btn-danger btn-sm btn-icon-split" do
         span.icon= fa_icon :times
-        span.text= t('schematics.application.form.buttons.cancel')
+        span.text= t('schematics.application.button.cancel')

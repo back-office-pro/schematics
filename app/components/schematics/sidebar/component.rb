@@ -1,7 +1,7 @@
 module Schematics
   module Sidebar
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, :setting, :user_setting, :current_ability, to: :helpers
+    class Component < ApplicationComponent
+      delegate :setting, :user_setting, to: :helpers
       delegate :entities, to: 'Schematics::Schema.instance'
       delegate :cannot?, to: :current_ability
 

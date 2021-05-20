@@ -19,8 +19,8 @@ module Schematics
       {
         confirm: t('schematics.application.delete.title'),
         text: t('schematics.application.delete.subtitle'),
-        'confirm-button-text': t('schematics.application.form.buttons.confirm'),
-        'cancel-button-text': t('schematics.application.form.buttons.cancel'),
+        'confirm-button-text': t('schematics.application.button.confirm'),
+        'cancel-button-text': t('schematics.application.button.cancel'),
         'sweet-alert-type': 'error',
         'allow-outside-click': false,
         'custom-class': ('disable-animation' if Rails.env.test?),

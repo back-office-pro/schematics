@@ -1,8 +1,6 @@
 module Schematics
   module Attachment
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, to: :helpers
-
+    class Component < ApplicationComponent
       class << self
         def create_avatar(attachment:)
           args = {

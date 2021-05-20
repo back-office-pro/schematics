@@ -1,11 +1,10 @@
 module Schematics
   module NotificationCenter
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, :current_user, :current_ability, to: :helpers
+    class Component < ApplicationComponent
       delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :updated_at, to: :current_user
       delegate :versions_path,
-               :preferences_versions_path,
+               :notification_preferences_path,
                to: 'Schematics::Engine.routes.url_helpers'
 
       def versions

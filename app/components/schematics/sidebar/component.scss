@@ -1,0 +1,52 @@
+.sidebar {
+  z-index: 3;
+  flex: 0 0 14rem;
+  max-width: 14rem;
+  transition: ease-in-out 0.3s;
+  .sidebar-brand {
+    height: 3.5rem;
+    line-height: 3.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .nav-link.active {
+    color: white !important;
+    .list-group-item {
+      .badge {
+        background: #fff !important;
+      }
+    }
+  }
+}
+
+.sidebar-sticky {
+  position: sticky;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  ul.nav {
+    height: calc(100vh - 50px - 3.5rem);
+    overflow-y: auto;
+  }
+  #sidebar-toggle {
+    height: 50px;
+  }
+}
+
+.sidebar.toggled {
+  flex: 0 0 6rem;
+  max-width: 6rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    flex: 0 0 6rem;
+    max-width: 6rem;
+  }
+  #sidebar-toggle {
+    display: none;
+  }
+}

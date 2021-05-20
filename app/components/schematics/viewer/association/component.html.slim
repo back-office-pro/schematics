@@ -26,20 +26,20 @@
                     - if can?(:update, resource)
                       = link_to edit_polymorphic_path(resource),
                         class: "btn btn-primary btn-sm",
-                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.edit') } do
+                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.button.tooltip.edit') } do
                         = fa_icon :edit
                     - if can?(:archive, resource)
                       = link_to fa_icon(:archive),
                         polymorphic_path(resource, action: :archive),
                         method: :delete,
                         class: "btn btn-danger btn-sm",
-                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.viewers.table.archive') }
+                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.button.tooltip.archive') }
                     - if attachment?
                       = form_for @resources.first.record do |f|
                         = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
                           = fields.hidden_field :id, value: resource.id
                           = fields.hidden_field :_destroy, value: true
-                        = f.button :button, class: "btn btn-danger btn-sm", data: confirm_data.merge({ toggle: "tooltip", placement: "top", title: t('schematics.application.show.buttons.destroy') }) do
+                        = f.button :button, class: "btn btn-danger btn-sm", data: confirm_data.merge({ toggle: "tooltip", placement: "top", title: t('schematics.application.button.destroy') }) do
                           = fa_icon(:trash)
                 - entity.listable_elements.sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle

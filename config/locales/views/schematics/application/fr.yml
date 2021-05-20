@@ -1,0 +1,26 @@
+fr:  
+  schematics:
+    application:
+      typeahead:
+        not_found: Aucun résultat
+        pending: Recherche en cours...
+      dropdown:
+        per_page: "%{size} %{model_name} par page"
+      button:
+        tooltip:
+          restore: Restaurer
+          edit: Editer
+          archive: Archiver
+        destroy: Supprimer définitivement
+        confirm: Valider
+        cancel: Annuler
+        add: Ajouter un %{model_name}
+        import: Importer des %{model_name}
+        download_as_csv: Télécharger au format CSV
+        reset_filters: Réinitialiser les filtres
+        edit: Editer
+        download_pdf: Télécharger au format PDF
+      delete:
+        title: Etes-vous sûr ?
+        subtitle: Cette action est irréversible
+        warning: "La suppression du %{model_name} %{resource} entraînera également la suppression définitive des éléments suivants :"

@@ -9,20 +9,20 @@
       .col-auto.mr-1
         = link_to polymorphic_path(@resource, format: :pdf), class: "btn btn-light btn-sm btn-icon-split mr-2" do
           span.icon= fa_icon :file_pdf
-          span.text.d-none.d-lg-inline= t('.buttons.download_pdf')
+          span.text.d-none.d-lg-inline= t('schematics.application.button.download_pdf')
         - if can?(:update, @resource)
           = link_to edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource), class: "btn btn-primary btn-sm btn-icon-split mr-2" do
             span.icon= fa_icon :edit
-            span.text.d-none.d-lg-inline= t('.buttons.edit')
+            span.text.d-none.d-lg-inline= t('schematics.application.button.edit')
         - if can?(:destroy, @resource)
           - if resource_associations.any?
             = link_to polymorphic_path(@resource, action: :delete), class: "btn btn-danger btn-sm btn-icon-split" do
                 span.icon= fa_icon :trash
-                span.text.d-none.d-lg-inline= t('.buttons.destroy')
+                span.text.d-none.d-lg-inline= t('schematics.application.button.destroy')
           - else
             = link_to polymorphic_path(@resource), method: :delete, class: "btn btn-danger btn-sm btn-icon-split", data: confirm_data do
                 span.icon= fa_icon :trash
-                span.text.d-none.d-lg-inline= t('.buttons.destroy')
+                span.text.d-none.d-lg-inline= t('schematics.application.button.destroy')
   .card-body.p-0
     = render template: 'schematics/application/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|

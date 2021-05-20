@@ -1,7 +1,7 @@
 thead
   tr
     th.text-nowrap.text-center.pb-0
-      = t('schematics.application.viewers.table.archives')
+      = t('.archives')
     - entity.listable_elements.sort_by(&:weight).each do |field|
         th.text-nowrap.text-center.pb-0
           = render Schematics::SortLink::Component.new(field: field, model_class: @model_class)

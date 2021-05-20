@@ -1,7 +1,6 @@
 module Schematics
   module Version
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, to: :helpers
+    class Component < ApplicationComponent
       delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :user, :item, :created_at, :icon, to: :@version
 
