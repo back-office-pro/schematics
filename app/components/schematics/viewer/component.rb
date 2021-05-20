@@ -1,7 +1,6 @@
 module Schematics
   module Viewer
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, :current_ability, to: :helpers
+    class Component < ApplicationComponent
       delegate :can?, to: :current_ability
       delegate :klass, to: :@resources
       delegate :entity, to: :klass
