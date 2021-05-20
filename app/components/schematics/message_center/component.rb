@@ -1,7 +1,6 @@
 module Schematics
   module MessageCenter
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, :current_user, to: :helpers
+    class Component < ApplicationComponent
       delegate :updated_at, :received_messages, to: :current_user
 
       def messages
