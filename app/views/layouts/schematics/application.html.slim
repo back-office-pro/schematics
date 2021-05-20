@@ -25,41 +25,11 @@ html
           nav.navbar.navbar-light.navbar-expand.border-0.p-0.sticky-top.shadow-sm
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
-              = form_tag schematics.searches_path, class: "form-inline flex-nowrap pr-3" do
-                = search_field_tag :query,
-                  @query,
-                  required: true,
-                  placeholder: t('.search.placeholder'),
-                  class: "form-control typeahead-search border-0 rounded-0 bg-transparent search"
-                = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
+              = render Schematics::SearchBar::Component.new
               = render Schematics::NotificationCenter::Component.new
               = render Schematics::MessageCenter::Component.new
-              li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
-                a.nav-link.switch-theme.dark role="button"
-                  = fa_icon :moon, class: "fa-lg"
-                a.nav-link.switch-theme.light role="button"
-                  = fa_icon :lightbulb, class: "fa-lg"
-              li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
-                a#account-dropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-                  span.d-none.d-lg-inline.mr-2= current_user.full_name
-                  = render Schematics::Attachment::Component.create_avatar(attachment: current_user.avatar)
-                .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="account-dropdown"
-                  h5.dropdown-header.font-weight-bold.bg-light= t('.dropdown.my_account')
-                  = link_to schematics.profile_path, class: "dropdown-item" do
-                    = fa_icon :user, class: "mr-3"
-                    = t('.dropdown.edit_profile')
-                  - if can?(:read, Setting)
-                    = link_to main_app.edit_settings_path, class: "dropdown-item" do
-                      = fa_icon :cog, class: "mr-3"
-                      = t('.dropdown.settings')
-                  - if current_ability.admin?
-                    = link_to main_app.grape_swagger_rails_path, data: { turbolinks: false }, class: "dropdown-item" do
-                      = fa_icon :project_diagram, class: "mr-3"
-                      = t('.dropdown.api')
-                  .dropdown-divider.m-0
-                  = link_to schematics.logout_path, method: :delete, class: "dropdown-item pb-2" do
-                    = fa_icon :sign_out_alt, class: "mr-3"
-                    = t('.dropdown.logout')
+              = render Schematics::SwitchTheme::Component.new
+              = render Schematics::MyAccount::Component.new
           .container-fluid.my-4.px-4.animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top
