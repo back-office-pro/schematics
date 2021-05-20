@@ -1,7 +1,0 @@
-fr:  
-  schematics:
-    application:
-      delete:
-        title: Etes-vous sûr ?
-        subtitle: Cette action est irréversible
-        warning: "La suppression du %{model_name} %{resource} entraînera également la suppression définitive des éléments suivants :"

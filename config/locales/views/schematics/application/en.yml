@@ -4,6 +4,8 @@ en:
       typeahead:
         not_found: No result
         pending: Loading...
+      dropdown:
+        per_page: "%{size} %{model_name} per page"
       button:
         tooltip:
           restore: Restore
@@ -12,3 +14,13 @@ en:
         destroy: Delete permanently
         confirm: Confirm
         cancel: Cancel
+        add: Add a new %{model_name}
+        import: Import %{model_name}
+        download_as_csv: Download as CSV
+        reset_filters: Reset filters
+        edit: Edit
+        download_pdf: Download PDF
+      delete:
+        title: Are you sure?
+        subtitle: This action is irreversible
+        warning: "Removing the %{model_name} %{resource} will also result in the permanent removal of the following:"
