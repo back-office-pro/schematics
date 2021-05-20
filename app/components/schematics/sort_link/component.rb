@@ -1,7 +1,6 @@
 module Schematics
   module SortLink
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, to: :helpers
+    class Component < ApplicationComponent
       delegate :name, to: :@field
 
       def initialize(field:, model_class:)

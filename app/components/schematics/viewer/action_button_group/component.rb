@@ -1,8 +1,7 @@
 module Schematics
   module Viewer
     module ActionButtonGroup
-      class Component < ::ViewComponent::Base
-        delegate :fa_icon, :current_ability, to: :helpers
+      class Component < ApplicationComponent
         delegate :can?, to: :current_ability
 
         def initialize(resource:)
