@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::Toast::Component, type: :component do
-  subject { render_inline(described_class.new(flash: flash)) }
+  subject { render_inline(component) }
 
+  let(:component) { described_class.new(flash: flash) }
   let(:flash) { [type, message] }
 
   context 'when flash message is a notice' do
     let(:type) { 'notice' }
     let(:message) { 'Logged out!' }
-    let(:title) { I18n.t('schematics.application.notice.title') }
+    let(:title) { component.translate('.notice') }
 
     it { is_expected.to have_css('.border-success') }
     it { is_expected.to have_css('.bg-success') }
@@ -19,7 +20,7 @@ RSpec.describe Schematics::Toast::Component, type: :component do
   context 'when flash message is an alert' do
     let(:type) { 'alert' }
     let(:message) { 'Forbidden!' }
-    let(:title) { I18n.t('schematics.application.alert.title') }
+    let(:title) { component.translate('.alert') }
 
     it { is_expected.to have_css('.border-danger') }
     it { is_expected.to have_css('.bg-danger') }
