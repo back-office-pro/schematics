@@ -8,7 +8,7 @@
             = fa_icon :table, class: "mr-3 ml-3 fa-lg align-middle"
             span.align-middle= title
         .col-auto.mr-1
-          - if @resources.size > 10
+          - if @pagy.count > 10
             = select_tag :per_page,
               options_for_select([10, 25, 50, 100].map { |size| [t('.dropdowns.per_page', size: size, model_name: @model_name_plural), size] }, params.fetch(:per_page, 25)),
               onchange: "$(this.form).submit()",
