@@ -74,13 +74,13 @@ $(document).on('turbolinks:load', function() {
                     notFound: () => `
                         <div class="tt-suggestion tt-selectable text-truncate">
                             <i class="fa fa-exclamation-triangle text-dark fa-fw mr-2"></i>
-                            <%= I18n.t('layouts.schematics.application.search.not_found') %>
+                            <%= I18n.t('schematics.application.typeahead.not_found') %>
                         </div>
                     `,
                     pending: () => `
                         <div class="tt-suggestion tt-selectable text-truncate">
                             <i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>
-                            <%= I18n.t('layouts.schematics.application.search.pending') %>
+                            <%= I18n.t('schematics.application.typeahead.pending') %>
                         </div>
                     `,
                     suggestion: (item) => `
