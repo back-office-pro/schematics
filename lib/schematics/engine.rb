@@ -24,6 +24,7 @@ module Schematics
 
     # Assets
     config.assets.paths << Pagy.root.join('javascripts')
+    config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.precompile += %w[schematics_manifest.js]
 
     # i18n
