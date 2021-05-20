@@ -7,6 +7,7 @@
 //= require font_awesome5
 //= require rails-timeago
 //= require locales/jquery.timeago.fr
+//= require_tree ../../../components/schematics
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
@@ -35,11 +36,6 @@ $(document).on('turbolinks:load', function() {
             $($(this).data('target')).modal('show');
         }
     });
-    $('#sidebar-toggle').on('click', function() {
-        $('.sidebar, .content').toggleClass('toggled');
-        $('.sidebar .d-none').toggleClass('d-md-block');
-        $.post('/dashboard/toggle_sidebar');
-    });
     $('input[type=search]').on('search', function(e) {
         const $target = $(e.target);
         const scope = $target.attr('name');
@@ -48,18 +44,6 @@ $(document).on('turbolinks:load', function() {
             searchParams.delete(scope);
             Turbolinks.visit(window.location.pathname + '?' + searchParams);
         }
-    });
-    $('#notifications-dropdown').has('.badge.badge-danger').on('click', function() {
-        $(this).find('.badge.badge-danger').fadeOut();
-        $.post('/dashboard/read_notifications');
-    });
-    $('.switch-theme').on('click', function() {
-        const $themes = $('link[href*=themes]');
-        const $inactive = $themes.filter('[disabled="disabled"]');
-        const $active = $themes.filter(':not([disabled="disabled"])');
-        $inactive.removeAttr('disabled');
-        setTimeout(() => $active.attr('disabled', 'disabled'), 10);
-        $.post('/dashboard/toggle_theme');
     });
 });
 
