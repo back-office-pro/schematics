@@ -1,7 +1,7 @@
 module Schematics
   module ResourceForm
-    class Component < ::ViewComponent::Base
-      delegate :fa_icon, :rich_text_area_tag, to: :helpers
+    class Component < ApplicationComponent
+      delegate :rich_text_area_tag, to: :helpers
       delegate :new_record?, to: :resource
       delegate :class, to: :resource, prefix: true
       delegate :entity, to: :resource_class
