@@ -1,0 +1,14 @@
+en:
+  content_type: "Allowed file formats:"
+  size: "File size:"
+  less_than: less than
+  dimension: Dimension
+  width: width
+  height: height
+fr:
+  content_type: "Formats fichiers acceptés :"
+  size: "Taille fichier :"
+  less_than: moins de
+  dimension: Dimension
+  width: largeur
+  height: hauteur
