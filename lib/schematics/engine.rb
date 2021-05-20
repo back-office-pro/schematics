@@ -11,9 +11,6 @@ module Schematics
       generator.template_engine nil
       generator.jbuilder nil
     end
-    
-    # Action View
-    config.action_view.raise_on_missing_translations = !Rails.env.production?
 
     # Active Record
     config.active_record.strict_loading_by_default = true
@@ -33,6 +30,7 @@ module Schematics
     config.i18n.default_locale = :fr
     config.i18n.available_locales = %i[fr en]
     config.i18n.load_path += Dir[root.join('config', 'locales', '**', '*.yml')]
+    config.i18n.raise_on_missing_translations = !Rails.env.production?
 
     def credentials
       ActiveSupport::EncryptedConfiguration.new(
