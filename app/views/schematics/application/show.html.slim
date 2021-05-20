@@ -18,11 +18,11 @@
           - if resource_associations.any?
             = link_to polymorphic_path(@resource, action: :delete), class: "btn btn-danger btn-sm btn-icon-split" do
                 span.icon= fa_icon :trash
-                span.text.d-none.d-lg-inline= t('.buttons.destroy')
+                span.text.d-none.d-lg-inline= t('schematics.application.button.destroy')
           - else
             = link_to polymorphic_path(@resource), method: :delete, class: "btn btn-danger btn-sm btn-icon-split", data: confirm_data do
                 span.icon= fa_icon :trash
-                span.text.d-none.d-lg-inline= t('.buttons.destroy')
+                span.text.d-none.d-lg-inline= t('schematics.application.button.destroy')
   .card-body.p-0
     = render template: 'schematics/application/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|
