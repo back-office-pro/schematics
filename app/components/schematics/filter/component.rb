@@ -1,6 +1,6 @@
 module Schematics
   module Filter
-    class Component < ::ViewComponent::Base
+    class Component < ApplicationComponent
       delegate :entity, to: :@model_class
 
       class << self
