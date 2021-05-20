@@ -1,0 +1,7 @@
+= form_tag searches_path, class: "form-inline flex-nowrap pr-3" do
+  = search_field_tag :query,
+    params[:query],
+    required: true,
+    placeholder: t('.placeholder'),
+    class: "form-control typeahead-search border-0 rounded-0 bg-transparent search"
+  = button_tag fa_icon(:search), name: nil, class: "fa-lg btn nav-link"
