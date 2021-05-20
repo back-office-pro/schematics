@@ -24,6 +24,7 @@ describe Schematics::Entities::Singleton do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      extend Pagy::Searchkick
       has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]
       acts_as_paranoid
       searchkick searchable: [:company_name],
