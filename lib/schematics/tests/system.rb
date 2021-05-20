@@ -56,7 +56,7 @@ module Schematics
             click_on I18n.t('schematics.application.index.buttons.add',
                             model_name: model_name.human.downcase)
             fill_form
-            click_on I18n.t('schematics.application.form.buttons.confirm')
+            click_on I18n.t('schematics.application.button.confirm')
             assert_text I18n.t('schematics.resources.create.success',
                                model_name: model_name.human)
           end
@@ -69,17 +69,17 @@ module Schematics
               visit polymorphic_path(model_class)
               click_on I18n.t('schematics.application.show.buttons.edit')
               fill_form
-              click_on I18n.t('schematics.application.form.buttons.confirm')
+              click_on I18n.t('schematics.application.button.confirm')
               assert_text I18n.t('schematics.resources.update.success',
                                  model_name: model_name.human)
             end
           else
             test "updating a #{entity.name}" do
               visit polymorphic_path(model_class)
-              selector = "a[data-title='#{I18n.t('schematics.application.viewers.table.edit')}']"
+              selector = "a[data-title='#{I18n.t('schematics.application.button.tooltip.edit')}']"
               find(selector, match: :first).click
               fill_form
-              click_on I18n.t('schematics.application.form.buttons.confirm')
+              click_on I18n.t('schematics.application.button.confirm')
               assert_text I18n.t('schematics.resources.update.success',
                                  model_name: model_name.human)
             end
@@ -90,7 +90,7 @@ module Schematics
           return if entity.is_a?(Entities::Singleton)
           test "archiving a #{entity.name}" do
             visit polymorphic_path(model_class)
-            title = I18n.t('schematics.application.viewers.table.archive')
+            title = I18n.t('schematics.application.button.tooltip.archive')
             selector = "a[data-title='#{title}']"
             find(selector, match: :first).click
             assert_text I18n.t('schematics.resources.archive.success',
@@ -103,8 +103,8 @@ module Schematics
           test "destroying a #{entity.name}" do
             visit polymorphic_path(model_class)
             page.execute_script("$('*[data-href]').first().click()")
-            click_on I18n.t('schematics.application.show.buttons.destroy')
-            click_on I18n.t('schematics.application.form.buttons.confirm')
+            click_on I18n.t('schematics.application.button.destroy')
+            click_on I18n.t('schematics.application.button.confirm')
             assert_text I18n.t('schematics.resources.destroy.success',
                                model_name: model_name.human)
           end
@@ -125,7 +125,7 @@ module Schematics
         visit login_path
         fill_in I18n.t('simple_form.labels.user.email'), with: email
         fill_in I18n.t('simple_form.labels.user.password'), with: 'secret'
-        click_on I18n.t('schematics.application.form.buttons.confirm')
+        click_on I18n.t('schematics.application.button.confirm')
         assert_text I18n.t('schematics.sessions.create.success')
       end
 
