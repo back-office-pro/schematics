@@ -8,6 +8,10 @@ $flag-icon-css-path: '../flag-icon-css/flags';
 @import "timeline";
 @import "trix";
 @import "best_in_place";
+@import "sidebar/component";
+@import "toast/component";
+@import "notification_center/component";
+@import "message_center/component";
 
 /**
  * Layout
@@ -16,20 +20,6 @@ $flag-icon-css-path: '../flag-icon-css/flags';
 html, body {
   height: 100%;
   font-size: 0.9rem;
-}
-
-.sidebar-sticky {
-  position: sticky;
-  top: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  ul.nav {
-    height: calc(100vh - 50px - 3.5rem);
-    overflow-y: auto;
-  }
-  #sidebar-toggle {
-    height: 50px;
-  }
 }
 
 .navbar {
@@ -57,30 +47,6 @@ html, body {
   background: white;
 }
 
-.sidebar {
-  z-index: 3;
-  flex: 0 0 14rem;
-  max-width: 14rem;
-  transition: ease-in-out 0.3s;
-  .sidebar-brand {
-    height: 3.5rem;
-    line-height: 3.5rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: .05rem;
-    font-weight: 800;
-    background: rgba(0, 0, 0, 0.2);
-  }
-  .nav-link.active {
-    color: white !important;
-    .list-group-item {
-      .badge {
-        background: #fff !important;
-      }
-    }
-  }
-}
-
 .content {
   flex: 0 0 calc(100% - 14rem);
   max-width: calc(100% - 14rem);
@@ -94,27 +60,15 @@ footer {
   height: 50px;
 }
 
-.sidebar.toggled {
-  flex: 0 0 6rem;
-  max-width: 6rem;
-}
-
 .content.toggled {
   flex: 0 0 calc(100% - 6rem);
   max-width: calc(100% - 6rem);
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    flex: 0 0 6rem;
-    max-width: 6rem;
-  }
   .content {
     flex: 0 0 calc(100% - 6rem);
     max-width: calc(100% - 6rem);
-  }
-  #sidebar-toggle {
-    display: none;
   }
 }
 
@@ -230,10 +184,6 @@ footer {
   display: none;
 }
 
-.dropdown-menu[aria-labelledby="notifications-dropdown"], .dropdown-menu[aria-labelledby="messages-dropdown"] {
-  min-width: 300px;
-}
-
 /**
  * Buttons
  */
@@ -296,17 +246,6 @@ label.custom-file-label::after {
 input[type="search"]::-webkit-search-decoration:hover,
 input[type="search"]::-webkit-search-cancel-button:hover {
   cursor:pointer; 
-}
-
-/**
- * Toasts
- */
-
-.toast {
-  position: fixed; 
-  z-index: 4; 
-  right: 1rem; 
-  top: 1rem;
 }
 
 /**
