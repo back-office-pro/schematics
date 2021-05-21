@@ -12,7 +12,7 @@ module Schematics
           format.html do
             redirect_to edit_preferences_path, notice: t(result.message)
           end
-          format.json { head :ok }
+          format.json
         end
       else
         respond_to do |format|
@@ -20,7 +20,10 @@ module Schematics
             flash.now[:alert] = t(result.message)
             render :edit
           end
-          format.json { head :unprocessable_entity }
+          format.json do
+            render json: { errors: [t(result.message)] },
+                   status: :unprocessable_entity
+          end
         end
       end
     end
