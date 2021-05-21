@@ -53,7 +53,10 @@ module Schematics
             flash.now[:alert] = t(result.message)
             render :edit
           end
-          format.json { render json: current_user.errors, status: :unprocessable_entity }
+          format.json do
+            render json: { errors: [t(result.message)] },
+                   status: :unprocessable_entity
+          end
         end
       end
     end

@@ -22,15 +22,24 @@ resource 'Password Resets' do
       example 'Creating a new password reset' do
         do_request
         expect(response_status).to eq(204)
+        expect(response_body).to be_blank
       end
     end
 
     context 'when email does not exist' do
       let(:email) { 'foo@foo.com' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.password_resets.create.failure'),
+          ],
+        }
+      end
 
       example 'Unprocessable entity' do
         do_request
         expect(response_status).to eq(422)
+        expect(json_response).to eq(expected_response)
       end
     end
   end
@@ -55,16 +64,25 @@ resource 'Password Resets' do
         example 'Updating the password' do
           do_request
           expect(response_status).to eq(204)
+          expect(response_body).to be_blank
         end
       end
 
       context 'when password is not equal to password_confirmation' do
         let(:password) { 'azerty' }
         let(:password_confirmation) { 'qwerty' }
+        let(:expected_response) do
+          {
+            'errors' => [
+              I18n.t('schematics.resources.update.failure'),
+            ],
+          }
+        end
 
         example 'Unprocessable entity' do
           do_request
           expect(response_status).to eq(422)
+          expect(json_response).to eq(expected_response)
         end
       end
     end
@@ -75,6 +93,7 @@ resource 'Password Resets' do
       example 'Not found' do
         do_request
         expect(response_status).to eq(404)
+        expect(response_body).to be_blank
       end
     end
   end

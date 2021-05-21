@@ -18,6 +18,7 @@ resource 'Searches' do
     example 'Success' do
       do_request
       expect(response_status).to eq(200)
+      expect(json_response).to be_empty
     end
   end
 end

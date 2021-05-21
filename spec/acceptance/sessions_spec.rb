@@ -35,6 +35,7 @@ resource 'Sessions' do
       example 'Not authorized' do
         do_request
         expect(response_status).to eq(401)
+        expect(response_body).to be_blank
       end
     end
   end
@@ -60,15 +61,24 @@ resource 'Sessions' do
       example 'update profile' do
         do_request
         expect(response_status).to eq(204)
+        expect(response_body).to be_blank
       end
     end
 
     context 'when current_password is wrong' do
       let(:current_password) { 'qwerty' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.sessions.update.failure'),
+          ],
+        }
+      end
 
       example 'update profile' do
         do_request
         expect(response_status).to eq(422)
+        expect(json_response).to eq(expected_response)
       end
     end
   end
