@@ -35,7 +35,7 @@ module Schematics
     end
 
     def cast_param_value(value)
-      return value == 'true' if value.in?(['true', 'false'])
+      return value == 'true' if value.in?(%w[true false])
       value
     end
 
