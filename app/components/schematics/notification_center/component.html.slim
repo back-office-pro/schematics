@@ -10,8 +10,4 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
         .dropdown-item.d-flex.align-items-center
           = render Schematics::Version::Component.new(version: version)
     .dropdown-divider.m-0
-    .row.no-gutters
-      .col
-        = link_to t('.edit_preferences'), notification_preferences_path, class: "dropdown-item text-muted text-center small p-2"
-      .col
-        = link_to t('.show_all'), versions_path, class: "dropdown-item text-muted text-center small p-2"
+    = link_to t('.show_all'), versions_path, class: "dropdown-item text-muted text-center small p-2"
