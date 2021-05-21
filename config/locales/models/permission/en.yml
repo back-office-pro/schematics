@@ -16,3 +16,4 @@ en:
           import: Import
           destroy: Delete
           archive: Archive
+          restore: Restore

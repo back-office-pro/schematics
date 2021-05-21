@@ -16,3 +16,4 @@ fr:
           import: Importer
           destroy: Supprimer
           archive: Archiver
+          restore: Restaurer
