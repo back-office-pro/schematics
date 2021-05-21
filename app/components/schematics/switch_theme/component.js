@@ -5,6 +5,12 @@ $(document).on('turbolinks:load', function() {
         const $active = $themes.filter(':not([disabled="disabled"])');
         $inactive.removeAttr('disabled');
         setTimeout(() => $active.attr('disabled', 'disabled'), 10);
-        $.post('/dashboard/toggle_theme');
+        $.ajax({
+            url: '/preferences',
+            type: 'PUT',
+            data: JSON.stringify({ preferences: { theme: $inactive.attr('id') } }),
+            contentType : 'application/json',
+            dataType: 'json'
+        });
     });
 });
