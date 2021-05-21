@@ -22,7 +22,7 @@ html
         .col.bg-primary.sidebar class=('toggled' if user_setting(:sidebar_toggled))
           = render Schematics::Sidebar::Component.new
         .col.bg-light.content class=('toggled' if user_setting(:sidebar_toggled))
-          nav.navbar.navbar-light.navbar-expand.border-0.p-0.sticky-top.shadow-sm
+          nav.navbar.navbar-light.navbar-expand.border-0.p-0.sticky-top
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
               = render Schematics::SearchBar::Component.new
