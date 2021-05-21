@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixturesGenerator < Rails::Generators::Base
   def generate_action_text_rich_texts
     Schematics::Schema

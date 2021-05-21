@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/text'
 require 'schematics/behaviours/listable'
 require 'active_support/core_ext/securerandom'
@@ -24,6 +26,7 @@ module Schematics
 
       def default
         return SecureRandom.base58 if unique?
+
         super
       end
 

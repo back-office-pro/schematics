@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class ApplicationSerializer < ActiveModel::Serializer
     delegate :model_class, to: :class, private: true

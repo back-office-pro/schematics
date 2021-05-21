@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
@@ -28,6 +30,7 @@ module Schematics
 
       def default
         return 'MyRichText' if required?
+
         super
       end
 

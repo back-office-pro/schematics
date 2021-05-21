@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
 
 Rack::Attack.safelist('allow from localhost') do |req|

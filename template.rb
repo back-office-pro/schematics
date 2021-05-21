@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Gems
 gem 'schematics', path: '/Users/max/github/schematics'
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'

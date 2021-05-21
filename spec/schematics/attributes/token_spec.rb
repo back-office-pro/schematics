@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/token'
 require 'schematics/entities/entity'
 

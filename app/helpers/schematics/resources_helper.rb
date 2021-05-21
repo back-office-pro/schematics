@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module ResourcesHelper
     def resource_associations(only_required: false)

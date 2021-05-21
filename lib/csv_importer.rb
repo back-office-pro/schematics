@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class CsvImporter
@@ -13,8 +15,10 @@ class CsvImporter
 
   def import
     return :content_type_error unless @file.content_type == 'text/csv'
+
     data = validate(read_csv_data)
     return :import_error if @errors.any?
+
     insert_all_paper_trail_versions(@model_class.insert_all(data).pluck('id').flatten) # rubocop:disable Rails/SkipsModelValidations
     @model_class.reindex
     :ok

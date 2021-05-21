@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/virtuals/calculation'
 
 describe Schematics::Virtuals::Calculation do

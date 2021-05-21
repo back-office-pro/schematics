@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module Fillable
     extend ActiveSupport::Concern
@@ -13,6 +15,7 @@ module Schematics
 
     def permitted_params
       return entity.permitted_json_params if request.format.json?
+
       entity.permitted_params
     end
 

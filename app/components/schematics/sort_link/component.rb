@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module SortLink
     class Component < ApplicationComponent
@@ -12,12 +14,14 @@ module Schematics
       def icon
         return :sort_down if asc?
         return :sort_up   if desc?
+
         @field.icon
       end
 
       def icon_text_class
         return :danger  if asc?
         return :success if desc?
+
         :dark
       end
 
@@ -37,6 +41,7 @@ module Schematics
 
       def new_sorted_params
         return name unless sorted_params
+
         new_params = revert_sorted_params
         new_params << name if new_param?
         new_params.join(',')
@@ -46,6 +51,7 @@ module Schematics
         sorted_params.map do |sorted_param|
           next "-#{name}" if sorted_param == name
           next name if sorted_param == "-#{name}"
+
           sorted_param
         end
       end

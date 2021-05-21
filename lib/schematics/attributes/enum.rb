@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
@@ -40,6 +42,7 @@ module Schematics
 
       def format(value)
         return unless value
+
         I18n.t value.to_sym,
                default: value.humanize,
                scope: [:activerecord, :attributes, @entity.class_name.underscore, @name.pluralize]

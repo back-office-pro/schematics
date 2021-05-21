@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class CsvSerializer
     delegate :klass, to: :@resources, private: true

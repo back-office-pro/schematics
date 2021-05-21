@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/association'
 require 'schematics/behaviours/fillable'
 

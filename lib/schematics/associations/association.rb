@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/module/delegation'
 
 module Schematics
@@ -42,6 +44,7 @@ module Schematics
 
       def name
         return [inverse_of, source].join('_') if @prefixed
+
         source
       end
 

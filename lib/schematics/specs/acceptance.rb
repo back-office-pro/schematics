@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/specs/helpers'
 
 module Schematics
@@ -79,6 +81,7 @@ module Schematics
 
       def test_index
         return if entity.is_a?(Entities::Singleton)
+
         route_summary "#{entity.name.pluralize} list"
         get polymorphic_path(model_class) do
           parameter :with_deleted, 'Display archives', with_example: true
@@ -151,6 +154,7 @@ module Schematics
 
       def test_create
         return if entity.is_a?(Entities::Singleton)
+
         route_summary "Create #{entity.name}"
         post polymorphic_path(model_class) do
           entity.fillable_elements.each do |element|
@@ -227,6 +231,7 @@ module Schematics
 
       def test_destroy
         return if entity.is_a?(Entities::Singleton)
+
         route_summary "Destroy #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id" do
           context401
@@ -244,6 +249,7 @@ module Schematics
 
       def test_archive
         return if entity.is_a?(Entities::Singleton)
+
         route_summary "Archive #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id/archive" do
           context401
@@ -261,6 +267,7 @@ module Schematics
 
       def test_restore
         return if entity.is_a?(Entities::Singleton)
+
         route_summary "Restore #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id/restore" do
           context401

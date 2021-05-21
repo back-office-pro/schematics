@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module PreferencesTable
     class Component < ApplicationComponent

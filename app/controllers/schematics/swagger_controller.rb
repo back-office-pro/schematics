@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class SwaggerController < ApplicationController
     def open_api

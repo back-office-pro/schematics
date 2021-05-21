@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/enumerable'
 
 module Schematics
@@ -13,6 +15,7 @@ module Schematics
 
       def validate
         return if validators.empty?
+
         <<~RUBY
           validates :#{name}, #{validators}
         RUBY

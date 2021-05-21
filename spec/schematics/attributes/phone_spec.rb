@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/phone'
 require 'schematics/entities/entity'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/number'
 
 describe Schematics::Tokens::Number do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Array
   def select_is_a?(*klasses)
     select { |x| klasses.any? { |klass| x.is_a?(klass) } }

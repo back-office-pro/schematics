@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/associations/association_through'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'

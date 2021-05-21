@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 
 module Schematics
@@ -9,6 +11,7 @@ module Schematics
 
       def to_str
         return super unless options.key?(:default)
+
         <<~RUBY
           store :#{name}, accessors: #{options[:default].keys}, prefix: true
         RUBY

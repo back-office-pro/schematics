@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module Tests
     class System < ::ApplicationSystemTestCase
@@ -41,6 +43,7 @@ module Schematics
 
         def test_index
           return if entity.is_a?(Entities::Singleton)
+
           test 'visiting the index' do
             visit polymorphic_path(model_class)
             title = I18n.t('titles.schematics.resources.index',
@@ -51,6 +54,7 @@ module Schematics
 
         def test_create
           return if entity.is_a?(Entities::Singleton)
+
           test "creating a #{entity.name}" do
             visit polymorphic_path(model_class)
             click_on I18n.t('schematics.application.index.buttons.add',
@@ -88,6 +92,7 @@ module Schematics
 
         def test_archive
           return if entity.is_a?(Entities::Singleton)
+
           test "archiving a #{entity.name}" do
             visit polymorphic_path(model_class)
             title = I18n.t('schematics.application.button.tooltip.archive')
@@ -100,6 +105,7 @@ module Schematics
 
         def test_destroy
           return if entity.is_a?(Entities::Singleton)
+
           test "destroying a #{entity.name}" do
             visit polymorphic_path(model_class)
             page.execute_script("$('*[data-href]').first().click()")

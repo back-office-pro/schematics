@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module Tests
     class Controller < ::ActionDispatch::IntegrationTest
@@ -46,6 +48,7 @@ module Schematics
 
         def test_index_api
           return if entity.is_a?(Entities::Singleton)
+
           test 'should get API index' do
             login formats: :json
             get polymorphic_path(model_class), headers: authorization_header, as: :json
@@ -55,6 +58,7 @@ module Schematics
 
         def test_index_csv
           return if entity.is_a?(Entities::Singleton)
+
           test 'should get CSV index' do
             login
             get polymorphic_path(model_class), as: :csv
@@ -64,6 +68,7 @@ module Schematics
 
         def test_index
           return if entity.is_a?(Entities::Singleton)
+
           test 'should get index' do
             login
             get polymorphic_path(model_class)
@@ -97,6 +102,7 @@ module Schematics
 
         def test_not_found
           return if entity.is_a?(Entities::Singleton)
+
           test "should throw #{entity.name} not found" do
             login
             get polymorphic_path(model_class).concat('/0')
@@ -106,6 +112,7 @@ module Schematics
 
         def test_not_found_api
           return if entity.is_a?(Entities::Singleton)
+
           test "should throw API #{entity.name} not found" do
             login formats: :json
             get polymorphic_path(model_class).concat('/0'),
@@ -144,6 +151,7 @@ module Schematics
 
         def test_new
           return if entity.is_a?(Entities::Singleton)
+
           test 'should get new' do
             login
             get new_polymorphic_path(model_class)
@@ -153,6 +161,7 @@ module Schematics
 
         def test_create_api
           return if entity.is_a?(Entities::Singleton)
+
           test "should create API #{entity.name}" do
             assert_difference("#{model_class.name}.count") do
               login formats: :json
@@ -167,6 +176,7 @@ module Schematics
 
         def test_create
           return if entity.is_a?(Entities::Singleton)
+
           test "should create #{entity.name}" do
             assert_difference("#{model_class.name}.count") do
               login
@@ -178,6 +188,7 @@ module Schematics
 
         def test_delete
           return if entity.is_a?(Entities::Singleton)
+
           test 'should get delete' do
             login
             get polymorphic_path(record, action: :delete)
@@ -187,6 +198,7 @@ module Schematics
 
         def test_destroy_api
           return if entity.is_a?(Entities::Singleton)
+
           test "should destroy API #{entity.name}" do
             assert_difference("#{model_class.name}.count", -1) do
               login formats: :json
@@ -200,6 +212,7 @@ module Schematics
 
         def test_destroy
           return if entity.is_a?(Entities::Singleton)
+
           test "should destroy #{entity.name}" do
             assert_difference("#{model_class.name}.count", -1) do
               login
@@ -211,6 +224,7 @@ module Schematics
 
         def test_restore_api
           return if entity.is_a?(Entities::Singleton)
+
           test "should restore API #{entity.name}" do
             record.destroy
             assert record.deleted?
@@ -226,6 +240,7 @@ module Schematics
 
         def test_restore
           return if entity.is_a?(Entities::Singleton)
+
           test "should restore #{entity.name}" do
             record.destroy
             assert record.deleted?
@@ -239,6 +254,7 @@ module Schematics
 
         def test_archive_api
           return if entity.is_a?(Entities::Singleton)
+
           test "should archive API #{entity.name}" do
             record.restore
             refute record.deleted?
@@ -254,6 +270,7 @@ module Schematics
 
         def test_archive
           return if entity.is_a?(Entities::Singleton)
+
           test "should archive #{entity.name}" do
             record.restore
             refute record.deleted?

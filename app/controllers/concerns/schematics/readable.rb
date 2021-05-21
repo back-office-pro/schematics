@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module Readable
     extend ActiveSupport::Concern
@@ -9,6 +11,7 @@ module Schematics
       return unless @resource.respond_to?(TIMESTAMP_FIELD)
       return if @resource.send(TIMESTAMP_FIELD).present?
       return unless (@resource.try(RECIPIENT_FIELD) || current_user) == current_user
+
       @resource.touch(TIMESTAMP_FIELD) # rubocop:disable Rails/SkipsModelValidations
     end
   end

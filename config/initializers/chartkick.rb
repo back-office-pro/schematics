@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Style/FormatStringToken
 Chartkick.options = {
   colors: ['#2c3e50'],

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
@@ -44,6 +46,7 @@ module Schematics
 
       def preload
         return if association_type == @entity.name # prevent self inclusion
+
         super
       end
 

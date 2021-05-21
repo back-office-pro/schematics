@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/references'
 require 'schematics/entities/entity'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
@@ -24,6 +26,7 @@ module Schematics
 
     def authorize
       return if current_user.present?
+
       respond_to do |format|
         format.json { head :unauthorized }
         format.any do

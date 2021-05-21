@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.reload_routes!
 GrapeSwaggerRails.options.url = Schematics::Engine.routes.url_helpers.swagger_open_api_path
 GrapeSwaggerRails.options.app_url = 'http://localhost:3000'

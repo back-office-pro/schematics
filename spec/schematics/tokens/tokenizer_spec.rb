@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/tokenizer'
 
 describe Schematics::Tokens::Tokenizer do

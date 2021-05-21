@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/schema'
 
 module Schematics
@@ -39,6 +41,7 @@ module Schematics
 
           def plural_name
             return "#{super}, column_options: { type: :uuid }" if @type == :join_table_uuid
+
             super
           end
 

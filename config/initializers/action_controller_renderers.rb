@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveSupport.on_load(:action_controller) do
   ActionController::Renderers.add(:csv) do |resources, _options|
     filename = "#{model_name.human.downcase.pluralize.dasherize}-#{I18n.l(Time.current)}.csv"

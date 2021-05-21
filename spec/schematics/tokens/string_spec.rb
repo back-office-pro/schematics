@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/string'
 
 describe Schematics::Tokens::String do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocalesGenerator < Rails::Generators::Base
   delegate :translate, to: :client, private: true
 

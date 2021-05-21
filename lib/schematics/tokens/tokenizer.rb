@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/number'
 require 'schematics/tokens/operator'
 require 'schematics/tokens/parenthesis'

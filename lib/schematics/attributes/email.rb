@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/string'
 
 module Schematics
@@ -9,6 +11,7 @@ module Schematics
 
       def default
         return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if unique? || required?
+
         super
       end
 

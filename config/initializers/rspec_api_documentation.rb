@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RspecApiDocumentation.configure do |config|
   config.format = :open_api
   config.configurations_dir = Rails.root.join('doc/configurations/api')

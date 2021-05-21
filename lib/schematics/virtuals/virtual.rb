@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/tokenizer'
 require 'schematics/virtuals/errors/name_error'
 require 'schematics/virtuals/errors/type_error'

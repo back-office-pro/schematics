@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class PasswordResetsController < ApplicationController
     include Fillable

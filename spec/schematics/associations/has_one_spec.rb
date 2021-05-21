@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/associations/has_one'
 require 'schematics/entities/entity'
 

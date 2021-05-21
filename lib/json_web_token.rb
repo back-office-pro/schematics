@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class JsonWebToken
   class << self
     delegate :secret_key_base, to: 'Rails.application.secrets', private: true

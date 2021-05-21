@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/virtuals/concatenation'
 require 'schematics/entities/entity'
 require 'schematics/tokens/tokenizer'

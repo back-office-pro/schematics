@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Schematics::Engine.routes.draw do
   draw :dashboard
   get 'swagger/open_api.json', to: 'swagger#open_api', as: :swagger_open_api

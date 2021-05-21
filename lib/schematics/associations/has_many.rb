@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/associations/association'
 
 module Schematics
@@ -21,6 +23,7 @@ module Schematics
 
       def dependent
         return :destroy if required?
+
         :nullify
       end
     end

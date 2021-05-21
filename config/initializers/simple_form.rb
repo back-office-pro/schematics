@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simple_form/components/input_group'
 
 # Make sure we override main app initializers config

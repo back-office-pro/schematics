@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FriendlyId.defaults do |config|
   config.use :reserved
   config.reserved_words = %w[new nouveau edit editer delete supprimer]

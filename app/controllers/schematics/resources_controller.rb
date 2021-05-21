@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class ResourcesController < ApplicationController
     include Fillable
@@ -249,6 +251,7 @@ module Schematics
                     @resource.find(params[:id])
                   end
       return if request.path.start_with?(polymorphic_path(@resource))
+
       redirect_to @resource, status: :moved_permanently
     end
 

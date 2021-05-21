@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/jsonb'
 require 'schematics/entities/entity'
 

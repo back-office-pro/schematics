@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class ApplicationComponent < ViewComponent::Base
     include ViewComponent::Translatable

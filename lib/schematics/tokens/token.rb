@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module Tokens
     class Token
@@ -10,6 +12,7 @@ module Schematics
           return String.new(string) if string.present?
           return Number.new(number) if number.present?
           return Parenthesis.new(parenthesis) if parenthesis.present?
+
           Whitespace.new if whitespace.present?
         end
       end

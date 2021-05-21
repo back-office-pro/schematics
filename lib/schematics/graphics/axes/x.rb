@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/graphics/axes/axis'
 
 module Schematics

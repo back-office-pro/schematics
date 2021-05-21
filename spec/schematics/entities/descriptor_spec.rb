@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/entities/descriptor'
 
 describe Schematics::Entities::Descriptor do

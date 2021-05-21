@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class Ability
     include CanCan::Ability
@@ -7,6 +9,7 @@ module Schematics
       @user = user
       aliases
       return can :manage, :all if Rails.env.test? # rubocop:disable Lint/ReturnInVoidContext
+
       user_permissions
       singleton_restrictions
       references_attributes_restrictions

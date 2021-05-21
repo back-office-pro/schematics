@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/entities/entity'
 require 'schematics/entities/tree'
 require 'schematics/entities/singleton'
@@ -123,6 +125,7 @@ module Schematics
     def find_has_many_through_associations(entity, parent)
       parent.entity.has_many_associations.each do |child|
         next if child.entity == parent.entity # prevent self association
+
         entity.associations << Associations::HasManyThrough.new(child.belongs_to, parent)
         find_has_many_through_associations(entity, child)
       end
@@ -139,6 +142,7 @@ module Schematics
     def find_has_one_through_associations(entity, parent)
       find_entity_by_name(parent.association_type).association_attributes.each do |child|
         next if child.entity == parent.entity # prevent self association
+
         entity.associations << Associations::HasOneThrough.new(child, parent)
         find_has_one_through_associations(entity, child)
       end

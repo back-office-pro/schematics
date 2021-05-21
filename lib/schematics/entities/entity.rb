@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/attributes/address'
 require 'schematics/attributes/association'
@@ -58,6 +60,7 @@ module Schematics
                    virtuals: [])
           args = [name, icon.to_sym, descriptor, associations, attributes, virtuals]
           return new(*args) unless type
+
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
 
@@ -108,6 +111,7 @@ module Schematics
         if Behaviours.const_defined?(constant)
           return send(method.to_sym).select_is_a?(Behaviours.const_get(constant))
         end
+
         super
       end
 
@@ -184,6 +188,7 @@ module Schematics
         return :inbox unless timestamp_attributes.size.zero?
         return :calendar if datetime_attributes.size >= 2
         return :grid if attachment_attributes.any?(&:image?)
+
         :table
       end
 

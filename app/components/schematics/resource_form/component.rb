@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   module ResourceForm
     class Component < ApplicationComponent

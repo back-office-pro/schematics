@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/rangeable'

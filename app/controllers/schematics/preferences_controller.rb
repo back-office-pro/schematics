@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class PreferencesController < ApplicationController
     def edit; end
@@ -39,6 +41,7 @@ module Schematics
 
     def cast_param_value(value)
       return value == 'true' if value.in?(%w[true false])
+
       value
     end
 

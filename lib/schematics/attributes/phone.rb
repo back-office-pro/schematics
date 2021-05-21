@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/string'
 
 module Schematics
@@ -9,6 +11,7 @@ module Schematics
 
       def default
         return Array.new(10) { rand(10) }.to_s if unique? || required?
+
         super
       end
 

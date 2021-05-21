@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
@@ -28,6 +30,7 @@ module Schematics
       def format(value)
         return unless value
         return number_to_human_size(value) if unit == 'bytes'
+
         [value, unit].compact.join(' ')
       end
 

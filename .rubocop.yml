@@ -5,8 +5,6 @@ require:
 Layout/DotPosition:
   Enabled: true
   EnforcedStyle: leading
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false # TODO enable
 Style/Documentation:
   Enabled: false
 Style/ReturnNil:
@@ -15,8 +13,6 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/FrozenStringLiteralComment:
-  Enabled: false # TODO enable
 Layout/LineLength:
   Max: 100
 RSpec/ExampleLength:

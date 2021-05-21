@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/operator'
 
 describe Schematics::Tokens::Operator do

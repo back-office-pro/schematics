@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 module Schematics
   module Sortable
     extend ActiveSupport::Concern
 
     def sorting_params
       return { created_at: { order: :desc, unmapped_type: 'long' } } unless params[:sort]
+
       ordering = {}
       sort_order = { '+' => :asc, '-' => :desc }
       sorted_params = params[:sort].split(',')

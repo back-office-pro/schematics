@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rack/test/uploaded_file'
 require 'action_dispatch/http/mime_type'
 
@@ -24,6 +26,7 @@ module Schematics
 
       def file
         return @file if defined?(@file)
+
         @file = Tempfile.new(filename_array)
         @file.write(content_type)
         @file.rewind

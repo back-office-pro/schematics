@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/attribute'
 require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
@@ -39,6 +41,7 @@ module Schematics
       def default
         return ::Time.zone.today.to_s(:db) if @options.key?(:before)
         return ::Time.zone.tomorrow.to_s(:db) if @options.key?(:after)
+
         super
       end
 

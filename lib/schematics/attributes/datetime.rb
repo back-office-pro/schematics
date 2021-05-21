@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/date'
 
 module Schematics
@@ -10,6 +12,7 @@ module Schematics
       def default
         return ::Time.current.yesterday.to_s(:db) if @options.key?(:before)
         return ::Time.current.tomorrow.to_s(:db) if @options.key?(:after)
+
         super
       end
     end

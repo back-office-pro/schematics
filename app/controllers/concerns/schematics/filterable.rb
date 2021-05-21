@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 module Schematics
   module Filterable
     extend ActiveSupport::Concern
 
     def filter_params
       return {} unless params.key?(:filter)
+
       params
         .require(:filter)
         .permit(permitted_filters)

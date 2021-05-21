@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Schematics
   class DashboardController < ApplicationController
     def home; end

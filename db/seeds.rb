@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 admin_role = Role.create!(name: 'Admin')
 User.create!(email: 'admin@admin.com',
              password: '123456',

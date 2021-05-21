@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/entities/entity'
 
 describe Schematics::Entities::Entity do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/attributes/string'
 require 'countries/iso3166'
 require 'sort_alphabetical'

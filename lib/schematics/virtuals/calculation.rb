@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/virtuals/virtual'
 require 'schematics/behaviours/rangeable'
 
@@ -20,6 +22,7 @@ module Schematics
 
       def format(value)
         return value.to_s if value.is_a?(::StandardError)
+
         [value.round(scale.to_i), unit].compact.join(' ')
       end
 

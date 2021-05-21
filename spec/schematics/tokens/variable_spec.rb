@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'schematics/tokens/variable'
 
 describe Schematics::Tokens::Variable do
@@ -9,7 +11,7 @@ describe Schematics::Tokens::Variable do
     let(:value) { 'type' }
 
     its(:to_sql) { is_expected.to eq('entities.type') }
-    its(:to_str) { is_expected.to eq('#{type}') }  # rubocop:disable Lint/InterpolationCheck
+    its(:to_str) { is_expected.to eq('#{type}') } # rubocop:disable Lint/InterpolationCheck
   end
 
   context 'when there is some reference' do
