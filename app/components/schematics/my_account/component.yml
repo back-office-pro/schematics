@@ -1,12 +1,14 @@
 en:
   title: My account
   edit_profile: Edit my profile
+  edit_preferences: Edit preferences
   settings: Application settings
   api: API access
   logout: Logout
 fr:
   title: Mon compte
   edit_profile: Editer mon profil
+  edit_preferences: Editer préférences
   settings: Paramètres application
   api: Accès API
   logout: Déconnexion
