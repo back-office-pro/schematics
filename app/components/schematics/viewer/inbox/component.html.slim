@@ -1,7 +1,7 @@
 .table-responsive
   table.table.mb-0 class=(['table-striped', 'table-hover'] if @resources.any?)
     = render Schematics::Filter::Component.new(model_class: klass)
-    tbody class=('table-bordered border-0' if @resources.any?) class=('animated animate__slideInRight' if params[:page].present?)
+    tbody class=('table-bordered border-0' if @resources.any?) class=('animate__animated animate__slideInRight' if params[:page].present?)
       - if @resources.empty?
         tr
           td.text-center.pt-4 colspan="100%"

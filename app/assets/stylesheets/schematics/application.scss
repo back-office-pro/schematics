@@ -14,6 +14,14 @@ $flag-icon-css-path: '../flag-icon-css/flags';
 @import "message_center/component";
 
 /**
+ * Animations
+ */
+
+:root {
+  --animate-duration: 300ms;
+}
+
+/**
  * Layout
  */
 
@@ -70,10 +78,6 @@ footer {
     flex: 0 0 calc(100% - 6rem);
     max-width: calc(100% - 6rem);
   }
-}
-
-.animated {
-  animation-duration: 0.3s !important;
 }
 
 /**

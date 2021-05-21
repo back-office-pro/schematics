@@ -2,8 +2,8 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
   a#notifications-dropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
     = fa_icon :bell, class: "fa-lg"
     - unless unread_count.zero?
-      .badge.badge-danger.animated.animate__zoomIn= unread_count
-  .dropdown-menu.dropdown-menu-right.animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="notifications-dropdown"
+      .badge.badge-danger.animate__animated.animate__zoomIn= unread_count
+  .dropdown-menu.dropdown-menu-right.animate__animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="notifications-dropdown"
     h5.dropdown-header.font-weight-bold.bg-light= t('.title')
     .pre-scrollable
       - versions.each do |version|
