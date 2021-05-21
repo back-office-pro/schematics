@@ -1,0 +1,26 @@
+= form_tag preferences_path, method: :put do |f|
+  .table-responsive
+    table.table.mb-0.table-striped.table-bordered
+      tr
+        th
+        - events.each do |action|
+          td.text-center.text-primary= t(action, scope: [:activerecord, :attributes, :permission, :actions])
+      - entities.sort_by(&:name).each do |entity|
+        - model_class = entity.class_name.constantize
+        tr
+          th.text-primary
+            = fa_icon entity.icon, class: "mr-2 text-muted"
+            = model_class.model_name.human
+          - events.each do |action|
+            - preference = :"#{action}_#{entity.name}"
+            td.text-center
+              - if can?(action.to_sym, model_class)
+                .custom-control.custom-switch
+                  = check_box "preferences", preference, { class: "custom-control-input", checked: checked?(action, model_class, preference) }, "true", "false"
+                  = label_tag preference, "", class: "custom-control-label", for: "preferences_#{preference}"
+  = button_tag class: "btn btn-primary btn-sm btn-icon-split mr-2" do
+    span.icon= fa_icon :check
+    span.text= t('schematics.application.button.confirm')
+  = link_to root_path, class: "btn btn-danger btn-sm btn-icon-split" do
+    span.icon= fa_icon :times
+    span.text= t('schematics.application.button.cancel')
