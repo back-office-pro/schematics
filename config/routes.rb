@@ -5,7 +5,12 @@ Schematics::Engine.routes.draw do
   localized do
     draw :sessions
     draw :password_resets
-    draw :versions
     resources :searches, only: %i[create show], param: :query
+    resource :preferences, only: %i[edit update]
+    resources :versions, only: %i[index show] do
+      member do
+        get :revert
+      end
+    end
   end
 end
