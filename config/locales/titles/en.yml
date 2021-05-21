@@ -11,7 +11,8 @@ en:
       versions:
         index: Timeline
         show: Timeline
-        preferences: Notification preferences
+      preferences:
+        edit: Notification preferences
       password_resets:
         new: Password reset
         edit: Password reset
