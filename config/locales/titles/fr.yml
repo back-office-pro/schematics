@@ -11,7 +11,8 @@ fr:
       versions:
         index: Historique
         show: Historique
-        preferences: Préférences de notification
+      preferences:
+        edit: Préférences de notification
       password_resets:
         new: Mot de passe oublié
         edit: Mot de passe oublié

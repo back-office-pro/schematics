@@ -1,6 +1,9 @@
 module PaperTrail
   class Version < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
     include PaperTrail::VersionConcern
+
+    EVENTS = %w[create update destroy archive restore import].freeze
+
     belongs_to :user,
                class_name: 'User',
                foreign_key: :whodunnit,
@@ -13,17 +16,21 @@ module PaperTrail
     scope :with_item, -> { includes(:item) }
 
     class << self
-      def timeline(ability:, versions: self)
+      def timeline(ability:, preferences: {}, versions: self)
         versions
           .with_user
           .with_item
           .order(created_at: :desc)
-          .select { |version| version.model_class.accessible_by(ability) }
+          .select { |version| version.visible?(ability, preferences) }
       end
     end
 
     def model_class
       item_type.constantize
+    end
+
+    def visible?(ability, preferences)
+      ability.can?(event.to_sym, model_class) && preferences.fetch(preference, true)
     end
 
     def icon
@@ -35,6 +42,12 @@ module PaperTrail
         'archive' => :archive,
         'restore' => :trash_restore,
       }[event]
+    end
+
+    private
+
+    def preference
+      [event, item_type.underscore].join('_')
     end
   end
 end

@@ -48,7 +48,7 @@ module Schematics
 
     def singleton_restrictions
       Schema.instance.entities.select_is_a?(Entities::Singleton).each do |entity|
-        cannot %i[index create destroy archive], entity.class_name.constantize
+        cannot %i[index create destroy archive import], entity.class_name.constantize
       end
     end
 

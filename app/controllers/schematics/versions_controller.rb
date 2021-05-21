@@ -2,7 +2,11 @@ module Schematics
   class VersionsController < ApplicationController
     def index
       @pagy, @versions = pagy_array(
-        PaperTrail::Version.timeline(ability: current_ability), items: 25
+        PaperTrail::Version.timeline(
+          ability: current_ability,
+          preferences: current_user.preferences
+        ),
+        items: 25
       )
     end
 
@@ -15,7 +19,5 @@ module Schematics
       @version.reify&.save! || @version.item.really_destroy!
       redirect_to @version.item
     end
-
-    def preferences; end
   end
 end
