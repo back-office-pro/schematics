@@ -3,13 +3,7 @@
 module Schematics
   class VersionsController < ApplicationController
     def index
-      @pagy, @versions = pagy_array(
-        PaperTrail::Version.timeline(
-          ability: current_ability,
-          preferences: current_user.preferences
-        ),
-        items: 25
-      )
+      @pagy, @versions = pagy(PaperTrail::Version.timeline(ability: current_ability), items: 50)
     end
 
     def show
