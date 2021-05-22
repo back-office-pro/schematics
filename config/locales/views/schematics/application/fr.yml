@@ -1,6 +1,8 @@
 fr:  
   schematics:
     application:
+      resource:
+        empty: Aucune donnée disponible
       typeahead:
         not_found: Aucun résultat
         pending: Recherche en cours...
