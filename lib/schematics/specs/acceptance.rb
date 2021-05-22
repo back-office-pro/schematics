@@ -93,7 +93,7 @@ module Schematics
 
           context401
           context '200' do
-            let(:expected_result) do
+            let(:expected_response) do
               ActiveModelSerializers::SerializableResource
                 .new([record, other_record])
                 .as_json
@@ -102,7 +102,7 @@ module Schematics
 
             example_request "Getting a list of #{entity.name.pluralize}" do
               expect(response_status).to eq(200)
-              expect(json_response).to contain_exactly(*expected_result)
+              expect(json_response).to contain_exactly(*expected_response)
             end
           end
         end
@@ -115,7 +115,7 @@ module Schematics
           get polymorphic_path(model_class) do
             context401
             context '200' do
-              let(:expected_result) do
+              let(:expected_response) do
                 ActiveModelSerializers::SerializableResource
                   .new(other_record)
                   .as_json
@@ -125,7 +125,7 @@ module Schematics
 
               example_request "Getting a #{entity.name}" do
                 expect(response_status).to eq(200)
-                expect(json_response).to eq(expected_result)
+                expect(json_response).to eq(expected_response)
               end
             end
           end
@@ -135,7 +135,7 @@ module Schematics
             context404
             context '200' do
               let(:id) { record.id }
-              let(:expected_result) do
+              let(:expected_response) do
                 ActiveModelSerializers::SerializableResource
                   .new(record)
                   .as_json
@@ -145,7 +145,7 @@ module Schematics
 
               example_request "Getting a #{entity.name}" do
                 expect(response_status).to eq(200)
-                expect(json_response).to eq(expected_result)
+                expect(json_response).to eq(expected_response)
               end
             end
           end
