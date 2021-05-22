@@ -22,6 +22,7 @@ en:
         reset_filters: Reset filters
         edit: Edit
         download_pdf: Download PDF
+        revert: Revert
       delete:
         title: Are you sure?
         subtitle: This action is irreversible
