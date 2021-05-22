@@ -19,7 +19,7 @@ resource 'Preferences' do
     context 'when updating application theme' do
       let(:theme) { 'light' }
 
-      example 'Success' do
+      example 'No content' do
         do_request
         expect(response_status).to eq(204)
         expect(response_body).to be_blank
