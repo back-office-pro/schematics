@@ -22,7 +22,7 @@ fr:
         reset_filters: Réinitialiser les filtres
         edit: Editer
         download_pdf: Télécharger au format PDF
-        revert: Retourner en arrière
+        revert: Rétablir
       delete:
         title: Etes-vous sûr ?
         subtitle: Cette action est irréversible
