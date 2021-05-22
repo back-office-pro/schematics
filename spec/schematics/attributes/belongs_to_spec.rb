@@ -57,7 +57,8 @@ describe Schematics::Attributes::BelongsTo do
                  class_name: 'Schema',
                  foreign_key: 'schema_id',
                  inverse_of: :entities,
-                 optional: true
+                 optional: true,
+                 counter_cache: :entities_count
     RUBY
   end
 
@@ -74,7 +75,8 @@ describe Schematics::Attributes::BelongsTo do
                    class_name: 'Schema',
                    foreign_key: 'schema_id',
                    inverse_of: :entities,
-                   optional: false
+                   optional: false,
+                   counter_cache: :entities_count
       RUBY
     end
   end

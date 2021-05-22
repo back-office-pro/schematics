@@ -62,7 +62,8 @@ module Schematics
                      class_name: '#{class_name}',
                      foreign_key: '#{column_name}',
                      inverse_of: :#{inverse_association.name},
-                     optional: #{!required?}
+                     optional: #{!required?},
+                     counter_cache: :#{inverse_association_name.pluralize}_count
         RUBY
       end
 

@@ -72,7 +72,8 @@ describe Schematics::Attributes::References do
                  class_name: 'User',
                  foreign_key: 'user_id',
                  inverse_of: :entities,
-                 optional: true
+                 optional: true,
+                 counter_cache: :entities_count
     RUBY
   end
 
@@ -92,7 +93,8 @@ describe Schematics::Attributes::References do
                    class_name: 'User',
                    foreign_key: 'user_id',
                    inverse_of: :entities,
-                   optional: false
+                   optional: false,
+                   counter_cache: :entities_count
       RUBY
     end
   end

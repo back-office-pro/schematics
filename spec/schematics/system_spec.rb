@@ -20,6 +20,16 @@ describe Schematics::System do
         name: 'name',
         type: 'string',
       },
+      {
+        name: 'owner',
+        type: 'belongs_to',
+        options: {
+          type: 'user',
+          inverse: {
+            name: 'roles',
+          },
+        },
+      },
     ]
   end
   let(:associations) do
@@ -37,11 +47,12 @@ describe Schematics::System do
     context 'when entity is default entity' do
       let(:expected_command_lines) do
         [
-          'rails generate scaffold role schema:role_name --skip-resource-route',
+          'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
           'rails generate rspec:acceptance role',
           'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
           'rails generate migration add_slug_to_roles slug:string:uniq',
           'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
+          'rails generate migration add_roles_count_to_users roles_count:integer',
         ]
       end
 
@@ -58,12 +69,13 @@ describe Schematics::System do
       end
       let(:expected_command_lines) do
         [
-          'rails generate scaffold role schema:role_name --skip-resource-route',
+          'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
           'rails generate rspec:acceptance role',
           'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
           'rails generate migration add_slug_to_roles slug:string:uniq',
           'rails generate migration add_ancestry_to_roles ancestry:string',
           'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
+          'rails generate migration add_roles_count_to_users roles_count:integer',
         ]
       end
 
@@ -78,7 +90,7 @@ describe Schematics::System do
       [
         'rails destroy scaffold role --skip-migration --skip-resource-route',
         'rails destroy rspec:acceptance role',
-        'rails generate migration drop_roles_table schema:role_name',
+        'rails generate migration drop_roles_table schema:role_name schema:role_owner',
       ]
     end
 

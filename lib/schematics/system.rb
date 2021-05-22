@@ -12,11 +12,14 @@ module Schematics
           generate_deleted_at_migration(entity.name),
           generate_slug_migration(entity.name),
           (generate_ancestry_migration(entity.name) if entity.is_a?(Entities::Tree)),
-        ].compact.map(&:squish) + entity
-                                  .has_and_belongs_to_many_associations
-                                  .reject { _1.entity.name.pluralize == _1.name }
-                                  .map(&method(:generate_join_table_migration))
-                                  .map(&:squish)
+          entity
+            .has_and_belongs_to_many_associations
+            .reject { _1.entity.name.pluralize == _1.name }
+            .map(&method(:generate_join_table_migration)),
+          entity
+            .association_attributes
+            .map(&method(:generate_counter_cache_migration)),
+        ].flatten.compact.map(&:squish)
       end
 
       def destroy_entity(entity)
@@ -34,6 +37,12 @@ module Schematics
       end
 
       private
+
+      def generate_counter_cache_migration(association)
+        <<~SHELL
+          rails generate migration add_#{association.inverse_association_name.pluralize}_count_to_#{association.association_type.pluralize} #{association.inverse_association_name.pluralize}_count:integer
+        SHELL
+      end
 
       def generate_join_table_migration(association)
         <<~SHELL
