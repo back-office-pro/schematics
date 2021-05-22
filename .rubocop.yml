@@ -26,6 +26,7 @@ Metrics/BlockLength:
     - after_initialize
     - put
     - post
+    - get
     - context
     - namespace
 Metrics/MethodLength:
