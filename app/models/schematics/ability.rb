@@ -54,7 +54,7 @@ module Schematics
       can :revert, ApplicationVersion, whodunnit: user.id
       @user.role.permissions.each do |permission|
         can :read, ApplicationVersion,
-            event: permission.action.to_sym,
+            event: permission.action,
             item_type: permission.model
       end
     end
