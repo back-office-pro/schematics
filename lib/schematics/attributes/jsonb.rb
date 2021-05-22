@@ -9,14 +9,6 @@ module Schematics
         options[:default]&.to_json
       end
 
-      def to_str
-        return super unless options.key?(:default)
-
-        <<~RUBY
-          store :#{name}, accessors: #{options[:default].keys}, prefix: true
-        RUBY
-      end
-
       protected
 
       def migration_options
