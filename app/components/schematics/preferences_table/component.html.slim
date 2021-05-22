@@ -12,11 +12,11 @@
             = fa_icon entity.icon, class: "mr-2 text-muted"
             = model_class.model_name.human
           - events.each do |action|
-            - preference = :"#{action}_#{entity.name}"
+            - preference = "#{action}_#{model_class}"
             td.text-center
               - if can?(action.to_sym, model_class)
                 .custom-control.custom-switch
-                  = check_box "preferences", preference, { class: "custom-control-input", checked: checked?(action, model_class, preference) }, "true", "false"
+                  = check_box "preferences", preference, { class: "custom-control-input", checked: checked?(preference) }, "true", "false"
                   = label_tag preference, "", class: "custom-control-label", for: "preferences_#{preference}"
   = button_tag class: "btn btn-primary btn-sm btn-icon-split mr-2" do
     span.icon= fa_icon :check

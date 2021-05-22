@@ -18,12 +18,22 @@ module PaperTrail
     scope :with_item, -> { includes(:item) }
 
     class << self
-      def timeline(ability:, preferences: {}, versions: self)
-        versions
-          .with_user
-          .with_item
-          .order(created_at: :desc)
-          .select { |version| version.visible?(ability, preferences) }
+      def timeline(ability:, versions: nil)
+        query = (versions || self)
+                .with_user
+                .with_item
+                .accessible_by(ability)
+        unless versions
+          query = query
+                  .joins(:user)
+                  .where(
+                    <<~SQL.squish
+                      users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
+                      users.preferences -> CONCAT(versions.event, '_', versions.item_type) IS NULL
+                    SQL
+                  )
+        end
+        query.order(created_at: :desc)
       end
     end
 
@@ -31,25 +41,16 @@ module PaperTrail
       item_type.constantize
     end
 
-    def visible?(ability, preferences)
-      ability.can?(event.to_sym, model_class) && preferences.fetch(preference, true)
-    end
-
     def icon
       {
         'update' => :edit,
         'create' => :plus,
         'import' => :cloud_upload_alt,
+        'revert' => :undo,
         'destroy' => :trash,
         'archive' => :archive,
         'restore' => :trash_restore,
       }[event]
-    end
-
-    private
-
-    def preference
-      [event, item_type.underscore].join('_')
     end
   end
 end

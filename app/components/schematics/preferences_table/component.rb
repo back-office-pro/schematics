@@ -12,8 +12,8 @@ module Schematics
         PaperTrail::Version::EVENTS
       end
 
-      def checked?(action, model_class, preference)
-        can?(action.to_sym, model_class) && preferences.fetch(preference, true)
+      def checked?(preference)
+        preferences.fetch(preference, true)
       end
     end
   end
