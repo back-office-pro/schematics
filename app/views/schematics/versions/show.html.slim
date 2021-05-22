@@ -18,7 +18,8 @@
                     = fa_icon field.icon, class: "mr-2 text-muted"
                     = @version.model_class.human_attribute_name(field.name)
                   td
-                    = render Schematics::Resource::Component.new(resource: @version.reify(dup: true), field: field)
+                    - old_version = @version.reify(dup: true)
+                    = render Schematics::Resource::Component.new(resource: old_version, field: field) if old_version
   .col-lg-1.my-4.mx-0.text-center
     = fa_icon :arrow_right, size: '4x', class: 'text-dark d-none d-lg-inline-block'
     = fa_icon :arrow_down, size: '4x', class: 'text-dark d-inline-block d-lg-none'
