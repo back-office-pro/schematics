@@ -57,7 +57,7 @@ module Schematics
 
           test "creating a #{entity.name}" do
             visit polymorphic_path(model_class)
-            click_on I18n.t('schematics.application.index.buttons.add',
+            click_on I18n.t('schematics.application.button.add',
                             model_name: model_name.human.downcase)
             fill_form
             click_on I18n.t('schematics.application.button.confirm')
@@ -71,7 +71,7 @@ module Schematics
           when Entities::Singleton
             test "updating a #{entity.name}" do
               visit polymorphic_path(model_class)
-              click_on I18n.t('schematics.application.show.buttons.edit')
+              click_on I18n.t('schematics.application.button.edit')
               fill_form
               click_on I18n.t('schematics.application.button.confirm')
               assert_text I18n.t('schematics.resources.update.success',
