@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+PaperTrail.enabled = false
 admin_role = Role.create!(name: 'Admin')
 User.create!(email: 'admin@admin.com',
              password: '123456',
@@ -12,3 +13,4 @@ Schematics::Schema.instance.entities.map(&:class_name).each do |model|
     admin_role.permissions << Permission.create!(model: model, action: action)
   end
 end
+PaperTrail.enabled = true
