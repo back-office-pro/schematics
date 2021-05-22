@@ -22,12 +22,6 @@ describe Schematics::Attributes::Jsonb do
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
   its(:options_for_migration) { is_expected.to eq(options) }
 
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      store :preferences, accessors: [:theme, :sidebar_toggled], prefix: true
-    RUBY
-  end
-
   context 'when there is no default' do
     let(:options) { {} }
 
