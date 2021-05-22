@@ -11,6 +11,7 @@ module Schematics
       return can :manage, :all if Rails.env.test? # rubocop:disable Lint/ReturnInVoidContext
 
       user_permissions
+      version_permissions
       singleton_restrictions
       references_attributes_restrictions
       default_restrictions
@@ -46,6 +47,15 @@ module Schematics
     def user_permissions
       @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
+      end
+    end
+
+    def version_permissions
+      can :revert, PaperTrail::Version, whodunnit: user.id
+      @user.role.permissions.each do |permission|
+        can :read, PaperTrail::Version,
+            event: permission.action.to_sym,
+            item_type: permission.model
       end
     end
 
