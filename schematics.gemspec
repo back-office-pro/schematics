@@ -58,7 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mini_magick', '>= 4.11.0'
   spec.add_dependency 'oj', '~> 3.11.3'
   spec.add_dependency 'pagy', '~> 4.7.1'
-  spec.add_dependency 'paper_trail', '~> 11.1.0'
+  spec.add_dependency 'paper_trail', '~> 12.0.0'
   spec.add_dependency 'paranoia', '~> 2.4.3'
   spec.add_dependency 'phonelib', '~> 0.6.48'
   spec.add_dependency 'rack-attack', '~> 6.5.0'
