@@ -27,7 +27,7 @@ class CsvImporter
   private
 
   def insert_all_paper_trail_versions(record_ids)
-    PaperTrail::Version.insert_all(record_ids.map(&method(:paper_trail_version))) # rubocop:disable Rails/SkipsModelValidations
+    ApplicationVersion.insert_all(record_ids.map(&method(:paper_trail_version))) # rubocop:disable Rails/SkipsModelValidations
   end
 
   def paper_trail_version(id)

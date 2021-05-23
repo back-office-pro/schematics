@@ -56,7 +56,7 @@ module Schematics
     end
 
     def preferences_by_entity(entity)
-      PaperTrail::Version::EVENTS
+      ApplicationVersion::EVENTS
         .select { |action| current_ability.can?(action.to_sym, entity.class_name.constantize) }
         .map { |action| [action, entity.class_name].join('_') }
     end

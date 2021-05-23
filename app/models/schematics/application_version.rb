@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-module PaperTrail
-  class Version < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
-    include PaperTrail::VersionConcern
-
+module Schematics
+  class ApplicationVersion < PaperTrail::Version
     EVENTS = %w[create update destroy archive restore import].freeze
 
     belongs_to :user,

@@ -227,7 +227,8 @@ module Schematics
       def to_str
         <<~RUBY
           extend Pagy::Searchkick
-          has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug]
+          has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug],
+                          versions: { class_name: 'Schematics::ApplicationVersion' }
           acts_as_paranoid
           searchkick searchable: #{elasticsearchable_elements},
                      filterable: #{elasticsearchable_elements},

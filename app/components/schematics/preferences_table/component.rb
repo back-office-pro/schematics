@@ -9,7 +9,7 @@ module Schematics
       delegate :can?, to: :current_ability
 
       def events
-        PaperTrail::Version::EVENTS
+        ApplicationVersion::EVENTS
       end
 
       def checked?(preference)

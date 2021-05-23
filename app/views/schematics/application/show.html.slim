@@ -40,7 +40,7 @@
   = render Schematics::Viewer::Association::Component.new(resources: resources)
 - if can?(:update, @resource)
   .mt-4
-    - versions = PaperTrail::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
+    - versions = Schematics::ApplicationVersion.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
     .row.justify-content-center
       .col-xl-9.col-md-12
         ul.timeline.list-unstyled

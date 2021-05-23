@@ -51,9 +51,9 @@ module Schematics
     end
 
     def version_permissions
-      can :revert, PaperTrail::Version, whodunnit: user.id
+      can :revert, ApplicationVersion, whodunnit: user.id
       @user.role.permissions.each do |permission|
-        can :read, PaperTrail::Version,
+        can :read, ApplicationVersion,
             event: permission.action.to_sym,
             item_type: permission.model
       end
