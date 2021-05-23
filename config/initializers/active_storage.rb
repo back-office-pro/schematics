@@ -6,7 +6,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
     # has_paper_trail only: [:blob_id],
     #                 meta: { item_type: :record_type, item_id: :record_id },
     #                 on: [:create],
-    #                 versions: { class_name: 'Schematics::ApplicationVersion' }
+    #                 versions: { class_name: 'Schematics::Version' }
   end
 end
 

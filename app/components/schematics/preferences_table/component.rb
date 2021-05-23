@@ -9,7 +9,7 @@ module Schematics
       delegate :can?, to: :current_ability
 
       def events
-        ApplicationVersion::EVENTS
+        Version::EVENTS
       end
 
       def checked?(preference)

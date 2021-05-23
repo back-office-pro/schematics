@@ -7,13 +7,13 @@ module Schematics
       delegate :updated_at, :preferences, to: :current_user
 
       def versions
-        @versions ||= ApplicationVersion
+        @versions ||= Version
                       .timeline(ability: current_ability)
                       .limit(10)
       end
 
       def unread_count
-        @unread_count ||= ApplicationVersion
+        @unread_count ||= Version
                           .where(created_at: updated_at...)
                           .timeline(ability: current_ability)
                           .size
