@@ -11,6 +11,10 @@ resource 'Versions' do
   token_auth
 
   get '/versions' do
+    with_options with_example: true do
+      parameter :per_page, 'Items per page'
+    end
+
     example 'Success' do
       do_request
       expect(response_status).to eq(200)
