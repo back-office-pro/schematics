@@ -22,5 +22,4 @@ fr:
         edit: Editer %{resource}
         delete: Supprimer %{resource}
         show: "%{resource}"
-        not_found: Ressource non trouvée
         import: Importer des %{model_name_plural}
