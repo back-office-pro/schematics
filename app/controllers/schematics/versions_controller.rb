@@ -2,18 +2,46 @@
 
 module Schematics
   class VersionsController < ApplicationController
+    load_and_authorize_resource class: ApplicationVersion
+
     def index
-      @pagy, @versions = pagy(ApplicationVersion.timeline(ability: current_ability), items: 50)
+      @pagy, @versions = pagy(
+        ApplicationVersion.timeline(ability: current_ability),
+        items: params.fetch(:per_page, 50)
+      )
+      respond_to do |format|
+        format.html
+        format.json { render json: @versions }
+      end
     end
 
     def show
-      @version = ApplicationVersion.find(params[:id])
+      respond_to do |format|
+        format.html
+        format.json { render json: @version }
+      end
     end
 
     def revert
-      @version = ApplicationVersion.find(params[:id])
-      @version.reify&.save! || @version.item.really_destroy!
-      redirect_to @version.item
+      result = Versions::Revert.call(version: @version)
+      if result.success?
+        notice = t(result.message, model_name: @version.item.model_name.human)
+        respond_to do |format|
+          format.html { redirect_to @version.item, notice: notice }
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :revert
+          end
+          format.json do
+            render json: { errors: [t(result.message)] },
+                   status: :unprocessable_entity
+          end
+        end
+      end
     end
   end
 end
