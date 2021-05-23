@@ -2,11 +2,12 @@
 
 module Schematics
   class VersionsController < ApplicationController
-    load_and_authorize_resource class: ApplicationVersion
+    load_and_authorize_resource class: Version
+    delegate :model_name, to: :model_class, private: true
 
     def index
       @pagy, @versions = pagy(
-        ApplicationVersion.timeline(ability: current_ability),
+        model_class.timeline(ability: current_ability),
         items: params.fetch(:per_page, 50)
       )
       respond_to do |format|
@@ -42,6 +43,12 @@ module Schematics
           end
         end
       end
+    end
+
+    private
+
+    def model_class
+      Version
     end
   end
 end

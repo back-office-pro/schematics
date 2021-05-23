@@ -5,9 +5,8 @@ module Schematics
     include Fillable
     skip_before_action :authorize
     before_action :set_user, only: %i[edit update]
-    rescue_from ActiveRecord::RecordNotFound, with: :not_found
     layout 'schematics/auth'
-    delegate :entity, to: :model_class, private: true
+    delegate :entity, :model_name, to: :model_class, private: true
 
     def new; end
 
@@ -52,13 +51,6 @@ module Schematics
       end
     end
 
-    def not_found
-      respond_to do |format|
-        format.html { redirect_to password_lost_path, alert: t('.user_not_found') }
-        format.json { head :not_found }
-      end
-    end
-
     private
 
     def model_class
@@ -68,5 +60,7 @@ module Schematics
     def set_user
       @user = model_class.find_by!(password_reset_token: params[:id])
     end
+
+    alias not_found_path password_lost_path
   end
 end

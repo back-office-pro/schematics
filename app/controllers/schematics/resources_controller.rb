@@ -7,19 +7,18 @@ module Schematics
     include Filterable
     include Searchable
     include Readable
-    before_action :authorize
+
     before_action :set_resource, only: %i[show edit delete update destroy archive restore]
-    before_action :set_paper_trail_whodunnit
     before_action :set_breadcrumb
     before_action :update_timestamp_field?, only: :show
+
     authorize_resource
-    after_action { pagy_headers_merge(@pagy) if @pagy }
-    rescue_from ActionController::ParameterMissing, with: :parameter_missing
-    rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    rescue_from CanCan::AccessDenied, with: :forbidden
+
     delegate :model_class, to: :class
     delegate :entity, :model_name, to: :model_class
+
     helper_method :entity, :model_class, :resource
+
     attr_reader :resource
 
     class << self
@@ -88,17 +87,15 @@ module Schematics
       )
       @errors = result.errors
       if result.success?
+        notice = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
         respond_to do |format|
-          format.html do
-            notice = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
-            redirect_to polymorphic_path(model_class), notice: notice
-          end
+          format.html { redirect_to polymorphic_path(model_class), notice: notice }
           format.json { head :created }
         end
       else
+        alert = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
         respond_to do |format|
           format.html do
-            alert = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
             flash.now[:alert] = alert
             render :import
           end
@@ -151,8 +148,8 @@ module Schematics
     def destroy
       result = Resources::Destroy.call(resource: @resource)
       if result.success?
+        notice = t(result.message, model_name: model_name.human)
         respond_to do |format|
-          notice = t(result.message, model_name: model_name.human)
           format.html { redirect_to polymorphic_path(model_class), notice: notice }
           format.json
         end
@@ -183,8 +180,8 @@ module Schematics
     def restore
       result = Resources::Restore.call(resource: @resource)
       if result.success?
+        notice = t(result.message, model_name: model_name.human)
         respond_to do |format|
-          notice = t(result.message, model_name: model_name.human)
           format.html { redirect_to polymorphic_path(model_class), notice: notice }
           format.json
         end
@@ -200,34 +197,6 @@ module Schematics
       field = params[:field].to_sym
       @resources = model_class.search(**search_params.merge(select: field))
       render json: @resources.map(&field).uniq
-    end
-
-    def parameter_missing(exception)
-      respond_to do |format|
-        format.json do
-          render json: { errors: [{ exception.param => ['parameter is required'] }] },
-                 status: :unprocessable_entity
-        end
-      end
-    end
-
-    def not_found
-      self.action_name = :not_found
-      respond_to do |format|
-        format.html do
-          redirect_to polymorphic_path(model_class),
-                      alert: t('.alert', model_name: model_name.human)
-        end
-        format.json { head :not_found }
-      end
-    end
-
-    def forbidden
-      self.action_name = :forbidden
-      respond_to do |format|
-        format.html { redirect_to schematics.root_path, alert: t('.alert') }
-        format.json { head :forbidden }
-      end
     end
 
     def view_assigns
