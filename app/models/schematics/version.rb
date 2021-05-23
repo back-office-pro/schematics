@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationVersion < PaperTrail::Version
+  class Version < PaperTrail::Version
     EVENTS = %w[create update destroy archive restore import].freeze
 
     belongs_to :user,

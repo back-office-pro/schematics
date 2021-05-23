@@ -3,7 +3,7 @@
 module Schematics
   class SessionsController < ApplicationController
     include Fillable
-    before_action :authorize, only: %i[edit update]
+    skip_before_action :authorize, only: %i[new create]
     layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true
     helper_method :attributes

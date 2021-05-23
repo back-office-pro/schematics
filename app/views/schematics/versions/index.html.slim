@@ -8,5 +8,5 @@
             = link_to fa_icon(version.entity.icon, size: "2x"), main_app.polymorphic_path(version.model_class), class: "text-light"
           .card.shadow-sm
             .card-body
-              = render Schematics::Version::Component.new(version: version)
+              = render Schematics::VersionPreview::Component.new(version: version)
 == pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1

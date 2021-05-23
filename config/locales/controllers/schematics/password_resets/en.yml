@@ -1,8 +1,6 @@
 en:
   schematics:
     password_resets:
-      edit:
-        user_not_found: User not found
       create:
         success: Email sent with password reset instructions
         failure: Unknown email

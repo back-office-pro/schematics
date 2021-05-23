@@ -1,8 +1,6 @@
 fr:
   schematics:
     password_resets:
-      edit:
-        user_not_found: Utilisateur non trouvé
       create:
         success: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
         failure: E-mail inconnu

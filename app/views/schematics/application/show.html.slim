@@ -40,7 +40,7 @@
   = render Schematics::Viewer::Association::Component.new(resources: resources)
 - if can?(:update, @resource)
   .mt-4
-    - versions = Schematics::ApplicationVersion.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
+    - versions = Schematics::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
     .row.justify-content-center
       .col-xl-9.col-md-12
         ul.timeline.list-unstyled
@@ -50,4 +50,4 @@
                 = link_to render(Schematics::Attachment::Component.create_avatar(attachment: version.user.avatar)), version.user
               .card.shadow-sm
                 .card-body
-                  = render Schematics::Version::Component.new(version: version)
+                  = render Schematics::VersionPreview::Component.new(version: version)

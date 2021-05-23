@@ -1,0 +1,6 @@
+fr:  
+  schematics:
+    versions:
+      revert:
+        success: "%{model_name} a été rétabli avec succès"
+        failure: Une erreur est survenue
