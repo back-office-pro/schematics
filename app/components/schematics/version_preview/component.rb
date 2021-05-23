@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Version
+  module VersionPreview
     class Component < ApplicationComponent
       delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :user, :item, :created_at, :icon, to: :@version
