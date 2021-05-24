@@ -20,7 +20,7 @@ describe Schematics::Entities::Tree do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       extend Pagy::Searchkick
-      has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug],
+      has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
                       versions: { class_name: 'Schematics::Version' }
       acts_as_paranoid
       searchkick searchable: [:name],
