@@ -25,7 +25,7 @@ module Schematics
         end
         format.json do
           render json: { errors: [{ exception.param => ['parameter is required'] }] },
-                 status: :unprocessable_entity # TODO: should be bad_request
+                 status: :unprocessable_entity
         end
       end
     end
