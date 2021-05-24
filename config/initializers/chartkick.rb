@@ -3,9 +3,10 @@
 # Make sure i18n translations are available
 Rails.application.config.after_initialize do
   Chartkick.options = {
-    colors: ['#2c3e50'],
+    colors: ['#2c3e50', '#ecf0f1'],
     height: '300px',
     empty: I18n.t('schematics.application.resource.empty'),
+    refresh: 60,
     # rubocop:disable Style/FormatStringToken
     html: <<~HTML,
       <div id="%{id}" class="text-light text-center" style="height: %{height}; width: %{width}; line-height: %{height};">
