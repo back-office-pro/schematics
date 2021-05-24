@@ -20,7 +20,7 @@ module Schematics
       end
 
       def display_unread_count
-        unread_count == 10 ? '9+' : unread_count
+        unread_count >= 10 ? '9+' : unread_count
       end
     end
   end
