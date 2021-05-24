@@ -197,11 +197,7 @@ module Schematics
           def search_data
             {
               created_at: created_at,
-              #{
-                searchable_elements.map do |element|
-                  "#{element.name}: #{element.search_data.squish}"
-                end.join(', ')
-              }
+              #{search_data_elements}
             }
           end
         RUBY
@@ -227,7 +223,7 @@ module Schematics
       def to_str
         <<~RUBY
           extend Pagy::Searchkick
-          has_paper_trail ignore: [:id, :created_at, :updated_at, :deleted_at, :slug],
+          has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
                           versions: { class_name: 'Schematics::Version' }
           acts_as_paranoid
           searchkick searchable: #{elasticsearchable_elements},
@@ -267,6 +263,12 @@ module Schematics
 
       def elasticsearchable_elements
         searchable_elements.map(&:name).map(&:to_sym)
+      end
+
+      def search_data_elements
+        searchable_elements
+          .map { |element| "#{element.name}: #{element.search_data.squish}" }
+          .join(", \n")
       end
     end
   end
