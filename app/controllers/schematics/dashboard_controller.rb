@@ -9,7 +9,7 @@ module Schematics
     end
 
     def read_notifications
-      current_user.touch # rubocop:disable Rails/SkipsModelValidations
+      current_user.update(updated_at: Time.current)
     end
   end
 end
