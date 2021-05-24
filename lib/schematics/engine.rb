@@ -14,9 +14,16 @@ module Schematics
       generator.jbuilder nil
     end
 
+    # Security
+    config.force_ssl = Rails.env.production?
+
+    # Action Controller
+    config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
+
     # Active Record
     config.active_record.strict_loading_by_default = true
-    config.active_record.action_on_strict_loading_violation = :log # if Rails.env.production?
+    config.active_record.action_on_strict_loading_violation = :log unless Rails.env.development?
+    config.active_record.warn_on_records_fetched_greater_than = 100
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
