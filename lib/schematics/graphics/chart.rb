@@ -45,9 +45,17 @@ module Schematics
         [@y.title, I18n.t('schematics.dashboard.home.graphics.by'), @x.title].join(' ')
       end
 
+      def joins
+        [
+          x.field&.try(:preload),
+          y.field&.try(:preload),
+        ].compact.flatten
+      end
+
       def as_json
         class_name
           .constantize
+          .joins(joins)
           .send(x.agregate.to_sym, x.to_sql)
           .send(y.agregate.to_sym, y.to_sql)
           .map do |key, value|
