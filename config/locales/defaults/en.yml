@@ -5,3 +5,7 @@ en:
     labels:
       defaults:
         _destroy: Delete?
+  errors:
+    virtuals:
+      name: "%{name} is not defined"
+      type: "Type error: %{message}"

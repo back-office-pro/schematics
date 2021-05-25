@@ -15,7 +15,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}&.parameterize(separator: ' ')
+          #{name}&.to_s&.parameterize(separator: ' ')
         RUBY
       end
 

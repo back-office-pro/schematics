@@ -43,7 +43,7 @@
             "entity": "product",
             "x": {
                 "agregate": "group",
-                "field": "state"
+                "field": "reference"
             },
             "y": {
                 "agregate": "sum",
@@ -71,6 +71,22 @@
                 {
                     "name": "full_name",
                     "function": "$first_name $last_name"
+                },
+                {
+                    "name": "concatenation_error",
+                    "function": "$foo $bar"
+                },
+                {
+                    "name": "calculation_error",
+                    "function": "$foo + $bar"
+                },
+                {
+                    "name": "type_error",
+                    "function": "$first_name * $last_name"
+                },
+                {
+                    "name": "association_error",
+                    "function": "$deleted_entity.some_attribute"
                 }
             ],
             "attributes": [

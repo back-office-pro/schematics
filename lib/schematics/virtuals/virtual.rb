@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'schematics/tokens/tokenizer'
-require 'schematics/virtuals/errors/name_error'
-require 'schematics/virtuals/errors/type_error'
 require 'schematics/behaviours/listable'
 require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
@@ -46,21 +44,32 @@ module Schematics
       end
 
       def preload
-        @tokens.select_is_a?(Tokens::Variable).flat_map(&:references).uniq.map(&:to_sym)
+        @tokens
+          .select_is_a?(Tokens::Variable)
+          .flat_map(&:references)
+          .uniq
+          .map(&:to_sym)
       end
 
       def to_str
         <<~RUBY
-          default_scope { includes(#{preload}) }
-
           def #{@name}
             #{function}
-          rescue NameError => e
-            Virtuals::Errors::NameError.new(e.message, e.name)
-          rescue TypeError => e
-            Virtuals::Errors::TypeError.new(e.message)
+          rescue StandardError => e
+            e
           end
         RUBY
+      end
+
+      def format(value)
+        case value
+        when NameError
+          I18n.t('errors.virtuals.name', name: value.name)
+        when TypeError
+          I18n.t('errors.virtuals.type', message: value.message)
+        else
+          value
+        end
       end
 
       def weight

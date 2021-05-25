@@ -21,9 +21,12 @@ module Schematics
       end
 
       def format(value)
-        return value.to_s if value.is_a?(::StandardError)
-
-        [value.round(scale.to_i), unit].compact.join(' ')
+        case value
+        when StandardError
+          super
+        else
+          [value.round(scale.to_i), unit].compact.join(' ')
+        end
       end
 
       def icon

@@ -39,14 +39,10 @@ describe Schematics::Virtuals::Calculation do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      default_scope { includes([:category]) }
-
       def tax_inclusive_price
         (price + category.vat)
-      rescue NameError => e
-        Virtuals::Errors::NameError.new(e.message, e.name)
-      rescue TypeError => e
-        Virtuals::Errors::TypeError.new(e.message)
+      rescue StandardError => e
+        e
       end
     RUBY
   end

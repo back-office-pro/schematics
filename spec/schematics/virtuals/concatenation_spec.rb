@@ -34,20 +34,16 @@ describe Schematics::Virtuals::Concatenation do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      full_name&.parameterize(separator: ' ')
+      full_name&.to_s&.parameterize(separator: ' ')
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      default_scope { includes([:profile]) }
-
       def full_name
         "\#{first_name} \#{profile.last_name}"
-      rescue NameError => e
-        Virtuals::Errors::NameError.new(e.message, e.name)
-      rescue TypeError => e
-        Virtuals::Errors::TypeError.new(e.message)
+      rescue StandardError => e
+        e
       end
     RUBY
   end
