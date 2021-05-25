@@ -73,14 +73,14 @@ class CsvImporter
     i18n_translations&.invert&.fetch(key, nil) || key.parameterize(separator: '_')
   end
 
-  def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity
     field = entity.find_field_by_name(key.to_s)
     case field
     when Schematics::Attributes::Association
       field
         .class_name
         .constantize
-        .joins(field.descriptor.instance_variable_get(:@field).try(:preload) || [])
+        .joins(field.descriptor.joins)
         .where("#{field.descriptor.to_sql} = ?", value)
         .first!
     when Schematics::Attributes::Enum

@@ -23,6 +23,10 @@ module Schematics
         name
       end
 
+      def joins
+        @field.try(:preload) || []
+      end
+
       def to_str
         <<~RUBY
           extend FriendlyId
