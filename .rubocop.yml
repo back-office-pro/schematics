@@ -29,8 +29,9 @@ Metrics/BlockLength:
     - get
     - context
     - namespace
+    - class_eval
 Metrics/MethodLength:
-  Max: 45
+  Max: 50
 Metrics/ClassLength:
   Max: 270
 RSpec/MultipleExpectations:
@@ -38,7 +39,7 @@ RSpec/MultipleExpectations:
 Metrics/CyclomaticComplexity:
   Max: 8
 Metrics/AbcSize:
-  Max: 72
+  Max: 76
 Metrics/ParameterLists:
   Max: 7
 Performance/MethodObjectAsBlock:

@@ -9,7 +9,7 @@ detectors:
   InstanceVariableAssumption:
     enabled: false
   TooManyStatements:
-    max_statements: 25
+    max_statements: 28
   UncommunicativeModuleName:
     enabled: false
   SubclassedFromCoreClass:

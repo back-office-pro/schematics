@@ -30,6 +30,14 @@ module Schematics
                 end.to_h,
               }
             end
+            let(:unprocessable_request) do
+              {
+                entity.name => entity
+                  .fillable_elements
+                  .map { |element| [element.column_name, nil] }
+                  .to_h,
+              }
+            end
 
             test_index
             test_show
@@ -68,14 +76,45 @@ module Schematics
         end
       end
 
+      def context400
+        context '400' do
+          let(:id) { record.id }
+          let(:expected_response) do
+            {
+              'errors' => [
+                { entity.name => ['parameter is required'] },
+              ],
+            }
+          end
+
+          example_request 'Bad request' do
+            expect(response_status).to eq(400)
+            expect(json_response).to eq(expected_response)
+          end
+        end
+      end
+
       def context422
         context '422' do
           let(:id) { record.id }
 
           example 'Unprocessable entity' do
-            do_request
+            do_request(unprocessable_request)
             expect(response_status).to eq(422)
           end
+        end
+      end
+
+      def set_parameters
+        entity.fillable_elements.each do |element|
+          parameter element.name.to_sym,
+                    type: element.type,
+                    default: element.json_default,
+                    with_example: true,
+                    required: element.required?,
+                    scope: entity.name.to_sym,
+                    # https://github.com/zipmark/rspec_api_documentation/issues/277
+                    method: (:custom_subject if element.name == 'subject')
         end
       end
 
@@ -157,16 +196,9 @@ module Schematics
 
         route_summary "Create #{entity.name}"
         post polymorphic_path(model_class) do
-          entity.fillable_elements.each do |element|
-            parameter element.name.to_sym,
-                      type: element.type,
-                      default: element.json_default,
-                      with_example: true,
-                      required: element.required?,
-                      scope: entity.name.to_sym
-          end
-
+          set_parameters
           context401
+          context400
           context422
           context '200' do
             example "Creating a #{entity.name}" do
@@ -183,16 +215,9 @@ module Schematics
         case entity
         when Entities::Singleton
           put polymorphic_path(model_class) do
-            entity.fillable_elements.each do |element|
-              parameter element.name.to_sym,
-                        type: element.type,
-                        default: element.json_default,
-                        with_example: true,
-                        required: element.required?,
-                        scope: entity.name.to_sym
-            end
-
+            set_parameters
             context401
+            context400
             context422
             context '200' do
               example "Updating a #{entity.name}" do
@@ -204,16 +229,9 @@ module Schematics
           end
         else
           put "#{polymorphic_path(model_class)}/:id" do
-            entity.fillable_elements.each do |element|
-              parameter element.name.to_sym,
-                        type: element.type,
-                        default: element.json_default,
-                        with_example: true,
-                        required: element.required?,
-                        scope: entity.name.to_sym
-            end
-
+            set_parameters
             context401
+            context400
             context404
             context422
             context '200' do
