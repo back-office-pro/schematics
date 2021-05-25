@@ -5,7 +5,7 @@ module Schematics
     def home; end
 
     def chart
-      render json: Schema.instance.charts[params[:id].to_i - 1]
+      render json: Schema.instance.charts[params[:id].to_i.pred]
     end
 
     def read_notifications

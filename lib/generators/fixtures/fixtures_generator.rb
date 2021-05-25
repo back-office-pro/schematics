@@ -73,11 +73,11 @@ class FixturesGenerator < Rails::Generators::Base
   private
 
   def human_root_index(root_index, index)
-    (root_index * 2 + (index - 1)).humanize
+    (root_index * 2 + index.pred).humanize
   end
 
   def human_index(index)
-    (index + 1).humanize
+    index.next.humanize
   end
 
   def fixtures_path
