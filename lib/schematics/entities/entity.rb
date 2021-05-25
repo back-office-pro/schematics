@@ -164,7 +164,10 @@ module Schematics
       end
 
       def includes
-        preloadable_elements.flat_map(&:preload).compact.uniq
+        preloadable_elements
+          .flat_map(&:preload)
+          .compact
+          .uniq - virtual_association_errors
       end
 
       def validates
@@ -262,13 +265,26 @@ module Schematics
       end
 
       def elasticsearchable_elements
-        searchable_elements.map(&:name).map(&:to_sym)
+        searchable_elements
+          .map(&:name)
+          .map(&:to_sym)
       end
 
       def search_data_elements
         searchable_elements
           .map { |element| "#{element.name}: #{element.search_data.squish}" }
           .join(", \n")
+      end
+
+      def virtual_association_errors
+        virtual_associations = association_attributes
+                               .concat(associations)
+                               .map(&:name)
+                               .map(&:to_sym)
+        virtuals
+          .flat_map(&:preload)
+          .uniq
+          .reject { |association| virtual_associations.include?(association) }
       end
     end
   end
