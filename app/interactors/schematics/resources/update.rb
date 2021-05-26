@@ -6,7 +6,7 @@ module Schematics
       include Interactor
 
       before do
-        @params   = context.resource_params
+        @params = context.resource_params
         @resource = context.resource
       end
 
