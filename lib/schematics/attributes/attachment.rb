@@ -60,6 +60,7 @@ module Schematics
       def validators
         super.merge(
           {
+            antivirus: true,
             attached: required?,
             size: {
               less_than: @options[:size]&.megabytes,

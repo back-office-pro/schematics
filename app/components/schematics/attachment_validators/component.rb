@@ -4,15 +4,15 @@ module Schematics
   module AttachmentValidators
     class Component < ApplicationComponent
       delegate :breadcrumb_trail, to: :helpers
-      BLACKLIST = %i[presence attached].freeze
+      DENYLIST = %i[presence attached antivirus].freeze
 
       def initialize(validators:)
         super
-        @validators = validators
+        @validators = validators.except(*DENYLIST)
       end
 
       def humanized_validators(validators: @validators)
-        validators.except(*BLACKLIST).map do |key, value|
+        validators.map do |key, value|
           [
             t(".#{key}"),
             case value

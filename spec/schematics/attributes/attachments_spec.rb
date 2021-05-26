@@ -21,14 +21,19 @@ describe Schematics::Attributes::Attachments do
   its(:column_name) { is_expected.to eq('files') }
   its(:icon) { is_expected.to eq(:file_image) }
   its(:default) { is_expected.to be_all(Rack::Test::UploadedFile) }
-  its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its(:validators) { is_expected.to eq(antivirus: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('directories.files') }
   its(:to_s) { is_expected.to eq('schema:directory_files') }
   its(:preload) { is_expected.to eq({ files_attachments: [blob: :variant_records] }) }
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
+
+  its(:validate) do
+    is_expected.to eq <<~RUBY
+      validates :files, {:antivirus=>true}
+    RUBY
+  end
 
   its(:permitted_params) do
     is_expected.to eq(
@@ -67,11 +72,11 @@ describe Schematics::Attributes::Attachments do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq({ presence: true, attached: true }) }
+    its(:validators) { is_expected.to eq({ presence: true, antivirus: true, attached: true }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :files, {:presence=>true, :attached=>true}
+        validates :files, {:presence=>true, :antivirus=>true, :attached=>true}
       RUBY
     end
   end

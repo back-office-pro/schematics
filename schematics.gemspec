@@ -68,6 +68,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails-erd', '~> 1.6.1'
   spec.add_dependency 'rails-i18n', '~> 6.0.0'
   spec.add_dependency 'rails-timeago', '~> 2.19.1'
+  spec.add_dependency 'ratonvirus', '~> 0.3.0'
+  spec.add_dependency 'ratonvirus-clamby', '~> 0.3.0'
   spec.add_dependency 'route_translator', '~> 10.0.0'
   spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.0.1'

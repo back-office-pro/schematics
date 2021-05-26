@@ -30,6 +30,9 @@ fr:
       aspect_ratio_not_landscape: "doit être une image de type paysage"
       aspect_ratio_is_not: "doit avoir un ratio d'aspect de %{aspect_ratio}"
       aspect_ratio_unknown: "a un ratio d'aspect inconnu"
+      antivirus_virus_detected: "contient un virus"
+      antivirus_client_error: "n'a pas pu être traitée pour l'analyse de virus"
+      antivirus_file_not_found: "n'a pas pu être trouvé pour l'analyse du virus"
     virtuals:
       name: "%{name} n'est pas défini"
       type: "Erreur de type : %{message}"

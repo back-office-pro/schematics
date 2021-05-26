@@ -21,14 +21,19 @@ describe Schematics::Attributes::Attachment do
   its(:column_name) { is_expected.to eq('avatar') }
   its(:icon) { is_expected.to eq(:file_image) }
   its(:default) { is_expected.to be_a(Rack::Test::UploadedFile) }
-  its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its(:validators) { is_expected.to eq(antivirus: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.avatar') }
   its(:to_s) { is_expected.to eq('schema:user_avatar') }
   its(:preload) { is_expected.to eq({ avatar_attachment: [blob: :variant_records] }) }
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
+
+  its(:validate) do
+    is_expected.to eq <<~RUBY
+      validates :avatar, {:antivirus=>true}
+    RUBY
+  end
 
   its(:permitted_params) do
     is_expected.to eq(
@@ -67,11 +72,11 @@ describe Schematics::Attributes::Attachment do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq({ presence: true, attached: true }) }
+    its(:validators) { is_expected.to eq({ presence: true, antivirus: true, attached: true }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:presence=>true, :attached=>true}
+        validates :avatar, {:presence=>true, :antivirus=>true, :attached=>true}
       RUBY
     end
   end
@@ -79,11 +84,11 @@ describe Schematics::Attributes::Attachment do
   context 'when size option is defined' do
     let(:options) { { size: 10 } }
 
-    its(:validators) { is_expected.to eq(size: { less_than: 10.megabytes }) }
+    its(:validators) { is_expected.to eq(antivirus: true, size: { less_than: 10.megabytes }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:size=>{:less_than=>10485760}}
+        validates :avatar, {:antivirus=>true, :size=>{:less_than=>10485760}}
       RUBY
     end
   end
@@ -91,11 +96,11 @@ describe Schematics::Attributes::Attachment do
   context 'when aspect_ratio option is defined' do
     let(:options) { { aspect_ratio: 10 } }
 
-    its(:validators) { is_expected.to eq(aspect_ratio: 10) }
+    its(:validators) { is_expected.to eq(antivirus: true, aspect_ratio: 10) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:aspect_ratio=>10}
+        validates :avatar, {:antivirus=>true, :aspect_ratio=>10}
       RUBY
     end
   end
@@ -103,11 +108,11 @@ describe Schematics::Attributes::Attachment do
   context 'when content_type option is defined' do
     let(:options) { { content_type: %w[png jpg jpeg] } }
 
-    its(:validators) { is_expected.to eq(content_type: %i[png jpg jpeg]) }
+    its(:validators) { is_expected.to eq(antivirus: true, content_type: %i[png jpg jpeg]) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:content_type=>[:png, :jpg, :jpeg]}
+        validates :avatar, {:antivirus=>true, :content_type=>[:png, :jpg, :jpeg]}
       RUBY
     end
   end
