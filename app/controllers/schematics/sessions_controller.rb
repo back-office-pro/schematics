@@ -15,8 +15,7 @@ module Schematics
     def create
       result = Sessions::Create.call(
         user_params: resource_params,
-        cookies: cookies,
-        remember_me: params[:user][:remember_me]
+        cookies: cookies
       )
       if result.success?
         respond_to do |format|
@@ -36,9 +35,9 @@ module Schematics
 
     def update
       result = Sessions::Update.call(
-        resource_params: resource_params,
+        resource_params: resource_params.except(*session_params),
         resource: current_user,
-        password: params[:user][:current_password]
+        password: resource_params[:current_password]
       )
       if result.success?
         respond_to do |format|
@@ -76,6 +75,14 @@ module Schematics
 
     def model_class
       User
+    end
+
+    def session_params
+      %i[remember_me current_password]
+    end
+
+    def permitted_params
+      super.concat(session_params)
     end
 
     def current_password_attribute

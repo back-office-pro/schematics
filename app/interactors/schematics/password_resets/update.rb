@@ -7,7 +7,7 @@ module Schematics
 
       before do
         @params = context.user_params.merge(password_reset_token: nil)
-        @user   = context.user
+        @user = context.user
       end
 
       def call

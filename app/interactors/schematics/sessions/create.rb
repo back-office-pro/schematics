@@ -6,10 +6,11 @@ module Schematics
       include Interactor
 
       before do
-        @params   = context.user_params
+        @params = context.user_params
         @password = context.password || @params[:password]
-        @cookies  = context.cookies
-        @user     = context.resource || User.find_by(email: @params[:email])
+        @cookies = context.cookies
+        @user = context.resource || User.find_by(email: @params[:email])
+        @remember_me = @params&[:remember_me]
       end
 
       def call
@@ -18,7 +19,7 @@ module Schematics
           context.jwt = JsonWebToken.encode({ auth_token: context.token })
           context.message = '.success'
           if @cookies.present?
-            if remember_me?
+            if @remember_me
               @cookies.permanent[:auth_token] = context.token
             else
               @cookies[:auth_token] = context.token
@@ -27,12 +28,6 @@ module Schematics
         else
           context.fail!(message: '.failure')
         end
-      end
-
-      private
-
-      def remember_me?
-        context.remember_me
       end
     end
   end
