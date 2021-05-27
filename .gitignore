@@ -6,3 +6,4 @@ doc/
 coverage/
 /config/master.key
 Gemfile.lock
+package-lock.json
