@@ -1,10 +1,8 @@
 $input-btn-focus-width: 0;
 $grid-gutter-width: 1.5rem !default;
-@import "bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
 
-/**
- * Forms - Custom file
- */
+// Forms - Custom file
 
 label.custom-file-label {
   background: $light;
@@ -22,17 +20,13 @@ input.custom-file-input.is-invalid + label.custom-file-label::after {
   background: $danger;
 }
 
-/**
- * Turbolinks
- */
+// Turbolinks
 
 .turbolinks-progress-bar {
   background: $primary;
 }
 
-/**
- * Typeahead
- */
+// Typeahead
 
 span.twitter-typeahead .tt-suggestion.tt-cursor,
 span.twitter-typeahead .tt-suggestion:hover,
@@ -40,9 +34,7 @@ span.twitter-typeahead .tt-suggestion:focus {
   background: $primary;
 }
 
-/**
- * Swal2
- */
+// Swal2
 
 .swal2-container.fade:not(.show) {
   opacity: inherit !important;
@@ -60,9 +52,7 @@ button.swal2-cancel.styled {
   animation: none !important;
 }
 
-/**
- * Buttons
- */
+// Buttons
 
 .btn {
   &-primary {
