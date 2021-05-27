@@ -21,6 +21,16 @@ jobs:
           bundler-cache: true
       - name: Run Reek
         run: bundle exec reek
+  slim_lint:
+    name: Slim lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run Slim lint
+        run: bundle exec slim-lint app
   standard:
     name: StandardJS
     runs-on: ubuntu-latest
