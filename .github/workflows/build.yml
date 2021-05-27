@@ -21,6 +21,17 @@ jobs:
           bundler-cache: true
       - name: Run Reek
         run: bundle exec reek
+  standard:
+    name: StandardJS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install standard
+        run: npm install standard
+      - name: Run standard
+        run: standard app
   rspec:
     name: Rspec
     runs-on: ubuntu-latest
