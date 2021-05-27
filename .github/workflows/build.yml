@@ -30,7 +30,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Run Slim lint
-        run: bundle exec slim-lint app
+        run: bundle exec slim-lint .
   standard:
     name: StandardJS
     runs-on: ubuntu-latest
