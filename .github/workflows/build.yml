@@ -31,6 +31,16 @@ jobs:
           bundler-cache: true
       - name: Run Slim lint
         run: bundle exec slim-lint app
+  scss_lint:
+    name: SCSS lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run SCSS lint
+        run: bundle exec scss-lint app
   standard:
     name: StandardJS
     runs-on: ubuntu-latest
