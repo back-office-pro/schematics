@@ -15,7 +15,7 @@
         - entity.enum_attributes.each do |attribute|
           li.nav-item.text-center.mw-100.mb-2.px-3.d-none class=('d-md-block' unless toggled?)
             ul.list-group
-              - attribute.values.each do |value|
+              - attribute.values.each do |value| # rubocop:disable Style/HashEachMethods
                 = active_link_to polymorphic_path(model_class, filter: { attribute.name => value }),
                                 active: :exact,
                                 class: 'nav-link p-0 m-0 text-secondary text-truncate segment' do
