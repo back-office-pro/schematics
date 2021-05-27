@@ -1,3 +1,5 @@
+/* global $ */
+
 $(document).on('turbolinks:load', function () {
   $('.switch-theme').on('click', function () {
     const $themes = $('link[href*=themes]')

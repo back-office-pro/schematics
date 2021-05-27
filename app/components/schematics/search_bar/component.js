@@ -1,3 +1,5 @@
+/* global $, Bloodhound, Turbolinks, ENTITY_ICONS, TYPEAHEAD_I18N_NOT_FOUND, TYPEAHEAD_I18N_PENDING */
+
 const findDescriptor = (result) => {
   if ($.type(result) === 'object') {
     const key = Object.keys(result).find(_ => _ !== 'id') || 'id'

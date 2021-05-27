@@ -1,3 +1,5 @@
+/* global $, Bloodhound, TYPEAHEAD_I18N_NOT_FOUND, TYPEAHEAD_I18N_PENDING */
+
 $(document).on('turbolinks:load', function () {
   const filterSource = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace,

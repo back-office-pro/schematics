@@ -10,6 +10,8 @@
 //= require_tree ../../../components/schematics
 //= require_tree .
 
+/* global $, Pagy, Turbolinks */
+
 $(document).on('turbolinks:load', function () {
   Pagy.init()
   $('[data-toggle="tooltip"]').tooltip()

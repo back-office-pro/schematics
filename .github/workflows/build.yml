@@ -49,9 +49,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: npm install
+      - name: Install standard
+        run: npm install -g standard
       - name: Run standard
-        run: npm test
+        run: standard app
   rspec:
     name: Rspec
     runs-on: ubuntu-latest

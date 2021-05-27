@@ -5,6 +5,8 @@
 //= require jquery-ui/ui/i18n/datepicker-fr
 //= require best_in_place.jquery-ui
 
+/* global $ */
+
 $(document).on('turbolinks:load', function () {
   $('textarea').autosize()
   $('.best_in_place').best_in_place()

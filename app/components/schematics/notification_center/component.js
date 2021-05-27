@@ -1,3 +1,5 @@
+/* global $ */
+
 $(document).on('turbolinks:load', function () {
   $('#notifications-dropdown').has('.badge.badge-danger').on('click', function () {
     const $element = $(this)
