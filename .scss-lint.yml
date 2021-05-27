@@ -1,0 +1,12 @@
+linters:
+  ImportantRule:
+    enabled: false
+
+  QualifyingElement:
+    enabled: false
+
+  ColorVariable:
+    enabled: false
+
+  SelectorDepth:
+    max_depth: 5
