@@ -1,7 +1,9 @@
 //= require chartkick
 //= require Chart.bundle
 
+/* global Chartkick */
+
 Chartkick.configure({
-    language: "<%= I18n.locale %>",
-    mapsApiKey: "<%= Schematics::Engine.credentials.gcloud[:api_key] %>"
-});
+  language: '<%= I18n.locale %>',
+  mapsApiKey: '<%= Schematics::Engine.credentials.gcloud[:api_key] %>'
+})
