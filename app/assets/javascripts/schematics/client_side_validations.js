@@ -1,8 +1,6 @@
 //= require rails.validations
 //= require rails.validations.simple_form.bootstrap4
 
-/* global ClientSideValidations */
-
 ClientSideValidations.callbacks.element.pass = function (element, callback) {
   element.closest('form').find('button[type="submit"]').removeAttr('disabled')
   callback()

@@ -1,5 +1,3 @@
-/* global $ */
-
 $(document).on('turbolinks:load', function () {
   $('#sidebar-toggle').on('click', function () {
     $('.sidebar, .content').toggleClass('toggled')

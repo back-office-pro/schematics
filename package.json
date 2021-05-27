@@ -1,0 +1,28 @@
+{
+  "name": "schematics",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "spec/dummy",
+      "vendor/bundle"
+    ],
+    "globals": [
+      "$",
+      "Pagy",
+      "Turbolinks",
+      "Chartkick",
+      "ClientSideValidations",
+      "Bloodhound",
+      "TYPEAHEAD_I18N_NOT_FOUND",
+      "TYPEAHEAD_I18N_PENDING",
+      "ENTITY_ICONS"
+    ]
+  }
+}
