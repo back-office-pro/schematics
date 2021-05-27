@@ -6,8 +6,8 @@
         .row.align-items-center
           .col.text-truncate
             h5.m-0.text-primary.text-truncate.font-weight-bold
-              = fa_icon @version.entity.icon, class: "mr-3 ml-3 fa-lg align-middle"
-              span.align-middle= title
+              = fa_icon @version.entity.icon, class: 'mr-3 ml-3 fa-lg align-middle'
+              span.align-middle = title
       .card-body.p-0
         .table-responsive
           table.table.mb-0.table-striped
@@ -15,7 +15,7 @@
               - @version.entity.renderable_elements.sort_by(&:weight).each do |field|
                 tr
                   th
-                    = fa_icon field.icon, class: "mr-2 text-muted"
+                    = fa_icon field.icon, class: 'mr-2 text-muted'
                     = @version.model_class.human_attribute_name(field.name)
                   td
                     - old_version = @version.reify(dup: true)
@@ -29,13 +29,13 @@
         .row.align-items-center
           .col.text-truncate
             h5.m-0.text-primary.text-truncate.font-weight-bold
-              = fa_icon @version.entity.icon, class: "mr-3 ml-3 fa-lg align-middle"
-              span.align-middle= title
+              = fa_icon @version.entity.icon, class: 'mr-3 ml-3 fa-lg align-middle'
+              span.align-middle = title
           .col-auto.mr-1
             - if can?(:revert, @version)
-              = link_to revert_version_path(@version), class: "btn btn-primary btn-sm btn-icon-split mr-2" do
-                span.icon= fa_icon :undo
-                span.text.d-none.d-lg-inline= t('schematics.application.button.revert')
+              = link_to revert_version_path(@version), class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
+                span.icon = fa_icon :undo
+                span.text.d-none.d-lg-inline = t('schematics.application.button.revert')
       .card-body.p-0
         .table-responsive
           table.table.mb-0.table-striped
@@ -43,7 +43,7 @@
               - @version.entity.renderable_elements.sort_by(&:weight).each do |field|
                 tr
                   th
-                    = fa_icon field.icon, class: "mr-2 text-muted"
+                    = fa_icon field.icon, class: 'mr-2 text-muted'
                     = @version.model_class.human_attribute_name(field.name)
                   td
                     = render Schematics::Resource::Component.new(resource: @version.item, field: field)

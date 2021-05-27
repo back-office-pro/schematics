@@ -3,10 +3,10 @@
   .card.shadow-sm.mb-4
     .card-header.p-2
       h5.m-0.text-primary.text-truncate.font-weight-bold
-        = fa_icon :search, class: "mr-3 ml-3 fa-lg align-middle"
-        span.align-middle= title
+        = fa_icon :search, class: 'mr-3 ml-3 fa-lg align-middle'
+        span.align-middle = title
     .card-body.text-center
       = render Schematics::EmptyResource::Component.new(suggestions: @suggestions)
 - else
-  - @results.each do |name, resources|
+  - @results.each do |_name, resources|
     = render Schematics::Viewer::Association::Component.new(resources: resources)

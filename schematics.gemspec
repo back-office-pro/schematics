@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rails', '~> 2.10.1'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.3.0'
   spec.add_development_dependency 'simplecov', '~> 0.21.2'
+  spec.add_development_dependency 'slim_lint', '~> 0.21.0'
   spec.add_development_dependency 'webpacker', '~> 5.4.0'
   spec.add_dependency 'active_link_to', '~> 1.0.5'
   spec.add_dependency 'active_model_serializers', '~> 0.10.12'
