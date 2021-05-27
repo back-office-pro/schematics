@@ -3,14 +3,14 @@
 .card.shadow-sm
   .card-header.p-2
     h5.m-0.text-primary.text-truncate.font-weight-bold
-      = fa_icon :key, class: "mr-3 ml-3 fa-lg align-middle"
-      span.align-middle= title
+      = fa_icon :key, class: 'mr-3 ml-3 fa-lg align-middle'
+      span.align-middle = title
   .card-body
     = simple_form_for :user, url: password_resets_path, wrapper: :input_group do |f|
       = f.input :email, prepend: fa_icon(:envelope)
-      = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2" do
-        span.icon= fa_icon :check
-        span.text= t('schematics.application.button.confirm')
-      = link_to login_path, class: "btn btn-danger btn-sm btn-icon-split" do
-        span.icon= fa_icon :times
-        span.text= t('schematics.application.button.cancel')
+      = f.button :button, class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
+        span.icon = fa_icon :check
+        span.text = t('schematics.application.button.confirm')
+      = link_to login_path, class: 'btn btn-danger btn-sm btn-icon-split' do
+        span.icon = fa_icon :times
+        span.text = t('schematics.application.button.cancel')

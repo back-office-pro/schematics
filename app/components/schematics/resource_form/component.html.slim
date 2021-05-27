@@ -60,7 +60,7 @@
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy,
                          as: :boolean,
-                         wrapper_html: { class: "float-right m-0 text-dark" }
+                         wrapper_html: { class: 'float-right m-0 text-dark' }
       = f.input field.name.to_sym,
                 as: :file,
                 validate: { presence: field.required? && new_record? },
@@ -69,13 +69,13 @@
       = f.input field.name.to_sym,
                 as: :password,
                 required: new_record?,
-                input_html: { autocomplete: "new-password" },
+                input_html: { autocomplete: 'new-password' },
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
       = f.input :"#{field.name}_confirmation",
                 as: :password,
                 required: new_record?,
-                input_html: { autocomplete: "new-password" },
+                input_html: { autocomplete: 'new-password' },
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Boolean
@@ -84,9 +84,9 @@
       = f.input field.name.to_sym,
                 wrapper: :input_group,
                 prepend: field.try(:unit) || fa_icon(field.icon)
-  = f.button :button, class: "btn btn-primary btn-sm btn-icon-split mr-2", disabled: new_record? do
-    span.icon= fa_icon :check
-    span.text= t('schematics.application.button.confirm')
-  = link_to @cancel_path, class: "btn btn-danger btn-sm btn-icon-split" do
-    span.icon= fa_icon :times
-    span.text= t('schematics.application.button.cancel')
+  = f.button :button, class: 'btn btn-primary btn-sm btn-icon-split mr-2', disabled: new_record? do
+    span.icon = fa_icon :check
+    span.text = t('schematics.application.button.confirm')
+  = link_to @cancel_path, class: 'btn btn-danger btn-sm btn-icon-split' do
+    span.icon = fa_icon :times
+    span.text = t('schematics.application.button.cancel')

@@ -4,7 +4,7 @@
       - entity.renderable_elements.reject_is_a?(Schematics::Attributes::RichText, Schematics::Attributes::Attachments).sort_by(&:weight).each do |field|
         tr
           th
-            = fa_icon field.icon, class: "mr-2 text-muted"
+            = fa_icon field.icon, class: 'mr-2 text-muted'
             = model_class.human_attribute_name(field.name)
           td
             = render Schematics::Resource::Component.new(resource: @resource, field: field, editable: true)

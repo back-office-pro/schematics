@@ -1,38 +1,38 @@
 .table-responsive
-  table.table.mb-0 class=(['table-striped', 'table-hover'] if @resources.any?)
+  table.table.mb-0 class=(%w[table-striped table-hover] if @resources.any?)
     = render Schematics::Filter::Component.new(model_class: klass)
     tbody class=('table-bordered border-0' if @resources.any?) class=('animate__animated animate__slideInRight' if params[:page].present?)
       - if @resources.empty?
         tr
-          td.text-center.pt-4 colspan="100%"
+          td.text-center.pt-4 colspan='100%'
             = render Schematics::EmptyResource::Component.new
       - else
-- @resources.to_a.in_groups_of(3, false).each do |group|
-  .row.no-gutters.mx-2
-    - group.each do |resource|
-      .col-xl-4.mb-2.pb-1
-        .card.mx-2
-          .card-body.p-0
-            table.table.mb-0.table-striped
-              tbody.table-bordered.border-0
-                tr
-                  td colspan="2"
-                    = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
-                    #carouselWithControls.carousel.slide data-ride="carousel"
-                      .carousel-inner
-                        - carousel(resource).each do |attachment|
-                          .carousel-item.active.text-center data-href=(polymorphic_path(resource) unless resource.deleted?)
-                            = render Schematics::Attachment::Component.new(attachment: attachment, height: 250, css_class: 'border shadow-sm')
-                      a.carousel-control-prev data-slide="prev" href="#carouselWithControls" role="button"
-                        span.carousel-control-prev-icon aria-hidden="true"
-                        span.sr-only Previous
-                      a.carousel-control-next data-slide="next" href="#carouselWithControls" role="button"
-                        span.carousel-control-next-icon aria-hidden="true"
-                        span.sr-only Next
-                - entity.listable_elements.reject_is_a?(Schematics::Attributes::Attachment).sort_by(&:weight).each do |field|
-                  tr
-                    th.text-truncate
-                      = fa_icon field.icon, class: "mr-2 text-muted"
-                      = klass.human_attribute_name(field.name)
-                    td
-                      = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
+        - @resources.to_a.in_groups_of(3, false).each do |group|
+          .row.no-gutters.mx-2
+            - group.each do |resource|
+              .col-xl-4.mb-2.pb-1
+                .card.mx-2
+                  .card-body.p-0
+                    table.table.mb-0.table-striped
+                      tbody.table-bordered.border-0
+                        tr
+                          td colspan='2'
+                            = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
+                            #carouselWithControls.carousel.slide data-ride='carousel'
+                              .carousel-inner
+                                - carousel(resource).each do |attachment|
+                                  .carousel-item.active.text-center data-href=(polymorphic_path(resource) unless resource.deleted?)
+                                    = render Schematics::Attachment::Component.new(attachment: attachment, height: 250, css_class: 'border shadow-sm')
+                              a.carousel-control-prev data-slide='prev' href='#carouselWithControls' role='button'
+                                span.carousel-control-prev-icon aria-hidden='true'
+                                span.sr-only Previous
+                              a.carousel-control-next data-slide='next' href='#carouselWithControls' role='button'
+                                span.carousel-control-next-icon aria-hidden='true'
+                                span.sr-only Next
+                        - entity.listable_elements.reject_is_a?(Schematics::Attributes::Attachment).sort_by(&:weight).each do |field|
+                          tr
+                            th.text-truncate
+                              = fa_icon field.icon, class: 'mr-2 text-muted'
+                              = klass.human_attribute_name(field.name)
+                            td
+                              = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)

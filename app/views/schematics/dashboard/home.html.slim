@@ -10,14 +10,14 @@
               h5.mb-0.text-dark.text-truncate.font-weight-bold
                 = stat
             .col-auto
-              = link_to fa_icon(stat.icon, size: "2x"), main_app.url_for(stat.model_class), class: "text-light"
+              = link_to fa_icon(stat.icon, size: '2x'), main_app.url_for(stat.model_class), class: 'text-light'
   - Schematics::Schema.instance.charts.each.with_index(1) do |chart, id|
     .col-xl-6.col-md-12.mb-4
       .card.shadow-sm
         .card-header.p-2
           h5.m-0.text-primary.text-truncate.font-weight-bold
-            = fa_icon chart.icon, class: "mr-3 ml-3 fa-lg align-middle"
-            span.align-middle= chart.title
+            = fa_icon chart.icon, class: 'mr-3 ml-3 fa-lg align-middle'
+            span.align-middle = chart.title
         .card-body
           = send chart.type,
                  dashboard_chart_path(id),

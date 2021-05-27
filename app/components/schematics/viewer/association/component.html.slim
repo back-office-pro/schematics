@@ -1,12 +1,12 @@
 .card.shadow-sm.mt-4
-  a.card-header.p-2 class=('collapsed' if collapsed?) href="#collapse-#{random}" data-toggle="collapse" role="button"
+  a.card-header.p-2 class=('collapsed' if collapsed?) href="#collapse-#{random}" data-toggle='collapse' role='button'
     .row.align-items-center
       .col.text-truncate
         h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon icon, class: "mr-3 ml-3 fa-lg align-middle"
-          span.align-middle= title
+          = fa_icon icon, class: 'mr-3 ml-3 fa-lg align-middle'
+          span.align-middle = title
       .col-auto.mr-4
-        .badge.badge-light.border.p-2.mr-4= @resources.size
+        .badge.badge-light.border.p-2.mr-4 = @resources.size
   .collapse class=(collapsed? ? 'hide' : 'show') id="collapse-#{random}"
     .card-body.p-0
       .table-responsive
@@ -16,7 +16,7 @@
               th.text-nowrap.text-center.align-middle
               - entity.listable_elements.sort_by(&:weight).each do |field|
                 th.text-nowrap.text-center.align-middle
-                  = fa_icon field.icon, class: "mr-2 text-dark"
+                  = fa_icon field.icon, class: 'mr-2 text-dark'
                   = klass.human_attribute_name(field.name)
           tbody.table-bordered.border-0
             - @resources.each do |resource|
@@ -25,21 +25,21 @@
                   .btn-group
                     - if can?(:update, resource)
                       = link_to edit_polymorphic_path(resource),
-                        class: "btn btn-primary btn-sm",
-                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.button.tooltip.edit') } do
+                        class: 'btn btn-primary btn-sm',
+                        data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.edit') } do
                         = fa_icon :edit
                     - if can?(:archive, resource)
                       = link_to fa_icon(:archive),
                         polymorphic_path(resource, action: :archive),
                         method: :delete,
-                        class: "btn btn-danger btn-sm",
-                        data: { toggle: "tooltip", placement: "top", title: t('schematics.application.button.tooltip.archive') }
+                        class: 'btn btn-danger btn-sm',
+                        data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
                     - if attachment?
                       = form_for @resources.first.record do |f|
                         = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
                           = fields.hidden_field :id, value: resource.id
                           = fields.hidden_field :_destroy, value: true
-                        = f.button :button, class: "btn btn-danger btn-sm", data: confirm_data.merge({ toggle: "tooltip", placement: "top", title: t('schematics.application.button.destroy') }) do
+                        = f.button :button, class: 'btn btn-danger btn-sm', data: confirm_data.merge({ toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }) do
                           = fa_icon(:trash)
                 - entity.listable_elements.sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle

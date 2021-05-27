@@ -1,13 +1,13 @@
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
-  a#notifications-dropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-    = fa_icon :bell, class: unread_count.zero? ? "fa-lg" : "fa-lg animate__animated animate__pulse animate__slower animate__infinite"
+  a#notifications-dropdown.nav-link.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+    = fa_icon :bell, class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
     - unless unread_count.zero?
-      .badge.badge-danger.animate__animated.animate__zoomIn= display_unread_count
-  .dropdown-menu.dropdown-menu-right.animate__animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby="notifications-dropdown"
-    h5.dropdown-header.font-weight-bold.bg-light= t('.title')
+      .badge.badge-danger.animate__animated.animate__zoomIn = display_unread_count
+  .dropdown-menu.dropdown-menu-right.animate__animated.animate__zoomIn.shadow-sm.p-0.mt-2 aria-labelledby='notifications-dropdown'
+    h5.dropdown-header.font-weight-bold.bg-light = t('.title')
     .pre-scrollable
       - versions.each do |version|
         .dropdown-item.d-flex.align-items-center
           = render Schematics::VersionPreview::Component.new(version: version)
     .dropdown-divider.m-0
-    = link_to t('.show_all'), versions_path, class: "dropdown-item text-muted text-center small p-2"
+    = link_to t('.show_all'), versions_path, class: 'dropdown-item text-muted text-center small p-2'

@@ -3,6 +3,6 @@
     = link_to render(Schematics::Attachment::Component.create_avatar(attachment: user.avatar)), user
   .col.text-truncate
     = link_to item.to_s, item if item.present?
-    div.text-muted= timeago_tag(created_at)
+    .text-muted = timeago_tag(created_at)
   .col-auto.align-self-center
     = fa_icon(icon, size: '2x', class: 'text-light')
