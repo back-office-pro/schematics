@@ -13,15 +13,15 @@
           = fields.hidden_field :id, value: value.id
           = fields.hidden_field :_destroy, value: true
         = f.button :button,
-                    class: "btn btn-danger btn-sm float-right",
-                    data: confirm_data.merge({ toggle: "tooltip", placement: "left", title: t('schematics.application.button.destroy') }) do
+                    class: 'btn btn-danger btn-sm float-right',
+                    data: confirm_data.merge({ toggle: 'tooltip', placement: 'left', title: t('schematics.application.button.destroy') }) do
                       = fa_icon(:trash)
     - if value.representable?
       = render Schematics::Attachment::Component.new(attachment: value)
     - else
       = link_to value.filename, value
 - when Schematics::Attributes::Boolean
-  = value ? fa_icon(:check, class: "text-success") : fa_icon(:times, class: "text-danger")
+  = value ? fa_icon(:check, class: 'text-success') : fa_icon(:times, class: 'text-danger')
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
@@ -29,18 +29,18 @@
     = best_in_place @resource,
                     @field.column_name.to_sym,
                     as: @field.input_type,
-                    inner_class: "form-control border p-0",
+                    inner_class: 'form-control border p-0',
                     collection: @field.input_collection,
-                    display_with: lambda { |value| tag.span(class: "flag-icon flag-icon-#{value.downcase}") }
+                    display_with: ->(value) { tag.span(class: "flag-icon flag-icon-#{value.downcase}") }
   - else
     = tag.span(class: "flag-icon flag-icon-#{value.downcase}")
 - when editable? && Schematics::Behaviours::Editable
   = best_in_place @resource,
                   @field.column_name.to_sym,
                   as: @field.input_type,
-                  inner_class: "form-control border p-0",
+                  inner_class: 'form-control border p-0',
                   collection: @field.try(:input_collection),
-                  display_with: (lambda { |value| @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
+                  display_with: (->(value) { @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
 - when Schematics::Behaviours::Searchable
   = highlight @field.format(value), params[:query]
 - else
