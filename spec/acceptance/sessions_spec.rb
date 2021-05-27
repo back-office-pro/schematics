@@ -19,6 +19,7 @@ resource 'Sessions' do
     with_options scope: :user, with_example: true do
       parameter :email, 'The user email', required: true
       parameter :password, 'The user password', required: true
+      parameter :remember_me, 'Set a session cookie'
     end
 
     context 'when credentials are correct' do

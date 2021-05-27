@@ -10,7 +10,7 @@ module Schematics
         @password = context.password || @params[:password]
         @cookies = context.cookies
         @user = context.resource || User.find_by(email: @params[:email])
-        @remember_me = @params&.fetch(:remember_me)
+        @remember_me = @params&.fetch(:remember_me, false)
       end
 
       def call
