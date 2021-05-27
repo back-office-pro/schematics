@@ -1,7 +1,3 @@
-exclude:
-  - vendor/bundle
-  - spec/dummy
-
 linters:
   LineLength:
     max: 200
