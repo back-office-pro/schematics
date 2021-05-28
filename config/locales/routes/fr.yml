@@ -1,17 +1,18 @@
+---
 fr:
   routes:
-    settings: parametres
-    searches: recherche
-    versions: historique
-    login: connexion
-    profile: profil
-    logout: deconnexion
-    password_lost: mot_de_passe_perdu
-    files: fichiers
-    users: utilisateurs
-    messages: messages
-    directories: dossiers
-    roles: roles
-    new: nouveau
-    edit: editer
     delete: supprimer
+    directories: dossiers
+    edit: editer
+    files: fichiers
+    login: connexion
+    logout: deconnexion
+    messages: messages
+    new: nouveau
+    password_lost: mot_de_passe_perdu
+    profile: profil
+    roles: roles
+    searches: recherche
+    settings: parametres
+    users: utilisateurs
+    versions: historique

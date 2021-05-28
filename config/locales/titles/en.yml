@@ -1,25 +1,26 @@
+---
 en:
   titles:
     schematics:
       dashboard:
         home: Dashboard
+      password_resets:
+        edit: Password reset
+        new: Password reset
+      preferences:
+        edit: Notification preferences
+      resources:
+        delete: Delete %{resource}
+        edit: Edit %{resource}
+        import: Import %{model_name_plural}
+        index: List of %{model_name_plural}
+        new: Add a new %{model_name}
+        show: "%{resource}"
       searches:
         show: Search "%{query}"
       sessions:
-        new: Login
         edit: Edit my profile
+        new: Login
       versions:
         index: Timeline
         show: Timeline
-      preferences:
-        edit: Notification preferences
-      password_resets:
-        new: Password reset
-        edit: Password reset
-      resources:
-        index: List of %{model_name_plural}
-        new: Add a new %{model_name}
-        edit: Edit %{resource}
-        delete: Delete %{resource}
-        show: "%{resource}"
-        import: Import %{model_name_plural}

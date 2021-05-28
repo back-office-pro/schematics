@@ -1,7 +1,8 @@
+---
 en:
   activerecord:
     attributes:
       active_storage/attachment:
-        filename: Filename
-        content_type: Content type
         byte_size: Byte size
+        content_type: Content type
+        filename: Filename

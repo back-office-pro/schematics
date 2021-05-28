@@ -1,12 +1,13 @@
+---
 fr:
   activerecord:
-    models:
-      setting: 
-        one: Paramètre
-        other: Paramètres
     attributes:
       setting:
-        company_name: Nom de la société
         company_address: Adresse de la société
-        company_registration_number: Numéro SIRET de la société
         company_logo: Logo de la société
+        company_name: Nom de la société
+        company_registration_number: Numéro SIRET de la société
+    models:
+      setting:
+        one: Paramètre
+        other: Paramètres

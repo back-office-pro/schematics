@@ -1,29 +1,30 @@
-en:  
+---
+en:
   schematics:
     application:
+      button:
+        add: Add a new %{model_name}
+        cancel: Cancel
+        confirm: Confirm
+        destroy: Delete permanently
+        download_as_csv: Download as CSV
+        download_pdf: Download PDF
+        edit: Edit
+        import: Import %{model_name}
+        reset_filters: Reset filters
+        revert: Revert
+        tooltip:
+          archive: Archive
+          edit: Edit
+          restore: Restore
+      delete:
+        subtitle: This action is irreversible
+        title: Are you sure?
+        warning: 'Removing the %{model_name} %{resource} will also result in the permanent removal of the following:'
+      dropdown:
+        per_page: "%{size} %{model_name} per page"
       resource:
         empty: No data available
       typeahead:
         not_found: No result
         pending: Loading...
-      dropdown:
-        per_page: "%{size} %{model_name} per page"
-      button:
-        tooltip:
-          restore: Restore
-          edit: Edit
-          archive: Archive
-        destroy: Delete permanently
-        confirm: Confirm
-        cancel: Cancel
-        add: Add a new %{model_name}
-        import: Import %{model_name}
-        download_as_csv: Download as CSV
-        reset_filters: Reset filters
-        edit: Edit
-        download_pdf: Download PDF
-        revert: Revert
-      delete:
-        title: Are you sure?
-        subtitle: This action is irreversible
-        warning: "Removing the %{model_name} %{resource} will also result in the permanent removal of the following:"

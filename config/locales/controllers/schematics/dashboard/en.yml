@@ -1,10 +1,11 @@
-en: 
+---
+en:
   schematics:
     dashboard:
       home:
         graphics:
-          by: by
-          of: of
           agregate:
             count: Count
             sum: Sum of
+          by: by
+          of: of

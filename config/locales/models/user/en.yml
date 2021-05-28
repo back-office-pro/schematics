@@ -1,7 +1,8 @@
+---
 en:
   activerecord:
     attributes:
       user:
         locales:
-          fr: French
           en: English
+          fr: French

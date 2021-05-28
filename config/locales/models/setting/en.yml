@@ -1,10 +1,11 @@
+---
 en:
   activerecord:
-    models:
-      setting: Setting
     attributes:
       setting:
-        company_name: Company name
         company_address: Company address
-        company_registration_number: Company registration number
         company_logo: Company Logo
+        company_name: Company name
+        company_registration_number: Company registration number
+    models:
+      setting: Setting

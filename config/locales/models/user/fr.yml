@@ -1,20 +1,21 @@
+---
 fr:
   activerecord:
-    models:
-      user: 
-        one: Utilisateur
-        other: Utilisateurs
     attributes:
       user:
+        avatar: Avatar
+        current_password: Mot de passe actuel
         email: E-mail
         first_name: Prénom
         full_name: Nom complet
         last_name: Nom
-        avatar: Avatar
         locale: Langue
+        locales:
+          en: Anglais
+          fr: Français
         password: Mot de passe
         password_confirmation: Confirmation mot de passe
-        current_password: Mot de passe actuel
-        locales:
-          fr: Français
-          en: Anglais
+    models:
+      user:
+        one: Utilisateur
+        other: Utilisateurs

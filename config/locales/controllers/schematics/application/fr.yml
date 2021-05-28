@@ -1,9 +1,10 @@
-fr:  
+---
+fr:
   schematics:
     application:
-      not_found: 
-        alert: "%{model_name} non trouvé"
-      forbidden: 
+      forbidden:
         alert: Accès non autorisé
+      not_found:
+        alert: "%{model_name} non trouvé"
       parameter_missing:
         alert: Une erreur est survenue

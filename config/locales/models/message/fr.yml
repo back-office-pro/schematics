@@ -1,21 +1,22 @@
+---
 fr:
   activerecord:
-    models:
-      message: 
-        one: Message
-        other: Messages
     attributes:
       message:
-        subject: Sujet
-        content: Contenu
         author: Auteur
+        content: Contenu
         read_at: Consulté le
-        sent_messages:
-          zero: Aucun message envoyé
-          one: Message envoyé
-          other: Messages envoyés
-        recipient: Destinataire
         received_messages:
-          zero: Aucun message reçu
           one: Message reçu
           other: Messages reçus
+          zero: Aucun message reçu
+        recipient: Destinataire
+        sent_messages:
+          one: Message envoyé
+          other: Messages envoyés
+          zero: Aucun message envoyé
+        subject: Sujet
+    models:
+      message:
+        one: Message
+        other: Messages

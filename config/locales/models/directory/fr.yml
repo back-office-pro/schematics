@@ -1,11 +1,12 @@
+---
 fr:
   activerecord:
-    models:
-      directory: 
-        one: Dossier
-        other: Dossiers
     attributes:
       directory:
+        files: Fichiers
         name: Nom
         parent: Parent
-        files: Fichiers
+    models:
+      directory:
+        one: Dossier
+        other: Dossiers

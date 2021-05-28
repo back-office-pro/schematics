@@ -1,19 +1,20 @@
+---
 en:
   activerecord:
-    models:
-      permission: 
-        one: Permission
-        other: Permissions
     attributes:
       permission:
-        model: Data
         action: Action
-        name: Name
         actions:
-          read: Read
-          create: Add
-          update: Edit
-          import: Import
-          destroy: Delete
           archive: Archive
+          create: Add
+          destroy: Delete
+          import: Import
+          read: Read
           restore: Restore
+          update: Edit
+        model: Data
+        name: Name
+    models:
+      permission:
+        one: Permission
+        other: Permissions

@@ -1,25 +1,26 @@
+---
 fr:
   titles:
     schematics:
       dashboard:
         home: Tableau de bord
+      password_resets:
+        edit: Mot de passe oublié
+        new: Mot de passe oublié
+      preferences:
+        edit: Préférences de notification
+      resources:
+        delete: Supprimer %{resource}
+        edit: Editer %{resource}
+        import: Importer des %{model_name_plural}
+        index: Liste des %{model_name_plural}
+        new: Ajouter un %{model_name}
+        show: "%{resource}"
       searches:
         show: Recherche "%{query}"
       sessions:
-        new: Se connecter
         edit: Editer mon profil
+        new: Se connecter
       versions:
         index: Historique
         show: Historique
-      preferences:
-        edit: Préférences de notification
-      password_resets:
-        new: Mot de passe oublié
-        edit: Mot de passe oublié
-      resources:
-        index: Liste des %{model_name_plural}
-        new: Ajouter un %{model_name}
-        edit: Editer %{resource}
-        delete: Supprimer %{resource}
-        show: "%{resource}"
-        import: Importer des %{model_name_plural}

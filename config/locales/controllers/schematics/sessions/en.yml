@@ -1,12 +1,13 @@
-en:  
+---
+en:
   schematics:
     sessions:
       create:
-        success: Logged in!
         failure: Email or password is invalid
-      update:
-        success: Your profile was successfully updated
-        failure: Wrong password
+        success: Logged in!
       destroy:
-        success: Logged out!
         failure: An error occurred
+        success: Logged out!
+      update:
+        failure: Wrong password
+        success: Your profile was successfully updated

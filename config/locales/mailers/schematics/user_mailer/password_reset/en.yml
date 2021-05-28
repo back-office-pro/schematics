@@ -1,9 +1,10 @@
+---
 en:
   schematics:
     user_mailer:
       password_reset:
-        subject: Password reset
-        body: 
+        body:
           first: To reset your password click the link below.
-          second: If you did not request your password to be reset please ignore this email and your password will stay as it is.
           link: Click here
+          second: If you did not request your password to be reset please ignore this email and your password will stay as it is.
+        subject: Password reset

@@ -1,21 +1,22 @@
-en:  
+---
+en:
   schematics:
     resources:
-      create:
-        success: "%{model_name} was successfully created"
-        failure: An error occured
-      update:
-        success: "%{model_name} was successfully updated"
-        failure: An error occured
-      destroy:
-        success: "%{model_name} was successfully destroyed"
-        failure: An error occured
       archive:
+        failure: An error occured
         success: "%{model_name} was successfully archived"
-        failure: An error occured
-      restore:
-        success: "%{model_name} was successfully restored"
-        failure: An error occured
       bulk_insert:
-        success: "%{model_name_plural} were successfully imported"
         failure: One or more error occured during %{model_name_plural} import
+        success: "%{model_name_plural} were successfully imported"
+      create:
+        failure: An error occured
+        success: "%{model_name} was successfully created"
+      destroy:
+        failure: An error occured
+        success: "%{model_name} was successfully destroyed"
+      restore:
+        failure: An error occured
+        success: "%{model_name} was successfully restored"
+      update:
+        failure: An error occured
+        success: "%{model_name} was successfully updated"

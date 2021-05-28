@@ -1,10 +1,11 @@
-fr: 
+---
+fr:
   schematics:
     dashboard:
       home:
         graphics:
-          by: par
-          of: des
           agregate:
             count: Total
             sum: Somme des
+          by: par
+          of: des

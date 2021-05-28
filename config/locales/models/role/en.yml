@@ -1,9 +1,10 @@
+---
 en:
   activerecord:
-    models:
-      role: 
-        one: Role
-        other: Roles
     attributes:
       role:
         name: Name
+    models:
+      role:
+        one: Role
+        other: Roles

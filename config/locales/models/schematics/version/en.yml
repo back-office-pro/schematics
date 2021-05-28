@@ -1,6 +1,7 @@
+---
 en:
   activerecord:
     models:
-      schematics/version: 
+      schematics/version:
         one: Version
         other: Versions

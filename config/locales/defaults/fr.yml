@@ -1,6 +1,34 @@
+---
 fr:
   attributes:
     created_at: date de création
+  errors:
+    messages:
+      antivirus_client_error: n'a pas pu être traitée pour l'analyse de virus
+      antivirus_file_not_found: n'a pas pu être trouvé pour l'analyse du virus
+      antivirus_virus_detected: contient un virus
+      aspect_ratio_is_not: doit avoir un ratio d'aspect de %{aspect_ratio}
+      aspect_ratio_not_landscape: doit être une image de type paysage
+      aspect_ratio_not_portrait: doit être une image de type portait
+      aspect_ratio_not_square: doit être une image carrée
+      aspect_ratio_unknown: a un ratio d'aspect inconnu
+      content_type_invalid: a un type de fichier non valide
+      dimension_height_equal_to: doit avoir une hauteur égale à %{length} pixels
+      dimension_height_greater_than_or_equal_to: doit avoir une hauteur supérieure ou égale à %{length} pixels
+      dimension_height_inclusion: doit avoir une hauteur comprise entre %{min} et %{max} pixels
+      dimension_height_less_than_or_equal_to: doit avoir une hauteur inférieure ou égale à %{length} pixels
+      dimension_max_inclusion: doit avoir des dimensions inférieures ou égales à %{width} x %{height} pixels
+      dimension_min_inclusion: doit avoir des dimensions supérieures ou égales à %{width} x %{height} pixels
+      dimension_width_equal_to: doit avoir une largeur égale à %{length} pixels
+      dimension_width_greater_than_or_equal_to: doit avoir une largeur supérieure ou égale à %{length} pixels
+      dimension_width_inclusion: doit avoir une largeur comprise entre %{min} et %{max} pixels
+      dimension_width_less_than_or_equal_to: doit avoir une largeur inférieure ou égale à %{length} pixels
+      file_size_out_of_range: a un poids de %{file_size} qui n'entre pas dans les limites requises
+      image_metadata_missing: n'est pas une image valide
+      limit_out_of_range: a un nombre de fichiers en dehors des limites
+    virtuals:
+      name: "%{name} n'est pas défini"
+      type: 'Erreur de type : %{message}'
   simple_form:
     labels:
       defaults:
@@ -9,30 +37,3 @@ fr:
         email: E-mail
         password: Mot de passe
         remember_me: Se souvenir de moi
-  errors:
-    messages:
-      content_type_invalid: "a un type de fichier non valide"
-      file_size_out_of_range: "a un poids de %{file_size} qui n'entre pas dans les limites requises"
-      limit_out_of_range: "a un nombre de fichiers en dehors des limites"
-      image_metadata_missing: "n'est pas une image valide"
-      dimension_min_inclusion: "doit avoir des dimensions supérieures ou égales à %{width} x %{height} pixels"
-      dimension_max_inclusion: "doit avoir des dimensions inférieures ou égales à %{width} x %{height} pixels"
-      dimension_width_inclusion: "doit avoir une largeur comprise entre %{min} et %{max} pixels"
-      dimension_height_inclusion: "doit avoir une hauteur comprise entre %{min} et %{max} pixels"
-      dimension_width_greater_than_or_equal_to: "doit avoir une largeur supérieure ou égale à %{length} pixels"
-      dimension_height_greater_than_or_equal_to: "doit avoir une hauteur supérieure ou égale à %{length} pixels"
-      dimension_width_less_than_or_equal_to: "doit avoir une largeur inférieure ou égale à %{length} pixels"
-      dimension_height_less_than_or_equal_to: "doit avoir une hauteur inférieure ou égale à %{length} pixels"
-      dimension_width_equal_to: "doit avoir une largeur égale à %{length} pixels"
-      dimension_height_equal_to: "doit avoir une hauteur égale à %{length} pixels"
-      aspect_ratio_not_square: "doit être une image carrée"
-      aspect_ratio_not_portrait: "doit être une image de type portait"
-      aspect_ratio_not_landscape: "doit être une image de type paysage"
-      aspect_ratio_is_not: "doit avoir un ratio d'aspect de %{aspect_ratio}"
-      aspect_ratio_unknown: "a un ratio d'aspect inconnu"
-      antivirus_virus_detected: "contient un virus"
-      antivirus_client_error: "n'a pas pu être traitée pour l'analyse de virus"
-      antivirus_file_not_found: "n'a pas pu être trouvé pour l'analyse du virus"
-    virtuals:
-      name: "%{name} n'est pas défini"
-      type: "Erreur de type : %{message}"
