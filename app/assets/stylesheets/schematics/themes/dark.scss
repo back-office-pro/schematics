@@ -1,4 +1,4 @@
-@import "bootswatch/dist/darkly/variables";
+@import 'bootswatch/dist/darkly/variables';
 $primary: #2c3e50;
 $link-color: $light;
 $card-bg: $secondary;
@@ -14,22 +14,20 @@ $pagination-bg: $primary;
 $pagination-hover-bg: darken($primary, 15%);
 $pagination-disabled-bg: lighten($primary, 15%);
 $pagination-active-bg: $primary;
-@import "default";
-@import "bootswatch/dist/darkly/bootswatch";
+@import 'default';
+@import 'bootswatch/dist/darkly/bootswatch';
 
-.navbar {
-  background: $light !important;
-}
-
-.navbar.scrolled {
-  background: rgba(48, 48, 48, 0.6) !important;
-}
-
+.navbar,
 .navbar.scrolled:hover {
   background: $light !important;
 }
 
-.text-primary, .text-light {
+.navbar.scrolled {
+  background: rgba(48, 48, 48, .6) !important;
+}
+
+.text-primary,
+.text-light {
   color: $dark !important;
 }
 
