@@ -9,4 +9,4 @@ linters:
     enabled: false
 
   SelectorDepth:
-    max_depth: 5
+    max_depth: 4
