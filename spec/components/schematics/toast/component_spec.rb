@@ -13,7 +13,6 @@ RSpec.describe Schematics::Toast::Component, type: :component do
     let(:message) { 'Logged out!' }
     let(:title) { component.translate('.notice') }
 
-    it { is_expected.to have_css('.border-success') }
     it { is_expected.to have_css('.bg-success') }
     it { is_expected.to have_selector('strong', text: title) }
     it { is_expected.to have_text(message) }
@@ -24,7 +23,6 @@ RSpec.describe Schematics::Toast::Component, type: :component do
     let(:message) { 'Forbidden!' }
     let(:title) { component.translate('.alert') }
 
-    it { is_expected.to have_css('.border-danger') }
     it { is_expected.to have_css('.bg-danger') }
     it { is_expected.to have_selector('strong', text: title) }
     it { is_expected.to have_text(message) }
