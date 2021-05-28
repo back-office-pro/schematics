@@ -16,6 +16,7 @@ module Schematics
 
     # Security
     config.force_ssl = Rails.env.production?
+    config.require_master_key = true
 
     # Action Controller
     config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
