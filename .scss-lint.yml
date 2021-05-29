@@ -7,6 +7,3 @@ linters:
 
   ColorVariable:
     enabled: false
-
-  SelectorDepth:
-    max_depth: 4
