@@ -10,7 +10,6 @@
   }
 
   .sidebar-brand {
-    background: rgba(0, 0, 0, .2);
     font-size: 1rem;
     font-weight: 800;
     height: 3.5rem;
@@ -22,7 +21,7 @@
   .nav-link.active {
     color: #fff !important;
 
-    .list-group-item .badge {
+    .badge {
       background: #fff !important;
     }
   }
