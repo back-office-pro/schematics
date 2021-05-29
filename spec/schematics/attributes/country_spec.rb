@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/string'
+require 'schematics/attributes/country'
 require 'schematics/entities/entity'
 
 describe Schematics::Attributes::Country do
