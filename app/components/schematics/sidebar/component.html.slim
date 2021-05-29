@@ -23,6 +23,6 @@
                     span = attribute.format(value)
                     span.badge.badge-secondary.text-primary = model_class.send(:"#{attribute.name}_#{value}").size
       li.nav-item.mb-2
-  button#sidebar-toggle.btn.btn-block.text-secondary.rounded-0.border-0.text-right.py-3
+  button#sidebar-toggle.btn.btn-block.text-secondary.border-0.text-right.py-3
     .d-none.mr-3 class=('d-md-block' unless toggled?) = fa_icon :chevron_left, class: 'fa-lg'
     .d-none.mr-3 class=('d-md-block' if toggled?) = fa_icon :chevron_right, class: 'fa-lg'

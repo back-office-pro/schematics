@@ -1,5 +1,5 @@
-.input-group.mx-1.mb-2.mt-1
+.input-group
   = search_field_tag filter_name,
                      value,
                      placeholder: t('.prompt', attribute_name: attribute_name),
-                     class: "form-control typeahead-filter bg-light border-success #{'border-0' unless active?}"
+                     class: 'form-control typeahead-filter border-0 bg-transparent'

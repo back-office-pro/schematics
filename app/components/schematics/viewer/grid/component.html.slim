@@ -1,19 +1,19 @@
 .table-responsive
   table.table.mb-0
     = render Schematics::Filter::Component.new(model_class: klass)
-    tbody class=('table-bordered border-0' if @resources.any?) class=('animate__animated animate__slideInRight' if params[:page].present?)
+    tbody class=('animate__animated animate__slideInRight' if params[:page].present?)
       - if @resources.empty?
         tr
           td.text-center.pt-4 colspan='100%'
             = render Schematics::EmptyResource::Component.new
 - @resources.to_a.in_groups_of(3, false).each do |group|
-  .row.no-gutters.mx-2
+  .row.no-gutters
     - group.each do |resource|
-      .col-xl-4.mb-2.pb-1
-        .card.mx-2
+      .col-xl-4
+        .card.border-0
           .card-body.p-0
             table.table.mb-0.table-striped
-              tbody.table-bordered.border-0
+              tbody
                 tr
                   td colspan='2'
                     = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
@@ -21,7 +21,7 @@
                       .carousel-inner
                         - carousel(resource).each do |attachment|
                           .carousel-item.active.text-center data-href=(polymorphic_path(resource) unless resource.deleted?)
-                            = render Schematics::Attachment::Component.new(attachment: attachment, height: 250, css_class: 'border shadow-sm')
+                            = render Schematics::Attachment::Component.new(attachment: attachment, height: 250, css_class: 'rounded')
                       a.carousel-control-prev data-slide='prev' href='#carouselWithControls' role='button'
                         span.carousel-control-prev-icon aria-hidden='true'
                         span.sr-only Previous

@@ -44,11 +44,9 @@ body {
     height: 3.5rem;
   }
 
-  .badge.badge-danger {
-    border-radius: 1rem;
-    padding: .25rem .4rem;
+  .badge {
     position: absolute;
-    right: .75rem;
+    right: .5rem;
     top: -.25rem;
   }
 }
@@ -81,13 +79,7 @@ footer {
 
 // Tables
 
-.table-bordered th,
-.table-bordered td {
-  border-left-style: dotted !important;
-  border-right-style: dotted !important;
-}
-
-.table thead tr:first-child a {
+.table thead tr:first-child {
   text-decoration: underline;
 }
 
@@ -101,46 +93,20 @@ footer {
   width: 1%;
 }
 
-.table thead th {
-  border-bottom-width: 0 !important;
-  border-top-width: 0 !important;
-}
-
-.table tbody tr td:first-child,
-.table tbody tr td:nth-child(2),
-.table tbody tr th:first-child {
-  border-left-width: 0 !important;
-}
-
-.table tbody tr:not([data-href]):first-child td,
-.table tbody tr:not([data-href]):first-child th {
-  border-top-width: 0 !important;
-}
-
-.table tbody tr:last-child td,
-.table tbody tr:last-child th {
-  border-bottom-width: 0 !important;
-}
-
-.table tbody tr td:last-child,
-.table tbody tr td:first-child,
-.table tbody tr th:last-child {
-  border-right-width: 0 !important;
-}
-
 .table tr.disabled {
   pointer-events: none;
 }
 
-.table tr td .btn-group.enabled {
+.table td .btn-group.enabled {
   pointer-events: auto;
 }
 
-.table tr.filters th:last-child > div {
-  margin-right: .5rem !important;
+.table td,
+th {
+  border: none !important;
 }
 
-.table tr td[colspan='2'] .btn-group.enabled {
+.table td[colspan='2'] .btn-group.enabled {
   position: absolute;
   right: .5rem;
   z-index: 2;
@@ -192,21 +158,6 @@ footer {
 
 .w-0 {
   width: 0;
-}
-
-.btn {
-  border-style: solid;
-  border-width: 0 1px 4px;
-
-  &:not(.disabled):hover {
-    border-bottom-width: 3px;
-    margin-top: 1px;
-  }
-
-  &:not(.disabled):active {
-    border-bottom-width: 2px;
-    margin-top: 2px;
-  }
 }
 
 .btn-icon-split {

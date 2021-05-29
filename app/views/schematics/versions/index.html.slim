@@ -4,9 +4,9 @@
     ul.timeline.list-unstyled
       - @versions.each do |version|
         li
-          .timeline-icon.bg-primary.border.shadow-sm
+          .timeline-icon.bg-primary
             = link_to fa_icon(version.entity.icon, size: '2x'), main_app.polymorphic_path(version.model_class), class: 'text-light'
-          .card.shadow-sm
-            .card-body
+          .card.border-0
+            .card-body.p-3
               = render Schematics::VersionPreview::Component.new(version: version)
 == pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1

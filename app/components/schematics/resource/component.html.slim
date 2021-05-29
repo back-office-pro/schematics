@@ -29,7 +29,7 @@
     = best_in_place @resource,
                     @field.column_name.to_sym,
                     as: @field.input_type,
-                    inner_class: 'form-control border p-0',
+                    inner_class: 'form-control border-0',
                     collection: @field.input_collection,
                     display_with: ->(value) { tag.span(class: "flag-icon flag-icon-#{value.downcase}") }
   - else
@@ -38,7 +38,7 @@
   = best_in_place @resource,
                   @field.column_name.to_sym,
                   as: @field.input_type,
-                  inner_class: 'form-control border p-0',
+                  inner_class: 'form-control border-0',
                   collection: @field.try(:input_collection),
                   display_with: (->(value) { @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
 - when Schematics::Behaviours::Searchable

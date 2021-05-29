@@ -1,18 +1,18 @@
 = form_tag '', method: :get, class: 'form-inline mb-4' do
   = submit_tag 'Filtrer', name: nil, class: 'd-none'
-  .card.shadow-sm.w-100
-    .card-header.p-2
+  .card.shadow-sm.border-0.w-100
+    .card-header.border-bottom.border-light.p-2
       .row.align-items-center
         .col.text-truncate
           h5.m-0.text-primary.text-truncate.font-weight-bold
-            = fa_icon :table, class: 'mr-3 ml-3 fa-lg align-middle'
+            = fa_icon :table, class: 'mr-3 ml-2 fa-lg align-middle'
             span.align-middle = title
         .col-auto.mr-1
           - if @pagy.pages > 1
             = select_tag :per_page,
               options_for_select([10, 25, 50, 100].map { |size| [t('schematics.application.dropdown.per_page', size: size, model_name: @model_name_plural), size] }, params.fetch(:per_page, 25)),
               onchange: '$(this.form).submit()',
-              class: 'form-control form-control-sm bg-light border-0 d-none d-md-inline mr-2'
+              class: 'form-control form-control-sm border-0 bg-transparent d-none d-md-inline mr-2'
           = link_to polymorphic_path(model_class, format: :csv), class: 'btn btn-light btn-sm btn-icon-split mr-2' do
             span.icon = fa_icon :file_csv
             span.text.d-none.d-lg-inline = t('schematics.application.button.download_as_csv')

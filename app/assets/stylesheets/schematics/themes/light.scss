@@ -4,6 +4,7 @@ $pagination-bg: $primary;
 $pagination-hover-bg: darken($primary, 15%);
 $pagination-disabled-bg: lighten($primary, 15%);
 $pagination-active-bg: $primary;
+$table-accent-bg: lighten($light, 2.5%);
 @import 'default';
 @import 'bootswatch/dist/flatly/bootswatch';
 
