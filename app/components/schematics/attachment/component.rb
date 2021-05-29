@@ -9,6 +9,7 @@ module Schematics
             attachment: attachment,
             width: 36,
             height: 36,
+            css_class: 'rounded-circle border shadow-sm',
             replacement: { icon: :user_circle, size: '2x' },
           }
           new(**args)
