@@ -17,12 +17,13 @@ describe Schematics::Attributes::Enum do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
   its(:type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('state') }
   its(:icon) { is_expected.to eq(:list_ol) }
   its(:input_type) { is_expected.to eq(:select) }
-  its(:default) { is_expected.to be_nil }
+  its(:default) { is_expected.to eq('available') }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('products.state') }
   its(:to_s) { is_expected.to eq('schema:product_state') }

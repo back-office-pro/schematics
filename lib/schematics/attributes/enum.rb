@@ -6,6 +6,7 @@ require 'schematics/behaviours/renderable'
 require 'schematics/behaviours/searchable'
 require 'schematics/behaviours/fillable'
 require 'schematics/behaviours/editable'
+require 'schematics/behaviours/enumerable'
 
 module Schematics
   module Attributes
@@ -15,21 +16,14 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Editable
-
-      def values
-        @options[:values]
-      end
-
-      def validators
-        super.merge(inclusion: { in: values }, allow_nil: !required?)
-      end
+      include Behaviours::Enumerable
 
       def type
         'integer'
       end
 
       def to_str
-        if default
+        if options.key?(:default)
           <<~RUBY
             enum #{@name}: #{to_h}, _prefix: true, _default: "#{default}"
           RUBY
@@ -50,14 +44,6 @@ module Schematics
 
       def icon
         :list_ol
-      end
-
-      def input_type
-        :select
-      end
-
-      def input_collection
-        values.collect { |value| [value, format(value)] }
       end
 
       private
