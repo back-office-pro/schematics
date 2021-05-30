@@ -28,7 +28,7 @@
 - entity.rich_text_attributes.each do |attribute|
   - rich_text = @resource.instance_eval(attribute.name)
   - if rich_text.present?
-    .card.shadow-sm.border-0.mt-4
+    .card.shadow-sm.border-0.mt-3
       a.card-header.border-top-0.border-left-0.border-right-0.border-light.p-2 href="#collapse-#{attribute.name}" data-toggle='collapse' role='button'
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon attribute.icon, class: 'mr-3 ml-2 fa-lg'

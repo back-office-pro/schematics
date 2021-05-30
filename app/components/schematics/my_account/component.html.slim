@@ -18,7 +18,6 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-
       = link_to grape_swagger_rails_path, data: { turbolinks: false }, class: 'dropdown-item' do
         = fa_icon :project_diagram, class: 'mr-3'
         = t('.api')
-    .dropdown-divider.m-0
     = link_to logout_path, method: :delete, class: 'dropdown-item pb-2' do
       = fa_icon :sign_out_alt, class: 'mr-3'
       = t('.logout')
