@@ -89,7 +89,7 @@ module Schematics
     end
 
     def extract_locale_from_accept_language_header
-      I18n.available_locales & request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)
+      I18n.available_locales & request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/).to_a
     end
   end
 end
