@@ -9,7 +9,7 @@ module Schematics
     before_action :authorize
     before_action :set_paper_trail_whodunnit
     around_action :switch_locale
-    around_action :switch_time_zone, if: :current_user
+    around_action :switch_time_zone, unless: -> { Rails.env.test? }
     after_action { pagy_headers_merge(@pagy) if @pagy }
 
     rescue_from ActionController::ParameterMissing, with: :parameter_missing
@@ -85,7 +85,7 @@ module Schematics
     end
 
     def switch_time_zone(&action)
-      Time.use_zone(current_user.time_zone, &action)
+      current_user && Time.use_zone(current_user.time_zone, &action)
     end
 
     def extract_locale_from_accept_language_header
