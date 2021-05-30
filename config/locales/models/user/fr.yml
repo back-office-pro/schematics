@@ -10,12 +10,12 @@ fr:
         full_name: Nom complet
         last_name: Nom
         locale: Langue
-        time_zone: Fuseau horaire
         locales:
           en: Anglais
           fr: Français
         password: Mot de passe
         password_confirmation: Confirmation mot de passe
+        time_zone: Fuseau horaire
     models:
       user:
         one: Utilisateur
