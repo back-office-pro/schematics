@@ -79,7 +79,7 @@ module Schematics
 
     def switch_locale(&action)
       locale = current_user&.locale&.downcase ||
-               extract_locale_from_accept_language_header ||
+               extract_locale_from_accept_language_header&.first ||
                I18n.default_locale
       I18n.with_locale(locale, &action)
     end
@@ -89,7 +89,7 @@ module Schematics
     end
 
     def extract_locale_from_accept_language_header
-      request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first
+      I18n.available_locales & request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)
     end
   end
 end
