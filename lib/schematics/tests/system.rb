@@ -163,7 +163,7 @@ module Schematics
             select record.instance_eval(element.name).to_s,
                    from: input,
                    match: :first
-          when Attributes::Country
+          when Attributes::Country, Attributes::TimeZone
             select element.format(element.default),
                    from: input,
                    match: :first
