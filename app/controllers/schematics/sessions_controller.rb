@@ -43,7 +43,9 @@ module Schematics
         respond_to do |format|
           format.html do
             switch_locale do
-              redirect_to profile_path, notice: t(result.message)
+              switch_time_zone do
+                redirect_to profile_path, notice: t(result.message)
+              end
             end
           end
           format.json

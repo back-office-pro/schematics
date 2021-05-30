@@ -63,11 +63,20 @@
                     "name": "locale",
                     "type": "enum",
                     "options": {
+                        "required": true,
                         "default": "fr",
                         "values": [
                             "fr",
                             "en"
                         ]
+                    }
+                },
+                {
+                    "name": "time_zone",
+                    "type": "time_zone",
+                    "options": {
+                        "required": true,
+                        "default": "Paris"
                     }
                 },
                 {

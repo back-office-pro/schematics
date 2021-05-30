@@ -33,4 +33,4 @@ html
           .container-fluid.my-4.px-4.animate__animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top
-            .ml-3 &copy; #{setting(:company_name)} #{Time.zone.now.year}
+            .ml-3 &copy; #{setting(:company_name)} #{Time.current.year}

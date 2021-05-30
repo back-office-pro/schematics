@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/country'
+require 'schematics/attributes/time_zone'
 require 'schematics/entities/entity'
 
-describe Schematics::Attributes::Country do
+describe Schematics::Attributes::TimeZone do
   subject(:attribute) { described_class.new(entity, name, options) }
 
   let(:entity) { Schematics::Entities::Entity.create(name: 'user') }
-  let(:name) { 'country' }
+  let(:name) { 'time_zone' }
   let(:options) { {} }
 
   before do
-    allow(ISO3166::Country).to receive(:codes).and_return(['FR'])
+    allow(ActiveSupport::TimeZone).to receive(:all).and_return([ActiveSupport::TimeZone['Paris']])
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
@@ -24,38 +24,41 @@ describe Schematics::Attributes::Country do
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
   its(:type) { is_expected.to eq('string') }
-  its(:column_name) { is_expected.to eq('country') }
-  its(:icon) { is_expected.to eq(:globe_europe) }
+  its(:column_name) { is_expected.to eq('time_zone') }
+  its(:icon) { is_expected.to eq(:clock) }
   its(:input_type) { is_expected.to eq(:select) }
-  its(:default) { is_expected.to eq('FR') }
-  its(:validators) { is_expected.to eq({ inclusion: { in: ['FR'] }, allow_nil: true }) }
+  its(:default) { is_expected.to eq('Paris') }
   its(:weight) { is_expected.to eq(1) }
-  its(:to_sql) { is_expected.to eq('users.country') }
-  its(:to_s) { is_expected.to eq('schema:user_country') }
-  its(:input_collection) { is_expected.to eq([%w[FR France]]) }
+  its(:to_sql) { is_expected.to eq('users.time_zone') }
+  its(:to_s) { is_expected.to eq('schema:user_time_zone') }
+  its(:input_collection) { is_expected.to eq([['Paris', '(GMT+01:00) Paris']]) }
+
+  its(:validators) do
+    is_expected.to eq(inclusion: { in: ['Paris'] }, allow_nil: true)
+  end
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :country, {:inclusion=>{:in=>["FR"]}, :allow_nil=>true}
+      validates :time_zone, {:inclusion=>{:in=>["Paris"]}, :allow_nil=>true}
     RUBY
   end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      country&.parameterize(separator: ' ')
+      time_zone&.parameterize(separator: ' ')
     RUBY
   end
 
-  context 'when country is required' do
+  context 'when time_zone is required' do
     let(:options) { { required: true } }
 
     its(:validators) do
-      is_expected.to eq({ inclusion: { in: ['FR'] }, presence: true, allow_nil: false })
+      is_expected.to eq(inclusion: { in: ['Paris'] }, presence: true, allow_nil: false)
     end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"]}, :allow_nil=>false}
+        validates :time_zone, {:presence=>true, :inclusion=>{:in=>["Paris"]}, :allow_nil=>false}
       RUBY
     end
   end

@@ -27,6 +27,11 @@
                 as: :country,
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::TimeZone
+      = f.input field.name.to_sym,
+                as: :time_zone,
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
                 maxlength: true,
