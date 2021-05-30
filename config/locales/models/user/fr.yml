@@ -10,6 +10,7 @@ fr:
         full_name: Nom complet
         last_name: Nom
         locale: Langue
+        time_zone: Fuseau horaire
         locales:
           en: Anglais
           fr: Français
