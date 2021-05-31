@@ -2,7 +2,6 @@ thead.border-bottom.border-light
   tr
     th.text-nowrap.text-center.pb-0
       = fa_icon :archive, class: 'text-dark mr-2'
-      u = t('.archives')
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
         th.text-nowrap.text-center.pb-0
           = render Schematics::SortLink::Component.new(field: field, model_class: @model_class)
