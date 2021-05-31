@@ -19,18 +19,6 @@
     width: 45%;
   }
 
-  .card::before {
-    border-bottom: 15px solid transparent;
-    border-left: 15px solid rgba(0, 0, 0, .125);
-    border-right: 0 solid rgba(0, 0, 0, .125);
-    border-top: 15px solid transparent;
-    content: ' ';
-    display: inline-block;
-    position: absolute;
-    right: -15px;
-    top: 18.5px;
-  }
-
   .card::after {
     border-bottom: 14px solid transparent;
     border-left: 14px solid #fff;
@@ -48,7 +36,6 @@
     border-bottom-right-radius: 50%;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
-    color: #fff;
     height: 50px;
     left: 50%;
     line-height: 57px;
@@ -107,17 +94,10 @@
     float: right;
   }
 
-  ul.timeline > li > .card::before {
+  ul.timeline > li > .card::after {
     border-left-width: 0;
     border-right-width: 15px;
     left: -15px;
-    right: auto;
-  }
-
-  ul.timeline > li > .card::after {
-    border-left-width: 0;
-    border-right-width: 14px;
-    left: -14px;
     right: auto;
   }
 }

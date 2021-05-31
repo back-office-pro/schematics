@@ -1,15 +1,15 @@
 /* global $ */
 
 $(document).on('turbolinks:load', function () {
-  $('#notifications-dropdown').has('.badge.badge-danger').on('click', function () {
+  $('#notifications-dropdown').has('.badge').on('click', function () {
     const $element = $(this)
     $.post('/dashboard/read_notifications', function () {
       $element
-        .find('.badge.badge-danger')
+        .find('.badge')
         .fadeOut()
         .end()
         .find('.animate__animated')
-        .removeClass('animate__animated')
+        .removeClass('animate__animated text-primary')
     })
   })
 })

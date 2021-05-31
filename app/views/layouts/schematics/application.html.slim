@@ -22,7 +22,7 @@ html
         .col.bg-primary.sidebar class=('toggled' if user_setting(:sidebar_toggled))
           = render Schematics::Sidebar::Component.new
         .col.bg-light.content class=('toggled' if user_setting(:sidebar_toggled))
-          nav.navbar.navbar-light.navbar-expand.border-0.p-0.sticky-top
+          nav.navbar.navbar-light.navbar-expand.p-0.sticky-top
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
               = render Schematics::SearchBar::Component.new
@@ -30,7 +30,7 @@ html
               = render Schematics::MessageCenter::Component.new
               = render Schematics::SwitchTheme::Component.new
               = render Schematics::MyAccount::Component.new
-          .container-fluid.my-4.px-4.animate__animated class=('animate__slideInDown' if params[:page].blank?)
+          .container-fluid.my-3.px-3.animate__animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           footer.px-2.py-3.border-top
-            .ml-3 &copy; #{setting(:company_name)} #{Time.current.year}
+            .ml-3.text-dark &copy; #{setting(:company_name)} #{Time.current.year}

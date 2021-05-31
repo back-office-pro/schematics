@@ -1,5 +1,5 @@
 $input-btn-focus-width: 0;
-$grid-gutter-width: 1.5rem !default;
+$grid-gutter-width: 1rem !default;
 @import 'bootstrap/scss/bootstrap';
 
 // Forms - Custom file
@@ -50,40 +50,4 @@ button.swal2-cancel.styled {
 
 .show-swal2.disable-animation {
   animation: none !important;
-}
-
-// Buttons
-
-.btn {
-  &-primary {
-    border-color: darken($primary, 5%);
-  }
-
-  &-secondary {
-    border-color: darken($secondary, 5%);
-  }
-
-  &-success {
-    border-color: darken($success, 5%);
-  }
-
-  &-info {
-    border-color: darken($info, 5%);
-  }
-
-  &-danger {
-    border-color: darken($danger, 5%);
-  }
-
-  &-warning {
-    border-color: darken($warning, 5%);
-  }
-
-  &-light {
-    border-color: darken($light, 5%);
-  }
-
-  &-dark {
-    border-color: darken($dark, 5%);
-  }
 }

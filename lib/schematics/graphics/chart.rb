@@ -41,6 +41,10 @@ module Schematics
         }[@type]
       end
 
+      def border_width
+        %w[line area].include?(@type) && 1 || 0
+      end
+
       def title
         [@y.title, I18n.t('schematics.dashboard.home.graphics.by'), @x.title].join(' ')
       end

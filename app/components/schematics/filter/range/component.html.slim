@@ -1,4 +1,4 @@
-.input-group.mx-1.mb-2.mt-1
+.input-group
   = render Schematics::Filter::Range::Bound::Component.new(field: @field, comparison: :gte)
   .mr-2
   = render Schematics::Filter::Range::Bound::Component.new(field: @field, comparison: :lte)

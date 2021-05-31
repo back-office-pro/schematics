@@ -1,24 +1,24 @@
-.card.shadow-sm.mt-4
-  a.card-header.p-2 class=('collapsed' if collapsed?) href="#collapse-#{random}" data-toggle='collapse' role='button'
+.card.shadow-sm.border-0.mt-3
+  a.card-header.border-top-0.border-left-0.border-right-0.border-light.p-2 class=('collapsed' if collapsed?) href="#collapse-#{random}" data-toggle='collapse' role='button'
     .row.align-items-center
       .col.text-truncate
         h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon icon, class: 'mr-3 ml-3 fa-lg align-middle'
+          = fa_icon icon, class: 'mr-3 ml-2 fa-lg align-middle'
           span.align-middle = title
-      .col-auto.mr-4
-        .badge.badge-light.border.p-2.mr-4 = @resources.size
+      .col-auto.mr-3
+        .badge.badge-light.text-dark.p-2.mr-4 = @resources.size
   .collapse class=(collapsed? ? 'hide' : 'show') id="collapse-#{random}"
     .card-body.p-0
       .table-responsive
         table.table.mb-0.table-striped.table-hover
-          thead
+          thead.border-bottom.border-light
             tr
               th.text-nowrap.text-center.align-middle
               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                 th.text-nowrap.text-center.align-middle
                   = fa_icon field.icon, class: 'mr-2 text-dark'
                   = klass.human_attribute_name(field.name)
-          tbody.table-bordered.border-0
+          tbody
             - @resources.each do |resource|
               tr data-href=polymorphic_path(resource)
                 td.text-nowrap.text-center

@@ -1,17 +1,17 @@
 - breadcrumb title, schematics.versions_path
 .row.no-gutters.align-items-center
   .col-lg
-    .card.shadow-sm
-      .card-header.p-2
+    .card.shadow-sm.border-0
+      .card-header.border-top-0.border-left-0.border-right-0.border-light.p-2
         .row.align-items-center
           .col.text-truncate
             h5.m-0.text-primary.text-truncate.font-weight-bold
-              = fa_icon @version.entity.icon, class: 'mr-3 ml-3 fa-lg align-middle'
+              = fa_icon @version.entity.icon, class: 'mr-3 ml-2 fa-lg align-middle'
               span.align-middle = title
       .card-body.p-0
         .table-responsive
           table.table.mb-0.table-striped
-            tbody.table-bordered.border-0
+            tbody
               - @version.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
                 tr
                   th
@@ -20,16 +20,16 @@
                   td
                     - old_version = @version.reify(dup: true)
                     = render Schematics::Resource::Component.new(resource: old_version, field: field) if old_version
-  .col-lg-1.my-4.mx-0.text-center
-    = fa_icon :arrow_right, size: '4x', class: 'text-dark d-none d-lg-inline-block'
-    = fa_icon :arrow_down, size: '4x', class: 'text-dark d-inline-block d-lg-none'
+  .col-lg-1.my-3.mx-0.text-center
+    = fa_icon :arrow_right, size: '4x', class: 'text-secondary d-none d-lg-inline-block'
+    = fa_icon :arrow_down, size: '4x', class: 'text-secondary d-inline-block d-lg-none'
   .col-lg
-    .card.shadow-sm
-      .card-header.p-2
+    .card.shadow-sm.border-0
+      .card-header.border-top-0.border-left-0.border-right-0.border-light.p-2
         .row.align-items-center
           .col.text-truncate
             h5.m-0.text-primary.text-truncate.font-weight-bold
-              = fa_icon @version.entity.icon, class: 'mr-3 ml-3 fa-lg align-middle'
+              = fa_icon @version.entity.icon, class: 'mr-3 ml-2 fa-lg align-middle'
               span.align-middle = title
           .col-auto.mr-1
             - if can?(:revert, @version)
@@ -39,7 +39,7 @@
       .card-body.p-0
         .table-responsive
           table.table.mb-0.table-striped
-            tbody.table-bordered.border-0
+            tbody
               - @version.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
                 tr
                   th
