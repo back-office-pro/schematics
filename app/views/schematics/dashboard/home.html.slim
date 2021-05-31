@@ -10,7 +10,7 @@
               h5.mb-0.text-dark.text-truncate.font-weight-bold
                 = stat
             .col-auto
-              = link_to fa_icon(stat.icon, size: '2x'), main_app.url_for(stat.model_class), class: 'text-light'
+              = link_to fa_icon(stat.icon, size: '2x'), main_app.polymorphic_path(stat.model_class), class: 'text-light'
   - Schematics::Schema.instance.charts.each.with_index(1) do |chart, id|
     .col-xl-6.col-md-12.mb-3
       .card.shadow-sm.border-0
