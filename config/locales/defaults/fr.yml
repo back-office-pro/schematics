@@ -27,7 +27,7 @@ fr:
       image_metadata_missing: n'est pas une image valide
       limit_out_of_range: a un nombre de fichiers en dehors des limites
     virtuals:
-      name: "%{name} n'est pas défini"
+      name: "$%{name} n'est pas défini"
       type: 'Erreur de type : %{message}'
   simple_form:
     labels:

@@ -4,7 +4,7 @@ en:
     created_at: creation date
   errors:
     virtuals:
-      name: "%{name} is not defined"
+      name: "$%{name} is not defined"
       type: 'Type error: %{message}'
   simple_form:
     labels:
