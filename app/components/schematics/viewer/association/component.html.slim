@@ -14,7 +14,7 @@
           thead
             tr
               th.text-nowrap.text-center.align-middle
-              - entity.listable_elements.sort_by(&:weight).each do |field|
+              - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                 th.text-nowrap.text-center.align-middle
                   = fa_icon field.icon, class: 'mr-2 text-dark'
                   = klass.human_attribute_name(field.name)
@@ -41,6 +41,6 @@
                           = fields.hidden_field :_destroy, value: true
                         = f.button :button, class: 'btn btn-danger btn-sm', data: confirm_data.merge({ toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }) do
                           = fa_icon(:trash)
-                - entity.listable_elements.sort_by(&:weight).each do |field|
+                - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle
                     = render Schematics::Resource::Component.new(resource: resource, field: field)

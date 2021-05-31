@@ -1,5 +1,5 @@
 = simple_form_for resource, url: @url, validate: true do |f|
-  - @attributes.sort_by(&:weight).each do |field|
+  - @attributes.stable_sort_by(&:weight).each do |field|
     - case field
     - when Schematics::Associations::HasAndBelongsToMany
       = f.association field.name.to_sym, as: :check_boxes

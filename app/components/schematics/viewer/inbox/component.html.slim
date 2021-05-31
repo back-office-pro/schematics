@@ -30,6 +30,6 @@
                       method: :delete,
                       class: 'btn btn-danger btn-sm',
                       data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
-            - entity.listable_elements.sort_by(&:weight).each do |field|
+            - entity.listable_elements.stable_sort_by(&:weight).each do |field|
               td.text-nowrap.text-center.align-middle class=('font-weight-bold' if resource.read_at.nil?)
                 = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)

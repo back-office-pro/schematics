@@ -27,13 +27,13 @@ module Schematics
 
     def headers
       listable_elements
-        .sort_by(&:weight)
+        .stable_sort_by(&:weight)
         .map(&:name)
         .map { |name| klass.human_attribute_name(name) }
     end
 
     def listable_elements_of(resource)
-      listable_elements.sort_by(&:weight).map do |element|
+      listable_elements.stable_sort_by(&:weight).map do |element|
         Array.wrap(element.format(resource.instance_eval(element.name))).join(' ')
       end
     end

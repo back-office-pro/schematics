@@ -12,4 +12,8 @@ class Array
   def reject_is_a?(*klasses)
     reject { |x| klasses.any? { |klass| x.is_a?(klass) } }
   end
+
+  def stable_sort_by
+    sort_by.with_index { |x, idx| [yield(x), idx] }
+  end
 end

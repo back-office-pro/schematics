@@ -11,6 +11,6 @@
           tr class=('disabled' if resource.deleted?) data-href=(polymorphic_path(resource) unless resource.deleted?)
             td.text-nowrap.text-center
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
-            - entity.listable_elements.sort_by(&:weight).each do |field|
+            - entity.listable_elements.stable_sort_by(&:weight).each do |field|
               td.text-nowrap.text-center.align-middle
                 = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
