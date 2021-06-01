@@ -43,6 +43,11 @@ module Schematics
     config.i18n.load_path += Dir[root.join('config', 'locales', '**', '*.yml')]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
+    # Active Storage
+    config.after_initialize do # Make sure we override main app 6.0 defaults
+      config.active_storage.replace_on_assign_to_many = false
+    end
+
     def credentials
       ActiveSupport::EncryptedConfiguration.new(
         config_path: root.join('config', 'credentials.yml.enc'),
