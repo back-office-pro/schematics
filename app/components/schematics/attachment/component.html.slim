@@ -7,6 +7,6 @@
     = fa_icon(:exclamation_triangle, class: 'mr-2')
     - case e
     - when MiniMagick::Error
-      = t('errors.messages.image_metadata_missing').humanize
+      = t('.minimagick_error')
     - when ActiveStorage::FileNotFoundError
-      = t('titles.schematics.resources.not_found')
+      = t('.active_storage_file_not_found_error')
