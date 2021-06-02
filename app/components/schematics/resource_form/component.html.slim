@@ -56,7 +56,7 @@
                 as: :file,
                 validate: { presence: field.required? && new_record? },
                 hint: hint,
-                input_html: { multiple: true }
+                input_html: { multiple: true, accept: field.extensions }
     - when Schematics::Attributes::Attachment
       - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
       - attachment = @resource.send(field.name.to_sym)
@@ -69,7 +69,8 @@
       = f.input field.name.to_sym,
                 as: :file,
                 validate: { presence: field.required? && new_record? },
-                hint: hint
+                hint: hint,
+                input_html: { accept: field.extensions }
     - when Schematics::Attributes::Digest
       = f.input field.name.to_sym,
                 as: :password,

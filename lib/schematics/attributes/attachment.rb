@@ -57,6 +57,10 @@ module Schematics
         @options[:content_type]&.first || 'png'
       end
 
+      def extensions
+        @options[:content_type]&.map { ".#{_1}" }&.join(',')
+      end
+
       def validators
         super.merge(
           {
