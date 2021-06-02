@@ -238,6 +238,12 @@
         },
         {
             "name": "order",
+            "virtuals": [
+                {
+                    "name": "reference",
+                    "function": "ORDER-$product.id"
+                }
+            ],
             "attributes": [
                 {
                     "name": "title",
