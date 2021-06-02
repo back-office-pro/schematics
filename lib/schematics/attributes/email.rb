@@ -10,7 +10,7 @@ module Schematics
       end
 
       def default
-        return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if unique? || required?
+        return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if required?
 
         super
       end
