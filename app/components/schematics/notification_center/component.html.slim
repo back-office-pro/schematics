@@ -2,7 +2,7 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
   a#notifications-dropdown.nav-link.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
     = fa_icon :bell, class: unread_count.zero? ? 'fa-lg' : 'fa-lg text-primary animate__animated animate__pulse animate__slower animate__infinite'
     - unless unread_count.zero?
-      .badge.text-primary.animate__animated.animate__zoomIn = display_unread_count
+      .badge.badge-primary.animate__animated.animate__zoomIn = display_unread_count
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-right.animate__animated.animate__zoomIn.p-0.mt-2 aria-labelledby='notifications-dropdown'
     h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
     .pre-scrollable
