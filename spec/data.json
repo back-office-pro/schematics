@@ -269,10 +269,7 @@
                 },
                 {
                     "name": "product",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true
-                    }
+                    "type": "belongs_to"
                 }
             ]
         }
