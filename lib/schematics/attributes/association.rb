@@ -59,6 +59,7 @@ module Schematics
       def to_str
         <<~RUBY
           belongs_to :#{@name},
+                     -> { with_deleted },
                      class_name: '#{class_name}',
                      foreign_key: '#{column_name}',
                      inverse_of: :#{inverse_association.name},

@@ -69,6 +69,7 @@ describe Schematics::Attributes::References do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       belongs_to :user,
+                 -> { with_deleted },
                  class_name: 'User',
                  foreign_key: 'user_id',
                  inverse_of: :entities,
@@ -90,6 +91,7 @@ describe Schematics::Attributes::References do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         belongs_to :user,
+                   -> { with_deleted },
                    class_name: 'User',
                    foreign_key: 'user_id',
                    inverse_of: :entities,

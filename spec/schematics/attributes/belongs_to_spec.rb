@@ -54,6 +54,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       belongs_to :schema,
+                 -> { with_deleted },
                  class_name: 'Schema',
                  foreign_key: 'schema_id',
                  inverse_of: :entities,
@@ -72,6 +73,7 @@ describe Schematics::Attributes::BelongsTo do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         belongs_to :schema,
+                   -> { with_deleted },
                    class_name: 'Schema',
                    foreign_key: 'schema_id',
                    inverse_of: :entities,
