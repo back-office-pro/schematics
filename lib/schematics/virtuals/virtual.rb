@@ -67,6 +67,8 @@ module Schematics
           I18n.t('errors.virtuals.name', name: value.name)
         when TypeError
           I18n.t('errors.virtuals.type', message: value.message)
+        when NoMethodError
+          I18n.t('errors.virtuals.no_method', name: value.name)
         else
           value
         end
