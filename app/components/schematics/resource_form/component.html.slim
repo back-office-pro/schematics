@@ -4,9 +4,8 @@
     - when Schematics::Associations::HasAndBelongsToMany
       = f.association field.name.to_sym, as: :check_boxes
     - when Schematics::Attributes::BelongsTo
-      - model_name = resource_class.human_attribute_name(field.name).downcase
       = f.association field.name.to_sym,
-                      prompt: t('.prompt', model_name: model_name),
+                      include_blank: !field.required?,
                       wrapper: :input_group,
                       prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Date
@@ -25,11 +24,13 @@
     - when Schematics::Attributes::Country
       = f.input field.name.to_sym,
                 as: :country,
+                include_blank: !field.required?,
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::TimeZone
       = f.input field.name.to_sym,
                 as: :time_zone,
+                include_blank: !field.required?,
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::String
@@ -48,8 +49,10 @@
       = f.input field.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
       = f.input field.name.to_sym,
-                as: :radio_buttons,
-                collection: field.input_collection.map(&:reverse)
+                include_blank: false,
+                collection: field.input_collection.map(&:reverse),
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Attachments
       - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
       = f.input field.name.to_sym,

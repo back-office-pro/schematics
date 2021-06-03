@@ -143,10 +143,6 @@ module Schematics
             check "#{input}[]",
                   match: :first,
                   allow_label_click: true
-          when Attributes::Enum
-            choose input,
-                   match: :first,
-                   allow_label_click: true
           when Attributes::Boolean
             check(input) if record.send(element.name)
           when Attributes::Attachments
@@ -163,7 +159,7 @@ module Schematics
             select record.instance_eval(element.name).to_s,
                    from: input,
                    match: :first
-          when Attributes::Country, Attributes::TimeZone
+          when Behaviours::Enumerable
             select element.format(element.default),
                    from: input,
                    match: :first

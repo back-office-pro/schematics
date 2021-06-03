@@ -8,7 +8,7 @@ module Schematics
       end
 
       def validators
-        super.merge(inclusion: { in: values }, allow_nil: !required?)
+        super.merge(inclusion: { in: values }, allow_blank: !required?)
       end
 
       def input_type
@@ -16,7 +16,9 @@ module Schematics
       end
 
       def input_collection
-        values.collect { |value| [value, format(value)] }
+        values
+          .collect { |value| [value, format(value)] }
+          .tap { _1.unshift ['', ''] unless required? }
       end
 
       def default
