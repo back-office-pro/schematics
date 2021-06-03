@@ -15,20 +15,26 @@ module Schematics
             schema_attribute&.type&.to_sym || super
           end
 
-          def default
-            schema_attribute.try(:default) || super
-          end
-
-          def required?
-            schema_attribute&.required? || super
-          end
-
           def attr_options
             schema_attribute&.options_for_migration || super
           end
 
+          def default
+            return schema_attribute.try(:default) if schema_attribute
+
+            super
+          end
+
+          def required?
+            return schema_attribute.required? if schema_attribute
+
+            super
+          end
+
           def has_uniq_index? # rubocop:disable Naming/PredicateName
-            schema_attribute&.unique? || super
+            return schema_attribute.unique? if schema_attribute
+
+            super
           end
 
           def has_index? # rubocop:disable Naming/PredicateName

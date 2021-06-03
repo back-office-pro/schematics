@@ -36,7 +36,7 @@ describe Schematics::Attributes::Enum do
         inclusion: {
           in: %w[available available_soon not_available],
         },
-        allow_nil: true,
+        allow_blank: true,
       }
     )
   end
@@ -44,6 +44,7 @@ describe Schematics::Attributes::Enum do
   its(:input_collection) do
     is_expected.to eq(
       [
+        ['', ''],
         %w[available Available],
         ['available_soon', 'Available soon'],
         ['not_available', 'Not available'],
@@ -53,7 +54,7 @@ describe Schematics::Attributes::Enum do
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_nil=>true}
+      validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>true}
     RUBY
   end
 
@@ -61,6 +62,43 @@ describe Schematics::Attributes::Enum do
     is_expected.to eq <<~RUBY
       enum state: {:available=>0, :available_soon=>1, :not_available=>2}, _prefix: true
     RUBY
+  end
+
+  context 'when required' do
+    let(:options) do
+      {
+        required: true,
+        values: %w[available available_soon not_available],
+      }
+    end
+
+    its(:input_collection) do
+      is_expected.to eq(
+        [
+          %w[available Available],
+          ['available_soon', 'Available soon'],
+          ['not_available', 'Not available'],
+        ]
+      )
+    end
+
+    its(:validators) do
+      is_expected.to eq(
+        {
+          inclusion: {
+            in: %w[available available_soon not_available],
+          },
+          presence: true,
+          allow_blank: false,
+        }
+      )
+    end
+
+    its(:validate) do
+      is_expected.to eq <<~RUBY
+        validates :state, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>false}
+      RUBY
+    end
   end
 
   context 'when there is a default' do

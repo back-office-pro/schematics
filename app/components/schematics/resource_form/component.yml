@@ -1,4 +1,0 @@
-en:
-  prompt: Select a %{model_name}
-fr:
-  prompt: Sélectionner un %{model_name}
