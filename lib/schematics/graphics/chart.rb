@@ -53,7 +53,7 @@ module Schematics
         [
           x.field&.try(:preload),
           y.field&.try(:preload),
-        ].compact.flatten
+        ].compact.flatten.uniq
       end
 
       def as_json
