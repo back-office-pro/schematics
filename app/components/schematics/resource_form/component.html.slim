@@ -6,6 +6,7 @@
     - when Schematics::Attributes::BelongsTo
       = f.association field.name.to_sym,
                       include_blank: !field.required?,
+                      collection: field.input_collection,
                       wrapper: :input_group,
                       prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Date
