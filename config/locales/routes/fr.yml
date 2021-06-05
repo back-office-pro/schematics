@@ -5,6 +5,7 @@ fr:
     directories: dossiers
     edit: editer
     files: fichiers
+    import: importer
     login: connexion
     logout: deconnexion
     messages: messages
