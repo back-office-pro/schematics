@@ -17,8 +17,7 @@ module Schematics
         when :ok
           context.message = '.success'
         when :content_type_error
-          # TODO: custom error message
-          context.message = '.failure'
+          context.fail!(message: '.failure')
         when :import_error
           context.errors = @importer.errors
           context.fail!(message: '.failure')

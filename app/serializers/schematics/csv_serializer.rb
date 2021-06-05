@@ -3,7 +3,7 @@
 module Schematics
   class CsvSerializer
     delegate :klass, to: :@resources, private: true
-    delegate :entity, to: :klass, private: true
+    delegate :entity, :human_attribute_name, to: :klass, private: true
     delegate :listable_elements, to: :entity
 
     def initialize(resources)
@@ -29,7 +29,7 @@ module Schematics
       listable_elements
         .stable_sort_by(&:weight)
         .map(&:name)
-        .map { |name| klass.human_attribute_name(name) }
+        .map { |name| human_attribute_name(name) }
     end
 
     def listable_elements_of(resource)

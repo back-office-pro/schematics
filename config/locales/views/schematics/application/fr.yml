@@ -8,6 +8,7 @@ fr:
         confirm: Valider
         destroy: Supprimer définitivement
         download_as_csv: Télécharger au format CSV
+        download_csv_template: Télécharger une trame
         download_pdf: Télécharger au format PDF
         edit: Editer
         import: Importer des %{model_name}

@@ -8,6 +8,7 @@ en:
         confirm: Confirm
         destroy: Delete permanently
         download_as_csv: Download as CSV
+        download_csv_template: Download CSV template
         download_pdf: Download PDF
         edit: Edit
         import: Import %{model_name}

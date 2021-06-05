@@ -76,7 +76,15 @@ module Schematics
 
     def delete; end
 
-    def import; end
+    def import
+      respond_to do |format|
+        format.html
+        format.csv do
+          send_data CsvTemplateSerializer.new(model_class).file,
+                    filename: "#{model_name_plural}.csv"
+        end
+      end
+    end
 
     def bulk_insert
       file = params.require(:import).permit(:file)
@@ -87,16 +95,17 @@ module Schematics
       )
       @errors = result.errors
       if result.success?
-        notice = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.html do
+            redirect_to polymorphic_path(model_class),
+                        notice: t(result.message, model_name_plural: model_name_plural)
+          end
           format.json { head :created }
         end
       else
-        alert = t(result.message, model_name_plural: model_name.human.pluralize.downcase)
         respond_to do |format|
           format.html do
-            flash.now[:alert] = alert
+            flash.now[:alert] = t(result.message, model_name_plural: model_name_plural)
             render :import
           end
           format.json { render json: @errors, status: :unprocessable_entity }
@@ -148,9 +157,11 @@ module Schematics
     def destroy
       result = Resources::Destroy.call(resource: @resource)
       if result.success?
-        notice = t(result.message, model_name: model_name.human)
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.html do
+            redirect_to polymorphic_path(model_class),
+                        notice: t(result.message, model_name: model_name.human)
+          end
           format.json
         end
       else
@@ -165,8 +176,10 @@ module Schematics
       result = Resources::Archive.call(resource: @resource)
       if result.success?
         respond_to do |format|
-          notice = t(result.message, model_name: model_name.human)
-          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.html do
+            redirect_to polymorphic_path(model_class),
+                        notice: t(result.message, model_name: model_name.human)
+          end
           format.json
         end
       else
@@ -180,9 +193,11 @@ module Schematics
     def restore
       result = Resources::Restore.call(resource: @resource)
       if result.success?
-        notice = t(result.message, model_name: model_name.human)
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), notice: notice }
+          format.html do
+            redirect_to polymorphic_path(model_class),
+                        notice: t(result.message, model_name: model_name.human)
+          end
           format.json
         end
       else
@@ -201,7 +216,7 @@ module Schematics
 
     def view_assigns
       super.merge(
-        model_name_plural: model_name.human.pluralize.downcase,
+        model_name_plural: model_name_plural,
         model_name: model_name.human.downcase
       )
     end
@@ -225,9 +240,12 @@ module Schematics
     end
 
     def set_breadcrumb
-      model_name_plural = model_name.human.pluralize.downcase
       title = t('titles.schematics.resources.index', model_name_plural: model_name_plural)
       breadcrumb title, :"#{entity.name.pluralize}_path"
+    end
+
+    def model_name_plural
+      model_name.human.pluralize.downcase
     end
   end
 end
