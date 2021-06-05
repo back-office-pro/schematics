@@ -80,7 +80,7 @@ module Schematics
       respond_to do |format|
         format.html
         format.csv do
-          send_data CsvImportTemplate.new(model_class).file,
+          send_data CsvTemplateSerializer.new(model_class).file,
                     filename: "#{model_name_plural}.csv"
         end
       end
