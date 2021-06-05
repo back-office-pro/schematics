@@ -7,6 +7,7 @@ fr:
         cancel: Annuler
         confirm: Valider
         destroy: Supprimer définitivement
+        download_csv_template: Télécharger une trame
         download_as_csv: Télécharger au format CSV
         download_pdf: Télécharger au format PDF
         edit: Editer
