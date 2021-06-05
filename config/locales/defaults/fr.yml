@@ -34,9 +34,9 @@ fr:
     labels:
       defaults:
         _destroy: Supprimer ?
+      import:
+        file: Fichier
       user:
         email: E-mail
         password: Mot de passe
         remember_me: Se souvenir de moi
-      import:
-        file: Fichier
