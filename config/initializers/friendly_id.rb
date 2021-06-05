@@ -2,7 +2,7 @@
 
 FriendlyId.defaults do |config|
   config.use :reserved
-  config.reserved_words = %w[new nouveau edit editer delete supprimer]
+  config.reserved_words = %w[new nouveau edit editer delete supprimer import importer]
   config.treat_reserved_as_conflict = true
   config.use :finders
   config.use :history
