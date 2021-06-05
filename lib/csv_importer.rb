@@ -27,7 +27,7 @@ class CsvImporter
   private
 
   def insert_all_paper_trail_versions(record_ids)
-    Version.insert_all(record_ids.map(&method(:paper_trail_version))) # rubocop:disable Rails/SkipsModelValidations
+    Schematics::Version.insert_all(record_ids.map(&method(:paper_trail_version))) # rubocop:disable Rails/SkipsModelValidations
   end
 
   def paper_trail_version(id)
@@ -84,7 +84,7 @@ class CsvImporter
         .where("#{field.descriptor.to_sql} = ?", value)
         .first!
     when Schematics::Attributes::Enum
-      i18n_translations&.dig(field.name.pluralize.to_sym)&.invert&.fetch(value) ||
+      i18n_translations&.dig(field.name.pluralize.to_sym)&.invert&.fetch(value, nil) ||
         value.parameterize(separator: '_')
     when Schematics::Attributes::Country
       field.input_collection.map(&:reverse).to_h.fetch(value)
