@@ -167,7 +167,7 @@ module Schematics
             fill_in input, with: element.default
             fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: element.default
           when Attributes::Date
-            fill_in input, with: Date.parse(element.default)
+            fill_in input, with: element.default.to_date
           else
             fill_in input, with: element.default || record.send(element.name)
           end
