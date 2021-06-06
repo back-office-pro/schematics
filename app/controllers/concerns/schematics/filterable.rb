@@ -34,12 +34,18 @@ module Schematics
       in 'false'
         false
       in gte:
-        { gte: gte.to_f }
+        { gte: cast_comparison(gte) }
       in lte:
-        { lte: lte.to_f }
+        { lte: cast_comparison(lte) }
       else
         /.*#{value.parameterize(separator: ' ')}.*/
       end
+    end
+
+    def cast_comparison(value)
+      return value.to_date if value.match?(/\d{4}-\d{2}-\d{2}/)
+
+      value.to_f
     end
   end
 end
