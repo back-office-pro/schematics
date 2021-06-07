@@ -5,6 +5,7 @@
       = f.association field.name.to_sym, as: :check_boxes
     - when Schematics::Attributes::BelongsTo
       = f.association field.name.to_sym,
+                      prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                       include_blank: !field.required?,
                       collection: field.input_collection,
                       wrapper: :input_group,
@@ -25,12 +26,14 @@
     - when Schematics::Attributes::Country
       = f.input field.name.to_sym,
                 as: :country,
+                prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                 include_blank: !field.required?,
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::TimeZone
       = f.input field.name.to_sym,
                 as: :time_zone,
+                prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                 include_blank: !field.required?,
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
@@ -50,6 +53,7 @@
       = f.input field.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
       = f.input field.name.to_sym,
+                prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                 include_blank: false,
                 collection: field.input_collection.map(&:reverse),
                 wrapper: :input_group,

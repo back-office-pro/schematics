@@ -6,7 +6,7 @@ module Schematics
       delegate :rich_text_area_tag, to: :helpers
       delegate :new_record?, to: :resource
       delegate :class, to: :resource, prefix: true
-      delegate :entity, to: :resource_class
+      delegate :entity, :human_attribute_name, to: :resource_class
       attr_reader :resource
 
       def initialize(resource:, url: nil, attributes: nil, cancel_path: nil)
