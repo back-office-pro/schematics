@@ -15,7 +15,7 @@ module Schematics
           def start_attribute
             @entity.datetime_attributes.first.name.to_sym
           end
-  
+
           def end_attribute
             @entity.datetime_attributes.second.name.to_sym
           end

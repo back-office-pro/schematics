@@ -28,6 +28,8 @@ ignore_missing:
   - attributes.*
   - schematics.*
   - javascript.*
+  - pagy.*
+  - date.*
   - 'true'
   - 'false'
 ignore_unused:
@@ -39,5 +41,7 @@ ignore_unused:
   - attributes.*
   - schematics.*
   - javascript.*
+  - pagy.*
+  - date.*
   - 'true'
   - 'false'
