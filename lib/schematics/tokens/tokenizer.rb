@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'schematics/tokens/combinator'
+require 'schematics/tokens/comparator'
 require 'schematics/tokens/number'
 require 'schematics/tokens/operator'
 require 'schematics/tokens/parenthesis'
@@ -12,7 +14,16 @@ module Schematics
   module Tokens
     class Tokenizer
       class << self
-        REGEX = /\$(\w+\.?\w+)|(\s\W\s)|([a-zA-Z_-]+)|(\d*\.?\d+)|(\(|\))|(\s+)/
+        REGEX = %r{
+          \$(\w+\.?\w+) |                   # variable
+          (\s(?:-|\+|\*|/)\s) |             # operator
+          ([a-zA-Z_-]+) |                   # string
+          (\d*\.?\d+) |                     # number
+          (\(|\)) |                         # parenthesis
+          (\s*(?:<=|>=|<|>|!=|<>|==)\s*) |  # comparator
+          (\s*(?:&&|\|\|)\s*) |             # combinator
+          (\s+)                             # whitespace
+        }x
 
         def tokenize(function, table_name)
           function.scan(REGEX).map do |match|
