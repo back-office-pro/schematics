@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 require 'schematics/virtuals/calculation'
+require 'schematics/entities/entity'
 
 describe Schematics::Virtuals::Calculation do
-  subject(:virtual) { described_class.new(entity, name, tokens, options) }
+  subject(:virtual) do
+    described_class.create(entity, name: name, function: function, options: options)
+  end
 
   let(:entity) do
     Schematics::Entities::Entity.create(
@@ -15,14 +18,12 @@ describe Schematics::Virtuals::Calculation do
     )
   end
   let(:name) { 'tax_inclusive_price' }
+  let(:function) { '($price + $category.vat)' }
   let(:options) do
     {
       unit: '€',
       scale: 2,
     }
-  end
-  let(:tokens) do
-    Schematics::Tokens::Tokenizer.tokenize('($price + $category.vat)', 'products')
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
