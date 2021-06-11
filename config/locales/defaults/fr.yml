@@ -30,6 +30,7 @@ fr:
       name: "$%{name} n'est pas défini"
       no_method_error: "$%{name} est nul"
       type: 'Erreur de type : %{message}'
+  'false': faux
   simple_form:
     labels:
       defaults:
@@ -40,3 +41,4 @@ fr:
         email: E-mail
         password: Mot de passe
         remember_me: Se souvenir de moi
+  'true': vrai
