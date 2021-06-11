@@ -26,8 +26,14 @@
       = render Schematics::Attachment::Component.new(attachment: value)
     - else
       = link_to value.filename, value
-- when Schematics::Attributes::Boolean
-  = value ? fa_icon(:check, class: 'text-success') : fa_icon(:times, class: 'text-danger')
+- when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
+  - case value
+  - when StandardError
+    = @field.format(value)
+  - when TrueClass
+    = fa_icon(:check, class: 'text-success')
+  - when FalseClass
+    = fa_icon(:times, class: 'text-danger')
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
