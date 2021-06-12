@@ -29,12 +29,13 @@ after_bundle do
   run 'yarn add animate.css@4.1.1'
   run 'yarn add bootstrap@4.6.0'
   run 'yarn add bootswatch@4.6.0'
+  run 'yarn add flag-icon-css@3.5.0'
   run 'yarn add jquery@3.5.1'
   run 'yarn add jquery-ui@^1.12.1'
   run 'yarn add jquery-ujs@^1.2.2'
   run 'yarn add typeahead.js@^0.11.1'
+  run 'yarn add stimulus@2.0.0'
   run 'yarn add sweetalert2@5.1.1'
-  run 'yarn add flag-icon-css@3.5.0'
 
   # Git
   git add: '-A'

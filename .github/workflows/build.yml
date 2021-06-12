@@ -70,7 +70,7 @@ jobs:
       - name: Install standard
         run: npm install -g standard
       - name: Run standard
-        run: standard app
+        run: standard app/**/*.js app/**/*.es6
 
   rspec:
     name: Rspec
