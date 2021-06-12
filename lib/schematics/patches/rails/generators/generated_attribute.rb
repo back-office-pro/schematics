@@ -20,9 +20,7 @@ module Schematics
           end
 
           def default
-            return schema_attribute.try(:default) if schema_attribute
-
-            super
+            schema_attribute.try(:default) || super
           end
 
           def required?
