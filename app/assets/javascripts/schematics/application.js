@@ -7,8 +7,8 @@
 //= require font_awesome5
 //= require rails-timeago
 //= require locales/jquery.timeago.fr
-//= require_tree ../../../components/schematics
 //= require_tree .
+//= require_tree ../../../components/schematics
 
 /* global $, Pagy, Turbolinks */
 
