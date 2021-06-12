@@ -27,6 +27,8 @@ ignore_missing:
   - errors.*
   - attributes.*
   - schematics.*
+  - 'true'
+  - 'false'
 ignore_unused:
   - activerecord.*
   - routes.*
@@ -35,3 +37,5 @@ ignore_unused:
   - errors.*
   - attributes.*
   - schematics.*
+  - 'true'
+  - 'false'

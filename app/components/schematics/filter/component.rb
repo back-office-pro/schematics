@@ -8,7 +8,7 @@ module Schematics
       class << self
         def create(field:, model_class:)
           case field
-          when Attributes::Boolean
+          when Attributes::Boolean, Virtuals::Comparison
             Checkbox::Component.new(field: field, model_class: model_class)
           when Behaviours::Rangeable
             Range::Component.new(field: field, model_class: model_class)

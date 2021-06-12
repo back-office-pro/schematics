@@ -163,6 +163,10 @@
                     }
                 },
                 {
+                    "name": "big_price",
+                    "function": "$price > 100 && $vat >= 10"
+                },
+                {
                     "name": "reference",
                     "function": "ref-$id-$sub_category.id"
                 }

@@ -2,10 +2,11 @@
 
 require 'schematics/virtuals/concatenation'
 require 'schematics/entities/entity'
-require 'schematics/tokens/tokenizer'
 
 describe Schematics::Virtuals::Concatenation do
-  subject(:virtual) { described_class.new(entity, name, tokens, options) }
+  subject(:virtual) do
+    described_class.create(entity, name: name, function: function, options: options)
+  end
 
   let(:entity) do
     Schematics::Entities::Entity.create(
@@ -18,10 +19,8 @@ describe Schematics::Virtuals::Concatenation do
     )
   end
   let(:name) { 'full_name' }
+  let(:function) { '$first_name $profile.last_name' }
   let(:options) { {} }
-  let(:tokens) do
-    Schematics::Tokens::Tokenizer.tokenize('$first_name $profile.last_name', 'users')
-  end
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
