@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'acts_as_singleton', '~> 0.0.8'
   spec.add_dependency 'ancestry', '~> 4.0.0'
   spec.add_dependency 'annotate', '~> 3.1.1'
+  spec.add_dependency 'babel-transpiler', '~> 0.7.0'
   spec.add_dependency 'bcrypt', '~> 3.1.16'
   spec.add_dependency 'best_in_place', '~> 3.1.1'
   spec.add_dependency 'better_errors', '~> 2.10.0beta2'
