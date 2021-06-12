@@ -18,7 +18,7 @@ describe Schematics::Virtuals::Calculation do
     )
   end
   let(:name) { 'tax_inclusive_price' }
-  let(:function) { '($price + $category.vat)' }
+  let(:function) { '($price ** $category.vat)' }
   let(:options) do
     {
       unit: '€',
@@ -31,8 +31,8 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
 
-  its(:function) { is_expected.to eq('(price + category.vat)') }
-  its(:to_sql) { is_expected.to eq('(products.price + categories.vat)') }
+  its(:function) { is_expected.to eq('(price ** category.vat)') }
+  its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:square_root_alt) }
   its(:unit) { is_expected.to eq('€') }
@@ -41,7 +41,7 @@ describe Schematics::Virtuals::Calculation do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       def tax_inclusive_price
-        (price + category.vat)
+        (price ** category.vat)
       rescue StandardError => e
         e
       end

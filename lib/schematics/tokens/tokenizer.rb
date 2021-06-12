@@ -15,14 +15,14 @@ module Schematics
     class Tokenizer
       class << self
         REGEX = %r{
-          \$(\w+\.?\w+) |                   # variable
-          (\s(?:-|\+|\*|/)\s) |             # operator
-          ([a-zA-Z_-]+) |                   # string
-          (\d*\.?\d+) |                     # number
-          (\(|\)) |                         # parenthesis
-          (\s*(?:<=|>=|<|>|!=|<>|==)\s*) |  # comparator
-          (\s*(?:&&|\|\|)\s*) |             # combinator
-          (\s+)                             # whitespace
+          (\s*(?:&&|\|\|)\s*)               | # combinator
+          (\s*(?:\*\*|\+|-|\*|/|%|\||&)\s*) | # operator
+          (\s*(?:<=|>=|<|>|!=|==)\s*)       | # comparator
+          (\(|\))                           | # parenthesis
+          \$(\w+\.?\w+)                     | # variable
+          ([a-zA-Z_-]+)                     | # string
+          (\d*\.?\d+)                       | # number
+          (\s+)                               # whitespace
         }x
 
         def tokenize(function, table_name)

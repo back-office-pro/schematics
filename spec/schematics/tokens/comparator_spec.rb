@@ -13,9 +13,9 @@ describe Schematics::Tokens::Comparator do
   end
 
   context 'when comparator is not equal' do
-    let(:value) { ' <> ' }
+    let(:value) { ' != ' }
 
-    its(:to_sql) { is_expected.to eq(' <> ') }
+    its(:to_sql) { is_expected.to eq(' != ') }
     its(:to_str) { is_expected.to eq(' != ') }
   end
 end
