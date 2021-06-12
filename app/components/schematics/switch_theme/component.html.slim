@@ -1,5 +1,5 @@
-li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light
-  a.nav-link.switch-theme.dark role='button'
+li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light data-controller='switchTheme'
+  a.nav-link.switch-theme.dark role='button' data-action='click->switchTheme#darkTheme'
     = fa_icon :moon, class: 'fa-lg'
-  a.nav-link.switch-theme.light role='button'
+  a.nav-link.switch-theme.light role='button' data-action='click->switchTheme#lightTheme'
     = fa_icon :lightbulb, class: 'fa-lg'
