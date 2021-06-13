@@ -28,10 +28,9 @@ input.custom-file-input.is-invalid + label.custom-file-label::after {
 
 // Typeahead
 
-span.twitter-typeahead .tt-suggestion.tt-cursor,
-span.twitter-typeahead .tt-suggestion:hover,
-span.twitter-typeahead .tt-suggestion:focus {
+.typeahead-results .list-group-item:hover {
   background: $primary;
+  color: $white;
 }
 
 // Swal2

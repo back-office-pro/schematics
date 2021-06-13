@@ -40,15 +40,6 @@ $table-accent-bg: lighten($light, 2.5%);
   display: none;
 }
 
-span.twitter-typeahead .tt-menu,
-span.twitter-typeahead .tt-dropdown-menu {
-  background: $light !important;
-}
-
-span.twitter-typeahead .tt-suggestion .tt-highlight {
-  background: $dark !important;
-}
-
 .timeline > li > .card::after {
   border-left: 14px solid $card-bg !important;
   border-right: 0 solid $card-bg !important;
