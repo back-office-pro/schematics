@@ -4,6 +4,6 @@
 /* global Chartkick */
 
 Chartkick.configure({
-  language: '<%= I18n.locale %>',
+  language: $.timeago.settings.lang,
   mapsApiKey: '<%= Schematics::Engine.credentials.gcloud[:api_key] %>'
 })
