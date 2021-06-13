@@ -30,16 +30,6 @@ describe Schematics::Tokens::Tokenizer do
       its([4]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
     end
 
-    context 'when function is a not spaced calculation' do
-      let(:function) { '($price+2)' }
-
-      its([0]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
-      its([1]) { is_expected.to be_a(Schematics::Tokens::Variable) }
-      its([2]) { is_expected.to be_a(Schematics::Tokens::Operator) }
-      its([3]) { is_expected.to be_a(Schematics::Tokens::Number) }
-      its([4]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
-    end
-
     context 'when function is a comparison' do
       let(:function) { '$price >= 100 && $vat != 20' }
 

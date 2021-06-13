@@ -16,7 +16,7 @@ module Schematics
       class << self
         REGEX = %r{
           (\s*(?:&&|\|\|)\s*)               | # combinator
-          (\s*(?:\*\*|\+|-|\*|/|%|\||&)\s*) | # operator
+          (\s+(?:\*\*|\+|-|\*|/|%|\||&)\s+) | # operator
           (\s*(?:<=|>=|<|>|!=|==)\s*)       | # comparator
           (\(|\))                           | # parenthesis
           \$(\w+\.?\w+)                     | # variable
