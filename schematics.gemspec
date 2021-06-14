@@ -77,7 +77,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'route_translator', '~> 10.0.0'
   spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.0.1'
-  spec.add_dependency 'searchkick', '~> 4.4.4'
+  spec.add_dependency 'searchkick', '>= 4.4.4', '< 4.6.0'
   spec.add_dependency 'selenium-webdriver', '~> 4.0.0.beta3'
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
