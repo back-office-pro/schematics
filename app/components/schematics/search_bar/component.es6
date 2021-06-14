@@ -1,4 +1,4 @@
-/* global Stimulus, fetchAPI, Turbolinks, ENTITY_ICONS, TYPEAHEAD_I18N_NOT_FOUND, TYPEAHEAD_I18N_PENDING */
+/* global Stimulus, fetchAPI, Turbolinks, I18n */
 
 window.SearchBarController = class extends Stimulus.Controller {
   static get targets () {
@@ -29,11 +29,11 @@ window.SearchBarController = class extends Stimulus.Controller {
 
   formatResults (results) {
     return Object.entries(results).flatMap(([key, value]) => {
-      return value.map(result => {
+      return value.map(({ icon, data }) => {
         return {
-          url: '/' + [key, result.id].filter(Boolean).join('/'),
-          icon: ENTITY_ICONS[key],
-          descriptor: this.findDescriptor(result)
+          url: '/' + [key, data.id].filter(Boolean).join('/'),
+          icon: icon,
+          descriptor: this.findDescriptor(data)
         }
       })
     })
@@ -56,7 +56,7 @@ window.SearchBarController = class extends Stimulus.Controller {
     return `
       <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
         <i class="fa fa-exclamation-triangle text-dark fa-fw mr-2"></i>
-        ${TYPEAHEAD_I18N_NOT_FOUND}
+        ${I18n.typeahead.not_found}
       </li>
     `
   }
@@ -65,7 +65,7 @@ window.SearchBarController = class extends Stimulus.Controller {
     return `
       <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
         <i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>
-        ${TYPEAHEAD_I18N_PENDING}
+        ${I18n.typeahead.pending}
       </li>
     `
   }

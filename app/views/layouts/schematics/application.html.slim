@@ -14,6 +14,10 @@ html
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
     = timeago_script_tag
+    - # rubocop:disable Rails/OutputSafety
+    javascript:
+      window.I18n = #{t('javascript').to_json.html_safe}
+    - # rubocop:enable Rails/OutputSafety
   body
     - flash.each do |f|
       = render Schematics::Toast::Component.new(flash: f)
