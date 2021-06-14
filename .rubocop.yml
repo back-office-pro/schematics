@@ -2,16 +2,17 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
-Layout/DotPosition:
-  Enabled: true
-  EnforcedStyle: leading
 Style/Documentation:
   Enabled: false
 Style/ReturnNil:
   Enabled: true
-Style/TrailingCommaInArrayLiteral:
+Style/HashEachMethods:
+  AllowedReceivers:
+    - enum
+    - attribute
+Style/TrailingCommaInArrayLiteral: # TODO: remove
   EnforcedStyleForMultiline: consistent_comma
-Style/TrailingCommaInHashLiteral:
+Style/TrailingCommaInHashLiteral: # TODO: remove
   EnforcedStyleForMultiline: consistent_comma
 Layout/LineLength:
   Max: 100

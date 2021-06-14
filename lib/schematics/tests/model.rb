@@ -95,7 +95,7 @@ module Schematics
               keys = model_class.send(enum.name.pluralize.to_sym).keys
               assert enum.validators[:inclusion][:in] == keys
             end
-            enum.values.each do |value| # rubocop:disable Style/HashEachMethods
+            enum.values.each do |value|
               test "should have enum value #{enum.name}_#{value}" do
                 assert model_class.respond_to?(:"#{enum.name}_#{value}")
               end
