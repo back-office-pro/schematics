@@ -46,7 +46,7 @@ module Schematics
 
           test 'visiting the index' do
             visit polymorphic_path(model_class)
-            title = I18n.t('titles.schematics.resources.index',
+            title = I18n.t('schematics.titles.resources.index',
                            model_name_plural: model_name.human.pluralize.downcase)
             assert_selector 'h5', text: title
           end

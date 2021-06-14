@@ -1,7 +1,7 @@
 ---
 en:
-  titles:
-    schematics:
+  schematics:
+    titles:
       dashboard:
         home: Dashboard
       password_resets:
