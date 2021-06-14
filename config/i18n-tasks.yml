@@ -23,6 +23,7 @@ ignore_missing:
   - activerecord.*
   - routes.*
   - simple_form.*
+  - titles.*
   - errors.*
   - attributes.*
   - schematics.*
@@ -33,6 +34,7 @@ ignore_unused:
   - activerecord.*
   - routes.*
   - simple_form.*
+  - titles.*
   - errors.*
   - attributes.*
   - schematics.*

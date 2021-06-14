@@ -1,7 +1,7 @@
 ---
 fr:
-  schematics:
-    titles:
+  titles:
+    schematics:
       dashboard:
         home: Tableau de bord
       password_resets:

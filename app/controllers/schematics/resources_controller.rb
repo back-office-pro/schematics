@@ -240,7 +240,7 @@ module Schematics
     end
 
     def set_breadcrumb
-      title = t('schematics.titles.resources.index', model_name_plural: model_name_plural)
+      title = t('titles.schematics.resources.index', model_name_plural: model_name_plural)
       breadcrumb title, :"#{entity.name.pluralize}_path"
     end
 
