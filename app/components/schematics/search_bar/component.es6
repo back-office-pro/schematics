@@ -95,7 +95,6 @@ window.SearchBarController = class extends Stimulus.Controller {
       const response = await fetchAPI(this.getUrl())
       const results = await response.json()
       this.clearResults()
-      console.log(results);
       if (results.length === 0 || Object.keys(results).length === 0) {
         this.resultsTarget.insertAdjacentHTML('afterbegin', this.notFoundTemplate())
       } else {

@@ -1,4 +1,4 @@
-/* global SearchBarController, Turbolinks */
+/* global $, SearchBarController, Turbolinks */
 
 window.TypeaheadController = class extends SearchBarController {
   onSearch () {
