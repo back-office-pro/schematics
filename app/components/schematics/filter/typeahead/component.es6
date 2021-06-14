@@ -30,7 +30,7 @@ window.TypeaheadController = class extends SearchBarController {
     `
   }
 
-  getUrl () {
+  get url () {
     const scope = this.inputTarget.getAttribute('name')
     const element = scope.match(/filter\[(\w+)\]/)[1]
     const searchParams = new URLSearchParams(window.location.search)

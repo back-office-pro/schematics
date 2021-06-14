@@ -82,7 +82,7 @@ window.SearchBarController = class extends Stimulus.Controller {
     this.resultsTarget.innerHTML = ''
   }
 
-  getUrl () {
+  get url () {
     return `/searches/${this.inputTarget.value}`
   }
 
@@ -92,7 +92,7 @@ window.SearchBarController = class extends Stimulus.Controller {
     this.clearResults()
     if (value.length >= minLength) {
       this.resultsTarget.insertAdjacentHTML('afterbegin', this.pendingTemplate())
-      const response = await fetchAPI(this.getUrl())
+      const response = await fetchAPI(this.url)
       const results = await response.json()
       this.clearResults()
       if (Object.keys(results).length === 0) {
