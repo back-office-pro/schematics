@@ -1,6 +1,6 @@
-/* global Stimulus, fetchAPI, application */
+/* global Stimulus, fetchAPI */
 
-application.register('notificationCenter', class extends Stimulus.Controller {
+window.NotificationCenterController = class extends Stimulus.Controller {
   static get targets () {
     return ['badge', 'icon']
   }
@@ -17,4 +17,4 @@ application.register('notificationCenter', class extends Stimulus.Controller {
       this.iconTarget.classList.remove('animate__animated', 'text-primary')
     }
   }
-})
+}

@@ -1,6 +1,6 @@
-/* global Stimulus, fetchAPI, application */
+/* global Stimulus, fetchAPI */
 
-application.register('sidebar', class extends Stimulus.Controller {
+window.SidebarController = class extends Stimulus.Controller {
   toggle () {
     document.querySelector('.sidebar').classList.toggle('toggled')
     document.querySelector('.content').classList.toggle('toggled')
@@ -10,4 +10,4 @@ application.register('sidebar', class extends Stimulus.Controller {
     const sidebarToggled = document.querySelector('.sidebar').classList.contains('toggled')
     fetchAPI('/preferences', 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
   }
-})
+}
