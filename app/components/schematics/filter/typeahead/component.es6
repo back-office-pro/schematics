@@ -16,14 +16,14 @@ window.TypeaheadController = class extends SearchBarController {
     return results
   }
 
-  goTo (event) {
+  selectItem (event) {
     this.inputTarget.value = event.currentTarget.dataset.value
     $(this.inputTarget.form).submit()
   }
 
   suggestionTemplate (result) {
     return `
-      <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->typeahead#goTo" data-value="${result}" role="button">
+      <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->typeahead#selectItem" data-value="${result}" role="button">
         <i class="fa fa-search text-dark fa-fw mr-2"></i>
         ${this.highlight(result, this.inputTarget.value)}
       </li>

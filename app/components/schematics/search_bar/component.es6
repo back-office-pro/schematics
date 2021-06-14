@@ -39,13 +39,13 @@ window.SearchBarController = class extends Stimulus.Controller {
     })
   }
 
-  goTo (event) {
+  selectItem (event) {
     Turbolinks.visit(event.currentTarget.dataset.url)
   }
 
   suggestionTemplate ({ descriptor, icon, url }) {
     return `
-      <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->searchBar#goTo" data-url="${url}" role="button">
+      <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->searchBar#selectItem" data-url="${url}" role="button">
         <i class="fa fa-${icon} text-dark fa-fw mr-2"></i>
         ${this.highlight(descriptor, this.inputTarget.value)}
       </li>
