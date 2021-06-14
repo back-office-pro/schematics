@@ -54,7 +54,7 @@ window.SearchBarController = class extends Stimulus.Controller {
 
   notFoundTemplate () {
     return `
-      <li class="list-group-item p-2 border-0 text-left text-truncate">
+      <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
         <i class="fa fa-exclamation-triangle text-dark fa-fw mr-2"></i>
         ${TYPEAHEAD_I18N_NOT_FOUND}
       </li>
@@ -63,7 +63,7 @@ window.SearchBarController = class extends Stimulus.Controller {
 
   pendingTemplate () {
     return `
-      <li class="list-group-item p-2 border-0 text-left text-truncate">
+      <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
         <i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>
         ${TYPEAHEAD_I18N_PENDING}
       </li>
