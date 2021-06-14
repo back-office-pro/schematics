@@ -1,9 +1,11 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
+
+require 'chroma'
 
 # Make sure i18n translations are available
 Rails.application.config.after_initialize do
   Chartkick.options = {
-    colors: ['#2c3e50', '#ecf0f1'],
+    colors: '#2c3e50'.paint.palette.analogous(as: :hex),
     height: '300px',
     empty: I18n.t('schematics.application.resource.empty'),
     refresh: 60,
