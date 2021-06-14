@@ -26,11 +26,15 @@ input.custom-file-input.is-invalid + label.custom-file-label::after {
   background: $primary;
 }
 
-// Typeahead
+// List groups
 
-.typeahead-results .list-group-item:hover {
-  background: $primary;
+ul.list-group.list-group-hover li:hover {
+  background: $primary !important;
   color: $white;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(even) {
+  background: $table-accent-bg;
 }
 
 // Swal2

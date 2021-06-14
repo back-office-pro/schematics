@@ -1,12 +1,12 @@
-.input-group.flex-nowrap data-controller='searchBar' data-searchBar-highlight='false' data-searchBar-min-length='3'
   = form_tag searches_path, class: 'form-inline flex-nowrap pr-3' do
-    = search_field_tag :query,
-      params[:query],
-      required: true,
-      placeholder: t('.placeholder'),
-      class: 'form-control border-0 bg-transparent',
-      autocomplete: 'off',
-      spellcheck: false,
-      data: { 'searchBar-target': 'input', action: 'keyup->searchBar#search' }
+    .input-group data-controller='searchBar' data-searchBar-highlight='false' data-searchBar-min-length='3'
+      = search_field_tag :query,
+        params[:query],
+        required: true,
+        placeholder: t('.placeholder'),
+        class: 'form-control border-0 bg-transparent',
+        autocomplete: 'off',
+        spellcheck: false,
+        data: { 'searchBar-target': 'input', action: 'keyup->searchBar#search' }
+      ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-searchBar-target='results'
     = button_tag fa_icon(:search), name: nil, class: 'fa-lg btn nav-link'
-    ul.list-group.shadow-sm.typeahead-results data-searchBar-target='results'
