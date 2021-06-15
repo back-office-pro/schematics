@@ -1,5 +1,5 @@
 @import 'bootswatch/dist/darkly/variables';
-$primary: #2c3e50;
+$primary: darken(#2c3e50, 5%);
 $link-color: $light;
 $card-bg: $secondary;
 $card-cap-bg: $dark;
@@ -38,15 +38,6 @@ $table-accent-bg: lighten($light, 2.5%);
 
 .switch-theme.dark {
   display: none;
-}
-
-span.twitter-typeahead .tt-menu,
-span.twitter-typeahead .tt-dropdown-menu {
-  background: $light !important;
-}
-
-span.twitter-typeahead .tt-suggestion .tt-highlight {
-  background: $dark !important;
 }
 
 .timeline > li > .card::after {

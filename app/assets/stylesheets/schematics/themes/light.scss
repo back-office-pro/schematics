@@ -6,6 +6,8 @@ $pagination-disabled-bg: lighten($primary, 15%);
 $pagination-active-bg: $primary;
 $toast-background-color: $white;
 $table-accent-bg: lighten($light, 2.5%);
+$list-group-disabled-bg: $white;
+
 @import 'default';
 @import 'bootswatch/dist/flatly/bootswatch';
 

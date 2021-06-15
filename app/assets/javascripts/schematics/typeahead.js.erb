@@ -1,5 +1,0 @@
-//= require typeahead.js/dist/typeahead.bundle
-
-const ENTITY_ICONS = { <%= Schematics::Schema.instance.entities.map { |entity| "#{entity.name.pluralize}: '#{entity.icon.to_s.dasherize}'"}.join(', ') %> };
-const TYPEAHEAD_I18N_PENDING = "<%= I18n.t('schematics.application.typeahead.pending') %>"
-const TYPEAHEAD_I18N_NOT_FOUND = "<%= I18n.t('schematics.application.typeahead.not_found') %>"

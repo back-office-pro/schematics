@@ -32,7 +32,10 @@ module Schematics
         format.json do
           @results.each do |_name, result|
             result.map! do |record|
-              record.class.entity.descriptor.serializer_class.new(record)
+              {
+                icon: record.class.entity.icon.to_s.dasherize,
+                data: record.class.entity.descriptor.serializer_class.new(record),
+              }
             end
           end
           render json: @results

@@ -27,6 +27,7 @@ ignore_missing:
   - errors.*
   - attributes.*
   - schematics.*
+  - javascript.*
   - 'true'
   - 'false'
 ignore_unused:
@@ -37,5 +38,6 @@ ignore_unused:
   - errors.*
   - attributes.*
   - schematics.*
+  - javascript.*
   - 'true'
   - 'false'

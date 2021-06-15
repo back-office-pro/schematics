@@ -26,6 +26,3 @@ en:
         per_page: "%{size} %{model_name} per page"
       resource:
         empty: No data available
-      typeahead:
-        not_found: No result
-        pending: Loading...

@@ -1,0 +1,6 @@
+---
+en:
+  javascript:
+    typeahead:
+      not_found: No result
+      pending: Loading...

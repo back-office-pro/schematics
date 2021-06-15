@@ -6,8 +6,8 @@ thead.border-bottom.border-light
         th.text-nowrap.text-center.pb-0
           = render Schematics::SortLink::Component.new(field: field, model_class: @model_class)
   tr
-    th.text-nowrap.align-middle.p-0
+    td.text-nowrap.align-middle.p-0
       = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-        th.align-middle.text-center.p-0
+        td.align-middle.text-center.p-0
           = render Schematics::Filter::Component.create(field: field, model_class: @model_class)

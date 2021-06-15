@@ -14,7 +14,7 @@
       - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(polymorphic_path(model_class))
         - entity.enum_attributes.each do |attribute|
           li.nav-item.text-center.mw-100.mb-2.px-3.d-none class=('d-md-block' unless toggled?)
-            ul.list-group
+            ul.list-group.list-group-hover
               - attribute.values.each do |value|
                 = active_link_to polymorphic_path(model_class, filter: { attribute.name => value }),
                                 active: :exact,

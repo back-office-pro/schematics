@@ -26,6 +26,3 @@ fr:
         per_page: "%{size} %{model_name} par page"
       resource:
         empty: Aucune donnée disponible
-      typeahead:
-        not_found: Aucun résultat
-        pending: Recherche en cours...

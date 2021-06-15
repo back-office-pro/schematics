@@ -1,6 +1,6 @@
-/* global Stimulus, fetchAPI, application */
+/* global Stimulus, fetchAPI */
 
-application.register('notificationCenter', class extends Stimulus.Controller {
+window.NotificationCenterController = class extends Stimulus.Controller {
   static get targets () {
     return ['badge', 'icon']
   }
@@ -14,7 +14,7 @@ application.register('notificationCenter', class extends Stimulus.Controller {
       await fetchAPI('/dashboard/read_notifications', 'POST')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
-      this.iconTarget.classList.remove('animate__animated', 'text-primary')
+      this.iconTarget.classList.remove('animate__animated')
     }
   }
-})
+}

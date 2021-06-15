@@ -1,6 +1,6 @@
-/* global Stimulus, fetchAPI, application */
+/* global Stimulus, fetchAPI */
 
-application.register('switchTheme', class extends Stimulus.Controller {
+window.SwitchThemeController = class extends Stimulus.Controller {
   lightTheme () {
     this.switchTheme('light')
   }
@@ -16,4 +16,4 @@ application.register('switchTheme', class extends Stimulus.Controller {
     setTimeout(() => oldTheme.setAttribute('disabled', 'disabled'), 200)
     fetchAPI('/preferences', 'PUT', { preferences: { theme: theme } })
   }
-})
+}

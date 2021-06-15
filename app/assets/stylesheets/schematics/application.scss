@@ -4,7 +4,6 @@
 @import 'sweetalert2/dist/sweetalert2';
 $flag-icon-css-path: '../flag-icon-css/flags';
 @import 'flag-icon-css/sass/flag-icon';
-@import 'typeahead';
 @import 'timeline';
 @import 'trix';
 @import 'best_in_place';
@@ -57,7 +56,7 @@ body {
   transition: ease-in-out .3s;
 
   .container-fluid {
-    min-height: calc(100vh - 50px - 6.5rem);
+    min-height: calc(100vh - 50px - 5.5rem);
   }
 
   &.toggled {
@@ -206,4 +205,13 @@ input[type='search']::-webkit-search-cancel-button:hover {
 
 *[data-href] {
   cursor: pointer;
+}
+
+// Typeahead
+
+.typeahead-results {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 5;
 }

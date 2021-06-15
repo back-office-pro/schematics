@@ -8,13 +8,13 @@
 //= require rails-timeago
 //= require locales/jquery.timeago.fr
 //= require_tree .
-//= require_tree ../../../components/schematics
 
 /* global $, Pagy, Turbolinks */
 
 $(document).on('turbolinks:load', function () {
   Pagy.init()
   $('[data-toggle="tooltip"]').tooltip()
+  $('.toast').toast({ delay: 5000 }).toast('show')
   $('.custom-file-input').on('change', function () {
     $(this)
       .siblings('.custom-file-label')
@@ -38,15 +38,6 @@ $(document).on('turbolinks:load', function () {
     const $target = $(e.target)
     if (!$target.is('a') && !$target.parent().is('a')) {
       $($(this).data('target')).modal('show')
-    }
-  })
-  $('input[type=search]').on('search', function (e) {
-    const $target = $(e.target)
-    const scope = $target.attr('name')
-    const searchParams = new URLSearchParams(window.location.search)
-    if (searchParams.has(scope)) {
-      searchParams.delete(scope)
-      Turbolinks.visit(window.location.pathname + '?' + searchParams)
     }
   })
 })
