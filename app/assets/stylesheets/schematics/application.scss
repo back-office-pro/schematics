@@ -104,6 +104,7 @@ footer {
 .table td,
 .table th {
   border: none !important;
+  padding: .5rem;
 }
 
 .table td[colspan='2'] .btn-group.enabled {
@@ -137,8 +138,8 @@ footer {
   font-family: 'Font Awesome 5 Free';
   font-size: 1.25rem;
   font-weight: 900;
-  line-height: 45px;
-  padding-right: 1.5rem;
+  line-height: 39.5px;
+  padding-right: 1rem;
   position: absolute;
   right: 0;
   top: 0;

@@ -1,26 +1,26 @@
 - breadcrumb title, @resource
 .card.shadow-sm.border-0
-  .card-header.border-top-0.border-left-0.border-right-0.border-light.p-2
+  .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
     .row.align-items-center
       .col.text-truncate
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon :eye, class: 'mr-3 ml-2 fa-lg align-middle'
           span.align-middle = title
-      .col-auto.mr-1
-        = link_to polymorphic_path(@resource, format: :pdf), class: 'btn btn-light btn-sm btn-icon-split mr-2' do
+      .col-auto
+        = link_to polymorphic_path(@resource, format: :pdf), class: 'btn btn-light btn-sm btn-icon-split' do
           span.icon = fa_icon :file_pdf
           span.text.d-none.d-lg-inline = t('schematics.application.button.download_pdf')
         - if can?(:update, @resource)
-          = link_to edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource), class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
+          = link_to edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource), class: 'btn btn-primary btn-sm btn-icon-split ml-2' do
             span.icon = fa_icon :edit
             span.text.d-none.d-lg-inline = t('schematics.application.button.edit')
         - if can?(:destroy, @resource)
           - if resource_associations.any?
-            = link_to polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split' do
+            = link_to polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
                 span.icon = fa_icon :trash
                 span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
           - else
-            = link_to polymorphic_path(@resource), method: :delete, class: 'btn btn-danger btn-sm btn-icon-split', data: confirm_data do
+            = link_to polymorphic_path(@resource), method: :delete, class: 'btn btn-danger btn-sm btn-icon-split ml-2', data: confirm_data do
                 span.icon = fa_icon :trash
                 span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
   .card-body.p-0
@@ -29,7 +29,7 @@
   - rich_text = @resource.instance_eval(attribute.name)
   - if rich_text.present?
     .card.shadow-sm.border-0.mt-3
-      a.card-header.border-top-0.border-left-0.border-right-0.border-light.p-2 href="#collapse-#{attribute.name}" data-toggle='collapse' role='button'
+      a.card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1 href="#collapse-#{attribute.name}" data-toggle='collapse' role='button'
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon attribute.icon, class: 'mr-3 ml-2 fa-lg'
           = attribute.entity.class_name.constantize.human_attribute_name(attribute.name)

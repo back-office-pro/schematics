@@ -2,15 +2,15 @@
 .row.no-gutters.align-items-center
   .col-lg
     .card.shadow-sm.border-0
-      .card-header.border-top-0.border-left-0.border-right-0.border-light.p-2
+      .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
         .row.align-items-center
           .col.text-truncate
             h5.m-0.text-primary.text-truncate.font-weight-bold
               = fa_icon @version.entity.icon, class: 'mr-3 ml-2 fa-lg align-middle'
               span.align-middle = title
-          .col-auto.mr-1
+          .col-auto
             - if can?(:revert, @version)
-              = link_to revert_version_path(@version), class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
+              = link_to revert_version_path(@version), class: 'btn btn-primary btn-sm btn-icon-split' do
                 span.icon = fa_icon :undo
                 span.text.d-none.d-lg-inline = t('schematics.application.button.revert')
       .card-body.p-0
@@ -30,7 +30,7 @@
     = fa_icon :arrow_down, size: '4x', class: 'text-secondary d-inline-block d-lg-none'
   .col-lg
     .card.shadow-sm.border-0
-      .card-header.border-top-0.border-left-0.border-right-0.border-light.p-2
+      .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
         .row.align-items-center
           .col.text-truncate
             h5.m-0.text-primary.text-truncate.font-weight-bold
