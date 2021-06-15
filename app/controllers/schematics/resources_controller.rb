@@ -39,8 +39,10 @@ module Schematics
       respond_to do |format|
         format.html
         format.json { render json: @resources }
-        format.csv  { render csv:  @resources }
-        format.xls  { render xls:  @resources }
+        format.csv do
+          send_data GenerateCsvJob.perform_now(model_name.to_s, @resources.pluck(:id)),
+                    filename: "#{model_name_plural.dasherize}-#{I18n.l(Time.current)}.csv"
+        end
       end
     end
 
@@ -49,21 +51,8 @@ module Schematics
         format.html
         format.json { render json: @resource }
         format.pdf do
-          render pdf: "#{model_name.human.downcase.dasherize}-#{@resource.slug}",
-                 disposition: 'attachment',
-                 template: 'schematics/application/show',
-                 layout: 'layouts/schematics/pdf',
-                 header: {
-                   font_size: 8,
-                   center: @resource,
-                   right: '[page] / [topage]',
-                 },
-                 footer: {
-                   font_size: 8,
-                   left: helpers.setting(:company_name),
-                   center: helpers.setting(:company_address),
-                   right: helpers.setting(:company_registration_number),
-                 }
+          send_data GeneratePdfJob.perform_now(model_name.to_s, @resource.id),
+                    filename: "#{model_name.human.downcase.dasherize}-#{resource.slug}.pdf"
         end
       end
     end
@@ -80,7 +69,7 @@ module Schematics
       respond_to do |format|
         format.html
         format.csv do
-          send_data CsvTemplateSerializer.new(model_class).file,
+          send_data GenerateCsvTemplateJob.perform_now(model_name.to_s),
                     filename: "#{model_name_plural}.csv"
         end
       end
