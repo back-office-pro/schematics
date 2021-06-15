@@ -26,6 +26,9 @@ module Schematics
     config.active_record.action_on_strict_loading_violation = :log # unless Rails.env.development?
     config.active_record.warn_on_records_fetched_greater_than = 100
 
+    # Active Job
+    config.active_job.queue_adapter = :sidekiq
+
     # Mailer
     config.action_mailer.delivery_method = :sendmail
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
