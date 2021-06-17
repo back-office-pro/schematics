@@ -40,8 +40,15 @@ module Schematics
         format.html
         format.json { render json: @resources }
         format.csv do
-          send_data GenerateCsvJob.perform_now(model_name.to_s, @resources.pluck(:id)),
-                    filename: "#{model_name_plural.dasherize}-#{I18n.l(Time.current)}.csv"
+          result = Resources::GenerateAsyncFile.call(
+            fingerprint: params[:fingerprint],
+            job: GenerateCsvJob,
+            job_params: [model_name.to_s, @resources.pluck(:id)],
+            extension: 'csv',
+            slug: model_name_plural.dasherize
+          )
+          return send_data result.data if result.failure?
+          send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
     end
@@ -51,8 +58,15 @@ module Schematics
         format.html
         format.json { render json: @resource }
         format.pdf do
-          send_data GeneratePdfJob.perform_now(model_name.to_s, @resource.id),
-                    filename: "#{model_name.human.downcase.dasherize}-#{resource.slug}.pdf"
+          result = Resources::GenerateAsyncFile.call(
+            fingerprint: params[:fingerprint],
+            job: GeneratePdfJob,
+            job_params: [model_name.to_s, @resource.id],
+            extension: 'pdf',
+            slug: "#{model_name.human.downcase.dasherize}-#{@resource.slug}"
+          )
+          return send_data result.data if result.failure?
+          send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
     end
@@ -69,8 +83,15 @@ module Schematics
       respond_to do |format|
         format.html
         format.csv do
-          send_data GenerateCsvTemplateJob.perform_now(model_name.to_s),
-                    filename: "#{model_name_plural}.csv"
+          result = Resources::GenerateAsyncFile.call(
+            fingerprint: params[:fingerprint],
+            job: GenerateCsvTemplateJob,
+            job_params: [model_name.to_s],
+            extension: 'csv',
+            slug: model_name_plural
+          )
+          return send_data result.data if result.failure?
+          send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
     end

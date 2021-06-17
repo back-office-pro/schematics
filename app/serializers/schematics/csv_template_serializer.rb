@@ -8,16 +8,16 @@ module Schematics
       @model_class = model_class
     end
 
-    def generate_file
-      generate do |file|
+    def generate_file(filepath)
+      generate(filepath) do |file|
         2.times { file << content }
       end
     end
 
     protected
 
-    def generate(separator: ',')
-      CSV.generate(headers: true, col_sep: separator) do |file|
+    def generate(filepath, separator: ',')
+      CSV.open(filepath, 'wb', headers: true, col_sep: separator) do |file|
         file << headers
         yield file
       end
