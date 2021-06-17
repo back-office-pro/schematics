@@ -1,5 +1,10 @@
 .card.shadow-sm.border-0.mt-3
-  a.card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1 class=('collapsed' if collapsed?) href="#collapse-#{random}" data-toggle='collapse' role='button'
+  a.card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1 {
+    class=('collapsed' if collapsed?)
+    href="#collapse-#{random}"
+    data-toggle='collapse'
+    role='button'
+  }
     .row.align-items-center
       .col.text-truncate
         h5.m-0.text-primary.text-truncate.font-weight-bold
@@ -39,7 +44,9 @@
                         = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
                           = fields.hidden_field :id, value: resource.id
                           = fields.hidden_field :_destroy, value: true
-                        = f.button :button, class: 'btn btn-danger btn-sm', data: confirm_data.merge({ toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }) do
+                        = f.button :button,
+                                   class: 'btn btn-danger btn-sm',
+                                   data: confirm_data.merge({ toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }) do
                           = fa_icon(:trash)
                 - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle

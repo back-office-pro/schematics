@@ -7,10 +7,16 @@
           h5.m-0.text-primary.text-truncate.font-weight-bold
             = fa_icon :table, class: 'mr-3 ml-2 fa-lg align-middle'
             span.align-middle = title
-        .col-auto data-controller='generateFileInBackground' data-generateFileInBackground-content-type='text/csv' data-generateFileInBackground-url=polymorphic_path(model_class, format: :csv)
+        .col-auto {
+          data-controller='generateFileInBackground'
+          data-generateFileInBackground-content-type='text/csv'
+          data-generateFileInBackground-url=polymorphic_path(model_class, format: :csv)
+        }
           - if @pagy.pages > 1
             = select_tag :per_page,
-              options_for_select([10, 25, 50, 100].map { |size| [t('schematics.application.dropdown.per_page', size: size, model_name: @model_name_plural), size] }, params.fetch(:per_page, 25)),
+              options_for_select([10, 25, 50, 100].map do |size| \
+                [t('schematics.application.dropdown.per_page', size: size, model_name: @model_name_plural), size] \
+              end, params.fetch(:per_page, 25)),
               onchange: '$(this.form).submit()',
               class: 'form-control form-control-sm border-0 bg-transparent d-none d-md-inline'
           a.btn.btn-light.btn-sm.btn-icon-split.ml-2 data-action='click->generateFileInBackground#run'
