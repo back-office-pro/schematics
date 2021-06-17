@@ -5,8 +5,9 @@
 //= require switch_theme/component
 //= require search_bar/component
 //= require filter/typeahead/component
+//= require ./controllers/generate_async_file_controller
 
-/* global Stimulus, fetch, SwitchThemeController, NotificationCenterController, SidebarController, SearchBarController, TypeaheadController */
+/* global Stimulus, fetch, SwitchThemeController, NotificationCenterController, SidebarController, SearchBarController, TypeaheadController, GenerateAsyncFileController */
 
 window.fetchAPI = (url, method = 'GET', data) => {
   const csrfToken = document.querySelector("[name='csrf-token']").content
@@ -29,3 +30,4 @@ application.register('notificationCenter', NotificationCenterController)
 application.register('sidebar', SidebarController)
 application.register('searchBar', SearchBarController)
 application.register('typeahead', TypeaheadController)
+application.register('generateAsyncFile', GenerateAsyncFileController)
