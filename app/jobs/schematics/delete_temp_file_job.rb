@@ -3,7 +3,8 @@
 module Schematics
   class DeleteTempFileJob < ApplicationJob
     def perform(filepath)
-      File.delete Rails.root.join('tmp', filepath)
+      filepath = Rails.root.join('tmp', filepath)
+      File.delete(filepath) if File.exist?(filepath)
     end
   end
 end
