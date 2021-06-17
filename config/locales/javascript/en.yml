@@ -1,8 +1,8 @@
 ---
 en:
   javascript:
+    generate_async_file:
+      pending: Generating...
     typeahead:
       not_found: No result
       pending: Loading...
-    generate_async_file:
-      pending: Generating...

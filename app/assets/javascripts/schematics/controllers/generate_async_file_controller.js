@@ -1,6 +1,6 @@
 //= require file-saver/dist/FileSaver
 
-/* global Stimulus, fetchAPI, Blob, saveAs */
+/* global Stimulus, fetchAPI, Blob, saveAs, I18n */
 
 window.GenerateAsyncFileController = class extends Stimulus.Controller {
   static get targets () {

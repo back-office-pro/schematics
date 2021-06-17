@@ -1,8 +1,8 @@
 ---
 fr:
   javascript:
+    generate_async_file:
+      pending: Génération en cours...
     typeahead:
       not_found: Aucun résultat
       pending: Recherche en cours...
-    generate_async_file:
-      pending: Génération en cours...

@@ -48,6 +48,7 @@ module Schematics
             slug: model_name_plural.dasherize
           )
           return send_data result.data if result.failure?
+
           send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
@@ -66,6 +67,7 @@ module Schematics
             slug: "#{model_name.human.downcase.dasherize}-#{@resource.slug}"
           )
           return send_data result.data if result.failure?
+
           send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
@@ -91,6 +93,7 @@ module Schematics
             slug: model_name_plural
           )
           return send_data result.data if result.failure?
+
           send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
