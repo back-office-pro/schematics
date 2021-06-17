@@ -2,7 +2,7 @@
 
 module Schematics
   module Resources
-    class GenerateAsyncFile
+    class GenerateFileInBackground
       include Interactor
 
       before do

@@ -2,17 +2,17 @@
 
 /* global Stimulus, fetchAPI, Blob, saveAs, I18n */
 
-window.GenerateAsyncFileController = class extends Stimulus.Controller {
+window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
   static get targets () {
     return ['text', 'icon']
   }
 
-  async call (event) {
+  async run (event) {
     event.preventDefault()
     const text = this.textTarget.textContent
     const icon = this.iconTarget.innerHTML
     let timer = 0
-    this.textTarget.textContent = I18n.generate_async_file.pending
+    this.textTarget.textContent = I18n.generate_file_in_background.pending
     this.iconTarget.innerHTML = '<i class="fa fa-spinner fa-spin fa-fw"></i>'
     const response = await fetchAPI(this.data.get('url'))
     const fingerprint = await response.text()
@@ -28,7 +28,7 @@ window.GenerateAsyncFileController = class extends Stimulus.Controller {
         this.iconTarget.innerHTML = icon
       } else {
         timer++
-        this.textTarget.textContent = `${I18n.generate_async_file.pending} (${timer})`
+        this.textTarget.textContent = `${I18n.generate_file_in_background.pending} (${timer})`
       }
     }, 1000)
   }

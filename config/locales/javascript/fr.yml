@@ -1,7 +1,7 @@
 ---
 fr:
   javascript:
-    generate_async_file:
+    generate_file_in_background:
       pending: Génération en cours...
     typeahead:
       not_found: Aucun résultat

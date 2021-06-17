@@ -40,7 +40,7 @@ module Schematics
         format.html
         format.json { render json: @resources }
         format.csv do
-          result = Resources::GenerateAsyncFile.call(
+          result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GenerateCsvJob,
             job_params: [model_name.to_s, @resources.pluck(:id)],
@@ -59,7 +59,7 @@ module Schematics
         format.html
         format.json { render json: @resource }
         format.pdf do
-          result = Resources::GenerateAsyncFile.call(
+          result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GeneratePdfJob,
             job_params: [model_name.to_s, @resource.id],
@@ -85,7 +85,7 @@ module Schematics
       respond_to do |format|
         format.html
         format.csv do
-          result = Resources::GenerateAsyncFile.call(
+          result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GenerateCsvTemplateJob,
             job_params: [model_name.to_s],
