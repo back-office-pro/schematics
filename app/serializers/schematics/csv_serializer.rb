@@ -9,8 +9,8 @@ module Schematics
       @resources = resources
     end
 
-    def generate_file(filepath)
-      generate(filepath) do |file|
+    def generate_file
+      generate do |file|
         @resources.each do |resource|
           file << content(resource)
         end
