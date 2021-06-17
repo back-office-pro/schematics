@@ -12,7 +12,7 @@ module Schematics
     end
 
     private
-     
+
     def controller
       @controller ||= "#{@model_name.pluralize}Controller".constantize
     end
