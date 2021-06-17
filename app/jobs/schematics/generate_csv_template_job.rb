@@ -2,9 +2,13 @@
 
 module Schematics
   class GenerateCsvTemplateJob < ApplicationJob
-    def perform(model_name, filepath)
+    def perform(model_name, fingerprint)
       model_class = model_name.constantize
-      CsvTemplateSerializer.new(model_class).generate_file(filepath)
+      filepath = Rails.root.join('tmp', "#{fingerprint}.csv").to_s
+      File.open(filepath, 'wb') do |file|
+        file << CsvTemplateSerializer.new(model_class).generate_file
+      end
+      DeleteTempFileJob.set(wait: 5.minutes).perform_later(filepath)
     end
   end
 end

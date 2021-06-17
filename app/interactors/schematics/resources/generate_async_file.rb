@@ -22,7 +22,7 @@ module Schematics
             context.fail!
           end
         else
-          @job.perform_later(*@job_params.push(filepath))
+          @job.perform_later(*@job_params.push(@fingerprint))
           context.fail!(data: @fingerprint)
         end
       end
@@ -30,7 +30,7 @@ module Schematics
       private
 
       def filepath
-        Rails.root.join('tmp', "#{@slug}-#{@fingerprint}.#{@extension}").to_s
+        Rails.root.join('tmp', "#{@fingerprint}.#{@extension}")
       end
 
       def filename
