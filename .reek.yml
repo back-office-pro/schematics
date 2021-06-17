@@ -2,10 +2,7 @@ detectors:
   IrresponsibleModule:
     enabled: false
   LongParameterList:
-    max_params: 7
-    overrides:
-      initialize:
-        max_params: 6
+    max_params: 5
   InstanceVariableAssumption:
     enabled: false
   TooManyStatements:

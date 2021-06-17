@@ -6,6 +6,7 @@ module Schematics
       attr_reader :value
 
       class << self
+        # :reek:LongParameterList
         def create((combinator, operator, comparator, parenthesis, variable, string, number, *whitespace), table_name) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Layout/LineLength
           return Combinator.new(combinator) if combinator
           return Operator.new(operator) if operator

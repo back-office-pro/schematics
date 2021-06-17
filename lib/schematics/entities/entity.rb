@@ -53,6 +53,7 @@ module Schematics
       MISSING_REGEX = /([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
 
       class << self
+        # :reek:LongParameterList
         def create(name:,
                    type: nil,
                    icon: :caret_square_right,
@@ -92,6 +93,7 @@ module Schematics
         end
       end
 
+      # :reek:LongParameterList
       def initialize(name, icon, descriptor, associations, attributes, virtuals)
         @name = name
         @icon = icon
