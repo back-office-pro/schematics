@@ -14,5 +14,6 @@
                 td class=td_classes_for(date)
                   .text-muted = date.day
                   - resources_for(date).each do |resource|
-                    .alert.alert-secondary.text-truncate.mb-1
-                      = link_to resource, resource
+                    .alert.alert-secondary.text-truncate.mb-1.p-2 data-href=(polymorphic_path(resource) unless resource.deleted?)
+                      = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
+                      span.ml-2= resource
