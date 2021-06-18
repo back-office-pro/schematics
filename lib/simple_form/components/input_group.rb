@@ -4,12 +4,12 @@ module SimpleForm
   module Components
     module InputGroup
       def prepend(_wrapper_options)
-        span_tag = tag.span(options[:prepend], class: 'input-group-text border-0 pr-0')
+        span_tag = tag.span(options[:prepend], class: 'input-group-text border-0 bg-light pr-1')
         template.tag.div(span_tag, class: 'input-group-prepend')
       end
 
       def append(_wrapper_options)
-        span_tag = tag.span(options[:append], class: 'input-group-text border-0 pl-0')
+        span_tag = tag.span(options[:append], class: 'input-group-text border-0 bg-light pl-1')
         template.tag.div(span_tag, class: 'input-group-append')
       end
     end

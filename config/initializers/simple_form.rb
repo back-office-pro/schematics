@@ -6,7 +6,7 @@ require 'simple_form/components/input_group'
 Rails.application.config.after_initialize do
   SimpleForm.include_component(SimpleForm::Components::InputGroup)
   SimpleForm.setup do |config|
-    config.input_class = 'bg-light border-0'
+    config.input_class = 'bg-light border-0 px-2'
     config.wrapper_mappings = {
       boolean: :custom_boolean_switch,
       check_boxes: :custom_collection,
