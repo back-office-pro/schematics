@@ -37,3 +37,4 @@
     .card-body.p-0
       = render Schematics::Viewer::Component.create(resources: @resources)
 == pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1
+= render Schematics::Viewer::Calendar::Pagination::Component.new(entity: entity) if entity.viewer == :calendar

@@ -11,6 +11,7 @@ $flag-icon-css-path: '../flag-icon-css/flags';
 @import 'toast/component';
 @import 'notification_center/component';
 @import 'message_center/component';
+@import 'viewer/calendar/component';
 
 // Animations
 
@@ -78,17 +79,17 @@ footer {
 
 // Tables
 
-.table thead tr:first-child {
+.table thead:first-child tr:first-child {
   text-decoration: underline;
 }
 
-.table td:first-child {
+.table.table-hover td:first-child {
   left: 0;
   position: sticky;
   width: 1%;
 }
 
-.table thead th:first-child {
+.table.table-hover thead:first-child th:first-child {
   width: 1%;
 }
 

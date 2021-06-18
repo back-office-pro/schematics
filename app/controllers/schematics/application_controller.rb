@@ -3,12 +3,14 @@
 module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
+    include Localizable
 
     protect_from_forgery unless: -> { request.format.json? }
 
     before_action :authorize
     before_action :set_paper_trail_whodunnit
     around_action :switch_locale
+    around_action :switch_beginning_of_week
     around_action :switch_time_zone, if: -> { current_user && !Rails.env.test? }
     after_action { pagy_headers_merge(@pagy) if @pagy }
 
@@ -75,21 +77,6 @@ module Schematics
           redirect_to schematics.login_path, alert: t('schematics.application.forbidden.alert')
         end
       end
-    end
-
-    def switch_locale(&action)
-      locale = current_user&.locale&.downcase ||
-               extract_locale_from_accept_language_header&.first ||
-               I18n.default_locale
-      I18n.with_locale(locale, &action)
-    end
-
-    def switch_time_zone(&action)
-      Time.use_zone(current_user.time_zone, &action)
-    end
-
-    def extract_locale_from_accept_language_header
-      I18n.available_locales & request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/).to_a
     end
   end
 end

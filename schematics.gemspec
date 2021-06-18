@@ -55,6 +55,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'grape-swagger-rails', '~> 0.3.1'
   spec.add_dependency 'groupdate', '~> 5.2.2'
   spec.add_dependency 'humanize', '~> 2.5.1'
+  spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
   spec.add_dependency 'image_processing', '~> 1.12.1'
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'json_schemer', '~> 0.2.17'

@@ -1,0 +1,13 @@
+nav
+  ul.pagination.justify-content-center
+    li.page-item.prev
+      = link_to previous_page_url, class: 'page-link' do
+        == t('pagy.nav.prev')
+    li.page-item.active
+      .page-link
+        = t('date.month_names')[month]
+        | &nbsp;
+        = year
+    li.page-item.next
+      = link_to next_page_url, class: 'page-link' do
+        == t('pagy.nav.next')
