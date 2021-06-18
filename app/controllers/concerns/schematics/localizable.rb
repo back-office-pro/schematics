@@ -6,7 +6,7 @@ module Schematics
 
     def current_locale
       current_user&.locale&.downcase ||
-        I18n.available_locales & extract_locale_from_accept_language_header ||
+        I18n.available_locales.include?(http_header_locale) && http_header_locale ||
         I18n.default_locale
     end
 
@@ -24,8 +24,13 @@ module Schematics
 
     private
 
-    def extract_locale_from_accept_language_header
-      request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.to_a&.first
+    def http_header_locale
+      request
+        .env['HTTP_ACCEPT_LANGUAGE']
+        &.scan(/^[a-z]{2}/)
+        &.to_a
+        &.first
+        &.to_sym
     end
   end
 end
