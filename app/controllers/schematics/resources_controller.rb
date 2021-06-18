@@ -39,8 +39,18 @@ module Schematics
       respond_to do |format|
         format.html
         format.json { render json: @resources }
-        format.csv  { render csv:  @resources }
-        format.xls  { render xls:  @resources }
+        format.csv do
+          result = Resources::GenerateFileInBackground.call(
+            fingerprint: params[:fingerprint],
+            job: GenerateCsvJob,
+            job_params: [model_name.to_s, @resources.pluck(:id)],
+            extension: 'csv',
+            slug: model_name_plural.dasherize
+          )
+          return send_data result.data if result.failure?
+
+          send_file result.filepath, type: 'text/csv', filename: result.filename
+        end
       end
     end
 
@@ -49,21 +59,16 @@ module Schematics
         format.html
         format.json { render json: @resource }
         format.pdf do
-          render pdf: "#{model_name.human.downcase.dasherize}-#{@resource.slug}",
-                 disposition: 'attachment',
-                 template: 'schematics/application/show',
-                 layout: 'layouts/schematics/pdf',
-                 header: {
-                   font_size: 8,
-                   center: @resource,
-                   right: '[page] / [topage]',
-                 },
-                 footer: {
-                   font_size: 8,
-                   left: helpers.setting(:company_name),
-                   center: helpers.setting(:company_address),
-                   right: helpers.setting(:company_registration_number),
-                 }
+          result = Resources::GenerateFileInBackground.call(
+            fingerprint: params[:fingerprint],
+            job: GeneratePdfJob,
+            job_params: [model_name.to_s, @resource.id],
+            extension: 'pdf',
+            slug: "#{model_name.human.downcase.dasherize}-#{@resource.slug}"
+          )
+          return send_data result.data if result.failure?
+
+          send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
     end
@@ -80,8 +85,16 @@ module Schematics
       respond_to do |format|
         format.html
         format.csv do
-          send_data CsvTemplateSerializer.new(model_class).file,
-                    filename: "#{model_name_plural}.csv"
+          result = Resources::GenerateFileInBackground.call(
+            fingerprint: params[:fingerprint],
+            job: GenerateCsvTemplateJob,
+            job_params: [model_name.to_s],
+            extension: 'csv',
+            slug: model_name_plural
+          )
+          return send_data result.data if result.failure?
+
+          send_file result.filepath, type: 'text/csv', filename: result.filename
         end
       end
     end

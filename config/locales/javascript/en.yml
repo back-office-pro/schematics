@@ -1,6 +1,8 @@
 ---
 en:
   javascript:
+    generate_file_in_background:
+      pending: Generating...
     typeahead:
       not_found: No result
       pending: Loading...

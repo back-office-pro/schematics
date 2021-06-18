@@ -29,6 +29,7 @@ after_bundle do
   run 'yarn add animate.css@4.1.1'
   run 'yarn add bootstrap@4.6.0'
   run 'yarn add bootswatch@4.6.0'
+  run 'yarn add file-saver@2.0.5'
   run 'yarn add flag-icon-css@3.5.0'
   run 'yarn add jquery@3.5.1'
   run 'yarn add jquery-ui@1.12.1'
