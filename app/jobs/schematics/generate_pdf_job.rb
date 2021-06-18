@@ -5,9 +5,7 @@ module Schematics
     def perform(model_name, resource_id, fingerprint)
       resource = model_name.constantize.find(resource_id)
       filepath = Rails.root.join('tmp', "#{fingerprint}.pdf").to_s
-      File.open(filepath, 'wb') do |file|
-        file << PdfSerializer.new(model_name, resource).generate_file
-      end
+      File.write(filepath, PdfSerializer.new(model_name, resource).generate_file)
       DeleteTempFileJob.set(wait: 5.minutes).perform_later(filepath)
     end
   end

@@ -6,9 +6,7 @@ module Schematics
       model_class = model_name.constantize
       resources = model_class.find(resource_ids)
       filepath = Rails.root.join('tmp', "#{fingerprint}.csv").to_s
-      File.open(filepath, 'wb') do |file|
-        file << CsvSerializer.new(model_class, resources).generate_file
-      end
+      File.write(filepath, CsvSerializer.new(model_class, resources).generate_file)
       DeleteTempFileJob.set(wait: 5.minutes).perform_later(filepath)
     end
   end
