@@ -8,7 +8,7 @@ describe Schematics::Attributes::Jsonb do
 
   let(:entity) { Schematics::Entities::Entity.create(name: 'user') }
   let(:name) { 'preferences' }
-  let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
+  let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
@@ -20,12 +20,11 @@ describe Schematics::Attributes::Jsonb do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
-  its(:options_for_migration) { is_expected.to eq(options) }
+  its(:options_for_migration) { is_expected.to be_empty }
 
-  context 'when there is no default' do
-    let(:options) { {} }
+  context 'when there is a default' do
+    let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
 
-    its(:to_str) { is_expected.to be_blank }
-    its(:options_for_migration) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to eq(options) }
   end
 end
