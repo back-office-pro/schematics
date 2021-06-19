@@ -16,4 +16,4 @@
                   - resources_for(date).each do |resource|
                     .alert.alert-secondary.text-truncate.mb-1.p-2 data-href=(polymorphic_path(resource) unless resource.deleted?)
                       = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
-                      span.ml-2= resource
+                      span.ml-2 = resource
