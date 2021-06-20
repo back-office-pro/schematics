@@ -3,7 +3,7 @@
 require 'chroma'
 
 # Make sure i18n translations are available
-Rails.application.config.after_initialize do
+Rails.configuration.after_initialize do
   Chartkick.options = {
     colors: '#2c3e50'.paint.palette.analogous(as: :hex),
     height: '300px',
