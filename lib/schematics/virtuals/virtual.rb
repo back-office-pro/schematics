@@ -15,7 +15,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      attr_reader :entity, :name
+      attr_reader :entity, :name, :options
 
       class << self
         def create(entity, name:, function:, options: {})
