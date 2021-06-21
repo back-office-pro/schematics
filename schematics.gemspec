@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'binding_of_caller', '~> 1.0.0'
   spec.add_dependency 'bootstrap-email', '~> 0.3.4'
   spec.add_dependency 'brakeman', '~> 5.0.4'
-  spec.add_dependency 'cancancan', '~> 3.2.2'
+  spec.add_dependency 'cancancan', '>= 3.2.2', '< 3.4.0'
   spec.add_dependency 'chartkick', '~> 4.0.4'
   spec.add_dependency 'chroma', '~> 0.2.0'
   spec.add_dependency 'client_side_validations', '~> 18.1.0'
