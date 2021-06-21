@@ -70,7 +70,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-attack', '~> 6.5.0'
   spec.add_dependency 'rack-cors', '~> 1.1.1'
   spec.add_dependency 'rails', '~> 6.1.3.2'
-  spec.add_dependency 'rails_best_practices', '~> 1.20.1'
+  spec.add_dependency 'rails_best_practices', '>= 1.20.1', '< 1.22.0'
   spec.add_dependency 'rails-erd', '~> 1.6.1'
   spec.add_dependency 'rails-i18n', '~> 6.0.0'
   spec.add_dependency 'rails-timeago', '~> 2.19.1'
