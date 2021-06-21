@@ -29,7 +29,9 @@ describe Schematics::Attributes::Timestamp do
 
     let(:value) { DateTime.parse('01/01/2021 10:00') }
 
-    before { I18n.locale = :en }
+    around do |example|
+      I18n.with_locale(:en, &example)
+    end
 
     it { is_expected.to eq('Friday 01 January 2021 10:00') }
   end
