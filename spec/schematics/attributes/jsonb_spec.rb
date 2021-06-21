@@ -12,6 +12,7 @@ describe Schematics::Attributes::Jsonb do
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
 
   its(:type) { is_expected.to eq('jsonb') }
   its(:column_name) { is_expected.to eq('preferences') }
@@ -26,5 +27,17 @@ describe Schematics::Attributes::Jsonb do
     let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
 
     its(:options_for_migration) { is_expected.to eq(options) }
+  end
+
+  context 'when hidden' do
+    let(:options) { { hidden: true } }
+
+    it { is_expected.to be_a(Schematics::Behaviours::Hidden) }
+  end
+
+  context 'when readonly' do
+    let(:options) { { readonly: true } }
+
+    it { is_expected.to be_a(Schematics::Behaviours::Readonly) }
   end
 end

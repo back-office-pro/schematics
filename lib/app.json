@@ -83,6 +83,7 @@
                     "name": "preferences",
                     "type": "jsonb",
                     "options": {
+                        "hidden": true,
                         "default": {
                             "theme": "light",
                             "sidebar_toggled": false

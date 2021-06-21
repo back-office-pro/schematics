@@ -2,6 +2,8 @@
 
 require 'schematics/behaviours/migratable'
 require 'schematics/behaviours/validatable'
+require 'schematics/behaviours/hidden'
+require 'schematics/behaviours/readonly'
 
 module Schematics
   module Attributes
@@ -29,6 +31,8 @@ module Schematics
         @entity = entity
         @name = name
         @options = options
+        extend Behaviours::Hidden if @options[:hidden]
+        extend Behaviours::Readonly if @options[:readonly]
       end
 
       def to_sql

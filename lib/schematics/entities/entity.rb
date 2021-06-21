@@ -112,8 +112,11 @@ module Schematics
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           return send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
         end
+
         if Behaviours.const_defined?(constant)
-          return send(method.to_sym).select_is_a?(Behaviours.const_get(constant))
+          return send(method.to_sym)
+                 .select_is_a?(Behaviours.const_get(constant))
+                 .reject_is_a?(Behaviours::Hidden)
         end
 
         super
@@ -157,6 +160,10 @@ module Schematics
 
       def elements
         fields + associations
+      end
+
+      def fillable_elements
+        super.reject_is_a?(Behaviours::Readonly)
       end
 
       def permitted_params
