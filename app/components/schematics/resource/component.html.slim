@@ -41,16 +41,16 @@
     = best_in_place @resource,
                     @field.column_name.to_sym,
                     as: @field.input_type,
-                    inner_class: 'form-control border-0',
+                    inner_class: 'form-control border-0 bg-light',
                     collection: @field.input_collection,
                     display_with: ->(value) { tag.span(class: "flag-icon flag-icon-#{value.downcase}") }
   - else
     = tag.span(class: "flag-icon flag-icon-#{value.downcase}")
-- when editable? && Schematics::Behaviours::Editable && !Schematics::Behaviours::Readonly
+- when editable? && Schematics::Behaviours::Editable, !Schematics::Behaviours::Readonly
   = best_in_place @resource,
                   @field.column_name.to_sym,
                   as: @field.input_type,
-                  inner_class: 'form-control border-0',
+                  inner_class: 'form-control border-0 bg-light',
                   collection: @field.try(:input_collection),
                   display_with: (->(value) { @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
 - when Schematics::Behaviours::Searchable
