@@ -28,6 +28,7 @@ require 'schematics/attributes/timestamp'
 require 'schematics/attributes/token'
 require 'schematics/attributes/url'
 require 'schematics/entities/descriptor'
+require 'schematics/entities/options_struct'
 require 'schematics/virtuals/virtual'
 require 'schematics/virtuals/comparison'
 require 'schematics/virtuals/concatenation'
@@ -105,24 +106,22 @@ module Schematics
         @descriptor = Descriptor.create(self, descriptor)
       end
 
-      def method_missing(method_name, *args, &block)
+      def method_missing(method_name, *args, &block) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
-          return send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
+          send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
+        elsif Behaviours.const_defined?(constant)
+          send(method.to_sym)
+            .select_is_a?(Behaviours.const_get(constant))
+            .reject(&:hidden?)
+        else
+          super
         end
-
-        if Behaviours.const_defined?(constant)
-          return send(method.to_sym)
-                 .select_is_a?(Behaviours.const_get(constant))
-                 .reject_is_a?(Behaviours::Hidden)
-        end
-
-        super
       end
 
-      def respond_to_missing?(method_name, *args)
+      def respond_to_missing?(method_name, *args) # rubocop:disable Metrics/CyclomaticComplexity
         constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
@@ -163,7 +162,7 @@ module Schematics
       end
 
       def fillable_elements
-        super.reject_is_a?(Behaviours::Readonly)
+        super.reject(&:readonly?)
       end
 
       def permitted_params

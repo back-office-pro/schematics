@@ -32,12 +32,12 @@ describe Schematics::Attributes::Jsonb do
   context 'when hidden' do
     let(:options) { { hidden: true } }
 
-    it { is_expected.to be_a(Schematics::Behaviours::Hidden) }
+    it { is_expected.to be_hidden }
   end
 
   context 'when readonly' do
     let(:options) { { readonly: true } }
 
-    it { is_expected.to be_a(Schematics::Behaviours::Readonly) }
+    it { is_expected.to be_readonly }
   end
 end

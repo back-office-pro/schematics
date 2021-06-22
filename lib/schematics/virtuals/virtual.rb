@@ -15,6 +15,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
+      delegate :hidden?, to: :options
       attr_reader :entity, :name, :options
 
       class << self
@@ -34,7 +35,7 @@ module Schematics
         @entity = entity
         @name = name
         @tokens = tokens
-        @options = OpenStruct.new(options)
+        @options = Entity::OptionsStruct.new(options)
       end
 
       def function

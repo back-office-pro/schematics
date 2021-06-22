@@ -2,8 +2,6 @@
 
 require 'schematics/behaviours/migratable'
 require 'schematics/behaviours/validatable'
-require 'schematics/behaviours/hidden'
-require 'schematics/behaviours/readonly'
 
 module Schematics
   module Attributes
@@ -11,6 +9,7 @@ module Schematics
       include Behaviours::Migratable
       include Behaviours::Validatable
 
+      delegate :hidden?, to: :options
       attr_reader :entity, :name, :options
 
       class << self
@@ -30,9 +29,7 @@ module Schematics
       def initialize(entity, name, options)
         @entity = entity
         @name = name
-        @options = OpenStruct.new(options)
-        extend Behaviours::Hidden if @options.hidden
-        extend Behaviours::Readonly if @options.readonly
+        @options = Entity::OptionsStruct.new(options)
       end
 
       def to_sql

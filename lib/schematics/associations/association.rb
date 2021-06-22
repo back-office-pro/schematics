@@ -7,6 +7,7 @@ module Schematics
     class Association
       delegate :entity, :required?, :column_name, :association_type, :options, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
+      delegate :hidden?, to: :options
       attr_reader :belongs_to
       attr_writer :prefixed
 

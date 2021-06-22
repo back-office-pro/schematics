@@ -5,12 +5,10 @@ require 'active_support/core_ext/enumerable'
 module Schematics
   module Behaviours
     module Validatable
-      def required?
-        options.required || unique?
-      end
+      delegate :unique?, to: :options
 
-      def unique?
-        options.unique
+      def required?
+        options.required? || unique?
       end
 
       def validate
