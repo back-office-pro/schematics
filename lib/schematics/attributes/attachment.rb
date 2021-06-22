@@ -54,11 +54,11 @@ module Schematics
       end
 
       def extension
-        @options[:content_type]&.first || 'png'
+        options.content_type&.first || 'png'
       end
 
       def extensions
-        @options[:content_type]&.map { ".#{_1}" }&.join(',')
+        options.content_type&.map { ".#{_1}" }&.join(',')
       end
 
       def validators
@@ -67,18 +67,18 @@ module Schematics
             antivirus: true,
             attached: required?,
             size: {
-              less_than: @options[:size]&.megabytes,
+              less_than: options.size&.megabytes,
             }.compact,
-            aspect_ratio: @options[:aspect_ratio],
+            aspect_ratio: options.aspect_ratio,
             limit: {
-              min: @options[:min],
-              max: @options[:max],
+              min: options.min,
+              max: options.max,
             }.compact,
             dimension: {
-              width: @options[:width],
-              height: @options[:height],
+              width: options.width,
+              height: options.height,
             }.compact,
-            content_type: @options[:content_type]&.map(&:to_sym),
+            content_type: options.content_type&.map(&:to_sym),
           }.compact_blank
         )
       end

@@ -3,9 +3,7 @@
 module Schematics
   module Behaviours
     module Enumerable
-      def values
-        options[:values]
-      end
+      delegate :values, to: :options
 
       def validators
         super.merge(inclusion: { in: values }, allow_blank: !required?)

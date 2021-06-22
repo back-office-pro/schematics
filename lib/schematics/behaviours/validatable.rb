@@ -6,11 +6,11 @@ module Schematics
   module Behaviours
     module Validatable
       def required?
-        options[:required] || unique?
+        options.required || unique?
       end
 
       def unique?
-        options[:unique]
+        options.unique
       end
 
       def validate

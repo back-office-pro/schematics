@@ -9,7 +9,7 @@ module Schematics
       include Behaviours::Renderable
 
       def default
-        options[:default]&.to_json
+        options.default&.to_json
       end
 
       def icon

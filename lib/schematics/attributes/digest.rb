@@ -17,9 +17,9 @@ module Schematics
           {
             allow_nil: true,
             length: {
-              minimum: @options[:min],
-              maximum: @options[:limit],
-              is: @options[:length],
+              minimum: options.min,
+              maximum: options.limit,
+              is: options.length,
             }.compact,
           }.compact_blank
         )

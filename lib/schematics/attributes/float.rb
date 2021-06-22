@@ -19,12 +19,10 @@ module Schematics
       include Behaviours::Rangeable
       include ActionView::Helpers::NumberHelper
 
+      delegate :unit, to: :options
+
       def validators
         super.merge(numericality: { allow_nil: !required? })
-      end
-
-      def unit
-        @options[:unit]
       end
 
       def format(value)

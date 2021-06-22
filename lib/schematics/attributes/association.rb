@@ -33,11 +33,11 @@ module Schematics
       end
 
       def inverse
-        @options[:inverse] || {}
+        options.inverse || {}
       end
 
       def association_type
-        @options[:type] || @name
+        options.type || @name
       end
 
       def inverse_association_name

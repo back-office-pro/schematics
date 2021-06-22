@@ -8,16 +8,10 @@ module Schematics
     class Calculation < Virtual
       include Behaviours::Rangeable
 
+      delegate :unit, :scale, to: :options
+
       def to_sql
         super.join
-      end
-
-      def unit
-        @options[:unit]
-      end
-
-      def scale
-        @options[:scale]
       end
 
       def format(value)

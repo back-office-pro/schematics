@@ -17,8 +17,8 @@ module Schematics
         super.merge(
           {
             length: {
-              minimum: @options[:min],
-              maximum: @options[:limit],
+              minimum: options.min,
+              maximum: options.limit,
             }.compact,
           }.compact_blank
         )

@@ -30,9 +30,9 @@ module Schematics
       def initialize(entity, name, options)
         @entity = entity
         @name = name
-        @options = options
-        extend Behaviours::Hidden if @options[:hidden]
-        extend Behaviours::Readonly if @options[:readonly]
+        @options = OpenStruct.new(options)
+        extend Behaviours::Hidden if @options.hidden
+        extend Behaviours::Readonly if @options.readonly
       end
 
       def to_sql

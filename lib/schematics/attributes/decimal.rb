@@ -5,16 +5,10 @@ require 'schematics/attributes/float'
 module Schematics
   module Attributes
     class Decimal < Float
-      def precision
-        @options[:precision]
-      end
-
-      def scale
-        @options[:scale] || 0
-      end
+      delegate :precision, :scale, to: :options
 
       def bound
-        10**(precision - scale)
+        10**(precision - scale.to_i)
       end
 
       def validators

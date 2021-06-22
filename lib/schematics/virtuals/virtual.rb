@@ -34,7 +34,7 @@ module Schematics
         @entity = entity
         @name = name
         @tokens = tokens
-        @options = options
+        @options = OpenStruct.new(options)
       end
 
       def function

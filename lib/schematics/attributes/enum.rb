@@ -23,7 +23,7 @@ module Schematics
       end
 
       def to_str
-        if options.key?(:default)
+        if options.default
           <<~RUBY
             enum #{@name}: #{to_h}, _prefix: true, _default: "#{default}"
           RUBY

@@ -28,19 +28,19 @@ module Schematics
           {
             date: {
               allow_blank: !required?,
-              equal_to: @options[:equal_to]&.to_sym,
-              before: @options[:before]&.to_sym,
-              after: @options[:after]&.to_sym,
-              before_or_equal_to: @options[:before_or_equal_to]&.to_sym,
-              after_or_equal_to: @options[:after_or_equal_to]&.to_sym,
+              equal_to: options.equal_to&.to_sym,
+              before: options.before&.to_sym,
+              after: options.after&.to_sym,
+              before_or_equal_to: options.before_or_equal_to&.to_sym,
+              after_or_equal_to: options.after_or_equal_to&.to_sym,
             }.compact,
           }.compact_blank
         )
       end
 
       def default
-        return ::Time.zone.today.to_s(:db) if @options.key?(:before)
-        return ::Time.zone.tomorrow.to_s(:db) if @options.key?(:after)
+        return ::Time.zone.today.to_s(:db) if options.before
+        return ::Time.zone.tomorrow.to_s(:db) if options.after
 
         super
       end
