@@ -21,7 +21,7 @@ module Schematics
       @pdf ||= controller.render(
         locals: { resource: @resource },
         assigns: { resource: @resource },
-        template: 'schematics/application/show.pdf',
+        template: 'schematics/resources/show.pdf',
         layout: 'layouts/schematics/pdf'
       )
     end
