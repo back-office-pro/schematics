@@ -24,5 +24,7 @@ en:
         warning: 'Removing the %{model_name} %{resource} will also result in the permanent removal of the following:'
       dropdown:
         per_page: "%{size} %{model_name} per page"
+      not_found:
+        title: Page not found
       resource:
         empty: No data available

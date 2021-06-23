@@ -24,5 +24,7 @@ fr:
         warning: 'La suppression du %{model_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
       dropdown:
         per_page: "%{size} %{model_name} par page"
+      not_found:
+        title: Page non trouvée
       resource:
         empty: Aucune donnée disponible
