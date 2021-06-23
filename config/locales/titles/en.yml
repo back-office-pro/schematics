@@ -2,6 +2,8 @@
 en:
   titles:
     schematics:
+      application:
+        not_found: Page not found
       dashboard:
         home: Dashboard
       password_resets:
