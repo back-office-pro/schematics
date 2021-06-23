@@ -11,7 +11,7 @@ Rails.configuration.after_initialize do
     refresh: 60,
     # rubocop:disable Style/FormatStringToken
     html: <<~HTML,
-      <div id="%{id}" class="text-light text-center" style="height: %{height}; width: %{width}; line-height: %{height};">
+      <div id="%{id}" class="chart text-light text-center" style="height: %{height}; width: %{width}; line-height: %{height};">
         <i class="fas fa-spinner fa-spin fa-6x"></i>
       </div>
     HTML
