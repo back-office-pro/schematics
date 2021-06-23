@@ -2,8 +2,11 @@
 
 require 'sidekiq/web'
 
+Rails.configuration.exceptions_app = Rails.application.routes
+Rails.configuration.consider_all_requests_local = false
+Rails.application.routes.default_url_options = Rails.configuration.action_mailer.default_url_options
+
 Rails.configuration.to_prepare do
-  Rails.application.routes.default_url_options = Rails.configuration.action_mailer.default_url_options # rubocop:disable Layout/LineLength
   Rails.application.routes.prepend do
     mount Schematics::Engine, at: '/'
     constraints Schematics::AuthConstraint do
