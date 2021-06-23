@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class PasswordResetsController < ApplicationController
+  class PasswordResetsController < ApiController
     include Fillable
     skip_before_action :authorize
     before_action :set_user, only: %i[edit update]

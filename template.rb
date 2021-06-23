@@ -25,6 +25,9 @@ after_bundle do
   # Ignore /doc directory
   append_to_file '.gitignore', '/doc'
 
+  # Remove 404.html
+  remove_file 'public/404.html'
+
   # Yarn packages
   run 'yarn add animate.css@4.1.1'
   run 'yarn add bootstrap@4.6.0'

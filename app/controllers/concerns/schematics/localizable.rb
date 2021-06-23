@@ -4,6 +4,12 @@ module Schematics
   module Localizable
     extend ActiveSupport::Concern
 
+    included do
+      around_action :switch_locale
+      around_action :switch_beginning_of_week
+      around_action :switch_time_zone, if: -> { current_user && !Rails.env.test? }
+    end
+
     def current_locale
       current_user&.locale&.downcase ||
         I18n.available_locales.include?(http_header_locale) && http_header_locale ||

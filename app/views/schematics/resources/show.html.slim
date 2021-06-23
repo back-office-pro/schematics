@@ -29,7 +29,7 @@
                 span.icon = fa_icon :trash
                 span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
   .card-body.p-0
-    = render template: 'schematics/application/show', formats: :pdf
+    = render template: 'schematics/resources/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|
   - rich_text = @resource.instance_eval(attribute.name)
   - if rich_text.present?

@@ -44,3 +44,8 @@ $table-accent-bg: lighten($light, 2.5%);
   border-left: 14px solid $card-bg !important;
   border-right: 0 solid $card-bg !important;
 }
+
+.chart svg,
+iframe.google-map {
+  filter: invert(90%);
+}

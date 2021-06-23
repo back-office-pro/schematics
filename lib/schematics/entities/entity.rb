@@ -113,9 +113,19 @@ module Schematics
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
-          send(method.to_sym)
-            .select_is_a?(Behaviours.const_get(constant))
-            .reject(&:hidden?)
+          case constant
+          when :Migratable
+            send(method.to_sym).select_is_a?(Behaviours::Migratable)
+          when :Fillable
+            send(method.to_sym)
+              .select_is_a?(Behaviours::Fillable)
+              .reject(&:hidden?)
+              .reject(&:readonly?)
+          else
+            send(method.to_sym)
+              .select_is_a?(Behaviours.const_get(constant))
+              .reject(&:hidden?)
+          end
         else
           super
         end
@@ -159,10 +169,6 @@ module Schematics
 
       def elements
         fields + associations
-      end
-
-      def fillable_elements
-        super.reject(&:readonly?)
       end
 
       def permitted_params
