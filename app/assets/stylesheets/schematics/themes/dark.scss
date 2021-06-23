@@ -45,6 +45,7 @@ $table-accent-bg: lighten($light, 2.5%);
   border-right: 0 solid $card-bg !important;
 }
 
-.chart svg, iframe.google-map {
+.chart svg,
+iframe.google-map {
   filter: invert(90%);
 }
