@@ -3,7 +3,7 @@
 module Schematics
   module Behaviours
     module Fillable
-      delegate :default, to: :options
+      delegate :default, :readonly?, to: :options
 
       def permitted_params
         column_name.to_sym

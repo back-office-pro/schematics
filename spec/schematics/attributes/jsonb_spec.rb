@@ -28,16 +28,4 @@ describe Schematics::Attributes::Jsonb do
 
     its(:options_for_migration) { is_expected.to eq(options) }
   end
-
-  context 'when hidden' do
-    let(:options) { { hidden: true } }
-
-    it { is_expected.to be_hidden }
-  end
-
-  context 'when readonly' do
-    let(:options) { { readonly: true } }
-
-    it { is_expected.to be_readonly }
-  end
 end

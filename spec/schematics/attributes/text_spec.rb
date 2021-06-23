@@ -32,4 +32,16 @@ describe Schematics::Attributes::Text do
       content&.parameterize(separator: ' ')
     RUBY
   end
+
+  context 'when hidden' do
+    let(:options) { { hidden: true } }
+
+    it { is_expected.to be_hidden }
+  end
+
+  context 'when readonly' do
+    let(:options) { { readonly: true } }
+
+    it { is_expected.to be_readonly }
+  end
 end
