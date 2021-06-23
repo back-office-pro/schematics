@@ -1,0 +1,10 @@
+---
+en:
+  schematics:
+    api:
+      forbidden:
+        alert: Forbidden access
+      not_found:
+        alert: "%{model_name} not found"
+      parameter_missing:
+        alert: An error occured
