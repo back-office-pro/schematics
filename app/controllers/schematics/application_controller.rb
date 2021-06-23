@@ -11,7 +11,7 @@ module Schematics
 
     def not_found
       respond_to do |format|
-        format.html(&not_found_proc)
+        format.html
         format.json { head :not_found }
       end
     end
@@ -41,10 +41,6 @@ module Schematics
           redirect_to schematics.login_path, alert: t('schematics.application.authorize.alert')
         end
       end
-    end
-
-    def not_found_proc
-      nil
     end
   end
 end

@@ -31,17 +31,20 @@ module Schematics
       end
     end
 
+    def not_found
+      respond_to do |format|
+        format.html do
+          redirect_to not_found_path,
+                      alert: t('schematics.api.not_found.alert', model_name: model_name.human)
+        end
+        format.json { head :not_found }
+      end
+    end
+
     private
 
     def not_found_path
       polymorphic_path(model_class)
-    end
-
-    def not_found_proc
-      proc do
-        redirect_to not_found_path,
-                    alert: t('schematics.api.not_found.alert', model_name: model_name.human)
-      end
     end
   end
 end
