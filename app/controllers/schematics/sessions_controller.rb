@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SessionsController < ApplicationController
+  class SessionsController < ApiController
     include Fillable
     skip_before_action :authorize, only: %i[new create]
     layout 'schematics/auth', only: %i[new create]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ResourcesController < ApplicationController
+  class ResourcesController < ApiController
     include Fillable
     include Sortable
     include Filterable

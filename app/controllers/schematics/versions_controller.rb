@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class VersionsController < ApplicationController
+  class VersionsController < ApiController
     load_and_authorize_resource class: Version
     delegate :model_name, to: :model_class, private: true
 
