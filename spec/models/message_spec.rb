@@ -36,7 +36,8 @@ RSpec.describe Message do
     it { is_expected.to have_db_column(:author_id).of_type(:uuid).with_options(null: false) }
 
     it do
-      expect(message).to belong_to(:author)
+      expect(message)
+        .to belong_to(:author)
         .class_name('User')
         .with_foreign_key('author_id')
         .inverse_of(:sent_messages)
@@ -49,7 +50,8 @@ RSpec.describe Message do
     it { is_expected.to have_db_column(:recipient_id).of_type(:uuid).with_options(null: false) }
 
     it do
-      expect(message).to belong_to(:recipient)
+      expect(message)
+        .to belong_to(:recipient)
         .class_name('User')
         .with_foreign_key('recipient_id')
         .inverse_of(:received_messages)

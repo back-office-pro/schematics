@@ -67,7 +67,8 @@ RSpec.describe User do
     it { is_expected.to have_db_index(:time_zone) }
 
     it do
-      expect(user).to have_db_column(:time_zone)
+      expect(user)
+        .to have_db_column(:time_zone)
         .of_type(:string)
         .with_options(null: false, default: 'Paris')
     end
@@ -77,7 +78,8 @@ RSpec.describe User do
     it { is_expected.to have_db_index(:preferences) }
 
     it do
-      expect(user).to have_db_column(:preferences)
+      expect(user)
+        .to have_db_column(:preferences)
         .of_type(:jsonb)
         .with_options(default: { 'theme' => 'light', 'sidebar_toggled' => false })
     end
@@ -88,7 +90,8 @@ RSpec.describe User do
     it { is_expected.to have_db_column(:role_id).of_type(:uuid).with_options(null: false) }
 
     it do
-      expect(user).to belong_to(:role)
+      expect(user)
+        .to belong_to(:role)
         .class_name('Role')
         .with_foreign_key('role_id')
         .inverse_of(:users)
