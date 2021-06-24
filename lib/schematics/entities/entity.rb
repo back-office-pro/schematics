@@ -133,7 +133,7 @@ module Schematics
       end
 
       def respond_to_missing?(method_name, *args) # rubocop:disable Metrics/CyclomaticComplexity
-        non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+        _non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant) ||
