@@ -7,6 +7,7 @@ module Schematics
     layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
+    DENYLIST = %i[role_id]
 
     def new; end
 
@@ -86,7 +87,9 @@ module Schematics
     end
 
     def permitted_params
-      super.concat(session_params)
+      super
+        .excluding(*DENYLIST)
+        .concat(session_params)
     end
 
     def current_password_attribute

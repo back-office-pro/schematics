@@ -36,6 +36,7 @@ module Schematics
 
     def default_restrictions
       cannot %i[destroy archive], user
+      cannot :update, user, :role_id
       cannot %i[update destroy archive], admin_role
       cannot %i[create update destroy import archive], Permission
       cannot %i[read update destroy archive], Message
