@@ -51,7 +51,7 @@ module Schematics
                   :virtuals,
                   :associations
 
-      MISSING_REGEX = /([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
+      MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
 
       class << self
         # :reek:LongParameterList
@@ -107,23 +107,24 @@ module Schematics
       end
 
       def method_missing(method_name, *args, &block) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+        non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+        predicate = non ? :reject_is_a? : :select_is_a?
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
-          send(method.to_sym).select_is_a?(Schematics.const_get(mod).const_get(constant))
+          send(method.to_sym).send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
           case constant
           when :Migratable
-            send(method.to_sym).select_is_a?(Behaviours::Migratable)
+            send(method.to_sym).send(predicate, Behaviours::Migratable)
           when :Fillable
             send(method.to_sym)
-              .select_is_a?(Behaviours::Fillable)
+              .send(predicate, Behaviours::Fillable)
               .reject(&:hidden?)
               .reject(&:readonly?)
           else
             send(method.to_sym)
-              .select_is_a?(Behaviours.const_get(constant))
+              .send(predicate, Behaviours.const_get(constant))
               .reject(&:hidden?)
           end
         else
@@ -132,7 +133,7 @@ module Schematics
       end
 
       def respond_to_missing?(method_name, *args) # rubocop:disable Metrics/CyclomaticComplexity
-        constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+        non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant) ||
