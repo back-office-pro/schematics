@@ -16,7 +16,16 @@ module Schematics
       end
 
       def entity
-        Schema.instance.find_entity_by_name(name.underscore)
+        Schema
+          .instance
+          .find_entity_by_name(name.underscore)
+      end
+
+      def filter_attributes
+        entity
+          .non_renderable_attributes
+          .map(&:name)
+          .map(&:to_sym)
       end
     end
   end
