@@ -16,9 +16,6 @@ describe Schematics::Schema do
   context 'when there are name collisions' do
     let(:data) do # rubocop:disable Metrics/BlockLength
       {
-        charts: [],
-        stats: [],
-        migrations: [],
         entities: [
           {
             name: 'user',
@@ -79,5 +76,30 @@ describe Schematics::Schema do
     it 'prefixes message associations of user entity' do
       expect(user_associations).to eq(%w[author_messages recipient_messages])
     end
+  end
+
+  context 'when there are reserved words' do
+    let(:data) do
+      {
+        entities: [
+          {
+            name: 'import',
+            attributes: [
+              {
+                name: 'errors',
+                type: 'jsonb',
+              },
+            ],
+          },
+        ],
+      }
+    end
+
+    before do
+      allow_any_instance_of(described_class).to receive(:data).and_return(data) # rubocop:disable RSpec/AnyInstance
+      Singleton.__init__(described_class)
+    end
+
+    it { is_expected.not_to be_valid }
   end
 end
