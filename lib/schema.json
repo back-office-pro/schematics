@@ -1,191 +1,259 @@
 {
-    "definitions": {
-        "stat": {
-            "definitions": {
-                "entity": {
-                    "type": "string"
-                },
-                "agregate": {
-                    "type": "string",
-                    "enum": ["count", "sum"]
-                },
-                "field": {
-                    "type": "string"
-                }
-            },
-            "required": ["entity", "agregate"],
-            "type": "object"
+  "definitions": {
+    "stat": {
+      "properties": {
+        "entity": {
+          "type": "string"
         },
-        "chart": {
-            "definitions": {
-                "type": {
-                    "type": "string"
-                },
-                "entity": {
-                    "type": "string"
-                },
-                "x": {
-                    "type": "object"
-                },
-                "y": {
-                    "type": "object"
-                }
-            },
-            "required": ["type", "entity", "x", "y"],
-            "type": "object"
+        "agregate": {
+          "type": "string",
+          "enum": [
+            "count",
+            "sum",
+            "maximum"
+          ]
+        },
+        "field": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity",
+        "agregate"
+      ],
+      "type": "object"
+    },
+    "chart": {
+      "properties": {
+        "type": {
+          "type": "string"
         },
         "entity": {
-            "definitions": {
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "icon": {
-                    "type": "string"
-                },
-                "descriptor": {
-                    "type": "string"
-                },
-                "virtuals": {
-                    "items": {
-                        "$ref": "#/definitions/virtual"
-                    },
-                    "type": "array"
-                },
-                "attributes": {
-                    "items": {
-                        "$ref": "#/definitions/attribute"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": ["name", "attributes"],
-            "type": "object"
+          "type": "string"
         },
-        "migration": {
-            "definitions": {
-                "action": {
-                    "type": "string"
-                },
-                "entity": {
-                    "type": "string"
-                },
-                "attribute": {
-                    "type": "string"
-                },
-                "timestamp": {
-                    "type": "integer"
-                }
-            },
-            "required": ["action", "entity", "timestamp"],
-            "type": "object"
+        "x": {
+          "type": "object"
         },
-        "virtual_option": {
-            "definitions": {
-                "scale": {
-                    "type": "integer"
-                },
-                "unit": {
-                    "type": "string"
-                }
-            }
+        "y": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "entity",
+        "x",
+        "y"
+      ],
+      "type": "object"
+    },
+    "entity": {
+      "$ref": "#/definitions/non_reserved_name",
+      "properties": {
+        "type": {
+          "type": "string"
         },
-        "virtual": {
-            "definitions": {
-                "name": {
-                    "type": "string"
-                },
-                "function": {
-                    "type": "string"
-                },
-                "options": {
-                    "$ref": "#/definitions/virtual_option",
-                    "type": "object"
-                }
-            },
-            "required": ["name", "function"],
-            "type": "object"
+        "icon": {
+          "type": "string"
         },
-        "attribute_option": {
-            "definitions": {
-                "unique": {
-                    "type": "boolean"
-                },
-                "required": {
-                    "type": "boolean"
-                },
-                "limit": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "inverse": {
-                    "type": "object"
-                },
-                "precision": {
-                    "type": "integer"
-                },
-                "scale": {
-                    "type": "integer"
-                },
-                "unit": {
-                    "type": "string"
-                },
-                "default": {
-                },
-                "content_type": {
-                    "type": "array"
-                },
-                "size": {
-                    "type": "integer"
-                }
-            }
+        "descriptor": {
+          "type": "string"
+        },
+        "virtuals": {
+          "items": {
+            "$ref": "#/definitions/virtual"
+          },
+          "type": "array"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/attribute"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "attributes"
+      ],
+      "type": "object"
+    },
+    "migration": {
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string"
         },
         "attribute": {
-            "definitions": {
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "options": {
-                    "$ref": "#/definitions/attribute_option",
-                    "type": ["object", "array"]
-                }
-            },
-            "required": ["name", "type"],
-            "type": "object"
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "integer"
         }
+      },
+      "required": [
+        "action",
+        "entity",
+        "timestamp"
+      ],
+      "type": "object"
     },
-    "properties": {
-        "stats": {
-            "items": {
-                "$ref": "#/definitions/stat"
-            },
-            "type": "array"
+    "virtual_option": {
+      "properties": {
+        "scale": {
+          "type": "integer"
         },
-        "charts": {
-            "items": {
-                "$ref": "#/definitions/chart"
-            },
-            "type": "array"
-        },
-        "entities": {
-            "items": {
-                "$ref": "#/definitions/entity"
-            },
-            "type": "array"
-        },
-        "migrations": {
-            "items": {
-                "$ref": "#/definitions/migration"
-            },
-            "type": "array"
+        "unit": {
+          "type": "string"
         }
+      }
     },
-    "type": "object"
+    "virtual": {
+      "$ref": "#/definitions/non_reserved_name",
+      "properties": {
+        "function": {
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/virtual_option",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "function"
+      ],
+      "type": "object"
+    },
+    "attribute_option": {
+      "properties": {
+        "unique": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "inverse": {
+          "type": "object"
+        },
+        "precision": {
+          "type": "integer"
+        },
+        "scale": {
+          "type": "integer"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "default": {},
+        "content_type": {
+          "type": "array"
+        },
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "attribute": {
+      "$ref": "#/definitions/non_reserved_name",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "address",
+            "attachment",
+            "attachments",
+            "belongs_to",
+            "boolean",
+            "country",
+            "date",
+            "datetime",
+            "decimal",
+            "digest",
+            "email",
+            "enum",
+            "float",
+            "integer",
+            "jsonb",
+            "phone",
+            "references",
+            "rich_text",
+            "string",
+            "text",
+            "time_zone",
+            "time",
+            "timestamp",
+            "token",
+            "url"
+          ]
+        },
+        "options": {
+          "$ref": "#/definitions/attribute_option",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object"
+    },
+    "non_reserved_name": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "not": {
+            "enum": [
+              "created_at",
+              "updated_at",
+              "deleted_at",
+              "id",
+              "slug",
+              "errors",
+              "new",
+              "save",
+              "send"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "stats": {
+      "items": {
+        "$ref": "#/definitions/stat"
+      },
+      "type": "array"
+    },
+    "charts": {
+      "items": {
+        "$ref": "#/definitions/chart"
+      },
+      "type": "array"
+    },
+    "entities": {
+      "items": {
+        "$ref": "#/definitions/entity"
+      },
+      "type": "array"
+    },
+    "migrations": {
+      "items": {
+        "$ref": "#/definitions/migration"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "entities"
+  ],
+  "type": "object"
 }

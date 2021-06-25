@@ -1,255 +1,255 @@
 {
-    "entities": [
+  "entities": [
+    {
+      "name": "user",
+      "icon": "users",
+      "descriptor": "full_name",
+      "virtuals": [
         {
-            "name": "user",
-            "icon": "users",
-            "descriptor": "full_name",
-            "virtuals": [
-                {
-                    "name": "full_name",
-                    "function": "$last_name $first_name"
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "email",
-                    "type": "email",
-                    "options": {
-                        "unique": true
-                    }
-                },
-                {
-                    "name": "password",
-                    "type": "digest",
-                    "options": {
-                        "min": 6
-                    }
-                },
-                {
-                    "name": "auth_token",
-                    "type": "token"
-                },
-                {
-                    "name": "password_reset_token",
-                    "type": "token"
-                },
-                {
-                    "name": "first_name",
-                    "type": "string",
-                    "options": {
-                        "required": true
-                    }
-                },
-                {
-                    "name": "last_name",
-                    "type": "string",
-                    "options": {
-                        "required": true
-                    }
-                },
-                {
-                    "name": "avatar",
-                    "type": "attachment",
-                    "options": {
-                        "content_type": [
-                            "png",
-                            "jpeg",
-                            "jpg"
-                        ],
-                        "size": 2
-                    }
-                },
-                {
-                    "name": "locale",
-                    "type": "enum",
-                    "options": {
-                        "required": true,
-                        "default": "fr",
-                        "values": [
-                            "fr",
-                            "en"
-                        ]
-                    }
-                },
-                {
-                    "name": "time_zone",
-                    "type": "time_zone",
-                    "options": {
-                        "required": true,
-                        "default": "Paris"
-                    }
-                },
-                {
-                    "name": "preferences",
-                    "type": "jsonb",
-                    "options": {
-                        "hidden": true,
-                        "default": {
-                            "theme": "light",
-                            "sidebar_toggled": false
-                        }
-                    }
-                },
-                {
-                    "name": "role",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true
-                    }
-                }
-            ]
-        },
-        {
-            "name": "message",
-            "icon": "inbox",
-            "descriptor": "subject",
-            "attributes": [
-                {
-                    "name": "subject",
-                    "type": "string",
-                    "options": {
-                        "required": true
-                    }
-                },
-                {
-                    "name": "content",
-                    "type": "rich_text",
-                    "options": {
-                        "required": true
-                    }
-                },
-                {
-                    "name": "read_at",
-                    "type": "timestamp"
-                },
-                {
-                    "name": "author",
-                    "type": "references",
-                    "options": {
-                        "required": true,
-                        "inverse": {
-                            "name": "sent_messages"
-                        }
-                    }
-                },
-                {
-                    "name": "recipient",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true,
-                        "type": "user",
-                        "inverse": {
-                            "name": "received_messages"
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "directory",
-            "type": "tree",
-            "icon": "folder",
-            "descriptor": "name",
-            "attributes": [
-                {
-                    "name": "name",
-                    "type": "string",
-                    "options": {
-                        "unique": true
-                    }
-                },
-                {
-                    "name": "files",
-                    "type": "attachments"
-                }
-            ]
-        },
-        {
-            "name": "setting",
-            "type": "singleton",
-            "icon": "cog",
-            "descriptor": "company_name",
-            "attributes": [
-                {
-                    "name": "company_name",
-                    "type": "string",
-                    "options": {
-                        "required": true
-                    }
-                },
-                {
-                    "name": "company_address",
-                    "type": "address"
-                },
-                {
-                    "name": "company_registration_number",
-                    "type": "string"
-                },
-                {
-                    "name": "company_logo",
-                    "type": "attachment",
-                    "options": {
-                        "content_type": [
-                            "png",
-                            "jpeg",
-                            "jpg"
-                        ],
-                        "size": 2
-                    }
-                }
-            ]
-        },
-        {
-            "name": "role",
-            "icon": "user_lock",
-            "descriptor": "name",
-            "associations": [
-                {
-                    "type": "has_and_belongs_to_many",
-                    "name": "permission"
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "name",
-                    "type": "string",
-                    "options": {
-                        "unique": true
-                    }
-                }
-            ]
-        },
-        {
-            "name": "permission",
-            "icon": "key",
-            "descriptor": "name",
-            "attributes": [
-                {
-                    "name": "model",
-                    "type": "string"
-                },
-                {
-                    "name": "action",
-                    "type": "enum",
-                    "options": {
-                        "required": true,
-                        "values": [
-                            "read",
-                            "create",
-                            "update",
-                            "import",
-                            "destroy",
-                            "archive"
-                        ]
-                    }
-                }
-            ],
-            "virtuals": [
-                {
-                    "name": "name",
-                    "function": "$action $model"
-                }
-            ]
+          "name": "full_name",
+          "function": "$last_name $first_name"
         }
-    ]
+      ],
+      "attributes": [
+        {
+          "name": "email",
+          "type": "email",
+          "options": {
+            "unique": true
+          }
+        },
+        {
+          "name": "password",
+          "type": "digest",
+          "options": {
+            "min": 6
+          }
+        },
+        {
+          "name": "auth_token",
+          "type": "token"
+        },
+        {
+          "name": "password_reset_token",
+          "type": "token"
+        },
+        {
+          "name": "first_name",
+          "type": "string",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "last_name",
+          "type": "string",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "avatar",
+          "type": "attachment",
+          "options": {
+            "content_type": [
+              "png",
+              "jpeg",
+              "jpg"
+            ],
+            "size": 2
+          }
+        },
+        {
+          "name": "locale",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "default": "fr",
+            "values": [
+              "fr",
+              "en"
+            ]
+          }
+        },
+        {
+          "name": "time_zone",
+          "type": "time_zone",
+          "options": {
+            "required": true,
+            "default": "Paris"
+          }
+        },
+        {
+          "name": "preferences",
+          "type": "jsonb",
+          "options": {
+            "hidden": true,
+            "default": {
+              "theme": "light",
+              "sidebar_toggled": false
+            }
+          }
+        },
+        {
+          "name": "role",
+          "type": "belongs_to",
+          "options": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "message",
+      "icon": "inbox",
+      "descriptor": "subject",
+      "attributes": [
+        {
+          "name": "subject",
+          "type": "string",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "content",
+          "type": "rich_text",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "read_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "author",
+          "type": "references",
+          "options": {
+            "required": true,
+            "inverse": {
+              "name": "sent_messages"
+            }
+          }
+        },
+        {
+          "name": "recipient",
+          "type": "belongs_to",
+          "options": {
+            "required": true,
+            "type": "user",
+            "inverse": {
+              "name": "received_messages"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "directory",
+      "type": "tree",
+      "icon": "folder",
+      "descriptor": "name",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "options": {
+            "unique": true
+          }
+        },
+        {
+          "name": "files",
+          "type": "attachments"
+        }
+      ]
+    },
+    {
+      "name": "setting",
+      "type": "singleton",
+      "icon": "cog",
+      "descriptor": "company_name",
+      "attributes": [
+        {
+          "name": "company_name",
+          "type": "string",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "company_address",
+          "type": "address"
+        },
+        {
+          "name": "company_registration_number",
+          "type": "string"
+        },
+        {
+          "name": "company_logo",
+          "type": "attachment",
+          "options": {
+            "content_type": [
+              "png",
+              "jpeg",
+              "jpg"
+            ],
+            "size": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "role",
+      "icon": "user_lock",
+      "descriptor": "name",
+      "associations": [
+        {
+          "type": "has_and_belongs_to_many",
+          "name": "permission"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "options": {
+            "unique": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "permission",
+      "icon": "key",
+      "descriptor": "name",
+      "attributes": [
+        {
+          "name": "model",
+          "type": "string"
+        },
+        {
+          "name": "action",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "values": [
+              "read",
+              "create",
+              "update",
+              "import",
+              "destroy",
+              "archive"
+            ]
+          }
+        }
+      ],
+      "virtuals": [
+        {
+          "name": "name",
+          "function": "$action $model"
+        }
+      ]
+    }
+  ]
 }

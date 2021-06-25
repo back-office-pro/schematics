@@ -1,300 +1,300 @@
 {
-    "stats": [
+  "stats": [
+    {
+      "entity": "user",
+      "agregate": "count"
+    },
+    {
+      "entity": "product",
+      "agregate": "sum",
+      "field": "price"
+    },
+    {
+      "entity": "product",
+      "agregate": "sum",
+      "field": "tax_inclusive_price"
+    }
+  ],
+  "charts": [
+    {
+      "type": "line",
+      "entity": "category",
+      "x": {
+        "agregate": "group_by_day",
+        "field": "created_at"
+      },
+      "y": {
+        "agregate": "count"
+      }
+    },
+    {
+      "type": "pie",
+      "entity": "user",
+      "x": {
+        "agregate": "group",
+        "field": "locale"
+      },
+      "y": {
+        "agregate": "count"
+      }
+    },
+    {
+      "type": "bar",
+      "entity": "product",
+      "x": {
+        "agregate": "group",
+        "field": "reference"
+      },
+      "y": {
+        "agregate": "sum",
+        "field": "tax_inclusive_price"
+      }
+    },
+    {
+      "type": "geo",
+      "entity": "order",
+      "x": {
+        "agregate": "group",
+        "field": "country"
+      },
+      "y": {
+        "agregate": "count"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "name": "client",
+      "icon": "user_tie",
+      "descriptor": "full_name",
+      "virtuals": [
         {
-            "entity": "user",
-            "agregate": "count"
+          "name": "full_name",
+          "function": "$first_name $last_name"
         },
         {
-            "entity": "product",
-            "agregate": "sum",
-            "field": "price"
+          "name": "concatenation_error",
+          "function": "$foo $bar"
         },
         {
-            "entity": "product",
-            "agregate": "sum",
-            "field": "tax_inclusive_price"
+          "name": "calculation_error",
+          "function": "$foo + $bar"
+        },
+        {
+          "name": "type_error",
+          "function": "$first_name * $last_name"
+        },
+        {
+          "name": "association_error",
+          "function": "$deleted_entity.some_attribute"
         }
-    ],
-    "charts": [
+      ],
+      "attributes": [
         {
-            "type": "line",
-            "entity": "category",
-            "x": {
-                "agregate": "group_by_day",
-                "field": "created_at"
-            },
-            "y": {
-                "agregate": "count"
-            }
+          "name": "first_name",
+          "type": "string",
+          "options": {
+            "required": true
+          }
         },
         {
-            "type": "pie",
-            "entity": "user",
-            "x": {
-                "agregate": "group",
-                "field": "locale"
-            },
-            "y": {
-                "agregate": "count"
-            }
-        },
-        {
-            "type": "bar",
-            "entity": "product",
-            "x": {
-                "agregate": "group",
-                "field": "reference"
-            },
-            "y": {
-                "agregate": "sum",
-                "field": "tax_inclusive_price"
-            }
-        },
-        {
-            "type": "geo",
-            "entity": "order",
-            "x": {
-                "agregate": "group",
-                "field": "country"
-            },
-            "y": {
-                "agregate": "count"
-            }
+          "name": "last_name",
+          "type": "string",
+          "options": {
+            "required": true
+          }
         }
-    ],
-    "entities": [
+      ]
+    },
+    {
+      "name": "sub_category",
+      "icon": "box",
+      "descriptor": "designation",
+      "attributes": [
         {
-            "name": "client",
-            "icon": "user_tie",
-            "descriptor": "full_name",
-            "virtuals": [
-                {
-                    "name": "full_name",
-                    "function": "$first_name $last_name"
-                },
-                {
-                    "name": "concatenation_error",
-                    "function": "$foo $bar"
-                },
-                {
-                    "name": "calculation_error",
-                    "function": "$foo + $bar"
-                },
-                {
-                    "name": "type_error",
-                    "function": "$first_name * $last_name"
-                },
-                {
-                    "name": "association_error",
-                    "function": "$deleted_entity.some_attribute"
-                }
+          "name": "designation",
+          "type": "string",
+          "options": {
+            "unique": true
+          }
+        },
+        {
+          "name": "category",
+          "type": "belongs_to",
+          "options": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "icon": "box",
+      "descriptor": "label",
+      "attributes": [
+        {
+          "name": "label",
+          "type": "string",
+          "options": {
+            "unique": true
+          }
+        },
+        {
+          "name": "preview",
+          "type": "attachment",
+          "options": {
+            "content_type": [
+              "png"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "product",
+      "descriptor": "reference",
+      "virtuals": [
+        {
+          "name": "tax_inclusive_price",
+          "function": "$price * (1 + $vat / 100)",
+          "options": {
+            "scale": 2,
+            "unit": "€"
+          }
+        },
+        {
+          "name": "big_price",
+          "function": "$price > 100 && $vat >= 10"
+        },
+        {
+          "name": "reference",
+          "function": "ref-$id-$sub_category.id"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "designation",
+          "type": "string",
+          "options": {
+            "unique": true,
+            "limit": 100
+          }
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "price",
+          "type": "decimal",
+          "options": {
+            "precision": 5,
+            "scale": 2,
+            "unit": "€"
+          }
+        },
+        {
+          "name": "vat",
+          "type": "float",
+          "options": {
+            "default": 19.6,
+            "unit": "%"
+          }
+        },
+        {
+          "name": "in_stock",
+          "type": "boolean",
+          "options": {
+            "default": false
+          }
+        },
+        {
+          "name": "logo",
+          "type": "attachment",
+          "options": {
+            "required": true,
+            "content_type": [
+              "pdf"
             ],
-            "attributes": [
-                {
-                    "name": "first_name",
-                    "type": "string",
-                    "options": {
-                        "required": true
-                    }
-                },
-                {
-                    "name": "last_name",
-                    "type": "string",
-                    "options": {
-                        "required": true
-                    }
-                }
-            ]
+            "size": 1
+          }
         },
         {
-            "name": "sub_category",
-            "icon": "box",
-            "descriptor": "designation",
-            "attributes": [
-                {
-                    "name": "designation",
-                    "type": "string",
-                    "options": {
-                        "unique": true
-                    }
-                },
-                {
-                    "name": "category",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true
-                    }
-                }
+          "name": "state",
+          "type": "enum",
+          "options": {
+            "default": "available",
+            "values": [
+              "available",
+              "not_available",
+              "available_soon"
             ]
+          }
         },
         {
-            "name": "category",
-            "icon": "box",
-            "descriptor": "label",
-            "attributes": [
-                {
-                    "name": "label",
-                    "type": "string",
-                    "options": {
-                        "unique": true
-                    }
-                },
-                {
-                    "name": "preview",
-                    "type": "attachment",
-                    "options": {
-                        "content_type": [
-                            "png"
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "name": "product",
-            "descriptor": "reference",
-            "virtuals": [
-                {
-                    "name": "tax_inclusive_price",
-                    "function": "$price * (1 + $vat / 100)",
-                    "options": {
-                        "scale": 2,
-                        "unit": "€"
-                    }
-                },
-                {
-                    "name": "big_price",
-                    "function": "$price > 100 && $vat >= 10"
-                },
-                {
-                    "name": "reference",
-                    "function": "ref-$id-$sub_category.id"
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "designation",
-                    "type": "string",
-                    "options": {
-                        "unique": true,
-                        "limit": 100
-                    }
-                },
-                {
-                    "name": "description",
-                    "type": "string"
-                },
-                {
-                    "name": "price",
-                    "type": "decimal",
-                    "options": {
-                        "precision": 5,
-                        "scale": 2,
-                        "unit": "€"
-                    }
-                },
-                {
-                    "name": "vat",
-                    "type": "float",
-                    "options": {
-                        "default": 19.6,
-                        "unit": "%"
-                    }
-                },
-                {
-                    "name": "in_stock",
-                    "type": "boolean",
-                    "options": {
-                        "default": false
-                    }
-                },
-                {
-                    "name": "logo",
-                    "type": "attachment",
-                    "options": {
-                        "required": true,
-                        "content_type": [
-                            "pdf"
-                        ],
-                        "size": 1
-                    }
-                },
-                {
-                    "name": "state",
-                    "type": "enum",
-                    "options": {
-                        "default": "available",
-                        "values": [
-                            "available",
-                            "not_available",
-                            "available_soon"
-                        ]
-                    }
-                },
-                {
-                    "name": "sub_category",
-                    "type": "belongs_to",
-                    "options": {
-                        "required": true
-                    }
-                }
-            ]
-        },
-        {
-            "name": "order",
-            "virtuals": [
-                {
-                    "name": "reference",
-                    "function": "ORDER-$product.id"
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "title",
-                    "type": "text"
-                },
-                {
-                    "name": "country",
-                    "type": "country"
-                },
-                {
-                    "name": "start_at",
-                    "type": "datetime",
-                    "options": {
-                        "required": true,
-                        "before": "ends_at"
-                    }
-                },
-                {
-                    "name": "ends_at",
-                    "type": "datetime",
-                    "options": {
-                        "required": true,
-                        "after": "start_at"
-                    }
-                },
-                {
-                    "name": "invoices",
-                    "type": "attachments"
-                },
-                {
-                    "name": "product",
-                    "type": "belongs_to"
-                }
-            ]
+          "name": "sub_category",
+          "type": "belongs_to",
+          "options": {
+            "required": true
+          }
         }
-    ],
-    "migrations": [
+      ]
+    },
+    {
+      "name": "order",
+      "virtuals": [
         {
-            "action": "destroy_entity_attribute",
-            "entity": "product",
-            "attribute": "description",
-            "timestamp": 20210515130024
+          "name": "reference",
+          "function": "ORDER-$product.id"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "title",
+          "type": "text"
         },
         {
-            "action": "destroy_entity",
-            "entity": "client",
-            "timestamp": 20210515130024
+          "name": "country",
+          "type": "country"
+        },
+        {
+          "name": "start_at",
+          "type": "datetime",
+          "options": {
+            "required": true,
+            "before": "ends_at"
+          }
+        },
+        {
+          "name": "ends_at",
+          "type": "datetime",
+          "options": {
+            "required": true,
+            "after": "start_at"
+          }
+        },
+        {
+          "name": "invoices",
+          "type": "attachments"
+        },
+        {
+          "name": "product",
+          "type": "belongs_to"
         }
-    ]
+      ]
+    }
+  ],
+  "migrations": [
+    {
+      "action": "destroy_entity_attribute",
+      "entity": "product",
+      "attribute": "description",
+      "timestamp": 20210515130024
+    },
+    {
+      "action": "destroy_entity",
+      "entity": "client",
+      "timestamp": 20210515130024
+    }
+  ]
 }
