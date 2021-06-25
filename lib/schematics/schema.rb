@@ -6,28 +6,19 @@ require 'schematics/entities/singleton'
 require 'schematics/graphics/chart'
 require 'schematics/graphics/stat'
 require 'schematics/migration'
-require 'json_schemer'
+require 'json-schema'
 require 'singleton'
 
 module Schematics
   class Schema
     include Singleton
-    delegate :schemer, to: :class, private: true
     attr_reader :entities, :charts, :stats, :migrations
 
-    class << self
-      delegate :validate, to: :schemer, private: true
-
-      def schemer
-        @schemer ||= JSONSchemer.schema(Pathname.new(File.expand_path('../schema.json', __dir__)))
-      end
-    end
-
-    def initialize
+    def initialize # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       @entities = data[:entities].map { |entity| Entities::Entity.create(**entity) }
-      @charts = data[:charts].map { |chart| Graphics::Chart.create(self, **chart) }
-      @stats = data[:stats].map { |stat| Graphics::Stat.create(self, **stat) }
-      @migrations = data[:migrations].map { |migration| Migration.create(self, **migration) }
+      @charts = data[:charts]&.map { |chart| Graphics::Chart.create(self, **chart) }
+      @stats = data[:stats]&.map { |stat| Graphics::Stat.create(self, **stat) }
+      @migrations = data[:migrations]&.map { |migration| Migration.create(self, **migration) }
       add_inverse_entity_to_association_attributes
       add_has_and_belongs_to_many_associations
       add_inverse_associations
@@ -60,7 +51,7 @@ module Schematics
     end
 
     def valid?
-      schemer.valid?(data)
+      JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
     end
 
     def sorted_entities
