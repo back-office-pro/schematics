@@ -5,9 +5,7 @@ require 'schematics/schema'
 describe Schematics::Schema do
   subject(:schema) { described_class.instance }
 
-  it 'is a valid schema' do
-    expect { schema }.not_to raise_error
-  end
+  it { is_expected.to be_valid }
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }
@@ -102,8 +100,6 @@ describe Schematics::Schema do
       Singleton.__init__(described_class)
     end
 
-    it 'is not a valid schema' do
-      expect { schema }.to raise_error(JSON::Schema::ValidationError)
-    end
+    it { is_expected.not_to be_valid }
   end
 end

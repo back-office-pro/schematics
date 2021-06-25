@@ -25,7 +25,6 @@ module Schematics
       add_has_many_through_associations
       add_has_one_through_associations
       @entities.each(&:check_for_association_name_collisions)
-      validate!
     end
 
     def find_entity_by_name(name)
@@ -57,6 +56,10 @@ module Schematics
         .reverse
     end
 
+    def valid?
+      JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
+    end
+
     private
 
     def data
@@ -73,10 +76,6 @@ module Schematics
       file_path = File.expand_path('../../spec/data.json', __dir__)
       file = File.read(file_path)
       JSON.parse(file, symbolize_names: true)
-    end
-
-    def validate!
-      JSON::Validator.validate!(File.expand_path('../schema.json', __dir__), data)
     end
 
     def add_inverse_entity_to_association_attributes
