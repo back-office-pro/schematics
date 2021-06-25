@@ -9,13 +9,6 @@ module Schematics
     before_action :authorize
     helper_method :current_user
 
-    def not_found
-      respond_to do |format|
-        format.html
-        format.json { head :not_found }
-      end
-    end
-
     private
 
     def current_ability

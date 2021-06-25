@@ -2,8 +2,10 @@
 en:
   titles:
     schematics:
-      application:
+      exception:
         not_found: Page not found
+        internal_server_error: Something went wrong
+        schema_error: Schema error
       dashboard:
         home: Dashboard
       password_resets:
