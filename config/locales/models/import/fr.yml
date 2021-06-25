@@ -3,12 +3,12 @@ fr:
   activerecord:
     attributes:
       import:
+        author: Auteur
         file: Fichier
         import_errors: Erreurs
         progress: Progression
         status: Statut
-        author: Auteur
         statuses:
-          pending: En cours
-          finished: Terminé
           error: Erreur
+          finished: Terminé
+          pending: En cours
