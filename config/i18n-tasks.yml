@@ -9,12 +9,14 @@ search:
     - app/
     - lib/
   relative_roots:
+    - app/components
     - app/controllers
+    - app/interactors
     - app/helpers
     - app/mailers
-    - app/presenters
     - app/views
-    - app/components
+  exclude:
+    - app/interactors/schematics/imports/read_data.rb
 # translation:
   # google_translate_api_key: TODO
 ignore_missing:
