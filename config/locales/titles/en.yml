@@ -8,6 +8,8 @@ en:
         internal_server_error: Something went wrong
         not_found: Page not found
         schema_error: Schema error
+      imports:
+        new: Import %{model_name_plural}
       password_resets:
         edit: Password reset
         new: Password reset
@@ -16,7 +18,6 @@ en:
       resources:
         delete: Delete %{resource}
         edit: Edit %{resource}
-        import: Import %{model_name_plural}
         index: List of %{model_name_plural}
         new: Add a new %{model_name}
         show: "%{resource}"
