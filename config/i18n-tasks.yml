@@ -15,8 +15,6 @@ search:
     - app/presenters
     - app/views
     - app/components
-  exclude:
-    - lib/csv_importer.rb
 # translation:
   # google_translate_api_key: TODO
 ignore_missing:
