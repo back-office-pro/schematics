@@ -3,7 +3,7 @@
 module Schematics
   class ExceptionController < ApplicationController
     layout 'schematics/auth', except: :not_found
-  
+
     def not_found
       respond_to do |format|
         format.html

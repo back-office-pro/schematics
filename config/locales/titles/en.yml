@@ -2,12 +2,12 @@
 en:
   titles:
     schematics:
-      exception:
-        not_found: Page not found
-        internal_server_error: Something went wrong
-        schema_error: Schema error
       dashboard:
         home: Dashboard
+      exception:
+        internal_server_error: Something went wrong
+        not_found: Page not found
+        schema_error: Schema error
       password_resets:
         edit: Password reset
         new: Password reset

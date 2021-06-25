@@ -2,12 +2,12 @@
 fr:
   titles:
     schematics:
-      exception:
-        not_found: Page non trouvée
-        internal_server_error: Quelque chose s'est mal passé
-        schema_error: Erreur schéma
       dashboard:
         home: Tableau de bord
+      exception:
+        internal_server_error: Quelque chose s'est mal passé
+        not_found: Page non trouvée
+        schema_error: Erreur schéma
       password_resets:
         edit: Mot de passe oublié
         new: Mot de passe oublié
