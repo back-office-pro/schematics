@@ -2,6 +2,7 @@
 
 require 'rack/test/uploaded_file'
 require 'action_dispatch/http/mime_type'
+require 'base64'
 
 module Schematics
   module Tests
@@ -54,7 +55,7 @@ module Schematics
       end
 
       def content_type
-        Mime[@extension]
+        Mime[@extension].to_s
       end
     end
   end
