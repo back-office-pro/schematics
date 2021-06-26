@@ -6,7 +6,7 @@ require 'schematics/graphics/axes/y'
 module Schematics
   module Graphics
     class Chart
-      delegate :icon, :class_name, to: :@entity
+      delegate :class_name, to: :@entity
       attr_reader :x, :y
 
       class << self
