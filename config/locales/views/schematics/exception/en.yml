@@ -1,0 +1,6 @@
+---
+en:
+  schematics:
+    exception:
+      internal_server_error:
+        back: Back to dashboard
