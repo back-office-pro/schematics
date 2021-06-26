@@ -43,7 +43,7 @@ RSpec.describe UsersController do
   end
 
   describe 'routes' do
-    it { is_expected.to route(:get, '/users').to(controller: :users, action: :index, locale: :en, model_name: 'User') }
+    it { is_expected.to route(:get, '/users').to(controller: :users, action: :index, locale: :en, model_name: 'User') } # rubocop:disable Layout/LineLength
     it { is_expected.to route(:get, '/utilisateurs').to(controller: :users, action: :index, locale: :fr, model_name: 'User') } # rubocop:disable Layout/LineLength
     it { is_expected.to route(:get, '/users/1').to(controller: :users, action: :show, id: 1, locale: :en, model_name: 'User') } # rubocop:disable Layout/LineLength
     it { is_expected.to route(:get, '/utilisateurs/1').to(controller: :users, action: :show, id: 1, locale: :fr, model_name: 'User') } # rubocop:disable Layout/LineLength
