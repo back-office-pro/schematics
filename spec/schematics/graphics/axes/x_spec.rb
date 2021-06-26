@@ -13,5 +13,4 @@ describe Schematics::Graphics::Axes::X do
   its(:to_sql) { is_expected.to eq(:all) }
   its(:icon) { is_expected.to eq(:caret_square_right) }
   its(:class_name) { is_expected.to eq('Product') }
-  its(:title) { is_expected.to be_blank }
 end
