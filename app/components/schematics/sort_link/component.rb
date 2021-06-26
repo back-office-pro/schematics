@@ -26,7 +26,7 @@ module Schematics
       end
 
       def link_params
-        request.parameters.merge(sort: new_sorted_params)
+        request.query_parameters.merge(sort: new_sorted_params)
       end
 
       def attribute_name

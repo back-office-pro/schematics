@@ -1,4 +1,4 @@
 .row.no-gutters
   .col
-    = fa_icon icon, class: "mr-2 text-#{icon_text_class}"
-    = link_to attribute_name, link_params
+    = fa_icon icon, class: "text-#{icon_text_class}"
+    = link_to attribute_name, polymorphic_path(@model_class, **link_params), class: 'ml-2'
