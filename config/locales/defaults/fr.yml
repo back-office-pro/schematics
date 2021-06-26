@@ -31,6 +31,7 @@ fr:
       no_method_error: "$%{name} est nul"
       type: 'Erreur de type : %{message}'
   'false': faux
+  line: Ligne %{line}
   simple_form:
     labels:
       defaults:

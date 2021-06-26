@@ -7,6 +7,7 @@ en:
       name: "$%{name} is not defined"
       no_method_error: "$%{name} is null"
       type: 'Type error: %{message}'
+  line: Line %{line}
   simple_form:
     labels:
       defaults:
