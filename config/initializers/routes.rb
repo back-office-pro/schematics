@@ -6,15 +6,13 @@ Rails.configuration.exceptions_app = Rails.application.routes
 Rails.configuration.consider_all_requests_local = false
 Rails.application.routes.default_url_options = Rails.configuration.action_mailer.default_url_options
 
-Rails.configuration.to_prepare do
-  Rails.application.routes.prepend do
-    mount Schematics::Engine, at: '/'
-    constraints Schematics::AuthConstraint do
-      mount GrapeSwaggerRails::Engine, at: '/api'
-      mount Sidekiq::Web, at: '/sidekiq'
-    end
-    localized do
-      Schematics::Schema.instance.load_routes
-    end
+Rails.application.routes.prepend do
+  mount Schematics::Engine, at: '/'
+  constraints Schematics::AuthConstraint do
+    mount GrapeSwaggerRails::Engine, at: '/api'
+    mount Sidekiq::Web, at: '/sidekiq'
+  end
+  localized do
+    Schematics::Schema.instance.load_routes
   end
 end
