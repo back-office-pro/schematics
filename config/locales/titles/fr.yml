@@ -9,7 +9,7 @@ fr:
         not_found: Page non trouvée
         schema_error: Erreur schéma
       imports:
-        new: Importer des %{model_name_plural}
+        new: Importer des %{parent_model_name_plural}
       password_resets:
         edit: Mot de passe oublié
         new: Mot de passe oublié

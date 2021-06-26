@@ -9,7 +9,7 @@ en:
         not_found: Page not found
         schema_error: Schema error
       imports:
-        new: Import %{model_name_plural}
+        new: Import %{parent_model_name_plural}
       password_resets:
         edit: Password reset
         new: Password reset
