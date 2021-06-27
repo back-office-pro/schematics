@@ -81,65 +81,20 @@ module Schematics
 
     def delete; end
 
-    def import
-      respond_to do |format|
-        format.html
-        format.csv do
-          result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
-            job: GenerateCsvTemplateJob,
-            job_params: [model_name.to_s],
-            extension: 'csv',
-            slug: model_name_plural
-          )
-          return send_data result.data if result.failure?
-
-          send_file result.filepath, type: 'text/csv', filename: result.filename
-        end
-      end
-    end
-
-    def bulk_insert
-      file = params.require(:import).permit(:file)
-      result = Resources::BulkInsert.call(
-        file: file[:file],
-        model_class: model_class,
-        current_user: current_user
-      )
-      @errors = result.errors
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to polymorphic_path(model_class),
-                        notice: t(result.message, model_name_plural: model_name_plural)
-          end
-          format.json { head :created }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = t(result.message, model_name_plural: model_name_plural)
-            render :import
-          end
-          format.json { render json: @errors, status: :unprocessable_entity }
-        end
-      end
-    end
-
     def create
       @resource = model_class.new(resource_params)
       result = Resources::Create.call(resource: @resource)
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to @resource, notice: t(result.message, model_name: model_name.human)
+            redirect_to @resource, notice: tscope(result.message, model_name: model_name.human)
           end
           format.json { head :created }
         end
       else
         respond_to do |format|
           format.html do
-            flash.now[:alert] = t(result.message)
+            flash.now[:alert] = tscope(result.message)
             render :new
           end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
@@ -152,14 +107,14 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to @resource, notice: t(result.message, model_name: model_name.human)
+            redirect_to @resource, notice: tscope(result.message, model_name: model_name.human)
           end
           format.json { respond_with_bip(@resource) }
         end
       else
         respond_to do |format|
           format.html do
-            flash.now[:alert] = t(result.message)
+            flash.now[:alert] = tscope(result.message)
             render :edit
           end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
@@ -173,14 +128,14 @@ module Schematics
         respond_to do |format|
           format.html do
             redirect_to polymorphic_path(model_class),
-                        notice: t(result.message, model_name: model_name.human)
+                        notice: tscope(result.message, model_name: model_name.human)
           end
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: t(result.message) }
-          format.json { render json: t(result.message), status: :server_error }
+          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
         end
       end
     end
@@ -191,14 +146,14 @@ module Schematics
         respond_to do |format|
           format.html do
             redirect_to polymorphic_path(model_class),
-                        notice: t(result.message, model_name: model_name.human)
+                        notice: tscope(result.message, model_name: model_name.human)
           end
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: t(result.message) }
-          format.json { render json: t(result.message), status: :server_error }
+          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
         end
       end
     end
@@ -209,14 +164,14 @@ module Schematics
         respond_to do |format|
           format.html do
             redirect_to polymorphic_path(model_class),
-                        notice: t(result.message, model_name: model_name.human)
+                        notice: tscope(result.message, model_name: model_name.human)
           end
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: t(result.message) }
-          format.json { render json: t(result.message), status: :server_error }
+          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
         end
       end
     end
@@ -253,12 +208,16 @@ module Schematics
     end
 
     def set_breadcrumb
-      title = t('titles.schematics.resources.index', model_name_plural: model_name_plural)
-      breadcrumb title, :"#{entity.name.pluralize}_path"
+      breadcrumb t('titles.schematics.resources.index', model_name_plural: model_name_plural),
+                 model_class
     end
 
     def model_name_plural
       model_name.human.pluralize.downcase
+    end
+
+    def tscope(message, **args)
+      t(message[1..], scope: [:schematics, :resources, action_name], **args)
     end
   end
 end
