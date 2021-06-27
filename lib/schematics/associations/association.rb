@@ -45,6 +45,10 @@ module Schematics
         belongs_to.inverse_association_name
       end
 
+      def inverse_of
+        belongs_to.name
+      end
+
       def to_str
         <<~RUBY
           #{type} :#{name},
@@ -55,12 +59,6 @@ module Schematics
 
       def weight
         3
-      end
-
-      protected
-
-      def inverse_of
-        belongs_to.name
       end
     end
   end

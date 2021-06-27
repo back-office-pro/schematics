@@ -15,6 +15,10 @@ module Schematics
         belongs_to.name
       end
 
+      def inverse_of
+        through.name
+      end
+
       def class_name
         source.camelize
       end
@@ -23,12 +27,6 @@ module Schematics
         <<~RUBY
           #{name}&.to_s
         RUBY
-      end
-
-      protected
-
-      def inverse_of
-        through.name
       end
     end
   end
