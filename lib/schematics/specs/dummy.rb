@@ -5,7 +5,7 @@ require 'action_dispatch/http/mime_type'
 require 'base64'
 
 module Schematics
-  module Tests
+  module Specs
     class Dummy
       def initialize(extension)
         @extension = extension

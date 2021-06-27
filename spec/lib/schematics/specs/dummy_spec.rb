@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Tests::Dummy do
+describe Schematics::Specs::Dummy do
   subject(:dummy) { described_class.new(extension) }
 
   context 'when extension is pdf' do

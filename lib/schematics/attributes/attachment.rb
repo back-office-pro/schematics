@@ -137,7 +137,7 @@ module Schematics
       end
 
       def dummy
-        @dummy ||= Tests::Dummy.new(extension)
+        @dummy ||= Specs::Dummy.new(extension)
       end
     end
   end
