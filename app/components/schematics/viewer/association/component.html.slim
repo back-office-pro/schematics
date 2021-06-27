@@ -39,7 +39,7 @@
                         method: :delete,
                         class: 'btn btn-danger btn-sm',
                         data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
-                    - if attachment?
+                    - if attachment? && can?(:destroy, resource)
                       = form_for @resources.first.record do |f|
                         = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
                           = fields.hidden_field :id, value: resource.id

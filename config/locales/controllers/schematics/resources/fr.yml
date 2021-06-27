@@ -5,9 +5,6 @@ fr:
       archive:
         failure: Une erreur est survenue
         success: "%{model_name} a été archivé avec succès"
-      bulk_insert:
-        failure: Une ou plusieurs erreurs sont survenus durant l'importation des %{model_name_plural}
-        success: Les %{model_name_plural} ont été importés avec succès
       create:
         failure: Une erreur est survenue
         success: "%{model_name} a été créé avec succès"

@@ -3,7 +3,7 @@
 module Schematics
   module Resource
     class Component < ApplicationComponent
-      delegate :confirm_data, to: :helpers
+      delegate :confirm_data, :can?, to: :helpers
 
       def initialize(resource:, field:, editable: false)
         super

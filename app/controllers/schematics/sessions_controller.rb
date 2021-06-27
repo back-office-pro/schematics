@@ -7,7 +7,6 @@ module Schematics
     layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
-    DENYLIST = %i[role_id].freeze
 
     def new; end
 
@@ -88,7 +87,7 @@ module Schematics
 
     def permitted_params
       super
-        .excluding(*DENYLIST)
+        .excluding(:role_id)
         .concat(session_params)
     end
 

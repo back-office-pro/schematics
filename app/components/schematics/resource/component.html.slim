@@ -7,13 +7,20 @@
         = value
     - else
       = link_to(value, value)
+- when Schematics::Attributes::Jsonb
+  - if value
+    table
+      - value.each do |key, value|
+        tr
+          th = key
+          td = value
 - when Schematics::Attributes::Address
   = render Schematics::GoogleMap::Component.new(address: value)
 - when Schematics::Attributes::Attachments
   = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true)
 - when Schematics::Attributes::Attachment
   - if value.attached?
-    - if editable?
+    - if editable? && can?(:destroy, value.attachment)
       = form_for @resource do |f|
         = f.fields_for :"#{value.name}_attachment_attributes" do |fields|
           = fields.hidden_field :id, value: value.id

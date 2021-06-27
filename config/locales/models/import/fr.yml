@@ -1,0 +1,14 @@
+---
+fr:
+  activerecord:
+    attributes:
+      import:
+        author: Auteur
+        file: Fichier
+        import_errors: Erreurs
+        progress: Progression
+        status: Statut
+        statuses:
+          error: Erreur
+          finished: Terminé
+          pending: En cours

@@ -5,9 +5,6 @@ en:
       archive:
         failure: An error occured
         success: "%{model_name} was successfully archived"
-      bulk_insert:
-        failure: One or more error occured during %{model_name_plural} import
-        success: "%{model_name_plural} were successfully imported"
       create:
         failure: An error occured
         success: "%{model_name} was successfully created"

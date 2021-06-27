@@ -85,19 +85,15 @@
     {
       "warning_type": "File Access",
       "warning_code": 16,
-      "fingerprint": "c15b8f3383e9b7e7a13103cc228217b5ef58c5297b53f53b41a27f47415ccd95",
+      "fingerprint": "d533d422c480e79424805ad8597e8a3cf9e7da016322ea000293494bd186635e",
       "check_name": "SendFile",
       "message": "Parameter value used in file name",
-      "file": "app/controllers/schematics/resources_controller.rb",
-      "line": 97,
+      "file": "config/initializers/overrides.rb",
+      "line": 24,
       "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([model_name.to_s]), :extension => \"csv\", :slug => model_name_plural).filepath, :type => \"text/csv\", :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([model_name.to_s]), :extension => \"csv\", :slug => model_name_plural).filename)",
+      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
       "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::ResourcesController",
-        "method": "import"
-      },
+      "location": null,
       "user_input": "params[:fingerprint]",
       "confidence": "Weak",
       "note": "Fingerprint is not used for filepath or filename"
@@ -154,6 +150,6 @@
       "note": "Fingerprint is not used for filepath or filename"
     }
   ],
-  "updated": "2021-06-27 14:11:50 +0200",
+  "updated": "2021-06-27 14:29:09 +0200",
   "brakeman_version": "5.0.4"
 }

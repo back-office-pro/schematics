@@ -9,14 +9,14 @@ search:
     - app/
     - lib/
   relative_roots:
+    - app/components
     - app/controllers
+    - app/interactors
     - app/helpers
     - app/mailers
-    - app/presenters
     - app/views
-    - app/components
   exclude:
-    - lib/csv_importer.rb
+    - app/interactors/schematics/imports
 # translation:
   # google_translate_api_key: TODO
 ignore_missing:
@@ -32,6 +32,7 @@ ignore_missing:
   - date.*
   - 'true'
   - 'false'
+  - line
 ignore_unused:
   - activerecord.*
   - routes.*
@@ -45,3 +46,4 @@ ignore_unused:
   - date.*
   - 'true'
   - 'false'
+  - line
