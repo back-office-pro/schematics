@@ -225,16 +225,17 @@ module Schematics
 
       def route
         <<~RUBY
-          resources :#{name.pluralize} do
+          resources :#{name.pluralize}, model_name: '#{class_name}' do
             member do
               get :delete
               delete :archive
               delete :restore
             end
             collection do
-              post :bulk_insert
-              get :import
               get :autocomplete
+              resources :imports, only: %i[new create], as: '#{name}_imports', format: false do
+                get :template, on: :collection, format: :csv
+              end
             end
           end
         RUBY
