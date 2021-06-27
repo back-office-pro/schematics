@@ -92,4 +92,4 @@ jobs:
         with:
           bundler-cache: true
       - name: Run brakeman
-        run: bundle exec brakeman --no-pager
+        run: bundle exec brakeman --no-pager --no-exit-on-error

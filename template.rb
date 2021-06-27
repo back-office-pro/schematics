@@ -48,7 +48,7 @@ after_bundle do
   git commit: "-m 'initial commit'"
 
   # Security
-  run 'brakeman --no-pager'
+  run 'brakeman --no-pager --no-exit-on-error'
 
   # Tests
   run 'rake test'
