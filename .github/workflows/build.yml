@@ -82,3 +82,14 @@ jobs:
           bundler-cache: true
       - name: Run tests
         run: bundle exec rspec ./spec/schematics
+
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run brakeman
+        run: bundle exec brakeman --no-pager
