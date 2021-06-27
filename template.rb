@@ -49,9 +49,6 @@ after_bundle do
   # Security
   run 'brakeman --no-pager'
 
-  # Best practices
-  run 'rails_best_practices'
-
   # Tests
   run 'rake test'
 end
