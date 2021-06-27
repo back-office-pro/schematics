@@ -1,0 +1,99 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "674e91b107786f85be889cbe539e5d64a3a3989166835795ba60cc6b7aa66d9a",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/searches/show.html.slim",
+      "line": 9,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::EmptyResource::Component.new(:suggestions => Searchkick.multi_search(Schema.instance.entities.map do\n entity.class_name.constantize.search(params[:query], :includes => entity.includes, :match => :word_middle, :suggest => true, :misspellings => false, :execute => false, :scope_results => (lambda do\n results.accessible_by(current_ability)\n end))\n end).flat_map(&:suggestions).uniq), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::SearchesController",
+          "method": "show",
+          "line": 31,
+          "file": "app/controllers/schematics/searches_controller.rb",
+          "rendered": {
+            "name": "schematics/searches/show",
+            "file": "app/views/schematics/searches/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/searches/show"
+      },
+      "user_input": "params[:query]",
+      "confidence": "Weak",
+      "note": "Will be fixed when https://github.com/presidentbeef/brakeman/pull/1578 will be released. Other reference: https://github.com/presidentbeef/brakeman/issues/1529"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "7c41f606c6015249b8982d77b0dbb78dc79c95f8f57e9e4bdf0065dcc0e97bee",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/resources/edit.html.slim",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::ResourceForm::Component.new(:resource => ((model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])))), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::ResourcesController",
+          "method": "edit",
+          "line": 81,
+          "file": "app/controllers/schematics/resources_controller.rb",
+          "rendered": {
+            "name": "schematics/resources/edit",
+            "file": "app/views/schematics/resources/edit.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/resources/edit"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": "Will be fixed when https://github.com/presidentbeef/brakeman/pull/1578 will be released. Other reference: https://github.com/presidentbeef/brakeman/issues/1529"
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "ec9c35c527353f0a7b10f1df13224f6b56efd51ed9a0f5161cd059357d3ba197",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped parameter value",
+      "file": "app/views/schematics/resources/show.html.slim",
+      "line": 47,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "(model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])).public_send(attribute.name)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::ResourcesController",
+          "method": "show",
+          "line": 59,
+          "file": "app/controllers/schematics/resources_controller.rb",
+          "rendered": {
+            "name": "schematics/resources/show",
+            "file": "app/views/schematics/resources/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/resources/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": "False positive"
+    }
+  ],
+  "updated": "2021-06-27 13:07:18 +0200",
+  "brakeman_version": "5.0.4"
+}
