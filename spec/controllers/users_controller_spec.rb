@@ -49,7 +49,7 @@ RSpec.describe UsersController do
     it { is_expected.to route(:get, '/utilisateurs/1').to(controller: :users, action: :show, id: 1, locale: :fr) } # rubocop:disable Layout/LineLength
   end
 
-  describe 'permitted params' do
+  xdescribe 'permitted params' do
     it { is_expected.to permit(*permitted_params).for(:create, params: user_params).on(:user) }
   end
 end
