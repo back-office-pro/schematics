@@ -33,8 +33,8 @@ resource 'Password Resets' do
       let(:expected_response) do
         {
           'errors' => [
-            I18n.t('schematics.password_resets.create.failure'),
-          ],
+            I18n.t('schematics.password_resets.create.failure')
+          ]
         }
       end
 
@@ -76,8 +76,8 @@ resource 'Password Resets' do
         let(:expected_response) do
           {
             'errors' => [
-              I18n.t('schematics.resources.update.failure'),
-            ],
+              I18n.t('schematics.resources.update.failure')
+            ]
           }
         end
 

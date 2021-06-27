@@ -8,7 +8,7 @@ module Schematics
       def permitted_params
         [
           { super.first => [] },
-          super.second,
+          super.second
         ]
       end
 

@@ -23,7 +23,7 @@ module Schematics
       def validators
         {
           uniqueness: ({ case_sensitive: false } if unique?),
-          presence: required?,
+          presence: required?
         }.compact
       end
     end

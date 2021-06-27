@@ -46,7 +46,7 @@ resource 'Versions' do
           'item_type' => 'User',
           'event' => 'create',
           'item_id' => user.id,
-          'whodunnit' => user.id,
+          'whodunnit' => user.id
         }
       end
 

@@ -37,7 +37,7 @@ module Schematics
           'area' => :chart_area,
           'scatter' => :chart_scatter,
           'column' => :analytics,
-          'geo' => :globe,
+          'geo' => :globe
         }[@type]
       end
 
@@ -52,7 +52,7 @@ module Schematics
       def joins
         [
           x.field&.try(:preload),
-          y.field&.try(:preload),
+          y.field&.try(:preload)
         ].compact.flatten.uniq
       end
 

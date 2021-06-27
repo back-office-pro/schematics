@@ -47,7 +47,7 @@ module Schematics
         'revert' => :undo,
         'destroy' => :trash,
         'archive' => :archive,
-        'restore' => :trash_restore,
+        'restore' => :trash_restore
       }[event]
     end
   end

@@ -25,7 +25,7 @@ module Schematics
         'cancel-button-text': t('schematics.application.button.cancel'),
         'sweet-alert-type': 'error',
         'allow-outside-click': false,
-        'custom-class': ('disable-animation' if Rails.env.test?),
+        'custom-class': ('disable-animation' if Rails.env.test?)
       }
     end
   end

@@ -10,7 +10,7 @@ module Schematics
             width: 36,
             height: 36,
             css_class: 'rounded-circle',
-            replacement: { icon: :user_circle, size: '2x' },
+            replacement: { icon: :user_circle, size: '2x' }
           }
           new(**args)
         end
@@ -20,7 +20,7 @@ module Schematics
             attachment: attachment,
             width: 300,
             height: 150,
-            replacement: { icon: icon, size: '7x' },
+            replacement: { icon: icon, size: '7x' }
           }
           new(**args)
         end

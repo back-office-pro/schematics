@@ -12,8 +12,8 @@ describe Schematics::Entities::Entity do
     [
       {
         name: 'name',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ]
   end
 

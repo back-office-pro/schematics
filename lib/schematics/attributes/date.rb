@@ -32,8 +32,8 @@ module Schematics
               before: options.before&.to_sym,
               after: options.after&.to_sym,
               before_or_equal_to: options.before_or_equal_to&.to_sym,
-              after_or_equal_to: options.after_or_equal_to&.to_sym,
-            }.compact,
+              after_or_equal_to: options.after_or_equal_to&.to_sym
+            }.compact
           }.compact_blank
         )
       end

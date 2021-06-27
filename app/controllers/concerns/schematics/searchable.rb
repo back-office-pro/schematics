@@ -12,7 +12,7 @@ module Schematics
         scope_results: lambda do |results|
           results = results.with_deleted if filter_params.key?(:with_deleted)
           results.accessible_by(current_ability)
-        end,
+        end
       }
     end
   end

@@ -21,7 +21,7 @@ RSpec.describe Schematics::Imports::ReadData do
     let(:expected_data) do
       {
         1 => { 'name' => 'Role1' },
-        2 => { 'name' => 'Role2' },
+        2 => { 'name' => 'Role2' }
       }
     end
 

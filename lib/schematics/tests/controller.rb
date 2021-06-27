@@ -309,9 +309,9 @@ module Schematics
           entity.name.to_sym => entity.fillable_elements.map do |element|
             [
               element.column_name.to_sym,
-              element.send(default_attribute) || record.send(element.column_name),
+              element.send(default_attribute) || record.send(element.column_name)
             ]
-          end.to_h,
+          end.to_h
         }
       end
     end

@@ -12,8 +12,8 @@ describe Schematics::Entities::Tree do
     [
       {
         name: 'name',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ]
   end
 

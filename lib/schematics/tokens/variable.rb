@@ -14,7 +14,7 @@ module Schematics
       def to_sql
         [
           references.any? ? references.map(&:pluralize) : @table_name,
-          @value.split('.').last,
+          @value.split('.').last
         ].join('.')
       end
 

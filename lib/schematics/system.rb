@@ -18,7 +18,7 @@ module Schematics
             .map(&method(:generate_join_table_migration)),
           entity
             .association_attributes
-            .map(&method(:generate_counter_cache_migration)),
+            .map(&method(:generate_counter_cache_migration))
         ].flatten.compact.map(&:squish)
       end
 
@@ -26,13 +26,13 @@ module Schematics
         [
           destroy_scaffold(entity.name),
           destroy_rspec_acceptance(entity.name),
-          generate_drop_table_migration(entity.name, entity.migratable_attributes),
+          generate_drop_table_migration(entity.name, entity.migratable_attributes)
         ].map(&:squish)
       end
 
       def destroy_entity_attribute(entity, attribute)
         [
-          generate_remove_attribute_migration(entity.name, attribute),
+          generate_remove_attribute_migration(entity.name, attribute)
         ].map(&:squish)
       end
 

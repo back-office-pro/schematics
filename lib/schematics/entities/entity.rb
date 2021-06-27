@@ -76,19 +76,19 @@ module Schematics
             attributes: [
               {
                 name: 'filename',
-                type: 'string',
+                type: 'string'
               },
               {
                 name: 'content_type',
-                type: 'string',
+                type: 'string'
               },
               {
                 name: 'byte_size',
                 type: 'float',
                 options: {
-                  unit: 'bytes',
-                },
-              },
+                  unit: 'bytes'
+                }
+              }
             ]
           )
         end

@@ -22,8 +22,8 @@ Rails.configuration.after_initialize do
       # Charts.js
       animation: {
         duration: 1000,
-        easing: 'easeOutQuad',
-      },
-    },
+        easing: 'easeOutQuad'
+      }
+    }
   }
 end

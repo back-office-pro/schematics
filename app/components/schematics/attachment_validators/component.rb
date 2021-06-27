@@ -24,7 +24,7 @@ module Schematics
               number_to_human_size(value)
             else
               value.humanize
-            end,
+            end
           ]
         end
       end

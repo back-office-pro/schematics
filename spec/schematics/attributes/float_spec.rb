@@ -10,7 +10,7 @@ describe Schematics::Attributes::Float do
   let(:name) { 'price' }
   let(:options) do
     {
-      unit: '€',
+      unit: '€'
     }
   end
 

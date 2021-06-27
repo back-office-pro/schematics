@@ -23,14 +23,14 @@ module Schematics
       def permitted_params
         [
           super,
-          { "#{association_name}_attributes": %i[id _destroy] },
+          { "#{association_name}_attributes": %i[id _destroy] }
         ]
       end
 
       def permitted_json_params
         [
           { permitted_params.first => %i[data filename content_type] },
-          permitted_params.second,
+          permitted_params.second
         ]
       end
 
@@ -67,18 +67,18 @@ module Schematics
             antivirus: true,
             attached: required?,
             size: {
-              less_than: options.size&.megabytes,
+              less_than: options.size&.megabytes
             }.compact,
             aspect_ratio: options.aspect_ratio,
             limit: {
               min: options.min,
-              max: options.max,
+              max: options.max
             }.compact,
             dimension: {
               width: options.width,
-              height: options.height,
+              height: options.height
             }.compact,
-            content_type: options.content_type&.map(&:to_sym),
+            content_type: options.content_type&.map(&:to_sym)
           }.compact_blank
         )
       end
@@ -120,7 +120,7 @@ module Schematics
           avi: :file_video,
           mov: :file_video,
           wmv: :file_video,
-          mp4: :file_video,
+          mp4: :file_video
         }[extension.to_sym] || :file
       end
 

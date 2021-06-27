@@ -15,7 +15,7 @@ RSpec.describe Schematics::Imports::ValidateData do
       let(:data) do
         {
           1 => { 'name' => 'Role1' },
-          2 => { 'name' => 'Role2' },
+          2 => { 'name' => 'Role2' }
         }
       end
       let(:expected_data) do
@@ -24,14 +24,14 @@ RSpec.describe Schematics::Imports::ValidateData do
             'name' => 'Role1',
             'slug' => 'role1',
             'created_at' => Time,
-            'updated_at' => Time,
+            'updated_at' => Time
           },
           {
             'name' => 'Role2',
             'slug' => 'role2',
             'created_at' => Time,
-            'updated_at' => Time,
-          },
+            'updated_at' => Time
+          }
         ]
       end
 
@@ -44,7 +44,7 @@ RSpec.describe Schematics::Imports::ValidateData do
       let(:data) do
         {
           1 => { 'name' => 'Role1' },
-          2 => { 'name' => '' },
+          2 => { 'name' => '' }
         }
       end
       let(:expected_data) do
@@ -53,9 +53,9 @@ RSpec.describe Schematics::Imports::ValidateData do
             'name' => 'Role1',
             'slug' => 'role1',
             'created_at' => Time,
-            'updated_at' => Time,
+            'updated_at' => Time
           },
-          ActiveRecord::RecordInvalid,
+          ActiveRecord::RecordInvalid
         ]
       end
 

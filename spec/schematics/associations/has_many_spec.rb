@@ -52,7 +52,7 @@ describe Schematics::Associations::HasMany do
   context 'when belongs_to is required' do
     let(:options) do
       {
-        required: true,
+        required: true
       }
     end
 

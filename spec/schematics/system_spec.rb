@@ -18,7 +18,7 @@ describe Schematics::System do
     [
       {
         name: 'name',
-        type: 'string',
+        type: 'string'
       },
       {
         name: 'owner',
@@ -26,18 +26,18 @@ describe Schematics::System do
         options: {
           type: 'user',
           inverse: {
-            name: 'roles',
-          },
-        },
-      },
+            name: 'roles'
+          }
+        }
+      }
     ]
   end
   let(:associations) do
     [
       {
         type: 'has_and_belongs_to_many',
-        name: 'permission',
-      },
+        name: 'permission'
+      }
     ]
   end
 
@@ -52,7 +52,7 @@ describe Schematics::System do
           'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
           'rails generate migration add_slug_to_roles slug:string:uniq',
           'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
-          'rails generate migration add_roles_count_to_users roles_count:integer',
+          'rails generate migration add_roles_count_to_users roles_count:integer'
         ]
       end
 
@@ -75,7 +75,7 @@ describe Schematics::System do
           'rails generate migration add_slug_to_roles slug:string:uniq',
           'rails generate migration add_ancestry_to_roles ancestry:string',
           'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
-          'rails generate migration add_roles_count_to_users roles_count:integer',
+          'rails generate migration add_roles_count_to_users roles_count:integer'
         ]
       end
 
@@ -90,7 +90,7 @@ describe Schematics::System do
       [
         'rails destroy scaffold role --skip-migration --skip-resource-route',
         'rails destroy rspec:acceptance role',
-        'rails generate migration drop_roles_table schema:role_name schema:role_owner',
+        'rails generate migration drop_roles_table schema:role_name schema:role_owner'
       ]
     end
 
@@ -102,7 +102,7 @@ describe Schematics::System do
 
     let(:expected_command_lines) do
       [
-        'rails generate migration remove_name_from_roles schema:role_name',
+        'rails generate migration remove_name_from_roles schema:role_name'
       ]
     end
 

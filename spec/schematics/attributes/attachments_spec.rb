@@ -39,7 +39,7 @@ describe Schematics::Attributes::Attachments do
     is_expected.to eq(
       [
         { files: [] },
-        { files_attachments_attributes: %i[id _destroy] },
+        { files_attachments_attributes: %i[id _destroy] }
       ]
     )
   end
@@ -48,7 +48,7 @@ describe Schematics::Attributes::Attachments do
     is_expected.to eq(
       [
         { files: [] },
-        { files_attachments_attributes: %i[id _destroy] },
+        { files_attachments_attributes: %i[id _destroy] }
       ]
     )
   end

@@ -10,7 +10,7 @@ describe Schematics::Attributes::Text do
   let(:name) { 'content' }
   let(:options) do
     {
-      limit: 100,
+      limit: 100
     }
   end
 

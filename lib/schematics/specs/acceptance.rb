@@ -27,7 +27,7 @@ module Schematics
               {
                 entity.name => entity.fillable_elements.map do |element|
                   [element.column_name, element.json_default || record.send(element.column_name)]
-                end.to_h,
+                end.to_h
               }
             end
             let(:unprocessable_request) do
@@ -35,7 +35,7 @@ module Schematics
                 entity.name => entity
                   .fillable_elements
                   .map { |element| [element.column_name, nil] }
-                  .to_h,
+                  .to_h
               }
             end
 
@@ -82,8 +82,8 @@ module Schematics
           let(:expected_response) do
             {
               'errors' => [
-                { entity.name => ['parameter is required'] },
-              ],
+                { entity.name => ['parameter is required'] }
+              ]
             }
           end
 

@@ -34,9 +34,9 @@ describe Schematics::Attributes::Enum do
     is_expected.to eq(
       {
         inclusion: {
-          in: %w[available available_soon not_available],
+          in: %w[available available_soon not_available]
         },
-        allow_blank: true,
+        allow_blank: true
       }
     )
   end
@@ -47,7 +47,7 @@ describe Schematics::Attributes::Enum do
         ['', ''],
         %w[available Available],
         ['available_soon', 'Available soon'],
-        ['not_available', 'Not available'],
+        ['not_available', 'Not available']
       ]
     )
   end
@@ -68,7 +68,7 @@ describe Schematics::Attributes::Enum do
     let(:options) do
       {
         required: true,
-        values: %w[available available_soon not_available],
+        values: %w[available available_soon not_available]
       }
     end
 
@@ -77,7 +77,7 @@ describe Schematics::Attributes::Enum do
         [
           %w[available Available],
           ['available_soon', 'Available soon'],
-          ['not_available', 'Not available'],
+          ['not_available', 'Not available']
         ]
       )
     end
@@ -86,10 +86,10 @@ describe Schematics::Attributes::Enum do
       is_expected.to eq(
         {
           inclusion: {
-            in: %w[available available_soon not_available],
+            in: %w[available available_soon not_available]
           },
           presence: true,
-          allow_blank: false,
+          allow_blank: false
         }
       )
     end
@@ -105,7 +105,7 @@ describe Schematics::Attributes::Enum do
     let(:options) do
       {
         default: 'available',
-        values: %w[available available_soon not_available],
+        values: %w[available available_soon not_available]
       }
     end
 

@@ -13,7 +13,7 @@ describe Schematics::Virtuals::Comparison do
       name: 'product',
       descriptor: 'full_name',
       attributes: [
-        { name: 'price', type: 'float' },
+        { name: 'price', type: 'float' }
       ]
     )
   end

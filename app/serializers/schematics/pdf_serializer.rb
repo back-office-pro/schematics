@@ -31,14 +31,14 @@ module Schematics
         header: {
           font_size: 8,
           center: @resource,
-          right: '[page] / [topage]',
+          right: '[page] / [topage]'
         },
         footer: {
           font_size: 8,
           left: Setting.instance.company_name,
           center: Setting.instance.company_address,
-          right: Setting.instance.company_registration_number,
-        },
+          right: Setting.instance.company_registration_number
+        }
       }
     end
   end

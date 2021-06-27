@@ -10,8 +10,8 @@ RSpec.describe UsersController do
         password: '123456',
         first_name: 'John',
         last_name: 'Doe',
-        locale: 'en',
-      },
+        locale: 'en'
+      }
     }
   end
   let(:permitted_params) do
@@ -25,7 +25,7 @@ RSpec.describe UsersController do
       { avatar_attachment_attributes: %i[id _destroy] },
       :locale,
       :time_zone,
-      :role_id,
+      :role_id
     ]
   end
 

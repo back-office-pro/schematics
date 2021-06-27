@@ -12,8 +12,8 @@ describe Schematics::Graphics::Chart do
       attributes: [
         {
           name: 'locale',
-          type: 'enum',
-        },
+          type: 'enum'
+        }
       ]
     )
   end

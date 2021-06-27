@@ -19,7 +19,7 @@ module Schematics
         {
           'filename' => filename,
           'content_type' => content_type,
-          'data' => data,
+          'data' => data
         }
       end
 

@@ -15,7 +15,7 @@ Rails.configuration.after_initialize do
       file: :custom_file,
       radio_buttons: :custom_collection,
       range: :custom_range,
-      time: :custom_multi_select,
+      time: :custom_multi_select
     }
     config.wrappers :input_group,
                     tag: 'div',

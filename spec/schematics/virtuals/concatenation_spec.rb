@@ -14,7 +14,7 @@ describe Schematics::Virtuals::Concatenation do
       descriptor: 'full_name',
       attributes: [
         { name: 'first_name', type: 'string' },
-        { name: 'last_name', type: 'string' },
+        { name: 'last_name', type: 'string' }
       ]
     )
   end

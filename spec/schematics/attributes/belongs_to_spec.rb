@@ -66,7 +66,7 @@ describe Schematics::Attributes::BelongsTo do
   context 'when belongs_to is required' do
     let(:options) do
       {
-        required: true,
+        required: true
       }
     end
 
@@ -87,8 +87,8 @@ describe Schematics::Attributes::BelongsTo do
     let(:options) do
       {
         inverse: {
-          type: 'has_one',
-        },
+          type: 'has_one'
+        }
       }
     end
 

@@ -10,10 +10,6 @@ Style/HashEachMethods:
   AllowedReceivers:
     - enum
     - attribute
-Style/TrailingCommaInArrayLiteral: # TODO: remove
-  EnforcedStyleForMultiline: consistent_comma
-Style/TrailingCommaInHashLiteral: # TODO: remove
-  EnforcedStyleForMultiline: consistent_comma
 Layout/LineLength:
   Max: 100
 RSpec/ExampleLength:

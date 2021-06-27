@@ -73,8 +73,8 @@ resource 'Sessions' do
       let(:expected_response) do
         {
           'errors' => [
-            I18n.t('schematics.sessions.update.failure'),
-          ],
+            I18n.t('schematics.sessions.update.failure')
+          ]
         }
       end
 

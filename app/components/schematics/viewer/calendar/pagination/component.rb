@@ -38,12 +38,12 @@ module Schematics
             {
               filter: {
                 start_attribute => {
-                  gte: start_date.end_of_month.tomorrow.beginning_of_month,
+                  gte: start_date.end_of_month.tomorrow.beginning_of_month
                 },
                 end_attribute => {
-                  lte: start_date.end_of_month.tomorrow.end_of_month,
-                },
-              },
+                  lte: start_date.end_of_month.tomorrow.end_of_month
+                }
+              }
             }
           end
 
@@ -51,12 +51,12 @@ module Schematics
             {
               filter: {
                 start_attribute => {
-                  gte: start_date.yesterday.beginning_of_month,
+                  gte: start_date.yesterday.beginning_of_month
                 },
                 end_attribute => {
-                  lte: start_date.yesterday.end_of_month,
-                },
-              },
+                  lte: start_date.yesterday.end_of_month
+                }
+              }
             }
           end
         end

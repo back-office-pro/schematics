@@ -12,13 +12,13 @@ describe Schematics::Attributes::References do
       descriptor: 'full_name',
       attributes: [
         { name: 'first_name', type: 'string' },
-        { name: 'last_name', type: 'string' },
+        { name: 'last_name', type: 'string' }
       ],
       virtuals: [
         {
           name: 'full_name',
-          function: '$first_name $last_name',
-        },
+          function: '$first_name $last_name'
+        }
       ]
     )
   end
@@ -33,8 +33,8 @@ describe Schematics::Attributes::References do
   let(:options) do
     {
       inverse: {
-        type: 'has_many',
-      },
+        type: 'has_many'
+      }
     }
   end
 
@@ -83,8 +83,8 @@ describe Schematics::Attributes::References do
       {
         required: true,
         inverse: {
-          type: 'has_many',
-        },
+          type: 'has_many'
+        }
       }
     end
 
@@ -105,8 +105,8 @@ describe Schematics::Attributes::References do
     let(:options) do
       {
         inverse: {
-          type: 'has_one',
-        },
+          type: 'has_one'
+        }
       }
     end
 

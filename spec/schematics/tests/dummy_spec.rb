@@ -17,7 +17,7 @@ describe Schematics::Tests::Dummy do
         {
           'filename' => 'dummy.pdf',
           'content_type' => 'application/pdf',
-          'data' => "data:application/pdf;base64,YXBwbGljYXRpb24vcGRm\n",
+          'data' => "data:application/pdf;base64,YXBwbGljYXRpb24vcGRm\n"
         }
       )
     end
@@ -35,7 +35,7 @@ describe Schematics::Tests::Dummy do
         {
           'filename' => 'dummy.png',
           'content_type' => 'image/png',
-          'data' => "data:image/png;base64,aW1hZ2UvcG5n\n",
+          'data' => "data:image/png;base64,aW1hZ2UvcG5n\n"
         }
       )
     end

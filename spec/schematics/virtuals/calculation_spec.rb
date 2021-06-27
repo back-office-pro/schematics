@@ -13,7 +13,7 @@ describe Schematics::Virtuals::Calculation do
       name: 'product',
       descriptor: 'full_name',
       attributes: [
-        { name: 'price', type: 'float' },
+        { name: 'price', type: 'float' }
       ]
     )
   end
@@ -22,7 +22,7 @@ describe Schematics::Virtuals::Calculation do
   let(:options) do
     {
       unit: '€',
-      scale: 2,
+      scale: 2
     }
   end
 

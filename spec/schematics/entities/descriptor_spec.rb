@@ -10,7 +10,7 @@ describe Schematics::Entities::Descriptor do
       name: 'entity',
       descriptor: 'type',
       attributes: [
-        { name: 'type', type: 'string' },
+        { name: 'type', type: 'string' }
       ]
     )
   end

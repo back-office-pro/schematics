@@ -28,8 +28,8 @@ module Schematics
             options: {
               required: true,
               inverse: {
-                type: type,
-              },
+                type: type
+              }
             }
           )
         end

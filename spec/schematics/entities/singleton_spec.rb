@@ -12,8 +12,8 @@ describe Schematics::Entities::Singleton do
     [
       {
         name: 'company_name',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ]
   end
 

@@ -22,18 +22,18 @@ describe Schematics::Schema do
             attributes: [
               {
                 name: 'role',
-                type: 'belongs_to',
-              },
-            ],
+                type: 'belongs_to'
+              }
+            ]
           },
           {
             name: 'role',
             attributes: [
               {
                 name: 'name',
-                type: 'string',
-              },
-            ],
+                type: 'string'
+              }
+            ]
           },
           {
             name: 'message',
@@ -42,19 +42,19 @@ describe Schematics::Schema do
                 name: 'author',
                 type: 'belongs_to',
                 options: {
-                  type: 'user',
-                },
+                  type: 'user'
+                }
               },
               {
                 name: 'recipient',
                 type: 'belongs_to',
                 options: {
-                  type: 'user',
-                },
-              },
-            ],
-          },
-        ],
+                  type: 'user'
+                }
+              }
+            ]
+          }
+        ]
       }
     end
     let(:message_associations) do
@@ -87,11 +87,11 @@ describe Schematics::Schema do
             attributes: [
               {
                 name: 'errors',
-                type: 'jsonb',
-              },
-            ],
-          },
-        ],
+                type: 'jsonb'
+              }
+            ]
+          }
+        ]
       }
     end
 

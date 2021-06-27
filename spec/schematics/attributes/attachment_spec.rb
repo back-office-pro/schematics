@@ -39,7 +39,7 @@ describe Schematics::Attributes::Attachment do
     is_expected.to eq(
       [
         :avatar,
-        { avatar_attachment_attributes: %i[id _destroy] },
+        { avatar_attachment_attributes: %i[id _destroy] }
       ]
     )
   end
@@ -48,7 +48,7 @@ describe Schematics::Attributes::Attachment do
     is_expected.to eq(
       [
         { avatar: %i[data filename content_type] },
-        { avatar_attachment_attributes: %i[id _destroy] },
+        { avatar_attachment_attributes: %i[id _destroy] }
       ]
     )
   end
