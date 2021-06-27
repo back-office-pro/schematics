@@ -21,6 +21,7 @@ after_bundle do
   rails_command 'db:fixtures:load' if options[:skip_listen]
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
+  rails_command 'dev:cache' if options[:skip_listen]
 
   # Ignore /doc directory
   append_to_file '.gitignore', '/doc'
