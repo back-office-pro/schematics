@@ -15,7 +15,7 @@ module Schematics
                                   .attachments_attributes
                                   .map do |attribute|
         resource
-          .instance_eval(attribute.name)
+          .public_send(attribute.name)
           .includes(:blob)
       end
     end
@@ -26,7 +26,7 @@ module Schematics
                         .take_while { |association| !(only_required && !association.required?) }
                         .map do |association|
         resource
-          .instance_eval(association.name)
+          .public_send(association.name)
           .includes(association.entity.includes)
           .accessible_by(current_ability)
       end

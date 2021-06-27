@@ -31,7 +31,7 @@
   .card-body.p-0
     = render template: 'schematics/resources/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|
-  - rich_text = @resource.instance_eval(attribute.name)
+  - rich_text = @resource.public_send(attribute.name)
   - if rich_text.present?
     .card.shadow-sm.border-0.mt-3
       a.card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1 {

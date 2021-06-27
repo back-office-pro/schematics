@@ -156,7 +156,7 @@ module Schematics
           when Attributes::RichText
             fill_in_rich_text_area input, with: element.default
           when Attributes::BelongsTo
-            select record.instance_eval(element.name).to_s,
+            select record.public_send(element.name).to_s,
                    from: input,
                    match: :first
           when Behaviours::Enumerable

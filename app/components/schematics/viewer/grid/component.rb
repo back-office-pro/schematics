@@ -6,7 +6,7 @@ module Schematics
       class Component < Viewer::Component
         def carousel(resource)
           entity.attachment_attributes.map do |attribute|
-            resource.instance_eval(attribute.name)
+            resource.public_send(attribute.name)
           end
         end
       end

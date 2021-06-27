@@ -13,7 +13,7 @@ module Schematics
       end
 
       def value
-        @resource.instance_eval(@field.name)
+        @resource.public_send(@field.name)
       end
 
       def editable?
