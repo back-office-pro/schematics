@@ -34,6 +34,10 @@ class FixturesGenerator < Rails::Generators::NamedBase
     create_file(rich_texts_file_path)
   end
 
+  def create_action_text_fixtures_directory
+    empty_directory(action_text_path)
+  end
+
   def generate_action_text_rich_texts
     entity
       .rich_text_attributes
@@ -114,7 +118,7 @@ class FixturesGenerator < Rails::Generators::NamedBase
   end
 
   def fixtures_path
-    File.join('test', 'fixtures')
+    File.join('spec', 'fixtures')
   end
 
   def active_storage_path
