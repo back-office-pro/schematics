@@ -35,6 +35,9 @@ after_bundle do
   remove_file 'public/422.html'
   remove_file 'public/500.html'
 
+  # Remove /test directory
+  remove_dir 'test'
+
   # Yarn packages
   JSON
     .parse(File.read((File.expand_path('package.json', __dir__))))
@@ -49,7 +52,7 @@ after_bundle do
   run 'brakeman --no-pager --no-exit-on-error'
 
   # Tests
-  # run 'rake test'
+  run 'rspec'
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'
