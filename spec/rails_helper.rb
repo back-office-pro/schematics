@@ -10,7 +10,6 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'paper_trail/frameworks/rspec'
 require 'support/shared_contexts'
-require 'support/shoulda_matchers'
 require 'support/view_component'
 require 'super_diff/rspec-rails'
 
@@ -30,7 +29,7 @@ require 'super_diff/rspec-rails'
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/test/fixtures"
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
