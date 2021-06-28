@@ -1,0 +1,8 @@
+require 'rails_helper'
+require 'schematics/specs/routing'
+
+<% module_namespacing do -%>
+RSpec.describe <%= controller_class_name %>Controller, <%= type_metatag(:routing) %> do
+  include Schematics::Specs::Routing
+end
+<% end -%>
