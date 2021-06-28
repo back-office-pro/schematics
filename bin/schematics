@@ -16,6 +16,7 @@ time rails new $app_name \
     --skip-action-cable \
     --skip-listen \
     --skip-spring \
+    --skip-test-unit \
     --template template.rb \
     --dummy-app=$dummy_app \
     &> log/build.log
