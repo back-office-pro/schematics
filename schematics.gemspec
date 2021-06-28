@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chroma', '~> 0.2.0'
   spec.add_dependency 'client_side_validations', '~> 18.1.0'
   spec.add_dependency 'client_side_validations-simple_form', '~> 13.0.0'
-  spec.add_dependency 'country_select', '~> 5.1.0'
+  spec.add_dependency 'country_select', '>= 5.1', '< 6.1'
   spec.add_dependency 'date_validator', '~> 0.11.0'
   spec.add_dependency 'font_awesome5_rails', '~> 1.5.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
