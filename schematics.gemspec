@@ -91,7 +91,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'title', '~> 0.0.8'
   spec.add_dependency 'validate_url', '~> 1.0.13'
   spec.add_dependency 'valid_email', '~> 0.1.3'
-  spec.add_dependency 'view_component', '~> 2.34.0'
+  spec.add_dependency 'view_component', '>= 2.34', '< 2.36'
   spec.add_dependency 'wicked_pdf', '~> 2.1.0'
   spec.add_dependency 'wkhtmltopdf-binary', '~> 0.12.6.5'
 end
