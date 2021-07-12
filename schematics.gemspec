@@ -63,7 +63,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwt', '~> 2.2.2'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mini_magick', '>= 4.11.0'
-  spec.add_dependency 'oj', '~> 3.11.7'
+  spec.add_dependency 'oj', '>= 3.11.7', '< 3.13.0'
   spec.add_dependency 'pagy', '~> 4.10.1'
   spec.add_dependency 'paper_trail', '~> 12.0.0'
   spec.add_dependency 'paranoia', '~> 2.4.3'
