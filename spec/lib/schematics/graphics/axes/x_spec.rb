@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/graphics/axes/x'
-require 'schematics/entities/entity'
-
 describe Schematics::Graphics::Axes::X do
   subject(:axis) { described_class.new(entity, agregate, field) }
 

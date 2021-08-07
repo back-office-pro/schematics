@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/entities/entity'
-
 module Schematics
   module Entities
     class Singleton < Entity

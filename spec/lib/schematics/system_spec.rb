@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/system'
-require 'schematics/entities/tree'
-
 describe Schematics::System do
   subject(:system) { described_class }
 

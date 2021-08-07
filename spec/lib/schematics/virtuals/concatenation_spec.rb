@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/virtuals/concatenation'
-require 'schematics/entities/entity'
-
 describe Schematics::Virtuals::Concatenation do
   subject(:virtual) do
     described_class.create(entity, name: name, function: function, options: options)

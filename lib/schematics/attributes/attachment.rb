@@ -3,12 +3,6 @@
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/array/access'
 require 'active_support/core_ext/numeric/bytes'
-require 'schematics/attributes/attribute'
-require 'schematics/behaviours/renderable'
-require 'schematics/behaviours/searchable'
-require 'schematics/behaviours/preloadable'
-require 'schematics/behaviours/fillable'
-require 'schematics/tests/dummy'
 
 module Schematics
   module Attributes

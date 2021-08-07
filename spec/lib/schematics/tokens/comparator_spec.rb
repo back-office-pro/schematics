@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/comparator'
-
 describe Schematics::Tokens::Comparator do
   subject(:token) { described_class.new(value) }
 

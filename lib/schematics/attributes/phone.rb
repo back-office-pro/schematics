@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/string'
-
 module Schematics
   module Attributes
     class Phone < String

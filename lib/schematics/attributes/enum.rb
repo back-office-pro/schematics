@@ -1,13 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attribute'
-require 'schematics/behaviours/listable'
-require 'schematics/behaviours/renderable'
-require 'schematics/behaviours/searchable'
-require 'schematics/behaviours/fillable'
-require 'schematics/behaviours/editable'
-require 'schematics/behaviours/enumerable'
-
 module Schematics
   module Attributes
     class Enum < Attribute

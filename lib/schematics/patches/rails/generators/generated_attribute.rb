@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/schema'
-
 module Schematics
   module Patches
     module Rails

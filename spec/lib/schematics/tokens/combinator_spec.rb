@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/combinator'
-
 describe Schematics::Tokens::Combinator do
   subject(:token) { described_class.new(value) }
 

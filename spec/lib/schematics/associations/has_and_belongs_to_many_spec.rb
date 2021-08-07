@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/has_and_belongs_to_many'
-require 'schematics/entities/entity'
-
 describe Schematics::Associations::HasAndBelongsToMany do
   subject(:association) { described_class.new(belongs_to) }
 

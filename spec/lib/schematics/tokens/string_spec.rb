@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/string'
-
 describe Schematics::Tokens::String do
   subject(:token) { described_class.new(value) }
 

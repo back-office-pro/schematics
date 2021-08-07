@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/schema'
-
 describe Schematics::Schema do
   subject(:schema) { described_class.instance }
 

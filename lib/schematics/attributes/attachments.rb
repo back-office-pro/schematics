@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attachment'
-
 module Schematics
   module Attributes
     class Attachments < Attachment

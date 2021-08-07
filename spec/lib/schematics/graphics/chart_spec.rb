@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/graphics/chart'
-require 'schematics/entities/entity'
-
 describe Schematics::Graphics::Chart do
   subject(:chart) { described_class.new(entity, type, x_axis, y_axis) }
 

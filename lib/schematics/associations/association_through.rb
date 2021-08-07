@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/association'
-
 module Schematics
   module Associations
     class AssociationThrough < Association

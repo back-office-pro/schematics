@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attribute'
-require 'schematics/behaviours/renderable'
-require 'schematics/behaviours/rangeable'
-
 module Schematics
   module Attributes
     class Timestamp < Attribute

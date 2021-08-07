@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/graphics/stat'
-require 'schematics/entities/entity'
-
 describe Schematics::Graphics::Stat do
   subject(:stat) { described_class.new(entity, agregate, field) }
 

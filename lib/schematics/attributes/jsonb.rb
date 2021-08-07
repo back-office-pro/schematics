@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attribute'
-require 'schematics/behaviours/renderable'
-
 module Schematics
   module Attributes
     class Jsonb < Attribute

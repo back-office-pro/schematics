@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/system'
-
 module Schematics
   class Migration
     class << self

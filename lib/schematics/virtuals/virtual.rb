@@ -1,12 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/tokenizer'
-require 'schematics/behaviours/listable'
-require 'schematics/behaviours/renderable'
-require 'schematics/behaviours/searchable'
-require 'schematics/behaviours/preloadable'
-require 'array'
-
 module Schematics
   module Virtuals
     class Virtual

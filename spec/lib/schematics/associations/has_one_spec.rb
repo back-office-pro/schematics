@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/has_one'
-require 'schematics/entities/entity'
-
 describe Schematics::Associations::HasOne do
   subject(:association) { described_class.new(belongs_to) }
 

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/decimal'
-require 'schematics/entities/entity'
-
 describe Schematics::Attributes::Decimal do
   subject(:attribute) { described_class.new(entity, name, options) }
 

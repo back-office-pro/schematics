@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'jwt'
+require 'active_support/core_ext/module/delegation'
 
 class JsonWebToken
   class << self

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/date'
-
 module Schematics
   module Attributes
     class Datetime < Date

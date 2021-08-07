@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/specs/helpers'
-
 module Schematics
   module Specs
     module Acceptance # rubocop:disable Metrics/ModuleLength

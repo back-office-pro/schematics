@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/entities/entity'
-require 'schematics/entities/tree'
-require 'schematics/entities/singleton'
-require 'schematics/graphics/chart'
-require 'schematics/graphics/stat'
-require 'schematics/migration'
 require 'json-schema'
 require 'singleton'
 

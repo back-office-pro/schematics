@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/system'
-
 namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do

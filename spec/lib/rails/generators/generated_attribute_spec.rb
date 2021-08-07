@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails/generators/generated_attribute'
-require 'schematics/patches/rails/generators/generated_attribute'
 
 describe Rails::Generators::GeneratedAttribute do
   subject(:generated_attribute) { described_class.parse(column_definition) }

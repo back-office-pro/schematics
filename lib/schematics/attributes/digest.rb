@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attribute'
-require 'schematics/behaviours/fillable'
-
 module Schematics
   module Attributes
     class Digest < Attribute

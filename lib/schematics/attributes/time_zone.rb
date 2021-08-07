@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/string'
-require 'schematics/behaviours/enumerable'
 require 'active_support/values/time_zone'
 
 module Schematics

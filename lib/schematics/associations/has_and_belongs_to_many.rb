@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/association'
-require 'schematics/behaviours/fillable'
-
 module Schematics
   module Associations
     class HasAndBelongsToMany < Association

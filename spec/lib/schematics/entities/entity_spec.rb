@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/entities/entity'
-
 describe Schematics::Entities::Entity do
   subject(:entity) do
     described_class.create(name: name, attributes: attributes)

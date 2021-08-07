@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/has_one_through'
-require 'schematics/entities/entity'
-
 describe Schematics::Associations::HasOneThrough do
   subject(:association) { described_class.new(belongs_to, through) }
 

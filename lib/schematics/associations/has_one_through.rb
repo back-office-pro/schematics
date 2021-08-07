@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/association_through'
-require 'schematics/behaviours/renderable'
-require 'schematics/behaviours/searchable'
-require 'schematics/behaviours/preloadable'
 require 'active_support/core_ext/module/delegation'
 
 module Schematics

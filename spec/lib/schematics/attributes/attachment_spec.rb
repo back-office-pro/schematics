@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attachment'
-require 'schematics/entities/entity'
-
 describe Schematics::Attributes::Attachment do
   subject(:attribute) { described_class.new(entity, name, options) }
 

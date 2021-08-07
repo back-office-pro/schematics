@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/text'
-require 'schematics/behaviours/listable'
 require 'active_support/core_ext/securerandom'
 
 module Schematics

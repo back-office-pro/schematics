@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/virtuals/virtual'
-require 'schematics/behaviours/rangeable'
-
 module Schematics
   module Virtuals
     class Calculation < Virtual

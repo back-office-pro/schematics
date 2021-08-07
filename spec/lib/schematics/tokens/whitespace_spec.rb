@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/whitespace'
-
 describe Schematics::Tokens::Whitespace do
   subject(:token) { described_class.new }
 

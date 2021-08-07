@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'schematics/tests/controller'
 
 <% module_namespacing do -%>
 class <%= controller_class_name %>ControllerTest < Schematics::Tests::Controller

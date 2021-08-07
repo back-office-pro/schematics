@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/float'
-
 module Schematics
   module Attributes
     class Decimal < Float

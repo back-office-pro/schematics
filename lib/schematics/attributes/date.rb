@@ -1,14 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/attribute'
-require 'schematics/behaviours/listable'
-require 'schematics/behaviours/renderable'
-require 'schematics/behaviours/searchable'
-require 'schematics/behaviours/preloadable'
-require 'schematics/behaviours/fillable'
-require 'schematics/behaviours/rangeable'
-require 'schematics/behaviours/editable'
-
 module Schematics
   module Attributes
     class Date < Attribute

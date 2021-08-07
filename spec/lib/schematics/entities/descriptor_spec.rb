@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/entities/descriptor'
-
 describe Schematics::Entities::Descriptor do
   subject(:descriptor) { described_class.create(entity, 'type') }
 

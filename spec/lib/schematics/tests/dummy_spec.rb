@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tests/dummy'
-
 describe Schematics::Tests::Dummy do
   subject(:dummy) { described_class.new(extension) }
 

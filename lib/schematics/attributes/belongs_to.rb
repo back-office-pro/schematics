@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/association'
-require 'schematics/behaviours/fillable'
-
 module Schematics
   module Attributes
     class BelongsTo < Association

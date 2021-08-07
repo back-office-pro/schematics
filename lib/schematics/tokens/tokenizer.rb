@@ -1,15 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/combinator'
-require 'schematics/tokens/comparator'
-require 'schematics/tokens/number'
-require 'schematics/tokens/operator'
-require 'schematics/tokens/parenthesis'
-require 'schematics/tokens/string'
-require 'schematics/tokens/token'
-require 'schematics/tokens/variable'
-require 'schematics/tokens/whitespace'
-
 module Schematics
   module Tokens
     class Tokenizer

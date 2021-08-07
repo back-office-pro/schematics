@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/associations/has_many_through'
-require 'schematics/entities/entity'
-
 describe Schematics::Associations::HasManyThrough do
   subject(:association) { described_class.new(through, belongs_to.inverse_association) }
 

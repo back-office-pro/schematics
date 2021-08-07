@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/digest'
-require 'schematics/entities/entity'
-
 describe Schematics::Attributes::Digest do
   subject(:attribute) { described_class.new(entity, name, options) }
 

@@ -81,7 +81,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Run tests
-        run: bundle exec rspec ./spec/lib/schematics
+        run: bundle exec rspec ./spec/lib/schematics --require schematics
 
   brakeman:
     name: Brakeman

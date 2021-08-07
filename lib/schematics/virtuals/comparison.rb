@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/virtuals/virtual'
-
 module Schematics
   module Virtuals
     class Comparison < Virtual

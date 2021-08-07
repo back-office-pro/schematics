@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/tokens/token'
 require 'active_support/core_ext/string/inflections'
 
 module Schematics

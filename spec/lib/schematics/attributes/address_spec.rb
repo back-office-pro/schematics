@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/attributes/address'
-require 'schematics/entities/entity'
-
 describe Schematics::Attributes::Address do
   subject(:attribute) { described_class.new(entity, name, options) }
 

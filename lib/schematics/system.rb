@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'schematics/entities/tree'
-
 module Schematics
   module System
     class << self
