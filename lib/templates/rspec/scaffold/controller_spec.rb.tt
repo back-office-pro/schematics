@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'schematics/specs/controller'
 
 <% module_namespacing do -%>
 RSpec.describe <%= controller_class_name %>Controller, <%= type_metatag(:controller) %> do

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'schematics/specs/model'
 
 <% module_namespacing do -%>
 RSpec.describe <%= class_name %>, <%= type_metatag(:model) %> do
