@@ -29,7 +29,7 @@ module Schematics
       def initialize(entity, name, options)
         @entity = entity
         @name = name
-        @options = Entity::OptionsStruct.new(options)
+        @options = Entities::OptionsStruct.new(options)
       end
 
       def to_sql

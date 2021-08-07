@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Entity
+  module Entities
     class OptionsStruct < OpenStruct
       def hidden?
         hidden
