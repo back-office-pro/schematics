@@ -23,7 +23,7 @@ RSpec.describe User do
 
   describe '#password' do
     it { is_expected.to have_secure_password(:password) }
-    it { is_expected.to validate_length_of(:password).is_at_least(6) }
+    it { is_expected.to validate_length_of(:password).is_at_least(8) }
     it { is_expected.to have_db_column(:password_digest).of_type(:string) }
   end
 
