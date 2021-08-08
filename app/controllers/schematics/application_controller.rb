@@ -6,8 +6,8 @@ module Schematics
     include Localizable
 
     protect_from_forgery unless: -> { request.format.json? }
+    before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
     before_action :authorize
-    before_action { Rack::MiniProfiler.authorize_request }
     helper_method :current_user
 
     private

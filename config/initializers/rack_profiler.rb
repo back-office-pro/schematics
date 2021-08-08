@@ -11,6 +11,7 @@ Rack::MiniProfiler.config.tap do |config|
   config.skip_paths = [
     %r{/sidekiq(.*)},
     %r{/favicon.ico},
-    %r{/api}
+    %r{/api},
+    %r{/assets(.*)}
   ]
 end
