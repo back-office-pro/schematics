@@ -57,6 +57,7 @@ require 'ratonvirus/clamby'
 require 'i18n/beginning_of_week'
 require 'redis'
 require 'hiredis'
+require 'rack-mini-profiler'
 
 module Schematics
   class Engine < ::Rails::Engine

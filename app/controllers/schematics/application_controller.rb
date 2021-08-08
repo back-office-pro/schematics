@@ -7,6 +7,7 @@ module Schematics
 
     protect_from_forgery unless: -> { request.format.json? }
     before_action :authorize
+    before_action { Rack::MiniProfiler.authorize_request }
     helper_method :current_user
 
     private
