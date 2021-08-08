@@ -9,8 +9,8 @@ Rack::MiniProfiler.config.tap do |config|
   config.authorization_mode = :allow_authorized
   config.base_url_path = '/profiler'
   config.skip_paths = [
-    /\/sidekiq(.*)/,
-    /\/favicon.ico/,
-    /\/api/
+    %r{/sidekiq(.*)},
+    %r{/favicon.ico},
+    %r{/api}
   ]
 end
