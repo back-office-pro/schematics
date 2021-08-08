@@ -2,10 +2,10 @@
 
 PaperTrail.enabled = false
 admin_role = Role.create(name: 'Admin')
-User.create(email: 'admin@admin.com',
-            password: '123456',
-            first_name: 'Jean',
-            last_name: 'Dupont',
+User.create(email: 'maxence.derous@gmail.com',
+            password: 'Azerty1!',
+            first_name: 'Maxence',
+            last_name: 'De Rous',
             role: admin_role)
 Setting.instance.update(company_name: Rails.application.class.module_parent_name)
 Schematics::Schema.instance.entities.map(&:class_name).each do |model|
