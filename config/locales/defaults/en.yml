@@ -3,6 +3,8 @@ en:
   attributes:
     created_at: creation date
   errors:
+    messages:
+      password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
     virtuals:
       name: "$%{name} is not defined"
       no_method_error: "$%{name} is null"
