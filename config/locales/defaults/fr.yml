@@ -26,6 +26,7 @@ fr:
       file_size_out_of_range: a un poids de %{file_size} qui n'entre pas dans les limites requises
       image_metadata_missing: n'est pas une image valide
       limit_out_of_range: a un nombre de fichiers en dehors des limites
+      password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:
       name: "$%{name} n'est pas défini"
       no_method_error: "$%{name} est nul"

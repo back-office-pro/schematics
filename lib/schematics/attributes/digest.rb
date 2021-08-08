@@ -4,6 +4,12 @@ module Schematics
   module Attributes
     class Digest < Attribute
       include Behaviours::Fillable
+      REGEX = /
+        (?=.*\d)           # contain at least one number
+        (?=.*[a-z])        # contain at least one lowercase letter
+        (?=.*[A-Z])        # contain at least one uppercase letter
+        (?=.*[[:^alnum:]]) # contain at least one symbol
+      /x
 
       def permitted_params
         [super, :"#{super}_confirmation"]
@@ -13,10 +19,10 @@ module Schematics
         super.merge(
           {
             allow_nil: true,
+            format: { with: REGEX, message: :password },
             length: {
               minimum: options.min,
-              maximum: options.limit,
-              is: options.length
+              maximum: options.limit
             }.compact
           }.compact_blank
         )
@@ -29,7 +35,7 @@ module Schematics
       end
 
       def default
-        @default ||= SecureRandom.base58
+        'Azerty1!'
       end
 
       def icon

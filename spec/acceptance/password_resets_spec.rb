@@ -59,8 +59,8 @@ resource 'Password Resets' do
       let(:token) { user.password_reset_token }
 
       context 'when password is equal to password_confirmation' do
-        let(:password) { 'azerty' }
-        let(:password_confirmation) { 'azerty' }
+        let(:password) { 'Azerty1!' }
+        let(:password_confirmation) { 'Azerty1!' }
 
         example 'Updating the password' do
           do_request
@@ -70,8 +70,8 @@ resource 'Password Resets' do
       end
 
       context 'when password is not equal to password_confirmation' do
-        let(:password) { 'azerty' }
-        let(:password_confirmation) { 'qwerty' }
+        let(:password) { 'Azerty1!' }
+        let(:password_confirmation) { 'Azerty1' }
         let(:expected_response) do
           {
             'errors' => [

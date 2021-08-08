@@ -16,9 +16,18 @@ describe Schematics::Attributes::Digest do
 
   its(:type) { is_expected.to eq('digest') }
   its(:column_name) { is_expected.to eq('password') }
+  its(:default) { is_expected.to eq('Azerty1!') }
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
-  its(:validators) { is_expected.to eq({ allow_nil: true }) }
   its(:icon) { is_expected.to eq(:key) }
+
+  its(:validators) do
+    is_expected.to eq(
+      {
+        allow_nil: true,
+        format: { with: described_class::REGEX, message: :password }
+      }
+    )
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
