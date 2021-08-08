@@ -42,7 +42,10 @@ module Schematics
         end
       else
         respond_to do |format|
-          format.html { redirect_to password_lost_path, alert: t(result.message) }
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :edit
+          end
           format.json do
             render json: { errors: [t(result.message)] },
                    status: :unprocessable_entity
