@@ -22,7 +22,7 @@
           "name": "password",
           "type": "digest",
           "options": {
-            "min": 6
+            "min": 8
           }
         },
         {
