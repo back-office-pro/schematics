@@ -13,7 +13,7 @@ en:
         new: Import %{parent_model_name_plural}
         show: "%{resource}"
       password_resets:
-        edit: Password reset
+        edit: New password
         new: Password reset
       preferences:
         edit: Notification preferences
