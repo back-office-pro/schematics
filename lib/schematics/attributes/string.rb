@@ -16,7 +16,8 @@ module Schematics
           {
             length: {
               minimum: options.min,
-              maximum: options.limit
+              maximum: options.limit,
+              is: options.length
             }.compact
           }.compact_blank
         )
