@@ -219,7 +219,8 @@
               "errors",
               "new",
               "save",
-              "send"
+              "send",
+              "type"
             ]
           }
         }
