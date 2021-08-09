@@ -26,6 +26,10 @@ module Schematics
       )
     end
 
+    def settings
+      @settings ||= Setting.instance
+    end
+
     def options
       @options ||= {
         header: {
@@ -35,9 +39,9 @@ module Schematics
         },
         footer: {
           font_size: 8,
-          left: Setting.instance.company_name,
-          center: Setting.instance.company_address,
-          right: Setting.instance.company_registration_number
+          left: settings.company_name,
+          center: settings.company_address,
+          right: settings.company_registration_number
         }
       }
     end
