@@ -62,7 +62,7 @@ module Schematics
         .permissions
         .map(&:model)
         .uniq
-        .filter { |model| can?(:edit, model.constantize) }
+        .filter { |model| can?(:update, model.constantize) }
         .each   { |model| can(:destroy, ActiveStorage::Attachment, { record_type: model }) }
     end
 
