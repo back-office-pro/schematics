@@ -8,4 +8,6 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
     models:
-      setting: Setting
+      setting:
+        one: Setting
+        other: Settings
