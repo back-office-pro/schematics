@@ -4,6 +4,7 @@ module Schematics
   module Attributes
     class Jsonb < Attribute
       include Behaviours::Renderable
+      include Behaviours::Cacheable
 
       def default
         options.default&.to_json
