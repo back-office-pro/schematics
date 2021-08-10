@@ -20,6 +20,16 @@ namespace :schematics do
       .each(&method(:system))
   end
 
+  namespace :licence do
+    desc 'Update application licence'
+    task :update, [:plan, :term] => [:environment] do |task, args|
+      Licence.instance.update(
+        plan: args[:plan],
+        expires_at: args[:term].to_i.months.from_now
+      )
+    end
+  end
+
   namespace :db do
     desc 'Load engine seed'
     task seed: :environment do
