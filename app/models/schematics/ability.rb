@@ -16,10 +16,15 @@ module Schematics
       singleton_restrictions
       references_attributes_restrictions
       default_restrictions
+      licence_restrictions
     end
 
     def admin?
       @user.role == admin_role
+    end
+
+    def licence
+      @licence ||= Licence.instance.decorate
     end
 
     private
@@ -48,6 +53,13 @@ module Schematics
       can :read, Message, recipient_id: user.id
       can :read, Message, author_id: user.id
       can %i[update destroy archive], Message, { read_at: nil }
+    end
+
+    def licence_restrictions
+      cannot :update, Licence
+      cannot :create, User if licence.quota_users_exceeded?
+      cannot :create, Directory if licence.quota_storage_exceeded?
+      cannot :manage, :all if licence.expired?
     end
 
     def user_permissions
