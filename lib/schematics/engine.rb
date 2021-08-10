@@ -58,6 +58,7 @@ require 'i18n/beginning_of_week'
 require 'redis'
 require 'hiredis'
 require 'rack-mini-profiler'
+require 'draper'
 
 module Schematics
   class Engine < ::Rails::Engine
