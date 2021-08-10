@@ -2,6 +2,11 @@
 en:
   schematics:
     dashboard:
+      admin:
+        api: API access
+        profiler: API performance
+        schema: Edit my application
+        sidekiq: Background jobs
       home:
         graphics:
           agregate:

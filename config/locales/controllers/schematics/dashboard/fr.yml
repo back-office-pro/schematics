@@ -2,6 +2,11 @@
 fr:
   schematics:
     dashboard:
+      admin:
+        api: Accès API
+        profiler: Performance API
+        schema: Editer mon application
+        sidekiq: Tâches de fond
       home:
         graphics:
           agregate:

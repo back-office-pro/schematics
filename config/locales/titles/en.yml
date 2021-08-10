@@ -3,6 +3,7 @@ en:
   titles:
     schematics:
       dashboard:
+        admin: Administration
         home: Dashboard
       exception:
         internal_server_error: Something went wrong
