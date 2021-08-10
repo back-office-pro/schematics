@@ -4,6 +4,7 @@ describe Schematics::Schema do
   subject(:schema) { described_class.instance }
 
   it { is_expected.to be_valid }
+  its(:root_route) { is_expected.to eq('dashboard#home') }
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }

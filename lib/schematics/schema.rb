@@ -50,6 +50,12 @@ module Schematics
         .reverse
     end
 
+    def root_route
+      return 'dashboard#home' if valid?
+
+      'exception#schema_error'
+    end
+
     def valid?
       JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
     end

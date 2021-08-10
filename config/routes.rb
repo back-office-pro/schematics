@@ -6,7 +6,7 @@ Schematics::Engine.routes.draw do
   get '404', to: 'exception#not_found'
   get '500', to: 'exception#internal_server_error'
 
-  root Schematics::Schema.instance.valid? ? 'dashboard#home' : 'exception#schema_error'
+  root Schematics::Schema.instance.root_route
 
   localized do
     draw :sessions
