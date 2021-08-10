@@ -1,6 +1,6 @@
 //= require slim-select/dist/slimselect
 
-/* global $, SlimSelect */
+/* global $, SlimSelect, I18n */
 
 $(document).on('turbolinks:load', function () {
   document.querySelectorAll('.simple_form select').forEach(element => {
