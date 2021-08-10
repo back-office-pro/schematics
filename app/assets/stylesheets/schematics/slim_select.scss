@@ -1,0 +1,40 @@
+@import 'slim-select/dist/slimselect';
+
+.ss-main .ss-single-selected,
+.ss-main .ss-multi-selected {
+  background: transparent;
+  border: 0;
+  height: 32px;
+}
+
+.ss-content .ss-search input {
+  background: transparent;
+}
+
+.ss-content .ss-option.ss-disabled {
+  background: transparent !important;
+}
+
+.ss-main .ss-content .ss-search-highlight {
+  background: #fcf8e3 !important;
+}
+
+.ss-main .ss-multi-selected .ss-add {
+  margin: 11px 10px 0 0;
+}
+
+.ss-main.is-valid .ss-add,
+.ss-main.is-invalid .ss-add {
+  padding-right: 1.25rem;
+}
+
+.ss-main.is-valid .ss-arrow,
+.ss-main.is-invalid .ss-arrow {
+  padding-right: 1rem;
+}
+
+.ss-main .ss-content {
+  border: 0 !important;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08);
+}

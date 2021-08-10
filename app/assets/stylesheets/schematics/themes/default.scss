@@ -54,3 +54,9 @@ button.swal2-cancel.styled {
 .show-swal2.disable-animation {
   animation: none !important;
 }
+
+// Slim Select
+
+.ss-main .ss-multi-selected .ss-value {
+  background: $primary !important;
+}

@@ -49,3 +49,9 @@ $table-accent-bg: lighten($light, 2.5%);
 iframe.google-map {
   filter: invert(90%);
 }
+
+// Slim Select
+
+.ss-main .ss-content {
+  background: $light !important;
+}
