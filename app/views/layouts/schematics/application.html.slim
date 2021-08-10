@@ -44,5 +44,4 @@ html
               = render Schematics::MyAccount::Component.new
           .container-fluid.my-3.px-3.animate__animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
-          footer.px-2.py-3.border-top
-            .ml-3.text-dark &copy; #{setting(:company_name)} #{Time.current.year}
+          = render Schematics::Footer::Component.new
