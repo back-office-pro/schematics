@@ -23,6 +23,8 @@ fr:
         index: Liste des %{model_name_plural}
         new: Ajouter un %{model_name}
         show: "%{resource}"
+      schema:
+        edit: Editer mon application
       searches:
         show: Recherche "%{query}"
       sessions:

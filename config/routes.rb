@@ -13,6 +13,7 @@ Schematics::Engine.routes.draw do
     draw :password_resets
     resources :searches, only: %i[create show], param: :query
     resource :preferences, only: %i[edit update]
+    resource :schema, only: %i[edit update show], controller: :schema
     resources :versions, only: %i[index show] do
       member do
         get :revert
