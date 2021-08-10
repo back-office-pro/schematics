@@ -5,7 +5,7 @@ module Schematics
     def edit; end
 
     def update
-      result = Resources::Update.call(
+      result = Resources::UpdateAndCache.call(
         resource: current_user,
         resource_params: { preferences: current_user.preferences.merge(preference_params) }
       )

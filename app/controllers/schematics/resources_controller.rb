@@ -103,7 +103,7 @@ module Schematics
     end
 
     def update
-      result = Resources::Update.call(resource: @resource, resource_params: resource_params)
+      result = Resources::UpdateAndCache.call(resource: @resource, resource_params: resource_params)
       if result.success?
         respond_to do |format|
           format.html do
