@@ -3,7 +3,7 @@
 module Schematics
   module Footer
     class Component < ApplicationComponent
-      delegate :setting, to: :helpers
+      delegate :settings, to: :helpers
     end
   end
 end

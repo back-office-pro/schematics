@@ -3,7 +3,7 @@ html
   head
     meta charset="utf-8"
     meta name="turbolinks-cache-control" content="no-preview"
-    title #{setting(:company_name)} - #{title}
+    title #{settings(:company_name)} - #{title}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -11,12 +11,12 @@ html
                           media: 'all',
                           'data-turbolinks-track': 'reload',
                           id: 'light',
-                          disabled: user_setting(:theme) != 'light'
+                          disabled: preferences(:theme) != 'light'
     = stylesheet_link_tag 'schematics/themes/dark',
                           media: 'all',
                           'data-turbolinks-track': 'reload',
                           id: 'dark',
-                          disabled: user_setting(:theme) != 'dark'
+                          disabled: preferences(:theme) != 'dark'
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
@@ -31,9 +31,9 @@ html
       = render Schematics::Toast::Component.new(flash: f)
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
-        .col.bg-primary.sidebar class=('toggled' if user_setting(:sidebar_toggled))
+        .col.bg-primary.sidebar class=('toggled' if preferences(:sidebar_toggled))
           = render Schematics::Sidebar::Component.new
-        .col.bg-light.content class=('toggled' if user_setting(:sidebar_toggled))
+        .col.bg-light.content class=('toggled' if preferences(:sidebar_toggled))
           nav.navbar.navbar-light.navbar-expand.p-0.sticky-top
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
