@@ -83,22 +83,6 @@
       "note": "Will be fixed when https://github.com/presidentbeef/brakeman/pull/1578 will be released. Other reference: https://github.com/presidentbeef/brakeman/issues/1529"
     },
     {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "d533d422c480e79424805ad8597e8a3cf9e7da016322ea000293494bd186635e",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "config/initializers/overrides.rb",
-      "line": 24,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
-      "render_path": null,
-      "location": null,
-      "user_input": "params[:fingerprint]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used for filepath or filename"
-    },
-    {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 2,
       "fingerprint": "ec9c35c527353f0a7b10f1df13224f6b56efd51ed9a0f5161cd059357d3ba197",
@@ -148,8 +132,24 @@
       "user_input": "params[:fingerprint]",
       "confidence": "Weak",
       "note": "Fingerprint is not used for filepath or filename"
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "f95ada303b844b0d95d7ef9458d4b576709949f7657574363ebf2f6ef7b14e05",
+      "check_name": "SendFile",
+      "message": "Parameter value used in file name",
+      "file": "config/initializers/overrides/controllers/imports_controller.rb",
+      "line": 24,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
+      "render_path": null,
+      "location": null,
+      "user_input": "params[:fingerprint]",
+      "confidence": "Weak",
+      "note": "Fingerprint is not used for filepath or filename"
     }
   ],
-  "updated": "2021-06-27 14:29:09 +0200",
-  "brakeman_version": "5.0.4"
+  "updated": "2021-08-10 10:24:47 +0200",
+  "brakeman_version": "5.1.1"
 }
