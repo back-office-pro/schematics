@@ -1,0 +1,16 @@
+---
+fr:
+  activerecord:
+    attributes:
+      licence:
+        expires_at: Expire le
+        label: Label
+        plan: Forfait
+        plans:
+          enterprise: Entreprise
+          free: Gratuit
+          pro: Pro
+    models:
+      licence:
+        one: Licence
+        other: Licences
