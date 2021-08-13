@@ -57,6 +57,10 @@ button.swal2-cancel.styled {
 
 // Slim Select
 
+.ss-main {
+  color: $gray-700 !important;
+}
+
 .ss-main .ss-multi-selected .ss-value {
   background: $primary !important;
 }
