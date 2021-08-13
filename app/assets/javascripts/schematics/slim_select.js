@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function () {
       searchText: I18n.slim_select.search_text,
       searchPlaceholder: I18n.slim_select.search_placeholder,
       placeholder: I18n.slim_select.placeholder,
-      searchFocus: false,
+      searchFocus: true,
       searchHighlight: true
     })
   })
