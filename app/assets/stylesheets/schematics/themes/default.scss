@@ -59,16 +59,16 @@ button.swal2-cancel.styled {
 
 .ss-main {
   color: $gray-700 !important;
-}
 
-.ss-main .ss-multi-selected .ss-value {
-  background: $primary !important;
-}
+  .ss-multi-selected .ss-value {
+    background: $primary !important;
+  }
 
-.ss-content .ss-search input {
-  background: $light !important;
-}
+  .ss-search input {
+    background: $light !important;
+  }
 
-.ss-content .ss-list .ss-option:hover {
-  background: $primary !important;
+  .ss-list .ss-option:hover {
+    background: $primary !important;
+  }
 }
