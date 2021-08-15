@@ -19,7 +19,7 @@ module Schematics
         unique
       end
 
-      def cache?
+      def cached?
         cache
       end
     end
