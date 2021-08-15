@@ -7,9 +7,10 @@ en:
         label: Label
         plan: Plan
         plans:
+          business: Business
           enterprise: Enterprise
-          free: Free
           pro: Pro
+          unlimited: Unlimited
     models:
       licence:
         one: Licence

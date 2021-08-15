@@ -7,9 +7,10 @@ fr:
         label: Label
         plan: Forfait
         plans:
+          business: Business
           enterprise: Entreprise
-          free: Gratuit
           pro: Pro
+          unlimited: Illimité
     models:
       licence:
         one: Licence
