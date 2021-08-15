@@ -10,7 +10,6 @@ describe Schematics::Attributes::Jsonb do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Cacheable) }
 
   its(:type) { is_expected.to eq('jsonb') }
   its(:column_name) { is_expected.to eq('preferences') }
