@@ -21,19 +21,16 @@ module Schematics
       def prefixed(key)
         [
           @resource.class.name.underscore.pluralize,
-          (@resource.id unless cache_all_keys?),
+          (@resource.id unless entity.is_a?(Entities::Singleton)),
           key
         ].compact.join(':')
       end
 
       def cached_keys
         entity
-          .send(cache_all_keys? ? :attributes : :cacheable_attributes)
+          .attributes
+          .select(&:cached?)
           .map(&:name)
-      end
-
-      def cache_all_keys?
-        entity.is_a?(Entities::Singleton)
       end
     end
   end
