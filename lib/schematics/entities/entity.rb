@@ -75,16 +75,18 @@ module Schematics
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           send(method.to_sym).send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
-          elements = send(method.to_sym).send(predicate, Behaviours.const_get(constant))
           case constant
-          when :Migratable, :Cacheable
-            elements
+          when :Migratable
+            send(method.to_sym).send(predicate, Behaviours::Migratable)
           when :Fillable
-            elements
+            send(method.to_sym)
+              .send(predicate, Behaviours::Fillable)
               .reject(&:hidden?)
               .reject(&:readonly?)
           else
-            elements.reject(&:hidden?)
+            send(method.to_sym)
+              .send(predicate, Behaviours.const_get(constant))
+              .reject(&:hidden?)
           end
         else
           super
