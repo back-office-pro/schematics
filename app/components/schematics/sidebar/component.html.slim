@@ -1,6 +1,6 @@
 .sidebar-sticky data-controller='sidebar'
   .sidebar-brand.d-flex.align-items-center.text-white.text-nowrap.justify-content-center
-    = setting(:company_name)
+    = settings(:company_name)
   ul.nav.nav-light.flex-column.flex-nowrap
     li.nav-item.mb-3
     - entities.sort_by(&:name).each do |entity|

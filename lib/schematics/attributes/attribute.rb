@@ -6,7 +6,7 @@ module Schematics
       include Behaviours::Migratable
       include Behaviours::Validatable
 
-      delegate :hidden?, to: :options
+      delegate :hidden?, :cached?, to: :options
       attr_reader :entity, :name, :options
 
       class << self

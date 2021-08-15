@@ -158,6 +158,12 @@
         },
         "size": {
           "type": "integer"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "cache": {
+          "type": "boolean"
         }
       }
     },
