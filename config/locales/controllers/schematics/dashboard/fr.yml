@@ -3,10 +3,27 @@ fr:
   schematics:
     dashboard:
       admin:
-        api: Accès API
-        profiler: Performance API
-        schema: Editer mon application
-        sidekiq: Tâches de fond
+        api:
+          caption: Documentation de l'API pour les développeurs
+          title: Accès API
+        licence:
+          expires_at: Valable jusqu'au %{date}
+        profiler:
+          caption: Moniter les performances des endpoints de l'API
+          title: Performance API
+        quota:
+          entities: Quota resources
+          storage: Quota stockage
+          users: Quota utilisateurs
+        schema:
+          caption: Editeur du schéma de l'application
+          title: Editer mon application
+        settings:
+          caption: Gérer les paramètres de l'application
+          title: Paramètres application
+        sidekiq:
+          caption: Gérer les tâches de fond de l'application (avancé)
+          title: Tâches de fond
       home:
         graphics:
           agregate:

@@ -3,10 +3,27 @@ en:
   schematics:
     dashboard:
       admin:
-        api: API access
-        profiler: API performance
-        schema: Edit my application
-        sidekiq: Background jobs
+        api:
+          caption: API documentation for developers
+          title: API access
+        licence:
+          expires_at: Valid until %{date}
+        profiler:
+          caption: Monitor API endpoint performance
+          title: API performance
+        quota:
+          entities: Resources quota
+          storage: Storage quota
+          users: Users quota
+        schema:
+          caption: Application schema editor
+          title: Edit my application
+        settings:
+          caption: Manage application settings
+          title: Application settings
+        sidekiq:
+          caption: Manage application background tasks (advanced)
+          title: Background tasks
       home:
         graphics:
           agregate:

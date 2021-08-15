@@ -8,7 +8,7 @@
             = link_to main_app.licences_path, class: 'text-decoration-none' do
               = fa_icon :id_badge, size: '3x', class: 'd-inline-block'
               h5.my-4 = licence
-              .text-muted Valable jusqu'au #{l(licence.expires_at, format: '%A %d %B %Y')}
+              .text-muted = t('.licence.expires_at', date: l(licence.expires_at, format: '%A %d %B %Y'))
   .col-xl-3.col-md-6.mb-3
     .card.border-0
       .card-body.p-3
@@ -16,7 +16,7 @@
           .col.text-center.p-4
             = link_to main_app.users_path, class: 'text-decoration-none' do
               = fa_icon :user, size: '3x', class: 'd-inline-block'
-              h5.my-4 Quota utilisateurs
+              h5.my-4 = t('.quota.users')
               .progress
                 .progress-bar.progress-bar-striped.progress-bar-animated {
                   role='progressbar'
@@ -33,7 +33,7 @@
           .col.text-center.p-4
             = link_to main_app.directories_path, class: 'text-decoration-none' do
               = fa_icon :hdd, size: '3x', class: 'd-inline-block'
-              h5.my-4 Quota stockage
+              h5.my-4 = t('.quota.storage')
               .progress
                 .progress-bar.progress-bar-striped.progress-bar-animated {
                   role='progressbar'
@@ -49,7 +49,7 @@
         .row.no-gutters.align-items-center
           .col.text-center.p-4
             = fa_icon :bezier_curve, size: '3x', class: 'd-inline-block text-primary'
-            h5.text-primary.my-4 Quota resources
+            h5.text-primary.my-4 = t('.quota.entities')
             .progress
               .progress-bar.progress-bar-striped.progress-bar-animated {
                   role='progressbar'
@@ -67,8 +67,8 @@
           .col.text-center.p-4
             = link_to main_app.edit_settings_path, class: 'text-decoration-none' do
               = fa_icon :cog, size: '3x', class: 'd-inline-block'
-              h5.my-4 Paramètres application
-              .text-muted Gérer les paramètres de l'application
+              h5.my-4 = t('.settings.title')
+              .text-muted = t('.settings.caption')
   .col-xl-3.col-md-6.mb-3
     .card.border-0
       .card-body.p-3
@@ -76,8 +76,8 @@
           .col.text-center.p-4
             = link_to edit_schema_path, class: 'text-decoration-none' do
               = fa_icon :paint_brush, size: '3x', class: 'd-inline-block'
-              h5.my-4 = t('.schema')
-              .text-muted Editeur du schéma de l'application
+              h5.my-4 = t('.schema.title')
+              .text-muted = t('.schema.caption')
   .col-xl-3.col-md-6.mb-3
     .card.border-0
       .card-body.p-3
@@ -87,8 +87,8 @@
                       class: 'text-decoration-none',
                       data: { turbolinks: false } do
               = fa_icon :project_diagram, size: '3x', class: 'd-inline-block'
-              h5.my-4 = t('.api')
-              .text-muted Documentation de l'API pour les développeurs
+              h5.my-4 = t('.api.title')
+              .text-muted = t('.api.caption')
   .col-xl-3.col-md-6.mb-3
     .card.border-0
       .card-body.p-3
@@ -98,8 +98,8 @@
                       class: 'text-decoration-none',
                       data: { turbolinks: false } do
               = fa_icon :tachometer_alt, size: '3x', class: 'd-inline-block'
-              h5.my-4 = t('.profiler')
-              .text-muted Moniter les performances des endpoints de l'API
+              h5.my-4 = t('.profiler.title')
+              .text-muted = t('.profiler.caption')
 .row
   .col-xl-3.col-md-6.mb-3
     .card.border-0
@@ -110,5 +110,5 @@
                       class: 'text-decoration-none',
                       data: { turbolinks: false } do
               = fa_icon :tasks, size: '3x', class: 'd-inline-block'
-              h5.my-4 = t('.sidekiq')
-              .text-muted Gérer les tâches de fond de l'application (avancé)
+              h5.my-4 = t('.sidekiq.title')
+              .text-muted = t('.sidekiq.caption')
