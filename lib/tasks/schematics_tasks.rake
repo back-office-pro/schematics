@@ -21,8 +21,8 @@ namespace :schematics do
   end
 
   namespace :licence do
-    desc 'Update application licence'
-    task :update, %i[plan term] => [:environment] do |_task, args|
+    desc 'Renew application licence'
+    task :renew, %i[plan term] => [:environment] do |_task, args|
       Licence.instance.update(
         plan: args[:plan],
         expires_at: args[:term].to_i.months.from_now

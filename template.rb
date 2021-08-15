@@ -21,7 +21,7 @@ after_bundle do
   rails_command 'db:fixtures:load' if options[:skip_listen]
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
-  rails_command 'schematics:licence:update[enterprise,12]'
+  rails_command 'schematics:licence:renew[enterprise,12]'
   rails_command 'dev:cache' if options[:skip_listen]
 
   # Ignore /doc directory
