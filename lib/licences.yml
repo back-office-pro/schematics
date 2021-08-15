@@ -10,7 +10,3 @@ enterprise:
   users: 1000
   storage: 100
   entities: 100
-unlimited:
-  users: .inf
-  storage: .inf
-  entities: .inf

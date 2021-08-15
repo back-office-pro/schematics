@@ -10,7 +10,6 @@ fr:
           business: Business
           enterprise: Entreprise
           pro: Pro
-          unlimited: Illimité
     models:
       licence:
         one: Licence
