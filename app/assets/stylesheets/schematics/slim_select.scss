@@ -1,0 +1,48 @@
+@import 'slim-select/dist/slimselect';
+
+.ss-main {
+  .ss-single-selected,
+  .ss-multi-selected {
+    background: transparent;
+    border: 0;
+    height: 32px;
+  }
+
+  .ss-multi-selected .ss-add {
+    margin: 11px 7px 0 0;
+  }
+
+  .ss-content {
+    border: 0;
+    border-radius: .25rem;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .08);
+    margin-left: -.5rem;
+
+    .ss-search-highlight {
+      background: #fcf8e3 !important;
+    }
+
+    .ss-option.ss-disabled {
+      background: transparent;
+    }
+  }
+}
+
+.ss-content .ss-search input {
+  border: 0;
+  color: inherit;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.ss-main.is-valid .ss-add,
+.ss-main.is-invalid .ss-add {
+  padding-right: 1.5rem;
+}
+
+.ss-main.is-valid .ss-arrow,
+.ss-main.is-invalid .ss-arrow {
+  padding-right: 1rem;
+}

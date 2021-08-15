@@ -2,7 +2,9 @@
   - @attributes.stable_sort_by(&:weight).each do |field|
     - case field
     - when Schematics::Associations::HasAndBelongsToMany
-      = f.association field.name.to_sym, as: :check_boxes
+      = f.association field.name.to_sym,
+                      wrapper: :input_group,
+                      prepend: fa_icon(field.icon)
     - when Schematics::Attributes::BelongsTo
       = f.association field.name.to_sym,
                       prompt: t('.prompt', name: human_attribute_name(field.name).downcase),

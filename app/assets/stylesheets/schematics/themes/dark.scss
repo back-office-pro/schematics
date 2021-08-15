@@ -49,3 +49,7 @@ $table-accent-bg: lighten($light, 2.5%);
 iframe.google-map {
   filter: invert(90%);
 }
+
+.ss-main .ss-content {
+  background: $card-bg !important;
+}
