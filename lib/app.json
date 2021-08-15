@@ -84,6 +84,7 @@
           "type": "jsonb",
           "options": {
             "hidden": true,
+            "cache": true,
             "default": {
               "theme": "light",
               "sidebar_toggled": false
@@ -174,7 +175,8 @@
           "name": "company_name",
           "type": "string",
           "options": {
-            "required": true
+            "required": true,
+            "cache": true
           }
         },
         {
@@ -189,6 +191,7 @@
           "name": "company_logo",
           "type": "attachment",
           "options": {
+            "cache": true,
             "content_type": [
               "png",
               "jpeg",
