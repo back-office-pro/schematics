@@ -307,14 +307,8 @@
     {
       "name": "licence",
       "type": "singleton",
-      "descriptor": "label",
+      "descriptor": "plan",
       "icon": "id_badge",
-      "virtuals": [
-        {
-          "name": "label",
-          "function": "Licence $plan"
-        }
-      ],
       "attributes": [
         {
           "name": "plan",
