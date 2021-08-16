@@ -7,6 +7,7 @@
 //= require font_awesome5
 //= require rails-timeago
 //= require locales/jquery.timeago.fr
+//= require jquery-resizable-columns/dist/jquery.resizableColumns.min
 //= require_tree .
 
 /* global $, Pagy, Turbolinks */
@@ -15,6 +16,7 @@ $(document).on('turbolinks:load', function () {
   Pagy.init()
   $('[data-toggle="tooltip"]').tooltip()
   $('.toast').toast({ delay: 5000 }).toast('show')
+  $('table').resizableColumns()
   $('.custom-file-input').on('change', function () {
     $(this)
       .siblings('.custom-file-label')

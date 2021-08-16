@@ -39,6 +39,7 @@ after_bundle do
   run 'yarn add file-saver@2.0.5'
   run 'yarn add flag-icon-css@3.5.0'
   run 'yarn add jquery@3.5.1'
+  run 'yarn add jquery-resizable-columns@0.2.3'
   run 'yarn add jquery-ui@1.12.1'
   run 'yarn add jquery-ujs@1.2.2'
   run 'yarn add slim-select@1.27.0'
