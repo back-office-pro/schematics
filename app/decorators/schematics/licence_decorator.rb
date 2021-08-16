@@ -18,8 +18,9 @@ module Schematics
     def entities_size
       Schematics::Schema
         .instance
-        .entities
-        .size - 8
+        .data_json
+        .fetch(:entities)
+        .size
     end
 
     def quota
