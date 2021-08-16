@@ -65,11 +65,17 @@ module Schematics
     end
 
     def app_json
-      JSON.parse(File.read(File.expand_path('../app.json', __dir__)), symbolize_names: true)
+      JSON.parse(
+        File.read(File.expand_path('../app.json', __dir__)),
+        symbolize_names: true
+      )
     end
 
     def data_json
-      JSON.parse(File.read(File.expand_path('../../spec/data.json', __dir__)), symbolize_names: true)
+      JSON.parse(
+        File.read(File.expand_path('../../spec/data.json', __dir__)),
+        symbolize_names: true
+      )
     end
 
     private
