@@ -7,7 +7,7 @@
           .col.text-center.p-4
             = link_to main_app.licences_path, class: 'text-decoration-none' do
               = fa_icon :id_badge, size: '3x', class: 'd-inline-block'
-              h5.my-4 = licence
+              h5.my-4 = licence.plan.titleize
               .text-muted = t('.licence.expires_at', date: l(licence.expires_at, format: '%A %d %B %Y'))
   .col-xl-3.col-md-6.mb-3
     .card.border-0
