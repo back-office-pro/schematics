@@ -36,16 +36,6 @@ $(document).on('turbolinks:load', function () {
       Turbolinks.visit($(this).data('href'))
     }
   })
-  $('.card-body[data-target]').on('click', function (e) {
-    const $target = $(e.target)
-    if (!$target.is('a') && !$target.parent().is('a')) {
-      $($(this).data('target')).modal('show')
-    }
-  })
-})
-
-$(document).on('show.bs.modal', '.modal', function () {
-  $(this).appendTo('body')
 })
 
 $(document).on('scroll', function () {
