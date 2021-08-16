@@ -303,6 +303,31 @@
           }
         }
       ]
+    },
+    {
+      "name": "licence",
+      "type": "singleton",
+      "descriptor": "plan",
+      "icon": "id_badge",
+      "attributes": [
+        {
+          "name": "plan",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "default": "free",
+            "values": [
+              "free",
+              "pro",
+              "enterprise"
+            ]
+          }
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp"
+        }
+      ]
     }
   ]
 }

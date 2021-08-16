@@ -1,0 +1,12 @@
+pro:
+  users: 3
+  storage: 1
+  entities: 5
+business:
+  users: 10
+  storage: 5
+  entities: 10
+enterprise:
+  users: 1000
+  storage: 100
+  entities: 100

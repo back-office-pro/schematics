@@ -50,6 +50,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'client_side_validations-simple_form', '~> 13.0.0'
   spec.add_dependency 'country_select', '~> 6.0.0'
   spec.add_dependency 'date_validator', '~> 0.12.0'
+  spec.add_dependency 'draper', '~> 4.0.2'
   spec.add_dependency 'font_awesome5_rails', '~> 1.5.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
   spec.add_dependency 'google-cloud-translate', '~> 3.2.2'

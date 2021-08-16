@@ -3,6 +3,7 @@ fr:
   titles:
     schematics:
       dashboard:
+        admin: Administration
         home: Tableau de bord
       exception:
         internal_server_error: Quelque chose s'est mal passé

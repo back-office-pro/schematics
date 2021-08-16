@@ -1,0 +1,16 @@
+---
+en:
+  activerecord:
+    attributes:
+      licence:
+        expires_at: Expires at
+        label: Label
+        plan: Plan
+        plans:
+          business: Business
+          enterprise: Enterprise
+          pro: Pro
+    models:
+      licence:
+        one: Licence
+        other: Licences

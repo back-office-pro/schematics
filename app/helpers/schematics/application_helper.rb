@@ -4,6 +4,7 @@ module Schematics
   module ApplicationHelper
     include Pagy::Frontend
     include FontAwesome5::Rails::IconHelper
+    delegate :licence, to: :current_ability
 
     def settings(key)
       Rails.cache.fetch("settings:#{key}") do

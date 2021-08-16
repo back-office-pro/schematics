@@ -60,23 +60,25 @@ module Schematics
       JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
     end
 
-    private
-
     def data
       @data ||= data_json.merge(app_json) { |_key, left, right| left + right }
     end
 
     def app_json
-      file_path = File.expand_path('../app.json', __dir__)
-      file = File.read(file_path)
-      JSON.parse(file, symbolize_names: true)
+      JSON.parse(
+        File.read(File.expand_path('../app.json', __dir__)),
+        symbolize_names: true
+      )
     end
 
     def data_json
-      file_path = File.expand_path('../../spec/data.json', __dir__)
-      file = File.read(file_path)
-      JSON.parse(file, symbolize_names: true)
+      JSON.parse(
+        File.read(File.expand_path('../../spec/data.json', __dir__)),
+        symbolize_names: true
+      )
     end
+
+    private
 
     def add_inverse_entity_to_association_attributes
       @entities.each do |entity|
