@@ -86,13 +86,10 @@ footer {
   text-decoration: underline;
 }
 
-.table.table-hover td:first-child {
+.table.table-hover td:first-child,
+.table.table-hover th:first-child {
   left: 0;
   position: sticky;
-  width: 1%;
-}
-
-.table.table-hover thead:first-child th:first-child {
   width: 1%;
 }
 
