@@ -12,5 +12,5 @@
             td.text-nowrap.text-center
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-              td.text-nowrap.text-center.align-middle
+              td.text-nowrap.text-center.align-middle.animate__animated.animate__slideInDown class=column_css_class(field)
                 = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
