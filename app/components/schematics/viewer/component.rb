@@ -34,7 +34,7 @@ module Schematics
       def column_css_class(field)
         preference = "col_#{entity.name}_#{field.name}"
         return preference if preferences.fetch(preference, true)
-        
+
         "#{preference} d-none"
       end
     end
