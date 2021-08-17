@@ -3,6 +3,7 @@
 module Schematics
   module Viewer
     class Component < ApplicationComponent
+      delegate :preferences, to: :current_user
       delegate :can?, to: :current_ability
       delegate :klass, to: :@resources
       delegate :entity, to: :klass
@@ -28,6 +29,13 @@ module Schematics
       def initialize(resources:)
         super
         @resources = resources
+      end
+
+      def column_css_class(field)
+        preference = "col_#{entity.name}_#{field.name}"
+        return preference if preferences.fetch(preference, true)
+        
+        "#{preference} d-none"
       end
     end
   end

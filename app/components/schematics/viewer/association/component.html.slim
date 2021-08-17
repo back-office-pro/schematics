@@ -20,7 +20,7 @@
             tr
               th.text-nowrap.text-center.align-middle
               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-                th.text-nowrap.text-center.align-middle
+                th.text-nowrap.text-center.align-middle class=column_css_class(field)
                   = fa_icon field.icon, class: 'mr-2 text-dark'
                   = klass.human_attribute_name(field.name)
           tbody
@@ -49,5 +49,5 @@
                                    data: confirm_data.merge({ toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }) do
                           = fa_icon(:trash)
                 - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-                  td.text-nowrap.text-center.align-middle
+                  td.text-nowrap.text-center.align-middle class=column_css_class(field)
                     = render Schematics::Resource::Component.new(resource: resource, field: field)
