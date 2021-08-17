@@ -46,19 +46,32 @@ module Schematics
     end
 
     def permitted_preference_params
-      @permitted_preference_params ||= Schematics::Schema
-                                       .instance
-                                       .entities
-                                       .sort_by(&:name)
-                                       .flat_map(&method(:preferences_by_entity))
-                                       .map(&:to_sym)
-                                       .push(:sidebar_toggled, :theme)
+      @permitted_preference_params ||= timeline_preferences
+                                       .concat(viewer_preferences)
+                                       .concat(dashboard_preferences)
     end
 
-    def preferences_by_entity(entity)
-      Version::EVENTS
-        .select { |action| current_ability.can?(action.to_sym, entity.class_name.constantize) }
-        .map { |action| [action, entity.class_name].join('_') }
+    def timeline_preferences
+      Schematics::Schema
+        .instance
+        .entities
+        .flat_map do |entity|
+          Version::EVENTS
+            .select { |action| current_ability.can?(action.to_sym, entity.class_name.constantize) }
+            .map { |action| [action, entity.class_name].join('_') }
+        end
+    end
+
+    def viewer_preferences
+      Schematics::Schema
+        .instance
+        .entities
+        .flat_map(&:listable_elements)
+        .map { |element| "col_#{element.entity.name}_#{element.name}" }
+    end
+
+    def dashboard_preferences
+      %i[sidebar_toggled theme]
     end
   end
 end
