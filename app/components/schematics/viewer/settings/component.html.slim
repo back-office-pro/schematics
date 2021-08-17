@@ -1,0 +1,21 @@
+.dropdown.no-arrow.position-static data-controller='viewerSettings'
+  button#settings-dropdown.btn.btn-sm.btn-light.dropdown-toggle.d-none.d-sm-inline {
+    aria-expanded="false"
+    aria-haspopup="true"
+    data-toggle="dropdown"
+    type="button"
+  }
+    = fa_icon :ellipsis_v
+  .dropdown-menu.border-0.shadow-sm.dropdown-menu-left.animate__animated.animate__zoomIn.p-0 {
+    aria-labelledby='settings-dropdown'
+    data-action='click->viewerSettings#keepOpened'
+  }
+    h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
+    .dropdown-item
+      = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted, label: t('.archives'))
+    - listable_elements.stable_sort_by(&:weight).each do |field|
+      .dropdown-item
+        .custom-control.custom-switch data-action='input->viewerSettings#toggleColumn'
+          - id = "col_#{@entity.name}_#{field.name}"
+          = check_box 'preferences', id, { class: 'custom-control-input', id: id, checked: checked?(id) }, '', ''
+          = label_tag id, model_class.human_attribute_name(field.name), class: 'custom-control-label float-left', for: id
