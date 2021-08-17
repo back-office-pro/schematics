@@ -7,6 +7,10 @@ module Schematics
         def active?
           value == 'true'
         end
+
+        def display_label?
+          @field == :with_deleted
+        end
       end
     end
   end

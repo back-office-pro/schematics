@@ -12,7 +12,7 @@
   }
     h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
     .dropdown-item
-      = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted, label: t('.archives'))
+      = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
     - listable_elements.stable_sort_by(&:weight).each do |field|
       .dropdown-item
         .custom-control.custom-switch data-action='input->viewerSettings#toggleColumn'
