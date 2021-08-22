@@ -1,3 +1,3 @@
-.custom-control.custom-switch.mx-auto class=('w-0' unless display_label?)
+.custom-control.custom-switch.mx-auto class=('w-0' if label.blank?)
   = check_box_tag filter_name, 'true', active?, onchange: '$(this.form).submit()', class: 'custom-control-input'
-  = label_tag filter_name, t(".#{name}", default: ''), class: 'custom-control-label'
+  = label_tag filter_name, label, class: 'custom-control-label'

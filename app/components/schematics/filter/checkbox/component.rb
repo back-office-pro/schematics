@@ -8,8 +8,8 @@ module Schematics
           value == 'true'
         end
 
-        def display_label?
-          @field == :with_deleted
+        def label
+          t(".#{name}", default: '')
         end
       end
     end
