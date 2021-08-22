@@ -12,15 +12,15 @@ module Schematics
       end
     end
 
-    def preferences(key)
+    def preferences(key, default: nil)
       Rails
         .cache
         .fetch("users:#{current_user.id}:preferences") { current_user.preferences }
-        .fetch(key.to_s)
+        .fetch(key.to_s, default)
     end
 
     def has_preference?(key)
-      preferences.fetch(key, true)
+      preferences(key, default: true)
     end
 
     def confirm_data

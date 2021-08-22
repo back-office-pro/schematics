@@ -4,7 +4,7 @@ module Schematics
   module Filter
     class Component < ApplicationComponent
       delegate :entity, to: :@model_class
-      delegate :has_preference?, to: :current_user
+      delegate :has_preference?, to: :helpers
 
       class << self
         def create(field:, model_class:)

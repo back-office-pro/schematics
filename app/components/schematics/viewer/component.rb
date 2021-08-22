@@ -3,7 +3,7 @@
 module Schematics
   module Viewer
     class Component < ApplicationComponent
-      delegate :has_preference?, to: :current_user
+      delegate :has_preference?, to: :helpers
       delegate :can?, to: :current_ability
       delegate :klass, to: :@resources
       delegate :entity, to: :klass
