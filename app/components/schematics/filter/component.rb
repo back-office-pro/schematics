@@ -47,7 +47,7 @@ module Schematics
         @model_class.human_attribute_name(name).downcase
       end
 
-      def column_css_class(field)
+      def col_preference_class(field)
         preference = "col_#{entity.name}_#{field.name}"
         return preference if has_preference?(preference)
 

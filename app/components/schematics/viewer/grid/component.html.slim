@@ -31,7 +31,7 @@
                                     span.carousel-control-next-icon aria-hidden='true'
                                     span.sr-only Next
                             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-                              tr.animate__animated.animate__slideInRight class=column_css_class(field)
+                              tr.animate__slideInRight class=col_preference_class(field)
                                 th.text-truncate
                                   = fa_icon field.icon, class: 'mr-2 text-muted'
                                   = klass.human_attribute_name(field.name)
