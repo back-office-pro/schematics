@@ -4,7 +4,7 @@ module Schematics
   module Filter
     class Component < ApplicationComponent
       delegate :entity, to: :@model_class
-      delegate :preferences, to: :current_user
+      delegate :has_preference?, to: :current_user
 
       class << self
         def create(field:, model_class:)
@@ -49,7 +49,7 @@ module Schematics
 
       def column_css_class(field)
         preference = "col_#{entity.name}_#{field.name}"
-        return preference if preferences.fetch(preference, true)
+        return preference if has_preference?(preference)
 
         "#{preference} d-none"
       end

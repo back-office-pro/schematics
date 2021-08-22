@@ -16,7 +16,7 @@
             td.text-center
               - if can?(action.to_sym, model_class)
                 .custom-control.custom-switch
-                  = check_box 'preferences', preference, { class: 'custom-control-input', checked: checked?(preference) }, 'true', 'false'
+                  = check_box 'preferences', preference, { class: 'custom-control-input', checked: has_preference?(preference) }, 'true', 'false'
                   = label_tag preference, '', class: 'custom-control-label', for: "preferences_#{preference}"
   .m-3
     = button_tag class: 'btn btn-primary btn-sm btn-icon-split' do

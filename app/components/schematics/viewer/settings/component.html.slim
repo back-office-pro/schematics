@@ -16,6 +16,6 @@
     - listable_elements.stable_sort_by(&:weight).each do |field|
       .dropdown-item
         .custom-control.custom-switch data-action='input->viewerSettings#toggleColumn'
-          - id = "col_#{@entity.name}_#{field.name}"
-          = check_box 'preferences', id, { class: 'custom-control-input', id: id, checked: checked?(id) }, '', ''
-          = label_tag id, model_class.human_attribute_name(field.name), class: 'custom-control-label float-left', for: id
+          - preference = "col_#{@entity.name}_#{field.name}"
+          = check_box 'preferences', preference, { class: 'custom-control-input', id: preference, checked: has_preference?(preference) }, '', ''
+          = label_tag preference, model_class.human_attribute_name(field.name), class: 'custom-control-label float-left', for: preference

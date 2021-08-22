@@ -19,6 +19,10 @@ module Schematics
         .fetch(key.to_s)
     end
 
+    def has_preference?(key)
+      preferences.fetch(key, true)
+    end
+
     def confirm_data
       {
         confirm: t('schematics.application.delete.title'),
