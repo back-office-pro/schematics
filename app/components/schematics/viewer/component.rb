@@ -3,7 +3,7 @@
 module Schematics
   module Viewer
     class Component < ApplicationComponent
-      delegate :has_preference?, to: :helpers
+      delegate :preferences, to: :helpers
       delegate :can?, to: :current_ability
       delegate :klass, to: :@resources
       delegate :entity, to: :klass
@@ -33,7 +33,7 @@ module Schematics
 
       def col_preference_class(field)
         preference = "col_#{entity.name}_#{field.name}"
-        return preference if has_preference?(preference)
+        return preference if preferences(preference, true)
 
         "#{preference} d-none"
       end

@@ -5,7 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :entities, to: 'Schematics::Schema.instance'
       delegate :preferences_path, :root_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :has_preference?, to: :helpers
+      delegate :preferences, to: :helpers
       delegate :can?, to: :current_ability
 
       def events

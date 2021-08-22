@@ -17,5 +17,5 @@
       .dropdown-item
         .custom-control.custom-switch data-action='input->viewerSettings#toggleColumn'
           - preference = "col_#{@entity.name}_#{field.name}"
-          = check_box 'preferences', preference, { class: 'custom-control-input', id: preference, checked: has_preference?(preference) }, '', ''
+          = check_box 'preferences', preference, { class: 'custom-control-input', id: preference, checked: preferences(preference, true) }, '', ''
           = label_tag preference, model_class.human_attribute_name(field.name), class: 'custom-control-label float-left', for: preference
