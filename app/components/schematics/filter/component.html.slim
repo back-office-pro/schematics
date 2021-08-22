@@ -1,13 +1,11 @@
 thead.border-bottom.border-light
   tr
-    th.text-nowrap.text-center.pb-0
-      = fa_icon :archive, class: 'text-dark mr-2'
+    th.align-top rowspan='2'
+      = render Schematics::Viewer::Settings::Component.new(entity: entity)
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-        th.text-nowrap.text-center.pb-0
+        th.text-nowrap.text-center.pb-0.animate__slideInDown class=col_preference_class(field)
           = render Schematics::SortLink::Component.new(field: field, model_class: @model_class)
   tr
-    td.text-nowrap.align-middle.p-0
-      = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-        td.align-middle.text-center.p-0
+        td.align-middle.text-center.p-0.animate__slideInDown class=col_preference_class(field)
           = render Schematics::Filter::Component.create(field: field, model_class: @model_class)

@@ -4,6 +4,7 @@ module Schematics
   module Filter
     class Component < ApplicationComponent
       delegate :entity, to: :@model_class
+      delegate :preferences, to: :helpers
 
       class << self
         def create(field:, model_class:)
@@ -44,6 +45,13 @@ module Schematics
 
       def attribute_name
         @model_class.human_attribute_name(name).downcase
+      end
+
+      def col_preference_class(field)
+        preference = "col_#{entity.name}_#{field.name}"
+        return preference if preferences(preference, true)
+
+        "#{preference} d-none"
       end
     end
   end

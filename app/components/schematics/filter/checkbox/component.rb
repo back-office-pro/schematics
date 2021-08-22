@@ -7,6 +7,10 @@ module Schematics
         def active?
           value == 'true'
         end
+
+        def label
+          t(".#{name}", default: '')
+        end
       end
     end
   end

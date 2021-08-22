@@ -2,8 +2,6 @@
 
 module Schematics
   class CsvSerializer < CsvTemplateSerializer
-    delegate :listable_elements, to: :entity
-
     def initialize(model_class, resources)
       super(model_class)
       @resources = resources
@@ -24,7 +22,7 @@ module Schematics
     end
 
     def content(resource)
-      listable_elements.stable_sort_by(&:weight).map do |element|
+      elements.stable_sort_by(&:weight).map do |element|
         Array.wrap(element.format(resource.public_send(element.name))).join(' ')
       end
     end

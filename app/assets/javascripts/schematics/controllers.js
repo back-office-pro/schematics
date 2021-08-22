@@ -5,9 +5,20 @@
 //= require switch_theme/component
 //= require search_bar/component
 //= require filter/typeahead/component
+//= require viewer/settings/component
 //= require ./controllers/generate_file_in_background_controller
 
-/* global Stimulus, fetch, SwitchThemeController, NotificationCenterController, SidebarController, SearchBarController, TypeaheadController, GenerateFileInBackgroundController */
+/*
+  global Stimulus,
+         fetch,
+         SwitchThemeController,
+         NotificationCenterController,
+         SidebarController,
+         SearchBarController,
+         TypeaheadController,
+         GenerateFileInBackgroundController,
+         ViewerSettings
+*/
 
 window.fetchAPI = (url, method = 'GET', data) => {
   const csrfToken = document.querySelector("[name='csrf-token']").content
@@ -31,3 +42,4 @@ application.register('sidebar', SidebarController)
 application.register('searchBar', SearchBarController)
 application.register('typeahead', TypeaheadController)
 application.register('generateFileInBackground', GenerateFileInBackgroundController)
+application.register('viewerSettings', ViewerSettings)
