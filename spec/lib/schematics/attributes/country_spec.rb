@@ -39,7 +39,7 @@ describe Schematics::Attributes::Country do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      country&.parameterize(separator: ' ')
+      country
     RUBY
   end
 

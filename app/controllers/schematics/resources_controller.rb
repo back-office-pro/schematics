@@ -178,7 +178,7 @@ module Schematics
 
     def autocomplete
       field = params[:field].to_sym
-      @resources = model_class.search(**search_params.merge(select: field))
+      @resources = model_class.search(**search_params.merge(select: field, load: false))
       render json: @resources.map(&field).map(&:to_s).uniq
     end
 

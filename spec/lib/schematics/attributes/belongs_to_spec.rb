@@ -44,7 +44,7 @@ describe Schematics::Attributes::BelongsTo do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      schema&.title&.parameterize(separator: ' ')
+      schema&.title
     RUBY
   end
 

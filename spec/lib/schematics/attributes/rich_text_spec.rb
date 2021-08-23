@@ -22,7 +22,7 @@ describe Schematics::Attributes::RichText do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      summary&.to_plain_text&.parameterize(separator: ' ')
+      summary&.to_plain_text
     RUBY
   end
 

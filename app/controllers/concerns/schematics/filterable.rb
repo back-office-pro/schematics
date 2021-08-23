@@ -38,7 +38,7 @@ module Schematics
       in lte:
         { lte: cast_comparison(lte) }
       else
-        /.*#{value.parameterize(separator: ' ')}.*/
+        /.*#{value}.*/i
       end
     end
 

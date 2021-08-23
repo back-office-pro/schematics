@@ -30,7 +30,7 @@ describe Schematics::Virtuals::Concatenation do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      full_name&.to_s&.parameterize(separator: ' ')
+      full_name&.to_s
     RUBY
   end
 

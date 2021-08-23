@@ -52,7 +52,7 @@ describe Schematics::Attributes::Attachment do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      (avatar.filename.to_s.parameterize(separator: ' ') if avatar.attached?)
+      (avatar.filename.to_s if avatar.attached?)
     RUBY
   end
 

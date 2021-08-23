@@ -33,7 +33,7 @@ describe Schematics::Attributes::Phone do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      phone&.parameterize(separator: ' ')
+      phone
     RUBY
   end
 
