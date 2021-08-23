@@ -83,7 +83,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'route_translator', '~> 10.0.0'
   spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.0.2'
-  spec.add_dependency 'searchkick', '~> 4.5.2'
+  spec.add_dependency 'searchkick', '>= 4.5.2', '< 4.7.0'
   spec.add_dependency 'selenium-webdriver', '~> 4.0.0.beta4'
   spec.add_dependency 'shoulda-matchers', '~> 5.0.0'
   spec.add_dependency 'sidekiq', '~> 6.2.1'
