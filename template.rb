@@ -43,6 +43,7 @@ after_bundle do
   run 'yarn add jquery-ui@1.12.1'
   run 'yarn add jquery-ujs@1.2.2'
   run 'yarn add slim-select@1.27.0'
+  run 'yarn add sortablejs@1.14.0'
   run 'yarn add stimulus@2.0.0'
   run 'yarn add sweetalert2@5.1.1'
 

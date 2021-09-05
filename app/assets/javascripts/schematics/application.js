@@ -8,12 +8,14 @@
 //= require rails-timeago
 //= require locales/jquery.timeago.fr
 //= require jquery-resizable-columns/dist/jquery.resizableColumns.min
+//= require sortablejs/Sortable
 //= require_tree .
 
-/* global $, Pagy, Turbolinks */
+/* global $, Pagy, Turbolinks, Sortable */
 
 $(document).on('turbolinks:load', function () {
   Pagy.init()
+  Sortable.create(document.querySelector('tbody'))
   $('[data-toggle="tooltip"]').tooltip()
   $('.toast').toast({ delay: 5000 }).toast('show')
   $('table').resizableColumns()
