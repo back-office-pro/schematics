@@ -12,7 +12,7 @@ module Schematics
 
     def current_locale
       current_user&.locale&.downcase ||
-        I18n.available_locales.include?(http_header_locale) && http_header_locale ||
+        (I18n.available_locales.include?(http_header_locale) && http_header_locale) ||
         I18n.default_locale
     end
 

@@ -39,7 +39,7 @@ module Schematics
       end
 
       def border_width
-        %w[line area].include?(@type) && 1 || 0
+        (%w[line area].include?(@type) && 1) || 0
       end
 
       def title

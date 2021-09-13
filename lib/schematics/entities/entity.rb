@@ -97,7 +97,7 @@ module Schematics
         _non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
-        Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant) ||
+        (Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)) ||
           Behaviours.const_defined?(constant) ||
           super
       end
