@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'scss_lint', '~> 0.59.0'
   spec.add_development_dependency 'simplecov', '~> 0.21.2'
   spec.add_development_dependency 'slim_lint', '~> 0.22.1'
-  spec.add_development_dependency 'webpacker', '~> 5.4.2'
+  spec.add_development_dependency 'webpacker', '~> 5.4.3'
   spec.add_development_dependency 'zeitwerk', '~> 2.4.2'
   spec.add_dependency 'active_link_to', '~> 1.0.5'
   spec.add_dependency 'active_model_serializers', '~> 0.10.12'
