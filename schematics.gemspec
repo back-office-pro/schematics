@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 1.21.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.11.5'
   spec.add_development_dependency 'rubocop-rails', '~> 2.12.2'
-  spec.add_development_dependency 'rubocop-rspec', '~> 2.4.0'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.5.0'
   spec.add_development_dependency 'scss_lint', '~> 0.59.0'
   spec.add_development_dependency 'simplecov', '~> 0.21.2'
   spec.add_development_dependency 'slim_lint', '~> 0.22.1'
