@@ -62,7 +62,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'image_processing', '~> 1.12.1'
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'json-schema', '~> 2.8.1'
-  spec.add_dependency 'jwt', '~> 2.2.2'
+  spec.add_dependency 'jwt', '>= 2.2.2', '< 2.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mini_magick', '>= 4.11.0'
   spec.add_dependency 'oj', '~> 3.13.7'
