@@ -38,7 +38,7 @@ module Schematics
       in lte:
         { lte: cast_comparison(lte) }
       else
-        /.*#{value}.*/i
+        { ilike: "%#{value}%" }
       end
     end
 
