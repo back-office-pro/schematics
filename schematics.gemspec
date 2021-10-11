@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'cancancan', '~> 3.3.0'
   spec.add_dependency 'chartkick', '~> 4.0.5'
   spec.add_dependency 'chroma', '~> 0.2.0'
-  spec.add_dependency 'client_side_validations', '~> 19.0.0'
+  spec.add_dependency 'client_side_validations', '>= 19.0', '< 19.2'
   spec.add_dependency 'client_side_validations-simple_form', '~> 14.0.0'
   spec.add_dependency 'country_select', '~> 6.0.0'
   spec.add_dependency 'date_validator', '~> 0.12.0'
