@@ -79,7 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails-timeago', '~> 2.19.1'
   spec.add_dependency 'ratonvirus', '~> 0.3.0'
   spec.add_dependency 'ratonvirus-clamby', '~> 0.3.0'
-  spec.add_dependency 'redis', '~> 4.4.0'
+  spec.add_dependency 'redis', '>= 4.4', '< 4.6'
   spec.add_dependency 'route_translator', '~> 11.0.0'
   spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.0.2'
