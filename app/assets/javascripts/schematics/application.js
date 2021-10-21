@@ -15,7 +15,7 @@
 
 $(document).on('turbolinks:load', function () {
   Pagy.init()
-  Sortable.create(document.querySelector('tbody'))
+  document.querySelectorAll('tbody').forEach(_ => Sortable.create(_))
   $('[data-toggle="tooltip"]').tooltip()
   $('.toast').toast({ delay: 5000 }).toast('show')
   $('table').resizableColumns()
