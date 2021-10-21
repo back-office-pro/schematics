@@ -66,7 +66,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mini_magick', '>= 4.11.0'
   spec.add_dependency 'oj', '~> 3.13.9'
-  spec.add_dependency 'pagy', '~> 4.11.0'
+  spec.add_dependency 'pagy', '~> 5.0.1'
   spec.add_dependency 'paper_trail', '~> 12.1.0'
   spec.add_dependency 'paranoia', '~> 2.4.3'
   spec.add_dependency 'phonelib', '~> 0.6.53'
