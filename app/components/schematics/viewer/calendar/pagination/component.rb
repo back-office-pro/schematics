@@ -12,6 +12,10 @@ module Schematics
             @entity = entity
           end
 
+          def render?
+            @entity.viewer == :calendar
+          end
+
           def start_attribute
             @entity.datetime_attributes.first.name.to_sym
           end
