@@ -37,11 +37,7 @@ html
           nav.navbar.navbar-light.navbar-expand.p-0.sticky-top
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3
-              = render Schematics::SearchBar::Component.new
-              = render Schematics::NotificationCenter::Component.new
-              = render Schematics::MessageCenter::Component.new
-              = render Schematics::SwitchTheme::Component.new
-              = render Schematics::MyAccount::Component.new
+              = render Schematics::Navbar::Component.new
           .container-fluid.my-3.px-3.animate__animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           = render Schematics::Footer::Component.new
