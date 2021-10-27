@@ -40,7 +40,7 @@ Metrics/ParameterLists:
 Performance/MethodObjectAsBlock:
   Enabled: false
 AllCops:
-  TargetRubyVersion: 3.0.0
+  TargetRubyVersion: 3.0.2
   NewCops: enable
   Exclude:
     - spec/dummy/**/*
