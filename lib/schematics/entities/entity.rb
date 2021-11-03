@@ -29,6 +29,7 @@ module Schematics
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
 
+        # FIXME: Should come from existing entities
         def active_storage_attachment(name:, icon:)
           create(
             name: name,
@@ -105,9 +106,9 @@ module Schematics
       def find_field_by_name(name)
         case name
         when 'created_at'
-          Attributes::Attribute.created_at(self)
+          Attributes::Date.new(self, 'created_at', required: true)
         when 'id'
-          Attributes::Attribute.id(self)
+          Attributes::Uuid.new(self, 'id', unique: true)
         else
           fields.find { |field| field.name == name }
         end
