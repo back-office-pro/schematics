@@ -4,18 +4,21 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
+        # OPTIMIZE: refactor with Pagination::Component
         def start_attribute
-          entity.datetime_attributes.first.name.to_sym
+          entity.datetime_attributes.first.name.to_sym # FIXME: could work randomly
         end
 
+        # OPTIMIZE: refactor with Pagination::Component
         def end_attribute
-          entity.datetime_attributes.second.name.to_sym
+          entity.datetime_attributes.second.name.to_sym # FIXME: could work randomly
         end
 
         def date_range
           (start_date.beginning_of_week..start_date.end_of_month.end_of_week).to_a
         end
 
+        # OPTIMIZE: refactor with Pagination::Component
         def start_date
           params.dig(:filter, start_attribute, :gte)&.to_date || Date.current.beginning_of_month
         end

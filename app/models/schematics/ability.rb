@@ -8,6 +8,7 @@ module Schematics
     def initialize(user)
       @user = user
       aliases
+      # TODO: Add specs with restricted account
       return can :manage, :all if Rails.env.test? # rubocop:disable Lint/ReturnInVoidContext
 
       user_permissions
@@ -75,7 +76,7 @@ module Schematics
         .map(&:model)
         .uniq
         .filter { |model| can?(:update, model.constantize) }
-        .each   { |model| can(:destroy, ActiveStorage::Attachment, { record_type: model }) }
+        .each   { |model| can(:destroy, ActiveStorage::Attachment, record_type: model) }
     end
 
     def version_permissions

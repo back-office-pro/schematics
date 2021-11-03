@@ -14,7 +14,7 @@ module Schematics
       class << self
         def create(belongs_to, type: 'has_many', name: nil)
           unless belongs_to.is_a?(Attributes::Association)
-            belongs_to = create_belongs_to(belongs_to, name, type)
+            belongs_to = create_belongs_to(belongs_to, name, type) # FIXME: way too tricky!
           end
           Associations.const_get(type.camelize.to_sym).new(belongs_to)
         end

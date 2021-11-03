@@ -33,6 +33,7 @@ module Schematics
         end
 
         def entity
+          # FIXME: Should come from existing entities
           klass.try(:entity) || Entities::Entity.active_storage_attachment(
             name: @resources.first.name,
             icon: @resources
