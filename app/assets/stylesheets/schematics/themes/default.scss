@@ -43,6 +43,15 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
   opacity: inherit !important;
 }
 
+.swal2-modal.show-swal2 {
+  background: $card-bg !important;
+
+  h2,
+  .swal2-content {
+    color: inherit !important;
+  }
+}
+
 button.swal2-confirm.styled {
   background: $primary !important;
 }
@@ -71,4 +80,15 @@ button.swal2-cancel.styled {
   .ss-list .ss-option:hover {
     background: $primary !important;
   }
+
+  .ss-content {
+    background: $card-bg !important;
+  }
+}
+
+// Timeline
+
+.timeline > li > .card::after {
+  border-left-color: $card-bg;
+  border-right-color: $card-bg;
 }
