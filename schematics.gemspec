@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0.0'
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
+  spec.add_development_dependency 'capybara', '~> 3.36.0'
   spec.add_development_dependency 'i18n-tasks', '~> 0.9.34'
   spec.add_development_dependency 'pg', '~> 1.2.3'
   spec.add_development_dependency 'reek', '~> 6.0.6'
