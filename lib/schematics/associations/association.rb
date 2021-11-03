@@ -12,26 +12,14 @@ module Schematics
       attr_writer :prefixed
 
       class << self
-        def create(belongs_to, type: 'has_many', name: nil)
-          unless belongs_to.is_a?(Attributes::Association)
-            belongs_to = create_belongs_to(belongs_to, name, type) # FIXME: way too tricky!
+        def create(entity_or_belongs_to, type: 'has_many', name: nil)
+          constant = Associations.const_get(type.camelize.to_sym)
+          case entity_or_belongs_to
+          when Entities::Entity
+            constant.new(Attributes::BelongsTo.new(entity_or_belongs_to, name, required: true))
+          when Attributes::Association
+            constant.new(entity_or_belongs_to)
           end
-          Associations.const_get(type.camelize.to_sym).new(belongs_to)
-        end
-
-        private
-
-        def create_belongs_to(entity, name, type)
-          Attributes::BelongsTo.new(
-            entity,
-            name,
-            options: {
-              required: true,
-              inverse: {
-                type: type
-              }
-            }
-          )
         end
       end
 
