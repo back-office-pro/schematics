@@ -22,6 +22,6 @@ describe Schematics::Attributes::Boolean do
   context 'when there is a default value' do
     let(:options) { { default: true } }
 
-    its(:options_for_migration) { is_expected.to eq({ default: true }) }
+    its(:options_for_migration) { is_expected.to eq(default: true) }
   end
 end

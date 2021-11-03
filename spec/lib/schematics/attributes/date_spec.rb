@@ -21,7 +21,7 @@ describe Schematics::Attributes::Date do
   its(:icon) { is_expected.to eq(:calendar_alt) }
   its(:input_type) { is_expected.to eq(:date) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq({ date: { allow_blank: true } }) }
+  its(:validators) { is_expected.to eq(date: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
@@ -35,7 +35,7 @@ describe Schematics::Attributes::Date do
   context 'when date is required' do
     let(:options) { { required: true } }
 
-    its(:validators) { is_expected.to eq({ presence: true, date: { allow_blank: false } }) }
+    its(:validators) { is_expected.to eq(presence: true, date: { allow_blank: false }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
@@ -47,7 +47,7 @@ describe Schematics::Attributes::Date do
   context 'when date has before option' do
     let(:options) { { before: 'start_at' } }
 
-    its(:validators) { is_expected.to eq({ date: { allow_blank: true, before: :start_at } }) }
+    its(:validators) { is_expected.to eq(date: { allow_blank: true, before: :start_at }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY

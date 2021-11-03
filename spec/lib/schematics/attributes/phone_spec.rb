@@ -20,7 +20,7 @@ describe Schematics::Attributes::Phone do
   its(:icon) { is_expected.to eq(:phone) }
   its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq({ phone: true }) }
+  its(:validators) { is_expected.to eq(phone: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.phone') }
   its(:to_s) { is_expected.to eq('schema:user_phone') }
@@ -45,7 +45,7 @@ describe Schematics::Attributes::Phone do
     its(:default) { is_expected.to match(/\d+/) }
 
     its(:validators) do
-      is_expected.to eq({ uniqueness: { case_sensitive: false }, presence: true, phone: true })
+      is_expected.to eq(uniqueness: { case_sensitive: false }, presence: true, phone: true)
     end
 
     its(:validate) do
@@ -59,7 +59,7 @@ describe Schematics::Attributes::Phone do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq({ presence: true, phone: true }) }
+    its(:validators) { is_expected.to eq(presence: true, phone: true) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY

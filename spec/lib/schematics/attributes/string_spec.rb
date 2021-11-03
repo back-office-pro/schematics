@@ -40,7 +40,7 @@ describe Schematics::Attributes::String do
     its(:default) { is_expected.not_to be_nil }
 
     its(:validators) do
-      is_expected.to eq({ uniqueness: { case_sensitive: false }, presence: true })
+      is_expected.to eq(uniqueness: { case_sensitive: false }, presence: true)
     end
 
     its(:validate) do
@@ -54,7 +54,7 @@ describe Schematics::Attributes::String do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq({ presence: true }) }
+    its(:validators) { is_expected.to eq(presence: true) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY

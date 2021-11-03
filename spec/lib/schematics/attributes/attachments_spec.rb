@@ -22,7 +22,7 @@ describe Schematics::Attributes::Attachments do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('directories.files') }
   its(:to_s) { is_expected.to eq('schema:directory_files') }
-  its(:preload) { is_expected.to eq({ files_attachments: [blob: :variant_records] }) }
+  its(:preload) { is_expected.to eq(files_attachments: [blob: :variant_records]) }
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 
@@ -69,7 +69,7 @@ describe Schematics::Attributes::Attachments do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq({ presence: true, antivirus: true, attached: true }) }
+    its(:validators) { is_expected.to eq(presence: true, antivirus: true, attached: true) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY

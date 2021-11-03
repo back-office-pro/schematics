@@ -25,7 +25,7 @@ describe Schematics::Attributes::Country do
   its(:icon) { is_expected.to eq(:globe_europe) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('FR') }
-  its(:validators) { is_expected.to eq({ inclusion: { in: ['FR'] }, allow_blank: true }) }
+  its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, allow_blank: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.country') }
   its(:to_s) { is_expected.to eq('schema:user_country') }
@@ -49,7 +49,7 @@ describe Schematics::Attributes::Country do
     its(:input_collection) { is_expected.to eq([%w[FR France]]) }
 
     its(:validators) do
-      is_expected.to eq({ inclusion: { in: ['FR'] }, presence: true, allow_blank: false })
+      is_expected.to eq(inclusion: { in: ['FR'] }, presence: true, allow_blank: false)
     end
 
     its(:validate) do

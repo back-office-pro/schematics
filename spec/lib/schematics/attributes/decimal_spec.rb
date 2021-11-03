@@ -22,14 +22,14 @@ describe Schematics::Attributes::Decimal do
   its(:type) { is_expected.to eq('decimal') }
   its(:column_name) { is_expected.to eq('price') }
   its(:unit) { is_expected.to eq('€') }
-  its(:validators) { is_expected.to eq({ numericality: { allow_nil: true } }) }
+  its(:validators) { is_expected.to eq(numericality: { allow_nil: true }) }
   its(:icon) { is_expected.to eq(:sort_numeric_up) }
 
   context 'when decimal has precision' do
     let(:options) { { precision: 2 } }
 
     its(:validators) do
-      is_expected.to eq({ numericality: { allow_nil: true, greater_than: -100, less_than: 100 } })
+      is_expected.to eq(numericality: { allow_nil: true, greater_than: -100, less_than: 100 })
     end
 
     its(:validate) do

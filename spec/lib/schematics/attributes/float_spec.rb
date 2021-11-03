@@ -22,6 +22,6 @@ describe Schematics::Attributes::Float do
   its(:type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('price') }
   its(:unit) { is_expected.to eq('€') }
-  its(:validators) { is_expected.to eq({ numericality: { allow_nil: true } }) }
+  its(:validators) { is_expected.to eq(numericality: { allow_nil: true }) }
   its(:icon) { is_expected.to eq(:sort_numeric_up) }
 end

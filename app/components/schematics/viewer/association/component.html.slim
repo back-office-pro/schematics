@@ -46,7 +46,7 @@
                           = fields.hidden_field :_destroy, value: true
                         = f.button :button,
                                    class: 'btn btn-danger btn-sm',
-                                   data: confirm_data.merge({ toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }) do
+                                   data: confirm_data.merge(toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy')) do
                           = fa_icon(:trash)
                 - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle class=col_preference_class(field)

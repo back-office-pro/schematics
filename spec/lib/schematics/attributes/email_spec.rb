@@ -20,7 +20,7 @@ describe Schematics::Attributes::Email do
   its(:icon) { is_expected.to eq(:envelope) }
   its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq({ email: true }) }
+  its(:validators) { is_expected.to eq(email: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
@@ -45,7 +45,7 @@ describe Schematics::Attributes::Email do
     its(:default) { is_expected.to match(/\w+@\w+\.com/) }
 
     its(:validators) do
-      is_expected.to eq({ uniqueness: { case_sensitive: false }, presence: true, email: true })
+      is_expected.to eq(uniqueness: { case_sensitive: false }, presence: true, email: true)
     end
 
     its(:validate) do
@@ -59,7 +59,7 @@ describe Schematics::Attributes::Email do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq({ presence: true, email: true }) }
+    its(:validators) { is_expected.to eq(presence: true, email: true) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
