@@ -3,7 +3,6 @@
 module Schematics
   class LicenceDecorator < Draper::Decorator
     delegate_all
-    decorates_finders
 
     LICENCES = YAML.load_file(Schematics::Engine.root.join('lib', 'licences.yml'))
 
