@@ -28,32 +28,6 @@ module Schematics
 
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
-
-        # FIXME: Should come from existing entities
-        def active_storage_attachment(name:, icon:)
-          create(
-            name: name,
-            icon: icon,
-            descriptor: 'filename',
-            attributes: [
-              {
-                name: 'filename',
-                type: 'string'
-              },
-              {
-                name: 'content_type',
-                type: 'string'
-              },
-              {
-                name: 'byte_size',
-                type: 'float',
-                options: {
-                  unit: 'bytes'
-                }
-              }
-            ]
-          )
-        end
       end
 
       # :reek:LongParameterList
@@ -186,8 +160,10 @@ module Schematics
       end
 
       def route
-        <<~RUBY
-          resources :#{name.pluralize}, model_name: '#{class_name}' do
+        resource, namespace = name.split('/').reverse
+
+        route = <<~RUBY
+          resources :#{resource.pluralize}, model_name: '#{class_name}' do
             member do
               get :delete
               delete :archive
@@ -195,10 +171,18 @@ module Schematics
             end
             collection do
               get :autocomplete
-              resources :imports, only: %i[new create], as: '#{name}_imports', format: false do
+              resources :imports, only: %i[new create], as: '#{resource}_imports', format: false do
                 get :template, on: :collection, format: :csv
               end
             end
+          end
+        RUBY
+
+        return route unless namespace
+
+        <<~RUBY
+          namespace :#{namespace} do
+            #{route}
           end
         RUBY
       end

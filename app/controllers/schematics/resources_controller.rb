@@ -22,8 +22,10 @@ module Schematics
     attr_reader :resource
 
     class << self
+      alias original_controller_path controller_path
+
       def model_class
-        controller_name.classify.constantize
+        original_controller_path.classify.constantize
       end
 
       def controller_path
@@ -209,7 +211,7 @@ module Schematics
 
     def set_breadcrumb
       breadcrumb t('titles.schematics.resources.index', model_name_plural: model_name_plural),
-                 model_class
+                 polymorphic_path(model_class)
     end
 
     def model_name_plural

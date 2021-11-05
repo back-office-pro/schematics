@@ -10,7 +10,7 @@
         .col-auto {
           data-controller='generateFileInBackground'
           data-generateFileInBackground-content-type='text/csv'
-          data-generateFileInBackground-url=polymorphic_path(model_class, format: :csv)
+          data-generateFileInBackground-url=main_app.polymorphic_path(model_class, format: :csv)
         }
           - if @pagy.pages > 1
             = select_tag :per_page,
@@ -31,7 +31,7 @@
               span.icon = fa_icon :plus
               span.text.d-none.d-lg-inline = t('schematics.application.button.add', model_name: @model_name)
           - unless params.except(:controller, :action, :locale, :page, :per_page, :model_name).empty?
-            = link_to polymorphic_path(model_class), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
+            = link_to main_app.polymorphic_path(model_class), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
               span.icon = fa_icon :eraser
               span.text.d-none.d-lg-inline = t('schematics.application.button.reset_filters')
     .card-body.p-0
