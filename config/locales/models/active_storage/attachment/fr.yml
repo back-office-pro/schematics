@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       active_storage/attachment:
+        blob: Fichier
         byte_size: Taille
         content_type: Type de fichier
         filename: Nom de fichier

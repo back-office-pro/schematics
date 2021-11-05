@@ -8,6 +8,7 @@ Rails.configuration.to_prepare do
       end
     end
 
+    ActiveStorage::Record.include(ActiveStorageSupport::SupportForBase64)
     ActiveStorage::Record.include(Schematics::Loadable)
   end
 end

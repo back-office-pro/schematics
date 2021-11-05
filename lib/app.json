@@ -172,6 +172,13 @@
             "readonly": true,
             "unit": "bytes"
           }
+        },
+        {
+          "name": "blob",
+          "type": "attachment",
+          "options": {
+            "readonly": true
+          }
         }
       ]
     },
