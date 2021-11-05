@@ -9,7 +9,6 @@ module Schematics
           generate_rspec_acceptance(entity.name),
           generate_deleted_at_migration(entity.name),
           generate_slug_migration(entity.name),
-          (generate_ancestry_migration(entity.name) if entity.is_a?(Entities::Tree)),
           entity
             .has_and_belongs_to_many_associations
             .reject { _1.entity.name.pluralize == _1.name }
@@ -18,6 +17,12 @@ module Schematics
             .association_attributes
             .map(&method(:generate_counter_cache_migration))
         ].flatten.compact.map(&:squish)
+      end
+
+      def generate_existing(entity)
+        [
+          generate_scaffold_controller(entity.name)
+        ].map(&:squish)
       end
 
       def destroy_entity(entity)
@@ -54,6 +59,12 @@ module Schematics
         SHELL
       end
 
+      def generate_scaffold_controller(name)
+        <<~SHELL
+          rails generate scaffold_controller #{name} --skip-resource-route
+        SHELL
+      end
+
       def generate_rspec_acceptance(name)
         <<~SHELL
           rails generate rspec:acceptance #{name}
@@ -69,12 +80,6 @@ module Schematics
       def generate_slug_migration(name)
         <<~SHELL
           rails generate migration add_slug_to_#{name.pluralize} slug:string:uniq
-        SHELL
-      end
-
-      def generate_ancestry_migration(name)
-        <<~SHELL
-          rails generate migration add_ancestry_to_#{name.pluralize} ancestry:string
         SHELL
       end
 
