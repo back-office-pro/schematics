@@ -31,7 +31,7 @@
       .card-body.p-3
         .row.no-gutters.align-items-center
           .col.text-center.p-4
-            = link_to main_app.directories_path, class: 'text-decoration-none' do
+            = link_to main_app.active_storage_attachments_path, class: 'text-decoration-none' do
               = fa_icon :hdd, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.quota.storage')
               .progress
