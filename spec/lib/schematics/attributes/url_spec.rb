@@ -33,7 +33,7 @@ describe Schematics::Attributes::Url do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      url
+      url.to_s
     RUBY
   end
 
