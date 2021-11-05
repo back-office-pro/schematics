@@ -22,12 +22,6 @@ module Schematics
         [super]
       end
 
-      def search_data
-        <<~RUBY
-          #{name}.map(&:filename).map(&:to_s).map(&:downcase)
-        RUBY
-      end
-
       def format(value)
         value.map do |attachment|
           Rails.application.routes.url_helpers.url_for(attachment)

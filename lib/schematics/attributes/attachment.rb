@@ -8,7 +8,6 @@ module Schematics
   module Attributes
     class Attachment < Attribute
       include Behaviours::Renderable
-      include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
 
@@ -30,12 +29,6 @@ module Schematics
 
       def preload
         { association_name => [blob: :variant_records] }
-      end
-
-      def search_data
-        <<~RUBY
-          (#{name}.filename.to_s if #{name}.attached?)
-        RUBY
       end
 
       def to_str
