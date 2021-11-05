@@ -48,7 +48,7 @@ module Schematics
       cannot %i[create update destroy archive], Permission
       cannot %i[read update destroy archive], Message
       cannot %i[create update destroy archive], Import
-      cannot :import, [Directory, Message, Permission, Import]
+      cannot :import, [ActiveStorage::Attachment, Message, Permission, Import]
       cannot %i[update archive], ActiveStorage::Attachment
       cannot :destroy, ActiveStorage::Attachment, { record_type: 'Import' }
       can :read, Message, recipient_id: user.id
@@ -59,7 +59,7 @@ module Schematics
     def licence_restrictions
       cannot :update, Licence
       cannot :create, User if licence.quota_users_exceeded?
-      cannot :create, Directory if licence.quota_storage_exceeded?
+      cannot :create, ActiveStorage::Attachment if licence.quota_storage_exceeded?
       cannot :manage, :all if licence.expired?
     end
 
