@@ -6,3 +6,7 @@ en:
         byte_size: Byte size
         content_type: Content type
         filename: Filename
+    models:
+      active_storage/attachment:
+        one: File
+        other: Files

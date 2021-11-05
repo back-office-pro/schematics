@@ -1,8 +1,9 @@
 ---
 fr:
   routes:
+    active_storage: stockage
+    attachments: fichiers
     delete: supprimer
-    directories: dossiers
     edit: editer
     files: fichiers
     import: importer
