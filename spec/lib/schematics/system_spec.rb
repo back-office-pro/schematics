@@ -41,43 +41,18 @@ describe Schematics::System do
   describe '.generate' do
     subject { system.generate(entity) }
 
-    context 'when entity is default entity' do
-      let(:expected_command_lines) do
-        [
-          'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
-          'rails generate rspec:acceptance role',
-          'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
-          'rails generate migration add_slug_to_roles slug:string:uniq',
-          'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
-          'rails generate migration add_roles_count_to_users roles_count:integer'
-        ]
-      end
-
-      it { is_expected.to eq(expected_command_lines) }
+    let(:expected_command_lines) do
+      [
+        'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
+        'rails generate rspec:acceptance role',
+        'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
+        'rails generate migration add_slug_to_roles slug:string:uniq',
+        'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
+        'rails generate migration add_roles_count_to_users roles_count:integer'
+      ]
     end
 
-    context 'when entity is tree' do
-      let(:entity) do
-        Schematics::Entities::Tree.create(
-          name: name,
-          attributes: attributes,
-          associations: associations
-        )
-      end
-      let(:expected_command_lines) do
-        [
-          'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
-          'rails generate rspec:acceptance role',
-          'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
-          'rails generate migration add_slug_to_roles slug:string:uniq',
-          'rails generate migration add_ancestry_to_roles ancestry:string',
-          'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
-          'rails generate migration add_roles_count_to_users roles_count:integer'
-        ]
-      end
-
-      it { is_expected.to eq(expected_command_lines) }
-    end
+    it { is_expected.to eq(expected_command_lines) }
   end
 
   describe '.destroy_entity' do
