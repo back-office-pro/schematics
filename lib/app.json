@@ -147,21 +147,31 @@
       ]
     },
     {
-      "name": "directory",
-      "type": "tree",
+      "name": "active_storage/attachment",
       "icon": "folder",
-      "descriptor": "name",
+      "descriptor": "filename",
       "attributes": [
         {
-          "name": "name",
+          "name": "filename",
           "type": "string",
           "options": {
-            "unique": true
+            "readonly": true
           }
         },
         {
-          "name": "files",
-          "type": "attachments"
+          "name": "content_type",
+          "type": "string",
+          "options": {
+            "readonly": true
+          }
+        },
+        {
+          "name": "byte_size",
+          "type": "float",
+          "options": {
+            "readonly": true,
+            "unit": "bytes"
+          }
         }
       ]
     },
