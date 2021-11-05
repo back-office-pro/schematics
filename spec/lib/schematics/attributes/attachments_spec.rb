@@ -10,7 +10,6 @@ describe Schematics::Attributes::Attachments do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
@@ -48,12 +47,6 @@ describe Schematics::Attributes::Attachments do
         { files_attachments_attributes: %i[id _destroy] }
       ]
     )
-  end
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      files.map(&:filename).map(&:to_s).map(&:downcase)
-    RUBY
   end
 
   its(:to_str) do

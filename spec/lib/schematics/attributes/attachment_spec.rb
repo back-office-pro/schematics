@@ -10,7 +10,6 @@ describe Schematics::Attributes::Attachment do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
@@ -48,12 +47,6 @@ describe Schematics::Attributes::Attachment do
         { avatar_attachment_attributes: %i[id _destroy] }
       ]
     )
-  end
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      (avatar.filename.to_s if avatar.attached?)
-    RUBY
   end
 
   its(:to_str) do
