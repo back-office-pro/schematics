@@ -8,6 +8,8 @@ namespace :schematics do
       .sorted_entities
       .flat_map(&Schematics::System.method(:generate))
       .each(&method(:system))
+    # TODO: check for existing constant
+    # if exists => generate_existing
   end
 
   desc 'Migrate schema application'
