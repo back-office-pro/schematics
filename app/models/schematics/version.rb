@@ -16,8 +16,8 @@ module Schematics
     scope :with_item, -> { includes(:item) }
 
     class << self
-      def timeline(ability:, versions: nil)
-        query = (versions || self)
+      def timeline(ability:, versions: self)
+        query = versions
                 .with_user
                 .with_item
                 .accessible_by(ability)
