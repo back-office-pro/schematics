@@ -229,13 +229,17 @@
       "attributes": [
         {
           "name": "model",
-          "type": "string"
+          "type": "string",
+          "options": {
+            "readonly": true
+          }
         },
         {
           "name": "action",
           "type": "enum",
           "options": {
             "required": true,
+            "readonly": true,
             "values": [
               "read",
               "create",
@@ -315,6 +319,7 @@
           "type": "enum",
           "options": {
             "required": true,
+            "readonly": true,
             "default": "free",
             "values": [
               "free",
