@@ -39,7 +39,7 @@ describe Schematics::Attributes::Country do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      country.to_s
+      country&.to_s
     RUBY
   end
 

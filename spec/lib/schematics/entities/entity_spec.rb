@@ -25,7 +25,7 @@ describe Schematics::Entities::Entity do
       def search_data
         {
           created_at: created_at,
-          name: name.to_s
+          name: name&.to_s
         }
       end
     RUBY

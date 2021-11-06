@@ -26,7 +26,7 @@ describe Schematics::Attributes::Text do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      content.to_s
+      content&.to_s
     RUBY
   end
 
