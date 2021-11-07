@@ -12,21 +12,7 @@ module Schematics
         end
 
         def title
-          @resources
-            .first
-            .record
-            .class
-            .human_attribute_name(@resources.first.name, count: @resources.size)
-        end
-
-        def icon
-          @resources
-            .first
-            .record
-            .class
-            .entity
-            .find_field_by_name(@resources.first.name)
-            .icon
+          klass.human_attribute_name(entity.name, count: @resources.size)
         end
 
         def random
