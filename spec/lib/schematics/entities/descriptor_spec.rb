@@ -18,8 +18,6 @@ describe Schematics::Entities::Descriptor do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      extend FriendlyId
-      friendly_id :type
       alias_attribute :to_s, :type
     RUBY
   end

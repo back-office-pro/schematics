@@ -4,11 +4,20 @@ module Schematics
   module Loadable
     extend ActiveSupport::Concern
 
+    included do
+      include ActiveStorageSupport::SupportForBase64
+    end
+
     class_methods do
+      attr_reader :concerns
+
       def inherited(subclass)
         super
         subclass.class_eval do
-          entity&.load
+          if entity
+            superclass.concerns.each(&method(:include))
+            entity.load
+          end
         end
       end
 
@@ -23,6 +32,12 @@ module Schematics
           .non_renderable_attributes
           .map(&:name)
           .map(&:to_sym)
+      end
+
+      private
+
+      def loadable(concerns: [])
+        @concerns = concerns
       end
     end
   end

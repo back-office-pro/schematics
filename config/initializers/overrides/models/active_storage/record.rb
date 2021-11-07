@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
-Rails.configuration.to_prepare do
-  if defined?(ActiveStorage)
-    ActiveStorage.singleton_class.module_eval do
-      def use_relative_model_naming?
-        false
-      end
-    end
-
-    ActiveStorage::Record.include(ActiveStorageSupport::SupportForBase64)
-    ActiveStorage::Record.include(Schematics::Loadable)
+ActiveSupport.on_load(:active_storage_record) do
+  ActiveStorage::Record.class_eval do
+    include Schematics::Loadable
+    loadable concerns: [Schematics::Elasticsearchable, Schematics::SoftDeletable]
   end
 end

@@ -188,17 +188,7 @@ module Schematics
       end
 
       def to_str
-        <<~RUBY
-          extend Pagy::Searchkick
-          has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
-                          versions: { class_name: 'Schematics::Version' }
-          acts_as_paranoid
-          searchkick searchable: #{elasticsearchable_elements},
-                     filterable: #{elasticsearchable_elements},
-                     word_middle: #{elasticsearchable_elements},
-                     suggest: #{elasticsearchable_elements},
-                     callbacks: :async
-        RUBY
+        ''
       end
 
       def to_s
@@ -228,12 +218,6 @@ module Schematics
         [self, descriptor, search_data] + elements + validates
       end
 
-      def elasticsearchable_elements
-        searchable_elements
-          .map(&:name)
-          .map(&:to_sym)
-      end
-
       def search_data_elements
         searchable_elements
           .map { |element| "#{element.name}: #{element.search_data.squish}" }
@@ -241,14 +225,16 @@ module Schematics
       end
 
       def virtual_association_errors
-        virtual_associations = association_attributes
-                               .concat(associations)
-                               .map(&:name)
-                               .map(&:to_sym)
         virtuals
           .flat_map(&:preload)
           .uniq
-          .reject { |association| virtual_associations.include?(association) }
+          .reject do |association|
+            association_attributes
+              .concat(associations)
+              .map(&:name)
+              .map(&:to_sym)
+              .include?(association)
+          end
       end
     end
   end

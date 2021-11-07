@@ -19,6 +19,7 @@ describe Schematics::Entities::Entity do
   its(:class_name) { is_expected.to eq('Entity') }
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
+  its(:to_str) { is_expected.to be_blank }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -46,20 +47,6 @@ describe Schematics::Entities::Entity do
           end
         end
       end
-    RUBY
-  end
-
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      extend Pagy::Searchkick
-      has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
-                      versions: { class_name: 'Schematics::Version' }
-      acts_as_paranoid
-      searchkick searchable: [:name],
-                 filterable: [:name],
-                 word_middle: [:name],
-                 suggest: [:name],
-                 callbacks: :async
     RUBY
   end
 end

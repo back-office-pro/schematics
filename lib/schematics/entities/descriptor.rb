@@ -29,8 +29,6 @@ module Schematics
 
       def to_str
         <<~RUBY
-          extend FriendlyId
-          friendly_id :#{name}
           alias_attribute :to_s, :#{name}
         RUBY
       end

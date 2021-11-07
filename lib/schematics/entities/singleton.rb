@@ -11,7 +11,7 @@ module Schematics
       end
 
       def to_str
-        super + <<~RUBY # rubocop:disable Style/StringConcatenation
+        <<~RUBY
           acts_as_singleton
         RUBY
       end

@@ -24,15 +24,6 @@ describe Schematics::Entities::Singleton do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      extend Pagy::Searchkick
-      has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
-                      versions: { class_name: 'Schematics::Version' }
-      acts_as_paranoid
-      searchkick searchable: [:company_name],
-                 filterable: [:company_name],
-                 word_middle: [:company_name],
-                 suggest: [:company_name],
-                 callbacks: :async
       acts_as_singleton
     RUBY
   end
