@@ -8,7 +8,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          entity.load
+          entity&.load
         end
       end
 
