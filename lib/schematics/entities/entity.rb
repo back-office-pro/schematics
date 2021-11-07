@@ -142,8 +142,8 @@ module Schematics
 
       def viewer
         return :inbox if timestamp_attributes.any?
-        return :grid if attachment_attributes.any?
         return :calendar if datetime_attributes.size >= 2
+        return :grid if attachment_attributes.any?
 
         :table
       end
