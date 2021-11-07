@@ -148,7 +148,8 @@
     },
     {
       "name": "active_storage/attachment",
-      "icon": "folder",
+      "type": "readonly",
+      "icon": "file",
       "descriptor": "filename",
       "attributes": [
         {

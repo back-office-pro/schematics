@@ -4,25 +4,26 @@ module Schematics
   module System
     class << self
       def generate(entity)
-        [
-          generate_scaffold(entity.name, entity.migratable_attributes),
-          generate_rspec_acceptance(entity.name),
-          generate_deleted_at_migration(entity.name),
-          generate_slug_migration(entity.name),
-          entity
-            .has_and_belongs_to_many_associations
-            .reject { _1.entity.name.pluralize == _1.name }
-            .map(&method(:generate_join_table_migration)),
-          entity
-            .association_attributes
-            .map(&method(:generate_counter_cache_migration))
-        ].flatten.compact.map(&:squish)
-      end
-
-      def generate_existing(entity)
-        [
-          generate_scaffold_controller(entity.name)
-        ].map(&:squish)
+        case entity
+        when Entities::Readonly
+          [
+            generate_scaffold_controller(entity.name)
+          ].map(&:squish)
+        else
+          [
+            generate_scaffold(entity.name, entity.migratable_attributes),
+            generate_rspec_acceptance(entity.name),
+            generate_deleted_at_migration(entity.name),
+            generate_slug_migration(entity.name),
+            entity
+              .has_and_belongs_to_many_associations
+              .reject { _1.entity.name.pluralize == _1.name }
+              .map(&method(:generate_join_table_migration)),
+            entity
+              .association_attributes
+              .map(&method(:generate_counter_cache_migration))
+          ].flatten.map(&:squish)
+        end
       end
 
       def destroy_entity(entity)

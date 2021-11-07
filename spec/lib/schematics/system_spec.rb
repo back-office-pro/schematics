@@ -41,18 +41,37 @@ describe Schematics::System do
   describe '.generate' do
     subject { system.generate(entity) }
 
-    let(:expected_command_lines) do
-      [
-        'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
-        'rails generate rspec:acceptance role',
-        'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
-        'rails generate migration add_slug_to_roles slug:string:uniq',
-        'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
-        'rails generate migration add_roles_count_to_users roles_count:integer'
-      ]
+    context 'when entity is default entity' do
+      let(:expected_command_lines) do
+        [
+          'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
+          'rails generate rspec:acceptance role',
+          'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
+          'rails generate migration add_slug_to_roles slug:string:uniq',
+          'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
+          'rails generate migration add_roles_count_to_users roles_count:integer'
+        ]
+      end
+
+      it { is_expected.to eq(expected_command_lines) }
     end
 
-    it { is_expected.to eq(expected_command_lines) }
+    context 'when entity is readonly entity' do
+      let(:entity) do
+        Schematics::Entities::Readonly.create(
+          name: name,
+          attributes: attributes,
+          associations: associations
+        )
+      end
+      let(:expected_command_lines) do
+        [
+          'rails generate scaffold_controller role --skip-resource-route'
+        ]
+      end
+
+      it { is_expected.to eq(expected_command_lines) }
+    end
   end
 
   describe '.destroy_entity' do
