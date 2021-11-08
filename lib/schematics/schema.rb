@@ -101,9 +101,13 @@ module Schematics
 
     def add_inverse_associations
       @entities.each do |entity|
-        entity.association_attributes.map(&:inverse_association).each do |association|
-          find_entity_by_name(association.association_type).associations << association
-        end
+        entity
+          .association_attributes
+          .reject(&:polymorphic?)
+          .map(&:inverse_association)
+          .each do |association|
+            find_entity_by_name(association.association_type).associations << association
+          end
       end
     end
 
@@ -126,7 +130,7 @@ module Schematics
 
     def add_has_one_through_associations
       @entities.each do |entity|
-        entity.association_attributes.each do |parent|
+        entity.association_attributes.reject(&:polymorphic?).each do |parent|
           find_has_one_through_associations(entity, parent)
         end
       end

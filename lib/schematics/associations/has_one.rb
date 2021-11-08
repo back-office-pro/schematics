@@ -18,7 +18,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}&.#{descriptor.name}
+          #{name}&.to_s
         RUBY
       end
     end
