@@ -28,15 +28,11 @@ window.SearchBarController = class extends Stimulus.Controller {
   }
 
   formatResults (results) {
-    return Object.entries(results).flatMap(([key, value]) => {
-      return value.map(({ icon, data }) => {
-        return {
-          url: '/' + [key, data.id].filter(Boolean).join('/'),
-          icon: icon,
-          descriptor: this.findDescriptor(data)
-        }
+    return Object.entries(results).flatMap(([_key, value]) => 
+      value.map(({ icon, data, url }) => {
+        return { url, icon, descriptor: this.findDescriptor(data) }
       })
-    })
+    )
   }
 
   selectItem (event) {

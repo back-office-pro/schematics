@@ -34,7 +34,8 @@ module Schematics
             result.map! do |record|
               {
                 icon: record.class.entity.icon.to_s.dasherize,
-                data: record.class.entity.descriptor.serializer_class.new(record)
+                data: record.class.entity.descriptor.serializer_class.new(record),
+                url: main_app.polymorphic_path(record)
               }
             end
           end
