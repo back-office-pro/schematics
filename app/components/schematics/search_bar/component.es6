@@ -19,31 +19,15 @@ window.SearchBarController = class extends Stimulus.Controller {
     this.clearResults()
   }
 
-  findDescriptor (result) {
-    if (typeof result === 'object' && result != null) {
-      const key = Object.keys(result).find(_ => _ !== 'id') || 'id'
-      return this.findDescriptor(result[key])
-    }
-    return result
-  }
-
-  formatResults (results) {
-    return Object.entries(results).flatMap(([_key, value]) => 
-      value.map(({ icon, data, url }) => {
-        return { url, icon, descriptor: this.findDescriptor(data) }
-      })
-    )
-  }
-
   selectItem (event) {
     Turbolinks.visit(event.currentTarget.dataset.url)
   }
 
-  suggestionTemplate ({ descriptor, icon, url }) {
+  suggestionTemplate ({ data, descriptor, icon, url }) {
     return `
       <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->searchBar#selectItem" data-url="${url}" role="button">
         <i class="fa fa-${icon} text-dark fa-fw mr-2"></i>
-        ${this.highlight(descriptor, this.inputTarget.value)}
+        ${this.highlight(data[descriptor], this.inputTarget.value)}
       </li>
     `
   }
@@ -94,7 +78,7 @@ window.SearchBarController = class extends Stimulus.Controller {
       if (Object.keys(results).length === 0) {
         this.resultsTarget.insertAdjacentHTML('afterbegin', this.notFoundTemplate())
       } else {
-        this.formatResults(results).forEach(result => {
+        Object.values(results).flat().forEach(result => {
           this.resultsTarget.insertAdjacentHTML('afterbegin', this.suggestionTemplate(result))
         })
       }

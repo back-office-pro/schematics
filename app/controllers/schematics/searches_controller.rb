@@ -35,6 +35,7 @@ module Schematics
               {
                 icon: record.class.entity.icon.to_s.dasherize,
                 data: record.class.entity.descriptor.serializer_class.new(record),
+                descriptor: record.class.entity.descriptor.name,
                 url: main_app.polymorphic_path(record)
               }
             end
