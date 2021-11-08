@@ -180,6 +180,13 @@
           "options": {
             "readonly": true
           }
+        },
+        {
+          "name": "record",
+          "type": "belongs_to",
+          "options": {
+            "polymorphic": true
+          }
         }
       ]
     },
