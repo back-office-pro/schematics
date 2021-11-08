@@ -7,6 +7,7 @@ fr:
         byte_size: Taille
         content_type: Type de fichier
         filename: Nom de fichier
+        record: Enregistrement
     models:
       active_storage/attachment:
         one: Fichier
