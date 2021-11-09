@@ -56,6 +56,7 @@ describe Schematics::Attributes::BelongsTo do
                  foreign_key: 'schema_id',
                  inverse_of: :entities,
                  optional: true,
+                 polymorphic: false,
                  counter_cache: :entities_count
     RUBY
   end
@@ -75,6 +76,28 @@ describe Schematics::Attributes::BelongsTo do
                    foreign_key: 'schema_id',
                    inverse_of: :entities,
                    optional: false,
+                   polymorphic: false,
+                   counter_cache: :entities_count
+      RUBY
+    end
+  end
+
+  context 'when belongs_to is polymorphic' do
+    let(:options) do
+      {
+        polymorphic: true
+      }
+    end
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        belongs_to :schema,
+                   -> { with_deleted },
+                   class_name: 'Schema',
+                   foreign_key: 'schema_id',
+                   inverse_of: :entities,
+                   optional: true,
+                   polymorphic: true,
                    counter_cache: :entities_count
       RUBY
     end

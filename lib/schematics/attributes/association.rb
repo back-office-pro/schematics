@@ -36,7 +36,7 @@ module Schematics
       end
 
       def inverse_association_name
-        inverse[:name] || @entity.name
+        inverse[:name] || @entity.name.tr('/', '_')
       end
 
       def preload
@@ -57,10 +57,10 @@ module Schematics
                      -> { with_deleted },
                      class_name: '#{class_name}',
                      foreign_key: '#{column_name}',
-                     inverse_of: :"#{inverse_association.name}",
+                     inverse_of: :#{inverse_association_name.pluralize},
                      optional: #{!required?},
-                     counter_cache: :"#{inverse_association_name.pluralize}_count",
-                     polymorphic: #{polymorphic?}
+                     polymorphic: #{polymorphic?},
+                     counter_cache: :#{inverse_association_name.pluralize}_count
         RUBY
       end
 
