@@ -81,34 +81,40 @@ module Schematics
     private
 
     def add_inverse_entity_to_association_attributes
-      @entities.each do |entity|
-        entity.association_attributes.each do |attribute|
+      @entities
+        .flat_map(&:association_attributes)
+        .reject(&:polymorphic?)
+        .each do |attribute|
           attribute.inverse_entity = find_entity_by_name(attribute.association_type)
         end
-      end
     end
 
     def add_has_and_belongs_to_many_associations
-      @entities.flat_map(&:has_and_belongs_to_many_associations).each do |habtm|
-        association = Associations::Association.create(
-          habtm.entity,
-          name: habtm.entity.name,
-          type: 'has_and_belongs_to_many'
-        )
-        find_entity_by_name(habtm.name.singularize).associations << association
-      end
+      @entities
+        .flat_map(&:has_and_belongs_to_many_associations)
+        .each do |habtm|
+          find_entity_by_name(habtm.name.singularize)
+            .associations
+            .push(
+              Associations::Association.create(
+                habtm.entity,
+                name: habtm.entity.name,
+                type: 'has_and_belongs_to_many'
+              )
+            )
+        end
     end
 
     def add_inverse_associations
-      @entities.each do |entity|
-        entity
-          .association_attributes
-          .reject(&:polymorphic?)
-          .map(&:inverse_association)
-          .each do |association|
-            find_entity_by_name(association.association_type).associations << association
-          end
-      end
+      @entities
+        .flat_map(&:association_attributes)
+        .reject(&:polymorphic?)
+        .map(&:inverse_association)
+        .each do |association|
+          find_entity_by_name(association.association_type)
+            .associations
+            .push(association)
+        end
     end
 
     def add_has_many_through_associations
@@ -130,9 +136,10 @@ module Schematics
 
     def add_has_one_through_associations
       @entities.each do |entity|
-        entity.association_attributes.reject(&:polymorphic?).each do |parent|
-          find_has_one_through_associations(entity, parent)
-        end
+        entity
+          .association_attributes
+          .reject(&:polymorphic?)
+          .each { |parent| find_has_one_through_associations(entity, parent) }
       end
     end
 
