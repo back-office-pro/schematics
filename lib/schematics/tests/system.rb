@@ -19,7 +19,7 @@ module Schematics
             Searchkick.disable_callbacks
             model_class.reindex
 
-            setup do # rubocop:disable RSpec/Rails/AvoidSetupHook
+            setup do
               Searchkick.enable_callbacks
               login
             end
