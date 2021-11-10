@@ -218,6 +218,7 @@
             "attachment",
             "attachments",
             "belongs_to",
+            "blob",
             "boolean",
             "country",
             "date",

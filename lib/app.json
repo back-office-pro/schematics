@@ -176,7 +176,7 @@
         },
         {
           "name": "blob",
-          "type": "attachment",
+          "type": "blob",
           "options": {
             "readonly": true
           }
