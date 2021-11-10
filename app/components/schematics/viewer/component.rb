@@ -31,7 +31,7 @@ module Schematics
       protected
 
       def model_class
-        @resources.first.class
+        @resources.try(:klass) || @resources.first.class
       end
 
       def col_preference_class(field)
