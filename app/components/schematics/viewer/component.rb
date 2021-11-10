@@ -5,8 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :preferences, to: :helpers
       delegate :can?, to: :current_ability
-      delegate :klass, to: :@resources
-      delegate :entity, to: :klass
+      delegate :entity, to: :model_class
       delegate :icon, to: :entity
 
       class << self
@@ -27,6 +26,12 @@ module Schematics
       def initialize(resources:)
         super
         @resources = resources
+      end
+
+      protected
+
+      def model_class
+        @resources.first.class
       end
 
       def col_preference_class(field)

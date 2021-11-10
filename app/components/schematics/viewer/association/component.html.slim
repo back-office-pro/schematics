@@ -22,7 +22,7 @@
               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                 th.text-nowrap.text-center.align-middle class=col_preference_class(field)
                   = fa_icon field.icon, class: 'mr-2 text-dark'
-                  = klass.human_attribute_name(field.name)
+                  = model_class.human_attribute_name(field.name)
           tbody
             - @resources.each do |resource|
               tr data-href=polymorphic_path(resource)
@@ -39,7 +39,7 @@
                         method: :delete,
                         class: 'btn btn-danger btn-sm',
                         data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
-                    - if attachment? && can?(:destroy, resource)
+                    - if model_class == ActiveStorage::Attachment && can?(:destroy, resource)
                       = form_for @resources.first.record do |f|
                         = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
                           = fields.hidden_field :id, value: resource.id
