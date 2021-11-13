@@ -4,8 +4,7 @@ module Schematics
   module System
     class << self
       def generate(entity)
-        case entity
-        when Entities::Readonly
+        if Object.const_defined?(entity.class_name)
           [
             generate_scaffold_controller(entity.name)
           ].map(&:squish)
