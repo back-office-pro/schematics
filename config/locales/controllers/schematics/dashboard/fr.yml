@@ -12,7 +12,7 @@ fr:
           caption: Moniter les performances des endpoints de l'API
           title: Performance API
         quota:
-          entities: Quota resources
+          entities: Quota ressources
           storage: Quota stockage
           users: Quota utilisateurs
         schema:
