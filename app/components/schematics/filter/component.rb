@@ -48,7 +48,7 @@ module Schematics
       end
 
       def col_preference_class(field)
-        preference = "col_#{entity.name}_#{field.name}"
+        preference = "col_#{entity.table_name}_#{field.name}"
         return preference if preferences(preference, true)
 
         "#{preference} d-none"

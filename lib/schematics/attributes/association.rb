@@ -36,7 +36,7 @@ module Schematics
       end
 
       def inverse_association_name
-        inverse[:name] || @entity.name.tr('/', '_')
+        inverse[:name] || @entity.table_name
       end
 
       def preload

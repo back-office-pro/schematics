@@ -13,7 +13,7 @@ module Schematics
 
       class << self
         def create(entity, name:, function:, options: {})
-          tokens = Tokens::Tokenizer.tokenize(function, entity.name.pluralize)
+          tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
           if tokens.any_is_a?(Tokens::Comparator)
             Comparison.new(entity, name, tokens, options)
           elsif tokens.any_is_a?(Tokens::Operator)
