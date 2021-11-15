@@ -6,6 +6,8 @@ Style/Documentation:
   Enabled: false
 Style/ReturnNil:
   Enabled: true
+Rails/SaveBang:
+  Enabled: true
 Style/HashEachMethods:
   AllowedReceivers:
     - enum

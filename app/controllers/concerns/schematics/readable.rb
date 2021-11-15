@@ -12,7 +12,7 @@ module Schematics
       return if @resource.send(TIMESTAMP_FIELD).present?
       return unless (@resource.try(RECIPIENT_FIELD) || current_user) == current_user
 
-      @resource.update(TIMESTAMP_FIELD => Time.current)
+      @resource.update!(TIMESTAMP_FIELD => Time.current)
     end
   end
 end

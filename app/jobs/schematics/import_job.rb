@@ -10,7 +10,7 @@ module Schematics
         import.status_finished!
         model_class.reindex
       else
-        import.update(status: 'error', import_errors: result.errors)
+        import.update!(status: 'error', import_errors: result.errors)
       end
     end
   end
