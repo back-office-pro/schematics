@@ -148,38 +148,32 @@
     },
     {
       "name": "active_storage/attachment",
-      "type": "readonly",
       "icon": "file",
       "descriptor": "filename",
+      "actions": [
+        "index",
+        "show",
+        "destroy"
+      ],
       "attributes": [
         {
           "name": "filename",
-          "type": "string",
-          "options": {
-            "readonly": true
-          }
+          "type": "string"
         },
         {
           "name": "content_type",
-          "type": "string",
-          "options": {
-            "readonly": true
-          }
+          "type": "string"
         },
         {
           "name": "byte_size",
           "type": "float",
           "options": {
-            "readonly": true,
             "unit": "bytes"
           }
         },
         {
           "name": "blob",
-          "type": "blob",
-          "options": {
-            "readonly": true
-          }
+          "type": "blob"
         },
         {
           "name": "record",
@@ -251,22 +245,23 @@
       "name": "permission",
       "icon": "key",
       "descriptor": "name",
+      "actions": [
+        "index",
+        "show"
+      ],
       "attributes": [
         {
           "name": "model",
-          "type": "string",
-          "options": {
-            "readonly": true
-          }
+          "type": "model"
         },
         {
           "name": "action",
           "type": "enum",
           "options": {
             "required": true,
-            "readonly": true,
             "values": [
-              "read",
+              "index",
+              "show",
               "create",
               "update",
               "import",
@@ -286,6 +281,10 @@
     {
       "name": "import",
       "icon": "cloud_upload_alt",
+      "actions": [
+        "index",
+        "show"
+      ],
       "attributes": [
         {
           "name": "file",
@@ -301,7 +300,6 @@
           "name": "status",
           "type": "enum",
           "options": {
-            "readonly": true,
             "required": true,
             "default": "pending",
             "values": [
@@ -315,7 +313,6 @@
           "name": "progress",
           "type": "float",
           "options": {
-            "readonly": true,
             "default": 0,
             "unit": "%"
           }
@@ -338,13 +335,15 @@
       "type": "singleton",
       "descriptor": "plan",
       "icon": "id_badge",
+      "actions": [
+        "show"
+      ],
       "attributes": [
         {
           "name": "plan",
           "type": "enum",
           "options": {
             "required": true,
-            "readonly": true,
             "default": "free",
             "values": [
               "free",
