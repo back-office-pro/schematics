@@ -8,14 +8,9 @@ module Schematics
     def initialize(user)
       @user = user
       aliases
-      # TODO: Add specs with restricted account
-      return can :manage, :all if Rails.env.test? # rubocop:disable Lint/ReturnInVoidContext
-
       user_permissions
       active_storage_attachment_permissions
       version_permissions
-      singleton_restrictions
-      readonly_restrictions
       references_attributes_restrictions
       default_restrictions
       licence_restrictions
@@ -46,19 +41,14 @@ module Schematics
       cannot %i[destroy archive], user
       cannot :update, user, :role_id
       cannot %i[update destroy archive], admin_role
-      cannot %i[create update destroy archive], Permission
-      cannot %i[read update destroy archive], Message
-      cannot %i[create update destroy archive], Import
-      cannot :import, [Message, Permission, Import]
-      cannot %i[update archive], ActiveStorage::Attachment
-      cannot :destroy, ActiveStorage::Attachment, { record_type: 'Import' }
+      cannot %i[read update destroy archive import], Message
       can :read, Message, recipient_id: user.id
       can :read, Message, author_id: user.id
       can %i[update destroy archive], Message, { read_at: nil }
+      cannot :destroy, ActiveStorage::Attachment, { record_type: 'Import' }
     end
 
     def licence_restrictions
-      cannot :update, Licence
       cannot :create, User if licence.quota_users_exceeded?
       cannot :create, ActiveStorage::Attachment if licence.quota_storage_exceeded?
       cannot :manage, :all if licence.expired?
@@ -86,18 +76,6 @@ module Schematics
         can :read, Version,
             event: permission.action,
             item_type: permission.model
-      end
-    end
-
-    def singleton_restrictions
-      Schema.instance.entities.select_is_a?(Entities::Singleton).each do |entity|
-        cannot %i[index create destroy archive import], entity.class_name.constantize
-      end
-    end
-
-    def readonly_restrictions
-      Schema.instance.entities.select_is_a?(Entities::Readonly).each do |entity|
-        cannot %i[create update archive import], entity.class_name.constantize
       end
     end
 
