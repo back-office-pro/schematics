@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pg', '~> 1.2.3'
   spec.add_development_dependency 'reek', '~> 6.0.6'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.22.3'
+  spec.add_development_dependency 'rubocop', '~> 1.23.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.12.0'
   spec.add_development_dependency 'rubocop-rails', '~> 2.12.4'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.6.0'
