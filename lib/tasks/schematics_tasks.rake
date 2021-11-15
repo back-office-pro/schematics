@@ -23,10 +23,16 @@ namespace :schematics do
   namespace :licence do
     desc 'Renew application licence'
     task :renew, %i[plan term] => [:environment] do |_task, args|
-      Licence.instance.update(
-        plan: args[:plan],
-        expires_at: args[:term].to_i.months.from_now
-      )
+      Licence.instance.update(plan: args[:plan], expires_at: args[:term].to_i.months.from_now)
+    end
+  end
+
+  namespace :users do
+    desc 'Create admin user'
+    task :admin, %i[email last_name first_name locale time_zone] => [:environment] do |_task, args|
+      PaperTrail.enabled = false
+      User.create!(args.to_h.merge(password: 'Azerty1!', role: Role.find_by(name: 'Admin')))
+      PaperTrail.enabled = true
     end
   end
 
