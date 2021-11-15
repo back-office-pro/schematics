@@ -8,6 +8,7 @@ module Schematics
       attr_reader :name,
                   :icon,
                   :descriptor,
+                  :actions,
                   :attributes,
                   :virtuals,
                   :associations
@@ -20,10 +21,11 @@ module Schematics
                    type: nil,
                    icon: :caret_square_right,
                    descriptor: 'id',
+                   actions: nil,
                    associations: [],
                    attributes: [],
                    virtuals: [])
-          args = [name, icon.to_sym, descriptor, associations, attributes, virtuals]
+          args = [name, icon.to_sym, descriptor, actions, associations, attributes, virtuals]
           return new(*args) unless type
 
           Entities.const_get(type.camelize.to_sym).new(*args)
@@ -31,9 +33,10 @@ module Schematics
       end
 
       # :reek:LongParameterList
-      def initialize(name, icon, descriptor, associations, attributes, virtuals)
+      def initialize(name, icon, descriptor, actions, associations, attributes, virtuals)
         @name = name
         @icon = icon
+        @actions = (actions || default_actions).map(&:to_sym)
         @associations = associations.map do |association|
           Associations::Association.create(self, **association)
         end
@@ -135,6 +138,10 @@ module Schematics
         name.camelize
       end
 
+      def table_name
+        name.tr('/', '_')
+      end
+
       def load
         context = binding.of_caller(1).method(:eval)
         model_elements.each(&context)
@@ -148,6 +155,10 @@ module Schematics
         :table
       end
 
+      def can?(action)
+        actions.include?(action.to_sym)
+      end
+
       def search_data
         <<~RUBY
           def search_data
@@ -155,34 +166,6 @@ module Schematics
               created_at: created_at,
               #{search_data_elements}
             }
-          end
-        RUBY
-      end
-
-      def route
-        resource, namespace = name.split('/').reverse
-
-        route = <<~RUBY
-          resources :#{resource.pluralize}, model_name: '#{class_name}' do
-            member do
-              get :delete
-              delete :archive
-              delete :restore
-            end
-            collection do
-              get :autocomplete
-              resources :imports, only: %i[new create], as: '#{resource}_imports', format: false do
-                get :template, on: :collection, format: :csv
-              end
-            end
-          end
-        RUBY
-
-        return route unless namespace
-
-        <<~RUBY
-          namespace :#{namespace} do
-            #{route}
           end
         RUBY
       end
@@ -213,6 +196,10 @@ module Schematics
       end
 
       protected
+
+      def default_actions
+        %w[index show create new edit update destroy archive import]
+      end
 
       def model_elements
         [self, descriptor, search_data] + elements + validates

@@ -15,13 +15,6 @@ describe Schematics::Entities::Singleton do
     ]
   end
 
-  its(:route) do
-    is_expected.to eq <<~RUBY
-      resource :settings, only: [:show, :edit, :update]
-      resolve("Setting") { [:settings] }
-    RUBY
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       acts_as_singleton

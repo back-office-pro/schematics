@@ -31,22 +31,4 @@ describe Schematics::Entities::Entity do
       end
     RUBY
   end
-
-  its(:route) do
-    is_expected.to eq <<~RUBY
-      resources :entities, model_name: 'Entity' do
-        member do
-          get :delete
-          delete :archive
-          delete :restore
-        end
-        collection do
-          get :autocomplete
-          resources :imports, only: %i[new create], as: 'entity_imports', format: false do
-            get :template, on: :collection, format: :csv
-          end
-        end
-      end
-    RUBY
-  end
 end

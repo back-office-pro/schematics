@@ -34,7 +34,7 @@ module Schematics
     def load_routes
       context = binding.of_caller(2).method(:eval)
       sorted_entities
-        .map(&:route)
+        .map(&Entities::Router.method(:new))
         .each(&context)
     end
 
