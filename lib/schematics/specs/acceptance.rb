@@ -37,6 +37,12 @@ module Schematics
               }
             end
 
+            before do
+              Engine.load_seed
+              user.update!(role: Role.find_by(name: 'Admin'))
+              Licence.instance.update!(plan: 'enterprise', expires_at: 12.months.from_now)
+            end
+
             test_index
             test_show
             test_create
@@ -117,7 +123,7 @@ module Schematics
       end
 
       def test_index
-        return if entity.is_a?(Entities::Singleton)
+        return unless entity.can?(:index)
 
         route_summary "#{entity.name.pluralize} list"
         get polymorphic_path(model_class) do
@@ -146,6 +152,8 @@ module Schematics
       end
 
       def test_show
+        return unless entity.can?(:show)
+
         route_summary "Show #{entity.name.pluralize}"
         case entity
         when Entities::Singleton
@@ -190,7 +198,7 @@ module Schematics
       end
 
       def test_create
-        return if entity.is_a?(Entities::Singleton)
+        return unless entity.can?(:create)
 
         route_summary "Create #{entity.name}"
         post polymorphic_path(model_class) do
@@ -209,6 +217,8 @@ module Schematics
       end
 
       def test_update
+        return unless entity.can?(:update)
+
         route_summary "Show #{entity.name.pluralize}"
         case entity
         when Entities::Singleton
@@ -246,7 +256,7 @@ module Schematics
       end
 
       def test_destroy
-        return if entity.is_a?(Entities::Singleton)
+        return unless entity.can?(:destroy)
 
         route_summary "Destroy #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id" do
@@ -264,7 +274,7 @@ module Schematics
       end
 
       def test_archive
-        return if entity.is_a?(Entities::Singleton)
+        return unless entity.can?(:archive)
 
         route_summary "Archive #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id/archive" do
@@ -282,7 +292,7 @@ module Schematics
       end
 
       def test_restore
-        return if entity.is_a?(Entities::Singleton)
+        return unless entity.can?(:restore)
 
         route_summary "Restore #{entity.name}"
         delete "#{polymorphic_path(model_class)}/:id/restore" do
