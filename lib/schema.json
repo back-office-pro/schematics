@@ -162,7 +162,7 @@
         "hidden": {
           "type": "boolean"
         },
-        "cache": {
+        "cached": {
           "type": "boolean"
         }
       }
