@@ -36,7 +36,7 @@ Metrics/ClassLength:
 RSpec/MultipleExpectations:
   Max: 2
 Metrics/AbcSize:
-  Max: 60
+  Max: 70
 Metrics/ParameterLists:
   Max: 8
 Performance/MethodObjectAsBlock:
