@@ -22,7 +22,7 @@ module Schematics
       end
 
       def to_sql
-        [@entity.name.pluralize, @name].join('.')
+        [@entity.table_name.pluralize, @name].join('.')
       end
 
       def to_str
