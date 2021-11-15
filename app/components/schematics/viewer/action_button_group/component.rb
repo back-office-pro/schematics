@@ -5,6 +5,7 @@ module Schematics
     module ActionButtonGroup
       class Component < ApplicationComponent
         delegate :can?, to: :current_ability
+        delegate :resource_associations, :confirm_data, to: :helpers
 
         def initialize(resource:)
           super
