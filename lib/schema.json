@@ -230,6 +230,7 @@
             "float",
             "integer",
             "jsonb",
+            "model",
             "phone",
             "references",
             "rich_text",
