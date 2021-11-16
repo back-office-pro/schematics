@@ -28,7 +28,7 @@ module Schematics
         @entity = entity
         @name = name
         @tokens = tokens
-        @options = Entities::OptionsStruct.new(options)
+        @options = Attributes::Options.new(options)
       end
 
       def function

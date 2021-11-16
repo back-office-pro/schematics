@@ -23,7 +23,9 @@ module Schematics
     end
 
     def quota
-      OpenStruct.new(LICENCES[plan])
+      Struct
+        .new(:users, :storage, :entities, keyword_init: true)
+        .new(LICENCES[plan])
     end
 
     def quota_users_percentage

@@ -16,7 +16,7 @@ module Schematics
       end
 
       def options_for_migration
-        options.to_h.slice(*migration_options)
+        options.slice(*migration_options)
       end
 
       def column_name
