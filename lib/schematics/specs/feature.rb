@@ -94,12 +94,12 @@ module Schematics
               fill_in_rich_text_area input, with: element.default
             when Attributes::BelongsTo
               select record.public_send(element.name).to_s,
-                    from: input,
-                    match: :first
+                     from: input,
+                     match: :first
             when Behaviours::Enumerable
               select element.format(element.default),
-                    from: input,
-                    match: :first
+                     from: input,
+                     match: :first
             when Attributes::Digest
               fill_in input, with: element.default
               fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: element.default
