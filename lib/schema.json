@@ -100,6 +100,7 @@
       "type": "object"
     },
     "virtual_option": {
+      "additionalProperties": false,
       "properties": {
         "scale": {
           "type": "integer"
@@ -127,6 +128,7 @@
       "type": "object"
     },
     "attribute_option": {
+      "additionalProperties": false,
       "properties": {
         "unique": {
           "type": "boolean"
@@ -149,6 +151,15 @@
         "scale": {
           "type": "integer"
         },
+        "min": {
+          "type": "integer"
+        },
+        "max": {
+          "type": "integer"
+        },
+        "length": {
+          "type": "integer"
+        },
         "unit": {
           "type": "string"
         },
@@ -164,6 +175,36 @@
         },
         "cached": {
           "type": "boolean"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "values": {
+          "type": "array"
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        },
+        "before_or_equal_to": {
+          "type": "string"
+        },
+        "after_or_equal_to": {
+          "type": "string"
+        },
+        "equal_to": {
+          "type": "string"
+        },
+        "aspect_ratio": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
         }
       }
     },
