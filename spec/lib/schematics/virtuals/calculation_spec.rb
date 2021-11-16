@@ -44,4 +44,12 @@ describe Schematics::Virtuals::Calculation do
       end
     RUBY
   end
+
+  describe '#format' do
+    subject { virtual.format(value) }
+
+    let(:value) { 100.099 }
+
+    it { is_expected.to eq('100.1 €') }
+  end
 end
