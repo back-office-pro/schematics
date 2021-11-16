@@ -11,7 +11,8 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Editable
 
-      delegate :icon, :descriptor, to: :inverse_entity
+      delegate :descriptor, to: :inverse_entity
+      delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
       def options_for_migration
@@ -35,7 +36,7 @@ module Schematics
       end
 
       def inverse_association_name
-        inverse[:name] || @entity.name
+        inverse[:name] || @entity.table_name
       end
 
       def preload
@@ -46,7 +47,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}&.#{descriptor.name}
+          #{name}&.to_s
         RUBY
       end
 
@@ -56,14 +57,19 @@ module Schematics
                      -> { with_deleted },
                      class_name: '#{class_name}',
                      foreign_key: '#{column_name}',
-                     inverse_of: :#{inverse_association.name},
+                     inverse_of: :#{inverse_association_name.pluralize},
                      optional: #{!required?},
+                     polymorphic: #{polymorphic? || false},
                      counter_cache: :#{inverse_association_name.pluralize}_count
         RUBY
       end
 
       def inverse_association
         @inverse_association ||= Associations::Association.create(self, **inverse)
+      end
+
+      def icon
+        inverse_entity&.icon || :link
       end
 
       def input_type

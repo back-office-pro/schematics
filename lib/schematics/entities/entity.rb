@@ -8,6 +8,7 @@ module Schematics
       attr_reader :name,
                   :icon,
                   :descriptor,
+                  :actions,
                   :attributes,
                   :virtuals,
                   :associations
@@ -20,46 +21,22 @@ module Schematics
                    type: nil,
                    icon: :caret_square_right,
                    descriptor: 'id',
+                   actions: nil,
                    associations: [],
                    attributes: [],
                    virtuals: [])
-          args = [name, icon.to_sym, descriptor, associations, attributes, virtuals]
+          args = [name, icon.to_sym, descriptor, actions, associations, attributes, virtuals]
           return new(*args) unless type
 
           Entities.const_get(type.camelize.to_sym).new(*args)
         end
-
-        # FIXME: Should come from existing entities
-        def active_storage_attachment(name:, icon:)
-          create(
-            name: name,
-            icon: icon,
-            descriptor: 'filename',
-            attributes: [
-              {
-                name: 'filename',
-                type: 'string'
-              },
-              {
-                name: 'content_type',
-                type: 'string'
-              },
-              {
-                name: 'byte_size',
-                type: 'float',
-                options: {
-                  unit: 'bytes'
-                }
-              }
-            ]
-          )
-        end
       end
 
       # :reek:LongParameterList
-      def initialize(name, icon, descriptor, associations, attributes, virtuals)
+      def initialize(name, icon, descriptor, actions, associations, attributes, virtuals)
         @name = name
         @icon = icon
+        @actions = (actions || default_actions).map(&:to_sym)
         @associations = associations.map do |association|
           Associations::Association.create(self, **association)
         end
@@ -161,17 +138,25 @@ module Schematics
         name.camelize
       end
 
+      def table_name
+        name.tr('/', '_')
+      end
+
       def load
         context = binding.of_caller(1).method(:eval)
         model_elements.each(&context)
       end
 
       def viewer
-        return :inbox unless timestamp_attributes.size.zero?
+        return :inbox if timestamp_attributes.any?
         return :calendar if datetime_attributes.size >= 2
-        return :grid if attachment_attributes.any?(&:image?)
+        return :grid if attachment_attributes.any?
 
         :table
+      end
+
+      def can?(action)
+        actions.include?(action.to_sym)
       end
 
       def search_data
@@ -185,36 +170,8 @@ module Schematics
         RUBY
       end
 
-      def route
-        <<~RUBY
-          resources :#{name.pluralize}, model_name: '#{class_name}' do
-            member do
-              get :delete
-              delete :archive
-              delete :restore
-            end
-            collection do
-              get :autocomplete
-              resources :imports, only: %i[new create], as: '#{name}_imports', format: false do
-                get :template, on: :collection, format: :csv
-              end
-            end
-          end
-        RUBY
-      end
-
       def to_str
-        <<~RUBY
-          extend Pagy::Searchkick
-          has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
-                          versions: { class_name: 'Schematics::Version' }
-          acts_as_paranoid
-          searchkick searchable: #{elasticsearchable_elements},
-                     filterable: #{elasticsearchable_elements},
-                     word_middle: #{elasticsearchable_elements},
-                     suggest: #{elasticsearchable_elements},
-                     callbacks: :async
-        RUBY
+        ''
       end
 
       def to_s
@@ -240,14 +197,12 @@ module Schematics
 
       protected
 
-      def model_elements
-        [self, descriptor, search_data] + elements + validates
+      def default_actions
+        %w[index show create new edit update destroy archive import]
       end
 
-      def elasticsearchable_elements
-        searchable_elements
-          .map(&:name)
-          .map(&:to_sym)
+      def model_elements
+        [self, descriptor, search_data] + elements + validates
       end
 
       def search_data_elements
@@ -257,14 +212,16 @@ module Schematics
       end
 
       def virtual_association_errors
-        virtual_associations = association_attributes
-                               .concat(associations)
-                               .map(&:name)
-                               .map(&:to_sym)
         virtuals
           .flat_map(&:preload)
           .uniq
-          .reject { |association| virtual_associations.include?(association) }
+          .reject do |association|
+            association_attributes
+              .concat(associations)
+              .map(&:name)
+              .map(&:to_sym)
+              .include?(association)
+          end
       end
     end
   end

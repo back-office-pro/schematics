@@ -23,7 +23,7 @@ module Schematics
         rescue StandardError => e
           @errors[I18n.t('.line', line: line)] = e
         ensure
-          @import.update(progress: (line / @data.size) * 100)
+          @import.update!(progress: (line / @data.size) * 100)
         end
         context.fail!(errors: @errors) if @errors.any?
       end

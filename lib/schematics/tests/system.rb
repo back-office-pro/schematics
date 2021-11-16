@@ -21,6 +21,9 @@ module Schematics
 
             setup do
               Searchkick.enable_callbacks
+              Engine.load_seed
+              current_user.update!(role: Role.find_by(name: 'Admin'))
+              Licence.instance.update!(plan: 'enterprise', expires_at: 12.months.from_now)
               login
             end
 
@@ -42,7 +45,7 @@ module Schematics
         end
 
         def test_index
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:index)
 
           test 'visiting the index' do
             visit polymorphic_path(model_class)
@@ -53,9 +56,9 @@ module Schematics
         end
 
         def test_create
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:create)
 
-          test "creating a #{entity.name}" do
+          test "creating a #{entity.table_name}" do
             visit polymorphic_path(model_class)
             click_on I18n.t('schematics.application.button.add',
                             model_name: model_name.human.downcase)
@@ -67,33 +70,28 @@ module Schematics
         end
 
         def test_update
-          case entity
-          when Entities::Singleton
-            test "updating a #{entity.name}" do
-              visit polymorphic_path(model_class)
+          return unless entity.can?(:update)
+
+          test "updating a #{entity.table_name}" do
+            visit polymorphic_path(model_class)
+            case entity
+            when Entities::Singleton
               click_on I18n.t('schematics.application.button.edit')
-              fill_form
-              click_on I18n.t('schematics.application.button.confirm')
-              assert_text I18n.t('schematics.resources.update.success',
-                                 model_name: model_name.human)
-            end
-          else
-            test "updating a #{entity.name}" do
-              visit polymorphic_path(model_class)
+            else
               selector = "a[data-title='#{I18n.t('schematics.application.button.tooltip.edit')}']"
               find(selector, match: :first).click
-              fill_form
-              click_on I18n.t('schematics.application.button.confirm')
-              assert_text I18n.t('schematics.resources.update.success',
-                                 model_name: model_name.human)
             end
+            fill_form
+            click_on I18n.t('schematics.application.button.confirm')
+            assert_text I18n.t('schematics.resources.update.success',
+                               model_name: model_name.human)
           end
         end
 
         def test_archive
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:archive)
 
-          test "archiving a #{entity.name}" do
+          test "archiving a #{entity.table_name}" do
             visit polymorphic_path(model_class)
             title = I18n.t('schematics.application.button.tooltip.archive')
             selector = "a[data-title='#{title}']"
@@ -104,9 +102,9 @@ module Schematics
         end
 
         def test_destroy
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:destroy)
 
-          test "destroying a #{entity.name}" do
+          test "destroying a #{entity.table_name}" do
             visit polymorphic_path(model_class)
             page.execute_script("$('*[data-href]').first().click()")
             click_on I18n.t('schematics.application.button.destroy')
@@ -124,7 +122,7 @@ module Schematics
       end
 
       def record
-        @record ||= send(entity.name.pluralize, :one)
+        @record ||= send(entity.table_name.pluralize, :one)
       end
 
       def login
@@ -137,7 +135,7 @@ module Schematics
 
       def fill_form # rubocop:disable Metrics/CyclomaticComplexity
         entity.fillable_elements.each do |element| # rubocop:disable Metrics/BlockLength
-          input = "#{entity.name}[#{element.column_name}]"
+          input = "#{entity.table_name}[#{element.column_name}]"
           case element
           when Associations::HasAndBelongsToMany
             check "#{input}[]",
@@ -165,7 +163,8 @@ module Schematics
                    match: :first
           when Attributes::Digest
             fill_in input, with: element.default
-            fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: element.default
+            fill_in "#{entity.table_name}[#{element.column_name}_confirmation]",
+                    with: element.default
           when Attributes::Date
             fill_in input, with: element.default.to_date
           else

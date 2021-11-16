@@ -179,6 +179,9 @@
         "readonly": {
           "type": "boolean"
         },
+        "polymorphic": {
+          "type": "boolean"
+        },
         "values": {
           "type": "array"
         },
@@ -218,6 +221,7 @@
             "attachment",
             "attachments",
             "belongs_to",
+            "blob",
             "boolean",
             "country",
             "date",
@@ -229,6 +233,7 @@
             "float",
             "integer",
             "jsonb",
+            "model",
             "phone",
             "references",
             "rich_text",

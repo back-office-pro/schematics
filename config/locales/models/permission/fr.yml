@@ -9,8 +9,10 @@ fr:
           create: Ajouter
           destroy: Supprimer
           import: Importer
+          index: Lister
           read: Lire
           restore: Restaurer
+          show: Consulter
           update: Editer
         model: Donnée
         name: Nom

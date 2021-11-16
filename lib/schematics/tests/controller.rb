@@ -18,6 +18,13 @@ module Schematics
           subclass.class_eval do
             PaperTrail.enabled = false
             model_class.reindex
+
+            setup do
+              Engine.load_seed
+              current_user.update!(role: Role.find_by(name: 'Admin'))
+              Licence.instance.update!(plan: 'enterprise', expires_at: 12.months.from_now)
+            end
+
             test_index_api
             test_index_csv
             test_index
@@ -47,7 +54,7 @@ module Schematics
         end
 
         def test_index_api
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:index)
 
           test 'should get API index' do
             login formats: :json
@@ -57,7 +64,7 @@ module Schematics
         end
 
         def test_index_csv
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:index)
 
           test 'should get CSV index' do
             login
@@ -67,7 +74,7 @@ module Schematics
         end
 
         def test_index
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:index)
 
           test 'should get index' do
             login
@@ -77,7 +84,9 @@ module Schematics
         end
 
         def test_show_api
-          test "should show API #{entity.name}" do
+          return unless entity.can?(:show)
+
+          test "should show API #{entity.table_name}" do
             login formats: :json
             get polymorphic_path(record), headers: authorization_header, as: :json
             assert_response :success
@@ -85,7 +94,9 @@ module Schematics
         end
 
         def test_show_pdf
-          test "should show PDF #{entity.name}" do
+          return unless entity.can?(:show)
+
+          test "should show PDF #{entity.table_name}" do
             login
             get polymorphic_path(record), as: :pdf
             assert_response :success
@@ -93,7 +104,9 @@ module Schematics
         end
 
         def test_show
-          test "should show #{entity.name}" do
+          return unless entity.can?(:show)
+
+          test "should show #{entity.table_name}" do
             login
             get polymorphic_path(record)
             assert_response :success
@@ -101,9 +114,9 @@ module Schematics
         end
 
         def test_not_found
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:index)
 
-          test "should throw #{entity.name} not found" do
+          test "should throw #{entity.table_name} not found" do
             login
             get polymorphic_path(model_class).concat('/0')
             assert_redirected_to polymorphic_path(model_class)
@@ -111,9 +124,9 @@ module Schematics
         end
 
         def test_not_found_api
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:index)
 
-          test "should throw API #{entity.name} not found" do
+          test "should throw API #{entity.table_name} not found" do
             login formats: :json
             get polymorphic_path(model_class).concat('/0'),
                 headers: authorization_header,
@@ -123,6 +136,8 @@ module Schematics
         end
 
         def test_edit
+          return unless entity.can?(:edit)
+
           test 'should get edit' do
             login
             get edit_polymorphic_path(record)
@@ -131,7 +146,9 @@ module Schematics
         end
 
         def test_update_api
-          test "should update API #{entity.name}" do
+          return unless entity.can?(:update)
+
+          test "should update API #{entity.table_name}" do
             login formats: :json
             patch polymorphic_path(record),
                   params: params(formats: :json),
@@ -142,7 +159,9 @@ module Schematics
         end
 
         def test_update
-          test "should update #{entity.name}" do
+          return unless entity.can?(:update)
+
+          test "should update #{entity.table_name}" do
             login
             patch polymorphic_path(record), params: params
             assert_redirected_to polymorphic_path(record.reload)
@@ -150,7 +169,7 @@ module Schematics
         end
 
         def test_new
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:new)
 
           test 'should get new' do
             login
@@ -160,9 +179,9 @@ module Schematics
         end
 
         def test_create_api
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:create)
 
-          test "should create API #{entity.name}" do
+          test "should create API #{entity.table_name}" do
             assert_difference("#{model_class.name}.count") do
               login formats: :json
               post polymorphic_path(model_class),
@@ -175,9 +194,9 @@ module Schematics
         end
 
         def test_create
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:create)
 
-          test "should create #{entity.name}" do
+          test "should create #{entity.table_name}" do
             assert_difference("#{model_class.name}.count") do
               login
               post polymorphic_path(model_class), params: params
@@ -187,7 +206,7 @@ module Schematics
         end
 
         def test_delete
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:delete)
 
           test 'should get delete' do
             login
@@ -197,9 +216,9 @@ module Schematics
         end
 
         def test_destroy_api
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:destroy)
 
-          test "should destroy API #{entity.name}" do
+          test "should destroy API #{entity.table_name}" do
             assert_difference("#{model_class.name}.count", -1) do
               login formats: :json
               delete polymorphic_path(record),
@@ -211,9 +230,9 @@ module Schematics
         end
 
         def test_destroy
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:destroy)
 
-          test "should destroy #{entity.name}" do
+          test "should destroy #{entity.table_name}" do
             assert_difference("#{model_class.name}.count", -1) do
               login
               delete polymorphic_path(record)
@@ -223,10 +242,10 @@ module Schematics
         end
 
         def test_restore_api
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:restore)
 
-          test "should restore API #{entity.name}" do
-            record.destroy
+          test "should restore API #{entity.table_name}" do
+            record.destroy!
             assert record.deleted?
             assert_difference("#{model_class.name}.count") do
               login formats: :json
@@ -239,10 +258,10 @@ module Schematics
         end
 
         def test_restore
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:restore)
 
-          test "should restore #{entity.name}" do
-            record.destroy
+          test "should restore #{entity.table_name}" do
+            record.destroy!
             assert record.deleted?
             assert_difference("#{model_class.name}.count") do
               login
@@ -253,9 +272,9 @@ module Schematics
         end
 
         def test_archive_api
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:archive)
 
-          test "should archive API #{entity.name}" do
+          test "should archive API #{entity.table_name}" do
             record.restore
             refute record.deleted?
             assert_difference("#{model_class.name}.count", -1) do
@@ -269,9 +288,9 @@ module Schematics
         end
 
         def test_archive
-          return if entity.is_a?(Entities::Singleton)
+          return unless entity.can?(:archive)
 
-          test "should archive #{entity.name}" do
+          test "should archive #{entity.table_name}" do
             record.restore
             refute record.deleted?
             assert_difference("#{model_class.name}.count", -1) do
@@ -290,7 +309,7 @@ module Schematics
       end
 
       def record
-        @record ||= send(entity.name.pluralize, :one)
+        @record ||= send(entity.table_name.pluralize, :one)
       end
 
       def login(formats: nil)
@@ -306,7 +325,7 @@ module Schematics
       def params(formats: nil)
         default_attribute = [formats, 'default'].compact.join('_')
         {
-          entity.name.to_sym => entity.fillable_elements.map do |element|
+          entity.table_name.to_sym => entity.fillable_elements.map do |element|
             [
               element.column_name.to_sym,
               element.send(default_attribute) || record.send(element.column_name)

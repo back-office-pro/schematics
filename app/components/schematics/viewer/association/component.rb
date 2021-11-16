@@ -12,7 +12,31 @@ module Schematics
         end
 
         def title
-          klass.human_attribute_name(entity.name, count: @resources.size)
+          case @resources.first
+          when ActiveStorage::Attachment
+            @resources
+              .first
+              .record
+              .class
+              .human_attribute_name(@resources.first.name, count: @resources.size)
+          else
+            model_class.human_attribute_name(entity.name, count: @resources.size)
+          end
+        end
+
+        def icon
+          case @resources.first
+          when ActiveStorage::Attachment
+            @resources
+              .first
+              .record
+              .class
+              .entity
+              .find_field_by_name(@resources.first.name)
+              .icon
+          else
+            super
+          end
         end
 
         def random
@@ -21,29 +45,6 @@ module Schematics
 
         def collapsed?
           @collapsed
-        end
-
-        # :reek:NilCheck
-        def attachment?
-          klass.try(:entity).nil?
-        end
-
-        def klass
-          @resources.first.class
-        end
-
-        def entity
-          # FIXME: Should come from existing entities
-          klass.try(:entity) || Entities::Entity.active_storage_attachment(
-            name: @resources.first.name,
-            icon: @resources
-              .first
-              .record
-              .class
-              .entity
-              .find_field_by_name(@resources.first.name)
-              .icon
-          )
         end
       end
     end

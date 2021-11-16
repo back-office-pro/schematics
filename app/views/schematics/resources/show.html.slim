@@ -1,4 +1,4 @@
-- breadcrumb title, @resource
+- breadcrumb title, main_app.polymorphic_path(@resource)
 .card.shadow-sm.border-0
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
     .row.align-items-center
@@ -9,23 +9,23 @@
       .col-auto {
         data-controller='generateFileInBackground'
         data-generateFileInBackground-content-type='application/pdf'
-        data-generateFileInBackground-url=polymorphic_path(@resource, format: :pdf)
+        data-generateFileInBackground-url=main_app.polymorphic_path(@resource, format: :pdf)
       }
         a.btn.btn-light.btn-sm.btn-icon-split data-action='click->generateFileInBackground#run'
           span.icon data-generateFileInBackground-target='icon' = fa_icon :file_pdf
           span.text.d-none.d-lg-inline data-generateFileInBackground-target='text' = t('schematics.application.button.download_pdf')
         - if can?(:update, @resource)
-          = link_to edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource),
+          = link_to main_app.edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource),
                     class: 'btn btn-primary btn-sm btn-icon-split ml-2' do
             span.icon = fa_icon :edit
             span.text.d-none.d-lg-inline = t('schematics.application.button.edit')
         - if can?(:destroy, @resource)
           - if resource_associations.any?
-            = link_to polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
+            = link_to main_app.polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
                 span.icon = fa_icon :trash
                 span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
           - else
-            = link_to polymorphic_path(@resource), method: :delete, class: 'btn btn-danger btn-sm btn-icon-split ml-2', data: confirm_data do
+            = link_to main_app.polymorphic_path(@resource), method: :delete, class: 'btn btn-danger btn-sm btn-icon-split ml-2', data: confirm_data do
                 span.icon = fa_icon :trash
                 span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
   .card-body.p-0

@@ -39,7 +39,6 @@ require 'date_validator'
 require 'google/cloud/translate'
 require 'active_model_serializers'
 require 'acts_as_singleton'
-require 'ancestry'
 require 'title'
 require 'best_in_place'
 require 'rails-erd'
@@ -111,8 +110,9 @@ module Schematics
     config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] } if Rails.env.production?
 
     # Active Storage
-    config.after_initialize do # Make sure we override main app 6.0 defaults
+    config.after_initialize do # Make sure we override main app 6.1 defaults
       config.active_storage.replace_on_assign_to_many = false
+      config.active_storage.track_variants = false
     end
 
     def credentials

@@ -61,7 +61,7 @@ class FixturesGenerator < Rails::Generators::Base
                 key: #{ActiveStorage::Blob.generate_unique_secure_token}
                 filename: dummy.#{attribute.extension}
                 content_type: #{Mime[attribute.extension]}
-                service_name: Disk
+                service_name: test
                 byte_size: 6381
                 checksum: XqaZqieypVz5akNq/VVJIg==
             YAML

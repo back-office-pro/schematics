@@ -67,7 +67,7 @@ module Schematics
         .instance
         .entities
         .flat_map(&:listable_elements)
-        .map { |element| "col_#{element.entity.name}_#{element.name}" }
+        .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
     end
 
     def dashboard_preferences

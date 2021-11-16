@@ -6,6 +6,8 @@ Style/Documentation:
   Enabled: false
 Style/ReturnNil:
   Enabled: true
+Rails/SaveBang:
+  Enabled: true
 Style/HashEachMethods:
   AllowedReceivers:
     - enum
@@ -30,13 +32,13 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 50
 Metrics/ClassLength:
-  Max: 270
+  Max: 300
 RSpec/MultipleExpectations:
   Max: 2
 Metrics/AbcSize:
-  Max: 76
+  Max: 70
 Metrics/ParameterLists:
-  Max: 7
+  Max: 8
 Performance/MethodObjectAsBlock:
   Enabled: false
 AllCops:

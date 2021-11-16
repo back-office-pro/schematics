@@ -17,7 +17,7 @@ module Schematics
       end
 
       def editable?
-        @editable && !@field.try(:readonly?)
+        @editable && can?(:update, @resource) && !@field.try(:readonly?)
       end
     end
   end

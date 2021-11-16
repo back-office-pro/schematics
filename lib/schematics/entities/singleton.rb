@@ -3,17 +3,16 @@
 module Schematics
   module Entities
     class Singleton < Entity
-      def route
+      def to_str
         <<~RUBY
-          resource :#{name.pluralize}, only: [:show, :edit, :update]
-          resolve("#{class_name}") { [:#{name.pluralize}] }
+          acts_as_singleton
         RUBY
       end
 
-      def to_str
-        super + <<~RUBY # rubocop:disable Style/StringConcatenation
-          acts_as_singleton
-        RUBY
+      protected
+
+      def default_actions
+        %w[show edit update]
       end
     end
   end

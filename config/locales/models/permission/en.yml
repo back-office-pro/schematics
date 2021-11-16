@@ -9,8 +9,10 @@ en:
           create: Add
           destroy: Delete
           import: Import
+          index: List
           read: Read
           restore: Restore
+          show: View
           update: Edit
         model: Data
         name: Name

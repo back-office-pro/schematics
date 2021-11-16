@@ -36,7 +36,7 @@ module Schematics
         end
 
         def test_valid?
-          test "valid #{entity.name}" do
+          test "valid #{entity.table_name}" do
             assert record.valid?
           end
         end
@@ -135,7 +135,8 @@ module Schematics
               assert reflection.class_name == attribute.class_name
               assert reflection.foreign_key == attribute.column_name
               assert reflection.options[:inverse_of] == attribute.inverse_association.name.to_sym
-              assert reflection.options[:optional] == true unless attribute.required?
+              assert reflection.options[:optional] == !attribute.required?
+              assert reflection.options[:polymorphic] == (attribute.polymorphic? || false)
             end
           end
         end
@@ -202,11 +203,11 @@ module Schematics
       protected
 
       def record
-        @record ||= send(entity.name.pluralize, :one)
+        @record ||= send(entity.table_name.pluralize, :one)
       end
 
       def other_record
-        @other_record ||= send(entity.name.pluralize, :two)
+        @other_record ||= send(entity.table_name.pluralize, :two)
       end
     end
   end

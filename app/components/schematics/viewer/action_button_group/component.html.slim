@@ -18,3 +18,15 @@
         method: :delete,
         class: 'btn btn-danger btn-sm',
         data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
+    - elsif can?(:destroy, @resource)
+      - if resource_associations.any?
+        = link_to fa_icon(:trash),
+          polymorphic_path(@resource, action: :delete),
+          class: 'btn btn-danger btn-sm',
+          data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy') }
+      - else
+        = link_to fa_icon(:trash),
+          polymorphic_path(@resource),
+          method: :delete,
+          class: 'btn btn-danger btn-sm',
+          data: confirm_data.merge(toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy'))

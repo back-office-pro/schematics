@@ -59,7 +59,7 @@ describe Schematics::Attributes::References do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      user&.full_name
+      user&.to_s
     RUBY
   end
 
@@ -71,6 +71,7 @@ describe Schematics::Attributes::References do
                  foreign_key: 'user_id',
                  inverse_of: :entities,
                  optional: true,
+                 polymorphic: false,
                  counter_cache: :entities_count
     RUBY
   end
@@ -93,6 +94,31 @@ describe Schematics::Attributes::References do
                    foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: false,
+                   polymorphic: false,
+                   counter_cache: :entities_count
+      RUBY
+    end
+  end
+
+  context 'when references is polymorphic' do
+    let(:options) do
+      {
+        polymorphic: true,
+        inverse: {
+          type: 'has_many'
+        }
+      }
+    end
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        belongs_to :user,
+                   -> { with_deleted },
+                   class_name: 'User',
+                   foreign_key: 'user_id',
+                   inverse_of: :entities,
+                   optional: true,
+                   polymorphic: true,
                    counter_cache: :entities_count
       RUBY
     end
