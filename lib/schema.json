@@ -179,6 +179,9 @@
         "readonly": {
           "type": "boolean"
         },
+        "polymorphic": {
+          "type": "boolean"
+        },
         "values": {
           "type": "array"
         },
