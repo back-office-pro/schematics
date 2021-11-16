@@ -30,7 +30,7 @@ module Schematics
         delegate :entity, to: :model_class, private: true
 
         def model_class
-          name.demodulize.constantize
+          name.demodulize.split('_').first.constantize
         end
       end
     end

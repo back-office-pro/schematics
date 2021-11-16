@@ -8,14 +8,14 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do # rubocop:disable Metrics/BlockLength
+        delegate :entity_fixtures, to: :class
+
         fixtures entity_fixtures
         fixtures 'action_text/rich_texts'
         fixtures 'active_storage/attachments'
         fixtures 'active_storage/blobs'
 
-        alias_method :models, entity_fixtures
-
-        subject(:model) { models(:one) }
+        subject(:model) { send(entity_fixtures, :one) }
 
         it { is_expected.to be_valid }
         it { is_expected.to have_implicit_order_column(:created_at) }
@@ -191,7 +191,7 @@ module Schematics
                  private: true
 
         def model_class
-          name.demodulize.constantize
+          name.demodulize.split('_').first.constantize
         end
 
         def entity_fixtures
