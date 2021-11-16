@@ -59,7 +59,7 @@ module Schematics
                      foreign_key: '#{column_name}',
                      inverse_of: :#{inverse_association_name.pluralize},
                      optional: #{!required?},
-                     polymorphic: #{polymorphic?},
+                     polymorphic: #{!polymorphic?.nil?},
                      counter_cache: :#{inverse_association_name.pluralize}_count
         RUBY
       end
