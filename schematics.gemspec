@@ -85,7 +85,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.0.2'
   spec.add_dependency 'searchkick', '~> 4.6.1'
-  spec.add_dependency 'selenium-webdriver', '~> 4.0.3'
+  spec.add_dependency 'selenium-webdriver', '>= 4.0.3', '< 4.2.0'
   spec.add_dependency 'shoulda-matchers', '~> 5.0.0'
   spec.add_dependency 'sidekiq', '~> 6.3.1'
   spec.add_dependency 'simple_form', '~> 5.1.0'
