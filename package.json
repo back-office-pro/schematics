@@ -11,7 +11,7 @@
     "jquery": "3.5.1",
     "jquery-resizable-columns": "0.2.3",
     "jquery-ui": "1.12.1",
-    "jquery-ujs": "1.2.2",
+    "jquery-ujs": "1.2.3",
     "slim-select": "1.27.0",
     "sortablejs": "1.14.0",
     "stimulus": "2.0.0",
