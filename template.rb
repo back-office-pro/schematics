@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 # Gems
 gem 'schematics', path: '/Users/max/github/schematics'
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
@@ -34,19 +36,10 @@ after_bundle do
   remove_file 'public/500.html'
 
   # Yarn packages
-  run 'yarn add animate.css@4.1.1'
-  run 'yarn add bootstrap@4.6.0'
-  run 'yarn add bootswatch@4.6.0'
-  run 'yarn add file-saver@2.0.5'
-  run 'yarn add flag-icon-css@3.5.0'
-  run 'yarn add jquery@3.5.1'
-  run 'yarn add jquery-resizable-columns@0.2.3'
-  run 'yarn add jquery-ui@1.12.1'
-  run 'yarn add jquery-ujs@1.2.2'
-  run 'yarn add slim-select@1.27.0'
-  run 'yarn add sortablejs@1.14.0'
-  run 'yarn add stimulus@2.0.0'
-  run 'yarn add sweetalert2@5.1.1'
+  JSON
+    .parse(File.read((File.expand_path('package.json', __dir__))))
+    .fetch('dependencies')
+    .each { |dependency, version| run "yarn add #{dependency}@#{version}" }
 
   # Git
   git add: '-A'

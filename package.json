@@ -1,0 +1,20 @@
+{
+  "name": "schematics",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "animate.css": "4.1.1",
+    "bootstrap": "4.6.0",
+    "bootswatch": "4.6.0",
+    "file-saver": "2.0.5",
+    "flag-icon-css": "3.5.0",
+    "jquery": "3.5.1",
+    "jquery-resizable-columns": "0.2.3",
+    "jquery-ui": "1.12.1",
+    "jquery-ujs": "1.2.2",
+    "slim-select": "1.27.0",
+    "sortablejs": "1.14.0",
+    "stimulus": "2.0.0",
+    "sweetalert2": "5.1.1"
+  }
+}
