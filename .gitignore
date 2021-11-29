@@ -1,8 +1,10 @@
-.bundle/
+.bundle
 log/*.log
-pkg/
+pkg
 spec/dummy
-doc/
-coverage/
-/config/master.key
+doc
+coverage
+config/master.key
+node_modules
 Gemfile.lock
+yarn.lock
