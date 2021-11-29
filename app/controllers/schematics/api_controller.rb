@@ -5,6 +5,7 @@ module Schematics
     before_action :set_paper_trail_whodunnit
     after_action { pagy_headers_merge(@pagy) if @pagy }
 
+    # TODO: rescue RecordInvalid
     rescue_from ActionController::ParameterMissing, with: :parameter_missing
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from CanCan::AccessDenied, with: :forbidden
