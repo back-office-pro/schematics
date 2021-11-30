@@ -20,7 +20,7 @@
             span.icon = fa_icon :edit
             span.text.d-none.d-lg-inline = t('schematics.application.button.edit')
         - if can?(:destroy, @resource)
-          - if resource_associations.any?
+          - if resource_associations(only_required: true).any?
             = link_to main_app.polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
                 span.icon = fa_icon :trash
                 span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
