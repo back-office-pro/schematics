@@ -22,7 +22,5 @@ en:
         subtitle: This action is irreversible
         title: Are you sure?
         warning: 'Removing the %{model_name} %{resource} will also result in the permanent removal of the following:'
-      dropdown:
-        per_page: "%{size} %{model_name} per page"
       resource:
         empty: No data available

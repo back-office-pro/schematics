@@ -92,3 +92,12 @@ button.swal2-cancel.styled {
   border-left-color: $card-bg;
   border-right-color: $card-bg;
 }
+
+// Pagy
+
+.pagy-items-selector-js input {
+  background: $light;
+  border: 0;
+  color: $dark;
+  font-weight: bold;
+}

@@ -3,8 +3,8 @@
 @import 'animate.css/animate';
 @import 'sweetalert2/dist/sweetalert2';
 @import 'jquery-resizable-columns/dist/jquery.resizableColumns';
-$flag-icon-css-path: '../flag-icon-css/flags';
-@import 'flag-icon-css/sass/flag-icon';
+$flag-icons-path: '../flag-icon-css/flags';
+@import 'flag-icon-css/sass/flag-icons';
 @import 'timeline';
 @import 'trix';
 @import 'best_in_place';
@@ -116,10 +116,6 @@ footer {
   z-index: 2;
 }
 
-.pagy-bootstrap-nav-js .pagination {
-  justify-content: center;
-}
-
 // Cards
 
 .card .card-header h5.text-primary {
@@ -220,4 +216,11 @@ input[type='search']::-webkit-search-cancel-button:hover {
 
 .progress {
   height: 19px;
+}
+
+// Pagy
+
+.pagy-bootstrap-nav-js .pagination {
+  justify-content: center;
+  margin-bottom: 0;
 }

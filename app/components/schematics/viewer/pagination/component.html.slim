@@ -1,0 +1,7 @@
+.row.pt-3
+  .col.d-none.d-xl-flex.text-dark.ml-2.align-items-center
+    == pagy_items_selector_js(@pagy, item_name: item_name)
+  .col
+    == pagy_bootstrap_nav_js(@pagy)
+  .col.d-none.d-xl-flex.text-dark.mr-2.align-items-center.justify-content-end
+    == pagy_info(@pagy, item_name: item_name)

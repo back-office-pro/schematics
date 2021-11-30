@@ -22,7 +22,5 @@ fr:
         subtitle: Cette action est irréversible
         title: Etes-vous sûr ?
         warning: 'La suppression du %{model_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
-      dropdown:
-        per_page: "%{size} %{model_name} par page"
       resource:
         empty: Aucune donnée disponible
