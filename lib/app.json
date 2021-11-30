@@ -252,13 +252,17 @@
       "attributes": [
         {
           "name": "model",
-          "type": "model"
+          "type": "model",
+          "options": {
+            "readonly": true
+          }
         },
         {
           "name": "action",
           "type": "enum",
           "options": {
             "required": true,
+            "readonly": true,
             "values": [
               "index",
               "show",
@@ -301,6 +305,7 @@
           "type": "enum",
           "options": {
             "required": true,
+            "readonly": true,
             "default": "pending",
             "values": [
               "pending",
@@ -313,6 +318,7 @@
           "name": "progress",
           "type": "float",
           "options": {
+            "readonly": true,
             "default": 0,
             "unit": "%"
           }
@@ -344,6 +350,7 @@
           "type": "enum",
           "options": {
             "required": true,
+            "readonly": true,
             "default": "free",
             "values": [
               "free",
