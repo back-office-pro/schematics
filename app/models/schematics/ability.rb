@@ -31,7 +31,6 @@ module Schematics
     end
 
     def aliases
-      alias_action :autocomplete, to: :read
       alias_action :import, to: :create
       alias_action :restore, to: :archive
       alias_action :delete, to: :destroy
@@ -57,6 +56,7 @@ module Schematics
     def user_permissions
       @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
+        can :autocomplete, permission.model.constantize if permission.action.to_sym == :index
       end
     end
 
@@ -73,9 +73,7 @@ module Schematics
     def version_permissions
       can :revert, Version, whodunnit: user.id
       @user.role.permissions.each do |permission|
-        can :read, Version,
-            event: permission.action,
-            item_type: permission.model
+        can :read, Version, event: permission.action, item_type: permission.model
       end
     end
 
