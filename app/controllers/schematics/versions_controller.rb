@@ -6,10 +6,7 @@ module Schematics
     delegate :model_name, to: :model_class, private: true
 
     def index
-      @pagy, @versions = pagy(
-        model_class.timeline(ability: current_ability),
-        items: params.fetch(:per_page, 50)
-      )
+      @pagy, @versions = pagy(model_class.timeline(ability: current_ability))
       respond_to do |format|
         format.html
         format.json { render json: @versions }

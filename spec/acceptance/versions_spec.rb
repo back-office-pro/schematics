@@ -11,7 +11,7 @@ resource 'Versions' do
 
   get '/versions' do
     with_options with_example: true do
-      parameter :per_page, 'Items per page'
+      parameter :items, 'Items per page'
     end
 
     example 'Success' do

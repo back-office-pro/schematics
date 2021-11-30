@@ -34,10 +34,7 @@ module Schematics
     end
 
     def index
-      @pagy, @resources = pagy_searchkick(
-        model_class.pagy_search(**search_params),
-        items: params.fetch(:per_page, 25)
-      )
+      @pagy, @resources = pagy_searchkick(model_class.pagy_search(**search_params))
       respond_to do |format|
         format.html
         format.json { render json: @resources }
