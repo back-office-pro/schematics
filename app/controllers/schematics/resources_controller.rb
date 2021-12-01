@@ -7,6 +7,7 @@ module Schematics
     include Filterable
     include Searchable
     include Readable
+    include Calendarable
 
     before_action :set_resource, only: %i[show edit delete update destroy archive restore]
     before_action :set_breadcrumb
@@ -34,7 +35,12 @@ module Schematics
     end
 
     def index
-      @pagy, @resources = pagy_searchkick(model_class.pagy_search(**search_params))
+      @calendar, @pagy, @resources = pagy_calendar(
+        model_class.pagy_search(**search_params),
+        month: { format: '%B %Y' },
+        pagy: { backend: :pagy_searchkick },
+        active: entity.viewer == :calendar
+      )
       respond_to do |format|
         format.html
         format.json { render json: @resources }

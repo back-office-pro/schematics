@@ -4,23 +4,28 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
-        # OPTIMIZE: refactor with Pagination::Component
-        def start_attribute
-          entity.datetime_attributes.first.name.to_sym # FIXME: could work randomly
-        end
-
-        # OPTIMIZE: refactor with Pagination::Component
-        def end_attribute
-          entity.datetime_attributes.second.name.to_sym # FIXME: could work randomly
-        end
+        delegate :calendar_start_attribute,
+                 :calendar_end_attribute,
+                 :calendar_start_date,
+                 :calendar_end_date,
+                 to: :helpers
 
         def date_range
-          (start_date.beginning_of_week..start_date.end_of_month.end_of_week).to_a
+          (start_date..end_date).to_a
         end
 
-        # OPTIMIZE: refactor with Pagination::Component
         def start_date
-          params.dig(:filter, start_attribute, :gte)&.to_date || Date.current.beginning_of_month
+          (calendar_start_date || @resources.map(&calendar_start_attribute).min || Date.current)
+            .beginning_of_month
+            .beginning_of_week
+            .to_date
+        end
+
+        def end_date
+          (calendar_start_date || @resources.map(&calendar_start_attribute).max || Date.current)
+            .end_of_month
+            .end_of_week
+            .to_date
         end
 
         def td_classes_for(date)
@@ -32,8 +37,8 @@ module Schematics
 
         def resources_for(date)
           @resources.filter do |resource|
-            resource.send(start_attribute).to_date <= date &&
-              resource.send(end_attribute).to_date >= date
+            resource.send(calendar_start_attribute).to_date <= date &&
+              resource.send(calendar_end_attribute).to_date >= date
           end
         end
       end

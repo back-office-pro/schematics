@@ -4,7 +4,6 @@ module Schematics
   module Attributes
     class References < Association
       # by convention, this attribute will always be set to current_user
-      # OPTIMIZE: Would be better to have some kind $CURRENT_USER super var as default value
       def initialize(entity, name, options)
         super entity, name, options.merge(type: 'user')
       end
