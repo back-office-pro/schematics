@@ -11,7 +11,7 @@ module Schematics
                     :calender_end_date
     end
 
-    def pagy_calendar_period(collection)
+    def pagy_calendar_period(_collection)
       [
         calendar_start_date ||
           model_class.with_deleted.minimum(calendar_start_attribute) ||
