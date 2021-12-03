@@ -19,17 +19,13 @@ module Schematics
         @field = field
       end
 
-      def to_s
-        name
-      end
-
       def joins
         @field.try(:preload) || []
       end
 
       def to_str
         <<~RUBY
-          alias_attribute :to_s, :#{name}
+          alias_attribute :to_s, :#{name}_formatted
         RUBY
       end
 

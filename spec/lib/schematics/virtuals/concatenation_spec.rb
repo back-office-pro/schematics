@@ -23,10 +23,13 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
-  its(:function) { is_expected.to eq("\"\#{first_name} \#{profile.last_name}\"") }
   its(:to_sql) { is_expected.to eq("CONCAT(users.first_name, ' ', profiles.last_name)") }
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
+
+  its(:function) do
+    is_expected.to eq("\"\#{first_name_formatted} \#{profile.last_name_formatted}\"")
+  end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -37,7 +40,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       def full_name
-        "\#{first_name} \#{profile.last_name}"
+        "\#{first_name_formatted} \#{profile.last_name_formatted}"
       rescue StandardError => e
         e
       end

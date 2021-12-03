@@ -40,5 +40,21 @@ module Schematics
         @concerns = concerns
       end
     end
+
+    def method_missing(method_name, *args, &block)
+      return super unless method_name.end_with?('_formatted')
+
+      field_name = method_name.to_s.chomp('_formatted')
+      value = public_send(field_name)
+      self
+        .class
+        .entity
+        .find_field_by_name(field_name)
+        .try(:format, value) || value
+    end
+
+    def respond_to_missing?(method_name, *args)
+      method_name.end_with?('_formatted') || super
+    end
   end
 end

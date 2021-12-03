@@ -18,7 +18,7 @@ module Schematics
       end
 
       def to_str
-        '#{' + @value + '}' # rubocop:disable Style/StringConcatenation
+        '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
       end
 
       def references

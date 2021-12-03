@@ -13,12 +13,11 @@ describe Schematics::Entities::Descriptor do
     )
   end
 
-  its(:to_s) { is_expected.to eq('type') }
   its(:serializer_class) { is_expected.to be_a(Class) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      alias_attribute :to_s, :type
+      alias_attribute :to_s, :type_formatted
     RUBY
   end
 end
