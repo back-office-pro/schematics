@@ -1,5 +1,6 @@
 //= require jquery/dist/jquery
 //= require jquery-ujs/src/rails
+//= require popper.js/dist/umd/popper
 //= require bootstrap/dist/js/bootstrap.bundle
 //= require sweetalert2/dist/sweetalert2
 //= require sweet-alert2-rails
