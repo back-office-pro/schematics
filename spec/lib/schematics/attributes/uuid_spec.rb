@@ -9,6 +9,7 @@ describe Schematics::Attributes::Uuid do
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
 
   its(:type) { is_expected.to eq('uuid') }
   its(:column_name) { is_expected.to eq('id') }

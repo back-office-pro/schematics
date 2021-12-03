@@ -3,6 +3,8 @@
 module Schematics
   module Attributes
     class Uuid < Attribute
+      include Behaviours::Renderable
+
       def default
         return SecureRandom.uuid if required?
 
