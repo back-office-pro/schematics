@@ -4,14 +4,14 @@ describe Schematics::Associations::HasOne do
   subject(:association) { described_class.new(belongs_to) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'schema',
       descriptor: 'title',
       attributes: [{ name: 'title', type: 'string' }]
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'entity',
       descriptor: 'type',
       attributes: [{ name: 'type', type: 'string' }]
@@ -25,7 +25,7 @@ describe Schematics::Associations::HasOne do
     }
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.create(
+    Schematics::Attributes::Attribute.build(
       entity,
       name: 'schema',
       type: 'belongs_to',
@@ -52,8 +52,8 @@ describe Schematics::Associations::HasOne do
     RUBY
   end
 
-  its('to_str.squish') do
-    is_expected.to eq <<~RUBY.squish
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
       has_one :entity,
               class_name: 'Entity',
               foreign_key: 'schema_id',

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/indent'
+
 module Schematics
   module Associations
     class HasOne < Association
@@ -10,8 +12,8 @@ module Schematics
       def to_str
         super
           .chomp
-          .concat(', ')
-          .concat <<~RUBY
+          .concat(",\n")
+          .concat <<~RUBY.indent(8)
             inverse_of: :#{inverse_of}
           RUBY
       end

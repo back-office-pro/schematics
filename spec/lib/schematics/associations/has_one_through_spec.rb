@@ -4,31 +4,31 @@ describe Schematics::Associations::HasOneThrough do
   subject(:association) { described_class.new(belongs_to, through) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'schema',
       descriptor: 'title',
       attributes: [{ name: 'title', type: 'string' }]
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'attribute',
       descriptor: 'name',
       attributes: [{ name: 'name', type: 'string' }]
     )
   end
   let(:through_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'entity',
       descriptor: 'type',
       attributes: [{ name: 'type', type: 'string' }]
     )
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.create(through_entity, name: 'schema', type: 'belongs_to')
+    Schematics::Attributes::Attribute.build(through_entity, name: 'schema', type: 'belongs_to')
   end
   let(:through) do
-    Schematics::Attributes::Attribute.create(entity, name: 'entity', type: 'belongs_to')
+    Schematics::Attributes::Attribute.build(entity, name: 'entity', type: 'belongs_to')
   end
 
   before do
@@ -50,8 +50,8 @@ describe Schematics::Associations::HasOneThrough do
     RUBY
   end
 
-  its('to_str.squish') do
-    is_expected.to eq <<~RUBY.squish
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
       has_one :schema,
               class_name: 'Schema',
               foreign_key: 'schema_id',

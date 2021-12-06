@@ -4,35 +4,35 @@ describe Schematics::Associations::HasManyThrough do
   subject(:association) { described_class.new(through, belongs_to.inverse_association) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'schema',
       descriptor: 'title',
       attributes: [{ name: 'title', type: 'string' }]
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'attribute',
       descriptor: 'name',
       attributes: [{ name: 'name', type: 'string' }]
     )
   end
   let(:through_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'entity',
       descriptor: 'type',
       attributes: [{ name: 'type', type: 'string' }]
     )
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.create(
+    Schematics::Attributes::Attribute.build(
       through_entity,
       name: 'schema',
       type: 'belongs_to'
     )
   end
   let(:through) do
-    Schematics::Attributes::Attribute.create(
+    Schematics::Attributes::Attribute.build(
       entity,
       name: 'entity',
       type: 'belongs_to'
@@ -49,13 +49,13 @@ describe Schematics::Associations::HasManyThrough do
   its(:class_name) { is_expected.to eq('Attribute') }
   its('descriptor.name') { is_expected.to eq('name') }
 
-  its('to_str.squish') do
-    is_expected.to eq <<~RUBY.squish
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
       has_many :attributes,
-               class_name: 'Attribute',
-               foreign_key: 'entity_id',
-               through: :entities,
-               source: :attributes
+              class_name: 'Attribute',
+              foreign_key: 'entity_id',
+              through: :entities,
+              source: :attributes
     RUBY
   end
 

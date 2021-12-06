@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/indent'
+
 module Schematics
   module Associations
     class AssociationThrough < Association
@@ -17,8 +19,8 @@ module Schematics
       def to_str
         super
           .chomp
-          .concat(', ')
-          .concat <<~RUBY
+          .concat(",\n")
+          .concat <<~RUBY.indent(8)
             through: :#{@through.name},
             source: :#{source}
           RUBY
