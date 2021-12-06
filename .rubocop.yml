@@ -38,7 +38,7 @@ RSpec/MultipleExpectations:
 Metrics/AbcSize:
   Max: 70
 Metrics/ParameterLists:
-  Max: 8
+  Max: 9
 Performance/MethodObjectAsBlock:
   Enabled: false
 AllCops:
