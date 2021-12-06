@@ -15,6 +15,10 @@ module Schematics
       def css_class
         { 'notice' => 'success', 'alert' => 'danger' }[type]
       end
+
+      def animated?
+        !Rails.env.test?
+      end
     end
   end
 end
