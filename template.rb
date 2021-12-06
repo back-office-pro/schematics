@@ -16,7 +16,7 @@ after_bundle do
   rails_command 'action_text:install'
   rails_command 'generate annotate:install'
   rails_command 'generate fixtures'
-  # rails_command 'generate locales'
+  rails_command 'generate locales'
   rails_command 'generate erd:install'
   rails_command 'generate open_api'
   rails_command 'db:migrate:reset'
