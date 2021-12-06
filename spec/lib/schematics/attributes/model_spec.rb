@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Model do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'permission') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'permission') }
   let(:name) { 'model' }
   let(:options) { {} }
 

@@ -10,7 +10,7 @@ module Schematics
       attr_reader :entity, :name, :options
 
       class << self
-        def create(entity, name:, type:, options: {})
+        def build(entity, name:, type:, options: {})
           Attributes.const_get(type.camelize.to_sym).new(entity, name, options)
         end
       end

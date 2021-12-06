@@ -7,10 +7,10 @@ module Schematics
       attr_reader :x, :y
 
       class << self
-        def create(schema, entity:, type:, x:, y:) # rubocop:disable Naming/MethodParameterName
+        def build(schema, entity:, type:, x:, y:) # rubocop:disable Naming/MethodParameterName
           entity = schema.find_entity_by_name(entity)
-          x_axis = Axes::X.create(entity, **x)
-          y_axis = Axes::Y.create(entity, **y)
+          x_axis = Axes::X.build(entity, **x)
+          y_axis = Axes::Y.build(entity, **y)
           new(entity, type, x_axis, y_axis)
         end
       end

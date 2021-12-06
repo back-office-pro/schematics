@@ -4,7 +4,7 @@ describe Schematics::Graphics::Chart do
   subject(:chart) { described_class.new(entity, type, x_axis, y_axis) }
 
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'user',
       attributes: [
         {
@@ -15,8 +15,8 @@ describe Schematics::Graphics::Chart do
     )
   end
   let(:type) { 'pie' }
-  let(:x_axis) { Schematics::Graphics::Axes::X.create(entity, agregate: 'group', field: 'locale') }
-  let(:y_axis) { Schematics::Graphics::Axes::Y.create(entity, agregate: 'count') }
+  let(:x_axis) { Schematics::Graphics::Axes::X.build(entity, agregate: 'group', field: 'locale') }
+  let(:y_axis) { Schematics::Graphics::Axes::Y.build(entity, agregate: 'count') }
 
   its(:type) { is_expected.to eq(:pie_chart) }
   its(:icon) { is_expected.to eq(:chart_pie) }

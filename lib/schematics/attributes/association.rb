@@ -65,7 +65,7 @@ module Schematics
       end
 
       def inverse_association
-        @inverse_association ||= Associations::Association.create(self, **inverse)
+        @inverse_association ||= Associations::Association.build(self, **inverse)
       end
 
       def icon

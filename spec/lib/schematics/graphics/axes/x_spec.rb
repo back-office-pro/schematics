@@ -3,7 +3,7 @@
 describe Schematics::Graphics::Axes::X do
   subject(:axis) { described_class.new(entity, agregate, field) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'product') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'product') }
   let(:field) { nil }
   let(:agregate) { 'sum' }
 

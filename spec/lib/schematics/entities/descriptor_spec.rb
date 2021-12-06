@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Descriptor do
-  subject(:descriptor) { described_class.create(entity, 'type') }
+  subject(:descriptor) { described_class.build(entity, 'type') }
 
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'entity',
       descriptor: 'type',
       attributes: [

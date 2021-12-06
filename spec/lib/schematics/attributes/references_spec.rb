@@ -4,7 +4,7 @@ describe Schematics::Attributes::References do
   subject(:attribute) { described_class.new(entity, name, options) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'user',
       descriptor: 'full_name',
       attributes: [
@@ -20,7 +20,7 @@ describe Schematics::Attributes::References do
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'entity',
       descriptor: 'type',
       attributes: [{ name: 'type', type: 'string' }]

@@ -11,7 +11,7 @@ module Schematics
         attr_reader :agregate, :field
 
         class << self
-          def create(entity, agregate:, field: nil)
+          def build(entity, agregate:, field: nil)
             field = entity.find_field_by_name(field)
             new(entity, agregate, field)
           end

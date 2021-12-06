@@ -4,14 +4,14 @@ describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity, name, options) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'schema',
       descriptor: 'title',
       attributes: [{ name: 'title', type: 'string' }]
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'entity',
       descriptor: 'type',
       attributes: [{ name: 'type', type: 'string' }]

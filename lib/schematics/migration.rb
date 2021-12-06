@@ -3,7 +3,7 @@
 module Schematics
   class Migration
     class << self
-      def create(schema, action:, entity:, timestamp:, attribute: nil)
+      def build(schema, action:, entity:, timestamp:, attribute: nil)
         entity = schema.find_entity_by_name(entity)
         new(action, entity, attribute, timestamp)
       end

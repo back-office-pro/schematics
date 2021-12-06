@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Token do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
   let(:name) { 'auth_token' }
   let(:options) { {} }
 

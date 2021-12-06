@@ -4,7 +4,7 @@ module Schematics
   module Graphics
     class Stat < Axes::Y
       class << self
-        def create(schema, entity:, **args)
+        def build(schema, entity:, **args)
           entity = schema.find_entity_by_name(entity)
           super(entity, **args)
         end

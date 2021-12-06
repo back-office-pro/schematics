@@ -2,11 +2,11 @@
 
 describe Schematics::Virtuals::Calculation do
   subject(:virtual) do
-    described_class.create(entity, name: name, function: function, options: options)
+    described_class.build(entity, name: name, function: function, options: options)
   end
 
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'product',
       descriptor: 'full_name',
       attributes: [

@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Address do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
   let(:name) { 'address' }
   let(:options) { {} }
 

@@ -2,7 +2,7 @@
 
 describe Schematics::Entities::Entity do
   subject(:entity) do
-    described_class.create(name: name, attributes: attributes)
+    described_class.build(name: name, attributes: attributes)
   end
 
   let(:name) { 'entity' }

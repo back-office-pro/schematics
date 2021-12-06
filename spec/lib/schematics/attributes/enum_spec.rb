@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Enum do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'product') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'product') }
   let(:name) { 'state' }
   let(:options) { { values: %w[available available_soon not_available] } }
 

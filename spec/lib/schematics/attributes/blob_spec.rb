@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Blob do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'active_storage/attachment') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'active_storage/attachment') }
   let(:name) { 'blob' }
   let(:options) { {} }
 

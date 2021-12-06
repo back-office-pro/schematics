@@ -9,7 +9,7 @@ module Schematics
       delegate :name, :entity, :to_sql, to: :@field
 
       class << self
-        def create(entity, descriptor)
+        def build(entity, descriptor)
           field = entity.find_field_by_name(descriptor)
           new(field)
         end

@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Attachments do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'directory') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'directory') }
   let(:name) { 'files' }
   let(:options) { {} }
 

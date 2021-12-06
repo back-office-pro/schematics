@@ -4,7 +4,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   subject(:association) { described_class.new(belongs_to) }
 
   let(:entity) do
-    Schematics::Entities::Entity.create(
+    Schematics::Entities::Entity.build(
       name: 'role',
       descriptor: 'name',
       attributes: [{ name: 'name', type: 'string' }]
@@ -19,7 +19,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     }
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.create(
+    Schematics::Attributes::Attribute.build(
       entity,
       name: 'permission',
       type: 'belongs_to',

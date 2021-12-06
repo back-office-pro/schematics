@@ -3,7 +3,7 @@
 describe Schematics::Attributes::Timestamp do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'message') }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'message') }
   let(:name) { 'read_at' }
   let(:options) { {} }
 

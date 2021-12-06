@@ -12,7 +12,7 @@ module Schematics
       attr_writer :prefixed
 
       class << self
-        def create(entity_or_belongs_to, type: 'has_many', name: nil)
+        def build(entity_or_belongs_to, type: 'has_many', name: nil)
           constant = Associations.const_get(type.camelize.to_sym)
           case entity_or_belongs_to
           when Entities::Entity
