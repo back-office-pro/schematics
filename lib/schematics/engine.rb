@@ -54,6 +54,7 @@ require 'redis'
 require 'hiredis'
 require 'rack-mini-profiler'
 require 'draper'
+require 'aasm'
 
 module Schematics
   class Engine < ::Rails::Engine
