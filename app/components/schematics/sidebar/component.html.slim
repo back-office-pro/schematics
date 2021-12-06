@@ -3,7 +3,7 @@
     = settings(:company_name)
   ul.nav.nav-light.flex-column.flex-nowrap
     li.nav-item.mb-3
-    - entities.sort_by(&:name).each do |entity|
+    - entities.each do |entity|
       - model_class = entity.class_name.constantize
       - next if cannot?(:index, model_class)
       li.nav-item.text-center.mw-100.mb-2
