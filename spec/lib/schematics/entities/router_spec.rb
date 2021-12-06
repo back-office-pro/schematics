@@ -3,13 +3,13 @@
 describe Schematics::Entities::Router do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.create(name: 'user', actions: actions) }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'user', actions: actions) }
 
   context 'when no actions are defined' do
     let(:actions) { nil }
 
-    its('to_str.squish') do
-      is_expected.to eq <<~RUBY.squish
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
         resources :users, only: [:index, :show, :create, :new, :edit, :update, :destroy], model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
@@ -28,8 +28,8 @@ describe Schematics::Entities::Router do
   context 'when some actions are defined' do
     let(:actions) { %w[index show create import] }
 
-    its('to_str.squish') do
-      is_expected.to eq <<~RUBY.squish
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
         resources :users, only: [:index, :show, :create], model_name: 'User' do
           get :autocomplete, on: :collection
           collection do
@@ -43,7 +43,7 @@ describe Schematics::Entities::Router do
   end
 
   context 'when entity is a singleton' do
-    let(:entity) { Schematics::Entities::Entity.create(name: 'setting', type: 'singleton') }
+    let(:entity) { Schematics::Entities::Entity.build(name: 'setting', type: 'singleton') }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

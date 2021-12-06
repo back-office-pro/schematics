@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/indent'
+
 module Schematics
   module Entities
     class Router
@@ -43,14 +45,18 @@ module Schematics
         when Entity
           <<~RUBY
             resources :#{resource.pluralize}, only: #{routes}, model_name: '#{class_name}' do
-              #{resource_routes}
+            #{resource_routes}
             end
           RUBY
         end
       end
 
       def resource_routes
-        [delete_route, archive_routes, autocomplete_route, import_routes].compact.join
+        [delete_route, archive_routes, autocomplete_route, import_routes]
+          .compact
+          .join
+          .indent(2)
+          .chomp
       end
 
       def delete_route
@@ -64,7 +70,7 @@ module Schematics
       def archive_routes
         return unless can?(:archive)
 
-        <<-RUBY
+        <<~RUBY
           delete :archive, on: :member
           delete :restore, on: :member
         RUBY
