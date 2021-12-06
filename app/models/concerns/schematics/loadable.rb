@@ -6,6 +6,7 @@ module Schematics
 
     included do
       include ActiveStorageSupport::SupportForBase64
+      include AASM
     end
 
     class_methods do
