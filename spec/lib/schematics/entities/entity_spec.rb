@@ -15,6 +15,8 @@ describe Schematics::Entities::Entity do
     ]
   end
 
+  it { is_expected.not_to be_core }
+
   its(:icon) { is_expected.to eq(:caret_square_right) }
   its(:class_name) { is_expected.to eq('Entity') }
   its(:weight) { is_expected.to eq(0) }

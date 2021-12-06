@@ -17,15 +17,16 @@ module Schematics
 
       class << self
         # :reek:LongParameterList
-        def create(name:,
-                   type: nil,
-                   icon: :caret_square_right,
-                   descriptor: 'id',
-                   actions: nil,
-                   associations: [],
-                   attributes: [],
-                   virtuals: [])
-          args = [name, icon.to_sym, descriptor, actions, associations, attributes, virtuals]
+        def build(name:,
+                  type: nil,
+                  icon: :caret_square_right,
+                  descriptor: 'id',
+                  core: false,
+                  actions: nil,
+                  associations: [],
+                  attributes: [],
+                  virtuals: [])
+          args = [name, icon.to_sym, descriptor, core, actions, associations, attributes, virtuals]
           return new(*args) unless type
 
           Entities.const_get(type.camelize.to_sym).new(*args)
@@ -33,16 +34,17 @@ module Schematics
       end
 
       # :reek:LongParameterList
-      def initialize(name, icon, descriptor, actions, associations, attributes, virtuals)
+      def initialize(name, icon, descriptor, core, actions, associations, attributes, virtuals)
         @name = name
         @icon = icon
+        @core = core
         @actions = (actions || default_actions).map(&:to_sym)
         @associations = associations.map do |association|
-          Associations::Association.create(self, **association)
+          Associations::Association.build(self, **association)
         end
-        @attributes = attributes.map { |attribute| Attributes::Attribute.create(self, **attribute) }
-        @virtuals = virtuals.map { |virtual| Virtuals::Virtual.create(self, **virtual) }
-        @descriptor = Descriptor.create(self, descriptor)
+        @attributes = attributes.map { |attribute| Attributes::Attribute.build(self, **attribute) }
+        @virtuals = virtuals.map { |virtual| Virtuals::Virtual.build(self, **virtual) }
+        @descriptor = Descriptor.build(self, descriptor)
       end
 
       def method_missing(method_name, *args, &block) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -140,6 +142,10 @@ module Schematics
 
       def table_name
         name.tr('/', '_')
+      end
+
+      def core?
+        @core
       end
 
       def load

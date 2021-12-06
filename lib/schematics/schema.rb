@@ -9,10 +9,10 @@ module Schematics
     attr_reader :entities, :charts, :stats, :migrations
 
     def initialize # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-      @entities = data[:entities].map { |entity| Entities::Entity.create(**entity) }
-      @charts = data[:charts]&.map { |chart| Graphics::Chart.create(self, **chart) }
-      @stats = data[:stats]&.map { |stat| Graphics::Stat.create(self, **stat) }
-      @migrations = data[:migrations]&.map { |migration| Migration.create(self, **migration) }
+      @entities = data[:entities].map { |entity| Entities::Entity.build(**entity) }
+      @charts = data[:charts]&.map { |chart| Graphics::Chart.build(self, **chart) }
+      @stats = data[:stats]&.map { |stat| Graphics::Stat.build(self, **stat) }
+      @migrations = data[:migrations]&.map { |migration| Migration.build(self, **migration) }
       add_inverse_entity_to_association_attributes
       add_has_and_belongs_to_many_associations
       add_inverse_associations
@@ -65,10 +65,11 @@ module Schematics
     end
 
     def app_json
-      JSON.parse(
-        File.read(File.expand_path('../app.json', __dir__)),
-        symbolize_names: true
-      )
+      JSON
+        .parse(File.read(File.expand_path('../app.json', __dir__)), symbolize_names: true)
+        .tap do |json|
+          json[:entities].each { _1[:core] = true }
+        end
     end
 
     def data_json
@@ -96,7 +97,7 @@ module Schematics
           find_entity_by_name(habtm.name.singularize)
             .associations
             .push(
-              Associations::Association.create(
+              Associations::Association.build(
                 habtm.entity,
                 name: habtm.entity.name,
                 type: 'has_and_belongs_to_many'
