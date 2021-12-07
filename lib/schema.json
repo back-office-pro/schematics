@@ -208,6 +208,9 @@
         },
         "height": {
           "type": "integer"
+        },
+        "events": {
+          "type": "array"
         }
       }
     },
@@ -237,6 +240,7 @@
             "phone",
             "references",
             "rich_text",
+            "state_machine",
             "string",
             "text",
             "time_zone",

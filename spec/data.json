@@ -221,13 +221,37 @@
         },
         {
           "name": "state",
-          "type": "enum",
+          "type": "state_machine",
           "options": {
-            "default": "available",
+            "required": true,
+            "default": "pending",
             "values": [
-              "available",
-              "not_available",
-              "available_soon"
+              "pending",
+              "closed",
+              "refused"
+            ],
+            "events": [
+              {
+                "name": "close",
+                "icon": "times",
+                "from": "pending",
+                "to": "closed"
+              },
+              {
+                "name": "refuse",
+                "icon": "ban",
+                "from": "pending",
+                "to": "refused"
+              },
+              {
+                "name": "reopen",
+                "icon": "lock_open",
+                "from": [
+                  "closed",
+                  "refused"
+                ],
+                "to": "pending"
+              }
             ]
           }
         },
