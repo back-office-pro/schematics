@@ -5,7 +5,7 @@ module Schematics
     class InsertData
       include Interactor
       delegate :model_name, to: :@model_class, private: true
-      REGEX = /DETAIL:  Key \((.+)\)=\((.+)\) (.+)\.\n/
+      RECORD_NOT_UNIQUE_REGEX = /DETAIL:  Key \((.+)\)=\((.+)\) (.+)\.\n/
 
       before do
         @import = context.import
@@ -18,7 +18,7 @@ module Schematics
         record_ids = @model_class.insert_all!(@data).pluck('id')
         Schematics::Version.insert_all(record_ids.map(&method(:version)))
       rescue ActiveRecord::RecordNotUnique => e
-        context.fail!(errors: { 'Error' => e.message.scan(REGEX).join(' ') })
+        context.fail!(errors: { 'Error' => e.message.scan(RECORD_NOT_UNIQUE_REGEX).join(' ') })
       end
       # rubocop:enable Rails/SkipsModelValidations
 
