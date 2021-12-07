@@ -29,6 +29,7 @@ Metrics/BlockLength:
     - context
     - namespace
     - class_eval
+    - let
 Metrics/MethodLength:
   Max: 50
 Metrics/ClassLength:

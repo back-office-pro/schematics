@@ -13,7 +13,7 @@ describe Schematics::Schema do
   end
 
   context 'when there are name collisions' do
-    let(:data) do # rubocop:disable Metrics/BlockLength
+    let(:data) do
       {
         entities: [
           {
