@@ -92,7 +92,7 @@ module Schematics
     end
 
     def current_password_attribute
-      Attributes::Attribute.create(entity, type: 'string', name: 'current_password')
+      Attributes::Attribute.build(entity, type: 'string', name: 'current_password')
     end
 
     def attributes
