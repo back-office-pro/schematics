@@ -73,11 +73,7 @@
           "function": "$first_name $last_name"
         },
         {
-          "name": "concatenation_error",
-          "function": "$foo $bar"
-        },
-        {
-          "name": "calculation_error",
+          "name": "name_error",
           "function": "$foo + $bar"
         },
         {
@@ -85,8 +81,8 @@
           "function": "$first_name * $last_name"
         },
         {
-          "name": "association_error",
-          "function": "$deleted_entity.some_attribute"
+          "name": "no_method_error",
+          "function": "$first_name.some_attribute"
         }
       ],
       "attributes": [

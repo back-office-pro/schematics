@@ -11,6 +11,8 @@ module Schematics
       delegate :hidden?, to: :options
       attr_reader :entity, :name, :options
 
+      TYPE_ERROR_REGEX = /([A-Z][a-z]+)/
+
       class << self
         def build(entity, name:, function:, options: {})
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
@@ -59,12 +61,15 @@ module Schematics
 
       def format(value)
         case value
-        when NameError
-          I18n.t('errors.virtuals.name', name: value.name)
-        when TypeError
-          I18n.t('errors.virtuals.type', message: value.message)
         when NoMethodError
-          I18n.t('errors.virtuals.no_method', name: value.name)
+          return I18n.t('errors.virtuals.nil') if value.receiver.nil?
+
+          I18n.t('errors.virtuals.no_method', name: value.name.to_s.chomp('_formatted'))
+        when NameError
+          I18n.t('errors.virtuals.name', variable: value.name)
+        when TypeError
+          source, target = value.message.scan(TYPE_ERROR_REGEX).flatten
+          I18n.t('errors.virtuals.type', source: source, target: target)
         else
           value
         end
