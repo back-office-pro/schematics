@@ -8,6 +8,8 @@ module Schematics
     def initialize(user)
       @user = user
       aliases
+      return unless @user
+
       user_permissions
       active_storage_attachment_permissions
       version_permissions
@@ -80,8 +82,8 @@ module Schematics
     def references_attributes_restrictions
       Schema.instance.entities.flat_map(&:references_attributes).each do |attribute|
         model_class = attribute.entity.class_name.constantize
-        cannot %i[read update destroy archive], model_class
-        can %i[read update destroy archive], model_class, attribute.column_name => @user.id
+        cannot attribute.entity.actions, model_class
+        can attribute.entity.actions, model_class, attribute.column_name => @user.id
       end
     end
   end
