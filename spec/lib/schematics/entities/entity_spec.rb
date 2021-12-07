@@ -2,7 +2,7 @@
 
 describe Schematics::Entities::Entity do
   subject(:entity) do
-    described_class.build(name: name, attributes: attributes)
+    described_class.build(name: name, attributes: attributes, core: true)
   end
 
   let(:name) { 'entity' }
@@ -15,7 +15,7 @@ describe Schematics::Entities::Entity do
     ]
   end
 
-  it { is_expected.not_to be_core }
+  it { is_expected.to be_core }
 
   its(:icon) { is_expected.to eq(:caret_square_right) }
   its(:class_name) { is_expected.to eq('Entity') }
