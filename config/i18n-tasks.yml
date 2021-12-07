@@ -17,8 +17,6 @@ search:
     - app/views
   exclude:
     - app/interactors/schematics/imports
-# translation:
-  # google_translate_api_key: TODO
 ignore_missing:
   - activerecord.*
   - routes.*
