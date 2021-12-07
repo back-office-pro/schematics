@@ -1,24 +1,14 @@
 # frozen_string_literal: true
 
 class FixturesGenerator < Rails::Generators::Base
+  delegate :entities, to: 'Schematics::Schema.instance'
+  delegate :generate_unique_secure_token, to: 'ActiveStorage::Blob'
+
   def generate_action_text_rich_texts
-    Schematics::Schema
-      .instance
-      .entities
+    entities
       .flat_map(&:rich_text_attributes)
       .each
-      .with_index(1) do |attribute, root_index|
-        2.times do |index|
-          append_file(rich_texts_file_path) do
-            <<~YAML
-              #{human_root_index(root_index, index)}:
-                record: #{human_index(index)} (#{attribute.entity.class_name})
-                name: #{attribute.name}
-                body: <p>In a <i>million</i> stars!</p>
-            YAML
-          end
-        end
-      end
+      .with_index(1, &method(:append_to_rich_texts_file))
   end
 
   def create_active_storage_fixtures_directory
@@ -27,50 +17,63 @@ class FixturesGenerator < Rails::Generators::Base
 
   def generate_active_storage_attachments
     create_file(attachments_file_path)
-    Schematics::Schema
-      .instance
-      .entities
+    entities
       .flat_map(&:attachment_attributes)
       .each
-      .with_index(1) do |attribute, root_index|
-        2.times do |index|
-          append_to_file(attachments_file_path) do
-            <<~YAML
-              #{human_root_index(root_index, index)}:
-                record: #{human_index(index)} (#{attribute.entity.class_name})
-                name: #{attribute.name}
-                blob: #{human_root_index(root_index, index)}
-            YAML
-          end
-        end
-      end
+      .with_index(1, &method(:append_to_attachments_file))
   end
 
   def generate_active_storage_blobs
     create_file(blobs_file_path)
-    Schematics::Schema
-      .instance
-      .entities
+    entities
       .flat_map(&:attachment_attributes)
       .each
-      .with_index(1) do |attribute, root_index|
-        2.times do |index|
-          append_to_file(blobs_file_path) do
-            <<~YAML
-              #{human_root_index(root_index, index)}:
-                key: #{ActiveStorage::Blob.generate_unique_secure_token}
-                filename: dummy.#{attribute.extension}
-                content_type: #{Mime[attribute.extension]}
-                service_name: test
-                byte_size: 6381
-                checksum: XqaZqieypVz5akNq/VVJIg==
-            YAML
-          end
-        end
-      end
+      .with_index(1, &method(:append_to_blobs_file))
   end
 
   private
+
+  def append_to_blobs_file(attribute, root_index)
+    2.times do |index|
+      append_to_file(blobs_file_path) do
+        <<~YAML
+          #{human_root_index(root_index, index)}:
+            key: #{generate_unique_secure_token}
+            filename: dummy.#{attribute.extension}
+            content_type: #{Mime[attribute.extension]}
+            service_name: test
+            byte_size: 6381
+            checksum: XqaZqieypVz5akNq/VVJIg==
+        YAML
+      end
+    end
+  end
+
+  def append_to_rich_texts_file(attribute, root_index)
+    2.times do |index|
+      append_file(rich_texts_file_path) do
+        <<~YAML
+          #{human_root_index(root_index, index)}:
+            record: #{human_index(index)} (#{attribute.entity.class_name})
+            name: #{attribute.name}
+            body: <p>In a <i>million</i> stars!</p>
+        YAML
+      end
+    end
+  end
+
+  def append_to_attachments_file(attribute, root_index)
+    2.times do |index|
+      append_to_file(attachments_file_path) do
+        <<~YAML
+          #{human_root_index(root_index, index)}:
+            record: #{human_index(index)} (#{attribute.entity.class_name})
+            name: #{attribute.name}
+            blob: #{human_root_index(root_index, index)}
+        YAML
+      end
+    end
+  end
 
   def human_root_index(root_index, index)
     ((root_index * 2) + index.pred).humanize
