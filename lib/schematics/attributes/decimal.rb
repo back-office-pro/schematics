@@ -3,7 +3,7 @@
 module Schematics
   module Attributes
     class Decimal < Float
-      delegate :precision, :scale, to: :options
+      delegate :precision, to: :options
 
       def bound
         10**(precision - scale.to_i)
