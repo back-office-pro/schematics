@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
+require 'active_support'
+require 'action_view/helpers/number_helper'
+
 module Schematics
   module Virtuals
     class Calculation < Virtual
       include Behaviours::Rangeable
+      include ActionView::Helpers::NumberHelper
 
       delegate :unit, :scale, to: :options
 
@@ -16,7 +20,10 @@ module Schematics
         when StandardError
           super
         else
-          [value.round(scale.to_i), unit].compact.join(' ')
+          return number_to_human_size(value) if unit == 'bytes'
+          value = value.round(scale) if scale
+
+          [value, unit].compact.join(' ')
         end
       end
 
