@@ -16,7 +16,7 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-
     h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
     .pre-scrollable
       - versions.each do |version|
-        .dropdown-item.d-flex.align-items-center
+        .dropdown-item
           = render Schematics::VersionPreview::Component.new(version: version)
     .dropdown-divider.m-0
     = link_to t('.show_all'), versions_path, class: 'dropdown-item text-muted text-center small p-2'
