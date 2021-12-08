@@ -236,6 +236,7 @@
             "float",
             "integer",
             "jsonb",
+            "mime",
             "model",
             "phone",
             "references",

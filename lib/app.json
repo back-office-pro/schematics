@@ -162,7 +162,7 @@
         },
         {
           "name": "content_type",
-          "type": "string"
+          "type": "mime"
         },
         {
           "name": "byte_size",
