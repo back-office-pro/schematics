@@ -21,9 +21,8 @@ module Schematics
           super
         else
           return number_to_human_size(value) if unit == 'bytes'
-          value = value.round(scale) if scale
 
-          [value, unit].compact.join(' ')
+          [scale ? value.round(scale) : value, unit].compact.join(' ')
         end
       end
 
