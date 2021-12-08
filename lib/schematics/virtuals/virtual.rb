@@ -11,8 +11,6 @@ module Schematics
       delegate :hidden?, to: :options
       attr_reader :entity, :name, :options
 
-      TYPE_ERROR_REGEX = /([A-Z][a-z]+)/
-
       class << self
         def build(entity, name:, function:, options: {})
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
