@@ -13,7 +13,7 @@ module Schematics
       include Behaviours::Rangeable
       include ActionView::Helpers::NumberHelper
 
-      delegate :unit, to: :options
+      delegate :unit, :scale, to: :options
 
       def validators
         super.merge(numericality: { allow_nil: !required? })
@@ -22,6 +22,7 @@ module Schematics
       def format(value)
         return unless value
         return number_to_human_size(value) if unit == 'bytes'
+        value = value.round(scale) if scale
 
         [value, unit].compact.join(' ')
       end
