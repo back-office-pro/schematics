@@ -32,8 +32,8 @@
                                     span.sr-only Next
                             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                               tr.animate__slideInRight class=col_preference_class(field)
-                                th.text-truncate
+                                th.text-nowrap
                                   = fa_icon field.icon, class: 'mr-2 text-muted'
                                   = model_class.human_attribute_name(field.name)
-                                td
+                                td.text-nowrap
                                   = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
