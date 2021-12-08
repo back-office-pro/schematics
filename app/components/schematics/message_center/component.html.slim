@@ -7,7 +7,7 @@ li.nav-item.dropdown.no-arrow.align-items-center.px-3.border-left.border-light.d
     h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
     .pre-scrollable
       - messages.each do |message|
-        .dropdown-item.d-flex.align-items-center
+        .dropdown-item
           = render Schematics::MessageCenter::Preview::Component.new(message: message)
     .dropdown-divider.m-0
     = link_to t('.show_all'), messages_path, class: 'dropdown-item text-muted text-center small p-2'
