@@ -23,7 +23,7 @@ module Schematics
 
     def content(resource)
       elements.stable_sort_by(&:weight).map do |element|
-        Array.wrap(element.format(resource.public_send(element.name))).join(' ')
+        Array(element.format(resource.public_send(element.name))).join(' ')
       end
     end
   end
