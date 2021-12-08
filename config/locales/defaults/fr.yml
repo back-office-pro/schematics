@@ -29,9 +29,12 @@ fr:
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:
       name: "$%{variable} n'est pas une variable définie"
-      nil: Une variable n'a pas de valeur
+      nil: une variable n'a pas de valeur
       no_method: "%{name} n'est pas défini"
-      type: Conversion de %{source} en %{target}
+      type: conversion de %{source} en %{target}
+      types:
+        integer: nombre
+        string: chaîne de caractère
   'false': faux
   line: Ligne %{line}
   simple_form:

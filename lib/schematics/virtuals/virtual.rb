@@ -54,25 +54,9 @@ module Schematics
           def #{@name}
             #{function}
           rescue StandardError => e
-            e
+            e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
           end
         RUBY
-      end
-
-      def format(value)
-        case value
-        when NoMethodError
-          return I18n.t('errors.virtuals.nil') if value.receiver.nil?
-
-          I18n.t('errors.virtuals.no_method', name: value.name.to_s.chomp('_formatted'))
-        when NameError
-          I18n.t('errors.virtuals.name', variable: value.name)
-        when TypeError
-          source, target = value.message.scan(TYPE_ERROR_REGEX).flatten
-          I18n.t('errors.virtuals.type', source: source, target: target)
-        else
-          value
-        end
       end
 
       def weight

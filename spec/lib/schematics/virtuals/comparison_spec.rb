@@ -32,7 +32,7 @@ describe Schematics::Virtuals::Comparison do
       def big_price
         price >= 100 && category.vat == 10
       rescue StandardError => e
-        e
+        e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
     RUBY
   end

@@ -33,10 +33,8 @@
       = render Schematics::Attachment::Component.new(attachment: value)
     - else
       = link_to value.filename, value
-- when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
+- when Schematics::Attributes::Boolean, !error? && Schematics::Virtuals::Comparison
   - case value
-  - when StandardError
-    = @field.format(value)
   - when TrueClass
     = fa_icon(:check, class: 'text-success')
   - when FalseClass
@@ -53,6 +51,10 @@
                     display_with: ->(value) { tag.span(class: "flag-icon flag-icon-#{value.downcase}") }
   - else
     = tag.span(class: "flag-icon flag-icon-#{value.downcase}")
+- when error? && Schematics::Virtuals::Virtual
+  span.text-danger
+    = fa_icon(:exclamation_triangle, class: 'mr-2')
+    = @field.format(value)
 - when editable? && Schematics::Behaviours::Editable
   = best_in_place @resource,
                   @field.column_name.to_sym,

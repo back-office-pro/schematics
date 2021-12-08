@@ -19,6 +19,10 @@ module Schematics
       def editable?
         @editable && can?(:update, @resource) && !@field.try(:readonly?)
       end
+
+      def error?
+        value.is_a?(StandardError)
+      end
     end
   end
 end
