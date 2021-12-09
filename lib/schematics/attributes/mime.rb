@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'action_dispatch/http/mime_type'
+
 module Schematics
   module Attributes
     class Mime < String
@@ -7,6 +9,7 @@ module Schematics
         ::Mime::Type
           .lookup(value)
           .symbol
+          .to_s
           .upcase
       end
 
