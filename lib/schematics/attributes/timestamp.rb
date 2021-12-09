@@ -7,7 +7,7 @@ module Schematics
       include Behaviours::Rangeable
 
       def format(value)
-        value && I18n.l(value, format: '%A %d %B %Y %H:%M')
+        value && localize(value, format: '%A %d %B %Y %H:%M')
       end
 
       def icon

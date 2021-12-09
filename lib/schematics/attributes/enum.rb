@@ -27,11 +27,11 @@ module Schematics
       end
 
       def format(value)
-        return unless value
-
-        I18n.t value.to_sym,
-               default: value.humanize,
-               scope: [:activerecord, :attributes, @entity.class_name.underscore, @name.pluralize]
+        value && translate(
+          value.to_sym,
+          default: value.humanize,
+          scope: [:activerecord, :attributes, @entity.class_name.underscore, @name.pluralize]
+        )
       end
 
       def icon

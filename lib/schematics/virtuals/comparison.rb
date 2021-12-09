@@ -12,7 +12,7 @@ module Schematics
         when StandardError
           super
         else
-          I18n.t(value, default: value.to_s).upcase
+          translate(value, default: value.to_s).upcase
         end
       end
 
