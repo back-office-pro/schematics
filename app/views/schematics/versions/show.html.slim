@@ -20,7 +20,7 @@
               - @version.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
                 tr
                   th
-                    = fa_icon field.icon, class: 'mr-2 text-muted'
+                    = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
                     = @version.model_class.human_attribute_name(field.name)
                   td
                     - old_version = @version.reify(dup: true)
@@ -43,7 +43,7 @@
               - @version.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
                 tr
                   th
-                    = fa_icon field.icon, class: 'mr-2 text-muted'
+                    = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
                     = @version.model_class.human_attribute_name(field.name)
                   td
                     = render Schematics::Resource::Component.new(resource: @version.item, field: field)

@@ -9,7 +9,7 @@
         - model_class = entity.class_name.constantize
         tr
           th.text-primary
-            = fa_icon entity.icon, class: 'mr-2 text-muted'
+            = fa_icon entity.icon, class: 'fa-fw mr-2 text-muted'
             = model_class.model_name.human
           - events.each do |action|
             - preference = "#{action}_#{model_class}"
