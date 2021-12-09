@@ -1,19 +1,9 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/module/delegation'
-
 module Schematics
   module Virtuals
     module Errors
-      class TypeError
-        delegate_missing_to :@exception
-        delegate :translate, to: :I18n
-        REGEX = /([A-Z][a-z]+)/
-
-        def initialize(exception)
-          @exception = exception
-        end
-
+      class TypeError < StandardError
         def to_s
           translate('errors.virtuals.type', **types)
         end
@@ -24,7 +14,7 @@ module Schematics
           %i[source target]
             .zip(
               message
-                .scan(REGEX)
+                .scan(/([A-Z][a-z]+)/)
                 .flatten
                 .map(&:downcase)
                 .map { "errors.virtuals.types.#{_1}" }
