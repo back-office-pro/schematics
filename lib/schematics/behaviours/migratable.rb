@@ -8,7 +8,7 @@ module Schematics
       end
 
       def id
-        [entity.name, name].join('_')
+        [entity.table_name, name].join('_')
       end
 
       def to_s
