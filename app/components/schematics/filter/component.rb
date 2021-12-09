@@ -10,13 +10,13 @@ module Schematics
         def create(field:, model_class:)
           case field
           when Attributes::Boolean, Virtuals::Comparison
-            Checkbox::Component.new(field: field, model_class: model_class)
+            Checkbox::Component.new(field:, model_class:)
           when Behaviours::Rangeable
-            Range::Component.new(field: field, model_class: model_class)
+            Range::Component.new(field:, model_class:)
           when Behaviours::Enumerable
-            Dropdown::Component.new(field: field, model_class: model_class)
+            Dropdown::Component.new(field:, model_class:)
           else
-            Typeahead::Component.new(field: field, model_class: model_class)
+            Typeahead::Component.new(field:, model_class:)
           end
         end
       end

@@ -3,7 +3,7 @@
 describe Schematics::Entities::Router do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user', actions: actions) }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'user', actions:) }
 
   context 'when no actions are defined' do
     let(:actions) { nil }

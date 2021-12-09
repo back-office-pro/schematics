@@ -94,7 +94,7 @@ class LocalesGenerator < Rails::Generators::Base
 
     EasyTranslate.translate(
       text.titleize,
-      to: to,
+      to:,
       key: Schematics::Engine.credentials.gcloud[:api_key]
     )
   end

@@ -6,7 +6,7 @@ RSpec.describe Schematics::Imports::InsertData do
   fixtures :imports
 
   describe '.call' do
-    subject(:call) { described_class.call(import: import, model_class: model_class, data: data) }
+    subject(:call) { described_class.call(import:, model_class:, data:) }
 
     let(:import) { imports(:one) }
     let(:model_class) { Role }

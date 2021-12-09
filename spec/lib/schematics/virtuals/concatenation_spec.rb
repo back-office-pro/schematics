@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe Schematics::Virtuals::Concatenation do
-  subject(:virtual) do
-    described_class.build(entity, name: name, function: function, options: options)
-  end
+  subject(:virtual) { described_class.build(entity, name:, function:, options:) }
 
   let(:entity) do
     Schematics::Entities::Entity.build(

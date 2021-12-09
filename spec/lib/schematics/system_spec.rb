@@ -3,13 +3,7 @@
 describe Schematics::System do
   subject(:system) { described_class }
 
-  let(:entity) do
-    Schematics::Entities::Entity.build(
-      name: name,
-      attributes: attributes,
-      associations: associations
-    )
-  end
+  let(:entity) { Schematics::Entities::Entity.build(name:, attributes:, associations:) }
   let(:name) { 'role' }
   let(:attributes) do
     [

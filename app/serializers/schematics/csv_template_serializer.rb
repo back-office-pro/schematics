@@ -16,8 +16,8 @@ module Schematics
 
     protected
 
-    def generate(separator: ',')
-      CSV.generate(headers: true, col_sep: separator) do |file|
+    def generate(col_sep: ',')
+      CSV.generate(headers: true, col_sep:) do |file|
         file << headers
         yield file
       end

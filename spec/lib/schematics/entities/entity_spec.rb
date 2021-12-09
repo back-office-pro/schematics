@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Entity do
-  subject(:entity) do
-    described_class.build(name: name, attributes: attributes, core: true)
-  end
+  subject(:entity) { described_class.build(name:, attributes:, core: true) }
 
   let(:name) { 'entity' }
   let(:attributes) do
@@ -27,7 +25,7 @@ describe Schematics::Entities::Entity do
     is_expected.to eq <<~RUBY
       def search_data
         {
-          created_at: created_at,
+          created_at:,
           name: name&.to_s
         }
       end

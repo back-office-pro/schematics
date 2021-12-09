@@ -6,7 +6,7 @@ module Schematics
       module Bound
         class Component < Filter::Component
           def initialize(field:, comparison:)
-            super(field: field)
+            super(field:)
             @comparison = comparison
           end
 

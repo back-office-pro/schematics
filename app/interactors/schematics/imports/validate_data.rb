@@ -21,7 +21,7 @@ module Schematics
             .compact
             .merge('created_at' => Time.current, 'updated_at' => Time.current)
         rescue StandardError => e
-          @errors[I18n.t('.line', line: line)] = e
+          @errors[I18n.t('.line', line:)] = e
         ensure
           @import.update!(progress: (line / @data.size) * 100)
         end

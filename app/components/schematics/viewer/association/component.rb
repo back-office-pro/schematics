@@ -7,7 +7,7 @@ module Schematics
         delegate :confirm_data, to: :helpers
 
         def initialize(resources:, collapsed: false)
-          super(resources: resources)
+          super(resources:)
           @collapsed = collapsed
         end
 

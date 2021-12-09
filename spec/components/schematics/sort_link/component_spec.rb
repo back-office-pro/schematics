@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::SortLink::Component, type: :component do
-  subject { render_inline(described_class.new(field: field, model_class: model_class)) }
+  subject { render_inline described_class.new(field:, model_class:) }
 
   let(:model_class) { User }
   let(:field) { model_class.entity.find_field_by_name('email') }

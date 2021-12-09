@@ -11,7 +11,7 @@ Schematics::Schema.instance.entities.each do |entity|
       Role
         .find_or_create_by!(name: 'Admin')
         .permissions
-        .push(Permission.find_or_create_by(model: entity.class_name, action: action))
+        .push(Permission.find_or_create_by(model: entity.class_name, action:))
     end
 end
 PaperTrail.enabled = true

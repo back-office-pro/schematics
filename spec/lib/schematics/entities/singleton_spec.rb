@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Singleton do
-  subject(:entity) do
-    described_class.build(name: name, attributes: attributes)
-  end
+  subject(:entity) { described_class.build(name:, attributes:) }
 
   let(:name) { 'setting' }
   let(:attributes) do

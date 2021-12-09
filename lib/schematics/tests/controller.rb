@@ -163,7 +163,7 @@ module Schematics
 
           test "should update #{entity.table_name}" do
             login
-            patch polymorphic_path(record), params: params
+            patch(polymorphic_path(record), params:)
             assert_redirected_to polymorphic_path(record.reload)
           end
         end
@@ -199,7 +199,7 @@ module Schematics
           test "should create #{entity.table_name}" do
             assert_difference("#{model_class.name}.count") do
               login
-              post polymorphic_path(model_class), params: params
+              post(polymorphic_path(model_class), params:)
             end
             assert_redirected_to polymorphic_path(model_class.last)
           end
@@ -314,7 +314,7 @@ module Schematics
 
       def login(formats: nil)
         post sessions_path,
-             params: { user: { email: email, password: 'secret' } },
+             params: { user: { email:, password: 'secret' } },
              as: formats
       end
 

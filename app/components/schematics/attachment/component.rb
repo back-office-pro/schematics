@@ -5,24 +5,17 @@ module Schematics
     class Component < ApplicationComponent
       class << self
         def create_avatar(attachment:)
-          args = {
-            attachment: attachment,
+          new(
+            attachment:,
             width: 36,
             height: 36,
             css_class: 'rounded-circle',
             replacement: { icon: :user_circle, size: '2x' }
-          }
-          new(**args)
+          )
         end
 
         def create_company_logo(attachment:, icon:)
-          args = {
-            attachment: attachment,
-            width: 300,
-            height: 150,
-            replacement: { icon: icon, size: '7x' }
-          }
-          new(**args)
+          new(attachment:, width: 300, height: 150, replacement: { icon:, size: '7x' })
         end
       end
 

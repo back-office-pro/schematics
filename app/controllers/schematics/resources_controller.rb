@@ -108,7 +108,7 @@ module Schematics
     end
 
     def update
-      result = Resources::UpdateAndCache.call(resource: @resource, resource_params: resource_params)
+      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
       if result.success?
         respond_to do |format|
           format.html do
@@ -188,10 +188,7 @@ module Schematics
     end
 
     def view_assigns
-      super.merge(
-        model_name_plural: model_name_plural,
-        model_name: model_name.human.downcase
-      )
+      super.merge(model_name_plural:, model_name: model_name.human.downcase)
     end
 
     protected
@@ -213,7 +210,7 @@ module Schematics
     end
 
     def set_breadcrumb
-      breadcrumb t('titles.schematics.resources.index', model_name_plural: model_name_plural),
+      breadcrumb t('titles.schematics.resources.index', model_name_plural:),
                  polymorphic_path(model_class)
     end
 

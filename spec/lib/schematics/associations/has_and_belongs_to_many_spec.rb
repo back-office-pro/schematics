@@ -23,7 +23,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
       entity,
       name: 'permission',
       type: 'belongs_to',
-      options: options
+      options:
     )
   end
 

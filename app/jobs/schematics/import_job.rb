@@ -5,7 +5,7 @@ module Schematics
     def perform(import_id, model_name)
       import = Import.find(import_id)
       model_class = model_name.constantize
-      result = Imports::ImportData.call(import: import, model_class: model_class)
+      result = Imports::ImportData.call(import:, model_class:)
       if result.success?
         import.status_finished!
         model_class.reindex

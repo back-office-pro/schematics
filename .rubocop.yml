@@ -2,6 +2,10 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
+Layout/SpaceAfterColon:
+  Enabled: false # TODO: remove when Ruby 3.1 is supported
+Layout/HashAlignment:
+  EnforcedLastArgumentHashStyle: ignore_implicit # TODO: remove when Ruby 3.1 is supported
 Style/Documentation:
   Enabled: false
 Style/ReturnNil:
@@ -43,7 +47,7 @@ Metrics/ParameterLists:
 Performance/MethodObjectAsBlock:
   Enabled: false
 AllCops:
-  TargetRubyVersion: 3.0.2
+  TargetRubyVersion: 3.1
   NewCops: enable
   Exclude:
     - spec/dummy/**/*

@@ -22,7 +22,7 @@ describe Schematics::Associations::HasMany do
       entity,
       name: 'schema',
       type: 'belongs_to',
-      options: options
+      options:
     )
   end
   let(:options) { {} }

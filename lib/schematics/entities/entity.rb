@@ -169,7 +169,7 @@ module Schematics
         <<~RUBY
           def search_data
             {
-              created_at: created_at,
+              created_at:,
               #{search_data_elements}
             }
           end

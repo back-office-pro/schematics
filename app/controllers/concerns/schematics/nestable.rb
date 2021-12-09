@@ -15,7 +15,7 @@ module Schematics
     end
 
     def view_assigns
-      super.merge(parent_model_name_plural: parent_model_name_plural)
+      super.merge(parent_model_name_plural:)
     end
 
     protected

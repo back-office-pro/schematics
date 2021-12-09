@@ -13,10 +13,7 @@ module Schematics
     def edit; end
 
     def create
-      result = Sessions::Create.call(
-        user_params: resource_params,
-        cookies: cookies
-      )
+      result = Sessions::Create.call(user_params: resource_params, cookies:)
       if result.success?
         respond_to do |format|
           format.html { redirect_to root_path, notice: t(result.message) }
@@ -67,7 +64,7 @@ module Schematics
     end
 
     def destroy
-      result = Sessions::Destroy.call(cookies: cookies)
+      result = Sessions::Destroy.call(cookies:)
       if result.success?
         redirect_to login_path, notice: t(result.message)
       else
