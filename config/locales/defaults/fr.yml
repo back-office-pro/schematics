@@ -28,7 +28,7 @@ fr:
       limit_out_of_range: a un nombre de fichiers en dehors des limites
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:
-      name: "$%{variable} n'est pas une variable définie"
+      name: "$%{name} n'est pas une variable définie"
       nil: une variable n'a pas de valeur
       no_method: "%{name} n'est pas défini"
       type: conversion de %{source} en %{target}
