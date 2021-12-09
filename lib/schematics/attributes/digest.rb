@@ -18,7 +18,7 @@ module Schematics
       def validators
         super.merge(
           {
-            allow_nil: true,
+            allow_blank: true,
             format: { with: REGEX, message: :password },
             length: {
               minimum: options.min,

@@ -23,7 +23,7 @@ describe Schematics::Attributes::Digest do
   its(:validators) do
     is_expected.to eq(
       {
-        allow_nil: true,
+        allow_blank: true,
         format: { with: described_class::REGEX, message: :password }
       }
     )
