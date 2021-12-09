@@ -2,8 +2,15 @@
 
 module Schematics
   module Attributes
-    class Decimal < Float
-      delegate :precision, to: :options
+    class Decimal < Attribute
+      include Behaviours::Listable
+      include Behaviours::Renderable
+      include Behaviours::Searchable
+      include Behaviours::Fillable
+      include Behaviours::Rangeable
+      include Behaviours::Numerable
+
+      delegate :scale, to: :options
 
       def bound
         10**(precision - scale.to_i)

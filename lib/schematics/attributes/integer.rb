@@ -2,7 +2,14 @@
 
 module Schematics
   module Attributes
-    class Integer < Float
+    class Integer < Attribute
+      include Behaviours::Listable
+      include Behaviours::Renderable
+      include Behaviours::Searchable
+      include Behaviours::Fillable
+      include Behaviours::Rangeable
+      include Behaviours::Numerable
+
       def validators
         validators = super
         validators[:numericality][:only_integer] = true

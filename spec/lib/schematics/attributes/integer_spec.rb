@@ -7,7 +7,7 @@ describe Schematics::Attributes::Integer do
   let(:name) { 'price' }
   let(:options) do
     {
-      unit: '€'
+      unit: '$'
     }
   end
 
@@ -18,10 +18,19 @@ describe Schematics::Attributes::Integer do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
   its(:type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('price') }
-  its(:unit) { is_expected.to eq('€') }
+  its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_nil: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:sort_numeric_up) }
+
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 100 }
+
+    it { is_expected.to eq('$100.00') }
+  end
 end

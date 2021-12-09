@@ -154,7 +154,7 @@
           "name": "tax_inclusive_price",
           "function": "$price * (1 + $vat / 100)",
           "options": {
-            "scale": 2,
+            "precision": 2,
             "unit": "€"
           }
         },
@@ -182,19 +182,18 @@
         },
         {
           "name": "price",
-          "type": "decimal",
+          "type": "currency",
           "options": {
-            "precision": 5,
-            "scale": 2,
+            "precision": 2,
             "unit": "€"
           }
         },
         {
           "name": "vat",
-          "type": "float",
+          "type": "percentage",
           "options": {
-            "default": 19.6,
-            "unit": "%"
+            "precision": 1,
+            "default": 19.6
           }
         },
         {

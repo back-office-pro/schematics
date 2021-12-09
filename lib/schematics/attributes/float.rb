@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support'
-require 'action_view/helpers/number_helper'
-
 module Schematics
   module Attributes
     class Float < Attribute
@@ -11,29 +8,10 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Rangeable
-      include ActionView::Helpers::NumberHelper
+      include Behaviours::Numerable
 
-      delegate :unit, :scale, to: :options
-
-      def validators
-        super.merge(numericality: { allow_nil: !required? })
-      end
-
-      def format(value)
-        return unless value
-        return number_to_human_size(value) if unit == 'bytes'
-
-        [scale ? value.round(scale) : value, unit].compact.join(' ')
-      end
-
-      def icon
-        :sort_numeric_up
-      end
-
-      protected
-
-      def migration_options
-        super.concat %i[default]
+      def type
+        'float'
       end
     end
   end

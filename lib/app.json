@@ -166,10 +166,7 @@
         },
         {
           "name": "byte_size",
-          "type": "float",
-          "options": {
-            "unit": "bytes"
-          }
+          "type": "byte"
         },
         {
           "name": "blob",
@@ -316,11 +313,11 @@
         },
         {
           "name": "progress",
-          "type": "float",
+          "type": "percentage",
           "options": {
             "readonly": true,
-            "default": 0,
-            "unit": "%"
+            "precision": 1,
+            "default": 0.0
           }
         },
         {

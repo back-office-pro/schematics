@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe Schematics::Virtuals::Calculation do
-  subject(:virtual) do
-    described_class.build(entity, name: name, function: function, options: options)
-  end
+  subject(:virtual) { described_class.build(entity, name:, function:, options:) }
 
   let(:entity) do
     Schematics::Entities::Entity.build(
@@ -18,8 +16,8 @@ describe Schematics::Virtuals::Calculation do
   let(:function) { '($price ** $category.vat)' }
   let(:options) do
     {
-      unit: '€',
-      scale: 2
+      unit: '$',
+      precision: 2
     }
   end
 
@@ -27,13 +25,14 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
   its(:function) { is_expected.to eq('(price ** category.vat)') }
   its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:square_root_alt) }
-  its(:unit) { is_expected.to eq('€') }
-  its(:scale) { is_expected.to eq(2) }
+  its(:unit) { is_expected.to eq('$') }
+  its(:precision) { is_expected.to eq(2) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
@@ -50,6 +49,6 @@ describe Schematics::Virtuals::Calculation do
 
     let(:value) { 100.099 }
 
-    it { is_expected.to eq('100.1 €') }
+    it { is_expected.to eq('$100.10') }
   end
 end
