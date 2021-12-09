@@ -67,4 +67,12 @@ describe Schematics::Attributes::Phone do
       RUBY
     end
   end
+
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { '0613336807' }
+
+    it { is_expected.to eq('061-333-6807') }
+  end
 end

@@ -13,6 +13,10 @@ module Schematics
         super
       end
 
+      def format(value)
+        value && number_to_phone(value)
+      end
+
       def icon
         :phone
       end
