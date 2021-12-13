@@ -16,4 +16,5 @@ fr:
         success: "%{model_name} a été restauré avec succès"
       update:
         failure: Une erreur est survenue
+        stale: Une modification a eu lieu pendant votre action
         success: "%{model_name} a été modifié avec succès"

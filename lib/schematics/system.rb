@@ -12,8 +12,9 @@ module Schematics
           [
             generate_scaffold(entity.name, entity.migratable_attributes),
             generate_rspec_acceptance(entity.name),
-            generate_deleted_at_migration(entity.name),
-            generate_slug_migration(entity.name),
+            generate_deleted_at_migration(entity.table_name),
+            generate_slug_migration(entity.table_name),
+            generate_lock_version_migration(entity.table_name),
             entity
               .has_and_belongs_to_many_associations
               .reject { _1.entity.name.pluralize == _1.name }
@@ -80,6 +81,12 @@ module Schematics
       def generate_slug_migration(name)
         <<~SHELL
           rails generate migration add_slug_to_#{name.pluralize} slug:string:uniq
+        SHELL
+      end
+
+      def generate_lock_version_migration(name)
+        <<~SHELL
+          rails generate migration add_lock_version_to_#{name.pluralize} lock_version:integer
         SHELL
       end
 

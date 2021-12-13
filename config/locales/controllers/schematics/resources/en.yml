@@ -16,4 +16,5 @@ en:
         success: "%{model_name} was successfully restored"
       update:
         failure: An error occured
+        stale: A change has occured while you were editing
         success: "%{model_name} was successfully updated"

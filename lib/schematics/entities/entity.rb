@@ -114,11 +114,15 @@ module Schematics
       end
 
       def permitted_params
-        fillable_elements.flat_map(&:permitted_params)
+        fillable_elements
+          .flat_map(&:permitted_params)
+          .push(:lock_version)
       end
 
       def permitted_json_params
-        fillable_elements.flat_map(&:permitted_json_params)
+        fillable_elements
+          .flat_map(&:permitted_json_params)
+          .push(:lock_version)
       end
 
       def includes

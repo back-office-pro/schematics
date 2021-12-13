@@ -41,6 +41,7 @@ describe Schematics::System do
         'rails generate rspec:acceptance role',
         'rails generate migration add_deleted_at_to_roles deleted_at:datetime',
         'rails generate migration add_slug_to_roles slug:string:uniq',
+        'rails generate migration add_lock_version_to_roles lock_version:integer',
         'rails generate migration create_join_table_roles_permissions roles permissions:join_table_uuid', # rubocop:disable Layout/LineLength
         'rails generate migration add_roles_count_to_users roles_count:integer'
       ]

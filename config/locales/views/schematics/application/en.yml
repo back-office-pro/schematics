@@ -14,6 +14,7 @@ en:
         import: Import %{model_name}
         reset_filters: Reset filters
         revert: Revert
+        stale: Check changes
         tooltip:
           archive: Archive
           edit: Edit
