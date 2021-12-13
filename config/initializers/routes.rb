@@ -3,7 +3,6 @@
 require 'sidekiq/web'
 
 Rails.configuration.exceptions_app = Rails.application.routes
-Rails.configuration.consider_all_requests_local = false
 Rails.application.routes.default_url_options = Rails.configuration.action_mailer.default_url_options
 
 Rails.application.routes.prepend do
