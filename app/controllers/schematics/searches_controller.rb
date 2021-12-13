@@ -17,9 +17,7 @@ module Schematics
           suggest: true,
           misspellings: false,
           execute: false,
-          scope_results: lambda do |results|
-            results.accessible_by(current_ability)
-          end
+          scope_results: -> { _1.accessible_by(current_ability) }
         )
       end
       @results = Searchkick.multi_search(searches)
