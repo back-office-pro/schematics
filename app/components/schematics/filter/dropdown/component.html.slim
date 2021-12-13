@@ -1,6 +1,6 @@
 .input-group.flex-nowrap
   = select_tag filter_name,
                options_for_select(collection, value),
-               prompt: t('.prompt', attribute_name: attribute_name),
+               prompt: t('.prompt', attribute_name:),
                onchange: '$(this.form).submit()',
                class: "form-control border-0 bg-transparent #{'font-weight-bold' if active?}"

@@ -24,7 +24,7 @@
                     = @version.model_class.human_attribute_name(field.name)
                   td
                     - old_version = @version.reify(dup: true)
-                    = render Schematics::Resource::Component.new(resource: old_version, field: field) if old_version
+                    = render Schematics::Resource::Component.new(resource: old_version, field:) if old_version
   .col-lg-1.my-3.mx-0.text-center
     = fa_icon :arrow_right, size: '4x', class: 'text-secondary d-none d-lg-inline-block'
     = fa_icon :arrow_down, size: '4x', class: 'text-secondary d-inline-block d-lg-none'
@@ -46,4 +46,4 @@
                     = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
                     = @version.model_class.human_attribute_name(field.name)
                   td
-                    = render Schematics::Resource::Component.new(resource: @version.item, field: field)
+                    = render Schematics::Resource::Component.new(resource: @version.item, field:)

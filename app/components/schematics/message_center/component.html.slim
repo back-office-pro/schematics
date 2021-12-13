@@ -8,6 +8,6 @@ li.nav-item.dropdown.no-arrow.align-items-center.px-3.border-left.border-light.d
     .pre-scrollable
       - messages.each do |message|
         .dropdown-item
-          = render Schematics::MessageCenter::Preview::Component.new(message: message)
+          = render Schematics::MessageCenter::Preview::Component.new(message:)
     .dropdown-divider.m-0
     = link_to t('.show_all'), messages_path, class: 'dropdown-item text-muted text-center small p-2'

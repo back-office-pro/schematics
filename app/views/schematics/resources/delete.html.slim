@@ -12,7 +12,7 @@
       = t('schematics.application.delete.subtitle')
     .text-dark = t('schematics.application.delete.warning', model_name: @model_name, resource: @resource)
     - resource_associations(only_required: true).each do |resources|
-      = render Schematics::Viewer::Association::Component.new(resources: resources, collapsed: true)
+      = render Schematics::Viewer::Association::Component.new(resources:, collapsed: true)
     .mt-4
       = link_to polymorphic_path(@resource), method: :delete, class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
         span.icon = fa_icon :check

@@ -1,6 +1,6 @@
 .table-responsive
   table.table.mb-0
-    = render Schematics::Filter::Component.new(model_class: model_class)
+    = render Schematics::Filter::Component.new(model_class:)
     tbody
       table.table.mb-0.table-striped
         thead
@@ -15,5 +15,5 @@
                   .text-muted = date.day
                   - resources_for(date).each do |resource|
                     .alert.alert-secondary.text-truncate.mb-1.p-2 data-href=(polymorphic_path(resource) unless resource.deleted?)
-                      = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
+                      = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                       span.ml-2 = resource

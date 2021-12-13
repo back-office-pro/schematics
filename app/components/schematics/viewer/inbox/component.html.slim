@@ -1,6 +1,6 @@
 .table-responsive
   table.table.mb-0 class=(%w[table-striped table-hover] if @resources.any?)
-    = render Schematics::Filter::Component.new(model_class: model_class)
+    = render Schematics::Filter::Component.new(model_class:)
     tbody class=('animate__animated animate__slideInRight' if params[:page].present?)
       - if @resources.empty?
         tr
@@ -35,4 +35,4 @@
                 class=col_preference_class(field)
                 class=('font-weight-bold' if resource.read_at.nil?)
               }
-                = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
+                = render Schematics::Resource::Component.new(resource:, field:, editable: true)

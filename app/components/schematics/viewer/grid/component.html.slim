@@ -1,6 +1,6 @@
 .table-responsive
   table.table.mb-0
-    = render Schematics::Filter::Component.new(model_class: model_class)
+    = render Schematics::Filter::Component.new(model_class:)
     tbody class=('animate__animated animate__slideInRight' if params[:page].present?)
       tr
       - if @resources.empty?
@@ -18,12 +18,12 @@
                           tbody
                             tr
                               td colspan='2'
-                                = render Schematics::Viewer::ActionButtonGroup::Component.new(resource: resource)
+                                = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                                 #carouselWithControls.carousel.slide data-ride='carousel'
                                   .carousel-inner
                                     - carousel(resource).each do |attachment|
                                       .carousel-item.active.text-center data-href=(polymorphic_path(resource) unless resource.deleted?)
-                                        = render Schematics::Attachment::Component.new(attachment: attachment, height: 250, css_class: 'rounded')
+                                        = render Schematics::Attachment::Component.new(attachment:, height: 250, css_class: 'rounded')
                                   a.carousel-control-prev data-slide='prev' href='#carouselWithControls' role='button'
                                     span.carousel-control-prev-icon aria-hidden='true'
                                     span.sr-only Previous
@@ -36,4 +36,4 @@
                                   = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
                                   = model_class.human_attribute_name(field.name)
                                 td.text-nowrap
-                                  = render Schematics::Resource::Component.new(resource: resource, field: field, editable: true)
+                                  = render Schematics::Resource::Component.new(resource:, field:, editable: true)
