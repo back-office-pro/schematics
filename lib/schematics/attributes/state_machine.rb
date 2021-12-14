@@ -7,7 +7,7 @@ module Schematics
     class StateMachine < Enum
       def to_str
         super + <<~RUBY
-          aasm column: :#{name}, no_direct_assignment: true, whiny_transitions: false do
+          aasm column: :#{name}, enum: true, no_direct_assignment: true, whiny_transitions: false do
             state :#{values.first}, initial: true
             state :#{values.drop(1).join(', :')}
 
