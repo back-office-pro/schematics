@@ -95,6 +95,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sidekiq', '~> 6.3.1'
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
+  spec.add_dependency 'strong_migrations', '~> 0.7.8'
   spec.add_dependency 'super_diff', '~> 0.8.0'
   spec.add_dependency 'sweet-alert2-rails', '~> 0.1.0'
   spec.add_dependency 'title', '~> 0.0.8'

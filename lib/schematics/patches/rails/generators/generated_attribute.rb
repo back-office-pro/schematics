@@ -37,6 +37,10 @@ module Schematics
             !virtual? && !token? && !password_digest?
           end
 
+          def inject_index_options
+            "#{super}, algorithm: :concurrently"
+          end
+
           def options_for_migration
             super.merge(attr_options)
           end

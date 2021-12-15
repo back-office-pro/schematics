@@ -55,6 +55,7 @@ require 'hiredis'
 require 'rack-mini-profiler'
 require 'draper'
 require 'aasm'
+require 'strong_migrations'
 
 module Schematics
   class Engine < ::Rails::Engine

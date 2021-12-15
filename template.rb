@@ -10,6 +10,7 @@ after_bundle do
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
+  rails_command 'generate strong_migrations:install'
   rails_command 'schematics:install:migrations'
   rails_command 'schematics:generate'
   rails_command 'active_storage:install'
