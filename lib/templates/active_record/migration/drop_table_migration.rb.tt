@@ -16,12 +16,5 @@ class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Mi
       t.timestamps
 <% end -%>
     end
-<% attributes.select(&:token?).each do |attribute| -%>
-    remove_index :<%= table_name %>, :<%= attribute.index_name %><%= attribute.inject_index_options %>, unique: true
-<% end -%>
-<% attributes_with_index.each do |attribute| -%>
-    remove_index :<%= table_name %>, :<%= attribute.index_name %><%= attribute.inject_index_options %>
-<% end -%>
-    Permission.destroy_by(model: '<%= table_name.singularize %>')
   end
 end
