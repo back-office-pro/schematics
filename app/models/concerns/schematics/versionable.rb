@@ -4,8 +4,10 @@ module Schematics
   module Versionable
     extend ActiveSupport::Concern
 
+    DENYLIST = %i[id created_at updated_at deleted_at slug].freeze
+
     included do
-      has_paper_trail ignore: %i[id created_at updated_at deleted_at read_at slug],
+      has_paper_trail ignore: DENYLIST + filter_attributes,
                       versions: { class_name: 'Schematics::Version' }
     end
   end
