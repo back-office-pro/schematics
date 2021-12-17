@@ -83,8 +83,8 @@ module Schematics
 
         def test_digest_attributes
           entity.digest_attributes.each do |digest|
-            test "#{digest.name} should have allow_nil validator" do
-              assert digest.validators[:allow_nil]
+            test "#{digest.name} should have allow_blank validator" do
+              assert digest.validators[:allow_blank]
             end
           end
         end
