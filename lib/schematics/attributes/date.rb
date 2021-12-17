@@ -10,6 +10,8 @@ module Schematics
       include Behaviours::Editable
       include Behaviours::Rangeable
 
+      ALLOWLIST = %i[equal_to before after before_or_equal_to after_or_equal_to].freeze
+
       def format(value)
         value && localize(value, format: '%A %d %B %Y')
       end
@@ -17,15 +19,13 @@ module Schematics
       def validators
         super.merge(
           {
-            date: {
-              allow_blank: !required?,
-              equal_to: options.equal_to&.to_sym,
-              before: options.before&.to_sym,
-              after: options.after&.to_sym,
-              before_or_equal_to: options.before_or_equal_to&.to_sym,
-              after_or_equal_to: options.after_or_equal_to&.to_sym
-            }.compact
-          }.compact_blank
+            date: { allow_blank: !required? }.merge(
+              options
+                .slice(*ALLOWLIST)
+                .to_h
+                .transform_values(&:to_sym)
+            )
+          }
         )
       end
 
