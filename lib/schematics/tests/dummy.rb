@@ -16,11 +16,7 @@ module Schematics
       end
 
       def json_default
-        {
-          'filename' => filename,
-          'content_type' => content_type,
-          'data' => data
-        }
+        { filename:, content_type:, data: }.transform_keys(&:to_s)
       end
 
       private
