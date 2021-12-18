@@ -27,7 +27,7 @@ module Schematics
     end
 
     def authorize
-      return if current_user.present?
+      return if current_user
 
       respond_to do |format|
         format.json { head :unauthorized }
