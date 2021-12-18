@@ -26,7 +26,7 @@ module Schematics
                  Associations::HasAndBelongsToMany
               has_many element.name.to_sym,
                        serializer: element.descriptor.serializer_class,
-                       if: -> { should_render_has_many_associations }
+                       if: :show?
             else
               attribute element.name.to_sym
             end
@@ -39,8 +39,8 @@ module Schematics
       end
     end
 
-    def should_render_has_many_associations
-      instance_options[:template]&.to_sym == :show
+    def show?
+      instance_options[:template] == 'show'
     end
   end
 end
