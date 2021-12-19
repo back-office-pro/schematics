@@ -52,7 +52,7 @@ module Schematics
       end
 
       def resource_routes
-        [delete_route, archive_routes, autocomplete_route, import_routes]
+        [delete_route, archive_routes, trigger_route, autocomplete_route, import_routes]
           .compact
           .join
           .indent(2)
@@ -81,6 +81,14 @@ module Schematics
 
         <<~RUBY
           get :autocomplete, on: :collection
+        RUBY
+      end
+
+      def trigger_route
+        return unless can?(:update)
+
+        <<~RUBY
+          patch :trigger, on: :member
         RUBY
       end
 

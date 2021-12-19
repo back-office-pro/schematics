@@ -14,6 +14,7 @@ describe Schematics::Entities::Router do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
+          patch :trigger, on: :member
           get :autocomplete, on: :collection
           collection do
             resources :imports, only: %i[new create], as: 'user_imports', format: false do
