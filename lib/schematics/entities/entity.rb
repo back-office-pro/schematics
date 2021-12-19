@@ -132,6 +132,10 @@ module Schematics
           .uniq - virtual_association_errors
       end
 
+      def events
+        state_machine_attributes.flat_map(&:events)
+      end
+
       def validates
         validatable_attributes.filter_map(&:validate)
       end
