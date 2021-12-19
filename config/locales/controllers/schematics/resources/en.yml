@@ -11,6 +11,9 @@ en:
       destroy:
         failure: An error occured
         success: "%{model_name} was successfully destroyed"
+      trigger:
+        failure: An error occured
+        success: The %{event} action on %{model_name} was sucessfully done
       restore:
         failure: An error occured
         success: "%{model_name} was successfully restored"

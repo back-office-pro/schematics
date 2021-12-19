@@ -33,6 +33,7 @@ module Schematics
     end
 
     def aliases
+      alias_action :trigger, to: :update
       alias_action :import, to: :create
       alias_action :restore, to: :archive
       alias_action :delete, to: :destroy

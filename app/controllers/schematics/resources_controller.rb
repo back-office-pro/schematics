@@ -9,7 +9,8 @@ module Schematics
     include Readable
     include Calendarable
 
-    before_action :set_resource, only: %i[show edit delete update destroy archive restore]
+    before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
+    before_action :set_event, only: :trigger
     before_action :set_breadcrumb
     before_action :update_timestamp_field?, only: :show
 
@@ -127,6 +128,27 @@ module Schematics
       end
     end
 
+    def trigger
+      result = Resources::Trigger.call(resource: @resource, event: @event)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            notice = tscope(result.message, model_name: model_name.human, event: @event.human)
+            redirect_to @resource, notice:
+          end
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :show
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
     def destroy
       result = Resources::Destroy.call(resource: @resource)
       if result.success?
@@ -207,6 +229,12 @@ module Schematics
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to @resource, status: :moved_permanently
+    end
+
+    def set_event
+      @event = entity
+               .events
+               .find { _1.name == params.require(entity.name.to_sym).fetch(:event) }
     end
 
     def set_breadcrumb
