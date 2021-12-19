@@ -1,0 +1,18 @@
+---
+en:
+  activerecord:
+    attributes:
+      import:
+        author: Author
+        file: File
+        import_errors: Errors
+        progress: Progress
+        status: Status
+        statuses:
+          error: Error
+          finished: Finished
+          pending: Pending
+    models:
+      import:
+        one: Import
+        other: Imports

@@ -12,3 +12,7 @@ fr:
           error: Erreur
           finished: Terminé
           pending: En cours
+    models:
+      import:
+        one: Import
+        other: Imports
