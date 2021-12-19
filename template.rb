@@ -21,9 +21,9 @@ after_bundle do
   rails_command 'generate erd:install'
   rails_command 'generate open_api'
   rails_command 'db:migrate:reset'
-  rails_command 'db:fixtures:load' if options[:skip_listen]
+  # rails_command 'db:fixtures:load' if options[:skip_listen]
   rails_command 'schematics:db:seed'
-  rails_command 'schematics:docs:generate'
+  # rails_command 'schematics:docs:generate'
   rails_command 'schematics:licence:renew[enterprise,12]'
   rails_command 'schematics:users:admin[maxence.derous@gmail.com,John,Doe,fr,Paris]'
   rails_command 'dev:cache' if options[:skip_listen]
@@ -50,5 +50,5 @@ after_bundle do
   run 'brakeman --no-pager --no-exit-on-error'
 
   # Tests
-  run 'rake test'
+  # run 'rake test'
 end
