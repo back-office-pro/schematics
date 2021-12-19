@@ -9,7 +9,7 @@ module Schematics
       delegate :icon, to: :entity
 
       class << self
-        def create(resources:)
+        def build(resources:)
           case resources.klass.entity.viewer
           when :table
             Table::Component.new(resources:)

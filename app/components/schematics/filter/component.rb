@@ -7,7 +7,7 @@ module Schematics
       delegate :preferences, to: :helpers
 
       class << self
-        def create(field:, model_class:)
+        def build(field:, model_class:)
           case field
           when Attributes::Boolean, Virtuals::Comparison
             Checkbox::Component.new(field:, model_class:)

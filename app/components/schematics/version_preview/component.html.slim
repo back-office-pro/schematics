@@ -1,6 +1,6 @@
 .row data-href=(version_path(@version) if item.present?)
   .col-auto.align-self-center
-    = link_to render(Schematics::Attachment::Component.create_avatar(attachment: user.avatar)), user
+    = link_to render(Schematics::Attachment::Component.build_avatar(attachment: user.avatar)), user
   .col.text-truncate
     - if item.present?
       = link_to(item, item)

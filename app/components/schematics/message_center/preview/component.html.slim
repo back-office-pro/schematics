@@ -1,4 +1,4 @@
-= link_to render(Schematics::Attachment::Component.create_avatar(attachment: @message.author.avatar)), @message.author
+= link_to render(Schematics::Attachment::Component.build_avatar(attachment: @message.author.avatar)), @message.author
 .ml-3
   .text-truncate = link_to(@message.subject, @message)
   .text-truncate = @message.content.to_plain_text
