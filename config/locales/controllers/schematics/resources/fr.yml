@@ -11,12 +11,12 @@ fr:
       destroy:
         failure: Une erreur est survenue
         success: "%{model_name} a été supprimé avec succès"
-      trigger:
-        failure: Une erreur est survenue
-        success: L'action %{event} sur %{model_name} a été effectuée avec succès
       restore:
         failure: Une erreur est survenue
         success: "%{model_name} a été restauré avec succès"
+      trigger:
+        failure: Une erreur est survenue
+        success: L'action %{event} sur %{model_name} a été effectuée avec succès
       update:
         failure: Une erreur est survenue
         stale: Une modification a eu lieu pendant votre action
