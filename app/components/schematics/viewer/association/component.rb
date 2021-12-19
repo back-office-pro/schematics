@@ -20,7 +20,7 @@ module Schematics
               .class
               .human_attribute_name(@resources.first.name, count: @resources.size)
           else
-            model_class.human_attribute_name(entity.name, count: @resources.size)
+            model_class.model_name.human(count: @resources.size)
           end
         end
 
