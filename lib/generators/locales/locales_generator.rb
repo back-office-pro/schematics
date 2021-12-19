@@ -86,6 +86,21 @@ class LocalesGenerator < Rails::Generators::Base
           YAML
         end
       end
+      next unless enum.is_a?(Schematics::Attributes::StateMachine)
+
+      append_file locale_file_path(entity, locale) do
+        indent <<~YAML, 4
+          events:
+            #{entity.name}:
+        YAML
+      end
+      enum.events.map(&:name).each do |event|
+        append_file locale_file_path(entity, locale) do
+          indent <<~YAML, 8
+            #{event}: #{translate(event, to: locale)}
+          YAML
+        end
+      end
     end
   end
 
