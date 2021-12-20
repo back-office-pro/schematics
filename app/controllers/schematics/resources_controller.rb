@@ -10,7 +10,6 @@ module Schematics
     include Calendarable
 
     before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
-    before_action :set_event, only: :trigger
     before_action :set_breadcrumb
     before_action :update_timestamp_field?, only: :show
 
@@ -129,11 +128,12 @@ module Schematics
     end
 
     def trigger
-      result = Resources::Trigger.call(resource: @resource, event: @event)
+      event = entity.find_event_by_name(params[:event])
+      result = Resources::Trigger.call(resource: @resource, event:)
       if result.success?
         respond_to do |format|
           format.html do
-            notice = tscope(result.message, model_name: model_name.human, event: @event.human)
+            notice = tscope(result.message, model_name: model_name.human, event: event.human)
             redirect_back fallback_location: @resource, notice:
           end
           format.json { head :no_content }
@@ -229,12 +229,6 @@ module Schematics
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to @resource, status: :moved_permanently
-    end
-
-    def set_event
-      @event = entity
-               .events
-               .find { _1.name == params.require(entity.name.to_sym).fetch(:event) }
     end
 
     def set_breadcrumb
