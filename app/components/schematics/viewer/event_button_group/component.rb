@@ -4,7 +4,7 @@ module Schematics
   module Viewer
     module EventButtonGroup
       class Component < ApplicationComponent
-        delegate :can?, to: :current_ability
+        delegate :can?, :cannot?, to: :current_ability
         delegate :entity, to: '@resource.class', private: true
 
         def initialize(resource:, compact: true)
@@ -23,10 +23,20 @@ module Schematics
           can?(:trigger, @resource)
         end
 
-        def css_class
-          return 'btn-group' if compact?
+        def css_classes
+          [
+            'btn',
+            'btn-primary',
+            'btn-sm',
+            ('btn-icon-split' unless compact?),
+            ('ml-2' unless compact?)
+          ].compact
+        end
 
-          'd-inline ml-2'
+        def data
+          return {} unless compact?
+
+          { toggle: 'tooltip', placement: 'top' }
         end
 
         def compact?
