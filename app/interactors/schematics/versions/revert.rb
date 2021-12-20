@@ -10,7 +10,7 @@ module Schematics
       end
 
       def call
-        if @version.reify&.save_stale || @version.item.really_destroy!
+        if @version.reify&.unstale&.save || @version.item.really_destroy!
           context.message = '.success'
         else
           context.fail!(message: '.failure')

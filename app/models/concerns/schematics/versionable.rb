@@ -11,10 +11,10 @@ module Schematics
                       versions: { class_name: 'Schematics::Version' }
     end
 
-    def save_stale
+    def unstale
       # TODO: self.paper_trail_event = :revert
       self.lock_version += (self.class.find(id).lock_version - lock_version)
-      save
+      self
     end
   end
 end
