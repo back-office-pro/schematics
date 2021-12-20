@@ -52,7 +52,7 @@ module Schematics
       end
 
       def resource_routes
-        [delete_route, archive_routes, trigger_route, autocomplete_route, import_routes]
+        [delete_route, archive_routes, autocomplete_route, events_routes, import_routes]
           .compact
           .join
           .indent(2)
@@ -84,12 +84,14 @@ module Schematics
         RUBY
       end
 
-      def trigger_route
+      def events_routes
         return unless can?(:update)
 
-        <<~RUBY
-          patch :trigger, on: :member
-        RUBY
+        @entity.events.map do |event|
+          <<~RUBY
+            patch :#{event.name}, action: :trigger, event: '#{event.name}', on: :member
+          RUBY
+        end
       end
 
       def import_routes

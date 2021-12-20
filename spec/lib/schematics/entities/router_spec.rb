@@ -3,10 +3,65 @@
 describe Schematics::Entities::Router do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user', actions:) }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'user', actions:, attributes:) }
+  let(:actions) { nil }
+  let(:attributes) { [] }
 
   context 'when no actions are defined' do
-    let(:actions) { nil }
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        resources :users, only: [:index, :show, :create, :new, :edit, :update, :destroy], model_name: 'User' do
+          get :delete, on: :member
+          delete :archive, on: :member
+          delete :restore, on: :member
+          get :autocomplete, on: :collection
+          collection do
+            resources :imports, only: %i[new create], as: 'user_imports', format: false do
+              get :template, on: :collection, format: :csv
+            end
+          end
+        end
+      RUBY
+    end
+  end
+
+  context 'when no actions are defined but entity has events' do
+    let(:attributes) do
+      [
+        {
+          name: 'state',
+          type: 'state_machine',
+          options: {
+            default: 'pending',
+            values: %w[
+              pending
+              closed
+              refused
+            ],
+            events: [
+              {
+                name: 'close',
+                from: 'pending',
+                to: 'closed'
+              },
+              {
+                name: 'refuse',
+                from: 'pending',
+                to: 'refused'
+              },
+              {
+                name: 'reopen',
+                from: %w[
+                  closed
+                  refused
+                ],
+                to: 'pending'
+              }
+            ]
+          }
+        }
+      ]
+    end
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
@@ -14,8 +69,10 @@ describe Schematics::Entities::Router do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
-          patch :trigger, on: :member
           get :autocomplete, on: :collection
+          patch :close, action: :trigger, event: 'close', on: :member
+          patch :refuse, action: :trigger, event: 'refuse', on: :member
+          patch :reopen, action: :trigger, event: 'reopen', on: :member
           collection do
             resources :imports, only: %i[new create], as: 'user_imports', format: false do
               get :template, on: :collection, format: :csv
