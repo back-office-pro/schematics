@@ -60,6 +60,12 @@ module Schematics
       @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
         can :autocomplete, permission.model.constantize if permission.action.to_sym == :index
+        # TODO: we should have a permission for each entity event
+        next unless permission.action.to_sym == :update
+
+        permission.model.constantize.entity.events.each do |event|
+          can event.name, permission.model.constantize
+        end
       end
     end
 
@@ -77,6 +83,11 @@ module Schematics
       can :revert, Version, whodunnit: user.id
       @user.role.permissions.each do |permission|
         can :read, Version, event: permission.action, item_type: permission.model
+        next unless permission.action.to_sym == :update
+
+        permission.model.constantize.entity.events.each do |event|
+          can :read, Version, event: event.name, item_type: permission.model
+        end
       end
     end
 
