@@ -16,8 +16,8 @@ module Schematics
     scope :with_item, -> { includes(:item) }
 
     class << self
-      def timeline(ability:, versions: self)
-        query = versions
+      def timeline(ability:, versions: nil)
+        query = (versions || self)
                 .with_user
                 .with_item
                 .accessible_by(ability)
@@ -31,7 +31,7 @@ module Schematics
                     SQL
                   )
         end
-        query.order(created_at: :desc)
+        query.reorder(created_at: :desc)
       end
     end
 
@@ -48,7 +48,7 @@ module Schematics
         'destroy' => :trash,
         'archive' => :archive,
         'restore' => :trash_restore
-      }[event]
+      }[event] || entity.find_event_by_name(event).try(:icon)
     end
   end
 end

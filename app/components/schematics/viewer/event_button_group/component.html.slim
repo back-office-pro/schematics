@@ -1,0 +1,8 @@
+- events.each do |event|
+  - next if cannot?(event.name, @resource)
+  = link_to polymorphic_path(@resource, action: event.name),
+            method: :patch,
+            data: data.merge(title: event.human),
+            class: css_classes do
+              span.icon = fa_icon event.icon
+              span.text.d-none.d-lg-inline = event.human unless compact?

@@ -240,7 +240,6 @@
               },
               {
                 "name": "reopen",
-                "icon": "lock_open",
                 "from": [
                   "closed",
                   "refused"

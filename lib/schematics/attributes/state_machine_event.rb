@@ -1,21 +1,28 @@
 # frozen_string_literal: true
 
+require 'action_view'
+
 module Schematics
   module Attributes
     class StateMachineEvent
-      attr_reader :name, :icon, :to
+      include ActionView::Helpers::TranslationHelper
 
-      class << self
-        def build(name:, from:, to:, icon: :location_arrow)
-          new(name, icon, from, to)
-        end
-      end
+      attr_reader :name, :icon
 
-      def initialize(name, icon, from, to)
+      def initialize(entity:, name:, from:, to:, icon: :location_arrow)
+        @entity = entity
         @name = name
         @icon = icon
         @from = from
         @to = to
+      end
+
+      def human
+        translate(
+          name.to_sym,
+          default: name.humanize,
+          scope: [:activerecord, :events, @entity.name]
+        )
       end
 
       def to_str

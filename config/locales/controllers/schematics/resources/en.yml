@@ -14,6 +14,9 @@ en:
       restore:
         failure: An error occured
         success: "%{model_name} was successfully restored"
+      trigger:
+        failure: An error occured
+        success: The %{event} action on %{model_name} was sucessfully done
       update:
         failure: An error occured
         stale: A change has occured while you were editing

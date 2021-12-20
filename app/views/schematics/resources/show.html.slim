@@ -19,6 +19,7 @@
                     class: 'btn btn-primary btn-sm btn-icon-split ml-2' do
             span.icon = fa_icon :edit
             span.text.d-none.d-lg-inline = t('schematics.application.button.edit')
+        = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
         - if can?(:destroy, @resource)
           - if resource_associations(only_required: true).any?
             = link_to main_app.polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do

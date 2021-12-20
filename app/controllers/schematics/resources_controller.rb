@@ -9,7 +9,7 @@ module Schematics
     include Readable
     include Calendarable
 
-    before_action :set_resource, only: %i[show edit delete update destroy archive restore]
+    before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
     before_action :set_breadcrumb
     before_action :update_timestamp_field?, only: :show
 
@@ -123,6 +123,28 @@ module Schematics
             render :edit
           end
           format.json { render json: @resource.errors, status: result.status }
+        end
+      end
+    end
+
+    def trigger
+      event = entity.find_event_by_name(params[:event])
+      result = Resources::Trigger.call(resource: @resource, event:)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            notice = tscope(result.message, model_name: model_name.human, event: event.human)
+            redirect_back fallback_location: @resource, notice:
+          end
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :show
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end

@@ -36,8 +36,10 @@ $(document).on('turbolinks:load', function () {
   })
   $('*[data-href]').on('click', function (e) {
     const $target = $(e.target)
-    if (!$target.is('a') && !$target.parent().is('a') &&
-            !$target.hasClass('best_in_place') && !$target.parents('.best_in_place').length) {
+    if (!$target.is('a') &&
+        !$target.parents('a').length &&
+        !$target.hasClass('best_in_place') &&
+        !$target.parents('.best_in_place').length) {
       Turbolinks.visit($(this).data('href'))
     }
   })
