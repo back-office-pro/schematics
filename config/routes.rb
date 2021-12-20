@@ -15,9 +15,7 @@ Schematics::Engine.routes.draw do
     resource :preferences, only: %i[edit update]
     resource :schema, only: %i[edit update show], controller: :schema
     resources :versions, only: %i[index show] do
-      member do
-        get :revert
-      end
+      patch :revert, on: :member
     end
   end
 end
