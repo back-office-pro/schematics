@@ -13,7 +13,7 @@ module Schematics
     before_action :set_breadcrumb
     before_action :update_timestamp_field?, only: :show
 
-    authorize_resource
+    authorize_resource except: :autocomplete
 
     delegate :model_class, to: :class
     delegate :entity, :model_name, to: :model_class

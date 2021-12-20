@@ -58,13 +58,11 @@ module Schematics
 
     def user_permissions
       @user.role.permissions.each do |permission|
-        can permission.action.to_sym, permission.model.constantize
-        can :autocomplete, permission.model.constantize if permission.action.to_sym == :index
-        # TODO: we should have a permission for each entity event
+        can permission.action.to_sym, permission.model.constantize        # TODO: we should have a permission for each entity event
         next unless permission.action.to_sym == :update
 
         permission.model.constantize.entity.events.each do |event|
-          can event.name, permission.model.constantize
+          can event.name.to_sym, permission.model.constantize
         end
       end
     end
