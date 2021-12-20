@@ -10,5 +10,11 @@ module Schematics
       has_paper_trail ignore: DENYLIST + filter_attributes,
                       versions: { class_name: 'Schematics::Version' }
     end
+
+    def save_stale
+      # TODO: self.paper_trail_event = :revert
+      self.lock_version += (self.class.find(id).lock_version - lock_version)
+      save
+    end
   end
 end
