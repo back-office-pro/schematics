@@ -83,6 +83,7 @@ module Schematics
       can :revert, Version, whodunnit: user.id
       @user.role.permissions.each do |permission|
         can :read, Version, event: permission.action, item_type: permission.model
+        # TODO: we should have a permission for each entity event
         next unless permission.action.to_sym == :update
 
         permission.model.constantize.entity.events.each do |event|
