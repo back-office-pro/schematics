@@ -93,6 +93,10 @@ module Schematics
         end
       end
 
+      def find_event_by_name(name)
+        events.find { _1.name == name }
+      end
+
       def check_for_association_name_collisions
         @associations.each do |association|
           association.prefixed = @associations
