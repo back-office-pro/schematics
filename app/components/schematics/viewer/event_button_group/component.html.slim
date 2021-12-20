@@ -1,5 +1,4 @@
 - events.each do |event|
-  - next if cannot?(event.name, @resource)
   = link_to polymorphic_path(@resource, action: event.name),
             method: :patch,
             data: data.merge(title: event.human),

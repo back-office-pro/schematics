@@ -4,7 +4,7 @@ module Schematics
   module Viewer
     module EventButtonGroup
       class Component < ApplicationComponent
-        delegate :can?, :cannot?, to: :current_ability
+        delegate :can?, to: :current_ability
         delegate :entity, to: '@resource.class', private: true
 
         def initialize(resource:, compact: true)
@@ -16,11 +16,8 @@ module Schematics
         def events
           entity
             .events
+            .select { |event| can?(event.name, @resource) }
             .select { |event| @resource.public_send(:"may_#{event.name}?") }
-        end
-
-        def render?
-          can?(:trigger, @resource)
         end
 
         def css_classes
