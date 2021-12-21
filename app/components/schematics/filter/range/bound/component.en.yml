@@ -1,8 +1,5 @@
+---
 en:
   placeholder:
     gte: From
     lte: To
-fr:
-  placeholder:
-    gte: De
-    lte: A

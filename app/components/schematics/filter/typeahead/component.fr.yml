@@ -1,4 +1,3 @@
-en:
-  prompt: Filter by %{attribute_name}
+---
 fr:
   prompt: Filtrer par %{attribute_name}

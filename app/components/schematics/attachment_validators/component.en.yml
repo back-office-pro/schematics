@@ -1,0 +1,9 @@
+---
+en:
+  antivirus_warning: Your files will be analyzed by an antivirus
+  content_type: 'Allowed file formats:'
+  dimension: Dimension
+  height: height
+  less_than: less than
+  size: 'File size:'
+  width: width

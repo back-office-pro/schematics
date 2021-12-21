@@ -1,4 +1,3 @@
-en:
-  prompt: Select a %{name}
+---
 fr:
   prompt: Sélectionner un %{name}
