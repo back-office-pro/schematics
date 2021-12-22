@@ -5,7 +5,6 @@ en:
       message:
         author: Author
         content: Content
-        read_at: Read at
         received_messages:
           one: Received message
           other: Received messages

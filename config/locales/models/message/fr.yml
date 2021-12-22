@@ -5,7 +5,6 @@ fr:
       message:
         author: Auteur
         content: Contenu
-        read_at: Consulté le
         received_messages:
           one: Message reçu
           other: Messages reçus

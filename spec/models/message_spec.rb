@@ -26,11 +26,6 @@ RSpec.describe Message do
     it { is_expected.to validate_presence_of(:content) }
   end
 
-  describe '#read_at' do
-    it { is_expected.to have_db_column(:read_at).of_type(:datetime) }
-    it { is_expected.to have_db_index(:read_at) }
-  end
-
   describe '#author' do
     it { is_expected.to validate_presence_of(:author) }
     it { is_expected.to have_db_column(:author_id).of_type(:uuid).with_options(null: false) }
