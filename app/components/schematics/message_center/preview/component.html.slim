@@ -3,4 +3,4 @@
     = link_to render(Schematics::Attachment::Component.build_avatar(attachment: @message.author.avatar)), @message.author
   .col.text-truncate
     div class=css_class = @message.subject
-    div.text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}
+    .text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}
