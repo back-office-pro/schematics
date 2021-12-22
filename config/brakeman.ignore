@@ -3,153 +3,24 @@
     {
       "warning_type": "File Access",
       "warning_code": 16,
-      "fingerprint": "2f93499e66aa29725b830ffc9a946be680f800b91ae7151ebc5336d1189a37a5",
+      "fingerprint": "2a9032bda73585e8e45580a01e600efcdf7a3fce07aff0cadf4b2a93b4f6e5f7",
       "check_name": "SendFile",
       "message": "Parameter value used in file name",
-      "file": "app/controllers/schematics/resources_controller.rb",
-      "line": 71,
+      "file": "app/controllers/schematics/imports_controller.rb",
+      "line": 25,
       "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_name.to_s, (model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])).id]), :extension => \"pdf\", :slug => (\"#{model_name.human.downcase.dasherize}-#{(model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])).slug}\")).filepath, :type => \"text/csv\", :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_name.to_s, (model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])).id]), :extension => \"pdf\", :slug => (\"#{model_name.human.downcase.dasherize}-#{(model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])).slug}\")).filename)",
+      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Schematics::ResourcesController",
-        "method": "show"
+        "class": "Schematics::ImportsController",
+        "method": "template"
       },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used for filepath or filename"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "674e91b107786f85be889cbe539e5d64a3a3989166835795ba60cc6b7aa66d9a",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/searches/show.html.slim",
-      "line": 9,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::EmptyResource::Component.new(:suggestions => Searchkick.multi_search(Schema.instance.entities.map do\n entity.class_name.constantize.search(params[:query], :includes => entity.includes, :match => :word_middle, :suggest => true, :misspellings => false, :execute => false, :scope_results => (lambda do\n results.accessible_by(current_ability)\n end))\n end).flat_map(&:suggestions).uniq), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::SearchesController",
-          "method": "show",
-          "line": 31,
-          "file": "app/controllers/schematics/searches_controller.rb",
-          "rendered": {
-            "name": "schematics/searches/show",
-            "file": "app/views/schematics/searches/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/searches/show"
-      },
-      "user_input": "params[:query]",
-      "confidence": "Weak",
-      "note": "Will be fixed when https://github.com/presidentbeef/brakeman/pull/1578 will be released. Other reference: https://github.com/presidentbeef/brakeman/issues/1529"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "7c41f606c6015249b8982d77b0dbb78dc79c95f8f57e9e4bdf0065dcc0e97bee",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/resources/edit.html.slim",
-      "line": 8,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceForm::Component.new(:resource => ((model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])))), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "edit",
-          "line": 81,
-          "file": "app/controllers/schematics/resources_controller.rb",
-          "rendered": {
-            "name": "schematics/resources/edit",
-            "file": "app/views/schematics/resources/edit.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/resources/edit"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "note": "Will be fixed when https://github.com/presidentbeef/brakeman/pull/1578 will be released. Other reference: https://github.com/presidentbeef/brakeman/issues/1529"
-    },
-    {
-      "warning_type": "Cross-Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "ec9c35c527353f0a7b10f1df13224f6b56efd51ed9a0f5161cd059357d3ba197",
-      "check_name": "CrossSiteScripting",
-      "message": "Unescaped parameter value",
-      "file": "app/views/schematics/resources/show.html.slim",
-      "line": 47,
-      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "(model_class.includes(entity.includes).includes(:slugs).with_deleted.instance or model_class.includes(entity.includes).includes(:slugs).with_deleted.find(params[:id])).public_send(attribute.name)",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "show",
-          "line": 59,
-          "file": "app/controllers/schematics/resources_controller.rb",
-          "rendered": {
-            "name": "schematics/resources/show",
-            "file": "app/views/schematics/resources/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/resources/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "note": "False positive"
-    },
-    {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "f9139749d6388c8a7ed0a4b312e9ca74b253df0eb58f8330fccfa0f1c6f1893a",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "app/controllers/schematics/resources_controller.rb",
-      "line": 52,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvJob), :job_params => ([model_name.to_s, @resources.pluck(:id)]), :extension => \"csv\", :slug => model_name_plural.dasherize).filepath, :type => \"text/csv\", :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvJob), :job_params => ([model_name.to_s, @resources.pluck(:id)]), :extension => \"csv\", :slug => model_name_plural.dasherize).filename)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::ResourcesController",
-        "method": "index"
-      },
-      "user_input": "params[:fingerprint]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used for filepath or filename"
-    },
-    {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "f95ada303b844b0d95d7ef9458d4b576709949f7657574363ebf2f6ef7b14e05",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "config/initializers/overrides/controllers/imports_controller.rb",
-      "line": 24,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
-      "render_path": null,
-      "location": null,
       "user_input": "params[:fingerprint]",
       "confidence": "Weak",
       "note": "Fingerprint is not used for filepath or filename"
     }
   ],
-  "updated": "2021-08-10 10:24:47 +0200",
-  "brakeman_version": "5.1.1"
+  "updated": "2021-12-22 14:05:20 +0100",
+  "brakeman_version": "5.2.0"
 }
