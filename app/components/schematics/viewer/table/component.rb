@@ -5,7 +5,7 @@ module Schematics
     module Table
       class Component < Viewer::Component
         def table_css_classes
-          return %w[table-striped table-hover] if @resources.any?
+          %w[table-striped table-hover] if @resources.any?
         end
 
         def tbody_css_classes

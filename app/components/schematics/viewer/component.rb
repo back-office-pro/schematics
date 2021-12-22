@@ -40,7 +40,7 @@ module Schematics
       end
 
       def href(resource)
-        return polymorphic_path(resource) unless resource.deleted?
+        polymorphic_path(resource) unless resource.deleted?
       end
 
       def tbody_css_classes
