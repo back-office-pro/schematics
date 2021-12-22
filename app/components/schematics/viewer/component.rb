@@ -17,8 +17,6 @@ module Schematics
             Grid::Component.new(resources:)
           when :calendar
             Calendar::Component.new(resources:)
-          when :inbox # rubocop:disable Lint/DuplicateBranch
-            Table::Component.new(resources:)
           end
         end
       end
