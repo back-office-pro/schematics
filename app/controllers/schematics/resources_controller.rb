@@ -11,7 +11,7 @@ module Schematics
 
     before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
     before_action :set_breadcrumb
-    before_action :update_timestamp_field?, only: :show
+    before_action :read!, only: :show
 
     authorize_resource except: :autocomplete
 
