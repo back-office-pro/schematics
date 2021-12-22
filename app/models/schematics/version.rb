@@ -2,7 +2,7 @@
 
 module Schematics
   class Version < PaperTrail::Version
-    EVENTS = %w[create update destroy archive restore import read].freeze
+    EVENTS = %w[create update destroy archive restore import].freeze
 
     belongs_to :user,
                class_name: 'User',
@@ -48,7 +48,7 @@ module Schematics
         'destroy' => :trash,
         'archive' => :archive,
         'restore' => :trash_restore,
-        'read' => :eye
+        'show' => :eye
       }[event] || entity.find_event_by_name(event).try(:icon)
     end
   end

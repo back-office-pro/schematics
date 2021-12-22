@@ -9,7 +9,7 @@ module Schematics
       return unless current_user == resource.recipient
 
       Version
-        .where(event: 'read', item: resource, user: current_user)
+        .where(event: 'show', item: resource, user: current_user)
         .first_or_create!
     end
   end

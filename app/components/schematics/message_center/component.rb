@@ -21,7 +21,7 @@ module Schematics
                               <<~SQL.squish
                                 versions.item_type = 'Message' AND
                                 versions.item_id = messages.id AND
-                                versions.event = 'read'
+                                versions.event = 'show'
                               SQL
                             )
                           )

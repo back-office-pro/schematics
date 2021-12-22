@@ -18,7 +18,7 @@ module Schematics
     end
 
     def unread?
-      readable? && !Version.exists?(event: 'read', item: self, user: recipient)
+      readable? && !Version.exists?(event: 'show', item: self, user: recipient)
     end
 
     def readable?
