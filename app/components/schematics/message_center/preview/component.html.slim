@@ -1,6 +1,6 @@
-.row data-href=message_path(@message)
+.row data-href=href
   .col-auto.align-self-center
     = link_to render(Schematics::Attachment::Component.build_avatar(attachment: @message.author.avatar)), @message.author
   .col.text-truncate
-    = @message.subject
-    .text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}
+    div class=css_class = @message.subject
+    div.text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}

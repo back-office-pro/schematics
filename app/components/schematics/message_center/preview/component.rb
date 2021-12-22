@@ -8,6 +8,14 @@ module Schematics
           super
           @message = message
         end
+
+        def css_class
+          return 'font-weight-bold' if @message.unread?
+        end
+
+        def href
+          message_path(@message)
+        end
       end
     end
   end
