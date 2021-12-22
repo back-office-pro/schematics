@@ -16,5 +16,13 @@ module Schematics
       self.lock_version += (self.class.find(id).lock_version - lock_version)
       self
     end
+
+    def unread?
+      readable? && !Version.exists?(event: 'read', item: self, user: recipient)
+    end
+
+    def readable?
+      respond_to?(:recipient)
+    end
   end
 end

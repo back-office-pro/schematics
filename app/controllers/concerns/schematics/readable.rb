@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     def read!
-      return unless resource.respond_to?(:recipient)
+      return unless resource.readable?
       return unless current_user == resource.recipient
 
       Version
