@@ -15,7 +15,16 @@ module Schematics
 
       def unread_count
         @unread_count ||= received_messages
-                          .where(read_at: nil)
+                          .where(
+                            'NOT EXISTS (:version)',
+                            version: Version.where(
+                              <<~SQL.squish
+                                versions.item_type = 'Message' AND
+                                versions.item_id = messages.id AND
+                                versions.event = 'read'
+                              SQL
+                            )
+                          )
                           .size
       end
 
