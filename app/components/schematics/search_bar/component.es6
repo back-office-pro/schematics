@@ -5,20 +5,6 @@ window.SearchBarController = class extends Stimulus.Controller {
     return ['input', 'results']
   }
 
-  connect () {
-    this.inputTarget.addEventListener('search', this.onSearch.bind(this))
-    this.inputTarget.addEventListener('blur', this.clearResults.bind(this))
-  }
-
-  disconnect () {
-    this.inputTarget.removeEventListener('search', this.onSearch)
-    this.inputTarget.removeEventListener('blur', this.clearResults)
-  }
-
-  onSearch () {
-    this.clearResults()
-  }
-
   selectItem (event) {
     Turbolinks.visit(event.currentTarget.dataset.url)
   }
@@ -62,15 +48,21 @@ window.SearchBarController = class extends Stimulus.Controller {
     this.resultsTarget.innerHTML = ''
   }
 
+  hideResults () {
+    this.resultsTarget.classList.add('d-none')
+  }
+
+  showResults () {
+    this.resultsTarget.classList.remove('d-none')
+  }
+
   get url () {
     return `/searches/${this.inputTarget.value}`
   }
 
   async search () {
-    const value = this.inputTarget.value
-    const minLength = parseInt(this.data.get('minLength') || 3)
     this.clearResults()
-    if (value.length >= minLength) {
+    if (this.inputTarget.checkValidity()) {
       this.resultsTarget.insertAdjacentHTML('afterbegin', this.pendingTemplate())
       const response = await fetchAPI(this.url)
       const results = await response.json()

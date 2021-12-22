@@ -1,9 +1,10 @@
-.input-group.flex-nowrap data-controller='typeahead' data-typeahead-highlight='true' data-typeahead-min-length='2'
+.input-group.flex-nowrap data-controller='typeahead' data-typeahead-highlight='true'
   = search_field_tag filter_name,
                     value,
+                    minlength: 2,
                     placeholder: t('.prompt', attribute_name: attribute_name),
                     autocomplete: 'off',
                     spellcheck: false,
-                    data: { 'typeahead-target': 'input', action: 'keyup->typeahead#search' },
+                    data: { 'typeahead-target': 'input', action: },
                     class: "form-control border-0 bg-transparent #{'font-weight-bold' if active?}"
   ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-typeahead-target='results'
