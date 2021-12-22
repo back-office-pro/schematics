@@ -33,11 +33,10 @@ resource 'Versions' do
     context 'when version exists' do
       let(:id) { version.id }
       let(:version) do
-        PaperTrail::Version.create!(
+        Schematics::Version.create!(
           event: 'create',
-          item_type: 'User',
-          item_id: user.id,
-          whodunnit: user.id
+          item: user,
+          user: user
         )
       end
       let(:expected_reponse) do
@@ -57,7 +56,7 @@ resource 'Versions' do
     end
   end
 
-  get '/versions/:id/revert' do
+  patch '/versions/:id/revert' do
     context 'when version does not exist' do
       example 'Not found' do
         do_request
@@ -69,11 +68,10 @@ resource 'Versions' do
     context 'when version exists' do
       let(:id) { version.id }
       let(:version) do
-        PaperTrail::Version.create!(
+        Schematics::Version.create!(
           event: 'create',
-          item_type: 'User',
-          item_id: user.id,
-          whodunnit: user.id
+          item: user,
+          user: user
         )
       end
 
