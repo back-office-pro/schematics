@@ -79,7 +79,7 @@ module Schematics
     end
 
     def version_permissions
-      can :revert, Version, whodunnit: user.id
+      can :revert, Version, user: user
       @user.role.permissions.each do |permission|
         can :read, Version, event: permission.action, item_type: permission.model
         # TODO: we should have a permission for each entity event
