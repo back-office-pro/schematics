@@ -7,8 +7,8 @@ class CreateVersions < ActiveRecord::Migration[6.1]
       t.uuid     :item_id,   null: false
       t.string   :event,     null: false
       t.uuid     :whodunnit, null: false
-      t.json     :object
-      t.json     :object_changes
+      t.jsonb    :object
+      t.jsonb    :object_changes
       t.datetime :created_at
     end
     add_index :versions, %i[item_type item_id]
