@@ -9,6 +9,10 @@ module Schematics
             resource.public_send(attribute.name)
           end
         end
+
+        def tbody_css_classes
+          params[:page] && super
+        end
       end
     end
   end

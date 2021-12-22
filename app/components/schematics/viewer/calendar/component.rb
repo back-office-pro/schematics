@@ -41,6 +41,12 @@ module Schematics
               resource.send(calendar_end_attribute).to_date >= date
           end
         end
+
+        def tbody_css_classes
+          params.dig(:filter, calendar_start_attribute) &&
+            params.dig(:filter, calendar_end_attribute) &&
+            super
+        end
       end
     end
   end

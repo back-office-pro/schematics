@@ -1,14 +1,14 @@
 .table-responsive
-  table.table.mb-0 class=(%w[table-striped table-hover] if @resources.any?)
+  table.table.mb-0 class=table_css_classes
     = render Schematics::Filter::Component.new(model_class:)
-    tbody class=('animate__animated animate__slideInRight' if params[:page].present?)
+    tbody class=tbody_css_classes
       - if @resources.empty?
         tr
           td.text-center.pt-4 colspan="100%"
             = render Schematics::EmptyResource::Component.new
       - else
         - @resources.each do |resource|
-          tr class=('disabled' if resource.deleted?) data-href=(polymorphic_path(resource) unless resource.deleted?)
+          tr class=tr_css_class(resource) data-href=href(resource)
             td.text-nowrap.text-center
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
             - entity.listable_elements.stable_sort_by(&:weight).each do |field|

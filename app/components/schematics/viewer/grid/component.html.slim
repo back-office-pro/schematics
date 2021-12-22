@@ -1,7 +1,7 @@
 .table-responsive
   table.table.mb-0
     = render Schematics::Filter::Component.new(model_class:)
-    tbody class=('animate__animated animate__slideInRight' if params[:page].present?)
+    tbody class=tbody_css_classes
       tr
       - if @resources.empty?
         td.text-center.pt-4 colspan='100%'
@@ -22,7 +22,7 @@
                                 #carouselWithControls.carousel.slide data-ride='carousel'
                                   .carousel-inner
                                     - carousel(resource).each do |attachment|
-                                      .carousel-item.active.text-center data-href=(polymorphic_path(resource) unless resource.deleted?)
+                                      .carousel-item.active.text-center data-href=href(resource)
                                         = render Schematics::Attachment::Component.new(attachment:, height: 250, css_class: 'rounded')
                                   a.carousel-control-prev data-slide='prev' href='#carouselWithControls' role='button'
                                     span.carousel-control-prev-icon aria-hidden='true'
