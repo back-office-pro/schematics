@@ -325,12 +325,12 @@ module Schematics
       def params(formats: nil)
         default_attribute = [formats, 'default'].compact.join('_')
         {
-          entity.table_name.to_sym => entity.fillable_elements.map do |element|
+          entity.table_name.to_sym => entity.fillable_elements.to_h do |element|
             [
               element.column_name.to_sym,
               element.send(default_attribute) || record.send(element.column_name)
             ]
-          end.to_h
+          end
         }
       end
     end

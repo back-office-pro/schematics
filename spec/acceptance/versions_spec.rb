@@ -32,13 +32,7 @@ resource 'Versions' do
 
     context 'when version exists' do
       let(:id) { version.id }
-      let(:version) do
-        Schematics::Version.create!(
-          event: 'create',
-          item: user,
-          user: user
-        )
-      end
+      let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
       let(:expected_reponse) do
         {
           'item_type' => 'User',
@@ -67,13 +61,7 @@ resource 'Versions' do
 
     context 'when version exists' do
       let(:id) { version.id }
-      let(:version) do
-        Schematics::Version.create!(
-          event: 'create',
-          item: user,
-          user: user
-        )
-      end
+      let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
 
       example 'No content' do
         do_request

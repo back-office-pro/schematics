@@ -27,9 +27,9 @@ module Schematics
       end
 
       def convert_row(row)
-        row.map do |key, value|
+        row.to_h do |key, value|
           [transform_key(key), transform_value(transform_key(key), value)]
-        end.to_h
+        end
       end
 
       def transform_key(key)

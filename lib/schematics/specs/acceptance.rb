@@ -23,17 +23,17 @@ module Schematics
             let(:other_record) { send(model_class.entity.name.pluralize, :two) }
             let(:request) do
               {
-                entity.name => entity.fillable_elements.map do |element|
+                entity.name => entity.fillable_elements.to_h do |element|
                   [element.column_name, element.json_default || record.send(element.column_name)]
-                end.to_h
+                end
               }
             end
             let(:unprocessable_request) do
               {
                 entity.name => entity
                   .fillable_elements
-                  .map { |element| [element.column_name, nil] }
-                  .to_h
+                  .to_h { |element| [element.column_name, nil] }
+
               }
             end
 
