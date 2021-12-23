@@ -172,8 +172,8 @@ module Schematics
         :table
       end
 
-      def can?(action)
-        actions.include?(action.to_sym)
+      def can?(*values)
+        (actions & values).any?
       end
 
       def search_data
