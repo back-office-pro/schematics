@@ -25,12 +25,7 @@ describe Schematics::Associations::HasOne do
     }
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.build(
-      entity,
-      name: 'schema',
-      type: 'belongs_to',
-      options:
-    )
+    Schematics::Attributes::Attribute.build(entity, name: 'schema', type: 'belongs_to', options:)
   end
 
   before do

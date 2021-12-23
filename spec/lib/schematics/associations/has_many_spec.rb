@@ -18,12 +18,7 @@ describe Schematics::Associations::HasMany do
     )
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.build(
-      entity,
-      name: 'schema',
-      type: 'belongs_to',
-      options:
-    )
+    Schematics::Attributes::Attribute.build(entity, name: 'schema', type: 'belongs_to', options:)
   end
   let(:options) { {} }
 
