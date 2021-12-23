@@ -53,6 +53,15 @@ module Schematics
 
         "#{preference} d-none"
       end
+
+      def css_classes
+        [
+          'form-control',
+          'border-0',
+          'bg-transparent',
+          ('font-weight-bold' if active?)
+        ].compact
+      end
     end
   end
 end

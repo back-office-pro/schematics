@@ -7,13 +7,13 @@
           tr
             - date_range.slice(0, 7).each do |day|
               th.text-center = t('date.day_names')[day.wday]
-        tbody class=('animate__animated animate__slideInRight' if params.dig(:filter, :start_at).present? && params.dig(:filter, :ends_at).present?)
+        tbody class=tbody_css_classes
           - date_range.each_slice(7) do |week|
             tr
               - week.each do |date|
                 td class=td_classes_for(date)
                   .text-muted = date.day
                   - resources_for(date).each do |resource|
-                    .alert.alert-secondary.text-truncate.mb-1.p-2 data-href=(polymorphic_path(resource) unless resource.deleted?)
+                    .alert.alert-secondary.text-truncate.mb-1.p-2 data-href=href(resource)
                       = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                       span.ml-2 = resource

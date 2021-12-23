@@ -43,10 +43,9 @@ module Schematics
       cannot %i[destroy archive], user
       cannot :update, user, :role_id
       cannot %i[update destroy archive], admin_role
-      cannot %i[read update destroy archive import], Message
-      can :read, Message, recipient_id: user.id
-      can :read, Message, author_id: user.id
-      can %i[update destroy archive], Message, { read_at: nil }
+      cannot %i[show update destroy archive import], Message
+      can :show, Message, recipient: user
+      can :show, Message, author: user
       cannot :destroy, ActiveStorage::Attachment, { record_type: 'Import' }
     end
 

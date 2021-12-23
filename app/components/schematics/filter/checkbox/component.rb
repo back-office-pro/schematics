@@ -11,6 +11,10 @@ module Schematics
         def label
           t(".#{name}", default: '')
         end
+
+        def css_class
+          'w-0' if label.blank?
+        end
       end
     end
   end

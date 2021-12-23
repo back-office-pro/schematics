@@ -1,5 +1,6 @@
-= link_to render(Schematics::Attachment::Component.build_avatar(attachment: @message.author.avatar)), @message.author
-.ml-3
-  .text-truncate = link_to(@message.subject, @message)
-  .text-truncate = @message.content.to_plain_text
-  .text-muted.small #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}
+.row data-href=href
+  .col-auto.align-self-center
+    = link_to render(Schematics::Attachment::Component.build_avatar(attachment: @message.author.avatar)), @message.author
+  .col.text-truncate
+    div class=css_class = @message.subject
+    .text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}

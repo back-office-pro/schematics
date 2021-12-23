@@ -17,8 +17,6 @@ module Schematics
             Grid::Component.new(resources:)
           when :calendar
             Calendar::Component.new(resources:)
-          when :inbox # rubocop:disable Lint/DuplicateBranch
-            Table::Component.new(resources:)
           end
         end
       end
@@ -39,6 +37,14 @@ module Schematics
         return preference if preferences(preference, true)
 
         "#{preference} d-none"
+      end
+
+      def href(resource)
+        polymorphic_path(resource) unless resource.deleted?
+      end
+
+      def tbody_css_classes
+        %w[animate__animated animate__slideInRight]
       end
     end
   end

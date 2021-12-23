@@ -2,7 +2,7 @@
                   value,
                   placeholder: t(".placeholder.#{@comparison}"),
                   onchange: ('$(this.form).submit()' if date?),
-                  class: "form-control border-0 bg-transparent #{'font-weight-bold' if active?}"
+                  class: css_classes
 - if unit.present?
   .input-group-append
     .input-group-text.border-0.bg-transparent.p-0.pl-2

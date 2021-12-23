@@ -1,8 +1,8 @@
-.row data-href=(version_path(@version) if item.present?)
+.row data-href=href
   .col-auto.align-self-center
     = link_to render(Schematics::Attachment::Component.build_avatar(attachment: user.avatar)), user
   .col.text-truncate
-    - if item.present?
+    - if item
       = link_to(item, item)
     - else
       .text-muted = @version.reify(dup: true)

@@ -10,6 +10,10 @@ module Schematics
         super
         @version = version
       end
+
+      def href
+        version_path(@version) if item
+      end
     end
   end
 end

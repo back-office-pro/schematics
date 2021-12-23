@@ -1,7 +1,7 @@
 .card.shadow-sm.border-0.mt-3
   a.card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1 {
-    class=('collapsed' if collapsed?)
-    href="#collapse-#{random}"
+    class=card_header_css_class
+    href="##{id}"
     data-toggle='collapse'
     role='button'
   }
@@ -12,7 +12,7 @@
           span.align-middle = title
       .col-auto.mr-3
         .badge.badge-light.text-dark.p-2.mr-3 = @resources.size
-  .collapse class=(collapsed? ? 'hide' : 'show') id="collapse-#{random}"
+  .collapse class=collapse_css_class id=id
     .card-body.p-0
       .table-responsive
         table.table.mb-0.table-striped.table-hover
