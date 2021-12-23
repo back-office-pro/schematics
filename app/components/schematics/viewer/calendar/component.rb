@@ -43,8 +43,8 @@ module Schematics
         end
 
         def tbody_css_classes
-          params.dig(:filter, calendar_start_attribute) &&
-            params.dig(:filter, calendar_end_attribute) &&
+          params.dig(:filter, calendar_start_attribute).present? &&
+            params.dig(:filter, calendar_end_attribute).present? &&
             super
         end
       end
