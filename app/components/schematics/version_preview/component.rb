@@ -12,7 +12,7 @@ module Schematics
       end
 
       def href
-        version_path(@version) if item.present?
+        version_path(@version) if item
       end
     end
   end
