@@ -134,7 +134,7 @@ module Schematics
         respond_to do |format|
           format.html do
             notice = tscope(result.message, model_name: model_name.human, event: event.human)
-            redirect_back fallback_location: @resource, notice:
+            redirect_back(fallback_location: @resource, notice:)
           end
           format.json { head :no_content }
         end

@@ -47,7 +47,7 @@ module Schematics
         @descriptor = Descriptor.build(self, descriptor)
       end
 
-      def method_missing(method_name, *args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def method_missing(method_name, *args, &block) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         predicate = non ? :reject_is_a? : :select_is_a?
         constant = constant&.camelize&.to_sym

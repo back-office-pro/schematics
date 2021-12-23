@@ -16,16 +16,16 @@ module Schematics
         I18n.default_locale
     end
 
-    def switch_locale(&)
-      I18n.with_locale(current_locale, &)
+    def switch_locale(&block)
+      I18n.with_locale(current_locale, &block)
     end
 
-    def switch_beginning_of_week(&)
-      I18n.in_beginning_of_week(&)
+    def switch_beginning_of_week(&block)
+      I18n.in_beginning_of_week(&block)
     end
 
-    def switch_time_zone(&)
-      Time.use_zone(current_user.time_zone, &)
+    def switch_time_zone(&block)
+      Time.use_zone(current_user.time_zone, &block)
     end
 
     private
