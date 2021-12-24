@@ -3,7 +3,7 @@
 module Schematics
   class SearchesController < ApplicationController
     def create
-      redirect_to search_path(query: params[:query])
+      redirect_to search_path(query: Search.create!(search_params).query)
     end
 
     def show
@@ -41,6 +41,15 @@ module Schematics
           render json: @results
         end
       end
+    end
+
+    private
+
+    def search_params
+      params
+        .require(:search)
+        .permit(:query)
+        .with_defaults(user: current_user)
     end
   end
 end
