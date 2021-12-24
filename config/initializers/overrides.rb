@@ -17,6 +17,12 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 Rails.configuration.to_prepare do
   ImportsController.prepend(Schematics::ImportsController) if defined?(ImportsController)
 
+  if defined?(Search)
+    Search.class_eval do
+      belongs_to :user
+    end
+  end
+
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming?
       false
