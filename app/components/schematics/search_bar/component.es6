@@ -2,7 +2,7 @@
 
 window.SearchBarController = class extends Stimulus.Controller {
   static get targets () {
-    return ['input', 'results']
+    return ['input', 'history', 'results']
   }
 
   selectItem (event) {
@@ -60,9 +60,18 @@ window.SearchBarController = class extends Stimulus.Controller {
     return `/searches/${this.inputTarget.value}`
   }
 
+  hideHistory() {
+    this.historyTarget.classList.add('d-none')
+  }
+
+  showHistory() {
+    this.historyTarget.classList.remove('d-none')
+  }
+
   async search () {
     this.clearResults()
     if (this.inputTarget.checkValidity()) {
+      this.hideHistory()
       this.resultsTarget.insertAdjacentHTML('afterbegin', this.pendingTemplate())
       const response = await fetchAPI(this.url)
       const results = await response.json()

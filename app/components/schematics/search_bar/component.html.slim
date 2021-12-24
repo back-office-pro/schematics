@@ -1,13 +1,21 @@
-  = form_tag searches_path, class: 'form-inline flex-nowrap pr-3' do
-    .input-group data-controller='searchBar' data-searchBar-highlight='false'
-      = search_field_tag :query,
-        params[:query],
-        minlength: 3,
-        required: true,
-        placeholder: t('.placeholder'),
-        class: 'search form-control border-0 bg-transparent',
-        autocomplete: 'off',
-        spellcheck: false,
-        data: { 'searchBar-target': 'input', action: }
-      ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-searchBar-target='results'
-    = button_tag fa_icon(:search), name: nil, class: 'fa-lg btn nav-link'
+= form_for Search.new, html: { class: 'form-inline flex-nowrap pr-3' } do |f|
+  .input-group data-controller='searchBar' data-searchBar-highlight='false'
+    = f.search_field :query,
+                     required: true,
+                     minlength: 3,
+                     placeholder: t('.placeholder'),
+                     class: 'search form-control border-0 bg-transparent',
+                     autocomplete: 'off',
+                     spellcheck: false,
+                     data: { 'searchBar-target': 'input', action: }
+    ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-searchBar-target='results'
+    ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.d-none data-searchBar-target='history'
+      - history.each do |query|
+        li.list-group-item.p-2.border-0.text-left.text-truncate {
+          data-action="mousedown->searchBar#selectItem"
+          data-url=search_path(query)
+          role="button"
+        }
+          = fa_icon :history, class: 'text-dark fa-fw mr-2'
+          = query
+  = f.button fa_icon(:search), name: nil, class: 'fa-lg btn nav-link'
