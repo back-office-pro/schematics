@@ -7,15 +7,19 @@ module Schematics
     def filter_params
       return {} unless params.key?(:filter)
 
-      params
-        .require(:filter)
-        .permit(permitted_filters)
-        .to_h
+      filter_params_to_h
         .deep_symbolize_keys
         .transform_values(&method(:cast_filter_value))
     end
 
     private
+
+    def filter_params_to_h
+      params
+        .require(:filter)
+        .permit(permitted_filters)
+        .to_h
+    end
 
     def permitted_filters
       entity.searchable_elements
