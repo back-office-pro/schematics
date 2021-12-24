@@ -8,3 +8,12 @@
                     data: { 'typeahead-target': 'input', action: },
                     class: css_classes
   ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-typeahead-target='results'
+  ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.d-none data-typeahead-target='history'
+    - history.each do |query|
+      li.list-group-item.p-2.border-0.text-left.text-truncate {
+        data-action="mousedown->typeahead#selectItem"
+        data-value=query
+        role="button"
+      }
+        = fa_icon :history, class: 'text-dark fa-fw mr-2'
+        = query
