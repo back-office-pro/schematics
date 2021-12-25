@@ -60,11 +60,11 @@ window.SearchBarController = class extends Stimulus.Controller {
     return `/searches/${this.inputTarget.value}`
   }
 
-  hideHistory() {
+  hideHistory () {
     this.historyTarget.classList.add('d-none')
   }
 
-  showHistory() {
+  showHistory () {
     this.historyTarget.classList.remove('d-none')
   }
 
