@@ -5,7 +5,7 @@ module Schematics
     def resource_associations(only_required: false)
       @resource_associations ||= attachments_attributes
                                  .concat(associations(only_required))
-                                 .reject(&:empty?)
+                                 .compact_blank
     end
 
     private
