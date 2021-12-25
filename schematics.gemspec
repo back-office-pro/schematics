@@ -67,9 +67,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwt', '~> 2.3.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mini_magick', '>= 4.11.0'
-  spec.add_dependency 'net-imap', '~> 0.2.2' # TODO: remove when Ruby 3.1 is supported
-  spec.add_dependency 'net-pop', '~> 0.1.1' # TODO: remove when Ruby 3.1 is supported
-  spec.add_dependency 'net-smtp', '~> 0.3.0' # TODO: remove when Ruby 3.1 is supported
+  # TODO: remove net-* gems when https://github.com/mikel/mail/pull/1439 is merged
+  spec.add_dependency 'net-imap', '~> 0.2.2'
+  spec.add_dependency 'net-pop', '~> 0.1.1'
+  spec.add_dependency 'net-smtp', '~> 0.3.0'
   spec.add_dependency 'oj', '~> 3.13.9'
   spec.add_dependency 'pagy', '~> 5.6.6'
   spec.add_dependency 'paper_trail', '~> 12.1.0'

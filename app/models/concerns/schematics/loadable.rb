@@ -42,7 +42,7 @@ module Schematics
       end
     end
 
-    def method_missing(method_name, *args, &block)
+    def method_missing(method_name, *args, &)
       return super unless method_name.end_with?('_formatted')
 
       field_name = method_name.to_s.chomp('_formatted')

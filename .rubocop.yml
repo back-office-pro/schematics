@@ -2,8 +2,6 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
-Naming/BlockForwarding:
-  Enabled: false # TODO: enable when supported by Ruby 3.1
 Style/Documentation:
   Enabled: false
 Style/ReturnNil:
