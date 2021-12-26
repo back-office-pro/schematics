@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SessionsController < ApiController
+  class SessionsController < ApplicationController
+    include Rescuable
     include Fillable
+
     skip_before_action :authorize, only: %i[new create]
     layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true

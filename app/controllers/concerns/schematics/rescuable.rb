@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApiController < ApplicationController
-    before_action :set_paper_trail_whodunnit
-    after_action { pagy_headers_merge(@pagy) if @pagy }
+  module Rescuable
+    extend ActiveSupport::Concern
 
-    rescue_from ActionController::ParameterMissing, with: :parameter_missing
-    rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    rescue_from CanCan::AccessDenied, with: :forbidden
+    included do
+      rescue_from ActionController::ParameterMissing, with: :parameter_missing
+      rescue_from ActiveRecord::RecordNotFound, with: :not_found
+      rescue_from CanCan::AccessDenied, with: :forbidden
+    end
 
     def parameter_missing(exception)
       respond_to do |format|
@@ -41,7 +42,7 @@ module Schematics
       end
     end
 
-    private
+    protected
 
     def not_found_path
       polymorphic_path(model_class)

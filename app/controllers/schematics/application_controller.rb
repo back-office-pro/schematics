@@ -8,6 +8,8 @@ module Schematics
     protect_from_forgery unless: -> { request.format.json? }
     before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
     before_action :authorize
+    before_action :set_paper_trail_whodunnit
+    after_action { pagy_headers_merge(@pagy) if @pagy }
     helper_method :current_user
 
     private
