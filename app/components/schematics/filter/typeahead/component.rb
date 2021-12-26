@@ -8,10 +8,11 @@ module Schematics
           %w[
             keyup->typeahead#search
             search->typeahead#onSearch
-            focus->typeahead#showResults
-            focus->typeahead#showHistory
-            blur->typeahead#hideResults
+            search->typeahead#clearResults
+            search->typeahead#showHistory
+            focus->typeahead#onFocus
             blur->typeahead#hideHistory
+            blur->typeahead#hideResults
           ].join(' ')
         end
 

@@ -9,10 +9,10 @@ module Schematics
         %w[
           keyup->searchBar#search
           search->searchBar#clearResults
-          focus->searchBar#showResults
-          focus->searchBar#showHistory
-          blur->searchBar#hideResults
+          search->searchBar#showHistory
+          focus->searchBar#onFocus
           blur->searchBar#hideHistory
+          blur->searchBar#hideResults
         ].join(' ')
       end
 
