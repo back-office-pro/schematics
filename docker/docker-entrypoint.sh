@@ -5,7 +5,7 @@ set -e
 bin/rails db:migrate
 bin/rails schematics:db:seed
 bin/rails searchkick:reindex:all
-bin/bundle exec sidekiq -q app -q searchkick
+bin/rails schematics:jobs:run
 
 freshclam -d &
 clamd &

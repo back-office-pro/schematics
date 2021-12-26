@@ -7,8 +7,6 @@ window.TypeaheadController = class extends SearchBarController {
     if (searchParams.has(scope)) {
       searchParams.delete(scope)
       Turbolinks.visit(window.location.pathname + '?' + searchParams)
-    } else {
-      this.clearResults()
     }
   }
 

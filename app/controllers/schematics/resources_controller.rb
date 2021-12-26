@@ -12,6 +12,7 @@ module Schematics
     before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
     before_action :set_breadcrumb
     before_action :read!, only: :show
+    before_action :log_search!, only: :index
 
     authorize_resource except: :autocomplete
 

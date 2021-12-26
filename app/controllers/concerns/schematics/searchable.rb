@@ -15,5 +15,11 @@ module Schematics
         end
       }
     end
+
+    def log_search!
+      return unless params.key?(:filter)
+
+      Search.create!(user: current_user, model: model_class, filters: filter_params_to_h)
+    end
   end
 end

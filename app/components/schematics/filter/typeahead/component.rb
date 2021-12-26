@@ -8,9 +8,23 @@ module Schematics
           %w[
             keyup->typeahead#search
             search->typeahead#onSearch
-            focus->typeahead#showResults
+            search->typeahead#clearResults
+            search->typeahead#showHistory
+            focus->typeahead#onFocus
+            blur->typeahead#hideHistory
             blur->typeahead#hideResults
           ].join(' ')
+        end
+
+        def history
+          Search
+            .where(user: current_user, model: @model_class.to_s, query: nil)
+            .order(created_at: :desc)
+            .limit(5)
+            .pluck(:filters)
+            .pluck(name)
+            .uniq
+            .compact
         end
       end
     end

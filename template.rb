@@ -13,6 +13,7 @@ after_bundle do
   rails_command 'generate strong_migrations:install'
   rails_command 'schematics:install:migrations'
   rails_command 'schematics:generate'
+  rails_command 'generate model search query:string model:string filters:jsonb user:references'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
   rails_command 'generate annotate:install'

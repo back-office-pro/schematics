@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
 
 Rails.configuration.exceptions_app = Rails.application.routes
 Rails.application.routes.default_url_options = Rails.configuration.action_mailer.default_url_options

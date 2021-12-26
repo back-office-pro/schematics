@@ -2,7 +2,17 @@
 
 window.SearchBarController = class extends Stimulus.Controller {
   static get targets () {
-    return ['input', 'results']
+    return ['input', 'history', 'results']
+  }
+
+  onFocus () {
+    if (this.hasResults()) {
+      this.showResults()
+      this.hideHistory()
+    } else {
+      this.showHistory()
+      this.hideResults()
+    }
   }
 
   selectItem (event) {
@@ -44,6 +54,10 @@ window.SearchBarController = class extends Stimulus.Controller {
     }
   }
 
+  hasResults () {
+    return this.resultsTarget.innerHTML !== ''
+  }
+
   clearResults () {
     this.resultsTarget.innerHTML = ''
   }
@@ -56,24 +70,46 @@ window.SearchBarController = class extends Stimulus.Controller {
     this.resultsTarget.classList.remove('d-none')
   }
 
-  get url () {
-    return `/searches/${this.inputTarget.value}`
+  hideHistory () {
+    this.historyTarget.classList.add('d-none')
   }
 
-  async search () {
-    this.clearResults()
-    if (this.inputTarget.checkValidity()) {
-      this.resultsTarget.insertAdjacentHTML('afterbegin', this.pendingTemplate())
-      const response = await fetchAPI(this.url)
-      const results = await response.json()
-      this.clearResults()
-      if (Object.keys(results).length === 0) {
-        this.resultsTarget.insertAdjacentHTML('afterbegin', this.notFoundTemplate())
+  showHistory () {
+    this.historyTarget.classList.remove('d-none')
+  }
+
+  isValid () {
+    return this.inputTarget.value.length >= this.inputTarget.getAttribute('minlength')
+  }
+
+  async search (e) {
+    if (this.isValid()) {
+      if (e.key === 'Enter') {
+        this.hideHistory()
+        this.hideResults()
       } else {
-        Object.values(results).flat().forEach(result => {
-          this.resultsTarget.insertAdjacentHTML('afterbegin', this.suggestionTemplate(result))
-        })
+        this.showResults()
+        this.hideHistory()
+        this.resultsTarget.innerHTML = this.pendingTemplate()
+        const response = await fetchAPI(this.url)
+        const results = await response.json()
+        if (Object.keys(results).length === 0) {
+          this.resultsTarget.innerHTML = this.notFoundTemplate()
+        } else {
+          this.resultsTarget.innerHTML = Object
+            .values(results)
+            .flat()
+            .map(this.suggestionTemplate.bind(this))
+            .join('')
+        }
       }
+    } else {
+      this.clearResults()
+      this.showHistory()
     }
+  }
+
+  get url () {
+    return `/searches/${this.inputTarget.value}`
   }
 }
