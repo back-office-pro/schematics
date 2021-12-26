@@ -4,6 +4,7 @@ module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
     include Localizable
+    include Rescuable
 
     protect_from_forgery unless: -> { request.format.json? }
     before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }

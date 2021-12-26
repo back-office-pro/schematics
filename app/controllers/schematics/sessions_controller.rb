@@ -2,7 +2,6 @@
 
 module Schematics
   class SessionsController < ApplicationController
-    include Rescuable
     include Fillable
 
     skip_before_action :authorize, only: %i[new create]

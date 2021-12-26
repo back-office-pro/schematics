@@ -2,8 +2,6 @@
 
 module Schematics
   class VersionsController < ApplicationController
-    include Rescuable
-
     load_and_authorize_resource class: Version
     delegate :model_name, to: :model_class, private: true
 

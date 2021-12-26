@@ -2,7 +2,6 @@
 
 module Schematics
   class ResourcesController < ApplicationController
-    include Rescuable
     include Fillable
     include Sortable
     include Filterable

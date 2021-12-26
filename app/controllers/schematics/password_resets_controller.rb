@@ -2,7 +2,6 @@
 
 module Schematics
   class PasswordResetsController < ApplicationController
-    include Rescuable
     include Fillable
 
     skip_before_action :authorize
