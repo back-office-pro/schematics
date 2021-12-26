@@ -2,6 +2,5 @@
 
 module Schematics
   class ApplicationJob < ::ApplicationJob
-    queue_as :app
   end
 end

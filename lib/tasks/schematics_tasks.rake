@@ -45,6 +45,12 @@ namespace :schematics do
     end
   end
 
+  namespace :jobs do
+    task run: :environment do
+      sh "bin/bundle exec sidekiq -C #{Schematics::Engine.root.join('config', 'sidekiq.yml')} &"
+    end
+  end
+
   desc 'Generate API request documentation from API specs'
   RSpec::Core::RakeTask.new('docs:generate') do |t|
     t.pattern = 'spec/acceptance/**/*_spec.rb'

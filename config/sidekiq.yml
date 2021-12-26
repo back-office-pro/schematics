@@ -1,0 +1,9 @@
+---
+:queues:
+  - default
+  - searchkick
+  - mailers
+:schedule:
+  clean_searches_job:
+    cron: '0 0 * * *'
+    class: CleanSearchesJob
