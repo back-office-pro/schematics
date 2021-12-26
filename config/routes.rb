@@ -2,9 +2,8 @@
 
 Schematics::Engine.routes.draw do
   draw :dashboard
+  draw :exceptions
   get 'swagger/open_api.json', to: 'swagger#open_api', as: :swagger_open_api
-  get '404', to: 'exception#not_found'
-  get '500', to: 'exception#internal_server_error'
 
   root Schematics::Schema.instance.root_route
 
