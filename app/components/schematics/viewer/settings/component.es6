@@ -1,4 +1,4 @@
-/* global Stimulus, fetchAPI */
+/* global Stimulus, fetchAPI, Routes */
 
 window.ViewerSettings = class extends Stimulus.Controller {
   keepOpened (e) {
@@ -11,6 +11,6 @@ window.ViewerSettings = class extends Stimulus.Controller {
       element.classList.add('animate__animated')
       element.classList.toggle('d-none')
     })
-    fetchAPI('/preferences', 'PUT', { preferences: { [id]: checked } })
+    fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { [id]: checked } })
   }
 }

@@ -12,6 +12,7 @@
 //= require locales/jquery.timeago.fr
 //= require jquery-resizable-columns/dist/jquery.resizableColumns.min
 //= require sortablejs/Sortable
+//= require js-routes
 //= require_tree .
 
 /* global $, Pagy, Turbolinks, Sortable */

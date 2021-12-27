@@ -1,4 +1,4 @@
-/* global Stimulus, fetchAPI */
+/* global Stimulus, fetchAPI, Routes */
 
 window.SidebarController = class extends Stimulus.Controller {
   toggle () {
@@ -8,6 +8,6 @@ window.SidebarController = class extends Stimulus.Controller {
       element.classList.toggle('d-md-block')
     })
     const sidebarToggled = document.querySelector('.sidebar').classList.contains('toggled')
-    fetchAPI('/preferences', 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
+    fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
   }
 }

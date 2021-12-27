@@ -1,4 +1,4 @@
-/* global Stimulus, fetchAPI */
+/* global Stimulus, fetchAPI, Routes */
 
 window.NotificationCenterController = class extends Stimulus.Controller {
   static get targets () {
@@ -11,7 +11,7 @@ window.NotificationCenterController = class extends Stimulus.Controller {
 
   async readNotifications () {
     if (this.hasNotifications()) {
-      await fetchAPI('/dashboard/read_notifications', 'POST')
+      await fetchAPI(Routes.schematicsDashboardReadNotifications(), 'POST')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
       this.iconTarget.classList.remove('animate__animated')

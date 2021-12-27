@@ -56,6 +56,7 @@ require 'rack-mini-profiler'
 require 'draper'
 require 'aasm'
 require 'strong_migrations'
+require 'js-routes'
 
 module Schematics
   class Engine < ::Rails::Engine

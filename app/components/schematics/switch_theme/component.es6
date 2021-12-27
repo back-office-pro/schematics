@@ -1,4 +1,4 @@
-/* global Stimulus, fetchAPI */
+/* global Stimulus, fetchAPI, Routes */
 
 window.SwitchThemeController = class extends Stimulus.Controller {
   lightTheme () {
@@ -14,6 +14,6 @@ window.SwitchThemeController = class extends Stimulus.Controller {
     const oldTheme = document.querySelector(`link#${theme === 'light' ? 'dark' : 'light'}`)
     newTheme.removeAttribute('disabled')
     setTimeout(() => oldTheme.setAttribute('disabled', 'disabled'), 200)
-    fetchAPI('/preferences', 'PUT', { preferences: { theme: theme } })
+    fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { theme: theme } })
   }
 }
