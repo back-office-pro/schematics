@@ -3,6 +3,10 @@
 module Schematics
   module Attributes
     class Attachments < Attachment
+      def open_api_type
+        :array
+      end
+
       def permitted_params
         [
           { super.first => [] },

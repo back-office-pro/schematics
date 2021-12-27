@@ -17,6 +17,7 @@ describe Schematics::Attributes::Token do
 
   its(:type) { is_expected.to eq('token') }
   its(:column_name) { is_expected.to eq('auth_token') }
+  its(:open_api_type) { is_expected.to eq(:string) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

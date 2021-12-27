@@ -31,6 +31,10 @@ module Schematics
         self.class.name.demodulize.underscore
       end
 
+      def open_api_type
+        :integer
+      end
+
       def name
         return [inverse_of, source].join('_') if @prefixed
 

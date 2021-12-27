@@ -21,6 +21,10 @@ module Schematics
         @options = Options.new(options)
       end
 
+      def open_api_type
+        :string
+      end
+
       def to_sql
         [@entity.table_name.pluralize, @name].join('.')
       end

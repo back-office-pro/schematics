@@ -6,6 +6,10 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
+      def open_api_type
+        :number
+      end
+
       def to_sql
         super.join
       end

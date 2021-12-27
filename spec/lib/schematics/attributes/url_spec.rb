@@ -17,6 +17,7 @@ describe Schematics::Attributes::Url do
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('url') }
+  its(:open_api_type) { is_expected.to eq(:string) }
   its(:icon) { is_expected.to eq(:chrome) }
   its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to be_nil }

@@ -5,6 +5,10 @@ module Schematics
     class Jsonb < Attribute
       include Behaviours::Renderable
 
+      def open_api_type
+        :object
+      end
+
       def default
         options.default&.to_json
       end

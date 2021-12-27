@@ -18,6 +18,7 @@ describe Schematics::Attributes::Datetime do
 
   its(:type) { is_expected.to eq('datetime') }
   its(:column_name) { is_expected.to eq('created_at') }
+  its(:open_api_type) { is_expected.to eq(:string) }
   its(:icon) { is_expected.to eq(:calendar_alt) }
   its(:input_type) { is_expected.to eq(:date) }
   its(:default) { is_expected.to be_nil }

@@ -13,6 +13,10 @@ module Schematics
       def type
         'float'
       end
+
+      def open_api_type
+        :number
+      end
     end
   end
 end
