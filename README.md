@@ -52,7 +52,7 @@ Dependencies choices details.
 
 ### API Documentation
 
-:star: **rspec_api_documentation + grape-swagger-rails**
+:star: **zero-rails_openapi**
 
 :+1: Open API documentation
 
