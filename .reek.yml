@@ -30,7 +30,7 @@ detectors:
   BooleanParameter:
     enabled: false
   TooManyMethods:
-    max_methods: 28
+    max_methods: 29
   NestedIterators:
     max_allowed_nesting: 3
   UncommunicativeVariableName:
