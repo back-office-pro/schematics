@@ -15,7 +15,7 @@ module Schematics
       end
 
       def open_api_type
-        :number
+        'number'
       end
     end
   end

@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Attachments < Attachment
       def open_api_type
-        :array
+        'array'
       end
 
       def permitted_params

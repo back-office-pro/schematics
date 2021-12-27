@@ -4,7 +4,7 @@ module Schematics
   module Virtuals
     class Comparison < Virtual
       def open_api_type
-        :boolean
+        'boolean'
       end
 
       def to_sql

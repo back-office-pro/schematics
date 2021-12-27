@@ -16,7 +16,7 @@ module Schematics
       attr_accessor :inverse_entity
 
       def open_api_type
-        :integer
+        'integer'
       end
 
       def options_for_migration

@@ -4,7 +4,7 @@ module Schematics
   module Virtuals
     class Concatenation < Virtual
       def open_api_type
-        :string
+        'string'
       end
 
       def function

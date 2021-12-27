@@ -32,7 +32,7 @@ module Schematics
       end
 
       def open_api_type
-        :integer
+        'integer'
       end
 
       def name

@@ -13,7 +13,7 @@ module Schematics
       delegate :scale, to: :options
 
       def open_api_type
-        :number
+        'number'
       end
 
       def bound

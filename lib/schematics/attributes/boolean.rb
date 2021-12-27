@@ -9,7 +9,7 @@ module Schematics
       include Behaviours::Fillable
 
       def open_api_type
-        :boolean
+        'boolean'
       end
 
       def icon

@@ -15,7 +15,7 @@ module Schematics
       delegate :default, :json_default, to: :dummy
 
       def open_api_type
-        :object
+        'object'
       end
 
       def permitted_params

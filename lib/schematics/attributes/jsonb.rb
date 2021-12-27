@@ -6,7 +6,7 @@ module Schematics
       include Behaviours::Renderable
 
       def open_api_type
-        :object
+        'object'
       end
 
       def default

@@ -47,7 +47,7 @@ describe Schematics::Associations::HasManyThrough do
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('attributes') }
   its(:class_name) { is_expected.to eq('Attribute') }
-  its(:open_api_type) { is_expected.to eq(:integer) }
+  its(:open_api_type) { is_expected.to eq('integer') }
   its('descriptor.name') { is_expected.to eq('name') }
 
   its(:to_str) do

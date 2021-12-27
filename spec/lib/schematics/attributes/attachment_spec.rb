@@ -16,7 +16,7 @@ describe Schematics::Attributes::Attachment do
 
   its(:type) { is_expected.to eq('attachment') }
   its(:column_name) { is_expected.to eq('avatar') }
-  its(:open_api_type) { is_expected.to eq(:object) }
+  its(:open_api_type) { is_expected.to eq('object') }
   its(:icon) { is_expected.to eq(:file_image) }
   its(:default) { is_expected.to be_a(Rack::Test::UploadedFile) }
   its(:validators) { is_expected.to eq(antivirus: true) }

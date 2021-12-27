@@ -16,7 +16,7 @@ describe Schematics::Attributes::Boolean do
 
   its(:type) { is_expected.to eq('boolean') }
   its(:column_name) { is_expected.to eq('toggle') }
-  its(:open_api_type) { is_expected.to eq(:boolean) }
+  its(:open_api_type) { is_expected.to eq('boolean') }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:options_for_migration) { is_expected.to be_empty }
 
