@@ -1,4 +1,4 @@
-/* global Stimulus, fetchAPI, Turbolinks, I18n */
+/* global Stimulus, fetchAPI, Turbolinks, I18n, Routes */
 
 window.SearchBarController = class extends Stimulus.Controller {
   static get targets () {
@@ -32,7 +32,7 @@ window.SearchBarController = class extends Stimulus.Controller {
     return `
       <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
         <i class="fa fa-exclamation-triangle text-dark fa-fw mr-2"></i>
-        ${I18n.typeahead.not_found}
+        ${I18n.typeahead.notFound}
       </li>
     `
   }
@@ -110,6 +110,6 @@ window.SearchBarController = class extends Stimulus.Controller {
   }
 
   get url () {
-    return `/searches/${this.inputTarget.value}`
+    return Routes.schematicsSearchEn(this.inputTarget.value)
   }
 }

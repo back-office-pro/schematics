@@ -12,7 +12,7 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
     const text = this.textTarget.textContent
     const icon = this.iconTarget.innerHTML
     let timer = 0
-    this.textTarget.textContent = I18n.generate_file_in_background.pending
+    this.textTarget.textContent = I18n.generateFileInBackground.pending
     this.iconTarget.innerHTML = '<i class="fa fa-spinner fa-spin fa-fw"></i>'
     const response = await fetchAPI(this.data.get('url'))
     const fingerprint = await response.text()
@@ -28,7 +28,7 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
         this.iconTarget.innerHTML = icon
       } else {
         timer++
-        this.textTarget.textContent = `${I18n.generate_file_in_background.pending} (${timer})`
+        this.textTarget.textContent = `${I18n.generateFileInBackground.pending} (${timer})`
       }
     }, 1000)
   }

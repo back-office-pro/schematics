@@ -19,6 +19,13 @@ module Schematics
         .fetch(key.to_s, default)
     end
 
+    def i18n_javascript
+      t('javascript')
+        .deep_transform_keys { _1.to_s.camelize(:lower) }
+        .to_json
+        .html_safe # rubocop:disable Rails/OutputSafety
+    end
+
     def confirm_data
       {
         confirm: t('schematics.application.delete.title'),
