@@ -52,6 +52,12 @@ namespace :schematics do
     end
   end
 
+  namespace :docs do
+    task generate: :environment do
+      OpenApi.write_docs
+    end
+  end
+
   namespace :active_record do
     desc 'Run all active_record_doctor detectors'
     task doctor: :environment do
@@ -60,15 +66,5 @@ namespace :schematics do
         .new(ActiveRecordDoctor.current_config)
         .run_all or exit(1)
     end
-  end
-
-  desc 'Generate API request documentation from API specs'
-  RSpec::Core::RakeTask.new('docs:generate') do |t|
-    t.pattern = 'spec/acceptance/**/*_spec.rb'
-    t.rspec_opts = [
-      Gem::Specification.find_by_name('schematics').gem_dir,
-      '--format RspecApiDocumentation::ApiFormatter',
-      '--order defined'
-    ]
   end
 end
