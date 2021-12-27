@@ -1,6 +1,0 @@
-require 'rails_helper'
-require 'rspec_api_documentation/dsl'
-
-resource '<%= name.pluralize.titleize %>' do
-  extend Schematics::Specs::Acceptance
-end

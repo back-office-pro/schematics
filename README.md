@@ -38,7 +38,7 @@ Dependencies choices details.
 
 ### Testing
 
-:star: **rspec + rspec_api_documentation**
+:star: **rspec**
 
 :+1: Rspec is the most popular testing framework
 
