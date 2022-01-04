@@ -51,6 +51,14 @@ namespace :schematics do
     end
   end
 
+  desc 'Run all active_record_doctor detectors'
+  task active_record_doctor: :environment do
+    Rails.application.eager_load!
+    ActiveRecordDoctor::Runner
+      .new(ActiveRecordDoctor.current_config)
+      .run_all or exit(1)
+  end
+
   desc 'Generate API request documentation from API specs'
   RSpec::Core::RakeTask.new('docs:generate') do |t|
     t.pattern = 'spec/acceptance/**/*_spec.rb'
