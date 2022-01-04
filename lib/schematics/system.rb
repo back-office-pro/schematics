@@ -12,7 +12,6 @@ module Schematics
           [
             generate_scaffold(entity.name, entity.migratable_attributes),
             generate_rspec_acceptance(entity.name),
-            generate_deleted_at_migration(entity.table_name),
             generate_slug_migration(entity.table_name),
             generate_lock_version_migration(entity.table_name),
             entity
@@ -50,7 +49,7 @@ module Schematics
 
       def generate_join_table_migration(association)
         <<~SHELL
-          rails generate migration create_join_table_#{association.entity.name.pluralize}_#{association.name} #{association.entity.name.pluralize} #{association.name}:join_table_uuid
+          rails generate migration create_join_table_#{association.entity.name.pluralize}_#{association.name} #{association.entity.name.pluralize}:join_table_first #{association.name}:join_table_second
         SHELL
       end
 
@@ -69,12 +68,6 @@ module Schematics
       def generate_rspec_acceptance(name)
         <<~SHELL
           rails generate rspec:acceptance #{name}
-        SHELL
-      end
-
-      def generate_deleted_at_migration(name)
-        <<~SHELL
-          rails generate migration add_deleted_at_to_#{name.pluralize} deleted_at:datetime
         SHELL
       end
 
