@@ -46,17 +46,20 @@ namespace :schematics do
   end
 
   namespace :jobs do
+    desc 'Start sidekiq with configuration'
     task run: :environment do
       sh "bin/bundle exec sidekiq -C #{Schematics::Engine.root.join('config', 'sidekiq.yml')} &"
     end
   end
 
-  desc 'Run all active_record_doctor detectors'
-  task active_record_doctor: :environment do
-    Rails.application.eager_load!
-    ActiveRecordDoctor::Runner
-      .new(ActiveRecordDoctor.current_config)
-      .run_all or exit(1)
+  namespace :active_record do
+    desc 'Run all active_record_doctor detectors'
+    task doctor: :environment do
+      Rails.application.eager_load!
+      ActiveRecordDoctor::Runner
+        .new(ActiveRecordDoctor.current_config)
+        .run_all or exit(1)
+    end
   end
 
   desc 'Generate API request documentation from API specs'
