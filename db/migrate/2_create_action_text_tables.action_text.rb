@@ -8,7 +8,6 @@ class CreateActionTextTables < ActiveRecord::Migration[6.1]
       t.references :record, null: false, polymorphic: true, index: false, type: :uuid
 
       t.timestamps
-      t.datetime :deleted_at
 
       t.index %i[record_type record_id name],
               name: 'index_action_text_rich_texts_uniqueness',

@@ -4,14 +4,17 @@ require 'rails/generators'
 require 'rails/generators/generated_attribute'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'active_record/migration'
+require 'active_record/connection_adapters/abstract/schema_definitions'
 
 GeneratedAttribute = Schematics::Patches::Rails::Generators::GeneratedAttribute
 MigrationGenerator = Schematics::Patches::ActiveRecord::Generators::MigrationGenerator
+TableDefinition = Schematics::Patches::ActiveRecord::ConnectionAdapters::TableDefinition
 
 Rails::Generators::GeneratedAttribute.singleton_class.prepend(GeneratedAttribute)
 Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
+ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
 Rails.configuration.to_prepare do
