@@ -37,18 +37,24 @@ module Schematics
             !virtual? && !token? && !password_digest?
           end
 
-          def inject_index_options
-            "#{super}, algorithm: :concurrently"
+          def options_for_migration
+            super
+              .tap { _1[:index] = { where: 'deleted_at IS NULL' } if _1[:foreign_key] }
+              .merge(attr_options)
           end
 
-          def options_for_migration
-            super.merge(attr_options)
+          def inject_index_options
+            [
+              super,
+              'algorithm: :concurrently',
+              ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table'))
+            ].compact.join(', ')
           end
 
           def plural_name
-            return "#{super}, column_options: { type: :uuid }" if @type == :join_table_uuid
-
-            super
+            [super, ('column_options: { type: :uuid }' if @type == :join_table_second)]
+              .compact
+              .join(', ')
           end
 
           private
