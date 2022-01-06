@@ -27,7 +27,13 @@ module Schematics
 
       def to_str
         <<~RUBY
-          event :#{@name} do
+          def after_#{@name}; end
+        RUBY
+      end
+
+      def to_proc
+        <<~RUBY
+          event :#{@name}, after: :after_#{@name} do
             transitions from: #{Array(@from).map(&:to_sym)}, to: :#{@to}
           end
         RUBY

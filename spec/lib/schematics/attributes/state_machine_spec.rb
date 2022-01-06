@@ -63,17 +63,19 @@ describe Schematics::Attributes::StateMachine do
       aasm column: :#{name}, enum: true, no_direct_assignment: true, whiny_transitions: false do
         state :pending, initial: true
         state :closed, :refused
-
-        event :close do
+        event :close, after: :after_close do
           transitions from: [:pending], to: :closed
         end
-        event :refuse do
+        event :refuse, after: :after_refuse do
           transitions from: [:pending], to: :refused
         end
-        event :reopen do
+        event :reopen, after: :after_reopen do
           transitions from: [:closed, :refused], to: :pending
         end
       end
+      def after_close; end
+      def after_refuse; end
+      def after_reopen; end
     RUBY
   end
 end

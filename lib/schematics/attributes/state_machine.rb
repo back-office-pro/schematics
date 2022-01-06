@@ -10,9 +10,9 @@ module Schematics
           aasm column: :#{name}, enum: true, no_direct_assignment: true, whiny_transitions: false do
             state :#{values.first}, initial: true
             state :#{values.drop(1).join(', :')}
-
-          #{events_to_str}
+          #{events_to_proc}
           end
+          #{events_to_str}
         RUBY
       end
 
@@ -32,6 +32,13 @@ module Schematics
 
       def events_to_str
         events
+          .join
+          .chomp
+      end
+
+      def events_to_proc
+        events
+          .map(&:to_proc)
           .join
           .indent(2)
           .chomp
