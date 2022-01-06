@@ -10,7 +10,7 @@
       = f.input :email, prepend: fa_icon(:envelope)
       = f.input :password, prepend: fa_icon(:key)
       = f.input :remember_me, as: :boolean
-      = f.button :button, class: 'btn-primary btn-icon-split mr-2' do
+      = f.button :button, class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
         span.icon = fa_icon :check
         span.text = t('schematics.application.button.confirm')
       = link_to t('.password_lost?'), password_lost_path, class: 'btn btn-link btn-sm'
