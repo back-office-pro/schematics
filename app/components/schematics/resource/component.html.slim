@@ -6,7 +6,7 @@
         = fa_icon :archive, class: 'mr-2'
         = value
     - else
-      = link_to(value, value)
+      = link_to(value.to_s, value)
 - when Schematics::Attributes::Jsonb
   - if value
     table
