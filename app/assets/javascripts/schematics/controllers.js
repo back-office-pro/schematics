@@ -6,7 +6,7 @@
 //= require search_bar/component
 //= require filter/typeahead/component
 //= require viewer/settings/component
-//= require ./controllers/generate_file_in_background_controller
+//= require button/generate_file_in_background/component
 
 /*
   global Stimulus,
