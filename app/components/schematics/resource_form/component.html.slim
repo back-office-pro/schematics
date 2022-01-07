@@ -101,9 +101,5 @@
       = f.input field.name.to_sym,
                 wrapper: :input_group,
                 prepend: field.try(:unit) || fa_icon(field.icon)
-  = f.button :button, class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
-    span.icon = fa_icon :check
-    span.text = t('schematics.application.button.confirm')
-  = link_to @cancel_path, class: 'btn btn-danger btn-sm btn-icon-split' do
-    span.icon = fa_icon :times
-    span.text = t('schematics.application.button.cancel')
+  = render Schematics::Button::Confirm::Component.new
+  = render Schematics::Button::Cancel::Component.new(path: @cancel_path)
