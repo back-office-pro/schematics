@@ -20,15 +20,7 @@
   = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true)
 - when Schematics::Attributes::Attachment
   - if value.attached?
-    - if editable? && can?(:destroy, value.attachment)
-      = form_for @resource do |f|
-        = f.fields_for :"#{value.name}_attachment_attributes" do |fields|
-          = fields.hidden_field :id, value: value.id
-          = fields.hidden_field :_destroy, value: true
-        = f.button :button,
-                    class: 'btn btn-danger btn-sm float-right',
-                    data: confirm_data.merge(toggle: 'tooltip', placement: 'left', title: t('schematics.application.button.destroy')) do
-                      = fa_icon(:trash)
+    = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if editable?
     - if value.representable?
       = render Schematics::Attachment::Component.new(attachment: value)
     - else

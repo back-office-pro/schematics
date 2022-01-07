@@ -39,15 +39,7 @@
                         method: :delete,
                         class: 'btn btn-danger btn-sm',
                         data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
-                    - if model_class == ActiveStorage::Attachment && can?(:destroy, resource)
-                      = form_for @resources.first.record do |f|
-                        = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
-                          = fields.hidden_field :id, value: resource.id
-                          = fields.hidden_field :_destroy, value: true
-                        = f.button :button,
-                                   class: 'btn btn-danger btn-sm',
-                                   data: confirm_data.merge(toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy')) do
-                          = fa_icon(:trash)
+                    = render Schematics::Button::DestroyAttachment::Component.new(resource: resource.try(:record), attachment: resource)
                 - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle class=col_preference_class(field)
                     = render Schematics::Resource::Component.new(resource:, field:)

@@ -72,7 +72,7 @@
       - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
       - attachment = @resource.send(field.name.to_sym)
       - if attachment.attached? && attachment.persisted?
-        = f.simple_fields_for :"#{attachment.name}_attachment_attributes" do |fields|
+        = f.simple_fields_for field.attributes_param_key do |fields|
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy,
                          as: :boolean,
