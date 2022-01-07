@@ -13,10 +13,6 @@
     .text-dark = t('schematics.application.delete.warning', model_name: @model_name, resource: @resource)
     - resource_associations(only_required: true).each do |resources|
       = render Schematics::Viewer::Association::Component.new(resources:, collapsed: true)
-    .mt-4
-      = link_to polymorphic_path(@resource), method: :delete, class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
-        span.icon = fa_icon :check
-        span.text = t('schematics.application.button.confirm')
-      = link_to @resource, class: 'btn btn-danger btn-sm btn-icon-split' do
-        span.icon = fa_icon :times
-        span.text = t('schematics.application.button.cancel')
+    = form_for @resource, method: :delete, html: { class: 'mt-3' } do
+      = render Schematics::Button::Confirm::Component.new
+      = render Schematics::Button::Cancel::Component.new(path: @resource)
