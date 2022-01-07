@@ -35,6 +35,16 @@ $(document).on('turbolinks:load', function () {
       .filter(function () { return !this.value })
       .attr('disabled', true)
   })
+  $('form').on('submit', function () {
+    $(this)
+      .find('button[type="submit"]')
+      .attr('disabled', true)
+      .find('.icon')
+      .toggleClass('d-none')
+      .end()
+      .find('.text')
+      .toggleClass('d-none')
+  })
   $('*[data-href]').on('click', function (e) {
     const $target = $(e.target)
     if (!$target.is('a') &&
