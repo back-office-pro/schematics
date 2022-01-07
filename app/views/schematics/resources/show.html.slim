@@ -6,14 +6,8 @@
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon :eye, class: 'mr-3 ml-2 fa-lg align-middle'
           span.align-middle = title
-      .col-auto {
-        data-controller='generateFileInBackground'
-        data-generateFileInBackground-content-type='application/pdf'
-        data-generateFileInBackground-url=main_app.polymorphic_path(@resource, format: :pdf)
-      }
-        a.btn.btn-light.btn-sm.btn-icon-split data-action='click->generateFileInBackground#run'
-          span.icon data-generateFileInBackground-target='icon' = fa_icon :file_pdf
-          span.text.d-none.d-lg-inline data-generateFileInBackground-target='text' = t('schematics.application.button.download_pdf')
+      .col-auto
+        = render Schematics::Button::GenerateFileInBackground::Component.build_pdf(url: main_app.polymorphic_path(@resource, format: :pdf))
         - if can?(:update, @resource)
           = link_to main_app.edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource),
                     class: 'btn btn-primary btn-sm btn-icon-split ml-2' do

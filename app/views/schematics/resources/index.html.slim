@@ -5,14 +5,9 @@
         h5.m-0.text-primary.text-truncate.font-weight-bold
           = fa_icon :table, class: 'mr-3 ml-2 fa-lg align-middle'
           span.align-middle = title
-      .col-auto {
-        data-controller='generateFileInBackground'
-        data-generateFileInBackground-content-type='text/csv'
-        data-generateFileInBackground-url=main_app.polymorphic_path(model_class, format: :csv)
-      }
-        a.btn.btn-light.btn-sm.btn-icon-split.ml-2 data-action='click->generateFileInBackground#run'
-          span.icon data-generateFileInBackground-target='icon' = fa_icon :file_csv
-          span.text.d-none.d-lg-inline data-generateFileInBackground-target='text' = t('schematics.application.button.download_as_csv')
+      .col-auto
+        = render Schematics::Button::GenerateFileInBackground::Component \
+            .build_csv(url: main_app.polymorphic_path(model_class, format: :csv), text: :download_as_csv)
         - if can?(:import, model_class)
           = link_to new_polymorphic_path([model_class, Import]), class: 'btn btn-dark btn-sm btn-icon-split ml-2' do
             span.icon = fa_icon :cloud_upload_alt
