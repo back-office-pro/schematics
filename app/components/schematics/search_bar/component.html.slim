@@ -18,4 +18,6 @@
         }
           = fa_icon :history, class: 'text-dark fa-fw mr-2'
           = query
-  = f.button fa_icon(:search), name: nil, class: 'fa-lg btn nav-link'
+  = f.button class: 'fa-lg btn nav-link' do
+    span.icon = fa_icon :search
+    span.icon.d-none = fa_icon :spinner, animation: 'spin'
