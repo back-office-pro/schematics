@@ -96,7 +96,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:references) }
     its(:has_index?) { is_expected.to be_truthy }
     its(:has_uniq_index?) { is_expected.to be_falsy }
-    its(:attr_options) { is_expected.to eq({ foreign_key: { to_table: :users } }) }
+    its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
     its(:default) { is_expected.to be_nil }
     it { is_expected.to be_required }
 
