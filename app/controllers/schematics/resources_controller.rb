@@ -21,8 +21,6 @@ module Schematics
 
     helper_method :entity, :model_class, :resource
 
-    attr_reader :resource
-
     class << self
       alias original_controller_path controller_path
 
