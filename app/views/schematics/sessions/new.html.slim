@@ -2,9 +2,7 @@
   = render Schematics::Attachment::Component.build_company_logo(attachment: settings(:company_logo), icon: :door_open)
 .card.shadow-sm.border-0
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
-    h5.m-0.text-primary.text-truncate.font-weight-bold
-      = fa_icon :sign_in_alt, class: 'mr-3 ml-2 fa-lg align-middle'
-      span.align-middle = title
+    = render Schematics::CardHeading::Component.new(icon: :sign_in_alt, title:)
   .card-body.p-3
     = simple_form_for :user, url: sessions_path, wrapper: :input_group do |f|
       = f.input :email, prepend: fa_icon(:envelope)

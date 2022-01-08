@@ -3,9 +3,7 @@
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :cloud_upload_alt, class: 'mr-3 ml-2 fa-lg align-middle'
-          span.align-middle = title
+        = render Schematics::CardHeading::Component.new(icon: :cloud_upload_alt, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component \
           .build_csv(url: polymorphic_path([parent_model_class, Import], action: :template, format: :csv), text: :download_csv_template)
