@@ -3,26 +3,13 @@
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :eye, class: 'mr-3 ml-2 fa-lg align-middle'
-          span.align-middle = title
+        = render Schematics::CardHeading::Component.new(icon: :eye, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component.build_pdf(url: main_app.polymorphic_path(@resource, format: :pdf))
-        - if can?(:update, @resource)
-          = link_to main_app.edit_polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource),
-                    class: 'btn btn-primary btn-sm btn-icon-split ml-2' do
-            span.icon = fa_icon :edit
-            span.text.d-none.d-lg-inline = t('schematics.application.button.edit')
+        = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
-        - if can?(:destroy, @resource)
-          - if resource_associations(only_required: true).any?
-            = link_to main_app.polymorphic_path(@resource, action: :delete), class: 'btn btn-danger btn-sm btn-icon-split ml-2' do
-                span.icon = fa_icon :trash
-                span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
-          - else
-            = link_to main_app.polymorphic_path(@resource), method: :delete, class: 'btn btn-danger btn-sm btn-icon-split ml-2', data: confirm_data do
-                span.icon = fa_icon :trash
-                span.text.d-none.d-lg-inline = t('schematics.application.button.destroy')
+        - constant = resource_associations(only_required: true).any? ? :Delete : :Destroy
+        = render Schematics::Button.const_get(constant)::Component.new(resource: @resource, compact: false)
   .card-body.p-0
     = render template: 'schematics/resources/show', formats: :pdf
 - entity.rich_text_attributes.each do |attribute|
@@ -34,9 +21,10 @@
         data-toggle='collapse'
         role='button'
       }
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon attribute.icon, class: 'mr-3 ml-2 fa-lg'
-          = attribute.entity.class_name.constantize.human_attribute_name(attribute.name)
+        = render Schematics::CardHeading::Component.new( \
+          icon: attribute.icon,
+          title: attribute.entity.class_name.constantize.human_attribute_name(attribute.name) \
+        )
       .collapse.show id="collapse-#{attribute.name}"
         .card-body.p-3
           == rich_text
