@@ -9,6 +9,7 @@ en:
         destroy: Delete permanently
         edit: Edit
         import: Import %{model_name}
+        loading: Processing...
         reset_filters: Reset filters
         revert: Revert
         stale: Check changes
