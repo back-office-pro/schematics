@@ -24,6 +24,14 @@ module Schematics
             .entity
             .find_field_by_name(name)
         end
+
+        def data
+          confirm_data.merge(
+            toggle: 'tooltip',
+            placement: 'left',
+            title: t('schematics.application.button.destroy')
+          )
+        end
       end
     end
   end

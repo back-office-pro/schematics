@@ -2,8 +2,6 @@
   = f.fields_for attributes_param_key do |fields|
     = fields.hidden_field :id, value: id
     = fields.hidden_field :_destroy, value: true
-  = f.button :button,
-             class: 'btn btn-danger btn-sm float-right',
-             data: confirm_data.merge(toggle: 'tooltip', placement: 'left', title: t('schematics.application.button.destroy')) do
-               span.icon = fa_icon :trash
-               span.icon.d-none = fa_icon :spinner, animation: 'spin'
+  = f.button :button, data:, class: 'btn btn-danger btn-sm float-right' do
+    span.icon = fa_icon :trash
+    span.icon.d-none = fa_icon :spinner, animation: 'spin'
