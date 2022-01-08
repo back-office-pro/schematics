@@ -1,7 +1,5 @@
 - breadcrumb title, schematics.edit_schema_path
 .card.shadow-sm.border-0
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
-    h5.m-0.text-primary.text-truncate.font-weight-bold
-      = fa_icon :paint_brush, class: 'mr-3 ml-2 fa-lg align-middle'
-      span.align-middle = title
+    = render Schematics::CardHeading::Component.new(icon: :paint_brush, title:)
   .card-body.p-0

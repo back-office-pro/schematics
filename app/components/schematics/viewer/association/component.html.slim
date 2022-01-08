@@ -7,9 +7,7 @@
   }
     .row.align-items-center
       .col.text-truncate
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon icon, class: 'mr-3 ml-2 fa-lg align-middle'
-          span.align-middle = title
+        = render Schematics::CardHeading::Component.new(icon:, title:)
       .col-auto.mr-3
         .badge.badge-light.text-dark.p-2.mr-3 = @resources.size
   .collapse class=collapse_css_class id=id
@@ -28,26 +26,9 @@
               tr data-href=polymorphic_path(resource)
                 td.text-nowrap.text-center
                   .btn-group
-                    - if can?(:update, resource)
-                      = link_to edit_polymorphic_path(resource),
-                        class: 'btn btn-primary btn-sm',
-                        data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.edit') } do
-                        = fa_icon :edit
-                    - if can?(:archive, resource)
-                      = link_to fa_icon(:archive),
-                        polymorphic_path(resource, action: :archive),
-                        method: :delete,
-                        class: 'btn btn-danger btn-sm',
-                        data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }
-                    - if model_class == ActiveStorage::Attachment && can?(:destroy, resource)
-                      = form_for @resources.first.record do |f|
-                        = f.fields_for :"#{resource.name}_attachments_attributes" do |fields|
-                          = fields.hidden_field :id, value: resource.id
-                          = fields.hidden_field :_destroy, value: true
-                        = f.button :button,
-                                   class: 'btn btn-danger btn-sm',
-                                   data: confirm_data.merge(toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.destroy')) do
-                          = fa_icon(:trash)
+                    = render Schematics::Button::Edit::Component.new(resource:)
+                    = render Schematics::Button::Archive::Component.new(resource:)
+                    = render Schematics::Button::DestroyAttachment::Component.new(resource: resource.try(:record), attachment: resource)
                 - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                   td.text-nowrap.text-center.align-middle class=col_preference_class(field)
                     = render Schematics::Resource::Component.new(resource:, field:)

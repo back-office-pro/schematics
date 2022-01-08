@@ -17,7 +17,7 @@ module Schematics
       def permitted_params
         [
           super,
-          { "#{association_name}_attributes": %i[id _destroy] }
+          { attributes_param_key => %i[id _destroy] }
         ]
       end
 
@@ -120,6 +120,10 @@ module Schematics
 
       def image?
         icon == :file_image
+      end
+
+      def attributes_param_key
+        :"#{association_name}_attributes"
       end
 
       protected

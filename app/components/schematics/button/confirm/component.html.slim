@@ -1,0 +1,5 @@
+= button_tag class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
+  span.icon = fa_icon :check
+  span.icon.d-none = fa_icon :spinner, animation: 'spin'
+  span.text = t('schematics.application.button.confirm')
+  span.text.d-none = t('schematics.application.button.loading')

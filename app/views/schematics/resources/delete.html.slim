@@ -1,9 +1,7 @@
 - breadcrumb title, main_app.polymorphic_path(@resource, action: :delete)
 .card.shadow-sm.border-0
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
-    h5.m-0.text-primary.text-truncate.font-weight-bold
-      = fa_icon :trash, class: 'mr-3 ml-2 fa-lg align-middle'
-      span.align-middle = title
+    = render Schematics::CardHeading::Component.new(icon: :trash, title:)
   .card-body.p-3
     .alert.alert-danger
       h5.alert-heading
@@ -11,12 +9,8 @@
         = t('schematics.application.delete.title')
       = t('schematics.application.delete.subtitle')
     .text-dark = t('schematics.application.delete.warning', model_name: @model_name, resource: @resource)
-    - resource_associations(only_required: true).each do |resources|
+    - resource_associations(resource: @resource, only_required: true).each do |resources|
       = render Schematics::Viewer::Association::Component.new(resources:, collapsed: true)
-    .mt-4
-      = link_to polymorphic_path(@resource), method: :delete, class: 'btn btn-primary btn-sm btn-icon-split mr-2' do
-        span.icon = fa_icon :check
-        span.text = t('schematics.application.button.confirm')
-      = link_to @resource, class: 'btn btn-danger btn-sm btn-icon-split' do
-        span.icon = fa_icon :times
-        span.text = t('schematics.application.button.cancel')
+    = form_for @resource, method: :delete, html: { class: 'mt-3' } do
+      = render Schematics::Button::Confirm::Component.new
+      = render Schematics::Button::Cancel::Component.new(path: @resource)

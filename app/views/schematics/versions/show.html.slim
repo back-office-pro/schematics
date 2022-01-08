@@ -5,14 +5,9 @@
       .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
         .row.align-items-center
           .col.text-truncate
-            h5.m-0.text-primary.text-truncate.font-weight-bold
-              = fa_icon @version.entity.icon, class: 'mr-3 ml-2 fa-lg align-middle'
-              span.align-middle = title
+            = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title:)
           .col-auto
-            - if can?(:revert, @version)
-              = link_to revert_version_path(@version), method: :patch, class: 'btn btn-primary btn-sm btn-icon-split' do
-                span.icon = fa_icon :undo
-                span.text.d-none.d-lg-inline = t('schematics.application.button.revert')
+            = render Schematics::Button::Revert::Component.new(version: @version)
       .card-body.p-0
         .table-responsive
           table.table.mb-0.table-striped
@@ -33,9 +28,7 @@
       .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
         .row.align-items-center
           .col.text-truncate
-            h5.m-0.text-primary.text-truncate.font-weight-bold
-              = fa_icon @version.entity.icon, class: 'mr-3 ml-2 fa-lg align-middle'
-              span.align-middle = title
+            = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title:)
       .card-body.p-0
         .table-responsive
           table.table.mb-0.table-striped

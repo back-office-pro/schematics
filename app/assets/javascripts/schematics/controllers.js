@@ -6,7 +6,7 @@
 //= require search_bar/component
 //= require filter/typeahead/component
 //= require viewer/settings/component
-//= require ./controllers/generate_file_in_background_controller
+//= require button/generate_file_in_background/component
 
 /*
   global Stimulus,
@@ -23,7 +23,7 @@
 window.fetchAPI = (url, method = 'GET', data) => {
   const csrfToken = document.querySelector("[name='csrf-token']").content
   const options = {
-    method: method,
+    method,
     body: data && JSON.stringify(data),
     headers: {
       'X-CSRF-Token': csrfToken,

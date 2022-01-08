@@ -4,10 +4,8 @@ module Schematics
   module ResourceForm
     class Component < ApplicationComponent
       delegate :rich_text_area_tag, to: :helpers
-      delegate :new_record?, to: :resource
-      delegate :class, to: :resource, prefix: true
-      delegate :entity, :human_attribute_name, to: :resource_class
-      attr_reader :resource
+      delegate :new_record?, to: :@resource
+      delegate :entity, :human_attribute_name, to: :model_class
 
       def initialize(resource:, url: nil, attributes: nil, cancel_path: nil)
         super
@@ -15,6 +13,12 @@ module Schematics
         @url = url
         @attributes = attributes || entity.fillable_elements
         @cancel_path = cancel_path || resource
+      end
+
+      private
+
+      def model_class
+        @resource.class
       end
     end
   end

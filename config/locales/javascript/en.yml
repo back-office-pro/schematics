@@ -1,8 +1,6 @@
 ---
 en:
   javascript:
-    generate_file_in_background:
-      pending: Generating...
     slim_select:
       placeholder: Select a value
       search_placeholder: Search...

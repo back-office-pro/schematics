@@ -3,16 +3,9 @@
   .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        h5.m-0.text-primary.text-truncate.font-weight-bold
-          = fa_icon :cloud_upload_alt, class: 'mr-3 ml-2 fa-lg align-middle'
-          span.align-middle = title
-      .col-auto {
-        data-controller='generateFileInBackground'
-        data-generateFileInBackground-content-type='text/csv'
-        data-generateFileInBackground-url=polymorphic_path([parent_model_class, Import], action: :template, format: :csv)
-      }
-        a.btn.btn-primary.btn-sm.btn-icon-split data-action='click->generateFileInBackground#run'
-          span.icon data-generateFileInBackground-target='icon' = fa_icon :file_csv
-          span.text.d-none.d-lg-inline data-generateFileInBackground-target='text' = t('schematics.application.button.download_csv_template')
+        = render Schematics::CardHeading::Component.new(icon: :cloud_upload_alt, title:)
+      .col-auto
+        = render Schematics::Button::GenerateFileInBackground::Component \
+          .build_csv(url: polymorphic_path([parent_model_class, Import], action: :template, format: :csv), text: :download_csv_template)
   .card-body.p-3
     = render Schematics::ResourceForm::Component.new(resource: @resource, url: [parent_model_class, Import], cancel_path: parent_model_class)

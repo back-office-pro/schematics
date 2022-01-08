@@ -3,9 +3,9 @@
     = link_to render(Schematics::Attachment::Component.build_avatar(attachment: user.avatar)), user
   .col.text-truncate
     - if item
-      = link_to(item, item)
+      = link_to(item.to_s, item)
     - else
-      .text-muted = @version.reify(dup: true)
+      .text-muted = @version.reify(dup: true).to_s
     .text-muted = timeago_tag(created_at, force: true)
   .col-auto.align-self-center
     = fa_icon(icon, size: '2x', class: 'fa-fw text-light')

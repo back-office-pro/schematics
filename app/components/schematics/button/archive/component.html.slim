@@ -1,0 +1,5 @@
+= link_to fa_icon(:archive),
+          polymorphic_path(@resource, action: :archive),
+          method: :delete,
+          class: 'btn btn-danger btn-sm',
+          data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.archive') }

@@ -1,19 +1,24 @@
 //= require file-saver/dist/FileSaver
 
-/* global Stimulus, fetchAPI, Blob, saveAs, I18n */
+/* global Stimulus, fetchAPI, Blob, saveAs */
 
 window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
   static get targets () {
-    return ['text', 'icon']
+    return ['button', 'loading']
+  }
+
+  toggleButton (loadingText) {
+    this.buttonTarget.disabled = !this.buttonTarget.disabled
+    this.loadingTarget.textContent = loadingText
+    this.buttonTarget.querySelectorAll('.icon').forEach(_ => _.classList.toggle('d-none'))
+    this.buttonTarget.querySelectorAll('.text').forEach(_ => _.classList.toggle('d-lg-inline'))
   }
 
   async run (event) {
     event.preventDefault()
-    const text = this.textTarget.textContent
-    const icon = this.iconTarget.innerHTML
     let timer = 0
-    this.textTarget.textContent = I18n.generateFileInBackground.pending
-    this.iconTarget.innerHTML = '<i class="fa fa-spinner fa-spin fa-fw"></i>'
+    const loadingText = this.loadingTarget.textContent
+    this.toggleButton(loadingText)
     const response = await fetchAPI(this.data.get('url'))
     const fingerprint = await response.text()
     const interval = setInterval(async () => {
@@ -24,11 +29,10 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
         const filename = res.headers.get('Content-Disposition').match(/filename="(.*)";/)[1]
         const blob = new Blob([data], { type: `${this.data.get('contentType')};charset=utf-8` })
         saveAs(blob, filename)
-        this.textTarget.textContent = text
-        this.iconTarget.innerHTML = icon
+        this.toggleButton(loadingText)
       } else {
         timer++
-        this.textTarget.textContent = `${I18n.generateFileInBackground.pending} (${timer})`
+        this.loadingTarget.textContent = `${loadingText} (${timer})`
       }
     }, 1000)
   }
