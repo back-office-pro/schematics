@@ -43,7 +43,7 @@ $(document).on('turbolinks:load', function () {
       .toggleClass('d-none')
       .end()
       .find('.text')
-      .toggleClass('d-none')
+      .toggleClass(function () { return $(this).hasClass('d-lg-inline') ? 'd-lg-inline' : 'd-none' })
   })
   $('*[data-href]').on('click', function (e) {
     const $target = $(e.target)
