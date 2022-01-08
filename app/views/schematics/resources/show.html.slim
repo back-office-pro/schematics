@@ -8,7 +8,7 @@
         = render Schematics::Button::GenerateFileInBackground::Component.build_pdf(url: main_app.polymorphic_path(@resource, format: :pdf))
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
-        - constant = resource_associations(only_required: true).any? ? :Delete : :Destroy
+        - constant = resource_associations(resource: @resource, only_required: true).any? ? :Delete : :Destroy
         = render Schematics::Button.const_get(constant)::Component.new(resource: @resource, compact: false)
   .card-body.p-0
     = render template: 'schematics/resources/show', formats: :pdf
@@ -28,7 +28,7 @@
       .collapse.show id="collapse-#{attribute.name}"
         .card-body.p-3
           == rich_text
-- resource_associations.each do |resources|
+- resource_associations(resource: @resource).each do |resources|
   = render Schematics::Viewer::Association::Component.new(resources:)
 - versions = Schematics::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
 - if versions.any?

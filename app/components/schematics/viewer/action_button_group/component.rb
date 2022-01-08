@@ -13,8 +13,8 @@ module Schematics
         end
 
         def constant
-          return :Delete if resource_associations.any?
-          
+          return :Delete if resource_associations(resource: @resource).any?
+
           :Destroy
         end
       end

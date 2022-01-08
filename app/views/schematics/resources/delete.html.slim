@@ -9,7 +9,7 @@
         = t('schematics.application.delete.title')
       = t('schematics.application.delete.subtitle')
     .text-dark = t('schematics.application.delete.warning', model_name: @model_name, resource: @resource)
-    - resource_associations(only_required: true).each do |resources|
+    - resource_associations(resource: @resource, only_required: true).each do |resources|
       = render Schematics::Viewer::Association::Component.new(resources:, collapsed: true)
     = form_for @resource, method: :delete, html: { class: 'mt-3' } do
       = render Schematics::Button::Confirm::Component.new
