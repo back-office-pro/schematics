@@ -1,4 +1,4 @@
-= simple_form_for resource, url: @url, validate: true do |f|
+= simple_form_for @resource, url: @url, validate: true do |f|
   = f.input :lock_version, as: :hidden, wrapper: false
   - @attributes.stable_sort_by(&:weight).each do |field|
     - case field
