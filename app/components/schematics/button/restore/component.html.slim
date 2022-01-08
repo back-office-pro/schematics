@@ -1,0 +1,5 @@
+= link_to fa_icon(:trash_restore),
+          polymorphic_path(@resource, action: :restore),
+          method: :delete,
+          class: 'btn btn-danger btn-sm',
+          data: { toggle: 'tooltip', placement: 'top', title: t('schematics.application.button.tooltip.restore') }
