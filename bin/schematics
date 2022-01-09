@@ -3,22 +3,19 @@
 if [ -z $1 ]
 then
     app_name="spec/dummy"
-    disable=""
     dummy_app="true"
-    rm -rf ./spec/dummy
 else
     app_name=$1
-    disable="-no"
     dummy_app="false"
 fi
 
+rm -rf $app_name
 rails new $app_name \
     --database postgresql \
     --skip-keeps \
     --skip-action-cable \
+    --skip-listen \
+    --skip-spring \
     --template template.rb \
-    -$disable-skip-listen \
-    -$disable-skip-bootsnap \
-    -$disable-skip-spring \
     --dummy-app=$dummy_app \
     > log/build.log
