@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.1'
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
+  spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
   spec.add_development_dependency 'bootsnap', '~> 1.10.1'
   spec.add_development_dependency 'capybara', '~> 3.36.0'
   spec.add_development_dependency 'i18n-tasks', '~> 0.9.37'
