@@ -12,9 +12,9 @@
     ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.d-none data-searchBar-target='history'
       - history.each do |query|
         li.list-group-item.p-2.border-0.text-left.text-truncate {
-          data-action="mousedown->searchBar#selectItem"
+          data-action='mousedown->searchBar#selectItem'
           data-url=search_path(query)
-          role="button"
+          role='button'
         }
           = fa_icon :history, class: 'text-dark fa-fw mr-2'
           = query

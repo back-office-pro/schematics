@@ -4,7 +4,7 @@
     tbody class=tbody_css_classes
       - if @resources.empty?
         tr
-          td.text-center.pt-4 colspan="100%"
+          td.text-center.pt-4 colspan='100%'
             = render Schematics::EmptyResource::Component.new
       - else
         - @resources.each do |resource|
