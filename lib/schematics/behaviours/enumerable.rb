@@ -15,7 +15,7 @@ module Schematics
 
       def input_collection
         values
-          .collect { |value| [value, format(value)] }
+          .map { [_1, format(_1)] }
           .tap { _1.unshift ['', ''] unless required? }
       end
 

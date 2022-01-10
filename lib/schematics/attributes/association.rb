@@ -77,9 +77,10 @@ module Schematics
       end
 
       def input_collection
-        class_name.constantize.all.collect do |association|
-          [association.id, association.to_s]
-        end
+        class_name
+          .constantize
+          .all
+          .map { [_1.id, _1.to_s] }
       end
 
       def weight
