@@ -31,6 +31,8 @@ fr:
       sessions:
         edit: Editer mon profil
         new: Se connecter
+      swagger:
+        index: Documentation API
       versions:
         index: Historique
         show: Historique
