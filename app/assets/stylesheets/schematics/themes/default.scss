@@ -20,6 +20,16 @@ input.custom-file-input.is-invalid + label.custom-file-label::after {
   background: $danger;
 }
 
+// Forms - Chrome autocomplete
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 30px $light inset;
+  -webkit-text-fill-color: $dark;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 // Turbolinks
 
 .turbolinks-progress-bar {
