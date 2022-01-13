@@ -45,6 +45,14 @@ $(document).on('turbolinks:load', function () {
       .find('.text')
       .toggleClass(function () { return $(this).hasClass('d-lg-inline') ? 'd-lg-inline' : 'd-none' })
   })
+  $('input[type="password"] + .input-group-append').on('click', function () {
+    $(this)
+      .prev()
+      .attr('type', (_, type) => type === 'text' ? 'password' : 'text')
+      .end()
+      .find('.icon')
+      .toggleClass('d-none')
+  })
   $('*[data-href]').on('click', function (e) {
     const $target = $(e.target)
     if (!$target.is('a') &&
