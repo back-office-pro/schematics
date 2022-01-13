@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
-  spec.add_development_dependency 'bootsnap', '~> 1.9.3'
+  spec.add_development_dependency 'bootsnap', '~> 1.9.4'
   spec.add_development_dependency 'capybara', '~> 3.36.0'
   spec.add_development_dependency 'i18n-tasks', '~> 0.9.37'
   spec.add_development_dependency 'pg', '~> 1.2.3'
@@ -75,7 +75,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'net-pop', '~> 0.1.1'
   spec.add_dependency 'net-smtp', '~> 0.3.0'
   spec.add_dependency 'oj', '~> 3.13.11'
-  spec.add_dependency 'pagy', '~> 5.7.1'
+  spec.add_dependency 'pagy', '~> 5.7.5'
   spec.add_dependency 'paper_trail', '~> 12.1.0'
   spec.add_dependency 'paranoia', '~> 2.5.0'
   spec.add_dependency 'phonelib', '~> 0.6.55'
