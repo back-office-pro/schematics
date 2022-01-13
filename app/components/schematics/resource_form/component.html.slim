@@ -83,18 +83,22 @@
                 hint:,
                 input_html: { accept: field.extensions }
     - when Schematics::Attributes::Digest
-      = f.input field.name.to_sym,
-                as: :password,
-                required: new_record?,
-                input_html: { autocomplete: 'new-password' },
-                wrapper: :input_group,
-                prepend: fa_icon(field.icon)
-      = f.input :"#{field.name}_confirmation",
-                as: :password,
-                required: new_record?,
-                input_html: { autocomplete: 'new-password' },
-                wrapper: :input_group,
-                prepend: fa_icon(field.icon)
+      = render Schematics::Input::Password::Component.new( \
+          form: f,
+          name: field.name.to_sym,
+          icon: field.icon,
+          required: new_record?,
+          input_html: { autocomplete: 'new-password' },
+          wrapper: :input_group \
+      )
+      = render Schematics::Input::Password::Component.new( \
+          form: f,
+          name: :"#{field.name}_confirmation",
+          icon: field.icon,
+          required: new_record?,
+          input_html: { autocomplete: 'new-password' },
+          wrapper: :input_group \
+      )
     - when Schematics::Attributes::Boolean
       = f.input field.name.to_sym
     - else

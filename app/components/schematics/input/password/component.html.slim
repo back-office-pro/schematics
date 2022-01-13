@@ -1,0 +1,6 @@
+= @form.input @name,
+              **@options,
+              as: :password,
+              prepend: fa_icon(@icon),
+              append:  fa_icon(:eye, class: 'icon', role: 'button') + \
+                       fa_icon(:eye_slash, class: 'icon d-none', role: 'button')

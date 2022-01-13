@@ -5,7 +5,7 @@
     = render Schematics::CardHeading::Component.new(icon: :unlock, title:)
   .card-body.p-3
     = simple_form_for @user, url: password_reset_path(params[:id]), wrapper: :input_group, validate: true do |f|
-      = f.input :password, required: true, prepend: fa_icon(:key)
-      = f.input :password_confirmation, required: true, prepend: fa_icon(:key)
+      = render Schematics::Input::Password::Component.new(form: f, required: true)
+      = render Schematics::Input::Password::Component.new(form: f, name: :password_confirmation, required: true)
       = render Schematics::Button::Confirm::Component.new
       = render Schematics::Button::Cancel::Component.new(path: login_path)
