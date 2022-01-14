@@ -9,4 +9,4 @@
           .card.border-0
             .card-body.p-3
               = render Schematics::VersionPreview::Component.new(version:)
-== pagy_bootstrap_nav_js(@pagy) if @pagy.pages > 1
+= render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)

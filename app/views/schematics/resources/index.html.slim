@@ -13,4 +13,4 @@
     = form_tag '', method: :get, class: 'form-inline' do
       = submit_tag 'Filtrer', name: nil, class: 'd-none'
       = render Schematics::Viewer::Component.build(resources: @resources)
-= render Schematics::Viewer::Pagination::Component.new(entity:, pagy: @pagy, calendar: @calendar)
+= render Schematics::Viewer::Pagination::Component.new(model_name_plural: @model_name_plural, pagy: @pagy, calendar: @calendar)
