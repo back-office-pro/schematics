@@ -99,6 +99,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sidekiq-scheduler', '~> 3.1.0'
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
+  spec.add_dependency 'strip_attributes', '~> 1.12.0'
   spec.add_dependency 'strong_migrations', '~> 0.7.9'
   spec.add_dependency 'super_diff', '~> 0.8.0'
   spec.add_dependency 'sweet-alert2-rails', '~> 0.1.0'
