@@ -20,8 +20,8 @@
                 wrapper: :input_group
     - when Schematics::Attributes::Address
       = f.input field.name.to_sym,
-                collection: field.input_collection,
-                include_blank: false,
+                collection: [@resource.public_send(field.name.to_sym)].compact,
+                include_blank: !field.required?,
                 minlength: 3,
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon),
@@ -78,7 +78,7 @@
                 input_html: { multiple: true, accept: field.extensions }
     - when Schematics::Attributes::Attachment
       - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
-      - attachment = @resource.send(field.name.to_sym)
+      - attachment = @resource.public_send(field.name.to_sym)
       - if attachment.attached? && attachment.persisted?
         = f.simple_fields_for field.attributes_param_key do |fields|
           = fields.hidden_field :id, value: attachment.id
