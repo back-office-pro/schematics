@@ -21,7 +21,7 @@ module Schematics
     end
 
     def run
-      System.send(@action.to_sym, *[@entity, @attribute].compact)
+      System.public_send(@action.to_sym, *[@entity, @attribute].compact)
     end
   end
 end

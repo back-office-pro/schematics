@@ -16,7 +16,7 @@ module Schematics
             case element
             when Attributes::Attachment, Attributes::RichText
               attribute element.name.to_sym do
-                element.format object.send(element.name.to_sym)
+                element.format object.public_send(element.name.to_sym)
               end
             when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
               has_one element.name.to_sym,

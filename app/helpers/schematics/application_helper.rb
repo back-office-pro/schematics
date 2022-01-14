@@ -8,7 +8,10 @@ module Schematics
 
     def settings(key)
       Rails.cache.fetch("settings:#{key}") do
-        Setting.with_attached_company_logo.instance.send(key)
+        Setting
+          .with_attached_company_logo
+          .instance
+          .public_send(key)
       end
     end
 

@@ -37,8 +37,8 @@ module Schematics
 
         def resources_for(date)
           @resources.filter do |resource|
-            resource.send(calendar_start_attribute).to_date <= date &&
-              resource.send(calendar_end_attribute).to_date >= date
+            resource.public_send(calendar_start_attribute).to_date <= date &&
+              resource.public_send(calendar_end_attribute).to_date >= date
           end
         end
 

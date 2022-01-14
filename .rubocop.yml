@@ -6,6 +6,8 @@ Style/Documentation:
   Enabled: false
 Style/ReturnNil:
   Enabled: true
+Style/Send:
+  Enabled: false # TODO: enable
 Rails/SaveBang:
   Enabled: true
 Style/HashEachMethods:
