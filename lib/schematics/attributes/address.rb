@@ -6,6 +6,10 @@ module Schematics
       def icon
         :map_marker_alt
       end
+
+      def input_collection
+        []
+      end
     end
   end
 end

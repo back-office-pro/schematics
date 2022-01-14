@@ -18,6 +18,14 @@
                 as: :date,
                 html5: true,
                 wrapper: :input_group
+    - when Schematics::Attributes::Address
+      = f.input field.name.to_sym,
+                collection: field.input_collection,
+                include_blank: false,
+                minlength: 3,
+                wrapper: :input_group,
+                prepend: fa_icon(field.icon),
+                input_html: { class: 'address_autocomplete' }
     - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
       = f.input field.name.to_sym,
                 as: field.class.name.demodulize.underscore,
