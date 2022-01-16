@@ -1,1 +1,12 @@
-@import 'bootstrap-email';
+@media (prefers-color-scheme: dark) {
+  @import 'themes/dark/variables';
+  @import 'bootstrap-email';
+  .card-body {
+    background: $card-bg;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  @import 'themes/light/variables';
+  @import 'bootstrap-email';
+}
