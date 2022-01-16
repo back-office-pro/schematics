@@ -1,6 +1,7 @@
 @media (prefers-color-scheme: dark) {
   @import 'themes/dark/variables';
   @import 'bootstrap-email';
+
   .card-body {
     background: $card-bg;
   }
