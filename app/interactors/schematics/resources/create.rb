@@ -3,18 +3,14 @@
 module Schematics
   module Resources
     class Create
-      include Interactor
+      include Interactable
 
       before do
         @resource = context.resource
       end
 
       def call
-        if @resource.save
-          context.message = '.success'
-        else
-          context.fail!(message: '.failure')
-        end
+        fail! unless @resource.save
       end
     end
   end

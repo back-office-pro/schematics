@@ -3,7 +3,7 @@
 module Schematics
   module Resources
     class Update
-      include Interactor
+      include Interactable
 
       before do
         @params = context.resource_params
@@ -11,16 +11,14 @@ module Schematics
       end
 
       def call
-        if @resource.update(@params)
-          context.message = '.success'
-        else
+        unless @resource.update(@params)
           context.status = :unprocessable_entity
-          context.fail!(message: '.failure')
+          fail!
         end
       rescue ActiveRecord::StaleObjectError
         @resource.errors.add(:base, :stale)
         context.status = :precondition_failed
-        context.fail!(message: '.stale')
+        fail!(message: '.stale')
       end
     end
   end

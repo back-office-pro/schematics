@@ -3,7 +3,7 @@
 module Schematics
   module PasswordResets
     class Update
-      include Interactor
+      include Interactable
 
       before do
         @params = context.user_params.merge(password_reset_token: nil)
@@ -11,15 +11,14 @@ module Schematics
       end
 
       def call
-        if @user.updated_at > 2.hours.ago
-          if @user.update(@params)
-            context.message = '.success'
-          else
-            context.fail!(message: '.error')
-          end
-        else
-          context.fail!(message: '.failure')
-        end
+        fail! if expired?
+        fail!(message: '.error') unless @user.update(@params)
+      end
+
+      private
+
+      def expired?
+        @user.password_digest && @user.updated_at < 2.hours.ago
       end
     end
   end
