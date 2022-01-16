@@ -16,7 +16,7 @@ module Schematics
         fixtures :users
 
         let(:user) { users(:two) }
-        let(:auth_token) { JsonWebToken.encode({ auth_token: user.auth_token }) }
+        let(:auth_token) { JsonWebToken.encode(auth_token: user.auth_token) }
       end
     end
   end
