@@ -2,6 +2,11 @@
 fr:
   schematics:
     user_mailer:
+      new_account:
+        body:
+          first: Pour configurer votre mot de passe, cliquez sur le lien ci-dessous.
+          link: Cliquez ici
+        subject: Activez votre compte
       password_reset:
         body:
           first: Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous.
