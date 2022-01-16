@@ -24,14 +24,16 @@ describe Schematics::Attributes::Digest do
     is_expected.to eq(
       {
         allow_blank: true,
-        format: { with: described_class::REGEX, message: :password }
+        confirmation: { allow_blank: true },
+        format: { with: described_class::REGEX, message: :password },
+        length: { maximum: 72 }
       }
     )
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_secure_password :password
+      has_secure_password :password, validations: false
     RUBY
   end
 end

@@ -95,7 +95,6 @@
           form: f,
           name: field.name.to_sym,
           icon: field.icon,
-          required: new_record?,
           input_html: { autocomplete: 'new-password' },
           wrapper: :input_group \
       )
@@ -103,7 +102,6 @@
           form: f,
           name: :"#{field.name}_confirmation",
           icon: field.icon,
-          required: new_record?,
           input_html: { autocomplete: 'new-password' },
           wrapper: :input_group \
       )

@@ -19,10 +19,11 @@ module Schematics
         super.merge(
           {
             allow_blank: true,
+            confirmation: { allow_blank: true },
             format: { with: REGEX, message: :password },
             length: {
               minimum: options.min,
-              maximum: options.limit
+              maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
             }.compact
           }.compact_blank
         )
@@ -30,7 +31,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_secure_password :#{@name}
+          has_secure_password :#{@name}, validations: false
         RUBY
       end
 
