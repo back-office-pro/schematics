@@ -20,6 +20,15 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 Rails.configuration.to_prepare do
   ImportsController.prepend(Schematics::ImportsController) if defined?(ImportsController)
 
+  if defined?(User)
+    User.class_eval do
+      after_create do
+        regenerate_password_reset_token
+        Schematics::UserMailer.new_account(self).deliver_later
+      end
+    end
+  end
+
   if defined?(Search)
     Search.class_eval do
       belongs_to :user

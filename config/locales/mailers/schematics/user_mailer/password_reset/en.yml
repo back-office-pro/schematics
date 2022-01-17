@@ -2,6 +2,11 @@
 en:
   schematics:
     user_mailer:
+      new_account:
+        body:
+          first: To set up your password click the link below.
+          link: Click here
+        subject: Activate your account
       password_reset:
         body:
           first: To reset your password click the link below.

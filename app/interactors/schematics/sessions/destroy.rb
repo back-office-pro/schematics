@@ -3,18 +3,14 @@
 module Schematics
   module Sessions
     class Destroy
-      include Interactor
+      include Interactable
 
       before do
         @cookies = context.cookies
       end
 
       def call
-        if @cookies.delete(:auth_token)
-          context.message = '.success'
-        else
-          context.fail!(message: '.failure')
-        end
+        fail! unless @cookies.delete(:auth_token)
       end
     end
   end

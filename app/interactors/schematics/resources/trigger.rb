@@ -3,7 +3,7 @@
 module Schematics
   module Resources
     class Trigger
-      include Interactor
+      include Interactable
 
       before do
         @resource = context.resource
@@ -12,11 +12,7 @@ module Schematics
       end
 
       def call
-        if @resource.public_send(:"#{@event.name}!")
-          context.message = '.success'
-        else
-          context.fail!(message: '.failure')
-        end
+        fail! unless @resource.public_send(:"#{@event.name}!")
       end
     end
   end

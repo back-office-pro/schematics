@@ -3,7 +3,7 @@
 module Schematics
   module Resources
     class Archive
-      include Interactor
+      include Interactable
 
       before do
         @resource = context.resource
@@ -11,11 +11,7 @@ module Schematics
       end
 
       def call
-        if @resource.destroy
-          context.message = '.success'
-        else
-          context.fail!(message: '.failure')
-        end
+        fail! unless @resource.destroy
       end
     end
   end

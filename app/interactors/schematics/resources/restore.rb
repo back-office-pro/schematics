@@ -3,7 +3,7 @@
 module Schematics
   module Resources
     class Restore
-      include Interactor
+      include Interactable
 
       before do
         @resource = context.resource
@@ -11,11 +11,7 @@ module Schematics
       end
 
       def call
-        if @resource.restore(recursive: true)
-          context.message = '.success'
-        else
-          context.fail!(message: '.failure')
-        end
+        fail! unless @resource.restore(recursive: true)
       end
     end
   end
