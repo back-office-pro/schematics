@@ -7,12 +7,12 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'schematics/themes/light/theme',
+    = stylesheet_link_tag 'schematics/themes/light',
                           media: 'all',
                           'data-turbolinks-track': 'reload',
                           id: 'light',
                           disabled: preferences(:theme) != 'light'
-    = stylesheet_link_tag 'schematics/themes/dark/theme',
+    = stylesheet_link_tag 'schematics/themes/dark',
                           media: 'all',
                           'data-turbolinks-track': 'reload',
                           id: 'dark',
