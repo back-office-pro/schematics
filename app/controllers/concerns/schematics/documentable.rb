@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     class_methods do
-      def inherited(subclass)
+      def inherited(subclass) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         super
         subclass.class_eval do
           route_base original_controller_path
