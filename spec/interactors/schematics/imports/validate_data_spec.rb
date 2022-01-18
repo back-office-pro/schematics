@@ -19,7 +19,7 @@ RSpec.describe Schematics::Imports::ValidateData do
       ).signed_id
     end
 
-    context 'when data are valid' do
+    context 'when data are valid' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:data) do
         {
           1 => { 'name' => 'Role1' },
@@ -50,7 +50,7 @@ RSpec.describe Schematics::Imports::ValidateData do
       its(:data) { is_expected.to match(expected_data) }
     end
 
-    context 'when data are not valid' do
+    context 'when data are not valid' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:data) do
         {
           1 => { 'name' => 'Role1' },
