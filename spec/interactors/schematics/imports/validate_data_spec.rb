@@ -70,10 +70,6 @@ RSpec.describe Schematics::Imports::ValidateData do
         ]
       end
 
-      around do |example|
-        I18n.with_locale(:en, &example)
-      end
-
       it { is_expected.to be_a_failure }
       its('import.progress') { is_expected.to eq(100) }
       its(:data) { is_expected.to match(expected_data) }

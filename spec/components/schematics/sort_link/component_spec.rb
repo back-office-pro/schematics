@@ -8,10 +8,6 @@ RSpec.describe Schematics::SortLink::Component, type: :component do
   let(:model_class) { User }
   let(:field) { model_class.entity.find_field_by_name('email') }
 
-  around do |example|
-    I18n.with_locale(:en, &example)
-  end
-
   context 'when emails are not ordered' do
     it { is_expected.to have_link('Email', href: '/users?sort=email') }
     it { is_expected.to have_selector('i', class: 'fa-envelope text-dark') }

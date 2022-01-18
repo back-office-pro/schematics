@@ -100,7 +100,7 @@ module Schematics
     config.assets.precompile += %w[schematics_manifest.js]
 
     # i18n
-    config.i18n.default_locale = :fr
+    config.i18n.default_locale = Rails.env.test? ? :en : :fr
     config.i18n.available_locales = %i[fr en]
     config.i18n.load_path += Dir[root.join('config', 'locales', '**', '*.yml')]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
