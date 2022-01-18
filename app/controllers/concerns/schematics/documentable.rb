@@ -4,6 +4,10 @@ module Schematics
   module Documentable
     extend ActiveSupport::Concern
 
+    included do
+      include OpenApi::DSL
+    end
+
     class_methods do
       def inherited(subclass) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         super
@@ -15,6 +19,7 @@ module Schematics
           if entity.can?(:index)
             api :index, "#{entity.name.pluralize} list" do
               query :page, 'integer', desc: 'Page number'
+              query :items, 'integer', desc: 'Items per page'
               query 'filter[with_deleted]', 'boolean', desc: 'Display archives'
 
               entity.searchable_elements.each do |element|

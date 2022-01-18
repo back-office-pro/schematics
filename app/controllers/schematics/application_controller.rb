@@ -3,7 +3,6 @@
 module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
-    include OpenApi::DSL
     include Localizable
     include Rescuable
 
