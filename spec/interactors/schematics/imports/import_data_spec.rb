@@ -8,7 +8,7 @@ RSpec.describe Schematics::Imports::ImportData do
   describe '.call' do
     subject(:call) { described_class.call(import:, model_class:) }
 
-    let(:import) { Import.create(file:, author:) }
+    let(:import) { Import.create(file:, author:) } # TODO: refactor to fixture
     let(:author) { users(:one) }
     let(:model_class) { Role }
     let(:file) do
