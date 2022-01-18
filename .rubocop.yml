@@ -34,6 +34,7 @@ Metrics/BlockLength:
     - let
     - configure
     - class_methods
+    - included
 Metrics/MethodLength:
   Max: 50
   IgnoredMethods:
@@ -41,7 +42,7 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Max: 300
 Metrics/ModuleLength:
-  Max: 101
+  Max: 105
 RSpec/MultipleExpectations:
   Max: 2
 Metrics/AbcSize:
