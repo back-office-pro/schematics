@@ -4,7 +4,7 @@ describe Schematics::System do
   subject(:system) { described_class }
 
   let(:entity) { Schematics::Entities::Entity.build(name:, attributes:, associations:) }
-  let(:name) { 'role' }
+  let(:name) { 'assembly' }
   let(:attributes) do
     [
       {
@@ -17,7 +17,7 @@ describe Schematics::System do
         options: {
           type: 'user',
           inverse: {
-            name: 'roles'
+            name: 'assemblies'
           }
         }
       }
@@ -27,7 +27,7 @@ describe Schematics::System do
     [
       {
         type: 'has_and_belongs_to_many',
-        name: 'permission'
+        name: 'part'
       }
     ]
   end
@@ -37,12 +37,12 @@ describe Schematics::System do
 
     let(:expected_command_lines) do
       [
-        'rails generate scaffold role schema:role_name schema:role_owner --skip-resource-route',
-        'rails generate rspec:acceptance role',
-        'rails generate migration add_slug_to_roles slug:string:uniq',
-        'rails generate migration add_lock_version_to_roles lock_version:integer',
-        'rails generate migration create_join_table_roles_permissions roles:join_table_first permissions:join_table_second', # rubocop:disable Layout/LineLength
-        'rails generate migration add_roles_count_to_users roles_count:integer'
+        'rails generate scaffold assembly schema:assembly_name schema:assembly_owner --skip-resource-route', # rubocop:disable Layout/LineLength
+        'rails generate rspec:acceptance assembly',
+        'rails generate migration add_slug_to_assemblies slug:string:uniq',
+        'rails generate migration add_lock_version_to_assemblies lock_version:integer',
+        'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength
+        'rails generate migration add_assemblies_count_to_users assemblies_count:integer'
       ]
     end
 
@@ -65,9 +65,9 @@ describe Schematics::System do
 
     let(:expected_command_lines) do
       [
-        'rails destroy scaffold role --skip-migration --skip-resource-route',
-        'rails destroy rspec:acceptance role',
-        'rails generate migration drop_roles_table schema:role_name schema:role_owner'
+        'rails destroy scaffold assembly --skip-migration --skip-resource-route',
+        'rails destroy rspec:acceptance assembly',
+        'rails generate migration drop_assemblies_table schema:assembly_name schema:assembly_owner'
       ]
     end
 
@@ -79,7 +79,7 @@ describe Schematics::System do
 
     let(:expected_command_lines) do
       [
-        'rails generate migration remove_name_from_roles schema:role_name'
+        'rails generate migration remove_name_from_assemblies schema:assembly_name'
       ]
     end
 
