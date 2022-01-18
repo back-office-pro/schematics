@@ -3,21 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions' do
-  include Schematics::Engine.routes.url_helpers
-
-  subject { response }
-
-  fixtures :users
-
-  let(:json_response) { JSON.parse(response.body) }
-  let(:user) { users(:two) }
-  let(:email) { user.email }
-  let(:headers) { { 'Accept' => 'application/json' } }
-  let(:auth_token) { JsonWebToken.encode(auth_token: user.auth_token) }
-
-  before { do_request }
-
   describe 'POST #create' do
+    include_context 'with unauthenticated user'
+
     let(:do_request) { post(sessions_path, params:, headers:) }
     let(:params) { { user: { email:, password: } } }
 
@@ -37,13 +25,9 @@ RSpec.describe 'Sessions' do
   end
 
   describe 'PUT #update' do
+    include_context 'with authenticated user'
+
     let(:do_request) { put(sessions_path, params:, headers:) }
-    let(:headers) do
-      {
-        'Accept' => 'application/json',
-        'Authorization' => auth_token
-      }
-    end
     let(:params) { { user: { current_password: } } }
 
     context 'when current_password is right' do

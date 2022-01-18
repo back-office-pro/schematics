@@ -3,20 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Password Resets' do
-  include Schematics::Engine.routes.url_helpers
-
-  subject { response }
-
-  fixtures :users
-  fixtures :roles
-
-  let(:json_response) { JSON.parse(response.body) }
-  let(:user) { users(:two) }
-  let(:email) { user.email }
-  let(:headers) { { 'Accept' => 'application/json' } }
-  let(:auth_token) { JsonWebToken.encode(auth_token: user.auth_token) }
-
-  before { do_request }
+  include_context 'with unauthenticated user'
 
   describe 'POST #create' do
     let(:do_request) { post(password_resets_path, params:, headers:) }
@@ -45,38 +32,37 @@ RSpec.describe 'Password Resets' do
   end
 
   describe 'PUT #update' do
-    let(:do_request) { put(password_reset_path(id:), params:, headers:) }
+    let(:do_request) { put(password_reset_path(token:), params:, headers:) }
     let(:params) { { user: { password:, password_confirmation: } } }
 
-    context 'when token exists' do
-      let(:id) { user.password_reset_token }
+    context 'when token exists and password is confirmed' do
+      let(:token) { user.password_reset_token }
+      let(:password) { 'Azerty1!' }
+      let(:password_confirmation) { 'Azerty1!' }
 
-      context 'when password is confirmed' do
-        let(:password) { 'Azerty1!' }
-        let(:password_confirmation) { 'Azerty1!' }
+      it { is_expected.to have_http_status(:no_content) }
+      it { expect(response.body).to be_blank }
+    end
 
-        it { is_expected.to have_http_status(:no_content) }
-        it { expect(response.body).to be_blank }
+    context 'when token exists and when password is not confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:token) { user.password_reset_token }
+      let(:password) { 'Azerty1!' }
+      let(:password_confirmation) { 'Azerty1' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.resources.update.failure')
+          ]
+        }
       end
 
-      context 'when password is not confirmed' do
-        let(:password) { 'Azerty1!' }
-        let(:password_confirmation) { 'Azerty1' }
-        let(:expected_response) do
-          {
-            'errors' => [
-              I18n.t('schematics.resources.update.failure')
-            ]
-          }
-        end
-
-        it { is_expected.to have_http_status(:unprocessable_entity) }
-        it { expect(json_response).to eq(expected_response) }
-      end
+      it { is_expected.to have_http_status(:unprocessable_entity) }
+      it { expect(json_response).to eq(expected_response) }
     end
 
     context 'when token does not exist' do
-      let(:id) { 'foo' }
+      let(:token) { 'foo' }
+      let(:params) { {} }
 
       it { is_expected.to have_http_status(:not_found) }
       it { expect(response.body).to be_blank }
