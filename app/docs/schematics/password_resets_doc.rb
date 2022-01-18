@@ -11,7 +11,7 @@ module Schematics
     end
 
     api :update, 'Update user password' do
-      path :id, 'string'
+      path :token, 'string'
       data 'user[password]', 'string'
       data 'user[password_confirmation]', 'string'
       response 204, 'Success', :json
