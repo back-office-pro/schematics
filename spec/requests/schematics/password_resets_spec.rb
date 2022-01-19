@@ -13,7 +13,7 @@ RSpec.describe 'Password Resets' do
       let(:email) { user.email }
 
       it { is_expected.to have_http_status(:no_content) }
-      it { expect(response.body).to be_blank }
+      its(:body) { is_expected.to be_blank }
     end
 
     context 'when email does not exist' do
@@ -41,7 +41,7 @@ RSpec.describe 'Password Resets' do
       let(:password_confirmation) { 'Azerty1!' }
 
       it { is_expected.to have_http_status(:no_content) }
-      it { expect(response.body).to be_blank }
+      its(:body) { is_expected.to be_blank }
     end
 
     context 'when token exists and when password is not confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
@@ -65,7 +65,7 @@ RSpec.describe 'Password Resets' do
       let(:params) { {} }
 
       it { is_expected.to have_http_status(:not_found) }
-      it { expect(response.body).to be_blank }
+      its(:body) { is_expected.to be_blank }
     end
   end
 end

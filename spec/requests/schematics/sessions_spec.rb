@@ -20,7 +20,7 @@ RSpec.describe 'Sessions' do
       let(:password) { 'qwerty' }
 
       it { is_expected.to have_http_status(:unauthorized) }
-      it { expect(response.body).to be_blank }
+      its(:body) { is_expected.to be_blank }
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe 'Sessions' do
       let(:current_password) { 'secret' }
 
       it { is_expected.to have_http_status(:no_content) }
-      it { expect(response.body).to be_blank }
+      its(:body) { is_expected.to be_blank }
     end
 
     context 'when current_password is wrong' do
