@@ -44,9 +44,9 @@
                     as: @field.input_type,
                     inner_class: 'form-control border-0 bg-light',
                     collection: @field.input_collection,
-                    display_with: ->(value) { tag.span(class: "fi fi-#{value.downcase}") }
+                    display_with: ->(value) { tag.span(class: "fi fi-#{value.downcase} rounded") }
   - else
-    = tag.span(class: "fi fi-#{value.downcase}")
+    = tag.span(class: "fi fi-#{value.downcase} rounded")
 - when editable? && Schematics::Behaviours::Editable
   = best_in_place @resource,
                   @field.column_name.to_sym,
