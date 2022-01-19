@@ -8,7 +8,7 @@ module Schematics
     include Singleton
     attr_reader :entities, :charts, :stats, :migrations
 
-    def initialize # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    def initialize
       @entities = data[:entities].map { Entities::Entity.build(**_1) }
       @charts = data[:charts]&.map { Graphics::Chart.build(self, **_1) }
       @stats = data[:stats]&.map { Graphics::Stat.build(self, **_1) }
