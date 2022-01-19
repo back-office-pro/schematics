@@ -15,6 +15,10 @@ module Schematics
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
+      def open_api_type
+        'integer'
+      end
+
       def options_for_migration
         super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
       end

@@ -33,12 +33,16 @@ Metrics/BlockLength:
     - class_eval
     - let
     - configure
+    - class_methods
+    - included
 Metrics/MethodLength:
   Max: 50
+  IgnoredMethods:
+    - inherited
 Metrics/ClassLength:
   Max: 300
-RSpec/MultipleExpectations:
-  Max: 2
+Metrics/ModuleLength:
+  Max: 105
 Metrics/AbcSize:
   Max: 70
 Metrics/ParameterLists:

@@ -68,6 +68,11 @@ describe Schematics::Schema do
       Singleton.__init__(described_class)
     end
 
+    after do
+      allow_any_instance_of(described_class).to receive(:data).and_call_original # rubocop:disable RSpec/AnyInstance
+      Singleton.__init__(described_class)
+    end
+
     it 'prefixes role associations of message entity' do
       expect(message_associations).to eq(%w[author_role recipient_role])
     end
@@ -96,6 +101,11 @@ describe Schematics::Schema do
 
     before do
       allow_any_instance_of(described_class).to receive(:data).and_return(data) # rubocop:disable RSpec/AnyInstance
+      Singleton.__init__(described_class)
+    end
+
+    after do
+      allow_any_instance_of(described_class).to receive(:data).and_call_original # rubocop:disable RSpec/AnyInstance
       Singleton.__init__(described_class)
     end
 

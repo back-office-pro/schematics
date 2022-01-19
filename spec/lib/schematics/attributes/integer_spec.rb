@@ -22,6 +22,7 @@ describe Schematics::Attributes::Integer do
 
   its(:type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('price') }
+  its(:open_api_type) { is_expected.to eq('integer') }
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_nil: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:sort_numeric_up) }

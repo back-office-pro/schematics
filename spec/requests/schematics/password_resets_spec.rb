@@ -1,0 +1,71 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe 'Password Resets' do
+  include_context 'with unauthenticated user'
+
+  describe 'POST #create' do
+    let(:do_request) { post(password_resets_path, params:, headers:) }
+    let(:params) { { user: { email: } } }
+
+    context 'when email exists' do
+      let(:email) { user.email }
+
+      it { is_expected.to have_http_status(:no_content) }
+      its(:body) { is_expected.to be_blank }
+    end
+
+    context 'when email does not exist' do
+      let(:email) { 'foo@foo.com' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.password_resets.create.failure')
+          ]
+        }
+      end
+
+      it { is_expected.to have_http_status(:unprocessable_entity) }
+      it { expect(json_response).to eq(expected_response) }
+    end
+  end
+
+  describe 'PUT #update' do
+    let(:do_request) { put(password_reset_path(token:), params:, headers:) }
+    let(:params) { { user: { password:, password_confirmation: } } }
+
+    context 'when token exists and password is confirmed' do
+      let(:token) { user.password_reset_token }
+      let(:password) { 'Azerty1!' }
+      let(:password_confirmation) { 'Azerty1!' }
+
+      it { is_expected.to have_http_status(:no_content) }
+      its(:body) { is_expected.to be_blank }
+    end
+
+    context 'when token exists and when password is not confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:token) { user.password_reset_token }
+      let(:password) { 'Azerty1!' }
+      let(:password_confirmation) { 'Azerty1' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.resources.update.failure')
+          ]
+        }
+      end
+
+      it { is_expected.to have_http_status(:unprocessable_entity) }
+      it { expect(json_response).to eq(expected_response) }
+    end
+
+    context 'when token does not exist' do
+      let(:token) { 'foo' }
+      let(:params) { {} }
+
+      it { is_expected.to have_http_status(:not_found) }
+      its(:body) { is_expected.to be_blank }
+    end
+  end
+end

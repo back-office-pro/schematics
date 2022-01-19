@@ -11,7 +11,6 @@ module Schematics
         else
           [
             generate_scaffold(entity.name, entity.migratable_attributes),
-            generate_rspec_acceptance(entity.name),
             generate_slug_migration(entity.table_name),
             generate_lock_version_migration(entity.table_name),
             entity
@@ -28,7 +27,6 @@ module Schematics
       def destroy_entity(entity)
         [
           destroy_scaffold(entity.name),
-          destroy_rspec_acceptance(entity.name),
           generate_drop_table_migration(entity.name, entity.migratable_attributes)
         ].map(&:squish)
       end
@@ -65,12 +63,6 @@ module Schematics
         SHELL
       end
 
-      def generate_rspec_acceptance(name)
-        <<~SHELL
-          rails generate rspec:acceptance #{name}
-        SHELL
-      end
-
       def generate_slug_migration(name)
         <<~SHELL
           rails generate migration add_slug_to_#{name.pluralize} slug:string:uniq
@@ -92,12 +84,6 @@ module Schematics
       def generate_drop_table_migration(name, attributes)
         <<~SHELL
           rails generate migration drop_#{name.pluralize}_table #{attributes.map(&:to_s).join(' ')}
-        SHELL
-      end
-
-      def destroy_rspec_acceptance(name)
-        <<~SHELL
-          rails destroy rspec:acceptance #{name}
         SHELL
       end
 

@@ -13,6 +13,7 @@ describe Schematics::Attributes::Jsonb do
 
   its(:type) { is_expected.to eq('jsonb') }
   its(:column_name) { is_expected.to eq('preferences') }
+  its(:open_api_type) { is_expected.to eq('object') }
   its(:validators) { is_expected.to be_empty }
   its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }

@@ -14,6 +14,10 @@ module Schematics
         'integer'
       end
 
+      def open_api_type
+        'integer'
+      end
+
       def to_str
         if options.default
           <<~RUBY

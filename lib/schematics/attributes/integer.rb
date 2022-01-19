@@ -10,6 +10,10 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
+      def open_api_type
+        'integer'
+      end
+
       def validators
         validators = super
         validators[:numericality][:only_integer] = true

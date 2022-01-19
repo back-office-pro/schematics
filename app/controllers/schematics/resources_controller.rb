@@ -8,6 +8,7 @@ module Schematics
     include Searchable
     include Readable
     include Calendarable
+    include Documentable
 
     before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
     before_action :set_breadcrumb

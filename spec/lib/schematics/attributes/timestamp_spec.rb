@@ -14,6 +14,7 @@ describe Schematics::Attributes::Timestamp do
 
   its(:type) { is_expected.to eq('timestamp') }
   its(:column_name) { is_expected.to eq('read_at') }
+  its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:calendar_alt) }
   its(:validators) { is_expected.to be_empty }
   its(:validate) { is_expected.to be_nil }

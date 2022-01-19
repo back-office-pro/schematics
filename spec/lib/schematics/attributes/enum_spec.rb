@@ -18,6 +18,7 @@ describe Schematics::Attributes::Enum do
 
   its(:type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('state') }
+  its(:open_api_type) { is_expected.to eq('integer') }
   its(:icon) { is_expected.to eq(:list_ol) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('available') }

@@ -32,6 +32,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:type) { is_expected.to eq('has_and_belongs_to_many') }
   its(:name) { is_expected.to eq('permissions') }
   its(:column_name) { is_expected.to eq('permission_ids') }
+  its(:open_api_type) { is_expected.to eq('integer') }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
 
   its(:to_str) do

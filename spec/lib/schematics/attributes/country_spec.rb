@@ -22,6 +22,7 @@ describe Schematics::Attributes::Country do
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('country') }
+  its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:globe_europe) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('FR') }

@@ -1,6 +1,5 @@
 @import 'font_awesome5';
 @import 'font_awesome5_webfont';
-@import 'animate.css/animate';
 @import 'sweetalert2/dist/sweetalert2';
 @import 'jquery-resizable-columns/dist/jquery.resizableColumns';
 $flag-icons-path: 'flag-icons/flags';
@@ -9,6 +8,7 @@ $flag-icons-path: 'flag-icons/flags';
 @import 'trix';
 @import 'best_in_place';
 @import 'slim_select';
+@import 'swagger';
 @import 'search_bar/component';
 @import 'sidebar/component';
 @import 'toast/component';

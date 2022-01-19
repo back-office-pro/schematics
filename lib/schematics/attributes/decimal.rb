@@ -12,6 +12,10 @@ module Schematics
 
       delegate :scale, to: :options
 
+      def open_api_type
+        'number'
+      end
+
       def bound
         10**(precision - scale.to_i)
       end

@@ -1,0 +1,10 @@
+@import 'swagger-ui-dist/swagger-ui';
+@import 'swagger-ui-themes/themes/3.x/theme-feeling-blue';
+@import 'animate.css/animate';
+
+.swagger-ui {
+  .wrapper {
+    max-width: initial;
+    padding: 0;
+  }
+}

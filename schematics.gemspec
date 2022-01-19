@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.1'
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.files = Dir['{app,config,db,lib,spec/acceptance}/**/*', 'README.md']
+  spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
   spec.add_development_dependency 'bootsnap', '~> 1.10.1'
   spec.add_development_dependency 'capybara', '~> 3.36.0'
   spec.add_development_dependency 'i18n-tasks', '~> 0.9.37'
@@ -58,7 +58,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'easy_translate', '~> 0.5.1'
   spec.add_dependency 'font_awesome5_rails', '~> 1.5.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
-  spec.add_dependency 'grape-swagger-rails', '~> 0.3.1'
   spec.add_dependency 'groupdate', '~> 6.0.1'
   spec.add_dependency 'hiredis', '~> 0.6.3'
   spec.add_dependency 'humanize', '~> 2.5.1'
@@ -66,11 +65,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'image_processing', '~> 1.12.1'
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'json-schema', '~> 2.8.1'
+  spec.add_dependency 'js-routes', '~> 2.2.0'
   spec.add_dependency 'jwt', '~> 2.3.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mini_magick', '>= 4.11.0'
   # TODO: remove net-* gems when https://github.com/mikel/mail/pull/1439 is merged
-  spec.add_dependency 'js-routes', '~> 2.2.0'
   spec.add_dependency 'net-imap', '~> 0.2.3'
   spec.add_dependency 'net-pop', '~> 0.1.1'
   spec.add_dependency 'net-smtp', '~> 0.3.0'
@@ -90,7 +89,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ratonvirus-clamby', '~> 0.3.0'
   spec.add_dependency 'redis', '~> 4.5.1'
   spec.add_dependency 'route_translator', '~> 12.1.0'
-  spec.add_dependency 'rspec_api_documentation', '~> 6.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.0.2'
   spec.add_dependency 'searchkick', '~> 4.6.3'
   spec.add_dependency 'selenium-webdriver', '~> 4.1.0'
@@ -109,4 +107,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'view_component', '~> 2.48.0'
   spec.add_dependency 'wicked_pdf', '~> 2.1.0'
   spec.add_dependency 'wkhtmltopdf-binary', '~> 0.12.6.5'
+  spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end

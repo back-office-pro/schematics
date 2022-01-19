@@ -21,6 +21,7 @@ describe Schematics::Attributes::Text do
 
   its(:type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
+  its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:input_type) { is_expected.to eq(:textarea) }
 

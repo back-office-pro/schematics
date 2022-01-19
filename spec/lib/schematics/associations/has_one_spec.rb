@@ -39,6 +39,7 @@ describe Schematics::Associations::HasOne do
   its(:type) { is_expected.to eq('has_one') }
   its(:name) { is_expected.to eq('entity') }
   its(:class_name) { is_expected.to eq('Entity') }
+  its(:open_api_type) { is_expected.to eq('integer') }
   its('descriptor.name') { is_expected.to eq('type') }
 
   its(:search_data) do
