@@ -65,10 +65,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'image_processing', '~> 1.12.1'
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'json-schema', '~> 2.8.1'
+  spec.add_dependency 'js-routes', '~> 2.2.0'
   spec.add_dependency 'jwt', '~> 2.3.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mini_magick', '>= 4.11.0'
-  spec.add_dependency 'js-routes', '~> 2.2.0'
   # TODO: remove net-* gems when https://github.com/mikel/mail/pull/1439 is merged
   spec.add_dependency 'net-imap', '~> 0.2.3'
   spec.add_dependency 'net-pop', '~> 0.1.1'
