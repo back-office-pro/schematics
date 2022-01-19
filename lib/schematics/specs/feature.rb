@@ -33,8 +33,7 @@ module Schematics
 
         unless entity.is_a?(Entities::Singleton)
           scenario 'visiting the index' do
-            title = t('titles.schematics.resources.index', model_name_plural: model_name_plural)
-            assert_selector 'h5', text: title
+            assert_selector 'h5', text: t('titles.schematics.resources.index', model_name_plural:)
           end
 
           scenario "creating a #{entity.name}" do

@@ -138,7 +138,7 @@ Metrics/MethodLength:
   IgnoredMethods:
     - inherited
 Metrics/ClassLength:
-  Max: 300
+  Max: 220
 Metrics/ModuleLength:
   Max: 105
 Metrics/AbcSize:

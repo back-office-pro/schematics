@@ -7,7 +7,7 @@ module Schematics
     module Model # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      included do # rubocop:disable Metrics/BlockLength
+      included do
         delegate :entity_fixtures, to: :class
 
         fixtures entity_fixtures
@@ -169,7 +169,7 @@ module Schematics
         end
       end
 
-      class_methods do # rubocop:disable Metrics/BlockLength
+      class_methods do
         delegate :entity, to: :model_class, private: true
         delegate :virtuals,
                  :attributes,
