@@ -10,12 +10,12 @@ module Schematics
       end
 
       def call
-        fail! unless revert_or_destroy!
+        fail! unless revert_or_destroy
       end
 
       private
 
-      def revert_or_destroy!
+      def revert_or_destroy
         @version.reify&.unstale&.save || @version.item.really_destroy!
       end
     end

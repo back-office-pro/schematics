@@ -6,7 +6,9 @@ detectors:
   InstanceVariableAssumption:
     enabled: false
   TooManyStatements:
-    max_statements: 31
+    max_statements: 15
+    exclude:
+      - inherited
   UncommunicativeModuleName:
     enabled: false
   SubclassedFromCoreClass:
@@ -18,7 +20,7 @@ detectors:
   ControlParameter:
     enabled: false
   DuplicateMethodCall:
-    max_calls: 8
+    max_calls: 9
   RepeatedConditional:
     max_ifs: 15
   ManualDispatch:
