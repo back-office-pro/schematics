@@ -43,8 +43,6 @@ Metrics/ClassLength:
   Max: 300
 Metrics/ModuleLength:
   Max: 105
-RSpec/MultipleExpectations:
-  Max: 2
 Metrics/AbcSize:
   Max: 70
 Metrics/ParameterLists:
