@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User do
   fixtures :users
+  fixtures :roles
 
   subject(:user) { users(:one) }
 
