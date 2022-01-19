@@ -27,3 +27,17 @@ RSpec.shared_context 'with authenticated user' do
     }
   end
 end
+
+RSpec.shared_context 'with import' do
+  fixtures :users
+
+  let(:import) { Import.create(file:, author:) }
+  let(:author) { users(:one) }
+  let(:file) do
+    ActiveStorage::Blob.create_and_upload!(
+      io: File.open(file_fixture('roles.csv'), 'rb'),
+      filename: 'roles.csv',
+      content_type: 'text/csv'
+    ).signed_id
+  end
+end
