@@ -24,10 +24,3 @@ en:
         sidekiq:
           caption: Manage application background tasks (advanced)
           title: Background tasks
-      home:
-        graphics:
-          agregate:
-            count: Count
-            sum: Sum of
-          by: by
-          of: of

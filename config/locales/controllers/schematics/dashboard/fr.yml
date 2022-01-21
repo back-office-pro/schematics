@@ -24,10 +24,3 @@ fr:
         sidekiq:
           caption: Gérer les tâches de fond de l'application (avancé)
           title: Tâches de fond
-      home:
-        graphics:
-          agregate:
-            count: Total
-            sum: Somme des
-          by: par
-          of: des
