@@ -6,12 +6,10 @@ require 'singleton'
 module Schematics
   class Schema
     include Singleton
-    attr_reader :entities, :charts, :stats, :migrations
+    attr_reader :entities, :migrations
 
     def initialize
       @entities = data[:entities].map { Entities::Entity.build(**_1) }
-      @charts = data[:charts]&.map { Graphics::Chart.build(self, **_1) }
-      @stats = data[:stats]&.map { Graphics::Stat.build(self, **_1) }
       @migrations = data[:migrations]&.map { Migration.build(self, **_1) }
       add_inverse_entity_to_association_attributes
       add_has_and_belongs_to_many_associations
