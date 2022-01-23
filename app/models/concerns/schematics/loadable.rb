@@ -45,6 +45,10 @@ module Schematics
         end
       end
 
+      def gender
+        I18n.t(:gender, scope: [i18n_scope, :models, model_name.i18n_key], default: 'male')
+      end
+
       private
 
       def loadable(concerns: [])
