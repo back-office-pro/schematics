@@ -16,7 +16,7 @@ module Schematics
           result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GenerateCsvTemplateJob,
-            job_params: [parent_model_name.to_s],
+            job_params: [parent_model_class.to_s],
             extension: 'csv',
             slug: parent_model_name_plural
           )
@@ -30,7 +30,7 @@ module Schematics
     private
 
     def enqueue_job
-      ImportJob.perform_later(@resource.id, parent_model_name.to_s)
+      ImportJob.perform_later(@resource.id, parent_model_class.to_s)
     end
   end
 end

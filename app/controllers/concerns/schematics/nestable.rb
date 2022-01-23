@@ -32,11 +32,14 @@ module Schematics
     end
 
     def parent_model_name
-      parent_model_class.model_name
+      parent_model_class
+        .model_name
+        .human
+        .downcase
     end
 
     def parent_model_name_plural
-      parent_model_class.model_name.human.pluralize.downcase
+      parent_model_name.pluralize
     end
   end
 end
