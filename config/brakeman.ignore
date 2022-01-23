@@ -3,13 +3,13 @@
     {
       "warning_type": "File Access",
       "warning_code": 16,
-      "fingerprint": "2a9032bda73585e8e45580a01e600efcdf7a3fce07aff0cadf4b2a93b4f6e5f7",
+      "fingerprint": "99b65e66162b5a115d5f4037fb4ae4df2637561b62bc46d6a503db82713fc37d",
       "check_name": "SendFile",
       "message": "Parameter value used in file name",
       "file": "app/controllers/schematics/imports_controller.rb",
       "line": 25,
       "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([parent_model_name.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
+      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filepath, :type => \"text/csv\", :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_model_name_plural).filename)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -21,6 +21,6 @@
       "note": "Fingerprint is not used for filepath or filename"
     }
   ],
-  "updated": "2021-12-22 14:05:20 +0100",
+  "updated": "2022-01-23 21:49:44 +0100",
   "brakeman_version": "5.2.0"
 }
