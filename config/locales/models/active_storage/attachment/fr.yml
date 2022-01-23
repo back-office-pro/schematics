@@ -10,5 +10,6 @@ fr:
         record: Enregistrement
     models:
       active_storage/attachment:
+        gender: male
         one: Fichier
         other: Fichiers

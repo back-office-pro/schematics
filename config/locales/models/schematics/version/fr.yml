@@ -3,5 +3,6 @@ fr:
   activerecord:
     models:
       schematics/version:
+        gender: female
         one: Version
         other: Versions

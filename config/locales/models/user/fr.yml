@@ -18,5 +18,6 @@ fr:
         time_zone: Fuseau horaire
     models:
       user:
+        gender: male
         one: Utilisateur
         other: Utilisateurs

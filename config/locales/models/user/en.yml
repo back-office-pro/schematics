@@ -18,5 +18,6 @@ en:
         time_zone: Time zone
     models:
       user:
+        gender: male
         one: User
         other: Users
