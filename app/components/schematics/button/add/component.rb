@@ -5,6 +5,7 @@ module Schematics
     module Add
       class Component < ApplicationComponent
         delegate :can?, to: :helpers
+        delegate :gender, to: :@model_class
 
         def initialize(model_class:)
           super
