@@ -6,5 +6,6 @@ fr:
         name: Nom
     models:
       role:
+        gender: male
         one: Rôle
         other: Rôles

@@ -8,7 +8,7 @@ en:
         confirm: Confirm
         destroy: Delete permanently
         edit: Edit
-        import: Import %{model_name}
+        import: Import %{model_name_plural}
         loading: Processing...
         reset_filters: Reset filters
         revert: Revert

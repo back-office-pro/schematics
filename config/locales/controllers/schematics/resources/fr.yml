@@ -4,20 +4,20 @@ fr:
     resources:
       archive:
         failure: Une erreur est survenue
-        success: "%{model_name} a été archivé avec succès"
+        success: "@{f:La|m:Le} %{model_name} a été archivé avec succès"
       create:
         failure: Une erreur est survenue
-        success: "%{model_name} a été créé avec succès"
+        success: "@{f:La|m:Le} %{model_name} a été créé avec succès"
       destroy:
         failure: Une erreur est survenue
-        success: "%{model_name} a été supprimé avec succès"
+        success: "@{f:La|m:Le} %{model_name} a été supprimé avec succès"
       restore:
         failure: Une erreur est survenue
-        success: "%{model_name} a été restauré avec succès"
+        success: "@{f:La|m:Le} %{model_name} a été restauré avec succès"
       trigger:
         failure: Une erreur est survenue
-        success: L'action %{event} sur %{model_name} a été effectuée avec succès
+        success: L'action %{event} sur @{f:la|m:le} %{model_name} a été effectuée avec succès
       update:
         failure: Une erreur est survenue
         stale: Une modification a eu lieu pendant votre action
-        success: "%{model_name} a été modifié avec succès"
+        success: "@{f:La|m:Le} %{model_name} a été modifié avec succès"
