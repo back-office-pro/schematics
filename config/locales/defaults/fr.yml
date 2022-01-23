@@ -36,6 +36,13 @@ fr:
         integer: nombre
         string: chaîne de caractère
   'false': faux
+  i18n:
+    inflections:
+      gender:
+        f: female
+        female: :@f
+        m: male
+        male: :@m
   line: Ligne %{line}
   simple_form:
     labels:
