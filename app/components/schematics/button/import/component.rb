@@ -15,7 +15,7 @@ module Schematics
           can?(:import, @model_class)
         end
 
-        def model_name
+        def model_name_plural
           @model_class
             .model_name
             .human
