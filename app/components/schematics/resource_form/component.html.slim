@@ -6,7 +6,7 @@
       = f.association field.name.to_sym, prepend: fa_icon(field.icon)
     - when Schematics::Attributes::BelongsTo
       = f.association field.name.to_sym,
-                      prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
+                      prompt: t('prompt', gender: field.class_name.constantize.gender, attribute_name: human_attribute_name(field.name).downcase),
                       include_blank: !field.required?,
                       collection: field.input_collection.map(&:reverse),
                       prepend: fa_icon(field.icon)
@@ -29,13 +29,13 @@
     - when Schematics::Attributes::Country
       = f.input field.name.to_sym,
                 as: :country,
-                prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
+                prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
                 include_blank: !field.required?,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::TimeZone
       = f.input field.name.to_sym,
                 as: :time_zone,
-                prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
+                prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
                 include_blank: !field.required?,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Color
@@ -52,7 +52,7 @@
       = f.input field.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
       = f.input field.name.to_sym,
-                prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
+                prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
                 include_blank: false,
                 collection: field.input_collection.map(&:reverse),
                 prepend: fa_icon(field.icon)

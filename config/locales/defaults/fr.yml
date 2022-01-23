@@ -44,6 +44,7 @@ fr:
         m: male
         male: :@m
   line: Ligne %{line}
+  prompt: Sélectionner @{f:une|m:un} %{attribute_name}
   simple_form:
     labels:
       defaults:
