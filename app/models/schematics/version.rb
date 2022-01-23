@@ -9,7 +9,7 @@ module Schematics
                foreign_key: :whodunnit,
                inverse_of: :versions
 
-    delegate :entity, to: :model_class
+    delegate :entity, :gender, to: :model_class
     delegate :icon, to: :entity
 
     scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
@@ -37,6 +37,13 @@ module Schematics
 
     def model_class
       item_type.constantize
+    end
+
+    def model_name
+      model_class
+        .model_name
+        .human
+        .downcase
     end
 
     def icon

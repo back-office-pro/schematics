@@ -3,7 +3,7 @@
 module Schematics
   class VersionsController < ApplicationController
     load_and_authorize_resource class: Version
-    delegate :model_name, to: :model_class, private: true
+    delegate :model_name, :gender, to: :@version, private: true
 
     def index
       @pagy, @versions = pagy(model_class.timeline(ability: current_ability))
@@ -23,7 +23,7 @@ module Schematics
     def revert
       result = Versions::Revert.call(version: @version)
       if result.success?
-        notice = t(result.message, model_name: @version.item.model_name.human)
+        notice = t(result.message, model_name:, gender:)
         respond_to do |format|
           format.html { redirect_to(main_app.polymorphic_path(@version.item), notice:) }
           format.json
