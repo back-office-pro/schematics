@@ -229,6 +229,7 @@ module Schematics
                  polymorphic_path(model_class)
     end
 
+    # FIXME: could be set in model_class and delegated
     def model_name
       model_class
         .model_name
