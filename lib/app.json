@@ -22,6 +22,7 @@
           "name": "password",
           "type": "digest",
           "options": {
+            "confirm": true,
             "min": 8
           }
         },

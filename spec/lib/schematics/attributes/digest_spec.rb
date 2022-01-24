@@ -25,7 +25,6 @@ describe Schematics::Attributes::Digest do
     is_expected.to eq(
       {
         allow_blank: true,
-        confirmation: { allow_blank: true },
         format: { with: described_class::REGEX, message: :password },
         length: { maximum: 72 }
       }
@@ -36,5 +35,22 @@ describe Schematics::Attributes::Digest do
     is_expected.to eq <<~RUBY
       has_secure_password :password, validations: false
     RUBY
+  end
+
+  context 'when digest needs to be confirmed' do
+    let(:options) { { confirm: true } }
+
+    it { is_expected.to be_confirm }
+
+    its(:validators) do
+      is_expected.to eq(
+        {
+          allow_blank: true,
+          confirmation: { allow_blank: true },
+          format: { with: described_class::REGEX, message: :password },
+          length: { maximum: 72 }
+        }
+      )
+    end
   end
 end

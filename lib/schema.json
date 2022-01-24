@@ -211,6 +211,9 @@
         },
         "events": {
           "type": "array"
+        },
+        "confirm": {
+          "type": "boolean"
         }
       }
     },
