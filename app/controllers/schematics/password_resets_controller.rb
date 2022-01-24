@@ -7,7 +7,7 @@ module Schematics
     skip_before_action :authorize
     before_action :set_user, only: %i[edit update]
     layout 'schematics/auth'
-    delegate :entity, to: :model_class, private: true
+    delegate :entity, :model_name, :gender, to: :model_class, private: true
 
     def new; end
 
