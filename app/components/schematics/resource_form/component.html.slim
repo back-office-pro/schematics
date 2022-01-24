@@ -78,18 +78,7 @@
                 hint:,
                 input_html: { accept: field.extensions }
     - when Schematics::Attributes::Digest
-      = render Schematics::Input::Password::Component.new( \
-          form: f,
-          name: field.name.to_sym,
-          icon: field.icon,
-          input_html: { autocomplete: 'new-password' } \
-      )
-      = render Schematics::Input::Password::Component.new( \
-          form: f,
-          name: :"#{field.name}_confirmation",
-          icon: field.icon,
-          input_html: { autocomplete: 'new-password' } \
-      )
+      = render Schematics::Input::Password::Component.new(form: f, field:, autocomplete: false)
     - when Schematics::Attributes::Boolean
       = f.input field.name.to_sym
     - else
