@@ -38,6 +38,12 @@ Rails.configuration.to_prepare do
     end
   end
 
+  if defined?(Setting)
+    Setting.class_eval do
+      after_update { system('rake assets:clobber') if theme_color_previously_changed? }
+    end
+  end
+
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming?
       false
