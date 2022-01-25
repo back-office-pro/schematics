@@ -35,6 +35,7 @@ Metrics/BlockLength:
     - configure
     - class_methods
     - included
+    - to_prepare
 Metrics/MethodLength:
   Max: 50
   IgnoredMethods:
