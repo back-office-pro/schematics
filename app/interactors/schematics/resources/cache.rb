@@ -20,7 +20,7 @@ module Schematics
 
       def prefixed(key)
         [
-          @resource.class.name.underscore.pluralize,
+          entity.table_name.pluralize,
           (@resource.id unless entity.is_a?(Entities::Singleton)),
           key
         ].compact.join(':')
