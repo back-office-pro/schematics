@@ -49,7 +49,7 @@
                 wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Color
-      - # TODO: remove wrapper: :input_group
+      / TODO: remove wrapper: :input_group
       = f.input field.name.to_sym, as: :color, wrapper: :input_group, prepend: fa_icon(field.icon)
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
