@@ -6,6 +6,6 @@
         = render Schematics::CardHeading::Component.new(icon: :cloud_upload_alt, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component \
-          .build_csv(url: polymorphic_path([parent_model_class, Import], action: :template, format: :csv), text: :download_csv_template)
+            .build_csv(url: polymorphic_path([parent_model_class, Import], action: :template, format: :csv), text: :download_csv_template)
   .card-body.p-3
     = render Schematics::ResourceForm::Component.new(resource: @resource, url: [parent_model_class, Import], cancel_path: parent_model_class)

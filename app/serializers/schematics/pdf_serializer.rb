@@ -2,6 +2,12 @@
 
 module Schematics
   class PdfSerializer
+    delegate :company_name,
+             :company_address,
+             :company_registration_number,
+             to: :settings,
+             private: true
+
     def initialize(model_name, resource)
       @model_name = model_name
       @resource = resource
@@ -39,9 +45,9 @@ module Schematics
         },
         footer: {
           font_size: 8,
-          left: settings.company_name,
-          center: settings.company_address,
-          right: settings.company_registration_number
+          left: company_name,
+          center: company_address,
+          right: company_registration_number
         }
       }
     end
