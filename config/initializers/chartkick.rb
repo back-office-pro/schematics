@@ -4,7 +4,7 @@ require 'chroma'
 
 # Make sure i18n translations are available
 Rails.configuration.after_initialize do
-  if defined?(Setting)
+  if defined?(Setting) && Setting.table_exists?
     Chartkick.options = {
       colors: Setting.instance.theme_color.paint.palette.analogous(as: :hex),
       height: '300px',
