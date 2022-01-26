@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 PaperTrail.enabled = false
-Setting.instance.update!(
+Setting.instance.update_columns(
   company_name: Rails.application.class.module_parent_name,
   theme_color: Rails.configuration.theme_color
 )
