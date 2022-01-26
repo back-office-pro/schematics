@@ -40,7 +40,12 @@ Rails.configuration.to_prepare do
 
   if defined?(Setting)
     Setting.class_eval do
-      after_update { system('rake assets:clobber') if theme_color_previously_changed? }
+      after_update do
+        if theme_color_previously_changed?
+          Chartkick.options[:colors] = theme_color.paint.palette.analogous(as: :hex)
+          system('rake assets:clobber')
+        end
+      end
     end
   end
 
