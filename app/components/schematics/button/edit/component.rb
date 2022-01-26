@@ -19,7 +19,7 @@ module Schematics
 
         def url
           case entity
-          when Schematics::Entities::Singleton
+          when Entities::Singleton
             edit_polymorphic_path(model_class)
           else
             edit_polymorphic_path(@resource)
