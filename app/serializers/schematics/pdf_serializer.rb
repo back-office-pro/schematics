@@ -2,6 +2,7 @@
 
 module Schematics
   class PdfSerializer
+    delegate :render, to: :controller
     delegate :company_name,
              :company_address,
              :company_registration_number,
@@ -24,7 +25,7 @@ module Schematics
     end
 
     def pdf
-      @pdf ||= controller.render(
+      @pdf ||= render(
         locals: { resource: @resource },
         assigns: { resource: @resource },
         template: 'schematics/resources/show.pdf',
