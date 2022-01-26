@@ -3,7 +3,7 @@
 PaperTrail.enabled = false
 Setting.instance.update!(
   company_name: Rails.application.class.module_parent_name,
-  theme_color: '#2c3e50'
+  theme_color: Rails.configuration.theme_color
 )
 Schematics::Schema.instance.entities.each do |entity|
   Permission
