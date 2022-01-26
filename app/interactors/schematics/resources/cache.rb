@@ -11,20 +11,14 @@ module Schematics
       end
 
       def call
-        cached_keys.each do |key|
-          Rails.cache.write(prefixed(key), @resource.public_send(key))
-        end
+        cached_keys
+          .select { @resource.try("#{_1}_previously_changed?") }
+          .each do |key|
+            Rails.cache.write("#{@resource.cache_key}/#{key}", @resource.public_send(key))
+          end
       end
 
       private
-
-      def prefixed(key)
-        [
-          entity.table_name.pluralize,
-          (@resource.id unless entity.is_a?(Entities::Singleton)),
-          key
-        ].compact.join(':')
-      end
 
       def cached_keys
         entity

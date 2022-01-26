@@ -7,7 +7,7 @@ module Schematics
     delegate :licence, to: :current_ability
 
     def settings(key)
-      Rails.cache.fetch("settings:#{key}") do
+      Rails.cache.fetch("settings/#{key}") do
         Setting
           .with_attached_company_logo
           .instance
@@ -18,7 +18,7 @@ module Schematics
     def preferences(key, default = nil)
       Rails
         .cache
-        .fetch("users:#{current_user.id}:preferences") { current_user.preferences }
+        .fetch("#{current_user.cache_key}/preferences") { current_user.preferences }
         .fetch(key.to_s, default)
     end
 
