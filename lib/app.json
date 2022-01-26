@@ -84,7 +84,6 @@
           "type": "jsonb",
           "options": {
             "hidden": true,
-            "cached": true,
             "default": {
               "theme": "light",
               "sidebar_toggled": false

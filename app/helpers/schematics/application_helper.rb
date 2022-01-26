@@ -16,9 +16,8 @@ module Schematics
     end
 
     def preferences(key, default = nil)
-      Rails
-        .cache
-        .fetch("#{current_user.cache_key}/preferences") { current_user.preferences }
+      current_user
+        .preferences
         .fetch(key.to_s, default)
     end
 
