@@ -2,8 +2,6 @@
 
 module Schematics
   class DashboardController < ApplicationController
-    include Themeable # TODO: should be in ChartsController
-
     def home; end
 
     def admin; end
