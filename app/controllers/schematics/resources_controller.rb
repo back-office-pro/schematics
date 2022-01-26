@@ -220,12 +220,7 @@ module Schematics
                   .includes(entity.includes)
                   .includes(:slugs)
       @resource = @resource.with_deleted if request.delete?
-      @resource = case entity
-                  when Entities::Singleton
-                    @resource.instance
-                  when Entities::Entity
-                    @resource.find(params[:id])
-                  end
+      @resource = @resource.finder(params[:id])
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to @resource, status: :moved_permanently

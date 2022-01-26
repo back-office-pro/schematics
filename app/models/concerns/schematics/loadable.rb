@@ -36,6 +36,15 @@ module Schematics
           .map(&:to_sym)
       end
 
+      def finder(id)
+        case entity
+        when Entities::Singleton
+          instance
+        else
+          find(id)
+        end
+      end
+
       private
 
       def loadable(concerns: [])

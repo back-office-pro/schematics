@@ -13,7 +13,7 @@ module Schematics
 
     def unstale
       # TODO: self.paper_trail_event = :revert
-      self.lock_version += (self.class.find(id).lock_version - lock_version)
+      self.lock_version += (self.class.finder(id).lock_version - lock_version)
       self
     end
 
