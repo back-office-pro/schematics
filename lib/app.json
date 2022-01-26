@@ -216,8 +216,7 @@
           "type": "color",
           "options": {
             "required": true,
-            "cached": true,
-            "default": "#2c3e50"
+            "cached": true
           }
         }
       ]
