@@ -6,6 +6,7 @@ module Schematics
       def to_str
         <<~RUBY
           acts_as_singleton
+          delegate :cache_key, to: :model_name
         RUBY
       end
 
