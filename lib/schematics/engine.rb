@@ -112,6 +112,9 @@ module Schematics
       config.active_storage.track_variants = false
     end
 
+    # Theme
+    config.theme_color = '#2c3e50'
+
     def credentials
       ActiveSupport::EncryptedConfiguration.new(
         config_path: root.join('config', 'credentials.yml.enc'),

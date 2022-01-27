@@ -7,6 +7,7 @@ en:
         company_logo: Company Logo
         company_name: Company name
         company_registration_number: Company registration number
+        theme_color: Theme color
     models:
       setting:
         one: Setting

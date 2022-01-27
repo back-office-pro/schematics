@@ -7,6 +7,7 @@ fr:
         company_logo: Logo de la société
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
+        theme_color: Couleur du thème
     models:
       setting:
         one: Paramètre

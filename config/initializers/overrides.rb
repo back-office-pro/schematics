@@ -38,6 +38,17 @@ Rails.configuration.to_prepare do
     end
   end
 
+  if defined?(Setting)
+    Setting.class_eval do
+      after_update do
+        if theme_color_previously_changed?
+          Chartkick.options[:colors] = theme_color.paint.palette.analogous(as: :hex)
+          system('rake assets:clobber')
+        end
+      end
+    end
+  end
+
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming?
       false

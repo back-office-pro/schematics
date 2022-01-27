@@ -227,6 +227,7 @@
             "blob",
             "boolean",
             "byte",
+            "color",
             "country",
             "currency",
             "date",
