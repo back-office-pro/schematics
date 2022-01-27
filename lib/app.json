@@ -254,6 +254,7 @@
           "name": "model",
           "type": "model",
           "options": {
+            "required": true,
             "readonly": true
           }
         },
