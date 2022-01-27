@@ -39,11 +39,9 @@ module Schematics
         @icon = icon
         @core = core
         @actions = (actions || default_actions).map(&:to_sym)
-        @associations = associations.map do |association|
-          Associations::Association.build(self, **association)
-        end
-        @attributes = attributes.map { |attribute| Attributes::Attribute.build(self, **attribute) }
-        @virtuals = virtuals.map { |virtual| Virtuals::Virtual.build(self, **virtual) }
+        @associations = associations.map { Associations::Association.build(self, **_1) }
+        @attributes = attributes.map { Attributes::Attribute.build(self, **_1) }
+        @virtuals = virtuals.map { Virtuals::Virtual.build(self, **_1) }
         @descriptor = Descriptor.build(self, descriptor)
       end
 
