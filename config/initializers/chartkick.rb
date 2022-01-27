@@ -4,7 +4,7 @@ require 'chroma'
 
 # Make sure i18n translations are available
 Rails.configuration.after_initialize do
-  color = (Setting.instance.theme_color.paint rescue Rails.configuration.theme_color.dup.paint) # rubocop:disable Style/RescueModifier
+  color = Setting.instance.theme_color.paint rescue Rails.configuration.theme_color.dup.paint # rubocop:disable Style/RescueModifier
   Chartkick.options = {
     colors: color.palette.analogous(as: :hex),
     height: '300px',
