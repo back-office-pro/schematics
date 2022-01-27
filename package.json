@@ -10,13 +10,13 @@
     "flag-icons": "6.0.3",
     "jquery": "3.6.0",
     "jquery-resizable-columns": "0.2.3",
-    "jquery-ui": "1.13.0",
+    "jquery-ui": "1.13.1",
     "jquery-ujs": "1.2.3",
     "popper.js": "1.16.1",
     "slim-select": "1.27.1",
     "sortablejs": "1.14.0",
     "stimulus": "2.0.0",
-    "swagger-ui-dist": "4.2.1",
+    "swagger-ui-dist": "4.4.0",
     "swagger-ui-themes": "3.0.1",
     "sweetalert2": "5.1.1"
   }
