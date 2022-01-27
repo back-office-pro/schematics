@@ -1,29 +1,22 @@
-= simple_form_for @resource, url: @url, validate: true do |f|
+= simple_form_for @resource, url: @url, wrapper: :input_group, validate: true do |f|
   = f.input :lock_version, as: :hidden, wrapper: false
   - @attributes.stable_sort_by(&:weight).each do |field|
     - case field
     - when Schematics::Associations::HasAndBelongsToMany
-      = f.association field.name.to_sym,
-                      wrapper: :input_group,
-                      prepend: fa_icon(field.icon)
+      = f.association field.name.to_sym, prepend: fa_icon(field.icon)
     - when Schematics::Attributes::BelongsTo
       = f.association field.name.to_sym,
                       prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                       include_blank: !field.required?,
                       collection: field.input_collection.map(&:reverse),
-                      wrapper: :input_group,
                       prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Date
-      = f.input field.name.to_sym,
-                as: :date,
-                html5: true,
-                wrapper: :input_group
+      = f.input field.name.to_sym, as: :date, html5: true
     - when Schematics::Attributes::Address
       = f.input field.name.to_sym,
                 collection: [@resource.public_send(field.name.to_sym)].compact,
                 include_blank: !field.required?,
                 minlength: 3,
-                wrapper: :input_group,
                 prepend: fa_icon(field.icon),
                 input_html: { class: 'address_autocomplete' }
     - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
@@ -32,37 +25,29 @@
                 maxlength: true,
                 minlength: true,
                 pattern: true,
-                wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Country
       = f.input field.name.to_sym,
                 as: :country,
                 prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                 include_blank: !field.required?,
-                wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::TimeZone
       = f.input field.name.to_sym,
                 as: :time_zone,
                 prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                 include_blank: !field.required?,
-                wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Color
-      / TODO: remove wrapper: :input_group
-      = f.input field.name.to_sym, as: :color, wrapper: :input_group, prepend: fa_icon(field.icon)
+      = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon)
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
                 maxlength: true,
                 minlength: true,
                 pattern: true,
-                wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Decimal
-      = f.input field.name.to_sym,
-                min_max: true,
-                wrapper: :input_group,
-                prepend: field.unit || fa_icon(field.icon)
+      = f.input field.name.to_sym, min_max: true, prepend: field.unit || fa_icon(field.icon)
     - when Schematics::Attributes::RichText
       = f.input field.name.to_sym, as: :rich_text_area
     - when Schematics::Attributes::Enum
@@ -70,7 +55,6 @@
                 prompt: t('.prompt', name: human_attribute_name(field.name).downcase),
                 include_blank: false,
                 collection: field.input_collection.map(&:reverse),
-                wrapper: :input_group,
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Attachments
       - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
@@ -98,21 +82,17 @@
           form: f,
           name: field.name.to_sym,
           icon: field.icon,
-          input_html: { autocomplete: 'new-password' },
-          wrapper: :input_group \
+          input_html: { autocomplete: 'new-password' } \
       )
       = render Schematics::Input::Password::Component.new( \
           form: f,
           name: :"#{field.name}_confirmation",
           icon: field.icon,
-          input_html: { autocomplete: 'new-password' },
-          wrapper: :input_group \
+          input_html: { autocomplete: 'new-password' } \
       )
     - when Schematics::Attributes::Boolean
       = f.input field.name.to_sym
     - else
-      = f.input field.name.to_sym,
-                wrapper: :input_group,
-                prepend: field.try(:unit) || fa_icon(field.icon)
+      = f.input field.name.to_sym, prepend: field.try(:unit) || fa_icon(field.icon)
   = render Schematics::Button::Confirm::Component.new
   = render Schematics::Button::Cancel::Component.new(path: @cancel_path)
