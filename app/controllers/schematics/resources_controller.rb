@@ -221,7 +221,7 @@ module Schematics
                   .includes(:slugs)
       @resource = @resource.with_deleted if request.delete?
       @resource = @resource.finder(params[:id])
-      @resource = @resource.decorate rescue @resource # rubocop:disable Style/RescueModifier
+      @resource = @resource.decorate rescue @resource
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to @resource, status: :moved_permanently

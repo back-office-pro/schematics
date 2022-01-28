@@ -5,6 +5,8 @@ require:
   - rubocop-rspec
 Style/Documentation:
   Enabled: false
+Style/RescueModifier:
+  Enabled: false
 Style/ReturnNil:
   Enabled: true
 Style/Send:
