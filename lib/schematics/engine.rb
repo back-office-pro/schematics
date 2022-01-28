@@ -101,7 +101,7 @@ module Schematics
     config.i18n.default_locale = Rails.env.test? ? :en : :fr
     config.i18n.available_locales = %i[fr en]
     config.i18n.load_path += Dir[root.join('config', 'locales', '**', '*.yml')]
-    # config.i18n.raise_on_missing_translations = !Rails.env.production?
+    config.i18n.raise_on_missing_translations = !Rails.env.production?
 
     # Cache
     config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] } if Rails.env.production?
