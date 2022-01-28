@@ -23,7 +23,7 @@ module Schematics
     end
 
     def licence
-      @licence ||= LicenceDecorator.decorate(Licence.instance)
+      @licence ||= Licence.instance.decorate
     end
 
     private
