@@ -1,10 +1,10 @@
-span {
+button.btn.btn-light.btn-sm.btn-icon-split {
   data-controller='generateFileInBackground'
+  data-action='click->generateFileInBackground#run'
   data-generateFileInBackground-content-type=@content_type
   data-generateFileInBackground-url=@url
 }
-  button.btn.btn-light.btn-sm.btn-icon-split data-generateFileInBackground-target='button' data-action='click->generateFileInBackground#run'
-    span.icon = fa_icon @icon
-    span.icon.d-none = fa_icon :spinner, animation: 'spin'
-    span.text.d-none.d-lg-inline = t(".#{@text}")
-    span.text.d-none data-generateFileInBackground-target='loading' = t('.loading')
+  span.icon = fa_icon @icon
+  span.icon.d-none = fa_icon :spinner, animation: 'spin'
+  span.text.d-none.d-lg-inline = t(".#{@text}")
+  span.text.d-none data-generateFileInBackground-target='loading' = t('.loading')

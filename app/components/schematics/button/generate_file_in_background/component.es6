@@ -4,14 +4,14 @@
 
 window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
   static get targets () {
-    return ['button', 'loading']
+    return ['loading']
   }
 
   toggleButton (loadingText) {
-    this.buttonTarget.disabled = !this.buttonTarget.disabled
+    this.element.disabled = !this.element.disabled
     this.loadingTarget.textContent = loadingText
-    this.buttonTarget.querySelectorAll('.icon').forEach(_ => _.classList.toggle('d-none'))
-    this.buttonTarget.querySelectorAll('.text').forEach(_ => _.classList.toggle('d-lg-inline'))
+    this.element.querySelectorAll('.icon').forEach(_ => _.classList.toggle('d-none'))
+    this.element.querySelectorAll('.text').forEach(_ => _.classList.toggle('d-lg-inline'))
   }
 
   async run (event) {
