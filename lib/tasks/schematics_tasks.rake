@@ -53,6 +53,7 @@ namespace :schematics do
   end
 
   namespace :docs do
+    desc 'Generate OpenAPI docs'
     task generate: :environment do
       OpenApi.write_docs
     end
