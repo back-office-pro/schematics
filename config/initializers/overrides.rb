@@ -25,10 +25,8 @@ Rails.configuration.to_prepare do
 
   if defined?(User)
     User.class_eval do
-      after_create do
-        regenerate_password_reset_token
-        Schematics::UserMailer.new_account(self).deliver_later
-      end
+      after_create :regenerate_password_reset_token
+      after_create { Schematics::UserMailer.new_account(self).deliver_later }
     end
   end
 
@@ -40,12 +38,9 @@ Rails.configuration.to_prepare do
 
   if defined?(Setting)
     Setting.class_eval do
-      after_update do
-        if theme_color_previously_changed?
-          Chartkick.options[:colors] = theme_color.paint.palette.analogous(as: :hex)
-          system('rake assets:clobber')
-        end
-      end
+      after_update -> { system('rake assets:clobber') }, if: :theme_color_previously_changed?
+      after_update -> { Chartkick.options[:colors] = decorate.palette },
+                   if: :theme_color_previously_changed?
     end
   end
 
