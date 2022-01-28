@@ -10,7 +10,9 @@ class LicenceDecorator < Draper::Decorator
   end
 
   def storage_size
-    ActiveStorage::Attachment.sum(&:byte_size)
+    ActiveStorage::Attachment
+      .includes(:blob)
+      .sum(&:byte_size)
   end
 
   def entities_size
