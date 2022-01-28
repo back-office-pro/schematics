@@ -9,8 +9,8 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'schematics/themes/light', media: '(prefers-color-scheme: light)', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'schematics/themes/dark', media: '(prefers-color-scheme: dark)', 'data-turbolinks-track': 'reload'
+    = render Schematics::ThemeStylesheetLink::Component.new(theme: 'light')
+    = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'

@@ -9,16 +9,8 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'schematics/themes/light',
-                          media: 'all',
-                          'data-turbolinks-track': 'reload',
-                          id: 'light',
-                          disabled: preferences(:theme) != 'light'
-    = stylesheet_link_tag 'schematics/themes/dark',
-                          media: 'all',
-                          'data-turbolinks-track': 'reload',
-                          id: 'dark',
-                          disabled: preferences(:theme) != 'dark'
+    = render Schematics::ThemeStylesheetLink::Component.new(theme: 'light')
+    = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
@@ -32,9 +24,8 @@ html
       = render Schematics::Toast::Component.new(flash: f)
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
-        .col.bg-primary.sidebar class=('toggled' if preferences(:sidebar_toggled))
-          = render Schematics::Sidebar::Component.new
-        .col.bg-light.content class=('toggled' if preferences(:sidebar_toggled))
+        = render Schematics::Sidebar::Component.new
+        .col.bg-light.content class=('toggled' if preferences(:sidebar_toggled, false))
           nav.navbar.navbar-light.navbar-expand.p-0.sticky-top
             = render Schematics::BreadcrumbTrail::Component.new
             ul.navbar-nav.ml-auto.p-3

@@ -7,7 +7,7 @@ module Schematics
       delegate :cannot?, to: :current_ability
 
       def toggled?
-        preferences(:sidebar_toggled)
+        preferences(:sidebar_toggled, false)
       end
 
       def entities
