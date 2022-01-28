@@ -75,8 +75,7 @@
           "name": "time_zone",
           "type": "time_zone",
           "options": {
-            "required": true,
-            "default": "Paris"
+            "required": true
           }
         },
         {
@@ -84,10 +83,7 @@
           "type": "jsonb",
           "options": {
             "hidden": true,
-            "default": {
-              "theme": "light",
-              "sidebar_toggled": false
-            }
+            "default": {}
           }
         },
         {

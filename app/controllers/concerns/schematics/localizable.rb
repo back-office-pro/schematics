@@ -7,17 +7,11 @@ module Schematics
     included do
       around_action :switch_locale
       around_action :switch_beginning_of_week
-      around_action :switch_time_zone, if: -> { current_user && !Rails.env.test? }
-    end
-
-    def current_locale
-      current_user&.locale&.downcase ||
-        (I18n.available_locales.include?(http_header_locale) && http_header_locale) ||
-        I18n.default_locale
+      around_action :switch_time_zone
     end
 
     def switch_locale(&)
-      I18n.with_locale(current_locale, &)
+      I18n.with_locale(current_user&.locale || http_header_locale, &) rescue yield
     end
 
     def switch_beginning_of_week(&)
@@ -25,7 +19,7 @@ module Schematics
     end
 
     def switch_time_zone(&)
-      Time.use_zone(current_user.time_zone, &)
+      Time.use_zone(current_user&.time_zone, &) rescue yield
     end
 
     private

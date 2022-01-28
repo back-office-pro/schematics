@@ -112,6 +112,9 @@ module Schematics
       config.active_storage.track_variants = false
     end
 
+    # Time zone
+    config.time_zone = 'Paris'
+
     # Theme
     config.theme_color = '#2c3e50'
 
