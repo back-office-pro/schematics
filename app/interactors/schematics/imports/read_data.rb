@@ -11,7 +11,7 @@ module Schematics
       before do
         @import = context.import
         @model_class = context.model_class
-        context.data = {}
+        context.data = Concurrent::Hash.new
       end
 
       def call

@@ -3,7 +3,7 @@
 class LicenceDecorator < Draper::Decorator
   delegate_all
 
-  LICENCES = YAML.load_file(Schematics::Engine.root.join('lib', 'licences.yml'))
+  LICENCES = YAML.load_file(Schematics::Engine.root.join('lib', 'licences.yml')).freeze
 
   def users_size
     User.count

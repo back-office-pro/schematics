@@ -9,7 +9,7 @@ module Schematics
         @import = context.import
         @model_class = context.model_class
         @data = context.data
-        @errors = {}
+        @errors = Concurrent::Hash.new
       end
 
       def call

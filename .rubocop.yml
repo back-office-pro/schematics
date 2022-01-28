@@ -3,12 +3,15 @@ require:
   - rubocop-rails
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-thread_safety
 Style/Documentation:
   Enabled: false
 Style/RescueModifier:
   Enabled: false
 Style/ReturnNil:
   Enabled: true
+Style/MutableConstant:
+  EnforcedStyle: strict
 Style/Send:
   Enabled: false # TODO: enable
 Rails/SaveBang:
