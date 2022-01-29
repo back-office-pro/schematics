@@ -71,7 +71,7 @@ RSpec.describe User do
       expect(user)
         .to have_db_column(:time_zone)
         .of_type(:string)
-        .with_options(null: false, default: 'Paris')
+        .with_options(null: false)
     end
   end
 
@@ -82,7 +82,7 @@ RSpec.describe User do
       expect(user)
         .to have_db_column(:preferences)
         .of_type(:jsonb)
-        .with_options(default: { 'theme' => 'light', 'sidebar_toggled' => false })
+        .with_options(default: {})
     end
   end
 
