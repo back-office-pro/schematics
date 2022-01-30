@@ -33,6 +33,10 @@ module Schematics
         end
         query.reorder(created_at: :desc)
       end
+
+      def gender
+        :female
+      end
     end
 
     def model_class
