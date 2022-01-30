@@ -5,7 +5,8 @@ module Schematics
     module Edit
       class Component < ApplicationComponent
         delegate :can?, to: :helpers
-        delegate :entity, to: :model_class
+        delegate :class, to: :@resource, prefix: :model, private: true
+        delegate :entity, to: :model_class, private: true
 
         def initialize(resource:, compact: true)
           super
@@ -48,12 +49,6 @@ module Schematics
 
         def compact?
           @compact
-        end
-
-        private
-
-        def model_class
-          @resource.class
         end
       end
     end
