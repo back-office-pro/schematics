@@ -54,7 +54,11 @@ end
 ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     include Schematics::Loadable
-    loadable concerns: [Schematics::Elasticsearchable, Schematics::SoftDeletable]
+    loadable concerns: [
+      Schematics::Elasticsearchable,
+      Schematics::SoftDeletable,
+      Schematics::Translatable
+    ]
   end
 end
 

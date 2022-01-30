@@ -18,7 +18,7 @@ module Schematics
     authorize_resource except: :autocomplete
 
     delegate :model_class, to: :class
-    delegate :entity, :gender, to: :model_class
+    delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
 
     helper_method :entity, :model_class
 
@@ -50,7 +50,7 @@ module Schematics
             job: GenerateCsvJob,
             job_params: [model_class.to_s, @resources.pluck(:id)],
             extension: 'csv',
-            slug: model_name_plural.dasherize
+            slug: human_name_plural.dasherize
           )
           return send_data result.data if result.failure?
 
@@ -69,7 +69,7 @@ module Schematics
             job: GeneratePdfJob,
             job_params: [model_class.to_s, @resource.id],
             extension: 'pdf',
-            slug: "#{model_name.dasherize}-#{@resource.slug}"
+            slug: "#{human_name.dasherize}-#{@resource.slug}"
           )
           return send_data result.data if result.failure?
 
@@ -207,7 +207,7 @@ module Schematics
     end
 
     def view_assigns
-      super.merge(model_name_plural:, model_name:, gender:)
+      super.merge(human_name_plural:, human_name:, gender:)
     end
 
     protected
@@ -225,27 +225,15 @@ module Schematics
     end
 
     def set_breadcrumb
-      breadcrumb t('titles.schematics.resources.index', model_name_plural:),
+      breadcrumb t('titles.schematics.resources.index', human_name_plural:),
                  polymorphic_path(model_class)
-    end
-
-    # FIXME: could be set in model_class and delegated
-    def model_name
-      model_class
-        .model_name
-        .human
-        .downcase
-    end
-
-    def model_name_plural
-      model_name.pluralize
     end
 
     def tscope(message, **args)
       translate(
         message[1..],
         scope: [:schematics, :resources, action_name],
-        **args.merge(model_name:, gender:)
+        **args.merge(human_name:, gender:)
       )
     end
   end

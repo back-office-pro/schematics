@@ -5,6 +5,6 @@ en:
       forbidden:
         alert: Forbidden access
       not_found:
-        alert: The %{model_name} was not found
+        alert: The %{human_name} was not found
       parameter_missing:
         alert: An error occured

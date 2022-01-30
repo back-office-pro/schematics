@@ -4,4 +4,4 @@ fr:
     versions:
       revert:
         failure: Une erreur est survenue
-        success: "@{f:La|m:Le} %{model_name} a été rétabli@{f:e} avec succès"
+        success: "@{f:La|m:Le} %{human_name} a été rétabli@{f:e} avec succès"

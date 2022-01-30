@@ -36,7 +36,7 @@ module Schematics
       respond_to do |format|
         format.html do
           redirect_to not_found_path,
-                      alert: t('schematics.api.not_found.alert', model_name:, gender:)
+                      alert: t('schematics.api.not_found.alert', human_name:, gender:)
         end
         format.json { head :not_found }
       end

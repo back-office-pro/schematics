@@ -7,7 +7,7 @@ module Schematics
         def title
           super.push(
             I18n.t('schematics.dashboard.home.graphics.of'),
-            model_class.model_name.human.downcase.pluralize
+            model_class.human_name_plural
           ).join(' ')
         end
       end

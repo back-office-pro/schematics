@@ -8,7 +8,7 @@
         = fa_icon :exclamation_triangle, class: 'mr-3'
         = t('schematics.application.delete.title')
       = t('schematics.application.delete.subtitle')
-    .text-dark = t('schematics.application.delete.warning', model_name: @model_name, gender: @gender, resource: @resource)
+    .text-dark = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)
     - resource_associations(resource: @resource, only_required: true).each do |resources|
       = render Schematics::Viewer::Association::Component.new(resources:, collapsed: true)
     = form_for @resource, method: :delete, html: { class: 'mt-3' } do

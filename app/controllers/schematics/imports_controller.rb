@@ -18,7 +18,7 @@ module Schematics
             job: GenerateCsvTemplateJob,
             job_params: [parent_model_class.to_s],
             extension: 'csv',
-            slug: parent_model_name_plural
+            slug: parent_human_name_plural
           )
           return send_data result.data if result.failure?
 
