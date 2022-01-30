@@ -2,7 +2,6 @@
 
 module Schematics
   module ResourcesHelper
-    # TODO: remove this helper
     def resource_associations(resource:, only_required: false)
       @resource_associations ||= attachments_attributes(resource)
                                  .concat(associations(resource, only_required))
