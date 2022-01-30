@@ -4,6 +4,7 @@ module Schematics
   module Input
     module Password
       class Component < ApplicationComponent
+        # :reek:LongParameterList
         def initialize(form:,
                        field: nil,
                        name: :password,
