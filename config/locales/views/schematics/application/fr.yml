@@ -3,7 +3,7 @@ fr:
   schematics:
     application:
       button:
-        add: Ajouter @{f:une nouvelle|m:un nouveau} %{human_name}
+        add: Ajouter @{f:une nouvelle|m:un nouveau|mv:un nouvel} %{human_name}
         cancel: Annuler
         confirm: Valider
         destroy: Supprimer définitivement
@@ -20,6 +20,6 @@ fr:
       delete:
         subtitle: Cette action est irréversible
         title: Etes-vous sûr ?
-        warning: 'Supprimer @{f:la|m:le} %{human_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
+        warning: 'Supprimer @{f:la |m:le |fv+mv:l''}%{human_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
       resource:
         empty: Aucune donnée disponible

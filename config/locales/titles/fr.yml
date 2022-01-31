@@ -22,7 +22,7 @@ fr:
         delete: Supprimer %{resource}
         edit: Editer %{resource}
         index: Liste des %{human_name_plural}
-        new: Ajouter @{f:une nouvelle|m:un nouveau} %{human_name}
+        new: Ajouter @{f:une nouvelle|m:un nouveau|mv:un nouvel} %{human_name}
         show: "%{resource}"
       schema:
         edit: Editer mon application

@@ -5,6 +5,6 @@ fr:
       forbidden:
         alert: Accès non autorisé
       not_found:
-        alert: "@{f:La|m:Le} %{human_name} n'a pas été trouvé@{f:e}"
+        alert: "@{f:La |m:Le |fv+mv:L'}%{human_name} n'a pas été trouvé@{f+fv:e}"
       parameter_missing:
         alert: Une erreur est survenue

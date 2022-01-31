@@ -41,8 +41,12 @@ fr:
       gender:
         f: female
         female: :@f
+        female_vowel: :@fv
+        fv: female_vowel
         m: male
         male: :@m
+        male_vowel: :@mv
+        mv: male_vowel
   line: Ligne %{line}
   prompt: Sélectionner @{f:une|m:un} %{attribute_name}
   simple_form:
