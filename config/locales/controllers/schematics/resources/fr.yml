@@ -4,20 +4,20 @@ fr:
     resources:
       archive:
         failure: Une erreur est survenue
-        success: "@{f:La |m:Le |fv+mv:L'}%{human_name} a été archivé@{f+fv:e} avec succès"
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été archivé@{f:e|fv:e} avec succès"
       create:
         failure: Une erreur est survenue
-        success: "@{f:La |m:Le |fv+mv:L'}%{human_name} a été créé@{f+fv:e} avec succès"
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été créé@{f:e|fv:e} avec succès"
       destroy:
         failure: Une erreur est survenue
-        success: "@{f:La |m:Le |fv+mv:L'}%{human_name} a été supprimé@{f+fv:e} avec succès"
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été supprimé@{f:e|fv:e} avec succès"
       restore:
         failure: Une erreur est survenue
-        success: "@{f:La |m:Le |fv+mv:L'}%{human_name} a été restauré@{f+fv:e} avec succès"
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été restauré@{f:e|fv:e} avec succès"
       trigger:
         failure: Une erreur est survenue
-        success: L'action %{event} sur @{f:la|m:le} %{human_name} a été effectuée avec succès
+        success: L'action %{event} sur @{f:la |m:le |fv:l'|mv:l'}%{human_name} a été effectuée avec succès
       update:
         failure: Une erreur est survenue
         stale: Une modification a eu lieu pendant votre action
-        success: "@{f:La |m:Le |fv+mv:L'}%{human_name} a été modifié@{f+fv:e} avec succès"
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été modifié@{f:e|fv:e} avec succès"

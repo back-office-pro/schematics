@@ -48,7 +48,7 @@ fr:
         male_vowel: :@mv
         mv: male_vowel
   line: Ligne %{line}
-  prompt: Sélectionner @{f:une|m:un} %{attribute_name}
+  prompt: Sélectionner @{f:une|m:un|fv:une|mv:un} %{attribute_name}
   simple_form:
     labels:
       defaults:

@@ -4,4 +4,4 @@ fr:
     versions:
       revert:
         failure: Une erreur est survenue
-        success: "@{f:La |m:Le |fv+mv:L'}%{human_name} a été rétabli@{f+fv:e} avec succès"
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été rétabli@{f:e|fv:e} avec succès"
