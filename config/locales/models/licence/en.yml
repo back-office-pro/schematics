@@ -12,5 +12,6 @@ en:
           pro: Pro
     models:
       licence:
+        gender: female
         one: Licence
         other: Licences

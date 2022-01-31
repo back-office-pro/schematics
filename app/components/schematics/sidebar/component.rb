@@ -14,7 +14,7 @@ module Schematics
         Schema
           .instance
           .entities
-          .sort_by { _1.class_name.constantize.model_name.human }
+          .sort_by { _1.class_name.constantize.human_name }
       end
     end
   end

@@ -66,6 +66,7 @@ Gem::Specification.new do |spec|
   # FIXME: remove when https://github.com/github/view_component/issues/1258 is fixed
   spec.add_dependency 'i18n', '~> 1.8.11'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
+  spec.add_dependency 'i18n-inflector', '~> 2.6.7'
   spec.add_dependency 'image_processing', '~> 1.12.1'
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'json-schema', '~> 2.8.1'

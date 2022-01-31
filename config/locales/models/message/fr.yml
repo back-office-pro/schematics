@@ -17,5 +17,6 @@ fr:
         subject: Sujet
     models:
       message:
+        gender: male
         one: Message
         other: Messages

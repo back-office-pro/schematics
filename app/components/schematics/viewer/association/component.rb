@@ -20,7 +20,7 @@ module Schematics
               .class
               .human_attribute_name(@resources.first.name, count: @resources.size)
           else
-            model_class.model_name.human(count: @resources.size)
+            model_class.human_name(count: @resources.size).titleize
           end
         end
 

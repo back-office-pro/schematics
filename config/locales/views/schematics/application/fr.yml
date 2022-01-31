@@ -3,12 +3,12 @@ fr:
   schematics:
     application:
       button:
-        add: Ajouter un %{model_name}
+        add: Ajouter @{f:une nouvelle|m:un nouveau|mv:un nouvel} %{human_name}
         cancel: Annuler
         confirm: Valider
         destroy: Supprimer définitivement
         edit: Editer
-        import: Importer des %{model_name}
+        import: Importer des %{human_name_plural}
         loading: Chargement...
         reset_filters: Réinitialiser les filtres
         revert: Rétablir
@@ -20,6 +20,6 @@ fr:
       delete:
         subtitle: Cette action est irréversible
         title: Etes-vous sûr ?
-        warning: 'La suppression du %{model_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
+        warning: 'Supprimer @{f:la |m:le |fv+mv:l''}%{human_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
       resource:
         empty: Aucune donnée disponible

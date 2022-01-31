@@ -18,9 +18,9 @@ module Schematics
     authorize_resource except: :autocomplete
 
     delegate :model_class, to: :class
-    delegate :entity, :model_name, to: :model_class
+    delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
 
-    helper_method :entity, :model_class, :resource
+    helper_method :entity, :model_class
 
     class << self
       alias original_controller_path controller_path
@@ -48,9 +48,9 @@ module Schematics
           result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GenerateCsvJob,
-            job_params: [model_name.to_s, @resources.pluck(:id)],
+            job_params: [model_class.to_s, @resources.pluck(:id)],
             extension: 'csv',
-            slug: model_name_plural.dasherize
+            slug: human_name_plural.dasherize
           )
           return send_data result.data if result.failure?
 
@@ -67,9 +67,9 @@ module Schematics
           result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GeneratePdfJob,
-            job_params: [model_name.to_s, @resource.id],
+            job_params: [model_class.to_s, @resource.id],
             extension: 'pdf',
-            slug: "#{model_name.human.downcase.dasherize}-#{@resource.slug}"
+            slug: "#{human_name.dasherize}-#{@resource.slug}"
           )
           return send_data result.data if result.failure?
 
@@ -92,7 +92,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to @resource, notice: tscope(result.message, model_name: model_name.human)
+            redirect_to @resource, notice: tscope(result.message)
           end
           format.json { head :created }
         end
@@ -112,7 +112,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to @resource, notice: tscope(result.message, model_name: model_name.human)
+            redirect_to @resource, notice: tscope(result.message)
           end
           format.json { respond_with_bip(@resource) }
         end
@@ -133,7 +133,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            notice = tscope(result.message, model_name: model_name.human, event: event.human)
+            notice = tscope(result.message, event: event.human.downcase)
             redirect_back(fallback_location: @resource, notice:)
           end
           format.json { head :no_content }
@@ -154,8 +154,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class),
-                        notice: tscope(result.message, model_name: model_name.human)
+            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
           end
           format.json
         end
@@ -172,8 +171,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class),
-                        notice: tscope(result.message, model_name: model_name.human)
+            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
           end
           format.json
         end
@@ -190,8 +188,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class),
-                        notice: tscope(result.message, model_name: model_name.human)
+            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
           end
           format.json
         end
@@ -210,7 +207,7 @@ module Schematics
     end
 
     def view_assigns
-      super.merge(model_name_plural:, model_name: model_name.human.downcase)
+      super.merge(human_name_plural:, human_name:, gender:)
     end
 
     protected
@@ -228,16 +225,16 @@ module Schematics
     end
 
     def set_breadcrumb
-      breadcrumb t('titles.schematics.resources.index', model_name_plural:),
+      breadcrumb t('titles.schematics.resources.index', human_name_plural:),
                  polymorphic_path(model_class)
     end
 
-    def model_name_plural
-      model_name.human.pluralize.downcase
-    end
-
     def tscope(message, **args)
-      t(message[1..], scope: [:schematics, :resources, action_name], **args)
+      translate(
+        message[1..],
+        scope: [:schematics, :resources, action_name],
+        **args.merge(human_name:, gender:)
+      )
     end
   end
 end

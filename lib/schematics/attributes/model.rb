@@ -7,7 +7,7 @@ module Schematics
         return unless value
         return unless Object.const_defined?(value)
 
-        value.constantize.model_name.human
+        value.constantize.human_name.titleize
       end
 
       def icon

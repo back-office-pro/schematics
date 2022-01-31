@@ -2,6 +2,8 @@
 
 module Schematics
   class Version < PaperTrail::Version
+    include Translatable
+
     EVENTS = %w[create update destroy archive restore import].freeze
 
     belongs_to :user,
@@ -9,7 +11,7 @@ module Schematics
                foreign_key: :whodunnit,
                inverse_of: :versions
 
-    delegate :entity, to: :model_class
+    delegate :entity, :human_name, :gender, to: :model_class
     delegate :icon, to: :entity
 
     scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }

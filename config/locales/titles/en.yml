@@ -10,8 +10,8 @@ en:
         not_found: Page not found
         schema_error: Schema error
       imports:
-        index: List of %{model_name_plural}
-        new: Import %{parent_model_name_plural}
+        index: List of %{human_name_plural}
+        new: Import %{parent_human_name_plural}
         show: "%{resource}"
       password_resets:
         edit: New password
@@ -21,8 +21,8 @@ en:
       resources:
         delete: Delete %{resource}
         edit: Edit %{resource}
-        index: List of %{model_name_plural}
-        new: Add a new %{model_name}
+        index: List of %{human_name_plural}
+        new: Add a new %{human_name}
         show: "%{resource}"
       schema:
         edit: Edit my application

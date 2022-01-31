@@ -14,6 +14,7 @@ en:
         integer: integer
         string: string
   line: Line %{line}
+  prompt: Select a %{attribute_name}
   simple_form:
     labels:
       defaults:

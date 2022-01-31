@@ -14,5 +14,6 @@ fr:
           pending: En cours
     models:
       import:
+        gender: male
         one: Import
         other: Imports

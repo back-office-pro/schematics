@@ -18,5 +18,6 @@ en:
         name: Name
     models:
       permission:
+        gender: female
         one: Permission
         other: Permissions

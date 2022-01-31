@@ -4,6 +4,9 @@ module Schematics
   module Attributes
     class Digest < Attribute
       include Behaviours::Fillable
+
+      delegate :confirm?, to: :options
+
       REGEX = /
         (?=.*\d)           # contain at least one number
         (?=.*[a-z])        # contain at least one lowercase letter
@@ -18,8 +21,8 @@ module Schematics
       def validators
         super.merge(
           {
-            allow_blank: true,
-            confirmation: { allow_blank: true },
+            allow_blank: !required?,
+            confirmation: ({ allow_blank: !required? } if confirm?),
             format: { with: REGEX, message: :password },
             length: {
               minimum: options.min,

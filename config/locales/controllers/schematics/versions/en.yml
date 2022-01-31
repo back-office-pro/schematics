@@ -4,4 +4,4 @@ en:
     versions:
       revert:
         failure: An error occured
-        success: "%{model_name} was successfully reverted"
+        success: The %{human_name} was successfully reverted

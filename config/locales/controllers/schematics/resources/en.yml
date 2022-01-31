@@ -4,20 +4,20 @@ en:
     resources:
       archive:
         failure: An error occured
-        success: "%{model_name} was successfully archived"
+        success: The %{human_name} was successfully archived
       create:
         failure: An error occured
-        success: "%{model_name} was successfully created"
+        success: The %{human_name} was successfully created
       destroy:
         failure: An error occured
-        success: "%{model_name} was successfully destroyed"
+        success: The %{human_name} was successfully destroyed
       restore:
         failure: An error occured
-        success: "%{model_name} was successfully restored"
+        success: The %{human_name} was successfully restored
       trigger:
         failure: An error occured
-        success: The %{event} action on %{model_name} was sucessfully done
+        success: The %{event} action on the %{human_name} was sucessfully done
       update:
         failure: An error occured
         stale: A change has occured while you were editing
-        success: "%{model_name} was successfully updated"
+        success: The %{human_name} was successfully updated

@@ -10,5 +10,6 @@ fr:
         theme_color: Couleur du thème
     models:
       setting:
+        gender: male
         one: Paramètre
         other: Paramètres

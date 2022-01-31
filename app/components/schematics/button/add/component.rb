@@ -5,6 +5,7 @@ module Schematics
     module Add
       class Component < ApplicationComponent
         delegate :can?, to: :helpers
+        delegate :human_name, :gender, to: :@model_class
 
         def initialize(model_class:)
           super
@@ -13,13 +14,6 @@ module Schematics
 
         def render?
           can?(:create, @model_class)
-        end
-
-        def model_name
-          @model_class
-            .model_name
-            .human
-            .downcase
         end
       end
     end

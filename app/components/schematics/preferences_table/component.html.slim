@@ -10,7 +10,7 @@
         tr
           th.text-primary
             = fa_icon entity.icon, class: 'fa-fw mr-2 text-muted'
-            = model_class.model_name.human
+            = model_class.human_name.titleize
           - events.each do |action|
             - preference = "#{action}_#{model_class}"
             td.text-center

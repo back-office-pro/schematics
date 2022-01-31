@@ -7,11 +7,11 @@ module Schematics
         delegate :pagy_items_selector_js, :pagy_info, :pagy_bootstrap_nav, to: :helpers
         delegate :pages, to: :@pagy
 
-        def initialize(pagy:, calendar: nil, model_name_plural: nil)
+        def initialize(pagy:, calendar: nil, human_name_plural: nil)
           super
           @pagy = pagy
           @calendar = calendar
-          @model_name_plural = model_name_plural
+          @human_name_plural = human_name_plural
         end
 
         def render?

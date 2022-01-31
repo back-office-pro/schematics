@@ -10,5 +10,6 @@ en:
         record: Record
     models:
       active_storage/attachment:
+        gender: male
         one: File
         other: Files

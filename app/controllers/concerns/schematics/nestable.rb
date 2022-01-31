@@ -6,6 +6,7 @@ module Schematics
 
     included do
       helper_method :parent_model_class
+      delegate :human_name, :human_name_plural, to: :parent_model_class, prefix: :parent
     end
 
     class_methods do
@@ -15,13 +16,13 @@ module Schematics
     end
 
     def view_assigns
-      super.merge(parent_model_name_plural:)
+      super.merge(parent_human_name_plural:)
     end
 
     protected
 
     def set_breadcrumb
-      title = t('titles.schematics.resources.index', model_name_plural: parent_model_name_plural)
+      title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
       breadcrumb title, parent_model_class
     end
 
@@ -29,14 +30,6 @@ module Schematics
       classes = Schema.instance.entities.map(&:class_name)
       constants = classes.map(&:constantize)
       classes.zip(constants).to_h.fetch(params[:model_name])
-    end
-
-    def parent_model_name
-      parent_model_class.model_name
-    end
-
-    def parent_model_name_plural
-      parent_model_class.model_name.human.pluralize.downcase
     end
   end
 end

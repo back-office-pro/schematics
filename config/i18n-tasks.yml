@@ -28,6 +28,7 @@ ignore_missing:
   - javascript.*
   - pagy.*
   - date.*
+  - i18n.inflections.gender.*
   - 'true'
   - 'false'
   - line
@@ -42,6 +43,7 @@ ignore_unused:
   - javascript.*
   - pagy.*
   - date.*
+  - i18n.inflections.gender.*
   - 'true'
   - 'false'
   - line

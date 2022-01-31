@@ -5,6 +5,7 @@ module Schematics
     module Import
       class Component < ApplicationComponent
         delegate :can?, to: :helpers
+        delegate :human_name_plural, to: :@model_class
 
         def initialize(model_class:)
           super
@@ -13,14 +14,6 @@ module Schematics
 
         def render?
           can?(:import, @model_class)
-        end
-
-        def model_name
-          @model_class
-            .model_name
-            .human
-            .pluralize
-            .downcase
         end
       end
     end

@@ -3,12 +3,12 @@ en:
   schematics:
     application:
       button:
-        add: Add a new %{model_name}
+        add: Add a new %{human_name}
         cancel: Cancel
         confirm: Confirm
         destroy: Delete permanently
         edit: Edit
-        import: Import %{model_name}
+        import: Import %{human_name_plural}
         loading: Processing...
         reset_filters: Reset filters
         revert: Revert
@@ -20,6 +20,6 @@ en:
       delete:
         subtitle: This action is irreversible
         title: Are you sure?
-        warning: 'Removing the %{model_name} %{resource} will also result in the permanent removal of the following:'
+        warning: 'Removing the %{human_name} %{resource} will also result in the permanent removal of the following:'
       resource:
         empty: No data available

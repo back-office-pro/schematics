@@ -6,5 +6,6 @@ en:
         name: Name
     models:
       role:
+        gender: male
         one: Role
         other: Roles

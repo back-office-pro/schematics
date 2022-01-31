@@ -10,8 +10,8 @@ fr:
         not_found: Page non trouvée
         schema_error: Erreur schéma
       imports:
-        index: Liste des %{model_name_plural}
-        new: Importer des %{parent_model_name_plural}
+        index: Liste des %{human_name_plural}
+        new: Importer des %{parent_human_name_plural}
         show: "%{resource}"
       password_resets:
         edit: Nouveau mot de passe
@@ -21,8 +21,8 @@ fr:
       resources:
         delete: Supprimer %{resource}
         edit: Editer %{resource}
-        index: Liste des %{model_name_plural}
-        new: Ajouter un %{model_name}
+        index: Liste des %{human_name_plural}
+        new: Ajouter @{f:une nouvelle|m:un nouveau|mv:un nouvel} %{human_name}
         show: "%{resource}"
       schema:
         edit: Editer mon application
