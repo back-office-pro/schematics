@@ -1,0 +1,36 @@
+---
+fr:
+  activerecord:
+    attributes:
+      chart:
+        kind: Type
+        kinds:
+          area: Aires empilées
+          bar: Diagramme en bâtons
+          column: Histogramme
+          geo: Géographique
+          line: Courbes
+          pie: Diagramme circulaire
+          scatter: Nuage de points
+        model: Donnée
+        roles: Rôles
+        x_agregate: Agrégat en X
+        x_agregates:
+          group: Grouper
+          group_by_day: Grouper par jour
+          group_by_month: Grouper par mois
+          group_by_week: Grouper par semaine
+        x_field: Attribut en X
+        y_agregate: Agrégat en Y
+        y_agregates:
+          average: Moyenne
+          count: Total
+          maximum: Maximum
+          minimum: Minimum
+          sum: Somme
+        y_field: Attribut en Y
+    models:
+      chart:
+        gender: male
+        one: Graphique
+        other: Graphiques
