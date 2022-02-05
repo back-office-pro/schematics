@@ -25,7 +25,7 @@ describe Schematics::Attributes::Timestamp do
   describe '#format' do
     subject { attribute.format(value) }
 
-    let(:value) { DateTime.parse('01/01/2021 10:00') }
+    let(:value) { Time.parse('01/01/2021 10:00').in_time_zone }
 
     it { is_expected.to eq('Friday 01 January 2021 10:00') }
   end

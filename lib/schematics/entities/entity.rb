@@ -17,15 +17,17 @@ module Schematics
 
       class << self
         # :reek:LongParameterList
-        def build(name:,
-                  type: nil,
-                  icon: :caret_square_right,
-                  descriptor: 'id',
-                  core: false,
-                  actions: nil,
-                  associations: [],
-                  attributes: [],
-                  virtuals: [])
+        def build(
+          name:,
+          type: nil,
+          icon: :caret_square_right,
+          descriptor: 'id',
+          core: false,
+          actions: nil,
+          associations: [],
+          attributes: [],
+          virtuals: []
+        )
           args = [name, icon.to_sym, descriptor, core, actions, associations, attributes, virtuals]
           return new(*args) unless type
 

@@ -49,8 +49,10 @@ module Schematics
 
           test 'visiting the index' do
             visit polymorphic_path(model_class)
-            text = I18n.t('titles.schematics.resources.index',
-                          model_name_plural: model_name.human.pluralize.downcase)
+            text = I18n.t(
+              'titles.schematics.resources.index',
+              model_name_plural: model_name.human.pluralize.downcase
+            )
             assert_selector('h5', text:)
           end
         end
@@ -60,12 +62,16 @@ module Schematics
 
           test "creating a #{entity.table_name}" do
             visit polymorphic_path(model_class)
-            click_on I18n.t('schematics.application.button.add',
-                            model_name: model_name.human.downcase)
+            click_on I18n.t(
+              'schematics.application.button.add',
+              model_name: model_name.human.downcase
+            )
             fill_form
             click_on I18n.t('schematics.application.button.confirm')
-            assert_text I18n.t('schematics.resources.create.success',
-                               model_name: model_name.human)
+            assert_text I18n.t(
+              'schematics.resources.create.success',
+              model_name: model_name.human
+            )
           end
         end
 
@@ -83,8 +89,10 @@ module Schematics
             end
             fill_form
             click_on I18n.t('schematics.application.button.confirm')
-            assert_text I18n.t('schematics.resources.update.success',
-                               model_name: model_name.human)
+            assert_text I18n.t(
+              'schematics.resources.update.success',
+              model_name: model_name.human
+            )
           end
         end
 
@@ -96,8 +104,10 @@ module Schematics
             title = I18n.t('schematics.application.button.tooltip.archive')
             selector = "a[data-title='#{title}']"
             find(selector, match: :first).click
-            assert_text I18n.t('schematics.resources.archive.success',
-                               model_name: model_name.human)
+            assert_text I18n.t(
+              'schematics.resources.archive.success',
+              model_name: model_name.human
+            )
           end
         end
 
@@ -109,8 +119,10 @@ module Schematics
             page.execute_script("$('*[data-href]').first().click()")
             click_on I18n.t('schematics.application.button.destroy')
             click_on I18n.t('schematics.application.button.confirm')
-            assert_text I18n.t('schematics.resources.destroy.success',
-                               model_name: model_name.human)
+            assert_text I18n.t(
+              'schematics.resources.destroy.success',
+              model_name: model_name.human
+            )
           end
         end
       end

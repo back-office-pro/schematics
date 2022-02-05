@@ -5,13 +5,15 @@ module Schematics
     module Password
       class Component < ApplicationComponent
         # :reek:LongParameterList
-        def initialize(form:,
-                       field: nil,
-                       name: :password,
-                       icon: :key,
-                       required: true,
-                       confirm: false,
-                       autocomplete: true)
+        def initialize(
+          form:,
+          field: nil,
+          name: :password,
+          icon: :key,
+          required: true,
+          confirm: false,
+          autocomplete: true
+        )
           super
           @form = form
           @field = field
