@@ -226,6 +226,14 @@
         {
           "type": "has_and_belongs_to_many",
           "name": "permission"
+        },
+        {
+          "type": "has_and_belongs_to_many",
+          "name": "chart"
+        },
+        {
+          "type": "has_and_belongs_to_many",
+          "name": "stat"
         }
       ],
       "attributes": [
@@ -360,6 +368,104 @@
         {
           "name": "expires_at",
           "type": "timestamp"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "icon": "chart_line",
+      "attributes": [
+        {
+          "name": "kind",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "values": [
+              "line",
+              "pie",
+              "bar",
+              "area",
+              "scatter",
+              "column",
+              "geo"
+            ]
+          }
+        },
+        {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "x_field",
+          "type": "model_field",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "x_agregate",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "values": [
+              "group",
+              "group_by_day",
+              "group_by_week",
+              "group_by_month"
+            ]
+          }
+        },
+        {
+          "name": "y_field",
+          "type": "model_field"
+        },
+        {
+          "name": "y_agregate",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "values": [
+              "count",
+              "sum",
+              "maximum",
+              "minimum",
+              "average"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "stat",
+      "icon": "stopwatch_20",
+      "attributes": [
+        {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "agregate",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "values": [
+              "count",
+              "sum",
+              "maximum",
+              "minimum",
+              "average"
+            ]
+          }
+        },
+        {
+          "name": "field",
+          "type": "model_field"
         }
       ]
     }
