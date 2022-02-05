@@ -2,9 +2,20 @@
 
 module Schematics
   class DashboardController < ApplicationController
-    def home; end
+    def home
+      @charts = ::Chart
+                .left_joins(:roles)
+                .where(roles: [current_user.role, nil])
+                .decorate
+      @stats = ::Stat
+               .left_joins(:roles)
+               .where(roles: [current_user.role, nil])
+               .decorate
+    end
 
-    def admin; end
+    def admin
+      authorize! :read, :admin_dashboard
+    end
 
     def read_notifications
       current_user.update!(updated_at: Time.current)

@@ -1,26 +1,6 @@
 .row
-  - Schematics::Schema.instance.stats.each do |stat|
-    .col-xl-3.col-md-6.mb-3
-      .card.border-0
-        .card-body.p-3
-          .row.no-gutters.align-items-center
-            .col
-              small.text-uppercase.text-truncate.text-primary.font-weight-bold
-                = stat.title
-              h5.mb-0.text-dark.text-truncate.font-weight-bold
-                = stat
-            .col-auto
-              = link_to fa_icon(stat.icon, size: '2x'), main_app.polymorphic_path(stat.model_class), class: 'text-light'
-  - Schematics::Schema.instance.charts.each.with_index(1) do |chart, id|
-    .col-xl-6.col-md-12.mb-3
-      .card.shadow-sm.border-0
-        .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
-          = render Schematics::CardHeading::Component.new(icon: chart.icon, title: chart.title)
-        .card-body.p-3
-          = send chart.type,
-                 dashboard_chart_path(id),
-                 xtitle: chart.x.title.humanize,
-                 ytitle: chart.y.title.humanize,
-                 suffix: chart.y.field&.try(:unit),
-                 download: { filename: chart.title.parameterize },
-                 dataset: { borderWidth: chart.border_width }
+  - @stats.each do |stat|
+    = render Schematics::Stat::Component.new(stat:)
+.row
+  - @charts.each do |chart|
+    = render Schematics::Chart::Component.new(chart:)
