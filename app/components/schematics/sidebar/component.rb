@@ -4,7 +4,7 @@ module Schematics
   module Sidebar
     class Component < ApplicationComponent
       delegate :settings, :preferences, to: :helpers
-      delegate :cannot?, to: :current_ability
+      delegate :can?, to: :current_ability
 
       def toggled?
         preferences(:sidebar_toggled, false)
@@ -14,6 +14,7 @@ module Schematics
         Schema
           .instance
           .entities
+          .select { can?(:index, _1.class_name.constantize) }
           .sort_by { _1.class_name.constantize.human_name }
       end
     end
