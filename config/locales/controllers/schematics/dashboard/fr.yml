@@ -15,8 +15,6 @@ fr:
           entities: Quota ressources
           storage: Quota stockage
           users: Quota utilisateurs
-        resource:
-          caption: Gérer les %{human_name_plural}
         schema:
           caption: Editeur du schéma de l'application
           title: Editer mon application

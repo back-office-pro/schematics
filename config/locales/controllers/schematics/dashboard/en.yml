@@ -15,8 +15,6 @@ en:
           entities: Resources quota
           storage: Storage quota
           users: Users quota
-        resource:
-          caption: Manage %{human_name_plural}
         schema:
           caption: Application schema editor
           title: Edit my application

@@ -83,25 +83,6 @@
       .card-body.p-3
         .row.no-gutters.align-items-center
           .col.text-center.p-4
-            = link_to main_app.charts_path, class: 'text-decoration-none' do
-              = fa_icon Chart.entity.icon, size: '3x', class: 'd-inline-block'
-              h5.my-4 = Chart.human_name_plural.titleize
-              .text-muted = t('.resource.caption', human_name_plural: Chart.human_name_plural)
-  .col-xl-3.col-md-6.mb-3
-    .card.border-0
-      .card-body.p-3
-        .row.no-gutters.align-items-center
-          .col.text-center.p-4
-            = link_to main_app.stats_path, class: 'text-decoration-none' do
-              = fa_icon Stat.entity.icon, size: '3x', class: 'd-inline-block'
-              h5.my-4 = Stat.human_name_plural.titleize
-              .text-muted = t('.resource.caption', human_name_plural: Stat.human_name_plural)
-.row
-  .col-xl-3.col-md-6.mb-3
-    .card.border-0
-      .card-body.p-3
-        .row.no-gutters.align-items-center
-          .col.text-center.p-4
             = link_to api_path,
                       class: 'text-decoration-none',
                       data: { turbolinks: false } do
@@ -119,6 +100,7 @@
               = fa_icon :tachometer_alt, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.profiler.title')
               .text-muted = t('.profiler.caption')
+.row
   .col-xl-3.col-md-6.mb-3
     .card.border-0
       .card-body.p-3
