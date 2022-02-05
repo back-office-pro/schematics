@@ -40,15 +40,9 @@
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Color
       = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon)
-    - when Schematics::Attributes::ModelField
+    - when Schematics::Behaviours::Enumerable
       = f.input field.name.to_sym,
-                prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
-                include_blank: false,
-                collection: field.input_collection.map(&:reverse),
-                prepend: fa_icon(field.icon)
-    - when Schematics::Attributes::Model
-      = f.input field.name.to_sym,
-                prompt: t('prompt', gender: :female, attribute_name: human_attribute_name(field.name).downcase),
+                prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
                 include_blank: false,
                 collection: field.input_collection.map(&:reverse),
                 prepend: fa_icon(field.icon)
@@ -62,12 +56,6 @@
       = f.input field.name.to_sym, min_max: true, prepend: field.unit || fa_icon(field.icon)
     - when Schematics::Attributes::RichText
       = f.input field.name.to_sym, as: :rich_text_area
-    - when Schematics::Attributes::Enum
-      = f.input field.name.to_sym,
-                prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
-                include_blank: false,
-                collection: field.input_collection.map(&:reverse),
-                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Attachments
       - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
       = f.input field.name.to_sym,
