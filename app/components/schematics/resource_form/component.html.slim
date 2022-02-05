@@ -40,6 +40,18 @@
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Color
       = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::ModelField
+      = f.input field.name.to_sym,
+                prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
+                include_blank: false,
+                collection: field.input_collection.map(&:reverse),
+                prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::Model
+      = f.input field.name.to_sym,
+                prompt: t('prompt', gender: :female, attribute_name: human_attribute_name(field.name).downcase),
+                include_blank: false,
+                collection: field.input_collection.map(&:reverse),
+                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
                 maxlength: true,
