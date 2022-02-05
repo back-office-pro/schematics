@@ -1,0 +1,20 @@
+---
+fr:
+  activerecord:
+    attributes:
+      stat:
+        agregate: Agrégat
+        agregates:
+          average: Moyenne
+          count: Total
+          maximum: Maximum
+          minimum: Minimum
+          sum: Somme
+        field: Attribut
+        model: Donnée
+        roles: Rôles
+    models:
+      stat:
+        gender: female
+        one: Statistique
+        other: Statistiques
