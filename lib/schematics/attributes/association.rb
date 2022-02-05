@@ -85,6 +85,7 @@ module Schematics
           .constantize
           .all
           .map { [_1.id, _1.to_s] }
+          .sort_by(&:last)
       end
 
       def weight

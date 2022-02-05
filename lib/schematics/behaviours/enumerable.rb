@@ -17,6 +17,12 @@ module Schematics
         values
           .map { [_1, format(_1)] }
           .tap { _1.unshift ['', ''] unless required? }
+          .sort_by(&input_collection_sort_by_key)
+          .to_a
+      end
+
+      def input_collection_sort_by_key
+        :last
       end
 
       def default
