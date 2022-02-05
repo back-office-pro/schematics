@@ -197,6 +197,7 @@
             "integer",
             "jsonb",
             "mime",
+            "model_field",
             "model",
             "percentage",
             "phone",
