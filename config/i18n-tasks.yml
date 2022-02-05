@@ -32,6 +32,8 @@ ignore_missing:
   - 'true'
   - 'false'
   - line
+  - by
+  - of
 ignore_unused:
   - activerecord.*
   - routes.*
@@ -47,3 +49,5 @@ ignore_unused:
   - 'true'
   - 'false'
   - line
+  - by
+  - of
