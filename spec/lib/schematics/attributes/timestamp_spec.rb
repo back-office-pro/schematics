@@ -27,6 +27,6 @@ describe Schematics::Attributes::Timestamp do
 
     let(:value) { Time.parse('01/01/2021 10:00').in_time_zone }
 
-    it { is_expected.to eq('Friday 01 January 2021 10:00') }
+    it { is_expected.to eq('Friday 01 January 2021 09:00') }
   end
 end
