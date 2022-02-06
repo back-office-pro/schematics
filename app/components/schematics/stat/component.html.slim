@@ -1,0 +1,14 @@
+.col-xl-3.col-md-6.mb-3
+  .card.border-0
+    .card-body.p-3
+      .row.no-gutters.align-items-center
+        .col
+          small.text-uppercase.text-truncate.text-primary.font-weight-bold
+            = @stat
+          h5.mb-0.text-dark.text-truncate.font-weight-bold
+            = value_formatted
+        .col-auto
+          - if model_class
+            = link_to fa_icon(icon, size: '2x'), model_class, class: 'text-light'
+          - else
+            = fa_icon :exclamation_triangle, size: '2x', class: 'text-danger'

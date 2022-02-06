@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-describe Schematics::Attributes::Model do
+describe Schematics::Attributes::ModelField do
   subject(:attribute) { described_class.new(entity, name, options) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'permission') }
-  let(:name) { 'model' }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'stat') }
+  let(:name) { 'attribute' }
   let(:options) { {} }
 
   before do
@@ -21,19 +21,19 @@ describe Schematics::Attributes::Model do
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
   its(:type) { is_expected.to eq('string') }
-  its(:column_name) { is_expected.to eq('model') }
+  its(:column_name) { is_expected.to eq('attribute') }
   its(:open_api_type) { is_expected.to eq('string') }
-  its(:icon) { is_expected.to eq(:project_diagram) }
+  its(:icon) { is_expected.to eq(:code) }
   its(:input_type) { is_expected.to eq(:select) }
-  its(:default) { is_expected.to eq('Permission') }
-  its(:validators) { is_expected.to eq(inclusion: { in: ['Permission'] }, allow_blank: true) }
+  its(:default) { is_expected.to be_nil }
+  its(:validators) { is_expected.to eq(inclusion: { in: [] }, allow_blank: true) }
   its(:weight) { is_expected.to eq(1) }
-  its(:to_sql) { is_expected.to eq('permissions.model') }
-  its(:to_s) { is_expected.to eq('schema:permission_model') }
+  its(:to_sql) { is_expected.to eq('stats.attribute') }
+  its(:to_s) { is_expected.to eq('schema:stat_attribute') }
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :model, {:inclusion=>{:in=>["Permission"]}, :allow_blank=>true}
+      validates :attribute, {:inclusion=>{:in=>[]}, :allow_blank=>true}
     RUBY
   end
 end

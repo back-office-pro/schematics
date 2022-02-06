@@ -1,0 +1,36 @@
+---
+en:
+  activerecord:
+    attributes:
+      chart:
+        kind: Type
+        kinds:
+          area: Area chart
+          bar: Bar chart
+          column: Column chart
+          geo: Geo chart
+          line: Line chart
+          pie: Pie chart
+          scatter: Scatter chart
+        model: Data
+        roles: Roles
+        x_agregate: X agregate
+        x_agregates:
+          group: Group
+          group_by_day: Group by day
+          group_by_month: Group by month
+          group_by_week: Group by week
+        x_field: X field
+        y_agregate: Y agregate
+        y_agregates:
+          average: Average
+          count: Count
+          maximum: Maximum
+          minimum: Minimum
+          sum: Sum
+        y_field: Y field
+    models:
+      chart:
+        gender: male
+        one: Chart
+        other: Charts

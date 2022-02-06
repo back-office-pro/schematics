@@ -13,10 +13,7 @@ module Schematics
       end
 
       def input_collection
-        super
-          .map(&:reverse)
-          .sort_alphabetical
-          .map(&:reverse)
+        super.sort_alphabetical_by(&:last)
       end
 
       def format(value)

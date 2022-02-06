@@ -10,7 +10,7 @@ li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-
     = link_to edit_preferences_path, class: 'dropdown-item' do
       = fa_icon :bell, class: 'fa-fw mr-3'
       = t('.edit_preferences')
-    - if admin?
+    - if can?(:read, :admin_dashboard)
       = link_to admin_path, class: 'dropdown-item text-danger' do
         = fa_icon :shield_alt, class: 'fa-fw mr-3'
         = t('.admin_zone')

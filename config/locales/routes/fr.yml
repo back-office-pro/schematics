@@ -3,6 +3,7 @@ fr:
   routes:
     active_storage: stockage
     attachments: fichiers
+    charts: graphiques
     delete: supprimer
     edit: editer
     files: fichiers
@@ -16,5 +17,6 @@ fr:
     roles: roles
     searches: recherche
     settings: parametres
+    stats: statistiques
     users: utilisateurs
     versions: historique

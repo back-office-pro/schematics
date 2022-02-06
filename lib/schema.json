@@ -1,51 +1,5 @@
 {
   "definitions": {
-    "stat": {
-      "properties": {
-        "entity": {
-          "type": "string"
-        },
-        "agregate": {
-          "type": "string",
-          "enum": [
-            "count",
-            "sum",
-            "maximum"
-          ]
-        },
-        "field": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "entity",
-        "agregate"
-      ],
-      "type": "object"
-    },
-    "chart": {
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "entity": {
-          "type": "string"
-        },
-        "x": {
-          "type": "object"
-        },
-        "y": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "type",
-        "entity",
-        "x",
-        "y"
-      ],
-      "type": "object"
-    },
     "entity": {
       "$ref": "#/definitions/non_reserved_name",
       "properties": {
@@ -214,6 +168,9 @@
         },
         "confirm": {
           "type": "boolean"
+        },
+        "depends_on": {
+          "type": "string"
         }
       }
     },
@@ -243,6 +200,7 @@
             "integer",
             "jsonb",
             "mime",
+            "model_field",
             "model",
             "percentage",
             "phone",
@@ -292,18 +250,6 @@
     }
   },
   "properties": {
-    "stats": {
-      "items": {
-        "$ref": "#/definitions/stat"
-      },
-      "type": "array"
-    },
-    "charts": {
-      "items": {
-        "$ref": "#/definitions/chart"
-      },
-      "type": "array"
-    },
     "entities": {
       "items": {
         "$ref": "#/definitions/entity"

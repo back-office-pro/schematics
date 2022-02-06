@@ -18,15 +18,15 @@ module Schematics
       licence_restrictions
     end
 
-    def admin?
-      @user.role == admin_role
-    end
-
     def licence
       @licence ||= Licence.instance.decorate
     end
 
     private
+
+    def admin?
+      @user.role == admin_role
+    end
 
     def admin_role
       @admin_role ||= Role.find_by(name: 'Admin')
@@ -56,6 +56,7 @@ module Schematics
     end
 
     def user_permissions
+      can :read, :admin_dashboard if admin?
       @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
         # TODO: we should have a permission for each entity event

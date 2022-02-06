@@ -11,6 +11,10 @@ module Schematics
       def format(value)
         value
       end
+
+      def method_name
+        [entity.class_name, name].join('#')
+      end
     end
   end
 end

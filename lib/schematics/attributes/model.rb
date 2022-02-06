@@ -3,11 +3,17 @@
 module Schematics
   module Attributes
     class Model < String
-      def format(value)
-        return unless value
-        return unless Object.const_defined?(value)
+      include Behaviours::Enumerable
 
-        value.constantize.human_name.titleize
+      def format(value)
+        value && value.constantize.human_name.titleize rescue value
+      end
+
+      def values
+        Schema
+          .instance
+          .entities
+          .map(&:class_name)
       end
 
       def icon

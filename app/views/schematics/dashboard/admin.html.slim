@@ -6,7 +6,7 @@
         .row.no-gutters.align-items-center
           .col.text-center.p-4
             = link_to main_app.licences_path, class: 'text-decoration-none' do
-              = fa_icon :id_badge, size: '3x', class: 'd-inline-block'
+              = fa_icon Licence.entity.icon, size: '3x', class: 'd-inline-block'
               h5.my-4 = licence
               .text-muted = t('.licence.expires_at', date: l(licence.expires_at, format: '%A %d %B %Y'))
   .col-xl-3.col-md-6.mb-3
@@ -15,7 +15,7 @@
         .row.no-gutters.align-items-center
           .col.text-center.p-4
             = link_to main_app.users_path, class: 'text-decoration-none' do
-              = fa_icon :user, size: '3x', class: 'd-inline-block'
+              = fa_icon User.entity.icon, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.quota.users')
               .progress
                 .progress-bar.progress-bar-striped.progress-bar-animated {
@@ -66,7 +66,7 @@
         .row.no-gutters.align-items-center
           .col.text-center.p-4
             = link_to main_app.edit_settings_path, class: 'text-decoration-none' do
-              = fa_icon :cog, size: '3x', class: 'd-inline-block'
+              = fa_icon Setting.entity.icon, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.settings.title')
               .text-muted = t('.settings.caption')
   .col-xl-3.col-md-6.mb-3

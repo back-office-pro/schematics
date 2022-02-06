@@ -2,6 +2,7 @@
 fr:
   attributes:
     created_at: date de création
+  by: par
   errors:
     messages:
       antivirus_client_error: n'a pas pu être traitée pour l'analyse de virus
@@ -48,7 +49,8 @@ fr:
         male_vowel: :@mv
         mv: male_vowel
   line: Ligne %{line}
-  prompt: Sélectionner @{f:une|m:un|fv:une|mv:un} %{attribute_name}
+  of: des
+  prompt: Sélectionner @{f:une|m:un|fv:une|mv:un|un(e)} %{attribute_name}
   simple_form:
     labels:
       defaults:
