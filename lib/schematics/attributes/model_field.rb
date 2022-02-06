@@ -5,30 +5,25 @@ module Schematics
     class ModelField < String
       include Behaviours::Enumerable
 
+      def format(value)
+        return unless value
+
+        class_name, field_name = value.split('#')
+        return unless Object.const_defined?(class_name)
+
+        class_name.constantize.human_attribute_name(field_name)
+      end
+
       def values
-        fields
-          .map(&:name)
-          .uniq
-      end
-
-      def input_collection
-        fields
-          .map { [_1.name, _1.entity.class_name.constantize.human_attribute_name(_1.name)] }
-          .tap { _1.unshift ['', ''] unless required? }
-          .sort_by(&input_collection_sort_by_key)
-      end
-
-      def icon
-        :code
-      end
-
-      private
-
-      def fields
         Schema
           .instance
           .entities
           .flat_map(&:renderable_fields)
+          .map(&:method_name)
+      end
+
+      def icon
+        :code
       end
     end
   end

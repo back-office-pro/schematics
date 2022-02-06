@@ -22,7 +22,7 @@ class StatDecorator < Draper::Decorator
   private
 
   def entity_field
-    find_field_by_name(field)
+    field && find_field_by_name(field.split('#').last)
   end
 
   def value

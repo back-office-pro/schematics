@@ -74,11 +74,11 @@ class ChartDecorator < Draper::Decorator
   private
 
   def entity_x_field
-    find_field_by_name(x_field)
+    x_field && find_field_by_name(x_field.split('#').last)
   end
 
   def entity_y_field
-    find_field_by_name(y_field)
+    y_field && find_field_by_name(y_field.split('#').last)
   end
 
   def joins
