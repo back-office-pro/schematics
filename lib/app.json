@@ -402,7 +402,8 @@
           "name": "x_field",
           "type": "model_field",
           "options": {
-            "required": true
+            "required": true,
+            "depends_on": "model"
           }
         },
         {
@@ -420,7 +421,10 @@
         },
         {
           "name": "y_field",
-          "type": "model_field"
+          "type": "model_field",
+          "options": {
+            "depends_on": "model"
+          }
         },
         {
           "name": "y_agregate",
@@ -465,7 +469,10 @@
         },
         {
           "name": "field",
-          "type": "model_field"
+          "type": "model_field",
+          "options": {
+            "depends_on": "model"
+          }
         }
       ]
     }

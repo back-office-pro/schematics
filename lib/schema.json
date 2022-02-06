@@ -168,6 +168,9 @@
         },
         "confirm": {
           "type": "boolean"
+        },
+        "depends_on": {
+          "type": "string"
         }
       }
     },
