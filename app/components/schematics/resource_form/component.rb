@@ -15,6 +15,10 @@ module Schematics
         @attributes = attributes || entity.fillable_elements
         @cancel_path = cancel_path || resource
       end
+
+      def model_field_collection_class(key, field)
+        'd-none' if new_record? || !key.start_with?(@resource.public_send(field.depends_on))
+      end
     end
   end
 end

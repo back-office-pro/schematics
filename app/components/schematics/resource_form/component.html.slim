@@ -40,6 +40,13 @@
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Color
       = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::ModelField
+      = f.input field.name.to_sym,
+                prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
+                include_blank: false,
+                collection: field.input_collection.map(&:reverse).map { _1.push(class: model_field_collection_class(_1.second, field)) },
+                prepend: fa_icon(field.icon),
+                input_html: { data: { 'depends-on': "#{entity.name}[#{field.depends_on}]" } }
     - when Schematics::Behaviours::Enumerable
       = f.input field.name.to_sym,
                 prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
