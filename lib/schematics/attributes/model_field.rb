@@ -11,9 +11,9 @@ module Schematics
         return unless value
 
         class_name, field_name = value.split('#')
-        return unless Object.const_defined?(class_name)
-
         class_name.constantize.human_attribute_name(field_name)
+      rescue StandardError
+        value
       end
 
       def values
