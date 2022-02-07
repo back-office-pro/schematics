@@ -12,7 +12,7 @@ describe Schematics::Attributes::Timestamp do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
 
-  its(:type) { is_expected.to eq('timestamp') }
+  its(:type) { is_expected.to eq('datetime') }
   its(:column_name) { is_expected.to eq('read_at') }
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:calendar_alt) }
@@ -27,6 +27,6 @@ describe Schematics::Attributes::Timestamp do
 
     let(:value) { Time.parse('01/01/2021 10:00').in_time_zone }
 
-    it { is_expected.to eq('Friday 01 January 2021 09:00') }
+    it { is_expected.to eq('Friday 01 January 2021 10:00') }
   end
 end

@@ -6,6 +6,10 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Rangeable
 
+      def type
+        'datetime' # Rails converts timestamp to datetime in database
+      end
+
       def format(value)
         value && localize(value, format: '%A %d %B %Y %H:%M')
       end
