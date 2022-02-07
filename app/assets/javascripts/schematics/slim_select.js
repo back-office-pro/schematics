@@ -1,8 +1,8 @@
 //= require slim-select/dist/slimselect
 
-/* global $, SlimSelect, I18n, google */
+/* global SlimSelect, I18n, google */
 
-$(document).on('turbolinks:load', function () {
+document.addEventListener('turbolinks:load', function () {
   document.querySelectorAll('.simple_form select').forEach(element => {
     const options = {
       searchingText: I18n.typeahead.pending,
