@@ -19,6 +19,7 @@ module Schematics
         .require(:filter)
         .permit(permitted_filters)
         .to_h
+        .compact_blank
     end
 
     def permitted_filters
