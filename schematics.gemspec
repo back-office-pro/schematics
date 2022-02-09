@@ -98,7 +98,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'searchkick', '~> 4.6.3'
   spec.add_dependency 'selenium-webdriver', '~> 4.1.0'
   spec.add_dependency 'shoulda-matchers', '~> 5.1.0'
-  spec.add_dependency 'sidekiq', '~> 6.4.0'
+  spec.add_dependency 'sidekiq', '~> 6.4.1'
   spec.add_dependency 'sidekiq-scheduler', '~> 3.1.0'
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
