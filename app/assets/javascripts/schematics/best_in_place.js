@@ -17,7 +17,7 @@ $(document).on('turbolinks:load', function () {
 
 $(document).on('best_in_place:error', function (event, request) {
   const $target = $(event.target).parent()
-  const response = $.parseJSON(request.responseText)
+  const response = JSON.parse(request.responseText)
   let i = 0
   for (const key in response) {
     const $element = $(`<div class='invalid-feedback'>${response[key]}</div>`)
