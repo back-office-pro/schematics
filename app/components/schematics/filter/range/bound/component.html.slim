@@ -1,7 +1,7 @@
 = send field_tag, filter_name,
                   value,
                   placeholder: t(".placeholder.#{@comparison}"),
-                  onchange: ('$(this.form).submit()' if date?),
+                  onchange: ('this.form.submit()' if date?),
                   class: css_classes
 - if unit.present?
   .input-group-append

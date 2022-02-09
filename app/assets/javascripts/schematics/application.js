@@ -17,42 +17,12 @@
 
 /* global $, Pagy, Turbolinks, Sortable */
 
-$(document).on('turbolinks:load', function () {
-  Pagy.init()
-  document.querySelectorAll('tbody').forEach(_ => Sortable.create(_))
+document.addEventListener('turbolinks:load', function () {
   $('[data-toggle="tooltip"]').tooltip()
   $('.toast').toast({ delay: 5000 }).toast('show')
   $('table').resizableColumns()
-  $('.custom-file-input').on('change', function () {
-    $(this)
-      .siblings('.custom-file-label')
-      .addClass('selected')
-      .html(Array.from($(this).get(0).files).map(_ => _.name).join(', '))
-  })
-  $('form.form-inline').on('submit', function () {
-    return $(this)
-      .find(':input')
-      .filter(function () { return !this.value })
-      .attr('disabled', true)
-  })
-  $('form').on('submit', function () {
-    $(this)
-      .find('button[type="submit"]')
-      .attr('disabled', true)
-      .find('.icon')
-      .toggleClass('d-none')
-      .end()
-      .find('.text')
-      .toggleClass(function () { return $(this).hasClass('d-lg-inline') ? 'd-lg-inline' : 'd-none' })
-  })
-  $('input[type="password"] + .input-group-append').on('click', function () {
-    $(this)
-      .prev()
-      .attr('type', (_, type) => type === 'text' ? 'password' : 'text')
-      .end()
-      .find('.icon')
-      .toggleClass('d-none')
-  })
+  Pagy.init()
+  document.querySelectorAll('tbody').forEach(Sortable.create)
   $('*[data-href]').on('click', function (e) {
     const $target = $(e.target)
     if (!$target.is('a') &&
@@ -64,11 +34,7 @@ $(document).on('turbolinks:load', function () {
   })
 })
 
-$(document).on('scroll', function () {
-  const $nav = $('nav.navbar')
-  if ($(window).scrollTop() > 50) {
-    $nav.addClass('scrolled')
-  } else {
-    $nav.removeClass('scrolled')
-  }
+document.addEventListener('scroll', function () {
+  const classList = document.querySelector('nav.navbar').classList
+  window.scrollY > 25 ? classList.add('scrolled') : classList.remove('scrolled')
 })

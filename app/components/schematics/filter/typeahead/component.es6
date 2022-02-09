@@ -1,6 +1,14 @@
-/* global $, SearchBarController, Turbolinks */
+/* global SearchBarController, Turbolinks */
 
 window.TypeaheadController = class extends SearchBarController {
+  connect () {
+    this.inputTarget.form.addEventListener('submit', this.compactBlankInputs)
+  }
+
+  diconnect () {
+    this.inputTarget.form.removeEventListener('submit', this.compactBlankInputs)
+  }
+
   onSearch () {
     const scope = this.inputTarget.getAttribute('name')
     const searchParams = new URLSearchParams(window.location.search)
@@ -16,7 +24,8 @@ window.TypeaheadController = class extends SearchBarController {
 
   selectItem (event) {
     this.inputTarget.value = event.currentTarget.dataset.value
-    $(this.inputTarget.form).submit()
+    this.compactBlankInputs.call(this.inputTarget.form)
+    this.inputTarget.form.submit()
   }
 
   suggestionTemplate (result) {
@@ -26,6 +35,13 @@ window.TypeaheadController = class extends SearchBarController {
         ${this.highlight(result, this.inputTarget.value)}
       </li>
     `
+  }
+
+  compactBlankInputs () {
+    Array
+      .from(this.elements)
+      .filter(_ => !_.value)
+      .forEach(_ => { _.disabled = true })
   }
 
   get url () {

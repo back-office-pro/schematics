@@ -2,6 +2,6 @@
   = check_box_tag filter_name,
                   'true',
                   active?,
-                  onchange: '$(this.form).submit()',
+                  onchange: 'this.form.submit()',
                   class: 'custom-control-input'
   = label_tag filter_name, label, class: 'custom-control-label'
