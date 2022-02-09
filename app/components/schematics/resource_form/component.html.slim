@@ -11,7 +11,10 @@
                       collection: field.input_collection.map(&:reverse),
                       prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Date
-      = f.input field.name.to_sym, as: :date, html5: true
+      = f.input field.name.to_sym,
+                as: :date,
+                html5: true,
+                wrapper: :input_group
     - when Schematics::Attributes::Address
       = f.input field.name.to_sym,
                 collection: [@resource.public_send(field.name.to_sym)].compact,
