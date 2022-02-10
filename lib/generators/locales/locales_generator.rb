@@ -57,6 +57,7 @@ class LocalesGenerator < Rails::Generators::Base
           activerecord:
             models:
               #{entity.name}:
+                gender: male
                 one: #{translate(entity.name, to: locale)}
                 other: #{translate(entity.name.pluralize, to: locale)}
             attributes:
@@ -105,13 +106,13 @@ class LocalesGenerator < Rails::Generators::Base
   end
 
   def translate(text, to:)
-    return text.titleize unless Rails.env.production?
-
     EasyTranslate.translate(
       text.titleize,
       to:,
       key: Schematics::Engine.credentials.gcloud[:api_key]
     )
+  rescue EasyTranslateException
+    text.titleize
   end
 
   def locales_path
