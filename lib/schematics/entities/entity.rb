@@ -85,7 +85,7 @@ module Schematics
       def find_field_by_name(name)
         case name
         when 'created_at'
-          Attributes::Date.new(self, 'created_at', required: true)
+          Attributes::Datetime.new(self, 'created_at', required: true)
         when 'id'
           Attributes::Uuid.new(self, 'id', unique: true)
         else
