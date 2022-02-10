@@ -9,9 +9,9 @@ module Schematics
 
       included do
         delegate :entity,
-                 :model_name,
                  :model_class,
-                 :model_name_plural,
+                 :human_name,
+                 :human_name_plural,
                  :login_path,
                  :fill_form,
                  :t,
@@ -33,42 +33,38 @@ module Schematics
 
         unless entity.is_a?(Entities::Singleton)
           scenario 'visiting the index' do
-            assert_selector 'h5', text: t('titles.schematics.resources.index', model_name_plural:)
+            assert_selector 'h5', text: t('titles.schematics.resources.index', human_name_plural:)
           end
 
           scenario "creating a #{entity.name}" do
-            click_on t('schematics.application.button.add', model_name: model_name.human.downcase)
+            click_on t('schematics.application.button.add', human_name:)
             fill_form
             click_on t('schematics.application.button.confirm')
-            assert_text t('schematics.resources.create.success', model_name: model_name.human)
+            assert_text t('schematics.resources.create.success', human_name:)
           end
 
           scenario "archiving a #{entity.name}" do
             title = t('schematics.application.button.tooltip.archive')
             find("a[data-title='#{title}']", match: :first).click
-            assert_text t('schematics.resources.archive.success', model_name: model_name.human)
+            assert_text t('schematics.resources.archive.success', human_name:)
           end
 
           scenario "destroying a #{entity.name}" do
             find('*[data-href]', match: :first).click
             click_on t('schematics.application.button.destroy')
             click_on t('schematics.application.button.confirm')
-            assert_text t('schematics.resources.destroy.success', model_name: model_name.human)
+            assert_text t('schematics.resources.destroy.success', human_name:)
           end
         end
       end
 
       class_methods do
-        delegate :entity, :model_name, to: :model_class
+        delegate :entity, :human_name, :human_name_plural, to: :model_class
         delegate :login_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :t, to: 'I18n'
 
         def model_class
           name.demodulize.split('_').first.constantize
-        end
-
-        def model_name_plural
-          model_name.human.pluralize.downcase
         end
 
         def fill_form # rubocop:disable Metrics/CyclomaticComplexity
