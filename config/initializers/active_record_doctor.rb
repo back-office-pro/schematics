@@ -28,7 +28,9 @@ ActiveRecordDoctor.configure do
   detector :extraneous_indexes, ignore_tables: [], ignore_indexes: []
   detector :incorrect_boolean_presence_validation, ignore_models: [], ignore_attributes: []
   detector :mismatched_foreign_key_type, ignore_tables: [], ignore_columns: []
-  detector :missing_foreign_keys, ignore_tables: ['permissions_roles'], ignore_columns: []
+  detector :missing_foreign_keys,
+           ignore_tables: %w[permissions_roles charts_roles roles_stats],
+           ignore_columns: []
   detector :missing_non_null_constraint, ignore_tables: [], ignore_columns: []
   detector :missing_presence_validation, ignore_models: [], ignore_attributes: []
   detector :missing_unique_indexes, ignore_models: [], ignore_columns: []
