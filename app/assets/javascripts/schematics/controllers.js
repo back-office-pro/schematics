@@ -17,7 +17,7 @@
          SearchBarController,
          TypeaheadController,
          GenerateFileInBackgroundController,
-         ViewerSettings
+         ViewerSettingsController
 */
 
 window.fetchAPI = (url, method = 'GET', data) => {
@@ -42,4 +42,4 @@ application.register('sidebar', SidebarController)
 application.register('searchBar', SearchBarController)
 application.register('typeahead', TypeaheadController)
 application.register('generateFileInBackground', GenerateFileInBackgroundController)
-application.register('viewerSettings', ViewerSettings)
+application.register('viewerSettings', ViewerSettingsController)

@@ -1,6 +1,6 @@
 /* global Stimulus, fetchAPI, Routes */
 
-window.ViewerSettings = class extends Stimulus.Controller {
+window.ViewerSettingsController = class extends Stimulus.Controller {
   keepOpened (e) {
     e.stopPropagation()
   }
