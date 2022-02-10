@@ -200,8 +200,8 @@ module Schematics
 
         def database_attributes
           [
-            Attributes::Attribute.id(entity),
-            Attributes::Attribute.created_at(entity)
+            entity.find_field_by_name('id'),
+            entity.find_field_by_name('created_at')
           ]
         end
       end
