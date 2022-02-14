@@ -1,3 +1,4 @@
+---
 data:
   read:
     - config/locales/**/%{locale}.yml
