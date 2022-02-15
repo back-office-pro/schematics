@@ -136,7 +136,7 @@ module Schematics
               assert reflection.foreign_key == attribute.column_name
               assert reflection.options[:inverse_of] == attribute.inverse_association.name.to_sym
               assert reflection.options[:optional] == !attribute.required?
-              assert reflection.options[:polymorphic] == (attribute.polymorphic? || false)
+              assert reflection.options[:polymorphic] == attribute.polymorphic?
             end
           end
         end
