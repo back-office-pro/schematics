@@ -27,6 +27,7 @@ describe Schematics::Virtuals::Comparison do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      define_attribute_method :big_price
       def big_price
         price >= 100 && category.vat == 10
       rescue StandardError => e

@@ -8,6 +8,7 @@ module Schematics
       include ActiveStorageSupport::SupportForBase64
       include AASM
       strip_attributes
+      attribute_method_suffix '_formatted'
     end
 
     class_methods do
@@ -52,20 +53,12 @@ module Schematics
       end
     end
 
-    def method_missing(method_name, *args, &)
-      return super unless method_name.end_with?('_formatted')
-
-      field_name = method_name.to_s.chomp('_formatted')
-      value = public_send(field_name)
+    def attribute_formatted(attr)
       self
         .class
         .entity
-        .find_field_by_name(field_name)
-        .try(:format, value) || value
-    end
-
-    def respond_to_missing?(method_name, *args)
-      method_name.end_with?('_formatted') || super
+        .find_field_by_name(attr)
+        .try(:format, public_send(attr)) || public_send(attr)
     end
   end
 end

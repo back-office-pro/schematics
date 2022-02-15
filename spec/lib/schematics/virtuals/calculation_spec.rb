@@ -36,6 +36,7 @@ describe Schematics::Virtuals::Calculation do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      define_attribute_method :tax_inclusive_price
       def tax_inclusive_price
         (price ** category.vat)
       rescue StandardError => e
