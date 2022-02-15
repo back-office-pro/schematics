@@ -15,7 +15,8 @@
           "name": "email",
           "type": "email",
           "options": {
-            "unique": true
+            "unique": true,
+            "required": true
           }
         },
         {
@@ -241,7 +242,8 @@
           "name": "name",
           "type": "string",
           "options": {
-            "unique": true
+            "unique": true,
+            "required": true
           }
         }
       ]

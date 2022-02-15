@@ -6,11 +6,7 @@ require 'active_support/core_ext/module/delegation'
 module Schematics
   module Behaviours
     module Validatable
-      delegate :unique?, to: :options
-
-      def required?
-        options.required? || unique?
-      end
+      delegate :unique?, :required?, :case_sensitive?, to: :options
 
       def validate
         return if validators.empty?
@@ -22,9 +18,9 @@ module Schematics
 
       def validators
         {
-          uniqueness: ({ case_sensitive: false } if unique?),
+          uniqueness: ({ case_sensitive: case_sensitive?, allow_blank: !required? } if unique?),
           presence: required?
-        }.compact
+        }.compact_blank
       end
     end
   end

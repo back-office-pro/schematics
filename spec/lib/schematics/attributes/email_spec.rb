@@ -21,14 +21,14 @@ describe Schematics::Attributes::Email do
   its(:icon) { is_expected.to eq(:envelope) }
   its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq(email: true) }
+  its(:validators) { is_expected.to eq(email: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :email, {:email=>true}
+      validates :email, {:email=>{:allow_blank=>true}}
     RUBY
   end
 
@@ -42,16 +42,17 @@ describe Schematics::Attributes::Email do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    it { is_expected.to be_required }
-    its(:default) { is_expected.to match(/\w+@\w+\.com/) }
 
     its(:validators) do
-      is_expected.to eq(uniqueness: { case_sensitive: false }, presence: true, email: true)
+      is_expected.to eq(
+        uniqueness: { case_sensitive: false, allow_blank: true },
+        email: { allow_blank: true }
+      )
     end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :email, {:uniqueness=>{:case_sensitive=>false}, :presence=>true, :email=>true}
+        validates :email, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true}}
       RUBY
     end
   end
@@ -60,11 +61,12 @@ describe Schematics::Attributes::Email do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq(presence: true, email: true) }
+    its(:default) { is_expected.to match(/\w+@\w+\.com/) }
+    its(:validators) { is_expected.to eq(presence: true, email: { allow_blank: false }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :email, {:presence=>true, :email=>true}
+        validates :email, {:presence=>true, :email=>{:allow_blank=>false}}
       RUBY
     end
   end

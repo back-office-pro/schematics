@@ -37,16 +37,12 @@ describe Schematics::Attributes::String do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    it { is_expected.to be_required }
     its(:default) { is_expected.not_to be_nil }
-
-    its(:validators) do
-      is_expected.to eq(uniqueness: { case_sensitive: false }, presence: true)
-    end
+    its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: false, allow_blank: true }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :last_name, {:uniqueness=>{:case_sensitive=>false}, :presence=>true}
+        validates :last_name, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}}
       RUBY
     end
   end

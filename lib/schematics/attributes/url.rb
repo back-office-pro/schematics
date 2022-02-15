@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Url < String
       def validators
-        super.merge(url: true)
+        super.merge(url: { allow_blank: !required? })
       end
 
       def default

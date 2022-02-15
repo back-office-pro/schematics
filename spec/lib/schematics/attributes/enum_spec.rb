@@ -82,19 +82,14 @@ describe Schematics::Attributes::Enum do
 
     its(:validators) do
       is_expected.to eq(
-        {
-          inclusion: {
-            in: %w[available available_soon not_available]
-          },
-          presence: true,
-          allow_blank: false
-        }
+        inclusion: { in: %w[available available_soon not_available] },
+        presence: true
       )
     end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :state, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>false}
+        validates :state, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}}
       RUBY
     end
   end

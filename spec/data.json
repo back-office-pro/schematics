@@ -69,7 +69,8 @@
           "name": "label",
           "type": "string",
           "options": {
-            "unique": true
+            "unique": true,
+            "required": true
           }
         },
         {
@@ -110,6 +111,7 @@
           "type": "string",
           "options": {
             "unique": true,
+            "required": true,
             "limit": 100
           }
         },

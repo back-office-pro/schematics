@@ -14,6 +14,8 @@ describe Schematics::Attributes::Token do
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Editable) }
+  it { is_expected.to be_unique }
+  it { is_expected.to be_case_sensitive }
 
   its(:type) { is_expected.to eq('token') }
   its(:column_name) { is_expected.to eq('auth_token') }

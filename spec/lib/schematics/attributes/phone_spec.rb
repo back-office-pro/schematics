@@ -21,14 +21,14 @@ describe Schematics::Attributes::Phone do
   its(:icon) { is_expected.to eq(:phone) }
   its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq(phone: true) }
+  its(:validators) { is_expected.to eq(phone: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.phone') }
   its(:to_s) { is_expected.to eq('schema:user_phone') }
 
   its(:validate) do
     is_expected.to eq <<~RUBY
-      validates :phone, {:phone=>true}
+      validates :phone, {:phone=>{:allow_blank=>true}}
     RUBY
   end
 
@@ -42,16 +42,18 @@ describe Schematics::Attributes::Phone do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    it { is_expected.to be_required }
     its(:default) { is_expected.to match(/\d+/) }
 
     its(:validators) do
-      is_expected.to eq(uniqueness: { case_sensitive: false }, presence: true, phone: true)
+      is_expected.to eq(
+        uniqueness: { case_sensitive: false, allow_blank: true },
+        phone: { allow_blank: true }
+      )
     end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :phone, {:uniqueness=>{:case_sensitive=>false}, :presence=>true, :phone=>true}
+        validates :phone, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :phone=>{:allow_blank=>true}}
       RUBY
     end
   end
@@ -60,11 +62,11 @@ describe Schematics::Attributes::Phone do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq(presence: true, phone: true) }
+    its(:validators) { is_expected.to eq(presence: true, phone: { allow_blank: false }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :phone, {:presence=>true, :phone=>true}
+        validates :phone, {:presence=>true, :phone=>{:allow_blank=>false}}
       RUBY
     end
   end
