@@ -31,7 +31,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
     its(:default) { is_expected.to eq('MyString') }
-    its(:index_name) { is_expected.to eq('foo') }
     it { is_expected.not_to be_required }
   end
 
@@ -45,7 +44,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
     its(:default) { is_expected.to eq('MyString') }
-    its(:index_name) { is_expected.to eq('foo') }
     it { is_expected.not_to be_required }
   end
 
@@ -59,7 +57,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
     its(:default) { is_expected.to eq('MyString') }
-    its(:index_name) { is_expected.to eq('foo') }
     it { is_expected.not_to be_required }
   end
 
@@ -72,7 +69,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:has_uniq_index?) { is_expected.to be_falsy }
     its(:attr_options) { is_expected.to be_empty }
     its(:default) { is_expected.to be_nil }
-    its(:index_name) { is_expected.to eq('foo_id') }
     it { is_expected.to be_required }
 
     its(:options_for_migration) do
@@ -84,13 +80,12 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'schema:user_email' }
 
     its(:name) { is_expected.to eq('email') }
-    its(:type) { is_expected.to eq(:string) }
+    its(:type) { is_expected.to eq(:citext) }
     its(:has_index?) { is_expected.to be_truthy }
     its(:has_uniq_index?) { is_expected.to be_truthy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(null: false) }
     its(:default) { is_expected.to match(/\w+@\w+\.com/) }
-    its(:index_name) { is_expected.to eq("'lower(email)'.to_s") }
     it { is_expected.to be_required }
   end
 
@@ -103,7 +98,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:has_uniq_index?) { is_expected.to be_falsy }
     its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
     its(:default) { is_expected.to be_nil }
-    its(:index_name) { is_expected.to eq('author_id') }
     it { is_expected.to be_required }
 
     its(:options_for_migration) do

@@ -58,14 +58,6 @@ module Schematics
               .join(', ')
           end
 
-          def index_name
-            if schema_attribute&.unique? && !schema_attribute&.case_sensitive?
-              "'lower(#{super})'.to_s"
-            else
-              super
-            end
-          end
-
           private
 
           def schema_attribute

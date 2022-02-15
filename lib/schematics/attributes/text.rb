@@ -25,7 +25,7 @@ module Schematics
       protected
 
       def migration_options
-        super.concat %i[default limit]
+        super.concat %i[default]
       end
     end
   end

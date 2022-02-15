@@ -26,7 +26,7 @@ module Schematics
       end
 
       def default
-        super || values.first
+        values.first
       end
     end
   end

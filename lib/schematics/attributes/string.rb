@@ -8,7 +8,11 @@ module Schematics
       include Behaviours::Listable
 
       def type
-        'string'
+        'citext'
+      end
+
+      def case_sensitive?
+        false
       end
 
       def validators
@@ -25,6 +29,7 @@ module Schematics
 
       def default
         return SecureRandom.base58 if unique?
+        return 'MyString' if required?
 
         super
       end

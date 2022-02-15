@@ -58,10 +58,6 @@ module Schematics
               refute record.valid?
               assert_not_nil record.errors[attribute.name.to_sym]
             end
-
-            test "#{attribute} should be required when unique" do
-              assert attribute.required?
-            end
           end
         end
 

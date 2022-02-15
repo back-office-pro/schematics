@@ -14,8 +14,9 @@ describe Schematics::Attributes::String do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
+  it { is_expected.not_to be_case_sensitive }
 
-  its(:type) { is_expected.to eq('string') }
+  its(:type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('last_name') }
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:align_justify) }
