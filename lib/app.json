@@ -240,7 +240,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "string",
+          "type": "citext",
           "options": {
             "unique": true,
             "required": true

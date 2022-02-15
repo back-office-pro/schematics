@@ -187,6 +187,7 @@
             "blob",
             "boolean",
             "byte",
+            "citext",
             "color",
             "country",
             "currency",

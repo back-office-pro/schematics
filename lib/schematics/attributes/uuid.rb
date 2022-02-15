@@ -6,7 +6,7 @@ module Schematics
       include Behaviours::Renderable
 
       def default
-        return SecureRandom.uuid if required?
+        return SecureRandom.uuid if unique? || required?
 
         super
       end

@@ -8,7 +8,7 @@ module Schematics
       end
 
       def default
-        return Array.new(10) { rand(10) }.to_s if required?
+        return Array.new(10) { rand(10) }.to_s if unique? || required?
 
         super
       end

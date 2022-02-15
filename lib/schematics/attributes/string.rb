@@ -4,15 +4,21 @@ require 'active_support/core_ext/securerandom'
 
 module Schematics
   module Attributes
-    class String < Text
+    class String < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Searchable
+      include Behaviours::Fillable
+      include Behaviours::Editable
       include Behaviours::Listable
 
       def type
-        'citext'
+        'string'
       end
 
-      def case_sensitive?
-        false
+      def search_data
+        <<~RUBY
+          #{name}&.to_s
+        RUBY
       end
 
       def validators
@@ -34,12 +40,18 @@ module Schematics
         super
       end
 
-      def input_type
-        :input
+      def icon
+        :font_case
       end
 
       def format(value)
         value&.to_s
+      end
+
+      protected
+
+      def migration_options
+        super.concat %i[default]
       end
     end
   end

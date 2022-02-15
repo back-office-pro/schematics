@@ -15,7 +15,7 @@ describe Schematics::Attributes::Phone do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
 
-  its(:type) { is_expected.to eq('citext') }
+  its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('phone') }
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:phone) }
@@ -46,14 +46,14 @@ describe Schematics::Attributes::Phone do
 
     its(:validators) do
       is_expected.to eq(
-        uniqueness: { case_sensitive: false, allow_blank: true },
+        uniqueness: { case_sensitive: true, allow_blank: true },
         phone: { allow_blank: true }
       )
     end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :phone, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :phone=>{:allow_blank=>true}}
+        validates :phone, {:uniqueness=>{:case_sensitive=>true, :allow_blank=>true}, :phone=>{:allow_blank=>true}}
       RUBY
     end
   end

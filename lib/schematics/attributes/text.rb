@@ -15,17 +15,11 @@ module Schematics
       end
 
       def icon
-        :align_justify
+        :text
       end
 
       def input_type
         :textarea
-      end
-
-      protected
-
-      def migration_options
-        super.concat %i[default]
       end
     end
   end
