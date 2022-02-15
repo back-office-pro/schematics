@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'active_record_doctor'
+require 'active_record_doctor/rake/task'
+require 'database_consistency'
+
 namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do
@@ -43,6 +47,19 @@ namespace :schematics do
     task seed: :environment do
       Schematics::Engine.load_seed
     end
+
+    desc 'Run database consistency checks'
+    task consistency: :environment do
+      Rails.application.eager_load!
+      exit DatabaseConsistency
+        .run(Schematics::Engine.root.join('config', 'database_consistency.yml'))
+    end
+
+    ActiveRecordDoctor::Rake::Task.new do |task|
+      task.deps = [:environment]
+      task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')
+      task.setup = -> { Rails.application.eager_load! }
+    end
   end
 
   namespace :jobs do
@@ -56,16 +73,6 @@ namespace :schematics do
     desc 'Generate OpenAPI docs'
     task generate: :environment do
       OpenApi.write_docs
-    end
-  end
-
-  namespace :active_record do
-    desc 'Run all active_record_doctor detectors'
-    task doctor: :environment do
-      Rails.application.eager_load!
-      ActiveRecordDoctor::Runner
-        .new(ActiveRecordDoctor.current_config)
-        .run_all or exit(1)
     end
   end
 end

@@ -52,4 +52,8 @@ after_bundle do
 
   # Tests
   # run 'rake test'
+
+  # Database checks
+  rails_command 'schematics:db:active_record_doctor'
+  rails_command 'schematics:db:consistency'
 end

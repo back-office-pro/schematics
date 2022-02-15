@@ -28,6 +28,7 @@ module Schematics
           end
 
           def has_uniq_index? # rubocop:disable Naming/PredicateName
+            return false if token?
             return schema_attribute.unique? if schema_attribute
 
             super
@@ -55,6 +56,14 @@ module Schematics
             [super, ('column_options: { type: :uuid }' if @type == :join_table_second)]
               .compact
               .join(', ')
+          end
+
+          def index_name
+            if schema_attribute&.unique? && !schema_attribute&.case_sensitive?
+              "'lower(#{super})'.to_s"
+            else
+              super
+            end
           end
 
           private
