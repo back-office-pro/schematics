@@ -4,8 +4,8 @@ module Schematics
   module Imports
     class InsertData
       include Interactor
-      delegate :model_name, to: :@model_class, private: true
       RECORD_NOT_UNIQUE_REGEX = /DETAIL:  Key \((.+)\)=\((.+)\) (.+)\.\n/
+      delegate :model_name, to: :@model_class, private: true
 
       before do
         @import = context.import

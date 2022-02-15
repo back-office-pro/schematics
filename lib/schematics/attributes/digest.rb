@@ -4,15 +4,13 @@ module Schematics
   module Attributes
     class Digest < Attribute
       include Behaviours::Fillable
-
-      delegate :confirm?, to: :options
-
       REGEX = /
         (?=.*\d)           # contain at least one number
         (?=.*[a-z])        # contain at least one lowercase letter
         (?=.*[A-Z])        # contain at least one uppercase letter
         (?=.*[[:^alnum:]]) # contain at least one symbol
       /x
+      delegate :confirm?, to: :options
 
       def permitted_params
         [super, :"#{super}_confirmation"]
