@@ -7,10 +7,6 @@ module Schematics
         true
       end
 
-      def case_sensitive?
-        true
-      end
-
       def default
         SecureRandom.base58
       end
