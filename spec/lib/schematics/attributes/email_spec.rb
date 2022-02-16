@@ -20,7 +20,7 @@ describe Schematics::Attributes::Email do
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:envelope) }
   its(:input_type) { is_expected.to eq(:input) }
-  its(:default) { is_expected.to be_nil }
+  its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }
   its(:validators) { is_expected.to eq(email: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.email') }
@@ -61,7 +61,6 @@ describe Schematics::Attributes::Email do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:default) { is_expected.to match(/\w+@\w+\.com/) }
     its(:validators) { is_expected.to eq(presence: true, email: { allow_blank: false }) }
 
     its(:validate) do

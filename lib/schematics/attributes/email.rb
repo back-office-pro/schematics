@@ -8,9 +8,7 @@ module Schematics
       end
 
       def default
-        return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if unique? || required?
-
-        super
+        "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
       end
 
       def icon
