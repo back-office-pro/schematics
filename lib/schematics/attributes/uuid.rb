@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/securerandom'
+
 module Schematics
   module Attributes
     class Uuid < Attribute
       include Behaviours::Renderable
 
-      def default
-        return SecureRandom.uuid if unique? || required?
+      def unique?
+        true
+      end
 
-        super
+      def default
+        SecureRandom.uuid
       end
     end
   end
