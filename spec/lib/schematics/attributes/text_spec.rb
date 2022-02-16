@@ -24,6 +24,7 @@ describe Schematics::Attributes::Text do
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:text) }
   its(:input_type) { is_expected.to eq(:textarea) }
+  its(:default) { is_expected.to be_a(String) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
