@@ -20,6 +20,7 @@ describe Schematics::Attributes::RichText do
   its(:open_api_type) { is_expected.to eq('string') }
   its(:preload) { is_expected.to eq(:rich_text_summary) }
   its(:icon) { is_expected.to eq(:align_justify) }
+  its(:default) { is_expected.to eq('MyRichText') }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
