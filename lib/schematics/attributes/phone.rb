@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Phone < String
       def validators
-        super.merge(phone: { allow_blank: !required? })
+        super.merge(phone: { allow_blank: })
       end
 
       def default

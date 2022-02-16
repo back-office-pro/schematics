@@ -19,7 +19,7 @@ describe Schematics::Attributes::Currency do
   its(:type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq('number') }
-  its(:validators) { is_expected.to eq(numericality: { allow_nil: true }) }
+  its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:money_bill_wave) }
 
   describe '#format' do

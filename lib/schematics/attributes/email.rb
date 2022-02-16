@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Email < Citext
       def validators
-        super.merge(email: { allow_blank: !required? })
+        super.merge(email: { allow_blank: })
       end
 
       def default

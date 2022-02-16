@@ -8,6 +8,10 @@ module Schematics
     module Validatable
       delegate :unique?, :required?, to: :options
 
+      def allow_blank
+        not required?
+      end
+
       def case_sensitive?
         true
       end
@@ -22,7 +26,7 @@ module Schematics
 
       def validators
         {
-          uniqueness: ({ case_sensitive: case_sensitive?, allow_blank: !required? } if unique?),
+          uniqueness: ({ case_sensitive: case_sensitive?, allow_blank: } if unique?),
           presence: required?
         }.compact_blank
       end

@@ -6,7 +6,7 @@ module Schematics
       delegate :unit, :precision, to: :options
 
       def validators
-        super.merge(numericality: { allow_nil: !required? })
+        super.merge(numericality: { allow_blank: })
       end
 
       def format(value)

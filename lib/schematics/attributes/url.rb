@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Url < Citext
       def validators
-        super.merge(url: { allow_blank: !required? })
+        super.merge(url: { allow_blank: })
       end
 
       def default

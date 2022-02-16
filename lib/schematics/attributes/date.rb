@@ -19,7 +19,7 @@ module Schematics
       def validators
         super.merge(
           {
-            date: { allow_blank: !required? }.merge(
+            date: { allow_blank: }.merge(
               options
                 .slice(*ALLOWLIST)
                 .to_h

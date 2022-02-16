@@ -16,7 +16,7 @@ module Schematics
       def validators
         super.merge(
           {
-            allow_blank: !required?,
+            allow_blank:,
             format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type }
           }.compact_blank
         )
