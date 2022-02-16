@@ -13,6 +13,19 @@ module Schematics
           .upcase
       end
 
+      def validators
+        super.merge(
+          {
+            allow_blank: !required?,
+            format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type }
+          }.compact_blank
+        )
+      end
+
+      def default
+        'image/png'
+      end
+
       def icon
         :file
       end

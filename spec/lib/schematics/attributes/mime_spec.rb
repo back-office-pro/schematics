@@ -20,12 +20,19 @@ describe Schematics::Attributes::Mime do
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:file) }
   its(:input_type) { is_expected.to eq(:input) }
-  its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its(:default) { is_expected.to eq('image/png') }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_attachments.content_type') }
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
+
+  its(:validators) do
+    is_expected.to eq(
+      {
+        allow_blank: true,
+        format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type }
+      }
+    )
+  end
 
   describe '#format' do
     subject { attribute.format(value) }

@@ -4,6 +4,7 @@ en:
     created_at: creation date
   errors:
     messages:
+      mime_type: is not a valid MIME type
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
     virtuals:
       name: "$%{name} is not a defined variable"
