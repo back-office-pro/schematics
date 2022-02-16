@@ -8,9 +8,7 @@ module Schematics
       end
 
       def default
-        return "www.#{SecureRandom.base58}.com" if unique? || required?
-
-        super
+        "https://www.#{SecureRandom.base58}.com"
       end
 
       def icon
