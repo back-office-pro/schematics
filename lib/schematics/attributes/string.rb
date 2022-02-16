@@ -28,6 +28,12 @@ module Schematics
       def icon
         :font_case
       end
+
+      protected
+
+      def migration_options
+        super.concat %i[limit]
+      end
     end
   end
 end
