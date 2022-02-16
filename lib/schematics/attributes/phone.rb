@@ -8,9 +8,7 @@ module Schematics
       end
 
       def default
-        return Array.new(10) { rand(10) }.to_s if unique? || required?
-
-        super
+        Array.new(10) { rand(10) }.join
       end
 
       def format(value)

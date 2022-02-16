@@ -20,7 +20,7 @@ describe Schematics::Attributes::Phone do
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:phone) }
   its(:input_type) { is_expected.to eq(:input) }
-  its(:default) { is_expected.to be_nil }
+  its(:default) { is_expected.to match(/\d+/) }
   its(:validators) { is_expected.to eq(phone: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.phone') }
@@ -42,7 +42,6 @@ describe Schematics::Attributes::Phone do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    its(:default) { is_expected.to match(/\d+/) }
 
     its(:validators) do
       is_expected.to eq(
