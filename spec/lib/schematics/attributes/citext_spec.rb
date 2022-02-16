@@ -21,7 +21,7 @@ describe Schematics::Attributes::Citext do
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:font_case) }
   its(:input_type) { is_expected.to eq(:input) }
-  its(:default) { is_expected.to be_nil }
+  its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
   its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }
@@ -38,7 +38,6 @@ describe Schematics::Attributes::Citext do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    its(:default) { is_expected.not_to be_nil }
     its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: false, allow_blank: true }) }
 
     its(:validate) do
