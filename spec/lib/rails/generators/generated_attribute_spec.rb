@@ -85,7 +85,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:has_uniq_index?) { is_expected.to be_truthy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(null: false) }
-    its(:default) { is_expected.to match(/\w+@\w+\.com/) }
+    its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }
     it { is_expected.to be_required }
   end
 
