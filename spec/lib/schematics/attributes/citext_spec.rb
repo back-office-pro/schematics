@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Attributes::String do
+describe Schematics::Attributes::Citext do
   subject(:attribute) { described_class.new(entity, name, options) }
 
   let(:entity) { Schematics::Entities::Entity.build(name: 'user') }
@@ -14,8 +14,9 @@ describe Schematics::Attributes::String do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
+  it { is_expected.not_to be_case_sensitive }
 
-  its(:type) { is_expected.to eq('string') }
+  its(:type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('last_name') }
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:align_justify) }
@@ -33,20 +34,20 @@ describe Schematics::Attributes::String do
     RUBY
   end
 
-  context 'when string is unique' do
+  context 'when attribute is unique' do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: true, allow_blank: true }) }
+    its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: false, allow_blank: true }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :last_name, {:uniqueness=>{:case_sensitive=>true, :allow_blank=>true}}
+        validates :last_name, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}}
       RUBY
     end
   end
 
-  context 'when string is required' do
+  context 'when attribute is required' do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }

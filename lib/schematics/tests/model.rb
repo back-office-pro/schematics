@@ -58,10 +58,6 @@ module Schematics
               refute record.valid?
               assert_not_nil record.errors[attribute.name.to_sym]
             end
-
-            test "#{attribute} should be required when unique" do
-              assert attribute.required?
-            end
           end
         end
 
@@ -106,7 +102,7 @@ module Schematics
         def test_float_attributes
           entity.float_attributes.each do |float|
             test "#{float.name} should have numericality validator" do
-              assert float.validators[:numericality][:allow_nil] == !float.required?
+              assert float.validators[:numericality][:allow_blank] == !float.required?
             end
           end
         end
@@ -136,7 +132,7 @@ module Schematics
               assert reflection.foreign_key == attribute.column_name
               assert reflection.options[:inverse_of] == attribute.inverse_association.name.to_sym
               assert reflection.options[:optional] == !attribute.required?
-              assert reflection.options[:polymorphic] == (attribute.polymorphic? || false)
+              assert reflection.options[:polymorphic] == attribute.polymorphic?
             end
           end
         end

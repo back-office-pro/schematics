@@ -15,7 +15,8 @@
           "name": "email",
           "type": "email",
           "options": {
-            "unique": true
+            "unique": true,
+            "required": true
           }
         },
         {
@@ -239,9 +240,10 @@
       "attributes": [
         {
           "name": "name",
-          "type": "string",
+          "type": "citext",
           "options": {
-            "unique": true
+            "unique": true,
+            "required": true
           }
         }
       ]

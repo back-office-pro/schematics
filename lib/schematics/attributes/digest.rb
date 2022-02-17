@@ -19,8 +19,8 @@ module Schematics
       def validators
         super.merge(
           {
-            allow_blank: !required?,
-            confirmation: ({ allow_blank: !required? } if confirm?),
+            allow_blank:,
+            confirmation: ({ allow_blank: } if confirm?),
             format: { with: REGEX, message: :password },
             length: {
               minimum: options.min,

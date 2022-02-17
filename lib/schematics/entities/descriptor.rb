@@ -24,7 +24,9 @@ module Schematics
 
       def to_str
         <<~RUBY
-          alias_attribute :to_s, :#{name}_formatted
+          def to_s
+            #{name}_formatted || id
+          end
         RUBY
       end
 

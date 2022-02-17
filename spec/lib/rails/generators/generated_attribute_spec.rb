@@ -80,12 +80,12 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'schema:user_email' }
 
     its(:name) { is_expected.to eq('email') }
-    its(:type) { is_expected.to eq(:string) }
+    its(:type) { is_expected.to eq(:citext) }
     its(:has_index?) { is_expected.to be_truthy }
     its(:has_uniq_index?) { is_expected.to be_truthy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(null: false) }
-    its(:default) { is_expected.to match(/\w+@\w+\.com/) }
+    its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }
     it { is_expected.to be_required }
   end
 

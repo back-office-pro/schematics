@@ -28,6 +28,7 @@ module Schematics
           end
 
           def has_uniq_index? # rubocop:disable Naming/PredicateName
+            return false if token?
             return schema_attribute.unique? if schema_attribute
 
             super

@@ -17,7 +17,9 @@ describe Schematics::Entities::Descriptor do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      alias_attribute :to_s, :type_formatted
+      def to_s
+        type_formatted || id
+      end
     RUBY
   end
 end

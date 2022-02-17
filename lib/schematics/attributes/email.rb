@@ -2,15 +2,13 @@
 
 module Schematics
   module Attributes
-    class Email < String
+    class Email < Citext
       def validators
-        super.merge(email: true)
+        super.merge(email: { allow_blank: })
       end
 
       def default
-        return "#{SecureRandom.base58}@#{SecureRandom.base58}.com" if required?
-
-        super
+        "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
       end
 
       def icon

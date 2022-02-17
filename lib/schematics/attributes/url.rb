@@ -2,15 +2,13 @@
 
 module Schematics
   module Attributes
-    class Url < String
+    class Url < Citext
       def validators
-        super.merge(url: true)
+        super.merge(url: { allow_blank: })
       end
 
       def default
-        return "www.#{SecureRandom.base58}.com" if required?
-
-        super
+        "https://www.#{SecureRandom.base58}.com"
       end
 
       def icon

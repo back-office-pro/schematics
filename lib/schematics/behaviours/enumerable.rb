@@ -6,7 +6,7 @@ module Schematics
       delegate :values, to: :options
 
       def validators
-        super.merge(inclusion: { in: values }, allow_blank: !required?)
+        super.merge({ inclusion: { in: values }, allow_blank: }.compact_blank)
       end
 
       def input_type
@@ -26,7 +26,7 @@ module Schematics
       end
 
       def default
-        super || values.first
+        values.first
       end
     end
   end

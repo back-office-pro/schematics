@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/securerandom'
-
 module Schematics
   module Attributes
     class String < Text
@@ -23,18 +21,18 @@ module Schematics
         )
       end
 
-      def default
-        return SecureRandom.base58 if unique?
-
-        super
-      end
-
       def input_type
         :input
       end
 
-      def format(value)
-        value&.to_s
+      def icon
+        :align_justify
+      end
+
+      protected
+
+      def migration_options
+        super.concat %i[limit]
       end
     end
   end

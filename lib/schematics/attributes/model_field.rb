@@ -4,7 +4,6 @@ module Schematics
   module Attributes
     class ModelField < String
       include Behaviours::Enumerable
-
       delegate :depends_on, to: :options
 
       def format(value)

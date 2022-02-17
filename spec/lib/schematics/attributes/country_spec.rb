@@ -48,14 +48,11 @@ describe Schematics::Attributes::Country do
     let(:options) { { required: true } }
 
     its(:input_collection) { is_expected.to eq([%w[FR France]]) }
-
-    its(:validators) do
-      is_expected.to eq(inclusion: { in: ['FR'] }, presence: true, allow_blank: false)
-    end
+    its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, presence: true) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"]}, :allow_blank=>false}
+        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"]}}
       RUBY
     end
   end

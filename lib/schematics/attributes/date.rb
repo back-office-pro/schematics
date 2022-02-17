@@ -19,7 +19,7 @@ module Schematics
       def validators
         super.merge(
           {
-            date: { allow_blank: !required? }.merge(
+            date: { allow_blank: }.merge(
               options
                 .slice(*ALLOWLIST)
                 .to_h
@@ -32,8 +32,6 @@ module Schematics
       def default
         return ::Time.zone.today.to_s(:db) if options.before
         return ::Time.zone.tomorrow.to_s(:db) if options.after
-
-        super
       end
 
       def icon

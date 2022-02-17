@@ -10,8 +10,6 @@ module Schematics
       def default
         return ::Time.current.yesterday.to_s(:db) if options.before
         return ::Time.current.tomorrow.to_s(:db) if options.after
-
-        super
       end
     end
   end

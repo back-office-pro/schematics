@@ -24,19 +24,19 @@ describe Schematics::Attributes::Decimal do
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq('number') }
   its(:unit) { is_expected.to eq('$') }
-  its(:validators) { is_expected.to eq(numericality: { allow_nil: true }) }
+  its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:sort_numeric_up) }
 
   context 'when decimal has precision' do
     let(:options) { { precision: 2 } }
 
     its(:validators) do
-      is_expected.to eq(numericality: { allow_nil: true, greater_than: -100, less_than: 100 })
+      is_expected.to eq(numericality: { allow_blank: true, greater_than: -100, less_than: 100 })
     end
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :price, {:numericality=>{:allow_nil=>true, :greater_than=>-100, :less_than=>100}}
+        validates :price, {:numericality=>{:allow_blank=>true, :greater_than=>-100, :less_than=>100}}
       RUBY
     end
   end

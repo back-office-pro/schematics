@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/securerandom'
+
 module Schematics
   module Attributes
     class Text < Attribute
@@ -14,18 +16,26 @@ module Schematics
         RUBY
       end
 
+      def default
+        SecureRandom.base58
+      end
+
       def icon
-        :align_justify
+        :font
       end
 
       def input_type
         :textarea
       end
 
+      def format(value)
+        value&.to_s
+      end
+
       protected
 
       def migration_options
-        super.concat %i[default limit]
+        super.concat %i[default]
       end
     end
   end

@@ -3,18 +3,20 @@
 module Schematics
   module Attributes
     class Options
-      delegate :slice, to: :@options
+      delegate :slice, :fetch, :dig, :key?, to: :@options
 
       def initialize(options)
         @options = options
       end
 
       def method_missing(method_name)
-        @options[method_name.to_s.chomp('?').to_sym]
+        return dig(method_name) unless method_name.end_with?('?')
+
+        fetch(method_name.to_s.chomp('?').to_sym, false)
       end
 
       def respond_to_missing?(method_name)
-        @options.key?(method_name.to_s.chomp('?').to_sym)
+        key?(method_name.to_s.chomp('?').to_sym)
       end
     end
   end

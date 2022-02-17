@@ -4,13 +4,11 @@ module Schematics
   module Attributes
     class Phone < String
       def validators
-        super.merge(phone: true)
+        super.merge(phone: { allow_blank: })
       end
 
       def default
-        return Array.new(10) { rand(10) }.to_s if required?
-
-        super
+        Array.new(10) { rand(10) }.join
       end
 
       def format(value)

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_record_doctor'
-
 ActiveRecordDoctor.configure do
   global :ignore_tables, %w[
     ar_internal_metadata

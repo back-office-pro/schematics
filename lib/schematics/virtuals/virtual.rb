@@ -49,6 +49,7 @@ module Schematics
 
       def to_str
         <<~RUBY
+          define_attribute_method :#{@name}
           def #{@name}
             #{function}
           rescue StandardError => e
