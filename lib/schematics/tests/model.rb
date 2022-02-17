@@ -102,7 +102,7 @@ module Schematics
         def test_float_attributes
           entity.float_attributes.each do |float|
             test "#{float.name} should have numericality validator" do
-              assert float.validators[:numericality][:allow_nil] == !float.required?
+              assert float.validators[:numericality][:allow_blank] == !float.required?
             end
           end
         end
