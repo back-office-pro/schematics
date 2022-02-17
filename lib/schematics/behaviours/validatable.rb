@@ -9,7 +9,7 @@ module Schematics
       delegate :unique?, :required?, to: :options
 
       def allow_blank
-        not required?
+        !required?
       end
 
       def case_sensitive?
