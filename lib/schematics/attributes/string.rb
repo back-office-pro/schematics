@@ -26,7 +26,7 @@ module Schematics
       end
 
       def icon
-        :font_case
+        :align_justify
       end
 
       protected

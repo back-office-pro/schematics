@@ -21,7 +21,7 @@ module Schematics
       end
 
       def icon
-        :text
+        :font
       end
 
       def input_type
