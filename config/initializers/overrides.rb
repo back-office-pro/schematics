@@ -44,6 +44,14 @@ Rails.configuration.to_prepare do
     end
   end
 
+  if defined?(Role)
+    Role.singleton_class.class_eval do
+      def admin
+        @admin ||= find_by(name: 'Admin')
+      end
+    end
+  end
+
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming?
       false

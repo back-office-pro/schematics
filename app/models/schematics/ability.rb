@@ -25,11 +25,7 @@ module Schematics
     private
 
     def admin?
-      @user.role == admin_role
-    end
-
-    def admin_role
-      @admin_role ||= Role.find_by(name: 'Admin')
+      @user.role == Role.admin
     end
 
     def aliases
@@ -42,7 +38,7 @@ module Schematics
     def default_restrictions
       cannot %i[destroy archive], user
       cannot :update, user, :role_id
-      cannot %i[update destroy archive], admin_role
+      cannot %i[update destroy archive], Role.admin
       cannot %i[show update destroy archive import], Message
       can :show, Message, recipient: user
       can :show, Message, author: user
