@@ -23,7 +23,9 @@ module Schematics
       private
 
       def filepath
-        ActiveStorage::Blob.service.send(:path_for, @import.file.key)
+        ActiveStorage::Blob
+          .service
+          .path_for(@import.file.key)
       end
 
       def convert_row(row)

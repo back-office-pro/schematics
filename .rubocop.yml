@@ -69,7 +69,7 @@ Style/MethodCalledOnDoEndBlock:
 Style/ReturnNil:
   Enabled: true
 Style/Send:
-  Enabled: false # TODO: enable
+  Enabled: true
 Style/SingleLineBlockParams:
   Enabled: true
 Style/StringHashKeys:

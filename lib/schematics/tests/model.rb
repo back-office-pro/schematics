@@ -44,7 +44,7 @@ module Schematics
         def test_required?
           entity.attributes.select(&:required?).each do |attribute|
             test "invalid without #{attribute.name}" do
-              record.send("#{attribute.name}=", nil)
+              record.public_send("#{attribute.name}=", nil)
               refute record.valid?
               assert_not_nil record.errors[attribute.name.to_sym]
             end
@@ -54,7 +54,7 @@ module Schematics
         def test_unique?
           entity.attributes.select(&:unique?).each do |attribute|
             test "invalid without unique #{attribute.name}" do
-              record.send("#{attribute.name}=", other_record.send(attribute.name))
+              record.public_send("#{attribute.name}=", other_record.public_send(attribute.name))
               refute record.valid?
               assert_not_nil record.errors[attribute.name.to_sym]
             end
@@ -88,7 +88,7 @@ module Schematics
         def test_enum_attributes
           entity.enum_attributes.each do |enum|
             test "#{enum.name} should have inclusion validator" do
-              keys = model_class.send(enum.name.pluralize.to_sym).keys
+              keys = model_class.public_send(enum.name.pluralize.to_sym).keys
               assert enum.validators[:inclusion][:in] == keys
             end
             enum.values.each do |value|
@@ -199,11 +199,11 @@ module Schematics
       protected
 
       def record
-        @record ||= send(entity.table_name.pluralize, :one)
+        @record ||= __send__(entity.table_name.pluralize, :one)
       end
 
       def other_record
-        @other_record ||= send(entity.table_name.pluralize, :two)
+        @other_record ||= __send__(entity.table_name.pluralize, :two)
       end
     end
   end

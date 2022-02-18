@@ -35,8 +35,8 @@ class ChartDecorator < Draper::Decorator
 
     model_class
       .joins(joins)
-      .send(x_agregate.to_sym, entity_x_field&.to_sql || :all)
-      .send(y_agregate.to_sym, entity_y_field&.to_sql || :all)
+      .public_send(x_agregate.to_sym, entity_x_field&.to_sql || :all)
+      .public_send(y_agregate.to_sym, entity_y_field&.to_sql || :all)
       .to_h do |key, value|
         [entity_x_field&.format(key) || key, entity_y_field&.format(value) || value]
       end

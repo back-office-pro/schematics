@@ -309,7 +309,7 @@ module Schematics
       end
 
       def record
-        @record ||= send(entity.table_name.pluralize, :one)
+        @record ||= __send__(entity.table_name.pluralize, :one)
       end
 
       def login(formats: nil)
@@ -328,7 +328,7 @@ module Schematics
           entity.table_name.to_sym => entity.fillable_elements.to_h do |element|
             [
               element.column_name.to_sym,
-              element.send(default_attribute) || record.send(element.column_name)
+              element.public_send(default_attribute) || record.public_send(element.column_name)
             ]
           end
         }

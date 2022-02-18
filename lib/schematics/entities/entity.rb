@@ -53,19 +53,20 @@ module Schematics
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
-          send(method.to_sym).send(predicate, Schematics.const_get(mod).const_get(constant))
+          public_send(method.to_sym)
+            .public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
           case constant
           when :Migratable
-            send(method.to_sym).send(predicate, Behaviours::Migratable)
+            public_send(method.to_sym).public_send(predicate, Behaviours::Migratable)
           when :Fillable
-            send(method.to_sym)
-              .send(predicate, Behaviours::Fillable)
+            public_send(method.to_sym)
+              .public_send(predicate, Behaviours::Fillable)
               .reject(&:hidden?)
               .reject(&:readonly?)
           else
-            send(method.to_sym)
-              .send(predicate, Behaviours.const_get(constant))
+            public_send(method.to_sym)
+              .public_send(predicate, Behaviours.const_get(constant))
               .reject(&:hidden?)
           end
         else
