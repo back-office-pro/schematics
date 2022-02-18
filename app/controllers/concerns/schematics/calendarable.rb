@@ -41,11 +41,11 @@ module Schematics
     end
 
     def calendar_start_attribute
-      entity.datetime_attributes.first.name.to_sym # FIXME: could work randomly
+      entity.datetime_attributes.first.name.to_sym # TODO: could work randomly
     end
 
     def calendar_end_attribute
-      entity.datetime_attributes.second.name.to_sym # FIXME: could work randomly
+      entity.datetime_attributes.second.name.to_sym # TODO: could work randomly
     end
   end
 end
