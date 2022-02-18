@@ -10,9 +10,8 @@ module Schematics
         where: filter_params.except(:with_deleted),
         order: sorting_params,
         scope_results: lambda do |results|
-          results
-            .yield_self { _1.with_deleted if filter_params.key?(:with_deleted) }
-            .accessible_by(current_ability)
+          results = results.with_deleted if filter_params.key?(:with_deleted)
+          results.accessible_by(current_ability)
         end
       }
     end
