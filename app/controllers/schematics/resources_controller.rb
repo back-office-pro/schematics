@@ -216,9 +216,9 @@ module Schematics
       @resource = model_class
                   .includes(entity.includes)
                   .includes(:slugs)
-      @resource = @resource.with_deleted if request.delete?
-      @resource = @resource.finder(params[:id])
-      @resource = @resource.decorate rescue @resource
+                  .yield_self { _1.with_deleted if request.delete? }
+                  .finder(params[:id])
+                  .safe_decorate
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to @resource, status: :moved_permanently

@@ -53,12 +53,19 @@ module Schematics
       end
     end
 
+    def safe_decorate
+      decorate
+    rescue Draper::UninferrableDecoratorError
+      self
+    end
+
     def attribute_formatted(attr)
+      value = safe_decorate.public_send(attr)
       self
         .class
         .entity
         .find_field_by_name(attr)
-        .try(:format, public_send(attr)) || public_send(attr)
+        .try(:format, value) || value
     end
   end
 end
