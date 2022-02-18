@@ -15,7 +15,7 @@ module Schematics
         fixtures 'active_storage/attachments'
         fixtures 'active_storage/blobs'
 
-        subject(:model) { send(entity_fixtures, :one) }
+        subject(:model) { __send__(entity_fixtures, :one) }
 
         it { is_expected.to be_valid }
         it { is_expected.to have_implicit_order_column(:created_at) }

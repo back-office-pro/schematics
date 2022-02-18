@@ -76,7 +76,7 @@ module Schematics
                     match: :first,
                     allow_label_click: true
             when Attributes::Boolean
-              check(input) if record.send(element.name)
+              check(input) if record.public_send(element.name)
             when Attributes::Attachments
               attach_file "#{input}[]",
                           element.default.first.path,
@@ -101,7 +101,7 @@ module Schematics
             when Attributes::Date
               fill_in input, with: element.default.to_date
             else
-              fill_in input, with: element.default || record.send(element.name)
+              fill_in input, with: element.default || record.public_send(element.name)
             end
           end
         end
