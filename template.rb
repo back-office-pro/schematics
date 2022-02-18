@@ -22,7 +22,7 @@ after_bundle do
   rails_command 'generate erd:install'
   rails_command 'db:reset'
   rails_command 'db:migrate'
-  rails_command 'db:fixtures:load'
+  rails_command 'db:fixtures:load FIXTURES=users,charts,stats,clients,sub_categories,categories,products,orders' # rubocop:disable Layout/LineLength
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
   rails_command 'schematics:licence:renew[enterprise,12]'
