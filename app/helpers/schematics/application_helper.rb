@@ -11,6 +11,7 @@ module Schematics
         Setting
           .with_attached_company_logo
           .instance
+          .decorate
           .public_send(key)
       end
     end

@@ -184,7 +184,6 @@
           "name": "company_name",
           "type": "string",
           "options": {
-            "required": true,
             "cached": true
           }
         },
@@ -213,7 +212,6 @@
           "name": "theme_color",
           "type": "color",
           "options": {
-            "required": true,
             "cached": true
           }
         }

@@ -3,6 +3,10 @@
 class SettingDecorator < Draper::Decorator
   delegate_all
 
+  def company_name
+    super || Rails.application.class.module_parent_name
+  end
+
   def theme_color
     super || Rails.configuration.theme_color
   end
