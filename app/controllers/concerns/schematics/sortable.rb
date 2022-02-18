@@ -8,11 +8,11 @@ module Schematics
       return { created_at: { order: :desc, unmapped_type: 'long' } } unless params[:sort]
 
       ordering = {}
-      sort_order = { '+' => :asc, '-' => :desc }
+      sort_order = { '+': :asc, '-': :desc }
       sorted_params = params[:sort].split(',')
       sorted_params.each do |sorted_param|
         sort_sign = sorted_param.match?(/\A[+-]/) ? sorted_param.slice!(0) : '+'
-        ordering[sorted_param] = { order: sort_order[sort_sign] }
+        ordering[sorted_param] = { order: sort_order[sort_sign.to_sym] }
       end
       ordering
     end

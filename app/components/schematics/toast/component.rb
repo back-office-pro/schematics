@@ -13,7 +13,7 @@ module Schematics
       end
 
       def css_class
-        { 'notice' => 'success', 'alert' => 'danger' }[type]
+        { notice: 'success', alert: 'danger' }[type.to_sym]
       end
 
       def animated?

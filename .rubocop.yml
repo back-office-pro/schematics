@@ -73,7 +73,9 @@ Style/Send:
 Style/SingleLineBlockParams:
   Enabled: true
 Style/StringHashKeys:
-  Enabled: false # TODO: enable
+  Enabled: true
+  Exclude:
+    - spec/**/*
 Style/StringMethods:
   Enabled: true
 Style/TrailingCommaInBlockArgs:

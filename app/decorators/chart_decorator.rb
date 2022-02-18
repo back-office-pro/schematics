@@ -14,14 +14,14 @@ class ChartDecorator < Draper::Decorator
     return :exclamation_triangle unless model_class
 
     {
-      'line' => :chart_line,
-      'pie' => :chart_pie,
-      'bar' => :chart_bar,
-      'area' => :chart_area,
-      'scatter' => :chart_scatter,
-      'column' => :analytics,
-      'geo' => :globe
-    }[kind]
+      line: :chart_line,
+      pie: :chart_pie,
+      bar: :chart_bar,
+      area: :chart_area,
+      scatter: :chart_scatter,
+      column: :analytics,
+      geo: :globe
+    }[kind.to_sym]
   end
 
   def to_s

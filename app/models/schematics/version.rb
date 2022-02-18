@@ -40,15 +40,15 @@ module Schematics
 
     def icon
       {
-        'update' => :edit,
-        'create' => :plus,
-        'import' => :cloud_upload_alt,
-        'revert' => :undo,
-        'destroy' => :trash,
-        'archive' => :archive,
-        'restore' => :trash_restore,
-        'show' => :eye
-      }[event] || entity.find_event_by_name(event).try(:icon)
+        update: :edit,
+        create: :plus,
+        import: :cloud_upload_alt,
+        revert: :undo,
+        destroy: :trash,
+        archive: :archive,
+        restore: :trash_restore,
+        show: :eye
+      }[event.to_sym] || entity.find_event_by_name(event).try(:icon)
     end
   end
 end

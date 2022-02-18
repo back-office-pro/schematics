@@ -13,14 +13,12 @@ module Schematics
         @data = context.data
       end
 
-      # rubocop:disable Rails/SkipsModelValidations
       def call
-        record_ids = @model_class.insert_all!(@data).pluck('id')
-        Schematics::Version.insert_all(record_ids.map(&method(:version)))
+        record_ids = @model_class.insert_all!(@data).pluck('id') # rubocop:disable Rails/SkipsModelValidations
+        Schematics::Version.insert_all(record_ids.map(&method(:version))) # rubocop:disable Rails/SkipsModelValidations
       rescue ActiveRecord::RecordNotUnique => e
-        context.fail!(errors: { 'Error' => e.message.scan(RECORD_NOT_UNIQUE_REGEX).join(' ') })
+        context.fail!(errors: { 'Error' => e.message.scan(RECORD_NOT_UNIQUE_REGEX).join(' ') }) # rubocop:disable Style/StringHashKeys
       end
-      # rubocop:enable Rails/SkipsModelValidations
 
       private
 
