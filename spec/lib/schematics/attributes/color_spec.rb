@@ -19,7 +19,7 @@ describe Schematics::Attributes::Color do
   its(:column_name) { is_expected.to eq('color') }
   its(:open_api_type) { is_expected.to eq('string') }
   its(:icon) { is_expected.to eq(:palette) }
-  its(:default) { is_expected.to eq('"#2c3e50"') }
+  its(:default) { is_expected.to eq('"#000000"') }
 
   its(:validators) do
     is_expected.to eq(allow_blank: true, format: { with: described_class::REGEX, message: :color })
