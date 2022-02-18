@@ -18,7 +18,7 @@ RSpec.describe User do
   describe '#email' do
     it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
     it { is_expected.to validate_presence_of(:email) }
-    it { is_expected.to have_db_column(:email).of_type(:string).with_options(null: false) }
+    it { is_expected.to have_db_column(:email).of_type(:citext).with_options(null: false) }
     it { is_expected.to have_db_index(:email).unique }
   end
 
