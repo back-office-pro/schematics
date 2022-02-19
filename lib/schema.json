@@ -180,6 +180,7 @@
         "type": {
           "type": "string",
           "enum": [
+            "action",
             "address",
             "attachment",
             "attachments",

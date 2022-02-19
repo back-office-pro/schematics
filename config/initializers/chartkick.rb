@@ -1,14 +1,12 @@
 # frozen_string_literal: false
 
-require 'chroma'
-
 # Make sure i18n translations are available
 Rails.configuration.after_initialize do
   Chartkick.options = {
     colors: defined?(Setting) &&
             Setting.table_exists? &&
             !ActiveRecord::Base.connection.migration_context.needs_migration? &&
-            Setting.instance.decorate.palette,
+            Setting.instance.try(:palette),
     height: '300px',
     empty: I18n.t('schematics.application.resource.empty'),
     refresh: 60,

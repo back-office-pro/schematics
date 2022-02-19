@@ -265,19 +265,10 @@
         },
         {
           "name": "action",
-          "type": "enum",
+          "type": "action",
           "options": {
             "required": true,
-            "readonly": true,
-            "values": [
-              "index",
-              "show",
-              "create",
-              "update",
-              "import",
-              "destroy",
-              "archive"
-            ]
+            "readonly": true
           }
         }
       ],

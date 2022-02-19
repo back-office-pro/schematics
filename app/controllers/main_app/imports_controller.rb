@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Schematics
+module MainApp
   module ImportsController
     extend ActiveSupport::Concern
 
     prepended do
-      include Nestable
+      include Schematics::Nestable
       skip_authorize_resource only: %i[new create template]
       after_action :enqueue_job, only: :create, if: -> { @resource.persisted? }
     end
@@ -13,9 +13,9 @@ module Schematics
     def template
       respond_to do |format|
         format.csv do
-          result = Resources::GenerateFileInBackground.call(
+          result = Schematics::Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
-            job: GenerateCsvTemplateJob,
+            job: Schematics::GenerateCsvTemplateJob,
             job_params: [parent_model_class.to_s],
             extension: 'csv',
             slug: parent_human_name_plural
@@ -30,7 +30,7 @@ module Schematics
     private
 
     def enqueue_job
-      ImportJob.perform_later(@resource.id, parent_model_class.to_s)
+      Schematics::ImportJob.perform_later(@resource.id, parent_model_class.to_s)
     end
   end
 end

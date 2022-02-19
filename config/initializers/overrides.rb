@@ -21,36 +21,10 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
-  ImportsController.prepend(Schematics::ImportsController) if defined?(ImportsController)
-
-  if defined?(User)
-    User.class_eval do
-      after_create :regenerate_password_reset_token
-      after_create { Schematics::UserMailer.new_account(self).deliver_later }
-    end
-  end
-
-  if defined?(Search)
-    Search.class_eval do
-      belongs_to :user
-    end
-  end
-
-  if defined?(Setting)
-    Setting.class_eval do
-      after_update -> { system('rake assets:clobber') }, if: :theme_color_previously_changed?
-      after_update -> { Chartkick.options[:colors] = decorate.palette },
-                   if: :theme_color_previously_changed?
-    end
-  end
-
-  if defined?(Role)
-    Role.singleton_class.class_eval do
-      def admin
-        @admin ||= find_by(name: 'Admin')
-      end
-    end
-  end
+  MainApp
+    .constants
+    .select { Object.const_defined?(_1) }
+    .each { Object.const_get(_1).prepend(MainApp.const_get(_1)) }
 
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming?

@@ -55,6 +55,7 @@ require 'strong_migrations'
 require 'js-routes'
 require 'strip_attributes'
 require 'i18n-inflector'
+require 'chroma'
 
 module Schematics
   class Engine < ::Rails::Engine

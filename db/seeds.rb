@@ -1,16 +1,9 @@
 # frozen_string_literal: true
 
-PaperTrail.enabled = false
-Schematics::Schema.instance.entities.each do |entity|
-  Permission
-    .actions
-    .keys
-    .select(&entity.method(:can?))
-    .each do |action|
-      Role
-        .find_or_create_by!(name: 'Admin')
-        .permissions
-        .push(Permission.find_or_create_by!(model: entity.class_name, action:))
-    end
+PaperTrail.request(enabled: false) do
+  Role.create!(name: 'Admin')
+  Schematics::Schema
+    .instance
+    .entities
+    .each(&Permission.method(:create_entity_permissions!))
 end
-PaperTrail.enabled = true
