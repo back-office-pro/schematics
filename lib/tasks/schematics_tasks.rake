@@ -37,7 +37,7 @@ namespace :schematics do
     desc 'Create admin user'
     task :admin, %i[email last_name first_name locale time_zone] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
-        User.create!(args.to_h.merge(password: 'Azerty1!', role: Role.find_by(name: 'Admin')))
+        User.create!(args.to_h.merge(password: 'Azerty1!', role: Role.admin))
       end
     end
   end

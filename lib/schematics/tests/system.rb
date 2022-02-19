@@ -22,7 +22,7 @@ module Schematics
             setup do
               Searchkick.enable_callbacks
               Engine.load_seed
-              current_user.update!(role: Role.find_by(name: 'Admin'))
+              current_user.update!(role: Role.admin)
               Licence.instance.update!(plan: 'enterprise', expires_at: 12.months.from_now)
               login
             end
