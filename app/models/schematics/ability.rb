@@ -19,7 +19,7 @@ module Schematics
     end
 
     def licence
-      @licence ||= Licence.instance.decorate
+      @licence ||= Licence.instance
     end
 
     private
@@ -55,12 +55,6 @@ module Schematics
       can :read, :admin_dashboard if admin?
       @user.role.permissions.each do |permission|
         can permission.action.to_sym, permission.model.constantize
-        # TODO: we should have a permission for each entity event
-        next unless permission.action.to_sym == :update
-
-        permission.model.constantize.entity.events.each do |event|
-          can event.name.to_sym, permission.model.constantize
-        end
       end
     end
 
@@ -78,12 +72,6 @@ module Schematics
       can(:revert, Version, user:)
       @user.role.permissions.each do |permission|
         can :read, Version, event: permission.action, item_type: permission.model
-        # TODO: we should have a permission for each entity event
-        next unless permission.action.to_sym == :update
-
-        permission.model.constantize.entity.events.each do |event|
-          can :read, Version, event: event.name, item_type: permission.model
-        end
       end
     end
 

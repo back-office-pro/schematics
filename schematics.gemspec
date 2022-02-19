@@ -57,7 +57,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'country_select', '~> 6.1.1'
   spec.add_dependency 'database_consistency', '~> 1.1.12'
   spec.add_dependency 'date_validator', '~> 0.12.0'
-  spec.add_dependency 'draper', '~> 4.0.2'
   spec.add_dependency 'easy_translate', '~> 0.5.1'
   spec.add_dependency 'font_awesome5_rails', '~> 1.5.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'

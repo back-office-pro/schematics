@@ -50,7 +50,6 @@ require 'i18n/beginning_of_week'
 require 'redis'
 require 'hiredis'
 require 'rack-mini-profiler'
-require 'draper'
 require 'aasm'
 require 'strong_migrations'
 require 'js-routes'
@@ -67,7 +66,6 @@ module Schematics
       generator.templates.unshift root.join('lib', 'templates')
       generator.assets false
       generator.helper false
-      generator.decorator false
       generator.template_engine nil
       generator.jbuilder nil
     end

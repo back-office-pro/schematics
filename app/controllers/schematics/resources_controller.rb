@@ -218,7 +218,6 @@ module Schematics
                   .includes(:slugs)
                   .yield_self { request.delete? ? _1.with_deleted : _1 }
                   .finder(params[:id])
-                  .safe_decorate
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to @resource, status: :moved_permanently

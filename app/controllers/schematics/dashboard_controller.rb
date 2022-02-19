@@ -6,11 +6,9 @@ module Schematics
       @charts = ::Chart
                 .left_joins(:roles)
                 .where(roles: [current_user.role, nil])
-                .decorate
       @stats = ::Stat
                .left_joins(:roles)
                .where(roles: [current_user.role, nil])
-               .decorate
     end
 
     def admin

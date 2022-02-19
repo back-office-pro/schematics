@@ -34,7 +34,7 @@ module Schematics
     end
 
     def settings
-      @settings ||= Setting.instance.decorate
+      @settings ||= Setting.instance
     end
 
     def options
