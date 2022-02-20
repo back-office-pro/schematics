@@ -12,14 +12,15 @@ module Schematics
                to: :@entity
 
       class << self
-        def build(command:, entity:, attribute: nil)
-          Commands.const_get(command.camelize.to_sym).new(entity, attribute)
+        def build(command:, entity:, attribute: nil, target: nil)
+          Commands.const_get(command.camelize.to_sym).new(entity, attribute, target)
         end
       end
 
-      def initialize(entity, attribute = nil)
+      def initialize(entity, attribute = nil, target = nil)
         @entity = entity
         @attribute = attribute
+        @target = target
       end
 
       def execute

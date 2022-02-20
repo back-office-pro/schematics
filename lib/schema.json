@@ -42,6 +42,9 @@
         "attribute": {
           "type": "string"
         },
+        "target": {
+          "type": "string"
+        },
         "timestamp": {
           "type": "integer"
         }
