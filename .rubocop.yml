@@ -44,6 +44,22 @@ Layout/MultilineHashKeyLineBreaks:
   Enabled: true
 Lint/HeredocMethodCallPosition:
   Enabled: true
+Lint/ConstantResolution:
+  Enabled: true
+  Only:
+    - User
+    - Message
+    - Setting
+    - Role
+    - Permission
+    - Import
+    - Licence
+    - Chart
+    - Stat
+  Exclude:
+    - spec/**/*
+    - db/*
+    - lib/tasks/*
 Naming/InclusiveLanguage:
   Enabled: true
 Style/AsciiComments:

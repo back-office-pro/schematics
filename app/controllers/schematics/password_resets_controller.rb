@@ -58,7 +58,7 @@ module Schematics
     private
 
     def model_class
-      User
+      ::User
     end
 
     def set_user

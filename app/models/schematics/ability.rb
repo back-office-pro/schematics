@@ -19,13 +19,13 @@ module Schematics
     end
 
     def licence
-      @licence ||= Licence.instance
+      @licence ||= ::Licence.instance
     end
 
     private
 
     def admin?
-      @user.role == Role.admin
+      @user.role == ::Role.admin
     end
 
     def aliases
@@ -38,15 +38,15 @@ module Schematics
     def default_restrictions
       cannot %i[destroy archive], user
       cannot :update, user, :role_id
-      cannot %i[update destroy archive], Role.admin
-      cannot %i[show update destroy archive import], Message
-      can :show, Message, recipient: user
-      can :show, Message, author: user
+      cannot %i[update destroy archive], ::Role.admin
+      cannot %i[show update destroy archive import], ::Message
+      can :show, ::Message, recipient: user
+      can :show, ::Message, author: user
       cannot :destroy, ActiveStorage::Attachment, { record_type: 'Import' }
     end
 
     def licence_restrictions
-      cannot :create, User if licence.quota_users_exceeded?
+      cannot :create, ::User if licence.quota_users_exceeded?
       cannot :create, ActiveStorage::Attachment if licence.quota_storage_exceeded?
       cannot :manage, :all if licence.expired?
     end

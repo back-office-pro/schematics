@@ -9,7 +9,7 @@ module Schematics
       end
 
       def current_user(auth_token)
-        User.find_by(auth_token:) if auth_token
+        ::User.find_by(auth_token:) if auth_token
       end
     end
   end

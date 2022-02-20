@@ -21,8 +21,8 @@ module Schematics
 
             setup do
               Engine.load_seed
-              current_user.update!(role: Role.admin)
-              Licence.instance.update!(plan: 'enterprise', expires_at: 12.months.from_now)
+              current_user.update!(role: ::Role.admin)
+              ::Licence.instance.update!(plan: 'enterprise', expires_at: 12.months.from_now)
             end
 
             test_index_api

@@ -20,7 +20,7 @@ module Schematics
     end
 
     def current_user
-      @current_user ||= User
+      @current_user ||= ::User
                         .includes(avatar_attachment: [blob: :variant_records], role: :permissions)
                         .find_by(auth_token: cookies[:auth_token] || auth_token&.dig(:auth_token))
     end

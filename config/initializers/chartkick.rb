@@ -3,7 +3,7 @@
 # Make sure i18n translations are available
 Rails.configuration.after_initialize do
   Chartkick.options = {
-    colors: (Setting.instance.palette rescue []),
+    colors: (::Setting.instance.palette rescue []),
     height: '300px',
     empty: I18n.t('schematics.application.resource.empty'),
     refresh: 60,

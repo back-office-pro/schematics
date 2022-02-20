@@ -9,7 +9,7 @@ module Schematics
       before do
         @params = context.user_params
         @password = context.password || @params[:password]
-        @user = context.resource || User.find_by(email: @params[:email])
+        @user = context.resource || ::User.find_by(email: @params[:email])
         @remember_me = @params&.fetch(:remember_me, false)
         @cookies = context.cookies&.tap { _1.permanent if @remember_me }
       end

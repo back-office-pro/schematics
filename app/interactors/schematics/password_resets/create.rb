@@ -6,7 +6,7 @@ module Schematics
       include Interactable
 
       before do
-        @user = User.find_by(email: context.email)
+        @user = ::User.find_by(email: context.email)
       end
 
       def call
