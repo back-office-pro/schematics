@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-describe Schematics::System do
-  subject(:system) { described_class }
+describe Schematics::Commands::CreateEntity do
+  subject(:command) { described_class.new(entity) }
 
   let(:entity) { Schematics::Entities::Entity.build(name:, attributes:, associations:) }
   let(:name) { 'assembly' }
@@ -32,8 +32,8 @@ describe Schematics::System do
     ]
   end
 
-  describe '.generate' do
-    subject { system.generate(entity) }
+  describe '#execute' do
+    subject { command.execute }
 
     let(:expected_command_lines) do
       [
@@ -49,38 +49,13 @@ describe Schematics::System do
 
     context 'when entity class is already defined' do
       let(:name) { 'object' }
-      let(:expected_command_lines) do
-        [
-          'rails generate scaffold_controller object --skip-resource-route'
-        ]
+      let(:expected_command_line) do
+        <<~SHELL
+          rails generate scaffold_controller object --skip-resource-route
+        SHELL
       end
 
-      it { is_expected.to eq(expected_command_lines) }
+      it { is_expected.to eq(expected_command_line) }
     end
-  end
-
-  describe '.destroy_entity' do
-    subject { system.destroy_entity(entity) }
-
-    let(:expected_command_lines) do
-      [
-        'rails destroy scaffold assembly --skip-migration --skip-resource-route',
-        'rails generate migration drop_assemblies_table schema:assembly_name schema:assembly_owner'
-      ]
-    end
-
-    it { is_expected.to eq(expected_command_lines) }
-  end
-
-  describe '.destroy_entity_attribute' do
-    subject { system.destroy_entity_attribute(entity, 'name') }
-
-    let(:expected_command_lines) do
-      [
-        'rails generate migration remove_name_from_assemblies schema:assembly_name'
-      ]
-    end
-
-    it { is_expected.to eq(expected_command_lines) }
   end
 end

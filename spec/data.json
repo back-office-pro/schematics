@@ -243,15 +243,26 @@
   ],
   "migrations": [
     {
-      "action": "destroy_entity_attribute",
+      "command": "remove_attribute",
       "entity": "product",
       "attribute": "description",
-      "timestamp": 20210515130024
+      "timestamp": 20230515130024
     },
     {
-      "action": "destroy_entity",
+      "command": "add_attribute",
+      "entity": "product",
+      "attribute": "description",
+      "timestamp": 20230515130024
+    },
+    {
+      "command": "destroy_entity",
       "entity": "client",
-      "timestamp": 20210515130024
+      "timestamp": 20230515130024
+    },
+    {
+      "command": "create_entity",
+      "entity": "client",
+      "timestamp": 20230515130024
     }
   ]
 }

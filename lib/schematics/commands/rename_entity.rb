@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Commands
+    class RenameEntity < Command
+      def execute
+        [
+          "rails generate migration rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}",
+          "rails destroy scaffold #{old_name} --skip-migration --skip-resource-route",
+          "rails 'schematics:permissions:rename[#{old_class_name},#{class_name}]'"
+        ]
+      end
+
+      private
+
+      def old_name
+        @attribute
+      end
+
+      def old_class_name
+        old_name.camelize
+      end
+
+      def old_table_name
+        old_name.tr('/', '_')
+      end
+    end
+  end
+end

@@ -2,26 +2,30 @@
 
 module Schematics
   class Migration
+    delegate :execute, to: :command
+
     class << self
-      def build(schema, action:, entity:, timestamp:, attribute: nil)
+      def build(schema, command:, entity:, timestamp:, attribute: nil)
         entity = schema.find_entity_by_name(entity)
-        new(action, entity, attribute, timestamp)
+        new(command, entity, attribute, timestamp)
       end
     end
 
-    def initialize(action, entity, attribute, timestamp)
-      @action = action
-      @timestamp = timestamp
+    def initialize(command, entity, attribute, timestamp)
+      @command = command
       @entity = entity
       @attribute = attribute
+      @timestamp = timestamp
     end
 
     def migrated?
       @timestamp < ::ApplicationRecord.connection.migration_context.current_version
     end
 
-    def run
-      System.public_send(@action.to_sym, *[@entity, @attribute].compact)
+    private
+
+    def command
+      Commands::Command.build(command: @command, entity: @entity, attribute: @attribute)
     end
   end
 end
