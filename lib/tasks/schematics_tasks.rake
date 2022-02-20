@@ -55,14 +55,22 @@ namespace :schematics do
     desc 'Destroy entity permissions and associated models'
     task :destroy, %i[model] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
-        Permission.destroy_entity_permissions(args[:model])
+        Permission.destroy_all(model: args[:model])
+        Chart.destroy_all(model: args[:model])
+        Stat.destroy_all(model: args[:model])
+        Schematics::Version.destroy_all(item_type: args[:model])
       end
     end
 
     desc 'Rename entity permissions and associated models'
     task :rename, %i[model new_model] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
-        Permission.rename_entity_permissions(args[:model], args[:new_model])
+        # rubocop:disable Rails/SkipsModelValidations
+        Permission.where(model: args[:model]).update_all(model: args[:new_model])
+        Chart.where(model: args[:model]).update_all(model: args[:new_model])
+        Stat.where(model: args[:model]).update_all(model: args[:new_model])
+        Schematics::Version.where(item_type: args[:model]).update_all(model: args[:new_model])
+        # rubocop:enable Rails/SkipsModelValidations
       end
     end
   end
