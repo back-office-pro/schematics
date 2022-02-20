@@ -47,7 +47,7 @@ describe Schematics::Commands::CreateEntity do
 
     it { is_expected.to eq(expected_command_lines) }
 
-    context 'when entity class is already defined' do
+    context 'when entity class is already defined' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:name) { 'object' }
       let(:expected_command_line) do
         <<~SHELL
