@@ -20,7 +20,7 @@ namespace :schematics do
       .instance
       .migrations
       .reject(&:migrated?)
-      .flat_map(&:run)
+      .flat_map(&:execute)
       .each(&method(:system))
   end
 
@@ -38,6 +38,30 @@ namespace :schematics do
     task :admin, %i[email last_name first_name locale time_zone] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
         User.create!(args.to_h.merge(password: 'Azerty1!', role: Role.admin))
+      end
+    end
+  end
+
+  namespace :permissions do
+    desc 'Create entity permissions'
+    task :create, %i[entity] => [:environment] do |_task, args|
+      entity = Schematics::Schema.instance.find_entity_by_name(args[:entity])
+      PaperTrail.request(enabled: false) do
+        Permission.create_entity_permissions!(entity)
+      end
+    end
+
+    desc 'Destroy entity permissions and associated models'
+    task :destroy, %i[model] => [:environment] do |_task, args|
+      PaperTrail.request(enabled: false) do
+        Permission.destroy_entity_permissions(args[:model])
+      end
+    end
+
+    desc 'Rename entity permissions and associated models'
+    task :rename, %i[model new_model] => [:environment] do |_task, args|
+      PaperTrail.request(enabled: false) do
+        Permission.rename_entity_permissions(args[:model], args[:new_model])
       end
     end
   end
