@@ -1,33 +1,33 @@
 # frozen_string_literal: true
 
 class FixturesGenerator < Rails::Generators::NamedBase
-  def create_active_storage_fixtures_directory
+  def create_active_storage_directory
     return if destroying?
 
     empty_directory(active_storage_path)
   end
 
-  def create_action_text_fixtures_directory
+  def create_action_text_directory
     return if destroying?
 
     empty_directory(action_text_path)
   end
 
-  def create_attachments_fixtures_file
+  def create_attachments_file
     return if destroying?
     return if File.exist?(attachments_file_path)
 
     create_file(attachments_file_path)
   end
 
-  def create_blobs_fixtures_file
+  def create_blobs_file
     return if destroying?
     return if File.exist?(blobs_file_path)
 
     create_file(blobs_file_path)
   end
 
-  def create_rich_texts_fixtures_file
+  def create_rich_texts_file
     return if destroying?
     return if File.exist?(rich_texts_file_path)
 
@@ -84,7 +84,7 @@ class FixturesGenerator < Rails::Generators::NamedBase
       append_file(rich_texts_file_path) do
         <<~YAML
           #{human_root_index(root_index, index)}:
-            record: #{human_index(index)} (#{attribute.entity.class_name})
+            record: #{human_index(index)} (#{entity.class_name})
             name: #{attribute.name}
             body: <p>In a <i>million</i> stars!</p>
         YAML
@@ -97,7 +97,7 @@ class FixturesGenerator < Rails::Generators::NamedBase
       append_to_file(attachments_file_path) do
         <<~YAML
           #{human_root_index(root_index, index)}:
-            record: #{human_index(index)} (#{attribute.entity.class_name})
+            record: #{human_index(index)} (#{entity.class_name})
             name: #{attribute.name}
             blob: #{human_root_index(root_index, index)}
         YAML
@@ -114,7 +114,7 @@ class FixturesGenerator < Rails::Generators::NamedBase
   end
 
   def generate_blob_key(attribute, root_index, index)
-    [attribute.entity.name, attribute.name, human_root_index(root_index, index)].join('_')
+    [entity.name, attribute.name, human_root_index(root_index, index)].join('_')
   end
 
   def destroying?
