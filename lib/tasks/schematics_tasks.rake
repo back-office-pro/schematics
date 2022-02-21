@@ -10,7 +10,8 @@ namespace :schematics do
     Schematics::Schema
       .instance
       .sorted_entities
-      .flat_map(&Schematics::System.method(:generate))
+      .map(&Schematics::Commands::CreateEntity.method(:new))
+      .flat_map(&:execute)
       .each(&method(:system))
   end
 
@@ -20,7 +21,7 @@ namespace :schematics do
       .instance
       .migrations
       .reject(&:migrated?)
-      .flat_map(&:run)
+      .flat_map(&:execute)
       .each(&method(:system))
   end
 
@@ -38,6 +39,38 @@ namespace :schematics do
     task :admin, %i[email last_name first_name locale time_zone] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
         User.create!(args.to_h.merge(password: 'Azerty1!', role: Role.admin))
+      end
+    end
+  end
+
+  namespace :permissions do
+    desc 'Create entity permissions'
+    task :create, %i[entity] => [:environment] do |_task, args|
+      entity = Schematics::Schema.instance.find_entity_by_name(args[:entity])
+      PaperTrail.request(enabled: false) do
+        Permission.create_entity_permissions!(entity)
+      end
+    end
+
+    desc 'Destroy entity permissions and associated models'
+    task :destroy, %i[model] => [:environment] do |_task, args|
+      PaperTrail.request(enabled: false) do
+        Permission.where(model: args[:model]).destroy_all
+        Chart.where(model: args[:model]).destroy_all
+        Stat.where(model: args[:model]).destroy_all
+        Schematics::Version.where(item_type: args[:model]).destroy_all
+      end
+    end
+
+    desc 'Rename entity permissions and associated models'
+    task :rename, %i[model new_model] => [:environment] do |_task, args|
+      PaperTrail.request(enabled: false) do
+        # rubocop:disable Rails/SkipsModelValidations
+        Permission.where(model: args[:model]).update_all(model: args[:new_model])
+        Chart.where(model: args[:model]).update_all(model: args[:new_model])
+        Stat.where(model: args[:model]).update_all(model: args[:new_model])
+        Schematics::Version.where(item_type: args[:model]).update_all(model: args[:new_model])
+        # rubocop:enable Rails/SkipsModelValidations
       end
     end
   end

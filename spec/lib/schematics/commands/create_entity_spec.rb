@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-describe Schematics::System do
-  subject(:system) { described_class }
+describe Schematics::Commands::CreateEntity do
+  subject(:command) { described_class.new(entity) }
 
   let(:entity) { Schematics::Entities::Entity.build(name:, attributes:, associations:) }
   let(:name) { 'assembly' }
@@ -32,12 +32,14 @@ describe Schematics::System do
     ]
   end
 
-  describe '.generate' do
-    subject { system.generate(entity) }
+  describe '#execute' do
+    subject { command.execute }
 
     let(:expected_command_lines) do
       [
         'rails generate scaffold assembly schema:assembly_name schema:assembly_owner --skip-resource-route', # rubocop:disable Layout/LineLength
+        'rails generate fixtures assembly',
+        'rails generate locales assembly',
         'rails generate migration add_slug_to_assemblies slug:string:uniq',
         'rails generate migration add_lock_version_to_assemblies lock_version:integer',
         'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength
@@ -47,40 +49,15 @@ describe Schematics::System do
 
     it { is_expected.to eq(expected_command_lines) }
 
-    context 'when entity class is already defined' do
+    context 'when entity class is already defined' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:name) { 'object' }
-      let(:expected_command_lines) do
-        [
-          'rails generate scaffold_controller object --skip-resource-route'
-        ]
+      let(:expected_command_line) do
+        <<~SHELL
+          rails generate scaffold_controller object --skip-resource-route
+        SHELL
       end
 
-      it { is_expected.to eq(expected_command_lines) }
+      it { is_expected.to eq(expected_command_line) }
     end
-  end
-
-  describe '.destroy_entity' do
-    subject { system.destroy_entity(entity) }
-
-    let(:expected_command_lines) do
-      [
-        'rails destroy scaffold assembly --skip-migration --skip-resource-route',
-        'rails generate migration drop_assemblies_table schema:assembly_name schema:assembly_owner'
-      ]
-    end
-
-    it { is_expected.to eq(expected_command_lines) }
-  end
-
-  describe '.destroy_entity_attribute' do
-    subject { system.destroy_entity_attribute(entity, 'name') }
-
-    let(:expected_command_lines) do
-      [
-        'rails generate migration remove_name_from_assemblies schema:assembly_name'
-      ]
-    end
-
-    it { is_expected.to eq(expected_command_lines) }
   end
 end

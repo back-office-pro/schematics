@@ -33,7 +33,7 @@
     },
     "migration": {
       "properties": {
-        "action": {
+        "command": {
           "type": "string"
         },
         "entity": {
@@ -42,12 +42,15 @@
         "attribute": {
           "type": "string"
         },
+        "target": {
+          "type": "string"
+        },
         "timestamp": {
           "type": "integer"
         }
       },
       "required": [
-        "action",
+        "command",
         "entity",
         "timestamp"
       ],
