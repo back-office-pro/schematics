@@ -38,6 +38,7 @@ describe Schematics::Commands::CreateEntity do
     let(:expected_command_lines) do
       [
         'rails generate scaffold assembly schema:assembly_name schema:assembly_owner --skip-resource-route', # rubocop:disable Layout/LineLength
+        'rails generate fixtures assembly',
         'rails generate migration add_slug_to_assemblies slug:string:uniq',
         'rails generate migration add_lock_version_to_assemblies lock_version:integer',
         'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength

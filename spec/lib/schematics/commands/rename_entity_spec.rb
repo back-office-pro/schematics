@@ -13,6 +13,8 @@ describe Schematics::Commands::RenameEntity do
       [
         'rails generate migration rename_clients_to_prospects',
         'rails destroy scaffold client --skip-migration --skip-resource-route',
+        'rails destroy fixtures client',
+        'rails generate fixtures prospect',
         "rails 'schematics:permissions:rename[Client,Prospect]'"
       ]
     end
