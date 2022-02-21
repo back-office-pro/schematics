@@ -20,6 +20,7 @@ describe Schematics::Attributes::Percentage do
   its(:column_name) { is_expected.to eq('progress') }
   its(:open_api_type) { is_expected.to eq('number') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
+  its(:unit) { is_expected.to eq('%') }
   its(:icon) { is_expected.to eq(:percentage) }
 
   describe '#format' do

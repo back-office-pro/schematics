@@ -13,6 +13,7 @@ describe Schematics::Entities::Descriptor do
     )
   end
 
+  its(:joins) { is_expected.to be_empty }
   its(:serializer_class) { is_expected.to be_a(Class) }
 
   its(:to_str) do

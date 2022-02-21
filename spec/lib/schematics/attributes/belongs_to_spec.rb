@@ -41,6 +41,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:preload) { is_expected.to eq(:schema) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:caret_square_right) }
+  its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
 
   its(:search_data) do

@@ -43,6 +43,7 @@ describe Schematics::Associations::HasOneThrough do
   its(:name) { is_expected.to eq('schema') }
   its(:class_name) { is_expected.to eq('Schema') }
   its(:open_api_type) { is_expected.to eq('integer') }
+  its(:weight) { is_expected.to eq(3) }
   its('descriptor.name') { is_expected.to eq('title') }
 
   its(:search_data) do

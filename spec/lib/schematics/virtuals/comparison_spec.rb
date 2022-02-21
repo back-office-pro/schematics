@@ -35,4 +35,12 @@ describe Schematics::Virtuals::Comparison do
       end
     RUBY
   end
+
+  describe '#format' do
+    subject { virtual.format(value) }
+
+    let(:value) { 'true' }
+
+    it { is_expected.to eq('TRUE') }
+  end
 end

@@ -36,4 +36,12 @@ describe Schematics::Attributes::ModelField do
       validates :attribute, {:inclusion=>{:in=>[]}, :allow_blank=>true}
     RUBY
   end
+
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'Stat#attribute' }
+
+    it { is_expected.to eq('Stat#attribute') }
+  end
 end
