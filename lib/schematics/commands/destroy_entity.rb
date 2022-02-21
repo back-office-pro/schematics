@@ -7,6 +7,7 @@ module Schematics
         [
           "rails destroy scaffold #{name} --skip-migration --skip-resource-route",
           "rails destroy fixtures #{name}",
+          "rails destroy locales #{name}",
           "rails generate migration drop_#{table_name.pluralize} #{migratable_attributes}",
           "rails 'schematics:permissions:destroy[#{class_name}]'"
         ]

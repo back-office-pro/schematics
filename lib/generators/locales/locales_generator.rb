@@ -1,37 +1,57 @@
 # frozen_string_literal: true
 
-class LocalesGenerator < Rails::Generators::Base
+class LocalesGenerator < Rails::Generators::NamedBase
   delegate :available_locales, to: 'Schematics::Engine.config.i18n'
-  delegate :entities, to: 'Schematics::Schema.instance'
+
+  def create_models_directory
+    return if destroying?
+
+    empty_directory(models_path)
+  end
+
+  def create_routes_directory
+    return if destroying?
+
+    empty_directory(routes_path)
+  end
+
+  def create_model_locale_directory
+    empty_directory(locale_path)
+  end
+
+  def create_route_files
+    return if destroying?
+
+    available_locales.each(&method(:create_route_file))
+  end
+
+  def create_locale_files
+    return if destroying?
+
+    available_locales.each(&method(:create_locale_file))
+  end
 
   def generate_route_locales
-    available_locales.each(&method(:generate_route_locale))
+    available_locales.each(&method(:append_to_route_file))
   end
 
   def generate_entity_locales
-    available_locales.each(&method(:generate_entity_locale))
+    return if destroying?
+
+    available_locales.each(&method(:append_to_locale_file))
   end
 
   private
 
-  def generate_entity_locale(locale)
-    empty_directory(models_path)
-    entities.reject(&:core?).each do |entity|
-      empty_directory locale_path(entity)
-      create_locale_file(entity, locale)
-      append_to_locale_file(entity, locale)
-    end
-  end
-
-  def generate_route_locale(locale)
-    empty_directory(routes_path)
-    create_route_file(locale)
-    entities.reject(&:core?).each do |entity|
-      append_to_route_file(entity, locale)
-    end
+  def entity
+    Schematics::Schema
+      .instance
+      .find_entity_by_name(name.underscore)
   end
 
   def create_route_file(locale)
+    return if File.exist?(route_file_path(locale))
+
     create_file(route_file_path(locale)) do
       <<~YAML
         ---
@@ -41,7 +61,7 @@ class LocalesGenerator < Rails::Generators::Base
     end
   end
 
-  def append_to_route_file(entity, locale)
+  def append_to_route_file(locale)
     append_file(route_file_path(locale)) do
       indent <<~YAML, 4
         #{entity.name.pluralize}: #{translate(entity.name.pluralize, to: locale).parameterize(separator: '_')}
@@ -49,8 +69,10 @@ class LocalesGenerator < Rails::Generators::Base
     end
   end
 
-  def create_locale_file(entity, locale)
-    create_file locale_file_path(entity, locale) do
+  def create_locale_file(locale)
+    return if File.exist?(locale_file_path(locale))
+
+    create_file locale_file_path(locale) do
       <<~YAML
         ---
         #{locale}:
@@ -66,22 +88,22 @@ class LocalesGenerator < Rails::Generators::Base
     end
   end
 
-  def append_to_locale_file(entity, locale)
+  def append_to_locale_file(locale)
     entity.fields.each do |field|
-      append_file locale_file_path(entity, locale) do
+      append_file locale_file_path(locale) do
         indent <<~YAML, 8
           #{field.name}: #{translate(field.name, to: locale)}
         YAML
       end
     end
     entity.enum_attributes.each do |enum|
-      append_file locale_file_path(entity, locale) do
+      append_file locale_file_path(locale) do
         indent <<~YAML, 8
           #{enum.name.pluralize}:
         YAML
       end
       enum.values.each do |value|
-        append_file locale_file_path(entity, locale) do
+        append_file locale_file_path(locale) do
           indent <<~YAML, 10
             #{value}: #{translate(value, to: locale)}
           YAML
@@ -89,14 +111,14 @@ class LocalesGenerator < Rails::Generators::Base
       end
       next unless enum.is_a?(Schematics::Attributes::StateMachine)
 
-      append_file locale_file_path(entity, locale) do
+      append_file locale_file_path(locale) do
         indent <<~YAML, 4
           events:
             #{entity.name}:
         YAML
       end
       enum.events.map(&:name).each do |event|
-        append_file locale_file_path(entity, locale) do
+        append_file locale_file_path(locale) do
           indent <<~YAML, 8
             #{event}: #{translate(event, to: locale)}
           YAML
@@ -115,6 +137,10 @@ class LocalesGenerator < Rails::Generators::Base
     text.titleize
   end
 
+  def destroying?
+    behavior == :revoke
+  end
+
   def locales_path
     File.join('config', 'locales')
   end
@@ -127,12 +153,12 @@ class LocalesGenerator < Rails::Generators::Base
     File.join(locales_path, 'routes')
   end
 
-  def locale_path(entity)
+  def locale_path
     File.join(models_path, entity.name)
   end
 
-  def locale_file_path(entity, locale)
-    File.join(locale_path(entity), "#{locale}.yml")
+  def locale_file_path(locale)
+    File.join(locale_path, "#{locale}.yml")
   end
 
   def route_file_path(locale)

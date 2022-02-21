@@ -9,6 +9,7 @@ module Schematics
                :migratable_attributes,
                :association_attributes,
                :has_and_belongs_to_many_associations,
+               :core?,
                to: :@entity
 
       class << self

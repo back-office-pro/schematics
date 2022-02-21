@@ -20,6 +20,7 @@ describe Schematics::Commands::DestroyEntity do
       [
         'rails destroy scaffold client --skip-migration --skip-resource-route',
         'rails destroy fixtures client',
+        'rails destroy locales client',
         'rails generate migration drop_clients schema:client_first_name',
         "rails 'schematics:permissions:destroy[Client]'"
       ]

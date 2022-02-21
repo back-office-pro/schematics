@@ -9,7 +9,9 @@ module Schematics
           "rails destroy scaffold #{old_name} --skip-migration --skip-resource-route",
           "rails destroy fixtures #{old_name}",
           "rails generate fixtures #{name}",
-          "rails 'schematics:permissions:rename[#{old_class_name},#{class_name}]'",
+          "rails destroy locales #{old_name}",
+          "rails generate locales #{name}",
+          "rails 'schematics:permissions:rename[#{old_class_name},#{class_name}]'"
         ]
       end
 
