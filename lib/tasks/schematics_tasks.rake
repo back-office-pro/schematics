@@ -3,7 +3,6 @@
 require 'active_record_doctor'
 require 'active_record_doctor/rake/task'
 require 'database_consistency'
-require 'rspec/core/rake_task'
 
 namespace :schematics do
   desc 'Generate schema application'
