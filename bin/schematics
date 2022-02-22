@@ -10,7 +10,7 @@ else
 fi
 
 rm -rf $app_name
-rails new $app_name \
+time rails new $app_name \
     --database postgresql \
     --skip-keeps \
     --skip-action-cable \
@@ -18,4 +18,4 @@ rails new $app_name \
     --skip-spring \
     --template template.rb \
     --dummy-app=$dummy_app \
-    > log/build.log
+    &> log/build.log
