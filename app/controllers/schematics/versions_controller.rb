@@ -25,8 +25,8 @@ module Schematics
       if result.success?
         notice = t(
           result.message,
-          human_name: @version.item.human_name,
-          gender: @version.item.gender
+          human_name: @version.model_class.human_name,
+          gender: @version.model_class.gender
         )
         respond_to do |format|
           format.html { redirect_to(main_app.polymorphic_path(@version.item), notice:) }
