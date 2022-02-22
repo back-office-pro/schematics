@@ -24,6 +24,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:to_sql) { is_expected.to eq("CONCAT(users.first_name, ' ', profiles.last_name)") }
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
+  its(:weight) { is_expected.to eq(1) }
 
   its(:function) do
     is_expected.to eq("\"\#{first_name_formatted} \#{profile.last_name_formatted}\"")

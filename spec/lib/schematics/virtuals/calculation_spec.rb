@@ -33,6 +33,7 @@ describe Schematics::Virtuals::Calculation do
   its(:icon) { is_expected.to eq(:square_root_alt) }
   its(:unit) { is_expected.to eq('$') }
   its(:precision) { is_expected.to eq(2) }
+  its(:weight) { is_expected.to eq(1) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

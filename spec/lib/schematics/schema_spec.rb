@@ -110,5 +110,6 @@ describe Schematics::Schema do
     end
 
     it { is_expected.not_to be_valid }
+    its(:root_route) { is_expected.to eq('exception#schema_error') }
   end
 end
