@@ -10,10 +10,7 @@ module Schematics
       included do
         delegate :entity_fixtures, to: :class
 
-        fixtures entity_fixtures
-        fixtures 'action_text/rich_texts'
-        fixtures 'active_storage/attachments'
-        fixtures 'active_storage/blobs'
+        fixtures :all
 
         subject(:model) { __send__(entity_fixtures, :one) }
 
