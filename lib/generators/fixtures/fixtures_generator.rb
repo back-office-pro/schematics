@@ -37,22 +37,19 @@ class FixturesGenerator < Rails::Generators::NamedBase
   def generate_action_text_rich_texts
     entity
       .rich_text_attributes
-      .each
-      .with_index(1, &method(:append_to_rich_texts_file))
+      .map(&method(:append_to_rich_texts_file))
   end
 
   def generate_active_storage_attachments
     entity
       .attachment_attributes
-      .each
-      .with_index(1, &method(:append_to_attachments_file))
+      .map(&method(:append_to_attachments_file))
   end
 
   def generate_active_storage_blobs
     entity
       .attachment_attributes
-      .each
-      .with_index(1, &method(:append_to_blobs_file))
+      .map(&method(:append_to_blobs_file))
   end
 
   private
@@ -63,12 +60,12 @@ class FixturesGenerator < Rails::Generators::NamedBase
       .find_entity_by_name(name.underscore)
   end
 
-  def append_to_blobs_file(attribute, root_index)
-    2.times do |index|
+  def append_to_blobs_file(attribute)
+    (1..2).each do |index|
       append_to_file(blobs_file_path) do
         <<~YAML
-          #{human_root_index(root_index, index)}:
-            key: #{generate_blob_key(attribute, root_index, index)}
+          #{root_index(blobs_file_path, index).humanize}:
+            key: #{entity.name}_#{attribute.name}_#{index.humanize}
             filename: dummy.#{attribute.extension}
             content_type: #{Mime[attribute.extension]}
             service_name: test
@@ -79,12 +76,12 @@ class FixturesGenerator < Rails::Generators::NamedBase
     end
   end
 
-  def append_to_rich_texts_file(attribute, root_index)
-    2.times do |index|
+  def append_to_rich_texts_file(attribute)
+    (1..2).each do |index|
       append_file(rich_texts_file_path) do
         <<~YAML
-          #{human_root_index(root_index, index)}:
-            record: #{human_index(index)} (#{entity.class_name})
+          #{root_index(rich_texts_file_path, index).humanize}:
+            record: #{index.humanize} (#{entity.class_name})
             name: #{attribute.name}
             body: <p>In a <i>million</i> stars!</p>
         YAML
@@ -92,29 +89,24 @@ class FixturesGenerator < Rails::Generators::NamedBase
     end
   end
 
-  def append_to_attachments_file(attribute, root_index)
-    2.times do |index|
+  def append_to_attachments_file(attribute)
+    (1..2).each do |index|
       append_to_file(attachments_file_path) do
         <<~YAML
-          #{human_root_index(root_index, index)}:
-            record: #{human_index(index)} (#{entity.class_name})
+          #{root_index(attachments_file_path, index).humanize}:
+            record: #{index.humanize} (#{entity.class_name})
             name: #{attribute.name}
-            blob: #{human_root_index(root_index, index)}
+            blob: #{root_index(attachments_file_path, index).humanize}
         YAML
       end
     end
   end
 
-  def human_root_index(root_index, index)
-    ((root_index * 2) + index.pred).humanize
-  end
+  def root_index(file_path, index)
+    fixtures = YAML.load_file(file_path)
+    return index unless fixtures
 
-  def human_index(index)
-    index.next.humanize
-  end
-
-  def generate_blob_key(attribute, root_index, index)
-    [entity.name, attribute.name, human_root_index(root_index, index)].join('_')
+    fixtures.keys.count.next
   end
 
   def destroying?
