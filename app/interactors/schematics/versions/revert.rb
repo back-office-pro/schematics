@@ -7,16 +7,12 @@ module Schematics
 
       before do
         @version = context.version
+        @resource = @version.reify.unstale
+        @resource.paper_trail_event = :revert
       end
 
       def call
-        fail! unless revert_or_destroy
-      end
-
-      private
-
-      def revert_or_destroy
-        @version.reify&.unstale&.save || @version.item.really_destroy!
+        fail! unless @resource.save
       end
     end
   end
