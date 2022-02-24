@@ -16,21 +16,21 @@ module Schematics
 
     class << self
       def timeline(ability:, versions: nil)
-        query = (versions || self)
-                .with_user
-                .with_item
-                .accessible_by(ability)
-        unless versions
-          query = query
-                  .joins(:user)
-                  .where(
-                    <<~SQL.squish
-                      users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
-                      users.preferences -> CONCAT(versions.event, '_', versions.item_type) IS NULL
-                    SQL
-                  )
-        end
-        query.reorder(created_at: :desc)
+        (versions || self)
+          .with_user
+          .with_item
+          .accessible_by(ability)
+          .yield_self { versions ? _1 : _1.joins(:user).where(user_preferences_conditions) }
+          .reorder(created_at: :desc)
+      end
+
+      private
+  
+      def user_preferences_conditions
+        <<~SQL.squish
+          users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
+          users.preferences -> CONCAT(versions.event, '_', versions.item_type) IS NULL
+        SQL
       end
     end
 
