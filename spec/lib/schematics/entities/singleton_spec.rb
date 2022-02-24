@@ -17,6 +17,10 @@ describe Schematics::Entities::Singleton do
     is_expected.to eq <<~RUBY
       acts_as_singleton
       delegate :cache_key, to: :model_name
+
+      class << self
+        public :all
+      end
     RUBY
   end
 end
