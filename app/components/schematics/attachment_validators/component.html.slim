@@ -1,6 +1,6 @@
 div
   = fa_icon :info_circle, class: 'mr-1' if @validators.any?
-  = humanized_validators.map { |validator| validator.join(' ') }.join(' - ')
+  = humanized_validators.map { _1.join(' ') }.join(' - ')
 div
   = fa_icon :virus, class: 'mr-1'
   = t('.antivirus_warning')
