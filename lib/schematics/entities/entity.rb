@@ -192,27 +192,6 @@ module Schematics
         ''
       end
 
-      def to_s
-        <<~RUBY
-          class #{class_name}
-            #{to_str}
-
-            ###
-            #{attributes.map { |attribute| "# #{attribute}" }.join("\n\s\s")}
-            # #{permitted_params.join(', ')}
-            # #{permitted_json_params.join(', ')}
-            ###
-
-            #{descriptor.to_str}
-            #{validates.join("\s\s")}
-            #{search_data}
-            #{attributes.map(&:to_str).join("\s\s")}
-            #{associations.map(&:to_str).join("\s\s")}
-            #{virtuals.map(&:to_str).join("\s\s")}
-          end
-        RUBY
-      end
-
       protected
 
       def default_actions

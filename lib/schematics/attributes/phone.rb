@@ -8,7 +8,9 @@ module Schematics
       end
 
       def default
-        Array.new(10) { rand(10) }.join
+        Array
+          .new(10) { rand(10) }
+          .join
       end
 
       def format(value)

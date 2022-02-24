@@ -42,6 +42,10 @@ Layout/MultilineArrayLineBreaks:
   Enabled: true
 Layout/MultilineHashKeyLineBreaks:
   Enabled: true
+Layout/SingleLineBlockChain:
+  Enabled: true
+  Exclude:
+    - spec/**/*
 Lint/HeredocMethodCallPosition:
   Enabled: true
 Lint/ConstantResolution:
