@@ -25,7 +25,7 @@ module Schematics
       end
 
       private
-  
+
       def user_preferences_conditions
         <<~SQL.squish
           users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
