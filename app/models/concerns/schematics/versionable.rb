@@ -12,6 +12,8 @@ module Schematics
     end
 
     class_methods do
+      private
+
       def hidden_attributes
         entity
           .attributes
