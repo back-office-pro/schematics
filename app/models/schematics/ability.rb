@@ -42,7 +42,8 @@ module Schematics
       cannot %i[show update destroy archive import], ::Message
       can :show, ::Message, recipient: user
       can :show, ::Message, author: user
-      cannot :destroy, ActiveStorage::Attachment, { record_type: 'Import' }
+      cannot :destroy, ActiveStorage::Attachment, record_type: 'Import'
+      cannot :revert, Version, object: nil
     end
 
     def licence_restrictions

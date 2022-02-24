@@ -19,7 +19,7 @@ module Schematics
         (versions || self)
           .with_user
           .with_item
-          .accessible_by(ability)
+          .yield_self { versions ? _1 : _1.accessible_by(ability) }
           .yield_self { versions ? _1 : _1.joins(:user).where(user_preferences_conditions) }
           .reorder(created_at: :desc)
       end
