@@ -28,9 +28,9 @@ module MainApp
     end
 
     def to_s
-      return I18n.t('errors.virtuals.no_method', name: model) unless model_class
+      return ::I18n.t('errors.virtuals.no_method', name: model) unless model_class
 
-      [ytitle, I18n.t('by'), xtitle].join(' ')
+      [ytitle, ::I18n.t('by'), xtitle].join(' ')
     end
 
     def as_json # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -59,9 +59,9 @@ module MainApp
 
       [
         y_agregate_formatted,
-        I18n.t('of'),
+        ::I18n.t('of'),
         (model_class.human_attribute_name(entity_y_field.name).pluralize.downcase if entity_y_field), # rubocop:disable Layout/LineLength
-        (I18n.t('of') if entity_y_field),
+        (::I18n.t('of') if entity_y_field),
         model_class.model_name.human.downcase.pluralize
       ].compact.join(' ')
     end

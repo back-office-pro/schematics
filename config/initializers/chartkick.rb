@@ -5,7 +5,7 @@ Rails.configuration.after_initialize do
   Chartkick.options = {
     colors: (::Setting.instance.palette rescue []),
     height: '300px',
-    empty: I18n.t('schematics.application.resource.empty'),
+    empty: ::I18n.t('schematics.application.resource.empty'),
     refresh: 60,
     # rubocop:disable Style/FormatStringToken
     html: <<~HTML,

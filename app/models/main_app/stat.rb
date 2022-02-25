@@ -11,7 +11,7 @@ module MainApp
     end
 
     def to_s
-      title || I18n.t('errors.virtuals.no_method', name: model)
+      title || ::I18n.t('errors.virtuals.no_method', name: model)
     end
 
     def value_formatted
@@ -37,9 +37,9 @@ module MainApp
 
       [
         agregate_formatted,
-        I18n.t('of'),
+        ::I18n.t('of'),
         (model_class.human_attribute_name(entity_field.name).pluralize.downcase if entity_field),
-        (I18n.t('of') if entity_field),
+        (::I18n.t('of') if entity_field),
         model_class.model_name.human.downcase.pluralize
       ].compact.join(' ')
     end

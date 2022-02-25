@@ -28,7 +28,7 @@ module Schematics
           item_id: id,
           event: 'import',
           whodunnit: @import.author.id,
-          created_at: Time.current
+          created_at: ::Time.current
         }
       end
     end

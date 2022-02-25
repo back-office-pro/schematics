@@ -19,9 +19,9 @@ module Schematics
           resource
             .attributes
             .compact
-            .merge('created_at' => Time.current, 'updated_at' => Time.current) # rubocop:disable Style/StringHashKeys
+            .merge('created_at' => ::Time.current, 'updated_at' => ::Time.current) # rubocop:disable Style/StringHashKeys
         rescue StandardError => e
-          @errors[I18n.t('.line', line:)] = e
+          @errors[::I18n.t('.line', line:)] = e
         ensure
           @import.update!(progress: (line / @data.size) * 100)
         end

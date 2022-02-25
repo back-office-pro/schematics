@@ -17,7 +17,7 @@ module Schematics
       end
 
       def format(value)
-        value && ISO3166::Country[value].try(:translation, I18n.locale.to_s)
+        value && ISO3166::Country[value].try(:translation, ::I18n.locale.to_s)
       end
 
       def values

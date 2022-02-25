@@ -61,7 +61,7 @@ module Schematics
       end
 
       def i18n_translations
-        @i18n_translations ||= I18n
+        @i18n_translations ||= ::I18n
                                .t('.')
                                .dig(i18n_scope, :attributes, model_name.to_s.underscore.to_sym)
       end

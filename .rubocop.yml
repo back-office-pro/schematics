@@ -60,6 +60,8 @@ Lint/ConstantResolution:
     - Licence
     - Chart
     - Stat
+    - Time
+    - I18n
   Exclude:
     - spec/**/*
     - db/*
