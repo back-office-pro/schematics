@@ -211,7 +211,7 @@ module Schematics
       end
 
       class_methods do
-        delegate :entity, to: :model_class, private: true
+        delegate :entity, to: :model_class
         delegate :elements,
                  :attributes,
                  :renderable_attributes,
@@ -220,8 +220,7 @@ module Schematics
                  :enumerable_attributes,
                  :numerable_attributes,
                  :string_attributes,
-                 to: :entity,
-                 private: true
+                 to: :entity
 
         def model_class
           name.demodulize.split('_').first.constantize
