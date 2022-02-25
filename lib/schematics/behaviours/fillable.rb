@@ -16,6 +16,14 @@ module Schematics
       def json_default
         default
       end
+
+      def to_str
+        return super unless readonly?
+
+        <<~RUBY
+          attr_readonly :#{name}
+        RUBY
+      end
     end
   end
 end
