@@ -36,6 +36,12 @@ module Schematics
             end
           end
 
+        fillable_attributes
+          .select(&:readonly?)
+          .each do |attribute|
+            it { is_expected.to have_readonly_attribute(attribute.name.to_sym) }
+          end
+
         enumerable_attributes.each do |attribute|
           it do
             is_expected
@@ -209,6 +215,7 @@ module Schematics
         delegate :elements,
                  :attributes,
                  :renderable_attributes,
+                 :fillable_attributes,
                  :attachments_attributes,
                  :enumerable_attributes,
                  :numerable_attributes,
