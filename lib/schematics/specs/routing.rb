@@ -53,7 +53,7 @@ module Schematics
                 .to route(:get, polymorphic_path(model_class, action: :autocomplete))
                 .to(locale:, model_name:, controller:, action: :autocomplete)
             end
-            if can?(:show)
+            if can?(:show) && model_class != ActiveStorage::Attachment
               is_expected
                 .to route(:get, polymorphic_path(resource))
                 .to(locale:, model_name:, controller:, action: :show, id:)
@@ -78,7 +78,7 @@ module Schematics
                 .to route(:patch, polymorphic_path(resource))
                 .to(locale:, model_name:, controller:, id:, action: :update)
             end
-            if can?(:destroy)
+            if can?(:destroy) && model_class != ActiveStorage::Attachment
               is_expected
                 .to route(:delete, polymorphic_path(resource))
                 .to(locale:, model_name:, controller:, id:, action: :destroy)
