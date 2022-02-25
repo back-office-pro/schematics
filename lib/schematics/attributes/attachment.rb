@@ -130,11 +130,11 @@ module Schematics
         :"#{association_name}_attributes"
       end
 
-      protected
-
       def association_name
         [name, type].join('_').to_sym
       end
+
+      protected
 
       def dummy
         @dummy ||= Specs::Dummy.new(extension)
