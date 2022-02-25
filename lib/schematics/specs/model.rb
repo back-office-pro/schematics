@@ -223,11 +223,11 @@ module Schematics
                  to: :entity
 
         def model_class
-          name.demodulize.split('_').first.constantize
+          description.constantize
         end
 
         def entity_fixtures
-          entity.name.pluralize.to_sym
+          entity.table_name.pluralize.to_sym
         end
 
         def database_attributes
