@@ -21,7 +21,6 @@ module Schematics
         let(:controller) { original_controller_path }
         let(:model_name) { model_class.to_s }
         let(:locale) { Rails.configuration.i18n.default_locale }
-        let(:format) { :csv }
         let(:id) { resource.id }
 
         case entity
