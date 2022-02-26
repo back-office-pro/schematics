@@ -17,11 +17,11 @@ module Schematics
                  :events,
                  to: :class
 
-        let(:resource) { __send__(entity_fixtures, :one) }
+        let(:record) { __send__(entity_fixtures, :one) }
         let(:controller) { original_controller_path }
         let(:model_name) { model_class.to_s }
         let(:locale) { Rails.configuration.i18n.default_locale }
-        let(:id) { resource.id }
+        let(:id) { record.id }
 
         case entity
         when Entities::Singleton
@@ -54,7 +54,7 @@ module Schematics
             end
             if can?(:show) && model_class != ActiveStorage::Attachment
               is_expected
-                .to route(:get, polymorphic_path(resource))
+                .to route(:get, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, action: :show, id:)
             end
             if can?(:create)
@@ -69,28 +69,28 @@ module Schematics
             end
             if can?(:edit)
               is_expected
-                .to route(:get, edit_polymorphic_path(resource))
+                .to route(:get, edit_polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :edit)
             end
             if can?(:update)
               is_expected
-                .to route(:patch, polymorphic_path(resource))
+                .to route(:patch, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :update)
             end
             if can?(:destroy) && model_class != ActiveStorage::Attachment
               is_expected
-                .to route(:delete, polymorphic_path(resource))
+                .to route(:delete, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :destroy)
               is_expected
-                .to route(:get, polymorphic_path(resource, action: :delete))
+                .to route(:get, polymorphic_path(record, action: :delete))
                 .to(locale:, model_name:, controller:, id:, action: :delete)
             end
             if can?(:archive)
               is_expected
-                .to route(:delete, polymorphic_path(resource, action: :archive))
+                .to route(:delete, polymorphic_path(record, action: :archive))
                 .to(locale:, model_name:, controller:, id:, action: :archive)
               is_expected
-                .to route(:delete, polymorphic_path(resource, action: :restore))
+                .to route(:delete, polymorphic_path(record, action: :restore))
                 .to(locale:, model_name:, controller:, id:, action: :restore)
             end
             if can?(:import)
@@ -104,7 +104,7 @@ module Schematics
             if can?(:update)
               events.each do |event|
                 is_expected
-                  .to route(:patch, polymorphic_path(resource, action: event.name))
+                  .to route(:patch, polymorphic_path(record, action: event.name))
                   .to(locale:, model_name:, controller:, action: :trigger, id:, event: event.name)
               end
             end
