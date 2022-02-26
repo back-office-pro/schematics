@@ -76,6 +76,11 @@ module Schematics
               is_expected
                 .to route(:patch, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :update)
+              events.each do |event|
+                is_expected
+                  .to route(:patch, polymorphic_path(record, action: event.name))
+                  .to(locale:, model_name:, controller:, action: :trigger, id:, event: event.name)
+              end
             end
             if can?(:destroy) && model_class != ActiveStorage::Attachment
               is_expected
@@ -100,13 +105,6 @@ module Schematics
               is_expected
                 .to route(:post, polymorphic_path([model_class, ::Import]))
                 .to(locale:, controller: 'imports', model_name:, action: :create)
-            end
-            if can?(:update)
-              events.each do |event|
-                is_expected
-                  .to route(:patch, polymorphic_path(record, action: event.name))
-                  .to(locale:, model_name:, controller:, action: :trigger, id:, event: event.name)
-              end
             end
           end
         end
