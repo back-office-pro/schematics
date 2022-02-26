@@ -64,7 +64,7 @@ module Schematics
         delegate :t, to: 'I18n'
 
         def model_class
-          name.demodulize.split('_').first.constantize
+          description.constantize
         end
 
         def fill_form # rubocop:disable Metrics/CyclomaticComplexity
