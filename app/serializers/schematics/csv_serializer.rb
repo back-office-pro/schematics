@@ -2,9 +2,10 @@
 
 module Schematics
   class CsvSerializer < CsvTemplateSerializer
-    def initialize(model_class, resources)
+    def initialize(model_class, resources, preferences)
       super(model_class)
       @resources = resources
+      @preferences = preferences
     end
 
     def generate_file
@@ -18,7 +19,9 @@ module Schematics
     private
 
     def elements
-      entity.listable_elements
+      entity
+        .listable_elements
+        .select { @preferences.fetch("col_#{_1.entity.table_name}_#{_1.name}", true) }
     end
 
     def content(resource)
