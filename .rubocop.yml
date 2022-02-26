@@ -62,6 +62,7 @@ Lint/ConstantResolution:
     - Stat
     - Time
     - I18n
+    - JsonWebToken
   Exclude:
     - spec/**/*
     - db/*
@@ -133,7 +134,7 @@ Metrics/BlockLength:
     - included
     - to_prepare
 Metrics/MethodLength:
-  Max: 50
+  Max: 40
   IgnoredMethods:
     - inherited
 Metrics/ClassLength:
@@ -141,7 +142,7 @@ Metrics/ClassLength:
 Metrics/ModuleLength:
   Max: 105
 Metrics/AbcSize:
-  Max: 70
+  Max: 50
 Metrics/ParameterLists:
   Max: 9
 # rubocop-rspec

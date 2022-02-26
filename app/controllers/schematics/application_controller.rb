@@ -26,7 +26,7 @@ module Schematics
     end
 
     def auth_token
-      @auth_token ||= JsonWebToken.decode(request.headers['Authorization']&.split(' ')&.last)
+      @auth_token ||= ::JsonWebToken.decode(request.headers['Authorization']&.split(' ')&.last)
     end
 
     def authorize

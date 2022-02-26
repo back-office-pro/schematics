@@ -18,7 +18,7 @@ module Schematics
         fail! unless authenticate(@password)
 
         context.token = auth_token
-        context.jwt = JsonWebToken.encode(auth_token:)
+        context.jwt = ::JsonWebToken.encode(auth_token:)
         @cookies[:auth_token] = auth_token if @cookies
       rescue BCrypt::Errors::InvalidHash
         fail!(message: '.invalid_hash')
