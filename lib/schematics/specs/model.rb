@@ -11,7 +11,7 @@ module Schematics
         delegate :entity_fixtures, to: :class
         fixtures :all
 
-        subject(:resource) { __send__(entity_fixtures, :one) }
+        subject(:record) { __send__(entity_fixtures, :one) }
 
         it { is_expected.to be_valid }
         it { is_expected.to have_implicit_order_column(:created_at) }
