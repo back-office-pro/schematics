@@ -48,7 +48,7 @@ module Schematics
           result = Resources::GenerateFileInBackground.call(
             fingerprint: params[:fingerprint],
             job: GenerateCsvJob,
-            job_params: [model_class.to_s, @resources.ids],
+            job_params: [model_class.to_s, @resources.pluck(:id)], # rubocop:disable Rails/PluckId
             extension: 'csv',
             slug: human_name_plural.dasherize
           )
