@@ -65,9 +65,7 @@ module Schematics
           .each do |attribute|
             it do
               is_expected.to allow_value('').for(attribute.name.to_sym) if attribute.allow_blank
-              is_expected
-                .to allow_value(attribute.try(:default).try(:tr, '"', ''))
-                .for(attribute.name.to_sym)
+              is_expected.to allow_value(attribute.try(:default)).for(attribute.name.to_sym)
             end
           end
 

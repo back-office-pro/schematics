@@ -10,7 +10,7 @@ module Schematics
       end
 
       def default
-        '#000000'.to_json
+        '#000000'
       end
 
       def icon
