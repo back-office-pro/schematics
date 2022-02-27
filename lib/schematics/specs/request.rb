@@ -27,7 +27,7 @@ module Schematics
         let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
         let(:role) do
           PaperTrail.request(enabled: false) do
-            Role.create!(name: 'Admin')
+            ::Role.create!(name: 'Admin')
           end
         end
         let(:user) do
