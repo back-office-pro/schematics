@@ -68,8 +68,6 @@ module Schematics
       generator.templates.unshift root.join('lib', 'templates')
       generator.test_framework :rspec, fixture: true
       generator.integration_tool :rspec
-      generator.controller_specs true
-      generator.request_specs false
       generator.assets false
       generator.helper false
       generator.template_engine nil
