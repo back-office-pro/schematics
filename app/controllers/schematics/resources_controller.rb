@@ -136,7 +136,7 @@ module Schematics
             notice = tscope(result.message, event: event.human.downcase)
             redirect_back(fallback_location: @resource, notice:)
           end
-          format.json { head :no_content }
+          format.json
         end
       else
         respond_to do |format|
@@ -201,7 +201,7 @@ module Schematics
     end
 
     def autocomplete
-      field = params[:field].to_sym
+      field = params.require(:field).to_sym
       @resources = model_class.search(**search_params.merge(select: field, load: false))
       render json: @resources.map(&field).map(&:to_s).uniq
     end
