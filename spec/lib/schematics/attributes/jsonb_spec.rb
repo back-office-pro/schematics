@@ -19,13 +19,11 @@ describe Schematics::Attributes::Jsonb do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
-  its(:default) { is_expected.to be_nil }
   its(:options_for_migration) { is_expected.to be_empty }
 
   context 'when there is a default' do
     let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
 
-    its(:default) { is_expected.to eq(options[:default].to_json) }
     its(:options_for_migration) { is_expected.to eq(options) }
   end
 end

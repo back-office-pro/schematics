@@ -9,10 +9,6 @@ module Schematics
         'object'
       end
 
-      def default
-        options.default&.to_json
-      end
-
       def icon
         :table
       end
