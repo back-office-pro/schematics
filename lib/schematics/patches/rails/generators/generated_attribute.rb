@@ -18,7 +18,14 @@ module Schematics
           end
 
           def default
-            schema_attribute.try(:default) || super
+            case attribute_default = schema_attribute.try(:default)
+            when String
+              attribute_default.to_json
+            when nil
+              super
+            else
+              attribute_default
+            end
           end
 
           def required?

@@ -4,7 +4,7 @@ require 'rails'
 require 'rails/generators/generated_attribute'
 
 describe Rails::Generators::GeneratedAttribute do
-  subject(:generated_attribute) { described_class.parse(column_definition) }
+  subject(:attribute) { described_class.parse(column_definition) }
 
   before do
     described_class
@@ -85,7 +85,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:has_uniq_index?) { is_expected.to be_truthy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(null: false) }
-    its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }
+    it { expect(JSON.parse(attribute.default)).to match(URI::MailTo::EMAIL_REGEXP) }
     it { is_expected.to be_required }
   end
 

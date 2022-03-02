@@ -6,7 +6,7 @@
   <%- elsif attribute.reference? -%>
   <%= attribute.column_name.delete_suffix("_id") %>: <%= attribute.default || name %>
   <%- elsif !attribute.virtual? -%>
-  <%= attribute.column_name %>: <%= attribute.default.yield_self { _1.is_a?(String) ? _1.to_json : _1 } %>
+  <%= attribute.column_name %>: <%= attribute.default %>
   <%- end -%>
   <%- if attribute.polymorphic? -%>
   <%= "#{attribute.name}_type" %>: <%= attribute.human_name %>
