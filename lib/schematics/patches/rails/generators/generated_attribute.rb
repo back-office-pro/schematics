@@ -19,7 +19,7 @@ module Schematics
 
           def default
             case attribute_default = schema_attribute.try(:default)
-            when String
+            when String, Hash
               attribute_default.to_json
             when nil
               super
