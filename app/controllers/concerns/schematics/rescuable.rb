@@ -23,22 +23,22 @@ module Schematics
       end
     end
 
-    def forbidden
-      respond_to do |format|
-        format.html do
-          redirect_to schematics.root_path, alert: t('schematics.api.forbidden.alert')
-        end
-        format.json { head :forbidden }
-      end
-    end
-
     def not_found
       respond_to do |format|
-        format.html do
+        format.json { head :not_found }
+        format.any do
           redirect_to not_found_path,
                       alert: t('schematics.api.not_found.alert', human_name:, gender:)
         end
-        format.json { head :not_found }
+      end
+    end
+
+    def forbidden
+      respond_to do |format|
+        format.json { head :forbidden }
+        format.any do
+          redirect_to schematics.root_path, alert: t('schematics.api.forbidden.alert')
+        end
       end
     end
 
