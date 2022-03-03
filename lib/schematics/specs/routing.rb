@@ -12,15 +12,14 @@ module Schematics
         fixtures :all
         delegate :entity_fixtures,
                  :model_class,
-                 :original_controller_path,
+                 :controller,
+                 :model_name,
+                 :locale,
                  :can?,
                  :events,
                  to: :class
 
         let(:record) { __send__(entity_fixtures, :one) }
-        let(:controller) { original_controller_path }
-        let(:model_name) { model_class.to_s }
-        let(:locale) { Rails.configuration.i18n.default_locale }
         let(:id) { record.id }
 
         case entity
@@ -114,6 +113,7 @@ module Schematics
         delegate :model_class, :original_controller_path, to: :controller_class
         delegate :entity, to: :model_class
         delegate :can?, :events, to: :entity
+        alias_method :controller, :original_controller_path
 
         def controller_class
           description.constantize
@@ -121,6 +121,14 @@ module Schematics
 
         def entity_fixtures
           entity.table_name.pluralize.to_sym
+        end
+
+        def model_name
+          model_class.to_s
+        end
+
+        def locale
+          Rails.configuration.i18n.default_locale
         end
       end
     end
