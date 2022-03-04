@@ -95,7 +95,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'route_translator', '~> 12.1.0'
   spec.add_dependency 'rspec-rails', '~> 5.1.0'
   spec.add_dependency 'searchkick', '~> 5.0.2'
-  spec.add_dependency 'selenium-webdriver', '~> 4.1.0'
   spec.add_dependency 'shoulda-matchers', '~> 5.1.0'
   spec.add_dependency 'sidekiq', '~> 6.4.1'
   spec.add_dependency 'sidekiq-scheduler', '~> 3.1.0'
