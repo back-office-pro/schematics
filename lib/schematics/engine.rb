@@ -57,6 +57,7 @@ require 'js-routes'
 require 'strip_attributes'
 require 'i18n-inflector'
 require 'chroma'
+require 'webpacker' if Rails.env.test?
 
 module Schematics
   class Engine < ::Rails::Engine
