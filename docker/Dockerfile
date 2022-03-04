@@ -1,4 +1,4 @@
-FROM ruby:3.1.0-alpine
+FROM ruby:3.1.1-alpine
 
 RUN apk --update add --virtual \
     runtime-deps postgresql-client build-base libxml2-dev \
