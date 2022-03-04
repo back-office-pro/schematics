@@ -11,14 +11,7 @@ module Schematics
       end
 
       def call
-        unless @resource.update(@params)
-          context.status = :unprocessable_entity
-          fail!
-        end
-      rescue ActiveRecord::StaleObjectError
-        @resource.errors.add(:base, :stale)
-        context.status = :precondition_failed
-        fail!(message: '.stale')
+        fail! unless @resource.update(@params)
       end
     end
   end

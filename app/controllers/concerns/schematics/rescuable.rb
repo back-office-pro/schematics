@@ -6,15 +6,17 @@ module Schematics
 
     included do
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
-      rescue_from ActiveRecord::RecordNotFound, with: :not_found
-      rescue_from CanCan::AccessDenied, with: :forbidden
+      rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+      rescue_from AASM::InvalidTransition, with: :invalid_transition
+      rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
+      rescue_from CanCan::AccessDenied, with: :access_denied
     end
 
     def parameter_missing(exception)
       respond_to do |format|
         format.html do
           redirect_back fallback_location: schematics.root_path,
-                        alert: t('schematics.api.parameter_missing.alert')
+                        alert: t('schematics.application.parameter_missing.alert')
         end
         format.json do
           render json: { errors: [{ exception.param => ['parameter is required'] }] },
@@ -23,28 +25,52 @@ module Schematics
       end
     end
 
-    def not_found
+    def record_not_found
       respond_to do |format|
         format.json { head :not_found }
         format.any do
-          redirect_to not_found_path,
-                      alert: t('schematics.api.not_found.alert', human_name:, gender:)
+          alert = t('schematics.application.record_not_found.alert', human_name:, gender:)
+          redirect_to record_not_found_path, alert:
         end
       end
     end
 
-    def forbidden
+    def invalid_transition(exception)
+      respond_to do |format|
+        format.html do
+          redirect_back fallback_location: @resource,
+                        alert: t('schematics.application.invalid_transition.alert')
+        end
+        format.json do
+          render json: { errors: [{ exception.state_machine_name => [exception.message] }] },
+                 status: :method_not_allowed
+        end
+      end
+    end
+
+    def stale_object_error
+      respond_to do |format|
+        format.json { head :precondition_failed }
+        format.html do
+          @resource.errors.add(:base, :stale)
+          flash.now[:alert] = t('schematics.application.stale_object_error.alert')
+          render :edit
+        end
+      end
+    end
+
+    def access_denied
       respond_to do |format|
         format.json { head :forbidden }
         format.any do
-          redirect_to schematics.root_path, alert: t('schematics.api.forbidden.alert')
+          redirect_to schematics.root_path, alert: t('schematics.application.access_denied.alert')
         end
       end
     end
 
     protected
 
-    def not_found_path
+    def record_not_found_path
       polymorphic_path(model_class)
     end
   end

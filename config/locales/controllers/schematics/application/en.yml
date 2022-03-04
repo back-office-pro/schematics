@@ -2,5 +2,15 @@
 en:
   schematics:
     application:
+      access_denied:
+        alert: Access denied
       authorize:
         alert: Please authenticate
+      invalid_transition:
+        alert: Action not authorized
+      parameter_missing:
+        alert: An error occured
+      record_not_found:
+        alert: The %{human_name} was not found
+      stale_object_error:
+        alert: A change has occured while you were editing

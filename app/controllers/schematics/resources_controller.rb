@@ -122,7 +122,7 @@ module Schematics
             flash.now[:alert] = tscope(result.message)
             render :edit
           end
-          format.json { render json: @resource.errors, status: result.status }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end

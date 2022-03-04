@@ -19,5 +19,4 @@ en:
         success: The %{event} action on the %{human_name} was sucessfully done
       update:
         failure: An error occured
-        stale: A change has occured while you were editing
         success: The %{human_name} was successfully updated
