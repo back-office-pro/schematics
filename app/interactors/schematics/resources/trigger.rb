@@ -12,7 +12,7 @@ module Schematics
       end
 
       def call
-        fail! unless @resource.public_send(:"#{@event.name}!")
+        fail! unless @resource.public_send(@event.name.to_sym)
       end
     end
   end
