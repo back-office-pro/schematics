@@ -1,5 +1,5 @@
 li.nav-item.dropdown.no-arrow.align-items-center.px-3.border-left.border-light.d-none.d-sm-flex
-  a#messages-dropdown.nav-link.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+  a#messages-dropdown.nav-link.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
     = fa_icon :envelope, class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
     - unless unread_count.zero?
       .badge.badge-danger.rounded-pill.animate__animated.animate__zoomIn = display_unread_count

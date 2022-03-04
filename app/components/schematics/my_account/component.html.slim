@@ -1,5 +1,5 @@
 li.nav-item.dropdown.no-arrow.d-flex.align-items-center.pl-2.border-left.border-light
-  a#account-dropdown.nav-link.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+  a#account-dropdown.nav-link.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
     span.d-none.d-lg-inline.align-middle.mr-2 = current_user.full_name
     = render Schematics::Attachment::Component.build_avatar(attachment: current_user.avatar)
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-right.animate__animated.animate__zoomIn.p-0.mt-2 aria-labelledby='account-dropdown'
