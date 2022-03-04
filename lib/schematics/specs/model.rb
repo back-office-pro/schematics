@@ -59,13 +59,12 @@ module Schematics
           end
         end
 
-        attributes
+        fillable_attributes
           .reject_is_a?(Behaviours::Preloadable)
-          .reject_is_a?(Attributes::StateMachine)
           .each do |attribute|
             it do
               is_expected.to allow_value('').for(attribute.name.to_sym) if attribute.allow_blank
-              is_expected.to allow_value(attribute.try(:default)).for(attribute.name.to_sym)
+              is_expected.to allow_value(attribute.default).for(attribute.name.to_sym)
             end
           end
 
