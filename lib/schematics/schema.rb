@@ -4,7 +4,7 @@ require 'json-schema'
 require 'singleton'
 
 module Schematics
-  class Schema
+  class Schema # rubocop:disable Metrics/ClassLength
     include Singleton
     attr_reader :entities, :migrations
 

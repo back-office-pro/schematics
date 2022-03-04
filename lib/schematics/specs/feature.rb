@@ -136,7 +136,7 @@ module Schematics
       private
 
       def fill_form(record) # rubocop:disable Metrics/CyclomaticComplexity
-        entity.fillable_elements.each do |element| # rubocop:disable Metrics/BlockLength
+        entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"
           case element
           when Associations::HasAndBelongsToMany

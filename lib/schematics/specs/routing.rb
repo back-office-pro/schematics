@@ -42,7 +42,7 @@ module Schematics
             end
           end
         else
-          it do # rubocop:disable Metrics/BlockLength
+          it do
             if can?(:index)
               is_expected
                 .to route(:get, polymorphic_path(model_class))

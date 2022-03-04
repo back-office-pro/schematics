@@ -4,7 +4,7 @@ require 'active_support/core_ext/string/inflections'
 
 module Schematics
   module Entities
-    class Entity
+    class Entity # rubocop:disable Metrics/ClassLength
       attr_reader :name,
                   :icon,
                   :descriptor,
@@ -17,7 +17,7 @@ module Schematics
 
       class << self
         # :reek:LongParameterList
-        def build(
+        def build( # rubocop:disable Metrics/ParameterLists
           name:,
           type: nil,
           icon: :caret_square_right,
@@ -36,7 +36,7 @@ module Schematics
       end
 
       # :reek:LongParameterList
-      def initialize(name, icon, descriptor, core, actions, associations, attributes, virtuals)
+      def initialize(name, icon, descriptor, core, actions, associations, attributes, virtuals) # rubocop:disable Metrics/ParameterLists
         @name = name
         @icon = icon
         @core = core

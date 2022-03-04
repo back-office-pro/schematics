@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LocalesGenerator < Rails::Generators::NamedBase
+class LocalesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/ClassLength
   delegate :available_locales, to: 'Schematics::Engine.config.i18n'
 
   def create_models_directory

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FixturesGenerator < Rails::Generators::NamedBase
+class FixturesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/ClassLength
   def create_active_storage_directory
     return if destroying?
 

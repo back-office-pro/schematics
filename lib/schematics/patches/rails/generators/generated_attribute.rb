@@ -17,6 +17,7 @@ module Schematics
             schema_attribute&.options_for_migration || super
           end
 
+          # :reek:NilCheck
           def default
             case attribute_default = schema_attribute.try(:default)
             when String, Hash

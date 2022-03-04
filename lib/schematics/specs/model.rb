@@ -116,8 +116,8 @@ module Schematics
           end
         end
 
-        elements.each do |element| # rubocop:disable Metrics/BlockLength
-          it do # rubocop:disable Metrics/BlockLength
+        elements.each do |element|
+          it do
             case element
             when Attributes::Url
               is_expected.to validate_url_of(element.name.to_sym)

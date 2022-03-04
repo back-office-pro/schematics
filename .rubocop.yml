@@ -133,18 +133,14 @@ Metrics/BlockLength:
     - class_methods
     - included
     - to_prepare
+    - it
+    - each
 Metrics/MethodLength:
-  Max: 40
+  Max: 35
   IgnoredMethods:
     - inherited
-Metrics/ClassLength:
-  Max: 220
-Metrics/ModuleLength:
-  Max: 105
 Metrics/AbcSize:
   Max: 50
-Metrics/ParameterLists:
-  Max: 9
 # rubocop-rspec
 RSpec/DescribedClassModuleWrapping:
   Enabled: true
@@ -153,7 +149,9 @@ RSpec/Dialect:
 RSpec/MessageExpectation:
   Enabled: true
 RSpec/ExampleLength:
-  Max: 15
+  CountAsOne:
+    - array
+    - hash
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true
