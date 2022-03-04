@@ -1,4 +1,4 @@
-<% %w(one two).each do |name| %>
+<%- %w(one two).each do |name| %>
 <%= name %>:
 <% attributes.each do |attribute| -%>
   <%- if attribute.password_digest? -%>
