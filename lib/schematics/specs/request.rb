@@ -40,8 +40,6 @@ module Schematics
           )
         end
 
-        before { allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false) }
-
         if can?(:index)
           %i[html csv].each do |as|
             it "should get #{as.upcase} index" do
@@ -250,7 +248,6 @@ module Schematics
 
         if can?(:archive)
           it 'should archive record' do
-            record.restore
             if ability.can?(:archive, record)
               expect { delete path(record.id, 'archive'), headers:, as: :html }
                 .to change { model_class.count }
@@ -263,22 +260,7 @@ module Schematics
             end
           end
 
-          it 'should archive API record' do
-            record.restore
-            if ability.can?(:archive, record)
-              expect { delete path(record.id, 'archive'), headers:, as: :json }
-                .to change { model_class.count }
-                .by(-1)
-              is_expected.to have_http_status(:no_content)
-            else
-              expect { delete path(record.id, 'archive'), headers:, as: :json }
-                .not_to(change { model_class.count })
-              is_expected.to have_http_status(:forbidden)
-            end
-          end
-
           it 'should restore record' do
-            record.destroy!
             if ability.can?(:restore, record)
               expect { delete path(record.id, 'restore'), headers:, as: :html }
                 .to change { model_class.count }
@@ -291,8 +273,20 @@ module Schematics
             end
           end
 
+          it 'should archive API record' do
+            if ability.can?(:archive, record)
+              expect { delete path(record.id, 'archive'), headers:, as: :json }
+                .to change { model_class.count }
+                .by(-1)
+              is_expected.to have_http_status(:no_content)
+            else
+              expect { delete path(record.id, 'archive'), headers:, as: :json }
+                .not_to(change { model_class.count })
+              is_expected.to have_http_status(:forbidden)
+            end
+          end
+
           it 'should restore API record' do
-            record.destroy!
             if ability.can?(:restore, record)
               expect { delete path(record.id, 'restore'), headers:, as: :json }
                 .to change { model_class.count }

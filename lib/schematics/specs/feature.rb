@@ -46,12 +46,7 @@ module Schematics
           is_expected.to have_text t('schematics.sessions.create.success')
         end
 
-        before do
-          allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
-          record
-          model_class.reindex
-          login
-        end
+        before { [record, model_class.reindex, login] }
 
         if can?(:index)
           scenario 'visiting the index' do
