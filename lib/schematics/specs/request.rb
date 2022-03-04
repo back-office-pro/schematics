@@ -200,7 +200,7 @@ module Schematics
 
           it 'should be a bad request' do
             post path, params: {}, headers: headers_with_referer, as: :html
-            redirect_path = ability.can?(:create, record) ? profile_path : root_path
+            redirect_path = ability.can?(:create, model_class) ? profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
