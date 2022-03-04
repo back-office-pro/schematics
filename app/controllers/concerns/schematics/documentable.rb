@@ -81,6 +81,16 @@ module Schematics
               response 400, 'Bad Request', :json
               response 422, 'Unprocessable entity', :json
             end
+
+            entity.events.each do |event|
+              api :trigger do
+                path :id, 'string' unless entity.is_a?(Entities::Singleton)
+  
+                response 204, 'Success', :json
+                response 401, 'Not Authorized', :json
+                response 404, 'Not Found', :json
+              end
+            end
           end
 
           if entity.can?(:show)
