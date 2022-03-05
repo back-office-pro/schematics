@@ -12,7 +12,7 @@ module Schematics
         end
 
         def render?
-          @resource.errors.of_kind?(:base, :stale)
+          @resource.errors.of_kind?(:base, :stale) && last_version
         end
 
         def last_version
