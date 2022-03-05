@@ -24,10 +24,10 @@ module Schematics
 
         let(:record) { __send__(entity_fixtures, :one) }
         let(:ability) { Ability.new(user) }
-        let!(:role) do
+        let(:role) do
           ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
         end
-        let!(:user) do
+        let(:user) do
           ::User.create!(
             email: 'admin@admin.com',
             password: 'Azerty1!',
@@ -48,6 +48,7 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
+          ::Licence.instance.update!(expires_at: 1.day.from_now)
           record
           model_class.reindex
           login

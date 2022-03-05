@@ -26,10 +26,10 @@ module Schematics
         let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
         let(:headers_with_referer) { headers.merge({ 'HTTP_REFERER' => profile_path }) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
-        let!(:role) do
+        let(:role) do
           ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
         end
-        let!(:user) do
+        let(:user) do
           ::User.create!(
             email: 'admin@admin.com',
             first_name: 'John',
@@ -40,7 +40,10 @@ module Schematics
           )
         end
 
-        before { allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false) }
+        before do
+          allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
+          ::Licence.instance.update!(expires_at: 1.day.from_now)
+        end
 
         if can?(:index)
           %i[html csv].each do |as|
@@ -147,12 +150,12 @@ module Schematics
 
           events.each do |event|
             it "should #{event.name} record" do
-              patch path(record.id, event.name), headers: headers_with_referer, as: :html
+              patch path(record.id, event.name), headers:, as: :html
               if ability.can?(event.name.to_sym, record)
                 if record.public_send(:"may_#{event.name}?")
-                  is_expected.to redirect_to(path(record.id))
+                  is_expected.to redirect_to(path(record.reload.slug))
                 else
-                  is_expected.to redirect_to(profile_path)
+                  is_expected.to redirect_to(path(record.id))
                 end
               else
                 is_expected.to redirect_to(root_path)
