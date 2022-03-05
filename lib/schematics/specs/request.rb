@@ -40,6 +40,8 @@ module Schematics
           )
         end
 
+        before { allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false) }
+
         if can?(:index)
           %i[html csv].each do |as|
             it "should get #{as.upcase} index" do
@@ -145,12 +147,12 @@ module Schematics
 
           events.each do |event|
             it "should #{event.name} record" do
-              patch path(record.id, event.name), headers:, as: :html
+              patch path(record.id, event.name), headers: headers_with_referer, as: :html
               if ability.can?(event.name.to_sym, record)
                 if record.public_send(:"may_#{event.name}?")
                   is_expected.to redirect_to(path(record.id))
                 else
-                  is_expected.to redirect_to(root_path)
+                  is_expected.to redirect_to(profile_path)
                 end
               else
                 is_expected.to redirect_to(root_path)
@@ -248,6 +250,7 @@ module Schematics
 
         if can?(:archive)
           it 'should archive record' do
+            record.restore
             if ability.can?(:archive, record)
               expect { delete path(record.id, 'archive'), headers:, as: :html }
                 .to change { model_class.count }
@@ -260,20 +263,8 @@ module Schematics
             end
           end
 
-          it 'should restore record' do
-            if ability.can?(:restore, record)
-              expect { delete path(record.id, 'restore'), headers:, as: :html }
-                .to change { model_class.count }
-                .by(1)
-              is_expected.to redirect_to(path)
-            else
-              expect { delete path(record.id, 'restore'), headers:, as: :html }
-                .not_to(change { model_class.count })
-              is_expected.to redirect_to(root_path)
-            end
-          end
-
           it 'should archive API record' do
+            record.restore
             if ability.can?(:archive, record)
               expect { delete path(record.id, 'archive'), headers:, as: :json }
                 .to change { model_class.count }
@@ -286,7 +277,22 @@ module Schematics
             end
           end
 
+          it 'should restore record' do
+            record.destroy!
+            if ability.can?(:restore, record)
+              expect { delete path(record.id, 'restore'), headers:, as: :html }
+                .to change { model_class.count }
+                .by(1)
+              is_expected.to redirect_to(path)
+            else
+              expect { delete path(record.id, 'restore'), headers:, as: :html }
+                .not_to(change { model_class.count })
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
           it 'should restore API record' do
+            record.destroy!
             if ability.can?(:restore, record)
               expect { delete path(record.id, 'restore'), headers:, as: :json }
                 .to change { model_class.count }
