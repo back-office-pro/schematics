@@ -63,10 +63,12 @@ Lint/ConstantResolution:
     - Time
     - I18n
     - JsonWebToken
+    - JSON
   Exclude:
     - spec/**/*
     - db/*
     - lib/tasks/*
+    - template.rb
 Naming/InclusiveLanguage:
   Enabled: true
 Style/AsciiComments:
