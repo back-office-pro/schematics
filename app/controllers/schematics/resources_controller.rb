@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ResourcesController < ApplicationController
+  class ResourcesController < ApplicationController # rubocop:disable Metrics/ClassLength
     include Fillable
     include Sortable
     include Filterable
@@ -15,7 +15,7 @@ module Schematics
     before_action :read!, only: :show
     before_action :log_search!, only: :index
 
-    authorize_resource except: :autocomplete
+    authorize_resource instance_name: :resource, except: :autocomplete
 
     delegate :model_class, to: :class
     delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
@@ -46,7 +46,7 @@ module Schematics
         format.json { render json: @resources }
         format.csv do
           result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
+            fingerprint: params.require(:fingerprint),
             job: GenerateCsvJob,
             job_params: [model_class.to_s, @resources.pluck(:id), current_user.preferences], # rubocop:disable Rails/PluckId
             extension: 'csv',
@@ -65,7 +65,7 @@ module Schematics
         format.json { render json: @resource }
         format.pdf do
           result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
+            fingerprint: params.require(:fingerprint),
             job: GeneratePdfJob,
             job_params: [model_class.to_s, @resource.id],
             extension: 'pdf',
@@ -122,13 +122,13 @@ module Schematics
             flash.now[:alert] = tscope(result.message)
             render :edit
           end
-          format.json { render json: @resource.errors, status: result.status }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
 
     def trigger
-      event = entity.find_event_by_name(params[:event])
+      event = entity.find_event_by_name(params.require(:event))
       result = Resources::Trigger.call(resource: @resource, event:)
       if result.success?
         respond_to do |format|
@@ -201,6 +201,7 @@ module Schematics
     end
 
     def autocomplete
+      authorize! :index, model_class
       field = params.require(:field).to_sym
       @resources = model_class.search(**search_params.merge(select: field, load: false))
       render json: @resources.map(&field).map(&:to_s).uniq

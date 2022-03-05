@@ -65,6 +65,6 @@ module Schematics
       @user = model_class.find_by!(password_reset_token: params[:token])
     end
 
-    alias not_found_path password_lost_path
+    alias record_not_found_path password_lost_path
   end
 end

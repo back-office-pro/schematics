@@ -6,7 +6,7 @@ require 'active_support/core_ext/numeric/bytes'
 
 module Schematics
   module Attributes
-    class Attachment < Attribute
+    class Attachment < Attribute # rubocop:disable Metrics/ClassLength
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
@@ -130,14 +130,14 @@ module Schematics
         :"#{association_name}_attributes"
       end
 
-      protected
-
       def association_name
         [name, type].join('_').to_sym
       end
 
+      protected
+
       def dummy
-        @dummy ||= Tests::Dummy.new(extension)
+        @dummy ||= Specs::Dummy.new(extension)
       end
     end
   end

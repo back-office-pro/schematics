@@ -5,7 +5,7 @@ module Schematics
     module Password
       class Component < ApplicationComponent
         # :reek:LongParameterList
-        def initialize(
+        def initialize( # rubocop:disable Metrics/ParameterLists
           form:,
           field: nil,
           name: :password,

@@ -10,7 +10,7 @@ RSpec.describe 'Sessions' do
     let(:params) { { user: { email:, password: } } }
 
     context 'when credentials are correct' do
-      let(:password) { 'secret' }
+      let(:password) { 'Azerty1!' }
 
       it { is_expected.to have_http_status(:success) }
       it { expect(json_response).to eq({ 'auth_token' => auth_token }) }
@@ -31,7 +31,7 @@ RSpec.describe 'Sessions' do
     let(:params) { { user: { current_password: } } }
 
     context 'when current_password is right' do
-      let(:current_password) { 'secret' }
+      let(:current_password) { 'Azerty1!' }
 
       it { is_expected.to have_http_status(:no_content) }
       its(:body) { is_expected.to be_blank }

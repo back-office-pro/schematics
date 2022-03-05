@@ -12,26 +12,27 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:user) { users(:two) }
   let(:email) { user.email }
   let(:headers) { { 'Accept' => 'application/json' } }
-  let(:auth_token) { JsonWebToken.encode(auth_token: user.auth_token) }
+  let(:auth_token) { ::JsonWebToken.encode(auth_token: user.auth_token) }
 
   before { do_request }
 end
 
 RSpec.shared_context 'with authenticated user' do
+  let(:admin_role) do
+    ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+  end
+
+  before { admin_role }
+
   include_context 'with unauthenticated user'
 
-  let(:headers) do
-    {
-      'Accept' => 'application/json',
-      'Authorization' => auth_token
-    }
-  end
+  let(:headers) { { 'Accept' => 'application/json', 'Authorization' => auth_token } }
 end
 
 RSpec.shared_context 'with import' do
   fixtures :users
 
-  let(:import) { Import.create(file:, author:) }
+  let(:import) { ::Import.create!(file:, author:) }
   let(:author) { users(:one) }
   let(:file) do
     ActiveStorage::Blob.create_and_upload!(

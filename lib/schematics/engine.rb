@@ -57,6 +57,7 @@ require 'js-routes'
 require 'strip_attributes'
 require 'i18n-inflector'
 require 'chroma'
+require 'webpacker' if Rails.env.test?
 
 module Schematics
   class Engine < ::Rails::Engine
@@ -66,6 +67,8 @@ module Schematics
     config.app_generators do |generator|
       generator.orm :active_record, primary_key_type: :uuid
       generator.templates.unshift root.join('lib', 'templates')
+      generator.test_framework :rspec, fixture: true
+      generator.integration_tool :rspec
       generator.assets false
       generator.helper false
       generator.template_engine nil

@@ -20,7 +20,7 @@ after_bundle do
   rails_command 'generate erd:install'
   rails_command 'db:reset'
   rails_command 'db:migrate'
-  rails_command 'db:fixtures:load FIXTURES=users,charts,stats,clients,sub_categories,categories,products,orders' # rubocop:disable Layout/LineLength
+  rails_command 'db:fixtures:load FIXTURES_PATH="spec/fixtures" FIXTURES=users,active_storage/attachments,active_storage/blobs,roles,charts,stats,clients,sub_categories,categories,products,orders' # rubocop:disable Layout/LineLength
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
   rails_command 'schematics:licence:renew[enterprise,12]'
@@ -34,6 +34,9 @@ after_bundle do
   remove_file 'public/404.html'
   remove_file 'public/422.html'
   remove_file 'public/500.html'
+
+  # Remove /test directory
+  remove_dir 'test'
 
   # Yarn packages
   JSON
@@ -49,7 +52,7 @@ after_bundle do
   run 'brakeman --no-pager --no-exit-on-error'
 
   # Tests
-  # run 'rake test'
+  run 'rspec'
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'

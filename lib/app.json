@@ -348,10 +348,10 @@
           "options": {
             "required": true,
             "readonly": true,
-            "default": "free",
+            "default": "pro",
             "values": [
-              "free",
               "pro",
+              "business",
               "enterprise"
             ]
           }

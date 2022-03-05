@@ -8,8 +8,6 @@ module Schematics
     def initialize(user)
       @user = user
       aliases
-      return unless @user
-
       user_permissions
       active_storage_attachment_permissions
       version_permissions

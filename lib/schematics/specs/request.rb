@@ -1,0 +1,362 @@
+# frozen_string_literal: true
+
+require 'active_support/concern'
+
+module Schematics
+  module Specs
+    module Request # rubocop:disable Metrics/ModuleLength
+      extend ActiveSupport::Concern
+
+      included do
+        include Engine.routes.url_helpers
+        fixtures :all
+        delegate :model_class,
+                 :entity,
+                 :can?,
+                 :params,
+                 :entity_fixtures,
+                 :path,
+                 :events,
+                 to: :class
+
+        subject { response }
+
+        let(:record) { __send__(entity_fixtures, :one) }
+        let(:auth_token) { ::JsonWebToken.encode(auth_token: user.auth_token) }
+        let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
+        let(:headers_with_referer) { headers.merge({ 'HTTP_REFERER' => profile_path }) } # rubocop:disable Style/StringHashKeys
+        let(:ability) { Ability.new(user) }
+        let(:role) do
+          ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+        end
+        let(:user) do
+          ::User.create!(
+            email: 'admin@admin.com',
+            first_name: 'John',
+            last_name: 'Doe',
+            time_zone: 'Paris',
+            locale: Rails.configuration.i18n.default_locale,
+            role:
+          )
+        end
+
+        before do
+          allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
+          ::Licence.instance.update!(expires_at: 1.day.from_now)
+        end
+
+        if can?(:index)
+          %i[html csv].each do |as|
+            it "should get #{as.upcase} index" do
+              get(path, headers:, as:)
+              if ability.can?(:index, model_class)
+                is_expected.to have_http_status(:success)
+              else
+                is_expected.to redirect_to(root_path)
+              end
+            end
+          end
+
+          it 'should get API index' do
+            get path, headers:, as: :json
+            status = ability.can?(:index, model_class) ? :success : :forbidden
+            is_expected.to have_http_status(status)
+          end
+
+          it 'should get API autocomplete' do
+            get path('autocomplete?field=id'), headers:, as: :json
+            status = ability.can?(:index, model_class) ? :success : :forbidden
+            is_expected.to have_http_status(status)
+          end
+        end
+
+        if can?(:show) && model_class != ActiveStorage::Attachment
+          %i[html pdf].each do |as|
+            it "should show #{as.upcase} record" do
+              get(path(record.id), headers:, as:)
+              if ability.can?(:show, record)
+                is_expected.to have_http_status(:success)
+              else
+                is_expected.to redirect_to(root_path)
+              end
+            end
+          end
+
+          it 'should show API record' do
+            get path(record.id), headers:, as: :json
+            status = ability.can?(:show, record) ? :success : :forbidden
+            is_expected.to have_http_status(status)
+          end
+
+          unless entity.is_a?(Entities::Singleton)
+            it 'should be not found' do
+              get path('abdc'), headers:, as: :html
+              is_expected.to redirect_to(path)
+            end
+
+            it 'should be not found API' do
+              get path('abdc'), headers:, as: :json
+              is_expected.to have_http_status(:not_found)
+            end
+          end
+        end
+
+        if can?(:edit)
+          it 'should get edit' do
+            get path(record.id, 'edit'), headers:, as: :html
+            if ability.can?(:edit, record)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+        end
+
+        if can?(:new)
+          it 'should get new' do
+            get path('new'), headers:, as: :html
+            if ability.can?(:new, model_class)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+        end
+
+        if can?(:update)
+          it 'should update record' do
+            patch path(record.id), params: params(record), headers:, as: :html
+            redirect_path = ability.can?(:update, record) ? path(record.reload.slug) : root_path
+            is_expected.to redirect_to(redirect_path)
+          end
+
+          it 'should update API record' do
+            patch path(record.id), params: params(record, :json), headers:, as: :json
+            status = ability.can?(:update, record) ? :success : :forbidden
+            is_expected.to have_http_status(status)
+          end
+
+          it 'should be a bad request' do
+            patch path(record.id), params: {}, headers: headers_with_referer, as: :html
+            redirect_path = ability.can?(:update, record) ? profile_path : root_path
+            is_expected.to redirect_to(redirect_path)
+          end
+
+          it 'should be a bad request API' do
+            patch path(record.id), params: {}, headers:, as: :json
+            status = ability.can?(:update, record) ? :bad_request : :forbidden
+            is_expected.to have_http_status(status)
+          end
+
+          events.each do |event|
+            it "should #{event.name} record" do
+              patch path(record.id, event.name), headers:, as: :html
+              if ability.can?(event.name.to_sym, record)
+                if record.public_send(:"may_#{event.name}?")
+                  is_expected.to redirect_to(path(record.reload.slug))
+                else
+                  is_expected.to redirect_to(path(record.id))
+                end
+              else
+                is_expected.to redirect_to(root_path)
+              end
+            end
+
+            it "should #{event.name} API record" do
+              patch path(record.id, event.name), headers:, as: :json
+              if ability.can?(event.name.to_sym, record)
+                status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
+                is_expected.to have_http_status(status)
+              else
+                is_expected.to have_http_status(:forbidden)
+              end
+            end
+          end
+        end
+
+        if can?(:create)
+          it 'should create record' do
+            if ability.can?(:create, model_class)
+              expect { post(path, params: params(record), headers:, as: :html) }
+                .to change { model_class.count }
+                .by(1)
+              is_expected.to redirect_to(path(model_class.last.slug || model_class.last.id))
+            else
+              expect { post(path, params: params(record), headers:, as: :html) }
+                .not_to(change { model_class.count })
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should create API record' do
+            if ability.can?(:create, model_class)
+              expect { post(path, params: params(record, :json), headers:, as: :json) }
+                .to change { model_class.count }
+                .by(1)
+              is_expected.to have_http_status(:created)
+            else
+              expect { post(path, params: params(record, :json), headers:, as: :json) }
+                .not_to(change { model_class.count })
+              is_expected.to have_http_status(:forbidden)
+            end
+          end
+
+          it 'should be a bad request' do
+            post path, params: {}, headers: headers_with_referer, as: :html
+            redirect_path = ability.can?(:create, model_class) ? profile_path : root_path
+            is_expected.to redirect_to(redirect_path)
+          end
+
+          it 'should be a bad request API' do
+            post path, params: {}, headers:, as: :json
+            status = ability.can?(:create, model_class) ? :bad_request : :forbidden
+            is_expected.to have_http_status(status)
+          end
+        end
+
+        if can?(:destroy) && model_class != ActiveStorage::Attachment
+          it 'should get delete' do
+            get path(record.id, 'delete'), headers:, as: :html
+            if ability.can?(:destroy, record)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should destroy record' do
+            if ability.can?(:destroy, record)
+              expect { delete path(record.id), headers:, as: :html }
+                .to change { model_class.count }
+                .by(-1)
+              is_expected.to redirect_to(path)
+            else
+              expect { delete path(record.id), headers:, as: :html }
+                .not_to(change { model_class.count })
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should destroy API record' do
+            if ability.can?(:destroy, record)
+              expect { delete path(record.id), headers:, as: :json }
+                .to change { model_class.count }
+                .by(-1)
+              is_expected.to have_http_status(:no_content)
+            else
+              expect { delete path(record.id), headers:, as: :json }
+                .not_to(change { model_class.count })
+              is_expected.to have_http_status(:forbidden)
+            end
+          end
+        end
+
+        if can?(:archive)
+          it 'should archive record' do
+            record.restore
+            if ability.can?(:archive, record)
+              expect { delete path(record.id, 'archive'), headers:, as: :html }
+                .to change { model_class.count }
+                .by(-1)
+              is_expected.to redirect_to(path)
+            else
+              expect { delete path(record.id, 'archive'), headers:, as: :html }
+                .not_to(change { model_class.count })
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should archive API record' do
+            record.restore
+            if ability.can?(:archive, record)
+              expect { delete path(record.id, 'archive'), headers:, as: :json }
+                .to change { model_class.count }
+                .by(-1)
+              is_expected.to have_http_status(:no_content)
+            else
+              expect { delete path(record.id, 'archive'), headers:, as: :json }
+                .not_to(change { model_class.count })
+              is_expected.to have_http_status(:forbidden)
+            end
+          end
+
+          it 'should restore record' do
+            record.destroy!
+            if ability.can?(:restore, record)
+              expect { delete path(record.id, 'restore'), headers:, as: :html }
+                .to change { model_class.count }
+                .by(1)
+              is_expected.to redirect_to(path)
+            else
+              expect { delete path(record.id, 'restore'), headers:, as: :html }
+                .not_to(change { model_class.count })
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should restore API record' do
+            record.destroy!
+            if ability.can?(:restore, record)
+              expect { delete path(record.id, 'restore'), headers:, as: :json }
+                .to change { model_class.count }
+                .by(1)
+              is_expected.to have_http_status(:no_content)
+            else
+              expect { delete path(record.id, 'restore'), headers:, as: :json }
+                .not_to(change { model_class.count })
+              is_expected.to have_http_status(:forbidden)
+            end
+          end
+        end
+
+        if can?(:import)
+          it 'should get new import' do
+            get path('imports', 'new'), headers:, as: :html
+            if ability.can?(:import, model_class)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+        end
+      end
+
+      class_methods do
+        delegate :model_class, :original_controller_path, to: :controller_class
+        delegate :entity, to: :model_class
+        delegate :fillable_elements, :can?, :events, to: :entity
+
+        def controller_class
+          description.constantize
+        end
+
+        def entity_fixtures
+          entity.table_name.pluralize.to_sym
+        end
+
+        def params(record, format = nil)
+          {
+            entity.table_name.to_sym => fillable_elements.to_h do |element|
+              [
+                element.column_name.to_sym,
+                element.public_send([format, 'default'].compact.join('_')) ||
+                  record.public_send(element.column_name)
+              ]
+            end
+          }
+        end
+
+        def path(*parts)
+          case entity
+          when Entities::Singleton
+            "/#{original_controller_path}"
+          else
+            parts
+              .unshift("/#{original_controller_path}")
+              .join('/')
+          end
+        end
+      end
+    end
+  end
+end

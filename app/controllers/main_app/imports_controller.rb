@@ -7,6 +7,7 @@ module MainApp
     prepended do
       include Schematics::Nestable
       skip_authorize_resource only: %i[new create template]
+      before_action -> { authorize!(:import, parent_model_class) }, only: %i[new create template] # rubocop:disable Rails/LexicallyScopedActionFilter
       after_action :enqueue_job, only: :create, if: -> { @resource.persisted? }
     end
 

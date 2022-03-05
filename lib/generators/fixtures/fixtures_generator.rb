@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FixturesGenerator < Rails::Generators::NamedBase
+class FixturesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/ClassLength
   def create_active_storage_directory
     return if destroying?
 
@@ -52,6 +52,12 @@ class FixturesGenerator < Rails::Generators::NamedBase
       .map(&method(:append_to_blobs_file))
   end
 
+  def generate_active_storage_files
+    entity
+      .attachment_attributes
+      .map(&method(:create_storage_file))
+  end
+
   private
 
   def entity
@@ -65,7 +71,7 @@ class FixturesGenerator < Rails::Generators::NamedBase
       append_to_file(blobs_file_path) do
         <<~YAML
           #{root_index(blobs_file_path, index).humanize}:
-            key: #{entity.name}_#{attribute.name}_#{index.humanize}
+            key: #{generate_blob_key(attribute, index)}
             filename: dummy.#{attribute.extension}
             content_type: #{Mime[attribute.extension]}
             service_name: test
@@ -102,6 +108,13 @@ class FixturesGenerator < Rails::Generators::NamedBase
     end
   end
 
+  def create_storage_file(attribute)
+    (1..2).each do |index|
+      key = generate_blob_key(attribute, index)
+      create_file(File.join(storage_path, key[0..1], key[2..3], key))
+    end
+  end
+
   def root_index(file_path, index)
     fixtures = YAML.load_file(file_path)
     return index unless fixtures
@@ -109,12 +122,20 @@ class FixturesGenerator < Rails::Generators::NamedBase
     fixtures.keys.count.next
   end
 
+  def generate_blob_key(attribute, index)
+    [entity.name, attribute.name, index.humanize].join('_')
+  end
+
   def destroying?
     behavior == :revoke
   end
 
   def fixtures_path
-    File.join('test', 'fixtures')
+    File.join('spec', 'fixtures')
+  end
+
+  def storage_path
+    File.join('tmp', 'storage')
   end
 
   def active_storage_path

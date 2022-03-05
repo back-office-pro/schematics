@@ -4,7 +4,7 @@ require 'json-schema'
 require 'singleton'
 
 module Schematics
-  class Schema
+  class Schema # rubocop:disable Metrics/ClassLength
     include Singleton
     attr_reader :entities, :migrations
 
@@ -55,7 +55,7 @@ module Schematics
     end
 
     def valid?
-      JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
+      ::JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
     end
 
     def data
@@ -63,7 +63,7 @@ module Schematics
     end
 
     def app_json
-      JSON
+      ::JSON
         .parse(File.read(File.expand_path('../app.json', __dir__)), symbolize_names: true)
         .tap do |json|
           json[:entities].each { _1[:core] = true }
@@ -71,7 +71,7 @@ module Schematics
     end
 
     def data_json
-      JSON.parse(
+      ::JSON.parse(
         File.read(File.expand_path('../../spec/data.json', __dir__)),
         symbolize_names: true
       )

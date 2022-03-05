@@ -40,17 +40,13 @@ Dependencies choices details.
 
 ### Testing
 
-:star: **rspec**
+:star: **rspec + fixtures**
 
 :+1: Rspec is the most popular testing framework
 
-:+1: Better for gem testing
+:+1: Fixtures are auto-generated
 
-:star: **minitest + fixtures**
-
-:+1: Built-in
-
-:+1: Suitable for generated application
+~~minitest~~
 
 ### API Documentation
 

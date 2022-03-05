@@ -11,6 +11,7 @@ module Schematics
         else
           [
             "rails generate scaffold #{name} #{migratable_attributes.map(&:to_s).join(' ')} --skip-resource-route", # rubocop:disable Layout/LineLength
+            "rails generate rspec:feature #{name}",
             "rails generate fixtures #{name}",
             ("rails generate locales #{name}" unless core?),
             "rails generate migration add_slug_to_#{table_name.pluralize} slug:string:uniq",
