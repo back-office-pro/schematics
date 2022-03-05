@@ -22,8 +22,10 @@ describe Schematics::Attributes::Jsonb do
   its(:options_for_migration) { is_expected.to be_empty }
 
   context 'when there is a default' do
-    let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
-
+    let(:default) { { theme: 'light', sidebar_toggled: false } }
+    let(:options) { { default: } }
+    
+    its(:default) { is_expected.to eq(default) }
     its(:options_for_migration) { is_expected.to eq(options) }
   end
 end

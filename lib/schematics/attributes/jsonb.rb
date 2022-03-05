@@ -4,6 +4,7 @@ module Schematics
   module Attributes
     class Jsonb < Attribute
       include Behaviours::Renderable
+      delegate :default, to: :options
 
       def open_api_type
         'object'

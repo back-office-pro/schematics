@@ -20,7 +20,7 @@ module Schematics
           # :reek:NilCheck
           def default
             case attribute_default = schema_attribute.try(:default)
-            when String, Hash
+            when String
               attribute_default.to_json
             when nil
               super
