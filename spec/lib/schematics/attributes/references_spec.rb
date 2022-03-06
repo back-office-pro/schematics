@@ -74,6 +74,7 @@ describe Schematics::Attributes::References do
                  inverse_of: :entities,
                  optional: true,
                  polymorphic: false,
+                 autosave: true,
                  counter_cache: :entities_count
     RUBY
   end
@@ -97,6 +98,7 @@ describe Schematics::Attributes::References do
                    inverse_of: :entities,
                    optional: false,
                    polymorphic: false,
+                   autosave: true,
                    counter_cache: :entities_count
       RUBY
     end
@@ -121,6 +123,7 @@ describe Schematics::Attributes::References do
                    inverse_of: :entities,
                    optional: true,
                    polymorphic: true,
+                   autosave: true,
                    counter_cache: :entities_count
       RUBY
     end

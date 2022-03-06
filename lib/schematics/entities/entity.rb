@@ -222,7 +222,7 @@ module Schematics
       end
 
       def model_elements
-        [self, descriptor, search_data] + elements + triggers + validates
+        [self, descriptor, search_data] + triggers + elements + validates
       end
 
       def search_data_elements
