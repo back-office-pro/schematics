@@ -17,7 +17,8 @@ describe Schematics::Attributes::StateMachine do
         {
           name: 'close',
           from: 'pending',
-          to: 'closed'
+          to: 'closed',
+          callback: '$in_stock = false'
         },
         {
           name: 'refuse',
@@ -30,7 +31,8 @@ describe Schematics::Attributes::StateMachine do
             closed
             refused
           ],
-          to: 'pending'
+          to: 'pending',
+          callback: '$in_stock = true'
         }
       ]
     }
@@ -64,19 +66,25 @@ describe Schematics::Attributes::StateMachine do
       aasm column: :#{name}, enum: true, no_direct_assignment: true do
         state :pending, initial: true
         state :closed, :refused
-        event :close, after: :after_close do
-          transitions from: [:pending], to: :closed
+        event :close do
+          transitions from: [:pending], to: :closed, after: :after_close
         end
-        event :refuse, after: :after_refuse do
-          transitions from: [:pending], to: :refused
+        event :refuse do
+          transitions from: [:pending], to: :refused, after: :after_refuse
         end
-        event :reopen, after: :after_reopen do
-          transitions from: [:closed, :refused], to: :pending
+        event :reopen do
+          transitions from: [:closed, :refused], to: :pending, after: :after_reopen
         end
       end
-      def after_close; end
+      def after_close
+        self.in_stock = false
+      rescue StandardError
+      end
       def after_refuse; end
-      def after_reopen; end
+      def after_reopen
+        self.in_stock = true
+      rescue StandardError
+      end
     RUBY
   end
 end
