@@ -51,5 +51,21 @@ describe Schematics::Tokens::Tokenizer do
       its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
       its([6]) { is_expected.to be_a(Schematics::Tokens::Number) }
     end
+
+    context 'when function is an assignment' do
+      let(:function) { '$in_stock = true' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::String) }
+    end
+
+    context 'when function is a not spaced assignment' do
+      let(:function) { '$in_stock=true' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::String) }
+    end
   end
 end
