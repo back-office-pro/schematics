@@ -20,6 +20,10 @@
         {
           "name": "no_method_error",
           "function": "$first_name.some_attribute"
+        },
+        {
+          "name": "malformed_virtual",
+          "function": "$first_name = true"
         }
       ],
       "attributes": [

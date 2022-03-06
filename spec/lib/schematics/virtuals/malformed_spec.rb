@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Virtuals::Comparison do
+describe Schematics::Virtuals::Malformed do
   subject(:virtual) { described_class.build(entity, name:, function:, options:) }
 
   let(:entity) do
@@ -12,37 +12,29 @@ describe Schematics::Virtuals::Comparison do
       ]
     )
   end
-  let(:name) { 'big_price' }
-  let(:function) { '$price >= 100 && $category.vat == 10' }
+  let(:name) { 'has_stock' }
+  let(:function) { '$in_stock = true' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
-  its(:open_api_type) { is_expected.to eq('boolean') }
-  its(:function) { is_expected.to eq('self.price >= 100 && self.category.vat == 10') }
-  its(:to_sql) { is_expected.to eq('products.price >= 100 AND categories.vat = 10') }
-  its(:preload) { is_expected.to eq([:category]) }
-  its(:icon) { is_expected.to eq(:toggle_on) }
+  its(:open_api_type) { is_expected.to eq('string') }
+  its(:function) { is_expected.to eq('raise ArgumentError') }
+  its(:to_sql) { is_expected.to eq("products.in_stock = 'true'") }
+  its(:preload) { is_expected.to be_empty }
+  its(:icon) { is_expected.to eq(:exclamation_triangle) }
   its(:weight) { is_expected.to eq(1) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      define_attribute_method :big_price
-      def big_price
-        self.price >= 100 && self.category.vat == 10
+      define_attribute_method :has_stock
+      def has_stock
+        raise ArgumentError
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
     RUBY
-  end
-
-  describe '#format' do
-    subject { virtual.format(value) }
-
-    let(:value) { 'true' }
-
-    it { is_expected.to eq('TRUE') }
   end
 end

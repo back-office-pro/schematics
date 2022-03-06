@@ -21,6 +21,7 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
+  its(:open_api_type) { is_expected.to eq('string') }
   its(:to_sql) { is_expected.to eq("CONCAT(users.first_name, ' ', profiles.last_name)") }
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
