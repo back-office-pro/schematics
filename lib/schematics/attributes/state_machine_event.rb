@@ -10,6 +10,7 @@ module Schematics
       delegate :to_str, to: :trigger
       attr_reader :name, :icon
 
+      # :reek:LongParameterList
       def initialize(entity:, name:, from:, to:, icon: :location_arrow, callback: nil) # rubocop:disable Metrics/ParameterLists
         @entity = entity
         @name = name
