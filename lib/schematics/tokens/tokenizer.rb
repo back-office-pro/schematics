@@ -8,6 +8,7 @@ module Schematics
           (\s*(?:&&|\|\|)\s*)               | # combinator
           (\s+(?:\*\*|\+|-|\*|/|%|\||&)\s+) | # operator
           (\s*(?:<=|>=|<|>|!=|==)\s*)       | # comparator
+          (\s*(?:\+=|-=|\*=|=)\s*)          | # assignment
           (\(|\))                           | # parenthesis
           \$(\w+\.?\w+)                     | # variable
           ([a-zA-Z_-]+)                     | # string
@@ -15,7 +16,7 @@ module Schematics
           (\s+)                               # whitespace
         }x
 
-        def tokenize(function, table_name)
+        def tokenize(function, table_name = nil)
           function.scan(REGEX).map do |match|
             Token.build(match, table_name)
           end
