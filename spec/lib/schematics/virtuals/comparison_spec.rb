@@ -20,7 +20,7 @@ describe Schematics::Virtuals::Comparison do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
-  its(:function) { is_expected.to eq('price >= 100 && category.vat == 10') }
+  its(:function) { is_expected.to eq('self.price >= 100 && self.category.vat == 10') }
   its(:to_sql) { is_expected.to eq('products.price >= 100 AND categories.vat = 10') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:toggle_on) }
@@ -30,7 +30,7 @@ describe Schematics::Virtuals::Comparison do
     is_expected.to eq <<~RUBY
       define_attribute_method :big_price
       def big_price
-        price >= 100 && category.vat == 10
+        self.price >= 100 && self.category.vat == 10
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end

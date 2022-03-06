@@ -27,7 +27,7 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
-  its(:function) { is_expected.to eq('(price ** category.vat)') }
+  its(:function) { is_expected.to eq('(self.price ** self.category.vat)') }
   its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:square_root_alt) }
@@ -39,7 +39,7 @@ describe Schematics::Virtuals::Calculation do
     is_expected.to eq <<~RUBY
       define_attribute_method :tax_inclusive_price
       def tax_inclusive_price
-        (price ** category.vat)
+        (self.price ** self.category.vat)
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
