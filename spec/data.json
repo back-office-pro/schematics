@@ -87,6 +87,12 @@
     {
       "name": "product",
       "descriptor": "reference",
+      "triggers": [
+        {
+          "action": "create",
+          "callback": "$in_stock = true"
+        }
+      ],
       "virtuals": [
         {
           "name": "tax_inclusive_price",
@@ -169,7 +175,8 @@
                 "name": "close",
                 "icon": "times",
                 "from": "pending",
-                "to": "closed"
+                "to": "closed",
+                "callback": "$in_stock = false"
               },
               {
                 "name": "refuse",
@@ -183,7 +190,8 @@
                   "closed",
                   "refused"
                 ],
-                "to": "pending"
+                "to": "pending",
+                "callback": "$in_stock = true"
               }
             ]
           }
@@ -199,6 +207,12 @@
     },
     {
       "name": "order",
+      "triggers": [
+        {
+          "action": "save",
+          "callback": "$product.in_stock = true"
+        }
+      ],
       "virtuals": [
         {
           "name": "reference",
