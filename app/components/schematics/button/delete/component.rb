@@ -13,7 +13,7 @@ module Schematics
         end
 
         def render?
-          can?(:destroy, @resource)
+          can?(:delete, @resource)
         end
 
         def css_classes
