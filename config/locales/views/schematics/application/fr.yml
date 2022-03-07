@@ -7,6 +7,7 @@ fr:
         cancel: Annuler
         confirm: Valider
         destroy: Supprimer définitivement
+        duplicate: Dupliquer
         edit: Editer
         import: Importer des %{human_name_plural}
         loading: Chargement...
