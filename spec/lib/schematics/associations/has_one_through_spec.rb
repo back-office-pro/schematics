@@ -58,7 +58,8 @@ describe Schematics::Associations::HasOneThrough do
               class_name: 'Schema',
               foreign_key: 'schema_id',
               through: :entity,
-              source: :schema
+              source: :schema,
+              autosave: true
     RUBY
   end
 

@@ -31,6 +31,7 @@ fr:
       mime_type: n'est pas un type de médias valide
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:
+      argument: un champ virtuel ne peut pas contenir d'assignement
       name: "$%{name} n'est pas une variable définie"
       nil: une variable n'a pas de valeur
       no_method: "%{name} n'est pas défini"

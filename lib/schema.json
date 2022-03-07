@@ -12,6 +12,12 @@
         "descriptor": {
           "type": "string"
         },
+        "triggers": {
+          "items": {
+            "$ref": "#/definitions/trigger"
+          },
+          "type": "array"
+        },
         "virtuals": {
           "items": {
             "$ref": "#/definitions/virtual"
@@ -34,7 +40,16 @@
     "migration": {
       "properties": {
         "command": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "add_attribute",
+            "change_attribute",
+            "create_entity",
+            "destroy_entity",
+            "remove_attribute",
+            "rename_attribute",
+            "rename_entity"
+          ]
         },
         "entity": {
           "type": "string"
@@ -53,6 +68,27 @@
         "command",
         "entity",
         "timestamp"
+      ],
+      "type": "object"
+    },
+    "trigger": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "create",
+            "update",
+            "save",
+            "destroy"
+          ]
+        },
+        "callback": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "callback"
       ],
       "type": "object"
     },

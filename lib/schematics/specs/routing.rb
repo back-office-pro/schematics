@@ -30,12 +30,10 @@ module Schematics
                 .to route(:get, polymorphic_path(model_class))
                 .to(locale:, controller:, action: :show)
             end
-            if can?(:edit)
+            if can?(:update)
               is_expected
                 .to route(:get, edit_polymorphic_path(model_class))
                 .to(locale:, controller:, action: :edit)
-            end
-            if can?(:update)
               is_expected
                 .to route(:patch, polymorphic_path(model_class))
                 .to(locale:, controller:, action: :update)
@@ -58,20 +56,22 @@ module Schematics
             end
             if can?(:create)
               is_expected
-                .to route(:post, polymorphic_path(model_class))
-                .to(locale:, model_name:, controller:, action: :create)
-            end
-            if can?(:new)
-              is_expected
                 .to route(:get, new_polymorphic_path(model_class))
                 .to(locale:, model_name:, controller:, action: :new)
+              is_expected
+                .to route(:post, polymorphic_path(model_class))
+                .to(locale:, model_name:, controller:, action: :create)
+              is_expected
+                .to route(:get, new_polymorphic_path([model_class, ::Import]))
+                .to(locale:, controller: 'imports', model_name:, action: :new)
+              is_expected
+                .to route(:post, polymorphic_path([model_class, ::Import]))
+                .to(locale:, controller: 'imports', model_name:, action: :create)
             end
-            if can?(:edit)
+            if can?(:update)
               is_expected
                 .to route(:get, edit_polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :edit)
-            end
-            if can?(:update)
               is_expected
                 .to route(:patch, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :update)
@@ -96,14 +96,6 @@ module Schematics
               is_expected
                 .to route(:delete, polymorphic_path(record, action: :restore))
                 .to(locale:, model_name:, controller:, id:, action: :restore)
-            end
-            if can?(:import)
-              is_expected
-                .to route(:get, new_polymorphic_path([model_class, ::Import]))
-                .to(locale:, controller: 'imports', model_name:, action: :new)
-              is_expected
-                .to route(:post, polymorphic_path([model_class, ::Import]))
-                .to(locale:, controller: 'imports', model_name:, action: :create)
             end
           end
         end

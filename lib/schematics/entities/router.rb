@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/indent'
+require 'active_support/core_ext/array/access'
 
 module Schematics
   module Entities
@@ -24,7 +25,10 @@ module Schematics
       private
 
       def routes
-        actions - %i[archive import]
+        actions
+          .excluding(:archive)
+          .tap { _1.push(:new) if can?(:create) }
+          .tap { _1.push(:edit) if can?(:update) }
       end
 
       def resource
@@ -95,7 +99,7 @@ module Schematics
       end
 
       def import_routes
-        return unless can?(:import)
+        return unless can?(:create)
 
         <<~RUBY
           collection do

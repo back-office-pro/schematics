@@ -14,7 +14,8 @@ module Schematics
           .chomp
           .concat(",\n")
           .concat <<~RUBY.indent(8)
-            inverse_of: :#{inverse_of}
+            inverse_of: :#{inverse_of},
+            autosave: true
           RUBY
       end
 

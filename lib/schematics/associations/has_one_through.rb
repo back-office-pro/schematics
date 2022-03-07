@@ -23,6 +23,15 @@ module Schematics
         source.camelize
       end
 
+      def to_str
+        super
+          .chomp
+          .concat(",\n")
+          .concat <<~RUBY.indent(8)
+            autosave: true
+          RUBY
+      end
+
       def search_data
         <<~RUBY
           #{name}&.to_s

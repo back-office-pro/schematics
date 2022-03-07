@@ -54,7 +54,8 @@ describe Schematics::Associations::HasOne do
       has_one :entity,
               class_name: 'Entity',
               foreign_key: 'schema_id',
-              inverse_of: :schema
+              inverse_of: :schema,
+              autosave: true
     RUBY
   end
 

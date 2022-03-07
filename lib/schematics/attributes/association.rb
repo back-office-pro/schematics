@@ -64,6 +64,7 @@ module Schematics
                      inverse_of: :#{inverse_association_name.pluralize},
                      optional: #{!required?},
                      polymorphic: #{polymorphic?},
+                     autosave: true,
                      counter_cache: :#{inverse_association_name.pluralize}_count
         RUBY
       end

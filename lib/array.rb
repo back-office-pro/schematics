@@ -5,10 +5,6 @@ class Array
     select { |x| klasses.any? { |klass| x.is_a?(klass) } }
   end
 
-  def any_is_a?(*klasses)
-    any? { |x| klasses.any? { |klass| x.is_a?(klass) } }
-  end
-
   def reject_is_a?(*klasses)
     reject { |x| klasses.any? { |klass| x.is_a?(klass) } }
   end

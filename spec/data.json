@@ -20,6 +20,10 @@
         {
           "name": "no_method_error",
           "function": "$first_name.some_attribute"
+        },
+        {
+          "name": "malformed_virtual",
+          "function": "$first_name = true"
         }
       ],
       "attributes": [
@@ -143,6 +147,13 @@
           }
         },
         {
+          "name": "quantity",
+          "type": "integer",
+          "options": {
+            "default": 20
+          }
+        },
+        {
           "name": "logo",
           "type": "attachment",
           "options": {
@@ -169,7 +180,8 @@
                 "name": "close",
                 "icon": "times",
                 "from": "pending",
-                "to": "closed"
+                "to": "closed",
+                "callback": "$in_stock = false"
               },
               {
                 "name": "refuse",
@@ -183,7 +195,8 @@
                   "closed",
                   "refused"
                 ],
-                "to": "pending"
+                "to": "pending",
+                "callback": "$in_stock = true"
               }
             ]
           }
@@ -237,6 +250,34 @@
         {
           "name": "product",
           "type": "belongs_to"
+        }
+      ]
+    },
+    {
+      "name": "stock_movement",
+      "icon": "people_carry",
+      "actions": [
+        "index",
+        "show",
+        "create"
+      ],
+      "triggers": [
+        {
+          "action": "save",
+          "callback": "$product.quantity -= quantity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "quantity",
+          "type": "integer"
+        },
+        {
+          "name": "product",
+          "type": "belongs_to",
+          "options": {
+            "required": true
+          }
         }
       ]
     }

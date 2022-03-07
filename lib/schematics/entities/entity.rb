@@ -11,6 +11,7 @@ module Schematics
                   :actions,
                   :attributes,
                   :virtuals,
+                  :triggers,
                   :associations
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
@@ -26,9 +27,20 @@ module Schematics
           actions: nil,
           associations: [],
           attributes: [],
-          virtuals: []
+          virtuals: [],
+          triggers: []
         )
-          args = [name, icon.to_sym, descriptor, core, actions, associations, attributes, virtuals]
+          args = [
+            name,
+            icon.to_sym,
+            descriptor,
+            core,
+            actions,
+            associations,
+            attributes,
+            virtuals,
+            triggers
+          ]
           return new(*args) unless type
 
           Entities.const_get(type.camelize.to_sym).new(*args)
@@ -36,7 +48,17 @@ module Schematics
       end
 
       # :reek:LongParameterList
-      def initialize(name, icon, descriptor, core, actions, associations, attributes, virtuals) # rubocop:disable Metrics/ParameterLists
+      def initialize( # rubocop:disable Metrics/ParameterLists
+        name,
+        icon,
+        descriptor,
+        core,
+        actions,
+        associations,
+        attributes,
+        virtuals,
+        triggers
+      )
         @name = name
         @icon = icon
         @core = core
@@ -44,6 +66,7 @@ module Schematics
         @associations = associations.map { Associations::Association.build(self, **_1) }
         @attributes = attributes.map { Attributes::Attribute.build(self, **_1) }
         @virtuals = virtuals.map { Virtuals::Virtual.build(self, **_1) }
+        @triggers = triggers.map { Trigger.new(**_1) }
         @descriptor = Descriptor.build(self, descriptor)
       end
 
@@ -177,6 +200,10 @@ module Schematics
         actions.include?(action.to_sym)
       end
 
+      def actions_with_events
+        actions.concat(events.map(&:name))
+      end
+
       def search_data
         <<~RUBY
           def search_data
@@ -195,11 +222,11 @@ module Schematics
       protected
 
       def default_actions
-        %w[index show create new edit update destroy archive import]
+        %w[index show create update destroy archive]
       end
 
       def model_elements
-        [self, descriptor, search_data] + elements + validates
+        [self, descriptor, search_data] + triggers + elements + validates
       end
 
       def search_data_elements

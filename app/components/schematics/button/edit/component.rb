@@ -15,7 +15,7 @@ module Schematics
         end
 
         def render?
-          can?(:update, @resource)
+          can?(:edit, @resource)
         end
 
         def url

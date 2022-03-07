@@ -17,7 +17,7 @@ module Schematics
       protected
 
       def default_actions
-        %w[show edit update]
+        %w[show update]
       end
     end
   end

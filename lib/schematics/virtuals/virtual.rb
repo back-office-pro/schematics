@@ -13,10 +13,12 @@ module Schematics
 
       class << self
         def build(entity, name:, function:, options: {})
-          tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
-          if tokens.any_is_a?(Tokens::Comparator)
+          case tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
+          in [*, Tokens::Assignment, *]
+            Malformed.new(entity, name, tokens, options)
+          in [*, Tokens::Comparator, *]
             Comparison.new(entity, name, tokens, options)
-          elsif tokens.any_is_a?(Tokens::Operator)
+          in [*, Tokens::Operator, *]
             Calculation.new(entity, name, tokens, options)
           else
             Concatenation.new(entity, name, tokens, options)

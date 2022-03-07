@@ -8,6 +8,7 @@ en:
       mime_type: is not a valid MIME type
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
     virtuals:
+      argument: a virtual cannot contains an assignment
       name: "$%{name} is not a defined variable"
       nil: a variable does not have value
       no_method: "%{name} is not defined"

@@ -10,7 +10,7 @@ describe Schematics::Entities::Router do
   context 'when no actions are defined' do
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :new, :edit, :update, :destroy], model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
@@ -65,7 +65,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :new, :edit, :update, :destroy], model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
@@ -84,11 +84,11 @@ describe Schematics::Entities::Router do
   end
 
   context 'when some actions are defined' do
-    let(:actions) { %w[index show create import] }
+    let(:actions) { %w[index show create] }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create], model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :new], model_name: 'User' do
           get :autocomplete, on: :collection
           collection do
             resources :imports, only: %i[new create], as: 'user_imports', format: false do
@@ -105,7 +105,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resource :settings, only: [:show, :edit, :update]
+        resource :settings, only: [:show, :update, :edit]
         resolve("Setting") { [:settings] }
       RUBY
     end

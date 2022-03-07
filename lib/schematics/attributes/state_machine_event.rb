@@ -7,14 +7,17 @@ module Schematics
     class StateMachineEvent
       include ActionView::Helpers::TranslationHelper
 
+      delegate :to_str, to: :trigger
       attr_reader :name, :icon
 
-      def initialize(entity:, name:, from:, to:, icon: :location_arrow)
+      # :reek:LongParameterList
+      def initialize(entity:, name:, from:, to:, icon: :location_arrow, callback: nil) # rubocop:disable Metrics/ParameterLists
         @entity = entity
         @name = name
         @icon = icon
         @from = from
         @to = to
+        @callback = callback
       end
 
       def human
@@ -25,18 +28,18 @@ module Schematics
         )
       end
 
-      def to_str
+      def to_proc
         <<~RUBY
-          def after_#{@name}; end
+          event :#{@name} do
+            transitions from: #{Array(@from).map(&:to_sym)}, to: :#{@to}, after: :after_#{@name}
+          end
         RUBY
       end
 
-      def to_proc
-        <<~RUBY
-          event :#{@name}, after: :after_#{@name} do
-            transitions from: #{Array(@from).map(&:to_sym)}, to: :#{@to}
-          end
-        RUBY
+      private
+
+      def trigger
+        @trigger ||= Trigger.new(action: @name, callback: @callback, trigger: :after)
       end
     end
   end

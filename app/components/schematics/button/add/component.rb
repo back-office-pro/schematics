@@ -13,7 +13,7 @@ module Schematics
         end
 
         def render?
-          can?(:create, @model_class)
+          can?(:new, @model_class)
         end
       end
     end
