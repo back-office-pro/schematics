@@ -108,8 +108,8 @@ module Schematics
     end
 
     def duplicate
+      @resource = @resource.dup
       result = Resources::Duplicate.call(resource: @resource)
-      @resource = result.resource
       if result.success?
         respond_to do |format|
           format.html do

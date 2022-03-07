@@ -6,7 +6,7 @@ module Schematics
       include Interactable
 
       before do
-        @resource = context.resource = context.resource.dup
+        @resource = context.resource
         @resource.paper_trail_event = :duplicate
       end
 
