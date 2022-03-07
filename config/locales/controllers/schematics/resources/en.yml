@@ -11,6 +11,9 @@ en:
       destroy:
         failure: An error occured
         success: The %{human_name} was successfully destroyed
+      duplicate:
+        failure: An error occured
+        success: The %{human_name} was successfully duplicated
       restore:
         failure: An error occured
         success: The %{human_name} was successfully restored
