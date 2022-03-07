@@ -47,7 +47,8 @@ module Schematics
         destroy: :trash,
         archive: :archive,
         restore: :trash_restore,
-        show: :eye
+        show: :eye,
+        duplicate: :clone
       }[event.to_sym] || entity.find_event_by_name(event).try(:icon)
     end
   end
