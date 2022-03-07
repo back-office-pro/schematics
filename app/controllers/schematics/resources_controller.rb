@@ -10,7 +10,7 @@ module Schematics
     include Calendarable
     include Documentable
 
-    before_action :set_resource, only: %i[show edit delete update trigger destroy archive restore]
+    before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_breadcrumb
     before_action :read!, only: :show
     before_action :log_search!, only: :index
@@ -89,6 +89,27 @@ module Schematics
     def create
       @resource = model_class.new(resource_params)
       result = Resources::Create.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to @resource, notice: tscope(result.message)
+          end
+          format.json { head :created }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :new
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+    def duplicate
+      result = Resources::Duplicate.call(resource: @resource)
+      @resource = result.resource
       if result.success?
         respond_to do |format|
           format.html do
