@@ -200,6 +200,10 @@ module Schematics
         actions.include?(action.to_sym)
       end
 
+      def actions_with_events
+        actions.concat(events.map(&:name))
+      end
+
       def search_data
         <<~RUBY
           def search_data
@@ -218,7 +222,7 @@ module Schematics
       protected
 
       def default_actions
-        %w[index show create new edit update destroy archive import]
+        %w[index show create update destroy archive]
       end
 
       def model_elements

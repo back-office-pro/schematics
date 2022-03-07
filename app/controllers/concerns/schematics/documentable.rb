@@ -124,9 +124,7 @@ module Schematics
               response 404, 'Not Found', :json
               response 401, 'Not Authorized', :json
             end
-          end
 
-          if entity.can?(:restore)
             api :restore, "Restore #{entity.name}" do
               path :id, 'string'
 

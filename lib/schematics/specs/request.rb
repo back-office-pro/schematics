@@ -101,7 +101,7 @@ module Schematics
           end
         end
 
-        if can?(:edit)
+        if can?(:update)
           it 'should get edit' do
             get path(record.id, 'edit'), headers:, as: :html
             if ability.can?(:edit, record)
@@ -110,20 +110,7 @@ module Schematics
               is_expected.to redirect_to(root_path)
             end
           end
-        end
 
-        if can?(:new)
-          it 'should get new' do
-            get path('new'), headers:, as: :html
-            if ability.can?(:new, model_class)
-              is_expected.to have_http_status(:success)
-            else
-              is_expected.to redirect_to(root_path)
-            end
-          end
-        end
-
-        if can?(:update)
           it 'should update record' do
             patch path(record.id), params: params(record), headers:, as: :html
             redirect_path = ability.can?(:update, record) ? path(record.reload.slug) : root_path
@@ -175,6 +162,24 @@ module Schematics
         end
 
         if can?(:create)
+          it 'should get new' do
+            get path('new'), headers:, as: :html
+            if ability.can?(:new, model_class)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should get new import' do
+            get path('imports', 'new'), headers:, as: :html
+            if ability.can?(:import, model_class)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
           it 'should create record' do
             if ability.can?(:create, model_class)
               expect { post(path, params: params(record), headers:, as: :html) }
@@ -305,17 +310,6 @@ module Schematics
               expect { delete path(record.id, 'restore'), headers:, as: :json }
                 .not_to(change { model_class.count })
               is_expected.to have_http_status(:forbidden)
-            end
-          end
-        end
-
-        if can?(:import)
-          it 'should get new import' do
-            get path('imports', 'new'), headers:, as: :html
-            if ability.can?(:import, model_class)
-              is_expected.to have_http_status(:success)
-            else
-              is_expected.to redirect_to(root_path)
             end
           end
         end
