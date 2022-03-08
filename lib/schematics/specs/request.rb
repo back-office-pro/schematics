@@ -17,7 +17,7 @@ module Schematics
                  :entity_fixtures,
                  :path,
                  :events,
-                 :fillable_elements,
+                 :fillable_attributes,
                  to: :class
 
         subject { response }
@@ -221,7 +221,7 @@ module Schematics
 
           it 'should duplicate record' do
             if ability.can?(:duplicate, record)
-              if fillable_elements.any?(&:unique?)
+              if fillable_attributes.any?(&:unique?)
                 expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
                   .not_to(change { model_class.count })
                 is_expected.to have_http_status(:success)
@@ -240,7 +240,7 @@ module Schematics
 
           it 'should duplicate record API' do
             if ability.can?(:duplicate, record)
-              if fillable_elements.any?(&:unique?)
+              if fillable_attributes.any?(&:unique?)
                 expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
                   .not_to(change { model_class.count })
                 is_expected.to have_http_status(:unprocessable_entity)
@@ -357,7 +357,7 @@ module Schematics
       class_methods do
         delegate :model_class, :original_controller_path, to: :controller_class
         delegate :entity, to: :model_class
-        delegate :fillable_elements, :can?, :events, to: :entity
+        delegate :fillable_elements, :fillable_attributes, :can?, :events, to: :entity
 
         def controller_class
           description.constantize
