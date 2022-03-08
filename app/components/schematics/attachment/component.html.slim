@@ -1,5 +1,5 @@
 - begin
-  = image_tag(attachment, class: @css_class)
+  = image_tag attachment, class: @css_class, data: { toggle: 'tooltip', placement: 'top', title: @title }
 - rescue StandardError => e
   - if @replacement.present?
     = fa_icon(@replacement[:icon], size: @replacement[:size], class: 'align-middle')

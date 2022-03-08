@@ -4,13 +4,14 @@ module Schematics
   module Attachment
     class Component < ApplicationComponent
       class << self
-        def build_avatar(attachment:)
+        def build_avatar(user:, title: true, css_class: 'rounded-circle')
           new(
-            attachment:,
+            attachment: user.avatar,
             width: 36,
             height: 36,
-            css_class: 'rounded-circle',
-            replacement: { icon: :user_circle, size: '2x' }
+            css_class:,
+            replacement: { icon: :user_circle, size: '2x' },
+            title: (user.full_name if title)
           )
         end
 
@@ -19,13 +20,21 @@ module Schematics
         end
       end
 
-      def initialize(attachment:, width: 800, height: 600, replacement: nil, css_class: nil)
+      def initialize( # rubocop:disable Metrics/ParameterLists
+        attachment:,
+        width: 800,
+        height: 600,
+        replacement: nil,
+        css_class: nil,
+        title: nil
+      )
         super
         @attachment = attachment
         @width = width
         @height = height
         @replacement = replacement
         @css_class = css_class
+        @title = title
       end
 
       def attachment
