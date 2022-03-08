@@ -20,6 +20,7 @@ en:
         edit: Notification preferences
       resources:
         delete: Delete %{resource}
+        duplicate: Duplicate %{resource}
         edit: Edit %{resource}
         index: List of %{human_name_plural}
         new: Add a new %{human_name}

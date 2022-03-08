@@ -15,6 +15,7 @@ describe Schematics::Entities::Router do
           delete :archive, on: :member
           delete :restore, on: :member
           get :autocomplete, on: :collection
+          post :duplicate, on: :member
           collection do
             resources :imports, only: %i[new create], as: 'user_imports', format: false do
               get :template, on: :collection, format: :csv
@@ -70,6 +71,7 @@ describe Schematics::Entities::Router do
           delete :archive, on: :member
           delete :restore, on: :member
           get :autocomplete, on: :collection
+          post :duplicate, on: :member
           patch :close, action: :trigger, event: 'close', on: :member
           patch :refuse, action: :trigger, event: 'refuse', on: :member
           patch :reopen, action: :trigger, event: 'reopen', on: :member
@@ -90,6 +92,7 @@ describe Schematics::Entities::Router do
       is_expected.to eq <<~RUBY
         resources :users, only: [:index, :show, :create, :new], model_name: 'User' do
           get :autocomplete, on: :collection
+          post :duplicate, on: :member
           collection do
             resources :imports, only: %i[new create], as: 'user_imports', format: false do
               get :template, on: :collection, format: :csv

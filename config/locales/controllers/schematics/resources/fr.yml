@@ -11,6 +11,9 @@ fr:
       destroy:
         failure: Une erreur est survenue
         success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été supprimé@{f:e|fv:e} avec succès"
+      duplicate:
+        failure: Une erreur est survenue
+        success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été dupliqué@{f:e|fv:e} avec succès"
       restore:
         failure: Une erreur est survenue
         success: "@{f:La |m:Le |fv:L'|mv:L'}%{human_name} a été restauré@{f:e|fv:e} avec succès"

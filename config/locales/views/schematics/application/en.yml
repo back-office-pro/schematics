@@ -7,6 +7,7 @@ en:
         cancel: Cancel
         confirm: Confirm
         destroy: Delete permanently
+        duplicate: Duplicate
         edit: Edit
         import: Import %{human_name_plural}
         loading: Processing...

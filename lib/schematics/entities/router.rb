@@ -56,11 +56,14 @@ module Schematics
       end
 
       def resource_routes
-        [delete_route, archive_routes, autocomplete_route, events_routes, import_routes]
-          .compact
-          .join
-          .indent(2)
-          .chomp
+        [
+          delete_route,
+          archive_routes,
+          autocomplete_route,
+          duplicate_route,
+          events_routes,
+          import_routes
+        ].compact.join.indent(2).chomp
       end
 
       def delete_route
@@ -85,6 +88,14 @@ module Schematics
 
         <<~RUBY
           get :autocomplete, on: :collection
+        RUBY
+      end
+
+      def duplicate_route
+        return unless can?(:create)
+
+        <<~RUBY
+          post :duplicate, on: :member
         RUBY
       end
 

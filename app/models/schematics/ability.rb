@@ -28,6 +28,7 @@ module Schematics
 
     def aliases
       alias_action :trigger, to: :update
+      alias_action :duplicate, to: :create
       alias_action :import, to: :create
       alias_action :restore, to: :archive
       alias_action :delete, to: :destroy

@@ -17,6 +17,7 @@ module Schematics
                  :entity_fixtures,
                  :path,
                  :events,
+                 :fillable_elements,
                  to: :class
 
         subject { response }
@@ -216,6 +217,44 @@ module Schematics
             post path, params: {}, headers:, as: :json
             status = ability.can?(:create, model_class) ? :bad_request : :forbidden
             is_expected.to have_http_status(status)
+          end
+
+          it 'should duplicate record' do
+            if ability.can?(:duplicate, record)
+              if fillable_elements.any?(&:unique?)
+                expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
+                  .not_to(change { model_class.count })
+                is_expected.to have_http_status(:success)
+              else
+                expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
+                  .to change { model_class.count }
+                  .by(1)
+                is_expected.to redirect_to(path(model_class.last.slug || model_class.last.id))
+              end
+            else
+              expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
+                .not_to(change { model_class.count })
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'should duplicate record API' do
+            if ability.can?(:duplicate, record)
+              if fillable_elements.any?(&:unique?)
+                expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
+                  .not_to(change { model_class.count })
+                is_expected.to have_http_status(:unprocessable_entity)
+              else
+                expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
+                  .to change { model_class.count }
+                  .by(1)
+                is_expected.to have_http_status(:created)
+              end
+            else
+              expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
+                .not_to(change { model_class.count })
+              is_expected.to have_http_status(:forbidden)
+            end
           end
         end
 
