@@ -1,0 +1,11 @@
+.d-none.d-xl-inline-flex.flex-row-reverse
+  - if @other_users&.any?
+    .rounded-circle.p-2.bg-light.border.border-light.ml-n2.text-secondary {
+      data-toggle='tooltip'
+      data-placement='bottom'
+      data-html='true'
+      data-title=title
+    }
+      | +#{@other_users.size}
+  - @users.each do |user|
+    = link_to render(Schematics::Attachment::Component.build_avatar(user:, css_class: 'rounded-circle border border-light ml-n2')), user
