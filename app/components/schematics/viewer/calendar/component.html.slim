@@ -11,7 +11,7 @@
           - date_range.each_slice(7) do |week|
             tr
               - week.each do |date|
-                td class=td_classes_for(date)
+                td.day class=td_class_for(date)
                   .text-muted = date.day
                   - resources_for(date).each do |resource|
                     .alert.alert-secondary.text-truncate.mb-1.p-2 data-href=href(resource)
