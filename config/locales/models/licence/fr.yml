@@ -3,7 +3,7 @@ fr:
   activerecord:
     attributes:
       licence:
-        expires_at: Expire le
+        expires_on: Expire le
         label: Label
         plan: Forfait
         plans:

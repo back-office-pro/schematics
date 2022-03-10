@@ -43,7 +43,7 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
-          ::Licence.instance.update!(expires_at: 1.day.from_now)
+          ::Licence.instance.update!(expires_on: 1.day.from_now)
         end
 
         if can?(:index)

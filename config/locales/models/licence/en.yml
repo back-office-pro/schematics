@@ -3,7 +3,7 @@ en:
   activerecord:
     attributes:
       licence:
-        expires_at: Expires at
+        expires_on: Expires on
         label: Label
         plan: Plan
         plans:

@@ -29,7 +29,7 @@ namespace :schematics do
     desc 'Renew application licence'
     task :renew, %i[plan term] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
-        Licence.instance.update!(plan: args[:plan], expires_at: args[:term].to_i.months.from_now)
+        Licence.instance.update!(plan: args[:plan], expires_on: args[:term].to_i.months.from_now)
       end
     end
   end

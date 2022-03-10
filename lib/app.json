@@ -369,7 +369,7 @@
           }
         },
         {
-          "name": "expires_at",
+          "name": "expires_on",
           "type": "date"
         }
       ]
