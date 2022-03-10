@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/array/access'
 
 module Schematics
   module Entities
@@ -157,7 +158,8 @@ module Schematics
         preloadable_elements
           .flat_map(&:preload)
           .compact
-          .uniq - virtual_association_errors
+          .uniq
+          .excluding(virtual_association_errors)
       end
 
       def events
