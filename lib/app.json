@@ -94,6 +94,18 @@
           "options": {
             "required": true
           }
+        },
+        {
+          "name": "last_seen_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "read_notifications_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "reset_password_sent_at",
+          "type": "timestamp"
         }
       ]
     },
@@ -358,7 +370,7 @@
         },
         {
           "name": "expires_at",
-          "type": "timestamp"
+          "type": "date"
         }
       ]
     },

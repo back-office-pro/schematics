@@ -13,7 +13,7 @@ module Schematics
         fail! unless @user
 
         @user.regenerate_password_reset_token
-        @user.update!(updated_at: ::Time.current)
+        @user.update!(reset_password_sent_at: ::Time.current)
         UserMailer.password_reset(@user).deliver_later
       end
     end

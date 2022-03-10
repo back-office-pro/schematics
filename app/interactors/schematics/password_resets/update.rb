@@ -18,7 +18,7 @@ module Schematics
       private
 
       def expired?
-        @user.password_digest && @user.updated_at < 2.hours.ago
+        @user.password_digest && @user.reset_password_sent_at < 2.hours.ago
       end
     end
   end

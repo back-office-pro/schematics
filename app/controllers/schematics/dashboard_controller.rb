@@ -12,7 +12,7 @@ module Schematics
     end
 
     def read_notifications
-      current_user.update!(updated_at: ::Time.current)
+      current_user.update!(read_notifications_at: ::Time.current)
     end
   end
 end

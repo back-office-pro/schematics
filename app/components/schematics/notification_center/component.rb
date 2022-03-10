@@ -4,7 +4,7 @@ module Schematics
   module NotificationCenter
     class Component < ApplicationComponent
       delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :updated_at, :preferences, to: :current_user
+      delegate :read_notifications_at, :preferences, to: :current_user
 
       def versions
         @versions ||= Version
@@ -14,7 +14,7 @@ module Schematics
 
       def unread_count
         @unread_count ||= Version
-                          .where(created_at: updated_at...)
+                          .where(created_at: read_notifications_at...)
                           .timeline(ability: current_ability)
                           .size
       end
