@@ -27,9 +27,8 @@ module Schematics
             .reject_is_a?(Schematics::Behaviours::Rangeable)
             .map(&:name)
             .map(&:to_sym)
-            .push(:with_deleted) + entity
-                                   .rangeable_elements
-                                   .map { |element| { element.name.to_sym => %i[gte lte] } }
+            .push(:with_deleted)
+            .concat(entity.rangeable_elements.map { { _1.name.to_sym => %i[gte lte] } })
     end
 
     def cast_filter_value(value)
