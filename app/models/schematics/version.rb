@@ -21,15 +21,6 @@ module Schematics
         SQL
       )
     }
-    scope :read_messages, lambda {
-      where(
-        <<~SQL.squish
-          versions.item_type = 'Message' AND
-          versions.item_id = messages.id AND
-          versions.event = 'show'
-        SQL
-      )
-    }
 
     class << self
       def timeline(ability:, versions: nil)

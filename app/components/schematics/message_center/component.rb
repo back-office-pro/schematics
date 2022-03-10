@@ -15,7 +15,7 @@ module Schematics
 
       def unread_count
         @unread_count ||= received_messages
-                          .where('NOT EXISTS (:version)', version: Version.read_messages)
+                          .unread
                           .size
       end
 
