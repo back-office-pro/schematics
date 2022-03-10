@@ -55,7 +55,7 @@ module MainApp
     end
 
     def expired?
-      ::Time.current >= expires_on
+      ::Date.current > expires_on
     end
   end
 end

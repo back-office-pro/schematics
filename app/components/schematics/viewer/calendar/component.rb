@@ -51,12 +51,12 @@ module Schematics
         end
 
         def start_of_month_date
-          (calendar_start_date || @resources.map(&calendar_start_attribute).min || Date.current)
+          (calendar_start_date || @resources.map(&calendar_start_attribute).min || ::Date.current)
             .beginning_of_month
         end
 
         def end_of_month_date
-          (calendar_start_date || @resources.map(&calendar_start_attribute).max || Date.current)
+          (calendar_start_date || @resources.map(&calendar_start_attribute).max || ::Date.current)
             .end_of_month
         end
       end

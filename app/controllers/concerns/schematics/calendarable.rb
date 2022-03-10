@@ -15,10 +15,10 @@ module Schematics
       [
         calendar_start_date ||
           model_class.with_deleted.minimum(calendar_start_attribute) ||
-          Date.current.beginning_of_month,
+          ::Date.current.beginning_of_month,
         calendar_end_date ||
           model_class.with_deleted.maximum(calendar_end_attribute) ||
-          Date.current.end_of_month
+          ::Date.current.end_of_month
       ].map(&:in_time_zone).map(&:to_time)
     end
 

@@ -61,6 +61,7 @@ Lint/ConstantResolution:
     - Chart
     - Stat
     - Time
+    - Date
     - I18n
     - JsonWebToken
     - JSON
