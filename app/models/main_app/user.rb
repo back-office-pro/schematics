@@ -13,6 +13,8 @@ module MainApp
     end
 
     def online?
+      return false unless last_seen_at
+
       last_seen_at < ONLINE_DELAY.ago
     end
   end
