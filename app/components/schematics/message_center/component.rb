@@ -3,7 +3,7 @@
 module Schematics
   module MessageCenter
     class Component < ApplicationComponent
-      delegate :updated_at, :received_messages, to: :current_user
+      delegate :received_messages, to: :current_user
 
       def messages
         @messages ||= received_messages
@@ -15,16 +15,7 @@ module Schematics
 
       def unread_count
         @unread_count ||= received_messages
-                          .where(
-                            'NOT EXISTS (:version)',
-                            version: Version.where(
-                              <<~SQL.squish
-                                versions.item_type = 'Message' AND
-                                versions.item_id = messages.id AND
-                                versions.event = 'show'
-                              SQL
-                            )
-                          )
+                          .where('NOT EXISTS (:version)', version: Version.read_messages)
                           .size
       end
 

@@ -13,6 +13,23 @@ module Schematics
 
     scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { includes(:item) }
+    scope :filter_by_user_preferences, lambda {
+      joins(:user).where(
+        <<~SQL.squish
+          users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
+          users.preferences -> CONCAT(versions.event, '_', versions.item_type) IS NULL
+        SQL
+      )
+    }
+    scope :read_messages, lambda {
+      where(
+        <<~SQL.squish
+          versions.item_type = 'Message' AND
+          versions.item_id = messages.id AND
+          versions.event = 'show'
+        SQL
+      )
+    }
 
     class << self
       def timeline(ability:, versions: nil)
@@ -20,17 +37,8 @@ module Schematics
           .with_user
           .with_item
           .yield_self { versions ? _1 : _1.accessible_by(ability) }
-          .yield_self { versions ? _1 : _1.joins(:user).where(user_preferences_conditions) }
+          .yield_self { versions ? _1 : _1.filter_by_user_preferences }
           .reorder(created_at: :desc)
-      end
-
-      private
-
-      def user_preferences_conditions
-        <<~SQL.squish
-          users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
-          users.preferences -> CONCAT(versions.event, '_', versions.item_type) IS NULL
-        SQL
       end
     end
 
