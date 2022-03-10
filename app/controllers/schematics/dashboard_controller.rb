@@ -3,12 +3,8 @@
 module Schematics
   class DashboardController < ApplicationController
     def home
-      @charts = ::Chart
-                .left_joins(:roles)
-                .where(roles: [current_user.role, nil])
-      @stats = ::Stat
-               .left_joins(:roles)
-               .where(roles: [current_user.role, nil])
+      @charts = ::Chart.accessible_by_role(current_user.role)
+      @stats = ::Stat.accessible_by_role(current_user.role)
     end
 
     def admin
