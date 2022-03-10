@@ -4,6 +4,7 @@ module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
     include Localizable
+    include Trackable
     include Rescuable
 
     protect_from_forgery unless: -> { request.format.json? }
