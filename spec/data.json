@@ -259,12 +259,17 @@
       "actions": [
         "index",
         "show",
-        "create"
+        "create",
+        "destroy"
       ],
       "triggers": [
         {
-          "action": "save",
+          "action": "create",
           "callback": "$product.quantity -= quantity"
+        },
+        {
+          "action": "destroy",
+          "callback": "$product.quantity += quantity"
         }
       ],
       "attributes": [
