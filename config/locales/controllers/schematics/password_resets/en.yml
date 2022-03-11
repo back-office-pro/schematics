@@ -6,6 +6,6 @@ en:
         failure: Unknown email
         success: Email sent with password reset instructions
       update:
-        error: An error occured
-        failure: Password reset has expired
+        expired: Password reset has expired
+        failure: An error occured
         success: Password has been reset!

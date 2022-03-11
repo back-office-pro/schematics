@@ -11,14 +11,16 @@ module Schematics
       end
 
       def call
-        fail! if expired?
-        fail!(message: '.error') unless @user.update(@params)
+        fail!(message: '.expired') if expired?
+        fail! unless @user.update(@params)
       end
 
       private
 
       def expired?
-        @user.password_digest && @user.reset_password_sent_at < 2.hours.ago
+        return false unless @user.password_digest
+
+        @user.reset_password_sent_at < 2.hours.ago
       end
     end
   end

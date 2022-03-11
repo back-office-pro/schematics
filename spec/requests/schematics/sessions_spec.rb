@@ -12,12 +12,16 @@ RSpec.describe 'Sessions' do
     context 'when credentials are correct' do
       let(:password) { 'Azerty1!' }
 
+      before { do_request }
+
       it { is_expected.to have_http_status(:success) }
       it { expect(json_response).to eq({ 'auth_token' => auth_token }) }
     end
 
     context 'when credentials are wrong' do
       let(:password) { 'qwerty' }
+
+      before { do_request }
 
       it { is_expected.to have_http_status(:unauthorized) }
       its(:body) { is_expected.to be_blank }
@@ -33,6 +37,8 @@ RSpec.describe 'Sessions' do
     context 'when current_password is right' do
       let(:current_password) { 'Azerty1!' }
 
+      before { do_request }
+
       it { is_expected.to have_http_status(:no_content) }
       its(:body) { is_expected.to be_blank }
     end
@@ -46,6 +52,8 @@ RSpec.describe 'Sessions' do
           ]
         }
       end
+
+      before { do_request }
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }

@@ -6,6 +6,6 @@ fr:
         failure: E-mail inconnu
         success: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
       update:
-        error: Une erreur est survenue
-        failure: La requête de réinitialisation a expirée
+        expired: La requête de réinitialisation a expirée
+        failure: Une erreur est survenue
         success: Votre mot de passe a été réinitialisé !

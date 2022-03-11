@@ -9,6 +9,8 @@ RSpec.describe 'Preferences' do
     let(:do_request) { put(preferences_path, params:, headers:) }
     let(:params) { { preferences: { theme: 'light' } } }
 
+    before { do_request }
+
     it { is_expected.to have_http_status(:no_content) }
     its(:body) { is_expected.to be_blank }
   end

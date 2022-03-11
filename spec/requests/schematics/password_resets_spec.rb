@@ -12,6 +12,8 @@ RSpec.describe 'Password Resets' do
     context 'when email exists' do
       let(:email) { user.email }
 
+      before { do_request }
+
       it { is_expected.to have_http_status(:no_content) }
       its(:body) { is_expected.to be_blank }
     end
@@ -26,6 +28,8 @@ RSpec.describe 'Password Resets' do
         }
       end
 
+      before { do_request }
+
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }
     end
@@ -35,26 +39,54 @@ RSpec.describe 'Password Resets' do
     let(:do_request) { put(password_reset_path(token:), params:, headers:) }
     let(:params) { { user: { password:, password_confirmation: } } }
 
-    context 'when token exists and password is confirmed' do
+    context 'when not expired token exists and password is confirmed' do
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
+
+      before do
+        user.update!(reset_password_sent_at: Time.current)
+        do_request
+      end
 
       it { is_expected.to have_http_status(:no_content) }
       its(:body) { is_expected.to be_blank }
     end
 
-    context 'when token exists and when password is not confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when not expired token exists and password is not confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1' }
       let(:expected_response) do
         {
           'errors' => [
-            I18n.t('schematics.resources.update.failure')
+            I18n.t('schematics.password_resets.update.failure')
           ]
         }
       end
+
+      before do
+        user.update!(reset_password_sent_at: Time.current)
+        do_request
+      end
+
+      it { is_expected.to have_http_status(:unprocessable_entity) }
+      it { expect(json_response).to eq(expected_response) }
+    end
+
+    context 'when token has expired' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:token) { user.password_reset_token }
+      let(:password) { 'Azerty1!' }
+      let(:password_confirmation) { 'Azerty1!' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.password_resets.update.expired')
+          ]
+        }
+      end
+
+      before { do_request }
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }
@@ -63,6 +95,8 @@ RSpec.describe 'Password Resets' do
     context 'when token does not exist' do
       let(:token) { 'foo' }
       let(:params) { {} }
+
+      before { do_request }
 
       it { is_expected.to have_http_status(:not_found) }
       its(:body) { is_expected.to be_blank }
