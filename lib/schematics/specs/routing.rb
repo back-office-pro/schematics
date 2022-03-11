@@ -49,7 +49,7 @@ module Schematics
                 .to route(:get, polymorphic_path(model_class, action: :autocomplete))
                 .to(locale:, model_name:, controller:, action: :autocomplete)
             end
-            if can?(:show) && model_class != ActiveStorage::Attachment
+            if can?(:show) && model_class != ::ActiveStorage::Attachment
               is_expected
                 .to route(:get, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, action: :show, id:)
@@ -84,7 +84,7 @@ module Schematics
                   .to(locale:, model_name:, controller:, action: :trigger, id:, event: event.name)
               end
             end
-            if can?(:destroy) && model_class != ActiveStorage::Attachment
+            if can?(:destroy) && model_class != ::ActiveStorage::Attachment
               is_expected
                 .to route(:delete, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :destroy)

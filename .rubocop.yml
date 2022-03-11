@@ -65,6 +65,8 @@ Lint/ConstantResolution:
     - I18n
     - JsonWebToken
     - JSON
+    - ActiveStorage::Attachment
+    - ActiveStorage::Blob
   Exclude:
     - spec/**/*
     - db/*

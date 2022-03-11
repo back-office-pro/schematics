@@ -23,7 +23,7 @@ module Schematics
       private
 
       def filepath
-        ActiveStorage::Blob
+        ::ActiveStorage::Blob
           .service
           .path_for(@import.file.key)
       end

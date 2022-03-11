@@ -71,7 +71,7 @@ module Schematics
           end
         end
 
-        if can?(:show) && model_class != ActiveStorage::Attachment
+        if can?(:show) && model_class != ::ActiveStorage::Attachment
           %i[html pdf].each do |as|
             it "should show #{as.upcase} record" do
               get(path(record.id), headers:, as:)
@@ -258,7 +258,7 @@ module Schematics
           end
         end
 
-        if can?(:destroy) && model_class != ActiveStorage::Attachment
+        if can?(:destroy) && model_class != ::ActiveStorage::Attachment
           it 'should get delete' do
             get path(record.id, 'delete'), headers:, as: :html
             if ability.can?(:destroy, record)

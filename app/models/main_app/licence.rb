@@ -11,7 +11,7 @@ module MainApp
     end
 
     def storage_size
-      ActiveStorage::Attachment
+      ::ActiveStorage::Attachment
         .includes(:blob)
         .sum(&:byte_size)
     end

@@ -13,7 +13,7 @@ module Schematics
 
         def title
           case @resources.first
-          when ActiveStorage::Attachment
+          when ::ActiveStorage::Attachment
             @resources
               .first
               .record
@@ -26,7 +26,7 @@ module Schematics
 
         def icon
           case @resources.first
-          when ActiveStorage::Attachment
+          when ::ActiveStorage::Attachment
             @resources
               .first
               .record
