@@ -15,7 +15,7 @@ module MainApp
     def online?
       return false unless last_seen_at
 
-      last_seen_at < ONLINE_DELAY.ago
+      ONLINE_DELAY.ago.before?(last_seen_at)
     end
   end
 end

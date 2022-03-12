@@ -57,7 +57,7 @@ module MainApp
     def expired?
       return true unless expires_on
 
-      ::Date.current > expires_on
+      ::Date.current.after?(expires_on)
     end
   end
 end

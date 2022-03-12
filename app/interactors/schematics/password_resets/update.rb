@@ -20,7 +20,7 @@ module Schematics
       def expired?
         return false unless @user.password_digest
 
-        @user.reset_password_sent_at < 2.hours.ago
+        2.hours.ago.after?(@user.reset_password_sent_at)
       end
     end
   end
