@@ -4,14 +4,14 @@ module Schematics
   module Attachment
     class Component < ApplicationComponent
       class << self
-        def build_avatar(user:, title: true, css_class: 'rounded-circle')
+        def build_avatar(user:, title: nil)
           new(
             attachment: user.avatar,
             width: 36,
             height: 36,
-            css_class:,
+            css_class: 'rounded-circle',
             replacement: { icon: :user_circle, size: '2x' },
-            title: (user.full_name if title)
+            title:
           )
         end
 
@@ -20,6 +20,7 @@ module Schematics
         end
       end
 
+      # :reek:LongParameterList
       def initialize( # rubocop:disable Metrics/ParameterLists
         attachment:,
         width: 800,
@@ -41,6 +42,18 @@ module Schematics
         @attachment
           .representation(resize_to_fit: [@width, @height])
           .processed
+      end
+
+      def data
+        { toggle: 'tooltip', placement: 'top', title: @title }
+      end
+
+      def icon
+        @replacement[:icon]
+      end
+
+      def size
+        @replacement[:size]
       end
     end
   end

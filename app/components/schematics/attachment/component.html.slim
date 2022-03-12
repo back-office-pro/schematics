@@ -1,10 +1,10 @@
 - begin
-  = image_tag attachment, class: @css_class, data: { toggle: 'tooltip', placement: 'top', title: @title }
+  = image_tag attachment, class: @css_class, data:
 - rescue StandardError => e
   - if @replacement.present?
-    = fa_icon(@replacement[:icon], size: @replacement[:size], class: 'align-middle')
+    = fa_icon icon, size:, class: @css_class, data:
   - else
-    = fa_icon(:exclamation_triangle, class: 'mr-2')
+    = fa_icon :exclamation_triangle, class: 'mr-2'
     - case e
     - when MiniMagick::Error
       = t('.minimagick_error')

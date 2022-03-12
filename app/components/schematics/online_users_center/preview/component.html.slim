@@ -1,0 +1,6 @@
+.row data-href=href
+  .col-auto.align-self-center
+    = render Schematics::Attachment::Component.build_avatar(user: @user)
+  .col.text-truncate
+    = @user.full_name
+    .text-muted = timeago_tag(@user.last_seen_at, force: true)

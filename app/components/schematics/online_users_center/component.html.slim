@@ -1,0 +1,10 @@
+li.nav-item.dropdown.no-arrow.align-items-center.px-3.border-left.border-light.d-none.d-sm-flex
+  a#online-users-dropdown.nav-link.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
+    = fa_icon :users, class: 'fa-lg'
+    .badge.badge-primary.rounded-pill.animate__animated.animate__zoomIn = users.size
+  .dropdown-menu.border-0.shadow-sm.dropdown-menu-right.animate__animated.animate__zoomIn.p-0.mt-2 aria-labelledby='online-users-dropdown'
+    h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
+    .pre-scrollable
+      - users.each do |user|
+        .dropdown-item
+          = render Schematics::OnlineUsersCenter::Preview::Component.new(user:)

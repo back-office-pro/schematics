@@ -1,6 +1,6 @@
 .row data-href=href
   .col-auto.align-self-center
-    = link_to render(Schematics::Attachment::Component.build_avatar(user: @message.author)), @message.author
+    = render Schematics::Avatar::Component.new(user: @message.author)
   .col.text-truncate
     div class=css_class = @message.subject
     .text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}
