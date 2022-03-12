@@ -33,6 +33,10 @@ module Schematics
           def date?
             type == :date
           end
+
+          def onchange
+            super if date?
+          end
         end
       end
     end

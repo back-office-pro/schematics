@@ -62,6 +62,12 @@ module Schematics
           ('font-weight-bold' if active?)
         ].compact
       end
+
+      def onchange
+        <<~JAVASCRIPT.chomp
+          this.form.dispatchEvent(new Event('submit'))
+        JAVASCRIPT
+      end
     end
   end
 end

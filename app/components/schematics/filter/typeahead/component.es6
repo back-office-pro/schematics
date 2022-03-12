@@ -2,11 +2,11 @@
 
 window.TypeaheadController = class extends SearchBarController {
   connect () {
-    this.inputTarget.form.addEventListener('submit', this.compactBlankInputs)
+    this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmit)
   }
 
   diconnect () {
-    this.inputTarget.form.removeEventListener('submit', this.compactBlankInputs)
+    this.inputTarget.form.removeEventListener('submit', this.compactBlankInputsAndSubmit)
   }
 
   onSearch () {
@@ -24,8 +24,7 @@ window.TypeaheadController = class extends SearchBarController {
 
   selectItem (event) {
     this.inputTarget.value = event.currentTarget.dataset.value
-    this.compactBlankInputs.call(this.inputTarget.form)
-    this.inputTarget.form.submit()
+    this.compactBlankInputsAndSubmit.call(this.inputTarget.form)
   }
 
   suggestionTemplate (result) {
@@ -37,11 +36,12 @@ window.TypeaheadController = class extends SearchBarController {
     `
   }
 
-  compactBlankInputs () {
+  compactBlankInputsAndSubmit () {
     Array
       .from(this.elements)
       .filter(_ => !_.value)
       .forEach(_ => { _.disabled = true })
+    this.submit()
   }
 
   get url () {
