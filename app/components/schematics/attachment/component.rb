@@ -4,7 +4,7 @@ module Schematics
   module Attachment
     class Component < ApplicationComponent
       class << self
-        def build_avatar(user:, title: nil)
+        def avatar(user:, title: nil)
           new(
             attachment: user.avatar,
             width: 36,
@@ -15,7 +15,7 @@ module Schematics
           )
         end
 
-        def build_company_logo(attachment:, icon:)
+        def company_logo(attachment:, icon:)
           new(attachment:, width: 300, height: 150, replacement: { icon:, size: '7x' })
         end
       end
