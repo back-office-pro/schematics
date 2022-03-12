@@ -5,14 +5,11 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      before_action :update_last_seen_at!
+      before_action :update_last_seen_at!, unless: -> { request.format.json? }
     end
 
     def update_last_seen_at!
-      return if request.format.json?
-      return if stale?(current_user)
-
-      current_user.update!(last_seen_at: ::Time.current)
+      current_user&.update!(last_seen_at: ::Time.current)
     end
   end
 end

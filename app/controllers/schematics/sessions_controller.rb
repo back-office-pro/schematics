@@ -5,6 +5,7 @@ module Schematics
     include Fillable
 
     skip_before_action :authorize, only: %i[new create]
+    skip_before_action :update_last_seen_at!, only: :update
     layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
