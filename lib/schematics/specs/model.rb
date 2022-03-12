@@ -17,6 +17,11 @@ module Schematics
         it { is_expected.to have_implicit_order_column(:created_at) }
         it { is_expected.to be_a(Loadable) }
 
+        triggers.each do |trigger|
+          it { is_expected.to respond_to(trigger.method_name.to_sym) }
+          it { is_expected.to callback(trigger.method_name.to_sym).before(trigger.action.to_sym) }
+        end
+
         attributes
           .select(&:required?)
           .reject_is_a?(Attributes::StateMachine)
@@ -160,6 +165,7 @@ module Schematics
               is_expected.to have_one_attached(element.name.to_sym)
             when Attributes::StateMachineEvent
               is_expected.to respond_to(:"after_#{element.name}")
+              is_expected.to callback(:"after_#{element.name}").after(element.name.to_sym)
             when Attributes::Association
               is_expected
                 .to belong_to(element.name.to_sym)
@@ -211,6 +217,7 @@ module Schematics
         delegate :entity, to: :model_class
         delegate :elements,
                  :attributes,
+                 :triggers,
                  :renderable_attributes,
                  :fillable_attributes,
                  :attachments_attributes,

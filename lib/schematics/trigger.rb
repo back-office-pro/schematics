@@ -2,6 +2,8 @@
 
 module Schematics
   class Trigger
+    attr_reader :action
+
     def initialize(action:, callback:, trigger: :before)
       @action = action
       @callback = callback
@@ -15,6 +17,10 @@ module Schematics
         #{method_name} :#{method_name}
         #{instance_method}
       RUBY
+    end
+
+    def method_name
+      [@trigger, @action].join('_')
     end
 
     private
@@ -36,10 +42,6 @@ module Schematics
           def #{method_name}; end
         RUBY
       end
-    end
-
-    def method_name
-      [@trigger, @action].join('_')
     end
 
     def callback
