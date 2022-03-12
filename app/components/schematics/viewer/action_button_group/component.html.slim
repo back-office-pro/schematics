@@ -1,4 +1,4 @@
-.btn-group.enabled
+.btn-group.pe-auto
   - if @resource.deleted?
     = render Schematics::Button::Restore::Component.new(resource: @resource)
   - else

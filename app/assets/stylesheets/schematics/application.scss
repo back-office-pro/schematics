@@ -9,6 +9,7 @@ $flag-icons-path: 'flag-icons/flags';
 @import 'best_in_place';
 @import 'slim_select';
 @import 'swagger';
+@import 'utilities';
 @import 'search_bar/component';
 @import 'sidebar/component';
 @import 'toast/component';
@@ -94,14 +95,6 @@ footer {
 
 .table.table-hover thead:first-child th:first-child {
   width: 1%;
-}
-
-.table tr.disabled {
-  pointer-events: none;
-}
-
-.table td .btn-group.enabled {
-  pointer-events: auto;
 }
 
 .table td,

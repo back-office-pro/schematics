@@ -13,7 +13,7 @@ module Schematics
         end
 
         def tr_css_class(resource)
-          return 'disabled' if resource.deleted?
+          return 'pe-none' if resource.deleted?
           return 'font-weight-bold' if resource.unread?
         end
       end
