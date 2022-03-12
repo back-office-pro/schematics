@@ -4,6 +4,7 @@ module Schematics
   module Chart
     class Component < ApplicationComponent
       delegate :icon, :kind, :suffix, :type, :xtitle, :ytitle, to: :@chart
+      with_collection_parameter :chart
 
       def initialize(chart:)
         super

@@ -1,6 +1,4 @@
 .row
-  - @stats.each do |stat|
-    = render Schematics::Stat::Component.new(stat:)
+  = render Schematics::Stat::Component.with_collection(@stats)
 .row
-  - @charts.each do |chart|
-    = render Schematics::Chart::Component.new(chart:)
+  = render Schematics::Chart::Component.with_collection(@charts)

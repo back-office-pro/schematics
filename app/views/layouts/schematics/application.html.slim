@@ -20,8 +20,7 @@ html
     javascript:
       window.I18n = #{i18n_javascript}
   body
-    - flash.each do |f|
-      = render Schematics::Toast::Component.new(flash: f)
+    = render Schematics::Toast::Component.with_collection(flash.to_a)
     .container-fluid.p-0.h-100
       .row.no-gutters.h-100
         = render Schematics::Sidebar::Component.new

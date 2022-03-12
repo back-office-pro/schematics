@@ -5,6 +5,7 @@ module Schematics
     module Association
       class Component < Viewer::Component
         delegate :confirm_data, to: :helpers
+        with_collection_parameter :resources
 
         def initialize(resources:, collapsed: false)
           super(resources:)
