@@ -79,7 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'net-smtp', '~> 0.3.0'
   spec.add_dependency 'oj', '~> 3.13.11'
   spec.add_dependency 'pagy', '~> 5.10.1'
-  spec.add_dependency 'paper_trail', '~> 12.2.0'
+  spec.add_dependency 'paper_trail', '~> 12.3.0'
   spec.add_dependency 'paranoia', '~> 2.5.2'
   spec.add_dependency 'phonelib', '~> 0.6.57'
   spec.add_dependency 'rack-attack', '~> 6.6.0'
