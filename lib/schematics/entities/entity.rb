@@ -178,6 +178,10 @@ module Schematics
         name.camelize
       end
 
+      def model_class
+        class_name.safe_constantize
+      end
+
       def table_name
         name.tr('/', '_')
       end

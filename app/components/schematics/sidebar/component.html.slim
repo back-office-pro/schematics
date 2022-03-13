@@ -5,7 +5,7 @@
     ul.nav.nav-light.flex-column.flex-nowrap
       li.nav-item.mb-3
       - entities.each do |entity|
-        - model_class = entity.class_name.constantize
+        - model_class = entity.model_class
         li.nav-item.text-center.mw-100.mb-2
           = active_link_to polymorphic_path(model_class),
             class: 'nav-link p-0 m-0 text-secondary text-nowrap',

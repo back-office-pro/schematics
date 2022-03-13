@@ -13,8 +13,8 @@ module Schematics
         Schema
           .instance
           .entities
-          .select { can?(:index, _1.class_name.constantize) }
-          .sort_by { _1.class_name.constantize.human_name }
+          .select { can?(:index, _1.model_class) }
+          .sort_by { _1.model_class.human_name }
       end
     end
   end

@@ -6,7 +6,7 @@
         - events.each do |action|
           td.text-center.text-primary = t(action, scope: %i[activerecord attributes permission actions])
       - entities.each do |entity|
-        - model_class = entity.class_name.constantize
+        - model_class = entity.model_class
         tr
           th.text-primary
             = fa_icon entity.icon, class: 'fa-fw mr-2 text-muted'
