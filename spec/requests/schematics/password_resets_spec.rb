@@ -86,7 +86,10 @@ RSpec.describe 'Password Resets' do
         }
       end
 
-      before { do_request }
+      before do
+        user.update!(reset_password_sent_at: Time.current - User::PASSWORD_RESET_TOKEN_DURATION)
+        do_request
+      end
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }
