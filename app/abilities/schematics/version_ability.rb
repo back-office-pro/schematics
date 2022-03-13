@@ -6,9 +6,10 @@ module Schematics
       super
       can(:revert, Version, user:)
       cannot :revert, Version, object: nil
-      user.role.permissions.each do |permission|
-        can :read, Version, event: permission.action, item_type: permission.model
-      end
+      user
+        .role
+        .permissions
+        .each { can :read, Version, event: _1.action, item_type: _1.model }
     end
   end
 end
