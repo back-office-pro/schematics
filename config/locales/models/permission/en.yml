@@ -8,6 +8,7 @@ en:
           archive: Archive
           create: Add
           destroy: Delete
+          duplicate: Duplicate
           import: Import
           index: List
           read: Read

@@ -4,7 +4,7 @@ module Schematics
   class Version < PaperTrail::Version
     include Translatable
 
-    EVENTS = %w[create update destroy archive restore import].freeze
+    EVENTS = %w[create update destroy archive restore import duplicate].freeze
 
     belongs_to :user, class_name: 'User', foreign_key: :whodunnit, inverse_of: :versions
 

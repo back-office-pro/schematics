@@ -8,6 +8,7 @@ fr:
           archive: Archiver
           create: Ajouter
           destroy: Supprimer
+          duplicate: Dupliquer
           import: Importer
           index: Lister
           read: Lire
