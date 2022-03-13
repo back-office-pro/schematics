@@ -57,6 +57,7 @@ Lint/ConstantResolution:
     - Role
     - Permission
     - Import
+    - Export
     - Licence
     - Chart
     - Stat
