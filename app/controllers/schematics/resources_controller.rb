@@ -46,7 +46,7 @@ module Schematics
         format.json { render json: @resources }
         format.csv do
           result = Resources::GenerateFileInBackground.call(
-            fingerprint: params.require(:fingerprint),
+            fingerprint: params[:fingerprint],
             job: GenerateCsvJob,
             job_params: [model_class.to_s, @resources.pluck(:id), current_user.preferences], # rubocop:disable Rails/PluckId
             extension: 'csv',
@@ -54,7 +54,7 @@ module Schematics
           )
           return send_data result.data if result.failure?
 
-          send_file result.filepath, type: 'text/csv', filename: result.filename
+          send_file result.filepath, type: ::Mime[:csv].to_s, filename: result.filename
         end
       end
     end
@@ -65,7 +65,7 @@ module Schematics
         format.json { render json: @resource }
         format.pdf do
           result = Resources::GenerateFileInBackground.call(
-            fingerprint: params.require(:fingerprint),
+            fingerprint: params[:fingerprint],
             job: GeneratePdfJob,
             job_params: [model_class.to_s, @resource.id],
             extension: 'pdf',
@@ -73,7 +73,7 @@ module Schematics
           )
           return send_data result.data if result.failure?
 
-          send_file result.filepath, type: 'text/csv', filename: result.filename
+          send_file result.filepath, type: ::Mime[:csv].to_s, filename: result.filename
         end
       end
     end
