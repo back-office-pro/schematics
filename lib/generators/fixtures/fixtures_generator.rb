@@ -73,7 +73,7 @@ class FixturesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics
           #{root_index(blobs_file_path, index).humanize}:
             key: #{generate_blob_key(attribute, index)}
             filename: dummy.#{attribute.extension}
-            content_type: #{Mime[attribute.extension]}
+            content_type: #{::Mime[attribute.extension]}
             service_name: test
             byte_size: 6381
             checksum: XqaZqieypVz5akNq/VVJIg==

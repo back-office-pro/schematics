@@ -51,7 +51,7 @@ module Schematics
       end
 
       def content_type
-        Mime[@extension].to_s
+        ::Mime[@extension].to_s
       end
     end
   end

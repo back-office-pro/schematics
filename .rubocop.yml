@@ -67,6 +67,7 @@ Lint/ConstantResolution:
     - JSON
     - ActiveStorage::Attachment
     - ActiveStorage::Blob
+    - Mime
   Exclude:
     - spec/**/*
     - db/*

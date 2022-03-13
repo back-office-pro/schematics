@@ -8,7 +8,7 @@ RSpec.shared_context 'with unauthenticated user' do
   fixtures :users
   fixtures :roles
 
-  let(:json_response) { JSON.parse(response.body) }
+  let(:json_response) { ::JSON.parse(response.body) }
   let(:user) { users(:two) }
   let(:email) { user.email }
   let(:headers) { { 'Accept' => 'application/json' } }
@@ -33,10 +33,10 @@ RSpec.shared_context 'with import' do
   let(:import) { ::Import.create!(file:, author:) }
   let(:author) { users(:one) }
   let(:file) do
-    ActiveStorage::Blob.create_and_upload!(
+    ::ActiveStorage::Blob.create_and_upload!(
       io: File.open(file_fixture('roles.csv'), 'rb'),
       filename: 'roles.csv',
-      content_type: 'text/csv'
+      content_type: ::Mime[:csv].to_s
     ).signed_id
   end
 end
