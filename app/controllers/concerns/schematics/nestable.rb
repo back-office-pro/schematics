@@ -27,9 +27,12 @@ module Schematics
     end
 
     def parent_model_class
-      classes = Schema.instance.entities.map(&:class_name)
-      constants = classes.map(&:constantize)
-      classes.zip(constants).to_h.fetch(params[:model_name])
+      Schema
+        .instance
+        .entities
+        .map { [_1.class_name, _1.model_class] }
+        .to_h
+        .fetch(params[:model_name])
     end
   end
 end
