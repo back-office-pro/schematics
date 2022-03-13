@@ -6,8 +6,6 @@ fr:
     charts: graphiques
     delete: supprimer
     edit: editer
-    files: fichiers
-    import: importer
     login: connexion
     logout: deconnexion
     messages: messages
