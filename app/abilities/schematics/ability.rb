@@ -4,6 +4,8 @@ module Schematics
   class Ability < ApplicationAbility
     def initialize(user)
       super
+      return unless user # PDF generation case
+
       merge PermissionAbility.new(user)
       merge ActiveStorage::AttachmentAbility.new(user)
       merge VersionAbility.new(user)

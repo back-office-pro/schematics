@@ -4,7 +4,6 @@ module Schematics
   class PermissionAbility < ApplicationAbility
     def initialize(user)
       super
-      can :read, :admin_dashboard if user.role == ::Role.admin
       user
         .role
         .permissions
