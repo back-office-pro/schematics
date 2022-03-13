@@ -6,7 +6,7 @@ module Schematics
       def format(value)
         return unless value
 
-        scope = [:activerecord, :attributes, @entity.class_name.underscore, name.pluralize]
+        scope = [:activerecord, :attributes, @entity.name, name.pluralize]
         translate(value.to_sym, default: nil, scope:) ||
           translate('activerecord.events')
             .values

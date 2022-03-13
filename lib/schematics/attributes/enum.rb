@@ -34,7 +34,7 @@ module Schematics
         value && translate(
           value.to_sym,
           default: value.humanize,
-          scope: [:activerecord, :attributes, @entity.class_name.underscore, @name.pluralize]
+          scope: [:activerecord, :attributes, @entity.name, @name.pluralize]
         )
       end
 
