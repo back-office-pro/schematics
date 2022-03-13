@@ -4,8 +4,7 @@
       .col.text-truncate
         = render Schematics::CardHeading::Component.new(icon: :table, title:)
       .col-auto
-        = render Schematics::Button::GenerateFileInBackground::Component \
-            .build_csv(url: main_app.polymorphic_path(model_class, format: :csv), text: :download_as_csv)
+        = render Schematics::Button::GenerateFileInBackground::Component.csv(:download_as_csv) if @resources.any?
         = render Schematics::Button::Import::Component.new(model_class:)
         = render Schematics::Button::Add::Component.new(model_class:)
         = render Schematics::Button::ResetFilters::Component.new(model_class:)

@@ -2,7 +2,6 @@ button.btn.btn-light.btn-sm.btn-icon-split {
   data-controller='generateFileInBackground'
   data-action='click->generateFileInBackground#run'
   data-generateFileInBackground-content-type=@content_type
-  data-generateFileInBackground-url=@url
 }
   span.icon = fa_icon @icon
   span.icon.d-none = fa_icon :spinner, animation: 'spin'
