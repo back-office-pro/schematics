@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/string/inflections'
 
 module Schematics
   module Attributes
@@ -29,6 +30,10 @@ module Schematics
 
       def class_name
         association_type.camelize
+      end
+
+      def model_class
+        class_name.safe_constantize
       end
 
       def inverse
@@ -82,8 +87,7 @@ module Schematics
       end
 
       def input_collection
-        class_name
-          .constantize
+        model_class
           .all
           .map { [_1.id, _1.to_s] }
           .sort_by(&:last)

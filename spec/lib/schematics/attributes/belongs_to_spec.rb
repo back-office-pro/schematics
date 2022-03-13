@@ -38,6 +38,8 @@ describe Schematics::Attributes::BelongsTo do
   its(:open_api_type) { is_expected.to eq('integer') }
   its(:association_type) { is_expected.to eq('schema') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
+  its(:class_name) { is_expected.to eq('Schema') }
+  its(:model_class) { is_expected.to be_nil }
   its(:preload) { is_expected.to eq(:schema) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:caret_square_right) }

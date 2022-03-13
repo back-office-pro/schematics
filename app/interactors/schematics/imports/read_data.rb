@@ -43,8 +43,7 @@ module Schematics
         case field
         when Schematics::Attributes::Association
           field
-            .class_name
-            .constantize
+            .model_class
             .joins(field.descriptor.joins)
             .where("#{field.descriptor.to_sql} = ?", value)
             .first!
