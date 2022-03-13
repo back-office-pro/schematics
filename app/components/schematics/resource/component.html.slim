@@ -37,6 +37,9 @@
     = fa_icon(:check, class: 'text-success')
   - when FalseClass
     = fa_icon(:times, class: 'text-danger')
+- when Schematics::Attributes::StateMachine
+  h5.mb-0
+    span.badge.badge-secondary = @field.format(value)
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
