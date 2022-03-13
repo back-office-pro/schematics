@@ -19,7 +19,7 @@ module Schematics
         end
 
         def resources_for(date)
-          @resources.filter do |resource|
+          @resources.select do |resource|
             start_date = resource.public_send(calendar_start_attribute).beginning_of_day
             end_date = resource.public_send(calendar_end_attribute).end_of_day
             (start_date..end_date).cover?(date)
