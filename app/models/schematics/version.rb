@@ -8,8 +8,7 @@ module Schematics
 
     belongs_to :user, class_name: 'User', foreign_key: :whodunnit, inverse_of: :versions
 
-    delegate :entity, :human_name, :gender, to: :model_class
-    delegate :icon, to: :entity
+    delegate :entity, :human_name, :gender, to: :model_class, allow_nil: true
 
     scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { includes(:item) }
@@ -34,7 +33,7 @@ module Schematics
     end
 
     def model_class
-      item_type.constantize
+      item_type.safe_constantize
     end
 
     def icon
