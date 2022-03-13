@@ -35,23 +35,22 @@ module Schematics
       end
 
       def transform_key(key)
-        i18n_translations&.invert&.fetch(key, nil) || key.parameterize(separator: '_')
+        i18n_translations&.invert&.dig(key) || key.parameterize(separator: '_')
       end
 
-      def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity
+      def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         field = entity.find_field_by_name(key.to_s)
         case field
         when Schematics::Attributes::Association
           field
             .model_class
             .joins(field.descriptor.joins)
-            .where("#{field.descriptor.to_sql} = ?", value)
-            .first!
+            .find_by("#{field.descriptor.to_sql} = ?", value)
         when Schematics::Attributes::Enum
-          i18n_translations&.dig(field.name.pluralize.to_sym)&.invert&.fetch(value, nil) ||
+          i18n_translations&.dig(field.name.pluralize.to_sym)&.invert&.dig(value) ||
             value.parameterize(separator: '_')
         when Schematics::Attributes::Country
-          field.input_collection.map(&:reverse).to_h.fetch(value)
+          field.input_collection.map(&:reverse).to_h[value] || value.parameterize(separator: '_')
         when Schematics::Virtuals::Virtual
           nil
         else
