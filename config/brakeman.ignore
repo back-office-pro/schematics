@@ -3,24 +3,24 @@
     {
       "warning_type": "File Access",
       "warning_code": 16,
-      "fingerprint": "44f81ebcdb5ae9ef25791c65f201c2f5239e9161ded9ab25c4020a769b7e3499",
+      "fingerprint": "84fe775722d20377e4c7ad4789a86b76077179bf1222cb1fae5f704193a0fafc",
       "check_name": "SendFile",
       "message": "Parameter value used in file name",
       "file": "app/controllers/main_app/imports_controller.rb",
-      "line": 25,
+      "line": 28,
       "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_human_name_plural).filepath, :type => \"text/csv\", :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_human_name_plural).filename)",
+      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_human_name_plural).filepath, :type => ::Mime[:csv].to_s, :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_human_name_plural).filename)",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "MainApp::ImportsController",
-        "method": "template"
+        "method": "new"
       },
       "user_input": "params[:fingerprint]",
       "confidence": "Weak",
       "note": "Fingerprint is not used for filepath or filename"
     }
   ],
-  "updated": "2022-02-20 00:36:11 +0100",
+  "updated": "2022-03-13 22:50:45 +0100",
   "brakeman_version": "5.2.1"
 }
