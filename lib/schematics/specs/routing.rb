@@ -65,10 +65,10 @@ module Schematics
                 .to route(:post, polymorphic_path(record, action: :duplicate))
                 .to(locale:, controller:, model_name:, id:, action: :duplicate)
               is_expected
-                .to route(:get, new_polymorphic_path([model_class, ::Import]))
+                .to route(:get, new_polymorphic_path([model_class, ::Import], format: nil))
                 .to(locale:, controller: 'imports', model_name:, action: :new)
               is_expected
-                .to route(:post, polymorphic_path([model_class, ::Import]))
+                .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
                 .to(locale:, controller: 'imports', model_name:, action: :create)
             end
             if can?(:update)

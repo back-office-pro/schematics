@@ -17,9 +17,7 @@ describe Schematics::Entities::Router do
           get :autocomplete, on: :collection
           post :duplicate, on: :member
           collection do
-            resources :imports, only: %i[new create], as: 'user_imports', format: false do
-              get :template, on: :collection, format: :csv
-            end
+            resources :imports, only: %i[new create], as: 'user_imports'
           end
         end
       RUBY
@@ -76,9 +74,7 @@ describe Schematics::Entities::Router do
           patch :refuse, action: :trigger, event: 'refuse', on: :member
           patch :reopen, action: :trigger, event: 'reopen', on: :member
           collection do
-            resources :imports, only: %i[new create], as: 'user_imports', format: false do
-              get :template, on: :collection, format: :csv
-            end
+            resources :imports, only: %i[new create], as: 'user_imports'
           end
         end
       RUBY
@@ -94,9 +90,7 @@ describe Schematics::Entities::Router do
           get :autocomplete, on: :collection
           post :duplicate, on: :member
           collection do
-            resources :imports, only: %i[new create], as: 'user_imports', format: false do
-              get :template, on: :collection, format: :csv
-            end
+            resources :imports, only: %i[new create], as: 'user_imports'
           end
         end
       RUBY
