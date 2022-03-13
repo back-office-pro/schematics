@@ -5,11 +5,21 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
+      rescue_from ActionController::UnknownFormat, with: :unknown_format
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from AASM::InvalidTransition, with: :invalid_transition
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from CanCan::AccessDenied, with: :access_denied
+    end
+
+    def unknown_format
+      respond_to do |format|
+        format.json { head :not_acceptable }
+        format.any do
+          redirect_to schematics.root_path, alert: t('schematics.application.unknown_format.alert')
+        end
+      end
     end
 
     def parameter_missing(exception)
