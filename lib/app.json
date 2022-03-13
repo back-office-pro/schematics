@@ -346,6 +346,55 @@
       ]
     },
     {
+      "name": "export",
+      "icon": "file_export",
+      "actions": [
+        "index",
+        "show",
+        "create"
+      ],
+      "attributes": [
+        {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "file",
+          "type": "attachment",
+          "options": {
+            "readonly": true,
+            "content_type": [
+              "csv"
+            ]
+          }
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "options": {
+            "required": true,
+            "readonly": true,
+            "default": "pending",
+            "values": [
+              "pending",
+              "finished",
+              "error"
+            ]
+          }
+        },
+        {
+          "name": "applicant",
+          "type": "references",
+          "options": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
       "name": "licence",
       "type": "singleton",
       "descriptor": "plan",
