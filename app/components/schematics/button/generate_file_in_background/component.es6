@@ -19,10 +19,10 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
     let timer = 0
     const loadingText = this.loadingTarget.textContent
     this.toggleButton(loadingText)
-    const response = await fetchAPI(this.url())
+    const response = await fetchAPI(this.buildUrl())
     const fingerprint = await response.text()
     const interval = setInterval(async () => {
-      const res = await fetchAPI(this.url(fingerprint))
+      const res = await fetchAPI(this.buildUrl(fingerprint))
       const data = await res.arrayBuffer()
       if (data.byteLength) {
         clearInterval(interval)
@@ -37,15 +37,15 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
     }, 1000)
   }
 
-  get extension () {
-    return this.data.get('contentType').split('/')[1]
-  }
-
-  url (fingerprint) {
+  buildUrl (fingerprint) {
     const searchParams = new URLSearchParams(window.location.search)
     if (fingerprint != null) {
       searchParams.set('fingerprint', fingerprint)
     }
     return `${window.location.pathname}.${this.extension}?${searchParams}`
+  }
+
+  get extension () {
+    return this.data.get('contentType').split('/')[1]
   }
 }
