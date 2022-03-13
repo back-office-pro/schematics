@@ -3,15 +3,15 @@
     table.table.mb-0.table-striped
       tr
         th
-        - events.each do |action|
-          td.text-center.text-primary = t(action, scope: %i[activerecord attributes permission actions])
+        - events.each_value do |action|
+          td.text-center.text-primary = action
       - entities.each do |entity|
         - model_class = entity.model_class
         tr
           th.text-primary
             = fa_icon entity.icon, class: 'fa-fw mr-2 text-muted'
             = model_class.human_name.titleize
-          - events.each do |action|
+          - events.each_key do |action|
             - preference = "#{action}_#{model_class}"
             td.text-center
               - if can?(action.to_sym, model_class)

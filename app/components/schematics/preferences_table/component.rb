@@ -9,6 +9,9 @@ module Schematics
 
       def events
         Version::EVENTS
+          .map { [_1, t(_1, scope: %i[activerecord attributes permission actions])] }
+          .sort_by(&:last)
+          .to_h
       end
 
       def entities
