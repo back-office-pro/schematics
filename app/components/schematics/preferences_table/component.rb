@@ -15,7 +15,7 @@ module Schematics
         Schema
           .instance
           .entities
-          .select { can?(:index, _1.model_class) }
+          .select { Object.const_defined?(_1.class_name) }
           .sort_by { _1.model_class.human_name }
       end
     end
