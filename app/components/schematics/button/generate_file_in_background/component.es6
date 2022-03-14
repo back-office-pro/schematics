@@ -32,7 +32,7 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
           const filename = res.headers.get('Content-Disposition').match(/filename="(.*)";/)[1]
           const blob = new Blob([data], { type: `${this.data.get('contentType')};charset=utf-8` })
           saveAs(blob, filename)
-          this.toggleButton(loadingText)
+          return this.toggleButton(loadingText)
         }
       }
       timer++
