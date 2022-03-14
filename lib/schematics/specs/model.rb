@@ -19,7 +19,7 @@ module Schematics
 
         triggers.each do |trigger|
           it { is_expected.to respond_to(trigger.method_name.to_sym) }
-          it { is_expected.to callback(trigger.method_name.to_sym).before(trigger.action.to_sym) }
+          it { is_expected.to callback(trigger.method_name.to_sym).after(trigger.action.to_sym) }
         end
 
         attributes

@@ -39,7 +39,7 @@ module Schematics
       private
 
       def trigger
-        @trigger ||= Trigger.new(action: @name, callback: @callback, trigger: :after)
+        @trigger ||= Trigger.new(action: @name, callback: @callback)
       end
     end
   end
