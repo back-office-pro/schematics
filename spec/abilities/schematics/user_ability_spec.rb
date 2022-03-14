@@ -10,6 +10,7 @@ RSpec.describe Schematics::UserAbility do
 
   let(:user) { users(:one) }
 
+  it { is_expected.not_to be_able_to(:read, :admin_dashboard) }
   it { is_expected.not_to be_able_to(:destroy, user) }
   it { is_expected.not_to be_able_to(:archive, user) }
 end
