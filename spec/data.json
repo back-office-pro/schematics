@@ -68,6 +68,12 @@
       "name": "category",
       "icon": "box",
       "descriptor": "label",
+      "triggers": [
+        {
+          "action": "save",
+          "callback": "$error.foo = true"
+        }
+      ],
       "attributes": [
         {
           "name": "label",
@@ -187,7 +193,8 @@
                 "name": "refuse",
                 "icon": "ban",
                 "from": "pending",
-                "to": "refused"
+                "to": "refused",
+                "callback": "$error.foo = true"
               },
               {
                 "name": "reopen",
