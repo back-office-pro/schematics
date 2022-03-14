@@ -35,12 +35,16 @@ module Schematics
     end
 
     def index
-      @calendar, @pagy, @resources = pagy_calendar(
-        model_class.pagy_search(**search_params),
-        month: { format: '%B %Y' },
-        pagy: { backend: :pagy_searchkick },
-        active: entity.viewer == :calendar
-      )
+      if params[:all_pages].present?
+        @resources = model_class.search(**search_params)
+      else
+        @calendar, @pagy, @resources = pagy_calendar(
+          model_class.pagy_search(**search_params),
+          month: { format: '%B %Y' },
+          pagy: { backend: :pagy_searchkick },
+          active: entity.viewer == :calendar
+        )
+      end
       respond_to do |format|
         format.html
         format.json { render json: @resources }
@@ -225,7 +229,7 @@ module Schematics
       authorize! :index, model_class
       field = params.require(:field).to_sym
       @resources = model_class.search(**search_params.merge(select: field, load: false))
-      render json: @resources.map(&field).map(&:to_s).uniq
+      render json: @resources.limit(5).map(&field).map(&:to_s).uniq
     end
 
     def view_assigns

@@ -1,5 +1,7 @@
 ---
 fr:
+  all_pages: Toutes les pages
+  current_page: Page courante
   download_as_csv: Télécharger au format CSV
   download_csv_template: Télécharger une trame
   download_pdf: Télécharger au format PDF
