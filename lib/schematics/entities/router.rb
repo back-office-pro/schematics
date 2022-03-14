@@ -114,9 +114,7 @@ module Schematics
 
         <<~RUBY
           collection do
-            resources :imports, only: %i[new create], as: '#{resource}_imports', format: false do
-              get :template, on: :collection, format: :csv
-            end
+            resources :imports, only: %i[new create], as: '#{resource}_imports'
           end
         RUBY
       end

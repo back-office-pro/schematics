@@ -6,8 +6,7 @@
       .col.text-truncate
         = render Schematics::CardHeading::Component.new(icon: :eye, title:)
       .col-auto
-        = render Schematics::Button::GenerateFileInBackground::Component \
-            .build_pdf(url: main_app.polymorphic_path(entity.is_a?(Schematics::Entities::Singleton) ? model_class : @resource, format: :pdf))
+        = render Schematics::Button::GenerateFileInBackground::Component.pdf
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Button::Duplicate::Component.new(resource: @resource)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
