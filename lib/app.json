@@ -482,6 +482,7 @@
     {
       "name": "comparison",
       "icon": "not_equal",
+      "descriptor": "model",
       "actions": [
         "show"
       ],
