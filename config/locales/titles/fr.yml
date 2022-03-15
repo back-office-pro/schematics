@@ -2,6 +2,8 @@
 fr:
   titles:
     schematics:
+      comparisons:
+        show: Comparaison
       dashboard:
         admin: Administration
         home: Tableau de bord

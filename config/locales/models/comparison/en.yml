@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      comparison:
+        ids: Resources
+        model: Data
+    models:
+      comparison:
+        gender: female
+        one: Comparison
+        other: Comparisons
