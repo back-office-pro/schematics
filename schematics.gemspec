@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.26.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.13.3'
-  spec.add_development_dependency 'rubocop-rails', '~> 2.13.2'
+  spec.add_development_dependency 'rubocop-rails', '~> 2.14.0'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.9.0'
   spec.add_development_dependency 'rubocop-thread_safety', '~> 0.4.4'

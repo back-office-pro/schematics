@@ -176,6 +176,8 @@ Rails/RequireDependency:
   Enabled: true
 Rails/ReversibleMigrationMethodDefinition:
   Enabled: true
+Rails/TableNameAssignment:
+  Enabled: true
 # rubocop-performance
 Performance/MethodObjectAsBlock:
   Enabled: false
