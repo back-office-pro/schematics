@@ -221,6 +221,7 @@
           "enum": [
             "action",
             "address",
+            "array",
             "attachment",
             "attachments",
             "belongs_to",
