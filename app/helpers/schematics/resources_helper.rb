@@ -2,9 +2,9 @@
 
 module Schematics
   module ResourcesHelper
-    def resource_associations(resource:, only_required: false)
+    def resource_associations(resource:, only: nil)
       attachments_attributes(resource)
-        .concat(associations(resource, only_required))
+        .concat(associations(resource, only))
         .compact_blank
     end
 
@@ -21,10 +21,10 @@ module Schematics
       end
     end
 
-    def associations(resource, only_required)
+    def associations(resource, filter_key)
       entity
         .has_many_and_through_and_belongs_to_many_associations
-        .reject { !_1.required? if only_required }
+        .select(&filter_key)
         .map do |association|
         resource
           .public_send(association.name)
