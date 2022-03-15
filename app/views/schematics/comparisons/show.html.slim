@@ -1,0 +1,20 @@
+- breadcrumb title, main_app.polymorphic_path(@resource)
+.row.align-items-center
+  - @resources.each do |resource|
+    .col-lg-6
+      .card.shadow-sm.border-0
+        .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
+          .row.align-items-center
+            .col.text-truncate
+              = render Schematics::CardHeading::Component.new(icon: parent_model_class.entity.icon, title: resource)
+        .card-body.p-0
+          .table-responsive
+            table.table.mb-0.table-striped
+              tbody
+                - parent_model_class.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
+                  tr
+                    th
+                      = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
+                      = parent_model_class.human_attribute_name(field.name)
+                    td
+                      = render Schematics::Resource::Component.new(resource:, field:)
