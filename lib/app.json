@@ -495,10 +495,7 @@
         },
         {
           "name": "ids",
-          "type": "array",
-          "options": {
-            "required": true
-          }
+          "type": "array"
         }
       ]
     }
