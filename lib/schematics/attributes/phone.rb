@@ -8,7 +8,7 @@ module Schematics
       end
 
       def default
-        Array
+        ::Array
           .new(10) { rand(10) }
           .join
       end

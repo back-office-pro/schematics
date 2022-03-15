@@ -16,11 +16,11 @@ module Schematics
           [
             t(".#{key}"),
             case value
-            when Array
+            when ::Array
               value.map(&:to_s).map(&:upcase).join(' ')
-            when Hash
+            when ::Hash
               humanized_validators(validators: value)
-            when Numeric
+            when ::Numeric
               number_to_human_size(value)
             else
               value.humanize
