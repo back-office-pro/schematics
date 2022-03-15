@@ -92,7 +92,8 @@ module Schematics
           unless entity.is_a?(Entities::Singleton)
             it 'should be not found' do
               get path('abdc'), headers:, as: :html
-              is_expected.to redirect_to(path)
+              redirect_path = ability.can?(:index, model_class) ? path : root_path
+              is_expected.to redirect_to(redirect_path)
             end
 
             it 'should be not found API' do
