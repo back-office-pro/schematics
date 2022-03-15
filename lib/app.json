@@ -478,6 +478,29 @@
           }
         }
       ]
+    },
+    {
+      "name": "comparison",
+      "icon": "not_equal",
+      "actions": [
+        "show"
+      ],
+      "attributes": [
+        {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "ids",
+          "type": "array",
+          "options": {
+            "required": true
+          }
+        }
+      ]
     }
   ]
 }
