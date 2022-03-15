@@ -17,15 +17,18 @@ detectors:
     max_methods: 30
   NestedIterators:
     max_allowed_nesting: 3
-  UtilityFunction:
-    enabled: false
   BooleanParameter:
+    exclude:
+      - Component
+  Attribute:
+    exclude:
+      - prefixed
+      - inverse_entity
+  UtilityFunction:
     enabled: false
   FeatureEnvy:
     enabled: false
   ControlParameter:
-    enabled: false
-  Attribute:
     enabled: false
   InstanceVariableAssumption:
     enabled: false

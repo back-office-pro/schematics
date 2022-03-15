@@ -18,7 +18,7 @@ module Schematics
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
 
       class << self
-        # :reek:LongParameterList
+        # :reek:LongParameterList :reek:BooleanParameter
         def build( # rubocop:disable Metrics/ParameterLists
           name:,
           type: nil,
