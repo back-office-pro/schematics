@@ -29,11 +29,11 @@ detectors:
       - initialize
       - build
   UtilityFunction:
-    enabled: false
+    enabled: false # TODO: fix this smell
   FeatureEnvy:
-    enabled: false
+    enabled: false # TODO: fix this smell
   InstanceVariableAssumption:
-    enabled: false
+    enabled: false # TODO: fix this smell
 exclude_paths:
   - db/migrate
   - spec/dummy
