@@ -4,6 +4,9 @@
   - searchkick
   - mailers
 :schedule:
+  schematics/clean_comparisons_job:
+    cron: '0 0 * * *'
+    class: Schematics::CleanComparisonsJob
   schematics/clean_searches_job:
     cron: '0 0 * * *'
     class: Schematics::CleanSearchesJob
