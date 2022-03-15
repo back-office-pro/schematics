@@ -95,6 +95,7 @@ module Schematics
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
     config.action_mailer.default_options = { from: 'localhost' }
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
+    config.action_mailer.raise_delivery_errors = Rails.env.development?
 
     # Assets
     config.assets.paths << Pagy.root.join('javascripts')
