@@ -22,6 +22,7 @@ module Schematics
     }
 
     class << self
+      # :reek:ControlParameter
       def timeline(ability:, versions: nil)
         (versions || self)
           .with_user

@@ -24,11 +24,13 @@ detectors:
     exclude:
       - prefixed
       - inverse_entity
+  ControlParameter:
+    exclude:
+      - initialize
+      - build
   UtilityFunction:
     enabled: false
   FeatureEnvy:
-    enabled: false
-  ControlParameter:
     enabled: false
   InstanceVariableAssumption:
     enabled: false
