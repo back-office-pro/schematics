@@ -2,14 +2,14 @@
 
 class Array
   def select_is_a?(*klasses)
-    select { |x| klasses.any? { |klass| x.is_a?(klass) } }
+    select { |element| klasses.any? { |klass| element.is_a?(klass) } }
   end
 
   def reject_is_a?(*klasses)
-    reject { |x| klasses.any? { |klass| x.is_a?(klass) } }
+    reject { |element| klasses.any? { |klass| element.is_a?(klass) } }
   end
 
   def stable_sort_by
-    sort_by.with_index { |x, idx| [yield(x), idx] }
+    sort_by.with_index { |first_element, second_element| [yield(first_element), second_element] }
   end
 end

@@ -2,6 +2,7 @@
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class ModelField < String
       include Behaviours::Enumerable
       delegate :depends_on, to: :options

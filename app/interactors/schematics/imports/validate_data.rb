@@ -12,6 +12,7 @@ module Schematics
         @errors = Concurrent::Hash.new
       end
 
+      # :reek:UncommunicativeVariableName
       def call
         context.data = @data.flat_map do |line, attributes|
           resource = @model_class.new(attributes)

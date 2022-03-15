@@ -2,6 +2,7 @@
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class Model < String
       include Behaviours::Enumerable
 

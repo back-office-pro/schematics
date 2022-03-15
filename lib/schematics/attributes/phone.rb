@@ -2,6 +2,7 @@
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class Phone < String
       def validators
         super.merge(phone: { allow_blank: })

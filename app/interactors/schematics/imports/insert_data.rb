@@ -13,6 +13,7 @@ module Schematics
         @data = context.data
       end
 
+      # :reek:UncommunicativeVariableName
       def call
         record_ids = @model_class.insert_all!(@data).pluck('id') # rubocop:disable Rails/SkipsModelValidations
         Schematics::Version.insert_all(record_ids.map(&method(:version))) # rubocop:disable Rails/SkipsModelValidations

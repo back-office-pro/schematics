@@ -2,6 +2,7 @@
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class Action < String
       def format(value)
         return unless value

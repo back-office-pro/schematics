@@ -4,6 +4,7 @@ require 'action_dispatch/http/mime_type'
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class Mime < String
       def format(value)
         ::Mime::Type

@@ -4,6 +4,7 @@ require 'active_support/values/time_zone'
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class TimeZone < String
       include Behaviours::Enumerable
 

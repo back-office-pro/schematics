@@ -5,6 +5,7 @@ require 'sort_alphabetical'
 
 module Schematics
   module Attributes
+    # :reek:SubclassedFromCoreClass
     class Country < String
       include Behaviours::Enumerable
 

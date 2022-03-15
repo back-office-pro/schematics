@@ -2,6 +2,7 @@
 
 module Schematics
   module Tokens
+    # :reek:SubclassedFromCoreClass
     class Whitespace < String
       def initialize
         super(' ')

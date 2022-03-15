@@ -32,6 +32,7 @@ module Schematics
       readable? && !Version.exists?(event: 'show', item: self, user: recipient)
     end
 
+    # :reek:ManualDispatch
     def readable?
       respond_to?(:recipient)
     end
