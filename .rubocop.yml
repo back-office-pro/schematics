@@ -68,6 +68,7 @@ Lint/ConstantResolution:
     - ActiveStorage::Attachment
     - ActiveStorage::Blob
     - Mime
+    - Search
   Exclude:
     - spec/**/*
     - db/*

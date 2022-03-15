@@ -17,7 +17,7 @@ module Schematics
         end
 
         def history
-          Search
+          ::Search
             .where(user: current_user, model: @model_class.to_s, query: nil)
             .order(created_at: :desc)
             .limit(5)

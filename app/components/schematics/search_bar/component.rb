@@ -17,7 +17,7 @@ module Schematics
       end
 
       def history
-        Search
+        ::Search
           .where(user: current_user, model: nil)
           .where
           .not(query: nil)

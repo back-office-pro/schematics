@@ -3,7 +3,7 @@
 module Schematics
   class SearchesController < ApplicationController
     def create
-      redirect_to search_path(query: Search.create!(search_params).query)
+      redirect_to search_path(query: ::Search.create!(search_params).query)
     end
 
     def show
