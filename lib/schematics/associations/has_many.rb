@@ -11,7 +11,6 @@ module Schematics
 
       def to_str
         super
-          .chomp
           .concat(",\n")
           .concat <<~RUBY.indent(8)
             inverse_of: :#{inverse_of},

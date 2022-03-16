@@ -53,7 +53,7 @@ describe Schematics::Attributes::Attachment do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      (avatar.filename.to_s if avatar.attached?)
+      avatar: (avatar.filename.to_s if avatar.attached?)
     RUBY
   end
 

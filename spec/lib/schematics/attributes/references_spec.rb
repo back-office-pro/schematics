@@ -62,7 +62,7 @@ describe Schematics::Attributes::References do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      user&.to_s
+      user: user&.to_s
     RUBY
   end
 

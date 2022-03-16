@@ -13,9 +13,11 @@ module Schematics
       end
 
       def search_data
-        <<~RUBY
-          #{name}&.to_plain_text
-        RUBY
+        super
+          .concat(' ')
+          .concat <<~RUBY
+            #{name}&.to_plain_text
+          RUBY
       end
 
       def format(value)

@@ -37,9 +37,11 @@ module Schematics
       end
 
       def search_data
-        <<~RUBY
-          (#{name}.filename.to_s if #{name}.attached?)
-        RUBY
+        super
+          .concat(' ')
+          .concat <<~RUBY
+            (#{name}.filename.to_s if #{name}.attached?)
+          RUBY
       end
 
       def to_str

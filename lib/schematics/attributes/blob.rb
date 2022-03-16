@@ -9,7 +9,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}&.filename&.to_s
+          #{name}: #{name}&.filename&.to_s
         RUBY
       end
 

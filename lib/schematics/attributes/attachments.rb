@@ -28,7 +28,7 @@ module Schematics
 
       def search_data
         <<~RUBY
-          #{name}.map(&:filename).map(&:to_s).map(&:downcase)
+          #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
         RUBY
       end
 

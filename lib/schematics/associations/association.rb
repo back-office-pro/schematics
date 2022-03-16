@@ -50,7 +50,7 @@ module Schematics
       end
 
       def to_str
-        <<~RUBY
+        <<~RUBY.chomp
           #{type} :#{name},
                   class_name: '#{class_name}',
                   foreign_key: '#{column_name}'

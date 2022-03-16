@@ -11,7 +11,6 @@ module Schematics
 
       def to_str
         super
-          .chomp
           .concat(",\n")
           .concat <<~RUBY.indent(8)
             inverse_of: :#{inverse_of},
@@ -20,9 +19,11 @@ module Schematics
       end
 
       def search_data
-        <<~RUBY
-          #{name}&.to_s
-        RUBY
+        super
+          .concat(' ')
+          .concat <<~RUBY
+            #{name}&.to_s
+          RUBY
       end
     end
   end

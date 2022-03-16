@@ -12,7 +12,7 @@ module Schematics
       end
 
       def function
-        <<~RUBY.chomp
+        <<~RUBY.squish
           raise ArgumentError
         RUBY
       end

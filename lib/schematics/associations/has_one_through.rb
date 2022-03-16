@@ -33,9 +33,11 @@ module Schematics
       end
 
       def search_data
-        <<~RUBY
-          #{name}&.to_s
-        RUBY
+        super
+          .concat(' ')
+          .concat <<~RUBY
+            #{name}&.to_s
+          RUBY
       end
     end
   end

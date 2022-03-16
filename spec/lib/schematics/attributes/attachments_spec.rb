@@ -53,7 +53,7 @@ describe Schematics::Attributes::Attachments do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      files.map(&:filename).map(&:to_s).map(&:downcase)
+      files: files.map(&:filename).map(&:to_s).map(&:downcase)
     RUBY
   end
 

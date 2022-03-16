@@ -45,7 +45,7 @@ describe Schematics::Associations::HasOne do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      entity&.to_s
+      entity: entity&.to_s
     RUBY
   end
 

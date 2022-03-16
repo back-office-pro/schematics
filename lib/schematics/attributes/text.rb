@@ -11,9 +11,11 @@ module Schematics
       include Behaviours::Editable
 
       def search_data
-        <<~RUBY
-          #{name}&.to_s
-        RUBY
+        super
+          .concat(' ')
+          .concat <<~RUBY
+            #{name}&.to_s
+          RUBY
       end
 
       def default

@@ -12,7 +12,7 @@ describe Schematics::Attributes::Blob do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      blob&.filename&.to_s
+      blob: blob&.filename&.to_s
     RUBY
   end
 end

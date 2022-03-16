@@ -237,7 +237,8 @@ module Schematics
 
       def search_data_elements
         searchable_elements
-          .map { |element| "#{element.name}: #{element.search_data.squish}" }
+          .map(&:search_data)
+          .map(&:squish)
           .join(", \n")
       end
 

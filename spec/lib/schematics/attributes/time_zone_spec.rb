@@ -43,7 +43,7 @@ describe Schematics::Attributes::TimeZone do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      time_zone&.to_s
+      time_zone: time_zone&.to_s
     RUBY
   end
 
