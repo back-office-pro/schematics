@@ -18,7 +18,7 @@ module MainApp
     end
 
     def parent_model_class
-      @resource.model.constantize
+      @resource.model.safe_constantize
     end
   end
 end
