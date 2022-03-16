@@ -21,11 +21,11 @@ module Schematics
       def to_str
         if options.default
           <<~RUBY
-            enum #{@name}: #{to_h}, _prefix: true, _default: "#{default}"
+            enum #{name}: #{to_h}, _prefix: true, _default: "#{default}"
           RUBY
         else
           <<~RUBY
-            enum #{@name}: #{to_h}, _prefix: true
+            enum #{name}: #{to_h}, _prefix: true
           RUBY
         end
       end
@@ -34,7 +34,7 @@ module Schematics
         value && translate(
           value.to_sym,
           default: value.humanize,
-          scope: [:activerecord, :attributes, @entity.name, @name.pluralize]
+          scope: [:activerecord, :attributes, entity.name, name.pluralize]
         )
       end
 

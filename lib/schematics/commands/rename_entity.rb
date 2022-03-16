@@ -18,7 +18,7 @@ module Schematics
       private
 
       def old_name
-        @attribute
+        attribute
       end
 
       def old_class_name

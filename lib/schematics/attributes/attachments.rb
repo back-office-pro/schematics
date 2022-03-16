@@ -40,7 +40,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_many_base64_attached :#{@name}
+          has_many_base64_attached :#{name}
           accepts_nested_attributes_for :#{association_name},
                                         allow_destroy: true,
                                         reject_if: :all_blank

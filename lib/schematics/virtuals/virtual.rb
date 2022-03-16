@@ -9,7 +9,7 @@ module Schematics
       include Behaviours::Preloadable
 
       delegate :hidden?, to: :options
-      attr_reader :entity, :name, :options
+      attr_reader :entity, :name, :tokens, :options
 
       class << self
         def build(entity, name:, function:, options: {})

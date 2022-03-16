@@ -9,7 +9,7 @@ module Schematics
       delegate :descriptor, :class_name, :icon, to: :entity
       delegate :hidden?, to: :options
       attr_reader :belongs_to
-      attr_writer :prefixed
+      attr_accessor :prefixed
 
       class << self
         def build(entity_or_belongs_to, type: 'has_many', name: nil)
@@ -36,7 +36,7 @@ module Schematics
       end
 
       def name
-        return [inverse_of, source].join('_') if @prefixed
+        return [inverse_of, source].join('_') if prefixed
 
         source
       end

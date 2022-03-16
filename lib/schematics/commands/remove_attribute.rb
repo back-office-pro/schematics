@@ -5,7 +5,7 @@ module Schematics
     class RemoveAttribute < Command
       def execute
         <<~SHELL
-          rails generate migration remove_#{@attribute}_from_#{table_name.pluralize} schema:#{name}_#{@attribute}
+          rails generate migration remove_#{attribute}_from_#{table_name.pluralize} schema:#{name}_#{attribute}
         SHELL
       end
     end

@@ -33,7 +33,13 @@ detectors:
   FeatureEnvy:
     enabled: false # TODO: fix this smell
   InstanceVariableAssumption:
-    enabled: false # TODO: fix this smell
+    exclude:
+      - Specs::Dummy
+      - Tokens::Variable
+directories:
+  app:
+    InstanceVariableAssumption:
+      enabled: false
 exclude_paths:
   - db/migrate
   - spec/dummy

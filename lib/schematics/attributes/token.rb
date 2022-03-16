@@ -15,7 +15,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_secure_token :#{@name}
+          has_secure_token :#{name}
         RUBY
       end
     end

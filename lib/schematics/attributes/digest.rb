@@ -32,7 +32,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_secure_password :#{@name}, validations: false
+          has_secure_password :#{name}, validations: false
         RUBY
       end
 

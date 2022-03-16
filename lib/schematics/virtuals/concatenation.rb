@@ -8,7 +8,7 @@ module Schematics
       end
 
       def function
-        @tokens.map(&:to_str).join.to_json
+        tokens.map(&:to_str).join.to_json
       end
 
       def to_sql

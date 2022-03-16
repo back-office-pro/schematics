@@ -32,7 +32,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_rich_text :#{@name}
+          has_rich_text :#{name}
         RUBY
       end
     end

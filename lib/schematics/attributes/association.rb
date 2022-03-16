@@ -41,15 +41,15 @@ module Schematics
       end
 
       def association_type
-        options.type || @name
+        options.type || name
       end
 
       def inverse_association_name
-        inverse[:name] || @entity.table_name
+        inverse[:name] || entity.table_name
       end
 
       def preload
-        return if association_type == @entity.name # prevent self inclusion
+        return if association_type == entity.name # prevent self inclusion
 
         super
       end
@@ -62,7 +62,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          belongs_to :#{@name},
+          belongs_to :#{name},
                      -> { with_deleted },
                      class_name: '#{class_name}',
                      foreign_key: '#{column_name}',
