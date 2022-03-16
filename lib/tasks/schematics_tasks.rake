@@ -55,10 +55,10 @@ namespace :schematics do
     desc 'Destroy entity permissions and associated models'
     task :destroy, %i[model] => [:environment] do |_task, args|
       PaperTrail.request(enabled: false) do
-        Permission.where(model: args[:model]).destroy_all
-        Chart.where(model: args[:model]).destroy_all
-        Stat.where(model: args[:model]).destroy_all
-        Schematics::Version.where(item_type: args[:model]).destroy_all
+        Permission.destroy_by(model: args[:model])
+        Chart.destroy_by(model: args[:model])
+        Stat.destroy_by(model: args[:model])
+        Schematics::Version.destroy_by(item_type: args[:model])
       end
     end
 
