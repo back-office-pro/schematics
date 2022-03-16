@@ -367,6 +367,7 @@ module Schematics
           entity.table_name.pluralize.to_sym
         end
 
+        # :reek:FeatureEnvy
         def params(record, format = nil)
           {
             entity.table_name.to_sym => fillable_elements.to_h do |element|

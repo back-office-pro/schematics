@@ -28,6 +28,7 @@ module Schematics
         Object.const_defined?(class_name)
       end
 
+      # :reek:FeatureEnvy
       def has_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
         super.reject { _1.entity.name.pluralize == _1.name }
       end

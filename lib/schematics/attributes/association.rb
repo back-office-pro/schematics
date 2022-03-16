@@ -86,6 +86,7 @@ module Schematics
         :select
       end
 
+      # :reek:FeatureEnvy
       def input_collection
         model_class
           .all

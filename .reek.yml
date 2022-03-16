@@ -29,9 +29,12 @@ detectors:
       - initialize
       - build
   UtilityFunction:
-    enabled: false # TODO: fix this smell
-  FeatureEnvy:
-    enabled: false # TODO: fix this smell
+    public_methods_only: true
+    exclude:
+      - format
+      - default
+      - values
+      - function
   InstanceVariableAssumption:
     exclude:
       - Specs::Dummy
@@ -39,6 +42,16 @@ detectors:
 directories:
   app:
     InstanceVariableAssumption:
+      enabled: false
+    FeatureEnvy:
+      enabled: false
+    UtilityFunction:
+      enabled: false
+  config:
+    UtilityFunction:
+      enabled: false
+  spec:
+    UtilityFunction:
       enabled: false
 exclude_paths:
   - db/migrate

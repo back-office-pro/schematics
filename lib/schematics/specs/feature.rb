@@ -141,6 +141,7 @@ module Schematics
 
       private
 
+      # :reek:FeatureEnvy
       def fill_form(record) # rubocop:disable Metrics/CyclomaticComplexity
         entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"

@@ -88,6 +88,7 @@ module Schematics
         end
     end
 
+    # :reek:FeatureEnvy
     def add_has_and_belongs_to_many_associations
       @entities
         .flat_map(&:has_and_belongs_to_many_associations)
@@ -124,6 +125,7 @@ module Schematics
       end
     end
 
+    # :reek:FeatureEnvy
     def find_has_many_through_associations(entity, parent)
       parent.entity.has_many_associations.each do |child|
         next if child.entity == parent.entity # prevent self association

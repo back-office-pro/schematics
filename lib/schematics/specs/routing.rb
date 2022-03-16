@@ -122,6 +122,7 @@ module Schematics
           model_class.to_s
         end
 
+        # :reek:UtilityFunction
         def locale
           Rails.configuration.i18n.default_locale
         end
