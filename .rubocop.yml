@@ -73,6 +73,7 @@ Lint/ConstantResolution:
     - Hash
     - Numeric
     - String
+    - Comparison
   Exclude:
     - spec/**/*
     - db/*
