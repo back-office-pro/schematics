@@ -5,6 +5,7 @@ en:
       button:
         add: Add a new %{human_name}
         cancel: Cancel
+        compare: Compare
         confirm: Confirm
         destroy: Delete permanently
         duplicate: Duplicate
