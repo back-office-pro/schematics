@@ -2,12 +2,10 @@
 
 window.SidebarController = class extends Stimulus.Controller {
   toggle () {
-    document.querySelector('.sidebar').classList.toggle('toggled')
+    this.element.classList.toggle('toggled')
+    this.element.querySelectorAll('.d-none').forEach(_ => _.classList.toggle('d-md-block'))
     document.querySelector('.content').classList.toggle('toggled')
-    document.querySelectorAll('.sidebar .d-none').forEach(element => {
-      element.classList.toggle('d-md-block')
-    })
-    const sidebarToggled = document.querySelector('.sidebar').classList.contains('toggled')
+    const sidebarToggled = this.element.classList.contains('toggled')
     fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
   }
 }
