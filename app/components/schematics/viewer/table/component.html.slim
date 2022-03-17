@@ -1,5 +1,5 @@
 .table-responsive
-  table.table.mb-0 class=table_css_classes
+  table.table.mb-0 class=table_css_classes data-controller='comparison' data-comparison-model=model_class
     = render Schematics::Filter::Component.new(model_class:)
     tbody class=tbody_css_classes
       - if @resources.empty?
@@ -9,7 +9,8 @@
       - else
         - @resources.each do |resource|
           tr class=tr_css_class(resource) data-href=href(resource)
-            td.text-nowrap.text-center
+            td.text-nowrap
+              = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
               td.text-nowrap.text-center.align-middle.animate__slideInDown class=col_preference_class(field)
