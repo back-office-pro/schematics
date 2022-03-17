@@ -1,4 +1,4 @@
-/* global Stimulus */
+/* global Stimulus, Routes, Turbolinks, fetchAPI */
 
 window.ComparisonController = class extends Stimulus.Controller {
   static get targets () {
