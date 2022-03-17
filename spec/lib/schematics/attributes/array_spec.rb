@@ -9,6 +9,7 @@ describe Schematics::Attributes::Array do
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ids') }
@@ -17,6 +18,7 @@ describe Schematics::Attributes::Array do
   its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }
   its(:default) { is_expected.to be_empty }
+  its(:permitted_params) { is_expected.to eq(ids: []) }
   its(:to_sql) { is_expected.to eq('comparisons.ids') }
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
   its(:options_for_migration) { is_expected.to eq(array: true) }

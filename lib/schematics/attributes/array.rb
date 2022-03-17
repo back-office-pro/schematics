@@ -3,8 +3,14 @@
 module Schematics
   module Attributes
     class Array < Attribute
+      include Behaviours::Fillable
+
       def type
         'string'
+      end
+
+      def permitted_params
+        { super => [] }
       end
 
       def default
