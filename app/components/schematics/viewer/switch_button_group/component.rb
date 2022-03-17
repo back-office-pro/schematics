@@ -14,6 +14,10 @@ module Schematics
         def render?
           can?(:create, ::Comparison)
         end
+
+        def data
+          { action: 'click->comparison#toggleButton', 'comparison-target': 'switch' }
+        end
       end
     end
   end
