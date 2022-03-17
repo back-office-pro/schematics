@@ -27,6 +27,7 @@ document.addEventListener('turbolinks:load', function () {
     const $target = $(e.target)
     if (!$target.is('a') &&
         !$target.parents('a').length &&
+        !$target.parents('.btn-group').length &&
         !$target.hasClass('best_in_place') &&
         !$target.parents('.best_in_place').length) {
       Turbolinks.visit($(this).data('href'))
