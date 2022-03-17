@@ -481,9 +481,10 @@
     },
     {
       "name": "comparison",
-      "icon": "not_equal",
+      "icon": "balance_scale",
       "descriptor": "model",
       "actions": [
+        "create",
         "show"
       ],
       "attributes": [
