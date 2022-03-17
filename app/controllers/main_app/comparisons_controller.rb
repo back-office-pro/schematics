@@ -6,6 +6,7 @@ module MainApp
 
     prepended do
       include Schematics::Nestable
+      skip_before_action :set_breadcrumb, only: :create # rubocop:disable Rails/LexicallyScopedActionFilter
       before_action :set_resources, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
     end
 
