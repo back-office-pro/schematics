@@ -8,13 +8,4 @@
             .col.text-truncate
               = render Schematics::CardHeading::Component.new(icon: parent_model_class.entity.icon, title: resource)
         .card-body.p-0
-          .table-responsive
-            table.table.mb-0.table-striped
-              tbody
-                - parent_model_class.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
-                  tr
-                    th
-                      = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
-                      = parent_model_class.human_attribute_name(field.name)
-                    td
-                      = render Schematics::Resource::Component.new(resource:, field:)
+          = render Schematics::ResourceDetails::Component.new(resource:, model_class: parent_model_class)

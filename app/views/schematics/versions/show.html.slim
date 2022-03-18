@@ -9,17 +9,7 @@
           .col-auto
             = render Schematics::Button::Revert::Component.new(version: @version)
       .card-body.p-0
-        .table-responsive
-          table.table.mb-0.table-striped
-            tbody
-              - @version.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
-                tr
-                  th
-                    = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
-                    = @version.model_class.human_attribute_name(field.name)
-                  td
-                    - old_version = @version.reify(dup: true)
-                    = render Schematics::Resource::Component.new(resource: old_version, field:) if old_version
+        = render Schematics::ResourceDetails::Component.new(resource: @version.reify(dup: true))
   .col-lg-1.my-3.mx-0.text-center
     = fa_icon :arrow_right, size: '4x', class: 'text-secondary d-none d-lg-inline-block'
     = fa_icon :arrow_down, size: '4x', class: 'text-secondary d-inline-block d-lg-none'
@@ -30,13 +20,4 @@
           .col.text-truncate
             = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title:)
       .card-body.p-0
-        .table-responsive
-          table.table.mb-0.table-striped
-            tbody
-              - @version.entity.renderable_elements.stable_sort_by(&:weight).each do |field|
-                tr
-                  th
-                    = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
-                    = @version.model_class.human_attribute_name(field.name)
-                  td
-                    = render Schematics::Resource::Component.new(resource: @version.item, field:)
+        = render Schematics::ResourceDetails::Component.new(resource: @version.item)
