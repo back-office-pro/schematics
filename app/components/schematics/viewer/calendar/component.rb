@@ -19,7 +19,7 @@ module Schematics
         end
 
         def alert_class_for(resource, date)
-          return 'rounded-0' if sibling_resource_for?(resource, date)
+          return 'rounded-0' if siblings_resource_for?(resource, date)
           return 'rounded-right mr-2' if previous_resource_for?(resource, date)
           return 'rounded-left ml-2' if next_resource_for?(resource, date)
         end
@@ -74,7 +74,7 @@ module Schematics
           resources_for(date.tomorrow).include?(resource)
         end
 
-        def sibling_resource_for?(resource, date)
+        def siblings_resource_for?(resource, date)
           resources_for(date.yesterday).include?(resource) &&
             resources_for(date.tomorrow).include?(resource)
         end
