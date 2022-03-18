@@ -7,7 +7,7 @@
 //= require filter/typeahead/component
 //= require viewer/settings/component
 //= require button/generate_file_in_background/component
-//= require viewer/table/component
+//= require viewer/component
 
 /*
   global Stimulus,
