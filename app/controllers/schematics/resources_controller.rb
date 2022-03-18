@@ -98,7 +98,7 @@ module Schematics
           format.html do
             redirect_to @resource, notice: tscope(result.message)
           end
-          format.json { render json: @resource, status: :created }
+          format.json { render json: @resource, status: :created, location: @resource }
         end
       else
         respond_to do |format|
@@ -119,7 +119,7 @@ module Schematics
           format.html do
             redirect_to @resource, notice: tscope(result.message)
           end
-          format.json { render json: @resource, status: :created }
+          format.json { render json: @resource, status: :created, location: @resource }
         end
       else
         respond_to do |format|
