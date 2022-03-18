@@ -48,7 +48,7 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
-          ::Licence.instance.update!(expires_on: 1.day.from_now)
+          allow_any_instance_of(::Licence).to receive(:expires_on).and_return(1.day.from_now)
           record
           model_class.reindex
           login
