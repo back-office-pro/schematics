@@ -8,8 +8,8 @@ window.ComparisonController = class extends Stimulus.Controller {
   async submit () {
     const params = { comparison: { model: this.data.get('model'), ids: this.ids() } }
     const response = await fetchAPI(Routes.comparisonsEn(), 'POST', params)
-    const { id } = await response.json()
-    Turbolinks.visit(Routes.comparisonEn({ id }))
+    const { pathname } = new URL(response.headers.get('Location'))
+    Turbolinks.visit(pathname)
   }
 
   toggleButton () {
