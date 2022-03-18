@@ -5,6 +5,7 @@ module Schematics
     module SwitchButtonGroup
       class Component < ApplicationComponent
         delegate :can?, to: :helpers
+        delegate :id, to: :@resource
 
         def initialize(resource:)
           super

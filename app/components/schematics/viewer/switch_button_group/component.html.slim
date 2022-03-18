@@ -1,4 +1,4 @@
 .btn-group
   .custom-control.custom-switch.w-0
-    = check_box_tag(@resource.id, 'true', false, class: 'custom-control-input', data:)
-    = label_tag @resource.id, '', class: 'custom-control-label'
+    = check_box_tag id, 'true', false, data:, class: 'custom-control-input'
+    = label_tag id, '', class: 'custom-control-label'
