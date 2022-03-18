@@ -10,6 +10,7 @@ module Schematics
         .role
         .permissions
         .each { can :read, Version, event: _1.action, item_type: _1.model }
+      cannot :read, Version, item_type: 'Comparison'
     end
   end
 end
