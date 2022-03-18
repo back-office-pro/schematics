@@ -2,6 +2,12 @@ $input-btn-focus-width: 0;
 $grid-gutter-width: 1rem !default;
 @import 'bootstrap/scss/bootstrap';
 
+// Sidebar
+
+.sidebar:hover {
+  background: darken($primary, 5%) !important;
+}
+
 // Forms - Custom file
 
 label.custom-file-label {
