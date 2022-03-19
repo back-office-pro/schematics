@@ -14,7 +14,7 @@
                 td.day.p-0 class=td_class_for(date)
                   .text-muted.pl-2.pt-1 = date.day
                   - resources_for(date).each do |resource|
-                    .alert.alert-secondary.resource.text-truncate.mb-1.p-2 class=alert_class_for(resource, date) data-href=href(resource)
+                    .alert.alert-secondary.calendar.text-truncate.mb-1.p-2 class=alert_class_for(resource, date) data-href=href(resource)
                       - unless previous_resource_for?(resource, date)
                         = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
                         = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
