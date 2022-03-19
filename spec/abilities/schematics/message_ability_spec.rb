@@ -15,6 +15,7 @@ RSpec.describe Schematics::MessageAbility do
   let(:other_user) { users(:two) }
   let(:message) { messages(:one) }
 
+  it { is_expected.not_to be_able_to(:duplicate, Message) }
   it { is_expected.not_to be_able_to(:update, Message) }
   it { is_expected.not_to be_able_to(:destroy, Message) }
   it { is_expected.not_to be_able_to(:archive, Message) }
