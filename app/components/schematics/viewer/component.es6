@@ -5,7 +5,7 @@ window.ComparisonController = class extends Stimulus.Controller {
     return ['button', 'switch']
   }
 
-  async submit () {
+  async compare () {
     const params = { comparison: { model: this.data.get('model'), ids: this.ids() } }
     const response = await fetchAPI(Routes.comparisonsEn(), 'POST', params)
     const { pathname } = new URL(response.headers.get('Location'))
