@@ -67,7 +67,7 @@ module Schematics
         if can?(:create)
           scenario "creating a #{entity.name}" do
             visit path
-            if ability.can?(:create, model_class)
+            if ability.can?(:new, model_class)
               click_on t('schematics.application.button.add', human_name:)
               fill_form(record)
               click_on t('schematics.application.button.confirm')
@@ -82,7 +82,7 @@ module Schematics
           scenario "updating a #{entity.name}" do
             visit path
             selector = "a[href='#{path(record.id, 'edit')}']"
-            if ability.can?(:update, record)
+            if ability.can?(:edit, record)
               case entity
               when Entities::Singleton
                 click_on t('schematics.application.button.edit')
