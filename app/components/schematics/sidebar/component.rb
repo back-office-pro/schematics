@@ -13,7 +13,7 @@ module Schematics
         Schema
           .instance
           .entities
-          .rejec(&:hidden?)
+          .reject(&:hidden?)
           .select { can?(:index, _1.model_class) }
           .sort_by { _1.model_class.human_name }
       end
