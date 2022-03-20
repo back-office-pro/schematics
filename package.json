@@ -14,7 +14,7 @@
     "jquery-ujs": "1.2.3",
     "popper.js": "1.16.1",
     "slim-select": "1.27.1",
-    "sortablejs": "1.14.0",
+    "sortablejs": "1.15.0",
     "stimulus": "2.0.0",
     "swagger-ui-dist": "4.6.2",
     "swagger-ui-themes": "3.0.1",
