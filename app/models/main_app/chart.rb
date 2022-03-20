@@ -63,7 +63,7 @@ module MainApp
         ::I18n.t('of'),
         (model_class.human_attribute_name(entity_y_field.name).pluralize.downcase if entity_y_field), # rubocop:disable Layout/LineLength
         (::I18n.t('of') if entity_y_field),
-        model_class.model_name.human.downcase.pluralize
+        model_class.human_name_plural
       ].compact.join(' ')
     end
 
