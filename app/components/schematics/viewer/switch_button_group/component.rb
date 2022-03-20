@@ -13,7 +13,7 @@ module Schematics
         end
 
         def render?
-          can?(:create, ::Comparison) && !@resource.deleted?
+          !@resource.deleted?
         end
 
         def data
