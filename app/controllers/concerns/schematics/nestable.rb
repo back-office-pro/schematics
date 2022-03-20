@@ -6,7 +6,11 @@ module Schematics
 
     included do
       helper_method :parent_model_class
-      delegate :human_name, :human_name_plural, to: :parent_model_class, prefix: :parent
+      delegate :human_name,
+               :human_name_plural,
+               to: :parent_model_class,
+               prefix: :parent,
+               allow_nil: true
     end
 
     class_methods do

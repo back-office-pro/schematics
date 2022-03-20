@@ -6,7 +6,7 @@ module MainApp
 
     prepended do
       include Schematics::Nestable
-      skip_before_action :set_breadcrumb, only: :create # rubocop:disable Rails/LexicallyScopedActionFilter
+      skip_before_action :set_breadcrumb, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
       before_action :set_resources, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
     end
 
@@ -21,7 +21,7 @@ module MainApp
     end
 
     def parent_model_class
-      @resource.model.safe_constantize
+      @resource.model.try(:safe_constantize)
     end
   end
 end
