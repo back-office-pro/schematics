@@ -9,7 +9,6 @@ module Schematics
       user
         .role
         .permissions
-        .reject { _1.model == 'Comparison' }
         .each { can :read, Version, event: _1.action, item_type: _1.model }
     end
   end
