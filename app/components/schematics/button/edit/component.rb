@@ -40,11 +40,7 @@ module Schematics
         def data
           return {} unless compact?
 
-          {
-            toggle: 'tooltip',
-            placement: 'top',
-            title: t('schematics.application.button.tooltip.edit')
-          }
+          { toggle: 'tooltip', placement: 'top', title: t('.text') }
         end
 
         def compact?

@@ -3,22 +3,10 @@ en:
   schematics:
     application:
       button:
-        add: Add a new %{human_name}
         cancel: Cancel
-        compare: Compare
         confirm: Confirm
         destroy: Delete permanently
-        duplicate: Duplicate
-        edit: Edit
-        import: Import %{human_name_plural}
         loading: Processing...
-        reset_filters: Reset filters
-        revert: Revert
-        stale: Check changes
-        tooltip:
-          archive: Archive
-          edit: Edit
-          restore: Restore
       delete:
         subtitle: This action is irreversible
         title: Are you sure?
