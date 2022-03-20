@@ -78,7 +78,7 @@ module Schematics
         if can?(:update)
           scenario "updating a #{entity.name}" do
             if ability.can?(:edit, record)
-              visit path(id: record.id, action: 'edit')
+              visit path(record:, action: 'edit')
               fill_form(record)
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
@@ -100,8 +100,8 @@ module Schematics
           entity.table_name.pluralize.to_sym
         end
 
-        def path(id: nil, action: nil)
-          ["/#{route_key}", (id unless entity.is_a?(Entities::Singleton)), action]
+        def path(record: nil, action: nil)
+          ["/#{route_key}", (record&.id unless entity.is_a?(Entities::Singleton)), action]
             .compact
             .join('/')
         end
