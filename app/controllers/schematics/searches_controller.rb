@@ -8,7 +8,7 @@ module Schematics
 
     def show
       @query = params[:query]
-      searches = Schema.instance.entities.map do |entity|
+      searches = Schema.instance.entities.select(&:listable?).map do |entity|
         entity.model_class.search(
           @query,
           includes: entity.includes,

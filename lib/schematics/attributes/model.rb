@@ -14,6 +14,7 @@ module Schematics
         Schema
           .instance
           .entities
+          .select(&:listable?)
           .map(&:class_name)
       end
 

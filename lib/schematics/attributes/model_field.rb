@@ -20,6 +20,7 @@ module Schematics
         Schema
           .instance
           .entities
+          .select(&:listable?)
           .flat_map(&:renderable_fields)
           .map(&:method_name)
       end

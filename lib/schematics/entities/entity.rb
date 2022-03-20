@@ -190,6 +190,10 @@ module Schematics
         @core
       end
 
+      def listable?
+        can?(:index)
+      end
+
       def load
         context = binding.of_caller(1).method(:eval)
         model_elements.each(&context)
