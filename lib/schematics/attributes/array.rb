@@ -21,6 +21,10 @@ module Schematics
         super.merge(array: true)
       end
 
+      def icon
+        :table
+      end
+
       protected
 
       def migration_options
