@@ -9,7 +9,7 @@ module MainApp
         Schematics::Schema
           .instance
           .entities
-          .select(&:listable?)
+          .reject(&:hidden?)
           .flat_map(&method(:create_entity_permissions!))
       end
 

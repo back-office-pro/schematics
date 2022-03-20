@@ -20,7 +20,7 @@ module Schematics
         Schema
           .instance
           .entities
-          .select(&:listable?)
+          .reject(&:hidden?)
           .flat_map(&:renderable_fields)
           .map(&:method_name)
       end

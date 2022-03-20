@@ -190,8 +190,8 @@ module Schematics
         @core
       end
 
-      def listable?
-        can?(:index)
+      def hidden?
+        core? && !can?(default_actions.first.to_sym)
       end
 
       def load
