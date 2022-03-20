@@ -15,6 +15,10 @@
                 as: :date,
                 html5: true,
                 wrapper: :input_group
+    - when Schematics::Attributes::Array
+      = f.input field.name.to_sym,
+                input_html: { multiple: true },
+                prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Address
       = f.input field.name.to_sym,
                 collection: [@resource.public_send(field.name.to_sym)].compact,
