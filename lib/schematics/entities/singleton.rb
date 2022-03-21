@@ -9,7 +9,7 @@ module Schematics
           delegate :cache_key, to: :model_name
 
           class << self
-            public :all
+            public :all, :new
           end
         RUBY
       end
