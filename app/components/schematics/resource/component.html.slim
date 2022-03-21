@@ -17,7 +17,7 @@
 - when Schematics::Attributes::Address
   = render Schematics::GoogleMap::Component.new(address: value)
 - when Schematics::Attributes::Color
-  .btn.p-2 style="background: #{value};"
+  .btn.p-2.pe-none style="background: #{value};"
 - when Schematics::Attributes::Attachments
   = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true)
 - when Schematics::Attributes::Attachment
