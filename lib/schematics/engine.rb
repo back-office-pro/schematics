@@ -88,7 +88,7 @@ module Schematics
     config.active_record.warn_on_records_fetched_greater_than = 100
 
     # Active Job
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = Rails.env.test? ? :test : :sidekiq
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
