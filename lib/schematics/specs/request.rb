@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/concern'
+require 'active_support/core_ext/enumerable'
 
 module Schematics
   module Specs
@@ -71,7 +72,7 @@ module Schematics
           end
         end
 
-        if can?(:show) && model_class != ::ActiveStorage::Attachment
+        if can?(:show) && [::ActiveStorage::Attachment, ::Search].exclude?(model_class)
           %i[html pdf].each do |as|
             it "should show #{as.upcase} record" do
               get(path(record:), headers:, as:)

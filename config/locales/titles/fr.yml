@@ -30,7 +30,7 @@ fr:
       schema:
         edit: Editer mon application
       searches:
-        show: Recherche "%{query}"
+        show: Recherche "%{resource}"
       sessions:
         edit: Editer mon profil
         new: Se connecter

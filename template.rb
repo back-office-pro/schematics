@@ -15,7 +15,6 @@ after_bundle do
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
   rails_command 'schematics:generate'
-  rails_command 'generate model search query:string model:string filters:jsonb user:references --no-test-framework' # rubocop:disable Layout/LineLength
   rails_command 'generate annotate:install'
   rails_command 'generate erd:install'
   rails_command 'db:reset'

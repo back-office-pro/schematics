@@ -110,6 +110,6 @@ window.SearchBarController = class extends Stimulus.Controller {
   }
 
   get url () {
-    return Routes.schematicsSearchEn(this.inputTarget.value)
+    return Routes.searchEn(this.inputTarget.value)
   }
 }

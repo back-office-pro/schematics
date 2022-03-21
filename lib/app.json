@@ -480,6 +480,36 @@
       ]
     },
     {
+      "name": "search",
+      "icon": "search",
+      "descriptor": "query",
+      "actions": [
+        "create",
+        "show"
+      ],
+      "attributes": [
+        {
+          "name": "query",
+          "type": "string"
+        },
+        {
+          "name": "model",
+          "type": "model"
+        },
+        {
+          "name": "filters",
+          "type": "jsonb"
+        },
+        {
+          "name": "user",
+          "type": "references",
+          "options": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
       "name": "comparison",
       "icon": "balance_scale",
       "descriptor": "model",
