@@ -64,51 +64,24 @@ module Schematics
           end
         end
 
-        if can?(:create)
+        if can?(:create) && model_class != ::Search
           scenario "creating a #{entity.name}" do
-            visit path
-            if ability.can?(:create, model_class)
-              click_on t('schematics.application.button.add', human_name:)
+            if ability.can?(:new, model_class)
+              visit path(action: 'new')
               fill_form(record)
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
-            else
-              is_expected.not_to have_button t('schematics.application.button.add')
             end
           end
         end
 
         if can?(:update)
           scenario "updating a #{entity.name}" do
-            visit path
-            selector = "a[href='#{path(record.id, 'edit')}']"
-            if ability.can?(:update, record)
-              case entity
-              when Entities::Singleton
-                click_on t('schematics.application.button.edit')
-              else
-                first(selector).click
-              end
+            if ability.can?(:edit, record)
+              visit path(record:, action: 'edit')
               fill_form(record)
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
-            else
-              case entity
-              when Entities::Singleton
-                is_expected.not_to have_button t('schematics.application.button.edit')
-              else
-                is_expected.not_to have_button selector
-              end
-            end
-          end
-        end
-
-        if can?(:archive)
-          scenario "archiving a #{entity.name}" do
-            if ability.can?(:archive, record)
-              visit path
-              first("a[href='#{path(record.id, 'archive')}']").click
-              is_expected.to have_text t('schematics.resources.archive.success', human_name:)
             end
           end
         end
@@ -127,22 +100,17 @@ module Schematics
           entity.table_name.pluralize.to_sym
         end
 
-        def path(*parts)
-          case entity
-          when Entities::Singleton
-            "/#{route_key}"
-          else
-            parts
-              .unshift("/#{route_key}")
-              .join('/')
-          end
+        def path(record: nil, action: nil)
+          ["/#{route_key}", (record&.id unless entity.is_a?(Entities::Singleton)), action]
+            .compact
+            .join('/')
         end
       end
 
       private
 
       # :reek:FeatureEnvy
-      def fill_form(record) # rubocop:disable Metrics/CyclomaticComplexity
+      def fill_form(record) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize
         entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"
           case element
@@ -173,6 +141,8 @@ module Schematics
             fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: element.default
           when Attributes::Date
             fill_in input, with: element.default.to_date
+          when Attributes::Array
+            fill_in "#{input}[]", with: element.default
           else
             fill_in input, with: element.default || record.public_send(element.name)
           end

@@ -7,6 +7,7 @@
 //= require filter/typeahead/component
 //= require viewer/settings/component
 //= require button/generate_file_in_background/component
+//= require viewer/component
 
 /*
   global Stimulus,
@@ -17,7 +18,8 @@
          SearchBarController,
          TypeaheadController,
          GenerateFileInBackgroundController,
-         ViewerSettingsController
+         ViewerSettingsController,
+         ComparisonController
 */
 
 window.fetchAPI = (url, method = 'GET', data) => {
@@ -43,3 +45,4 @@ application.register('searchBar', SearchBarController)
 application.register('typeahead', TypeaheadController)
 application.register('generateFileInBackground', GenerateFileInBackgroundController)
 application.register('viewerSettings', ViewerSettingsController)
+application.register('comparison', ComparisonController)

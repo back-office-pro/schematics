@@ -1,7 +1,8 @@
 thead.border-bottom.border-light
   tr
-    th.align-top rowspan='2'
+    th.align-top.pb-0 rowspan='2'
       = render Schematics::Viewer::Settings::Component.new(entity:)
+      = render Schematics::Button::Compare::Component.new
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
       th.text-nowrap.text-center.pb-0.animate__slideInDown class=col_preference_class(field)
         = render Schematics::SortLink::Component.new(field:, model_class: @model_class)

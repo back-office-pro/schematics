@@ -1,21 +1,27 @@
 # frozen_string_literal: true
 
-module Schematics
-  class SearchesController < ApplicationController
-    def create
-      redirect_to search_path(query: ::Search.create!(search_params).query)
+module MainApp
+  module SearchesController
+    extend ActiveSupport::Concern
+
+    prepended do
+      after_action -> { flash.clear }
     end
 
-    def show
-      @query = params[:query]
-      searches = Schema.instance.entities.map do |entity|
+    class_methods do
+      def controller_path
+        File.join('schematics', controller_name)
+      end
+    end
+
+    def show # rubocop:disable Metrics/CyclomaticComplexity
+      searches = Schematics::Schema.instance.entities.reject(&:hidden?).map do |entity|
         entity.model_class.search(
-          @query,
+          @resource.query,
           includes: entity.includes,
           match: :word_middle,
           suggest: true,
           misspellings: false,
-          execute: false,
           scope_results: -> { _1.accessible_by(current_ability) }
         )
       end
@@ -27,7 +33,7 @@ module Schematics
       respond_to do |format|
         format.html
         format.json do
-          @results.each do |_name, result|
+          @results.each_value do |result|
             result.map! do |record|
               {
                 icon: record.class.entity.icon.to_s.dasherize,
@@ -42,13 +48,12 @@ module Schematics
       end
     end
 
-    private
+    protected
 
-    def search_params
-      params
-        .require(:search)
-        .permit(:query)
-        .with_defaults(user: current_user)
+    def set_resource
+      super
+    rescue ActiveRecord::RecordNotFound
+      @resource = model_class.new(query: params[:id])
     end
   end
 end

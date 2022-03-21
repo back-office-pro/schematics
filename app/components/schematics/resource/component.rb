@@ -5,11 +5,12 @@ module Schematics
     class Component < ApplicationComponent
       delegate :confirm_data, :can?, to: :helpers
 
-      def initialize(resource:, field:, editable: false)
+      def initialize(resource:, field:, editable: false, highlight: nil)
         super
         @resource = resource
         @field = field
         @editable = editable
+        @highlight = highlight
       end
 
       def value

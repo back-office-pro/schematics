@@ -18,6 +18,12 @@ module Schematics
           'bg-light' if month_range.cover?(date)
         end
 
+        def alert_class_for(resource, date)
+          return 'rounded-0' if siblings_resource_for?(resource, date)
+          return 'rounded-right mr-2' if previous_resource_for?(resource, date)
+          return 'rounded-left ml-2' if next_resource_for?(resource, date)
+        end
+
         def resources_for(date)
           @resources.select do |resource|
             start_date = resource.public_send(calendar_start_attribute).beginning_of_day
@@ -30,6 +36,10 @@ module Schematics
           params.dig(:filter, calendar_start_attribute).present? &&
             params.dig(:filter, calendar_end_attribute).present? &&
             super
+        end
+
+        def previous_resource_for?(resource, date)
+          resources_for(date.yesterday).include?(resource)
         end
 
         private
@@ -58,6 +68,15 @@ module Schematics
         def end_of_month_date
           (calendar_start_date || @resources.map(&calendar_start_attribute).max || ::Date.current)
             .end_of_month
+        end
+
+        def next_resource_for?(resource, date)
+          resources_for(date.tomorrow).include?(resource)
+        end
+
+        def siblings_resource_for?(resource, date)
+          resources_for(date.yesterday).include?(resource) &&
+            resources_for(date.tomorrow).include?(resource)
         end
       end
     end

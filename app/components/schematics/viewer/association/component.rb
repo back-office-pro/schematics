@@ -7,9 +7,10 @@ module Schematics
         delegate :confirm_data, to: :helpers
         with_collection_parameter :resources
 
-        def initialize(resources:, collapsed: false)
+        def initialize(resources:, collapsed: false, highlight: nil)
           super(resources:)
           @collapsed = collapsed
+          @highlight = highlight
         end
 
         def title

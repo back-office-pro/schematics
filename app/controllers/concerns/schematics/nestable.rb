@@ -6,7 +6,11 @@ module Schematics
 
     included do
       helper_method :parent_model_class
-      delegate :human_name, :human_name_plural, to: :parent_model_class, prefix: :parent
+      delegate :human_name,
+               :human_name_plural,
+               to: :parent_model_class,
+               prefix: :parent,
+               allow_nil: true
     end
 
     class_methods do
@@ -22,6 +26,8 @@ module Schematics
     protected
 
     def set_breadcrumb
+      return unless can?(:index, parent_model_class)
+
       title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
       breadcrumb title, parent_model_class
     end

@@ -4,6 +4,7 @@ fr:
     active_storage: stockage
     attachments: fichiers
     charts: graphiques
+    comparisons: comparaisons
     delete: supprimer
     edit: editer
     login: connexion

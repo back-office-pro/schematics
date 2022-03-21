@@ -55,6 +55,7 @@ module Schematics
       Schematics::Schema
         .instance
         .entities
+        .reject(&:hidden?)
         .flat_map do |entity|
           Version::EVENTS
             .select { |action| current_ability.can?(action.to_sym, entity.model_class) }
@@ -66,6 +67,7 @@ module Schematics
       Schematics::Schema
         .instance
         .entities
+        .reject(&:hidden?)
         .flat_map(&:listable_elements)
         .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
     end

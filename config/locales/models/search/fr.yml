@@ -1,0 +1,14 @@
+---
+fr:
+  activerecord:
+    attributes:
+      search:
+        filters: Filtres
+        model: Donnée
+        query: Requête
+        user: Utilisateur
+    models:
+      search:
+        gender: female
+        one: Recherche
+        other: Recherches

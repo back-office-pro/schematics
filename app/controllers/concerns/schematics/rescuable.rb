@@ -81,7 +81,9 @@ module Schematics
     protected
 
     def record_not_found_path
-      polymorphic_path(model_class)
+      return polymorphic_path(model_class) if can?(:index, model_class)
+
+      schematics.root_path
     end
   end
 end

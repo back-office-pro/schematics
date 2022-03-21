@@ -7,17 +7,7 @@ fr:
         cancel: Annuler
         confirm: Valider
         destroy: Supprimer définitivement
-        duplicate: Dupliquer
-        edit: Editer
-        import: Importer des %{human_name_plural}
         loading: Chargement...
-        reset_filters: Réinitialiser les filtres
-        revert: Rétablir
-        stale: Voir les changements
-        tooltip:
-          archive: Archiver
-          edit: Editer
-          restore: Restaurer
       delete:
         subtitle: Cette action est irréversible
         title: Etes-vous sûr ?

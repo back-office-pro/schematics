@@ -1,4 +1,4 @@
-- breadcrumb title, schematics.search_path, match: :inclusive
+- breadcrumb title, main_app.polymorphic_path(@resource)
 - if @results.empty?
   .card.shadow-sm.border-0.mb-3
     .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
@@ -6,4 +6,4 @@
     .card-body.text-center.p-3
       = render Schematics::EmptyResource::Component.new(suggestions: @suggestions)
 - else
-  = render Schematics::Viewer::Association::Component.with_collection(@results.values)
+  = render Schematics::Viewer::Association::Component.with_collection(@results.values, highlight: @resource.query)

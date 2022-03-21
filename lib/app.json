@@ -350,9 +350,7 @@
       "type": "singleton",
       "descriptor": "plan",
       "icon": "id_badge",
-      "actions": [
-        "show"
-      ],
+      "actions": [],
       "attributes": [
         {
           "name": "plan",
@@ -476,6 +474,58 @@
           "options": {
             "depends_on": "model"
           }
+        }
+      ]
+    },
+    {
+      "name": "search",
+      "icon": "search",
+      "descriptor": "query",
+      "actions": [
+        "create",
+        "show"
+      ],
+      "attributes": [
+        {
+          "name": "query",
+          "type": "string"
+        },
+        {
+          "name": "model",
+          "type": "model"
+        },
+        {
+          "name": "filters",
+          "type": "jsonb"
+        },
+        {
+          "name": "user",
+          "type": "references",
+          "options": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "comparison",
+      "icon": "balance_scale",
+      "descriptor": "model",
+      "actions": [
+        "create",
+        "show"
+      ],
+      "attributes": [
+        {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "ids",
+          "type": "array"
         }
       ]
     }

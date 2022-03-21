@@ -2,6 +2,8 @@
 en:
   titles:
     schematics:
+      comparisons:
+        show: Comparison
       dashboard:
         admin: Administration
         home: Dashboard
@@ -28,7 +30,7 @@ en:
       schema:
         edit: Edit my application
       searches:
-        show: Search "%{query}"
+        show: Search "%{resource}"
       sessions:
         edit: Edit my profile
         new: Login

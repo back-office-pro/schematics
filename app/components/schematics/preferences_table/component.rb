@@ -18,6 +18,7 @@ module Schematics
         Schema
           .instance
           .entities
+          .reject(&:hidden?)
           .select { Object.const_defined?(_1.class_name) }
           .sort_by { _1.model_class.human_name }
       end

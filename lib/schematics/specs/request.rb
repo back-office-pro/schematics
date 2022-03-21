@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/concern'
+require 'active_support/core_ext/enumerable'
 
 module Schematics
   module Specs
@@ -65,16 +66,16 @@ module Schematics
           end
 
           it 'should get API autocomplete' do
-            get path('autocomplete?field=id'), headers:, as: :json
+            get path(action: 'autocomplete?field=id'), headers:, as: :json
             status = ability.can?(:index, model_class) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
         end
 
-        if can?(:show) && model_class != ::ActiveStorage::Attachment
+        if can?(:show) && [::ActiveStorage::Attachment, ::Search].exclude?(model_class)
           %i[html pdf].each do |as|
             it "should show #{as.upcase} record" do
-              get(path(record.id), headers:, as:)
+              get(path(record:), headers:, as:)
               if ability.can?(:show, record)
                 is_expected.to have_http_status(:success)
               else
@@ -84,19 +85,20 @@ module Schematics
           end
 
           it 'should show API record' do
-            get path(record.id), headers:, as: :json
+            get path(record:), headers:, as: :json
             status = ability.can?(:show, record) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
 
           unless entity.is_a?(Entities::Singleton)
             it 'should be not found' do
-              get path('abdc'), headers:, as: :html
-              is_expected.to redirect_to(path)
+              get path(action: 'foo'), headers:, as: :html
+              redirect_path = ability.can?(:index, model_class) ? path : root_path
+              is_expected.to redirect_to(redirect_path)
             end
 
             it 'should be not found API' do
-              get path('abdc'), headers:, as: :json
+              get path(action: 'foo'), headers:, as: :json
               is_expected.to have_http_status(:not_found)
             end
           end
@@ -104,7 +106,7 @@ module Schematics
 
         if can?(:update)
           it 'should get edit' do
-            get path(record.id, 'edit'), headers:, as: :html
+            get path(record:, action: 'edit'), headers:, as: :html
             if ability.can?(:edit, record)
               is_expected.to have_http_status(:success)
             else
@@ -113,45 +115,41 @@ module Schematics
           end
 
           it 'should update record' do
-            patch path(record.id), params: params(record), headers:, as: :html
-            redirect_path = ability.can?(:update, record) ? path(record.reload.slug) : root_path
+            patch path(record:), params: params(record), headers:, as: :html
+            redirect_path = ability.can?(:update, record) ? path(record:) : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
           it 'should update API record' do
-            patch path(record.id), params: params(record, :json), headers:, as: :json
+            patch path(record:), params: params(record, :json), headers:, as: :json
             status = ability.can?(:update, record) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
 
           it 'should be a bad request' do
-            patch path(record.id), params: {}, headers: headers_with_referer, as: :html
+            patch path(record:), params: {}, headers: headers_with_referer, as: :html
             redirect_path = ability.can?(:update, record) ? profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
           it 'should be a bad request API' do
-            patch path(record.id), params: {}, headers:, as: :json
+            patch path(record:), params: {}, headers:, as: :json
             status = ability.can?(:update, record) ? :bad_request : :forbidden
             is_expected.to have_http_status(status)
           end
 
           events.each do |event|
             it "should #{event.name} record" do
-              patch path(record.id, event.name), headers:, as: :html
+              patch path(record:, action: event.name), headers:, as: :html
               if ability.can?(event.name.to_sym, record)
-                if record.public_send(:"may_#{event.name}?")
-                  is_expected.to redirect_to(path(record.reload.slug))
-                else
-                  is_expected.to redirect_to(path(record.id))
-                end
+                is_expected.to redirect_to(path(record:))
               else
                 is_expected.to redirect_to(root_path)
               end
             end
 
             it "should #{event.name} API record" do
-              patch path(record.id, event.name), headers:, as: :json
+              patch path(record:, action: event.name), headers:, as: :json
               if ability.can?(event.name.to_sym, record)
                 status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
                 is_expected.to have_http_status(status)
@@ -164,7 +162,7 @@ module Schematics
 
         if can?(:create)
           it 'should get new' do
-            get path('new'), headers:, as: :html
+            get path(action: 'new'), headers:, as: :html
             if ability.can?(:new, model_class)
               is_expected.to have_http_status(:success)
             else
@@ -173,7 +171,7 @@ module Schematics
           end
 
           it 'should get new import' do
-            get path('imports', 'new'), headers:, as: :html
+            get path(action: 'imports/new'), headers:, as: :html
             if ability.can?(:import, model_class)
               is_expected.to have_http_status(:success)
             else
@@ -186,7 +184,7 @@ module Schematics
               expect { post(path, params: params(record), headers:, as: :html) }
                 .to change { model_class.count }
                 .by(1)
-              is_expected.to redirect_to(path(model_class.last.slug || model_class.last.id))
+              is_expected.to redirect_to(path(record: model_class.last))
             else
               expect { post(path, params: params(record), headers:, as: :html) }
                 .not_to(change { model_class.count })
@@ -222,17 +220,17 @@ module Schematics
           it 'should duplicate record' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
-                expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
+                expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
                   .not_to(change { model_class.count })
                 is_expected.to have_http_status(:success)
               else
-                expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
+                expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
                   .to change { model_class.count }
                   .by(1)
-                is_expected.to redirect_to(path(model_class.last.slug || model_class.last.id))
+                is_expected.to redirect_to(path(record: model_class.last))
               end
             else
-              expect { post(path(record.id, 'duplicate'), headers:, as: :html) }
+              expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
                 .not_to(change { model_class.count })
               is_expected.to redirect_to(root_path)
             end
@@ -241,17 +239,17 @@ module Schematics
           it 'should duplicate record API' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
-                expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
+                expect { post(path(record:, action: 'duplicate'), headers:, as: :json) }
                   .not_to(change { model_class.count })
                 is_expected.to have_http_status(:unprocessable_entity)
               else
-                expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
+                expect { post(path(record:, action: 'duplicate'), headers:, as: :json) }
                   .to change { model_class.count }
                   .by(1)
                 is_expected.to have_http_status(:created)
               end
             else
-              expect { post(path(record.id, 'duplicate'), headers:, as: :json) }
+              expect { post(path(record:, action: 'duplicate'), headers:, as: :json) }
                 .not_to(change { model_class.count })
               is_expected.to have_http_status(:forbidden)
             end
@@ -260,7 +258,7 @@ module Schematics
 
         if can?(:destroy) && model_class != ::ActiveStorage::Attachment
           it 'should get delete' do
-            get path(record.id, 'delete'), headers:, as: :html
+            get path(record:, action: 'delete'), headers:, as: :html
             if ability.can?(:destroy, record)
               is_expected.to have_http_status(:success)
             else
@@ -270,12 +268,12 @@ module Schematics
 
           it 'should destroy record' do
             if ability.can?(:destroy, record)
-              expect { delete path(record.id), headers:, as: :html }
+              expect { delete path(record:), headers:, as: :html }
                 .to change { model_class.count }
                 .by(-1)
               is_expected.to redirect_to(path)
             else
-              expect { delete path(record.id), headers:, as: :html }
+              expect { delete path(record:), headers:, as: :html }
                 .not_to(change { model_class.count })
               is_expected.to redirect_to(root_path)
             end
@@ -283,12 +281,12 @@ module Schematics
 
           it 'should destroy API record' do
             if ability.can?(:destroy, record)
-              expect { delete path(record.id), headers:, as: :json }
+              expect { delete path(record:), headers:, as: :json }
                 .to change { model_class.count }
                 .by(-1)
               is_expected.to have_http_status(:no_content)
             else
-              expect { delete path(record.id), headers:, as: :json }
+              expect { delete path(record:), headers:, as: :json }
                 .not_to(change { model_class.count })
               is_expected.to have_http_status(:forbidden)
             end
@@ -299,12 +297,12 @@ module Schematics
           it 'should archive record' do
             record.restore
             if ability.can?(:archive, record)
-              expect { delete path(record.id, 'archive'), headers:, as: :html }
+              expect { delete path(record:, action: 'archive'), headers:, as: :html }
                 .to change { model_class.count }
                 .by(-1)
               is_expected.to redirect_to(path)
             else
-              expect { delete path(record.id, 'archive'), headers:, as: :html }
+              expect { delete path(record:, action: 'archive'), headers:, as: :html }
                 .not_to(change { model_class.count })
               is_expected.to redirect_to(root_path)
             end
@@ -313,12 +311,12 @@ module Schematics
           it 'should archive API record' do
             record.restore
             if ability.can?(:archive, record)
-              expect { delete path(record.id, 'archive'), headers:, as: :json }
+              expect { delete path(record:, action: 'archive'), headers:, as: :json }
                 .to change { model_class.count }
                 .by(-1)
               is_expected.to have_http_status(:no_content)
             else
-              expect { delete path(record.id, 'archive'), headers:, as: :json }
+              expect { delete path(record:, action: 'archive'), headers:, as: :json }
                 .not_to(change { model_class.count })
               is_expected.to have_http_status(:forbidden)
             end
@@ -327,12 +325,12 @@ module Schematics
           it 'should restore record' do
             record.destroy!
             if ability.can?(:restore, record)
-              expect { delete path(record.id, 'restore'), headers:, as: :html }
+              expect { delete path(record:, action: 'restore'), headers:, as: :html }
                 .to change { model_class.count }
                 .by(1)
               is_expected.to redirect_to(path)
             else
-              expect { delete path(record.id, 'restore'), headers:, as: :html }
+              expect { delete path(record:, action: 'restore'), headers:, as: :html }
                 .not_to(change { model_class.count })
               is_expected.to redirect_to(root_path)
             end
@@ -341,12 +339,12 @@ module Schematics
           it 'should restore API record' do
             record.destroy!
             if ability.can?(:restore, record)
-              expect { delete path(record.id, 'restore'), headers:, as: :json }
+              expect { delete path(record:, action: 'restore'), headers:, as: :json }
                 .to change { model_class.count }
                 .by(1)
               is_expected.to have_http_status(:no_content)
             else
-              expect { delete path(record.id, 'restore'), headers:, as: :json }
+              expect { delete path(record:, action: 'restore'), headers:, as: :json }
                 .not_to(change { model_class.count })
               is_expected.to have_http_status(:forbidden)
             end
@@ -380,15 +378,12 @@ module Schematics
           }
         end
 
-        def path(*parts)
-          case entity
-          when Entities::Singleton
-            "/#{original_controller_path}"
-          else
-            parts
-              .unshift("/#{original_controller_path}")
-              .join('/')
-          end
+        def path(record: nil, action: nil)
+          [
+            "/#{original_controller_path}",
+            (record&.reload&.slug || record&.id unless entity.is_a?(Entities::Singleton)),
+            action
+          ].compact.join('/')
         end
       end
     end

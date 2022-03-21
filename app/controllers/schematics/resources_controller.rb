@@ -98,7 +98,7 @@ module Schematics
           format.html do
             redirect_to @resource, notice: tscope(result.message)
           end
-          format.json { head :created }
+          format.json { render json: @resource, status: :created, location: @resource }
         end
       else
         respond_to do |format|
@@ -119,7 +119,7 @@ module Schematics
           format.html do
             redirect_to @resource, notice: tscope(result.message)
           end
-          format.json { head :created }
+          format.json { render json: @resource, status: :created, location: @resource }
         end
       else
         respond_to do |format|
@@ -250,6 +250,8 @@ module Schematics
     end
 
     def set_breadcrumb
+      return unless can?(:index, model_class)
+
       breadcrumb t('titles.schematics.resources.index', human_name_plural:),
                  polymorphic_path(model_class)
     end

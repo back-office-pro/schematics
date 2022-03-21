@@ -17,14 +17,7 @@ module Schematics
         end
 
         def history
-          ::Search
-            .where(user: current_user, model: @model_class.to_s, query: nil)
-            .order(created_at: :desc)
-            .limit(5)
-            .pluck(:filters)
-            .pluck(name)
-            .uniq
-            .compact
+          ::Search.user_typeahead_history(current_user, @model_class.to_s, name)
         end
       end
     end
