@@ -60,6 +60,6 @@
                   collection: @field.try(:input_collection),
                   display_with: (->(value) { @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
 - when Schematics::Behaviours::Searchable
-  = highlight @field.format(value), params[:query]
+  = highlight @field.format(value), params[:query]&.tr('0-9-', '')
 - else
   = @field.format(value)

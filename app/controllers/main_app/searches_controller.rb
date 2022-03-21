@@ -53,7 +53,7 @@ module MainApp
     def set_resource
       super
     rescue ActiveRecord::RecordNotFound
-      @resource = model_class.new(query: params[:id])
+      @resource = model_class.new(query: params[:query])
     end
   end
 end
