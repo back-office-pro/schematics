@@ -3,6 +3,7 @@ en:
   schematics:
     application:
       button:
+        add: Add a new %{human_name}
         cancel: Cancel
         confirm: Confirm
         destroy: Delete permanently
