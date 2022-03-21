@@ -182,12 +182,12 @@ module Schematics
           it 'should create record' do
             if ability.can?(:create, model_class)
               expect { post(path, params: params(record), headers:, as: :html) }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(1)
               is_expected.to redirect_to(path(record: model_class.last))
             else
               expect { post(path, params: params(record), headers:, as: :html) }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
           end
@@ -195,12 +195,12 @@ module Schematics
           it 'should create API record' do
             if ability.can?(:create, model_class)
               expect { post(path, params: params(record, :json), headers:, as: :json) }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(1)
               is_expected.to have_http_status(:created)
             else
               expect { post(path, params: params(record, :json), headers:, as: :json) }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
           end
@@ -221,17 +221,17 @@ module Schematics
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
                 expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
-                  .not_to(change { model_class.count })
+                  .not_to change(model_class, :count)
                 is_expected.to have_http_status(:success)
               else
                 expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
-                  .to change { model_class.count }
+                  .to change(model_class, :count)
                   .by(1)
                 is_expected.to redirect_to(path(record: model_class.last))
               end
             else
               expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
           end
@@ -240,17 +240,17 @@ module Schematics
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
                 expect { post(path(record:, action: 'duplicate'), headers:, as: :json) }
-                  .not_to(change { model_class.count })
+                  .not_to change(model_class, :count)
                 is_expected.to have_http_status(:unprocessable_entity)
               else
                 expect { post(path(record:, action: 'duplicate'), headers:, as: :json) }
-                  .to change { model_class.count }
+                  .to change(model_class, :count)
                   .by(1)
                 is_expected.to have_http_status(:created)
               end
             else
               expect { post(path(record:, action: 'duplicate'), headers:, as: :json) }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
           end
@@ -269,12 +269,12 @@ module Schematics
           it 'should destroy record' do
             if ability.can?(:destroy, record)
               expect { delete path(record:), headers:, as: :html }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(-1)
               is_expected.to redirect_to(path)
             else
               expect { delete path(record:), headers:, as: :html }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
           end
@@ -282,12 +282,12 @@ module Schematics
           it 'should destroy API record' do
             if ability.can?(:destroy, record)
               expect { delete path(record:), headers:, as: :json }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(-1)
               is_expected.to have_http_status(:no_content)
             else
               expect { delete path(record:), headers:, as: :json }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
           end
@@ -298,12 +298,12 @@ module Schematics
             record.restore
             if ability.can?(:archive, record)
               expect { delete path(record:, action: 'archive'), headers:, as: :html }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(-1)
               is_expected.to redirect_to(path)
             else
               expect { delete path(record:, action: 'archive'), headers:, as: :html }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
           end
@@ -312,12 +312,12 @@ module Schematics
             record.restore
             if ability.can?(:archive, record)
               expect { delete path(record:, action: 'archive'), headers:, as: :json }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(-1)
               is_expected.to have_http_status(:no_content)
             else
               expect { delete path(record:, action: 'archive'), headers:, as: :json }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
           end
@@ -326,12 +326,12 @@ module Schematics
             record.destroy!
             if ability.can?(:restore, record)
               expect { delete path(record:, action: 'restore'), headers:, as: :html }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(1)
               is_expected.to redirect_to(path)
             else
               expect { delete path(record:, action: 'restore'), headers:, as: :html }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
           end
@@ -340,12 +340,12 @@ module Schematics
             record.destroy!
             if ability.can?(:restore, record)
               expect { delete path(record:, action: 'restore'), headers:, as: :json }
-                .to change { model_class.count }
+                .to change(model_class, :count)
                 .by(1)
               is_expected.to have_http_status(:no_content)
             else
               expect { delete path(record:, action: 'restore'), headers:, as: :json }
-                .not_to(change { model_class.count })
+                .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
           end
