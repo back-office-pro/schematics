@@ -11,6 +11,7 @@ module Schematics
       merge VersionAbility.new(user)
       merge UserAbility.new(user)
       merge MessageAbility.new(user)
+      merge SettingAbility.new(user)
       merge LicenceAbility.new(licence)
       merge ComparisonAbility.new
       merge SearchAbility.new
