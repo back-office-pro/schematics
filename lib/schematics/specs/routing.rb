@@ -17,11 +17,10 @@ module Schematics
                  :locale,
                  :can?,
                  :events,
-                 :descriptor,
                  to: :class
 
         let(:record) { __send__(entity_fixtures, :one) }
-        let(:param) { { descriptor.name.to_sym => record.id } }
+        let(:id) { record.id }
 
         case entity
         when Entities::Singleton
@@ -53,7 +52,7 @@ module Schematics
             if can?(:show) && model_class != ::ActiveStorage::Attachment
               is_expected
                 .to route(:get, polymorphic_path(record))
-                .to(locale:, model_name:, controller:, action: :show, **param)
+                .to(locale:, model_name:, controller:, action: :show, id:)
             end
             if can?(:create)
               is_expected
@@ -64,7 +63,7 @@ module Schematics
                 .to(locale:, model_name:, controller:, action: :create)
               is_expected
                 .to route(:post, polymorphic_path(record, action: :duplicate))
-                .to(locale:, controller:, model_name:, action: :duplicate, **param)
+                .to(locale:, controller:, model_name:, id:, action: :duplicate)
               is_expected
                 .to route(:get, new_polymorphic_path([model_class, ::Import], format: nil))
                 .to(locale:, controller: 'imports', model_name:, action: :new)
@@ -75,31 +74,31 @@ module Schematics
             if can?(:update)
               is_expected
                 .to route(:get, edit_polymorphic_path(record))
-                .to(locale:, model_name:, controller:, action: :edit, **param)
+                .to(locale:, model_name:, controller:, id:, action: :edit)
               is_expected
                 .to route(:patch, polymorphic_path(record))
-                .to(locale:, model_name:, controller:, action: :update, **param)
+                .to(locale:, model_name:, controller:, id:, action: :update)
               events.each do |event|
                 is_expected
                   .to route(:patch, polymorphic_path(record, action: event.name))
-                  .to(locale:, model_name:, controller:, action: :trigger, event: event.name, **param) # rubocop:disable Layout/LineLength
+                  .to(locale:, model_name:, controller:, action: :trigger, id:, event: event.name)
               end
             end
             if can?(:destroy) && model_class != ::ActiveStorage::Attachment
               is_expected
                 .to route(:delete, polymorphic_path(record))
-                .to(locale:, model_name:, controller:, action: :destroy, **param)
+                .to(locale:, model_name:, controller:, id:, action: :destroy)
               is_expected
                 .to route(:get, polymorphic_path(record, action: :delete))
-                .to(locale:, model_name:, controller:, action: :delete, **param)
+                .to(locale:, model_name:, controller:, id:, action: :delete)
             end
             if can?(:archive)
               is_expected
                 .to route(:delete, polymorphic_path(record, action: :archive))
-                .to(locale:, model_name:, controller:, action: :archive, **param)
+                .to(locale:, model_name:, controller:, id:, action: :archive)
               is_expected
                 .to route(:delete, polymorphic_path(record, action: :restore))
-                .to(locale:, model_name:, controller:, action: :restore, **param)
+                .to(locale:, model_name:, controller:, id:, action: :restore)
             end
           end
         end
@@ -108,7 +107,7 @@ module Schematics
       class_methods do
         delegate :model_class, :original_controller_path, to: :controller_class
         delegate :entity, to: :model_class
-        delegate :can?, :events, :descriptor, to: :entity
+        delegate :can?, :events, to: :entity
         alias_method :controller, :original_controller_path
 
         def controller_class

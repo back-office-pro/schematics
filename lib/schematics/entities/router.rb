@@ -6,7 +6,7 @@ require 'active_support/core_ext/array/access'
 module Schematics
   module Entities
     class Router
-      delegate :name, :class_name, :actions, :can?, :descriptor, to: :@entity
+      delegate :name, :class_name, :actions, :can?, to: :@entity
 
       def initialize(entity)
         @entity = entity
@@ -48,7 +48,7 @@ module Schematics
           RUBY
         when Entity
           <<~RUBY
-            resources :#{resource.pluralize}, only: #{routes}, param: :#{descriptor.name}, model_name: '#{class_name}' do
+            resources :#{resource.pluralize}, only: #{routes}, model_name: '#{class_name}' do
             #{resource_routes}
             end
           RUBY

@@ -10,7 +10,7 @@ describe Schematics::Entities::Router do
   context 'when no actions are defined' do
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], param: :id, model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
@@ -64,7 +64,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], param: :id, model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'User' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
@@ -86,7 +86,7 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resources :users, only: [:index, :show, :create, :new], param: :id, model_name: 'User' do
+        resources :users, only: [:index, :show, :create, :new], model_name: 'User' do
           get :autocomplete, on: :collection
           post :duplicate, on: :member
           collection do
