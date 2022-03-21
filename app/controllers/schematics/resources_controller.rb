@@ -250,6 +250,8 @@ module Schematics
     end
 
     def set_breadcrumb
+      return unless can?(:index, model_class)
+
       breadcrumb t('titles.schematics.resources.index', human_name_plural:),
                  polymorphic_path(model_class)
     end

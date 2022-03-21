@@ -26,6 +26,8 @@ module Schematics
     protected
 
     def set_breadcrumb
+      return unless can?(:index, parent_model_class)
+
       title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
       breadcrumb title, parent_model_class
     end
