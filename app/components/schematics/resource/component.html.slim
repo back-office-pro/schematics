@@ -19,7 +19,7 @@
 - when Schematics::Attributes::Color
   .btn.p-2.pe-none style="background: #{value};"
 - when Schematics::Attributes::Attachments
-  = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true)
+  = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true, highlight: @highlight)
 - when Schematics::Attributes::Attachment
   - if value.attached?
     = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if editable?
@@ -60,6 +60,6 @@
                   collection: @field.try(:input_collection),
                   display_with: (->(value) { @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
 - when Schematics::Behaviours::Searchable
-  = highlight @field.format(value), params[:query]&.tr('0-9-', '')
+  = highlight @field.format(value), @highlight
 - else
   = @field.format(value)
