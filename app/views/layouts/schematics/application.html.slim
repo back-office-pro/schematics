@@ -11,6 +11,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = render Schematics::ThemeStylesheetLink::Component.new(theme: 'light')
     = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
+    = render Schematics::Favicon::Component.new
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
