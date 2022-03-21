@@ -191,7 +191,7 @@ module Schematics
       end
 
       def hidden?
-        core? && !can?(default_actions.first.to_sym)
+        core? && !can?(:index)
       end
 
       def load
