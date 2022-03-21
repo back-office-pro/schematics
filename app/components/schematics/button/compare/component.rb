@@ -4,6 +4,9 @@ module Schematics
   module Button
     module Compare
       class Component < ApplicationComponent
+        def render?
+          can?(:create, ::Comparison)
+        end
       end
     end
   end
