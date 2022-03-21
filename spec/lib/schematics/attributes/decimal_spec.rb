@@ -30,6 +30,8 @@ describe Schematics::Attributes::Decimal do
   context 'when decimal has precision' do
     let(:options) { { precision: 2 } }
 
+    its(:options_for_migration) { is_expected.to eq(precision: 2) }
+
     its(:validators) do
       is_expected.to eq(numericality: { allow_blank: true, greater_than: -100, less_than: 100 })
     end
