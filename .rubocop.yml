@@ -62,6 +62,7 @@ Lint/ConstantResolution:
     - Stat
     - Time
     - Date
+    - DateTime
     - I18n
     - JsonWebToken
     - JSON
@@ -73,6 +74,8 @@ Lint/ConstantResolution:
     - Hash
     - Numeric
     - String
+    - Integer
+    - Float
     - Comparison
   Exclude:
     - spec/**/*
