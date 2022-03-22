@@ -5,9 +5,11 @@ require 'active_support/core_ext/string/indent'
 module Schematics
   module Associations
     class HasOne < Association
-      include Behaviours::Renderable
       include Behaviours::Searchable
-      include Behaviours::Preloadable
+
+      def open_api_type
+        'integer'
+      end
 
       def to_str
         super

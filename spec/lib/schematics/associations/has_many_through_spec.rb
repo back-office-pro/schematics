@@ -44,10 +44,13 @@ describe Schematics::Associations::HasManyThrough do
     through.inverse_entity = through_entity
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('attributes') }
   its(:class_name) { is_expected.to eq('Attribute') }
-  its(:open_api_type) { is_expected.to eq('integer') }
+  its(:open_api_type) { is_expected.to eq('array') }
   its(:weight) { is_expected.to eq(3) }
   its('descriptor.name') { is_expected.to eq('name') }
 

@@ -5,11 +5,13 @@ require 'active_support/core_ext/module/delegation'
 module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
-      include Behaviours::Renderable
       include Behaviours::Searchable
-      include Behaviours::Preloadable
 
       delegate :descriptor, to: :belongs_to
+
+      def open_api_type
+        'integer'
+      end
 
       def source
         belongs_to.name

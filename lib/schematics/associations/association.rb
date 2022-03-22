@@ -5,6 +5,9 @@ require 'active_support/core_ext/module/delegation'
 module Schematics
   module Associations
     class Association
+      include Behaviours::Renderable
+      include Behaviours::Preloadable
+
       delegate :entity, :required?, :column_name, :association_type, :options, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
       delegate :hidden?, to: :options
@@ -32,7 +35,7 @@ module Schematics
       end
 
       def open_api_type
-        'integer'
+        'array'
       end
 
       def name
