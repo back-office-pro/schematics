@@ -17,7 +17,7 @@ module Schematics
           entity = model_class.entity
 
           if entity.can?(:index)
-            api :index, "#{entity.name.pluralize} list" do
+            api :index, "List #{entity.name.pluralize}" do
               query :page, 'integer', desc: 'Page number'
               query :items, 'integer', desc: 'Items per page'
               query 'filter[with_deleted]', 'boolean', desc: 'Display archives'
@@ -31,6 +31,7 @@ module Schematics
               response 200, 'Success', :json, data: [
                 entity
                   .renderable_elements
+                  .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
                   .map { [_1.name, _1.open_api_type] }
                   .to_h
               ]
