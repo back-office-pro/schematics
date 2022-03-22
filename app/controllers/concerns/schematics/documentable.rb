@@ -18,8 +18,8 @@ module Schematics
 
           if entity.can?(:index)
             api :index, "List #{entity.name.pluralize}" do
-              query :page, 'integer', desc: 'Page number'
-              query :items, 'integer', desc: 'Items per page'
+              query :page, ::Integer, desc: 'Page number'
+              query :items, ::Integer, desc: 'Items per page'
               query 'filter[with_deleted]', 'boolean', desc: 'Display archives'
 
               entity.searchable_elements.each do |element|
@@ -31,8 +31,10 @@ module Schematics
               response 200, 'Success', :json, data: [
                 entity
                   .renderable_elements
+                  .stable_sort_by(&:weight)
                   .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
                   .map { [_1.name, _1.open_api_type] }
+                  .unshift([:id, ::String])
                   .to_h
               ]
               response 401, 'Not Authorized', :json
@@ -62,7 +64,7 @@ module Schematics
 
           if entity.can?(:update)
             api :update, "Update #{entity.name}" do
-              path :id, 'string' unless entity.is_a?(Entities::Singleton)
+              path :id, ::String unless entity.is_a?(Entities::Singleton)
 
               entity.fillable_elements.each do |element|
                 data "#{entity.name}[#{element.column_name}]",
@@ -85,7 +87,7 @@ module Schematics
 
             entity.events.each do
               api :trigger do
-                path :id, 'string' unless entity.is_a?(Entities::Singleton)
+                path :id, ::String unless entity.is_a?(Entities::Singleton)
 
                 response 204, 'Success', :json
                 response 401, 'Not Authorized', :json
@@ -96,11 +98,13 @@ module Schematics
 
           if entity.can?(:show)
             api :show, "Show #{entity.name}" do
-              path :id, 'string' unless entity.is_a?(Entities::Singleton)
+              path :id, ::String unless entity.is_a?(Entities::Singleton)
 
               response 200, 'Success', :json, data: entity
                 .renderable_elements
+                .stable_sort_by(&:weight)
                 .map { [_1.name, _1.open_api_type] }
+                .tap { _1.unshift([:id, ::String]) unless entity.is_a?(Entities::Singleton) }
                 .to_h
               response 404, 'Not Found', :json
               response 401, 'Not Authorized', :json
@@ -109,7 +113,7 @@ module Schematics
 
           if entity.can?(:destroy)
             api :destroy, "Destroy #{entity.name}" do
-              path :id, 'string'
+              path :id, ::String
 
               response :no_content, 'Success', :json
               response 404, 'Not Found', :json
@@ -119,7 +123,7 @@ module Schematics
 
           if entity.can?(:archive)
             api :archive, "Archive #{entity.name}" do
-              path :id, 'string'
+              path :id, ::String
 
               response :no_content, 'Success', :json
               response 404, 'Not Found', :json
@@ -127,7 +131,7 @@ module Schematics
             end
 
             api :restore, "Restore #{entity.name}" do
-              path :id, 'string'
+              path :id, ::String
 
               response :no_content, 'Success', :json
               response 404, 'Not Found', :json

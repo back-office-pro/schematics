@@ -3,6 +3,10 @@
 module Schematics
   module Attributes
     class Datetime < Date
+      def open_api_type
+        ::DateTime
+      end
+
       def format(value)
         value && localize(value, format: '%A %d %B %Y %H:%M')
       end

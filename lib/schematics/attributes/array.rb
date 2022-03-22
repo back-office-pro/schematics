@@ -5,6 +5,10 @@ module Schematics
     class Array < Attribute
       include Behaviours::Fillable
 
+      def open_api_type
+        [::String]
+      end
+
       def type
         'string'
       end

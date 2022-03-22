@@ -8,7 +8,7 @@ module Schematics
       include Behaviours::Searchable
 
       def open_api_type
-        'integer'
+        super.first
       end
 
       def to_str

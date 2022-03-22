@@ -22,7 +22,7 @@ module Schematics
       end
 
       def open_api_type
-        'string'
+        ::String
       end
 
       def to_sql

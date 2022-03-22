@@ -27,7 +27,7 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
-  its(:open_api_type) { is_expected.to eq('number') }
+  its(:open_api_type) { is_expected.to eq(Float) }
   its(:function) { is_expected.to eq('(self.price ** self.category.vat)') }
   its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }

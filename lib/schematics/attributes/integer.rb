@@ -11,7 +11,7 @@ module Schematics
       include Behaviours::Numerable
 
       def open_api_type
-        'integer'
+        ::Integer
       end
 
       def validators

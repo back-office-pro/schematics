@@ -50,7 +50,7 @@ describe Schematics::Attributes::References do
 
   its(:type) { is_expected.to eq('references') }
   its(:column_name) { is_expected.to eq('user_id') }
-  its(:open_api_type) { is_expected.to eq('integer') }
+  its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:class_name) { is_expected.to eq('User') }

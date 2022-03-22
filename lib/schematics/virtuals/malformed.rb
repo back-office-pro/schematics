@@ -3,10 +3,6 @@
 module Schematics
   module Virtuals
     class Malformed < Virtual
-      def open_api_type
-        'string'
-      end
-
       def to_sql
         super.join
       end

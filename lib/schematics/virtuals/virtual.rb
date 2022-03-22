@@ -30,6 +30,10 @@ module Schematics
         @options = Attributes::Options.new(options)
       end
 
+      def open_api_type
+        ::String
+      end
+
       def function
         @tokens.map(&:value).join
       end

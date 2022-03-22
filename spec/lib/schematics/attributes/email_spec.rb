@@ -17,7 +17,7 @@ describe Schematics::Attributes::Email do
 
   its(:type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('email') }
-  its(:open_api_type) { is_expected.to eq('string') }
+  its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:envelope) }
   its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }

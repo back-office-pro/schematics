@@ -7,7 +7,7 @@ module Schematics
       include Behaviours::Numerable
 
       def open_api_type
-        'number'
+        ::Float
       end
 
       def to_sql

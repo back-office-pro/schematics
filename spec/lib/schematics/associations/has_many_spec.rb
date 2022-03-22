@@ -32,7 +32,7 @@ describe Schematics::Associations::HasMany do
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }
   its(:class_name) { is_expected.to eq('Entity') }
-  its(:open_api_type) { is_expected.to eq('array') }
+  its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:weight) { is_expected.to eq(3) }
   its('descriptor.name') { is_expected.to eq('type') }
 

@@ -17,7 +17,7 @@ describe Schematics::Attributes::Color do
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('color') }
-  its(:open_api_type) { is_expected.to eq('string') }
+  its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:palette) }
   its(:default) { is_expected.to eq('#000000') }
 

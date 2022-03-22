@@ -35,7 +35,7 @@ describe Schematics::Attributes::BelongsTo do
 
   its(:type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('schema_id') }
-  its(:open_api_type) { is_expected.to eq('integer') }
+  its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('schema') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:class_name) { is_expected.to eq('Schema') }

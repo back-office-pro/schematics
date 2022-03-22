@@ -12,7 +12,7 @@ describe Schematics::Attributes::Timestamp do
 
   its(:type) { is_expected.to eq('datetime') }
   its(:column_name) { is_expected.to eq('last_seen_at') }
-  its(:open_api_type) { is_expected.to eq('string') }
+  its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:validators) { is_expected.to be_empty }
   its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }

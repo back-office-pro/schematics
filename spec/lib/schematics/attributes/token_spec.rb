@@ -18,7 +18,7 @@ describe Schematics::Attributes::Token do
 
   its(:type) { is_expected.to eq('token') }
   its(:column_name) { is_expected.to eq('auth_token') }
-  its(:open_api_type) { is_expected.to eq('string') }
+  its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: true, allow_blank: true }) }
 

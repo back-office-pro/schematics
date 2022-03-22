@@ -12,6 +12,10 @@ module Schematics
 
       ALLOWLIST = %i[equal_to before after before_or_equal_to after_or_equal_to].freeze
 
+      def open_api_type
+        ::Date
+      end
+
       def format(value)
         value && localize(value, format: '%A %d %B %Y')
       end

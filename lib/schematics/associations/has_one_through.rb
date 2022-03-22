@@ -10,7 +10,7 @@ module Schematics
       delegate :descriptor, to: :belongs_to
 
       def open_api_type
-        'integer'
+        super.first
       end
 
       def source

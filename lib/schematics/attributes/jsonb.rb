@@ -7,7 +7,7 @@ module Schematics
       delegate :default, to: :options
 
       def open_api_type
-        'object'
+        {}
       end
 
       def icon

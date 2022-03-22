@@ -3,10 +3,6 @@
 module Schematics
   module Virtuals
     class Concatenation < Virtual
-      def open_api_type
-        'string'
-      end
-
       def function
         tokens.map(&:to_str).join.to_json
       end

@@ -20,7 +20,7 @@ describe Schematics::Virtuals::Malformed do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
-  its(:open_api_type) { is_expected.to eq('string') }
+  its(:open_api_type) { is_expected.to eq(String) }
   its(:function) { is_expected.to eq('raise ArgumentError') }
   its(:to_sql) { is_expected.to eq("products.in_stock = 'true'") }
   its(:preload) { is_expected.to be_empty }

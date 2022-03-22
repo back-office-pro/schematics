@@ -17,6 +17,6 @@ describe Schematics::Attributes::Action do
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('action') }
-  its(:open_api_type) { is_expected.to eq('string') }
+  its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:hand_rock) }
 end
