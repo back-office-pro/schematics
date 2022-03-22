@@ -8,8 +8,6 @@ RSpec.describe Schematics::Imports::ImportData do
   describe '.call' do
     subject(:call) { described_class.call(import:, model_class:) }
 
-    let(:model_class) { Role }
-
     it { is_expected.to be_a_success }
 
     it 'inserts two roles' do

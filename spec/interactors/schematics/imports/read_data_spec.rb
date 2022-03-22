@@ -8,7 +8,6 @@ RSpec.describe Schematics::Imports::ReadData do
   describe '.call' do
     subject(:call) { described_class.call(import:, model_class:) }
 
-    let(:model_class) { Role }
     let(:expected_data) do
       {
         1 => { name: 'Role1' },

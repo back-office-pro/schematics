@@ -32,6 +32,7 @@ RSpec.shared_context 'with import' do
 
   let(:import) { ::Import.create!(file:, author:) }
   let(:author) { users(:one) }
+  let(:model_class) { Role }
   let(:file) do
     ::ActiveStorage::Blob.create_and_upload!(
       io: File.open(file_fixture('roles.csv'), 'rb'),
