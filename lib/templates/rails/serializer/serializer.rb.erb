@@ -1,4 +1,5 @@
 <% module_namespacing do -%>
-class <%= class_name %>Serializer < Schematics::ApplicationSerializer
+class <%= class_name %>Serializer < ActiveModel::Serializer
+  include Schematics::JsonSerializer
 end
 <% end -%>
