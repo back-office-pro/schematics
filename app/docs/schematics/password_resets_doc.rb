@@ -5,15 +5,15 @@ module Schematics
     route_base PasswordResetsController.controller_path
 
     api :create, 'Create a password reset request' do
-      data 'user[email]', 'string', required: true
+      data 'user[email]', ::String, required: true
       response 204, 'Success', :json
       response 422, 'Unprocessable entity', :json
     end
 
     api :update, 'Update user password' do
-      path :token, 'string'
-      data 'user[password]', 'string'
-      data 'user[password_confirmation]', 'string'
+      path :token, ::String
+      data 'user[password]', ::String
+      data 'user[password_confirmation]', ::String
       response 204, 'Success', :json
       response 404, 'Not Found', :json
       response 422, 'Unprocessable entity', :json
