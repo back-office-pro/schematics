@@ -22,7 +22,7 @@ module Schematics
         return :danger  if asc?
         return :success if desc?
 
-        :dark
+        :secondary
       end
 
       def link_params
