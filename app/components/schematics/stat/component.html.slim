@@ -1,11 +1,11 @@
-.col-xl-3.col-md-6.mb-3
+.col-xl-3.col-md-6
   .card.border-0
     .card-body.p-3
-      .row.no-gutters.align-items-center
+      .row.g-0.align-items-center
         .col
-          small.text-uppercase.text-truncate.text-primary.font-weight-bold
+          small.text-uppercase.text-truncate.text-primary.fw-bold
             = @stat
-          h5.mb-0.text-dark.text-truncate.font-weight-bold
+          h6.mb-0.text-secondary.text-truncate.fw-bold
             = value_formatted
         .col-auto
           - if model_class
