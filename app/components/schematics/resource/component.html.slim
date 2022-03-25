@@ -3,7 +3,7 @@
   - if value.present?
     - if value.deleted?
       .text-muted
-        = fa_icon :archive, class: 'mr-2'
+        = fa_icon :archive, class: 'me-2'
         = value
     - else
       = link_to(value.to_s, value)
@@ -35,7 +35,7 @@
       = link_to value.filename, value
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
   span.text-danger
-    = fa_icon(:exclamation_triangle, class: 'mr-2')
+    = fa_icon(:exclamation_triangle, class: 'me-2')
     = @field.format(value)
 - when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
   - case value
@@ -45,7 +45,7 @@
     = fa_icon(:times, class: 'text-danger')
 - when Schematics::Attributes::StateMachine
   h5.mb-0
-    span.badge.badge-secondary = @field.format(value)
+    span.badge.bg-secondary = @field.format(value)
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
