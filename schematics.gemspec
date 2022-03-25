@@ -99,7 +99,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'shoulda-matchers', '~> 5.1.0'
   spec.add_dependency 'sidekiq', '~> 6.4.1'
   spec.add_dependency 'sidekiq-scheduler', '~> 3.1.0'
-  spec.add_dependency 'simple_form', '~> 5.1.0'
+  spec.add_dependency 'simple_form'
   spec.add_dependency 'slim', '~> 4.1.0'
   spec.add_dependency 'strip_attributes', '~> 1.12.0'
   spec.add_dependency 'strong_migrations', '~> 1.0.0'

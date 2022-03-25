@@ -17,3 +17,4 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
+gem 'simple_form', git: 'https://github.com/heartcombo/simple_form', branch: 'main'
