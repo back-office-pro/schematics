@@ -1,5 +1,5 @@
 .card.shadow-sm.border-0.w-100
-  .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
+  .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     .row.align-items-center
       .col.text-truncate
         = render Schematics::CardHeading::Component.new(icon: :table, title:)
@@ -9,7 +9,7 @@
         = render Schematics::Button::Add::Component.new(model_class:)
         = render Schematics::Button::ResetFilters::Component.new(model_class:)
   .card-body.p-0
-    = form_tag '', method: :get, class: 'form-inline' do
+    = form_tag '', method: :get do
       = submit_tag 'Filtrer', name: nil, class: 'd-none'
       = render Schematics::Viewer::Component.build(resources: @resources)
 = render Schematics::Viewer::Pagination::Component.new(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)
