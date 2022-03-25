@@ -1,9 +1,9 @@
 - breadcrumb title, main_app.polymorphic_path(@resource)
-.row.align-items-center
+.row.g-3.align-items-center
   - @resources.each do |resource|
-    .col-lg-6.mb-4
+    .col-lg-6
       .card.shadow-sm.border-0
-        .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
+        .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
           .row.align-items-center
             .col.text-truncate
               = render Schematics::CardHeading::Component.new(icon: parent_model_class.entity.icon, title: resource.to_s)
