@@ -26,11 +26,11 @@ module Schematics
         end
 
         def data
-          confirm_data.merge(
-            toggle: 'tooltip',
-            placement: 'left',
-            title: t('schematics.application.button.destroy')
-          )
+          confirm_data.merge('bs-toggle': 'tooltip', 'bs-placement': 'left')
+        end
+
+        def title
+          t('schematics.application.button.destroy')
         end
       end
     end
