@@ -1,10 +1,10 @@
 .table-responsive
-  table.table.mb-0.table-striped
+  table.table.mb-0.table-striped.table-borderless
     tbody
       - elements.stable_sort_by(&:weight).each do |element|
         tr
           th
-            = fa_icon element.icon, class: 'fa-fw mr-2 text-muted'
+            = fa_icon element.icon, class: 'fa-fw me-2 text-muted'
             = @model_class.human_attribute_name(element.name)
           td
             = render Schematics::Resource::Component.new(resource: @resource, field: element, editable: @editable)
