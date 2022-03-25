@@ -1,7 +1,7 @@
 .row.pt-3
-  .col.d-none.d-xl-flex.text-dark.ml-2.align-items-center
+  .col.d-none.d-xl-flex.text-secondary.ms-2.align-items-center
     == pagy_items_selector_js(@pagy, item_name: @human_name_plural) if @human_name_plural
   .col.d-flex.justify-content-center
     == pagy_bootstrap_nav(nav_parameter)
-  .col.d-none.d-xl-flex.text-dark.mr-2.align-items-center.justify-content-end
+  .col.d-none.d-xl-flex.text-secondary.me-2.align-items-center.justify-content-end
     == pagy_info(@pagy, item_name: @human_name_plural) if @human_name_plural
