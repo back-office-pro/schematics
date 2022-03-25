@@ -21,8 +21,8 @@ window.SearchBarController = class extends Stimulus.Controller {
 
   suggestionTemplate ({ data, descriptor, icon, url }) {
     return `
-      <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->searchBar#selectItem" data-url="${url}" role="button">
-        <i class="fa fa-${icon} text-dark fa-fw mr-2"></i>
+      <li class="list-group-item p-2 border-0 text-start text-truncate" data-action="mousedown->searchBar#selectItem" data-url="${url}" role="button">
+        <i class="fa fa-${icon} text-secondary fa-fw me-2"></i>
         ${this.highlight(data[descriptor], this.inputTarget.value)}
       </li>
     `
@@ -30,8 +30,8 @@ window.SearchBarController = class extends Stimulus.Controller {
 
   notFoundTemplate () {
     return `
-      <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
-        <i class="fa fa-exclamation-triangle text-dark fa-fw mr-2"></i>
+      <li class="list-group-item disabled p-2 border-0 text-start text-truncate">
+        <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>
         ${I18n.typeahead.notFound}
       </li>
     `
@@ -39,8 +39,8 @@ window.SearchBarController = class extends Stimulus.Controller {
 
   pendingTemplate () {
     return `
-      <li class="list-group-item disabled p-2 border-0 text-left text-truncate">
-        <i class="fa fa-spinner fa-spin text-dark fa-fw mr-2"></i>
+      <li class="list-group-item disabled p-2 border-0 text-start text-truncate">
+        <i class="fa fa-spinner fa-spin text-secondary fa-fw me-2"></i>
         ${I18n.typeahead.pending}
       </li>
     `
