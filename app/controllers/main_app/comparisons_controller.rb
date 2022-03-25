@@ -15,7 +15,6 @@ module MainApp
     def set_resources
       @resources = parent_model_class
                    .includes(parent_model_class.entity.includes)
-                   .includes(:slugs)
                    .where(id: @resource.ids)
                    .accessible_by(current_ability)
     end

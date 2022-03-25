@@ -57,8 +57,8 @@ module Schematics
       self
         .class
         .entity
-        .find_field_by_name(attr)
-        .try(:format, public_send(attr)) || public_send(attr)
+        &.find_field_by_name(attr)
+        &.format(public_send(attr)) || public_send(attr)
     end
   end
 end
