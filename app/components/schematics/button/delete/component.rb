@@ -22,7 +22,7 @@ module Schematics
             'btn-danger',
             'btn-sm',
             ('btn-icon-split' unless compact?),
-            ('ml-2' unless compact?)
+            ('ms-2' unless compact?)
           ].compact
         end
 
