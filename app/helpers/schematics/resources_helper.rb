@@ -10,6 +10,8 @@ module Schematics
 
     private
 
+    HABTM = Associations::HasAndBelongsToMany
+
     def attachments_attributes(resource)
       entity
         .attachments_attributes
@@ -28,7 +30,7 @@ module Schematics
         .map do |association|
         resource
           .public_send(association.name)
-          .includes(association.entity.includes)
+          .yield_self { association.is_a?(HABTM) ? _1 : _1.includes(association.entity.includes) }
           .accessible_by(current_ability)
           .order(created_at: :desc)
       end
