@@ -26,14 +26,14 @@ module Schematics
             'btn-primary',
             'btn-sm',
             ('btn-icon-split' unless compact?),
-            ('ml-2' unless compact?)
+            ('ms-2' unless compact?)
           ].compact
         end
 
         def data
           return {} unless compact?
 
-          { toggle: 'tooltip', placement: 'top' }
+          { 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
         end
 
         def compact?
