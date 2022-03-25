@@ -7,8 +7,8 @@
                     spellcheck: false,
                     data: { 'typeahead-target': 'input', action: },
                     class: css_classes
-  ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-typeahead-target='results'
-  ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.d-none data-typeahead-target='history'
+  ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.z-index-3 data-typeahead-target='results'
+  ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.z-index-3.d-none data-typeahead-target='history'
     - history.each do |query|
       li.list-group-item.p-2.border-0.text-start.text-truncate {
         data-action='mousedown->typeahead#selectItem'
