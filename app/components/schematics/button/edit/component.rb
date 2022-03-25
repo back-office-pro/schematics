@@ -33,14 +33,20 @@ module Schematics
             'btn-primary',
             'btn-sm',
             ('btn-icon-split' unless compact?),
-            ('ml-2' unless compact?)
+            ('ms-2' unless compact?)
           ].compact
         end
 
         def data
           return {} unless compact?
 
-          { toggle: 'tooltip', placement: 'top', title: t('.text') }
+          { 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
+        end
+
+        def title
+          return unless compact?
+
+          t('.text')
         end
 
         def compact?
