@@ -22,18 +22,20 @@ module Schematics
             'btn-danger',
             'btn-sm',
             ('btn-icon-split' unless compact?),
-            ('ml-2' unless compact?)
+            ('ms-2' unless compact?)
           ].compact
         end
 
         def data
           return confirm_data unless compact?
 
-          confirm_data.merge(
-            toggle: 'tooltip',
-            placement: 'top',
-            title: t('schematics.application.button.destroy')
-          )
+          confirm_data.merge('bs-toggle': 'tooltip', 'bs-placement': 'top')
+        end
+
+        def title
+          return unless compact?
+
+          t('schematics.application.button.destroy')
         end
 
         def compact?

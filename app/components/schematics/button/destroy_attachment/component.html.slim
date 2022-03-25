@@ -2,6 +2,6 @@
   = f.fields_for attributes_param_key do |fields|
     = fields.hidden_field :id, value: id
     = fields.hidden_field :_destroy, value: true
-  = f.button :button, data:, class: 'btn btn-danger btn-sm float-right' do
+  = f.button :button, data:, title:, class: 'btn btn-danger btn-sm float-end' do
     span.icon = fa_icon :trash
     span.icon.d-none = fa_icon :spinner, animation: 'spin'
