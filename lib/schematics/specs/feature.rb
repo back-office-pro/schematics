@@ -59,7 +59,7 @@ module Schematics
             if ability.can?(:index, model_class)
               visit path
               text = t('titles.schematics.resources.index', human_name_plural:)
-              is_expected.to have_selector 'h5', text:
+              is_expected.to have_selector 'h6', text:
             end
           end
         end
