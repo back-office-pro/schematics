@@ -1,8 +1,8 @@
 .table-responsive data-controller='comparison' data-comparison-model=model_class
-  table.table.mb-0
+  table.table.table-borderless.mb-0
     = render Schematics::Filter::Component.new(model_class:)
     tbody
-      table.table.mb-0.table-striped
+      table.table.table-borderless.mb-0
         thead
           tr
             - date_range.slice(0, 7).each do |day|
@@ -12,10 +12,10 @@
             tr
               - week.each do |date|
                 td.day.p-0 class=td_class_for(date)
-                  .text-muted.pl-2.pt-1 = date.day
+                  .text-muted.ps-2.pt-1 = date.day
                   - resources_for(date).each do |resource|
-                    .alert.alert-secondary.calendar.text-truncate.mb-1.p-2 class=alert_class_for(resource, date) data-href=href(resource)
+                    .alert.alert-secondary.calendar.lh-lg.text-truncate.mb-1.p-2 class=alert_class_for(resource, date) data-href=href(resource)
                       - unless previous_resource_for?(resource, date)
                         = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
                         = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
-                      span.ml-2 = resource
+                      span.ms-2 = resource
