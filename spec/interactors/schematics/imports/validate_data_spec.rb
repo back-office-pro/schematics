@@ -64,7 +64,7 @@ RSpec.describe Schematics::Imports::ValidateData do
       its(:data) { is_expected.to match(expected_data) }
 
       its(:errors) do
-        is_expected.to match({ I18n.t('line', line: 2) => ActiveRecord::RecordInvalid })
+        is_expected.to match(I18n.t('line', line: 2) => ActiveRecord::RecordInvalid)
       end
     end
   end

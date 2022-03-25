@@ -15,7 +15,7 @@ RSpec.describe 'Sessions' do
       before { do_request }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(json_response).to eq({ 'auth_token' => auth_token }) }
+      it { expect(json_response).to eq('auth_token' => auth_token) }
     end
 
     context 'when credentials are wrong' do

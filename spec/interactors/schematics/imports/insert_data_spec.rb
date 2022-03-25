@@ -56,7 +56,7 @@ RSpec.describe Schematics::Imports::InsertData do
       end
 
       it { is_expected.to be_a_failure }
-      its(:errors) { is_expected.to eq({ 'Error' => 'name Role1 already exists' }) }
+      its(:errors) { is_expected.to eq('Error' => 'name Role1 already exists') }
     end
   end
 end

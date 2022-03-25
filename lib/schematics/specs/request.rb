@@ -26,7 +26,7 @@ module Schematics
         let(:record) { __send__(entity_fixtures, :one) }
         let(:auth_token) { ::JsonWebToken.encode(auth_token: user.auth_token) }
         let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
-        let(:headers_with_referer) { headers.merge({ 'HTTP_REFERER' => profile_path }) } # rubocop:disable Style/StringHashKeys
+        let(:headers_with_referer) { headers.merge('HTTP_REFERER' => profile_path) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
         let(:role) do
           ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
