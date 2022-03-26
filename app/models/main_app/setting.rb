@@ -5,7 +5,6 @@ module MainApp
     extend ActiveSupport::Concern
 
     prepended do
-      after_update -> { system('rake assets:clobber') }, if: :theme_color_previously_changed?
       after_update -> { Chartkick.options[:colors] = palette }, if: :theme_color_previously_changed?
     end
 
@@ -15,6 +14,24 @@ module MainApp
 
     def theme_color
       super || Rails.configuration.theme_color
+    end
+
+    def theme_color_rgb
+      theme_color
+        .dup
+        .paint
+        .to_rgb
+        .scan(/\d+/)
+        .join(', ')
+    rescue Chroma::Errors::UnrecognizedColor
+      Rails
+        .configuration
+        .theme_color
+        .dup
+        .paint
+        .to_rgb
+        .scan(/\d+/)
+        .join(', ')
     end
 
     def palette
