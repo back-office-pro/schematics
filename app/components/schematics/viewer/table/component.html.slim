@@ -9,7 +9,7 @@
       - else
         - @resources.each do |resource|
           tr class=tr_css_class(resource) data-href=href(resource)
-            td.text-nowrap.px-2.py-0.align-middle
+            td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
               = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
