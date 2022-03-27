@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
   spec.add_development_dependency 'bootsnap', '~> 1.11.1'
   spec.add_development_dependency 'capybara', '~> 3.36.0'
-  spec.add_development_dependency 'i18n-tasks', '~> 1.0.3'
+  spec.add_development_dependency 'i18n-tasks', '~> 1.0.5'
   spec.add_development_dependency 'pg', '~> 1.3.4'
   spec.add_development_dependency 'reek', '~> 6.1.0'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
@@ -89,7 +89,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails-erd', '~> 1.6.1'
   spec.add_dependency 'rails-i18n', '~> 7.0.3'
   spec.add_dependency 'rails-timeago', '~> 2.20.0'
-  spec.add_dependency 'ratonvirus', '~> 0.3.0'
+  spec.add_dependency 'ratonvirus', '~> 0.3.2'
   spec.add_dependency 'ratonvirus-clamby', '~> 0.3.0'
   spec.add_dependency 'redis', '~> 4.6.0'
   spec.add_dependency 'route_translator', '~> 12.1.0'
