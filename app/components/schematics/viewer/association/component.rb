@@ -45,12 +45,12 @@ module Schematics
           @id ||= "collapse-#{SecureRandom.base58}"
         end
 
-        def card_header_css_class
+        def header_button_css_class
           'collapsed' if @collapsed
         end
 
         def collapse_css_class
-          return 'hide' if @collapsed
+          return if @collapsed
 
           'show'
         end
