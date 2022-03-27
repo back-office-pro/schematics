@@ -59,7 +59,8 @@ module Schematics
           'form-control',
           'border-0',
           'bg-transparent',
-          ('font-weight-bold' if active?)
+          'text-secondary',
+          ('fw-bold' if active?)
         ].compact
       end
 
