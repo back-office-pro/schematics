@@ -1,9 +1,7 @@
 linters:
   ImportantRule:
     enabled: false
-
   QualifyingElement:
     enabled: false
-
-  ColorVariable:
+  PlaceholderInExtend:
     enabled: false
