@@ -23,27 +23,18 @@ module MainApp
         .to_rgb
         .scan(/\d+/)
         .join(', ')
-    rescue Chroma::Errors::UnrecognizedColor
-      Rails
-        .configuration
-        .theme_color
+    end
+
+    def theme_color_darken
+      theme_color
         .dup
         .paint
-        .to_rgb
-        .scan(/\d+/)
-        .join(', ')
+        .darken(5)
+        .to_s
     end
 
     def palette
       theme_color
-        .dup
-        .paint
-        .palette
-        .analogous(as: :hex)
-    rescue Chroma::Errors::UnrecognizedColor
-      Rails
-        .configuration
-        .theme_color
         .dup
         .paint
         .palette
