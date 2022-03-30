@@ -1,0 +1,27 @@
+$secondary: #95a5a6;
+$input-btn-focus-width: 0;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$body-bg: $light;
+$toast-background-color: $white;
+$input-bg: $light;
+$input-group-addon-bg: $light;
+
+@import 'default';
+
+.switch-theme.light {
+  display: none;
+}
+
+.dropdown-header {
+  @extend .bg-light;
+}
+
+.navbar {
+  @extend .navbar-light;
+  @extend .bg-white;
+}

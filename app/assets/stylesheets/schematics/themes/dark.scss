@@ -1,0 +1,45 @@
+$body-color: #fff;
+$secondary: #95a5a6;
+$input-btn-focus-width: 0;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$body-bg: $dark;
+$toast-background-color: $dark;
+$pagination-bg: $dark;
+$pagination-disabled-bg: $dark;
+$pagination-color: $white;
+$card-bg: $gray-700;
+$card-cap-bg: $gray-800;
+$input-bg: $dark;
+$form-file-button-bg: $dark;
+$form-file-button-color: $white;
+$form-file-button-hover-bg: $dark;
+$input-group-addon-bg: $dark;
+
+@import 'default';
+
+.switch-theme.dark {
+  display: none;
+}
+
+.chart svg,
+iframe.google-map {
+  filter: invert(90%);
+}
+
+.dropdown-menu {
+  @extend .dropdown-menu-dark;
+}
+
+.dropdown-header {
+  @extend .bg-dark;
+}
+
+.navbar {
+  @extend .navbar-dark;
+  @extend .bg-dark;
+}
