@@ -14,7 +14,7 @@
 //= require js-routes
 //= require_tree .
 
-/* global Pagy, Turbolinks, Sortable, ColumnResizer, bootstrap */
+/* global Pagy, Turbolinks, Sortable, bootstrap */
 
 document.addEventListener('turbolinks:load', function () {
   Pagy.init()
