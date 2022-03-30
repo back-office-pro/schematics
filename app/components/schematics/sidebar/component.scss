@@ -2,27 +2,27 @@
   flex: 0 0 12rem;
   max-width: 12rem;
   transition: ease-in-out .3s;
-  z-index: 3;
 
   &.toggled {
     flex: 0 0 6rem;
     max-width: 6rem;
   }
 
+  &:hover {
+    background: var(--bs-primary-darken) !important;
+  }
+
   .sidebar-brand {
-    font-size: 1rem;
-    font-weight: 800;
     height: 3.5rem;
     letter-spacing: .05rem;
     line-height: 3.5rem;
-    text-transform: uppercase;
   }
 
   .nav-link.active {
-    color: #fff !important;
+    color: var(--bs-white) !important;
 
     .badge {
-      background: #fff !important;
+      background: var(--bs-white) !important;
     }
   }
 }
@@ -30,8 +30,6 @@
 .sidebar-sticky {
   overflow-x: hidden;
   overflow-y: auto;
-  position: sticky;
-  top: 0;
 
   ul.nav {
     height: calc(100vh - 50px - 3.5rem);

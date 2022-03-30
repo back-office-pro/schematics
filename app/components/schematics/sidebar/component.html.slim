@@ -1,6 +1,6 @@
-.col.bg-primary.sidebar data-controller='sidebar' class=('toggled' if toggled?)
-  .sidebar-sticky
-    .sidebar-brand.d-flex.align-items-center.text-white.text-nowrap.justify-content-center
+.col.bg-primary.sidebar.z-index-2 data-controller='sidebar' class=('toggled' if toggled?)
+  .sidebar-sticky.sticky-top
+    .sidebar-brand.fs-5.fw-bolder.text-uppercase.d-flex.align-items-center.text-white.text-nowrap.justify-content-center
       = settings(:company_name)
     ul.nav.nav-light.flex-column.flex-nowrap
       li.nav-item.mb-3
@@ -10,7 +10,7 @@
           = active_link_to polymorphic_path(model_class),
             class: 'nav-link p-0 m-0 text-secondary text-nowrap',
             title: model_class.human_name_plural.titleize,
-            data: { toggle: 'tooltip', placement: 'bottom', container: '.sidebar' } do
+            data: { 'bs-toggle': 'tooltip', 'bs-placement': 'bottom', 'bs-container': '.sidebar' } do
             = fa_icon entity.icon, size: '2x'
             .mt-2.d-none class=('d-md-block' unless toggled?) = model_class.human_name_plural.titleize
         - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(polymorphic_path(model_class))
@@ -20,11 +20,11 @@
                 - attribute.values.each do |value|
                   = active_link_to polymorphic_path(model_class, filter: { attribute.name => value }),
                                   active: :exact,
-                                  class: 'nav-link p-0 m-0 text-secondary text-truncate segment' do
-                    li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-primary
-                      span = attribute.format(value)
-                      span.badge.badge-secondary.text-primary = model_class.public_send(:"#{attribute.name}_#{value}").size
+                                  class: 'nav-link p-0 m-0 text-truncate' do
+                    li.list-group-item.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-transparent
+                      span.text-secondary = attribute.format(value)
+                      span.badge.bg-secondary.text-primary = model_class.public_send(:"#{attribute.name}_#{value}").size
         li.nav-item.mb-2
-    button#sidebar-toggle.btn.btn-block.text-secondary.border-0.text-right.py-3 data-action='click->sidebar#toggle'
-      .d-none.mr-3 class=('d-md-block' unless toggled?) = fa_icon :chevron_left, class: 'fa-lg'
-      .d-none.mr-3 class=('d-md-block' if toggled?) = fa_icon :chevron_right, class: 'fa-lg'
+    button#sidebar-toggle.btn.text-secondary.border-0.text-end.py-3.w-100 data-action='click->sidebar#toggle'
+      .d-none.me-3 class=('d-md-block' unless toggled?) = fa_icon :chevron_left, class: 'fa-lg'
+      .d-none.me-3 class=('d-md-block' if toggled?) = fa_icon :chevron_right, class: 'fa-lg'
