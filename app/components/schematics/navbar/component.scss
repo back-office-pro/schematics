@@ -1,0 +1,21 @@
+.navbar {
+  height: 3.5rem;
+
+  &.scrolled {
+    background: rgba(255, 255, 255, .6) !important; // scss-lint:disable ColorVariable
+  }
+
+  &.scrolled:hover {
+    background: var(--bs-white) !important;
+  }
+
+  .navbar-nav {
+    height: 3.5rem;
+  }
+
+  .badge.rounded-pill {
+    position: absolute;
+    right: .5rem;
+    top: -.5rem;
+  }
+}
