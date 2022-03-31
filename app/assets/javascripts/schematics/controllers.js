@@ -23,12 +23,10 @@
 */
 
 window.fetchAPI = (url, method = 'GET', data) => {
-  const csrfToken = document.querySelector("[name='csrf-token']").content
   const options = {
     method,
     body: data && JSON.stringify(data),
     headers: {
-      'X-CSRF-Token': csrfToken,
       'Content-Type': 'application/json',
       Accept: 'application/json'
     }
