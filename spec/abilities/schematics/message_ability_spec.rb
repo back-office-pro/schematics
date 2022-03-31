@@ -6,10 +6,7 @@ require 'cancan/matchers'
 RSpec.describe Schematics::MessageAbility do
   subject(:ability) { described_class.new(user) }
 
-  fixtures :users
-  fixtures :messages
-  fixtures :roles
-  fixtures 'action_text/rich_texts'
+  fixtures :users, :messages, :roles, 'action_text/rich_texts'
 
   let(:user) { users(:one) }
   let(:other_user) { users(:two) }

@@ -6,9 +6,7 @@ require 'cancan/matchers'
 RSpec.describe Schematics::ActiveStorage::AttachmentAbility do
   subject(:ability) { described_class.new(user) }
 
-  fixtures :users
-  fixtures :roles
-  fixtures :permissions
+  fixtures :users, :roles, :permissions
 
   let(:user) { users(:one) }
 

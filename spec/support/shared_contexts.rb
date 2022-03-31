@@ -5,8 +5,7 @@ RSpec.shared_context 'with unauthenticated user' do
 
   subject { response }
 
-  fixtures :users
-  fixtures :roles
+  fixtures :users, :roles
 
   let(:json_response) { ::JSON.parse(response.body) }
   let(:user) { users(:two) }
