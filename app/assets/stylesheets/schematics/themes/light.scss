@@ -11,6 +11,28 @@ $toast-background-color: $white;
 $input-bg: $light;
 $input-group-addon-bg: $light;
 
+$font-size-root: 12px;
+$enable-caret: false;
+$badge-padding-y: .25em;
+$badge-padding-x: .5em;
+$accordion-button-active-bg: $card-cap-bg;
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'z-index': (
+      property: z-index,
+      class: z-index,
+      values: (
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4
+      )
+    )
+  )
+);
+
 @import 'default';
 
 .switch-theme.light {
