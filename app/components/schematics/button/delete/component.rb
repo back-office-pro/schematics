@@ -4,8 +4,6 @@ module Schematics
   module Button
     module Delete
       class Component < ApplicationComponent
-        delegate :can?, to: :helpers
-
         def initialize(resource:, compact: true)
           super
           @resource = resource

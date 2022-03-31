@@ -4,8 +4,6 @@ module Schematics
   module Button
     module Destroy
       class Component < ApplicationComponent
-        delegate :can?, :confirm_data, to: :helpers
-
         def initialize(resource:, compact: true)
           super
           @resource = resource

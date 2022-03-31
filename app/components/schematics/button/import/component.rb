@@ -4,7 +4,6 @@ module Schematics
   module Button
     module Import
       class Component < ApplicationComponent
-        delegate :can?, to: :helpers
         delegate :human_name_plural, to: :@model_class
 
         def initialize(model_class:)

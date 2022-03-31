@@ -4,7 +4,6 @@ module Schematics
   module AttachmentValidators
     class Component < ApplicationComponent
       DENYLIST = %i[presence attached antivirus].freeze
-      delegate :breadcrumb_trail, to: :helpers
 
       def initialize(validators:)
         super

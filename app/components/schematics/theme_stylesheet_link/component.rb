@@ -3,8 +3,6 @@
 module Schematics
   module ThemeStylesheetLink
     class Component < ApplicationComponent
-      delegate :preferences, to: :helpers
-
       def initialize(theme:)
         super
         @theme = theme

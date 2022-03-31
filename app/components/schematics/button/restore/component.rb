@@ -4,8 +4,6 @@ module Schematics
   module Button
     module Restore
       class Component < ApplicationComponent
-        delegate :can?, to: :helpers
-
         def initialize(resource:)
           super
           @resource = resource

@@ -3,8 +3,6 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
-      delegate :can?, :settings, :preferences, to: :helpers
-
       def toggled?
         preferences(:sidebar_toggled, false)
       end

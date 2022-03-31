@@ -4,12 +4,6 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
-        delegate :calendar_start_attribute,
-                 :calendar_end_attribute,
-                 :calendar_start_date,
-                 :calendar_end_date,
-                 to: :helpers
-
         def date_range
           (start_date..end_date).to_a
         end

@@ -3,8 +3,6 @@
 module Schematics
   module Favicon
     class Component < ApplicationComponent
-      delegate :settings, to: :helpers
-
       def url
         return url_for(settings(:company_logo)) if settings(:company_logo).attached?
 

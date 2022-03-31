@@ -4,8 +4,6 @@ module Schematics
   module Button
     module Duplicate
       class Component < ApplicationComponent
-        delegate :can?, to: :helpers
-
         def initialize(resource:)
           super
           @resource = resource

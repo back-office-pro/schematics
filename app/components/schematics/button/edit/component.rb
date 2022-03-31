@@ -4,7 +4,6 @@ module Schematics
   module Button
     module Edit
       class Component < ApplicationComponent
-        delegate :can?, to: :helpers
         delegate :class, to: :@resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
 

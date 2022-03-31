@@ -5,7 +5,6 @@ module Schematics
     module Settings
       class Component < ApplicationComponent
         delegate :listable_elements, :model_class, to: :@entity
-        delegate :preferences, to: :helpers
 
         def initialize(entity:)
           super

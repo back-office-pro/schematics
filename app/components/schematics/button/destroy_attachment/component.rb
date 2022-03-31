@@ -4,7 +4,6 @@ module Schematics
   module Button
     module DestroyAttachment
       class Component < ApplicationComponent
-        delegate :confirm_data, :can?, to: :helpers
         delegate :id, :name, to: :@attachment
         delegate :attributes_param_key, to: :field
 
