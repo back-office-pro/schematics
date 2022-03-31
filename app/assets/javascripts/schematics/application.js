@@ -7,7 +7,6 @@
 //= require sweetalert2/dist/sweetalert2
 //= require sweet-alert2-rails
 //= require pagy
-//= require @fortawesome/fontawesome-free/js/all
 //= require rails-timeago
 //= require locales/jquery.timeago.fr
 //= require sortablejs/Sortable
