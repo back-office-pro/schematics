@@ -30,7 +30,7 @@ document.addEventListener('turbolinks:load', function () {
     .querySelectorAll('*[data-href]')
     .forEach(element => {
       element.addEventListener('click', function (e) {
-        if (['TD', 'DIV'].includes(e.target.nodeName)) {
+        if (!e.target.closest('a, .btn-group, .best_in_place')) {
           Turbolinks.visit(this.dataset.href)
         }
       })
