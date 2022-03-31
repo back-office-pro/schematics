@@ -256,11 +256,11 @@ module Schematics
                  polymorphic_path(model_class)
     end
 
-    def tscope(message, **args)
+    def tscope(message, **kwargs)
       translate(
         message[1..],
         scope: [:schematics, :resources, action_name],
-        **args.merge(human_name:, gender:)
+        **kwargs.merge(human_name:, gender:)
       )
     end
   end
