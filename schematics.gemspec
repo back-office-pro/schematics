@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bootsnap', '~> 1.11.1'
   spec.add_development_dependency 'capybara', '~> 3.36.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.5'
-  spec.add_development_dependency 'pg', '~> 1.3.4'
+  spec.add_development_dependency 'pg', '~> 1.3.5'
   spec.add_development_dependency 'reek', '~> 6.1.0'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.26.1'
