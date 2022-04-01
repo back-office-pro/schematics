@@ -1,3 +1,6 @@
-= link_to polymorphic_path(@resource), method: :delete, data:, title:, class: css_classes do
-  span.icon = fa_icon :trash
-  span.text.d-none.d-lg-inline = t('schematics.application.button.destroy') unless compact?
+= form_for @resource, method: :delete, html: { class: 'd-inline' }
+  = render Schematics::ConfirmDialog::Component.new(target:)
+span data-bs-toggle='modal' data-bs-target="##{target}"
+  = button_tag data:, title:, class: css_classes do
+    span.icon = fa_icon :trash
+    span.text.d-none.d-lg-inline = t('schematics.application.button.destroy') unless compact?

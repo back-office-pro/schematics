@@ -4,7 +4,7 @@ module Schematics
   module Button
     module DestroyAttachment
       class Component < ApplicationComponent
-        delegate :id, :name, to: :@attachment
+        delegate :name, to: :@attachment
         delegate :attributes_param_key, to: :field
 
         def initialize(resource:, attachment:)
@@ -22,6 +22,10 @@ module Schematics
             .class
             .entity
             .find_field_by_name(name)
+        end
+
+        def target
+          "confirm-dialog-#{@resource.id}-#{@attachment.id}"
         end
       end
     end

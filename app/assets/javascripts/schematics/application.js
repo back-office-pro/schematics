@@ -36,7 +36,7 @@ document.addEventListener('turbolinks:load', function () {
     .querySelectorAll('.modal')
     .forEach(element => {
       element.addEventListener('show.bs.modal', function () {
-        document.body.appendChild(this)
+        document.body.appendChild(this.parentNode)
       })
     })
 })

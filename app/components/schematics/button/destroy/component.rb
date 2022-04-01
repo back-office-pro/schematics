@@ -36,6 +36,10 @@ module Schematics
           t('schematics.application.button.destroy')
         end
 
+        def target
+          "confirm-dialog-#{@resource.id}"
+        end
+
         def compact?
           @compact
         end
