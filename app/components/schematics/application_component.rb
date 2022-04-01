@@ -3,6 +3,7 @@
 module Schematics
   class ApplicationComponent < ViewComponent::Base
     include ViewComponent::Translatable
+    include ApplicationHelper
 
     delegate_missing_to :helpers
   end
