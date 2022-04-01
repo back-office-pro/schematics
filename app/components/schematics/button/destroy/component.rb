@@ -25,9 +25,9 @@ module Schematics
         end
 
         def data
-          return confirm_data unless compact?
+          return { confirm: true } unless compact?
 
-          confirm_data.merge('bs-toggle': 'tooltip', 'bs-placement': 'top')
+          { confirm: true, 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
         end
 
         def title

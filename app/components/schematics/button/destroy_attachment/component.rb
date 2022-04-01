@@ -25,7 +25,7 @@ module Schematics
         end
 
         def data
-          confirm_data.merge('bs-toggle': 'tooltip', 'bs-placement': 'left')
+          { confirm: true, 'bs-toggle': 'tooltip', 'bs-placement': 'left' }
         end
 
         def title

@@ -1,11 +1,8 @@
 //= require jquery/dist/jquery
-//= require jquery-ujs/src/rails
 //= require @popperjs/core/dist/umd/popper
 //= require bootstrap/dist/js/bootstrap.bundle
 //= require rails.validations
 //= require rails.validations.simple_form.bootstrap4
-//= require sweetalert2/dist/sweetalert2
-//= require sweet-alert2-rails
 //= require pagy
 //= require rails-timeago
 //= require locales/jquery.timeago.fr

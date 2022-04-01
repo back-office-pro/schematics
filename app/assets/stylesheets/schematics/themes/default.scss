@@ -28,29 +28,6 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
   background: $light;
 }
 
-// Swal2
-
-.swal2-container.fade:not(.show) {
-  opacity: inherit !important;
-}
-
-.swal2-modal.show-swal2 {
-  background: $card-bg !important;
-
-  h2,
-  .swal2-content {
-    color: inherit !important;
-  }
-}
-
-button.swal2-cancel.styled {
-  background: $danger !important;
-}
-
-.show-swal2.disable-animation {
-  animation: none !important;
-}
-
 // Slim Select
 
 .ss-main {
