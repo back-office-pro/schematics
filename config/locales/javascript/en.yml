@@ -5,11 +5,6 @@ en:
       placeholder: Select a value
       search_placeholder: Search...
       search_text: No result
-    sweetalert2:
-      cancel_button_text: Cancel
-      confirm_button_text: Confirm
-      text: This action is irreversible
-      title: Are you sure?
     typeahead:
       not_found: No result
       pending: Loading...
