@@ -25,9 +25,9 @@ module Schematics
         end
 
         def data
-          return { confirm: true } unless compact?
+          return unless compact?
 
-          { confirm: true, 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
+          { 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
         end
 
         def title

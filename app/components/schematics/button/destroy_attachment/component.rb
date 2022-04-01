@@ -23,14 +23,6 @@ module Schematics
             .entity
             .find_field_by_name(name)
         end
-
-        def data
-          { confirm: true, 'bs-toggle': 'tooltip', 'bs-placement': 'left' }
-        end
-
-        def title
-          t('schematics.application.button.destroy')
-        end
       end
     end
   end
