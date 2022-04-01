@@ -8,6 +8,10 @@ module Schematics
         @address = address
       end
 
+      def render?
+        @address.present?
+      end
+
       def url
         "https://www.google.com/maps/embed/v1/place?q=#{CGI.escape(@address)}&key=#{api_key}"
       end
