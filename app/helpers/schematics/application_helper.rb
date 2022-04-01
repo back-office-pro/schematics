@@ -27,6 +27,7 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
     end
 
+    # :reek:UnusedParameters
     def fa_icon(icon, class: nil, size: nil, animation: nil, **kwargs)
       tag.i(
         class: ['solid', icon.to_s.dasherize, size, animation]
