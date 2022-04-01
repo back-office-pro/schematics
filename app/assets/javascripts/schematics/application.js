@@ -32,6 +32,13 @@ document.addEventListener('turbolinks:load', function () {
         }
       })
     })
+  document
+    .querySelectorAll('.modal')
+    .forEach(element => {
+      element.addEventListener('show.bs.modal', function () {
+        document.body.appendChild(this)
+      })
+    })
 })
 
 document.addEventListener('scroll', function () {
