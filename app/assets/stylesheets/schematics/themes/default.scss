@@ -1,5 +1,66 @@
 @import 'bootstrap/scss/bootstrap';
-@import 'primary';
+
+// Bootstrap
+
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:disabled {
+    background-color: var(--bs-primary-darken);
+    border-color: var(--bs-primary-darken);
+  }
+}
+
+.btn-link {
+  color: var(--bs-primary);
+
+  &:hover {
+    color: var(--bs-primary-darken);
+  }
+}
+
+.page-link {
+  color: var(--bs-primary);
+}
+
+a {
+  color: var(--bs-primary);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--bs-primary-darken);
+  }
+}
+
+.form-check-input:checked {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+.page-item.active .page-link {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.page-item .page-link:hover,
+.page-item .page-link:focus {
+  color: var(--bs-primary-darken);
+}
+
+.progress-bar {
+  background-color: var(--bs-primary);
+}
+
+// Turbolinks
+
+.turbolinks-progress-bar {
+  background: var(--bs-primary);
+}
 
 // Forms - Chrome autocomplete
 
@@ -15,12 +76,14 @@ input:-webkit-autofill:focus {
 
 .dropdown-item:active,
 .dropdown-item:hover {
+  background-color: var(--bs-primary);
   color: $white;
 }
 
 // List groups
 
 ul.list-group.list-group-hover li:hover {
+  background: var(--bs-primary) !important;
   color: $white;
 }
 
