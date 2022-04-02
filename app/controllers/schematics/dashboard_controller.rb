@@ -2,6 +2,8 @@
 
 module Schematics
   class DashboardController < ApplicationController
+    content_security_policy false, only: :home
+
     def home
       @charts = ::Chart.accessible_by_role(current_user.role)
       @stats = ::Stat.accessible_by_role(current_user.role)
