@@ -5,8 +5,10 @@ li.nav-item.dropdown.align-items-center.px-3.border-start.border-light.d-none.d-
     href='#'
     role='button'
   }
-    = fa_icon :users, class: 'fa-lg'
-    .badge.bg-primary.rounded-pill.animate__animated.animate__zoomIn = users.size
+    .position-relative
+      = fa_icon :users, class: 'fa-lg'
+      .badge.bg-primary.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
+        = users.size
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
     aria-labelledby='online-users-dropdown'
   }

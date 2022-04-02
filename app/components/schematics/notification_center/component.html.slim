@@ -6,11 +6,15 @@ li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light da
     role='button'
     data-action='click->notificationCenter#readNotifications'
   }
-    = fa_icon :bell,
-              data: { 'notificationCenter-target': 'icon' },
-              class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
-    - unless unread_count.zero?
-      .badge.bg-danger.rounded-pill.animate__animated.animate__zoomIn data-notificationCenter-target='badge' = display_unread_count
+    .position-relative
+      = fa_icon :bell,
+                data: { 'notificationCenter-target': 'icon' },
+                class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
+      - unless unread_count.zero?
+        .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn {
+          data-notificationCenter-target='badge'
+        }
+          = display_unread_count
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
     aria-labelledby='notifications-dropdown'
   }
