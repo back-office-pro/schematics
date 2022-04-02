@@ -22,6 +22,10 @@
   .nav-link:hover {
     color: var(--bs-white) !important;
 
+    span:not(.badge) {
+      color: var(--bs-white) !important;
+    }
+
     .badge {
       background: var(--bs-white) !important;
     }
