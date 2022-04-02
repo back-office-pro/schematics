@@ -66,37 +66,15 @@ a {
   background: var(--bs-primary);
 }
 
-// Forms - Chrome autocomplete
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  box-shadow: 0 0 0 30px $light inset;
-  -webkit-text-fill-color: $dark;
-  transition: background-color 5000s ease-in-out 0s;
-}
-
 // Dropdowns
 
 .dropdown-item:active {
-  background-color: var(--bs-primary);
-}
-
-// List groups
-
-ul.list-group.list-group-striped li:nth-of-type(even) {
-  background: $light;
+  background-color: var(--bs-primary) !important;
 }
 
 // Slim Select
 
 .ss-main {
-  color: $gray-700 !important;
-
-  .ss-search input {
-    background: $light !important;
-  }
-
   .ss-content {
     background: $card-bg !important;
   }
@@ -112,7 +90,6 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
 // Pagy
 
 .pagy-items-selector-js input {
-  background: $light;
   border: 0;
   color: $secondary;
   font-weight: bold;
