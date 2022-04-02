@@ -10,7 +10,7 @@
         class=header_button_css_class
       }
         = render Schematics::CardHeading::Component.new(icon:, title:)
-        .badge.bg-light.text-secondary.p-2.me-3 = @resources.size
+        .badge.bg-primary.text-white.p-2.me-3 = @resources.size
   .accordion-collapse.collapse class=collapse_css_class id=id
     .accordion-body.p-0
       .table-responsive
