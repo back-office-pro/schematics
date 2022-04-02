@@ -5,7 +5,7 @@ require 'singleton'
 
 module Schematics
   class Schema # rubocop:disable Metrics/ClassLength
-    include Singleton
+    include ::Singleton
     attr_reader :entities, :migrations
 
     def initialize

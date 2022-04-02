@@ -41,7 +41,7 @@ module Schematics
 
       def route
         case @entity
-        when Singleton
+        when Singleton # rubocop:disable Lint/ConstantResolution
           <<~RUBY
             resource :#{resource.pluralize}, only: #{routes}
             resolve("#{class_name}") { [:#{resource.pluralize}] }
