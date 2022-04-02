@@ -13,9 +13,9 @@ module Schematics
       end
 
       def badge_css_class
-        return 'badge-success' if @user.online?
+        return 'bg-success' if @user.online?
 
-        'badge-danger'
+        'bg-danger'
       end
     end
   end

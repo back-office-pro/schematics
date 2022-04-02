@@ -1,10 +1,10 @@
 - begin
-  = image_tag attachment, class: @css_class, data:
+  = image_tag attachment, class: @css_class, data:, title: @title
 - rescue StandardError => e
   - if @replacement.present?
-    = fa_icon icon, size:, class: @css_class, data:
+    = fa_icon icon, size:, class: @css_class, data:, title: @title
   - else
-    = fa_icon :exclamation_triangle, class: 'mr-2'
+    = fa_icon :exclamation_triangle, class: 'me-2'
     - case e
     - when MiniMagick::Error
       = t('.minimagick_error')

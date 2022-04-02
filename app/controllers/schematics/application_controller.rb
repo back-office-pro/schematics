@@ -7,7 +7,7 @@ module Schematics
     include Trackable
     include Rescuable
 
-    protect_from_forgery unless: -> { request.format.json? }
+    protect_from_forgery with: :null_session, if: -> { request.format.json? }
     before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
     before_action :authorize
     before_action :set_paper_trail_whodunnit

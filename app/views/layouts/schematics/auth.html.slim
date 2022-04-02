@@ -1,5 +1,5 @@
 doctype html
-html
+html dir='ltr'
   head
     meta charset='utf-8'
     meta name='turbolinks-cache-control' content='no-preview'
@@ -15,8 +15,14 @@ html
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
+    css [nonce=content_security_policy_nonce]:
+      :root {
+        --bs-primary: #{settings(:theme_color)};
+        --bs-primary-darken: #{settings(:theme_color_darken)};
+        --bs-primary-rgb: #{settings(:theme_color_rgb)};
+      }
   body
     = render Schematics::Toast::Component.with_collection(flash.to_a)
-    .jumbotron.p-0.m-0.d-flex.align-items-center.min-vh-100.bg-primary.border-0
+    .p-0.m-0.d-flex.align-items-center.min-vh-100.bg-primary.border-0
       .container.animate__animated.animate__slideInDown
         = yield

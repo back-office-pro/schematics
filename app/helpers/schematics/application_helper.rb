@@ -3,7 +3,6 @@
 module Schematics
   module ApplicationHelper
     include Pagy::Frontend
-    include FontAwesome5::Rails::IconHelper
     delegate :licence, to: :current_ability
 
     def settings(key)
@@ -28,16 +27,15 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
     end
 
-    def confirm_data
-      {
-        confirm: t('schematics.application.delete.title'),
-        text: t('schematics.application.delete.subtitle'),
-        'confirm-button-text': t('schematics.application.button.confirm'),
-        'cancel-button-text': t('schematics.application.button.cancel'),
-        'sweet-alert-type': 'error',
-        'allow-outside-click': false,
-        'custom-class': ('disable-animation' if Rails.env.test?)
-      }
+    # :reek:UnusedParameters
+    def fa_icon(icon, class: nil, size: nil, animation: nil, **kwargs)
+      tag.i(
+        class: ['solid', icon.to_s.dasherize, size, animation]
+          .compact
+          .map { "fa-#{_1}" }
+          .push(binding.local_variable_get(:class)),
+        **kwargs
+      )
     end
   end
 end

@@ -10,7 +10,7 @@ module Schematics
         end
 
         def css_class
-          'font-weight-bold' if @message.unread?
+          'fw-bold' if @message.unread?
         end
 
         def href

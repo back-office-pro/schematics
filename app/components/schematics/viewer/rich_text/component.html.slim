@@ -1,0 +1,14 @@
+.accordion.shadow-sm.mt-3
+  .accordion-item.border-0
+    .accordion-header
+      button.accordion-button.py-1.pe-3.ps-2 {
+        type='button'
+        data-bs-toggle='collapse'
+        data-bs-target="##{id}"
+        aria-expanded='true'
+        aria-controls=id
+      }
+        = render Schematics::CardHeading::Component.new(icon:, title:)
+    .accordion-collapse.collapse.show id=id
+      .accordion-body
+        == value

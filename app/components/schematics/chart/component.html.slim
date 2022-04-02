@@ -1,9 +1,7 @@
-.col-xl-6.col-md-12.mb-3
+.col-xl-6.col-md-12
   .card.shadow-sm.border-0
-    .card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1
-      h5.m-0.text-primary.text-truncate.font-weight-bold
-        = fa_icon icon, class: 'mr-3 ml-2 fa-lg align-middle'
-        span.align-middle = @chart
+    .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+      = render Schematics::CardHeading::Component.new(icon:, title: @chart)
     .card-body.p-3
       = public_send type,
                     chart_path(@chart),
@@ -11,5 +9,6 @@
                     xtitle:,
                     ytitle:,
                     suffix:,
+                    nonce: content_security_policy_nonce,
                     download: { filename: },
                     dataset: { borderWidth: border_width }

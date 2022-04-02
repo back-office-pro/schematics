@@ -1,11 +1,26 @@
 @import 'slim-select/dist/slimselect';
 
 .ss-main {
+  padding: 0 !important;
+
+  .ss-multi-selected .ss-value {
+    background: var(--bs-primary) !important;
+  }
+
+  .ss-list .ss-option:hover {
+    background: var(--bs-primary);
+  }
+
   .ss-single-selected,
   .ss-multi-selected {
     background: transparent;
     border: 0;
-    height: 32px;
+  }
+
+  .ss-single-selected .placeholder {
+    background-color: initial;
+    cursor: initial;
+    opacity: initial;
   }
 
   .ss-multi-selected .ss-add {
@@ -15,11 +30,11 @@
   .ss-content {
     border: 0;
     border-radius: .25rem;
-    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .08);
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .08); // scss-lint:disable ColorVariable
     margin-left: -.5rem;
 
     .ss-search-highlight {
-      background: #fcf8e3 !important;
+      background: var(--highlight) !important;
     }
 
     .ss-option.ss-disabled {
@@ -44,5 +59,5 @@
 
 .ss-main.is-valid .ss-arrow,
 .ss-main.is-invalid .ss-arrow {
-  padding-right: 1rem;
+  padding-right: 2rem;
 }

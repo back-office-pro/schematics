@@ -1,5 +1,5 @@
 .table-responsive data-controller='comparison' data-comparison-model=model_class
-  table.table.mb-0
+  table.table.table-borderless.mb-0
     = render Schematics::Filter::Component.new(model_class:)
     tbody class=tbody_css_classes
       tr
@@ -9,32 +9,30 @@
       - else
           td.p-0 colspan='100%'
             - @resources.to_a.in_groups_of(3, false).each do |group|
-              .row.no-gutters
+              .row.g-0
                 - group.each do |resource|
                   .col-xl-4
                     .card.border-0
                       .card-body.p-0
-                        table.table.mb-0.table-striped
+                        table.table.mb-0.table-striped.table-borderless
                           tbody
                             tr
                               td colspan='2'
                                 = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
                                 = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
-                                #carouselWithControls.carousel.slide data-ride='carousel'
+                                #carousel.carousel.slide data-ride='carousel'
                                   .carousel-inner
                                     - carousel(resource).each do |attachment|
                                       .carousel-item.active.text-center data-href=href(resource)
                                         = render Schematics::Attachment::Component.new(attachment:, height: 250, css_class: 'rounded')
-                                  a.carousel-control-prev data-slide='prev' href='#carouselWithControls' role='button'
+                                  a.carousel-control-prev data-slide='prev' href='#carousel' role='button'
                                     span.carousel-control-prev-icon aria-hidden='true'
-                                    span.sr-only Previous
-                                  a.carousel-control-next data-slide='next' href='#carouselWithControls' role='button'
+                                  a.carousel-control-next data-slide='next' href='#carousel' role='button'
                                     span.carousel-control-next-icon aria-hidden='true'
-                                    span.sr-only Next
                             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                               tr.animate__slideInRight class=col_preference_class(field)
                                 th.text-nowrap
-                                  = fa_icon field.icon, class: 'fa-fw mr-2 text-muted'
+                                  = fa_icon field.icon, class: 'fa-fw me-2 text-muted'
                                   = model_class.human_attribute_name(field.name)
                                 td.text-nowrap
                                   = render Schematics::Resource::Component.new(resource:, field:, editable: true)

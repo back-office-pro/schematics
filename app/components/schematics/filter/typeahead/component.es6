@@ -29,8 +29,8 @@ window.TypeaheadController = class extends SearchBarController {
 
   suggestionTemplate (result) {
     return `
-      <li class="list-group-item p-2 border-0 text-left text-truncate" data-action="mousedown->typeahead#selectItem" data-value="${result}" role="button">
-        <i class="fa fa-search text-dark fa-fw mr-2"></i>
+      <li class="list-group-item list-group-item-action p-2 border-0 text-start text-truncate" data-action="mousedown->typeahead#selectItem" data-value="${result}" role="button">
+        <i class="fa fa-search text-secondary fa-fw me-2"></i>
         ${this.highlight(result, this.inputTarget.value)}
       </li>
     `

@@ -21,6 +21,27 @@ Rails.configuration.after_initialize do
       animation: {
         duration: 1000,
         easing: 'easeOutQuad'
+      },
+      title: {
+        font: {
+          size: 12
+        }
+      },
+      scales: {
+        y: {
+          title: {
+            font: {
+              size: 12
+            }
+          }
+        },
+        x: {
+          title: {
+            font: {
+              size: 12
+            }
+          }
+        }
       }
     }
   }

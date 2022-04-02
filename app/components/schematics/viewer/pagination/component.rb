@@ -4,7 +4,6 @@ module Schematics
   module Viewer
     module Pagination
       class Component < ApplicationComponent
-        delegate :pagy_items_selector_js, :pagy_info, :pagy_bootstrap_nav, to: :helpers
         delegate :pages, to: :@pagy
 
         def initialize(pagy:, calendar: nil, human_name_plural: nil)

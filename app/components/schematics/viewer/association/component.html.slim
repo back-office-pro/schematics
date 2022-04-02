@@ -1,27 +1,28 @@
-.card.shadow-sm.border-0.mt-3
-  a.card-header.border-top-0.border-left-0.border-right-0.border-light.px-2.py-1 {
-    class=card_header_css_class
-    href="##{id}"
-    data-toggle='collapse'
-    role='button'
-  }
-    .row.align-items-center
-      .col.text-truncate
+.accordion.shadow-sm.mt-3
+  .accordion-item.border-0
+    .accordion-header
+      button.accordion-button.py-1.pe-3.ps-2 {
+        type='button'
+        data-bs-toggle='collapse'
+        data-bs-target="##{id}"
+        aria-expanded='true'
+        aria-controls=id
+        class=header_button_css_class
+      }
         = render Schematics::CardHeading::Component.new(icon:, title:)
-      .col-auto.mr-3
-        .badge.badge-light.text-dark.p-2.mr-3 = @resources.size
-  .collapse class=collapse_css_class id=id
-    .card-body.p-0
+        .badge.bg-primary.text-white.p-2.me-3 = @resources.size
+  .accordion-collapse.collapse class=collapse_css_class id=id
+    .accordion-body.p-0
       .table-responsive
-        table.table.mb-0.table-striped.table-hover
+        table.table.mb-0.table-striped.table-hover.table-borderless
           thead.border-bottom.border-light
             tr
               th.text-nowrap.text-center.align-middle
               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                 th.text-nowrap.text-center.align-middle class=col_preference_class(field)
-                  = fa_icon field.icon, class: 'mr-2 text-dark'
+                  = fa_icon field.icon, class: 'me-2 text-secondary'
                   = model_class.human_attribute_name(field.name)
-          tbody
+          tbody.border-0
             - @resources.each do |resource|
               tr data-href=polymorphic_path(resource)
                 td.text-nowrap.text-center

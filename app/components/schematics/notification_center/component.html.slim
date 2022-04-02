@@ -1,19 +1,26 @@
-li.nav-item.dropdown.no-arrow.d-flex.align-items-center.px-3.border-left.border-light data-controller='notificationCenter'
+li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light data-controller='notificationCenter'
   a#notifications-dropdown.nav-link.dropdown-toggle {
     aria-expanded='false'
-    data-toggle='dropdown'
+    data-bs-toggle='dropdown'
     href='#'
     role='button'
     data-action='click->notificationCenter#readNotifications'
   }
-    = fa_icon :bell,
-              data: { 'notificationCenter-target': 'icon' },
-              class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
-    - unless unread_count.zero?
-      .badge.badge-danger.rounded-pill.animate__animated.animate__zoomIn data-notificationCenter-target='badge' = display_unread_count
-  .dropdown-menu.border-0.shadow-sm.dropdown-menu-right.animate__animated.animate__zoomIn.p-0.mt-2 aria-labelledby='notifications-dropdown'
-    h5.dropdown-header.rounded-top.font-weight-bold.bg-light.border-bottom.border-light = t('.title')
-    .pre-scrollable
+    .position-relative
+      = fa_icon :bell,
+                data: { 'notificationCenter-target': 'icon' },
+                class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
+      - unless unread_count.zero?
+        .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn {
+          data-notificationCenter-target='badge'
+        }
+          = display_unread_count
+  .dropdown-menu.border-0.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
+    aria-labelledby='notifications-dropdown'
+  }
+    h5.dropdown-header.fw-bold
+      = t('.title')
+    .pre-scrollable.overflow-scroll
       - versions.each do |version|
         .dropdown-item
           = render Schematics::VersionPreview::Component.new(version:)

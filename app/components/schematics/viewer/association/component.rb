@@ -4,7 +4,6 @@ module Schematics
   module Viewer
     module Association
       class Component < Viewer::Component
-        delegate :confirm_data, to: :helpers
         with_collection_parameter :resources
 
         def initialize(resources:, collapsed: false, highlight: nil)
@@ -45,12 +44,12 @@ module Schematics
           @id ||= "collapse-#{SecureRandom.base58}"
         end
 
-        def card_header_css_class
+        def header_button_css_class
           'collapsed' if @collapsed
         end
 
         def collapse_css_class
-          return 'hide' if @collapsed
+          return if @collapsed
 
           'show'
         end

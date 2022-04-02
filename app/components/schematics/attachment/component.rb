@@ -45,7 +45,7 @@ module Schematics
       end
 
       def data
-        { toggle: 'tooltip', placement: 'top', title: @title }
+        { 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
       end
 
       def icon

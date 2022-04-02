@@ -1,23 +1,27 @@
-= form_for ::Search.new, html: { class: 'form-inline flex-nowrap pr-3' } do |f|
-  .input-group data-controller='searchBar' data-searchBar-highlight='false'
+= form_for ::Search.new, html: { class: 'd-flex pe-3' } do |f|
+  .position-relative.d-flex data-controller='searchBar' data-searchBar-highlight='false'
     = f.search_field :query,
-                     required: true,
-                     minlength: 3,
-                     placeholder: t('.placeholder'),
-                     class: 'search form-control border-0 bg-transparent',
-                     autocomplete: 'off',
-                     spellcheck: false,
-                     data: { 'searchBar-target': 'input', action: }
-    ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results data-searchBar-target='results'
-    ul.list-group.list-group-hover.list-group-striped.shadow-sm.typeahead-results.d-none data-searchBar-target='history'
+                      required: true,
+                      minlength: 3,
+                      placeholder: t('.placeholder'),
+                      class: 'search form-control border-0 bg-transparent',
+                      autocomplete: 'off',
+                      spellcheck: false,
+                      data: { 'searchBar-target': 'input', action: }
+    ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.top-100.w-100 {
+      data-searchBar-target='results'
+    }
+    ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.top-100.w-100.d-none {
+      data-searchBar-target='history'
+    }
       - history.each do |query|
-        li.list-group-item.p-2.border-0.text-left.text-truncate {
+        li.list-group-item.list-group-item-action.p-2.border-0.text-start.text-truncate {
           data-action='mousedown->searchBar#selectItem'
           data-url=search_path(query)
           role='button'
         }
-          = fa_icon :history, class: 'text-dark fa-fw mr-2'
+          = fa_icon :history, class: 'text-secondary fa-fw me-2'
           = query
-  = f.button class: 'fa-lg btn nav-link' do
-    span.icon = fa_icon :search
+  = f.button class: 'btn nav-link p-0' do
+    span.icon = fa_icon :search, class: 'fa-lg'
     span.icon.d-none = fa_icon :spinner, animation: 'spin'

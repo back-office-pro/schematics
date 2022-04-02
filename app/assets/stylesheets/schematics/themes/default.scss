@@ -1,102 +1,80 @@
-$input-btn-focus-width: 0;
-$grid-gutter-width: 1rem !default;
 @import 'bootstrap/scss/bootstrap';
 
-// Sidebar
+// Bootstrap
 
-.sidebar:hover {
-  background: darken($primary, 5%) !important;
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:disabled {
+    background-color: var(--bs-primary-darken);
+    border-color: var(--bs-primary-darken);
+  }
 }
 
-// Forms - Custom file
+.btn-link {
+  color: var(--bs-primary);
 
-label.custom-file-label {
-  background: $light;
+  &:hover {
+    color: var(--bs-primary-darken);
+  }
 }
 
-label.custom-file-label::after {
-  background: $primary;
+.page-link {
+  color: var(--bs-primary);
 }
 
-input.custom-file-input.is-valid + label.custom-file-label::after {
-  background: $success;
+a {
+  color: var(--bs-primary);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--bs-primary-darken);
+  }
 }
 
-input.custom-file-input.is-invalid + label.custom-file-label::after {
-  background: $danger;
+.form-check-input:checked {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
 }
 
-// Forms - Chrome autocomplete
+.page-item.active .page-link {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  box-shadow: 0 0 0 30px $light inset;
-  -webkit-text-fill-color: $dark;
-  transition: background-color 5000s ease-in-out 0s;
+.page-item .page-link:hover,
+.page-item .page-link:focus {
+  color: var(--bs-primary-darken);
+}
+
+.progress-bar {
+  background-color: var(--bs-primary);
+}
+
+.fixed-top {
+  left: initial;
 }
 
 // Turbolinks
 
 .turbolinks-progress-bar {
-  background: $primary;
+  background: var(--bs-primary);
 }
 
-// List groups
+// Dropdowns
 
-ul.list-group.list-group-hover li:hover {
-  background: $primary !important;
-  color: $white;
-}
-
-ul.list-group.list-group-striped li:nth-of-type(even) {
-  background: $table-accent-bg;
-}
-
-// Swal2
-
-.swal2-container.fade:not(.show) {
-  opacity: inherit !important;
-}
-
-.swal2-modal.show-swal2 {
-  background: $card-bg !important;
-
-  h2,
-  .swal2-content {
-    color: inherit !important;
-  }
-}
-
-button.swal2-confirm.styled {
-  background: $primary !important;
-}
-
-button.swal2-cancel.styled {
-  background: $danger !important;
-}
-
-.show-swal2.disable-animation {
-  animation: none !important;
+.dropdown-item:active {
+  background-color: var(--bs-primary) !important;
 }
 
 // Slim Select
 
 .ss-main {
-  color: $gray-700 !important;
-
-  .ss-multi-selected .ss-value {
-    background: $primary !important;
-  }
-
-  .ss-search input {
-    background: $light !important;
-  }
-
-  .ss-list .ss-option:hover {
-    background: $primary !important;
-  }
-
   .ss-content {
     background: $card-bg !important;
   }
@@ -112,8 +90,7 @@ button.swal2-cancel.styled {
 // Pagy
 
 .pagy-items-selector-js input {
-  background: $light;
   border: 0;
-  color: $dark;
+  color: $secondary;
   font-weight: bold;
 }

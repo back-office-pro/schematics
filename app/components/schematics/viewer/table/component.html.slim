@@ -1,5 +1,5 @@
 .table-responsive data-controller='comparison' data-comparison-model=model_class
-  table.table.mb-0 class=table_css_classes
+  table.table.table-borderless.mb-0 class=table_css_classes
     = render Schematics::Filter::Component.new(model_class:)
     tbody class=tbody_css_classes
       - if @resources.empty?
@@ -9,7 +9,7 @@
       - else
         - @resources.each do |resource|
           tr class=tr_css_class(resource) data-href=href(resource)
-            td.text-nowrap
+            td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
               = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
             - entity.listable_elements.stable_sort_by(&:weight).each do |field|

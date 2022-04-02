@@ -1,9 +1,9 @@
-.toast.w-50.border-0.shadow-sm aria-atomic='true' aria-live='assertive' role='alert' data-animation="#{animated?}"
-  .toast-header.text-white class="bg-#{css_class}"
-    span
-      = fa_icon :bell
-    strong.mr-auto.ml-2.align-middle = t(".#{type}")
-    button.ml-2.mb-1.close aria-label='Close' data-dismiss='toast' type='button'
-      = fa_icon :check, class: 'fa-xs'
-  .toast-body
-    = message
+.fixed-top.p-3
+  .toast.border-0.shadow-sm aria-atomic='true' aria-live='assertive' role='alert' data-bs-animation="#{animated?}"
+    .toast-header.text-white class="bg-#{css_class}"
+      span
+        = fa_icon :bell
+      strong.me-auto.ms-2.align-middle = t(".#{type}")
+      button.ms-2.mb-1.btn-close.btn-close-white aria-label='Close' data-bs-dismiss='toast' type='button'
+    .toast-body
+      = message

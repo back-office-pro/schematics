@@ -3,12 +3,10 @@
 module Schematics
   module Favicon
     class Component < ApplicationComponent
-      delegate :settings, to: :helpers
-
       def url
         return url_for(settings(:company_logo)) if settings(:company_logo).attached?
 
-        asset_path('fa5/solid/rocket.svg')
+        asset_path('@fortawesome/fontawesome-free/svgs/solid/rocket.svg')
       end
     end
   end

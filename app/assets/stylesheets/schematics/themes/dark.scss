@@ -1,0 +1,89 @@
+$secondary: #95a5a6;
+$input-btn-focus-width: 0;
+$body-color: #fff;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$body-bg: $dark;
+$toast-background-color: $dark;
+$pagination-bg: $dark;
+$pagination-disabled-bg: $dark;
+$pagination-color: $white;
+$pagination-hover-bg: $dark;
+$pagination-active-bg: $dark;
+$pagination-focus-bg: $dark;
+$card-bg: #444;
+$card-cap-bg: #303030;
+$input-bg: $dark;
+$input-focus-bg: $dark;
+$form-file-button-bg: $dark;
+$form-file-button-color: $white;
+$form-file-button-hover-bg: $dark;
+$input-group-addon-bg: $dark;
+$list-group-bg: $card-bg;
+$list-group-color: $white;
+$list-group-hover-bg: $card-bg;
+
+$font-size-root: 12px;
+$enable-caret: false;
+$badge-padding-y: .25em;
+$badge-padding-x: .5em;
+$zindex-dropdown: 1035;
+$accordion-button-active-bg: $card-cap-bg;
+$accordion-button-bg: $card-bg;
+
+@import 'default';
+
+.switch-theme.dark {
+  display: none;
+}
+
+.chart svg,
+iframe.google-map {
+  filter: invert(90%);
+}
+
+.dropdown-menu {
+  @extend .dropdown-menu-dark;
+}
+
+.dropdown-header,
+.modal-content,
+.calendar-month-day,
+.pagy-items-selector-js input,
+.ss-main .ss-search input,
+ul.list-group.list-group-striped li:nth-of-type(even),
+.navbar.scrolled:hover {
+  @extend .bg-dark;
+}
+
+.navbar {
+  @extend .navbar-dark;
+  @extend .bg-dark;
+
+  &.scrolled {
+    background: rgba(48, 48, 48, .6) !important; // scss-lint:disable ColorVariable
+  }
+}
+
+#settings-dropdown { // scss-lint:disable IdSelector
+  @extend .btn-dark;
+}
+
+a:not(.nav-link),
+.text-primary {
+  @extend .text-light;
+}
+
+// Forms - Chrome autocomplete
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 30px $dark inset;
+  -webkit-text-fill-color: $light;
+  transition: background-color 5000s ease-in-out 0s;
+}

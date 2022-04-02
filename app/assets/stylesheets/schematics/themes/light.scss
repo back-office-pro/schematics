@@ -1,0 +1,52 @@
+$secondary: #95a5a6;
+$input-btn-focus-width: 0;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$body-bg: $light;
+$toast-background-color: $white;
+$input-bg: $light;
+$input-group-addon-bg: $light;
+
+$font-size-root: 12px;
+$enable-caret: false;
+$badge-padding-y: .25em;
+$badge-padding-x: .5em;
+$zindex-dropdown: 1035;
+$accordion-button-active-bg: $card-cap-bg;
+
+@import 'default';
+
+.switch-theme.light {
+  display: none;
+}
+
+.dropdown-header,
+.calendar-month-day,
+.pagy-items-selector-js input,
+.ss-main .ss-search input,
+ul.list-group.list-group-striped li:nth-of-type(even) {
+  @extend .bg-light;
+}
+
+.navbar {
+  @extend .navbar-light;
+  background: $white;
+}
+
+#settings-dropdown { // scss-lint:disable IdSelector
+  @extend .btn-light;
+}
+
+// Forms - Chrome autocomplete
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 30px $light inset;
+  -webkit-text-fill-color: $dark;
+  transition: background-color 5000s ease-in-out 0s;
+}

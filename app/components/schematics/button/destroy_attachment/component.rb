@@ -4,8 +4,7 @@ module Schematics
   module Button
     module DestroyAttachment
       class Component < ApplicationComponent
-        delegate :confirm_data, :can?, to: :helpers
-        delegate :id, :name, to: :@attachment
+        delegate :name, to: :@attachment
         delegate :attributes_param_key, to: :field
 
         def initialize(resource:, attachment:)
@@ -25,12 +24,8 @@ module Schematics
             .find_field_by_name(name)
         end
 
-        def data
-          confirm_data.merge(
-            toggle: 'tooltip',
-            placement: 'left',
-            title: t('schematics.application.button.destroy')
-          )
+        def target
+          "confirm-dialog-#{@resource.id}-#{@attachment.id}"
         end
       end
     end

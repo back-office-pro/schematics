@@ -3,7 +3,8 @@
 module Schematics
   class ApplicationComponent < ViewComponent::Base
     include ViewComponent::Translatable
+    include ApplicationHelper
 
-    delegate :fa_icon, :current_user, :current_ability, to: :helpers
+    delegate_missing_to :helpers
   end
 end

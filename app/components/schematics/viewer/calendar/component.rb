@@ -4,24 +4,18 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
-        delegate :calendar_start_attribute,
-                 :calendar_end_attribute,
-                 :calendar_start_date,
-                 :calendar_end_date,
-                 to: :helpers
-
         def date_range
           (start_date..end_date).to_a
         end
 
         def td_class_for(date)
-          'bg-light' if month_range.cover?(date)
+          'calendar-month-day' if month_range.cover?(date)
         end
 
         def alert_class_for(resource, date)
-          return 'rounded-0' if siblings_resource_for?(resource, date)
-          return 'rounded-right mr-2' if previous_resource_for?(resource, date)
-          return 'rounded-left ml-2' if next_resource_for?(resource, date)
+          return 'rounded-0 border-start-0 border-end-0' if siblings_resource_for?(resource, date)
+          return 'rounded-end border-start-0 me-2' if previous_resource_for?(resource, date)
+          return 'rounded-start border-end-0 ms-2' if next_resource_for?(resource, date)
         end
 
         def resources_for(date)

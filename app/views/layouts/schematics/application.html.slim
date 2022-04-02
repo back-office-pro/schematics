@@ -1,5 +1,5 @@
 doctype html
-html
+html dir='ltr'
   head
     meta charset='utf-8'
     meta name='turbolinks-cache-control' content='no-preview'
@@ -17,19 +17,22 @@ html
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Schematics::Engine.credentials.gcloud[:api_key]}&libraries=places"
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
-    = timeago_script_tag
-    javascript:
+    = timeago_script_tag nonce: true
+    css [nonce=content_security_policy_nonce]:
+      :root {
+        --bs-primary: #{settings(:theme_color)};
+        --bs-primary-darken: #{settings(:theme_color_darken)};
+        --bs-primary-rgb: #{settings(:theme_color_rgb)};
+      }
+    javascript [nonce=content_security_policy_nonce]:
       window.I18n = #{i18n_javascript}
   body
     = render Schematics::Toast::Component.with_collection(flash.to_a)
     .container-fluid.p-0.h-100
-      .row.no-gutters.h-100
+      .row.g-0.h-100
         = render Schematics::Sidebar::Component.new
-        .col.bg-light.content class=('toggled' if preferences(:sidebar_toggled, false))
-          nav.navbar.navbar-light.navbar-expand.p-0.sticky-top
-            = render Schematics::BreadcrumbTrail::Component.new
-            ul.navbar-nav.ml-auto.p-3
-              = render Schematics::Navbar::Component.new
-          .container-fluid.my-3.px-3.animate__animated class=('animate__slideInDown' if params[:page].blank?)
+        .col.content class=('toggled' if preferences(:sidebar_toggled, false))
+          = render Schematics::Navbar::Component.new
+          .container-fluid.overflow-hidden.my-3.px-3.animate__animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           = render Schematics::Footer::Component.new

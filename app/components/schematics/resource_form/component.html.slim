@@ -85,7 +85,7 @@
           = fields.hidden_field :id, value: attachment.id
           = fields.input :_destroy,
                          as: :boolean,
-                         wrapper_html: { class: 'float-right m-0 text-dark' }
+                         wrapper_html: { class: 'float-end m-0 text-secondary' }
       = f.input field.name.to_sym,
                 as: :file,
                 validate: { presence: field.required? && new_record? },
