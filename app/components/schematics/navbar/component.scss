@@ -2,11 +2,11 @@
   height: 3.5rem;
 
   &.scrolled {
-    background: rgba(255, 255, 255, .6) !important; // scss-lint:disable ColorVariable
+    background: rgba(255, 255, 255, .6); // scss-lint:disable ColorVariable
   }
 
   &.scrolled:hover {
-    background: var(--bs-white) !important;
+    background: var(--bs-white);
   }
 
   .navbar-nav {
