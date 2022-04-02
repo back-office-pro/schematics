@@ -78,18 +78,11 @@ input:-webkit-autofill:focus {
 
 // Dropdowns
 
-.dropdown-item:active,
-.dropdown-item:hover {
+.dropdown-item:active {
   background-color: var(--bs-primary);
-  color: $white;
 }
 
 // List groups
-
-ul.list-group.list-group-hover li:hover {
-  background: var(--bs-primary) !important;
-  color: $white;
-}
 
 ul.list-group.list-group-striped li:nth-of-type(even) {
   background: $light;
