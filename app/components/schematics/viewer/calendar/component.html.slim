@@ -11,7 +11,7 @@
           - date_range.each_slice(7) do |week|
             tr
               - week.each do |date|
-                td.day.p-0 class=td_class_for(date)
+                td.calendar-day.p-0 class=td_class_for(date)
                   .text-muted.ps-2.pt-1 = date.day
                   - resources_for(date).each do |resource|
                     .alert.alert-secondary.calendar.lh-lg.text-truncate.mb-1.p-2 {

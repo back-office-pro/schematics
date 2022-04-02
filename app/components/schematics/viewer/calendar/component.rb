@@ -9,7 +9,7 @@ module Schematics
         end
 
         def td_class_for(date)
-          'bg-light' if month_range.cover?(date)
+          'calendar-month-day' if month_range.cover?(date)
         end
 
         def alert_class_for(resource, date)
