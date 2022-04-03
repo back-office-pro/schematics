@@ -40,7 +40,7 @@ module Schematics
 
     def edit_polymorphic_path(resource)
       case resource
-      when ::Singleton
+      when Singleton # rubocop:disable Lint/ConstantResolution
         super(resource.class)
       else
         super

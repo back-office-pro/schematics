@@ -15,16 +15,7 @@ describe Schematics::Entities::Singleton do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      include ::Singleton
-      delegate :cache_key, to: :model_name
-
-      class << self
-        public :allocate
-
-        def instance
-          first_or_create!
-        end
-      end
+      include Schematics::Singleton
     RUBY
   end
 end
