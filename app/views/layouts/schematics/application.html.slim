@@ -1,5 +1,5 @@
 doctype html
-html dir='ltr'
+html lang=I18n.locale dir='ltr'
   head
     meta charset='utf-8'
     meta name='turbolinks-cache-control' content='no-preview'
@@ -16,8 +16,8 @@ html dir='ltr'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Schematics::Engine.credentials.gcloud[:api_key]}&libraries=places"
+    = javascript_include_tag 'timeago.js/dist/timeago.full.min', type: 'module', crossorigin: 'anonymous'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
-    = timeago_script_tag nonce: true
     css [nonce=content_security_policy_nonce]:
       :root {
         --bs-primary: #{settings(:theme_color)};

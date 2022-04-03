@@ -3,4 +3,7 @@
     = render Schematics::Avatar::Component.new(user: @message.author)
   .col.text-truncate
     div class=css_class = @message.subject
-    .text-muted #{@message.author.full_name} - #{timeago_tag(@message.created_at, force: true)}
+    .text-muted
+      => @message.author.full_name
+      | - 
+      span.timeago datetime=@message.created_at
