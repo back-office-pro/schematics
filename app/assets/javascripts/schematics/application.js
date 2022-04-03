@@ -1,5 +1,7 @@
 //= require js-routes
+//= require file-saver/dist/FileSaver
 //= require_tree .
+//= stub ./stimulus
 
 /* global Turbolinks */
 
