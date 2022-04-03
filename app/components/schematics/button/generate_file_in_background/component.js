@@ -1,7 +1,7 @@
 import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
 import { saveAs } from '../../file-saver-es/src/FileSaver'
 
-/* global fetchAPI, Blob, saveAs */
+/* global fetchAPI, Blob */
 
 export class GenerateFileInBackgroundController extends Controller {
   static get targets () {

@@ -8,15 +8,13 @@ import { GenerateFileInBackgroundController } from '../button/generate_file_in_b
 import { ViewerSettingsController } from '../viewer/settings/component'
 import { ComparisonController } from '../viewer/component'
 
-/* global Stimulus */
+const application = Application.start()
 
-window.Stimulus = Application.start()
-
-Stimulus.register('switch-theme', SwitchThemeController)
-Stimulus.register('notification-center', NotificationCenterController)
-Stimulus.register('sidebar', SidebarController)
-Stimulus.register('search-bar', SearchBarController)
-Stimulus.register('typeahead', TypeaheadController)
-Stimulus.register('generate-file-in-background', GenerateFileInBackgroundController)
-Stimulus.register('viewer-settings', ViewerSettingsController)
-Stimulus.register('comparison', ComparisonController)
+application.register('switch-theme', SwitchThemeController)
+application.register('notification-center', NotificationCenterController)
+application.register('sidebar', SidebarController)
+application.register('search-bar', SearchBarController)
+application.register('typeahead', TypeaheadController)
+application.register('generate-file-in-background', GenerateFileInBackgroundController)
+application.register('viewer-settings', ViewerSettingsController)
+application.register('comparison', ComparisonController)
