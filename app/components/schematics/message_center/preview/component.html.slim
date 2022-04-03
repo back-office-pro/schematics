@@ -4,6 +4,6 @@
   .col.text-truncate
     div class=css_class = @message.subject
     .text-muted
-      => @message.author.full_name
-      | - 
+      span = @message.author.full_name
+      span.mx-1 -
       span.timeago datetime=@message.created_at
