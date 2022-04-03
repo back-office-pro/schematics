@@ -74,6 +74,7 @@ ul.list-group.list-group-striped li:nth-of-type(even),
 }
 
 a:not(.nav-link),
+.btn-link,
 .text-primary {
   @extend .text-light;
 }
