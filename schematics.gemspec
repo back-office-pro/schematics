@@ -40,7 +40,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_record_doctor', '~> 1.9.0'
   spec.add_dependency 'active_storage_base64', '~> 1.2.0'
   spec.add_dependency 'active_storage_validations', '~> 0.9.7'
-  spec.add_dependency 'acts_as_singleton', '~> 0.0.8'
   spec.add_dependency 'annotate', '~> 3.2.0'
   spec.add_dependency 'babel-transpiler', '~> 0.7.0'
   spec.add_dependency 'bcrypt', '~> 3.1.16'

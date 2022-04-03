@@ -5,11 +5,15 @@ module Schematics
     class Singleton < Entity
       def to_str
         <<~RUBY
-          acts_as_singleton
+          include ::Singleton
           delegate :cache_key, to: :model_name
 
           class << self
-            public :all, :new
+            public :allocate
+
+            def instance
+              first_or_create!
+            end
           end
         RUBY
       end
