@@ -24,7 +24,7 @@ export class TypeaheadController extends SearchBarController {
     return results
   }
 
-  selectItem ({ params: { value }}) {
+  selectItem ({ params: { value } }) {
     this.inputTarget.value = value
     this.compactBlankInputsAndSubmit.call(this.inputTarget.form)
   }

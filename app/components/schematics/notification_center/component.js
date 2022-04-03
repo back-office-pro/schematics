@@ -3,7 +3,9 @@ import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 /* global fetchAPI, Routes */
 
 export class NotificationCenterController extends Controller {
-  static targets = ['badge', 'icon']
+  static get targets () {
+    return ['badge', 'icon']
+  }
 
   hasNotifications () {
     return this.targets.has('badge') && this.badgeTarget.classList.contains('animate__zoomIn')

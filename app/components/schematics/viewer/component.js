@@ -3,8 +3,13 @@ import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 /* global Routes, Turbolinks, fetchAPI */
 
 export class ComparisonController extends Controller {
-  static targets = ['button', 'switch']
-  static values = { model: String }
+  static get targets () {
+    return ['button', 'switch']
+  }
+
+  static get values () {
+    return { model: String }
+  }
 
   async compare () {
     const params = { comparison: { model: this.modelValue, ids: this.ids() } }

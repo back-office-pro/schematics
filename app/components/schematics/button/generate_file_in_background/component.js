@@ -3,8 +3,13 @@ import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
 /* global fetchAPI, Blob, saveAs */
 
 export class GenerateFileInBackgroundController extends Controller {
-  static targets = ['button', 'loading']
-  static values = { contentType: String }
+  static get targets () {
+    return ['button', 'loading']
+  }
+
+  static get values () {
+    return { contentType: String }
+  }
 
   toggleButton (loadingText) {
     this.buttonTarget.disabled = !this.buttonTarget.disabled

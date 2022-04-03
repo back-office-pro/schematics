@@ -3,9 +3,12 @@ import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 /* global fetchAPI, Turbolinks, I18n, Routes */
 
 export class SearchBarController extends Controller {
-  static targets = ['input', 'history', 'results']
-  static values = {
-    highlight: { type: Boolean, default: true }
+  static get targets () {
+    return ['input', 'history', 'results']
+  }
+
+  static get values () {
+    return { highlight: { type: Boolean, default: true } }
   }
 
   onFocus () {
@@ -18,7 +21,7 @@ export class SearchBarController extends Controller {
     }
   }
 
-  selectItem ({ params: { url }}) {
+  selectItem ({ params: { url } }) {
     Turbolinks.visit(url)
   }
 
