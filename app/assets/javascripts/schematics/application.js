@@ -1,28 +1,9 @@
-//= require jquery/dist/jquery
-//= require @popperjs/core/dist/umd/popper
-//= require bootstrap/dist/js/bootstrap.bundle
-//= require rails.validations
-//= require rails.validations.simple_form.bootstrap4
-//= require pagy
-//= require rails-timeago
-//= require locales/jquery.timeago.fr
-//= require sortablejs/Sortable
 //= require js-routes
 //= require_tree .
 
-/* global Pagy, Turbolinks, Sortable, bootstrap */
+/* global Turbolinks */
 
 document.addEventListener('turbolinks:load', function () {
-  Pagy.init()
-  document
-    .querySelectorAll('[data-bs-toggle="tooltip"]')
-    .forEach(_ => new bootstrap.Tooltip(_))
-  document
-    .querySelectorAll('.toast')
-    .forEach(_ => new bootstrap.Toast(_).show())
-  document
-    .querySelectorAll('tbody')
-    .forEach(Sortable.create)
   document
     .querySelectorAll('*[data-href]')
     .forEach(element => {
@@ -30,13 +11,6 @@ document.addEventListener('turbolinks:load', function () {
         if (!e.target.closest('a, .btn-group, .best_in_place')) {
           Turbolinks.visit(this.dataset.href)
         }
-      })
-    })
-  document
-    .querySelectorAll('.modal')
-    .forEach(element => {
-      element.addEventListener('show.bs.modal', function () {
-        document.body.appendChild(this.parentNode)
       })
     })
 })

@@ -1,3 +1,4 @@
+//= require jquery/dist/jquery
 //= require best_in_place
 //= require jquery-ui/ui/effect
 //= require jquery-ui/ui/effects/effect-highlight
