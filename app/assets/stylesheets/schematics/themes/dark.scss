@@ -73,7 +73,7 @@ ul.list-group.list-group-striped li:nth-of-type(even),
   @extend .btn-dark;
 }
 
-a:not(.nav-link),
+a:not(.nav-link):not(.text-danger),
 .btn-link,
 .text-primary {
   @extend .text-light;
