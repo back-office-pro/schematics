@@ -1,5 +1,13 @@
-li.nav-item.align-items-center.px-3.border-start.border-light.d-none.d-md-flex data-controller='switchTheme'
-  a.nav-link.switch-theme.dark role='button' data-action='click->switchTheme#darkTheme'
+li.nav-item.align-items-center.px-3.border-start.border-light.d-none.d-md-flex data-controller='switch-theme'
+  a.nav-link.switch-theme.dark {
+    role='button'
+    data-action='click->switch-theme#switchTheme'
+    data-switch-theme-theme-param='dark'
+  }
     = fa_icon :moon, class: 'fa-lg'
-  a.nav-link.switch-theme.light role='button' data-action='click->switchTheme#lightTheme'
+  a.nav-link.switch-theme.light {
+    role='button'
+    data-action='click->switch-theme#switchTheme'
+    data-switch-theme-theme-param='light'
+  }
     = fa_icon :lightbulb, class: 'fa-lg'

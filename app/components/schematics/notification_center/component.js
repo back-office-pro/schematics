@@ -1,9 +1,9 @@
-/* global Stimulus, fetchAPI, Routes */
+import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
-window.NotificationCenterController = class extends Stimulus.Controller {
-  static get targets () {
-    return ['badge', 'icon']
-  }
+/* global fetchAPI, Routes */
+
+export class NotificationCenterController extends Controller {
+  static targets = ['badge', 'icon']
 
   hasNotifications () {
     return this.targets.has('badge') && this.badgeTarget.classList.contains('animate__zoomIn')

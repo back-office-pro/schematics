@@ -1,6 +1,8 @@
-/* global Stimulus, fetchAPI, Routes */
+import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
-window.SidebarController = class extends Stimulus.Controller {
+/* global fetchAPI, Routes */
+
+export class SidebarController extends Controller {
   toggle () {
     this.element.classList.toggle('toggled')
     this.element.querySelectorAll('.d-none').forEach(_ => _.classList.toggle('d-md-block'))

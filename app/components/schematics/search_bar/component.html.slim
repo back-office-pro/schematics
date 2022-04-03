@@ -1,5 +1,5 @@
 = form_for ::Search.new, html: { class: 'd-flex pe-3' } do |f|
-  .position-relative.d-flex data-controller='searchBar' data-searchBar-highlight='false'
+  .position-relative.d-flex data-controller='search-bar' data-search-bar-highlight-value='false'
     = f.search_field :query,
                       required: true,
                       minlength: 3,
@@ -7,16 +7,16 @@
                       class: 'search form-control border-0 bg-transparent',
                       autocomplete: 'off',
                       spellcheck: false,
-                      data: { 'searchBar-target': 'input', action: }
+                      data: { 'search-bar-target': 'input', action: }
     ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.top-100.w-100 {
-      data-searchBar-target='results'
+      data-search-bar-target='results'
     }
     ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.top-100.w-100.d-none {
-      data-searchBar-target='history'
+      data-search-bar-target='history'
     }
       - history.each do |query|
         li.list-group-item.list-group-item-action.p-2.border-0.text-start.text-truncate {
-          data-action='mousedown->searchBar#selectItem'
+          data-action='mousedown->search-bar#selectItem'
           data-url=search_path(query)
           role='button'
         }

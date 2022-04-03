@@ -1,6 +1,8 @@
-/* global SearchBarController, Turbolinks */
+import { SearchBarController } from '../../search_bar/component'
 
-window.TypeaheadController = class extends SearchBarController {
+/* global Turbolinks */
+
+export class TypeaheadController extends SearchBarController {
   connect () {
     this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmit)
   }
@@ -22,14 +24,14 @@ window.TypeaheadController = class extends SearchBarController {
     return results
   }
 
-  selectItem (event) {
-    this.inputTarget.value = event.currentTarget.dataset.value
+  selectItem ({ params: { value }}) {
+    this.inputTarget.value = value
     this.compactBlankInputsAndSubmit.call(this.inputTarget.form)
   }
 
   suggestionTemplate (result) {
     return `
-      <li class="list-group-item list-group-item-action p-2 border-0 text-start text-truncate" data-action="mousedown->typeahead#selectItem" data-value="${result}" role="button">
+      <li class="list-group-item list-group-item-action p-2 border-0 text-start text-truncate" data-action="mousedown->typeahead#selectItem" data-typeahead-value-param="${result}" role="button">
         <i class="fa fa-search text-secondary fa-fw me-2"></i>
         ${this.highlight(result, this.inputTarget.value)}
       </li>
