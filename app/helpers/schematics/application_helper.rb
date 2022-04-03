@@ -37,5 +37,14 @@ module Schematics
         **kwargs
       )
     end
+
+    def edit_polymorphic_path(resource)
+      case resource
+      when ::Singleton
+        super(resource.class)
+      else
+        super
+      end
+    end
   end
 end

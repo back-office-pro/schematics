@@ -17,15 +17,6 @@ module Schematics
           can?(:edit, @resource)
         end
 
-        def url
-          case entity
-          when Entities::Singleton
-            edit_polymorphic_path(model_class)
-          else
-            edit_polymorphic_path(@resource)
-          end
-        end
-
         def css_classes
           [
             'btn',
