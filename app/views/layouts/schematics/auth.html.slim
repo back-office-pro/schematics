@@ -14,7 +14,7 @@ html lang=::I18n.locale dir='ltr'
     = render Schematics::Favicon::Component.new
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'schematics/application', type: 'module', crossorigin: 'anonymous', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
     css [nonce=content_security_policy_nonce]:
       :root {
         --bs-primary: #{settings(:theme_color)};

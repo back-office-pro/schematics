@@ -1,6 +1,6 @@
-import SwaggerUIBundle from '../@kensingtontech/swagger-ui/dist/swagger-ui-es-bundle'
+//= require swagger-ui-dist/swagger-ui-bundle
 
-/* global Routes */
+/* global SwaggerUIBundle, Routes */
 
 document.addEventListener('turbolinks:load', function () {
   const domNode = document.getElementById('swagger-ui')

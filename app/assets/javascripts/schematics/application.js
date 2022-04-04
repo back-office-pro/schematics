@@ -1,5 +1,7 @@
 //= require js-routes
 //= require_tree .
+//= stub ./timeago
+//= stub ./stimulus
 
 /* global Turbolinks */
 

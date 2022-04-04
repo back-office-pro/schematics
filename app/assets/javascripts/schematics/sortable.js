@@ -1,4 +1,6 @@
-import Sortable from '../sortablejs/modular/sortable.esm'
+//= require sortablejs/Sortable
+
+/* global Sortable */
 
 document.addEventListener('turbolinks:load', function () {
   document
