@@ -1,23 +1,25 @@
 = form_tag preferences_path, method: :put do
   .table-responsive
     table.table.mb-0.table-striped.table-borderless
-      tr
-        th
-        - events.each_value do |action|
-          td.text-center.text-primary = action
-      - entities.each do |entity|
-        - model_class = entity.model_class
+      thead
         tr
-          th.text-primary
-            = fa_icon entity.icon, class: 'fa-fw me-2 text-muted'
-            = model_class.human_name.titleize
-          - events.each_key do |action|
-            - preference = "#{action}_#{model_class}"
-            td.text-center
-              - if can?(action.to_sym, model_class)
-                .form-check.form-switch
-                  = check_box 'preferences', preference, { class: 'form-check-input', checked: preferences(preference, true) }, 'true', 'false'
-                  = label_tag preference, '', class: 'form-check-label', for: "preferences_#{preference}"
+          th
+          - events.each_value do |action|
+            th.text-primary = action
+      tbody
+        - entities.each do |entity|
+          - model_class = entity.model_class
+          tr
+            td
+              = fa_icon entity.icon, class: 'fa-fw me-2 text-muted'
+              = model_class.human_name.titleize
+            - events.each_key do |action|
+              - preference = "#{action}_#{model_class}"
+              td
+                - if can?(action.to_sym, model_class)
+                  .form-check.form-switch
+                    = check_box 'preferences', preference, { class: 'form-check-input', checked: preferences(preference, true) }, 'true', 'false'
+                    = label_tag preference, '', class: 'form-check-label', for: "preferences_#{preference}"
   .m-3
     = render Schematics::Button::Confirm::Component.new
     = render Schematics::Button::Cancel::Component.new(path: root_path)
