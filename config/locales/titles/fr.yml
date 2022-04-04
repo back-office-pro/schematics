@@ -1,9 +1,14 @@
 ---
 fr:
   titles:
+    comparisons:
+      show: Comparaison
+    imports:
+      create: Importer des %{parent_human_name_plural}
+      index: Liste des %{human_name_plural}
+      new: Importer des %{parent_human_name_plural}
+      show: "%{resource}"
     schematics:
-      comparisons:
-        show: Comparaison
       dashboard:
         admin: Administration
         home: Tableau de bord
@@ -11,26 +16,22 @@ fr:
         internal_server_error: Quelque chose s'est mal passé
         not_found: Page non trouvée
         schema_error: Erreur schéma
-      imports:
-        index: Liste des %{human_name_plural}
-        new: Importer des %{parent_human_name_plural}
-        show: "%{resource}"
       password_resets:
         edit: Nouveau mot de passe
         new: Mot de passe oublié
       preferences:
         edit: Préférences de notification
       resources:
+        create: Ajouter @{f:une nouvelle|m:un nouveau|fv:une nouvelle|mv:un nouvel} %{human_name}
         delete: Supprimer %{resource}
         duplicate: Dupliquer %{resource}
         edit: Editer %{resource}
         index: Liste des %{human_name_plural}
         new: Ajouter @{f:une nouvelle|m:un nouveau|fv:une nouvelle|mv:un nouvel} %{human_name}
         show: "%{resource}"
+        update: Editer %{resource}
       schema:
         edit: Editer mon application
-      searches:
-        show: Recherche "%{resource}"
       sessions:
         edit: Editer mon profil
         new: Se connecter
@@ -39,3 +40,5 @@ fr:
       versions:
         index: Historique
         show: Historique
+    searches:
+      show: Recherche "%{resource}"

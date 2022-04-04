@@ -23,14 +23,8 @@ module Schematics
     helper_method :entity, :model_class
 
     class << self
-      alias original_controller_path controller_path
-
       def model_class
-        original_controller_path.classify.constantize
-      end
-
-      def controller_path
-        'schematics/resources'
+        controller_path.classify.constantize
       end
     end
 

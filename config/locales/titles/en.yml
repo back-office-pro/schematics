@@ -1,9 +1,14 @@
 ---
 en:
   titles:
+    comparisons:
+      show: Comparison
+    imports:
+      create: Import %{parent_human_name_plural}
+      index: List of %{human_name_plural}
+      new: Import %{parent_human_name_plural}
+      show: "%{resource}"
     schematics:
-      comparisons:
-        show: Comparison
       dashboard:
         admin: Administration
         home: Dashboard
@@ -11,26 +16,22 @@ en:
         internal_server_error: Something went wrong
         not_found: Page not found
         schema_error: Schema error
-      imports:
-        index: List of %{human_name_plural}
-        new: Import %{parent_human_name_plural}
-        show: "%{resource}"
       password_resets:
         edit: New password
         new: Password reset
       preferences:
         edit: Notification preferences
       resources:
+        create: Add a new %{human_name}
         delete: Delete %{resource}
         duplicate: Duplicate %{resource}
         edit: Edit %{resource}
         index: List of %{human_name_plural}
         new: Add a new %{human_name}
         show: "%{resource}"
+        update: Edit %{resource}
       schema:
         edit: Edit my application
-      searches:
-        show: Search "%{resource}"
       sessions:
         edit: Edit my profile
         new: Login
@@ -39,3 +40,5 @@ en:
       versions:
         index: Timeline
         show: Timeline
+    searches:
+      show: Search "%{resource}"

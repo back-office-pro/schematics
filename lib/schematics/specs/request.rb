@@ -353,7 +353,7 @@ module Schematics
       end
 
       class_methods do
-        delegate :model_class, :original_controller_path, to: :controller_class
+        delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
         delegate :fillable_elements, :fillable_attributes, :can?, :events, to: :entity
 
@@ -380,7 +380,7 @@ module Schematics
 
         def path(record: nil, action: nil)
           [
-            "/#{original_controller_path}",
+            "/#{controller_path}",
             (record&.reload&.slug || record&.id unless entity.is_a?(Entities::Singleton)),
             action
           ].compact.join('/')

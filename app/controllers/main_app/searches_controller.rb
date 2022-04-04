@@ -8,12 +8,6 @@ module MainApp
       after_action -> { flash.clear }
     end
 
-    class_methods do
-      def controller_path
-        File.join('schematics', controller_name)
-      end
-    end
-
     def show # rubocop:disable Metrics/CyclomaticComplexity
       searches = Schematics::Schema.instance.entities.reject(&:hidden?).map do |entity|
         entity.model_class.search(

@@ -13,12 +13,6 @@ module Schematics
                allow_nil: true
     end
 
-    class_methods do
-      def controller_path
-        File.join('schematics', controller_name)
-      end
-    end
-
     def view_assigns
       super.merge(parent_human_name_plural:)
     end

@@ -12,7 +12,7 @@ module Schematics
       def inherited(subclass) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         super
         subclass.class_eval do
-          route_base original_controller_path
+          route_base controller_path
 
           entity = model_class.entity
 

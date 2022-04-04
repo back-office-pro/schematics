@@ -27,6 +27,12 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
     end
 
+    def title(path: controller_path)
+      scope = [:titles, path.tr('/', '.')]
+      context = controller.view_assigns.symbolize_keys
+      t(action_name, scope:, **context) rescue title(path: 'schematics/resources')
+    end
+
     # :reek:UnusedParameters
     def fa_icon(icon, class: nil, size: nil, animation: nil, **kwargs)
       tag.i(

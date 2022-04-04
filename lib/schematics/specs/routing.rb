@@ -105,10 +105,10 @@ module Schematics
       end
 
       class_methods do
-        delegate :model_class, :original_controller_path, to: :controller_class
+        delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
         delegate :can?, :events, to: :entity
-        alias_method :controller, :original_controller_path
+        alias_method :controller, :controller_path
 
         def controller_class
           description.constantize
