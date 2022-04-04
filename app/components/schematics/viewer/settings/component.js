@@ -1,6 +1,8 @@
-/* global Stimulus, fetchAPI, Routes */
+import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
 
-window.ViewerSettingsController = class extends Stimulus.Controller {
+/* global fetchAPI, Routes */
+
+export class ViewerSettingsController extends Controller {
   keepOpened (e) {
     e.stopPropagation()
   }

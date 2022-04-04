@@ -1,15 +1,9 @@
-/* global Stimulus, fetchAPI, Routes */
+import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
-window.SwitchThemeController = class extends Stimulus.Controller {
-  lightTheme () {
-    this.switchTheme('light')
-  }
+/* global fetchAPI, Routes */
 
-  darkTheme () {
-    this.switchTheme('dark')
-  }
-
-  switchTheme (theme) {
+export class SwitchThemeController extends Controller {
+  switchTheme ({ params: { theme } }) {
     const newTheme = document.querySelector(`link#${theme}`)
     const oldTheme = document.querySelector(`link#${theme === 'light' ? 'dark' : 'light'}`)
     newTheme.disabled = false

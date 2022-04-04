@@ -1,12 +1,18 @@
-/* global Stimulus, Routes, Turbolinks, fetchAPI */
+import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
-window.ComparisonController = class extends Stimulus.Controller {
+/* global Routes, Turbolinks, fetchAPI */
+
+export class ComparisonController extends Controller {
   static get targets () {
     return ['button', 'switch']
   }
 
+  static get values () {
+    return { model: String }
+  }
+
   async compare () {
-    const params = { comparison: { model: this.data.get('model'), ids: this.ids() } }
+    const params = { comparison: { model: this.modelValue, ids: this.ids() } }
     const response = await fetchAPI(Routes.comparisonsEn(), 'POST', params)
     const { pathname } = new URL(response.headers.get('Location'))
     Turbolinks.visit(pathname)

@@ -62,7 +62,7 @@ jobs:
       - name: Install standard
         run: npm install -g standard
       - name: Run standard
-        run: standard app/**/*.js app/**/*.es6
+        run: standard app/**/*.js
   rspec:
     name: Rspec
     runs-on: ubuntu-latest

@@ -23,7 +23,7 @@ module Schematics
         end
 
         def action
-          'click->generateFileInBackground#run' unless dropdown?
+          'click->generate-file-in-background#run' unless dropdown?
         end
 
         def toggle

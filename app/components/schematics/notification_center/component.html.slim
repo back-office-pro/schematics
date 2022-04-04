@@ -1,18 +1,18 @@
-li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light data-controller='notificationCenter'
+li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light data-controller='notification-center'
   a#notifications-dropdown.nav-link.dropdown-toggle {
     aria-expanded='false'
     data-bs-toggle='dropdown'
     href='#'
     role='button'
-    data-action='click->notificationCenter#readNotifications'
+    data-action='click->notification-center#readNotifications'
   }
     .position-relative
       = fa_icon :bell,
-                data: { 'notificationCenter-target': 'icon' },
+                data: { 'notification-center-target': 'icon' },
                 class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
       - unless unread_count.zero?
         .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn {
-          data-notificationCenter-target='badge'
+          data-notification-center-target='badge'
         }
           = display_unread_count
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {

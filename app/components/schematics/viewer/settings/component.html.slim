@@ -1,4 +1,4 @@
-.dropdown.position-static data-controller='viewerSettings'
+.dropdown.position-static data-controller='viewer-settings'
   button#settings-dropdown.btn.btn-sm.dropdown-toggle {
     aria-expanded='false'
     data-bs-toggle='dropdown'
@@ -7,7 +7,7 @@
     = fa_icon :ellipsis_v
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-start.animate__animated.animate__zoomIn.p-0 {
     aria-labelledby='settings-dropdown'
-    data-action='click->viewerSettings#keepOpened'
+    data-action='click->viewer-settings#keepOpened'
   }
     h5.dropdown-header.fw-bold
       = t('.title')
@@ -15,7 +15,7 @@
       = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
     - listable_elements.stable_sort_by(&:weight).each do |field|
       .dropdown-item
-        .form-check.form-switch.mb-0 data-action='input->viewerSettings#toggleColumn'
+        .form-check.form-switch.mb-0 data-action='input->viewer-settings#toggleColumn'
           - preference = "col_#{@entity.table_name}_#{field.name}"
           = check_box 'preferences', preference, { class: 'form-check-input', id: preference, checked: preferences(preference, true) }, '', ''
           = label_tag preference, model_class.human_attribute_name(field.name), class: 'form-check-label float-start', for: preference

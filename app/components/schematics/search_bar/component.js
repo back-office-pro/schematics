@@ -1,8 +1,14 @@
-/* global Stimulus, fetchAPI, Turbolinks, I18n, Routes */
+import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
-window.SearchBarController = class extends Stimulus.Controller {
+/* global fetchAPI, Turbolinks, I18n, Routes */
+
+export class SearchBarController extends Controller {
   static get targets () {
     return ['input', 'history', 'results']
+  }
+
+  static get values () {
+    return { highlight: { type: Boolean, default: true } }
   }
 
   onFocus () {
@@ -15,13 +21,13 @@ window.SearchBarController = class extends Stimulus.Controller {
     }
   }
 
-  selectItem (event) {
-    Turbolinks.visit(event.currentTarget.dataset.url)
+  selectItem ({ params: { url } }) {
+    Turbolinks.visit(url)
   }
 
   suggestionTemplate ({ data, descriptor, icon, url }) {
     return `
-      <li class="list-group-item list-group-item-action p-2 border-0 text-start text-truncate" data-action="mousedown->searchBar#selectItem" data-url="${url}" role="button">
+      <li class="list-group-item list-group-item-action p-2 border-0 text-start text-truncate" data-action="mousedown->search-bar#selectItem" data-search-bar-url-param="${url}" role="button">
         <i class="fa fa-${icon} text-secondary fa-fw me-2"></i>
         ${this.highlight(data[descriptor], this.inputTarget.value)}
       </li>
@@ -47,7 +53,7 @@ window.SearchBarController = class extends Stimulus.Controller {
   }
 
   highlight (source, mark) {
-    if (this.data.get('highlight') === 'true') {
+    if (this.highlightValue) {
       return source.replace(new RegExp(`(${mark})`, 'i'), '<mark>$1</mark>')
     } else {
       return source

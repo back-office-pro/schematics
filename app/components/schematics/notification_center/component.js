@@ -1,6 +1,8 @@
-/* global Stimulus, fetchAPI, Routes */
+import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
-window.NotificationCenterController = class extends Stimulus.Controller {
+/* global fetchAPI, Routes */
+
+export class NotificationCenterController extends Controller {
   static get targets () {
     return ['badge', 'icon']
   }

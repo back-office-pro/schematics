@@ -1,10 +1,15 @@
-//= require file-saver/dist/FileSaver
+import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
+import { saveAs } from '../../file-saver-es/src/FileSaver'
 
-/* global Stimulus, fetchAPI, Blob, saveAs */
+/* global fetchAPI, Blob */
 
-window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
+export class GenerateFileInBackgroundController extends Controller {
   static get targets () {
     return ['button', 'loading']
+  }
+
+  static get values () {
+    return { contentType: String }
   }
 
   toggleButton (loadingText) {
@@ -14,12 +19,10 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
     this.buttonTarget.querySelectorAll('.text').forEach(_ => _.classList.toggle('d-lg-inline'))
   }
 
-  async run (event) {
-    event.preventDefault()
+  async run ({ params: { allPages } }) {
     let timer = 0
     const loadingText = this.loadingTarget.textContent
     this.toggleButton(loadingText)
-    const { allPages } = event.target.dataset
     const response = await fetchAPI(this.buildUrl(allPages))
     const fingerprint = await response.text()
     const throttleWait = 10
@@ -30,7 +33,7 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
         if (data.byteLength) {
           clearInterval(interval)
           const filename = res.headers.get('Content-Disposition').match(/filename="(.*)";/)[1]
-          const blob = new Blob([data], { type: `${this.data.get('contentType')};charset=utf-8` })
+          const blob = new Blob([data], { type: `${this.contentTypeValue};charset=utf-8` })
           saveAs(blob, filename)
           return this.toggleButton(loadingText)
         }
@@ -52,6 +55,6 @@ window.GenerateFileInBackgroundController = class extends Stimulus.Controller {
   }
 
   get extension () {
-    return this.data.get('contentType').split('/')[1]
+    return this.contentTypeValue.split('/')[1]
   }
 }

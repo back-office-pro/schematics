@@ -5,12 +5,12 @@ module Schematics
     class Component < ApplicationComponent
       def action
         %w[
-          keyup->searchBar#search
-          search->searchBar#clearResults
-          search->searchBar#showHistory
-          focus->searchBar#onFocus
-          blur->searchBar#hideHistory
-          blur->searchBar#hideResults
+          keyup->search-bar#search
+          search->search-bar#clearResults
+          search->search-bar#showHistory
+          focus->search-bar#onFocus
+          blur->search-bar#hideHistory
+          blur->search-bar#hideResults
         ].join(' ')
       end
 
