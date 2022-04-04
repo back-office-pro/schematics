@@ -4,6 +4,6 @@
 
 document.addEventListener('turbolinks:load', function () {
   document
-    .querySelectorAll('tbody')
+    .querySelectorAll('tbody.sortable')
     .forEach(Sortable.create)
 })
