@@ -24,7 +24,6 @@ describe Schematics::Attributes::Country do
   its(:column_name) { is_expected.to eq('country') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:earth_europe) }
-  its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('FR') }
   its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, allow_blank: true) }
   its(:weight) { is_expected.to eq(1) }

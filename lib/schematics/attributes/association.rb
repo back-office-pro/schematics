@@ -84,10 +84,6 @@ module Schematics
         inverse_entity&.icon || :link
       end
 
-      def input_type
-        :select
-      end
-
       # :reek:FeatureEnvy
       def input_collection
         model_class

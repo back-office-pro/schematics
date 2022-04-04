@@ -26,10 +26,6 @@ module Schematics
         :font
       end
 
-      def input_type
-        :textarea
-      end
-
       def format(value)
         value&.to_s
       end

@@ -50,10 +50,6 @@ module Schematics
         :calendar_days
       end
 
-      def input_type
-        :date
-      end
-
       protected
 
       def migration_options

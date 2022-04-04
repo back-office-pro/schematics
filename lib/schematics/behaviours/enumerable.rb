@@ -9,10 +9,6 @@ module Schematics
         super.merge({ inclusion: { in: values }, allow_blank: }.compact_blank)
       end
 
-      def input_type
-        :select
-      end
-
       def input_collection
         values
           .map { [_1, format(_1)] }

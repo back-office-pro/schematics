@@ -24,7 +24,6 @@ describe Schematics::Attributes::Model do
   its(:column_name) { is_expected.to eq('model') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:project_diagram) }
-  its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('Permission') }
   its(:validators) { is_expected.to eq(inclusion: { in: ['Permission'] }, allow_blank: true) }
   its(:weight) { is_expected.to eq(1) }

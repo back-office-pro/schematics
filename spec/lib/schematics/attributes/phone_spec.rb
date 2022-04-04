@@ -19,7 +19,6 @@ describe Schematics::Attributes::Phone do
   its(:column_name) { is_expected.to eq('phone') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:phone) }
-  its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to match(/\d+/) }
   its(:validators) { is_expected.to eq(phone: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
