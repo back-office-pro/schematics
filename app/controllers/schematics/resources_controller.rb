@@ -133,7 +133,7 @@ module Schematics
           format.html do
             redirect_to polymorphic_path(@resource), notice: tscope(result.message)
           end
-          format.json { respond_with_bip(@resource) }
+          format.json
         end
       else
         respond_to do |format|
