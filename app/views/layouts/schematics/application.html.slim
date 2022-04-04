@@ -17,6 +17,7 @@ html lang=::I18n.locale dir='ltr'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Schematics::Engine.credentials.gcloud[:api_key]}&libraries=places"
     = javascript_include_tag 'schematics/timeago', type: 'module', crossorigin: 'anonymous', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'schematics/resizable_table_columns', type: 'module', crossorigin: 'anonymous', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/stimulus', type: 'module', crossorigin: 'anonymous', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbolinks-track': 'reload'
     css [nonce=content_security_policy_nonce]:

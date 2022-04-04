@@ -1,6 +1,7 @@
 //= require js-routes
 //= require_tree .
 //= stub ./timeago
+//= stub ./resizable_table_columns
 //= stub ./stimulus
 
 /* global Turbolinks */
