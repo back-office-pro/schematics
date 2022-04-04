@@ -14,12 +14,12 @@
   .accordion-collapse.collapse class=collapse_css_class id=id
     .accordion-body.p-0
       .table-responsive
-        table.table.mb-0.table-striped.table-hover.table-borderless
+        table.table.mb-0.table-striped.table-hover.table-borderless.resizable
           thead.border-bottom.border-light
             tr
               th.text-nowrap.text-center.align-middle
               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-                th.text-nowrap.text-center.align-middle class=col_preference_class(field)
+                th.text-nowrap.text-center.align-middle class=col_preference_class(field) data-rtc-resizable=field.name
                   = fa_icon field.icon, class: 'me-2 text-secondary'
                   = model_class.human_attribute_name(field.name)
           tbody.border-0
