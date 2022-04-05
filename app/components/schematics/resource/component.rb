@@ -16,7 +16,19 @@ module Schematics
       end
 
       def editable?
-        @editable && can?(:update, @resource) && !@field.try(:readonly?)
+        @editable &&
+          can?(:update, @resource) &&
+          !@field.try(:readonly?) &&
+          @field.is_a?(Behaviours::Fillable)
+      end
+
+      def data
+        return unless editable?
+
+        {
+          'content-editable-target': 'resource',
+          action: 'click->content-editable#toggle'
+        }
       end
     end
   end
