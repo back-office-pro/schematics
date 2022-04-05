@@ -1,3 +1,3 @@
-= link_to @path, data:, class: 'btn btn-danger btn-sm btn-icon-split' do
+= link_to @path, data: @data, class: css_classes do
   span.icon = fa_icon :xmark
-  span.text = t('schematics.application.button.cancel')
+  span.text = t('schematics.application.button.cancel') unless compact?
