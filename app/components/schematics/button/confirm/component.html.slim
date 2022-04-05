@@ -1,5 +1,5 @@
-= button_tag class: 'btn btn-primary btn-sm btn-icon-split me-2', data: { 'form-target': 'submitButton' } do
+= button_tag class: css_classes, data: { 'form-target': 'submitButton' } do
   span.icon = fa_icon :check
   span.icon.d-none = fa_icon :spinner, animation: 'spin'
-  span.text = t('schematics.application.button.confirm')
-  span.text.d-none = t('schematics.application.button.loading')
+  span.text = t('schematics.application.button.confirm') unless compact?
+  span.text.d-none = t('schematics.application.button.loading') unless compact?
