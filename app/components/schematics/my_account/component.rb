@@ -3,7 +3,6 @@
 module Schematics
   module MyAccount
     class Component < ApplicationComponent
-      delegate :can?, to: :current_ability
       delegate :logout_path,
                :profile_path,
                :admin_path,

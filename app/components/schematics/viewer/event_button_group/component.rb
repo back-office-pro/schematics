@@ -4,7 +4,6 @@ module Schematics
   module Viewer
     module EventButtonGroup
       class Component < ApplicationComponent
-        delegate :can?, to: :current_ability
         delegate :entity, to: '@resource.class', private: true
 
         def initialize(resource:, compact: true)
