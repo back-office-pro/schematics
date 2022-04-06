@@ -15,7 +15,7 @@ module Schematics
       end
 
       def call
-        fail! unless authenticate(@password)
+        fail! unless authenticate(@password) # TODO: use authenticate_by when upgrading to Rails 7
 
         context.token = auth_token
         context.jwt = ::JsonWebToken.encode(auth_token:)
