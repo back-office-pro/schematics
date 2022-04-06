@@ -9,8 +9,10 @@ Rails.configuration.after_initialize do
     refresh: 60,
     # rubocop:disable Style/FormatStringToken
     html: <<~HTML,
-      <div id="%{id}" class="chart text-light text-center" style="height: %{height}; width: %{width}; line-height: %{height};">
-        <i class="fas fa-spinner fa-spin fa-6x"></i>
+      <div id='%{id}' class='chart' style='height: %{height}; width: %{width};'>
+        <p class='card-text placeholder-glow'>
+          #{"<span class='placeholder col-12 bg-light'></span>" * 16}
+        </p>
       </div>
     HTML
     # rubocop:enable Style/FormatStringToken
