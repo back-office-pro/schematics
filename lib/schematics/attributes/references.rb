@@ -3,7 +3,7 @@
 module Schematics
   module Attributes
     class References < Association
-      # by convention, this attribute will always be set to current_user
+      # by convention, this attribute will always be set to current user
       def initialize(entity, name, options)
         super entity, name, options.merge(type: 'user')
       end
