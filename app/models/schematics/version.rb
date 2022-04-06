@@ -20,18 +20,14 @@ module Schematics
         SQL
       )
     }
-
-    class << self
-      # :reek:ControlParameter
-      def timeline(ability:, versions: nil)
-        (versions || self)
-          .with_user
-          .with_item
-          .yield_self { versions ? _1 : _1.accessible_by(ability) }
-          .yield_self { versions ? _1 : _1.filter_by_user_preferences }
-          .reorder(created_at: :desc)
-      end
-    end
+    scope :timeline, lambda { |ability, versions = nil|
+      (versions || self)
+        .with_user
+        .with_item
+        .yield_self { versions ? _1 : _1.accessible_by(ability) }
+        .yield_self { versions ? _1 : _1.filter_by_user_preferences }
+        .reorder(created_at: :desc)
+    }
 
     def model_class
       item_type.safe_constantize

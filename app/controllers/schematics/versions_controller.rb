@@ -6,7 +6,7 @@ module Schematics
     delegate :human_name, :gender, to: :model_class, private: true
 
     def index
-      @pagy, @versions = pagy(model_class.timeline(ability: current_ability))
+      @pagy, @versions = pagy(model_class.timeline(current_ability))
       respond_to do |format|
         format.html
         format.json { render json: @versions }

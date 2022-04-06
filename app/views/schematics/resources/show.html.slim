@@ -1,5 +1,5 @@
 - breadcrumb title, polymorphic_path(@resource)
-- versions = Schematics::Version.timeline(versions: @resource.versions.includes(item: entity.includes), ability: current_ability)
+- versions = Schematics::Version.timeline(current_ability, @resource.versions.includes(item: entity.includes))
 .card.shadow-sm.border-0
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     .row.align-items-center

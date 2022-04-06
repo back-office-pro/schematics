@@ -8,14 +8,14 @@ module Schematics
 
       def versions
         @versions ||= Version
-                      .timeline(ability: current_ability)
+                      .timeline(current_ability)
                       .limit(10)
       end
 
       def unread_count
         @unread_count ||= Version
                           .where(created_at: read_notifications_at...)
-                          .timeline(ability: current_ability)
+                          .timeline(current_ability)
                           .size
       end
 
