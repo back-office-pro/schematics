@@ -77,6 +77,9 @@ module Schematics
     # Action Controller
     config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
 
+    # Action Dispatch
+    config.action_dispatch.signed_cookie_digest = 'SHA256'
+
     # Active Record
     config.active_record.strict_loading_by_default = true
     config.active_record.action_on_strict_loading_violation = :log # unless Rails.env.development?
