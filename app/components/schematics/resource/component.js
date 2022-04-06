@@ -36,7 +36,7 @@ export default class extends ApplicationController {
 
   blink () {
     this.resourceTarget.classList.remove('animate__flash')
-    void this.resourceTarget.offsetWidth
+    void this.resourceTarget.offsetWidth // eslint-disable-line no-void
     this.resourceTarget.classList.add('animate__flash')
   }
 
