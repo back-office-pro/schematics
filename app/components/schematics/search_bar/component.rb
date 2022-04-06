@@ -3,6 +3,8 @@
 module Schematics
   module SearchBar
     class Component < ApplicationComponent
+      delegate :search_history, to: :current_user
+
       def action
         %w[
           keyup->search-bar#search
@@ -12,10 +14,6 @@ module Schematics
           blur->search-bar#hideHistory
           blur->search-bar#hideResults
         ].join(' ')
-      end
-
-      def history
-        ::Search.user_search_history(current_user)
       end
     end
   end

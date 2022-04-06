@@ -17,7 +17,7 @@ module Schematics
         end
 
         def history
-          ::Search.user_typeahead_history(current_user, @model_class.to_s, name)
+          current_user.typeahead_history(@model_class.to_s, name)
         end
       end
     end

@@ -14,7 +14,7 @@
     ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.top-100.w-100.d-none {
       data-search-bar-target='history'
     }
-      - history.each do |query|
+      - search_history.each do |query|
         li.list-group-item.list-group-item-action.p-2.border-0.text-start.text-truncate {
           data-action='mousedown->search-bar#selectItem'
           data-url=search_path(query)
