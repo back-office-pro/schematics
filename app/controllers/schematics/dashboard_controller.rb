@@ -11,6 +11,7 @@ module Schematics
 
     def admin
       authorize! :read, :admin_dashboard
+      @licence = ::Licence.instance
     end
 
     def read_notifications
