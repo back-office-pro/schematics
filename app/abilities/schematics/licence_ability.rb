@@ -2,11 +2,17 @@
 
 module Schematics
   class LicenceAbility < ApplicationAbility
-    def initialize(licence)
+    def initialize
       super
       cannot :create, ::User if licence.quota_users_exceeded?
       cannot :create, ::ActiveStorage::Attachment if licence.quota_storage_exceeded?
       cannot :manage, :all if licence.expired?
+    end
+
+    private
+
+    def licence
+      @licence ||= ::Licence.instance
     end
   end
 end

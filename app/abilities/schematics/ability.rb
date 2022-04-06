@@ -12,14 +12,10 @@ module Schematics
       merge UserAbility.new(user)
       merge MessageAbility.new(user)
       merge SettingAbility.new(user)
-      merge LicenceAbility.new(licence)
+      merge LicenceAbility.new
       merge ComparisonAbility.new
       merge SearchAbility.new
       merge RoleAbility.new
-    end
-
-    def licence
-      @licence ||= ::Licence.instance
     end
   end
 end

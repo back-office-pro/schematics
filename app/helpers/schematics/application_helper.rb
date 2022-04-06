@@ -3,7 +3,6 @@
 module Schematics
   module ApplicationHelper
     include Pagy::Frontend
-    delegate :licence, to: :current_ability
 
     def settings(key)
       Rails.cache.fetch("settings/#{key}") do
