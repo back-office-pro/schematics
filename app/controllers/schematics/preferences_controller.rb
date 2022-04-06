@@ -58,7 +58,7 @@ module Schematics
         .reject(&:hidden?)
         .flat_map do |entity|
           Version::EVENTS
-            .select { |action| current_ability.can?(action.to_sym, entity.model_class) }
+            .select { |action| can?(action.to_sym, entity.model_class) }
             .map { |action| [action, entity.class_name].join('_') }
         end
     end
