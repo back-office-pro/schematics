@@ -16,7 +16,7 @@
     - history.each do |query|
       li.list-group-item.list-group-item-action.p-2.border-0.text-start.text-truncate {
         data-action='mousedown->typeahead#selectItem'
-        data-value=query
+        data-typeahead-value-param=query
         role='button'
       }
         = fa_icon :history, class: 'text-secondary fa-fw me-2'
