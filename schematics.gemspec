@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_link_to', '~> 1.0.5'
   spec.add_dependency 'active_model_serializers', '~> 0.10.13'
   spec.add_dependency 'active_record_doctor', '~> 1.9.0'
-  spec.add_dependency 'active_storage_base64', '~> 1.2.0'
+  spec.add_dependency 'active_storage_base64', '>= 1.2', '< 2.1'
   spec.add_dependency 'active_storage_validations', '~> 0.9.7'
   spec.add_dependency 'annotate', '~> 3.2.0'
   spec.add_dependency 'bcrypt', '~> 3.1.16'
