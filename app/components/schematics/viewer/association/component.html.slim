@@ -25,7 +25,7 @@
           tbody.border-0
             - @resources.each do |resource|
               tr data-href=polymorphic_path(resource)
-                td.text-nowrap.text-center
+                td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
                   .btn-group
                     = render Schematics::Button::Edit::Component.new(resource:)
                     = render Schematics::Button::Archive::Component.new(resource:)
