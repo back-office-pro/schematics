@@ -7,6 +7,7 @@ import { TypeaheadController } from '../filter/typeahead/component'
 import { GenerateFileInBackgroundController } from '../button/generate_file_in_background/component'
 import { ViewerSettingsController } from '../viewer/settings/component'
 import { ComparisonController } from '../viewer/component'
+import { DropdownController } from '../resource_form/component'
 
 const application = Application.start()
 
@@ -18,3 +19,4 @@ application.register('typeahead', TypeaheadController)
 application.register('generate-file-in-background', GenerateFileInBackgroundController)
 application.register('viewer-settings', ViewerSettingsController)
 application.register('comparison', ComparisonController)
+application.register('dropdown', DropdownController)

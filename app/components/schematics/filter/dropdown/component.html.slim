@@ -2,5 +2,6 @@
   = select_tag filter_name,
                options_for_select(collection, value),
                prompt: t('.prompt', attribute_name:),
+               data: { controller: 'dropdown' },
                onchange:,
                class: css_classes

@@ -1,4 +1,5 @@
 //= require js-routes
+//= require slim-select/dist/slimselect
 //= require_tree .
 //= stub ./timeago
 //= stub ./resizable_table_columns
