@@ -1,5 +1,5 @@
 .table-responsive data-controller='comparison' data-comparison-model-value=model_class
-  table.table.table-borderless.mb-0.resizable class=table_css_classes
+  table.table.table-borderless.mb-0 data-controller='resizable-table' class=table_css_classes
     = render Schematics::Filter::Component.new(model_class:)
     tbody class=tbody_css_classes
       - if @resources.empty?
