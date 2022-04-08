@@ -2,11 +2,13 @@ document.addEventListener('turbolinks:load', function () {
   document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function () {
       const submitButton = this.querySelector('button[type="submit"]')
-      submitButton.disabled = true
-      submitButton.querySelectorAll('.icon').forEach(_ => _.classList.toggle('d-none'))
-      submitButton.querySelectorAll('.text').forEach(_ => {
-        _.classList.toggle(_.classList.contains('d-lg-inline') ? 'd-lg-inline' : 'd-none')
-      })
+      if (submitButton != null) {
+        submitButton.disabled = true
+        submitButton.querySelectorAll('.icon').forEach(_ => _.classList.toggle('d-none'))
+        submitButton.querySelectorAll('.text').forEach(_ => {
+          _.classList.toggle(_.classList.contains('d-lg-inline') ? 'd-lg-inline' : 'd-none')
+        })
+      }
     })
   })
   document.querySelectorAll('input[type="password"] + .input-group-text').forEach(input => {
