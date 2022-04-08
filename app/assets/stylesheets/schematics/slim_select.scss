@@ -1,6 +1,7 @@
 @import 'slim-select/dist/slimselect';
 
 .ss-main {
+  z-index: 1000 !important;
   padding: 0 !important;
 
   .ss-multi-selected .ss-value {
