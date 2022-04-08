@@ -6,4 +6,4 @@
     .text-muted
       span = @message.author.full_name
       span.mx-1 -
-      span.timeago datetime=@message.created_at
+      span data-controller='timeago' datetime=@message.created_at

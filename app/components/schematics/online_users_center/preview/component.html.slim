@@ -3,4 +3,4 @@
     = render Schematics::Attachment::Component.avatar(user: @user)
   .col.text-truncate
     = @user.full_name
-    .text-muted.timeago datetime=@user.last_seen_at
+    .text-muted data-controller='timeago' datetime=@user.last_seen_at
