@@ -8,6 +8,9 @@ import { GenerateFileInBackgroundController } from '../button/generate_file_in_b
 import { ViewerSettingsController } from '../viewer/settings/component'
 import { ComparisonController } from '../viewer/component'
 import { DropdownController } from '../resource_form/component'
+import TimeagoController from './controllers/timeago_controller'
+import ResizableTableController from './controllers/resizable_table_controller'
+import SortableController from './controllers/sortable_controller'
 
 const application = Application.start()
 
@@ -20,3 +23,6 @@ application.register('generate-file-in-background', GenerateFileInBackgroundCont
 application.register('viewer-settings', ViewerSettingsController)
 application.register('comparison', ComparisonController)
 application.register('dropdown', DropdownController)
+application.register('timeago', TimeagoController)
+application.register('resizable-table', ResizableTableController)
+application.register('sortable', SortableController)

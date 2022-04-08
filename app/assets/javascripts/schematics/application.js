@@ -1,9 +1,10 @@
 //= require js-routes
 //= require slim-select/dist/slimselect
 //= require_tree .
-//= stub ./timeago
-//= stub ./resizable_table_columns
-//= stub ./stimulus
+//= stub ./controllers/resizable_table_controller
+//= stub ./controllers/sortable_controller
+//= stub ./controllers/timeago_controller
+//= stub ./controllers
 
 /* global Turbolinks */
 
