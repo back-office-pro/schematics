@@ -1,5 +1,5 @@
 document.addEventListener('turbolinks:request-start', function (event) {
-  const nonce = document.querySelector('meta[name="csp-nonce"]').content
+  const nonce = document.querySelector('meta[name="csp-nonce"]')?.content
   event.data.xhr.setRequestHeader('X-Turbolinks-Nonce', nonce)
 })
 
