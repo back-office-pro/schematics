@@ -2,7 +2,7 @@ import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
 /* global fetchAPI, Routes */
 
-export class NotificationCenterController extends Controller {
+export default class extends Controller {
   static get targets () {
     return ['badge', 'icon']
   }

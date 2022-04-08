@@ -3,7 +3,7 @@ import { saveAs } from '../../file-saver-es/src/FileSaver'
 
 /* global fetchAPI, Blob */
 
-export class GenerateFileInBackgroundController extends Controller {
+export default class extends Controller {
   static get targets () {
     return ['button', 'loading']
   }

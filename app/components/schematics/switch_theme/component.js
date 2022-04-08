@@ -2,7 +2,7 @@ import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
 /* global fetchAPI, Routes */
 
-export class SwitchThemeController extends Controller {
+export default class extends Controller {
   switchTheme ({ params: { theme } }) {
     const newTheme = document.querySelector(`link#${theme}`)
     const oldTheme = document.querySelector(`link#${theme === 'light' ? 'dark' : 'light'}`)

@@ -1,8 +1,8 @@
-import { SearchBarController } from '../../search_bar/component'
+import SearchBarController from '../../search_bar/component'
 
 /* global Turbolinks */
 
-export class TypeaheadController extends SearchBarController {
+export default class extends SearchBarController {
   connect () {
     this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmit)
   }

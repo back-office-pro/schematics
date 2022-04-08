@@ -2,7 +2,7 @@ import { Controller } from '../@hotwired/stimulus/dist/stimulus'
 
 /* global fetchAPI, Turbolinks, I18n, Routes */
 
-export class SearchBarController extends Controller {
+export default class extends Controller {
   static get targets () {
     return ['input', 'history', 'results']
   }
