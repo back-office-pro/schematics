@@ -17,10 +17,13 @@ fr:
         not_found: Page non trouvée
         schema_error: Erreur schéma
       password_resets:
+        create: Mot de passe oublié
         edit: Nouveau mot de passe
         new: Mot de passe oublié
+        update: Nouveau mot de passe
       preferences:
         edit: Préférences de notification
+        update: Préférences de notification
       resources:
         create: Ajouter @{f:une nouvelle|m:un nouveau|fv:une nouvelle|mv:un nouvel} %{human_name}
         delete: Supprimer %{resource}
@@ -33,8 +36,10 @@ fr:
       schema:
         edit: Editer mon application
       sessions:
+        create: Se connecter
         edit: Editer mon profil
         new: Se connecter
+        update: Editer mon profil
       swagger:
         index: Documentation API
       versions:

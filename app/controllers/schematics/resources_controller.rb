@@ -230,6 +230,10 @@ module Schematics
       super.merge(human_name_plural:, human_name:, gender:)
     end
 
+    def title_path
+      'schematics.resources'
+    end
+
     protected
 
     def set_resource

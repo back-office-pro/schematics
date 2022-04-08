@@ -3,6 +3,7 @@
 module Schematics
   class ApplicationController < ::ApplicationController
     include Pagy::Backend
+    include Entitleable
     include Localizable
     include Trackable
     include Rescuable

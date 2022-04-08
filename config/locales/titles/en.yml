@@ -17,10 +17,13 @@ en:
         not_found: Page not found
         schema_error: Schema error
       password_resets:
+        create: Password reset
         edit: New password
         new: Password reset
+        update: New password
       preferences:
         edit: Notification preferences
+        update: Notification preferences
       resources:
         create: Add a new %{human_name}
         delete: Delete %{resource}
@@ -33,8 +36,10 @@ en:
       schema:
         edit: Edit my application
       sessions:
+        create: Login
         edit: Edit my profile
         new: Login
+        update: Edit my profile
       swagger:
         index: API documentation
       versions:
