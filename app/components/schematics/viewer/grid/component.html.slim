@@ -29,7 +29,7 @@
                                     span.carousel-control-prev-icon aria-hidden='true'
                                   a.carousel-control-next data-slide='next' href='#carousel' role='button'
                                     span.carousel-control-next-icon aria-hidden='true'
-                            tbody.sortable
+                            tbody data-controller='sortable'
                               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                                 tr.animate__slideInRight class=col_preference_class(field)
                                   th.text-nowrap

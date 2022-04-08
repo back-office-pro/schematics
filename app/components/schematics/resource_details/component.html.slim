@@ -1,6 +1,6 @@
 .table-responsive
   table.table.mb-0.table-striped.table-borderless
-    tbody.sortable
+    tbody data-controller='sortable'
       - elements.stable_sort_by(&:weight).each do |element|
         tr
           th
