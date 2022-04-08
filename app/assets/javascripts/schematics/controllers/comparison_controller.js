@@ -1,8 +1,8 @@
-import { Controller } from '../@hotwired/stimulus/dist/stimulus'
+import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
 
 /* global Routes, Turbolinks, fetchAPI */
 
-export class ComparisonController extends Controller {
+export default class extends Controller {
   static get targets () {
     return ['button', 'switch']
   }
