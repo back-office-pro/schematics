@@ -26,10 +26,11 @@ module Schematics
 
     def pdf
       @pdf ||= render(
+        action: :show,
+        formats: :pdf,
+        layout: 'layouts/schematics/pdf',
         locals: { resource: @resource },
-        assigns: { resource: @resource },
-        template: 'schematics/resources/show.pdf',
-        layout: 'layouts/schematics/pdf'
+        assigns: { resource: @resource }
       )
     end
 
