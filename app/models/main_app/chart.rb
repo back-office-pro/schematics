@@ -71,6 +71,18 @@ module MainApp
       entity_y_field.try(:unit)
     end
 
+    def css_id
+      "chart-#{id}"
+    end
+
+    def filename
+      to_s.parameterize
+    end
+
+    def border_width
+      (%w[line area].include?(kind) && 1) || 0
+    end
+
     def model_class
       model.safe_constantize
     end
