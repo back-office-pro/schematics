@@ -8,6 +8,7 @@
 //= stub ./controllers/resizable_table_controller
 //= stub ./controllers/sortable_controller
 //= stub ./controllers/timeago_controller
+//= stub ./controllers/toast_controller
 //= stub ./controllers
 
 /* global Turbolinks */

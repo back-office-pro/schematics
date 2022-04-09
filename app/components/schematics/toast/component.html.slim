@@ -1,5 +1,11 @@
 .fixed-top.p-3
-  .toast.border-0.shadow-sm aria-atomic='true' aria-live='assertive' role='alert' data-bs-animation="#{animated?}"
+  .toast.border-0.shadow-sm {
+    data-controller='toast'
+    aria-atomic='true'
+    aria-live='assertive'
+    role='alert'
+    data-bs-animation="#{animated?}"
+  }
     .toast-header.text-white class="bg-#{css_class}"
       span
         = fa_icon :bell

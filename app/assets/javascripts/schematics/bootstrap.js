@@ -9,7 +9,4 @@ document.addEventListener('turbolinks:load', function () {
   document
     .querySelectorAll('[data-bs-toggle="tooltip"]')
     .forEach(_ => new bootstrap.Tooltip(_))
-  document
-    .querySelectorAll('.toast')
-    .forEach(_ => new bootstrap.Toast(_).show())
 })
