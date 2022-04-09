@@ -12,11 +12,4 @@ document.addEventListener('turbolinks:load', function () {
   document
     .querySelectorAll('.toast')
     .forEach(_ => new bootstrap.Toast(_).show())
-  document
-    .querySelectorAll('.modal')
-    .forEach(element => {
-      element.addEventListener('show.bs.modal', function () {
-        document.body.appendChild(this.parentNode)
-      })
-    })
 })

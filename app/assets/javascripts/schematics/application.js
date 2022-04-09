@@ -4,6 +4,7 @@
 //= stub ./controllers/comparison_controller
 //= stub ./controllers/dropdown_controller
 //= stub ./controllers/form_controller
+//= stub ./controllers/modal_controller
 //= stub ./controllers/resizable_table_controller
 //= stub ./controllers/sortable_controller
 //= stub ./controllers/timeago_controller
