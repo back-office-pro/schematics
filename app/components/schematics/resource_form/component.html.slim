@@ -63,6 +63,10 @@
                 collection: field.input_collection.map(&:reverse),
                 prepend: fa_icon(field.icon),
                 input_html: { data: { controller: 'dropdown' } }
+    - when Schematics::Attributes::Text
+      = f.input field.name.to_sym,
+                prepend: fa_icon(field.icon),
+                input_html: { data: { controller: 'autosize' } }
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
                 maxlength: true,
