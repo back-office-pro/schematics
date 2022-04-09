@@ -1,3 +1,8 @@
+//= require @popperjs/core/dist/umd/popper
+//= require bootstrap/dist/js/bootstrap.bundle
+//= require jquery/dist/jquery
+//= require rails.validations
+//= require rails.validations.simple_form.bootstrap4
 //= require js-routes
 //= require slim-select/dist/slimselect
 //= require_tree .
@@ -9,6 +14,7 @@
 //= stub ./controllers/sortable_controller
 //= stub ./controllers/timeago_controller
 //= stub ./controllers/toast_controller
+//= stub ./controllers/tooltip_controller
 //= stub ./controllers
 
 /* global Turbolinks */

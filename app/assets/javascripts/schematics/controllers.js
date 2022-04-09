@@ -14,6 +14,7 @@ import SortableController from './controllers/sortable_controller'
 import FormController from './controllers/form_controller'
 import ModalController from './controllers/modal_controller'
 import ToastController from './controllers/toast_controller'
+import TooltipController from './controllers/tooltip_controller'
 
 const application = Application.start()
 
@@ -32,3 +33,4 @@ application.register('sortable', SortableController)
 application.register('form', FormController)
 application.register('modal', ModalController)
 application.register('toast', ToastController)
+application.register('tooltip', TooltipController)

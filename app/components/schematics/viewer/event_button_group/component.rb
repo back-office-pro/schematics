@@ -32,7 +32,7 @@ module Schematics
         def data
           return {} unless compact?
 
-          { 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
+          { controller: 'tooltip', 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
         end
 
         def compact?

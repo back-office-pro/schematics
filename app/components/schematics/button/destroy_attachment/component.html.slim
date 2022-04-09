@@ -5,6 +5,7 @@
   = render Schematics::ConfirmDialog::Component.new(target:)
 span data-bs-toggle='modal' data-bs-target="##{target}"
   button.btn.btn-danger.btn-sm.float-end {
+    data-controller='tooltip'
     data-bs-toggle='tooltip'
     data-bs-placement='left'
     title=t('schematics.application.button.destroy')
