@@ -1,8 +1,8 @@
-import { Controller } from '../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from '../schematics/controllers/application_controller'
 
-/* global fetchAPI, Routes */
+/* global Routes */
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static get targets () {
     return ['badge', 'icon']
   }
@@ -13,7 +13,7 @@ export default class extends Controller {
 
   async readNotifications () {
     if (this.hasNotifications()) {
-      await fetchAPI(Routes.schematicsDashboardReadNotifications(), 'POST')
+      await this.fetchAPI(Routes.schematicsDashboardReadNotifications(), 'POST')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
       this.iconTarget.classList.remove('animate__animated')

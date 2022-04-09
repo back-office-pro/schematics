@@ -1,8 +1,8 @@
-import { Controller } from '../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from '../schematics/controllers/application_controller'
 
-/* global fetchAPI, Turbolinks, I18n, Routes */
+/* global Turbolinks, I18n, Routes */
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static get targets () {
     return ['input', 'history', 'results']
   }
@@ -97,7 +97,7 @@ export default class extends Controller {
         this.showResults()
         this.hideHistory()
         this.resultsTarget.innerHTML = this.pendingTemplate()
-        const response = await fetchAPI(this.url)
+        const response = await this.fetchAPI(this.url)
         const results = await response.json()
         if (Object.keys(results).length === 0) {
           this.resultsTarget.innerHTML = this.notFoundTemplate()

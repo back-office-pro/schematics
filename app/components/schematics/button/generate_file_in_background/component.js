@@ -1,9 +1,9 @@
-import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from '../../schematics/controllers/application_controller'
 import { saveAs } from '../../file-saver-es/src/FileSaver'
 
-/* global fetchAPI, Blob */
+/* global Blob */
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static get targets () {
     return ['button', 'loading']
   }
@@ -23,12 +23,12 @@ export default class extends Controller {
     let timer = 0
     const loadingText = this.loadingTarget.textContent
     this.toggleButton(loadingText)
-    const response = await fetchAPI(this.buildUrl(allPages))
+    const response = await this.fetchAPI(this.buildUrl(allPages))
     const fingerprint = await response.text()
     const throttleWait = 10
     const interval = setInterval(async () => {
       if (!allPages || timer % throttleWait === 0) {
-        const res = await fetchAPI(this.buildUrl(allPages, fingerprint))
+        const res = await this.fetchAPI(this.buildUrl(allPages, fingerprint))
         const data = await res.arrayBuffer()
         if (data.byteLength) {
           clearInterval(interval)

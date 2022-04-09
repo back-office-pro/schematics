@@ -1,6 +1,6 @@
-import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from './application_controller'
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static get targets () {
     return ['submitButton', 'passwordInput']
   }

@@ -5,17 +5,12 @@
 //= require rails.validations.simple_form.bootstrap4
 //= require js-routes
 //= require slim-select/dist/slimselect
-//= require_tree .
-//= stub ./controllers/comparison_controller
-//= stub ./controllers/dropdown_controller
-//= stub ./controllers/form_controller
-//= stub ./controllers/modal_controller
-//= stub ./controllers/resizable_table_controller
-//= stub ./controllers/sortable_controller
-//= stub ./controllers/timeago_controller
-//= stub ./controllers/toast_controller
-//= stub ./controllers/tooltip_controller
-//= stub ./controllers
+//= require ./best_in_place
+//= require ./chartkick
+//= require ./fontawesome
+//= require ./pagy
+//= require ./swagger
+//= require ./turbolinks
 
 /* global Turbolinks */
 

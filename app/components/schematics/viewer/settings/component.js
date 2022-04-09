@@ -1,8 +1,8 @@
-import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from '../../schematics/controllers/application_controller'
 
-/* global fetchAPI, Routes */
+/* global Routes */
 
-export default class extends Controller {
+export default class extends ApplicationController {
   keepOpened (e) {
     e.stopPropagation()
   }
@@ -13,6 +13,6 @@ export default class extends Controller {
       element.classList.add('animate__animated')
       element.classList.toggle('d-none')
     })
-    fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { [id]: checked } })
+    this.fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { [id]: checked } })
   }
 }

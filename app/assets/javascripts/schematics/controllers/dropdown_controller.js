@@ -1,8 +1,8 @@
-import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from './application_controller'
 
 /* global SlimSelect, I18n, google */
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static get values () {
     return {
       addressAutocomplete: { type: Boolean, default: false },

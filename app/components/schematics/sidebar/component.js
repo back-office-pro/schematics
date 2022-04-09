@@ -1,13 +1,13 @@
-import { Controller } from '../@hotwired/stimulus/dist/stimulus'
+import ApplicationController from '../schematics/controllers/application_controller'
 
-/* global fetchAPI, Routes */
+/* global Routes */
 
-export default class extends Controller {
+export default class extends ApplicationController {
   toggle () {
     this.element.classList.toggle('toggled')
     this.element.querySelectorAll('.d-none').forEach(_ => _.classList.toggle('d-md-block'))
     document.querySelector('.content').classList.toggle('toggled')
     const sidebarToggled = this.element.classList.contains('toggled')
-    fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
+    this.fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
   }
 }
