@@ -71,7 +71,7 @@ module Schematics
           )
           return send_data result.data if result.failure?
 
-          send_file result.filepath, type: ::Mime[:csv].to_s, filename: result.filename
+          send_file result.filepath, type: ::Mime[:pdf].to_s, filename: result.filename
         end
       end
     end
