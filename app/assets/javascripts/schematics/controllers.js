@@ -11,6 +11,7 @@ import DropdownController from './controllers/dropdown_controller'
 import TimeagoController from './controllers/timeago_controller'
 import ResizableTableController from './controllers/resizable_table_controller'
 import SortableController from './controllers/sortable_controller'
+import FormController from './controllers/form_controller'
 
 const application = Application.start()
 
@@ -26,3 +27,4 @@ application.register('dropdown', DropdownController)
 application.register('timeago', TimeagoController)
 application.register('resizable-table', ResizableTableController)
 application.register('sortable', SortableController)
+application.register('form', FormController)

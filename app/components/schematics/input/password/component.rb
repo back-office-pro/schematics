@@ -32,8 +32,8 @@ module Schematics
           @field.try(:icon) || @icon
         end
 
-        def autocomplete?
-          @autocomplete
+        def autocomplete
+          'new-password' unless @autocomplete
         end
 
         def required?
@@ -53,9 +53,11 @@ module Schematics
         end
 
         def input_html
-          return { autocomplete: 'new-password' } unless autocomplete?
+          { autocomplete:, 'data-form-target': 'passwordInput' }.compact
+        end
 
-          {}
+        def data
+          { action: 'click->form#togglePasswordValue' }
         end
       end
     end
