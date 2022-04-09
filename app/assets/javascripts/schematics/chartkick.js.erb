@@ -4,6 +4,6 @@
 /* global Chartkick */
 
 Chartkick.configure({
-  language: document.querySelector('html').lang,
+  language: document.documentElement.lang,
   mapsApiKey: '<%= Schematics::Engine.credentials.gcloud[:api_key] %>'
 })
