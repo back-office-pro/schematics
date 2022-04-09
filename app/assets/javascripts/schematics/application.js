@@ -7,7 +7,6 @@
 //= require slim-select/dist/slimselect
 //= require ./best_in_place
 //= require ./chartkick
-//= require ./fontawesome
 //= require ./pagy
 //= require ./swagger
 //= require ./turbolinks
