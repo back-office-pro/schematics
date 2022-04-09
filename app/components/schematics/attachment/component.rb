@@ -23,8 +23,8 @@ module Schematics
       # :reek:LongParameterList
       def initialize( # rubocop:disable Metrics/ParameterLists
         attachment:,
-        width: 800,
-        height: 600,
+        width: 300,
+        height: 300,
         replacement: nil,
         css_class: nil,
         title: nil
