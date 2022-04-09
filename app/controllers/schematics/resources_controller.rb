@@ -111,7 +111,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to @resource, notice: tscope(result.message)
+            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
           end
           format.json { render json: @resource, status: :created, location: @resource }
         end
@@ -131,7 +131,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to @resource, notice: tscope(result.message)
+            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
           end
           format.json { respond_with_bip(@resource) }
         end
@@ -244,7 +244,7 @@ module Schematics
                   .finder(params[:id])
       return if request.path.start_with?(polymorphic_path(@resource))
 
-      redirect_to @resource, status: :moved_permanently
+      redirect_to polymorphic_path(@resource), status: :moved_permanently
     end
 
     def set_breadcrumb
