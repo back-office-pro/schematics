@@ -158,37 +158,6 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "515fdc03c5fd672e2be80b5464638a83a85b937533d71f3230af50d01f0ced4e",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/resources/show.html.slim",
-      "line": 16,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]), :editable => true), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "show",
-          "line": 62,
-          "file": "app/controllers/schematics/resources_controller.rb",
-          "rendered": {
-            "name": "schematics/resources/show",
-            "file": "app/views/schematics/resources/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/resources/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
       "fingerprint": "5dfeba5df9811694e3d0dc8c01e3b1b325a474fe1b11f522c1d7ed4b9544b359",
       "check_name": "Render",
       "message": "Render path contains parameter value",
@@ -320,6 +289,26 @@
       "note": "Fingerprint is not used in filename"
     },
     {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "a2b6ed9e12595aa22fc3153cf1fb42d0193072c5539587b6a2ad9ba9c6292719",
+      "check_name": "SendFile",
+      "message": "Parameter value used in file name",
+      "file": "app/controllers/schematics/resources_controller.rb",
+      "line": 74,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_class.to_s, model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).id]), :extension => \"pdf\", :slug => (\"#{human_name.dasherize}-#{model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).slug}\")).filepath, :type => ::Mime[:pdf].to_s, :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_class.to_s, model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).id]), :extension => \"pdf\", :slug => (\"#{human_name.dasherize}-#{model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).slug}\")).filename)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::ResourcesController",
+        "method": "show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": "Fingerprint is not used in filename"
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "bc28ab6f5ba26ea9cd40b4a772036208d61faef2dcacc0e61f45e8dbc702d6c1",
@@ -349,26 +338,6 @@
       "user_input": "params[:id]",
       "confidence": "Weak",
       "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "cbdaed42aa6251f0f26d116b15ba0fe2e8a0e21859421a1285fcad192284bf3b",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "app/controllers/schematics/resources_controller.rb",
-      "line": 74,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_class.to_s, model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).id]), :extension => \"pdf\", :slug => (\"#{human_name.dasherize}-#{model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).slug}\")).filepath, :type => ::Mime[:csv].to_s, :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_class.to_s, model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).id]), :extension => \"pdf\", :slug => (\"#{human_name.dasherize}-#{model_class.includes(entity.includes).includes(:slugs).yield_self do\n request.delete? ? (_1.with_deleted) : (_1)\n end.finder(params[:id]).slug}\")).filename)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::ResourcesController",
-        "method": "show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used in filename"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -402,6 +371,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-04-09 17:42:42 +0200",
+  "updated": "2022-04-09 23:23:59 +0200",
   "brakeman_version": "5.2.2"
 }
