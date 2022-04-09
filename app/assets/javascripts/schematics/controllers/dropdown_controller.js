@@ -24,7 +24,7 @@ export default class extends Controller {
       try {
         const { predictions } = await this.service.getPlacePredictions({ input })
         callback(predictions.map(prediction => ({ text: prediction.description })))
-      } catch (e) {
+      } catch {
         callback(predictions)
       }
     }
