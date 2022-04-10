@@ -9,7 +9,7 @@ module Schematics
         end
 
         def tbody_css_classes
-          params[:page].present? && super
+          params[:page].presence && super
         end
 
         def tr_css_class(resource)

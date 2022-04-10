@@ -11,7 +11,7 @@ module Schematics
         end
 
         def tbody_css_classes
-          params[:page].present? && super
+          params[:page].presence && super
         end
       end
     end
