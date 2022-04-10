@@ -58,16 +58,4 @@ describe Schematics::Attributes::String do
       RUBY
     end
   end
-
-  context 'when string is readonly' do
-    let(:options) { { readonly: true } }
-
-    it { is_expected.to be_readonly }
-
-    its(:to_str) do
-      is_expected.to eq <<~RUBY
-        attr_readonly :last_name
-      RUBY
-    end
-  end
 end
