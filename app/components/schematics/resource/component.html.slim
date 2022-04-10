@@ -23,14 +23,18 @@
 - when Schematics::Attributes::Blob
   = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if editable?
   - if value.representable?
-    = render Schematics::Attachment::Component.new(attachment: value)
+    = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
+    span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
+      = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
   - else
     = link_to value.filename, value
 - when Schematics::Attributes::Attachment
   - if value.attached?
     = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if editable?
     - if value.representable?
-      = render Schematics::Attachment::Component.new(attachment: value)
+      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
+      span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
+        = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
     - else
       = link_to value.filename, value
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual

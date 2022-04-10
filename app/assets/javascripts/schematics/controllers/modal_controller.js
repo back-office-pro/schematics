@@ -10,6 +10,15 @@ export default class extends ApplicationController {
   }
 
   appendToBody () {
-    document.body.appendChild(this.element.parentNode)
+    document.body.appendChild(this.modalElement)
+  }
+
+  get modalElement () {
+    switch (this.element.parentNode.tagName) {
+      case 'FORM':
+        return this.element.parentNode
+      default:
+        return this.element
+    }
   }
 }

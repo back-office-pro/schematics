@@ -1,0 +1,23 @@
+.modal.fade {
+  id=target
+  data-controller='modal'
+  aria-hidden='true'
+  aria-labelledby=label
+  tabindex='-1'
+}
+  .modal-dialog.modal-dialog-centered.modal-lg
+    .modal-content.border-0.shadow-sm
+      .modal-header
+        h5.modal-title.text-primary id=label
+          = fa_icon @icon, class: 'me-3 ms-2 fa-lg align-middle'
+          span.align-middle = filename
+        button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
+      .modal-body.text-center
+        = render Schematics::Attachment::Component.new(attachment: @attachment, width: 800, height: 600, class: 'rounded')
+      .modal-footer
+        = link_to @attachment, download: filename, class: 'btn btn-primary btn-sm btn-icon-split me-2' do
+          span.icon = fa_icon :download
+          span.text = t('.download')
+        button.btn.btn-danger.btn-sm.btn-icon-split data-bs-dismiss='modal'
+          span.icon = fa_icon :times
+          span.text = t('.close')
