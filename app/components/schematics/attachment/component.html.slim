@@ -1,7 +1,7 @@
 - begin
   = image_tag attachment, data:, **@kwargs
 - rescue StandardError => e
-  - if @replacement.present?
+  - if @replacement
     = fa_icon icon, size:, data:, **@kwargs
   - else
     = fa_icon :exclamation_triangle, class: 'me-2'

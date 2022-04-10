@@ -14,7 +14,7 @@ module Schematics
         end
 
         def render?
-          @calendar.present? || pages > 1
+          @calendar.presence || pages > 1
         end
 
         def nav_parameter
