@@ -1,8 +1,8 @@
 - begin
-  = image_tag attachment, class: @css_class, data:, title: @title
+  = image_tag attachment, data:, **@kwargs
 - rescue StandardError => e
   - if @replacement.present?
-    = fa_icon icon, size:, class: @css_class, data:, title: @title
+    = fa_icon icon, size:, data:, **@kwargs
   - else
     = fa_icon :exclamation_triangle, class: 'me-2'
     - case e

@@ -24,7 +24,7 @@
                                   .carousel-inner
                                     - carousel(resource).each do |attachment|
                                       .carousel-item.active.text-center data-href=href(resource)
-                                        = render Schematics::Attachment::Component.new(attachment:)
+                                        = render Schematics::Attachment::Component.new(attachment:, class: 'rounded')
                                   a.carousel-control-prev data-slide='prev' href='#carousel' role='button'
                                     span.carousel-control-prev-icon aria-hidden='true'
                                   a.carousel-control-next data-slide='next' href='#carousel' role='button'

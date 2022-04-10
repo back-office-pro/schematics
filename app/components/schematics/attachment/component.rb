@@ -9,8 +9,8 @@ module Schematics
             attachment: user.avatar,
             width: 36,
             height: 36,
-            css_class: 'align-middle rounded-circle',
             replacement: { icon: :user_circle, size: '2x' },
+            class: 'align-middle rounded-circle',
             title:
           )
         end
@@ -20,22 +20,13 @@ module Schematics
         end
       end
 
-      # :reek:LongParameterList
-      def initialize( # rubocop:disable Metrics/ParameterLists
-        attachment:,
-        width: 300,
-        height: 300,
-        replacement: nil,
-        css_class: 'rounded',
-        title: nil
-      )
+      def initialize(attachment:, width: 300, height: 300, replacement: nil, **kwargs)
         super
         @attachment = attachment
         @width = width
         @height = height
         @replacement = replacement
-        @css_class = css_class
-        @title = title
+        @kwargs = kwargs
       end
 
       def attachment
