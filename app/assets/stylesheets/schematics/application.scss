@@ -88,6 +88,11 @@ input[type='search']::-webkit-search-cancel-button:hover {
   cursor: pointer;
 }
 
+.input-group .form-control,
+.input-group .form-select {
+  z-index: initial !important;
+}
+
 // Clickable elements
 
 *[data-href] {
