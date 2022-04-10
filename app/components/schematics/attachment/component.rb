@@ -26,7 +26,7 @@ module Schematics
         width: 300,
         height: 300,
         replacement: nil,
-        css_class: nil,
+        css_class: 'rounded',
         title: nil
       )
         super
