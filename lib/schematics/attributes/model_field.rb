@@ -21,7 +21,7 @@ module Schematics
           .instance
           .entities
           .reject(&:hidden?)
-          .flat_map(&:renderable_fields)
+          .flat_map(&:numerable_fields)
           .map(&:method_name)
       end
 
