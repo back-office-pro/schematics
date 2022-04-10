@@ -8,5 +8,5 @@ thead.border-bottom.border-light
         = render Schematics::SortLink::Component.new(field:, model_class: @model_class)
   tr
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-      td.align-middle.text-center.p-0.animate__slideInDown class=col_preference_class(field)
+      td.align-middle.text-center.p-0.animate__slideInDown.overflow-visible class=col_preference_class(field)
         = render Schematics::Filter::Component.build(field:, model_class: @model_class)
