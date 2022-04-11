@@ -19,8 +19,8 @@ html lang=::I18n.locale dir='ltr'
     css [nonce=content_security_policy_nonce]:
       :root {
         --bs-primary: #{settings(:theme_color)};
-        --bs-primary-darken: #{settings(:theme_color_darken)};
-        --bs-primary-rgb: #{settings(:theme_color_rgb)};
+        --bs-primary-darken: #{theme_color_darken};
+        --bs-primary-rgb: #{theme_color_rgb};
       }
   body
     = render Schematics::Toast::Component.with_collection(flash.to_a)

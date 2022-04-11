@@ -21,8 +21,8 @@ html lang=::I18n.locale dir='ltr'
     css [nonce=content_security_policy_nonce]:
       :root {
         --bs-primary: #{settings(:theme_color)};
-        --bs-primary-darken: #{settings(:theme_color_darken)};
-        --bs-primary-rgb: #{settings(:theme_color_rgb)};
+        --bs-primary-darken: #{theme_color_darken};
+        --bs-primary-rgb: #{theme_color_rgb};
       }
     javascript [nonce=content_security_policy_nonce]:
       window.I18n = #{i18n_javascript}

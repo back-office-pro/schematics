@@ -16,23 +16,6 @@ module MainApp
       super || Rails.configuration.theme_color
     end
 
-    def theme_color_rgb
-      theme_color
-        .dup
-        .paint
-        .to_rgb
-        .scan(/\d+/)
-        .join(', ')
-    end
-
-    def theme_color_darken
-      theme_color
-        .dup
-        .paint
-        .darken(5)
-        .to_s
-    end
-
     def palette
       theme_color
         .dup

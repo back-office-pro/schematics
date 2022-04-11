@@ -45,5 +45,20 @@ module Schematics
         super
       end
     end
+
+    def theme_color_rgb
+      settings(:theme_color)
+        .paint
+        .to_rgb
+        .scan(/\d+/)
+        .join(', ')
+    end
+
+    def theme_color_darken
+      settings(:theme_color)
+        .paint
+        .darken(5)
+        .to_s
+    end
   end
 end
