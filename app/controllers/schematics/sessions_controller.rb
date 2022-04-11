@@ -18,7 +18,7 @@ module Schematics
       result = Sessions::Create.call(user_params: resource_params, cookies:)
       if result.success?
         respond_to do |format|
-          format.html { redirect_to root_path, notice: t(result.message) }
+          format.html { redirect_to session[:redirect_to] || root_path, notice: t(result.message) }
           format.json { render json: { auth_token: result.jwt } }
         end
       else
