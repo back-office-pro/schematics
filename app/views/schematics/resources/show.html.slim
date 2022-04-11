@@ -13,7 +13,7 @@
         - constant = resource_associations(resource: @resource, only: :required?).any? ? :Delete : :Destroy
         = render Schematics::Button.const_get(constant)::Component.new(resource: @resource, compact: false)
   .card-body.p-0
-    = render template: 'schematics/resources/show.pdf'
+    = render template: 'schematics/resources/show', formats: :pdf
 = render Schematics::Viewer::RichText::Component.with_collection(entity.rich_text_attributes, resource: @resource)
 = render Schematics::Viewer::Association::Component.with_collection(resource_associations(resource: @resource))
 - if versions.any?
