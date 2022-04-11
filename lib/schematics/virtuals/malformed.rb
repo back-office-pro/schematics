@@ -14,7 +14,7 @@ module Schematics
       end
 
       def icon
-        :exclamation_triangle
+        :triangle_exclamation
       end
     end
   end

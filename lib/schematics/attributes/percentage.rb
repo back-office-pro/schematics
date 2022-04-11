@@ -12,7 +12,7 @@ module Schematics
       end
 
       def icon
-        :percentage
+        :percent
       end
     end
   end

@@ -2,7 +2,7 @@ nav.d-none.d-xl-block aria-label='breadcrumb'
   ol.nav.align-items-center.ps-4
     li.nav-item.breadcrumb-item
       = link_to root_path do
-        = fa_icon :home, class: 'fa-lg'
+        = fa_icon :house, class: 'fa-lg'
     - breadcrumb_trail do |crumb|
       li.breadcrumb-item class=(crumb.current? ? 'active' : '')
         = link_to_unless crumb.current?, crumb.name, crumb.url, { class: 'text-decoration-none', 'aria-current': ('page' if crumb.current?) }

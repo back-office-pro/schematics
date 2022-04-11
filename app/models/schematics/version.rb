@@ -35,13 +35,13 @@ module Schematics
 
     def icon
       {
-        update: :edit,
+        update: :pen_to_square,
         create: :plus,
-        import: :cloud_upload_alt,
-        revert: :undo,
+        import: :cloud_arrow_up,
+        revert: :arrow_rotate_left,
         destroy: :trash,
-        archive: :archive,
-        restore: :trash_restore,
+        archive: :box_archive,
+        restore: :trash_arrow_up,
         show: :eye,
         duplicate: :clone
       }[event.to_sym] || entity.find_event_by_name(event).try(:icon)

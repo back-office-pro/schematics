@@ -21,7 +21,7 @@ describe Schematics::Attributes::Percentage do
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:unit) { is_expected.to eq('%') }
-  its(:icon) { is_expected.to eq(:percentage) }
+  its(:icon) { is_expected.to eq(:percent) }
 
   describe '#format' do
     subject { attribute.format(value) }

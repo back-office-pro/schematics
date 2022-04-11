@@ -5,7 +5,7 @@
   .card-body.p-3
     .alert.alert-danger
       h5.alert-heading
-        = fa_icon :exclamation_triangle, class: 'me-3'
+        = fa_icon :triangle_exclamation, class: 'me-3'
         = t('schematics.application.delete.title')
       = t('schematics.application.delete.subtitle')
     .text-secondary = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)

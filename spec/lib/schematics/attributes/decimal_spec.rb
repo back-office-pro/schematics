@@ -25,7 +25,7 @@ describe Schematics::Attributes::Decimal do
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
-  its(:icon) { is_expected.to eq(:sort_numeric_up) }
+  its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
 
   context 'when decimal has precision' do
     let(:options) { { precision: 2 } }

@@ -10,7 +10,7 @@ module Schematics
       include Behaviours::Enumerable
 
       def icon
-        :globe_europe
+        :earth_europe
       end
 
       def input_collection

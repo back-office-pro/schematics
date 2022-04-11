@@ -5,7 +5,7 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class Address < String
       def icon
-        :map_marker_alt
+        :location_dot
       end
     end
   end

@@ -184,7 +184,7 @@
             "events": [
               {
                 "name": "close",
-                "icon": "times",
+                "icon": "xmark",
                 "from": "pending",
                 "to": "closed",
                 "callback": "$in_stock = false"

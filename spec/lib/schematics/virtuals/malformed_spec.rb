@@ -24,7 +24,7 @@ describe Schematics::Virtuals::Malformed do
   its(:function) { is_expected.to eq('raise ArgumentError') }
   its(:to_sql) { is_expected.to eq("products.in_stock = 'true'") }
   its(:preload) { is_expected.to be_empty }
-  its(:icon) { is_expected.to eq(:exclamation_triangle) }
+  its(:icon) { is_expected.to eq(:triangle_exclamation) }
   its(:weight) { is_expected.to eq(1) }
 
   its(:to_str) do

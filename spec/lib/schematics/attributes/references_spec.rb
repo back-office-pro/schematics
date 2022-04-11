@@ -56,7 +56,7 @@ describe Schematics::Attributes::References do
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq(:user) }
   its(:input_type) { is_expected.to eq(:select) }
-  its(:icon) { is_expected.to eq(:caret_square_right) }
+  its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
 

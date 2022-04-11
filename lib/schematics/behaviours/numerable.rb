@@ -28,7 +28,7 @@ module Schematics
       end
 
       def icon
-        :sort_numeric_up
+        :arrow_up_1_9 # rubocop:disable Naming/VariableNumber
       end
 
       def migration_options

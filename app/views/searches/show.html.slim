@@ -2,7 +2,7 @@
 - if @results.empty?
   .card.shadow-sm.border-0.mb-3
     .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
-      = render Schematics::CardHeading::Component.new(icon: :search, title:)
+      = render Schematics::CardHeading::Component.new(icon: :magnifying_glass, title:)
     .card-body.text-center.p-3
       = render Schematics::EmptyResource::Component.new(suggestions: @suggestions)
 - else

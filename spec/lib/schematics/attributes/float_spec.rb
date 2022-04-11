@@ -25,7 +25,7 @@ describe Schematics::Attributes::Float do
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:unit) { is_expected.to eq('kg') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
-  its(:icon) { is_expected.to eq(:sort_numeric_up) }
+  its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
 
   describe '#format' do
     subject { attribute.format(value) }

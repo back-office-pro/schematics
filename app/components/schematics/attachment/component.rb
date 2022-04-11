@@ -9,7 +9,7 @@ module Schematics
             attachment: user.avatar,
             width: 36,
             height: 36,
-            replacement: { icon: :user_circle, size: '2x' },
+            replacement: { icon: :circle_user, size: '2x' },
             class: 'align-middle rounded-circle',
             title:
           )

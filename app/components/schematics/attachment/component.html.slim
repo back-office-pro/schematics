@@ -4,7 +4,7 @@
   - if @replacement
     = fa_icon icon, size:, data:, **@kwargs
   - else
-    = fa_icon :exclamation_triangle, class: 'me-2'
+    = fa_icon :triangle_exclamation, class: 'me-2'
     - case e
     - when MiniMagick::Error
       = t('.minimagick_error')
