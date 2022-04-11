@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'arel'
+
 module Schematics
   module Virtuals
     class Concatenation < Virtual
@@ -8,7 +10,7 @@ module Schematics
       end
 
       def to_sql
-        "CONCAT(#{super.join(', ')})"
+        ::Arel.sql("CONCAT(#{super.join(', ')})")
       end
 
       def search_data

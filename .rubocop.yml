@@ -78,6 +78,7 @@ Lint/ConstantResolution:
     - Float
     - Comparison
     - Singleton
+    - Arel
   Exclude:
     - spec/**/*
     - db/*
