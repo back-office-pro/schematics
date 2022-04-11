@@ -22,7 +22,7 @@ module Schematics
         def build( # rubocop:disable Metrics/ParameterLists
           name:,
           type: nil,
-          icon: :caret_square_right,
+          icon: :square_caret_right,
           descriptor: 'id',
           core: false,
           actions: nil,

@@ -39,7 +39,7 @@ module Schematics
       end
 
       def icon
-        :calendar_alt
+        :calendar_days
       end
 
       def input_type
