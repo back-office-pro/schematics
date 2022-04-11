@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
   spec.add_development_dependency 'bootsnap', '~> 1.11.1'
   spec.add_development_dependency 'capybara', '~> 3.36.0'
-  spec.add_development_dependency 'i18n-tasks', '~> 1.0.8'
+  spec.add_development_dependency 'i18n-tasks', '~> 1.0.9'
   spec.add_development_dependency 'pg', '~> 1.3.5'
   spec.add_development_dependency 'reek', '~> 6.1.0'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
