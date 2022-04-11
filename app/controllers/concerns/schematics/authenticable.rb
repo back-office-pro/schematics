@@ -38,7 +38,7 @@ module Schematics
     end
 
     def store_redirect_to_location
-      return unless request.get?
+      return unless request.get? || request.head?
       return unless request.local?
 
       session[:redirect_to] = request.original_url
