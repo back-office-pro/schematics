@@ -15,6 +15,10 @@ module Schematics
       def method_name
         [entity.class_name, name].join('#')
       end
+
+      def group_method
+        :group
+      end
     end
   end
 end
