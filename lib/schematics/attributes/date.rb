@@ -16,8 +16,12 @@ module Schematics
         ::Date
       end
 
+      def to_sql
+        super.split('/').first
+      end
+
       def format(value)
-        value && localize(value, format: '%A %d %B %Y')
+        value && localize(value, format: :short)
       end
 
       def validators
@@ -36,6 +40,10 @@ module Schematics
       def default
         return ::Time.zone.today.to_s(:db) if options.before
         return ::Time.zone.tomorrow.to_s(:db) if options.after
+      end
+
+      def group_method
+        :group_by_day
       end
 
       def icon

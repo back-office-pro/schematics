@@ -8,7 +8,7 @@ module Schematics
       end
 
       def format(value)
-        value && localize(value, format: '%A %d %B %Y %H:%M')
+        value && localize(value, format: :long)
       end
 
       def default

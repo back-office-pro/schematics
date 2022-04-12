@@ -210,6 +210,9 @@
         },
         "depends_on": {
           "type": "string"
+        },
+        "without_core": {
+          "type": "boolean"
         }
       }
     },

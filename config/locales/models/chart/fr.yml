@@ -3,6 +3,13 @@ fr:
   activerecord:
     attributes:
       chart:
+        agregate: Agrégat
+        agregates:
+          average: Moyenne
+          count: Total
+          maximum: Maximum
+          minimum: Minimum
+          sum: Somme
         kind: Type
         kinds:
           area: Aires empilées
@@ -14,20 +21,7 @@ fr:
           scatter: Nuage de points
         model: Donnée
         roles: Rôles
-        x_agregate: Agrégat en abscisse
-        x_agregates:
-          group: Grouper
-          group_by_day: Grouper par jour
-          group_by_month: Grouper par mois
-          group_by_week: Grouper par semaine
         x_field: Attribut en abscisse
-        y_agregate: Agrégat en ordonnée
-        y_agregates:
-          average: Moyenne
-          count: Total
-          maximum: Maximum
-          minimum: Minimum
-          sum: Somme
         y_field: Attribut en ordonnée
     models:
       chart:

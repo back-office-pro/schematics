@@ -2,13 +2,13 @@
 
 module Schematics
   module Attributes
-    class Time < Datetime
+    class Month < Datetime
       def format(value)
-        value && localize(value, format: :time)
+        value && localize(value, format: :month)
       end
 
-      def icon
-        :clock
+      def group_method
+        :group_by_month
       end
     end
   end

@@ -24,6 +24,7 @@ describe Schematics::Attributes::Date do
   its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to eq(date: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
+  its(:group_method) { is_expected.to eq(:group_by_day) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
 
@@ -62,6 +63,6 @@ describe Schematics::Attributes::Date do
 
     let(:value) { Time.parse('01/01/2021 00:00 +0000').in_time_zone }
 
-    it { is_expected.to eq('Friday 01 January 2021') }
+    it { is_expected.to eq('Friday 01 January, 2021') }
   end
 end

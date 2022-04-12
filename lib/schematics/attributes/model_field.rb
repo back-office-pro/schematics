@@ -21,12 +21,18 @@ module Schematics
           .instance
           .entities
           .reject(&:hidden?)
-          .flat_map(&:numerable_fields)
+          .flat_map(&:"#{field_type}_fields")
           .map(&:method_name)
       end
 
       def icon
         :code
+      end
+
+      private
+
+      def field_type
+        options.type || 'renderable_with_created_ats'
       end
     end
   end

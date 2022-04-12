@@ -2,13 +2,13 @@
 
 module Schematics
   module Attributes
-    class Time < Datetime
+    class Week < Datetime
       def format(value)
-        value && localize(value, format: :time)
+        value && localize(value, format: :week)
       end
 
-      def icon
-        :clock
+      def group_method
+        :group_by_week
       end
     end
   end
