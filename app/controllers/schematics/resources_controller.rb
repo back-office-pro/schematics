@@ -34,7 +34,7 @@ module Schematics
       else
         @calendar, @pagy, @resources = pagy_calendar(
           model_class.pagy_search(**search_params),
-          month: { format: '%B %Y' },
+          month: { format: t('date.formats.month') },
           pagy: { backend: :pagy_searchkick },
           active: entity.viewer == :calendar
         )

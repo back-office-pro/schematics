@@ -1,8 +1,20 @@
 ---
 fr:
   attributes:
-    created_at: date de création
+    created_at: Date de création
+    created_at/day: Jour
+    created_at/month: Mois
+    created_at/week: Semaine
+    created_at/year: Année
   by: par
+  date:
+    formats:
+      long: "%A %d %B %Y à %H:%M"
+      month: "%B %Y"
+      short: "%A %d %B %Y"
+      time: "%H:%M"
+      week: Semaine %W
+      year: Année %Y
   errors:
     messages:
       antivirus_client_error: n'a pas pu être traitée pour l'analyse de virus
@@ -64,4 +76,12 @@ fr:
         email: E-mail
         password: Mot de passe
         remember_me: Se souvenir de moi
+  time:
+    formats:
+      long: "%A %d %B %Y à %H:%M"
+      month: "%B %Y"
+      short: "%A %d %B %Y"
+      time: "%H:%M"
+      week: Semaine %W
+      year: Année %Y
   'true': vrai

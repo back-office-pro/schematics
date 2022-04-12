@@ -1,7 +1,19 @@
 ---
 en:
   attributes:
-    created_at: creation date
+    created_at: Creation date
+    created_at/day: Day
+    created_at/month: Month
+    created_at/week: Week
+    created_at/year: Year
+  date:
+    formats:
+      long: "%A %d %B, %Y at %H:%M"
+      month: "%B, %Y"
+      short: "%A %d %B, %Y"
+      time: "%H:%M"
+      week: Week %W
+      year: Year %Y
   errors:
     messages:
       color: is not a valid hexadecimal color code
@@ -28,3 +40,11 @@ en:
         email: Email
         password: Password
         remember_me: Remember me?
+  time:
+    formats:
+      long: "%A %d %B, %Y at %H:%M"
+      month: "%B, %Y"
+      short: "%A %d %B, %Y"
+      time: "%H:%M"
+      week: Week %W
+      year: Year %Y
