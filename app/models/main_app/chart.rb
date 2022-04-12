@@ -15,7 +15,7 @@ module MainApp
     end
 
     def icon
-      return :exclamation_triangle unless model_class
+      return :triangle_exclamation unless model_class
 
       {
         line: :chart_line,
@@ -23,7 +23,7 @@ module MainApp
         bar: :chart_bar,
         area: :chart_area,
         scatter: :chart_scatter,
-        column: :analytics,
+        column: :chart_column,
         geo: :globe
       }[kind.to_sym]
     end
@@ -31,18 +31,18 @@ module MainApp
     def to_s
       return ::I18n.t('errors.virtuals.no_method', name: model) unless model_class
 
-      [ytitle, ::I18n.t('by'), xtitle].join(' ')
+      [ytitle, ::I18n.t('by'), xtitle&.downcase].compact.join(' ')
     end
 
-    def serializable_hash(*) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    def serializable_hash(*)
       return unless model_class
 
       model_class
         .joins(joins)
-        .public_send(x_agregate.to_sym, entity_x_field&.to_sql || :all)
-        .public_send(y_agregate.to_sym, entity_y_field&.to_sql || :all)
+        .public_send(entity_x_field.group_method, entity_x_field.to_sql)
+        .public_send(agregate.to_sym, entity_y_field&.to_sql || :all)
         .to_h do |key, value|
-          [entity_x_field&.format(key) || key, entity_y_field&.format(value) || value]
+          [entity_x_field.format(key), entity_y_field&.format(value) || value]
         end
     end
 
@@ -50,16 +50,14 @@ module MainApp
       return unless model_class
       return unless entity_x_field
 
-      model_class
-        .human_attribute_name(entity_x_field.name)
-        .downcase
+      model_class.human_attribute_name(entity_x_field.name)
     end
 
     def ytitle
       return unless model_class
 
       [
-        y_agregate_formatted,
+        agregate_formatted,
         ::I18n.t('of'),
         (model_class.human_attribute_name(entity_y_field.name).pluralize.downcase if entity_y_field), # rubocop:disable Layout/LineLength
         (::I18n.t('of') if entity_y_field),
