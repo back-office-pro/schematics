@@ -114,7 +114,9 @@ module Schematics
         when 'id'
           Attributes::Uuid.new(self, 'id', unique: true)
         else
-          fields.find { |field| field.name == name }
+          fields
+            .concat(created_at_attributes)
+            .find { |field| field.name == name }
         end
       end
 
@@ -140,6 +142,10 @@ module Schematics
 
       def elements
         fields + associations
+      end
+
+      def renderable_with_created_ats_fields
+        renderable_fields + created_at_attributes
       end
 
       def permitted_params
@@ -257,6 +263,15 @@ module Schematics
               .map(&:to_sym)
               .include?(association)
           end
+      end
+
+      def created_at_attributes
+        [
+          Attributes::Date.new(self, 'created_at/day', required: true),
+          Attributes::Week.new(self, 'created_at/week', required: true),
+          Attributes::Month.new(self, 'created_at/month', required: true),
+          Attributes::Year.new(self, 'created_at/year', required: true)
+        ]
       end
     end
   end
