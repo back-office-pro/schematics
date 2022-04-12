@@ -16,6 +16,7 @@ describe Schematics::Attributes::Year do
   it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
 
+  its(:group_method) { is_expected.to eq(:group_by_year) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
 
   describe '#format' do
