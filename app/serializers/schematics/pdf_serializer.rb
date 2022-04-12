@@ -3,11 +3,6 @@
 module Schematics
   class PdfSerializer
     delegate :render, to: :controller
-    delegate :company_name,
-             :company_address,
-             :company_registration_number,
-             to: :settings,
-             private: true
 
     def initialize(model_name, resource)
       @model_name = model_name
@@ -15,7 +10,7 @@ module Schematics
     end
 
     def generate_file
-      WickedPdf.new.pdf_from_string(pdf, options)
+      Grover.new(pdf, options).to_pdf
     end
 
     private
@@ -25,7 +20,11 @@ module Schematics
     end
 
     def pdf
-      @pdf ||= render(
+      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url, 'http')
+    end
+
+    def template
+      @template ||= render(
         action: :show,
         formats: :pdf,
         layout: 'layouts/schematics/pdf',
@@ -34,24 +33,15 @@ module Schematics
       )
     end
 
-    def settings
-      @settings ||= ::Setting.instance
+    def options
+      {
+        header_template: PdfHeader::Component.new(resource: @resource).to_html,
+        footer_template: PdfFooter::Component.new.to_html
+      }
     end
 
-    def options
-      @options ||= {
-        header: {
-          font_size: 8,
-          center: @resource,
-          right: '[page] / [topage]'
-        },
-        footer: {
-          font_size: 8,
-          left: company_name,
-          center: company_address,
-          right: company_registration_number
-        }
-      }
+    def asset_url
+      'http://localhost:3000/'
     end
   end
 end
