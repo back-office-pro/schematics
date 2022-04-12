@@ -122,9 +122,17 @@ Dependencies choices details.
 
 ### PDF generation
 
-:star: **wkhtmltopdf**
+:star: **grover**
 
 :+1: View system
+
+:+1: Use puppeteer internally with cutting-edge features
+
+~~wkhtmltopdf~~
+
+:+1: View system
+
+:-1: No support for CSS variables and Bootstrap 5 (the driver is too old)
 
 ~~prawn~~
 
