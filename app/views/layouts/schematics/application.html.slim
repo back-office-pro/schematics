@@ -36,3 +36,4 @@ html lang=::I18n.locale dir='ltr'
           .container-fluid.overflow-hidden.my-3.px-3.animate__animated class=('animate__slideInDown' if params[:page].blank?)
             = yield
           = render Schematics::Footer::Component.new
+    = yield :charts_js
