@@ -13,7 +13,6 @@ describe Schematics::Attributes::Week do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
 
   its(:group_method) { is_expected.to eq(:group_by_week) }
