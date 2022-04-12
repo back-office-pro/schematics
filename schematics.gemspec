@@ -59,6 +59,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'elasticsearch', '~> 7.17.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
   spec.add_dependency 'groupdate', '~> 6.1.0'
+  spec.add_dependency 'grover', '~> 1.1.1'
   spec.add_dependency 'hiredis', '~> 0.6.3'
   spec.add_dependency 'humanize', '~> 2.5.1'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
@@ -103,7 +104,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'validate_url', '~> 1.0.13'
   spec.add_dependency 'valid_email', '~> 0.1.4'
   spec.add_dependency 'view_component', '~> 2.52.0'
-  spec.add_dependency 'wicked_pdf', '~> 2.1.0'
-  spec.add_dependency 'wkhtmltopdf-binary', '~> 0.12.6.5'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
