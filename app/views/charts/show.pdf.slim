@@ -1,9 +1,7 @@
 = public_send @resource.type,
-              chart_path(@resource),
-              id: @resource.css_id,
+              @resource.serializable_hash,
               xtitle: @resource.xtitle,
               ytitle: @resource.ytitle,
               suffix: @resource.suffix,
-              nonce: content_security_policy_nonce,
-              download: { filename: @resource.filename },
-              dataset: { borderWidth: @resource.border_width }
+              dataset: { borderWidth: @resource.border_width },
+              library: { animation: false }
