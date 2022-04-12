@@ -3,6 +3,13 @@ en:
   activerecord:
     attributes:
       chart:
+        agregate: Agregate
+        agregates:
+          average: Average
+          count: Count
+          maximum: Maximum
+          minimum: Minimum
+          sum: Sum
         kind: Type
         kinds:
           area: Area chart
@@ -14,20 +21,7 @@ en:
           scatter: Scatter chart
         model: Data
         roles: Roles
-        x_agregate: X agregate
-        x_agregates:
-          group: Group
-          group_by_day: Group by day
-          group_by_month: Group by month
-          group_by_week: Group by week
         x_field: X field
-        y_agregate: Y agregate
-        y_agregates:
-          average: Average
-          count: Count
-          maximum: Maximum
-          minimum: Minimum
-          sum: Sum
         y_field: Y field
     models:
       chart:
