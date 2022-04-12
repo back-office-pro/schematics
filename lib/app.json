@@ -189,7 +189,7 @@
     {
       "name": "setting",
       "type": "singleton",
-      "icon": "cog",
+      "icon": "gear",
       "descriptor": "company_name",
       "attributes": [
         {
@@ -293,7 +293,7 @@
     },
     {
       "name": "import",
-      "icon": "cloud_upload_alt",
+      "icon": "cloud_arrow_up",
       "actions": [
         "index",
         "show"
@@ -393,42 +393,7 @@
           }
         },
         {
-          "name": "model",
-          "type": "model",
-          "options": {
-            "required": true
-          }
-        },
-        {
-          "name": "x_field",
-          "type": "model_field",
-          "options": {
-            "required": true,
-            "depends_on": "model"
-          }
-        },
-        {
-          "name": "x_agregate",
-          "type": "enum",
-          "options": {
-            "required": true,
-            "values": [
-              "group",
-              "group_by_day",
-              "group_by_week",
-              "group_by_month"
-            ]
-          }
-        },
-        {
-          "name": "y_field",
-          "type": "model_field",
-          "options": {
-            "depends_on": "model"
-          }
-        },
-        {
-          "name": "y_agregate",
+          "name": "agregate",
           "type": "enum",
           "options": {
             "required": true,
@@ -440,6 +405,30 @@
               "average"
             ]
           }
+        },
+        {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true,
+            "without_core": true
+          }
+        },
+        {
+          "name": "y_field",
+          "type": "model_field",
+          "options": {
+            "depends_on": "model",
+            "type": "numerable"
+          }
+        },
+        {
+          "name": "x_field",
+          "type": "model_field",
+          "options": {
+            "required": true,
+            "depends_on": "model"
+          }
         }
       ]
     },
@@ -447,13 +436,6 @@
       "name": "stat",
       "icon": "stopwatch_20",
       "attributes": [
-        {
-          "name": "model",
-          "type": "model",
-          "options": {
-            "required": true
-          }
-        },
         {
           "name": "agregate",
           "type": "enum",
@@ -469,17 +451,26 @@
           }
         },
         {
+          "name": "model",
+          "type": "model",
+          "options": {
+            "required": true,
+            "without_core": true
+          }
+        },
+        {
           "name": "field",
           "type": "model_field",
           "options": {
-            "depends_on": "model"
+            "depends_on": "model",
+            "type": "numerable"
           }
         }
       ]
     },
     {
       "name": "search",
-      "icon": "search",
+      "icon": "magnifying_glass",
       "descriptor": "query",
       "actions": [
         "create",
@@ -509,7 +500,7 @@
     },
     {
       "name": "comparison",
-      "icon": "balance_scale",
+      "icon": "scale_balanced",
       "descriptor": "model",
       "actions": [
         "create",
