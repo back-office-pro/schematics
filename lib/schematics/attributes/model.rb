@@ -14,12 +14,20 @@ module Schematics
         Schema
           .instance
           .entities
-          .reject(&:hidden?)
+          .reject(&entity_type)
           .map(&:class_name)
       end
 
       def icon
         :project_diagram
+      end
+
+      private
+
+      def entity_type
+        return :core? if options.without_core?
+
+        :hidden?
       end
     end
   end
