@@ -3,23 +3,19 @@ import ApplicationController from './application_controller'
 /* global FormData, File, Routes */
 
 export default class extends ApplicationController {
-  static get targets () {
-    return ['form', 'feedback']
-  }
-
   static get values () {
     return { draft: Object }
   }
 
   connect () {
-    this.formTarget.addEventListener('change', this.save.bind(this))
-    this.formTarget.addEventListener('submit', this.clear.bind(this))
+    this.element.addEventListener('change', this.save.bind(this))
+    this.element.addEventListener('submit', this.clear.bind(this))
     Object.keys(this.draftValue).length && this.restore()
   }
 
   disconnect () {
-    this.formTarget.removeEventListener('change', this.save.bind(this))
-    this.formTarget.removeEventListener('submit', this.clear.bind(this))
+    this.element.removeEventListener('change', this.save.bind(this))
+    this.element.removeEventListener('submit', this.clear.bind(this))
   }
 
   async save () {
@@ -29,7 +25,6 @@ export default class extends ApplicationController {
     } else {
       this.fetchAPI(Routes.draftEn(this.draftValue.id), 'PUT', this.params)
     }
-    // TODO update feedback
   }
 
   async restore () {
@@ -37,7 +32,7 @@ export default class extends ApplicationController {
       .entries(this.draftValue.data)
       .forEach(([key, value]) =>
         this
-          .formTarget
+          .element
           .querySelector(`[name='${key}']`)
           ?.setAttribute('value', value)
       )
@@ -50,14 +45,14 @@ export default class extends ApplicationController {
   get params () {
     return {
       draft: {
-        name: this.formTarget.id,
+        name: this.element.id,
         data: this.filteredFormData
       }
     }
   }
 
   get formData () {
-    return Object.fromEntries(new FormData(this.formTarget))
+    return Object.fromEntries(new FormData(this.element))
   }
 
   get filteredFormData () {
