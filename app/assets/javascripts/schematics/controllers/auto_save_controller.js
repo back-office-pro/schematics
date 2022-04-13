@@ -35,7 +35,12 @@ export default class extends ApplicationController {
   async restore () {
     Object
       .entries(this.draftValue.data)
-      .forEach(([key, value]) => { this.formTarget.querySelector(`[name='${key}']`).value = value })
+      .forEach(([key, value]) =>
+        this
+          .formTarget
+          .querySelector(`[name='${key}']`)
+          ?.setAttribute('value', value)
+      )
   }
 
   clear () {
