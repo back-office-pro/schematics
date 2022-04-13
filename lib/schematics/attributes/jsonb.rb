@@ -3,11 +3,16 @@
 module Schematics
   module Attributes
     class Jsonb < Attribute
+      include Behaviours::Fillable
       include Behaviours::Renderable
       delegate :default, to: :options
 
       def open_api_type
         {}
+      end
+
+      def permitted_params
+        { super => {} }
       end
 
       def icon
