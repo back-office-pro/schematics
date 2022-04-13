@@ -1,6 +1,17 @@
 - breadcrumb title, new_polymorphic_path(@resource)
-.card.shadow-sm.border-0
+.card.shadow-sm.border-0 {
+  data-controller='auto-save'
+  data-auto-save-draft-value=current_user.drafts.find_by(name: "new_#{@resource.class.model_name.to_s.underscore}")&.to_json
+}
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
-    = render Schematics::CardHeading::Component.new(icon: :plus, title:)
+    .row.align-items-center
+      .col.text-truncate
+        = render Schematics::CardHeading::Component.new(icon: :plus, title:)
+      .col-auto data-auto-save-target='feedback'
+        button.btn.btn-sm.btn-icon-split.pe-none
+          span.icon = fa_icon ::Draft.entity.icon
+          span.text.d-none.d-lg-inline
+            | Brouillon sauvegardé
+            span.ms-1 data-controller='timeago' datetime=::Time.current
   .card-body.p-3
     = render Schematics::ResourceForm::Component.new(resource: @resource)
