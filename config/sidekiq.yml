@@ -7,6 +7,9 @@
   schematics/clean_comparisons_job:
     cron: '0 0 * * *'
     class: Schematics::CleanComparisonsJob
+  schematics/clean_drafts_job:
+    cron: '0 0 * * *'
+    class: Schematics::CleanDraftsJob
   schematics/clean_searches_job:
     cron: '0 0 * * *'
     class: Schematics::CleanSearchesJob
