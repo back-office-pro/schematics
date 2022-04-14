@@ -1,0 +1,8 @@
+button.btn.btn-primary.btn-sm.btn-icon-split {
+  data-auto-save-target='restoreButton'
+  data-action='click->auto-save#restore'
+}
+  span.icon = fa_icon(icon)
+  span.text.d-none.d-lg-inline
+    = t('.text')
+    span.ms-1 data-controller='timeago' datetime=updated_at
