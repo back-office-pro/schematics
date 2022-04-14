@@ -15,8 +15,7 @@ export default class extends ApplicationController {
     this.element.removeEventListener('ajax:complete', this.toggleSubmitButton.bind(this))
   }
 
-  toggleSubmitButton (e) {
-    e.stopImmediatePropagation()
+  toggleSubmitButton () {
     this.submitButtonTarget.disabled = !this.submitButtonTarget.disabled
     this
       .submitButtonTarget

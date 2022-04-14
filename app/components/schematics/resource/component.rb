@@ -22,7 +22,13 @@ module Schematics
           @field.is_a?(Behaviours::Fillable)
       end
 
-      def data
+      def div_data
+        return unless editable?
+
+        { controller: 'edit-in-place' }
+      end
+
+      def span_data
         return unless editable?
 
         {
