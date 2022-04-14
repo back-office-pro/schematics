@@ -25,12 +25,10 @@ module Schematics
       end
 
       def data
-        return { controller: 'form', 'auto-save-target': 'form' } unless remote?
-
         {
           controller: 'form',
           'auto-save-target': 'form',
-          action: 'ajax:success->edit-in-place#success ajax:error->edit-in-place#error',
+          'edit-in-place-target': 'form',
           type: :json
         }
       end
@@ -42,13 +40,13 @@ module Schematics
       end
 
       def css_classes
-        'd-flex' if remote?
+        'd-none d-flex' if remote?
       end
 
       def wrapper
         return :input_group unless remote?
 
-        :content_editable_form
+        :edit_in_place_form
       end
     end
   end

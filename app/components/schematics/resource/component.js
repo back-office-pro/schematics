@@ -5,6 +5,16 @@ export default class extends ApplicationController {
     return ['resource', 'form']
   }
 
+  connect () {
+    this.formTarget.addEventListener('ajax:success', this.success.bind(this))
+    this.formTarget.addEventListener('ajax:error', this.error.bind(this))
+  }
+
+  disconnect () {
+    this.formTarget.removeEventListener('ajax:success', this.success.bind(this))
+    this.formTarget.removeEventListener('ajax:error', this.error.bind(this))
+  }
+
   toggle (event) {
     event.preventDefault()
     this.resourceTarget.classList.toggle('d-none')
