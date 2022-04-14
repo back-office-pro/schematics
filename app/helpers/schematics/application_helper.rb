@@ -60,5 +60,11 @@ module Schematics
         .darken(5)
         .to_s
     end
+
+    def current_draft
+      @current_draft ||= current_user
+                         .drafts
+                         .find_by(name: "new_#{entity.table_name}")
+    end
   end
 end

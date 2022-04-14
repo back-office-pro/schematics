@@ -79,6 +79,7 @@ Lint/ConstantResolution:
     - Comparison
     - Singleton
     - Arel
+    - Draft
   Exclude:
     - spec/**/*
     - db/*

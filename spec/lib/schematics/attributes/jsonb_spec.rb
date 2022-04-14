@@ -9,6 +9,7 @@ describe Schematics::Attributes::Jsonb do
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
 
   its(:type) { is_expected.to eq('jsonb') }
@@ -17,6 +18,7 @@ describe Schematics::Attributes::Jsonb do
   its(:validators) { is_expected.to be_empty }
   its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }
+  its(:permitted_params) { is_expected.to eq(preferences: {}) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
   its(:options_for_migration) { is_expected.to be_empty }

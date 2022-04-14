@@ -18,6 +18,13 @@ module Schematics
       def model_field_collection_class(key, field)
         'd-none' if new_record? || !key.start_with?(@resource.public_send(field.depends_on))
       end
+
+      def data
+        {
+          controller: 'form',
+          'auto-save-target': 'form'
+        }
+      end
     end
   end
 end

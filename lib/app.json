@@ -334,7 +334,10 @@
         },
         {
           "name": "import_errors",
-          "type": "jsonb"
+          "type": "jsonb",
+          "options": {
+            "readonly": true
+          }
         },
         {
           "name": "author",
@@ -517,6 +520,36 @@
         {
           "name": "ids",
           "type": "array"
+        }
+      ]
+    },
+    {
+      "name": "draft",
+      "icon": "floppy_disk",
+      "actions": [
+        "create",
+        "update",
+        "show",
+        "destroy"
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "options": {
+            "required": true
+          }
+        },
+        {
+          "name": "data",
+          "type": "jsonb"
+        },
+        {
+          "name": "user",
+          "type": "references",
+          "options": {
+            "required": true
+          }
         }
       ]
     }
