@@ -26,8 +26,8 @@ module Schematics
         return unless editable?
 
         {
-          'content-editable-target': 'resource',
-          action: 'click->content-editable#toggle'
+          'edit-in-place-target': 'resource',
+          action: 'click->edit-in-place#toggle'
         }
       end
     end

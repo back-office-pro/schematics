@@ -30,7 +30,7 @@ module Schematics
         {
           controller: 'form',
           'auto-save-target': 'form',
-          action: 'ajax:success->content-editable#success ajax:error->content-editable#error',
+          action: 'ajax:success->edit-in-place#success ajax:error->edit-in-place#error',
           type: :json
         }
       end
@@ -38,7 +38,7 @@ module Schematics
       def cancel_button_data
         return unless remote?
 
-        { action: 'click->content-editable#toggle' }
+        { action: 'click->edit-in-place#toggle' }
       end
 
       def css_classes

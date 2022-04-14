@@ -1,4 +1,4 @@
-div data-controller='content-editable'
+div data-controller='edit-in-place'
   span.animate__animated data=data
     - case @field
     - when Schematics::Associations::Association, Schematics::Attributes::Association
@@ -61,5 +61,5 @@ div data-controller='content-editable'
     - else
       = @field.format(value)
   - if editable?
-    span.d-none data-content-editable-target='form'
+    span.d-none data-edit-in-place-target='form'
       = render Schematics::ResourceForm::Component.new(resource: @resource, remote: true, attributes: [@field])

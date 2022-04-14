@@ -6,7 +6,7 @@ import SearchBarController from '../search_bar/component'
 import TypeaheadController from '../filter/typeahead/component'
 import GenerateFileInBackgroundController from '../button/generate_file_in_background/component'
 import ViewerSettingsController from '../viewer/settings/component'
-import ContentEditableController from '../resource/component'
+import EditInPlaceController from '../resource/component'
 import ComparisonController from './controllers/comparison_controller'
 import DropdownController from './controllers/dropdown_controller'
 import TimeagoController from './controllers/timeago_controller'
@@ -28,6 +28,7 @@ application.register('search-bar', SearchBarController)
 application.register('typeahead', TypeaheadController)
 application.register('generate-file-in-background', GenerateFileInBackgroundController)
 application.register('viewer-settings', ViewerSettingsController)
+application.register('edit-in-place', EditInPlaceController)
 application.register('comparison', ComparisonController)
 application.register('dropdown', DropdownController)
 application.register('timeago', TimeagoController)
@@ -39,4 +40,3 @@ application.register('toast', ToastController)
 application.register('tooltip', TooltipController)
 application.register('auto-save', AutoSaveController)
 application.register('autosize', AutosizeController)
-application.register('content-editable', ContentEditableController)
