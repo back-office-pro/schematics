@@ -17,7 +17,7 @@ document.addEventListener('turbolinks:load', function () {
     .querySelectorAll('*[data-href]')
     .forEach(element => {
       element.addEventListener('click', function (e) {
-        if (!e.target.closest('a, .btn-group')) {
+        if (!e.target.closest('a, .btn-group, [data-controller="edit-in-place"]')) {
           Turbolinks.visit(this.dataset.href)
         }
       })
