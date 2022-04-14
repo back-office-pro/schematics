@@ -8,7 +8,7 @@ export default class extends ApplicationController {
   connect () {
     render(this.element, document.documentElement.lang)
   }
-  
+
   disconnect () {
     cancel(this.element)
   }

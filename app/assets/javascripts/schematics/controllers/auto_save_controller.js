@@ -81,7 +81,7 @@ export default class extends ApplicationController {
   get denylist () {
     return ['authenticity_token', 'password', 'lock_version']
   }
-  
+
   get timeagoController () {
     return this.application.getControllerForElementAndIdentifier(this.timeagoTarget, 'timeago')
   }
