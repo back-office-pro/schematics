@@ -3,19 +3,22 @@ import ApplicationController from './application_controller'
 /* global FormData, File, Routes */
 
 export default class extends ApplicationController {
+  static get targets () {
+    return ['form', 'button', 'restoreButton', 'timeago']
+  }
+
   static get values () {
     return { draft: Object }
   }
 
   connect () {
-    this.element.addEventListener('change', this.save.bind(this))
-    this.element.addEventListener('submit', this.clear.bind(this))
-    Object.keys(this.draftValue).length && this.restore()
+    this.formTarget.addEventListener('change', this.save.bind(this))
+    this.formTarget.addEventListener('submit', this.clear.bind(this))
   }
 
   disconnect () {
-    this.element.removeEventListener('change', this.save.bind(this))
-    this.element.removeEventListener('submit', this.clear.bind(this))
+    this.formTarget.removeEventListener('change', this.save.bind(this))
+    this.formTarget.removeEventListener('submit', this.clear.bind(this))
   }
 
   async save () {
@@ -25,9 +28,15 @@ export default class extends ApplicationController {
     } else {
       this.fetchAPI(Routes.draftEn(this.draftValue.id), 'PUT', this.params)
     }
+    this.hasRestoreButtonTarget && this.hideRestoreButton()
+    this.buttonTarget.classList.remove('d-none')
+    this.timeagoTarget.setAttribute('datetime', new Date().toJSON())
+    this.timeagoController.disconnect()
+    this.timeagoController.connect()
   }
 
-  async restore () {
+  restore () {
+    this.hideRestoreButton()
     Object
       .entries(this.draftValue.data)
       .forEach(([key, value]) =>
@@ -42,17 +51,21 @@ export default class extends ApplicationController {
     this.fetchAPI(Routes.draftEn(this.draftValue.id), 'DELETE')
   }
 
+  hideRestoreButton () {
+    this.restoreButtonTarget.classList.add('d-none')
+  }
+
   get params () {
     return {
       draft: {
-        name: this.element.id,
+        name: this.formTarget.id,
         data: this.filteredFormData
       }
     }
   }
 
   get formData () {
-    return Object.fromEntries(new FormData(this.element))
+    return Object.fromEntries(new FormData(this.formTarget))
   }
 
   get filteredFormData () {
@@ -67,5 +80,9 @@ export default class extends ApplicationController {
 
   get denylist () {
     return ['authenticity_token', 'password', 'lock_version']
+  }
+  
+  get timeagoController () {
+    return this.application.getControllerForElementAndIdentifier(this.timeagoTarget, 'timeago')
   }
 }

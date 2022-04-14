@@ -20,20 +20,10 @@ module Schematics
       end
 
       def data
-        return { controller: 'form' } unless new_record?
-
         {
-          controller: 'form auto-save',
-          'auto-save-draft-value': current_draft&.to_json
+          controller: 'form',
+          'auto-save-target': 'form'
         }
-      end
-
-      private
-
-      def current_draft
-        current_user
-          .drafts
-          .find_by(name: "new_#{entity.table_name}")
       end
     end
   end
