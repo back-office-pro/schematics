@@ -5,7 +5,6 @@
 //= require rails.validations.simple_form.bootstrap4
 //= require js-routes
 //= require slim-select/dist/slimselect
-//= require ./best_in_place
 //= require ./chartkick
 //= require ./pagy
 //= require ./swagger
