@@ -8,7 +8,7 @@ Rails.configuration.after_initialize do
   SimpleForm.setup do |config|
     config.input_class = 'border-0 p-2'
     config.wrapper_mappings = { boolean: :custom_boolean_switch }
-    config.wrappers :content_editable_form, class: 'row w-100' do |b|
+    config.wrappers :edit_in_place_form, class: 'row w-100' do |b|
       b.use :html5
       b.use :placeholder
       b.optional :maxlength
