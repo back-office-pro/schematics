@@ -16,6 +16,10 @@ module Schematics
       end
 
       def editable?
+        deletable? && !@field.is_a?(Behaviours::Preloadable)
+      end
+
+      def deletable?
         @editable &&
           can?(:update, @resource) &&
           !@field.try(:readonly?) &&
