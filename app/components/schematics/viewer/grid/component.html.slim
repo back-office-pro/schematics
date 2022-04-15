@@ -36,4 +36,4 @@
                                     = fa_icon field.icon, class: 'fa-fw me-2 text-muted'
                                     = model_class.human_attribute_name(field.name)
                                   td.text-nowrap
-                                    = render Schematics::Resource::Component.new(resource:, field:, editable: true)
+                                    = render Schematics::Resource::Component.new(resource:, field:)
