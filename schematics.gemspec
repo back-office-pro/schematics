@@ -81,7 +81,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'phonelib', '~> 0.6.58'
   spec.add_dependency 'rack-attack', '~> 6.6.1'
   spec.add_dependency 'rack-cors', '~> 1.1.1'
-  spec.add_dependency 'rack-mini-profiler', '~> 2.3.4'
+  spec.add_dependency 'rack-mini-profiler', '>= 2.3.4', '< 3.1.0'
   spec.add_dependency 'rails', '~> 6.1.5'
   spec.add_dependency 'rails-erd', '~> 1.6.1'
   spec.add_dependency 'rails-i18n', '~> 7.0.3'
