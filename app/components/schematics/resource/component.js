@@ -19,7 +19,7 @@ export default class extends ApplicationController {
     event?.preventDefault()
     this.resourceTarget.classList.toggle('d-none')
     this.formTarget.classList.toggle('d-none')
-    this.input.value = this.resourceTarget.innerText
+    this.formTarget.reset()
     this.clearErrors()
   }
 
