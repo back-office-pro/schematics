@@ -20,6 +20,10 @@ module Schematics
           ].compact
         end
 
+        def icon_class
+          'fa-fw' if compact?
+        end
+
         def compact?
           @compact
         end

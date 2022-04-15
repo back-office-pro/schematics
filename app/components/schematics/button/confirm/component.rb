@@ -15,8 +15,13 @@ module Schematics
             'btn-primary',
             'btn-sm',
             ('btn-icon-split' unless compact?),
-            ('me-2' unless compact?)
+            ('me-2' unless compact?),
+            ('mx-1' if compact?)
           ].compact
+        end
+
+        def icon_class
+          'fa-fw' if compact?
         end
 
         def compact?
