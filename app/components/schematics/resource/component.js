@@ -16,15 +16,17 @@ export default class extends ApplicationController {
   }
 
   toggle (event) {
-    event.preventDefault()
+    event?.preventDefault()
     this.resourceTarget.classList.toggle('d-none')
     this.formTarget.classList.toggle('d-none')
+    this.input.value = this.resourceTarget.innerText
+    this.clearErrors()
   }
 
-  success (event) {
+  success ({ detail: [data] }) {
     this.clearErrors()
-    this.toggle(event)
-    this.resourceTarget.innerText = Object.values(event.detail[0])[0]
+    this.toggle()
+    this.resourceTarget.innerText = Object.values(data)[0]
     this.blink()
   }
 
