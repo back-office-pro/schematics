@@ -79,7 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paper_trail', '~> 12.3.0'
   spec.add_dependency 'paranoia', '~> 2.6.0'
   spec.add_dependency 'phonelib', '~> 0.6.58'
-  spec.add_dependency 'rack-attack', '~> 6.6.0'
+  spec.add_dependency 'rack-attack', '~> 6.6.1'
   spec.add_dependency 'rack-cors', '~> 1.1.1'
   spec.add_dependency 'rack-mini-profiler', '~> 2.3.4'
   spec.add_dependency 'rails', '~> 6.1.5'
