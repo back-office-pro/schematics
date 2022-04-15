@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Summary of Schematics.'
   spec.description = 'Description of Schematics.'
   spec.license = 'Private'
-  spec.required_ruby_version = '>= 3.1.1'
+  spec.required_ruby_version = '>= 3.1.2'
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
