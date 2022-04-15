@@ -44,6 +44,8 @@ module MainApp
         .to_h do |key, value|
           [entity_x_field.format(key), entity_y_field&.format(value) || value]
         end
+    rescue ActiveRecord::StatementInvalid
+      {}
     end
 
     def xtitle
