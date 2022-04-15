@@ -8,7 +8,6 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Fillable
-      include Behaviours::Editable
 
       def search_data
         super
@@ -24,10 +23,6 @@ module Schematics
 
       def icon
         :font
-      end
-
-      def input_type
-        :textarea
       end
 
       def format(value)

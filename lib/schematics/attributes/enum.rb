@@ -7,7 +7,6 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Fillable
-      include Behaviours::Editable
       include Behaviours::Enumerable
 
       def type

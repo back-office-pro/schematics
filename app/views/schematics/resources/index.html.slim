@@ -10,6 +10,6 @@
         = render Schematics::Button::ResetFilters::Component.new(model_class:)
   .card-body.p-0
     = form_tag '', method: :get do
-      = submit_tag 'Filtrer', name: nil, class: 'd-none'
+      = submit_tag nil, name: nil, class: 'd-none'
       = render Schematics::Viewer::Component.build(resources: @resources)
 = render Schematics::Viewer::Pagination::Component.new(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)

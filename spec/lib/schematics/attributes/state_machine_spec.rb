@@ -44,7 +44,6 @@ describe Schematics::Attributes::StateMachine do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
   it { is_expected.to be_readonly }
 
@@ -52,7 +51,6 @@ describe Schematics::Attributes::StateMachine do
   its(:column_name) { is_expected.to eq('state') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:recycle) }
-  its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to eq('pending') }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('orders.state') }

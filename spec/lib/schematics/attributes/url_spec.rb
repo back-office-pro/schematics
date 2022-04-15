@@ -13,13 +13,11 @@ describe Schematics::Attributes::Url do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
 
   its(:type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('url') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:chrome) }
-  its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to match(URI::DEFAULT_PARSER.make_regexp) }
   its(:validators) { is_expected.to eq(url: { allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }

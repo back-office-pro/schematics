@@ -16,7 +16,6 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
 gem 'simple_form', # TODO: remove when simple_form is upgraded
     git: 'https://github.com/heartcombo/simple_form',
     branch: 'main'

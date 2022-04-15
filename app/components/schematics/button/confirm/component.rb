@@ -4,6 +4,29 @@ module Schematics
   module Button
     module Confirm
       class Component < ApplicationComponent
+        def initialize(compact: false)
+          super
+          @compact = compact
+        end
+
+        def css_classes
+          [
+            'btn',
+            'btn-primary',
+            'btn-sm',
+            ('btn-icon-split' unless compact?),
+            ('me-2' unless compact?),
+            ('mx-1' if compact?)
+          ].compact
+        end
+
+        def icon_class
+          'fa-fw' if compact?
+        end
+
+        def compact?
+          @compact
+        end
       end
     end
   end

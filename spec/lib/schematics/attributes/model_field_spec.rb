@@ -17,14 +17,12 @@ describe Schematics::Attributes::ModelField do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('part') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:code) }
-  its(:input_type) { is_expected.to eq(:select) }
   its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to eq(inclusion: { in: [] }, allow_blank: true) }
   its(:weight) { is_expected.to eq(1) }

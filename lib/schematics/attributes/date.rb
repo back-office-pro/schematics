@@ -7,7 +7,6 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Fillable
-      include Behaviours::Editable
       include Behaviours::Rangeable
 
       ALLOWLIST = %i[equal_to before after before_or_equal_to after_or_equal_to].freeze
@@ -48,10 +47,6 @@ module Schematics
 
       def icon
         :calendar_days
-      end
-
-      def input_type
-        :date
       end
 
       protected

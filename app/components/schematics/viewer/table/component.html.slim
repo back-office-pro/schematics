@@ -14,4 +14,4 @@
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
             - entity.listable_elements.stable_sort_by(&:weight).each do |field|
               td.text-nowrap.text-center.align-middle.animate__slideInDown class=col_preference_class(field)
-                = render Schematics::Resource::Component.new(resource:, field:, editable: true)
+                = render Schematics::Resource::Component.new(resource:, field:)

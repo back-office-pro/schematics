@@ -8,7 +8,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@validide/resizable-table-columns/dist/css/resizable-table-columns';
 @import 'timeline';
 @import 'trix';
-@import 'best_in_place';
 @import 'slim_select';
 @import 'swagger';
 @import 'navbar/component';
@@ -19,6 +18,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'message_center/component';
 @import 'online_users_center/component';
 @import 'viewer/calendar/component';
+@import 'resource/component';
 
 // Variables
 

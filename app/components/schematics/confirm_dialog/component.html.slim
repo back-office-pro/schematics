@@ -18,4 +18,4 @@
         .pt-2 = t('schematics.application.delete.subtitle')
       .modal-footer
         = render Schematics::Button::Confirm::Component.new
-        = render Schematics::Button::Cancel::Component.new
+        = render Schematics::Button::Cancel::Component.new(data: { 'bs-dismiss': 'modal' })

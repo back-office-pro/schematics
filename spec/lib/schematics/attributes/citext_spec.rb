@@ -13,14 +13,12 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.not_to be_case_sensitive }
 
   its(:type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('last_name') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:align_justify) }
-  its(:input_type) { is_expected.to eq(:input) }
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
   its(:validate) { is_expected.to be_nil }

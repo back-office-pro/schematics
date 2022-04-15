@@ -45,7 +45,6 @@ describe Schematics::Attributes::References do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('references') }
@@ -55,7 +54,6 @@ describe Schematics::Attributes::References do
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq(:user) }
-  its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }

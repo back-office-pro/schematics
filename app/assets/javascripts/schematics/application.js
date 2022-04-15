@@ -5,7 +5,6 @@
 //= require rails.validations.simple_form.bootstrap4
 //= require js-routes
 //= require slim-select/dist/slimselect
-//= require ./best_in_place
 //= require ./chartkick
 //= require ./pagy
 //= require ./swagger
@@ -18,7 +17,7 @@ document.addEventListener('turbolinks:load', function () {
     .querySelectorAll('*[data-href]')
     .forEach(element => {
       element.addEventListener('click', function (e) {
-        if (!e.target.closest('a, .btn-group, .best_in_place')) {
+        if (!e.target.closest('a, .btn-group, [data-controller="edit-in-place"]')) {
           Turbolinks.visit(this.dataset.href)
         }
       })

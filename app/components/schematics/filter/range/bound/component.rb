@@ -15,7 +15,12 @@ module Schematics
           end
 
           def type
-            @field.try(:input_type) || :number
+            case @field
+            when Attributes::Date
+              :date
+            else
+              :number
+            end
           end
 
           def filter_name

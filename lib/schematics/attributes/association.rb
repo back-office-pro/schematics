@@ -10,7 +10,6 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
-      include Behaviours::Editable
 
       delegate :descriptor, to: :inverse_entity
       delegate :polymorphic?, to: :options
@@ -82,10 +81,6 @@ module Schematics
 
       def icon
         inverse_entity&.icon || :link
-      end
-
-      def input_type
-        :select
       end
 
       # :reek:FeatureEnvy

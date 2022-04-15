@@ -13,10 +13,6 @@ module Schematics
         false
       end
 
-      def input_type
-        :input
-      end
-
       def icon
         :align_justify
       end

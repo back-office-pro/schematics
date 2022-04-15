@@ -30,7 +30,6 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Editable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('belongs_to') }
@@ -41,7 +40,6 @@ describe Schematics::Attributes::BelongsTo do
   its(:class_name) { is_expected.to eq('Schema') }
   its(:model_class) { is_expected.to be_nil }
   its(:preload) { is_expected.to eq(:schema) }
-  its(:input_type) { is_expected.to eq(:select) }
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }

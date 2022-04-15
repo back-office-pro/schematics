@@ -1,75 +1,63 @@
-- case @field
-- when Schematics::Associations::Association, Schematics::Attributes::Association
-  - if value.present?
-    - if value.deleted?
-      .text-muted
-        = fa_icon :box_archive, class: 'me-2'
-        = value
+span data=div_data
+  span.animate__animated data=span_data
+    - case @field
+    - when Schematics::Associations::Association, Schematics::Attributes::Association
+      - if value.present?
+        - if value.deleted?
+          .text-muted
+            = fa_icon :box_archive, class: 'me-2'
+            = value
+        - else
+          = link_to(value.to_s, value)
+    - when Schematics::Attributes::Jsonb
+      - if value
+        table
+          - value.each do |key, value|
+            tr
+              th = key
+              td = value
+    - when Schematics::Attributes::Address
+      = render Schematics::GoogleMap::Component.new(address: value)
+    - when Schematics::Attributes::Color
+      .btn.p-2.pe-none style="background: #{value};"
+    - when Schematics::Attributes::Attachments
+      = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true, highlight: @highlight)
+    - when Schematics::Attributes::Blob
+      = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if deletable?
+      - if value.representable?
+        = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
+        span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
+          = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
+      - else
+        = link_to value.filename, value
+    - when Schematics::Attributes::Attachment
+      - if value.attached?
+        = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if deletable?
+        - if value.representable?
+          = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
+          span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
+            = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
+        - else
+          = link_to value.filename, value
+    - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
+      span.text-danger
+        = fa_icon(:triangle_exclamation, class: 'me-2')
+        = @field.format(value)
+    - when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
+      - case value
+      - when TrueClass
+        = fa_icon(:check, class: 'text-success')
+      - when FalseClass
+        = fa_icon(:xmark, class: 'text-danger')
+    - when Schematics::Attributes::StateMachine
+      h5.mb-0
+        span.badge.bg-secondary = @field.format(value)
+    - when Schematics::Attributes::RichText
+      == value
+    - when Schematics::Attributes::Country
+        span.fi.rounded class="fi-#{value&.downcase}"
+    - when Schematics::Behaviours::Searchable
+      = highlight @field.format(value), @highlight
     - else
-      = link_to(value.to_s, value)
-- when Schematics::Attributes::Jsonb
-  - if value
-    table
-      - value.each do |key, value|
-        tr
-          th = key
-          td = value
-- when Schematics::Attributes::Address
-  = render Schematics::GoogleMap::Component.new(address: value)
-- when Schematics::Attributes::Color
-  .btn.p-2.pe-none style="background: #{value};"
-- when Schematics::Attributes::Attachments
-  = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true, highlight: @highlight)
-- when Schematics::Attributes::Blob
-  = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if editable?
-  - if value.representable?
-    = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
-    span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
-      = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
-  - else
-    = link_to value.filename, value
-- when Schematics::Attributes::Attachment
-  - if value.attached?
-    = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if editable?
-    - if value.representable?
-      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
-      span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
-        = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
-    - else
-      = link_to value.filename, value
-- when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
-  span.text-danger
-    = fa_icon(:triangle_exclamation, class: 'me-2')
-    = @field.format(value)
-- when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
-  - case value
-  - when TrueClass
-    = fa_icon(:check, class: 'text-success')
-  - when FalseClass
-    = fa_icon(:xmark, class: 'text-danger')
-- when Schematics::Attributes::StateMachine
-  h5.mb-0
-    span.badge.bg-secondary = @field.format(value)
-- when Schematics::Attributes::RichText
-  == value
-- when Schematics::Attributes::Country
-  - if editable?
-    = best_in_place @resource,
-                    @field.column_name.to_sym,
-                    as: @field.input_type,
-                    inner_class: 'form-control border-0',
-                    collection: @field.input_collection,
-                    display_with: ->(value) { tag.span(class: "fi fi-#{value&.downcase} rounded") }
-  - else
-    span.fi.rounded class="fi-#{value&.downcase}"
-- when editable? && Schematics::Behaviours::Editable
-  = best_in_place @resource,
-                  @field.column_name.to_sym,
-                  as: @field.input_type,
-                  inner_class: 'form-control border-0',
-                  collection: @field.try(:input_collection),
-                  display_with: (->(value) { @field.format(value) } unless @field.is_a?(Schematics::Attributes::Association))
-- when Schematics::Behaviours::Searchable
-  = highlight @field.format(value), @highlight
-- else
-  = @field.format(value)
+      = @field.format(value)
+  = render Schematics::ResourceForm::Component.new(resource: @resource, remote: true, attributes: [@field]) if editable?
