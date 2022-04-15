@@ -4,9 +4,7 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Schematics::LicenceAbility do
-  subject(:ability) { described_class.new(licence) }
-
-  let(:licence) { Licence.instance }
+  subject(:ability) { described_class.new }
 
   context 'when storage quota is exceeded' do
     before { allow(Licence.instance).to receive(:quota_storage_exceeded?).and_return(true) }
