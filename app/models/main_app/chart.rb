@@ -34,7 +34,7 @@ module MainApp
       [ytitle, ::I18n.t('by'), xtitle&.downcase].compact.join(' ')
     end
 
-    def serializable_hash(*)
+    def serializable_hash(*) # rubocop:disable Metrics/CyclomaticComplexity
       return unless model_class
 
       model_class
