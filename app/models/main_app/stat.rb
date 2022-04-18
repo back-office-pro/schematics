@@ -16,7 +16,7 @@ module MainApp
     end
 
     def value_formatted
-      format(value) || value.to_s
+      format(value) || '-'
     end
 
     def model_class
@@ -30,7 +30,9 @@ module MainApp
     end
 
     def value
-      model_class&.public_send(agregate.to_sym, to_sql || :all) || '-'
+      model_class&.public_send(agregate.to_sym, to_sql || :all)
+    rescue ActiveRecord::StatementInvalid
+      nil
     end
 
     def title
