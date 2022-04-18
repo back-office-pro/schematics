@@ -11,9 +11,10 @@ module Schematics
         super.join
       end
 
+      # :reek:NilCheck
       def format(value)
         case value
-        when StandardError
+        when nil, StandardError
           super
         else
           translate(value, default: value.to_s).upcase
