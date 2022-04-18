@@ -259,7 +259,8 @@
             "time",
             "timestamp",
             "token",
-            "url"
+            "url",
+            "user_agent"
           ]
         },
         "options": {
