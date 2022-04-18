@@ -7,11 +7,7 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class Mime < String
       def format(value)
-        ::Mime::Type
-          .lookup(value)
-          .symbol
-          .to_s
-          .upcase
+        value && ::Mime::Type.lookup(value).symbol.to_s.upcase
       end
 
       def validators
