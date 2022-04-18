@@ -80,6 +80,8 @@ Lint/ConstantResolution:
     - Singleton
     - Arel
     - Draft
+    - Resolv
+    - Session
   Exclude:
     - spec/**/*
     - db/*
@@ -126,8 +128,6 @@ Style/UnlessLogicalOperators:
 Style/MutableConstant:
   EnforcedStyle: strict
 Style/Documentation:
-  Enabled: false
-Style/RescueModifier:
   Enabled: false
 Style/HashEachMethods:
   AllowedReceivers:

@@ -7,7 +7,10 @@ module Schematics
       include Behaviours::Enumerable
 
       def format(value)
-        value && value.constantize.human_name.titleize rescue value
+        value
+          &.safe_constantize
+          &.human_name
+          &.titleize || value
       end
 
       def values
