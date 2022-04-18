@@ -9,9 +9,10 @@ module Schematics
         super.merge(numericality: { allow_blank: })
       end
 
+      # :reek:NilCheck
       def format(value)
         case value
-        when StandardError
+        when nil, StandardError
           super
         else
           case unit
