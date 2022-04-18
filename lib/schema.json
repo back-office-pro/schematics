@@ -242,6 +242,7 @@
             "email",
             "enum",
             "float",
+            "inet",
             "integer",
             "jsonb",
             "mime",
