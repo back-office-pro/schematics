@@ -6,8 +6,12 @@ describe Schematics::Associations::HasAndBelongsToMany do
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'role',
-      descriptor: 'name',
-      attributes: [{ name: 'name', type: 'string' }]
+      options: {
+        descriptor: 'name'
+      },
+      attributes: [
+        { name: 'name', type: 'string' }
+      ]
     )
   end
   let(:options) do

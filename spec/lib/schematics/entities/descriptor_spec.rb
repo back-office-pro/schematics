@@ -6,7 +6,9 @@ describe Schematics::Entities::Descriptor do
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'entity',
-      descriptor: 'type',
+      options: {
+        descriptor: 'type'
+      },
       attributes: [
         { name: 'type', type: 'string' }
       ]

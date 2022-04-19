@@ -10,7 +10,7 @@ module Schematics
 
       class << self
         def build(entity, descriptor)
-          new(entity.find_field_by_name(descriptor))
+          new(entity.find_field_by_name(descriptor || 'id'))
         end
       end
 

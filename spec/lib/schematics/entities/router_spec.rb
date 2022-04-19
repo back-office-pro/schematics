@@ -3,7 +3,8 @@
 describe Schematics::Entities::Router do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user', actions:, attributes:) }
+  let(:entity) { Schematics::Entities::Entity.build(name: 'user', options:, attributes:) }
+  let(:options) { { actions: } }
   let(:actions) { nil }
   let(:attributes) { [] }
 

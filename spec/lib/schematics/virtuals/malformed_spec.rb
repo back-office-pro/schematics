@@ -6,7 +6,9 @@ describe Schematics::Virtuals::Malformed do
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'product',
-      descriptor: 'full_name',
+      options: {
+        descriptor: 'full_name'
+      },
       attributes: [
         { name: 'price', type: 'float' }
       ]

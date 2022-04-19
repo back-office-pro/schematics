@@ -66,7 +66,7 @@ module Schematics
       ::JSON
         .parse(File.read(File.expand_path('../app.json', __dir__)), symbolize_names: true)
         .tap do |json|
-          json[:entities].each { _1[:core] = true }
+          json[:entities].each { _1[:options]&.store(:core, true) }
         end
     end
 

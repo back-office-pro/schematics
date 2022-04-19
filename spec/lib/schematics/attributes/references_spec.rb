@@ -6,7 +6,9 @@ describe Schematics::Attributes::References do
   let(:parent_entity) do
     Schematics::Entities::Entity.build(
       name: 'user',
-      descriptor: 'full_name',
+      options: {
+        descriptor: 'full_name'
+      },
       attributes: [
         { name: 'first_name', type: 'string' },
         { name: 'last_name', type: 'string' }
@@ -22,7 +24,9 @@ describe Schematics::Attributes::References do
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'entity',
-      descriptor: 'type',
+      options: {
+        descriptor: 'type'
+      },
       attributes: [{ name: 'type', type: 'string' }]
     )
   end

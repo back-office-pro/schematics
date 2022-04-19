@@ -1,16 +1,45 @@
 {
   "definitions": {
+    "entity_option": {
+      "additionalProperties": false,
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "index",
+              "show",
+              "create",
+              "update",
+              "destroy",
+              "archive"
+            ]
+          }
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "core": {
+          "type": "boolean"
+        }
+      }
+    },
     "entity": {
       "$ref": "#/definitions/non_reserved_name",
       "properties": {
         "type": {
           "type": "string"
         },
-        "icon": {
-          "type": "string"
-        },
-        "descriptor": {
-          "type": "string"
+        "options": {
+          "$ref": "#/definitions/entity_option",
+          "type": "object"
         },
         "triggers": {
           "items": {

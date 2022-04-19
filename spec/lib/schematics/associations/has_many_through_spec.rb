@@ -6,22 +6,34 @@ describe Schematics::Associations::HasManyThrough do
   let(:parent_entity) do
     Schematics::Entities::Entity.build(
       name: 'schema',
-      descriptor: 'title',
-      attributes: [{ name: 'title', type: 'string' }]
+      options: {
+        descriptor: 'title'
+      },
+      attributes: [
+        { name: 'title', type: 'string' }
+      ]
     )
   end
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'attribute',
-      descriptor: 'name',
-      attributes: [{ name: 'name', type: 'string' }]
+      options: {
+        descriptor: 'name'
+      },
+      attributes: [
+        { name: 'name', type: 'string' }
+      ]
     )
   end
   let(:through_entity) do
     Schematics::Entities::Entity.build(
       name: 'entity',
-      descriptor: 'type',
-      attributes: [{ name: 'type', type: 'string' }]
+      options: {
+        descriptor: 'type'
+      },
+      attributes: [
+        { name: 'type', type: 'string' }
+      ]
     )
   end
   let(:belongs_to) do

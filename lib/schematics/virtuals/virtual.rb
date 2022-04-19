@@ -27,7 +27,7 @@ module Schematics
         @entity = entity
         @name = name
         @tokens = tokens
-        @options = Attributes::Options.new(options)
+        @options = Schematics::Options.new(options)
       end
 
       def open_api_type

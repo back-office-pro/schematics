@@ -6,15 +6,23 @@ describe Schematics::Attributes::BelongsTo do
   let(:parent_entity) do
     Schematics::Entities::Entity.build(
       name: 'schema',
-      descriptor: 'title',
-      attributes: [{ name: 'title', type: 'string' }]
+      options: {
+        descriptor: 'title'
+      },
+      attributes: [
+        { name: 'title', type: 'string' }
+      ]
     )
   end
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'entity',
-      descriptor: 'type',
-      attributes: [{ name: 'type', type: 'string' }]
+      options: {
+        descriptor: 'type'
+      },
+      attributes: [
+        { name: 'type', type: 'string' }
+      ]
     )
   end
   let(:name) { 'schema' }

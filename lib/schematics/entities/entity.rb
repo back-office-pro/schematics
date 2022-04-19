@@ -6,69 +6,38 @@ require 'active_support/core_ext/array/access'
 module Schematics
   module Entities
     class Entity # rubocop:disable Metrics/ClassLength
-      attr_reader :name,
-                  :icon,
-                  :descriptor,
-                  :actions,
-                  :attributes,
-                  :virtuals,
-                  :triggers,
-                  :associations
+      attr_reader :name, :descriptor, :actions, :attributes, :virtuals, :triggers, :associations
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
+      delegate :core?, :hidden?, to: :@options
 
       class << self
-        # :reek:LongParameterList :reek:BooleanParameter
+        # :reek:LongParameterList
         def build( # rubocop:disable Metrics/ParameterLists
           name:,
-          type: nil,
-          icon: :square_caret_right,
-          descriptor: 'id',
-          core: false,
-          actions: nil,
+          type: self.name.demodulize,
+          options: {},
           associations: [],
           attributes: [],
           virtuals: [],
           triggers: []
         )
-          args = [
-            name,
-            icon.to_sym,
-            descriptor,
-            core,
-            actions,
-            associations,
-            attributes,
-            virtuals,
-            triggers
-          ]
-          return new(*args) unless type
-
-          Entities.const_get(type.camelize.to_sym).new(*args)
+          Entities
+            .const_get(type.camelize.to_sym)
+            .new(name, options, associations, attributes, virtuals, triggers)
         end
       end
 
       # :reek:LongParameterList
-      def initialize( # rubocop:disable Metrics/ParameterLists
-        name,
-        icon,
-        descriptor,
-        core,
-        actions,
-        associations,
-        attributes,
-        virtuals,
-        triggers
-      )
+      def initialize(name, options, associations, attributes, virtuals, triggers) # rubocop:disable Metrics/ParameterLists
         @name = name
-        @icon = icon
-        @core = core
-        @actions = (actions || default_actions).map(&:to_sym)
+        @options = Schematics::Options.new(options)
+        @actions = (@options.actions || default_actions).map(&:to_sym)
         @associations = associations.map { Associations::Association.build(self, **_1) }
         @attributes = attributes.map { Attributes::Attribute.build(self, **_1) }
         @virtuals = virtuals.map { Virtuals::Virtual.build(self, **_1) }
         @triggers = triggers.map { Trigger.new(**_1) }
-        @descriptor = Descriptor.build(self, descriptor)
+        @descriptor = Descriptor.build(self, @options.descriptor)
       end
 
       def method_missing(method_name, *args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -192,12 +161,8 @@ module Schematics
         name.tr('/', '_')
       end
 
-      def core?
-        @core
-      end
-
-      def hidden?
-        core? && !can?(:index)
+      def icon
+        @options.icon&.to_sym || :square_caret_right
       end
 
       def load

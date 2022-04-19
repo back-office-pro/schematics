@@ -2,8 +2,10 @@
   "entities": [
     {
       "name": "user",
-      "icon": "users",
-      "descriptor": "full_name",
+      "options": {
+        "icon": "users",
+        "descriptor": "full_name"
+      },
       "virtuals": [
         {
           "name": "full_name",
@@ -111,8 +113,10 @@
     },
     {
       "name": "message",
-      "icon": "inbox",
-      "descriptor": "subject",
+      "options": {
+        "icon": "inbox",
+        "descriptor": "subject"
+      },
       "attributes": [
         {
           "name": "subject",
@@ -153,13 +157,15 @@
     },
     {
       "name": "active_storage/attachment",
-      "icon": "file",
-      "descriptor": "filename",
-      "actions": [
-        "index",
-        "show",
-        "destroy"
-      ],
+      "options": {
+        "icon": "file",
+        "descriptor": "filename",
+        "actions": [
+          "index",
+          "show",
+          "destroy"
+        ]
+      },
       "attributes": [
         {
           "name": "filename",
@@ -189,8 +195,10 @@
     {
       "name": "setting",
       "type": "singleton",
-      "icon": "gear",
-      "descriptor": "company_name",
+      "options": {
+        "icon": "gear",
+        "descriptor": "company_name"
+      },
       "attributes": [
         {
           "name": "company_name",
@@ -231,8 +239,10 @@
     },
     {
       "name": "role",
-      "icon": "user_lock",
-      "descriptor": "name",
+      "options": {
+        "icon": "user_lock",
+        "descriptor": "name"
+      },
       "associations": [
         {
           "type": "has_and_belongs_to_many",
@@ -260,12 +270,14 @@
     },
     {
       "name": "permission",
-      "icon": "key",
-      "descriptor": "name",
-      "actions": [
-        "index",
-        "show"
-      ],
+      "options": {
+        "icon": "key",
+        "descriptor": "name",
+        "actions": [
+          "index",
+          "show"
+        ]
+      },
       "attributes": [
         {
           "name": "model",
@@ -293,11 +305,13 @@
     },
     {
       "name": "import",
-      "icon": "cloud_arrow_up",
-      "actions": [
-        "index",
-        "show"
-      ],
+      "options": {
+        "icon": "cloud_arrow_up",
+        "actions": [
+          "index",
+          "show"
+        ]
+      },
       "attributes": [
         {
           "name": "file",
@@ -351,9 +365,12 @@
     {
       "name": "licence",
       "type": "singleton",
-      "descriptor": "plan",
-      "icon": "id_badge",
-      "actions": [],
+      "options": {
+        "descriptor": "plan",
+        "icon": "id_badge",
+        "hidden": true,
+        "actions": []
+      },
       "attributes": [
         {
           "name": "plan",
@@ -377,7 +394,9 @@
     },
     {
       "name": "chart",
-      "icon": "chart_line",
+      "options": {
+        "icon": "chart_line"
+      },
       "attributes": [
         {
           "name": "kind",
@@ -437,7 +456,9 @@
     },
     {
       "name": "stat",
-      "icon": "stopwatch_20",
+      "options": {
+        "icon": "stopwatch_20"
+      },
       "attributes": [
         {
           "name": "agregate",
@@ -473,12 +494,15 @@
     },
     {
       "name": "search",
-      "icon": "magnifying_glass",
-      "descriptor": "query",
-      "actions": [
-        "create",
-        "show"
-      ],
+      "options": {
+        "icon": "magnifying_glass",
+        "descriptor": "query",
+        "hidden": true,
+        "actions": [
+          "create",
+          "show"
+        ]
+      },
       "attributes": [
         {
           "name": "query",
@@ -503,12 +527,15 @@
     },
     {
       "name": "comparison",
-      "icon": "scale_balanced",
-      "descriptor": "model",
-      "actions": [
-        "create",
-        "show"
-      ],
+      "options": {
+        "icon": "scale_balanced",
+        "descriptor": "model",
+        "hidden": true,
+        "actions": [
+          "create",
+          "show"
+        ]
+      },
       "attributes": [
         {
           "name": "model",
@@ -525,13 +552,16 @@
     },
     {
       "name": "draft",
-      "icon": "floppy_disk",
-      "actions": [
-        "create",
-        "update",
-        "show",
-        "destroy"
-      ],
+      "options": {
+        "icon": "floppy_disk",
+        "hidden": true,
+        "actions": [
+          "create",
+          "update",
+          "show",
+          "destroy"
+        ]
+      },
       "attributes": [
         {
           "name": "name",

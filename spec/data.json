@@ -2,8 +2,10 @@
   "entities": [
     {
       "name": "client",
-      "icon": "user_tie",
-      "descriptor": "full_name",
+      "options": {
+        "icon": "user_tie",
+        "descriptor": "full_name"
+      },
       "virtuals": [
         {
           "name": "full_name",
@@ -45,8 +47,10 @@
     },
     {
       "name": "sub_category",
-      "icon": "box",
-      "descriptor": "designation",
+      "options": {
+        "icon": "box",
+        "descriptor": "designation"
+      },
       "attributes": [
         {
           "name": "designation",
@@ -66,8 +70,10 @@
     },
     {
       "name": "category",
-      "icon": "box",
-      "descriptor": "label",
+      "options": {
+        "icon": "box",
+        "descriptor": "label"
+      },
       "triggers": [
         {
           "action": "save",
@@ -96,7 +102,9 @@
     },
     {
       "name": "product",
-      "descriptor": "reference",
+      "options": {
+        "descriptor": "reference"
+      },
       "virtuals": [
         {
           "name": "tax_inclusive_price",
@@ -262,13 +270,15 @@
     },
     {
       "name": "stock_movement",
-      "icon": "people_carry",
-      "actions": [
-        "index",
-        "show",
-        "create",
-        "destroy"
-      ],
+      "options": {
+        "icon": "people_carry",
+        "actions": [
+          "index",
+          "show",
+          "create",
+          "destroy"
+        ]
+      },
       "triggers": [
         {
           "action": "create",

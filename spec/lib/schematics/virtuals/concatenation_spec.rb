@@ -6,7 +6,9 @@ describe Schematics::Virtuals::Concatenation do
   let(:entity) do
     Schematics::Entities::Entity.build(
       name: 'user',
-      descriptor: 'full_name',
+      options: {
+        descriptor: 'full_name'
+      },
       attributes: [
         { name: 'first_name', type: 'string' },
         { name: 'last_name', type: 'string' }
