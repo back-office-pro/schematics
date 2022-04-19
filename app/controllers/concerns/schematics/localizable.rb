@@ -11,7 +11,7 @@ module Schematics
     end
 
     def switch_locale(&)
-      ::I18n.with_locale(current_user&.locale || http_header_locale, &) rescue yield # rubocop:disable Style/RescueModifier
+      ::I18n.with_locale(current_user.locale, &)
     end
 
     def switch_beginning_of_week(&)
@@ -19,18 +19,7 @@ module Schematics
     end
 
     def switch_time_zone(&)
-      ::Time.use_zone(current_user&.time_zone, &) rescue yield # rubocop:disable Style/RescueModifier
-    end
-
-    private
-
-    def http_header_locale
-      request
-        .env['HTTP_ACCEPT_LANGUAGE']
-        &.scan(/^[a-z]{2}/)
-        &.to_a
-        &.first
-        &.to_sym
+      ::Time.use_zone(current_user.time_zone, &)
     end
   end
 end
