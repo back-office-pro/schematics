@@ -7,4 +7,4 @@
     = simple_form_for :user, url: password_resets_path, wrapper: :input_group, html: { data: { controller: 'form' } } do |form|
       = form.input :email, prepend: fa_icon(:envelope)
       = render Schematics::Button::Confirm::Component.new
-      = render Schematics::Button::Cancel::Component.new(path: login_path)
+      = render Schematics::Button::Cancel::Component.new(path: main_app.login_path)

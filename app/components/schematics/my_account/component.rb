@@ -3,9 +3,7 @@
 module Schematics
   module MyAccount
     class Component < ApplicationComponent
-      delegate :logout_path,
-               :profile_path,
-               :admin_path,
+      delegate :admin_path,
                :edit_preferences_path,
                to: 'Schematics::Engine.routes.url_helpers'
     end
