@@ -5,11 +5,11 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      before_action :update_last_seen_at!, unless: -> { request.format.json? }
+      before_action :track!, unless: -> { request.format.json? }
     end
 
-    def update_last_seen_at!
-      current_user&.update!(last_seen_at: ::Time.current)
+    def track!
+      current_session.update!(updated_at: ::Time.current)
     end
   end
 end
