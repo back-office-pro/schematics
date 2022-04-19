@@ -18,6 +18,9 @@ en:
         schema:
           caption: Application schema editor
           title: Edit my application
+        sessions:
+          caption: Manage application accesses
+          title: Secure accesses
         settings:
           caption: Manage application settings
           title: Application settings
