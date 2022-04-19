@@ -30,10 +30,6 @@
           }
         },
         {
-          "name": "auth_token",
-          "type": "token"
-        },
-        {
           "name": "password_reset_token",
           "type": "token"
         },
@@ -96,10 +92,6 @@
           "options": {
             "required": true
           }
-        },
-        {
-          "name": "last_seen_at",
-          "type": "timestamp"
         },
         {
           "name": "read_notifications_at",
@@ -573,6 +565,47 @@
         {
           "name": "data",
           "type": "jsonb"
+        },
+        {
+          "name": "user",
+          "type": "references",
+          "options": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "session",
+      "options": {
+        "icon": "user_shield",
+        "hidden": true,
+        "actions": [
+          "index",
+          "show",
+          "create",
+          "update",
+          "destroy"
+        ]
+      },
+      "attributes": [
+        {
+          "name": "auth_token",
+          "type": "token"
+        },
+        {
+          "name": "user_agent",
+          "type": "user_agent",
+          "options": {
+            "readonly": true
+          }
+        },
+        {
+          "name": "ip",
+          "type": "inet",
+          "options": {
+            "readonly": true
+          }
         },
         {
           "name": "user",
