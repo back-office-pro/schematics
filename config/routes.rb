@@ -8,7 +8,6 @@ Schematics::Engine.routes.draw do
   root Schematics::Schema.instance.root_route
 
   localized do
-    draw :sessions
     draw :password_resets
     resource :preferences, only: %i[edit update]
     resource :schema, only: %i[edit update show], controller: :schema
