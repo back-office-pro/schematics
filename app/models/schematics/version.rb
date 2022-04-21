@@ -24,8 +24,8 @@ module Schematics
       (versions || self)
         .with_user
         .with_item
-        .yield_self { versions ? _1 : _1.accessible_by(ability) }
-        .yield_self { versions ? _1 : _1.filter_by_user_preferences }
+        .then_tap { _1.accessible_by(ability) unless versions }
+        .then_tap { _1.filter_by_user_preferences unless versions }
         .reorder(created_at: :desc)
     }
 

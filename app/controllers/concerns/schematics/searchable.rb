@@ -11,7 +11,7 @@ module Schematics
         order: sorting_params,
         scope_results: lambda { |results|
           results
-            .yield_self { filter_params.key?(:with_deleted) ? _1.with_deleted : _1 }
+            .then_tap { _1.with_deleted if filter_params.key?(:with_deleted) }
             .accessible_by(current_ability)
         }
       }

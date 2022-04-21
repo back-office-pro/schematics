@@ -240,7 +240,7 @@ module Schematics
       @resource = model_class
                   .includes(entity.includes)
                   .includes(:slugs)
-                  .yield_self { request.delete? ? _1.with_deleted : _1 }
+                  .then_tap { _1.with_deleted if request.delete? }
                   .finder(params[:id])
       return if request.path.start_with?(polymorphic_path(@resource))
 

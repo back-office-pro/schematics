@@ -30,7 +30,7 @@ module Schematics
         .map do |association|
         resource
           .public_send(association.name)
-          .yield_self { association.is_a?(HABTM) ? _1 : _1.includes(association.entity.includes) }
+          .then_tap { _1.includes(association.entity.includes) unless association.is_a?(HABTM) }
           .accessible_by(current_ability)
           .order(created_at: :desc)
       end
