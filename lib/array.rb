@@ -10,6 +10,6 @@ class Array
   end
 
   def stable_sort_by
-    sort_by.with_index { |first_element, second_element| [yield(first_element), second_element] }
+    sort_by.with_index { [yield(_1), _2] } # rubocop:disable Style/NumberedParametersLimit
   end
 end
