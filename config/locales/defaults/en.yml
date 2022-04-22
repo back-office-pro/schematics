@@ -35,12 +35,6 @@ en:
     labels:
       defaults:
         _destroy: Delete?
-      import:
-        file: File
-      user:
-        email: Email
-        password: Password
-        remember_me: Remember me?
   time:
     formats:
       long: "%A %d %B, %Y at %H:%M"
