@@ -35,11 +35,6 @@ fr:
         update: Editer %{resource}
       schema:
         edit: Editer mon application
-      sessions:
-        create: Se connecter
-        edit: Editer mon profil
-        new: Se connecter
-        update: Editer mon profil
       swagger:
         index: Documentation API
       versions:
@@ -47,3 +42,10 @@ fr:
         show: Historique
     searches:
       show: Recherche "%{resource}"
+    sessions:
+      create: Se connecter
+      edit: Editer mon profil
+      index: Liste des %{human_name_plural}
+      new: Se connecter
+      show: "%{resource}"
+      update: Editer mon profil

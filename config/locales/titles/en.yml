@@ -35,11 +35,6 @@ en:
         update: Edit %{resource}
       schema:
         edit: Edit my application
-      sessions:
-        create: Login
-        edit: Edit my profile
-        new: Login
-        update: Edit my profile
       swagger:
         index: API documentation
       versions:
@@ -47,3 +42,10 @@ en:
         show: Timeline
     searches:
       show: Search "%{resource}"
+    sessions:
+      create: Login
+      edit: Edit my profile
+      index: List of %{human_name_plural}
+      new: Login
+      show: "%{resource}"
+      update: Edit my profile
