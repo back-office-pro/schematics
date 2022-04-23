@@ -4,12 +4,20 @@ module Schematics
   module Guest
     # :reek:MissingSafeMethod
     class Session
+      delegate :ip, :user_agent, to: :@request
+
       def initialize(request:)
         @request = request
       end
 
       def user
         User.new(locale:) # rubocop:disable Lint/ConstantResolution
+      end
+
+      def login!(user)
+        PaperTrail.request(enabled: false) do
+          ::Session.create!(ip:, user_agent:, user:)
+        end
       end
 
       def locale
@@ -19,10 +27,6 @@ module Schematics
           &.to_a
           &.first
           &.to_sym
-      end
-
-      def authorized?
-        false
       end
 
       def update!(*); end
