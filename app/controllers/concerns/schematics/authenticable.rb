@@ -15,24 +15,38 @@ module Schematics
       @current_ability ||= Ability.new(current_user)
     end
 
+    def current_session
+      ::Session
+        .includes(:slugs, user: { avatar_attachment: [blob: :variant_records], role: :permissions })
+        .where(auth_token:)
+        .or(::Session.where(id: session[:current_session_id]))
+        .first || Guest::Session.new(request:)
+    end
+
     def current_user
-      @current_user ||= ::User
-                        .includes(avatar_attachment: [blob: :variant_records], role: :permissions)
-                        .find_by(auth_token: cookies[:auth_token] || auth_token&.dig(:auth_token))
+      @current_user ||= current_session.user
     end
 
     def auth_token
-      @auth_token ||= ::JsonWebToken.decode(request.headers['Authorization']&.split(' ')&.last)
+      ::JsonWebToken.decode(authorization_header)&.dig(:auth_token) ||
+        cookies.permanent.encrypted[:auth_token]
+    end
+
+    def authorization_header
+      request
+        .headers['Authorization']
+        &.split(' ')
+        &.last
     end
 
     def authorize
-      return if current_user
+      return unless current_session.is_a?(Guest::Session)
 
       respond_to do |format|
         format.json { head :unauthorized }
         format.any do
           store_redirect_to_location
-          redirect_to schematics.login_path, alert: t('schematics.application.authorize.alert')
+          redirect_to main_app.login_path, alert: t('schematics.application.authorize.alert')
         end
       end
     end
