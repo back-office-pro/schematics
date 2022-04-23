@@ -1,0 +1,13 @@
+---
+en:
+  activerecord:
+    attributes:
+      session:
+        ip: IP address
+        user: User
+        user_agent: User agent
+    models:
+      session:
+        gender: female
+        one: Session
+        other: Sessions
