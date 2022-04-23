@@ -1,0 +1,13 @@
+---
+fr:
+  sessions:
+    create:
+      failure: L'e-mail ou le mot de passe est invalide
+      invalid_hash: Votre compte n'a pas de mot de passe configuré
+      success: Connecté !
+    destroy:
+      failure: Une erreur est survenue
+      success: Déconnecté !
+    update:
+      failure: Mauvais mot de passe
+      success: Votre profil a été mis à jour avec succès
