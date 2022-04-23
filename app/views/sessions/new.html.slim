@@ -4,7 +4,7 @@
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     = render Schematics::CardHeading::Component.new(icon: :right_to_bracket, title:)
   .card-body.p-3
-    = simple_form_for User.new, as: :session, url: sessions_path, wrapper: :input_group, html: { data: { controller: 'form' } } do |form|
+    = simple_form_for ::User.new, as: :session, url: sessions_path, wrapper: :input_group, html: { data: { controller: 'form' } } do |form|
       = form.input :email, prepend: fa_icon(:envelope)
       = render Schematics::Input::Password::Component.new(form:)
       = form.input :remember_me, as: :boolean

@@ -26,6 +26,7 @@ ignore_missing:
   - errors.*
   - attributes.*
   - schematics.*
+  - sessions.*
   - javascript.*
   - pagy.*
   - date.*
@@ -44,6 +45,7 @@ ignore_unused:
   - errors.*
   - attributes.*
   - schematics.*
+  - sessions.*
   - javascript.*
   - pagy.*
   - date.*
