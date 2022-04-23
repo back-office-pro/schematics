@@ -4,7 +4,7 @@ fr:
     application:
       access_denied:
         alert: Accès non autorisé
-      authorize:
+      authenticate_user:
         alert: Veuillez vous authentifier
       invalid_transition:
         alert: Action non autorisée

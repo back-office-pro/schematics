@@ -4,7 +4,7 @@ module Schematics
   class PasswordResetsController < ApplicationController
     include Fillable
 
-    skip_before_action :authorize
+    skip_before_action :authenticate_user!
     before_action :set_user, only: %i[edit update]
     layout 'schematics/auth'
     delegate :entity, :human_name, :gender, to: :model_class, private: true

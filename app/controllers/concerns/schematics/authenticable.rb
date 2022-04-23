@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      before_action :authorize
+      before_action :authenticate_user!
       helper_method :current_user
     end
 
@@ -39,14 +39,15 @@ module Schematics
         &.last
     end
 
-    def authorize
+    def authenticate_user!
       return unless current_session.is_a?(Guest::Session)
 
       respond_to do |format|
         format.json { head :unauthorized }
         format.any do
           store_redirect_to_location
-          redirect_to main_app.login_path, alert: t('schematics.application.authorize.alert')
+          redirect_to main_app.login_path,
+                      alert: t('schematics.application.authenticate_user.alert')
         end
       end
     end
