@@ -8,7 +8,6 @@ fr:
     delete: supprimer
     edit: editer
     login: connexion
-    logout: deconnexion
     messages: messages
     new: nouveau
     password_lost: mot_de_passe_perdu
