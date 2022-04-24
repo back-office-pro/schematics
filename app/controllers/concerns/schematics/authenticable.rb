@@ -6,7 +6,7 @@ module Schematics
 
     included do
       before_action :authenticate_user!
-      helper_method :current_user
+      helper_method :current_user, :current_session
     end
 
     private
