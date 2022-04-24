@@ -613,6 +613,12 @@
             "required": true
           }
         }
+      ],
+      "virtuals": [
+        {
+          "name": "safe",
+          "function": "$safe == true"
+        }
       ]
     }
   ]

@@ -4,6 +4,7 @@ fr:
     attributes:
       session:
         ip: Adresse IP
+        safe: Connexion certifiée
         user: Utilisateur
         user_agent: Appareil
     models:

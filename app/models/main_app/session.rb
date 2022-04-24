@@ -9,5 +9,13 @@ module MainApp
     prepended do
       scope :online, -> { where(updated_at: ONLINE_DELAY.ago..) }
     end
+
+    def safe
+      user.sessions.exists?(ip:, user_agent:)
+    end
+
+    def login!(*)
+      self
+    end
   end
 end
