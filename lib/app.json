@@ -584,7 +584,6 @@
           "index",
           "show",
           "create",
-          "update",
           "destroy"
         ]
       },
