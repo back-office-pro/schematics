@@ -10,7 +10,9 @@ module Schematics
 
       included do
         fixtures :all
-        delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
+        delegate :root_path,
+                 :edit_profile_path,
+                 to: 'Schematics::Engine.routes.url_helpers'
         delegate :model_class,
                  :entity,
                  :can?,
