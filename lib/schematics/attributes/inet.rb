@@ -18,7 +18,7 @@ module Schematics
       end
 
       def default
-        '127.0.0.1'
+        '::1'
       end
 
       def icon

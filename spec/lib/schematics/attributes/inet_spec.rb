@@ -15,7 +15,7 @@ describe Schematics::Attributes::Inet do
   its(:type) { is_expected.to eq('inet') }
   its(:column_name) { is_expected.to eq('ip') }
   its(:open_api_type) { is_expected.to eq(String) }
-  its(:default) { is_expected.to eq('127.0.0.1') }
+  its(:default) { is_expected.to eq('::1') }
   its(:icon) { is_expected.to eq(:network_wired) }
 
   its(:validators) do
