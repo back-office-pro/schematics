@@ -1,26 +1,25 @@
 # frozen_string_literal: true
 
-RSpec.shared_context 'with unauthenticated user' do
+RSpec.shared_context 'with unauthenticated user' do # rubocop:disable RSpec/MultipleMemoizedHelpers
   include Schematics::Engine.routes.url_helpers
 
   subject { response }
 
-  fixtures :users, :roles
+  fixtures :sessions, :roles
 
   let(:json_response) { ::JSON.parse(response.body) }
-  let(:user) { users(:two) }
+  let(:session) { sessions(:two) }
+  let(:user) { session.user }
   let(:email) { user.email }
   let(:headers) { { 'Accept' => 'application/json' } }
-  let(:auth_token) { ::JsonWebToken.encode(auth_token: user.auth_token) }
+  let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
+  let(:permissions) { ::Permission.create_all_entities_permissions! }
+  let(:admin_role) { ::Role.create!(name: 'Admin', permissions:) }
+
+  before { admin_role }
 end
 
 RSpec.shared_context 'with authenticated user' do
-  let(:admin_role) do
-    ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
-  end
-
-  before { admin_role }
-
   include_context 'with unauthenticated user'
 
   let(:headers) { { 'Accept' => 'application/json', 'Authorization' => auth_token } }

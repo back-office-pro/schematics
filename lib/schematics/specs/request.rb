@@ -9,8 +9,8 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        include Engine.routes.url_helpers
         fixtures :all
+        delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :model_class,
                  :entity,
                  :can?,
@@ -24,10 +24,11 @@ module Schematics
         subject { response }
 
         let(:record) { __send__(entity_fixtures, :one) }
-        let(:auth_token) { ::JsonWebToken.encode(auth_token: user.auth_token) }
+        let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
         let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
-        let(:headers_with_referer) { headers.merge('HTTP_REFERER' => profile_path) } # rubocop:disable Style/StringHashKeys
+        let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_path) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
+        let(:session) { ::Session.create!(user:) }
         let(:role) do
           ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
         end
@@ -128,7 +129,7 @@ module Schematics
 
           it 'should be a bad request' do
             patch path(record:), params: {}, headers: headers_with_referer, as: :html
-            redirect_path = ability.can?(:update, record) ? profile_path : root_path
+            redirect_path = ability.can?(:update, record) ? edit_profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
@@ -207,7 +208,7 @@ module Schematics
 
           it 'should be a bad request' do
             post path, params: {}, headers: headers_with_referer, as: :html
-            redirect_path = ability.can?(:create, model_class) ? profile_path : root_path
+            redirect_path = ability.can?(:create, model_class) ? edit_profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
 

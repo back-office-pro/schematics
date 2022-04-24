@@ -8,9 +8,9 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        include Engine.routes.url_helpers
         fixtures :all
         delegate :t, to: 'I18n'
+        delegate :login_path, to: 'Rails.application.routes.url_helpers'
         delegate :entity,
                  :entity_fixtures,
                  :model_class,
@@ -40,16 +40,17 @@ module Schematics
         end
         let(:login) do
           visit login_path
-          fill_in t('simple_form.labels.user.email'), with: user.email
-          fill_in t('simple_form.labels.user.password'), with: 'Azerty1!'
+          fill_in ::User.human_attribute_name('email'), with: user.email
+          fill_in ::User.human_attribute_name('password'), with: 'Azerty1!'
           click_on t('schematics.application.button.confirm')
-          is_expected.to have_text t('schematics.sessions.create.success')
+          is_expected.to have_text t('sessions.create.success')
         end
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
           allow_any_instance_of(::Licence).to receive(:expires_on).and_return(1.day.from_now)
           record
+          role
           model_class.reindex
           login
         end
