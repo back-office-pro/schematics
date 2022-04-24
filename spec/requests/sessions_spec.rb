@@ -11,6 +11,7 @@ RSpec.describe 'Sessions' do
 
     context 'when credentials are correct' do
       let(:password) { 'Azerty1!' }
+      let(:auth_token) { JsonWebToken.encode(auth_token: Session.last.auth_token) }
 
       before { do_request }
 
