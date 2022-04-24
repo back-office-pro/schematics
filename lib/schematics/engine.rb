@@ -105,7 +105,7 @@ module Schematics
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
     # Cache
-    config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] } if Rails.env.production?
+    config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', nil) } if Rails.env.production? # rubocop:disable Layout/LineLength
 
     # Active Storage
     config.after_initialize do # Make sure we override main app 6.1 defaults

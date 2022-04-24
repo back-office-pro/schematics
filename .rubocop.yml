@@ -129,8 +129,6 @@ Style/MutableConstant:
   EnforcedStyle: strict
 Style/Documentation:
   Enabled: false
-Style/FetchEnvVar:
-  Enabled: false
 Style/HashEachMethods:
   AllowedReceivers:
     - enum

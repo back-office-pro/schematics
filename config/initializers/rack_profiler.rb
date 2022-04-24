@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rack::MiniProfiler.config.tap do |config|
-  config.storage_options = { url: ENV['REDIS_URL'] }
+  config.storage_options = { url: ENV.fetch('REDIS_URL', nil) }
   config.storage = Rack::MiniProfiler::RedisStore
   config.position = 'bottom-left'
   config.start_hidden = Rails.env.production?
