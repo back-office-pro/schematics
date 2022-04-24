@@ -11,8 +11,9 @@
   }
     h5.dropdown-header.fw-bold
       = t('.title')
-    .dropdown-item
-      = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
+    - if can?(:restore, model_class)
+      .dropdown-item
+        = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
     - listable_elements.stable_sort_by(&:weight).each do |field|
       .dropdown-item
         .form-check.form-switch.mb-0 data-action='input->viewer-settings#toggleColumn'
