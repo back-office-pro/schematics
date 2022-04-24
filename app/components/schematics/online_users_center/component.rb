@@ -3,8 +3,11 @@
 module Schematics
   module OnlineUsersCenter
     class Component < ApplicationComponent
-      def users
-        @users ||= ::User.online
+      def sessions
+        @sessions ||= ::Session
+                      .includes(:user)
+                      .online
+                      .order(updated_at: :desc)
       end
     end
   end

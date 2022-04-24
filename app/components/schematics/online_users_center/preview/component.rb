@@ -4,13 +4,16 @@ module Schematics
   module OnlineUsersCenter
     module Preview
       class Component < ApplicationComponent
-        def initialize(user:)
+        delegate :user, :updated_at, to: :@session
+        delegate :full_name, to: :user
+
+        def initialize(session:)
           super
-          @user = user
+          @session = session
         end
 
         def href
-          user_path(@user)
+          user_path(user)
         end
       end
     end

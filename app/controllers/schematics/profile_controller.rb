@@ -1,40 +1,17 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SessionsController < ApplicationController
+  class ProfileController < ApplicationController
     include Fillable
-
-    skip_before_action :authorize, only: %i[new create]
-    skip_before_action :update_last_seen_at!, only: :update
-    layout 'schematics/auth', only: %i[new create]
     delegate :entity, to: :model_class, private: true
     helper_method :attributes
 
-    def new; end
-
     def edit; end
 
-    def create
-      result = Sessions::Create.call(user_params: resource_params, cookies:)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to session[:redirect_to] || root_path, notice: t(result.message) }
-          format.json { render json: { auth_token: result.jwt } }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = t(result.message)
-            render :new
-          end
-          format.json { head :unauthorized }
-        end
-      end
-    end
-
     def update
-      result = Sessions::Update.call(
-        resource_params: resource_params.except(*session_params),
+      result = Profile::Update.call(
+        current_session:,
+        resource_params: resource_params.except(:current_password),
         resource: current_user,
         password: resource_params[:current_password]
       )
@@ -44,7 +21,7 @@ module Schematics
             switch_locale do
               switch_beginning_of_week do
                 switch_time_zone do
-                  redirect_to profile_path, notice: t(result.message)
+                  redirect_to edit_profile_path, notice: t(result.message)
                 end
               end
             end
@@ -65,29 +42,16 @@ module Schematics
       end
     end
 
-    def destroy
-      result = Sessions::Destroy.call(cookies:)
-      if result.success?
-        redirect_to login_path, notice: t(result.message)
-      else
-        redirect_to root_path, alert: t(result.message)
-      end
-    end
-
     private
 
     def model_class
       ::User
     end
 
-    def session_params
-      %i[remember_me current_password]
-    end
-
     def permitted_params
       super
         .excluding(:role_id)
-        .concat(session_params)
+        .push(:current_password)
     end
 
     def current_password_attribute

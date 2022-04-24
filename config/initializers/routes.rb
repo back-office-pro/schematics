@@ -13,5 +13,6 @@ Rails.application.routes.prepend do
   end
   localized do
     Schematics::Schema.instance.load_routes
+    get 'login', to: 'sessions#new', as: :login
   end
 end

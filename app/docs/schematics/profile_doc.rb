@@ -1,16 +1,8 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SessionsDoc < ApplicationDoc
-    route_base SessionsController.controller_path
-
-    api :create, 'Create a session' do
-      data 'user[email]', ::String, required: true
-      data 'user[password]', ::String, required: true
-      data 'user[remember_me]', 'boolean'
-      response 200, 'Success', :json
-      response 401, 'Not Authorized', :json
-    end
+  class ProfileDoc < ApplicationDoc
+    route_base ProfileController.controller_path
 
     api :update, 'Update user profile' do
       data 'user[email]', ::String
@@ -21,7 +13,6 @@ module Schematics
       data 'user[last_name]', ::String
       data 'user[avatar]', ::String
       data 'user[locale]', ::String
-      data 'user[role]', ::String
       response 204, 'Success', :json
       response 422, 'Unprocessable entity', :json
     end

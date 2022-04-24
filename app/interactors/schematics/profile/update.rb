@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Sessions
+  module Profile
     class Update
       include Interactor::Organizer
 
-      organize Create, Resources::UpdateAndCache
+      organize ::Sessions::Create, Resources::UpdateAndCache
     end
   end
 end

@@ -14,9 +14,7 @@ module Schematics
     end
 
     def preferences(key, default = nil)
-      current_user
-        &.preferences
-        &.fetch(key.to_s, default)
+      current_user.preferences.fetch(key.to_s, default)
     end
 
     def i18n_javascript

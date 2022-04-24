@@ -1,6 +1,6 @@
 .row data-href=href
   .col-auto.align-self-center
-    = render Schematics::Attachment::Component.avatar(user: @user)
+    = render Schematics::Attachment::Component.avatar(user:)
   .col.text-truncate
-    = @user.full_name
-    .text-muted data-controller='timeago' datetime=@user.last_seen_at
+    = full_name
+    .text-muted data-controller='timeago' datetime=updated_at

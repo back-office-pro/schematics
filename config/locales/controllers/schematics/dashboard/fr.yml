@@ -18,6 +18,9 @@ fr:
         schema:
           caption: Editeur du schéma de l'application
           title: Editer mon application
+        sessions:
+          caption: Gérer les accès à l'application
+          title: Accès sécurisés
         settings:
           caption: Gérer les paramètres de l'application
           title: Paramètres application

@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+module MainApp
+  module SessionsController
+    extend ActiveSupport::Concern
+
+    prepended do
+      skip_before_action :authenticate_user!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
+      layout 'schematics/auth', only: %i[new create]
+    end
+
+    def create
+      result = Sessions::Create.call(resource_params:, cookies:, current_session:)
+      if result.success?
+        session[:current_session_id] = result.current_session_id
+        respond_to do |format|
+          format.html { redirect_to session[:redirect_to] || root_path, notice: t(result.message) }
+          format.json { render json: { auth_token: result.jwt } }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :new
+          end
+          format.json { head :unauthorized }
+        end
+      end
+    end
+
+    def destroy
+      result = Sessions::Destroy.call(current_session:, cookies:)
+      reset_session
+      if result.success?
+        redirect_to login_path, notice: t(result.message)
+      else
+        redirect_to root_path, alert: t(result.message)
+      end
+    end
+
+    private
+
+    def title_path
+      'sessions'
+    end
+
+    def permitted_params
+      %i[email password remember_me]
+    end
+  end
+end

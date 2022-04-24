@@ -1,0 +1,7 @@
+---
+fr:
+  schematics:
+    profile:
+      update:
+        failure: Mauvais mot de passe
+        success: Votre profil a été mis à jour avec succès

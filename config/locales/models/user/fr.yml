@@ -15,6 +15,7 @@ fr:
           fr: Français
         password: Mot de passe
         password_confirmation: Confirmation mot de passe
+        remember_me: Se souvenir de moi
         time_zone: Fuseau horaire
     models:
       user:

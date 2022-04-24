@@ -1,6 +1,0 @@
----
-en:
-  schematics:
-    sessions:
-      new:
-        password_lost?: Password lost?

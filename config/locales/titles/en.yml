@@ -24,6 +24,9 @@ en:
       preferences:
         edit: Notification preferences
         update: Notification preferences
+      profile:
+        edit: Edit my profile
+        update: Edit my profile
       resources:
         create: Add a new %{human_name}
         delete: Delete %{resource}
@@ -35,11 +38,6 @@ en:
         update: Edit %{resource}
       schema:
         edit: Edit my application
-      sessions:
-        create: Login
-        edit: Edit my profile
-        new: Login
-        update: Edit my profile
       swagger:
         index: API documentation
       versions:
@@ -47,3 +45,8 @@ en:
         show: Timeline
     searches:
       show: Search "%{resource}"
+    sessions:
+      create: Login
+      index: List of %{human_name_plural}
+      new: Login
+      show: "%{resource}"
