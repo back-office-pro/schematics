@@ -10,7 +10,7 @@ RSpec.describe Schematics::CsvSerializer do
   let(:model_class) { Stat }
   let(:resources) { model_class.all }
 
-  before { Stat.update(model: 'User', field: 'User#email') }
+  before { Stat.update_all(model: 'User', field: 'User#email') } # rubocop:disable Rails/SkipsModelValidations
 
   describe '#generate_file' do
     subject { serializer.generate_file }
@@ -19,9 +19,9 @@ RSpec.describe Schematics::CsvSerializer do
       let(:preferences) { {} }
       let(:expected_content) do
         <<~CSV
-          Data,Agregate,Field
-          User,Count,Email
-          User,Count,Email
+          Agregate,Data,Field
+          Count,User,Email
+          Count,User,Email
         CSV
       end
 
@@ -32,9 +32,9 @@ RSpec.describe Schematics::CsvSerializer do
       let(:preferences) { { 'col_stat_field' => false } }
       let(:expected_content) do
         <<~CSV
-          Data,Agregate
-          User,Count
-          User,Count
+          Agregate,Data
+          Count,User
+          Count,User
         CSV
       end
 
