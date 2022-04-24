@@ -1,0 +1,73 @@
+# frozen_string_literal: true
+
+module Schematics
+  class ProfileController < ApplicationController
+    include Fillable
+    delegate :entity, to: :model_class, private: true
+    helper_method :attributes
+
+    def edit; end
+
+    def update
+      result = Profile::Update.call(
+        current_session:,
+        resource_params: resource_params.except(:current_password),
+        resource: current_user,
+        password: resource_params[:current_password]
+      )
+      if result.success?
+        respond_to do |format|
+          format.html do
+            switch_locale do
+              switch_beginning_of_week do
+                switch_time_zone do
+                  redirect_to edit_profile_path, notice: t(result.message)
+                end
+              end
+            end
+          end
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = t(result.message)
+            render :edit
+          end
+          format.json do
+            render json: { errors: [t(result.message)] },
+                   status: :unprocessable_entity
+          end
+        end
+      end
+    end
+
+    private
+
+    def model_class
+      ::User
+    end
+
+    def permitted_params
+      super
+        .excluding(:role_id)
+        .push(:current_password)
+    end
+
+    def current_password_attribute
+      Attributes::Attribute.build(
+        entity,
+        type: 'digest',
+        name: 'current_password',
+        options: { required: true }
+      )
+    end
+
+    def attributes
+      entity
+        .fillable_elements
+        .insert(2, current_password_attribute)
+        .reject_is_a?(Attributes::Association)
+    end
+  end
+end

@@ -8,6 +8,3 @@ fr:
     destroy:
       failure: Une erreur est survenue
       success: Déconnecté !
-    update:
-      failure: Mauvais mot de passe
-      success: Votre profil a été mis à jour avec succès

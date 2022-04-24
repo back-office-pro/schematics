@@ -8,6 +8,3 @@ en:
     destroy:
       failure: An error occurred
       success: Logged out!
-    update:
-      failure: Wrong password
-      success: Your profile was successfully updated

@@ -24,6 +24,9 @@ en:
       preferences:
         edit: Notification preferences
         update: Notification preferences
+      profile:
+        edit: Edit my profile
+        update: Edit my profile
       resources:
         create: Add a new %{human_name}
         delete: Delete %{resource}
@@ -44,8 +47,6 @@ en:
       show: Search "%{resource}"
     sessions:
       create: Login
-      edit: Edit my profile
       index: List of %{human_name_plural}
       new: Login
       show: "%{resource}"
-      update: Edit my profile
