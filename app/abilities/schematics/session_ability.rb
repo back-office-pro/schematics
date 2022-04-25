@@ -5,7 +5,7 @@ module Schematics
     def initialize(user)
       super
       can(:destroy, ::Session, user:)
-      return unless user.role == ::Role.admin
+      return unless user.admin?
 
       can %i[read destroy], ::Session
     end

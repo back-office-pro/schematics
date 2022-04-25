@@ -4,7 +4,7 @@ module Schematics
   class SettingAbility < ApplicationAbility
     def initialize(user)
       super
-      return unless user.role == ::Role.admin
+      return unless user.admin?
 
       can :update, ::Setting
       can :show, ::Setting

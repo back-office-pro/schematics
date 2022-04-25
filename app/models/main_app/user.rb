@@ -12,6 +12,10 @@ module MainApp
       attribute :remember_me, :boolean
     end
 
+    def admin?
+      role == ::Role.admin
+    end
+
     def online?
       @online ||= sessions.exists?(updated_at: ::Session::ONLINE_DELAY.ago..)
     end
