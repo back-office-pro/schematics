@@ -133,7 +133,7 @@ class LocalesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/
       to:,
       key: Schematics::Engine.credentials.gcloud[:api_key]
     )
-  rescue EasyTranslateException
+  rescue EasyTranslate::EasyTranslateException
     text.titleize
   end
 
