@@ -12,4 +12,11 @@ RSpec.describe Schematics::SessionAbility do
   let(:user) { session.user }
 
   it { is_expected.to be_able_to(:destroy, session) }
+
+  context 'when user is admin' do
+    before { allow(user).to receive(:admin?).and_return(true) }
+
+    it { is_expected.to be_able_to(:read, ::Session) }
+    it { is_expected.to be_able_to(:destroy, ::Session) }
+  end
 end
