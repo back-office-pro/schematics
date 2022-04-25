@@ -20,13 +20,16 @@ RSpec.describe Schematics::GenerateCsvJob do
   end
 
   describe '#perform_now' do
+    subject(:perform_now) do
+      described_class.perform_now(model_name, resource_ids, preferences, filepath)
+    end
+
     it 'writes to file' do
-      expect { described_class.perform_now(model_name, resource_ids, preferences, filepath) }
-        .to(change { File.size(filepath) })
+      expect { perform_now }.to(change { File.size(filepath) })
     end
 
     it 'queues the delete job' do
-      expect { described_class.perform_now(model_name, resource_ids, preferences, filepath) }
+      expect { perform_now }
         .to have_enqueued_job(Schematics::DeleteTempFileJob)
         .with(filepath)
     end
