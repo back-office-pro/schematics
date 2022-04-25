@@ -16,9 +16,40 @@ RSpec.describe Schematics::ImportJob do
   end
 
   describe '#perform_now' do
-    it 'imports the roles' do
-      expect { described_class.perform_now(import.id, model_name) }
-        .to change { import.reload.status }.from('pending').to('finished')
+    subject(:perform_now) { described_class.perform_now(import.id, model_name) }
+
+    context 'when there are no import error' do
+      it 'imports the resources' do
+        expect { perform_now }.to change(model_class, :count).by(2)
+      end
+
+      it 'changes the import status from pending to finished' do
+        expect { perform_now }
+          .to change { import.reload.status }
+          .from('pending')
+          .to('finished')
+      end
+    end
+
+    context 'when there are import errors' do
+      let(:model_class) { User }
+
+      it 'does not import the resources' do
+        expect { perform_now }.not_to change(model_class, :count)
+      end
+
+      it 'changes the import status from pending to error' do
+        expect { perform_now }
+          .to change { import.reload.status }
+          .from('pending')
+          .to('error')
+      end
+
+      it 'stores the import errors' do
+        expect { perform_now }
+          .to change { import.reload.import_errors }
+          .to match('Line 1' => String, 'Line 2' => String)
+      end
     end
   end
 end
