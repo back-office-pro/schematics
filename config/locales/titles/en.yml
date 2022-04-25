@@ -47,6 +47,7 @@ en:
       show: Search "%{resource}"
     sessions:
       create: Login
+      delete: Delete %{resource}
       index: List of %{human_name_plural}
       new: Login
       show: "%{resource}"

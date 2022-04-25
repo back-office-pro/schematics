@@ -47,6 +47,7 @@ fr:
       show: Recherche "%{resource}"
     sessions:
       create: Se connecter
+      delete: Supprimer %{resource}
       index: Liste des %{human_name_plural}
       new: Se connecter
       show: "%{resource}"
