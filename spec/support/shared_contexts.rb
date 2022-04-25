@@ -14,7 +14,10 @@ RSpec.shared_context 'with unauthenticated user' do # rubocop:disable RSpec/Mult
   let(:permissions) { ::Permission.create_all_entities_permissions! }
   let(:admin_role) { ::Role.create!(name: 'Admin', permissions:) }
 
-  before { admin_role }
+  before do
+    allow_any_instance_of(::Licence).to receive(:expires_on).and_return(1.day.from_now) # rubocop:disable RSpec/AnyInstance
+    admin_role
+  end
 end
 
 RSpec.shared_context 'with authenticated user' do
