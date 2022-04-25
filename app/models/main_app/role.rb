@@ -6,7 +6,7 @@ module MainApp
 
     class_methods do
       def admin
-        @admin ||= find_by(name: 'Admin')
+        find_by(name: 'Admin')
       end
     end
   end
