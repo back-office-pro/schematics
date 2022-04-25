@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-get '404', to: 'exception#not_found'
-get '500', to: 'exception#internal_server_error'
+get '404', to: 'exception#not_found', as: :not_found
+get '500', to: 'exception#internal_server_error', as: :internal_server_error
