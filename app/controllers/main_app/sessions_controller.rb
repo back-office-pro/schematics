@@ -36,16 +36,6 @@ module MainApp
       end
     end
 
-    def destroy
-      result = Sessions::Destroy.call(current_session:, cookies:)
-      reset_session
-      if result.success?
-        redirect_to login_path, notice: t(result.message)
-      else
-        redirect_to root_path, alert: t(result.message)
-      end
-    end
-
     private
 
     def title_path
