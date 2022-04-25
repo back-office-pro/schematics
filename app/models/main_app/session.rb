@@ -11,7 +11,11 @@ module MainApp
     end
 
     def safe
-      user.sessions.exists?(ip:, user_agent:)
+      user
+        .sessions
+        .where
+        .not(id:)
+        .exists?(ip:, user_agent:)
     end
 
     def login!(*)
