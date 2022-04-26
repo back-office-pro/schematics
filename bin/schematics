@@ -12,11 +12,7 @@ fi
 rm -rf $app_name
 time rails new $app_name \
     --database postgresql \
-    --skip-keeps \
-    --skip-action-cable \
-    --skip-listen \
-    --skip-spring \
-    --skip-test-unit \
+    --skip-test \
     --template template.rb \
     --dummy-app=$dummy_app \
     &> log/build.log
