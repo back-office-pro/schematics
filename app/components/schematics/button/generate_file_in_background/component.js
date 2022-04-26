@@ -1,5 +1,5 @@
 import ApplicationController from '../../schematics/controllers/application_controller'
-import { saveAs } from '../../file-saver-es/src/FileSaver'
+import saveAs from 'file-saver'
 
 /* global Blob */
 

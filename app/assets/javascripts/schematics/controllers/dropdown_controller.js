@@ -1,6 +1,7 @@
 import ApplicationController from './application_controller'
+import SlimSelect from 'slim-select'
 
-/* global SlimSelect, I18n, google */
+/* global I18n, google */
 
 export default class extends ApplicationController {
   static get values () {

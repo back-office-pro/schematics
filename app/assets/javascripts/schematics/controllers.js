@@ -1,4 +1,3 @@
-import { Application } from '../@hotwired/stimulus/dist/stimulus'
 import SwitchThemeController from '../switch_theme/component'
 import NotificationCenterController from '../notification_center/component'
 import SidebarController from '../sidebar/component'
@@ -18,8 +17,9 @@ import ToastController from './controllers/toast_controller'
 import TooltipController from './controllers/tooltip_controller'
 import AutoSaveController from './controllers/auto_save_controller'
 import AutosizeController from './controllers/autosize_controller'
+import SwaggerController from './controllers/swagger_controller'
 
-const application = Application.start()
+const application = window.Stimulus
 
 application.register('switch-theme', SwitchThemeController)
 application.register('notification-center', NotificationCenterController)
@@ -40,3 +40,4 @@ application.register('toast', ToastController)
 application.register('tooltip', TooltipController)
 application.register('auto-save', AutoSaveController)
 application.register('autosize', AutosizeController)
+application.register('swagger', SwaggerController)

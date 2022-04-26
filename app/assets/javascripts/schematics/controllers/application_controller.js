@@ -1,4 +1,4 @@
-import { Controller } from '../../@hotwired/stimulus/dist/stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 /* global fetch */
 

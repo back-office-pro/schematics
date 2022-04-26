@@ -1,5 +1,5 @@
 import ApplicationController from './application_controller'
-import { render, register, cancel } from '../../timeago.js/esm/index'
+import { render, register, cancel } from 'timeago.js'
 import fr from '../../timeago.js/esm/lang/fr'
 
 register('fr', fr)

@@ -4,10 +4,8 @@
 //= require rails.validations
 //= require rails.validations.simple_form.bootstrap4
 //= require js-routes
-//= require slim-select/dist/slimselect
 //= require ./chartkick
 //= require ./pagy
-//= require ./swagger
 
 /* global Turbo */
 
