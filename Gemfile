@@ -16,6 +16,7 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'ratonvirus-clamby', git: 'https://github.com/geetfun/ratonvirus-clamby'
 gem 'simple_form', # TODO: remove when simple_form is upgraded
     git: 'https://github.com/heartcombo/simple_form',
     branch: 'main'
