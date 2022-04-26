@@ -2,6 +2,4 @@
 
 /* global Pagy */
 
-document.addEventListener('turbo:load', function () {
-  Pagy.init()
-})
+document.addEventListener('turbo:load', Pagy.init)
