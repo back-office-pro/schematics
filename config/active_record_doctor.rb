@@ -17,6 +17,7 @@ ActiveRecordDoctor.configure do
     'ActiveStorage::Blob',
     'ActiveStorage::Attachment',
     'ActiveStorage::VariantRecord',
+    'ActionText::EncryptedRichText',
     'ActionText::RichText',
     'PaperTrail::Version',
     'Schematics::Version',
