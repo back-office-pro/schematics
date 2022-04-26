@@ -8,17 +8,16 @@
 //= require ./chartkick
 //= require ./pagy
 //= require ./swagger
-//= require ./turbolinks
 
-/* global Turbolinks */
+/* global Turbo */
 
-document.addEventListener('turbolinks:load', function () {
+document.addEventListener('turbo:load', function () {
   document
     .querySelectorAll('*[data-href]')
     .forEach(element => {
       element.addEventListener('click', function (e) {
         if (!e.target.closest('a, .btn-group, [data-controller="edit-in-place"]')) {
-          Turbolinks.visit(this.dataset.href)
+          Turbo.visit(this.dataset.href)
         }
       })
     })

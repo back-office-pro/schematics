@@ -1,6 +1,6 @@
 import ApplicationController from '../schematics/controllers/application_controller'
 
-/* global Turbolinks, I18n, Routes */
+/* global Turbo, I18n, Routes */
 
 export default class extends ApplicationController {
   static get targets () {
@@ -22,7 +22,7 @@ export default class extends ApplicationController {
   }
 
   selectItem ({ params: { url } }) {
-    Turbolinks.visit(url)
+    Turbo.visit(url)
   }
 
   suggestionTemplate ({ data, descriptor, icon, url }) {

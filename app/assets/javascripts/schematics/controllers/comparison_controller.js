@@ -1,6 +1,6 @@
 import ApplicationController from './application_controller'
 
-/* global Routes, Turbolinks */
+/* global Routes, Turbo */
 
 export default class extends ApplicationController {
   static get targets () {
@@ -15,7 +15,7 @@ export default class extends ApplicationController {
     const params = { comparison: { model: this.modelValue, ids: this.ids() } }
     const response = await this.fetchAPI(Routes.comparisonsEn(), 'POST', params)
     const { pathname } = new URL(response.headers.get('Location'))
-    Turbolinks.visit(pathname)
+    Turbo.visit(pathname)
   }
 
   toggleButton () {

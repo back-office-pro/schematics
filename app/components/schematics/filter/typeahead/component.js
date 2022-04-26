@@ -1,6 +1,6 @@
 import SearchBarController from '../../search_bar/component'
 
-/* global Turbolinks */
+/* global Turbo */
 
 export default class extends SearchBarController {
   connect () {
@@ -16,7 +16,7 @@ export default class extends SearchBarController {
     const searchParams = new URLSearchParams(window.location.search)
     if (searchParams.has(scope)) {
       searchParams.delete(scope)
-      Turbolinks.visit(window.location.pathname + '?' + searchParams)
+      Turbo.visit(window.location.pathname + '?' + searchParams)
     }
   }
 

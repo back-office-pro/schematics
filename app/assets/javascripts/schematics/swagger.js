@@ -2,7 +2,7 @@
 
 /* global SwaggerUIBundle, Routes */
 
-document.addEventListener('turbolinks:load', function () {
+document.addEventListener('turbo:load', function () {
   const domNode = document.getElementById('swagger-ui')
   if (domNode != null) {
     SwaggerUIBundle({
