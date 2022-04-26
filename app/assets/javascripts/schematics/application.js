@@ -4,12 +4,13 @@
 //= require rails.validations
 //= require rails.validations.simple_form.bootstrap4
 //= require js-routes
+//= require pagy
 //= require ./chartkick
-//= require ./pagy
 
-/* global Turbo */
+/* global Turbo, Pagy */
 
 document.addEventListener('turbo:load', function () {
+  Pagy.init()
   document
     .querySelectorAll('*[data-href]')
     .forEach(element => {
