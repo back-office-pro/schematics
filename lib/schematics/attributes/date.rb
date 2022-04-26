@@ -39,8 +39,8 @@ module Schematics
       end
 
       def default
-        return ::Time.zone.today.to_s(:db) if options.before
-        return ::Time.zone.tomorrow.to_s(:db) if options.after
+        return ::Time.zone.today.to_fs(:db) if options.before
+        return ::Time.zone.tomorrow.to_fs(:db) if options.after
       end
 
       def group_method
