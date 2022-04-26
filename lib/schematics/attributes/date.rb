@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/time/zones'
+
 module Schematics
   module Attributes
     class Date < Attribute
