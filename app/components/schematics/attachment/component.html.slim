@@ -1,12 +1,4 @@
 - begin
   = image_tag attachment, data:, **@kwargs
-- rescue StandardError => e
-  - if @replacement
-    = fa_icon icon, size:, data:, **@kwargs
-  - else
-    = fa_icon :triangle_exclamation, class: 'me-2'
-    - case e
-    - when ::ActiveStorage::FileNotFoundError
-      = t('.not_found')
-    - else
-      = t('.not_valid')
+- rescue StandardError
+  = fa_icon icon, size:, data:, **@kwargs

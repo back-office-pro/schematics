@@ -16,11 +16,11 @@ module Schematics
         end
 
         def company_logo(attachment:, icon:)
-          new(attachment:, width: 300, height: 150, replacement: { icon:, size: '7x' })
+          new(attachment:, width: 300, height: 150, replacement: { icon: })
         end
       end
 
-      def initialize(attachment:, width: 300, height: 300, replacement: nil, **kwargs)
+      def initialize(attachment:, width: 300, height: 300, replacement: {}, **kwargs)
         super
         @attachment = attachment
         @width = width
@@ -40,11 +40,11 @@ module Schematics
       end
 
       def icon
-        @replacement[:icon]
+        @replacement.fetch(:icon, :triangle_exclamation)
       end
 
       def size
-        @replacement[:size]
+        @replacement.fetch(:size, '7x')
       end
     end
   end
