@@ -16,7 +16,6 @@ html lang=::I18n.locale dir='ltr'
     = javascript_importmap_tags
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Schematics::Engine.credentials.gcloud[:api_key]}&libraries=places"
-    = javascript_include_tag 'schematics/controllers', type: 'module', crossorigin: 'anonymous', 'data-turbo-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbo-track': 'reload'
     css [nonce=content_security_policy_nonce]:
       :root {

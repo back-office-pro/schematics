@@ -1,4 +1,4 @@
-import SearchBarController from '../../search_bar/component'
+import SearchBarController from './search_bar_controller'
 
 /* global Turbo */
 

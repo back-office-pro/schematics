@@ -14,7 +14,6 @@ html lang=::I18n.locale dir='ltr'
     = render Schematics::Favicon::Component.new
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
     = javascript_importmap_tags
-    = javascript_include_tag 'schematics/controllers', type: 'module', crossorigin: 'anonymous', 'data-turbo-track': 'reload'
     = javascript_include_tag 'schematics/application', 'data-turbo-track': 'reload'
     css [nonce=content_security_policy_nonce]:
       :root {

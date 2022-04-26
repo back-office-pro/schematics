@@ -3,6 +3,10 @@
 pin 'chartkick', to: 'chartkick.js'
 pin 'Chart.bundle', to: 'Chart.bundle.js'
 
+pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schematics', 'controllers'), # rubocop:disable Layout/LineLength
+             under: 'controllers',
+             to: 'schematics/controllers'
+
 pin '@fortawesome/fontawesome-free', to: 'https://ga.jspm.io/npm:@fortawesome/fontawesome-free@6.1.1/js/fontawesome.js'
 pin '@popperjs/core', to: 'https://ga.jspm.io/npm:@popperjs/core@2.11.5/lib/index.js'
 pin '@validide/resizable-table-columns', to: 'https://ga.jspm.io/npm:@validide/resizable-table-columns@2.0.5/dist/js/es6/index.js'
