@@ -26,7 +26,7 @@ Rails.configuration.to_prepare do
     .select { Object.const_defined?(_1) }
     .each { Object.const_get(_1).prepend(MainApp.const_get(_1)) }
 
-  ActiveStorage.singleton_class.module_eval do
+  ::ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming?
       false
     end
@@ -34,7 +34,7 @@ Rails.configuration.to_prepare do
 end
 
 ActiveSupport.on_load(:active_storage_record) do
-  ActiveStorage::Record.class_eval do
+  ::ActiveStorage::Record.class_eval do
     include Schematics::Loadable
     loadable concerns: [
       Schematics::Elasticsearchable,

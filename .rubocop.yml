@@ -66,8 +66,7 @@ Lint/ConstantResolution:
     - I18n
     - JsonWebToken
     - JSON
-    - ActiveStorage::Attachment
-    - ActiveStorage::Blob
+    - ActiveStorage
     - Mime
     - Search
     - Array
