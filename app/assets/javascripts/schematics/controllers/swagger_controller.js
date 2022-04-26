@@ -1,13 +1,13 @@
-//= require swagger-ui-dist/swagger-ui-bundle
+import ApplicationController from './application_controller'
+import { SwaggerUIBundle } from 'swagger-ui-dist'
 
-/* global SwaggerUIBundle, Routes */
+/* global Routes */
 
-document.addEventListener('turbo:load', function () {
-  const domNode = document.getElementById('swagger-ui')
-  if (domNode != null) {
+export default class extends ApplicationController {
+  connect () {
     SwaggerUIBundle({
       url: Routes.schematicsOpenApi(),
-      domNode,
+      domNode: this.element,
       presets: [
         SwaggerUIBundle.presets.apis,
         SwaggerUIBundle.SwaggerUIStandalonePreset
@@ -17,4 +17,4 @@ document.addEventListener('turbo:load', function () {
       ]
     })
   }
-})
+}
