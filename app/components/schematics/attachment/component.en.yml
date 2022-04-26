@@ -1,4 +1,4 @@
 ---
 en:
-  active_storage_file_not_found_error: Image not found
-  minimagick_error: Invalid image
+  not_found: Image not found
+  not_valid: Invalid image

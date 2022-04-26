@@ -6,7 +6,7 @@
   - else
     = fa_icon :triangle_exclamation, class: 'me-2'
     - case e
-    - when MiniMagick::Error
-      = t('.minimagick_error')
     - when ::ActiveStorage::FileNotFoundError
-      = t('.active_storage_file_not_found_error')
+      = t('.not_found')
+    - else
+      = t('.not_valid')
