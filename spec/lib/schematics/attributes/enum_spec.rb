@@ -56,7 +56,7 @@ describe Schematics::Attributes::Enum do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      enum state: {:available=>0, :available_soon=>1, :not_available=>2}, _prefix: true
+      enum :state, {:available=>0, :available_soon=>1, :not_available=>2}, prefix: true
     RUBY
   end
 
@@ -104,7 +104,7 @@ describe Schematics::Attributes::Enum do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        enum state: {:available=>0, :available_soon=>1, :not_available=>2}, _prefix: true, _default: "available"
+        enum :state, {:available=>0, :available_soon=>1, :not_available=>2}, prefix: true, default: "available"
       RUBY
     end
   end

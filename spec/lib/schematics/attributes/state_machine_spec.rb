@@ -60,7 +60,7 @@ describe Schematics::Attributes::StateMachine do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      enum state: {:pending=>0, :closed=>1, :refused=>2}, _prefix: true, _default: "pending"
+      enum :state, {:pending=>0, :closed=>1, :refused=>2}, prefix: true, default: "pending"
       aasm column: :#{name}, enum: true, no_direct_assignment: true do
         state :pending, initial: true
         state :closed, :refused
