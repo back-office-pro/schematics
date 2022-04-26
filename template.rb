@@ -37,10 +37,9 @@ after_bundle do
   remove_file 'public/422.html'
   remove_file 'public/500.html'
 
-  # Remove /test directory
-  remove_dir 'test'
-
   # Yarn packages
+  run 'yarn init --yes'
+
   JSON
     .parse(File.read((File.expand_path('package.json', __dir__))))
     .fetch('dependencies')
