@@ -18,7 +18,7 @@ describe Schematics::Attributes::RichText do
   its(:type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
   its(:open_api_type) { is_expected.to eq(String) }
-  its(:preload) { is_expected.to eq(:rich_text_summary) }
+  its(:preload) { is_expected.to eq(rich_text_summary: [embeds_attachments: :blob]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to eq('MyRichText') }
 

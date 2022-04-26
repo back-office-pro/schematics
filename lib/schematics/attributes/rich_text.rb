@@ -9,7 +9,7 @@ module Schematics
       include Behaviours::Fillable
 
       def preload
-        [type, name].join('_').to_sym
+        { association_name => [embeds_attachments: :blob] }
       end
 
       def search_data
@@ -36,6 +36,12 @@ module Schematics
         <<~RUBY
           has_rich_text :#{name}
         RUBY
+      end
+
+      private
+
+      def association_name
+        [type, name].join('_').to_sym
       end
     end
   end
