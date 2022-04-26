@@ -15,7 +15,7 @@ module MainApp
       end
 
       def call
-        fail! unless authenticate(@password) # TODO: use authenticate_by when upgrading to Rails 7
+        fail! unless authenticate(@password) # TODO: use authenticate_by when upgrading to Rails 7.1
 
         session = @session.login!(@user)
         context.current_session_id = session.id
