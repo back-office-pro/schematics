@@ -3,8 +3,8 @@
 module Schematics
   class DashboardController < ApplicationController
     def home
-      @charts = ::Chart.accessible_by_role(current_user.role)
-      @stats = ::Stat.accessible_by_role(current_user.role)
+      @charts = ::Chart.accessible_by_role(current_user.role).load_async
+      @stats = ::Stat.accessible_by_role(current_user.role).load_async
     end
 
     def admin
