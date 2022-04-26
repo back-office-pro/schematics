@@ -97,7 +97,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'slim', '~> 4.1.0'
   spec.add_dependency 'strip_attributes', '~> 1.12.0'
   spec.add_dependency 'strong_migrations', '~> 1.0.0'
-  spec.add_dependency 'super_diff', '~> 0.8.0'
+  spec.add_dependency 'super_diff', '~> 0.9.0'
   spec.add_dependency 'validate_url', '~> 1.0.13'
   spec.add_dependency 'valid_email', '~> 0.1.4'
   spec.add_dependency 'view_component', '~> 2.53.0'
