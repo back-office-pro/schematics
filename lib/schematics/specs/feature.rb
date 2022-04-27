@@ -24,8 +24,9 @@ module Schematics
 
         let(:record) { __send__(entity_fixtures, :one) }
         let(:ability) { Ability.new(user) }
-        let(:permissions) { ::Permission.create_all_entities_permissions! }
-        let(:role) { ::Role.create!(name: 'Admin', permissions:) }
+        let(:role) do
+          ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+        end
         let(:user) do
           ::User.create!(
             email: 'admin@admin.com',

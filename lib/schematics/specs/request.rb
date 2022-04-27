@@ -31,8 +31,9 @@ module Schematics
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_path) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
         let(:session) { ::Session.create!(user:) }
-        let(:permissions) { ::Permission.create_all_entities_permissions! }
-        let(:role) { ::Role.create!(name: 'Admin', permissions:) }
+        let(:role) do
+          ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+        end
         let(:user) do
           ::User.create!(
             email: 'admin@admin.com',
