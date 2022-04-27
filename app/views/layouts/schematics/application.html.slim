@@ -24,6 +24,7 @@ html lang=::I18n.locale dir='ltr'
         --bs-primary-rgb: #{theme_color_rgb};
       }
     javascript [nonce=content_security_policy_nonce]:
+      window.mapsApiKey = #{gcloud_api_key}
       window.I18n = #{i18n_javascript}
   body data-controller='application'
     = render Schematics::Toast::Component.with_collection(flash.to_a)

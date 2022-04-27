@@ -1,27 +1,12 @@
-//= require @popperjs/core/dist/umd/popper
-//= require bootstrap/dist/js/bootstrap.bundle
-//= require jquery/dist/jquery
-//= require rails.validations
-//= require rails.validations.simple_form.bootstrap4
-//= require js-routes
-//= require pagy
-//= require ./chartkick
+import 'chartkick'
+import 'Chart.bundle'
+import '@client-side-validations/simple-form'
+import Pagy from 'pagy-module'
 
-/* global Turbo, Pagy */
+/* global mapsApiKey, Chartkick */
 
-document.addEventListener('turbo:load', function () {
-  Pagy.init()
-  document
-    .querySelectorAll('*[data-href]')
-    .forEach(element => {
-      element.addEventListener('click', function (e) {
-        if (!e.target.closest('a, .btn-group, [data-controller="edit-in-place"]')) {
-          Turbo.visit(this.dataset.href)
-        }
-      })
-    })
-})
-
+Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
+document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', function () {
   const navbar = document.querySelector('nav.navbar')
   if (navbar != null) {

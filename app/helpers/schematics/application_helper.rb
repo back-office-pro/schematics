@@ -24,6 +24,14 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
     end
 
+    def gcloud_api_key
+      Engine
+        .credentials
+        .gcloud[:api_key]
+        .to_json
+        .html_safe # rubocop:disable Rails/OutputSafety
+    end
+
     # :reek:UnusedParameters
     def fa_icon(icon, class: nil, size: nil, animation: nil, **kwargs)
       tag.i(
