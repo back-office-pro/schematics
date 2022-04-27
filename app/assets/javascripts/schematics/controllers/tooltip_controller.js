@@ -1,9 +1,8 @@
 import ApplicationController from './application_controller'
-
-/* global bootstrap */
+import { Tooltip } from 'bootstrap'
 
 export default class extends ApplicationController {
   connect () {
-    new bootstrap.Tooltip(this.element) // eslint-disable-line no-new
+    new Tooltip(this.element) // eslint-disable-line no-new
   }
 }
