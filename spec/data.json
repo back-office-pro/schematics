@@ -42,6 +42,10 @@
           "options": {
             "required": true
           }
+        },
+        {
+          "name": "age",
+          "type": "float"
         }
       ]
     },
