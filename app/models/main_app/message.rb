@@ -5,6 +5,9 @@ module MainApp
     extend ActiveSupport::Concern
 
     prepended do
+      scope :with_author_avatar, lambda {
+        includes(author: { avatar_attachment: { blob: :variant_records } })
+      }
       scope :unread, lambda {
         where(
           'NOT EXISTS (:version)',

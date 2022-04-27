@@ -8,7 +8,7 @@ module Schematics
       def messages
         @messages ||= received_messages
                       .with_rich_text_content_and_embeds
-                      .includes(author: [avatar_attachment: [blob: :variant_records]])
+                      .with_author_avatar
                       .order(created_at: :desc)
                       .limit(10)
       end
