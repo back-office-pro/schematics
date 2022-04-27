@@ -238,8 +238,7 @@ module Schematics
 
     def set_resource
       @resource = model_class
-                  .includes(entity.includes)
-                  .includes(:slugs)
+                  .includes(:slugs, *entity.includes)
                   .then_tap { _1.with_deleted if request.delete? }
                   .finder(params[:id])
       return if request.path.start_with?(polymorphic_path(@resource))
