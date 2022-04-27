@@ -165,7 +165,7 @@ module Schematics
           end
         end
 
-        if can?(:create)
+        if can?(:create) && model_class != ::Session
           it 'should get new' do
             get path(action: 'new'), headers:, as: :html
             if ability.can?(:new, model_class)
@@ -261,7 +261,7 @@ module Schematics
           end
         end
 
-        if can?(:destroy) && model_class != ::ActiveStorage::Attachment
+        if can?(:destroy) && [::ActiveStorage::Attachment, ::Session].exclude?(model_class)
           it 'should get delete' do
             get path(record:, action: 'delete'), headers:, as: :html
             if ability.can?(:destroy, record)
