@@ -1,6 +1,5 @@
 import ApplicationController from './application_controller'
-
-/* global Routes */
+import { schematicsPreferencesEn } from 'routes'
 
 export default class extends ApplicationController {
   switchTheme ({ params: { theme } }) {
@@ -9,6 +8,6 @@ export default class extends ApplicationController {
     newTheme.disabled = false
     newTheme.setAttribute('media', 'all')
     setTimeout(() => { oldTheme.disabled = true }, 200)
-    this.fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { theme } })
+    this.fetchAPI(schematicsPreferencesEn(), 'PUT', { preferences: { theme } })
   }
 }

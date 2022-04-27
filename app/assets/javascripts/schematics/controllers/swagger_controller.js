@@ -1,12 +1,11 @@
 import ApplicationController from './application_controller'
 import { SwaggerUIBundle } from 'swagger-ui-dist'
-
-/* global Routes */
+import { schematicsOpenApi } from 'routes'
 
 export default class extends ApplicationController {
   connect () {
     SwaggerUIBundle({
-      url: Routes.schematicsOpenApi(),
+      url: schematicsOpenApi(),
       domNode: this.element,
       presets: [
         SwaggerUIBundle.presets.apis,

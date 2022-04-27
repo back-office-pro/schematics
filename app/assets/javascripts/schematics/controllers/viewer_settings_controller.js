@@ -1,6 +1,5 @@
 import ApplicationController from './application_controller'
-
-/* global Routes */
+import { schematicsPreferencesEn } from 'routes'
 
 export default class extends ApplicationController {
   keepOpened (e) {
@@ -13,6 +12,6 @@ export default class extends ApplicationController {
       element.classList.add('animate__animated')
       element.classList.toggle('d-none')
     })
-    this.fetchAPI(Routes.schematicsPreferencesEn(), 'PUT', { preferences: { [id]: checked } })
+    this.fetchAPI(schematicsPreferencesEn(), 'PUT', { preferences: { [id]: checked } })
   }
 }

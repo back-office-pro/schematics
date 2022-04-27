@@ -1,6 +1,7 @@
 import ApplicationController from './application_controller'
+import { comparisonsEn } from 'routes'
 
-/* global Routes, Turbo */
+/* global Turbo */
 
 export default class extends ApplicationController {
   static get targets () {
@@ -13,7 +14,7 @@ export default class extends ApplicationController {
 
   async compare () {
     const params = { comparison: { model: this.modelValue, ids: this.ids() } }
-    const response = await this.fetchAPI(Routes.comparisonsEn(), 'POST', params)
+    const response = await this.fetchAPI(comparisonsEn(), 'POST', params)
     const { pathname } = new URL(response.headers.get('Location'))
     Turbo.visit(pathname)
   }

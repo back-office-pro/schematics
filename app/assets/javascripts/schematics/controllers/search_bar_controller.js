@@ -1,6 +1,7 @@
 import ApplicationController from './application_controller'
+import { searchEn } from 'routes'
 
-/* global Turbo, I18n, Routes */
+/* global Turbo, I18n */
 
 export default class extends ApplicationController {
   static get targets () {
@@ -116,6 +117,6 @@ export default class extends ApplicationController {
   }
 
   get url () {
-    return Routes.searchEn(this.inputTarget.value)
+    return searchEn(this.inputTarget.value)
   }
 }
