@@ -93,12 +93,6 @@ input[type='search']::-webkit-search-cancel-button:hover {
   z-index: initial !important;
 }
 
-// Clickable elements
-
-*[data-href] {
-  cursor: pointer;
-}
-
 // Progress bars
 
 .progress {
