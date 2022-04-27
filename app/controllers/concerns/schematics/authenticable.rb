@@ -21,6 +21,7 @@ module Schematics
         .includes(user: :slugs)
         .with_user_avatar
         .with_user_permissions
+        .with_user_drafts
         .where(auth_token:)
         .or(::Session.where(id: session[:current_session_id]))
         .first || Guest::Session.new(request:)
