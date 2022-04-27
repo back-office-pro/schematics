@@ -38,7 +38,7 @@ after_bundle do
   remove_file 'public/500.html'
 
   # Yarn packages
-  run 'yarn init --yes'
+  run 'yarn init -yp'
 
   JSON
     .parse(File.read((File.expand_path('package.json', __dir__))))
