@@ -8,7 +8,12 @@
             = render Schematics::EmptyResource::Component.new
       - else
         - @resources.each do |resource|
-          tr class=tr_css_class(resource) data-href=href(resource)
+          tr {
+            class=tr_css_class(resource)
+            data-action='click->application#visit'
+            data-application-href-param=href(resource)
+            role='button'
+          }
             td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
               = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
               = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)

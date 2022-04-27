@@ -1,8 +1,14 @@
 import { Controller } from '@hotwired/stimulus'
 
-/* global fetch */
+/* global Turbo, fetch */
 
 export default class extends Controller {
+  visit ({ target, params: { href } }) {
+    if (!target.closest('a, .btn-group, [data-controller="edit-in-place"]')) {
+      Turbo.visit(href)
+    }
+  }
+
   fetchAPI (url, method = 'GET', data) {
     const options = {
       method,

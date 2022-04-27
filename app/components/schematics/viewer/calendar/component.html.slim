@@ -16,7 +16,9 @@
                   - resources_for(date).each do |resource|
                     .alert.alert-secondary.calendar.lh-lg.text-truncate.mb-1.p-2 {
                       class=alert_class_for(resource, date)
-                      data-href=href(resource)
+                      data-action='click->application#visit'
+                      data-application-href-param=href(resource)
+                      role='button'
                     }
                       - unless previous_resource_for?(resource, date)
                         = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
