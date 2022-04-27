@@ -20,38 +20,33 @@ describe Schematics::Attributes::Date do
   its(:open_api_type) { is_expected.to eq(Date) }
   its(:icon) { is_expected.to eq(:calendar_days) }
   its(:default) { is_expected.to be_nil }
-  its(:validators) { is_expected.to eq(date: { allow_blank: true }) }
+  its(:validators) { is_expected.to be_empty }
+  its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }
   its(:group_method) { is_expected.to eq(:group_by_day) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
 
-  its(:validate) do
-    is_expected.to eq <<~RUBY
-      validates :created_at, {:date=>{:allow_blank=>true}}
-    RUBY
-  end
-
   context 'when date is required' do
     let(:options) { { required: true } }
 
-    its(:validators) { is_expected.to eq(presence: true, date: { allow_blank: false }) }
+    its(:validators) { is_expected.to eq(presence: true) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :created_at, {:presence=>true, :date=>{:allow_blank=>false}}
+        validates :created_at, {:presence=>true}
       RUBY
     end
   end
 
-  context 'when date has before option' do
-    let(:options) { { before: 'start_at' } }
+  context 'when date has less_than option' do
+    let(:options) { { less_than: 'start_at' } }
 
-    its(:validators) { is_expected.to eq(date: { allow_blank: true, before: :start_at }) }
+    its(:validators) { is_expected.to eq(comparison: { allow_blank: true, less_than: :start_at }) }
 
     its(:validate) do
       is_expected.to eq <<~RUBY
-        validates :created_at, {:date=>{:allow_blank=>true, :before=>:start_at}}
+        validates :created_at, {:comparison=>{:less_than=>:start_at, :allow_blank=>true}}
       RUBY
     end
   end

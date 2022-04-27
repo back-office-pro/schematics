@@ -12,8 +12,8 @@ module Schematics
       end
 
       def default
-        return ::Time.current.yesterday.to_fs(:db) if options.before
-        return ::Time.current.tomorrow.to_fs(:db) if options.after
+        return ::Time.current.yesterday.to_fs(:db) if options.less_than
+        return ::Time.current.tomorrow.to_fs(:db) if options.greater_than
       end
     end
   end

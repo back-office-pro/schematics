@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/time/zones'
+require 'active_model/validations/comparability'
 
 module Schematics
   module Attributes
@@ -10,8 +11,6 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
       include Behaviours::Rangeable
-
-      ALLOWLIST = %i[equal_to before after before_or_equal_to after_or_equal_to].freeze
 
       def open_api_type
         ::Date
@@ -28,19 +27,18 @@ module Schematics
       def validators
         super.merge(
           {
-            date: { allow_blank: }.merge(
-              options
-                .slice(*ALLOWLIST)
-                .to_h
-                .transform_values(&:to_sym)
-            )
-          }
+            comparison: options
+                        .slice(*ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
+                        .to_h
+                        .transform_values(&:to_sym)
+                        .tap { _1.merge!(allow_blank:) if _1.any? }
+          }.compact_blank
         )
       end
 
       def default
-        return ::Time.zone.today.to_fs(:db) if options.before
-        return ::Time.zone.tomorrow.to_fs(:db) if options.after
+        return ::Time.zone.today.to_fs(:db) if options.less_than
+        return ::Time.zone.tomorrow.to_fs(:db) if options.greater_than
       end
 
       def group_method
