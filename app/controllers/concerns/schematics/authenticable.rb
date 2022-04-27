@@ -17,7 +17,10 @@ module Schematics
 
     def current_session
       ::Session
-        .includes(:slugs, user: { avatar_attachment: [blob: :variant_records], role: :permissions })
+        .includes(:slugs)
+        .includes(user: :slugs)
+        .with_user_avatar
+        .with_user_permissions
         .where(auth_token:)
         .or(::Session.where(id: session[:current_session_id]))
         .first || Guest::Session.new(request:)

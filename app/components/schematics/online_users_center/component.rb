@@ -5,7 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       def sessions
         @sessions ||= ::Session
-                      .includes(:user)
+                      .with_user_avatar
                       .online
                       .order(updated_at: :desc)
       end
