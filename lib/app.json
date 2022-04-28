@@ -608,7 +608,7 @@
         },
         {
           "name": "ip",
-          "type": "inet",
+          "type": "ip",
           "options": {
             "readonly": true
           }
