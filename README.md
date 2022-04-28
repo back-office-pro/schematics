@@ -20,7 +20,7 @@ Dependencies choices details.
 
 :+1: Enable search in *Text* and *RichText* without newlines and HTML tags
 
-:-1: We need the elasticsearch daemon
+:-1: We need the elasticsearch / opensearch daemon
 
 ~~ransack~~
 
