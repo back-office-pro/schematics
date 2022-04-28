@@ -15,7 +15,7 @@ module Schematics
       result = PasswordResets::Create.call(resource_params)
       if result.success?
         respond_to do |format|
-          format.html { redirect_to login_path, notice: t(result.message) }
+          format.html { redirect_to main_app.login_path, notice: t(result.message) }
           format.json
         end
       else
@@ -38,7 +38,7 @@ module Schematics
       result = PasswordResets::Update.call(user: @user, user_params: resource_params)
       if result.success?
         respond_to do |format|
-          format.html { redirect_to login_path, notice: t(result.message) }
+          format.html { redirect_to main_app.login_path, notice: t(result.message) }
           format.json
         end
       else

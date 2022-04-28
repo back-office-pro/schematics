@@ -11,4 +11,4 @@
                       html: { data: { controller: 'form' } } do |form|
       = render Schematics::Input::Password::Component.new(form:, confirm: true)
       = render Schematics::Button::Confirm::Component.new
-      = render Schematics::Button::Cancel::Component.new(path: login_path)
+      = render Schematics::Button::Cancel::Component.new(path: main_app.login_path)
