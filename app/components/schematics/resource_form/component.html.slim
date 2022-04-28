@@ -1,5 +1,5 @@
-= simple_form_for @resource, url: @url, wrapper:, remote: remote?, validate: true, html: { data:, class: css_classes } do |f|
-  = f.input :lock_version, as: :hidden, wrapper: false unless remote?
+= simple_form_for @resource, url: @url, wrapper:, validate: true, html: { data:, class: css_classes } do |f|
+  = f.input :lock_version, as: :hidden, wrapper: false unless edit_in_place?
   - @attributes.stable_sort_by(&:weight).each do |field|
     - case field
     - when Schematics::Associations::HasAndBelongsToMany
@@ -104,5 +104,5 @@
       = f.input field.name.to_sym
     - else
       = f.input field.name.to_sym, prepend: field.try(:unit) || fa_icon(field.icon)
-  = render Schematics::Button::Confirm::Component.new(compact: remote?)
-  = render Schematics::Button::Cancel::Component.new(path: @cancel_path, compact: remote?, data: cancel_button_data)
+  = render Schematics::Button::Confirm::Component.new(compact: edit_in_place?)
+  = render Schematics::Button::Cancel::Component.new(path: @cancel_path, compact: edit_in_place?, data: cancel_button_data)

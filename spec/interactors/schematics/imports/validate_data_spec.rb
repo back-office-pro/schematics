@@ -20,16 +20,12 @@ RSpec.describe Schematics::Imports::ValidateData do
           {
             'name' => 'Role1',
             'slug' => 'role1',
-            'lock_version' => 0,
-            'created_at' => Time,
-            'updated_at' => Time
+            'lock_version' => 0
           },
           {
             'name' => 'Role2',
             'slug' => 'role2',
-            'lock_version' => 0,
-            'created_at' => Time,
-            'updated_at' => Time
+            'lock_version' => 0
           }
         ]
       end
@@ -51,9 +47,7 @@ RSpec.describe Schematics::Imports::ValidateData do
           {
             'name' => 'Role1',
             'slug' => 'role1',
-            'lock_version' => 0,
-            'created_at' => Time,
-            'updated_at' => Time
+            'lock_version' => 0
           },
           ActiveRecord::RecordInvalid
         ]

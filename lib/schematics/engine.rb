@@ -22,7 +22,7 @@ require 'phonelib'
 require 'valid_email'
 require 'validate_url'
 require 'active_storage_validations'
-require 'mini_magick'
+require 'ruby-vips'
 require 'active_link_to'
 require 'loaf'
 require 'groupdate'
@@ -30,7 +30,6 @@ require 'chartkick'
 require 'humanize'
 require 'active_storage_base64'
 require 'route_translator'
-require 'date_validator'
 require 'easy_translate'
 require 'active_model_serializers'
 require 'rails-erd'
@@ -50,7 +49,10 @@ require 'js-routes'
 require 'strip_attributes'
 require 'i18n-inflector'
 require 'chroma'
-require 'webpacker' if Rails.env.test?
+require 'sprockets/railtie'
+require 'importmap-rails'
+require 'turbo-rails'
+require 'stimulus-rails'
 
 module Schematics
   class Engine < ::Rails::Engine
@@ -79,7 +81,9 @@ module Schematics
     config.action_dispatch.signed_cookie_digest = 'SHA256'
 
     # Active Record
+    config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
+    config.active_record.query_log_tags_enabled = true
     config.active_record.action_on_strict_loading_violation = :log # unless Rails.env.development?
     config.active_record.warn_on_records_fetched_greater_than = 100
 
@@ -98,10 +102,12 @@ module Schematics
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.precompile += %w[schematics_manifest.js]
 
+    # Importmap
+    config.importmap.paths << root.join('config', 'importmap.rb')
+
     # i18n
     config.i18n.default_locale = Rails.env.test? ? :en : :fr
     config.i18n.available_locales = %i[fr en]
-    config.i18n.load_path += Dir[root.join('config', 'locales', '**', '*.yml')]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
     # Cache

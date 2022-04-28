@@ -23,7 +23,11 @@
                                 #carousel.carousel.slide data-ride='carousel'
                                   .carousel-inner
                                     - carousel(resource).each do |attachment|
-                                      .carousel-item.active.text-center data-href=href(resource)
+                                      .carousel-item.active.text-center {
+                                        data-action='click->application#visit'
+                                        data-application-href-param=href(resource)
+                                        role='button'
+                                      }
                                         = render Schematics::Attachment::Component.new(attachment:, class: 'rounded')
                                   a.carousel-control-prev data-slide='prev' href='#carousel' role='button'
                                     span.carousel-control-prev-icon aria-hidden='true'

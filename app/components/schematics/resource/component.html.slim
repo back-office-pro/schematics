@@ -60,4 +60,4 @@ span data=div_data
       = highlight @field.format(value), @highlight
     - else
       = @field.format(value)
-  = render Schematics::ResourceForm::Component.new(resource: @resource, remote: true, attributes: [@field]) if editable?
+  = render Schematics::ResourceForm::Component.new(resource: @resource, edit_in_place: true, attributes: [@field]) if editable?

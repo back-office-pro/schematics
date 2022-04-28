@@ -53,11 +53,11 @@ module Schematics
         end
 
         def input_html
-          { autocomplete:, 'data-form-target': 'passwordInput' }.compact
+          { autocomplete:, 'data-password-target': 'input' }.compact
         end
 
         def data
-          { action: 'click->form#togglePasswordValue' }
+          { action: 'click->password#toggle' }
         end
       end
     end

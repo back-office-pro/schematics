@@ -251,7 +251,7 @@
           "type": "datetime",
           "options": {
             "required": true,
-            "before": "ends_at"
+            "less_than": "ends_at"
           }
         },
         {
@@ -259,7 +259,7 @@
           "type": "datetime",
           "options": {
             "required": true,
-            "after": "start_at"
+            "greater_than": "start_at"
           }
         },
         {

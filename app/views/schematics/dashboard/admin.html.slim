@@ -84,7 +84,7 @@
           .col.text-center.p-4
             = link_to api_path,
                       class: 'text-decoration-none',
-                      data: { turbolinks: false } do
+                      data: { turbo: false } do
               = fa_icon :project_diagram, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.api.title')
               .text-muted = t('.api.caption')
@@ -104,7 +104,7 @@
           .col.text-center.p-4
             = link_to '/profiler/snapshots',
                       class: 'text-decoration-none',
-                      data: { turbolinks: false } do
+                      data: { turbo: false } do
               = fa_icon :tachometer_alt, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.profiler.title')
               .text-muted = t('.profiler.caption')
@@ -115,7 +115,7 @@
           .col.text-center.p-4
             = link_to main_app.sidekiq_web_path,
                       class: 'text-decoration-none',
-                      data: { turbolinks: false } do
+                      data: { turbo: false } do
               = fa_icon :tasks, size: '3x', class: 'd-inline-block'
               h5.my-4 = t('.sidekiq.title')
               .text-muted = t('.sidekiq.caption')

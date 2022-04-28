@@ -16,11 +16,11 @@ module Schematics
       def to_str
         if options.default
           <<~RUBY
-            enum #{name}: #{to_h}, _prefix: true, _default: "#{default}"
+            enum :#{name}, #{to_h}, prefix: true, default: "#{default}"
           RUBY
         else
           <<~RUBY
-            enum #{name}: #{to_h}, _prefix: true
+            enum :#{name}, #{to_h}, prefix: true
           RUBY
         end
       end

@@ -1,3 +1,5 @@
-= link_to polymorphic_path(@resource, action: :duplicate), method: :post, class: 'btn btn-primary btn-sm btn-icon-split ms-2' do
+= button_to polymorphic_path(@resource, action: :duplicate), method: :post, class: css_classes, form: { class: 'd-inline' } do
   span.icon = fa_icon :clone
+  span.icon.d-none = fa_icon :spinner, animation: 'spin'
   span.text.d-none.d-lg-inline = t('.text')
+  span.text.d-none = t('schematics.application.button.loading')

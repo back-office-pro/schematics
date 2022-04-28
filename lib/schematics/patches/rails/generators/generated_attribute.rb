@@ -5,6 +5,10 @@ module Schematics
     module Rails
       module Generators
         module GeneratedAttribute
+          def valid_type?(*)
+            true
+          end
+
           def name
             schema_attribute&.name || super
           end

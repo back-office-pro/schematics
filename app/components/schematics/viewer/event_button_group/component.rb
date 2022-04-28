@@ -30,9 +30,14 @@ module Schematics
         end
 
         def data
-          return {} unless compact?
+          return { turbo_method: :patch } unless compact?
 
-          { controller: 'tooltip', 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
+          {
+            turbo_method: :patch,
+            controller: 'tooltip',
+            'bs-toggle': 'tooltip',
+            'bs-placement': 'top'
+          }
         end
 
         def compact?

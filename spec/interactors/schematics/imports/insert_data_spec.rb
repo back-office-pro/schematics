@@ -13,15 +13,11 @@ RSpec.describe Schematics::Imports::InsertData do
         [
           {
             'name' => 'Role1',
-            'slug' => 'role1',
-            'created_at' => Time.current,
-            'updated_at' => Time.current
+            'slug' => 'role1'
           },
           {
             'name' => 'Role2',
-            'slug' => 'role2',
-            'created_at' => Time.current,
-            'updated_at' => Time.current
+            'slug' => 'role2'
           }
         ]
       end
@@ -42,15 +38,11 @@ RSpec.describe Schematics::Imports::InsertData do
         [
           {
             'name' => 'Role1',
-            'slug' => 'role1',
-            'created_at' => Time.current,
-            'updated_at' => Time.current
+            'slug' => 'role1'
           },
           {
             'name' => 'Role1',
-            'slug' => 'role1',
-            'created_at' => Time.current,
-            'updated_at' => Time.current
+            'slug' => 'role1'
           }
         ]
       end

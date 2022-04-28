@@ -1,4 +1,8 @@
-.row data-href=href
+.row {
+  data-action='click->application#visit'
+  data-application-href-param=href
+  role='button'
+}
   .col-auto.align-self-center
     = render Schematics::Attachment::Component.avatar(user:)
   .col.text-truncate

@@ -12,6 +12,10 @@ module Schematics
         def render?
           can?(:duplicate, @resource)
         end
+
+        def css_classes
+          %w[btn btn-primary btn-sm btn-icon-split ms-2]
+        end
       end
     end
   end

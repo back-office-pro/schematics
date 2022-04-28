@@ -4,6 +4,8 @@ require 'json'
 
 # Gems
 gem 'schematics', path: '/Users/max/github/schematics'
+gem 'ratonvirus-clamby', # TODO: https://github.com/mainio/ratonvirus-clamby/pull/5
+    git: 'https://github.com/geetfun/ratonvirus-clamby'
 gem 'simple_form', # TODO: remove when simple_form is upgraded
     git: 'https://github.com/heartcombo/simple_form',
     branch: 'main'
@@ -26,20 +28,21 @@ after_bundle do
   rails_command 'schematics:docs:generate'
   rails_command 'schematics:licence:renew[enterprise,12]'
   rails_command 'schematics:users:admin[maxence.derous@gmail.com,John,Doe,fr,Paris]'
+  rails_command 'js:routes'
   rails_command 'dev:cache'
 
   # Ignore /doc directory
   append_to_file '.gitignore', '/doc'
+  append_to_file '.gitignore', '/app/javascript/routes.js'
 
   # Remove public html files
   remove_file 'public/404.html'
   remove_file 'public/422.html'
   remove_file 'public/500.html'
 
-  # Remove /test directory
-  remove_dir 'test'
-
   # Yarn packages
+  run 'yarn init -yp'
+
   JSON
     .parse(File.read((File.expand_path('package.json', __dir__))))
     .fetch('dependencies')

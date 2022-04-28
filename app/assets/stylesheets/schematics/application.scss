@@ -6,6 +6,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@validide/resizable-table-columns/dist/css/resizable-table-columns';
+@import 'animate.css/animate';
 @import 'timeline';
 @import 'trix';
 @import 'slim_select';
@@ -93,10 +94,16 @@ input[type='search']::-webkit-search-cancel-button:hover {
   z-index: initial !important;
 }
 
-// Clickable elements
+button[disabled] .icon:not(.d-none),
+button[disabled] .text:not(.d-none),
+button[disabled] .text.d-none:not(.d-lg-inline),
+button[disabled] .text.d-none.d-lg-inline {
+  display: none !important;
+}
 
-*[data-href] {
-  cursor: pointer;
+button[disabled] .icon.d-none,
+button[disabled] .text.d-none:not(.d-lg-inline) {
+  display: initial !important;
 }
 
 // Progress bars

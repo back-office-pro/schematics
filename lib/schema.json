@@ -207,19 +207,22 @@
         "values": {
           "type": "array"
         },
-        "before": {
+        "less_than": {
           "type": "string"
         },
-        "after": {
+        "greater_than": {
           "type": "string"
         },
-        "before_or_equal_to": {
+        "less_than_or_equal_to": {
           "type": "string"
         },
-        "after_or_equal_to": {
+        "greater_than_or_equal_to": {
           "type": "string"
         },
         "equal_to": {
+          "type": "string"
+        },
+        "other_than": {
           "type": "string"
         },
         "aspect_ratio": {

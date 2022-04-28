@@ -1,4 +1,4 @@
-= button_tag class: css_classes, data: { 'form-target': 'submitButton' } do
+= button_tag class: css_classes do
   span.icon = fa_icon :check, class: icon_class
   span.icon.d-none = fa_icon :spinner, animation: 'spin'
   span.text = t('schematics.application.button.confirm') unless compact?

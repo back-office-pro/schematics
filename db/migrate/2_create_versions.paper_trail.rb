@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateVersions < ActiveRecord::Migration[6.1]
+class CreateVersions < ActiveRecord::Migration[7.0]
   def change
     create_table :versions, id: :uuid do |t|
       t.string   :item_type, null: false

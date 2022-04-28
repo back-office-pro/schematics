@@ -12,6 +12,7 @@ module Schematics
         fixtures :all
         delegate :root_path,
                  :edit_profile_path,
+                 :edit_profile_url,
                  to: 'Schematics::Engine.routes.url_helpers'
         delegate :model_class,
                  :entity,
@@ -28,7 +29,8 @@ module Schematics
         let(:record) { __send__(entity_fixtures, :one) }
         let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
         let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
-        let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_path) } # rubocop:disable Style/StringHashKeys
+        let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
+        let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
         let(:session) { ::Session.create!(user:) }
         let(:role) do
@@ -163,7 +165,7 @@ module Schematics
           end
         end
 
-        if can?(:create)
+        if can?(:create) && model_class != ::Session
           it 'should get new' do
             get path(action: 'new'), headers:, as: :html
             if ability.can?(:new, model_class)
@@ -259,7 +261,7 @@ module Schematics
           end
         end
 
-        if can?(:destroy) && model_class != ::ActiveStorage::Attachment
+        if can?(:destroy) && [::ActiveStorage::Attachment, ::Session].exclude?(model_class)
           it 'should get delete' do
             get path(record:, action: 'delete'), headers:, as: :html
             if ability.can?(:destroy, record)

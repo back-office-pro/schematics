@@ -1,5 +1,5 @@
 import ApplicationController from './application_controller'
-import { ResizableTableColumns } from '../../@validide/resizable-table-columns/dist/js/es6/index'
+import { ResizableTableColumns } from '@validide/resizable-table-columns'
 
 export default class extends ApplicationController {
   initialize () {

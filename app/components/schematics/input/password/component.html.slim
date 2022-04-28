@@ -1,8 +1,9 @@
 - inputs_count.times do |index|
-  = @form.input index.zero? ? name : :"#{name}_confirmation",
-                as: :password,
-                required: required?,
-                input_html:,
-                prepend: fa_icon(icon),
-                append:  fa_icon(:eye, class: 'icon', role: 'button', data:) + \
-                         fa_icon(:eye_slash, class: 'icon d-none', role: 'button', data:)
+  span data-controller='password'
+    = @form.input index.zero? ? name : :"#{name}_confirmation",
+                  as: :password,
+                  required: required?,
+                  input_html:,
+                  prepend: fa_icon(icon),
+                  append:  fa_icon(:eye, class: 'icon', role: 'button', data:) + \
+                          fa_icon(:eye_slash, class: 'icon d-none', role: 'button', data:)

@@ -1,11 +1,8 @@
 import ApplicationController from './application_controller'
-
-/* global bootstrap */
+import { Toast } from 'bootstrap'
 
 export default class extends ApplicationController {
   connect () {
-    new bootstrap // eslint-disable-line no-new
-      .Toast(this.element)
-      .show()
+    new Toast(this.element).show() // eslint-disable-line no-new
   }
 }

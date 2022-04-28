@@ -1,5 +1,5 @@
 import ApplicationController from './application_controller'
-import Sortable from '../../sortablejs/modular/sortable.esm'
+import Sortable from 'sortablejs'
 
 export default class extends ApplicationController {
   connect () {

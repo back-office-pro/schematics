@@ -19,16 +19,11 @@ describe Schematics::Attributes::Time do
   its(:column_name) { is_expected.to eq('hour') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:icon) { is_expected.to eq(:clock) }
-  its(:validators) { is_expected.to eq(date: { allow_blank: true }) }
+  its(:validators) { is_expected.to be_empty }
+  its(:validate) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('messages.hour') }
   its(:to_s) { is_expected.to eq('schema:message_hour') }
-
-  its(:validate) do
-    is_expected.to eq <<~RUBY
-      validates :hour, {:date=>{:allow_blank=>true}}
-    RUBY
-  end
 
   describe '#format' do
     subject { attribute.format(value) }

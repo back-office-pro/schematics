@@ -24,7 +24,11 @@
                   = model_class.human_attribute_name(field.name)
           tbody.border-0
             - @resources.each do |resource|
-              tr data-href=polymorphic_path(resource)
+              tr {
+                data-action='click->application#visit'
+                data-application-href-param=polymorphic_path(resource)
+                role='button'
+              }
                 td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
                   .btn-group
                     = render Schematics::Button::Edit::Component.new(resource:)

@@ -8,6 +8,7 @@ Rack::MiniProfiler.config.tap do |config|
   config.snapshot_every_n_requests = 1
   config.authorization_mode = :allow_authorized
   config.base_url_path = '/profiler'
+  config.enable_hotwire_turbo_drive_support = true
   config.skip_paths = [
     %r{/sidekiq(.*)},
     %r{/favicon.ico},

@@ -25,8 +25,8 @@ module Schematics
     def parameter_missing(exception)
       respond_to do |format|
         format.html do
-          redirect_back fallback_location: schematics.root_path,
-                        alert: t('schematics.application.parameter_missing.alert')
+          redirect_back_or_to schematics.root_path,
+                              alert: t('schematics.application.parameter_missing.alert')
         end
         format.json do
           render json: { errors: [{ exception.param => ['parameter is required'] }] },
@@ -48,8 +48,8 @@ module Schematics
     def invalid_transition(exception)
       respond_to do |format|
         format.html do
-          redirect_back fallback_location: @resource,
-                        alert: t('schematics.application.invalid_transition.alert')
+          redirect_back_or_to @resource,
+                              alert: t('schematics.application.invalid_transition.alert')
         end
         format.json do
           render json: { errors: [{ exception.state_machine_name => [exception.message] }] },
@@ -64,7 +64,7 @@ module Schematics
         format.html do
           @resource.errors.add(:base, :stale)
           flash.now[:alert] = t('schematics.application.stale_object_error.alert')
-          render :edit
+          render :edit, status: :precondition_failed
         end
       end
     end

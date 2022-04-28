@@ -29,7 +29,7 @@ module MainApp
         respond_to do |format|
           format.html do
             flash.now[:alert] = t(result.message)
-            render :new
+            render :new, status: :unauthorized
           end
           format.json { head :unauthorized }
         end
