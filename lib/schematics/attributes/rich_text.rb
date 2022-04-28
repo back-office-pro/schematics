@@ -7,6 +7,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
+      include Behaviours::Encryptable
 
       def preload
         { association_name => [embeds_attachments: :blob] }

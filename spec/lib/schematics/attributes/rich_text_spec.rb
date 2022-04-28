@@ -14,6 +14,7 @@ describe Schematics::Attributes::RichText do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
