@@ -30,7 +30,7 @@ describe Schematics::Attributes::RichText do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_rich_text :summary
+      has_rich_text :summary, encrypted: true
     RUBY
   end
 end

@@ -7,6 +7,10 @@ module Schematics
         super.merge(url: { allow_blank: })
       end
 
+      def encrypted?
+        true
+      end
+
       def default
         "https://www.#{SecureRandom.base58}.com"
       end

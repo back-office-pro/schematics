@@ -18,4 +18,11 @@ describe Schematics::Attributes::Address do
   its(:column_name) { is_expected.to eq('address') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:location_dot) }
+  it { is_expected.to be_encrypted }
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      encrypts :address, deterministic: true
+    RUBY
+  end
 end

@@ -18,6 +18,13 @@ describe Schematics::Attributes::UserAgent do
   its(:column_name) { is_expected.to eq('user_agent') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:computer) }
+  it { is_expected.to be_encrypted }
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      encrypts :user_agent, deterministic: true
+    RUBY
+  end
 
   describe '#format' do
     subject { attribute.format(value) }

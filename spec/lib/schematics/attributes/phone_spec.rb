@@ -23,6 +23,13 @@ describe Schematics::Attributes::Phone do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.phone') }
   its(:to_s) { is_expected.to eq('schema:user_phone') }
+  it { is_expected.to be_encrypted }
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      encrypts :phone, deterministic: true
+    RUBY
+  end
 
   its(:validate) do
     is_expected.to eq <<~RUBY

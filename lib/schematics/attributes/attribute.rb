@@ -6,7 +6,7 @@ module Schematics
       include Behaviours::Migratable
       include Behaviours::Validatable
 
-      delegate :hidden?, :cached?, to: :options
+      delegate :hidden?, :cached?, :encrypted?, to: :options
       attr_reader :entity, :name, :options
 
       class << self
@@ -30,7 +30,11 @@ module Schematics
       end
 
       def to_str
-        ''
+        return '' unless encrypted?
+
+        <<~RUBY
+          encrypts :#{name}, deterministic: true
+        RUBY
       end
 
       def weight

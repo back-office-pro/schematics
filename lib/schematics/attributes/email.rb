@@ -11,6 +11,10 @@ module Schematics
         "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
       end
 
+      def encrypted?
+        true
+      end
+
       def icon
         :envelope
       end

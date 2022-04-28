@@ -13,6 +13,10 @@ module Schematics
         [browser.name, browser.version, browser.platform.name].join(' ')
       end
 
+      def encrypted?
+        true
+      end
+
       def icon
         :computer
       end

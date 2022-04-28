@@ -8,6 +8,10 @@ module Schematics
         super.merge(phone: { allow_blank: })
       end
 
+      def encrypted?
+        true
+      end
+
       def default
         ::Array
           .new(10) { rand(10) }
