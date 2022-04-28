@@ -20,7 +20,7 @@ module Schematics
         respond_to do |format|
           format.html do
             flash.now[:alert] = t(result.message)
-            render :edit
+            render :edit, status: :unprocessable_entity
           end
           format.json do
             render json: { errors: [t(result.message)] },

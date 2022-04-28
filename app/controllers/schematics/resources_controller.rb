@@ -98,7 +98,7 @@ module Schematics
         respond_to do |format|
           format.html do
             flash.now[:alert] = tscope(result.message)
-            render :new
+            render :new, status: :unprocessable_entity
           end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
@@ -119,7 +119,7 @@ module Schematics
         respond_to do |format|
           format.html do
             flash.now[:alert] = tscope(result.message)
-            render :new
+            render :new, status: :unprocessable_entity
           end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
@@ -139,7 +139,7 @@ module Schematics
         respond_to do |format|
           format.html do
             flash.now[:alert] = tscope(result.message)
-            render :edit
+            render :edit, status: :unprocessable_entity
           end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
@@ -161,7 +161,7 @@ module Schematics
         respond_to do |format|
           format.html do
             flash.now[:alert] = tscope(result.message)
-            render :show
+            render :show, status: :unprocessable_entity
           end
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
@@ -173,7 +173,9 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
+            redirect_to polymorphic_path(model_class),
+                        notice: tscope(result.message),
+                        status: :see_other
           end
           format.json
         end
