@@ -3,7 +3,7 @@
 module Schematics
   module Virtuals
     module Errors
-      class NoMethodError < StandardError
+      class NoMethodError < NameError
         def name
           super
             .to_s
@@ -11,9 +11,9 @@ module Schematics
         end
 
         def to_s
-          return translate('errors.virtuals.nil') unless receiver
+          return super if receiver
 
-          translate('errors.virtuals.no_method', name:)
+          translate('errors.virtuals.nil')
         end
       end
     end

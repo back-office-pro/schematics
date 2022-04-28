@@ -45,9 +45,8 @@ fr:
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:
       argument: un champ virtuel ne peut pas contenir d'assignement
-      name: "$%{name} n'est pas une variable définie"
+      name: "%{name} n'est pas défini"
       nil: une variable n'a pas de valeur
-      no_method: "%{name} n'est pas défini"
       type: conversion de %{source} en %{target}
       types:
         integer: nombre

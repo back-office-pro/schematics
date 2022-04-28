@@ -22,9 +22,8 @@ en:
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
     virtuals:
       argument: a virtual cannot contains an assignment
-      name: "$%{name} is not a defined variable"
+      name: "%{name} is not defined"
       nil: a variable does not have value
-      no_method: "%{name} is not defined"
       type: conversion from %{source} to %{target}
       types:
         integer: integer
