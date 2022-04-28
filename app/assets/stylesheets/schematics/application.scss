@@ -93,6 +93,15 @@ input[type='search']::-webkit-search-cancel-button:hover {
   z-index: initial !important;
 }
 
+button[disabled] .icon,
+button[disabled] .text {
+  display: none;
+
+  &.d-none {
+    display: initial !important;
+  }
+}
+
 // Progress bars
 
 .progress {

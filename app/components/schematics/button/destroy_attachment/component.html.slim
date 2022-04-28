@@ -1,4 +1,4 @@
-= form_for @resource, data: { controller: 'form' } do |f|
+= form_for @resource do |f|
   = f.fields_for attributes_param_key do |fields|
     = fields.hidden_field :id, value: @attachment.id
     = fields.hidden_field :_destroy, value: true

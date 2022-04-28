@@ -26,7 +26,6 @@ module Schematics
 
       def data
         {
-          controller: 'form',
           'auto-save-target': 'form',
           'edit-in-place-target': 'form',
           type: :json
