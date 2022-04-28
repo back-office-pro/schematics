@@ -2,16 +2,15 @@ import ApplicationController from './application_controller'
 
 export default class extends ApplicationController {
   static get targets () {
-    return ['passwordInput']
+    return ['input']
   }
 
-  togglePasswordValue () {
-    const { type } = this.passwordInputTarget
+  toggle () {
     this
-      .passwordInputTarget
-      .setAttribute('type', type === 'text' ? 'password' : 'text')
+      .inputTarget
+      .setAttribute('type', this.inputTarget.type === 'text' ? 'password' : 'text')
     this
-      .passwordInputTarget
+      .inputTarget
       .nextSibling
       .querySelectorAll('.icon')
       .forEach(_ => _.classList.toggle('d-none'))
