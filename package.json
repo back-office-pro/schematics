@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@client-side-validations/client-side-validations": "0.3.0",
     "@client-side-validations/simple-form": "0.3.1",
     "@fortawesome/fontawesome-free": "6.1.1",
-    "@hotwired/stimulus": "3.0.1",
     "@popperjs/core": "2.11.5",
     "@validide/resizable-table-columns": "2.0.5",
     "animate.css": "4.1.1",
