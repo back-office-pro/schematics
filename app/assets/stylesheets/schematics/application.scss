@@ -93,13 +93,16 @@ input[type='search']::-webkit-search-cancel-button:hover {
   z-index: initial !important;
 }
 
-button[disabled] .icon,
-button[disabled] .text {
-  display: none;
+button[disabled] .icon:not(.d-none),
+button[disabled] .text:not(.d-none),
+button[disabled] .text.d-none:not(.d-lg-inline),
+button[disabled] .text.d-none.d-lg-inline {
+  display: none !important;
+}
 
-  &.d-none {
-    display: initial !important;
-  }
+button[disabled] .icon.d-none,
+button[disabled] .text.d-none:not(.d-lg-inline) {
+  display: initial !important;
 }
 
 // Progress bars
