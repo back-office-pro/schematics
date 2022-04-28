@@ -1,6 +1,5 @@
 = link_to fa_icon(:trash_arrow_up),
           polymorphic_path(@resource, action: :restore),
-          method: :delete,
           class: 'btn btn-danger btn-sm',
           title: t('.title'),
-          data: { controller: 'tooltip', 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
+          data: { turbo_method: :delete, controller: 'tooltip', 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
