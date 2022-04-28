@@ -4,7 +4,8 @@ require 'json'
 
 # Gems
 gem 'schematics', path: '/Users/max/github/schematics'
-gem 'ratonvirus-clamby', git: 'https://github.com/geetfun/ratonvirus-clamby'
+gem 'ratonvirus-clamby', # TODO: https://github.com/mainio/ratonvirus-clamby/pull/5
+    git: 'https://github.com/geetfun/ratonvirus-clamby'
 gem 'simple_form', # TODO: remove when simple_form is upgraded
     git: 'https://github.com/heartcombo/simple_form',
     branch: 'main'
