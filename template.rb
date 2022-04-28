@@ -19,6 +19,7 @@ after_bundle do
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
   rails_command 'schematics:generate'
+  rails_command 'schematics:db:encryption:init'
   rails_command 'generate annotate:install'
   rails_command 'generate erd:install'
   rails_command 'db:reset'
