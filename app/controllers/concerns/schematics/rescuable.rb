@@ -64,7 +64,7 @@ module Schematics
         format.html do
           @resource.errors.add(:base, :stale)
           flash.now[:alert] = t('schematics.application.stale_object_error.alert')
-          render :edit
+          render :edit, status: :precondition_failed
         end
       end
     end
