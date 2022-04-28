@@ -37,14 +37,16 @@
           "name": "first_name",
           "type": "string",
           "options": {
-            "required": true
+            "required": true,
+            "encrypted": true
           }
         },
         {
           "name": "last_name",
           "type": "string",
           "options": {
-            "required": true
+            "required": true,
+            "encrypted": true
           }
         },
         {
@@ -114,7 +116,8 @@
           "name": "subject",
           "type": "string",
           "options": {
-            "required": true
+            "required": true,
+            "encrypted": true
           }
         },
         {
@@ -196,7 +199,8 @@
           "name": "company_name",
           "type": "string",
           "options": {
-            "cached": true
+            "cached": true,
+            "encrypted": true
           }
         },
         {
@@ -205,7 +209,10 @@
         },
         {
           "name": "company_registration_number",
-          "type": "string"
+          "type": "string",
+          "options": {
+            "encrypted": true
+          }
         },
         {
           "name": "company_logo",

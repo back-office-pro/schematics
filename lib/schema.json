@@ -198,6 +198,9 @@
         "cached": {
           "type": "boolean"
         },
+        "encrypted": {
+          "type": "boolean"
+        },
         "readonly": {
           "type": "boolean"
         },
