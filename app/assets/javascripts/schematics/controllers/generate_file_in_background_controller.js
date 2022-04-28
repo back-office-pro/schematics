@@ -15,8 +15,6 @@ export default class extends ApplicationController {
   toggleButton (loadingText) {
     this.buttonTarget.disabled = !this.buttonTarget.disabled
     this.loadingTarget.textContent = loadingText
-    this.buttonTarget.querySelectorAll('.icon').forEach(_ => _.classList.toggle('d-none'))
-    this.buttonTarget.querySelectorAll('.text').forEach(_ => _.classList.toggle('d-lg-inline'))
   }
 
   async run ({ params: { allPages } }) {
