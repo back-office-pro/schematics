@@ -50,6 +50,15 @@ module Schematics
           .map(&:to_sym)
       end
 
+      def format(value)
+        case value
+        when NoMethodError
+          value.original_message
+        else
+          super
+        end
+      end
+
       def to_str
         <<~RUBY
           define_attribute_method :#{@name}
