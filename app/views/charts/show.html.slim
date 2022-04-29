@@ -12,7 +12,7 @@
         = render Schematics::Button::Destroy::Component.new(resource: @resource, compact: false)
   .card-body.p-3
     = public_send @resource.type,
-                  chart_path(@resource),
+                  chart_path(@resource, format: :json),
                   id: @resource.css_id,
                   xtitle: @resource.xtitle,
                   ytitle: @resource.ytitle,
