@@ -6,12 +6,12 @@ require 'cancan/matchers'
 RSpec.describe Schematics::SessionAbility do
   subject(:ability) { described_class.new(user) }
 
-  fixtures :sessions, :users
+  fixtures :users
 
-  let(:session) { sessions(:one) }
-  let(:user) { session.user }
+  let(:user) { users(:one) }
 
-  it { is_expected.to be_able_to(:destroy, session) }
+  it { is_expected.not_to be_able_to(:read, ::Session) }
+  it { is_expected.not_to be_able_to(:destroy, ::Session) }
 
   context 'when user is admin' do
     before { allow(user).to receive(:admin?).and_return(true) }
