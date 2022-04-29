@@ -17,7 +17,7 @@ module MainApp
     end
 
     def online?
-      @online ||= sessions.exists?(updated_at: ::Session::ONLINE_DELAY.ago..)
+      @online ||= sessions.active.exists?
     end
 
     def password_reset_token_expired?

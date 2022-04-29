@@ -6,7 +6,7 @@ module Schematics
       def sessions
         @sessions ||= ::Session
                       .with_user_avatar
-                      .online
+                      .active
                       .order(updated_at: :desc)
       end
     end

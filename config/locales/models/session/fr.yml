@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       session:
+        active: Connexion active
         ip: Adresse IP
         safe: Connexion certifiée
         user: Utilisateur

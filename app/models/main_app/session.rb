@@ -4,10 +4,10 @@ module MainApp
   module Session
     extend ActiveSupport::Concern
 
-    ONLINE_DELAY = 15.minutes.freeze
+    ACTIVE_DELAY = 15.minutes.freeze
 
     prepended do
-      scope :online, -> { where(updated_at: ONLINE_DELAY.ago..) }
+      scope :active, -> { where(updated_at: ACTIVE_DELAY.ago..) }
       scope :with_user_permissions, -> { includes(user: { role: :permissions }) }
       scope :with_user_drafts, -> { includes(user: :drafts) }
       scope :with_user_avatar, lambda {
@@ -15,7 +15,11 @@ module MainApp
       }
     end
 
-    def safe
+    def active?
+      ACTIVE_DELAY.ago.before?(updated_at)
+    end
+
+    def safe?
       user
         .sessions
         .where
