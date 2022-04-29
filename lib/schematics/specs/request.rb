@@ -227,7 +227,7 @@ module Schematics
               if fillable_attributes.any?(&:unique?)
                 expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
                   .not_to change(model_class, :count)
-                is_expected.to have_http_status(:success)
+                is_expected.to have_http_status(:unprocessable_entity)
               else
                 expect { post(path(record:, action: 'duplicate'), headers:, as: :html) }
                   .to change(model_class, :count)
