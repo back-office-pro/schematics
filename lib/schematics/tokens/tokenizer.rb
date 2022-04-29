@@ -10,7 +10,7 @@ module Schematics
           (\s*(?:<=|>=|<|>|!=|==)\s*)       | # comparator
           (\s*(?:\+=|-=|\*=|=)\s*)          | # assignment
           (\(|\))                           | # parenthesis
-          \$(\w+\.?\w+)                     | # variable
+          \$(\w+\.?\w+\?{0,1})              | # variable
           ([a-zA-Z_-]+)                     | # string
           (\d*\.?\d+)                       | # number
           (\s+)                               # whitespace

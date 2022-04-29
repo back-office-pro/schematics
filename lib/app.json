@@ -631,8 +631,12 @@
       ],
       "virtuals": [
         {
+          "name": "active",
+          "function": "$active? == true"
+        },
+        {
           "name": "safe",
-          "function": "$safe == true"
+          "function": "$safe? == true"
         }
       ]
     }
