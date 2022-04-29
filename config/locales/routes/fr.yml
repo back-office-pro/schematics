@@ -2,12 +2,14 @@
 fr:
   routes:
     active_storage: stockage
+    admin: administration
     attachments: fichiers
     charts: graphiques
     comparisons: comparaisons
     delete: supprimer
     edit: editer
     login: connexion
+    logout: deconnexion
     messages: messages
     new: nouveau
     password_lost: mot_de_passe_perdu

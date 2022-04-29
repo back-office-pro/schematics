@@ -27,3 +27,5 @@ en:
         sidekiq:
           caption: Manage application background tasks (advanced)
           title: Background tasks
+      logout:
+        success: Logged out !

@@ -17,6 +17,6 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start.border-light
       = link_to admin_path, class: 'dropdown-item text-danger' do
         = fa_icon :shield_alt, class: 'fa-fw me-3'
         = t('.admin_zone')
-    = button_to session_path(current_session), method: :delete, class: 'dropdown-item' do
+    = link_to logout_path, data: { turbo: false }, class: 'dropdown-item' do
       = fa_icon :right_from_bracket, class: 'fa-fw me-3'
       = t('.logout')
