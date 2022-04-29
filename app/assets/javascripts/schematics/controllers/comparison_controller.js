@@ -20,11 +20,7 @@ export default class extends ApplicationController {
   }
 
   toggleButton () {
-    if (this.ids().length >= 2) {
-      this.buttonTarget.classList.remove('d-none')
-    } else {
-      this.buttonTarget.classList.add('d-none')
-    }
+    this.buttonTarget.classList.toggle('d-none', this.ids().length >= 2)
   }
 
   ids () {
