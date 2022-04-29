@@ -16,7 +16,7 @@ export default class extends SearchBarController {
     const searchParams = new URLSearchParams(window.location.search)
     if (searchParams.has(scope)) {
       searchParams.delete(scope)
-      Turbo.visit(window.location.pathname + '?' + searchParams)
+      Turbo.visit(window.location.pathname + '?' + searchParams, { action: 'replace' })
     }
   }
 
@@ -43,7 +43,7 @@ export default class extends SearchBarController {
       .from(this.elements)
       .filter(_ => !_.value)
       .forEach(_ => { _.disabled = true })
-    this.submit()
+    this.requestSubmit()
   }
 
   get url () {

@@ -65,7 +65,7 @@ module Schematics
 
       def onchange
         <<~JAVASCRIPT.squish
-          this.form.dispatchEvent(new Event('submit'))
+          this.form.requestSubmit()
         JAVASCRIPT
       end
     end
