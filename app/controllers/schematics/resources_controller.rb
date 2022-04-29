@@ -232,7 +232,7 @@ module Schematics
       super.merge(human_name_plural:, human_name:, gender:)
     end
 
-    def title_path
+    def i18n_title_path
       'schematics.resources'
     end
 

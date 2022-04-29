@@ -38,7 +38,7 @@ module MainApp
 
     private
 
-    def title_path
+    def i18n_title_path
       'sessions'
     end
 
