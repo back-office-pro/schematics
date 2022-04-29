@@ -40,7 +40,7 @@ module Schematics
         format.json { head :not_found }
         format.any do
           alert = t('schematics.application.record_not_found.alert', human_name:, gender:)
-          redirect_to record_not_found_path, alert:
+          redirect_to index_path, alert:
         end
       end
     end
@@ -80,7 +80,7 @@ module Schematics
 
     protected
 
-    def record_not_found_path
+    def index_path
       return polymorphic_path(model_class) if can?(:index, model_class)
 
       schematics.root_path
