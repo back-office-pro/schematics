@@ -5,7 +5,7 @@ module MainApp
     extend ActiveSupport::Concern
 
     prepended do
-      after_action :touch_session!, only: :update
+      after_action :touch_session!, only: :update # rubocop:disable Rails/LexicallyScopedActionFilter
     end
   end
 end
