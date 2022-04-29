@@ -7,7 +7,8 @@ module Schematics
         @sessions ||= ::Session
                       .with_user_avatar
                       .active
-                      .order(updated_at: :desc)
+                      .select('DISTINCT ON (user_id) *')
+                      .order(:user_id, updated_at: :desc)
       end
     end
   end
