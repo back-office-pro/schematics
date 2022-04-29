@@ -7,4 +7,4 @@
             = fa_icon element.icon, class: 'fa-fw me-2 text-muted'
             = @model_class.human_attribute_name(element.name)
           td
-            = render Schematics::Resource::Component.new(resource: @resource, field: element, editable: @editable)
+            = render Schematics.const_get(constant(element))::Component.new(resource: @resource, field: element)
