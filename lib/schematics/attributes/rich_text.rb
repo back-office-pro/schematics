@@ -7,6 +7,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
+      include Behaviours::Encryptable
 
       def preload
         { association_name => [embeds_attachments: :blob] }
@@ -34,7 +35,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          has_rich_text :#{name}
+          has_rich_text :#{name}, encrypted: true
         RUBY
       end
 

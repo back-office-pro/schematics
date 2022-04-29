@@ -21,6 +21,7 @@
                 prepend: fa_icon(field.icon)
     - when Schematics::Attributes::Address
       = f.input field.name.to_sym,
+                as: :select,
                 collection: [@resource.public_send(field.name.to_sym)].compact,
                 include_blank: !field.required?,
                 minlength: 3,
@@ -51,6 +52,7 @@
       = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon)
     - when Schematics::Attributes::ModelField
       = f.input field.name.to_sym,
+                as: :select,
                 prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
                 include_blank: false,
                 collection: field.input_collection.map(&:reverse).map { _1.push(class: model_field_collection_class(_1.second, field)) },
@@ -58,21 +60,24 @@
                 input_html: { data: { controller: 'dropdown', 'dropdown-depends-on-value': "#{entity.name}[#{field.depends_on}]" } }
     - when Schematics::Behaviours::Enumerable
       = f.input field.name.to_sym,
+                as: :select,
                 prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
                 include_blank: false,
                 collection: field.input_collection.map(&:reverse),
                 prepend: fa_icon(field.icon),
                 input_html: { data: { controller: 'dropdown' } }
-    - when Schematics::Attributes::Text
-      = f.input field.name.to_sym,
-                prepend: fa_icon(field.icon),
-                input_html: { data: { controller: 'autosize' } }
     - when Schematics::Attributes::String
       = f.input field.name.to_sym,
+                as: :string,
                 maxlength: true,
                 minlength: true,
                 pattern: true,
                 prepend: fa_icon(field.icon)
+    - when Schematics::Attributes::Text
+      = f.input field.name.to_sym,
+                as: :text,
+                prepend: fa_icon(field.icon),
+                input_html: { data: { controller: 'autosize' } }
     - when Schematics::Attributes::Decimal
       = f.input field.name.to_sym, min_max: true, prepend: field.unit || fa_icon(field.icon)
     - when Schematics::Attributes::RichText

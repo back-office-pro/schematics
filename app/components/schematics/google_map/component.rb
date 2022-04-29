@@ -13,13 +13,17 @@ module Schematics
       end
 
       def url
-        "https://www.google.com/maps/embed/v1/place?q=#{CGI.escape(@address)}&key=#{api_key}"
+        "https://www.google.com/maps/embed/v1/place?q=#{address}&key=#{api_key}"
       end
 
       private
 
+      def address
+        CGI.escape(@address)
+      end
+
       def api_key
-        Engine.credentials.gcloud[:api_key]
+        settings(:google_cloud_api_key)
       end
     end
   end

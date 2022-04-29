@@ -13,9 +13,17 @@ describe Schematics::Attributes::Address do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('address') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:location_dot) }
+  it { is_expected.to be_encrypted }
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      encrypts :address, deterministic: true
+    RUBY
+  end
 end

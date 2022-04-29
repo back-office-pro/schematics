@@ -13,6 +13,7 @@ describe Schematics::Attributes::Email do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('email') }
@@ -23,6 +24,13 @@ describe Schematics::Attributes::Email do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
+  it { is_expected.to be_encrypted }
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      encrypts :email, deterministic: true
+    RUBY
+  end
 
   its(:validate) do
     is_expected.to eq <<~RUBY

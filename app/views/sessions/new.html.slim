@@ -5,7 +5,7 @@
     = render Schematics::CardHeading::Component.new(icon: :right_to_bracket, title:)
   .card-body.p-3
     = simple_form_for ::User.new, as: :session, url: sessions_path, wrapper: :input_group do |form|
-      = form.input :email, prepend: fa_icon(:envelope)
+      = form.input :email, as: :email, prepend: fa_icon(:envelope)
       = render Schematics::Input::Password::Component.new(form:)
       = form.input :remember_me, as: :boolean
       = render Schematics::Button::Confirm::Component.new

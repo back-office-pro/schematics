@@ -4,10 +4,8 @@ require 'resolv'
 
 module Schematics
   module Attributes
-    class Inet < Attribute
-      include Behaviours::Renderable
-      include Behaviours::Fillable
-
+    # :reek:SubclassedFromCoreClass
+    class Ip < String
       def validators
         super.merge(
           {
@@ -15,6 +13,10 @@ module Schematics
             format: { with: ::Resolv::AddressRegex, message: :ip_address }
           }.compact_blank
         )
+      end
+
+      def encrypted?
+        true
       end
 
       def default
