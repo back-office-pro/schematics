@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-pin 'chartkick', to: 'chartkick.js'
-pin 'Chart.bundle', to: 'Chart.bundle.js'
+pin 'chartkick', to: 'chartkick.js', preload: true
+pin 'Chart.bundle', to: 'Chart.bundle.js', preload: true
 pin 'pagy-module'
 pin 'routes'
 
