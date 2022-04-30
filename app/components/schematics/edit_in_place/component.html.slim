@@ -1,4 +1,4 @@
 = form_with model: @resource, data: { turbo_frame: frame_id } do
-  = turbo_frame_tag frame_id, class: 'd-flex' do
+  = turbo_frame_tag frame_id, class: 'd-flex animate__animated' do
     = link_to edit_polymorphic_path(@resource), class: 'edit-in-place text-decoration-none' do
       = render Schematics::Resource::Component.new(resource: @resource, field: @field, highlight: @highlight, editable: true)
