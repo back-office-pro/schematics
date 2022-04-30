@@ -28,9 +28,14 @@ module Schematics
         end
 
         def data
-          return {} unless compact?
+          return { turbo_frame: '_top' } unless compact?
 
-          { controller: 'tooltip', 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
+          {
+            turbo_frame: '_top',
+            controller: 'tooltip',
+            'bs-toggle': 'tooltip',
+            'bs-placement': 'top'
+          }
         end
 
         def title
