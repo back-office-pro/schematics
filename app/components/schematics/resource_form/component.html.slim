@@ -50,7 +50,7 @@
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::Color
-        = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon)
+        = f.input field.name.to_sym, as: :color, prepend: fa_icon(field.icon), class: 'form-control-color'
       - when Schematics::Attributes::ModelField
         = f.input field.name.to_sym,
                   as: :select,
@@ -89,7 +89,7 @@
                   as: :file,
                   validate: { presence: field.required? && new_record? },
                   hint:,
-                  input_html: { multiple: true, accept: field.extensions }
+                  input_html: { multiple: true, include_hidden: false, accept: field.extensions }
       - when Schematics::Attributes::Attachment
         - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
         - attachment = @resource.public_send(field.name.to_sym)
