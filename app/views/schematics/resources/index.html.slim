@@ -1,5 +1,5 @@
 = form_with url: main_app.polymorphic_path(model_class), method: :get, data: { turbo_frame: 'viewer' } do
-  = turbo_frame_tag 'viewer', data: { turbo_action: 'advance' } do
+  = turbo_frame_tag 'viewer', target: '_top', data: { turbo_action: 'advance' } do
     .card.shadow-sm.border-0.w-100
       .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
         .row.align-items-center
