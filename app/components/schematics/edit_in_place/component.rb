@@ -1,22 +1,17 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Resource
+  module EditInPlace
     class Component < ApplicationComponent
-      def initialize(resource:, field:, editable: false, highlight: nil)
+      def initialize(resource:, field:, highlight: nil)
         super
         @resource = resource
         @field = field
-        @editable = editable
         @highlight = highlight
       end
 
-      def value
-        @resource.public_send(@field.name)
-      end
-
-      def editable?
-        @editable
+      def frame_id
+        dom_id(@resource, @field.name)
       end
     end
   end

@@ -14,6 +14,10 @@ module Schematics
         def render?
           can?(:new, @model_class)
         end
+
+        def css_classes
+          %w[btn btn-primary btn-sm btn-icon-split ms-2]
+        end
       end
     end
   end

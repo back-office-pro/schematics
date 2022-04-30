@@ -11,13 +11,6 @@ module Schematics
         .with_defaults(resource_defaults)
     end
 
-    def respond_with_value(resource)
-      return head :no_content if resource_params.keys.size > 1
-
-      field = entity.find_field_by_name(resource_params.keys.first)
-      render json: { field.name => field.format(resource.public_send(field.name)) }
-    end
-
     private
 
     def permitted_params

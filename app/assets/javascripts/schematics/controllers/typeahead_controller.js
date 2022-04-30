@@ -1,23 +1,16 @@
 import SearchBarController from './search_bar_controller'
 
-/* global Turbo */
-
 export default class extends SearchBarController {
   connect () {
-    this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmit)
+    this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmitForm)
   }
 
   diconnect () {
-    this.inputTarget.form.removeEventListener('submit', this.compactBlankInputsAndSubmit)
+    this.inputTarget.form.removeEventListener('submit', this.compactBlankInputsAndSubmitForm)
   }
 
   onSearch () {
-    const scope = this.inputTarget.getAttribute('name')
-    const searchParams = new URLSearchParams(window.location.search)
-    if (searchParams.has(scope)) {
-      searchParams.delete(scope)
-      Turbo.visit(window.location.pathname + '?' + searchParams)
-    }
+    this.compactBlankInputsAndSubmitForm.call(this.inputTarget.form)
   }
 
   formatResults (results) {
@@ -26,7 +19,7 @@ export default class extends SearchBarController {
 
   selectItem ({ params: { value } }) {
     this.inputTarget.value = value
-    this.compactBlankInputsAndSubmit.call(this.inputTarget.form)
+    this.onSearch()
   }
 
   suggestionTemplate (result) {
@@ -38,12 +31,12 @@ export default class extends SearchBarController {
     `
   }
 
-  compactBlankInputsAndSubmit () {
+  compactBlankInputsAndSubmitForm () {
     Array
       .from(this.elements)
       .filter(_ => !_.value)
       .forEach(_ => { _.disabled = true })
-    this.submit()
+    this.requestSubmit()
   }
 
   get url () {

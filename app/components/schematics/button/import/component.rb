@@ -14,6 +14,10 @@ module Schematics
         def render?
           can?(:import, @model_class)
         end
+
+        def css_classes
+          %w[btn btn-sm btn-icon-split ms-2]
+        end
       end
     end
   end

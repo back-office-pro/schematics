@@ -1,15 +1,17 @@
-.card.shadow-sm.border-0.w-100
-  .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
-    .row.align-items-center
-      .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :table, title:)
-      .col-auto
-        = render Schematics::Button::GenerateFileInBackground::Component.csv(:download_as_csv, dropdown: @pagy.pages > 1) if @resources.any?
-        = render Schematics::Button::Import::Component.new(model_class:)
-        = render Schematics::Button::Add::Component.new(model_class:)
-        = render Schematics::Button::ResetFilters::Component.new(model_class:)
-  .card-body.p-0
-    = form_tag '', method: :get do
-      = submit_tag nil, name: nil, class: 'd-none'
-      = render Schematics::Viewer::Component.build(resources: @resources)
-= render Schematics::Viewer::Pagination::Component.new(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)
+= form_with url: main_app.polymorphic_path(model_class), method: :get, data: { turbo_frame: 'viewer' } do
+  = submit_tag nil, name: nil, class: 'd-none'
+  = turbo_frame_tag 'viewer', data: { turbo_action: 'advance' } do
+    .card.shadow-sm.border-0.w-100
+      .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+        .row.align-items-center
+          .col.text-truncate
+            = render Schematics::CardHeading::Component.new(icon: :table, title:)
+          .col-auto
+            = render Schematics::Button::GenerateFileInBackground::Component.csv(:download_as_csv, dropdown: @pagy.pages > 1) if @resources.any?
+            = render Schematics::Button::Import::Component.new(model_class:)
+            = render Schematics::Button::Add::Component.new(model_class:)
+            = render Schematics::Button::ResetFilters::Component.new(model_class:)
+      .card-body.p-0
+        = render Schematics::Placeholder::Component.new(visible: false)
+        = render Schematics::Viewer::Component.build(resources: @resources)
+    = render Schematics::Viewer::Pagination::Component.new(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)

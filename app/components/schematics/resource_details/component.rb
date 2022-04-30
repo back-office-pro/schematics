@@ -18,6 +18,22 @@ module Schematics
           .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
           .reject_is_a?(Attributes::RichText, Attributes::Attachments)
       end
+
+      def constant(element)
+        return :EditInPlace if editable?(element)
+
+        :Resource
+      end
+
+      private
+
+      def editable?(element)
+        @editable &&
+          can?(:update, @resource) &&
+          element.is_a?(Behaviours::Fillable) &&
+          !element.readonly? &&
+          !element.is_a?(Behaviours::Preloadable)
+      end
     end
   end
 end

@@ -24,8 +24,17 @@ const setTurboNonces = () => {
   })
 }
 
+const animateTurboFrame = ({ target }) => {
+  target.classList.add('animate__fadeOut')
+  target.addEventListener('animationend', () => {
+    target.classList.remove('animate__fadeOut')
+    target.classList.add('animate__fadeIn')
+  })
+}
+
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', setNavbarScrolled)
 document.addEventListener('turbo:before-fetch-request', setTurboHeaders)
+document.addEventListener('turbo:before-fetch-request', animateTurboFrame)
 document.addEventListener('turbo:before-cache', setTurboNonces)

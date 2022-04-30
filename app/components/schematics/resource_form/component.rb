@@ -7,11 +7,10 @@ module Schematics
       delegate :class, to: :@resource, prefix: :model, private: true
       delegate :entity, :human_attribute_name, to: :model_class
 
-      def initialize(resource:, url: nil, edit_in_place: false, attributes: nil, cancel_path: nil)
+      def initialize(resource:, url: nil, attributes: nil, cancel_path: nil)
         super
         @resource = resource
         @url = url
-        @edit_in_place = edit_in_place
         @attributes = attributes || entity.fillable_elements
         @cancel_path = cancel_path || resource
       end
@@ -20,30 +19,12 @@ module Schematics
         'd-none' if new_record? || !key.start_with?(@resource.public_send(field.depends_on))
       end
 
-      def edit_in_place?
-        @edit_in_place
-      end
-
-      def data
-        {
-          'auto-save-target': 'form',
-          'edit-in-place-target': 'form',
-          type: :json
-        }
-      end
-
-      def cancel_button_data
-        return unless edit_in_place?
-
-        { action: 'click->edit-in-place#toggle' }
-      end
-
-      def css_classes
-        'd-none d-flex' if edit_in_place?
+      def turbo?
+        request.headers['Turbo-Frame'].present?
       end
 
       def wrapper
-        return :edit_in_place_form if edit_in_place?
+        return :edit_in_place_form if turbo?
 
         :input_group
       end
