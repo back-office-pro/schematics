@@ -1,7 +1,5 @@
 import SearchBarController from './search_bar_controller'
 
-/* global Turbo */
-
 export default class extends SearchBarController {
   connect () {
     this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmitForm)
