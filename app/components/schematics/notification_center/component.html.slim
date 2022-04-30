@@ -9,7 +9,7 @@ li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light da
     .position-relative
       = fa_icon :bell,
                 data: { 'notification-center-target': 'icon' },
-                class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
+                class: icon_class
       - unless unread_count.zero?
         .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn {
           data-notification-center-target='badge'
