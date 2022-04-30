@@ -6,7 +6,7 @@ li.nav-item.dropdown.align-items-center.px-3.border-start.border-light.d-none.d-
     role='button'
   }
     .position-relative
-      = fa_icon :envelope, class: unread_count.zero? ? 'fa-lg' : 'fa-lg animate__animated animate__pulse animate__slower animate__infinite'
+      = fa_icon :envelope, class: icon_class
       - unless unread_count.zero?
         .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
           = display_unread_count

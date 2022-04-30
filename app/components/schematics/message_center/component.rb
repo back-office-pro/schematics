@@ -22,6 +22,12 @@ module Schematics
       def display_unread_count
         unread_count >= 10 ? '9+' : unread_count
       end
+
+      def icon_class
+        return 'fa-lg' if unread_count.zero?
+
+        %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
+      end
     end
   end
 end
