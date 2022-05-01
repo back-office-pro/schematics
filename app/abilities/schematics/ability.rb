@@ -12,6 +12,7 @@ module Schematics
       merge SettingAbility.new(user)
       merge DraftAbility.new(user)
       merge SessionAbility.new(user)
+      merge SchemaAbility.new(user)
       merge LicenceAbility.new
       merge ComparisonAbility.new
       merge SearchAbility.new
