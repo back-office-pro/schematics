@@ -15,19 +15,10 @@
   }
 }
 
-.btn-link {
-  color: var(--bs-primary);
-
-  &:hover {
-    color: var(--bs-primary-darken);
-  }
-}
-
+a,
+.btn-link,
+.nav-link,
 .page-link {
-  color: var(--bs-primary);
-}
-
-a {
   color: var(--bs-primary);
 
   &:hover,
@@ -45,11 +36,6 @@ a {
 .page-item.active .page-link {
   background-color: var(--bs-primary);
   border-color: var(--bs-primary);
-}
-
-.page-item .page-link:hover,
-.page-item .page-link:focus {
-  color: var(--bs-primary-darken);
 }
 
 .progress-bar {
