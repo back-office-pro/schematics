@@ -11,6 +11,6 @@
     .text-secondary = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)
     = render Schematics::Viewer::Association::Component \
               .with_collection(resource_associations(resource: @resource, only: :required?), collapsed: true)
-    = form_for @resource, method: :delete, html: { class: 'mt-3' } do
+    = form_with model: @resource, method: :delete, html: { class: 'mt-3' } do
       = render Schematics::Button::Confirm::Component.new
       = render Schematics::Button::Cancel::Component.new(path: @resource)
