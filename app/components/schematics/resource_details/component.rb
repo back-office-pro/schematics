@@ -19,20 +19,23 @@ module Schematics
           .reject_is_a?(Attributes::RichText, Attributes::Attachments)
       end
 
-      def constant(element)
-        return :EditInPlace if editable?(element)
+      def component_for(field)
+        return EditInPlace::Component.new(resource: @resource, field:) if editable?(field)
 
-        :Resource
+        Resource::Component.new(resource: @resource, field:, enable_buttons: enable_buttons?(field))
       end
 
       private
 
       def editable?(element)
+        enable_buttons?(element) && !element.is_a?(Behaviours::Preloadable)
+      end
+
+      def enable_buttons?(element)
         @editable &&
           can?(:update, @resource) &&
           element.is_a?(Behaviours::Fillable) &&
-          !element.readonly? &&
-          !element.is_a?(Behaviours::Preloadable)
+          !element.readonly?
       end
     end
   end

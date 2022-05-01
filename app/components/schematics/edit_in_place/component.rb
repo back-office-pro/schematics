@@ -3,11 +3,10 @@
 module Schematics
   module EditInPlace
     class Component < ApplicationComponent
-      def initialize(resource:, field:, highlight: nil)
+      def initialize(resource:, field:)
         super
         @resource = resource
         @field = field
-        @highlight = highlight
       end
 
       def frame_id

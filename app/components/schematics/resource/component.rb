@@ -3,11 +3,11 @@
 module Schematics
   module Resource
     class Component < ApplicationComponent
-      def initialize(resource:, field:, editable: false, highlight: nil)
+      def initialize(resource:, field:, enable_buttons: false, highlight: nil)
         super
         @resource = resource
         @field = field
-        @editable = editable
+        @enable_buttons = enable_buttons
         @highlight = highlight
       end
 
@@ -15,8 +15,8 @@ module Schematics
         @resource.public_send(@field.name)
       end
 
-      def editable?
-        @editable
+      def enable_buttons?
+        @enable_buttons
       end
     end
   end
