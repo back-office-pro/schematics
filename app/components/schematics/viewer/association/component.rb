@@ -6,7 +6,7 @@ module Schematics
       class Component < Viewer::Component
         with_collection_parameter :resources
 
-        def initialize(resources:, collapsed: false, highlight: nil)
+        def initialize(resources:, collapsed: true, highlight: nil)
           super(resources:)
           @collapsed = collapsed
           @highlight = highlight
@@ -44,12 +44,16 @@ module Schematics
           @id ||= "collapse-#{SecureRandom.base58}"
         end
 
+        def collapsed?
+          @collapsed
+        end
+
         def header_button_css_class
-          'collapsed' if @collapsed
+          'collapsed' if collapsed?
         end
 
         def collapse_css_class
-          return if @collapsed
+          return if collapsed?
 
           'show'
         end

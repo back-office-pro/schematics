@@ -19,7 +19,7 @@
 - when Schematics::Attributes::Color
   .btn.p-2.pe-none style="background: #{value};"
 - when Schematics::Attributes::Attachments
-  = render Schematics::Viewer::Association::Component.new(resources: value, collapsed: true, highlight: @highlight)
+  = render Schematics::Viewer::Association::Component.new(resources: value, highlight: @highlight)
 - when Schematics::Attributes::Blob
   = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if enable_buttons?
   - if value.representable?
