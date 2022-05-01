@@ -118,7 +118,6 @@ module Schematics
     # Active Storage
     config.after_initialize do # Make sure we override main app 6.1 defaults
       config.active_storage.replace_on_assign_to_many = false
-      config.active_storage.track_variants = false
     end
 
     # Time zone
