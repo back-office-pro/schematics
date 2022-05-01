@@ -6,6 +6,8 @@ then
     email="maxence.derous@gmail.com"
     dummy_app="true"
     rm -rf $app_name
+    mkdir $app_name
+    cp dummy_app.json $app_name/app.json
 else
     app_name=$1
     email=$2
