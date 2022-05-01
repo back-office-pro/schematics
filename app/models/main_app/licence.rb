@@ -19,7 +19,7 @@ module MainApp
     def entities_size
       Schematics::Schema
         .instance
-        .data_json
+        .app_data
         .fetch(:entities)
         .size
     end

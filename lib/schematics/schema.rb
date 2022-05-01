@@ -8,6 +8,10 @@ module Schematics
     include ::Singleton
     attr_reader :entities, :migrations
 
+    SCHEMA_FILEPATH = File.expand_path('../schema.json', __dir__).freeze
+    CORE_DATA_FILEPATH = File.expand_path('../core.json', __dir__).freeze
+    APP_DATA_FILEPATH = ::Rails.root&.join('app.json').freeze
+
     def initialize
       @entities = data[:entities].map { Entities::Entity.build(**_1) }
       @migrations = data[:migrations]&.map { Migration.build(self, **_1) }
@@ -55,26 +59,23 @@ module Schematics
     end
 
     def valid?
-      ::JSON::Validator.validate(File.expand_path('../schema.json', __dir__), data)
+      ::JSON::Validator.validate(SCHEMA_FILEPATH, data)
     end
 
     def data
-      @data ||= data_json.merge(app_json) { |_key, left, right| left + right }
+      @data ||= app_data.merge(core_data) { _2 + _3 } # rubocop:disable Style/NumberedParametersLimit
     end
 
-    def app_json
+    def core_data
       ::JSON
-        .parse(File.read(File.expand_path('../app.json', __dir__)), symbolize_names: true)
-        .tap do |json|
-          json[:entities].each { _1[:options]&.store(:core, true) }
-        end
+        .parse(File.read(CORE_DATA_FILEPATH), symbolize_names: true)
+        .tap { |json| json[:entities].each { _1[:options]&.store(:core, true) } }
     end
 
-    def data_json
-      ::JSON.parse(
-        File.read(File.expand_path('../../spec/data.json', __dir__)),
-        symbolize_names: true
-      )
+    def app_data
+      return {} unless APP_DATA_FILEPATH
+
+      ::JSON.parse(File.read(APP_DATA_FILEPATH), symbolize_names: true)
     end
 
     private
