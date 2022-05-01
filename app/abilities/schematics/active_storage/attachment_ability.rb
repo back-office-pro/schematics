@@ -6,6 +6,9 @@ module Schematics
       def initialize(user)
         super
         cannot :destroy, ::ActiveStorage::Attachment, record_type: 'Import'
+        cannot :read,
+               ::ActiveStorage::Attachment,
+               record_type: %w[ActiveStorage::VariantRecord ActiveStorage::Blob]
         user
           .role
           .permissions
