@@ -30,9 +30,7 @@ module Schematics
       end
 
       def attachment
-        @attachment
-          .representation(resize_to_fit: [@width, @height])
-          .processed
+        @attachment.representation(resize_to_fit: [@width, @height])
       end
 
       def data
