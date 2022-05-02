@@ -21,7 +21,7 @@ describe Schematics::Attributes::Citext do
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
@@ -38,7 +38,7 @@ describe Schematics::Attributes::Citext do
     it { is_expected.to be_unique }
     its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: false, allow_blank: true }) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :last_name, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}}
       RUBY
@@ -51,7 +51,7 @@ describe Schematics::Attributes::Citext do
     it { is_expected.to be_required }
     its(:validators) { is_expected.to eq(presence: true) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :last_name, {:presence=>true}
       RUBY

@@ -15,7 +15,7 @@ describe Schematics::Attributes::Array do
   its(:column_name) { is_expected.to eq('ids') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:default) { is_expected.to be_empty }
   its(:permitted_params) { is_expected.to eq(ids: []) }

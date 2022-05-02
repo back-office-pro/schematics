@@ -33,7 +33,7 @@ describe Schematics::Attributes::TimeZone do
     is_expected.to eq(inclusion: { in: ['Paris'] }, allow_blank: true)
   end
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :time_zone, {:inclusion=>{:in=>["Paris"]}, :allow_blank=>true}
     RUBY
@@ -51,7 +51,7 @@ describe Schematics::Attributes::TimeZone do
     its(:input_collection) { is_expected.to eq([['Paris', '(GMT+01:00) Paris']]) }
     its(:validators) { is_expected.to eq(inclusion: { in: ['Paris'] }, presence: true) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :time_zone, {:presence=>true, :inclusion=>{:in=>["Paris"]}}
       RUBY

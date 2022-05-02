@@ -15,9 +15,7 @@ module Schematics
       end
 
       def validators
-        validators = super
-        validators[:numericality][:only_integer] = true
-        validators
+        super.merge(numericality: { only_integer: true })
       end
 
       protected

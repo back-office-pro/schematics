@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/module/delegation'
 
 module Schematics
@@ -16,19 +15,14 @@ module Schematics
         true
       end
 
-      def validate
-        return if validators.empty?
-
-        <<~RUBY
-          validates :#{name}, #{validators}
-        RUBY
-      end
-
       def validators
-        {
-          uniqueness: ({ case_sensitive: case_sensitive?, allow_blank: } if unique?),
-          presence: required?
-        }.compact_blank
+        Schematics::Validators.new(
+          name:,
+          validators: {
+            uniqueness: ({ case_sensitive: case_sensitive?, allow_blank: } if unique?),
+            presence: required?
+          }
+        )
       end
     end
   end

@@ -11,13 +11,11 @@ module Schematics
 
       def validators
         super.merge(
-          {
-            length: {
-              minimum: options.min,
-              maximum: options.limit,
-              is: options.length
-            }.compact
-          }.compact_blank
+          length: {
+            minimum: options.min,
+            maximum: options.limit,
+            is: options.length
+          }
         )
       end
 

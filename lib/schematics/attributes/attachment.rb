@@ -59,23 +59,21 @@ module Schematics
 
       def validators
         super.merge(
-          {
-            antivirus: true,
-            attached: required?,
-            size: {
-              less_than: options.size&.megabytes
-            }.compact,
-            aspect_ratio: options.aspect_ratio,
-            limit: {
-              min: options.min,
-              max: options.max
-            }.compact,
-            dimension: {
-              width: options.width,
-              height: options.height
-            }.compact,
-            content_type: options.content_type&.map(&:to_sym)
-          }.compact_blank
+          antivirus: true,
+          attached: required?,
+          size: {
+            less_than: options.size&.megabytes
+          },
+          aspect_ratio: options.aspect_ratio,
+          limit: {
+            min: options.min,
+            max: options.max
+          },
+          dimension: {
+            width: options.width,
+            height: options.height
+          },
+          content_type: options.content_type&.map(&:to_sym)
         )
       end
 

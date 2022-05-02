@@ -7,12 +7,7 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class Ip < String
       def validators
-        super.merge(
-          {
-            allow_blank:,
-            format: { with: ::Resolv::AddressRegex, message: :ip_address }
-          }.compact_blank
-        )
+        super.merge(allow_blank:, format: { with: ::Resolv::AddressRegex, message: :ip_address })
       end
 
       def encrypted?

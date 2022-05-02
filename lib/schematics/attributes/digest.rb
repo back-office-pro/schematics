@@ -18,15 +18,13 @@ module Schematics
 
       def validators
         super.merge(
-          {
-            allow_blank:,
-            confirmation: ({ allow_blank: } if confirm?),
-            format: { with: REGEX, message: :password },
-            length: {
-              minimum: options.min,
-              maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
-            }.compact
-          }.compact_blank
+          allow_blank:,
+          confirmation: ({ allow_blank: } if confirm?),
+          format: { with: REGEX, message: :password },
+          length: {
+            minimum: options.min,
+            maximum: ::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
+          }
         )
       end
 

@@ -27,7 +27,7 @@ describe Schematics::Attributes::Attachment do
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :avatar, {:antivirus=>true}
     RUBY
@@ -72,7 +72,7 @@ describe Schematics::Attributes::Attachment do
     it { is_expected.to be_required }
     its(:validators) { is_expected.to eq(presence: true, antivirus: true, attached: true) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :avatar, {:presence=>true, :antivirus=>true, :attached=>true}
       RUBY
@@ -84,7 +84,7 @@ describe Schematics::Attributes::Attachment do
 
     its(:validators) { is_expected.to eq(antivirus: true, size: { less_than: 10.megabytes }) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :avatar, {:antivirus=>true, :size=>{:less_than=>10485760}}
       RUBY
@@ -96,7 +96,7 @@ describe Schematics::Attributes::Attachment do
 
     its(:validators) { is_expected.to eq(antivirus: true, aspect_ratio: 10) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :avatar, {:antivirus=>true, :aspect_ratio=>10}
       RUBY
@@ -108,7 +108,7 @@ describe Schematics::Attributes::Attachment do
 
     its(:validators) { is_expected.to eq(antivirus: true, content_type: %i[png jpg jpeg]) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :avatar, {:antivirus=>true, :content_type=>[:png, :jpg, :jpeg]}
       RUBY

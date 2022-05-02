@@ -141,8 +141,8 @@ module Schematics
         state_machine_attributes.flat_map(&:events)
       end
 
-      def validates
-        validatable_attributes.filter_map(&:validate)
+      def validators
+        validatable_attributes.filter_map(&:validators)
       end
 
       def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
@@ -207,7 +207,7 @@ module Schematics
       end
 
       def model_elements
-        [self, descriptor, search_data] + triggers + elements + validates
+        [self, descriptor, search_data] + triggers + elements + validators
       end
 
       def search_data_elements

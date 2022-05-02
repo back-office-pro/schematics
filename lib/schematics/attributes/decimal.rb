@@ -21,10 +21,12 @@ module Schematics
       end
 
       def validators
-        validators = super
-        validators[:numericality][:greater_than] = -bound if precision
-        validators[:numericality][:less_than] = bound if precision
-        validators
+        super.merge(
+          numericality: {
+            greater_than: (-bound if precision),
+            less_than: (bound if precision)
+          }
+        )
       end
 
       protected

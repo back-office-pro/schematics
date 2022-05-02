@@ -32,7 +32,7 @@ describe Schematics::Attributes::Email do
     RUBY
   end
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :email, {:email=>{:allow_blank=>true}}
     RUBY
@@ -56,7 +56,7 @@ describe Schematics::Attributes::Email do
       )
     end
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :email, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true}}
       RUBY
@@ -69,7 +69,7 @@ describe Schematics::Attributes::Email do
     it { is_expected.to be_required }
     its(:validators) { is_expected.to eq(presence: true, email: { allow_blank: false }) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :email, {:presence=>true, :email=>{:allow_blank=>false}}
       RUBY

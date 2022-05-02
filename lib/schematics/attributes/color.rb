@@ -7,7 +7,7 @@ module Schematics
       REGEX = /\A#(?:\h{3}){1,2}\z/
 
       def validators
-        super.merge({ allow_blank:, format: { with: REGEX, message: :color } }.compact_blank)
+        super.merge(allow_blank:, format: { with: REGEX, message: :color })
       end
 
       def default

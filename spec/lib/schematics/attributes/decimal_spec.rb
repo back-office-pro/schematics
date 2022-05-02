@@ -36,7 +36,7 @@ describe Schematics::Attributes::Decimal do
       is_expected.to eq(numericality: { allow_blank: true, greater_than: -100, less_than: 100 })
     end
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :price, {:numericality=>{:allow_blank=>true, :greater_than=>-100, :less_than=>100}}
       RUBY

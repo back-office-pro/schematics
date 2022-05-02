@@ -29,7 +29,7 @@ describe Schematics::Attributes::ModelField do
   its(:to_sql) { is_expected.to eq('assemblies.part') }
   its(:to_s) { is_expected.to eq('schema:assembly_part') }
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :part, {:inclusion=>{:in=>[]}, :allow_blank=>true}
     RUBY

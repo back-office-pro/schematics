@@ -27,7 +27,7 @@ describe Schematics::Attributes::Attachments do
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :files, {:antivirus=>true}
     RUBY
@@ -72,7 +72,7 @@ describe Schematics::Attributes::Attachments do
     it { is_expected.to be_required }
     its(:validators) { is_expected.to eq(presence: true, antivirus: true, attached: true) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :files, {:presence=>true, :antivirus=>true, :attached=>true}
       RUBY

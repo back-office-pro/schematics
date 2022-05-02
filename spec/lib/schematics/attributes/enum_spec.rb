@@ -48,7 +48,7 @@ describe Schematics::Attributes::Enum do
     )
   end
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>true}
     RUBY
@@ -85,7 +85,7 @@ describe Schematics::Attributes::Enum do
       )
     end
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :state, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}}
       RUBY

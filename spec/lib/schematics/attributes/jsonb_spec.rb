@@ -16,7 +16,7 @@ describe Schematics::Attributes::Jsonb do
   its(:column_name) { is_expected.to eq('preferences') }
   its(:open_api_type) { is_expected.to eq({}) }
   its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:permitted_params) { is_expected.to eq(preferences: {}) }
   its(:to_sql) { is_expected.to eq('users.preferences') }

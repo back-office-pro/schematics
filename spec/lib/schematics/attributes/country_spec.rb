@@ -30,7 +30,7 @@ describe Schematics::Attributes::Country do
   its(:to_s) { is_expected.to eq('schema:user_country') }
   its(:input_collection) { is_expected.to eq([['', ''], %w[FR France]]) }
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :country, {:inclusion=>{:in=>["FR"]}, :allow_blank=>true}
     RUBY
@@ -48,7 +48,7 @@ describe Schematics::Attributes::Country do
     its(:input_collection) { is_expected.to eq([%w[FR France]]) }
     its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, presence: true) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :country, {:presence=>true, :inclusion=>{:in=>["FR"]}}
       RUBY

@@ -21,7 +21,7 @@ describe Schematics::Attributes::Date do
   its(:icon) { is_expected.to eq(:calendar_days) }
   its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to be_empty }
-  its(:validate) { is_expected.to be_nil }
+  its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:group_method) { is_expected.to eq(:group_by_day) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
@@ -32,7 +32,7 @@ describe Schematics::Attributes::Date do
 
     its(:validators) { is_expected.to eq(presence: true) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :created_at, {:presence=>true}
       RUBY
@@ -44,7 +44,7 @@ describe Schematics::Attributes::Date do
 
     its(:validators) { is_expected.to eq(comparison: { allow_blank: true, less_than: :start_at }) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :created_at, {:comparison=>{:less_than=>:start_at, :allow_blank=>true}}
       RUBY

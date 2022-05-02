@@ -6,7 +6,7 @@ module Schematics
       delegate :values, to: :options
 
       def validators
-        super.merge({ inclusion: { in: values }, allow_blank: }.compact_blank)
+        super.merge({ inclusion: { in: values }, allow_blank: })
       end
 
       def input_collection

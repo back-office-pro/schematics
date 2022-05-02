@@ -29,7 +29,7 @@ describe Schematics::Attributes::Model do
   its(:to_sql) { is_expected.to eq('permissions.model') }
   its(:to_s) { is_expected.to eq('schema:permission_model') }
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :model, {:inclusion=>{:in=>["Permission"]}, :allow_blank=>true}
     RUBY

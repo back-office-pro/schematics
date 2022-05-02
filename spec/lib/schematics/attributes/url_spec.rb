@@ -32,7 +32,7 @@ describe Schematics::Attributes::Url do
     RUBY
   end
 
-  its(:validate) do
+  its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :url, {:url=>{:allow_blank=>true}}
     RUBY
@@ -56,7 +56,7 @@ describe Schematics::Attributes::Url do
       )
     end
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :url, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :url=>{:allow_blank=>true}}
       RUBY
@@ -69,7 +69,7 @@ describe Schematics::Attributes::Url do
     it { is_expected.to be_required }
     its(:validators) { is_expected.to eq(presence: true, url: { allow_blank: false }) }
 
-    its(:validate) do
+    its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :url, {:presence=>true, :url=>{:allow_blank=>false}}
       RUBY
