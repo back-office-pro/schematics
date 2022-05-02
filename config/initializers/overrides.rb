@@ -36,16 +36,19 @@ end
 ActiveSupport.on_load(:active_storage_record) do
   ::ActiveStorage::Record.class_eval do
     include Schematics::Loadable
-    loadable concerns: [
-      Schematics::Elasticsearchable,
-      Schematics::SoftDeletable,
-      Schematics::Translatable
-    ]
+    include Schematics::Translatable
+    loadable concerns: [Schematics::SoftDeletable]
+  end
+end
+
+ActiveSupport.on_load(:active_storage_attachment) do
+  ::ActiveStorage::Attachment.class_eval do
+    include Schematics::Elasticsearchable
   end
 end
 
 ActiveSupport.on_load(:action_text_rich_text) do
   ActionText::RichText.class_eval do
-    acts_as_paranoid
+    include Schematics::SoftDeletable
   end
 end
