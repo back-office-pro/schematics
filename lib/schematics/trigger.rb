@@ -1,21 +1,18 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:Attribute
   class Trigger
-    attr_reader :action
-
-    def initialize(action:, callback:)
-      @action = action
-      @callback = callback
-    end
+    include ::ActiveModel::API
+    attr_accessor :action, :callback
 
     def to_str
-      case [@action, callback]
+      case [action, callback]
       in ['create', *] | ['save', *] | ['destroy', *]
         <<~RUBY
           #{method_name} :#{method_name}
           def #{method_name}
-            #{callback}
+            #{method_body}
             save!
           rescue StandardError
           end
@@ -27,7 +24,7 @@ module Schematics
       else
         <<~RUBY
           def #{method_name}
-            #{callback}
+            #{method_body}
           rescue StandardError
           end
         RUBY
@@ -35,16 +32,16 @@ module Schematics
     end
 
     def method_name
-      "after_#{@action}"
+      "after_#{action}"
     end
 
     private
 
-    def callback
-      return unless @callback
+    def method_body
+      return unless callback
 
       Tokens::Tokenizer
-        .tokenize(@callback)
+        .tokenize(callback)
         .map(&:value)
         .join
     end
