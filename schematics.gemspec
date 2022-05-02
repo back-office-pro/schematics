@@ -49,7 +49,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'better_errors', '~> 2.10.0beta2'
   spec.add_dependency 'binding_of_caller', '~> 1.0.0'
   spec.add_dependency 'bootstrap-email', '~> 1.1.5'
-  spec.add_dependency 'brakeman', '~> 5.2.2'
+  spec.add_dependency 'brakeman', '~> 5.2.3'
   spec.add_dependency 'browser', '~> 5.3.1'
   spec.add_dependency 'cancancan', '~> 3.3.0'
   spec.add_dependency 'chartkick', '~> 4.1.3'
