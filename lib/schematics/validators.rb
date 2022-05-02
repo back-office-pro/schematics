@@ -3,6 +3,7 @@
 require 'active_support/core_ext/enumerable'
 
 module Schematics
+  # :reek:Attribute
   class Validators
     include ActiveModel::API
 
@@ -10,13 +11,13 @@ module Schematics
     attr_accessor :name, :validators
 
     def compact_validators
-      @validators
+      validators
         .transform_values { _1.try(:compact) || _1 }
         .compact_blank
     end
 
-    def merge(validators)
-      @validators.deep_merge!(validators)
+    def merge(other_validators)
+      validators.deep_merge!(other_validators)
       self
     end
 
@@ -24,7 +25,7 @@ module Schematics
       return '' if empty?
 
       <<~RUBY
-        validates :#{@name}, #{compact_validators}
+        validates :#{name}, #{compact_validators}
       RUBY
     end
   end
