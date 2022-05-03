@@ -81,6 +81,7 @@ Lint/ConstantResolution:
     - Draft
     - Resolv
     - Session
+    - ActiveModel
   Exclude:
     - spec/**/*
     - db/*

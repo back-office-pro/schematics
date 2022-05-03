@@ -34,11 +34,11 @@ module Schematics
         descriptor = name
         case entity
         when Singleton # rubocop:disable Lint/ConstantResolution
-          Class.new(ActiveModel::Serializer) do
+          Class.new(::ActiveModel::Serializer) do
             attribute descriptor
           end
         when Entity
-          Class.new(ActiveModel::Serializer) do
+          Class.new(::ActiveModel::Serializer) do
             attribute :id
             attribute descriptor if descriptor != 'id'
           end

@@ -153,7 +153,7 @@ module Schematics
                   .tap { _1.is_at_least(element.options.min) if element.options.min }
               is_expected
                 .to validate_length_of(element.name.to_sym)
-                .is_at_most(ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
+                .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
             when Attributes::Token
               is_expected.to have_secure_token(element.name.to_sym)
               is_expected

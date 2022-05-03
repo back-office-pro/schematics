@@ -5,7 +5,7 @@ require 'active_support/core_ext/enumerable'
 module Schematics
   # :reek:Attribute
   class Validators
-    include ActiveModel::API
+    include ::ActiveModel::API
 
     delegate :==, :empty?, to: :compact_validators
     attr_accessor :name, :validators
