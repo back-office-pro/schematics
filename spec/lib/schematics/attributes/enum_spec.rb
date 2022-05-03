@@ -37,13 +37,13 @@ describe Schematics::Attributes::Enum do
     )
   end
 
-  its(:input_collection) do
+  its(:collection) do
     is_expected.to eq(
       [
         ['', ''],
-        %w[available Available],
-        ['available_soon', 'Available soon'],
-        ['not_available', 'Not available']
+        %w[Available available],
+        ['Available soon', 'available_soon'],
+        ['Not available', 'not_available']
       ]
     )
   end
@@ -68,12 +68,12 @@ describe Schematics::Attributes::Enum do
       }
     end
 
-    its(:input_collection) do
+    its(:collection) do
       is_expected.to eq(
         [
-          %w[available Available],
-          ['available_soon', 'Available soon'],
-          ['not_available', 'Not available']
+          %w[Available available],
+          ['Available soon', 'available_soon'],
+          ['Not available', 'not_available']
         ]
       )
     end

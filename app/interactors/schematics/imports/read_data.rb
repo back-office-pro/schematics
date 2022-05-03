@@ -38,7 +38,7 @@ module Schematics
         i18n_translations&.invert&.dig(key) || key.parameterize(separator: '_')
       end
 
-      def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity
         field = entity.find_field_by_name(key.to_s)
         case field
         when Schematics::Attributes::Association
@@ -50,7 +50,7 @@ module Schematics
           i18n_translations&.dig(field.name.pluralize.to_sym)&.invert&.dig(value) ||
             value.parameterize(separator: '_')
         when Schematics::Attributes::Country
-          field.input_collection.map(&:reverse).to_h[value] || value.parameterize(separator: '_')
+          field.collection.to_h[value] || value.parameterize(separator: '_')
         when Schematics::Virtuals::Virtual
           nil
         else

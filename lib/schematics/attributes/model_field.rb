@@ -25,6 +25,10 @@ module Schematics
           .map(&:method_name)
       end
 
+      def collection
+        super.sort
+      end
+
       def icon
         :code
       end

@@ -33,6 +33,10 @@ module Schematics
         )
       end
 
+      def collection
+        super.sort
+      end
+
       def icon
         :list_ol
       end

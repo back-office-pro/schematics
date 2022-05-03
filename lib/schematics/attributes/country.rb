@@ -13,8 +13,8 @@ module Schematics
         :earth_europe
       end
 
-      def input_collection
-        super.sort_alphabetical_by(&:last)
+      def collection
+        super.sort_alphabetical
       end
 
       def format(value)

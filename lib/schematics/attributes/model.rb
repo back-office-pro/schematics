@@ -21,6 +21,10 @@ module Schematics
           .map(&:class_name)
       end
 
+      def collection
+        super.sort
+      end
+
       def icon
         :project_diagram
       end

@@ -84,11 +84,11 @@ module Schematics
       end
 
       # :reek:FeatureEnvy
-      def input_collection
+      def collection
         model_class
           .all
-          .map { [_1.id, _1.to_s] }
-          .sort_by(&:last)
+          .map { [_1.to_s, _1.id] }
+          .sort
       end
 
       def weight

@@ -11,7 +11,7 @@
         = f.association field.name.to_sym,
                         prompt: t('prompt', gender: field.model_class.gender, attribute_name: human_attribute_name(field.name).downcase),
                         include_blank: !field.required?,
-                        collection: field.input_collection.map(&:reverse),
+                        collection: field.collection,
                         prepend: fa_icon(field.icon),
                         input_html: { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::Date
@@ -59,7 +59,7 @@
                   as: :select,
                   prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
                   include_blank: false,
-                  collection: field.input_collection.map(&:reverse).map { _1.push(class: model_field_collection_class(_1.second, field)) },
+                  collection: field.collection.map { _1.push(class: model_field_collection_class(_1.second, field)) },
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown', 'dropdown-depends-on-value': "#{entity.name}[#{field.depends_on}]" } }
       - when Schematics::Behaviours::Enumerable
@@ -67,7 +67,7 @@
                   as: :select,
                   prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
                   include_blank: false,
-                  collection: field.input_collection.map(&:reverse),
+                  collection: field.collection,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::String

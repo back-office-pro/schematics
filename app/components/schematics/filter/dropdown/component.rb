@@ -4,9 +4,7 @@ module Schematics
   module Filter
     module Dropdown
       class Component < Filter::Component
-        def collection
-          @field.input_collection.map(&:reverse)
-        end
+        delegate :collection, to: :@field
       end
     end
   end

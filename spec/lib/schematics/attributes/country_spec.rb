@@ -28,7 +28,7 @@ describe Schematics::Attributes::Country do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.country') }
   its(:to_s) { is_expected.to eq('schema:user_country') }
-  its(:input_collection) { is_expected.to eq([['', ''], %w[FR France]]) }
+  its(:collection) { is_expected.to eq([['', ''], %w[France FR]]) }
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
@@ -45,7 +45,7 @@ describe Schematics::Attributes::Country do
   context 'when country is required' do
     let(:options) { { required: true } }
 
-    its(:input_collection) { is_expected.to eq([%w[FR France]]) }
+    its(:collection) { is_expected.to eq([%w[France FR]]) }
     its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, presence: true) }
 
     its('validators.to_str') do

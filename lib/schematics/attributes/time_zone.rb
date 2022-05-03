@@ -12,10 +12,6 @@ module Schematics
         :clock
       end
 
-      def input_collection_sort_by_key
-        nil
-      end
-
       def format(value)
         value && ActiveSupport::TimeZone[value].to_s
       end

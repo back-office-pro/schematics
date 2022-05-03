@@ -9,16 +9,10 @@ module Schematics
         super.merge({ inclusion: { in: values }, allow_blank: })
       end
 
-      def input_collection
+      def collection
         values
-          .map { [_1, format(_1)] }
+          .map { [format(_1), _1] }
           .tap { _1.unshift ['', ''] unless required? }
-          .sort_by(&input_collection_sort_by_key)
-          .to_a
-      end
-
-      def input_collection_sort_by_key
-        :last
       end
 
       def default
