@@ -20,6 +20,7 @@ search:
     - app/interactors/schematics/imports
 ignore_missing:
   - activerecord.*
+  - activemodel.*
   - routes.*
   - simple_form.*
   - titles.*
@@ -39,6 +40,7 @@ ignore_missing:
   - of
 ignore_unused:
   - activerecord.*
+  - activemodel.*
   - routes.*
   - simple_form.*
   - titles.*

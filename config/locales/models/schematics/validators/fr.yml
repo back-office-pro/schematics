@@ -1,0 +1,16 @@
+---
+fr:
+  activemodel:
+    attributes:
+      schematics/validators:
+        antivirus: Vos fichiers seront analysés par un antivirus
+        aspect_ratio: Ratio d'aspect
+        content_type: Formats fichiers acceptés
+        dimension: Dimension
+        height: Hauteur
+        less_than: Moins de
+        limit: Nombre de fichiers
+        max: Maximum
+        min: Minimum
+        size: Taille fichier
+        width: Largeur
