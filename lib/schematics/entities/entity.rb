@@ -31,7 +31,7 @@ module Schematics
       # :reek:LongParameterList
       def initialize(name, options, associations, attributes, virtuals, triggers) # rubocop:disable Metrics/ParameterLists
         @name = name
-        @options = Schematics::Options.new(options)
+        @options = Schematics::Options.new(options:)
         @actions = (@options.actions || default_actions).map(&:to_sym)
         @associations = associations.map { Associations::Association.build(self, **_1) }
         @attributes = attributes.map { Attributes::Attribute.build(self, **_1) }

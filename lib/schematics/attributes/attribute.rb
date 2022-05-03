@@ -18,7 +18,7 @@ module Schematics
       def initialize(entity, name, options)
         @entity = entity
         @name = name
-        @options = Schematics::Options.new(options)
+        @options = Schematics::Options.new(options:)
       end
 
       def open_api_type

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:Attribute
   class Options
-    delegate :slice, :fetch, :dig, :key?, to: :@options
+    include ::ActiveModel::API
 
-    def initialize(options)
-      @options = options
-    end
+    delegate :slice, :fetch, :dig, :key?, to: :options
+    attr_accessor :options
 
     def method_missing(method_name)
       return dig(method_name) unless method_name.end_with?('?')
