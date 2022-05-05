@@ -2,11 +2,11 @@
 
 module Schematics
   class GenerateCsvJob < ApplicationJob
-    def perform(model_name, resource_ids, preferences, filepath)
-      model_class = model_name.constantize
-      resources = model_class.find(resource_ids)
-      File.write(filepath, CsvSerializer.new(model_class, resources, preferences).generate_file)
-      DeleteTempFileJob.set(wait: 5.minutes).perform_later(filepath)
+    def perform(user_id, model_name, resource_ids, dropdown)
+      user = ::User.find(user_id)
+      resources = model_name.constantize.find(resource_ids)
+      serializer = CsvSerializer.new(resources, user.preferences)
+      Resources::GenerateFile.call(user:, serializer:, extension: :csv, dropdown:)
     end
   end
 end

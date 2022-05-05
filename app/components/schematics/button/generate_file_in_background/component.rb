@@ -5,20 +5,25 @@ module Schematics
     module GenerateFileInBackground
       class Component < ApplicationComponent
         class << self
-          def csv(text, dropdown: false)
-            new(content_type: ::Mime[:csv].to_s, icon: :file_csv, text:, dropdown:)
+          def csv_template(**kwargs)
+            new(extension: :csv, icon: :file_csv, text: :download_csv_template, **kwargs)
           end
 
-          def pdf
-            new(content_type: ::Mime[:pdf].to_s, icon: :file_pdf, text: :download_pdf)
+          def csv(**kwargs)
+            new(extension: :csv, icon: :file_csv, text: :download_as_csv, **kwargs)
+          end
+
+          def pdf(**kwargs)
+            new(extension: :pdf, icon: :file_pdf, text: :download_pdf, **kwargs)
           end
         end
 
-        def initialize(content_type:, icon:, text:, dropdown: false)
+        def initialize(extension:, icon:, text:, url: nil, dropdown: false)
           super
-          @content_type = content_type
+          @extension = extension
           @icon = icon
           @text = text
+          @url = url
           @dropdown = dropdown
         end
 

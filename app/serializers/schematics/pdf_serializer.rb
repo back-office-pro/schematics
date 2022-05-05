@@ -2,25 +2,44 @@
 
 module Schematics
   class PdfSerializer
-    delegate :render, to: :controller
+    delegate :render, to: :controller, private: true
+    delegate :human_name, to: :model_class, private: true
+    delegate :default_url_options, to: 'Rails.application.routes', private: true
 
-    def initialize(model_name, resource)
-      @model_name = model_name
+    def initialize(resource)
       @resource = resource
     end
 
-    def generate_file
+    def content
       Grover.new(pdf, options).to_pdf
+    end
+
+    def file
+      @file ||= begin
+        file = Tempfile.new
+        file.binmode
+        file.write(content)
+        file.rewind
+        file
+      end
+    end
+
+    def filename
+      "#{human_name.dasherize}-#{@resource.slug}.pdf"
     end
 
     private
 
+    def model_class
+      @resource.class
+    end
+
     def controller
-      @controller ||= "#{@model_name.pluralize}Controller".constantize
+      @controller ||= "#{model_class.to_s.pluralize}Controller".constantize
     end
 
     def pdf
-      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url, 'http')
+      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url.to_s, asset_url.scheme)
     end
 
     def template
@@ -41,7 +60,7 @@ module Schematics
     end
 
     def asset_url
-      'http://localhost:3000/'
+      URI.parse(URI::HTTP.build(**default_url_options.merge(path: '/')).to_s)
     end
   end
 end

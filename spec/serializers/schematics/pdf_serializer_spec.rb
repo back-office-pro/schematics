@@ -3,16 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::PdfSerializer do
-  subject(:serializer) { described_class.new(model_name, resource) }
+  subject(:serializer) { described_class.new(resource) }
 
-  fixtures :stats
+  fixtures :users
 
-  let(:model_name) { 'Stat' }
-  let(:resource) { stats(:one) }
+  let(:resource) { users(:one) }
 
-  describe '#generate_file' do
-    subject { serializer.generate_file }
-
-    it { is_expected.to start_with('%PDF') }
-  end
+  its(:file) { is_expected.to be_a(Tempfile) }
+  its(:filename) { is_expected.to eq('user-.pdf') }
+  its(:content) { is_expected.to start_with('%PDF') }
 end

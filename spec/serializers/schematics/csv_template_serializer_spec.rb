@@ -7,17 +7,14 @@ RSpec.describe Schematics::CsvTemplateSerializer do
 
   let(:model_class) { Permission }
 
-  describe '#generate_file' do
-    subject { serializer.generate_file }
+  its(:file) { is_expected.to be_a(Tempfile) }
+  its(:filename) { is_expected.to eq('permissions.csv') }
 
-    let(:expected_content) do
-      <<~CSV
-        Roles
+  its(:content) do
+    is_expected.to eq <<~CSV
+      Roles
 
 
-      CSV
-    end
-
-    it { is_expected.to eq(expected_content) }
+    CSV
   end
 end

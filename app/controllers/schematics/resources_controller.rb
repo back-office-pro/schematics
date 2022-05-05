@@ -29,7 +29,7 @@ module Schematics
     end
 
     def index
-      if params[:all_pages].present?
+      if params.key?(:all_pages)
         @resources = model_class.search(**search_params)
       else
         @calendar, @pagy, @resources = pagy_calendar(
@@ -43,16 +43,13 @@ module Schematics
         format.html
         format.json { render json: @resources }
         format.csv do
-          result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
-            job: GenerateCsvJob,
-            job_params: [model_class.to_s, @resources.pluck(:id), current_user.preferences], # rubocop:disable Rails/PluckId
-            extension: 'csv',
-            slug: human_name_plural.dasherize
+          GenerateCsvJob.perform_later(
+            current_user.id,
+            model_class.to_s,
+            @resources.pluck(:id), # rubocop:disable Rails/PluckId
+            params.key?(:all_pages) || @pagy.pages > 1
           )
-          return send_data result.data if result.failure?
-
-          send_file result.filepath, type: ::Mime[:csv].to_s, filename: result.filename
+          head :accepted
         end
       end
     end
@@ -62,16 +59,8 @@ module Schematics
         format.html
         format.json { render json: @resource }
         format.pdf do
-          result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
-            job: GeneratePdfJob,
-            job_params: [model_class.to_s, @resource.id],
-            extension: 'pdf',
-            slug: "#{human_name.dasherize}-#{@resource.slug}"
-          )
-          return send_data result.data if result.failure?
-
-          send_file result.filepath, type: ::Mime[:pdf].to_s, filename: result.filename
+          GeneratePdfJob.perform_later(current_user.id, model_class.to_s, @resource.id)
+          head :accepted
         end
       end
     end

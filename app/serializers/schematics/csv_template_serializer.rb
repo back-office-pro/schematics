@@ -2,16 +2,33 @@
 
 module Schematics
   class CsvTemplateSerializer
-    delegate :entity, :human_attribute_name, to: :@model_class, private: true
+    delegate :entity,
+             :human_attribute_name,
+             :human_name_plural,
+             to: :@model_class,
+             private: true
 
     def initialize(model_class)
       @model_class = model_class
     end
 
-    def generate_file
+    def content
       generate do |file|
-        2.times { file << content }
+        2.times { file << line }
       end
+    end
+
+    def file
+      @file ||= begin
+        file = Tempfile.new
+        file.write(content)
+        file.rewind
+        file
+      end
+    end
+
+    def filename
+      "#{human_name_plural.dasherize}.csv"
     end
 
     protected
@@ -34,7 +51,7 @@ module Schematics
         .map { |name| human_attribute_name(name) }
     end
 
-    def content
+    def line
       elements
         .stable_sort_by(&:weight)
         .map(&:default)

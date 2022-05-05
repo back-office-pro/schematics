@@ -5,31 +5,39 @@ require 'rails_helper'
 RSpec.describe Schematics::GeneratePdfJob do
   fixtures :users
 
-  let(:file) { Tempfile.new('user.pdf') }
-  let(:filepath) { file.path }
-  let(:model_name) { 'User' }
   let(:user) { users(:one) }
-  let(:resource_id) { user.id }
+  let(:user_id) { user.id }
+  let(:model_name) { 'User' }
+  let(:resource_id) { user_id }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(model_name, resource_id, filepath) }
+      expect { described_class.perform_later(user_id, model_name, resource_id) }
         .to have_enqueued_job(described_class)
-        .with(model_name, resource_id, filepath)
+        .with(user_id, model_name, resource_id)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(model_name, resource_id, filepath) }
+    subject(:perform_now) { described_class.perform_now(user_id, model_name, resource_id) }
 
-    it 'writes to file' do
-      expect { perform_now }.to(change { File.size(filepath) })
+    it 'uploads a blob' do
+      expect { perform_now }
+        .to change(ActiveStorage::Blob, :count)
+        .by(1)
     end
 
-    it 'queues the delete job' do
+    it 'queues the purge job' do
       expect { perform_now }
-        .to have_enqueued_job(Schematics::DeleteTempFileJob)
-        .with(filepath)
+        .to have_enqueued_job(ActiveStorage::PurgeJob)
+        .with(an_instance_of(ActiveStorage::Blob))
+    end
+
+    xit 'broadcasts to user' do # TODO: enable when supported
+      expect { perform_now }
+        .to have_broadcasted_to(user)
+        .from_channel(Turbo::StreamsChannel)
+        .with(a_hash_including(target: 'generate_file_in_background'))
     end
   end
 end

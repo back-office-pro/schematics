@@ -24,6 +24,12 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
     end
 
+    def maps_api_key_javascript
+      settings(:google_cloud_api_key)
+        .to_json
+        .html_safe # rubocop:disable Rails/OutputSafety
+    end
+
     # :reek:UnusedParameters
     def fa_icon(icon, class: nil, size: nil, animation: nil, **kwargs)
       tag.i(
