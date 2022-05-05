@@ -3,12 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::CsvSerializer do
-  subject(:serializer) { described_class.new(model_class, resources, preferences) }
+  subject(:serializer) { described_class.new(resources, preferences) }
 
   fixtures :stats
 
-  let(:model_class) { Stat }
-  let(:resources) { model_class.all }
+  let(:resources) { Stat.all }
   let(:preferences) { {} }
 
   before { Stat.update_all(model: 'User', field: 'User#email') } # rubocop:disable Rails/SkipsModelValidations

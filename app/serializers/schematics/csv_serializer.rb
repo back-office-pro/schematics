@@ -2,8 +2,8 @@
 
 module Schematics
   class CsvSerializer < CsvTemplateSerializer
-    def initialize(model_class, resources, preferences)
-      super(model_class)
+    def initialize(resources, preferences)
+      super(resources.klass)
       @resources = resources
       @preferences = preferences
     end
