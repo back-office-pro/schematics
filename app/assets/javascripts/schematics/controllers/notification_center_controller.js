@@ -1,5 +1,5 @@
 import ApplicationController from './application_controller'
-import { schematicsDashboardReadNotifications } from 'routes'
+import { schematicsDashboardReadNotificationsEn } from 'routes'
 
 export default class extends ApplicationController {
   static get targets () {
@@ -12,7 +12,7 @@ export default class extends ApplicationController {
 
   async readNotifications () {
     if (this.hasNotifications()) {
-      await this.fetchAPI(schematicsDashboardReadNotifications(), 'POST')
+      await this.fetchAPI(schematicsDashboardReadNotificationsEn(), 'POST')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
       this.iconTarget.classList.remove('animate__animated')
