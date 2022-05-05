@@ -15,7 +15,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 86,
+          "line": 72,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -46,7 +46,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 84,
+          "line": 70,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -77,7 +77,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -108,7 +108,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -139,7 +139,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -170,7 +170,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 84,
+          "line": 70,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -201,7 +201,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -216,26 +216,6 @@
       "user_input": "params[:id]",
       "confidence": "Weak",
       "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "84fe775722d20377e4c7ad4789a86b76077179bf1222cb1fae5f704193a0fafc",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "app/controllers/main_app/imports_controller.rb",
-      "line": 28,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_human_name_plural).filepath, :type => ::Mime[:csv].to_s, :filename => Schematics::Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (Schematics::GenerateCsvTemplateJob), :job_params => ([parent_model_class.to_s]), :extension => \"csv\", :slug => parent_human_name_plural).filename)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "MainApp::ImportsController",
-        "method": "new"
-      },
-      "user_input": "params[:fingerprint]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used in filename"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -252,7 +232,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -267,26 +247,6 @@
       "user_input": "params[:id]",
       "confidence": "Weak",
       "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "9d92b90058d4d505427f935368fc46d23acbe32796cbcc826721809263e0c10a",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "app/controllers/schematics/resources_controller.rb",
-      "line": 55,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvJob), :job_params => ([model_class.to_s, model_class.search(**search_params).pluck(:id), current_user.preferences]), :extension => \"csv\", :slug => human_name_plural.dasherize).filepath, :type => ::Mime[:csv].to_s, :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GenerateCsvJob), :job_params => ([model_class.to_s, model_class.search(**search_params).pluck(:id), current_user.preferences]), :extension => \"csv\", :slug => human_name_plural.dasherize).filename)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::ResourcesController",
-        "method": "index"
-      },
-      "user_input": "params[:fingerprint]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used in filename"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -303,7 +263,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -320,26 +280,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "da57e10edb674d33c197094329658db437e236a164cd46c6a169f397c58c4136",
-      "check_name": "SendFile",
-      "message": "Parameter value used in file name",
-      "file": "app/controllers/schematics/resources_controller.rb",
-      "line": 74,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "send_file(Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_class.to_s, model_class.includes(:slugs, *entity.includes).then_tap do\n _1.with_deleted if request.delete?\n end.finder(params[:id]).id]), :extension => \"pdf\", :slug => (\"#{human_name.dasherize}-#{model_class.includes(:slugs, *entity.includes).then_tap do\n _1.with_deleted if request.delete?\n end.finder(params[:id]).slug}\")).filepath, :type => ::Mime[:pdf].to_s, :filename => Resources::GenerateFileInBackground.call(:fingerprint => params[:fingerprint], :job => (GeneratePdfJob), :job_params => ([model_class.to_s, model_class.includes(:slugs, *entity.includes).then_tap do\n _1.with_deleted if request.delete?\n end.finder(params[:id]).id]), :extension => \"pdf\", :slug => (\"#{human_name.dasherize}-#{model_class.includes(:slugs, *entity.includes).then_tap do\n _1.with_deleted if request.delete?\n end.finder(params[:id]).slug}\")).filename)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::ResourcesController",
-        "method": "show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "note": "Fingerprint is not used in filename"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "db2d839cabd7fe1c1c5269240879d6543c92a3bf894e81b3e0d034e297eab92f",
@@ -354,7 +294,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 86,
+          "line": 72,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -385,7 +325,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 62,
+          "line": 57,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -402,6 +342,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-05-02 00:11:51 +0200",
-  "brakeman_version": "5.2.2"
+  "updated": "2022-05-05 02:10:43 +0200",
+  "brakeman_version": "5.2.3"
 }
