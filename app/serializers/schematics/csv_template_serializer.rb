@@ -2,7 +2,11 @@
 
 module Schematics
   class CsvTemplateSerializer
-    delegate :entity, :human_attribute_name, to: :@model_class, private: true
+    delegate :entity,
+             :human_attribute_name,
+             :human_name_plural,
+             to: :@model_class,
+             private: true
 
     def initialize(model_class)
       @model_class = model_class
@@ -21,6 +25,10 @@ module Schematics
         file.rewind
         file
       end
+    end
+
+    def filename
+      "#{human_name_plural.dasherize}.csv"
     end
 
     protected

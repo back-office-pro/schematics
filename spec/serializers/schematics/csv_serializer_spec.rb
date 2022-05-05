@@ -14,6 +14,7 @@ RSpec.describe Schematics::CsvSerializer do
   before { Stat.update_all(model: 'User', field: 'User#email') } # rubocop:disable Rails/SkipsModelValidations
 
   its(:file) { is_expected.to be_a(Tempfile) }
+  its(:filename) { is_expected.to eq('stats.csv') }
 
   its(:content) do
     is_expected.to eq <<~CSV
