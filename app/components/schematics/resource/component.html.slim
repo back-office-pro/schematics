@@ -1,6 +1,6 @@
 - case @field
 - when Schematics::Associations::Association, Schematics::Attributes::Association
-  - if value.present?
+  - if value
     - if value.deleted?
       .text-muted
         = fa_icon :box_archive, class: 'me-2'
