@@ -2,10 +2,15 @@
 
 module Schematics
   class GeneratePdfJob < ApplicationJob
-    def perform(model_name, resource_id, filepath)
-      resource = model_name.constantize.finder(resource_id)
-      File.open(filepath, 'wb') { _1 << PdfSerializer.new(model_name, resource).generate_file }
-      DeleteTempFileJob.set(wait: 5.minutes).perform_later(filepath)
+    def perform(user_id, model_name, resource_id)
+      user = ::User.find(user_id)
+      model_class = model_name.constantize
+      resource = model_class.finder(resource_id)
+      Resources::GenerateFile.call(
+        user:,
+        serializer: PdfSerializer.new(model_class, resource),
+        content_type: :pdf
+      )
     end
   end
 end
