@@ -25,6 +25,10 @@ export default class extends ApplicationController {
   }
 
   url (allPages) {
-    return `${window.location.pathname}.${this.extensionValue}${allPages ? '?all_pages' : ''}`
+    const searchParams = new URLSearchParams(window.location.search)
+    if (allPages) {
+      searchParams.set('all_pages', true)
+    }
+    return `${window.location.pathname}.${this.extensionValue}?${searchParams}`
   }
 }
