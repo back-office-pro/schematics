@@ -6,15 +6,9 @@ describe Schematics::Commands::AddAttribute do
   let(:entity) { Schematics::Entities::Entity.build(name: 'client') }
   let(:attribute) { 'first_name' }
 
-  describe '#execute' do
-    subject { command.execute }
-
-    let(:expected_command_line) do
-      <<~SHELL
-        rails generate migration add_first_name_to_clients schema:client_first_name
-      SHELL
-    end
-
-    it { is_expected.to eq(expected_command_line) }
+  its(:execute) do
+    is_expected.to eq <<~SHELL
+      rails generate migration add_first_name_to_clients schema:client_first_name
+    SHELL
   end
 end

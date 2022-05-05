@@ -7,15 +7,9 @@ describe Schematics::Commands::RenameAttribute do
   let(:attribute) { 'first_name' }
   let(:target) { 'name' }
 
-  describe '#execute' do
-    subject { command.execute }
-
-    let(:expected_command_line) do
-      <<~SHELL
-        rails generate migration rename_first_name_to_name_in_clients
-      SHELL
-    end
-
-    it { is_expected.to eq(expected_command_line) }
+  its(:execute) do
+    is_expected.to eq <<~SHELL
+      rails generate migration rename_first_name_to_name_in_clients
+    SHELL
   end
 end

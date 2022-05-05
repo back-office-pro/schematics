@@ -32,10 +32,8 @@ describe Schematics::Commands::CreateEntity do
     ]
   end
 
-  describe '#execute' do
-    subject { command.execute }
-
-    let(:expected_command_lines) do
+  its(:execute) do
+    is_expected.to eq(
       [
         'rails generate scaffold assembly schema:assembly_name schema:assembly_owner --skip-resource-route', # rubocop:disable Layout/LineLength
         'rails generate rspec:feature assembly',
@@ -46,19 +44,16 @@ describe Schematics::Commands::CreateEntity do
         'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength
         'rails generate migration add_assemblies_count_to_users assemblies_count:integer'
       ]
-    end
+    )
+  end
 
-    it { is_expected.to eq(expected_command_lines) }
+  context 'when entity class is already defined' do
+    let(:name) { 'object' }
 
-    context 'when entity class is already defined' do # rubocop:disable RSpec/MultipleMemoizedHelpers
-      let(:name) { 'object' }
-      let(:expected_command_line) do
-        <<~SHELL
-          rails generate scaffold_controller object --skip-resource-route
-        SHELL
-      end
-
-      it { is_expected.to eq(expected_command_line) }
+    its(:execute) do
+      is_expected.to eq <<~SHELL
+        rails generate scaffold_controller object --skip-resource-route
+      SHELL
     end
   end
 end

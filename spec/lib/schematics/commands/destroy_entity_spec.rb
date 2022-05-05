@@ -13,10 +13,8 @@ describe Schematics::Commands::DestroyEntity do
     ]
   end
 
-  describe '#execute' do
-    subject { command.execute }
-
-    let(:expected_command_lines) do
+  its(:execute) do
+    is_expected.to eq(
       [
         'rails destroy scaffold client --skip-migration --skip-resource-route',
         'rails destroy rspec:feature client',
@@ -25,8 +23,6 @@ describe Schematics::Commands::DestroyEntity do
         'rails generate migration drop_clients schema:client_first_name',
         "rails 'schematics:permissions:destroy[Client]'"
       ]
-    end
-
-    it { is_expected.to eq(expected_command_lines) }
+    )
   end
 end
