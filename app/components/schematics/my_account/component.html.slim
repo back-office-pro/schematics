@@ -1,6 +1,6 @@
 li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start.border-light
   a#account-dropdown.nav-link.dropdown-toggle aria-expanded='false' data-bs-toggle='dropdown' href='#' role='button'
-    span.d-none.d-lg-inline.align-middle.me-2 = current_user.full_name
+    span.d-none.d-lg-inline.align-middle.me-2 = current_user
     = render Schematics::Attachment::Component.avatar(user: current_user)
   .dropdown-menu.border-0.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
     aria-labelledby='account-dropdown'

@@ -8,10 +8,6 @@ module Schematics
         @user = user
       end
 
-      def title
-        @user.full_name
-      end
-
       def badge_css_class
         return 'bg-success' if @user.online?
 
