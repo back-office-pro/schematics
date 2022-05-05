@@ -5,9 +5,10 @@ module Schematics
     def perform(user_id, model_name)
       user = ::User.find(user_id)
       model_class = model_name.constantize
+      serializer = CsvTemplateSerializer.new(model_class)
       Resources::GenerateFile.call(
         user:,
-        serializer: CsvTemplateSerializer.new(model_class),
+        serializer:,
         extension: :csv,
         component_method: :csv_template
       )
