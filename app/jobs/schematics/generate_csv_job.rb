@@ -9,7 +9,7 @@ module Schematics
       Resources::GenerateFile.call(
         user:,
         serializer: CsvSerializer.new(model_class, resources, user.preferences),
-        content_type: :csv,
+        extension: :csv,
         dropdown:
       )
     end

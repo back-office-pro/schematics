@@ -9,7 +9,7 @@ module Schematics
       Resources::GenerateFile.call(
         user:,
         serializer: PdfSerializer.new(model_class, resource),
-        content_type: :pdf
+        extension: :pdf
       )
     end
   end

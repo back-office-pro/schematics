@@ -8,7 +8,7 @@ module Schematics
       Resources::GenerateFile.call(
         user:,
         serializer: CsvTemplateSerializer.new(model_class),
-        content_type: :csv,
+        extension: :csv,
         component_method: :csv_template
       )
     end

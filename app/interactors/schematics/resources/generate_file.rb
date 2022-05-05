@@ -11,8 +11,8 @@ module Schematics
         @user = context.user
         @serializer = context.serializer
         @filename = context.filename
-        @content_type = context.content_type
-        @component_method = context.component_method || @content_type
+        @extension = context.extension
+        @component_method = context.component_method || @extension
         @dropdown = context.dropdown
       end
 
@@ -32,11 +32,11 @@ module Schematics
       private
 
       def blob
-        @blob ||= ::ActiveStorage::Blob.create_and_upload!(
-          io: file,
-          filename:,
-          content_type: ::Mime[@content_type].to_s
-        )
+        @blob ||= ::ActiveStorage::Blob.create_and_upload!(io: file, filename:, content_type:)
+      end
+
+      def content_type
+        ::Mime[@extension].to_s
       end
     end
   end
