@@ -38,7 +38,7 @@ module Schematics
     end
 
     def pdf
-      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url, 'http')
+      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url.to_s, asset_url.scheme)
     end
 
     def template
@@ -59,7 +59,11 @@ module Schematics
     end
 
     def asset_url
-      'http://localhost:3000/'
+      @asset_url ||= URI.parse(
+        URI::HTTP
+          .build(**Rails.application.routes.default_url_options.merge(path: '/'))
+          .to_s
+      )
     end
   end
 end
