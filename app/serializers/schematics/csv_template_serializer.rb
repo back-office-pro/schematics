@@ -8,9 +8,18 @@ module Schematics
       @model_class = model_class
     end
 
-    def generate_file
+    def content
       generate do |file|
-        2.times { file << content }
+        2.times { file << line }
+      end
+    end
+
+    def file
+      @file ||= begin
+        file = Tempfile.new
+        file.write(content)
+        file.rewind
+        file
       end
     end
 
@@ -34,7 +43,7 @@ module Schematics
         .map { |name| human_attribute_name(name) }
     end
 
-    def content
+    def line
       elements
         .stable_sort_by(&:weight)
         .map(&:default)
