@@ -29,7 +29,7 @@ module Schematics
     end
 
     def index
-      if params[:all_pages].present?
+      if params.key?(:all_pages)
         @resources = model_class.search(**search_params)
       else
         @calendar, @pagy, @resources = pagy_calendar(
