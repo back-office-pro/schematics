@@ -43,7 +43,12 @@ module Schematics
         format.html
         format.json { render json: @resources }
         format.csv do
-          GenerateCsvJob.perform_later(current_user.id, model_class.to_s, @resources.pluck(:id)) # rubocop:disable Rails/PluckId
+          GenerateCsvJob.perform_later(
+            current_user.id,
+            model_class.to_s,
+            @resources.pluck(:id), # rubocop:disable Rails/PluckId
+            params.key?(:all_pages) || @pagy.pages > 1
+          )
           head :accepted
         end
       end

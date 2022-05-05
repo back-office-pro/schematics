@@ -13,6 +13,7 @@ module Schematics
         @filename = context.filename
         @content_type = context.content_type
         @component_method = context.component_method || @content_type
+        @dropdown = context.dropdown
       end
 
       def call
@@ -23,7 +24,7 @@ module Schematics
           @user,
           target: 'generate_file_in_background',
           content: Button::GenerateFileInBackground::Component
-            .public_send(@component_method, url: url_for(blob))
+            .public_send(@component_method, dropdown: @dropdown, url: url_for(blob))
             .to_html
         )
       end
