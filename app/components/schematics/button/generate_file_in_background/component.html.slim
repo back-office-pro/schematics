@@ -1,30 +1,32 @@
-.dropdown.d-inline-block {
-    data-controller='generate-file-in-background'
-    data-generate-file-in-background-content-type-value=@content_type
-}
-  button#generate-file-in-background-button.btn.btn-sm.btn-icon-split {
-    data-generate-file-in-background-target='button'
-    data-action=action
-    data-bs-toggle=toggle
-    aria-expanded='false'
+= turbo_frame_tag 'generate_file_in_background' do
+  .dropdown.d-inline-block {
+      data-controller='generate-file-in-background'
+      data-generate-file-in-background-extension-value=@extension
+      data-generate-file-in-background-url-value=@url
   }
-    span.icon = fa_icon @icon
-    span.icon.d-none = fa_icon :spinner, animation: 'spin'
-    span.text.d-none.d-lg-inline = t(".#{@text}")
-    span.text.d-none data-generate-file-in-background-target='loading' = t('.loading')
-  .dropdown-menu.w-100.border-0.shadow-sm.animate__animated.animate__zoomIn.mt-0 {
-    aria-labelledby='generate-file-in-background-button'
-  }
-    .dropdown-item {
-      data-action='click->generate-file-in-background#run'
-      role='button'
+    button#generate-file-in-background-button.btn.btn-sm.btn-icon-split {
+      data-generate-file-in-background-target='button'
+      data-action=action
+      data-bs-toggle=toggle
+      aria-expanded='false'
     }
-      = fa_icon :table, class: 'fa-fw me-3'
-      = t('.current_page')
-    .dropdown-item {
-      data-action='click->generate-file-in-background#run'
-      data-generate-file-in-background-all-pages-param='true'
-      role='button'
+      span.icon = fa_icon @icon
+      span.icon.d-none = fa_icon :spinner, animation: 'spin'
+      span.text.d-none.d-lg-inline = t(".#{@text}")
+      span.text.d-none data-generate-file-in-background-target='loading' = t('.loading')
+    .dropdown-menu.w-100.border-0.shadow-sm.animate__animated.animate__zoomIn.mt-0 {
+      aria-labelledby='generate-file-in-background-button'
     }
-      = fa_icon :file_export, class: 'fa-fw me-3'
-      = t('.all_pages')
+      .dropdown-item {
+        data-action='click->generate-file-in-background#run'
+        role='button'
+      }
+        = fa_icon :table, class: 'fa-fw me-3'
+        = t('.current_page')
+      .dropdown-item {
+        data-action='click->generate-file-in-background#run'
+        data-generate-file-in-background-all-pages-param='true'
+        role='button'
+      }
+        = fa_icon :file_export, class: 'fa-fw me-3'
+        = t('.all_pages')
