@@ -4,6 +4,7 @@ module Schematics
   class PdfSerializer
     delegate :render, to: :controller, private: true
     delegate :human_name, to: :model_class, private: true
+    delegate :default_url_options, to: 'Rails.application.routes', private: true
 
     def initialize(resource)
       @resource = resource
@@ -59,11 +60,7 @@ module Schematics
     end
 
     def asset_url
-      @asset_url ||= URI.parse(
-        URI::HTTP
-          .build(**Rails.application.routes.default_url_options.merge(path: '/'))
-          .to_s
-      )
+      URI.parse(URI::HTTP.build(**default_url_options.merge(path: '/')).to_s)
     end
   end
 end
