@@ -116,7 +116,7 @@ module Schematics
     config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', nil) } if Rails.env.production? # rubocop:disable Layout/LineLength
 
     # Active Storage
-    config.after_initialize do # Make sure we override main app 6.1 defaults
+    config.after_initialize do # Make sure we override main app defaults
       config.active_storage.replace_on_assign_to_many = false
     end
 
