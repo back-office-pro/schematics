@@ -9,8 +9,18 @@ module Schematics
       @resource = resource
     end
 
-    def generate_file
+    def content
       Grover.new(pdf, options).to_pdf
+    end
+
+    def file
+      @file ||= begin
+        file = Tempfile.new
+        file.binmode
+        file.write(content)
+        file.rewind
+        file
+      end
     end
 
     private

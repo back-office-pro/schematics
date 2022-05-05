@@ -10,9 +10,6 @@ RSpec.describe Schematics::PdfSerializer do
   let(:model_name) { 'Stat' }
   let(:resource) { stats(:one) }
 
-  describe '#generate_file' do
-    subject { serializer.generate_file }
-
-    it { is_expected.to start_with('%PDF') }
-  end
+  its(:file) { is_expected.to be_a(Tempfile) }
+  its(:content) { is_expected.to start_with('%PDF') }
 end
