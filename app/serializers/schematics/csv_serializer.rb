@@ -8,10 +8,10 @@ module Schematics
       @preferences = preferences
     end
 
-    def generate_file
+    def content
       generate do |file|
         @resources.each do |resource|
-          file << content(resource)
+          file << line(resource)
         end
       end
     end
@@ -24,7 +24,7 @@ module Schematics
         .select { @preferences.fetch("col_#{_1.entity.table_name}_#{_1.name}", true) }
     end
 
-    def content(resource)
+    def line(resource)
       elements.stable_sort_by(&:weight).map do |element|
         Array(element.format(resource.public_send(element.name))).join(' ')
       end

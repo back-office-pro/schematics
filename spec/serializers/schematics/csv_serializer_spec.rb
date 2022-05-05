@@ -9,36 +9,29 @@ RSpec.describe Schematics::CsvSerializer do
 
   let(:model_class) { Stat }
   let(:resources) { model_class.all }
+  let(:preferences) { {} }
 
   before { Stat.update_all(model: 'User', field: 'User#email') } # rubocop:disable Rails/SkipsModelValidations
 
-  describe '#generate_file' do
-    subject { serializer.generate_file }
+  its(:file) { is_expected.to be_a(Tempfile) }
 
-    context 'without preferences' do
-      let(:preferences) { {} }
-      let(:expected_content) do
-        <<~CSV
-          Agregate,Data,Field
-          Count,User,Email
-          Count,User,Email
-        CSV
-      end
+  its(:content) do
+    is_expected.to eq <<~CSV
+      Agregate,Data,Field
+      Count,User,Email
+      Count,User,Email
+    CSV
+  end
 
-      it { is_expected.to eq(expected_content) }
-    end
+  context 'with preferences' do
+    let(:preferences) { { 'col_stat_field' => false } }
 
-    context 'with preferences' do
-      let(:preferences) { { 'col_stat_field' => false } }
-      let(:expected_content) do
-        <<~CSV
-          Agregate,Data
-          Count,User
-          Count,User
-        CSV
-      end
-
-      it { is_expected.to eq(expected_content) }
+    its(:content) do
+      is_expected.to eq <<~CSV
+        Agregate,Data
+        Count,User
+        Count,User
+      CSV
     end
   end
 end
