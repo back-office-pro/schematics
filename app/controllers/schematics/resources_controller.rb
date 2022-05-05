@@ -43,16 +43,8 @@ module Schematics
         format.html
         format.json { render json: @resources }
         format.csv do
-          result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
-            job: GenerateCsvJob,
-            job_params: [model_class.to_s, @resources.pluck(:id), current_user.preferences], # rubocop:disable Rails/PluckId
-            extension: 'csv',
-            slug: human_name_plural.dasherize
-          )
-          return send_data result.data if result.failure?
-
-          send_file result.filepath, type: ::Mime[:csv].to_s, filename: result.filename
+          GenerateCsvJob.perform_later(current_user.id, model_class.to_s, @resources.pluck(:id)) # rubocop:disable Rails/PluckId
+          head :accepted
         end
       end
     end
@@ -62,16 +54,8 @@ module Schematics
         format.html
         format.json { render json: @resource }
         format.pdf do
-          result = Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
-            job: GeneratePdfJob,
-            job_params: [model_class.to_s, @resource.id],
-            extension: 'pdf',
-            slug: "#{human_name.dasherize}-#{@resource.slug}"
-          )
-          return send_data result.data if result.failure?
-
-          send_file result.filepath, type: ::Mime[:pdf].to_s, filename: result.filename
+          GeneratePdfJob.perform_later(current_user.id, model_class.to_s, @resource.id)
+          head :accepted
         end
       end
     end

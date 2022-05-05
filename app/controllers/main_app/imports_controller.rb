@@ -16,16 +16,8 @@ module MainApp
       respond_to do |format|
         format.html
         format.csv do
-          result = Schematics::Resources::GenerateFileInBackground.call(
-            fingerprint: params[:fingerprint],
-            job: Schematics::GenerateCsvTemplateJob,
-            job_params: [parent_model_class.to_s],
-            extension: 'csv',
-            slug: parent_human_name_plural
-          )
-          return send_data result.data if result.failure?
-
-          send_file result.filepath, type: ::Mime[:csv].to_s, filename: result.filename
+          Schematics::GenerateCsvTemplateJob.perform_later(current_user.id, parent_model_class.to_s)
+          head :accepted
         end
       end
     end
