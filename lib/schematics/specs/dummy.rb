@@ -22,12 +22,12 @@ module Schematics
       private
 
       def file
-        return @file if defined?(@file)
-
-        @file = Tempfile.new(filename_array)
-        @file.write(content_type)
-        @file.rewind
-        @file
+        @file ||= begin
+          file = Tempfile.new(filename_array)
+          file.write(content_type)
+          file.rewind
+          file
+        end
       end
 
       def read
