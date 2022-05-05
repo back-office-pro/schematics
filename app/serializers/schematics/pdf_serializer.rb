@@ -3,10 +3,9 @@
 module Schematics
   class PdfSerializer
     delegate :render, to: :controller, private: true
-    delegate :human_name, to: :@model_class, private: true
+    delegate :human_name, to: :model_class, private: true
 
-    def initialize(model_class, resource)
-      @model_class = model_class
+    def initialize(resource)
       @resource = resource
     end
 
@@ -30,8 +29,12 @@ module Schematics
 
     private
 
+    def model_class
+      @resource.class
+    end
+
     def controller
-      @controller ||= "#{@model_class.to_s.pluralize}Controller".constantize
+      @controller ||= "#{model_class.to_s.pluralize}Controller".constantize
     end
 
     def pdf
