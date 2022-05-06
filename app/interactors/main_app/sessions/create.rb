@@ -4,7 +4,7 @@ module MainApp
   module Sessions
     class Create
       include Schematics::Interactable
-      delegate :authenticate, to: :@user, allow_nil: true
+      delegate :authenticate, :confirmed?, to: :@user, allow_nil: true
 
       before do
         @session = context.current_session
@@ -15,14 +15,13 @@ module MainApp
       end
 
       def call
+        fail!(message: '.unconfirmed') unless confirmed?
         fail! unless authenticate(@password) # TODO: use authenticate_by when upgrading to Rails 7.1
 
         session = @session.login!(@user)
         context.current_session_id = session.id
         context.jwt = ::JsonWebToken.encode(auth_token: session.auth_token)
         @cookies.permanent.encrypted[:auth_token] = session.auth_token if remember_me?
-      rescue BCrypt::Errors::InvalidHash
-        fail!(message: '.invalid_hash')
       end
 
       private
