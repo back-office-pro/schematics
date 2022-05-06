@@ -18,7 +18,6 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
   spec.add_development_dependency 'bootsnap', '~> 1.11.1'
-  spec.add_development_dependency 'capybara', '~> 3.36.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.9'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.0.3'
@@ -52,6 +51,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'brakeman', '~> 5.2.3'
   spec.add_dependency 'browser', '~> 5.3.1'
   spec.add_dependency 'cancancan', '~> 3.3.0'
+  spec.add_dependency 'capybara', '~> 3.36.0'
   spec.add_dependency 'chartkick', '~> 4.1.3'
   spec.add_dependency 'chroma', '~> 0.2.0'
   spec.add_dependency 'client_side_validations', '~> 20.0.2'
