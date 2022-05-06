@@ -121,7 +121,9 @@ module Schematics
     end
 
     # Time zone
-    config.time_zone = 'Paris'
+    config.after_initialize do |app|
+      app.config.time_zone = 'Paris' # Time zone must be bound to app
+    end
 
     # Theme
     config.theme_color = '#2c3e50'

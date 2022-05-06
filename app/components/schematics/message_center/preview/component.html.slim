@@ -8,6 +8,6 @@
   .col.text-truncate
     div class=css_class = @message.subject
     .text-muted
-      span = @message.author.full_name
+      span = @message.author
       span.mx-1 -
       span data-controller='timeago' datetime=@message.created_at

@@ -28,9 +28,7 @@ after_bundle do
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
   rails_command 'schematics:licence:renew[enterprise,12]'
-  rails_command 'schematics:users:admin[maxence.derous@gmail.com,John,Doe,fr,Paris]'
   rails_command 'js:routes'
-  rails_command 'dev:cache'
 
   # Ignore /doc directory
   append_to_file '.gitignore', '/doc'

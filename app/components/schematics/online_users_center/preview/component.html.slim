@@ -6,5 +6,5 @@
   .col-auto.align-self-center
     = render Schematics::Attachment::Component.avatar(user:)
   .col.text-truncate
-    = full_name
+    = user
     .text-muted data-controller='timeago' datetime=updated_at

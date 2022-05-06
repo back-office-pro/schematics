@@ -37,7 +37,6 @@
           "name": "first_name",
           "type": "string",
           "options": {
-            "required": true,
             "encrypted": true
           }
         },
@@ -45,7 +44,6 @@
           "name": "last_name",
           "type": "string",
           "options": {
-            "required": true,
             "encrypted": true
           }
         },
@@ -65,7 +63,6 @@
           "name": "locale",
           "type": "enum",
           "options": {
-            "required": true,
             "default": "fr",
             "values": [
               "fr",
@@ -75,10 +72,7 @@
         },
         {
           "name": "time_zone",
-          "type": "time_zone",
-          "options": {
-            "required": true
-          }
+          "type": "time_zone"
         },
         {
           "name": "preferences",

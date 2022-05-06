@@ -5,7 +5,6 @@ module Schematics
     module Preview
       class Component < ApplicationComponent
         delegate :user, :updated_at, to: :@session
-        delegate :full_name, to: :user
 
         def initialize(session:)
           super

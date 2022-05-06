@@ -3,5 +3,5 @@ en:
   sessions:
     create:
       failure: Email or password is invalid
-      invalid_hash: Password is not set up for your account
       success: Logged in!
+      unconfirmed: Password is not set up for your account

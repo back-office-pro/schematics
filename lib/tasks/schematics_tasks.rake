@@ -34,15 +34,6 @@ namespace :schematics do
     end
   end
 
-  namespace :users do
-    desc 'Create admin user'
-    task :admin, %i[email last_name first_name locale time_zone] => [:environment] do |_task, args|
-      PaperTrail.request(enabled: false) do
-        User.create!(args.to_h.merge(password: 'Azerty1!', role: Role.admin))
-      end
-    end
-  end
-
   namespace :permissions do
     desc 'Create entity permissions'
     task :create, %i[entity] => [:environment] do |_task, args|
