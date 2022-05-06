@@ -25,6 +25,7 @@ module Schematics
         .with_user_drafts
         .where(auth_token:)
         .or(::Session.active.where(id: session[:current_session_id]))
+        .load_async
         .first || Guest::Session.new(request:)
     end
 

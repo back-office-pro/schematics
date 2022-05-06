@@ -231,6 +231,7 @@ module Schematics
       @resource = model_class
                   .includes(:slugs, *entity.includes)
                   .then_tap { _1.with_deleted if request.delete? }
+                  .load_async
                   .finder(params[:id])
       return if request.path.start_with?(polymorphic_path(@resource))
 

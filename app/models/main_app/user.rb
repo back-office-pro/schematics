@@ -45,6 +45,7 @@ module MainApp
         .not(query: nil)
         .order(created_at: :desc)
         .limit(SEARCH_HISTORY_LIMIT)
+        .load_async
         .pluck(:query)
         .uniq
     end
@@ -54,6 +55,7 @@ module MainApp
         .where(model:, query: nil)
         .order(created_at: :desc)
         .limit(SEARCH_HISTORY_LIMIT)
+        .load_async
         .pluck(:filters)
         .pluck(name)
         .uniq

@@ -17,6 +17,7 @@ module MainApp
                    .includes(parent_model_class.entity.includes)
                    .where(id: @resource.ids)
                    .accessible_by(current_ability)
+                   .load_async
     end
 
     def parent_model_class
