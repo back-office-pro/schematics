@@ -10,7 +10,7 @@
       data-bs-toggle=toggle
       aria-expanded='false'
     }
-      span.icon = fa_icon @icon
+      span.icon = fa_icon(icon)
       span.icon.d-none = fa_icon :spinner, animation: 'spin'
       span.text.d-none.d-lg-inline = t(".#{@text}")
       span.text.d-none data-generate-file-in-background-target='loading' = t('.loading')

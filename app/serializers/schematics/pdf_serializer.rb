@@ -25,7 +25,15 @@ module Schematics
     end
 
     def filename
-      "#{human_name.dasherize}-#{@resource.slug}.pdf"
+      ["#{human_name.dasherize}-#{@resource.slug}", extension].join('.')
+    end
+
+    def extension
+      :pdf
+    end
+
+    def content_type
+      ::Mime[extension].to_s
     end
 
     private

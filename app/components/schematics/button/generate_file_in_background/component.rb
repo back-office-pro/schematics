@@ -6,25 +6,28 @@ module Schematics
       class Component < ApplicationComponent
         class << self
           def csv_template(**kwargs)
-            new(extension: :csv, icon: :file_csv, text: :download_csv_template, **kwargs)
+            new(extension: :csv, text: :download_csv_template, **kwargs)
           end
 
           def csv(**kwargs)
-            new(extension: :csv, icon: :file_csv, text: :download_as_csv, **kwargs)
+            new(extension: :csv, text: :download_as_csv, **kwargs)
           end
 
           def pdf(**kwargs)
-            new(extension: :pdf, icon: :file_pdf, text: :download_pdf, **kwargs)
+            new(extension: :pdf, text: :download_pdf, **kwargs)
           end
         end
 
-        def initialize(extension:, icon:, text:, url: nil, dropdown: false)
+        def initialize(extension:, text:, url: nil, dropdown: false)
           super
           @extension = extension
-          @icon = icon
           @text = text
           @url = url
           @dropdown = dropdown
+        end
+
+        def icon
+          :"file_#{@extension}"
         end
 
         def action

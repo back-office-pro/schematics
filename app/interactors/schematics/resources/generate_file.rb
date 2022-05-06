@@ -5,14 +5,13 @@ module Schematics
     class GenerateFile
       include Interactor
       include Rails.application.routes.url_helpers
-      delegate :file, :filename, to: :@serializer
+      delegate :file, :filename, :extension, :content_type, to: :@serializer
 
       before do
         @user = context.user
         @serializer = context.serializer
         @filename = context.filename
-        @extension = context.extension
-        @component_method = context.component_method || @extension
+        @component_method = context.component_method || extension
         @dropdown = context.dropdown
       end
 
@@ -33,10 +32,6 @@ module Schematics
 
       def blob
         @blob ||= ::ActiveStorage::Blob.create_and_upload!(io: file, filename:, content_type:)
-      end
-
-      def content_type
-        ::Mime[@extension].to_s
       end
     end
   end

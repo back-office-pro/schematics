@@ -14,6 +14,8 @@ RSpec.describe Schematics::CsvSerializer do
 
   its(:file) { is_expected.to be_a(Tempfile) }
   its(:filename) { is_expected.to eq('stats.csv') }
+  its(:extension) { is_expected.to eq(:csv) }
+  its(:content_type) { is_expected.to eq('text/csv') }
 
   its(:content) do
     is_expected.to eq <<~CSV

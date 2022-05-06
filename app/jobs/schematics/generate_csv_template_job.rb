@@ -9,7 +9,6 @@ module Schematics
       Resources::GenerateFile.call(
         user:,
         serializer:,
-        extension: :csv,
         component_method: :csv_template
       )
     end

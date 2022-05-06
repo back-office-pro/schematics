@@ -28,7 +28,15 @@ module Schematics
     end
 
     def filename
-      "#{human_name_plural.dasherize}.csv"
+      [human_name_plural.dasherize, extension].join('.')
+    end
+
+    def extension
+      :csv
+    end
+
+    def content_type
+      ::Mime[extension].to_s
     end
 
     protected
