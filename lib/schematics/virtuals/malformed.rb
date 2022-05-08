@@ -9,7 +9,13 @@ module Schematics
         super.join
       end
 
-      def function
+      def icon
+        :triangle_exclamation
+      end
+
+      protected
+
+      def method_body
         <<~RUBY.squish
           raise ArgumentError
         RUBY
