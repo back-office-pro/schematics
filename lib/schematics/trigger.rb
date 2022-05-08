@@ -4,6 +4,8 @@ module Schematics
   # :reek:Attribute
   class Trigger
     include ::ActiveModel::API
+
+    validates :action, presence: true
     attr_accessor :action, :callback
 
     def method_name = "after_#{action}"
