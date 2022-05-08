@@ -55,12 +55,7 @@ module Schematics
     end
 
     def current_password_attribute
-      Attributes::Attribute.build(
-        entity,
-        type: 'digest',
-        name: 'current_password',
-        options: { required: true }
-      )
+      Attributes::Digest.new(entity:, name: 'current_password', options: { required: true })
     end
 
     def attributes
