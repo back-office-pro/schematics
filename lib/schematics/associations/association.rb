@@ -1,33 +1,27 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'active_model'
 
 module Schematics
   module Associations
+    # :reek:Attribute
     class Association
       include Behaviours::Renderable
       include Behaviours::Preloadable
+      include ::ActiveModel::API
 
       delegate :entity, :required?, :column_name, :association_type, :options, to: :belongs_to
       delegate :descriptor, :class_name, :icon, to: :entity
       delegate :hidden?, to: :options
-      attr_reader :belongs_to
-      attr_accessor :prefixed
+      attr_accessor :belongs_to, :prefixed
 
       class << self
-        def build(entity_or_belongs_to, type: 'has_many', name: nil)
+        def build(type: 'has_many', entity: nil, belongs_to: nil, name: nil)
           constant = Associations.const_get(type.camelize.to_sym)
-          case entity_or_belongs_to
-          when Entities::Entity
-            constant.new(Attributes::BelongsTo.new(entity_or_belongs_to, name, required: true))
-          when Attributes::Association
-            constant.new(entity_or_belongs_to)
-          end
+          belongs_to ||= Attributes::BelongsTo.new(entity:, name:, options: { required: true })
+          constant.new(belongs_to:)
         end
-      end
-
-      def initialize(belongs_to)
-        @belongs_to = belongs_to
       end
 
       def open_api_type = [{ id!: ::String }]
