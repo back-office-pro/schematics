@@ -1,0 +1,9 @@
+.col-xl-2.col-md-4
+  .card.border-0.bg-light
+    .card-body.text-center
+      = fa_icon :star, class: 'fa-lg text-secondary position-absolute top-0 start-100 translate-middle' if name == descriptor.name
+      = fa_icon icon, size: '2x', class: 'text-primary'
+      h6.pt-2 = model_class.human_attribute_name(name)
+      = @entity_fields.fields_for :virtuals, @virtual, include_id: false do |virtuals_fields|
+        = virtuals_fields.text_field :name, class: 'form-control'
+        = virtuals_fields.text_field :function, class: 'form-control'
