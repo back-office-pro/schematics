@@ -310,24 +310,24 @@
   ],
   "migrations": [
     {
-      "command": "remove_attribute",
+      "type": "remove_attribute",
       "entity": "product",
       "attribute": "description",
       "timestamp": 20230515130024
     },
     {
-      "command": "add_attribute",
+      "type": "add_attribute",
       "entity": "product",
       "attribute": "description",
       "timestamp": 20230515130024
     },
     {
-      "command": "destroy_entity",
+      "type": "destroy_entity",
       "entity": "client",
       "timestamp": 20230515130024
     },
     {
-      "command": "create_entity",
+      "type": "create_entity",
       "entity": "client",
       "timestamp": 20230515130024
     }
