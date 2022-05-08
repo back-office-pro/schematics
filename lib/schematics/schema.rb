@@ -1,34 +1,34 @@
 # frozen_string_literal: true
 
-require 'json-schema'
 require 'singleton'
+require 'active_model'
 
 module Schematics
   class Schema # rubocop:disable Metrics/ClassLength
     include ::Singleton
-    attr_reader :entities, :migrations
+    include ::ActiveModel::API
+    attr_reader :entities
 
-    SCHEMA_FILEPATH = File.expand_path('../schema.json', __dir__).freeze
     CORE_DATA_FILEPATH = File.expand_path('../core.json', __dir__).freeze
     APP_DATA_FILEPATH = ::Rails.root&.join('app.json').freeze
 
     def initialize
-      @entities = data[:entities].map { Entities::Entity.build(**_1) }
-      @migrations = data[:migrations]&.map { Migration.build(self, **_1) }
-      add_inverse_entity_to_association_attributes
-      add_has_and_belongs_to_many_associations
-      add_inverse_associations
-      add_has_many_through_associations
-      add_has_one_through_associations
-      @entities.each(&:check_for_association_name_collisions)
+      self.entities = data[:entities]
     end
 
+    def entities=(entities)
+      @entities = entities.map { Entities::Entity.build(**_1) }
+      add_associations_and_check_for_name_collisions
+    end
+
+    alias entities_attributes= entities=
+
     def find_entity_by_name(name)
-      @entities.find { _1.name == name }
+      entities.find { _1.name == name }
     end
 
     def find_attribute_by_id(id)
-      @entities
+      entities
         .flat_map(&:attributes)
         .find { _1.id == id }
     end
@@ -47,7 +47,7 @@ module Schematics
     end
 
     def sorted_entities
-      @entities
+      entities
         .sort_by(&:weight)
         .reverse
     end
@@ -59,8 +59,12 @@ module Schematics
     end
 
     def valid?
-      ::JSON::Validator.validate(SCHEMA_FILEPATH, data)
+      valid = super && entities.all?(&:valid?)
+      entities.each { errors.merge!(_1) }
+      valid
     end
+
+    private
 
     def data
       @data ||= app_data.merge(core_data) { _2 + _3 } # rubocop:disable Style/NumberedParametersLimit
@@ -78,10 +82,17 @@ module Schematics
       ::JSON.parse(File.read(APP_DATA_FILEPATH), symbolize_names: true)
     end
 
-    private
+    def add_associations_and_check_for_name_collisions
+      add_inverse_entity_to_association_attributes
+      add_has_and_belongs_to_many_associations
+      add_inverse_associations
+      add_has_many_through_associations
+      add_has_one_through_associations
+      entities.each(&:check_for_association_name_collisions)
+    end
 
     def add_inverse_entity_to_association_attributes
-      @entities
+      entities
         .flat_map(&:association_attributes)
         .reject(&:polymorphic?)
         .each do |attribute|
@@ -91,14 +102,14 @@ module Schematics
 
     # :reek:FeatureEnvy
     def add_has_and_belongs_to_many_associations
-      @entities
+      entities
         .flat_map(&:has_and_belongs_to_many_associations)
         .each do |habtm|
           find_entity_by_name(habtm.name.singularize)
             .associations
             .push(
               Associations::Association.build(
-                habtm.entity,
+                entity: habtm.entity,
                 name: habtm.entity.name,
                 type: 'has_and_belongs_to_many'
               )
@@ -107,7 +118,7 @@ module Schematics
     end
 
     def add_inverse_associations
-      @entities
+      entities
         .flat_map(&:association_attributes)
         .reject(&:polymorphic?)
         .map(&:inverse_association)
@@ -119,7 +130,7 @@ module Schematics
     end
 
     def add_has_many_through_associations
-      @entities.each do |entity|
+      entities.each do |entity|
         entity.has_many_associations.each do |parent|
           find_has_many_through_associations(entity, parent)
         end
@@ -131,13 +142,16 @@ module Schematics
       parent.entity.has_many_associations.each do |child|
         next if child.entity == parent.entity # prevent self association
 
-        entity.associations << Associations::HasManyThrough.new(child.belongs_to, parent)
+        entity.associations << Associations::HasManyThrough.new(
+          belongs_to: child.belongs_to,
+          through: parent
+        )
         find_has_many_through_associations(entity, child)
       end
     end
 
     def add_has_one_through_associations
-      @entities.each do |entity|
+      entities.each do |entity|
         entity
           .association_attributes
           .reject(&:polymorphic?)
@@ -149,7 +163,7 @@ module Schematics
       find_entity_by_name(parent.association_type).association_attributes.each do |child|
         next if child.entity == parent.entity # prevent self association
 
-        entity.associations << Associations::HasOneThrough.new(child, parent)
+        entity.associations << Associations::HasOneThrough.new(belongs_to: child, through: parent)
         find_has_one_through_associations(entity, child)
       end
     end
