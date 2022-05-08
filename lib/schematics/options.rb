@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 module Schematics
-  # :reek:Attribute
+  # :reek:Attribute :reek:InstanceVariableAssumption
   class Options
     include ::ActiveModel::API
 
     delegate :slice, :fetch, :dig, :key?, to: :options
-    attr_accessor :options
+    attr_writer :options
+
+    def options
+      @options || {}
+    end
 
     def method_missing(method_name)
       return dig(method_name) unless method_name.end_with?('?')
