@@ -8,7 +8,7 @@ module MainApp
       delegate :entity, to: :model_class, allow_nil: true, private: true
       delegate :icon, :find_field_by_name, to: :entity, allow_nil: true
       delegate :to_sql, :format, to: :entity_field, allow_nil: true
-      scope :accessible_by_role, -> { left_joins(:roles).where(roles: [_1, nil]).load_async }
+      scope :accessible_by_role, ->(role) { left_joins(:roles).where(roles: [role, nil]) }
     end
 
     def to_s

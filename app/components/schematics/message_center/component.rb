@@ -16,6 +16,7 @@ module Schematics
       def unread_count
         @unread_count ||= received_messages
                           .unread
+                          .load_async
                           .size
       end
 

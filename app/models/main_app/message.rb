@@ -18,7 +18,7 @@ module MainApp
               versions.event = 'show'
             SQL
           )
-        ).load_async
+        )
       }
     end
   end
