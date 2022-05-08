@@ -1,0 +1,8 @@
+.col-xl-2.col-md-4
+  .card.border-0.bg-light
+    .card-body.text-center
+      = fa_icon :atom, size: '2x', class: 'text-primary'
+      h6.pt-2 Trigger
+      = @entity_fields.fields_for :triggers, @trigger do |triggers_fields|
+        = triggers_fields.text_field :action, class: 'form-control'
+        = triggers_fields.text_field :callback, class: 'form-control'
