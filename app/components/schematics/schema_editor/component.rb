@@ -3,6 +3,8 @@
 module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
+      prepend ViewComponent::GlobalOutputBuffer
+
       def entities
         Schema
           .instance
