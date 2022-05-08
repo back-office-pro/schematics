@@ -1,31 +1,29 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:Attribute :reek:InstanceVariableAssumption
   class Migration
+    include ::ActiveModel::API
+
     delegate :execute, to: :command
-
-    class << self
-      def build(schema, command:, entity:, timestamp:, attribute: nil)
-        entity = schema.find_entity_by_name(entity)
-        new(command, entity, attribute, timestamp)
-      end
-    end
-
-    def initialize(command, entity, attribute, timestamp)
-      @command = command
-      @entity = entity
-      @attribute = attribute
-      @timestamp = timestamp
-    end
+    delegate :current_version,
+             to: '::ApplicationRecord.connection.migration_context',
+             private: true
+    attr_accessor :schema, :type, :attribute, :timestamp
+    attr_writer :entity
 
     def migrated?
-      @timestamp < ::ApplicationRecord.connection.migration_context.current_version
+      timestamp < current_version
     end
 
     private
 
+    def entity
+      schema.find_entity_by_name(@entity)
+    end
+
     def command
-      Commands::Command.build(command: @command, entity: @entity, attribute: @attribute)
+      Commands::Command.build(type:, entity:, attribute:)
     end
   end
 end
