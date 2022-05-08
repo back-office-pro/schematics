@@ -1,32 +1,39 @@
 # frozen_string_literal: true
 
+require 'active_record'
+
 module Schematics
   module Attributes
+    # :reek:Attribute :reek:InstanceVariableAssumption
     class Attribute
       include Behaviours::Migratable
       include Behaviours::Validatable
+      include ::ActiveModel::API
 
       delegate :hidden?, :cached?, to: :options
-      attr_reader :entity, :name, :options
+      attr_accessor :entity, :name
+      attr_writer :options
+
+      validates :name,
+                presence: true,
+                exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       class << self
-        def build(entity, name:, type:, options: {})
-          Attributes.const_get(type.camelize.to_sym).new(entity, name, options)
+        def build(type:, **kwargs)
+          Attributes.const_get(type.camelize.to_sym).new(**kwargs)
         end
-      end
-
-      def initialize(entity, name, options)
-        @entity = entity
-        @name = name
-        @options = Schematics::Options.new(options:)
       end
 
       def open_api_type = ::String
       def to_str = ''
       def weight = 1
 
+      def options
+        Schematics::Options.new(options: @options)
+      end
+
       def to_sql
-        [@entity.table_name.pluralize, @name].join('.')
+        [entity.table_name.pluralize, name].join('.')
       end
     end
   end
