@@ -19,8 +19,8 @@ module MainApp
     def entities_size
       Schematics::Schema
         .instance
-        .app_data
-        .fetch(:entities)
+        .entities
+        .reject(&:core?) # rubocop:disable Performance/Count
         .size
     end
 
