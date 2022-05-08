@@ -5,39 +5,73 @@ require 'active_support/core_ext/array/access'
 
 module Schematics
   module Entities
+    # :reek:Attribute, :reek:InstanceVariableAssumption
     class Entity # rubocop:disable Metrics/ClassLength
-      attr_reader :name, :descriptor, :actions, :attributes, :virtuals, :triggers, :associations
+      include ::ActiveModel::API
+
+      validates :name, presence: true
+      validates :attributes, presence: true
+      validates :actions, inclusion: { in: %i[index show create update destroy archive] }
+
+      attr_accessor :name
+      attr_writer :options
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
-      delegate :core?, :hidden?, to: :@options
+      delegate :core?, :hidden?, to: :options
 
       class << self
-        # :reek:LongParameterList
-        def build( # rubocop:disable Metrics/ParameterLists
-          name:,
-          type: self.name.demodulize,
-          options: {},
-          associations: [],
-          attributes: [],
-          virtuals: [],
-          triggers: []
-        )
-          Entities
-            .const_get(type.camelize.to_sym)
-            .new(name, options, associations, attributes, virtuals, triggers)
+        def build(type: 'entity', **kwargs)
+          Entities.const_get(type.camelize.to_sym).new(**kwargs)
         end
       end
 
-      # :reek:LongParameterList
-      def initialize(name, options, associations, attributes, virtuals, triggers) # rubocop:disable Metrics/ParameterLists
-        @name = name
-        @options = Schematics::Options.new(options:)
-        @actions = (@options.actions || default_actions).map(&:to_sym)
-        @associations = associations.map { Associations::Association.build(self, **_1) }
-        @attributes = attributes.map { Attributes::Attribute.build(self, **_1) }
-        @virtuals = virtuals.map { Virtuals::Virtual.build(self, **_1) }
+      def attributes=(attributes)
+        @attributes = attributes.map { Attributes::Attribute.build(entity: self, **_1) }
+      end
+
+      def virtuals=(virtuals)
+        @virtuals = virtuals.map { Virtuals::Virtual.build(entity: self, **_1) }
+      end
+
+      def triggers=(triggers)
         @triggers = triggers.map { Trigger.new(**_1) }
-        @descriptor = Descriptor.build(self, @options.descriptor)
+      end
+
+      def associations=(associations)
+        @associations = associations.map { Associations::Association.build(entity: self, **_1) }
+      end
+
+      alias attributes_attributes= attributes=
+      alias virtuals_attributes= virtuals=
+      alias triggers_attributes= triggers=
+      alias associations_attributes= associations=
+
+      def descriptor
+        Descriptor.new(entity: self, field_name: options.descriptor)
+      end
+
+      def actions
+        (options.actions || default_actions).map(&:to_sym)
+      end
+
+      def options
+        Schematics::Options.new(options: @options)
+      end
+
+      def associations
+        @associations ||= []
+      end
+
+      def attributes
+        @attributes ||= []
+      end
+
+      def virtuals
+        @virtuals ||= []
+      end
+
+      def triggers
+        @triggers ||= []
       end
 
       def method_missing(method_name, *args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -77,7 +111,7 @@ module Schematics
       end
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size
-      def fields = @attributes + @virtuals
+      def fields = attributes + virtuals
       def elements = fields + associations
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
       def to_str = ''
@@ -85,9 +119,9 @@ module Schematics
       def find_field_by_name(name)
         case name
         when 'created_at'
-          Attributes::Datetime.new(self, 'created_at', required: true)
+          Attributes::Datetime.new(entity: self, name: 'created_at')
         when 'id'
-          Attributes::Uuid.new(self, 'id', unique: true)
+          Attributes::Uuid.new(entity: self, name: 'id')
         else
           fields
             .concat(created_at_attributes)
@@ -100,8 +134,8 @@ module Schematics
       end
 
       def check_for_association_name_collisions
-        @associations.each do |association|
-          association.prefixed = @associations
+        associations.each do |association|
+          association.prefixed = associations
                                  .reject { _1 == association }
                                  .any? { _1.source == association.source }
         end
@@ -152,7 +186,7 @@ module Schematics
       end
 
       def icon
-        @options.icon&.to_sym || :square_caret_right
+        options.icon&.to_sym || :square_caret_right
       end
 
       def load
@@ -186,6 +220,12 @@ module Schematics
         RUBY
       end
 
+      def valid?
+        valid = super && (fields + triggers).all?(&:valid?)
+        (fields + triggers).each { errors.merge!(_1) }
+        valid
+      end
+
       protected
 
       def default_actions = %w[index show create update destroy archive]
@@ -213,10 +253,10 @@ module Schematics
 
       def created_at_attributes
         [
-          Attributes::Date.new(self, 'created_at/day', required: true),
-          Attributes::Week.new(self, 'created_at/week', required: true),
-          Attributes::Month.new(self, 'created_at/month', required: true),
-          Attributes::Year.new(self, 'created_at/year', required: true)
+          Attributes::Date.new(entity: self, name: 'created_at/day'),
+          Attributes::Week.new(entity: self, name: 'created_at/week'),
+          Attributes::Month.new(entity: self, name: 'created_at/month'),
+          Attributes::Year.new(entity: self, name: 'created_at/year')
         ]
       end
     end
