@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Boolean do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'toggle' }
   let(:options) { {} }
 
@@ -14,7 +14,7 @@ describe Schematics::Attributes::Boolean do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:type) { is_expected.to eq('boolean') }
+  its(:database_type) { is_expected.to eq('boolean') }
   its(:column_name) { is_expected.to eq('toggle') }
   its(:open_api_type) { is_expected.to eq('boolean') }
   its(:icon) { is_expected.to eq(:toggle_on) }

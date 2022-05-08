@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Percentage do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'import') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'import') }
   let(:name) { 'progress' }
   let(:options) { {} }
 
@@ -16,7 +16,7 @@ describe Schematics::Attributes::Percentage do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
-  its(:type) { is_expected.to eq('float') }
+  its(:database_type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('progress') }
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }

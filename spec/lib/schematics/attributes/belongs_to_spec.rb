@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::BelongsTo do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'schema',
       options: {
         descriptor: 'title'
@@ -15,7 +15,7 @@ describe Schematics::Attributes::BelongsTo do
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -40,7 +40,7 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:type) { is_expected.to eq('belongs_to') }
+  its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('schema_id') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('schema') }

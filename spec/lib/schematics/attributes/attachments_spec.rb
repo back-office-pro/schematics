@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Attachments do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'directory') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'directory') }
   let(:name) { 'files' }
   let(:options) { {} }
 
@@ -14,7 +14,7 @@ describe Schematics::Attributes::Attachments do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:type) { is_expected.to eq('attachments') }
+  its(:database_type) { is_expected.to eq('attachments') }
   its(:column_name) { is_expected.to eq('files') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:icon) { is_expected.to eq(:file_image) }

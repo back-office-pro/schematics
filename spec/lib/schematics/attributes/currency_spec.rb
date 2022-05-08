@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Currency do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'product') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'product') }
   let(:name) { 'price' }
   let(:options) { {} }
 
@@ -16,7 +16,7 @@ describe Schematics::Attributes::Currency do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
-  its(:type) { is_expected.to eq('float') }
+  its(:database_type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }

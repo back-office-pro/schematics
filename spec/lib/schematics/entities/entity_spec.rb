@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Entity do
-  subject(:entity) { described_class.build(name:, attributes:, options:) }
+  subject(:entity) { described_class.new(name:, attributes:, options:) }
 
   let(:name) { 'entity' }
   let(:options) { { core: true } }

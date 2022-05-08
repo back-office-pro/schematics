@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Descriptor do
-  subject(:descriptor) { described_class.build(entity, 'type') }
+  subject(:descriptor) { described_class.new(entity:, field_name:) }
 
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -14,6 +14,7 @@ describe Schematics::Entities::Descriptor do
       ]
     )
   end
+  let(:field_name) { 'type' }
 
   its(:joins) { is_expected.to be_empty }
   its(:serializer_class) { is_expected.to be_a(Class) }

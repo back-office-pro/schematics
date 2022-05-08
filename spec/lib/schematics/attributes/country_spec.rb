@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Country do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
   let(:name) { 'country' }
   let(:options) { {} }
 
@@ -19,7 +19,7 @@ describe Schematics::Attributes::Country do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
-  its(:type) { is_expected.to eq('string') }
+  its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('country') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:earth_europe) }

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Enum do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'product') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'product') }
   let(:name) { 'state' }
   let(:options) { { values: %w[available available_soon not_available] } }
 
@@ -15,7 +15,7 @@ describe Schematics::Attributes::Enum do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
-  its(:type) { is_expected.to eq('integer') }
+  its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('state') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:list_ol) }

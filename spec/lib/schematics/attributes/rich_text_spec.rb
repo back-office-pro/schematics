@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::RichText do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'summary' }
   let(:options) { {} }
 
@@ -16,7 +16,7 @@ describe Schematics::Attributes::RichText do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
-  its(:type) { is_expected.to eq('rich_text') }
+  its(:database_type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:preload) { is_expected.to eq(rich_text_summary: [embeds_attachments: :blob]) }

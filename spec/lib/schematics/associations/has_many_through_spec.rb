@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 describe Schematics::Associations::HasManyThrough do
-  subject(:association) { described_class.new(through, belongs_to.inverse_association) }
+  subject(:association) do
+    described_class.new(belongs_to: through, through: belongs_to.inverse_association)
+  end
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'schema',
       options: {
         descriptor: 'title'
@@ -15,7 +17,7 @@ describe Schematics::Associations::HasManyThrough do
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'attribute',
       options: {
         descriptor: 'name'
@@ -26,7 +28,7 @@ describe Schematics::Associations::HasManyThrough do
     )
   end
   let(:through_entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -37,18 +39,10 @@ describe Schematics::Associations::HasManyThrough do
     )
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.build(
-      through_entity,
-      name: 'schema',
-      type: 'belongs_to'
-    )
+    Schematics::Attributes::BelongsTo.new(entity: through_entity, name: 'schema')
   end
   let(:through) do
-    Schematics::Attributes::Attribute.build(
-      entity,
-      name: 'entity',
-      type: 'belongs_to'
-    )
+    Schematics::Attributes::BelongsTo.new(entity:, name: 'entity')
   end
 
   before do

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Timestamp do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
   let(:name) { 'reset_password_sent_at' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
 
-  its(:type) { is_expected.to eq('datetime') }
+  its(:database_type) { is_expected.to eq('datetime') }
   its(:column_name) { is_expected.to eq('reset_password_sent_at') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:validators) { is_expected.to be_empty }

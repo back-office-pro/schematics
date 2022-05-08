@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Array do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'comparison') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'comparison') }
   let(:name) { 'ids' }
   let(:options) { {} }
 
@@ -11,7 +11,7 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:type) { is_expected.to eq('string') }
+  its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ids') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:validators) { is_expected.to be_empty }

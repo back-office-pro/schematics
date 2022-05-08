@@ -3,7 +3,7 @@
 describe Schematics::Entities::Router do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user', options:, attributes:) }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user', options:, attributes:) }
   let(:options) { { actions: } }
   let(:actions) { nil }
   let(:attributes) { [] }
@@ -99,7 +99,7 @@ describe Schematics::Entities::Router do
   end
 
   context 'when entity is a singleton' do
-    let(:entity) { Schematics::Entities::Entity.build(name: 'setting', type: 'singleton') }
+    let(:entity) { Schematics::Entities::Singleton.new(name: 'setting') }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

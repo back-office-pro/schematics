@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Associations::HasAndBelongsToMany do
-  subject(:association) { described_class.new(belongs_to) }
+  subject(:association) { described_class.new(belongs_to:) }
 
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'role',
       options: {
         descriptor: 'name'
@@ -23,12 +23,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     }
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.build(
-      entity,
-      name: 'permission',
-      type: 'belongs_to',
-      options:
-    )
+    Schematics::Attributes::BelongsTo.new(entity:, name: 'permission', options:)
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }

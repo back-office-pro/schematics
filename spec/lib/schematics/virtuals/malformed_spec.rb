@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Virtuals::Malformed do
-  subject(:virtual) { described_class.build(entity, name:, function:, options:) }
+  subject(:virtual) { described_class.new(entity:, name:, function:, options:) }
 
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'product',
       options: {
         descriptor: 'full_name'
@@ -23,7 +23,6 @@ describe Schematics::Virtuals::Malformed do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   its(:open_api_type) { is_expected.to eq(String) }
-  its(:function) { is_expected.to eq('raise ArgumentError') }
   its(:to_sql) { is_expected.to eq("products.in_stock = 'true'") }
   its(:preload) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:triangle_exclamation) }

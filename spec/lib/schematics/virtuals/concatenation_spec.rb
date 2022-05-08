@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Virtuals::Concatenation do
-  subject(:virtual) { described_class.build(entity, name:, function:, options:) }
+  subject(:virtual) { described_class.new(entity:, name:, function:, options:) }
 
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'user',
       options: {
         descriptor: 'full_name'
@@ -28,10 +28,6 @@ describe Schematics::Virtuals::Concatenation do
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:weight) { is_expected.to eq(1) }
-
-  its(:function) do
-    is_expected.to eq("\"\#{first_name_formatted} \#{profile.last_name_formatted}\"")
-  end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
