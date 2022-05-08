@@ -9,6 +9,8 @@ module Schematics
         self.class.name.demodulize.underscore
       end
 
+      alias database_type type
+
       def id
         [entity.table_name, name].join('_')
       end

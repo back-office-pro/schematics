@@ -9,7 +9,7 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Enumerable
 
-      def type = 'integer'
+      def database_type = 'integer'
       def collection = super.sort
       def icon = :list_ol
 

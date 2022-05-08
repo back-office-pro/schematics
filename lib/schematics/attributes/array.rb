@@ -6,7 +6,7 @@ module Schematics
       include Behaviours::Fillable
 
       def open_api_type = [::String]
-      def type = 'string'
+      def database_type = 'string'
       def default = []
       def icon = :table
 

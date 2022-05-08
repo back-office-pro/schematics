@@ -10,7 +10,7 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
-      def type = 'float'
+      def database_type = 'float'
       def open_api_type = ::Float
     end
   end

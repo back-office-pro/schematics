@@ -5,7 +5,7 @@ module Schematics
     class Citext < Text
       include Behaviours::Listable
 
-      def type = 'citext'
+      def database_type = 'citext'
       def case_sensitive? = false
       def icon = :align_justify
     end
