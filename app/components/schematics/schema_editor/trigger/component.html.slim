@@ -1,8 +1,12 @@
 .col-xl-2.col-md-4
-  .card.border-0.bg-light
-    .card-body.text-center
-      = fa_icon :atom, size: '2x', class: 'text-primary'
-      h6.pt-2 Trigger
-      = @entity_fields.fields_for :triggers, @trigger do |triggers_fields|
-        = triggers_fields.text_field :action, class: 'form-control'
-        = triggers_fields.text_field :callback, class: 'form-control'
+  .card.border-0.shadow-sm
+    .card-body
+      .text-center
+        = fa_icon :atom, size: '2x', class: 'text-primary'
+        h6.pt-2 Trigger
+      = @entities_form.simple_fields_for :triggers, @trigger do |triggers_form|
+        = triggers_form.input :action,
+                              as: :select,
+                              collection: actions,
+                              input_html: { data: { controller: 'dropdown' } }
+        = triggers_form.input :callback

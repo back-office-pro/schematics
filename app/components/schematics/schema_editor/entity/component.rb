@@ -5,7 +5,7 @@ module Schematics
     module Entity
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
-        delegate :table_name, :attributes, :virtuals, :triggers, to: :@entity
+        delegate :table_name, :attributes, :virtuals, :triggers, :options, to: :@entity
         with_collection_parameter :entity
 
         def initialize(entity:, entity_counter:, form:)
@@ -20,7 +20,9 @@ module Schematics
         end
 
         def actions
-          %w[index show create update destroy archive]
+          @entity
+            .__send__(:default_actions)
+            .map { [t("activerecord.attributes.permission.actions.#{_1}"), _1] }
         end
 
         def icons

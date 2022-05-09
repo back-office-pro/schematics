@@ -12,6 +12,3 @@ ul.nav.nav-tabs.border-0 role='tablist'
         class=('active' if index.zero?)
       }
         = render Schematics::CardHeading::Component.new(icon: entity.icon, title: entity.model_class.human_name.pluralize.titleize)
-  li.nav-item role='presentation'
-    a.nav-link.border-0 type='button' role='tab'
-      = fa_icon :add, class: 'fa-lg'

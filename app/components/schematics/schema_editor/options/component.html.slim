@@ -1,0 +1,5 @@
+= @form.simple_fields_for :options, options do |options_form|
+  .row
+    - available_options.each do |key, value|
+      .col
+        = options_form.input key, as: value

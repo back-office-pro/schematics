@@ -5,14 +5,15 @@ module Schematics
     module Attribute
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
-        delegate :name, :type, :icon, :unique?, :required?, to: :@attribute
-        delegate :model_class, :descriptor, to: :@entity
+        delegate :name, :type, :icon, :options, to: :@attribute
+        delegate :model_class, to: :@entity
+        delegate :human_attribute_name, to: :model_class
         with_collection_parameter :attribute
 
-        def initialize(attribute:, entity_fields:, entity:)
+        def initialize(attribute:, entities_form:, entity:)
           super
           @attribute = attribute
-          @entity_fields = entity_fields
+          @entities_form = entities_form
           @entity = entity
         end
 

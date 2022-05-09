@@ -8,11 +8,15 @@ module Schematics
         delegate :action, :callback, to: :@trigger
         with_collection_parameter :trigger
 
-        def initialize(trigger:, entity_fields:, entity:)
+        def initialize(trigger:, entities_form:, entity:)
           super
           @trigger = trigger
-          @entity_fields = entity_fields
+          @entities_form = entities_form
           @entity = entity
+        end
+
+        def actions
+          %w[save create update destroy]
         end
       end
     end

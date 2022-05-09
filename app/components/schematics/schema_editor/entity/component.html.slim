@@ -1,22 +1,18 @@
 .tab-pane.fade id=table_name role='tabpanel' aria-labelledby="#{table_name}-tab" class=css_classes
-  = @form.fields_for :entities, @entity, include_id: false do |entity_fields|
-    = entity_fields.text_field :name, value: @entity.name, class: 'form-control'
-    = entity_fields.fields_for :options do |option_fields|
-      = option_fields.select :actions,
-                              options_for_select(actions, @entity.actions),
-                              { include_hidden: false },
-                              class: 'form-control border-0 p-2',
-                              multiple: true,
-                              data: { controller: 'dropdown' }
-      - icons.each do |icon|
-        .form-check.d-inline-block.me-2
-          = option_fields.radio_button :icon, icon, checked: icon == @entity.icon, class: 'form-check-input'
-          = option_fields.label :"icon_#{icon}", fa_icon(icon), class: 'form-check-label'
-    .row.g-3.pt-3
-      = render Schematics::SchemaEditor::Attribute::Component.with_collection(attributes, entity_fields:, entity: @entity)
-      = render Schematics::SchemaEditor::Virtual::Component.with_collection(virtuals, entity_fields:, entity: @entity)
-      = render Schematics::SchemaEditor::Trigger::Component.with_collection(triggers, entity_fields:, entity: @entity)
-      .col-xl-2.col-md-4
-        .card.border-0.bg-light
-          .card-body.text-center
-            = fa_icon :add, size: '2x'
+  = @form.simple_fields_for :entities, @entity, include_id: false do |entities_form|
+    = entities_form.input :name, hint: 'Must be in english'
+    = entities_form.simple_fields_for :options, options do |options_form|
+      = options_form.input :actions,
+                            as: :select,
+                            collection: actions,
+                            selected: @entity.actions,
+                            include_hidden: false,
+                            input_html: { multiple: true, data: { controller: 'dropdown' } }
+      = options_form.input :icon,
+                            as: :select,
+                            collection: icons,
+                            input_html: { data: { controller: 'dropdown' } }
+    .row.g-3
+      = render Schematics::SchemaEditor::Attribute::Component.with_collection(attributes, entities_form:, entity: @entity)
+      = render Schematics::SchemaEditor::Virtual::Component.with_collection(virtuals, entities_form:, entity: @entity)
+      = render Schematics::SchemaEditor::Trigger::Component.with_collection(triggers, entities_form:, entity: @entity)

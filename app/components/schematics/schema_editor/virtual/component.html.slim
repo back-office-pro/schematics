@@ -1,9 +1,10 @@
 .col-xl-2.col-md-4
-  .card.border-0.bg-light
-    .card-body.text-center
-      = fa_icon :star, class: 'fa-lg text-secondary position-absolute top-0 start-100 translate-middle' if name == descriptor.name
-      = fa_icon icon, size: '2x', class: 'text-primary'
-      h6.pt-2 = model_class.human_attribute_name(name)
-      = @entity_fields.fields_for :virtuals, @virtual, include_id: false do |virtuals_fields|
-        = virtuals_fields.text_field :name, class: 'form-control'
-        = virtuals_fields.text_field :function, class: 'form-control'
+  .card.border-0.shadow-sm
+    .card-body
+      .text-center
+        = fa_icon icon, size: '2x', class: 'text-primary'
+        h6.pt-2 = human_attribute_name(name)
+      = @entities_form.simple_fields_for :virtuals, @virtual, include_id: false do |virtuals_form|
+        = virtuals_form.input :name
+        = virtuals_form.input :function
+        = render Schematics::SchemaEditor::Options::Component.new(field: @virtual, form: virtuals_form)

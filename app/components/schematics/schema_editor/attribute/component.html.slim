@@ -1,16 +1,13 @@
 .col-xl-2.col-md-4
-  .card.border-0.bg-light
-    .card-body.text-center
-      = fa_icon :star, class: 'fa-lg text-secondary position-absolute top-0 start-100 translate-middle' if name == descriptor.name
-      = fa_icon icon, size: '2x', class: 'text-primary'
-      h6.pt-2 = model_class.human_attribute_name(name)
-      = @entity_fields.fields_for :attributes, @attribute, include_id: false do |attributes_fields|
-        = attributes_fields.text_field :name, class: 'form-control'
-        = attributes_fields.select :type, options_for_select(types, type), {}, class: 'form-control', data: { controller: 'dropdown' }
-        = attributes_fields.fields_for :options do |options_fields|
-          .form-check.form-switch
-            = options_fields.check_box :unique, { class: 'form-check-input', checked: unique? }, true, false
-            = options_fields.label :unique, 'Unique', class: 'form-check-label'
-          .form-check.form-switch
-            = options_fields.check_box :required, { class: 'form-check-input', checked: required? }, true, false
-            = options_fields.label :required, 'Requis', class: 'form-check-label'
+  .card.border-0.shadow-sm
+    .card-body
+      .text-center
+        = fa_icon icon, size: '2x', class: 'text-primary'
+        h6.pt-2 = human_attribute_name(name)
+      = @entities_form.simple_fields_for :attributes, @attribute, include_id: false do |attributes_form|
+        = attributes_form.input :name
+        = attributes_form.input :type,
+                                as: :select,
+                                collection: types,
+                                input_html: { data: { controller: 'dropdown' } }
+        = render Schematics::SchemaEditor::Options::Component.new(field: @attribute, form: attributes_form)
