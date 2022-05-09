@@ -9,9 +9,11 @@ module Schematics
     class Entity # rubocop:disable Metrics/ClassLength
       include ::ActiveModel::API
 
-      validates :name, presence: true
       validates :attributes, presence: true
       validates :actions, inclusion: { in: %i[index show create update destroy archive] }
+      validates :name,
+                presence: true,
+                exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       attr_accessor :name
       attr_writer :options
@@ -74,11 +76,13 @@ module Schematics
         @triggers ||= []
       end
 
-      def method_missing(method_name, *args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def method_missing(method_name, *_args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         predicate = non ? :reject_is_a? : :select_is_a?
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
+        return super unless mod || constant
+
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           public_send(method.to_sym)
             .public_send(predicate, Schematics.const_get(mod).const_get(constant))
@@ -96,18 +100,17 @@ module Schematics
               .public_send(predicate, Behaviours.const_get(constant))
               .reject(&:hidden?)
           end
-        else
-          super
         end
       end
 
-      def respond_to_missing?(method_name, *args) # rubocop:disable Metrics/CyclomaticComplexity
+      def respond_to_missing?(method_name, *_args) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         _non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
+        return super unless mod || constant
+
         (Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)) ||
-          Behaviours.const_defined?(constant) ||
-          super
+          Behaviours.const_defined?(constant)
       end
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size
