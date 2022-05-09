@@ -1,0 +1,7 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/trigger:
+        action: Action
+        callback: Callback

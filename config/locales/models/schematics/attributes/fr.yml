@@ -1,6 +1,10 @@
 ---
 fr:
   activemodel:
+    attributes:
+      schematics/attributes/attribute:
+        name: Nom
+        type: Type
     models:
       schematics/attributes/action: Action
       schematics/attributes/address: Adresse

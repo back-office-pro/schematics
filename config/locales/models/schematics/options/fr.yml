@@ -1,0 +1,40 @@
+---
+fr:
+  activemodel:
+    attributes:
+      schematics/options:
+        actions: Actions
+        aspect_ratio: Ratio d'aspect
+        cached: En cache
+        confirm: Confirmation
+        content_type: Type de contenu
+        default: Valeur par défaut
+        depends_on: Dépend de
+        encrypted: Encrypté
+        equal_to: Egal à
+        events: Evènements
+        greater_than: Greater than
+        greater_than_or_equal_to: Greater than or equal to
+        height: Hauteur
+        hidden: Caché
+        icon: Icône
+        inverse: Inverse
+        length: Length
+        less_than: Less than
+        less_than_or_equal_to: Less than or equal to
+        limit: Limit
+        max: Max
+        min: Min
+        other_than: Other than
+        polymorphic: Polymorphic
+        precision: Precision
+        readonly: Readonly
+        required: Requis
+        scale: Scale
+        size: Size
+        type: Type
+        unique: Unique
+        unit: Unit
+        values: Values
+        width: Width
+        without_core: Without core

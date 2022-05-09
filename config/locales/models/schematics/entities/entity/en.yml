@@ -1,0 +1,6 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/entities/entity:
+        name: Name
