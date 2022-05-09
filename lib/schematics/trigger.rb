@@ -5,7 +5,8 @@ module Schematics
   class Trigger
     include ::ActiveModel::API
 
-    validates :action, presence: true
+    validates :callback, presence: true
+    validates :action, presence: true, inclusion: { in: %w[create save destroy] }
     attr_accessor :action, :callback
 
     def method_name = "after_#{action}"
