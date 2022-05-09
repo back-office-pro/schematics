@@ -16,6 +16,7 @@ module Schematics
       attr_accessor :entity, :name, :function
       attr_writer :options
 
+      validates :function, presence: true
       validates :name,
                 presence: true,
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
