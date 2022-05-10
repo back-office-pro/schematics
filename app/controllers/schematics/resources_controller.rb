@@ -59,11 +59,7 @@ module Schematics
     def show
       respond_to do |format|
         format.json { render json: @resource }
-        format.html do
-          @pagy, @versions = pagy(
-            Version.timeline(current_ability, @resource.versions.includes(item: entity.includes))
-          )
-        end
+        format.html
         format.pdf do
           GeneratePdfJob.perform_later(current_user.id, model_class.to_s, @resource.id)
           head :accepted

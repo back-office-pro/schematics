@@ -19,4 +19,4 @@
                   nonce: content_security_policy_nonce,
                   download: { filename: @resource.filename },
                   dataset: { borderWidth: @resource.border_width }
-= render Schematics::Viewer::Timeline::Component.new(versions: @versions, pagy: @pagy)
+= render Schematics::Viewer::Timeline::Component.new(resource: @resource)

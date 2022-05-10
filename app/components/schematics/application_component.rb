@@ -3,6 +3,7 @@
 module Schematics
   class ApplicationComponent < ViewComponent::Base
     include ViewComponent::Translatable
+    include Pagy::Backend
     include Turbo::StreamsHelper
     include Turbo::FramesHelper
     include ApplicationHelper
