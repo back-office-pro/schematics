@@ -3,13 +3,14 @@
 module Schematics
   module NotificationCenter
     class Component < ApplicationComponent
+      VERSIONS_LIMIT = 10
       delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :read_notifications_at, :preferences, to: :current_user
 
       def versions
         @versions ||= Version
                       .timeline(current_ability)
-                      .limit(10)
+                      .limit(VERSIONS_LIMIT)
       end
 
       def unread_count
