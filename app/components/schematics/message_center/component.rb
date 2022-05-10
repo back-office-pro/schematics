@@ -3,6 +3,7 @@
 module Schematics
   module MessageCenter
     class Component < ApplicationComponent
+      MESSAGES_LIMIT = 10
       delegate :received_messages, to: :current_user
 
       def messages
@@ -10,7 +11,7 @@ module Schematics
                       .with_rich_text_content_and_embeds
                       .with_author_avatar
                       .order(created_at: :desc)
-                      .limit(10)
+                      .limit(MESSAGES_LIMIT)
       end
 
       def unread_count
