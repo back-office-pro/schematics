@@ -6,6 +6,7 @@ module MainApp
 
     PASSWORD_RESET_TOKEN_DURATION = 2.hours.freeze
     SEARCH_HISTORY_LIMIT = 5
+    TYPEAHEAD_HISTORY_LIMIT = 5
 
     prepended do
       after_create { Schematics::UserMailer.new_account(self).deliver_later }
@@ -54,7 +55,7 @@ module MainApp
       searches
         .where(model:, query: nil)
         .order(created_at: :desc)
-        .limit(SEARCH_HISTORY_LIMIT)
+        .limit(TYPEAHEAD_HISTORY_LIMIT)
         .load_async
         .pluck(:filters)
         .pluck(name)
