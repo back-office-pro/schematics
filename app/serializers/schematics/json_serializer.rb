@@ -6,6 +6,8 @@ module Schematics
 
     included do
       attribute :id unless entity.is_a?(Entities::Singleton)
+      attribute :_metadata, if: :metadata?
+
       entity.renderable_elements.stable_sort_by(&:weight).each do |element|
         case element
         when Attributes::Attachment, Attributes::RichText
@@ -22,6 +24,14 @@ module Schematics
       end
     end
 
+    def _metadata
+      {
+        icon: self.class.entity.icon.to_s.dasherize,
+        descriptor: self.class.entity.descriptor.name.camelize(:lower),
+        url: Rails.application.routes.url_helpers.polymorphic_path(object)
+      }
+    end
+
     class_methods do
       delegate :entity, to: :model_class
 
@@ -32,6 +42,10 @@ module Schematics
 
     def show?
       instance_options[:template] == 'show'
+    end
+
+    def metadata?
+      instance_options[:metadata]
     end
   end
 end
