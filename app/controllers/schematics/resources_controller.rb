@@ -10,6 +10,8 @@ module Schematics
     include Calendarable
     include Documentable
 
+    AUTOCOMPLETE_LIMIT = 5
+
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_breadcrumb
     before_action :read!, only: :show
@@ -56,8 +58,12 @@ module Schematics
 
     def show
       respond_to do |format|
-        format.html
         format.json { render json: @resource }
+        format.html do
+          @pagy, @versions = pagy(
+            Version.timeline(current_ability, @resource.versions.includes(item: entity.includes))
+          )
+        end
         format.pdf do
           GeneratePdfJob.perform_later(current_user.id, model_class.to_s, @resource.id)
           head :accepted
@@ -214,7 +220,7 @@ module Schematics
       authorize! :index, model_class
       field = params.require(:field).to_sym
       @resources = model_class.search(**search_params.merge(select: field, load: false))
-      render json: @resources.limit(5).map(&field).map(&:to_s).uniq
+      render json: @resources.limit(AUTOCOMPLETE_LIMIT).map(&field).map(&:to_s).uniq
     end
 
     def view_assigns

@@ -1,5 +1,4 @@
 - breadcrumb title, polymorphic_path(@resource)
-- versions = Schematics::Version.timeline(current_ability, @resource.versions.includes(item: entity.includes))
 .card.shadow-sm.border-0
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     .row.align-items-center
@@ -16,14 +15,4 @@
     = render Schematics::ResourceDetails::Component.new(resource: @resource, editable: true)
 = render Schematics::Viewer::RichText::Component.with_collection(entity.rich_text_attributes, resource: @resource)
 = render Schematics::Viewer::Association::Component.with_collection(resource_associations(resource: @resource))
-- if versions.any?
-  .row.justify-content-center.mt-4
-    .col-xl-9.col-md-12.position-relative
-      ul.timeline.list-unstyled
-        - versions.each do |version|
-          li
-            .timeline-icon.bg-primary
-              = fa_icon version.icon, size: '2x', class: 'text-light'
-            .card.border-0
-              .card-body.p-3
-                = render Schematics::VersionPreview::Component.new(version:)
+= render Schematics::Viewer::Timeline::Component.new(versions: @versions, pagy: @pagy)
