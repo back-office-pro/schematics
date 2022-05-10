@@ -26,7 +26,7 @@ export default class extends ApplicationController {
     Turbo.visit(url)
   }
 
-  suggestionTemplate ({ data, descriptor, icon, url }) {
+  suggestionTemplate ({ Metadata: { descriptor, icon, url }, ...data }) {
     return `
       <li class="list-group-item list-group-item-action p-2 border-0 text-start text-truncate" data-action="mousedown->search-bar#selectItem" data-search-bar-url-param="${url}" role="button">
         <i class="fa fa-${icon} text-secondary fa-fw me-2"></i>
@@ -100,15 +100,9 @@ export default class extends ApplicationController {
         this.resultsTarget.innerHTML = this.pendingTemplate()
         const response = await this.fetchAPI(this.url)
         const results = await response.json()
-        if (Object.keys(results).length === 0) {
-          this.resultsTarget.innerHTML = this.notFoundTemplate()
-        } else {
-          this.resultsTarget.innerHTML = Object
-            .values(results)
-            .flat()
-            .map(this.suggestionTemplate.bind(this))
-            .join('')
-        }
+        this.resultsTarget.innerHTML = (results.length === 0)
+          ? this.notFoundTemplate()
+          : results.map(this.suggestionTemplate.bind(this)).join('')
       }
     } else {
       this.clearResults()

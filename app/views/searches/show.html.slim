@@ -6,4 +6,4 @@
     .card-body.text-center.p-3
       = render Schematics::EmptyResource::Component.new(suggestions: @suggestions)
 - else
-  = render Schematics::Viewer::Association::Component.with_collection(@results.values, collapsed: false, highlight: @resource.query)
+  = render Schematics::Viewer::Association::Component.with_collection(@results, collapsed: false, highlight: @resource.query)
