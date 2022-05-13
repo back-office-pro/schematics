@@ -14,10 +14,10 @@
     "file-saver": "2.0.5",
     "flag-icons": "6.3.0",
     "jquery": "3.6.0",
-    "puppeteer": "14.0.0",
+    "puppeteer": "14.1.0",
     "slim-select": "1.27.1",
     "sortablejs": "1.15.0",
-    "swagger-ui-dist": "4.11.0",
+    "swagger-ui-dist": "4.11.1",
     "swagger-ui-themes": "3.0.1",
     "timeago.js": "4.0.2"
   }
