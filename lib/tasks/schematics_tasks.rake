@@ -10,7 +10,7 @@ namespace :schematics do
     Schematics::Schema
       .instance
       .sorted_entities
-      .map(&Schematics::Commands::CreateEntity.method(:new))
+      .map { |entity| Schematics::Commands::CreateEntity.new(entity:) }
       .flat_map(&:execute)
       .each(&method(:system))
   end
