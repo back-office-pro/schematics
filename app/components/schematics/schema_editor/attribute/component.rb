@@ -5,6 +5,7 @@ module Schematics
     module Attribute
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
+
         delegate :name, :type, :icon, :options, to: :@attribute
         delegate :model_class, to: :@entity
         delegate :human_attribute_name, to: :model_class

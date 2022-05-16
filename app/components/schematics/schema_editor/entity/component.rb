@@ -5,6 +5,7 @@ module Schematics
     module Entity
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
+
         delegate :table_name, :attributes, :virtuals, :triggers, :options, to: :@entity
         with_collection_parameter :entity
 

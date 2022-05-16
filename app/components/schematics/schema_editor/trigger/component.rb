@@ -5,6 +5,7 @@ module Schematics
     module Trigger
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
+
         delegate :action, :callback, to: :@trigger
         with_collection_parameter :trigger
 

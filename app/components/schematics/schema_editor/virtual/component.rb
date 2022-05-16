@@ -5,6 +5,7 @@ module Schematics
     module Virtual
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
+
         delegate :name, :icon, :function, to: :@virtual
         delegate :model_class, to: :@entity
         delegate :human_attribute_name, to: :model_class
