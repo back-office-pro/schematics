@@ -5,7 +5,7 @@ require 'arel'
 module Schematics
   module Virtuals
     class Concatenation < Virtual
-      def icon = :align_justif
+      def icon = :align_justify
 
       def to_sql
         ::Arel.sql("CONCAT(#{super.join(', ')})")

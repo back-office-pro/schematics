@@ -9,10 +9,6 @@ module Schematics
         super.join
       end
 
-      def icon
-        :triangle_exclamation
-      end
-
       protected
 
       def method_body
