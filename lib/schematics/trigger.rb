@@ -6,6 +6,8 @@ module Schematics
     include ::ActiveModel::API
     attr_accessor :action, :callback
 
+    def method_name = "after_#{action}"
+
     def to_str
       case [action, callback]
       in ['create', *] | ['save', *] | ['destroy', *]
@@ -29,10 +31,6 @@ module Schematics
           end
         RUBY
       end
-    end
-
-    def method_name
-      "after_#{action}"
     end
 
     private
