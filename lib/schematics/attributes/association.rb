@@ -15,16 +15,12 @@ module Schematics
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
-      def open_api_type
-        { id!: ::String }
-      end
+      def open_api_type = { id!: ::String }
+      def column_name = "#{super}_id"
+      def weight = 2
 
       def options_for_migration
         super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
-      end
-
-      def column_name
-        "#{super}_id"
       end
 
       def class_name
@@ -89,10 +85,6 @@ module Schematics
           .all
           .map { [_1.to_s, _1.id] }
           .sort
-      end
-
-      def weight
-        2
       end
 
       protected

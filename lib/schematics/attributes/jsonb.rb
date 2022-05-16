@@ -7,16 +7,11 @@ module Schematics
       include Behaviours::Renderable
       delegate :default, to: :options
 
-      def open_api_type
-        {}
-      end
+      def open_api_type = {}
+      def icon = :table
 
       def permitted_params
         { super => {} }
-      end
-
-      def icon
-        :table
       end
 
       protected

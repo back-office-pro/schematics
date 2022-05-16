@@ -6,16 +6,11 @@ module Schematics
     class Color < String
       REGEX = /\A#(?:\h{3}){1,2}\z/
 
+      def default = '#000000'
+      def icon = :palette
+
       def validators
         super.merge(allow_blank:, format: { with: REGEX, message: :color })
-      end
-
-      def default
-        '#000000'
-      end
-
-      def icon
-        :palette
       end
     end
   end

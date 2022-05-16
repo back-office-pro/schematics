@@ -8,16 +8,14 @@ module Schematics
       include ActionView::Helpers::TranslationHelper
       include ActionView::Helpers::NumberHelper
 
+      def group_method = :group
+
       def format(value)
         value
       end
 
       def method_name
         [entity.class_name, name].join('#')
-      end
-
-      def group_method
-        :group
       end
     end
   end

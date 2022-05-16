@@ -3,27 +3,16 @@
 module Schematics
   module Attributes
     class Attachments < Attachment
-      def open_api_type
-        [super]
-      end
+      def open_api_type = [super]
+      def default = [super]
+      def json_default = [super]
+      def permitted_json_params = permitted_params
 
       def permitted_params
         [
           { super.first => [] },
           super.second
         ]
-      end
-
-      def permitted_json_params
-        permitted_params
-      end
-
-      def default
-        [super]
-      end
-
-      def json_default
-        [super]
       end
 
       def search_data

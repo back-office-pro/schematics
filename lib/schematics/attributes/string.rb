@@ -5,9 +5,8 @@ module Schematics
     class String < Text
       include Behaviours::Listable
 
-      def type
-        'string'
-      end
+      def type = 'string'
+      def icon = :align_justify
 
       def validators
         super.merge(
@@ -17,10 +16,6 @@ module Schematics
             is: options.length
           }
         )
-      end
-
-      def icon
-        :align_justify
       end
 
       protected

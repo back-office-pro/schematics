@@ -30,12 +30,11 @@ module Schematics
         @belongs_to = belongs_to
       end
 
+      def open_api_type = [{ id!: ::String }]
+      def weight = 3
+
       def type
         self.class.name.demodulize.underscore
-      end
-
-      def open_api_type
-        [{ id!: ::String }]
       end
 
       def name
@@ -58,10 +57,6 @@ module Schematics
                   class_name: '#{class_name}',
                   foreign_key: '#{column_name}'
         RUBY
-      end
-
-      def weight
-        3
       end
     end
   end

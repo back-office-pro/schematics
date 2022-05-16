@@ -5,6 +5,8 @@ require 'arel'
 module Schematics
   module Virtuals
     class Concatenation < Virtual
+      def icon = :align_justify
+
       def function
         tokens.map(&:to_str).join.to_json
       end
@@ -19,10 +21,6 @@ module Schematics
           .concat <<~RUBY
             #{name}&.to_s
           RUBY
-      end
-
-      def icon
-        :align_justify
       end
     end
   end

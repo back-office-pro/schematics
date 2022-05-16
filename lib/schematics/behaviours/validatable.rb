@@ -7,13 +7,8 @@ module Schematics
     module Validatable
       delegate :unique?, :required?, to: :options
 
-      def allow_blank
-        !required?
-      end
-
-      def case_sensitive?
-        true
-      end
+      def allow_blank = !required?
+      def case_sensitive? = true
 
       def validators
         Schematics::Validators.new(

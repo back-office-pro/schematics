@@ -3,9 +3,7 @@
 module Schematics
   module Attributes
     class Datetime < Date
-      def open_api_type
-        ::DateTime
-      end
+      def open_api_type = ::DateTime
 
       def format(value)
         value && localize(value, format: :long)

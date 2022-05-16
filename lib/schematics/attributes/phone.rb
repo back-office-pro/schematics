@@ -4,12 +4,11 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Phone < String
+      def encrypted? = true
+      def icon = :phone
+
       def validators
         super.merge(phone: { allow_blank: })
-      end
-
-      def encrypted?
-        true
       end
 
       def default
@@ -20,10 +19,6 @@ module Schematics
 
       def format(value)
         value && number_to_phone(value)
-      end
-
-      def icon
-        :phone
       end
     end
   end

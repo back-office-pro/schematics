@@ -76,6 +76,12 @@ module Schematics
           super
       end
 
+      def weight = has_many_and_through_and_belongs_to_many_associations.size
+      def fields = @attributes + @virtuals
+      def elements = fields + associations
+      def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
+      def to_str = ''
+
       def find_field_by_name(name)
         case name
         when 'created_at'
@@ -99,22 +105,6 @@ module Schematics
                                  .reject { _1 == association }
                                  .any? { _1.source == association.source }
         end
-      end
-
-      def weight
-        has_many_and_through_and_belongs_to_many_associations.size
-      end
-
-      def fields
-        @attributes + @virtuals
-      end
-
-      def elements
-        fields + associations
-      end
-
-      def renderable_with_created_ats_fields
-        renderable_fields + created_at_attributes
       end
 
       def permitted_params
@@ -196,19 +186,10 @@ module Schematics
         RUBY
       end
 
-      def to_str
-        ''
-      end
-
       protected
 
-      def default_actions
-        %w[index show create update destroy archive]
-      end
-
-      def model_elements
-        [self, descriptor, search_data] + triggers + elements + validators
-      end
+      def default_actions = %w[index show create update destroy archive]
+      def model_elements = [self, descriptor, search_data] + triggers + elements + validators
 
       def search_data_elements
         searchable_elements

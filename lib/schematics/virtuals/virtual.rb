@@ -30,9 +30,8 @@ module Schematics
         @options = Schematics::Options.new(options:)
       end
 
-      def open_api_type
-        ::String
-      end
+      def open_api_type = ::String
+      def weight = 1
 
       def function
         @tokens.map(&:value).join
@@ -68,10 +67,6 @@ module Schematics
             e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
           end
         RUBY
-      end
-
-      def weight
-        1
       end
     end
   end

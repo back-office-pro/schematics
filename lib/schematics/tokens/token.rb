@@ -25,13 +25,8 @@ module Schematics
         @value = value
       end
 
-      def to_sql
-        @value
-      end
-
-      def to_str
-        @value
-      end
+      def to_sql = @value
+      def to_str = @value
     end
   end
 end

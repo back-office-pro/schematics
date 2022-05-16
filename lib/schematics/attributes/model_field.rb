@@ -7,6 +7,9 @@ module Schematics
       include Behaviours::Enumerable
       delegate :depends_on, to: :options
 
+      def collection = super.sort
+      def icon = :code
+
       def format(value)
         return unless value
 
@@ -25,19 +28,9 @@ module Schematics
           .map(&:method_name)
       end
 
-      def collection
-        super.sort
-      end
-
-      def icon
-        :code
-      end
-
       private
 
-      def field_type
-        options.type || 'renderable_with_created_ats'
-      end
+      def field_type = options.type || 'renderable_with_created_ats'
     end
   end
 end

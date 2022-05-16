@@ -7,13 +7,8 @@ module Schematics
     class Uuid < Attribute
       include Behaviours::Renderable
 
-      def unique?
-        true
-      end
-
-      def default
-        SecureRandom.uuid
-      end
+      def unique? = true
+      def default = SecureRandom.uuid
     end
   end
 end

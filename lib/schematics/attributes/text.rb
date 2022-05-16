@@ -10,20 +10,15 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Encryptable
 
+      def default = SecureRandom.base58
+      def icon = :font
+
       def search_data
         super
           .concat(' ')
           .concat <<~RUBY
             #{name}&.to_s
           RUBY
-      end
-
-      def default
-        SecureRandom.base58
-      end
-
-      def icon
-        :font
       end
 
       def format(value)

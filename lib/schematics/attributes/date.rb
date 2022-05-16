@@ -12,9 +12,9 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
 
-      def open_api_type
-        ::Date
-      end
+      def open_api_type = ::Date
+      def group_method = :group_by_day
+      def icon = :calendar_days
 
       def to_sql
         super.split('/').first
@@ -37,14 +37,6 @@ module Schematics
       def default
         return ::Time.zone.today.to_fs(:db) if options.less_than
         return ::Time.zone.tomorrow.to_fs(:db) if options.greater_than
-      end
-
-      def group_method
-        :group_by_day
-      end
-
-      def icon
-        :calendar_days
       end
 
       protected

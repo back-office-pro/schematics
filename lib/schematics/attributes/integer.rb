@@ -10,9 +10,7 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
-      def open_api_type
-        ::Integer
-      end
+      def open_api_type = ::Integer
 
       def validators
         super.merge(numericality: { only_integer: true })

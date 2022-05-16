@@ -6,6 +6,9 @@ module Schematics
     class Model < String
       include Behaviours::Enumerable
 
+      def collection = super.sort
+      def icon = :project_diagram
+
       def format(value)
         value
           &.safe_constantize
@@ -19,14 +22,6 @@ module Schematics
           .entities
           .reject(&entity_type)
           .map(&:class_name)
-      end
-
-      def collection
-        super.sort
-      end
-
-      def icon
-        :project_diagram
       end
 
       private

@@ -6,19 +6,14 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class UserAgent < String
+      def encrypted? = true
+      def icon = :computer
+
       def format(value)
         return unless value
 
         browser = Browser.new(value)
         [browser.name, browser.version, browser.platform.name].join(' ')
-      end
-
-      def encrypted?
-        true
-      end
-
-      def icon
-        :computer
       end
     end
   end

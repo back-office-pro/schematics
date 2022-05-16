@@ -12,6 +12,9 @@ module Schematics
       /x
       delegate :confirm?, to: :options
 
+      def default = 'Azerty1!'
+      def icon = :key
+
       def permitted_params
         [super, :"#{super}_confirmation"]
       end
@@ -32,14 +35,6 @@ module Schematics
         <<~RUBY
           has_secure_password :#{name}, validations: false
         RUBY
-      end
-
-      def default
-        'Azerty1!'
-      end
-
-      def icon
-        :key
       end
     end
   end

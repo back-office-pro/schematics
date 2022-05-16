@@ -3,13 +3,8 @@
 module Schematics
   module Attributes
     class Timestamp < Attribute
-      def open_api_type
-        ::DateTime
-      end
-
-      def type
-        'datetime' # Rails converts timestamp to datetime in database
-      end
+      def open_api_type = ::DateTime
+      def type = 'datetime'
     end
   end
 end

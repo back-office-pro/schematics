@@ -3,20 +3,12 @@
 module Schematics
   module Attributes
     class Url < Citext
+      def encrypted? = true
+      def default = "https://www.#{SecureRandom.base58}.com"
+      def icon = :chrome
+
       def validators
         super.merge(url: { allow_blank: })
-      end
-
-      def encrypted?
-        true
-      end
-
-      def default
-        "https://www.#{SecureRandom.base58}.com"
-      end
-
-      def icon
-        :chrome
       end
     end
   end

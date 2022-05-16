@@ -3,6 +3,8 @@
 module Schematics
   module Virtuals
     class Malformed < Virtual
+      def icon = :triangle_exclamation
+
       def to_sql
         super.join
       end
@@ -11,10 +13,6 @@ module Schematics
         <<~RUBY.squish
           raise ArgumentError
         RUBY
-      end
-
-      def icon
-        :triangle_exclamation
       end
     end
   end

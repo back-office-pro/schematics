@@ -5,13 +5,8 @@ require 'active_support/core_ext/securerandom'
 module Schematics
   module Attributes
     class Token < Attribute
-      def unique?
-        true
-      end
-
-      def default
-        SecureRandom.base58
-      end
+      def unique? = true
+      def default = SecureRandom.base58
 
       def to_str
         <<~RUBY

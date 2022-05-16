@@ -5,6 +5,9 @@ require 'active_support/core_ext/string/indent'
 module Schematics
   module Attributes
     class StateMachine < Enum
+      def icon = :recycle
+      def readonly? = true
+
       def to_str
         super + <<~RUBY
           aasm column: :#{name}, enum: true, no_direct_assignment: true do
@@ -14,14 +17,6 @@ module Schematics
           end
           #{events_to_str}
         RUBY
-      end
-
-      def icon
-        :recycle
-      end
-
-      def readonly?
-        true
       end
 
       def events

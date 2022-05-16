@@ -3,6 +3,8 @@
 module Schematics
   module Behaviours
     module Migratable
+      def column_name = name
+
       def type
         self.class.name.demodulize.underscore
       end
@@ -19,15 +21,9 @@ module Schematics
         options.slice(*migration_options)
       end
 
-      def column_name
-        name
-      end
-
       protected
 
-      def migration_options
-        []
-      end
+      def migration_options = []
     end
   end
 end

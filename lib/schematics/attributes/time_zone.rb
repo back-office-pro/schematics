@@ -8,9 +8,7 @@ module Schematics
     class TimeZone < String
       include Behaviours::Enumerable
 
-      def icon
-        :clock
-      end
+      def icon = :clock
 
       def format(value)
         value && ActiveSupport::TimeZone[value].to_s

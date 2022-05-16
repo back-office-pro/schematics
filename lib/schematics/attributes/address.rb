@@ -4,13 +4,8 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Address < String
-      def encrypted?
-        true
-      end
-
-      def icon
-        :location_dot
-      end
+      def encrypted? = true
+      def icon = :location_dot
     end
   end
 end

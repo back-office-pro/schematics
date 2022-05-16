@@ -5,6 +5,8 @@ module Schematics
     module Numerable
       delegate :unit, :precision, to: :options
 
+      def icon = :arrow_up_1_9 # rubocop:disable Naming/VariableNumber
+
       def validators
         super.merge(numericality: { allow_blank: })
       end
@@ -26,10 +28,6 @@ module Schematics
             [number_with_precision(value, **{ precision: }.compact), unit].compact.join(' ')
           end
         end
-      end
-
-      def icon
-        :arrow_up_1_9 # rubocop:disable Naming/VariableNumber
       end
 
       def migration_options

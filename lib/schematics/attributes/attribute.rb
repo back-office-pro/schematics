@@ -21,20 +21,12 @@ module Schematics
         @options = Schematics::Options.new(options:)
       end
 
-      def open_api_type
-        ::String
-      end
+      def open_api_type = ::String
+      def to_str = ''
+      def weight = 1
 
       def to_sql
         [@entity.table_name.pluralize, @name].join('.')
-      end
-
-      def to_str
-        ''
-      end
-
-      def weight
-        1
       end
     end
   end

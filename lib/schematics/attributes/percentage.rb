@@ -3,16 +3,11 @@
 module Schematics
   module Attributes
     class Percentage < Float
-      def unit
-        '%'
-      end
+      def unit = '%'
+      def icon = :percent
 
       def format(value)
         value && number_to_percentage(value, **{ precision: }.compact)
-      end
-
-      def icon
-        :percent
       end
     end
   end

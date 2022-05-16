@@ -9,9 +9,9 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Enumerable
 
-      def type
-        'integer'
-      end
+      def type = 'integer'
+      def collection = super.sort
+      def icon = :list_ol
 
       def to_str
         if options.default
@@ -31,14 +31,6 @@ module Schematics
           default: value.humanize,
           scope: [:activerecord, :attributes, entity.name, name.pluralize]
         )
-      end
-
-      def collection
-        super.sort
-      end
-
-      def icon
-        :list_ol
       end
 
       private

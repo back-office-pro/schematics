@@ -9,6 +9,9 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Encryptable
 
+      def default = 'MyRichText'
+      def icon = :align_justify
+
       def preload
         { association_name => [embeds_attachments: :blob] }
       end
@@ -23,14 +26,6 @@ module Schematics
 
       def format(value)
         value&.to_plain_text
-      end
-
-      def default
-        'MyRichText'
-      end
-
-      def icon
-        :align_justify
       end
 
       def to_str

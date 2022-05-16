@@ -3,9 +3,8 @@
 module Schematics
   module Virtuals
     class Comparison < Virtual
-      def open_api_type
-        'boolean'
-      end
+      def open_api_type = 'boolean'
+      def icon = :toggle_on
 
       def to_sql
         super.join
@@ -19,10 +18,6 @@ module Schematics
         else
           translate(value, default: value.to_s).upcase
         end
-      end
-
-      def icon
-        :toggle_on
       end
     end
   end

@@ -9,20 +9,12 @@ module Schematics
     class Country < String
       include Behaviours::Enumerable
 
-      def icon
-        :earth_europe
-      end
-
-      def collection
-        super.sort_alphabetical
-      end
+      def icon = :earth_europe
+      def collection = super.sort_alphabetical
+      def values = ISO3166::Country.codes
 
       def format(value)
         value && ISO3166::Country[value].try(:translation, ::I18n.locale.to_s)
-      end
-
-      def values
-        ISO3166::Country.codes
       end
     end
   end
