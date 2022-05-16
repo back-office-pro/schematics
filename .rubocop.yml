@@ -4,6 +4,7 @@ require:
   - rubocop-rake
   - rubocop-rspec
   - rubocop-thread_safety
+  # - rubocop-ordered_methods TODO: enable
 AllCops:
   TargetRubyVersion: 3.1.2
   NewCops: enable
