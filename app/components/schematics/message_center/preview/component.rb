@@ -4,13 +4,15 @@ module Schematics
   module MessageCenter
     module Preview
       class Component < ApplicationComponent
+        delegate :author, :subject, :created_at, :unread?, to: :@message
+
         def initialize(message:)
           super
           @message = message
         end
 
         def css_class
-          'fw-bold' if @message.unread?
+          'fw-bold' if unread?
         end
 
         def href
