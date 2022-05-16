@@ -20,7 +20,7 @@ module Schematics
       end
 
       def events
-        options.events.map { StateMachineEvent.new(entity:, **_1) }
+        options.events&.map { StateMachineEvent.new(entity:, **_1) } || []
       end
 
       private
