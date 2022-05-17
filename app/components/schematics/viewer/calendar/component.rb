@@ -12,10 +12,9 @@ module Schematics
           'calendar-month-day' if month_range.cover?(date)
         end
 
-        def alert_class_for(resource, date)
-          return 'rounded-0 border-start-0 border-end-0' if siblings_resource_for?(resource, date)
-          return 'rounded-end border-start-0 me-2' if previous_resource_for?(resource, date)
-          return 'rounded-start border-end-0 ms-2' if next_resource_for?(resource, date)
+        def alert_css_classes_for(resource, date)
+          %w[alert alert-secondary calendar lh-lg text-truncate mb-1 p-2]
+            .concat alert_border_css_classes_for(resource, date)
         end
 
         def resources_for(date)
@@ -71,6 +70,12 @@ module Schematics
         def siblings_resource_for?(resource, date)
           resources_for(date.yesterday).include?(resource) &&
             resources_for(date.tomorrow).include?(resource)
+        end
+
+        def alert_border_css_classes_for(resource, date)
+          return %w[rounded-0 border-start-0 border-end-0] if siblings_resource_for?(resource, date)
+          return %w[rounded-end border-start-0 me-2] if previous_resource_for?(resource, date)
+          return %w[rounded-start border-end-0 ms-2] if next_resource_for?(resource, date)
         end
       end
     end

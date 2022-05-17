@@ -37,10 +37,6 @@ module Schematics
         "#{preference} d-none"
       end
 
-      def href(resource)
-        polymorphic_path(resource) unless resource.deleted?
-      end
-
       def tbody_css_classes
         %w[animate__animated animate__slideInRight]
       end

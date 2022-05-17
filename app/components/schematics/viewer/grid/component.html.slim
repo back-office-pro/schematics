@@ -23,12 +23,9 @@
                                 #carousel.carousel.slide data-ride='carousel'
                                   .carousel-inner
                                     - carousel(resource).each do |attachment|
-                                      .carousel-item.active.text-center {
-                                        data-action='click->application#visit'
-                                        data-application-href-param=href(resource)
-                                        role='button'
-                                      }
-                                        = render Schematics::Attachment::Component.new(attachment:, class: 'rounded')
+                                      = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: carousel_css_classes) do |c|
+                                        - c.with_resource do
+                                          = render Schematics::Attachment::Component.new(attachment:, class: 'rounded')
                                   a.carousel-control-prev data-slide='prev' href='#carousel' role='button'
                                     span.carousel-control-prev-icon aria-hidden='true'
                                   a.carousel-control-next data-slide='next' href='#carousel' role='button'
