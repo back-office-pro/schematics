@@ -8,9 +8,7 @@ module Schematics
         @target = target
       end
 
-      def label
-        "#{@target}-label"
-      end
+      def label = "#{@target}-label"
     end
   end
 end

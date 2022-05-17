@@ -19,13 +19,6 @@ module Schematics
 
     protected
 
-    def set_breadcrumb
-      return unless can?(:index, parent_model_class)
-
-      title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
-      breadcrumb title, parent_model_class
-    end
-
     def parent_model_class
       Schema
         .instance
@@ -33,6 +26,13 @@ module Schematics
         .map { [_1.class_name, _1.model_class] }
         .to_h
         .fetch(params[:model_name])
+    end
+
+    def set_breadcrumb
+      return unless can?(:index, parent_model_class)
+
+      title = t('titles.schematics.resources.index', human_name_plural: parent_human_name_plural)
+      breadcrumb title, parent_model_class
     end
   end
 end

@@ -27,9 +27,7 @@ Rails.configuration.to_prepare do
     .each { Object.const_get(_1).prepend(MainApp.const_get(_1)) }
 
   ::ActiveStorage.singleton_class.module_eval do
-    def use_relative_model_naming?
-      false
-    end
+    def use_relative_model_naming? = false
   end
 end
 

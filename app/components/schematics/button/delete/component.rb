@@ -10,9 +10,7 @@ module Schematics
           @compact = compact
         end
 
-        def render?
-          can?(:delete, @resource)
-        end
+        def compact? = @compact
 
         def css_classes
           [
@@ -24,8 +22,8 @@ module Schematics
           ].compact
         end
 
-        def compact?
-          @compact
+        def render?
+          can?(:delete, @resource)
         end
       end
     end

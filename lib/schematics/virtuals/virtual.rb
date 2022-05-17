@@ -30,16 +30,20 @@ module Schematics
         @options = Schematics::Options.new(options:)
       end
 
-      def open_api_type = ::String
-      def weight = 1
+      def format(value)
+        case value
+        when NoMethodError
+          value.original_message
+        else
+          super
+        end
+      end
 
       def function
         @tokens.map(&:value).join
       end
 
-      def to_sql
-        @tokens.map(&:to_sql)
-      end
+      def open_api_type = ::String
 
       def preload
         @tokens
@@ -49,13 +53,8 @@ module Schematics
           .map(&:to_sym)
       end
 
-      def format(value)
-        case value
-        when NoMethodError
-          value.original_message
-        else
-          super
-        end
+      def to_sql
+        @tokens.map(&:to_sql)
       end
 
       def to_str
@@ -68,6 +67,8 @@ module Schematics
           end
         RUBY
       end
+
+      def weight = 1
     end
   end
 end

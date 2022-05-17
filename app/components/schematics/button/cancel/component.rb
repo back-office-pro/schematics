@@ -11,6 +11,8 @@ module Schematics
           @compact = compact
         end
 
+        def compact? = @compact
+
         def css_classes
           [
             'btn',
@@ -22,10 +24,6 @@ module Schematics
 
         def icon_class
           'fa-fw' if compact?
-        end
-
-        def compact?
-          @compact
         end
       end
     end

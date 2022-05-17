@@ -11,12 +11,12 @@ module Schematics
           @resource = resource
         end
 
-        def render?
-          @resource.errors.of_kind?(:base, :stale) && last_version
-        end
-
         def last_version
           @resource.versions.last
+        end
+
+        def render?
+          @resource.errors.of_kind?(:base, :stale) && last_version
         end
       end
     end

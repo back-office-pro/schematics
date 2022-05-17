@@ -10,6 +10,11 @@ module Schematics
       include Behaviours::Encryptable
 
       def default = 'MyRichText'
+
+      def format(value)
+        value&.to_plain_text
+      end
+
       def icon = :align_justify
 
       def preload
@@ -22,10 +27,6 @@ module Schematics
           .concat <<~RUBY
             #{name}&.to_plain_text
           RUBY
-      end
-
-      def format(value)
-        value&.to_plain_text
       end
 
       def to_str

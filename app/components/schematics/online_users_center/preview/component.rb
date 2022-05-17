@@ -11,9 +11,7 @@ module Schematics
           @session = session
         end
 
-        def href
-          user_path(user)
-        end
+        def href = user_path(user)
       end
     end
   end

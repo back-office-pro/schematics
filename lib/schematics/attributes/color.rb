@@ -7,6 +7,7 @@ module Schematics
       REGEX = /\A#(?:\h{3}){1,2}\z/
 
       def default = '#000000'
+
       def icon = :palette
 
       def validators

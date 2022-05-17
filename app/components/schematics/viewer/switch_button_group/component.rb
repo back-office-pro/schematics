@@ -11,12 +11,12 @@ module Schematics
           @resource = resource
         end
 
-        def render?
-          !@resource.deleted?
-        end
-
         def data
           { action: 'click->comparison#toggleButton', 'comparison-target': 'switch' }
+        end
+
+        def render?
+          !@resource.deleted?
         end
       end
     end

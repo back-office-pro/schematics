@@ -10,8 +10,18 @@ module Schematics
             @comparison = comparison
           end
 
-          def field_tag
-            :"#{type}_field_tag"
+          def date?
+            type == :date
+          end
+
+          def field_tag = :"#{type}_field_tag"
+
+          def filter_name
+            super + "[#{@comparison}]"
+          end
+
+          def onchange
+            super if date?
           end
 
           def type
@@ -23,24 +33,12 @@ module Schematics
             end
           end
 
-          def filter_name
-            super + "[#{@comparison}]"
-          end
-
-          def value
-            super&.dig(@comparison)
-          end
-
           def unit
             @field.try(:unit)
           end
 
-          def date?
-            type == :date
-          end
-
-          def onchange
-            super if date?
+          def value
+            super&.dig(@comparison)
           end
         end
       end

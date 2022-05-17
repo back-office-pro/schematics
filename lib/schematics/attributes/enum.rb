@@ -9,8 +9,16 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Enumerable
 
-      def type = 'integer'
       def collection = super.sort
+
+      def format(value)
+        value && translate(
+          value.to_sym,
+          default: value.humanize,
+          scope: [:activerecord, :attributes, entity.name, name.pluralize]
+        )
+      end
+
       def icon = :list_ol
 
       def to_str
@@ -25,13 +33,7 @@ module Schematics
         end
       end
 
-      def format(value)
-        value && translate(
-          value.to_sym,
-          default: value.humanize,
-          scope: [:activerecord, :attributes, entity.name, name.pluralize]
-        )
-      end
+      def type = 'integer'
 
       private
 

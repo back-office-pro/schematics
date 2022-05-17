@@ -6,6 +6,7 @@ module Schematics
   module Attributes
     class StateMachine < Enum
       def icon = :recycle
+
       def readonly? = true
 
       def to_str

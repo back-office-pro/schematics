@@ -13,10 +13,17 @@ module Schematics
       delegate :confirm?, to: :options
 
       def default = 'Azerty1!'
+
       def icon = :key
 
       def permitted_params
         [super, :"#{super}_confirmation"]
+      end
+
+      def to_str
+        <<~RUBY
+          has_secure_password :#{name}, validations: false
+        RUBY
       end
 
       def validators
@@ -29,12 +36,6 @@ module Schematics
             maximum: ::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
           }
         )
-      end
-
-      def to_str
-        <<~RUBY
-          has_secure_password :#{name}, validations: false
-        RUBY
       end
     end
   end

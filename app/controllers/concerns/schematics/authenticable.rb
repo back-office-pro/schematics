@@ -12,6 +12,31 @@ module Schematics
 
     private
 
+    def auth_token
+      ::JsonWebToken.decode(authorization_header)&.dig(:auth_token) ||
+        cookies.permanent.encrypted[:auth_token]
+    end
+
+    def authenticate_user!
+      return unless current_session.is_a?(Guest::Session)
+
+      respond_to do |format|
+        format.json { head :unauthorized }
+        format.any do
+          store_location
+          redirect_to main_app.login_path,
+                      alert: t('schematics.application.authenticate_user.alert')
+        end
+      end
+    end
+
+    def authorization_header
+      request
+        .headers['Authorization']
+        &.split(' ')
+        &.last
+    end
+
     def current_ability
       @current_ability ||= Ability.new(current_user)
     end
@@ -31,31 +56,6 @@ module Schematics
 
     def current_user
       @current_user ||= current_session.user
-    end
-
-    def auth_token
-      ::JsonWebToken.decode(authorization_header)&.dig(:auth_token) ||
-        cookies.permanent.encrypted[:auth_token]
-    end
-
-    def authorization_header
-      request
-        .headers['Authorization']
-        &.split(' ')
-        &.last
-    end
-
-    def authenticate_user!
-      return unless current_session.is_a?(Guest::Session)
-
-      respond_to do |format|
-        format.json { head :unauthorized }
-        format.any do
-          store_location
-          redirect_to main_app.login_path,
-                      alert: t('schematics.application.authenticate_user.alert')
-        end
-      end
     end
 
     def store_location

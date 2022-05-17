@@ -4,18 +4,18 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
-        def date_range
-          (start_date..end_date).to_a
-        end
-
-        def td_class_for(date)
-          'calendar-month-day' if month_range.cover?(date)
-        end
-
         def alert_class_for(resource, date)
           return 'rounded-0 border-start-0 border-end-0' if siblings_resource_for?(resource, date)
           return 'rounded-end border-start-0 me-2' if previous_resource_for?(resource, date)
           return 'rounded-start border-end-0 ms-2' if next_resource_for?(resource, date)
+        end
+
+        def date_range
+          (start_date..end_date).to_a
+        end
+
+        def previous_resource_for?(resource, date)
+          resources_for(date.yesterday).include?(resource)
         end
 
         def resources_for(date)
@@ -32,17 +32,11 @@ module Schematics
             super
         end
 
-        def previous_resource_for?(resource, date)
-          resources_for(date.yesterday).include?(resource)
+        def td_class_for(date)
+          'calendar-month-day' if month_range.cover?(date)
         end
 
         private
-
-        def start_date
-          start_of_month_date
-            .beginning_of_week
-            .to_date
-        end
 
         def end_date
           end_of_month_date
@@ -50,18 +44,13 @@ module Schematics
             .to_date
         end
 
-        def month_range
-          start_of_month_date..end_of_month_date
-        end
-
-        def start_of_month_date
-          (calendar_start_date || @resources.map(&calendar_start_attribute).min || ::Date.current)
-            .beginning_of_month
-        end
-
         def end_of_month_date
           (calendar_start_date || @resources.map(&calendar_start_attribute).max || ::Date.current)
             .end_of_month
+        end
+
+        def month_range
+          start_of_month_date..end_of_month_date
         end
 
         def next_resource_for?(resource, date)
@@ -71,6 +60,17 @@ module Schematics
         def siblings_resource_for?(resource, date)
           resources_for(date.yesterday).include?(resource) &&
             resources_for(date.tomorrow).include?(resource)
+        end
+
+        def start_date
+          start_of_month_date
+            .beginning_of_week
+            .to_date
+        end
+
+        def start_of_month_date
+          (calendar_start_date || @resources.map(&calendar_start_attribute).min || ::Date.current)
+            .beginning_of_month
         end
       end
     end

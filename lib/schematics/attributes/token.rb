@@ -6,6 +6,7 @@ module Schematics
   module Attributes
     class Token < Attribute
       def unique? = true
+
       def default = SecureRandom.base58
 
       def to_str

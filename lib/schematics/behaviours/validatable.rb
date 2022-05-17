@@ -8,6 +8,7 @@ module Schematics
       delegate :unique?, :required?, to: :options
 
       def allow_blank = !required?
+
       def case_sensitive? = true
 
       def validators

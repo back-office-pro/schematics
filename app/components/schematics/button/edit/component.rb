@@ -13,9 +13,7 @@ module Schematics
           @compact = compact
         end
 
-        def render?
-          can?(:edit, @resource)
-        end
+        def compact? = @compact
 
         def css_classes
           [
@@ -38,14 +36,14 @@ module Schematics
           }
         end
 
+        def render?
+          can?(:edit, @resource)
+        end
+
         def title
           return unless compact?
 
           t('.text')
-        end
-
-        def compact?
-          @compact
         end
       end
     end

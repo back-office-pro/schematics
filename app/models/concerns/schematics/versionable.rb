@@ -23,18 +23,16 @@ module Schematics
       end
     end
 
-    def unstale
-      self.lock_version += (self.class.finder(id).lock_version - lock_version)
-      self
-    end
+    # :reek:ManualDispatch
+    def readable? = respond_to?(:recipient)
 
     def unread?
       readable? && !Version.exists?(event: 'show', item: self, user: recipient)
     end
 
-    # :reek:ManualDispatch
-    def readable?
-      respond_to?(:recipient)
+    def unstale
+      self.lock_version += (self.class.finder(id).lock_version - lock_version)
+      self
     end
   end
 end

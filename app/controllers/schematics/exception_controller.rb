@@ -4,17 +4,17 @@ module Schematics
   class ExceptionController < ApplicationController
     layout 'schematics/auth', except: :not_found
 
-    def not_found
-      respond_to do |format|
-        format.html
-        format.json { head :not_found }
-      end
-    end
-
     def internal_server_error
       respond_to do |format|
         format.html
         format.json { head :internal_server_error }
+      end
+    end
+
+    def not_found
+      respond_to do |format|
+        format.html
+        format.json { head :not_found }
       end
     end
 

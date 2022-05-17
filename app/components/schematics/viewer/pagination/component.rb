@@ -13,12 +13,12 @@ module Schematics
           @human_name_plural = human_name_plural
         end
 
-        def render?
-          @calendar.presence || pages > 1
-        end
-
         def nav_parameter
           @calendar&.fetch(:month) || @pagy
+        end
+
+        def render?
+          @calendar.presence || pages > 1
         end
       end
     end

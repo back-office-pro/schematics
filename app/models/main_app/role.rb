@@ -5,9 +5,7 @@ module MainApp
     extend ActiveSupport::Concern
 
     class_methods do
-      def admin
-        find_by(name: 'Admin')
-      end
+      def admin = find_by(name: 'Admin')
     end
   end
 end

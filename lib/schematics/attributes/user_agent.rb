@@ -7,6 +7,7 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class UserAgent < String
       def encrypted? = true
+
       def icon = :computer
 
       def format(value)

@@ -10,16 +10,6 @@ module Schematics
         @request = request
       end
 
-      def user
-        User.new(locale:) # rubocop:disable Lint/ConstantResolution
-      end
-
-      def login!(user)
-        PaperTrail.request(enabled: false) do
-          ::Session.create!(ip:, user_agent:, user:)
-        end
-      end
-
       def locale
         @request
           .env['HTTP_ACCEPT_LANGUAGE']
@@ -29,7 +19,15 @@ module Schematics
           &.to_sym
       end
 
+      def login!(user)
+        PaperTrail.request(enabled: false) do
+          ::Session.create!(ip:, user_agent:, user:)
+        end
+      end
+
       def update!(*); end
+
+      def user = User.new(locale:) # rubocop:disable Lint/ConstantResolution
     end
   end
 end

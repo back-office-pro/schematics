@@ -6,12 +6,12 @@ module Schematics
       class Component < ApplicationComponent
         delegate :updated_at, to: :current_draft
 
-        def render?
-          current_draft.present?
-        end
-
         def icon
           ::Draft.entity.icon
+        end
+
+        def render?
+          current_draft.present?
         end
       end
     end

@@ -26,18 +26,6 @@ module Schematics
         @model_class = model_class
       end
 
-      def name
-        @field.try(:name) || @field
-      end
-
-      def filter_name
-        "filter[#{name}]"
-      end
-
-      def value
-        params.dig(:filter, name)
-      end
-
       def active?
         value.present?
       end
@@ -63,10 +51,20 @@ module Schematics
         ].compact
       end
 
+      def filter_name = "filter[#{name}]"
+
+      def name
+        @field.try(:name) || @field
+      end
+
       def onchange
         <<~JAVASCRIPT.squish
           this.form.requestSubmit()
         JAVASCRIPT
+      end
+
+      def value
+        params.dig(:filter, name)
       end
     end
   end

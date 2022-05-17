@@ -17,8 +17,10 @@ module Schematics
 
       private
 
-      def old_name = attribute
       def old_class_name = old_name.camelize
+
+      def old_name = attribute
+
       def old_table_name = old_name.tr('/', '_')
     end
   end

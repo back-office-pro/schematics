@@ -10,7 +10,9 @@ module Schematics
       include Behaviours::Enumerable
 
       def icon = :earth_europe
+
       def collection = super.sort_alphabetical
+
       def values = ISO3166::Country.codes
 
       def format(value)

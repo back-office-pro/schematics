@@ -32,23 +32,25 @@ module Schematics
 
     private
 
-    def preference_params
-      params
-        .require(:preferences)
-        .permit(permitted_preference_params)
-        .transform_values(&method(:cast_param_value))
-    end
-
     def cast_param_value(value)
       return value == 'true' if %w[true false].include?(value)
 
       value
     end
 
+    def dashboard_preferences = %i[sidebar_toggled theme]
+
     def permitted_preference_params
       @permitted_preference_params ||= timeline_preferences
                                        .concat(viewer_preferences)
                                        .concat(dashboard_preferences)
+    end
+
+    def preference_params
+      params
+        .require(:preferences)
+        .permit(permitted_preference_params)
+        .transform_values(&method(:cast_param_value))
     end
 
     def timeline_preferences
@@ -70,10 +72,6 @@ module Schematics
         .reject(&:hidden?)
         .flat_map(&:listable_elements)
         .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
-    end
-
-    def dashboard_preferences
-      %i[sidebar_toggled theme]
     end
   end
 end

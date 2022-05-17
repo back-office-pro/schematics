@@ -8,8 +8,10 @@ module Schematics
         @theme = theme
       end
 
-      def path
-        File.join('schematics', 'themes', @theme)
+      def disabled?
+        return false unless preferences(:theme)
+
+        preferences(:theme) != @theme
       end
 
       def media
@@ -18,10 +20,8 @@ module Schematics
         "(prefers-color-scheme: #{@theme})"
       end
 
-      def disabled?
-        return false unless preferences(:theme)
-
-        preferences(:theme) != @theme
+      def path
+        File.join('schematics', 'themes', @theme)
       end
     end
   end

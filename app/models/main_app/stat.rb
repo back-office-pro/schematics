@@ -11,6 +11,10 @@ module MainApp
       scope :accessible_by_role, ->(role) { left_joins(:roles).where(roles: [role, nil]) }
     end
 
+    def model_class
+      model.safe_constantize
+    end
+
     def to_s
       title || ::I18n.t('errors.virtuals.no_method', name: model)
     end
@@ -19,20 +23,10 @@ module MainApp
       format(value) || '-'
     end
 
-    def model_class
-      model.safe_constantize
-    end
-
     private
 
     def entity_field
       field && find_field_by_name(field.split('#').last)
-    end
-
-    def value
-      model_class&.public_send(agregate.to_sym, to_sql || :all)
-    rescue ActiveRecord::StatementInvalid
-      nil
     end
 
     def title
@@ -45,6 +39,12 @@ module MainApp
         (::I18n.t('of') if entity_field),
         model_class.human_name_plural
       ].compact.join(' ')
+    end
+
+    def value
+      model_class&.public_send(agregate.to_sym, to_sql || :all)
+    rescue ActiveRecord::StatementInvalid
+      nil
     end
   end
 end

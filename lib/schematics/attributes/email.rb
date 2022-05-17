@@ -4,7 +4,9 @@ module Schematics
   module Attributes
     class Email < Citext
       def default = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
+
       def encrypted? = true
+
       def icon = :envelope
 
       def validators

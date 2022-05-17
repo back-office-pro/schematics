@@ -5,12 +5,6 @@ module Schematics
     module Numerable
       delegate :unit, :precision, to: :options
 
-      def icon = :arrow_up_1_9 # rubocop:disable Naming/VariableNumber
-
-      def validators
-        super.merge(numericality: { allow_blank: })
-      end
-
       # :reek:NilCheck
       def format(value)
         case value
@@ -30,8 +24,14 @@ module Schematics
         end
       end
 
+      def icon = :arrow_up_1_9 # rubocop:disable Naming/VariableNumber
+
       def migration_options
         super.concat %i[default]
+      end
+
+      def validators
+        super.merge(numericality: { allow_blank: })
       end
     end
   end

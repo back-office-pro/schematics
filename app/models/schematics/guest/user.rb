@@ -10,17 +10,11 @@ module Schematics
         @locale = locale
       end
 
-      def admin?
-        false
-      end
+      def admin? = false
 
-      def role
-        Role.new # rubocop:disable Lint/ConstantResolution
-      end
+      def preferences = {}
 
-      def preferences
-        {}
-      end
+      def role = Role.new # rubocop:disable Lint/ConstantResolution
     end
   end
 end

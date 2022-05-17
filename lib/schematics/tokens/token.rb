@@ -26,6 +26,7 @@ module Schematics
       end
 
       def to_sql = @value
+
       def to_str = @value
     end
   end

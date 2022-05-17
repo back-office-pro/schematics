@@ -14,21 +14,10 @@ module Schematics
 
     private
 
-    def filter_params_to_h
-      params
-        .require(:filter)
-        .permit(permitted_filters)
-        .to_h
-        .compact_blank
-    end
+    def cast_comparison(value)
+      return value.to_date if value.match?(/\d{4}-\d{2}-\d{2}/)
 
-    def permitted_filters
-      entity.searchable_elements
-            .reject_is_a?(Schematics::Behaviours::Rangeable)
-            .map(&:name)
-            .map(&:to_sym)
-            .push(:with_deleted)
-            .concat(entity.rangeable_elements.map { { _1.name.to_sym => %i[gte lte] } })
+      value.to_f
     end
 
     def cast_filter_value(value)
@@ -46,10 +35,21 @@ module Schematics
       end
     end
 
-    def cast_comparison(value)
-      return value.to_date if value.match?(/\d{4}-\d{2}-\d{2}/)
+    def filter_params_to_h
+      params
+        .require(:filter)
+        .permit(permitted_filters)
+        .to_h
+        .compact_blank
+    end
 
-      value.to_f
+    def permitted_filters
+      entity.searchable_elements
+            .reject_is_a?(Schematics::Behaviours::Rangeable)
+            .map(&:name)
+            .map(&:to_sym)
+            .push(:with_deleted)
+            .concat(entity.rangeable_elements.map { { _1.name.to_sym => %i[gte lte] } })
     end
   end
 end

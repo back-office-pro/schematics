@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Encryptable
 
       def default = SecureRandom.base58
+
       def icon = :font
 
       def search_data

@@ -26,20 +26,16 @@ module Schematics
           @dropdown = dropdown
         end
 
-        def icon
-          :"file_#{@extension}"
-        end
-
         def action
           'click->generate-file-in-background#run' unless dropdown?
         end
 
+        def dropdown? = @dropdown
+
+        def icon = :"file_#{@extension}"
+
         def toggle
           'dropdown' if dropdown?
-        end
-
-        def dropdown?
-          @dropdown
         end
       end
     end

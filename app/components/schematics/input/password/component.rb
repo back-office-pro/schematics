@@ -24,22 +24,8 @@ module Schematics
           @autocomplete = autocomplete
         end
 
-        def name
-          @field.try(:name) || @name
-        end
-
-        def icon
-          @field.try(:icon) || @icon
-        end
-
         def autocomplete
           'new-password' unless @autocomplete
-        end
-
-        def required?
-          return @field.required? if @field
-
-          @required
         end
 
         def confirm?
@@ -48,16 +34,30 @@ module Schematics
           @confirm
         end
 
-        def inputs_count
-          confirm? ? 2 : 1
+        def data
+          { action: 'click->password#toggle' }
+        end
+
+        def icon
+          @field.try(:icon) || @icon
         end
 
         def input_html
           { autocomplete:, 'data-password-target': 'input' }.compact
         end
 
-        def data
-          { action: 'click->password#toggle' }
+        def inputs_count
+          confirm? ? 2 : 1
+        end
+
+        def name
+          @field.try(:name) || @name
+        end
+
+        def required?
+          return @field.required? if @field
+
+          @required
         end
       end
     end

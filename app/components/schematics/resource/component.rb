@@ -11,12 +11,10 @@ module Schematics
         @highlight = highlight
       end
 
+      def enable_buttons? = @enable_buttons
+
       def value
         @resource.public_send(@field.name)
-      end
-
-      def enable_buttons?
-        @enable_buttons
       end
     end
   end

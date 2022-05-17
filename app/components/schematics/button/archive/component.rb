@@ -9,10 +9,6 @@ module Schematics
           @resource = resource
         end
 
-        def render?
-          can?(:archive, @resource)
-        end
-
         def data
           {
             turbo_method: :delete,
@@ -21,6 +17,10 @@ module Schematics
             'bs-toggle': 'tooltip',
             'bs-placement': 'top'
           }
+        end
+
+        def render?
+          can?(:archive, @resource)
         end
       end
     end

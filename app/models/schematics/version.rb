@@ -30,10 +30,6 @@ module Schematics
         .load_async
     }
 
-    def model_class
-      item_type.safe_constantize
-    end
-
     def icon
       {
         update: :pen_to_square,
@@ -46,6 +42,10 @@ module Schematics
         show: :eye,
         duplicate: :clone
       }[event.to_sym] || entity.find_event_by_name(event).try(:icon)
+    end
+
+    def model_class
+      item_type.safe_constantize
     end
   end
 end

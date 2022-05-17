@@ -11,6 +11,10 @@ module Schematics
         @model_class = model_class
       end
 
+      def attribute_name
+        @model_class.human_attribute_name(name)
+      end
+
       def icon
         return :sort_down if asc?
         return :sort_up   if desc?
@@ -29,14 +33,18 @@ module Schematics
         request.query_parameters.merge(sort: new_sorted_params)
       end
 
-      def attribute_name
-        @model_class.human_attribute_name(name)
-      end
-
       private
 
-      def sorted_params
-        params[:sort]&.split(',')
+      def asc?
+        sorted_params&.include?(name)
+      end
+
+      def desc?
+        sorted_params&.include?("-#{name}")
+      end
+
+      def new_param?
+        !asc? && !desc?
       end
 
       def new_sorted_params
@@ -56,16 +64,8 @@ module Schematics
         end
       end
 
-      def new_param?
-        !asc? && !desc?
-      end
-
-      def asc?
-        sorted_params&.include?(name)
-      end
-
-      def desc?
-        sorted_params&.include?("-#{name}")
+      def sorted_params
+        params[:sort]&.split(',')
       end
     end
   end

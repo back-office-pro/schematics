@@ -12,17 +12,17 @@ module Schematics
         @editable = editable
       end
 
+      def component_for(field)
+        return EditInPlace::Component.new(resource: @resource, field:) if editable?(field)
+
+        Resource::Component.new(resource: @resource, field:, enable_buttons: enable_buttons?(field))
+      end
+
       def elements
         entity
           .renderable_elements
           .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
           .reject_is_a?(Attributes::RichText, Attributes::Attachments)
-      end
-
-      def component_for(field)
-        return EditInPlace::Component.new(resource: @resource, field:) if editable?(field)
-
-        Resource::Component.new(resource: @resource, field:, enable_buttons: enable_buttons?(field))
       end
 
       private

@@ -13,7 +13,9 @@ module Schematics
       include Behaviours::Rangeable
 
       def open_api_type = ::Date
+
       def group_method = :group_by_day
+
       def icon = :calendar_days
 
       def to_sql
