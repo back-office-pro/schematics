@@ -8,9 +8,7 @@ module Schematics
     delegate :slice, :fetch, :dig, :key?, to: :options
     attr_writer :options
 
-    def options
-      @options || {}
-    end
+    def options = @options || {}
 
     def method_missing(method_name, *_args, &)
       return dig(method_name) unless method_name.end_with?('?')

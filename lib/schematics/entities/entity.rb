@@ -60,21 +60,15 @@ module Schematics
         Schematics::Options.new(options: @options)
       end
 
-      def associations
-        @associations ||= []
-      end
-
-      def attributes
-        @attributes ||= []
-      end
-
-      def virtuals
-        @virtuals ||= []
-      end
-
-      def triggers
-        @triggers ||= []
-      end
+      def associations = @associations ||= []
+      def attributes = @attributes ||= []
+      def virtuals = @virtuals ||= []
+      def triggers = @triggers ||= []
+      def weight = has_many_and_through_and_belongs_to_many_associations.size
+      def fields = attributes + virtuals
+      def elements = fields + associations
+      def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
+      def to_str = ''
 
       def method_missing(method_name, *_args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
@@ -112,12 +106,6 @@ module Schematics
         (Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)) ||
           Behaviours.const_defined?(constant)
       end
-
-      def weight = has_many_and_through_and_belongs_to_many_associations.size
-      def fields = attributes + virtuals
-      def elements = fields + associations
-      def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
-      def to_str = ''
 
       def find_field_by_name(name)
         case name
