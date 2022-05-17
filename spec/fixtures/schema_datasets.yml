@@ -1,0 +1,180 @@
+one:
+  state: migrated
+  data:
+    - name: client
+      options:
+        icon: user_tie
+        descriptor: full_name
+      virtuals:
+        - name: full_name
+          function: $first_name $last_name
+        - name: name_error
+          function: $foo + $bar
+        - name: type_error
+          function: $first_name * $last_name
+        - name: no_method_error
+          function: $first_name.some_attribute
+        - name: malformed_virtual
+          function: $first_name = true
+      attributes:
+        - name: first_name
+          type: string
+          options:
+            required: true
+        - name: last_name
+          type: string
+          options:
+            required: true
+        - name: age
+          type: float
+    - name: sub_category
+      options:
+        icon: box
+        descriptor: designation
+      attributes:
+        - name: designation
+          type: string
+          options:
+            unique: true
+        - name: category
+          type: belongs_to
+          options:
+            required: true
+    - name: category
+      options:
+        icon: box
+        descriptor: label
+      triggers:
+        - action: save
+          callback: $error.foo = true
+      attributes:
+        - name: label
+          type: string
+          options:
+            unique: true
+            required: true
+        - name: preview
+          type: attachment
+          options:
+            content_type:
+              - png
+    - name: product
+      options:
+        descriptor: reference
+      virtuals:
+        - name: tax_inclusive_price
+          function: $price * (1 + $vat / 100)
+          options:
+            precision: 2
+            unit: €
+        - name: big_price
+          function: $price > 100 && $vat >= 10
+        - name: reference
+          function: ref-$id-$sub_category.id
+      attributes:
+        - name: designation
+          type: string
+          options:
+            unique: true
+            required: true
+            limit: 100
+        - name: description
+          type: string
+        - name: price
+          type: currency
+          options:
+            precision: 2
+            unit: €
+        - name: vat
+          type: percentage
+          options:
+            precision: 1
+            default: 19.6
+        - name: in_stock
+          type: boolean
+          options:
+            default: false
+        - name: quantity
+          type: integer
+          options:
+            default: 20
+        - name: logo
+          type: attachment
+          options:
+            required: true
+            content_type:
+              - pdf
+            size: 1
+        - name: state
+          type: state_machine
+          options:
+            required: true
+            default: pending
+            values:
+              - pending
+              - closed
+              - refused
+            events:
+              - name: close
+                icon: xmark
+                from: pending
+                to: closed
+                callback: $in_stock = false
+              - name: refuse
+                icon: ban
+                from: pending
+                to: refused
+                callback: $error.foo = true
+              - name: reopen
+                from:
+                  - closed
+                  - refused
+                to: pending
+                callback: $in_stock = true
+        - name: sub_category
+          type: belongs_to
+          options:
+            required: true
+    - name: order
+      virtuals:
+        - name: reference
+          function: ORDER-$product.id
+      attributes:
+        - name: title
+          type: text
+        - name: country
+          type: country
+        - name: start_at
+          type: datetime
+          options:
+            required: true
+            less_than: ends_at
+        - name: ends_at
+          type: datetime
+          options:
+            required: true
+            greater_than: start_at
+        - name: invoices
+          type: attachments
+        - name: product
+          type: belongs_to
+    - name: stock_movement
+      options:
+        icon: people_carry
+        actions:
+          - index
+          - show
+          - create
+          - destroy
+      triggers:
+        - action: create
+          callback: $product.quantity -= quantity
+        - action: destroy
+          callback: $product.quantity += quantity
+      attributes:
+        - name: quantity
+          type: integer
+        - name: product
+          type: belongs_to
+          options:
+            required: true
