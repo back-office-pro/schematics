@@ -25,6 +25,7 @@ after_bundle do
   rails_command 'db:reset'
   rails_command 'db:migrate'
   rails_command 'db:fixtures:load FIXTURES_PATH="spec/fixtures" FIXTURES=users,active_storage/attachments,active_storage/blobs,roles,charts,stats,clients,sub_categories,categories,products,orders,stock_movements,imports' # rubocop:disable Layout/LineLength
+  rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
   rails_command 'schematics:licence:renew[enterprise,12]'
