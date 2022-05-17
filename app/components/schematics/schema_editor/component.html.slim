@@ -1,4 +1,10 @@
-= simple_form_for Schematics::Schema.instance, as: :schema_dataset, url: schema_datasets_path, method: :post, wrapper: :input_group, validate: true, html: { data: { 'auto-save-target': 'form' } } do |form|
+= simple_form_for Schematics::Schema.instance,
+                  as: :schema_dataset,
+                  url: schema_datasets_path,
+                  method: :post,
+                  wrapper: :input_group,
+                  validate: true,
+                  html: { data: { 'auto-save-target': 'form' } } do |form|
   .row
     .col
       .tab-content
