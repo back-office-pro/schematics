@@ -1,0 +1,16 @@
+---
+en:
+  activerecord:
+    attributes:
+      schema_dataset:
+        data: Data
+        state: State
+        states:
+          migrated: Migrated
+          planned: Planned
+        version: Version
+    models:
+      schema_dataset:
+        gender: female
+        one: Application version
+        other: Application versions
