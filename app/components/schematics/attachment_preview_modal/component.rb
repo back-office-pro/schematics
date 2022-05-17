@@ -11,13 +11,9 @@ module Schematics
         @icon = icon
       end
 
-      def target
-        "attachment-preview-modal-#{@attachment.id}"
-      end
+      def label = "#{target}-label"
 
-      def label
-        "#{target}-label"
-      end
+      def target = "attachment-preview-modal-#{@attachment.id}"
     end
   end
 end

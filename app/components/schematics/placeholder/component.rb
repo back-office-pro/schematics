@@ -9,13 +9,11 @@ module Schematics
         @size = size
       end
 
-      def visible?
-        @visible
-      end
-
       def css_classes
         'd-none' unless visible?
       end
+
+      def visible? = @visible
     end
   end
 end

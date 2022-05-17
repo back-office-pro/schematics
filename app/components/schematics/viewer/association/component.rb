@@ -12,17 +12,16 @@ module Schematics
           @highlight = highlight
         end
 
-        def title
-          case @resources.first
-          when ::ActiveStorage::Attachment
-            @resources
-              .first
-              .record
-              .class
-              .human_attribute_name(@resources.first.name, count: @resources.size)
-          else
-            model_class.human_name(count: @resources.size).titleize
-          end
+        def collapse_css_class
+          return if collapsed?
+
+          'show'
+        end
+
+        def collapsed? = @collapsed
+
+        def header_button_css_class
+          'collapsed' if collapsed?
         end
 
         def icon
@@ -44,18 +43,17 @@ module Schematics
           @id ||= "collapse-#{SecureRandom.base58}"
         end
 
-        def collapsed?
-          @collapsed
-        end
-
-        def header_button_css_class
-          'collapsed' if collapsed?
-        end
-
-        def collapse_css_class
-          return if collapsed?
-
-          'show'
+        def title
+          case @resources.first
+          when ::ActiveStorage::Attachment
+            @resources
+              .first
+              .record
+              .class
+              .human_attribute_name(@resources.first.name, count: @resources.size)
+          else
+            model_class.human_name(count: @resources.size).titleize
+          end
         end
       end
     end

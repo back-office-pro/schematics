@@ -11,6 +11,14 @@ module Schematics
                     :calender_end_date
     end
 
+    def pagy_calendar_filter(collection, from, to)
+      collection.third[:where][calendar_start_attribute] = {
+        gte: calendar_start_date || from.to_date,
+        lte: calendar_end_date || to.to_date
+      }
+      collection
+    end
+
     def pagy_calendar_period(*)
       [
         calendar_start_date ||
@@ -22,18 +30,10 @@ module Schematics
       ].map(&:in_time_zone).map(&:to_time)
     end
 
-    def pagy_calendar_filter(collection, from, to)
-      collection.third[:where][calendar_start_attribute] = {
-        gte: calendar_start_date || from.to_date,
-        lte: calendar_end_date || to.to_date
-      }
-      collection
-    end
-
     private
 
-    def calendar_start_date
-      params.dig(:filter, calendar_start_attribute, :gte)&.to_date
+    def calendar_end_attribute
+      entity.datetime_attributes.second.name.to_sym # TODO: could work randomly
     end
 
     def calendar_end_date
@@ -44,8 +44,8 @@ module Schematics
       entity.datetime_attributes.first.name.to_sym # TODO: could work randomly
     end
 
-    def calendar_end_attribute
-      entity.datetime_attributes.second.name.to_sym # TODO: could work randomly
+    def calendar_start_date
+      params.dig(:filter, calendar_start_attribute, :gte)&.to_date
     end
   end
 end

@@ -44,25 +44,23 @@ module Schematics
 
     private
 
-    def model_class
-      ::User
-    end
-
-    def permitted_params
-      super
-        .excluding(:role_id)
-        .push(:current_password)
+    def attributes
+      entity
+        .fillable_elements
+        .insert(2, current_password_attribute)
+        .reject_is_a?(Attributes::Association)
     end
 
     def current_password_attribute
       Attributes::Digest.new(entity:, name: 'current_password', options: { required: true })
     end
 
-    def attributes
-      entity
-        .fillable_elements
-        .insert(2, current_password_attribute)
-        .reject_is_a?(Attributes::Association)
+    def model_class = ::User
+
+    def permitted_params
+      super
+        .excluding(:role_id)
+        .push(:current_password)
     end
   end
 end

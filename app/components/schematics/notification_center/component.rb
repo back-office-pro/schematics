@@ -7,10 +7,14 @@ module Schematics
       delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
       delegate :read_notifications_at, :preferences, to: :current_user
 
-      def versions
-        @versions ||= Version
-                      .timeline(current_ability)
-                      .limit(VERSIONS_LIMIT)
+      def display_unread_count
+        unread_count >= 10 ? '9+' : unread_count
+      end
+
+      def icon_class
+        return 'fa-lg' if unread_count.zero?
+
+        %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
       end
 
       def unread_count
@@ -20,14 +24,10 @@ module Schematics
                           .size
       end
 
-      def display_unread_count
-        unread_count >= 10 ? '9+' : unread_count
-      end
-
-      def icon_class
-        return 'fa-lg' if unread_count.zero?
-
-        %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
+      def versions
+        @versions ||= Version
+                      .timeline(current_ability)
+                      .limit(VERSIONS_LIMIT)
       end
     end
   end

@@ -10,8 +10,14 @@ module MainApp
       scope :accessible_by_role, ->(role) { left_joins(:roles).where(roles: [role, nil]) }
     end
 
-    def type
-      :"#{kind}_chart"
+    def border_width
+      (%w[line area].include?(kind) && 1) || 0
+    end
+
+    def css_id = "chart-#{id}"
+
+    def filename
+      to_s.parameterize
     end
 
     def icon
@@ -28,10 +34,8 @@ module MainApp
       }[kind.to_sym]
     end
 
-    def to_s
-      return ::I18n.t('errors.virtuals.no_method', name: model) unless model_class
-
-      [ytitle, ::I18n.t('by'), xtitle&.downcase].compact.join(' ')
+    def model_class
+      model.safe_constantize
     end
 
     def serializable_hash(*) # rubocop:disable Metrics/CyclomaticComplexity
@@ -47,6 +51,18 @@ module MainApp
     rescue ActiveRecord::StatementInvalid
       nil
     end
+
+    def suffix
+      entity_y_field.try(:unit)
+    end
+
+    def to_s
+      return ::I18n.t('errors.virtuals.no_method', name: model) unless model_class
+
+      [ytitle, ::I18n.t('by'), xtitle&.downcase].compact.join(' ')
+    end
+
+    def type = :"#{kind}_chart"
 
     def xtitle
       return unless model_class
@@ -65,26 +81,6 @@ module MainApp
         (::I18n.t('of') if entity_y_field),
         model_class.human_name_plural
       ].compact.join(' ')
-    end
-
-    def suffix
-      entity_y_field.try(:unit)
-    end
-
-    def css_id
-      "chart-#{id}"
-    end
-
-    def filename
-      to_s.parameterize
-    end
-
-    def border_width
-      (%w[line area].include?(kind) && 1) || 0
-    end
-
-    def model_class
-      model.safe_constantize
     end
 
     private

@@ -8,12 +8,12 @@ module Schematics
           value == 'true'
         end
 
-        def label
-          t(".#{name}", default: '')
-        end
-
         def css_class
           'w-0' if label.blank?
+        end
+
+        def label
+          t(".#{name}", default: '')
         end
       end
     end

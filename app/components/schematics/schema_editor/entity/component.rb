@@ -16,14 +16,14 @@ module Schematics
           @form = form
         end
 
-        def css_classes
-          %w[show active] if first_tab?
-        end
-
         def actions
           @entity
             .__send__(:default_actions)
             .map { [t("activerecord.attributes.permission.actions.#{_1}"), _1] }
+        end
+
+        def css_classes
+          %w[show active] if first_tab?
         end
 
         def icons

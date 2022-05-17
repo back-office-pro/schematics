@@ -5,8 +5,6 @@ module Schematics
     module ActiveRecord
       module Generators
         module MigrationGenerator
-          private
-
           def set_local_assigns!
             case file_name
             when /^drop_(.+)/
@@ -30,24 +28,26 @@ module Schematics
             end
           end
 
-          def templates_path
-            Schematics::Engine.root.join('lib', 'templates', 'active_record', 'migration')
+          private
+
+          def change_column_migration_template_path
+            templates_path.join('change_column_migration.rb')
           end
 
           def drop_table_migration_template_path
             templates_path.join('drop_table_migration.rb')
           end
 
-          def rename_table_migration_template_path
-            templates_path.join('rename_table_migration.rb')
-          end
-
           def rename_column_migration_template_path
             templates_path.join('rename_column_migration.rb')
           end
 
-          def change_column_migration_template_path
-            templates_path.join('change_column_migration.rb')
+          def rename_table_migration_template_path
+            templates_path.join('rename_table_migration.rb')
+          end
+
+          def templates_path
+            Schematics::Engine.root.join('lib', 'templates', 'active_record', 'migration')
           end
         end
       end

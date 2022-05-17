@@ -16,7 +16,9 @@ module Schematics
       attr_accessor :inverse_entity
 
       def open_api_type = { id!: ::String }
+
       def column_name = "#{super}_id"
+
       def weight = 2
 
       def options_for_migration

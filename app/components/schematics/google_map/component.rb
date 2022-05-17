@@ -12,9 +12,7 @@ module Schematics
         @address.present?
       end
 
-      def url
-        "https://www.google.com/maps/embed/v1/place?q=#{address}&key=#{api_key}"
-      end
+      def url = "https://www.google.com/maps/embed/v1/place?q=#{address}&key=#{api_key}"
 
       private
 
@@ -22,9 +20,7 @@ module Schematics
         CGI.escape(@address)
       end
 
-      def api_key
-        settings(:google_cloud_api_key)
-      end
+      def api_key = settings(:google_cloud_api_key)
     end
   end
 end

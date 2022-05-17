@@ -9,8 +9,18 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Enumerable
 
-      def database_type = 'integer'
       def collection = super.sort
+
+      def database_type = 'integer'
+
+      def format(value)
+        value && translate(
+          value.to_sym,
+          default: value.humanize,
+          scope: [:activerecord, :attributes, entity.name, name.pluralize]
+        )
+      end
+
       def icon = :list_ol
 
       def to_str
@@ -23,14 +33,6 @@ module Schematics
             enum :#{name}, #{to_h}, prefix: true
           RUBY
         end
-      end
-
-      def format(value)
-        value && translate(
-          value.to_sym,
-          default: value.humanize,
-          scope: [:activerecord, :attributes, entity.name, name.pluralize]
-        )
       end
 
       private

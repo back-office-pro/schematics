@@ -40,12 +40,12 @@ module Schematics
       end
     end
 
-    def show?
-      instance_options[:template] == 'show'
-    end
-
     def metadata?
       instance_options[:metadata]
+    end
+
+    def show?
+      instance_options[:template] == 'show'
     end
   end
 end

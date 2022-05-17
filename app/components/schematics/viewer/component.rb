@@ -26,10 +26,6 @@ module Schematics
 
       protected
 
-      def model_class
-        @resources.try(:klass) || @resources.first.class
-      end
-
       def col_preference_class(field)
         preference = "col_#{entity.table_name}_#{field.name}"
         return preference if preferences(preference, true)
@@ -37,9 +33,11 @@ module Schematics
         "#{preference} d-none"
       end
 
-      def tbody_css_classes
-        %w[animate__animated animate__slideInRight]
+      def model_class
+        @resources.try(:klass) || @resources.first.class
       end
+
+      def tbody_css_classes = %w[animate__animated animate__slideInRight]
     end
   end
 end

@@ -17,26 +17,18 @@ module MainApp
       role == ::Role.admin
     end
 
-    def online?
-      @online ||= sessions.active.exists?
-    end
-
     def confirmed?
       password_digest.present?
+    end
+
+    def online?
+      @online ||= sessions.active.exists?
     end
 
     def password_reset_token_expired?
       return false unless confirmed?
 
       PASSWORD_RESET_TOKEN_DURATION.ago.after?(reset_password_sent_at)
-    end
-
-    def time_zone
-      super || Rails.configuration.time_zone
-    end
-
-    def to_s
-      super.presence || email
     end
 
     def search_history
@@ -49,6 +41,14 @@ module MainApp
         .load_async
         .pluck(:query)
         .uniq
+    end
+
+    def time_zone
+      super || Rails.configuration.time_zone
+    end
+
+    def to_s
+      super.presence || email
     end
 
     def typeahead_history(model, name)

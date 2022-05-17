@@ -14,12 +14,12 @@ module Schematics
           @resource = resource
         end
 
-        def render?
-          value.present?
-        end
-
         def id
           @id ||= "collapse-#{SecureRandom.base58}"
+        end
+
+        def render?
+          value.present?
         end
 
         def title

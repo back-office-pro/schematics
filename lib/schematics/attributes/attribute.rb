@@ -25,8 +25,6 @@ module Schematics
       end
 
       def open_api_type = ::String
-      def to_str = ''
-      def weight = 1
 
       def options
         Schematics::Options.new(options: @options)
@@ -35,6 +33,10 @@ module Schematics
       def to_sql
         [entity.table_name.pluralize, name].join('.')
       end
+
+      def to_str = ''
+
+      def weight = 1
     end
   end
 end

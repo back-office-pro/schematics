@@ -15,9 +15,7 @@ module Schematics
           'fw-bold' if unread?
         end
 
-        def href
-          message_path(@message)
-        end
+        def href = message_path(@message)
       end
     end
   end

@@ -38,12 +38,8 @@ module MainApp
 
     private
 
-    def i18n_title_path
-      'sessions'
-    end
+    def i18n_title_path = 'sessions'
 
-    def permitted_params
-      %i[email password remember_me]
-    end
+    def permitted_params = %i[email password remember_me]
   end
 end

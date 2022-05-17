@@ -18,6 +18,10 @@ module Schematics
       end
     end
 
+    def content_type = ::Mime[extension].to_s
+
+    def extension = :csv
+
     def file
       @file ||= begin
         file = Tempfile.new
@@ -31,25 +35,17 @@ module Schematics
       [human_name_plural.dasherize, extension].join('.')
     end
 
-    def extension
-      :csv
-    end
-
-    def content_type
-      ::Mime[extension].to_s
-    end
-
     protected
+
+    def elements
+      entity.fillable_elements
+    end
 
     def generate(col_sep: ',')
       CSV.generate(headers: true, col_sep:) do |file|
         file << headers
         yield file
       end
-    end
-
-    def elements
-      entity.fillable_elements
     end
 
     def headers

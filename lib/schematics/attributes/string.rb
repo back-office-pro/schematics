@@ -6,6 +6,7 @@ module Schematics
       include Behaviours::Listable
 
       def database_type = 'string'
+
       def icon = :align_justify
 
       def validators

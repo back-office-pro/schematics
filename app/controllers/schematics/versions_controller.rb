@@ -13,13 +13,6 @@ module Schematics
       end
     end
 
-    def show
-      respond_to do |format|
-        format.html
-        format.json { render json: @version }
-      end
-    end
-
     def revert
       result = Versions::Revert.call(version: @version)
       if result.success?
@@ -45,10 +38,15 @@ module Schematics
       end
     end
 
+    def show
+      respond_to do |format|
+        format.html
+        format.json { render json: @version }
+      end
+    end
+
     private
 
-    def model_class
-      Version
-    end
+    def model_class = Version
   end
 end

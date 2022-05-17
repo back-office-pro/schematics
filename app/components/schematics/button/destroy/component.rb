@@ -10,9 +10,7 @@ module Schematics
           @compact = compact
         end
 
-        def render?
-          can?(:destroy, @resource)
-        end
+        def compact? = @compact
 
         def css_classes
           [
@@ -35,18 +33,16 @@ module Schematics
           }
         end
 
+        def render?
+          can?(:destroy, @resource)
+        end
+
+        def target = "confirm-dialog-#{@resource.id}"
+
         def title
           return unless compact?
 
           t('schematics.application.button.destroy')
-        end
-
-        def target
-          "confirm-dialog-#{@resource.id}"
-        end
-
-        def compact?
-          @compact
         end
       end
     end

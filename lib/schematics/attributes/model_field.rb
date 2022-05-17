@@ -8,7 +8,6 @@ module Schematics
       delegate :depends_on, to: :options
 
       def collection = super.sort
-      def icon = :code
 
       def format(value)
         return unless value
@@ -18,6 +17,8 @@ module Schematics
       rescue StandardError
         value
       end
+
+      def icon = :code
 
       def values
         Schema

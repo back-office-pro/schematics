@@ -38,6 +38,7 @@ module Schematics
       end
 
       def open_api_type = ::String
+
       def weight = 1
 
       def options

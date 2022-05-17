@@ -6,8 +6,9 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
-      def open_api_type = ::Float
       def icon = :square_root_alt
+
+      def open_api_type = ::Float
 
       def to_sql
         super.join

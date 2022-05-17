@@ -12,16 +12,16 @@ module MainApp
       super || Rails.application.class.module_parent_name
     end
 
-    def theme_color
-      super || Rails.configuration.theme_color
-    end
-
     def palette
       theme_color
         .dup
         .paint
         .palette
         .analogous(as: :hex)
+    end
+
+    def theme_color
+      super || Rails.configuration.theme_color
     end
   end
 end

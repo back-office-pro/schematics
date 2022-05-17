@@ -3,11 +3,11 @@
 module Schematics
   module Attributes
     class Year < Datetime
-      def group_method = :group_by_year
-
       def format(value)
         value && localize(value, format: :year)
       end
+
+      def group_method = :group_by_year
     end
   end
 end

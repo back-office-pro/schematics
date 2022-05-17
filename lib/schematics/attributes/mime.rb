@@ -7,6 +7,7 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class Mime < String
       def default = 'image/png'
+
       def icon = :file
 
       def format(value)

@@ -5,19 +5,32 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      rescue_from ActionController::UnknownFormat, with: :unknown_format
+      rescue_from CanCan::AccessDenied, with: :access_denied
+      rescue_from AASM::InvalidTransition, with: :invalid_transition
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-      rescue_from AASM::InvalidTransition, with: :invalid_transition
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
-      rescue_from CanCan::AccessDenied, with: :access_denied
+      rescue_from ActionController::UnknownFormat, with: :unknown_format
     end
 
-    def unknown_format
+    def access_denied
       respond_to do |format|
-        format.json { head :not_acceptable }
+        format.json { head :forbidden }
         format.any do
-          redirect_to schematics.root_path, alert: t('schematics.application.unknown_format.alert')
+          redirect_to schematics.root_path, alert: t('schematics.application.access_denied.alert')
+        end
+      end
+    end
+
+    def invalid_transition(exception)
+      respond_to do |format|
+        format.html do
+          redirect_back_or_to @resource,
+                              alert: t('schematics.application.invalid_transition.alert')
+        end
+        format.json do
+          render json: { errors: [{ exception.state_machine_name => [exception.message] }] },
+                 status: :method_not_allowed
         end
       end
     end
@@ -45,19 +58,6 @@ module Schematics
       end
     end
 
-    def invalid_transition(exception)
-      respond_to do |format|
-        format.html do
-          redirect_back_or_to @resource,
-                              alert: t('schematics.application.invalid_transition.alert')
-        end
-        format.json do
-          render json: { errors: [{ exception.state_machine_name => [exception.message] }] },
-                 status: :method_not_allowed
-        end
-      end
-    end
-
     def stale_object_error
       respond_to do |format|
         format.json { head :precondition_failed }
@@ -69,11 +69,11 @@ module Schematics
       end
     end
 
-    def access_denied
+    def unknown_format
       respond_to do |format|
-        format.json { head :forbidden }
+        format.json { head :not_acceptable }
         format.any do
-          redirect_to schematics.root_path, alert: t('schematics.application.access_denied.alert')
+          redirect_to schematics.root_path, alert: t('schematics.application.unknown_format.alert')
         end
       end
     end

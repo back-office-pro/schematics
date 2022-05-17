@@ -8,6 +8,7 @@ module Schematics
       include Behaviours::Renderable
 
       def unique? = true
+
       def default = SecureRandom.uuid
     end
   end

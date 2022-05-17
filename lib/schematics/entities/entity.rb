@@ -61,13 +61,21 @@ module Schematics
       end
 
       def associations = @associations ||= []
+
       def attributes = @attributes ||= []
+
       def virtuals = @virtuals ||= []
+
       def triggers = @triggers ||= []
+
       def weight = has_many_and_through_and_belongs_to_many_associations.size
+
       def fields = attributes + virtuals
+
       def elements = fields + associations
+
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
+
       def to_str = ''
 
       def method_missing(method_name, *_args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -220,6 +228,7 @@ module Schematics
       protected
 
       def default_actions = %w[index show create update destroy archive]
+
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
 
       def search_data_elements

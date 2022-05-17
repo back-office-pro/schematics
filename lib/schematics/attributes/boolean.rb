@@ -8,8 +8,9 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
 
-      def open_api_type = 'boolean'
       def icon = :toggle_on
+
+      def open_api_type = 'boolean'
 
       protected
 

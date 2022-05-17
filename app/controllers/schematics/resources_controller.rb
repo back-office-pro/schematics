@@ -30,6 +30,95 @@ module Schematics
       end
     end
 
+    def archive
+      result = Resources::Archive.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
+          end
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
+        end
+      end
+    end
+
+    def autocomplete
+      authorize! :index, model_class
+      field = params.require(:field).to_sym
+      @resources = model_class.search(**search_params.merge(select: field, load: false))
+      render json: @resources.limit(AUTOCOMPLETE_LIMIT).map(&field).map(&:to_s).uniq
+    end
+
+    def create
+      @resource = model_class.new(resource_params)
+      result = Resources::Create.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to @resource, notice: tscope(result.message)
+          end
+          format.json { render json: @resource, status: :created, location: @resource }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :new, status: :unprocessable_entity
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+    def delete; end
+
+    def destroy
+      result = Resources::Destroy.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to polymorphic_path(model_class),
+                        notice: tscope(result.message),
+                        status: :see_other
+          end
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
+        end
+      end
+    end
+
+    def duplicate
+      @resource = @resource.dup
+      result = Resources::Duplicate.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
+          end
+          format.json { render json: @resource, status: :created, location: @resource }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :new, status: :unprocessable_entity
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+    def edit; end
+
     def index
       if params.key?(:all_pages)
         @resources = model_class.search(**search_params)
@@ -56,6 +145,27 @@ module Schematics
       end
     end
 
+    def new
+      @resource = model_class.new
+    end
+
+    def restore
+      result = Resources::Restore.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
+          end
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
+        end
+      end
+    end
+
     def show
       respond_to do |format|
         format.json { render json: @resource }
@@ -63,76 +173,6 @@ module Schematics
         format.pdf do
           GeneratePdfJob.perform_later(current_user.id, model_class.to_s, @resource.id)
           head :accepted
-        end
-      end
-    end
-
-    def new
-      @resource = model_class.new
-    end
-
-    def edit; end
-
-    def delete; end
-
-    def create
-      @resource = model_class.new(resource_params)
-      result = Resources::Create.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to @resource, notice: tscope(result.message)
-          end
-          format.json { render json: @resource, status: :created, location: @resource }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :new, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-
-    def duplicate
-      @resource = @resource.dup
-      result = Resources::Duplicate.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
-          end
-          format.json { render json: @resource, status: :created, location: @resource }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :new, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-
-    def update
-      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :edit, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -159,75 +199,40 @@ module Schematics
       end
     end
 
-    def destroy
-      result = Resources::Destroy.call(resource: @resource)
+    def update
+      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class),
-                        notice: tscope(result.message),
-                        status: :see_other
+            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
           end
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
-        end
-      end
-    end
-
-    def archive
-      result = Resources::Archive.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
+            flash.now[:alert] = tscope(result.message)
+            render :edit, status: :unprocessable_entity
           end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
-    end
-
-    def restore
-      result = Resources::Restore.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
-        end
-      end
-    end
-
-    def autocomplete
-      authorize! :index, model_class
-      field = params.require(:field).to_sym
-      @resources = model_class.search(**search_params.merge(select: field, load: false))
-      render json: @resources.limit(AUTOCOMPLETE_LIMIT).map(&field).map(&:to_s).uniq
     end
 
     def view_assigns
       super.merge(human_name_plural:, human_name:, gender:)
     end
 
-    def i18n_title_path
-      'schematics.resources'
-    end
-
     protected
+
+    def i18n_title_path = 'schematics.resources'
+
+    def set_breadcrumb
+      return unless can?(:index, model_class)
+
+      breadcrumb t('titles.schematics.resources.index', human_name_plural:),
+                 polymorphic_path(model_class)
+    end
 
     def set_resource
       @resource = model_class
@@ -238,13 +243,6 @@ module Schematics
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to polymorphic_path(@resource), status: :moved_permanently
-    end
-
-    def set_breadcrumb
-      return unless can?(:index, model_class)
-
-      breadcrumb t('titles.schematics.resources.index', human_name_plural:),
-                 polymorphic_path(model_class)
     end
 
     def tscope(message, **kwargs)

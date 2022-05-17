@@ -12,16 +12,16 @@ module MainApp
 
     protected
 
+    def parent_model_class
+      @resource.model.try(:safe_constantize)
+    end
+
     def set_resources
       @resources = parent_model_class
                    .includes(parent_model_class.entity.includes)
                    .where(id: @resource.ids)
                    .accessible_by(current_ability)
                    .load_async
-    end
-
-    def parent_model_class
-      @resource.model.try(:safe_constantize)
     end
   end
 end

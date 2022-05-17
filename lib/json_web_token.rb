@@ -20,8 +20,6 @@ class JsonWebToken
 
     private
 
-    def exp
-      24.hours.from_now.to_i
-    end
+    def exp = 24.hours.from_now.to_i
   end
 end

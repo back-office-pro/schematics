@@ -3,8 +3,13 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
-      def toggled?
-        preferences(:sidebar_toggled, false)
+      def data
+        {
+          controller: 'tooltip',
+          'bs-toggle': 'tooltip',
+          'bs-placement': 'bottom',
+          'bs-container': '.sidebar'
+        }
       end
 
       def entities
@@ -16,14 +21,7 @@ module Schematics
           .sort_by { _1.model_class.human_name }
       end
 
-      def data
-        {
-          controller: 'tooltip',
-          'bs-toggle': 'tooltip',
-          'bs-placement': 'bottom',
-          'bs-container': '.sidebar'
-        }
-      end
+      def toggled? = preferences(:sidebar_toggled, false)
     end
   end
 end

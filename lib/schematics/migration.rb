@@ -18,12 +18,12 @@ module Schematics
 
     private
 
-    def entity
-      schema.find_entity_by_name(@entity)
-    end
-
     def command
       Commands::Command.build(type:, entity:, attribute:)
+    end
+
+    def entity
+      schema.find_entity_by_name(@entity)
     end
   end
 end

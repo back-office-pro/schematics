@@ -3,9 +3,18 @@
 module Schematics
   module Attributes
     class Attachments < Attachment
-      def open_api_type = [super]
       def default = [super]
+
+      def format(value)
+        value.map do |attachment|
+          Rails.application.routes.url_helpers.url_for(attachment)
+        end
+      end
+
       def json_default = [super]
+
+      def open_api_type = [super]
+
       def permitted_json_params = permitted_params
 
       def permitted_params
@@ -19,12 +28,6 @@ module Schematics
         <<~RUBY
           #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
         RUBY
-      end
-
-      def format(value)
-        value.map do |attachment|
-          Rails.application.routes.url_helpers.url_for(attachment)
-        end
       end
 
       def to_str

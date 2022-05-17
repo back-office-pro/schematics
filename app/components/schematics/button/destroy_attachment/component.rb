@@ -13,10 +13,6 @@ module Schematics
           @attachment = attachment
         end
 
-        def render?
-          @resource && can?(:destroy, @attachment)
-        end
-
         def field
           @resource
             .class
@@ -24,9 +20,11 @@ module Schematics
             .find_field_by_name(name)
         end
 
-        def target
-          "confirm-dialog-#{@resource.id}-#{@attachment.id}"
+        def render?
+          @resource && can?(:destroy, @attachment)
         end
+
+        def target = "confirm-dialog-#{@resource.id}-#{@attachment.id}"
       end
     end
   end

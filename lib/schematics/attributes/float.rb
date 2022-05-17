@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Numerable
 
       def database_type = 'float'
+
       def open_api_type = ::Float
     end
   end

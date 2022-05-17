@@ -3,8 +3,10 @@
 module Schematics
   module Attributes
     class Url < Citext
-      def encrypted? = true
       def default = "https://www.#{SecureRandom.base58}.com"
+
+      def encrypted? = true
+
       def icon = :chrome
 
       def validators

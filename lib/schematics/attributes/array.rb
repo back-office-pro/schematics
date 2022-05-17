@@ -5,17 +5,20 @@ module Schematics
     class Array < Attribute
       include Behaviours::Fillable
 
-      def open_api_type = [::String]
       def database_type = 'string'
+
       def default = []
+
       def icon = :table
 
-      def permitted_params
-        { super => [] }
-      end
+      def open_api_type = [::String]
 
       def options_for_migration
         super.merge(array: true)
+      end
+
+      def permitted_params
+        { super => [] }
       end
 
       protected

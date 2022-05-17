@@ -20,12 +20,6 @@ module MainApp
 
     protected
 
-    def set_resource
-      super
-    rescue ActiveRecord::RecordNotFound
-      @resource = model_class.new(query: params[:id])
-    end
-
     def searches
       Schematics::Schema
         .instance
@@ -41,6 +35,12 @@ module MainApp
             scope_results: -> { _1.accessible_by(current_ability) }
           )
         end
+    end
+
+    def set_resource
+      super
+    rescue ActiveRecord::RecordNotFound
+      @resource = model_class.new(query: params[:id])
     end
   end
 end

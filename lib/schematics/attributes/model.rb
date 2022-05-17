@@ -7,7 +7,6 @@ module Schematics
       include Behaviours::Enumerable
 
       def collection = super.sort
-      def icon = :project_diagram
 
       def format(value)
         value
@@ -15,6 +14,8 @@ module Schematics
           &.human_name
           &.titleize || value
       end
+
+      def icon = :project_diagram
 
       def values
         Schema
