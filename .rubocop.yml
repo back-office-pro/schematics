@@ -50,6 +50,10 @@ Layout/SingleLineBlockChain:
 Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: false
 Layout/OrderedMethods:
+  IgnoredMethods:
+    - initialize
+    - method_missing
+    - respond_to_missing?
   Exclude:
     - lib/generators/**/*
 Lint/HeredocMethodCallPosition:
