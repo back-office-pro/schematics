@@ -66,6 +66,17 @@ module Schematics
           resources_for(date.yesterday).include?(resource) &&
             resources_for(date.tomorrow).include?(resource)
         end
+
+        def start_date
+          start_of_month_date
+            .beginning_of_week
+            .to_date
+        end
+
+        def start_of_month_date
+          (calendar_start_date || @resources.map(&calendar_start_attribute).min || ::Date.current)
+            .beginning_of_month
+        end
       end
     end
   end
