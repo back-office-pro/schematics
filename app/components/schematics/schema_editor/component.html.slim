@@ -1,8 +1,9 @@
-= simple_form_for Schematics::Schema.instance, url: schema_path, wrapper: :input_group, validate: true, method: :patch do |form|
-  = render Schematics::SchemaEditor::Tabs::Component.new
-  .card.shadow-sm.border-0
-    .tab-content.card-body.p-3
-      = render Schematics::SchemaEditor::Entity::Component.with_collection(entities, form:)
-      .pt-3
-        = render Schematics::Button::Confirm::Component.new
-        = render Schematics::Button::Cancel::Component.new(path: admin_path)
+= simple_form_for Schematics::Schema.instance, as: :schema_dataset, url: schema_datasets_path, method: :post, wrapper: :input_group, validate: true, html: { data: { 'auto-save-target': 'form' } } do |form|
+  .row
+    .col
+      .tab-content
+        = render Schematics::SchemaEditor::Entity::Component.with_collection(entities, form:)
+    .col-auto
+      = render Schematics::SchemaEditor::Tabs::Component.new
+      = render Schematics::Button::Confirm::Component.new
+      = render Schematics::Button::Cancel::Component.new(path: ::SchemaDataset)
