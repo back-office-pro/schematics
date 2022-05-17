@@ -10,7 +10,6 @@ Schematics::Engine.routes.draw do
     draw :password_resets
     resource :preferences, only: %i[edit update]
     resource :profile, only: %i[edit update], controller: :profile
-    resource :schema, only: %i[edit update], controller: :schema
     resources :versions, only: %i[index show] do
       patch :revert, on: :member
     end

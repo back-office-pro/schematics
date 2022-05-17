@@ -15,9 +15,6 @@ fr:
           entities: Quota ressources
           storage: Quota stockage
           users: Quota utilisateurs
-        schema:
-          caption: Editeur du schéma de l'application
-          title: Editer mon application
         sessions:
           caption: Gérer les accès à l'application
           title: Accès sécurisés

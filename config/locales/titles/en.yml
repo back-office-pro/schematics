@@ -36,8 +36,6 @@ en:
         new: Add a new %{human_name}
         show: "%{resource}"
         update: Edit %{resource}
-      schema:
-        edit: Edit my application
       swagger:
         index: API documentation
       versions:
