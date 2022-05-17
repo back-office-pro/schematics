@@ -14,10 +14,10 @@ module Schematics
       fetch(method_name.to_s.chomp('?').to_sym, false)
     end
 
-    def options = @options || {}
-
     def respond_to_missing?(method_name, *_args)
       key?(method_name.to_s.chomp('?').to_sym)
     end
+
+    def options = @options || {}
   end
 end
