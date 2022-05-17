@@ -9,11 +9,10 @@ module Schematics
     include ::ActiveModel::API
     attr_reader :entities
 
-    CORE_DATA_FILEPATH = File.expand_path('../core.json', __dir__).freeze
-    APP_DATA_FILEPATH = ::Rails.root&.join('app.json').freeze
+    def initialize = load
 
-    def initialize
-      self.entities = data[:entities]
+    def load(data: [])
+      self.entities = core_data.concat(data)
     end
 
     def entities=(entities)
@@ -66,20 +65,10 @@ module Schematics
 
     private
 
-    def data
-      @data ||= app_data.merge(core_data) { _2 + _3 } # rubocop:disable Style/NumberedParametersLimit
-    end
-
     def core_data
       ::JSON
-        .parse(File.read(CORE_DATA_FILEPATH), symbolize_names: true)
-        .tap { |json| json[:entities].each { _1[:options]&.store(:core, true) } }
-    end
-
-    def app_data
-      return {} unless APP_DATA_FILEPATH
-
-      ::JSON.parse(File.read(APP_DATA_FILEPATH), symbolize_names: true)
+        .parse(File.read(File.expand_path('../core.json', __dir__)), symbolize_names: true)
+        .tap { |json| json.each { _1[:options]&.store(:core, true) } }
     end
 
     def add_associations_and_check_for_name_collisions
