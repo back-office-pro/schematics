@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_storage_base64', '~> 2.0.0'
   spec.add_dependency 'active_storage_validations', '~> 0.9.8'
   spec.add_dependency 'annotate', '~> 3.2.0'
-  spec.add_dependency 'bcrypt', '~> 3.1.16'
+  spec.add_dependency 'bcrypt', '~> 3.1.18'
   spec.add_dependency 'better_errors', '~> 2.10.0beta2'
   spec.add_dependency 'binding_of_caller', '~> 1.0.0'
   spec.add_dependency 'bootstrap-email', '~> 1.1.5'
