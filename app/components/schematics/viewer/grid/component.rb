@@ -10,9 +10,11 @@ module Schematics
           end
         end
 
-        def carousel_css_classes
-          %w[carousel-item active text-center]
-        end
+        def carousel_css_classes = %w[
+          carousel-item
+          active
+          text-center
+        ]
 
         def tbody_css_classes
           params[:page].presence && super
