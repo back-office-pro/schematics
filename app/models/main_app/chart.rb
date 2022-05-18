@@ -57,7 +57,7 @@ module MainApp
     end
 
     def to_s
-      return ::I18n.t('errors.virtuals.no_method', name: model) unless model_class
+      return ::I18n.t('errors.virtuals.name', name: model) unless model_class
 
       [ytitle, ::I18n.t('by'), xtitle&.downcase].compact.join(' ')
     end
