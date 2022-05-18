@@ -3,11 +3,9 @@
 module Schematics
   module Entities
     class Singleton < Entity
-      def to_str
-        <<~RUBY
-          include Schematics::Singleton
-        RUBY
-      end
+      def to_str = <<~RUBY
+        include Schematics::Singleton
+      RUBY
 
       protected
 

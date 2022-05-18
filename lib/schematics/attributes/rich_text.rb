@@ -27,11 +27,9 @@ module Schematics
           #{name}&.to_plain_text
         RUBY
 
-      def to_str
-        <<~RUBY
-          has_rich_text :#{name}, encrypted: true
-        RUBY
-      end
+      def to_str = <<~RUBY
+        has_rich_text :#{name}, encrypted: true
+      RUBY
 
       private
 

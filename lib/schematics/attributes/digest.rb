@@ -20,11 +20,9 @@ module Schematics
         [super, :"#{super}_confirmation"]
       end
 
-      def to_str
-        <<~RUBY
-          has_secure_password :#{name}, validations: false
-        RUBY
-      end
+      def to_str = <<~RUBY
+        has_secure_password :#{name}, validations: false
+      RUBY
 
       def validators
         super.merge(

@@ -9,8 +9,8 @@ module Schematics
 
       def readonly? = true
 
-      def to_str
-        super + <<~RUBY
+      def to_str = super
+        .concat <<~RUBY
           aasm column: :#{name}, enum: true, no_direct_assignment: true do
             state :#{values.first}, initial: true
             state :#{values.drop(1).join(', :')}
@@ -18,7 +18,6 @@ module Schematics
           end
           #{events_to_str}
         RUBY
-      end
 
       def events
         options.events.map { StateMachineEvent.new(entity:, **_1) }

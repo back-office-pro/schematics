@@ -5,11 +5,9 @@ module Schematics
     class Blob < Attachment
       def preload = { blob: :variant_records }
 
-      def search_data
-        <<~RUBY
-          #{name}: #{name}&.filename&.to_s
-        RUBY
-      end
+      def search_data = <<~RUBY
+        #{name}: #{name}&.filename&.to_s
+      RUBY
 
       def to_str = ''
     end

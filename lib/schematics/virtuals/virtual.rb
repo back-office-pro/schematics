@@ -55,16 +55,14 @@ module Schematics
         @tokens.map(&:to_sql)
       end
 
-      def to_str
-        <<~RUBY
-          define_attribute_method :#{@name}
-          def #{@name}
-            #{function}
-          rescue StandardError => e
-            e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
-          end
-        RUBY
-      end
+      def to_str = <<~RUBY
+        define_attribute_method :#{@name}
+        def #{@name}
+          #{function}
+        rescue StandardError => e
+          e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
+        end
+      RUBY
 
       def weight = 1
     end

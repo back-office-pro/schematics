@@ -22,13 +22,11 @@ module Schematics
         @field.try(:preload) || []
       end
 
-      def to_str
-        <<~RUBY
-          def to_s
-            #{name}_formatted || id
-          end
-        RUBY
-      end
+      def to_str = <<~RUBY
+        def to_s
+          #{name}_formatted || id
+        end
+      RUBY
 
       def serializer_class
         descriptor = name

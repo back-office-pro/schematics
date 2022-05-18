@@ -3,11 +3,9 @@
 module Schematics
   module Virtuals
     class Malformed < Virtual
-      def function
-        <<~RUBY.squish
-          raise ArgumentError
-        RUBY
-      end
+      def function = <<~RUBY.squish
+        raise ArgumentError
+      RUBY
 
       def icon = :triangle_exclamation
 

@@ -17,11 +17,9 @@ module Schematics
         inverse_of.pluralize
       end
 
-      def to_str
-        <<~RUBY
-          #{type} :#{name}
-        RUBY
-      end
+      def to_str = <<~RUBY
+        #{type} :#{name}
+      RUBY
     end
   end
 end
