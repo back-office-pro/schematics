@@ -142,27 +142,6 @@ module Schematics
             status = ability.can?(:update, record) ? :bad_request : :forbidden
             is_expected.to have_http_status(status)
           end
-
-          events.each do |event|
-            it "should #{event.name} record" do
-              patch path(record:, action: event.name), headers:, as: :html
-              if ability.can?(event.name.to_sym, record)
-                is_expected.to redirect_to(path(record:))
-              else
-                is_expected.to redirect_to(root_path)
-              end
-            end
-
-            it "should #{event.name} API record" do
-              patch path(record:, action: event.name), headers:, as: :json
-              if ability.can?(event.name.to_sym, record)
-                status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
-                is_expected.to have_http_status(status)
-              else
-                is_expected.to have_http_status(:forbidden)
-              end
-            end
-          end
         end
 
         if can?(:create) && model_class != ::Session
@@ -351,6 +330,27 @@ module Schematics
             else
               expect { delete path(record:, action: 'restore'), headers:, as: :json }
                 .not_to change(model_class, :count)
+              is_expected.to have_http_status(:forbidden)
+            end
+          end
+        end
+
+        events.each do |event|
+          it "should #{event.name} record" do
+            patch path(record:, action: event.name), headers:, as: :html
+            if ability.can?(event.name.to_sym, record)
+              is_expected.to redirect_to(path(record:))
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it "should #{event.name} API record" do
+            patch path(record:, action: event.name), headers:, as: :json
+            if ability.can?(event.name.to_sym, record)
+              status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed
+              is_expected.to have_http_status(status)
+            else
               is_expected.to have_http_status(:forbidden)
             end
           end

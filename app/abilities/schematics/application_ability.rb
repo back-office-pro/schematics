@@ -5,7 +5,6 @@ module Schematics
     include CanCan::Ability
 
     def initialize(*)
-      alias_action :trigger, to: :update
       alias_action :duplicate, :import, to: :create
       alias_action :restore, to: :archive
       alias_action :delete, to: :destroy
