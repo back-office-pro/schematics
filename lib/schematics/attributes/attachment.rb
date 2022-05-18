@@ -32,13 +32,11 @@ module Schematics
         { association_name => [blob: :variant_records] }
       end
 
-      def search_data
-        super
-          .concat(' ')
-          .concat <<~RUBY
-            (#{name}.filename.to_s if #{name}.attached?)
-          RUBY
-      end
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          (#{name}.filename.to_s if #{name}.attached?)
+        RUBY
 
       def to_str
         <<~RUBY

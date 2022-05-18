@@ -14,12 +14,10 @@ module Schematics
     end
 
     class_methods do
-      def searchkick_elements
-        entity
-          .searchable_elements
-          .map(&:name)
-          .map(&:to_sym)
-      end
+      def searchkick_elements = entity
+        .searchable_elements
+        .map(&:name)
+        .map(&:to_sym)
     end
   end
 end

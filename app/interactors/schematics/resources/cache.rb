@@ -20,12 +20,10 @@ module Schematics
 
       private
 
-      def cached_keys
-        entity
-          .attributes
-          .select(&:cached?)
-          .map(&:name)
-      end
+      def cached_keys = entity
+        .attributes
+        .select(&:cached?)
+        .map(&:name)
     end
   end
 end

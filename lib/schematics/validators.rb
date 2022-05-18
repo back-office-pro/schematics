@@ -11,11 +11,9 @@ module Schematics
     delegate :==, :empty?, :any?, to: :compact_validators
     attr_accessor :name, :validators
 
-    def compact_validators
-      validators
-        .transform_values { _1.try(:compact) || _1 }
-        .compact_blank
-    end
+    def compact_validators = validators
+      .transform_values { _1.try(:compact) || _1 }
+      .compact_blank
 
     def merge(other_validators)
       validators.deep_merge!(other_validators)

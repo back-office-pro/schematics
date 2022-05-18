@@ -17,13 +17,11 @@ module Schematics
 
       def icon = :project_diagram
 
-      def values
-        Schema
-          .instance
-          .entities
-          .reject(&entity_type)
-          .map(&:class_name)
-      end
+      def values = Schema
+        .instance
+        .entities
+        .reject(&entity_type)
+        .map(&:class_name)
 
       private
 

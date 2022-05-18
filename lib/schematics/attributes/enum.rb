@@ -37,13 +37,11 @@ module Schematics
 
       private
 
-      def to_h
-        values
-          .map(&:to_sym)
-          .map
-          .with_index
-          .to_h
-      end
+      def to_h = values
+        .map(&:to_sym)
+        .map
+        .with_index
+        .to_h
     end
   end
 end

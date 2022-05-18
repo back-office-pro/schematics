@@ -43,11 +43,9 @@ class LocalesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/
 
   private
 
-  def entity
-    Schematics::Schema
-      .instance
-      .find_entity_by_name(name.underscore)
-  end
+  def entity = Schematics::Schema
+    .instance
+    .find_entity_by_name(name.underscore)
 
   def create_route_file(locale)
     return if File.exist?(route_file_path(locale))

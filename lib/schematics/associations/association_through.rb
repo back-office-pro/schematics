@@ -16,14 +16,12 @@ module Schematics
         super.chomp('_through')
       end
 
-      def to_str
-        super
-          .concat(",\n")
-          .concat <<~RUBY.indent(8)
-            through: :#{@through.name},
-            source: :#{source}
-          RUBY
-      end
+      def to_str = super
+        .concat(",\n")
+        .concat <<~RUBY.indent(8)
+          through: :#{@through.name},
+          source: :#{source}
+        RUBY
     end
   end
 end

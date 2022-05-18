@@ -30,18 +30,14 @@ module Schematics
       )
     end
 
-    def i18n_javascript
-      t('javascript')
-        .deep_transform_keys { _1.to_s.camelize(:lower) }
-        .to_json
-        .html_safe # rubocop:disable Rails/OutputSafety
-    end
+    def i18n_javascript = t('javascript')
+      .deep_transform_keys { _1.to_s.camelize(:lower) }
+      .to_json
+      .html_safe # rubocop:disable Rails/OutputSafety
 
-    def maps_api_key_javascript
-      settings(:google_cloud_api_key)
-        .to_json
-        .html_safe # rubocop:disable Rails/OutputSafety
-    end
+    def maps_api_key_javascript = settings(:google_cloud_api_key)
+      .to_json
+      .html_safe # rubocop:disable Rails/OutputSafety
 
     def preferences(key, default = nil)
       current_user.preferences.fetch(key.to_s, default)
@@ -56,19 +52,15 @@ module Schematics
       end
     end
 
-    def theme_color_darken
-      settings(:theme_color)
-        .paint
-        .darken(5)
-        .to_s
-    end
+    def theme_color_darken = settings(:theme_color)
+      .paint
+      .darken(5)
+      .to_s
 
-    def theme_color_rgb
-      settings(:theme_color)
-        .paint
-        .to_rgb
-        .scan(/\d+/)
-        .join(', ')
-    end
+    def theme_color_rgb = settings(:theme_color)
+      .paint
+      .to_rgb
+      .scan(/\d+/)
+      .join(', ')
   end
 end

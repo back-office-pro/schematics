@@ -11,22 +11,18 @@ module Schematics
         super.first
       end
 
-      def to_str
-        super
-          .concat(",\n")
-          .concat <<~RUBY.indent(8)
-            inverse_of: :#{inverse_of},
-            autosave: true
-          RUBY
-      end
+      def to_str = super
+        .concat(",\n")
+        .concat <<~RUBY.indent(8)
+          inverse_of: :#{inverse_of},
+          autosave: true
+        RUBY
 
-      def search_data
-        super
-          .concat(' ')
-          .concat <<~RUBY
-            #{name}&.to_s
-          RUBY
-      end
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
     end
   end
 end

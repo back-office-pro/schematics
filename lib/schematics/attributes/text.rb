@@ -14,13 +14,11 @@ module Schematics
 
       def icon = :font
 
-      def search_data
-        super
-          .concat(' ')
-          .concat <<~RUBY
-            #{name}&.to_s
-          RUBY
-      end
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
 
       def format(value)
         value&.to_s

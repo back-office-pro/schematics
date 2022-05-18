@@ -20,14 +20,12 @@ module Schematics
 
       def icon = :code
 
-      def values
-        Schema
-          .instance
-          .entities
-          .reject(&:hidden?)
-          .flat_map(&:"#{field_type}_fields")
-          .map(&:method_name)
-      end
+      def values = Schema
+        .instance
+        .entities
+        .reject(&:hidden?)
+        .flat_map(&:"#{field_type}_fields")
+        .map(&:method_name)
 
       private
 

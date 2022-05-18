@@ -44,11 +44,9 @@ module Schematics
             schema_attribute&.name || super
           end
 
-          def options_for_migration
-            super
-              .tap { _1[:index] = { where: 'deleted_at IS NULL' } if _1[:foreign_key] }
-              .merge(attr_options)
-          end
+          def options_for_migration = super
+            .tap { _1[:index] = { where: 'deleted_at IS NULL' } if _1[:foreign_key] }
+            .merge(attr_options)
 
           def plural_name
             [super, ('column_options: { type: :uuid }' if @type == :join_table_second)]

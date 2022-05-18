@@ -30,12 +30,10 @@ module Schematics
       end
     end
 
-    def authorization_header
-      request
-        .headers['Authorization']
-        &.split(' ')
-        &.last
-    end
+    def authorization_header = request
+      .headers['Authorization']
+      &.split(' ')
+      &.last
 
     def current_ability
       @current_ability ||= Ability.new(current_user)

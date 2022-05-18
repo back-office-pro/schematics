@@ -34,37 +34,27 @@ class FixturesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics
     create_file(rich_texts_file_path)
   end
 
-  def generate_action_text_rich_texts
-    entity
-      .rich_text_attributes
-      .map(&method(:append_to_rich_texts_file))
-  end
+  def generate_action_text_rich_texts = entity
+    .rich_text_attributes
+    .map(&method(:append_to_rich_texts_file))
 
-  def generate_active_storage_attachments
-    entity
-      .attachment_attributes
-      .map(&method(:append_to_attachments_file))
-  end
+  def generate_active_storage_attachments = entity
+    .attachment_attributes
+    .map(&method(:append_to_attachments_file))
 
-  def generate_active_storage_blobs
-    entity
-      .attachment_attributes
-      .map(&method(:append_to_blobs_file))
-  end
+  def generate_active_storage_blobs = entity
+    .attachment_attributes
+    .map(&method(:append_to_blobs_file))
 
-  def generate_active_storage_files
-    entity
-      .attachment_attributes
-      .map(&method(:create_storage_file))
-  end
+  def generate_active_storage_files = entity
+    .attachment_attributes
+    .map(&method(:create_storage_file))
 
   private
 
-  def entity
-    Schematics::Schema
-      .instance
-      .find_entity_by_name(name.underscore)
-  end
+  def entity = Schematics::Schema
+    .instance
+    .find_entity_by_name(name.underscore)
 
   def append_to_blobs_file(attribute)
     (1..2).each do |index|

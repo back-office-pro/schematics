@@ -26,19 +26,15 @@ module Schematics
 
       private
 
-      def events_to_str
-        events
-          .join
-          .chomp
-      end
+      def events_to_str = events
+        .join
+        .chomp
 
-      def events_to_proc
-        events
-          .map(&:to_proc)
-          .join
-          .indent(2)
-          .chomp
-      end
+      def events_to_proc = events
+        .map(&:to_proc)
+        .join
+        .indent(2)
+        .chomp
     end
   end
 end

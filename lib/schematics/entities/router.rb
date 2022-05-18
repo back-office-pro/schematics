@@ -24,12 +24,10 @@ module Schematics
 
       private
 
-      def routes
-        actions
-          .excluding(:archive)
-          .tap { _1.push(:new) if can?(:create) }
-          .tap { _1.push(:edit) if can?(:update) }
-      end
+      def routes = actions
+        .excluding(:archive)
+        .tap { _1.push(:new) if can?(:create) }
+        .tap { _1.push(:edit) if can?(:update) }
 
       def resource = name
         .split('/')

@@ -20,22 +20,20 @@ module MainApp
 
     protected
 
-    def searches
-      Schematics::Schema
-        .instance
-        .entities
-        .reject(&:hidden?)
-        .map do |entity|
-          entity.model_class.search(
-            @resource.query,
-            includes: entity.includes,
-            match: :word_middle,
-            suggest: true,
-            misspellings: false,
-            scope_results: -> { _1.accessible_by(current_ability) }
-          )
-        end
-    end
+    def searches = Schematics::Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .map do |entity|
+        entity.model_class.search(
+          @resource.query,
+          includes: entity.includes,
+          match: :word_middle,
+          suggest: true,
+          misspellings: false,
+          scope_results: -> { _1.accessible_by(current_ability) }
+        )
+      end
 
     def set_resource
       super

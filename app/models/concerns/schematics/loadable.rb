@@ -22,18 +22,14 @@ module Schematics
         end
       end
 
-      def entity
-        Schema
-          .instance
-          .find_entity_by_name(name.underscore)
-      end
+      def entity = Schema
+        .instance
+        .find_entity_by_name(name.underscore)
 
-      def filter_attributes
-        entity
-          .non_renderable_attributes
-          .map(&:name)
-          .map(&:to_sym)
-      end
+      def filter_attributes = entity
+        .non_renderable_attributes
+        .map(&:name)
+        .map(&:to_sym)
 
       def finder(id)
         case entity

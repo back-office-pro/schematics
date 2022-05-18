@@ -45,13 +45,11 @@ module Schematics
 
       def open_api_type = ::String
 
-      def preload
-        @tokens
-          .select_is_a?(Tokens::Variable)
-          .flat_map(&:references)
-          .uniq
-          .map(&:to_sym)
-      end
+      def preload = @tokens
+        .select_is_a?(Tokens::Variable)
+        .flat_map(&:references)
+        .uniq
+        .map(&:to_sym)
 
       def to_sql
         @tokens.map(&:to_sql)

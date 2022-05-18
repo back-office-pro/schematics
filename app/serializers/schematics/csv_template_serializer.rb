@@ -48,17 +48,13 @@ module Schematics
       end
     end
 
-    def headers
-      elements
-        .stable_sort_by(&:weight)
-        .map(&:name)
-        .map { |name| human_attribute_name(name) }
-    end
+    def headers = elements
+      .stable_sort_by(&:weight)
+      .map(&:name)
+      .map { |name| human_attribute_name(name) }
 
-    def line
-      elements
-        .stable_sort_by(&:weight)
-        .map(&:default)
-    end
+    def line = elements
+      .stable_sort_by(&:weight)
+      .map(&:default)
   end
 end

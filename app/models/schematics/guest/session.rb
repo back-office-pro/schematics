@@ -10,14 +10,12 @@ module Schematics
         @request = request
       end
 
-      def locale
-        @request
-          .env['HTTP_ACCEPT_LANGUAGE']
-          &.scan(/^[a-z]{2}/)
-          &.to_a
-          &.first
-          &.to_sym
-      end
+      def locale = @request
+        .env['HTTP_ACCEPT_LANGUAGE']
+        &.scan(/^[a-z]{2}/)
+        &.to_a
+        &.first
+        &.to_sym
 
       def login!(user)
         PaperTrail.request(enabled: false) do
