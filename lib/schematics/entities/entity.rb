@@ -60,13 +60,21 @@ module Schematics
         Schematics::Options.new(options: @options)
       end
 
-      def associations = @associations ||= []
+      def associations
+        @associations ||= []
+      end
 
-      def attributes = @attributes ||= []
+      def attributes
+        @attributes ||= []
+      end
 
-      def virtuals = @virtuals ||= []
+      def virtuals
+        @virtuals ||= []
+      end
 
-      def triggers = @triggers ||= []
+      def triggers
+        @triggers ||= []
+      end
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size
 
