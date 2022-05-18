@@ -653,10 +653,18 @@
         "type": "state_machine",
         "options": {
           "required": true,
-          "default": "planned",
+          "default": "scheduled",
           "values": [
-            "planned",
+            "scheduled",
             "migrated"
+          ],
+          "events": [
+            {
+              "name": "migrate",
+              "icon": "database",
+              "from": "scheduled",
+              "to": "migrated"
+            }
           ]
         }
       }

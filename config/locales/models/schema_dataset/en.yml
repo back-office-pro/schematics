@@ -7,8 +7,11 @@ en:
         state: State
         states:
           migrated: Migrated
-          planned: Planned
+          scheduled: Scheduled
         version: Version
+    events:
+      schema_dataset:
+        migrate: Migrate
     models:
       schema_dataset:
         gender: female

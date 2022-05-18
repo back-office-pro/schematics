@@ -1,5 +1,5 @@
 one:
-  state: migrated
+  state: scheduled
   data:
     - name: client
       options:
