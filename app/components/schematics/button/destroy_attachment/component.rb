@@ -13,12 +13,10 @@ module Schematics
           @attachment = attachment
         end
 
-        def field
-          @resource
-            .class
-            .entity
-            .find_field_by_name(name)
-        end
+        def field = @resource
+          .class
+          .entity
+          .find_field_by_name(name)
 
         def render?
           @resource && can?(:destroy, @attachment)

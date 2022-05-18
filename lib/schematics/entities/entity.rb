@@ -140,25 +140,19 @@ module Schematics
         end
       end
 
-      def permitted_params
-        fillable_elements
-          .flat_map(&:permitted_params)
-          .push(:lock_version)
-      end
+      def permitted_params = fillable_elements
+        .flat_map(&:permitted_params)
+        .push(:lock_version)
 
-      def permitted_json_params
-        fillable_elements
-          .flat_map(&:permitted_json_params)
-          .push(:lock_version)
-      end
+      def permitted_json_params = fillable_elements
+        .flat_map(&:permitted_json_params)
+        .push(:lock_version)
 
-      def includes
-        preloadable_elements
-          .flat_map(&:preload)
-          .compact
-          .uniq
-          .excluding(virtual_association_errors)
-      end
+      def includes = preloadable_elements
+        .flat_map(&:preload)
+        .compact
+        .uniq
+        .excluding(virtual_association_errors)
 
       def events
         state_machine_attributes.flat_map(&:events)
@@ -231,25 +225,21 @@ module Schematics
 
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
 
-      def search_data_elements
-        searchable_elements
-          .map(&:search_data)
-          .map(&:squish)
-          .join(", \n")
-      end
+      def search_data_elements = searchable_elements
+        .map(&:search_data)
+        .map(&:squish)
+        .join(", \n")
 
-      def virtual_association_errors
-        virtuals
-          .flat_map(&:preload)
-          .uniq
-          .reject do |association|
-            association_attributes
-              .concat(associations)
-              .map(&:name)
-              .map(&:to_sym)
-              .include?(association)
-          end
-      end
+      def virtual_association_errors = virtuals
+        .flat_map(&:preload)
+        .uniq
+        .reject do |association|
+          association_attributes
+            .concat(associations)
+            .map(&:name)
+            .map(&:to_sym)
+            .include?(association)
+        end
 
       def created_at_attributes
         [

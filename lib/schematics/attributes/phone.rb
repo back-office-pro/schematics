@@ -4,11 +4,9 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Phone < String
-      def default
-        ::Array
-          .new(10) { rand(10) }
-          .join
-      end
+      def default = ::Array
+        .new(10) { rand(10) }
+        .join
 
       def encrypted? = true
 

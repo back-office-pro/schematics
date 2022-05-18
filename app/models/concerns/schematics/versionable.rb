@@ -14,13 +14,11 @@ module Schematics
     class_methods do
       private
 
-      def hidden_attributes
-        entity
-          .attributes
-          .select(&:hidden?)
-          .map(&:name)
-          .map(&:to_sym)
-      end
+      def hidden_attributes = entity
+        .attributes
+        .select(&:hidden?)
+        .map(&:name)
+        .map(&:to_sym)
     end
 
     # :reek:ManualDispatch

@@ -9,14 +9,12 @@ module Schematics
         super.pluralize
       end
 
-      def to_str
-        super
-          .concat(",\n")
-          .concat <<~RUBY.indent(8)
-            inverse_of: :#{inverse_of},
-            dependent: :#{dependent}
-          RUBY
-      end
+      def to_str = super
+        .concat(",\n")
+        .concat <<~RUBY.indent(8)
+          inverse_of: :#{inverse_of},
+          dependent: :#{dependent}
+        RUBY
 
       private
 

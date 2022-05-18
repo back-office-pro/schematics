@@ -22,11 +22,9 @@ module Schematics
 
       private
 
-      def filepath
-        ::ActiveStorage::Blob
-          .service
-          .path_for(@import.file.key)
-      end
+      def filepath = ::ActiveStorage::Blob
+        .service
+        .path_for(@import.file.key)
 
       def convert_row(row)
         row.to_h do |key, value|

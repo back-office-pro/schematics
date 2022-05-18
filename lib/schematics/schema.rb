@@ -26,11 +26,9 @@ module Schematics
       entities.find { _1.name == name }
     end
 
-    def find_attribute_by_id(id)
-      entities
-        .flat_map(&:attributes)
-        .find { _1.id == id }
-    end
+    def find_attribute_by_id(id) = entities
+      .flat_map(&:attributes)
+      .find { _1.id == id }
 
     def load_routes
       context = binding.of_caller(2).method(:eval)
@@ -39,17 +37,13 @@ module Schematics
         .each(&context)
     end
 
-    def to_s
-      sorted_entities
-        .map(&:to_s)
-        .join("\n")
-    end
+    def to_s = sorted_entities
+      .map(&:to_s)
+      .join("\n")
 
-    def sorted_entities
-      entities
-        .sort_by(&:weight)
-        .reverse
-    end
+    def sorted_entities = entities
+      .sort_by(&:weight)
+      .reverse
 
     def root_route
       return 'dashboard#home' if valid?
@@ -78,43 +72,37 @@ module Schematics
       entities.each(&:check_for_association_name_collisions)
     end
 
-    def add_inverse_entity_to_association_attributes
-      entities
-        .flat_map(&:association_attributes)
-        .reject(&:polymorphic?)
-        .each do |attribute|
-          attribute.inverse_entity = find_entity_by_name(attribute.association_type)
-        end
-    end
+    def add_inverse_entity_to_association_attributes = entities
+      .flat_map(&:association_attributes)
+      .reject(&:polymorphic?)
+      .each do |attribute|
+        attribute.inverse_entity = find_entity_by_name(attribute.association_type)
+      end
 
     # :reek:FeatureEnvy
-    def add_has_and_belongs_to_many_associations
-      entities
-        .flat_map(&:has_and_belongs_to_many_associations)
-        .each do |habtm|
-          find_entity_by_name(habtm.name.singularize)
-            .associations
-            .push(
-              Associations::Association.build(
-                entity: habtm.entity,
-                name: habtm.entity.name,
-                type: 'has_and_belongs_to_many'
-              )
+    def add_has_and_belongs_to_many_associations = entities
+      .flat_map(&:has_and_belongs_to_many_associations)
+      .each do |habtm|
+        find_entity_by_name(habtm.name.singularize)
+          .associations
+          .push(
+            Associations::Association.build(
+              entity: habtm.entity,
+              name: habtm.entity.name,
+              type: 'has_and_belongs_to_many'
             )
-        end
-    end
+          )
+      end
 
-    def add_inverse_associations
-      entities
-        .flat_map(&:association_attributes)
-        .reject(&:polymorphic?)
-        .map(&:inverse_association)
-        .each do |association|
-          find_entity_by_name(association.association_type)
-            .associations
-            .push(association)
-        end
-    end
+    def add_inverse_associations = entities
+      .flat_map(&:association_attributes)
+      .reject(&:polymorphic?)
+      .map(&:inverse_association)
+      .each do |association|
+        find_entity_by_name(association.association_type)
+          .associations
+          .push(association)
+      end
 
     def add_has_many_through_associations
       entities.each do |entity|

@@ -19,14 +19,12 @@ module Schematics
 
     protected
 
-    def parent_model_class
-      Schema
-        .instance
-        .entities
-        .map { [_1.class_name, _1.model_class] }
-        .to_h
-        .fetch(params[:model_name])
-    end
+    def parent_model_class = Schema
+      .instance
+      .entities
+      .map { [_1.class_name, _1.model_class] }
+      .to_h
+      .fetch(params[:model_name])
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)

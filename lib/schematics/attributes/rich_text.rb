@@ -21,13 +21,11 @@ module Schematics
         { association_name => [embeds_attachments: :blob] }
       end
 
-      def search_data
-        super
-          .concat(' ')
-          .concat <<~RUBY
-            #{name}&.to_plain_text
-          RUBY
-      end
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_plain_text
+        RUBY
 
       def to_str
         <<~RUBY

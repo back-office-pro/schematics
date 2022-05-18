@@ -36,12 +36,10 @@ module Schematics
           }
         end
 
-        def events
-          entity
-            .events
-            .select { |event| can?(event.name.to_sym, @resource) }
-            .select { |event| @resource.public_send(:"may_#{event.name}?") }
-        end
+        def events = entity
+          .events
+          .select { |event| can?(event.name.to_sym, @resource) }
+          .select { |event| @resource.public_send(:"may_#{event.name}?") }
       end
     end
   end

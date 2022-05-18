@@ -35,21 +35,18 @@ module Schematics
       end
     end
 
-    def filter_params_to_h
-      params
-        .require(:filter)
-        .permit(permitted_filters)
-        .to_h
-        .compact_blank
-    end
+    def filter_params_to_h = params
+      .require(:filter)
+      .permit(permitted_filters)
+      .to_h
+      .compact_blank
 
-    def permitted_filters
-      entity.searchable_elements
-            .reject_is_a?(Schematics::Behaviours::Rangeable)
-            .map(&:name)
-            .map(&:to_sym)
-            .push(:with_deleted)
-            .concat(entity.rangeable_elements.map { { _1.name.to_sym => %i[gte lte] } })
-    end
+    def permitted_filters = entity
+      .searchable_elements
+      .reject_is_a?(Schematics::Behaviours::Rangeable)
+      .map(&:name)
+      .map(&:to_sym)
+      .push(:with_deleted)
+      .concat(entity.rangeable_elements.map { { _1.name.to_sym => %i[gte lte] } })
   end
 end

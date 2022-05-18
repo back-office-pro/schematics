@@ -31,17 +31,15 @@ module MainApp
       PASSWORD_RESET_TOKEN_DURATION.ago.after?(reset_password_sent_at)
     end
 
-    def search_history
-      searches
-        .where(model: nil)
-        .where
-        .not(query: nil)
-        .order(created_at: :desc)
-        .limit(SEARCH_HISTORY_LIMIT)
-        .load_async
-        .pluck(:query)
-        .uniq
-    end
+    def search_history = searches
+      .where(model: nil)
+      .where
+      .not(query: nil)
+      .order(created_at: :desc)
+      .limit(SEARCH_HISTORY_LIMIT)
+      .load_async
+      .pluck(:query)
+      .uniq
 
     def time_zone
       super || Rails.configuration.time_zone

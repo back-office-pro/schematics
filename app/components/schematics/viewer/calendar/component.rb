@@ -43,11 +43,9 @@ module Schematics
           return %w[rounded-start border-end-0 ms-2] if next_resource_for?(resource, date)
         end
 
-        def end_date
-          end_of_month_date
-            .end_of_week
-            .to_date
-        end
+        def end_date = end_of_month_date
+          .end_of_week
+          .to_date
 
         def end_of_month_date
           (calendar_start_date || @resources.map(&calendar_start_attribute).max || ::Date.current)
@@ -67,11 +65,9 @@ module Schematics
             resources_for(date.tomorrow).include?(resource)
         end
 
-        def start_date
-          start_of_month_date
-            .beginning_of_week
-            .to_date
-        end
+        def start_date = start_of_month_date
+          .beginning_of_week
+          .to_date
 
         def start_of_month_date
           (calendar_start_date || @resources.map(&calendar_start_attribute).min || ::Date.current)

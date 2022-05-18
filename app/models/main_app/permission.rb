@@ -5,13 +5,11 @@ module MainApp
     extend ActiveSupport::Concern
 
     class_methods do
-      def create_all_entities_permissions!
-        Schematics::Schema
-          .instance
-          .entities
-          .reject(&:hidden?)
-          .flat_map(&method(:create_entity_permissions!))
-      end
+      def create_all_entities_permissions! = Schematics::Schema
+        .instance
+        .entities
+        .reject(&:hidden?)
+        .flat_map(&method(:create_entity_permissions!))
 
       def create_entity_permissions!(entity)
         entity

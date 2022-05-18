@@ -51,13 +51,11 @@ module Schematics
         super
       end
 
-      def search_data
-        super
-          .concat(' ')
-          .concat <<~RUBY
-            #{name}&.to_s
-          RUBY
-      end
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
 
       def to_str
         <<~RUBY
@@ -82,12 +80,10 @@ module Schematics
       end
 
       # :reek:FeatureEnvy
-      def collection
-        model_class
-          .all
-          .map { [_1.to_s, _1.id] }
-          .sort
-      end
+      def collection = model_class
+        .all
+        .map { [_1.to_s, _1.id] }
+        .sort
 
       protected
 

@@ -49,13 +49,11 @@ module Schematics
         tokens.map(&:to_sql)
       end
 
-      def preload
-        tokens
-          .select_is_a?(Tokens::Variable)
-          .flat_map(&:references)
-          .uniq
-          .map(&:to_sym)
-      end
+      def preload = tokens
+        .select_is_a?(Tokens::Variable)
+        .flat_map(&:references)
+        .uniq
+        .map(&:to_sym)
 
       def format(value)
         case value

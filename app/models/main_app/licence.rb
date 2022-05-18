@@ -6,13 +6,11 @@ module MainApp
 
     LICENCES = YAML.load_file(Schematics::Engine.root.join('lib', 'licences.yml')).freeze
 
-    def entities_size
-      Schematics::Schema
-        .instance
-        .entities
-        .reject(&:core?) # rubocop:disable Performance/Count
-        .size
-    end
+    def entities_size = Schematics::Schema
+      .instance
+      .entities
+      .reject(&:core?) # rubocop:disable Performance/Count
+      .size
 
     def expired?
       return true unless expires_on
@@ -20,11 +18,9 @@ module MainApp
       ::Date.current.after?(expires_on)
     end
 
-    def quota
-      Struct
-        .new(:users, :storage, :entities, keyword_init: true)
-        .new(LICENCES[plan])
-    end
+    def quota = Struct
+      .new(:users, :storage, :entities, keyword_init: true)
+      .new(LICENCES[plan])
 
     def quota_entities_exceeded?
       entities_size >= quota.entities
@@ -50,11 +46,9 @@ module MainApp
       users_size * 100 / quota.users
     end
 
-    def storage_size
-      ::ActiveStorage::Attachment
-        .includes(:blob)
-        .sum(&:byte_size)
-    end
+    def storage_size = ::ActiveStorage::Attachment
+      .includes(:blob)
+      .sum(&:byte_size)
 
     def users_size
       ::User.count

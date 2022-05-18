@@ -46,32 +46,26 @@ module Schematics
                                        .concat(dashboard_preferences)
     end
 
-    def preference_params
-      params
-        .require(:preferences)
-        .permit(permitted_preference_params)
-        .transform_values(&method(:cast_param_value))
-    end
+    def preference_params = params
+      .require(:preferences)
+      .permit(permitted_preference_params)
+      .transform_values(&method(:cast_param_value))
 
-    def timeline_preferences
-      Schematics::Schema
-        .instance
-        .entities
-        .reject(&:hidden?)
-        .flat_map do |entity|
-          Version::EVENTS
-            .select { |action| can?(action.to_sym, entity.model_class) }
-            .map { |action| [action, entity.class_name].join('_') }
-        end
-    end
+    def timeline_preferences = Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .flat_map do |entity|
+        Version::EVENTS
+          .select { |action| can?(action.to_sym, entity.model_class) }
+          .map { |action| [action, entity.class_name].join('_') }
+      end
 
-    def viewer_preferences
-      Schematics::Schema
-        .instance
-        .entities
-        .reject(&:hidden?)
-        .flat_map(&:listable_elements)
-        .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
-    end
+    def viewer_preferences = Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .flat_map(&:listable_elements)
+      .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
   end
 end
