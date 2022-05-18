@@ -17,7 +17,7 @@ module Schematics
     before_action :read!, only: :show
     before_action :log_search!, only: :index
 
-    authorize_resource instance_name: :resource, except: :autocomplete
+    authorize_resource instance_name: :resource, except: %i[autocomplete trigger]
 
     delegate :model_class, to: :class
     delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
@@ -179,6 +179,7 @@ module Schematics
 
     def trigger
       event = entity.find_event_by_name(params.require(:event))
+      authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
       if result.success?
         respond_to do |format|

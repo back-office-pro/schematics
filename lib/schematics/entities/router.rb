@@ -100,8 +100,6 @@ module Schematics
       end
 
       def events_routes
-        return unless can?(:update)
-
         @entity.events.map do |event|
           <<~RUBY
             patch :#{event.name}, action: :trigger, event: '#{event.name}', on: :member
