@@ -9,7 +9,7 @@ module Schematics
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
 
-      delegate :to_str, to: :trigger
+      delegate :to_str, to: :trigger, prefix: true
       attr_accessor :entity, :name, :from, :to, :callback
       attr_writer :icon
 
@@ -25,11 +25,17 @@ module Schematics
         )
       end
 
-      def to_proc
+      def to_str
         <<~RUBY
           event :#{name} do
             transitions from: #{Array(from).map(&:to_sym)}, to: :#{to}, after: :after_#{name}
           end
+        RUBY
+      end
+
+      def to_route
+        <<~RUBY
+          patch :#{name}, action: :trigger, event: '#{name}', on: :member
         RUBY
       end
 

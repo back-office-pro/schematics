@@ -14,9 +14,9 @@ module Schematics
           aasm column: :#{name}, enum: true, no_direct_assignment: true do
             state :#{values.first}, initial: true
             state :#{values.drop(1).join(', :')}
-          #{events_to_proc}
-          end
           #{events_to_str}
+          end
+          #{events_methods_to_str}
         RUBY
       end
 
@@ -26,19 +26,15 @@ module Schematics
 
       private
 
-      def events_to_str
-        events
-          .join
-          .chomp
-      end
+      def events_to_str = events
+        .join
+        .indent(2)
+        .chomp
 
-      def events_to_proc
-        events
-          .map(&:to_proc)
-          .join
-          .indent(2)
-          .chomp
-      end
+      def events_methods_to_str = events
+        .map(&:trigger_to_str)
+        .join
+        .chomp
     end
   end
 end

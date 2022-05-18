@@ -6,7 +6,7 @@ require 'active_support/core_ext/array/access'
 module Schematics
   module Entities
     class Router
-      delegate :name, :class_name, :actions, :can?, to: :@entity
+      delegate :name, :class_name, :actions, :events, :can?, to: :@entity
 
       def initialize(entity)
         @entity = entity
@@ -61,7 +61,7 @@ module Schematics
           archive_routes,
           autocomplete_route,
           duplicate_route,
-          events_routes,
+          events.map(&:to_route),
           import_routes
         ].compact.join.indent(2).chomp
       end
@@ -97,14 +97,6 @@ module Schematics
         <<~RUBY
           post :duplicate, on: :member
         RUBY
-      end
-
-      def events_routes
-        @entity.events.map do |event|
-          <<~RUBY
-            patch :#{event.name}, action: :trigger, event: '#{event.name}', on: :member
-          RUBY
-        end
       end
 
       def import_routes
