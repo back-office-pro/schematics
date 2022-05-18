@@ -3,12 +3,12 @@
 module Schematics
   class MigrateSchemaJob < ApplicationJob
     def perform(data)
-      Schematics::Schema.instance.load(data:)
-      Schematics::Schema
+      Schema.instance.load(data:)
+      Schema
         .instance
         .sorted_entities
-        .reject(&:core)
-        .map { |entity| Schematics::Commands::CreateEntity.new(entity:) }
+        .reject(&:core?)
+        .map { |entity| Commands::CreateEntity.new(entity:) }
         .flat_map(&:execute)
         .each(&method(:system))
       system 'rails db:migrate'
