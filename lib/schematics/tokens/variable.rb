@@ -17,13 +17,9 @@ module Schematics
         ].join('.')
       end
 
-      def to_str
-        '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
-      end
+      def to_str = '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
 
-      def value
-        "self.#{@value}"
-      end
+      def value = "self.#{@value}"
 
       def references = @value
         .split('.')

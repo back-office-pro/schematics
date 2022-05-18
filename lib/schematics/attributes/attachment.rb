@@ -38,14 +38,12 @@ module Schematics
           (#{name}.filename.to_s if #{name}.attached?)
         RUBY
 
-      def to_str
-        <<~RUBY
-          has_one_base64_attached :#{name}
-          accepts_nested_attributes_for :#{association_name},
-                                        allow_destroy: true,
-                                        reject_if: :all_blank
-        RUBY
-      end
+      def to_str = <<~RUBY
+        has_one_base64_attached :#{name}
+        accepts_nested_attributes_for :#{association_name},
+                                      allow_destroy: true,
+                                      reject_if: :all_blank
+      RUBY
 
       def extension
         options.content_type&.first || 'png'

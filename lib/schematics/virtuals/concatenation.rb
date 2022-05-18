@@ -11,13 +11,11 @@ module Schematics
         ::Arel.sql("CONCAT(#{super.join(', ')})")
       end
 
-      def search_data
-        super
-          .concat(' ')
-          .concat <<~RUBY
-            #{name}&.to_s
-          RUBY
-      end
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
 
       protected
 

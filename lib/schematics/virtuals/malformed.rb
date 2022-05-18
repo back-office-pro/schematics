@@ -11,11 +11,9 @@ module Schematics
 
       protected
 
-      def method_body
-        <<~RUBY.squish
-          raise ArgumentError
-        RUBY
-      end
+      def method_body = <<~RUBY.squish
+        raise ArgumentError
+      RUBY
     end
   end
 end

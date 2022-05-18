@@ -25,13 +25,11 @@ module Schematics
         )
       end
 
-      def to_str
-        <<~RUBY
-          event :#{name} do
-            transitions from: #{Array(from).map(&:to_sym)}, to: :#{to}, after: :after_#{name}
-          end
-        RUBY
-      end
+      def to_str = <<~RUBY
+        event :#{name} do
+          transitions from: #{Array(from).map(&:to_sym)}, to: :#{to}, after: :after_#{name}
+        end
+      RUBY
 
       def to_route
         <<~RUBY

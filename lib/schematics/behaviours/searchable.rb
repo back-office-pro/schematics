@@ -3,11 +3,9 @@
 module Schematics
   module Behaviours
     module Searchable
-      def search_data
-        <<~RUBY.squish
-          #{name}:
-        RUBY
-      end
+      def search_data = <<~RUBY.squish
+        #{name}:
+      RUBY
     end
   end
 end

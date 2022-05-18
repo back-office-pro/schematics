@@ -24,20 +24,16 @@ module Schematics
         ]
       end
 
-      def search_data
-        <<~RUBY
-          #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
-        RUBY
-      end
+      def search_data = <<~RUBY
+        #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
+      RUBY
 
-      def to_str
-        <<~RUBY
-          has_many_base64_attached :#{name}
-          accepts_nested_attributes_for :#{association_name},
-                                        allow_destroy: true,
-                                        reject_if: :all_blank
-        RUBY
-      end
+      def to_str = <<~RUBY
+        has_many_base64_attached :#{name}
+        accepts_nested_attributes_for :#{association_name},
+                                      allow_destroy: true,
+                                      reject_if: :all_blank
+      RUBY
     end
   end
 end

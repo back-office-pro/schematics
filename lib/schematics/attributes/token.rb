@@ -9,11 +9,9 @@ module Schematics
 
       def default = SecureRandom.base58
 
-      def to_str
-        <<~RUBY
-          has_secure_token :#{name}
-        RUBY
-      end
+      def to_str = <<~RUBY
+        has_secure_token :#{name}
+      RUBY
     end
   end
 end

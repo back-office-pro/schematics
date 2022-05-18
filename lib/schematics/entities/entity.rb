@@ -202,16 +202,14 @@ module Schematics
         actions.concat(events.map(&:name))
       end
 
-      def search_data
-        <<~RUBY
-          def search_data
-            {
-              created_at:,
-              #{search_data_elements}
-            }
-          end
-        RUBY
-      end
+      def search_data = <<~RUBY
+        def search_data
+          {
+            created_at:,
+            #{search_data_elements}
+          }
+        end
+      RUBY
 
       def valid?
         valid = super && (fields + triggers).all?(&:valid?)

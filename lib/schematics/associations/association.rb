@@ -48,13 +48,11 @@ module Schematics
         belongs_to.name
       end
 
-      def to_str
-        <<~RUBY.chomp
-          #{type} :#{name},
-                  class_name: '#{class_name}',
-                  foreign_key: '#{column_name}'
-        RUBY
-      end
+      def to_str = <<~RUBY.chomp
+        #{type} :#{name},
+                class_name: '#{class_name}',
+                foreign_key: '#{column_name}'
+      RUBY
     end
   end
 end

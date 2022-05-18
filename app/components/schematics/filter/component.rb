@@ -57,11 +57,9 @@ module Schematics
         @field.try(:name) || @field
       end
 
-      def onchange
-        <<~JAVASCRIPT.squish
-          this.form.requestSubmit()
-        JAVASCRIPT
-      end
+      def onchange = <<~JAVASCRIPT.squish
+        this.form.requestSubmit()
+      JAVASCRIPT
 
       def value
         params.dig(:filter, name)

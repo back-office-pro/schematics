@@ -64,16 +64,14 @@ module Schematics
         end
       end
 
-      def to_str
-        <<~RUBY
-          define_attribute_method :#{name}
-          def #{name}
-            #{method_body}
-          rescue StandardError => e
-            e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
-          end
-        RUBY
-      end
+      def to_str = <<~RUBY
+        define_attribute_method :#{name}
+        def #{name}
+          #{method_body}
+        rescue StandardError => e
+          e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
+        end
+      RUBY
 
       protected
 

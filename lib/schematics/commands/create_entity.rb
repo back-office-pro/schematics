@@ -33,11 +33,9 @@ module Schematics
         SHELL
       end
 
-      def generate_scaffold_controller
-        <<~SHELL
-          rails generate scaffold_controller #{name} --skip-resource-route
-        SHELL
-      end
+      def generate_scaffold_controller = <<~SHELL
+        rails generate scaffold_controller #{name} --skip-resource-route
+      SHELL
 
       # :reek:FeatureEnvy
       def has_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
