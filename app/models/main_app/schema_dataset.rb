@@ -5,11 +5,9 @@ module MainApp
     extend ActiveSupport::Concern
 
     class_methods do
-      def current
-        migrated
-          .order(created_at: :desc)
-          .first
-      end
+      def current = migrated
+        .order(created_at: :desc)
+        .first
     end
 
     def after_migrate

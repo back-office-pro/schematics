@@ -18,14 +18,12 @@ module Schematics
           @entity = entity
         end
 
-        def types
-          Attributes
-            .constants
-            .reject { %i[Association Attribute Month StateMachineEvent Week Year].include?(_1) }
-            .map(&Attributes.method(:const_get))
-            .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
-            .sort
-        end
+        def types = Attributes
+          .constants
+          .reject { %i[Association Attribute Month StateMachineEvent Week Year].include?(_1) }
+          .map(&Attributes.method(:const_get))
+          .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
+          .sort
       end
     end
   end
