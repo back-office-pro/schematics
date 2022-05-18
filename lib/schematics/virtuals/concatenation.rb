@@ -21,12 +21,10 @@ module Schematics
 
       protected
 
-      def method_body
-        tokens
-          .map(&:to_str)
-          .join
-          .to_json
-      end
+      def method_body = tokens
+        .map(&:to_str)
+        .join
+        .to_json
     end
   end
 end

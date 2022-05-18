@@ -83,11 +83,9 @@ module Schematics
         @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
       end
 
-      def method_body
-        tokens
-          .map(&:value)
-          .join
-      end
+      def method_body = tokens
+        .map(&:value)
+        .join
     end
   end
 end

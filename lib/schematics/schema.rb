@@ -65,11 +65,9 @@ module Schematics
 
     private
 
-    def core_data
-      ::JSON
-        .parse(File.read(File.expand_path('../core.json', __dir__)), symbolize_names: true)
-        .tap { |json| json.each { _1[:options]&.store(:core, true) } }
-    end
+    def core_data = ::JSON
+      .parse(File.read(File.expand_path('../core.json', __dir__)), symbolize_names: true)
+      .tap { |json| json.each { _1[:options]&.store(:core, true) } }
 
     def add_associations_and_check_for_name_collisions
       add_inverse_entity_to_association_attributes
