@@ -19,9 +19,9 @@ module Schematics
         'd-none' if new_record? || !key.start_with?(@resource.public_send(field.depends_on))
       end
 
-      def turbo?
-        request.headers['Turbo-Frame'].present?
-      end
+      def turbo? = request
+        .headers['Turbo-Frame']
+        .present?
 
       def wrapper
         return :edit_in_place_form if turbo?

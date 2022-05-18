@@ -32,20 +32,24 @@ module Schematics
 
     private
 
-    def calendar_end_attribute
-      entity.datetime_attributes.second.name.to_sym # TODO: could work randomly
-    end
+    def calendar_end_attribute = entity
+      .datetime_attributes
+      .second
+      .name
+      .to_sym # TODO: could work randomly
 
-    def calendar_end_date
-      params.dig(:filter, calendar_end_attribute, :lte)&.to_date
-    end
+    def calendar_end_date = params
+      .dig(:filter, calendar_end_attribute, :lte)
+      &.to_date
 
-    def calendar_start_attribute
-      entity.datetime_attributes.first.name.to_sym # TODO: could work randomly
-    end
+    def calendar_start_attribute = entity
+      .datetime_attributes
+      .first
+      .name
+      .to_sym # TODO: could work randomly
 
-    def calendar_start_date
-      params.dig(:filter, calendar_start_attribute, :gte)&.to_date
-    end
+    def calendar_start_date = params
+      .dig(:filter, calendar_start_attribute, :gte)
+      &.to_date
   end
 end

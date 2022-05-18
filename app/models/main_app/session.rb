@@ -15,18 +15,16 @@ module MainApp
       }
     end
 
-    def active?
-      ACTIVE_DELAY.ago.before?(updated_at)
-    end
+    def active? = ACTIVE_DELAY
+      .ago
+      .before?(updated_at)
 
     def login!(*) = self
 
-    def safe?
-      user
-        .sessions
-        .where
-        .not(id:)
-        .exists?(ip:, user_agent:)
-    end
+    def safe? = user
+      .sessions
+      .where
+      .not(id:)
+      .exists?(ip:, user_agent:)
   end
 end

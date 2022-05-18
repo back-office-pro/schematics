@@ -18,9 +18,9 @@ module Schematics
 
       def icon = :calendar_days
 
-      def to_sql
-        super.split('/').first
-      end
+      def to_sql = super
+        .split('/')
+        .first
 
       def format(value)
         value && localize(value, format: :short)

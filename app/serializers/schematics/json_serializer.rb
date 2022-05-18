@@ -35,9 +35,9 @@ module Schematics
     class_methods do
       delegate :entity, to: :model_class
 
-      def model_class
-        name.chomp('Serializer').constantize
-      end
+      def model_class = name
+        .chomp('Serializer')
+        .constantize
     end
 
     def metadata?

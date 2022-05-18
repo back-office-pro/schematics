@@ -4,9 +4,7 @@ module Schematics
   module Button
     module Draft
       class Component < ApplicationComponent
-        def icon
-          ::Draft.entity.icon
-        end
+        delegate :icon, to: '::Draft.entity'
       end
     end
   end

@@ -25,9 +25,9 @@ module Schematics
         "self.#{@value}"
       end
 
-      def references
-        @value.split('.').tap(&:pop)
-      end
+      def references = @value
+        .split('.')
+        .tap(&:pop)
     end
   end
 end

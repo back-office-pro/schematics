@@ -114,18 +114,20 @@ module Schematics
           description.constantize
         end
 
-        def entity_fixtures
-          entity.table_name.pluralize.to_sym
-        end
+        def entity_fixtures = entity
+          .table_name
+          .pluralize
+          .to_sym
 
         def model_name
           model_class.to_s
         end
 
         # :reek:UtilityFunction
-        def locale
-          Rails.configuration.i18n.default_locale
-        end
+        def locale = Rails
+          .configuration
+          .i18n
+          .default_locale
       end
     end
   end

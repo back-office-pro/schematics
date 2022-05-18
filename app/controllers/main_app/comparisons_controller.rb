@@ -12,9 +12,9 @@ module MainApp
 
     protected
 
-    def parent_model_class
-      @resource.model.try(:safe_constantize)
-    end
+    def parent_model_class = @resource
+      .model
+      .try(:safe_constantize)
 
     def set_resources
       @resources = parent_model_class

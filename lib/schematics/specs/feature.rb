@@ -97,9 +97,10 @@ module Schematics
           description.constantize
         end
 
-        def entity_fixtures
-          entity.table_name.pluralize.to_sym
-        end
+        def entity_fixtures = entity
+          .table_name
+          .pluralize
+          .to_sym
 
         def path(record: nil, action: nil)
           ["/#{route_key}", (record&.id unless entity.is_a?(Entities::Singleton)), action]

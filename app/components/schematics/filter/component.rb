@@ -30,9 +30,9 @@ module Schematics
         value.present?
       end
 
-      def attribute_name
-        @model_class.human_attribute_name(name).downcase
-      end
+      def attribute_name = @model_class
+        .human_attribute_name(name)
+        .downcase
 
       def col_preference_class(field)
         preference = "col_#{entity.table_name}_#{field.name}"

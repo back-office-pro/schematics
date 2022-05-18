@@ -14,9 +14,9 @@ module Schematics
         value && ActiveSupport::TimeZone[value].to_s
       end
 
-      def values
-        ActiveSupport::TimeZone.all.map(&:name)
-      end
+      def values = ActiveSupport::TimeZone
+        .all
+        .map(&:name)
     end
   end
 end

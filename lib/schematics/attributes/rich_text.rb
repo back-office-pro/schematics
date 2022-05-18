@@ -37,9 +37,9 @@ module Schematics
 
       private
 
-      def association_name
-        [type, name].join('_').to_sym
-      end
+      def association_name = [type, name]
+        .join('_')
+        .to_sym
     end
   end
 end

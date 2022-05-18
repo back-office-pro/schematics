@@ -29,9 +29,9 @@ module Schematics
         :secondary
       end
 
-      def link_params
-        request.query_parameters.merge(sort: new_sorted_params)
-      end
+      def link_params = request
+        .query_parameters
+        .merge(sort: new_sorted_params)
 
       private
 
