@@ -141,6 +141,8 @@ Style/HashEachMethods:
   AllowedReceivers:
     - enum
     - attribute
+Style/EndlessMethod:
+  EnforcedStyle: allow_always
 Metrics/BlockLength:
   IgnoredMethods:
     - describe

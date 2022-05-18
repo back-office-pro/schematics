@@ -16,7 +16,7 @@ module MainApp
     end
 
     def to_s
-      title || ::I18n.t('errors.virtuals.no_method', name: model)
+      title || ::I18n.t('errors.virtuals.name', name: model)
     end
 
     def value_formatted
