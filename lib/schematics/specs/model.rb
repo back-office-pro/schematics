@@ -231,9 +231,10 @@ module Schematics
           description.constantize
         end
 
-        def entity_fixtures
-          entity.table_name.pluralize.to_sym
-        end
+        def entity_fixtures = entity
+          .table_name
+          .pluralize
+          .to_sym
 
         def database_attributes
           [

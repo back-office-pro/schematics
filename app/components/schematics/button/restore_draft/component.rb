@@ -5,10 +5,7 @@ module Schematics
     module RestoreDraft
       class Component < ApplicationComponent
         delegate :updated_at, to: :current_draft
-
-        def icon
-          ::Draft.entity.icon
-        end
+        delegate :icon, to: '::Draft.entity'
 
         def render?
           current_draft.present?

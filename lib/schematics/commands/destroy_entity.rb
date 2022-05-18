@@ -16,9 +16,9 @@ module Schematics
 
       private
 
-      def migratable_attributes
-        super.map(&:to_s).join(' ')
-      end
+      def migratable_attributes = super
+        .map(&:to_s)
+        .join(' ')
     end
   end
 end

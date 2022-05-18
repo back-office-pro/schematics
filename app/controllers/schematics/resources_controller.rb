@@ -25,9 +25,9 @@ module Schematics
     helper_method :entity, :model_class
 
     class << self
-      def model_class
-        controller_path.classify.constantize
-      end
+      def model_class = controller_path
+        .classify
+        .constantize
     end
 
     def archive

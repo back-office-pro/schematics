@@ -31,13 +31,13 @@ module Schematics
           .tap { _1.push(:edit) if can?(:update) }
       end
 
-      def resource
-        name.split('/').last
-      end
+      def resource = name
+        .split('/')
+        .last
 
-      def namespace
-        name.split('/').reverse[1]
-      end
+      def namespace = name
+        .split('/')
+        .reverse[1]
 
       def route
         case @entity
