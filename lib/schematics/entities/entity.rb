@@ -225,9 +225,9 @@ module Schematics
         valid
       end
 
-      protected
-
       def default_actions = %w[index show create update destroy archive]
+
+      protected
 
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
 
