@@ -5,9 +5,7 @@ module Schematics
     class Malformed < Virtual
       def icon = :triangle_exclamation
 
-      def to_sql
-        super.join
-      end
+      def to_sql = super.join
 
       protected
 

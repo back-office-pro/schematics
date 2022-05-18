@@ -9,9 +9,9 @@ module Schematics
 
       def icon = :chrome
 
-      def validators
-        super.merge(url: { allow_blank: })
-      end
+      def validators = super.merge(
+        url: { allow_blank: }
+      )
     end
   end
 end

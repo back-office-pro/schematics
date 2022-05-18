@@ -30,9 +30,10 @@ module Schematics
         Schematics::Options.new(options: @options)
       end
 
-      def to_sql
-        [entity.table_name.pluralize, name].join('.')
-      end
+      def to_sql = [
+        entity.table_name.pluralize,
+        name
+      ].join('.')
 
       def to_str = ''
 

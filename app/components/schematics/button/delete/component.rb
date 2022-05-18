@@ -12,15 +12,13 @@ module Schematics
 
         def compact? = @compact
 
-        def css_classes
-          [
-            'btn',
-            'btn-danger',
-            'btn-sm',
-            ('btn-icon-split' unless compact?),
-            ('ms-2' unless compact?)
-          ].compact
-        end
+        def css_classes = [
+          'btn',
+          'btn-danger',
+          'btn-sm',
+          ('btn-icon-split' unless compact?),
+          ('ms-2' unless compact?)
+        ].compact
 
         def render?
           can?(:delete, @resource)

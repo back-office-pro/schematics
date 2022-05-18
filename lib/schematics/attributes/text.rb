@@ -26,9 +26,9 @@ module Schematics
 
       protected
 
-      def migration_options
-        super.concat %i[default]
-      end
+      def migration_options = super.push(
+        :default
+      )
     end
   end
 end

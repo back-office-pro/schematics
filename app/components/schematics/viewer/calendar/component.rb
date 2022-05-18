@@ -9,9 +9,7 @@ module Schematics
             .concat alert_border_css_classes_for(resource, date)
         end
 
-        def date_range
-          (start_date..end_date).to_a
-        end
+        def date_range = (start_date..end_date).to_a
 
         def previous_resource_for?(resource, date)
           resources_for(date.yesterday).include?(resource)
@@ -52,9 +50,7 @@ module Schematics
             .end_of_month
         end
 
-        def month_range
-          start_of_month_date..end_of_month_date
-        end
+        def month_range = start_of_month_date..end_of_month_date
 
         def next_resource_for?(resource, date)
           resources_for(date.tomorrow).include?(resource)

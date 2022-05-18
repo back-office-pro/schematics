@@ -3,9 +3,7 @@
 module Schematics
   module Associations
     class HasManyThrough < AssociationThrough
-      def source
-        super.pluralize
-      end
+      def source = super.pluralize
     end
   end
 end

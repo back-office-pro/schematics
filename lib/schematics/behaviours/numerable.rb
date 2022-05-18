@@ -26,13 +26,13 @@ module Schematics
 
       def icon = :arrow_up_1_9 # rubocop:disable Naming/VariableNumber
 
-      def migration_options
-        super.concat %i[default]
-      end
+      def migration_options = super.push(
+        :default
+      )
 
-      def validators
-        super.merge(numericality: { allow_blank: })
-      end
+      def validators = super.merge(
+        numericality: { allow_blank: }
+      )
     end
   end
 end

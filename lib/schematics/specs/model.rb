@@ -236,12 +236,10 @@ module Schematics
           .pluralize
           .to_sym
 
-        def database_attributes
-          [
-            entity.find_field_by_name('id'),
-            entity.find_field_by_name('created_at')
-          ]
-        end
+        def database_attributes = [
+          entity.find_field_by_name('id'),
+          entity.find_field_by_name('created_at')
+        ]
       end
     end
   end

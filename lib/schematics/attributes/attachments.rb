@@ -17,12 +17,10 @@ module Schematics
 
       def permitted_json_params = permitted_params
 
-      def permitted_params
-        [
-          { super.first => [] },
-          super.second
-        ]
-      end
+      def permitted_params = [
+        { super.first => [] },
+        super.second
+      ]
 
       def search_data = <<~RUBY
         #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)

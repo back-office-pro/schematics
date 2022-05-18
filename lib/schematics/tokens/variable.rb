@@ -10,12 +10,10 @@ module Schematics
         @table_name = table_name
       end
 
-      def to_sql
-        [
-          references.any? ? references.map(&:pluralize) : @table_name,
-          @value.split('.').last
-        ].join('.')
-      end
+      def to_sql = [
+        references.any? ? references.map(&:pluralize) : @table_name,
+        @value.split('.').last
+      ].join('.')
 
       def to_str = '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
 

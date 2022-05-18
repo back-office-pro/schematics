@@ -12,17 +12,15 @@ module Schematics
         .create!(model: model_class, filters: filter_params_to_h)
     end
 
-    def search_params
-      {
-        includes: entity.includes,
-        where: filter_params.except(:with_deleted),
-        order: sorting_params,
-        scope_results: lambda { |results|
-          results
-            .then_tap { _1.with_deleted if filter_params.key?(:with_deleted) }
-            .accessible_by(current_ability)
-        }
+    def search_params = {
+      includes: entity.includes,
+      where: filter_params.except(:with_deleted),
+      order: sorting_params,
+      scope_results: lambda { |results|
+        results
+          .then_tap { _1.with_deleted if filter_params.key?(:with_deleted) }
+          .accessible_by(current_ability)
       }
-    end
+    }
   end
 end

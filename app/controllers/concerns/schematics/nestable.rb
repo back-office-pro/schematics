@@ -13,9 +13,9 @@ module Schematics
                allow_nil: true
     end
 
-    def view_assigns
-      super.merge(parent_human_name_plural:)
-    end
+    def view_assigns = super.merge(
+      parent_human_name_plural:
+    )
 
     protected
 

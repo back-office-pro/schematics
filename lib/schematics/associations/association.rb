@@ -40,13 +40,9 @@ module Schematics
         source
       end
 
-      def source
-        belongs_to.inverse_association_name
-      end
+      def source = belongs_to.inverse_association_name
 
-      def inverse_of
-        belongs_to.name
-      end
+      def inverse_of = belongs_to.name
 
       def to_str = <<~RUBY.chomp
         #{type} :#{name},

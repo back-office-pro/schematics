@@ -10,9 +10,7 @@ module Schematics
 
       def open_api_type = ::Float
 
-      def to_sql
-        super.join
-      end
+      def to_sql = super.join
     end
   end
 end

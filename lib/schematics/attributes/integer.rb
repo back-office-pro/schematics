@@ -12,15 +12,15 @@ module Schematics
 
       def open_api_type = ::Integer
 
-      def validators
-        super.merge(numericality: { only_integer: true })
-      end
+      def validators = super.merge(
+        numericality: { only_integer: true }
+      )
 
       protected
 
-      def migration_options
-        super.concat %i[limit]
-      end
+      def migration_options = super.push(
+        :limit
+      )
     end
   end
 end

@@ -9,9 +9,9 @@ module Schematics
 
       def icon = :envelope
 
-      def validators
-        super.merge(email: { allow_blank: })
-      end
+      def validators = super.merge(
+        email: { allow_blank: }
+      )
     end
   end
 end

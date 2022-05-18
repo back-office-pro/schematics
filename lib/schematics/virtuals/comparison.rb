@@ -17,9 +17,7 @@ module Schematics
 
       def open_api_type = 'boolean'
 
-      def to_sql
-        super.join
-      end
+      def to_sql = super.join
     end
   end
 end

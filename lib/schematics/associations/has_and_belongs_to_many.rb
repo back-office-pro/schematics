@@ -5,17 +5,13 @@ module Schematics
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
 
-      def column_name
-        super.pluralize
-      end
+      def column_name = super.pluralize
 
-      def permitted_params
-        { super => [] }
-      end
+      def permitted_params = {
+        super => []
+      }
 
-      def source
-        inverse_of.pluralize
-      end
+      def source = inverse_of.pluralize
 
       def to_str = <<~RUBY
         #{type} :#{name}

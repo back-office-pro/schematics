@@ -7,9 +7,7 @@ module Schematics
     class HasOne < Association
       include Behaviours::Searchable
 
-      def open_api_type
-        super.first
-      end
+      def open_api_type = super.first
 
       def to_str = super
         .concat(",\n")

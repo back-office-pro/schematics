@@ -11,16 +11,14 @@ module Schematics
 
         def compact? = @compact
 
-        def css_classes
-          [
-            'btn',
-            'btn-primary',
-            'btn-sm',
-            ('btn-icon-split' unless compact?),
-            ('me-2' unless compact?),
-            ('mx-1' if compact?)
-          ].compact
-        end
+        def css_classes = [
+          'btn',
+          'btn-primary',
+          'btn-sm',
+          ('btn-icon-split' unless compact?),
+          ('me-2' unless compact?),
+          ('mx-1' if compact?)
+        ].compact
 
         def icon_class
           'fa-fw' if compact?

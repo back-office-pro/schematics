@@ -9,9 +9,7 @@ module Schematics
 
     delegate_missing_to :helpers
 
-    def to_html
-      render_in(view_context)
-    end
+    def to_html = render_in view_context
 
     private
 

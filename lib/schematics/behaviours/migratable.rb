@@ -5,9 +5,10 @@ module Schematics
     module Migratable
       def column_name = name
 
-      def id
-        [entity.table_name, name].join('_')
-      end
+      def id = [
+        entity.table_name,
+        name
+      ].join('_')
 
       def options_for_migration
         options.slice(*migration_options)

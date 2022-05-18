@@ -13,19 +13,19 @@ module Schematics
 
       def open_api_type = [::String]
 
-      def options_for_migration
-        super.merge(array: true)
-      end
+      def options_for_migration = super.merge(
+        array: true
+      )
 
-      def permitted_params
-        { super => [] }
-      end
+      def permitted_params = {
+        super => []
+      }
 
       protected
 
-      def migration_options
-        super.concat %i[default]
-      end
+      def migration_options = super.push(
+        :default
+      )
     end
   end
 end

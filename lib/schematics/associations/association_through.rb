@@ -8,9 +8,7 @@ module Schematics
     class AssociationThrough < Association
       attr_accessor :through
 
-      def type
-        super.chomp('_through')
-      end
+      def type = super.chomp('_through')
 
       def to_str = super
         .concat(",\n")

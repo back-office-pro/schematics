@@ -24,13 +24,11 @@ module Schematics
       end
     end
 
-    def _metadata
-      {
-        icon: self.class.entity.icon.to_s.dasherize,
-        descriptor: self.class.entity.descriptor.name.camelize(:lower),
-        url: Rails.application.routes.url_helpers.polymorphic_path(object)
-      }
-    end
+    def _metadata = {
+      icon: self.class.entity.icon.to_s.dasherize,
+      descriptor: self.class.entity.descriptor.name.camelize(:lower),
+      url: Rails.application.routes.url_helpers.polymorphic_path(object)
+    }
 
     class_methods do
       delegate :entity, to: :model_class

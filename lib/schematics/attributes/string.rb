@@ -9,21 +9,19 @@ module Schematics
 
       def icon = :align_justify
 
-      def validators
-        super.merge(
-          length: {
-            minimum: options.min,
-            maximum: options.limit,
-            is: options.length
-          }
-        )
-      end
+      def validators = super.merge(
+        length: {
+          minimum: options.min,
+          maximum: options.limit,
+          is: options.length
+        }
+      )
 
       protected
 
-      def migration_options
-        super.concat %i[limit]
-      end
+      def migration_options = super.push(
+        :limit
+      )
     end
   end
 end

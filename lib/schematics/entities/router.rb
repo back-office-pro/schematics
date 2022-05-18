@@ -53,16 +53,14 @@ module Schematics
         end
       end
 
-      def resource_routes
-        [
-          delete_route,
-          archive_routes,
-          autocomplete_route,
-          duplicate_route,
-          events.map(&:to_route),
-          import_routes
-        ].compact.join.indent(2).chomp
-      end
+      def resource_routes = [
+        delete_route,
+        archive_routes,
+        autocomplete_route,
+        duplicate_route,
+        events.map(&:to_route),
+        import_routes
+      ].compact.join.indent(2).chomp
 
       def delete_route
         return unless can?(:destroy)

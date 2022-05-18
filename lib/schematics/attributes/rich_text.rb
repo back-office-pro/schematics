@@ -17,9 +17,9 @@ module Schematics
 
       def icon = :align_justify
 
-      def preload
-        { association_name => [embeds_attachments: :blob] }
-      end
+      def preload = {
+        association_name => [embeds_attachments: :blob]
+      }
 
       def search_data = super
         .concat(' ')
