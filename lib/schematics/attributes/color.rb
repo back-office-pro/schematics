@@ -10,9 +10,10 @@ module Schematics
 
       def icon = :palette
 
-      def validators
-        super.merge(allow_blank:, format: { with: REGEX, message: :color })
-      end
+      def validators = super.merge(
+        allow_blank:,
+        format: { with: REGEX, message: :color }
+      )
     end
   end
 end

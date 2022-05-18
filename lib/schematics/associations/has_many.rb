@@ -5,9 +5,7 @@ require 'active_support/core_ext/string/indent'
 module Schematics
   module Associations
     class HasMany < Association
-      def source
-        super.pluralize
-      end
+      def source = super.pluralize
 
       def to_str = super
         .concat(",\n")

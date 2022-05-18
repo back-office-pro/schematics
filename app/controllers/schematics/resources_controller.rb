@@ -220,9 +220,11 @@ module Schematics
       end
     end
 
-    def view_assigns
-      super.merge(human_name_plural:, human_name:, gender:)
-    end
+    def view_assigns = super.merge(
+      human_name_plural:,
+      human_name:,
+      gender:
+    )
 
     protected
 

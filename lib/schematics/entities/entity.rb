@@ -204,14 +204,12 @@ module Schematics
             .include?(association)
         end
 
-      def created_at_attributes
-        [
-          Attributes::Date.new(self, 'created_at/day', required: true),
-          Attributes::Week.new(self, 'created_at/week', required: true),
-          Attributes::Month.new(self, 'created_at/month', required: true),
-          Attributes::Year.new(self, 'created_at/year', required: true)
-        ]
-      end
+      def created_at_attributes = [
+        Attributes::Date.new(self, 'created_at/day', required: true),
+        Attributes::Week.new(self, 'created_at/week', required: true),
+        Attributes::Month.new(self, 'created_at/month', required: true),
+        Attributes::Year.new(self, 'created_at/year', required: true)
+      ]
     end
   end
 end

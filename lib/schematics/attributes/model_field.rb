@@ -29,7 +29,9 @@ module Schematics
 
       private
 
-      def field_type = options.type || 'renderable_with_created_ats'
+      def field_type
+        options.type || 'renderable_with_created_ats'
+      end
     end
   end
 end

@@ -23,9 +23,10 @@ module Schematics
 
       def open_api_type = ::String
 
-      def to_sql
-        [@entity.table_name.pluralize, @name].join('.')
-      end
+      def to_sql = [
+        @entity.table_name.pluralize,
+        @name
+      ].join('.')
 
       def to_str = ''
 

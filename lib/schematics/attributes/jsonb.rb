@@ -11,15 +11,15 @@ module Schematics
 
       def open_api_type = {}
 
-      def permitted_params
-        { super => {} }
-      end
+      def permitted_params = {
+        super => {}
+      }
 
       protected
 
-      def migration_options
-        super.concat %i[default]
-      end
+      def migration_options = super.push(
+        :default
+      )
     end
   end
 end

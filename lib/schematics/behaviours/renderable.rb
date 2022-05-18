@@ -14,9 +14,10 @@ module Schematics
         value
       end
 
-      def method_name
-        [entity.class_name, name].join('#')
-      end
+      def method_name = [
+        entity.class_name,
+        name
+      ].join('#')
     end
   end
 end

@@ -25,13 +25,9 @@ module Schematics
         super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
       end
 
-      def class_name
-        association_type.camelize
-      end
+      def class_name = association_type.camelize
 
-      def model_class
-        class_name.safe_constantize
-      end
+      def model_class = class_name.safe_constantize
 
       def inverse
         options.inverse || {}
@@ -85,9 +81,9 @@ module Schematics
 
       protected
 
-      def migration_options
-        super.concat %i[polymorphic]
-      end
+      def migration_options = super.push(
+        :polymorphic
+      )
     end
   end
 end

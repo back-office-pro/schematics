@@ -14,23 +14,19 @@ module Schematics
 
       delegate :default, :json_default, to: :dummy
 
-      def permitted_params
-        [
-          super,
-          { attributes_param_key => %i[id _destroy] }
-        ]
-      end
+      def permitted_params = [
+        super,
+        { attributes_param_key => %i[id _destroy] }
+      ]
 
-      def permitted_json_params
-        [
-          { permitted_params.first => %i[data filename content_type] },
-          permitted_params.second
-        ]
-      end
+      def permitted_json_params = [
+        { permitted_params.first => %i[data filename content_type] },
+        permitted_params.second
+      ]
 
-      def preload
-        { association_name => [blob: :variant_records] }
-      end
+      def preload = {
+        association_name => [blob: :variant_records]
+      }
 
       def search_data = super
         .concat(' ')
@@ -54,25 +50,23 @@ module Schematics
         &.map { ".#{_1}" }
         &.join(',')
 
-      def validators
-        super.merge(
-          antivirus: true,
-          attached: required?,
-          size: {
-            less_than: options.size&.megabytes
-          },
-          aspect_ratio: options.aspect_ratio,
-          limit: {
-            min: options.min,
-            max: options.max
-          },
-          dimension: {
-            width: options.width,
-            height: options.height
-          },
-          content_type: options.content_type&.map(&:to_sym)
-        )
-      end
+      def validators = super.merge(
+        antivirus: true,
+        attached: required?,
+        size: {
+          less_than: options.size&.megabytes
+        },
+        aspect_ratio: options.aspect_ratio,
+        limit: {
+          min: options.min,
+          max: options.max
+        },
+        dimension: {
+          width: options.width,
+          height: options.height
+        },
+        content_type: options.content_type&.map(&:to_sym)
+      )
 
       def format(value)
         Rails.application.routes.url_helpers.url_for(value) if value.attached?
@@ -119,13 +113,11 @@ module Schematics
         icon == :file_image
       end
 
-      def attributes_param_key
-        :"#{association_name}_attributes"
-      end
+      def attributes_param_key = :"#{association_name}_attributes"
 
-      def association_name
-        [name, type].join('_').to_sym
-      end
+      def association_name = [name, type]
+        .join('_')
+        .to_sym
 
       protected
 

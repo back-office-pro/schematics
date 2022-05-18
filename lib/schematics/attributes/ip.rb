@@ -12,9 +12,10 @@ module Schematics
 
       def icon = :network_wired
 
-      def validators
-        super.merge(allow_blank:, format: { with: ::Resolv::AddressRegex, message: :ip_address })
-      end
+      def validators = super.merge(
+        allow_blank:,
+        format: { with: ::Resolv::AddressRegex, message: :ip_address }
+      )
     end
   end
 end

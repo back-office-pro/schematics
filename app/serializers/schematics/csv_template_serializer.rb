@@ -31,9 +31,10 @@ module Schematics
       end
     end
 
-    def filename
-      [human_name_plural.dasherize, extension].join('.')
-    end
+    def filename = [
+      human_name_plural.dasherize,
+      extension
+    ].join('.')
 
     protected
 

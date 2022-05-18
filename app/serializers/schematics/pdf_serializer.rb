@@ -28,9 +28,10 @@ module Schematics
       end
     end
 
-    def filename
-      ["#{human_name.dasherize}-#{@resource.slug}", extension].join('.')
-    end
+    def filename = [
+      "#{human_name.dasherize}-#{@resource.slug}",
+      extension
+    ].join('.')
 
     private
 
@@ -46,12 +47,10 @@ module Schematics
       @resource.class
     end
 
-    def options
-      {
-        header_template: PdfHeader::Component.new(resource: @resource).to_html,
-        footer_template: PdfFooter::Component.new.to_html
-      }
-    end
+    def options = {
+      header_template: PdfHeader::Component.new(resource: @resource).to_html,
+      footer_template: PdfFooter::Component.new.to_html
+    }
 
     def pdf
       @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url.to_s, asset_url.scheme)

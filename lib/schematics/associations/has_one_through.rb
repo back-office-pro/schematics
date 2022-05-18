@@ -9,21 +9,13 @@ module Schematics
 
       delegate :descriptor, to: :belongs_to
 
-      def open_api_type
-        super.first
-      end
+      def open_api_type = super.first
 
-      def source
-        belongs_to.name
-      end
+      def source = belongs_to.name
 
-      def inverse_of
-        through.name
-      end
+      def inverse_of = through.name
 
-      def class_name
-        source.camelize
-      end
+      def class_name = source.camelize
 
       def to_str = super
         .chomp

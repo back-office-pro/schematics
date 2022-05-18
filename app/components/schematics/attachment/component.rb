@@ -33,9 +33,11 @@ module Schematics
         @attachment.representation(resize_to_fit: [@width, @height])
       end
 
-      def data
-        { controller: 'tooltip', 'bs-toggle': 'tooltip', 'bs-placement': 'top' }
-      end
+      def data = {
+        controller: 'tooltip',
+        'bs-toggle': 'tooltip',
+        'bs-placement': 'top'
+      }
 
       def icon
         @replacement.fetch(:icon, :triangle_exclamation)

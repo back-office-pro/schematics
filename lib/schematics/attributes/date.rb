@@ -26,15 +26,13 @@ module Schematics
         value && localize(value, format: :short)
       end
 
-      def validators
-        super.merge(
-          comparison: options
-                      .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
-                      .to_h
-                      .transform_values(&:to_sym)
-                      .tap { _1.merge!(allow_blank:) if _1.any? }
-        )
-      end
+      def validators = super.merge(
+        comparison: options
+                    .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
+                    .to_h
+                    .transform_values(&:to_sym)
+                    .tap { _1.merge!(allow_blank:) if _1.any? }
+      )
 
       def default
         return ::Time.zone.today.to_fs(:db) if options.less_than
@@ -43,9 +41,9 @@ module Schematics
 
       protected
 
-      def migration_options
-        super.concat %i[default]
-      end
+      def migration_options = super.push(
+        :default
+      )
     end
   end
 end

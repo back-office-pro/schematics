@@ -32,13 +32,11 @@ module Schematics
             super
           end
 
-          def inject_index_options
-            [
-              super,
-              'algorithm: :concurrently',
-              ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table'))
-            ].compact.join(', ')
-          end
+          def inject_index_options = [
+            super,
+            'algorithm: :concurrently',
+            ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table'))
+          ].compact.join(', ')
 
           def name
             schema_attribute&.name || super
@@ -48,11 +46,10 @@ module Schematics
             .tap { _1[:index] = { where: 'deleted_at IS NULL' } if _1[:foreign_key] }
             .merge(attr_options)
 
-          def plural_name
-            [super, ('column_options: { type: :uuid }' if @type == :join_table_second)]
-              .compact
-              .join(', ')
-          end
+          def plural_name = [
+            super,
+            ('column_options: { type: :uuid }' if @type == :join_table_second)
+          ].compact.join(', ')
 
           def required?
             return schema_attribute.required? if schema_attribute

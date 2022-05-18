@@ -16,9 +16,7 @@ module Schematics
 
       private
 
-      def address
-        CGI.escape(@address)
-      end
+      def address = CGI.escape(@address)
 
       def api_key = settings(:google_cloud_api_key)
     end

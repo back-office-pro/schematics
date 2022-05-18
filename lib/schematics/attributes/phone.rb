@@ -16,9 +16,9 @@ module Schematics
 
       def icon = :phone
 
-      def validators
-        super.merge(phone: { allow_blank: })
-      end
+      def validators = super.merge(
+        phone: { allow_blank: }
+      )
     end
   end
 end

@@ -14,9 +14,10 @@ module Schematics
         value && ::Mime::Type.lookup(value).symbol.to_s.upcase
       end
 
-      def validators
-        super.merge(allow_blank:, format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type })
-      end
+      def validators = super.merge(
+        allow_blank:,
+        format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type }
+      )
     end
   end
 end

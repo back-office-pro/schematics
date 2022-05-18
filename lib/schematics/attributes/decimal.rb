@@ -18,20 +18,19 @@ module Schematics
 
       def open_api_type = ::Float
 
-      def validators
-        super.merge(
-          numericality: {
-            greater_than: (-bound if precision),
-            less_than: (bound if precision)
-          }
-        )
-      end
+      def validators = super.merge(
+        numericality: {
+          greater_than: (-bound if precision),
+          less_than: (bound if precision)
+        }
+      )
 
       protected
 
-      def migration_options
-        super.concat %i[precision scale]
-      end
+      def migration_options = super.push(
+        :precision,
+        :scale
+      )
     end
   end
 end

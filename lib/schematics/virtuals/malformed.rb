@@ -9,9 +9,7 @@ module Schematics
 
       def icon = :triangle_exclamation
 
-      def to_sql
-        super.join
-      end
+      def to_sql = super.join
     end
   end
 end

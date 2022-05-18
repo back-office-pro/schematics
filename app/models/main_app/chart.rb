@@ -93,11 +93,9 @@ module MainApp
       y_field && find_field_by_name(y_field.split('#').last)
     end
 
-    def joins
-      [
-        entity_x_field.try(:preload),
-        entity_y_field.try(:preload)
-      ].compact.flatten.uniq
-    end
+    def joins = [
+      entity_x_field.try(:preload),
+      entity_y_field.try(:preload)
+    ].compact.flatten.uniq
   end
 end

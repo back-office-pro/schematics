@@ -39,9 +39,9 @@ module Schematics
         end
       end
 
-      def function
-        @tokens.map(&:value).join
-      end
+      def function = @tokens
+        .map(&:value)
+        .join
 
       def open_api_type = ::String
 
