@@ -37,7 +37,7 @@ namespace :schematics do
   namespace :permissions do
     desc 'Create entity permissions'
     task :create, %i[entity] => [:environment] do |_task, args|
-      entity = Schematics::Schema.instance.find_entity_by_name(args[:entity])
+      entity = args[:entity].constantize.entity
       PaperTrail.request(enabled: false) do
         Role.admin.permissions.push(Permission.create_entity_permissions!(entity))
       end
