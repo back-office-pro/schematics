@@ -9,9 +9,10 @@ module Schematics
         @field = field
       end
 
-      def frame_id
-        dom_id(@resource, @field.name)
-      end
+      def frame_id = dom_id(
+        @resource,
+        @field.name
+      )
     end
   end
 end

@@ -128,13 +128,11 @@ module Schematics
     # Theme
     config.theme_color = '#2c3e50'
 
-    def credentials
-      ActiveSupport::EncryptedConfiguration.new(
-        config_path: root.join('config', 'credentials.yml.enc'),
-        key_path: root.join('config', 'master.key'),
-        env_key: 'RAILS_MASTER_KEY',
-        raise_if_missing_key: true
-      )
-    end
+    def credentials = ActiveSupport::EncryptedConfiguration.new(
+      config_path: root.join('config', 'credentials.yml.enc'),
+      key_path: root.join('config', 'master.key'),
+      env_key: 'RAILS_MASTER_KEY',
+      raise_if_missing_key: true
+    )
   end
 end
