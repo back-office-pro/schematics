@@ -11,7 +11,6 @@ module Schematics
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from ActionController::UnknownFormat, with: :unknown_format
-      rescue_from ActiveRecord::PendingMigrationError, with: :pending_migration_error
     end
 
     def access_denied
@@ -46,13 +45,6 @@ module Schematics
           render json: { errors: [{ exception.param => ['parameter is required'] }] },
                  status: :bad_request
         end
-      end
-    end
-
-    def pending_migration_error
-      respond_to do |format|
-        format.html # TODO
-        format.json # TODO
       end
     end
 

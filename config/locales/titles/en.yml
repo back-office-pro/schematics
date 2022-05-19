@@ -14,6 +14,7 @@ en:
         home: Dashboard
       exception:
         internal_server_error: Something went wrong
+        maintenance_mode: Maintenance in progress
         not_found: Page not found
         schema_error: Schema error
       password_resets:
