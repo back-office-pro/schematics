@@ -73,12 +73,6 @@ module Schematics
         inverse_entity&.icon || :link
       end
 
-      # :reek:FeatureEnvy
-      def collection = model_class
-        .all
-        .map { [_1.to_s, _1.id] }
-        .sort
-
       protected
 
       def migration_options = super.push(
