@@ -11,10 +11,8 @@ module Schematics
 
       def default = values.first
 
-      def inclusion_list = values
-
       def validators = super.merge(
-        inclusion: { in: inclusion_list },
+        inclusion: { in: values },
         allow_blank:
       )
     end
