@@ -211,12 +211,10 @@ module Schematics
       end
 
       def search_data = <<~RUBY
-        def search_data
-          {
-            created_at:,
-            #{search_data_elements}
-          }
-        end
+        def search_data = {
+          created_at:,
+          #{search_data_elements}
+        }
       RUBY
 
       def valid?

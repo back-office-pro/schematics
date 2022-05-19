@@ -25,12 +25,10 @@ describe Schematics::Entities::Entity do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      def search_data
-        {
-          created_at:,
-          name: name&.to_s
-        }
-      end
+      def search_data = {
+        created_at:,
+        name: name&.to_s
+      }
     RUBY
   end
 end
