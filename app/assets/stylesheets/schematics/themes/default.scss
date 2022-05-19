@@ -28,6 +28,10 @@ a,
   }
 }
 
+.nav-pills .nav-link.active {
+  background-color: var(--bs-primary) !important;
+}
+
 .form-check-input:checked {
   background-color: var(--bs-primary) !important;
   border-color: var(--bs-primary) !important;
