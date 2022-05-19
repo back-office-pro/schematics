@@ -43,7 +43,7 @@ describe Schematics::Commands::CreateEntity do
         'rails generate migration add_lock_version_to_assemblies lock_version:integer',
         'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength
         'rails generate migration add_assemblies_count_to_users assemblies_count:integer',
-        "rails 'schematics:permissions:create[Assembly]'"
+        "rails 'schematics:permissions:create[assembly]'"
       ]
     )
   end
