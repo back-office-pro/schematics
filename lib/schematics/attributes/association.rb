@@ -21,9 +21,9 @@ module Schematics
 
       def weight = 2
 
-      def options_for_migration
-        super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
-      end
+      def options_for_migration = super.merge(
+        foreign_key: { to_table: association_type.pluralize.to_sym }
+      )
 
       def class_name = association_type.camelize
 

@@ -3,12 +3,9 @@
 module Schematics
   class GenerateCsvTemplateJob < ApplicationJob
     def perform(user_id, model_name)
-      user = ::User.find(user_id)
-      model_class = model_name.constantize
-      serializer = CsvTemplateSerializer.new(model_class)
       Resources::GenerateFile.call(
-        user:,
-        serializer:,
+        user: ::User.find(user_id),
+        serializer: CsvTemplateSerializer.new(model_name.constantize),
         component_method: :csv_template
       )
     end
