@@ -7,6 +7,6 @@
       = @entities_form.simple_fields_for :triggers, @trigger do |triggers_form|
         = triggers_form.input :action,
                               as: :select,
-                              collection: actions,
+                              collection:,
                               input_html: { data: { controller: 'dropdown' } }
         = triggers_form.input :callback

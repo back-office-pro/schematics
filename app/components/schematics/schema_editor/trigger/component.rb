@@ -16,8 +16,8 @@ module Schematics
           @entity = entity
         end
 
-        def actions
-          %w[save create update destroy]
+        def collection
+          Schematics::Trigger::ACTIONS
         end
       end
     end
