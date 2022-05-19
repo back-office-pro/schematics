@@ -20,6 +20,8 @@ module Schematics
 
       def icon = :code
 
+      def inclusion_list = :"model_field_#{field_type}_values"
+
       def values = Schema
         .instance
         .entities

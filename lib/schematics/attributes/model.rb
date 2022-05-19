@@ -17,6 +17,12 @@ module Schematics
 
       def icon = :project_diagram
 
+      def inclusion_list
+        return :model_app_entities_values if options.without_core?
+
+        :model_entities_values
+      end
+
       def values = Schema
         .instance
         .entities

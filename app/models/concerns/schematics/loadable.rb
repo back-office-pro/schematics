@@ -54,5 +54,32 @@ module Schematics
         &.find_field_by_name(attr)
         &.format(public_send(attr)) || public_send(attr)
     end
+
+    def model_app_entities_values = Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .reject(&:core?)
+      .map(&:class_name)
+
+    def model_entities_values = Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .map(&:class_name)
+
+    def model_field_numerable_values = Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .flat_map(&:numerable_fields)
+      .map(&:method_name)
+
+    def model_field_renderable_with_created_ats_values = Schema
+      .instance
+      .entities
+      .reject(&:hidden?)
+      .flat_map(&:renderable_with_created_ats_fields)
+      .map(&:method_name)
   end
 end

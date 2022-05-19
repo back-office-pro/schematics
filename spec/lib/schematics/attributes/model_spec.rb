@@ -24,14 +24,17 @@ describe Schematics::Attributes::Model do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:project_diagram) }
   its(:default) { is_expected.to eq('Permission') }
-  its(:validators) { is_expected.to eq(inclusion: { in: ['Permission'] }, allow_blank: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('permissions.model') }
   its(:to_s) { is_expected.to eq('schema:permission_model') }
 
+  its(:validators) do
+    is_expected.to eq(inclusion: { in: :model_entities_values }, allow_blank: true)
+  end
+
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :model, {:inclusion=>{:in=>["Permission"]}, :allow_blank=>true}
+      validates :model, {:inclusion=>{:in=>:model_entities_values}, :allow_blank=>true}
     RUBY
   end
 end
