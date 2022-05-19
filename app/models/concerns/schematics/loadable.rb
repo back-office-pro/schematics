@@ -40,11 +40,22 @@ module Schematics
         end
       end
 
+      def reload!
+        return unless File.exist?(model_filepath)
+
+        module_parent.__send__(:remove_const, name.demodulize.to_sym)
+        load(model_filepath)
+      end
+
       private
 
       def loadable(concerns: [])
         @concerns = concerns
       end
+
+      def model_filepath = Rails
+        .root
+        .join('app', 'models', "#{name.underscore}.rb")
     end
 
     def attribute_formatted(attr)
