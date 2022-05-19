@@ -11,6 +11,7 @@ module Schematics
         .map { |entity| Commands::CreateEntity.new(entity:) }
         .flat_map(&:execute)
         .each(&method(:system))
+      ::Rails.application.reload_routes!
       system 'rails db:migrate'
       system 'rails schematics:docs:generate'
       system 'rails js:routes'
