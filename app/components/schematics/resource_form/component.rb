@@ -15,6 +15,11 @@ module Schematics
         @cancel_path = cancel_path || resource
       end
 
+      def collection = model_class
+        .all
+        .map { [_1.to_s, _1.id] }
+        .sort
+
       def model_field_collection_class(key, field)
         'd-none' if new_record? || !key.start_with?(@resource.public_send(field.depends_on))
       end
