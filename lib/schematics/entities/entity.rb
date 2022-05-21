@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/array/access'
+require 'active_record'
 
 module Schematics
   module Entities
