@@ -13,9 +13,5 @@ module MainApp
     def after_migrate
       Schematics::MigrateSchemaJob.perform_later(data)
     end
-
-    def data
-      super&.map(&:deep_symbolize_keys)
-    end
   end
 end

@@ -12,7 +12,7 @@ module Schematics
     def initialize = load
 
     def load(data: [])
-      self.entities = core_data.concat(data)
+      self.entities = core_data.concat(data.map(&:deep_symbolize_keys))
       self
     end
 
