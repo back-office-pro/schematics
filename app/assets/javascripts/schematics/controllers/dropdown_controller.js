@@ -6,6 +6,7 @@ import SlimSelect from 'slim-select'
 export default class extends ApplicationController {
   static get values () {
     return {
+      data: Array,
       addressAutocomplete: { type: Boolean, default: false },
       dependsOn: String
     }
@@ -61,6 +62,7 @@ export default class extends ApplicationController {
   get options () {
     return {
       select: this.element,
+      data: this.dataValue.length && this.dataValue,
       ajax: this.addressAutocompleteValue && this.getPlacePredictions.bind(this),
       onChange: this.setDependentDropdownsOptions.bind(this),
       searchingText: I18n.typeahead.pending,
