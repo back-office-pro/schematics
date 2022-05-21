@@ -144,7 +144,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && model_class != ::Session
+        if can?(:create) && [::Session, ::SchemaDataset].exclude?(model_class)
           it 'should get new' do
             get path(action: 'new'), headers:, as: :html
             if ability.can?(:new, model_class)
