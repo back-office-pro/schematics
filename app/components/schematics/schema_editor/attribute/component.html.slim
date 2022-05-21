@@ -9,5 +9,6 @@
         = attributes_form.input :type,
                                 as: :select,
                                 collection: types,
+                                include_blank: false,
                                 input_html: { data: { controller: 'dropdown' } }
         = render Schematics::SchemaEditor::Options::Component.new(field: @attribute, form: attributes_form)
