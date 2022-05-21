@@ -13,6 +13,7 @@ module Schematics
 
     def load(data: [])
       self.entities = core_data.concat(data)
+      self
     end
 
     def entities=(entities)

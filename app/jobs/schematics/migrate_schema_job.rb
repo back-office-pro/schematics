@@ -3,9 +3,9 @@
 module Schematics
   class MigrateSchemaJob < ApplicationJob
     def perform(data)
-      Schema.instance.load(data:)
       Schema
         .instance
+        .load(data:)
         .sorted_entities
         .reject(&:core?)
         .map { |entity| Commands::CreateEntity.new(entity:) }
