@@ -661,7 +661,7 @@
           "events": [
             {
               "name": "migrate",
-              "icon": "database",
+              "icon": "arrow_trend_up",
               "from": "scheduled",
               "to": "migrated"
             }
