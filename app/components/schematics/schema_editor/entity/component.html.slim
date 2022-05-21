@@ -10,8 +10,7 @@
                             input_html: { multiple: true, data: { controller: 'dropdown' } }
       = options_form.input :icon,
                             as: :select,
-                            collection: icons,
-                            input_html: { data: { controller: 'dropdown' } }
+                            input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
     .row.g-3
       = render Schematics::SchemaEditor::Attribute::Component.with_collection(attributes, entities_form:, entity: @entity)
       = render Schematics::SchemaEditor::Virtual::Component.with_collection(virtuals, entities_form:, entity: @entity)

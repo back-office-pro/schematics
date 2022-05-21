@@ -24,31 +24,9 @@ module Schematics
           %w[show active] if first_tab?
         end
 
-        def icons
-          # rubocop:disable Naming/VariableNumber
-          %i[
-            user_tie
-            box
-            xmark
-            ban
-            people_carry
-            users
-            inbox
-            file
-            gear
-            user_lock
-            key
-            cloud_arrow_up
-            id_badge
-            chart_line
-            stopwatch_20
-            magnifying_glass
-            scale_balanced
-            floppy_disk
-            user_shield
-          ]
-          # rubocop:enable Naming/VariableNumber
-        end
+        def icons = YAML
+          .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
+          .map { |text| { innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'), text: } }
 
         private
 
