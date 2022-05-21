@@ -6,6 +6,8 @@ module Schematics
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
 
+        DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
+
         delegate :name, :type, :icon, :options, to: :@attribute
         delegate :model_class, to: :@entity
         delegate :human_attribute_name, to: :model_class
@@ -18,9 +20,7 @@ module Schematics
           @entity = entity
         end
 
-        def types = Attributes
-          .constants
-          .reject { %i[Association Attribute Month StateMachineEvent Week Year].include?(_1) }
+        def types = (Attributes.constants - DENYLIST)
           .map(&Attributes.method(:const_get))
           .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
           .sort
