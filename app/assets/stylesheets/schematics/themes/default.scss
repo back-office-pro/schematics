@@ -28,10 +28,6 @@ a,
   }
 }
 
-.nav-pills .nav-link.active {
-  background-color: var(--bs-primary) !important;
-}
-
 .form-check-input:checked {
   background-color: var(--bs-primary) !important;
   border-color: var(--bs-primary) !important;
@@ -42,7 +38,7 @@ a,
   border-color: var(--bs-primary);
 }
 
-.progress-bar {
+.nav-pills .nav-link.active, .progress-bar {
   background-color: var(--bs-primary);
 }
 
