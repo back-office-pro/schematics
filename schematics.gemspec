@@ -73,7 +73,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'js-routes', '~> 2.2.4'
   spec.add_dependency 'jwt', '~> 2.3.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
-  spec.add_dependency 'oj', '~> 3.13.11'
+  spec.add_dependency 'oj', '~> 3.13.13'
   spec.add_dependency 'pagy', '~> 5.10.1'
   spec.add_dependency 'paper_trail', '~> 12.3.0'
   spec.add_dependency 'paranoia', '~> 2.6.0'
