@@ -15,6 +15,7 @@ fr:
     password_lost: mot_de_passe_perdu
     profile: profil
     roles: roles
+    schema_datasets: schemas
     searches: recherche
     settings: parametres
     stats: statistiques
