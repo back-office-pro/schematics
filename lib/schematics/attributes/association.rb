@@ -15,6 +15,12 @@ module Schematics
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
+      def available_options = super.push(
+        :inverse,
+        :type,
+        :polymorphic
+      )
+
       def open_api_type = { id!: ::String }
 
       def column_name = "#{super}_id"

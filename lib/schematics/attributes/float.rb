@@ -10,6 +10,10 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
+      def available_options = super.push(
+        :precision
+      )
+
       def database_type = 'float'
 
       def open_api_type = ::Float

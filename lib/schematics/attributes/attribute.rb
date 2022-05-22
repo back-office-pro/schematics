@@ -11,9 +11,11 @@ module Schematics
       include ::ActiveModel::API
 
       delegate :hidden?, :cached?, to: :options
+      delegate :keys, to: :options, prefix: true
       attr_accessor :entity, :name
       attr_writer :options
 
+      validates :options_keys, inclusion: { in: :available_options }
       validates :name,
                 presence: true,
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }

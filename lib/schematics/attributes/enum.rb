@@ -9,6 +9,10 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Enumerable
 
+      def available_options = super.push(
+        :values
+      )
+
       def collection = super.sort
 
       def database_type = 'integer'

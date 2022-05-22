@@ -5,6 +5,10 @@ require 'active_support/core_ext/string/indent'
 module Schematics
   module Attributes
     class StateMachine < Enum
+      def available_options = super.push(
+        :events
+      )
+
       def icon = :recycle
 
       def readonly? = true

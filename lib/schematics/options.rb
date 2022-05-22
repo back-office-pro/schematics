@@ -5,7 +5,7 @@ module Schematics
   class Options
     include ::ActiveModel::API
 
-    delegate :slice, :fetch, :dig, :key?, to: :options
+    delegate :slice, :fetch, :dig, :key?, :keys, to: :options
     attr_writer :options
 
     def method_missing(method_name, *_args, &)

@@ -12,6 +12,11 @@ module Schematics
 
       delegate :scale, to: :options
 
+      def available_options = super.push(
+        :precision,
+        :scale
+      )
+
       def bound
         10**(precision - scale.to_i)
       end

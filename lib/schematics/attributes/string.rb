@@ -5,6 +5,14 @@ module Schematics
     class String < Text
       include Behaviours::Listable
 
+      def available_options = super.push(
+        :unique,
+        :encrypted,
+        :min,
+        :limit,
+        :length
+      )
+
       def database_type = 'string'
 
       def icon = :align_justify
