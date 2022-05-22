@@ -11,7 +11,7 @@ module Schematics
       include ::ActiveModel::API
 
       validates :attributes, presence: true
-      validates :actions, inclusion: { in: %i[index show create update destroy archive] }
+      validates :actions, inclusion: { in: :default_actions }
       validates :name,
                 presence: true,
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
@@ -54,7 +54,7 @@ module Schematics
       end
 
       def actions
-        (options.actions || default_actions).map(&:to_sym)
+        options.actions&.map(&:to_sym) || default_actions
       end
 
       def options
@@ -224,7 +224,7 @@ module Schematics
         valid
       end
 
-      def default_actions = %w[index show create update destroy archive]
+      def default_actions = %i[index show create update destroy archive]
 
       protected
 
