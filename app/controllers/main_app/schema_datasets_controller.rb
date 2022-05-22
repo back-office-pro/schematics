@@ -34,7 +34,13 @@ module MainApp
         {
           name: entity[:name],
           options: entity[:options],
-          attributes: entity[:attributes_attributes].values,
+          attributes: entity[:attributes_attributes].values.map do |attribute|
+            {
+              name: attribute[:name],
+              type: attribute[:type],
+              options: attribute[:options].compact_blank
+            }
+          end,
           virtuals: entity[:virtuals_attributes]&.values,
           triggers: entity[:triggers_attributes]&.values
         }.compact
