@@ -13,6 +13,7 @@ module Schematics
       delegate :scale, to: :options
 
       def available_options = super.push(
+        :unit,
         :precision,
         :scale
       )

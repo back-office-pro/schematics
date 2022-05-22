@@ -10,6 +10,10 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
+      def available_options = super.push(
+        :unit
+      )
+
       def open_api_type = ::Integer
 
       def validators = super.merge(

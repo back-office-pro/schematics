@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Numerable
 
       def available_options = super.push(
+        :unit,
         :precision
       )
 
