@@ -5,7 +5,7 @@ module Schematics
     def perform(data)
       Schema
         .instance
-        .load(data:)
+        .load(data)
         .sorted_entities
         .reject(&:core?)
         .map { |entity| Commands::CreateEntity.new(entity:) }

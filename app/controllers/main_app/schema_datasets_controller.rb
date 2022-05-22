@@ -4,16 +4,6 @@ module MainApp
   module SchemaDatasetsController
     extend ActiveSupport::Concern
 
-    def create
-      Schematics::Schema.instance.load(data: resource_params)
-      Rails.logger.debug resource_params.inspect
-      Rails.logger.debug Schematics::Schema.instance.valid?
-      Rails.logger.debug Schematics::Schema.instance.errors.inspect
-      Schematics::Schema.instance.load(data: ::SchemaDataset.current.data)
-    end
-
-    private
-
     def permitted_params
       {
         entities_attributes: [
@@ -26,24 +16,26 @@ module MainApp
       }
     end
 
-    def resource_params = super
-      .to_h
-      .deep_symbolize_keys[:entities_attributes]
-      .values
-      .map do |entity|
-        {
-          name: entity[:name],
-          options: entity[:options],
-          attributes: entity[:attributes_attributes].values.map do |attribute|
-            {
-              name: attribute[:name],
-              type: attribute[:type],
-              options: attribute[:options].compact_blank
-            }
-          end,
-          virtuals: entity[:virtuals_attributes]&.values,
-          triggers: entity[:triggers_attributes]&.values
-        }.compact
-      end
+    def resource_params = {
+      data: super
+        .to_h
+        .deep_symbolize_keys[:entities_attributes]
+        .values
+        .map do |entity|
+          {
+            name: entity[:name],
+            options: entity[:options],
+            attributes: entity[:attributes_attributes].values.map do |attribute|
+              {
+                name: attribute[:name],
+                type: attribute[:type],
+                options: attribute[:options].compact_blank
+              }
+            end,
+            virtuals: entity[:virtuals_attributes]&.values,
+            triggers: entity[:triggers_attributes]&.values
+          }.compact
+        end
+    }
   end
 end

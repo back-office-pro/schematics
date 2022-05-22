@@ -9,9 +9,19 @@ module Schematics
     include ::ActiveModel::API
     attr_reader :entities
 
+    class << self
+      delegate :load, to: :instance
+
+      def dump(data)
+        data
+      end
+    end
+
     def initialize = load
 
-    def load(data: [])
+    def load(data = [])
+      return unless data
+
       self.entities = core_data.concat(data.map(&:deep_symbolize_keys))
       self
     end

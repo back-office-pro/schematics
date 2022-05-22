@@ -61,7 +61,7 @@ describe Schematics::Schema do
       schema.find_entity_by_name('user').associations.map(&:name)
     end
 
-    before { schema.load(data:) }
+    before { schema.load(data) }
 
     it 'prefixes role associations of message entity' do
       expect(message_associations).to include('author_role', 'recipient_role')
@@ -87,7 +87,7 @@ describe Schematics::Schema do
       ]
     end
 
-    before { schema.load(data:) }
+    before { schema.load(data) }
 
     it { is_expected.not_to be_valid }
     its(:root_route) { is_expected.to eq('exception#schema_error') }

@@ -4,6 +4,10 @@ module MainApp
   module SchemaDataset
     extend ActiveSupport::Concern
 
+    prepended do
+      serialize :data, Schematics::Schema
+    end
+
     class_methods do
       def current = migrated
         .order(created_at: :desc)
