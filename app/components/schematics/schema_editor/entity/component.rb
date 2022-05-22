@@ -26,7 +26,13 @@ module Schematics
 
         def icons = YAML
           .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
-          .map { |text| { innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'), text: } }
+          .map do |text|
+            {
+              innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'),
+              selected: text == @entity.icon.to_s,
+              text:
+            }
+          end
 
         private
 
