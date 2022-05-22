@@ -13,28 +13,28 @@ fr:
         encrypted: Encrypté
         equal_to: Egal à
         events: Evènements
-        greater_than: Greater than
-        greater_than_or_equal_to: Greater than or equal to
+        greater_than: Supérieur à
+        greater_than_or_equal_to: Supérieur ou égal à
         height: Hauteur
         hidden: Caché
         icon: Icône
         inverse: Inverse
-        length: Length
-        less_than: Less than
-        less_than_or_equal_to: Less than or equal to
-        limit: Limit
-        max: Max
-        min: Min
-        other_than: Other than
-        polymorphic: Polymorphic
-        precision: Precision
-        readonly: Readonly
+        length: Longueur
+        less_than: Inférieur à
+        less_than_or_equal_to: Inférieur ou égal à
+        limit: Limite
+        max: Maximum
+        min: Minimum
+        other_than: Autre que
+        polymorphic: Polymorphique
+        precision: Précision
+        readonly: Lecture seule
         required: Requis
-        scale: Scale
-        size: Size
+        scale: Echelle
+        size: Taille
         type: Type
         unique: Unique
-        unit: Unit
-        values: Values
-        width: Width
+        unit: Unitée
+        values: Valeur
+        width: Largeur
         without_core: Without core
