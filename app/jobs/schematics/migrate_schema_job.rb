@@ -2,7 +2,7 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
-    def perform(data)
+    def perform(data = Schema.awaiting)
       Schema
         .instance
         .load(data)

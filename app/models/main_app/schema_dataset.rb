@@ -12,6 +12,10 @@ module MainApp
       def current = migrated
         .order(created_at: :desc)
         .first
+
+      def awaiting = scheduled
+        .order(created_at: :desc)
+        .first
     end
 
     def after_migrate
