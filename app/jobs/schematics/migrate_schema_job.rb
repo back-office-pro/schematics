@@ -2,7 +2,7 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
-    def perform(data = Schema.awaiting)
+    def perform(data = ::SchemaDataset.awaiting)
       Schema
         .load(data)
         .sorted_entities
