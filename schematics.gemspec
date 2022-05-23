@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'slim_lint', '~> 0.22.1'
   spec.add_development_dependency 'sprockets-rails', '~> 3.4.2'
   spec.add_development_dependency 'stimulus-rails', '~> 1.0.4'
-  spec.add_development_dependency 'turbo-rails', '~> 1.1.0'
+  spec.add_development_dependency 'turbo-rails', '~> 1.1.1'
   spec.add_development_dependency 'zeitwerk', '~> 2.5.3'
   spec.add_dependency 'aasm', '~> 5.2.0'
   spec.add_dependency 'active_link_to', '~> 1.0.5'
