@@ -14,6 +14,16 @@ module Schematics
 
       delegate :default, :json_default, to: :dummy
 
+      def available_options = super.push(
+        :size,
+        :aspect_ratio,
+        :min,
+        :max,
+        :width,
+        :height,
+        :content_type
+      )
+
       def permitted_params = [
         super,
         { attributes_param_key => %i[id _destroy] }

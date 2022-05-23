@@ -6,6 +6,11 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
+      def available_options = %i[
+        unit
+        precision
+      ]
+
       def icon = :square_root_alt
 
       def open_api_type = ::Float

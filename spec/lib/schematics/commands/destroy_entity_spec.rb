@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::DestroyEntity do
-  subject(:command) { described_class.new(entity) }
+  subject(:command) { described_class.new(entity:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'client', attributes:) }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'client', attributes:) }
   let(:attributes) do
     [
       {

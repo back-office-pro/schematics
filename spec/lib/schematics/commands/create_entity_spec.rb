@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::CreateEntity do
-  subject(:command) { described_class.new(entity) }
+  subject(:command) { described_class.new(entity:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name:, attributes:, associations:) }
+  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, associations:) }
   let(:name) { 'assembly' }
   let(:attributes) do
     [
@@ -42,7 +42,8 @@ describe Schematics::Commands::CreateEntity do
         'rails generate migration add_slug_to_assemblies slug:string:uniq',
         'rails generate migration add_lock_version_to_assemblies lock_version:integer',
         'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength
-        'rails generate migration add_assemblies_count_to_users assemblies_count:integer'
+        'rails generate migration add_assemblies_count_to_users assemblies_count:integer',
+        "rails 'schematics:permissions:create[Assembly]'"
       ]
     )
   end

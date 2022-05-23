@@ -5,6 +5,8 @@ module Schematics
     class Array < Attribute
       include Behaviours::Fillable
 
+      def database_type = 'string'
+
       def default = []
 
       def icon = :table
@@ -18,8 +20,6 @@ module Schematics
       def permitted_params = {
         super => []
       }
-
-      def type = 'string'
 
       protected
 

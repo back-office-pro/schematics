@@ -1,0 +1,19 @@
+---
+en:
+  activerecord:
+    attributes:
+      schema_dataset:
+        data: Data
+        state: State
+        states:
+          migrated: Migrated
+          scheduled: Scheduled
+        version: Version
+    events:
+      schema_dataset:
+        migrate: Migrate
+    models:
+      schema_dataset:
+        gender: female
+        one: Application version
+        other: Application versions

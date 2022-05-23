@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::StateMachine do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'order') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'order') }
   let(:name) { 'state' }
   let(:options) do
     {
@@ -47,7 +47,7 @@ describe Schematics::Attributes::StateMachine do
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
   it { is_expected.to be_readonly }
 
-  its(:type) { is_expected.to eq('integer') }
+  its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('state') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:recycle) }

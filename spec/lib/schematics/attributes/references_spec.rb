@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::References do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'user',
       options: {
         descriptor: 'full_name'
@@ -22,7 +22,7 @@ describe Schematics::Attributes::References do
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -51,7 +51,7 @@ describe Schematics::Attributes::References do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:type) { is_expected.to eq('references') }
+  its(:database_type) { is_expected.to eq('references') }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('user') }

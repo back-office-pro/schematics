@@ -14,47 +14,45 @@ describe Schematics::Schema do
 
   context 'when there are name collisions' do
     let(:data) do
-      {
-        entities: [
-          {
-            name: 'user',
-            attributes: [
-              {
-                name: 'role',
-                type: 'belongs_to'
+      [
+        {
+          name: 'user',
+          attributes: [
+            {
+              name: 'role',
+              type: 'belongs_to'
+            }
+          ]
+        },
+        {
+          name: 'role',
+          attributes: [
+            {
+              name: 'name',
+              type: 'string'
+            }
+          ]
+        },
+        {
+          name: 'message',
+          attributes: [
+            {
+              name: 'author',
+              type: 'belongs_to',
+              options: {
+                type: 'user'
               }
-            ]
-          },
-          {
-            name: 'role',
-            attributes: [
-              {
-                name: 'name',
-                type: 'string'
+            },
+            {
+              name: 'recipient',
+              type: 'belongs_to',
+              options: {
+                type: 'user'
               }
-            ]
-          },
-          {
-            name: 'message',
-            attributes: [
-              {
-                name: 'author',
-                type: 'belongs_to',
-                options: {
-                  type: 'user'
-                }
-              },
-              {
-                name: 'recipient',
-                type: 'belongs_to',
-                options: {
-                  type: 'user'
-                }
-              }
-            ]
-          }
-        ]
-      }
+            }
+          ]
+        }
+      ]
     end
     let(:message_associations) do
       schema.find_entity_by_name('message').associations.map(&:name)
@@ -63,51 +61,33 @@ describe Schematics::Schema do
       schema.find_entity_by_name('user').associations.map(&:name)
     end
 
-    before do
-      allow_any_instance_of(described_class).to receive(:data).and_return(data) # rubocop:disable RSpec/AnyInstance
-      Singleton.__init__(described_class)
-    end
-
-    after do
-      allow_any_instance_of(described_class).to receive(:data).and_call_original # rubocop:disable RSpec/AnyInstance
-      Singleton.__init__(described_class)
-    end
+    before { schema.load(data) }
 
     it 'prefixes role associations of message entity' do
-      expect(message_associations).to eq(%w[author_role recipient_role])
+      expect(message_associations).to include('author_role', 'recipient_role')
     end
 
     it 'prefixes message associations of user entity' do
-      expect(user_associations).to eq(%w[author_messages recipient_messages])
+      expect(user_associations).to include('author_messages', 'recipient_messages')
     end
   end
 
   context 'when there are reserved words' do
     let(:data) do
-      {
-        entities: [
-          {
-            name: 'import',
-            attributes: [
-              {
-                name: 'errors',
-                type: 'jsonb'
-              }
-            ]
-          }
-        ]
-      }
+      [
+        {
+          name: 'import',
+          attributes: [
+            {
+              name: 'errors',
+              type: 'jsonb'
+            }
+          ]
+        }
+      ]
     end
 
-    before do
-      allow_any_instance_of(described_class).to receive(:data).and_return(data) # rubocop:disable RSpec/AnyInstance
-      Singleton.__init__(described_class)
-    end
-
-    after do
-      allow_any_instance_of(described_class).to receive(:data).and_call_original # rubocop:disable RSpec/AnyInstance
-      Singleton.__init__(described_class)
-    end
+    before { schema.load(data) }
 
     it { is_expected.not_to be_valid }
     its(:root_route) { is_expected.to eq('exception#schema_error') }

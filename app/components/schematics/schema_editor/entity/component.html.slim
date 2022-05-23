@@ -1,0 +1,17 @@
+.tab-pane.fade id=table_name role='tabpanel' aria-labelledby="#{table_name}-tab" class=css_classes
+  = @form.simple_fields_for :entities, @entity, include_id: false do |entities_form|
+    = entities_form.input :name, hint: 'Must be in english'
+    = entities_form.simple_fields_for :options, options do |options_form|
+      = options_form.input :actions,
+                            as: :select,
+                            collection: actions,
+                            selected: @entity.actions,
+                            include_hidden: false,
+                            input_html: { multiple: true, data: { controller: 'dropdown' } }
+      = options_form.input :icon,
+                            as: :select,
+                            input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
+    .row.g-3
+      = render Schematics::SchemaEditor::Attribute::Component.with_collection(attributes, entities_form:, entity: @entity)
+      = render Schematics::SchemaEditor::Virtual::Component.with_collection(virtuals, entities_form:, entity: @entity)
+      = render Schematics::SchemaEditor::Trigger::Component.with_collection(triggers, entities_form:, entity: @entity)

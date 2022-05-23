@@ -79,6 +79,7 @@ module Schematics
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
+    config.action_dispatch.rescue_responses['ActiveRecord::PendingMigrationError'] = :service_unavailable # rubocop:disable Layout/LineLength
 
     # Active Record
     config.active_record.async_query_executor = :global_thread_pool

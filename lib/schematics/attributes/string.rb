@@ -5,9 +5,17 @@ module Schematics
     class String < Text
       include Behaviours::Listable
 
-      def icon = :align_justify
+      def available_options = super.push(
+        :unique,
+        :encrypted,
+        :min,
+        :limit,
+        :length
+      )
 
-      def type = 'string'
+      def database_type = 'string'
+
+      def icon = :align_justify
 
       def validators = super.merge(
         length: {

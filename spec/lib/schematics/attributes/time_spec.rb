@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Time do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'message') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'message') }
   let(:name) { 'hour' }
   let(:options) { {} }
 
@@ -15,7 +15,7 @@ describe Schematics::Attributes::Time do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
 
-  its(:type) { is_expected.to eq('time') }
+  its(:database_type) { is_expected.to eq('time') }
   its(:column_name) { is_expected.to eq('hour') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:icon) { is_expected.to eq(:clock) }

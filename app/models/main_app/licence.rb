@@ -8,8 +8,8 @@ module MainApp
 
     def entities_size = Schematics::Schema
       .instance
-      .data_json
-      .fetch(:entities)
+      .entities
+      .reject(&:core?) # rubocop:disable Performance/Count
       .size
 
     def expired?

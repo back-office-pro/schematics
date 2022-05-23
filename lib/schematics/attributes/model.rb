@@ -6,6 +6,10 @@ module Schematics
     class Model < String
       include Behaviours::Enumerable
 
+      def available_options = super.push(
+        :without_core
+      )
+
       def collection = super.sort
 
       def format(value)

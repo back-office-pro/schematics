@@ -8,15 +8,11 @@
             = render Schematics::EmptyResource::Component.new
       - else
         - @resources.each do |resource|
-          tr {
-            class=tr_css_class(resource)
-            data-action='click->application#visit'
-            data-application-href-param=href(resource)
-            role='button'
-          }
-            td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
-              = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
-              = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
-            - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-              td.text-nowrap.text-center.align-middle.animate__slideInDown class=col_preference_class(field)
-                = render Schematics::Resource::Component.new(resource:, field:)
+          = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr, css_classes: tr_css_classes_for(resource)) do |c|
+            - c.with_resource do
+              td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
+                = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
+                = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
+              - entity.listable_elements.stable_sort_by(&:weight).each do |field|
+                td.text-nowrap.text-center.align-middle.animate__slideInDown class=col_preference_class(field)
+                  = render Schematics::Resource::Component.new(resource:, field:)

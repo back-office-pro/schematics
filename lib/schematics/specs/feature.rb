@@ -65,7 +65,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && model_class != ::Search
+        if can?(:create) && [::Search, ::SchemaDataset].exclude?(model_class)
           scenario "creating a #{entity.name}" do
             if ability.can?(:new, model_class)
               visit path(action: 'new')

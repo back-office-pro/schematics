@@ -58,7 +58,7 @@ module Schematics
           end
 
           def type
-            schema_attribute&.type&.to_sym || super
+            schema_attribute&.database_type&.to_sym || super
           end
 
           def valid_type?(*) = true

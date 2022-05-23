@@ -3,9 +3,9 @@
 module Schematics
   module Attributes
     class Timestamp < Attribute
-      def open_api_type = ::DateTime
+      def database_type = 'datetime'
 
-      def type = 'datetime'
+      def open_api_type = ::DateTime
     end
   end
 end

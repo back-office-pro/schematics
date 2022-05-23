@@ -9,6 +9,14 @@ module Schematics
 
       def allow_blank = !required?
 
+      def available_options = %i[
+        required
+        hidden
+        cached
+        readonly
+        default
+      ]
+
       def case_sensitive? = true
 
       def validators = Schematics::Validators.new(

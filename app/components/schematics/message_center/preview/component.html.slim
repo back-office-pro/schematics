@@ -4,10 +4,10 @@
   role='button'
 }
   .col-auto.align-self-center
-    = render Schematics::Avatar::Component.new(user: @message.author)
+    = render Schematics::Avatar::Component.new(user: author)
   .col.text-truncate
-    div class=css_class = @message.subject
+    div class=css_class = subject
     .text-muted
-      span = @message.author
+      span = author
       span.mx-1 -
-      span data-controller='timeago' datetime=@message.created_at
+      span data-controller='timeago' datetime=created_at

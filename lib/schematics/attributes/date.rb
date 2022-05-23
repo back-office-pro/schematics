@@ -12,6 +12,10 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
 
+      def available_options = super.concat(
+        ::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys
+      )
+
       def open_api_type = ::Date
 
       def group_method = :group_by_day

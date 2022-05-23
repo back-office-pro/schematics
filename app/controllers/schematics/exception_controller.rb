@@ -11,6 +11,13 @@ module Schematics
       end
     end
 
+    def maintenance_mode
+      respond_to do |format|
+        format.html
+        format.json { head :service_unavailable }
+      end
+    end
+
     def not_found
       respond_to do |format|
         format.html
@@ -21,7 +28,7 @@ module Schematics
     def schema_error
       respond_to do |format|
         format.html
-        format.json { head :service_unavailable }
+        format.json { head :unknown_error }
       end
     end
   end

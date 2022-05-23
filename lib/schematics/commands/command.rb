@@ -2,7 +2,10 @@
 
 module Schematics
   module Commands
+    # :reek:Attribute
     class Command
+      include ::ActiveModel::API
+
       delegate :name,
                :table_name,
                :class_name,
@@ -10,19 +13,13 @@ module Schematics
                :association_attributes,
                :has_and_belongs_to_many_associations,
                :core?,
-               to: :@entity
-      attr_reader :attribute, :target
+               to: :entity
+      attr_accessor :entity, :attribute, :target
 
       class << self
-        def build(command:, entity:, attribute: nil, target: nil)
-          Commands.const_get(command.camelize.to_sym).new(entity, attribute, target)
+        def build(type:, **kwargs)
+          Commands.const_get(type.camelize.to_sym).new(**kwargs)
         end
-      end
-
-      def initialize(entity, attribute = nil, target = nil)
-        @entity = entity
-        @attribute = attribute
-        @target = target
       end
 
       def execute

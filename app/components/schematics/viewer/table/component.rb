@@ -12,9 +12,8 @@ module Schematics
           params[:page].presence && super
         end
 
-        def tr_css_class(resource)
-          return 'pe-none' if resource.deleted?
-          return 'fw-bold' if resource.unread?
+        def tr_css_classes_for(resource)
+          %w[fw-bold] if resource.unread?
         end
       end
     end

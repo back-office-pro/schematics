@@ -33,10 +33,6 @@ module Schematics
         "#{preference} d-none"
       end
 
-      def href(resource)
-        polymorphic_path(resource) unless resource.deleted?
-      end
-
       def model_class
         @resources.try(:klass) || @resources.first.class
       end

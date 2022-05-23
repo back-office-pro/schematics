@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Jsonb do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
   let(:name) { 'preferences' }
   let(:options) { {} }
 
@@ -12,7 +12,7 @@ describe Schematics::Attributes::Jsonb do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
 
-  its(:type) { is_expected.to eq('jsonb') }
+  its(:database_type) { is_expected.to eq('jsonb') }
   its(:column_name) { is_expected.to eq('preferences') }
   its(:open_api_type) { is_expected.to eq({}) }
   its(:validators) { is_expected.to be_empty }

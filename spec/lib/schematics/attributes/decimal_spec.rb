@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Decimal do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'price' }
   let(:options) do
     {
@@ -20,7 +20,7 @@ describe Schematics::Attributes::Decimal do
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
-  its(:type) { is_expected.to eq('decimal') }
+  its(:database_type) { is_expected.to eq('decimal') }
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:unit) { is_expected.to eq('$') }

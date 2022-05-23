@@ -7,6 +7,11 @@ module Schematics
       include Behaviours::Enumerable
       delegate :depends_on, to: :options
 
+      def available_options = super.push(
+        :depends_on,
+        :type
+      )
+
       def collection = super.sort
 
       def format(value)

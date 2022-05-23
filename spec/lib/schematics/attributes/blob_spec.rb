@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Blob do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'active_storage/attachment') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'active_storage/attachment') }
   let(:name) { 'blob' }
   let(:options) { {} }
 

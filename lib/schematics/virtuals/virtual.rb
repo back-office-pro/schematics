@@ -1,34 +1,61 @@
 # frozen_string_literal: true
 
+require 'active_record'
+
 module Schematics
+  # :reek:Attribute :reek:InstanceVariableAssumption
   module Virtuals
     class Virtual
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
+      include ::ActiveModel::API
 
       delegate :hidden?, to: :options
-      attr_reader :entity, :name, :tokens, :options
+      attr_accessor :entity, :name, :function
+      attr_writer :options
+
+      validates :function, presence: true
+      validates :name,
+                presence: true,
+                exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       class << self
-        def build(entity, name:, function:, options: {})
+        def build(**kwargs)
+          klass(**kwargs).new(**kwargs)
+        end
+
+        def klass(entity:, function:, **_kwargs)
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
 
-          return Malformed.new(entity, name, tokens, options) if tokens.any?(Tokens::Assignment)
-          return Comparison.new(entity, name, tokens, options) if tokens.any?(Tokens::Comparator) # rubocop:disable Lint/ConstantResolution
-          return Calculation.new(entity, name, tokens, options) if tokens.any?(Tokens::Operator)
+          return Malformed   if tokens.any?(Tokens::Assignment)
+          return Comparison  if tokens.any?(Tokens::Comparator) # rubocop:disable Lint/ConstantResolution
+          return Calculation if tokens.any?(Tokens::Operator)
 
-          Concatenation.new(entity, name, tokens, options)
+          Concatenation
         end
       end
 
-      def initialize(entity, name, tokens, options)
-        @entity = entity
-        @name = name
-        @tokens = tokens
-        @options = Schematics::Options.new(options:)
+      def available_options = []
+
+      def open_api_type = ::String
+
+      def weight = 1
+
+      def options
+        Schematics::Options.new(options: @options)
       end
+
+      def to_sql
+        tokens.map(&:to_sql)
+      end
+
+      def preload = tokens
+        .select_is_a?(Tokens::Variable)
+        .flat_map(&:references)
+        .uniq
+        .map(&:to_sym)
 
       def format(value)
         case value
@@ -39,32 +66,24 @@ module Schematics
         end
       end
 
-      def function = @tokens
-        .map(&:value)
-        .join
-
-      def open_api_type = ::String
-
-      def preload = @tokens
-        .select_is_a?(Tokens::Variable)
-        .flat_map(&:references)
-        .uniq
-        .map(&:to_sym)
-
-      def to_sql
-        @tokens.map(&:to_sql)
-      end
-
       def to_str = <<~RUBY
-        define_attribute_method :#{@name}
-        def #{@name}
-          #{function}
+        define_attribute_method :#{name}
+        def #{name}
+          #{method_body}
         rescue StandardError => e
           e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
         end
       RUBY
 
-      def weight = 1
+      protected
+
+      def tokens
+        @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
+      end
+
+      def method_body = tokens
+        .map(&:value)
+        .join
     end
   end
 end

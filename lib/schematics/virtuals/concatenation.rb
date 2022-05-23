@@ -7,11 +7,6 @@ module Schematics
     class Concatenation < Virtual
       def icon = :align_justify
 
-      def function = tokens
-        .map(&:to_str)
-        .join
-        .to_json
-
       def to_sql
         ::Arel.sql("CONCAT(#{super.join(', ')})")
       end
@@ -21,6 +16,13 @@ module Schematics
         .concat <<~RUBY
           #{name}&.to_s
         RUBY
+
+      protected
+
+      def method_body = tokens
+        .map(&:to_str)
+        .join
+        .to_json
     end
   end
 end

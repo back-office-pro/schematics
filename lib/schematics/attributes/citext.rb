@@ -2,14 +2,11 @@
 
 module Schematics
   module Attributes
-    class Citext < Text
-      include Behaviours::Listable
-
+    # :reek:SubclassedFromCoreClass
+    class Citext < String
       def case_sensitive? = false
 
-      def icon = :align_justify
-
-      def type = 'citext'
+      def database_type = 'citext'
     end
   end
 end

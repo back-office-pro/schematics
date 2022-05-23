@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Associations::HasOne do
-  subject(:association) { described_class.new(belongs_to) }
+  subject(:association) { described_class.new(belongs_to:) }
 
   let(:parent_entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'schema',
       options: {
         descriptor: 'title'
@@ -15,7 +15,7 @@ describe Schematics::Associations::HasOne do
     )
   end
   let(:entity) do
-    Schematics::Entities::Entity.build(
+    Schematics::Entities::Entity.new(
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -33,7 +33,7 @@ describe Schematics::Associations::HasOne do
     }
   end
   let(:belongs_to) do
-    Schematics::Attributes::Attribute.build(entity, name: 'schema', type: 'belongs_to', options:)
+    Schematics::Attributes::BelongsTo.new(entity:, name: 'schema', options:)
   end
 
   before do

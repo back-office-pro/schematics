@@ -10,7 +10,7 @@ namespace :schematics do
     Schematics::Schema
       .instance
       .sorted_entities
-      .map(&Schematics::Commands::CreateEntity.method(:new))
+      .map { |entity| Schematics::Commands::CreateEntity.new(entity:) }
       .flat_map(&:execute)
       .each(&method(:system))
   end
@@ -36,8 +36,9 @@ namespace :schematics do
 
   namespace :permissions do
     desc 'Create entity permissions'
-    task :create, %i[entity] => [:environment] do |_task, args|
-      entity = Schematics::Schema.instance.find_entity_by_name(args[:entity])
+    task :create, %i[model] => [:environment] do |_task, args|
+      entity = args[:model].constantize.entity
+      Rails.application.reloader.reload!
       PaperTrail.request(enabled: false) do
         Role.admin.permissions.push(Permission.create_entity_permissions!(entity))
       end

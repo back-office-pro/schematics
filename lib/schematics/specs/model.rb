@@ -80,7 +80,7 @@ module Schematics
             it do
               is_expected
                 .to have_db_column(attribute.column_name.to_sym)
-                .of_type(attribute.type.to_sym)
+                .of_type(attribute.database_type.to_sym)
                 .with_options(attribute.options_for_migration)
             end
           end
@@ -117,7 +117,7 @@ module Schematics
           it do
             is_expected
               .to have_db_column(attribute.column_name.to_sym)
-              .of_type(attribute.type.to_sym)
+              .of_type(attribute.database_type.to_sym)
           end
         end
 

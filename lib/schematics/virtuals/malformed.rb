@@ -3,13 +3,15 @@
 module Schematics
   module Virtuals
     class Malformed < Virtual
-      def function = <<~RUBY.squish
-        raise ArgumentError
-      RUBY
-
       def icon = :triangle_exclamation
 
       def to_sql = super.join
+
+      protected
+
+      def method_body = <<~RUBY.squish
+        raise ArgumentError
+      RUBY
     end
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Commands::RenameEntity do
-  subject(:command) { described_class.new(entity, attribute) }
+  subject(:command) { described_class.new(entity:, attribute:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'prospect') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'prospect') }
   let(:attribute) { 'client' }
 
   its(:execute) do

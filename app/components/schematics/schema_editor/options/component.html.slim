@@ -1,0 +1,14 @@
+= @form.simple_fields_for :options, options do |options_form|
+  button.btn.btn-sm.btn-icon-split {
+    type='button'
+    data-bs-toggle='collapse'
+    data-bs-target="##{id}"
+    aria-expanded='false'
+    aria-controls=id
+  }
+    span.icon = fa_icon :gear
+    span.text Options
+  .row.collapse id=id
+    - available_options.each do |option|
+      .col
+        = options_form.input option, as: input_type[option]

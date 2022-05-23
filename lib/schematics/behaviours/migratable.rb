@@ -22,6 +22,8 @@ module Schematics
         .demodulize
         .underscore
 
+      alias database_type type
+
       protected
 
       def migration_options = []

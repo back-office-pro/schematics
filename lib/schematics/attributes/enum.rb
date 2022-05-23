@@ -9,7 +9,13 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Enumerable
 
+      def available_options = super.push(
+        :values
+      )
+
       def collection = super.sort
+
+      def database_type = 'integer'
 
       def format(value)
         value && translate(
@@ -32,8 +38,6 @@ module Schematics
           RUBY
         end
       end
-
-      def type = 'integer'
 
       private
 

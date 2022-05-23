@@ -1,0 +1,48 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/attributes/attribute:
+        name: Name
+        type: Type
+    models:
+      schematics/attributes/action: Action
+      schematics/attributes/address: Address
+      schematics/attributes/array: Array
+      schematics/attributes/attachment: Attachment
+      schematics/attributes/attachments: Attachments
+      schematics/attributes/belongs_to: Association
+      schematics/attributes/blob: Blob
+      schematics/attributes/boolean: Boolean
+      schematics/attributes/byte: Byte
+      schematics/attributes/citext: Case insensitive text
+      schematics/attributes/color: Color
+      schematics/attributes/country: Country
+      schematics/attributes/currency: Currency
+      schematics/attributes/date: Date
+      schematics/attributes/datetime: Datetime
+      schematics/attributes/decimal: Decimal
+      schematics/attributes/digest: Password
+      schematics/attributes/email: Email
+      schematics/attributes/enum: Enum
+      schematics/attributes/float: Float
+      schematics/attributes/integer: Integer
+      schematics/attributes/ip: IP address
+      schematics/attributes/jsonb: JSON
+      schematics/attributes/mime: MIME type
+      schematics/attributes/model: Model
+      schematics/attributes/model_field: Model field
+      schematics/attributes/percentage: Percentage
+      schematics/attributes/phone: Phone number
+      schematics/attributes/references: Current user
+      schematics/attributes/rich_text: Rich text editor
+      schematics/attributes/state_machine: State machine
+      schematics/attributes/string: String
+      schematics/attributes/text: Text
+      schematics/attributes/time: Time
+      schematics/attributes/time_zone: Time Zone
+      schematics/attributes/timestamp: Timestamp
+      schematics/attributes/token: Token
+      schematics/attributes/url: URL
+      schematics/attributes/user_agent: User Agent
+      schematics/attributes/uuid: UUID

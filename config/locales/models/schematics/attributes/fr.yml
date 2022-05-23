@@ -1,0 +1,48 @@
+---
+fr:
+  activemodel:
+    attributes:
+      schematics/attributes/attribute:
+        name: Nom
+        type: Type
+    models:
+      schematics/attributes/action: Action
+      schematics/attributes/address: Adresse
+      schematics/attributes/array: Tableau
+      schematics/attributes/attachment: Attachment
+      schematics/attributes/attachments: Attachments
+      schematics/attributes/belongs_to: Association
+      schematics/attributes/blob: Blob
+      schematics/attributes/boolean: Booléen
+      schematics/attributes/byte: Octet
+      schematics/attributes/citext: Texte insensible à la casse
+      schematics/attributes/color: Couleur
+      schematics/attributes/country: Pays
+      schematics/attributes/currency: Devis
+      schematics/attributes/date: Date
+      schematics/attributes/datetime: Date et heure
+      schematics/attributes/decimal: Nombre à virgule (decimal)
+      schematics/attributes/digest: Mot de passe
+      schematics/attributes/email: E-mail
+      schematics/attributes/enum: Enumération
+      schematics/attributes/float: Nombre à virgule (float)
+      schematics/attributes/integer: Nombre entier
+      schematics/attributes/ip: Adresse IP
+      schematics/attributes/jsonb: JSON
+      schematics/attributes/mime: Type MIME
+      schematics/attributes/model: Modèle
+      schematics/attributes/model_field: Champs de modèle
+      schematics/attributes/percentage: Pourcentage
+      schematics/attributes/phone: Numéro de téléphone
+      schematics/attributes/references: Utilisateur courant
+      schematics/attributes/rich_text: Editeur de texte riche
+      schematics/attributes/state_machine: Machine à état
+      schematics/attributes/string: Chaîne de caractères
+      schematics/attributes/text: Texte
+      schematics/attributes/time: Heure
+      schematics/attributes/time_zone: Fuseau horaire
+      schematics/attributes/timestamp: Timestamp
+      schematics/attributes/token: Token
+      schematics/attributes/url: URL
+      schematics/attributes/user_agent: Agent utilisateur
+      schematics/attributes/uuid: Identifiant unique

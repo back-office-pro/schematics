@@ -5,21 +5,20 @@ require 'active_model_serializers'
 
 module Schematics
   module Entities
+    # :reek:Attribute :reek:InstanceVariableAssumption
     class Descriptor
-      delegate :name, :entity, :to_sql, to: :@field
+      include ::ActiveModel::API
 
-      class << self
-        def build(entity, descriptor)
-          new(entity.find_field_by_name(descriptor || 'id'))
-        end
-      end
+      delegate :name, :entity, :to_sql, to: :field
+      attr_accessor :entity
+      attr_writer :field_name
 
-      def initialize(field)
-        @field = field
+      def field_name
+        @field_name || 'id'
       end
 
       def joins
-        @field.try(:preload) || []
+        field.try(:preload) || []
       end
 
       def to_str = <<~RUBY
@@ -41,6 +40,12 @@ module Schematics
             attribute descriptor if descriptor != 'id'
           end
         end
+      end
+
+      private
+
+      def field
+        entity.find_field_by_name(field_name)
       end
     end
   end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Citext do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
   let(:name) { 'last_name' }
   let(:options) { {} }
 
@@ -15,7 +15,7 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.not_to be_case_sensitive }
 
-  its(:type) { is_expected.to eq('citext') }
+  its(:database_type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('last_name') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:align_justify) }

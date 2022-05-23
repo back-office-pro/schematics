@@ -4,20 +4,16 @@ require 'active_support/core_ext/string/indent'
 
 module Schematics
   module Associations
+    # :reek:Attribute
     class AssociationThrough < Association
-      attr_reader :through
-
-      def initialize(belongs_to, through)
-        super(belongs_to)
-        @through = through
-      end
+      attr_accessor :through
 
       def type = super.chomp('_through')
 
       def to_str = super
         .concat(",\n")
         .concat <<~RUBY.indent(8)
-          through: :#{@through.name},
+          through: :#{through.name},
           source: :#{source}
         RUBY
     end

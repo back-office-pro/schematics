@@ -1,0 +1,7 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/virtuals/virtual:
+        function: Function
+        name: Name

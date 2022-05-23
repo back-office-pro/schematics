@@ -24,16 +24,13 @@
                   = model_class.human_attribute_name(field.name)
           tbody.border-0
             - @resources.each do |resource|
-              tr {
-                data-action='click->application#visit'
-                data-application-href-param=polymorphic_path(resource)
-                role='button'
-              }
-                td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
-                  .btn-group
-                    = render Schematics::Button::Edit::Component.new(resource:)
-                    = render Schematics::Button::Archive::Component.new(resource:)
-                    = render Schematics::Button::DestroyAttachment::Component.new(resource: resource.try(:record), attachment: resource)
-                - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-                  td.text-nowrap.text-center.align-middle class=col_preference_class(field)
-                    = render Schematics::Resource::Component.new(resource:, field:, highlight: @highlight)
+              = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr) do |c|
+                - c.with_resource do
+                  td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
+                    .btn-group
+                      = render Schematics::Button::Edit::Component.new(resource:)
+                      = render Schematics::Button::Archive::Component.new(resource:)
+                      = render Schematics::Button::DestroyAttachment::Component.new(resource: resource.try(:record), attachment: resource)
+                  - entity.listable_elements.stable_sort_by(&:weight).each do |field|
+                    td.text-nowrap.text-center.align-middle class=col_preference_class(field)
+                      = render Schematics::Resource::Component.new(resource:, field:, highlight: @highlight)

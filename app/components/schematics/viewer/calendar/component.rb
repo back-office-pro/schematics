@@ -4,10 +4,9 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
-        def alert_class_for(resource, date)
-          return 'rounded-0 border-start-0 border-end-0' if siblings_resource_for?(resource, date)
-          return 'rounded-end border-start-0 me-2' if previous_resource_for?(resource, date)
-          return 'rounded-start border-end-0 ms-2' if next_resource_for?(resource, date)
+        def alert_css_classes_for(resource, date)
+          %w[alert alert-secondary calendar lh-lg text-truncate mb-1 p-2]
+            .concat alert_border_css_classes_for(resource, date)
         end
 
         def date_range = (start_date..end_date).to_a
@@ -35,6 +34,12 @@ module Schematics
         end
 
         private
+
+        def alert_border_css_classes_for(resource, date)
+          return %w[rounded-0 border-start-0 border-end-0] if siblings_resource_for?(resource, date)
+          return %w[rounded-end border-start-0 me-2] if previous_resource_for?(resource, date)
+          return %w[rounded-start border-end-0 ms-2] if next_resource_for?(resource, date)
+        end
 
         def end_date = end_of_month_date
           .end_of_week

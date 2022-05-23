@@ -1,0 +1,15 @@
+ul.nav.nav-pills.flex-column.pb-4 role='tablist'
+  - entities.each_with_index do |entity, index|
+    li.nav-item role='presentation'
+      a.nav-link {
+        id="#{entity.table_name}-tab"
+        data-bs-toggle='tab'
+        data-bs-target="##{entity.table_name}"
+        type='button'
+        role='tab'
+        aria-controls=entity.table_name
+        aria-selected='false'
+        class=('active' if index.zero?)
+      }
+        = fa_icon entity.icon, class: 'me-2 fa-fw fa-lg'
+        = entity.model_class.human_name.pluralize.titleize

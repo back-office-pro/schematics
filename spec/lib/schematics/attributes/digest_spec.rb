@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Digest do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'password' }
   let(:options) { {} }
 
@@ -14,7 +14,7 @@ describe Schematics::Attributes::Digest do
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:type) { is_expected.to eq('digest') }
+  its(:database_type) { is_expected.to eq('digest') }
   its(:column_name) { is_expected.to eq('password') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to eq('Azerty1!') }

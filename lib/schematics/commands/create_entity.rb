@@ -3,7 +3,7 @@
 module Schematics
   module Commands
     class CreateEntity < Command
-      def execute
+      def execute # rubocop:disable Metrics/CyclomaticComplexity
         return generate_scaffold_controller if model_exists?
 
         [
@@ -14,7 +14,8 @@ module Schematics
           "rails generate migration add_slug_to_#{table_name.pluralize} slug:string:uniq",
           "rails generate migration add_lock_version_to_#{table_name.pluralize} lock_version:integer", # rubocop:disable Layout/LineLength
           has_and_belongs_to_many_associations.map(&method(:generate_create_join_table_migration)),
-          association_attributes.map(&method(:generate_counter_cache_migration))
+          association_attributes.map(&method(:generate_counter_cache_migration)),
+          ("rails 'schematics:permissions:create[#{class_name}]'" unless core?)
         ].compact.flatten.map(&:squish)
       end
 

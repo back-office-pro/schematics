@@ -15,6 +15,12 @@ module Schematics
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
+      def available_options = super.push(
+        :inverse,
+        :type,
+        :polymorphic
+      )
+
       def open_api_type = { id!: ::String }
 
       def column_name = "#{super}_id"
@@ -66,18 +72,12 @@ module Schematics
       RUBY
 
       def inverse_association
-        @inverse_association ||= Associations::Association.build(self, **inverse)
+        @inverse_association ||= Associations::Association.build(belongs_to: self, **inverse)
       end
 
       def icon
         inverse_entity&.icon || :link
       end
-
-      # :reek:FeatureEnvy
-      def collection = model_class
-        .all
-        .map { [_1.to_s, _1.id] }
-        .sort
 
       protected
 

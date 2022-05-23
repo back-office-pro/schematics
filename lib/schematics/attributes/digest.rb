@@ -12,6 +12,11 @@ module Schematics
       /x
       delegate :confirm?, to: :options
 
+      def available_options = super.push(
+        :confirm,
+        :min
+      )
+
       def default = 'Azerty1!'
 
       def icon = :key

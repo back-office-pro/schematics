@@ -14,13 +14,9 @@
                 td.calendar-day.p-0 class=td_class_for(date)
                   .text-muted.ps-2.pt-1 = date.day
                   - resources_for(date).each do |resource|
-                    .alert.alert-secondary.calendar.lh-lg.text-truncate.mb-1.p-2 {
-                      class=alert_class_for(resource, date)
-                      data-action='click->application#visit'
-                      data-application-href-param=href(resource)
-                      role='button'
-                    }
-                      - unless previous_resource_for?(resource, date)
-                        = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
-                        = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
-                      span.ms-2 = resource
+                    = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: alert_css_classes_for(resource, date)) do |c|
+                      - c.with_resource do
+                        - unless previous_resource_for?(resource, date)
+                          = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
+                          = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
+                        span.ms-2 = resource

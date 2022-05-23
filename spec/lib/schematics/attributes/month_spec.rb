@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Month do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'user') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
   let(:name) { 'created_at/month' }
   let(:options) { {} }
 

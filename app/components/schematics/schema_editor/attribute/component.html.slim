@@ -1,0 +1,14 @@
+.col-xl-2.col-md-4
+  .card.border-0
+    .card-body
+      .text-center
+        = fa_icon icon, size: '2x', class: 'text-primary'
+        h6.pt-2 = human_attribute_name(name)
+      = @entities_form.simple_fields_for :attributes, @attribute, include_id: false do |attributes_form|
+        = attributes_form.input :name
+        = attributes_form.input :type,
+                                as: :select,
+                                collection: types,
+                                include_blank: false,
+                                input_html: { data: { controller: 'dropdown' } }
+        = render Schematics::SchemaEditor::Options::Component.new(field: @attribute, form: attributes_form)

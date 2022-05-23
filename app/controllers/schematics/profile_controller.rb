@@ -49,9 +49,8 @@ module Schematics
       .insert(2, current_password_attribute)
       .reject_is_a?(Attributes::Association)
 
-    def current_password_attribute = Attributes::Attribute.build(
-      entity,
-      type: 'digest',
+    def current_password_attribute = Attributes::Digest.new(
+      entity:,
       name: 'current_password',
       options: { required: true }
     )

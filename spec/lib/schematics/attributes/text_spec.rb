@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Attributes::Text do
-  subject(:attribute) { described_class.new(entity, name, options) }
+  subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.build(name: 'entity') }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'content' }
   let(:options) do
     {
@@ -19,7 +19,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
-  its(:type) { is_expected.to eq('text') }
+  its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:font) }
