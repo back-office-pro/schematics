@@ -18,11 +18,11 @@ after_bundle do
   rails_command 'schematics:install:migrations'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
+  rails_command 'db:reset'
   rails_command 'schematics:generate'
   rails_command 'schematics:db:encryption:init'
   rails_command 'generate annotate:install'
   rails_command 'generate erd:install'
-  rails_command 'db:reset'
   rails_command 'db:migrate'
   rails_command 'db:fixtures:load FIXTURES_PATH="spec/fixtures" FIXTURES=users,active_storage/attachments,active_storage/blobs,roles,charts,stats,imports' # rubocop:disable Layout/LineLength
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
