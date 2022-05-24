@@ -19,7 +19,7 @@ module MainApp
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(data)
+      Schematics::MigrateSchemaJob.perform_later(data.to_json)
     end
   end
 end
