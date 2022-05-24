@@ -11,6 +11,8 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
+  its(:icon) { is_expected.to eq(:table) }
+  its(:database_index_type) { is_expected.to eq(:gin) }
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ids') }
   its(:open_api_type) { is_expected.to eq([String]) }

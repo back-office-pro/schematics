@@ -5,6 +5,8 @@ module Schematics
     class Array < Attribute
       include Behaviours::Fillable
 
+      def database_index_type = :gin
+
       def database_type = 'string'
 
       def default = []

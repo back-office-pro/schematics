@@ -35,6 +35,7 @@ module Schematics
           def inject_index_options = [
             super,
             'algorithm: :concurrently',
+            ("using: :#{schema_attribute.database_index_type}" if schema_attribute),
             ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table'))
           ].compact.join(', ')
 

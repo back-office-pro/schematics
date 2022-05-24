@@ -7,6 +7,8 @@ module Schematics
       include Behaviours::Renderable
       delegate :default, to: :options
 
+      def database_index_type = :gin
+
       def icon = :table
 
       def open_api_type = {}

@@ -26,12 +26,16 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:string) }
-    its(:has_index?) { is_expected.to be_truthy }
-    its(:has_uniq_index?) { is_expected.to be_falsy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
     its(:default) { is_expected.to eq('MyString') }
     it { is_expected.not_to be_required }
+    it { is_expected.to have_index }
+    it { is_expected.not_to have_uniq_index }
+
+    its(:inject_index_options) do
+      is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
+    end
   end
 
   context 'when column is string and unique' do
@@ -39,12 +43,16 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:string) }
-    its(:has_index?) { is_expected.to be_truthy }
-    its(:has_uniq_index?) { is_expected.to be_truthy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
     its(:default) { is_expected.to eq('MyString') }
     it { is_expected.not_to be_required }
+    it { is_expected.to have_index }
+    it { is_expected.to have_uniq_index }
+
+    its(:inject_index_options) do
+      is_expected.to eq(", unique: true, algorithm: :concurrently, where: 'deleted_at IS NULL'")
+    end
   end
 
   context 'when column is string and has index' do
@@ -52,12 +60,16 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:string) }
-    its(:has_index?) { is_expected.to be_truthy }
-    its(:has_uniq_index?) { is_expected.to be_falsy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
     its(:default) { is_expected.to eq('MyString') }
     it { is_expected.not_to be_required }
+    it { is_expected.to have_index }
+    it { is_expected.not_to have_uniq_index }
+
+    its(:inject_index_options) do
+      is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
+    end
   end
 
   context 'when column is references' do
@@ -65,11 +77,15 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:references) }
-    its(:has_index?) { is_expected.to be_truthy }
-    its(:has_uniq_index?) { is_expected.to be_falsy }
     its(:attr_options) { is_expected.to be_empty }
     its(:default) { is_expected.to be_nil }
     it { is_expected.to be_required }
+    it { is_expected.to have_index }
+    it { is_expected.not_to have_uniq_index }
+
+    its(:inject_index_options) do
+      is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
+    end
 
     its(:options_for_migration) do
       is_expected.to eq(null: false, foreign_key: true, index: { where: 'deleted_at IS NULL' })
@@ -81,12 +97,18 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('email') }
     its(:type) { is_expected.to eq(:citext) }
-    its(:has_index?) { is_expected.to be_truthy }
-    its(:has_uniq_index?) { is_expected.to be_truthy }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(null: false) }
     it { expect(JSON.parse(attribute.default)).to match(URI::MailTo::EMAIL_REGEXP) }
     it { is_expected.to be_required }
+    it { is_expected.to have_index }
+    it { is_expected.to have_uniq_index }
+
+    its(:inject_index_options) do
+      is_expected.to eq <<~TEXT.chomp
+        , unique: true, algorithm: :concurrently, using: :btree, where: 'deleted_at IS NULL'
+      TEXT
+    end
   end
 
   context 'when column is schema references' do
@@ -94,11 +116,15 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('author') }
     its(:type) { is_expected.to eq(:references) }
-    its(:has_index?) { is_expected.to be_truthy }
-    its(:has_uniq_index?) { is_expected.to be_falsy }
     its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
     its(:default) { is_expected.to be_nil }
     it { is_expected.to be_required }
+    it { is_expected.to have_index }
+    it { is_expected.not_to have_uniq_index }
+
+    its(:inject_index_options) do
+      is_expected.to eq(", algorithm: :concurrently, using: :btree, where: 'deleted_at IS NULL'")
+    end
 
     its(:options_for_migration) do
       is_expected.to eq(

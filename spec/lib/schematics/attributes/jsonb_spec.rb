@@ -12,6 +12,8 @@ describe Schematics::Attributes::Jsonb do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
 
+  its(:icon) { is_expected.to eq(:table) }
+  its(:database_index_type) { is_expected.to eq(:gin) }
   its(:database_type) { is_expected.to eq('jsonb') }
   its(:column_name) { is_expected.to eq('preferences') }
   its(:open_api_type) { is_expected.to eq({}) }

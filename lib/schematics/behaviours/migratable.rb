@@ -5,6 +5,8 @@ module Schematics
     module Migratable
       def column_name = name
 
+      def database_index_type = :btree
+
       def id = [
         entity.table_name,
         name
