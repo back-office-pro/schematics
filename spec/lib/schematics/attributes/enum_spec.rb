@@ -25,6 +25,7 @@ describe Schematics::Attributes::Enum do
   its(:to_s) { is_expected.to eq('schema:product_state') }
   its(:search_data) { is_expected.to eq('state:') }
   its(:options_for_migration) { is_expected.to be_empty }
+  its(:available_options) { is_expected.to include(:values) }
 
   its(:validators) do
     is_expected.to eq(

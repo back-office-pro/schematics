@@ -28,6 +28,7 @@ describe Schematics::Attributes::ModelField do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('assemblies.part') }
   its(:to_s) { is_expected.to eq('schema:assembly_part') }
+  its(:available_options) { is_expected.to include(:depends_on, :type) }
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY

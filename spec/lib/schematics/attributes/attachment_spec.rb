@@ -27,6 +27,10 @@ describe Schematics::Attributes::Attachment do
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 
+  its(:available_options) do
+    is_expected.to include(:size, :aspect_ratio, :min, :max, :width, :height, :content_type)
+  end
+
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :avatar, {:antivirus=>true}

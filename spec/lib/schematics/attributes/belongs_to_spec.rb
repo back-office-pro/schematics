@@ -51,6 +51,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
+  its(:available_options) { is_expected.to include(:inverse, :type, :polymorphic) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

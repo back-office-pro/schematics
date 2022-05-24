@@ -26,6 +26,7 @@ describe Schematics::Attributes::Decimal do
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
+  its(:available_options) { is_expected.to include(:unit, :precision, :scale) }
 
   context 'when decimal has precision' do
     let(:options) { { precision: 2 } }

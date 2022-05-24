@@ -26,6 +26,7 @@ describe Schematics::Attributes::Integer do
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
+  its(:available_options) { is_expected.to include(:unit) }
 
   describe '#format' do
     subject { attribute.format(value) }

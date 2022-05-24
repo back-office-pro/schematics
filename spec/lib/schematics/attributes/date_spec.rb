@@ -27,6 +27,10 @@ describe Schematics::Attributes::Date do
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
 
+  its(:available_options) do
+    is_expected.to include(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
+  end
+
   context 'when date is required' do
     let(:options) { { required: true } }
 

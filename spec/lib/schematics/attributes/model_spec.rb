@@ -28,6 +28,7 @@ describe Schematics::Attributes::Model do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('permissions.model') }
   its(:to_s) { is_expected.to eq('schema:permission_model') }
+  its(:available_options) { is_expected.to include(:without_core) }
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
