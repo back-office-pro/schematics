@@ -6,8 +6,8 @@ fr:
         data: Données
         state: Etat
         states:
-          migrated: Migré
-          scheduled: Programmé
+          migrated: Migrée
+          scheduled: Programmée
         version: Version
     events:
       schema_dataset:
