@@ -13,7 +13,7 @@ module Schematics
       delegate :load, to: :instance
 
       def dump(data)
-        data
+        data.to_json
       end
     end
 
@@ -22,9 +22,13 @@ module Schematics
     def load(data = [])
       return unless data
 
-      self.entities = core_data.concat(data.map(&:deep_symbolize_keys))
+      data = ::JSON.parse(data) if data.is_a?(::String)
+      @data = data.map(&:deep_symbolize_keys)
+      self.entities = core_data.concat(@data)
       self
     end
+
+    def as_json = @data
 
     def entities=(entities)
       @entities = entities.map { Entities::Entity.build(**_1) }
