@@ -3,6 +3,7 @@
 describe Schematics::Attributes::Integer do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
+  let(:compare_checks) { ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys }
   let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'price' }
   let(:options) do
@@ -26,7 +27,7 @@ describe Schematics::Attributes::Integer do
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
-  its(:available_options) { is_expected.to include(:unit) }
+  its(:available_options) { is_expected.to include(*compare_checks, :unit) }
 
   describe '#format' do
     subject { attribute.format(value) }

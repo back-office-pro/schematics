@@ -5,6 +5,10 @@ module Schematics
     module Numerable
       delegate :unit, :precision, to: :options
 
+      def available_options = super.concat(
+        ::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys
+      )
+
       # :reek:NilCheck
       def format(value)
         case value
@@ -31,7 +35,10 @@ module Schematics
       )
 
       def validators = super.merge(
-        numericality: { allow_blank: }
+        numericality: options
+                      .slice(*::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys)
+                      .to_h
+                      .merge(allow_blank:)
       )
     end
   end
