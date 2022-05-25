@@ -68,7 +68,7 @@ module Schematics
           .reject_is_a?(Behaviours::Preloadable)
           .each do |attribute|
             it do
-              is_expected.to allow_value('').for(attribute.name.to_sym) if attribute.allow_blank
+              is_expected.to allow_value(nil).for(attribute.name.to_sym) if attribute.allow_blank
               is_expected.to allow_value(attribute.default).for(attribute.name.to_sym)
             end
           end
