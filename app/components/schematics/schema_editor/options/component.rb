@@ -49,8 +49,7 @@ module Schematics
           unique: :boolean,
           unit: :string,
           values: :select,
-          width: :string,
-          without_core: :boolean
+          width: :string
         }
 
         def render?

@@ -432,8 +432,7 @@
         "name": "model",
         "type": "model",
         "options": {
-          "required": true,
-          "without_core": true
+          "required": true
         }
       },
       {
@@ -478,8 +477,7 @@
         "name": "model",
         "type": "model",
         "options": {
-          "required": true,
-          "without_core": true
+          "required": true
         }
       },
       {

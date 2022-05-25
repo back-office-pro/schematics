@@ -6,10 +6,6 @@ module Schematics
     class Model < String
       include Behaviours::Enumerable
 
-      def available_options = super.push(
-        :without_core
-      )
-
       def collection = super.sort
 
       def format(value)
@@ -24,16 +20,8 @@ module Schematics
       def values = Schema
         .instance
         .entities
-        .reject(&entity_type)
+        .reject(&:hidden?)
         .map(&:class_name)
-
-      private
-
-      def entity_type
-        return :core? if options.without_core?
-
-        :hidden?
-      end
     end
   end
 end
