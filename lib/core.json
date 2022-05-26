@@ -670,7 +670,7 @@
     "virtuals": [
       {
         "name": "version",
-        "function": "$lock_version + 1",
+        "function": "$version + 1",
         "options": {
           "precision": 0
         }

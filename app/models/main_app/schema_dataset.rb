@@ -21,5 +21,10 @@ module MainApp
     def after_migrate
       Schematics::MigrateSchemaJob.perform_later(data.to_json)
     end
+
+    def version = self
+      .class
+      .where(created_at: ...created_at)
+      .size
   end
 end
