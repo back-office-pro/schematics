@@ -26,7 +26,7 @@ module Schematics
 
     def _metadata = {
       icon: self.class.entity.icon.to_s.dasherize,
-      descriptor: self.class.entity.descriptor.name.camelize(:lower),
+      descriptor: object.to_s,
       url: Rails.application.routes.url_helpers.polymorphic_path(object)
     }
 
