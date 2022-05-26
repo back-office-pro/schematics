@@ -24,7 +24,7 @@ module MainApp
 
     def version = self
       .class
-      .where(created_at: ...created_at)
+      .where(created_at: ..created_at)
       .size
   end
 end

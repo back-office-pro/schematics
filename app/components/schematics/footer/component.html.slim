@@ -3,6 +3,8 @@ footer.py-3.border-top
     .col
       | &copy; #{::Time.current.year} #{settings(:company_name)}
     .col.text-end
-      = fa_icon :rocket, class: 'text-primary me-2'
+      = fa_icon ::SchemaDataset.entity.icon, class: 'text-primary me-2'
+      = t('.version', version:)
+      = fa_icon :rocket, class: 'text-primary mx-2'
       = t('.powered_by')
       = link_to 'BackOffice', 'https://www.back-office.pro', class: 'ms-1 text-primary text-decoration-none'
