@@ -2,12 +2,11 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
-    def perform(data = ::SchemaDataset.awaiting.data.to_json)
-      Schema
-        .load(data)
-        .sorted_entities
-        .reject(&:core?)
-        .map { |entity| Commands::CreateEntity.new(entity:) }
+    def perform
+      schema_dataset = ::SchemaDataset.awaiting
+      Schema.load(schema_dataset.data.to_json)
+      schema_dataset
+        .migrations
         .flat_map(&:execute)
         .each(&method(:system))
       ::Rails.application.reload_routes!
