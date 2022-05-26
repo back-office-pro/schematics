@@ -7,7 +7,6 @@ require 'pagy/extras/i18n'
 require 'pagy/extras/items'
 require 'pagy/extras/calendar'
 require 'pagy/extras/overflow'
-require 'pagy/extras/trim'
 
 module LocalizePagyCalendar
   def localize(time, opts)

@@ -9,7 +9,7 @@
               = link_to fa_icon(version.entity.icon, size: '2x'),
                         main_app.polymorphic_path(version.model_class),
                         class: 'text-light'
-            .card.border-0
+            .card.border-0.animate__animated.animate__zoomIn
               .card-body.p-3
                 = render Schematics::VersionPreview::Component.new(version:)
   = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
