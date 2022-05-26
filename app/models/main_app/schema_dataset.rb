@@ -26,7 +26,9 @@ module MainApp
 
     def migrations = self
       .class
-      .current_data
+      .current
+      .data
+      .as_json
       .difference(data.as_json)
       .map do |entity|
         Schematics::Commands::Command.build(type: 'create_entity', entity: entity[:name])
