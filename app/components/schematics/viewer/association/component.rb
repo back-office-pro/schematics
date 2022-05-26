@@ -52,7 +52,7 @@ module Schematics
               .class
               .human_attribute_name(@resources.first.name, count: @resources.size)
           else
-            model_class.human_name(count: @resources.size).titleize
+            model_class.human_name(count: @resources.size).capitalize
           end
         end
       end

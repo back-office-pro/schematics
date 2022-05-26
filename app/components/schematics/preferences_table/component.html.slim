@@ -12,7 +12,7 @@
           tr
             td
               = fa_icon entity.icon, class: 'fa-fw me-2 text-muted'
-              = model_class.human_name.titleize
+              = model_class.human_name_plural.capitalize
             - events.each_key do |action|
               - preference = "#{action}_#{model_class}"
               td

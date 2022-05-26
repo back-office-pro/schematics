@@ -127,12 +127,12 @@ class LocalesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/
 
   def translate(text, to:)
     EasyTranslate.translate(
-      text.titleize,
+      text.capitalize,
       to:,
       key: Schematics::Engine.credentials.gcloud[:api_key]
     )
   rescue EasyTranslate::EasyTranslateException
-    text.titleize
+    text.capitalize
   end
 
   def destroying?
