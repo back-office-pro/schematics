@@ -24,15 +24,14 @@ module MainApp
       Schematics::MigrateSchemaJob.perform_later
     end
 
-    def migrations = self
-      .class
-      .current
-      .data
-      .as_json
-      .difference(data.as_json)
-      .map do |entity|
-        Schematics::Commands::Command.build(type: 'create_entity', entity: entity[:name])
-      end
+    def migrations
+      current_data = self.class.current.data&.as_json || []
+      current_data
+        .difference(data.as_json)
+        .map do |entity|
+          Schematics::Commands::Command.build(type: 'create_entity', entity: entity[:name])
+        end
+    end
 
     def version = self
       .class
