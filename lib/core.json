@@ -638,6 +638,7 @@
       "descriptor": "version",
       "actions": [
         "index",
+        "show",
         "create",
         "destroy"
       ]
