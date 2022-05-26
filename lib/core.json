@@ -635,9 +635,9 @@
     "name": "schema_dataset",
     "options": {
       "icon": "project_diagram",
+      "descriptor": "version",
       "actions": [
         "index",
-        "show",
         "create",
         "destroy"
       ]
