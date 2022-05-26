@@ -637,6 +637,7 @@
       "icon": "project_diagram",
       "actions": [
         "index",
+        "show",
         "create",
         "destroy"
       ]
