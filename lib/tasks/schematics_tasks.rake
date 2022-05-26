@@ -15,16 +15,6 @@ namespace :schematics do
       .each(&method(:system))
   end
 
-  desc 'Migrate schema application'
-  task migrate: :environment do
-    Schematics::Schema
-      .instance
-      .migrations
-      .reject(&:migrated?)
-      .flat_map(&:execute)
-      .each(&method(:system))
-  end
-
   namespace :licence do
     desc 'Renew application licence'
     task :renew, %i[plan term] => [:environment] do |_task, args|
