@@ -50,8 +50,8 @@ module MainApp
       .includes(:blob)
       .sum(&:byte_size)
 
-    def users_size
-      ::User.count
-    end
+    def users_size = ::User
+      .all
+      .size
   end
 end

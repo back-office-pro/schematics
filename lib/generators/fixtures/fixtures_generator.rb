@@ -109,7 +109,7 @@ class FixturesGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics
     fixtures = YAML.load_file(file_path)
     return index unless fixtures
 
-    fixtures.keys.count.next
+    fixtures.keys.size.next
   end
 
   def generate_blob_key(attribute, index)
