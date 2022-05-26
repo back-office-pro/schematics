@@ -8,7 +8,6 @@
   }
     span.icon = fa_icon :gear
     span.text Options
-  .row.collapse id=id
+  .collapse.mt-3 id=id
     - available_options.each do |option|
-      .col
-        = options_form.input option, as: input_type[option]
+      = options_form.input option, as: input_type[option]
