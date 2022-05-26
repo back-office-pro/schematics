@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module SearchBar
+  module SearchBarModal
     class Component < ApplicationComponent
       delegate :search_history, to: :current_user
 

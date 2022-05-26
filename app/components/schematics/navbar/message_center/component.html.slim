@@ -1,4 +1,4 @@
-li.nav-item.dropdown.align-items-center.px-3.border-start.border-light.d-none.d-sm-flex
+li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light
   a#messages-dropdown.nav-link.dropdown-toggle {
     aria-expanded='false'
     data-bs-toggle='dropdown'
@@ -18,6 +18,6 @@ li.nav-item.dropdown.align-items-center.px-3.border-start.border-light.d-none.d-
     .pre-scrollable.overflow-scroll
       - messages.each do |message|
         .dropdown-item
-          = render Schematics::MessageCenter::Preview::Component.new(message:)
+          = render Schematics::Navbar::MessageCenter::Preview::Component.new(message:)
     .dropdown-divider.m-0
     = link_to t('.show_all'), messages_path, class: 'dropdown-item text-muted text-center small p-2'

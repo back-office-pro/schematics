@@ -1,9 +1,9 @@
 nav.navbar.navbar-expand.p-0.sticky-top
-  = render Schematics::BreadcrumbTrail::Component.new
+  = render Schematics::Navbar::BreadcrumbTrail::Component.new
   ul.navbar-nav.ms-auto.p-3
-    = render Schematics::SearchBar::Component.new
-    = render Schematics::NotificationCenter::Component.new
-    = render Schematics::MessageCenter::Component.new
-    = render Schematics::OnlineUsersCenter::Component.new
-    = render Schematics::SwitchTheme::Component.new
-    = render Schematics::MyAccount::Component.new
+    = render Schematics::Navbar::NotificationCenter::Component.new
+    = render Schematics::Navbar::MessageCenter::Component.new
+    = render Schematics::Navbar::SearchBar::Component.new
+    = render Schematics::Navbar::SwitchTheme::Component.new
+    = render Schematics::Navbar::OnlineUsersCenter::Component.new
+    = render Schematics::Navbar::MyAccount::Component.new

@@ -1,4 +1,4 @@
-li.nav-item.dropdown.align-items-center.px-3.border-start.border-light.d-none.d-sm-flex
+li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light
   a#online-users-dropdown.nav-link.dropdown-toggle {
     aria-expanded='false'
     data-bs-toggle='dropdown'
@@ -17,4 +17,4 @@ li.nav-item.dropdown.align-items-center.px-3.border-start.border-light.d-none.d-
     .pre-scrollable.overflow-scroll
       - sessions.each do |session|
         .dropdown-item
-          = render Schematics::OnlineUsersCenter::Preview::Component.new(session:)
+          = render Schematics::Navbar::OnlineUsersCenter::Preview::Component.new(session:)

@@ -29,6 +29,7 @@ html lang=::I18n.locale dir='ltr'
   body data-controller='application'
     = turbo_stream_from current_user
     = render Schematics::Toast::Component.with_collection(flash.to_a)
+    = render Schematics::SearchBarModal::Component.new
     .container-fluid.p-0.h-100
       .row.g-0.h-100
         = render Schematics::Sidebar::Component.new
