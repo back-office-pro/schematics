@@ -3,7 +3,9 @@
 module Schematics
   module Footer
     class Component < ApplicationComponent
-      delegate :version, to: '::SchemaDataset.current'
+      def version
+        ::SchemaDataset.current_version || '1.0'
+      end
     end
   end
 end

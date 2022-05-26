@@ -9,11 +9,13 @@ module MainApp
     end
 
     class_methods do
-      def current = migrated
+      delegate :data, :version, to: :current, prefix: true, allow_nil: true
+
+      def awaiting = scheduled
         .order(created_at: :desc)
         .first
 
-      def awaiting = scheduled
+      def current = migrated
         .order(created_at: :desc)
         .first
     end
