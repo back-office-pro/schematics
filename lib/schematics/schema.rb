@@ -10,7 +10,8 @@ module Schematics
     attr_reader :entities
 
     class << self
-      delegate :load, to: :instance
+      public :new
+      delegate :load, to: :new
 
       def dump(data)
         data.to_json
