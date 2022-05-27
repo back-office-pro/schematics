@@ -6,7 +6,7 @@ ActiveSupport.on_load(:active_record) do
   sql = <<~SQL.squish
     SELECT data
     FROM schema_datasets
-    WHERE state = 1
+    WHERE state = 2
     ORDER BY created_at DESC
     LIMIT 1
   SQL
@@ -15,7 +15,7 @@ ActiveSupport.on_load(:active_record) do
          .execute(sql)
          .first
          &.fetch('data')
-  Schematics::Schema.load(::JSON.parse(data)) if data
+  Schematics::Schema.instance.load(::JSON.parse(data)) if data
 rescue ActiveRecord::StatementInvalid
   nil
 ensure

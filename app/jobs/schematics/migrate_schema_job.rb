@@ -2,13 +2,14 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
-    def perform
-      schema_dataset = ::SchemaDataset.awaiting
-      Schema.load(schema_dataset.data.to_json)
+    def perform(schema_dataset_id = ::SchemaDataset.scheduled.last&.id)
+      schema_dataset = ::SchemaDataset.find(schema_dataset_id)
+      Schema.instance.load(schema_dataset.data.to_json)
       schema_dataset
         .migrations
         .flat_map(&:execute)
         .each(&method(:system))
+      schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
       ::Rails.application.reload_routes!
       system 'rails db:migrate'
       system 'rails schematics:docs:generate'
