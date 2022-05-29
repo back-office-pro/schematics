@@ -53,6 +53,7 @@ require 'sprockets/railtie'
 require 'importmap-rails'
 require 'turbo-rails'
 require 'stimulus-rails'
+require 'cocoon'
 
 module Schematics
   class Engine < ::Rails::Engine

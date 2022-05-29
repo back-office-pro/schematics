@@ -1,6 +1,7 @@
 import 'chartkick'
 import 'Chart.bundle'
 import '@client-side-validations/simple-form'
+import '@oddcamp/cocoon-vanilla-js'
 import Pagy from 'pagy-module'
 
 /* global mapsApiKey, Chartkick */

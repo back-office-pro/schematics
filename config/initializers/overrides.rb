@@ -6,6 +6,7 @@ require 'rails/generators/active_record/migration/migration_generator'
 require 'active_record/migration'
 require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'open_api/router'
+require 'cocoon/view_helpers'
 
 GeneratedAttribute = Schematics::Patches::Rails::Generators::GeneratedAttribute
 MigrationGenerator = Schematics::Patches::ActiveRecord::Generators::MigrationGenerator
@@ -19,6 +20,7 @@ ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
+Cocoon::ViewHelpers.prepend(Schematics::Patches::Cocoon::ViewHelpers)
 
 Rails.configuration.to_prepare do
   MainApp
