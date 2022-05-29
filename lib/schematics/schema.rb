@@ -38,8 +38,6 @@ module Schematics
 
     alias entities_attributes= entities=
 
-    def build_entity = Entities::Entity.new(name: '')
-
     def find_entity_by_name(name)
       entities.find { _1.name == name }
     end

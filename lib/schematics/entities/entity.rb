@@ -61,12 +61,6 @@ module Schematics
         Schematics::Options.new(options: @options)
       end
 
-      def build_attribute = Attributes::String.new(entity: self)
-
-      def build_virtual = Virtuals::Virtual.new(entity: self)
-
-      def build_trigger = Trigger.new
-
       def associations
         @associations ||= []
       end
