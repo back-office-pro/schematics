@@ -12,7 +12,7 @@ module Schematics
         value
           &.safe_constantize
           &.human_name
-          &.capitalize || value
+          &.humanize || value
       end
 
       def icon = :project_diagram

@@ -7,7 +7,7 @@
           .col.text-center.p-4
             = fa_icon ::Licence.entity.icon, size: '3x', class: 'text-primary d-inline-block'
             h5.text-primary.my-4
-              | #{::Licence.human_name.capitalize} #{@licence}
+              | #{::Licence.human_name.humanize} #{@licence}
             .text-muted = t('.licence.expires_on', date: @licence.expires_on_formatted)
   .col-xl-3.col-md-6
     .card.border-0.animate__animated.animate__zoomIn

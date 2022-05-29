@@ -12,4 +12,4 @@ ul.nav.nav-pills.flex-column.pb-4 role='tablist'
         class=('active' if index.zero?)
       }
         = fa_icon entity.icon, class: 'me-2 fa-fw fa-lg'
-        = entity.model_class.human_name_plural.capitalize
+        = entity.model_class.human_name_plural.humanize
