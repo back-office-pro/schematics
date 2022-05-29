@@ -1,17 +1,43 @@
-.tab-pane.fade id=table_name role='tabpanel' aria-labelledby="#{table_name}-tab" class=css_classes
-  = @form.simple_fields_for :entities, @entity, include_id: false do |entities_form|
-    = entities_form.input :name, hint: 'Must be in english'
-    = entities_form.simple_fields_for :options, options do |options_form|
-      = options_form.input :actions,
-                            as: :select,
-                            collection: actions,
-                            selected: @entity.actions,
-                            include_hidden: false,
-                            input_html: { multiple: true, data: { controller: 'dropdown' } }
-      = options_form.input :icon,
-                            as: :select,
-                            input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
-    .row.g-3
-      = render Schematics::SchemaEditor::Attribute::Component.with_collection(attributes, entities_form:, entity: @entity)
-      = render Schematics::SchemaEditor::Virtual::Component.with_collection(virtuals, entities_form:, entity: @entity)
-      = render Schematics::SchemaEditor::Trigger::Component.with_collection(triggers, entities_form:, entity: @entity)
+.tab-pane.fade id=table_name role='tabpanel' class=tab_css_classes
+  = @builder.input :name
+  = @builder.simple_fields_for :options do |options_form|
+    = options_form.input :actions,
+                         as: :select,
+                         collection:,
+                         selected: actions,
+                         include_hidden: false,
+                         input_html: { multiple: true, data: { controller: 'dropdown' } }
+    = options_form.input :icon,
+                         as: :select,
+                         input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
+  = link_to_add_association @builder,
+                            :attributes,
+                            class: 'btn btn-sm btn-primary btn-icon-split me-2',
+                            'data-association-insertion-node': ".#{fields_css_class}",
+                            'data-association-insertion-method': 'append',
+                            partial: Schematics::SchemaEditor::Attribute::Component do
+                              span.icon = fa_icon :plus
+                              span.text Ajouter un attribut
+  = link_to_add_association @builder,
+                            :virtuals,
+                            class: 'btn btn-sm btn-primary btn-icon-split me-2',
+                            'data-association-insertion-node': ".#{fields_css_class}",
+                            'data-association-insertion-method': 'append',
+                            partial: Schematics::SchemaEditor::Virtual::Component do
+                              span.icon = fa_icon :plus
+                              span.text Ajouter un champs virtuel
+  = link_to_add_association @builder,
+                            :triggers,
+                            class: 'btn btn-sm btn-primary btn-icon-split',
+                            'data-association-insertion-node': ".#{fields_css_class}",
+                            'data-association-insertion-method': 'append',
+                            partial: Schematics::SchemaEditor::Trigger::Component do
+                              span.icon = fa_icon :plus
+                              span.text Ajouter un trigger
+  .row.g-3 class=fields_css_class
+    = @builder.simple_fields_for :attributes do |builder|
+      = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
+    = @builder.simple_fields_for :virtuals do |builder|
+      = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
+    = @builder.simple_fields_for :triggers do |builder|
+      = render Schematics::SchemaEditor::Trigger::Component.new(builder:)

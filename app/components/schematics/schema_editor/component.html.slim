@@ -7,9 +7,10 @@
                   html: { data: { 'auto-save-target': 'form' } } do |form|
   .row
     .col
-      .tab-content
-        = render Schematics::SchemaEditor::Entity::Component.with_collection(entities, form:)
+      .tab-content.entities
+        = form.simple_fields_for :entities, entities do |builder|
+          = render Schematics::SchemaEditor::Entity::Component.new(builder:)
     .col-auto
-      = render Schematics::SchemaEditor::Tabs::Component.new
+      = render Schematics::SchemaEditor::Tabs::Component.new(form:)
       = render Schematics::Button::Confirm::Component.new
       = render Schematics::Button::Cancel::Component.new(path: ::SchemaDataset)

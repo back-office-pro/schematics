@@ -4,6 +4,11 @@ module Schematics
   module SchemaEditor
     module Tabs
       class Component < ApplicationComponent
+        def initialize(form:)
+          super
+          @form = form
+        end
+
         def entities = Schema
           .instance
           .entities

@@ -1,10 +1,9 @@
-.col-xl-2.col-md-4
+.col-xl-2.col-md-4.virtual
   .card.border-0.bg-light.animate__animated.animate__zoomIn
     .card-body
-      .text-center
+      .text-center.mb-2
         = fa_icon icon, size: '2x', class: 'text-primary'
-        h6.pt-2 = human_attribute_name(name)
-      = @entities_form.simple_fields_for :virtuals, @virtual, include_id: false do |virtuals_form|
-        = virtuals_form.input :name
-        = virtuals_form.input :function
-        = render Schematics::SchemaEditor::Options::Component.new(field: @virtual, form: virtuals_form)
+      = @builder.input :name
+      = @builder.input :function
+      = link_to_remove_association fa_icon(:trash), @builder, class: 'btn btn-sm btn-danger', 'data-wrapper-class': 'virtual'
+      = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)

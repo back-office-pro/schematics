@@ -6,38 +6,33 @@ module Schematics
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
 
-        delegate :table_name, :attributes, :virtuals, :triggers, :options, to: :@entity
-        with_collection_parameter :entity
+        delegate :table_name, :default_actions, :actions, :icon, to: '@builder.object'
 
-        def initialize(entity:, entity_counter:, form:)
+        def initialize(builder:)
           super
-          @entity = entity
-          @entity_counter = entity_counter
-          @form = form
+          @builder = builder
         end
 
-        def actions = @entity
-          .default_actions
-          .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
-
-        def css_classes
-          %w[show active] if first_tab?
+        def collection
+          default_actions.map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
         end
 
-        def icons = YAML
-          .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
-          .map do |text|
-            {
-              innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'),
-              selected: text == @entity.icon.to_s,
-              text:
-            }
-          end
+        def fields_css_class = "#{table_name}-fields"
 
-        private
+        def icons
+          YAML
+            .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
+            .map do |text|
+              {
+                innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'),
+                selected: text == icon.to_s,
+                text:
+              }
+            end
+        end
 
-        def first_tab?
-          @entity_counter == 1
+        def tab_css_classes
+          %w[show active] if @builder.index.try(:zero?)
         end
       end
     end

@@ -13,3 +13,11 @@ ul.nav.nav-pills.flex-column.pb-4 role='tablist'
       }
         = fa_icon entity.icon, class: 'me-2 fa-fw fa-lg'
         = entity.model_class.human_name_plural.humanize
+= link_to_add_association @form,
+                          :entities,
+                          class: 'btn btn-sm btn-primary btn-icon-split me-2',
+                          'data-association-insertion-node': '.entities',
+                          'data-association-insertion-method': 'append',
+                          partial: Schematics::SchemaEditor::Entity::Component do
+                            span.icon = fa_icon :plus
+                            span.text Ajouter une entitée
