@@ -22,7 +22,7 @@ module MainApp
 
     def migrations = data
       .as_json
-      .difference(self.class.current_data&.as_json || [])
+      .difference(self.class.current_data&.as_json || []) # TODO: improve
       .map do |entity|
         Schematics::Commands::Command.build(
           type: 'create_entity',
