@@ -5,7 +5,6 @@ module Schematics
     class Jsonb < Attribute
       include Behaviours::Fillable
       include Behaviours::Renderable
-      delegate :default, to: :options
 
       def database_index_type = :gin
 
