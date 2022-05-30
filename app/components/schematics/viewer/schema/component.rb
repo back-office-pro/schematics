@@ -12,6 +12,10 @@ module Schematics
         def entities = @schema
           .entities
           .reject(&:core?)
+
+        def render?
+          @schema.present?
+        end
       end
     end
   end
