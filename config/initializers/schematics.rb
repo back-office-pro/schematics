@@ -6,7 +6,7 @@ ActiveSupport.on_load(:active_record) do
   sql = <<~SQL.squish
     SELECT data
     FROM schema_datasets
-    WHERE state = 2
+    WHERE state <> 0
     ORDER BY created_at DESC
     LIMIT 1
   SQL
