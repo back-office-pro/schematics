@@ -23,12 +23,10 @@ module MainApp
     def migrations = data
       .as_json
       .difference(self.class.current_data&.as_json || [])
-      .map do |entity|
-        Schematics::Commands::Command.build(
-          type: 'create_entity',
-          entity: data.find_entity_by_name(entity[:name])
-        )
-      end
+      .map { data.find_entity_by_name(_1[:name]) }
+      .sort_by(&:weight)
+      .reverse
+      .map { |entity| Schematics::Commands::Command.build(type: 'create_entity', entity:) }
 
     def version = self
       .class
