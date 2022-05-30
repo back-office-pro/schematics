@@ -1,8 +1,7 @@
 = simple_form_for Schematics::Schema.instance, as: :schema_dataset, url:, method: :post, wrapper:, validate: true, html: { data: } do |form|
-  template data-nested-form-target='template'
+  template#schema-editor-entity data-nested-form-target='templates'
     = form.simple_fields_for :entities, Schematics::Entities::Entity.new, child_index: 'NEW_RECORD' do |builder|
       = render Schematics::SchemaEditor::Entity::Component.new(builder:)
-  span data-nested-form-target='target'
   = form.simple_fields_for :entities, entities do |builder|
     = render Schematics::SchemaEditor::Entity::Component.new(builder:)
   = render Schematics::Button::Confirm::Component.new

@@ -6,7 +6,8 @@ module Schematics
       prepend ViewComponent::GlobalOutputBuffer
 
       def data = {
-        'auto-save-target': 'form'
+        'auto-save-target': 'form',
+        'nested-form-target': 'form'
       }
 
       def entities = Schema

@@ -3,11 +3,13 @@
 module Schematics
   module SchemaEditor
     module Button
-      module Remove
+      module AddDropdown
         class Component < ApplicationComponent
-          def initialize(wrapper:)
+          delegate :index, to: :@builder
+
+          def initialize(builder:)
             super
-            @wrapper = wrapper
+            @builder = builder
           end
         end
       end

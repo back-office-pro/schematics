@@ -1,5 +1,6 @@
-.nested-form-wrapper data-new-record='true'
-  = render Schematics::SchemaEditor::Button::Remove::Component.new
+.schema-editor-entity
+  = render Schematics::SchemaEditor::Button::AddDropdown::Component.new(builder: @builder)
+  = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
   = @builder.input :name
   = @builder.simple_fields_for :options do |options_form|
     = options_form.input :actions,
@@ -11,14 +12,19 @@
     = options_form.input :icon,
                           as: :select,
                           input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
-  - objects.each do |(name, object)|
-    .row.g-3 data-controller='nested-form' data-nested-form-wrapper-selector-value='.nested-form-wrapper'
-      template data-nested-form-target='template'
-        = @builder.simple_fields_for name.pluralize.to_sym, object, child_index: 'NEW_RECORD' do |builder|
-          = render Schematics::SchemaEditor.const_get(name.camelize)::Component.new(builder:)
-      button.btn.btn-sm.btn-primary.btn-icon-split.me-2 data-action='click->nested-form#add'
-        span.icon = fa_icon :plus
-        span.text Ajouter un #{name}
-      = @builder.simple_fields_for name.pluralize.to_sym do |builder|
-        = render Schematics::SchemaEditor.const_get(name.camelize)::Component.new(builder:)
-      span data-nested-form-target='target'
+  .row.g-3
+    = @builder.simple_fields_for :attributes do |builder|
+      = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
+    template id="schema-editor-attribute-#{@builder.index}" data-nested-form-target='templates'
+      = @builder.simple_fields_for :attributes, Schematics::Attributes::Attribute.new, child_index: 'NEW_RECORD' do |builder|
+        = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
+    = @builder.simple_fields_for :virtuals do |builder|
+      = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
+    template id="schema-editor-virtual-#{@builder.index}" data-nested-form-target='templates'
+      = @builder.simple_fields_for :virtuals, Schematics::Virtuals::Virtual.new, child_index: 'NEW_RECORD' do |builder|
+        = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
+    = @builder.simple_fields_for :triggers do |builder|
+      = render Schematics::SchemaEditor::Trigger::Component.new(builder:)
+    template id="schema-editor-trigger-#{@builder.index}" data-nested-form-target='templates'
+      = @builder.simple_fields_for :triggers, Schematics::Trigger.new, child_index: 'NEW_RECORD' do |builder|
+        = render Schematics::SchemaEditor::Trigger::Component.new(builder:)

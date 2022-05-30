@@ -1,4 +1,4 @@
-.col-xl-2.col-md-4.nested-form-wrapper data-new-record='true'
+.col-xl-2.col-md-4.schema-editor-trigger
   .card.border-0.animate__animated.animate__zoomIn
     .card-body
       .text-center.mb-2
@@ -9,4 +9,4 @@
                        include_blank: false,
                        input_html: { data: { controller: 'dropdown' } }
       = @builder.input :callback
-      = render Schematics::SchemaEditor::Button::Remove::Component.new
+      = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-trigger')
