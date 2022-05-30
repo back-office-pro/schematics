@@ -6,16 +6,13 @@ module Schematics
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
 
-        delegate :name, :icon, :function, to: :@virtual
-        delegate :model_class, to: :@entity
-        delegate :human_attribute_name, to: :model_class
-        with_collection_parameter :virtual
-
-        def initialize(virtual:, entities_form:, entity:)
+        def initialize(builder:)
           super
-          @virtual = virtual
-          @entities_form = entities_form
-          @entity = entity
+          @builder = builder
+        end
+
+        def icon
+          @builder.object.try(:icon) || :plus
         end
       end
     end

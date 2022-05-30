@@ -1,12 +1,12 @@
-.col-xl-2.col-md-4
-  .card.border-0
+.col-xl-2.col-md-4.schema-editor-trigger
+  .card.border-0.animate__animated.animate__zoomIn
     .card-body
-      .text-center
-        = fa_icon :atom, size: '2x', class: 'text-primary'
-        h6.pt-2 Trigger
-      = @entities_form.simple_fields_for :triggers, @trigger do |triggers_form|
-        = triggers_form.input :action,
-                              as: :select,
-                              collection:,
-                              input_html: { data: { controller: 'dropdown' } }
-        = triggers_form.input :callback
+      .text-center.mb-2
+        = fa_icon icon, size: '2x', class: 'text-primary'
+      = @builder.input :action,
+                       as: :select,
+                       collection:,
+                       include_blank: false,
+                       input_html: { data: { controller: 'dropdown' } }
+      = @builder.input :callback
+      = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-trigger')

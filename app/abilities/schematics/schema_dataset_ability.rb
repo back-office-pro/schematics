@@ -5,7 +5,7 @@ module Schematics
     def initialize
       super
       cannot :import, ::SchemaDataset
-      cannot :destroy, ::SchemaDataset.migrated
+      cannot :destroy, ::SchemaDataset, state: %i[pending migrated]
     end
   end
 end

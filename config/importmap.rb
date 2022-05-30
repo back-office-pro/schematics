@@ -7,7 +7,8 @@ pin 'routes'
 
 pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schematics', 'controllers'), # rubocop:disable Layout/LineLength
              under: 'controllers',
-             to: 'schematics/controllers'
+             to: 'schematics/controllers',
+             preload: true
 
 pin '@client-side-validations/client-side-validations', to: 'https://ga.jspm.io/npm:@client-side-validations/client-side-validations@0.3.0/dist/client-side-validations.esm.js'
 pin '@client-side-validations/simple-form', to: '/assets/@client-side-validations/simple-form/dist/simple-form.bootstrap4.esm.js' # rubocop:disable Layout/LineLength

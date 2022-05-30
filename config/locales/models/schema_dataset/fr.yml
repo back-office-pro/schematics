@@ -7,6 +7,7 @@ fr:
         state: Etat
         states:
           migrated: Migrée
+          pending: Migration en cours
           scheduled: Programmée
         version: Version
     events:

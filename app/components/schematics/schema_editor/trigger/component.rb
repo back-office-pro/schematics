@@ -6,19 +6,14 @@ module Schematics
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
 
-        delegate :action, :callback, to: :@trigger
-        with_collection_parameter :trigger
-
-        def initialize(trigger:, entities_form:, entity:)
+        def initialize(builder:)
           super
-          @trigger = trigger
-          @entities_form = entities_form
-          @entity = entity
+          @builder = builder
         end
 
-        def collection
-          Schematics::Trigger::ACTIONS
-        end
+        def collection = Schematics::Trigger::ACTIONS
+
+        def icon = :atom
       end
     end
   end

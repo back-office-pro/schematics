@@ -635,8 +635,10 @@
     "name": "schema_dataset",
     "options": {
       "icon": "project_diagram",
+      "descriptor": "version",
       "actions": [
         "index",
+        "show",
         "create",
         "destroy"
       ]
@@ -654,6 +656,7 @@
           "default": "scheduled",
           "values": [
             "scheduled",
+            "pending",
             "migrated"
           ],
           "events": [
@@ -661,7 +664,7 @@
               "name": "migrate",
               "icon": "arrow_trend_up",
               "from": "scheduled",
-              "to": "migrated"
+              "to": "pending"
             }
           ]
         }

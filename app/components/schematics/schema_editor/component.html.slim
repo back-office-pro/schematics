@@ -1,15 +1,8 @@
-= simple_form_for Schematics::Schema.instance,
-                  as: :schema_dataset,
-                  url: schema_datasets_path,
-                  method: :post,
-                  wrapper: :input_group,
-                  validate: true,
-                  html: { data: { 'auto-save-target': 'form' } } do |form|
-  .row
-    .col
-      .tab-content
-        = render Schematics::SchemaEditor::Entity::Component.with_collection(entities, form:)
-    .col-auto
-      = render Schematics::SchemaEditor::Tabs::Component.new
-      = render Schematics::Button::Confirm::Component.new
-      = render Schematics::Button::Cancel::Component.new(path: ::SchemaDataset)
+= simple_form_for Schematics::Schema.instance, as: :schema_dataset, url:, method: :post, wrapper:, validate: true, html: { data: } do |form|
+  template#schema-editor-entity data-nested-form-target='templates'
+    = form.simple_fields_for :entities, Schematics::Entities::Entity.new, child_index: 'NEW_RECORD' do |builder|
+      = render Schematics::SchemaEditor::Entity::Component.new(builder:)
+  = form.simple_fields_for :entities, entities do |builder|
+    = render Schematics::SchemaEditor::Entity::Component.new(builder:)
+  = render Schematics::Button::Confirm::Component.new
+  = render Schematics::Button::Cancel::Component.new(path: ::SchemaDataset)

@@ -5,12 +5,11 @@ module Schematics
     module Options
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
-        delegate :options, :available_options, to: :@field
+        delegate :available_options, to: '@builder.object'
 
-        def initialize(field:, form:)
+        def initialize(builder:)
           super
-          @field = field
-          @form = form
+          @builder = builder
         end
 
         def id

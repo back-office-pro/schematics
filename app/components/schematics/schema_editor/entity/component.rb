@@ -5,39 +5,27 @@ module Schematics
     module Entity
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
+        delegate :default_actions, :actions, :icon, to: '@builder.object'
 
-        delegate :table_name, :attributes, :virtuals, :triggers, :options, to: :@entity
-        with_collection_parameter :entity
-
-        def initialize(entity:, entity_counter:, form:)
+        def initialize(builder:)
           super
-          @entity = entity
-          @entity_counter = entity_counter
-          @form = form
+          @builder = builder
         end
 
-        def actions = @entity
-          .default_actions
-          .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
-
-        def css_classes
-          %w[show active] if first_tab?
+        def collection
+          default_actions.map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
         end
 
-        def icons = YAML
-          .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
-          .map do |text|
-            {
-              innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'),
-              selected: text == @entity.icon.to_s,
-              text:
-            }
-          end
-
-        private
-
-        def first_tab?
-          @entity_counter == 1
+        def icons
+          YAML
+            .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
+            .map do |text|
+              {
+                innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'),
+                selected: text == icon.to_s,
+                text:
+              }
+            end
         end
       end
     end

@@ -11,18 +11,22 @@ module MainApp
     class_methods do
       delegate :data, :version, to: :current, prefix: true, allow_nil: true
 
-      def awaiting = scheduled
-        .order(created_at: :desc)
-        .first
-
-      def current = migrated
-        .order(created_at: :desc)
-        .first
+      def current
+        migrated.last
+      end
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(data.to_json)
+      Schematics::MigrateSchemaJob.perform_later(id)
     end
+
+    def migrations = data
+      .as_json
+      .difference(self.class.current_data&.as_json || [])
+      .map { data.find_entity_by_name(_1[:name]) }
+      .sort_by(&:weight)
+      .reverse
+      .map { |entity| Schematics::Commands::Command.build(type: 'create_entity', entity:) }
 
     def version = self
       .class

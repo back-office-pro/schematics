@@ -1,0 +1,20 @@
+.row.g-3
+  - entities.each do |entity|
+    .col-xl-2.col-md-4
+      .card.border-0.bg-light
+        .card-body
+          .text-center
+            = fa_icon entity.icon, size: '2x', class: 'text-primary'
+            h6.pt-2 = entity.name
+          - entity.attributes.each do |attribute|
+            div
+              = fa_icon attribute.icon, class: 'fa-fw me-1'
+              = attribute.name
+          - entity.virtuals.each do |virtual|
+            div
+              = fa_icon virtual.icon, class: 'fa-fw me-1'
+              = virtual.name
+          - entity.triggers.each do |trigger|
+            div
+              = fa_icon :atom, class: 'fa-fw me-1'
+              = trigger.action

@@ -8,22 +8,19 @@ module Schematics
 
         DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
 
-        delegate :name, :type, :icon, :options, to: :@attribute
-        delegate :model_class, to: :@entity
-        delegate :human_attribute_name, to: :model_class
-        with_collection_parameter :attribute
-
-        def initialize(attribute:, entities_form:, entity:)
+        def initialize(builder:)
           super
-          @attribute = attribute
-          @entities_form = entities_form
-          @entity = entity
+          @builder = builder
         end
 
-        def types = (Attributes.constants - DENYLIST)
+        def collection = (Attributes.constants - DENYLIST)
           .map(&Attributes.method(:const_get))
           .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
           .sort
+
+        def icon
+          @builder.object.try(:icon) || :plus
+        end
       end
     end
   end
