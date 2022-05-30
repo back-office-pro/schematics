@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
-  spec.add_development_dependency 'bootsnap', '~> 1.11.1'
+  spec.add_development_dependency 'bootsnap', '~> 1.12.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.10'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.0'
@@ -81,7 +81,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-cors', '~> 1.1.1'
   spec.add_dependency 'rack-mini-profiler', '~> 3.0.0'
   spec.add_dependency 'rails', '~> 7.0.3'
-  spec.add_dependency 'rails-erd', '~> 1.6.1'
+  spec.add_dependency 'rails-erd', '~> 1.7.0'
   spec.add_dependency 'rails-i18n', '~> 7.0.3'
   spec.add_dependency 'ratonvirus', '~> 0.4.2'
   spec.add_dependency 'ratonvirus-clamby', '~> 0.4.0'
