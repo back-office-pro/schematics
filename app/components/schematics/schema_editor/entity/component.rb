@@ -27,12 +27,6 @@ module Schematics
               }
             end
         end
-
-        def objects = [
-          ['attribute', Schematics::Attributes::Attribute.new],
-          ['virtual', Schematics::Virtuals::Virtual.new],
-          ['trigger', Schematics::Trigger.new]
-        ]
       end
     end
   end
