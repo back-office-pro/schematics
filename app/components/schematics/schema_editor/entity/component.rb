@@ -5,8 +5,7 @@ module Schematics
     module Entity
       class Component < ApplicationComponent
         prepend ViewComponent::GlobalOutputBuffer
-
-        delegate :table_name, :default_actions, :actions, :icon, to: '@builder.object'
+        delegate :default_actions, :actions, :icon, to: '@builder.object'
 
         def initialize(builder:)
           super
@@ -16,8 +15,6 @@ module Schematics
         def collection
           default_actions.map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
         end
-
-        def fields_css_class = "#{table_name}-fields"
 
         def icons
           YAML
@@ -31,9 +28,11 @@ module Schematics
             end
         end
 
-        def tab_css_classes
-          %w[show active] if @builder.index.try(:zero?)
-        end
+        def objects = [
+          ['attribute', Schematics::Attributes::Attribute.new],
+          ['virtual', Schematics::Virtuals::Virtual.new],
+          ['trigger', Schematics::Trigger.new]
+        ]
       end
     end
   end

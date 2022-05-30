@@ -1,5 +1,5 @@
-.col-xl-2.col-md-4.attribute
-  .card.border-0.bg-light.animate__animated.animate__zoomIn
+.col-xl-2.col-md-4.nested-form-wrapper data-new-record='true'
+  .card.border-0.animate__animated.animate__zoomIn
     .card-body
       .text-center.mb-2
         = fa_icon icon, size: '2x', class: 'text-primary'
@@ -9,5 +9,5 @@
                        collection:,
                        include_blank: false,
                        input_html: { data: { controller: 'dropdown' } }
-      = link_to_remove_association fa_icon(:trash), @builder, class: 'btn btn-sm btn-danger', 'data-wrapper-class': 'attribute'
+      = render Schematics::SchemaEditor::Button::Remove::Component.new
       = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)

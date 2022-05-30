@@ -1,43 +1,24 @@
-.tab-pane.fade id=table_name role='tabpanel' class=tab_css_classes
+.nested-form-wrapper data-new-record='true'
+  = render Schematics::SchemaEditor::Button::Remove::Component.new
   = @builder.input :name
   = @builder.simple_fields_for :options do |options_form|
     = options_form.input :actions,
-                         as: :select,
-                         collection:,
-                         selected: actions,
-                         include_hidden: false,
-                         input_html: { multiple: true, data: { controller: 'dropdown' } }
+                          as: :select,
+                          collection:,
+                          selected: actions,
+                          include_hidden: false,
+                          input_html: { multiple: true, data: { controller: 'dropdown' } }
     = options_form.input :icon,
-                         as: :select,
-                         input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
-  = link_to_add_association @builder,
-                            :attributes,
-                            class: 'btn btn-sm btn-primary btn-icon-split me-2',
-                            'data-association-insertion-node': ".#{fields_css_class}",
-                            'data-association-insertion-method': 'append',
-                            partial: Schematics::SchemaEditor::Attribute::Component do
-                              span.icon = fa_icon :plus
-                              span.text Ajouter un attribut
-  = link_to_add_association @builder,
-                            :virtuals,
-                            class: 'btn btn-sm btn-primary btn-icon-split me-2',
-                            'data-association-insertion-node': ".#{fields_css_class}",
-                            'data-association-insertion-method': 'append',
-                            partial: Schematics::SchemaEditor::Virtual::Component do
-                              span.icon = fa_icon :plus
-                              span.text Ajouter un champs virtuel
-  = link_to_add_association @builder,
-                            :triggers,
-                            class: 'btn btn-sm btn-primary btn-icon-split',
-                            'data-association-insertion-node': ".#{fields_css_class}",
-                            'data-association-insertion-method': 'append',
-                            partial: Schematics::SchemaEditor::Trigger::Component do
-                              span.icon = fa_icon :plus
-                              span.text Ajouter un trigger
-  .row.g-3 class=fields_css_class
-    = @builder.simple_fields_for :attributes do |builder|
-      = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
-    = @builder.simple_fields_for :virtuals do |builder|
-      = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
-    = @builder.simple_fields_for :triggers do |builder|
-      = render Schematics::SchemaEditor::Trigger::Component.new(builder:)
+                          as: :select,
+                          input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
+  - objects.each do |(name, object)|
+    .row.g-3 data-controller='nested-form' data-nested-form-wrapper-selector-value='.nested-form-wrapper'
+      template data-nested-form-target='template'
+        = @builder.simple_fields_for name.pluralize.to_sym, object, child_index: 'NEW_RECORD' do |builder|
+          = render Schematics::SchemaEditor.const_get(name.camelize)::Component.new(builder:)
+      button.btn.btn-sm.btn-primary.btn-icon-split.me-2 data-action='click->nested-form#add'
+        span.icon = fa_icon :plus
+        span.text Ajouter un #{name}
+      = @builder.simple_fields_for name.pluralize.to_sym do |builder|
+        = render Schematics::SchemaEditor.const_get(name.camelize)::Component.new(builder:)
+      span data-nested-form-target='target'
