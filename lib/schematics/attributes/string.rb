@@ -24,12 +24,6 @@ module Schematics
           is: options.length
         }
       )
-
-      protected
-
-      def migration_options = super.push(
-        :limit
-      )
     end
   end
 end

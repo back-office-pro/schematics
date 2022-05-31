@@ -13,8 +13,6 @@ module Schematics
         required
         hidden
         cached
-        readonly
-        default
       ]
 
       def case_sensitive? = true

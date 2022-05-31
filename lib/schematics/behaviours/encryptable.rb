@@ -8,7 +8,7 @@ module Schematics
       def to_str
         return super unless encrypted?
 
-        <<~RUBY
+        super + <<~RUBY
           encrypts :#{name}, deterministic: true
         RUBY
       end

@@ -6,10 +6,8 @@ module MainApp
 
     prepended do
       after_update -> { Chartkick.options[:colors] = palette }, if: :theme_color_previously_changed?
-    end
-
-    def company_name
-      super || Rails.application.class.module_parent_name
+      attribute :company_name, default: Rails.application.class.module_parent_name
+      attribute :theme_color, default: Rails.configuration.theme_color
     end
 
     def palette = theme_color
@@ -17,9 +15,5 @@ module MainApp
       .paint
       .palette
       .analogous(as: :hex)
-
-    def theme_color
-      super || Rails.configuration.theme_color
-    end
   end
 end

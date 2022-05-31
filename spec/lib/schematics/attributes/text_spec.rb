@@ -24,6 +24,7 @@ describe Schematics::Attributes::Text do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:font) }
   its(:default) { is_expected.to be_a(String) }
+  its(:available_options) { is_expected.to include(:default) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -41,5 +42,15 @@ describe Schematics::Attributes::Text do
     let(:options) { { readonly: true } }
 
     it { is_expected.to be_readonly }
+  end
+
+  context 'when there is a default value' do
+    let(:options) { { default: 'text' } }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        attribute :content, default: "text"
+      RUBY
+    end
   end
 end

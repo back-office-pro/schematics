@@ -24,7 +24,10 @@ describe Schematics::Attributes::String do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
-  its(:available_options) { is_expected.to include(:unique, :encrypted, :min, :limit, :length) }
+
+  its(:available_options) do
+    is_expected.to include(:unique, :encrypted, :min, :limit, :length, :default)
+  end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

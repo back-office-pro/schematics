@@ -23,13 +23,15 @@ describe Schematics::Attributes::Jsonb do
   its(:permitted_params) { is_expected.to eq(preferences: {}) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
-  its(:options_for_migration) { is_expected.to be_empty }
+  its(:available_options) { is_expected.to include(:default) }
 
   context 'when there is a default' do
-    let(:default) { { theme: 'light', sidebar_toggled: false } }
-    let(:options) { { default: } }
+    let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
 
-    its(:default) { is_expected.to eq(default) }
-    its(:options_for_migration) { is_expected.to eq(options) }
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        attribute :preferences, default: {"theme":"light","sidebar_toggled":false}
+      RUBY
+    end
   end
 end

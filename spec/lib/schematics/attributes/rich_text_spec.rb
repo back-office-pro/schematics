@@ -22,6 +22,7 @@ describe Schematics::Attributes::RichText do
   its(:preload) { is_expected.to eq(rich_text_summary: [embeds_attachments: :blob]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to eq('MyRichText') }
+  it { is_expected.to be_encrypted }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

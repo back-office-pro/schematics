@@ -11,6 +11,7 @@ module MainApp
     prepended do
       after_create { Schematics::UserMailer.new_account(self).deliver_later }
       attribute :remember_me, :boolean
+      attribute :time_zone, default: Rails.configuration.time_zone
     end
 
     def admin?
@@ -40,10 +41,6 @@ module MainApp
       .load_async
       .pluck(:query)
       .uniq
-
-    def time_zone
-      super || Rails.configuration.time_zone
-    end
 
     def to_s
       super.presence || email

@@ -6,7 +6,7 @@ module Schematics
       module Generators
         module GeneratedAttribute
           def attr_options
-            schema_attribute&.options_for_migration || super
+            schema_attribute&.migration_options || super
           end
 
           # :reek:NilCheck
