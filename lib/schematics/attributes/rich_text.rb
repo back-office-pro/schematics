@@ -11,6 +11,8 @@ module Schematics
 
       def default = 'MyRichText'
 
+      def encrypted? = true
+
       def format(value)
         value&.to_plain_text
       end
