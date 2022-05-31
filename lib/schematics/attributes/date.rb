@@ -42,12 +42,6 @@ module Schematics
         return ::Time.zone.today.to_fs(:db) if options.less_than
         return ::Time.zone.tomorrow.to_fs(:db) if options.greater_than
       end
-
-      protected
-
-      def migration_options = super.push(
-        :default
-      )
     end
   end
 end

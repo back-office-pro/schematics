@@ -15,12 +15,6 @@ module Schematics
       def permitted_params = {
         super => {}
       }
-
-      protected
-
-      def migration_options = super.push(
-        :default
-      )
     end
   end
 end

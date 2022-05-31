@@ -30,13 +30,6 @@ module Schematics
           less_than: (bound if precision)
         }
       )
-
-      protected
-
-      def migration_options = super.push(
-        :precision,
-        :scale
-      )
     end
   end
 end

@@ -11,12 +11,6 @@ module Schematics
       def icon = :toggle_on
 
       def open_api_type = 'boolean'
-
-      protected
-
-      def migration_options = super.push(
-        :default
-      )
     end
   end
 end

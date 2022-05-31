@@ -23,12 +23,6 @@ module Schematics
       def format(value)
         value&.to_s
       end
-
-      protected
-
-      def migration_options = super.push(
-        :default
-      )
     end
   end
 end
