@@ -56,7 +56,6 @@ describe Schematics::Attributes::StateMachine do
   its(:to_sql) { is_expected.to eq('orders.state') }
   its(:to_s) { is_expected.to eq('schema:order_state') }
   its(:search_data) { is_expected.to eq('state:') }
-  its(:options_for_migration) { is_expected.to be_empty }
   its(:available_options) { is_expected.to include(:events) }
 
   its(:to_str) do

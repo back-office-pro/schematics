@@ -27,7 +27,7 @@ describe Schematics::Attributes::Date do
   its(:group_method) { is_expected.to eq(:group_by_day) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
-  its(:available_options) { is_expected.to include(*compare_checks) }
+  its(:available_options) { is_expected.to include(*compare_checks, :default) }
 
   context 'when date is required' do
     let(:options) { { required: true } }

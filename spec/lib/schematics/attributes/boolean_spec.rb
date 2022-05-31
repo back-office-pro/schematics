@@ -18,11 +18,15 @@ describe Schematics::Attributes::Boolean do
   its(:column_name) { is_expected.to eq('toggle') }
   its(:open_api_type) { is_expected.to eq('boolean') }
   its(:icon) { is_expected.to eq(:toggle_on) }
-  its(:options_for_migration) { is_expected.to be_empty }
+  its(:available_options) { is_expected.to include(:default) }
 
   context 'when there is a default value' do
     let(:options) { { default: true } }
 
-    its(:options_for_migration) { is_expected.to eq(default: true) }
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        attribute :toggle, default: true
+      RUBY
+    end
   end
 end
