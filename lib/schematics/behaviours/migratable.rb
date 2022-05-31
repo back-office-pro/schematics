@@ -12,9 +12,7 @@ module Schematics
         name
       ].join('_')
 
-      def options_for_migration
-        options.slice(*migration_options)
-      end
+      def migration_options = {}
 
       def to_s = "schema:#{id}"
 
@@ -25,10 +23,6 @@ module Schematics
         .underscore
 
       alias database_type type
-
-      protected
-
-      def migration_options = []
     end
   end
 end

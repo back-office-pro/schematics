@@ -81,7 +81,7 @@ module Schematics
               is_expected
                 .to have_db_column(attribute.column_name.to_sym)
                 .of_type(attribute.database_type.to_sym)
-                .with_options(attribute.options_for_migration)
+                .with_options(attribute.migration_options)
             end
           end
 
@@ -146,7 +146,7 @@ module Schematics
               is_expected
                 .to have_db_column(:"#{element.column_name}_digest")
                 .of_type(:string)
-                .with_options(element.options_for_migration)
+                .with_options(element.migration_options)
               is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?
               is_expected
                 .to validate_length_of(element.name.to_sym)
@@ -159,7 +159,7 @@ module Schematics
               is_expected
                 .to have_db_column(element.column_name.to_sym)
                 .of_type(:string)
-                .with_options(element.options_for_migration)
+                .with_options(element.migration_options)
             when Attributes::Attachments
               is_expected.to have_many_attached(element.name.to_sym)
             when Attributes::Attachment
