@@ -4,6 +4,7 @@ require 'singleton'
 require 'active_model'
 
 module Schematics
+  # :reek:InstanceVariableAssumption
   class Schema # rubocop:disable Metrics/ClassLength
     include ::Singleton
     include ::ActiveModel::API
