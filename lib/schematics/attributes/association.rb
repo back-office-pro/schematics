@@ -27,9 +27,10 @@ module Schematics
 
       def weight = 2
 
-      def options_for_migration = super.merge(
-        foreign_key: { to_table: association_type.pluralize.to_sym }
-      )
+      def migration_options = super.merge(
+        foreign_key: { to_table: association_type.pluralize.to_sym },
+        polymorphic: polymorphic?
+      ).compact_blank
 
       def class_name = association_type.camelize
 
@@ -78,12 +79,6 @@ module Schematics
       def icon
         inverse_entity&.icon || :link
       end
-
-      protected
-
-      def migration_options = super.push(
-        :polymorphic
-      )
     end
   end
 end
