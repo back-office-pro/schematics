@@ -30,7 +30,7 @@ module Schematics
       def to_str
         if options.default
           <<~RUBY
-            enum :#{name}, #{to_h}, prefix: true, default: "#{default}"
+            enum :#{name}, #{to_h}, prefix: true, default: #{options.default.to_json}
           RUBY
         else
           <<~RUBY
