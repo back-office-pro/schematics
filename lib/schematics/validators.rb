@@ -20,24 +20,11 @@ module Schematics
       self
     end
 
-    def human(validators: compact_validators) # rubocop:disable Metrics/CyclomaticComplexity
-      validators.map do |key, value|
-        [
-          self.class.human_attribute_name(key),
-          case value
-          when ::Array
-            value.map(&:to_s).map(&:upcase).join(' ')
-          when ::Hash
-            human(validators: value)
-          when ::Numeric
-            number_to_human_size(value)
-          when ::TrueClass
-            nil
-          else
-            value.humanize
-          end
-        ].compact
-      end.map { _1.join(' ') }
+    def human(validators: compact_validators)
+      validators
+        .map(&method(:humanize))
+        .map { _1.join(' ') }
+        .compact_blank
     end
 
     def to_str
@@ -46,6 +33,26 @@ module Schematics
       <<~RUBY
         validates :#{name}, #{compact_validators}
       RUBY
+    end
+
+    private
+
+    def humanize(key, value)
+      [
+        self.class.human_attribute_name(key, default: ''),
+        case value
+        when ::Array
+          value.map(&:to_s).map(&:upcase).join(' ')
+        when ::Hash
+          human(validators: value)
+        when ::Numeric
+          number_to_human_size(value)
+        when ::TrueClass
+          nil
+        else
+          value.humanize
+        end
+      ].compact
     end
   end
 end
