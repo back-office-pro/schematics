@@ -13,6 +13,7 @@ module Schematics
     AUTOCOMPLETE_LIMIT = 5
 
     before_action :set_resource, except: %i[index new create autocomplete]
+    before_action :set_resources, only: :index
     before_action :set_breadcrumb
     before_action :read!, only: :show
     before_action :log_search!, only: :index
@@ -120,16 +121,8 @@ module Schematics
     def edit; end
 
     def index
-      if params.key?(:all_pages)
-        @resources = model_class.search(**search_params)
-      else
-        @calendar, @pagy, @resources = pagy_calendar(
-          model_class.pagy_search(**search_params),
-          month: { format: t('date.formats.month') },
-          pagy: { backend: :pagy_searchkick },
-          active: entity.viewer == :calendar
-        )
-      end
+      return unless stale?(@resources)
+
       respond_to do |format|
         format.html
         format.json { render json: @resources }
@@ -167,6 +160,8 @@ module Schematics
     end
 
     def show
+      return unless stale?(@resource)
+
       respond_to do |format|
         format.json { render json: @resource }
         format.html
@@ -246,6 +241,17 @@ module Schematics
       return if request.path.start_with?(polymorphic_path(@resource))
 
       redirect_to polymorphic_path(@resource), status: :moved_permanently
+    end
+
+    def set_resources
+      return @resources = model_class.search(**search_params) if params.key?(:all_pages)
+
+      @calendar, @pagy, @resources = pagy_calendar(
+        model_class.pagy_search(**search_params),
+        month: { format: t('date.formats.month') },
+        pagy: { backend: :pagy_searchkick },
+        active: entity.viewer == :calendar
+      )
     end
 
     def tscope(message, **kwargs)
