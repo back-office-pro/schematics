@@ -12,7 +12,7 @@ fr:
     logout: deconnexion
     messages: messages
     new: nouveau
-    password_lost: mot_de_passe_perdu
+    password_resets: mots-de-passe
     profile: profil
     roles: roles
     schema_datasets: schemas

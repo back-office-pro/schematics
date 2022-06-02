@@ -9,4 +9,4 @@
       = render Schematics::Input::Password::Component.new(form:)
       = form.input :remember_me, as: :boolean
       = render Schematics::Button::Confirm::Component.new
-      = link_to t('.password_lost?'), schematics.password_lost_path, class: 'btn btn-link btn-sm text-decoration-none'
+      = link_to t('.password_lost?'), schematics.new_password_reset_path, class: 'btn btn-link btn-sm text-decoration-none'
