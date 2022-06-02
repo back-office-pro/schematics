@@ -7,6 +7,8 @@ module Schematics
 
     def index
       @pagy, @versions = pagy(model_class.timeline(current_ability))
+      return unless stale?(@versions)
+
       respond_to do |format|
         format.html
         format.json { render json: @versions }
@@ -39,6 +41,8 @@ module Schematics
     end
 
     def show
+      return unless stale?(@version)
+
       respond_to do |format|
         format.html
         format.json { render json: @version }

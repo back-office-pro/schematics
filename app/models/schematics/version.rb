@@ -11,7 +11,7 @@ module Schematics
     delegate :entity, :human_name, :gender, to: :model_class, allow_nil: true
 
     scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
-    scope :with_item, -> { includes(:item) }
+    scope :with_item, -> { preload(:item) }
     scope :filter_by_user_preferences, lambda {
       joins(:user).where(
         <<~SQL.squish
