@@ -22,7 +22,6 @@ after_bundle do
   rails_command 'generate annotate:install'
   rails_command 'generate erd:install'
   rails_command 'db:migrate'
-  rails_command 'db:fixtures:load FIXTURES_PATH="spec/fixtures" FIXTURES=users,active_storage/attachments,active_storage/blobs,roles,charts,stats,imports' # rubocop:disable Layout/LineLength
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
@@ -54,7 +53,7 @@ after_bundle do
   run 'brakeman --no-pager --no-exit-on-error'
 
   # Tests
-  run 'rspec'
+  # run 'rspec'
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'
