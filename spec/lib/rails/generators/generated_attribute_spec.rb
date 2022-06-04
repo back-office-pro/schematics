@@ -28,7 +28,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
-    its(:default) { is_expected.to eq('MyString') }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
@@ -45,7 +44,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
-    its(:default) { is_expected.to eq('MyString') }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.to have_uniq_index }
@@ -62,7 +60,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
-    its(:default) { is_expected.to eq('MyString') }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
@@ -78,7 +75,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
-    its(:default) { is_expected.to be_nil }
     it { is_expected.to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
@@ -99,7 +95,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:citext) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(null: false) }
-    it { expect(JSON.parse(attribute.default)).to match(URI::MailTo::EMAIL_REGEXP) }
     it { is_expected.to be_required }
     it { is_expected.to have_index }
     it { is_expected.to have_uniq_index }
@@ -117,7 +112,6 @@ describe Rails::Generators::GeneratedAttribute do
     its(:name) { is_expected.to eq('author') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
-    its(:default) { is_expected.to be_nil }
     it { is_expected.to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
