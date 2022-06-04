@@ -6,8 +6,6 @@ module Schematics
       def execute = [
         "rails generate migration rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}",
         "rails destroy scaffold #{old_name} --skip-migration --skip-resource-route",
-        "rails destroy fixtures #{old_name}",
-        "rails generate fixtures #{name}",
         "rails destroy locales #{old_name}",
         "rails generate locales #{name}",
         "rails 'schematics:permissions:rename[#{old_class_name},#{class_name}]'"
