@@ -40,13 +40,13 @@ Dependencies choices details.
 
 ### Testing
 
-:star: **rspec + fixtures**
+:star: **rspec + factory_bot**
 
 :+1: Rspec is the most popular testing framework
 
-:+1: Fixtures are auto-generated
+~~minitest + fixtures ~~
 
-~~minitest~~
+:-1: Fixtures files are hardcoded
 
 ### API Documentation
 
