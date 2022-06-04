@@ -53,6 +53,7 @@ require 'sprockets/railtie'
 require 'importmap-rails'
 require 'turbo-rails'
 require 'stimulus-rails'
+require 'factory_bot_rails'
 
 module Schematics
   class Engine < ::Rails::Engine
@@ -62,7 +63,7 @@ module Schematics
     config.app_generators do |generator|
       generator.orm :active_record, primary_key_type: :uuid
       generator.templates.unshift root.join('lib', 'templates')
-      generator.test_framework :rspec, fixture: true
+      generator.test_framework :rspec
       generator.integration_tool :rspec
       generator.assets false
       generator.helper false
