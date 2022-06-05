@@ -7,6 +7,8 @@ module Schematics
 
       def column_name = super.pluralize
 
+      def default = nil
+
       def permitted_params = {
         super => []
       }
