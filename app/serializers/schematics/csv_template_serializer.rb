@@ -54,6 +54,6 @@ module Schematics
       .map(&:name)
       .map { |name| human_attribute_name(name) }
 
-    def line = ::Array.new(elements.size) { '' }
+    def line = ::Array.new(elements.size)
   end
 end
