@@ -39,8 +39,9 @@ module Schematics
       )
 
       def default
-        return ::Time.zone.today.to_fs(:db) if options.less_than
-        return ::Time.zone.tomorrow.to_fs(:db) if options.greater_than
+        return ::Time.current.tomorrow.to_fs(:db) if options.greater_than
+
+        ::Time.current.to_fs(:db)
       end
     end
   end
