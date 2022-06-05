@@ -14,7 +14,7 @@ detectors:
   RepeatedConditional:
     max_ifs: 15
   TooManyMethods:
-    max_methods: 43
+    max_methods: 44
   NestedIterators:
     max_allowed_nesting: 3
   BooleanParameter:
