@@ -5,12 +5,10 @@ require 'rails_helper'
 RSpec.describe Schematics::CsvSerializer do
   subject(:serializer) { described_class.new(resources, preferences) }
 
-  fixtures :stats
-
-  let(:resources) { Stat.all }
   let(:preferences) { {} }
-
-  before { Stat.update_all(model: 'User', field: 'User#email') } # rubocop:disable Rails/SkipsModelValidations
+  let(:resources) do
+    build_list(:stat, 2, agregate: :count, model: 'User', field: 'User#email')
+  end
 
   its(:file) { is_expected.to be_a(Tempfile) }
   its(:filename) { is_expected.to eq('stats.csv') }

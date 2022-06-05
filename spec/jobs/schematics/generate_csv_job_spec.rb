@@ -3,10 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GenerateCsvJob do
-  fixtures :users
+  include_context 'with user'
 
-  let(:user) { users(:one) }
-  let(:user_id) { user.id }
   let(:model_name) { 'User' }
   let(:resource_ids) { User.ids }
   let(:dropdown) { false }

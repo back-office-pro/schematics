@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::CleanComparisonsJob do
-  fixtures :comparisons
+  let(:created_at) { described_class::DELAY.ago }
+  let(:comparisons) { create_list(:comparison, 2, model: 'User', created_at:) }
 
   describe '#perform_later' do
     it 'queues the job' do
@@ -12,7 +13,7 @@ RSpec.describe Schematics::CleanComparisonsJob do
   end
 
   describe '#perform_now' do
-    before { Comparison.update(created_at: described_class::DELAY.ago) }
+    before { comparisons }
 
     it 'cleans searches' do
       expect { described_class.perform_now }.to change(Comparison, :count).by(-2)

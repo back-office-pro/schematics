@@ -10,7 +10,7 @@ RSpec.describe 'Password Resets' do
     let(:params) { { user: { email: } } }
 
     context 'when email exists' do
-      let(:email) { user.email }
+      let(:email) { 'john.doe@nowhere.com' }
 
       before { do_request }
 
@@ -39,15 +39,13 @@ RSpec.describe 'Password Resets' do
     let(:do_request) { put(password_reset_path(token:), params:, headers:) }
     let(:params) { { user: { password:, password_confirmation: } } }
 
-    context 'when not expired token exists and password is confirmed' do
+    context 'when not expired token exists and password is confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
+      let(:reset_password_sent_at) { Time.current }
 
-      before do
-        user.update!(reset_password_sent_at: Time.current)
-        do_request
-      end
+      before { do_request }
 
       it { is_expected.to have_http_status(:no_content) }
       its(:body) { is_expected.to be_blank }
@@ -57,6 +55,7 @@ RSpec.describe 'Password Resets' do
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1' }
+      let(:reset_password_sent_at) { Time.current }
       let(:expected_response) do
         {
           'errors' => [
@@ -65,10 +64,7 @@ RSpec.describe 'Password Resets' do
         }
       end
 
-      before do
-        user.update!(reset_password_sent_at: Time.current)
-        do_request
-      end
+      before { do_request }
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }
@@ -78,6 +74,7 @@ RSpec.describe 'Password Resets' do
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
+      let(:reset_password_sent_at) { Time.current - User::PASSWORD_RESET_TOKEN_DURATION }
       let(:expected_response) do
         {
           'errors' => [
@@ -86,10 +83,7 @@ RSpec.describe 'Password Resets' do
         }
       end
 
-      before do
-        user.update!(reset_password_sent_at: Time.current - User::PASSWORD_RESET_TOKEN_DURATION)
-        do_request
-      end
+      before { do_request }
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }
