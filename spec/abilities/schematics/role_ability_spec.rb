@@ -6,7 +6,7 @@ require 'cancan/matchers'
 RSpec.describe Schematics::RoleAbility do
   subject(:ability) { described_class.new }
 
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:admin_role) { create(:role, name: 'Admin') }
 
   before { admin_role }
 
