@@ -54,8 +54,6 @@ module Schematics
       .map(&:name)
       .map { |name| human_attribute_name(name) }
 
-    def line = elements
-      .stable_sort_by(&:weight)
-      .map(&:default)
+    def line = ::Array.new(elements.size) { '' }
   end
 end
