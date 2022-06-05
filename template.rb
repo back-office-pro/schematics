@@ -53,7 +53,7 @@ after_bundle do
   run 'brakeman --no-pager --no-exit-on-error'
 
   # Tests
-  # run 'rspec'
+  run 'rspec'
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'
