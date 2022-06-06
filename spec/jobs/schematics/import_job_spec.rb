@@ -32,7 +32,7 @@ RSpec.describe Schematics::ImportJob do
     end
 
     context 'when there are import errors' do
-      let(:model_class) { User }
+      let(:model_class) { Permission }
 
       it 'does not import the resources' do
         expect { perform_now }.not_to change(model_class, :count)
