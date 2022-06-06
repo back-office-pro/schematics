@@ -226,9 +226,8 @@ module Schematics
 
       def default_actions = %i[index show create update destroy archive]
 
-      # :reek:FeatureEnvy
-      def factory_kwargs
-        non_state_machine_attributes.to_h { [_1.name, _1.default] }
+      def default
+        model_class.new(**non_state_machine_attributes.to_h { [_1.name, _1.default] })
       end
 
       protected
