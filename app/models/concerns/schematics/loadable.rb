@@ -9,6 +9,7 @@ module Schematics
       include AASM
       strip_attributes
       attribute_method_suffix '_formatted'
+      attribute :lock_version, default: 0
     end
 
     class_methods do
