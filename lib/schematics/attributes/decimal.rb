@@ -22,6 +22,8 @@ module Schematics
         10**(precision - scale.to_i)
       end
 
+      def default = '9.99'
+
       def open_api_type = ::Float
 
       def validators = super.merge(

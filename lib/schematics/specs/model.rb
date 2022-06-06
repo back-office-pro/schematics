@@ -8,10 +8,9 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        delegate :entity_fixtures, to: :class
-        fixtures :all
+        delegate :default, to: :class
 
-        subject(:record) { __send__(entity_fixtures, :one) }
+        subject(:record) { default }
 
         it { is_expected.to be_valid }
         it { is_expected.to have_implicit_order_column(:created_at) }
@@ -36,7 +35,7 @@ module Schematics
             it do
               is_expected
                 .to validate_uniqueness_of(attribute.name.to_sym)
-                  .tap { _1.case_insensitive unless attribute.case_sensitive? }
+                  .tap { _1.ignoring_case_sensitivity unless attribute.case_sensitive? }
                   .tap { _1.allow_nil unless attribute.required? }
             end
           end
@@ -225,16 +224,12 @@ module Schematics
                  :enumerable_attributes,
                  :numerable_attributes,
                  :string_attributes,
+                 :default,
                  to: :entity
 
         def model_class
           description.constantize
         end
-
-        def entity_fixtures = entity
-          .table_name
-          .pluralize
-          .to_sym
 
         def database_attributes = [
           entity.find_field_by_name('id'),

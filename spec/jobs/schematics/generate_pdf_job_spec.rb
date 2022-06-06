@@ -3,10 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GeneratePdfJob do
-  fixtures :users
+  include_context 'with user'
 
-  let(:user) { users(:one) }
-  let(:user_id) { user.id }
   let(:model_name) { 'User' }
   let(:resource_id) { user_id }
 

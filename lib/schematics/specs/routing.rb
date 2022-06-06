@@ -9,18 +9,17 @@ module Schematics
 
       included do
         include Rails.application.routes.url_helpers
-        fixtures :all
-        delegate :entity_fixtures,
-                 :model_class,
+        delegate :model_class,
                  :controller,
                  :model_name,
                  :locale,
                  :can?,
                  :events,
+                 :default,
                  to: :class
 
-        let(:record) { __send__(entity_fixtures, :one) }
-        let(:id) { record.id }
+        let(:record) { default.tap(&:save!) }
+        let(:id) { record.slug || record.id }
 
         case entity
         when Entities::Singleton
@@ -107,17 +106,12 @@ module Schematics
       class_methods do
         delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
-        delegate :can?, :events, to: :entity
+        delegate :can?, :events, :default, to: :entity
         alias_method :controller, :controller_path
 
         def controller_class
           description.constantize
         end
-
-        def entity_fixtures = entity
-          .table_name
-          .pluralize
-          .to_sym
 
         def model_name
           model_class.to_s

@@ -14,6 +14,8 @@ module Schematics
         :unit
       )
 
+      def default = 1
+
       def open_api_type = ::Integer
 
       def validators = super.merge(

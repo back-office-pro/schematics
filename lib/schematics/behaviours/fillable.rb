@@ -3,7 +3,7 @@
 module Schematics
   module Behaviours
     module Fillable
-      delegate :default, :readonly?, to: :options
+      delegate :readonly?, to: :options
 
       def available_options = super.push(
         :default,

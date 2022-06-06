@@ -6,16 +6,16 @@ require 'cancan/matchers'
 RSpec.describe Schematics::UserAbility do
   subject(:ability) { described_class.new(user) }
 
-  fixtures :users
-
-  let(:user) { users(:one) }
+  let(:role) { Role.new }
+  let(:user) { User.new(role:) }
+  let(:admin_role) { Role.create!(name: 'Admin') }
 
   it { is_expected.not_to be_able_to(:read, :admin_dashboard) }
   it { is_expected.not_to be_able_to(:destroy, user) }
   it { is_expected.not_to be_able_to(:archive, user) }
 
   context 'when user is admin' do
-    before { allow(user).to receive(:admin?).and_return(true) }
+    let(:role) { admin_role }
 
     it { is_expected.to be_able_to(:read, :admin_dashboard) }
   end

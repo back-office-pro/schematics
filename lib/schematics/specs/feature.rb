@@ -8,21 +8,20 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        fixtures :all
         delegate :t, to: 'I18n'
         delegate :login_path, to: 'Rails.application.routes.url_helpers'
         delegate :entity,
-                 :entity_fixtures,
                  :model_class,
                  :human_name,
                  :human_name_plural,
                  :path,
                  :can?,
+                 :default,
                  to: :class
 
         subject { page }
 
-        let(:record) { __send__(entity_fixtures, :one) }
+        let(:record) { default.tap(&:save!) }
         let(:ability) { Ability.new(user) }
         let(:role) do
           ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
@@ -69,7 +68,7 @@ module Schematics
           scenario "creating a #{entity.name}" do
             if ability.can?(:new, model_class)
               visit path(action: 'new')
-              fill_form(record)
+              fill_form
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
             end
@@ -80,7 +79,7 @@ module Schematics
           scenario "updating a #{entity.name}" do
             if ability.can?(:edit, record)
               visit path(record:, action: 'edit')
-              fill_form(record)
+              fill_form
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
             end
@@ -90,17 +89,12 @@ module Schematics
 
       class_methods do
         delegate :entity, :human_name, :human_name_plural, :model_name, to: :model_class
-        delegate :can?, to: :entity
+        delegate :can?, :default, to: :entity
         delegate :route_key, to: :model_name
 
         def model_class
           description.constantize
         end
-
-        def entity_fixtures = entity
-          .table_name
-          .pluralize
-          .to_sym
 
         def path(record: nil, action: nil)
           ["/#{route_key}", (record&.id unless entity.is_a?(Entities::Singleton)), action]
@@ -111,17 +105,14 @@ module Schematics
 
       private
 
-      # :reek:FeatureEnvy
-      def fill_form(record) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize
+      def fill_form # rubocop:disable Metrics/CyclomaticComplexity
         entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"
           case element
           when Associations::HasAndBelongsToMany
-            select record.public_send(element.name).first.to_s,
-                   from: "#{input}[]",
-                   match: :first
+            # Do nothing
           when Attributes::Boolean
-            check(input) if record.public_send(element.name)
+            check(input)
           when Attributes::Attachments
             attach_file "#{input}[]", element.default.first.path
           when Attributes::Attachment
@@ -129,7 +120,7 @@ module Schematics
           when Attributes::RichText
             find_field(input, type: :hidden).set(element.default)
           when Attributes::BelongsTo
-            select record.public_send(element.name).to_s,
+            select element.inverse_entity.model_class.first.to_s,
                    from: input,
                    match: :first
           when Behaviours::Enumerable
@@ -146,7 +137,7 @@ module Schematics
           when Attributes::Array
             fill_in "#{input}[]", with: element.default
           else
-            fill_in input, with: element.default || record.public_send(element.name)
+            fill_in input, with: element.default
           end
         end
       end

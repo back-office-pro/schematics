@@ -15,6 +15,7 @@ describe Schematics::Attributes::Jsonb do
   its(:icon) { is_expected.to eq(:table) }
   its(:database_index_type) { is_expected.to eq(:gin) }
   its(:database_type) { is_expected.to eq('jsonb') }
+  its(:default) { is_expected.to be_empty }
   its(:column_name) { is_expected.to eq('preferences') }
   its(:open_api_type) { is_expected.to eq({}) }
   its(:validators) { is_expected.to be_empty }

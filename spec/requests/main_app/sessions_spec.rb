@@ -10,6 +10,7 @@ RSpec.describe 'Sessions' do
     let(:params) { { session: { email:, password: } } }
 
     context 'when credentials are correct' do
+      let(:email) { 'john.doe@nowhere.com' }
       let(:password) { 'Azerty1!' }
       let(:auth_token) { JsonWebToken.encode(auth_token: Session.last.auth_token) }
 
@@ -20,6 +21,7 @@ RSpec.describe 'Sessions' do
     end
 
     context 'when credentials are wrong' do
+      let(:email) { 'john.doe@nowhere.com' }
       let(:password) { 'qwerty' }
 
       before { do_request }

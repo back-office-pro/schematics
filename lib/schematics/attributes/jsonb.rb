@@ -8,6 +8,8 @@ module Schematics
 
       def database_index_type = :gin
 
+      def default = {}
+
       def icon = :table
 
       def open_api_type = {}

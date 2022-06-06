@@ -9,18 +9,6 @@ module Schematics
             schema_attribute&.migration_options || super
           end
 
-          # :reek:NilCheck
-          def default
-            case attribute_default = schema_attribute.try(:default)
-            when ::String
-              attribute_default.to_json
-            when nil
-              super
-            else
-              attribute_default
-            end
-          end
-
           def has_index? # rubocop:disable Naming/PredicateName
             !virtual? && !token? && !password_digest?
           end

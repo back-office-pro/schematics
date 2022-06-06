@@ -19,7 +19,7 @@ describe Schematics::Attributes::Datetime do
   its(:column_name) { is_expected.to eq('created_at') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:icon) { is_expected.to eq(:calendar_days) }
-  its(:default) { is_expected.to be_nil }
+  its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }

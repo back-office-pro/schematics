@@ -11,6 +11,7 @@ describe Schematics::Attributes::Timestamp do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
 
   its(:database_type) { is_expected.to eq('datetime') }
+  its(:default) { is_expected.to be_a(String) }
   its(:column_name) { is_expected.to eq('reset_password_sent_at') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:validators) { is_expected.to be_empty }

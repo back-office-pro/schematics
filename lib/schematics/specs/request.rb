@@ -9,7 +9,6 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        fixtures :all
         delegate :root_path,
                  :edit_profile_path,
                  :edit_profile_url,
@@ -18,7 +17,7 @@ module Schematics
                  :entity,
                  :can?,
                  :params,
-                 :entity_fixtures,
+                 :default,
                  :path,
                  :events,
                  :fillable_attributes,
@@ -26,7 +25,7 @@ module Schematics
 
         subject { response }
 
-        let(:record) { __send__(entity_fixtures, :one) }
+        let(:record) { default.tap(&:save!) }
         let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
         let(:headers) { { 'Authorization' => auth_token } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
@@ -120,13 +119,13 @@ module Schematics
           end
 
           it 'should update record' do
-            patch path(record:), params: params(record), headers:, as: :html
+            patch path(record:), params:, headers:, as: :html
             redirect_path = ability.can?(:update, record) ? path(record:) : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
           it 'should update API record' do
-            patch path(record:), params: params(record, :json), headers:, as: :json
+            patch path(record:), params: params(:json), headers:, as: :json
             status = ability.can?(:update, record) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
@@ -165,12 +164,12 @@ module Schematics
 
           it 'should create record' do
             if ability.can?(:create, model_class)
-              expect { post(path, params: params(record), headers:, as: :html) }
+              expect { post(path, params:, headers:, as: :html) }
                 .to change(model_class, :count)
                 .by(1)
               is_expected.to redirect_to(path(record: model_class.last))
             else
-              expect { post(path, params: params(record), headers:, as: :html) }
+              expect { post(path, params:, headers:, as: :html) }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -178,12 +177,12 @@ module Schematics
 
           it 'should create API record' do
             if ability.can?(:create, model_class)
-              expect { post(path, params: params(record, :json), headers:, as: :json) }
+              expect { post(path, params: params(:json), headers:, as: :json) }
                 .to change(model_class, :count)
                 .by(1)
               is_expected.to have_http_status(:created)
             else
-              expect { post(path, params: params(record, :json), headers:, as: :json) }
+              expect { post(path, params: params(:json), headers:, as: :json) }
                 .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
@@ -360,25 +359,25 @@ module Schematics
       class_methods do
         delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
-        delegate :fillable_elements, :fillable_attributes, :can?, :events, to: :entity
+        delegate :fillable_elements,
+                 :fillable_attributes,
+                 :can?,
+                 :events,
+                 :default,
+                 to: :entity
 
         def controller_class
           description.constantize
         end
 
-        def entity_fixtures = entity
-          .table_name
-          .pluralize
-          .to_sym
-
         # :reek:FeatureEnvy
-        def params(record, format = nil)
+        def params(format = nil)
           {
             entity.table_name.to_sym => fillable_elements.to_h do |element|
               [
                 element.column_name.to_sym,
-                element.public_send([format, 'default'].compact.join('_')) ||
-                  record.public_send(element.column_name)
+                element.public_send([format, 'default'].compact.join('_'))
+                       .then_tap { _1.save! && _1.id if element.is_a?(Attributes::Association) }
               ]
             end
           }
@@ -387,7 +386,7 @@ module Schematics
         def path(record: nil, action: nil)
           [
             "/#{controller_path}",
-            (record&.reload&.slug || record&.id unless entity.is_a?(Entities::Singleton)),
+            (record&.slug || record&.id unless entity.is_a?(Entities::Singleton)),
             action
           ].compact.join('/')
         end

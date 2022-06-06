@@ -3,7 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::CleanDraftsJob do
-  fixtures :drafts
+  include_context 'with user'
+
+  let(:created_at) { described_class::DELAY.ago }
+  let(:drafts) do
+    [
+      Draft.create!(name: 'new_user', user:, created_at:),
+      Draft.create!(name: 'new_user', user:, created_at:)
+    ]
+  end
 
   describe '#perform_later' do
     it 'queues the job' do
@@ -12,7 +20,7 @@ RSpec.describe Schematics::CleanDraftsJob do
   end
 
   describe '#perform_now' do
-    before { Draft.update(created_at: described_class::DELAY.ago) }
+    before { drafts }
 
     it 'cleans searches' do
       expect { described_class.perform_now }.to change(Draft, :count).by(-2)

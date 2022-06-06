@@ -3,7 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::CleanSearchesJob do
-  fixtures :searches
+  include_context 'with user'
+
+  let(:created_at) { described_class::DELAY.ago }
+  let(:searches) do
+    [
+      Search.create!(user:, created_at:),
+      Search.create!(user:, created_at:)
+    ]
+  end
 
   describe '#perform_later' do
     it 'queues the job' do
@@ -12,7 +20,7 @@ RSpec.describe Schematics::CleanSearchesJob do
   end
 
   describe '#perform_now' do
-    before { Search.update(created_at: described_class::DELAY.ago) }
+    before { searches }
 
     it 'cleans searches' do
       expect { described_class.perform_now }.to change(Search, :count).by(-2)

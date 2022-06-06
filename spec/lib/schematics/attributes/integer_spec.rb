@@ -22,6 +22,7 @@ describe Schematics::Attributes::Integer do
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
 
   its(:database_type) { is_expected.to eq('integer') }
+  its(:default) { is_expected.to eq(1) }
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq(Integer) }
   its(:unit) { is_expected.to eq('$') }
