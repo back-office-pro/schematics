@@ -7,7 +7,10 @@ RSpec.describe Schematics::CsvSerializer do
 
   let(:preferences) { {} }
   let(:resources) do
-    build_list(:stat, 2, agregate: :count, model: 'User', field: 'User#email')
+    [
+      Stat.new(agregate: :count, model: 'User', field: 'User#email'),
+      Stat.new(agregate: :count, model: 'User', field: 'User#email')
+    ]
   end
 
   its(:file) { is_expected.to be_a(Tempfile) }

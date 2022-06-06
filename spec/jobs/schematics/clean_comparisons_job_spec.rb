@@ -4,7 +4,12 @@ require 'rails_helper'
 
 RSpec.describe Schematics::CleanComparisonsJob do
   let(:created_at) { described_class::DELAY.ago }
-  let(:comparisons) { create_list(:comparison, 2, model: 'User', created_at:) }
+  let(:comparisons) do
+    [
+      Comparison.create!(model: 'User', created_at:),
+      Comparison.create!(model: 'User', created_at:)
+    ]
+  end
 
   describe '#perform_later' do
     it 'queues the job' do

@@ -6,7 +6,12 @@ RSpec.describe Schematics::CleanDraftsJob do
   include_context 'with user'
 
   let(:created_at) { described_class::DELAY.ago }
-  let(:drafts) { create_list(:draft, 2, name: 'new_user', user:, created_at:) }
+  let(:drafts) do
+    [
+      Draft.create!(name: 'new_user', user:, created_at:),
+      Draft.create!(name: 'new_user', user:, created_at:)
+    ]
+  end
 
   describe '#perform_later' do
     it 'queues the job' do

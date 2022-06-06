@@ -6,7 +6,12 @@ RSpec.describe Schematics::CleanSearchesJob do
   include_context 'with user'
 
   let(:created_at) { described_class::DELAY.ago }
-  let(:searches) { create_list(:search, 2, user:, created_at:) }
+  let(:searches) do
+    [
+      Search.create!(user:, created_at:),
+      Search.create!(user:, created_at:)
+    ]
+  end
 
   describe '#perform_later' do
     it 'queues the job' do
