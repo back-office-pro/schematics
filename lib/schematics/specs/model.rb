@@ -8,9 +8,9 @@ module Schematics
       extend ActiveSupport::Concern
 
       included do
-        delegate :table_name, :factory_kwargs, to: :class
+        delegate :default, to: :class
 
-        subject(:record) { build(table_name.to_sym, **factory_kwargs) }
+        subject(:record) { default }
 
         it { is_expected.to be_valid }
         it { is_expected.to have_implicit_order_column(:created_at) }
@@ -224,8 +224,7 @@ module Schematics
                  :enumerable_attributes,
                  :numerable_attributes,
                  :string_attributes,
-                 :factory_kwargs,
-                 :table_name,
+                 :default,
                  to: :entity
 
         def model_class

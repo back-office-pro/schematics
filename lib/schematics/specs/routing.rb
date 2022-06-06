@@ -15,11 +15,10 @@ module Schematics
                  :locale,
                  :can?,
                  :events,
-                 :table_name,
-                 :factory_kwargs,
+                 :default,
                  to: :class
 
-        let(:record) { create(table_name.to_sym, **factory_kwargs) }
+        let(:record) { default.tap(&:save!) }
         let(:id) { record.slug || record.id }
 
         case entity
@@ -107,7 +106,7 @@ module Schematics
       class_methods do
         delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
-        delegate :can?, :events, :factory_kwargs, :table_name, to: :entity
+        delegate :can?, :events, :default, to: :entity
         alias_method :controller, :controller_path
 
         def controller_class
