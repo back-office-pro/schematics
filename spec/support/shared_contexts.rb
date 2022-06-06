@@ -47,7 +47,6 @@ RSpec.shared_context 'with user' do
   let(:user_id) { user.id }
   let(:user) do
     User.create!(
-      :user,
       email: 'john.doe@nowhere.com',
       password: 'Azerty1!',
       first_name: 'John',
