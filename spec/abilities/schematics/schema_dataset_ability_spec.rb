@@ -7,7 +7,7 @@ RSpec.describe Schematics::SchemaDatasetAbility do
   subject(:ability) { described_class.new }
 
   let(:state) { :scheduled }
-  let(:schema_dataset) { build(:schema_dataset, state:) }
+  let(:schema_dataset) { SchemaDataset.new(state:) }
 
   before { SchemaDataset.aasm.state_machine.config.no_direct_assignment = false }
 

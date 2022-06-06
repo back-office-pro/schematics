@@ -6,9 +6,9 @@ require 'cancan/matchers'
 RSpec.describe Schematics::SettingAbility do
   subject(:ability) { described_class.new(user) }
 
-  let(:role) { build(:role) }
-  let(:user) { build(:user, role:) }
-  let(:admin_role) { create(:role, name: 'Admin') }
+  let(:role) { Role.new }
+  let(:user) { User.new(role:) }
+  let(:admin_role) { Role.create!(name: 'Admin') }
 
   it { is_expected.not_to be_able_to(:update, ::Setting) }
   it { is_expected.not_to be_able_to(:show, ::Setting) }

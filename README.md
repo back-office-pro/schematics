@@ -40,7 +40,7 @@ Dependencies choices details.
 
 ### Testing
 
-:star: **rspec + factory_bot**
+:star: **rspec**
 
 :+1: Rspec is the most popular testing framework
 

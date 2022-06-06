@@ -53,7 +53,6 @@ require 'sprockets/railtie'
 require 'importmap-rails'
 require 'turbo-rails'
 require 'stimulus-rails'
-require 'factory_bot_rails'
 
 module Schematics
   class Engine < ::Rails::Engine

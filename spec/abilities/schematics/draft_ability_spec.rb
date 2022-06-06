@@ -6,8 +6,8 @@ require 'cancan/matchers'
 RSpec.describe Schematics::DraftAbility do
   subject(:ability) { described_class.new(user) }
 
-  let(:user) { build(:user) }
-  let(:draft) { build(:draft, user:) }
+  let(:user) { User.new }
+  let(:draft) { Draft.new(user:) }
 
   it { is_expected.to be_able_to(:create, Draft) }
   it { is_expected.to be_able_to(:show, draft) }

@@ -8,6 +8,5 @@ Rails.configuration.to_prepare do
 
   RSpec.configure do |config|
     config.include ActiveStorageValidations::Matchers
-    config.include FactoryBot::Syntax::Methods
   end
 end

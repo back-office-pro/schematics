@@ -10,7 +10,7 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:json_response) { ::JSON.parse(response.body) }
   let(:headers) { { 'Accept' => 'application/json' } }
   let(:permissions) { ::Permission.create_all_entities_permissions! }
-  let(:admin_role) { create(:role, name: 'Admin', permissions:) }
+  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
 
   before do
     allow_any_instance_of(::Licence).to receive(:expires_on).and_return(1.day.from_now) # rubocop:disable RSpec/AnyInstance
@@ -22,7 +22,7 @@ end
 RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
-  let(:session) { create(:session, user:) }
+  let(:session) { Session.create!(user:) }
   let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
   let(:headers) { { 'Accept' => 'application/json', 'Authorization' => auth_token } }
 end
@@ -30,7 +30,7 @@ end
 RSpec.shared_context 'with import' do
   include_context 'with user'
 
-  let(:import) { create(:import, file:, author: user) }
+  let(:import) { Import.create!(file:, author: user) }
   let(:model_class) { Role }
   let(:file) do
     ::ActiveStorage::Blob.create_and_upload!(
@@ -43,10 +43,10 @@ end
 
 RSpec.shared_context 'with user' do
   let(:reset_password_sent_at) { nil }
-  let(:role) { create(:role, name: 'Manager') }
+  let(:role) { Role.create!(name: 'Manager') }
   let(:user_id) { user.id }
   let(:user) do
-    create(
+    User.create!(
       :user,
       email: 'john.doe@nowhere.com',
       password: 'Azerty1!',
