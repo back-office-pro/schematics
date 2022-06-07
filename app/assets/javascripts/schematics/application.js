@@ -1,9 +1,11 @@
 import 'chartkick'
 import 'Chart.bundle'
 import '@client-side-validations/simple-form'
+import { application } from 'controllers/application'
 import Pagy from 'pagy-module'
+import Rollbar from 'rollbar'
 
-/* global mapsApiKey, Chartkick */
+/* global mapsApiKey, rollbarAccessToken, Chartkick */
 
 const setNavbarScrolled = () => {
   document
@@ -30,6 +32,17 @@ const animateTurboFrame = ({ target }) => {
     target.classList.remove('animate__fadeOut')
     target.classList.add('animate__fadeIn')
   })
+}
+
+const rollbar = new Rollbar({
+  accessToken: rollbarAccessToken,
+  captureUncaught: true,
+  captureUnhandledRejections: true
+})
+
+application.handleError = (error) => {
+  rollbar.error(error)
+  throw error
 }
 
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })

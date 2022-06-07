@@ -43,6 +43,12 @@ module Schematics
       current_user.preferences.fetch(key.to_s, default)
     end
 
+    def rollbar_access_token_javascript = Schematics::Engine
+      .credentials
+      .rollbar[:access_token]
+      .to_json
+      .html_safe # rubocop:disable Rails/OutputSafety
+
     def settings(key)
       Rails.cache.fetch("settings/#{key}") do
         ::Setting

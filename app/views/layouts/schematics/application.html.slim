@@ -25,6 +25,7 @@ html lang=::I18n.locale dir='ltr'
       }
     javascript [nonce=content_security_policy_nonce]:
       window.mapsApiKey = #{maps_api_key_javascript}
+      window.rollbarAccessToken = #{rollbar_access_token_javascript}
       window.I18n = #{i18n_javascript}
   body data-controller='application'
     = turbo_stream_from current_user

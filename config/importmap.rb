@@ -19,6 +19,7 @@ pin 'bootstrap', to: 'https://ga.jspm.io/npm:bootstrap@5.1.3/dist/js/bootstrap.e
 pin 'file-saver', to: 'https://ga.jspm.io/npm:file-saver@2.0.5/dist/FileSaver.min.js'
 pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js'
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/path.js'
+pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.25.0/dist/rollbar.umd.min.js'
 pin 'slim-select', to: 'https://ga.jspm.io/npm:slim-select@1.27.1/dist/slimselect.min.mjs'
 pin 'sortablejs', to: 'https://ga.jspm.io/npm:sortablejs@1.15.0/modular/sortable.esm.js'
 pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.11.1/index.js'
