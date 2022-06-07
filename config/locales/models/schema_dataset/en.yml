@@ -6,6 +6,7 @@ en:
         data: Data
         state: State
         states:
+          error: Error
           migrated: Migrated
           pending: Pending
           scheduled: Scheduled

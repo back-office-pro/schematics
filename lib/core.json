@@ -657,7 +657,8 @@
           "values": [
             "scheduled",
             "pending",
-            "migrated"
+            "migrated",
+            "error"
           ],
           "events": [
             {

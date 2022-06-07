@@ -6,6 +6,7 @@ fr:
         data: Données
         state: Etat
         states:
+          error: Erreur
           migrated: Migrée
           pending: Migration en cours
           scheduled: Programmée

@@ -14,6 +14,9 @@ module Schematics
       system 'rails db:migrate'
       system 'rails schematics:docs:generate'
       system 'rails js:routes'
+    rescue StandardError => e
+      schema_dataset.update_column(:state, 3) # rubocop:disable Rails/SkipsModelValidations
+      raise e
     end
   end
 end
