@@ -8,7 +8,10 @@
     - else
       = link_to(value.to_s, value)
 - when Schematics::Attributes::Jsonb
-  - if value
+  - case value
+  - when Schematics::Schema
+    = render Schematics::Viewer::Schema::Component.new(schema: value)
+  - when ::Hash
     table
       - value.each do |key, value|
         tr
