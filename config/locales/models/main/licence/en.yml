@@ -1,17 +1,16 @@
 ---
-fr:
+en:
   activerecord:
     attributes:
-      licence:
-        expires_on: Expire le
-        label: Label
-        plan: Forfait
+      main/licence:
+        expires_on: Expires on
+        plan: Plan
         plans:
           business: Business
-          enterprise: Entreprise
+          enterprise: Enterprise
           pro: Pro
     models:
-      licence:
+      main/licence:
         gender: female
         one: Licence
         other: Licences

@@ -6,8 +6,6 @@ en:
         api:
           caption: API documentation for developers
           title: API access
-        licence:
-          expires_on: Valid until %{date}
         profiler:
           caption: Monitor API endpoint performance
           title: API performance
