@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApp
+module Application
   module Setting
     extend ActiveSupport::Concern
 
