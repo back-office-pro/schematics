@@ -369,36 +369,6 @@
     ]
   },
   {
-    "name": "licence",
-    "type": "singleton",
-    "options": {
-      "descriptor": "plan",
-      "icon": "id_badge",
-      "hidden": true,
-      "actions": []
-    },
-    "attributes": [
-      {
-        "name": "plan",
-        "type": "enum",
-        "options": {
-          "required": true,
-          "readonly": true,
-          "default": "pro",
-          "values": [
-            "pro",
-            "business",
-            "enterprise"
-          ]
-        }
-      },
-      {
-        "name": "expires_on",
-        "type": "date"
-      }
-    ]
-  },
-  {
     "name": "chart",
     "options": {
       "icon": "chart_line"
