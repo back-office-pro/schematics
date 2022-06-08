@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rollbar.configure do |config|
-  config.access_token = Schematics::Engine.credentials.rollbar[:api_key]
+  config.access_token = Schematics::Engine.credentials.rollbar[:server_key]
   config.enabled = !Rails.env.test?
   config.use_sidekiq unless Rails.env.test?
   config.environment = Rails.env

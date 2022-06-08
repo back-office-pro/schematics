@@ -5,7 +5,7 @@ import { application } from 'controllers/application'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global mapsApiKey, rollbarAccessToken, Chartkick */
+/* global mapsApiKey, rollbarClientKey, Chartkick */
 
 const setNavbarScrolled = () => {
   document
@@ -34,15 +34,16 @@ const animateTurboFrame = ({ target }) => {
   })
 }
 
+const defaultErrorHandler = application.handleError.bind(application)
 const rollbar = new Rollbar({
-  accessToken: rollbarAccessToken,
+  accessToken: rollbarClientKey,
   captureUncaught: true,
   captureUnhandledRejections: true
 })
 
-application.handleError = (error) => {
+application.handleError = (error, message, detail = {}) => {
+  defaultErrorHandler(error, message, detail)
   rollbar.error(error)
-  throw error
 }
 
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
