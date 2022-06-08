@@ -13,7 +13,10 @@ after_bundle do
   append_to_file 'config/database.yml', <<~YAML
     main:
       <<: *default
-      database: backoffice
+      database: backoffice_production
+      username: readonly
+      password: <%= ENV["MAIN_DATABASE_PASSWORD"] %>
+      host: <%= ENV["MAIN_DATABASE_HOST"] %>
   YAML
 
   # Rails commands
