@@ -36,14 +36,16 @@
         "name": "first_name",
         "type": "string",
         "options": {
-          "encrypted": true
+          "encrypted": true,
+          "limit": 50
         }
       },
       {
         "name": "last_name",
         "type": "string",
         "options": {
-          "encrypted": true
+          "encrypted": true,
+          "limit": 50
         }
       },
       {
@@ -110,7 +112,8 @@
         "type": "string",
         "options": {
           "required": true,
-          "encrypted": true
+          "encrypted": true,
+          "limit": 100
         }
       },
       {
@@ -193,7 +196,8 @@
         "type": "string",
         "options": {
           "cached": true,
-          "encrypted": true
+          "encrypted": true,
+          "limit": 25
         }
       },
       {
@@ -204,7 +208,8 @@
         "name": "company_registration_number",
         "type": "string",
         "options": {
-          "encrypted": true
+          "encrypted": true,
+          "limit": 14
         }
       },
       {
@@ -263,7 +268,8 @@
         "type": "citext",
         "options": {
           "unique": true,
-          "required": true
+          "required": true,
+          "limit": 50
         }
       }
     ]
