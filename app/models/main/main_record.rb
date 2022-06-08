@@ -10,10 +10,10 @@ module Main
 
     class << self
       def instance
-        find_by(subdomain:)
+        find_by(application:)
       end
 
-      def subdomain = Rails
+      def application = Rails
         .application
         .class
         .module_parent_name
