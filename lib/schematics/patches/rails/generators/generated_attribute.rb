@@ -40,11 +40,7 @@ module Schematics
             ('column_options: { type: :uuid }' if @type == :join_table_second)
           ].compact.join(', ')
 
-          def required?
-            return schema_attribute.required? if schema_attribute
-
-            super
-          end
+          def required? = false
 
           def type
             schema_attribute&.database_type&.to_sym || super

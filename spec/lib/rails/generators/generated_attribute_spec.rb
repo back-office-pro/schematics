@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails'
 require 'rails/generators/generated_attribute'
 
 describe Rails::Generators::GeneratedAttribute do
@@ -12,13 +11,6 @@ describe Rails::Generators::GeneratedAttribute do
       .prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
     described_class
       .prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
-    allow(Rails)
-      .to receive_message_chain( # rubocop:disable RSpec/MessageChain
-        :application,
-        :config,
-        :active_record,
-        :belongs_to_required_by_default
-      ).and_return(true)
   end
 
   context 'when column is string' do
@@ -75,7 +67,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
-    it { is_expected.to be_required }
+    it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
 
@@ -84,7 +76,7 @@ describe Rails::Generators::GeneratedAttribute do
     end
 
     its(:options_for_migration) do
-      is_expected.to eq(null: false, foreign_key: true, index: { where: 'deleted_at IS NULL' })
+      is_expected.to eq(foreign_key: true, index: { where: 'deleted_at IS NULL' })
     end
   end
 
@@ -94,8 +86,8 @@ describe Rails::Generators::GeneratedAttribute do
     its(:name) { is_expected.to eq('email') }
     its(:type) { is_expected.to eq(:citext) }
     its(:attr_options) { is_expected.to be_empty }
-    its(:options_for_migration) { is_expected.to eq(null: false) }
-    it { is_expected.to be_required }
+    its(:options_for_migration) { is_expected.to be_empty }
+    it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.to have_uniq_index }
 
@@ -112,7 +104,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:name) { is_expected.to eq('author') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
-    it { is_expected.to be_required }
+    it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
 
@@ -122,7 +114,6 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:options_for_migration) do
       is_expected.to eq(
-        null: false,
         foreign_key: { to_table: :users },
         index: { where: 'deleted_at IS NULL' }
       )
