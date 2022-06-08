@@ -23,7 +23,7 @@
                                   class: 'nav-link p-0 m-0 text-truncate' do
                     li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center.px-2.py-1.border-0.bg-transparent
                       span.text-secondary.text-truncate = attribute.format(value)
-                      span.badge.bg-secondary.text-primary = model_class.public_send(:"#{attribute.name}_#{value}").size
+                      span.badge.bg-secondary.text-primary.ms-2 = model_class.public_send(:"#{attribute.name}_#{value}").size
         li.nav-item.mb-2
     button#sidebar-toggle.btn.text-secondary.border-0.text-end.py-3.w-100 data-action='click->sidebar#toggle'
       .d-none.me-3 class=('d-md-block' unless toggled?) = fa_icon :chevron_left, class: 'fa-lg'
