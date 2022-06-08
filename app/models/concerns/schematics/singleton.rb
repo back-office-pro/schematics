@@ -9,7 +9,7 @@ module Schematics
       delegate :cache_key, to: :model_name
 
       class << self
-        public :allocate
+        public :new, :allocate
 
         def instance
           PaperTrail.request(enabled: false) do
