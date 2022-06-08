@@ -19,6 +19,7 @@ module Schematics
       validates :function, presence: true
       validates :name,
                 presence: true,
+                length: { maximum: 50 },
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       class << self

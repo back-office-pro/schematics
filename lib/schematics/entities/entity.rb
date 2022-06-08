@@ -14,6 +14,7 @@ module Schematics
       validates :actions, inclusion: { in: :default_actions }
       validates :name,
                 presence: true,
+                length: { maximum: 50 },
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       attr_accessor :name

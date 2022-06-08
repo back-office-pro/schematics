@@ -18,6 +18,7 @@ module Schematics
       validates :options_keys, inclusion: { in: :available_options }
       validates :name,
                 presence: true,
+                length: { maximum: 50 },
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       class << self
