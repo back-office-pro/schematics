@@ -93,8 +93,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'searchkick', '~> 5.0.2'
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.1.0'
-  spec.add_dependency 'sidekiq', '~> 6.4.2' # TODO: upgrade when sidekiq-scheduler is compatible
-  spec.add_dependency 'sidekiq-scheduler', '~> 4.0.0'
+  spec.add_dependency 'sidekiq', '~> 6.5.0'
+  spec.add_dependency 'sidekiq-scheduler', '~> 4.0.1'
   spec.add_dependency 'simple_form'
   spec.add_dependency 'slim', '~> 4.1.0'
   spec.add_dependency 'spring', '~> 4.0.0'
