@@ -97,9 +97,11 @@ module Schematics
         end
 
         def path(record: nil, action: nil)
-          ["/#{route_key}", (record&.id unless entity.is_a?(Entities::Singleton)), action]
-            .compact
-            .join('/')
+          [
+            "/#{route_key}",
+            (record&.slug || record&.id unless entity.is_a?(Entities::Singleton)),
+            action
+          ].compact.join('/')
         end
       end
 
