@@ -16,7 +16,7 @@ module MainApp
       respond_to do |format|
         format.html
         format.csv do
-          Schematics::GenerateCsvTemplateJob.perform_later(current_user.id, parent_model_class.to_s)
+          Schematics::GenerateCsvTemplateJob.perform_later(current_user, parent_model_class)
           head :accepted
         end
       end
@@ -25,7 +25,7 @@ module MainApp
     private
 
     def enqueue_job
-      Schematics::ImportJob.perform_later(@resource.id, parent_model_class.to_s)
+      Schematics::ImportJob.perform_later(@resource, parent_model_class)
     end
   end
 end

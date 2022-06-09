@@ -5,22 +5,19 @@ require 'rails_helper'
 RSpec.describe Schematics::GenerateCsvJob do
   include_context 'with user'
 
-  let(:model_name) { 'User' }
-  let(:resource_ids) { User.ids }
+  let(:resources) { [user] }
   let(:dropdown) { false }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user_id, model_name, resource_ids, dropdown) }
+      expect { described_class.perform_later(user, resources, dropdown) }
         .to have_enqueued_job(described_class)
-        .with(user_id, model_name, resource_ids, dropdown)
+        .with(user, resources, dropdown)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) do
-      described_class.perform_now(user_id, model_name, resource_ids, dropdown)
-    end
+    subject(:perform_now) { described_class.perform_now(user, resources, dropdown) }
 
     it 'uploads a blob' do
       expect { perform_now }

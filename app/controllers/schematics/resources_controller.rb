@@ -128,9 +128,8 @@ module Schematics
         format.json { render json: @resources }
         format.csv do
           GenerateCsvJob.perform_later(
-            current_user.id,
-            model_class.to_s,
-            @resources.pluck(:id), # rubocop:disable Rails/PluckId
+            current_user,
+            @resources.to_a,
             params.key?(:all_pages) || @pagy.pages > 1
           )
           head :accepted
@@ -166,7 +165,7 @@ module Schematics
         format.json { render json: @resource }
         format.html
         format.pdf do
-          GeneratePdfJob.perform_later(current_user.id, model_class.to_s, @resource.id)
+          GeneratePdfJob.perform_later(current_user, @resource)
           head :accepted
         end
       end

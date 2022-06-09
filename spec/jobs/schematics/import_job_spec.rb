@@ -5,18 +5,16 @@ require 'rails_helper'
 RSpec.describe Schematics::ImportJob do
   include_context 'with import'
 
-  let(:model_name) { model_class.to_s }
-
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(import.id, model_name) }
+      expect { described_class.perform_later(import, model_class) }
         .to have_enqueued_job(described_class)
-        .with(import.id, model_name)
+        .with(import, model_class)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(import.id, model_name) }
+    subject(:perform_now) { described_class.perform_now(import, model_class) }
 
     context 'when there are no import error' do
       it 'imports the resources' do

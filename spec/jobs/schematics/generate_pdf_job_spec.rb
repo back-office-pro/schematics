@@ -5,19 +5,18 @@ require 'rails_helper'
 RSpec.describe Schematics::GeneratePdfJob do
   include_context 'with user'
 
-  let(:model_name) { 'User' }
-  let(:resource_id) { user_id }
+  let(:resource) { user }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user_id, model_name, resource_id) }
+      expect { described_class.perform_later(user, resource) }
         .to have_enqueued_job(described_class)
-        .with(user_id, model_name, resource_id)
+        .with(user, resource)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(user_id, model_name, resource_id) }
+    subject(:perform_now) { described_class.perform_now(user, resource) }
 
     it 'uploads a blob' do
       expect { perform_now }

@@ -5,18 +5,18 @@ require 'rails_helper'
 RSpec.describe Schematics::GenerateCsvTemplateJob do
   include_context 'with user'
 
-  let(:model_name) { 'User' }
+  let(:model_class) { User }
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user_id, model_name) }
+      expect { described_class.perform_later(user, model_class) }
         .to have_enqueued_job(described_class)
-        .with(user_id, model_name)
+        .with(user, model_class)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(user_id, model_name) }
+    subject(:perform_now) { described_class.perform_now(user, model_class) }
 
     it 'uploads a blob' do
       expect { perform_now }

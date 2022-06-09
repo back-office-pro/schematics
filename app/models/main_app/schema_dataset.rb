@@ -17,7 +17,7 @@ module MainApp
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(id)
+      Schematics::MigrateSchemaJob.perform_later(self)
     end
 
     def migrations = data

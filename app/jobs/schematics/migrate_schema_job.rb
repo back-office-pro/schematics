@@ -2,8 +2,8 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
-    def perform(schema_dataset_id = ::SchemaDataset.scheduled.last&.id)
-      schema_dataset = ::SchemaDataset.find(schema_dataset_id)
+    # :reek:UncommunicativeVariableName
+    def perform(schema_dataset = ::SchemaDataset.scheduled.last)
       Schema.instance.load(schema_dataset.data.to_json)
       schema_dataset
         .migrations

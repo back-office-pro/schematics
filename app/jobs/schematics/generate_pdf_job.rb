@@ -2,11 +2,9 @@
 
 module Schematics
   class GeneratePdfJob < ApplicationJob
-    def perform(user_id, model_name, resource_id)
-      Resources::GenerateFile.call(
-        user: ::User.find(user_id),
-        serializer: PdfSerializer.new(model_name.constantize.finder(resource_id))
-      )
+    def perform(user, resource)
+      serializer = PdfSerializer.new(resource)
+      Resources::GenerateFile.call(user:, serializer:)
     end
   end
 end

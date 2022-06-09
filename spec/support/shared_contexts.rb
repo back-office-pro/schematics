@@ -44,7 +44,6 @@ end
 RSpec.shared_context 'with user' do
   let(:reset_password_sent_at) { nil }
   let(:role) { Role.create!(name: 'Manager') }
-  let(:user_id) { user.id }
   let(:user) do
     User.create!(
       email: 'john.doe@nowhere.com',

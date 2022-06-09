@@ -2,9 +2,7 @@
 
 module Schematics
   class ImportJob < ApplicationJob
-    def perform(import_id, model_name)
-      import = ::Import.find(import_id)
-      model_class = model_name.constantize
+    def perform(import, model_class)
       result = Imports::ImportData.call(import:, model_class:)
       if result.success?
         import.status_finished!

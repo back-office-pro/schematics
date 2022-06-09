@@ -2,9 +2,8 @@
 
 module Schematics
   class GenerateCsvJob < ApplicationJob
-    def perform(user_id, model_name, resource_ids, dropdown)
-      user = ::User.find(user_id)
-      serializer = CsvSerializer.new(model_name.constantize.find(resource_ids), user.preferences)
+    def perform(user, resources, dropdown)
+      serializer = CsvSerializer.new(resources, user.preferences)
       Resources::GenerateFile.call(user:, serializer:, dropdown:)
     end
   end
