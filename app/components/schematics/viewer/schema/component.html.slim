@@ -1,7 +1,7 @@
 .row.g-3
   - entities.each do |entity|
     .col-xl-2.col-md-4
-      .card.border-0
+      .card.border-0.animate__animated.animate__zoomIn
         .card-body
           .text-center
             = fa_icon entity.icon, size: '2x', class: 'text-primary'
