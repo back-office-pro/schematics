@@ -54,6 +54,7 @@ require 'importmap-rails'
 require 'turbo-rails'
 require 'stimulus-rails'
 require 'rollbar'
+require 'activejob/uniqueness'
 
 module Schematics
   class Engine < ::Rails::Engine
