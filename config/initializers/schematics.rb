@@ -3,7 +3,7 @@
 ActiveSupport.on_load(:active_record) do
   connection = ActiveRecord::Base.remove_connection
   ActiveRecord::Base.establish_connection(:development)
-  sql = <<~SQL.squish
+  sql = <<~SQL.squish.freeze
     SELECT data
     FROM schema_datasets
     WHERE state IN (1, 2)
