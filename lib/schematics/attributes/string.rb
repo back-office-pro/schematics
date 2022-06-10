@@ -4,6 +4,7 @@ module Schematics
   module Attributes
     class String < Text
       include Behaviours::Listable
+      delegate :limit, to: :options
 
       def available_options = super.push(
         :unique,
@@ -14,6 +15,8 @@ module Schematics
       )
 
       def database_type = 'string'
+
+      def default = SecureRandom.base58(limit || 10)
 
       def icon = :align_justify
 
