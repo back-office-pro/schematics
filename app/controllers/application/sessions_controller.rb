@@ -18,7 +18,7 @@ module Application
     end
 
     def create
-      result = Sessions::Create.call(resource_params:, cookies:, current_session:)
+      result = Sessions::Create.call(resource_params:, cookies:, current_session:, current_ability:)
       if result.success?
         session[:current_session_id] = result.current_session_id
         respond_to do |format|
