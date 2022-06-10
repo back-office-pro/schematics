@@ -7,7 +7,7 @@ module MainApp
     prepended do
       delegate :entity, to: :model_class, allow_nil: true, private: true
       delegate :find_field_by_name, to: :entity, allow_nil: true
-      scope :accessible_by_role, ->(role) { left_joins(:roles).where(roles: [role, nil]) }
+      scope :accessible_by_role, AccessibleByRoleQuery
     end
 
     def border_width

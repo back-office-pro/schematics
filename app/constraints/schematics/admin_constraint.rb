@@ -5,8 +5,7 @@ module Schematics
     class << self
       def matches?(request)
         ::Session
-          .where(auth_token: request.cookies['auth_token'])
-          .or(::Session.active.where(id: request.session['current_session_id']))
+          .authorized_by(request.cookies['auth_token'], request.session['current_session_id'])
           .first
           &.user
           &.admin?

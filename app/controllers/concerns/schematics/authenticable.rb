@@ -40,16 +40,8 @@ module Schematics
     end
 
     def current_session
-      ::Session
-        .includes(:slugs)
-        .includes(user: :slugs)
-        .with_user_avatar
-        .with_user_permissions
-        .with_user_drafts
-        .where(auth_token:)
-        .or(::Session.active.where(id: session[:current_session_id]))
-        .load_async
-        .first || Guest::Session.new(request:)
+      ::Session.authorized_by(auth_token, session[:current_session_id]).first ||
+        Guest::Session.new(request:)
     end
 
     def current_user

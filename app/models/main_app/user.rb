@@ -5,8 +5,6 @@ module MainApp
     extend ActiveSupport::Concern
 
     PASSWORD_RESET_TOKEN_DURATION = 2.hours.freeze
-    SEARCH_HISTORY_LIMIT = 5
-    TYPEAHEAD_HISTORY_LIMIT = 5
 
     prepended do
       after_create { Schematics::UserMailer.new_account(self).deliver_later }
@@ -32,30 +30,14 @@ module MainApp
       PASSWORD_RESET_TOKEN_DURATION.ago.after?(reset_password_sent_at)
     end
 
-    def search_history = searches
-      .where(model: nil)
-      .where
-      .not(query: nil)
-      .order(created_at: :desc)
-      .limit(SEARCH_HISTORY_LIMIT)
-      .load_async
-      .pluck(:query)
-      .uniq
+    def search_history = SearchHistoryQuery.call(searches)
 
     def to_s
       super.presence || email
     end
 
     def typeahead_history(model, name)
-      searches
-        .where(model:, query: nil)
-        .order(created_at: :desc)
-        .limit(TYPEAHEAD_HISTORY_LIMIT)
-        .load_async
-        .pluck(:filters)
-        .pluck(name)
-        .uniq
-        .compact
+      TypeaheadHistoryQuery.call(searches, model, name)
     end
   end
 end

@@ -10,25 +10,12 @@ module Schematics
 
     delegate :entity, :human_name, :gender, to: :model_class, allow_nil: true
 
+    scope :unread, UnreadVersionQuery
+    scope :read_messages, ReadMessagesVersionQuery
+    scope :filter_by_user_preferences, FilterByUserPreferencesVersionQuery
+    scope :timeline, TimelineVersionQuery
     scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { preload(:item) }
-    scope :filter_by_user_preferences, lambda {
-      joins(:user).where(
-        <<~SQL.squish
-          users.preferences -> CONCAT(versions.event, '_', versions.item_type) = 'true' OR
-          users.preferences -> CONCAT(versions.event, '_', versions.item_type) IS NULL
-        SQL
-      )
-    }
-    scope :timeline, lambda { |ability, versions = nil|
-      (versions || self)
-        .with_user
-        .with_item
-        .then_tap { _1.accessible_by(ability) unless versions }
-        .then_tap { _1.filter_by_user_preferences unless versions }
-        .reorder(created_at: :desc)
-        .load_async
-    }
 
     def icon
       {

@@ -20,7 +20,7 @@ module Schematics
 
         def unread_count
           @unread_count ||= Version
-                            .where(created_at: read_notifications_at...)
+                            .unread(read_notifications_at)
                             .timeline(current_ability)
                             .size
         end

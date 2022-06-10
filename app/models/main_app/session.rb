@@ -7,7 +7,8 @@ module MainApp
     ACTIVE_DELAY = 15.minutes.freeze
 
     prepended do
-      scope :active, -> { where(updated_at: ACTIVE_DELAY.ago..).load_async }
+      scope :active, ActiveQuery
+      scope :authorized_by, AuthorizedByQuery
       scope :with_user_permissions, -> { includes(user: { role: :permissions }) }
       scope :with_user_drafts, -> { includes(user: :drafts) }
       scope :with_user_avatar, lambda {
