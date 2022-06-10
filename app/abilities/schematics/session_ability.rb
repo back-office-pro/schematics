@@ -6,7 +6,7 @@ module Schematics
       super
       return unless user.admin?
 
-      can %i[read destroy], ::Session
+      can %i[create read destroy], ::Session
     end
   end
 end
