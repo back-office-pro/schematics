@@ -3,7 +3,7 @@
 module Schematics
   module SearchBarModal
     class Component < ApplicationComponent
-      delegate :search_history, to: :current_user
+      delegate :history, to: 'current_user.searches'
 
       def action = %w[
         keyup->search-bar#search
