@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApp
+module Application
   module Session
     class ActiveQuery < Schematics::ApplicationQuery
       def call

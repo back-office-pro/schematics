@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe MainApp::User::SearchHistoryQuery do
+RSpec.describe Application::User::SearchHistoryQuery do
   subject(:query) { described_class }
 
   include_context 'with user'

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe MainApp::Chart::AccessibleByRoleQuery do
+RSpec.describe Application::Chart::AccessibleByRoleQuery do
   subject(:query) { described_class }
 
   let(:manager_role) { Role.create!(name: 'Manager') }

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe MainApp::Message::UnreadQuery do
+RSpec.describe Application::Message::UnreadQuery do
   include_context 'with user'
 
   let(:message) { Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipient: user) }

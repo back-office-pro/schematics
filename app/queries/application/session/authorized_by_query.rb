@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApp
+module Application
   module Session
     class AuthorizedByQuery < Schematics::ApplicationQuery
       def call(auth_token, id)

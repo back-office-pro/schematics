@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe MainApp::User::TypeaheadHistoryQuery do
+RSpec.describe Application::User::TypeaheadHistoryQuery do
   subject(:query) { described_class }
 
   include_context 'with user'

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe MainApp::Session::AuthorizedByQuery do
+RSpec.describe Application::Session::AuthorizedByQuery do
   subject(:query) { described_class }
 
   include_context 'with user'
@@ -25,7 +25,7 @@ RSpec.describe MainApp::Session::AuthorizedByQuery do
     context 'when auth_token does not exist and session has expired' do
       let(:auth_token) { nil }
       let(:session_id) { session.id }
-      let(:updated_at) { Time.current - MainApp::Session::ACTIVE_DELAY }
+      let(:updated_at) { Time.current - Application::Session::ACTIVE_DELAY }
 
       it { is_expected.to be_empty }
     end
@@ -57,7 +57,7 @@ RSpec.describe MainApp::Session::AuthorizedByQuery do
     context 'when auth_token is right but session has expired' do
       let(:auth_token) { session.auth_token }
       let(:session_id) { session.id }
-      let(:updated_at) { Time.current - MainApp::Session::ACTIVE_DELAY }
+      let(:updated_at) { Time.current - Application::Session::ACTIVE_DELAY }
 
       it { is_expected.to eq([session]) }
     end

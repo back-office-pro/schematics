@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApp
+module Application
   module Chart
     class AccessibleByRoleQuery < Schematics::ApplicationQuery
       def call(role)
