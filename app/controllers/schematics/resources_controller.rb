@@ -9,6 +9,7 @@ module Schematics
     include Readable
     include Calendarable
     include Documentable
+    include Lockable
 
     AUTOCOMPLETE_LIMIT = 5
 
@@ -17,6 +18,7 @@ module Schematics
     before_action :set_breadcrumb
     before_action :read!, only: :show
     before_action :log_search!, only: :index
+    after_action :assign_etag, only: %i[show update]
 
     authorize_resource instance_name: :resource, except: %i[autocomplete trigger]
 
