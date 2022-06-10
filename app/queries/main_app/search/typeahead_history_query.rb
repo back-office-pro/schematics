@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 module MainApp
-  module User
+  module Search
     class TypeaheadHistoryQuery < Schematics::ApplicationQuery
       LIMIT = 5
 
-      def call(searches, model, name)
-        searches
-          .where(model:, query: nil)
+      def call(model, name)
+        where(model:, query: nil)
           .order(created_at: :desc)
           .limit(LIMIT)
           .load_async

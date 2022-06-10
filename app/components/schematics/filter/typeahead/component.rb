@@ -14,9 +14,9 @@ module Schematics
           blur->typeahead#hideResults
         ].join(' ')
 
-        def history
-          current_user.typeahead_history(@model_class.to_s, name)
-        end
+        def history = current_user
+          .searches
+          .typeahead_history(@model_class.to_s, name)
       end
     end
   end
