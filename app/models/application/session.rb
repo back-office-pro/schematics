@@ -21,9 +21,7 @@ module Application
       .before?(updated_at)
 
     def login!(user)
-      PaperTrail.request(enabled: false) do
-        ::Session.create!(ip:, user_agent:, user:)
-      end
+      create!(ip:, user_agent:, user:)
     end
 
     def safe? = user
