@@ -15,7 +15,7 @@ RSpec.describe Schematics::TimelineVersionQuery do
   end
 
   before do
-    allow_any_instance_of(::Licence).to receive(:expires_on).and_return(1.day.from_now) # rubocop:disable RSpec/AnyInstance
+    allow_any_instance_of(::Main::Licence).to receive(:expires_on).and_return(1.day.from_now) # rubocop:disable RSpec/AnyInstance
     admin_role
     first_version
     second_version
