@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module User
+  module Search
     class TypeaheadHistoryQuery < Schematics::ApplicationQuery
       LIMIT = 5
 
