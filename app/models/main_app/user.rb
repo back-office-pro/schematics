@@ -30,8 +30,6 @@ module MainApp
       PASSWORD_RESET_TOKEN_DURATION.ago.after?(reset_password_sent_at)
     end
 
-    def search_history = SearchHistoryQuery.call(searches)
-
     def to_s
       super.presence || email
     end
