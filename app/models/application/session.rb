@@ -20,7 +20,11 @@ module Application
       .ago
       .before?(updated_at)
 
-    def login!(*) = self
+    def login!(user)
+      PaperTrail.request(enabled: false) do
+        ::Session.create!(ip:, user_agent:, user:)
+      end
+    end
 
     def safe? = user
       .sessions
