@@ -4,8 +4,6 @@ module Main
   class Licence < MainRecord
     self.table_name = 'licences' # rubocop:disable Rails/TableNameAssignment
 
-    enum :plan, { pro: 0, business: 1, enterprise: 2 }, prefix: true, default: 'pro'
-
     LICENCES = YAML.load_file(Schematics::Engine.root.join('lib', 'licences.yml')).freeze
 
     def entities_size = Schematics::Schema
