@@ -4,6 +4,8 @@ module Main
   class MainRecord < ::ApplicationRecord
     self.abstract_class = true
 
+    include Schematics::Loadable
+    include Schematics::Translatable
     include Schematics::Singleton
 
     connects_to database: { writing: :main, reading: :main }
