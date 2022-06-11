@@ -5,7 +5,7 @@ module Application
     class Create
       include Schematics::Interactable
       delegate :authenticate, to: :@user, allow_nil: true
-      delegate :cannot?, to: :@ability, allow_nil: true
+      delegate :cannot?, to: :@ability
 
       before do
         @session = context.current_session
