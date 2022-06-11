@@ -4,7 +4,7 @@ module Application
   module Sessions
     class Create
       include Schematics::Interactable
-      delegate :authenticate, :confirmed?, to: :@user, allow_nil: true
+      delegate :authenticate, to: :@user, allow_nil: true
 
       before do
         @session = context.current_session
@@ -15,7 +15,7 @@ module Application
       end
 
       def call
-        fail!(message: '.unconfirmed') unless confirmed?
+        fail!(message: '.unconfirmed') if @user && !@user.confirmed?
         fail! unless authenticate(@password) # TODO: use authenticate_by when upgrading to Rails 7.1
 
         session = @session.login!(@user)
