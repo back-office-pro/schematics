@@ -7,7 +7,7 @@ module Schematics
 
       def encrypted? = true
 
-      def icon = :chrome
+      def icon = :wifi
 
       def validators = super.merge(
         url: { allow_blank: }
