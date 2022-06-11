@@ -1,7 +1,7 @@
-- if object
-  = link_to @url, class: 'text-decoration-none' do
+= link_to @url, class: 'text-decoration-none' do
+  - if object
     = image_tag favicon
     span.ms-1.align-middle = title
     .text-muted = description
-- else
-  = link_to @url, @url, class: 'text-decoration-none'
+  - else
+    = @url
