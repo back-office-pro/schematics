@@ -9,7 +9,6 @@ module Schematics
       merge VersionAbility.new(user)
       merge UserAbility.new(user)
       merge MessageAbility.new(user)
-      merge SettingAbility.new(user)
       merge DraftAbility.new(user)
       merge SessionAbility.new(user)
       merge SchemaDatasetAbility.new
