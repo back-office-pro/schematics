@@ -7,7 +7,9 @@ fr:
         company_logo: Logo de la société
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
+        company_website: Site web de la société
         google_cloud_api_key: Clé API Google Cloud
+        messages_feature_flag: Activer la messagerie interne
         theme_color: Couleur du thème
     models:
       setting:

@@ -202,13 +202,24 @@
       },
       {
         "name": "company_address",
-        "type": "address"
+        "type": "address",
+        "options": {
+          "cached": true
+        }
+      },
+      {
+        "name": "company_website",
+        "type": "url",
+        "options": {
+          "cached": true
+        }
       },
       {
         "name": "company_registration_number",
         "type": "string",
         "options": {
           "encrypted": true,
+          "cached": true,
           "limit": 14
         }
       },
@@ -238,6 +249,14 @@
         "type": "color",
         "options": {
           "cached": true
+        }
+      },
+      {
+        "name": "messages_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
         }
       }
     ]
