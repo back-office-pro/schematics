@@ -72,6 +72,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'js-routes', '~> 2.2.4'
   spec.add_dependency 'jwt', '~> 2.4.1'
+  spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'oj', '~> 3.13.14'
   spec.add_dependency 'pagy', '~> 5.10.1'

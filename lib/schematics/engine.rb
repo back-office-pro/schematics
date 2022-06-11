@@ -55,6 +55,7 @@ require 'turbo-rails'
 require 'stimulus-rails'
 require 'rollbar'
 require 'activejob/uniqueness'
+require 'link_thumbnailer'
 
 module Schematics
   class Engine < ::Rails::Engine
