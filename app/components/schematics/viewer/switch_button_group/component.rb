@@ -6,9 +6,10 @@ module Schematics
       class Component < ApplicationComponent
         delegate :id, to: :@resource
 
-        def initialize(resource:)
+        def initialize(resource:, resources:)
           super
           @resource = resource
+          @resources = resources
         end
 
         def data = {
@@ -17,7 +18,7 @@ module Schematics
         }
 
         def render?
-          !@resource.deleted?
+          @resources.reject(&:deleted?).size > 1 && !@resource.deleted? # rubocop:disable Performance/Count
         end
       end
     end

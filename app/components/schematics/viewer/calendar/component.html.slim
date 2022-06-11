@@ -17,6 +17,6 @@
                     = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: alert_css_classes_for(resource, date)) do |c|
                       - c.with_resource do
                         - unless previous_resource_for?(resource, date)
-                          = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:)
+                          = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources: @resources)
                           = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                         span.ms-2 = resource
