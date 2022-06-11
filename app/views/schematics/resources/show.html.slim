@@ -6,6 +6,7 @@
         = render Schematics::CardHeading::Component.new(icon: :eye, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component.pdf
+        = render Schematics::Button::Impersonate::Component.new(resource: @resource)
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Button::Duplicate::Component.new(resource: @resource)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)

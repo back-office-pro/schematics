@@ -5,9 +5,11 @@ module Application
     class Create
       include Schematics::Interactable
       delegate :authenticate, to: :@user, allow_nil: true
+      delegate :cannot?, to: :@ability
 
       before do
         @session = context.current_session
+        @ability = context.current_ability
         @params = context.resource_params
         @password = context.password || @params[:password]
         @user = context.resource || ::User.find_by(email: @params[:email])
@@ -25,6 +27,10 @@ module Application
       end
 
       private
+
+      def fail!(message: '.failure')
+        return super if cannot?(:impersonate, @user)
+      end
 
       def remember_me?
         @params&.fetch(:remember_me, false)

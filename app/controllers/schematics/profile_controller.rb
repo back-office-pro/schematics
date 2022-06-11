@@ -11,6 +11,7 @@ module Schematics
     def update
       result = Profile::Update.call(
         current_session:,
+        current_ability:,
         resource_params: resource_params.except(:current_password),
         resource: current_user,
         password: resource_params[:current_password]

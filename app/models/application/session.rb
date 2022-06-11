@@ -20,7 +20,9 @@ module Application
       .ago
       .before?(updated_at)
 
-    def login!(*) = self
+    def login!(user)
+      self.class.create!(ip:, user_agent:, user:)
+    end
 
     def safe? = user
       .sessions
