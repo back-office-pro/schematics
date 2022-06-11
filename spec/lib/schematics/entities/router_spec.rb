@@ -3,7 +3,8 @@
 describe Schematics::Entities::Router do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'user', options:, attributes:) }
+  let(:entity) { Schematics::Entities::Entity.new(name:, options:, attributes:) }
+  let(:name) { 'user' }
   let(:options) { { actions: } }
   let(:actions) { nil }
   let(:attributes) { [] }
@@ -105,6 +106,40 @@ describe Schematics::Entities::Router do
       is_expected.to eq <<~RUBY
         resource :settings, only: [:show, :update, :edit]
         resolve("Setting") { [:settings] }
+      RUBY
+    end
+  end
+
+  context 'when entity has a namespace' do
+    let(:name) { 'active_storage/attachment' }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        namespace :active_storage do
+          resources :attachments, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'ActiveStorage::Attachment' do
+          get :delete, on: :member
+          delete :archive, on: :member
+          delete :restore, on: :member
+          get :autocomplete, on: :collection
+          post :duplicate, on: :member
+          collection do
+            resources :imports, only: %i[new create], as: 'active_storage_attachment_imports'
+          end
+        end
+        end
+      RUBY
+    end
+  end
+
+  context 'when entity is a singleton and has a namespace' do
+    let(:entity) { Schematics::Entities::Singleton.new(name: 'main/licence') }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        namespace :main do
+          resource :licences, only: [:show, :update, :edit]
+        end
+        resolve("Main::Licence") { [:licences] }
       RUBY
     end
   end

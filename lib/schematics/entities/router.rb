@@ -6,21 +6,16 @@ require 'active_support/core_ext/array/access'
 module Schematics
   module Entities
     class Router
-      delegate :name, :class_name, :actions, :events, :can?, to: :@entity
+      delegate :name, :class_name, :table_name, :actions, :events, :can?, to: :@entity
 
       def initialize(entity)
         @entity = entity
       end
 
-      def to_str
-        return route unless namespace
-
-        <<~RUBY
-          namespace :#{namespace} do
-            #{route}
-          end
-        RUBY
-      end
+      def to_str = [
+        route_definition,
+        resolver
+      ].compact.join
 
       private
 
@@ -37,12 +32,19 @@ module Schematics
         .split('/')
         .reverse[1]
 
+      def resolver
+        return unless @entity.is_a?(Singleton) # rubocop:disable Lint/ConstantResolution
+
+        <<~RUBY
+          resolve("#{class_name}") { [:#{resource.pluralize}] }
+        RUBY
+      end
+
       def route
         case @entity
         when Singleton # rubocop:disable Lint/ConstantResolution
           <<~RUBY
             resource :#{resource.pluralize}, only: #{routes}
-            resolve("#{class_name}") { [:#{resource.pluralize}] }
           RUBY
         when Entity
           <<~RUBY
@@ -51,6 +53,16 @@ module Schematics
             end
           RUBY
         end
+      end
+
+      def route_definition
+        return route unless namespace
+
+        <<~RUBY
+          namespace :#{namespace} do
+            #{route.chomp}
+          end
+        RUBY
       end
 
       def resource_routes = [
@@ -100,7 +112,7 @@ module Schematics
 
         <<~RUBY
           collection do
-            resources :imports, only: %i[new create], as: '#{resource}_imports'
+            resources :imports, only: %i[new create], as: '#{table_name}_imports'
           end
         RUBY
       end
