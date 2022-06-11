@@ -3,7 +3,7 @@ en:
   activerecord:
     attributes:
       main/licence:
-        expires_on: Expires on
+        expires_on: Valid until
         plan: Plan
         plans:
           business: Business
