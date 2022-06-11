@@ -21,10 +21,10 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
-  MainApp
+  Application
     .constants
     .select { Object.const_defined?(_1) }
-    .each { Object.const_get(_1).prepend(MainApp.const_get(_1)) }
+    .each { Object.const_get(_1).prepend(Application.const_get(_1)) }
 
   ::ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false

@@ -6,8 +6,6 @@ fr:
         api:
           caption: Documentation de l'API pour les développeurs
           title: Accès API
-        licence:
-          expires_on: Valable jusqu'au %{date}
         profiler:
           caption: Moniter les performances des endpoints de l'API
           title: Performance API

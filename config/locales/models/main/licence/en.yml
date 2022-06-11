@@ -1,0 +1,16 @@
+---
+en:
+  activerecord:
+    attributes:
+      main/licence:
+        expires_on: Valid until
+        plan: Plan
+        plans:
+          business: Business
+          enterprise: Enterprise
+          pro: Pro
+    models:
+      main/licence:
+        gender: female
+        one: Licence
+        other: Licences

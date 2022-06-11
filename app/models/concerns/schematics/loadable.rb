@@ -18,7 +18,7 @@ module Schematics
       def inherited(subclass)
         super
         subclass.class_eval do
-          superclass.concerns.each(&method(:include))
+          superclass.concerns&.each(&method(:include))
           entity&.load
         end
       end

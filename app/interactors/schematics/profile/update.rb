@@ -5,7 +5,7 @@ module Schematics
     class Update
       include Interactor::Organizer
 
-      organize MainApp::Sessions::Create, Resources::UpdateAndCache
+      organize Application::Sessions::Create, Resources::UpdateAndCache
     end
   end
 end

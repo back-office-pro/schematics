@@ -3,16 +3,12 @@
 if [ -z $1 ]
 then
     app_name="spec/dummy"
-    email="maxence.derous@gmail.com"
     dummy_app="true"
     rm -rf $app_name
 else
     app_name=$1
-    email=$2
     dummy_app="false"
 fi
-
-export ADMIN_USER_EMAIL=$email
 
 time rails new $app_name \
                --database postgresql \

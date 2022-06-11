@@ -9,6 +9,16 @@ gem 'simple_form', # TODO: remove when simple_form is upgraded
     branch: 'main'
 
 after_bundle do
+  # Add main database configuration
+  append_to_file 'config/database.yml', <<~YAML
+    main:
+      <<: *default
+      database: backoffice_production
+      username: readonly
+      password: <%= ENV["MAIN_DATABASE_PASSWORD"] %>
+      host: <%= ENV["MAIN_DATABASE_HOST"] %>
+  YAML
+
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
@@ -25,10 +35,9 @@ after_bundle do
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
-  rails_command 'schematics:licence:renew[enterprise,12]'
   rails_command 'js:routes'
 
-  # Ignore /doc directory
+  # Edit .gitignore
   append_to_file '.gitignore', '/doc'
   append_to_file '.gitignore', '/app/javascript/routes.js'
 

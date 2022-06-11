@@ -12,7 +12,7 @@ module Schematics
     private
 
     def licence
-      @licence ||= ::Licence.instance
+      @licence ||= Main::Licence.instance
     end
   end
 end

@@ -369,7 +369,7 @@
     ]
   },
   {
-    "name": "licence",
+    "name": "main/licence",
     "type": "singleton",
     "options": {
       "descriptor": "plan",
