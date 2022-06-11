@@ -17,6 +17,8 @@
         tr
           th = key
           td = value
+- when Schematics::Attributes::Url
+  = render Schematics::LinkPreview::Component.new(url: value)
 - when Schematics::Attributes::Address
   = render Schematics::GoogleMap::Component.new(address: value)
 - when Schematics::Attributes::Color
