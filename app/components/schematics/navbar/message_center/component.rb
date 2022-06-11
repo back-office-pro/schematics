@@ -25,6 +25,10 @@ module Schematics
                         .limit(MESSAGES_LIMIT)
         end
 
+        def render?
+          settings(:messages_feature_flag)
+        end
+
         def unread_count
           @unread_count ||= received_messages
                             .unread
