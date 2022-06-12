@@ -5,6 +5,7 @@ module Schematics
     module Import
       class Component < ApplicationComponent
         delegate :human_name_plural, to: :@model_class
+        delegate :icon, to: '::Import.entity'
 
         def initialize(model_class:)
           super
