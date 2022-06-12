@@ -20,6 +20,10 @@ module Schematics
 
       private
 
+      def association_attributes
+        super.reject(&:polymorphic?)
+      end
+
       def generate_counter_cache_migration(association)
         <<~SHELL
           rails generate migration add_#{association.inverse_association_name.pluralize}_count_to_#{association.association_type.pluralize} #{association.inverse_association_name.pluralize}_count:integer
