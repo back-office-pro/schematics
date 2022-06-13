@@ -2,11 +2,11 @@
 
 module Schematics
   class ImportJob < ApplicationJob
-    def perform(import, model_class)
-      result = Imports::ImportData.call(import:, model_class:)
+    def perform(import)
+      result = Imports::ImportData.call(import:)
       if result.success?
         import.status_finished!
-        model_class.reindex
+        import.model_class.reindex
       else
         import.update!(status: 'error', import_errors: result.errors)
       end

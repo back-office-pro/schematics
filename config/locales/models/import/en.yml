@@ -6,6 +6,7 @@ en:
         author: Author
         file: File
         import_errors: Errors
+        model: Data
         progress: Progress
         status: Status
         statuses:

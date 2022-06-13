@@ -6,7 +6,7 @@ RSpec.describe Schematics::Imports::InsertData do
   include_context 'with import'
 
   describe '.call' do
-    subject(:call) { described_class.call(import:, model_class:, data:) }
+    subject(:call) { described_class.call(import:, data:) }
 
     context 'when data are valid' do
       let(:data) do
@@ -24,8 +24,8 @@ RSpec.describe Schematics::Imports::InsertData do
 
       it { is_expected.to be_a_success }
 
-      it 'inserts two roles' do
-        expect { call }.to change(model_class, :count).by(2)
+      it 'inserts two resources' do
+        expect { call }.to change(import.model_class, :count).by(2)
       end
 
       it 'inserts two versions' do

@@ -8,7 +8,6 @@ module Application
       include Schematics::Nestable
       skip_authorize_resource only: %i[new create]
       before_action -> { authorize!(:import, parent_model_class) }, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
-      after_action :enqueue_job, only: :create, if: -> { @resource.persisted? }
     end
 
     def new
@@ -22,10 +21,8 @@ module Application
       end
     end
 
-    private
-
-    def enqueue_job
-      Schematics::ImportJob.perform_later(@resource, parent_model_class)
+    def resource_defaults
+      super.merge(model: parent_model_class.to_s)
     end
   end
 end

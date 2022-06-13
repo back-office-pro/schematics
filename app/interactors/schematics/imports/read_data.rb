@@ -6,11 +6,11 @@ module Schematics
   module Imports
     class ReadData
       include Interactor
-      delegate :model_name, :entity, :i18n_scope, to: :@model_class, private: true
+      delegate :model_class, to: :@import, private: true
+      delegate :entity, :i18n_scope, to: :model_class, private: true
 
       before do
         @import = context.import
-        @model_class = context.model_class
         context.data = Concurrent::Hash.new
       end
 
@@ -59,7 +59,7 @@ module Schematics
       def i18n_translations
         @i18n_translations ||= ::I18n
                                .t('.')
-                               .dig(i18n_scope, :attributes, model_name.to_s.underscore.to_sym)
+                               .dig(i18n_scope, :attributes, @import.model.underscore.to_sym)
       end
     end
   end

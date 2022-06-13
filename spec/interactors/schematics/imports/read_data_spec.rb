@@ -6,7 +6,7 @@ RSpec.describe Schematics::Imports::ReadData do
   include_context 'with import'
 
   describe '.call' do
-    subject(:call) { described_class.call(import:, model_class:) }
+    subject(:call) { described_class.call(import:) }
 
     let(:expected_data) do
       {

@@ -6,7 +6,7 @@ RSpec.describe Schematics::Imports::ValidateData do
   include_context 'with import'
 
   describe '.call' do
-    subject(:call) { described_class.call(import:, model_class:, data:) }
+    subject(:call) { described_class.call(import:, data:) }
 
     context 'when data are valid' do
       let(:data) do

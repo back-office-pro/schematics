@@ -7,18 +7,18 @@ RSpec.describe Schematics::ImportJob do
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(import, model_class) }
+      expect { described_class.perform_later(import) }
         .to have_enqueued_job(described_class)
-        .with(import, model_class)
+        .with(import)
     end
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(import, model_class) }
+    subject(:perform_now) { described_class.perform_now(import) }
 
     context 'when there are no import error' do
       it 'imports the resources' do
-        expect { perform_now }.to change(model_class, :count).by(2)
+        expect { perform_now }.to change(import.model_class, :count).by(2)
       end
 
       it 'changes the import status from pending to finished' do
@@ -30,10 +30,10 @@ RSpec.describe Schematics::ImportJob do
     end
 
     context 'when there are import errors' do
-      let(:model_class) { Permission }
+      let(:model) { 'Permission' }
 
       it 'does not import the resources' do
-        expect { perform_now }.not_to change(model_class, :count)
+        expect { perform_now }.not_to change(import.model_class, :count)
       end
 
       it 'changes the import status from pending to error' do

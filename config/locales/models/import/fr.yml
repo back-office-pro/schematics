@@ -6,6 +6,7 @@ fr:
         author: Auteur
         file: Fichier
         import_errors: Erreurs
+        model: Donnée
         progress: Progression
         status: Statut
         statuses:

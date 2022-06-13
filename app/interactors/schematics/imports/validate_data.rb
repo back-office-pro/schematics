@@ -4,10 +4,10 @@ module Schematics
   module Imports
     class ValidateData
       include Interactor
+      delegate :model_class, to: :@import, private: true
 
       before do
         @import = context.import
-        @model_class = context.model_class
         @data = context.data
         @errors = Concurrent::Hash.new
       end
@@ -15,7 +15,7 @@ module Schematics
       # :reek:UncommunicativeVariableName
       def call
         context.data = @data.flat_map do |line, attributes|
-          resource = @model_class.new(attributes)
+          resource = model_class.new(attributes)
           resource.validate!
           resource
             .attributes

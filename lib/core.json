@@ -349,6 +349,14 @@
         }
       },
       {
+        "name": "model",
+        "type": "model",
+        "options": {
+          "required": true,
+          "readonly": true
+        }
+      },
+      {
         "name": "status",
         "type": "enum",
         "options": {
