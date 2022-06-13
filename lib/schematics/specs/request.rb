@@ -8,6 +8,10 @@ module Schematics
     module Request # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
+      CREATE_DENYLIST  = [::Session, ::SchemaDataset].freeze
+      SHOW_DENYLIST    = [::ActiveStorage::Attachment, ::Search].freeze
+      DESTROY_DENYLIST = [::ActiveStorage::Attachment, ::Session].freeze
+
       included do
         delegate :root_path,
                  :edit_profile_path,
@@ -76,7 +80,7 @@ module Schematics
           end
         end
 
-        if can?(:show) && [::ActiveStorage::Attachment, ::Search].exclude?(model_class)
+        if can?(:show) && SHOW_DENYLIST.exclude?(model_class)
           %i[html pdf].each do |as|
             it "should show #{as.upcase} record" do
               get(path(record:), headers:, as:)
@@ -143,7 +147,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && [::Session, ::SchemaDataset].exclude?(model_class)
+        if can?(:create) && CREATE_DENYLIST.exclude?(model_class)
           it 'should get new' do
             get path(action: 'new'), headers:, as: :html
             if ability.can?(:new, model_class)
@@ -239,7 +243,7 @@ module Schematics
           end
         end
 
-        if can?(:destroy) && [::ActiveStorage::Attachment, ::Session].exclude?(model_class)
+        if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class)
           it 'should get delete' do
             get path(record:, action: 'delete'), headers:, as: :html
             if ability.can?(:destroy, record)
