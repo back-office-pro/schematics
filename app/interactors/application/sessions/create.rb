@@ -2,6 +2,7 @@
 
 module Application
   module Sessions
+    # :reek:MissingSafeMethod
     class Create
       include Schematics::Interactable
       delegate :authenticate, to: :@user, allow_nil: true
