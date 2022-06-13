@@ -7,6 +7,8 @@ module Schematics
     module Feature # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
+      CREATE_DENYLIST = [::Search, ::Session, ::SchemaDataset].freeze
+
       included do
         delegate :t, to: 'I18n'
         delegate :login_path, to: 'Rails.application.routes.url_helpers'
@@ -64,7 +66,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && [::Search, ::SchemaDataset].exclude?(model_class)
+        if can?(:create) && CREATE_DENYLIST.exclude?(model_class)
           scenario "creating a #{entity.name}" do
             if ability.can?(:new, model_class)
               visit path(action: 'new')
