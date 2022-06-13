@@ -19,6 +19,6 @@ module Schematics
 
     def resource_defaults = entity
       .references_attributes
-      .map { |attribute| [attribute.name, current_user] }
+      .to_h { |attribute| [attribute.name, current_user] }
   end
 end
