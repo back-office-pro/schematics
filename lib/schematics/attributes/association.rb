@@ -11,7 +11,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      delegate :descriptor, :default, to: :inverse_entity
+      delegate :descriptor, :default, to: :inverse_entity, allow_nil: true
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
@@ -27,10 +27,11 @@ module Schematics
 
       def weight = 2
 
-      def migration_options = super.merge(
-        foreign_key: { to_table: association_type.pluralize.to_sym },
-        polymorphic: polymorphic?
-      ).compact_blank
+      def migration_options
+        return super.merge(polymorphic: true) if polymorphic?
+
+        super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
+      end
 
       def class_name = association_type.camelize
 
