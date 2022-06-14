@@ -47,7 +47,7 @@ module Main
     end
 
     def storage_size = ::ActiveStorage::Attachment
-      .includes(:blob)
+      .preload(:blob)
       .sum(&:byte_size)
 
     def users_size = ::User

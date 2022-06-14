@@ -235,7 +235,7 @@ module Schematics
 
     def set_resource
       @resource = model_class
-                  .includes(:slugs, *entity.includes)
+                  .preload(:slugs, *entity.includes)
                   .then_tap { _1.with_deleted if request.delete? }
                   .load_async
                   .finder(params[:id])

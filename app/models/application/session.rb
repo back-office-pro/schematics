@@ -9,10 +9,10 @@ module Application
     prepended do
       scope :active, ActiveQuery
       scope :authorized_by, AuthorizedByQuery
-      scope :with_user_permissions, -> { includes(user: { role: :permissions }) }
-      scope :with_user_drafts, -> { includes(user: :drafts) }
+      scope :with_user_permissions, -> { preload(user: { role: :permissions }) }
+      scope :with_user_drafts, -> { preload(user: :drafts) }
       scope :with_user_avatar, lambda {
-        includes(user: { avatar_attachment: { blob: :variant_records } })
+        preload(user: { avatar_attachment: { blob: :variant_records } })
       }
     end
 

@@ -19,7 +19,7 @@ module Schematics
         .map do |association|
         resource
           .public_send(association.name)
-          .then_tap { _1.includes(association.entity.includes) unless association.is_a?(HABTM) }
+          .then_tap { _1.preload(association.entity.includes) unless association.is_a?(HABTM) }
           .accessible_by(current_ability)
           .order(created_at: :desc)
       end
@@ -31,7 +31,7 @@ module Schematics
         .map do |attribute|
         resource
           .public_send(attribute.name)
-          .includes(:blob)
+          .preload(:blob)
           .order(created_at: :desc)
       end
     end

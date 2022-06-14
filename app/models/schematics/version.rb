@@ -14,7 +14,7 @@ module Schematics
     scope :read_messages, ReadMessagesVersionQuery
     scope :filter_by_user_preferences, FilterByUserPreferencesVersionQuery
     scope :timeline, TimelineVersionQuery
-    scope :with_user, -> { includes(user: [avatar_attachment: [blob: :variant_records]]) }
+    scope :with_user, -> { preload(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { preload(:item) }
 
     def icon
