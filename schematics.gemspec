@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
   spec.add_development_dependency 'bootsnap', '~> 1.12.0'
-  spec.add_development_dependency 'i18n-tasks', '~> 1.0.10'
+  spec.add_development_dependency 'i18n-tasks', '~> 1.0.11'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.0'
   spec.add_development_dependency 'pg', '~> 1.3.5'
