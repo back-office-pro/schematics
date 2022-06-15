@@ -6,9 +6,8 @@ require 'json_web_token'
 require 'zeitwerk'
 require 'schematics/engine' if defined?(Rails)
 
-loader = Zeitwerk::Loader.for_gem
+loader = Zeitwerk::Loader.for_gem(warn_on_extra_files: false)
 loader.enable_reloading
-loader.ignore("#{__dir__}/generators")
 loader.setup
 
 module Schematics
