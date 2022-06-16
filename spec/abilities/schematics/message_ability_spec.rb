@@ -13,9 +13,6 @@ RSpec.describe Schematics::MessageAbility do
   let(:message) { Message.new(author:, recipient:) }
 
   it { is_expected.not_to be_able_to(:duplicate, Message) }
-  it { is_expected.not_to be_able_to(:update, Message) }
-  it { is_expected.not_to be_able_to(:destroy, Message) }
-  it { is_expected.not_to be_able_to(:archive, Message) }
   it { is_expected.not_to be_able_to(:import, Message) }
 
   context 'when the user is not the author or the recipient' do
@@ -23,6 +20,9 @@ RSpec.describe Schematics::MessageAbility do
     let(:recipient) { other_user }
 
     it { is_expected.not_to be_able_to(:show, message) }
+    it { is_expected.not_to be_able_to(:update, message) }
+    it { is_expected.not_to be_able_to(:destroy, message) }
+    it { is_expected.not_to be_able_to(:archive, message) }
   end
 
   context 'when the user is the author' do
@@ -30,6 +30,9 @@ RSpec.describe Schematics::MessageAbility do
     let(:recipient) { other_user }
 
     it { is_expected.to be_able_to(:show, message) }
+    it { is_expected.to be_able_to(:update, message) }
+    it { is_expected.to be_able_to(:destroy, message) }
+    it { is_expected.to be_able_to(:archive, message) }
   end
 
   context 'when the user is the recipient' do
@@ -37,5 +40,8 @@ RSpec.describe Schematics::MessageAbility do
     let(:recipient) { user }
 
     it { is_expected.to be_able_to(:show, message) }
+    it { is_expected.not_to be_able_to(:update, message) }
+    it { is_expected.not_to be_able_to(:destroy, message) }
+    it { is_expected.not_to be_able_to(:archive, message) }
   end
 end
