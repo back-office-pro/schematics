@@ -6,7 +6,7 @@
   .offcanvas-header
     = render Schematics::CardHeading::Component.new(icon:, title:)
     h5#commentsLabel.offcanvas-title
-    button.btn-close.text-reset aria-label='Close' data-bs-dismiss='offcanvas' type='button' 
+    button.btn-close.text-reset aria-label='Close' data-bs-dismiss='offcanvas' type='button'
   .offcanvas-body
     - comments.each do |comment|
       .card.shadow-sm.border-0.animate__animated.animate__zoomIn
