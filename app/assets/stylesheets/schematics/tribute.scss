@@ -1,7 +1,7 @@
 .tribute-container {
+  border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 4px;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 0 4px rgba(0,0,0,0.1), 0 5px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 0 4px rgba(0, 0, 0, .1), 0 5px 20px rgba(0, 0, 0, .05);
 
   ul {
     list-style-type: none;
@@ -11,9 +11,9 @@
 
   li {
     background: #fff;
-    padding: 0.2em 1em;
-    min-width: 15em;
     max-width: 100%;
+    min-width: 15em;
+    padding: .2em 1em;
   }
 
   .highlight {
