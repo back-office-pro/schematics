@@ -1,0 +1,9 @@
+- breadcrumb record.to_s, record
+- breadcrumb title, new_polymorphic_path([record, ::Comment])
+.card.shadow-sm.border-0.animate__animated.animate__zoomIn
+  .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+    .row.align-items-center
+      .col.text-truncate
+        = render Schematics::CardHeading::Component.new(icon: ::Comment.entity.icon, title:)
+  .card-body.p-3
+    = render Schematics::ResourceForm::Component.new(resource: @resource, url: polymorphic_path([record, ::Comment]), cancel_path: record)
