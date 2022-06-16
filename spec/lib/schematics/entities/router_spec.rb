@@ -21,6 +21,9 @@ describe Schematics::Entities::Router do
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
+          member do
+            resources :comments, only: %i[new create edit update], as: 'user_comments'
+          end
         end
       RUBY
     end
@@ -78,6 +81,9 @@ describe Schematics::Entities::Router do
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
+          member do
+            resources :comments, only: %i[new create edit update], as: 'user_comments'
+          end
         end
       RUBY
     end
@@ -93,6 +99,9 @@ describe Schematics::Entities::Router do
           post :duplicate, on: :member
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
+          end
+          member do
+            resources :comments, only: %i[new create edit update], as: 'user_comments'
           end
         end
       RUBY
@@ -124,6 +133,9 @@ describe Schematics::Entities::Router do
           post :duplicate, on: :member
           collection do
             resources :imports, only: %i[new create], as: 'active_storage_attachment_imports'
+          end
+          member do
+            resources :comments, only: %i[new create edit update], as: 'active_storage_attachment_comments'
           end
         end
         end
