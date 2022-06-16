@@ -8,6 +8,7 @@
         = render Schematics::Button::GenerateFileInBackground::Component.pdf
         = render Schematics::Button::QrCode::Component.new(resource: @resource)
         = render Schematics::Button::Impersonate::Component.new(resource: @resource)
+        = render Schematics::Button::Comment::Component.new(resource: @resource)
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Button::Duplicate::Component.new(resource: @resource)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
@@ -17,4 +18,5 @@
     = render Schematics::ResourceDetails::Component.new(resource: @resource, editable: true)
 = render Schematics::Viewer::RichText::Component.with_collection(entity.rich_text_attributes, resource: @resource)
 = render Schematics::Viewer::Association::Component.with_collection(resource_associations(resource: @resource))
+= render Schematics::Viewer::Comments::Component.new(resource: @resource)
 = render Schematics::Viewer::Timeline::Component.new(resource: @resource)
