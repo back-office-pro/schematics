@@ -10,6 +10,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'trix';
 @import 'slim_select';
 @import 'swagger';
+@import 'tribute';
 @import 'navbar/component';
 @import 'footer/component';
 @import 'sidebar/component';
@@ -19,6 +20,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'viewer/calendar/component';
 @import 'edit_in_place/component';
 @import 'placeholder/component';
+@import 'mention/component';
 
 // Variables
 
