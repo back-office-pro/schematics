@@ -7,6 +7,8 @@ module Schematics
     included do
       attribute :id unless entity.is_a?(Entities::Singleton)
       attribute :_metadata, if: :metadata?
+      attribute :_mention, if: :mention?
+      attribute :attachable_sgid, if: :mention?
 
       entity.renderable_elements.stable_sort_by(&:weight).each do |element|
         case element
@@ -24,18 +26,26 @@ module Schematics
       end
     end
 
-    def _metadata = {
-      icon: self.class.entity.icon.to_s.dasherize,
-      descriptor: object.to_s,
-      url: Rails.application.routes.url_helpers.polymorphic_path(object)
-    }
-
     class_methods do
       delegate :entity, to: :model_class
 
       def model_class = name
         .chomp('Serializer')
         .constantize
+    end
+
+    def _mention = Mention::Component
+      .new(resource: object)
+      .to_html
+
+    def _metadata = {
+      icon: self.class.entity.icon.to_s.dasherize,
+      descriptor: object.to_s,
+      url: Rails.application.routes.url_helpers.polymorphic_path(object)
+    }
+
+    def mention?
+      instance_options[:mention]
     end
 
     def metadata?

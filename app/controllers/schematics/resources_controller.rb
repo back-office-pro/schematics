@@ -127,7 +127,7 @@ module Schematics
 
       respond_to do |format|
         format.html
-        format.json { render json: @resources }
+        format.json { render json: @resources, mention: params.key?(:mention) }
         format.csv do
           GenerateCsvJob.perform_later(
             current_user,
