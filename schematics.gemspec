@@ -95,7 +95,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'searchkick', '~> 5.0.2'
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.1.0'
-  spec.add_dependency 'sidekiq', '~> 6.5.0'
+  spec.add_dependency 'sidekiq', '~> 6.5.1'
   spec.add_dependency 'sidekiq-scheduler', '~> 4.0.1'
   spec.add_dependency 'simple_form'
   spec.add_dependency 'slim', '~> 4.1.0'
@@ -105,6 +105,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'super_diff', '~> 0.9.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 2.57.0'
+  spec.add_dependency 'view_component', '~> 2.57.1'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
