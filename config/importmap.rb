@@ -25,3 +25,4 @@ pin 'sortablejs', to: 'https://ga.jspm.io/npm:sortablejs@1.15.0/modular/sortable
 pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.12.0/index.js'
 pin 'timeago.js', to: '/assets/timeago.js/esm/index.js'
 pin 'timeago.fr.js', to: '/assets/timeago.js/esm/lang/fr.js'
+pin 'tributejs', to: 'https://ga.jspm.io/npm:tributejs@5.1.3/dist/tribute.min.js'
