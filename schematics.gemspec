@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'turbo-rails', '~> 1.1.1'
   spec.add_development_dependency 'zeitwerk', '~> 2.6.0'
   spec.add_dependency 'aasm', '~> 5.2.0'
-  spec.add_dependency 'activejob-uniqueness', '~> 0.2.3'
+  spec.add_dependency 'activejob-uniqueness', '~> 0.2.4'
   spec.add_dependency 'active_link_to', '~> 1.0.5'
   spec.add_dependency 'active_model_serializers', '~> 0.10.13'
   spec.add_dependency 'active_record_doctor', '~> 1.9.0'
