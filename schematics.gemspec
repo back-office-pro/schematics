@@ -52,7 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bootstrap-email', '~> 1.2.0'
   spec.add_dependency 'brakeman', '~> 5.2.3'
   spec.add_dependency 'browser', '~> 5.3.1'
-  spec.add_dependency 'cancancan', '~> 3.3.0'
+  spec.add_dependency 'cancancan', '~> 3.4.0'
   spec.add_dependency 'capybara', '~> 3.37.1'
   spec.add_dependency 'chartkick', '~> 4.2.0'
   spec.add_dependency 'chroma', '~> 0.2.0'
