@@ -36,7 +36,7 @@ module Schematics
       icon: self.class.entity.icon.to_s.dasherize,
       descriptor: object.to_s,
       url: Rails.application.routes.url_helpers.polymorphic_path(object),
-      sgid: object.attachable_sgid,
+      sgid: object.attachable_sgid
     }
 
     def metadata?
