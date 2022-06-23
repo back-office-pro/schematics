@@ -1,6 +1,2 @@
-- case model_class
-- when ::User
-  = render Schematics::Avatar::Component.new(user: @resource)
-- else
-  = fa_icon icon, class: 'me-2'
+= fa_icon icon, class: 'me-2'
 = link_to @resource, polymorphic_path(@resource)
