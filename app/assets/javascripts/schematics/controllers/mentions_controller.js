@@ -8,15 +8,18 @@ export default class extends ApplicationController {
     this.tribute = new Tribute({ collection: this.options })
     this.tribute.attach(this.element)
     this.tribute.range.pasteHtml = this.pasteHtml.bind(this)
-    this.element.addEventListener('tribute-replaced', this.replaced)
+    this.element.addEventListener('tribute-replaced', this.replaced.bind(this))
   }
 
   disconnect () {
     this.tribute.detach(this.element)
   }
 
-  replaced ({ detail: { item: { original: { attachableSgid, Mention } } } }) {
-    const attachment = new Trix.Attachment({ sgid: attachableSgid, content: Mention })
+  replaced ({ detail: { item: { original: { Metadata: { sgid, descriptor, icon, url } } } } }) {
+    const attachment = new Trix.Attachment({
+      sgid,
+      content: this.mentionTemplate(descriptor, icon, url)
+    })
     this.editor.insertAttachment(attachment)
     this.editor.insertString(' ')
   }
@@ -24,7 +27,7 @@ export default class extends ApplicationController {
   async fetchUsers (text, callback) {
     const searchParams = new URLSearchParams()
     searchParams.set('filter[full_name]', text)
-    searchParams.set('mention', true)
+    searchParams.set('metadata', true)
     const url = `${usersEn()}?${searchParams}`
     const response = await this.fetchAPI(url)
     const users = await response.json()
@@ -42,6 +45,10 @@ export default class extends ApplicationController {
     const position = this.editor.getPosition()
     this.editor.setSelectedRange([position - (endPosition - startPosition), position])
     this.editor.deleteInDirection('backward')
+  }
+
+  mentionTemplate (descriptor, icon, url) {
+    return `<i class="fa-solid fa-${icon} me-2"></i><a href="${url}">${descriptor}</a>`
   }
 
   get options () {

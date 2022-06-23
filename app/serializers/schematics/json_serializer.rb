@@ -7,8 +7,6 @@ module Schematics
     included do
       attribute :id unless entity.is_a?(Entities::Singleton)
       attribute :_metadata, if: :metadata?
-      attribute :_mention, if: :mention?
-      attribute :attachable_sgid, if: :mention?
 
       entity.renderable_elements.stable_sort_by(&:weight).each do |element|
         case element
@@ -34,19 +32,12 @@ module Schematics
         .constantize
     end
 
-    def _mention = Mention::Component
-      .new(resource: object)
-      .to_html
-
     def _metadata = {
       icon: self.class.entity.icon.to_s.dasherize,
       descriptor: object.to_s,
-      url: Rails.application.routes.url_helpers.polymorphic_path(object)
+      url: Rails.application.routes.url_helpers.polymorphic_path(object),
+      sgid: object.attachable_sgid,
     }
-
-    def mention?
-      instance_options[:mention]
-    end
 
     def metadata?
       instance_options[:metadata]
