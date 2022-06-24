@@ -10,5 +10,11 @@ module Application
         preload(author: { avatar_attachment: { blob: :variant_records } })
       }
     end
+
+    def mentions = content
+      .body
+      .attachables
+      .select_is_a?(::User)
+      .uniq
   end
 end

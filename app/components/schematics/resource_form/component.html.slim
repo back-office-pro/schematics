@@ -85,7 +85,9 @@
       - when Schematics::Attributes::Decimal
         = f.input field.name.to_sym, min_max: true, prepend: field.unit || fa_icon(field.icon)
       - when Schematics::Attributes::RichText
-        = f.input field.name.to_sym, as: :rich_text_area
+        = f.input field.name.to_sym,
+                  as: :rich_text_area,
+                  input_html: { data: { controller: 'mentions' } }
       - when Schematics::Attributes::Attachments
         - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
         = f.input field.name.to_sym,
