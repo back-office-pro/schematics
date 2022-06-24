@@ -16,10 +16,7 @@ export default class extends ApplicationController {
   }
 
   replaced ({ detail: { item: { original: { Metadata: { sgid, descriptor, icon, url } } } } }) {
-    const attachment = new Trix.Attachment({
-      sgid,
-      content: this.mentionTemplate(descriptor, icon, url)
-    })
+    const attachment = new Trix.Attachment({ sgid, content: this.template(descriptor, icon, url) })
     this.editor.insertAttachment(attachment)
     this.editor.insertString(' ')
   }
@@ -47,8 +44,8 @@ export default class extends ApplicationController {
     this.editor.deleteInDirection('backward')
   }
 
-  mentionTemplate (descriptor, icon, url) {
-    return `<i class="fa-solid fa-${icon} me-2"></i><a href="${url}">${descriptor}</a>`
+  template (descriptor, icon, url) {
+    return `<i class="fa fa-${icon} me-2"></i><a href="${url}">${descriptor}</a>`
   }
 
   get options () {
