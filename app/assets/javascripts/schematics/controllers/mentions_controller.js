@@ -63,7 +63,7 @@ export default class extends ApplicationController {
         },
         {
           trigger: '#',
-          lookup: ({ Metadata: { descriptor }}) => descriptor,
+          lookup: ({ Metadata: { descriptor } }) => descriptor,
           values: this.search.bind(this)
         }
       ]
