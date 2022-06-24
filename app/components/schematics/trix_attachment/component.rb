@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Mention
+  module TrixAttachment
     class Component < ApplicationComponent
       delegate :class, to: :@resource, prefix: :model, private: true
       delegate :entity, to: :model_class, private: true

@@ -9,7 +9,7 @@ module Schematics
     end
 
     def to_partial_path
-      'schematics/mention'
+      'action_text/trix_attachment'
     end
   end
 end
