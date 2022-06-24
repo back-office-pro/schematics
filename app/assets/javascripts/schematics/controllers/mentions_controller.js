@@ -48,7 +48,7 @@ export default class extends ApplicationController {
   }
 
   mentionTemplate (descriptor, icon, url) {
-    return `<i class="fa fa-${icon} text-secondary me-2"></i><a href="${url}">${descriptor}</a>`
+    return `<i class="fa-solid fa-${icon} me-2"></i><a href="${url}">${descriptor}</a>`
   }
 
   get options () {
