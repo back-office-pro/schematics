@@ -4,7 +4,7 @@ module Schematics
   class CommentAbility < ApplicationAbility
     def initialize(user)
       super
-      cannot %i[duplicate update destroy archive], ::Comment
+      cannot %i[import duplicate update destroy archive], ::Comment
       can %i[update destroy archive], ::Comment, author: user
     end
   end
