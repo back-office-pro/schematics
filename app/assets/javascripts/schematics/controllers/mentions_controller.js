@@ -5,7 +5,7 @@ import { usersEn, searchEn } from 'routes'
 
 export default class extends ApplicationController {
   connect () {
-    this.tribute = new Tribute({ collection: this.options })
+    this.tribute = new Tribute(this.options)
     this.tribute.attach(this.element)
     this.tribute.range.pasteHtml = this.pasteHtml.bind(this)
     this.element.addEventListener('tribute-replaced', this.replaced.bind(this))
@@ -49,26 +49,25 @@ export default class extends ApplicationController {
   }
 
   get options () {
-    return [
-      {
-        trigger: '@',
-        allowSpaces: true,
-        noMatchTemplate: '',
-        menuItemLimit: 5,
-        menuShowMinLength: 2,
-        lookup: 'fullName',
-        values: this.fetchUsers.bind(this)
-      },
-      {
-        trigger: '#',
-        allowSpaces: true,
-        noMatchTemplate: '',
-        menuItemLimit: 5,
-        menuShowMinLength: 2,
-        lookup: 'Metadata.descriptor',
-        values: this.search.bind(this)
-      }
-    ]
+    return {
+      allowSpaces: true,
+      menuItemLimit: 5,
+      menuShowMinLength: 2,
+      noMatchTemplate: () => null,
+      loadingItemTemplate: () => null,
+      collection: [
+        {
+          trigger: '@',
+          lookup: 'fullName',
+          values: this.fetchUsers.bind(this)
+        },
+        {
+          trigger: '#',
+          lookup: ({ Metadata: { descriptor }}) => descriptor,
+          values: this.search.bind(this)
+        }
+      ]
+    }
   }
 
   get editor () {
