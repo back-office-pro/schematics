@@ -81,3 +81,23 @@ a,
   color: $secondary;
   font-weight: bold;
 }
+
+// Tribute
+
+.tribute-container {
+  ul {
+    @extend .list-group;
+    @extend .list-group-striped;
+    @extend .shadow-sm;
+  }
+
+  li {
+    @extend .list-group-item;
+    @extend .list-group-item-action;
+    @extend .p-2;
+    @extend .border-0;
+    @extend .text-start;
+    @extend .text-truncate;
+    cursor: pointer;
+  }
+}
