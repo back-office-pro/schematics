@@ -17,6 +17,9 @@ $badge-padding-y: .25em;
 $badge-padding-x: .5em;
 $zindex-dropdown: 1035;
 $accordion-button-active-bg: $card-cap-bg;
+$offcanvas-border-width: 0;
+$offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
+$offcanvas-bg-color: $light;
 
 @import 'default';
 
