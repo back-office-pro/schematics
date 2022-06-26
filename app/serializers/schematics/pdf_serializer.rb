@@ -28,10 +28,7 @@ module Schematics
       end
     end
 
-    def filename = [
-      "#{human_name.dasherize}-#{@resource.slug}",
-      extension
-    ].join('.')
+    def filename = "#{human_name.dasherize}-#{@resource.slug}.#{extension}"
 
     private
 
