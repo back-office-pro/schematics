@@ -90,6 +90,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis', '~> 4.7.0'
   spec.add_dependency 'rollbar', '~> 3.3.0'
   spec.add_dependency 'route_translator', '~> 12.1.0'
+  spec.add_dependency 'rqrcode', '~> 2.1.1'
   spec.add_dependency 'rspec-rails', '~> 6.0.0.rc1'
   spec.add_dependency 'ruby-vips', '~> 2.1.4'
   spec.add_dependency 'searchkick', '~> 5.0.4'

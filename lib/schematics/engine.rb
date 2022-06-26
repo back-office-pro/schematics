@@ -56,6 +56,7 @@ require 'stimulus-rails'
 require 'rollbar'
 require 'activejob/uniqueness'
 require 'link_thumbnailer'
+require 'rqrcode'
 
 module Schematics
   class Engine < ::Rails::Engine

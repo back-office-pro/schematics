@@ -166,6 +166,7 @@ module Schematics
       respond_to do |format|
         format.json { render json: @resource }
         format.html
+        format.svg
         format.pdf do
           GeneratePdfJob.perform_later(current_user, @resource)
           head :accepted
