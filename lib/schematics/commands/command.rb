@@ -18,12 +18,6 @@ module Schematics
                to: :entity
       attr_accessor :entity, :attribute, :target
 
-      class << self
-        def build(type:, **kwargs)
-          Commands.const_get(type.camelize.to_sym).new(**kwargs)
-        end
-      end
-
       def execute
         raise NotImplementedError
       end
