@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_model'
+
 module Schematics
   module Commands
     # :reek:Attribute
