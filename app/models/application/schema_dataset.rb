@@ -6,6 +6,7 @@ module Application
 
     prepended do
       serialize :data, Schematics::Schema
+      delegate :commands, to: :migration, prefix: true
     end
 
     class_methods do
@@ -20,13 +21,9 @@ module Application
       Schematics::MigrateSchemaJob.perform_later(self)
     end
 
-    def migrations = data
-      .as_json
-      .difference(self.class.current_data&.as_json || [])
-      .map { data.find_entity_by_name(_1[:name]) }
-      .sort_by(&:weight)
-      .reverse
-      .map { |entity| Schematics::Commands::Command.build(type: 'create_entity', entity:) }
+    def migration
+      Schematics::Migration.new(self.class.current_data, data)
+    end
 
     def version = self
       .class

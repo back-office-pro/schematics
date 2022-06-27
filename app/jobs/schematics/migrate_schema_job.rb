@@ -6,7 +6,7 @@ module Schematics
     def perform(schema_dataset = ::SchemaDataset.scheduled.last)
       Schema.instance.load(schema_dataset.data.to_json)
       schema_dataset
-        .migrations
+        .migration_commands
         .flat_map(&:execute)
         .each(&method(:system))
       schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
