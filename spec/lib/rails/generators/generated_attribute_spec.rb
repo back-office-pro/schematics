@@ -67,16 +67,13 @@ describe Rails::Generators::GeneratedAttribute do
     its(:name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to be_empty }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
       is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
-    end
-
-    its(:options_for_migration) do
-      is_expected.to eq(foreign_key: true, index: { where: 'deleted_at IS NULL' })
     end
   end
 
@@ -101,9 +98,9 @@ describe Rails::Generators::GeneratedAttribute do
   context 'when column is schema references' do
     let(:column_definition) { 'schema:message_author' }
 
-    its(:name) { is_expected.to eq('author') }
+    its(:name) { is_expected.to eq('author_id') }
     its(:type) { is_expected.to eq(:references) }
-    its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
+    its(:attr_options) { is_expected.to eq(foreign_key: false) }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
@@ -113,10 +110,7 @@ describe Rails::Generators::GeneratedAttribute do
     end
 
     its(:options_for_migration) do
-      is_expected.to eq(
-        foreign_key: { to_table: :users },
-        index: { where: 'deleted_at IS NULL' }
-      )
+      is_expected.to eq(foreign_key: false, index: { where: 'deleted_at IS NULL' })
     end
   end
 end

@@ -30,7 +30,7 @@ module Schematics
       def migration_options
         return super.merge(polymorphic: true) if polymorphic?
 
-        super.merge(foreign_key: { to_table: association_type.pluralize.to_sym })
+        super.merge(foreign_key: false)
       end
 
       def class_name = association_type.camelize

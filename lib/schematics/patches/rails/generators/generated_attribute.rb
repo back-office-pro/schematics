@@ -28,17 +28,19 @@ module Schematics
           ].compact.join(', ')
 
           def name
-            schema_attribute&.name || super
+            schema_attribute&.column_name || super
           end
 
           def options_for_migration = super
-            .tap { _1[:index] = { where: 'deleted_at IS NULL' } if _1[:foreign_key] }
+            .tap { _1[:index] = { where: 'deleted_at IS NULL' } if foreign_key? }
             .merge(attr_options)
 
           def plural_name = [
             super,
             ('column_options: { type: :uuid }' if @type == :join_table_second)
           ].compact.join(', ')
+
+          def reference?(*) = false
 
           def required? = false
 
