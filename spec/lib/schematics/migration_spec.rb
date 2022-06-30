@@ -17,6 +17,7 @@ describe Schematics::Migration do
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               }
@@ -33,9 +34,11 @@ describe Schematics::Migration do
       let(:current_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               }
@@ -53,9 +56,11 @@ describe Schematics::Migration do
       let(:current_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               }
@@ -66,9 +71,11 @@ describe Schematics::Migration do
       let(:new_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               }
@@ -85,9 +92,11 @@ describe Schematics::Migration do
       let(:current_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               }
@@ -98,13 +107,16 @@ describe Schematics::Migration do
       let(:new_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               },
               {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'last_name',
                 type: 'string'
               }
@@ -121,13 +133,16 @@ describe Schematics::Migration do
       let(:current_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               },
               {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'last_name',
                 type: 'string'
               }
@@ -138,9 +153,11 @@ describe Schematics::Migration do
       let(:new_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               }
@@ -157,13 +174,16 @@ describe Schematics::Migration do
       let(:current_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               },
               {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'last_name',
                 type: 'string'
               }
@@ -174,13 +194,16 @@ describe Schematics::Migration do
       let(:new_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               },
               {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'surname',
                 type: 'string'
               }
@@ -197,13 +220,16 @@ describe Schematics::Migration do
       let(:current_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               },
               {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'last_name',
                 type: 'string'
               }
@@ -214,13 +240,16 @@ describe Schematics::Migration do
       let(:new_data) do
         [
           {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
             attributes: [
               {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
                 type: 'string'
               },
               {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'surname',
                 type: 'string'
               }
