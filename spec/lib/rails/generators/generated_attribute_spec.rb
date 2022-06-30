@@ -73,7 +73,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(foreign_key: true) }
     it { is_expected.not_to be_required }
-    it { is_expected.not_to have_index }
+    it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
@@ -107,9 +107,9 @@ describe Rails::Generators::GeneratedAttribute do
     its(:column_name) { is_expected.to eq('author_id') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
-    its(:options_for_migration) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to eq(index: { where: 'deleted_at IS NULL' }) }
     it { is_expected.not_to be_required }
-    it { is_expected.not_to have_index }
+    it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do

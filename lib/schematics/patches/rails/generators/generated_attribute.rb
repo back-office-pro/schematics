@@ -10,7 +10,7 @@ module Schematics
           end
 
           def has_index? # rubocop:disable Naming/PredicateName
-            !virtual? && !token? && !password_digest? && !reference?
+            !virtual? && !token? && !password_digest?
           end
 
           def has_uniq_index? # rubocop:disable Naming/PredicateName
