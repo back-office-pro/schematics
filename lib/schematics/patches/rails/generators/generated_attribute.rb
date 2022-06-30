@@ -5,12 +5,12 @@ module Schematics
     module Rails
       module Generators
         module GeneratedAttribute
-          def attr_options
-            schema_attribute&.migration_options || super
+          def column_name
+            schema_attribute&.column_name || super
           end
 
           def has_index? # rubocop:disable Naming/PredicateName
-            !virtual? && !token? && !password_digest?
+            !virtual? && !token? && !password_digest? && !reference?
           end
 
           def has_uniq_index? # rubocop:disable Naming/PredicateName
@@ -28,19 +28,21 @@ module Schematics
           ].compact.join(', ')
 
           def name
-            schema_attribute&.column_name || super
+            schema_attribute&.name || super
           end
 
-          def options_for_migration = super
-            .tap { _1[:index] = { where: 'deleted_at IS NULL' } if foreign_key? }
-            .merge(attr_options)
+          def options_for_migration
+            schema_attribute&.migration_options || super
+          end
 
           def plural_name = [
             super,
             ('column_options: { type: :uuid }' if @type == :join_table_second)
           ].compact.join(', ')
 
-          def reference?(*) = false
+          def reference?(*)
+            schema_attribute.is_a?(Schematics::Attributes::Association) || super
+          end
 
           def required? = false
 
