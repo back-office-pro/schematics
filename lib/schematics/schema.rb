@@ -47,9 +47,11 @@ module Schematics
       entities.find { _1.id == id }
     end
 
-    def find_attribute_by_prefixed_name(name) = entities
-      .flat_map(&:attributes)
-      .find { _1.prefixed_name == name }
+    def find_attribute_by_prefixed_name(name)
+      entities
+        .flat_map(&:attributes)
+        .find { _1.prefixed_name == name }
+    end
 
     def load_routes
       context = binding.of_caller(2).method(:eval)
