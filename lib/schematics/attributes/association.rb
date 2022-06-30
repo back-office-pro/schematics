@@ -28,9 +28,9 @@ module Schematics
       def weight = 2
 
       def migration_options
-        return super.merge(polymorphic: true) if polymorphic?
+        return super unless polymorphic?
 
-        super.merge(foreign_key: false)
+        super.merge(polymorphic: true)
       end
 
       def class_name = association_type.camelize

@@ -100,7 +100,7 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('author_id') }
     its(:type) { is_expected.to eq(:references) }
-    its(:attr_options) { is_expected.to eq(foreign_key: false) }
+    its(:attr_options) { is_expected.to be_empty }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
@@ -110,7 +110,7 @@ describe Rails::Generators::GeneratedAttribute do
     end
 
     its(:options_for_migration) do
-      is_expected.to eq(foreign_key: false, index: { where: 'deleted_at IS NULL' })
+      is_expected.to eq(index: { where: 'deleted_at IS NULL' })
     end
   end
 end
