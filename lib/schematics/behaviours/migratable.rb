@@ -7,14 +7,11 @@ module Schematics
 
       def database_index_type = :btree
 
-      def id = [
-        entity.table_name,
-        name
-      ].join('_')
-
       def migration_options = {}
 
-      def to_s = "schema:#{id}"
+      def prefixed_name = "#{entity.table_name}_#{name}"
+
+      def to_s = "schema:#{prefixed_name}"
 
       def type = self
         .class
