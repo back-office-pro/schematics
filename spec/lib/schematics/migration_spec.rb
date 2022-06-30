@@ -192,5 +192,46 @@ describe Schematics::Migration do
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its(:size) { is_expected.to eq(1) }
     end
+
+    context 'with a more complex scenario' do
+      let(:current_data) do
+        [
+          {
+            name: 'client',
+            attributes: [
+              {
+                name: 'first_name',
+                type: 'string'
+              },
+              {
+                name: 'last_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:new_data) do
+        [
+          {
+            name: 'prospect',
+            attributes: [
+              {
+                name: 'first_name',
+                type: 'string'
+              },
+              {
+                name: 'surname',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
+      its(:size) { is_expected.to eq(2) }
+    end
   end
 end
