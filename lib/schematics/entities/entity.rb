@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/array/access'
 require 'active_record'
 
@@ -18,7 +19,7 @@ module Schematics
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
       attr_accessor :name
-      attr_writer :options
+      attr_writer :id, :options
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
       delegate :core?, :hidden?, to: :options
@@ -76,6 +77,10 @@ module Schematics
 
       def triggers
         @triggers ||= []
+      end
+
+      def id
+        @id ||= SecureRandom.uuid
       end
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size
@@ -136,6 +141,10 @@ module Schematics
             .concat(created_at_attributes)
             .find { |field| field.name == name }
         end
+      end
+
+      def find_attribute_by_id(id)
+        attributes.find { _1.id == id }
       end
 
       def find_event_by_name(name)
