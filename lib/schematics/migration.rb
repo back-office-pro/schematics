@@ -33,6 +33,12 @@ module Schematics
                   target: current_attribute.name
                 )
               end
+              if current_attribute.type != new_attribute.type
+                @commands << Commands::ChangeAttribute.new(
+                  entity: new_entity,
+                  attribute: new_attribute
+                )
+              end
             else
               @commands << Commands::AddAttribute.new(
                 entity: current_entity,
