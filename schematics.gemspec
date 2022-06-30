@@ -58,7 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chroma', '~> 0.2.0'
   spec.add_dependency 'client_side_validations', '~> 20.0.2'
   spec.add_dependency 'client_side_validations-simple_form', '~> 14.1.0'
-  spec.add_dependency 'country_select', '~> 7.0.0'
+  spec.add_dependency 'country_select', '~> 8.0.0'
   spec.add_dependency 'database_consistency', '~> 1.1.15'
   spec.add_dependency 'easy_translate', '~> 0.5.1'
   spec.add_dependency 'elasticsearch', '~> 7.17.0'
