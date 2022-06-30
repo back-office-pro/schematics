@@ -7,9 +7,10 @@ module Application
     def permitted_params
       {
         entities_attributes: [
+          :id,
           :name,
           [options: [:icon, :descriptor, [actions: []], :hidden]],
-          [attributes_attributes: [:name, :type, [options: {}]]],
+          [attributes_attributes: [:id, :name, :type, [options: {}]]],
           [virtuals_attributes: [:name, :function, [options: {}]]],
           [triggers_attributes: %i[action callback]]
         ]
@@ -21,12 +22,14 @@ module Application
         .to_h
         .deep_symbolize_keys[:entities_attributes]
         .values
-        .map do |name:, options:, attributes_attributes:, virtuals_attributes: [], triggers_attributes: []| # rubocop:disable Layout/LineLength
+        .map do |id:, name:, options:, attributes_attributes:, virtuals_attributes: [], triggers_attributes: []| # rubocop:disable Layout/LineLength, Metrics/ParameterLists
           {
+            id:,
             name:,
             options:,
             attributes: attributes_attributes.values.map do |attribute|
               {
+                id: attribute[:id],
                 name: attribute[:name],
                 type: attribute[:type],
                 options: attribute[:options].compact_blank

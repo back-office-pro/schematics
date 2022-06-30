@@ -3,6 +3,7 @@
     .card-body
       .text-center.mb-2
         = fa_icon icon, size: '2x', class: 'text-primary'
+      = @builder.hidden_field :id
       = @builder.input :name
       = @builder.input :type,
                        as: :select,
