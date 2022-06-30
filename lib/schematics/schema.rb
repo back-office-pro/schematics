@@ -60,10 +60,6 @@ module Schematics
         .each(&context)
     end
 
-    def to_s = sorted_entities
-      .map(&:to_s)
-      .join("\n")
-
     def sorted_entities = entities
       .sort_by(&:weight)
       .reverse
