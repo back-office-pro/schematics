@@ -41,7 +41,7 @@ module Schematics
               end
             else
               @commands << Commands::AddAttribute.new(
-                entity: current_entity,
+                entity: new_entity,
                 attribute: new_attribute.name
               )
             end
