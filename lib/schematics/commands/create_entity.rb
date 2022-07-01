@@ -3,11 +3,11 @@
 module Schematics
   module Commands
     class CreateEntity < Command
-      def execute # rubocop:disable Metrics/CyclomaticComplexity
+      def execute
         return generate_scaffold_controller if model_exists?
 
         [
-          "rails generate scaffold #{name} #{migratable_attributes.map(&:to_s).join(' ')} --skip-resource-route", # rubocop:disable Layout/LineLength
+          "rails generate scaffold #{name} #{migratable_attributes} --skip-resource-route",
           "rails generate rspec:feature #{name}",
           ("rails generate locales #{name}" unless core?),
           "rails generate migration add_slug_to_#{table_name.pluralize} slug:string:uniq",
@@ -44,6 +44,10 @@ module Schematics
       def has_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
         super.reject { _1.entity.name.pluralize == _1.name }
       end
+
+      def migratable_attributes = super
+        .map(&:to_s)
+        .join(' ')
 
       def model_exists?
         Object.const_defined?(class_name)
