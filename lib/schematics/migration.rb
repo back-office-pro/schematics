@@ -7,7 +7,7 @@ module Schematics
     def initialize(schema)
       @schema = schema
       @commands = []
-      generate_migration_commands
+      generate_commands
     end
 
     private
@@ -47,6 +47,7 @@ module Schematics
           end
         else
           @commands << Commands::CreateEntity.new(entity: new_entity)
+          @commands << Commands::CreateEntityCounterCaches.new(entity: new_entity)
         end
       end
     end
@@ -70,9 +71,10 @@ module Schematics
       end
     end
 
-    def generate_migration_commands
+    def generate_commands
       generate_build_commmands
       generate_clean_commands
+      @commands.sort_by!(&:weight)
     end
   end
 end

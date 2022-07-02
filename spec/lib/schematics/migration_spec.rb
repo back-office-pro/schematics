@@ -28,7 +28,8 @@ describe Schematics::Migration do
       end
 
       its([0]) { is_expected.to be_a(Schematics::Commands::CreateEntity) }
-      its(:size) { is_expected.to eq(1) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::CreateEntityCounterCaches) }
+      its(:size) { is_expected.to eq(2) }
     end
 
     context 'when removing an entity' do
