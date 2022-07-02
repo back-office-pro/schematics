@@ -1,7 +1,8 @@
 one:
   state: scheduled
   data:
-    - name: client
+    - id: <%= SecureRandom.uuid %>
+      name: client
       options:
         icon: user_tie
         descriptor: full_name
@@ -17,30 +18,37 @@ one:
         - name: malformed_virtual
           function: $first_name = true
       attributes:
-        - name: first_name
+        - id: <%= SecureRandom.uuid %>
+          name: first_name
           type: string
           options:
             required: true
-        - name: last_name
+        - id: <%= SecureRandom.uuid %>
+          name: last_name
           type: string
           options:
             required: true
-        - name: age
+        - id: <%= SecureRandom.uuid %>
+          name: age
           type: float
-    - name: sub_category
+    - id: <%= SecureRandom.uuid %>
+      name: sub_category
       options:
         icon: box
         descriptor: designation
       attributes:
-        - name: designation
+        - id: <%= SecureRandom.uuid %>
+          name: designation
           type: string
           options:
             unique: true
-        - name: category
+        - id: <%= SecureRandom.uuid %>
+          name: category
           type: belongs_to
           options:
             required: true
-    - name: category
+    - id: <%= SecureRandom.uuid %>
+      name: category
       options:
         icon: box
         descriptor: label
@@ -48,17 +56,20 @@ one:
         - action: save
           callback: $error.foo = true
       attributes:
-        - name: label
+        - id: <%= SecureRandom.uuid %>
+          name: label
           type: string
           options:
             unique: true
             required: true
-        - name: preview
+        - id: <%= SecureRandom.uuid %>
+          name: preview
           type: attachment
           options:
             content_type:
               - png
-    - name: product
+    - id: <%= SecureRandom.uuid %>
+      name: product
       options:
         descriptor: reference
       virtuals:
@@ -72,40 +83,48 @@ one:
         - name: reference
           function: ref-$id-$sub_category.id
       attributes:
-        - name: designation
+        - id: <%= SecureRandom.uuid %>
+          name: designation
           type: string
           options:
             unique: true
             required: true
             limit: 100
-        - name: description
+        - id: <%= SecureRandom.uuid %>
+          name: description
           type: string
-        - name: price
+        - id: <%= SecureRandom.uuid %>
+          name: price
           type: currency
           options:
             precision: 2
             unit: €
-        - name: vat
+        - id: <%= SecureRandom.uuid %>
+          name: vat
           type: percentage
           options:
             precision: 1
             default: 19.6
-        - name: in_stock
+        - id: <%= SecureRandom.uuid %>
+          name: in_stock
           type: boolean
           options:
             default: false
-        - name: quantity
+        - id: <%= SecureRandom.uuid %>
+          name: quantity
           type: integer
           options:
             default: 20
-        - name: logo
+        - id: <%= SecureRandom.uuid %>
+          name: logo
           type: attachment
           options:
             required: true
             content_type:
               - pdf
             size: 1
-        - name: state
+        - id: <%= SecureRandom.uuid %>
+          name: state
           type: state_machine
           options:
             required: true
@@ -131,34 +150,43 @@ one:
                   - refused
                 to: pending
                 callback: $in_stock = true
-        - name: sub_category
+        - id: <%= SecureRandom.uuid %>
+          name: sub_category
           type: belongs_to
           options:
             required: true
-    - name: order
+    - id: <%= SecureRandom.uuid %>
+      name: order
       virtuals:
         - name: reference
           function: ORDER-$product.id
       attributes:
-        - name: title
+        - id: <%= SecureRandom.uuid %>
+          name: title
           type: text
-        - name: country
+        - id: <%= SecureRandom.uuid %>
+          name: country
           type: country
-        - name: start_at
+        - id: <%= SecureRandom.uuid %>
+          name: start_at
           type: datetime
           options:
             required: true
             less_than: ends_at
-        - name: ends_at
+        - id: <%= SecureRandom.uuid %>
+          name: ends_at
           type: datetime
           options:
             required: true
             greater_than: start_at
-        - name: invoices
+        - id: <%= SecureRandom.uuid %>
+          name: invoices
           type: attachments
-        - name: product
+        - id: <%= SecureRandom.uuid %>
+          name: product
           type: belongs_to
-    - name: stock_movement
+    - id: <%= SecureRandom.uuid %>
+      name: stock_movement
       options:
         icon: people_carry
         actions:
@@ -172,9 +200,11 @@ one:
         - action: destroy
           callback: $product.quantity += quantity
       attributes:
-        - name: quantity
+        - id: <%= SecureRandom.uuid %>
+          name: quantity
           type: integer
-        - name: product
+        - id: <%= SecureRandom.uuid %>
+          name: product
           type: belongs_to
           options:
             required: true
