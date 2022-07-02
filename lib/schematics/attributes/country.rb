@@ -10,6 +10,7 @@ module Schematics
 
       def icon = :earth_europe
 
+      # :reek:FeatureEnvy
       def collection = super.sort_by { [::I18n.transliterate(_1.first), _1.first] }
 
       def values = ISO3166::Country.codes
