@@ -42,7 +42,7 @@ namespace :schematics do
         Permission.where(model:).update_all(model: new_model)
         Chart.where(model:).update_all(model: new_model)
         Stat.where(model:).update_all(model: new_model)
-        Schematics::Version.where(item_type: model).update_all(model: new_model)
+        Schematics::Version.where(item_type: model).update_all(item_type: new_model)
         # rubocop:enable Rails/SkipsModelValidations
       end
     end
