@@ -22,12 +22,12 @@ module Application
         .to_h
         .deep_symbolize_keys[:entities_attributes]
         .values
-        .map do |id:, name:, options:, attributes_attributes:, virtuals_attributes: [], triggers_attributes: []| # rubocop:disable Layout/LineLength, Metrics/ParameterLists
+        .map do |entity|
           {
-            id:,
-            name:,
-            options:,
-            attributes: attributes_attributes.values.map do |attribute|
+            id: entity[:id],
+            name: entity[:name],
+            options: entity[:options],
+            attributes: entity[:attributes_attributes].values.map do |attribute|
               {
                 id: attribute[:id],
                 name: attribute[:name],
@@ -35,8 +35,8 @@ module Application
                 options: attribute[:options].compact_blank
               }
             end,
-            virtuals: virtuals_attributes.values,
-            triggers: triggers_attributes.values
+            virtuals: entity[:virtuals_attributes]&.values,
+            triggers: entity[:triggers_attributes]&.values
           }.compact
         end
     }
