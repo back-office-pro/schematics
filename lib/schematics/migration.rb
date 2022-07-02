@@ -28,14 +28,14 @@ module Schematics
               if current_attribute.name != new_attribute.name
                 @commands << Commands::RenameAttribute.new(
                   entity: new_entity,
-                  attribute: new_attribute,
-                  target: current_attribute.name
+                  attribute: current_attribute.name,
+                  target: new_attribute.name
                 )
               end
               if current_attribute.type != new_attribute.type
                 @commands << Commands::ChangeAttribute.new(
                   entity: new_entity,
-                  attribute: new_attribute
+                  attribute: new_attribute.name
                 )
               end
             else
