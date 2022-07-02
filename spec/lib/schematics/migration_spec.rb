@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 describe Schematics::Migration do
-  subject(:migration) { described_class.new(current_schema, new_schema) }
+  subject(:migration) { described_class.new(schema) }
 
-  let(:current_schema) { Schematics::Schema.load(current_data) }
-  let(:new_schema) { Schematics::Schema.load(new_data) }
+  let(:schema) { Schematics::Schema.load(new_data) }
+
+  before { Schematics::Schema.instance.load(current_data) }
 
   describe '#commands' do
     subject { migration.commands }

@@ -10,7 +10,7 @@ module Application
     end
 
     class_methods do
-      delegate :data, :version, to: :current, prefix: true, allow_nil: true
+      delegate :version, to: :current, prefix: true, allow_nil: true
 
       def current
         migrated.last
@@ -18,11 +18,13 @@ module Application
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(self)
+      Schematics::MigrateSchemaJob.perform_later(self) do
+        Schematics::Schema.instance.load(data.to_json)
+      end
     end
 
     def migration
-      Schematics::Migration.new(self.class.current_data, data)
+      Schematics::Migration.new(data)
     end
 
     def version = self

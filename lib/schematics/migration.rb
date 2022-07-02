@@ -4,9 +4,8 @@ module Schematics
   class Migration
     attr_reader :commands
 
-    def initialize(current_schema, new_schema)
-      @current_schema = current_schema
-      @new_schema = new_schema
+    def initialize(schema)
+      @schema = schema
       @commands = []
       generate_migration_commands
     end
@@ -14,8 +13,8 @@ module Schematics
     private
 
     def generate_build_commmands # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-      @new_schema.entities.reject(&:core?).each do |new_entity|
-        current_entity = @current_schema.find_entity_by_id(new_entity.id)
+      @schema.entities.reject(&:core?).each do |new_entity|
+        current_entity = Schema.instance.find_entity_by_id(new_entity.id)
         if current_entity
           if current_entity.name != new_entity.name
             @commands << Commands::RenameEntity.new(
@@ -53,8 +52,8 @@ module Schematics
     end
 
     def generate_clean_commands
-      @current_schema.entities.reject(&:core?).each do |current_entity|
-        new_entity = @new_schema.find_entity_by_id(current_entity.id)
+      Schema.instance.entities.reject(&:core?).each do |current_entity|
+        new_entity = @schema.find_entity_by_id(current_entity.id)
         if new_entity
           current_entity.attributes.each do |current_attribute|
             new_attribute = new_entity.find_attribute_by_id(current_attribute.id)
