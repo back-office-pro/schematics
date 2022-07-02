@@ -21,6 +21,8 @@ module Schematics
       def execute
         raise NotImplementedError
       end
+
+      def weight = 1
     end
   end
 end
