@@ -15,7 +15,8 @@ module Schematics
                :association_attributes,
                :has_and_belongs_to_many_associations,
                :core?,
-               to: :entity
+               to: :entity,
+               private: true
       attr_accessor :entity, :attribute, :target
 
       def execute
