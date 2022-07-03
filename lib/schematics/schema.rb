@@ -43,24 +43,22 @@ module Schematics
       entities.find { _1.name == name }
     end
 
-    def find_attribute_by_id(id) = entities
-      .flat_map(&:attributes)
-      .find { _1.id == id }
+    def find_entity_by_id(id)
+      entities.find { _1.id == id }
+    end
+
+    def find_attribute_by_prefixed_name(name)
+      entities
+        .flat_map(&:attributes)
+        .find { _1.prefixed_name == name }
+    end
 
     def load_routes
       context = binding.of_caller(2).method(:eval)
-      sorted_entities
+      entities
         .map(&Entities::Router.method(:new))
         .each(&context)
     end
-
-    def to_s = sorted_entities
-      .map(&:to_s)
-      .join("\n")
-
-    def sorted_entities = entities
-      .sort_by(&:weight)
-      .reverse
 
     def root_route
       return 'dashboard#home' if valid?

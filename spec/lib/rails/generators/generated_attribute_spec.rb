@@ -17,6 +17,7 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'foo:string' }
 
     its(:name) { is_expected.to eq('foo') }
+    its(:column_name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
@@ -33,6 +34,7 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'foo:string:uniq' }
 
     its(:name) { is_expected.to eq('foo') }
+    its(:column_name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
@@ -49,6 +51,7 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'foo:string:index' }
 
     its(:name) { is_expected.to eq('foo') }
+    its(:column_name) { is_expected.to eq('foo') }
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
@@ -65,8 +68,10 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'foo:references' }
 
     its(:name) { is_expected.to eq('foo') }
+    its(:column_name) { is_expected.to eq('foo_id') }
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to eq(foreign_key: true) }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
@@ -74,16 +79,13 @@ describe Rails::Generators::GeneratedAttribute do
     its(:inject_index_options) do
       is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
     end
-
-    its(:options_for_migration) do
-      is_expected.to eq(foreign_key: true, index: { where: 'deleted_at IS NULL' })
-    end
   end
 
   context 'when column is schema email' do
     let(:column_definition) { 'schema:user_email' }
 
     its(:name) { is_expected.to eq('email') }
+    its(:column_name) { is_expected.to eq('email') }
     its(:type) { is_expected.to eq(:citext) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
@@ -102,21 +104,16 @@ describe Rails::Generators::GeneratedAttribute do
     let(:column_definition) { 'schema:message_author' }
 
     its(:name) { is_expected.to eq('author') }
+    its(:column_name) { is_expected.to eq('author_id') }
     its(:type) { is_expected.to eq(:references) }
-    its(:attr_options) { is_expected.to eq(foreign_key: { to_table: :users }) }
+    its(:attr_options) { is_expected.to be_empty }
+    its(:options_for_migration) { is_expected.to eq(index: { where: 'deleted_at IS NULL' }) }
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
       is_expected.to eq(", algorithm: :concurrently, using: :btree, where: 'deleted_at IS NULL'")
-    end
-
-    its(:options_for_migration) do
-      is_expected.to eq(
-        foreign_key: { to_table: :users },
-        index: { where: 'deleted_at IS NULL' }
-      )
     end
   end
 end

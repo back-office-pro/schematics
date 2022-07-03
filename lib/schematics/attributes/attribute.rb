@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_record'
+require 'active_support/core_ext/securerandom'
 
 module Schematics
   module Attributes
@@ -13,7 +14,7 @@ module Schematics
       delegate :hidden?, :cached?, to: :options
       delegate :keys, to: :options, prefix: true
       attr_accessor :entity, :name
-      attr_writer :options
+      attr_writer :id, :options
 
       validates :options_keys, inclusion: { in: :available_options }
       validates :name,
@@ -27,16 +28,17 @@ module Schematics
         end
       end
 
+      def id
+        @id ||= SecureRandom.uuid
+      end
+
       def open_api_type = ::String
 
       def options
         Schematics::Options.new(options: @options)
       end
 
-      def to_sql = [
-        entity.table_name.pluralize,
-        name
-      ].join('.')
+      def to_sql = "#{entity.table_name.pluralize}.#{name}"
 
       def to_str = ''
 

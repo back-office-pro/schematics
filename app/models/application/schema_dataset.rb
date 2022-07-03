@@ -6,10 +6,11 @@ module Application
 
     prepended do
       serialize :data, Schematics::Schema
+      delegate :commands, to: :migration, prefix: true
     end
 
     class_methods do
-      delegate :data, :version, to: :current, prefix: true, allow_nil: true
+      delegate :version, to: :current, prefix: true, allow_nil: true
 
       def current
         migrated.last
@@ -17,16 +18,14 @@ module Application
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(self)
+      Schematics::MigrateSchemaJob.perform_later(self) do
+        Schematics::Schema.instance.load(data.to_json)
+      end
     end
 
-    def migrations = data
-      .as_json
-      .difference(self.class.current_data&.as_json || [])
-      .map { data.find_entity_by_name(_1[:name]) }
-      .sort_by(&:weight)
-      .reverse
-      .map { |entity| Schematics::Commands::Command.build(type: 'create_entity', entity:) }
+    def migration
+      Schematics::Migration.new(data)
+    end
 
     def version = self
       .class

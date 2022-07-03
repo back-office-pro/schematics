@@ -9,8 +9,14 @@ namespace :schematics do
   task generate: :environment do
     Schematics::Schema
       .instance
-      .sorted_entities
-      .map { |entity| Schematics::Commands::CreateEntity.new(entity:) }
+      .entities
+      .flat_map do |entity|
+        [
+          Schematics::Commands::CreateEntity.new(entity:),
+          Schematics::Commands::CreateEntityCounterCaches.new(entity:)
+        ]
+      end
+      .sort_by(&:weight)
       .flat_map(&:execute)
       .each(&method(:system))
   end
