@@ -2,7 +2,6 @@
 
 require 'active_record_doctor'
 require 'active_record_doctor/rake/task'
-require 'database_consistency'
 
 namespace :schematics do
   desc 'Generate schema application'
@@ -58,13 +57,6 @@ namespace :schematics do
     desc 'Load engine seed'
     task seed: :environment do
       Schematics::Engine.load_seed
-    end
-
-    desc 'Run database consistency checks'
-    task consistency: :environment do
-      Rails.application.eager_load!
-      exit DatabaseConsistency
-        .run(Schematics::Engine.root.join('config', 'database_consistency.yml'))
     end
 
     ActiveRecordDoctor::Rake::Task.new do |task|
