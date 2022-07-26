@@ -43,6 +43,8 @@ Layout/MultilineArrayLineBreaks:
   Enabled: true
 Layout/MultilineHashKeyLineBreaks:
   Enabled: true
+Layout/MultilineMethodParameterLineBreaks:
+  Enabled: true
 Layout/SingleLineBlockChain:
   Enabled: true
   Exclude:
