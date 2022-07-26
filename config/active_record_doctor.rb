@@ -13,45 +13,27 @@ ActiveRecordDoctor.configure do
   ]
 
   global :ignore_models, [
+    'ActionMailbox::Record',
     'ActionMailbox::InboundEmail',
+    'ActiveStorage::Record',
     'ActiveStorage::Blob',
     'ActiveStorage::Attachment',
     'ActiveStorage::VariantRecord',
     'ActionText::EncryptedRichText',
     'ActionText::RichText',
+    'ActionText::Record',
     'PaperTrail::Version',
+    'Schematics::ApplicationRecord',
     'Schematics::Version',
-    'FriendlyId::Slug'
+    'FriendlyId::Slug',
+    'Main::MainRecord',
+    'Main::AdminUser',
+    'Main::Licence',
+    'ApplicationRecord'
   ]
 
-  detector :extraneous_indexes, ignore_tables: [], ignore_indexes: []
-  detector :incorrect_boolean_presence_validation, ignore_models: [], ignore_attributes: []
-  detector :mismatched_foreign_key_type, ignore_tables: [], ignore_columns: []
-  detector :missing_foreign_keys,
-           ignore_tables: %w[permissions_roles charts_roles roles_stats],
-           ignore_columns: []
-  detector :missing_non_null_constraint, ignore_tables: [], ignore_columns: []
-  detector :missing_presence_validation, ignore_models: [], ignore_attributes: []
-  detector :missing_unique_indexes, ignore_models: [], ignore_columns: []
-  detector :short_primary_key_type,
-           ignore_tables: Schematics::Schema
-             .instance
-             .entities
-             .map(&:table_name)
-             .map(&:pluralize)
-             .push('searches')
-  detector :undefined_table_references, ignore_models: []
-  detector :unindexed_foreign_keys, ignore_tables: [], ignore_columns: []
-  detector :incorrect_dependent_option,
-           ignore_models: [],
-           ignore_associations: Schematics::Schema
-             .instance
-             .entities
-             .map(&:class_name)
-             .map { "#{_1}.slugs" }
-  detector :unindexed_deleted_at,
-           ignore_tables: [],
-           ignore_columns: [],
-           ignore_indexes: [],
-           column_names: []
+  detector :missing_foreign_keys, enabled: false
+  detector :missing_non_null_constraint, enabled: false
+  detector :incorrect_length_validation, enabled: false
+  detector :incorrect_dependent_option, enabled: false
 end
