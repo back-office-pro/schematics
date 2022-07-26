@@ -7,7 +7,6 @@ export default class extends ApplicationController {
   }
 
   add (event) {
-    event.preventDefault()
     const template = this.templatesTargets.find(_ => _.id === event.params.template)
     const content = template.innerHTML.replace(/NEW_RECORD/g, new Date().getTime().toString())
     template.insertAdjacentHTML('beforebegin', content)
@@ -15,7 +14,6 @@ export default class extends ApplicationController {
   }
 
   remove (event) {
-    event.preventDefault()
     event.target.closest(event.params.wrapper).remove()
   }
 }

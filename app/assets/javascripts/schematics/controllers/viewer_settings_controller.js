@@ -2,9 +2,7 @@ import ApplicationController from './application_controller'
 import { schematicsPreferencesEn } from 'routes'
 
 export default class extends ApplicationController {
-  keepOpened (e) {
-    e.stopPropagation()
-  }
+  keepOpened () {}
 
   toggleColumn (e) {
     const { id, checked } = e.target
