@@ -29,8 +29,8 @@ module Schematics
 
       def migration_options = super.merge(
         index: { where: 'deleted_at IS NULL' },
-        polymorphic: (true if polymorphic?)
-      ).compact
+        polymorphic: polymorphic?
+      ).compact_blank
 
       def class_name = association_type.camelize
 
