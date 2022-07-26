@@ -7,7 +7,6 @@ module Schematics
     included do
       extend FriendlyId
       friendly_id entity.descriptor.name.to_sym
-      validates :slug, uniqueness: true, allow_blank: true
     end
   end
 end

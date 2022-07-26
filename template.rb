@@ -66,5 +66,4 @@ after_bundle do
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'
-  rails_command 'schematics:db:consistency'
 end
