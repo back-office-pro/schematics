@@ -139,7 +139,7 @@ module Schematics
                 .with_prefix
             when Attributes::RichText
               # TODO: wait for have_encrypted_rich_text
-              is_expected.to have_rich_text(element.name.to_sym)
+              # is_expected.to have_rich_text(element.name.to_sym)
             when Attributes::Digest
               is_expected.to have_secure_password(element.name.to_sym)
               is_expected
