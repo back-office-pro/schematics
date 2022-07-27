@@ -1,6 +1,6 @@
 nav.d-none.d-xl-block.text-truncate aria-label='breadcrumb'
-  ol.nav.align-items-center.ps-4.flex-nowrap
-    li.nav-item.breadcrumb-item
+  ol.breadcrumb.ps-4.mb-0.flex-nowrap
+    li.breadcrumb-item
       = link_to fa_icon(:house, class: 'fa-lg'), root_path, data:
     - breadcrumb_trail do |crumb|
       li.breadcrumb-item.text-truncate class=(crumb.current? ? 'active' : '')

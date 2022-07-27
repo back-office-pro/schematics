@@ -16,7 +16,7 @@ pin '@fortawesome/fontawesome-free', to: 'https://ga.jspm.io/npm:@fortawesome/fo
 pin '@github/hotkey', to: 'https://ga.jspm.io/npm:@github/hotkey@2.0.1/dist/index.js'
 pin '@popperjs/core', to: 'https://ga.jspm.io/npm:@popperjs/core@2.11.5/dist/esm/index.js'
 pin 'autosize', to: 'https://ga.jspm.io/npm:autosize@5.0.1/dist/autosize.esm.js'
-pin 'bootstrap', to: 'https://ga.jspm.io/npm:bootstrap@5.1.3/dist/js/bootstrap.esm.js'
+pin 'bootstrap', to: 'https://ga.jspm.io/npm:bootstrap@5.2.0/dist/js/bootstrap.esm.js'
 pin 'file-saver', to: 'https://ga.jspm.io/npm:file-saver@2.0.5/dist/FileSaver.min.js'
 pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js'
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/path.js'

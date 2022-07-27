@@ -1,9 +1,11 @@
 $secondary: #95a5a6;
 $input-btn-focus-width: 0;
+$btn-border-width: 0;
 $body-color: #fff;
 
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/utilities';
 
