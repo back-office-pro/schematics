@@ -1,16 +1,8 @@
 import SearchBarController from './search_bar_controller'
 
 export default class extends SearchBarController {
-  connect () {
-    this.inputTarget.form.addEventListener('submit', this.compactBlankInputsAndSubmitForm)
-  }
-
-  diconnect () {
-    this.inputTarget.form.removeEventListener('submit', this.compactBlankInputsAndSubmitForm)
-  }
-
   onSearch () {
-    this.compactBlankInputsAndSubmitForm.call(this.inputTarget.form)
+    this.inputTarget.form.requestSubmit()
   }
 
   formatResults (results) {
@@ -29,14 +21,6 @@ export default class extends SearchBarController {
         ${this.highlight(result, this.inputTarget.value)}
       </li>
     `
-  }
-
-  compactBlankInputsAndSubmitForm () {
-    Array
-      .from(this.elements)
-      .filter(_ => !_.value)
-      .forEach(_ => { _.disabled = true })
-    this.requestSubmit()
   }
 
   get url () {
