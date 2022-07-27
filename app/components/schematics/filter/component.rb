@@ -46,8 +46,8 @@ module Schematics
         'border-0',
         'bg-transparent',
         'text-secondary',
-        ('fw-bold' if active?)
-      ].compact
+        { 'fw-bold': active? }
+      ]
 
       def filter_name = "filter[#{name}]"
 

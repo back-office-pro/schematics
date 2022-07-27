@@ -17,8 +17,8 @@ module Schematics
           'btn',
           'btn-danger',
           'btn-sm',
-          ('btn-icon-split' unless compact?)
-        ].compact
+          { 'btn-icon-split': !compact? }
+        ]
 
         def icon_class
           'fa-fw' if compact?

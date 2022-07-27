@@ -16,9 +16,9 @@ module Schematics
           'btn',
           'btn-danger',
           'btn-sm',
-          ('btn-icon-split' unless compact?),
-          ('ms-2' unless compact?)
-        ].compact
+          { 'btn-icon-split': !compact? },
+          { 'ms-2': !compact? }
+        ]
 
         def render?
           can?(:delete, @resource)

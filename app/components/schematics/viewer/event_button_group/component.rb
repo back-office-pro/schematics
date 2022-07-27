@@ -18,9 +18,9 @@ module Schematics
           'btn',
           'btn-primary',
           'btn-sm',
-          ('btn-icon-split' unless compact?),
-          ('ms-2' unless compact?)
-        ].compact
+          { 'btn-icon-split': !compact? },
+          { 'ms-2': !compact? }
+        ]
 
         def data
           return { turbo_method: :patch, turbo_frame: '_top' } unless compact?
