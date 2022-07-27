@@ -5,4 +5,3 @@
     = render Schematics::Button::Edit::Component.new(resource: @resource)
     = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource)
     = render Schematics::Button::Archive::Component.new(resource: @resource)
-    = render Schematics::Button.const_get(constant)::Component.new(resource: @resource) if cannot?(:archive, @resource)

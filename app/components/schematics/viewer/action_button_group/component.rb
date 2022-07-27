@@ -8,12 +8,6 @@ module Schematics
           super
           @resource = resource
         end
-
-        def constant
-          return :Delete if resource_associations(resource: @resource).any?
-
-          :Destroy
-        end
       end
     end
   end
