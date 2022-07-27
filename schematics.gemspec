@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.11'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.5'
-  spec.add_development_dependency 'pg', '~> 1.4.1'
+  spec.add_development_dependency 'pg', '~> 1.4.2'
   spec.add_development_dependency 'reek', '~> 6.1.1'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.32.0'
