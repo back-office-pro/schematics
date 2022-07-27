@@ -10,7 +10,7 @@
           = active_link_to polymorphic_path(model_class),
             class: 'nav-link p-0 m-0 text-secondary text-nowrap',
             title: model_class.human_name_plural.humanize,
-            data: do
+            data: data.merge('hotkey-shortcut-value': "Control+#{model_class.human_name.first}") do
             = fa_icon entity.icon, size: '2x'
             .mt-2.d-none class=('d-md-block' unless toggled?) = model_class.human_name_plural.humanize
         - if !entity.is_a?(Schematics::Entities::Singleton) && is_active_link?(polymorphic_path(model_class))

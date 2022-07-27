@@ -4,7 +4,7 @@ module Schematics
   module Sidebar
     class Component < ApplicationComponent
       def data = {
-        controller: 'tooltip',
+        controller: 'tooltip hotkey',
         'bs-toggle': 'tooltip',
         'bs-placement': 'bottom',
         'bs-container': '.sidebar'

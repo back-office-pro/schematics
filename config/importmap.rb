@@ -13,6 +13,7 @@ pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schem
 pin '@client-side-validations/client-side-validations', to: 'https://ga.jspm.io/npm:@client-side-validations/client-side-validations@0.3.0/dist/client-side-validations.esm.js'
 pin '@client-side-validations/simple-form', to: '/assets/@client-side-validations/simple-form/dist/simple-form.bootstrap4.esm.js' # rubocop:disable Layout/LineLength
 pin '@fortawesome/fontawesome-free', to: 'https://ga.jspm.io/npm:@fortawesome/fontawesome-free@6.1.2/js/fontawesome.js'
+pin '@github/hotkey', to: 'https://ga.jspm.io/npm:@github/hotkey@2.0.1/dist/index.js'
 pin '@popperjs/core', to: 'https://ga.jspm.io/npm:@popperjs/core@2.11.5/dist/esm/index.js'
 pin 'autosize', to: 'https://ga.jspm.io/npm:autosize@5.0.1/dist/autosize.esm.js'
 pin 'bootstrap', to: 'https://ga.jspm.io/npm:bootstrap@5.1.3/dist/js/bootstrap.esm.js'
