@@ -7,7 +7,7 @@ module Schematics
       schema_dataset
         .migration_commands
         .flat_map(&:execute)
-        .each(&method(:system)) # TODO: send output to log/ directory
+        .each(&method(:system))
       schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
       Schema.instance.load(schema_dataset.data.to_json)
       ::Rails.application.reload_routes!
