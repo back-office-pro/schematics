@@ -6,6 +6,7 @@ module Schematics
 
     included do
       helper_method :parent_model_class
+      helper_method :record
       delegate :human_name,
                :human_name_plural,
                to: :parent_model_class,
@@ -25,6 +26,10 @@ module Schematics
       .map { [_1.class_name, _1.model_class] }
       .to_h
       .fetch(params[:model_name])
+
+    def record
+      parent_model_class.find(params[:id])
+    end
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)
