@@ -2,6 +2,7 @@
 
 pin 'chartkick', to: 'chartkick.js', preload: true
 pin 'Chart.bundle', to: 'Chart.bundle.js', preload: true
+pin 'schematics/application'
 pin 'pagy-module'
 pin 'routes'
 
