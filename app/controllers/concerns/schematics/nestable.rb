@@ -28,7 +28,7 @@ module Schematics
       .fetch(params[:model_name])
 
     def record
-      parent_model_class.find(params[:id])
+      parent_model_class.finder(params[:id])
     end
 
     def set_breadcrumb
