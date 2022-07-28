@@ -11,7 +11,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      delegate :descriptor, :default, to: :inverse_entity, allow_nil: true
+      delegate :descriptor, :default, to: :inverse_entity
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
