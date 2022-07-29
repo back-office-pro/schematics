@@ -727,7 +727,6 @@
     "options": {
       "icon": "comment",
       "actions": [
-        "show",
         "create",
         "update",
         "destroy",
