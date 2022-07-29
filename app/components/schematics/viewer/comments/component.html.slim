@@ -5,6 +5,7 @@
 }
   .offcanvas-header
     = render Schematics::CardHeading::Component.new(icon:, title:)
+    = render Schematics::Button::AddComment::Component.new(resource: @resource)
     h5#commentsLabel.offcanvas-title
     button.btn-close.text-reset aria-label='Close' data-bs-dismiss='offcanvas' type='button'
   .offcanvas-body
