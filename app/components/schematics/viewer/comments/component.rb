@@ -5,6 +5,7 @@ module Schematics
     module Comments
       class Component < ApplicationComponent
         delegate :comments, to: :@resource
+        delegate :size, to: :comments
         delegate :icon, to: '::Comment.entity'
 
         def initialize(resource:)
@@ -12,9 +13,7 @@ module Schematics
           @resource = resource
         end
 
-        def title
-          '4 commentaires'
-        end
+        def title = "#{size} #{::Comment.human_name(count: size)}"
       end
     end
   end
