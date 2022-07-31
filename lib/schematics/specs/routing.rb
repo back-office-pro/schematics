@@ -27,15 +27,15 @@ module Schematics
             if can?(:show)
               is_expected
                 .to route(:get, polymorphic_path(model_class))
-                .to(locale:, controller:, action: :show)
+                .to(locale:, model_name:, controller:, action: :show)
             end
             if can?(:update)
               is_expected
                 .to route(:get, edit_polymorphic_path(model_class))
-                .to(locale:, controller:, action: :edit)
+                .to(locale:, model_name:, controller:, action: :edit)
               is_expected
                 .to route(:patch, polymorphic_path(model_class))
-                .to(locale:, controller:, action: :update)
+                .to(locale:, model_name:, controller:, action: :update)
             end
           end
         else
@@ -52,6 +52,12 @@ module Schematics
               is_expected
                 .to route(:get, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, action: :show, id:)
+              is_expected
+                .to route(:get, new_polymorphic_path([record, ::Comment]))
+                .to(locale:, controller: 'comments', model_name:, id:, action: :new)
+              is_expected
+                .to route(:post, polymorphic_path([record, ::Comment]))
+                .to(locale:, controller: 'comments', model_name:, id:, action: :create)
             end
             if can?(:create)
               is_expected
