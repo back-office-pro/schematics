@@ -113,7 +113,11 @@ describe Schematics::Entities::Router do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resource :settings, only: [:show, :update, :edit]
+        resource :settings, only: [:show, :update, :edit], model_name: 'Setting' do
+          member do
+            resources :comments, only: %i[new create edit update], as: 'setting_comments'
+          end
+        end
         resolve("Setting") { [:settings] }
       RUBY
     end
@@ -149,7 +153,11 @@ describe Schematics::Entities::Router do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         namespace :main do
-          resource :licences, only: [:show, :update, :edit]
+          resource :licences, only: [:show, :update, :edit], model_name: 'Main::Licence' do
+          member do
+            resources :comments, only: %i[new create edit update], as: 'main_licence_comments'
+          end
+        end
         end
         resolve("Main::Licence") { [:licences] }
       RUBY

@@ -44,7 +44,9 @@ module Schematics
         case @entity
         when Singleton # rubocop:disable Lint/ConstantResolution
           <<~RUBY
-            resource :#{resource.pluralize}, only: #{routes}
+            resource :#{resource.pluralize}, only: #{routes}, model_name: '#{class_name}' do
+            #{resource_routes}
+            end
           RUBY
         when Entity
           <<~RUBY
