@@ -7,7 +7,7 @@ module Schematics
     module Feature # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST = [::Search, ::Session, ::SchemaDataset].freeze
+      CREATE_DENYLIST = [::Search, ::Session, ::SchemaDataset, ::Comment].freeze
 
       included do
         delegate :t, to: 'I18n'

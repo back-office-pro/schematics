@@ -258,6 +258,14 @@
           "cached": true,
           "default": true
         }
+      },
+      {
+        "name": "comments_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
+        }
       }
     ]
   },
@@ -710,6 +718,43 @@
         "function": "$version + 1",
         "options": {
           "precision": 0
+        }
+      }
+    ]
+  },
+  {
+    "name": "comment",
+    "options": {
+      "icon": "comment",
+      "actions": [
+        "create",
+        "update",
+        "destroy",
+        "archive"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "record",
+        "type": "belongs_to",
+        "options": {
+          "required": true,
+          "polymorphic": true,
+          "readonly": true
+        }
+      },
+      {
+        "name": "content",
+        "type": "rich_text",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "name": "author",
+        "type": "references",
+        "options": {
+          "required": true
         }
       }
     ]

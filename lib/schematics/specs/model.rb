@@ -169,10 +169,10 @@ module Schematics
             when Attributes::Association
               is_expected
                 .to belong_to(element.name.to_sym)
-                  .class_name(element.class_name)
                   .with_foreign_key(element.column_name)
-                  .inverse_of(element.inverse_association.name.to_sym)
+                  .inverse_of(element.inverse_association_name.pluralize.to_sym)
                   .counter_cache(:"#{element.inverse_association_name.pluralize}_count")
+                  .tap { _1.class_name(element.class_name) unless element.polymorphic? }
                   .tap { _1.optional unless element.required? }
               is_expected
                 .to have_db_column(element.column_name.to_sym)

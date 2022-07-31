@@ -44,7 +44,9 @@ module Schematics
         case @entity
         when Singleton # rubocop:disable Lint/ConstantResolution
           <<~RUBY
-            resource :#{resource.pluralize}, only: #{routes}
+            resource :#{resource.pluralize}, only: #{routes}, model_name: '#{class_name}' do
+            #{resource_routes}
+            end
           RUBY
         when Entity
           <<~RUBY
@@ -71,7 +73,8 @@ module Schematics
         autocomplete_route,
         duplicate_route,
         events.map(&:to_route),
-        import_routes
+        import_routes,
+        comment_routes
       ].compact.join.indent(2).chomp
 
       def delete_route
@@ -113,6 +116,16 @@ module Schematics
         <<~RUBY
           collection do
             resources :imports, only: %i[new create], as: '#{table_name}_imports'
+          end
+        RUBY
+      end
+
+      def comment_routes
+        return unless can?(:show)
+
+        <<~RUBY
+          member do
+            resources :comments, only: %i[new create edit update], as: '#{table_name}_comments'
           end
         RUBY
       end

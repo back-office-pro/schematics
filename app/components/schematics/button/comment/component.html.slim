@@ -1,0 +1,6 @@
+button.btn.btn-primary.btn-sm.btn-icon-split.ms-2.position-relative data-bs-toggle='offcanvas' data-bs-target='#comments'
+  - unless size.zero?
+    .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
+      = display_count
+  span.icon = fa_icon(icon)
+  span.text.d-none.d-lg-inline = ::Comment.human_name_plural.humanize

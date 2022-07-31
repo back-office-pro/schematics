@@ -1,0 +1,12 @@
+#comments.offcanvas.offcanvas-end {
+  aria-labelledby='commentsLabel'
+  tabindex='-1'
+  data-bs-scroll='true'
+}
+  .offcanvas-header
+    h5#commentsLabel.offcanvas-title
+      = render Schematics::CardHeading::Component.new(icon:, title:)
+      = render Schematics::Button::Add::Component.new(model_class:, resource: @resource)
+    button.btn-close.text-reset.ms-1 aria-label='Close' data-bs-dismiss='offcanvas' type='button'
+  .offcanvas-body.pt-0
+    = render Schematics::CommentPreview::Component.with_collection(comments)

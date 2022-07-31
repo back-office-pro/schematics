@@ -3,6 +3,7 @@ en:
   activerecord:
     attributes:
       setting:
+        comments_feature_flag: Enable comments
         company_address: Company address
         company_logo: Company Logo
         company_name: Company name

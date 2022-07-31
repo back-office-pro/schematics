@@ -1,0 +1,13 @@
+---
+en:
+  activerecord:
+    attributes:
+      comment:
+        author: Author
+        content: Content
+        record: Record
+    models:
+      comment:
+        gender: male
+        one: Comment
+        other: Comments

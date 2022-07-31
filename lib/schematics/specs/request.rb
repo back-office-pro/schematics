@@ -8,7 +8,7 @@ module Schematics
     module Request # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST  = [::Session, ::SchemaDataset].freeze
+      CREATE_DENYLIST  = [::Session, ::SchemaDataset, ::Comment].freeze
       SHOW_DENYLIST    = [::ActiveStorage::Attachment, ::Search].freeze
       DESTROY_DENYLIST = [::ActiveStorage::Attachment, ::Session].freeze
 

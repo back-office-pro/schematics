@@ -11,6 +11,8 @@ FriendlyId.defaults do |config|
     delete
     supprimer
     import
+    comments
+    commentaires
   ]
   config.use Module.new do
     def should_generate_new_friendly_id? = true
