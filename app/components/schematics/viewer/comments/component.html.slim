@@ -8,10 +8,5 @@
     = render Schematics::Button::AddComment::Component.new(resource: @resource)
     h5#commentsLabel.offcanvas-title
     button.btn-close.text-reset aria-label='Close' data-bs-dismiss='offcanvas' type='button'
-  .offcanvas-body
-    - comments.each do |comment|
-      .card.shadow-sm.border-0.animate__animated.animate__zoomIn
-        .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
-          = render Schematics::CardHeading::Component.new(icon: :user, title: comment.author)
-        .card-body.p-3
-          == comment.content
+  .offcanvas-body.pt-0
+    = render Schematics::CommentPreview::Component.with_collection(comments)
