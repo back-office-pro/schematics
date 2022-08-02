@@ -266,6 +266,14 @@
           "cached": true,
           "default": true
         }
+      },
+      {
+        "name": "tasks_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
+        }
       }
     ]
   },
@@ -757,6 +765,81 @@
         "options": {
           "required": true
         }
+      }
+    ]
+  },
+  {
+    "name": "task",
+    "options": {
+      "icon": "list_check",
+      "descriptor": "title"
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "user"
+      }
+    ],
+    "attributes": [
+      {
+        "name": "title",
+        "type": "string",
+        "options": {
+          "required": true,
+          "encrypted": true,
+          "limit": 100
+        }
+      },
+      {
+        "name": "content",
+        "type": "rich_text"
+      },
+      {
+        "name": "applicant",
+        "type": "references",
+        "options": {
+          "required": true,
+          "inverse": {
+            "name": "requested_tasks"
+          }
+        }
+      },
+      {
+        "name": "deadline",
+        "type": "datetime"
+      },
+      {
+        "name": "state",
+        "type": "state_machine",
+        "options": {
+          "required": true,
+          "default": "pending",
+          "values": [
+            "pending",
+            "completed",
+            "aborted"
+          ],
+          "events": [
+            {
+              "name": "complete",
+              "icon": "check",
+              "from": "pending",
+              "to": "completed"
+            },
+            {
+              "name": "abort",
+              "icon": "ban",
+              "from": "pending",
+              "to": "aborted"
+            }
+          ]
+        }
+      }
+    ],
+    "virtuals": [
+      {
+        "name": "late",
+        "function": "$late? == true"
       }
     ]
   }
