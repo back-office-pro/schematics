@@ -11,6 +11,7 @@ en:
         company_website: Company website
         google_cloud_api_key: Google Cloud API Key
         messages_feature_flag: Enable internal messaging
+        tasks_feature_flag: Enable tasks
         theme_color: Theme color
     models:
       setting:

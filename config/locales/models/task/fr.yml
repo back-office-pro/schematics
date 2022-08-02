@@ -1,0 +1,25 @@
+---
+fr:
+  activerecord:
+    attributes:
+      task:
+        applicant: Demandeur
+        content: Contenu
+        deadline: Date limite
+        late: En retard
+        state: Etat
+        states:
+          aborted: Annulée
+          completed: Complétée
+          pending: En cours
+        title: Titre
+        users: Assignés
+    events:
+      task:
+        abort: Annuler
+        complete: Compléter
+    models:
+      task:
+        gender: female
+        one: Tâche
+        other: Tâches
