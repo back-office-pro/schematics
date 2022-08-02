@@ -11,6 +11,7 @@ fr:
         company_website: Site web de la société
         google_cloud_api_key: Clé API Google Cloud
         messages_feature_flag: Activer la messagerie interne
+        tasks_feature_flag: Activer les tâches
         theme_color: Couleur du thème
     models:
       setting:
