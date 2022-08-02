@@ -1,0 +1,23 @@
+li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light
+  a#tasks-dropdown.nav-link.dropdown-toggle {
+    aria-expanded='false'
+    data-bs-toggle='dropdown'
+    href='#'
+    role='button'
+  }
+    .position-relative
+      = fa_icon ::Task.entity.icon, class: icon_class
+      - unless pending_count.zero?
+        .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
+          = display_pending_count
+  .dropdown-menu.border-0.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
+    aria-labelledby='tasks-dropdown'
+  }
+    h5.dropdown-header.fw-bold
+      = t('.title')
+    .pre-scrollable.overflow-scroll
+      - tasks.each do |task|
+        .dropdown-item
+          = render Schematics::Navbar::TaskCenter::Preview::Component.new(task:)
+    .dropdown-divider.m-0
+    = link_to t('.show_all'), tasks_path, class: 'dropdown-item text-muted text-center small p-2'

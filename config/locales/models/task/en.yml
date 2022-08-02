@@ -1,0 +1,25 @@
+---
+en:
+  activerecord:
+    attributes:
+      task:
+        applicant: Applicant
+        content: Content
+        deadline: Deadline
+        late: Late
+        state: State
+        states:
+          aborted: Aborted
+          completed: Completed
+          pending: Pending
+        title: Title
+        users: Assigned
+    events:
+      task:
+        abort: Abort
+        complete: Complete
+    models:
+      task:
+        gender: female
+        one: Task
+        other: Tasks

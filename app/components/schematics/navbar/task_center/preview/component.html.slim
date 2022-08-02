@@ -1,0 +1,13 @@
+.row {
+  data-action='click->application#visit'
+  data-application-href-param=href
+  role='button'
+}
+  .col-auto.align-self-center
+    = render Schematics::Avatar::Component.new(user: applicant)
+  .col.text-truncate
+    div = title
+    .text-muted
+      span = applicant
+      span.mx-1 -
+      span data-controller='timeago' datetime=created_at
