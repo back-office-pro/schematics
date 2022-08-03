@@ -274,6 +274,14 @@
           "cached": true,
           "default": true
         }
+      },
+      {
+        "name": "meetings_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
+        }
       }
     ]
   },
@@ -840,6 +848,66 @@
       {
         "name": "late",
         "function": "$late? == true"
+      }
+    ]
+  },
+  {
+    "name": "meeting",
+    "options": {
+      "icon": "headset",
+      "descriptor": "subject"
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "user"
+      }
+    ],
+    "attributes": [
+      {
+        "name": "subject",
+        "type": "string",
+        "options": {
+          "required": true,
+          "encrypted": true,
+          "limit": 100
+        }
+      },
+      {
+        "name": "content",
+        "type": "rich_text"
+      },
+      {
+        "name": "creator",
+        "type": "references",
+        "options": {
+          "required": true,
+          "inverse": {
+            "name": "created_meetings"
+          }
+        }
+      },
+      {
+        "name": "start_at",
+        "type": "datetime",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "name": "end_at",
+        "type": "datetime",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "name": "url",
+        "type": "url"
+      },
+      {
+        "name": "place",
+        "type": "address"
       }
     ]
   }
