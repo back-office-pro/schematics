@@ -1,0 +1,18 @@
+---
+fr:
+  activerecord:
+    attributes:
+      meeting:
+        content: Contenu
+        creator: Créateur
+        end_at: Fin le
+        place: Endroit
+        start_at: Début le
+        subject: Sujet
+        url: Lien
+        users: Participants
+    models:
+      meeting:
+        gender: female
+        one: Réunion
+        other: Réunions
