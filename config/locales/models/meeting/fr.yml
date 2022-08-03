@@ -6,10 +6,10 @@ fr:
         content: Contenu
         creator: Créateur
         end_at: Fin le
-        place: Endroit
+        place: Lieu
         start_at: Début le
         subject: Sujet
-        url: Lien
+        url: URL
         users: Participants
     models:
       meeting:
