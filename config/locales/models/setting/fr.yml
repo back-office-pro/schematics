@@ -10,6 +10,7 @@ fr:
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
         google_cloud_api_key: Clé API Google Cloud
+        meetings_feature_flag: Activer les réunions
         messages_feature_flag: Activer la messagerie interne
         tasks_feature_flag: Activer les tâches
         theme_color: Couleur du thème
