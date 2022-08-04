@@ -1,0 +1,23 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Button
+    module Calendar
+      class Component < ApplicationComponent
+        delegate :class, to: :@resource, prefix: :model, private: true
+        delegate :viewer, to: :entity, private: true
+
+        def initialize(resource:)
+          super
+          @resource = resource
+        end
+
+        def css_classes = %w[btn btn-sm btn-icon-split ms-2]
+
+        def render?
+          viewer == :calendar
+        end
+      end
+    end
+  end
+end
