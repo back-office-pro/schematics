@@ -7,6 +7,7 @@
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component.pdf
         = render Schematics::Button::QrCode::Component.new(resource: @resource)
+        = render Schematics::Button::Calendar::Component.new(resource: @resource)
         = render Schematics::Button::Impersonate::Component.new(resource: @resource)
         = render Schematics::Button::Comment::Component.new(resource: @resource)
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
