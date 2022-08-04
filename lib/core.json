@@ -906,7 +906,7 @@
         "type": "url"
       },
       {
-        "name": "place",
+        "name": "location",
         "type": "address"
       }
     ]

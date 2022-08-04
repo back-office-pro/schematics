@@ -6,7 +6,7 @@ en:
         content: Content
         creator: Creator
         end_at: End at
-        place: Place
+        location: Location
         start_at: Start at
         subject: Subject
         url: URL

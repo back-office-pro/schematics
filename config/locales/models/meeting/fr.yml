@@ -6,7 +6,7 @@ fr:
         content: Contenu
         creator: Créateur
         end_at: Fin le
-        place: Lieu
+        location: Lieu
         start_at: Début le
         subject: Sujet
         url: URL
