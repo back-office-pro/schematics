@@ -12,10 +12,10 @@ module Main
 
     class << self
       def instance
-        find_by(application:)
+        find_by(tenant:)
       end
 
-      def application = Rails
+      def tenant = Rails
         .application
         .class
         .module_parent_name
