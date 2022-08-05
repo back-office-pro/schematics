@@ -2,7 +2,7 @@
 
 module Schematics
   module Button
-    module QrCode
+    module Calendar
       class Component < ApplicationComponent
         delegate :class, to: :@resource, prefix: :model, private: true
         delegate :viewer, to: :entity, private: true
@@ -15,7 +15,7 @@ module Schematics
         def css_classes = %w[btn btn-sm btn-icon-split ms-2]
 
         def render?
-          viewer != :calendar
+          viewer == :calendar
         end
       end
     end

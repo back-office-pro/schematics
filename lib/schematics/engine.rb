@@ -57,6 +57,7 @@ require 'rollbar'
 require 'activejob/uniqueness'
 require 'link_thumbnailer'
 require 'rqrcode'
+require 'icalendar'
 
 module Schematics
   class Engine < ::Rails::Engine

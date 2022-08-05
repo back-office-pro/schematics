@@ -11,6 +11,7 @@ fr:
     edit: editer
     login: connexion
     logout: deconnexion
+    meetings: reunions
     messages: messages
     new: nouveau
     password_resets: mots-de-passe

@@ -39,6 +39,8 @@ module Schematics
           return %w[rounded-0 border-start-0 border-end-0] if siblings_resource_for?(resource, date)
           return %w[rounded-end border-start-0 me-2] if previous_resource_for?(resource, date)
           return %w[rounded-start border-end-0 ms-2] if next_resource_for?(resource, date)
+
+          %w[rounded]
         end
 
         def end_date = end_of_month_date
