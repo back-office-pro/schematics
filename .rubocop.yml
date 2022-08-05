@@ -146,7 +146,7 @@ Style/HashEachMethods:
 Style/EndlessMethod:
   EnforcedStyle: allow_always
 Metrics/BlockLength:
-  IgnoredMethods:
+  AllowedMethods:
     - describe
     - resource
     - after_bundle
@@ -167,7 +167,7 @@ Metrics/BlockLength:
     - each
 Metrics/MethodLength:
   Max: 37
-  IgnoredMethods:
+  AllowedMethods:
     - inherited
 Metrics/AbcSize:
   Max: 50
