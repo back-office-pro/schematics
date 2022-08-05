@@ -76,7 +76,7 @@ module Schematics
                 .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
                 .to(locale:, controller: 'imports', model_name:, action: :create)
             end
-            if can?(:update)
+            if can?(:update) && model_class != ::Comment
               is_expected
                 .to route(:get, edit_polymorphic_path(record))
                 .to(locale:, model_name:, controller:, id:, action: :edit)
