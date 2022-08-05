@@ -81,7 +81,7 @@ module Schematics
         end
 
         if can?(:show) && SHOW_DENYLIST.exclude?(model_class)
-          %i[html pdf svg].each do |as|
+          %i[html pdf svg ics].each do |as|
             it "should show #{as.upcase} record" do
               get(path(record:), headers:, as:)
               if ability.can?(:show, record)
