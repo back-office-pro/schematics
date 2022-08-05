@@ -19,6 +19,11 @@ after_bundle do
       host: <%= ENV["MAIN_DATABASE_HOST"] %>
   YAML
 
+  # Spring
+  run 'bundle exec spring binstub --all'
+  run 'bin/spring stop'
+  run 'bin/spring server &'
+
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
