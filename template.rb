@@ -20,7 +20,7 @@ after_bundle do
   YAML
 
   # Spring
-  run 'bundle exec spring binstub --all'
+  run 'bin/spring spring binstub --all'
   run 'bin/spring stop'
   run 'bin/spring server &'
 
