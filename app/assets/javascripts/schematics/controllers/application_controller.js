@@ -9,6 +9,10 @@ export default class extends Controller {
     }
   }
 
+  disableWith (event) {
+    event.target.querySelector('button[type="submit"]').disabled = true
+  }
+
   fetchAPI (url, method = 'GET', data) {
     const options = {
       method,
