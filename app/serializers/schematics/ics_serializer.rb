@@ -3,7 +3,7 @@
 module Schematics
   class IcsSerializer
     delegate :class, to: :@resource, prefix: :model, private: true
-    delegate :human_name, to: :model_class, private: true
+    delegate :human_name, :entity, to: :model_class, private: true
 
     def initialize(resource)
       @resource = resource
@@ -23,8 +23,8 @@ module Schematics
       @calendar ||= begin
         calendar = Icalendar::Calendar.new
         calendar.event do |event|
-          event.dtstart = Icalendar::Values::Date.new(@resource.try(:start_at) || ::Time.current)
-          event.dtend = Icalendar::Values::Date.new(@resource.try(:end_at) || ::Time.current)
+          event.dtstart = dtstart
+          event.dtend = dtend
           event.summary = @resource.try(:subject)
           event.description = @resource.try(:content).try(&:to_plain_text)
           event.url = @resource.try(:url)
@@ -32,6 +32,26 @@ module Schematics
         end
         calendar
       end
+    end
+
+    def calendar_end_attribute = entity
+      .datetime_attributes
+      .second
+      .name
+      .to_sym # TODO: could work randomly
+
+    def calendar_start_attribute = entity
+      .datetime_attributes
+      .first
+      .name
+      .to_sym # TODO: could work randomly
+
+    def dtend
+      Icalendar::Values::Date.new(@resource.try(calendar_end_attribute) || ::Time.current)
+    end
+
+    def dtstart
+      Icalendar::Values::Date.new(@resource.try(calendar_start_attribute) || ::Time.current)
     end
   end
 end
