@@ -43,6 +43,37 @@ module Schematics
       current_user.preferences.fetch(key.to_s, default)
     end
 
+    def resource_associations(resource:, only: nil)
+      resource
+        .class
+        .entity
+        .attachments_attributes
+        .map do |attribute|
+          resource
+            .public_send(attribute.name)
+            .preload(:blob)
+            .order(created_at: :desc)
+        end
+        .concat(
+          resource
+            .class
+            .entity
+            .has_many_and_through_and_belongs_to_many_associations
+            .select(&only)
+            .map do |association|
+              resource
+                .public_send(association.name)
+                .then_tap do |query|
+                  unless association.is_a?(Associations::HasAndBelongsToMany)
+                    query.preload(association.entity.includes)
+                  end
+                end
+                .accessible_by(current_ability)
+                .order(created_at: :desc)
+            end
+        ).compact_blank
+    end
+
     def rollbar_client_key_javascript = Schematics::Engine
       .credentials
       .rollbar[:client_key]
