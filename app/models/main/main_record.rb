@@ -11,9 +11,7 @@ module Main
     connects_to database: { writing: :main, reading: :main }
 
     class << self
-      def instance
-        find_by(tenant:)
-      end
+      def instance = find_by(tenant:)
 
       def tenant = Rails
         .application
