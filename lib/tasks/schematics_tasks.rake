@@ -12,7 +12,8 @@ namespace :schematics do
       .flat_map do |entity|
         [
           Schematics::Commands::CreateEntity.new(entity:),
-          Schematics::Commands::CreateEntityCounterCaches.new(entity:)
+          Schematics::Commands::CreateEntityCounterCaches.new(entity:),
+          Schematics::Commands::CreateEntityPolymorphicCounterCaches.new(entity:)
         ]
       end
       .sort_by(&:weight)

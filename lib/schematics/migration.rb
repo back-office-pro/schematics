@@ -48,6 +48,7 @@ module Schematics
         else
           @commands << Commands::CreateEntity.new(entity: new_entity)
           @commands << Commands::CreateEntityCounterCaches.new(entity: new_entity)
+          @commands << Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity)
         end
       end
     end
