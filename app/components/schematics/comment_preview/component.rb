@@ -3,7 +3,7 @@
 module Schematics
   module CommentPreview
     class Component < ApplicationComponent
-      delegate :content, :author, to: :@comment
+      delegate :content, :author, :created_at, to: :@comment
       with_collection_parameter :comment
 
       def initialize(comment:)
