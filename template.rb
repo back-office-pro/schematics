@@ -21,7 +21,7 @@ after_bundle do
 
   # Spring
   run 'bundle exec spring binstub --all'
-  run 'bin/spring stop'
+  run 'bundle exec spring stop'
   run 'bin/spring server &'
 
   # Rails commands
