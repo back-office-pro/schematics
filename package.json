@@ -14,7 +14,7 @@
     "file-saver": "2.0.5",
     "flag-icons": "6.6.4",
     "jquery": "3.6.0",
-    "puppeteer": "16.0.0",
+    "puppeteer": "16.1.0",
     "rollbar": "2.25.1",
     "slim-select": "1.27.1",
     "sortablejs": "1.15.0",
