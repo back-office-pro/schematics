@@ -4,7 +4,6 @@ module Schematics
   module Viewer
     module Comments
       class Component < ApplicationComponent
-        delegate :comments, to: :@resource
         delegate :size, to: :comments
         delegate :entity, :human_name, to: :model_class
         delegate :icon, to: :entity
@@ -13,6 +12,12 @@ module Schematics
           super
           @resource = resource
         end
+
+        def comments = @resource
+          .comments
+          .with_rich_text_content_and_embeds
+          .preload(:author)
+          .order(created_at: :desc)
 
         def model_class = ::Comment
 
