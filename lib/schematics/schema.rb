@@ -60,6 +60,10 @@ module Schematics
         .each(&context)
     end
 
+    def polymorphic_associations = entities
+      .flat_map(&:association_attributes)
+      .select(&:polymorphic?)
+
     def root_route
       return 'dashboard#home' if valid?
 
@@ -96,12 +100,11 @@ module Schematics
         attribute.inverse_entity = find_entity_by_name(attribute.association_type)
       end
 
-    def add_inverse_entity_to_polymorphic_association_attributes = entities
-      .flat_map(&:association_attributes)
-      .select(&:polymorphic?)
-      .each do |attribute|
+    def add_inverse_entity_to_polymorphic_association_attributes
+      polymorphic_associations.each do |attribute|
         attribute.inverse_entity = entities.first
       end
+    end
 
     # :reek:FeatureEnvy
     def add_has_and_belongs_to_many_associations = entities
@@ -132,12 +135,7 @@ module Schematics
       entities.each do |entity|
         entity
           .associations
-          .push(
-            *entities
-              .flat_map(&:association_attributes)
-              .select(&:polymorphic?)
-              .map(&:inverse_association)
-          )
+          .push(*polymorphic_associations.map(&:inverse_association))
       end
     end
 
