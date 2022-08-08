@@ -60,17 +60,31 @@ module Schematics
           #{name}&.to_s
         RUBY
 
-      def to_str = <<~RUBY
-        belongs_to :#{name},
-                   -> { with_deleted },
-                   class_name: '#{class_name}',
-                   foreign_key: '#{column_name}',
-                   inverse_of: :#{inverse_association_name.pluralize},
-                   optional: #{!required?},
-                   polymorphic: #{polymorphic?},
-                   autosave: true,
-                   counter_cache: :#{inverse_association_name.pluralize}_count
-      RUBY
+      def to_str
+        if polymorphic?
+          <<~RUBY
+            belongs_to :#{name},
+                       -> { with_deleted },
+                       foreign_key: '#{column_name}',
+                       inverse_of: :#{inverse_association_name.pluralize},
+                       optional: #{!required?},
+                       polymorphic: true,
+                       autosave: true,
+                       counter_cache: :#{inverse_association_name.pluralize}_count
+          RUBY
+        else
+          <<~RUBY
+            belongs_to :#{name},
+                       -> { with_deleted },
+                       class_name: '#{class_name}',
+                       foreign_key: '#{column_name}',
+                       inverse_of: :#{inverse_association_name.pluralize},
+                       optional: #{!required?},
+                       autosave: true,
+                       counter_cache: :#{inverse_association_name.pluralize}_count
+          RUBY
+        end
+      end
 
       def inverse_association
         @inverse_association ||= Associations::Association.build(belongs_to: self, **inverse)

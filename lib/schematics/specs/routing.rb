@@ -20,6 +20,7 @@ module Schematics
 
         let(:record) { default.tap(&:save!) }
         let(:id) { record.slug || record.id }
+        let(:parent_id) { :"#{model_class.model_name.param_key}_id" }
 
         case entity
         when Entities::Singleton
@@ -54,10 +55,10 @@ module Schematics
                 .to(locale:, model_name:, controller:, action: :show, id:)
               is_expected
                 .to route(:get, new_polymorphic_path([record, ::Comment]))
-                .to(locale:, controller: 'comments', model_name:, id:, action: :new)
+                .to(locale:, controller: 'comments', model_name:, parent_id => id, action: :new)
               is_expected
                 .to route(:post, polymorphic_path([record, ::Comment]))
-                .to(locale:, controller: 'comments', model_name:, id:, action: :create)
+                .to(locale:, controller: 'comments', model_name:, parent_id => id, action: :create)
             end
             if can?(:create)
               is_expected

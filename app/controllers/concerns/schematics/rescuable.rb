@@ -77,13 +77,5 @@ module Schematics
         end
       end
     end
-
-    protected
-
-    def index_path
-      return polymorphic_path(model_class) if can?(:index, model_class)
-
-      schematics.root_path
-    end
   end
 end

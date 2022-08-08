@@ -37,14 +37,12 @@ module Schematics
       result = Resources::Archive.call(resource: @resource)
       if result.success?
         respond_to do |format|
-          format.html do
-            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
-          end
+          format.html { redirect_to index_path, notice: tscope(result.message) }
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.html { redirect_to index_path, alert: tscope(result.message) }
           format.json { render json: tscope(result.message), status: :server_error }
         end
       end
@@ -62,9 +60,7 @@ module Schematics
       result = Resources::Create.call(resource: @resource)
       if result.success?
         respond_to do |format|
-          format.html do
-            redirect_to @resource, notice: tscope(result.message)
-          end
+          format.html { redirect_to create_redirect_path, notice: tscope(result.message) }
           format.json { render json: @resource, status: :created, location: @resource }
         end
       else
@@ -85,15 +81,13 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(model_class),
-                        notice: tscope(result.message),
-                        status: :see_other
+            redirect_to index_path, notice: tscope(result.message), status: :see_other
           end
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.html { redirect_to index_path, alert: tscope(result.message) }
           format.json { render json: tscope(result.message), status: :server_error }
         end
       end
@@ -147,14 +141,12 @@ module Schematics
       result = Resources::Restore.call(resource: @resource)
       if result.success?
         respond_to do |format|
-          format.html do
-            redirect_to polymorphic_path(model_class), notice: tscope(result.message)
-          end
+          format.html { redirect_to index_path, notice: tscope(result.message) }
           format.json
         end
       else
         respond_to do |format|
-          format.html { redirect_to polymorphic_path(model_class), alert: tscope(result.message) }
+          format.html { redirect_to index_path, alert: tscope(result.message) }
           format.json { render json: tscope(result.message), status: :server_error }
         end
       end
@@ -203,7 +195,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
+            redirect_to update_redirect_path, notice: tscope(result.message)
           end
           format.json
         end
@@ -226,13 +218,20 @@ module Schematics
 
     protected
 
+    def create_redirect_path = polymorphic_path(@resource)
+
     def i18n_title_path = 'schematics.resources'
+
+    def index_path
+      return polymorphic_path(model_class) if can?(:index, model_class)
+
+      schematics.root_path
+    end
 
     def set_breadcrumb
       return unless can?(:index, model_class)
 
-      breadcrumb t('titles.schematics.resources.index', human_name_plural:),
-                 polymorphic_path(model_class)
+      breadcrumb t('titles.schematics.resources.index', human_name_plural:), index_path
     end
 
     def set_resource
@@ -264,5 +263,7 @@ module Schematics
         **kwargs.merge(human_name:, gender:)
       )
     end
+
+    alias update_redirect_path create_redirect_path
   end
 end

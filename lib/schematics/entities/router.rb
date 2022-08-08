@@ -124,9 +124,7 @@ module Schematics
         return unless can?(:show)
 
         <<~RUBY
-          member do
-            resources :comments, only: %i[new create edit update], as: '#{table_name}_comments'
-          end
+          resources :comments, only: %i[new create edit update], shallow: true
         RUBY
       end
     end

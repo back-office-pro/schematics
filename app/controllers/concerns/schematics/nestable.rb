@@ -25,11 +25,11 @@ module Schematics
       .entities
       .map { [_1.class_name, _1.model_class] }
       .to_h
-      .fetch(params[:model_name])
+      .fetch(parent_model_name)
 
-    def record
-      parent_model_class.finder(params[:id])
-    end
+    def parent_model_name = params[:model_name]
+
+    def record = parent_model_class.finder(params[:"#{parent_model_class.model_name.param_key}_id"])
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)

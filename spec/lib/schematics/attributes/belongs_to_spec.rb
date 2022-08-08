@@ -67,7 +67,6 @@ describe Schematics::Attributes::BelongsTo do
                  foreign_key: 'schema_id',
                  inverse_of: :entities,
                  optional: true,
-                 polymorphic: false,
                  autosave: true,
                  counter_cache: :entities_count
     RUBY
@@ -88,7 +87,6 @@ describe Schematics::Attributes::BelongsTo do
                    foreign_key: 'schema_id',
                    inverse_of: :entities,
                    optional: false,
-                   polymorphic: false,
                    autosave: true,
                    counter_cache: :entities_count
       RUBY
@@ -106,7 +104,6 @@ describe Schematics::Attributes::BelongsTo do
       is_expected.to eq <<~RUBY
         belongs_to :schema,
                    -> { with_deleted },
-                   class_name: 'Schema',
                    foreign_key: 'schema_id',
                    inverse_of: :entities,
                    optional: true,

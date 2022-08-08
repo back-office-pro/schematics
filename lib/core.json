@@ -769,7 +769,10 @@
         "name": "author",
         "type": "references",
         "options": {
-          "required": true
+          "required": true,
+          "inverse": {
+            "name": "created_comments"
+          }
         }
       }
     ]
