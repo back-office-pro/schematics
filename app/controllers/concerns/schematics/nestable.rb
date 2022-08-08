@@ -9,7 +9,6 @@ module Schematics
       helper_method :record
       delegate :human_name,
                :human_name_plural,
-               :model_name,
                to: :parent_model_class,
                prefix: :parent,
                allow_nil: true
@@ -34,7 +33,7 @@ module Schematics
 
     def record
       @resource.try(:record) ||
-        parent_model_class.finder(params[:"#{parent_model_name.param_key}_id"])
+        parent_model_class.finder(params[:"#{parent_model_class.model_name.param_key}_id"])
     end
 
     def set_breadcrumb
