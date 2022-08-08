@@ -9,6 +9,7 @@ module Schematics
       helper_method :record
       delegate :human_name,
                :human_name_plural,
+               :model_name,
                to: :parent_model_class,
                prefix: :parent,
                allow_nil: true
@@ -25,10 +26,15 @@ module Schematics
       .entities
       .map { [_1.class_name, _1.model_class] }
       .to_h
-      .fetch(params[:model_name])
+      .fetch(parent_model_name)
+
+    def parent_model_name
+      @resource.try(:record_type) || params[:model_name]
+    end
 
     def record
-      parent_model_class.finder(params[:id])
+      @resource.try(:record) ||
+        parent_model_class.finder(params[:"#{parent_model_name.param_key}_id"])
     end
 
     def set_breadcrumb
