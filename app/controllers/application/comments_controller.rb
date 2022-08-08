@@ -8,8 +8,10 @@ module Application
       include Schematics::Nestable
     end
 
-    def resource_defaults
-      super.merge(record:)
-    end
+    def create_redirect_path = polymorphic_path(record)
+
+    def resource_defaults = super.merge(record:)
+
+    def update_redirect_path = polymorphic_path(record)
   end
 end
