@@ -27,14 +27,9 @@ module Schematics
       .to_h
       .fetch(parent_model_name)
 
-    def parent_model_name
-      @resource.try(:record_type) || params[:model_name]
-    end
+    def parent_model_name = params[:model_name]
 
-    def record
-      @resource.try(:record) ||
-        parent_model_class.finder(params[:"#{parent_model_class.model_name.param_key}_id"])
-    end
+    def record = parent_model_class.finder(params[:"#{parent_model_class.model_name.param_key}_id"])
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)
