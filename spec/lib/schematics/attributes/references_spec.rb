@@ -77,7 +77,6 @@ describe Schematics::Attributes::References do
                  foreign_key: 'user_id',
                  inverse_of: :entities,
                  optional: true,
-                 polymorphic: false,
                  autosave: true,
                  counter_cache: :entities_count
     RUBY
@@ -101,7 +100,6 @@ describe Schematics::Attributes::References do
                    foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: false,
-                   polymorphic: false,
                    autosave: true,
                    counter_cache: :entities_count
       RUBY
@@ -122,7 +120,6 @@ describe Schematics::Attributes::References do
       is_expected.to eq <<~RUBY
         belongs_to :user,
                    -> { with_deleted },
-                   class_name: 'User',
                    foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: true,
