@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module ApplicationHelper
+  module ApplicationHelper # rubocop:disable Metrics/ModuleLength
     include Pagy::Frontend
 
     def current_draft
@@ -38,6 +38,34 @@ module Schematics
     def maps_api_key_javascript = settings(:google_cloud_api_key)
       .to_json
       .html_safe # rubocop:disable Rails/OutputSafety
+
+    def new_polymorphic_path(record_or_hash_or_array, options = {})
+      case record_or_hash_or_array
+      in [resource, model_class]
+        case resource
+        when Singleton # rubocop:disable Lint/ConstantResolution
+          super [resource.class.model_name.route_key.to_sym, model_class], options
+        else
+          super
+        end
+      else
+        super
+      end
+    end
+
+    def polymorphic_path(record_or_hash_or_array, options = {})
+      case record_or_hash_or_array
+      in [resource, model_class]
+        case resource
+        when Singleton # rubocop:disable Lint/ConstantResolution
+          super [resource.class.model_name.route_key.to_sym, model_class], options
+        else
+          super
+        end
+      else
+        super
+      end
+    end
 
     def preferences(key, default = nil)
       current_user.preferences.fetch(key.to_s, default)
