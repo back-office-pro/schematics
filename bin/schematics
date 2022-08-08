@@ -15,4 +15,4 @@ time rails new $app_name \
                --skip-test \
                --template template.rb \
                --dummy-app=$dummy_app \
-               &> log/build.log
+               &> log/$app_name.log
