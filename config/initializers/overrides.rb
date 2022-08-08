@@ -6,6 +6,7 @@ require 'rails/generators/active_record/migration/migration_generator'
 require 'active_record/migration'
 require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_support/dependencies'
+require 'view_component/renders_one_form'
 require 'open_api/router'
 
 GeneratedAttribute = Schematics::Patches::Rails::Generators::GeneratedAttribute
@@ -19,7 +20,7 @@ ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
-ActiveSupport::Dependencies.singleton_class.attr_writer(:mechanism) # Spring
+ActiveSupport::Dependencies.singleton_class.attr_writer(:mechanism) # https://github.com/rails/spring/issues/649
 
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 

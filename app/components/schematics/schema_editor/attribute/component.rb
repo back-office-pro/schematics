@@ -4,9 +4,8 @@ module Schematics
   module SchemaEditor
     module Attribute
       class Component < ApplicationComponent
-        prepend ViewComponent::GlobalOutputBuffer
-
         DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
+        renders_one_form :builder
 
         def initialize(builder:)
           super

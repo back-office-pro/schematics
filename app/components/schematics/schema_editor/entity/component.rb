@@ -4,8 +4,8 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        prepend ViewComponent::GlobalOutputBuffer
         delegate :default_actions, :actions, :icon, to: '@builder.object'
+        renders_one_form :builder
 
         def initialize(builder:)
           super

@@ -4,7 +4,7 @@ module Schematics
   module SchemaEditor
     module Trigger
       class Component < ApplicationComponent
-        prepend ViewComponent::GlobalOutputBuffer
+        renders_one_form :builder
 
         def initialize(builder:)
           super

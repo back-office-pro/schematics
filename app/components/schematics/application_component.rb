@@ -2,6 +2,7 @@
 
 module Schematics
   class ApplicationComponent < ViewComponent::Base
+    include ViewComponent::RendersOneForm
     include Pagy::Backend
     include Turbo::StreamsHelper
     include Turbo::FramesHelper

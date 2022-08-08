@@ -4,8 +4,8 @@ module Schematics
   module SchemaEditor
     module Options
       class Component < ApplicationComponent
-        prepend ViewComponent::GlobalOutputBuffer
         delegate :available_options, to: '@builder.object'
+        renders_one_form :builder
 
         def initialize(builder:)
           super

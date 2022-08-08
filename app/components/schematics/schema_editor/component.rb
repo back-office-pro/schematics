@@ -3,8 +3,6 @@
 module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
-      prepend ViewComponent::GlobalOutputBuffer
-
       def data = {
         'auto-save-target': 'form',
         'nested-form-target': 'form'
