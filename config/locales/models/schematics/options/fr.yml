@@ -3,6 +3,7 @@ fr:
   activemodel:
     attributes:
       schematics/options:
+        descriptor: Descripteur
         actions: Actions
         aspect_ratio: Ratio d'aspect
         cached: En cache
