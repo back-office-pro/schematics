@@ -3,7 +3,6 @@ en:
   activemodel:
     attributes:
       schematics/options:
-        descriptor: Descriptor
         actions: Actions
         aspect_ratio: Aspect ratio
         cached: Cached
@@ -11,6 +10,7 @@ en:
         content_type: Content type
         default: Default value
         depends_on: Depends on
+        descriptor: Descriptor
         encrypted: Encrypted
         equal_to: Equal to
         events: Events
