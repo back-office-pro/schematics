@@ -4,7 +4,11 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        delegate :default_actions, :actions, :icon, to: '@builder.object'
+        delegate :default_actions,
+                 :actions,
+                 :icon,
+                 :fields,
+                 to: '@builder.object'
         renders_one_form :builder
 
         def initialize(builder:)
@@ -12,9 +16,11 @@ module Schematics
           @builder = builder
         end
 
-        def collection
+        def actions_collection
           default_actions.map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
         end
+
+        def descriptors_collection = fields.map(&:name)
 
         def icons
           YAML

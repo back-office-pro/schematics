@@ -38,6 +38,8 @@ module Schematics
         end
       end
 
+      alias options_attributes= options=
+
       def available_options = []
 
       def open_api_type = ::String

@@ -50,6 +50,7 @@ module Schematics
       alias virtuals_attributes= virtuals=
       alias triggers_attributes= triggers=
       alias associations_attributes= associations=
+      alias options_attributes= options=
 
       def descriptor
         Descriptor.new(entity: self, field_name: options.descriptor)

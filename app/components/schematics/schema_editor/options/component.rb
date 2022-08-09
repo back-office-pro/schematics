@@ -25,7 +25,7 @@ module Schematics
           depends_on: :string,
           encrypted: :boolean,
           equal_to: :string,
-          events: :select,
+          events: :jsonb,
           greater_than: :string,
           greater_than_or_equal_to: :string,
           height: :string,
@@ -47,7 +47,7 @@ module Schematics
           type: :string,
           unique: :boolean,
           unit: :string,
-          values: :select,
+          values: :jsonb,
           width: :string
         }
 

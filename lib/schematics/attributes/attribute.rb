@@ -28,6 +28,8 @@ module Schematics
         end
       end
 
+      alias options_attributes= options=
+
       def id
         @id ||= SecureRandom.uuid
       end
