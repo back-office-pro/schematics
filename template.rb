@@ -19,10 +19,9 @@ after_bundle do
       host: <%= ENV["MAIN_DATABASE_HOST"] %>
   YAML
 
-  # Spring
+  # Start Spring
   run 'bundle exec spring binstub --all'
-  run 'bundle exec spring stop'
-  run 'bin/spring server &'
+  run 'bundle exec spring server &'
 
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
@@ -71,4 +70,7 @@ after_bundle do
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'
+
+  # Stop Spring
+  run 'bundle exec spring stop'
 end

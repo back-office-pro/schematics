@@ -7,6 +7,7 @@ module Schematics
     # :reek:UncommunicativeVariableName
     def perform(schema_dataset = ::SchemaDataset.scheduled.last)
       system "pg_dump -F t #{current_database} > migration_#{migration_time}.tar"
+      system 'bundle exec spring server &'
       schema_dataset
         .migration_commands
         .flat_map(&:execute)
@@ -19,6 +20,7 @@ module Schematics
       system 'rails js:routes'
       system 'git add -A'
       system "git commit -m 'Migration #{schema_dataset.id}'"
+      system 'bundle exec spring stop'
     rescue StandardError => e
       schema_dataset.update_column(:state, 3) # rubocop:disable Rails/SkipsModelValidations
       raise e
