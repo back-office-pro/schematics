@@ -58,6 +58,7 @@ require 'activejob/uniqueness'
 require 'link_thumbnailer'
 require 'rqrcode'
 require 'icalendar'
+require 'dry/transformer'
 
 module Schematics
   class Engine < ::Rails::Engine
