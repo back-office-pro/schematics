@@ -20,7 +20,7 @@ module Schematics
           aspect_ratio: :string,
           cached: :boolean,
           confirm: :boolean,
-          content_type: :select,
+          content_type: :array,
           default: :string,
           depends_on: :string,
           encrypted: :boolean,
