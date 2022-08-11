@@ -21,7 +21,6 @@ after_bundle do
 
   # Start Spring
   run 'bundle exec spring binstub --all'
-  run 'bundle exec spring server &'
 
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
@@ -42,9 +41,11 @@ after_bundle do
   rails_command 'js:routes'
 
   # Edit .gitignore
-  append_to_file '.gitignore', '/doc'
-  append_to_file '.gitignore', '/app/javascript/routes.js'
-  append_to_file '.gitignore', '/migration_*.tar'
+  append_to_file '.gitignore', <<~TEXT
+    /doc
+    /app/javascript/routes.js
+    /migration_*.tar
+  TEXT
 
   # Remove public html files
   remove_file 'public/404.html'
@@ -71,7 +72,4 @@ after_bundle do
 
   # Database checks
   rails_command 'schematics:db:active_record_doctor'
-
-  # Stop Spring
-  run 'bundle exec spring stop'
 end
