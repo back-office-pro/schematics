@@ -2,17 +2,13 @@
 
 if [ -z $1 ]
 then
-    app_name="spec/dummy"
-    dummy_app="true"
-    rm -rf $app_name
+    rm -rf spec/dummy
+    time rails new spec/dummy \
+                   --database postgresql \
+                   --skip-test \
+                   --template template.rb \
+                   --dummy-app=true \
+                   &> log/build.log
 else
-    app_name=$1
-    dummy_app="false"
+    rails new $1 --database postgresql --skip-test --template template.rb &> log/$1.log
 fi
-
-time rails new $app_name \
-               --database postgresql \
-               --skip-test \
-               --template template.rb \
-               --dummy-app=$dummy_app \
-               &> log/$app_name.log
