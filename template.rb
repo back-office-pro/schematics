@@ -44,6 +44,7 @@ after_bundle do
   # Edit .gitignore
   append_to_file '.gitignore', '/doc'
   append_to_file '.gitignore', '/app/javascript/routes.js'
+  append_to_file '.gitignore', '/migration_*.tar'
 
   # Remove public html files
   remove_file 'public/404.html'
