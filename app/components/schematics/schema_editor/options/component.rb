@@ -25,7 +25,7 @@ module Schematics
           depends_on: :string,
           encrypted: :boolean,
           equal_to: :string,
-          events: :array,
+          events: :schema_editor_options_events,
           greater_than: :string,
           greater_than_or_equal_to: :string,
           height: :string,

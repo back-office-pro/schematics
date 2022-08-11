@@ -1,0 +1,15 @@
+- events.each do |event|
+  = @builder.simple_fields_for :events, event do |events_form|
+    = events_form.input :name,
+                        input_html: { value: event[:name], name: "#{events_form.object_name}[][name]" }
+    = events_form.input :icon,
+                        required: false,
+                        input_html: { value: event[:icon], name: "#{events_form.object_name}[][icon]" }
+    - Array(event[:from]).each do |value|
+      = events_form.input :from,
+                          input_html: { value:, name: "#{events_form.object_name}[][from][]" }
+    = events_form.input :to,
+                        input_html: { value: event[:to], name: "#{events_form.object_name}[][to]" }
+    = events_form.input :callback,
+                        required: false,
+                        input_html: { value: event[:callback], name: "#{events_form.object_name}[][callback]" }
