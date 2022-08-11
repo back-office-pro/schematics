@@ -19,7 +19,7 @@ module Application
 
     def after_migrate
       Schematics::MigrateSchemaJob.perform_later(self) do
-        Schematics::Schema.instance.load(data.to_json)
+        Schematics::Schema.instance.load(data.to_json) if migrated?
       end
     end
 
