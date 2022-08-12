@@ -20,7 +20,7 @@ module Application
     end
 
     def value_formatted
-      format(value) || '-'
+      format(value) || value || '-'
     end
 
     private
