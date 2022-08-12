@@ -4,7 +4,6 @@ pin 'chartkick', to: 'chartkick.js', preload: true
 pin 'Chart.bundle', to: 'Chart.bundle.js', preload: true
 pin 'schematics/application'
 pin 'pagy-module'
-pin 'routes'
 
 pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schematics', 'controllers'), # rubocop:disable Layout/LineLength
              under: 'controllers',

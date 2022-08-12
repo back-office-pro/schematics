@@ -1,7 +1,6 @@
 import ApplicationController from './application_controller'
-import { draftsEn, draftEn } from 'routes'
 
-/* global FormData, File */
+/* global FormData, File, routes */
 
 export default class extends ApplicationController {
   static get targets () {
@@ -24,10 +23,10 @@ export default class extends ApplicationController {
 
   async save () {
     if (Object.keys(this.draftValue).length === 0) {
-      const response = await this.fetchAPI(draftsEn(), 'POST', this.params)
+      const response = await this.fetchAPI(routes.drafts, 'POST', this.params)
       this.draftValue = await response.json()
     } else {
-      this.fetchAPI(draftEn(this.draftValue.id), 'PUT', this.params)
+      this.fetchAPI(this.url, 'PUT', this.params)
     }
     this.hasRestoreButtonTarget && this.hideRestoreButton()
     this.buttonTarget.classList.remove('d-none')
@@ -49,7 +48,7 @@ export default class extends ApplicationController {
   }
 
   clear () {
-    this.fetchAPI(draftEn(this.draftValue.id), 'DELETE')
+    this.fetchAPI(this.url, 'DELETE')
   }
 
   hideRestoreButton () {
@@ -63,6 +62,10 @@ export default class extends ApplicationController {
         data: this.filteredFormData
       }
     }
+  }
+
+  get url () {
+    return [routes.drafts, this.draftValue.id].join('/')
   }
 
   get formData () {

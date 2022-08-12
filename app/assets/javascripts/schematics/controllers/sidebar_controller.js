@@ -1,5 +1,6 @@
 import ApplicationController from './application_controller'
-import { schematicsPreferencesEn } from 'routes'
+
+/* global routes */
 
 export default class extends ApplicationController {
   toggle () {
@@ -7,6 +8,6 @@ export default class extends ApplicationController {
     this.element.querySelectorAll('.d-none').forEach(_ => _.classList.toggle('d-md-block'))
     document.querySelector('.content').classList.toggle('toggled')
     const sidebarToggled = this.element.classList.contains('toggled')
-    this.fetchAPI(schematicsPreferencesEn(), 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
+    this.fetchAPI(routes.preferences, 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
   }
 }
