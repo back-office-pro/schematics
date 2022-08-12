@@ -20,8 +20,6 @@ ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
-ActiveSupport::Dependencies.singleton_class.attr_writer(:mechanism) # https://github.com/rails/spring/issues/649
-
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
