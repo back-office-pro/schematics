@@ -1,14 +1,12 @@
-.col-xl-2.col-md-4.schema-editor-attribute
-  .card.border-0.animate__animated.animate__zoomIn
-    .card-body
-      .text-center.mb-2
-        = fa_icon icon, size: '2x', class: 'text-primary'
-      = @builder.hidden_field :id
-      = @builder.input :name
-      = @builder.input :type,
-                       as: :select,
-                       collection:,
-                       include_blank: false,
-                       input_html: { data: { controller: 'dropdown' } }
-      = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
-      = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)
+.col-xl-4.col-md-6.schema-editor-attribute
+  .text-center.mb-2
+    = fa_icon icon, size: '2x', class: 'text-primary'
+  = @builder.hidden_field :id
+  = @builder.input :name
+  = @builder.input :type,
+                   as: :select,
+                   collection:,
+                   include_blank: false,
+                   input_html: { data: { controller: 'dropdown' } }
+  = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
+  = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)
