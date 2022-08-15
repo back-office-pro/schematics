@@ -34,7 +34,7 @@ module Schematics
                   target: new_attribute.name
                 )
               end
-              if current_attribute.type != new_attribute.type
+              if current_attribute.database_type != new_attribute.database_type
                 @build_commands << Commands::ChangeAttribute.new(
                   entity: new_entity,
                   attribute: new_attribute.name
