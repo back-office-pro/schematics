@@ -7,6 +7,8 @@ module Schematics
     class Token < Attribute
       def default = SecureRandom.base58
 
+      def icon = :key
+
       def to_str = <<~RUBY
         has_secure_token :#{name}
       RUBY
