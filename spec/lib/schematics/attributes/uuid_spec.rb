@@ -15,5 +15,6 @@ describe Schematics::Attributes::Uuid do
   its(:column_name) { is_expected.to eq('id') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
+  its(:icon) { is_expected.to eq(:id_card) }
   its(:validators) { is_expected.to be_empty }
 end

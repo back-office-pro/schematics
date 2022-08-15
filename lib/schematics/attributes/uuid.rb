@@ -8,6 +8,8 @@ module Schematics
       include Behaviours::Renderable
 
       def default = SecureRandom.uuid
+
+      def icon = :id_card
     end
   end
 end
