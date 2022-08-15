@@ -9,6 +9,10 @@ module Schematics
     class Descriptor
       include ::ActiveModel::API
 
+      validates :name,
+                allow_blank: true,
+                inclusion: { in: proc { entity.fields.map(&:name) } }
+
       delegate :name, :entity, :to_sql, to: :field
       attr_accessor :entity
       attr_writer :field_name
