@@ -1,7 +1,9 @@
 .col-xl-4.col-md-6.schema-editor-virtual
-  .text-center.mb-2
-    = fa_icon icon, size: '2x', class: 'text-primary'
-  = @builder.input :name
-  = @builder.input :function
-  = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-virtual')
-  = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)
+  .card.shadow-sm.border-0.animate__animated.animate__zoomIn
+    .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+      = render Schematics::CardHeading::Component.new(icon:, title: t('.title'))
+    .card-body
+      = @builder.input :name
+      = @builder.input :function
+      = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-virtual')
+      = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)

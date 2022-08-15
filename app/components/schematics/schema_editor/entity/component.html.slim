@@ -1,31 +1,37 @@
 .col-xl-4.col-md-6.schema-editor-entity
-  = render Schematics::SchemaEditor::Button::AddDropdown::Component.new(builder: @builder)
-  = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
-  = @builder.hidden_field :id
-  = @builder.input :name
-  = @builder.simple_fields_for :options do |options_form|
-    = options_form.input :descriptor,
-                         as: :select,
-                         collection: descriptors_collection
-    = options_form.input :actions,
-                         as: :select,
-                         collection: actions_collection,
-                         selected: actions,
-                         include_hidden: false,
-                         input_html: { multiple: true, data: { controller: 'dropdown' } }
-    = options_form.input :icon,
-                         as: :select,
-                         input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
-  .row.g-3
+  .card.shadow-sm.border-0.animate__animated.animate__zoomIn
+    .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+      .row.align-items-center
+        .col.text-truncate
+          = render Schematics::CardHeading::Component.new(icon: ::SchemaDataset.entity.icon, title: t('.title'))
+        .col-auto
+          = render Schematics::SchemaEditor::Button::AddDropdown::Component.new(builder: @builder)
+          = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
+    .card-body
+      = @builder.hidden_field :id
+      = @builder.input :name
+      = @builder.simple_fields_for :options do |options_form|
+        = options_form.input :descriptor
+        = options_form.input :actions,
+                            as: :select,
+                            collection: actions_collection,
+                            selected: actions,
+                            include_hidden: false,
+                            input_html: { multiple: true, data: { controller: 'dropdown' } }
+        = options_form.input :icon,
+                            as: :select,
+                            input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
+  .row.g-3.mt-1
     = @builder.simple_fields_for :attributes do |builder|
       = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
-    template id="schema-editor-attribute-#{@builder.index}" data-nested-form-target='templates'
-      = @builder.simple_fields_for :attributes, Schematics::Attributes::Attribute.new, child_index: 'NEW_RECORD' do |builder|
-        = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
+    - attribute_constants_collection.each do |constant|
+      template id="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}-#{@builder.index}" data-nested-form-target='templates'
+        = @builder.simple_fields_for :attributes, constant.new, child_index: 'NEW_RECORD' do |builder|
+          = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
     = @builder.simple_fields_for :virtuals do |builder|
       = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
     template id="schema-editor-virtual-#{@builder.index}" data-nested-form-target='templates'
-      = @builder.simple_fields_for :virtuals, Schematics::Virtuals::Virtual.new, child_index: 'NEW_RECORD' do |builder|
+      = @builder.simple_fields_for :virtuals, Schematics::Virtuals::Calculation.new, child_index: 'NEW_RECORD' do |builder|
         = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
     = @builder.simple_fields_for :triggers do |builder|
       = render Schematics::SchemaEditor::Trigger::Component.new(builder:)

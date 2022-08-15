@@ -1,13 +1,11 @@
 = @builder.simple_fields_for :options do |options_form|
-  button.btn.btn-sm.btn-icon-split.ms-2 {
+  button.btn.ms-2 {
     type='button'
     data-bs-toggle='collapse'
     data-bs-target="##{id}"
     aria-expanded='false'
     aria-controls=id
-  }
-    span.icon = fa_icon :gear
-    span.text = t('.text')
+  } = fa_icon :gear
   .collapse.mt-3 id=id
     - available_options.each do |option|
       = options_form.input option,
