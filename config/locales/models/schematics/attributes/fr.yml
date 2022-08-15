@@ -9,8 +9,8 @@ fr:
       schematics/attributes/action: Action
       schematics/attributes/address: Adresse
       schematics/attributes/array: Tableau
-      schematics/attributes/attachment: Attachement
-      schematics/attributes/attachments: Attachements
+      schematics/attributes/attachment: Document
+      schematics/attributes/attachments: Documents
       schematics/attributes/belongs_to: Association
       schematics/attributes/blob: Blob
       schematics/attributes/boolean: Booléen
@@ -18,7 +18,7 @@ fr:
       schematics/attributes/citext: Texte insensible à la casse
       schematics/attributes/color: Couleur
       schematics/attributes/country: Pays
-      schematics/attributes/currency: Devis
+      schematics/attributes/currency: Devise
       schematics/attributes/date: Date
       schematics/attributes/datetime: Date et heure
       schematics/attributes/decimal: Nombre à virgule (decimal)
