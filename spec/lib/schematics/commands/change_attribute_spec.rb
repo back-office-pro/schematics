@@ -6,9 +6,9 @@ describe Schematics::Commands::ChangeAttribute do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'first_name' }
 
-  its(:execute) do
-    is_expected.to eq <<~SHELL
-      rails generate migration change_first_name_in_clients schema:client_first_name
-    SHELL
+  describe '#generators' do
+    subject { command.generators }
+
+    its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
   end
 end

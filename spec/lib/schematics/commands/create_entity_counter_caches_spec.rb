@@ -24,17 +24,15 @@ describe Schematics::Commands::CreateEntityCounterCaches do
     ]
   end
 
-  its(:execute) do
-    is_expected.to eq(
-      [
-        'rails generate migration add_assemblies_count_to_users assemblies_count:integer'
-      ]
-    )
-  end
+  describe '#generators' do
+    subject { command.generators }
 
-  context 'when entity class is already defined' do
-    let(:name) { 'object' }
+    its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
 
-    its(:execute) { is_expected.to be_empty }
+    context 'when entity class is already defined' do
+      let(:name) { 'object' }
+
+      it { is_expected.to be_empty }
+    end
   end
 end

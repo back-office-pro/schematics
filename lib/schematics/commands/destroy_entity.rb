@@ -1,21 +1,69 @@
 # frozen_string_literal: true
 
+require 'rails/generators'
+require 'rails/generators/rails/scaffold_controller/scaffold_controller_generator'
+require 'rails/generators/rails/scaffold/scaffold_generator'
+require 'rails/generators/rails/migration/migration_generator'
+require 'generators/rspec/feature/feature_generator'
+require 'generators/locales/locales_generator'
+require 'generators/permissions/permissions_generator'
+
 module Schematics
   module Commands
     class DestroyEntity < Command
-      def execute = [
-        "rails destroy scaffold #{name} --skip-migration --skip-resource-route",
-        "rails destroy rspec:feature #{name}",
-        "rails destroy locales #{name}",
-        "rails generate migration drop_#{table_name.pluralize} #{migratable_attributes}",
-        "rails 'schematics:permissions:destroy[#{class_name}]'"
-      ]
+      def generators
+        return [scaffold_controller_generator] if model_exists?
+
+        [
+          scaffold_generator,
+          feature_generator,
+          locales_generator,
+          permissions_generator,
+          migration_generator
+        ].compact.flatten
+      end
 
       private
 
-      def migratable_attributes = super
-        .map(&:to_s)
-        .join(' ')
+      def feature_generator
+        Rspec::Generators::FeatureGenerator.new([name], [], behavior: :revoke)
+      end
+
+      def locales_generator
+        return if core?
+
+        LocalesGenerator.new([name], [], behavior: :revoke)
+      end
+
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "drop_#{table_name.pluralize}",
+          *migratable_attributes.map(&:to_s)
+        ]
+      )
+
+      def permissions_generator
+        return if core?
+
+        PermissionsGenerator.new([name], [], behavior: :revoke)
+      end
+
+      def scaffold_controller_generator
+        Rails::Generators::ScaffoldControllerGenerator.new(
+          [name],
+          ['--skip-resource-route', '--skip-migration'],
+          behavior: :revoke
+        )
+      end
+
+      def scaffold_generator = Rails::Generators::ScaffoldGenerator.new(
+        [
+          name,
+          *migratable_attributes.map(&:to_s)
+        ],
+        ['--skip-resource-route'],
+        behavior: :revoke
+      )
     end
   end
 end

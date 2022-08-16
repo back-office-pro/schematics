@@ -3,7 +3,8 @@
 describe Schematics::Commands::DestroyEntity do
   subject(:command) { described_class.new(entity:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'client', attributes:) }
+  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:) }
+  let(:name) { 'client' }
   let(:attributes) do
     [
       {
@@ -13,15 +14,19 @@ describe Schematics::Commands::DestroyEntity do
     ]
   end
 
-  its(:execute) do
-    is_expected.to eq(
-      [
-        'rails destroy scaffold client --skip-migration --skip-resource-route',
-        'rails destroy rspec:feature client',
-        'rails destroy locales client',
-        'rails generate migration drop_clients schema:client_first_name',
-        "rails 'schematics:permissions:destroy[Client]'"
-      ]
-    )
+  describe '#generators' do
+    subject { command.generators }
+
+    its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+    its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+    its([2]) { is_expected.to be_a(LocalesGenerator) }
+    its([3]) { is_expected.to be_a(PermissionsGenerator) }
+    its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+
+    context 'when entity class is already defined' do
+      let(:name) { 'object' }
+
+      its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldControllerGenerator) }
+    end
   end
 end

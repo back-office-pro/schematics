@@ -7,9 +7,9 @@ describe Schematics::Commands::RenameAttribute do
   let(:attribute) { 'first_name' }
   let(:target) { 'name' }
 
-  its(:execute) do
-    is_expected.to eq <<~SHELL
-      rails generate migration rename_first_name_to_name_in_clients
-    SHELL
+  describe '#generators' do
+    subject { command.generators }
+
+    its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
   end
 end
