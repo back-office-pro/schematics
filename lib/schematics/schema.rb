@@ -70,7 +70,7 @@ module Schematics
       'exception#schema_error'
     end
 
-    def valid?
+    def valid?(*)
       valid = super && entities.all?(&:valid?)
       entities.each { errors.merge!(_1) }
       valid

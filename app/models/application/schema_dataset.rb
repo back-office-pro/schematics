@@ -7,6 +7,7 @@ module Application
     prepended do
       serialize :data, Schematics::Schema
       delegate :build_commands, :clean_commands, to: :migration, prefix: true
+      delegate :valid?, :errors, to: :data
     end
 
     class_methods do
