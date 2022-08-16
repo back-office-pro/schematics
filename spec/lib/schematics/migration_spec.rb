@@ -7,8 +7,8 @@ describe Schematics::Migration do
 
   before { Schematics::Schema.instance.load(current_data) }
 
-  describe '#commands' do
-    subject { migration.commands }
+  describe '#build_commands' do
+    subject { migration.build_commands }
 
     context 'when creating a new entity' do
       let(:current_data) { [] }
@@ -31,28 +31,6 @@ describe Schematics::Migration do
       its([1]) { is_expected.to be_a(Schematics::Commands::CreateEntityCounterCaches) }
       its([2]) { is_expected.to be_a(Schematics::Commands::CreateEntityPolymorphicCounterCaches) }
       its(:size) { is_expected.to eq(3) }
-    end
-
-    context 'when removing an entity' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'client',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
-      let(:new_data) { [] }
-
-      its([0]) { is_expected.to be_a(Schematics::Commands::DestroyEntity) }
-      its(:size) { is_expected.to eq(1) }
     end
 
     context 'when renaming an entity' do
@@ -129,47 +107,6 @@ describe Schematics::Migration do
       end
 
       its([0]) { is_expected.to be_a(Schematics::Commands::AddAttribute) }
-      its(:size) { is_expected.to eq(1) }
-    end
-
-    context 'when removing an attribute' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'client',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-                name: 'last_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
-      let(:new_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'client',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
-
-      its([0]) { is_expected.to be_a(Schematics::Commands::RemoveAttribute) }
       its(:size) { is_expected.to eq(1) }
     end
 
@@ -311,6 +248,73 @@ describe Schematics::Migration do
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
       its([1]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its(:size) { is_expected.to eq(2) }
+    end
+  end
+
+  describe '#clean_commands' do
+    subject { migration.clean_commands }
+
+    context 'when removing an entity' do
+      let(:current_data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'client',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:new_data) { [] }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::DestroyEntity) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    context 'when removing an attribute' do
+      let(:current_data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'client',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              },
+              {
+                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
+                name: 'last_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:new_data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'client',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemoveAttribute) }
+      its(:size) { is_expected.to eq(1) }
     end
   end
 end
