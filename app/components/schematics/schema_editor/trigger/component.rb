@@ -11,7 +11,9 @@ module Schematics
           @builder = builder
         end
 
-        def collection = Schematics::Trigger::ACTIONS
+        def collection = Schematics::Trigger::ACTIONS.map do |action|
+          [t(action, scope: %i[activerecord attributes permission actions]), action]
+        end
 
         def icon = :atom
 
