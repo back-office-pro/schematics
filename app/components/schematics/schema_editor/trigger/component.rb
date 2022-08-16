@@ -14,6 +14,8 @@ module Schematics
         def collection = Schematics::Trigger::ACTIONS
 
         def icon = :atom
+
+        def title = t('.title')
       end
     end
   end

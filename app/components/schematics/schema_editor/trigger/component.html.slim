@@ -1,7 +1,11 @@
 .col-xl-4.col-md-6.schema-editor-trigger
   .card.shadow-sm.border-0.animate__animated.animate__zoomIn
     .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
-      = render Schematics::CardHeading::Component.new(icon:, title: t('.title'))
+      .row.align-items-center
+        .col.text-truncate
+          = render Schematics::CardHeading::Component.new(icon:, title:)
+        .col-auto
+          = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-trigger')
     .card-body
       = @builder.input :action,
                       as: :select,
@@ -9,4 +13,3 @@
                       include_blank: false,
                       input_html: { data: { controller: 'dropdown' } }
       = @builder.input :callback
-      = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-trigger')

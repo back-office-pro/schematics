@@ -11,6 +11,8 @@ module Schematics
           super
           @builder = builder
         end
+
+        def title = t('.title')
       end
     end
   end
