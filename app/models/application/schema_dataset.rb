@@ -7,7 +7,6 @@ module Application
     prepended do
       serialize :data, Schematics::Schema
       delegate :build_commands, :clean_commands, to: :migration, prefix: true
-      delegate :valid?, :errors, to: :data
     end
 
     class_methods do
@@ -26,6 +25,14 @@ module Application
 
     def migration
       @migration ||= Schematics::Migration.new(data)
+    end
+
+    def valid?(*)
+      return super unless data
+
+      valid = super && data.valid?
+      errors.merge!(data)
+      valid
     end
 
     def version = self
