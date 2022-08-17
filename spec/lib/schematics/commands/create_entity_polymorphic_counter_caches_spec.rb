@@ -6,7 +6,7 @@ describe Schematics::Commands::CreateEntityPolymorphicCounterCaches do
   before { stub_const('ActiveStorage::Attachment', Class.new) }
 
   let(:entity) { Schematics::Entities::Entity.new(name:) }
-  let(:name) { 'assembly' }
+  let(:name) { 'category' }
 
   describe '#generators' do
     subject { command.generators }
