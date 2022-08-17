@@ -22,11 +22,5 @@ describe Schematics::Commands::DestroyEntity do
     its([2]) { is_expected.to be_a(LocalesGenerator) }
     its([3]) { is_expected.to be_a(PermissionsGenerator) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-
-    context 'when entity class is already defined' do
-      let(:name) { 'object' }
-
-      its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldControllerGenerator) }
-    end
   end
 end

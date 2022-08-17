@@ -11,17 +11,13 @@ require 'generators/permissions/permissions_generator'
 module Schematics
   module Commands
     class DestroyEntity < Command
-      def generators
-        return [scaffold_controller_generator] if model_exists?
-
-        [
-          scaffold_generator,
-          feature_generator,
-          locales_generator,
-          permissions_generator,
-          migration_generator
-        ].compact.flatten
-      end
+      def generators = [
+        scaffold_generator,
+        feature_generator,
+        locales_generator,
+        permissions_generator,
+        migration_generator
+      ].compact.flatten
 
       private
 
@@ -48,20 +44,12 @@ module Schematics
         PermissionsGenerator.new([name], [], behavior: :revoke)
       end
 
-      def scaffold_controller_generator
-        Rails::Generators::ScaffoldControllerGenerator.new(
-          [name],
-          ['--skip-resource-route', '--skip-migration'],
-          behavior: :revoke
-        )
-      end
-
       def scaffold_generator = Rails::Generators::ScaffoldGenerator.new(
         [
           name,
           *migratable_attributes.map(&:to_s)
         ],
-        ['--skip-resource-route'],
+        ['--skip-resource-route', '--skip-migration'],
         behavior: :revoke
       )
     end
