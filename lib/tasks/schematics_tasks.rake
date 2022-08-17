@@ -22,20 +22,6 @@ namespace :schematics do
       .each(&:invoke_all)
   end
 
-  namespace :permissions do
-    desc 'Rename entity permissions and associated models'
-    task :rename, %i[model new_model] => [:environment] do |_task, model:, new_model:|
-      PaperTrail.request(enabled: false) do
-        # rubocop:disable Rails/SkipsModelValidations
-        Permission.where(model:).update_all(model: new_model)
-        Chart.where(model:).update_all(model: new_model)
-        Stat.where(model:).update_all(model: new_model)
-        Schematics::Version.where(item_type: model).update_all(item_type: new_model)
-        # rubocop:enable Rails/SkipsModelValidations
-      end
-    end
-  end
-
   namespace :db do
     desc 'Load engine seed'
     task seed: :environment do
