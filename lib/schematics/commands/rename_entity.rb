@@ -3,12 +3,12 @@
 module Schematics
   module Commands
     class RenameEntity < Command
-      def execute = [
-        "rails generate migration rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}",
-        "rails destroy scaffold #{old_name} --skip-migration --skip-resource-route",
-        "rails destroy locales #{old_name}",
-        "rails generate locales #{name}",
-        "rails 'schematics:permissions:rename[#{old_class_name},#{class_name}]'"
+      def generators = [
+        Rails::Generators::MigrationGenerator.new(
+          [
+            "rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"
+          ]
+        )
       ]
 
       private

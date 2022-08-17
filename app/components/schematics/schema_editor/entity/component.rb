@@ -4,11 +4,8 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        delegate :default_actions,
-                 :actions,
-                 :icon,
-                 :fields,
-                 to: '@builder.object'
+        DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
+        delegate :default_actions, :actions, :icon, to: '@builder.object'
         renders_one_form :builder
 
         def initialize(builder:)
@@ -20,7 +17,9 @@ module Schematics
           default_actions.map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
         end
 
-        def descriptors_collection = fields.map(&:name)
+        def attribute_constants_collection
+          (Attributes.constants - DENYLIST).map(&Attributes.method(:const_get))
+        end
 
         def icons
           YAML

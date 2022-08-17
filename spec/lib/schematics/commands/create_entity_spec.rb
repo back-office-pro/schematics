@@ -32,27 +32,21 @@ describe Schematics::Commands::CreateEntity do
     ]
   end
 
-  its(:execute) do
-    is_expected.to eq(
-      [
-        'rails generate scaffold assembly schema:assembly_name schema:assembly_owner --skip-resource-route', # rubocop:disable Layout/LineLength
-        'rails generate rspec:feature assembly',
-        'rails generate locales assembly',
-        'rails generate migration add_slug_to_assemblies slug:string:uniq',
-        'rails generate migration add_lock_version_to_assemblies lock_version:integer',
-        'rails generate migration create_join_table_assemblies_parts assemblies:join_table_first parts:join_table_second', # rubocop:disable Layout/LineLength
-        "rails 'schematics:permissions:create[Assembly]'"
-      ]
-    )
-  end
+  describe '#generators' do
+    subject { command.generators }
 
-  context 'when entity class is already defined' do
-    let(:name) { 'object' }
+    its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+    its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+    its([2]) { is_expected.to be_a(LocalesGenerator) }
+    its([3]) { is_expected.to be_a(PermissionsGenerator) }
+    its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its([6]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
 
-    its(:execute) do
-      is_expected.to eq <<~SHELL
-        rails generate scaffold_controller object --skip-resource-route
-      SHELL
+    context 'when entity class is already defined' do
+      let(:name) { 'object' }
+
+      its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldControllerGenerator) }
     end
   end
 end

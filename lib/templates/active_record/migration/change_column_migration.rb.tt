@@ -1,7 +1,5 @@
 class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def change
-    safety_assured do
-      change_column :<%= table_name %>, :<%= @column_name %>, :<%= attributes.first.type %><%= attributes.first.inject_options %>
-    end
+    change_column :<%= table_name %>, :<%= @column_name %>, :<%= attributes.first.type %><%= attributes.first.inject_options %>
   end
 end

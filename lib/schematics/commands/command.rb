@@ -19,11 +19,15 @@ module Schematics
                private: true
       attr_accessor :entity, :attribute, :target
 
-      def execute
-        raise NotImplementedError
-      end
+      def generators = []
 
       def weight = 1
+
+      protected
+
+      def model_exists?
+        Object.const_defined?(class_name)
+      end
     end
   end
 end

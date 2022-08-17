@@ -2,22 +2,24 @@
 
 module Schematics
   class Migration
-    attr_reader :commands
+    attr_reader :build_commands, :clean_commands
 
     def initialize(schema)
       @schema = schema
-      @commands = []
-      generate_commands
+      @build_commands = []
+      @clean_commands = []
+      generate_build_commands
+      generate_clean_commands
     end
 
     private
 
-    def generate_build_commmands # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    def generate_build_commands # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       @schema.entities.reject(&:core?).each do |new_entity|
         current_entity = Schema.instance.find_entity_by_id(new_entity.id)
         if current_entity
           if current_entity.name != new_entity.name
-            @commands << Commands::RenameEntity.new(
+            @build_commands << Commands::RenameEntity.new(
               entity: new_entity,
               attribute: current_entity.name
             )
@@ -26,31 +28,32 @@ module Schematics
             current_attribute = current_entity.find_attribute_by_id(new_attribute.id)
             if current_attribute
               if current_attribute.name != new_attribute.name
-                @commands << Commands::RenameAttribute.new(
+                @build_commands << Commands::RenameAttribute.new(
                   entity: new_entity,
                   attribute: current_attribute.name,
                   target: new_attribute.name
                 )
               end
-              if current_attribute.type != new_attribute.type
-                @commands << Commands::ChangeAttribute.new(
+              if current_attribute.database_type != new_attribute.database_type
+                @build_commands << Commands::ChangeAttribute.new(
                   entity: new_entity,
                   attribute: new_attribute.name
                 )
               end
             else
-              @commands << Commands::AddAttribute.new(
+              @build_commands << Commands::AddAttribute.new(
                 entity: new_entity,
                 attribute: new_attribute.name
               )
             end
           end
         else
-          @commands << Commands::CreateEntity.new(entity: new_entity)
-          @commands << Commands::CreateEntityCounterCaches.new(entity: new_entity)
-          @commands << Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity)
+          @build_commands << Commands::CreateEntity.new(entity: new_entity)
+          @build_commands << Commands::CreateEntityCounterCaches.new(entity: new_entity)
+          @build_commands << Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity)
         end
       end
+      @build_commands.sort_by!(&:weight)
     end
 
     def generate_clean_commands
@@ -61,21 +64,16 @@ module Schematics
             new_attribute = new_entity.find_attribute_by_id(current_attribute.id)
             next if new_attribute
 
-            @commands << Commands::RemoveAttribute.new(
+            @clean_commands << Commands::RemoveAttribute.new(
               entity: current_entity,
               attribute: current_attribute.name
             )
           end
         else
-          @commands << Commands::DestroyEntity.new(entity: current_entity)
+          @clean_commands << Commands::DestroyEntity.new(entity: current_entity)
         end
       end
-    end
-
-    def generate_commands
-      generate_build_commmands
-      generate_clean_commands
-      @commands.sort_by!(&:weight)
+      @clean_commands.sort_by!(&:weight)
     end
   end
 end

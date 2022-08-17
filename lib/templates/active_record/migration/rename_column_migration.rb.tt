@@ -1,7 +1,5 @@
 class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def change
-    safety_assured do
-      rename_column :<%= table_name %>, :<%= @old_column_name %>, :<%= @new_column_name %>
-    end
+    rename_column :<%= table_name %>, :<%= @old_column_name %>, :<%= @new_column_name %>
   end
 end

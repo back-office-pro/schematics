@@ -1,18 +1,30 @@
 button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs-toggle='dropdown'
   = fa_icon :plus
-.dropdown-menu.border-0.shadow-sm.animate__animated.animate__zoomIn
-  .dropdown-item {
-    data-action='click->nested-form#add:prevent'
-    data-nested-form-template-param="schema-editor-attribute-#{index}"
-    role='button'
-  } = t('.add_attribute')
-  .dropdown-item {
-    data-action='click->nested-form#add:prevent'
-    data-nested-form-template-param="schema-editor-virtual-#{index}"
-    role='button'
-  } = t('.add_virtual')
-  .dropdown-item {
-    data-action='click->nested-form#add:prevent'
-    data-nested-form-template-param="schema-editor-trigger-#{index}"
-    role='button'
-  } = t('.add_trigger')
+.dropdown-menu.dropdown-menu-end.border-0.shadow-sm.animate__animated.animate__zoomIn
+  h5.dropdown-header.fw-bold
+    = t('.title')
+  .pre-scrollable.overflow-scroll
+    - collection.each do |constant|
+      .dropdown-item {
+        data-action='click->nested-form#add:prevent'
+        data-nested-form-template-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}-#{index}"
+        role='button'
+      }
+        = fa_icon constant.new.icon, class: 'fa-fw me-2'
+        = t('.add_attribute', type: constant.model_name.human.downcase)
+    .dropdown-divider
+    .dropdown-item {
+      data-action='click->nested-form#add:prevent'
+      data-nested-form-template-param="schema-editor-virtual-#{index}"
+      role='button'
+    }
+      = fa_icon :plus, class: 'fa-fw me-2'
+      = t('.add_virtual')
+    .dropdown-divider
+    .dropdown-item {
+      data-action='click->nested-form#add:prevent'
+      data-nested-form-template-param="schema-editor-trigger-#{index}"
+      role='button'
+    }
+      = fa_icon :atom, class: 'fa-fw me-2'
+      = t('.add_trigger')

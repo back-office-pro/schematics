@@ -7,6 +7,8 @@ module Schematics
 
       def default = ::Time.current.to_fs(:db)
 
+      def icon = :clock
+
       def open_api_type = ::DateTime
     end
   end

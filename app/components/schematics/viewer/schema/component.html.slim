@@ -1,19 +1,14 @@
 .row.g-3
   - entities.each do |entity|
     .col-xl-2.col-md-4
-      .card.border-0.animate__animated.animate__zoomIn
-        .card-body
-          .text-center
-            = fa_icon entity.icon, size: '2x', class: 'text-primary'
-            h6.pt-2 = entity.name
-          - entity.attributes.each do |attribute|
+      .card.shadow-sm.border-0.animate__animated.animate__zoomIn
+        .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+          = render Schematics::CardHeading::Component.new(icon: entity.icon, title: entity.name)
+        .card-body.p-3
+          - entity.fields.each do |field|
             div
-              = fa_icon attribute.icon, class: 'fa-fw me-1'
-              = attribute.name
-          - entity.virtuals.each do |virtual|
-            div
-              = fa_icon virtual.icon, class: 'fa-fw me-1'
-              = virtual.name
+              = fa_icon field.icon, class: 'fa-fw me-1'
+              = field.name
           - entity.triggers.each do |trigger|
             div
               = fa_icon :atom, class: 'fa-fw me-1'

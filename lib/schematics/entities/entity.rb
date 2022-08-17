@@ -230,9 +230,10 @@ module Schematics
         }
       RUBY
 
-      def valid?
-        valid = super && (fields + triggers).all?(&:valid?)
+      def valid?(*)
+        valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
         (fields + triggers).each { errors.merge!(_1) }
+        errors.merge!(descriptor)
         valid
       end
 

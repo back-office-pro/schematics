@@ -27,6 +27,7 @@ html lang=::I18n.locale dir='ltr'
       window.mapsApiKey = #{maps_api_key_javascript}
       window.rollbarClientKey = #{rollbar_client_key_javascript}
       window.I18n = #{i18n_javascript}
+      window.routes = #{routes_javascript}
   body data-controller='application'
     = turbo_stream_from current_user
     = render Schematics::Toast::Component.with_collection(flash.to_a)

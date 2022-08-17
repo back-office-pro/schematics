@@ -13,6 +13,7 @@ en:
           index: List
           read: Read
           restore: Restore
+          save: Save
           show: View
           update: Edit
         model: Data

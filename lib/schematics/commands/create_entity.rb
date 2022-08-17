@@ -1,45 +1,84 @@
 # frozen_string_literal: true
 
+require 'rails/generators'
+require 'rails/generators/rails/scaffold_controller/scaffold_controller_generator'
+require 'rails/generators/rails/scaffold/scaffold_generator'
+require 'rails/generators/rails/migration/migration_generator'
+require 'generators/rspec/feature/feature_generator'
+require 'generators/locales/locales_generator'
+require 'generators/permissions/permissions_generator'
+
 module Schematics
   module Commands
     class CreateEntity < Command
-      def execute
-        return generate_scaffold_controller if model_exists?
+      def generators
+        return [scaffold_controller_generator] if model_exists?
 
         [
-          "rails generate scaffold #{name} #{migratable_attributes} --skip-resource-route",
-          "rails generate rspec:feature #{name}",
-          ("rails generate locales #{name}" unless core?),
-          "rails generate migration add_slug_to_#{table_name.pluralize} slug:string:uniq",
-          "rails generate migration add_lock_version_to_#{table_name.pluralize} lock_version:integer", # rubocop:disable Layout/LineLength
-          has_and_belongs_to_many_associations.map(&method(:generate_create_join_table_migration)),
-          ("rails 'schematics:permissions:create[#{class_name}]'" unless core?)
-        ].compact.flatten.map(&:squish)
+          scaffold_generator,
+          feature_generator,
+          locales_generator,
+          permissions_generator,
+          slug_migration_generator,
+          lock_version_migration_generator,
+          has_and_belongs_to_many_associations.map(&method(:join_table_migration_generator))
+        ].compact.flatten
       end
 
       private
 
-      def generate_create_join_table_migration(association)
-        <<~SHELL
-          rails generate migration create_join_table_#{association.entity.name.pluralize}_#{association.name} #{association.entity.name.pluralize}:join_table_first #{association.name}:join_table_second
-        SHELL
+      def scaffold_generator = Rails::Generators::ScaffoldGenerator.new(
+        [
+          name,
+          *migratable_attributes.map(&:to_s)
+        ], ['--skip-resource-route']
+      )
+
+      def feature_generator = Rspec::Generators::FeatureGenerator.new([name])
+
+      def locales_generator
+        return if core?
+
+        LocalesGenerator.new([name])
       end
 
-      def generate_scaffold_controller = <<~SHELL
-        rails generate scaffold_controller #{name} --skip-resource-route
-      SHELL
+      def permissions_generator
+        return if core?
+
+        PermissionsGenerator.new([name])
+      end
+
+      def slug_migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "add_slug_to_#{table_name.pluralize}",
+          'slug:string:uniq'
+        ]
+      )
+
+      def lock_version_migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "add_lock_version_to_#{table_name.pluralize}",
+          'lock_version:integer'
+        ]
+      )
+
+      def join_table_migration_generator(association)
+        Rails::Generators::MigrationGenerator.new(
+          [
+            "create_join_table_#{association.entity.name.pluralize}_#{association.name}",
+            "#{association.entity.name.pluralize}:join_table_first",
+            "#{association.name}:join_table_second"
+          ]
+        )
+      end
+
+      def scaffold_controller_generator
+        Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
+      end
 
       # :reek:FeatureEnvy
       def has_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
         super.reject { _1.entity.name.pluralize == _1.name }
-      end
-
-      def migratable_attributes = super
-        .map(&:to_s)
-        .join(' ')
-
-      def model_exists?
-        Object.const_defined?(class_name)
       end
     end
   end

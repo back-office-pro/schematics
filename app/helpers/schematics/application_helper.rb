@@ -108,6 +108,18 @@ module Schematics
       .to_json
       .html_safe # rubocop:disable Rails/OutputSafety
 
+    def routes_javascript = {
+      comparisons: main_app.comparisons_path,
+      dashboard_read_notifications: schematics.dashboard_read_notifications_path,
+      drafts: main_app.drafts_path,
+      open_api: schematics.open_api_path,
+      preferences: schematics.preferences_path,
+      searches: main_app.searches_path,
+      users: main_app.users_path
+    }.transform_keys { _1.to_s.camelize(:lower) }
+      .to_json
+      .html_safe # rubocop:disable Rails/OutputSafety
+
     def settings(key)
       Rails.cache.fetch("settings/#{key}") do
         ::Setting

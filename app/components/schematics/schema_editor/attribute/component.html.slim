@@ -1,14 +1,13 @@
-.col-xl-2.col-md-4.schema-editor-attribute
-  .card.border-0.animate__animated.animate__zoomIn
+.col-xl-4.col-md-6.schema-editor-attribute
+  .card.shadow-sm.border-0.animate__animated.animate__zoomIn
+    .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+      .row.align-items-center
+        .col.text-truncate
+          = render Schematics::CardHeading::Component.new(icon:, title:)
+        .col-auto
+          = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
     .card-body
-      .text-center.mb-2
-        = fa_icon icon, size: '2x', class: 'text-primary'
       = @builder.hidden_field :id
+      = @builder.hidden_field :type
       = @builder.input :name
-      = @builder.input :type,
-                       as: :select,
-                       collection:,
-                       include_blank: false,
-                       input_html: { data: { controller: 'dropdown' } }
-      = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
       = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)

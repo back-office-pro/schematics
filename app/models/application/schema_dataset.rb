@@ -6,7 +6,7 @@ module Application
 
     prepended do
       serialize :data, Schematics::Schema
-      delegate :commands, to: :migration, prefix: true
+      delegate :build_commands, :clean_commands, to: :migration, prefix: true
     end
 
     class_methods do
@@ -19,12 +19,20 @@ module Application
 
     def after_migrate
       Schematics::MigrateSchemaJob.perform_later(self) do
-        Schematics::Schema.instance.load(data.to_json) if migrated?
+        Schematics::Schema.instance.load(data.to_json)
       end
     end
 
     def migration
-      Schematics::Migration.new(data)
+      @migration ||= Schematics::Migration.new(data)
+    end
+
+    def valid?(*)
+      return super unless data
+
+      valid = super && data.valid?
+      errors.merge!(data)
+      valid
     end
 
     def version = self

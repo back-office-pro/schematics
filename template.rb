@@ -19,26 +19,19 @@ after_bundle do
       host: <%= ENV["MAIN_DATABASE_HOST"] %>
   YAML
 
-  # Start Spring
-  run 'bundle exec spring binstub --all'
-
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
-  rails_command 'generate strong_migrations:install'
   rails_command 'schematics:install:migrations'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
   rails_command 'db:reset'
   rails_command 'schematics:generate'
   rails_command 'schematics:db:encryption:init'
-  rails_command 'generate annotate:install'
-  rails_command 'generate erd:install'
   rails_command 'db:migrate'
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
   rails_command 'schematics:db:seed'
   rails_command 'schematics:docs:generate'
-  rails_command 'js:routes'
 
   # Edit .gitignore
   append_to_file '.gitignore', <<~TEXT

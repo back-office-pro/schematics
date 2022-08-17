@@ -4,6 +4,7 @@ module Schematics
   module SchemaEditor
     module Virtual
       class Component < ApplicationComponent
+        delegate :icon, to: '@builder.object'
         renders_one_form :builder
 
         def initialize(builder:)
@@ -11,9 +12,7 @@ module Schematics
           @builder = builder
         end
 
-        def icon
-          @builder.object.try(:icon) || :plus
-        end
+        def title = t('.title')
       end
     end
   end

@@ -6,15 +6,9 @@ describe Schematics::Commands::RenameEntity do
   let(:entity) { Schematics::Entities::Entity.new(name: 'prospect') }
   let(:attribute) { 'client' }
 
-  its(:execute) do
-    is_expected.to eq(
-      [
-        'rails generate migration rename_clients_to_prospects',
-        'rails destroy scaffold client --skip-migration --skip-resource-route',
-        'rails destroy locales client',
-        'rails generate locales prospect',
-        "rails 'schematics:permissions:rename[Client,Prospect]'"
-      ]
-    )
+  describe '#generators' do
+    subject { command.generators }
+
+    its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
   end
 end

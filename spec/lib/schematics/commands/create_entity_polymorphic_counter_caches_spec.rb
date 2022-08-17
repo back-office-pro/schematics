@@ -6,19 +6,17 @@ describe Schematics::Commands::CreateEntityPolymorphicCounterCaches do
   before { stub_const('ActiveStorage::Attachment', Class.new) }
 
   let(:entity) { Schematics::Entities::Entity.new(name:) }
-  let(:name) { 'assembly' }
+  let(:name) { 'category' }
 
-  its(:execute) do
-    is_expected.to eq(
-      [
-        'rails generate migration add_comments_count_to_assemblies comments_count:integer'
-      ]
-    )
-  end
+  describe '#generators' do
+    subject { command.generators }
 
-  context 'when entity class is already defined' do
-    let(:name) { 'ActiveStorage::Attachment' }
+    its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
 
-    its(:execute) { is_expected.to be_empty }
+    context 'when entity class is already defined' do
+      let(:name) { 'ActiveStorage::Attachment' }
+
+      it { is_expected.to be_empty }
+    end
   end
 end

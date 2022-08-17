@@ -1,7 +1,8 @@
 import ApplicationController from './application_controller'
 import Tribute from 'tributejs'
 import Trix from 'trix'
-import { usersEn, searchEn } from 'routes'
+
+/* global routes */
 
 export default class extends ApplicationController {
   connect () {
@@ -25,14 +26,14 @@ export default class extends ApplicationController {
     const searchParams = new URLSearchParams()
     searchParams.set('filter[full_name]', text)
     searchParams.set('metadata', true)
-    const url = `${usersEn()}?${searchParams}`
+    const url = [routes.users, searchParams].join('?')
     const response = await this.fetchAPI(url)
     const users = await response.json()
     callback(users)
   }
 
   async search (text, callback) {
-    const url = searchEn(text)
+    const url = [routes.searches, text].join('/')
     const response = await this.fetchAPI(url)
     const results = await response.json()
     callback(results)

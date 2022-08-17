@@ -19,6 +19,7 @@ describe Schematics::Attributes::Token do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
+  its(:icon) { is_expected.to eq(:key) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

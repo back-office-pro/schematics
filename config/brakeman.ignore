@@ -29,6 +29,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -60,6 +63,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -91,6 +97,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -122,6 +131,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -153,6 +165,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -184,6 +199,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -215,6 +233,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -246,6 +267,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -255,7 +279,7 @@
       "check_name": "Execute",
       "message": "Possible command injection",
       "file": "app/jobs/schematics/migrate_schema_job.rb",
-      "line": 21,
+      "line": 31,
       "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
       "code": "system(\"git commit -m 'Migration #{schema_dataset.id}'\")",
       "render_path": null,
@@ -266,6 +290,9 @@
       },
       "user_input": "schema_dataset.id",
       "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
       "note": "No user input"
     },
     {
@@ -297,7 +324,33 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "7d7db73d3a3de6bcfb262b3ea6a123765c037a2c78c1a783bacceb6b435a1fb0",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/jobs/schematics/migrate_schema_job.rb",
+      "line": 28,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"rails db:migrate > log/migration_#{schema_dataset.id}.log\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::MigrateSchemaJob",
+        "method": "perform"
+      },
+      "user_input": "schema_dataset.id",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -328,6 +381,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -359,6 +415,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -390,6 +449,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -421,27 +483,10 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "c81fc52f4440bbdeabd266f8823ab476dba6c9d1e453aa9c783c1550fa2731d5",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/jobs/schematics/migrate_schema_job.rb",
-      "line": 9,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"pg_dump -F t #{current_database} > migration_#{migration_time}.tar\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::MigrateSchemaJob",
-        "method": "perform"
-      },
-      "user_input": "current_database",
-      "confidence": "Medium",
-      "note": "No user input"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -472,6 +517,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -503,7 +551,33 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "e2c6533127a47b4996305c09690142a8ac33ed4c2f9bcd9d90ef78f36811c60f",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/jobs/schematics/migrate_schema_job.rb",
+      "line": 9,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"pg_dump -F t #{current_database} > migration_#{schema_dataset.id}.tar\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::MigrateSchemaJob",
+        "method": "perform"
+      },
+      "user_input": "current_database",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -534,6 +608,9 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     },
     {
@@ -565,9 +642,12 @@
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-08-08 23:48:45 +0200",
-  "brakeman_version": "5.2.3"
+  "updated": "2022-08-16 17:50:26 +0200",
+  "brakeman_version": "5.3.1"
 }
