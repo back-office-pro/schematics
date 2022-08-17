@@ -75,7 +75,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'oj', '~> 3.13.20'
   spec.add_dependency 'pagy', '~> 5.10.1'
-  spec.add_dependency 'paper_trail', '~> 12.3.0'
+  spec.add_dependency 'paper_trail', '~> 13.0.0'
   spec.add_dependency 'paranoia', '~> 2.6.0'
   spec.add_dependency 'phonelib', '~> 0.7.1'
   spec.add_dependency 'rack-attack', '~> 6.6.1'
@@ -102,6 +102,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'super_diff', '~> 0.9.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 2.66.0'
+  spec.add_dependency 'view_component', '~> 2.69.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
