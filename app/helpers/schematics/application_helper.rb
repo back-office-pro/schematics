@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module ApplicationHelper # rubocop:disable Metrics/ModuleLength
+  module ApplicationHelper
     include Pagy::Frontend
 
     def current_draft
@@ -29,15 +29,6 @@ module Schematics
         **kwargs
       )
     end
-
-    def i18n_javascript = t('javascript')
-      .deep_transform_keys { _1.to_s.camelize(:lower) }
-      .to_json
-      .html_safe # rubocop:disable Rails/OutputSafety
-
-    def maps_api_key_javascript = settings(:google_cloud_api_key)
-      .to_json
-      .html_safe # rubocop:disable Rails/OutputSafety
 
     def new_polymorphic_path(record_or_hash_or_array, options = {})
       case record_or_hash_or_array
@@ -101,24 +92,6 @@ module Schematics
             end
         ).compact_blank
     end
-
-    def rollbar_client_key_javascript = Schematics::Engine
-      .credentials
-      .rollbar[:client_key]
-      .to_json
-      .html_safe # rubocop:disable Rails/OutputSafety
-
-    def routes_javascript = {
-      comparisons: main_app.comparisons_path,
-      dashboard_read_notifications: schematics.dashboard_read_notifications_path,
-      drafts: main_app.drafts_path,
-      open_api: schematics.open_api_path,
-      preferences: schematics.preferences_path,
-      searches: main_app.searches_path,
-      users: main_app.users_path
-    }.transform_keys { _1.to_s.camelize(:lower) }
-      .to_json
-      .html_safe # rubocop:disable Rails/OutputSafety
 
     def settings(key)
       Rails.cache.fetch("settings/#{key}") do

@@ -18,11 +18,7 @@ html lang=::I18n.locale dir='ltr'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{settings(:google_cloud_api_key)}&libraries=places"
     = render Schematics::ThemeCustomStylesheet::Component.new
-    javascript [nonce=content_security_policy_nonce]:
-      window.mapsApiKey = #{maps_api_key_javascript}
-      window.rollbarClientKey = #{rollbar_client_key_javascript}
-      window.I18n = #{i18n_javascript}
-      window.routes = #{routes_javascript}
+    = render Schematics::InlineJavascript::Component.new
   body data-controller='application'
     = turbo_stream_from current_user
     = render Schematics::Toast::Component.with_collection(flash.to_a)
