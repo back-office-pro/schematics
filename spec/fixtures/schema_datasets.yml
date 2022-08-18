@@ -188,7 +188,7 @@ one:
     - id: <%= SecureRandom.uuid %>
       name: stock_movement
       options:
-        icon: people_carry
+        icon: people_carry_box
         actions:
           - index
           - show

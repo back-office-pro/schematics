@@ -691,7 +691,7 @@
   {
     "name": "schema_dataset",
     "options": {
-      "icon": "project_diagram",
+      "icon": "diagram_project",
       "descriptor": "version",
       "actions": [
         "index",
