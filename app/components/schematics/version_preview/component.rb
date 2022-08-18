@@ -11,6 +11,12 @@ module Schematics
         @version = version
       end
 
+      def action
+        return unless href
+
+        %w[click->application#visit]
+      end
+
       def href
         return unless item
         return unless object
