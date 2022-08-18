@@ -1,6 +1,8 @@
 button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs-toggle='dropdown'
   = fa_icon :plus
-.dropdown-menu.dropdown-menu-end.border-0.shadow-sm.animate__animated.animate__zoomIn
+.dropdown-menu.dropdown-menu-end.border-0.shadow-sm.animate__animated.animate__zoomIn.p-0 {
+    aria-labelledby='entity-dropdown'
+  }
   h5.dropdown-header.fw-bold
     = t('.title')
   .pre-scrollable.overflow-scroll

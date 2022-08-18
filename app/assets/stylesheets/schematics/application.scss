@@ -13,10 +13,15 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'navbar/component';
 @import 'footer/component';
 @import 'sidebar/component';
+@import 'navbar/notification_center/component';
+@import 'navbar/message_center/component';
+@import 'navbar/task_center/component';
+@import 'navbar/online_users_center/component';
 @import 'viewer/calendar/component';
 @import 'edit_in_place/component';
 @import 'placeholder/component';
 @import 'trix_attachment/component';
+@import 'schema_editor/button/add_dropdown/component';
 
 // Variables
 
@@ -100,12 +105,6 @@ button[disabled] .text.d-none.d-lg-inline {
 button[disabled] .icon.d-none,
 button[disabled] .text.d-none:not(.d-lg-inline) {
   display: initial !important;
-}
-
-// Dropdowns
-
-.pre-scrollable {
-  max-height: 350px;
 }
 
 // Progress bars
