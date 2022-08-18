@@ -14,12 +14,7 @@ html lang=::I18n.locale dir='ltr'
     = render Schematics::Favicon::Component.new
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
     = javascript_importmap_tags
-    css [nonce=content_security_policy_nonce]:
-      :root {
-        --bs-primary: #{settings(:theme_color)};
-        --bs-primary-darken: #{theme_color_darken};
-        --bs-primary-rgb: #{theme_color_rgb};
-      }
+    = render Schematics::ThemeCustomStylesheet::Component.new
   body data-controller='application'
     = render Schematics::Toast::Component.with_collection(flash.to_a)
     .p-0.m-0.d-flex.align-items-center.min-vh-100.bg-primary.border-0

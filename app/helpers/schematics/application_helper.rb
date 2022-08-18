@@ -128,16 +128,5 @@ module Schematics
           .public_send(key)
       end
     end
-
-    def theme_color_darken = settings(:theme_color)
-      .paint
-      .darken(5)
-      .to_s
-
-    def theme_color_rgb = settings(:theme_color)
-      .paint
-      .to_rgb
-      .scan(/\d+/)
-      .join(', ')
   end
 end
