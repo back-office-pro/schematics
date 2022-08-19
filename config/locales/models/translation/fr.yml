@@ -1,0 +1,16 @@
+---
+fr:
+  activerecord:
+    attributes:
+      translation:
+        key: Clé
+        locale: Langue
+        locales:
+          en: Anglais
+          fr: Français
+        value: Valeur
+    models:
+      translation:
+        gender: female
+        one: Traduction
+        other: Traductions
