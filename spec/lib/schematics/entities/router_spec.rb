@@ -115,7 +115,7 @@ describe Schematics::Entities::Router do
     end
   end
 
-  context 'when entity has a namespace' do
+  context 'when entity has a one-level namespace' do
     let(:name) { 'active_storage/attachment' }
 
     its(:to_str) do
@@ -137,7 +137,33 @@ describe Schematics::Entities::Router do
     end
   end
 
-  context 'when entity is a singleton and has a namespace' do
+  context 'when entity has a three-levels namespace' do
+    let(:name) { 'i18n/backend/active_record/translation' }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        namespace :i18n do
+          namespace :backend do
+          namespace :active_record do
+          resources :translations, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'I18n::Backend::ActiveRecord::Translation' do
+          get :delete, on: :member
+          delete :archive, on: :member
+          delete :restore, on: :member
+          get :autocomplete, on: :collection
+          post :duplicate, on: :member
+          collection do
+            resources :imports, only: %i[new create], as: 'i18n_backend_active_record_translation_imports'
+          end
+          resources :comments, only: %i[new create edit update], shallow: true
+        end
+        end
+        end
+        end
+      RUBY
+    end
+  end
+
+  context 'when entity is a singleton and has a one-level namespace' do
     let(:entity) { Schematics::Entities::Singleton.new(name: 'main/licence') }
 
     its(:to_str) do

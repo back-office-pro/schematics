@@ -28,9 +28,10 @@ module Schematics
         .split('/')
         .last
 
-      def namespace = name
+      def namespaces = name
         .split('/')
-        .reverse[1]
+        .tap(&:pop)
+        .reverse
 
       def resolver
         return unless @entity.is_a?(Singleton) # rubocop:disable Lint/ConstantResolution
@@ -58,13 +59,15 @@ module Schematics
       end
 
       def route_definition
-        return route unless namespace
+        return route unless namespaces
 
-        <<~RUBY
-          namespace :#{namespace} do
-            #{route.chomp}
-          end
-        RUBY
+        namespaces.reduce(route) do |code, namespace|
+          <<~RUBY
+            namespace :#{namespace} do
+              #{code.chomp}
+            end
+          RUBY
+        end
       end
 
       def resource_routes = [
