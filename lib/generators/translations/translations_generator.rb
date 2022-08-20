@@ -5,13 +5,14 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   delegate :credentials, to: 'Schematics::Engine'
 
   def generate_route_translations
+    key = "routes.#{entity.name.pluralize}"
     case behavior
     in :invoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
           Translation.create!(
             locale:,
-            key: "routes.#{entity.name.pluralize}",
+            key:,
             value: translate(entity.name.pluralize, locale:).parameterize(separator: '-')
           )
         end
@@ -19,70 +20,61 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     in :revoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.destroy_by(locale:, key: "routes.#{entity.name.pluralize}")
+          Translation.destroy_by(locale:, key:)
         end
       end
     end
   end
 
   def generate_model_gender_translations
+    key = "activerecord.models.#{entity.name}.gender"
     case behavior
     in :invoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.create!(
-            locale:,
-            key: "activerecord.models.#{entity.name}.gender",
-            value: 'male'
-          )
+          Translation.create!(locale:, key:, value: 'male')
         end
       end
     in :revoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.gender")
+          Translation.destroy_by(locale:, key:)
         end
       end
     end
   end
 
   def generate_model_singular_translations
+    key = "activerecord.models.#{entity.name}.one"
     case behavior
     in :invoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.create!(
-            locale:,
-            key: "activerecord.models.#{entity.name}.one",
-            value: translate(entity.name, locale:)
-          )
+          Translation.create!(locale:, key:, value: translate(entity.name, locale:))
         end
       end
     in :revoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.one")
+          Translation.destroy_by(locale:, key:)
         end
       end
     end
   end
 
   def generate_model_plural_translations
+    key = "activerecord.models.#{entity.name}.other"
     case behavior
     in :invoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.create!(
-            locale:,
-            key: "activerecord.models.#{entity.name}.other",
-            value: translate(entity.name.pluralize, locale:)
-          )
+          Translation.create!(locale:, key:, value: translate(entity.name.pluralize, locale:))
         end
       end
     in :revoke
       PaperTrail.request(enabled: false) do
         available_locales.each do |locale|
-          Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.other")
+          Translation.destroy_by(locale:, key:)
         end
       end
     end
