@@ -15,6 +15,6 @@
             = render Schematics::Button::Add::Component.new(model_class:)
             = render Schematics::Button::ResetFilters::Component.new(model_class:)
       .card-body.p-0
-        = render Schematics::Placeholder::Component.new(visible: false, cols: 6)
+        = render Schematics::Placeholder::Component.new(visible: false)
         = render Schematics::Viewer::Component.build(resources: @resources)
     = render Schematics::Viewer::Pagination::Component.new(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)

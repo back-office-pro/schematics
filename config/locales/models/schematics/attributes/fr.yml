@@ -29,6 +29,7 @@ fr:
       schematics/attributes/integer: Nombre entier
       schematics/attributes/ip: Adresse IP
       schematics/attributes/jsonb: JSON
+      schematics/attributes/locale: Langue
       schematics/attributes/mime: Type MIME
       schematics/attributes/model: Modèle
       schematics/attributes/model_field: Champs de modèle

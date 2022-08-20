@@ -5,7 +5,7 @@ require 'rails/generators/rails/scaffold_controller/scaffold_controller_generato
 require 'rails/generators/rails/scaffold/scaffold_generator'
 require 'rails/generators/rails/migration/migration_generator'
 require 'generators/rspec/feature/feature_generator'
-require 'generators/locales/locales_generator'
+require 'generators/translations/translations_generator'
 require 'generators/permissions/permissions_generator'
 
 module Schematics
@@ -14,7 +14,7 @@ module Schematics
       def generators = [
         scaffold_generator,
         feature_generator,
-        locales_generator,
+        translations_generator,
         permissions_generator,
         migration_generator
       ].compact.flatten
@@ -25,10 +25,10 @@ module Schematics
         Rspec::Generators::FeatureGenerator.new([name], [], behavior: :revoke)
       end
 
-      def locales_generator
+      def translations_generator
         return if core?
 
-        LocalesGenerator.new([name], [], behavior: :revoke)
+        TranslationsGenerator.new([name], [], behavior: :revoke)
       end
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(

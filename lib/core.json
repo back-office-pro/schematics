@@ -911,5 +911,41 @@
         "type": "address"
       }
     ]
+  },
+  {
+    "name": "translation",
+    "options": {
+      "icon": "language",
+      "descriptor": "key",
+      "actions": [
+        "index",
+        "update",
+        "show"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "locale",
+        "type": "enum",
+        "options": {
+          "readonly": true,
+          "values": [
+            "fr",
+            "en"
+          ]
+        }
+      },
+      {
+        "name": "key",
+        "type": "locale",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "name": "value",
+        "type": "string"
+      }
+    ]
   }
 ]

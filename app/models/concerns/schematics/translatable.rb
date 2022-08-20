@@ -16,9 +16,9 @@ module Schematics
           .downcase
       end
 
-      def human_name_plural
-        human_name.pluralize
-      end
+      def human_name_plural = model_name
+        .human(count: 2)
+        .downcase
     end
   end
 end

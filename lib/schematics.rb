@@ -9,6 +9,7 @@ require 'schematics/engine' if defined?(Rails)
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
 loader.ignore("#{__dir__}/generators")
+loader.ignore("#{__dir__}/i18n")
 loader.ignore("#{__dir__}/simple_form")
 loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")

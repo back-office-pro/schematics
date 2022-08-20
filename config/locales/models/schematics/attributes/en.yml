@@ -29,6 +29,7 @@ en:
       schematics/attributes/integer: Integer
       schematics/attributes/ip: IP address
       schematics/attributes/jsonb: JSON
+      schematics/attributes/locale: Locale
       schematics/attributes/mime: MIME type
       schematics/attributes/model: Model
       schematics/attributes/model_field: Model field
