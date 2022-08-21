@@ -83,7 +83,15 @@ module Schematics
               resource
                 .public_send(association.name)
                 .then_tap do |query|
-                  unless association.is_a?(Associations::HasAndBelongsToMany)
+                  case association
+                  when Associations::HasAndBelongsToMany
+                    query.preload(
+                      Schema
+                        .instance
+                        .find_entity_by_name(association.name.singularize)
+                        .includes
+                    )
+                  else
                     query.preload(association.entity.includes)
                   end
                 end
