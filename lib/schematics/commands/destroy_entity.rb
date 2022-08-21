@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
-require 'rails/generators/rails/scaffold_controller/scaffold_controller_generator'
 require 'rails/generators/rails/scaffold/scaffold_generator'
 require 'rails/generators/rails/migration/migration_generator'
 require 'generators/rspec/feature/feature_generator'
