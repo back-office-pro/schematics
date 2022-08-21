@@ -88,7 +88,7 @@ module Schematics
     config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
     config.active_record.query_log_tags_enabled = true
-    config.active_record.action_on_strict_loading_violation = :log # unless Rails.env.development?
+    config.active_record.action_on_strict_loading_violation = :log unless Rails.env.development?
     config.active_record.warn_on_records_fetched_greater_than = 100
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true

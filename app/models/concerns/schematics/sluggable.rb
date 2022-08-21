@@ -7,6 +7,13 @@ module Schematics
     included do
       extend FriendlyId
       friendly_id entity.descriptor.name.to_sym
+      has_many :slugs,
+               -> { order(created_at: :desc) },
+               as: :sluggable,
+               dependent: :destroy,
+               class_name: 'FriendlyId::Slug',
+               strict_loading: false,
+               inverse_of: false
     end
   end
 end

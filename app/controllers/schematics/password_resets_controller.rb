@@ -60,7 +60,9 @@ module Schematics
     def model_class = ::User
 
     def set_user
-      @user = model_class.find_by!(password_reset_token: params[:token])
+      @user = model_class
+              .with_role
+              .find_by!(password_reset_token: params[:token])
     end
 
     alias index_path new_password_reset_path

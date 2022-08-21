@@ -4,6 +4,10 @@ module Application
   module Task
     extend ActiveSupport::Concern
 
+    prepended do
+      scope :with_applicant, -> { preload(:applicant) }
+    end
+
     def late?
       return false unless deadline
       return false unless pending?

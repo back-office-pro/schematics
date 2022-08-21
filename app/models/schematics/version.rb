@@ -7,6 +7,7 @@ module Schematics
     EVENTS = %w[create update destroy archive restore import duplicate].freeze
 
     belongs_to :user, class_name: 'User', foreign_key: :whodunnit, inverse_of: :versions
+    belongs_to :item, polymorphic: true, optional: true, strict_loading: false, inverse_of: false
 
     delegate :entity, :human_name, :gender, to: :model_class, allow_nil: true
 
