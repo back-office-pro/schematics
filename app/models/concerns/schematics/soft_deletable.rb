@@ -6,7 +6,7 @@ module Schematics
 
     included do
       acts_as_paranoid
-      scope :search_import, -> { with_deleted }
+      scope :search_import, -> { preload(entity.includes).with_deleted }
     end
   end
 end
