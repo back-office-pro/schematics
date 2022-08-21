@@ -5,7 +5,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   let(:entity) do
     Schematics::Entities::Entity.new(
-      name: 'role',
+      name: 'permission',
       options: {
         descriptor: 'name'
       },
@@ -33,6 +33,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:type) { is_expected.to eq('has_and_belongs_to_many') }
   its(:name) { is_expected.to eq('permissions') }
   its(:column_name) { is_expected.to eq('permission_ids') }
+  its(:class_name) { is_expected.to eq('Permission') }
   its(:default) { is_expected.to be_nil }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
