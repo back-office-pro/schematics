@@ -24,7 +24,12 @@ RSpec.shared_context 'with authenticated user' do
 
   let(:session) { Session.create!(user:) }
   let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
-  let(:headers) { { 'Accept' => 'application/json', 'Authorization' => auth_token } }
+  let(:headers) do
+    {
+      'Accept' => 'application/json',
+      'Authorization' => "Bearer #{auth_token}"
+    }
+  end
 end
 
 RSpec.shared_context 'with import' do

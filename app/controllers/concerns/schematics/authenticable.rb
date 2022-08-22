@@ -12,9 +12,8 @@ module Schematics
 
     private
 
-    def auth_token
-      ::JsonWebToken.decode(authorization_header)&.dig(:auth_token) ||
-        cookies.permanent.encrypted[:auth_token]
+    def auth_token = authenticate_with_http_token do |token|
+      ::JsonWebToken.decode(token)&.dig(:auth_token) || cookies.permanent.encrypted[:auth_token]
     end
 
     def authenticate_user!
@@ -29,11 +28,6 @@ module Schematics
         end
       end
     end
-
-    def authorization_header = request
-      .headers['Authorization']
-      &.split(' ')
-      &.last
 
     def current_ability
       @current_ability ||= Ability.new(current_user)
