@@ -16,7 +16,7 @@ html lang=::I18n.locale dir='ltr'
     = javascript_importmap_tags
     = javascript_import_module_tag 'schematics/application'
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
-    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{settings(:google_cloud_api_key)}&libraries=places"
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Schematics::Engine.credentials.gcloud[:api_key]}&libraries=places"
     = render Schematics::ThemeCustomStylesheet::Component.new
     = render Schematics::InlineJavascript::Component.new
   body data-controller='application'

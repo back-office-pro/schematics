@@ -14,7 +14,8 @@ module Schematics
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
-      def maps_api_key = settings(:google_cloud_api_key)
+      def maps_api_key = credentials
+        .gcloud[:api_key]
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 

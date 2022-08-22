@@ -237,14 +237,6 @@
         }
       },
       {
-        "name": "google_cloud_api_key",
-        "type": "string",
-        "options": {
-          "cached": true,
-          "encrypted": true
-        }
-      },
-      {
         "name": "theme_color",
         "type": "color",
         "options": {

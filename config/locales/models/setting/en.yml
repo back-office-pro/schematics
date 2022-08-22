@@ -9,7 +9,6 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
-        google_cloud_api_key: Google Cloud API Key
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
         tasks_feature_flag: Enable tasks
