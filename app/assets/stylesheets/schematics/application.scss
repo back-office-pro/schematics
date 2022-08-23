@@ -61,10 +61,6 @@ body {
 
 // Buttons
 
-.w-0 {
-  width: 0;
-}
-
 .btn-icon-split {
   align-items: stretch;
   display: inline-flex;
@@ -117,4 +113,14 @@ button[disabled] .text.d-none:not(.d-lg-inline) {
 
 .pagy-bootstrap-nav .pagination {
   margin-bottom: 0;
+}
+
+// Utils
+
+.w-0 {
+  width: 0;
+}
+
+.z-index-1 {
+  z-index: 1;
 }
