@@ -13,6 +13,8 @@ module Schematics
           ]
         )
       ]
+
+      def weight = 3
     end
   end
 end

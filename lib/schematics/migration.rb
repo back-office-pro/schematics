@@ -21,7 +21,8 @@ module Schematics
           if current_entity.name != new_entity.name
             @build_commands << Commands::RenameEntity.new(
               entity: new_entity,
-              attribute: current_entity.name
+              attribute: current_entity.name,
+              target: :build
             )
           end
           new_entity.attributes.each do |new_attribute|
@@ -60,6 +61,13 @@ module Schematics
       Schema.instance.entities.reject(&:core?).each do |current_entity|
         new_entity = @schema.find_entity_by_id(current_entity.id)
         if new_entity
+          if new_entity.name != current_entity.name
+            @clean_commands << Commands::RenameEntity.new(
+              entity: current_entity,
+              attribute: new_entity.name,
+              target: :clean
+            )
+          end
           current_entity.attributes.each do |current_attribute|
             new_attribute = new_entity.find_attribute_by_id(current_attribute.id)
             next if new_attribute

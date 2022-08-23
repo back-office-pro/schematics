@@ -94,6 +94,7 @@ Lint/ConstantResolution:
     - Resolv
     - Session
     - ActiveModel
+    - Translation
   Exclude:
     - spec/**/*
     - db/*
@@ -166,7 +167,7 @@ Metrics/BlockLength:
     - it
     - each
 Metrics/MethodLength:
-  Max: 39
+  Max: 40
   AllowedMethods:
     - inherited
 Metrics/AbcSize:

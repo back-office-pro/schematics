@@ -14,6 +14,8 @@ describe Schematics::Commands::DestroyEntity do
     ]
   end
 
+  its(:weight) { is_expected.to eq(1) }
+
   describe '#generators' do
     subject { command.generators }
 

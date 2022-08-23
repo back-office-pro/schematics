@@ -56,6 +56,7 @@ require 'link_thumbnailer'
 require 'rqrcode'
 require 'icalendar'
 require 'dry/transformer'
+require 'git'
 
 module Schematics
   class Engine < ::Rails::Engine

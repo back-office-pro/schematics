@@ -32,6 +32,8 @@ describe Schematics::Commands::CreateEntity do
     ]
   end
 
+  its(:weight) { is_expected.to eq(1) }
+
   describe '#generators' do
     subject { command.generators }
 
