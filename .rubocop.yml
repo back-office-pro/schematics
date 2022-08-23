@@ -94,6 +94,7 @@ Lint/ConstantResolution:
     - Resolv
     - Session
     - ActiveModel
+    - Translation
   Exclude:
     - spec/**/*
     - db/*
