@@ -24,6 +24,8 @@ describe Schematics::Commands::CreateEntityCounterCaches do
     ]
   end
 
+  its(:weight) { is_expected.to eq(2) }
+
   describe '#generators' do
     subject { command.generators }
 

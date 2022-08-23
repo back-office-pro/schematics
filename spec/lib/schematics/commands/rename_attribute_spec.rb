@@ -7,6 +7,8 @@ describe Schematics::Commands::RenameAttribute do
   let(:attribute) { 'first_name' }
   let(:target) { 'name' }
 
+  its(:weight) { is_expected.to eq(3) }
+
   describe '#generators' do
     subject { command.generators }
 

@@ -8,6 +8,8 @@ describe Schematics::Commands::CreateEntityPolymorphicCounterCaches do
   let(:entity) { Schematics::Entities::Entity.new(name:) }
   let(:name) { 'category' }
 
+  its(:weight) { is_expected.to eq(2) }
+
   describe '#generators' do
     subject { command.generators }
 
