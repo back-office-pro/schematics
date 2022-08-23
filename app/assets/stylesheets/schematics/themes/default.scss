@@ -22,6 +22,7 @@
 .ss-main {
   .ss-content {
     background: $card-bg !important;
+    z-index: $zindex-fixed;
   }
 }
 
