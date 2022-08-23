@@ -6,7 +6,6 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   def generate_permissions
     return unless behavior == :invoke
 
-    ::Rails.application.reloader.reload!
     PaperTrail.request(enabled: false) do
       ::Role.admin.permissions.push(::Permission.create_entity_permissions!(entity))
     end
