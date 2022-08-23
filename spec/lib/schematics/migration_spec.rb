@@ -276,6 +276,42 @@ describe Schematics::Migration do
       its(:size) { is_expected.to eq(1) }
     end
 
+    context 'when renaming an entity' do
+      let(:current_data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'prospect',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:new_data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'client',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
     context 'when removing an attribute' do
       let(:current_data) do
         [
