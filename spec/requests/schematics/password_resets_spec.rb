@@ -39,7 +39,7 @@ RSpec.describe 'Password Resets' do
     let(:do_request) { put(password_reset_path(token:), params:, headers:) }
     let(:params) { { user: { password:, password_confirmation: } } }
 
-    context 'when not expired token exists and password is confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when not expired token exists and password is confirmed' do
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
@@ -51,7 +51,7 @@ RSpec.describe 'Password Resets' do
       its(:body) { is_expected.to be_blank }
     end
 
-    context 'when not expired token exists and password is not confirmed' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when not expired token exists and password is not confirmed' do
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1' }
@@ -70,7 +70,7 @@ RSpec.describe 'Password Resets' do
       it { expect(json_response).to eq(expected_response) }
     end
 
-    context 'when token has expired' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when token has expired' do
       let(:token) { user.password_reset_token }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }

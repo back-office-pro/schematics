@@ -30,14 +30,14 @@ RSpec.describe Schematics::TimelineVersionQuery do
       it { is_expected.to be_empty }
     end
 
-    context 'when timeline is global with permissions but without preferences' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when timeline is global with permissions but without preferences' do
       let(:versions) { nil }
       let(:role) { admin_role }
 
       it { is_expected.to eq([second_version, first_version]) }
     end
 
-    context 'when timeline is global with permissions and preferences' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when timeline is global with permissions and preferences' do
       let(:versions) { nil }
       let(:role) { admin_role }
       let(:preferences) { { 'create_User' => false } }
@@ -51,14 +51,14 @@ RSpec.describe Schematics::TimelineVersionQuery do
       it { is_expected.to eq([second_version, first_version]) }
     end
 
-    context 'when timeline is local with permissions but without preferences' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when timeline is local with permissions but without preferences' do
       let(:versions) { user.versions }
       let(:role) { admin_role }
 
       it { is_expected.to eq([second_version, first_version]) }
     end
 
-    context 'when timeline is local with permissions and preferences' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when timeline is local with permissions and preferences' do
       let(:versions) { user.versions }
       let(:role) { admin_role }
       let(:preferences) { { 'create_User' => false } }

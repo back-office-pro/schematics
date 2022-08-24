@@ -39,13 +39,13 @@ RSpec.describe Application::Chart::AccessibleByRoleQuery do
   describe '.call' do
     subject { query.call(role) }
 
-    context 'with manager role' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'with manager role' do
       let(:role) { manager_role }
 
       it { is_expected.to contain_exactly(first_chart, third_chart) }
     end
 
-    context 'with admin role' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'with admin role' do
       let(:role) { admin_role }
 
       it { is_expected.to contain_exactly(first_chart, second_chart) }
