@@ -22,7 +22,7 @@ RSpec.describe Schematics::CleanDraftsJob do
   describe '#perform_now' do
     before { drafts }
 
-    it 'cleans searches' do
+    it 'cleans drafts' do
       expect { described_class.perform_now }.to change(Draft, :count).by(-2)
     end
   end
