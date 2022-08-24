@@ -59,7 +59,7 @@ RSpec.describe PermissionsGenerator do
       end
     end
 
-    context 'when reinvoking' do
+    context 'when renaming' do
       let(:name) { 'role' }
       let(:options) { ['--rename=User'] }
 
