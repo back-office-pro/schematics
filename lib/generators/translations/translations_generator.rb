@@ -6,7 +6,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   class_option :rename, type: :string
 
   def generate_route_translations
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -20,7 +20,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def destroy_route_translations
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -30,7 +30,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def rename_route_translations
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       ::Translation
@@ -40,7 +40,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def generate_model_gender_translations
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -54,7 +54,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def destroy_model_gender_translations
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -67,7 +67,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def rename_model_gender_translations
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       ::Translation
@@ -77,7 +77,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def generate_model_singular_translations
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -91,7 +91,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def destroy_model_singular_translations
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -101,7 +101,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def rename_model_singular_translations
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       ::Translation
@@ -111,7 +111,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def generate_model_plural_translations
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -125,7 +125,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def destroy_model_plural_translations
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -135,7 +135,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def rename_model_plural_translations
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       ::Translation
@@ -145,7 +145,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def generate_model_attributes_translations
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -161,7 +161,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def destroy_model_attributes_translations
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -176,7 +176,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def rename_model_attributes_translations
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       entity.fields.each do |field|
@@ -188,7 +188,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def generate_model_enums_translations # rubocop:disable Metrics/CyclomaticComplexity
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -215,7 +215,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def destroy_model_enums_translations # rubocop:disable Metrics/CyclomaticComplexity
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
@@ -237,7 +237,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   end
 
   def rename_model_enums_translations
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       entity.enum_attributes.each do |enum|
@@ -264,6 +264,19 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     .find_entity_by_name(name.underscore)
 
   def old_name = options[:rename]
+
+  # :reek:NilCheck
+  def generating?
+    behavior == :invoke && old_name.nil?
+  end
+
+  def destroying?
+    behavior == :revoke
+  end
+
+  def renaming?
+    behavior == :invoke && old_name.present?
+  end
 
   # :reek:FeatureEnvy
   def translate(text, locale:)

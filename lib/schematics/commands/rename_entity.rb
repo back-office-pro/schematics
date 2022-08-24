@@ -15,8 +15,8 @@ module Schematics
         in :build
           [
             migration_generator,
-            scaffold_generator(behavior: :invoke),
-            feature_generator(behavior: :invoke),
+            scaffold_generator,
+            feature_generator,
             translations_generator,
             permissions_generator
           ]
@@ -30,7 +30,7 @@ module Schematics
 
       private
 
-      def feature_generator(behavior:)
+      def feature_generator(behavior: :invoke)
         Rspec::Generators::FeatureGenerator.new([name], [], behavior:)
       end
 
@@ -48,11 +48,10 @@ module Schematics
 
       def permissions_generator = PermissionsGenerator.new(
         [name],
-        ["--rename=#{old_class_name}"],
-        behavior: :reinvoke
+        ["--rename=#{old_class_name}"]
       )
 
-      def scaffold_generator(behavior:)
+      def scaffold_generator(behavior: :invoke)
         Rails::Generators::ScaffoldGenerator.new(
           [
             name,
@@ -65,8 +64,7 @@ module Schematics
 
       def translations_generator = TranslationsGenerator.new(
         [name],
-        ["--rename=#{old_name}"],
-        behavior: :reinvoke
+        ["--rename=#{old_name}"]
       )
     end
   end
