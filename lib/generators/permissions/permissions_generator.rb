@@ -4,7 +4,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   class_option :rename, type: :string
 
   def generate_permissions
-    return unless behavior == :invoke
+    return unless generating?
 
     PaperTrail.request(enabled: false) do
       ::Role.admin.permissions.push(::Permission.create_entity_permissions!(entity))
@@ -12,7 +12,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   end
 
   def destroy_permissions
-    return unless behavior == :revoke
+    return unless destroying?
 
     PaperTrail.request(enabled: false) do
       ::Permission.destroy_by(model:)
@@ -23,7 +23,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   end
 
   def rename_permissions
-    return unless behavior == :reinvoke
+    return unless renaming?
 
     PaperTrail.request(enabled: false) do
       # rubocop:disable Rails/SkipsModelValidations
@@ -44,4 +44,17 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   def model = entity.class_name
 
   def old_model = options[:rename]
+
+  # :reek:NilCheck
+  def generating?
+    behavior == :invoke && old_model.nil?
+  end
+
+  def destroying?
+    behavior == :revoke
+  end
+
+  def renaming?
+    behavior == :invoke && old_model.present?
+  end
 end
