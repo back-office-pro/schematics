@@ -86,7 +86,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails-i18n', '~> 7.0.5'
   spec.add_dependency 'ratonvirus', '~> 0.4.2'
   spec.add_dependency 'ratonvirus-clamby', '~> 0.4.0'
-  spec.add_dependency 'redis', '~> 4.7.1'
+  spec.add_dependency 'redis', '~> 4.8.0'
   spec.add_dependency 'rollbar', '~> 3.3.1'
   spec.add_dependency 'route_translator', '~> 12.1.0'
   spec.add_dependency 'rqrcode', '~> 2.1.2'
