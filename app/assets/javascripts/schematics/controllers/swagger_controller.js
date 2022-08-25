@@ -8,6 +8,7 @@ export default class extends ApplicationController {
     SwaggerUIBundle({
       url: routes.openApi,
       domNode: this.element,
+      docExpansion: 'none',
       presets: [
         SwaggerUIBundle.presets.apis,
         SwaggerUIBundle.SwaggerUIStandalonePreset
