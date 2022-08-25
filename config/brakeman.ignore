@@ -273,29 +273,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "7a498ed65d1b59221a1e0ef627f1b1fb7ffbb33dd0aceae404016a2438f10536",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/jobs/schematics/migrate_schema_job.rb",
-      "line": 31,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"git commit -m 'Migration #{schema_dataset.id}'\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::MigrateSchemaJob",
-        "method": "perform"
-      },
-      "user_input": "schema_dataset.id",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "No user input"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "7af825b5e35a6f54770cf11e3d87943959ab7617b10c8a726563c1da69b6a9dd",
@@ -328,29 +305,6 @@
         22
       ],
       "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "7d7db73d3a3de6bcfb262b3ea6a123765c037a2c78c1a783bacceb6b435a1fb0",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/jobs/schematics/migrate_schema_job.rb",
-      "line": 28,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"rails db:migrate > log/migration_#{schema_dataset.id}.log\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::MigrateSchemaJob",
-        "method": "perform"
-      },
-      "user_input": "schema_dataset.id",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "Safe"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -455,6 +409,52 @@
       "note": "ViewComponent false positive"
     },
     {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "9e4360e1e84dff51ee5ccb8a5842fb4a3785a8e264a7b14314604eaf155c5808",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
+      "line": 23,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"rails db:migrate > log/migration_#{id}.log\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::SchemaDatasets::MigrateDatabase",
+        "method": "call"
+      },
+      "user_input": "id",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "bcafd2213674026503e9ee928b27794e2a79f15d198ebade17e8c90aca876f13",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
+      "line": 22,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"pg_dump -F t #{current_database} > migration_#{id}.tar\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::SchemaDatasets::MigrateDatabase",
+        "method": "call"
+      },
+      "user_input": "current_database",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "c16636182cb6ff5e2f62ddb6bd2296a68369d1c4d2039d677cc348322cad1c96",
@@ -557,29 +557,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "e2c6533127a47b4996305c09690142a8ac33ed4c2f9bcd9d90ef78f36811c60f",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/jobs/schematics/migrate_schema_job.rb",
-      "line": 9,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"pg_dump -F t #{current_database} > migration_#{schema_dataset.id}.tar\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::MigrateSchemaJob",
-        "method": "perform"
-      },
-      "user_input": "current_database",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "Safe"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "eb18dd47e65db627fa909c85ba75deaaf54ef5186d444854185d2926eacd5bc6",
@@ -648,6 +625,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-08-16 17:50:26 +0200",
+  "updated": "2022-08-25 15:14:51 +0200",
   "brakeman_version": "5.3.1"
 }
