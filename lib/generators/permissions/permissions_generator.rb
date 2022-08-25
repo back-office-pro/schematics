@@ -6,6 +6,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   def generate_permissions
     return unless generating?
 
+    ::Permission.reload_definitions!
     PaperTrail.request(enabled: false) do
       ::Role.admin.permissions.push(::Permission.create_entity_permissions!(entity))
     end
