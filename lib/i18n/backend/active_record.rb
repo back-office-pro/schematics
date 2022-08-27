@@ -10,6 +10,8 @@ module I18n
       delegate :normalize_flat_keys, to: '::I18n::Backend::Flatten'
 
       def lookup(locale, key, scope = [], options = EMPTY_HASH)
+        return unless %i[routes activerecord].include?(scope.first)
+
         key = normalize_flat_keys(locale, key, scope, '.') + count_to_key(options[:count])
         Rails.cache.fetch("i18n:#{locale}:#{key}") do
           ::Translation.where(locale:, key:).pick(:value)
