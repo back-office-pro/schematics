@@ -46,10 +46,6 @@ module Schematics
       entities.find { _1.name == name }
     end
 
-    def find_entity_by_id(id)
-      entities.find { _1.id == id }
-    end
-
     def find_attribute_by_prefixed_name(name)
       entities
         .flat_map(&:attributes)

@@ -7,17 +7,9 @@ namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do
     Rails.application.load_generators
-    Schematics::Schema
-      .instance
-      .entities
-      .flat_map do |entity|
-        [
-          Schematics::Commands::CreateEntity.new(entity:),
-          Schematics::Commands::CreateEntityCounterCaches.new(entity:),
-          Schematics::Commands::CreateEntityPolymorphicCounterCaches.new(entity:)
-        ]
-      end
-      .sort_by(&:weight)
+    Schematics::Migrations::CoreMigration
+      .new
+      .build_commands
       .flat_map(&:generators)
       .each(&:invoke_all)
   end
