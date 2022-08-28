@@ -8,6 +8,10 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
     .card-body
       = @builder.hidden_field :id
-      = @builder.hidden_field :type
       = @builder.input :name
+      = @builder.input :type,
+                       as: :select,
+                       collection:,
+                       include_blank: false,
+                       input_html: { data: { controller: 'dropdown' } }
       = render Schematics::SchemaEditor::Options::Component.new(builder: @builder)

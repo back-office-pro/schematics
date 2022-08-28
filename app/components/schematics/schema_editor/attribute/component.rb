@@ -4,6 +4,8 @@ module Schematics
   module SchemaEditor
     module Attribute
       class Component < ApplicationComponent
+        DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
+        delegate :class, to: '@builder.object', prefix: :attribute
         delegate :icon, :type, to: '@builder.object'
         renders_one_form :builder
 
@@ -12,10 +14,27 @@ module Schematics
           @builder = builder
         end
 
+        def collection = (Attributes.constants - DENYLIST)
+          .map(&Attributes.method(:const_get))
+          .select(&method(:compatible_types))
+          .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
+          .sort
+
         def title = Attributes
           .const_get(type.camelize.to_sym)
           .model_name
           .human
+
+        private
+
+        def compatible_types(constant)
+          return true if constant == attribute_class
+
+          constant.superclass != Attributes::Attribute && (
+            constant.superclass == attribute_class ||
+            constant.superclass == attribute_class.superclass
+          )
+        end
       end
     end
   end
