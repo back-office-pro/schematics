@@ -3,6 +3,12 @@
 module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
+      DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
+
+      def attribute_constants_collection
+        (Attributes.constants - DENYLIST).map(&Attributes.method(:const_get))
+      end
+
       def data = {
         'auto-save-target': 'form',
         'nested-form-target': 'form'
