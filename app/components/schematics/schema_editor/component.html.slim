@@ -1,8 +1,9 @@
 = simple_form_for ::SchemaDataset.last.data, as: :schema_dataset, url:, method: :post, wrapper:, validate: true, html: { data: } do |form|
-  .row.g-3.pb-3
-    template#schema-editor-entity data-nested-form-target='templates'
-      = form.simple_fields_for :entities, Schematics::Entities::Entity.new, child_index: 'NEW_RECORD' do |builder|
-        = render Schematics::SchemaEditor::Entity::Component.new(builder:)
+  = render Schematics::SchemaEditor::Template::Entity::Component.new(form:)
+  = render Schematics::SchemaEditor::Template::Virtual::Component.new(form:)
+  = render Schematics::SchemaEditor::Template::Trigger::Component.new(form:)
+  = render Schematics::SchemaEditor::Template::Attribute::Component.with_collection(attribute_constants_collection, form:)
+  .row.g-3.pb-3#entities data-nested-form-target='targets'
     = form.simple_fields_for :entities, entities do |builder|
       = render Schematics::SchemaEditor::Entity::Component.new(builder:)
   = render Schematics::Button::Confirm::Component.new
