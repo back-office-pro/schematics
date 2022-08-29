@@ -21,20 +21,10 @@
         = options_form.input :icon,
                              as: :select,
                              input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
-  .row.g-3.mt-1
+  .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
     = @builder.simple_fields_for :attributes do |builder|
       = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
-    - attribute_constants_collection.each do |constant|
-      template id="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}-#{@builder.index}" data-nested-form-target='templates'
-        = @builder.simple_fields_for :attributes, constant.new, child_index: 'NEW_RECORD' do |builder|
-          = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
     = @builder.simple_fields_for :virtuals do |builder|
       = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
-    template id="schema-editor-virtual-#{@builder.index}" data-nested-form-target='templates'
-      = @builder.simple_fields_for :virtuals, Schematics::Virtuals::Calculation.new, child_index: 'NEW_RECORD' do |builder|
-        = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
     = @builder.simple_fields_for :triggers do |builder|
       = render Schematics::SchemaEditor::Trigger::Component.new(builder:)
-    template id="schema-editor-trigger-#{@builder.index}" data-nested-form-target='templates'
-      = @builder.simple_fields_for :triggers, Schematics::Trigger.new, child_index: 'NEW_RECORD' do |builder|
-        = render Schematics::SchemaEditor::Trigger::Component.new(builder:)

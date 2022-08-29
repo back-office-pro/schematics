@@ -4,8 +4,8 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
         delegate :default_actions, :actions, :icon, to: '@builder.object'
+        delegate :index, to: :@builder
         renders_one_form :builder
 
         def initialize(builder:)
@@ -15,10 +15,6 @@ module Schematics
 
         def actions_collection
           default_actions.map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
-        end
-
-        def attribute_constants_collection
-          (Attributes.constants - DENYLIST).map(&Attributes.method(:const_get))
         end
 
         def icons
