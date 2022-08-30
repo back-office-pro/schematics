@@ -19,6 +19,7 @@ en:
       color: is not a valid hexadecimal color code
       ip_address: is not a valid IP address
       mime_type: is not a valid MIME type
+      name: must contain only word characters (letter, number, underscore)
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
     virtuals:
       argument: a virtual cannot contains an assignment

@@ -19,7 +19,7 @@ module Schematics
       validates :function, presence: true
       validates :name,
                 presence: true,
-                format: { with: /\w+/ },
+                format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
