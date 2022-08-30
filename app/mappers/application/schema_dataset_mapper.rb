@@ -20,28 +20,30 @@ module Application
           rename_keys triggers_attributes: :triggers
           rename_keys options_attributes: :options
           map_value :options, -> { _1.compact_blank }
-          map_value :attributes, -> { _1.values }
-          map_value :attributes do
-            map_array do
-              rename_keys options_attributes: :options
-              guard -> { _1.key?(:options) } do
-                map_value :options, lambda { |options|
-                  options.transform_values do |value|
-                    case value
-                    in 'true'
-                      true
-                    in 'false'
-                      false
-                    in /^(\d)+$/
-                      value.to_i
-                    in /^(\d)+\.(\d)+$/
-                      value.to_f
-                    else
-                      value
+          guard -> { _1.key?(:attributes) } do
+            map_value :attributes, -> { _1.values }
+            map_value :attributes do
+              map_array do
+                rename_keys options_attributes: :options
+                guard -> { _1.key?(:options) } do
+                  map_value :options, lambda { |options|
+                    options.transform_values do |value|
+                      case value
+                      in 'true'
+                        true
+                      in 'false'
+                        false
+                      in /^(\d)+$/
+                        value.to_i
+                      in /^(\d)+\.(\d)+$/
+                        value.to_f
+                      else
+                        value
+                      end
                     end
-                  end
-                }
-                map_value :options, -> { _1.compact_blank }
+                  }
+                  map_value :options, -> { _1.compact_blank }
+                end
               end
             end
           end
