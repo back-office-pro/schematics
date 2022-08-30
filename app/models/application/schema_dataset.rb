@@ -6,11 +6,13 @@ module Application
 
     prepended do
       serialize :data, Schematics::Schema
+      attribute :data, default: -> { last_data }
       delegate :build_commands, :clean_commands, to: :migration, prefix: true
     end
 
     class_methods do
       delegate :version, to: :current, prefix: true, allow_nil: true
+      delegate :data, to: :last, prefix: true, allow_nil: true
 
       def current
         migrated.last
