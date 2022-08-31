@@ -23,13 +23,11 @@ export default class extends ApplicationController {
         element.slim.setData(
           Array
             .from(element.options)
-            .map(option => {
-              return {
-                value: option.value,
-                text: option.innerText,
-                class: !option.value.startsWith(value) && 'd-none'
-              }
-            })
+            .map(option => ({
+              value: option.value,
+              text: option.innerText,
+              class: !option.value.startsWith(value) && 'd-none'
+            }))
         )
         element.value = null
       })
