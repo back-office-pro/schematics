@@ -27,7 +27,7 @@
                   include_blank: !field.required?,
                   minlength: 3,
                   prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown', 'dropdown-address-autocomplete-value': true } }
+                  input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } }
       - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
         = f.input field.name.to_sym,
                   as: field.class.name.demodulize.underscore,
@@ -61,7 +61,7 @@
                   include_blank: false,
                   collection: field.collection.map { _1.push(class: model_field_collection_class(_1.second, field)) },
                   prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown', 'dropdown-depends-on-value': "#{entity.name}[#{field.depends_on}]" } }
+                  input_html: { data: { controller: 'dropdown', 'dropdown-depends-on': "#{entity.name}[#{field.depends_on}]" } }
       - when Schematics::Behaviours::Enumerable
         = f.input field.name.to_sym,
                   as: :select,
