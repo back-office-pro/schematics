@@ -13,6 +13,13 @@ module Schematics
           @builder = builder
         end
 
+        def associations_collection = Schema
+          .instance
+          .entities
+          .reject(&:core?)
+          .map(&:name)
+          .sort
+
         def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
           .map(&Attributes.method(:const_get))
           .select(&method(:compatible_types))

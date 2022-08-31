@@ -8,7 +8,14 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
     .card-body
       = @builder.hidden_field :id
-      = @builder.input :name
+      - case @builder.object
+      - when Schematics::Attributes::BelongsTo
+        = @builder.input :name,
+                         as: :select,
+                         collection: associations_collection,
+                         input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
+      - else
+        = @builder.input :name
       = @builder.input :type,
                        as: :select,
                        collection:,
