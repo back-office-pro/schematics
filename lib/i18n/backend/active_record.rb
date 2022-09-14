@@ -10,11 +10,12 @@ module I18n
       delegate :normalize_flat_keys, to: '::I18n::Backend::Flatten'
 
       def lookup(locale, key, scope = [], options = EMPTY_HASH)
-        return unless %i[routes activerecord].include?(scope.first)
-
-        key = normalize_flat_keys(locale, key, scope, '.') + count_to_key(options[:count])
-        Rails.cache.fetch("i18n:#{locale}:#{key}") do
-          ::Translation.where(locale:, key:).pick(:value)
+        key = normalize_flat_keys(locale, key, scope, '.')
+        case key.split('.')
+        in ['activerecord', 'models', *]
+          fetch(locale, key + count_to_key(options[:count]))
+        in ['routes', *] | ['activerecord', 'attributes', *] | ['activerecord', 'events', *]
+          fetch(locale, key)
         end
       rescue StandardError
         nil
@@ -28,6 +29,12 @@ module I18n
         return '.zero' if count.zero?
         return '.one' if count == 1
         return '.other' if count > 1
+      end
+
+      def fetch(locale, key)
+        Rails.cache.fetch("i18n:#{locale}:#{key}") do
+          ::Translation.where(locale:, key:).pick(:value)
+        end
       end
     end
   end
