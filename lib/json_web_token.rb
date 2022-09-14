@@ -2,6 +2,7 @@
 
 require 'jwt'
 require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/hash/indifferent_access'
 
 class JsonWebToken
   class << self
@@ -13,7 +14,7 @@ class JsonWebToken
 
     def decode(token)
       body, * = JWT.decode(token, secret_key_base)
-      HashWithIndifferentAccess.new(body)
+      ActiveSupport::HashWithIndifferentAccess.new(body)
     rescue JWT::DecodeError
       nil
     end
