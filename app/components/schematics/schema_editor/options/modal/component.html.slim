@@ -1,0 +1,16 @@
+.modal.fade {
+  id=target
+  data-controller='modal'
+  aria-hidden='true'
+  aria-labelledby="#{target}-label"
+  tabindex='-1'
+}
+  .modal-dialog.modal-dialog-centered
+    .modal-content.border-0.shadow-sm
+      .modal-header
+        = render Schematics::CardHeading::Component.new(icon:, title:)
+        button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
+      .modal-body
+        = @builder.simple_fields_for :options do |options_form|
+          - available_options.each do |option|
+            = options_form.input option, as: input_type[option], checked_value: 'true', unchecked_value: 'false'
