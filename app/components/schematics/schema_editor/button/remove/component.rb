@@ -9,6 +9,8 @@ module Schematics
             super
             @wrapper = wrapper
           end
+
+          def title = t('.title')
         end
       end
     end
