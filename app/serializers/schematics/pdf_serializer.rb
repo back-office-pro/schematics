@@ -11,7 +11,7 @@ module Schematics
     end
 
     def content = Grover
-      .new(pdf, options)
+      .new(pdf, **options)
       .to_pdf
 
     def content_type = ::Mime[extension].to_s
