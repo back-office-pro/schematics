@@ -35,6 +35,7 @@ fr:
       schematics/attributes/model_field: Champs de modèle
       schematics/attributes/percentage: Pourcentage
       schematics/attributes/phone: Numéro de téléphone
+      schematics/attributes/rating: Notation
       schematics/attributes/references: Utilisateur courant
       schematics/attributes/rich_text: Editeur de texte riche
       schematics/attributes/state_machine: Machine à état

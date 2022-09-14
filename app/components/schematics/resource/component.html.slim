@@ -58,7 +58,9 @@
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
-    span.fi.rounded class="fi-#{value&.downcase}"
+  span.fi.rounded class="fi-#{value&.downcase}"
+- when Schematics::Attributes::Rating
+  == stars(value)
 - when Schematics::Behaviours::Searchable
   = highlight @field.format(value), @highlight
 - else

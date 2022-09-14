@@ -84,6 +84,11 @@
                   input_html: { data: { controller: 'autosize' } }
       - when Schematics::Attributes::Decimal
         = f.input field.name.to_sym, min_max: true, prepend: field.unit || fa_icon(field.icon)
+      - when Schematics::Attributes::Rating
+        = f.input field.name.to_sym,
+                  as: :range,
+                  prepend: fa_icon(field.icon),
+                  input_html: { step: 0.5, min: 0, max: 5 }
       - when Schematics::Attributes::RichText
         = f.input field.name.to_sym,
                   as: :rich_text_area,

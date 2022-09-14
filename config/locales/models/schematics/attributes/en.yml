@@ -35,6 +35,7 @@ en:
       schematics/attributes/model_field: Model field
       schematics/attributes/percentage: Percentage
       schematics/attributes/phone: Phone number
+      schematics/attributes/rating: Rating
       schematics/attributes/references: Current user
       schematics/attributes/rich_text: Rich text editor
       schematics/attributes/state_machine: State machine

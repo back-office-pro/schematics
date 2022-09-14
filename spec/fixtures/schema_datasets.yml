@@ -116,6 +116,9 @@ one:
           options:
             default: 20
         - id: <%= SecureRandom.uuid %>
+          name: rating
+          type: rating
+        - id: <%= SecureRandom.uuid %>
           name: logo
           type: attachment
           options:
