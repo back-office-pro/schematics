@@ -4,12 +4,14 @@ button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs
     aria-labelledby='entity-dropdown'
   }
   h5.dropdown-header.fw-bold
-    = t('.title')
+    = title
   .pre-scrollable.overflow-scroll
     - collection.each do |constant|
       .dropdown-item {
         data-action='click->nested-form#add:prevent'
-        data-nested-form-template-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}-#{index}"
+        data-nested-form-template-id-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}"
+        data-nested-form-target-id-param="fields-#{index}"
+        data-nested-form-index-param=index
         role='button'
       }
         = fa_icon constant.new.icon, class: 'fa-fw me-2'
@@ -17,7 +19,9 @@ button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs
     .dropdown-divider
     .dropdown-item {
       data-action='click->nested-form#add:prevent'
-      data-nested-form-template-param="schema-editor-virtual-#{index}"
+      data-nested-form-template-id-param='schema-editor-virtual'
+      data-nested-form-target-id-param="fields-#{index}"
+      data-nested-form-index-param=index
       role='button'
     }
       = fa_icon :plus, class: 'fa-fw me-2'
@@ -25,8 +29,20 @@ button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs
     .dropdown-divider
     .dropdown-item {
       data-action='click->nested-form#add:prevent'
-      data-nested-form-template-param="schema-editor-trigger-#{index}"
+      data-nested-form-template-id-param='schema-editor-trigger'
+      data-nested-form-target-id-param="fields-#{index}"
+      data-nested-form-index-param=index
       role='button'
     }
       = fa_icon :atom, class: 'fa-fw me-2'
       = t('.add_trigger')
+    .dropdown-divider
+    .dropdown-item {
+      data-action='click->nested-form#add:prevent'
+      data-nested-form-template-id-param='schema-editor-attribute-belongs-to'
+      data-nested-form-target-id-param="fields-#{index}"
+      data-nested-form-index-param=index
+      role='button'
+    }
+      = fa_icon :link, class: 'fa-fw me-2'
+      = t('.add_association')

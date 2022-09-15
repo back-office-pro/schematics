@@ -3,13 +3,18 @@ import ClientSideValidations from '@client-side-validations/client-side-validati
 
 export default class extends ApplicationController {
   static get targets () {
-    return ['templates', 'form']
+    return ['targets', 'templates', 'form']
   }
 
-  add (event) {
-    const template = this.templatesTargets.find(_ => _.id === event.params.template)
-    const content = template.innerHTML.replace(/NEW_RECORD/g, new Date().getTime().toString())
-    template.insertAdjacentHTML('beforebegin', content)
+  add ({ params: { templateId, targetId, index } }) {
+    const timestamp = new Date().getTime().toString()
+    const template = this.templatesTargets.find(_ => _.id === templateId)
+    const target = this.targetsTargets.find(_ => _.id === targetId)
+    const content = template
+      .innerHTML
+      .replace(/NEW_RECORD/g, timestamp)
+      .replace(/INDEX/g, index == null ? timestamp : index)
+    target.insertAdjacentHTML('beforeend', content)
     ClientSideValidations.reset(this.formTarget)
   }
 

@@ -5,7 +5,6 @@ module Schematics
     module Button
       module AddDropdown
         class Component < ApplicationComponent
-          DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
           delegate :index, to: :@builder
 
           def initialize(builder:)
@@ -13,9 +12,12 @@ module Schematics
             @builder = builder
           end
 
-          def collection = (Attributes.constants - DENYLIST)
+          def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
+            .excluding(Attributes::BelongsTo)
             .map(&Attributes.method(:const_get))
             .sort_by { _1.model_name.human }
+
+          def title = t('.title')
         end
       end
     end

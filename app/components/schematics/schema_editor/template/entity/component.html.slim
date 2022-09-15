@@ -1,0 +1,3 @@
+template#schema-editor-entity data-nested-form-target='templates'
+  = @form.simple_fields_for :entities, Schematics::Entities::Entity.new, child_index: 'INDEX' do |builder|
+    = render Schematics::SchemaEditor::Entity::Component.new(builder:)

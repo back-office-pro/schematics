@@ -71,7 +71,9 @@ module Schematics
 
     def valid?(*)
       valid = super && entities.all?(&:valid?)
-      entities.each { errors.merge!(_1) }
+      entities
+        .flat_map(&:errors)
+        .each { |error| errors.add(:entities_attributes, error) }
       valid
     end
 

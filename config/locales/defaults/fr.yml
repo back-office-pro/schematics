@@ -42,6 +42,7 @@ fr:
       ip_address: n'est pas une adresse IP valide
       limit_out_of_range: a un nombre de fichiers en dehors des limites
       mime_type: n'est pas un type de médias valide
+      name: doit contenir uniquement des caractères alphabétiques (lettre, nombre, underscore)
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:
       argument: un champ virtuel ne peut pas contenir d'assignement

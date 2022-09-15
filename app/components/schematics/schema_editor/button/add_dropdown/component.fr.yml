@@ -1,5 +1,6 @@
 ---
 fr:
+  add_association: Ajouter une association
   add_attribute: Ajouter un attribut %{type}
   add_trigger: Ajouter un déclencheur
   add_virtual: Ajouter un champs virtuel

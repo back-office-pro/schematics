@@ -15,7 +15,7 @@ module Schematics
       validates :actions, inclusion: { in: :default_actions }
       validates :name,
                 presence: true,
-                format: { with: /\w+/ },
+                format: { with: %r{\A([\w/]+)\z}, message: :name },
                 length: { maximum: 50 },
                 exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
 
@@ -230,9 +230,17 @@ module Schematics
         }
       RUBY
 
-      def valid?(*)
+      def valid?(*) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
-        (fields + triggers).each { errors.merge!(_1) }
+        attributes
+          .flat_map(&:errors)
+          .each { |error| errors.add(:attributes_attributes, error) }
+        virtuals
+          .flat_map(&:errors)
+          .each { |error| errors.add(:virtuals_attributes, error) }
+        triggers
+          .flat_map(&:errors)
+          .each { |error| errors.add(:triggers_attributes, error) }
         errors.merge!(descriptor)
         valid
       end

@@ -2,15 +2,15 @@
 
 module Schematics
   module SchemaEditor
-    module Button
-      module Remove
+    module Template
+      module Virtual
         class Component < ApplicationComponent
-          def initialize(wrapper:)
-            super
-            @wrapper = wrapper
-          end
+          renders_one_form :form
 
-          def title = t('.title')
+          def initialize(form:)
+            super
+            @form = form
+          end
         end
       end
     end
