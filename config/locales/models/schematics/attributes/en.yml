@@ -11,7 +11,7 @@ en:
       schematics/attributes/array: Array
       schematics/attributes/attachment: Attachment
       schematics/attributes/attachments: Attachments
-      schematics/attributes/belongs_to: Association
+      schematics/attributes/belongs_to: One-to-many
       schematics/attributes/blob: Blob
       schematics/attributes/boolean: Boolean
       schematics/attributes/byte: Byte

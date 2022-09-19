@@ -7,6 +7,10 @@ module Schematics
         module MigrationGenerator
           def set_local_assigns!
             case file_name
+            when /^drop_join_table_(.+)/
+              @join_tables = attributes.map(&:plural_name)
+              @migration_template = drop_join_table_migration_template_path
+              set_index_names
             when /^drop_(.+)/
               @table_name = normalize_table_name Regexp.last_match(1)
               @migration_template = drop_table_migration_template_path
@@ -32,6 +36,10 @@ module Schematics
 
           def change_column_migration_template_path
             templates_path.join('change_column_migration.rb')
+          end
+
+          def drop_join_table_migration_template_path
+            templates_path.join('drop_join_table_migration.rb')
           end
 
           def drop_table_migration_template_path

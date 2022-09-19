@@ -21,7 +21,7 @@ module Schematics
           permissions_generator,
           slug_migration_generator,
           lock_version_migration_generator,
-          has_and_belongs_to_many_associations.map(&method(:join_table_migration_generator))
+          has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
         ].compact.flatten
       end
 
@@ -62,7 +62,7 @@ module Schematics
         ]
       )
 
-      def join_table_migration_generator(association)
+      def create_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
             "create_join_table_#{association.entity.name.pluralize}_#{association.name}",
@@ -74,11 +74,6 @@ module Schematics
 
       def scaffold_controller_generator
         Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
-      end
-
-      # :reek:FeatureEnvy
-      def has_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
-        super.reject { _1.entity.name.pluralize == _1.name }
       end
     end
   end

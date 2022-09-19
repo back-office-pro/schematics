@@ -46,3 +46,12 @@ button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs
     }
       = fa_icon :link, class: 'fa-fw me-2'
       = t('.add_association')
+    .dropdown-item {
+      data-action='click->nested-form#add:prevent'
+      data-nested-form-template-id-param='schema-editor-habtm-association'
+      data-nested-form-target-id-param="fields-#{index}"
+      data-nested-form-index-param=index
+      role='button'
+    }
+      = fa_icon :link, class: 'fa-fw me-2'
+      = t('.add_habtm_association')

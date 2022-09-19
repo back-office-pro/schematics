@@ -1,0 +1,5 @@
+class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+  def change
+    drop_join_table :<%= join_tables.first %>, :<%= join_tables.second %>
+  end
+end

@@ -2,6 +2,7 @@
 en:
   add_association: Add an association
   add_attribute: Add a %{type} attribute
+  add_habtm_association: Add a many-to-many association
   add_trigger: Add a trigger
   add_virtual: Add a virtual field
   title: Add a field

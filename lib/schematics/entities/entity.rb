@@ -50,7 +50,7 @@ module Schematics
       alias attributes_attributes= attributes=
       alias virtuals_attributes= virtuals=
       alias triggers_attributes= triggers=
-      alias associations_attributes= associations=
+      alias has_and_belongs_to_many_associations_attributes= associations=
       alias options_attributes= options=
 
       def descriptor
@@ -230,17 +230,13 @@ module Schematics
         }
       RUBY
 
-      def valid?(*) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def valid?(*)
         valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
-        attributes
-          .flat_map(&:errors)
-          .each { |error| errors.add(:attributes_attributes, error) }
-        virtuals
-          .flat_map(&:errors)
-          .each { |error| errors.add(:virtuals_attributes, error) }
-        triggers
-          .flat_map(&:errors)
-          .each { |error| errors.add(:triggers_attributes, error) }
+        %i[attributes virtuals triggers has_and_belongs_to_many_associations].each do |element|
+          public_send(element)
+            .flat_map(&:errors)
+            .each { |error| errors.add(:"#{element}_attributes", error) }
+        end
         errors.merge!(descriptor)
         valid
       end

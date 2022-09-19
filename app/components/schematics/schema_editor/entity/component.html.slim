@@ -31,3 +31,5 @@
       = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
     = @builder.simple_fields_for :triggers do |builder|
       = render Schematics::SchemaEditor::Trigger::Component.new(builder:)
+    = @builder.simple_fields_for :has_and_belongs_to_many_associations do |builder|
+      = render Schematics::SchemaEditor::Association::HasAndBelongsToMany::Component.new(builder:)

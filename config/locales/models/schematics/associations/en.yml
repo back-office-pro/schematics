@@ -1,0 +1,9 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/associations/association:
+        name: Name
+        type: Type
+    models:
+      schematics/associations/has_and_belongs_to_many: Many-to-many

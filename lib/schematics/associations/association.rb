@@ -16,6 +16,8 @@ module Schematics
       delegate :hidden?, to: :options
       attr_accessor :belongs_to, :prefixed
 
+      validates :name, presence: true
+
       class << self
         def build(type: 'has_many', entity: nil, belongs_to: nil, name: nil)
           belongs_to ||= Attributes::BelongsTo.new(entity:, name:, options: { required: true })

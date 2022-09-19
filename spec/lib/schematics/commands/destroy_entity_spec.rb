@@ -3,13 +3,31 @@
 describe Schematics::Commands::DestroyEntity do
   subject(:command) { described_class.new(entity:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:) }
-  let(:name) { 'client' }
+  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, associations:) }
+  let(:name) { 'assembly' }
   let(:attributes) do
     [
       {
-        name: 'first_name',
+        name: 'name',
         type: 'string'
+      },
+      {
+        name: 'owner',
+        type: 'belongs_to',
+        options: {
+          type: 'user',
+          inverse: {
+            name: 'assemblies'
+          }
+        }
+      }
+    ]
+  end
+  let(:associations) do
+    [
+      {
+        type: 'has_and_belongs_to_many',
+        name: 'part'
       }
     ]
   end
@@ -24,5 +42,6 @@ describe Schematics::Commands::DestroyEntity do
     its([2]) { is_expected.to be_a(TranslationsGenerator) }
     its([3]) { is_expected.to be_a(PermissionsGenerator) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
   end
 end
