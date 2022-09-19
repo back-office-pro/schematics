@@ -1,0 +1,20 @@
+.col-xl-6.col-md-12.schema-editor-habtm-association
+  .card.shadow-sm.border-0.animate__animated.animate__zoomIn
+    .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+      .row.align-items-center
+        .col.text-truncate
+          = render Schematics::CardHeading::Component.new(icon:, title:)
+        .col-auto
+          = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-habtm-association')
+    .card-body
+      = @builder.input :name,
+                       as: :select,
+                       collection: associations_collection,
+                       selected:,
+                       input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
+      = @builder.input :type,
+                       as: :select,
+                       collection:,
+                       include_blank: false,
+                       readonly: true,
+                       input_html: { data: { controller: 'dropdown' } }
