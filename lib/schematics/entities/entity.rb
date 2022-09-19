@@ -230,20 +230,13 @@ module Schematics
         }
       RUBY
 
-      def valid?(*) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def valid?(*)
         valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
-        attributes
-          .flat_map(&:errors)
-          .each { |error| errors.add(:attributes_attributes, error) }
-        virtuals
-          .flat_map(&:errors)
-          .each { |error| errors.add(:virtuals_attributes, error) }
-        triggers
-          .flat_map(&:errors)
-          .each { |error| errors.add(:triggers_attributes, error) }
-        has_and_belongs_to_many_associations
-          .flat_map(&:errors)
-          .each { |error| errors.add(:has_and_belongs_to_many_associations_attributes, error) }
+        %i[attributes virtuals triggers has_and_belongs_to_many_associations].each do |element|
+          public_send(element)
+            .flat_map(&:errors)
+            .each { |error| errors.add(:"#{element}_attributes", error) }
+        end
         errors.merge!(descriptor)
         valid
       end
