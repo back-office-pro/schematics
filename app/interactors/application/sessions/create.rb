@@ -33,9 +33,9 @@ module Application
         return super if cannot?(:impersonate, @user)
       end
 
-      def remember_me?
-        @params&.fetch(:remember_me, false)
-      end
+      def remember_me? = ::ActiveModel::Type::Boolean
+        .new
+        .cast(@params[:remember_me])
     end
   end
 end
