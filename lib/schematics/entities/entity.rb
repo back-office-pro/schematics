@@ -50,7 +50,7 @@ module Schematics
       alias attributes_attributes= attributes=
       alias virtuals_attributes= virtuals=
       alias triggers_attributes= triggers=
-      alias associations_attributes= associations=
+      alias has_and_belongs_to_many_associations_attributes= associations=
       alias options_attributes= options=
 
       def descriptor
@@ -241,6 +241,9 @@ module Schematics
         triggers
           .flat_map(&:errors)
           .each { |error| errors.add(:triggers_attributes, error) }
+        has_and_belongs_to_many_associations
+          .flat_map(&:errors)
+          .each { |error| errors.add(:has_and_belongs_to_many_associations_attributes, error) }
         errors.merge!(descriptor)
         valid
       end
