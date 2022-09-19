@@ -13,7 +13,6 @@ module Schematics
                :class_name,
                :migratable_attributes,
                :association_attributes,
-               :has_and_belongs_to_many_associations,
                :core?,
                to: :entity,
                private: true
@@ -28,6 +27,11 @@ module Schematics
       def model_exists?
         Object.const_defined?(class_name)
       end
+
+      # :reek:FeatureEnvy
+      def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicateName
+        .has_and_belongs_to_many_associations
+        .reject { _1.entity.name.pluralize == _1.name }
     end
   end
 end
