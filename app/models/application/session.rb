@@ -21,7 +21,12 @@ module Application
       .before?(updated_at)
 
     def login!(user)
-      self.class.create!(ip:, user_agent:, user:)
+      case user
+      when self.user
+        self
+      else
+        self.class.create!(ip:, user_agent:, user:)
+      end
     end
 
     def safe? = user
