@@ -13,3 +13,7 @@
             div
               = fa_icon :atom, class: 'fa-fw me-1'
               = trigger.action
+          - entity.has_and_belongs_to_many_associations.each do |association|
+            div
+              = fa_icon :link, class: 'fa-fw me-1'
+              = association.name
