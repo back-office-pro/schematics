@@ -18,6 +18,7 @@ module Application
           rename_keys attributes_attributes: :attributes
           rename_keys virtuals_attributes: :virtuals
           rename_keys triggers_attributes: :triggers
+          rename_keys has_and_belongs_to_many_associations_attributes: :associations
           rename_keys options_attributes: :options
           map_value :options, -> { _1.compact_blank }
           guard -> { _1.key?(:attributes) } do
@@ -76,6 +77,9 @@ module Application
           end
           guard -> { _1.key?(:triggers) } do
             map_value :triggers, -> { _1.values }
+          end
+          guard -> { _1.key?(:associations) } do
+            map_value :associations, -> { _1.values }
           end
         end
       end

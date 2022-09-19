@@ -48,6 +48,12 @@ RSpec.describe Application::SchemaDatasetMapper do
                 'action' => 'save',
                 'callback' => '$foo = true'
               }
+            },
+            'has_and_belongs_to_many_associations_attributes' => {
+              '0' => {
+                'name' => 'product',
+                'type' => 'has_and_belongs_to_many'
+              }
             }
           }
         }
@@ -91,6 +97,12 @@ RSpec.describe Application::SchemaDatasetMapper do
               {
                 action: 'save',
                 callback: '$foo = true'
+              }
+            ],
+            associations: [
+              {
+                name: 'product',
+                type: 'has_and_belongs_to_many'
               }
             ]
           }
