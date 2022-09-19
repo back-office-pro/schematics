@@ -15,7 +15,8 @@ module Schematics
         feature_generator,
         translations_generator,
         permissions_generator,
-        migration_generator
+        migration_generator,
+        has_and_belongs_to_many_associations.map(&method(:drop_join_table_migration_generator))
       ].compact.flatten
 
       private
@@ -51,6 +52,16 @@ module Schematics
         ['--skip-resource-route', '--skip-migration'],
         behavior: :revoke
       )
+
+      def drop_join_table_migration_generator(association)
+        Rails::Generators::MigrationGenerator.new(
+          [
+            "drop_join_table_#{association.entity.name.pluralize}_#{association.name}",
+            association.entity.name.pluralize,
+            association.name
+          ]
+        )
+      end
     end
   end
 end
