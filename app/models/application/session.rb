@@ -25,7 +25,7 @@ module Application
       when self.user
         self
       else
-        self.class.create!(ip:, user_agent:, user:)
+        self.class.create!(ip:, user_agent:, user:) # impersonate case
       end
     end
 
