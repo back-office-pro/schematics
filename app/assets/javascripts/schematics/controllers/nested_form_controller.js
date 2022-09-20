@@ -15,7 +15,9 @@ export default class extends ApplicationController {
       .replace(/NEW_RECORD/g, timestamp)
       .replace(/INDEX/g, index == null ? timestamp : index)
     target.insertAdjacentHTML('beforeend', content)
-    ClientSideValidations.reset(this.formTarget)
+    if (this.hasFormTarget) {
+      ClientSideValidations.reset(this.formTarget)
+    }
   }
 
   remove (event) {
