@@ -4,7 +4,7 @@ detectors:
   LongParameterList:
     max_params: 5
   TooManyStatements:
-    max_statements: 15
+    max_statements: 16
     exclude:
       - inherited
   TooManyInstanceVariables:
