@@ -1,0 +1,10 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/attributes/state_machine_event:
+        callback: Callback
+        from: From
+        icon: Icon
+        name: Name
+        to: To
