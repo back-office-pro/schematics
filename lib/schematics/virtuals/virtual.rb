@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_record'
+require 'active_record/attribute_methods'
 
 module Schematics
   # :reek:Attribute :reek:InstanceVariableAssumption

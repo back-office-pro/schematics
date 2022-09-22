@@ -4,6 +4,7 @@ require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/array/access'
 require 'active_record'
+require 'active_record/attribute_methods'
 
 module Schematics
   module Entities
