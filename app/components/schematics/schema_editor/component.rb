@@ -22,8 +22,7 @@ module Schematics
       def entities = @schema
         .entities
         .reject(&:core?)
-        .select { Object.const_defined?(_1.class_name) }
-        .sort_by { _1.model_class.human_name }
+        .sort_by(&:name)
 
       def url = schema_datasets_path
 
