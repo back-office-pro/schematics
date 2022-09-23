@@ -38,6 +38,7 @@ describe Schematics::Attributes::StateMachine do
     }
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }

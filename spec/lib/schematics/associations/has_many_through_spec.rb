@@ -50,6 +50,7 @@ describe Schematics::Associations::HasManyThrough do
     through.inverse_entity = through_entity
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 

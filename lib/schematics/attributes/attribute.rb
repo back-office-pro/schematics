@@ -8,6 +8,7 @@ module Schematics
   module Attributes
     # :reek:Attribute :reek:InstanceVariableAssumption
     class Attribute
+      include Behaviours::Inspectable
       include Behaviours::Migratable
       include Behaviours::Validatable
       include ::ActiveModel::API

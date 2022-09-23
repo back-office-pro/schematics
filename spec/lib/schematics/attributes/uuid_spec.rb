@@ -7,6 +7,7 @@ describe Schematics::Attributes::Uuid do
   let(:name) { 'id' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }

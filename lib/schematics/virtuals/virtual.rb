@@ -7,6 +7,7 @@ module Schematics
   # :reek:Attribute :reek:InstanceVariableAssumption
   module Virtuals
     class Virtual
+      include Behaviours::Inspectable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable

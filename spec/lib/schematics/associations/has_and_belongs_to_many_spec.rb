@@ -26,6 +26,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'permission', options:)
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }

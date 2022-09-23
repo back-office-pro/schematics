@@ -7,6 +7,7 @@ module Schematics
   module Associations
     # :reek:Attribute
     class Association
+      include Behaviours::Inspectable
       include Behaviours::Renderable
       include Behaviours::Preloadable
       include ::ActiveModel::API
@@ -28,12 +29,6 @@ module Schematics
       def open_api_type = [{ id!: ::String }]
 
       def weight = 3
-
-      def type = self
-        .class
-        .name
-        .demodulize
-        .underscore
 
       def name
         return [inverse_of, source].join('_') if prefixed

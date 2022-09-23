@@ -11,6 +11,7 @@ describe Schematics::Attributes::Country do
     allow(ISO3166::Country).to receive(:codes).and_return(['FR'])
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
