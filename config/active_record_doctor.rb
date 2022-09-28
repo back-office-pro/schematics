@@ -26,9 +26,6 @@ ActiveRecordDoctor.configure do
     'Schematics::ApplicationRecord',
     'Schematics::Version',
     'FriendlyId::Slug',
-    'Main::MainRecord',
-    'Main::AdminUser',
-    'Main::Licence',
     'ApplicationRecord'
   ]
 

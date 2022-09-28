@@ -9,16 +9,6 @@ gem 'simple_form', # TODO: remove when simple_form is upgraded
     branch: 'main'
 
 after_bundle do
-  # Add main database configuration
-  append_to_file 'config/database.yml', <<~YAML
-    main:
-      <<: *default
-      database: backoffice_production
-      username: readonly
-      password: <%= ENV["MAIN_DATABASE_PASSWORD"] %>
-      host: <%= ENV["MAIN_DATABASE_HOST"] %>
-  YAML
-
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
