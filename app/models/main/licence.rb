@@ -4,7 +4,9 @@ module Main
   class Licence < MainRecord
     self.table_name = 'licences' # rubocop:disable Rails/TableNameAssignment
 
-    LICENCES = YAML.load_file(Schematics::Engine.root.join('lib', 'licences.yml')).freeze
+    LICENCES = YAML
+               .load_file(Schematics::Engine.root.join('lib', 'licences.yml'))
+               .freeze
 
     def entities_size = Schematics::Schema
       .instance
