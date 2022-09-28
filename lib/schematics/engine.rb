@@ -62,6 +62,21 @@ module Schematics
   class Engine < ::Rails::Engine
     isolate_namespace Schematics
 
+    class << self
+      def credentials = ActiveSupport::EncryptedConfiguration.new(
+        config_path: root.join('config', 'credentials.yml.enc'),
+        key_path: root.join('config', 'master.key'),
+        env_key: 'RAILS_MASTER_KEY',
+        raise_if_missing_key: true
+      )
+
+      def tenant = Rails
+        .application
+        .class
+        .module_parent_name
+        .underscore
+    end
+
     # Generators
     config.app_generators do |generator|
       generator.orm :active_record, primary_key_type: :uuid
@@ -132,12 +147,5 @@ module Schematics
 
     # Theme
     config.theme_color = '#2c3e50'
-
-    def credentials = ActiveSupport::EncryptedConfiguration.new(
-      config_path: root.join('config', 'credentials.yml.enc'),
-      key_path: root.join('config', 'master.key'),
-      env_key: 'RAILS_MASTER_KEY',
-      raise_if_missing_key: true
-    )
   end
 end
