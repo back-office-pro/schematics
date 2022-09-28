@@ -28,6 +28,7 @@ detectors:
     exclude:
       - initialize
       - build
+      - load
   UtilityFunction:
     public_methods_only: true
     exclude:
