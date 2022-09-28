@@ -6,7 +6,8 @@ module Schematics
              :comments_feature_flag,
              :tasks_feature_flag,
              :meetings_feature_flag,
-             to: :settings
+             to: :settings,
+             private: true
 
     def initialize
       super
