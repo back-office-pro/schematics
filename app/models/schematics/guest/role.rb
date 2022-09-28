@@ -3,6 +3,8 @@
 module Schematics
   module Guest
     class Role
+      include ::ActiveModel::API
+
       def permissions = [
         ::Permission.new(action: 'create', model: 'Session')
       ]

@@ -3,14 +3,13 @@
 module Schematics
   module Guest
     # :reek:MissingSafeMethod
+    # :reek:Attribute
     class Session
-      delegate :ip, :user_agent, to: :@request
+      include ::ActiveModel::API
+      delegate :ip, :user_agent, to: :request
+      attr_accessor :request
 
-      def initialize(request:)
-        @request = request
-      end
-
-      def locale = @request
+      def locale = request
         .env['HTTP_ACCEPT_LANGUAGE']
         &.scan(/^[a-z]{2}/)
         &.to_a

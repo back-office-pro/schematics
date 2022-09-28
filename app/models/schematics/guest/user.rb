@@ -2,13 +2,11 @@
 
 module Schematics
   module Guest
+    # :reek:Attribute
     class User
+      include ::ActiveModel::API
       delegate :time_zone, to: 'Rails.configuration'
-      attr_reader :locale
-
-      def initialize(locale:)
-        @locale = locale
-      end
+      attr_accessor :locale
 
       def admin? = false
 
