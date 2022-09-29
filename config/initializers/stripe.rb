@@ -2,6 +2,6 @@
 
 require 'stripe'
 
-Stripe.api_key = Schematics::Engine
-                 .credentials
-                 .dig(:stripe, :secret_key)
+::Stripe.api_key = Schematics::Engine
+                   .credentials
+                   .dig(:stripe, :secret_key)
