@@ -1,0 +1,16 @@
+.col-xl-3.col-md-6
+  .card.border-0.animate__animated.animate__zoomIn
+    .card-body.p-3
+      .row.g-0.align-items-center
+        .col.text-center.p-4
+          = fa_icon icon, size: '3x', class: 'd-inline-block'
+          h5.my-4 = title
+          .progress
+            .progress-bar.progress-bar-striped.progress-bar-animated {
+                role='progressbar'
+                aria-valuenow=entities_size
+                aria-valuemin='0'
+                aria-valuemax=quota.entities
+                style="width: #{quota_entities_percentage}%"
+              }
+              | #{entities_size} / #{quota.entities}

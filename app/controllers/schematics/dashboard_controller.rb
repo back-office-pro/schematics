@@ -4,7 +4,6 @@ module Schematics
   class DashboardController < ApplicationController
     def admin
       authorize! :read, :admin_dashboard
-      @licence = Licence.instance # rubocop:disable Lint/ConstantResolution
     end
 
     def home
