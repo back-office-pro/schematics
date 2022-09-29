@@ -3,7 +3,7 @@
 module Schematics
   class Licence
     include ::Singleton
-    attr_reader :email, :name
+    attr_reader :id, :email, :name
 
     def active?
       name.present?
@@ -15,7 +15,8 @@ module Schematics
       .reject(&:core?) # rubocop:disable Performance/Count
       .size
 
-    def load(email:, name:, quota:)
+    def load(id:, email:, name:, quota:)
+      @id = id
       @email = email
       @name = name
       @quota = quota || {}
