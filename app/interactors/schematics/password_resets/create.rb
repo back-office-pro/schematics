@@ -4,18 +4,19 @@ module Schematics
   module PasswordResets
     class Create
       include Interactable
-
-      before do
-        @user = ::User.find_by(email: context.email)
-      end
+      delegate :email, to: :context, private: true
 
       def call
-        fail! unless @user
+        fail! unless user
 
-        @user.regenerate_password_reset_token
-        @user.update!(reset_password_sent_at: ::Time.current)
-        UserMailer.password_reset(@user).deliver_later
+        user.regenerate_password_reset_token
+        user.update!(reset_password_sent_at: ::Time.current)
+        UserMailer.password_reset(user).deliver_later
       end
+
+      private
+
+      def user = ::User.find_by(email:)
     end
   end
 end

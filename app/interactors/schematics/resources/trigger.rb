@@ -4,15 +4,13 @@ module Schematics
   module Resources
     class Trigger
       include Interactable
+      delegate :resource, :event, to: :context, private: true
+      delegate :name, to: :event, prefix: true, private: true
 
-      before do
-        @resource = context.resource
-        @event = context.event
-        @resource.paper_trail_event = @event.name.to_sym
-      end
+      before { resource.paper_trail_event = event_name.to_sym }
 
       def call
-        fail! unless @resource.public_send(:"#{@event.name}!")
+        fail! unless resource.public_send(:"#{event_name}!")
       end
     end
   end

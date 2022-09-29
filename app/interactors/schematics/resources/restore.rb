@@ -4,14 +4,12 @@ module Schematics
   module Resources
     class Restore
       include Interactable
+      delegate :resource, to: :context, private: true
 
-      before do
-        @resource = context.resource
-        @resource.paper_trail_event = :restore
-      end
+      before { resource.paper_trail_event = :restore }
 
       def call
-        fail! unless @resource.restore(recursive: true)
+        fail! unless resource.restore(recursive: true)
       end
     end
   end

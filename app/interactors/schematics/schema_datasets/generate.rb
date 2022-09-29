@@ -5,18 +5,16 @@ module Schematics
     class Generate
       include Interactor
 
+      delegate :schema_dataset, to: :context, private: true
       delegate :load, to: 'Schematics::Schema.instance', private: true
       delegate :load_generators, to: 'Rails.application', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
                :data,
-               to: :@schema_dataset,
+               to: :schema_dataset,
                private: true
 
-      before do
-        @schema_dataset = context.schema_dataset
-        load_generators
-      end
+      before { load_generators }
 
       def call
         migration_clean_commands

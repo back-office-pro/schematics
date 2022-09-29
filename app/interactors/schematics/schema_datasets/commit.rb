@@ -5,16 +5,14 @@ module Schematics
     class Commit
       include Interactor
       delegate :clean, :add, :commit, to: :git, private: true
-
-      before do
-        @schema_dataset = context.schema_dataset
-      end
+      delegate :schema_dataset, to: :context, private: true
+      delegate :id, to: :schema_dataset, private: true
 
       def call
         return clean(ff: true, d: true) if Rails.env.test?
 
         add(all: true)
-        commit("Migration #{@schema_dataset.id}")
+        commit("Migration #{id}")
       end
 
       private

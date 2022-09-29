@@ -4,14 +4,12 @@ module Schematics
   module Resources
     class Archive
       include Interactable
+      delegate :resource, to: :context, private: true
 
-      before do
-        @resource = context.resource
-        @resource.paper_trail_event = :archive
-      end
+      before { resource.paper_trail_event = :archive }
 
       def call
-        fail! unless @resource.destroy
+        fail! unless resource.destroy
       end
     end
   end

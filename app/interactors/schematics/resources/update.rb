@@ -4,14 +4,10 @@ module Schematics
   module Resources
     class Update
       include Interactable
-
-      before do
-        @params = context.resource_params
-        @resource = context.resource
-      end
+      delegate :resource, :resource_params, to: :context, private: true
 
       def call
-        fail! unless @resource.update(@params)
+        fail! unless resource.update(resource_params)
       end
     end
   end

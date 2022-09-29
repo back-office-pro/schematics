@@ -6,13 +6,11 @@ module Schematics
   module Imports
     class ReadData
       include Interactor
-      delegate :model_class, to: :@import, private: true
+      delegate :import, to: :context, private: true
+      delegate :model_class, :file, :model, to: :import, private: true
       delegate :entity, :i18n_scope, to: :model_class, private: true
 
-      before do
-        @import = context.import
-        context.data = Concurrent::Hash.new
-      end
+      before { context.data = Concurrent::Hash.new }
 
       def call
         CSV.foreach(filepath, headers: true).with_index(1) do |row, line|
@@ -24,7 +22,7 @@ module Schematics
 
       def filepath = ::ActiveStorage::Blob
         .service
-        .path_for(@import.file.key)
+        .path_for(file.key)
 
       def convert_row(row)
         row.to_h do |key, value|
@@ -59,7 +57,7 @@ module Schematics
       def i18n_translations
         @i18n_translations ||= ::I18n
                                .t('.')
-                               .dig(i18n_scope, :attributes, @import.model.underscore.to_sym)
+                               .dig(i18n_scope, :attributes, model.underscore.to_sym)
       end
     end
   end

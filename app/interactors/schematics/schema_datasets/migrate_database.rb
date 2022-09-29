@@ -5,16 +5,13 @@ module Schematics
     class MigrateDatabase
       include Interactor
 
+      delegate :schema_dataset, to: :context, private: true
       delegate :needs_migration?, to: :migration_context, private: true
-      delegate :id, to: :@schema_dataset, private: true
+      delegate :id, to: :schema_dataset, private: true
       delegate :current_database,
                :migration_context,
                to: 'ActiveRecord::Base.connection',
                private: true
-
-      before do
-        @schema_dataset = context.schema_dataset
-      end
 
       def call
         return unless needs_migration?

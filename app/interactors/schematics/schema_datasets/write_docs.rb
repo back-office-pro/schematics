@@ -4,13 +4,10 @@ module Schematics
   module SchemaDatasets
     class WriteDocs
       include Interactor
-
-      before do
-        @schema_dataset = context.schema_dataset
-      end
+      delegate :schema_dataset, to: :context, private: true
 
       def call
-        @schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
+        schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
         system 'rails schematics:docs:generate'
       end
     end

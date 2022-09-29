@@ -4,17 +4,15 @@ module Schematics
   module Resources
     class Cache
       include Interactor
-      delegate :entity, to: '@resource.class', private: true
-
-      before do
-        @resource = context.resource
-      end
+      delegate :resource, to: :context, private: true
+      delegate :cache_key, to: :resource, private: true
+      delegate :entity, to: 'resource.class', private: true
 
       def call
         cached_keys
-          .select { @resource.try("#{_1}_previously_changed?") }
+          .select { resource.try("#{_1}_previously_changed?") }
           .each do |key|
-            Rails.cache.write("#{@resource.cache_key}/#{key}", @resource.public_send(key))
+            Rails.cache.write("#{cache_key}/#{key}", resource.public_send(key))
           end
       end
 

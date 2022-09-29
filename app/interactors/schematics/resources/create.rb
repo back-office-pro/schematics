@@ -4,13 +4,10 @@ module Schematics
   module Resources
     class Create
       include Interactable
-
-      before do
-        @resource = context.resource
-      end
+      delegate :resource, to: :context, private: true
 
       def call
-        fail! unless @resource.save
+        fail! unless resource.save
       end
     end
   end

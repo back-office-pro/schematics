@@ -4,17 +4,14 @@ module Schematics
   module Imports
     class ValidateData
       include Interactor
-      delegate :model_class, to: :@import, private: true
+      delegate :import, :data, to: :context, private: true
+      delegate :model_class, to: :import, private: true
 
-      before do
-        @import = context.import
-        @data = context.data
-        @errors = Concurrent::Hash.new
-      end
+      before { @errors = Concurrent::Hash.new }
 
       # :reek:UncommunicativeVariableName
       def call
-        context.data = @data.flat_map do |line, attributes|
+        context.data = data.flat_map do |line, attributes|
           resource = model_class.new(attributes)
           resource.validate!
           resource
@@ -23,7 +20,7 @@ module Schematics
         rescue StandardError => e
           @errors[::I18n.t('.line', line:)] = e
         ensure
-          @import.update!(progress: (line / @data.size) * 100)
+          import.update!(progress: (line / data.size) * 100)
         end
         context.fail!(errors: @errors) if @errors.any?
       end
