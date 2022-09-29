@@ -36,8 +36,7 @@ module Schematics
             render :edit, status: :unprocessable_entity
           end
           format.json do
-            render json: { errors: [t(result.message)] },
-                   status: :unprocessable_entity
+            render json: { errors: [t(result.message)] }, status: :unprocessable_entity
           end
         end
       end
