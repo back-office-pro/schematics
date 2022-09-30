@@ -74,7 +74,7 @@ module Schematics
         .application
         .class
         .module_parent_name
-        .underscore
+        .dasherize
     end
 
     # Generators
