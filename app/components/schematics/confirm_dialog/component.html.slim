@@ -15,7 +15,7 @@
         button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
       .modal-body.text-center
         = fa_icon :triangle_exclamation, size: '2x', class: 'text-danger'
-        .pt-2 = t('schematics.application.delete.subtitle')
+        .pt-2 = @text
       .modal-footer
         = render Schematics::Button::Confirm::Component.new
         = render Schematics::Button::Cancel::Component.new(data: { 'bs-dismiss': 'modal' })

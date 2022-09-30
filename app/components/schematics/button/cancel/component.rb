@@ -4,7 +4,7 @@ module Schematics
   module Button
     module Cancel
       class Component < ApplicationComponent
-        def initialize(path: nil, data: nil, compact: false)
+        def initialize(path: '', data: nil, compact: false)
           super
           @path = path
           @data = data

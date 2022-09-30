@@ -4,7 +4,6 @@ module Schematics
   class DashboardController < ApplicationController
     def admin
       authorize! :read, :admin_dashboard
-      @licence = Main::Licence.instance
     end
 
     def home

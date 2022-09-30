@@ -1,0 +1,17 @@
+.col-xl-3.col-md-6
+  .card.border-0.animate__animated.animate__zoomIn
+    .card-body.p-3
+      .row.g-0.align-items-center
+        .col.text-center.p-4
+          = link_to active_storage_attachments_path, class: 'text-decoration-none' do
+            = fa_icon icon, size: '3x', class: 'd-inline-block'
+            h5.my-4 = title
+            .progress.my-2
+              .progress-bar {
+                role='progressbar'
+                aria-valuenow=storage_size
+                aria-valuemin='0'
+                aria-valuemax=quota.storage
+                style="width: #{quota_storage_percentage}%"
+              }
+                | #{number_to_human_size(storage_size)} / #{number_to_human_size(quota.storage)}

@@ -1,30 +1,34 @@
 # frozen_string_literal: true
 
-module Main
-  class Licence < MainRecord
-    self.table_name = 'licences' # rubocop:disable Rails/TableNameAssignment
+module Schematics
+  class Licence
+    include ::Singleton
+    attr_reader :id, :email, :name
 
-    LICENCES = YAML
-               .load_file(Schematics::Engine.root.join('lib', 'licences.yml'))
-               .freeze
+    def active?
+      name.present?
+    end
 
-    def entities_size = Schematics::Schema
+    def entities_size = Schema
       .instance
       .entities
       .reject(&:core?) # rubocop:disable Performance/Count
       .size
 
-    def expired?
-      return true unless expires_on
-
-      ::Date.current.after?(expires_on)
+    def load(id:, email:, name:, quota:)
+      @id = id
+      @email = email
+      @name = name
+      @quota = quota || {}
     end
 
     def quota = Struct
-      .new(:users, :storage, :entities, keyword_init: true)
-      .new(LICENCES[plan])
+      .new(:entities, :storage, :users, keyword_init: true)
+      .new(**@quota)
 
     def quota_entities_exceeded?
+      return true unless active?
+
       entities_size >= quota.entities
     end
 
@@ -33,6 +37,8 @@ module Main
     end
 
     def quota_storage_exceeded?
+      return true unless active?
+
       storage_size >= quota.storage
     end
 
@@ -41,6 +47,8 @@ module Main
     end
 
     def quota_users_exceeded?
+      return true unless active?
+
       users_size >= quota.users
     end
 

@@ -1,0 +1,12 @@
+.col-xl-3.col-md-6
+  .card.border-0.animate__animated.animate__zoomIn
+    .card-body.p-3
+      .row.g-0.align-items-center
+        .col.text-center.p-4
+          = fa_icon icon, size: '3x', class: 'd-inline-block'
+          h5.my-4 = name
+          = form_with url: licence_path, method: :delete, html: { class: 'd-inline' }
+            = render Schematics::ConfirmDialog::Component.new(target:, text: t('.warning'))
+          button.btn.btn-danger.btn-icon-split.btn-sm data-bs-toggle='modal' data-bs-target="##{target}"
+            span.icon = fa_icon :ban
+            span.text = t('.cancel')

@@ -95,6 +95,7 @@ Lint/ConstantResolution:
     - Session
     - ActiveModel
     - Translation
+    - Stripe
   Exclude:
     - spec/**/*
     - db/*

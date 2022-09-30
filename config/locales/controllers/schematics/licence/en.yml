@@ -1,0 +1,7 @@
+---
+en:
+  schematics:
+    licence:
+      destroy:
+        failure: An error occured
+        success: Your subscription was successfully canceled

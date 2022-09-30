@@ -2,25 +2,5 @@
 en:
   schematics:
     dashboard:
-      admin:
-        api:
-          caption: API documentation for developers
-          title: API access
-        profiler:
-          caption: Monitor API endpoint performance
-          title: API performance
-        quota:
-          entities: Resources quota
-          storage: Storage quota
-          users: Users quota
-        sessions:
-          caption: Manage application accesses
-          title: Secure accesses
-        settings:
-          caption: Manage application settings
-          title: Application settings
-        sidekiq:
-          caption: Manage application background tasks (advanced)
-          title: Background tasks
       logout:
         success: Logged out !

@@ -52,7 +52,6 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
-          allow_any_instance_of(::Main::Licence).to receive(:expires_on).and_return(1.day.from_now)
         end
 
         if can?(:index)

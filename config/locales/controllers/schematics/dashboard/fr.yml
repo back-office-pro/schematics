@@ -2,25 +2,5 @@
 fr:
   schematics:
     dashboard:
-      admin:
-        api:
-          caption: Documentation de l'API pour les développeurs
-          title: Accès API
-        profiler:
-          caption: Moniter les performances des endpoints de l'API
-          title: Performance API
-        quota:
-          entities: Quota ressources
-          storage: Quota stockage
-          users: Quota utilisateurs
-        sessions:
-          caption: Gérer les accès à l'application
-          title: Accès sécurisés
-        settings:
-          caption: Gérer les paramètres de l'application
-          title: Paramètres application
-        sidekiq:
-          caption: Gérer les tâches de fond de l'application (avancé)
-          title: Tâches de fond
       logout:
         success: Déconnecté !
