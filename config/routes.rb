@@ -9,6 +9,7 @@ Schematics::Engine.routes.draw do
     draw :swagger
     resource :preferences, only: %i[edit update]
     resource :profile, only: %i[edit update], controller: :profile
+    resource :licence, only: :destroy, controller: :licence
     resources :password_resets, only: %i[new create edit update], param: :token
     resources :versions, only: %i[index show] do
       patch :revert, on: :member
