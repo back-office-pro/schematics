@@ -12,7 +12,7 @@ class JsonWebToken
       JWT.encode(payload.merge(exp:), secret_key_base)
     end
 
-    def decode(token)
+    def decode(token, *_args)
       body, * = JWT.decode(token, secret_key_base)
       ActiveSupport::HashWithIndifferentAccess.new(body)
     rescue JWT::DecodeError
