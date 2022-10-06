@@ -5,13 +5,13 @@
         = form_with model: ::Search.new, html: { class: 'd-flex' } do |f|
           .position-relative.w-100 data-controller='search-bar' data-search-bar-highlight-value='false'
             = f.search_field :query,
-                              required: true,
-                              minlength: 3,
-                              placeholder: t('.placeholder'),
-                              class: 'form-control border-0 bg-transparent',
-                              autocomplete: 'off',
-                              spellcheck: false,
-                              data: { 'search-bar-target': 'input', action: }
+                             required: true,
+                             minlength: 3,
+                             placeholder: t('.placeholder'),
+                             class: 'form-control border-0 bg-transparent',
+                             autocomplete: 'off',
+                             spellcheck: false,
+                             data: { 'search-bar-target': 'input', action: }
             ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.top-100.w-100 {
               data-search-bar-target='results'
             }
