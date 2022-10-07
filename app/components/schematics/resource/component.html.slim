@@ -61,6 +61,8 @@
   span.fi.rounded class="fi-#{value&.downcase}"
 - when Schematics::Attributes::Rating
   == stars(value)
+- when Schematics::Attributes::Token
+  = render Schematics::Button::Clipboard::Component.new(value:)
 - when Schematics::Behaviours::Searchable
   = highlight @field.format(value), @highlight
 - else
