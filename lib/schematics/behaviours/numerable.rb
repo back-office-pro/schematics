@@ -23,7 +23,7 @@ module Schematics
           when '€', '$', '£'
             number_to_currency(value, **{ unit:, precision: }.compact)
           else
-            [number_with_precision(value, **{ precision: }.compact), unit].compact.join(' ')
+            [number_with_precision(value, precision: precision.to_i), unit].compact.join(' ')
           end
         end
       end
