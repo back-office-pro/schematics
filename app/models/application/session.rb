@@ -34,5 +34,7 @@ module Application
       .where
       .not(id:)
       .exists?(ip:, user_agent:)
+
+    def touch!(*) = update!(updated_at: ::Time.current)
   end
 end

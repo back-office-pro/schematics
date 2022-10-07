@@ -22,7 +22,7 @@ module Schematics
         end
       end
 
-      def update!(*); end
+      def touch!(*) = true
 
       def user = User.new(locale:) # rubocop:disable Lint/ConstantResolution
     end
