@@ -14,9 +14,9 @@ RSpec.describe Schematics::CsvTemplateSerializer do
 
   its(:content) do
     is_expected.to eq <<~CSV
-      Roles
-
-
+      Roles,Api keys
+      ,
+      ,
     CSV
   end
 end
