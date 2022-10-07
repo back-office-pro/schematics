@@ -6,8 +6,8 @@ en:
         api_key: API key
         endpoint: Endpoint
         ip: IP address
-        method: Method
-        methods:
+        request_method: Method
+        request_methods:
           DELETE: DELETE
           GET: GET
           PATCH: PATCH
