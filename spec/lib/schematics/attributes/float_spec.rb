@@ -34,8 +34,8 @@ describe Schematics::Attributes::Float do
   describe '#format' do
     subject { attribute.format(value) }
 
-    let(:value) { 100.099 }
+    let(:value) { 100.999 }
 
-    it { is_expected.to eq('100.099 kg') }
+    it { is_expected.to eq('101 kg') }
   end
 end
