@@ -4,17 +4,16 @@ fr:
     attributes:
       api_request:
         api_key: Clé API
+        endpoint: Point d'entrée
         ip: Adresse IP
         method: Méthode
         methods:
-          delete: DELETE
-          get: GET
-          patch: PATCH
-          post: POST
-          put: PUT
+          DELETE: DELETE
+          GET: GET
+          PATCH: PATCH
+          POST: POST
+          PUT: PUT
         status: Statut
-        url: URL
-        user_agent: Appareil
     models:
       api_request:
         gender: female
