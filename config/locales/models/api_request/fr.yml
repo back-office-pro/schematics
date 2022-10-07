@@ -13,7 +13,6 @@ fr:
           PATCH: PATCH
           POST: POST
           PUT: PUT
-        status: Statut
     models:
       api_request:
         gender: female
