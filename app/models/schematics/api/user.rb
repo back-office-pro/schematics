@@ -3,19 +3,13 @@
 module Schematics
   module Api
     # :reek:Attribute
-    class User
-      include ::ActiveModel::API
-      delegate :time_zone, to: 'Rails.configuration'
+    class User < Guest::User
       attr_accessor :permissions
-
-      def admin? = false
 
       def locale = ::Rails
         .configuration
         .i18n
         .default_locale
-
-      def preferences = {}
 
       def role = Struct
         .new(:permissions)
