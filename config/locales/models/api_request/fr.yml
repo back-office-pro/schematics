@@ -1,0 +1,22 @@
+---
+fr:
+  activerecord:
+    attributes:
+      api_request:
+        api_key: Clé API
+        ip: Adresse IP
+        method: Méthode
+        methods:
+          delete: DELETE
+          get: GET
+          patch: PATCH
+          post: POST
+          put: PUT
+        status: Statut
+        url: URL
+        user_agent: Appareil
+    models:
+      api_key:
+        gender: female
+        one: Requête API
+        other: Requêtes API

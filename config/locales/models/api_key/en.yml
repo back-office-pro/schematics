@@ -1,0 +1,14 @@
+---
+en:
+  activerecord:
+    attributes:
+      api_key:
+        auth_token: API key
+        expired: Expired
+        expires_at: Expires at
+        name: Name
+    models:
+      api_key:
+        gender: female
+        one: API Key
+        other: API Keys

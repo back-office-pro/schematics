@@ -1,0 +1,9 @@
+---
+fr:
+  activerecord:
+    attributes:
+      api_key:
+        auth_token: Clé API
+        expired: Expirée
+        expires_at: Expire le
+        name: Nom
