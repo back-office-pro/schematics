@@ -16,7 +16,7 @@ fr:
         url: URL
         user_agent: Appareil
     models:
-      api_key:
+      api_request:
         gender: female
         one: Requête API
         other: Requêtes API

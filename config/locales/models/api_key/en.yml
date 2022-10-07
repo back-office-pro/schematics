@@ -3,8 +3,8 @@ en:
   activerecord:
     attributes:
       api_key:
+        active: Active
         auth_token: API key
-        expired: Expired
         expires_at: Expires at
         name: Name
     models:
