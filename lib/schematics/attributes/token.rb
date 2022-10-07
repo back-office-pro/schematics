@@ -7,8 +7,6 @@ module Schematics
     class Token < Attribute
       include Behaviours::Renderable
 
-      def database_type = 'string'
-
       def default = SecureRandom.base58
 
       def icon = :key

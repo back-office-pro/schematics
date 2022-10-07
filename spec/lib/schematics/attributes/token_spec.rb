@@ -15,7 +15,7 @@ describe Schematics::Attributes::Token do
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:database_type) { is_expected.to eq('string') }
+  its(:database_type) { is_expected.to eq('token') }
   its(:column_name) { is_expected.to eq('auth_token') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
