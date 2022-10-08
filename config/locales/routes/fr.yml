@@ -3,6 +3,8 @@ fr:
   routes:
     active_storage: stockage
     admin: administration
+    api_keys: cles-api
+    api_requests: requetes-api
     attachments: fichiers
     charts: graphiques
     comments: commentaires

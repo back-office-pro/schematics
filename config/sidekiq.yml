@@ -13,6 +13,12 @@
   schematics/clean_searches_job:
     cron: '0 0 * * *'
     class: Schematics::CleanSearchesJob
+  schematics/clean_sessions_job:
+    cron: '0 0 * * *'
+    class: Schematics::CleanSessionsJob
+  schematics/clean_api_requests_job:
+    cron: '0 0 * * *'
+    class: Schematics::CleanApiRequestsJob
   schematics/migrate_schema_job:
     cron: '0 0 * * *'
     class: Schematics::MigrateSchemaJob

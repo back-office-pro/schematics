@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+module Schematics
+  class CleanSessionsJob < ApplicationJob
+    DELAY = 1.year.freeze
+
+    def perform
+      ::Session.destroy_by(created_at: ..DELAY.ago)
+    end
+  end
+end

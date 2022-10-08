@@ -1,0 +1,14 @@
+---
+fr:
+  activerecord:
+    attributes:
+      api_key:
+        active: Active
+        auth_token: Clé API
+        expires_at: Expire le
+        name: Nom
+    models:
+      api_key:
+        gender: female
+        one: Clé API
+        other: Clés API

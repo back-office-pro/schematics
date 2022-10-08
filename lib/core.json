@@ -30,7 +30,10 @@
       },
       {
         "name": "password_reset_token",
-        "type": "token"
+        "type": "token",
+        "options": {
+          "hidden": true
+        }
       },
       {
         "name": "first_name",
@@ -615,7 +618,10 @@
     "attributes": [
       {
         "name": "auth_token",
-        "type": "token"
+        "type": "token",
+        "options": {
+          "hidden": true
+        }
       },
       {
         "name": "user_agent",
@@ -907,6 +913,85 @@
       {
         "name": "value",
         "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "api_key",
+    "options": {
+      "icon": "key",
+      "descriptor": "name"
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "permission"
+      }
+    ],
+    "attributes": [
+      {
+        "name": "name",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "limit": 50
+        }
+      },
+      {
+        "name": "auth_token",
+        "type": "token"
+      },
+      {
+        "name": "expires_at",
+        "type": "datetime"
+      }
+    ],
+    "virtuals": [
+      {
+        "name": "active",
+        "function": "$active? == true"
+      }
+    ]
+  },
+  {
+    "name": "api_request",
+    "options": {
+      "icon": "server",
+      "hidden": true,
+      "actions": [
+        "index",
+        "show"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "api_key",
+        "type": "belongs_to",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "name": "ip",
+        "type": "ip"
+      },
+      {
+        "name": "endpoint",
+        "type": "string"
+      },
+      {
+        "name": "request_method",
+        "type": "enum",
+        "options": {
+          "values": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
       }
     ]
   }

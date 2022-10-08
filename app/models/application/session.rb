@@ -34,5 +34,11 @@ module Application
       .where
       .not(id:)
       .exists?(ip:, user_agent:)
+
+    def touch!(request)
+      return if request.format.json?
+
+      update!(updated_at: ::Time.current)
+    end
   end
 end

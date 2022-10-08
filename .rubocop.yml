@@ -96,6 +96,7 @@ Lint/ConstantResolution:
     - ActiveModel
     - Translation
     - Stripe
+    - ApiRequest
   Exclude:
     - spec/**/*
     - db/*

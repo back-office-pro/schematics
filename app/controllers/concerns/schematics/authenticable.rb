@@ -6,7 +6,7 @@ module Schematics
 
     included do
       before_action :authenticate_user!
-      before_action :touch_session!, unless: -> { request.format.json? }
+      before_action :touch_session!
       helper_method :current_user, :current_session
     end
 
@@ -33,6 +33,7 @@ module Schematics
 
     def current_session
       ::Session.authorized_by(auth_token, session[:current_session_id]).first ||
+        ::ApiKey.active.find_by(auth_token:) ||
         Guest::Session.new(request:)
     end
 
@@ -50,7 +51,7 @@ module Schematics
     end
 
     def touch_session!
-      current_session.update!(updated_at: ::Time.current)
+      current_session.touch!(request)
     end
   end
 end

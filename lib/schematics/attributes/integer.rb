@@ -18,6 +18,8 @@ module Schematics
 
       def open_api_type = ::Integer
 
+      def precision = 0
+
       def validators = super.merge(
         numericality: { only_integer: true }
       )

@@ -1,0 +1,20 @@
+---
+en:
+  activerecord:
+    attributes:
+      api_request:
+        api_key: API key
+        endpoint: Endpoint
+        ip: IP address
+        request_method: Method
+        request_methods:
+          DELETE: DELETE
+          GET: GET
+          PATCH: PATCH
+          POST: POST
+          PUT: PUT
+    models:
+      api_request:
+        gender: female
+        one: API Request
+        other: API Requests
