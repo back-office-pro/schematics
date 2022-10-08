@@ -27,6 +27,7 @@ describe Schematics::Attributes::Integer do
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq(Integer) }
   its(:unit) { is_expected.to eq('$') }
+  its(:precision) { is_expected.to be_zero }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
   its(:available_options) { is_expected.to include(*compare_checks, :unit, :default) }
@@ -46,6 +47,6 @@ describe Schematics::Attributes::Integer do
 
     let(:value) { 100 }
 
-    it { is_expected.to eq('$100.00') }
+    it { is_expected.to eq('$100') }
   end
 end
