@@ -8,7 +8,7 @@ module Schematics
 
       class << self
         def build(resources:)
-          case resources.klass.entity.viewer
+          case resources.model.entity.viewer
           when :table
             Table::Component.new(resources:)
           when :grid
@@ -33,9 +33,7 @@ module Schematics
         "#{preference} d-none"
       end
 
-      def model_class
-        @resources.try(:klass) || @resources.first.class
-      end
+      def model_class = @resources.model
 
       def tbody_css_classes = %w[animate__animated animate__slideInRight]
     end
