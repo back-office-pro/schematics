@@ -92,7 +92,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rqrcode', '~> 2.1.2'
   spec.add_dependency 'rspec-rails', '~> 6.0.0.rc1'
   spec.add_dependency 'ruby-vips', '~> 2.1.4'
-  spec.add_dependency 'searchkick', '~> 5.0.4'
+  spec.add_dependency 'searchkick', '~> 5.0.5'
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.2.0'
   spec.add_dependency 'sidekiq', '~> 6.5.7'
