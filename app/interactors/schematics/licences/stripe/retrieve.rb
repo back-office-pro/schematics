@@ -7,9 +7,9 @@ module Schematics
         include Interactor
 
         delegate :tenant, to: 'Schematics::Engine', private: true
-        delegate :email, to: :customer, private: true
+        delegate :email, to: :customer, allow_nil: true, private: true
         delegate :name, to: :product, allow_nil: true, private: true
-        delegate :id, to: :subscription, private: true
+        delegate :id, to: :subscription, allow_nil: true, private: true
 
         def call
           context.id = id
@@ -41,7 +41,7 @@ module Schematics
           &.transform_values(&:to_i)
 
         def subscription = ::Stripe::Subscription
-          .list(customer: customer.id, status: 'active')
+          .list(customer: customer&.id, status: 'active')
           .first
       end
     end
