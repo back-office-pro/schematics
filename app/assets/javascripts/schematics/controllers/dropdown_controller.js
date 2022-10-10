@@ -1,4 +1,4 @@
-import ApplicationController from './application_controller'
+import ApplicationController from 'controllers/application_controller'
 import SlimSelect from 'slim-select'
 
 /* global I18n */

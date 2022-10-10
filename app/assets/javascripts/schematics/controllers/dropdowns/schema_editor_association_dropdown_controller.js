@@ -1,4 +1,4 @@
-import SchemaEditorDescriptorDropdownController from './schema_editor_descriptor_dropdown_controller'
+import SchemaEditorDescriptorDropdownController from 'controllers/dropdowns/schema_editor_descriptor_dropdown_controller'
 
 export default class extends SchemaEditorDescriptorDropdownController {
   get inputs () {

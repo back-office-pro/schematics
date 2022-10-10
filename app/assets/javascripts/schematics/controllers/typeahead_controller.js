@@ -1,4 +1,4 @@
-import SearchBarController from './search_bar_controller'
+import SearchBarController from 'controllers/search_bar_controller'
 
 export default class extends SearchBarController {
   onSearch () {

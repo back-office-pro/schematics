@@ -1,4 +1,4 @@
-import ApplicationController from './application_controller'
+import ApplicationController from 'controllers/application_controller'
 import ClientSideValidations from '@client-side-validations/client-side-validations'
 
 export default class extends ApplicationController {

@@ -1,4 +1,4 @@
-import DropdownController from '../dropdown_controller'
+import DropdownController from 'controllers/dropdown_controller'
 
 export default class extends DropdownController {
   setCollection () {
