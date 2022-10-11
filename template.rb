@@ -3,16 +3,16 @@
 require 'json'
 require 'active_support/core_ext/string/inquiry'
 
+# Set environment
+env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
+
 # Gems
-gem 'schematics', path: __dir__
+gem 'schematics', **{ path: (__dir__ if env.development?) }.compact
 gem 'simple_form', # TODO: remove when simple_form is upgraded
     git: 'https://github.com/heartcombo/simple_form',
     branch: 'main'
 
 after_bundle do
-  # Set environment
-  env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
-
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'

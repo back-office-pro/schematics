@@ -1,7 +1,27 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-APP_NAME="${1:-spec/dummy}"
+# frozen_string_literal: true
 
-psql -c "CREATE USER $APP_NAME CREATEDB" 2> /dev/null
-rm -rf $APP_NAME
-time rails new $APP_NAME --database postgresql --skip-test --template template.rb &> log/$APP_NAME.log
+require 'fileutils'
+require 'pg'
+require 'active_support/core_ext/string/filters'
+
+app_name = ARGV.first || 'spec/dummy'
+
+begin
+  PG
+    .connect
+    .exec("CREATE USER #{app_name} CREATEDB")
+rescue PG::Error
+  nil
+end
+
+FileUtils.rm_rf app_name
+
+system <<~SHELL.squish
+  time rails new #{app_name}
+                 --database postgresql
+                 --skip-test
+                 --template template.rb
+                 &> log/#{app_name}.log
+SHELL
