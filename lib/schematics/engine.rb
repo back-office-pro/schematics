@@ -57,6 +57,8 @@ require 'rqrcode'
 require 'icalendar'
 require 'dry/transformer'
 require 'git'
+require 'terser'
+require 'sassc-rails'
 
 module Schematics
   class Engine < ::Rails::Engine
@@ -121,6 +123,8 @@ module Schematics
     config.assets.paths << Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.precompile += %w[schematics_manifest.js]
+    config.assets.js_compressor  = :terser if Rails.env.production?
+    config.assets.css_compressor = :sass if Rails.env.production?
 
     # Importmap
     config.importmap.paths << root.join('config', 'importmap.rb')
