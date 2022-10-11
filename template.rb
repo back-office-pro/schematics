@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'active_support/core_ext/string/inquiry'
 
 # Gems
 gem 'schematics', path: __dir__
