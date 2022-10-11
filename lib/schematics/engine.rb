@@ -106,8 +106,6 @@ module Schematics
     config.active_record.query_log_tags_enabled = true
     config.active_record.action_on_strict_loading_violation = :log
     config.active_record.warn_on_records_fetched_greater_than = 100
-    config.active_record.encryption.support_unencrypted_data = true
-    config.active_record.encryption.extend_queries = true
 
     # Active Job
     config.active_job.queue_adapter = Rails.env.test? ? :test : :sidekiq
