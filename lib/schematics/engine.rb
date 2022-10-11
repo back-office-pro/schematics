@@ -65,12 +65,16 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
+      def app_env = dummy_app? ? :development : :production
+
       def credentials = ActiveSupport::EncryptedConfiguration.new(
         config_path: root.join('config', 'credentials.yml.enc'),
         key_path: root.join('config', 'master.key'),
         env_key: 'RAILS_MASTER_KEY',
         raise_if_missing_key: true
       )
+
+      def dummy_app? = tenant == 'Dummy'
 
       def tenant = Rails
         .application
