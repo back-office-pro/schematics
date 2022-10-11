@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
-if [ -z $1 ]
-then
-    rm -rf spec/dummy
-    time rails new spec/dummy \
-                   --database postgresql \
-                   --skip-test \
-                   --template template.rb \
-                   --dummy-app=true \
-                   &> log/build.log
-else
-    rails new $1 --database postgresql --skip-test --template template.rb &> log/$1.log
-fi
+APP_NAME="${1:-spec/dummy}"
+
+psql -c "CREATE USER $APP_NAME CREATEDB" 2> /dev/null
+rm -rf $APP_NAME
+time rails new $APP_NAME --database postgresql --skip-test --template template.rb &> log/$APP_NAME.log
