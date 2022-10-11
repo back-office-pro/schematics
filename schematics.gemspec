@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'http://mygemserver.com'
   spec.summary = 'Summary of Schematics.'
   spec.description = 'Description of Schematics.'
-  spec.license = 'Private'
+  spec.license = 'Nonstandard'
   spec.required_ruby_version = '>= 3.1.2'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro'
   spec.metadata['rubygems_mfa_required'] = 'true'
