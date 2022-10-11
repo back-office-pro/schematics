@@ -7,16 +7,16 @@ require 'schematics/version'
 Gem::Specification.new do |spec|
   spec.name = 'schematics'
   spec.version = Schematics::VERSION
-  spec.authors = ['maxence.derous']
-  spec.email = ['maxence.derous@gmail.com']
-  spec.homepage = 'http://mygemserver.com'
-  spec.summary = 'Summary of Schematics.'
-  spec.description = 'Description of Schematics.'
+  spec.author = 'Maxence De Rous'
+  spec.email = 'maxence.derous@gmail.com'
+  spec.homepage = 'https://www.back-office.pro'
+  spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
   spec.required_ruby_version = '>= 3.1.2'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/*', 'README.md']
+  spec.executables << 'schematics'
   spec.add_development_dependency 'bootsnap', '~> 1.13.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
