@@ -47,6 +47,12 @@ ActiveSupport.on_load(:active_storage_attachment) do
   end
 end
 
+ActiveSupport.on_load(:active_storage_blob) do
+  ::ActiveStorage::Blob.class_eval do
+    def key = [Schematics::Engine.tenant, super].join('/')
+  end
+end
+
 ActiveSupport.on_load(:action_text_rich_text) do
   ActionText::RichText.class_eval do
     include Schematics::SoftDeletable
