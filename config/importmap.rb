@@ -23,7 +23,7 @@ pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.27/nodelibs/browse
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.25.2/dist/rollbar.umd.js'
 pin 'slim-select', to: 'https://unpkg.com/slim-select@1.27.1/dist/slimselect.min.mjs'
 pin 'sortablejs', to: 'https://unpkg.com/sortablejs@1.15.0/modular/sortable.esm.js'
-pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.14.2/index.js'
+pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.14.3/index.js'
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js'
 pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js'
 pin 'tributejs', to: 'https://unpkg.com/tributejs@5.1.3/dist/tribute.esm.js'
