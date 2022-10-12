@@ -58,6 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'client_side_validations', '~> 21.0.0'
   spec.add_dependency 'client_side_validations-simple_form', '~> 15.0.0'
   spec.add_dependency 'country_select', '~> 8.0.0'
+  spec.add_dependency 'dotenv-rails', '~> 2.8.1'
   spec.add_dependency 'dry-transformer', '~> 0.1.1'
   spec.add_dependency 'easy_translate', '~> 0.5.1'
   spec.add_dependency 'elasticsearch', '~> 7.17.0'
