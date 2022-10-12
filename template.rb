@@ -30,6 +30,16 @@ after_bundle do
   rails_command "RAILS_ENV=#{env} schematics:docs:generate"
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets' if env.development? # rubocop:disable Layout/LineLength
 
+  # Storage configuration
+  append_file 'config/storage.yml', <<~YAML
+    amazon:
+      service: S3
+      access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+      secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+      region: us-east-1
+      bucket: back-office.pro
+  YAML
+
   # Edit .gitignore
   append_to_file '.gitignore', <<~TEXT
     /doc
