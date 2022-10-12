@@ -13,14 +13,17 @@ gem 'simple_form', # TODO: remove when simple_form is upgraded
     branch: 'main'
 
 after_bundle do
+  # Environment file
+  create_file '.env', "#{app_name.upcase}_DATABASE_PASSWORD=#{ENV.fetch('DATABASE_PASSWORD', nil)}"
+
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
   rails_command 'schematics:install:migrations'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
-  rails_command 'schematics:generate'
   rails_command "RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:reset"
+  rails_command 'schematics:generate'
   rails_command "RAILS_ENV=#{env} schematics:db:encryption:init"
   rails_command "RAILS_ENV=#{env} db:migrate"
   rails_command "RAILS_ENV=#{env} schematics:db:seed"
