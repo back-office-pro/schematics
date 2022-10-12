@@ -14,7 +14,12 @@ module Schematics
         def data = {
           controller: 'clipboard',
           action: 'click->clipboard#copy',
-          'clipboard-text-value': @value
+          'clipboard-text-value': @value,
+          'bs-toggle': 'tooltip',
+          'bs-placement': 'right',
+          'bs-trigger': 'manual',
+          'bs-title': fa_icon(:check, class: 'me-2') + t('.tooltip'),
+          'bs-html': true
         }
 
         def icon = :clipboard
