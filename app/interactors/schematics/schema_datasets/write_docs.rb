@@ -5,10 +5,11 @@ module Schematics
     class WriteDocs
       include Interactor
       delegate :schema_dataset, to: :context, private: true
+      delegate :app_env, to: 'Schematics::Engine', private: true
 
       def call
         schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
-        system 'rails schematics:docs:generate'
+        system "RAILS_ENV=#{app_env} rails schematics:docs:generate"
       end
     end
   end
