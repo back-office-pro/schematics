@@ -6,6 +6,7 @@ require 'rails/generators/active_record/migration/migration_generator'
 require 'active_record/migration'
 require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_support/dependencies'
+require 'active_storage/service/tenant_s3_service'
 require 'view_component/renders_one_form'
 require 'open_api/router'
 
