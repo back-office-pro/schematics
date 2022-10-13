@@ -5,13 +5,16 @@
 require 'fileutils'
 require 'pg'
 require 'active_support/core_ext/string/filters'
+require 'active_support/core_ext/securerandom'
+require 'active_support/inflector'
 
 app_name = ARGV.first || 'spec/dummy'
+ENV['DATABASE_PASSWORD'] = db_password = SecureRandom.base58
 
 begin
   PG
     .connect
-    .exec("CREATE USER #{app_name} CREATEDB")
+    .exec("CREATE USER #{app_name.underscore} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
 rescue PG::Error
   nil
 end

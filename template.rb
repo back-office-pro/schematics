@@ -13,19 +13,32 @@ gem 'simple_form', # TODO: remove when simple_form is upgraded
     branch: 'main'
 
 after_bundle do
+  # Environment file
+  create_file '.env', "#{app_name.upcase}_DATABASE_PASSWORD=#{ENV.fetch('DATABASE_PASSWORD', nil)}"
+
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
   rails_command 'schematics:install:migrations'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
-  rails_command 'schematics:generate'
   rails_command "RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:reset"
+  rails_command 'schematics:generate'
   rails_command "RAILS_ENV=#{env} schematics:db:encryption:init"
   rails_command "RAILS_ENV=#{env} db:migrate"
   rails_command "RAILS_ENV=#{env} schematics:db:seed"
   rails_command "RAILS_ENV=#{env} schematics:docs:generate"
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets' if env.development? # rubocop:disable Layout/LineLength
+
+  # Storage configuration
+  append_file 'config/storage.yml', <<~YAML
+    amazon:
+      service: S3
+      access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+      secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+      region: us-east-1
+      bucket: back-office.pro
+  YAML
 
   # Edit .gitignore
   append_to_file '.gitignore', <<~TEXT

@@ -22,7 +22,7 @@ module Schematics
 
         def customer
           @customer ||= ::Stripe::Customer
-                        .search(query: "name:'#{tenant}'")
+                        .search(query: "name:'#{tenant.dasherize}'")
                         .data
                         .first
         end

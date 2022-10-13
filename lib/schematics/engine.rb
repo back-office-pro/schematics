@@ -40,6 +40,7 @@ require 'ratonvirus'
 require 'ratonvirus/clamby'
 require 'i18n/beginning_of_week'
 require 'redis'
+require 'redis-namespace'
 require 'hiredis'
 require 'rack-mini-profiler'
 require 'aasm'
@@ -59,6 +60,7 @@ require 'dry/transformer'
 require 'git'
 require 'terser'
 require 'sassc-rails'
+require 'dotenv-rails'
 
 module Schematics
   class Engine < ::Rails::Engine
@@ -74,13 +76,13 @@ module Schematics
         raise_if_missing_key: true
       )
 
-      def dummy_app? = tenant == 'Dummy'
+      def dummy_app? = tenant == 'dummy'
 
       def tenant = Rails
         .application
         .class
         .module_parent_name
-        .dasherize
+        .underscore
     end
 
     # Generators
@@ -141,10 +143,16 @@ module Schematics
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
     # Cache
-    config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', nil) } if Rails.env.production? # rubocop:disable Layout/LineLength
+    config.before_configuration do |app| # Will work only on production
+      app.config.cache_store = :redis_cache_store, { # rubocop:disable Layout/FirstArrayElementLineBreak, Layout/MultilineArrayLineBreaks
+        namespace: tenant,
+        url: ENV.fetch('REDIS_URL', nil)
+      }
+    end
 
     # Active Storage
     config.after_initialize do # Make sure we override main app defaults
+      config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
     end
 
