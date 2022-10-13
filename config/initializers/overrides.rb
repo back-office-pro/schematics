@@ -49,7 +49,7 @@ end
 
 ActiveSupport.on_load(:active_storage_blob) do
   ::ActiveStorage::Blob.class_eval do
-    def key = [Schematics::Engine.tenant, super].join('/')
+    def key = [Schematics::Engine.tenant.dasherize, super].join('/')
   end
 end
 
