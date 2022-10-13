@@ -18,7 +18,9 @@ module Schematics
                 presence: true,
                 format: { with: %r{\A([\w/]+)\z}, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
+                exclusion: {
+                  in: proc { ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
+                }
 
       attr_accessor :name
       attr_writer :id, :options

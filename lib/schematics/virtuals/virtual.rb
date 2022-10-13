@@ -23,7 +23,9 @@ module Schematics
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
+                exclusion: {
+                  in: proc { ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
+                }
 
       class << self
         def build(**kwargs)
