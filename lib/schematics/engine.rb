@@ -152,6 +152,7 @@ module Schematics
 
     # Active Storage
     config.after_initialize do # Make sure we override main app defaults
+      config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
     end
 
