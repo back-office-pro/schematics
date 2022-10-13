@@ -97,6 +97,7 @@ Lint/ConstantResolution:
     - Translation
     - Stripe
     - ApiRequest
+    - Searchkick
   Exclude:
     - spec/**/*
     - db/*

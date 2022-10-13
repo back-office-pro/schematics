@@ -10,7 +10,7 @@ module Application
     end
 
     def show
-      @results = Searchkick.multi_search(searches).reject(&:empty?)
+      @results = ::Searchkick.multi_search(searches).reject(&:empty?)
       @suggestions = @results.flat_map(&:suggestions).uniq
       respond_to do |format|
         format.json { render json: @results.flat_map(&:results).take(SEARCH_LIMIT), metadata: true }
