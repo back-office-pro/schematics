@@ -29,11 +29,12 @@ after_bundle do
   rails_command "RAILS_ENV=#{env} schematics:db:seed"
   rails_command "RAILS_ENV=#{env} schematics:docs:generate"
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets' if env.development? # rubocop:disable Layout/LineLength
+  rails_command "RAILS_ENV=#{env} searchkick:reindex:all"
 
   # Storage configuration
   append_file 'config/storage.yml', <<~YAML
     amazon:
-      service: S3
+      service: TenantS3
       access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
       secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
       region: us-east-1
