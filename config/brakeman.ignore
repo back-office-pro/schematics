@@ -69,6 +69,29 @@
       "note": "ViewComponent false positive"
     },
     {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "11c045e69de451581c2b534e4e1ba89ee1366f8bad9ccdc97038bfa56eed71d8",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
+      "line": 20,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"RAILS_ENV=#{app_env} rails schematics:db:backup\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::SchemaDatasets::MigrateDatabase",
+        "method": "call"
+      },
+      "user_input": "app_env",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "RAILS_ENV is not set by user"
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "1d662d608c0e4f0db48b697edaf7aedf531adf37425849f6a97efcefb352d716",
@@ -169,6 +192,29 @@
         22
       ],
       "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "427fe4aced5c72482b4e4039f8497dfd6b1c8f8a9a6c824e79fab8cfb7cac50d",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/schematics/schema_datasets/write_docs.rb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"RAILS_ENV=#{app_env} rails schematics:docs:generate\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::SchemaDatasets::WriteDocs",
+        "method": "call"
+      },
+      "user_input": "app_env",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "RAILS_ENV is not set by user"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -409,52 +455,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "9e4360e1e84dff51ee5ccb8a5842fb4a3785a8e264a7b14314604eaf155c5808",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
-      "line": 23,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"rails db:migrate > log/migration_#{id}.log\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::MigrateDatabase",
-        "method": "call"
-      },
-      "user_input": "id",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "Safe"
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "bcafd2213674026503e9ee928b27794e2a79f15d198ebade17e8c90aca876f13",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
-      "line": 22,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"pg_dump -F t #{current_database} > migration_#{id}.tar\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::MigrateDatabase",
-        "method": "call"
-      },
-      "user_input": "current_database",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "Safe"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "c16636182cb6ff5e2f62ddb6bd2296a68369d1c4d2039d677cc348322cad1c96",
@@ -557,6 +557,29 @@
       "note": "ViewComponent false positive"
     },
     {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "e52e2301e9cdf57a19f8ad6164a4e0ada8d213730091d3e7662073bd5afe3fdd",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/schematics/schema_datasets/reindex.rb",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"RAILS_ENV=#{app_env} rails searchkick:reindex:all\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::SchemaDatasets::Reindex",
+        "method": "call"
+      },
+      "user_input": "app_env",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "RAILS_ENV is not set by user"
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "eb18dd47e65db627fa909c85ba75deaaf54ef5186d444854185d2926eacd5bc6",
@@ -589,6 +612,29 @@
         22
       ],
       "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "f51b1ce1d91a8373975375f02abd6b31585cdb178eaf09b4837daa7701620f44",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
+      "line": 21,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"RAILS_ENV=#{app_env} rails db:migrate > log/migration_#{id}.log\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Schematics::SchemaDatasets::MigrateDatabase",
+        "method": "call"
+      },
+      "user_input": "app_env",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "RAILS_ENV is not set by user"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -625,6 +671,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-08-25 15:14:51 +0200",
+  "updated": "2022-10-14 00:19:59 +0200",
   "brakeman_version": "5.3.1"
 }
