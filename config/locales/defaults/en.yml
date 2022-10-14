@@ -6,6 +6,7 @@ en:
     created_at/month: Month
     created_at/week: Week
     created_at/year: Year
+  by: by
   date:
     formats:
       long: "%A %d %B, %Y at %H:%M"
@@ -30,6 +31,7 @@ en:
         integer: integer
         string: string
   line: Line %{line}
+  of: of
   prompt: Select a %{attribute_name}
   simple_form:
     labels:
