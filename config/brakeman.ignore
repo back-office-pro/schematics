@@ -69,29 +69,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "11c045e69de451581c2b534e4e1ba89ee1366f8bad9ccdc97038bfa56eed71d8",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
-      "line": 20,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"RAILS_ENV=#{app_env} rails schematics:db:backup\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::MigrateDatabase",
-        "method": "call"
-      },
-      "user_input": "app_env",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "RAILS_ENV is not set by user"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "1d662d608c0e4f0db48b697edaf7aedf531adf37425849f6a97efcefb352d716",
@@ -559,6 +536,29 @@
     {
       "warning_type": "Command Injection",
       "warning_code": 14,
+      "fingerprint": "e01ed1d7af7eb6e43861c2306695d5b74d6f3cf7fc830ad7e05e6ed157274702",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/application/active_storage/backup.rb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "IO.popen(\"pg_dump -Fc #{current_database}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Application::ActiveStorage::Backup",
+        "method": "call"
+      },
+      "user_input": "current_database",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
       "fingerprint": "e52e2301e9cdf57a19f8ad6164a4e0ada8d213730091d3e7662073bd5afe3fdd",
       "check_name": "Execute",
       "message": "Possible command injection",
@@ -620,7 +620,7 @@
       "check_name": "Execute",
       "message": "Possible command injection",
       "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
-      "line": 21,
+      "line": 18,
       "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
       "code": "system(\"RAILS_ENV=#{app_env} rails db:migrate > log/migration_#{id}.log\")",
       "render_path": null,
@@ -671,6 +671,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-10-14 00:19:59 +0200",
+  "updated": "2022-10-14 01:38:43 +0200",
   "brakeman_version": "5.3.1"
 }
