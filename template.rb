@@ -16,6 +16,16 @@ after_bundle do
   # Environment file
   create_file '.env', "#{app_name.upcase}_DATABASE_PASSWORD=#{ENV.fetch('DATABASE_PASSWORD', nil)}"
 
+  # Storage configuration
+  append_file 'config/storage.yml', <<~YAML
+    amazon:
+      service: TenantS3
+      access_key_id: <%= Schematics::Engine.credentials.dig(:aws, :access_key_id) %>
+      secret_access_key: <%= Schematics::Engine.credentials.dig(:aws, :secret_access_key) %>
+      region: us-east-1
+      bucket: back-office.pro
+  YAML
+
   # Rails commands
   rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
@@ -30,16 +40,6 @@ after_bundle do
   rails_command "RAILS_ENV=#{env} schematics:docs:generate"
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets' if env.development? # rubocop:disable Layout/LineLength
   rails_command "RAILS_ENV=#{env} searchkick:reindex:all"
-
-  # Storage configuration
-  append_file 'config/storage.yml', <<~YAML
-    amazon:
-      service: TenantS3
-      access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-      secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-      region: us-east-1
-      bucket: back-office.pro
-  YAML
 
   # Edit .gitignore
   append_to_file '.gitignore', <<~TEXT
