@@ -103,6 +103,7 @@ module Schematics
 
     # Action Controller
     config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
+    config.action_controller.default_url_options = { host: 'localhost', port: 3000 }
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
