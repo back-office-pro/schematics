@@ -152,6 +152,7 @@
   {
     "name": "active_storage/attachment",
     "options": {
+      "existing": true,
       "icon": "file",
       "descriptor": "filename",
       "actions": [

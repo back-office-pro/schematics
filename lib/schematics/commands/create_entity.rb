@@ -12,7 +12,7 @@ module Schematics
   module Commands
     class CreateEntity < Command
       def generators
-        return [scaffold_controller_generator] if model_exists?
+        return [scaffold_controller_generator] if existing?
 
         [
           scaffold_generator,

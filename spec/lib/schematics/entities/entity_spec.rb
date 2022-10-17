@@ -4,7 +4,7 @@ describe Schematics::Entities::Entity do
   subject(:entity) { described_class.new(name:, attributes:, options:) }
 
   let(:name) { 'entity' }
-  let(:options) { { core: true } }
+  let(:options) { { core: true, existing: true } }
   let(:attributes) do
     [
       {
@@ -15,6 +15,7 @@ describe Schematics::Entities::Entity do
   end
 
   it { is_expected.to be_core }
+  it { is_expected.to be_existing }
 
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:class_name) { is_expected.to eq('Entity') }

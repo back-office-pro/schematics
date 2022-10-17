@@ -7,7 +7,7 @@ module Schematics
   module Commands
     class CreateEntityCounterCaches < Command
       def generators
-        return super if model_exists?
+        return super if existing?
 
         association_attributes
           .reject(&:polymorphic?)

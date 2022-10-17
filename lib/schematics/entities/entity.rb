@@ -26,7 +26,7 @@ module Schematics
       attr_writer :id, :options
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
-      delegate :core?, :hidden?, to: :options
+      delegate :core?, :existing?, :hidden?, to: :options
 
       class << self
         def build(type: 'entity', **kwargs)

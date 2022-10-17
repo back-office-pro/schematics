@@ -7,13 +7,13 @@ module Schematics
   module Commands
     class CreateEntityPolymorphicCounterCaches < Command
       def generators
-        return super if model_exists?
+        return super if existing?
 
         Schema
           .instance
           .polymorphic_associations
-          .reject { Object.const_defined?(_1.entity.class_name) }
           .map(&:entity)
+          .reject(&:existing?)
           .map(&method(:migration_generator))
       end
 

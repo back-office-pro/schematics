@@ -14,6 +14,7 @@ module Schematics
                :migratable_attributes,
                :association_attributes,
                :core?,
+               :existing?,
                to: :entity,
                private: true
       attr_accessor :entity, :attribute, :target
@@ -23,10 +24,6 @@ module Schematics
       def weight = 1
 
       protected
-
-      def model_exists?
-        Object.const_defined?(class_name)
-      end
 
       # :reek:FeatureEnvy
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicateName
