@@ -27,7 +27,7 @@ namespace :schematics do
 
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
-      task.config_path = Schematics::Engine.config_join('active_record_doctor.rb')
+      task.config_path = Schematics::Engine.join_config('active_record_doctor.rb')
       task.setup = -> { Rails.application.eager_load! }
     end
 
@@ -42,19 +42,19 @@ namespace :schematics do
   namespace :docker do
     desc 'Docker build'
     task build: :environment do
-      sh "docker-compose -f #{Schematics::Engine.config_join('docker', 'docker-compose.yml')} build"
+      sh "docker-compose -f #{Schematics::Engine.join_config('docker', 'docker-compose.yml')} build"
     end
 
     desc 'Docker up'
     task up: :environment do
-      sh "docker-compose -f #{Schematics::Engine.config_join('docker', 'docker-compose.yml')} up"
+      sh "docker-compose -f #{Schematics::Engine.join_config('docker', 'docker-compose.yml')} up"
     end
   end
 
   namespace :jobs do
     desc 'Start sidekiq with configuration'
     task run: :environment do
-      sh "bin/bundle exec sidekiq -C #{Schematics::Engine.config_join('sidekiq.yml')}"
+      sh "bin/bundle exec sidekiq -C #{Schematics::Engine.join_config('sidekiq.yml')}"
     end
   end
 
