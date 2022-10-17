@@ -13,8 +13,8 @@ module Schematics
           end
 
           def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
-            .excluding(Attributes::BelongsTo)
             .map(&Attributes.method(:const_get))
+            .excluding(Attributes::BelongsTo)
             .sort_by { _1.model_name.human }
 
           def title = t('.title')
