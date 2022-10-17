@@ -38,6 +38,18 @@ RSpec.describe Schematics::SchemaDatasets::Generate do
         expect(Dir['db/migrate/*_create_prospects.rb']).not_to be_empty
       end
 
+      it 'creates a slug migration file' do
+        expect(Dir['db/migrate/*_add_slug_to_prospects.rb']).not_to be_empty
+      end
+
+      it 'creates a lock_version migration file' do
+        expect(Dir['db/migrate/*_add_lock_version_to_prospects.rb']).not_to be_empty
+      end
+
+      it 'creates a counter cache migration file' do
+        expect(Dir['db/migrate/*_add_comments_count_to_prospects.rb']).not_to be_empty
+      end
+
       it 'creates a model file' do
         expect(File).to exist('app/models/prospect.rb')
       end
