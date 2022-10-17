@@ -6,4 +6,4 @@ en:
         name: Name
         type: Type
     models:
-      schematics/associations/has_and_belongs_to_many: Many-to-many
+      schematics/associations/has_and_belongs_to_many: Many-to-many association

@@ -1,6 +1,6 @@
 ---
 fr:
-  add_association: Ajouter une association
+  add_association: Ajouter une association un à plusieurs
   add_attribute: Ajouter un attribut %{type}
   add_habtm_association: Ajouter une association plusieurs à plusieurs
   add_trigger: Ajouter un déclencheur

@@ -11,7 +11,7 @@ fr:
       schematics/attributes/array: Tableau
       schematics/attributes/attachment: Document
       schematics/attributes/attachments: Documents
-      schematics/attributes/belongs_to: Un à plusieurs
+      schematics/attributes/belongs_to: Association un à plusieurs
       schematics/attributes/blob: Blob
       schematics/attributes/boolean: Booléen
       schematics/attributes/byte: Octet
