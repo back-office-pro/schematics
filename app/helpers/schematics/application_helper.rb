@@ -79,6 +79,7 @@ module Schematics
             .class
             .entity
             .has_many_and_through_and_belongs_to_many_associations
+            .reject(&:existing?)
             .select(&only)
             .map do |association|
               resource
