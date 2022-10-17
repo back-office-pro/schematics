@@ -223,7 +223,7 @@ module Schematics
     def i18n_title_path = 'schematics.resources'
 
     def index_path
-      return polymorphic_path(model_class) if can?(:index, model_class)
+      return main_app.polymorphic_path(model_class) if can?(:index, model_class)
 
       schematics.root_path
     end
