@@ -51,6 +51,11 @@ after_bundle do
   remove_file 'public/422.html'
   remove_file 'public/500.html'
 
+  # Remove unused files
+  remove_file 'app/javascript/controllers/hello_controller.js'
+  remove_file 'config/locales/en.yml'
+  remove_file 'config/locales/simple_form.en.yml'
+
   # Yarn packages
   run 'yarn init -yp'
 

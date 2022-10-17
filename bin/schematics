@@ -28,6 +28,7 @@ system <<~SHELL.squish
   time rails new #{app_name}
                  --database postgresql
                  --skip-test
+                 --skip-keeps
                  --template #{template_path}
                  &> #{log_name}.log
 SHELL
