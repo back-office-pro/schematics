@@ -9,9 +9,7 @@ module Schematics
     class Descriptor
       include ::ActiveModel::API
 
-      validates :field_name,
-                allow_nil: true,
-                inclusion: { in: proc { _1.entity.fields.map(&:name).push('id') } }
+      validates :field_name, allow_nil: true, inclusion: { in: :allowed_field_names }
 
       delegate :name, :entity, :to_sql, to: :field
       attr_accessor :entity
@@ -47,6 +45,11 @@ module Schematics
       end
 
       private
+
+      def allowed_field_names = entity
+        .fields
+        .map(&:name)
+        .push('id')
 
       def field
         entity.find_field_by_name(field_name)
