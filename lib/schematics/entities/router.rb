@@ -5,8 +5,15 @@ require 'active_support/core_ext/array/access'
 
 module Schematics
   module Entities
-    class Router
-      delegate :name, :class_name, :table_name, :actions, :events, :can?, to: :@entity
+    class Router # rubocop:disable Metrics/ClassLength
+      delegate :name,
+               :class_name,
+               :table_name,
+               :actions,
+               :events,
+               :can?,
+               to: :@entity,
+               private: true
 
       def initialize(entity)
         @entity = entity
