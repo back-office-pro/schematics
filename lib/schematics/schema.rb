@@ -10,9 +10,6 @@ module Schematics
     include ::ActiveModel::API
     attr_reader :entities
 
-    validate :missing_associations
-    validate :missing_habtm_associations
-
     class << self
       public :new
       delegate :load, to: :new
@@ -36,7 +33,7 @@ module Schematics
     def as_json = @data
 
     def entities=(entities)
-      @entities = entities.map { Entities::Entity.build(**_1) }
+      @entities = entities.map { Entities::Entity.build(schema: self, **_1) }
       add_associations_and_check_for_name_collisions
     end
 
@@ -178,20 +175,5 @@ module Schematics
         find_has_one_through_associations(entity, child)
       end
     end
-
-    def missing_associations = entities
-      .flat_map(&:association_attributes)
-      .reject(&:polymorphic?)
-      .map(&:inverse_association)
-      .map(&:association_type)
-      .reject(&method(:find_entity_by_name))
-      .map { |name| errors.add(:base, :missing_association, name:) }
-
-    def missing_habtm_associations = entities
-      .flat_map(&:has_and_belongs_to_many_associations)
-      .map(&:name)
-      .map(&:singularize)
-      .reject(&method(:find_entity_by_name))
-      .map { |name| errors.add(:base, :missing_habtm_association, name:) }
   end
 end

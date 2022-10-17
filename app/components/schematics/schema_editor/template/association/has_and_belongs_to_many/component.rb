@@ -19,7 +19,9 @@ module Schematics
               name: 'NEW_HABTM_ASSOCIATION'
             )
 
-            def entity = Entities::Entity.new
+            def entity = Entities::Entity.new(schema:)
+
+            def schema = @form.object
           end
         end
       end

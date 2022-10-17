@@ -5,7 +5,7 @@ module Schematics
     module Attribute
       class Component < ApplicationComponent
         delegate :class, to: '@builder.object', prefix: :attribute
-        delegate :icon, :type, to: '@builder.object'
+        delegate :entity, :icon, :type, to: '@builder.object'
         renders_one_form :builder
 
         def initialize(builder:)
@@ -13,8 +13,8 @@ module Schematics
           @builder = builder
         end
 
-        def associations_collection = Schema
-          .instance
+        def associations_collection = entity
+          .schema
           .entities
           .reject(&:core?)
           .map(&:name)

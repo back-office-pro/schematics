@@ -15,6 +15,10 @@ module Schematics
       delegate :polymorphic?, to: :options
       attr_accessor :inverse_entity
 
+      validates :association_type,
+                inclusion: { in: :allowed_association_types },
+                unless: :polymorphic?
+
       def available_options = super.push(
         :inverse,
         :type,
@@ -93,6 +97,13 @@ module Schematics
       def icon
         inverse_entity&.icon || :link
       end
+
+      protected
+
+      def allowed_association_types = entity
+        .schema
+        .entities
+        .map(&:name)
     end
   end
 end

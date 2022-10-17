@@ -3,12 +3,13 @@
 describe Schematics::Attributes::ModelField do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'assembly') }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'assembly') }
+  let(:schema) { Schematics::Schema.instance }
   let(:name) { 'part' }
   let(:options) { { type: 'numerable' } }
 
   before do
-    allow(Schematics::Schema.instance).to receive(:entities).and_return([entity])
+    allow(schema).to receive(:entities).and_return([entity])
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }

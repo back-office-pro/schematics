@@ -1,4 +1,4 @@
 template#schema-editor-trigger data-nested-form-target='templates'
-  = @form.simple_fields_for :entities, Schematics::Entities::Entity.new, child_index: 'INDEX' do |entity_builder|
+  = @form.simple_fields_for :entities, entity, child_index: 'INDEX' do |entity_builder|
     = entity_builder.simple_fields_for :triggers, Schematics::Trigger.new, child_index: 'NEW_RECORD' do |builder|
       = render Schematics::SchemaEditor::Trigger::Component.new(builder:)

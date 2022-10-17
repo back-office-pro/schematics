@@ -11,6 +11,10 @@ module Schematics
             super
             @form = form
           end
+
+          def entity = Entities::Entity.new(schema:)
+
+          def schema = @form.object
         end
       end
     end

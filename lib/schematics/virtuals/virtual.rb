@@ -20,7 +20,7 @@ module Schematics
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :dangerous_attribute_methods }
+                exclusion: { in: :reserved_names }
 
       class << self
         def build(**kwargs)
@@ -83,6 +83,11 @@ module Schematics
       def method_body = tokens
         .map(&:value)
         .join
+
+      def reserved_names = ::ActiveRecord::AttributeMethods
+        .dangerous_attribute_methods
+        .to_a
+        .concat(entity.virtuals.excluding(self).map(&:name))
 
       def tokens
         @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)

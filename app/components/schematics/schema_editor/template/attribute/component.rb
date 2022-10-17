@@ -13,6 +13,10 @@ module Schematics
             @form = form
             @constant = constant
           end
+
+          def entity = Entities::Entity.new(schema:)
+
+          def schema = @form.object
         end
       end
     end

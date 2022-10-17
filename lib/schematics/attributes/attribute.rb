@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_record'
+require 'active_record/attribute_methods'
 require 'active_support/core_ext/securerandom'
 
 module Schematics
@@ -21,7 +23,7 @@ module Schematics
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :dangerous_attribute_methods }
+                exclusion: { in: :reserved_names }
 
       class << self
         def build(type:, **kwargs)
@@ -46,6 +48,13 @@ module Schematics
       def to_str = ''
 
       def weight = 1
+
+      protected
+
+      def reserved_names = ::ActiveRecord::AttributeMethods
+        .dangerous_attribute_methods
+        .to_a
+        .concat(entity.attributes.excluding(self).map(&:name))
     end
   end
 end

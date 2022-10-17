@@ -17,8 +17,8 @@ module Schematics
 
       def icon = :project_diagram
 
-      def values = Schema
-        .instance
+      def values = entity
+        .schema
         .entities
         .reject(&:hidden?)
         .map(&:class_name)

@@ -25,8 +25,8 @@ module Schematics
 
       def icon = :code
 
-      def values = Schema
-        .instance
+      def values = entity
+        .schema
         .entities
         .reject(&:hidden?)
         .flat_map(&:"#{field_type}_fields")

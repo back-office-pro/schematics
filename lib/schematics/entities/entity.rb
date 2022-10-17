@@ -18,11 +18,9 @@ module Schematics
                 presence: true,
                 format: { with: %r{\A([\w/]+)\z}, message: :name },
                 length: { maximum: 50 },
-                exclusion: {
-                  in: proc { ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
-                }
+                exclusion: { in: :reserved_names }
 
-      attr_accessor :name
+      attr_accessor :schema, :name
       attr_writer :id, :options
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
@@ -276,6 +274,11 @@ module Schematics
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
+
+      def reserved_names = ::ActiveRecord::AttributeMethods
+        .dangerous_attribute_methods
+        .to_a
+        .concat(schema.entities.excluding(self).map(&:name))
     end
   end
 end

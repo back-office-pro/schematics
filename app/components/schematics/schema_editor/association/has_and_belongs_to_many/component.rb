@@ -5,6 +5,7 @@ module Schematics
     module Association
       module HasAndBelongsToMany
         class Component < ApplicationComponent
+          delegate :entity, to: '@builder.object', private: true
           renders_one_form :builder
 
           def initialize(builder:)
@@ -12,8 +13,8 @@ module Schematics
             @builder = builder
           end
 
-          def associations_collection = Schema
-            .instance
+          def associations_collection = entity
+            .schema
             .entities
             .reject(&:core?)
             .map(&:name)
