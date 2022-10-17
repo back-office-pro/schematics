@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_record'
-require 'active_record/attribute_methods'
 require 'active_support/core_ext/securerandom'
 
 module Schematics
@@ -23,9 +21,7 @@ module Schematics
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
-                exclusion: {
-                  in: proc { ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
-                }
+                exclusion: { in: :dangerous_attribute_methods }
 
       class << self
         def build(type:, **kwargs)

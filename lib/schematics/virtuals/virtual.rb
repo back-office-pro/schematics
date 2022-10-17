@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_record'
-require 'active_record/attribute_methods'
-
 module Schematics
   # :reek:Attribute :reek:InstanceVariableAssumption
   module Virtuals
@@ -23,9 +20,7 @@ module Schematics
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
-                exclusion: {
-                  in: proc { ::ActiveRecord::AttributeMethods.dangerous_attribute_methods }
-                }
+                exclusion: { in: :dangerous_attribute_methods }
 
       class << self
         def build(**kwargs)
@@ -47,16 +42,19 @@ module Schematics
 
       def available_options = []
 
-      def open_api_type = ::String
+      def format(value)
+        case value
+        when NoMethodError
+          value.original_message
+        else
+          super
+        end
+      end
 
-      def weight = 1
+      def open_api_type = ::String
 
       def options
         Schematics::Options.new(options: @options)
-      end
-
-      def to_sql
-        tokens.map(&:to_sql)
       end
 
       def preload = tokens
@@ -65,13 +63,8 @@ module Schematics
         .uniq
         .map(&:to_sym)
 
-      def format(value)
-        case value
-        when NoMethodError
-          value.original_message
-        else
-          super
-        end
+      def to_sql
+        tokens.map(&:to_sql)
       end
 
       def to_str = <<~RUBY
@@ -83,15 +76,17 @@ module Schematics
         end
       RUBY
 
-      protected
+      def weight = 1
 
-      def tokens
-        @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
-      end
+      protected
 
       def method_body = tokens
         .map(&:value)
         .join
+
+      def tokens
+        @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
+      end
     end
   end
 end
