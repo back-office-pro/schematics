@@ -69,9 +69,13 @@ module Schematics
     class << self
       def app_env = dummy_app? ? :development : :production
 
+      def config_join(*pathnames)
+        root.join(*pathnames.unshift('config'))
+      end
+
       def credentials = ActiveSupport::EncryptedConfiguration.new(
-        config_path: root.join('config', 'credentials.yml.enc'),
-        key_path: root.join('config', 'master.key'),
+        config_path: config_join('credentials.yml.enc'),
+        key_path: config_join('master.key'),
         env_key: 'RAILS_MASTER_KEY',
         raise_if_missing_key: true
       )
@@ -136,7 +140,7 @@ module Schematics
     config.assets.css_compressor = :sass if Rails.env.production?
 
     # Importmap
-    config.importmap.paths << root.join('config', 'importmap.rb')
+    config.importmap.paths << config_join('importmap.rb')
 
     # i18n
     config.i18n.default_locale = Rails.env.test? ? :en : :fr

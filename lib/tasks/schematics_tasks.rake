@@ -27,7 +27,7 @@ namespace :schematics do
 
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
-      task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')
+      task.config_path = Schematics::Engine.config_join('active_record_doctor.rb')
       task.setup = -> { Rails.application.eager_load! }
     end
 
@@ -42,7 +42,7 @@ namespace :schematics do
   namespace :jobs do
     desc 'Start sidekiq with configuration'
     task run: :environment do
-      sh "bin/bundle exec sidekiq -C #{Schematics::Engine.root.join('config', 'sidekiq.yml')}"
+      sh "bin/bundle exec sidekiq -C #{Schematics::Engine.config_join('sidekiq.yml')}"
     end
   end
 
