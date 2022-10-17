@@ -28,8 +28,8 @@ services:
       - 6379:6379
   web:
     build:
-      context: .
-      dockerfile: docker/Dockerfile
+      context: ${PWD}
+      dockerfile: ${GEM_HOME}/gems/schematics-1.0.0/config/docker/Dockerfile
     ports:
       - 3000:3000
     depends_on:
