@@ -175,7 +175,7 @@ module Schematics
         respond_to do |format|
           format.html do
             notice = tscope(result.message, event: event.human.downcase)
-            redirect_back_or_to(@resource, notice:)
+            redirect_back_or_to polymorphic_path(@resource), notice:
           end
           format.json
         end

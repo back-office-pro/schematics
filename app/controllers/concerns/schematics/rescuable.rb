@@ -25,7 +25,7 @@ module Schematics
     def invalid_transition(exception)
       respond_to do |format|
         format.html do
-          redirect_back_or_to @resource,
+          redirect_back_or_to polymorphic_path(@resource),
                               alert: t('schematics.application.invalid_transition.alert')
         end
         format.json do
