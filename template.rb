@@ -32,14 +32,14 @@ after_bundle do
   rails_command 'schematics:install:migrations'
   rails_command 'active_storage:install'
   rails_command 'action_text:install'
-  rails_command "RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:reset"
+  rails_command('DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:reset', env:)
   rails_command 'schematics:generate'
-  rails_command "RAILS_ENV=#{env} schematics:db:encryption:init"
-  rails_command "RAILS_ENV=#{env} db:migrate"
-  rails_command "RAILS_ENV=#{env} schematics:db:seed"
-  rails_command "RAILS_ENV=#{env} schematics:docs:generate"
+  rails_command('schematics:db:encryption:init', env:)
+  rails_command('db:migrate', env:)
+  rails_command('schematics:db:seed', env:)
+  rails_command('schematics:docs:generate', env:)
   rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets' if env.development? # rubocop:disable Layout/LineLength
-  rails_command "RAILS_ENV=#{env} searchkick:reindex:all"
+  rails_command('searchkick:reindex:all', env:)
 
   # Edit .gitignore
   append_to_file '.gitignore', <<~TEXT
@@ -65,7 +65,7 @@ after_bundle do
     .each { |dependency, version| run "yarn add #{dependency}@#{version}" }
 
   # Assets
-  rails_command 'RAILS_ENV=production assets:precompile' if env.production?
+  rails_command('assets:precompile', env:) if env.production?
 
   # Git
   git add: '-A'
@@ -75,5 +75,5 @@ after_bundle do
   run 'brakeman --no-pager --no-exit-on-error'
 
   # Database checks
-  rails_command "RAILS_ENV=#{env} schematics:db:active_record_doctor"
+  rails_command('schematics:db:active_record_doctor', env:)
 end
