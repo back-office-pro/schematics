@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-gem build && gem install --local ./schematics-*.gem
+bundle cache
+gem build
+gem install --local ./schematics-*.gem

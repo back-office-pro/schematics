@@ -9,3 +9,4 @@
 /Gemfile.lock
 /yarn.lock
 /schematics-*.gem
+/vendor
