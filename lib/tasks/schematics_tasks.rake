@@ -39,18 +39,6 @@ namespace :schematics do
     end
   end
 
-  namespace :docker do
-    desc 'Docker build'
-    task build: :environment do
-      sh "docker-compose -f #{Schematics::Engine.join_config('docker', 'docker-compose.yml')} build"
-    end
-
-    desc 'Docker up'
-    task up: :environment do
-      sh "docker-compose -f #{Schematics::Engine.join_config('docker', 'docker-compose.yml')} up"
-    end
-  end
-
   namespace :jobs do
     desc 'Start sidekiq with configuration'
     task run: :environment do
