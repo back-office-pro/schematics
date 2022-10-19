@@ -44,6 +44,7 @@ after_bundle do
   # Edit .gitignore
   append_to_file '.gitignore', <<~TEXT
     /doc
+    .env
   TEXT
 
   # Remove public HTML files
