@@ -15,7 +15,3 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-
-gem 'simple_form', # TODO: remove when simple_form is upgraded
-    git: 'https://github.com/heartcombo/simple_form',
-    branch: 'main'

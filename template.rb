@@ -8,9 +8,6 @@ env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
 
 # Gems
 gem 'schematics', **{ path: (__dir__ if env.development?) }.compact
-gem 'simple_form', # TODO: remove when simple_form is upgraded
-    git: 'https://github.com/heartcombo/simple_form',
-    branch: 'main'
 
 after_bundle do
   # Environment file
@@ -27,7 +24,6 @@ after_bundle do
   YAML
 
   # Rails commands
-  rails_command 'generate simple_form:install --bootstrap'
   rails_command 'generate rspec:install'
   rails_command 'schematics:install:migrations'
   rails_command 'active_storage:install'
@@ -55,7 +51,6 @@ after_bundle do
   # Remove unused files
   remove_file 'app/javascript/controllers/hello_controller.js'
   remove_file 'config/locales/en.yml'
-  remove_file 'config/locales/simple_form.en.yml'
 
   # Yarn packages
   run 'yarn init -yp'
