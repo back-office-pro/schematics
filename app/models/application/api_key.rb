@@ -14,7 +14,11 @@ module Application
       ::Time.current.before?(expires_at)
     end
 
-    def auth_token = ::JsonWebToken.encode({ auth_token: super, exp: expires_at&.to_i }.compact)
+    def auth_token
+      return unless super
+
+      ::JsonWebToken.encode({ auth_token: super, exp: expires_at&.to_i }.compact)
+    end
 
     def login!(*) = self
 
