@@ -25,7 +25,6 @@
                   as: :select,
                   collection: [@resource.public_send(field.name.to_sym)].compact,
                   include_blank: !field.required?,
-                  minlength: 3,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } }
       - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone

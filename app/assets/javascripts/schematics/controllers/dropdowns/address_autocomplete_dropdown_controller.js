@@ -16,7 +16,7 @@ export default class extends DropdownController {
   }
 
   isValid (input) {
-    return input.length >= this.element.getAttribute('minlength')
+    return input.length >= 3
   }
 
   get service () {
