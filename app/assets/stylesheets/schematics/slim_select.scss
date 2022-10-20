@@ -46,3 +46,10 @@
     box-shadow: none;
   }
 }
+
+.ss-main.is-valid .ss-add,
+.ss-main.is-invalid .ss-add,
+.ss-main.is-valid .ss-arrow,
+.ss-main.is-invalid .ss-arrow {
+  padding-right: 1.5rem;
+}
