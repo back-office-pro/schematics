@@ -1,12 +1,12 @@
 .input-group.flex-nowrap data-controller='typeahead'
   = search_field_tag filter_name,
-                    value,
-                    minlength: 2,
-                    placeholder: t('.prompt', attribute_name:),
-                    autocomplete: 'off',
-                    spellcheck: false,
-                    data: { 'typeahead-target': 'input', action: },
-                    class: css_classes
+                     value,
+                     minlength: 2,
+                     placeholder: t('.prompt', attribute_name:),
+                     autocomplete: 'off',
+                     spellcheck: false,
+                     data: { 'typeahead-target': 'input', action: },
+                     class: css_classes
   ul.list-group.list-group-striped.shadow-sm.typeahead-results.position-absolute.z-index-1.top-100.w-100 {
     data-typeahead-target='results'
   }
