@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pg', '~> 1.4.4'
   spec.add_development_dependency 'reek', '~> 6.1.1'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.36.0'
+  spec.add_development_dependency 'rubocop', '~> 1.37.0'
   spec.add_development_dependency 'rubocop-ordered_methods', '~> 0.9.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.15.0'
   spec.add_development_dependency 'rubocop-rails', '~> 2.16.1'
