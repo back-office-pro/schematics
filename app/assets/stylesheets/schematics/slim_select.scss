@@ -23,10 +23,6 @@
     opacity: initial;
   }
 
-  .ss-multi-selected .ss-add {
-    margin: 11px 7px 0 0;
-  }
-
   .ss-content {
     border: 0;
     border-radius: .25rem;
@@ -49,14 +45,4 @@
   &:focus {
     box-shadow: none;
   }
-}
-
-.ss-main.is-valid .ss-add,
-.ss-main.is-invalid .ss-add {
-  padding-right: 1.5rem;
-}
-
-.ss-main.is-valid .ss-arrow,
-.ss-main.is-invalid .ss-arrow {
-  padding-right: 2rem;
 }
