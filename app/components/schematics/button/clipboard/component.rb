@@ -18,7 +18,7 @@ module Schematics
           'bs-toggle': 'tooltip',
           'bs-placement': 'right',
           'bs-trigger': 'manual',
-          'bs-title': fa_icon(:check, class: 'me-2') + t('.tooltip'),
+          'bs-title': fa_icon(:check, class: 'me-2 text-success') + t('.tooltip'),
           'bs-html': true
         }
 
