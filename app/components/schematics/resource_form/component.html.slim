@@ -6,16 +6,18 @@
       - when Schematics::Associations::HasAndBelongsToMany
         = f.association field.name.to_sym,
                         prepend: fa_icon(field.icon),
-                        input_html: { data: { controller: 'dropdown' } }
+                        input_html: { data: { controller: 'dropdown' } },
+                        wrapper:
       - when Schematics::Attributes::BelongsTo
         = f.association field.name.to_sym,
                         prompt: t('prompt', gender: field.model_class.gender, attribute_name: human_attribute_name(field.name).downcase),
                         include_blank: !field.required?,
                         collection: field.model_class.all.map { [_1.to_s, _1.id] }.sort,
                         prepend: fa_icon(field.icon),
-                        input_html: { data: { controller: 'dropdown' } }
+                        input_html: { data: { controller: 'dropdown' } },
+                        wrapper:
       - when Schematics::Attributes::Date
-        = f.input field.name.to_sym, as: :date, html5: true
+        = f.input field.name.to_sym, as: :date, html5: true, wrapper:
       - when Schematics::Attributes::Array
         = f.input field.name.to_sym,
                   input_html: { multiple: true },
@@ -26,7 +28,8 @@
                   collection: [@resource.public_send(field.name.to_sym)].compact,
                   include_blank: !field.required?,
                   prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } }
+                  input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } },
+                  wrapper:
       - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
         = f.input field.name.to_sym,
                   as: field.class.name.demodulize.underscore,
@@ -60,7 +63,8 @@
                   include_blank: false,
                   collection: field.collection.map { _1.push(class: model_field_collection_class(_1.second, field)) },
                   prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown', 'dropdown-depends-on': "#{entity.name}[#{field.depends_on}]" } }
+                  input_html: { data: { controller: 'dropdown', 'dropdown-depends-on': "#{entity.name}[#{field.depends_on}]" } },
+                  wrapper:
       - when Schematics::Behaviours::Enumerable
         = f.input field.name.to_sym,
                   as: :select,
@@ -68,7 +72,8 @@
                   include_blank: false,
                   collection: field.collection,
                   prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown' } }
+                  input_html: { data: { controller: 'dropdown' } },
+                  wrapper:
       - when Schematics::Attributes::String
         = f.input field.name.to_sym,
                   as: :string,
