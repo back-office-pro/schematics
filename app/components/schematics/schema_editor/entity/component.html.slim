@@ -14,15 +14,18 @@
         = options_form.input :descriptor,
                              as: :select,
                              collection: descriptors_collection,
+                             wrapper:,
                              input_html: { data: { controller: 'dropdowns--schema-editor-descriptor-dropdown' } }
         = options_form.input :actions,
                              as: :select,
                              collection: actions_collection,
                              selected: actions,
                              include_hidden: false,
+                             wrapper:,
                              input_html: { multiple: true, data: { controller: 'dropdown' } }
         = options_form.input :icon,
                              as: :select,
+                             wrapper:,
                              input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
   .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
     = @builder.simple_fields_for :attributes do |builder|

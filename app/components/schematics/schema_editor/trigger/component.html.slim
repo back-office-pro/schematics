@@ -8,8 +8,9 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-trigger')
     .card-body
       = @builder.input :action,
-                      as: :select,
-                      collection:,
-                      include_blank: false,
-                      input_html: { data: { controller: 'dropdown' } }
+                       as: :select,
+                       collection:,
+                       include_blank: false,
+                       wrapper:,
+                       input_html: { data: { controller: 'dropdown' } }
       = @builder.input :callback

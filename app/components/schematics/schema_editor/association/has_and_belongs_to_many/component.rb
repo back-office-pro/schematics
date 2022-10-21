@@ -32,6 +32,8 @@ module Schematics
             .singularize
 
           def title = t('.title')
+
+          def wrapper = :input_group
         end
       end
     end

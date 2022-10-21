@@ -32,6 +32,8 @@ module Schematics
               }
             end
         end
+
+        def wrapper = :input_group
       end
     end
   end

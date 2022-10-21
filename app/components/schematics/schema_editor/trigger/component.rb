@@ -18,6 +18,8 @@ module Schematics
         def icon = :atom
 
         def title = t('.title')
+
+        def wrapper = :input_group
       end
     end
   end

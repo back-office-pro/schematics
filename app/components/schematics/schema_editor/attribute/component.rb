@@ -31,6 +31,8 @@ module Schematics
           .model_name
           .human
 
+        def wrapper = :input_group
+
         private
 
         def compatible_types(constant)
