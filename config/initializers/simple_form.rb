@@ -16,7 +16,7 @@ SimpleForm.setup do |config|
   config.error_method = :to_sentence
   config.input_field_error_class = 'is-invalid'
   config.input_field_valid_class = 'is-valid'
-  config.default_wrapper = :vertical_form
+  config.default_wrapper = :input_group
   config.input_class = 'border-0 p-2'
 
   config.wrapper_mappings = {

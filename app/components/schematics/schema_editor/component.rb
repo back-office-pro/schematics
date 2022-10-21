@@ -25,8 +25,6 @@ module Schematics
         .sort_by(&:name)
 
       def url = schema_datasets_path
-
-      def wrapper = :input_group
     end
   end
 end

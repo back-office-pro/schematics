@@ -7,7 +7,6 @@
     = simple_form_for ::User.new,
                       as: :session,
                       url: sessions_path,
-                      wrapper: :input_group,
                       data: { turbo: false, action: 'submit->application#disableWith' } do |form|
       = form.input :email, as: :email, prepend: fa_icon(:envelope)
       = render Schematics::Input::Password::Component.new(form:)
