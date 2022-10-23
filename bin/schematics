@@ -2,33 +2,16 @@
 
 # frozen_string_literal: true
 
-require 'fileutils'
-require 'pg'
-require 'active_support/core_ext/string/filters'
-require 'active_support/core_ext/securerandom'
-require 'active_support/inflector'
-require 'rails/generators/rails/app/app_generator'
+require 'optparse'
+require_relative '../lib/generators/tenant_app/tenant_app_generator'
 
 app_name = ARGV.first || 'spec/dummy'
-log_name = ARGV.first || 'log/dummy'
-db_name = app_name.underscore.tr('/', '_')
-template = File.expand_path('../template.rb', __dir__)
-ENV['DATABASE_PASSWORD'] = db_password = SecureRandom.base58
+options = {}
 
-begin
-  PG
-    .connect
-    .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
-rescue PG::Error
-  nil
-end
+::OptionParser
+  .new { _1.on('--container') { options[:container] = true } }
+  .parse!
 
-FileUtils.rm_rf app_name
-
-$stdout.reopen("#{log_name}.log", 'w')
-$stdout.sync = true
-$stderr.reopen($stdout)
-
-Rails::Generators::AppGenerator
-  .new([app_name], { database: 'postgresql', skip_keeps: true, skip_test: true, template: })
+::TenantAppGenerator
+  .new([app_name], **options)
   .invoke_all
