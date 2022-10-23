@@ -1,5 +1,9 @@
 FROM ruby:3.1.2-alpine
 
+RUN apk add --update --no-cache \
+    --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
+    --repository http://dl-3.alpinelinux.org/alpine/edge/main vips-dev
+
 RUN apk --update add --virtual \
     runtime-deps postgresql-client build-base libxml2-dev \
     libxslt-dev nodejs yarn libffi-dev readline \
@@ -17,10 +21,9 @@ WORKDIR /app
 COPY . /app
 
 RUN bundle install --jobs=4 --retry=3
-RUN bin/deploy
 
 WORKDIR /home
-RUN schematics $APP_NAME
+RUN ruby /app/bin/schematics $APP_NAME --container > $APP_NAME.log
 
 WORKDIR /home/$APP_NAME
 

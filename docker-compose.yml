@@ -16,8 +16,6 @@ services:
       - 9200:9200
   db:
     image: postgres:latest
-    environment:
-      - POSTGRES_PASSWORD=password
     ports:
       - 5432:5432
     volumes:
@@ -28,8 +26,8 @@ services:
       - 6379:6379
   web:
     build:
-      context: ${PWD}
-      dockerfile: ${GEM_HOME}/gems/schematics-1.0.0/config/docker/Dockerfile
+      context: .
+      dockerfile: ./config/docker/Dockerfile
     ports:
       - 3000:3000
     depends_on:
@@ -37,7 +35,6 @@ services:
       - db
       - redis
     environment:
-      - DATABASE_URL=postgres://postgres:password@db:5432/postgres
       - REDIS_URL=redis://redis:6379
       - ELASTICSEARCH_URL=http://elasticsearch:9200
     volumes:
