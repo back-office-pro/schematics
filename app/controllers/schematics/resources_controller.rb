@@ -55,40 +55,36 @@ module Schematics
       render json: @resources.limit(AUTOCOMPLETE_LIMIT).map(&field).map(&:to_s).uniq
     end
 
-    def create
-      @resource = model_class.new(resource_params)
-      result = Resources::Create.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to create_redirect_path, notice: tscope(result.message) }
-          format.json { render json: @resource, status: :created, location: @resource }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :new, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
+    def index
+      return unless stale?(@resources)
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @resources, metadata: params.key?(:metadata) }
+        format.csv do
+          GenerateCsvJob.perform_later(
+            current_user,
+            @resources.to_a,
+            params.key?(:all_pages) || @pagy.pages > 1
+          )
+          head :accepted
         end
       end
     end
 
     def delete; end
 
-    def destroy
-      result = Resources::Destroy.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to index_path, notice: tscope(result.message), status: :see_other
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to index_path, alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
+    def show
+      return unless stale?(@resource)
+
+      respond_to do |format|
+        format.json { render json: @resource }
+        format.svg { render svg: @resource }
+        format.ics { render ics: @resource }
+        format.html
+        format.pdf do
+          GeneratePdfJob.perform_later(current_user, @resource)
+          head :accepted
         end
       end
     end
@@ -114,27 +110,29 @@ module Schematics
       end
     end
 
-    def edit; end
-
-    def index
-      return unless stale?(@resources)
-
-      respond_to do |format|
-        format.html
-        format.json { render json: @resources, metadata: params.key?(:metadata) }
-        format.csv do
-          GenerateCsvJob.perform_later(
-            current_user,
-            @resources.to_a,
-            params.key?(:all_pages) || @pagy.pages > 1
-          )
-          head :accepted
-        end
-      end
-    end
-
     def new
       @resource = model_class.new
+    end
+
+    def edit; end
+
+    def create
+      @resource = model_class.new(resource_params)
+      result = Resources::Create.call(resource: @resource)
+      if result.success?
+        respond_to do |format|
+          format.html { redirect_to create_redirect_path, notice: tscope(result.message) }
+          format.json { render json: @resource, status: :created, location: @resource }
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :new, status: :unprocessable_entity
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
     def restore
@@ -152,17 +150,22 @@ module Schematics
       end
     end
 
-    def show
-      return unless stale?(@resource)
-
-      respond_to do |format|
-        format.json { render json: @resource }
-        format.svg { render svg: @resource }
-        format.ics { render ics: @resource }
-        format.html
-        format.pdf do
-          GeneratePdfJob.perform_later(current_user, @resource)
-          head :accepted
+    def update
+      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
+      if result.success?
+        respond_to do |format|
+          format.html do
+            redirect_to update_redirect_path, notice: tscope(result.message)
+          end
+          format.json
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = tscope(result.message)
+            render :edit, status: :unprocessable_entity
+          end
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -190,22 +193,19 @@ module Schematics
       end
     end
 
-    def update
-      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
+    def destroy
+      result = Resources::Destroy.call(resource: @resource)
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to update_redirect_path, notice: tscope(result.message)
+            redirect_to index_path, notice: tscope(result.message), status: :see_other
           end
           format.json
         end
       else
         respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :edit, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
+          format.html { redirect_to index_path, alert: tscope(result.message) }
+          format.json { render json: tscope(result.message), status: :server_error }
         end
       end
     end

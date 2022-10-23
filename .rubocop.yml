@@ -4,7 +4,6 @@ require:
   - rubocop-rake
   - rubocop-rspec
   - rubocop-thread_safety
-  - rubocop-ordered_methods
 AllCops:
   TargetRubyVersion: 3.1.2
   NewCops: enable
@@ -51,13 +50,6 @@ Layout/SingleLineBlockChain:
     - spec/**/*
 Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: false
-Layout/OrderedMethods:
-  IgnoredMethods:
-    - initialize
-    - method_missing
-    - respond_to_missing?
-  Exclude:
-    - lib/generators/**/*
 Lint/HeredocMethodCallPosition:
   Enabled: true
 Lint/ConstantResolution:

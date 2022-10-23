@@ -9,6 +9,10 @@ module Schematics
     layout 'schematics/auth'
     delegate :entity, :human_name, :gender, to: :model_class, private: true
 
+    def new; end
+
+    def edit; end
+
     def create
       result = PasswordResets::Create.call(resource_params)
       if result.success?
@@ -28,10 +32,6 @@ module Schematics
         end
       end
     end
-
-    def edit; end
-
-    def new; end
 
     def update
       result = PasswordResets::Update.call(user: @user, user_params: resource_params)
