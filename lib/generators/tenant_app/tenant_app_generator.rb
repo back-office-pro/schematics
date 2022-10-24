@@ -15,24 +15,14 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   end
 
   def create_root
-    FileUtils.rm_rf app_path
+    create_postgres_user
+    clean_app_path
     super
   end
 
-  def create_postgres_user
-    ::PG
-      .connect
-      .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
-  rescue PG::Error
-    nil
-  end
-
-  def add_gem
-    gem 'schematics', **{ path: gem_path }.compact
-  end
-
-  def run_bundle_install
-    run 'bundle install'
+  def run_bundle
+    add_gem
+    super
   end
 
   def create_env_file
@@ -163,8 +153,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def default_options = {
     database: 'postgresql',
     skip_keeps: true,
-    skip_test: true,
-    skip_bundle: true
+    skip_test: true
   }
 
   def db_name = app_name.underscore
@@ -180,5 +169,21 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def gem_path
     return '/app' if container?
     return root_path if env.development?
+  end
+
+  def add_gem
+    gem 'schematics', **{ path: gem_path }.compact
+  end
+
+  def clean_app_path
+    FileUtils.rm_rf app_path
+  end
+
+  def create_postgres_user
+    ::PG
+      .connect
+      .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
+  rescue PG::Error
+    nil
   end
 end
