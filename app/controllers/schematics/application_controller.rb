@@ -2,7 +2,7 @@
 
 module Schematics
   class ApplicationController < ::ApplicationController
-    include Pagy::Backend
+    include ::Pagy::Backend
     include Authenticable
     include Entitleable
     include Localizable

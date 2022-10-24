@@ -133,7 +133,7 @@ module Schematics
     config.action_mailer.raise_delivery_errors = Rails.env.development?
 
     # Assets
-    config.assets.paths << Pagy.root.join('javascripts')
+    config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.precompile += %w[schematics_manifest.js]
     config.assets.js_compressor  = :terser if Rails.env.production?

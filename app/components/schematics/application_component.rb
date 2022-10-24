@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationComponent < ViewComponent::Base
-    include ViewComponent::RendersOneForm
-    include Pagy::Backend
-    include Turbo::StreamsHelper
-    include Turbo::FramesHelper
+  class ApplicationComponent < ::ViewComponent::Base
+    include ::ViewComponent::RendersOneForm
+    include ::Pagy::Backend
+    include ::Turbo::StreamsHelper
+    include ::Turbo::FramesHelper
     include ApplicationHelper
 
     delegate_missing_to :helpers

@@ -14,4 +14,4 @@ module LocalizePagyCalendar
   end
 end
 
-Pagy::Calendar.prepend(LocalizePagyCalendar)
+::Pagy::Calendar.prepend(LocalizePagyCalendar)

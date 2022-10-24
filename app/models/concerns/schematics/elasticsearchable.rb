@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      extend Pagy::Searchkick
+      extend ::Pagy::Searchkick
       searchkick searchable: searchkick_elements,
                  filterable: searchkick_elements,
                  word_middle: searchkick_elements,

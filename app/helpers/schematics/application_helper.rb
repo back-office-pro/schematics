@@ -2,7 +2,7 @@
 
 module Schematics
   module ApplicationHelper
-    include Pagy::Frontend
+    include ::Pagy::Frontend
 
     def current_draft
       @current_draft ||= current_user

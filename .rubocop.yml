@@ -90,6 +90,9 @@ Lint/ConstantResolution:
     - Stripe
     - ApiRequest
     - Searchkick
+    - ViewComponent
+    - Pagy
+    - Turbo
   Exclude:
     - spec/**/*
     - db/*
