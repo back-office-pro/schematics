@@ -4,16 +4,12 @@ module Schematics
   module Button
     module Edit
       class Component < ApplicationComponent
-        delegate :class, to: :@resource, prefix: :model, private: true
+        delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
+        option :resource
+        option :compact, default: proc { true }
 
-        def initialize(resource:, compact: true)
-          super
-          @resource = resource
-          @compact = compact
-        end
-
-        def compact? = @compact
+        def compact? = compact
 
         def css_classes = [
           'btn',
@@ -35,7 +31,7 @@ module Schematics
         end
 
         def render?
-          can?(:edit, @resource)
+          can?(:edit, resource)
         end
 
         def title

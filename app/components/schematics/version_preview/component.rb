@@ -4,12 +4,8 @@ module Schematics
   module VersionPreview
     class Component < ApplicationComponent
       delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :user, :item, :created_at, :icon, :object, to: :@version
-
-      def initialize(version:)
-        super
-        @version = version
-      end
+      delegate :user, :item, :created_at, :icon, :object, to: :version
+      option :version
 
       def action
         return unless href
@@ -21,7 +17,7 @@ module Schematics
         return unless item
         return unless object
 
-        version_path(@version)
+        version_path(version)
       end
     end
   end

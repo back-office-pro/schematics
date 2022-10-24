@@ -3,23 +3,19 @@
 module Schematics
   module SortLink
     class Component < ApplicationComponent
-      delegate :name, to: :@field
-
-      def initialize(field:, model_class:)
-        super
-        @field = field
-        @model_class = model_class
-      end
+      delegate :name, to: :field
+      option :field
+      option :model_class
 
       def attribute_name
-        @model_class.human_attribute_name(name)
+        model_class.human_attribute_name(name)
       end
 
       def icon
         return :sort_down if asc?
         return :sort_up   if desc?
 
-        @field.icon
+        field.icon
       end
 
       def icon_text_class

@@ -3,10 +3,7 @@
 module Schematics
   module EmptyResource
     class Component < ApplicationComponent
-      def initialize(suggestions: [])
-        super
-        @suggestions = suggestions
-      end
+      option :suggestions, default: proc { [] }
     end
   end
 end

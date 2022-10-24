@@ -4,14 +4,10 @@ module Schematics
   module Viewer
     module Timeline
       class Component < ApplicationComponent
-        delegate :versions, to: :@resource, private: true
-        delegate :class, to: :@resource, prefix: :model, private: true
+        delegate :versions, to: :resource, private: true
+        delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
-
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        option :resource
 
         def before_render
           @pagy, @versions = pagy(

@@ -4,13 +4,10 @@ module Schematics
   module Button
     module Destroy
       class Component < ApplicationComponent
-        def initialize(resource:, compact: true)
-          super
-          @resource = resource
-          @compact = compact
-        end
+        option :resource
+        option :compact, default: proc { true }
 
-        def compact? = @compact
+        def compact? = compact
 
         def css_classes = [
           'btn',
@@ -32,10 +29,10 @@ module Schematics
         end
 
         def render?
-          can?(:destroy, @resource)
+          can?(:destroy, resource)
         end
 
-        def target = "confirm-dialog-#{@resource.id}"
+        def target = "confirm-dialog-#{resource.id}"
 
         def title
           return unless compact?

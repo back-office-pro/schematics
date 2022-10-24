@@ -4,12 +4,9 @@ module Schematics
   module Button
     module Confirm
       class Component < ApplicationComponent
-        def initialize(compact: false)
-          super
-          @compact = compact
-        end
+        option :compact, default: proc { false }
 
-        def compact? = @compact
+        def compact? = compact
 
         def css_classes = [
           'btn',

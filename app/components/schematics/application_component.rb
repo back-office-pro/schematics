@@ -6,7 +6,8 @@ module Schematics
     include ::Pagy::Backend
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
-    include ApplicationHelper
+    include ::ApplicationHelper
+    extend ::Dry::Initializer
 
     delegate_missing_to :helpers
 

@@ -5,18 +5,14 @@ module Schematics
     module Stale
       class Component < ApplicationComponent
         delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
+        option :resource
 
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
-
-        def last_version = @resource
+        def last_version = resource
           .versions
           .last
 
         def render?
-          @resource.errors.of_kind?(:base, :stale) && last_version
+          resource.errors.of_kind?(:base, :stale) && last_version
         end
       end
     end

@@ -17,6 +17,6 @@
     - listable_elements.stable_sort_by(&:weight).each do |field|
       .dropdown-item
         .form-check.form-switch.mb-0 data-action='input->viewer-settings#toggleColumn'
-          - preference = "col_#{@entity.table_name}_#{field.name}"
+          - preference = "col_#{table_name}_#{field.name}"
           = check_box 'preferences', preference, { class: 'form-check-input', id: preference, checked: preferences(preference, true) }, '', ''
           = label_tag preference, model_class.human_attribute_name(field.name), class: 'form-check-label float-start', for: preference

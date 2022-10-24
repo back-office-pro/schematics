@@ -5,12 +5,8 @@ module Schematics
     module Comment
       class Component < ApplicationComponent
         delegate :icon, to: '::Comment.entity'
-        delegate :size, to: '@resource.comments'
-
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        delegate :size, to: 'resource.comments'
+        option :resource
 
         def display_count
           size >= 10 ? '9+' : size

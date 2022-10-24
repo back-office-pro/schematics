@@ -4,10 +4,7 @@ module Schematics
   module Button
     module Archive
       class Component < ApplicationComponent
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        option :resource
 
         def data = {
           turbo_method: :delete,
@@ -18,7 +15,7 @@ module Schematics
         }
 
         def render?
-          can?(:archive, @resource)
+          can?(:archive, resource)
         end
       end
     end

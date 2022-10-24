@@ -4,7 +4,7 @@ module Schematics
   module Filter
     module Dropdown
       class Component < Filter::Component
-        delegate :collection, to: :@field
+        delegate :collection, to: :field
       end
     end
   end

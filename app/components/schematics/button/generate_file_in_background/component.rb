@@ -4,6 +4,11 @@ module Schematics
   module Button
     module GenerateFileInBackground
       class Component < ApplicationComponent
+        option :extension
+        option :text
+        option :url, optional: true
+        option :dropdown, default: proc { false }
+
         class << self
           def csv_template(**kwargs)
             new(extension: :csv, text: :download_csv_template, **kwargs)
@@ -18,21 +23,13 @@ module Schematics
           end
         end
 
-        def initialize(extension:, text:, url: nil, dropdown: false)
-          super
-          @extension = extension
-          @text = text
-          @url = url
-          @dropdown = dropdown
-        end
-
         def action
           'click->generate-file-in-background#run' unless dropdown?
         end
 
-        def dropdown? = @dropdown
+        def dropdown? = dropdown
 
-        def icon = :"file_#{@extension}"
+        def icon = :"file_#{extension}"
 
         def toggle
           'dropdown' if dropdown?

@@ -3,16 +3,10 @@
 module Schematics
   module EditInPlace
     class Component < ApplicationComponent
-      def initialize(resource:, field:)
-        super
-        @resource = resource
-        @field = field
-      end
+      option :resource
+      option :field
 
-      def frame_id = dom_id(
-        @resource,
-        @field.name
-      )
+      def frame_id = dom_id(resource, field.name)
     end
   end
 end

@@ -1,4 +1,4 @@
-= button_to polymorphic_path(@resource, action: :duplicate), method: :post, class: css_classes, form: { class: 'd-inline' } do
+= button_to polymorphic_path(resource, action: :duplicate), method: :post, class: css_classes, form: { class: 'd-inline' } do
   span.icon = fa_icon :clone
   span.icon.d-none = fa_icon :spinner, animation: 'spin'
   span.text.d-none.d-lg-inline = t('.text')

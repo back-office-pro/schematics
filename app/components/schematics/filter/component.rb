@@ -3,7 +3,9 @@
 module Schematics
   module Filter
     class Component < ApplicationComponent
-      delegate :entity, to: :@model_class
+      delegate :entity, to: :model_class
+      option :field, optional: true
+      option :model_class, optional: true
 
       class << self
         def build(field:, model_class:)
@@ -20,17 +22,11 @@ module Schematics
         end
       end
 
-      def initialize(field: nil, model_class: nil)
-        super
-        @field = field
-        @model_class = model_class
-      end
-
       def active?
         value.present?
       end
 
-      def attribute_name = @model_class
+      def attribute_name = model_class
         .human_attribute_name(name)
         .downcase
 
@@ -52,7 +48,7 @@ module Schematics
       def filter_name = "filter[#{name}]"
 
       def name
-        @field.try(:name) || @field
+        field.try(:name) || field
       end
 
       def onchange = <<~JAVASCRIPT.squish

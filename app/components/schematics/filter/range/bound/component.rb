@@ -5,10 +5,7 @@ module Schematics
     module Range
       module Bound
         class Component < Filter::Component
-          def initialize(field:, comparison:)
-            super(field:)
-            @comparison = comparison
-          end
+          option :comparison
 
           def date?
             type == :date
@@ -17,7 +14,7 @@ module Schematics
           def field_tag = :"#{type}_field_tag"
 
           def filter_name
-            super + "[#{@comparison}]"
+            super + "[#{comparison}]"
           end
 
           def onchange
@@ -25,7 +22,7 @@ module Schematics
           end
 
           def type
-            case @field
+            case field
             when Attributes::Date
               :date
             else
@@ -34,11 +31,11 @@ module Schematics
           end
 
           def unit
-            @field.try(:unit)
+            field.try(:unit)
           end
 
           def value
-            super&.dig(@comparison)
+            super&.dig(comparison)
           end
         end
       end

@@ -4,13 +4,10 @@ module Schematics
   module Button
     module Delete
       class Component < ApplicationComponent
-        def initialize(resource:, compact: true)
-          super
-          @resource = resource
-          @compact = compact
-        end
+        option :resource
+        option :compact, default: proc { true }
 
-        def compact? = @compact
+        def compact? = compact
 
         def css_classes = [
           'btn',
@@ -21,7 +18,7 @@ module Schematics
         ]
 
         def render?
-          can?(:delete, @resource)
+          can?(:delete, resource)
         end
       end
     end

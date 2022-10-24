@@ -16,7 +16,7 @@ module Schematics
 
         def history = current_user
           .searches
-          .typeahead_history(@model_class.to_s, name)
+          .typeahead_history(model_class.to_s, name)
       end
     end
   end

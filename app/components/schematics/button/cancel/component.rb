@@ -4,14 +4,11 @@ module Schematics
   module Button
     module Cancel
       class Component < ApplicationComponent
-        def initialize(path: '', data: nil, compact: false)
-          super
-          @path = path
-          @data = data
-          @compact = compact
-        end
+        option :path, default: proc { '' }
+        option :data, optional: true
+        option :compact, default: proc { false }
 
-        def compact? = @compact
+        def compact? = compact
 
         def css_classes = [
           'btn',

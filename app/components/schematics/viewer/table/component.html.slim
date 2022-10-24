@@ -2,16 +2,16 @@
   table.table.table-borderless.mb-0 class=table_css_classes
     = render Schematics::Filter::Component.new(model_class:)
     tbody class=tbody_css_classes
-      - if @resources.empty?
+      - if resources.empty?
         tr
           td.text-center.pt-4 colspan='100%'
             = render Schematics::EmptyResource::Component.new
       - else
-        - @resources.each do |resource|
+        - resources.each do |resource|
           = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr, css_classes: tr_css_classes_for(resource)) do |c|
             - c.with_resource do
               td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
-                = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources: @resources)
+                = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
                 = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                 td.text-nowrap.text-center.align-middle.animate__slideInDown class=col_preference_class(field)
