@@ -136,7 +136,9 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     .each { |dependency, version| run "yarn add #{dependency}@#{version}" }
 
   def precompile_assets
-    rails_command('assets:precompile', env:) if env.production?
+    return unless env.production?
+
+    rails_command('assets:precompile', env:)
   end
 
   def create_initial_commit
