@@ -4,6 +4,11 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
+        delegate :calendar_start_date,
+                 :calendar_start_attribute,
+                 :calendar_end_attribute,
+                 to: :helpers
+
         def alert_css_classes_for(resource, date)
           %w[alert alert-secondary calendar lh-lg text-truncate mb-1 p-2]
             .concat alert_border_css_classes_for(resource, date)
