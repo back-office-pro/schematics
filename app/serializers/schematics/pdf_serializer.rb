@@ -4,7 +4,7 @@ module Schematics
   class PdfSerializer
     delegate :render, to: :controller, private: true
     delegate :human_name, to: :model_class, private: true
-    delegate :default_url_options, to: 'Rails.application.routes', private: true
+    delegate :default_url_options, to: 'Schematics::Engine', private: true
 
     def initialize(resource)
       @resource = resource
