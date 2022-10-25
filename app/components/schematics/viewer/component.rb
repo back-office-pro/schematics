@@ -3,9 +3,9 @@
 module Schematics
   module Viewer
     class Component < ApplicationComponent
-      option :resources
       delegate :entity, to: :model_class
       delegate :icon, to: :entity
+      option :resources
 
       class << self
         def build(resources:)
