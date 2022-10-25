@@ -5,6 +5,7 @@ module Schematics
     module Calendar
       class Component < ApplicationComponent
         delegate :class, to: :@resource, prefix: :model, private: true
+        delegate :entity, to: :model_class, private: true
         delegate :viewer, to: :entity, private: true
 
         def initialize(resource:)
