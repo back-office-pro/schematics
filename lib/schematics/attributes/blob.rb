@@ -9,6 +9,10 @@ module Schematics
         #{name}: #{name}&.filename&.to_s
       RUBY
 
+      def format(value)
+        Rails.application.routes.url_helpers.url_for(value)
+      end
+
       def to_str = ''
     end
   end
