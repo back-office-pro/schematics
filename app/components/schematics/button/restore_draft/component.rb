@@ -4,11 +4,12 @@ module Schematics
   module Button
     module RestoreDraft
       class Component < ApplicationComponent
-        delegate :updated_at, to: :current_draft
+        delegate :updated_at, to: :draft
         delegate :icon, to: '::Draft.entity'
+        option :draft
 
         def render?
-          current_draft.present?
+          draft.present?
         end
       end
     end

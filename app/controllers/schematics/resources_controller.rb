@@ -25,7 +25,7 @@ module Schematics
     delegate :model_class, to: :class
     delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
 
-    helper_method :entity, :model_class
+    helper_method :model_class
 
     class << self
       def model_class = controller_path
@@ -112,6 +112,7 @@ module Schematics
 
     def new
       @resource = model_class.new
+      @draft = current_user.drafts.find_by(name: "new_#{entity.table_name}")
     end
 
     def edit; end
