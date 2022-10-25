@@ -15,8 +15,13 @@ module Schematics
           )
         end
 
-        def company_logo(attachment:, icon:)
-          new(attachment:, width: 300, height: 150, replacement: { icon: })
+        def company_logo(icon:)
+          new(
+            attachment: settings(:company_logo),
+            width: 300,
+            height: 150,
+            replacement: { icon: }
+          )
         end
       end
 
