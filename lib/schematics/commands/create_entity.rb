@@ -7,12 +7,13 @@ require 'rails/generators/rails/migration/migration_generator'
 require 'generators/rspec/feature/feature_generator'
 require 'generators/translations/translations_generator'
 require 'generators/permissions/permissions_generator'
+require 'generators/rails/serializer_generator'
 
 module Schematics
   module Commands
     class CreateEntity < Command
       def generators
-        return [scaffold_controller_generator] if existing?
+        return [scaffold_controller_generator, serializer_generator] if existing?
 
         [
           scaffold_generator,
@@ -74,6 +75,10 @@ module Schematics
 
       def scaffold_controller_generator
         Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
+      end
+
+      def serializer_generator
+        Rails::Generators::SerializerGenerator.new([name])
       end
     end
   end
