@@ -2,6 +2,6 @@
 
 module Schematics
   class DatabaseBackupJob < ApplicationJob
-    def perform = Application::ActiveStorage::Backup.call
+    def perform = SchemaDatasets::Backup.call(force: true)
   end
 end

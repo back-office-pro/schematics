@@ -17,7 +17,7 @@ namespace :schematics do
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do
-      Application::ActiveStorage::Backup.call
+      Schematics::SchemaDatasets::Backup.call(force: true)
     end
 
     desc 'Load engine seed'

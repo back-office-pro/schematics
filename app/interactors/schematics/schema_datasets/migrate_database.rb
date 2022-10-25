@@ -14,7 +14,6 @@ module Schematics
       def call
         return unless needs_migration?
 
-        Application::ActiveStorage::Backup.call
         system "RAILS_ENV=#{app_env} rails db:migrate > log/migration_#{id}.log"
       end
     end
