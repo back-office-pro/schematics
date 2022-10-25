@@ -7,7 +7,6 @@ module Schematics
         delegate :versions, to: :resource, private: true
         delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
-        delegate :current_ability, to: :helpers, private: true
         option :resource
 
         def before_render

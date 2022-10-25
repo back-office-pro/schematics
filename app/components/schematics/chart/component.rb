@@ -3,7 +3,6 @@
 module Schematics
   module Chart
     class Component < ApplicationComponent
-      delegate :content_security_policy_nonce, to: :helpers
       with_collection_parameter :chart
       delegate :icon,
                :kind,

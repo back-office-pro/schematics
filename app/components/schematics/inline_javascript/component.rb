@@ -3,7 +3,6 @@
 module Schematics
   module InlineJavascript
     class Component < ApplicationComponent
-      delegate :content_security_policy_nonce, to: :helpers
       delegate :credentials, to: 'Schematics::Engine'
       delegate :dashboard_read_notifications_path,
                :open_api_path,

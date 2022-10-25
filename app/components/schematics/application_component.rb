@@ -6,10 +6,14 @@ module Schematics
     include ::Pagy::Backend
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
-    include ::ApplicationHelper
+    include ApplicationHelper
     extend ::Dry::Initializer
 
-    delegate_missing_to :helpers
+    delegate :current_user,
+             :current_ability,
+             :can?,
+             :content_security_policy_nonce,
+             to: :helpers
 
     def to_html = render_in view_context
 
