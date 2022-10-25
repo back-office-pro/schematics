@@ -4,42 +4,20 @@ module Schematics
   module Input
     module Password
       class Component < ApplicationComponent
-        # :reek:LongParameterList
-        def initialize( # rubocop:disable Metrics/ParameterLists
-          form:,
-          field: nil,
-          name: :password,
-          icon: :key,
-          required: true,
-          confirm: false,
-          autocomplete: true
-        )
-          super
-          @form = form
-          @field = field
-          @name = name
-          @icon = icon
-          @required = required
-          @confirm = confirm
-          @autocomplete = autocomplete
-        end
-
-        def autocomplete
-          'new-password' unless @autocomplete
-        end
-
-        def confirm?
-          return @field.confirm? if @field
-
-          @confirm
-        end
+        option :form
+        option :field, optional: true
+        option :name, default: proc { :password }, reader: false
+        option :icon, default: proc { :key }, reader: false
+        option :required, default: proc { true }
+        option :confirm, default: proc { false }
+        option :autocomplete, default: proc { true }, reader: false
 
         def data = {
           action: 'click->password#toggle'
         }
 
         def icon
-          @field.try(:icon) || @icon
+          field.try(:icon) || @icon
         end
 
         def input_html = {
@@ -52,13 +30,25 @@ module Schematics
         end
 
         def name
-          @field.try(:name) || @name
+          field.try(:name) || @name
         end
 
         def required?
-          return @field.required? if @field
+          return field.required? if field
 
-          @required
+          required
+        end
+
+        private
+
+        def autocomplete
+          'new-password' unless @autocomplete
+        end
+
+        def confirm?
+          return field.confirm? if field
+
+          confirm
         end
       end
     end
