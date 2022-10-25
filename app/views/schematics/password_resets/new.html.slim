@@ -1,5 +1,5 @@
 .d-flex.justify-content-center.text-white.mb-4.pb-4
-  = render Schematics::Attachment::Component.company_logo(icon: :door_closed)
+  = render Schematics::Attachment::Component.company_logo(attachment: settings(:company_logo), icon: :door_closed)
 .card.shadow-sm.border-0.animate__animated.animate__zoomIn
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     = render Schematics::CardHeading::Component.new(icon: :key, title:)
