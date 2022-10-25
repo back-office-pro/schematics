@@ -5,13 +5,9 @@ module Schematics
     module Association
       module HasAndBelongsToMany
         class Component < ApplicationComponent
-          delegate :entity, to: '@builder.object', private: true
+          delegate :entity, to: 'builder.object', private: true
           renders_one_form :builder
-
-          def initialize(builder:)
-            super
-            @builder = builder
-          end
+          option :builder
 
           def associations_collection = entity
             .schema
@@ -26,7 +22,7 @@ module Schematics
 
           def icon = :link
 
-          def selected = @builder
+          def selected = builder
             .object
             .name
             .singularize

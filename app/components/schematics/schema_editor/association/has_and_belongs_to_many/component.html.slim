@@ -7,16 +7,16 @@
         .col-auto
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-habtm-association')
     .card-body
-      = @builder.input :name,
-                       as: :select,
-                       collection: associations_collection,
-                       selected:,
-                       wrapper:,
-                       input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
-      = @builder.input :type,
-                       as: :select,
-                       collection:,
-                       include_blank: false,
-                       readonly: true,
-                       wrapper:,
-                       input_html: { data: { controller: 'dropdown' } }
+      = builder.input :name,
+                      as: :select,
+                      collection: associations_collection,
+                      selected:,
+                      wrapper:,
+                      input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
+      = builder.input :type,
+                      as: :select,
+                      collection:,
+                      include_blank: false,
+                      readonly: true,
+                      wrapper:,
+                      input_html: { data: { controller: 'dropdown' } }

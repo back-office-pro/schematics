@@ -5,12 +5,8 @@ module Schematics
     module Button
       module AddDropdown
         class Component < ApplicationComponent
-          delegate :index, to: :@builder
-
-          def initialize(builder:)
-            super
-            @builder = builder
-          end
+          delegate :index, to: :builder
+          option :builder
 
           def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
             .map(&Attributes.method(:const_get))

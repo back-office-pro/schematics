@@ -7,11 +7,7 @@ module Schematics
         module HasAndBelongsToMany
           class Component < ApplicationComponent
             renders_one_form :form
-
-            def initialize(form:)
-              super
-              @form = form
-            end
+            option :form
 
             def association = Associations::Association.build(
               type: 'has_and_belongs_to_many',
@@ -21,7 +17,7 @@ module Schematics
 
             def entity = Entities::Entity.new(schema:)
 
-            def schema = @form.object
+            def schema = form.object
           end
         end
       end

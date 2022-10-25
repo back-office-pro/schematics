@@ -12,7 +12,7 @@
   #nested-form-array-inputs data-nested-form-target='targets'
     - values.each do |value|
       .input-group.nested-form-array-input.mb-1
-        = @builder.text_field nil, @merged_input_options.merge(value:, name:)
+        = builder.text_field nil, merged_input_options.merge(value:, name:)
         .btn.btn-sm.btn-danger {
           data-action='click->nested-form#remove:prevent:stop'
           data-nested-form-wrapper-param='.nested-form-array-input'

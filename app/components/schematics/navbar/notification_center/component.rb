@@ -7,6 +7,7 @@ module Schematics
         VERSIONS_LIMIT = 10
         delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :read_notifications_at, :preferences, to: :current_user
+        delegate :current_ability, to: :helpers, private: true
 
         def display_unread_count
           unread_count >= 10 ? '9+' : unread_count

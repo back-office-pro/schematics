@@ -6,15 +6,11 @@ module Schematics
       module Entity
         class Component < ApplicationComponent
           renders_one_form :form
-
-          def initialize(form:)
-            super
-            @form = form
-          end
+          option :form
 
           def entity = Entities::Entity.new(schema:)
 
-          def schema = @form.object
+          def schema = form.object
         end
       end
     end

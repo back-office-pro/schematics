@@ -5,13 +5,9 @@ module Schematics
     module Options
       module Modal
         class Component < ApplicationComponent
-          delegate :icon, :type, :available_options, :id, to: '@builder.object'
+          delegate :icon, :type, :available_options, :id, to: 'builder.object'
           renders_one_form :builder
-
-          def initialize(builder:)
-            super
-            @builder = builder
-          end
+          option :builder
 
           def input_type = {
             aspect_ratio: :string,

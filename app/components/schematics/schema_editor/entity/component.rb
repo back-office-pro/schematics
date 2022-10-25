@@ -4,14 +4,10 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        delegate :default_actions, :actions, :icon, :fields, to: '@builder.object'
-        delegate :index, to: :@builder
+        delegate :default_actions, :actions, :icon, :fields, to: 'builder.object'
+        delegate :index, to: :builder
         renders_one_form :builder
-
-        def initialize(builder:)
-          super
-          @builder = builder
-        end
+        option :builder
 
         def actions_collection = default_actions
           .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }

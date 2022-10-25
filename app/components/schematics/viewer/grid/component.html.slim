@@ -3,12 +3,12 @@
     = render Schematics::Filter::Component.new(model_class:)
     tbody class=tbody_css_classes
       tr
-      - if @resources.empty?
+      - if resources.empty?
         td.text-center.pt-4 colspan='100%'
           = render Schematics::EmptyResource::Component.new
       - else
           td.p-0 colspan='100%'
-            - @resources.to_a.in_groups_of(3, false).each do |group|
+            - resources.to_a.in_groups_of(3, false).each do |group|
               .row.g-0
                 - group.each do |resource|
                   .col-xl-4
@@ -18,7 +18,7 @@
                           thead
                             tr
                               td colspan='2'
-                                = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources: @resources)
+                                = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
                                 = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                                 #carousel.carousel.slide data-ride='carousel'
                                   .carousel-inner

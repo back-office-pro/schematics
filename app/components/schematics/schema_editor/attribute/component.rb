@@ -4,14 +4,10 @@ module Schematics
   module SchemaEditor
     module Attribute
       class Component < ApplicationComponent
-        delegate :class, to: '@builder.object', prefix: :attribute
-        delegate :entity, :icon, :type, to: '@builder.object'
+        delegate :class, to: 'builder.object', prefix: :attribute
+        delegate :entity, :icon, :type, to: 'builder.object'
         renders_one_form :builder
-
-        def initialize(builder:)
-          super
-          @builder = builder
-        end
+        option :builder
 
         def associations_collection = entity
           .schema

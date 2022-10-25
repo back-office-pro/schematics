@@ -5,6 +5,6 @@
         tr
           th
             = fa_icon element.icon, class: 'fa-fw me-2 text-muted'
-            = @model_class.human_attribute_name(element.name)
+            = model_class.human_attribute_name(element.name)
           td
             = render component_for(element)

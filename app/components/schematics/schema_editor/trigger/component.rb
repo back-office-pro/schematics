@@ -5,11 +5,7 @@ module Schematics
     module Trigger
       class Component < ApplicationComponent
         renders_one_form :builder
-
-        def initialize(builder:)
-          super
-          @builder = builder
-        end
+        option :builder
 
         def collection = Schematics::Trigger::ACTIONS.map do |action|
           [t(action, scope: %i[activerecord attributes permission actions]), action]

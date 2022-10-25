@@ -11,6 +11,6 @@
         = render Schematics::CardHeading::Component.new(icon:, title:)
         button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
       .modal-body
-        = @builder.simple_fields_for :options do |options_form|
+        = builder.simple_fields_for :options do |options_form|
           - available_options.each do |option|
             = options_form.input option, as: input_type[option], checked_value: 'true', unchecked_value: 'false'

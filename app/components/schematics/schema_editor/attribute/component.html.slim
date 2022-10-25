@@ -5,23 +5,23 @@
         .col.text-truncate
           = render Schematics::CardHeading::Component.new(icon:, title:)
         .col-auto
-          = render Schematics::SchemaEditor::Button::Options::Component.new(field: @builder.object)
+          = render Schematics::SchemaEditor::Button::Options::Component.new(field: builder.object)
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
     .card-body
-      = @builder.hidden_field :id
-      - case @builder.object
+      = builder.hidden_field :id
+      - case builder.object
       - when Schematics::Attributes::BelongsTo
-        = @builder.input :name,
-                         as: :select,
-                         collection: associations_collection,
-                         wrapper:,
-                         input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
+        = builder.input :name,
+                        as: :select,
+                        collection: associations_collection,
+                        wrapper:,
+                        input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
       - else
-        = @builder.input :name
-      = @builder.input :type,
-                       as: :select,
-                       collection:,
-                       include_blank: false,
-                       wrapper:,
-                       input_html: { data: { controller: 'dropdown' } }
-      = render Schematics::SchemaEditor::Options::Modal::Component.new(builder: @builder)
+        = builder.input :name
+      = builder.input :type,
+                      as: :select,
+                      collection:,
+                      include_blank: false,
+                      wrapper:,
+                      input_html: { data: { controller: 'dropdown' } }
+      = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)

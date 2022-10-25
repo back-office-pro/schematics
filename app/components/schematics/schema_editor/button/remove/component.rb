@@ -5,10 +5,7 @@ module Schematics
     module Button
       module Remove
         class Component < ApplicationComponent
-          def initialize(wrapper:)
-            super
-            @wrapper = wrapper
-          end
+          option :wrapper
 
           def title = t('.title')
         end

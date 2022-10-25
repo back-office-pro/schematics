@@ -3,10 +3,7 @@
 module Schematics
   module GoogleMap
     class Component < ApplicationComponent
-      def initialize(address:)
-        super
-        @address = address
-      end
+      option :address, reader: false
 
       def render?
         @address.present?
