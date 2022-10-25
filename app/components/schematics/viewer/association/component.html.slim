@@ -33,4 +33,4 @@
                       = render Schematics::Button::DestroyAttachment::Component.new(resource: resource.try(:record), attachment: resource)
                   - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                     td.text-nowrap.text-center.align-middle class=col_preference_class(field)
-                      = render Schematics::Resource::Component.new(resource:, field:, highlight: @highlight)
+                      = render Schematics::Resource::Component.new(resource:, field:, highlight_text: @highlight_text)

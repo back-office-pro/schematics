@@ -3,15 +3,12 @@
 module Schematics
   module Resource
     class Component < ApplicationComponent
-      def initialize(resource:, field:, enable_buttons: false, highlight: nil)
-        super
-        @resource = resource
-        @field = field
-        @enable_buttons = enable_buttons
-        @highlight = highlight
-      end
+      option :resource
+      option :field
+      option :enable_buttons, default: proc { false }
+      option :highlight_text, optional: true
 
-      def enable_buttons? = @enable_buttons
+      def enable_buttons? = enable_buttons
 
       def stars(rating, max_stars: 5)
         full_stars, half_stars = (rating * 2).round.divmod(2)
@@ -24,7 +21,7 @@ module Schematics
       end
 
       def value
-        @resource.public_send(@field.name)
+        resource.public_send(field.name)
       end
     end
   end
