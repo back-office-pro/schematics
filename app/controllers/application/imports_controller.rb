@@ -21,6 +21,10 @@ module Application
       end
     end
 
+    protected
+
+    def i18n_title_path = 'imports'
+
     def resource_defaults
       super.merge(model: parent_model_class.to_s)
     end

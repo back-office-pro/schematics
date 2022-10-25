@@ -20,6 +20,8 @@ module Application
 
     protected
 
+    def i18n_title_path = 'searches'
+
     def searches = Schematics::Schema
       .instance
       .entities

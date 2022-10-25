@@ -12,6 +12,8 @@ module Application
 
     protected
 
+    def i18n_title_path = 'comparisons'
+
     def parent_model_class = @resource
       .model
       .try(:safe_constantize)
