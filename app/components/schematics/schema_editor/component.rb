@@ -4,11 +4,7 @@ module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
       DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
-
-      def initialize(schema:)
-        super
-        @schema = schema
-      end
+      option :schema
 
       def attribute_constants_collection
         (Attributes.constants - DENYLIST).map(&Attributes.method(:const_get))
@@ -19,7 +15,7 @@ module Schematics
         'nested-form-target': 'form'
       }
 
-      def entities = @schema
+      def entities = schema
         .entities
         .reject(&:core?)
         .sort_by(&:name)

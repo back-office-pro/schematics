@@ -4,12 +4,8 @@ module Schematics
   module Viewer
     module Settings
       class Component < ApplicationComponent
-        delegate :listable_elements, :model_class, to: :@entity
-
-        def initialize(entity:)
-          super
-          @entity = entity
-        end
+        delegate :listable_elements, :table_name, :model_class, to: :entity
+        option :entity
       end
     end
   end

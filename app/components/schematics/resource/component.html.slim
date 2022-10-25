@@ -1,4 +1,4 @@
-- case @field
+- case field
 - when Schematics::Associations::Association, Schematics::Attributes::Association
   - if value
     - if value.deleted?
@@ -24,20 +24,20 @@
 - when Schematics::Attributes::Color
   .btn.p-2.pe-none style="background: #{value};"
 - when Schematics::Attributes::Attachments
-  = render Schematics::Viewer::Association::Component.new(resources: value, highlight: @highlight)
+  = render Schematics::Viewer::Association::Component.new(resources: value, highlight_text:)
 - when Schematics::Attributes::Blob
-  = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if enable_buttons?
+  = render Schematics::Button::DestroyAttachment::Component.new(resource:, attachment: value.attachment) if enable_buttons?
   - if value.representable?
-    = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
+    = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: field.icon)
     span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
       = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
   - else
     = link_to value.filename, value
 - when Schematics::Attributes::Attachment
   - if value.attached?
-    = render Schematics::Button::DestroyAttachment::Component.new(resource: @resource, attachment: value.attachment) if enable_buttons?
+    = render Schematics::Button::DestroyAttachment::Component.new(resource:, attachment: value.attachment) if enable_buttons?
     - if value.representable?
-      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: @field.icon)
+      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: field.icon)
       span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
         = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
     - else
@@ -45,7 +45,7 @@
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
   span.text-danger
     = fa_icon(:triangle_exclamation, class: 'me-2')
-    = @field.format(value)
+    = field.format(value)
 - when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
   - case value
   - when TrueClass
@@ -54,7 +54,7 @@
     = fa_icon(:xmark, class: 'text-danger')
 - when Schematics::Attributes::StateMachine
   h5.mb-0
-    span.badge.bg-secondary = @field.format(value)
+    span.badge.bg-secondary = field.format(value)
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
@@ -64,6 +64,6 @@
 - when Schematics::Attributes::Token
   = render Schematics::Button::Clipboard::Component.new(value:)
 - when Schematics::Behaviours::Searchable
-  = highlight @field.format(value), @highlight
+  = highlight field.format(value), highlight_text
 - else
-  = @field.format(value)
+  = field.format(value)

@@ -4,17 +4,14 @@ module Schematics
   module Viewer
     module Schema
       class Component < ApplicationComponent
-        def initialize(schema:)
-          super
-          @schema = schema
-        end
+        option :schema
 
-        def entities = @schema
+        def entities = schema
           .entities
           .reject(&:core?)
 
         def render?
-          @schema.present?
+          schema.present?
         end
       end
     end

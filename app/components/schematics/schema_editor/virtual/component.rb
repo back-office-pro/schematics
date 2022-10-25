@@ -4,13 +4,9 @@ module Schematics
   module SchemaEditor
     module Virtual
       class Component < ApplicationComponent
-        delegate :icon, to: '@builder.object'
+        delegate :icon, to: 'builder.object'
         renders_one_form :builder
-
-        def initialize(builder:)
-          super
-          @builder = builder
-        end
+        option :builder
 
         def title = t('.title')
       end

@@ -7,13 +7,9 @@ module Schematics
         delegate :size, to: :comments
         delegate :entity, :human_name, to: :model_class
         delegate :icon, to: :entity
+        option :resource
 
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
-
-        def comments = @resource
+        def comments = resource
           .comments
           .with_rich_text_content_and_embeds
           .preload(:author)

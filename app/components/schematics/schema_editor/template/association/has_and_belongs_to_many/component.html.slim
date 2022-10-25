@@ -1,4 +1,4 @@
 template#schema-editor-habtm-association data-nested-form-target='templates'
-  = @form.simple_fields_for :entities, entity, child_index: 'INDEX' do |entity_builder|
+  = form.simple_fields_for :entities, entity, child_index: 'INDEX' do |entity_builder|
     = entity_builder.simple_fields_for :has_and_belongs_to_many_associations, association, child_index: 'NEW_RECORD' do |builder|
       = render Schematics::SchemaEditor::Association::HasAndBelongsToMany::Component.new(builder:)

@@ -4,12 +4,8 @@ module Schematics
   module Button
     module Impersonate
       class Component < ApplicationComponent
-        delegate :email, to: :@resource
-
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        delegate :email, to: :resource
+        option :resource
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-2]
 
@@ -20,7 +16,7 @@ module Schematics
         def params = { session: { email: } }
 
         def render?
-          can?(:impersonate, @resource)
+          can?(:impersonate, resource)
         end
       end
     end

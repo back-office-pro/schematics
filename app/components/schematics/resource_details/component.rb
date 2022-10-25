@@ -3,19 +3,15 @@
 module Schematics
   module ResourceDetails
     class Component < ApplicationComponent
-      delegate :entity, to: :@model_class
-
-      def initialize(resource:, model_class: nil, editable: false)
-        super
-        @resource = resource
-        @model_class = model_class || resource.class
-        @editable = editable
-      end
+      delegate :entity, to: :model_class
+      option :resource
+      option :model_class, default: proc { resource.class }
+      option :editable, default: proc { false }
 
       def component_for(field)
-        return EditInPlace::Component.new(resource: @resource, field:) if editable?(field)
+        return EditInPlace::Component.new(resource:, field:) if editable?(field)
 
-        Resource::Component.new(resource: @resource, field:, enable_buttons: enable_buttons?(field))
+        Resource::Component.new(resource:, field:, enable_buttons: enable_buttons?(field))
       end
 
       def elements = entity
@@ -30,8 +26,8 @@ module Schematics
       end
 
       def enable_buttons?(element)
-        @editable &&
-          can?(:update, @resource) &&
+        editable &&
+          can?(:update, resource) &&
           element.is_a?(Behaviours::Fillable) &&
           !element.readonly?
       end

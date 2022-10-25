@@ -5,6 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :entity, to: :model_class
       delegate :icon, to: :entity
+      option :resources
 
       class << self
         def build(resources:)
@@ -19,11 +20,6 @@ module Schematics
         end
       end
 
-      def initialize(resources:)
-        super
-        @resources = resources
-      end
-
       protected
 
       def col_preference_class(field)
@@ -33,7 +29,7 @@ module Schematics
         "#{preference} d-none"
       end
 
-      def model_class = @resources.klass
+      def model_class = resources.klass
 
       def tbody_css_classes = %w[animate__animated animate__slideInRight]
     end

@@ -5,6 +5,7 @@ module Schematics
     module BreadcrumbTrail
       class Component < ApplicationComponent
         delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
+        delegate :breadcrumb_trail, to: :helpers
 
         def data = {
           controller: 'hotkey',

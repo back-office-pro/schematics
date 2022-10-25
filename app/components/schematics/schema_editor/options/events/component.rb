@@ -6,11 +6,7 @@ module Schematics
       module Events
         class Component < ApplicationComponent
           renders_one_form :builder
-
-          def initialize(builder:)
-            super
-            @builder = builder
-          end
+          option :builder
 
           def data(icon = :location_arrow)
             {
@@ -28,7 +24,7 @@ module Schematics
           end
 
           def events
-            @builder.object.events&.map { Attributes::StateMachineEvent.new(**_1) } || []
+            builder.object.events&.map { Attributes::StateMachineEvent.new(**_1) } || []
           end
 
           def wrapper = :input_group

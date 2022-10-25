@@ -1,7 +1,7 @@
 .btn-group.pe-auto
-  - if @resource.deleted?
-    = render Schematics::Button::Restore::Component.new(resource: @resource)
+  - if deleted?
+    = render Schematics::Button::Restore::Component.new(resource:)
   - else
-    = render Schematics::Button::Edit::Component.new(resource: @resource)
-    = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource)
-    = render Schematics::Button::Archive::Component.new(resource: @resource)
+    = render Schematics::Button::Edit::Component.new(resource:)
+    = render Schematics::Viewer::EventButtonGroup::Component.new(resource:)
+    = render Schematics::Button::Archive::Component.new(resource:)

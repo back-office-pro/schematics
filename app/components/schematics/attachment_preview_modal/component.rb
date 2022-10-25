@@ -3,17 +3,13 @@
 module Schematics
   module AttachmentPreviewModal
     class Component < ApplicationComponent
-      delegate :filename, to: :@attachment
-
-      def initialize(attachment:, icon:)
-        super
-        @attachment = attachment
-        @icon = icon
-      end
+      delegate :filename, to: :attachment
+      option :attachment
+      option :icon
 
       def label = "#{target}-label"
 
-      def target = "attachment-preview-modal-#{@attachment.id}"
+      def target = "attachment-preview-modal-#{attachment.id}"
     end
   end
 end

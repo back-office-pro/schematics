@@ -1,4 +1,4 @@
-= simple_form_for @schema, as: :schema_dataset, url:, method: :post, validate: true, html: { data: } do |form|
+= simple_form_for schema, as: :schema_dataset, url:, method: :post, validate: true, html: { data: } do |form|
   = render Schematics::SchemaEditor::Template::Entity::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Virtual::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Trigger::Component.new(form:)

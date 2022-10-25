@@ -4,10 +4,8 @@ module Schematics
   module Viewer
     module ActionButtonGroup
       class Component < ApplicationComponent
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        delegate :deleted?, to: :resource
+        option :resource
       end
     end
   end

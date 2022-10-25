@@ -6,6 +6,7 @@ module Schematics
       module Licence
         class Component < ApplicationComponent
           delegate :name, to: 'Schematics::Licence.instance'
+          delegate :licence_path, to: :helpers
 
           def icon = :id_badge
 

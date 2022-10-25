@@ -10,6 +10,8 @@ module Schematics
 
       def admin? = false
 
+      def drafts = ::Draft.none
+
       def preferences = {}
 
       def role = Role.new # rubocop:disable Lint/ConstantResolution

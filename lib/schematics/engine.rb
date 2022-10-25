@@ -61,6 +61,7 @@ require 'git'
 require 'terser'
 require 'sassc-rails'
 require 'dotenv-rails'
+require 'dry-initializer'
 
 module Schematics
   class Engine < ::Rails::Engine

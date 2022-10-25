@@ -1,7 +1,7 @@
 - breadcrumb title, new_polymorphic_path(@resource)
 .card.shadow-sm.border-0.animate__animated.animate__zoomIn {
   data-controller='auto-save nested-form'
-  data-auto-save-draft-value=current_draft&.to_json
+  data-auto-save-draft-value=@draft&.to_json
 }
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     .row.align-items-center
@@ -9,7 +9,7 @@
         = render Schematics::CardHeading::Component.new(icon: :plus, title:)
       .col-auto
         = render Schematics::SchemaEditor::Button::AddEntity::Component.new
-        = render Schematics::Button::RestoreDraft::Component.new
+        = render Schematics::Button::RestoreDraft::Component.new(draft: @draft)
         = render Schematics::Button::Draft::Component.new
   .card-body.p-3
     = render Schematics::SchemaEditor::Component.new(schema: @resource.data)

@@ -9,7 +9,7 @@
     - if item
       = link_to item.to_s, item, class: 'text-decoration-none', data: { turbo_frame: '_top' }
     - else
-      .text-muted = @version.reify(dup: true).to_s
+      .text-muted = version.reify(dup: true).to_s
     .text-muted data-controller='timeago' datetime=created_at
   .col-auto.align-self-center
     = fa_icon(icon, size: '2x', class: 'fa-fw text-light')

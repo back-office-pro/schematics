@@ -3,13 +3,10 @@
 module Schematics
   module Avatar
     class Component < ApplicationComponent
-      def initialize(user:)
-        super
-        @user = user
-      end
+      option :user
 
       def badge_css_class
-        return 'bg-success' if @user.online?
+        return 'bg-success' if user.online?
 
         'bg-danger'
       end

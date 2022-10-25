@@ -5,11 +5,7 @@ module Schematics
     module ResetFilters
       class Component < ApplicationComponent
         DENYLIST = %i[controller action locale page items model_name].freeze
-
-        def initialize(model_class:)
-          super
-          @model_class = model_class
-        end
+        option :model_class
 
         def render?
           !params.except(*DENYLIST).empty?

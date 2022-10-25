@@ -6,10 +6,10 @@ module Schematics
       class Component < Viewer::Component
         with_collection_parameter :resources
 
-        def initialize(resources:, collapsed: true, highlight: nil)
+        def initialize(resources:, collapsed: true, highlight_text: nil)
           super(resources:)
           @collapsed = collapsed
-          @highlight = highlight
+          @highlight_text = highlight_text
         end
 
         def collapse_css_class

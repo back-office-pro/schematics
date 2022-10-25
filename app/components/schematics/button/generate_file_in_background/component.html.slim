@@ -1,8 +1,8 @@
 = turbo_frame_tag 'generate_file_in_background' do
   .dropdown.d-inline-block {
       data-controller='generate-file-in-background'
-      data-generate-file-in-background-extension-value=@extension
-      data-generate-file-in-background-url-value=@url
+      data-generate-file-in-background-extension-value=extension
+      data-generate-file-in-background-url-value=url
   }
     button#generate-file-in-background-button.btn.btn-sm.btn-icon-split {
       data-generate-file-in-background-target='button'
@@ -12,7 +12,7 @@
     }
       span.icon = fa_icon(icon)
       span.icon.d-none = fa_icon :spinner, animation: 'spin'
-      span.text.d-none.d-lg-inline = t(".#{@text}")
+      span.text.d-none.d-lg-inline = t(".#{text}")
       span.text.d-none data-generate-file-in-background-target='loading' = t('.loading')
     .dropdown-menu.w-100.border-0.shadow-sm.animate__animated.animate__zoomIn.mt-0 {
       aria-labelledby='generate-file-in-background-button'

@@ -4,6 +4,11 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
+        delegate :calendar_start_date,
+                 :calendar_start_attribute,
+                 :calendar_end_attribute,
+                 to: :helpers
+
         def alert_css_classes_for(resource, date)
           %w[alert alert-secondary calendar lh-lg text-truncate mb-1 p-2]
             .concat alert_border_css_classes_for(resource, date)
@@ -16,7 +21,7 @@ module Schematics
         end
 
         def resources_for(date)
-          @resources.select do |resource|
+          resources.select do |resource|
             start_date = resource.public_send(calendar_start_attribute).beginning_of_day
             end_date = resource.public_send(calendar_end_attribute).end_of_day
             (start_date..end_date).cover?(date)
@@ -48,7 +53,7 @@ module Schematics
           .to_date
 
         def end_of_month_date
-          (calendar_start_date || @resources.map(&calendar_start_attribute).max || ::Date.current)
+          (calendar_start_date || resources.map(&calendar_start_attribute).max || ::Date.current)
             .end_of_month
         end
 
@@ -68,7 +73,7 @@ module Schematics
           .to_date
 
         def start_of_month_date
-          (calendar_start_date || @resources.map(&calendar_start_attribute).min || ::Date.current)
+          (calendar_start_date || resources.map(&calendar_start_attribute).min || ::Date.current)
             .beginning_of_month
         end
       end

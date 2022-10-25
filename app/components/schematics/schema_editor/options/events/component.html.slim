@@ -1,7 +1,7 @@
 .w-100 data-controller='nested-form'
   template#schema-editor-events-input data-nested-form-target='templates'
     .schema-editor-events-input
-      = @builder.simple_fields_for :events, Schematics::Attributes::StateMachineEvent.new do |events_form|
+      = builder.simple_fields_for :events, Schematics::Attributes::StateMachineEvent.new do |events_form|
         = events_form.input :name, input_html: { name: "#{events_form.object_name}[][name]" }
         = events_form.input :icon, as: :select, required: false, wrapper:, input_html: { data:, name: "#{events_form.object_name}[][icon]" }
         = events_form.input :from, input_html: { name: "#{events_form.object_name}[][from][]" }
@@ -17,7 +17,7 @@
   #schema-editor-events-inputs data-nested-form-target='targets'
     - events.each do |event|
       .schema-editor-events-input
-        = @builder.simple_fields_for :events, event do |events_form|
+        = builder.simple_fields_for :events, event do |events_form|
           = events_form.input :name, input_html: { value: event.name, name: "#{events_form.object_name}[][name]" }
           = events_form.input :icon,
                               as: :select,

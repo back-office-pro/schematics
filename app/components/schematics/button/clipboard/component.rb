@@ -4,17 +4,14 @@ module Schematics
   module Button
     module Clipboard
       class Component < ApplicationComponent
-        def initialize(value:)
-          super
-          @value = value
-        end
+        option :value
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split]
 
         def data = {
           controller: 'clipboard',
           action: 'click->clipboard#copy',
-          'clipboard-text-value': @value,
+          'clipboard-text-value': value,
           'bs-toggle': 'tooltip',
           'bs-placement': 'right',
           'bs-trigger': 'manual',

@@ -5,12 +5,8 @@ module Schematics
     module Button
       module Options
         class Component < ApplicationComponent
-          delegate :id, :available_options, to: :@field
-
-          def initialize(field:)
-            super
-            @field = field
-          end
+          delegate :id, :available_options, to: :field
+          option :field
 
           def render?
             available_options.any?

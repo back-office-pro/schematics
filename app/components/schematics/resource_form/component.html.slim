@@ -1,7 +1,7 @@
-= simple_form_for @resource, url: @url, wrapper:, validate: true, html: { data: { 'auto-save-target': 'form' } } do |f|
+= simple_form_for resource, url:, wrapper:, validate: true, html: { data: { 'auto-save-target': 'form' } } do |f|
   = f.input :lock_version, as: :hidden, wrapper: false
-  - @attributes.stable_sort_by(&:weight).each do |field|
-    = turbo_frame_tag dom_id(@resource, field.name) do
+  - attributes.stable_sort_by(&:weight).each do |field|
+    = turbo_frame_tag dom_id(resource, field.name) do
       - case field
       - when Schematics::Associations::HasAndBelongsToMany
         = f.association field.name.to_sym,
@@ -25,7 +25,7 @@
       - when Schematics::Attributes::Address
         = f.input field.name.to_sym,
                   as: :select,
-                  collection: [@resource.public_send(field.name.to_sym)].compact,
+                  collection: [resource.public_send(field.name.to_sym)].compact,
                   include_blank: !field.required?,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } },
@@ -106,7 +106,7 @@
                   input_html: { multiple: true, include_hidden: false, accept: field.extensions }
       - when Schematics::Attributes::Attachment
         - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
-        - attachment = @resource.public_send(field.name.to_sym)
+        - attachment = resource.public_send(field.name.to_sym)
         - if attachment.attached?
           = f.simple_fields_for field.attributes_param_key do |fields|
             = fields.hidden_field :id, value: attachment.id
@@ -125,6 +125,6 @@
       - else
         = f.input field.name.to_sym, prepend: field.try(:unit) || fa_icon(field.icon)
       = render Schematics::Button::Confirm::Component.new(compact: true) if turbo?
-      = render Schematics::Button::Cancel::Component.new(path: @cancel_path, compact: true) if turbo?
+      = render Schematics::Button::Cancel::Component.new(path: cancel_path, compact: true) if turbo?
   = render Schematics::Button::Confirm::Component.new
-  = render Schematics::Button::Cancel::Component.new(path: @cancel_path)
+  = render Schematics::Button::Cancel::Component.new(path: cancel_path)

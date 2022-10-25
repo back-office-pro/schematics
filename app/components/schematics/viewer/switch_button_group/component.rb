@@ -4,13 +4,9 @@ module Schematics
   module Viewer
     module SwitchButtonGroup
       class Component < ApplicationComponent
-        delegate :id, to: :@resource
-
-        def initialize(resource:, resources:)
-          super
-          @resource = resource
-          @resources = resources
-        end
+        delegate :id, :deleted?, to: :resource
+        option :resource
+        option :resources
 
         def data = {
           action: 'click->comparison#toggleButton',
@@ -18,7 +14,7 @@ module Schematics
         }
 
         def render?
-          @resources.reject(&:deleted?).size > 1 && !@resource.deleted? # rubocop:disable Performance/Count
+          resources.reject(&:deleted?).size > 1 && !deleted? # rubocop:disable Performance/Count
         end
       end
     end

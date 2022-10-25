@@ -4,14 +4,10 @@ module Schematics
   module Button
     module Calendar
       class Component < ApplicationComponent
-        delegate :class, to: :@resource, prefix: :model, private: true
+        delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
         delegate :viewer, to: :entity, private: true
-
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        option :resource
 
         def css_classes = %w[btn btn-sm btn-icon-split ms-2]
 

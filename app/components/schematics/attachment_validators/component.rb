@@ -3,13 +3,10 @@
 module Schematics
   module AttachmentValidators
     class Component < ApplicationComponent
-      def initialize(validators:)
-        super
-        @validators = validators
-      end
+      option :validators
 
       def render?
-        @validators.any?
+        validators.any?
       end
     end
   end

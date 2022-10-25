@@ -4,12 +4,6 @@ module Schematics
   module ApplicationHelper
     include ::Pagy::Frontend
 
-    def current_draft
-      @current_draft ||= current_user
-                         .drafts
-                         .find_by(name: "new_#{entity.table_name}")
-    end
-
     def edit_polymorphic_path(resource)
       case resource
       when Singleton # rubocop:disable Lint/ConstantResolution

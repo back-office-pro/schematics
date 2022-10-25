@@ -4,15 +4,12 @@ module Schematics
   module Button
     module Duplicate
       class Component < ApplicationComponent
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        option :resource
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-2]
 
         def render?
-          can?(:duplicate, @resource)
+          can?(:duplicate, resource)
         end
       end
     end

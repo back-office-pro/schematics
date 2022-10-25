@@ -4,10 +4,7 @@ module Schematics
   module Button
     module Restore
       class Component < ApplicationComponent
-        def initialize(resource:)
-          super
-          @resource = resource
-        end
+        option :resource
 
         def data = {
           turbo_method: :delete,
@@ -18,7 +15,7 @@ module Schematics
         }
 
         def render?
-          can?(:restore, @resource)
+          can?(:restore, resource)
         end
       end
     end
