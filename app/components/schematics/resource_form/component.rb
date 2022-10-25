@@ -6,6 +6,7 @@ module Schematics
       delegate :new_record?, to: :resource
       delegate :class, to: :resource, prefix: :model, private: true
       delegate :entity, :human_attribute_name, to: :model_class
+      delegate :rich_text_area_tag, to: :helpers
 
       option :resource
       option :url, optional: true
