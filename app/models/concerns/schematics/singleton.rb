@@ -6,6 +6,7 @@ module Schematics
 
     included do
       include ::Singleton
+      delegate :cache_key, to: :model_name
 
       class << self
         public :new, :allocate
