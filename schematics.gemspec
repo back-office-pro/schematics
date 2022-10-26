@@ -69,7 +69,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'groupdate', '~> 6.1.0'
   spec.add_dependency 'grover', '~> 1.1.2'
   spec.add_dependency 'hiredis', '~> 0.6.3'
-  spec.add_dependency 'humanize', '~> 2.5.1'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
   spec.add_dependency 'i18n-inflector', '~> 2.6.7'
   spec.add_dependency 'icalendar', '~> 2.8.0'
