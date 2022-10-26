@@ -13,7 +13,7 @@ module Schematics
         end
 
         def render?
-          settings(:comments_feature_flag)
+          config(:comments_feature_flag)
         end
       end
     end

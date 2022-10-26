@@ -9,6 +9,7 @@ fr:
     charts: graphiques
     comments: commentaires
     comparisons: comparaisons
+    configuration: configuration
     delete: supprimer
     edit: editer
     login: connexion
@@ -21,7 +22,6 @@ fr:
     roles: roles
     schema_datasets: schemas
     searches: recherche
-    settings: parametres
     stats: statistiques
     tasks: taches
     translations: traductions

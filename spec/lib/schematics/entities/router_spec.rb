@@ -103,14 +103,16 @@ describe Schematics::Entities::Router do
   end
 
   context 'when entity is a singleton' do
-    let(:entity) { Schematics::Entities::Singleton.new(name: 'setting') }
+    let(:entity) { Schematics::Entities::Singleton.new(name: 'configuration') }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        resource :settings, only: [:show, :update, :edit], model_name: 'Setting' do
+        resource :configuration, only: [:show, :update, :edit], model_name: 'Configuration' do
           resources :comments, only: %i[new create edit update], shallow: true
         end
-        resolve("Setting") { [:settings] }
+        resolve "Configuration" do |resource, options|
+          [:configuration, options]
+        end
       RUBY
     end
   end
@@ -169,11 +171,13 @@ describe Schematics::Entities::Router do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         namespace :main do
-          resource :licences, only: [:show, :update, :edit], model_name: 'Main::Licence' do
+          resource :licence, only: [:show, :update, :edit], model_name: 'Main::Licence' do
           resources :comments, only: %i[new create edit update], shallow: true
         end
         end
-        resolve("Main::Licence") { [:licences] }
+        resolve "Main::Licence" do |resource, options|
+          [:licence, options]
+        end
       RUBY
     end
   end

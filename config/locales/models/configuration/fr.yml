@@ -2,7 +2,7 @@
 fr:
   activerecord:
     attributes:
-      setting:
+      configuration:
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
         company_logo: Logo de la société
@@ -14,7 +14,7 @@ fr:
         tasks_feature_flag: Activer les tâches
         theme_color: Couleur du thème
     models:
-      setting:
-        gender: male
-        one: Paramètre
-        other: Paramètres
+      configuration:
+        gender: female
+        one: Configuration
+        other: Configurations

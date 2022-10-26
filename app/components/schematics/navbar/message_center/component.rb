@@ -26,7 +26,7 @@ module Schematics
         end
 
         def render?
-          settings(:messages_feature_flag)
+          config(:messages_feature_flag)
         end
 
         def unread_count

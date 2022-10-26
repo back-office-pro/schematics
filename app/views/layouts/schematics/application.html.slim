@@ -4,8 +4,8 @@ html lang=::I18n.locale dir='ltr'
     meta charset='utf-8'
     meta name='turbo-cache-control' content='no-preview'
     meta name='viewport' content='width=device-width,initial-scale=1'
-    meta name='theme-color' content=settings(:theme_color)
-    title #{settings(:company_name)} - #{title}
+    meta name='theme-color' content=config(:theme_color)
+    title #{config(:company_name)} - #{title}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload'

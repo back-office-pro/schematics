@@ -2,17 +2,6 @@
 
 module Schematics
   module ApplicationHelper
-    include ::Pagy::Frontend
-
-    def edit_polymorphic_path(resource)
-      case resource
-      when Singleton # rubocop:disable Lint/ConstantResolution
-        super(resource.class)
-      else
-        super
-      end
-    end
-
     # :reek:UnusedParameters
     # :reek:LongParameterList
     def fa_icon(icon, style: 'solid', class: nil, size: nil, animation: nil, **kwargs) # rubocop:disable Metrics/ParameterLists
@@ -25,36 +14,17 @@ module Schematics
       )
     end
 
-    def new_polymorphic_path(record_or_hash_or_array, options = {})
-      case record_or_hash_or_array
-      in [resource, model_class]
-        case resource
-        when Singleton # rubocop:disable Lint/ConstantResolution
-          super [resource.class.model_name.route_key.to_sym, model_class], options
-        else
-          super
-        end
-      else
-        super
-      end
-    end
-
-    def polymorphic_path(record_or_hash_or_array, options = {})
-      case record_or_hash_or_array
-      in [resource, model_class]
-        case resource
-        when Singleton # rubocop:disable Lint/ConstantResolution
-          super [resource.class.model_name.route_key.to_sym, model_class], options
-        else
-          super
-        end
-      else
-        super
-      end
-    end
-
     def preferences(key, default = nil)
       current_user.preferences.fetch(key.to_s, default)
+    end
+
+    def config(key)
+      Rails.cache.fetch("configuration/#{key}") do
+        ::Configuration
+          .with_attached_company_logo
+          .instance
+          .public_send(key)
+      end
     end
 
     def resource_associations(resource:, only: nil)
@@ -93,15 +63,6 @@ module Schematics
                 .order(created_at: :desc)
             end
         ).compact_blank
-    end
-
-    def settings(key)
-      Rails.cache.fetch("settings/#{key}") do
-        ::Setting
-          .with_attached_company_logo
-          .instance
-          .public_send(key)
-      end
     end
   end
 end
