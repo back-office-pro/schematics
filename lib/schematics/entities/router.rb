@@ -44,7 +44,9 @@ module Schematics
         return unless @entity.is_a?(Singleton) # rubocop:disable Lint/ConstantResolution
 
         <<~RUBY
-          resolve("#{class_name}") { [:#{resource}] }
+          resolve "#{class_name}" do |resource, options|
+            [:#{resource}, options]
+          end
         RUBY
       end
 
