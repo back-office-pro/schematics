@@ -7,16 +7,15 @@ module Schematics
     module Feature # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST = [::Search, ::Session, ::SchemaDataset, ::Comment].freeze
+      CREATE_DENYLIST = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
 
       included do
+        include Rails.application.routes.url_helpers
         delegate :t, to: 'I18n'
-        delegate :login_path, to: 'Rails.application.routes.url_helpers'
         delegate :entity,
                  :model_class,
                  :human_name,
                  :human_name_plural,
-                 :path,
                  :can?,
                  :default,
                  to: :class
@@ -58,7 +57,7 @@ module Schematics
         if can?(:index)
           scenario 'visiting the index' do
             if ability.can?(:index, model_class)
-              visit path
+              visit polymorphic_path(model_class)
               text = t('titles.schematics.resources.index', human_name_plural:)
               is_expected.to have_selector 'h6', text:
             end
@@ -68,7 +67,7 @@ module Schematics
         if can?(:create) && CREATE_DENYLIST.exclude?(model_class)
           scenario "creating a #{entity.name}" do
             if ability.can?(:new, model_class)
-              visit path(action: 'new')
+              visit new_polymorphic_path(model_class)
               fill_form
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
@@ -79,7 +78,7 @@ module Schematics
         if can?(:update)
           scenario "updating a #{entity.name}" do
             if ability.can?(:edit, record)
-              visit path(record:, action: 'edit')
+              visit edit_polymorphic_path(record)
               fill_form
               click_on t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
@@ -89,20 +88,11 @@ module Schematics
       end
 
       class_methods do
-        delegate :entity, :human_name, :human_name_plural, :model_name, to: :model_class
+        delegate :entity, :human_name, :human_name_plural, to: :model_class
         delegate :can?, :default, to: :entity
-        delegate :route_key, to: :model_name
 
         def model_class
           description.constantize
-        end
-
-        def path(record: nil, action: nil)
-          [
-            "/#{route_key}",
-            (record&.slug || record&.id unless entity.is_a?(Entities::Singleton)),
-            action
-          ].compact.join('/')
         end
       end
 
