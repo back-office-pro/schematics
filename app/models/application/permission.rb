@@ -4,6 +4,10 @@ module Application
   module Permission
     extend ActiveSupport::Concern
 
+    prepended do
+      scope :features, FeaturesQuery
+    end
+
     class_methods do
       def create_all_entities_permissions! = Schematics::Schema
         .instance
