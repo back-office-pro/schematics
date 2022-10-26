@@ -157,7 +157,7 @@ module Schematics
     config.before_configuration do |app| # Will work only on production
       app.config.cache_store = :redis_cache_store, { # rubocop:disable Layout/FirstArrayElementLineBreak, Layout/MultilineArrayLineBreaks
         namespace: tenant,
-        url: ENV.fetch('REDIS_URL', nil)
+        url: ENV.fetch('REDIS_URL', 'redis://localhost:6379')
       }
     end
 
