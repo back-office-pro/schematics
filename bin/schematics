@@ -6,11 +6,16 @@ require 'optparse'
 require_relative '../lib/generators/tenant_app/tenant_app_generator'
 
 app_name = ARGV.first || 'spec/dummy'
+log_name = ARGV.first || 'log/dummy'
 options = {}
 
 ::OptionParser
   .new { _1.on('--container') { options[:container] = true } }
   .parse!
+
+$stdout.reopen("#{log_name}.log", 'w')
+$stdout.sync = true
+$stderr.reopen($stdout)
 
 ::TenantAppGenerator
   .new([app_name], **options)
