@@ -7,5 +7,11 @@ module Application
     class_methods do
       def admin = find_by(name: 'Admin')
     end
+
+    def permission_ids
+      return super if persisted?
+
+      ::Permission.features.ids
+    end
   end
 end
