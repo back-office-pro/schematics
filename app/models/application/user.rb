@@ -11,10 +11,7 @@ module Application
       after_create { Schematics::UserMailer.new_account(self).deliver_later }
       attribute :remember_me, :boolean
       attribute :time_zone, default: -> { Rails.configuration.time_zone }
-    end
-
-    def admin?
-      role == ::Role.admin
+      delegate :admin?, to: :role
     end
 
     def confirmed?

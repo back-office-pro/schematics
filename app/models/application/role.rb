@@ -5,8 +5,10 @@ module Application
     extend ActiveSupport::Concern
 
     class_methods do
-      def admin = find_by(name: 'Admin')
+      def admin = first
     end
+
+    def admin? = eql?(self.class.admin)
 
     def permission_ids
       return super if persisted?
