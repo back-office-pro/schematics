@@ -25,7 +25,7 @@ module Schematics
         end
 
         def render?
-          settings(:tasks_feature_flag)
+          config(:tasks_feature_flag)
         end
 
         def tasks

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Setting
+  module Configuration
     extend ActiveSupport::Concern
 
     prepended do

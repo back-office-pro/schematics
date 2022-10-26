@@ -3,7 +3,7 @@
 describe Schematics::Entities::Singleton do
   subject(:entity) { described_class.new(name:, attributes:) }
 
-  let(:name) { 'setting' }
+  let(:name) { 'configuration' }
   let(:attributes) do
     [
       {

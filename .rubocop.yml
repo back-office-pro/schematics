@@ -57,7 +57,7 @@ Lint/ConstantResolution:
   Only:
     - User
     - Message
-    - Setting
+    - Configuration
     - Role
     - Permission
     - Import

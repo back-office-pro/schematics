@@ -1,7 +1,7 @@
 footer.py-3.border-top
   .row.mx-2.text-secondary
     .col
-      | &copy; #{::Time.current.year} #{settings(:company_name)}
+      | &copy; #{::Time.current.year} #{config(:company_name)}
     .col.text-end.text-nowrap
       = fa_icon ::SchemaDataset.entity.icon, class: 'text-primary me-2'
       = t('.version', version:)

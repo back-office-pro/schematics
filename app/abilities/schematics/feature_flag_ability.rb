@@ -6,7 +6,7 @@ module Schematics
              :comments_feature_flag,
              :tasks_feature_flag,
              :meetings_feature_flag,
-             to: :settings,
+             to: :config,
              private: true
 
     def initialize
@@ -19,8 +19,8 @@ module Schematics
 
     private
 
-    def settings
-      @settings ||= ::Setting.instance
+    def config
+      @config ||= ::Configuration.instance
     end
   end
 end

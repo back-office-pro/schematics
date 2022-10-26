@@ -188,7 +188,7 @@
     ]
   },
   {
-    "name": "setting",
+    "name": "configuration",
     "type": "singleton",
     "options": {
       "icon": "gear",
