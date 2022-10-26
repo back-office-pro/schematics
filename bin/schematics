@@ -9,13 +9,13 @@ app_name = ARGV.first || 'spec/dummy'
 log_name = ARGV.first || 'log/dummy'
 options = {}
 
-::OptionParser
-  .new { _1.on('--container') { options[:container] = true } }
-  .parse!
-
 $stdout.reopen("#{log_name}.log", 'w')
 $stdout.sync = true
 $stderr.reopen($stdout)
+
+::OptionParser
+  .new { _1.on('--container') { options[:container] = true } }
+  .parse!
 
 ::TenantAppGenerator
   .new([app_name], **options)
