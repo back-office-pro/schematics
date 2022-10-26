@@ -74,7 +74,9 @@ module Schematics
           end
 
           it 'should get API autocomplete' do
-            get polymorphic_path([:autocomplete, model_class], field: 'id'), headers:, as: :json
+            get polymorphic_path(model_class, action: :autocomplete, field: 'id'),
+                headers:,
+                as: :json
             status = ability.can?(:index, model_class) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
@@ -207,17 +209,17 @@ module Schematics
           it 'should duplicate record' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
-                expect { post polymorphic_path([:duplicate, record]), headers:, as: :html }
+                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :html }
                   .not_to change(model_class, :count)
                 is_expected.to have_http_status(:unprocessable_entity)
               else
-                expect { post polymorphic_path([:duplicate, record]), headers:, as: :html }
+                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :html }
                   .to change(model_class, :count)
                   .by(1)
                 is_expected.to redirect_to(polymorphic_path(model_class.last))
               end
             else
-              expect { post polymorphic_path([:duplicate, record]), headers:, as: :html }
+              expect { post polymorphic_path(record, action: :duplicate), headers:, as: :html }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -226,17 +228,17 @@ module Schematics
           it 'should duplicate record API' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
-                expect { post polymorphic_path([:duplicate, record]), headers:, as: :json }
+                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
                   .not_to change(model_class, :count)
                 is_expected.to have_http_status(:unprocessable_entity)
               else
-                expect { post polymorphic_path([:duplicate, record]), headers:, as: :json }
+                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
                   .to change(model_class, :count)
                   .by(1)
                 is_expected.to have_http_status(:created)
               end
             else
-              expect { post polymorphic_path([:duplicate, record]), headers:, as: :json }
+              expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
                 .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
@@ -245,7 +247,7 @@ module Schematics
 
         if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class)
           it 'should get delete' do
-            get polymorphic_path([:delete, record]), headers:, as: :html
+            get polymorphic_path(record, action: :delete), headers:, as: :html
             if ability.can?(:destroy, record)
               is_expected.to have_http_status(:success)
             else
@@ -284,12 +286,12 @@ module Schematics
           it 'should archive record' do
             record.restore
             if ability.can?(:archive, record)
-              expect { delete polymorphic_path([:archive, record]), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :archive), headers:, as: :html }
                 .to change(model_class, :count)
                 .by(-1)
               is_expected.to redirect_to(index_path)
             else
-              expect { delete polymorphic_path([:archive, record]), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :archive), headers:, as: :html }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -298,12 +300,12 @@ module Schematics
           it 'should archive API record' do
             record.restore
             if ability.can?(:archive, record)
-              expect { delete polymorphic_path([:archive, record]), headers:, as: :json }
+              expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
                 .to change(model_class, :count)
                 .by(-1)
               is_expected.to have_http_status(:no_content)
             else
-              expect { delete polymorphic_path([:archive, record]), headers:, as: :json }
+              expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
                 .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
@@ -312,12 +314,12 @@ module Schematics
           it 'should restore record' do
             record.destroy!
             if ability.can?(:restore, record)
-              expect { delete polymorphic_path([:restore, record]), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :restore), headers:, as: :html }
                 .to change(model_class, :count)
                 .by(1)
               is_expected.to redirect_to(index_path)
             else
-              expect { delete polymorphic_path([:restore, record]), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :restore), headers:, as: :html }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -326,12 +328,12 @@ module Schematics
           it 'should restore API record' do
             record.destroy!
             if ability.can?(:restore, record)
-              expect { delete polymorphic_path([:restore, record]), headers:, as: :json }
+              expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
                 .to change(model_class, :count)
                 .by(1)
               is_expected.to have_http_status(:no_content)
             else
-              expect { delete polymorphic_path([:restore, record]), headers:, as: :json }
+              expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
                 .not_to change(model_class, :count)
               is_expected.to have_http_status(:forbidden)
             end
@@ -340,7 +342,7 @@ module Schematics
 
         events.each do |event|
           it "should #{event.name} record" do
-            patch polymorphic_path([event.name.to_sym, record]), headers:, as: :html
+            patch polymorphic_path(record, action: event.name), headers:, as: :html
             if ability.can?(event.name.to_sym, record)
               is_expected.to redirect_to(polymorphic_path(record))
             else
@@ -349,7 +351,7 @@ module Schematics
           end
 
           it "should #{event.name} API record" do
-            patch polymorphic_path([event.name.to_sym, record]), headers:, as: :json
+            patch polymorphic_path(record, action: event.name), headers:, as: :json
             if ability.can?(event.name.to_sym, record)
               status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed
               is_expected.to have_http_status(status)
