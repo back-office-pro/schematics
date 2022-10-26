@@ -2,6 +2,7 @@
 
 PaperTrail.request(enabled: false) do
   Role.create!(name: 'Admin', permissions: Permission.create_all_entities_permissions!)
+  Role.create!(name: 'User', permissions: Permission.features)
   User.create!(email: Schematics::Licence.instance.email, role: Role.admin)
   Stat.create!(agregate: 'count', model: 'User')
   Stat.create!(
