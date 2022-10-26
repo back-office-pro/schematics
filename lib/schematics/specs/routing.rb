@@ -54,10 +54,10 @@ module Schematics
                 .to route(:get, polymorphic_path(record))
                 .to(locale:, model_name:, controller:, action: :show, id:)
               is_expected
-                .to route(:get, new_polymorphic_path([record, ::Comment]))
+                .to route(:get, new_polymorphic_path([record, ::Comment], format: nil))
                 .to(locale:, controller: 'comments', model_name:, parent_id => id, action: :new)
               is_expected
-                .to route(:post, polymorphic_path([record, ::Comment]))
+                .to route(:post, polymorphic_path([record, ::Comment], format: nil))
                 .to(locale:, controller: 'comments', model_name:, parent_id => id, action: :create)
             end
             if can?(:create)
