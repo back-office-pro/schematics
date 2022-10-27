@@ -28,6 +28,7 @@ ignore_missing:
   - attributes.*
   - schematics.*
   - sessions.*
+  - licences.*
   - javascript.*
   - pagy.*
   - date.*
@@ -48,6 +49,7 @@ ignore_unused:
   - attributes.*
   - schematics.*
   - sessions.*
+  - licences.*
   - javascript.*
   - pagy.*
   - date.*
