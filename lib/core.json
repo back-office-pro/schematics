@@ -1000,7 +1000,7 @@
     "name": "licence",
     "type": "singleton",
     "options": {
-      "descriptor": "plan",
+      "descriptor": "name",
       "icon": "id_badge",
       "hidden": true,
       "actions": [
@@ -1009,15 +1009,8 @@
     },
     "attributes": [
       {
-        "name": "plan",
-        "type": "enum",
-        "options": {
-          "values": [
-            "basic",
-            "pro",
-            "premium"
-          ]
-        }
+        "name": "name",
+        "type": "string"
       },
       {
         "name": "email",
