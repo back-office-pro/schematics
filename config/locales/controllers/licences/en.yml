@@ -1,0 +1,6 @@
+---
+en:
+  licences:
+    destroy:
+      failure: An error occured
+      success: Your subscription was successfully canceled
