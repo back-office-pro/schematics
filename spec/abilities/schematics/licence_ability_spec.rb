@@ -8,7 +8,7 @@ RSpec.describe Schematics::LicenceAbility do
 
   context 'when storage quota is exceeded' do
     before do
-      allow(Schematics::Licence.instance)
+      allow(Licence.instance)
         .to receive(:quota_storage_exceeded?)
         .and_return(true)
     end
@@ -18,7 +18,7 @@ RSpec.describe Schematics::LicenceAbility do
 
   context 'when users quota is exceeded' do
     before do
-      allow(Schematics::Licence.instance)
+      allow(Licence.instance)
         .to receive(:quota_users_exceeded?)
         .and_return(true)
     end
@@ -28,7 +28,7 @@ RSpec.describe Schematics::LicenceAbility do
 
   context 'when licence is inactive' do
     before do
-      allow(Schematics::Licence.instance)
+      allow(Licence.instance)
         .to receive(:active?)
         .and_return(false)
     end

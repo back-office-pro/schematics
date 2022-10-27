@@ -8,7 +8,7 @@ module Schematics
           delegate :entities_size,
                    :quota,
                    :quota_entities_percentage,
-                   to: 'Schematics::Licence.instance'
+                   to: '::Licence.instance'
 
           def icon = :bezier_curve
 
