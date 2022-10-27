@@ -1012,6 +1012,7 @@
         "name": "plan",
         "type": "enum",
         "options": {
+          "default": "basic",
           "values": [
             "basic",
             "pro",
@@ -1025,11 +1026,21 @@
       },
       {
         "name": "active",
-        "type": "boolean"
+        "type": "boolean",
+        "options": {
+          "default": true
+        }
       },
       {
         "name": "quota",
-        "type": "jsonb"
+        "type": "jsonb",
+        "options": {
+          "default": {
+            "users": 0,
+            "entities": 0,
+            "storage": 0
+          }
+        }
       }
     ]
   }
