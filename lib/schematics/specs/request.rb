@@ -9,6 +9,7 @@ module Schematics
       extend ActiveSupport::Concern
 
       CREATE_DENYLIST  = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
+      UPDATE_DENYLIST  = [::Licence].freeze
       SHOW_DENYLIST    = [::ActiveStorage::Attachment, ::Search].freeze
       DESTROY_DENYLIST = [::ActiveStorage::Attachment, ::Session].freeze
 
@@ -114,7 +115,7 @@ module Schematics
           end
         end
 
-        if can?(:update)
+        if can?(:update) && UPDATE_DENYLIST.exclude?(model_class)
           it 'should get edit' do
             get edit_polymorphic_path(record), headers:, as: :html
             if ability.can?(:edit, record)
