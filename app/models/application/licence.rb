@@ -1,26 +1,18 @@
 # frozen_string_literal: true
 
-module Schematics
-  class Licence
-    include ::Singleton
-    attr_reader :id, :email, :name
+module Application
+  module Licence
+    extend ActiveSupport::Concern
 
-    def active?
-      name.present?
+    def load!(gateway = Stripe::Load)
+      update!(**gateway.call.data)
     end
 
-    def entities_size = Schema
+    def entities_size = Schematics::Schema
       .instance
       .entities
       .reject(&:core?) # rubocop:disable Performance/Count
       .size
-
-    def load(id:, email:, name:, quota:)
-      @id = id
-      @email = email
-      @name = name
-      @quota = quota || {}
-    end
 
     def quota = Struct
       .new(:entities, :storage, :users, keyword_init: true)

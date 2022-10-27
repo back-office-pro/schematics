@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Schematics
-  module Licences
+module Application
+  module Licence
     module Stripe
-      class Retrieve
+      class Load
         include Interactor
 
         delegate :tenant, to: 'Schematics::Engine', private: true
@@ -13,12 +13,14 @@ module Schematics
 
         def call
           context.id = id
-          context.email = email
-          context.name = name
-          context.quota = quota
+          context.data = { active:, name:, email:, quota: }
+        rescue ::Stripe::StripeError
+          context.data = { active: true }
         end
 
         private
+
+        def active = id.present?
 
         def customer
           @customer ||= ::Stripe::Customer

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Schematics
-  class LicenceController < ApplicationController
-    authorize_resource class: Licence # rubocop:disable Lint/ConstantResolution
+module Application
+  module LicencesController
+    extend ActiveSupport::Concern
 
     def destroy
-      result = Licences::Stripe::Cancel.call
+      result = Licence::Stripe::Destroy.call
       if result.success?
         respond_to do |format|
           format.html { redirect_to admin_path, notice: t(result.message) }
