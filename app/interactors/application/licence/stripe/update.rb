@@ -3,7 +3,7 @@
 module Application
   module Licence
     module Stripe
-      class Destroy
+      class Update
         include Interactor::Organizer
 
         organize Load, Cancel

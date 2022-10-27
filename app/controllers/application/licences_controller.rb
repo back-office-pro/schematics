@@ -4,8 +4,8 @@ module Application
   module LicencesController
     extend ActiveSupport::Concern
 
-    def destroy
-      result = Licence::Stripe::Destroy.call
+    def update
+      result = Licence::Stripe::Update.call # rubocop:disable Lint/ConstantResolution
       if result.success?
         respond_to do |format|
           format.html { redirect_to admin_path, notice: t(result.message) }

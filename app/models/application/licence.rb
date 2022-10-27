@@ -4,9 +4,11 @@ module Application
   module Licence
     extend ActiveSupport::Concern
 
-    def load!(gateway = Stripe::Load)
-      update!(**gateway.call.data)
+    def load!(gateway: Stripe) # rubocop:disable Lint/ConstantResolution
+      update!(**gateway.const_get(:Load).call.data)
     end
+
+    def active? = active
 
     def entities_size = Schematics::Schema
       .instance
@@ -16,7 +18,7 @@ module Application
 
     def quota = Struct
       .new(:entities, :storage, :users, keyword_init: true)
-      .new(**@quota)
+      .new(**super)
 
     def quota_entities_exceeded?
       return true unless active?
