@@ -13,7 +13,7 @@ module Application
 
         def call
           context.id = id
-          context.data = { active:, name:, email:, quota: }
+          context.data = { active:, plan: name, email:, quota: }
         rescue ::Stripe::StripeError
           context.data = { active: true }
         end
