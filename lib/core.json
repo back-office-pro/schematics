@@ -995,5 +995,42 @@
         }
       }
     ]
+  },
+  {
+    "name": "licence",
+    "type": "singleton",
+    "options": {
+      "descriptor": "plan",
+      "icon": "id_badge",
+      "hidden": true,
+      "actions": [
+        "destroy"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "plan",
+        "type": "enum",
+        "options": {
+          "values": [
+            "basic",
+            "pro",
+            "premium"
+          ]
+        }
+      },
+      {
+        "name": "email",
+        "type": "email"
+      },
+      {
+        "name": "active",
+        "type": "boolean"
+      },
+      {
+        "name": "quota",
+        "type": "jsonb"
+      }
+    ]
   }
 ]
