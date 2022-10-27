@@ -1012,7 +1012,8 @@
         "name": "plan",
         "type": "enum",
         "options": {
-          "default": "basic",
+          "default": "premium",
+          "required": true,
           "values": [
             "basic",
             "pro",
@@ -1035,10 +1036,11 @@
         "name": "quota",
         "type": "jsonb",
         "options": {
+          "required": true,
           "default": {
-            "users": 0,
-            "entities": 0,
-            "storage": 0
+            "users": 1000,
+            "entities": 100,
+            "storage": 1000
           }
         }
       }
