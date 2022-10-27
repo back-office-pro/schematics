@@ -1,0 +1,18 @@
+---
+en:
+  activerecord:
+    attributes:
+      licence:
+        active: Active
+        email: Email
+        plan: Plan
+        plans:
+          basic: Basic licence
+          premium: Premium licence
+          pro: Pro licence
+        quota: Quota
+    models:
+      licence:
+        gender: female
+        one: Licence
+        other: Licences
