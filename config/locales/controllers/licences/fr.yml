@@ -1,6 +1,6 @@
 ---
 fr:
   licences:
-    destroy:
+    update:
       failure: Une erreur est survenue
       success: Votre abonnement a été annulé avec succès
