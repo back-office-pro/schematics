@@ -1013,7 +1013,6 @@
         "type": "enum",
         "options": {
           "default": "premium",
-          "required": true,
           "values": [
             "basic",
             "pro",
@@ -1033,14 +1032,13 @@
         }
       },
       {
-        "name": "quota",
+        "name": "metadata",
         "type": "jsonb",
         "options": {
-          "required": true,
           "default": {
-            "users": 1000,
-            "entities": 100,
-            "storage": 1000
+            "users": 1,
+            "entities": 1,
+            "storage": 1
           }
         }
       }

@@ -5,12 +5,12 @@ fr:
       licence:
         active: Active
         email: Email
+        metadata: Métadonnées
         plan: Plan
         plans:
           basic: Licence basique
           premium: Licence premium
           pro: Licence pro
-        quota: Quota
     models:
       licence:
         gender: female

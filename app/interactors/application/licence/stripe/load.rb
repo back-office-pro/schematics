@@ -13,7 +13,7 @@ module Application
 
         def call
           context.id = id
-          context.data = { active:, plan: name, email:, quota: }
+          context.data = { active:, plan: name, email:, metadata: }
         rescue ::Stripe::StripeError
           context.data = {}
         end
@@ -37,7 +37,7 @@ module Application
           &.plan
           &.product
 
-        def quota = product
+        def metadata = product
           &.metadata
           &.to_h
           &.transform_values(&:to_i)

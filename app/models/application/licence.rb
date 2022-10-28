@@ -18,7 +18,7 @@ module Application
 
     def quota = Struct
       .new(:entities, :storage, :users, keyword_init: true)
-      .new(**super)
+      .new(**metadata)
 
     def quota_entities_exceeded?
       return true unless active?
