@@ -32,7 +32,7 @@ describe Schematics::Attributes::Jsonb do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        attribute :preferences, default: {"theme":"light","sidebar_toggled":false}
+        attribute :preferences, default: -> { {"theme":"light","sidebar_toggled":false} }
       RUBY
     end
   end

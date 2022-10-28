@@ -37,7 +37,7 @@ describe Schematics::Attributes::Integer do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        attribute :price, default: 10
+        attribute :price, default: -> { 10 }
       RUBY
     end
   end

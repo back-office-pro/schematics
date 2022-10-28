@@ -20,7 +20,7 @@ module Schematics
         return super unless options.default
 
         super + <<~RUBY
-          attribute :#{name}, default: #{options.default.to_json}
+          attribute :#{name}, default: -> { #{options.default.to_json} }
         RUBY
       end
     end

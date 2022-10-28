@@ -50,7 +50,7 @@ describe Schematics::Attributes::Text do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        attribute :content, default: "text"
+        attribute :content, default: -> { "text" }
       RUBY
     end
   end

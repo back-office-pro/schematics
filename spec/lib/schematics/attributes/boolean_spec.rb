@@ -27,7 +27,7 @@ describe Schematics::Attributes::Boolean do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        attribute :toggle, default: true
+        attribute :toggle, default: -> { true }
       RUBY
     end
   end
