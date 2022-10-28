@@ -33,6 +33,6 @@ module Application
       end
     end
 
-    def user = Schematics::Api::User.new(permissions:)
+    def user = Schematics::Guest::User.new(permissions:)
   end
 end
