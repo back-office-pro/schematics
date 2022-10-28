@@ -3,6 +3,8 @@ en:
   titles:
     comparisons:
       show: Comparison
+    documentation:
+      show: API documentation
     imports:
       create: Import %{parent_human_name_plural}
       index: List of %{human_name_plural}
@@ -37,8 +39,6 @@ en:
         new: Add a new %{human_name}
         show: "%{resource}"
         update: Edit %{resource}
-      swagger:
-        index: API documentation
       versions:
         index: Timeline
         show: Timeline
