@@ -5,7 +5,6 @@ module Schematics
     class Component < ApplicationComponent
       delegate :credentials, to: 'Schematics::Engine'
       delegate :dashboard_read_notifications_path,
-               :open_api_path,
                :preferences_path,
                to: 'Schematics::Engine.routes.url_helpers'
 
@@ -27,8 +26,8 @@ module Schematics
       def routes = {
         comparisons: comparisons_path,
         dashboard_read_notifications: dashboard_read_notifications_path,
+        documentation: documentation_path,
         drafts: drafts_path,
-        open_api: open_api_path,
         preferences: preferences_path,
         searches: searches_path,
         users: users_path
