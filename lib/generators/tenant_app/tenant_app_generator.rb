@@ -105,10 +105,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   end
 
   def edit_gitignore
-    append_to_file '.gitignore', <<~TEXT
-      /doc
-      .env
-    TEXT
+    append_to_file '.gitignore', '.env'
   end
 
   def remove_public_html_files
