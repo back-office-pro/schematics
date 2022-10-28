@@ -26,7 +26,7 @@ module Schematics
       def routes = {
         comparisons: comparisons_path,
         dashboard_read_notifications: dashboard_read_notifications_path,
-        documentation: documentation_path,
+        documentation: documentation_path(format: :json),
         drafts: drafts_path,
         preferences: preferences_path,
         searches: searches_path,
