@@ -15,7 +15,7 @@ module Application
           context.id = id
           context.data = { active:, plan: name, email:, quota: }
         rescue ::Stripe::StripeError
-          context.data = { active: true }
+          context.data = {}
         end
 
         private
