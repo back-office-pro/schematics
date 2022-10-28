@@ -33,6 +33,7 @@ RSpec.describe Schematics::LicenceAbility do
         .and_return(false)
     end
 
-    it { is_expected.not_to be_able_to(:manage, :all) }
+    it { is_expected.not_to be_able_to(:create, :all) }
+    it { is_expected.not_to be_able_to(:update, :all) }
   end
 end

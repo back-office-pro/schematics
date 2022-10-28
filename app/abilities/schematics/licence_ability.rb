@@ -12,7 +12,7 @@ module Schematics
       super
       cannot :create, ::User if quota_users_exceeded?
       cannot :create, ::ActiveStorage::Attachment if quota_storage_exceeded?
-      cannot :manage, :all unless active?
+      cannot %i[create update], :all unless active?
     end
   end
 end
