@@ -10,7 +10,7 @@ module Schematics
 
       can :read, :admin_dashboard
       can :impersonate, ::User
-      can :destroy, Licence # rubocop:disable Lint/ConstantResolution
+      can :update, ::Licence
       cannot :impersonate, ::User, role: ::Role.admin
     end
   end

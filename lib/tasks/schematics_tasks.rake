@@ -54,4 +54,11 @@ namespace :schematics do
       OpenApi.write_docs
     end
   end
+
+  namespace :licence do
+    desc 'Load licence from gateway'
+    task load: :environment do
+      Licence.instance.load!
+    end
+  end
 end

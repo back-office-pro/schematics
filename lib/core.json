@@ -995,5 +995,53 @@
         }
       }
     ]
+  },
+  {
+    "name": "licence",
+    "type": "singleton",
+    "options": {
+      "descriptor": "plan",
+      "icon": "id_badge",
+      "hidden": true,
+      "actions": [
+        "update"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "plan",
+        "type": "enum",
+        "options": {
+          "default": "premium",
+          "values": [
+            "basic",
+            "pro",
+            "premium"
+          ]
+        }
+      },
+      {
+        "name": "email",
+        "type": "email"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "options": {
+          "default": true
+        }
+      },
+      {
+        "name": "metadata",
+        "type": "jsonb",
+        "options": {
+          "default": {
+            "users": 1,
+            "entities": 1,
+            "storage": 1
+          }
+        }
+      }
+    ]
   }
 ]

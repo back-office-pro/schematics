@@ -5,7 +5,7 @@ module Schematics
     delegate :quota_users_exceeded?,
              :quota_storage_exceeded?,
              :active?,
-             to: 'Schematics::Licence.instance',
+             to: '::Licence.instance',
              private: true
 
     def initialize

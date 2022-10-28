@@ -1,0 +1,6 @@
+---
+fr:
+  licences:
+    update:
+      failure: Une erreur est survenue
+      success: Votre abonnement a été annulé avec succès

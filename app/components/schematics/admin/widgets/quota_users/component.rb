@@ -9,7 +9,7 @@ module Schematics
           delegate :users_size,
                    :quota,
                    :quota_users_percentage,
-                   to: 'Schematics::Licence.instance'
+                   to: '::Licence.instance'
 
           def title = t('.title')
         end

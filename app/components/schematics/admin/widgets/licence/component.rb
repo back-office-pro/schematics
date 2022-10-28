@@ -5,10 +5,11 @@ module Schematics
     module Widgets
       module Licence
         class Component < ApplicationComponent
-          delegate :name, to: 'Schematics::Licence.instance'
-          delegate :licence_path, to: :helpers
+          delegate :icon, to: '::Licence.entity'
 
-          def icon = :id_badge
+          def model
+            @model ||= ::Licence.instance
+          end
 
           def target = 'confirm-dialog-cancel-licence'
         end

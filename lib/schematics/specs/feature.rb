@@ -8,6 +8,7 @@ module Schematics
       extend ActiveSupport::Concern
 
       CREATE_DENYLIST = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
+      UPDATE_DENYLIST = [::Licence].freeze
 
       included do
         include Rails.application.routes.url_helpers
@@ -75,7 +76,7 @@ module Schematics
           end
         end
 
-        if can?(:update)
+        if can?(:update) && UPDATE_DENYLIST.exclude?(model_class)
           scenario "updating a #{entity.name}" do
             if ability.can?(:edit, record)
               visit edit_polymorphic_path(record)

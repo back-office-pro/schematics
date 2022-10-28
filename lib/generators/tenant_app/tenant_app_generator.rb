@@ -76,6 +76,12 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     rails_command 'db:migrate', env:
   end
 
+  def load_licence
+    return if container?
+
+    rails_command 'schematics:licence:load'
+  end
+
   def seed_database
     return if container?
 
