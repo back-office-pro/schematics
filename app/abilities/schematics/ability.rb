@@ -10,7 +10,6 @@ module Schematics
       merge UserAbility.new(user)
       merge MessageAbility.new(user)
       merge DraftAbility.new(user)
-      merge SessionAbility.new(user)
       merge ApiRequestAbility.new(user)
       merge CommentAbility.new(user)
       merge SchemaDatasetAbility.new
@@ -19,6 +18,7 @@ module Schematics
       merge RoleAbility.new
       merge FeatureFlagAbility.new
       merge LicenceAbility.new
+      merge SessionAbility.new(user)
     end
   end
 end
