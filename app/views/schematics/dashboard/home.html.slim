@@ -1,4 +1,5 @@
 .row.g-3
+  = render Schematics::Onboarding::Component.new
   = render Schematics::Stat::Component.with_collection(@stats)
 .row.g-3.pt-3
   = render Schematics::Chart::Component.with_collection(@charts)
