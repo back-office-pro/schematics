@@ -7,7 +7,8 @@ module Schematics
     DENYLIST = %i[id created_at updated_at deleted_at lock_version slug].freeze
 
     included do
-      has_paper_trail ignore: DENYLIST + hidden_attributes + filter_attributes,
+      has_paper_trail ignore: DENYLIST,
+                      skip: hidden_attributes + filter_attributes,
                       versions: { class_name: 'Schematics::Version' }
     end
 
