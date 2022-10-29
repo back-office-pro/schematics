@@ -21,7 +21,7 @@ module Schematics
     private
 
     def json_serializer
-      @json_serializer ||= ActiveModelSerializers::SerializableResource.new(@resource)
+      @json_serializer ||= ::ActiveModelSerializers::SerializableResource.new(@resource)
     end
 
     def qr_code

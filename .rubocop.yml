@@ -93,6 +93,7 @@ Lint/ConstantResolution:
     - ViewComponent
     - Pagy
     - Turbo
+    - ActiveModelSerializers
   Exclude:
     - spec/**/*
     - db/*
