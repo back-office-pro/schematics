@@ -60,7 +60,7 @@ module Schematics
 
       respond_to do |format|
         format.html
-        format.json { render json: @resources, metadata: params.key?(:metadata) }
+        format.json { render json: @resources, key_transform:, metadata: params.key?(:metadata) }
         format.csv do
           GenerateCsvJob.perform_later(
             current_user,
@@ -78,7 +78,7 @@ module Schematics
       return unless stale?(@resource)
 
       respond_to do |format|
-        format.json { render json: @resource }
+        format.json { render json: @resource, key_transform: }
         format.svg { render svg: @resource }
         format.ics { render ics: @resource }
         format.html
@@ -218,6 +218,8 @@ module Schematics
     )
 
     protected
+
+    def key_transform = :camel_lower
 
     def create_redirect_path = polymorphic_path(@resource)
 

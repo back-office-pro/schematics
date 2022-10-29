@@ -7,5 +7,7 @@ module Application
     def load!
       update!(data: ::OpenApi.generate_docs(true).fetch(:open_api))
     end
+
+    def serializable_hash(*) = data
   end
 end

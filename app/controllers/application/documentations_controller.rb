@@ -4,14 +4,7 @@ module Application
   module DocumentationsController
     extend ActiveSupport::Concern
 
-    def show
-      return unless stale?(@resource)
-
-      respond_to do |format|
-        format.json { render json: @resource.data }
-        format.html
-      end
-    end
+    def key_transform = :unaltered
 
     def i18n_title_path = 'documentation'
   end
