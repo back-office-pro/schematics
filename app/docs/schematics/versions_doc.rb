@@ -10,13 +10,11 @@ module Schematics
       response 200, 'Success', :json, data: [
         {
           id: ::String,
-          item_type: ::String,
-          item_id: ::String,
+          created_at: ::DateTime,
           event: ::String,
-          whodunnit: ::String,
-          object: {},
-          object_changes: {},
-          created_at: ::DateTime
+          user: {},
+          item: {},
+          object_changes: {}
         }
       ]
       response 401, 'Not Authorized', :json
@@ -27,13 +25,11 @@ module Schematics
       response 200, 'Success', :json, data: [
         {
           id: ::String,
-          item_type: ::String,
-          item_id: ::String,
+          created_at: ::DateTime,
           event: ::String,
-          whodunnit: ::String,
-          object: {},
-          object_changes: {},
-          created_at: ::DateTime
+          user: {},
+          item: {},
+          object_changes: {}
         }
       ]
       response 404, 'Not Found', :json
