@@ -10,11 +10,11 @@ module Schematics
       response 200, 'Success', :json, data: [
         {
           id: ::String,
-          created_at: ::DateTime,
+          createdAt: ::DateTime,
           event: ::String,
           user: {},
           item: {},
-          object_changes: {}
+          objectChanges: {}
         }
       ]
       response 401, 'Not Authorized', :json
@@ -25,11 +25,11 @@ module Schematics
       response 200, 'Success', :json, data: [
         {
           id: ::String,
-          created_at: ::DateTime,
+          createdAt: ::DateTime,
           event: ::String,
           user: {},
           item: {},
-          object_changes: {}
+          objectChanges: {}
         }
       ]
       response 404, 'Not Found', :json
