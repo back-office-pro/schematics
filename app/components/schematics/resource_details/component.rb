@@ -16,6 +16,7 @@ module Schematics
 
       def elements = entity
         .renderable_elements
+        .push(entity.find_field_by_name('created_at'))
         .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
         .reject_is_a?(Attributes::RichText, Attributes::Attachments)
 
