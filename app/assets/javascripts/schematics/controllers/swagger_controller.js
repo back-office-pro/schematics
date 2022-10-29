@@ -6,7 +6,7 @@ import { SwaggerUIBundle } from 'swagger-ui-dist'
 export default class extends ApplicationController {
   connect () {
     SwaggerUIBundle({
-      url: routes.openApi,
+      url: routes.documentation,
       domNode: this.element,
       docExpansion: 'none',
       presets: [

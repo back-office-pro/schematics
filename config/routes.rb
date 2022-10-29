@@ -6,7 +6,6 @@ Schematics::Engine.routes.draw do
   localized do
     draw :dashboard
     draw :exceptions
-    draw :swagger
     resource :preferences, only: %i[edit update]
     resource :profile, only: %i[edit update], controller: :profile
     resources :password_resets, only: %i[new create edit update], param: :token

@@ -2,7 +2,6 @@
 /log/*.log
 /pkg
 /spec/dummy
-/doc
 /coverage
 /config/master.key
 /node_modules
