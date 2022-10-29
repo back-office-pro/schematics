@@ -47,7 +47,7 @@ module Schematics
               entity.fillable_elements.each do |element|
                 data "#{entity.name}[#{element.column_name}]",
                      element.open_api_type,
-                     default: element.json_default,
+                     default: element.options.default,
                      required: element.required?
               end
 
@@ -70,7 +70,7 @@ module Schematics
               entity.fillable_elements.each do |element|
                 data "#{entity.name}[#{element.column_name}]",
                      element.open_api_type,
-                     default: element.json_default,
+                     default: element.options.default,
                      required: element.required?
               end
 
