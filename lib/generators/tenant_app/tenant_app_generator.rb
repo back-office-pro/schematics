@@ -79,7 +79,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def load_licence
     return if container?
 
-    rails_command 'schematics:licence:load'
+    rails_command 'schematics:licence:load', env:
   end
 
   def seed_database
