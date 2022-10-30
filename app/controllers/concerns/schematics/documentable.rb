@@ -34,7 +34,6 @@ module Schematics
                   .stable_sort_by(&:weight)
                   .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
                   .map { [_1.name.camelize(:lower), _1.open_api_type] }
-                  .unshift([:createdAt, ::DateTime])
                   .unshift([:id, ::String])
                   .to_h
               ]
@@ -95,7 +94,6 @@ module Schematics
                 .renderable_elements
                 .stable_sort_by(&:weight)
                 .map { [_1.name.camelize(:lower), _1.open_api_type] }
-                .unshift([:createdAt, ::DateTime])
                 .tap { _1.unshift([:id, ::String]) unless entity.is_a?(Entities::Singleton) }
                 .to_h
               response 404, 'Not Found', :json
