@@ -112,14 +112,6 @@ module Schematics
           end
         end
 
-        database_attributes.each do |attribute|
-          it do
-            is_expected
-              .to have_db_column(attribute.column_name.to_sym)
-              .of_type(attribute.database_type.to_sym)
-          end
-        end
-
         elements.each do |element|
           it do
             case element
@@ -230,11 +222,6 @@ module Schematics
         def model_class
           description.constantize
         end
-
-        def database_attributes = [
-          entity.find_field_by_name('id'),
-          entity.find_field_by_name('created_at')
-        ]
       end
     end
   end
