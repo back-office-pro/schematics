@@ -22,9 +22,6 @@
   schematics/clean_api_requests_job:
     cron: '0 1 * * *'
     class: Schematics::CleanApiRequestsJob
-  schematics/migrate_schema_job:
-    cron: '0 1 * * *'
-    class: Schematics::MigrateSchemaJob
   schematics/load_licence_job:
     cron: '0 1 * * *'
     class: Schematics::LoadLicenceJob
