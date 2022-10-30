@@ -103,22 +103,24 @@ module Schematics
         mod = method&.camelize&.to_sym
         return super unless mod || constant
 
+        elements = public_send(method.to_sym)
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
-          public_send(method.to_sym)
-            .public_send(predicate, Schematics.const_get(mod).const_get(constant))
+          elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
+          elements = elements.public_send(predicate, Behaviours.const_get(constant))
           case constant
           when :Migratable
-            public_send(method.to_sym).public_send(predicate, Behaviours::Migratable)
+            elements
           when :Fillable
-            public_send(method.to_sym)
-              .public_send(predicate, Behaviours::Fillable)
+            elements
               .reject(&:hidden?)
               .reject(&:readonly?)
-          else
-            public_send(method.to_sym)
-              .public_send(predicate, Behaviours.const_get(constant))
+          when :Listable, :Renderable, :Searchable
+            elements
               .reject(&:hidden?)
+              .push(created_at_attribute)
+          else
+            elements.reject(&:hidden?)
           end
         end
       end
@@ -135,13 +137,12 @@ module Schematics
 
       def find_field_by_name(name)
         case name
-        when 'created_at'
-          Attributes::Datetime.new(entity: self, name: 'created_at')
         when 'id'
           Attributes::Uuid.new(entity: self, name: 'id')
         else
           fields
             .concat(created_at_attributes)
+            .push(created_at_attribute)
             .find { |field| field.name == name }
         end
       end
@@ -226,7 +227,6 @@ module Schematics
 
       def search_data = <<~RUBY
         def search_data = {
-          created_at:,
           #{search_data_elements}
         }
       RUBY
@@ -248,6 +248,8 @@ module Schematics
         model_class.new(**non_state_machine_attributes.to_h { [_1.name, _1.default] })
       end
 
+      def created_at_attribute = Attributes::Datetime.new(entity: self, name: 'created_at')
+
       protected
 
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
@@ -255,7 +257,7 @@ module Schematics
       def search_data_elements = searchable_elements
         .map(&:search_data)
         .map(&:squish)
-        .join(", \n")
+        .join(",\n  ")
 
       def virtual_association_errors = virtuals
         .flat_map(&:preload)

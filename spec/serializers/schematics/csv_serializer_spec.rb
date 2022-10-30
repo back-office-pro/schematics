@@ -20,9 +20,9 @@ RSpec.describe Schematics::CsvSerializer do
 
   its(:content) do
     is_expected.to eq <<~CSV
-      Agregate,Data,Field
-      Count,User,Email
-      Count,User,Email
+      Agregate,Data,Field,Creation date
+      Count,User,Email,""
+      Count,User,Email,""
     CSV
   end
 
@@ -31,9 +31,9 @@ RSpec.describe Schematics::CsvSerializer do
 
     its(:content) do
       is_expected.to eq <<~CSV
-        Agregate,Data
-        Count,User
-        Count,User
+        Agregate,Data,Creation date
+        Count,User,""
+        Count,User,""
       CSV
     end
   end

@@ -7,7 +7,6 @@ module Schematics
     included do
       attribute :id unless entity.is_a?(Entities::Singleton)
       attribute :_metadata, if: :metadata?
-      attribute :created_at
 
       entity.renderable_elements.stable_sort_by(&:weight).each do |element|
         case element
