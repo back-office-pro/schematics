@@ -4,10 +4,6 @@ module Application
   module Licence
     extend ActiveSupport::Concern
 
-    def load!(gateway: Stripe) # rubocop:disable Lint/ConstantResolution
-      update!(**gateway.const_get(:Load).call.data)
-    end
-
     def active? = active
 
     def entities_size = Schematics::Schema
