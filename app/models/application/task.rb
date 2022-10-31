@@ -10,7 +10,7 @@ module Application
 
     def late?
       return false unless deadline
-      return false unless pending?
+      return false if completed? || aborted?
 
       ::Time.current.after?(deadline)
     end

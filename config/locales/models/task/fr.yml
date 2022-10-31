@@ -11,13 +11,15 @@ fr:
         states:
           aborted: Annulée
           completed: Complétée
-          pending: En cours
+          in_progress: En cours
+          pending: En attente
         title: Titre
         users: Assignés
     events:
       task:
         abort: Annuler
         complete: Compléter
+        start: Démarrer
     models:
       task:
         gender: female

@@ -11,6 +11,7 @@ en:
         states:
           aborted: Aborted
           completed: Completed
+          in_progress: In progress
           pending: Pending
         title: Title
         users: Assigned
@@ -18,6 +19,7 @@ en:
       task:
         abort: Abort
         complete: Complete
+        start: Start
     models:
       task:
         gender: female

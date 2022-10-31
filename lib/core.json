@@ -794,20 +794,30 @@
           "default": "pending",
           "values": [
             "pending",
+            "in_progress",
             "completed",
             "aborted"
           ],
           "events": [
             {
+              "name": "start",
+              "icon": "hammer",
+              "from": "pending",
+              "to": "in_progress"
+            },
+            {
               "name": "complete",
               "icon": "check",
-              "from": "pending",
+              "from": "in_progress",
               "to": "completed"
             },
             {
               "name": "abort",
               "icon": "ban",
-              "from": "pending",
+              "from": [
+                "pending",
+                "in_progress"
+              ],
               "to": "aborted"
             }
           ]
