@@ -37,6 +37,7 @@ module Application
 
     def version = self
       .class
+      .with_deleted
       .where(created_at: ..created_at)
       .size
   end
