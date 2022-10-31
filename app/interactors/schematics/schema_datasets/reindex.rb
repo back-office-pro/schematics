@@ -4,10 +4,12 @@ module Schematics
   module SchemaDatasets
     class Reindex
       include Interactor
-      delegate :app_env, to: 'Schematics::Engine', private: true
+      delegate :eager_load!, to: 'Rails.application', private: true
+      delegate :models, to: '::Searchkick', private: true
 
       def call
-        system "RAILS_ENV=#{app_env} rails searchkick:reindex:all"
+        eager_load!
+        models.each(&:reindex)
       end
     end
   end
