@@ -7,9 +7,9 @@ en:
         state: State
         states:
           error: Error
+          in_progress: In progress
           migrated: Migrated
           pending: Pending
-          scheduled: Scheduled
         version: Version
     events:
       schema_dataset:

@@ -666,7 +666,8 @@
         "index",
         "show",
         "create",
-        "destroy"
+        "update",
+        "archive"
       ]
     },
     "attributes": [
@@ -679,10 +680,10 @@
         "type": "state_machine",
         "options": {
           "required": true,
-          "default": "scheduled",
+          "default": "pending",
           "values": [
-            "scheduled",
             "pending",
+            "in_progress",
             "migrated",
             "error"
           ],
@@ -690,8 +691,11 @@
             {
               "name": "migrate",
               "icon": "arrow_trend_up",
-              "from": "scheduled",
-              "to": "pending"
+              "from": [
+                "pending",
+                "error"
+              ],
+              "to": "in_progress"
             }
           ]
         }

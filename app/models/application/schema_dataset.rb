@@ -14,9 +14,7 @@ module Application
       delegate :version, to: :current, prefix: true, allow_nil: true
       delegate :data, to: :last, prefix: true, allow_nil: true
 
-      def current
-        migrated.last
-      end
+      def current = migrated.last
     end
 
     def after_migrate

@@ -1,5 +1,5 @@
 one:
-  state: scheduled
+  state: pending
   data:
     - id: <%= SecureRandom.uuid %>
       name: client
