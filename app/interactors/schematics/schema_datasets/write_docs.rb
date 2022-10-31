@@ -4,13 +4,18 @@ module Schematics
   module SchemaDatasets
     class WriteDocs
       include Interactor
-      delegate :schema_dataset, to: :context, private: true
-      delegate :app_env, to: 'Schematics::Engine', private: true
 
       def call
-        schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
-        system "RAILS_ENV=#{app_env} rails schematics:docs:generate"
+        PaperTrail.request(enabled: false) do
+          ::Documentation.instance.update!(data:)
+        end
       end
+
+      private
+
+      def data = ::OpenApi
+        .generate_docs(true)
+        .fetch(:open_api)
     end
   end
 end

@@ -51,7 +51,7 @@ namespace :schematics do
   namespace :docs do
     desc 'Generate OpenAPI docs'
     task generate: :environment do
-      Documentation.instance.load!
+      Schematics::SchemaDatasets::WriteDocs.call
     end
   end
 
