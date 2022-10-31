@@ -96,6 +96,7 @@ module Schematics
 
       def to_str = ''
 
+      # :reek:FeatureEnvy
       def method_missing(method_name, *_args, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
         predicate = non ? :reject_is_a? : :select_is_a?
