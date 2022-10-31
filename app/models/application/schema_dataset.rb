@@ -7,7 +7,12 @@ module Application
     prepended do
       serialize :data, Schematics::Schema
       attribute :data, default: -> { last_data || {} }
-      delegate :build_commands, :clean_commands, to: :migration, prefix: true
+      delegate :build_commands,
+               :clean_commands,
+               :new_classes,
+               :old_classes,
+               to: :migration,
+               prefix: true
     end
 
     class_methods do
