@@ -171,29 +171,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "427fe4aced5c72482b4e4039f8497dfd6b1c8f8a9a6c824e79fab8cfb7cac50d",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/write_docs.rb",
-      "line": 12,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"RAILS_ENV=#{app_env} rails schematics:docs:generate\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::WriteDocs",
-        "method": "call"
-      },
-      "user_input": "app_env",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "RAILS_ENV is not set by user"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "42846c9a8cffcc960d8cb0339e850bc2fa04f91da6bde52aecadb43e52b3515e",
@@ -557,29 +534,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "e52e2301e9cdf57a19f8ad6164a4e0ada8d213730091d3e7662073bd5afe3fdd",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/reindex.rb",
-      "line": 10,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"RAILS_ENV=#{app_env} rails searchkick:reindex:all\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::Reindex",
-        "method": "call"
-      },
-      "user_input": "app_env",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "RAILS_ENV is not set by user"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "eb18dd47e65db627fa909c85ba75deaaf54ef5186d444854185d2926eacd5bc6",
@@ -612,29 +566,6 @@
         22
       ],
       "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "f51b1ce1d91a8373975375f02abd6b31585cdb178eaf09b4837daa7701620f44",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/migrate_database.rb",
-      "line": 17,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"RAILS_ENV=#{app_env} rails db:migrate > log/migration_#{id}.log\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::MigrateDatabase",
-        "method": "call"
-      },
-      "user_input": "app_env",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "RAILS_ENV is not set by user"
     },
     {
       "warning_type": "Dynamic Render Path",
@@ -671,6 +602,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2022-10-25 16:46:47 +0200",
+  "updated": "2022-11-01 00:34:18 +0100",
   "brakeman_version": "5.3.1"
 }
