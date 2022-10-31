@@ -11,6 +11,11 @@ module Schematics
             .new(Schematics::Engine.routes.routes)
             .format(ActionDispatch::Routing::ConsoleFormatter::Sheet.new)
         end
+
+        def reload!
+          instance_variable_set(:@routes, nil)
+          instance_variable_set(:@routes_list, nil)
+        end
       end
     end
   end
