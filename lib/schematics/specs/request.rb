@@ -9,7 +9,7 @@ module Schematics
       extend ActiveSupport::Concern
 
       CREATE_DENYLIST  = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
-      UPDATE_DENYLIST  = [::Licence].freeze
+      UPDATE_DENYLIST  = [::Licence, ::SchemaDataset].freeze
       SHOW_DENYLIST    = [::ActiveStorage::Attachment, ::Search].freeze
       DESTROY_DENYLIST = [::ActiveStorage::Attachment, ::Session].freeze
 

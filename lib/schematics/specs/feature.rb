@@ -8,7 +8,7 @@ module Schematics
       extend ActiveSupport::Concern
 
       CREATE_DENYLIST = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
-      UPDATE_DENYLIST = [::Licence].freeze
+      UPDATE_DENYLIST = [::Licence, ::SchemaDataset].freeze
 
       included do
         include Rails.application.routes.url_helpers
