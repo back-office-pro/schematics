@@ -12,7 +12,7 @@ en:
         statuses:
           error: Error
           finished: Finished
-          pending: Pending
+          in_progress: In progress
     models:
       import:
         gender: male

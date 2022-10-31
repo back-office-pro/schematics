@@ -35,7 +35,7 @@ RSpec.describe Schematics::MigrateSchemaJob do
     it 'changes the schema dataset state from pending to migrated' do
       expect { perform_now }
         .to change { schema_dataset.reload.state }
-        .from('scheduled')
+        .from('pending')
         .to('migrated')
     end
   end

@@ -382,9 +382,9 @@
         "options": {
           "required": true,
           "readonly": true,
-          "default": "pending",
+          "default": "in_progress",
           "values": [
-            "pending",
+            "in_progress",
             "finished",
             "error"
           ]
