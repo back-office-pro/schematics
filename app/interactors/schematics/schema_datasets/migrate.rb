@@ -5,7 +5,14 @@ module Schematics
     class Migrate
       include Interactor::Organizer
 
-      organize Generate, Backup, MigrateDatabase, WriteDocs, Commit, Reindex
+      organize Generate,
+               Backup,
+               MigrateDatabase,
+               Reload,
+               WriteDocs,
+               Reindex,
+               Commit,
+               UpdateState
     end
   end
 end
