@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 describe Schematics::Migrations::DataMigration do
-  subject(:migration) { described_class.new(schema) }
+  subject(:migration) { described_class.new(new_schema, current_schema) }
 
-  let(:schema) { Schematics::Schema.load(new_data) }
-
-  before { Schematics::Schema.instance.load(current_data) }
+  let(:new_schema) { Schematics::Schema.load(new_data) }
+  let(:current_schema) { Schematics::Schema.instance.load(current_data) }
 
   describe '#build_commands' do
     subject { migration.build_commands }

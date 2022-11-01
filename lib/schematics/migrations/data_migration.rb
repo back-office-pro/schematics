@@ -3,10 +3,10 @@
 module Schematics
   module Migrations
     class DataMigration < Migration
-      def initialize(schema)
+      def initialize(new_schema, current_schema)
         super(
-          schema.entities.reject(&:core?),
-          Schema.instance.entities.reject(&:core?)
+          new_schema.entities.reject(&:core?),
+          current_schema.entities.reject(&:core?)
         )
       end
     end

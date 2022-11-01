@@ -6,7 +6,7 @@ module Application
 
     prepended do
       serialize :data, Schematics::Schema
-      attribute :data, default: -> { last_data || {} }
+      attribute :data, default: -> { current_data || {} }
       delegate :build_commands,
                :clean_commands,
                :new_classes,
@@ -16,8 +16,7 @@ module Application
     end
 
     class_methods do
-      delegate :version, to: :current, prefix: true, allow_nil: true
-      delegate :data, to: :last, prefix: true, allow_nil: true
+      delegate :version, :data, to: :current, prefix: true, allow_nil: true
 
       def current = migrated.last
     end
@@ -29,7 +28,7 @@ module Application
     end
 
     def migration
-      @migration ||= Schematics::Migrations::DataMigration.new(data)
+      @migration ||= Schematics::Migrations::DataMigration.new(data, Schematics::Schema.instance)
     end
 
     def valid?(*)

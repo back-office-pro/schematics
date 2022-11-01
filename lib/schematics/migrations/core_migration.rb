@@ -3,8 +3,8 @@
 module Schematics
   module Migrations
     class CoreMigration < Migration
-      def initialize(current_entities = [])
-        super(Schema.instance.entities.select(&:core?), current_entities)
+      def initialize(new_schema, current_entities = [])
+        super(new_schema.entities.select(&:core?), current_entities)
       end
     end
   end
