@@ -24,9 +24,6 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
-  # Disable eager_load to prevent scaffold_generator issue in production
-  Rails.configuration.eager_load = false
-
   Application
     .constants
     .select { Object.const_defined?(_1) }
