@@ -58,10 +58,7 @@ namespace :schematics do
   namespace :licence do
     desc 'Load licence from gateway'
     task load: :environment do
-      PaperTrail.request(enabled: false) do
-        gateway = Application::Licence::Stripe::Load
-        Licence.instance.update!(**gateway.call.data)
-      end
+      Licence.instance.load!
     end
   end
 end
