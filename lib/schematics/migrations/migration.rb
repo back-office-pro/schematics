@@ -3,13 +3,18 @@
 module Schematics
   module Migrations
     class Migration
-      attr_reader :build_commands, :clean_commands
+      attr_reader :build_commands,
+                  :clean_commands,
+                  :new_classes,
+                  :old_classes
 
       def initialize(new_entities = [], current_entities = [])
         @new_entities = new_entities
         @current_entities = current_entities
         @build_commands = []
         @clean_commands = []
+        @new_classes = []
+        @old_classes = []
         generate_build_commands
         generate_clean_commands
       end
@@ -51,6 +56,7 @@ module Schematics
               end
             end
           else
+            @new_classes << new_entity.name
             @build_commands << Commands::CreateEntity.new(entity: new_entity)
             @build_commands << Commands::CreateEntityCounterCaches.new(entity: new_entity)
             @build_commands << Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity) # rubocop:disable Layout/LineLength
@@ -80,6 +86,7 @@ module Schematics
               )
             end
           else
+            @old_classes << current_entity.class_name
             @clean_commands << Commands::DestroyEntity.new(entity: current_entity)
           end
         end
