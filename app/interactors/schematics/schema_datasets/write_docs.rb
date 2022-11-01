@@ -13,8 +13,10 @@ module Schematics
 
       private
 
+      def read_on_controller = !Rails.env.test?
+
       def data = ::OpenApi
-        .generate_docs(true)
+        .generate_docs(read_on_controller)
         .fetch(:open_api)
     end
   end
