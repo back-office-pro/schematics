@@ -6,9 +6,9 @@ module Schematics
       include Interactor::Organizer
 
       organize Generate,
+               Reload,
                Backup,
                MigrateDatabase,
-               Reload,
                WriteDocs,
                Reindex,
                Commit,
