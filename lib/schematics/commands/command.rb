@@ -15,6 +15,7 @@ module Schematics
                :association_attributes,
                :core?,
                :existing?,
+               :schema,
                to: :entity,
                private: true
       attr_accessor :entity, :attribute, :target

@@ -3,7 +3,8 @@
 describe Schematics::Commands::CreateEntityPolymorphicCounterCaches do
   subject(:command) { described_class.new(entity:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name:, options:) }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name:, options:) }
+  let(:schema) { Schematics::Schema.instance }
   let(:name) { 'category' }
   let(:options) { {} }
 

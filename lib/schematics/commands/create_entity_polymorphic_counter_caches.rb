@@ -9,8 +9,7 @@ module Schematics
       def generators
         return super if existing?
 
-        Schema
-          .instance
+        schema
           .polymorphic_associations
           .map(&:entity)
           .reject(&:existing?)
