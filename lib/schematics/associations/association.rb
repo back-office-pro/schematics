@@ -13,7 +13,7 @@ module Schematics
       include ::ActiveModel::API
 
       delegate :entity, :required?, :column_name, :association_type, :options, to: :belongs_to
-      delegate :descriptor, :class_name, :icon, :existing?, to: :entity
+      delegate :descriptor, :class_name, :icon, :includes, :schema, :existing?, to: :entity
       delegate :hidden?, to: :options
       attr_accessor :belongs_to, :prefixed
 

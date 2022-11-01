@@ -48,17 +48,7 @@ module Schematics
             .map do |association|
               resource
                 .public_send(association.name)
-                .preload(
-                  case association
-                  when Associations::HasAndBelongsToMany
-                    Schema
-                      .instance
-                      .find_entity_by_name(association.name.singularize)
-                      .includes
-                  else
-                    association.entity.includes
-                  end
-                )
+                .preload(association.includes)
                 .accessible_by(current_ability)
                 .order(created_at: :desc)
             end

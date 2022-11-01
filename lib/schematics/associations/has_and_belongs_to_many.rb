@@ -17,6 +17,10 @@ module Schematics
 
       def source = inverse_of.pluralize
 
+      def includes = schema
+        .find_entity_by_name(name.singularize)
+        .includes
+
       def to_str = <<~RUBY
         #{type} :#{name}
       RUBY
