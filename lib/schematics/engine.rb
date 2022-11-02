@@ -153,26 +153,25 @@ module Schematics
     config.i18n.available_locales = %i[fr en]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
-    # Cache
-    config.before_configuration do |app| # Will work only on production
+    # Theme
+    config.theme_color = '#2c3e50'
+
+    # Production
+    config.before_configuration do |app|
+      # Cache
       app.config.cache_store = :redis_cache_store, { # rubocop:disable Layout/FirstArrayElementLineBreak, Layout/MultilineArrayLineBreaks
         namespace: tenant,
         url: ENV.fetch('REDIS_URL', 'redis://localhost:6379')
       }
     end
 
-    # Active Storage
-    config.after_initialize do # Make sure we override main app defaults
+    # Make sure we override main app defaults
+    config.after_initialize do |app|
+      # Active Storage
       config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
+      # Time zone
+      app.config.time_zone = 'Paris'
     end
-
-    # Time zone
-    config.after_initialize do |app|
-      app.config.time_zone = 'Paris' # Time zone must be bound to app
-    end
-
-    # Theme
-    config.theme_color = '#2c3e50'
   end
 end
