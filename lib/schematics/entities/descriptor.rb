@@ -44,12 +44,13 @@ module Schematics
         end
       end
 
-      private
-
       def allowed_field_names = entity
         .fields
         .map(&:name)
         .push('id')
+        .sort
+
+      private
 
       def field
         entity.find_field_by_name(field_name)

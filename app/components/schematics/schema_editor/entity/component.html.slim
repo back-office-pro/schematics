@@ -13,7 +13,7 @@
       = builder.simple_fields_for :options do |options_form|
         = options_form.input :descriptor,
                              as: :select,
-                             collection: descriptors_collection,
+                             collection: allowed_field_names,
                              wrapper:,
                              input_html: { data: { controller: 'dropdowns--schema-editor-descriptor-dropdown' } }
         = options_form.input :actions,

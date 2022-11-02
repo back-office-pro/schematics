@@ -18,6 +18,7 @@ describe Schematics::Entities::Descriptor do
 
   its(:joins) { is_expected.to be_empty }
   its(:serializer_class) { is_expected.to be_a(Class) }
+  its(:allowed_field_names) { is_expected.to eq(%w[id type]) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
