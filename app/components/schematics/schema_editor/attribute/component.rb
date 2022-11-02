@@ -5,16 +5,9 @@ module Schematics
     module Attribute
       class Component < ApplicationComponent
         delegate :class, to: 'builder.object', prefix: :attribute
-        delegate :entity, :icon, :type, to: 'builder.object'
+        delegate :allowed_association_types, :icon, :type, to: 'builder.object'
         renders_one_form :builder
         option :builder
-
-        def associations_collection = entity
-          .schema
-          .entities
-          .reject(&:core?)
-          .map(&:name)
-          .sort
 
         def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
           .map(&Attributes.method(:const_get))

@@ -98,12 +98,11 @@ module Schematics
         inverse_entity&.icon || :link
       end
 
-      protected
-
       def allowed_association_types = entity
         .schema
         .entities
         .map(&:name)
+        .sort
     end
   end
 end

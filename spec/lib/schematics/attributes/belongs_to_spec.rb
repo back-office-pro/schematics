@@ -3,8 +3,10 @@
 describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
+  let(:schema) { Schematics::Schema.instance }
   let(:parent_entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'schema',
       options: {
         descriptor: 'title'
@@ -16,6 +18,7 @@ describe Schematics::Attributes::BelongsTo do
   end
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -53,6 +56,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:available_options) { is_expected.to include(:inverse, :type, :polymorphic) }
+  its(:allowed_association_types) { is_expected.to include('user', 'role') }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
