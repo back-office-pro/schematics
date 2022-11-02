@@ -8,9 +8,20 @@ module Schematics
           delegate :index, to: :builder
           option :builder
 
-          def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
+          def most_used_collection = [
+            Attributes::Attachment,
+            Attributes::Boolean,
+            Attributes::Date,
+            Attributes::Enum,
+            Attributes::Integer,
+            Attributes::String,
+            Attributes::Text
+          ].sort_by { _1.model_name.human }
+
+          def advanced_collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
             .map(&Attributes.method(:const_get))
             .excluding(Attributes::BelongsTo)
+            .excluding(most_used_collection)
             .sort_by { _1.model_name.human }
 
           def title = t('.title')

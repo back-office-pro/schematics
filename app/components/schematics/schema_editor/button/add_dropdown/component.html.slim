@@ -6,17 +6,18 @@ button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs
   h5.dropdown-header.fw-bold
     = title
   .pre-scrollable.overflow-scroll
-    - collection.each do |constant|
-      .dropdown-item {
-        data-action='click->nested-form#add:prevent'
-        data-nested-form-template-id-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}"
-        data-nested-form-target-id-param="fields-#{index}"
-        data-nested-form-index-param=index
-        role='button'
-      }
-        = fa_icon constant.new.icon, class: 'fa-fw me-2'
-        = t('.add_attribute', type: constant.model_name.human.downcase)
-    .dropdown-divider
+    - [most_used_collection, advanced_collection].each do |collection|
+      - collection.each do |constant|
+        .dropdown-item {
+          data-action='click->nested-form#add:prevent'
+          data-nested-form-template-id-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}"
+          data-nested-form-target-id-param="fields-#{index}"
+          data-nested-form-index-param=index
+          role='button'
+        }
+          = fa_icon constant.new.icon, class: 'fa-fw me-2'
+          = t('.add_attribute', type: constant.model_name.human.downcase)
+      .dropdown-divider
     .dropdown-item {
       data-action='click->nested-form#add:prevent'
       data-nested-form-template-id-param='schema-editor-virtual'

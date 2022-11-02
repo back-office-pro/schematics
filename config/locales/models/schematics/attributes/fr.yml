@@ -44,7 +44,7 @@ fr:
       schematics/attributes/time: Heure
       schematics/attributes/time_zone: Fuseau horaire
       schematics/attributes/timestamp: Timestamp
-      schematics/attributes/token: Token
+      schematics/attributes/token: Jeton unique
       schematics/attributes/url: URL
       schematics/attributes/user_agent: Agent utilisateur
       schematics/attributes/uuid: Identifiant unique
