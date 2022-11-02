@@ -25,12 +25,11 @@ module Schematics
         #{type} :#{name}
       RUBY
 
-      private
-
       def allowed_names = entity
         .schema
         .entities
         .map(&:name)
+        .sort
     end
   end
 end

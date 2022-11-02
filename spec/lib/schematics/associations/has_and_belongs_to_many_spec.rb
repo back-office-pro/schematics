@@ -3,8 +3,10 @@
 describe Schematics::Associations::HasAndBelongsToMany do
   subject(:association) { described_class.new(belongs_to:) }
 
+  let(:schema) { Schematics::Schema.instance }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'permission',
       options: {
         descriptor: 'name'
@@ -38,6 +40,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:default) { is_expected.to be_nil }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
+  its(:allowed_names) { is_expected.to include('user', 'role') }
   its(:weight) { is_expected.to eq(3) }
 
   its(:to_str) do

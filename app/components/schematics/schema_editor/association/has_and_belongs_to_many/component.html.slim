@@ -9,7 +9,7 @@
     .card-body
       = builder.input :name,
                       as: :select,
-                      collection: associations_collection,
+                      collection: allowed_names,
                       selected:,
                       wrapper:,
                       input_html: { data: { controller: 'dropdowns--schema-editor-association-dropdown' } }
