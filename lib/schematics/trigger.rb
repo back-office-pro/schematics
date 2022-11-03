@@ -7,8 +7,12 @@ module Schematics
 
     ACTIONS = %w[create save destroy].freeze
 
-    validates :callback, presence: true
-    validates :action, presence: true, inclusion: { in: ACTIONS }
+    validates :callback,
+              presence: true,
+              format: { with: Tokens::Tokenizer::REGEX, message: :function }
+    validates :action,
+              presence: true,
+              inclusion: { in: ACTIONS }
     attr_accessor :action, :callback
 
     def method_name = "after_#{action}"

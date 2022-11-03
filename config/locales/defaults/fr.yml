@@ -38,10 +38,11 @@ fr:
       dimension_width_inclusion: doit avoir une largeur comprise entre %{min} et %{max} pixels
       dimension_width_less_than_or_equal_to: doit avoir une largeur inférieure ou égale à %{length} pixels
       file_size_out_of_range: a un poids de %{file_size} qui n'entre pas dans les limites requises
+      function: n'est pas valide
       image_metadata_missing: n'est pas une image valide
       ip_address: n'est pas une adresse IP valide
       limit_out_of_range: a un nombre de fichiers en dehors des limites
-      mime_type: n'est pas un type de médias valide
+      mime_type: n'est pas un type de média valide
       name: doit contenir uniquement des caractères alphabétiques (lettre, nombre, underscore)
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
     virtuals:

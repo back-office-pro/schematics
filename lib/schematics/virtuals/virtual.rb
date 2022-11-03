@@ -15,7 +15,9 @@ module Schematics
       attr_accessor :entity, :name, :function
       attr_writer :options
 
-      validates :function, presence: true
+      validates :function,
+                presence: true,
+                format: { with: Tokens::Tokenizer::REGEX, message: :function }
       validates :name,
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
