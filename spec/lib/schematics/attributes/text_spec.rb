@@ -25,7 +25,7 @@ describe Schematics::Attributes::Text do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:font) }
   its(:default) { is_expected.to be_a(String) }
-  its(:available_options) { is_expected.to include(:default) }
+  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

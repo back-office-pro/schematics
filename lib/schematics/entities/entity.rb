@@ -63,7 +63,7 @@ module Schematics
       end
 
       def options
-        Schematics::Options.new(options: @options)
+        Options::Wrapper.new(options: @options)
       end
 
       def associations

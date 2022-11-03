@@ -25,5 +25,5 @@ describe Schematics::Attributes::Array do
   its(:to_sql) { is_expected.to eq('comparisons.ids') }
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
   its(:migration_options) { is_expected.to eq(array: true) }
-  its(:available_options) { is_expected.to include(:default) }
+  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
 end

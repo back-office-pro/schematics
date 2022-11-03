@@ -6,7 +6,7 @@ module Schematics
   module Attributes
     class StateMachine < Enum
       def available_options = super.push(
-        :events
+        Options::Events
       )
 
       def icon = :recycle

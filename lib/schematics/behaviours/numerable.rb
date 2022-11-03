@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
+require 'active_model/validations/comparability'
+
 module Schematics
   module Behaviours
     module Numerable
       delegate :unit, :precision, to: :options
 
-      def available_options = super.concat(
-        ::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys
+      def available_options = super.push(
+        Options::GreaterThan,
+        Options::GreaterThanOrEqualTo,
+        Options::EqualTo,
+        Options::LessThan,
+        Options::LessThanOrEqualTo,
+        Options::OtherThan
       )
 
       # :reek:NilCheck

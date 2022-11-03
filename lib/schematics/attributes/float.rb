@@ -11,8 +11,8 @@ module Schematics
       include Behaviours::Numerable
 
       def available_options = super.push(
-        :unit,
-        :precision
+        Options::Unit,
+        Options::Precision
       )
 
       def database_type = 'float'

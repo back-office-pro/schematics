@@ -12,8 +12,13 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
 
-      def available_options = super.concat(
-        ::ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys
+      def available_options = super.push(
+        Options::GreaterThan,
+        Options::GreaterThanOrEqualTo,
+        Options::EqualTo,
+        Options::LessThan,
+        Options::LessThanOrEqualTo,
+        Options::OtherThan
       )
 
       def open_api_type = ::Date

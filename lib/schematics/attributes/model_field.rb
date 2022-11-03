@@ -8,8 +8,8 @@ module Schematics
       delegate :depends_on, to: :options
 
       def available_options = super.push(
-        :depends_on,
-        :type
+        Options::DependsOn,
+        Options::Type
       )
 
       def collection = super.sort

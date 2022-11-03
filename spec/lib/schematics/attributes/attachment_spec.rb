@@ -28,8 +28,16 @@ describe Schematics::Attributes::Attachment do
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 
-  its(:available_options) do
-    is_expected.to include(:size, :aspect_ratio, :min, :max, :width, :height, :content_type)
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to include(
+      Schematics::Options::Size,
+      Schematics::Options::AspectRatio,
+      Schematics::Options::Min,
+      Schematics::Options::Max,
+      Schematics::Options::Width,
+      Schematics::Options::Height,
+      Schematics::Options::ContentType
+    )
   end
 
   its('validators.to_str') do

@@ -7,11 +7,11 @@ module Schematics
       delegate :limit, to: :options
 
       def available_options = super.push(
-        :unique,
-        :encrypted,
-        :min,
-        :limit,
-        :length
+        Options::Unique,
+        Options::Encrypted,
+        Options::Min,
+        Options::Limit,
+        Options::Length
       )
 
       def database_type = 'string'

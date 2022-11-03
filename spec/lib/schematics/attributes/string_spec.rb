@@ -26,8 +26,14 @@ describe Schematics::Attributes::String do
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
 
-  its(:available_options) do
-    is_expected.to include(:unique, :encrypted, :min, :limit, :length, :default)
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to include(
+      Schematics::Options::Unique,
+      Schematics::Options::Encrypted,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
   end
 
   its(:search_data) do

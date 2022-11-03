@@ -3,7 +3,6 @@
 describe Schematics::Attributes::Decimal do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:compare_checks) { ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys }
   let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
   let(:name) { 'price' }
   let(:options) do
@@ -30,8 +29,19 @@ describe Schematics::Attributes::Decimal do
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
 
-  its(:available_options) do
-    is_expected.to include(*compare_checks, :unit, :precision, :scale, :default)
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to include(
+      Schematics::Options::GreaterThan,
+      Schematics::Options::GreaterThanOrEqualTo,
+      Schematics::Options::EqualTo,
+      Schematics::Options::LessThan,
+      Schematics::Options::LessThanOrEqualTo,
+      Schematics::Options::OtherThan,
+      Schematics::Options::Unit,
+      Schematics::Options::Precision,
+      Schematics::Options::Scale,
+      Schematics::Options::Default
+    )
   end
 
   context 'when decimal has precision' do
