@@ -13,13 +13,7 @@ module Schematics
 
       def to_s = "schema:#{prefixed_name}"
 
-      def type = self
-        .class
-        .name
-        .demodulize
-        .underscore
-
-      alias database_type type
+      def database_type = type
     end
   end
 end
