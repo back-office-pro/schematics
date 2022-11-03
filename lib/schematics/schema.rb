@@ -70,6 +70,7 @@ module Schematics
       valid = super && entities.all?(&:valid?)
       entities
         .flat_map(&:errors)
+        .flat_map(&:compact)
         .each { |error| errors.add(:entities_attributes, error) }
       valid
     end
