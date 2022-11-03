@@ -3,7 +3,6 @@
 describe Schematics::Attributes::Date do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:compare_checks) { ActiveModel::Validations::Comparability::COMPARE_CHECKS.keys }
   let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
   let(:name) { 'created_at' }
   let(:options) { {} }
@@ -28,7 +27,18 @@ describe Schematics::Attributes::Date do
   its(:group_method) { is_expected.to eq(:group_by_day) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
-  its(:available_options) { is_expected.to include(*compare_checks, :default) }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to include(
+      Schematics::Options::GreaterThan,
+      Schematics::Options::GreaterThanOrEqualTo,
+      Schematics::Options::EqualTo,
+      Schematics::Options::LessThan,
+      Schematics::Options::LessThanOrEqualTo,
+      Schematics::Options::OtherThan,
+      Schematics::Options::Default
+    )
+  end
 
   context 'when date is required' do
     let(:options) { { required: true } }

@@ -25,7 +25,7 @@ describe Schematics::Attributes::Jsonb do
   its(:permitted_params) { is_expected.to eq(preferences: {}) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
-  its(:available_options) { is_expected.to include(:default) }
+  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
 
   context 'when there is a default' do
     let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }

@@ -5,44 +5,14 @@ module Schematics
     module Options
       module Modal
         class Component < ApplicationComponent
-          delegate :icon, :type, :available_options, :id, to: 'builder.object'
+          delegate :icon, :type, :id, to: 'builder.object'
           renders_one_form :builder
           option :builder
 
-          def input_type = {
-            aspect_ratio: :string,
-            cached: :boolean,
-            confirm: :boolean,
-            content_type: :array,
-            default: :string,
-            depends_on: :string,
-            encrypted: :boolean,
-            equal_to: :string,
-            events: :schema_editor_options_events,
-            greater_than: :string,
-            greater_than_or_equal_to: :string,
-            height: :string,
-            hidden: :boolean,
-            inverse: :string,
-            length: :string,
-            less_than: :string,
-            less_than_or_equal_to: :string,
-            limit: :string,
-            max: :string,
-            min: :string,
-            other_than: :string,
-            polymorphic: :boolean,
-            precision: :numeric,
-            readonly: :boolean,
-            required: :boolean,
-            scale: :numeric,
-            size: :string,
-            type: :string,
-            unique: :boolean,
-            unit: :string,
-            values: :array,
-            width: :string
-          }
+          def available_options = builder
+            .object
+            .available_options
+            .sort_by(&:input_type)
 
           def render?
             available_options.any?

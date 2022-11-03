@@ -37,7 +37,15 @@ describe Schematics::Virtuals::Calculation do
   its(:unit) { is_expected.to eq('$') }
   its(:precision) { is_expected.to eq(2) }
   its(:weight) { is_expected.to eq(1) }
-  its(:available_options) { is_expected.to eq(%i[unit precision]) }
+
+  its(:available_options) do
+    is_expected.to eq(
+      [
+        Schematics::Options::Unit,
+        Schematics::Options::Precision
+      ]
+    )
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

@@ -9,10 +9,10 @@ module Schematics
 
       def allow_blank = !required?
 
-      def available_options = %i[
-        required
-        hidden
-        cached
+      def available_options = [
+        Options::Required,
+        Options::Hidden,
+        Options::Cached
       ]
 
       def case_sensitive? = true

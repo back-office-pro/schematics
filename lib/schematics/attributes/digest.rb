@@ -13,8 +13,8 @@ module Schematics
       delegate :confirm?, to: :options
 
       def available_options = super.push(
-        :confirm,
-        :min
+        Options::Confirm,
+        Options::Min
       )
 
       def default = 'Azerty1!'

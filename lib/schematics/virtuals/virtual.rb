@@ -54,7 +54,7 @@ module Schematics
       def open_api_type = ::String
 
       def options
-        Schematics::Options.new(options: @options)
+        Options::Wrapper.new(options: @options)
       end
 
       def preload = tokens

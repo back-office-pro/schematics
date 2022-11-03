@@ -15,13 +15,13 @@ module Schematics
       delegate :default, :json_default, to: :dummy
 
       def available_options = super.push(
-        :size,
-        :aspect_ratio,
-        :min,
-        :max,
-        :width,
-        :height,
-        :content_type
+        Options::Size,
+        Options::AspectRatio,
+        Options::Min,
+        Options::Max,
+        Options::Width,
+        Options::Height,
+        Options::ContentType
       )
 
       def permitted_params = [

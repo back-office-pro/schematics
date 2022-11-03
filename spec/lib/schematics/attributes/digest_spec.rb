@@ -21,7 +21,14 @@ describe Schematics::Attributes::Digest do
   its(:default) { is_expected.to eq('Azerty1!') }
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
   its(:icon) { is_expected.to eq(:key) }
-  its(:available_options) { is_expected.to include(:confirm, :min, :default) }
+
+  its(:available_options) do
+    is_expected.to include(
+      Schematics::Options::Confirm,
+      Schematics::Options::Min,
+      Schematics::Options::Default
+    )
+  end
 
   its(:validators) do
     is_expected.to eq(

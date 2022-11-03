@@ -6,8 +6,8 @@ module Schematics
       delegate :readonly?, to: :options
 
       def available_options = super.push(
-        :default,
-        :readonly
+        Options::Default,
+        Options::Readonly
       )
 
       def json_default = default

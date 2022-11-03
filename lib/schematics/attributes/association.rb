@@ -20,9 +20,9 @@ module Schematics
                 unless: :polymorphic?
 
       def available_options = super.push(
-        :inverse,
-        :type,
-        :polymorphic
+        Options::Inverse,
+        Options::Type,
+        Options::Polymorphic
       )
 
       def open_api_type = { id!: ::String }

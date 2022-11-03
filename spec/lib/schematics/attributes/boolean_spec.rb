@@ -20,7 +20,7 @@ describe Schematics::Attributes::Boolean do
   its(:column_name) { is_expected.to eq('toggle') }
   its(:open_api_type) { is_expected.to eq('boolean') }
   its(:icon) { is_expected.to eq(:toggle_on) }
-  its(:available_options) { is_expected.to include(:default) }
+  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
 
   context 'when there is a default value' do
     let(:options) { { default: true } }

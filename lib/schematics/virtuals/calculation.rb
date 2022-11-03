@@ -6,9 +6,9 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
-      def available_options = %i[
-        unit
-        precision
+      def available_options = [
+        Options::Unit,
+        Options::Precision
       ]
 
       def icon = :square_root_alt

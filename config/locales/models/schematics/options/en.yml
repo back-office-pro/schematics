@@ -2,7 +2,7 @@
 en:
   activemodel:
     attributes:
-      schematics/options:
+      schematics/options/wrapper:
         actions: Actions
         aspect_ratio: Aspect ratio
         cached: Cached

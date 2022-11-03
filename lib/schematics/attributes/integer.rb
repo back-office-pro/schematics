@@ -11,7 +11,7 @@ module Schematics
       include Behaviours::Numerable
 
       def available_options = super.push(
-        :unit
+        Options::Unit
       )
 
       def default = 1

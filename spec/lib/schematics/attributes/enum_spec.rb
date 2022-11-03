@@ -25,7 +25,13 @@ describe Schematics::Attributes::Enum do
   its(:to_sql) { is_expected.to eq('products.state') }
   its(:to_s) { is_expected.to eq('schema:product_state') }
   its(:search_data) { is_expected.to eq('state:') }
-  its(:available_options) { is_expected.to include(:values, :default) }
+
+  its(:available_options) do
+    is_expected.to include(
+      Schematics::Options::Values,
+      Schematics::Options::Default
+    )
+  end
 
   its(:validators) do
     is_expected.to eq(

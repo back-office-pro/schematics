@@ -10,7 +10,7 @@ module Schematics
       include Behaviours::Enumerable
 
       def available_options = super.push(
-        :values
+        Options::Values
       )
 
       def collection = super.sort
