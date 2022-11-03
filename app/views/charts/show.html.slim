@@ -6,6 +6,7 @@
         = render Schematics::CardHeading::Component.new(icon: :eye, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component.pdf
+        = render Schematics::Button::Comment::Component.new(resource: @resource)
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Button::Duplicate::Component.new(resource: @resource)
         = render Schematics::Button::Destroy::Component.new(resource: @resource, compact: false)
@@ -19,4 +20,5 @@
                   nonce: content_security_policy_nonce,
                   download: { filename: @resource.filename },
                   dataset: { borderWidth: @resource.border_width }
+= render Schematics::Viewer::Comments::Component.new(resource: @resource)
 = render Schematics::Viewer::Timeline::Component.new(resource: @resource)
