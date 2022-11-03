@@ -13,4 +13,8 @@
       .modal-body
         = builder.simple_fields_for :options do |options_form|
           - available_options.each do |option|
-            = options_form.input option, as: input_type[option], checked_value: 'true', unchecked_value: 'false'
+            = options_form.input option.name,
+                                 as: option.input_type,
+                                 collection: option.try(:collection),
+                                 checked_value: 'true',
+                                 unchecked_value: 'false'
