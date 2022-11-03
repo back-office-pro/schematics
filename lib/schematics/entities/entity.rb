@@ -232,11 +232,12 @@ module Schematics
         }
       RUBY
 
-      def valid?(*)
+      def valid?(*) # rubocop:disable Metrics/CyclomaticComplexity
         valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
         %i[attributes virtuals triggers has_and_belongs_to_many_associations].each do |element|
           public_send(element)
             .flat_map(&:errors)
+            .flat_map(&:compact)
             .each { |error| errors.add(:"#{element}_attributes", error) }
         end
         errors.merge!(descriptor)
