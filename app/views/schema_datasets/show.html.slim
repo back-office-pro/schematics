@@ -6,8 +6,10 @@
         = render Schematics::CardHeading::Component.new(icon: :eye, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component.pdf
+        = render Schematics::Button::Comment::Component.new(resource: @resource)
+        = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
-        = render Schematics::Button::Destroy::Component.new(resource: @resource, compact: false)
   .card-body
     = render Schematics::Viewer::Schema::Component.new(schema: @resource.data)
+= render Schematics::Viewer::Comments::Component.new(resource: @resource)
 = render Schematics::Viewer::Timeline::Component.new(resource: @resource)
