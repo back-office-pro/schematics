@@ -5,9 +5,14 @@ module Schematics
     module Options
       module Modal
         class Component < ApplicationComponent
-          delegate :icon, :type, :available_options, :id, to: 'builder.object'
+          delegate :icon, :type, :id, to: 'builder.object'
           renders_one_form :builder
           option :builder
+
+          def available_options = builder
+            .object
+            .available_options
+            .sort_by(&:input_type)
 
           def render?
             available_options.any?
