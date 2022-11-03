@@ -32,7 +32,7 @@
                   wrapper:
       - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
         = f.input field.name.to_sym,
-                  as: field.class.name.demodulize.underscore,
+                  as: field.type,
                   maxlength: true,
                   minlength: true,
                   pattern: true,
