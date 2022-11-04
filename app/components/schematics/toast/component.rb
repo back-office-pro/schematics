@@ -14,10 +14,6 @@ module Schematics
         @flash = flash
       end
 
-      def animated?
-        !Rails.env.test?
-      end
-
       def css_class = {
         notice: 'success',
         alert: 'danger'
