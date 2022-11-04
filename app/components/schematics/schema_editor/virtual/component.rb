@@ -11,7 +11,7 @@ module Schematics
         def title = t('.title')
 
         def data = {
-          controller: 'popover',
+          controller: 'popover schema-editor--variable-typeahead',
           'bs-toggle': 'popover',
           'bs-trigger': 'hover',
           'bs-content': Popover::Component.new.to_html,
