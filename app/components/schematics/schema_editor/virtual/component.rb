@@ -9,6 +9,15 @@ module Schematics
         option :builder
 
         def title = t('.title')
+
+        def data = {
+          controller: 'popover',
+          'bs-toggle': 'popover',
+          'bs-trigger': 'hover',
+          'bs-content': Popover::Component.new.to_html,
+          'bs-placement': 'bottom',
+          'bs-html': true
+        }
       end
     end
   end

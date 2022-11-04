@@ -1,0 +1,18 @@
+table.table.mb-0.table-striped.table-borderless
+  tbody
+    tr
+      th = t('.combinator')
+      td = '&& ||'
+    tr
+      th = t('.operator')
+      td = '* ** + - / % | &'
+    tr
+      th = t('.comparator')
+      td = '<= >= < > != =='
+    tr
+      th = t('.parenthesis')
+      td = '( )'
+    tr
+      th = t('.variable')
+      td = '$foo.bar'
+    = row
