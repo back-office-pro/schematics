@@ -2,6 +2,7 @@
 :queues:
   - default
   - searchkick
+  - rollbar
   - mailers
 :schedule:
   schematics/database_backup_job:
