@@ -5,7 +5,7 @@ import { application } from 'controllers/application'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global mapsApiKey, rollbarClientKey, Chartkick */
+/* global environment, mapsApiKey, rollbarClientKey, Chartkick */
 
 const setNavbarScrolled = () => {
   document
@@ -38,7 +38,8 @@ const defaultErrorHandler = application.handleError.bind(application)
 const rollbar = new Rollbar({
   accessToken: rollbarClientKey,
   captureUncaught: true,
-  captureUnhandledRejections: true
+  captureUnhandledRejections: true,
+  environment
 })
 
 application.handleError = (error, message, detail = {}) => {

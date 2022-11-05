@@ -8,6 +8,11 @@ module Schematics
                :preferences_path,
                to: 'Schematics::Engine.routes.url_helpers'
 
+      def environment = Rails
+        .env
+        .to_json
+        .html_safe # rubocop:disable Rails/OutputSafety
+
       def i18n = t('javascript')
         .deep_transform_keys { _1.to_s.camelize(:lower) }
         .to_json
