@@ -231,7 +231,6 @@
         "name": "company_logo",
         "type": "attachment",
         "options": {
-          "cached": true,
           "content_type": [
             "png",
             "jpeg",
