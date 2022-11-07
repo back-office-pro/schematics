@@ -31,12 +31,6 @@ module Schematics
         end
       RUBY
 
-      def to_route
-        <<~RUBY
-          patch :#{name}, action: :trigger, event: '#{name}', on: :member
-        RUBY
-      end
-
       private
 
       def trigger

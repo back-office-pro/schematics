@@ -84,7 +84,7 @@ module Schematics
         archive_routes,
         autocomplete_route,
         duplicate_route,
-        events.map(&:to_route),
+        events.map(&method(:event_route)),
         import_routes,
         comment_routes
       ].compact.join.indent(2).chomp
@@ -119,6 +119,12 @@ module Schematics
 
         <<~RUBY
           post :duplicate, on: :member
+        RUBY
+      end
+
+      def event_route(event)
+        <<~RUBY
+          patch :#{event.name}, action: :trigger, event: '#{event.name}', on: :member
         RUBY
       end
 
