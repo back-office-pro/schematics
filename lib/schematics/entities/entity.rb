@@ -252,6 +252,8 @@ module Schematics
 
       def created_at_attribute = Attributes::Datetime.new(entity: self, name: 'created_at')
 
+      def router = Router.new(self)
+
       protected
 
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators

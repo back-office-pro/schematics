@@ -52,7 +52,7 @@ module Schematics
     def load_routes
       context = binding.of_caller(2).method(:eval)
       entities
-        .map(&Entities::Router.method(:new))
+        .map(&:router)
         .each(&context)
     end
 
