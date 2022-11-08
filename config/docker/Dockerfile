@@ -23,7 +23,7 @@ COPY . /app
 RUN bundle install --jobs=4 --retry=3
 
 WORKDIR /home
-RUN ruby /app/bin/schematics $APP_NAME --container > $APP_NAME.log
+RUN ruby /app/bin/schematics $APP_NAME --container
 
 WORKDIR /home/$APP_NAME
 
