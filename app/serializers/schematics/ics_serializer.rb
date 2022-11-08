@@ -2,6 +2,9 @@
 
 module Schematics
   class IcsSerializer
+    CALENDAR_START = Entities::Entity::CALENDAR_START
+    CALENDAR_END = Entities::Entity::CALENDAR_END
+
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :human_name, :entity, to: :model_class, private: true
 
@@ -34,24 +37,12 @@ module Schematics
       end
     end
 
-    def calendar_end_attribute = entity
-      .datetime_attributes
-      .second
-      .name
-      .to_sym # TODO: could work randomly
-
-    def calendar_start_attribute = entity
-      .datetime_attributes
-      .first
-      .name
-      .to_sym # TODO: could work randomly
-
     def dtend
-      Icalendar::Values::Date.new(@resource.try(calendar_end_attribute) || ::Time.current)
+      Icalendar::Values::Date.new(@resource.try(CALENDAR_START) || ::Time.current)
     end
 
     def dtstart
-      Icalendar::Values::Date.new(@resource.try(calendar_start_attribute) || ::Time.current)
+      Icalendar::Values::Date.new(@resource.try(CALENDAR_END) || ::Time.current)
     end
   end
 end

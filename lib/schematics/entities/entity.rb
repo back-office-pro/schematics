@@ -24,6 +24,9 @@ module Schematics
       attr_writer :id, :options
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
+      CALENDAR_START = :start_at
+      CALENDAR_END = :end_at
+
       delegate :core?, :existing?, :hidden?, to: :options
 
       class << self
@@ -137,7 +140,7 @@ module Schematics
       end
 
       def find_field_by_name(name)
-        case name
+        case name = name.to_s
         when 'id'
           Attributes::Uuid.new(entity: self, name: 'id')
         else
@@ -212,7 +215,7 @@ module Schematics
       end
 
       def viewer
-        return :calendar if datetime_attributes.size >= 2
+        return :calendar if find_field_by_name(CALENDAR_START) && find_field_by_name(CALENDAR_END)
         return :grid if attachment_attributes.any?(&:image?)
 
         :table
