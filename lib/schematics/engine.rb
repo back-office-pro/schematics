@@ -111,6 +111,9 @@ module Schematics
     config.force_ssl = Rails.env.production?
     config.require_master_key = true
 
+    # Logs
+    config.log_file_size = 100.megabytes # TODO: enabled when upgrading to Rails 7.1
+
     # Action Controller
     config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
     config.action_controller.default_url_options = default_url_options
