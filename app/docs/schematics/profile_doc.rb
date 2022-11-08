@@ -8,7 +8,7 @@ module Schematics
       data 'user[email]', ::String
       data 'user[password]', ::String
       data 'user[password_confirmation]', ::String
-      data 'user[current_password]', ::String
+      data 'user[password_challenge]', ::String
       data 'user[first_name]', ::String
       data 'user[last_name]', ::String
       data 'user[avatar]', ::String

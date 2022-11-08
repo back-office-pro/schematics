@@ -7,10 +7,10 @@ RSpec.describe 'Profile' do
 
   describe 'PUT #update' do
     let(:do_request) { put(profile_path, params:, headers:) }
-    let(:params) { { user: { current_password: } } }
+    let(:params) { { user: { password_challenge: } } }
 
-    context 'when current_password is right' do
-      let(:current_password) { 'Azerty1!' }
+    context 'when password_challenge is right' do
+      let(:password_challenge) { 'Azerty1!' }
 
       before { do_request }
 
@@ -18,8 +18,8 @@ RSpec.describe 'Profile' do
       its(:body) { is_expected.to be_blank }
     end
 
-    context 'when current_password is wrong' do
-      let(:current_password) { 'qwerty' }
+    context 'when password_challenge is wrong' do
+      let(:password_challenge) { 'qwerty' }
       let(:expected_response) do
         {
           'errors' => [

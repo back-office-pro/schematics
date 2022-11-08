@@ -12,9 +12,9 @@ module Schematics
       result = Profile::Update.call(
         current_session:,
         current_ability:,
-        resource_params: resource_params.except(:current_password),
+        resource_params: resource_params.except(:password_challenge),
         resource: current_user,
-        password: resource_params[:current_password]
+        password: resource_params[:password_challenge]
       )
       if result.success?
         respond_to do |format|
@@ -46,12 +46,12 @@ module Schematics
 
     def attributes = entity
       .fillable_elements
-      .insert(2, current_password_attribute)
+      .insert(2, password_challenge_attribute)
       .reject_is_a?(Attributes::Association, Associations::Association)
 
-    def current_password_attribute = Attributes::Digest.new(
+    def password_challenge_attribute = Attributes::Digest.new(
       entity:,
-      name: 'current_password',
+      name: 'password_challenge',
       options: { required: true }
     )
 
@@ -59,6 +59,6 @@ module Schematics
 
     def permitted_params = super
       .excluding(:role_id)
-      .push(:current_password)
+      .push(:password_challenge)
   end
 end

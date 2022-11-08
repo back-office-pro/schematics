@@ -4,7 +4,6 @@ en:
     attributes:
       user:
         avatar: Avatar
-        current_password: Current password
         email: Email
         first_name: First name
         full_name: Full name
@@ -14,6 +13,7 @@ en:
           en: English
           fr: French
         password: Password
+        password_challenge: Current password
         password_confirmation: Password confirmation
         remember_me: Remember me?
         time_zone: Time zone
