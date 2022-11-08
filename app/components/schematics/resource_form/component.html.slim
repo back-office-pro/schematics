@@ -16,6 +16,8 @@
                         prepend: fa_icon(field.icon),
                         input_html: { data: { controller: 'dropdown' } },
                         wrapper:
+      - when Schematics::Attributes::Datetime
+        = f.input field.name.to_sym, as: :datetime, html5: true, wrapper:
       - when Schematics::Attributes::Date
         = f.input field.name.to_sym, as: :date, html5: true, wrapper:
       - when Schematics::Attributes::Array
