@@ -8,7 +8,7 @@ Rack::MiniProfiler.config.tap do |config|
   config.base_url_path = '/profiler'
   config.enable_hotwire_turbo_drive_support = true
   config.storage = Rack::MiniProfiler::RedisStore
-  config.storage_options = { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379') }
+  config.storage_options = { url: ENV.fetch('REDIS_URL') }
   config.skip_paths = [
     %r{/sidekiq(.*)},
     %r{/favicon.ico},
