@@ -39,7 +39,6 @@ require 'ratonvirus'
 require 'ratonvirus/clamby'
 require 'i18n/beginning_of_week'
 require 'redis'
-require 'redis-namespace'
 require 'hiredis'
 require 'rack-mini-profiler'
 require 'aasm'
@@ -152,7 +151,7 @@ module Schematics
     # Production
     config.before_configuration do |app|
       # Cache
-      app.config.cache_store = :redis_cache_store, ::Tenant.redis_options
+      app.config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL') }
     end
 
     # Make sure we override main app defaults
