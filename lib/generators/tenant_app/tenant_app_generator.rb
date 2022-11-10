@@ -26,7 +26,10 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   end
 
   def create_env_file
-    create_file '.env', "#{db_name.upcase}_DATABASE_PASSWORD=#{db_password}"
+    create_file '.env', <<~TEXT
+      #{db_name.upcase}_DATABASE_PASSWORD=#{db_password}
+      REDIS_URL=redis://localhost:6379/#{redis_index}
+    TEXT
   end
 
   def edit_storage_configuration
@@ -189,4 +192,11 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   rescue PG::Error
     nil
   end
+
+  def redis_index = ::Redis
+    .new
+    .info('keyspace')
+    .keys
+    .size
+    .next
 end
