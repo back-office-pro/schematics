@@ -4,6 +4,7 @@ require 'rails/generators/rails/app/app_generator'
 require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inquiry'
 require 'pg'
+require 'redis'
 require 'json'
 require 'fileutils'
 
