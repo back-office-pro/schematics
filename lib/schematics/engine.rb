@@ -67,8 +67,6 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
-      def app_env = dummy_app? ? :development : :production
-
       def default_url_options
         return { host: 'back-office.pro' } if Rails.env.production?
 
@@ -85,14 +83,6 @@ module Schematics
         env_key: 'SCHEMATICS_MASTER_KEY',
         raise_if_missing_key: true
       )
-
-      def dummy_app? = tenant == 'dummy'
-
-      def tenant = Rails
-        .application
-        .class
-        .module_parent_name
-        .underscore
     end
 
     # Generators
@@ -162,10 +152,7 @@ module Schematics
     # Production
     config.before_configuration do |app|
       # Cache
-      app.config.cache_store = :redis_cache_store, { # rubocop:disable Layout/FirstArrayElementLineBreak, Layout/MultilineArrayLineBreaks
-        namespace: tenant,
-        url: ENV.fetch('REDIS_URL', 'redis://localhost:6379')
-      }
+      app.config.cache_store = :redis_cache_store, ::Tenant.redis_options
     end
 
     # Make sure we override main app defaults

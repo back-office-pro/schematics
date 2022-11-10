@@ -3,6 +3,7 @@
 require 'array'
 require 'object'
 require 'json_web_token'
+require 'tenant'
 require 'zeitwerk'
 require 'schematics/engine' if defined?(Rails)
 
@@ -16,6 +17,7 @@ loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")
 loader.ignore("#{__dir__}/json_web_token.rb")
 loader.ignore("#{__dir__}/object.rb")
+loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 
 module Schematics

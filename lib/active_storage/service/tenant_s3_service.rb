@@ -7,7 +7,7 @@ module ActiveStorage
     private
 
     def object_for(key)
-      bucket.object ::File.join(Schematics::Engine.tenant.dasherize, key)
+      bucket.object ::File.join(::Tenant.folder_name, key)
     end
   end
 end

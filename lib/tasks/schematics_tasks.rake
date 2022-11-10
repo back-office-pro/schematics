@@ -43,7 +43,7 @@ namespace :schematics do
     desc 'Start sidekiq with configuration'
     task run: :environment do
       sh <<~SHELL
-        bin/bundle exec sidekiq -C #{Schematics::Engine.join_config('sidekiq.yml')} -e #{Schematics::Engine.app_env}
+        bin/bundle exec sidekiq -C #{Schematics::Engine.join_config('sidekiq.yml')} -e #{::Tenant.app_env}
       SHELL
     end
   end

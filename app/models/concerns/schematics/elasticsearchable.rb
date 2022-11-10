@@ -15,7 +15,7 @@ module Schematics
     end
 
     class_methods do
-      def index_name = -> { [Engine.tenant, model_name.plural, Rails.env].join('_') }
+      def index_name = -> { ::Tenant.index_name(model_name) }
 
       def searchkick_elements = entity
         .searchable_elements

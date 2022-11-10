@@ -94,6 +94,7 @@ Lint/ConstantResolution:
     - Pagy
     - Turbo
     - ActiveModelSerializers
+    - Tenant
   Exclude:
     - spec/**/*
     - db/*
