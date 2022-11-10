@@ -151,7 +151,7 @@ module Schematics
     # Production
     config.before_configuration do |app|
       # Cache
-      app.config.cache_store = :redis_cache_store, ::Tenant.redis_options
+      app.config.cache_store = :redis_cache_store
     end
 
     # Make sure we override main app defaults
