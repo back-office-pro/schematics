@@ -148,12 +148,6 @@ module Schematics
     # Theme
     config.theme_color = '#2c3e50'
 
-    # Production
-    config.before_configuration do |app|
-      # Cache
-      app.config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL') }
-    end
-
     # Make sure we override main app defaults
     config.after_initialize do |app|
       # Active Storage
