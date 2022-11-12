@@ -198,6 +198,8 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     .new
     .info('keyspace')
     .keys
-    .size
+    .map { _1.delete_prefix('db') }
+    .map(&:to_i)
+    .max
     .next
 end
