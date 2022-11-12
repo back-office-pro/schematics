@@ -7,7 +7,7 @@ bin/rails db:migrate
 bin/rails schematics:licence:load
 bin/rails schematics:db:seed
 bin/rails searchkick:reindex:all
-bin/rails schematics:jobs:run &
+bin/bundle exec sidekiq &
 rm -rf tmp/pids/server.pid
 
 exec "$@"

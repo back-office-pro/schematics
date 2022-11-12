@@ -39,15 +39,6 @@ namespace :schematics do
     end
   end
 
-  namespace :jobs do
-    desc 'Start sidekiq with configuration'
-    task run: :environment do
-      sh <<~SHELL
-        bin/bundle exec sidekiq -C #{Schematics::Engine.join_config('sidekiq.yml')} -e #{::Tenant.app_env}
-      SHELL
-    end
-  end
-
   namespace :docs do
     desc 'Generate OpenAPI docs'
     task generate: :environment do
