@@ -8,4 +8,6 @@ Rollbar.configure do |config|
   config.use_sidekiq unless Rails.env.test?
   config.environment = Rails.env
   config.async_json_payload = true
+  config.person_method = :current_user
+  config.payload_options = { tenant: ::Tenant.name }
 end
