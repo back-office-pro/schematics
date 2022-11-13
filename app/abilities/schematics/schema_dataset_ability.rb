@@ -5,7 +5,7 @@ module Schematics
     def initialize
       super
       cannot :import, ::SchemaDataset
-      cannot :create, ::SchemaDataset unless ::SchemaDataset.last&.migrated?
+      cannot :create, ::SchemaDataset if ::SchemaDataset.any? && !::SchemaDataset.last.migrated?
       cannot :manage, ::SchemaDataset.in_progress
       cannot :update, ::SchemaDataset.migrated
       cannot :archive, ::SchemaDataset.current if ::SchemaDataset.current
