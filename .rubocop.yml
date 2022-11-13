@@ -99,7 +99,6 @@ Lint/ConstantResolution:
     - spec/**/*
     - db/*
     - lib/tasks/*
-    - template.rb
 Naming/InclusiveLanguage:
   Enabled: true
 Style/AsciiComments:
