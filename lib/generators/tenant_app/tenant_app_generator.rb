@@ -9,6 +9,7 @@ require 'json'
 require 'fileutils'
 
 class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
+  DEFAULT_PORT = 3000
   source_root superclass.source_root
 
   def initialize(generator, options = {})
@@ -27,10 +28,11 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   end
 
   def create_env_file
-    create_file '.env', <<~TEXT
-      #{db_name.upcase}_DATABASE_PASSWORD=#{db_password}
-      REDIS_URL=redis://localhost:6379/#{redis_index}
-    TEXT
+    template '.env'
+  end
+
+  def create_procfile
+    template 'Procfile'
   end
 
   def edit_storage_configuration
@@ -153,7 +155,18 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     rails_command 'schematics:db:active_record_doctor', env:
   end
 
+  def run_application
+    return if container?
+    return if env.development?
+
+    run 'foreman start &'
+  end
+
   private
+
+  def source_paths
+    super.push File.expand_path('templates', __dir__)
+  end
 
   def env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
 
@@ -202,4 +215,6 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     .map(&:to_i)
     .max
     .next
+
+  def port = DEFAULT_PORT + redis_index
 end
