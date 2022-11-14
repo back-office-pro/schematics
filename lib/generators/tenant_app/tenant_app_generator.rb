@@ -214,6 +214,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     .map { _1.delete_prefix('db') }
     .map(&:to_i)
     .max
+    .to_i
     .next
 
   def port = DEFAULT_PORT + redis_index
