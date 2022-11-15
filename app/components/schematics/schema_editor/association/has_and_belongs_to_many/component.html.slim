@@ -10,9 +10,8 @@
       = builder.input :name,
                       as: :select,
                       collection: allowed_names,
-                      selected:,
                       wrapper:,
-                      input_html: { data: { controller: 'schema-editor--association-dropdown' } }
+                      input_html: { data: { controller: 'dropdown' } }
       = builder.input :type,
                       as: :select,
                       collection:,
