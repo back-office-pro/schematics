@@ -45,6 +45,7 @@ fr:
       mime_type: n'est pas un type de média valide
       name: doit contenir uniquement des caractères alphabétiques (lettre, nombre, underscore)
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
+      singular: n'est pas au singulier
     virtuals:
       argument: un champ virtuel ne peut pas contenir d'assignement
       name: "%{name} n'est pas défini"

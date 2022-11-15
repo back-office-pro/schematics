@@ -23,6 +23,7 @@ en:
       mime_type: is not a valid MIME type
       name: must contain only word characters (letter, number, underscore)
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
+      singular: is not singular
     virtuals:
       argument: a virtual cannot contains an assignment
       name: "%{name} is not defined"

@@ -19,6 +19,7 @@ module Schematics
                 format: { with: %r{\A([\w/]+)\z}, message: :name },
                 length: { maximum: 50 },
                 exclusion: { in: :reserved_names }
+      validate :singular_name?
 
       attr_accessor :schema, :name
       attr_writer :id, :options
@@ -288,6 +289,12 @@ module Schematics
         .dangerous_attribute_methods
         .to_a
         .concat(schema.entities.excluding(self).map(&:name))
+
+      def singular_name?
+        return if name.singularize == name
+
+        errors.add(:name, :singular)
+      end
     end
   end
 end
