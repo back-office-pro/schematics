@@ -7,7 +7,6 @@ module Schematics
       return if result.success?
 
       schema_dataset.update_column(:state, 3) # rubocop:disable Rails/SkipsModelValidations
-      raise result.exception
     end
   end
 end
