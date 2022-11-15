@@ -66,12 +66,6 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
-      def default_url_options
-        return { host: 'back-office.pro' } if Rails.env.production?
-
-        { host: 'localhost', port: 3000 }
-      end
-
       def join_config(*pathnames)
         root.join(*pathnames.unshift('config'))
       end
@@ -105,7 +99,6 @@ module Schematics
 
     # Action Controller
     config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
-    config.action_controller.default_url_options = default_url_options
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
@@ -125,7 +118,6 @@ module Schematics
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.default_url_options = default_url_options
     config.action_mailer.default_options = { from: 'localhost' }
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
     config.action_mailer.raise_delivery_errors = Rails.env.development?
