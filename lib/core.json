@@ -289,15 +289,15 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "permission"
+        "name": "permissions"
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "chart"
+        "name": "charts"
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "stat"
+        "name": "stats"
       }
     ],
     "attributes": [
@@ -758,7 +758,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "user"
+        "name": "users"
       }
     ],
     "attributes": [
@@ -843,7 +843,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "user"
+        "name": "users"
       }
     ],
     "attributes": [
@@ -939,7 +939,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "permission"
+        "name": "permissions"
       }
     ],
     "attributes": [

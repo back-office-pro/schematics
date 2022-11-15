@@ -25,7 +25,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     }
   end
   let(:belongs_to) do
-    Schematics::Attributes::BelongsTo.new(entity:, name: 'permission', options:)
+    Schematics::Attributes::BelongsTo.new(entity:, name: 'permissions', options:)
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }

@@ -7,7 +7,7 @@ module Schematics
 
       validates :name, inclusion: { in: :allowed_names }
 
-      def column_name = super.pluralize
+      def column_name = "#{name.singularize}_ids"
 
       def default = nil
 
