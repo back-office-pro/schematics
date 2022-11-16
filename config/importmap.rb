@@ -12,7 +12,7 @@ pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schem
 
 pin '@client-side-validations/client-side-validations', to: 'https://unpkg.com/@client-side-validations/client-side-validations@0.3.0/dist/client-side-validations.esm.js'
 pin '@client-side-validations/simple-form', to: 'https://unpkg.com/@client-side-validations/simple-form@0.3.1/dist/simple-form.bootstrap4.esm.js'
-pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/js/fontawesome.js'
+pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.2.1/js/fontawesome.js'
 pin '@github/hotkey', to: 'https://unpkg.com/@github/hotkey@2.0.1/dist/index.js'
 pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.6/dist/esm/index.js'
 pin 'autosize', to: 'https://unpkg.com/autosize@5.0.1/dist/autosize.esm.js'
