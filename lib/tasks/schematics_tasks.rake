@@ -8,7 +8,7 @@ namespace :schematics do
   task generate: :environment do
     Rails.application.load_generators
     Schematics::Migrations::CoreMigration
-      .new(Schematics::Schema.instance)
+      .new(::Tenant.current_schema)
       .build_commands
       .flat_map(&:generators)
       .each(&:invoke_all)
