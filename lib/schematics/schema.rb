@@ -6,28 +6,25 @@ require 'active_model'
 module Schematics
   # :reek:InstanceVariableAssumption
   class Schema # rubocop:disable Metrics/ClassLength
-    include ::Singleton
     include ::ActiveModel::API
     attr_reader :entities
 
     class << self
-      public :new
-      delegate :load, to: :new
+      def load(data = [])
+        return unless data
+
+        data = ::JSON.parse(data) if data.is_a?(::String)
+        new(data:)
+      end
 
       def dump(data)
         data.to_json
       end
     end
 
-    def initialize = load
-
-    def load(data = [])
-      return unless data
-
-      data = ::JSON.parse(data) if data.is_a?(::String)
+    def initialize(data: [])
       @data = data.map(&:deep_symbolize_keys)
       self.entities = core_data.concat(@data)
-      self
     end
 
     def as_json = @data

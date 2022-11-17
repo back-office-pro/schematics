@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Schema do
-  subject(:schema) { described_class.instance }
+  subject(:schema) { described_class.new(data:) }
+
+  let(:data) { [] }
 
   it { is_expected.to be_valid }
   its(:root_route) { is_expected.to eq('dashboard#home') }
@@ -61,8 +63,6 @@ describe Schematics::Schema do
       schema.find_entity_by_name('user').associations.map(&:name)
     end
 
-    before { schema.load(data) }
-
     it 'prefixes role associations of message entity' do
       expect(message_associations).to include('author_role', 'recipient_role')
     end
@@ -86,8 +86,6 @@ describe Schematics::Schema do
         }
       ]
     end
-
-    before { schema.load(data) }
 
     it { is_expected.not_to be_valid }
     its(:root_route) { is_expected.to eq('exception#schema_error') }
