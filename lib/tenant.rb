@@ -4,8 +4,17 @@ require 'active_support/core_ext/module/delegation'
 
 class Tenant
   class << self
+    SEMAPHORE = Mutex.new.freeze
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
+
+    def current_schema=(value)
+      SEMAPHORE.synchronize { @current_schema = value }
+    end
+
+    def current_schema
+      SEMAPHORE.synchronize { @current_schema ||= Schematics::Schema.new }
+    end
 
     def name = application
       .class
