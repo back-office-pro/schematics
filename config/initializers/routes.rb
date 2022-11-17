@@ -9,7 +9,7 @@ Rails.application.routes.prepend do
   mount Schematics::Engine, at: '/'
   mount Sidekiq::Web, at: '/sidekiq', constraints: Schematics::AdminConstraint
   localized do
-    Schematics::Schema.instance.load_routes
+    ::Tenant.current_schema.load_routes
     get 'login', to: 'sessions#new', as: :login
   end
 end
