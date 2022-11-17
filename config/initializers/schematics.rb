@@ -15,7 +15,7 @@ ActiveSupport.on_load(:active_record) do
          .execute(sql)
          .first
          &.fetch('data')
-  Schematics::Schema.instance.load(::JSON.parse(data)) if data
+  ::Tenant.current_schema = Schematics::Schema.new(data: ::JSON.parse(data)) if data
 rescue ActiveRecord::StatementInvalid
   nil
 ensure
