@@ -10,11 +10,8 @@ module Schematics
     attr_reader :entities
 
     class << self
-      def load(data = [])
-        return unless data
-
-        data = ::JSON.parse(data) if data.is_a?(::String)
-        new(data:)
+      def load(data)
+        new(data:) if data
       end
 
       def dump(data)
@@ -23,6 +20,7 @@ module Schematics
     end
 
     def initialize(data: [])
+      data = ::JSON.parse(data) if data.is_a?(::String)
       @data = data.map(&:deep_symbolize_keys)
       self.entities = core_data.concat(@data)
     end
