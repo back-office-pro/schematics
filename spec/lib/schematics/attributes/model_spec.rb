@@ -4,7 +4,7 @@ describe Schematics::Attributes::Model do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'permission') }
-  let(:schema) { Schematics::Schema.instance }
+  let(:schema) { Schematics::Schema.new }
   let(:name) { 'model' }
   let(:options) { {} }
 
