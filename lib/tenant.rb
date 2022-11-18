@@ -4,7 +4,6 @@ require 'active_support/core_ext/module/delegation'
 
 class Tenant
   class << self
-    SEMAPHORE = Mutex.new.freeze
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
     attr_writer :current_schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
