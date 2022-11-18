@@ -6,7 +6,9 @@ module Schematics
       result = SchemaDatasets::Migrate.call(schema_dataset:)
       return if result.success?
 
-      schema_dataset.state_error!
+      PaperTrail.request(enabled: false) do
+        schema_dataset.state_error!
+      end
     end
   end
 end
