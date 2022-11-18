@@ -17,13 +17,9 @@ module Application
     end
 
     class_methods do
-      delegate :version, to: :current, prefix: true, allow_nil: true
+      delegate :version, :data, to: :current, prefix: true, allow_nil: true
 
       def current = migrated.last
-
-      def current_data
-        current&.data || Schematics::Schema.new
-      end
     end
 
     def after_migrate

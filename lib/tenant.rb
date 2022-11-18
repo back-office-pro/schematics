@@ -10,7 +10,11 @@ class Tenant
     attr_writer :current_schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def current_schema
-      @current_schema ||= ::SchemaDataset.current_data rescue Schematics::Schema.new # rubocop:disable Style/RescueModifier, ThreadSafety/InstanceVariableInClassMethod
+      @current_schema ||= begin # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+        ::SchemaDataset.current_data || Schematics::Schema.new
+      rescue NameError
+        Schematics::Schema.new
+      end
     end
 
     def name = application
