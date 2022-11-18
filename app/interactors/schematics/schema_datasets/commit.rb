@@ -12,7 +12,7 @@ module Schematics
         return clean(ff: true, d: true) if Rails.env.test?
 
         add(all: true)
-        commit("Migration #{id}")
+        commit("Migration #{id}", allow_empty: true)
       end
 
       private
