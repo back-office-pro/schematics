@@ -29,15 +29,11 @@ class Tenant
       [name, model_name.plural, env].join('_')
     end
 
-    def app_env = dummy? ? :development : :production
-
     def default_url_options = { host:, port: }.compact
 
     def default_mailer_options = { from: host }
 
     private
-
-    def dummy? = name == 'dummy'
 
     def host
       return "#{name}.back-office.pro" if production?
