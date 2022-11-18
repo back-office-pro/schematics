@@ -7,15 +7,10 @@ class Tenant
     SEMAPHORE = Mutex.new.freeze
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
-
-    def current_schema=(value)
-      SEMAPHORE.synchronize { @current_schema = value }
-    end
+    attr_writer :current_schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def current_schema
-      SEMAPHORE.synchronize do
-        @current_schema ||= SchemaDataset.current_data rescue Schematics::Schema.new # rubocop:disable Style/RescueModifier
-      end
+      @current_schema ||= ::SchemaDataset.current_data rescue Schematics::Schema.new # rubocop:disable Style/RescueModifier, ThreadSafety/InstanceVariableInClassMethod
     end
 
     def name = application
