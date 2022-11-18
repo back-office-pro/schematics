@@ -13,7 +13,9 @@ class Tenant
     end
 
     def current_schema
-      SEMAPHORE.synchronize { @current_schema ||= Schematics::Schema.new }
+      SEMAPHORE.synchronize do
+        @current_schema ||= SchemaDataset.current_data rescue Schematics::Schema.new # rubocop:disable Style/RescueModifier
+      end
     end
 
     def name = application
