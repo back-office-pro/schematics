@@ -26,8 +26,8 @@ module Schematics
       end
 
       def to_str = <<~RUBY
-        event :#{name} do
-          transitions from: #{Array(from).map(&:to_sym)}, to: :#{to}, after: :after_#{name}
+        event :#{name}, after_commit: :after_#{name} do
+          transitions from: #{Array(from).map(&:to_sym)}, to: :#{to}
         end
       RUBY
 
