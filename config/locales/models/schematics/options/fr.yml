@@ -11,6 +11,7 @@ fr:
         default: Valeur par défaut
         depends_on: Dépend de
         descriptor: Descripteur
+        direct_assignment: Assignment direct
         encrypted: Encrypté
         equal_to: Egal à
         events: Evènements

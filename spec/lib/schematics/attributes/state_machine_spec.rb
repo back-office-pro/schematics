@@ -57,7 +57,13 @@ describe Schematics::Attributes::StateMachine do
   its(:to_sql) { is_expected.to eq('orders.state') }
   its(:to_s) { is_expected.to eq('schema:order_state') }
   its(:search_data) { is_expected.to eq('state:') }
-  its(:available_options) { is_expected.to include(Schematics::Options::Events) }
+
+  its(:available_options) do
+    is_expected.to include(
+      Schematics::Options::Events,
+      Schematics::Options::DirectAssignment
+    )
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

@@ -5,8 +5,11 @@ require 'active_support/core_ext/string/indent'
 module Schematics
   module Attributes
     class StateMachine < Enum
+      delegate :direct_assignment, to: :options
+
       def available_options = super.push(
-        Options::Events
+        Options::Events,
+        Options::DirectAssignment
       )
 
       def icon = :recycle
@@ -15,7 +18,7 @@ module Schematics
 
       def to_str = super
         .concat <<~RUBY
-          aasm column: :#{name}, enum: true, no_direct_assignment: true do
+          aasm column: :#{name}, enum: true, no_direct_assignment: #{!direct_assignment} do
             state :#{values.first}, initial: true
             state :#{values.drop(1).join(', :')}
           #{events_to_str}

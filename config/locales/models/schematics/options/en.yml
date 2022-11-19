@@ -11,6 +11,7 @@ en:
         default: Default value
         depends_on: Depends on
         descriptor: Descriptor
+        direct_assignment: Direct assignment
         encrypted: Encrypted
         equal_to: Equal to
         events: Events

@@ -6,7 +6,7 @@ module Schematics
       result = SchemaDatasets::Migrate.call(schema_dataset:)
       return if result.success?
 
-      schema_dataset.update_column(:state, 3) # rubocop:disable Rails/SkipsModelValidations
+      schema_dataset.state_error!
     end
   end
 end

@@ -679,6 +679,7 @@
         "type": "state_machine",
         "options": {
           "required": true,
+          "direct_assignment": true,
           "default": "pending",
           "values": [
             "pending",

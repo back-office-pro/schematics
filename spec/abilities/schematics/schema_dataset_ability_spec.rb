@@ -9,8 +9,6 @@ RSpec.describe Schematics::SchemaDatasetAbility do
   let(:state) { :pending }
   let(:schema_dataset) { SchemaDataset.new(state:) }
 
-  before { SchemaDataset.aasm.state_machine.config.no_direct_assignment = false }
-
   it { is_expected.not_to be_able_to(:import, SchemaDataset) }
 
   context 'when the migration is in progress' do

@@ -6,9 +6,7 @@ module Schematics
       include Interactor
       delegate :schema_dataset, to: :context, private: true
 
-      def call
-        schema_dataset.update_column(:state, 2) # rubocop:disable Rails/SkipsModelValidations
-      end
+      def call = schema_dataset.state_migrated!
     end
   end
 end
