@@ -9,8 +9,9 @@ module Application
       attribute :data, default: -> { current_data || {} }
       delegate :build_commands,
                :clean_commands,
-               :new_classes,
-               :old_classes,
+               :new_entities,
+               :old_entities,
+               :entities,
                to: :migration,
                prefix: true
     end

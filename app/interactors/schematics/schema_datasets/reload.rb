@@ -7,8 +7,8 @@ module Schematics
 
       delegate :schema_dataset, to: :context, private: true
       delegate :reload!, to: '::OpenApi::Router', private: true
-      delegate :migration_old_classes,
-               :migration_new_classes,
+      delegate :migration_old_entities,
+               :migration_new_entities,
                to: :schema_dataset,
                private: true
 
@@ -16,13 +16,13 @@ module Schematics
         return if Rails.env.test?
 
         reload!
-        migration_old_classes.each do |class_name|
-          Object.__send__(:remove_const, class_name.to_sym)
-          Object.__send__(:remove_const, :"#{class_name.pluralize}Controller".to_sym)
+        migration_old_entities.each do |entity|
+          Object.__send__(:remove_const, entity.class_name.to_sym)
+          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
         end
-        migration_new_classes.each do |name|
-          load ::Rails.root.join('app', 'models', "#{name}.rb")
-          load ::Rails.root.join('app', 'controllers', "#{name.pluralize}_controller.rb")
+        migration_new_entities.each do |entity|
+          load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
+          load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
         end
       end
     end
