@@ -4,13 +4,12 @@ module Schematics
   module SchemaDatasets
     class Reindex
       include Interactor
-      delegate :eager_load!, to: 'Rails.application', private: true
-      delegate :models, to: '::Searchkick', private: true
+      delegate :schema_dataset, to: :context, private: true
+      delegate :migration_entities, to: :schema_dataset, private: true
 
-      def call
-        eager_load!
-        models.each(&:reindex)
-      end
+      def call = migration_entities
+        .filter_map(&:model_class)
+        .each(&:reindex)
     end
   end
 end
