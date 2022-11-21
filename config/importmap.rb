@@ -15,7 +15,7 @@ pin '@client-side-validations/simple-form', to: 'https://unpkg.com/@client-side-
 pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.2.1/js/fontawesome.js'
 pin '@github/hotkey', to: 'https://unpkg.com/@github/hotkey@2.0.1/dist/index.js'
 pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.6/dist/esm/index.js'
-pin 'autosize', to: 'https://unpkg.com/autosize@5.0.1/dist/autosize.esm.js'
+pin 'autosize', to: 'https://unpkg.com/autosize@5.0.2/dist/autosize.esm.js'
 pin 'bootstrap', to: 'https://unpkg.com/bootstrap@5.2.2/dist/js/bootstrap.esm.js'
 pin 'file-saver', to: 'https://ga.jspm.io/npm:file-saver@2.0.5/dist/FileSaver.js'
 pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.1/dist/jquery.js'
