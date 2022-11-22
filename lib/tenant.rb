@@ -11,7 +11,7 @@ class Tenant
 
     def current_schema
       @current_schema ||= begin # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
-        data = ::SchemaDataset.where(state: 2).last.data rescue [] # rubocop:disable Style/RescueModifier
+        data = (::SchemaDataset.where(state: 2).last.data rescue nil) || [] # rubocop:disable Style/RescueModifier
         Schematics::Schema.new(data:)
       end
     end
