@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.5'
   spec.add_development_dependency 'pg', '~> 1.4.5'
-  spec.add_development_dependency 'reek', '~> 6.1.1'
+  spec.add_development_dependency 'reek', '~> 6.1.2'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.39.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.15.1'
@@ -107,6 +107,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terser', '~> 1.1.12'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 2.76.0'
+  spec.add_dependency 'view_component', '~> 2.77.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
