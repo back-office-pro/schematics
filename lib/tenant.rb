@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/module/delegation'
 
+# :reek:Attribute
 class Tenant
   class << self
     delegate :env, :application, to: 'Rails', private: true
