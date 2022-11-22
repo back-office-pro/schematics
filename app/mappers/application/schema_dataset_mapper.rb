@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'dry/transformer/conditional'
+
 module Application
   class SchemaDatasetMapper < Dry::Transformer::Pipe
     import Dry::Transformer::ArrayTransformations
