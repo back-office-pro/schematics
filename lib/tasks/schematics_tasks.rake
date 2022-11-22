@@ -41,9 +41,10 @@ namespace :schematics do
     namespace :test do
       desc 'Prepare test database by loading current schema data'
       task prepare: :environment do
+        data = SchemaDataset.current_data
         ActiveRecord::Base.establish_connection(:test)
         PaperTrail.request(enabled: false) do
-          SchemaDataset.create!(state: :migrated, data: SchemaDataset.current_data)
+          SchemaDataset.create!(state: :migrated, data:)
         end
       end
     end
