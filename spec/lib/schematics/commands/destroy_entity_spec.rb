@@ -3,6 +3,8 @@
 describe Schematics::Commands::DestroyEntity do
   subject(:command) { described_class.new(entity:) }
 
+  include_context 'with custom generated attribute'
+
   let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, associations:) }
   let(:name) { 'assembly' }
   let(:attributes) do

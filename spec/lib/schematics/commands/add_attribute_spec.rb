@@ -3,6 +3,8 @@
 describe Schematics::Commands::AddAttribute do
   subject(:command) { described_class.new(entity:, attribute:) }
 
+  include_context 'with custom generated attribute'
+
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'first_name' }
 

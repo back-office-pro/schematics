@@ -3,6 +3,8 @@
 describe Schematics::Commands::CreateEntityCounterCaches do
   subject(:command) { described_class.new(entity:) }
 
+  include_context 'with custom generated attribute'
+
   let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, options:) }
   let(:name) { 'assembly' }
   let(:options) { {} }

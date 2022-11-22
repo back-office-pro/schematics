@@ -5,13 +5,7 @@ require 'rails/generators/generated_attribute'
 describe Rails::Generators::GeneratedAttribute do
   subject(:attribute) { described_class.parse(column_definition) }
 
-  before do
-    described_class
-      .singleton_class
-      .prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
-    described_class
-      .prepend(Schematics::Patches::Rails::Generators::GeneratedAttribute)
-  end
+  include_context 'with custom generated attribute'
 
   context 'when column is string' do
     let(:column_definition) { 'foo:string' }

@@ -3,6 +3,8 @@
 describe Schematics::Commands::RenameEntity do
   subject(:command) { described_class.new(entity:, attribute:, target:) }
 
+  include_context 'with custom generated attribute'
+
   let(:entity) { Schematics::Entities::Entity.new(name: 'prospect') }
   let(:attribute) { 'client' }
   let(:target) { nil }
