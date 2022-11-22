@@ -2,10 +2,19 @@
 
 require 'active_support/core_ext/module/delegation'
 
+# :reek:Attribute
 class Tenant
   class << self
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
+    attr_writer :current_schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
+
+    def current_schema
+      @current_schema ||= begin # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+        data = (::SchemaDataset.where(state: 2).last.data rescue nil) || [] # rubocop:disable Style/RescueModifier
+        Schematics::Schema.new(data:)
+      end
+    end
 
     def name = application
       .class
@@ -20,15 +29,11 @@ class Tenant
       [name, model_name.plural, env].join('_')
     end
 
-    def app_env = dummy? ? :development : :production
-
     def default_url_options = { host:, port: }.compact
 
     def default_mailer_options = { from: host }
 
     private
-
-    def dummy? = name == 'dummy'
 
     def host
       return "#{name}.back-office.pro" if production?

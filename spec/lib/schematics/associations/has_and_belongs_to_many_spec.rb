@@ -3,7 +3,7 @@
 describe Schematics::Associations::HasAndBelongsToMany do
   subject(:association) { described_class.new(belongs_to:) }
 
-  let(:schema) { Schematics::Schema.instance }
+  let(:schema) { Schematics::Schema.new }
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,

@@ -3,8 +3,8 @@
 describe Schematics::Migrations::DataMigration do
   subject(:migration) { described_class.new(new_schema, current_schema) }
 
-  let(:new_schema) { Schematics::Schema.load(new_data) }
-  let(:current_schema) { Schematics::Schema.instance.load(current_data) }
+  let(:new_schema) { Schematics::Schema.new(data: new_data) }
+  let(:current_schema) { Schematics::Schema.new(data: current_data) }
 
   describe '#build_commands' do
     subject { migration.build_commands }

@@ -3,7 +3,7 @@
 describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:schema) { Schematics::Schema.instance }
+  let(:schema) { Schematics::Schema.new }
   let(:parent_entity) do
     Schematics::Entities::Entity.new(
       schema:,

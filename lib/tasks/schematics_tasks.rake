@@ -8,7 +8,7 @@ namespace :schematics do
   task generate: :environment do
     Rails.application.load_generators
     Schematics::Migrations::CoreMigration
-      .new(Schematics::Schema.instance)
+      .new(::Tenant.current_schema)
       .build_commands
       .flat_map(&:generators)
       .each(&:invoke_all)
@@ -35,6 +35,17 @@ namespace :schematics do
       desc 'Generate database encryption credentials'
       task init: :environment do
         sh %[EDITOR='echo "$(rails db:encryption:init | tail -n +2)" >> ' rails credentials:edit]
+      end
+    end
+
+    namespace :test do
+      desc 'Prepare test database by loading current schema data'
+      task prepare: :environment do
+        data = SchemaDataset.current_data
+        ActiveRecord::Base.establish_connection(:test)
+        PaperTrail.request(enabled: false) do
+          SchemaDataset.create!(state: :migrated, data:)
+        end
       end
     end
   end

@@ -8,7 +8,7 @@ RSpec.describe Schematics::SchemaDatasets::Generate do
 
   before do
     admin_role
-    Schematics::Schema.instance.load(current_data)
+    Tenant.current_schema = Schematics::Schema.new(data: current_data)
   end
 
   after(:all) { Git.init.clean(ff: true, d: true) } # rubocop:disable RSpec/BeforeAfterAll

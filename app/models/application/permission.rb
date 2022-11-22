@@ -9,8 +9,8 @@ module Application
     end
 
     class_methods do
-      def create_all_entities_permissions! = Schematics::Schema
-        .instance
+      def create_all_entities_permissions! = ::Tenant
+        .current_schema
         .entities
         .reject(&:hidden?)
         .flat_map(&method(:create_entity_permissions!))

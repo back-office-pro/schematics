@@ -6,7 +6,6 @@ module Schematics
       include Interactor
 
       delegate :schema_dataset, to: :context, private: true
-      delegate :load, to: 'Schematics::Schema.instance', private: true
       delegate :load_generators, to: 'Rails.application', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
@@ -20,7 +19,7 @@ module Schematics
         migration_clean_commands
           .flat_map(&:generators)
           .each(&:invoke_all)
-        load(data.to_json)
+        ::Tenant.current_schema = data
         migration_build_commands
           .flat_map(&:generators)
           .each(&:invoke_all)

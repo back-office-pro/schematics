@@ -23,8 +23,8 @@ module Schematics
         end
       end
 
-      def entity = Schema
-        .instance
+      def entity = ::Tenant
+        .current_schema
         .find_entity_by_name(name.underscore)
 
       def filter_attributes = entity
