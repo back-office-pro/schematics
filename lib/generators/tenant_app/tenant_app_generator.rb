@@ -98,12 +98,6 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     rails_command 'schematics:docs:generate', env:
   end
 
-  def enable_cache
-    return unless env.development?
-
-    rails_command 'dev:cache'
-  end
-
   def load_schemadataset_fixture
     return unless env.development?
 
