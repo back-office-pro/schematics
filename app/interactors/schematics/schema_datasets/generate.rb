@@ -23,8 +23,6 @@ module Schematics
         migration_build_commands
           .flat_map(&:generators)
           .each(&:invoke_all)
-      rescue StandardError => exception # rubocop:disable Naming/RescuedExceptionsVariableName
-        context.fail!(exception:)
       end
     end
   end

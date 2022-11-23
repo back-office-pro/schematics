@@ -3,10 +3,12 @@
 module Schematics
   class MigrateSchemaJob < ApplicationJob
     def perform(schema_dataset)
-      result = SchemaDatasets::Migrate.call(schema_dataset:)
-      return if result.success?
-
-      schema_dataset.state_error!
+      SchemaDatasets::Migrate.call(schema_dataset:)
+    rescue StandardError => e
+      PaperTrail.request(enabled: false) do
+        schema_dataset.state_error!
+        Rollbar.error(e, 'Migration error')
+      end
     end
   end
 end
