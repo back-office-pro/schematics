@@ -10,10 +10,7 @@ class Tenant
     attr_writer :current_schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def current_schema
-      @current_schema ||= begin # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
-        data = (::SchemaDataset.where(state: 2).last.data rescue nil) || [] # rubocop:disable Style/RescueModifier
-        Schematics::Schema.new(data:)
-      end
+      @current_schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
     end
 
     def name = application
@@ -34,6 +31,15 @@ class Tenant
     def default_mailer_options = { from: host }
 
     private
+
+    def data
+      ::SchemaDataset
+        .where(state: 2)
+        .last
+        .data || []
+    rescue StandardError
+      []
+    end
 
     def host
       return "#{name}.back-office.pro" if production?
