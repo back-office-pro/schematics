@@ -45,6 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_record_doctor', '~> 1.10.0'
   spec.add_dependency 'active_storage_base64', '~> 2.0.0'
   spec.add_dependency 'active_storage_validations', '~> 1.0.2'
+  spec.add_dependency 'after_commit_everywhere', '~> 1.3.0'
   spec.add_dependency 'aws-sdk-s3', '~> 1.117.1'
   spec.add_dependency 'bcrypt', '~> 3.1.18'
   spec.add_dependency 'better_errors', '~> 2.10.0beta2'
