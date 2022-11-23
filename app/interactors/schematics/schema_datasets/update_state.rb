@@ -6,7 +6,11 @@ module Schematics
       include Interactor
       delegate :schema_dataset, to: :context, private: true
 
-      def call = schema_dataset.state_migrated!
+      def call
+        PaperTrail.request(enabled: false) do
+          schema_dataset.state_migrated!
+        end
+      end
     end
   end
 end
