@@ -9,7 +9,7 @@
         = t('schematics.application.delete.title')
       = t('schematics.application.delete.subtitle')
     .text-secondary = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)
-    = render Schematics::Viewer::Association::Component.with_collection(resource_associations(resource: @resource, only: :required?))
+    = render Schematics::Viewer::Association::Component.with_collection(model_class.associations(@resource, current_ability, :required?))
     = form_with model: @resource, method: :delete, html: { class: 'mt-3' } do
       = render Schematics::Button::Confirm::Component.new
       = render Schematics::Button::Cancel::Component.new(path: @resource)

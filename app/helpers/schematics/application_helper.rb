@@ -26,33 +26,5 @@ module Schematics
           .public_send(key)
       end
     end
-
-    def resource_associations(resource:, only: nil)
-      resource
-        .class
-        .entity
-        .attachments_attributes
-        .map do |attribute|
-          resource
-            .public_send(attribute.name)
-            .preload(:blob)
-            .order(created_at: :desc)
-        end
-        .concat(
-          resource
-            .class
-            .entity
-            .has_many_and_through_and_belongs_to_many_associations
-            .reject(&:existing?)
-            .select(&only)
-            .map do |association|
-              resource
-                .public_send(association.name)
-                .preload(association.includes)
-                .accessible_by(current_ability)
-                .order(created_at: :desc)
-            end
-        ).compact_blank
-    end
   end
 end
