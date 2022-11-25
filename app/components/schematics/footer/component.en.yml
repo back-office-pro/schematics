@@ -1,4 +1,4 @@
 ---
 en:
   powered_by: Powered by
-  version: Version %{version}
+  version: Version %{current_version}
