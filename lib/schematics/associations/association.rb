@@ -21,7 +21,7 @@ module Schematics
 
       class << self
         def build(type: 'has_many', entity: nil, belongs_to: nil, name: nil)
-          belongs_to ||= Attributes::BelongsTo.new(entity:, name:, options: { required: true })
+          belongs_to ||= Attributes::BelongsTo.new(entity:, name:)
           Associations.const_get(type.camelize.to_sym).new(belongs_to:)
         end
       end
