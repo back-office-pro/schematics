@@ -55,7 +55,7 @@ module Schematics
 
           def schema_attribute
             @schema_attribute ||= ::Tenant
-                                  .current_schema
+                                  .schema
                                   .find_attribute_by_prefixed_name(@type.to_s)
           end
         end

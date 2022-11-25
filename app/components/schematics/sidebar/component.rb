@@ -10,8 +10,7 @@ module Schematics
         'bs-container': '.sidebar'
       }
 
-      def entities = ::Tenant
-        .current_schema
+      def entities = current_schema
         .entities
         .reject(&:hidden?)
         .select { can?(:index, _1.model_class) }

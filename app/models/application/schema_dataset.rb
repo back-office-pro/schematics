@@ -27,7 +27,7 @@ module Application
     end
 
     def migration
-      @migration ||= Schematics::Migrations::DataMigration.new(data, ::Tenant.current_schema)
+      @migration ||= Schematics::Migrations::DataMigration.new(data, ::Tenant.schema)
     end
 
     def valid?(*)

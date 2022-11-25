@@ -22,8 +22,7 @@ module Application
 
     def i18n_title_path = 'searches'
 
-    def searches = ::Tenant
-      .current_schema
+    def searches = current_schema
       .entities
       .reject(&:hidden?)
       .map do |entity|

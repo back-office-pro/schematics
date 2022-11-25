@@ -8,12 +8,12 @@ class Tenant
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
 
-    def current_schema
-      @current_schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+    def schema
+      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
     end
 
     def reset!
-      @current_schema = nil # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+      @schema = nil # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
     end
 
     def name = application

@@ -260,7 +260,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   private
 
   def entity = ::Tenant
-    .current_schema
+    .schema
     .find_entity_by_name(name.underscore)
 
   def old_name = options[:rename]

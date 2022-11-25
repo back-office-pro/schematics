@@ -20,8 +20,7 @@ module Schematics
 
     protected
 
-    def parent_model_class = ::Tenant
-      .current_schema
+    def parent_model_class = current_schema
       .entities
       .map { [_1.class_name, _1.model_class] }
       .to_h

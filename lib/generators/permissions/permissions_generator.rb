@@ -39,7 +39,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   private
 
   def entity = ::Tenant
-    .current_schema
+    .schema
     .find_entity_by_name(name.underscore)
 
   def model = entity.class_name
