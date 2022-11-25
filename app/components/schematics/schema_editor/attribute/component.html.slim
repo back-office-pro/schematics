@@ -15,7 +15,7 @@
                         as: :select,
                         collection: allowed_association_types,
                         wrapper:,
-                        input_html: { data: { controller: 'schema-editor--association-dropdown' } }
+                        input_html: { data: { controller: 'dropdown' } }
       - else
         = builder.input :name
       = builder.input :type,
