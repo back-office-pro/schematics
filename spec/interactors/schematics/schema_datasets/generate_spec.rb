@@ -3,12 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::SchemaDatasets::Generate do
-  let(:schema_dataset) { SchemaDataset.create!(data:) }
+  let(:schema_dataset) { SchemaDataset.create!(data:, state: :in_progress) }
+  let(:current_schema) { Schematics::Schema.new(data: current_data) }
   let(:admin_role) { Role.create!(name: 'Admin') }
 
   before do
     admin_role
-    Tenant.current_schema = Schematics::Schema.new(data: current_data)
+    Tenant.instance_variable_set(:@current_schema, current_schema)
   end
 
   after(:all) { Git.init.clean(ff: true, d: true) } # rubocop:disable RSpec/BeforeAfterAll

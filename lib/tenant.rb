@@ -7,10 +7,13 @@ class Tenant
   class << self
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
-    attr_writer :current_schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def current_schema
       @current_schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+    end
+
+    def reset!
+      @current_schema = nil # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
     end
 
     def name = application
@@ -34,9 +37,10 @@ class Tenant
 
     def data
       ::SchemaDataset
-        .where(state: 2)
+        .where(state: [1, 2])
         .last
-        .data || []
+        .data
+        .as_json
     rescue StandardError
       []
     end

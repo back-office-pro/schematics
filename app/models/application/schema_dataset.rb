@@ -23,9 +23,7 @@ module Application
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(self) do
-        ::Tenant.current_schema = data
-      end
+      Schematics::MigrateSchemaJob.perform_later(self) { ::Tenant.reset! }
     end
 
     def migration
