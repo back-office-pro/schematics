@@ -13,11 +13,11 @@
         = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
         = render Schematics::Button::Duplicate::Component.new(resource: @resource)
         = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
-        - constant = model_class.associations(@resource, current_ability, :required?).any? ? :Delete : :Destroy
+        - constant = @resource.associations(current_ability:, only: :required?).any? ? :Delete : :Destroy
         = render Schematics::Button.const_get(constant)::Component.new(resource: @resource, compact: false)
   .card-body.p-0
     = render Schematics::ResourceDetails::Component.new(resource: @resource, editable: true)
 = render Schematics::Viewer::RichText::Component.with_collection(model_class.entity.rich_text_attributes, resource: @resource)
-= render Schematics::Viewer::Association::Component.with_collection(model_class.associations(@resource, current_ability))
+= render Schematics::Viewer::Association::Component.with_collection(@resource.associations(current_ability:))
 = render Schematics::Viewer::Comments::Component.new(resource: @resource)
 = render Schematics::Viewer::Timeline::Component.new(resource: @resource)

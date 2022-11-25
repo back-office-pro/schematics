@@ -7,7 +7,6 @@ module Schematics
     included do
       include ActiveStorageSupport::SupportForBase64
       include AASM
-      scope :associations, AssociationsQuery
       attribute_method_suffix '_formatted'
       attribute :lock_version, default: 0
       strip_attributes
@@ -65,6 +64,20 @@ module Schematics
         .entity
         &.find_field_by_name(attr)
         &.format(public_send(attr)) || public_send(attr)
+    end
+
+    def associations(current_ability:, only: nil)
+      self
+        .class
+        .entity
+        .association_elements
+        .select(&only)
+        .map do |association|
+          public_send(association.name)
+            .preload(association.includes)
+            .accessible_by(current_ability)
+            .order(created_at: :desc)
+        end.compact_blank
     end
   end
 end

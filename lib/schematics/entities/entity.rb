@@ -258,6 +258,11 @@ module Schematics
 
       def router = Router.new(self)
 
+      def association_elements = has_many_and_through_and_belongs_to_many_associations
+        .reject(&:existing?)
+        .to_a
+        .concat(attachments_attributes)
+
       protected
 
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
