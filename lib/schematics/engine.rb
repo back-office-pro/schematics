@@ -60,6 +60,7 @@ require 'terser'
 require 'sassc-rails'
 require 'dotenv-rails'
 require 'dry-initializer'
+require 'ruby-graphviz'
 
 module Schematics
   class Engine < ::Rails::Engine

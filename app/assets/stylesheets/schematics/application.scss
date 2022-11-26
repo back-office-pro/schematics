@@ -114,6 +114,12 @@ button[disabled] .text.d-none:not(.d-lg-inline) {
   margin-bottom: 0;
 }
 
+// SVG responsiveness
+
+svg {
+  max-width: 100%;
+}
+
 // Utils
 
 .w-0 {
