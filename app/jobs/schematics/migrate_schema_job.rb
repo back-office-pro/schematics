@@ -2,6 +2,7 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
+    # :reek:UncommunicativeVariableName
     def perform(schema_dataset)
       SchemaDatasets::Migrate.call(schema_dataset:)
     rescue StandardError => e

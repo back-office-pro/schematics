@@ -3,6 +3,7 @@
 require 'active_support/core_ext/module/delegation'
 
 # :reek:Attribute
+# :reek:MissingSafeMethod
 class Tenant
   class << self
     delegate :env, :application, to: 'Rails', private: true
