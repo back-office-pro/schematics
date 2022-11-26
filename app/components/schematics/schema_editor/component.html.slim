@@ -8,4 +8,4 @@
     = form.simple_fields_for :entities, entities do |builder|
       = render Schematics::SchemaEditor::Entity::Component.new(builder:)
   = render Schematics::Button::Confirm::Component.new
-  = render Schematics::Button::Cancel::Component.new(path: ::SchemaDataset)
+  = render Schematics::Button::Cancel::Component.new(path: resource)
