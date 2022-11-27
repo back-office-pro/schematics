@@ -1,5 +1,6 @@
 import ApplicationController from 'controllers/application_controller'
-import saveAs from 'file-saver'
+
+/* global open */
 
 export default class extends ApplicationController {
   static get targets () {
@@ -12,7 +13,7 @@ export default class extends ApplicationController {
 
   connect () {
     if (this.urlValue !== '') {
-      saveAs(this.urlValue)
+      open(this.urlValue)
     }
   }
 
