@@ -15,3 +15,9 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+# TODO: remove when sidekiq-scheduler is released
+gem 'sidekiq-scheduler',
+    github: 'sidekiq-scheduler/sidekiq-scheduler',
+    branch: 'master',
+    ref: '76573dbc46c73afa213331049cfc5657582dc376'
