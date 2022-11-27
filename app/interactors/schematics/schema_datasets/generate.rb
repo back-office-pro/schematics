@@ -10,7 +10,6 @@ module Schematics
       delegate :reset!, to: 'Tenant', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
-               :data,
                to: :schema_dataset,
                private: true
 
