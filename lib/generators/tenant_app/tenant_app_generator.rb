@@ -31,6 +31,10 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     template '.env'
   end
 
+  def create_puppeteer_config_file
+    template '.puppeteerrc.cjs'
+  end
+
   def edit_storage_configuration
     append_file 'config/storage.yml', <<~YAML
       amazon:
@@ -107,7 +111,11 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   end
 
   def edit_gitignore
-    append_to_file '.gitignore', '.env'
+    append_to_file '.gitignore', <<~TEXT
+      /.cache
+      /.env
+      /node_modules
+    TEXT
   end
 
   def remove_public_html_files
