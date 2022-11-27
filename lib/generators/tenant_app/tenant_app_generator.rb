@@ -151,6 +151,13 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     rails_command 'schematics:db:active_record_doctor', env:
   end
 
+  def run_application
+    return if container?
+    return if env.development?
+
+    rails_command 'server &'
+  end
+
   private
 
   def source_paths
