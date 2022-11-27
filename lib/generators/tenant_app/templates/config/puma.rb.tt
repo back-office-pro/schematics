@@ -45,7 +45,9 @@ plugin :tmp_restart
 x = nil
 
 on_worker_boot do
-  x = Sidekiq.configure_embed {}
+  x = Sidekiq.configure_embed do |config|
+    config.merge! YAML.load_file(Schematics::Engine.join_config('sidekiq.yml'))
+  end
   x.run
 end
 
