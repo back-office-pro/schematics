@@ -163,7 +163,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     return if container?
     return if env.development?
 
-    rails_command 'server &'
+    rails_command 'server &', env:
   end
 
   private
