@@ -119,7 +119,6 @@ module Schematics
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.default_options = { from: 'localhost' }
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
     config.action_mailer.raise_delivery_errors = Rails.env.development?
 

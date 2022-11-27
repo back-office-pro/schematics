@@ -32,7 +32,7 @@ class Tenant
 
     def default_url_options = { host:, port: }.compact
 
-    def default_mailer_options = { from: host }
+    def default_mailer_options = { from: }
 
     private
 
@@ -45,6 +45,8 @@ class Tenant
     rescue StandardError
       []
     end
+
+    def from = "no-reply@#{host}"
 
     def host
       return "#{name}.back-office.pro" if production?
