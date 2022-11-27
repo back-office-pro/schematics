@@ -31,10 +31,6 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     template '.env'
   end
 
-  def create_procfile
-    template 'Procfile'
-  end
-
   def edit_storage_configuration
     append_file 'config/storage.yml', <<~YAML
       amazon:
@@ -159,13 +155,13 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     return if container?
     return if env.development?
 
-    run 'foreman start &'
+    rails_command 'server &'
   end
 
   private
 
   def source_paths
-    super.push File.expand_path('templates', __dir__)
+    super.unshift File.expand_path('templates', __dir__)
   end
 
   def env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
@@ -193,6 +189,11 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
 
   def add_gem
     gem 'schematics', **{ path: gem_path }.compact
+    # TODO: remove when sidekiq-scheduler is released
+    gem 'sidekiq-scheduler',
+        github: 'sidekiq-scheduler/sidekiq-scheduler',
+        branch: 'master',
+        ref: '76573dbc46c73afa213331049cfc5657582dc376'
   end
 
   def clean_app_path
