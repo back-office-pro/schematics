@@ -2,4 +2,4 @@
 
 bundle cache
 gem build
-gem install --local --force ./schematics-*.gem
+gem install --local ./schematics-*.gem
