@@ -8,6 +8,5 @@ bin/rails schematics:licence:load
 bin/rails schematics:db:seed
 bin/rails searchkick:reindex:all
 rm -rf tmp/pids/server.pid
-foreman start
 
 exec "$@"
