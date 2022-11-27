@@ -4,18 +4,20 @@ require 'rails_helper'
 
 RSpec.describe Schematics::SchemaDatasets::Generate do
   let(:schema_dataset) { SchemaDataset.create!(data:, state: :in_progress) }
-  let(:current_schema) { Schematics::Schema.new(data: current_data) }
+  let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:admin_role) { Role.create!(name: 'Admin') }
 
   before do
     admin_role
-    Tenant.instance_variable_set(:@current_schema, current_schema)
+    Tenant.instance_variable_set(:@schema, schema)
   end
-
-  after(:all) { Git.init.clean(ff: true, d: true) } # rubocop:disable RSpec/BeforeAfterAll
 
   describe '.call' do
     subject(:call) { described_class.call(schema_dataset:) }
+
+    before { call }
+
+    after { Git.init.clean(ff: true, d: true) }
 
     context 'when creating a new entity' do
       let(:current_data) { [] }
