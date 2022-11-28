@@ -4,9 +4,9 @@ module Schematics
   class ApplicationController < ::ApplicationController
     include ::Pagy::Backend
     include Tenantable
+    include Localizable
     include Authenticable
     include Entitleable
-    include Localizable
     include Rescuable
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
