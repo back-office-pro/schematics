@@ -238,4 +238,6 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     .next
 
   def port = DEFAULT_PORT + redis_index
+
+  def https? = Dir.exist?('/etc/letsencrypt/live')
 end
