@@ -1,5 +1,5 @@
 server {
-  server_name <%= subdomain %>.back-office.pro;
+  server_name <%= app_name %>.back-office.pro;
 	listen 80;
 	listen [::]:80;
 

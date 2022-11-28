@@ -193,8 +193,6 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
 
   def db_name = app_name.underscore
 
-  def subdomain = app_name.dasherize
-
   def db_password
     @db_password ||= SecureRandom.base58
   end
