@@ -6,7 +6,7 @@ module Application
 
     def load!(gateway: Stripe::Load) # rubocop:disable Lint/ConstantResolution
       PaperTrail.request(enabled: false) do
-        update!(**gateway.call.data)
+        update!(**gateway.call.data.slice(:active, :plan, :metadata))
       end
     end
 
