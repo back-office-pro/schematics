@@ -14,6 +14,21 @@ namespace :schematics do
       .each(&:invoke_all)
   end
 
+  namespace :nginx do
+    desc 'Deploy nginx subdomain'
+    task deploy: :environment do
+      FileUtils.cp(
+        Rails.root.join('config/nginx.conf'),
+        "/etc/nginx/sites-available/#{Tenant.folder_name}"
+      )
+      FileUtils.ln_s(
+        "/etc/nginx/sites-available/#{Tenant.folder_name}",
+        "/etc/nginx/sites-enabled/#{Tenant.folder_name}"
+      )
+      sh 'service nginx reload'
+    end
+  end
+
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do

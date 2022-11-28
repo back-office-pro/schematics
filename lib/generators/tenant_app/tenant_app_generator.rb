@@ -35,6 +35,10 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     template '.puppeteerrc.cjs'
   end
 
+  def create_nginx_config_file
+    template 'config/nginx.conf'
+  end
+
   def edit_storage_configuration
     append_file 'config/storage.yml', <<~YAML
       amazon:
@@ -159,6 +163,13 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     rails_command 'schematics:db:active_record_doctor', env:
   end
 
+  def deploy_nginx_subdomain
+    return if container?
+    return if env.development?
+
+    rails_command 'schematics:nginx:deploy'
+  end
+
   def run_application
     return if container?
     return if env.development?
@@ -181,6 +192,8 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   }
 
   def db_name = app_name.underscore
+
+  def subdomain = app_name.dasherize
 
   def db_password
     @db_password ||= SecureRandom.base58
