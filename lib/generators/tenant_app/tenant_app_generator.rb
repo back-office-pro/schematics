@@ -167,7 +167,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     return if container?
     return if env.development?
 
-    rails_command 'schematics:nginx:deploy'
+    rails_command 'schematics:nginx:deploy', env:
   end
 
   def run_application
