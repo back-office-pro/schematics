@@ -19,11 +19,11 @@ namespace :schematics do
     task deploy: :environment do
       FileUtils.cp(
         Rails.root.join('config/nginx.conf'),
-        "/etc/nginx/sites-available/#{Tenant.folder_name}"
+        "/etc/nginx/sites-available/#{Tenant.subdomain}"
       )
       FileUtils.ln_s(
-        "/etc/nginx/sites-available/#{Tenant.folder_name}",
-        "/etc/nginx/sites-enabled/#{Tenant.folder_name}"
+        "/etc/nginx/sites-available/#{Tenant.subdomain}",
+        "/etc/nginx/sites-enabled/#{Tenant.subdomain}"
       )
       sh 'service nginx reload'
     end

@@ -22,7 +22,7 @@ class Tenant
       .module_parent_name
       .underscore
 
-    def folder_name = name.dasherize
+    def subdomain = name.dasherize
 
     def human = name.humanize
 

@@ -6,7 +6,7 @@ module Application
       class Load
         include Interactor
 
-        delegate :folder_name, to: '::Tenant', private: true
+        delegate :subdomain, to: '::Tenant', private: true
         delegate :email, :preferred_locales, to: :customer, allow_nil: true, private: true
         delegate :name, to: :product, allow_nil: true, private: true
         delegate :id, to: :subscription, allow_nil: true, private: true
@@ -28,7 +28,7 @@ module Application
 
         def customer
           @customer ||= ::Stripe::Customer
-                        .search(query: "name:'#{folder_name}'")
+                        .search(query: "name:'#{subdomain}'")
                         .data
                         .first
         end
