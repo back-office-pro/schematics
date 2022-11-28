@@ -6,7 +6,7 @@ module Application
 
     prepended do
       serialize :data, Schematics::Schema
-      attribute :data, default: -> { current_data || {} }
+      attribute :data, default: -> { current_data || [] }
       delegate :build_commands,
                :clean_commands,
                :new_entities,
