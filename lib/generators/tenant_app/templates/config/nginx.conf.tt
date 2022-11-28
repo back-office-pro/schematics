@@ -1,9 +1,9 @@
 server {
   server_name <%= app_name %>.back-office.pro;
-	listen 80;
-	listen [::]:80;
+  listen 80;
+  listen [::]:80;
 
-	location / {
+  location / {
     proxy_pass http://localhost:<%= port %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
