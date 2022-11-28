@@ -1,4 +1,4 @@
-<% if https? %>
+<%- if https? -%>
 server {
   server_name <%= app_name %>.back-office.pro;
   listen 80;
@@ -23,7 +23,7 @@ server {
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
-<% else %>
+<%- else -%>
 server {
   server_name <%= app_name %>.back-office.pro;
   listen 80;
@@ -38,4 +38,4 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 }
-<% end %>
+<%- end -%>
