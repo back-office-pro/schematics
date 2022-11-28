@@ -7,13 +7,13 @@ module Application
         include Interactor
 
         delegate :folder_name, to: '::Tenant', private: true
-        delegate :email, to: :customer, allow_nil: true, private: true
+        delegate :email, :preferred_locales, to: :customer, allow_nil: true, private: true
         delegate :name, to: :product, allow_nil: true, private: true
         delegate :id, to: :subscription, allow_nil: true, private: true
 
         def call
           context.id = id
-          context.data = { active:, plan: name, email:, metadata: }
+          context.data = { active:, plan: name, email:, locale:, metadata: }
         rescue ::Stripe::StripeError
           context.data = {}
         end
@@ -21,6 +21,10 @@ module Application
         private
 
         def active = id.present?
+
+        def locale = preferred_locales
+          &.first
+          &.slice(0, 2)
 
         def customer
           @customer ||= ::Stripe::Customer
