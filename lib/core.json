@@ -67,10 +67,9 @@
         "name": "locale",
         "type": "enum",
         "options": {
-          "default": "fr",
           "values": [
-            "fr",
-            "en"
+            "en",
+            "fr"
           ]
         }
       },
@@ -238,6 +237,20 @@
           ],
           "size": 2
         }
+      },
+      {
+        "name": "locale",
+        "type": "enum",
+        "options": {
+          "values": [
+            "en",
+            "fr"
+          ]
+        }
+      },
+      {
+        "name": "time_zone",
+        "type": "time_zone"
       },
       {
         "name": "theme_color",
@@ -913,8 +926,8 @@
         "options": {
           "readonly": true,
           "values": [
-            "fr",
-            "en"
+            "en",
+            "fr"
           ]
         }
       },
@@ -1033,10 +1046,6 @@
             "premium"
           ]
         }
-      },
-      {
-        "name": "email",
-        "type": "email"
       },
       {
         "name": "active",
