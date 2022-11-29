@@ -67,6 +67,7 @@
         "name": "locale",
         "type": "enum",
         "options": {
+          "default": "en",
           "values": [
             "en",
             "fr"
@@ -75,7 +76,10 @@
       },
       {
         "name": "time_zone",
-        "type": "time_zone"
+        "type": "time_zone",
+        "options": {
+          "default": "UTC"
+        }
       },
       {
         "name": "preferences",
