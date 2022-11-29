@@ -6,6 +6,7 @@ fr:
     created_at/month: Mois
     created_at/week: Semaine
     created_at/year: Année
+    id: Identifiant
   by: par
   date:
     formats:
