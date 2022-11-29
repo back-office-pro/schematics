@@ -8,6 +8,8 @@ module Application
       after_update -> { Chartkick.options[:colors] = palette }, if: :theme_color_previously_changed?
       attribute :company_name, default: -> { ::Tenant.human }
       attribute :theme_color, default: -> { Rails.configuration.theme_color }
+      attribute :time_zone, default: -> { Rails.configuration.time_zone }
+      attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
     end
 
     def palette = theme_color
