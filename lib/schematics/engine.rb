@@ -137,9 +137,6 @@ module Schematics
     config.i18n.available_locales = %i[en fr]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
-    # Theme
-    config.theme_color = '#2c3e50'
-
     # Make sure we override main app defaults
     config.after_initialize do
       # Active Storage

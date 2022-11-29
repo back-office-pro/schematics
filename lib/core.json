@@ -260,7 +260,8 @@
         "name": "theme_color",
         "type": "color",
         "options": {
-          "cached": true
+          "cached": true,
+          "default": "#2c3e50"
         }
       },
       {
