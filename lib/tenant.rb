@@ -34,6 +34,10 @@ class Tenant
 
     def default_mailer_options = { from: }
 
+    def nginx_sites_available_path = "/etc/nginx/sites-available/#{subdomain}"
+
+    def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
+
     private
 
     def data
