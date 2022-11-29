@@ -133,20 +133,18 @@ module Schematics
     config.importmap.paths << join_config('importmap.rb')
 
     # i18n
-    config.i18n.default_locale = Rails.env.test? ? :en : :fr
-    config.i18n.available_locales = %i[fr en]
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = %i[en fr]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
     # Theme
     config.theme_color = '#2c3e50'
 
     # Make sure we override main app defaults
-    config.after_initialize do |app|
+    config.after_initialize do
       # Active Storage
       config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
-      # Time zone
-      app.config.time_zone = 'Paris'
     end
   end
 end
