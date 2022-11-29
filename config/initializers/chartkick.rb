@@ -2,8 +2,7 @@
 
 # Make sure i18n translations are available
 Rails.configuration.after_initialize do
-  Chartkick.options = {
-    colors: (::Configuration.instance.palette rescue []), # rubocop:disable Style/RescueModifier
+  Chartkick.options.merge!(
     height: '300px',
     empty: ::I18n.t('schematics.application.resource.empty'),
     refresh: 60,
@@ -39,5 +38,5 @@ Rails.configuration.after_initialize do
         }
       }
     }
-  }
+  )
 end
