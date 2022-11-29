@@ -9,10 +9,15 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
+        locale: Locale
+        locales:
+          en: English
+          fr: French
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
         tasks_feature_flag: Enable tasks
         theme_color: Theme color
+        time_zone: Time zone
     models:
       configuration:
         gender: female

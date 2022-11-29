@@ -9,10 +9,15 @@ fr:
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
+        locale: Langue
+        locales:
+          en: Anglais
+          fr: Français
         meetings_feature_flag: Activer les réunions
         messages_feature_flag: Activer la messagerie interne
         tasks_feature_flag: Activer les tâches
         theme_color: Couleur du thème
+        time_zone: Fuseau horaire
     models:
       configuration:
         gender: female
