@@ -4,9 +4,9 @@ module Application
   module Licence
     extend ActiveSupport::Concern
 
-    def load!(gateway: Stripe::Load) # rubocop:disable Lint/ConstantResolution
+    def load!
       PaperTrail.request(enabled: false) do
-        update!(**gateway.call.data.slice(:active, :plan, :metadata))
+        update!(Load.call.data)
       end
     end
 
