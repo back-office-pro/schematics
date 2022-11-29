@@ -76,10 +76,7 @@
       },
       {
         "name": "time_zone",
-        "type": "time_zone",
-        "options": {
-          "default": "UTC"
-        }
+        "type": "time_zone"
       },
       {
         "name": "preferences",
@@ -254,7 +251,10 @@
       },
       {
         "name": "time_zone",
-        "type": "time_zone"
+        "type": "time_zone",
+        "options": {
+          "default": "UTC"
+        }
       },
       {
         "name": "theme_color",
