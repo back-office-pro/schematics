@@ -6,6 +6,8 @@ require 'active_support/core_ext/module/delegation'
 # :reek:MissingSafeMethod
 class Tenant
   class << self
+    SEMAPHORE = Mutex.new.freeze
+
     delegate :env, :application, to: 'Rails', private: true
     delegate :production?, to: :env, private: true
 
@@ -37,6 +39,15 @@ class Tenant
     def nginx_sites_available_path = "/etc/nginx/sites-available/#{subdomain}"
 
     def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
+
+    def customer
+      SEMAPHORE.synchronize do
+        @customer ||= ::Stripe::Customer
+                      .search(query: "name:'#{subdomain}'")
+                      .data
+                      .first
+      end
+    end
 
     private
 
