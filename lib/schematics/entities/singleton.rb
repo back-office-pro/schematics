@@ -9,6 +9,10 @@ module Schematics
 
       def default_actions = %i[show update]
 
+      def id_attribute = super.tap { _1.options = { hidden: true } }
+
+      def created_at_attribute = super.tap { _1.options = { hidden: true } }
+
       def to_str = <<~RUBY
         include Schematics::Singleton
       RUBY

@@ -120,10 +120,15 @@ module Schematics
             elements
               .reject(&:hidden?)
               .reject(&:readonly?)
-          when :Listable, :Renderable, :Searchable
+          when :Listable, :Searchable
             elements
-              .reject(&:hidden?)
               .push(created_at_attribute)
+              .reject(&:hidden?)
+          when :Renderable
+            elements
+              .unshift(id_attribute)
+              .push(created_at_attribute)
+              .reject(&:hidden?)
           else
             elements.reject(&:hidden?)
           end
@@ -141,15 +146,11 @@ module Schematics
       end
 
       def find_field_by_name(name)
-        case name = name.to_s
-        when 'id'
-          Attributes::Uuid.new(entity: self, name: 'id')
-        else
-          fields
-            .concat(created_at_attributes)
-            .push(created_at_attribute)
-            .find { |field| field.name == name }
-        end
+        fields
+          .concat(created_at_attributes)
+          .push(created_at_attribute)
+          .push(id_attribute)
+          .find { |field| field.name == name.to_s }
       end
 
       def find_attribute_by_id(id)
@@ -254,8 +255,6 @@ module Schematics
         model_class.new(**non_state_machine_attributes.to_h { [_1.name, _1.default] })
       end
 
-      def created_at_attribute = Attributes::Datetime.new(entity: self, name: 'created_at')
-
       def router = Router.new(self)
 
       def association_elements = has_many_and_through_and_belongs_to_many_associations
@@ -282,6 +281,10 @@ module Schematics
             .map(&:to_sym)
             .include?(association)
         end
+
+      def id_attribute = Attributes::Uuid.new(entity: self, name: 'id')
+
+      def created_at_attribute = Attributes::Datetime.new(entity: self, name: 'created_at')
 
       def created_at_attributes = [
         Attributes::Date.new(entity: self, name: 'created_at/day'),
