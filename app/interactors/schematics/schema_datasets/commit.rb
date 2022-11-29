@@ -4,7 +4,7 @@ module Schematics
   module SchemaDatasets
     class Commit
       include Interactor
-      delegate :add, :commit, to: :git, private: true
+      delegate :add, :commit, :push, to: :git, private: true
       delegate :schema_dataset, to: :context, private: true
       delegate :id, to: :schema_dataset, private: true
 
@@ -13,6 +13,7 @@ module Schematics
 
         add(all: true)
         commit("Migration #{id}", allow_empty: true)
+        push('origin') if Rails.env.production?
       end
 
       private

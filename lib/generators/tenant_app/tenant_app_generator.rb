@@ -153,6 +153,24 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     git commit: "-m 'initial commit'"
   end
 
+  def create_github_repo
+    return if env.development?
+
+    rails_command 'schematics:repo:create', env:
+  end
+
+  def add_remote_to_repo
+    return if env.development?
+
+    run "git remote add origin #{git_remote}"
+  end
+
+  def push_repo_to_origin
+    return if env.development?
+
+    git push: 'origin'
+  end
+
   def run_brakeman
     run 'brakeman --no-pager --no-exit-on-error'
   end
@@ -240,4 +258,6 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def port = DEFAULT_PORT + redis_index
 
   def https? = Dir.exist?('/etc/letsencrypt/live')
+
+  def git_remote = "git@github.com:back-office-pro/#{app_name}.git"
 end
