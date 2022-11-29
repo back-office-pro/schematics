@@ -109,6 +109,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terser', '~> 1.1.12'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 2.77.0'
+  spec.add_dependency 'view_component', '~> 2.78.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
