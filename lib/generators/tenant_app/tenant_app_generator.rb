@@ -115,9 +115,9 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   end
 
   def edit_gitignore
-    comment_lines '.gitignore', '/config/master.key'
     append_to_file '.gitignore', <<~TEXT
       /.cache
+      /.env
       /node_modules
     TEXT
   end
