@@ -13,10 +13,7 @@ RSpec.describe Schematics::LoadLicenceJob do
 
   describe '#perform_now' do
     it 'loads licence from gateway' do
-      expect { described_class.perform_now }
-        .to change { licence.reload.email }
-        .from(nil)
-        .to(String)
+      expect { described_class.perform_now }.to(change { licence.reload.metadata })
     end
   end
 end
