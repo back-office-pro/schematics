@@ -188,6 +188,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def deploy_nginx_subdomain
     return if container?
     return if env.development?
+    return unless nginx?
 
     rails_command 'schematics:nginx:deploy', env:
   end
@@ -262,6 +263,8 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def port = DEFAULT_PORT + redis_index
 
   def https? = Dir.exist?('/etc/letsencrypt/live')
+
+  def nginx? = Dir.exist?('/etc/nginx')
 
   def git_remote = "git@github.com:back-office-pro/#{app_name}.git"
 end
