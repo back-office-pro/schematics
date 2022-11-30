@@ -102,6 +102,10 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     rails_command 'schematics:docs:generate', env:
   end
 
+  def backup_credentials
+    rails_command 'schematics:credentials:backup', env:
+  end
+
   def load_schemadataset_fixture
     return unless env.development?
 
