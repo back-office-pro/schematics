@@ -32,10 +32,6 @@ Rails.configuration.to_prepare do
   ::ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false
   end
-
-  ::Configuration
-    .instance
-    .configure!
 end
 
 ActiveSupport.on_load(:active_storage_record) do

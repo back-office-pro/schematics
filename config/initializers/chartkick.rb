@@ -2,9 +2,8 @@
 
 # Make sure i18n translations are available
 Rails.configuration.after_initialize do
-  Chartkick.options.merge!(
+  Chartkick.options = {
     height: '300px',
-    empty: ::I18n.t('schematics.application.resource.empty'),
     refresh: 60,
     html: Schematics::ChartPlaceholder::Component.new.to_html,
     content_for: :charts_js,
@@ -38,5 +37,5 @@ Rails.configuration.after_initialize do
         }
       }
     }
-  )
+  }
 end

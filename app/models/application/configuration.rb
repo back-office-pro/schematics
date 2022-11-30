@@ -5,20 +5,23 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
-      after_update :configure!
+      after_initialize :set_chartkick_options
+      after_update :set_chartkick_options
       attribute :company_name, default: -> { ::Tenant.human }
     end
 
-    def configure!
-      Chartkick.options[:colors] = palette
-      Rails.configuration.i18n.default_locale = locale.to_sym
-      Rails.configuration.time_zone = time_zone
-    end
+    def set_chartkick_options = ::Chartkick
+      .options
+      .merge!(colors:, empty:)
 
-    def palette = theme_color
+    private
+
+    def colors = theme_color
       .dup
       .paint
       .palette
       .analogous(as: :hex)
+
+    def empty = ::I18n.t('schematics.application.resource.empty', locale:)
   end
 end
