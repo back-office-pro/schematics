@@ -6,16 +6,19 @@ require 'active_model'
 # :reek:Attribute
 class Tenant
   include ::ActiveModel::API
+  include ::ActiveModel::Attributes
+
   delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-  attr_accessor :name
   attr_writer :schema
+
+  attribute :name, default: -> { Rails.application.class.module_parent_name.underscore }
 
   class << self
     SEMAPHORE = Mutex.new.freeze
 
     def current
       SEMAPHORE.synchronize do
-        @current ||= new(name: Rails.application.class.module_parent_name.underscore)
+        @current ||= new
       end
     end
   end
