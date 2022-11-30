@@ -1,80 +1,88 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'active_model'
 
 # :reek:Attribute
-# :reek:MissingSafeMethod
 class Tenant
+  include ::ActiveModel::API
+  delegate :id, :email, to: :customer, prefix: true, allow_nil: true
+  attr_accessor :name
+  attr_writer :schema
+
   class << self
     SEMAPHORE = Mutex.new.freeze
 
-    delegate :env, :application, to: 'Rails', private: true
-    delegate :production?, to: :env, private: true
-
-    def schema
-      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
-    end
-
-    def reset!
-      @schema = nil # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
-    end
-
-    def name = application
-      .class
-      .module_parent_name
-      .underscore
-
-    def subdomain = name.dasherize
-
-    def human = name.humanize
-
-    def index_name(model_name)
-      [name, model_name.plural, env].join('_')
-    end
-
-    def default_url_options = { host:, port: }.compact
-
-    def default_mailer_options = { from: }
-
-    def nginx_sites_available_path = "/etc/nginx/sites-available/#{subdomain}"
-
-    def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
-
-    def customer
+    def current
       SEMAPHORE.synchronize do
-        @customer ||= ::Stripe::Customer
-                      .search(query: "name:'#{subdomain}'")
-                      .data
-                      .first
+        @current ||= new(name: Rails.application.class.module_parent_name.underscore)
       end
     end
+  end
 
-    private
+  def schema
+    @schema ||= Schematics::Schema.new(data:)
+  end
 
-    def data
-      ::SchemaDataset
-        .where(state: [1, 2])
-        .last
-        .data
-        .as_json
-    rescue StandardError
-      []
-    end
+  def customer
+    @customer ||= ::Stripe::Customer
+                  .search(query: "name:'#{subdomain}'")
+                  .data
+                  .first
+  end
 
-    def from = "no-reply@#{host}"
+  def subdomain = name.dasherize
 
-    def host
-      return "#{name}.back-office.pro" if production?
+  def human = name.humanize
 
-      'localhost'
-    end
+  def index_name(model_name)
+    [name, model_name.plural, Rails.env].join('_')
+  end
 
-    def port
-      return if production?
+  def default_url_options = { host:, port: }.compact
 
-      ENV
-        .fetch('PORT', 3000)
-        .to_i
-    end
+  def default_mailer_options = { from: }
+
+  def nginx_sites_available_path = "/etc/nginx/sites-available/#{subdomain}"
+
+  def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
+
+  def rollbar_payload_options = { subdomain: }
+
+  def git_remote = "git@github.com:back-office-pro/#{subdomain}.git"
+
+  def deploy_directory = "/home/deploy/#{subdomain}"
+
+  def customer_locale = customer
+    &.preferred_locales
+    &.first
+    &.slice(0, 2)
+
+  private
+
+  def data
+    ::SchemaDataset
+      .where(state: 2)
+      .last
+      .data
+      .as_json
+  rescue StandardError
+    []
+  end
+
+  def from = "no-reply@#{host}"
+
+  def host
+    return "#{subdomain}.back-office.pro" if Rails.env.production?
+
+    'localhost'
+  end
+
+  def port
+    return if Rails.env.production?
+
+    ENV
+      .fetch('PORT', 3000)
+      .to_i
   end
 end

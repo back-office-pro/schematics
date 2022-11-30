@@ -23,11 +23,13 @@ module Application
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(self) { ::Tenant.reset! }
+      Schematics::MigrateSchemaJob.perform_later(self) do
+        ::Tenant.current.schema = data
+      end
     end
 
     def migration
-      @migration ||= Schematics::Migrations::DataMigration.new(data, ::Tenant.schema)
+      @migration ||= Schematics::Migrations::DataMigration.new(data, ::Tenant.current.schema)
     end
 
     def valid?(*)

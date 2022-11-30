@@ -10,6 +10,7 @@ module Application
 
     class_methods do
       def create_all_entities_permissions! = ::Tenant
+        .current
         .schema
         .entities
         .reject(&:hidden?)

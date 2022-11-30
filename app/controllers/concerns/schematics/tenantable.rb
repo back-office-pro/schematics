@@ -3,13 +3,10 @@
 module Schematics
   module Tenantable
     extend ActiveSupport::Concern
+    delegate :schema, to: 'Tenant.current', prefix: :current, private: true
 
     included do
       helper_method :current_schema
     end
-
-    private
-
-    def current_schema = ::Tenant.schema
   end
 end

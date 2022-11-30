@@ -9,5 +9,5 @@ Rollbar.configure do |config|
   config.environment = Rails.env
   config.async_json_payload = true
   config.person_method = :current_user
-  config.payload_options = { tenant: ::Tenant.name }
+  config.payload_options = ::Tenant.current.rollbar_payload_options
 end

@@ -24,6 +24,7 @@ module Schematics
       end
 
       def entity = ::Tenant
+        .current
         .schema
         .find_entity_by_name(name.underscore)
 

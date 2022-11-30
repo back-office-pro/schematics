@@ -7,9 +7,9 @@ module Schematics
 
       delegate :schema_dataset, to: :context, private: true
       delegate :load_generators, to: 'Rails.application', private: true
-      delegate :reset!, to: 'Tenant', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
+               :data,
                to: :schema_dataset,
                private: true
 
@@ -19,7 +19,7 @@ module Schematics
         migration_clean_commands
           .flat_map(&:generators)
           .each(&:invoke_all)
-        reset!
+        ::Tenant.current.schema = data
         migration_build_commands
           .flat_map(&:generators)
           .each(&:invoke_all)

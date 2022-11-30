@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Schematics::Engine.routes.draw do
-  root ::Tenant.schema.root_route
+  root ::Tenant.current.schema.root_route
 
   localized do
     draw :dashboard

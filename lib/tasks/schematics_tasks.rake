@@ -8,7 +8,7 @@ namespace :schematics do
   task generate: :environment do
     Rails.application.load_generators
     Schematics::Migrations::CoreMigration
-      .new(::Tenant.schema)
+      .new(::Tenant.current.schema)
       .build_commands
       .flat_map(&:generators)
       .each(&:invoke_all)
@@ -17,8 +17,14 @@ namespace :schematics do
   namespace :nginx do
     desc 'Deploy nginx subdomain'
     task deploy: :environment do
-      FileUtils.cp(Rails.root.join('config/nginx.conf'), Tenant.nginx_sites_available_path)
-      FileUtils.ln_s(Tenant.nginx_sites_available_path, Tenant.nginx_sites_enabled_path)
+      FileUtils.cp(
+        Rails.root.join('config/nginx.conf'),
+        Tenant.current.nginx_sites_available_path
+      )
+      FileUtils.ln_s(
+        Tenant.current.nginx_sites_available_path,
+        Tenant.current.nginx_sites_enabled_path
+      )
       sh 'service nginx reload'
     end
   end
@@ -79,7 +85,7 @@ namespace :schematics do
       uri = URI.parse('https://api.github.com/orgs/back-office-pro/repos')
       request = Net::HTTP::Post.new(uri)
       request.basic_auth(Schematics::Engine.credentials.github[:access_token], 'x-oauth-basic')
-      request.body = JSON.dump({ name: Tenant.subdomain, private: true })
+      request.body = JSON.dump({ name: Tenant.current.subdomain, private: true })
       Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { _1.request(request) }
     end
   end
