@@ -118,6 +118,7 @@ Style/IpAddresses:
   Enabled: true
   AllowedAddresses:
     - 127.0.0.1
+    - 192.168.56.2
     - '::1'
 Style/ReturnNil:
   Enabled: true
