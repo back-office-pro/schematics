@@ -149,7 +149,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def precompile_assets
     return unless env.production?
 
-    rails_command('assets:precompile', env:)
+    rails_command 'assets:precompile', env:
   end
 
   def create_initial_commit
