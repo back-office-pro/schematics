@@ -67,7 +67,6 @@
         "name": "locale",
         "type": "enum",
         "options": {
-          "default": "en",
           "values": [
             "en",
             "fr"
@@ -243,6 +242,7 @@
         "name": "locale",
         "type": "enum",
         "options": {
+          "default": "en",
           "values": [
             "en",
             "fr"
