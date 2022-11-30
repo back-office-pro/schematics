@@ -42,14 +42,7 @@ module Schematics
           ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
         end
         let(:user) do
-          ::User.create!(
-            email: 'admin@admin.com',
-            first_name: 'John',
-            last_name: 'Doe',
-            time_zone: 'Paris',
-            locale: Rails.configuration.i18n.default_locale,
-            role:
-          )
+          ::User.create!(email: 'admin@admin.com', first_name: 'John', last_name: 'Doe', role:)
         end
 
         before do

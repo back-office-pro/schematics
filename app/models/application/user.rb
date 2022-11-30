@@ -10,7 +10,8 @@ module Application
       scope :with_role, -> { preload(:role) }
       after_create { Schematics::UserMailer.new_account(self).deliver_later }
       attribute :remember_me, :boolean
-      attribute :time_zone, default: -> { Rails.configuration.time_zone }
+      attribute :time_zone, default: -> { ::Configuration.instance.time_zone }
+      attribute :locale, default: -> { ::Configuration.instance.locale }
       delegate :admin?, to: :role
     end
 

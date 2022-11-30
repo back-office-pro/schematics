@@ -34,8 +34,6 @@ module Schematics
             password: 'Azerty1!',
             first_name: 'John',
             last_name: 'Doe',
-            time_zone: 'Paris',
-            locale: Rails.configuration.i18n.default_locale,
             role:
           )
         end

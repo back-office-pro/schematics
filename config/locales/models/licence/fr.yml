@@ -4,7 +4,6 @@ fr:
     attributes:
       licence:
         active: Active
-        email: Email
         metadata: Métadonnées
         plan: Plan
         plans:

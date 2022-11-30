@@ -67,10 +67,9 @@
         "name": "locale",
         "type": "enum",
         "options": {
-          "default": "fr",
           "values": [
-            "fr",
-            "en"
+            "en",
+            "fr"
           ]
         }
       },
@@ -240,10 +239,29 @@
         }
       },
       {
+        "name": "locale",
+        "type": "enum",
+        "options": {
+          "default": "en",
+          "values": [
+            "en",
+            "fr"
+          ]
+        }
+      },
+      {
+        "name": "time_zone",
+        "type": "time_zone",
+        "options": {
+          "default": "UTC"
+        }
+      },
+      {
         "name": "theme_color",
         "type": "color",
         "options": {
-          "cached": true
+          "cached": true,
+          "default": "#2c3e50"
         }
       },
       {
@@ -913,8 +931,8 @@
         "options": {
           "readonly": true,
           "values": [
-            "fr",
-            "en"
+            "en",
+            "fr"
           ]
         }
       },
@@ -1033,10 +1051,6 @@
             "premium"
           ]
         }
-      },
-      {
-        "name": "email",
-        "type": "email"
       },
       {
         "name": "active",

@@ -73,7 +73,7 @@ module Schematics
           end
 
         renderable_attributes
-          .reject_is_a?(Behaviours::Preloadable, Attributes::Token)
+          .reject_is_a?(Behaviours::Preloadable, Attributes::Token, Attributes::Uuid)
           .each do |attribute|
             it { is_expected.to have_db_index(attribute.name.to_sym) }
             it do

@@ -22,8 +22,8 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.to include(email: be_a(String)) }
       it { is_expected.to include(first_name: be_a(String)) }
       it { is_expected.to include(last_name: be_a(String)) }
-      it { is_expected.to include(locale: 'fr') }
-      it { is_expected.to include(time_zone: 'Paris') }
+      it { is_expected.to include(locale: 'en') }
+      it { is_expected.to include(time_zone: 'UTC') }
       it { is_expected.to include(full_name: be_a(String)) }
       it { is_expected.to include(:searches) }
       it { is_expected.to include(:imports) }
@@ -37,8 +37,8 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.to include(email: be_a(String)) }
       it { is_expected.to include(first_name: be_a(String)) }
       it { is_expected.to include(last_name: be_a(String)) }
-      it { is_expected.to include(locale: 'fr') }
-      it { is_expected.to include(time_zone: 'Paris') }
+      it { is_expected.to include(locale: 'en') }
+      it { is_expected.to include(time_zone: 'UTC') }
       it { is_expected.to include(full_name: be_a(String)) }
       it { is_expected.not_to include(:searches) }
       it { is_expected.not_to include(:imports) }

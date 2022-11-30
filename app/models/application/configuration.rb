@@ -5,15 +5,22 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
-      after_update -> { Chartkick.options[:colors] = palette }, if: :theme_color_previously_changed?
+      after_initialize :set_chartkick_options
       attribute :company_name, default: -> { ::Tenant.human }
-      attribute :theme_color, default: -> { Rails.configuration.theme_color }
     end
 
-    def palette = theme_color
+    def set_chartkick_options = ::Chartkick
+      .options
+      .merge!(colors:, empty:)
+
+    private
+
+    def colors = theme_color
       .dup
       .paint
       .palette
       .analogous(as: :hex)
+
+    def empty = ::I18n.t('schematics.application.resource.empty', locale:)
   end
 end
