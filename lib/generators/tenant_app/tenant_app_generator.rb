@@ -155,6 +155,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def create_initial_commit
     git add: '-A'
     git commit: "-m 'initial commit'"
+    git branch: '-M main'
   end
 
   def create_github_repo
@@ -166,13 +167,13 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def add_remote_to_repo
     return if env.development?
 
-    run "git remote add origin #{git_remote}"
+    git remote: "add origin #{git_remote}"
   end
 
   def push_repo_to_origin
     return if env.development?
 
-    git push: 'origin'
+    git push: '-u origin main'
   end
 
   def run_brakeman
