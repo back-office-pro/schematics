@@ -13,7 +13,7 @@ module Schematics
 
         add(all: true)
         commit("Migration #{id}", allow_empty: true)
-        push('origin') if Rails.env.production?
+        push('origin', 'main') if Rails.env.production?
       end
 
       private
