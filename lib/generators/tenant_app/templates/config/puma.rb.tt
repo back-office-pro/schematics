@@ -45,14 +45,7 @@ plugin :tmp_restart
 x = nil
 
 on_worker_boot do
-  x = Sidekiq.configure_embed do |config|
-    opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
-    config.merge!(opts)
-    config.default_capsule.tap do |cap|
-      cap.queues = opts[:queues]
-      cap.concurrency = opts[:concurrency]
-    end
-  end
+  x = Sidekiq.configure_embed {}
   x.run
 end
 
