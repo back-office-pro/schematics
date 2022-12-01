@@ -46,7 +46,12 @@ x = nil
 
 on_worker_boot do
   x = Sidekiq.configure_embed do |config|
-    config.merge! YAML.load_file(Schematics::Engine.join_config('sidekiq.yml'))
+    opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
+    config.merge!(opts)
+    config.default_capsule.tap do |cap|
+      cap.queues = opts[:queues]
+      cap.concurrency = opts[:concurrency]
+    end
   end
   x.run
 end
