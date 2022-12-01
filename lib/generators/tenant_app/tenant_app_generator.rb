@@ -167,7 +167,7 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def add_remote_to_repo
     return if env.development?
 
-    git remote: "add origin #{git_remote}"
+    git remote: "add origin git@github.com:back-office-pro/#{app_name}.git"
   end
 
   def push_repo_to_origin
@@ -266,6 +266,4 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
   def https? = Dir.exist?('/etc/letsencrypt/live')
 
   def nginx? = Dir.exist?('/etc/nginx')
-
-  def git_remote = "git@github.com:back-office-pro/#{app_name}.git"
 end
