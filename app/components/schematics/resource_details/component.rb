@@ -17,7 +17,7 @@ module Schematics
       def elements = entity
         .renderable_elements
         .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
-        .reject_is_a?(Attributes::RichText, Attributes::Attachments)
+        .reject_is_a?(Attributes::RichText, Attributes::Attachments, Attributes::Uuid)
 
       private
 
