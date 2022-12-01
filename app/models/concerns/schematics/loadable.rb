@@ -23,7 +23,7 @@ module Schematics
         end
       end
 
-      def entity = ::Tenant
+      def entity = Tenant # rubocop:disable Lint/ConstantResolution
         .current
         .schema
         .find_entity_by_name(name.underscore)

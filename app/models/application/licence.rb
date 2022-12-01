@@ -12,7 +12,7 @@ module Application
 
     def active? = active
 
-    def entities_size = ::Tenant
+    def entities_size = Schematics::Tenant
       .current
       .schema
       .entities

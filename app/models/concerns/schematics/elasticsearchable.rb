@@ -15,7 +15,7 @@ module Schematics
     end
 
     class_methods do
-      def index_name = -> { ::Tenant.current.index_name(model_name) }
+      def index_name = -> { Tenant.current.index_name(model_name) } # rubocop:disable Lint/ConstantResolution
 
       def searchkick_elements = entity
         .searchable_elements

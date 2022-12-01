@@ -19,7 +19,7 @@ module Schematics
         migration_clean_commands
           .flat_map(&:generators)
           .each(&:invoke_all)
-        ::Tenant.current.schema = data
+        Tenant.current.schema = data # rubocop:disable Lint/ConstantResolution
         migration_build_commands
           .flat_map(&:generators)
           .each(&:invoke_all)

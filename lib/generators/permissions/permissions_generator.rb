@@ -38,7 +38,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
 
   private
 
-  def entity = ::Tenant
+  def entity = Schematics::Tenant
     .current
     .schema
     .find_entity_by_name(name.underscore)

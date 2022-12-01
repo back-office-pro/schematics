@@ -9,7 +9,7 @@ module Application
     end
 
     class_methods do
-      def create_all_entities_permissions! = ::Tenant
+      def create_all_entities_permissions! = Schematics::Tenant
         .current
         .schema
         .entities

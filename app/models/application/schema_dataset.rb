@@ -24,12 +24,15 @@ module Application
 
     def after_migrate
       Schematics::MigrateSchemaJob.perform_later(self) do
-        ::Tenant.current.schema = data
+        Schematics::Tenant.current.schema = data
       end
     end
 
     def migration
-      @migration ||= Schematics::Migrations::DataMigration.new(data, ::Tenant.current.schema)
+      @migration ||= Schematics::Migrations::DataMigration.new(
+        data,
+        Schematics::Tenant.current.schema
+      )
     end
 
     def valid?(*)

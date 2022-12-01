@@ -259,7 +259,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
   private
 
-  def entity = ::Tenant
+  def entity = Schematics::Tenant
     .current
     .schema
     .find_entity_by_name(name.underscore)
