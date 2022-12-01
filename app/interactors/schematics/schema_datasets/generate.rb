@@ -7,6 +7,7 @@ module Schematics
 
       delegate :schema_dataset, to: :context, private: true
       delegate :load_generators, to: 'Rails.application', private: true
+      delegate :reset!, to: 'Schematics::Tenant.current', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
                :data,
@@ -19,7 +20,7 @@ module Schematics
         migration_clean_commands
           .flat_map(&:generators)
           .each(&:invoke_all)
-        Tenant.current.schema = data # rubocop:disable Lint/ConstantResolution
+        reset!
         migration_build_commands
           .flat_map(&:generators)
           .each(&:invoke_all)

@@ -7,18 +7,24 @@ module Schematics
     include ::ActiveModel::Attributes
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-    attr_writer :schema
-
     attribute :name, default: -> { Rails.application.class.module_parent_name.underscore }
 
     class << self
+      SEMAPHORE = Mutex.new.freeze
+
       def current
-        @current ||= new # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+        SEMAPHORE.synchronize do
+          @current ||= new
+        end
       end
     end
 
     def schema
       @schema ||= Schematics::Schema.new(data:)
+    end
+
+    def reset!
+      @schema = nil
     end
 
     def customer
@@ -55,7 +61,7 @@ module Schematics
 
     def data
       ::SchemaDataset
-        .where(state: 2)
+        .where(state: [1, 2])
         .last
         .data
         .as_json
