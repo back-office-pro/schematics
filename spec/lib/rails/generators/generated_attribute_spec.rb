@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require 'rails/generators/generated_attribute'
+require 'rails_helper'
 
 describe Rails::Generators::GeneratedAttribute do
   subject(:attribute) { described_class.parse(column_definition) }
-
-  include_context 'with custom generated attribute'
 
   context 'when column is string' do
     let(:column_definition) { 'foo:string' }

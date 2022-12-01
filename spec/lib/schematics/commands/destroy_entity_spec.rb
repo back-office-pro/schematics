@@ -3,8 +3,6 @@
 describe Schematics::Commands::DestroyEntity do
   subject(:command) { described_class.new(entity:) }
 
-  include_context 'with custom generated attribute'
-
   let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, associations:) }
   let(:name) { 'assembly' }
   let(:attributes) do
@@ -32,6 +30,12 @@ describe Schematics::Commands::DestroyEntity do
         name: 'part'
       }
     ]
+  end
+
+  before do
+    allow(ActiveRecord::Base)
+      .to receive_message_chain(:connection, :valid_type?) # rubocop:disable RSpec/MessageChain
+      .and_return(true)
   end
 
   its(:weight) { is_expected.to eq(1) }
