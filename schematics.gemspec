@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.1.3'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro'
   spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'package.json']
+  spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
   spec.add_development_dependency 'bootsnap', '~> 1.15.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'

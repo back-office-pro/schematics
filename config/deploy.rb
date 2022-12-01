@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
-require 'tenant'
-
 lock '~> 3.17.1'
 
-name = ENV.fetch('APP_NAME') { raise StandardError, 'Missing APP_NAME env variable' }
-tenant = ::Tenant.new(name:)
+app_name = File.basename(Dir.getwd)
 
-set :application, tenant.name
-set :repo_url, tenant.git_remote
-set :deploy_to, tenant.deploy_directory
+set :application, app_name
+set :repo_url, "git@github.com:back-office-pro/#{app_name}.git"
+set :deploy_to, "/home/deploy/#{app_name}"
+set :branch, 'main'
 
-append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs,
        'log',
        'tmp/pids',

@@ -52,10 +52,6 @@ class Tenant
 
   def rollbar_payload_options = { subdomain: }
 
-  def git_remote = "git@github.com:back-office-pro/#{subdomain}.git"
-
-  def deploy_directory = "/home/deploy/#{subdomain}"
-
   def customer_locale = customer
     &.preferred_locales
     &.first

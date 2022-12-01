@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+set :deploy_config_path, File.expand_path('config/deploy.rb', __dir__)
+set :stage_config_path, File.expand_path('config/deploy', __dir__)
+
 require 'capistrano/setup'
 require 'capistrano/deploy'
 require 'capistrano/bundler'
