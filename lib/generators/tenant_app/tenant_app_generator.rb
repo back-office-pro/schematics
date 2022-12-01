@@ -31,6 +31,10 @@ class TenantAppGenerator < Rails::Generators::AppGenerator # rubocop:disable Met
     template '.env'
   end
 
+  def create_github_workflow_file
+    template 'github/workflows/build.yml', '.github/workflows/build.yml'
+  end
+
   def create_puppeteer_config_file
     template '.puppeteerrc.cjs'
   end
