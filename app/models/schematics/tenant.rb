@@ -50,8 +50,6 @@ module Schematics
 
     def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
 
-    def rollbar_payload_options = { subdomain: }
-
     def customer_locale = customer
       &.preferred_locales
       &.first
