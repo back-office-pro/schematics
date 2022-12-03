@@ -25,7 +25,7 @@ namespace :schematics do
         Schematics::Tenant.current.nginx_sites_available_path,
         Schematics::Tenant.current.nginx_sites_enabled_path
       )
-      sh 'sudo service nginx reload'
+      sh 'service nginx reload'
     end
   end
 
