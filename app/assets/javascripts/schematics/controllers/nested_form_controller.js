@@ -1,9 +1,8 @@
 import ApplicationController from 'controllers/application_controller'
-import ClientSideValidations from '@client-side-validations/client-side-validations'
 
 export default class extends ApplicationController {
   static get targets () {
-    return ['targets', 'templates', 'form']
+    return ['targets', 'templates']
   }
 
   add ({ params: { templateId, targetId, index } }) {
@@ -15,9 +14,6 @@ export default class extends ApplicationController {
       .replace(/NEW_RECORD/g, timestamp)
       .replace(/INDEX/g, index == null ? timestamp : index)
     target.insertAdjacentHTML('afterbegin', content)
-    if (this.hasFormTarget) {
-      ClientSideValidations.reset(this.formTarget)
-    }
   }
 
   remove (event) {

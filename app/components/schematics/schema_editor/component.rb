@@ -11,10 +11,7 @@ module Schematics
         (Attributes.constants - DENYLIST).map(&Attributes.method(:const_get))
       end
 
-      def data = {
-        'auto-save-target': 'form',
-        'nested-form-target': 'form'
-      }
+      def data = { 'auto-save-target': 'form' }
 
       def schema = resource.data
 
