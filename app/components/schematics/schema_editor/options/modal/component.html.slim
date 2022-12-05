@@ -25,4 +25,4 @@
             - when :array
               = render Schematics::SchemaEditor::Options::Array::Component.new(builder: options_form, name: option.name)
             - when :events
-              = render Schematics::SchemaEditor::Options::Events::Component.new(builder: options_form)
+              = render Schematics::SchemaEditor::Options::Events::Component.new(builder: options_form, name: option.name)

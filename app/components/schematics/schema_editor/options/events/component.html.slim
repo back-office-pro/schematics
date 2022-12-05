@@ -1,8 +1,8 @@
 .mb-3 data-controller='nested-form'
-  = builder.label :events, class: 'form-label'
+  = builder.label name, class: 'form-label'
   template#schema-editor-events-input data-nested-form-target='templates'
     .schema-editor-events-input
-      = builder.fields_for :events, Schematics::Attributes::StateMachineEvent.new do |events_form|
+      = builder.fields_for name, Schematics::Attributes::StateMachineEvent.new do |events_form|
         = events_form.text_field :name, name: "#{events_form.object_name}[][name]", floating: true
         = events_form.select :icon, [], {}, { data:, name: "#{events_form.object_name}[][icon]" }
         = events_form.text_field :from, name: "#{events_form.object_name}[][from][]", floating: true
@@ -18,7 +18,7 @@
   #schema-editor-events-inputs data-nested-form-target='targets'
     - events.each do |event|
       .schema-editor-events-input
-        = builder.fields_for :events, event do |events_form|
+        = builder.fields_for name, event do |events_form|
           = events_form.text_field :name, value: event.name, name: "#{events_form.object_name}[][name]", floating: true
           = events_form.select :icon, [], {}, { data: data(event.icon), name: "#{events_form.object_name}[][icon]" }
           - Array(event.from).each do |value|
