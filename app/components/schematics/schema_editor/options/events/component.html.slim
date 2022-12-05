@@ -1,4 +1,5 @@
-.w-100 data-controller='nested-form'
+.mb-3 data-controller='nested-form'
+  = builder.label :events, class: 'form-label'
   template#schema-editor-events-input data-nested-form-target='templates'
     .schema-editor-events-input
       = builder.fields_for :events, Schematics::Attributes::StateMachineEvent.new do |events_form|
