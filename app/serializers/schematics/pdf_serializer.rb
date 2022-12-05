@@ -3,8 +3,8 @@
 module Schematics
   class PdfSerializer
     delegate :render, to: :controller, private: true
-    delegate :human_name, to: :model_class, private: true
-    delegate :default_url_options, to: 'Schematics::Tenant.current', private: true
+    delegate :human_name, :tenant, to: :model_class, private: true
+    delegate :default_url_options, to: :tenant, private: true
 
     def initialize(resource)
       @resource = resource

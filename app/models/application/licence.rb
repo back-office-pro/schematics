@@ -12,8 +12,9 @@ module Application
 
     def active? = active
 
-    def entities_size = Schematics::Tenant
-      .current
+    def entities_size = self
+      .class
+      .tenant
       .schema
       .entities
       .reject(&:core?) # rubocop:disable Performance/Count
