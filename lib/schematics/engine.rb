@@ -61,6 +61,7 @@ require 'sassc-rails'
 require 'dotenv-rails'
 require 'dry-initializer'
 require 'ruby-graphviz'
+require 'bootstrap_form'
 
 module Schematics
   class Engine < ::Rails::Engine

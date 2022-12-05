@@ -7,5 +7,5 @@
         .col-auto
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-virtual')
     .card-body
-      = builder.input :name
-      = builder.input :function, input_html: { data: }
+      = builder.text_field :name, class: 'entity_field_name'
+      = builder.text_field :function, data:

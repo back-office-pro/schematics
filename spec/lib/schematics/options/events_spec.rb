@@ -4,5 +4,5 @@ describe Schematics::Options::Events do
   subject { described_class }
 
   its(:name) { is_expected.to eq(:events) }
-  its(:input_type) { is_expected.to eq(:schema_editor_options_events) }
+  its(:input_type) { is_expected.to eq(:events) }
 end

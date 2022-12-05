@@ -11,10 +11,18 @@
         = render Schematics::CardHeading::Component.new(icon:, title:)
         button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
       .modal-body
-        = builder.simple_fields_for :options do |options_form|
+        = builder.fields_for :options do |options_form|
           - available_options.each do |option|
-            = options_form.input option.name,
-                                 as: option.input_type,
-                                 collection: option.try(:collection),
-                                 checked_value: 'true',
-                                 unchecked_value: 'false'
+            - case option.input_type
+            - when :boolean
+              = options_form.check_box option.name, { switch: true }, 'true', 'false'
+            - when :string
+              = options_form.text_field option.name, floating: true
+            - when :integer
+              = options_form.number_field option.name, floating: true
+            - when :select
+              = options_form.select option.name, option.collection, {}, { multiple: option.multiple?, data: { controller: 'dropdown' } }
+            - when :array
+              = render Schematics::SchemaEditor::Options::Array::Component.new(builder: options_form, name: option.name)
+            - when :events
+              = render Schematics::SchemaEditor::Options::Events::Component.new(builder: options_form, name: option.name)

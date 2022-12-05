@@ -17,7 +17,6 @@ SimpleForm.setup do |config|
   config.input_field_error_class = 'is-invalid'
   config.input_field_valid_class = 'is-valid'
   config.default_wrapper = :input_group
-  config.input_class = 'border-0 p-2'
 
   config.wrapper_mappings = {
     boolean: :custom_boolean_switch,

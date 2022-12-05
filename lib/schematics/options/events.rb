@@ -4,7 +4,7 @@ module Schematics
   module Options
     class Events < Option
       class << self
-        def input_type = :schema_editor_options_events
+        def input_type = :events
       end
     end
   end

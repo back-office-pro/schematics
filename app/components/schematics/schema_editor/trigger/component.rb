@@ -7,9 +7,9 @@ module Schematics
         renders_one_form :builder
         option :builder
 
-        def collection = Schematics::Trigger::ACTIONS.map do |action|
-          [t(action, scope: %i[activerecord attributes permission actions]), action]
-        end
+        def collection = Schematics::Trigger::ACTIONS
+          .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
+          .sort
 
         def icon = :atom
 

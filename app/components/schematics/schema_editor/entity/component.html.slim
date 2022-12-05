@@ -9,30 +9,17 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
     .card-body
       = builder.hidden_field :id
-      = builder.input :name
-      = builder.simple_fields_for :options do |options_form|
-        = options_form.input :descriptor,
-                             as: :select,
-                             collection: allowed_field_names,
-                             wrapper:,
-                             input_html: { data: { controller: 'schema-editor--descriptor-dropdown' } }
-        = options_form.input :actions,
-                             as: :select,
-                             collection: actions_collection,
-                             selected: actions,
-                             include_hidden: false,
-                             wrapper:,
-                             input_html: { multiple: true, data: { controller: 'dropdown' } }
-        = options_form.input :icon,
-                             as: :select,
-                             wrapper:,
-                             input_html: { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
+      = builder.text_field :name, floating: true
+      = builder.fields_for :options do |options_form|
+        = options_form.select :descriptor, allowed_field_names, {}, { data: { controller: 'schema-editor--descriptor-dropdown' } }
+        = options_form.select :actions, actions_collection, { selected: actions }, { multiple: true, data: { controller: 'dropdown' } }
+        = options_form.select :icon, [], {}, { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
   .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
-    = builder.simple_fields_for :attributes do |attributes_builder|
+    = builder.fields_for :attributes do |attributes_builder|
       = render Schematics::SchemaEditor::Attribute::Component.new(builder: attributes_builder)
-    = builder.simple_fields_for :virtuals do |virtuals_builder|
+    = builder.fields_for :virtuals do |virtuals_builder|
       = render Schematics::SchemaEditor::Virtual::Component.new(builder: virtuals_builder)
-    = builder.simple_fields_for :triggers do |triggers_builder|
+    = builder.fields_for :triggers do |triggers_builder|
       = render Schematics::SchemaEditor::Trigger::Component.new(builder: triggers_builder)
-    = builder.simple_fields_for :has_and_belongs_to_many_associations do |habtm_associations_builder|
+    = builder.fields_for :has_and_belongs_to_many_associations do |habtm_associations_builder|
       = render Schematics::SchemaEditor::Association::HasAndBelongsToMany::Component.new(builder: habtm_associations_builder)

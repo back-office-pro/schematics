@@ -15,7 +15,7 @@ export default class extends ApplicationController {
     return this
       .element
       .closest('.schema-editor-entity')
-      .querySelectorAll('.schema_dataset_entities_attributes_name input, .schema_dataset_entities_virtuals_name input')
+      .querySelectorAll('.entity_field_name')
   }
 
   get collection () {
