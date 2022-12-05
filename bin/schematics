@@ -3,7 +3,7 @@
 # frozen_string_literal: true
 
 require 'optparse'
-require_relative '../lib/generators/tenant_app/tenant_app_generator'
+require_relative '../lib/generators/app/app_generator'
 
 app_name = ARGV.first || 'spec/dummy'
 log_name = ARGV.first || 'log/dummy'
@@ -17,7 +17,7 @@ $stderr.reopen($stdout)
   .new { _1.on('--container') { options[:container] = true } }
   .parse!
 
-::TenantAppGenerator
+::AppGenerator
   .new([app_name], **options)
   .invoke_all
 
