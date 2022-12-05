@@ -8,10 +8,14 @@ module Schematics
       class << self
         def input_type = :select
 
+        def multiple? = true
+
         def collection = ::Mime::LOOKUP
           .values
           .map(&:symbol)
           .map(&:to_s)
+          .uniq
+          .sort
       end
     end
   end

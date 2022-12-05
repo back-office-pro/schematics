@@ -6,6 +6,8 @@ module Schematics
       class << self
         def input_type = :select
 
+        def multiple? = false
+
         # rubocop:disable Naming/VariableNumber
         def collection = %i[
           landspace
