@@ -8,4 +8,4 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-trigger')
     .card-body
       = builder.select :action, collection, {}, { data: { controller: 'dropdown' } }
-      = builder.text_field :callback, { data: }
+      = builder.text_field :callback, data:
