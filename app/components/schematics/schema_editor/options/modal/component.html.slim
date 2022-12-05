@@ -23,6 +23,6 @@
             - when :select
               = options_form.select option.name, option.collection, { data: { controller: 'dropdown' } }
             - when :array
-              = render Schematics::Input::Array::Component.new(builder: options_form, object_name: options_form.object_name, attribute_name: "options[#{option.name}", merged_input_options: {})
+              = render Schematics::SchemaEditor::Options::Array::Component.new(builder: options_form, name: option.name)
             - when :events
               = render Schematics::SchemaEditor::Options::Events::Component.new(builder: options_form)
