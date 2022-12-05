@@ -7,15 +7,5 @@
         .col-auto
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-habtm-association')
     .card-body
-      = builder.input :name,
-                      as: :select,
-                      collection: allowed_names,
-                      wrapper:,
-                      input_html: { data: { controller: 'dropdown' } }
-      = builder.input :type,
-                      as: :select,
-                      collection:,
-                      include_blank: false,
-                      readonly: true,
-                      wrapper:,
-                      input_html: { data: { controller: 'dropdown' } }
+      = builder.select :name, allowed_names, {}, { data: { controller: 'dropdown' } }
+      = builder.select :type, collection, {}, { readonly: true, data: { controller: 'dropdown' } }

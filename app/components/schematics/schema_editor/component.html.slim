@@ -1,11 +1,11 @@
-= simple_form_for schema, as: :schema_dataset, url:, method: form_method, validate: true, html: { data: } do |form|
+= bootstrap_form_for schema, as: :schema_dataset, url:, method: form_method, html: { data: } do |form|
   = render Schematics::SchemaEditor::Template::Entity::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Virtual::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Trigger::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Association::HasAndBelongsToMany::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Attribute::Component.with_collection(attribute_constants_collection, form:)
   .row.g-3.pb-3#entities data-nested-form-target='targets'
-    = form.simple_fields_for :entities, entities do |builder|
+    = form.fields_for :entities, entities do |builder|
       = render Schematics::SchemaEditor::Entity::Component.new(builder:)
   = render Schematics::Button::Confirm::Component.new
   = render Schematics::Button::Cancel::Component.new(path: resource)

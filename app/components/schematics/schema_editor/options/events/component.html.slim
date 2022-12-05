@@ -1,12 +1,12 @@
 .w-100 data-controller='nested-form'
   template#schema-editor-events-input data-nested-form-target='templates'
     .schema-editor-events-input
-      = builder.simple_fields_for :events, Schematics::Attributes::StateMachineEvent.new do |events_form|
-        = events_form.input :name, input_html: { name: "#{events_form.object_name}[][name]" }
-        = events_form.input :icon, as: :select, required: false, wrapper:, input_html: { data:, name: "#{events_form.object_name}[][icon]" }
-        = events_form.input :from, input_html: { name: "#{events_form.object_name}[][from][]" }
-        = events_form.input :to, input_html: { name: "#{events_form.object_name}[][to]" }
-        = events_form.input :callback, required: false, input_html: { name: "#{events_form.object_name}[][callback]" }
+      = builder.fields_for :events, Schematics::Attributes::StateMachineEvent.new do |events_form|
+        = events_form.text_field :name, { name: "#{events_form.object_name}[][name]" }
+        = events_form.select :icon, [], {}, { data:, name: "#{events_form.object_name}[][icon]" }
+        = events_form.text_field :from, { name: "#{events_form.object_name}[][from][]" }
+        = events_form.text_field :to, { name: "#{events_form.object_name}[][to]" }
+        = events_form.text_field :callback, { name: "#{events_form.object_name}[][callback]" }
       .btn.btn-sm.btn-danger {
         data-action='click->nested-form#remove:prevent:stop'
         data-nested-form-wrapper-param='.schema-editor-events-input'
@@ -17,17 +17,13 @@
   #schema-editor-events-inputs data-nested-form-target='targets'
     - events.each do |event|
       .schema-editor-events-input
-        = builder.simple_fields_for :events, event do |events_form|
-          = events_form.input :name, input_html: { value: event.name, name: "#{events_form.object_name}[][name]" }
-          = events_form.input :icon,
-                              as: :select,
-                              required: false,
-                              wrapper:,
-                              input_html: { data: data(event.icon), name: "#{events_form.object_name}[][icon]" }
+        = builder.fields_for :events, event do |events_form|
+          = events_form.text_field :name, { value: event.name, name: "#{events_form.object_name}[][name]" }
+          = events_form.select :icon, [], {}, { data: data(event.icon), name: "#{events_form.object_name}[][icon]" }
           - Array(event.from).each do |value|
-            = events_form.input :from, input_html: { value:, name: "#{events_form.object_name}[][from][]" }
-          = events_form.input :to, input_html: { value: event.to, name: "#{events_form.object_name}[][to]" }
-          = events_form.input :callback, required: false, input_html: { value: event.callback, name: "#{events_form.object_name}[][callback]" }
+            = events_form.text_field :from, { value:, name: "#{events_form.object_name}[][from][]" }
+          = events_form.text_field :to, { value: event.to, name: "#{events_form.object_name}[][to]" }
+          = events_form.text_field :callback, { value: event.callback, name: "#{events_form.object_name}[][callback]" }
         .btn.btn-sm.btn-danger {
           data-action='click->nested-form#remove:prevent:stop'
           data-nested-form-wrapper-param='.schema-editor-events-input'

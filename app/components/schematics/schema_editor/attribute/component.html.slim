@@ -11,17 +11,8 @@
       = builder.hidden_field :id
       - case builder.object
       - when Schematics::Attributes::BelongsTo
-        = builder.input :name,
-                        as: :select,
-                        collection: allowed_association_types,
-                        wrapper:,
-                        input_html: { data: { controller: 'dropdown' } }
+        = builder.select :name, allowed_association_types, {}, { data: { controller: 'dropdown' } }
       - else
-        = builder.input :name
-      = builder.input :type,
-                      as: :select,
-                      collection:,
-                      include_blank: false,
-                      wrapper:,
-                      input_html: { data: { controller: 'dropdown' } }
+        = builder.text_field :name
+      = builder.select :type, collection, {}, { data: { controller: 'dropdown' } }
       = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)
