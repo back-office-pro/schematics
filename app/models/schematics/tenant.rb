@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# :reek:Attribute
 module Schematics
+  # :reek:MissingSafeMethod
   class Tenant
     include ::ActiveModel::API
     include ::ActiveModel::Attributes
