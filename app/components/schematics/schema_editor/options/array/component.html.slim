@@ -1,4 +1,4 @@
-.w-100 data-controller='nested-form'
+.mb-3 data-controller='nested-form'
   template#nested-form-array-input data-nested-form-target='templates'
     .input-group.nested-form-array-input.mb-1
       = builder.fields_for name do |values_form|
@@ -11,6 +11,7 @@
           data-bs-title=t('.remove')
         } = fa_icon :trash
   #nested-form-array-inputs data-nested-form-target='targets'
+    = builder.label name, class: 'form-label'
     - values.each do |value|
       .input-group.nested-form-array-input.mb-1
         = builder.fields_for name do |values_form|
