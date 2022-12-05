@@ -81,6 +81,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwt', '~> 2.5.0'
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
+  spec.add_dependency 'mail', '~> 2.7.1'
   spec.add_dependency 'oj', '~> 3.13.23'
   spec.add_dependency 'pagy', '~> 5.10.1'
   spec.add_dependency 'paper_trail', '~> 14.0.0'
