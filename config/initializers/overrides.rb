@@ -46,7 +46,7 @@ end
 
 ActiveSupport.on_load(:active_storage_attachment) do
   ::ActiveStorage::Attachment.class_eval do
-    #include Schematics::Elasticsearchable
+    # include Schematics::Elasticsearchable
   end
 end
 

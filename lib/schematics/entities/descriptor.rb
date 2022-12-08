@@ -32,7 +32,7 @@ module Schematics
       def serializer_class
         descriptor = name
         case entity
-        when Singleton # rubocop:disable Lint/ConstantResolution
+        when Singleton
           Class.new(::ActiveModel::Serializer) do
             attribute descriptor
           end

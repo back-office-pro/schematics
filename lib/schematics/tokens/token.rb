@@ -14,7 +14,7 @@ module Schematics
           return Assignment.new(assignment) if assignment
           return Parenthesis.new(parenthesis) if parenthesis
           return Variable.new(variable, table_name) if variable
-          return String.new(string) if string # rubocop:disable Lint/ConstantResolution
+          return String.new(string) if string
           return Number.new(number) if number
 
           Whitespace.new if whitespace

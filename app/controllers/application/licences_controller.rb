@@ -5,7 +5,7 @@ module Application
     extend ActiveSupport::Concern
 
     def update
-      result = Licence::Update.call # rubocop:disable Lint/ConstantResolution
+      result = Licence::Update.call
       if result.success?
         respond_to do |format|
           format.html { redirect_to schematics.admin_path, notice: t(result.message) }
