@@ -5,7 +5,7 @@ module Schematics
     def initialize(user)
       super
       merge PermissionAbility.new(user)
-      merge ActiveStorage::AttachmentAbility.new(user) # rubocop:disable Lint/ConstantResolution
+      merge ActiveStorage::AttachmentAbility.new(user)
       merge VersionAbility.new(user)
       merge UserAbility.new(user)
       merge MessageAbility.new(user)

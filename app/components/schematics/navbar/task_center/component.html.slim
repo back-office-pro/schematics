@@ -6,7 +6,7 @@ li.nav-item.dropdown.d-flex.align-items-center.px-3.border-start.border-light
     role='button'
   }
     .position-relative
-      = fa_icon ::Task.entity.icon, class: icon_class
+      = fa_icon Task.entity.icon, class: icon_class
       - unless pending_count.zero?
         .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
           = display_pending_count

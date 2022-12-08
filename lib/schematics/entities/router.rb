@@ -41,7 +41,7 @@ module Schematics
         .reverse
 
       def resolver
-        return unless @entity.is_a?(Singleton) # rubocop:disable Lint/ConstantResolution
+        return unless @entity.is_a?(Singleton)
 
         <<~RUBY
           resolve "#{class_name}" do |resource, options|
@@ -52,7 +52,7 @@ module Schematics
 
       def route
         case @entity
-        when Singleton # rubocop:disable Lint/ConstantResolution
+        when Singleton
           <<~RUBY
             resource :#{resource}, only: #{routes}, model_name: '#{class_name}' do
             #{resource_routes}

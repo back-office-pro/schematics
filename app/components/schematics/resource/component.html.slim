@@ -11,7 +11,7 @@
   - case value
   - when Schematics::Schema
     = render Schematics::Viewer::Schema::Component.new(schema: value)
-  - when ::Hash
+  - when Hash
     table
       - value.each do |key, value|
         tr

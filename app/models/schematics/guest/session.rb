@@ -24,7 +24,7 @@ module Schematics
 
       def touch!(*) = true
 
-      def user = User.new(locale:) # rubocop:disable Lint/ConstantResolution
+      def user = User.new(locale:)
     end
   end
 end

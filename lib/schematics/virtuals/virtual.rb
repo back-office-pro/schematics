@@ -33,7 +33,7 @@ module Schematics
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
 
           return Malformed   if tokens.any?(Tokens::Assignment)
-          return Comparison  if tokens.any?(Tokens::Comparator) # rubocop:disable Lint/ConstantResolution
+          return Comparison  if tokens.any?(Tokens::Comparator)
           return Calculation if tokens.any?(Tokens::Operator)
 
           Concatenation

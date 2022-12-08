@@ -23,7 +23,7 @@ module Schematics
         end
       end
 
-      def tenant = Tenant.current # rubocop:disable Lint/ConstantResolution
+      def tenant = Tenant.current
 
       def entity = tenant
         .schema
