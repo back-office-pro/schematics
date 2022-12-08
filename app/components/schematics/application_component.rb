@@ -12,7 +12,7 @@ module Schematics
 
     delegate :current_user,
              :current_ability,
-             :current_schema,
+             :current_tenant,
              :can?,
              :content_security_policy_nonce,
              to: :helpers
