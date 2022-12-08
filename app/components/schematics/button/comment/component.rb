@@ -4,7 +4,7 @@ module Schematics
   module Button
     module Comment
       class Component < ApplicationComponent
-        delegate :icon, to: '::Comment.entity'
+        delegate :icon, to: 'mod::Comment.entity'
         delegate :size, to: 'resource.comments'
         option :resource
 

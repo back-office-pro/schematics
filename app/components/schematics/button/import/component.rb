@@ -5,7 +5,7 @@ module Schematics
     module Import
       class Component < ApplicationComponent
         delegate :human_name_plural, to: :model_class
-        delegate :icon, to: '::Import.entity'
+        delegate :icon, to: 'mod::Import.entity'
         option :model_class
 
         def css_classes = %w[btn btn-sm btn-icon-split ms-2]

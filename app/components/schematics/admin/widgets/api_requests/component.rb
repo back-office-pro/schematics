@@ -5,7 +5,7 @@ module Schematics
     module Widgets
       module ApiRequests
         class Component < ApplicationComponent
-          delegate :icon, to: '::ApiRequest.entity'
+          delegate :icon, to: 'mod::ApiRequest.entity'
 
           def caption = t('.caption')
 

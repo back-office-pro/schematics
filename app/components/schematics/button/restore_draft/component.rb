@@ -5,7 +5,7 @@ module Schematics
     module RestoreDraft
       class Component < ApplicationComponent
         delegate :updated_at, to: :draft
-        delegate :icon, to: '::Draft.entity'
+        delegate :icon, to: 'mod::Draft.entity'
         option :draft
 
         def render?

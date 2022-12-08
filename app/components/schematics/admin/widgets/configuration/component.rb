@@ -5,7 +5,7 @@ module Schematics
     module Widgets
       module Configuration
         class Component < ApplicationComponent
-          delegate :icon, to: '::Configuration.entity'
+          delegate :icon, to: 'mod::Configuration.entity'
 
           def caption = t('.caption')
 

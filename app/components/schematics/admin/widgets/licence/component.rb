@@ -5,7 +5,7 @@ module Schematics
     module Widgets
       module Licence
         class Component < ApplicationComponent
-          delegate :icon, to: '::Licence.entity'
+          delegate :icon, to: 'mod::Licence.entity'
 
           def model
             @model ||= mod::Licence.instance

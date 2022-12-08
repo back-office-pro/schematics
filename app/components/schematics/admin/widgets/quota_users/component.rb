@@ -5,11 +5,11 @@ module Schematics
     module Widgets
       module QuotaUsers
         class Component < ApplicationComponent
-          delegate :icon, to: '::User.entity'
+          delegate :icon, to: 'mod::User.entity'
           delegate :users_size,
                    :quota,
                    :quota_users_percentage,
-                   to: '::Licence.instance'
+                   to: 'mod::Licence.instance'
 
           def title = t('.title')
         end

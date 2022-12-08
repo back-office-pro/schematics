@@ -8,7 +8,7 @@ module Schematics
           delegate :storage_size,
                    :quota,
                    :quota_storage_percentage,
-                   to: '::Licence.instance'
+                   to: 'mod::Licence.instance'
 
           def icon = :hdd
 
