@@ -7,8 +7,8 @@ module Schematics
       include ::ActiveModel::Attributes
 
       attribute :permissions, default: -> { [] }
-      attribute :time_zone#, default: -> { ::Configuration.instance.time_zone }
-      attribute :locale#, default: -> { ::Configuration.instance.locale }
+      attribute :time_zone, default: -> { Dummy::Configuration.instance.time_zone }
+      attribute :locale, default: -> { Dummy::Configuration.instance.locale }
 
       delegate :admin?, to: :role
 

@@ -17,7 +17,11 @@ module Schematics
         .excluding('default')
         .map { |name| new(name:) }
 
-      def modules = all.map(&:mod)
+      def modules
+        return [] if Rails.env.test?
+
+        all.map(&:mod)
+      end
 
       def app_name = Rails
         .application

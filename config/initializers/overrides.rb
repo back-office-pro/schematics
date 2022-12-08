@@ -24,11 +24,11 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
-  Schematics::Tenant.all.each do |tenant|
+  Schematics::Tenant.modules.each do |mod|
     Application
       .constants
-      .select { tenant.mod.const_defined?(_1) }
-      .each { tenant.mod.const_get(_1).prepend(Application.const_get(_1)) }
+      .select { mod.const_defined?(_1) }
+      .each { mod.const_get(_1).prepend(Application.const_get(_1)) }
   end
 
   ::ActiveStorage.singleton_class.module_eval do

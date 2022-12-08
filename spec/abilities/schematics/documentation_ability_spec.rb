@@ -8,10 +8,13 @@ RSpec.describe Schematics::DocumentationAbility do
 
   let(:mod) { Dummy }
   let(:role) { Role.new }
-  let(:user) { User.new(role:) }
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:user) { mod::User.new(role:) }
+  let(:admin_role) { mod::Role.create!(name: 'Admin') }
 
-  before { stub_const('Dummy') }
+  before do
+    stub_const('Dummy', Module.new)
+    allow(Schematics::Tenant).to receive(:modules).and_return([mod])
+  end
 
   it { is_expected.not_to be_able_to(:show, ::Documentation) }
 
