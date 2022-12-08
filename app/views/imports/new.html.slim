@@ -1,11 +1,11 @@
-- breadcrumb title, new_polymorphic_path([parent_model_class, ::Import], format: nil)
+- breadcrumb title, new_polymorphic_path([parent_model_class, mod::Import], format: nil)
 .card.shadow-sm.border-0.animate__animated.animate__zoomIn
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: ::Import.entity.icon, title:)
+        = render Schematics::CardHeading::Component.new(icon: mod::Import.entity.icon, title:)
       .col-auto
         = render Schematics::Button::GenerateFileInBackground::Component.csv_template
   .card-body.p-3
     = render Schematics::ResourceForm::Component \
-              .new(resource: @resource, url: polymorphic_path([parent_model_class, ::Import], format: nil), cancel_path: parent_model_class)
+              .new(resource: @resource, url: polymorphic_path([parent_model_class, mod::Import], format: nil), cancel_path: parent_model_class)

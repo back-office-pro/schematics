@@ -24,7 +24,7 @@ module Application
 
     def touch!(request)
       PaperTrail.request(enabled: false) do
-        ::ApiRequest.create!(
+        mod::ApiRequest.create!(
           api_key: self,
           ip: request.ip,
           request_method: request.method,

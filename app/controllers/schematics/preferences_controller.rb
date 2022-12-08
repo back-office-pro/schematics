@@ -50,7 +50,8 @@ module Schematics
       .permit(permitted_preference_params)
       .transform_values(&method(:cast_param_value))
 
-    def timeline_preferences = current_schema
+    def timeline_preferences = current_tenant
+      .schema
       .entities
       .reject(&:hidden?)
       .flat_map do |entity|
@@ -59,7 +60,8 @@ module Schematics
           .map { |action| [action, entity.class_name].join('_') }
       end
 
-    def viewer_preferences = current_schema
+    def viewer_preferences = current_tenant
+      .schema
       .entities
       .reject(&:hidden?)
       .flat_map(&:listable_elements)

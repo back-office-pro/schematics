@@ -4,10 +4,9 @@ default: &default
   pool: <%%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  foo:
+  default:
     <<: *default
     database: foo_development
-    migrations_paths: db/foo_migrate
   <%= app_name %>:
     <<: *default
     database: <%= app_name %>_development

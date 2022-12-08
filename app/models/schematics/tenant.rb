@@ -10,7 +10,14 @@ module Schematics
     attribute :name, default: -> { ENV.fetch('TENANT') { raise ArgumentError, 'Missing tenant' } }
 
     class << self
-      def all = [new(name: 'dummy')]
+      def all = Rails
+        .configuration
+        .database_configuration[Rails.env]
+        .keys
+        .excluding('default')
+        .map { |name| new(name:) }
+
+      def modules = all.map(&:mod)
 
       def app_name = Rails
         .application
@@ -58,7 +65,7 @@ module Schematics
     private
 
     def data
-      ::SchemaDataset
+      mod::SchemaDataset
         .where(state: [1, 2])
         .last
         .data

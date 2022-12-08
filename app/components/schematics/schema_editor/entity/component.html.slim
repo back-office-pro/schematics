@@ -3,7 +3,7 @@
     .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
       .row.align-items-center
         .col.text-truncate
-          = render Schematics::CardHeading::Component.new(icon: ::SchemaDataset.entity.icon, title: t('.title'))
+          = render Schematics::CardHeading::Component.new(icon: mod::SchemaDataset.entity.icon, title: t('.title'))
         .col-auto
           = render Schematics::SchemaEditor::Button::AddDropdown::Component.new(builder:)
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')

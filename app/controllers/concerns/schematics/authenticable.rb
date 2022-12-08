@@ -28,12 +28,12 @@ module Schematics
     end
 
     def current_ability
-      @current_ability ||= Ability.new(current_user, current_tenant.mod)
+      @current_ability ||= Ability.new(current_user, mod)
     end
 
     def current_session
-      #current_tenant.mod::Session.authorized_by(auth_token, session[:current_session_id]).first ||
-      #  current_tenant.mod::ApiKey.active.find_by(auth_token:) ||
+      #mod::Session.authorized_by(auth_token, session[:current_session_id]).first ||
+      #  mod::ApiKey.active.find_by(auth_token:) ||
         Guest::Session.new(request:)
     end
 

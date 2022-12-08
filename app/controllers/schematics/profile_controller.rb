@@ -55,7 +55,7 @@ module Schematics
       options: { required: true }
     )
 
-    def model_class = ::User
+    def model_class = mod::User
 
     def permitted_params = super
       .excluding(:role_id)

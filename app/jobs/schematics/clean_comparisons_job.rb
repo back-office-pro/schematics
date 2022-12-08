@@ -5,7 +5,9 @@ module Schematics
     DELAY = 30.days.freeze
 
     def perform
-      ::Comparison.destroy_by(created_at: ..DELAY.ago)
+      Schematics::Tenant.modules.each do |mod|
+        mod::Comparison.destroy_by(created_at: ..DELAY.ago)
+      end
     end
   end
 end

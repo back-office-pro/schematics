@@ -20,7 +20,7 @@ module Schematics
 
     def config(key)
       Rails.cache.fetch("#{current_tenant.name}:configuration/#{key}") do
-        current_tenant.mod::Configuration
+        mod::Configuration
           .with_attached_company_logo
           .instance
           .public_send(key)

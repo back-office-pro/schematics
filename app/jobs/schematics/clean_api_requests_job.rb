@@ -5,7 +5,9 @@ module Schematics
     DELAY = 1.year.freeze
 
     def perform
-      ::ApiRequest.destroy_by(created_at: ..DELAY.ago)
+      Schematics::Tenant.modules.each do |mod|
+        mod::ApiRequest.destroy_by(created_at: ..DELAY.ago)
+      end
     end
   end
 end

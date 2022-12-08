@@ -13,7 +13,7 @@ module Application
     def permission_ids
       return super if persisted?
 
-      ::Permission.features.ids
+      mod::Permission.features.ids
     end
   end
 end

@@ -15,7 +15,7 @@ module Schematics
           .preload(:author)
           .order(created_at: :desc)
 
-        def model_class = ::Comment
+        def model_class = mod::Comment
 
         def title = "#{size} #{human_name(count: size)}"
       end

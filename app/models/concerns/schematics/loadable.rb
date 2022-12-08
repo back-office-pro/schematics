@@ -23,7 +23,9 @@ module Schematics
         end
       end
 
-      def tenant = Tenant.new(name: module_parent.to_s)
+      def tenant
+        @tenant ||= Tenant.new(name: module_parent.to_s)
+      end
 
       def entity = tenant
         .schema

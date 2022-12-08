@@ -4,7 +4,7 @@
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: ::Comment.entity.icon, title:)
+        = render Schematics::CardHeading::Component.new(icon: mod::Comment.entity.icon, title:)
       .col-auto
         = render Schematics::Button::Stale::Component.new(resource: @resource)
   .card-body.p-3

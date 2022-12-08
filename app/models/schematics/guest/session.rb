@@ -18,13 +18,13 @@ module Schematics
 
       def login!(user)
         PaperTrail.request(enabled: false) do
-          ::Session.create!(ip:, user_agent:, user:)
+          user.module_parent::Session.create!(ip:, user_agent:, user:)
         end
       end
 
       def touch!(*) = true
 
-      def user = User.new(locale:) # rubocop:disable Lint/ConstantResolution
+      def user = User.new(locale:)
     end
   end
 end
