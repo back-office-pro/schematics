@@ -7,7 +7,7 @@ module ActiveStorage
     private
 
     def object_for(key)
-      bucket.object ::File.join(Schematics::Tenant.current.subdomain, key)
+      bucket.object ::File.join(::Tenant.app_name, key)
     end
   end
 end

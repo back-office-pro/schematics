@@ -58,7 +58,7 @@ module Application
       .preload(:blob)
       .sum(&:byte_size)
 
-    def users_size = ::User
+    def users_size = self.class.tenant.mod::User
       .all
       .size
   end

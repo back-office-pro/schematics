@@ -29,13 +29,13 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
 
       def routes = {
-        comparisons: comparisons_path,
+        comparisons: public_send(:"#{current_tenant.name}_comparisons_path"),
         dashboard_read_notifications: dashboard_read_notifications_path,
-        documentation: documentation_path(format: :json),
-        drafts: drafts_path,
+        documentation: public_send(:"#{current_tenant.name}_documentation_path", format: :json),
+        drafts: public_send(:"#{current_tenant.name}_drafts_path"),
         preferences: preferences_path,
-        searches: searches_path,
-        users: users_path
+        searches: public_send(:"#{current_tenant.name}_searches_path"),
+        users: public_send(:"#{current_tenant.name}_users_path")
       }.transform_keys { _1.to_s.camelize(:lower) }
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety

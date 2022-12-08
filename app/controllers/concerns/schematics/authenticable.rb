@@ -21,19 +21,19 @@ module Schematics
         format.json { head :unauthorized }
         format.any do
           store_location
-          redirect_to main_app.login_path,
+          redirect_to main_app.public_send(:"#{current_tenant.name}_login_path"),
                       alert: t('schematics.application.authenticate_user.alert')
         end
       end
     end
 
     def current_ability
-      @current_ability ||= Ability.new(current_user)
+      @current_ability ||= Ability.new(current_user, current_tenant.mod)
     end
 
     def current_session
-      ::Session.authorized_by(auth_token, session[:current_session_id]).first ||
-        ::ApiKey.active.find_by(auth_token:) ||
+      #current_tenant.mod::Session.authorized_by(auth_token, session[:current_session_id]).first ||
+      #  current_tenant.mod::ApiKey.active.find_by(auth_token:) ||
         Guest::Session.new(request:)
     end
 

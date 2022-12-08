@@ -2,10 +2,10 @@
 
 module Schematics
   class SearchAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      can :create, ::Search
-      can :show, ::Search
+      can :create, mod::Search
+      can :show, mod::Search
     end
   end
 end

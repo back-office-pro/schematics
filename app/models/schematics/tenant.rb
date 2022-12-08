@@ -7,17 +7,21 @@ module Schematics
     include ::ActiveModel::Attributes
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-    attribute :name, default: -> { Rails.application.class.module_parent_name.underscore }
+    attribute :name, default: -> { ENV.fetch('TENANT') { raise ArgumentError, 'Missing tenant' } }
 
     class << self
-      SEMAPHORE = Mutex.new.freeze
+      def all = [new(name: 'dummy')]
 
-      def current
-        SEMAPHORE.synchronize do
-          @current ||= new
-        end
-      end
+      def app_name = Rails
+        .application
+        .class
+        .module_parent_name
+        .underscore
     end
+
+    def mod = name
+      .classify
+      .constantize
 
     def schema
       @schema ||= Schematics::Schema.new(data:)
@@ -37,10 +41,6 @@ module Schematics
     def subdomain = name.dasherize
 
     def human = name.humanize
-
-    def index_name(model_name)
-      [name, model_name.plural, Rails.env].join('_')
-    end
 
     def default_url_options = { host:, port: }.compact
 

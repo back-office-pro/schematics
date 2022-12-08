@@ -55,12 +55,6 @@ module Schematics
       .flat_map(&:association_attributes)
       .select(&:polymorphic?)
 
-    def root_route
-      return 'dashboard#home' if valid?
-
-      'exception#schema_error'
-    end
-
     def valid?(*)
       valid = super && entities.all?(&:valid?)
       entities

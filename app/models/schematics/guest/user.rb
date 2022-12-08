@@ -7,16 +7,16 @@ module Schematics
       include ::ActiveModel::Attributes
 
       attribute :permissions, default: -> { [] }
-      attribute :time_zone, default: -> { ::Configuration.instance.time_zone }
-      attribute :locale, default: -> { ::Configuration.instance.locale }
+      attribute :time_zone#, default: -> { ::Configuration.instance.time_zone }
+      attribute :locale#, default: -> { ::Configuration.instance.locale }
 
       delegate :admin?, to: :role
 
-      def drafts = ::Draft.none
+      def drafts = Dummy::Draft.none
 
       def preferences = {}
 
-      def role = ::Role.new(permissions:)
+      def role = Dummy::Role.new(permissions:)
     end
   end
 end

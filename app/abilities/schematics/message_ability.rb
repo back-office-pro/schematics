@@ -2,11 +2,11 @@
 
 module Schematics
   class MessageAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
-      cannot %i[show update duplicate destroy archive import], ::Message
-      can %i[show update destroy archive], ::Message, author: user
-      can :show, ::Message, recipient: user
+      cannot %i[show update duplicate destroy archive import], mod::Message
+      can %i[show update destroy archive], mod::Message, author: user
+      can :show, mod::Message, recipient: user
     end
   end
 end

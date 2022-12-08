@@ -2,10 +2,10 @@
 
 module Schematics
   class DraftAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
-      can :create, ::Draft
-      can %i[show update destroy], ::Draft, user:
+      can :create, mod::Draft
+      can %i[show update destroy], mod::Draft, user:
     end
   end
 end

@@ -6,9 +6,10 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   def generate_permissions
     return unless generating?
 
-    ::Permission.reload_definitions!
     PaperTrail.request(enabled: false) do
-      ::Role.admin.permissions.push(::Permission.create_entity_permissions!(entity))
+      include tenant.mod
+      Permission.reload_definitions!
+      Role.admin.permissions.push(Permission.create_entity_permissions!(entity))
     end
   end
 
@@ -16,9 +17,10 @@ class PermissionsGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      ::Permission.destroy_by(model:)
-      ::Chart.destroy_by(model:)
-      ::Stat.destroy_by(model:)
+      include tenant.mod
+      Permission.destroy_by(model:)
+      Chart.destroy_by(model:)
+      Stat.destroy_by(model:)
       Schematics::Version.destroy_by(item_type: model)
     end
   end
@@ -26,22 +28,28 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   def rename_permissions
     return unless renaming?
 
+    # rubocop:disable Rails/SkipsModelValidations
     PaperTrail.request(enabled: false) do
-      # rubocop:disable Rails/SkipsModelValidations
-      ::Permission.where(model: old_model).update_all(model:)
-      ::Chart.where(model: old_model).update_all(model:)
-      ::Stat.where(model: old_model).update_all(model:)
+      include tenant.mod
+      Permission.where(model: old_model).update_all(model:)
+      Chart.where(model: old_model).update_all(model:)
+      Stat.where(model: old_model).update_all(model:)
       Schematics::Version.where(item_type: old_model).update_all(item_type: model)
-      # rubocop:enable Rails/SkipsModelValidations
     end
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
   private
 
-  def entity = Schematics::Tenant
-    .current
+  def tenant = Schematics::Tenant.new(name: tenant_name)
+
+  def tenant_name = name.split('/').first
+
+  def entity = tenant
     .schema
-    .find_entity_by_name(name.underscore)
+    .find_entity_by_name(entity_name)
+
+  def entity_name = name.split('/').second
 
   def model = entity.class_name
 

@@ -5,7 +5,7 @@ module Schematics
     module OnlineUsersCenter
       class Component < ApplicationComponent
         def sessions
-          @sessions ||= ::Session
+          @sessions ||= current_tenant.mod::Session
                         .with_user_avatar
                         .active
                         .select('DISTINCT ON (user_id) *')

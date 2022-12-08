@@ -2,11 +2,11 @@
 
 module Schematics
   class ApiRequestAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       return unless user.admin?
 
-      can :read, ::ApiRequest
+      can :read, mod::ApiRequest
     end
   end
 end

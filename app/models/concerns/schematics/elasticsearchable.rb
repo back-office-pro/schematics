@@ -10,13 +10,10 @@ module Schematics
                  filterable: searchkick_elements,
                  word_middle: searchkick_elements,
                  suggest: searchkick_elements,
-                 callbacks: :async,
-                 index_name:
+                 callbacks: :async
     end
 
     class_methods do
-      def index_name = -> { tenant.index_name(model_name) }
-
       def searchkick_elements = entity
         .searchable_elements
         .map(&:name)

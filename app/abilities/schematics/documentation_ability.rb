@@ -2,11 +2,11 @@
 
 module Schematics
   class DocumentationAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       return unless user.admin?
 
-      can :show, ::Documentation
+      can :show, mod::Documentation
     end
   end
 end

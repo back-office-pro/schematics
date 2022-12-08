@@ -54,8 +54,8 @@ module Schematics
           private
 
           def schema_attribute
-            @schema_attribute ||= Tenant # rubocop:disable Lint/ConstantResolution
-                                  .current
+            @schema_attribute ||= Tenant
+                                  .new
                                   .schema
                                   .find_attribute_by_prefixed_name(@type.to_s)
           end

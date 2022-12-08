@@ -5,7 +5,7 @@ module Schematics
     module Compare
       class Component < ApplicationComponent
         def render?
-          can?(:create, ::Comparison)
+          can?(:create, current_tenant.mod::Comparison)
         end
       end
     end

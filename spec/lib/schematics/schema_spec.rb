@@ -6,7 +6,6 @@ describe Schematics::Schema do
   let(:data) { [] }
 
   it { is_expected.to be_valid }
-  its(:root_route) { is_expected.to eq('dashboard#home') }
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }
@@ -88,6 +87,5 @@ describe Schematics::Schema do
     end
 
     it { is_expected.not_to be_valid }
-    its(:root_route) { is_expected.to eq('exception#schema_error') }
   end
 end

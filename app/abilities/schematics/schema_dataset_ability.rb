@@ -2,13 +2,13 @@
 
 module Schematics
   class SchemaDatasetAbility < ApplicationAbility
-    def initialize
+    def initialize(mod)
       super
-      cannot :import, ::SchemaDataset
-      cannot :create, ::SchemaDataset if ::SchemaDataset.any? && !::SchemaDataset.last.migrated?
-      cannot :manage, ::SchemaDataset.in_progress
-      cannot :update, ::SchemaDataset.migrated
-      cannot :archive, ::SchemaDataset.current if ::SchemaDataset.current
+      cannot :import, mod::SchemaDataset
+      cannot :create, mod::SchemaDataset if mod::SchemaDataset.any? && !mod::SchemaDataset.last.migrated?
+      cannot :manage, mod::SchemaDataset.in_progress
+      cannot :update, mod::SchemaDataset.migrated
+      cannot :archive, mod::SchemaDataset.current if mod::SchemaDataset.current
     end
   end
 end

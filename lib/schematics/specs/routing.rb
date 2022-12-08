@@ -7,9 +7,9 @@ module Schematics
     module Routing # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      UPDATE_DENYLIST = [::Comment].freeze
-      SHOW_DENYLIST = [::ActiveStorage::Attachment].freeze
-      DESTROY_DENYLIST = [::ActiveStorage::Attachment].freeze
+      UPDATE_DENYLIST = %w[Comment].freeze
+      SHOW_DENYLIST = %w[ActiveStorage::Attachment].freeze
+      DESTROY_DENYLIST = %w[ActiveStorage::Attachment].freeze
 
       included do
         include Rails.application.routes.url_helpers
@@ -36,7 +36,7 @@ module Schematics
               .to route(:get, polymorphic_path(model_class, action: :autocomplete))
               .to params.merge(action: :autocomplete)
           end
-          if can?(:show) && SHOW_DENYLIST.exclude?(model_class)
+          if can?(:show) && SHOW_DENYLIST.exclude?(model_class.to_s.demodulize)
             is_expected
               .to route(:get, polymorphic_path(record))
               .to params.merge(action: :show, id:).compact
@@ -64,7 +64,7 @@ module Schematics
               .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
               .to params.merge(controller: 'imports', action: :create)
           end
-          if can?(:update) && UPDATE_DENYLIST.exclude?(model_class)
+          if can?(:update) && UPDATE_DENYLIST.exclude?(model_class.to_s.demodulize)
             is_expected
               .to route(:get, edit_polymorphic_path(record))
               .to params.merge(id:, action: :edit).compact
@@ -72,7 +72,7 @@ module Schematics
               .to route(:patch, polymorphic_path(record))
               .to params.merge(id:, action: :update).compact
           end
-          if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class)
+          if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class.to_s.demodulize)
             is_expected
               .to route(:delete, polymorphic_path(record))
               .to params.merge(id:, action: :destroy)

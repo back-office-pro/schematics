@@ -2,7 +2,7 @@
 
 module Schematics
   class VersionAbility < ApplicationAbility
-    def initialize(user)
+    def initialize(user, mod)
       super
       can(:revert, Version, user:)
       cannot :revert, Version, object: nil

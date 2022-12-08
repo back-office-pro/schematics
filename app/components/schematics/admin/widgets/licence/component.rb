@@ -8,7 +8,7 @@ module Schematics
           delegate :icon, to: '::Licence.entity'
 
           def model
-            @model ||= ::Licence.instance
+            @model ||= current_tenant.mod::Licence.instance
           end
 
           def target = 'confirm-dialog-cancel-licence'

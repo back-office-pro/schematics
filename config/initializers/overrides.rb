@@ -24,10 +24,12 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
-  Application
-    .constants
-    .select { Object.const_defined?(_1) }
-    .each { Object.const_get(_1).prepend(Application.const_get(_1)) }
+  Schematics::Tenant.all.each do |tenant|
+    Application
+      .constants
+      .select { tenant.mod.const_defined?(_1) }
+      .each { tenant.mod.const_get(_1).prepend(Application.const_get(_1)) }
+  end
 
   ::ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false
@@ -44,7 +46,7 @@ end
 
 ActiveSupport.on_load(:active_storage_attachment) do
   ::ActiveStorage::Attachment.class_eval do
-    include Schematics::Elasticsearchable
+    #include Schematics::Elasticsearchable
   end
 end
 

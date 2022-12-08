@@ -3,7 +3,7 @@
 module Schematics
   module ActiveStorage
     class AttachmentAbility < ApplicationAbility
-      def initialize(user)
+      def initialize(user, mod)
         super
         cannot :destroy, ::ActiveStorage::Attachment, record_type: 'Import'
         cannot :read,

@@ -17,6 +17,7 @@ module Schematics
 
         [
           scaffold_generator,
+          migration_generator,
           feature_generator,
           translations_generator,
           permissions_generator,
@@ -28,11 +29,20 @@ module Schematics
 
       private
 
+      def name = "dummy/#{super}"
+
       def scaffold_generator = Rails::Generators::ScaffoldGenerator.new(
         [
           name,
           *migratable_attributes.map(&:to_s)
-        ], ['--skip-resource-route']
+        ], ['--skip-resource-route', '--database=dummy', '--skip-migration']
+      )
+
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "create_#{name.split('/').second.pluralize}",
+          *migratable_attributes.map(&:to_s)
+        ], ['--database=dummy', '--primary-key-type=uuid', '--timestamps=true']
       )
 
       def feature_generator = Rspec::Generators::FeatureGenerator.new([name])
@@ -53,23 +63,23 @@ module Schematics
         [
           "add_slug_to_#{table_name.pluralize}",
           'slug:string:uniq'
-        ]
+        ], ['--database=dummy']
       )
 
       def lock_version_migration_generator = Rails::Generators::MigrationGenerator.new(
         [
           "add_lock_version_to_#{table_name.pluralize}",
           'lock_version:integer'
-        ]
+        ], ['--database=dummy']
       )
 
       def create_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
-            "create_join_table_#{association.entity.name.pluralize}_#{association.name}",
+            "create_join_table_#{association.entity.name.pluralize}_dummy_#{association.name}",
             "#{association.entity.name.pluralize}:join_table_first",
             "#{association.name}:join_table_second"
-          ]
+          ], ['--database=dummy']
         )
       end
 

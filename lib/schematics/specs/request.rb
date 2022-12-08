@@ -8,10 +8,10 @@ module Schematics
     module Request # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST  = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
-      UPDATE_DENYLIST  = [::Licence, ::SchemaDataset].freeze
-      SHOW_DENYLIST    = [::ActiveStorage::Attachment, ::Search].freeze
-      DESTROY_DENYLIST = [::ActiveStorage::Attachment, ::Session].freeze
+      CREATE_DENYLIST  = %w[Search Session Comparison SchemaDataset Comment].freeze
+      UPDATE_DENYLIST  = %w[Licence SchemaDataset].freeze
+      SHOW_DENYLIST    = %w[ActiveStorage::Attachment Search].freeze
+      DESTROY_DENYLIST = %w[ActiveStorage::Attachment Session].freeze
 
       included do
         include Rails.application.routes.url_helpers
@@ -76,7 +76,7 @@ module Schematics
           end
         end
 
-        if can?(:show) && SHOW_DENYLIST.exclude?(model_class)
+        if can?(:show) && SHOW_DENYLIST.exclude?(model_class.to_s.demodulize)
           %i[html pdf svg ics].each do |as|
             it "should show #{as.upcase} record" do
               get(polymorphic_path(record), headers:, as:)
@@ -108,7 +108,7 @@ module Schematics
           end
         end
 
-        if can?(:update) && UPDATE_DENYLIST.exclude?(model_class)
+        if can?(:update) && UPDATE_DENYLIST.exclude?(model_class.to_s.demodulize)
           it 'should get edit' do
             get edit_polymorphic_path(record), headers:, as: :html
             if ability.can?(:edit, record)
@@ -143,7 +143,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && CREATE_DENYLIST.exclude?(model_class)
+        if can?(:create) && CREATE_DENYLIST.exclude?(model_class.to_s.demodulize)
           it 'should get new' do
             get new_polymorphic_path(model_class), headers:, as: :html
             if ability.can?(:new, model_class)
@@ -239,7 +239,7 @@ module Schematics
           end
         end
 
-        if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class)
+        if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class.to_s.demodulize)
           it 'should get delete' do
             get polymorphic_path(record, action: :delete), headers:, as: :html
             if ability.can?(:destroy, record)
@@ -334,7 +334,7 @@ module Schematics
           end
         end
 
-        if UPDATE_DENYLIST.exclude?(model_class)
+        if UPDATE_DENYLIST.exclude?(model_class.to_s.demodulize)
           events.each do |event|
             it "should #{event.name} record" do
               patch polymorphic_path(record, action: event.name), headers:, as: :html

@@ -9,18 +9,19 @@ module Schematics
              to: :config,
              private: true
 
-    def initialize
+    def initialize(mod)
       super
-      cannot :manage, ::Message unless messages_feature_flag
-      cannot :manage, ::Comment unless comments_feature_flag
-      cannot :manage, ::Meeting unless meetings_feature_flag
-      cannot :manage, ::Task unless tasks_feature_flag
+      @mod = mod
+      cannot :manage, mod::Message unless messages_feature_flag
+      cannot :manage, mod::Comment unless comments_feature_flag
+      cannot :manage, mod::Meeting unless meetings_feature_flag
+      cannot :manage, mod::Task unless tasks_feature_flag
     end
 
     private
 
     def config
-      @config ||= ::Configuration.instance
+      @config ||= @mod::Configuration.instance
     end
   end
 end

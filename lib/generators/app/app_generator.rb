@@ -6,6 +6,7 @@ require 'active_support/core_ext/string/inquiry'
 require 'redis'
 require 'json'
 require 'fileutils'
+require 'pg'
 
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
   DEFAULT_PORT = 3000
@@ -16,6 +17,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_root
+    create_postgres_user
     clean_app_path
     super
   end
@@ -56,16 +58,20 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'generate rspec:install'
   end
 
+  def install_active_storage
+    rails_command "MIGRATIONS_PATH='db/foo' active_storage:install"
+  end
+
+  def install_action_text
+    rails_command "MIGRATIONS_PATH='db/foo' action_text:install"
+  end
+
   def encrypt_database
     rails_command 'schematics:db:encryption:init', env:
   end
 
-  def generate_tenant
-    rails_command "generate tenant #{db_name} --db-password=#{db_password}", env:
-  end
-
   def backup_credentials
-    rails_command 'schematics:credentials:backup', env:
+    # rails_command 'schematics:credentials:backup', env:
   end
 
   def edit_gitignore
@@ -134,13 +140,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:nginx:deploy', env:
   end
 
-  def run_application
-    return if container?
-    return if env.development?
-
-    rails_command 'server &', env:
-  end
-
   private
 
   def source_paths
@@ -159,6 +158,14 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def db_password
     @db_password ||= SecureRandom.base58
+  end
+
+  def create_postgres_user
+    ::PG
+      .connect
+      .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
+  rescue PG::Error
+    nil
   end
 
   def container? = options[:container]

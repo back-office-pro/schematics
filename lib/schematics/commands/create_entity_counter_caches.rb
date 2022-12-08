@@ -23,7 +23,7 @@ module Schematics
           [
             "add_#{association.inverse_association_name.pluralize}_count_to_#{association.association_type.pluralize}", # rubocop:disable Layout/LineLength
             "#{association.inverse_association_name.pluralize}_count:integer"
-          ]
+          ], ['--database=dummy']
         )
       end
     end

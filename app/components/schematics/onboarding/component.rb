@@ -9,7 +9,7 @@ module Schematics
 
       def title = t('.title')
 
-      def model_class = ::SchemaDataset
+      def model_class = current_tenant.mod::SchemaDataset
 
       def render?
         can?(:create, model_class) && none?

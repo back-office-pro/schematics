@@ -4,7 +4,7 @@ module Schematics
   module Button
     module Draft
       class Component < ApplicationComponent
-        delegate :icon, to: '::Draft.entity'
+        delegate :icon, to: 'current_tenant.mod::Draft.entity'
       end
     end
   end

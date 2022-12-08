@@ -7,8 +7,8 @@ module Schematics
     end
 
     def home
-      @charts = ::Chart.accessible_by_role(current_user.role).load_async
-      @stats = ::Stat.accessible_by_role(current_user.role).load_async
+      @charts = current_tenant.mod::Chart.accessible_by_role(current_user.role).load_async
+      @stats = current_tenant.mod::Stat.accessible_by_role(current_user.role).load_async
     end
 
     def logout

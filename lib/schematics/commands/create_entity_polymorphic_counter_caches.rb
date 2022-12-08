@@ -26,7 +26,7 @@ module Schematics
           [
             "add_#{entity.table_name.pluralize}_count_to_#{table_name.pluralize}",
             "#{entity.table_name.pluralize}_count:integer"
-          ]
+          ], ['--database=dummy']
         )
       end
     end

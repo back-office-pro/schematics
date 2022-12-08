@@ -1,0 +1,10 @@
+<% module_namespacing do -%>
+class <%= abstract_class_name %> < ApplicationRecord
+  self.abstract_class = true
+  self.implicit_order_column = 'created_at'
+
+  include Schematics::ApplicationRecord
+
+  connects_to database: { <%= ActiveRecord.writing_role %>: :<%= database -%> }
+end
+<% end -%>

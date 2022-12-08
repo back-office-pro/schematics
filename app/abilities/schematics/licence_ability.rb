@@ -5,14 +5,21 @@ module Schematics
     delegate :quota_users_exceeded?,
              :quota_storage_exceeded?,
              :active?,
-             to: '::Licence.instance',
+             to: :licence,
              private: true
 
-    def initialize
+    def initialize(mod)
       super
-      cannot :create, ::User if quota_users_exceeded?
+      @mod = mod
+      cannot :create, mod::User if quota_users_exceeded?
       cannot :create, ::ActiveStorage::Attachment if quota_storage_exceeded?
       cannot %i[create update], :all unless active?
+    end
+
+    private
+
+    def licence
+      @licence ||= @mod::Licence.instance
     end
   end
 end

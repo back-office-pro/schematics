@@ -23,11 +23,11 @@ module Schematics
         end
       end
 
-      def tenant = Tenant.current # rubocop:disable Lint/ConstantResolution
+      def tenant = Tenant.new(name: module_parent.to_s)
 
       def entity = tenant
         .schema
-        .find_entity_by_name(name.underscore)
+        .find_entity_by_name(name.demodulize.underscore)
 
       def filter_attributes = entity
         .non_renderable_attributes

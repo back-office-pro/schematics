@@ -8,7 +8,7 @@ namespace :schematics do
   task generate: :environment do
     Rails.application.load_generators
     Schematics::Migrations::CoreMigration
-      .new(Schematics::Tenant.current.schema)
+      .new(Schematics::Tenant.new.schema)
       .build_commands
       .flat_map(&:generators)
       .each(&:invoke_all)
@@ -68,6 +68,7 @@ namespace :schematics do
   namespace :docs do
     desc 'Generate OpenAPI docs'
     task generate: :environment do
+      include Schematics::Tenant.new.mod
       Schematics::SchemaDatasets::WriteDocs.call
     end
   end
@@ -75,7 +76,7 @@ namespace :schematics do
   namespace :licence do
     desc 'Load licence from gateway'
     task load: :environment do
-      Licence.instance.load!
+      Schematics::Tenant.new.mod::Licence.instance.load!
     end
   end
 
@@ -85,7 +86,7 @@ namespace :schematics do
       uri = URI.parse('https://api.github.com/orgs/back-office-pro/repos')
       request = Net::HTTP::Post.new(uri)
       request.basic_auth(Schematics::Engine.credentials.github[:access_token], 'x-oauth-basic')
-      request.body = JSON.dump({ name: Schematics::Tenant.current.subdomain, private: true })
+      request.body = JSON.dump({ name: ::Tenant.app_name, private: true })
       Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { _1.request(request) }
     end
   end

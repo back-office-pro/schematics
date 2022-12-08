@@ -52,53 +52,6 @@ Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: false
 Lint/HeredocMethodCallPosition:
   Enabled: true
-Lint/ConstantResolution:
-  Enabled: true
-  Only:
-    - User
-    - Message
-    - Configuration
-    - Role
-    - Permission
-    - Import
-    - Licence
-    - Chart
-    - Stat
-    - Time
-    - Date
-    - DateTime
-    - I18n
-    - JsonWebToken
-    - JSON
-    - ActiveStorage
-    - Mime
-    - Search
-    - Array
-    - Hash
-    - Numeric
-    - String
-    - Integer
-    - Float
-    - Comparison
-    - Singleton
-    - Arel
-    - Draft
-    - Resolv
-    - Session
-    - ActiveModel
-    - Translation
-    - Stripe
-    - ApiRequest
-    - Searchkick
-    - ViewComponent
-    - Pagy
-    - Turbo
-    - ActiveModelSerializers
-    - Tenant
-  Exclude:
-    - spec/**/*
-    - db/*
-    - lib/tasks/*
 Naming/InclusiveLanguage:
   Enabled: true
 Style/AsciiComments:

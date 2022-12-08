@@ -6,10 +6,14 @@ require 'sidekiq-scheduler/web'
 Rails.configuration.exceptions_app = Rails.application.routes
 
 Rails.application.routes.prepend do
-  mount Schematics::Engine, at: '/'
-  mount Sidekiq::Web, at: '/sidekiq', constraints: Schematics::AdminConstraint
-  localized do
-    Schematics::Tenant.current.schema.load_routes
-    get 'login', to: 'sessions#new', as: :login
+  mount Sidekiq::Web, at: '/sidekiq'
+  Schematics::Tenant.all.each do |tenant|
+    namespace tenant.subdomain do
+      localized do
+        mount Schematics::Engine, at: '/'
+        tenant.schema.load_routes
+        get 'login', to: 'sessions#new', as: :login
+      end
+    end
   end
 end

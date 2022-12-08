@@ -32,7 +32,7 @@ module Application
         &.transform_values(&:to_i)
 
       def subscription = ::Stripe::Subscription
-        .list(customer: Schematics::Tenant.current.customer_id, status: 'active')
+        .list(customer: Schematics::Tenant.new.customer_id, status: 'active')
         .first
     end
   end

@@ -19,8 +19,8 @@ module Schematics
     end
 
     def config(key)
-      Rails.cache.fetch("configuration/#{key}") do
-        ::Configuration
+      Rails.cache.fetch("#{current_tenant.name}:configuration/#{key}") do
+        current_tenant.mod::Configuration
           .with_attached_company_logo
           .instance
           .public_send(key)

@@ -21,7 +21,7 @@ module Schematics
 
       def to_str = [
         route_definition,
-        resolver
+        # resolver
       ].compact.join
 
       private
