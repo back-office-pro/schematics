@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'singleton'
 require 'active_model'
+require 'singleton'
 
 module Schematics
   # :reek:InstanceVariableAssumption

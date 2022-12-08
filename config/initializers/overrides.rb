@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'rails/generators'
-require 'rails/generators/generated_attribute'
-require 'rails/generators/active_record/migration/migration_generator'
-require 'active_record/migration'
 require 'active_record/connection_adapters/abstract/schema_definitions'
-require 'active_support/dependencies'
+require 'active_record/migration'
 require 'active_storage/service/tenant_s3_service'
-require 'view_component/renders_one_form'
+require 'active_support/dependencies'
 require 'open_api/router'
+require 'rails/generators'
+require 'rails/generators/active_record/migration/migration_generator'
+require 'rails/generators/generated_attribute'
+require 'view_component/renders_one_form'
 
 GeneratedAttribute = Schematics::Patches::Rails::Generators::GeneratedAttribute
 MigrationGenerator = Schematics::Patches::ActiveRecord::Generators::MigrationGenerator
@@ -29,13 +29,13 @@ Rails.configuration.to_prepare do
     .select { Object.const_defined?(_1) }
     .each { Object.const_get(_1).prepend(Application.const_get(_1)) }
 
-  ::ActiveStorage.singleton_class.module_eval do
+  ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false
   end
 end
 
 ActiveSupport.on_load(:active_storage_record) do
-  ::ActiveStorage::Record.class_eval do
+  ActiveStorage::Record.class_eval do
     include Schematics::Loadable
     include Schematics::Translatable
     loadable concerns: [Schematics::SoftDeletable]
@@ -43,7 +43,7 @@ ActiveSupport.on_load(:active_storage_record) do
 end
 
 ActiveSupport.on_load(:active_storage_attachment) do
-  ::ActiveStorage::Attachment.class_eval do
+  ActiveStorage::Attachment.class_eval do
     include Schematics::Elasticsearchable
   end
 end

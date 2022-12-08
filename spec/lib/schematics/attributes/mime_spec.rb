@@ -28,7 +28,7 @@ describe Schematics::Attributes::Mime do
     is_expected.to eq(
       {
         allow_blank: true,
-        format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type }
+        format: { with: Mime::Type::MIME_REGEXP, message: :mime_type }
       }
     )
   end

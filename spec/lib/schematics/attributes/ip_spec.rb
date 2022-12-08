@@ -31,7 +31,7 @@ describe Schematics::Attributes::Ip do
     is_expected.to eq(
       {
         allow_blank: true,
-        format: { with: ::Resolv::AddressRegex, message: :ip_address }
+        format: { with: Resolv::AddressRegex, message: :ip_address }
       }
     )
   end

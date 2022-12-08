@@ -10,11 +10,11 @@ RSpec.describe Schematics::DocumentationAbility do
   let(:user) { User.new(role:) }
   let(:admin_role) { Role.create!(name: 'Admin') }
 
-  it { is_expected.not_to be_able_to(:show, ::Documentation) }
+  it { is_expected.not_to be_able_to(:show, Documentation) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
 
-    it { is_expected.to be_able_to(:show, ::Documentation) }
+    it { is_expected.to be_able_to(:show, Documentation) }
   end
 end

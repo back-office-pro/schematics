@@ -7,9 +7,9 @@ RSpec.shared_context 'with unauthenticated user' do
 
   include_context 'with user'
 
-  let(:json_response) { ::JSON.parse(response.body) }
+  let(:json_response) { JSON.parse(response.body) }
   let(:headers) { { 'Accept' => 'application/json' } }
-  let(:permissions) { ::Permission.create_all_entities_permissions! }
+  let(:permissions) { Permission.create_all_entities_permissions! }
   let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
 
   before do
@@ -22,7 +22,7 @@ RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
   let(:session) { Session.create!(user:) }
-  let(:auth_token) { ::JsonWebToken.encode(auth_token: session.auth_token) }
+  let(:auth_token) { JsonWebToken.encode(auth_token: session.auth_token) }
   let(:headers) do
     {
       'Accept' => 'application/json',
@@ -37,10 +37,10 @@ RSpec.shared_context 'with import' do
   let(:import) { Import.create!(file:, model:, author: user) }
   let(:model) { 'Role' }
   let(:file) do
-    ::ActiveStorage::Blob.create_and_upload!(
+    ActiveStorage::Blob.create_and_upload!(
       io: File.open(file_fixture('roles.csv'), 'rb'),
       filename: 'roles.csv',
-      content_type: ::Mime[:csv].to_s
+      content_type: Mime[:csv].to_s
     ).signed_id
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/string/indent'
 require 'active_support/core_ext/array/access'
+require 'active_support/core_ext/string/indent'
 
 module Schematics
   module Entities

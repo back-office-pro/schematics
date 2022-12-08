@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'rack/test/uploaded_file'
 require 'action_dispatch/http/mime_type'
 require 'base64'
+require 'rack/test/uploaded_file'
 
 module Schematics
   module Specs

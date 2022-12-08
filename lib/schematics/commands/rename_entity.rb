@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails/generators'
-require 'rails/generators/rails/scaffold/scaffold_generator'
-require 'rails/generators/rails/migration/migration_generator'
+require 'generators/permissions/permissions_generator'
 require 'generators/rspec/feature/feature_generator'
 require 'generators/translations/translations_generator'
-require 'generators/permissions/permissions_generator'
+require 'rails/generators'
+require 'rails/generators/rails/migration/migration_generator'
+require 'rails/generators/rails/scaffold/scaffold_generator'
 
 module Schematics
   module Commands

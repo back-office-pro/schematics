@@ -99,6 +99,7 @@ Lint/ConstantResolution:
     - spec/**/*
     - db/*
     - lib/tasks/*
+    - config/initializers/*
 Naming/InclusiveLanguage:
   Enabled: true
 Style/AsciiComments:
@@ -146,6 +147,12 @@ Style/HashEachMethods:
     - attribute
 Style/EndlessMethod:
   EnforcedStyle: allow_always
+Style/RequireOrder:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+    - bin/importmap
+    - Capfile
 Metrics/BlockLength:
   AllowedMethods:
     - describe

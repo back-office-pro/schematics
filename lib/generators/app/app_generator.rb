@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails/generators/rails/app/app_generator'
 require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inquiry'
-require 'redis'
-require 'json'
 require 'fileutils'
+require 'json'
+require 'rails/generators/rails/app/app_generator'
+require 'redis'
 
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
   DEFAULT_PORT = 3000

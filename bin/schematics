@@ -13,11 +13,11 @@ $stdout.reopen("#{log_name}.log", 'w')
 $stdout.sync = true
 $stderr.reopen($stdout)
 
-::OptionParser
+OptionParser
   .new { _1.on('--container') { options[:container] = true } }
   .parse!
 
-::AppGenerator
+AppGenerator
   .new([app_name], **options)
   .invoke_all
 

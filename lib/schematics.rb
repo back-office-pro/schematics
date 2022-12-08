@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'array'
-require 'object'
 require 'json_web_token'
+require 'object'
 require 'zeitwerk'
 require 'schematics/engine' if defined?(Rails)
 

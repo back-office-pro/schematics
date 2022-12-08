@@ -10,23 +10,23 @@ RSpec.describe Schematics::SessionAbility do
   let(:user) { User.new(role:) }
   let(:admin_role) { Role.create!(name: 'Admin') }
 
-  it { is_expected.not_to be_able_to(:create, ::Session) }
-  it { is_expected.not_to be_able_to(:read, ::Session) }
-  it { is_expected.not_to be_able_to(:destroy, ::Session) }
+  it { is_expected.not_to be_able_to(:create, Session) }
+  it { is_expected.not_to be_able_to(:read, Session) }
+  it { is_expected.not_to be_able_to(:destroy, Session) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
 
-    it { is_expected.to be_able_to(:create, ::Session) }
-    it { is_expected.to be_able_to(:read, ::Session) }
-    it { is_expected.to be_able_to(:destroy, ::Session) }
+    it { is_expected.to be_able_to(:create, Session) }
+    it { is_expected.to be_able_to(:read, Session) }
+    it { is_expected.to be_able_to(:destroy, Session) }
   end
 
   context 'when user is guest' do
     let(:user) { Schematics::Guest::User.new }
 
-    it { is_expected.to be_able_to(:create, ::Session) }
-    it { is_expected.not_to be_able_to(:read, ::Session) }
-    it { is_expected.not_to be_able_to(:destroy, ::Session) }
+    it { is_expected.to be_able_to(:create, Session) }
+    it { is_expected.not_to be_able_to(:read, Session) }
+    it { is_expected.not_to be_able_to(:destroy, Session) }
   end
 end

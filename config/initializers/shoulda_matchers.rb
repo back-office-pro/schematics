@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.configuration.to_prepare do
-  require 'shoulda/matchers'
   require 'shoulda/callback/matchers'
+  require 'shoulda/matchers'
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
