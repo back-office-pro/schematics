@@ -1,26 +1,25 @@
 # frozen_string_literal: true
 
-tenant = Schematics::Tenant.new
-
 PaperTrail.request(enabled: false) do
-  include tenant.mod
-  Role.create!(name: 'Admin', permissions: Permission.create_all_entities_permissions!)
-  Role.create!(name: 'Manager', permissions: Permission.features)
-  Configuration.instance.update!(locale: tenant.customer_locale)
-  User.create!(email: tenant.customer_email, role: Role.admin)
-  Stat.create!(agregate: 'count', model: 'User')
-  Stat.create!(
+  tenant = Schematics::Tenant.new
+  mod = tenant.mod
+  mod::Role.create!(name: 'Admin', permissions: mod::Permission.create_all_entities_permissions!)
+  mod::Role.create!(name: 'Manager', permissions: mod::Permission.features)
+  mod::Configuration.instance.update!(locale: tenant.customer_locale)
+  mod::User.create!(email: tenant.customer_email, role: mod::Role.admin)
+  mod::Stat.create!(agregate: 'count', model: 'User')
+  mod::Stat.create!(
     agregate: 'sum',
     model: 'ActiveStorage::Attachment',
     field: 'ActiveStorage::Attachment#byte_size'
   )
-  Chart.create!(
+  mod::Chart.create!(
     kind: 'column',
     agregate: 'count',
     model: 'Meeting',
     x_field: 'Meeting#created_at/month'
   )
-  Chart.create!(
+  mod::Chart.create!(
     kind: 'column',
     agregate: 'count',
     model: 'Task',
