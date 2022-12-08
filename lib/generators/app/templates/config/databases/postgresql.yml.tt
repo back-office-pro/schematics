@@ -6,7 +6,8 @@ default: &default
 development:
   default:
     <<: *default
-    database: foo_development
+    database: default_development
+    migrations_paths: db/migrate
   <%= app_name %>:
     <<: *default
     database: <%= app_name %>_development
