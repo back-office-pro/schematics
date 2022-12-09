@@ -7,8 +7,7 @@ module Schematics
 
       delegate :schema_dataset, to: :context, private: true
       delegate :load_generators, to: 'Rails.application', private: true
-      delegate :tenant, to: '::SchemaDataset', private: true
-      delegate :reset!, to: :tenant, private: true
+      delegate :reset!, to: 'Schematics::Tenant.current', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
                :data,
