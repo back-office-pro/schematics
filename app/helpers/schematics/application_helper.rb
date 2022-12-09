@@ -14,10 +14,6 @@ module Schematics
       )
     end
 
-    def preferences(key, default = nil)
-      current_user.preferences.fetch(key.to_s, default)
-    end
-
     def config(key)
       Rails.cache.fetch("configuration/#{key}") do
         ::Configuration

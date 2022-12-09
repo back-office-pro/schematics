@@ -23,12 +23,6 @@ html lang=I18n.locale dir='ltr'
     = turbo_stream_from current_user
     = render Schematics::Toast::Component.with_collection(flash.to_a)
     = render Schematics::SearchBarModal::Component.new
-    .container-fluid.p-0.h-100
-      .row.g-0.h-100
-        = render Schematics::Sidebar::Component.new
-        .col.content class=('toggled' if preferences(:sidebar_toggled, false))
-          = render Schematics::Navbar::Component.new
-          .container-fluid.overflow-hidden.my-3.px-3
-            = yield
-          = render Schematics::Footer::Component.new
+    = render Schematics::Layout::Component.new do
+      = yield
     = yield :charts_js

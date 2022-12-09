@@ -17,6 +17,12 @@ module Schematics
              :content_security_policy_nonce,
              to: :helpers
 
+    def preferences(key, default = nil)
+      current_user
+        .preferences
+        .fetch(key.to_s, default)
+    end
+
     def to_html = render_in view_context
 
     private
