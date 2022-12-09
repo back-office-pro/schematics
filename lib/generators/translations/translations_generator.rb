@@ -10,7 +10,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.create!(
+        Translation.create!(
           locale:,
           key: "routes.#{entity.name.pluralize}",
           value: translate(entity.name.pluralize, locale:).parameterize(separator: '-')
@@ -24,7 +24,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.destroy_by(locale:, key: "routes.#{entity.name.pluralize}")
+        Translation.destroy_by(locale:, key: "routes.#{entity.name.pluralize}")
       end
     end
   end
@@ -33,7 +33,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      ::Translation
+      Translation
         .where(key: "routes.#{old_name.pluralize}")
         .update_all(key: "routes.#{entity.name.pluralize}") # rubocop:disable Rails/SkipsModelValidations
     end
@@ -44,7 +44,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.create!(
+        Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.gender",
           value: 'male'
@@ -58,7 +58,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.destroy_by(
+        Translation.destroy_by(
           locale:,
           key: "activerecord.models.#{entity.name}.gender"
         )
@@ -70,7 +70,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      ::Translation
+      Translation
         .where(key: "activerecord.models.#{old_name}.gender")
         .update_all(key: "activerecord.models.#{entity.name}.gender") # rubocop:disable Rails/SkipsModelValidations
     end
@@ -81,7 +81,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.create!(
+        Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.one",
           value: translate(entity.name, locale:)
@@ -95,7 +95,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.one")
+        Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.one")
       end
     end
   end
@@ -104,7 +104,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      ::Translation
+      Translation
         .where(key: "activerecord.models.#{old_name}.one")
         .update_all(key: "activerecord.models.#{entity.name}.one") # rubocop:disable Rails/SkipsModelValidations
     end
@@ -115,7 +115,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.create!(
+        Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.other",
           value: translate(entity.name.pluralize, locale:)
@@ -129,7 +129,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        ::Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.other")
+        Translation.destroy_by(locale:, key: "activerecord.models.#{entity.name}.other")
       end
     end
   end
@@ -138,7 +138,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      ::Translation
+      Translation
         .where(key: "activerecord.models.#{old_name}.other")
         .update_all(key: "activerecord.models.#{entity.name}.other") # rubocop:disable Rails/SkipsModelValidations
     end
@@ -150,7 +150,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.fields.each do |field|
-          ::Translation.create!(
+          Translation.create!(
             locale:,
             key: "activerecord.attributes.#{entity.name}.#{field.name}",
             value: translate(field.name, locale:)
@@ -166,7 +166,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.fields.each do |field|
-          ::Translation.destroy_by(
+          Translation.destroy_by(
             locale:,
             key: "activerecord.attributes.#{entity.name}.#{field.name}"
           )
@@ -180,7 +180,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       entity.fields.each do |field|
-        ::Translation
+        Translation
           .where(key: "activerecord.attributes.#{old_name}.#{field.name}")
           .update_all(key: "activerecord.attributes.#{entity.name}.#{field.name}") # rubocop:disable Rails/SkipsModelValidations
       end
@@ -194,7 +194,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
           enum.values.each do |value|
-            ::Translation.create!(
+            Translation.create!(
               locale:,
               key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}",
               value: translate(value, locale:)
@@ -203,7 +203,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
           next unless enum.is_a?(Schematics::Attributes::StateMachine)
 
           enum.events.map(&:name).each do |event|
-            ::Translation.create!(
+            Translation.create!(
               locale:,
               key: "activerecord.events.#{entity.name}.#{event}",
               value: translate(event, locale:)
@@ -221,7 +221,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
           enum.values.each do |value|
-            ::Translation.destroy_by(
+            Translation.destroy_by(
               locale:,
               key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}"
             )
@@ -229,7 +229,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
           next unless enum.is_a?(Schematics::Attributes::StateMachine)
 
           enum.events.map(&:name).each do |event|
-            ::Translation.destroy_by(locale:, key: "activerecord.events.#{entity.name}.#{event}")
+            Translation.destroy_by(locale:, key: "activerecord.events.#{entity.name}.#{event}")
           end
         end
       end
@@ -242,14 +242,14 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       entity.enum_attributes.each do |enum|
         enum.values.each do |value|
-          ::Translation
+          Translation
             .where(key: "activerecord.attributes.#{old_name}.#{enum.name.pluralize}.#{value}")
             .update_all(key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}") # rubocop:disable Rails/SkipsModelValidations, Layout/LineLength
         end
         next unless enum.is_a?(Schematics::Attributes::StateMachine)
 
         enum.events.map(&:name).each do |event|
-          ::Translation
+          Translation
             .where(key: "activerecord.events.#{old_name}.#{event}")
             .update_all(key: "activerecord.events.#{entity.name}.#{event}") # rubocop:disable Rails/SkipsModelValidations
         end
