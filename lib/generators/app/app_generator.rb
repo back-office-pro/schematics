@@ -111,12 +111,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
   end
 
-  def reindex_searchkick
-    return if container?
-
-    rails_command 'searchkick:reindex:all', env:
-  end
-
   def edit_gitignore
     append_to_file '.gitignore', <<~TEXT
       /.env

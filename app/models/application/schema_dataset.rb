@@ -11,7 +11,6 @@ module Application
                :clean_commands,
                :new_entities,
                :old_entities,
-               :entities,
                to: :migration,
                prefix: true
     end

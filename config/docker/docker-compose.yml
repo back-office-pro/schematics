@@ -1,19 +1,5 @@
 version: "3.8"
 services:
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-    container_name: es01
-    environment:
-      - node.name=es01
-      - cluster.initial_master_nodes=es01
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    ports:
-      - 9200:9200
   db:
     image: postgres:latest
     ports:
@@ -31,12 +17,10 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      - elasticsearch
       - db
       - redis
     environment:
       - REDIS_URL=redis://redis:6379
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
     volumes:
       - .:/app
 volumes:

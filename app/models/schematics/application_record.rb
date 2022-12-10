@@ -8,7 +8,7 @@ module Schematics
     include Translatable
     include Attachable
     loadable concerns: [
-      Elasticsearchable,
+      Ransackable,
       SoftDeletable,
       Trackable,
       Sluggable
