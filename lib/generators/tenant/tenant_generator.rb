@@ -68,16 +68,6 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command 'searchkick:reindex:all', env:
   end
 
-  def run_brakeman
-    run 'brakeman --no-pager --no-exit-on-error'
-  end
-
-  def run_database_checks
-    return if container?
-
-    rails_command 'schematics:db:active_record_doctor', env:
-  end
-
   private
 
   def db_password = options[:db_password]
