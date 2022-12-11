@@ -22,6 +22,9 @@ describe Schematics::Attributes::Email do
   its(:icon) { is_expected.to eq(:envelope) }
   its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }
   its(:validators) { is_expected.to eq(email: { allow_blank: true }) }
+  its(:search_column) { is_expected.to eq(:email) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:email_i_cont) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
@@ -36,12 +39,6 @@ describe Schematics::Attributes::Email do
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :email, {:email=>{:allow_blank=>true}}
-    RUBY
-  end
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      email: email&.to_s
     RUBY
   end
 

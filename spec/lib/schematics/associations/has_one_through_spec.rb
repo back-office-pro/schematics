@@ -57,13 +57,10 @@ describe Schematics::Associations::HasOneThrough do
   its(:class_name) { is_expected.to eq('Schema') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:weight) { is_expected.to eq(3) }
+  its(:search_column) { is_expected.to eq(:schema_title) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:schema_title_i_cont) }
   its('descriptor.name') { is_expected.to eq('title') }
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      schema: schema&.to_s
-    RUBY
-  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

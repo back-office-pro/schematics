@@ -50,13 +50,10 @@ describe Schematics::Associations::HasOne do
   its(:class_name) { is_expected.to eq('Entity') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:weight) { is_expected.to eq(3) }
+  its(:search_column) { is_expected.to eq(:entity_type) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:entity_type_i_cont) }
   its('descriptor.name') { is_expected.to eq('type') }
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      entity: entity&.to_s
-    RUBY
-  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

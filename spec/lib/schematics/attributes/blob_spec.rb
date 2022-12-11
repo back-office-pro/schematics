@@ -8,11 +8,8 @@ describe Schematics::Attributes::Blob do
   let(:options) { {} }
 
   its(:preload) { is_expected.to eq(blob: :variant_records) }
+  its(:search_column) { is_expected.to eq(:blob_blob_filename) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:blob_blob_filename_i_cont) }
   its(:to_str) { is_expected.to be_blank }
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      blob: blob&.filename&.to_s
-    RUBY
-  end
 end

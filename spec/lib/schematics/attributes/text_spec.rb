@@ -25,13 +25,10 @@ describe Schematics::Attributes::Text do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:font) }
   its(:default) { is_expected.to be_a(String) }
+  its(:search_column) { is_expected.to eq(:content) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      content: content&.to_s
-    RUBY
-  end
 
   context 'when hidden' do
     let(:options) { { hidden: true } }

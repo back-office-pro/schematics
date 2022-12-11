@@ -23,15 +23,12 @@ describe Schematics::Attributes::Citext do
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
+  its(:search_column) { is_expected.to eq(:last_name) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:last_name_i_cont) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      last_name: last_name&.to_s
-    RUBY
-  end
 
   context 'when attribute is unique' do
     let(:options) { { unique: true } }

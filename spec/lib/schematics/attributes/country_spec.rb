@@ -30,16 +30,13 @@ describe Schematics::Attributes::Country do
   its(:to_sql) { is_expected.to eq('users.country') }
   its(:to_s) { is_expected.to eq('schema:user_country') }
   its(:collection) { is_expected.to eq([['', ''], %w[France FR]]) }
+  its(:search_column) { is_expected.to eq(:country) }
+  its(:search_predicate) { is_expected.to eq(:in) }
+  its(:search_query) { is_expected.to eq(:country_in) }
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :country, {:inclusion=>{:in=>["FR"]}, :allow_blank=>true}
-    RUBY
-  end
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      country: country&.to_s
     RUBY
   end
 

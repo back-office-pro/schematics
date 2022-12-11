@@ -21,6 +21,9 @@ describe Schematics::Attributes::Boolean do
   its(:open_api_type) { is_expected.to eq('boolean') }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
+  its(:search_column) { is_expected.to eq(:toggle) }
+  its(:search_predicate) { is_expected.to eq(:eq) }
+  its(:search_query) { is_expected.to eq(:toggle_eq) }
 
   context 'when there is a default value' do
     let(:options) { { default: true } }

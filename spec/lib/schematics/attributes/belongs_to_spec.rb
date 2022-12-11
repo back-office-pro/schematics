@@ -56,6 +56,9 @@ describe Schematics::Attributes::BelongsTo do
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
+  its(:search_column) { is_expected.to eq(:schema_title) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:schema_title_i_cont) }
 
   its(:available_options) do
     is_expected.to include(
@@ -63,12 +66,6 @@ describe Schematics::Attributes::BelongsTo do
       Schematics::Options::Type,
       Schematics::Options::Polymorphic
     )
-  end
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      schema: schema&.to_s
-    RUBY
   end
 
   its(:to_str) do

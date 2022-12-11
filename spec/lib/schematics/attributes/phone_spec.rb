@@ -22,6 +22,9 @@ describe Schematics::Attributes::Phone do
   its(:icon) { is_expected.to eq(:phone) }
   its(:default) { is_expected.to match(/\d+/) }
   its(:validators) { is_expected.to eq(phone: { allow_blank: true }) }
+  its(:search_column) { is_expected.to eq(:phone) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:phone_i_cont) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.phone') }
   its(:to_s) { is_expected.to eq('schema:user_phone') }
@@ -36,12 +39,6 @@ describe Schematics::Attributes::Phone do
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :phone, {:phone=>{:allow_blank=>true}}
-    RUBY
-  end
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      phone: phone&.to_s
     RUBY
   end
 
