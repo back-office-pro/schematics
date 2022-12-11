@@ -49,7 +49,6 @@ module Schematics
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
           record
           role
-          model_class.reindex
           login
         end
 
