@@ -34,18 +34,21 @@ describe Schematics::Virtuals::Comparison do
     SQL
   end
 
+  its(:search_alias) do
+    is_expected.to eq <<~RUBY
+      ransacker :big_price do
+        Arel.sql("products.price >= 100 AND categories.vat = 10")
+      end
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       define_attribute_method :big_price
-
       def big_price
         (self.category.vat == 10) && (self.created_at == nil || Time.current < self.created_at)
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
-      end
-
-      ransacker :big_price do
-        Arel.sql("products.price >= 100 AND categories.vat = 10")
       end
     RUBY
   end

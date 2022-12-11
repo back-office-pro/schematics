@@ -8,6 +8,10 @@ module Schematics
       def search_predicate = :i_cont
 
       def search_query = :"#{search_column}_#{search_predicate}"
+
+      def search_alias = <<~RUBY
+        ransack_alias :#{name}, :#{search_column}
+      RUBY
     end
   end
 end

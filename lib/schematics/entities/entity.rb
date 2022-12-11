@@ -257,9 +257,13 @@ module Schematics
         .to_a
         .concat(attachments_attributes)
 
+      def search_aliases
+        searchable_elements.map(&:search_alias)
+      end
+
       protected
 
-      def model_elements = [self, descriptor].concat(triggers, elements, validators)
+      def model_elements = [self, descriptor].concat(triggers, elements, validators, search_aliases)
 
       def id_attribute = Attributes::Uuid.new(entity: self, name: 'id')
 

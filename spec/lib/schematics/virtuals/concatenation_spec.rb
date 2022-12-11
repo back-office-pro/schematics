@@ -30,18 +30,21 @@ describe Schematics::Virtuals::Concatenation do
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:weight) { is_expected.to eq(1) }
 
+  its(:search_alias) do
+    is_expected.to eq <<~RUBY
+      ransacker :full_name do
+        Arel.sql("CONCAT(users.first_name, ' ', profiles.last_name)")
+      end
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       define_attribute_method :full_name
-
       def full_name
         "\#{first_name_formatted} \#{profile.last_name_formatted}"
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
-      end
-
-      ransacker :full_name do
-        Arel.sql("CONCAT(users.first_name, ' ', profiles.last_name)")
       end
     RUBY
   end
