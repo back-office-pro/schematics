@@ -44,7 +44,7 @@ Dependencies choices details.
 
 :+1: Rspec is the most popular testing framework
 
-~~minitest + fixtures ~~
+~~minitest + fixtures~~
 
 :-1: Fixtures files are hardcoded
 
