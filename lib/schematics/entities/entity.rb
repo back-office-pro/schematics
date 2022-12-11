@@ -14,10 +14,10 @@ module Schematics
 
       validates :attributes, presence: true
       validates :actions, inclusion: { in: :default_actions }
+      validates :name, english: true, unless: :core?
       validates :name,
                 presence: true,
                 singular: true,
-                english: true,
                 format: { with: %r{\A([\w/]+)\z}, message: :name },
                 length: { maximum: 50 },
                 exclusion: { in: :reserved_names }
@@ -35,6 +35,10 @@ module Schematics
         def build(type: 'entity', **kwargs)
           Entities.const_get(type.camelize.to_sym).new(**kwargs)
         end
+      end
+
+      def foo?
+        false
       end
 
       def attributes=(attributes)

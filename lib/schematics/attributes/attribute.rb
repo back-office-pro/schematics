@@ -14,13 +14,14 @@ module Schematics
       include ::ActiveModel::API
 
       delegate :hidden?, :cached?, to: :options
+      delegate :core?, to: :entity, private: true
       delegate :keys, to: :options, prefix: true, private: true
       attr_accessor :entity, :name
       attr_writer :id, :options
 
       validates :options_keys, inclusion: { in: :available_options_names }
+      validates :name, english: true, unless: :core?
       validates :name,
-                english: true,
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
