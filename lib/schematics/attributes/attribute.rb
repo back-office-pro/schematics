@@ -20,6 +20,7 @@ module Schematics
 
       validates :options_keys, inclusion: { in: :available_options_names }
       validates :name,
+                english: true,
                 presence: true,
                 format: { with: /\A(\w+)\z/, message: :name },
                 length: { maximum: 50 },
