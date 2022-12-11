@@ -2,7 +2,6 @@
 
 class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Metrics/ClassLength
   delegate :available_locales, to: 'Schematics::Engine.config.i18n'
-  delegate :credentials, to: 'Schematics::Engine'
   class_option :rename, type: :string
 
   def generate_route_translations
@@ -281,7 +280,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
   # :reek:FeatureEnvy
   def translate(text, locale:)
-    EasyTranslate.translate(text.humanize, to: locale, key: credentials.gcloud[:api_key])
+    EasyTranslate.translate(text.humanize, to: locale)
   rescue EasyTranslate::EasyTranslateException
     text.humanize
   end
