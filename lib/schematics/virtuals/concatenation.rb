@@ -11,12 +11,6 @@ module Schematics
         ::Arel.sql("CONCAT(#{super.join(', ')})")
       end
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_s
-        RUBY
-
       protected
 
       def method_body = tokens

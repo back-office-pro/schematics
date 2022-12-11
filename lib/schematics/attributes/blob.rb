@@ -5,9 +5,7 @@ module Schematics
     class Blob < Attachment
       def preload = { blob: :variant_records }
 
-      def search_data = <<~RUBY
-        #{name}: #{name}&.filename&.to_s
-      RUBY
+      def search_column = :"#{name}_blob_filename"
 
       def format(value)
         Rails.application.routes.url_helpers.url_for(value)
