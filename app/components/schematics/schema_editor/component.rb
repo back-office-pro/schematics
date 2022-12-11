@@ -4,7 +4,7 @@ module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
       DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
-      delegate :persisted?, to: :resource
+      delegate :new_record?, to: :resource
       option :resource
 
       def attribute_constants_collection
@@ -21,13 +21,13 @@ module Schematics
         .sort_by(&:name)
 
       def url
-        return schema_datasets_path unless persisted?
+        return schema_datasets_path if new_record?
 
         schema_dataset_path(resource)
       end
 
       def form_method
-        return :post unless persisted?
+        return :post if new_record?
 
         :patch
       end
