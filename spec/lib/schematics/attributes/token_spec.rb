@@ -11,9 +11,11 @@ describe Schematics::Attributes::Token do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_encrypted }
 
   its(:database_type) { is_expected.to eq('token') }
   its(:column_name) { is_expected.to eq('auth_token') }
@@ -24,7 +26,8 @@ describe Schematics::Attributes::Token do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_secure_token :auth_token
+      encrypts :auth_token, deterministic: true
+      has_secure_token :auth_token, length: 32
     RUBY
   end
 end
