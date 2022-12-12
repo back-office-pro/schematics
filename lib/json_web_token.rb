@@ -12,11 +12,11 @@ class JsonWebToken
       JWT.encode(payload, secret_key_base)
     end
 
-    def decode(token, *_args)
+    def decode(token, *)
       body, * = JWT.decode(token, secret_key_base)
       ActiveSupport::HashWithIndifferentAccess.new(body)
     rescue JWT::DecodeError
-      nil
+      {}
     end
   end
 end
