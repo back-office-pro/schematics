@@ -23,7 +23,6 @@ describe Schematics::Attributes::Token do
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:key) }
-  it { is_expected.to be_encrypted }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
