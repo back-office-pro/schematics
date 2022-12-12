@@ -29,7 +29,7 @@ module Schematics
           klass(**kwargs).new(**kwargs)
         end
 
-        def klass(entity:, function:, **_kwargs)
+        def klass(entity:, function:, **)
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
 
           return Malformed   if tokens.any?(Tokens::Assignment)
