@@ -15,7 +15,6 @@ describe Schematics::Attributes::RichText do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:database_type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
@@ -26,11 +25,10 @@ describe Schematics::Attributes::RichText do
   its(:search_column) { is_expected.to eq(:rich_text_summary_body) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:rich_text_summary_body_i_cont) }
-  it { is_expected.to be_encrypted }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_rich_text :summary, encrypted: true
+      has_rich_text :summary
     RUBY
   end
 end

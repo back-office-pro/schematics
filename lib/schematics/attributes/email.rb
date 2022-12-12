@@ -5,8 +5,6 @@ module Schematics
     class Email < Citext
       def default = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
 
-      def encrypted? = true
-
       def icon = :envelope
 
       def validators = super.merge(

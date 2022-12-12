@@ -5,8 +5,6 @@ module Schematics
     class Url < Citext
       def default = "https://www.#{SecureRandom.base58}.com"
 
-      def encrypted? = true
-
       def icon = :wifi
 
       def validators = super.merge(

@@ -8,8 +8,6 @@ module Schematics
         .new(10) { rand(10) }
         .join
 
-      def encrypted? = true
-
       def format(value)
         value && number_to_phone(value)
       end

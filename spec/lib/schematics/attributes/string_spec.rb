@@ -32,7 +32,6 @@ describe Schematics::Attributes::String do
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to include(
       Schematics::Options::Unique,
-      Schematics::Options::Encrypted,
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length
