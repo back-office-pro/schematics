@@ -26,7 +26,7 @@ module Schematics
         :"#{super}_confirmation"
       ]
 
-      def to_str = <<~RUBY
+      def to_str = super + <<~RUBY
         has_secure_password :#{name}, validations: false
       RUBY
 
