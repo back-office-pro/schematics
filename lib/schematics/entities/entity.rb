@@ -37,10 +37,6 @@ module Schematics
         end
       end
 
-      def foo?
-        false
-      end
-
       def attributes=(attributes)
         @attributes = attributes.map { Attributes::Attribute.build(entity: self, **_1) }
       end
