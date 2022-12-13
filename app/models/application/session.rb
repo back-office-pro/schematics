@@ -11,6 +11,7 @@ module Application
       scope :authorized_by, AuthorizedByQuery
       scope :with_user_permissions, -> { preload(user: { role: :permissions }) }
       scope :with_user_drafts, -> { preload(user: :drafts) }
+      scope :with_user_slugs, -> { preload(user: :slugs) }
       scope :with_user_avatar, lambda {
         preload(user: { avatar_attachment: { blob: :variant_records } })
       }

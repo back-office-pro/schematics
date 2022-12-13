@@ -5,7 +5,7 @@ module Application
     class AuthorizedByQuery < Schematics::ApplicationQuery
       def call(auth_token, id)
         preload(:slugs)
-          .preload(user: :slugs)
+          .with_user_slugs
           .with_user_avatar
           .with_user_permissions
           .with_user_drafts
