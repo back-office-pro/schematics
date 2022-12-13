@@ -5,10 +5,10 @@ module Application
     class AuthorizedByQuery < Schematics::ApplicationQuery
       def call(auth_token, id)
         preload(:slugs)
-          .with_user_slugs
           .with_user_avatar
           .with_user_permissions
           .with_user_drafts
+          .with_user_slugs
           .where(auth_token:)
           .or(active.where(id:))
           .load_async
