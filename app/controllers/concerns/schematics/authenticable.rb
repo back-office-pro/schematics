@@ -12,7 +12,7 @@ module Schematics
 
     private
 
-    def auth_token = http_token || cookies.permanent.encrypted[:auth_token]
+    def auth_token = http_token&.dig(:auth_token) || cookies.permanent.encrypted[:auth_token]
 
     def authenticate_user!
       return unless current_session.is_a?(Guest::Session)
