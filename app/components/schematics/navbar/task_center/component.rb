@@ -32,7 +32,7 @@ module Schematics
           @tasks ||= current_user
                      .tasks
                      .pending
-                     .with_applicant
+                     .preload(:applicant)
                      .order(created_at: :desc)
                      .limit(TASKS_LIMIT)
         end
