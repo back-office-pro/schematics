@@ -29,27 +29,27 @@ describe Schematics::Tokens::Tokenizer do
     end
 
     context 'when function is a comparison' do
-      let(:function) { '$price >= 100 && $vat != 20' }
+      let(:function) { '$price >= 100 && NOW() > $created_at' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
-      its([4]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to be_a(Schematics::Tokens::Function) }
       its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
-      its([6]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([6]) { is_expected.to be_a(Schematics::Tokens::Variable) }
     end
 
     context 'when function is a not spaced comparison' do
-      let(:function) { '$price>=100&&$vat!=20' }
+      let(:function) { '$price>=100&&NOW()>$created_at' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
-      its([4]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to be_a(Schematics::Tokens::Function) }
       its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
-      its([6]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([6]) { is_expected.to be_a(Schematics::Tokens::Variable) }
     end
 
     context 'when function is an assignment' do

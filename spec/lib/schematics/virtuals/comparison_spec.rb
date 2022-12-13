@@ -15,7 +15,7 @@ describe Schematics::Virtuals::Comparison do
     )
   end
   let(:name) { 'big_price' }
-  let(:function) { '$price >= 100 && $category.vat == 10' }
+  let(:function) { '$category.vat == 10 && NOW() > $created_at' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -24,7 +24,7 @@ describe Schematics::Virtuals::Comparison do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   its(:open_api_type) { is_expected.to eq('boolean') }
-  its(:to_sql) { is_expected.to eq('products.price >= 100 AND categories.vat = 10') }
+  its(:to_sql) { is_expected.to eq('categories.vat = 10 AND NOW() > products.created_at') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:weight) { is_expected.to eq(1) }
@@ -33,7 +33,7 @@ describe Schematics::Virtuals::Comparison do
     is_expected.to eq <<~RUBY
       define_attribute_method :big_price
       def big_price
-        self.price >= 100 && self.category.vat == 10
+        self.category.vat == 10 && Time.current > self.created_at
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end

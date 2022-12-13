@@ -8,6 +8,7 @@ module Schematics
         (\s+(?:\*\*|\+|-|\*|/|%|\||&)\s+) | # operator
         (\s*(?:<=|>=|<|>|!=|==)\s*)       | # comparator
         (\s*(?:\+=|-=|\*=|=)\s*)          | # assignment
+        (\w+\(\))                         | # function
         (\(|\))                           | # parenthesis
         \$(\w+\.?\w+\?{0,1})              | # variable
         ([a-zA-Z_-]+)                     | # string

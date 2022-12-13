@@ -7,11 +7,12 @@ module Schematics
 
       class << self
         # :reek:LongParameterList
-        def build((combinator, operator, comparator, assignment, parenthesis, variable, string, number, *whitespace), table_name) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Layout/LineLength
+        def build((combinator, operator, comparator, assignment, function, parenthesis, variable, string, number, *whitespace), table_name) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Layout/LineLength
           return Combinator.new(combinator) if combinator
           return Operator.new(operator) if operator
           return Comparator.new(comparator) if comparator
           return Assignment.new(assignment) if assignment
+          return Function.new(function) if function
           return Parenthesis.new(parenthesis) if parenthesis
           return Variable.new(variable, table_name) if variable
           return String.new(string) if string
