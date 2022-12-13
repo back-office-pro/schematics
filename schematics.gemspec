@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '~> 1.15.1'
   spec.add_development_dependency 'rubocop-rails', '~> 2.17.3'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
-  spec.add_development_dependency 'rubocop-rspec', '~> 2.15.0'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.16.0'
   spec.add_development_dependency 'rubocop-thread_safety', '~> 0.4.4'
   spec.add_development_dependency 'rubycritic', '~> 4.7.0'
   spec.add_development_dependency 'scss_lint', '~> 0.59.0'
@@ -115,6 +115,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terser', '~> 1.1.13'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 2.78.0'
+  spec.add_dependency 'view_component', '~> 2.79.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
