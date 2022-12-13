@@ -662,23 +662,12 @@
           "required": true
         }
       }
-    ],
-    "virtuals": [
-      {
-        "name": "active",
-        "function": "$active? == true"
-      },
-      {
-        "name": "safe",
-        "function": "$safe? == true"
-      }
     ]
   },
   {
     "name": "schema_dataset",
     "options": {
       "icon": "diagram_project",
-      "descriptor": "version",
       "actions": [
         "index",
         "show",
@@ -716,15 +705,6 @@
               "to": "in_progress"
             }
           ]
-        }
-      }
-    ],
-    "virtuals": [
-      {
-        "name": "version",
-        "function": "$version + 1",
-        "options": {
-          "precision": 0
         }
       }
     ]
@@ -849,7 +829,10 @@
     "virtuals": [
       {
         "name": "late",
-        "function": "$late? == true"
+        "function": "NOW() > $deadline",
+        "options" : {
+          "default": false
+        }
       }
     ]
   },
@@ -983,7 +966,10 @@
     "virtuals": [
       {
         "name": "active",
-        "function": "$active? == true"
+        "function": "NOW() < $expires_at",
+        "options" : {
+          "default": true
+        }
       }
     ]
   },
