@@ -31,7 +31,7 @@ RSpec.describe Schematics::GenerateCsvJob do
         .with(an_instance_of(ActiveStorage::Blob))
     end
 
-    xit 'broadcasts to user' do # TODO: enable when supported
+    it 'broadcasts to user', skip: 'not supported' do
       expect { perform_now }
         .to have_broadcasted_to(user)
         .from_channel(Turbo::StreamsChannel)
