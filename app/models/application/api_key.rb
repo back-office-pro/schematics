@@ -6,6 +6,7 @@ module Application
 
     prepended do
       scope :active, ActiveQuery
+      scope :with_permissions, -> { preload(:permissions) }
     end
 
     def active?
