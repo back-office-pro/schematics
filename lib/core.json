@@ -829,10 +829,7 @@
     "virtuals": [
       {
         "name": "late",
-        "function": "NOW() > $deadline",
-        "options" : {
-          "default": false
-        }
+        "function": "NOW() > $deadline"
       }
     ]
   },
@@ -968,7 +965,7 @@
         "name": "active",
         "function": "NOW() < $expires_at",
         "options" : {
-          "default": true
+          "logical": true
         }
       }
     ]

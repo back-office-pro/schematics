@@ -25,6 +25,7 @@ fr:
         less_than: Inférieur à
         less_than_or_equal_to: Inférieur ou égal à
         limit: Limite
+        logical: Vrai par défaut
         max: Maximum
         min: Minimum
         other_than: Autre que

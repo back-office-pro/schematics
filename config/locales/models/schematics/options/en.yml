@@ -25,6 +25,7 @@ en:
         less_than: Less than
         less_than_or_equal_to: Less than or equal to
         limit: Limit
+        logical: True by default
         max: Max
         min: Min
         other_than: Other than

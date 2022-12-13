@@ -24,10 +24,13 @@ describe Schematics::Virtuals::Comparison do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   its(:open_api_type) { is_expected.to eq('boolean') }
-  its(:to_sql) { is_expected.to eq('categories.vat = 10 AND NOW() > products.created_at') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:weight) { is_expected.to eq(1) }
+
+  its(:to_sql) do
+    is_expected.to eq('COALESCE((categories.vat = 10 AND NOW() > products.created_at), FALSE)')
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

@@ -3,10 +3,10 @@
 module Schematics
   module Virtuals
     class Comparison < Virtual
-      delegate :default, to: :options
+      delegate :logical?, to: :options
 
       def available_options = [
-        Options::Default
+        Options::Logical
       ]
 
       # :reek:NilCheck
@@ -23,17 +23,8 @@ module Schematics
 
       def open_api_type = 'boolean'
 
-      def default = case options.default
-                    when true
-                      'TRUE'
-                    when false
-                      'FALSE'
-                    else
-                      'NULL'
-                    end
-
       def to_sql
-        ::Arel.sql("COALESCE(#{super.join}, #{default})")
+        ::Arel.sql("COALESCE((#{super.join}), #{logical?.to_s.upcase})")
       end
     end
   end
