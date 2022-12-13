@@ -2,6 +2,7 @@
 fr:
   combinator: Combinateur
   comparator: Comparateur
+  function: Fonction
   operator: Opérateur
   parenthesis: Parenthèse
   variable: Variable
