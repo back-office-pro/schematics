@@ -9,12 +9,6 @@ module Application
       scope :with_permissions, -> { preload(:permissions) }
     end
 
-    def active?
-      return true unless expires_at
-
-      ::Time.current.before?(expires_at)
-    end
-
     def login!(*) = self
 
     def touch!(request)
