@@ -8,15 +8,17 @@ class JsonWebToken
   class << self
     delegate :secret_key_base, to: 'Rails.application.secrets', private: true
 
-    def encode(payload)
-      JWT.encode(payload, secret_key_base)
+    def encode(auth_token:, exp: 24.hours.from_now.to_i)
+      JWT.encode({ auth_token:, exp: }, secret_key_base)
     end
 
     def decode(token, *)
-      body, * = JWT.decode(token, secret_key_base)
-      ActiveSupport::HashWithIndifferentAccess.new(body)
+      JWT
+        .decode(token, secret_key_base)
+        .first
+        .fetch('auth_token')
     rescue JWT::DecodeError
-      {}
+      token
     end
   end
 end

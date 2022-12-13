@@ -21,16 +21,11 @@ module Application
 
         session = current_session.login!(user)
         context.current_session_id = session.id
-        context.jwt = ::JsonWebToken.encode(auth_token: session.auth_token, exp:)
+        context.jwt = ::JsonWebToken.encode(auth_token: session.auth_token)
         cookies.permanent.encrypted[:auth_token] = session.auth_token if remember_me?
       end
 
       private
-
-      def exp = 24
-        .hours
-        .from_now
-        .to_i
 
       def fail!(message: '.failure')
         return super if cannot?(:impersonate, user)

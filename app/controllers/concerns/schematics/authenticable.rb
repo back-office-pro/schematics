@@ -12,13 +12,7 @@ module Schematics
 
     private
 
-    def auth_token = authenticate_with_http_token do |token|
-      ::JsonWebToken.decode(token)[:auth_token] || auth_token_cookie || token
-    end
-
-    def auth_token_cookie = cookies
-      .permanent
-      .encrypted[:auth_token]
+    def auth_token = http_token || cookies.permanent.encrypted[:auth_token]
 
     def authenticate_user!
       return unless current_session.is_a?(Guest::Session)
@@ -46,6 +40,8 @@ module Schematics
     def current_user
       @current_user ||= current_session.user
     end
+
+    def http_token = authenticate_with_http_token(&::JsonWebToken.method(:decode))
 
     def store_location
       return unless request.get? || request.head?
