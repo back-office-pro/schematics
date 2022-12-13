@@ -17,10 +17,6 @@ module Application
       }
     end
 
-    def active? = ACTIVE_DELAY
-      .ago
-      .before?(updated_at)
-
     def login!(user)
       case user
       when self.user
@@ -29,12 +25,6 @@ module Application
         self.class.create!(ip:, user_agent:, user:) # impersonate case
       end
     end
-
-    def safe? = user
-      .sessions
-      .where
-      .not(id:)
-      .exists?(ip:, user_agent:)
 
     def touch!(request)
       return if request.format.json?
