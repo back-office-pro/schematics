@@ -3,10 +3,19 @@
 describe Schematics::Tokens::Function do
   subject(:token) { described_class.new(value) }
 
-  context 'when function is now' do
-    let(:value) { 'NOW()' }
+  context 'when function is CURRENT_TIMESTAMP()' do
+    let(:value) { 'CURRENT_TIMESTAMP()' }
 
-    its(:to_sql) { is_expected.to eq('NOW()') }
+    its(:to_sql) { is_expected.to eq('CURRENT_TIMESTAMP()') }
+    its(:to_str) { is_expected.to eq('#{Time.current}') } # rubocop:disable Lint/InterpolationCheck
     its(:value) { is_expected.to eq('Time.current') }
+  end
+
+  context 'when function is CURRENT_DATE()' do
+    let(:value) { 'CURRENT_DATE()' }
+
+    its(:to_sql) { is_expected.to eq('CURRENT_DATE()') }
+    its(:to_str) { is_expected.to eq('#{Date.current}') } # rubocop:disable Lint/InterpolationCheck
+    its(:value) { is_expected.to eq('Date.current') }
   end
 end

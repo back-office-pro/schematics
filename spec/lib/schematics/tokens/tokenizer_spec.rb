@@ -29,7 +29,7 @@ describe Schematics::Tokens::Tokenizer do
     end
 
     context 'when function is a comparison' do
-      let(:function) { '$price >= 100 && NOW() > $created_at' }
+      let(:function) { '$price >= 100 && CURRENT_TIMESTAMP() > $created_at' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
@@ -41,7 +41,7 @@ describe Schematics::Tokens::Tokenizer do
     end
 
     context 'when function is a not spaced comparison' do
-      let(:function) { '$price>=100&&NOW()>$created_at' }
+      let(:function) { '$price>=100&&CURRENT_TIMESTAMP()>$created_at' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }

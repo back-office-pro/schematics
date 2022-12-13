@@ -15,7 +15,7 @@ describe Schematics::Virtuals::Comparison do
     )
   end
   let(:name) { 'big_price' }
-  let(:function) { '$category.vat == 10 && NOW() > $created_at' }
+  let(:function) { '$category.vat == 10 && CURRENT_TIMESTAMP() > $created_at' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -29,7 +29,9 @@ describe Schematics::Virtuals::Comparison do
   its(:weight) { is_expected.to eq(1) }
 
   its(:to_sql) do
-    is_expected.to eq('COALESCE((categories.vat = 10 AND NOW() > products.created_at), FALSE)')
+    is_expected.to eq <<~SQL.squish.chomp
+      COALESCE((categories.vat = 10 AND CURRENT_TIMESTAMP() > products.created_at), FALSE)
+    SQL
   end
 
   its(:to_str) do
