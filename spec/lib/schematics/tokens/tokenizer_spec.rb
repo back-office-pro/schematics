@@ -29,27 +29,35 @@ describe Schematics::Tokens::Tokenizer do
     end
 
     context 'when function is a comparison' do
-      let(:function) { '$price >= 100 && CURRENT_TIMESTAMP() > $created_at' }
+      let(:function) { '$price >= 100 && (CURRENT_TIMESTAMP() > $created_at) || true' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
-      its([4]) { is_expected.to be_a(Schematics::Tokens::Function) }
-      its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
-      its([6]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
+      its([5]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([6]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([7]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([8]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
+      its([9]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([10]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
 
     context 'when function is a not spaced comparison' do
-      let(:function) { '$price>=100&&CURRENT_TIMESTAMP()>$created_at' }
+      let(:function) { '$price>=100&&(CURRENT_TIMESTAMP()>$created_at)||true' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
-      its([4]) { is_expected.to be_a(Schematics::Tokens::Function) }
-      its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
-      its([6]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
+      its([5]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([6]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([7]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([8]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
+      its([9]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([10]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
 
     context 'when function is an assignment' do
