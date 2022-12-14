@@ -29,7 +29,7 @@ describe Schematics::Virtuals::Comparison do
   its(:weight) { is_expected.to eq(1) }
 
   its(:to_sql) do
-    is_expected.to eq <<~SQL.squish.chomp
+    is_expected.to eq <<~SQL.squish
       (categories.vat = 10) AND (CURRENT_TIMESTAMP() > products.created_at OR TRUE)
     SQL
   end
