@@ -6,16 +6,16 @@ describe Schematics::Tokens::Function do
   context 'when function is CURRENT_TIMESTAMP()' do
     let(:value) { 'CURRENT_TIMESTAMP()' }
 
+    its(:value) { is_expected.to eq('Time.current') }
     its(:to_sql) { is_expected.to eq('CURRENT_TIMESTAMP()') }
     its(:to_str) { is_expected.to eq('#{Time.current}') } # rubocop:disable Lint/InterpolationCheck
-    its(:value) { is_expected.to eq('Time.current') }
   end
 
   context 'when function is CURRENT_DATE()' do
     let(:value) { 'CURRENT_DATE()' }
 
+    its(:value) { is_expected.to eq('Date.current') }
     its(:to_sql) { is_expected.to eq('CURRENT_DATE()') }
     its(:to_str) { is_expected.to eq('#{Date.current}') } # rubocop:disable Lint/InterpolationCheck
-    its(:value) { is_expected.to eq('Date.current') }
   end
 end
