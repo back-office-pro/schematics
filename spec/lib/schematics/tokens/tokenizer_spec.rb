@@ -57,7 +57,7 @@ describe Schematics::Tokens::Tokenizer do
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
-      its([2]) { is_expected.to be_a(Schematics::Tokens::String) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
 
     context 'when function is a not spaced assignment' do
@@ -65,7 +65,7 @@ describe Schematics::Tokens::Tokenizer do
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
-      its([2]) { is_expected.to be_a(Schematics::Tokens::String) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
   end
 end

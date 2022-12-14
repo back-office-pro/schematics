@@ -11,6 +11,7 @@ module Schematics
         (\w+\(\))                         | # function
         (\(|\))                           | # parenthesis
         \$(\w+\.?\w+\?{0,1})              | # variable
+        (true|false)                      | # boolean
         ([a-zA-Z_-]+)                     | # string
         (\d*\.?\d+)                       | # number
         (\s+)                               # whitespace
