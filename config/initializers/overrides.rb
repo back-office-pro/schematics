@@ -23,6 +23,8 @@ ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
 
+ActiveSupport::TimeWithZone.prepend(Schematics::Patches::ActiveSupport::TimeWithZone)
+
 Rails.configuration.to_prepare do
   Application
     .constants
