@@ -963,10 +963,7 @@
     "virtuals": [
       {
         "name": "active",
-        "function": "CURRENT_TIMESTAMP() < $expires_at",
-        "options" : {
-          "logical": true
-        }
+        "function": "CURRENT_TIMESTAMP() < $expires_at || true",
       }
     ]
   },
