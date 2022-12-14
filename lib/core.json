@@ -829,7 +829,7 @@
     "virtuals": [
       {
         "name": "late",
-        "function": "CURRENT_TIMESTAMP() > $deadline"
+        "function": "CURRENT_TIMESTAMP() > $deadline || false"
       }
     ]
   },
