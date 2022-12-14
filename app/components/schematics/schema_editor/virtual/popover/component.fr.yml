@@ -1,8 +1,8 @@
 ---
 fr:
-  combinator: Combinateur
-  comparator: Comparateur
-  function: Fonction
-  operator: Opérateur
-  parenthesis: Parenthèse
-  variable: Variable
+  combinators: Combinateurs
+  comparators: Comparateurs
+  functions: Fonctions
+  operators: Opérateurs
+  parentheses: Parenthèses
+  variables: Variables

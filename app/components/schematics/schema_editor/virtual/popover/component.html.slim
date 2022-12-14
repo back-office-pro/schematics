@@ -1,21 +1,21 @@
 table.table.mb-0.table-striped.table-borderless
   tbody
     tr
-      th = t('.combinator')
+      th = t('.functions')
+      td= 'CURRENT_DATE() CURRENT_TIMESTAMP()'
+    tr
+      th = t('.combinators')
       td = '&& ||'
     tr
-      th = t('.operator')
+      th = t('.operators')
       td = '* ** + - / % | &'
     tr
-      th = t('.comparator')
+      th = t('.comparators')
       td = '<= >= < > != =='
     tr
-      th = t('.function')
-      td = 'CURRENT_DATE() CURRENT_TIMESTAMP()'
-    tr
-      th = t('.parenthesis')
+      th = t('.parentheses')
       td = '( )'
     tr
-      th = t('.variable')
+      th = t('.variables')
       td = '$foo.bar'
     = row
