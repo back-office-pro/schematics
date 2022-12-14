@@ -100,11 +100,12 @@ Style/HashEachMethods:
 Style/EndlessMethod:
   EnforcedStyle: allow_always
 Style/RequireOrder:
-  Enabled: false # TODO: enable when rubocop issue is fixed
+  Enabled: true
   Exclude:
     - spec/**/*
     - bin/importmap
     - Capfile
+    - app/controllers/schematics/resources_controller.rb
 Metrics/BlockLength:
   AllowedMethods:
     - describe
