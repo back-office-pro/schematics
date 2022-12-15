@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Patches
-  module Rails
+module Rails
+  module Override
     module Generators
       module GeneratedAttribute
         def column_name

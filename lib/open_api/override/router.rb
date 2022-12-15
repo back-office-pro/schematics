@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Patches
-  module OpenApi
+module OpenApi
+  module Override
     module Router
       delegate :routes, to: 'Schematics::Engine.routes', prefix: :schematics, private: true
       delegate :routes, to: 'Rails.application.routes', prefix: :rails, private: true

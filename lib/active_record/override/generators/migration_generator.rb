@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Patches
-  module ActiveRecord
+module ActiveRecord
+  module Override
     module Generators
       module MigrationGenerator
         def set_local_assigns!
