@@ -5,14 +5,18 @@ require 'active_record/migration'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'open_api/router'
+require 'patches/active_record/connection_adapters/table_definition'
+require 'patches/active_record/generators/migration_generator'
+require 'patches/open_api/router'
+require 'patches/rails/generators/generated_attribute'
 require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'view_component/renders_one_form'
 
-GeneratedAttribute = Schematics::Patches::Rails::Generators::GeneratedAttribute
-MigrationGenerator = Schematics::Patches::ActiveRecord::Generators::MigrationGenerator
-TableDefinition = Schematics::Patches::ActiveRecord::ConnectionAdapters::TableDefinition
+GeneratedAttribute = Patches::Rails::Generators::GeneratedAttribute
+MigrationGenerator = Patches::ActiveRecord::Generators::MigrationGenerator
+TableDefinition = Patches::ActiveRecord::ConnectionAdapters::TableDefinition
 
 Rails::Generators::GeneratedAttribute.singleton_class.prepend(GeneratedAttribute)
 Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
@@ -21,7 +25,7 @@ ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
-OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
+OpenApi::Router.singleton_class.prepend(Patches::OpenApi::Router)
 
 Rails.configuration.to_prepare do
   Application
