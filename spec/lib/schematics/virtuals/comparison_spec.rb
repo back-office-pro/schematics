@@ -15,7 +15,7 @@ describe Schematics::Virtuals::Comparison do
     )
   end
   let(:name) { 'big_price' }
-  let(:function) { '($category.vat == 10) && (CURRENT_TIMESTAMP() > $created_at || true)' }
+  let(:function) { '($category.vat == 10) && ($created_at == NULL || NOW() < $created_at)' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -30,7 +30,7 @@ describe Schematics::Virtuals::Comparison do
 
   its(:to_sql) do
     is_expected.to eq <<~SQL.squish
-      (categories.vat = 10) AND (CURRENT_TIMESTAMP() > products.created_at OR TRUE)
+      (categories.vat = 10) AND (products.created_at IS NULL OR NOW() < products.created_at)
     SQL
   end
 
@@ -38,7 +38,7 @@ describe Schematics::Virtuals::Comparison do
     is_expected.to eq <<~RUBY
       define_attribute_method :big_price
       def big_price
-        (self.category.vat == 10) && (Time.current > self.created_at || true)
+        (self.category.vat == 10) && (self.created_at == nil || Time.current < self.created_at)
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
