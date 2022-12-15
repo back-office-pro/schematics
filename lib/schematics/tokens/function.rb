@@ -6,9 +6,7 @@ module Schematics
     class Function < Token
       def to_str =
         case @value
-        when 'CURRENT_DATE()'
-          '#{Date.current}' # rubocop:disable Lint/InterpolationCheck
-        when 'CURRENT_TIMESTAMP()'
+        when 'NOW()'
           '#{Time.current}' # rubocop:disable Lint/InterpolationCheck
         else
           super
@@ -16,9 +14,7 @@ module Schematics
 
       def value =
         case @value
-        when 'CURRENT_DATE()'
-          'Date.current'
-        when 'CURRENT_TIMESTAMP()'
+        when 'NOW()'
           'Time.current'
         else
           super
