@@ -10,7 +10,6 @@ fr:
           in_progress: En cours
           migrated: Migrée
           pending: En attente
-        version: Version
     events:
       schema_dataset:
         migrate: Migrer

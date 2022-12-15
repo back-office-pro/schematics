@@ -52,12 +52,34 @@ describe Schematics::Tokens::Tokenizer do
       its([6]) { is_expected.to be_a(Schematics::Tokens::Number) }
     end
 
+    context 'when function is a more complex comparison' do
+      let(:function) { '$expires_at == NULL || NOW() < $expires_at' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([3]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([4]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([5]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+    end
+
+    context 'when function is a not spaced more complex comparison' do
+      let(:function) { '$expires_at==NULL||NOW()<$expires_at' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([3]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([4]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([5]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+    end
+
     context 'when function is an assignment' do
       let(:function) { '$in_stock = true' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
-      its([2]) { is_expected.to be_a(Schematics::Tokens::String) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
 
     context 'when function is a not spaced assignment' do
@@ -65,7 +87,7 @@ describe Schematics::Tokens::Tokenizer do
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
-      its([2]) { is_expected.to be_a(Schematics::Tokens::String) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
   end
 end

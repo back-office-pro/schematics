@@ -4,15 +4,17 @@ module Schematics
   module Tokens
     class Tokenizer
       REGEX = %r{
-        (\s*(?:&&|\|\|)\s*)               | # combinator
-        (\s+(?:\*\*|\+|-|\*|/|%|\||&)\s+) | # operator
-        (\s*(?:<=|>=|<|>|!=|==)\s*)       | # comparator
-        (\s*(?:\+=|-=|\*=|=)\s*)          | # assignment
-        (\(|\))                           | # parenthesis
-        \$(\w+\.?\w+\?{0,1})              | # variable
-        ([a-zA-Z_-]+)                     | # string
-        (\d*\.?\d+)                       | # number
-        (\s+)                               # whitespace
+        (\s*(?:&&|\|\|)\s*)                             | # combinator
+        (\s+(?:\*\*|\+|-|\*|/|%|\||&)\s+)               | # operator
+        (\s*(?:==\s*NULL|!=\s*NULL|<=|>=|<|>|!=|==)\s*) | # comparator
+        (\s*(?:\+=|-=|\*=|=)\s*)                        | # assignment
+        (\w+\(\))                                       | # function
+        (\(|\))                                         | # parenthesis
+        \$(\w+\.?\w+\?{0,1})                            | # variable
+        (true|false)                                    | # boolean
+        ([a-zA-Z_-]+)                                   | # string
+        (\d*\.?\d+)                                     | # number
+        (\s+)                                             # whitespace
       }x
 
       class << self

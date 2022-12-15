@@ -3,9 +3,7 @@ en:
   activerecord:
     attributes:
       session:
-        active: Active connection
         ip: IP address
-        safe: Safe connection
         user: User
         user_agent: User agent
     models:
