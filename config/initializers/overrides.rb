@@ -4,7 +4,6 @@ require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_record/migration'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
-require 'active_support/time_with_zone'
 require 'open_api/router'
 require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
@@ -23,8 +22,6 @@ ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
 OpenApi::Router.singleton_class.prepend(Schematics::Patches::OpenApi::Router)
-
-ActiveSupport::TimeWithZone.prepend(Schematics::Patches::ActiveSupport::TimeWithZone)
 
 Rails.configuration.to_prepare do
   Application
