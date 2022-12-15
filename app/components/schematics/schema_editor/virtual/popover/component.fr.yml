@@ -1,7 +1,7 @@
 ---
 fr:
-  combinators: Combinateurs
-  comparators: Comparateurs
-  functions: Fonctions
-  operators: Opérateurs
-  variables: Variables
+  combinator: Combinateur
+  comparator: Comparateur
+  function: Fonction
+  operator: Opérateur
+  variable: Variable
