@@ -2,9 +2,10 @@
 
 module Schematics
   module Tokens
+    # :reek:InstanceVariableAssumption
     class Combinator < Token
       def to_sql =
-        case value.strip
+        case @value.strip
         when '&&' then ' AND '
         when '||' then ' OR '
         else

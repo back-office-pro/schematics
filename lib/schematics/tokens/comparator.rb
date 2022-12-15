@@ -2,6 +2,7 @@
 
 module Schematics
   module Tokens
+    # :reek:InstanceVariableAssumption
     class Comparator < Token
       def to_sql =
         case @value.delete(' ')

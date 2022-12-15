@@ -2,6 +2,7 @@
 
 module Schematics
   module Tokens
+    # :reek:InstanceVariableAssumption
     class Boolean < Token
       def to_sql = @value.upcase
     end
