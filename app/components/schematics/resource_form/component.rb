@@ -21,6 +21,8 @@ module Schematics
         .headers['Turbo-Frame']
         .present?
 
+      def data = { 'auto-save-target': 'form' }
+
       def wrapper
         return :edit_in_place_form if turbo?
 

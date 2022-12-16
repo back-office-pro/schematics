@@ -62,8 +62,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '~> 3.38.0'
   spec.add_dependency 'chartkick', '~> 4.2.1'
   spec.add_dependency 'chroma', '~> 0.2.0'
-  spec.add_dependency 'client_side_validations', '~> 21.0.0'
-  spec.add_dependency 'client_side_validations-simple_form', '~> 15.0.0'
   spec.add_dependency 'country_select', '~> 8.0.0'
   spec.add_dependency 'dotenv-rails', '~> 2.8.1'
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
