@@ -1,6 +1,5 @@
 import 'chartkick'
 import 'Chart.bundle'
-import '@client-side-validations/simple-form'
 import { application } from 'controllers/application'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
