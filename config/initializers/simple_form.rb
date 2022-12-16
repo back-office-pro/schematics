@@ -4,7 +4,6 @@ require 'simple_form/components/input_group'
 
 SimpleForm.include_component(SimpleForm::Components::InputGroup)
 SimpleForm.setup do |config|
-  config.browser_validations = false
   config.error_notification_tag = :div
   config.button_class = 'btn'
   config.boolean_label_class = 'form-check-label'
