@@ -1,4 +1,4 @@
-= simple_form_for resource, url:, wrapper:, validate: true, html: { data: { 'auto-save-target': 'form' } } do |f|
+= simple_form_for resource, url:, wrapper:, html: { data: } do |f|
   = f.input :lock_version, as: :hidden, wrapper: false
   - attributes.stable_sort_by(&:weight).each do |field|
     = turbo_frame_tag dom_id(resource, field.name) do
@@ -103,7 +103,6 @@
         - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
         = f.input field.name.to_sym,
                   as: :file,
-                  validate: { presence: field.required? && new_record? },
                   hint:,
                   input_html: { multiple: true, include_hidden: false, accept: field.extensions }
       - when Schematics::Attributes::Attachment
@@ -117,7 +116,6 @@
                           wrapper_html: { class: 'float-end m-0 text-secondary' }
         = f.input field.name.to_sym,
                   as: :file,
-                  validate: { presence: field.required? && new_record? },
                   hint:,
                   input_html: { accept: field.extensions }
       - when Schematics::Attributes::Digest
