@@ -5,7 +5,14 @@ module Schematics
   class Trigger
     include ::ActiveModel::API
 
-    ACTIONS = %w[create save destroy].freeze
+    ACTIONS = %w[
+      after_create
+      after_destroy
+      after_save
+      before_create
+      before_destroy
+      before_save
+    ].freeze
 
     validates :callback,
               presence: true,
@@ -15,14 +22,20 @@ module Schematics
               inclusion: { in: ACTIONS }
     attr_accessor :action, :callback
 
-    def method_name = "after_#{action}"
-
     def to_str
       case [action, callback]
-      in ['create', *] | ['save', *] | ['destroy', *]
+      in ['before_create', *] | ['before_save', *] | ['before_destroy', *]
         <<~RUBY
-          #{method_name} :#{method_name}
-          def #{method_name}
+          #{action} :#{action}
+          def #{action}
+            #{method_body}
+          rescue StandardError
+          end
+        RUBY
+      in ['after_create', *] | ['after_save', *] | ['after_destroy', *]
+        <<~RUBY
+          #{action} :#{action}
+          def #{action}
             #{method_body}
             save!
           rescue StandardError
@@ -30,11 +43,11 @@ module Schematics
         RUBY
       in [*, nil]
         <<~RUBY
-          def #{method_name}; end
+          def #{action}; end
         RUBY
       else
         <<~RUBY
-          def #{method_name}
+          def #{action}
             #{method_body}
           rescue StandardError
           end

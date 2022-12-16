@@ -26,15 +26,17 @@ module Schematics
       end
 
       def to_str = <<~RUBY
-        event :#{name}, after_commit: :after_#{name} do
+        event :#{name}, after_commit: :#{action} do
           transitions from: #{Array(from).map(&:to_sym)}, to: :#{to}
         end
       RUBY
 
       private
 
+      def action = "after_#{name}"
+
       def trigger
-        @trigger ||= Trigger.new(action: name, callback:)
+        @trigger ||= Trigger.new(action:, callback:)
       end
     end
   end

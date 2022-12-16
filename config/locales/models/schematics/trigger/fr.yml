@@ -4,4 +4,11 @@ fr:
     attributes:
       schematics/trigger:
         action: Action
+        actions:
+          after_create: Après ajout
+          after_destroy: Après suppression
+          after_save: Après sauvegarde
+          before_create: Avant ajout
+          before_destroy: Avant suppression
+          before_save: Avant sauvegarde
         callback: Fonction

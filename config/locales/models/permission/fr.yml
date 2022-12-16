@@ -13,7 +13,6 @@ fr:
           index: Lister
           read: Lire
           restore: Restaurer
-          save: Sauvegarder
           show: Consulter
           update: Editer
         model: Donnée

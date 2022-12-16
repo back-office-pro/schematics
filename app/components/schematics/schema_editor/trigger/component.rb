@@ -8,7 +8,7 @@ module Schematics
         option :builder
 
         def collection = Schematics::Trigger::ACTIONS
-          .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
+          .map { [t(_1, scope: %i[activemodel attributes schematics/trigger actions]), _1] }
           .sort
 
         def icon = :atom
