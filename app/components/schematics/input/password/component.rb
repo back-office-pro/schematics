@@ -12,18 +12,13 @@ module Schematics
         option :confirm, default: proc { false }
         option :autocomplete, default: proc { true }, reader: false
 
-        def data = {
-          action: 'click->password#toggle'
-        }
+        def data = { action: 'click->password#toggle' }
 
         def icon
           field.try(:icon) || @icon
         end
 
-        def input_html = {
-          autocomplete:,
-          'data-password-target': 'input'
-        }.compact
+        def input_html = { autocomplete:, 'data-password-target': 'input' }.compact
 
         def inputs_count
           confirm? ? 2 : 1
