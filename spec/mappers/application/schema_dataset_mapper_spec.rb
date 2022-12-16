@@ -45,7 +45,7 @@ RSpec.describe Application::SchemaDatasetMapper do
             },
             'triggers_attributes' => {
               '0' => {
-                'action' => 'save',
+                'action' => 'after_save',
                 'callback' => '$foo = true'
               }
             },
@@ -95,7 +95,7 @@ RSpec.describe Application::SchemaDatasetMapper do
             ],
             triggers: [
               {
-                action: 'save',
+                action: 'after_save',
                 callback: '$foo = true'
               }
             ],
