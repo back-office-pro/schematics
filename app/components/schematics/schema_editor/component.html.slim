@@ -1,4 +1,4 @@
-= bootstrap_form_for schema, as: :schema_dataset, url:, method: form_method, html: { data: } do |form|
+= bootstrap_form_with model: schema, scope: :schema_dataset, url:, method: form_method, data: do |form|
   = render Schematics::SchemaEditor::Template::Entity::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Virtual::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Trigger::Component.new(form:)
