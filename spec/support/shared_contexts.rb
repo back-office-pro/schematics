@@ -12,10 +12,7 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:permissions) { Permission.create_all_entities_permissions! }
   let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
 
-  before do
-    admin_role
-    user
-  end
+  before { [admin_role, user] }
 end
 
 RSpec.shared_context 'with authenticated user' do
