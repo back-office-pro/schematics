@@ -34,7 +34,7 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
         ],
         triggers: [
           {
-            action: 'save',
+            action: 'after_save',
             callback: '$error.foo = true'
           }
         ],
@@ -67,7 +67,7 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
   end
 
   describe 'Trigger fields' do
-    it { is_expected.to have_select('Action', selected: 'Save') }
+    it { is_expected.to have_select('Action', selected: 'After save') }
     it { is_expected.to have_field('Callback', with: '$error.foo = true') }
   end
 
