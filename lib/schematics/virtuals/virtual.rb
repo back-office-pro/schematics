@@ -20,7 +20,7 @@ module Schematics
                 format: { with: Tokens::Tokenizer::REGEX, message: :function }
       validates :name,
                 presence: true,
-                format: { with: /\A(\w+)\z/, message: :name },
+                format: { with: Entities::Entity::NAME_REGEX, message: :name },
                 length: { maximum: 50 },
                 exclusion: { in: :reserved_names }
 

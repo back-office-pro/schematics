@@ -12,22 +12,23 @@ module Schematics
     class Entity # rubocop:disable Metrics/ClassLength
       include ::ActiveModel::API
 
+      MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
+      NAME_REGEX = %r{\A([a-z_/]+)\z}
+      CALENDAR_START = :start_at
+      CALENDAR_END = :end_at
+
       validates :attributes, presence: true
       validates :actions, inclusion: { in: :default_actions }
       validates :name, english: true, unless: :core?
       validates :name,
                 presence: true,
                 singular: true,
-                format: { with: %r{\A([\w/]+)\z}, message: :name },
+                format: { with: NAME_REGEX, message: :name },
                 length: { maximum: 50 },
                 exclusion: { in: :reserved_names }
 
       attr_accessor :schema, :name
       attr_writer :id, :options
-
-      MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
-      CALENDAR_START = :start_at
-      CALENDAR_END = :end_at
 
       delegate :core?, :existing?, :hidden?, to: :options
 

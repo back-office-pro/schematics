@@ -23,7 +23,7 @@ en:
       function: is not valid
       ip_address: is not a valid IP address
       mime_type: is not a valid MIME type
-      name: must contain only word characters (letter, number, underscore)
+      name: must contain only lowercase letters or underscores
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
       singular: is not singular
     virtuals:
