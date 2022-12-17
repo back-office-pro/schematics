@@ -28,7 +28,7 @@ describe Schematics::Attributes::Attachment do
   its(:extension) { is_expected.to eq('png') }
   its(:search_column) { is_expected.to eq(:avatar_blob_filename) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:avatar_blob_filename_i_cont) }
+  its(:search_query) { is_expected.to eq(:avatar_i_cont) }
   it { is_expected.to be_image }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength

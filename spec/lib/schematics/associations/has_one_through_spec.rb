@@ -59,7 +59,7 @@ describe Schematics::Associations::HasOneThrough do
   its(:weight) { is_expected.to eq(3) }
   its(:search_column) { is_expected.to eq(:schema_title) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:schema_title_i_cont) }
+  its(:search_query) { is_expected.to eq(:schema_i_cont) }
   its('descriptor.name') { is_expected.to eq('title') }
 
   its(:to_str) do

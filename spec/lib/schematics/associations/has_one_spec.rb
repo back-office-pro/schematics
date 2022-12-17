@@ -52,7 +52,7 @@ describe Schematics::Associations::HasOne do
   its(:weight) { is_expected.to eq(3) }
   its(:search_column) { is_expected.to eq(:entity_type) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:entity_type_i_cont) }
+  its(:search_query) { is_expected.to eq(:entity_i_cont) }
   its('descriptor.name') { is_expected.to eq('type') }
 
   its(:to_str) do

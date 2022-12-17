@@ -28,7 +28,7 @@ describe Schematics::Attributes::Attachments do
   its(:extension) { is_expected.to eq('png') }
   its(:search_column) { is_expected.to eq(:files_blobs_filename) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:files_blobs_filename_i_cont) }
+  its(:search_query) { is_expected.to eq(:files_i_cont) }
   it { is_expected.to be_image }
 
   its('validators.to_str') do

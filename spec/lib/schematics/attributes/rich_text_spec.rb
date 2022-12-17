@@ -24,7 +24,7 @@ describe Schematics::Attributes::RichText do
   its(:default) { is_expected.to eq('MyRichText') }
   its(:search_column) { is_expected.to eq(:rich_text_summary_body) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:rich_text_summary_body_i_cont) }
+  its(:search_query) { is_expected.to eq(:summary_i_cont) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

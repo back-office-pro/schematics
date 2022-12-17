@@ -68,7 +68,7 @@ describe Schematics::Attributes::References do
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:user_full_name_i_cont) }
+  its(:search_query) { is_expected.to eq(:user_i_cont) }
 
   its(:available_options) do
     is_expected.to include(

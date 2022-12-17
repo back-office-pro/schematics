@@ -58,7 +58,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:search_column) { is_expected.to eq(:schema_title) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:schema_title_i_cont) }
+  its(:search_query) { is_expected.to eq(:schema_i_cont) }
 
   its(:available_options) do
     is_expected.to include(
