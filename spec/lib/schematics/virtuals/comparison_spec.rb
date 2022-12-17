@@ -37,7 +37,7 @@ describe Schematics::Virtuals::Comparison do
   its(:search_alias) do
     is_expected.to eq <<~RUBY
       ransacker :big_price do
-        Arel.sql("products.price >= 100 AND categories.vat = 10")
+        Arel.sql("(categories.vat = 10) AND (products.created_at IS NULL OR NOW() < products.created_at)")
       end
     RUBY
   end
