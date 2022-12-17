@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     def sort_params = params
-      .fetch(:sort, ApplicationRecord.implicit_order_column)
+      .fetch(:sort, "-#{ApplicationRecord.implicit_order_column}")
       .split(',')
       .map { |param| param.start_with?('-') ? "#{param[1..]} desc" : "#{param} asc" }
   end
