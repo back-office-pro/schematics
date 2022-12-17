@@ -11,10 +11,10 @@ module Schematics
 
     delegate :entity, :human_name, :gender, to: :model_class, allow_nil: true
 
-    scope :unread, UnreadVersionQuery
-    scope :read_messages, ReadMessagesVersionQuery
-    scope :filter_by_user_preferences, FilterByUserPreferencesVersionQuery
-    scope :timeline, TimelineVersionQuery
+    scope :unread, Versions::UnreadQuery
+    scope :read_messages, Versions::ReadMessagesQuery
+    scope :filter_by_user_preferences, Versions::FilterByUserPreferencesQuery
+    scope :timeline, Versions::TimelineQuery
     scope :with_user, -> { preload(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { preload(:item) }
 
