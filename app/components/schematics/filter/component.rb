@@ -55,9 +55,7 @@ module Schematics
         this.form.requestSubmit()
       JAVASCRIPT
 
-      def value
-        params.dig(:filter, name)
-      end
+      def value = params.dig(Ransack.options[:search_key], name)
     end
   end
 end
