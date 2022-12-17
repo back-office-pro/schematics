@@ -5,6 +5,8 @@ require 'arel'
 module Schematics
   module Virtuals
     class Concatenation < Virtual
+      include Behaviours::Multisearchable
+
       def icon = :align_justify
 
       def to_sql
