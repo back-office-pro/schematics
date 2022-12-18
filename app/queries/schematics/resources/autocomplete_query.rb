@@ -8,7 +8,7 @@ module Schematics
       def call(params, field, ability)
         ransack(params)
           .result(distinct: true)
-          .includes(entity.includes)
+          .preload(entity.includes)
           .accessible_by(ability)
           .limit(LIMIT)
           .map(&field.to_sym)

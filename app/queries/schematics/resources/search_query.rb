@@ -7,7 +7,7 @@ module Schematics
         ransack(filter_params)
           .tap { _1.sorts = sort_params || "#{implicit_order_column} desc" }
           .result(distinct: true)
-          .includes(entity.includes)
+          .preload(entity.includes)
           .accessible_by(ability)
       end
     end
