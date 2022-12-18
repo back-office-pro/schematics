@@ -261,6 +261,13 @@ module Schematics
         searchable_elements.map(&:search_alias)
       end
 
+      def multisearch_query = multisearchable_fields
+        .map(&:name)
+        .join('_or_')
+        .concat('_')
+        .concat(multisearchable_fields.first.search_predicate.to_s)
+        .to_sym
+
       protected
 
       def model_elements = [self, descriptor].concat(triggers, elements, validators, search_aliases)

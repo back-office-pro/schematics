@@ -19,6 +19,7 @@ describe Schematics::Entities::Entity do
 
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:class_name) { is_expected.to eq('Entity') }
+  its(:multisearch_query) { is_expected.to eq(:name_i_cont) }
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
