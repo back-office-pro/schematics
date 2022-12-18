@@ -6,7 +6,7 @@ module Schematics
       def call(filter_params, ability, sort_params = nil)
         ransack(filter_params)
           .tap { _1.sorts = sort_params || "#{implicit_order_column} desc" }
-          .result
+          .result(distinct: true)
           .includes(entity.includes)
           .accessible_by(ability)
       end
