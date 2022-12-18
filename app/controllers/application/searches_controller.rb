@@ -6,14 +6,13 @@ module Application
     SEARCH_LIMIT = 5
 
     prepended do
+      before_action :set_results, only: :show
       after_action -> { flash.clear }
     end
 
     def show
-      @results = ::Searchkick.multi_search(searches).reject(&:empty?)
-      @suggestions = @results.flat_map(&:suggestions).uniq
       respond_to do |format|
-        format.json { render json: @results.flat_map(&:results).take(SEARCH_LIMIT), metadata: true }
+        format.json { render json: @results.take(SEARCH_LIMIT), metadata: true }
         format.html
       end
     end
@@ -22,20 +21,20 @@ module Application
 
     def i18n_title_path = 'searches'
 
-    def searches = ::Tenant
-      .schema
-      .entities
-      .reject(&:hidden?)
-      .map do |entity|
-        entity.model_class.search(
-          @resource.query,
-          includes: entity.includes,
-          match: :word_middle,
-          suggest: true,
-          misspellings: false,
-          scope_results: -> { _1.accessible_by(current_ability) }
-        )
-      end
+    def set_results
+      @results = ::Tenant
+                 .schema
+                 .entities
+                 .select(&:multisearchable?)
+                 .reject(&:hidden?)
+                 .reject { _1.name == 'active_storage/attachment' } # TODO: remove
+                 .map do |entity|
+                   entity
+                     .model_class
+                     .search({ entity.multisearch_query => @resource.query }, current_ability)
+                     .load_async
+                 end.reject(&:empty?)
+    end
 
     def set_resource
       super
