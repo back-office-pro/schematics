@@ -4,15 +4,32 @@ module Schematics
   module Filterable
     extend ActiveSupport::Concern
 
+    def log_search!
+      return unless params.key?(filter_key)
+
+      current_user
+        .searches
+        .create!(model: model_class, filters: filter_params_to_h)
+    end
+
     def filter_params
-      return {} unless params.key?(:filter)
+      return {} unless params.key?(filter_key)
 
       filter_params_to_h
         .deep_symbolize_keys
+        .transform_keys(&method(:convert_key_to_search_query))
         .transform_values(&method(:cast_filter_value))
     end
 
     private
+
+    def filter_key = Ransack.options[:search_key]
+
+    def convert_key_to_search_query(key)
+      entity
+        .find_field_by_name(key)
+        .search_query
+    end
 
     def cast_comparison(value)
       return value.to_date if value.match?(/\d{4}-\d{2}-\d{2}/)
@@ -27,16 +44,16 @@ module Schematics
       in 'false'
         false
       in gte:
-        { gte: cast_comparison(gte) }
+        cast_comparison(gte)
       in lte:
-        { lte: cast_comparison(lte) }
+        cast_comparison(lte)
       else
-        { ilike: "%#{value}%" }
+        value
       end
     end
 
     def filter_params_to_h = params
-      .require(:filter)
+      .require(filter_key)
       .permit(permitted_filters)
       .to_h
       .compact_blank
