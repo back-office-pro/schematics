@@ -261,11 +261,12 @@ module Schematics
         searchable_elements.map(&:search_alias)
       end
 
+      def multisearchable? = multisearchable_fields.any?
+
       def multisearch_query = multisearchable_fields
-        .map(&:name)
+        .map(&:search_column)
         .join('_or_')
-        .concat('_')
-        .concat(multisearchable_fields.first.search_predicate.to_s)
+        .concat('_i_cont')
         .to_sym
 
       protected

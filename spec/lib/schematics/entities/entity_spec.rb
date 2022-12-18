@@ -16,6 +16,7 @@ describe Schematics::Entities::Entity do
 
   it { is_expected.to be_core }
   it { is_expected.to be_existing }
+  it { is_expected.to be_multisearchable }
 
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:class_name) { is_expected.to eq('Entity') }
