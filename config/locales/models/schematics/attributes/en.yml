@@ -12,7 +12,6 @@ en:
       schematics/attributes/attachment: Attachment
       schematics/attributes/attachments: Attachments
       schematics/attributes/belongs_to: One-to-many association
-      schematics/attributes/blob: Blob
       schematics/attributes/boolean: Boolean
       schematics/attributes/byte: Byte
       schematics/attributes/citext: Case insensitive text
