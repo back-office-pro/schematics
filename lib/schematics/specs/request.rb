@@ -10,8 +10,8 @@ module Schematics
 
       CREATE_DENYLIST  = [::Search, ::Session, ::Comparison, ::SchemaDataset, ::Comment].freeze
       UPDATE_DENYLIST  = [::Licence, ::SchemaDataset].freeze
-      SHOW_DENYLIST    = [::ActiveStorage::Attachment, ::Search].freeze
-      DESTROY_DENYLIST = [::ActiveStorage::Attachment, ::Session].freeze
+      SHOW_DENYLIST    = [::ActiveStorage::Blob, ::Search].freeze
+      DESTROY_DENYLIST = [::ActiveStorage::Blob, ::Session].freeze
 
       included do
         include Rails.application.routes.url_helpers

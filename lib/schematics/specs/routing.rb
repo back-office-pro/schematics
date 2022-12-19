@@ -8,8 +8,8 @@ module Schematics
       extend ActiveSupport::Concern
 
       UPDATE_DENYLIST = [::Comment].freeze
-      SHOW_DENYLIST = [::ActiveStorage::Attachment].freeze
-      DESTROY_DENYLIST = [::ActiveStorage::Attachment].freeze
+      SHOW_DENYLIST = [::ActiveStorage::Blob].freeze
+      DESTROY_DENYLIST = [::ActiveStorage::Blob].freeze
 
       included do
         include Rails.application.routes.url_helpers

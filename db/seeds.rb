@@ -8,8 +8,8 @@ PaperTrail.request(enabled: false) do
   Stat.create!(agregate: 'count', model: 'User')
   Stat.create!(
     agregate: 'sum',
-    model: 'ActiveStorage::Attachment',
-    field: 'ActiveStorage::Attachment#byte_size'
+    model: 'ActiveStorage::Blob',
+    field: 'ActiveStorage::Blob#byte_size'
   )
   Chart.create!(
     kind: 'column',

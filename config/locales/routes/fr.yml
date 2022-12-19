@@ -5,7 +5,7 @@ fr:
     admin: administration
     api_keys: cles-api
     api_requests: requetes-api
-    attachments: fichiers
+    blobs: fichiers
     charts: graphiques
     comments: commentaires
     comparisons: comparaisons

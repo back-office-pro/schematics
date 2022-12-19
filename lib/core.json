@@ -146,7 +146,7 @@
     ]
   },
   {
-    "name": "active_storage/attachment",
+    "name": "active_storage/blob",
     "options": {
       "existing": true,
       "icon": "file",
@@ -159,6 +159,10 @@
     },
     "attributes": [
       {
+        "name": "attachments",
+        "type": "attachments"
+      },
+      {
         "name": "filename",
         "type": "string"
       },
@@ -169,17 +173,6 @@
       {
         "name": "byte_size",
         "type": "byte"
-      },
-      {
-        "name": "blob",
-        "type": "blob"
-      },
-      {
-        "name": "record",
-        "type": "belongs_to",
-        "options": {
-          "polymorphic": true
-        }
       }
     ]
   },

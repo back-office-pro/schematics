@@ -2,14 +2,13 @@
 fr:
   activerecord:
     attributes:
-      active_storage/attachment:
-        blob: Fichier
+      active_storage/blob:
+        attachments: Fichier
         byte_size: Taille
         content_type: Type de fichier
         filename: Nom de fichier
-        record: Enregistrement
     models:
-      active_storage/attachment:
+      active_storage/blob:
         gender: male
         one: Fichier
         other: Fichiers
