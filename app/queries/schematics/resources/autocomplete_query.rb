@@ -11,7 +11,7 @@ module Schematics
           .preload(entity.includes)
           .accessible_by(ability)
           .limit(LIMIT)
-          .map(&field.to_sym)
+          .pluck(entity.find_field_by_name(field).to_sql)
       end
     end
   end
