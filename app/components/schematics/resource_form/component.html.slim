@@ -11,7 +11,6 @@
       - when Schematics::Attributes::BelongsTo
         = f.association field.name.to_sym,
                         prompt: t('prompt', gender: field.model_class.gender, attribute_name: human_attribute_name(field.name).downcase),
-                        include_blank: !field.required?,
                         collection: field.model_class.all.map { [_1.to_s, _1.id] }.sort,
                         prepend: fa_icon(field.icon),
                         input_html: { data: { controller: 'dropdown' } },
@@ -28,7 +27,6 @@
         = f.input field.name.to_sym,
                   as: :select,
                   collection: [resource.public_send(field.name.to_sym)].compact,
-                  include_blank: !field.required?,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } },
                   wrapper:
@@ -43,14 +41,12 @@
         = f.input field.name.to_sym,
                   as: :country,
                   prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
-                  include_blank: !field.required?,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::TimeZone
         = f.input field.name.to_sym,
                   as: :time_zone,
                   prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
-                  include_blank: !field.required?,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::Color
@@ -62,7 +58,6 @@
         = f.input field.name.to_sym,
                   as: :select,
                   prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
-                  include_blank: false,
                   collection: field.collection.map { _1.push(class: model_field_collection_class(_1.second, field)) },
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown', 'dropdown-depends-on': "#{entity.name}[#{field.depends_on}]" } },
@@ -71,7 +66,6 @@
         = f.input field.name.to_sym,
                   as: :select,
                   prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
-                  include_blank: false,
                   collection: field.collection,
                   prepend: fa_icon(field.icon),
                   input_html: { data: { controller: 'dropdown' } },
