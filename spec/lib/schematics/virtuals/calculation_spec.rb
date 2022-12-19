@@ -15,7 +15,7 @@ describe Schematics::Virtuals::Calculation do
     )
   end
   let(:name) { 'tax_inclusive_price' }
-  let(:function) { '($price ** $category.vat)' }
+  let(:function) { '$price ** $category.vat' }
   let(:options) do
     {
       unit: '$',
@@ -51,7 +51,7 @@ describe Schematics::Virtuals::Calculation do
     is_expected.to eq <<~RUBY
       define_attribute_method :tax_inclusive_price
       def tax_inclusive_price
-        (self.price ** self.category.vat)
+        self.price ** self.category.vat
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
