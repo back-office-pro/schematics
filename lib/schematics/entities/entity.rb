@@ -122,7 +122,7 @@ module Schematics
             elements
               .reject(&:hidden?)
               .reject(&:readonly?)
-          when :Listable, :Searchable
+          when :Listable, :Searchable, :Rangeable
             elements
               .push(created_at_attribute)
               .reject(&:hidden?)
