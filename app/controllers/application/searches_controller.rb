@@ -27,7 +27,6 @@ module Application
                  .entities
                  .select(&:multisearchable?)
                  .reject(&:hidden?)
-                 .reject { _1.name == 'active_storage/attachment' } # TODO: remove
                  .map do |entity|
                    entity
                      .model_class
