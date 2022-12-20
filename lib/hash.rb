@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Hash
+  # :reek:FeatureEnvy
   def deep_flatten(prefix = nil)
     each_pair
       .reduce({}) do |hash, (key, value)|
