@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'sidekiq-scheduler/web'
-require 'sidekiq/web'
-
 Rails.configuration.exceptions_app = Rails.application.routes
 
 Rails.application.routes.prepend do
@@ -10,7 +7,7 @@ Rails.application.routes.prepend do
   localized do
     Tenant.schema.load_routes
     get 'login', to: 'sessions#new', as: :login
-    mount Sidekiq::Web,
+    mount GoodJob::Engine,
           at: '/admin/jobs',
           constraints: Schematics::AdminConstraint
   end
