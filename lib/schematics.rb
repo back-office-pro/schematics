@@ -3,10 +3,10 @@
 require 'array'
 require 'json_web_token'
 require 'object'
+require 'schematics/engine' if defined?(Rails)
 require 'validators/english_validator'
 require 'validators/singular_validator'
 require 'zeitwerk'
-require 'schematics/engine' if defined?(Rails)
 
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
