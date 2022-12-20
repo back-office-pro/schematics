@@ -6,6 +6,7 @@ module Schematics
       super
       merge PermissionAbility.new(user)
       merge ActiveStorage::AttachmentAbility.new(user)
+      merge ActiveStorage::BlobAbility.new
       merge VersionAbility.new(user)
       merge UserAbility.new(user)
       merge MessageAbility.new(user)
