@@ -144,6 +144,7 @@ module Schematics
     config.after_initialize do
       config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
+      config.active_storage.track_variants = false
     end
   end
 end
