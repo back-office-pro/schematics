@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module Sidekiq
+      module Jobs
         class Component < ApplicationComponent
           def caption = t('.caption')
 
