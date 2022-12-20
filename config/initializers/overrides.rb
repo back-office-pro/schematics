@@ -42,13 +42,10 @@ ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     include Schematics::Loadable
     include Schematics::Translatable
-    loadable concerns: [Schematics::SoftDeletable]
-  end
-end
-
-ActiveSupport.on_load(:active_storage_attachment) do
-  ActiveStorage::Attachment.class_eval do
-    include Schematics::Ransackable
+    loadable concerns: [
+      Schematics::Ransackable,
+      Schematics::SoftDeletable
+    ]
   end
 end
 
