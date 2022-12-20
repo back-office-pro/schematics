@@ -21,8 +21,8 @@ require 'easy_translate'
 require 'elasticsearch'
 require 'friendly_id'
 require 'git'
+require 'good_job'
 require 'groupdate'
-require 'hiredis'
 require 'i18n-inflector'
 require 'i18n/beginning_of_week'
 require 'icalendar'
@@ -42,7 +42,6 @@ require 'rails'
 require 'rails-i18n'
 require 'ratonvirus'
 require 'ratonvirus/clamby'
-require 'redis'
 require 'rollbar'
 require 'route_translator'
 require 'rqrcode'
@@ -114,7 +113,45 @@ module Schematics
     config.active_record.encryption.extend_queries = true
 
     # Active Job
-    config.active_job.queue_adapter = Rails.env.test? ? :test : :sidekiq
+    config.active_job.queue_adapter = Rails.env.test? ? :test : :good_job
+
+    # Good job
+    config.good_job.execution_mode = :async
+    config.good_job.enable_cron = true
+    config.good_job.cron = {
+      database_backup_job: {
+        cron: '0 0 * * *',
+        class: 'Schematics::DatabaseBackupJob'
+      },
+      clean_database_backups_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::CleanDatabaseBackupsJob'
+      },
+      clean_comparisons_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::CleanComparisonsJob'
+      },
+      clean_drafts_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::CleanDraftsJob'
+      },
+      clean_searches_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::CleanSearchesJob'
+      },
+      clean_sessions_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::CleanSessionsJob'
+      },
+      clean_api_requests_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::CleanApiRequestsJob'
+      },
+      load_licence_job: {
+        cron: '0 1 * * *',
+        class: 'Schematics::LoadLicenceJob'
+      }
+    }
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail
