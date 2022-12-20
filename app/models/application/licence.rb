@@ -52,9 +52,9 @@ module Application
       users_size * 100 / quota.users
     end
 
-    def storage_size = ::ActiveStorage::Attachment
-      .preload(:blob)
-      .sum(&:byte_size)
+    def storage_size
+      ::ActiveStorage::Blob.sum(&:byte_size)
+    end
 
     def users_size = ::User
       .all
