@@ -5,10 +5,6 @@ module Schematics
     class AttachmentAbility < ApplicationAbility
       def initialize(user)
         super
-        cannot :destroy, ::ActiveStorage::Attachment, record_type: 'Import'
-        cannot :read,
-               ::ActiveStorage::Attachment,
-               record_type: %w[ActiveStorage::VariantRecord ActiveStorage::Blob]
         user
           .role
           .permissions
@@ -16,6 +12,7 @@ module Schematics
           .uniq
           .select { can?(:update, _1.safe_constantize) }
           .each { |record_type| can(:destroy, ::ActiveStorage::Attachment, record_type:) }
+        cannot :destroy, ::ActiveStorage::Attachment, record_type: 'Import'
       end
     end
   end

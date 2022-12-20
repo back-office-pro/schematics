@@ -8,8 +8,6 @@ RSpec.describe Schematics::ActiveStorage::AttachmentAbility do
 
   let(:role) { Role.new }
   let(:user) { User.new(role:) }
-  let(:record_type) { %w[ActiveStorage::VariantRecord ActiveStorage::Blob] }
 
   it { is_expected.not_to be_able_to(:destroy, ActiveStorage::Attachment, record_type: 'Import') }
-  it { is_expected.not_to be_able_to(:read, ActiveStorage::Attachment, record_type:) }
 end
