@@ -34,7 +34,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_puppeteer_config_file
-    template '.puppeteerrc.cjs'
+    template File.join(root_path, '.puppeteerrc.cjs'), '.puppeteerrc.cjs'
   end
 
   def create_nginx_config_file
