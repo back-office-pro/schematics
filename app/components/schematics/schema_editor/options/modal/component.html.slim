@@ -21,7 +21,10 @@
             - when :integer
               = options_form.number_field option.name, floating: true
             - when :select
-              = options_form.select option.name, option.collection, {}, { multiple: option.multiple?, data: { controller: 'dropdown' } }
+              = options_form.select option.name,
+                                    option.collection,
+                                    { include_hidden: false },
+                                    { multiple: option.multiple?, data: { controller: 'dropdown' } }
             - when :array
               = render Schematics::SchemaEditor::Options::Array::Component.new(builder: options_form, name: option.name)
             - when :events

@@ -12,7 +12,10 @@
       = builder.text_field :name, floating: true, help: t('.must_be_english')
       = builder.fields_for :options do |options_form|
         = options_form.select :descriptor, allowed_field_names, {}, { data: { controller: 'schema-editor--descriptor-dropdown' } }
-        = options_form.select :actions, actions_collection, { selected: actions }, { multiple: true, data: { controller: 'dropdown' } }
+        = options_form.select :actions,
+                              actions_collection,
+                              { selected: actions, include_hidden: false },
+                              { multiple: true, data: { controller: 'dropdown' } }
         = options_form.select :icon, [], {}, { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
   .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
     = builder.fields_for :attributes do |attributes_builder|
