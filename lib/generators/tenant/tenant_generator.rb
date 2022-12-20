@@ -76,5 +76,5 @@ class TenantGenerator < Rails::Generators::NamedBase
     .fetch('RAILS_ENV', 'production')
     .inquiry
 
-  def container? = false
+  def container? = options[:container]
 end

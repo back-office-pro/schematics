@@ -61,7 +61,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def generate_tenant
-    rails_command "generate tenant #{db_name} --db-password=#{db_password}", env:
+    rails_command "generate tenant #{db_name} --db-password=#{db_password} --container=#{container?}", env: # rubocop:disable Layout/LineLength
   end
 
   def backup_credentials
