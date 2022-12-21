@@ -10,9 +10,8 @@ Rack::MiniProfiler.config.tap do |config|
   config.storage = Rack::MiniProfiler::RedisStore
   config.storage_options = { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379') }
   config.skip_paths = [
-    %r{/sidekiq(.*)},
+    %r{/admin(.*)},
     %r{/favicon.ico},
-    %r{/api},
     %r{/assets(.*)}
   ]
 end
