@@ -10,7 +10,6 @@ module Schematics
                Reload,
                Backup,
                MigrateDatabase,
-               WriteDocs,
                Reindex,
                Commit,
                UpdateState
