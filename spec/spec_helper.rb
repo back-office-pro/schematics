@@ -17,6 +17,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'support/simplecov'
 require 'support/i18n'
+require 'support/overrides'
 require 'rspec/its'
 
 RSpec.configure do |config|

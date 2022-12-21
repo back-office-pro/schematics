@@ -3,6 +3,8 @@
 describe Schematics::Commands::CreateEntityCounterCaches do
   subject(:command) { described_class.new(entity:) }
 
+  include_context 'with custom generated attribute'
+
   let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, options:) }
   let(:name) { 'assembly' }
   let(:options) { {} }
@@ -23,12 +25,6 @@ describe Schematics::Commands::CreateEntityCounterCaches do
         }
       }
     ]
-  end
-
-  before do
-    allow(ActiveRecord::Base)
-      .to receive_message_chain(:connection, :valid_type?) # rubocop:disable RSpec/MessageChain
-      .and_return(true)
   end
 
   its(:weight) { is_expected.to eq(2) }
