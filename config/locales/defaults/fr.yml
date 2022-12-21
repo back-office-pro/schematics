@@ -57,7 +57,7 @@ fr:
       type: conversion de %{source} en %{target}
       types:
         integer: nombre
-        string: chaîne de caractère
+        string: chaîne de caractères
   'false': faux
   i18n:
     inflections:
