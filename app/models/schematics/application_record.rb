@@ -10,7 +10,7 @@ module Schematics
     loadable concerns: [
       Elasticsearchable,
       SoftDeletable,
-      Versionable,
+      Trackable,
       Sluggable
     ]
   end

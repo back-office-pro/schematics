@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Versionable
+  module Trackable
     extend ActiveSupport::Concern
 
     DENYLIST = %i[id created_at updated_at deleted_at lock_version slug].freeze
