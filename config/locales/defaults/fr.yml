@@ -47,7 +47,7 @@ fr:
       limit_out_of_range: a un nombre de fichiers en dehors des limites
       mime_type: n'est pas un type de média valide
       name: doit contenir uniquement des lettres minusculues ou tirets du bas
-      numerable: doit contenir uniquement des variables numériques
+      numerable: "$%{name} n'est pas une variable numérique"
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
       reserved_name: est un nom réservé
       singular: n'est pas au singulier

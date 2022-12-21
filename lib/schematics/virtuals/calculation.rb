@@ -21,13 +21,11 @@ module Schematics
 
       private
 
-      def variables_fields
-        variables.map(&entity.method(:find_field_by_name))
-      end
-
-      def numberable_variables?
-        errors.add(:function, :numerable) unless variables_fields.all?(Behaviours::Numerable)
-      end
+      def numberable_variables? = variables
+        .map(&entity.method(:find_field_by_name))
+        .reject_is_a?(Behaviours::Numerable)
+        .map(&:name)
+        .each { |name| errors.add(:function, :numerable, name:) }
     end
   end
 end

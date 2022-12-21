@@ -25,7 +25,7 @@ en:
       ip_address: is not a valid IP address
       mime_type: is not a valid MIME type
       name: must contain only lowercase letters or underscores
-      numerable: must contain only numeric variables
+      numerable: "$%{name} is not a numeric variable"
       password: must contain at least one number, one lowercase letter, one uppercase letter and a special character
       reserved_name: is a reserved name
       singular: is not singular
