@@ -7,6 +7,7 @@ Schematics::Engine.routes.draw do
     draw :dashboard
     draw :exceptions
     resource :preferences, only: %i[edit update]
+    resource :documentation, only: :show, controller: :documentation
     resource :profile, only: %i[edit update], controller: :profile
     resources :password_resets, only: %i[new create edit update], param: :token
     resources :versions, only: %i[index show] do

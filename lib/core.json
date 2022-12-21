@@ -1051,22 +1051,5 @@
         }
       }
     ]
-  },
-  {
-    "name": "documentation",
-    "type": "singleton",
-    "options": {
-      "icon": "book",
-      "hidden": true,
-      "actions": [
-        "show"
-      ]
-    },
-    "attributes": [
-      {
-        "name": "data",
-        "type": "jsonb"
-      }
-    ]
   }
 ]

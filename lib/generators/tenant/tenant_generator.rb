@@ -52,10 +52,6 @@ class TenantGenerator < Rails::Generators::NamedBase
     rails_command 'schematics:db:seed', env:
   end
 
-  def generate_api_docs
-    rails_command 'schematics:docs:generate', env:
-  end
-
   def load_schemadataset_fixture
     return unless env.development?
 

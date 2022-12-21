@@ -1,6 +1,6 @@
-- breadcrumb title, polymorphic_path(@resource)
+- breadcrumb title, schematics.documentation_path
 .card.shadow-sm.border-0.animate__animated.animate__zoomIn
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
-    = render Schematics::CardHeading::Component.new(icon: :eye, title:)
+    = render Schematics::CardHeading::Component.new(icon: :project_diagram, title:)
   .card-body.p-3
     #swagger-ui data-controller='swagger'
