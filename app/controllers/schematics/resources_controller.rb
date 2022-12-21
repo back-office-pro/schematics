@@ -9,6 +9,7 @@ module Schematics
     include Readable
     include Calendarable
     include Documentable
+    include Versionable
     include Lockable
 
     AUTOCOMPLETE_LIMIT = 5
