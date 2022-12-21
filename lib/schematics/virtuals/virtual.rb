@@ -22,7 +22,10 @@ module Schematics
                 presence: true,
                 format: { with: Entities::Entity::NAME_REGEX, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :reserved_names }
+                exclusion: { in: :reserved_names, message: :reserved_name }
+      validates :preload, inclusion: { in: :allowed_references }
+      validates :variables, inclusion: { in: :allowed_variables }
+      validate :assignment_token?
 
       class << self
         def build(**kwargs)
@@ -31,8 +34,6 @@ module Schematics
 
         def klass(entity:, function:, **)
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
-
-          return Malformed   if tokens.any?(Tokens::Assignment)
           return Comparison  if tokens.any?(Tokens::Comparator)
           return Calculation if tokens.any?(Tokens::Operator)
 
@@ -90,6 +91,25 @@ module Schematics
         .dangerous_attribute_methods
         .to_a
         .concat(entity.virtuals.excluding(self).map(&:name))
+
+      def allowed_references = entity
+        .association_attributes
+        .concat(entity.associations)
+        .map(&:name)
+        .map(&:to_sym)
+
+      def variables = tokens
+        .select_is_a?(Tokens::Variable)
+        .reject(&:with_references?)
+        .map(&:end_value)
+
+      def allowed_variables = entity
+        .renderable_elements
+        .map(&:name)
+
+      def assignment_token?
+        errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
+      end
 
       def tokens
         @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
