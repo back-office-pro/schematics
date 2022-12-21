@@ -3,8 +3,8 @@
 PaperTrail.request(enabled: false) do
   Role.create!(name: 'Admin', permissions: Permission.create_all_entities_permissions!)
   Role.create!(name: 'Manager', permissions: Permission.features)
-  Configuration.instance.update!(locale: Schematics::Tenant.current.customer_locale)
-  User.create!(email: Schematics::Tenant.current.customer_email, role: Role.admin)
+  Configuration.instance.update!(locale: Tenant.customer_locale)
+  User.create!(email: Tenant.customer_email, role: Role.admin)
   Stat.create!(agregate: 'count', model: 'User')
   Stat.create!(
     agregate: 'sum',

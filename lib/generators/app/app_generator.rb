@@ -16,6 +16,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_root
+    create_postgres_user
     clean_app_path
     super
   end
@@ -56,16 +57,64 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'generate rspec:install'
   end
 
+  def install_migrations
+    rails_command 'schematics:install:migrations'
+  end
+
+  def install_active_storage
+    rails_command 'active_storage:install'
+  end
+
+  def install_action_text
+    rails_command 'action_text:install'
+  end
+
+  def reset_database
+    return if container?
+
+    rails_command 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:reset', env:
+  end
+
+  def generate_schematics
+    rails_command 'schematics:generate'
+  end
+
   def encrypt_database
     rails_command 'schematics:db:encryption:init', env:
   end
 
-  def generate_tenant
-    rails_command "generate tenant #{db_name} --db-password=#{db_password} --container=#{container?}", env: # rubocop:disable Layout/LineLength
+  def migrate_database
+    return if container?
+
+    rails_command 'db:migrate', env:
+  end
+
+  def load_licence
+    return if container?
+
+    rails_command 'schematics:licence:load', env:
+  end
+
+  def seed_database
+    return if container?
+
+    rails_command 'schematics:db:seed', env:
   end
 
   def backup_credentials
     rails_command 'schematics:credentials:backup', env:
+  end
+
+  def load_schemadataset_fixture
+    return unless env.development?
+
+    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
+  end
+
+  def reindex_searchkick
+    return if container?
+
+    rails_command 'searchkick:reindex:all', env:
   end
 
   def edit_gitignore
@@ -181,6 +230,14 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def clean_app_path
     FileUtils.rm_rf app_path
+  end
+
+  def create_postgres_user
+    ::PG
+      .connect
+      .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
+  rescue PG::Error
+    nil
   end
 
   def database_index = ::PG

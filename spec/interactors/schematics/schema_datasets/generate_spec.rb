@@ -9,7 +9,7 @@ RSpec.describe Schematics::SchemaDatasets::Generate do
 
   before do
     admin_role
-    Schematics::Tenant.current.instance_variable_set(:@schema, schema)
+    Tenant.schema = schema
   end
 
   describe '.call' do

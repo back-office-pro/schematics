@@ -6,7 +6,7 @@ module Application
 
     prepended do
       after_initialize :set_chartkick_options
-      attribute :company_name, default: -> { tenant.human }
+      attribute :company_name, default: -> { ::Tenant.human }
     end
 
     def set_chartkick_options = ::Chartkick

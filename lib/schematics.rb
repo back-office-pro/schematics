@@ -4,6 +4,7 @@ require 'array'
 require 'json_web_token'
 require 'object'
 require 'schematics/engine' if defined?(Rails)
+require 'tenant'
 require 'validators/english_validator'
 require 'validators/singular_validator'
 require 'zeitwerk'
@@ -22,6 +23,7 @@ loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")
 loader.ignore("#{__dir__}/json_web_token.rb")
 loader.ignore("#{__dir__}/object.rb")
+loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 
 module Schematics

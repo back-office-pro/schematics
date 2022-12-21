@@ -50,7 +50,7 @@ module Schematics
       .permit(permitted_preference_params)
       .transform_values(&method(:cast_param_value))
 
-    def timeline_preferences = current_tenant
+    def timeline_preferences = ::Tenant
       .schema
       .entities
       .reject(&:hidden?)
@@ -60,7 +60,7 @@ module Schematics
           .map { |action| [action, entity.class_name].join('_') }
       end
 
-    def viewer_preferences = current_tenant
+    def viewer_preferences = ::Tenant
       .schema
       .entities
       .reject(&:hidden?)
