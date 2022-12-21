@@ -11,7 +11,7 @@ describe Schematics::Tokens::Variable do
     it { is_expected.not_to be_with_references }
 
     its(:value) { is_expected.to eq('self.type') }
-    its(:end_value) { is_expected.to eq('type') }
+    its(:raw_value) { is_expected.to eq('type') }
     its(:to_sql) { is_expected.to eq('entities.type') }
     its(:to_str) { is_expected.to eq('#{type_formatted}') } # rubocop:disable Lint/InterpolationCheck
   end
@@ -22,7 +22,7 @@ describe Schematics::Tokens::Variable do
     it { is_expected.to be_with_references }
 
     its(:value) { is_expected.to eq('self.schema.title') }
-    its(:end_value) { is_expected.to eq('title') }
+    its(:raw_value) { is_expected.to eq('title') }
     its(:to_sql) { is_expected.to eq('schemas.title') }
     its(:to_str) { is_expected.to eq('#{schema.title_formatted}') } # rubocop:disable Lint/InterpolationCheck
   end

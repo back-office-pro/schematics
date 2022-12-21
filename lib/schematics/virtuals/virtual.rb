@@ -101,7 +101,7 @@ module Schematics
       def variables = tokens
         .select_is_a?(Tokens::Variable)
         .reject(&:with_references?)
-        .map(&:end_value)
+        .map(&:raw_value)
 
       def allowed_variables = entity
         .renderable_elements

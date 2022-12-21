@@ -12,14 +12,14 @@ module Schematics
 
       def to_sql = [
         with_references? ? references.map(&:pluralize) : @table_name,
-        end_value
+        raw_value
       ].join('.')
 
       def to_str = '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
 
       def value = "self.#{@value}"
 
-      def end_value = @value
+      def raw_value = @value
         .split('.')
         .last
 
