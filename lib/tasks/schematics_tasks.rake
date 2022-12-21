@@ -65,13 +65,6 @@ namespace :schematics do
     end
   end
 
-  namespace :docs do
-    desc 'Generate OpenAPI docs'
-    task generate: :environment do
-      Schematics::SchemaDatasets::WriteDocs.call
-    end
-  end
-
   namespace :licence do
     desc 'Load licence from gateway'
     task load: :environment do
