@@ -25,7 +25,7 @@ module Schematics
                 presence: true,
                 format: { with: Entities::Entity::NAME_REGEX, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :reserved_names }
+                exclusion: { in: :reserved_names, message: :reserved_name }
 
       class << self
         def build(type:, **kwargs)

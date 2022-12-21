@@ -25,7 +25,7 @@ module Schematics
                 singular: true,
                 format: { with: NAME_REGEX, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :reserved_names }
+                exclusion: { in: :reserved_names, message: :reserved_name }
 
       attr_accessor :schema, :name
       attr_writer :id, :options
@@ -183,7 +183,6 @@ module Schematics
         .flat_map(&:preload)
         .compact
         .uniq
-        .excluding(virtual_association_errors)
 
       def events
         state_machine_attributes.flat_map(&:events)
@@ -272,17 +271,6 @@ module Schematics
         .map(&:search_data)
         .map(&:squish)
         .join(",\n  ")
-
-      def virtual_association_errors = virtuals
-        .flat_map(&:preload)
-        .uniq
-        .reject do |association|
-          association_attributes
-            .concat(associations)
-            .map(&:name)
-            .map(&:to_sym)
-            .include?(association)
-        end
 
       def id_attribute = Attributes::Uuid.new(entity: self, name: 'id')
 
