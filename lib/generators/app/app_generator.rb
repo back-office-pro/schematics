@@ -4,8 +4,8 @@ require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inquiry'
 require 'fileutils'
 require 'json'
+require 'pg'
 require 'rails/generators/rails/app/app_generator'
-require 'redis'
 
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
   DEFAULT_PORT = 3000
@@ -183,17 +183,14 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     FileUtils.rm_rf app_path
   end
 
-  def redis_index = ::Redis
-    .new
-    .info('keyspace')
-    .keys
-    .map { _1.delete_prefix('db') }
-    .map(&:to_i)
-    .max
+  def database_index = ::PG
+    .connect
+    .exec("SELECT COUNT(datname) FROM pg_database WHERE datname LIKE '%_#{env}'")
+    .getvalue(0, 0)
     .to_i
     .next
 
-  def port = DEFAULT_PORT + redis_index
+  def port = DEFAULT_PORT + database_index
 
   def https? = Dir.exist?('/etc/letsencrypt/live')
 
