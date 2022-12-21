@@ -5,6 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :credentials, to: 'Schematics::Engine'
       delegate :dashboard_read_notifications_path,
+               :documentation_path,
                :preferences_path,
                to: 'Schematics::Engine.routes.url_helpers'
 
