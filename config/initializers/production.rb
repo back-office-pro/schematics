@@ -7,8 +7,6 @@ if Rails.env.production?
     # Disable eager_load to prevent scaffold_generator issue on production
     app.config.eager_load = false
     # Cache
-    app.config.cache_store =
-      Schematics::Tenant.current.storage.cache_store,
-      Schematics::Tenant.current.storage.cache_store_options
+    app.config.cache_store = Tenant.storage.cache_store, Tenant.storage.cache_store_options
   end
 end

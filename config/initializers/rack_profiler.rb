@@ -7,8 +7,8 @@ Rack::MiniProfiler.config.tap do |config|
   config.authorization_mode = :allow_authorized
   config.base_url_path = '/profiler'
   config.enable_hotwire_turbo_drive_support = true
-  config.storage = Schematics::Tenant.current.storage.storage
-  config.storage_options = Schematics::Tenant.current.storage.storage_options
+  config.storage = Tenant.storage.storage
+  config.storage_options = Tenant.storage.storage_options
   config.skip_paths = [
     %r{/admin(.*)},
     %r{/favicon.ico},

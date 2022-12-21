@@ -114,7 +114,7 @@ module Schematics
     config.active_record.encryption.extend_queries = true
 
     # Active Job
-    config.active_job.queue_adapter = Schematics::Tenant.current.storage.queue_adapter
+    config.active_job.queue_adapter = ::Tenant.storage.queue_adapter
 
     # Good job
     config.good_job.execution_mode = :async
