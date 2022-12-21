@@ -7,7 +7,7 @@ Rails.application.routes.prepend do
   localized do
     Tenant.schema.load_routes
     get 'login', to: 'sessions#new', as: :login
-    mount GoodJob::Engine,
+    mount Schematics::Tenant.current.storage.engine,
           at: '/admin/jobs',
           constraints: Schematics::AdminConstraint
   end
