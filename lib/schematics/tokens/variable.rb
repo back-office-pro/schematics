@@ -10,10 +10,7 @@ module Schematics
         @table_name = table_name
       end
 
-      def to_sql = [
-        with_references? ? references.map(&:pluralize) : @table_name,
-        raw_value
-      ].join('.')
+      def to_sql = [prefix, raw_value].join('.')
 
       def to_str = '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
 
@@ -28,6 +25,14 @@ module Schematics
       def references = @value
         .split('.')
         .tap(&:pop)
+
+      private
+
+      def prefix
+        return @table_name unless with_references?
+
+        references.map(&:pluralize)
+      end
     end
   end
 end
