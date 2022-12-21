@@ -3,8 +3,6 @@ en:
   titles:
     comparisons:
       show: Comparison
-    documentation:
-      show: API documentation
     imports:
       create: Import %{parent_human_name_plural}
       index: List of %{human_name_plural}
@@ -14,6 +12,8 @@ en:
       dashboard:
         admin: Administration
         home: Dashboard
+      documentation:
+        show: API documentation
       exception:
         internal_server_error: Something went wrong
         maintenance_mode: Maintenance in progress
