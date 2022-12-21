@@ -6,6 +6,7 @@ module Schematics
 
     included do
       include OpenApi::DSL
+      after_action :assign_version
     end
 
     class_methods do
@@ -138,6 +139,10 @@ module Schematics
           end
         end
       end
+    end
+
+    def assign_version
+      response.headers['Version'] = ::SchemaDataset.current_version
     end
   end
 end
