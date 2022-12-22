@@ -7,6 +7,8 @@ require 'storage/redis'
 # :reek:Attribute
 class Tenant
   class << self
+    DEFAULT_STORAGE = 'redis'
+
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
     attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
@@ -21,7 +23,9 @@ class Tenant
                     .first
     end
 
-    def storage = Storage::Postgresql.new
+    def storage = Storage
+      .const_get(env_storage)
+      .new
 
     def name = Rails
       .application
@@ -61,6 +65,11 @@ class Tenant
     rescue StandardError
       []
     end
+
+    def env_storage = ENV
+      .fetch('STORAGE', DEFAULT_STORAGE)
+      .classify
+      .to_sym
 
     def from = "no-reply@#{host}"
 
