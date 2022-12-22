@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rollbar/delay/sidekiq'
-
 Rollbar.configure do |config|
   config.access_token = Schematics::Engine.credentials.rollbar[:server_key]
   config.enabled = !Rails.env.test?
