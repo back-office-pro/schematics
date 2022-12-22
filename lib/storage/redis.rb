@@ -4,7 +4,11 @@ module Storage
   class Redis
     def engine = ::Sidekiq::Web
 
-    def engine_path = sidekiq_web_path
+    def engine_path = Rails
+      .application
+      .routes
+      .url_helpers
+      .sidekiq_web_path
 
     def cache_store = :redis_cache_store
 
