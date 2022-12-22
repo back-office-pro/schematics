@@ -3,7 +3,7 @@
 require 'array'
 require 'json_web_token'
 require 'object'
-require 'schematics/engine' if defined?(Rails)
+require 'schematics/engine' if defined?(Rails::Engine)
 require 'tenant'
 require 'validators/english_validator'
 require 'validators/singular_validator'
