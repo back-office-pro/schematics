@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'sidekiq-scheduler/web'
+require 'sidekiq/web'
+
 Rails.configuration.exceptions_app = Rails.application.routes
 
 Rails.application.routes.prepend do

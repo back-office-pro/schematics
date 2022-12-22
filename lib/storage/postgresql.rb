@@ -21,8 +21,6 @@ module Storage
     end
 
     def initializer
-      require 'good_job'
-
       Rails.application.configure do
         opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
         config.good_job.execution_mode = :async

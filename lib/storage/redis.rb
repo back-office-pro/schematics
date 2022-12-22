@@ -21,12 +21,6 @@ module Storage
     end
 
     def initializer
-      require 'hiredis'
-      require 'redis'
-      require 'rollbar/delay/sidekiq'
-      require 'sidekiq-scheduler/web'
-      require 'sidekiq/web'
-
       Sidekiq.configure_server do |config|
         opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
         config.merge!(opts)
