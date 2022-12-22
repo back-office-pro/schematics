@@ -12,7 +12,7 @@ module Storage
 
     def cache_store = :memory_store
 
-    def cache_store_options = nil
+    def cache_store_options = {}
 
     def profiler_store = Rack::MiniProfiler::MemoryStore
 
