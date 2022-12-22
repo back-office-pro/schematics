@@ -14,9 +14,9 @@ module Schematics
 
       def cache_store_options = { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379') }
 
-      def storage = Rack::MiniProfiler::RedisStore
+      def profiler_store = Rack::MiniProfiler::RedisStore
 
-      alias storage_options cache_store_options
+      alias profiler_store_options cache_store_options
 
       def queue_adapter
         return :test if Rails.env.test?

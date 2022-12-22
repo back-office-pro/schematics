@@ -9,11 +9,11 @@ module Schematics
 
       def cache_store = :memory_store
 
-      def cache_store_options = nil
+      def cache_store_options = {}
 
-      def storage = Rack::MiniProfiler::MemoryStore
+      def profiler_store = Rack::MiniProfiler::MemoryStore
 
-      alias storage_options cache_store_options
+      alias profiler_store_options cache_store_options
 
       def queue_adapter
         return :test if Rails.env.test?
