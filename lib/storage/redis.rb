@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'sidekiq-scheduler/web'
-require 'sidekiq/web'
-
 module Storage
   class Redis
     def engine = ::Sidekiq::Web
