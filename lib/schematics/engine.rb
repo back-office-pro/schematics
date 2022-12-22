@@ -21,9 +21,7 @@ require 'easy_translate'
 require 'elasticsearch'
 require 'friendly_id'
 require 'git'
-require 'good_job'
 require 'groupdate'
-require 'hiredis'
 require 'i18n-inflector'
 require 'i18n/beginning_of_week'
 require 'icalendar'
@@ -43,7 +41,6 @@ require 'rails'
 require 'rails-i18n'
 require 'ratonvirus'
 require 'ratonvirus/clamby'
-require 'redis'
 require 'rollbar'
 require 'route_translator'
 require 'rqrcode'
@@ -116,11 +113,6 @@ module Schematics
 
     # Active Job
     config.active_job.queue_adapter = ::Tenant.storage.queue_adapter
-
-    # Good job
-    config.good_job.execution_mode = :async
-    config.good_job.enable_cron = true
-    config.good_job.cron = YAML.load_file(join_config('sidekiq.yml')).fetch(:schedule)
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail

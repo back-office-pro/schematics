@@ -62,6 +62,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def install_good_job
+    return unless ENV.fetch('STORAGE') == 'postgresql'
+
     rails_command 'generate good_job:install'
   end
 

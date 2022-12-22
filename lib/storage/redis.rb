@@ -19,5 +19,26 @@ module Storage
 
       :sidekiq
     end
+
+    def initializer
+      proc do
+        require 'hiredis'
+        require 'redis'
+        require 'rollbar/delay/sidekiq'
+        require 'sidekiq-scheduler/web'
+        require 'sidekiq/web'
+
+        Sidekiq.configure_server do |config|
+          opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
+          config.merge!(opts)
+          config.queues = opts[:queues]
+          config.concurrency = opts[:concurrency]
+        end
+
+        Rollbar.configure do |config|
+          config.use_sidekiq unless Rails.env.test?
+        end
+      end
+    end
   end
 end
