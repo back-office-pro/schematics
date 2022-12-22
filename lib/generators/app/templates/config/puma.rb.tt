@@ -42,6 +42,7 @@ preload_app!
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
+# Embed sidekiq when enabled
 if ENV['STORAGE'] == 'redis'
   x = nil
 
