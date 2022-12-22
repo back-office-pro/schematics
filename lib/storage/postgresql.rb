@@ -10,9 +10,9 @@ module Storage
 
     def cache_store_options = nil
 
-    def storage = Rack::MiniProfiler::MemoryStore
+    def profiler_store = Rack::MiniProfiler::MemoryStore
 
-    alias storage_options cache_store_options
+    alias profiler_store_options cache_store_options
 
     def queue_adapter
       return :test if Rails.env.test?
@@ -21,16 +21,14 @@ module Storage
     end
 
     def initializer
-      proc do
-        require 'good_job'
+      require 'good_job'
 
-        Rails.application.configure do
-          opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
-          config.good_job.execution_mode = :async
-          config.good_job.enable_cron = true
-          config.good_job.queues = opts[:queues]
-          config.good_job.cron = opts[:schedule]
-        end
+      Rails.application.configure do
+        opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
+        config.good_job.execution_mode = :async
+        config.good_job.enable_cron = true
+        config.good_job.queues = opts[:queues]
+        config.good_job.cron = opts[:schedule]
       end
     end
   end

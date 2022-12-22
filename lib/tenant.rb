@@ -7,7 +7,7 @@ require 'storage/redis'
 # :reek:Attribute
 class Tenant
   class << self
-    DEFAULT_STORAGE = 'redis'
+    DEFAULT_STORAGE = 'postgresql'
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
     attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes

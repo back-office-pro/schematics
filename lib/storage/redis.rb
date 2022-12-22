@@ -10,9 +10,9 @@ module Storage
 
     def cache_store_options = { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379') }
 
-    def storage = Rack::MiniProfiler::RedisStore
+    def profiler_store = Rack::MiniProfiler::RedisStore
 
-    alias storage_options cache_store_options
+    alias profiler_store_options cache_store_options
 
     def queue_adapter
       return :test if Rails.env.test?
@@ -21,23 +21,21 @@ module Storage
     end
 
     def initializer
-      proc do
-        require 'hiredis'
-        require 'redis'
-        require 'rollbar/delay/sidekiq'
-        require 'sidekiq-scheduler/web'
-        require 'sidekiq/web'
+      require 'hiredis'
+      require 'redis'
+      require 'rollbar/delay/sidekiq'
+      require 'sidekiq-scheduler/web'
+      require 'sidekiq/web'
 
-        Sidekiq.configure_server do |config|
-          opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
-          config.merge!(opts)
-          config.queues = opts[:queues]
-          config.concurrency = opts[:concurrency]
-        end
+      Sidekiq.configure_server do |config|
+        opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
+        config.merge!(opts)
+        config.queues = opts[:queues]
+        config.concurrency = opts[:concurrency]
+      end
 
-        Rollbar.configure do |config|
-          config.use_sidekiq unless Rails.env.test?
-        end
+      Rollbar.configure do |config|
+        config.use_sidekiq unless Rails.env.test?
       end
     end
   end
