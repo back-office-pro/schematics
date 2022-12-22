@@ -68,7 +68,7 @@ class Tenant
 
     def env_storage = ENV
       .fetch('STORAGE', DEFAULT_STORAGE)
-      .classify
+      .camelize
       .to_sym
 
     def from = "no-reply@#{host}"
