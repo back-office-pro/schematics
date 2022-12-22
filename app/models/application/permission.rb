@@ -9,7 +9,7 @@ module Application
     end
 
     class_methods do
-      def create_all_entities_permissions! = tenant
+      def create_all_entities_permissions! = ::Tenant
         .schema
         .entities
         .reject(&:hidden?)

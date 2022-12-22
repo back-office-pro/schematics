@@ -1,38 +1,29 @@
 # frozen_string_literal: true
 
-module Schematics
-  # :reek:MissingSafeMethod
-  class Tenant
-    include ::ActiveModel::API
-    include ::ActiveModel::Attributes
+require 'active_support/core_ext/module/delegation'
 
+# :reek:Attribute
+class Tenant
+  class << self
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-    attribute :name, default: -> { Rails.application.class.module_parent_name.underscore }
-
-    class << self
-      SEMAPHORE = Mutex.new.freeze
-
-      def current
-        SEMAPHORE.synchronize do
-          @current ||= new
-        end
-      end
-    end
+    attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def schema
-      @schema ||= Schematics::Schema.new(data:)
-    end
-
-    def reset!
-      @schema = nil
+      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
     end
 
     def customer
-      @customer ||= ::Stripe::Customer
+      @customer ||= ::Stripe::Customer # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
                     .search(query: "name:'#{subdomain}'")
                     .data
                     .first
     end
+
+    def name = Rails
+      .application
+      .class
+      .module_parent_name
+      .underscore
 
     def subdomain = name.dasherize
 
@@ -59,7 +50,7 @@ module Schematics
 
     def data
       ::SchemaDataset
-        .where(state: [1, 2])
+        .where(state: 2)
         .last
         .data
         .as_json

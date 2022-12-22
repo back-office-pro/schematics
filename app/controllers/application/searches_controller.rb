@@ -22,7 +22,7 @@ module Application
 
     def i18n_title_path = 'searches'
 
-    def searches = current_tenant
+    def searches = ::Tenant
       .schema
       .entities
       .reject(&:hidden?)

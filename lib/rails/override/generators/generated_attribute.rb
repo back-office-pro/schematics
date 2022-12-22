@@ -53,8 +53,7 @@ module Rails
         private
 
         def schema_attribute
-          @schema_attribute ||= Schematics::Tenant
-                                .current
+          @schema_attribute ||= ::Tenant
                                 .schema
                                 .find_attribute_by_prefixed_name(@type.to_s)
         end

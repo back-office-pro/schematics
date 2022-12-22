@@ -23,9 +23,7 @@ module Schematics
         end
       end
 
-      def tenant = Tenant.current
-
-      def entity = tenant
+      def entity = ::Tenant
         .schema
         .find_entity_by_name(name.underscore)
 

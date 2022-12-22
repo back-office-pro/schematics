@@ -5,7 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :preferences_path, :root_path, to: 'Schematics::Engine.routes.url_helpers'
 
-      def entities = current_tenant
+      def entities = ::Tenant
         .schema
         .entities
         .reject(&:hidden?)

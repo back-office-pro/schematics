@@ -20,7 +20,7 @@ module Schematics
 
     protected
 
-    def parent_model_class = current_tenant
+    def parent_model_class = ::Tenant
       .schema
       .entities
       .map { [_1.class_name, _1.model_class] }

@@ -7,7 +7,6 @@ SimpleCov.start(:rails) do
   add_filter %w[
     app/docs/schematics
     lib/generators/app
-    lib/generators/tenant
     lib/schematics/version.rb
   ]
 end
