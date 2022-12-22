@@ -77,7 +77,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'i18n-inflector', '~> 2.6.7'
   spec.add_dependency 'icalendar', '~> 2.8.0'
   spec.add_dependency 'interactor', '~> 3.1.2'
-  spec.add_dependency 'jwt', '~> 2.5.0'
+  spec.add_dependency 'jwt', '~> 2.6.0'
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mail', '~> 2.7.1'
