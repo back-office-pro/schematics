@@ -3,11 +3,11 @@
 require 'array'
 require 'json_web_token'
 require 'object'
-require 'schematics/engine' if defined?(Rails::Engine)
 require 'tenant'
 require 'validators/english_validator'
 require 'validators/singular_validator'
 require 'zeitwerk'
+require 'schematics/engine' if defined?(Rails::Engine)
 
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
@@ -18,6 +18,7 @@ loader.ignore("#{__dir__}/i18n")
 loader.ignore("#{__dir__}/open_api")
 loader.ignore("#{__dir__}/rails")
 loader.ignore("#{__dir__}/simple_form")
+loader.ignore("#{__dir__}/storage")
 loader.ignore("#{__dir__}/validators")
 loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")

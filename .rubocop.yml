@@ -105,6 +105,7 @@ Style/RequireOrder:
     - spec/**/*
     - bin/importmap
     - Capfile
+    - lib/schematics.rb
     - app/controllers/schematics/resources_controller.rb
 Metrics/BlockLength:
   AllowedMethods:

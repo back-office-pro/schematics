@@ -120,40 +120,7 @@ module Schematics
     # Good job
     config.good_job.execution_mode = :async
     config.good_job.enable_cron = true
-    config.good_job.cron = {
-      database_backup_job: {
-        cron: '0 0 * * *',
-        class: 'Schematics::DatabaseBackupJob'
-      },
-      clean_database_backups_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::CleanDatabaseBackupsJob'
-      },
-      clean_comparisons_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::CleanComparisonsJob'
-      },
-      clean_drafts_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::CleanDraftsJob'
-      },
-      clean_searches_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::CleanSearchesJob'
-      },
-      clean_sessions_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::CleanSessionsJob'
-      },
-      clean_api_requests_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::CleanApiRequestsJob'
-      },
-      load_licence_job: {
-        cron: '0 1 * * *',
-        class: 'Schematics::LoadLicenceJob'
-      }
-    }
+    config.good_job.cron = YAML.load_file(join_config('sidekiq.yml')).fetch(:schedule)
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail

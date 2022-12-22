@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'storage/postgresql'
+require 'storage/redis'
 
 # :reek:Attribute
 class Tenant
@@ -18,6 +20,8 @@ class Tenant
                     .data
                     .first
     end
+
+    def storage = Storage::Postgresql.new
 
     def name = Rails
       .application
