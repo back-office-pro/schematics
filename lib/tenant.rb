@@ -1,22 +1,35 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'backend/postgresql'
+require 'backend/redis'
 
 # :reek:Attribute
+# rubocop:disable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod
 class Tenant
   class << self
+    DEFAULT_BACKEND = 'postgresql'
+
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
     attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def schema
-      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+      @schema ||= Schematics::Schema.new(data:)
     end
 
     def customer
-      @customer ||= ::Stripe::Customer # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+      @customer ||= ::Stripe::Customer
                     .search(query: "name:'#{subdomain}'")
                     .data
                     .first
+    end
+
+    def backend = Backend
+      .const_get(env_backend)
+      .new
+
+    def backend_config
+      @backend_config ||= YAML.load_file Schematics::Engine.join_config('backend.yml')
     end
 
     def name = Rails
@@ -58,6 +71,11 @@ class Tenant
       []
     end
 
+    def env_backend = ENV
+      .fetch('BACKEND', DEFAULT_BACKEND)
+      .camelize
+      .to_sym
+
     def from = "no-reply@#{host}"
 
     def host
@@ -75,3 +93,4 @@ class Tenant
     end
   end
 end
+# rubocop:enable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod

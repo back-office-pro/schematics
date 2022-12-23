@@ -61,6 +61,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations'
   end
 
+  def install_good_job
+    rails_command 'generate good_job:install'
+  end
+
   def install_active_storage
     rails_command 'active_storage:install'
   end

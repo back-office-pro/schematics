@@ -3,7 +3,7 @@
     .card-body.p-3
       .row.g-0.align-items-center
         .col.text-center.p-4
-          = link_to sidekiq_web_path, class: 'text-decoration-none', data: { turbo: false } do
+          = link_to Tenant.backend.engine_path, class: 'text-decoration-none', data: { turbo: false } do
             = fa_icon icon, size: '3x', class: 'd-inline-block'
             h5.my-4 = title
             .text-muted = caption

@@ -7,6 +7,6 @@ if Rails.env.production?
     # Disable eager_load to prevent scaffold_generator issue on production
     app.config.eager_load = false
     # Cache
-    app.config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379') } # rubocop:disable Layout/LineLength
+    app.config.cache_store = Tenant.backend.cache_store, Tenant.backend.cache_store_options
   end
 end

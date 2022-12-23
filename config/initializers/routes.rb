@@ -10,7 +10,7 @@ Rails.application.routes.prepend do
   localized do
     Tenant.schema.load_routes
     get 'login', to: 'sessions#new', as: :login
-    mount Sidekiq::Web,
+    mount Tenant.backend.engine,
           at: '/admin/jobs',
           constraints: Schematics::AdminConstraint
   end
