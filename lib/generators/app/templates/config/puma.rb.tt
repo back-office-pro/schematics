@@ -43,7 +43,7 @@ preload_app!
 plugin :tmp_restart
 
 case Tenant.backend
-when Storage::Redis
+when Backend::Redis
   x = nil
 
   on_worker_boot do
@@ -56,7 +56,7 @@ when Storage::Redis
   on_worker_shutdown do
     x&.stop
   end
-when Storage::Postgresql
+when Backend::Postgresql
   MAIN_PID = Process.pid.freeze
 
   before_fork do
