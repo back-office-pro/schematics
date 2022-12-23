@@ -134,13 +134,15 @@ module Schematics
     config.i18n.available_locales = %i[en fr]
     config.i18n.raise_on_missing_translations = !Rails.env.production?
 
-    # Make sure we override main app defaults
+    # Active Job
+    config.before_configuration do
+      config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
+    end
+
+    # Active Storage
     config.after_initialize do
-      # Active Storage
       config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
-      # Active Job
-      config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
     end
   end
 end
