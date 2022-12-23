@@ -42,36 +42,17 @@ preload_app!
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
+# Run with backend
+#
 case Tenant.backend
 when Backend::Redis
   x = nil
-
-  on_worker_boot do
-    x = Sidekiq.configure_embed do
-      # do nothing
-    end
-    x.run
-  end
-
-  on_worker_shutdown do
-    x&.stop
-  end
+  on_worker_boot { x = Sidekiq.configure_embed {}; x.run }
+  on_worker_shutdown { x&.stop }
 when Backend::Postgresql
   MAIN_PID = Process.pid.freeze
-
-  before_fork do
-    GoodJob.shutdown
-  end
-
-  on_worker_boot do
-    GoodJob.restart
-  end
-
-  on_worker_shutdown do
-    GoodJob.shutdown
-  end
-
-  at_exit do
-    GoodJob.shutdown if Process.pid == MAIN_PID
-  end
+  before_fork { GoodJob.shutdown }
+  on_worker_boot { GoodJob.restart }
+  on_worker_shutdown { GoodJob.shutdown }
+  at_exit { GoodJob.shutdown if Process.pid == MAIN_PID }
 end
