@@ -105,7 +105,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.3.0'
   spec.add_dependency 'sidekiq', '~> 7.0.2'
-  spec.add_dependency 'sidekiq-scheduler'
+  spec.add_dependency 'sidekiq-scheduler', '~> 5.0.0.beta1'
   spec.add_dependency 'simple_form', '~> 5.1.0'
   spec.add_dependency 'slim', '~> 4.1.0'
   spec.add_dependency 'strip_attributes', '~> 1.13.0'

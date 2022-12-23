@@ -221,11 +221,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def add_gem
     gem 'schematics', **{ path: gem_path }.compact
-    # TODO: remove when sidekiq-scheduler is released
-    gem 'sidekiq-scheduler',
-        github: 'sidekiq-scheduler/sidekiq-scheduler',
-        branch: 'master',
-        ref: '76573dbc46c73afa213331049cfc5657582dc376'
   end
 
   def clean_app_path
