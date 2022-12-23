@@ -114,9 +114,6 @@ module Schematics
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true
 
-    # Active Job
-    config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
-
     # Mailer
     config.action_mailer.delivery_method = :sendmail
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
@@ -142,6 +139,8 @@ module Schematics
       # Active Storage
       config.active_storage.service = :amazon if Rails.env.production?
       config.active_storage.replace_on_assign_to_many = false
+      # Active Job
+      config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
     end
   end
 end
