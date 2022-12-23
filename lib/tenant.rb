@@ -5,6 +5,7 @@ require 'storage/postgresql'
 require 'storage/redis'
 
 # :reek:Attribute
+# rubocop:disable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod
 class Tenant
   class << self
     DEFAULT_STORAGE = 'postgresql'
@@ -13,11 +14,11 @@ class Tenant
     attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def schema
-      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+      @schema ||= Schematics::Schema.new(data:)
     end
 
     def customer
-      @customer ||= ::Stripe::Customer # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+      @customer ||= ::Stripe::Customer
                     .search(query: "name:'#{subdomain}'")
                     .data
                     .first
@@ -26,6 +27,10 @@ class Tenant
     def storage = Storage
       .const_get(env_storage)
       .new
+
+    def storage_config
+      @storage_config ||= YAML.load_file Schematics::Engine.join_config('storage.yml')
+    end
 
     def name = Rails
       .application
@@ -88,3 +93,4 @@ class Tenant
     end
   end
 end
+# rubocop:enable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod

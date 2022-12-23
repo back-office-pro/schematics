@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 Sidekiq.configure_server do |config|
-  opts = YAML.load_file Schematics::Engine.join_config('sidekiq.yml')
-  config.merge!(opts)
-  config.queues = opts[:queues]
-  config.concurrency = opts[:concurrency]
+  config.merge!(Tenant.storage_config)
+  config.queues = Tenant.storage_config[:queues]
+  config.concurrency = Tenant.storage_config[:concurrency]
 end
