@@ -51,7 +51,7 @@ module Schematics
           .to_date
 
         def end_of_month_date
-          (calendar_start_date || resources.map(&CALENDAR_START).max || ::Date.current)
+          (calendar_start_date || resources.maximum(CALENDAR_START) || ::Date.current)
             .end_of_month
         end
 
@@ -71,7 +71,7 @@ module Schematics
           .to_date
 
         def start_of_month_date
-          (calendar_start_date || resources.map(&CALENDAR_START).min || ::Date.current)
+          (calendar_start_date || resources.minimum(CALENDAR_START) || ::Date.current)
             .beginning_of_month
         end
 
