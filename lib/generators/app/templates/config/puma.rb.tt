@@ -42,7 +42,7 @@ preload_app!
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
-case Tenant.storage
+case Tenant.backend
 when Storage::Redis
   x = nil
 

@@ -1,11 +1,11 @@
 development:
-  adapter: <%%= ENV['STORAGE'] %>
+  adapter: <%%= ENV['BACKEND'] %>
   url: <%%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379' } %>
 
 test:
   adapter: test
 
 production:
-  adapter: <%%= ENV['STORAGE'] %>
+  adapter: <%%= ENV['BACKEND'] %>
   url: <%%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379' } %>
   channel_prefix: <%= app_name %>_production

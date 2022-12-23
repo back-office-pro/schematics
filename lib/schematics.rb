@@ -13,12 +13,12 @@ loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
 loader.ignore("#{__dir__}/active_record")
 loader.ignore("#{__dir__}/active_storage")
+loader.ignore("#{__dir__}/backend")
 loader.ignore("#{__dir__}/generators")
 loader.ignore("#{__dir__}/i18n")
 loader.ignore("#{__dir__}/open_api")
 loader.ignore("#{__dir__}/rails")
 loader.ignore("#{__dir__}/simple_form")
-loader.ignore("#{__dir__}/storage")
 loader.ignore("#{__dir__}/validators")
 loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")

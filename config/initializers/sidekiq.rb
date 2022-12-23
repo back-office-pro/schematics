@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Sidekiq.configure_server do |config|
-  config.merge!(Tenant.storage_config)
-  config.queues = Tenant.storage_config[:queues]
-  config.concurrency = Tenant.storage_config[:concurrency]
+  config.merge!(Tenant.backend_config)
+  config.queues = Tenant.backend_config[:queues]
+  config.concurrency = Tenant.backend_config[:concurrency]
 end

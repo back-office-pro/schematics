@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Storage
+module Backend
   class Postgresql
     def engine = ::GoodJob::Engine
 

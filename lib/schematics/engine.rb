@@ -115,7 +115,7 @@ module Schematics
     config.active_record.encryption.extend_queries = true
 
     # Active Job
-    config.active_job.queue_adapter = ::Tenant.storage.queue_adapter
+    config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
 
     # Mailer
     config.action_mailer.delivery_method = :sendmail

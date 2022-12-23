@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
-require 'storage/postgresql'
-require 'storage/redis'
+require 'backend/postgresql'
+require 'backend/redis'
 
 # :reek:Attribute
 # rubocop:disable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod
 class Tenant
   class << self
-    DEFAULT_STORAGE = 'postgresql'
+    DEFAULT_BACKEND = 'postgresql'
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
     attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
@@ -24,12 +24,12 @@ class Tenant
                     .first
     end
 
-    def storage = Storage
-      .const_get(env_storage)
+    def backend = Backend
+      .const_get(env_backend)
       .new
 
-    def storage_config
-      @storage_config ||= YAML.load_file Schematics::Engine.join_config('storage.yml')
+    def backend_config
+      @backend_config ||= YAML.load_file Schematics::Engine.join_config('backend.yml')
     end
 
     def name = Rails
@@ -71,8 +71,8 @@ class Tenant
       []
     end
 
-    def env_storage = ENV
-      .fetch('STORAGE', DEFAULT_STORAGE)
+    def env_backend = ENV
+      .fetch('BACKEND', DEFAULT_BACKEND)
       .camelize
       .to_sym
 
