@@ -23,6 +23,7 @@ describe Schematics::Attributes::RichText do
   its(:preload) { is_expected.to eq(rich_text_summary: [embeds_attachments: :blob]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to eq('MyRichText') }
+  its(:to_sql) { is_expected.to eq('action_text_rich_texts.body') }
   its(:search_column) { is_expected.to eq(:rich_text_summary_body) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:summary_i_cont) }

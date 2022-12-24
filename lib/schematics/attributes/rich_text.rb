@@ -23,6 +23,8 @@ module Schematics
 
       def search_column = :"rich_text_#{name}_body"
 
+      def to_sql = 'action_text_rich_texts.body'
+
       def to_str = <<~RUBY
         has_rich_text :#{name}
       RUBY
