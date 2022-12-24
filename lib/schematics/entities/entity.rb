@@ -179,6 +179,10 @@ module Schematics
         .flat_map(&:permitted_json_params)
         .push(:lock_version)
 
+      def joins = includes.excluding association_attributes
+        .select(&:polymorphic?)
+        .flat_map(&:preload)
+
       def includes = preloadable_elements
         .flat_map(&:preload)
         .compact

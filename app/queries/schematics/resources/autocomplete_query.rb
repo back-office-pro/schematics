@@ -6,7 +6,8 @@ module Schematics
       LIMIT = 5
 
       def call(params, field, ability)
-        ransack(params)
+        left_joins(entity.joins)
+          .ransack(params)
           .result(distinct: true)
           .preload(entity.includes)
           .accessible_by(ability)
