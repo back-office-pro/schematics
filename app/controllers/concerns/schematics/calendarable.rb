@@ -8,7 +8,9 @@ module Schematics
     CALENDAR_END = Entities::Entity::CALENDAR_END
 
     def pagy_calendar_filter(collection, from, to)
-      collection.where CALENDAR_START => (calendar_start_date || from)..(calendar_end_date || to)
+      ::Tenant
+        .search_engine
+        .pagy_calendar_filter(collection, calendar_start_date, calendar_end_date, from, to)
     end
 
     def pagy_calendar_period(*)

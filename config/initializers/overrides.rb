@@ -43,7 +43,7 @@ ActiveSupport.on_load(:active_storage_record) do
     include Schematics::Loadable
     include Schematics::Translatable
     loadable concerns: [
-      Schematics::Ransackable,
+      Tenant.search_engine.concern,
       Schematics::SoftDeletable
     ]
   end

@@ -8,6 +8,7 @@ require 'backend/redis'
 class Tenant
   class << self
     DEFAULT_BACKEND = 'postgresql'
+    DEFAULT_SEARCH_ENGINE = 'postgresql'
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
     delegate :mutex, to: :backend, private: true
@@ -35,6 +36,10 @@ class Tenant
 
     def backend = Backend
       .const_get(env_backend)
+      .new
+
+    def search_engine = SearchEngine
+      .const_get(env_search_engine)
       .new
 
     def name = Rails
@@ -77,6 +82,11 @@ class Tenant
 
     def env_backend = ENV
       .fetch('BACKEND', DEFAULT_BACKEND)
+      .camelize
+      .to_sym
+
+    def env_search_engine = ENV
+      .fetch('SEARCH_ENGINE', DEFAULT_SEARCH_ENGINE)
       .camelize
       .to_sym
 
