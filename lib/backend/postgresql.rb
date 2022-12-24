@@ -4,6 +4,7 @@ module Backend
   class Postgresql
     def engine = ::GoodJob::Engine
 
+    # :reek:UtilityFunction
     def engine_path = Rails
       .application
       .routes
@@ -18,6 +19,7 @@ module Backend
 
     alias profiler_store_options cache_store_options
 
+    # :reek:UtilityFunction
     def queue_adapter
       return :test if Rails.env.test?
 
