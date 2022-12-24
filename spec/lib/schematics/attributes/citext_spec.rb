@@ -30,6 +30,12 @@ describe Schematics::Attributes::Citext do
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      last_name: last_name&.to_s
+    RUBY
+  end
+
   context 'when attribute is unique' do
     let(:options) { { unique: true } }
 

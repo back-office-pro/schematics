@@ -62,6 +62,12 @@ describe Schematics::Associations::HasOneThrough do
   its(:search_query) { is_expected.to eq(:schema_i_cont) }
   its('descriptor.name') { is_expected.to eq('title') }
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      schema: schema&.to_s
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_one :schema,

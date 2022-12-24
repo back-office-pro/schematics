@@ -22,6 +22,10 @@ module Schematics
         super.second
       ]
 
+      def search_data = <<~RUBY
+        #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
+      RUBY
+
       def search_column = :"#{name}_blobs_filename"
 
       def to_str = <<~RUBY

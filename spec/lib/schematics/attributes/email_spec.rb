@@ -34,6 +34,12 @@ describe Schematics::Attributes::Email do
     RUBY
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      email: email&.to_s
+    RUBY
+  end
+
   context 'when email is unique' do
     let(:options) { { unique: true } }
 

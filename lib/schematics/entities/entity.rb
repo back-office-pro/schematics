@@ -236,6 +236,12 @@ module Schematics
         actions.concat(events.map(&:name))
       end
 
+      def search_data = <<~RUBY
+        def search_data = {
+          #{search_data_elements}
+        }
+      RUBY
+
       def valid?(*) # rubocop:disable Metrics/CyclomaticComplexity
         valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
         %i[attributes virtuals triggers has_and_belongs_to_many_associations].each do |element|
@@ -275,7 +281,13 @@ module Schematics
 
       protected
 
-      def model_elements = [self, descriptor].concat(triggers, elements, validators, search_aliases)
+      def model_elements = [self, descriptor, search_data]
+        .concat(triggers, elements, validators, search_aliases)
+
+      def search_data_elements = searchable_elements
+        .map(&:search_data)
+        .map(&:squish)
+        .join(",\n  ")
 
       def id_attribute = Attributes::Uuid.new(entity: self, name: 'id')
 

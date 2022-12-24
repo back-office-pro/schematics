@@ -43,6 +43,12 @@ describe Schematics::Attributes::TimeZone do
     RUBY
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      time_zone: time_zone&.to_s
+    RUBY
+  end
+
   context 'when time_zone is required' do
     let(:options) { { required: true } }
 

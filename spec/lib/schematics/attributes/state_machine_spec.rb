@@ -59,6 +59,7 @@ describe Schematics::Attributes::StateMachine do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('orders.state') }
   its(:to_s) { is_expected.to eq('schema:order_state') }
+  its(:search_data) { is_expected.to eq('state:') }
 
   its(:available_options) do
     is_expected.to include(

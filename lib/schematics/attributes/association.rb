@@ -58,6 +58,12 @@ module Schematics
         super
       end
 
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
+
       def search_column = :"#{name}_#{descriptor.name}"
 
       def to_sql = "#{inverse_entity.table_name.pluralize}.#{descriptor.name}"

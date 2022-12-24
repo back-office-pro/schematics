@@ -27,6 +27,7 @@ describe Schematics::Attributes::Enum do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('products.state') }
   its(:to_s) { is_expected.to eq('schema:product_state') }
+  its(:search_data) { is_expected.to eq('state:') }
 
   its(:available_options) do
     is_expected.to include(

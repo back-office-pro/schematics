@@ -2,6 +2,7 @@
 :concurrency: 2
 :queues:
   - default
+  - searchkick
   - rollbar
   - mailers
 :scheduler:

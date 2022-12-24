@@ -69,6 +69,12 @@ describe Schematics::Attributes::BelongsTo do
     )
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      schema: schema&.to_s
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       belongs_to :schema,

@@ -55,6 +55,12 @@ describe Schematics::Associations::HasOne do
   its(:search_query) { is_expected.to eq(:entity_i_cont) }
   its('descriptor.name') { is_expected.to eq('type') }
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      entity: entity&.to_s
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_one :entity,

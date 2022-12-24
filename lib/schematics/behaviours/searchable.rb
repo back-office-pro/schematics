@@ -12,6 +12,10 @@ module Schematics
       def search_alias = <<~RUBY
         ransack_alias :#{name}, :#{search_column}
       RUBY
+
+      def search_data = <<~RUBY.squish
+        #{name}:
+      RUBY
     end
   end
 end

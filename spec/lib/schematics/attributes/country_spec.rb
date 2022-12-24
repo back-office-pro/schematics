@@ -40,6 +40,12 @@ describe Schematics::Attributes::Country do
     RUBY
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      country: country&.to_s
+    RUBY
+  end
+
   context 'when country is required' do
     let(:options) { { required: true } }
 

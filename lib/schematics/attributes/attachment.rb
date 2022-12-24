@@ -38,6 +38,12 @@ module Schematics
         association_name => [blob: :variant_records]
       }
 
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          (#{name}.filename.to_s if #{name}.attached?)
+        RUBY
+
       def search_column = :"#{name}_blob_filename"
 
       def to_sql = 'active_storage_blobs.filename'

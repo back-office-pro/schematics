@@ -22,6 +22,12 @@ module Schematics
         .select_is_a?(Commands::DestroyEntity)
         .map(&:entity)
 
+      def entities = @build_commands
+        .concat(@clean_commands)
+        .reject_is_a?(Commands::DestroyEntity)
+        .map(&:entity)
+        .uniq
+
       private
 
       def generate_build_commands # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

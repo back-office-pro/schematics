@@ -34,6 +34,12 @@ describe Schematics::Attributes::Url do
     RUBY
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      url: url&.to_s
+    RUBY
+  end
+
   context 'when url is unique' do
     let(:options) { { unique: true } }
 

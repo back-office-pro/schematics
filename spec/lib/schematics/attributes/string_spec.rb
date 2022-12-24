@@ -38,6 +38,12 @@ describe Schematics::Attributes::String do
     )
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      last_name: last_name&.to_s
+    RUBY
+  end
+
   context 'when string is unique' do
     let(:options) { { unique: true } }
 

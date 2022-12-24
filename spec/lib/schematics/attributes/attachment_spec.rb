@@ -67,6 +67,12 @@ describe Schematics::Attributes::Attachment do
     )
   end
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      avatar: (avatar.filename.to_s if avatar.attached?)
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_one_base64_attached :avatar

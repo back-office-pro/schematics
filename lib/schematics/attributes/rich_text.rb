@@ -21,6 +21,12 @@ module Schematics
         association_name => [embeds_attachments: :blob]
       }
 
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_plain_text
+        RUBY
+
       def search_column = :"rich_text_#{name}_body"
 
       def to_sql = 'action_text_rich_texts.body'

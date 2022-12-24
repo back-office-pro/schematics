@@ -30,6 +30,12 @@ describe Schematics::Attributes::Text do
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      content: content&.to_s
+    RUBY
+  end
+
   context 'when hidden' do
     let(:options) { { hidden: true } }
 
