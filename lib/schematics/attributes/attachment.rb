@@ -40,6 +40,8 @@ module Schematics
 
       def search_column = :"#{name}_blob_filename"
 
+      def to_sql = 'active_storage_blobs.filename'
+
       def to_str = <<~RUBY
         has_one_base64_attached :#{name}
         accepts_nested_attributes_for :#{association_name},

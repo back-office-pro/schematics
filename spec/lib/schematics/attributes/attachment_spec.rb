@@ -22,7 +22,7 @@ describe Schematics::Attributes::Attachment do
   its(:default) { is_expected.to be_a(Rack::Test::UploadedFile) }
   its(:validators) { is_expected.to eq(antivirus: true) }
   its(:weight) { is_expected.to eq(1) }
-  its(:to_sql) { is_expected.to eq('users.avatar') }
+  its(:to_sql) { is_expected.to eq('active_storage_blobs.filename') }
   its(:to_s) { is_expected.to eq('schema:user_avatar') }
   its(:preload) { is_expected.to eq(avatar_attachment: [blob: :variant_records]) }
   its(:extension) { is_expected.to eq('png') }
