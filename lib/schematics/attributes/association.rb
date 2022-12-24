@@ -60,6 +60,8 @@ module Schematics
 
       def search_column = :"#{name}_#{descriptor.name}"
 
+      def to_sql = "#{inverse_entity.table_name.pluralize}.#{descriptor.name}"
+
       def to_str
         if polymorphic?
           <<~RUBY

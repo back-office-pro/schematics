@@ -53,6 +53,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:model_class) { is_expected.to be_nil }
   its(:preload) { is_expected.to eq(:schema) }
   its(:icon) { is_expected.to eq(:square_caret_right) }
+  its(:to_sql) { is_expected.to eq('schemas.title') }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
