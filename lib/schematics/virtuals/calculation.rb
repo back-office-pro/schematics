@@ -23,6 +23,7 @@ module Schematics
 
       def numberable_variables? = variables
         .map(&entity.method(:find_field_by_name))
+        .compact
         .reject_is_a?(Behaviours::Numerable)
         .map(&:name)
         .each { |name| errors.add(:function, :numerable, name:) }
