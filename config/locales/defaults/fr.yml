@@ -26,6 +26,7 @@ fr:
       aspect_ratio_not_portrait: doit être une image de type portait
       aspect_ratio_not_square: doit être une image carrée
       aspect_ratio_unknown: a un ratio d'aspect inconnu
+      assignment: ne doit pas contenir d'assignement
       color: n'est pas un code hexadécimal de couleur valide
       content_type_invalid: a un type de fichier non valide
       dimension_height_equal_to: doit avoir une hauteur égale à %{length} pixels
@@ -46,16 +47,17 @@ fr:
       limit_out_of_range: a un nombre de fichiers en dehors des limites
       mime_type: n'est pas un type de média valide
       name: doit contenir uniquement des lettres minusculues ou tirets du bas
+      numerable: "$%{name} n'est pas une variable numérique"
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
+      reserved_name: est un nom réservé
       singular: n'est pas au singulier
     virtuals:
-      argument: un champ virtuel ne peut pas contenir d'assignement
       name: "%{name} n'est pas défini"
       nil: une variable n'a pas de valeur
       type: conversion de %{source} en %{target}
       types:
         integer: nombre
-        string: chaîne de caractère
+        string: chaîne de caractères
   'false': faux
   i18n:
     inflections:
