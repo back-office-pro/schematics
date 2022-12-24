@@ -6,6 +6,7 @@ module Schematics
       result = Imports::ImportData.call(import:)
       if result.success?
         import.status_finished!
+        import.model_class.try(:reindex)
       else
         import.update!(status: 'error', import_errors: result.errors)
       end
