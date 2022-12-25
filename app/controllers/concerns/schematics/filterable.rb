@@ -15,21 +15,12 @@ module Schematics
     def filter_params
       return {} unless params.key?(filter_key)
 
-      filter_params_to_h
-        .deep_symbolize_keys
-        .deep_flatten
-        .transform_keys(&method(:convert_key_to_search_query))
+      filter_params_to_h.deep_symbolize_keys
     end
 
     private
 
     def filter_key = Ransack.options[:search_key]
-
-    def convert_key_to_search_query(key)
-      entity
-        .find_field_by_name(key)
-        &.search_query || key
-    end
 
     def filter_params_to_h = params
       .require(filter_key)
