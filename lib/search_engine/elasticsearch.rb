@@ -6,6 +6,8 @@ module SearchEngine
 
     def concern = Schematics::Elasticsearchable
 
+    # :reek:ControlParameter
+    # :reek:UtilityFunction
     def pagy_calendar_filter(collection, calendar_start_date, calendar_end_date, from, to)
       collection.third[:where][Schematics::Entities::Entity::CALENDAR_START] = {
         gte: calendar_start_date || from,
