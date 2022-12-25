@@ -20,12 +20,14 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
 
       def maps_api_key = credentials
-        .gcloud[:api_key]
+        .gcloud
+        .fetch(:api_key)
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
       def rollbar_client_key = credentials
-        .rollbar[:client_key]
+        .rollbar
+        .fetch(:client_key)
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 

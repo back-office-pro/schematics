@@ -2,4 +2,5 @@
 
 EasyTranslate.api_key = Schematics::Engine
                         .credentials
-                        .gcloud[:api_key]
+                        .gcloud
+                        .fetch(:api_key)
