@@ -18,8 +18,8 @@ module Application
       .reject(&:core?) # rubocop:disable Performance/Count
       .size
 
-    def quota = Struct
-      .new(:entities, :storage, :users, keyword_init: true)
+    def quota = Data
+      .define(:entities, :storage, :users)
       .new(**metadata)
 
     def quota_entities_exceeded?
