@@ -9,6 +9,8 @@ require 'validators/singular_validator'
 require 'zeitwerk'
 require 'schematics/engine' if defined?(Rails::Engine)
 
+Regexp.timeout = 1.0
+
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
 loader.ignore("#{__dir__}/active_record")
