@@ -12,5 +12,7 @@ module SearchEngine
       collection.where Schematics::Entities::Entity::CALENDAR_START =>
         (calendar_start_date || from)..(calendar_end_date || to)
     end
+
+    def pagy_backend = :pagy
   end
 end

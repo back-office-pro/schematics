@@ -15,5 +15,7 @@ module SearchEngine
       }
       collection
     end
+
+    def pagy_backend = :pagy_searchkick
   end
 end

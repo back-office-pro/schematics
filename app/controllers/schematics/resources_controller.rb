@@ -251,6 +251,7 @@ module Schematics
       @calendar, @pagy, @resources = pagy_calendar(
         @resources,
         month: { format: t('date.formats.month') },
+        pagy: { backend: ::Tenant.search_engine.pagy_backend },
         active: entity.viewer == :calendar
       )
     end
