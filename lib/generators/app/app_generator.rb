@@ -34,10 +34,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     template 'github/workflows/build.yml', '.github/workflows/build.yml'
   end
 
-  def create_puppeteer_config_file
-    template File.join(root_path, '.puppeteerrc.cjs'), '.puppeteerrc.cjs'
-  end
-
   def create_nginx_config_file
     template 'config/nginx.conf'
   end
@@ -123,7 +119,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def edit_gitignore
     append_to_file '.gitignore', <<~TEXT
-      /.cache
       /.env
       /node_modules
     TEXT
