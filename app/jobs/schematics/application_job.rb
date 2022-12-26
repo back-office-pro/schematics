@@ -3,6 +3,6 @@
 module Schematics
   class ApplicationJob < ::ApplicationJob
     discard_on ActiveJob::DeserializationError
-    unique :until_executed
+    unique :while_executing
   end
 end
