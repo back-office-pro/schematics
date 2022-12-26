@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.1.3'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro'
   spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.files = Dir['{app,config,db,lib}/**/{*,.*}', '.puppeteerrc.cjs', 'Capfile', 'package.json']
+  spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
   spec.add_development_dependency 'bootsnap', '~> 1.15.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
@@ -67,11 +67,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-transformer', '~> 1.0.1'
   spec.add_dependency 'easy_translate', '~> 0.5.1'
   spec.add_dependency 'elasticsearch', '~> 7.17.0'
+  spec.add_dependency 'ferrum', '~> 0.13.0'
   spec.add_dependency 'friendly_id', '~> 5.5.0'
   spec.add_dependency 'git', '~> 1.13.0'
   spec.add_dependency 'good_job', '~> 3.7.2'
   spec.add_dependency 'groupdate', '~> 6.1.0'
-  spec.add_dependency 'grover', '~> 1.1.2'
   spec.add_dependency 'hiredis', '~> 0.6.3'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
   spec.add_dependency 'i18n-inflector', '~> 2.6.7'
