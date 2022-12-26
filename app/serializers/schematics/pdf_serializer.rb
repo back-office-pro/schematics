@@ -14,8 +14,10 @@ module Schematics
     end
 
     def content
-      browser.go_to("data:text/html,#{template_with_absolute_paths}")
-      browser.pdf(**pdf_options)
+      page = browser.create_page
+      page.content = template_with_absolute_paths
+      page.network.wait_for_idle
+      page.pdf(**pdf_options)
     ensure
       browser.quit
     end
