@@ -12,11 +12,10 @@ module Schematics
 
     def content
       page = browser.create_page
-      page.content = template_with_absolute_paths
+      page.content = template
       page.network.wait_for_idle
       page.pdf(**pdf_options)
     ensure
-      browser.reset
       browser.quit
     end
 
@@ -69,8 +68,6 @@ module Schematics
 
     def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
 
-    def template_with_absolute_paths = template.gsub(%r{/assets/}, "#{asset_url}/assets/")
-
     def template
       @template ||= render(
         action: :show,
@@ -78,7 +75,7 @@ module Schematics
         layout: 'layouts/schematics/pdf',
         locals: { resource: @resource },
         assigns: { resource: @resource }
-      )
+      ).gsub(%r{/assets/}, "#{asset_url}/assets/")
     end
   end
 end
