@@ -12,7 +12,7 @@ module Schematics
 
     def content
       page = browser.create_page
-      page.content = template
+      page.content = template.gsub(%r{/assets/}, "#{asset_url}/assets/")
       page.network.wait_for_idle
       page.pdf(**pdf_options)
     ensure
@@ -75,7 +75,7 @@ module Schematics
         layout: 'layouts/schematics/pdf',
         locals: { resource: @resource },
         assigns: { resource: @resource }
-      ).gsub(%r{/assets/}, "#{asset_url}/assets/")
+      )
     end
   end
 end
