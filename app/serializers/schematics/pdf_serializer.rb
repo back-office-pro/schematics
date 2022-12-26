@@ -53,7 +53,10 @@ module Schematics
     def pdf_options = {
       header_template: PdfHeader::Component.new(resource: @resource).to_html,
       footer_template: PdfFooter::Component.new.to_html,
-      margin: { top: 48, bottom: 48, left: 16, right: 16 },
+      margin_top: 0.5,
+      margin_bottom: 0.5,
+      margin_left: 0.167,
+      margin_right: 0.167,
       display_header_footer: true,
       cache: false,
       format: :A4,
