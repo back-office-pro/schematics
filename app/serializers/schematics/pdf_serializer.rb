@@ -2,9 +2,6 @@
 
 module Schematics
   class PdfSerializer
-    PROTOCOL_REGEX = %r{(href|src)=(['"])//([^"']*|[^"']*)['"]}
-    PATH_REGEX = %r{(href|src)=(['"])/([^/"']([^"']*|[^"']*))?['"]}
-
     delegate :render, to: :controller, private: true
     delegate :human_name, to: :model_class, private: true
     delegate :default_url_options, to: '::Tenant', private: true
@@ -19,6 +16,7 @@ module Schematics
       page.network.wait_for_idle
       page.pdf(**pdf_options)
     ensure
+      browser.reset
       browser.quit
     end
 
@@ -41,7 +39,7 @@ module Schematics
     private
 
     def asset_url
-      URI.parse(URI::HTTP.build(**default_url_options.merge(path: '/')).to_s)
+      URI.parse(URI::HTTP.build(**default_url_options).to_s)
     end
 
     def controller
@@ -71,9 +69,7 @@ module Schematics
 
     def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
 
-    def template_with_absolute_paths = template
-      .gsub(PATH_REGEX, "\\1=\\2#{asset_url}\\3\\2")
-      .gsub(PROTOCOL_REGEX, "\\1=\\2#{asset_url.scheme}://\\3\\2")
+    def template_with_absolute_paths = template.gsub(%r{/assets/}, "#{asset_url}/assets/")
 
     def template
       @template ||= render(
