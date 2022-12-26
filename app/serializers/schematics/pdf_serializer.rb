@@ -2,6 +2,9 @@
 
 module Schematics
   class PdfSerializer
+    PROTOCOL_REGEX = %r{(href|src)=(['"])//([^"']*|[^"']*)['"]}
+    PATH_REGEX = %r{(href|src)=(['"])/([^/"']([^"']*|[^"']*))?['"]}
+
     delegate :render, to: :controller, private: true
     delegate :human_name, to: :model_class, private: true
     delegate :default_url_options, to: '::Tenant', private: true
@@ -10,9 +13,12 @@ module Schematics
       @resource = resource
     end
 
-    def content = Grover
-      .new(pdf, **options)
-      .to_pdf
+    def content
+      browser.go_to("data:text/html,#{template_with_absolute_paths}")
+      browser.pdf(**pdf_options)
+    ensure
+      browser.quit
+    end
 
     def content_type = ::Mime[extension].to_s
 
@@ -44,14 +50,25 @@ module Schematics
       @resource.class
     end
 
-    def options = {
+    def pdf_options = {
       header_template: PdfHeader::Component.new(resource: @resource).to_html,
-      footer_template: PdfFooter::Component.new.to_html
+      footer_template: PdfFooter::Component.new.to_html,
+      margin: { top: 48, bottom: 48, left: 16, right: 16 },
+      display_header_footer: true,
+      cache: false,
+      format: :A4,
+      encoding: :binary
     }
 
-    def pdf
-      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url.to_s, asset_url.scheme)
+    def browser
+      @browser ||= Ferrum::Browser.new(browser_options:)
     end
+
+    def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
+
+    def template_with_absolute_paths = template
+      .gsub(PATH_REGEX, "\\1=\\2#{asset_url}\\3\\2")
+      .gsub(PROTOCOL_REGEX, "\\1=\\2#{asset_url.scheme}://\\3\\2")
 
     def template
       @template ||= render(
