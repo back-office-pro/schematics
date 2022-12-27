@@ -5,7 +5,6 @@ require 'backend/postgresql'
 require 'backend/redis'
 
 # :reek:Attribute
-# rubocop:disable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod
 class Tenant
   class << self
     DEFAULT_BACKEND = 'postgresql'
@@ -14,11 +13,11 @@ class Tenant
     attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
 
     def schema
-      @schema ||= Schematics::Schema.new(data:)
+      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
     end
 
     def customer
-      @customer ||= ::Stripe::Customer
+      @customer ||= ::Stripe::Customer # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
                     .search(query: "name:'#{subdomain}'")
                     .data
                     .first
@@ -27,10 +26,6 @@ class Tenant
     def backend = Backend
       .const_get(env_backend)
       .new
-
-    def backend_config
-      @backend_config ||= YAML.load_file Schematics::Engine.join_config('backend.yml')
-    end
 
     def name = Rails
       .application
@@ -93,4 +88,3 @@ class Tenant
     end
   end
 end
-# rubocop:enable ThreadSafety/ClassAndModuleAttributes, ThreadSafety/InstanceVariableInClassMethod
