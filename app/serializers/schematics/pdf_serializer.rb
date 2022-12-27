@@ -10,9 +10,14 @@ module Schematics
       @resource = resource
     end
 
-    def content = Grover
-      .new(pdf, **options)
-      .to_pdf
+    def content
+      page = browser.create_page
+      page.content = template.gsub(%r{/assets/}, "#{assets_url}/assets/")
+      page.network.wait_for_idle(timeout: 30)
+      page.pdf(**pdf_options)
+    ensure
+      browser.quit
+    end
 
     def content_type = ::Mime[extension].to_s
 
@@ -32,9 +37,9 @@ module Schematics
 
     private
 
-    def asset_url
-      URI.parse(URI::HTTP.build(**default_url_options.merge(path: '/')).to_s)
-    end
+    def assets_url = URI::HTTP
+      .build(**default_url_options)
+      .to_s
 
     def controller
       @controller ||= "#{model_class.to_s.pluralize}Controller".constantize
@@ -44,14 +49,24 @@ module Schematics
       @resource.class
     end
 
-    def options = {
+    def pdf_options = {
       header_template: PdfHeader::Component.new(resource: @resource).to_html,
-      footer_template: PdfFooter::Component.new.to_html
+      footer_template: PdfFooter::Component.new.to_html,
+      display_header_footer: true,
+      margin_top: 0.5,
+      margin_bottom: 0.5,
+      margin_left: 0.167,
+      margin_right: 0.167,
+      encoding: :binary,
+      cache: false,
+      format: :A4
     }
 
-    def pdf
-      @pdf ||= Grover::HTMLPreprocessor.process(template, asset_url.to_s, asset_url.scheme)
+    def browser
+      @browser ||= Ferrum::Browser.new(browser_options:)
     end
+
+    def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
 
     def template
       @template ||= render(

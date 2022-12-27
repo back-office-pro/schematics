@@ -4,7 +4,8 @@ html
     meta charset='utf-8'
     = stylesheet_link_tag 'schematics/themes/light', media: 'all'
     = stylesheet_link_tag 'schematics/application', media: 'all'
-    = javascript_include_tag 'schematics/application', media: 'all'
+    = javascript_importmap_tags
+    = javascript_import_module_tag 'schematics/application'
   body
     = yield
     = yield :charts_js

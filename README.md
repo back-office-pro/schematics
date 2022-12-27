@@ -122,11 +122,17 @@ Dependencies choices details.
 
 ### PDF generation
 
-:star: **grover**
+:star: **ferrum**
+
+:+1: Cutting-edge features without puppeteer
+
+~~grover~~
 
 :+1: View system
 
 :+1: Use puppeteer internally with cutting-edge features
+
+:-1: Needs puppeteer and node.js to be installed
 
 ~~wkhtmltopdf~~
 
