@@ -12,7 +12,7 @@ module Schematics
 
     def content
       page = browser.create_page
-      page.content = template.gsub(%r{/assets/}, "#{asset_url}/assets/")
+      page.content = template.gsub(%r{/assets/}, "#{assets_url}/assets/")
       page.network.wait_for_idle
       page.pdf(**pdf_options)
     ensure
@@ -37,9 +37,9 @@ module Schematics
 
     private
 
-    def asset_url
-      URI.parse(URI::HTTP.build(**default_url_options).to_s)
-    end
+    def assets_url = URI::HTTP
+      .build(**default_url_options)
+      .to_s
 
     def controller
       @controller ||= "#{model_class.to_s.pluralize}Controller".constantize
