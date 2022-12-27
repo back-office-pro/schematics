@@ -13,7 +13,7 @@ module Schematics
     def content
       page = browser.create_page
       page.content = template.gsub(%r{/assets/}, "#{assets_url}/assets/")
-      page.network.wait_for_idle
+      page.network.wait_for_idle(timeout: 30)
       page.pdf(**pdf_options)
     ensure
       browser.quit
