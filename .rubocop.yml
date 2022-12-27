@@ -5,7 +5,7 @@ require:
   - rubocop-rspec
   - rubocop-thread_safety
 AllCops:
-  TargetRubyVersion: 3.1.3
+  TargetRubyVersion: 3.2.0
   NewCops: enable
   Exclude:
     - spec/dummy/**/*
