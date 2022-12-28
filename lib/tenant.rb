@@ -10,10 +10,18 @@ class Tenant
     DEFAULT_BACKEND = 'postgresql'
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-    attr_writer :schema # rubocop:disable ThreadSafety/ClassAndModuleAttributes
+    delegate :mutex, to: :backend, private: true
 
     def schema
-      @schema ||= Schematics::Schema.new(data:) # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
+      mutex.synchronize do
+        @schema ||= Schematics::Schema.new(data:)
+      end
+    end
+
+    def schema=(value)
+      mutex.synchronize do
+        @schema = value
+      end
     end
 
     def customer
@@ -59,11 +67,10 @@ class Tenant
     private
 
     def data
-      ::SchemaDataset
-        .where(state: 2)
-        .last
-        .data
-        .as_json
+      JSON.parse ActiveRecord::Base
+        .connection
+        .execute('SELECT data FROM schema_datasets WHERE state = 2 ORDER BY created_at DESC LIMIT 1') # rubocop:disable Layout/LineLength
+        .getvalue(0, 0)
     rescue StandardError
       []
     end
