@@ -13,7 +13,7 @@ module Backend
 
     def cache_store = :memory_store
 
-    def cache_store_options = {}
+    def cache_store_options = { size: 64.megabytes }
 
     def profiler_store = Rack::MiniProfiler::MemoryStore
 
