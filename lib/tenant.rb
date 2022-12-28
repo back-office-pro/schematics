@@ -17,10 +17,12 @@ class Tenant
     end
 
     def customer
-      @customer ||= ::Stripe::Customer # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
-                    .search(query: "name:'#{subdomain}'")
-                    .data
-                    .first
+      Rails.cache.fetch('stripe:customer') do
+        ::Stripe::Customer
+          .search(query: "name:'#{subdomain}'")
+          .data
+          .first
+      end
     end
 
     def backend = Backend
