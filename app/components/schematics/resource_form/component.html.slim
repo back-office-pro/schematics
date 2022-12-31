@@ -28,7 +28,7 @@
                   as: :select,
                   collection: [resource.public_send(field.name.to_sym)].compact,
                   prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdowns--address-autocomplete-dropdown' } },
+                  input_html: { autocomplete: 'new-address', data: { controller: 'dropdowns--address-autocomplete-dropdown' } },
                   wrapper:
       - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
         = f.input field.name.to_sym,
