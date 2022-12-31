@@ -11,8 +11,8 @@ export default class extends DropdownController {
       maxOptions: this.icons.length,
       options: this.icons.map(value => ({ value, text: value })),
       render: {
-        option: (data, escape) => `<i class='fa-solid fa-${escape(data.text)} fa-2x fa-fw'></i>`,
-        item: (data, escape) => `<i class='fa-solid fa-${escape(data.text)} fa-2x fa-fw'></i>`
+        option: (data, escape) => `<i class='fa-solid fa-${escape(data.text)} fa-fw fa-lg'></i>`,
+        item: (data, escape) => `<i class='fa-solid fa-${escape(data.text)} fa-fw fa-lg'></i>`
       }
     })
   }
