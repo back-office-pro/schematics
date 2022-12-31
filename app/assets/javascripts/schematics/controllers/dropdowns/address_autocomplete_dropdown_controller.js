@@ -4,14 +4,12 @@ import DropdownController from 'controllers/dropdown_controller'
 
 export default class extends DropdownController {
   async getPlacePredictions (input, callback) {
-    if (this.isValid(input)) {
-      const predictions = [{ text: input }]
-      try {
-        const { predictions } = await this.service.getPlacePredictions({ input })
-        callback(predictions.map(prediction => ({ text: prediction.description })))
-      } catch {
-        callback(predictions)
-      }
+    try {
+      const { predictions } = await this.service.getPlacePredictions({ input })
+      callback(predictions)
+    } catch {
+      const predictions = [{ description: input }]
+      callback(predictions)
     }
   }
 
@@ -25,7 +23,11 @@ export default class extends DropdownController {
 
   get options () {
     return Object.assign(super.options, {
-      ajax: this.getPlacePredictions.bind(this)
+      valueField: 'description',
+      searchField: 'description',
+      labelField: 'description',
+      shouldLoad: this.isValid,
+      load: this.getPlacePredictions.bind(this)
     })
   }
 }
