@@ -14,19 +14,13 @@ module Schematics
           .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
           .sort
 
-        def icons
-          YAML
-            .load_file(Schematics::Engine.root.join('lib', 'font_awesome_icons.yml'))
-            .map do |text|
-              {
-                innerHTML: fa_icon(text, class: 'fa-fw', size: '2x'),
-                selected: text == icon.to_s,
-                text:
-              }
-            end
-        end
-
         def wrapper = :input_group
+
+        def icon = builder
+          .object
+          .icon
+          .to_s
+          .dasherize
       end
     end
   end

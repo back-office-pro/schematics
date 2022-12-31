@@ -16,7 +16,10 @@
                               actions_collection,
                               { selected: actions, include_hidden: false },
                               { multiple: true, data: { controller: 'dropdown' } }
-        = options_form.select :icon, [], {}, { data: { controller: 'dropdown', 'dropdown-data-value': icons } }
+        = options_form.select :icon,
+                              [],
+                              {},
+                              { data: { controller: 'dropdowns--fa-icons-dropdown', 'dropdowns--fa-icons-dropdown-selected-value': icon } }
   .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
     = builder.fields_for :attributes do |attributes_builder|
       = render Schematics::SchemaEditor::Attribute::Component.new(builder: attributes_builder)
