@@ -39,10 +39,6 @@ en:
   line: Line %{line}
   of: of
   prompt: Select a %{attribute_name}
-  simple_form:
-    labels:
-      defaults:
-        _destroy: Delete?
   time:
     formats:
       long: "%A %d %B, %Y at %H:%M"

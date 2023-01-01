@@ -18,8 +18,6 @@ module Schematics
           field.try(:icon) || @icon
         end
 
-        def input_html = { autocomplete:, 'data-password-target': 'input' }.compact
-
         def inputs_count
           confirm? ? 2 : 1
         end
