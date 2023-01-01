@@ -3,17 +3,13 @@
 module Backend
   # :reek:UtilityFunction
   class Postgresql
+    delegate :middleware, to: :engine, prefix: true
+
     def concurrency = 0
 
     def mutex = Mutex.new
 
     def engine = ::GoodJob::Engine
-
-    def engine_path = Rails
-      .application
-      .routes
-      .url_helpers
-      .good_job_path
 
     def cache_store = :memory_store
 
