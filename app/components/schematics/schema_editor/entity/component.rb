@@ -14,8 +14,6 @@ module Schematics
           .map { [t(_1, scope: %i[activerecord attributes permission actions]), _1] }
           .sort
 
-        def wrapper = :input_group
-
         def icon = builder
           .object
           .icon

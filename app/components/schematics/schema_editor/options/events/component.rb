@@ -20,8 +20,6 @@ module Schematics
           def events
             object.events&.map { Attributes::StateMachineEvent.new(**_1) } || []
           end
-
-          def wrapper = :input_group
         end
       end
     end
