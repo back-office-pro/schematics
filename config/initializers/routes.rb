@@ -4,9 +4,9 @@ Rails.configuration.exceptions_app = Rails.application.routes
 
 Rails.application.routes.prepend do
   mount Schematics::Engine, at: '/'
+  mount Tenant.backend.engine, at: '/backend'
   localized do
     get 'login', to: 'sessions#new', as: :login
-    mount Tenant.backend.engine, at: '/admin/jobs', constraints: Schematics::AdminConstraint
     Tenant
       .schema
       .entities
