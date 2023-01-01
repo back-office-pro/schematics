@@ -31,7 +31,6 @@ export default class extends ApplicationController {
     return {
       plugins: ['no_active_items', 'remove_button'],
       onChange: this.setDependentDropdownsOptions.bind(this),
-      allowEmptyOption: true,
       render: {
         no_results: () => I18n.typeahead.notFound,
         loading: () => I18n.typeahead.pending
