@@ -19,7 +19,7 @@ module Schematics
         super
         subclass.class_eval do
           superclass.concerns&.each(&method(:include))
-          entity&.load
+          entity&.model_elements&.each(&method(:eval))
         end
       end
 

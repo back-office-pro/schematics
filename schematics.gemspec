@@ -48,7 +48,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-s3', '~> 1.117.2'
   spec.add_dependency 'bcrypt', '~> 3.1.18'
   spec.add_dependency 'better_errors', '~> 2.10.0beta2'
-  spec.add_dependency 'binding_of_caller', '~> 1.0.0'
   spec.add_dependency 'bootstrap-email', '~> 1.3.1'
   spec.add_dependency 'bootstrap_form', '~> 5.1.0'
   spec.add_dependency 'brakeman', '~> 5.4.0'

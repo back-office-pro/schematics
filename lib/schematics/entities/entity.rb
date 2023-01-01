@@ -212,11 +212,6 @@ module Schematics
         options.icon&.to_sym || :square_caret_right
       end
 
-      def load
-        context = binding.of_caller(1).method(:eval)
-        model_elements.each(&context)
-      end
-
       def viewer
         return :calendar if find_field_by_name(CALENDAR_START) && find_field_by_name(CALENDAR_END)
         return :grid if attachment_attributes.any?(&:image?)
@@ -263,9 +258,9 @@ module Schematics
         .to_a
         .concat(attachments_attributes)
 
-      protected
-
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
+
+      protected
 
       def search_data_elements = searchable_elements
         .map(&:search_data)

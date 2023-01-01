@@ -44,13 +44,6 @@ module Schematics
         .find { _1.prefixed_name == name }
     end
 
-    def load_routes
-      context = binding.of_caller(2).method(:eval)
-      entities
-        .map(&:router)
-        .each(&context)
-    end
-
     def polymorphic_associations = entities
       .flat_map(&:association_attributes)
       .select(&:polymorphic?)
