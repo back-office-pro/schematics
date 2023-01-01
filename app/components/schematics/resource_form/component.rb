@@ -22,12 +22,6 @@ module Schematics
         .present?
 
       def data = { 'auto-save-target': 'form' }
-
-      def wrapper
-        return :edit_in_place_form if turbo?
-
-        :input_group
-      end
     end
   end
 end
