@@ -20,8 +20,8 @@ module Schematics
       validates :name, presence: true
 
       class << self
-        def build(type: 'has_many', entity: nil, belongs_to: nil, name: nil)
-          belongs_to ||= Attributes::BelongsTo.new(entity:, name:)
+        def build(type: 'has_many', entity: nil, belongs_to: nil, name: nil, options: nil)
+          belongs_to ||= Attributes::BelongsTo.new(entity:, name:, options:)
           Associations.const_get(type.camelize.to_sym).new(belongs_to:)
         end
       end

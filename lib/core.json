@@ -308,14 +308,6 @@
       {
         "type": "has_and_belongs_to_many",
         "name": "permissions"
-      },
-      {
-        "type": "has_and_belongs_to_many",
-        "name": "charts"
-      },
-      {
-        "type": "has_and_belongs_to_many",
-        "name": "stats"
       }
     ],
     "attributes": [
@@ -437,6 +429,12 @@
     "options": {
       "icon": "chart_line"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "roles"
+      }
+    ],
     "attributes": [
       {
         "name": "kind",
@@ -498,6 +496,12 @@
     "options": {
       "icon": "stopwatch_20"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "roles"
+      }
+    ],
     "attributes": [
       {
         "name": "agregate",

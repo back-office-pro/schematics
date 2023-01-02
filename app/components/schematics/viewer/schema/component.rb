@@ -51,7 +51,7 @@ module Schematics
           entities.each do |entity|
             entity
               .has_and_belongs_to_many_associations
-              .reject { _1.entity.name.pluralize == _1.name }
+              .reject(&:hidden?)
               .each do |association|
                 graph.add_edges(association.entity.name, association.name.singularize, dir: 'both')
               end

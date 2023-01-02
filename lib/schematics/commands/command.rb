@@ -26,10 +26,9 @@ module Schematics
 
       protected
 
-      # :reek:FeatureEnvy
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicateName
         .has_and_belongs_to_many_associations
-        .reject { _1.entity.name.pluralize == _1.name }
+        .reject(&:hidden?)
     end
   end
 end

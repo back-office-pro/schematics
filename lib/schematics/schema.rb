@@ -101,9 +101,10 @@ module Schematics
           &.associations
           &.push(
             Associations::Association.build(
+              type: 'has_and_belongs_to_many',
               entity: habtm.entity,
               name: habtm.entity.name,
-              type: 'has_and_belongs_to_many'
+              options: { hidden: true }
             )
           )
       end
