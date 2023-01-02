@@ -267,9 +267,17 @@ module Schematics
         .map(&:squish)
         .join(",\n  ")
 
-      def id_attribute = Attributes::Uuid.new(entity: self, name: 'id')
+      def id_attribute = Attributes::Uuid.new(
+        entity: self,
+        name: 'id',
+        options: { readonly: true }
+      )
 
-      def created_at_attribute = Attributes::Datetime.new(entity: self, name: 'created_at')
+      def created_at_attribute = Attributes::Datetime.new(
+        entity: self,
+        name: 'created_at',
+        options: { readonly: true }
+      )
 
       def created_at_attributes = [
         Attributes::Date.new(entity: self, name: 'created_at/day'),
