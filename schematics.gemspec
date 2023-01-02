@@ -2,18 +2,16 @@
 
 $LOAD_PATH.push File.expand_path('lib', __dir__)
 
-require 'schematics/version'
-
 Gem::Specification.new do |spec|
   spec.name = 'schematics'
-  spec.version = Schematics::VERSION
+  spec.version = '1.0.0'
   spec.author = 'Maxence De Rous'
   spec.email = 'maxence.derous@gmail.com'
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
   spec.required_ruby_version = '>= 3.2.0'
-  spec.metadata['allowed_push_host'] = 'https://www.back-office.pro'
+  spec.metadata['allowed_push_host'] = 'https://www.back-office.pro:9292/private'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
