@@ -22,6 +22,14 @@ module Schematics
         .present?
 
       def data = { 'auto-save-target': 'form' }
+
+      def hide_label = turbo?
+
+      def layout
+        return :inline if turbo?
+
+        :default
+      end
     end
   end
 end

@@ -59,6 +59,9 @@ fr:
         integer: nombre
         string: chaîne de caractères
   'false': faux
+  helpers:
+    label:
+      destroy: Supprimer ?
   i18n:
     inflections:
       gender:
