@@ -20,15 +20,15 @@ module Schematics
         #{type} :#{name}
       RUBY
 
-      private
-
-      def inverse_entity = schema.find_entity_by_name(name.singularize)
-
       def allowed_names = entity
         .schema
         .entities
         .map(&:name)
         .sort
+
+      private
+
+      def inverse_entity = schema.find_entity_by_name(name.singularize)
     end
   end
 end
