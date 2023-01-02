@@ -4,6 +4,7 @@ module Schematics
   module Associations
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
+      delegate :includes, :icon, to: :inverse_entity
 
       validates :name, inclusion: { in: :allowed_names }
 
@@ -11,19 +12,17 @@ module Schematics
 
       def default = nil
 
-      def permitted_params = {
-        super => []
-      }
+      def permitted_params = { super => [] }
 
       def source = inverse_of.pluralize
-
-      def includes = schema
-        .find_entity_by_name(name.singularize)
-        .includes
 
       def to_str = <<~RUBY
         #{type} :#{name}
       RUBY
+
+      private
+
+      def inverse_entity = schema.find_entity_by_name(name.singularize)
 
       def allowed_names = entity
         .schema
