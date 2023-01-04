@@ -3,6 +3,7 @@
 module Schematics
   # :reek:Attribute
   class Trigger
+    include Behaviours::Identifiable
     include ::ActiveModel::API
 
     ACTIONS = %w[
@@ -26,16 +27,16 @@ module Schematics
       case [action, callback]
       in ['before_create', *] | ['before_save', *] | ['before_destroy', *]
         <<~RUBY
-          #{action} :#{action}
-          def #{action}
+          #{action} :#{method_name}
+          def #{method_name}
             #{method_body}
           rescue StandardError
           end
         RUBY
       in ['after_create', *] | ['after_save', *] | ['after_destroy', *]
         <<~RUBY
-          #{action} :#{action}
-          def #{action}
+          #{action} :#{method_name}
+          def #{method_name}
             #{method_body}
             save!
           rescue StandardError
@@ -49,6 +50,7 @@ module Schematics
         <<~RUBY
           def #{action}
             #{method_body}
+            save!
           rescue StandardError
           end
         RUBY
@@ -56,6 +58,8 @@ module Schematics
     end
 
     private
+
+    def method_name = [action, id].join('_')
 
     def method_body
       return unless callback

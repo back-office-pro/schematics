@@ -83,11 +83,13 @@ describe Schematics::Attributes::StateMachine do
       end
       def after_close
         self.in_stock = false
+        save!
       rescue StandardError
       end
       def after_refuse; end
       def after_reopen
         self.in_stock = true
+        save!
       rescue StandardError
       end
     RUBY
