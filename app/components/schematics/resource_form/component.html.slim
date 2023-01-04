@@ -11,7 +11,10 @@
       - when Schematics::Attributes::BelongsTo
         = f.select field.name.to_sym,
                    field.model_class.all.map { [_1.to_s, _1.id] }.sort,
-                   { prepend: fa_icon(field.icon), prompt: t('prompt', gender: field.model_class.gender, attribute_name: human_attribute_name(field.name).downcase) },
+                   { \
+                    prepend: fa_icon(field.icon), \
+                    prompt: t('prompt', gender: field.model_class.gender, attribute_name: human_attribute_name(field.name).downcase) \
+                   },
                    { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::Datetime
         = f.datetime_field field.name.to_sym, hide_label:
@@ -32,16 +35,6 @@
         = f.url_field field.name.to_sym, prepend: fa_icon(field.icon), hide_label:
       - when Schematics::Attributes::Phone
         = f.telephone_field field.name.to_sym, prepend: fa_icon(field.icon), hide_label:
-      - when Schematics::Attributes::Country
-        = f.select field.name.to_sym,
-                   field.collection,
-                   { prepend: fa_icon(field.icon), hide_label:, prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase) },
-                   { data: { controller: 'dropdown' } }
-      - when Schematics::Attributes::TimeZone
-        = f.select field.name.to_sym,
-                   field.collection,
-                   { prepend: fa_icon(field.icon), hide_label:, prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase) },
-                   { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::Color
         = f.color_field field.name.to_sym, prepend: fa_icon(field.icon), hide_label:
       - when Schematics::Attributes::ModelField
