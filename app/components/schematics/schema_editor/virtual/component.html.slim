@@ -5,7 +5,9 @@
         .col.text-truncate
           = render Schematics::CardHeading::Component.new(icon:, title:)
         .col-auto
+          = render Schematics::SchemaEditor::Button::Options::Component.new(field: builder.object)
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-virtual')
     .card-body
       = builder.text_field :name, class: 'entity_field_name'
       = builder.text_field :function, data:
+      = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)
