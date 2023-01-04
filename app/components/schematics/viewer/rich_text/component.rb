@@ -4,7 +4,7 @@ module Schematics
   module Viewer
     module RichText
       class Component < ApplicationComponent
-        delegate :icon, :entity, to: :@attribute
+        delegate :icon, :entity, :name, to: :@attribute
         delegate :model_class, to: :entity
         with_collection_parameter :attribute
 
@@ -15,7 +15,7 @@ module Schematics
         end
 
         def id
-          @id ||= "collapse-#{SecureRandom.base58}"
+          @id ||= "collapse-#{@attribute.id}"
         end
 
         def render?
@@ -23,11 +23,11 @@ module Schematics
         end
 
         def title
-          model_class.human_attribute_name(@attribute.name)
+          model_class.human_attribute_name(name)
         end
 
         def value
-          @resource.public_send(@attribute.name)
+          @resource.public_send(name)
         end
       end
     end
