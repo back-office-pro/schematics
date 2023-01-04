@@ -35,6 +35,7 @@ describe Schematics::Attributes::BelongsTo do
     attribute.inverse_entity = parent_entity
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }

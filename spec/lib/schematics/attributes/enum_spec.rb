@@ -7,6 +7,7 @@ describe Schematics::Attributes::Enum do
   let(:name) { 'state' }
   let(:options) { { values: %w[available available_soon not_available] } }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
