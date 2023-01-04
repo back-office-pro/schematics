@@ -5,7 +5,7 @@ module Schematics
     module Attribute
       class Component < ApplicationComponent
         delegate :class, to: 'builder.object', prefix: :attribute
-        delegate :allowed_association_types, :icon, :type, to: 'builder.object'
+        delegate :allowed_association_types, :icon, to: 'builder.object'
         renders_one_form :builder
         option :builder
 
@@ -15,8 +15,7 @@ module Schematics
           .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
           .sort
 
-        def title = Attributes
-          .const_get(type.camelize.to_sym)
+        def title = attribute_class
           .model_name
           .human
 
