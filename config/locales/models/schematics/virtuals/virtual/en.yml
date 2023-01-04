@@ -5,3 +5,7 @@ en:
       schematics/virtuals/virtual:
         function: Function
         name: Name
+    models:
+      schematics/virtuals/calculation: Calculation
+      schematics/virtuals/comparison: Comparison
+      schematics/virtuals/concatenation: Concatenation
