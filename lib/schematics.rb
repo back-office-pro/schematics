@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_model/nested_attributes'
 require 'array'
 require 'json_web_token'
 require 'object'
@@ -13,6 +14,7 @@ Regexp.timeout = 1.0
 
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
+loader.ignore("#{__dir__}/active_model")
 loader.ignore("#{__dir__}/active_record")
 loader.ignore("#{__dir__}/active_storage")
 loader.ignore("#{__dir__}/backend")

@@ -7,6 +7,9 @@ module Schematics
   # :reek:InstanceVariableAssumption
   class Schema # rubocop:disable Metrics/ClassLength
     include ::ActiveModel::API
+    include ::ActiveModel::NestedAttributes
+
+    accepts_nested_attributes_for :entities
     attr_reader :entities
 
     class << self
@@ -31,8 +34,6 @@ module Schematics
       @entities = entities.map { Entities::Entity.build(schema: self, **_1) }
       add_associations_and_check_for_name_collisions
     end
-
-    alias entities_attributes= entities=
 
     def find_entity_by_name(name)
       entities.find { _1.name == name }

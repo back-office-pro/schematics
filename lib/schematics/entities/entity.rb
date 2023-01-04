@@ -10,12 +10,20 @@ module Schematics
   module Entities
     # :reek:Attribute, :reek:InstanceVariableAssumption
     class Entity # rubocop:disable Metrics/ClassLength
+      include Behaviours::Identifiable
       include ::ActiveModel::API
+      include ::ActiveModel::NestedAttributes
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
       NAME_REGEX = %r{\A([a-z_/]+)\z}
       CALENDAR_START = :start_at
       CALENDAR_END = :end_at
+
+      accepts_nested_attributes_for :attributes
+      accepts_nested_attributes_for :virtuals
+      accepts_nested_attributes_for :triggers
+      accepts_nested_attributes_for :has_and_belongs_to_many_associations
+      accepts_nested_attributes_for :options
 
       validates :attributes, presence: true
       validates :actions, inclusion: { in: :default_actions }
@@ -54,12 +62,6 @@ module Schematics
         @associations = associations.map { Associations::Association.build(entity: self, **_1) }
       end
 
-      alias attributes_attributes= attributes=
-      alias virtuals_attributes= virtuals=
-      alias triggers_attributes= triggers=
-      alias has_and_belongs_to_many_associations_attributes= associations=
-      alias options_attributes= options=
-
       def descriptor
         Descriptor.new(entity: self, field_name: options.descriptor)
       end
@@ -86,10 +88,6 @@ module Schematics
 
       def triggers
         @triggers ||= []
-      end
-
-      def id
-        @id ||= SecureRandom.uuid
       end
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size

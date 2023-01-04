@@ -14,6 +14,7 @@ describe Schematics::Entities::Entity do
     ]
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_core }
   it { is_expected.to be_existing }
 

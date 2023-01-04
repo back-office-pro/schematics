@@ -8,16 +8,20 @@ module Schematics
   module Attributes
     # :reek:Attribute :reek:InstanceVariableAssumption
     class Attribute
+      include Behaviours::Identifiable
       include Behaviours::Inspectable
       include Behaviours::Migratable
       include Behaviours::Validatable
       include ::ActiveModel::API
+      include ::ActiveModel::NestedAttributes
 
       delegate :hidden?, :cached?, to: :options
       delegate :core?, to: :entity, private: true
       delegate :keys, to: :options, prefix: true, private: true
       attr_accessor :entity, :name
       attr_writer :id, :options
+
+      accepts_nested_attributes_for :options
 
       validates :options_keys, inclusion: { in: :available_options_names }
       validates :name, english: true, unless: :core?
@@ -31,12 +35,6 @@ module Schematics
         def build(type:, **kwargs)
           Attributes.const_get(type.camelize.to_sym).new(**kwargs)
         end
-      end
-
-      alias options_attributes= options=
-
-      def id
-        @id ||= SecureRandom.uuid
       end
 
       def open_api_type = ::String
