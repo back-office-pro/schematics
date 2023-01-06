@@ -16,7 +16,7 @@ pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.6/dist/esm/inde
 pin 'autosize', to: 'https://unpkg.com/autosize@5.0.2/dist/autosize.esm.js'
 pin 'bootstrap', to: 'https://unpkg.com/bootstrap@5.2.3/dist/js/bootstrap.esm.js'
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.27/nodelibs/browser/path.js'
-pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.0/dist/rollbar.umd.js'
+pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js'
 pin 'sortablejs', to: 'https://unpkg.com/sortablejs@1.15.0/modular/sortable.esm.js'
 pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.15.5/index.js'
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js'
