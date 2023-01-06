@@ -59,7 +59,9 @@ module Schematics
 
     private
 
-    def method_name = [action, id].join('_')
+    def method_name = [action, id]
+      .join('_')
+      .underscore
 
     def method_body
       return unless callback

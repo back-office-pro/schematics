@@ -3,7 +3,7 @@
 describe Schematics::Trigger do
   subject { described_class.new(action:, callback:) }
 
-  before { allow(SecureRandom).to receive(:uuid).and_return('abcd') }
+  before { allow(SecureRandom).to receive(:uuid).and_return('abcd-123') }
 
   context 'when trigger is coming from state machine' do
     let(:action) { 'after_close' }
@@ -28,8 +28,8 @@ describe Schematics::Trigger do
 
       its(:to_str) do
         is_expected.to eq <<~RUBY
-          after_create :after_create_abcd
-          def after_create_abcd
+          after_create :after_create_abcd_123
+          def after_create_abcd_123
             self.in_stock = true
             save!
           rescue StandardError
@@ -43,8 +43,8 @@ describe Schematics::Trigger do
 
       its(:to_str) do
         is_expected.to eq <<~RUBY
-          before_create :before_create_abcd
-          def before_create_abcd
+          before_create :before_create_abcd_123
+          def before_create_abcd_123
             self.in_stock = true
           rescue StandardError
           end
