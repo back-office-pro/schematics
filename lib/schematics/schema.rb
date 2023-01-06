@@ -71,27 +71,12 @@ module Schematics
       .tap { |json| json.each { _1[:options]&.store(:core, true) } }
 
     def add_associations_and_check_for_name_collisions
-      add_inverse_entity_to_association_attributes
-      add_inverse_entity_to_polymorphic_association_attributes
       add_has_and_belongs_to_many_associations
       add_inverse_associations
       add_has_many_through_associations
       add_has_one_through_associations
       add_inverse_polymorphic_associations
       entities.each(&:check_for_association_name_collisions)
-    end
-
-    def add_inverse_entity_to_association_attributes = entities
-      .flat_map(&:association_attributes)
-      .reject(&:polymorphic?)
-      .each do |attribute|
-        attribute.inverse_entity = find_entity_by_name(attribute.association_type)
-      end
-
-    def add_inverse_entity_to_polymorphic_association_attributes
-      polymorphic_associations.each do |attribute|
-        attribute.inverse_entity = entities.first
-      end
     end
 
     # :reek:FeatureEnvy

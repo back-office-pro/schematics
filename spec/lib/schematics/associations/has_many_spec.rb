@@ -3,17 +3,6 @@
 describe Schematics::Associations::HasMany do
   subject(:association) { described_class.new(belongs_to:) }
 
-  let(:parent_entity) do
-    Schematics::Entities::Entity.new(
-      name: 'schema',
-      options: {
-        descriptor: 'title'
-      },
-      attributes: [
-        { name: 'title', type: 'string' }
-      ]
-    )
-  end
   let(:entity) do
     Schematics::Entities::Entity.new(
       name: 'entity',
@@ -29,10 +18,6 @@ describe Schematics::Associations::HasMany do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'schema', options:)
   end
   let(:options) { {} }
-
-  before do
-    belongs_to.inverse_entity = parent_entity
-  end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }

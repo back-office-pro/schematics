@@ -3,19 +3,10 @@
 describe Schematics::Associations::HasOneThrough do
   subject(:association) { described_class.new(belongs_to:, through:) }
 
-  let(:parent_entity) do
-    Schematics::Entities::Entity.new(
-      name: 'schema',
-      options: {
-        descriptor: 'title'
-      },
-      attributes: [
-        { name: 'title', type: 'string' }
-      ]
-    )
-  end
+  let(:schema) { Schematics::Schema.new }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'attribute',
       options: {
         descriptor: 'name'
@@ -27,6 +18,7 @@ describe Schematics::Associations::HasOneThrough do
   end
   let(:through_entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -37,14 +29,10 @@ describe Schematics::Associations::HasOneThrough do
     )
   end
   let(:belongs_to) do
-    Schematics::Attributes::BelongsTo.new(entity: through_entity, name: 'schema')
+    Schematics::Attributes::BelongsTo.new(entity: through_entity, name: 'user')
   end
   let(:through) do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'entity')
-  end
-
-  before do
-    belongs_to.inverse_entity = parent_entity
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -53,25 +41,25 @@ describe Schematics::Associations::HasOneThrough do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
 
   its(:type) { is_expected.to eq('has_one') }
-  its(:name) { is_expected.to eq('schema') }
-  its(:class_name) { is_expected.to eq('Schema') }
+  its(:name) { is_expected.to eq('user') }
+  its(:class_name) { is_expected.to eq('User') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:weight) { is_expected.to eq(3) }
-  its('descriptor.name') { is_expected.to eq('title') }
+  its('descriptor.name') { is_expected.to eq('full_name') }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      schema: schema&.to_s
+      user: user&.to_s
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_one :schema,
-              class_name: 'Schema',
-              foreign_key: 'schema_id',
+      has_one :user,
+              class_name: 'User',
+              foreign_key: 'user_id',
               through: :entity,
-              source: :schema,
+              source: :user,
               autosave: true
     RUBY
   end
@@ -79,6 +67,6 @@ describe Schematics::Associations::HasOneThrough do
   context 'when association has a name collision' do
     before { association.prefixed = true }
 
-    its(:name) { is_expected.to eq('entity_schema') }
+    its(:name) { is_expected.to eq('entity_user') }
   end
 end

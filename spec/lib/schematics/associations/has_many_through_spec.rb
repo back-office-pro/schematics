@@ -5,17 +5,6 @@ describe Schematics::Associations::HasManyThrough do
     described_class.new(belongs_to: through, through: belongs_to.inverse_association)
   end
 
-  let(:parent_entity) do
-    Schematics::Entities::Entity.new(
-      name: 'schema',
-      options: {
-        descriptor: 'title'
-      },
-      attributes: [
-        { name: 'title', type: 'string' }
-      ]
-    )
-  end
   let(:entity) do
     Schematics::Entities::Entity.new(
       name: 'attribute',
@@ -43,11 +32,6 @@ describe Schematics::Associations::HasManyThrough do
   end
   let(:through) do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'entity')
-  end
-
-  before do
-    belongs_to.inverse_entity = parent_entity
-    through.inverse_entity = through_entity
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }

@@ -4,25 +4,6 @@ describe Schematics::Attributes::References do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:schema) { Schematics::Schema.new }
-  let(:parent_entity) do
-    Schematics::Entities::Entity.new(
-      schema:,
-      name: 'user',
-      options: {
-        descriptor: 'full_name'
-      },
-      attributes: [
-        { name: 'first_name', type: 'string' },
-        { name: 'last_name', type: 'string' }
-      ],
-      virtuals: [
-        {
-          name: 'full_name',
-          function: '$first_name $last_name'
-        }
-      ]
-    )
-  end
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
@@ -42,10 +23,6 @@ describe Schematics::Attributes::References do
     }
   end
 
-  before do
-    attribute.inverse_entity = parent_entity
-  end
-
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
@@ -63,7 +40,7 @@ describe Schematics::Attributes::References do
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq(:user) }
-  its(:icon) { is_expected.to eq(:square_caret_right) }
+  its(:icon) { is_expected.to eq(:users) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }

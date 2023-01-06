@@ -13,7 +13,6 @@ module Schematics
 
       delegate :descriptor, :default, to: :inverse_entity
       delegate :polymorphic?, to: :options
-      attr_accessor :inverse_entity
 
       validates :association_type,
                 inclusion: { in: :allowed_association_types },
@@ -90,12 +89,25 @@ module Schematics
         end
       end
 
+      def inverse_entity
+        return entity.schema.find_entity_by_name(association_type) unless polymorphic?
+
+        entity
+          .schema
+          .entities
+          .excluding(entity)
+          .first
+      end
+
       def inverse_association
         @inverse_association ||= Associations::Association.build(belongs_to: self, **inverse)
       end
 
       def icon
-        inverse_entity&.icon || :link
+        return :link unless inverse_entity
+        return :link if polymorphic?
+
+        inverse_entity.icon
       end
 
       def allowed_association_types = entity

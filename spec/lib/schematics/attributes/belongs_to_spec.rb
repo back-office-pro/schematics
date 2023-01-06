@@ -4,18 +4,6 @@ describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:schema) { Schematics::Schema.new }
-  let(:parent_entity) do
-    Schematics::Entities::Entity.new(
-      schema:,
-      name: 'schema',
-      options: {
-        descriptor: 'title'
-      },
-      attributes: [
-        { name: 'title', type: 'string' }
-      ]
-    )
-  end
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
@@ -28,11 +16,13 @@ describe Schematics::Attributes::BelongsTo do
       ]
     )
   end
-  let(:name) { 'schema' }
-  let(:options) { {} }
-
-  before do
-    attribute.inverse_entity = parent_entity
+  let(:name) { 'user' }
+  let(:options) do
+    {
+      inverse: {
+        type: 'has_many'
+      }
+    }
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
@@ -46,14 +36,13 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:database_type) { is_expected.to eq('belongs_to') }
-  its(:column_name) { is_expected.to eq('schema_id') }
+  its(:column_name) { is_expected.to eq('user_id') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
-  its(:association_type) { is_expected.to eq('schema') }
+  its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
-  its(:class_name) { is_expected.to eq('Schema') }
-  its(:model_class) { is_expected.to be_nil }
-  its(:preload) { is_expected.to eq(:schema) }
-  its(:icon) { is_expected.to eq(:square_caret_right) }
+  its(:class_name) { is_expected.to eq('User') }
+  its(:preload) { is_expected.to eq(:user) }
+  its(:icon) { is_expected.to eq(:users) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
@@ -68,16 +57,16 @@ describe Schematics::Attributes::BelongsTo do
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
-      schema: schema&.to_s
+      user: user&.to_s
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      belongs_to :schema,
+      belongs_to :user,
                  -> { with_deleted },
-                 class_name: 'Schema',
-                 foreign_key: 'schema_id',
+                 class_name: 'User',
+                 foreign_key: 'user_id',
                  inverse_of: :entities,
                  optional: true,
                  autosave: true,
@@ -94,10 +83,10 @@ describe Schematics::Attributes::BelongsTo do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        belongs_to :schema,
+        belongs_to :user,
                    -> { with_deleted },
-                   class_name: 'Schema',
-                   foreign_key: 'schema_id',
+                   class_name: 'User',
+                   foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: false,
                    autosave: true,
@@ -115,9 +104,9 @@ describe Schematics::Attributes::BelongsTo do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        belongs_to :schema,
+        belongs_to :user,
                    -> { with_deleted },
-                   foreign_key: 'schema_id',
+                   foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: true,
                    polymorphic: true,
