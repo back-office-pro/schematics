@@ -13,7 +13,7 @@
                    },
                    { multiple: true, data: { controller: 'dropdown' } }
       - when Schematics::Attributes::BelongsTo
-        = f.select field.name.to_sym,
+        = f.select field.column_name.to_sym,
                    field.model_class.all.map { [_1.to_s, _1.id] }.sort,
                    { \
                     prepend: fa_icon(field.icon), \
