@@ -4,9 +4,13 @@
     = turbo_frame_tag dom_id(resource, field.name) do
       - case field
       - when Schematics::Associations::HasAndBelongsToMany
-        = f.select field.name.to_sym,
-                   field.model_class.all.map { [_1.to_s, _1.id] }.sort,
-                   { prepend: fa_icon(field.icon), include_hidden: false },
+        = f.select field.column_name.to_sym,
+                   field.inverse_entity.model_class.all.map { [_1.to_s, _1.id] }.sort,
+                   { \
+                    prepend: fa_icon(field.icon), \
+                    prompt: t('prompt', gender: field.inverse_entity.model_class.gender, attribute_name: human_attribute_name(field.name).downcase), \
+                    include_hidden: false \
+                   },
                    { multiple: true, data: { controller: 'dropdown' } }
       - when Schematics::Attributes::BelongsTo
         = f.select field.name.to_sym,
@@ -36,12 +40,20 @@
       - when Schematics::Attributes::Phone
         = f.telephone_field field.name.to_sym, prepend: fa_icon(field.icon), hide_label:
       - when Schematics::Attributes::Color
-        = f.color_field field.name.to_sym, prepend: fa_icon(field.icon), hide_label:
+        = f.color_field field.name.to_sym,
+                        prepend: fa_icon(field.icon),
+                        hide_label:,
+                        control_class: 'form-control form-control-color'
       - when Schematics::Attributes::ModelField
         = f.select field.name.to_sym,
                    field.collection.map { _1.push(class: model_field_collection_class(_1.second, field)) },
                    { prepend: fa_icon(field.icon), hide_label:, prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase) },
                    { data: { controller: 'dropdown', 'dropdown-depends-on': "#{entity.name}[#{field.depends_on}]" } }
+      - when Schematics::Behaviours::Enumerable
+        = f.select field.name.to_sym,
+                   field.collection,
+                   { prepend: fa_icon(field.icon), hide_label:, prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase) },
+                   { data: { controller: 'dropdown' } }
       - when Schematics::Attributes::String
         = f.text_field field.name.to_sym, prepend: fa_icon(field.icon), hide_label:
       - when Schematics::Attributes::Text
@@ -74,11 +86,6 @@
         = f.check_box field.name.to_sym, switch: true, hide_label:
       - when Schematics::Behaviours::Numerable
         = f.number_field field.name.to_sym, step: :any, prepend: field.unit || fa_icon(field.icon), hide_label:
-      - when Schematics::Behaviours::Enumerable
-        = f.select field.name.to_sym,
-                   field.collection,
-                   { prepend: fa_icon(field.icon), hide_label:, prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase) },
-                   { data: { controller: 'dropdown' } }
       = render Schematics::Button::Confirm::Component.new(compact: true) if turbo?
       = render Schematics::Button::Cancel::Component.new(path: cancel_path, compact: true) if turbo?
   = render Schematics::Button::Confirm::Component.new
