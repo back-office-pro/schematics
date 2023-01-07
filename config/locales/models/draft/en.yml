@@ -3,8 +3,8 @@ en:
   activerecord:
     attributes:
       draft:
-        name: Name
         data: Data
+        name: Name
         user: User
     models:
       draft:
