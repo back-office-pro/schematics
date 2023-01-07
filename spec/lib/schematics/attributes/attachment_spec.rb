@@ -26,6 +26,7 @@ describe Schematics::Attributes::Attachment do
   its(:to_sql) { is_expected.to eq('users.avatar') }
   its(:to_s) { is_expected.to eq('schema:user_avatar') }
   its(:preload) { is_expected.to eq(avatar_attachment: [blob: :variant_records]) }
+  its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 

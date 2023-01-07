@@ -26,6 +26,7 @@ describe Schematics::Attributes::Attachments do
   its(:to_sql) { is_expected.to eq('directories.files') }
   its(:to_s) { is_expected.to eq('schema:directory_files') }
   its(:preload) { is_expected.to eq(files_attachments: [blob: :variant_records]) }
+  its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to eq('png') }
   it { is_expected.to be_image }
 

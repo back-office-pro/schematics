@@ -38,6 +38,8 @@ module Schematics
         association_name => [blob: :variant_records]
       }
 
+      def includes = { blob: :variant_records }
+
       def search_data = super
         .concat(' ')
         .concat <<~RUBY
