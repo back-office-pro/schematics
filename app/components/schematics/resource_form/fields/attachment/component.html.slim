@@ -1,0 +1,5 @@
+- if attached?
+  = form.fields_for attributes_param_key do |fields|
+    = fields.hidden_field :id, value: value.id
+    = fields.check_box :_destroy, switch: true, label: t('helpers.label.destroy'), wrapper_class: 'text-secondary float-end'
+= form.file_field name.to_sym, help:, accept:
