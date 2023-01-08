@@ -3,7 +3,7 @@
   template#nested-form-array-input data-nested-form-target='templates'
     .input-group.nested-form-array-input.mb-1
       = builder.fields_for name do |values_form|
-        = values_form.text_field nil, wrapper: false
+        = values_form.text_field nil, required: true, wrapper: false
         button.btn.btn-sm.btn-danger {
           data-action='click->nested-form#remove:prevent:stop'
           data-nested-form-wrapper-param='.nested-form-array-input'
@@ -15,7 +15,7 @@
     - values.each do |value|
       .input-group.nested-form-array-input.mb-1
         = builder.fields_for name do |values_form|
-          = values_form.text_field nil, value:, wrapper: false
+          = values_form.text_field nil, value:, required: true, wrapper: false
           .btn.btn-sm.btn-danger {
             data-action='click->nested-form#remove:prevent:stop'
             data-nested-form-wrapper-param='.nested-form-array-input'
