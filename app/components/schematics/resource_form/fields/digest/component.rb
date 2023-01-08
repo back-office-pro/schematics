@@ -33,11 +33,11 @@ module Schematics
             required
           end
 
-          private
-
           def autocomplete
             'new-password' unless @autocomplete
           end
+
+          private
 
           def confirm?
             return field.confirm? if field
