@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Elasticsearchable
+  module Searchkickable
     extend ActiveSupport::Concern
 
     included do
       extend ::Pagy::Searchkick
+      scope :autocomplete, AutocompleteQuery.new(self) # rubocop:disable Rails/ScopeArgs
+      scope :search_list, SearchListQuery.new(self) # rubocop:disable Rails/ScopeArgs
       searchkick searchable: searchkick_elements,
                  filterable: searchkick_elements,
                  word_middle: searchkick_elements,

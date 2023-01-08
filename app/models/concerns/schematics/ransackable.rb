@@ -5,8 +5,8 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      scope :autocomplete, Resources::AutocompleteQuery.new(self) # rubocop:disable Rails/ScopeArgs
-      scope :search, Resources::SearchQuery.new(self) # rubocop:disable Rails/ScopeArgs
+      scope :autocomplete, AutocompleteQuery.new(self) # rubocop:disable Rails/ScopeArgs
+      scope :search_list, SearchListQuery.new(self) # rubocop:disable Rails/ScopeArgs
     end
 
     def ransackable_attributes(*)

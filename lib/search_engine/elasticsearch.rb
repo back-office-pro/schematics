@@ -4,7 +4,7 @@ module SearchEngine
   class Elasticsearch
     def indexable? = true
 
-    def concern = Schematics::Elasticsearchable
+    def concern = Schematics::Searchkickable
 
     # :reek:ControlParameter
     # :reek:UtilityFunction

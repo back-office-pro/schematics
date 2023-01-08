@@ -245,7 +245,7 @@ module Schematics
     end
 
     def set_resources
-      @resources = model_class.search(filter_params, current_ability, sort_params)
+      @resources = model_class.search_list(filter_params, current_ability, sort_params)
       return if params.key?(:all_pages)
 
       @calendar, @pagy, @resources = pagy_calendar(

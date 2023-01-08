@@ -42,10 +42,13 @@ ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     include Schematics::Loadable
     include Schematics::Translatable
-    loadable concerns: [
-      Tenant.search_engine.concern,
-      Schematics::SoftDeletable
-    ]
+    loadable concerns: [Schematics::SoftDeletable]
+  end
+end
+
+ActiveSupport.on_load(:active_storage_blob) do
+  ActiveStorage::Blob.class_eval do
+    include Tenant.search_engine.concern
   end
 end
 
