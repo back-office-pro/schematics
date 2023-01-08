@@ -5,12 +5,12 @@ module Schematics
     module Fields
       module Numerable
         class Component < Fields::Component
-          def step = :any
+          def step = (10**-field.precision.to_i).to_f
 
           def prepend
             return if inline?
 
-            field.try(:unit) || super
+            field.unit || super
           end
         end
       end
