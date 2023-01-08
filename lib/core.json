@@ -877,14 +877,16 @@
         "name": "start_at",
         "type": "datetime",
         "options": {
-          "required": true
+          "required": true,
+          "less_than": "end_at"
         }
       },
       {
         "name": "end_at",
         "type": "datetime",
         "options": {
-          "required": true
+          "required": true,
+          "greater_than": "start_at"
         }
       },
       {
