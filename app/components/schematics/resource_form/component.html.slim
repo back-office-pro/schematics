@@ -7,6 +7,8 @@
         = render Schematics::ResourceForm::Fields::HasAndBelongsToMany::Component.new(form:, field:)
       - when Schematics::Attributes::BelongsTo
         = render Schematics::ResourceForm::Fields::BelongsTo::Component.new(form:, field:)
+      - when Schematics::Attributes::Time
+        = render Schematics::ResourceForm::Fields::Time::Component.new(form:, field:)
       - when Schematics::Attributes::Datetime
         = render Schematics::ResourceForm::Fields::Datetime::Component.new(form:, field:)
       - when Schematics::Attributes::Date
