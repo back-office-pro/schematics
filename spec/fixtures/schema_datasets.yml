@@ -167,9 +167,9 @@ one:
           type: datetime
           options:
             required: true
-            less_than: ends_at
+            less_than: end_at
         - id: <%= SecureRandom.uuid %>
-          name: ends_at
+          name: end_at
           type: datetime
           options:
             required: true
