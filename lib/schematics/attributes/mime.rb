@@ -6,7 +6,7 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Mime < String
-      def default = 'image/png'
+      include Behaviours::Enumerable
 
       def icon = :file
 
@@ -14,10 +14,10 @@ module Schematics
         value && ::Mime::Type.lookup(value).symbol.to_s.upcase
       end
 
-      def validators = super.merge(
-        allow_blank:,
-        format: { with: ::Mime::Type::MIME_REGEXP, message: :mime_type }
-      )
+      def values = ::Mime::EXTENSION_LOOKUP
+        .values
+        .map { _1.__send__(:string) }
+        .uniq
     end
   end
 end

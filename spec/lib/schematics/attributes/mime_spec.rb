@@ -7,6 +7,12 @@ describe Schematics::Attributes::Mime do
   let(:name) { 'content_type' }
   let(:options) { {} }
 
+  before do
+    allow(Mime::EXTENSION_LOOKUP)
+      .to receive(:values)
+      .and_return([Mime::Type.lookup('image/png')])
+  end
+
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
@@ -15,6 +21,7 @@ describe Schematics::Attributes::Mime do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('content_type') }
@@ -24,14 +31,16 @@ describe Schematics::Attributes::Mime do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_attachments.content_type') }
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
+  its(:collection) { is_expected.to eq([['', ''], ['PNG', 'image/png']]) }
 
   its(:validators) do
-    is_expected.to eq(
-      {
-        allow_blank: true,
-        format: { with: Mime::Type::MIME_REGEXP, message: :mime_type }
-      }
-    )
+    is_expected.to eq(inclusion: { in: ['image/png'] }, allow_blank: true)
+  end
+
+  its('validators.to_str') do
+    is_expected.to eq <<~RUBY
+      validates :content_type, {:inclusion=>{:in=>["image/png"]}, :allow_blank=>true}
+    RUBY
   end
 
   describe '#format' do
