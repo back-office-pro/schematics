@@ -18,12 +18,6 @@ module Schematics
           fa_icon(icon)
         end
 
-        def wrapper
-          return unless inline?
-
-          false
-        end
-
         def hide_label
           return false unless inline?
 
