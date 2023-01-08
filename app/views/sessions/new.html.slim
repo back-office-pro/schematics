@@ -8,7 +8,7 @@
                           scope: :session,
                           url: sessions_path,
                           data: { turbo: false, action: 'submit->application#disableWith' } do |form|
-      = form.email_field :email, prepend: fa_icon(:envelope)
+      = form.email_field :email, prepend: fa_icon(:envelope), required: true
       = render Schematics::Input::Password::Component.new(form:)
       = form.check_box :remember_me, switch: true
       = render Schematics::Button::Confirm::Component.new
