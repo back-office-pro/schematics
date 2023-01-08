@@ -29,7 +29,7 @@ describe Schematics::Attributes::TimeZone do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.time_zone') }
   its(:to_s) { is_expected.to eq('schema:user_time_zone') }
-  its(:collection) { is_expected.to eq([['', ''], ['(GMT+01:00) Paris', 'Paris']]) }
+  its(:collection) { is_expected.to eq([['(GMT+01:00) Paris', 'Paris']]) }
 
   its(:validators) do
     is_expected.to eq(inclusion: { in: ['Paris'] }, allow_blank: true)

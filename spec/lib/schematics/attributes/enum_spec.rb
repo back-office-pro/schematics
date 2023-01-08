@@ -48,7 +48,6 @@ describe Schematics::Attributes::Enum do
   its(:collection) do
     is_expected.to eq(
       [
-        ['', ''],
         %w[Available available],
         ['Available soon', 'available_soon'],
         ['Not available', 'not_available']

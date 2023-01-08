@@ -31,7 +31,7 @@ describe Schematics::Attributes::Mime do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_attachments.content_type') }
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
-  its(:collection) { is_expected.to eq([['', ''], ['PNG', 'image/png']]) }
+  its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
 
   its(:validators) do
     is_expected.to eq(inclusion: { in: ['image/png'] }, allow_blank: true)
