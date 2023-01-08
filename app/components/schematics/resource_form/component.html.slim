@@ -1,123 +1,52 @@
-= simple_form_for resource, url:, wrapper:, html: { data: } do |f|
-  = f.input :lock_version, as: :hidden, wrapper: false
+= bootstrap_form_with model: resource, url:, data:, layout: do |form|
+  = form.hidden_field :lock_version
   - attributes.stable_sort_by(&:weight).each do |field|
     = turbo_frame_tag dom_id(resource, field.name) do
       - case field
       - when Schematics::Associations::HasAndBelongsToMany
-        = f.association field.name.to_sym,
-                        prepend: fa_icon(field.icon),
-                        input_html: { data: { controller: 'dropdown' } },
-                        wrapper:
+        = render Schematics::ResourceForm::Fields::HasAndBelongsToMany::Component.new(form:, field:)
       - when Schematics::Attributes::BelongsTo
-        = f.association field.name.to_sym,
-                        prompt: t('prompt', gender: field.model_class.gender, attribute_name: human_attribute_name(field.name).downcase),
-                        collection: field.model_class.all.map { [_1.to_s, _1.id] }.sort,
-                        prepend: fa_icon(field.icon),
-                        input_html: { data: { controller: 'dropdown' } },
-                        wrapper:
+        = render Schematics::ResourceForm::Fields::BelongsTo::Component.new(form:, field:)
+      - when Schematics::Attributes::Time
+        = render Schematics::ResourceForm::Fields::Time::Component.new(form:, field:)
       - when Schematics::Attributes::Datetime
-        = f.input field.name.to_sym, as: :datetime, html5: true, wrapper:
+        = render Schematics::ResourceForm::Fields::Datetime::Component.new(form:, field:)
       - when Schematics::Attributes::Date
-        = f.input field.name.to_sym, as: :date, html5: true, wrapper:
+        = render Schematics::ResourceForm::Fields::Date::Component.new(form:, field:)
       - when Schematics::Attributes::Array
-        = f.input field.name.to_sym,
-                  input_html: { multiple: true },
-                  prepend: fa_icon(field.icon)
+        = render Schematics::ResourceForm::Fields::Array::Component.new(form:, field:)
       - when Schematics::Attributes::Address
-        = f.input field.name.to_sym,
-                  as: :select,
-                  collection: [resource.public_send(field.name.to_sym)].compact,
-                  prepend: fa_icon(field.icon),
-                  input_html: { autocomplete: 'new-address', data: { controller: 'dropdowns--address-autocomplete-dropdown' } },
-                  wrapper:
-      - when Schematics::Attributes::Email, Schematics::Attributes::Url, Schematics::Attributes::Phone
-        = f.input field.name.to_sym,
-                  as: field.type,
-                  maxlength: true,
-                  minlength: true,
-                  pattern: true,
-                  prepend: fa_icon(field.icon)
-      - when Schematics::Attributes::Country
-        = f.input field.name.to_sym,
-                  as: :country,
-                  prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
-                  prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown' } }
-      - when Schematics::Attributes::TimeZone
-        = f.input field.name.to_sym,
-                  as: :time_zone,
-                  prompt: t('prompt', gender: :male, attribute_name: human_attribute_name(field.name).downcase),
-                  prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown' } }
+        = render Schematics::ResourceForm::Fields::Address::Component.new(form:, field:)
+      - when Schematics::Attributes::Email
+        = render Schematics::ResourceForm::Fields::Email::Component.new(form:, field:)
+      - when Schematics::Attributes::Url
+        = render Schematics::ResourceForm::Fields::Url::Component.new(form:, field:)
+      - when Schematics::Attributes::Phone
+        = render Schematics::ResourceForm::Fields::Phone::Component.new(form:, field:)
       - when Schematics::Attributes::Color
-        = f.input field.name.to_sym,
-                  as: :color,
-                  prepend: fa_icon(field.icon),
-                  input_html: { class: 'form-control-color' }
+        = render Schematics::ResourceForm::Fields::Color::Component.new(form:, field:)
       - when Schematics::Attributes::ModelField
-        = f.input field.name.to_sym,
-                  as: :select,
-                  prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
-                  collection: field.collection.map { _1.push(class: model_field_collection_class(_1.second, field)) },
-                  prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown', 'dropdown-depends-on': "#{entity.name}[#{field.depends_on}]" } },
-                  wrapper:
+        = render Schematics::ResourceForm::Fields::ModelField::Component.new(form:, field:)
       - when Schematics::Behaviours::Enumerable
-        = f.input field.name.to_sym,
-                  as: :select,
-                  prompt: t('prompt', attribute_name: human_attribute_name(field.name).downcase),
-                  collection: field.collection,
-                  prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'dropdown' } },
-                  wrapper:
+        = render Schematics::ResourceForm::Fields::Enumerable::Component.new(form:, field:)
       - when Schematics::Attributes::String
-        = f.input field.name.to_sym,
-                  as: :string,
-                  maxlength: true,
-                  minlength: true,
-                  pattern: true,
-                  prepend: fa_icon(field.icon)
-      - when Schematics::Attributes::Text
-        = f.input field.name.to_sym,
-                  as: :text,
-                  prepend: fa_icon(field.icon),
-                  input_html: { data: { controller: 'autosize' } }
-      - when Schematics::Attributes::Decimal
-        = f.input field.name.to_sym, min_max: true, prepend: field.unit || fa_icon(field.icon)
+        = render Schematics::ResourceForm::Fields::String::Component.new(form:, field:)
+      - when Schematics::Attributes::Text, Schematics::Attributes::Jsonb
+        = render Schematics::ResourceForm::Fields::Text::Component.new(form:, field:)
       - when Schematics::Attributes::Rating
-        = f.input field.name.to_sym,
-                  as: :range,
-                  prepend: fa_icon(field.icon),
-                  input_html: { step: 0.5, min: 0, max: 5 }
+        = render Schematics::ResourceForm::Fields::Rating::Component.new(form:, field:)
       - when Schematics::Attributes::RichText
-        = f.input field.name.to_sym,
-                  as: :rich_text_area,
-                  input_html: { data: { controller: 'mentions' } }
+        = render Schematics::ResourceForm::Fields::RichText::Component.new(form:, field:)
       - when Schematics::Attributes::Attachments
-        - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
-        = f.input field.name.to_sym,
-                  as: :file,
-                  hint:,
-                  input_html: { multiple: true, include_hidden: false, accept: field.extensions }
+        = render Schematics::ResourceForm::Fields::Attachments::Component.new(form:, field:)
       - when Schematics::Attributes::Attachment
-        - hint = render Schematics::AttachmentValidators::Component.new(validators: field.validators)
-        - attachment = resource.public_send(field.name.to_sym)
-        - if attachment.attached?
-          = f.simple_fields_for field.attributes_param_key do |fields|
-            = fields.hidden_field :id, value: attachment.id
-            = fields.input :_destroy,
-                          as: :boolean,
-                          wrapper_html: { class: 'float-end m-0 text-secondary' }
-        = f.input field.name.to_sym,
-                  as: :file,
-                  hint:,
-                  input_html: { accept: field.extensions }
+        = render Schematics::ResourceForm::Fields::Attachment::Component.new(form:, field:)
       - when Schematics::Attributes::Digest
-        = render Schematics::Input::Password::Component.new(form: f, field:, autocomplete: false)
+        = render Schematics::ResourceForm::Fields::Digest::Component.new(form:, field:, autocomplete: false)
       - when Schematics::Attributes::Boolean
-        = f.input field.name.to_sym
-      - else
-        = f.input field.name.to_sym, prepend: field.try(:unit) || fa_icon(field.icon)
+        = render Schematics::ResourceForm::Fields::Boolean::Component.new(form:, field:)
+      - when Schematics::Behaviours::Numerable
+        = render Schematics::ResourceForm::Fields::Numerable::Component.new(form:, field:)
       = render Schematics::Button::Confirm::Component.new(compact: true) if turbo?
       = render Schematics::Button::Cancel::Component.new(path: cancel_path, compact: true) if turbo?
   = render Schematics::Button::Confirm::Component.new

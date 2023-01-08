@@ -103,7 +103,7 @@ button[disabled] .text.d-none:not(.d-lg-inline) {
   display: initial !important;
 }
 
-form:not(.simple_form) label.required::after {
+form label.required::after {
   content: ' *';
 }
 
