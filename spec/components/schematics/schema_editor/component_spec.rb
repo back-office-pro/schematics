@@ -40,7 +40,7 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
         ],
         associations: [
           {
-            name: 'user',
+            name: 'users',
             type: 'has_and_belongs_to_many'
           }
         ]
@@ -72,6 +72,7 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
   end
 
   describe 'Association fields' do
+    it { is_expected.to have_select('Name', selected: 'users') }
     it { is_expected.to have_select('Type', selected: 'Many-to-many association') }
   end
 end

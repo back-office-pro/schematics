@@ -10,6 +10,9 @@ ActiveRecordDoctor.configure do
     action_text_rich_texts
     versions
     friendly_id_slugs
+    good_jobs
+    good_job_processes
+    good_job_settings
   ]
 
   global :ignore_models, [
@@ -26,7 +29,9 @@ ActiveRecordDoctor.configure do
     'Schematics::ApplicationRecord',
     'Schematics::Version',
     'FriendlyId::Slug',
-    'ApplicationRecord'
+    'ApplicationRecord',
+    'GoodJob::BaseRecord',
+    'GoodJob::Job'
   ]
 
   detector :missing_foreign_keys, enabled: false

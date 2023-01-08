@@ -1,23 +1,11 @@
 name: Build
 on: [push]
 jobs:
-  active_record_doctor:
-    name: Active Record Doctor
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Run active record doctor
-        run: bundle exec rake schematics:db:active_record_doctor
   brakeman:
     name: Brakeman
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Run brakeman
-        run: bundle exec brakeman --no-pager --no-exit-on-error
+    runs:
+      using: docker
+      image: docker://presidentbeef/brakeman
+      args:
+        - --no-pager 
+        - --no-exit-on-error

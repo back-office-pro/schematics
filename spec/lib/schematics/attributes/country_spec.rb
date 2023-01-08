@@ -11,6 +11,7 @@ describe Schematics::Attributes::Country do
     allow(ISO3166::Country).to receive(:codes).and_return(['FR'])
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
@@ -29,7 +30,7 @@ describe Schematics::Attributes::Country do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.country') }
   its(:to_s) { is_expected.to eq('schema:user_country') }
-  its(:collection) { is_expected.to eq([['', ''], %w[France FR]]) }
+  its(:collection) { is_expected.to eq([%w[France FR]]) }
   its(:search_column) { is_expected.to eq(:country) }
   its(:search_predicate) { is_expected.to eq(:in) }
   its(:search_query) { is_expected.to eq(:country_in) }

@@ -2,18 +2,16 @@
 
 $LOAD_PATH.push File.expand_path('lib', __dir__)
 
-require 'schematics/version'
-
 Gem::Specification.new do |spec|
   spec.name = 'schematics'
-  spec.version = Schematics::VERSION
+  spec.version = '1.0.0'
   spec.author = 'Maxence De Rous'
   spec.email = 'maxence.derous@gmail.com'
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
   spec.required_ruby_version = '>= 3.2.0'
-  spec.metadata['allowed_push_host'] = 'https://www.back-office.pro'
+  spec.metadata['allowed_push_host'] = 'https://www.back-office.pro:9292/private'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
@@ -22,9 +20,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.5'
   spec.add_development_dependency 'pg', '~> 1.4.5'
-  spec.add_development_dependency 'reek', '~> 6.1.2'
+  spec.add_development_dependency 'reek', '~> 6.1.3'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.41.1'
+  spec.add_development_dependency 'rubocop', '~> 1.42.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.15.2'
   spec.add_development_dependency 'rubocop-rails', '~> 2.17.4'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
@@ -48,7 +46,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-s3', '~> 1.117.2'
   spec.add_dependency 'bcrypt', '~> 3.1.18'
   spec.add_dependency 'better_errors', '~> 2.10.0beta2'
-  spec.add_dependency 'binding_of_caller', '~> 1.0.0'
   spec.add_dependency 'bootstrap-email', '~> 1.3.1'
   spec.add_dependency 'bootstrap_form', '~> 5.1.0'
   spec.add_dependency 'brakeman', '~> 5.4.0'
@@ -61,7 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '~> 3.38.0'
   spec.add_dependency 'chartkick', '~> 4.2.1'
   spec.add_dependency 'chroma', '~> 0.2.0'
-  spec.add_dependency 'country_select', '~> 8.0.0'
+  spec.add_dependency 'countries', '~> 5.3.0'
   spec.add_dependency 'dotenv-rails', '~> 2.8.1'
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
   spec.add_dependency 'dry-transformer', '~> 1.0.1'
@@ -96,7 +93,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ratonvirus', '~> 0.4.2'
   spec.add_dependency 'ratonvirus-clamby', '~> 0.4.0'
   spec.add_dependency 'redis', '~> 4.8.0'
-  spec.add_dependency 'rollbar', '~> 3.3.3'
+  spec.add_dependency 'rollbar', '~> 3.4.0'
   spec.add_dependency 'route_translator', '~> 13.1.0'
   spec.add_dependency 'rqrcode', '~> 2.1.2'
   spec.add_dependency 'rspec-rails', '~> 6.0.1'
@@ -107,8 +104,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.3.0'
   spec.add_dependency 'sidekiq', '~> 7.0.2'
-  spec.add_dependency 'sidekiq-scheduler', '~> 5.0.0.beta1'
-  spec.add_dependency 'simple_form', '~> 5.1.0'
+  spec.add_dependency 'sidekiq-scheduler', '~> 5.0.0.beta2'
   spec.add_dependency 'slim', '~> 4.1.0'
   spec.add_dependency 'strip_attributes', '~> 1.13.0'
   spec.add_dependency 'stripe', '~> 8.0.0'

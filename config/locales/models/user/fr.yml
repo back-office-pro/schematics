@@ -16,6 +16,7 @@ fr:
         password_challenge: Mot de passe actuel
         password_confirmation: Confirmation mot de passe
         remember_me: Se souvenir de moi
+        role: Rôle
         time_zone: Fuseau horaire
     models:
       user:

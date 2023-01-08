@@ -1,10 +1,6 @@
 ---
 fr:
   javascript:
-    slim_select:
-      placeholder: Sélectionner une valeur
-      search_placeholder: Rechercher...
-      search_text: Aucun résultat
     typeahead:
       not_found: Aucun résultat
       pending: Recherche en cours...

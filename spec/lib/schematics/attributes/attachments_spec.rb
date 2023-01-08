@@ -7,6 +7,7 @@ describe Schematics::Attributes::Attachments do
   let(:name) { 'files' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
@@ -25,6 +26,7 @@ describe Schematics::Attributes::Attachments do
   its(:to_sql) { is_expected.to eq('active_storage_blobs.filename') }
   its(:to_s) { is_expected.to eq('schema:directory_files') }
   its(:preload) { is_expected.to eq(files_attachments: [blob: :variant_records]) }
+  its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to eq('png') }
   its(:search_column) { is_expected.to eq(:files_blobs_filename) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }

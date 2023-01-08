@@ -1,8 +1,8 @@
 .container-fluid.p-0.h-100
   .row.g-0.h-100
     = render Schematics::Sidebar::Component.new
-    .col.content class=css_class
+    .col.content.d-flex.flex-column class=css_class
       = render Schematics::Navbar::Component.new
-      .container-fluid.overflow-hidden.my-3.px-3
+      .container-fluid.my-3.px-3
         = content
       = render Schematics::Footer::Component.new

@@ -4,16 +4,20 @@ module Schematics
   # :reek:Attribute :reek:InstanceVariableAssumption
   module Virtuals
     class Virtual
+      include Behaviours::Identifiable
       include Behaviours::Inspectable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include ::ActiveModel::API
+      include ::ActiveModel::NestedAttributes
 
       delegate :hidden?, to: :options
       attr_accessor :entity, :name, :function
       attr_writer :options
+
+      accepts_nested_attributes_for :options
 
       validates :function,
                 presence: true,
@@ -40,8 +44,6 @@ module Schematics
           Concatenation
         end
       end
-
-      alias options_attributes= options=
 
       def available_options = []
 

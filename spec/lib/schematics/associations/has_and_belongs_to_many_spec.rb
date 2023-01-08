@@ -16,16 +16,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
       ]
     )
   end
-  let(:options) do
-    {
-      inverse: {
-        required: true,
-        type: 'has_and_belongs_to_many'
-      }
-    }
-  end
   let(:belongs_to) do
-    Schematics::Attributes::BelongsTo.new(entity:, name: 'permissions', options:)
+    Schematics::Attributes::BelongsTo.new(entity:, name: 'permissions')
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }

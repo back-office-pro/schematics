@@ -20,8 +20,6 @@ module Schematics
           def icon = :link
 
           def title = t('.title')
-
-          def wrapper = :input_group
         end
       end
     end

@@ -51,11 +51,12 @@ $accordion-bg: $card-bg;
 $offcanvas-border-width: 0;
 $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 $offcanvas-bg-color: $dark;
+$dropdown-bg: $dark;
 
 @import 'default';
 
 .switch-theme.dark {
-  display: none;
+  @extend .d-none;
 }
 
 svg,
@@ -73,6 +74,7 @@ iframe.google-map {
 .pagy-items-selector-js input,
 .ss-main .ss-search input,
 ul.list-group.list-group-striped li:nth-of-type(even),
+.ts-dropdown div:nth-of-type(even),
 .navbar.scrolled:hover {
   @extend .bg-dark;
 }
@@ -104,24 +106,4 @@ input:-webkit-autofill:focus {
   box-shadow: 0 0 0 30px $dark inset;
   -webkit-text-fill-color: $light;
   transition: background-color 5000s ease-in-out 0s;
-}
-
-// Tribute
-
-.tribute-container {
-  ul {
-    @extend .list-group;
-    @extend .list-group-striped;
-    @extend .shadow-sm;
-  }
-
-  li {
-    @extend .list-group-item;
-    @extend .list-group-item-action;
-    @extend .p-2;
-    @extend .border-0;
-    @extend .text-start;
-    @extend .text-truncate;
-    cursor: pointer;
-  }
 }

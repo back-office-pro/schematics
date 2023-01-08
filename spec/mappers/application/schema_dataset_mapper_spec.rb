@@ -51,7 +51,7 @@ RSpec.describe Application::SchemaDatasetMapper do
             },
             'has_and_belongs_to_many_associations_attributes' => {
               '0' => {
-                'name' => 'product',
+                'name' => 'products',
                 'type' => 'has_and_belongs_to_many'
               }
             }
@@ -101,7 +101,7 @@ RSpec.describe Application::SchemaDatasetMapper do
             ],
             associations: [
               {
-                name: 'product',
+                name: 'products',
                 type: 'has_and_belongs_to_many'
               }
             ]

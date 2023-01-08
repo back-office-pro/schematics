@@ -296,14 +296,6 @@
       {
         "type": "has_and_belongs_to_many",
         "name": "permissions"
-      },
-      {
-        "type": "has_and_belongs_to_many",
-        "name": "charts"
-      },
-      {
-        "type": "has_and_belongs_to_many",
-        "name": "stats"
       }
     ],
     "attributes": [
@@ -425,6 +417,12 @@
     "options": {
       "icon": "chart_line"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "roles"
+      }
+    ],
     "attributes": [
       {
         "name": "kind",
@@ -486,6 +484,12 @@
     "options": {
       "icon": "stopwatch_20"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "roles"
+      }
+    ],
     "attributes": [
       {
         "name": "agregate",
@@ -859,14 +863,16 @@
         "name": "start_at",
         "type": "datetime",
         "options": {
-          "required": true
+          "required": true,
+          "less_than": "end_at"
         }
       },
       {
         "name": "end_at",
         "type": "datetime",
         "options": {
-          "required": true
+          "required": true,
+          "greater_than": "start_at"
         }
       },
       {

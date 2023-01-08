@@ -1,0 +1,13 @@
+---
+fr:
+  activerecord:
+    attributes:
+      draft:
+        data: Données
+        name: Nom
+        user: Utilisateur
+    models:
+      draft:
+        gender: male
+        one: Brouillon
+        other: Brouillons

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'backend/concurrent_mutex'
+require 'sidekiq-scheduler/web'
+require 'sidekiq/web'
 
 module Backend
   # :reek:UtilityFunction
@@ -11,11 +13,7 @@ module Backend
 
     def engine = ::Sidekiq::Web
 
-    def engine_path = Rails
-      .application
-      .routes
-      .url_helpers
-      .sidekiq_web_path
+    alias engine_middleware engine
 
     def cache_store = :redis_cache_store
 

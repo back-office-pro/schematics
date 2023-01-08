@@ -6,7 +6,6 @@ module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
       include Behaviours::Searchable
-
       delegate :descriptor, to: :belongs_to
 
       def open_api_type = super.first

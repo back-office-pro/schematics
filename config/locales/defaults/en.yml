@@ -36,13 +36,12 @@ en:
       types:
         integer: integer
         string: string
+  helpers:
+    label:
+      destroy: Delete?
   line: Line %{line}
   of: of
   prompt: Select a %{attribute_name}
-  simple_form:
-    labels:
-      defaults:
-        _destroy: Delete?
   time:
     formats:
       long: "%A %d %B, %Y at %H:%M"

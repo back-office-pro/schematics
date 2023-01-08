@@ -25,6 +25,8 @@ module Schematics
             .sort_by { _1.model_name.human }
 
           def title = t('.title')
+
+          def entity = builder.object
         end
       end
     end

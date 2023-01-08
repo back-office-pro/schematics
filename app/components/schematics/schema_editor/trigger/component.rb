@@ -23,8 +23,6 @@ module Schematics
           'bs-placement': 'bottom',
           'bs-html': true
         }
-
-        def wrapper = :input_group
       end
     end
   end

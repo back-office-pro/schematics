@@ -1,0 +1,13 @@
+---
+en:
+  activerecord:
+    attributes:
+      draft:
+        data: Data
+        name: Name
+        user: User
+    models:
+      draft:
+        gender: male
+        one: Draft
+        other: Drafts

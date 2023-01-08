@@ -1,10 +1,11 @@
 @import 'bootstrap/scss/bootstrap';
+@import 'tom-select/dist/scss/tom-select.bootstrap5';
 
 // Bootstrap
 
 .form-check-input:checked {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
+  @extend .bg-primary;
+  @extend .border-primary;
 }
 
 .fixed-top {
@@ -14,15 +15,36 @@
 // Turbo
 
 .turbo-progress-bar {
-  background: var(--bs-primary);
+  @extend .bg-primary;
 }
 
-// Slim Select
+// Tom Select
 
-.ss-main {
-  .ss-content {
-    background: $card-bg !important;
-    z-index: $zindex-fixed;
+.ts-dropdown,
+.ts-dropdown.form-control,
+.ts-dropdown.form-select {
+  @extend .border-0;
+  @extend .shadow-sm;
+  @extend .list-group-striped !optional;
+}
+
+// Tribute
+
+.tribute-container {
+  ul {
+    @extend .list-group;
+    @extend .list-group-striped !optional;
+    @extend .shadow-sm;
+  }
+
+  li {
+    @extend .list-group-item;
+    @extend .list-group-item-action;
+    @extend .p-2;
+    @extend .border-0;
+    @extend .text-start;
+    @extend .text-truncate;
+    cursor: pointer;
   }
 }
 
@@ -36,7 +58,7 @@
 // Pagy
 
 .pagy-items-selector-js input {
-  border: 0;
-  color: $secondary;
-  font-weight: bold;
+  @extend .border-0;
+  @extend .text-secondary;
+  @extend .fw-bold;
 }

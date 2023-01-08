@@ -11,12 +11,5 @@ RSpec.describe Schematics::CsvTemplateSerializer do
   its(:filename) { is_expected.to eq('permissions.csv') }
   its(:extension) { is_expected.to eq(:csv) }
   its(:content_type) { is_expected.to eq('text/csv') }
-
-  its(:content) do
-    is_expected.to eq <<~CSV
-      Roles,Api keys
-      ,
-      ,
-    CSV
-  end
+  its(:content) { is_expected.to be_blank }
 end

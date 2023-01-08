@@ -5,7 +5,7 @@ module Schematics
     module Options
       module Modal
         class Component < ApplicationComponent
-          delegate :icon, :type, :id, to: 'builder.object'
+          delegate :icon, :id, to: 'builder.object'
           renders_one_form :builder
           option :builder
 
@@ -20,8 +20,9 @@ module Schematics
 
           def target = "schema-editor-options-modal-#{id}"
 
-          def title = Attributes
-            .const_get(type.camelize.to_sym)
+          def title = builder
+            .object
+            .class
             .model_name
             .human
         end

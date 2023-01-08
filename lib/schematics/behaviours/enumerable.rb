@@ -5,9 +5,7 @@ module Schematics
     module Enumerable
       delegate :values, to: :options
 
-      def collection = values
-        .map { [format(_1), _1] }
-        .tap { _1.unshift ['', ''] unless required? }
+      def collection = values.map { [format(_1), _1] }
 
       def default = values.first
 

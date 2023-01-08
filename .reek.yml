@@ -23,7 +23,6 @@ detectors:
   Attribute:
     exclude:
       - prefixed
-      - inverse_entity
   ControlParameter:
     exclude:
       - initialize

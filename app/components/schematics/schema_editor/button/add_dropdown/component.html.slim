@@ -15,7 +15,7 @@ button.btn.btn-sm.btn-primary.me-2.dropdown-toggle aria-expanded='false' data-bs
           data-nested-form-index-param=index
           role='button'
         }
-          = fa_icon constant.new.icon, class: 'fa-fw me-2'
+          = fa_icon constant.new(entity:).icon, class: 'fa-fw me-2'
           = t('.add_attribute', type: constant.model_name.human.downcase)
       .dropdown-divider
     .dropdown-item {
