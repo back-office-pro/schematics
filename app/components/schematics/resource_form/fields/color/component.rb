@@ -6,7 +6,7 @@ module Schematics
       module Color
         class Component < Fields::Component
           def control_class
-            super + ' form-control-color'
+            super.push('form-control-color')
           end
         end
       end

@@ -5,7 +5,6 @@ module Schematics
     module Fields
       module Array
         class Component < Fields::Component
-          def multiple = true
         end
       end
     end

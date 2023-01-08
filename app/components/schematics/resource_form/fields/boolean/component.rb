@@ -5,7 +5,6 @@ module Schematics
     module Fields
       module Boolean
         class Component < Fields::Component
-          def switch = true
         end
       end
     end

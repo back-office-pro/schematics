@@ -27,9 +27,9 @@
         = render Schematics::ResourceForm::Fields::ModelField::Component.new(form:, field:)
       - when Schematics::Behaviours::Enumerable
         = render Schematics::ResourceForm::Fields::Enumerable::Component.new(form:, field:)
-      - when Schematics::Attributes::String, Schematics::Attributes::Jsonb
+      - when Schematics::Attributes::String
         = render Schematics::ResourceForm::Fields::String::Component.new(form:, field:)
-      - when Schematics::Attributes::Text
+      - when Schematics::Attributes::Text, Schematics::Attributes::Jsonb
         = render Schematics::ResourceForm::Fields::Text::Component.new(form:, field:)
       - when Schematics::Attributes::Rating
         = render Schematics::ResourceForm::Fields::Rating::Component.new(form:, field:)

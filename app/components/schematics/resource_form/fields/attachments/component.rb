@@ -9,8 +9,6 @@ module Schematics
 
           alias accept extensions
 
-          def multiple = true
-
           def help = render AttachmentValidators::Component.new(validators:)
         end
       end

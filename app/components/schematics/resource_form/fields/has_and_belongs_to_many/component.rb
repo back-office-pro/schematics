@@ -5,7 +5,6 @@ module Schematics
     module Fields
       module HasAndBelongsToMany
         class Component < BelongsTo::Component
-          def multiple = true
         end
       end
     end

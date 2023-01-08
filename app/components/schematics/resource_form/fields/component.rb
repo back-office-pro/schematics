@@ -31,12 +31,16 @@ module Schematics
         end
 
         def control_class
-          return 'form-control' unless inline?
+          return %w[form-control] unless inline?
 
-          'form-control form-control-sm px-2 py-0'
+          %w[form-control form-control-sm px-2 py-0]
         end
 
         def include_hidden = false
+
+        def multiple = true
+
+        def switch = true
 
         def resource = form.object
 
