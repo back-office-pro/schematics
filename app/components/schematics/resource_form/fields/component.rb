@@ -27,7 +27,7 @@ module Schematics
         def control_class
           return %w[form-control] unless inline?
 
-          %w[form-control form-control-sm px-2 py-0]
+          %w[form-control form-control-sm rounded px-2 py-0]
         end
 
         def include_hidden = false
