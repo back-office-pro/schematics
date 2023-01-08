@@ -24,6 +24,7 @@ module Schematics
       accepts_nested_attributes_for :options
 
       validates :options_keys, inclusion: { in: :available_options_names }
+      validates :type, presence: true
       validates :name, english: true, unless: :core?
       validates :name,
                 presence: true,
