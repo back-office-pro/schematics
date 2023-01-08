@@ -18,9 +18,7 @@ module Schematics
 
           def data = { controller: 'dropdown' }
 
-          def label
-            attribute_name.humanize
-          end
+          def field_name = "#{resource.class.entity.name}[#{column_name}]"
 
           protected
 

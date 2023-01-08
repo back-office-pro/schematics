@@ -5,7 +5,9 @@ module Schematics
     module Fields
       module HasAndBelongsToMany
         class Component < BelongsTo::Component
-          def label = super.pluralize
+          def label = attribute_name
+            .humanize
+            .pluralize
 
           def attribute_name = super.singularize
         end
