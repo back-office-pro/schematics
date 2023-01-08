@@ -272,8 +272,6 @@ module Schematics
         .concat('_i_cont')
         .to_sym
 
-      protected
-
       def model_elements = [self, descriptor, search_data]
         .concat(triggers, elements, validators, search_aliases)
 
