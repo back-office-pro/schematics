@@ -4,6 +4,8 @@ module Schematics
   module Options
     class Option
       class << self
+        def hidden? = false
+
         def name = super
           .demodulize
           .underscore

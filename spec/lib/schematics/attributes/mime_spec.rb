@@ -7,11 +7,7 @@ describe Schematics::Attributes::Mime do
   let(:name) { 'content_type' }
   let(:options) { {} }
 
-  before do
-    allow(Mime::EXTENSION_LOOKUP)
-      .to receive(:values)
-      .and_return([Mime::Type.lookup('image/png')])
-  end
+  before { allow(Mime::LOOKUP).to receive(:keys).and_return(['image/png']) }
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }

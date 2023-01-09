@@ -864,6 +864,7 @@
         "type": "datetime",
         "options": {
           "required": true,
+          "start_date": true,
           "less_than": "end_at"
         }
       },
@@ -872,6 +873,7 @@
         "type": "datetime",
         "options": {
           "required": true,
+          "end_date": true,
           "greater_than": "start_at"
         }
       },

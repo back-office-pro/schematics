@@ -4,8 +4,10 @@ module Schematics
   module Viewer
     module Calendar
       class Component < Viewer::Component
-        CALENDAR_START = Entities::Entity::CALENDAR_START
-        CALENDAR_END = Entities::Entity::CALENDAR_END
+        delegate :start_date_attribute_name,
+                 :end_date_attribute_name,
+                 to: :entity,
+                 private: true
 
         def alert_css_classes_for(resource, date)
           %w[alert alert-secondary calendar lh-lg text-truncate mb-1 p-2]
@@ -20,15 +22,15 @@ module Schematics
 
         def resources_for(date)
           resources.select do |resource|
-            start_date = resource.public_send(CALENDAR_START).beginning_of_day
-            end_date = resource.public_send(CALENDAR_END).end_of_day
+            start_date = resource.public_send(start_date_attribute_name).beginning_of_day
+            end_date = resource.public_send(end_date_attribute_name).end_of_day
             (start_date..end_date).cover?(date)
           end
         end
 
         def tbody_css_classes
-          params.dig(filter_key, CALENDAR_START).presence &&
-            params.dig(filter_key, CALENDAR_END).presence &&
+          params.dig(:filter, start_date_attribute_name).presence &&
+            params.dig(:filter, end_date_attribute_name).presence &&
             super
         end
 
@@ -53,7 +55,7 @@ module Schematics
           .to_date
 
         def end_of_month_date
-          (calendar_start_date || resources.maximum(CALENDAR_START) || ::Date.current)
+          (calendar_start_date || resources.maximum(start_date_attribute_name) || ::Date.current)
             .end_of_month
         end
 
@@ -73,12 +75,12 @@ module Schematics
           .to_date
 
         def start_of_month_date
-          (calendar_start_date || resources.minimum(CALENDAR_START) || ::Date.current)
+          (calendar_start_date || resources.minimum(start_date_attribute_name) || ::Date.current)
             .beginning_of_month
         end
 
         def calendar_start_date = params
-          .dig(filter_key, CALENDAR_START, :gte)
+          .dig(:filter, start_date_attribute_name, :gte)
           &.to_date
       end
     end

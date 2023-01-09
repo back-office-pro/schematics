@@ -9,7 +9,9 @@ module Schematics
           option :field
 
           def render?
-            available_options.any?
+            available_options
+              .reject(&:hidden?)
+              .any?
           end
 
           def target = "#schema-editor-options-modal-#{id}"

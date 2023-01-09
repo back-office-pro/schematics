@@ -2,10 +2,8 @@
 
 module Schematics
   module Options
-    class Encrypted < Option
+    class EndDate < Option
       class << self
-        def hidden? = true
-
         def input_type = :boolean
       end
     end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-describe Schematics::Options::Polymorphic do
+describe Schematics::Options::DirectAssignment do
   subject { described_class }
 
   it { is_expected.to be_hidden }
 
-  its(:name) { is_expected.to eq(:polymorphic) }
+  its(:name) { is_expected.to eq(:direct_assignment) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

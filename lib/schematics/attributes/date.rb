@@ -12,13 +12,17 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
 
+      delegate :start_date?, :end_date?, to: :options
+
       def available_options = super.push(
         Options::GreaterThan,
         Options::GreaterThanOrEqualTo,
         Options::EqualTo,
         Options::LessThan,
         Options::LessThanOrEqualTo,
-        Options::OtherThan
+        Options::OtherThan,
+        Options::StartDate,
+        Options::EndDate
       )
 
       def open_api_type = ::Date

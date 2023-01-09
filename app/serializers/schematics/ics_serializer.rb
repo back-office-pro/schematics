@@ -2,11 +2,16 @@
 
 module Schematics
   class IcsSerializer
-    CALENDAR_START = Entities::Entity::CALENDAR_START
-    CALENDAR_END = Entities::Entity::CALENDAR_END
-
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :human_name, :entity, to: :model_class, private: true
+    delegate :start_date_attribute_name,
+             :end_date_attribute_name,
+             :string_attributes,
+             :url_attributes,
+             :address_attributes,
+             :rich_text_attributes,
+             to: :entity,
+             private: true
 
     def initialize(resource)
       @resource = resource
@@ -28,21 +33,47 @@ module Schematics
         calendar.event do |event|
           event.dtstart = dtstart
           event.dtend = dtend
-          event.summary = @resource.try(:subject)
-          event.description = @resource.try(:content).try(&:to_plain_text)
-          event.url = @resource.try(:url)
-          event.location = @resource.try(:location)
+          event.summary = summary
+          event.description = description
+          event.url = url
+          event.location = location
         end
         calendar
       end
     end
 
-    def dtend
-      Icalendar::Values::Date.new(@resource.try(CALENDAR_START) || ::Time.current)
+    def dtstart
+      Icalendar::Values::DateTime.new @resource.public_send(start_date_attribute_name)
     end
 
-    def dtstart
-      Icalendar::Values::Date.new(@resource.try(CALENDAR_END) || ::Time.current)
+    def dtend
+      Icalendar::Values::DateTime.new @resource.public_send(end_date_attribute_name)
+    end
+
+    def summary
+      return if string_attributes.none?
+
+      @resource.public_send(string_attributes.first.name)
+    end
+
+    def url
+      return if url_attributes.none?
+
+      @resource.public_send(url_attributes.first.name)
+    end
+
+    def location
+      return if address_attributes.none?
+
+      @resource.public_send(address_attributes.first.name)
+    end
+
+    def description
+      return if rich_text_attributes.none?
+
+      @resource
+        .public_send(rich_text_attributes.first.name)
+        .to_plain_text
     end
   end
 end
