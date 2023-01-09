@@ -4,11 +4,14 @@ module Schematics
   module Calendarable
     extend ActiveSupport::Concern
 
-    CALENDAR_START = Entities::Entity::CALENDAR_START
-    CALENDAR_END = Entities::Entity::CALENDAR_END
+    delegate :entity, to: :model_class, private: true
+    delegate :start_date_attribute_name,
+             :end_date_attribute_name,
+             to: :entity,
+             private: true
 
     def pagy_calendar_filter(collection, from, to)
-      collection.third[:where][CALENDAR_START] = {
+      collection.third[:where][start_date_attribute_name] = {
         gte: calendar_start_date || from,
         lte: calendar_end_date || to
       }
@@ -18,10 +21,10 @@ module Schematics
     def pagy_calendar_period(*)
       [
         calendar_start_date ||
-          model_class.with_deleted.minimum(CALENDAR_START) ||
+          model_class.with_deleted.minimum(start_date_attribute_name) ||
           ::Time.current.beginning_of_month,
         calendar_end_date ||
-          model_class.with_deleted.maximum(CALENDAR_END) ||
+          model_class.with_deleted.maximum(end_date_attribute_name) ||
           ::Time.current.end_of_month
       ]
     end
@@ -29,11 +32,11 @@ module Schematics
     private
 
     def calendar_end_date = params
-      .dig(:filter, CALENDAR_END, :lte)
+      .dig(:filter, end_date_attribute_name, :lte)
       &.in_time_zone
 
     def calendar_start_date = params
-      .dig(:filter, CALENDAR_START, :gte)
+      .dig(:filter, start_date_attribute_name, :gte)
       &.in_time_zone
   end
 end

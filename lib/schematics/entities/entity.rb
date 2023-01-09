@@ -16,8 +16,6 @@ module Schematics
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
       NAME_REGEX = %r{\A([a-z_/]+)\z}
-      CALENDAR_START = :start_at
-      CALENDAR_END = :end_at
 
       accepts_nested_attributes_for :attributes
       accepts_nested_attributes_for :virtuals
@@ -211,7 +209,7 @@ module Schematics
       end
 
       def viewer
-        return :calendar if find_field_by_name(CALENDAR_START) && find_field_by_name(CALENDAR_END)
+        return :calendar if start_date_attribute_name && end_date_attribute_name
         return :grid if attachment_attributes.any?(&:image?)
 
         :table
@@ -257,6 +255,16 @@ module Schematics
         .concat(attachments_attributes)
 
       def model_elements = [self, descriptor, search_data] + triggers + elements + validators
+
+      def start_date_attribute_name = date_attributes
+        .find(&:start_date?)
+        &.name
+        &.to_sym
+
+      def end_date_attribute_name = date_attributes
+        .find(&:end_date?)
+        &.name
+        &.to_sym
 
       protected
 
