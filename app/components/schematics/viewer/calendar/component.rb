@@ -29,8 +29,8 @@ module Schematics
         end
 
         def tbody_css_classes
-          params.dig(:filter, start_date_attribute_name).presence &&
-            params.dig(:filter, end_date_attribute_name).presence &&
+          params.dig(filter_key, start_date_attribute_name).presence &&
+            params.dig(filter_key, end_date_attribute_name).presence &&
             super
         end
 
@@ -80,7 +80,7 @@ module Schematics
         end
 
         def calendar_start_date = params
-          .dig(:filter, start_date_attribute_name, :gte)
+          .dig(filter_key, start_date_attribute_name, :gte)
           &.to_date
       end
     end
