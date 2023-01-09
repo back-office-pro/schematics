@@ -13,6 +13,7 @@ fr:
         descriptor: Descripteur
         direct_assignment: Assignement direct
         encrypted: Encrypté
+        end_date: Date de fin
         equal_to: Egal à
         events: Evènements
         greater_than: Supérieur à
@@ -34,6 +35,7 @@ fr:
         required: Requis
         scale: Echelle
         size: Taille
+        start_date: Date de début
         type: Type
         unique: Unique
         unit: Unitée
