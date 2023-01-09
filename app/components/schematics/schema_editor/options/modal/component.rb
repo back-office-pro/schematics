@@ -12,6 +12,7 @@ module Schematics
           def available_options = builder
             .object
             .available_options
+            .reject(&:hidden?)
             .sort_by(&:input_type)
 
           def render?

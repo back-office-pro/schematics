@@ -4,6 +4,8 @@ module Schematics
   module Options
     class DependsOn < Option
       class << self
+        def hidden? = true
+
         def input_type = :string
       end
     end
