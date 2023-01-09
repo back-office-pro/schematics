@@ -4,7 +4,7 @@ describe Schematics::Options::ContentType do
   subject { described_class }
 
   before do
-    allow(Mime::LOOKUP).to receive(:values).and_return([Mime[:png]])
+    allow(Mime::EXTENSION_LOOKUP).to receive(:keys).and_return(['png'])
   end
 
   its(:name) { is_expected.to eq(:content_type) }

@@ -10,11 +10,8 @@ module Schematics
 
         def multiple? = true
 
-        def collection = ::Mime::LOOKUP
-          .values
-          .map(&:symbol)
-          .map(&:to_s)
-          .uniq
+        def collection = ::Mime::EXTENSION_LOOKUP
+          .keys
           .sort
       end
     end
