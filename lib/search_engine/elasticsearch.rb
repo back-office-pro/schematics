@@ -8,12 +8,8 @@ module SearchEngine
 
     # :reek:ControlParameter
     # :reek:UtilityFunction
-    def pagy_calendar_filter(collection, calendar_start_date, calendar_end_date, from, to)
-      collection.third[:where][Schematics::Entities::Entity::CALENDAR_START] = {
-        gte: calendar_start_date || from,
-        lte: calendar_end_date || to
-      }
-      collection
+    def pagy_calendar_filter(collection, start_date_attribute_name, gte, lte)
+      collection.tap { _1.third[:where][start_date_attribute_name] = { gte:, lte: } }
     end
 
     def pagy_backend = :pagy_searchkick
