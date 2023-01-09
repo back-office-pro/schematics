@@ -14,10 +14,9 @@ module Schematics
         value && ::Mime::Type.lookup(value).symbol.to_s.upcase
       end
 
-      def values = ::Mime::EXTENSION_LOOKUP
-        .values
-        .map { _1.__send__(:string) }
-        .uniq
+      def collection = super.sort
+
+      def values = ::Mime::LOOKUP.keys
     end
   end
 end
