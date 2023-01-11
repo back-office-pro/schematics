@@ -5,17 +5,13 @@ module Schematics
     module Association
       module HasAndBelongsToMany
         class Component < ApplicationComponent
+          delegate :allowed_names, to: 'builder.object'
           renders_one_form :builder
           option :builder
 
           def collection = [Associations::HasAndBelongsToMany]
             .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
             .sort
-
-          def allowed_names = builder
-            .object
-            .allowed_names
-            .map(&:pluralize)
 
           def icon = :link
 

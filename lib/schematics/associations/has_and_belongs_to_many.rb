@@ -26,6 +26,7 @@ module Schematics
         .schema
         .entities
         .map(&:name)
+        .map(&:pluralize)
         .sort
     end
   end
