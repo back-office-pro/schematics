@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
   spec.add_development_dependency 'bootsnap', '~> 1.15.0'
+  spec.add_development_dependency 'debug', '~> 1.7.1'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.5'
@@ -58,6 +59,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chartkick', '~> 4.2.1'
   spec.add_dependency 'chroma', '~> 0.2.0'
   spec.add_dependency 'countries', '~> 5.3.0'
+  spec.add_dependency 'derailed_benchmarks', '~> 2.1.2'
   spec.add_dependency 'dotenv-rails', '~> 2.8.1'
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
   spec.add_dependency 'dry-transformer', '~> 1.0.1'
