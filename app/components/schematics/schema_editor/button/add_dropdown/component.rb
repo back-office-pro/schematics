@@ -20,7 +20,6 @@ module Schematics
 
           def never_used_collection = [
             Attributes::Action,
-            Attributes::Blob,
             Attributes::Model,
             Attributes::ModelField,
             Attributes::Uuid,
