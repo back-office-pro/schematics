@@ -63,7 +63,7 @@ module Schematics
       end
 
       def preload = tokens
-        .select_is_a?(Tokens::Variable)
+        .grep(Tokens::Variable)
         .flat_map(&:references)
         .uniq
         .map(&:to_sym)
@@ -101,7 +101,7 @@ module Schematics
         .map(&:to_sym)
 
       def variables = tokens
-        .select_is_a?(Tokens::Variable)
+        .grep(Tokens::Variable)
         .reject(&:with_references?)
         .map(&:raw_value)
 

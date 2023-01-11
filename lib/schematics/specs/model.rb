@@ -23,7 +23,7 @@ module Schematics
 
         attributes
           .select(&:required?)
-          .reject_is_a?(Attributes::StateMachine)
+          .grep_v(Attributes::StateMachine)
           .each do |attribute|
             it { is_expected.to validate_presence_of(attribute.name.to_sym) }
           end
@@ -64,7 +64,7 @@ module Schematics
         end
 
         fillable_attributes
-          .reject_is_a?(Behaviours::Preloadable)
+          .grep_v(Behaviours::Preloadable)
           .each do |attribute|
             it do
               is_expected.to allow_value(nil).for(attribute.name.to_sym) if attribute.allow_blank
@@ -73,7 +73,9 @@ module Schematics
           end
 
         renderable_attributes
-          .reject_is_a?(Behaviours::Preloadable, Attributes::Token, Attributes::Uuid)
+          .grep_v(Behaviours::Preloadable)
+          .grep_v(Attributes::Token)
+          .grep_v(Attributes::Uuid)
           .each do |attribute|
             it { is_expected.to have_db_index(attribute.name.to_sym) }
             it do

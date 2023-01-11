@@ -101,7 +101,7 @@ module Schematics
       # :reek:FeatureEnvy
       def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
-        predicate = non ? :reject_is_a? : :select_is_a?
+        predicate = non ? :grep_v : :grep
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         return super unless mod || constant
