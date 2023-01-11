@@ -7,6 +7,7 @@ module Application
     prepended do
       serialize :data, Schematics::Schema
       attribute :data, default: -> { current_data || [] }
+      validates_associated :data
       delegate :build_commands,
                :clean_commands,
                :new_entities,
@@ -30,14 +31,6 @@ module Application
 
     def migration
       @migration ||= Schematics::Migrations::DataMigration.new(data, ::Tenant.schema)
-    end
-
-    def valid?(*)
-      return super unless data
-
-      valid = super && data.valid?
-      errors.merge!(data)
-      valid
     end
 
     def version = self
