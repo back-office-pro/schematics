@@ -47,7 +47,7 @@ module Schematics
     def attributes = entity
       .fillable_elements
       .insert(2, password_challenge_attribute)
-      .reject_is_a?(Attributes::Association)
+      .grep_v(Attributes::Association)
 
     def password_challenge_attribute = Attributes::Digest.new(
       entity:,

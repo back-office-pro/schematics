@@ -10,6 +10,7 @@ module Schematics
     include ::ActiveModel::NestedAttributes
 
     accepts_nested_attributes_for :entities
+    validates_associated :entities
     attr_reader :entities
 
     class << self
@@ -53,15 +54,6 @@ module Schematics
       return 'dashboard#home' if valid?
 
       'exception#schema_error'
-    end
-
-    def valid?(*)
-      valid = super && entities.all?(&:valid?)
-      entities
-        .flat_map(&:errors)
-        .flat_map(&:compact)
-        .each { |error| errors.add(:entities_attributes, error) }
-      valid
     end
 
     private

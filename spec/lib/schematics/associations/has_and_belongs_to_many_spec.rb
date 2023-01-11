@@ -32,7 +32,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:default) { is_expected.to be_nil }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
-  its(:allowed_names) { is_expected.to include('user', 'role') }
+  its(:allowed_names) { is_expected.to include('users', 'roles') }
   its(:weight) { is_expected.to eq(3) }
 
   its(:to_str) do

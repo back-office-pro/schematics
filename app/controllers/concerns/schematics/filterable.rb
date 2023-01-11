@@ -30,7 +30,7 @@ module Schematics
 
     def permitted_filters = entity
       .searchable_elements
-      .reject_is_a?(Schematics::Behaviours::Rangeable)
+      .grep_v(Schematics::Behaviours::Rangeable)
       .map(&:name)
       .map(&:to_sym)
       .push(:with_deleted)

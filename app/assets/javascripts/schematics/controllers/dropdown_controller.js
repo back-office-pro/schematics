@@ -29,12 +29,16 @@ export default class extends ApplicationController {
 
   get options () {
     return {
-      plugins: ['no_active_items', 'remove_button'],
+      plugins: ['no_active_items', !this.required && 'remove_button'],
       onChange: this.setDependentDropdownsOptions.bind(this),
       render: {
         no_results: () => I18n.typeahead.notFound,
         loading: () => I18n.typeahead.pending
       }
     }
+  }
+
+  get required () {
+    return this.element.getAttribute('required') === 'required'
   }
 }

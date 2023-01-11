@@ -6,7 +6,7 @@ module Schematics
       include Behaviours::Rangeable
       include Behaviours::Numerable
 
-      validate :numberable_variables?
+      validate :numerable_variables?
 
       def available_options = [
         Options::Unit,
@@ -21,10 +21,10 @@ module Schematics
 
       private
 
-      def numberable_variables? = variables
+      def numerable_variables? = variables
         .map(&entity.method(:find_field_by_name))
         .compact
-        .reject_is_a?(Behaviours::Numerable)
+        .grep_v(Behaviours::Numerable)
         .map(&:name)
         .each { |name| errors.add(:function, :numerable, name:) }
     end

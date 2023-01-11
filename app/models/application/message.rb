@@ -14,7 +14,7 @@ module Application
     def mentions = content
       .body
       .attachables
-      .select_is_a?(::User)
+      .grep(::User)
       .uniq
   end
 end

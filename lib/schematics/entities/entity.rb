@@ -23,6 +23,12 @@ module Schematics
       accepts_nested_attributes_for :has_and_belongs_to_many_associations
       accepts_nested_attributes_for :options
 
+      validates_associated :attributes
+      validates_associated :virtuals
+      validates_associated :triggers
+      validates_associated :has_and_belongs_to_many_associations
+      validates_associated :descriptor
+
       validates :attributes, presence: true
       validates :actions, inclusion: { in: :default_actions }
       validates :name, english: true, unless: :core?
@@ -101,7 +107,7 @@ module Schematics
       # :reek:FeatureEnvy
       def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
-        predicate = non ? :reject_is_a? : :select_is_a?
+        predicate = non ? :grep_v : :grep
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
         return super unless mod || constant
@@ -232,18 +238,6 @@ module Schematics
           #{search_data_elements}
         }
       RUBY
-
-      def valid?(*) # rubocop:disable Metrics/CyclomaticComplexity
-        valid = super && (fields + triggers).all?(&:valid?) && descriptor.valid?
-        %i[attributes virtuals triggers has_and_belongs_to_many_associations].each do |element|
-          public_send(element)
-            .flat_map(&:errors)
-            .flat_map(&:compact)
-            .each { |error| errors.add(:"#{element}_attributes", error) }
-        end
-        errors.merge!(descriptor)
-        valid
-      end
 
       def default_actions = %i[index show create update destroy archive]
 
