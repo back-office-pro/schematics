@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_model/nested_attributes'
+require 'active_model/validations/associated'
 require 'array'
 require 'json_web_token'
 require 'object'
