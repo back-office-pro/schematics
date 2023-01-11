@@ -18,10 +18,20 @@ module Schematics
             Attributes::Text
           ].sort_by { _1.model_name.human }
 
+          def never_used_collection = [
+            Attributes::Action,
+            Attributes::Blob,
+            Attributes::Model,
+            Attributes::ModelField,
+            Attributes::Uuid,
+            Attributes::Locale,
+            Attributes::Timestamp,
+            Attributes::Array
+          ]
+
           def advanced_collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
             .map(&Attributes.method(:const_get))
-            .excluding(Attributes::BelongsTo)
-            .excluding(most_used_collection)
+            .excluding(Attributes::BelongsTo, most_used_collection, never_used_collection)
             .sort_by { _1.model_name.human }
 
           def title = t('.title')
