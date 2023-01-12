@@ -4,6 +4,7 @@ module Schematics
   module SchemaDatasets
     class Commit
       include Interactor
+
       delegate :add, :commit, :push, to: :git, private: true
       delegate :schema_dataset, to: :context, private: true
       delegate :id, to: :schema_dataset, private: true
