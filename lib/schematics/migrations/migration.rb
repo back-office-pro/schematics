@@ -15,16 +15,10 @@ module Schematics
       end
 
       def new_entities = @build_commands
-        .grep(Commands::CreateEntity)
         .map(&:entity)
+        .uniq
 
       def old_entities = @clean_commands
-        .grep(Commands::DestroyEntity)
-        .map(&:entity)
-
-      def entities = @build_commands
-        .concat(@clean_commands)
-        .grep_v(Commands::DestroyEntity)
         .map(&:entity)
         .uniq
 
