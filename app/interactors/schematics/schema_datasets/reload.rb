@@ -13,8 +13,6 @@ module Schematics
                private: true
 
       def call
-        return if Rails.env.test?
-
         reload!
         migration_old_entities.each do |entity|
           Object.__send__(:remove_const, entity.class_name.to_sym)

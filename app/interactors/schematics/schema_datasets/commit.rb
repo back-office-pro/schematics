@@ -10,8 +10,6 @@ module Schematics
       delegate :id, to: :schema_dataset, private: true
 
       def call
-        return if Rails.env.test?
-
         add(all: true)
         commit("Migration #{id}", allow_empty: true)
         push('origin', 'main') if Rails.env.production?
