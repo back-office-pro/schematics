@@ -15,8 +15,6 @@ module Schematics
       end
 
       def new_entities = @build_commands
-        .grep(Commands::CreateEntity)
-        .grep(Commands::RenameEntity)
         .map(&:entity)
         .uniq
 
