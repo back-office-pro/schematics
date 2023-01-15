@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::SchemaDatasets::Migrate do
-  self.use_transactional_tests = false
-
   let(:schema_dataset) { SchemaDataset.new(data:, state: :in_progress) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:admin_role) { Role.find_or_create_by!(name: 'Admin') }
@@ -17,6 +15,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
   end
 
   describe '.call' do
+    self.use_transactional_tests = false
+
     subject(:call) { described_class.call(schema_dataset:) }
 
     let(:rollback_commit) { Git.init(root).reset_hard('HEAD~1') }
