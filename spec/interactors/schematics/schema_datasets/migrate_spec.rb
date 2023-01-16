@@ -31,8 +31,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
       end
       schema_dataset.migration_old_entities.each do |entity|
-        load Rails.root.join('app', 'models', "#{entity.name}.rb")
-        load Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+        load root.join('app', 'models', "#{entity.name}.rb")
+        load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
       end
     end
 
