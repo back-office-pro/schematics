@@ -29,7 +29,9 @@ RSpec.describe Schematics::MigrateSchemaJob do
     end
   end
 
-  describe '#perform_now' do
+  describe '#perform_now', skip: 'use_transactional_tests would leak between specs' do
+    self.use_transactional_tests = false
+
     subject(:perform_now) { described_class.perform_now(schema_dataset) }
 
     it 'changes the schema dataset state from in_progress to migrated' do

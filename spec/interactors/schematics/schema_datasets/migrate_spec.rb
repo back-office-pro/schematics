@@ -14,7 +14,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
-  describe '.call' do
+  describe '.call', skip: 'use_transactional_tests would leak between specs' do
     self.use_transactional_tests = false
 
     subject(:call) { described_class.call(schema_dataset:) }
