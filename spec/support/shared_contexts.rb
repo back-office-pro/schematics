@@ -59,3 +59,25 @@ RSpec.shared_context 'with user' do
     )
   end
 end
+
+RSpec.shared_context 'with application migration rollback' do |migrations_steps = 1|
+  let(:root) { Rails.root }
+  let(:rollback_commit) { Git.init(root).reset_hard('HEAD~1') }
+  let(:rollback_migration) do
+    Dir.chdir(root) do
+      ActiveRecord::Base.connection.migration_context.rollback(migrations_steps)
+    end
+  end
+  let(:rollback_reload) do
+    schema_dataset.migration_new_entities.each do |entity|
+      Object.__send__(:remove_const, entity.class_name.to_sym)
+      Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
+    end
+    schema_dataset.migration_old_entities.each do |entity|
+      load root.join('app', 'models', "#{entity.name}.rb")
+      load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+    end
+  end
+
+  after { [rollback_migration, rollback_commit, rollback_reload] }
+end

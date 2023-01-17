@@ -6,7 +6,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
   let(:schema_dataset) { SchemaDataset.new(data:, state: :in_progress) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:admin_role) { Role.find_or_create_by!(name: 'Admin') }
-  let(:root) { Rails.root }
 
   before do
     admin_role
@@ -17,31 +16,11 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
   describe '.call' do
     subject(:call) { described_class.call(schema_dataset:) }
 
-    let(:rollback_commit) { Git.init(root).reset_hard('HEAD~1') }
-    let(:rollback_migration) do
-      Dir.chdir(root) do
-        ActiveRecord::Base.connection.migration_context.rollback(migrations_steps)
-      end
-    end
-    let(:rollback_reload) do
-      schema_dataset.migration_new_entities.each do |entity|
-        Object.__send__(:remove_const, entity.class_name.to_sym)
-        Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
-      end
-      schema_dataset.migration_old_entities.each do |entity|
-        load root.join('app', 'models', "#{entity.name}.rb")
-        load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
-      end
-    end
-
     before do
       Dir.chdir(root) { call }
     end
 
-    after { [rollback_migration, rollback_commit, rollback_reload] }
-
     context 'when creating a new entity' do
-      let(:migrations_steps) { 4 }
       let(:current_data) { [] }
       let(:data) do
         [
@@ -56,6 +35,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+
+      include_context 'with application migration rollback', 4
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -110,7 +91,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     end
 
     context 'when renaming an entity' do
-      let(:migrations_steps) { 1 }
       let(:current_data) do
         [
           {
@@ -141,6 +121,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+
+      include_context 'with application migration rollback'
 
       uses_transaction 'is a success'
       uses_transaction 'destroys the model file'
@@ -205,7 +187,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     end
 
     context 'when destroying an entity' do
-      let(:migrations_steps) { 1 }
       let(:data) { [] }
       let(:current_data) do
         [
@@ -224,6 +205,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+
+      include_context 'with application migration rollback'
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -263,7 +246,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     end
 
     context 'when adding a new attribute' do
-      let(:migrations_steps) { 1 }
       let(:current_data) do
         [
           {
@@ -300,6 +282,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
+      include_context 'with application migration rollback'
+
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
 
@@ -313,7 +297,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     end
 
     context 'when removing an attribute' do
-      let(:migrations_steps) { 1 }
       let(:current_data) do
         [
           {
@@ -350,6 +333,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
+      include_context 'with application migration rollback'
+
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
 
@@ -363,7 +348,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     end
 
     context 'when renaming an attribute' do
-      let(:migrations_steps) { 1 }
       let(:current_data) do
         [
           {
@@ -404,6 +388,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+
+      include_context 'with application migration rollback'
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
