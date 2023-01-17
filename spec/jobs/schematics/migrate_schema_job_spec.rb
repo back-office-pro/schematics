@@ -29,7 +29,7 @@ RSpec.describe Schematics::MigrateSchemaJob do
     end
   end
 
-  describe '#perform_now' do
+  describe '#perform_now', skip: 'must be run standalone' do
     subject(:perform_now) { described_class.perform_now(schema_dataset) }
 
     include_context 'with application migration rollback', 4

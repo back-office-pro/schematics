@@ -13,7 +13,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
-  describe '.call' do
+  describe '.call', skip: 'must be run standalone' do
     subject(:call) { described_class.call(schema_dataset:) }
 
     before do
