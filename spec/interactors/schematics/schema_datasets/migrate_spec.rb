@@ -14,9 +14,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
-  describe '.call', skip: 'use_transactional_tests would leak between specs' do
-    self.use_transactional_tests = false
-
+  describe '.call' do
     subject(:call) { described_class.call(schema_dataset:) }
 
     let(:rollback_commit) { Git.init(root).reset_hard('HEAD~1') }
@@ -59,7 +57,20 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
-      it { is_expected.to be_a_success }
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+      uses_transaction 'creates a slug migration file'
+      uses_transaction 'creates a lock_version migration file'
+      uses_transaction 'creates a counter cache migration file'
+      uses_transaction 'creates a model file'
+      uses_transaction 'creates a controller file'
+      uses_transaction 'creates a rspec model file'
+      uses_transaction 'creates a serializer file'
+      uses_transaction 'creates a rspec feature file'
+
+      it 'is a success' do
+        expect(call).to be_a_success
+      end
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_create_prospects.rb')]).not_to be_empty
@@ -131,7 +142,22 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
-      it { is_expected.to be_a_success }
+      uses_transaction 'is a success'
+      uses_transaction 'destroys the model file'
+      uses_transaction 'destroys the controller file'
+      uses_transaction 'destroys the rspec model file'
+      uses_transaction 'destroys the serializer file'
+      uses_transaction 'destroys the rspec feature file'
+      uses_transaction 'creates a migration file'
+      uses_transaction 'creates a model file'
+      uses_transaction 'creates a controller file'
+      uses_transaction 'creates a rspec model file'
+      uses_transaction 'creates a serializer file'
+      uses_transaction 'creates a rspec feature file'
+
+      it 'is a success' do
+        expect(call).to be_a_success
+      end
 
       it 'destroys the model file' do
         expect(File).not_to exist root.join('app/models/user.rb')
@@ -199,7 +225,17 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
-      it { is_expected.to be_a_success }
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+      uses_transaction 'destroys the model file'
+      uses_transaction 'destroys the controller file'
+      uses_transaction 'destroys the rspec model file'
+      uses_transaction 'destroys the serializer file'
+      uses_transaction 'destroys the rspec feature file'
+
+      it 'is a success' do
+        expect(call).to be_a_success
+      end
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_drop_users.rb')]).not_to be_empty
@@ -264,7 +300,12 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
-      it { is_expected.to be_a_success }
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+
+      it 'is a success' do
+        expect(call).to be_a_success
+      end
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_add_age_to_users.rb')]).not_to be_empty
@@ -309,7 +350,12 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
-      it { is_expected.to be_a_success }
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+
+      it 'is a success' do
+        expect(call).to be_a_success
+      end
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_remove_last_name_from_users.rb')]).not_to be_empty
@@ -359,7 +405,12 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
 
-      it { is_expected.to be_a_success }
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+
+      it 'is a success' do
+        expect(call).to be_a_success
+      end
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_rename_last_name_to_surname_in_users.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
