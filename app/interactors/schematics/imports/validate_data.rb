@@ -4,6 +4,7 @@ module Schematics
   module Imports
     class ValidateData
       include Interactor
+
       delegate :import, :data, to: :context, private: true
       delegate :model_class, to: :import, private: true
 

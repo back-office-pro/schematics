@@ -6,6 +6,7 @@ module Schematics
   module Imports
     class ReadData
       include Interactor
+
       delegate :import, to: :context, private: true
       delegate :model_class, :file, :model, to: :import, private: true
       delegate :entity, :i18n_scope, to: :model_class, private: true
