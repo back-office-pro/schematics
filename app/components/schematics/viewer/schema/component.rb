@@ -10,6 +10,7 @@ module Schematics
           add_association_edges
           add_habtm_edges
           add_entity_nodes
+          add_state_machine_clusters
         end
 
         def output
@@ -33,9 +34,9 @@ module Schematics
             graph.node[:fontname] = 'Helvetica, Arial, sans-serif'
             graph.node[:fontsize] = 10
             graph.node[:style] = 'filled'
-            graph.node[:fillcolor] = 'gray98'
-            graph.edge[:style] = 'dashed'
-            graph.edge[:color] = 'gray70'
+            graph.node[:fillcolor] = 'gray97'
+            graph.edge[:fontname] = 'Helvetica, Arial, sans-serif'
+            graph.edge[:fontsize] = 10
           end
         end
 
@@ -64,7 +65,7 @@ module Schematics
               <<table border='0' cellborder='0' cellspacing='0'>
                 <tr>
                   <td>
-                    <b>#{entity.name}</b>
+                    <b>#{entity.name.humanize}</b>
                   </td>
                 </tr>
                 #{entity.non_association_attributes.map { "<tr><td align='left'>+ #{_1.name}</td></tr>" }.join}
@@ -72,6 +73,24 @@ module Schematics
               </table>>
             HTML
           end
+        end
+
+        def add_state_machine_clusters
+          entities
+            .flat_map(&:state_machine_attributes)
+            .each_with_index do |attribute, index|
+              graph.public_send(:"cluster_#{index}") do |subgraph|
+                subgraph[:label] = "<<b>#{attribute.entity.name.humanize} #{attribute.name} *</b>>"
+                subgraph[:fontname] = 'Helvetica, Arial, sans-serif'
+                subgraph[:fontsize] = 10
+                subgraph[:color] = 'transparent'
+                subgraph.node[:shape] = 'oval'
+                subgraph.node[:color] = 'transparent'
+                attribute.events.each do |event|
+                  subgraph.add_edges(event.from, event.to, label: event.name)
+                end
+              end
+            end
         end
       end
     end
