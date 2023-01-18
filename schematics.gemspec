@@ -49,7 +49,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'after_commit_everywhere', '~> 1.3.0'
   spec.add_dependency 'aws-sdk-s3', '~> 1.117.2'
   spec.add_dependency 'bcrypt', '~> 3.1.18'
-  spec.add_dependency 'bootstrap-email', '~> 1.3.1'
+  spec.add_dependency 'bootstrap-email', '~> 1.4.0'
   spec.add_dependency 'bootstrap_form', '~> 5.1.0'
   spec.add_dependency 'browser', '~> 5.3.1'
   spec.add_dependency 'cancancan', '~> 3.4.0'
