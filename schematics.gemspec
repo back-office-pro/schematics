@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
   spec.add_development_dependency 'image_processing', '~> 1.12.2'
   spec.add_development_dependency 'importmap-rails', '~> 1.1.5'
+  spec.add_development_dependency 'isolator', '~> 0.8.0'
   spec.add_development_dependency 'pg', '~> 1.4.5'
   spec.add_development_dependency 'reek', '~> 6.1.4'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
@@ -79,6 +80,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwt', '~> 2.6.0'
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
+  spec.add_dependency 'mail', '~> 2.8.1.rc2' # TODO: remove when 2.8.1 is released
   spec.add_dependency 'oj', '~> 3.13.23'
   spec.add_dependency 'pagy', '~> 6.0.1'
   spec.add_dependency 'paper_trail', '~> 14.0.0'
