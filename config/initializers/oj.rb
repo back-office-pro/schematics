@@ -2,6 +2,4 @@
 
 require 'oj'
 
-Oj::Rails.set_encoder
-Oj::Rails.set_decoder
-Oj::Rails.optimize
+Oj.optimize_rails
