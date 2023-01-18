@@ -43,11 +43,9 @@ module Schematics
             .model_class
             .joins(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
-        when Schematics::Attributes::Enum
+        when Schematics::Behaviours::Enumerable
           i18n_translations&.dig(field.name.pluralize.to_sym)&.invert&.dig(value) ||
-            value.parameterize(separator: '_')
-        when Schematics::Attributes::Country
-          field.collection.to_h[value] || value.parameterize(separator: '_')
+            value&.parameterize(separator: '_')
         when Schematics::Virtuals::Virtual
           nil
         else
