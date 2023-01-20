@@ -10,9 +10,10 @@ module Application
       validates_associated :data
       delegate :build_commands,
                :clean_commands,
-               :new_entities,
                :old_entities,
-               :entities,
+               :changed_entities,
+               :new_and_changed_entities,
+               :old_and_changed_entities,
                to: :migration,
                prefix: true
     end

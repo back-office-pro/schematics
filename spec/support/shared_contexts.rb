@@ -69,11 +69,11 @@ RSpec.shared_context 'with application migration rollback' do |migrations_steps 
     end
   end
   let(:rollback_reload) do
-    schema_dataset.migration_new_entities.each do |entity|
+    schema_dataset.migration_new_and_changed_entities.each do |entity|
       Object.__send__(:remove_const, entity.class_name.to_sym)
       Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
     end
-    schema_dataset.migration_old_entities.each do |entity|
+    schema_dataset.migration_old_and_changed_entities.each do |entity|
       load root.join('app', 'models', "#{entity.name}.rb")
       load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
     end

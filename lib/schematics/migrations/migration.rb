@@ -2,7 +2,7 @@
 
 module Schematics
   module Migrations
-    class Migration
+    class Migration # rubocop:disable Metrics/ClassLength
       attr_reader :build_commands, :clean_commands
 
       def initialize(new_entities = [], current_entities = [])
@@ -15,13 +15,33 @@ module Schematics
       end
 
       def new_entities = @build_commands
+        .grep(Commands::CreateEntity)
+        .concat(@build_commands.grep(Commands::RenameEntity))
         .map(&:entity)
         .uniq
 
       def old_entities = @clean_commands
         .grep(Commands::DestroyEntity)
-        .grep(Commands::RenameEntity)
+        .concat(@clean_commands.grep(Commands::RenameEntity))
         .map(&:entity)
+        .uniq
+
+      def changed_entities = @build_commands
+        .grep(Commands::RenameAttribute)
+        .concat(@build_commands.grep(Commands::ChangeAttribute))
+        .concat(@build_commands.grep(Commands::AddAttribute))
+        .concat(@clean_commands.grep(Commands::RemoveAttribute))
+        .map(&:entity)
+        .excluding(new_entities)
+        .excluding(old_entities)
+        .uniq
+
+      def new_and_changed_entities = new_entities
+        .concat(changed_entities)
+        .uniq
+
+      def old_and_changed_entities = old_entities
+        .concat(changed_entities)
         .uniq
 
       private

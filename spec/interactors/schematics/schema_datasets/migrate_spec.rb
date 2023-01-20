@@ -13,7 +13,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
-  describe '.call', skip: 'must be run standalone' do
+  describe '.call' do
     subject(:call) { described_class.call(schema_dataset:) }
 
     before do
@@ -48,6 +48,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'creates a rspec model file'
       uses_transaction 'creates a serializer file'
       uses_transaction 'creates a rspec feature file'
+      uses_transaction 'defines a model class'
 
       it 'is a success' do
         expect(call).to be_a_success
@@ -87,6 +88,10 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a rspec feature file' do
         expect(File).to exist root.join('spec/features/prospect_spec.rb')
+      end
+
+      it 'defines a model class' do
+        expect { Prospect }.not_to raise_error
       end
     end
 
@@ -136,6 +141,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'creates a rspec model file'
       uses_transaction 'creates a serializer file'
       uses_transaction 'creates a rspec feature file'
+      uses_transaction 'undefines a model class'
+      uses_transaction 'defines a model class'
 
       it 'is a success' do
         expect(call).to be_a_success
@@ -184,6 +191,14 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'creates a rspec feature file' do
         expect(File).to exist root.join('spec/features/client_spec.rb')
       end
+
+      it 'undefines a model class' do
+        expect { User }.to raise_error(NameError)
+      end
+
+      it 'defines a model class' do
+        expect { Client }.not_to raise_error
+      end
     end
 
     context 'when destroying an entity' do
@@ -215,6 +230,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'destroys the rspec model file'
       uses_transaction 'destroys the serializer file'
       uses_transaction 'destroys the rspec feature file'
+      uses_transaction 'undefines a model class'
 
       it 'is a success' do
         expect(call).to be_a_success
@@ -242,6 +258,10 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'destroys the rspec feature file' do
         expect(File).not_to exist root.join('spec/features/user_spec.rb')
+      end
+
+      it 'undefines a model class' do
+        expect { User }.to raise_error(NameError)
       end
     end
 
@@ -286,6 +306,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
+      uses_transaction 'responds to new model attribute'
 
       it 'is a success' do
         expect(call).to be_a_success
@@ -293,6 +314,10 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_add_age_to_users.rb')]).not_to be_empty
+      end
+
+      it 'responds to new model attribute' do
+        expect(User.new).to respond_to(:age)
       end
     end
 
@@ -337,6 +362,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
+      uses_transaction 'does not respond to old model attribute'
 
       it 'is a success' do
         expect(call).to be_a_success
@@ -344,6 +370,10 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_remove_last_name_from_users.rb')]).not_to be_empty
+      end
+
+      it 'does not respond to old model attribute' do
+        expect(User.new).not_to respond_to(:last_name)
       end
     end
 
@@ -393,6 +423,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
+      uses_transaction 'responds to new model attribute'
+      uses_transaction 'does not respond to old model attribute'
 
       it 'is a success' do
         expect(call).to be_a_success
@@ -400,6 +432,14 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         expect(Dir[root.join('db/migrate/*_rename_last_name_to_surname_in_users.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+      end
+
+      it 'responds to new model attribute' do
+        expect(User.new).to respond_to(:surname)
+      end
+
+      it 'does not respond to old model attribute' do
+        expect(User.new).not_to respond_to(:last_name)
       end
     end
   end
