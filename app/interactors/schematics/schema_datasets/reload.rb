@@ -13,8 +13,9 @@ module Schematics
                to: :schema_dataset,
                private: true
 
+      before { reload! }
+
       def call
-        reload!
         migration_old_and_changed_entities.each(&method(:remove_constants))
         migration_new_and_changed_entities.each(&method(:load_files))
         migration_changed_entities
