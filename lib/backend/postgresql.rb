@@ -7,8 +7,6 @@ module Backend
 
     def concurrency = 0
 
-    def mutex = Mutex.new
-
     def engine = ::GoodJob::Engine
 
     def cache_store = :memory_store
