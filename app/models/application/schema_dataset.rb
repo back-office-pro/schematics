@@ -25,9 +25,8 @@ module Application
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(self) do
-        ::Tenant.schema = data if Tenant.backend.concurrency.positive?
-      end
+      Schematics::MigrateSchemaJob.wait_for(self)
+      Schematics::MigrateSchemaJob.perform_later(self)
     end
 
     def migration
