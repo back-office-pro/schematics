@@ -2,21 +2,13 @@
 
 module Schematics
   class VersionSerializer < ::ActiveModel::Serializer
-    attributes :id, :created_at, :event, :item, :object_changes
-    has_one :user
-
-    class << self
-      # :reek:ControlParameter
-      def serializer_for(model, *)
-        case model
-        when User
-          ::User.entity.descriptor.serializer_class
-        else
-          super
-        end
-      end
-    end
+    attributes :id, :created_at, :event, :item, :user, :object_changes
 
     def item = ::ActiveModelSerializers::SerializableResource.new(object.item)
+
+    def user = ::ActiveModelSerializers::SerializableResource.new(
+      object.user,
+      serializer: ::User.entity.descriptor.serializer_class
+    )
   end
 end
