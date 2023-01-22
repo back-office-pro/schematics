@@ -10,7 +10,13 @@ module Schematics
       def action
         return unless href
 
-        %w[click->application#visit]
+        'click->application#visit'
+      end
+
+      def role
+        return unless href
+
+        'button'
       end
 
       def href
