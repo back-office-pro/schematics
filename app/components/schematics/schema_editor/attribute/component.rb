@@ -9,7 +9,9 @@ module Schematics
         renders_one_form :builder
         option :builder
 
-        def collection = (Attributes.constants - SchemaEditor::Component::DENYLIST)
+        def collection = Attributes
+          .constants
+          .excluding(SchemaEditor::Component::DENYLIST)
           .map(&Attributes.method(:const_get))
           .select(&method(:compatible_types))
           .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
