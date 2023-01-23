@@ -6,7 +6,7 @@ RSpec.describe 'Dashboard' do
   include_context 'with authenticated user'
 
   let(:role) { admin_role }
-  let(:headers) { { 'Authorization' => "Bearer #{auth_token}" } }
+  let(:accept_header) { 'text/html' }
 
   describe 'GET #admin' do
     let(:do_request) { get(admin_path, headers:) }
