@@ -23,6 +23,7 @@ fr:
       schematics/attributes/datetime: Date et heure
       schematics/attributes/decimal: Nombre à virgule (decimal)
       schematics/attributes/digest: Mot de passe
+      schematics/attributes/duration: Durée
       schematics/attributes/email: E-mail
       schematics/attributes/enum: Enumération
       schematics/attributes/float: Nombre à virgule (float)

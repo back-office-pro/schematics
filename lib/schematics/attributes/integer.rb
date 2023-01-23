@@ -14,6 +14,8 @@ module Schematics
         Options::Unit
       )
 
+      def database_type = 'integer'
+
       def default = 1
 
       def open_api_type = ::Integer

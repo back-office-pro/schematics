@@ -201,6 +201,9 @@ one:
           name: quantity
           type: integer
         - id: <%= SecureRandom.uuid %>
+          name: duration
+          type: duration
+        - id: <%= SecureRandom.uuid %>
           name: product
           type: belongs_to
           options:
