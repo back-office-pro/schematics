@@ -5,9 +5,10 @@ module Schematics
     module Grid
       class Component < Viewer::Component
         def carousel(resource)
-          entity.attachment_attributes.map do |attribute|
-            resource.public_send(attribute.name)
-          end
+          entity
+            .attachment_attributes
+            .map(&:name)
+            .flat_map(&resource.method(:public_send))
         end
 
         def carousel_css_classes = %w[
