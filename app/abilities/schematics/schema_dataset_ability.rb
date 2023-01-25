@@ -6,7 +6,7 @@ module Schematics
       super
       cannot :import, ::SchemaDataset
       cannot :create, ::SchemaDataset if ::SchemaDataset.any? && !::SchemaDataset.last.migrated?
-      cannot :manage, ::SchemaDataset.in_progress
+      cannot :update, ::SchemaDataset.in_progress
       cannot :update, ::SchemaDataset.migrated
       cannot :archive, ::SchemaDataset.current if ::SchemaDataset.current
     end

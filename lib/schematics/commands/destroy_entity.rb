@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'generators/permissions/permissions_generator'
-require 'generators/rspec/feature/feature_generator'
-require 'generators/translations/translations_generator'
 require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
 require 'rails/generators/rails/scaffold/scaffold_generator'
+require 'generators/permissions/permissions_generator'
+require 'generators/rspec/feature/feature_generator'
+require 'generators/translations/translations_generator'
 
 module Schematics
   module Commands
@@ -35,7 +35,8 @@ module Schematics
         [
           "drop_#{table_name.pluralize}",
           *migratable_attributes.map(&:to_s)
-        ]
+        ],
+        ['--timestamps=true']
       )
 
       def permissions_generator

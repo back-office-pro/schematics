@@ -5,6 +5,7 @@ module Schematics
     self.abstract_class = true
     self.implicit_order_column = 'created_at'
     include Loadable
+    include Retryable
     include Translatable
     include Attachable
     loadable concerns: [

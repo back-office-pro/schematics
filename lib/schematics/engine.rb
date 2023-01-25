@@ -11,6 +11,7 @@ require 'cancancan'
 require 'chartkick'
 require 'chroma'
 require 'csv'
+require 'derailed_benchmarks'
 require 'dotenv-rails'
 require 'dry-initializer'
 require 'dry/transformer'
@@ -136,6 +137,11 @@ module Schematics
     # Active Job
     config.before_configuration do
       config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
+    end
+
+    # Cache
+    config.before_configuration do |app|
+      app.config.cache_store = ::Tenant.backend.cache_store, ::Tenant.backend.cache_store_options
     end
 
     # Active Storage

@@ -4,6 +4,7 @@ module Schematics
   module SchemaDatasets
     class Backup
       include Interactor
+
       delegate :create_and_upload!, to: 'ActiveStorage::Blob', private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :force, to: :context, private: true
@@ -33,7 +34,7 @@ module Schematics
 
       def filename = 'db.dump'
 
-      def key = File.join('backups', ::Time.current.to_s, filename)
+      def key = File.join('backups', ::Time.current.strftime('%Y_%m_%d_%H_%M_%S_%L'), filename)
     end
   end
 end

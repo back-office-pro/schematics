@@ -32,8 +32,14 @@ export default class extends ApplicationController {
       plugins: ['no_active_items', !this.required && 'remove_button'],
       onChange: this.setDependentDropdownsOptions.bind(this),
       render: {
-        no_results: () => I18n.typeahead.notFound,
-        loading: () => I18n.typeahead.pending
+        no_results: () => `<div class="option opacity-100 text-muted">
+          <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>
+          ${I18n.typeahead.notFound}
+        </div>`,
+        loading: () => `<div class="option opacity-100 text-muted">
+          <i class="fa fa-spinner fa-spin text-secondary fa-fw me-2"></i>
+          ${I18n.typeahead.pending}
+        </div>`
       }
     }
   }

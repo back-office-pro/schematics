@@ -63,6 +63,6 @@ module Schematics
               .find_by!(password_reset_token: params[:token])
     end
 
-    alias index_path new_password_reset_path
+    def index_path = new_password_reset_path
   end
 end

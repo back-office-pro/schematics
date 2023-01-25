@@ -191,11 +191,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
 
-  def default_options = {
-    database: 'postgresql',
-    skip_keeps: true,
-    skip_test: true
-  }
+  def default_options = { database: 'postgresql', skip_test: true }
 
   def db_name = app_name.underscore
 

@@ -9,3 +9,8 @@ jobs:
       args:
         - --no-pager 
         - --no-exit-on-error
+  bundler_audit:
+    name: Bundler audit
+    runs:
+      using: docker
+      image: docker://sebanpl/bundler-audit

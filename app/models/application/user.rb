@@ -8,7 +8,7 @@ module Application
 
     prepended do
       scope :with_role, -> { preload(:role) }
-      after_create { Schematics::UserMailer.new_account(self).deliver_later }
+      after_create_commit { Schematics::UserMailer.new_account(self).deliver_later }
       attribute :remember_me, :boolean
       attribute :time_zone, default: -> { ::Configuration.instance.time_zone }
       attribute :locale, default: -> { ::Configuration.instance.locale }

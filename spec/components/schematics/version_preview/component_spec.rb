@@ -1,0 +1,43 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe Schematics::VersionPreview::Component, type: :component do
+  subject { render_inline described_class.new(version:) }
+
+  include_context 'with user'
+
+  let(:version) { Schematics::Version.create!(event:, item: user, user:, object:) }
+
+  context 'when version has a create event' do
+    let(:event) { 'create' }
+    let(:object) { nil }
+
+    it { is_expected.to have_link(user.to_s, href: user_path(user)) }
+    it { is_expected.not_to have_selector('.row[role]') }
+    it { is_expected.not_to have_selector('.row[data-action]') }
+    it { is_expected.not_to have_selector('.row[data-application-href-param]') }
+  end
+
+  context 'when version has a update event' do
+    let(:event) { 'update' }
+    let(:object) { user.as_json }
+
+    it { is_expected.to have_link(user.to_s, href: user_path(user)) }
+    it { is_expected.to have_selector('.row[role]') }
+    it { is_expected.to have_selector('.row[data-action]') }
+    it { is_expected.to have_selector('.row[data-application-href-param]') }
+  end
+
+  context 'when version has a destroy event' do
+    let(:event) { 'destroy' }
+    let(:object) { nil }
+
+    before { user.really_destroy! }
+
+    it { is_expected.not_to have_link(user.to_s, href: user_path(user)) }
+    it { is_expected.not_to have_selector('.row[role]') }
+    it { is_expected.not_to have_selector('.row[data-action]') }
+    it { is_expected.not_to have_selector('.row[data-application-href-param]') }
+  end
+end

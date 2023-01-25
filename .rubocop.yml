@@ -105,6 +105,9 @@ Style/RequireOrder:
     - bin/importmap
     - Capfile
     - lib/schematics.rb
+    - lib/schematics/commands/create_entity.rb
+    - lib/schematics/commands/destroy_entity.rb
+    - lib/schematics/commands/rename_entity.rb
     - app/controllers/schematics/resources_controller.rb
 Metrics/BlockLength:
   AllowedMethods:
@@ -144,7 +147,7 @@ RSpec/ExampleLength:
     - array
     - hash
 RSpec/MultipleMemoizedHelpers:
-  Max: 9
+  Max: 10
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true

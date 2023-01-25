@@ -32,7 +32,7 @@ module I18n
       end
 
       def fetch(locale, key)
-        Rails.cache.fetch("i18n:#{locale}:#{key}") do
+        Rails.cache.fetch("translations/#{locale}/#{key}") do
           ::Translation.where(locale:, key:).pick(:value)
         end
       end

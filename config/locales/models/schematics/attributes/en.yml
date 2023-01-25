@@ -22,6 +22,7 @@ en:
       schematics/attributes/datetime: Datetime
       schematics/attributes/decimal: Decimal
       schematics/attributes/digest: Password
+      schematics/attributes/duration: Duration
       schematics/attributes/email: Email
       schematics/attributes/enum: Enum
       schematics/attributes/float: Float

@@ -7,9 +7,10 @@ module Schematics
       delegate :new_record?, to: :resource
       option :resource
 
-      def attribute_constants_collection
-        (Attributes.constants - DENYLIST).map(&Attributes.method(:const_get))
-      end
+      def attribute_constants_collection = Attributes
+        .constants
+        .excluding(DENYLIST)
+        .map(&Attributes.method(:const_get))
 
       def data = { 'auto-save-target': 'form' }
 

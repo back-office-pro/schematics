@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'backend/concurrent_mutex'
 require 'sidekiq-scheduler/web'
 require 'sidekiq/web'
 
@@ -8,8 +7,6 @@ module Backend
   # :reek:UtilityFunction
   class Redis
     def concurrency = 2
-
-    def mutex = ConcurrentMutex.new
 
     def engine = ::Sidekiq::Web
 

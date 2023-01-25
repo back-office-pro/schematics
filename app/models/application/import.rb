@@ -5,7 +5,7 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
-      after_create { Schematics::ImportJob.perform_later(self) }
+      after_create_commit { Schematics::ImportJob.perform_later(self) }
     end
 
     def model_class
