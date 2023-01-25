@@ -34,7 +34,7 @@ module Schematics
 
       def filename = 'db.dump'
 
-      def key = File.join('backups', ::Time.current.to_s, filename)
+      def key = File.join('backups', ::Time.current.strftime('%Y_%m_%d_%H_%M_%S_%L'), filename)
     end
   end
 end

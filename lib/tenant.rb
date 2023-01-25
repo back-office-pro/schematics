@@ -8,28 +8,28 @@ require 'backend/redis'
 class Tenant
   class << self
     DEFAULT_BACKEND = 'postgresql'
+    SEMAPHORE = Mutex.new.freeze
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-    delegate :mutex, to: :backend, private: true
 
     def schema
-      mutex.synchronize do
+      SEMAPHORE.synchronize do
         @schema ||= Schematics::Schema.new(data:)
       end
     end
 
     def schema=(value)
-      mutex.synchronize do
+      SEMAPHORE.synchronize do
         @schema = value
       end
     end
 
     def customer
-      Rails.cache.fetch('stripe:customer') do
-        ::Stripe::Customer
-          .search(query: "name:'#{subdomain}'")
-          .data
-          .first
+      SEMAPHORE.synchronize do
+        @customer ||= ::Stripe::Customer
+                      .search(query: "name:'#{subdomain}'")
+                      .data
+                      .first
       end
     end
 

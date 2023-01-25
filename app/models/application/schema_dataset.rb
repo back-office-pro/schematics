@@ -10,9 +10,10 @@ module Application
       validates_associated :data
       delegate :build_commands,
                :clean_commands,
-               :new_entities,
                :old_entities,
-               :entities,
+               :changed_entities,
+               :new_and_changed_entities,
+               :old_and_changed_entities,
                to: :migration,
                prefix: true
     end
@@ -24,9 +25,8 @@ module Application
     end
 
     def after_migrate
-      Schematics::MigrateSchemaJob.perform_later(self) do
-        ::Tenant.schema = data if Tenant.backend.concurrency.positive?
-      end
+      Schematics::MigrateSchemaJob.wait_for(self)
+      Schematics::MigrateSchemaJob.perform_later(self)
     end
 
     def migration

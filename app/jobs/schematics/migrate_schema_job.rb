@@ -2,6 +2,23 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
+    class << self
+      def wait_for(record)
+        return if ::Tenant.backend.concurrency.zero?
+
+        Thread.new(record) do |schema_dataset|
+          loop do
+            sleep 1
+            break if schema_dataset.reload.migrated?
+          end
+          schema_dataset.migration # force migration to be set before changing schema
+          ::Tenant.schema = schema_dataset.data
+          SchemaDatasets::Reload.call(schema_dataset:)
+          Thread.current.kill
+        end
+      end
+    end
+
     # :reek:UncommunicativeVariableName
     def perform(schema_dataset)
       SchemaDatasets::Migrate.call(schema_dataset:)

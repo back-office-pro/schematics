@@ -137,6 +137,11 @@ module Schematics
       config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
     end
 
+    # Cache
+    config.before_configuration do |app|
+      app.config.cache_store = ::Tenant.backend.cache_store, ::Tenant.backend.cache_store_options
+    end
+
     # Active Storage
     config.after_initialize do
       config.active_storage.service = :amazon if Rails.env.production?

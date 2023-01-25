@@ -147,7 +147,7 @@ RSpec/ExampleLength:
     - array
     - hash
 RSpec/MultipleMemoizedHelpers:
-  Max: 9
+  Max: 10
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true

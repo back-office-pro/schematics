@@ -35,7 +35,8 @@ module Schematics
         [
           "drop_#{table_name.pluralize}",
           *migratable_attributes.map(&:to_s)
-        ]
+        ],
+        ['--timestamps=true']
       )
 
       def permissions_generator

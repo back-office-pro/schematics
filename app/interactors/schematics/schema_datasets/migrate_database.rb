@@ -8,7 +8,7 @@ module Schematics
       delegate :migration_context, to: 'ActiveRecord::Base.connection', private: true
       delegate :migrate, to: :migration_context, private: true
 
-      def call = migrate unless Rails.env.test?
+      alias call migrate
     end
   end
 end
