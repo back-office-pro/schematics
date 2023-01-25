@@ -12,7 +12,7 @@ Dependencies choices details.
 
 :+1: More search patterns (_cont, _matches, _any...)
 
-~~searchkick~~
+:star: searchkick
 
 :+1: Most recent and popular solution
 
