@@ -6,14 +6,11 @@ module Schematics
       include Interactor
 
       delegate :schema_dataset, to: :context, private: true
-      delegate :load_generators, to: 'Rails.application', private: true
       delegate :migration_clean_commands,
                :migration_build_commands,
                :data,
                to: :schema_dataset,
                private: true
-
-      before { load_generators }
 
       def call
         migration_clean_commands
