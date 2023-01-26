@@ -4,9 +4,31 @@
 
 Dependencies choices details.
 
+### Jobs
+
+:star: **good_job**
+
+:+1: Postgresql only
+
+:+1: Can run on the web server process
+
+:-1: Slower than sidekiq
+
+:star: **sidekiq**
+
+:+1: Fastest
+
+:-1: Increase the architecture cost
+
 ### Searching, Sorting, filterting
 
-:star: **searchkick**
+:star: **ransack**
+
+:+1: More robust than has_scope
+
+:+1: More search patterns (_cont, _matches, _any...)
+
+:star: searchkick
 
 :+1: Most recent and popular solution
 
@@ -20,17 +42,7 @@ Dependencies choices details.
 
 :+1: Enable search in *Text* and *RichText* without newlines and HTML tags
 
-:-1: We need the elasticsearch / opensearch daemon
-
-~~ransack~~
-
-:+1: More robust than has_scope
-
-:+1: More search patterns (_cont, _matches, _any...)
-
-:-1: We need to monkey patch sorting by alias
-
-:-1: Not so much maintained
+:-1: We need the elasticsearch / opensearch daemon, increase the architecture cost
 
 ~~has_scope~~
 
