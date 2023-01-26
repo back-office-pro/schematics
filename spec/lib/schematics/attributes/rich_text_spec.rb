@@ -29,6 +29,12 @@ describe Schematics::Attributes::RichText do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:summary_i_cont) }
 
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      summary: summary&.to_plain_text
+    RUBY
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_rich_text :summary
