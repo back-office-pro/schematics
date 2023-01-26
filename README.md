@@ -4,6 +4,22 @@
 
 Dependencies choices details.
 
+### Jobs
+
+:star: **good_job**
+
+:+1: Postgresql only
+
+:+1: Can run on the web server process
+
+:-1: Slower than sidekiq
+
+:star: **sidekiq**
+
+:+1: Fastest
+
+:-1: Increase the architecture cost
+
 ### Searching, Sorting, filterting
 
 :star: **ransack**
