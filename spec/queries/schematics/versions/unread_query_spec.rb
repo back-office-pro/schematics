@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::UnreadVersionQuery do
+RSpec.describe Schematics::Versions::UnreadQuery do
   subject(:query) { described_class }
 
   include_context 'with user'

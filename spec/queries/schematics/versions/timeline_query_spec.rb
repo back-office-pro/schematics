@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::TimelineVersionQuery do
+RSpec.describe Schematics::Versions::TimelineQuery do
   subject(:query) { described_class }
 
   include_context 'with user'
