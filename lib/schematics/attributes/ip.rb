@@ -6,8 +6,6 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Ip < String
-      def encrypted? = true
-
       def default = '::1'
 
       def icon = :network_wired

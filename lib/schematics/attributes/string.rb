@@ -8,7 +8,6 @@ module Schematics
 
       def available_options = super.push(
         Options::Unique,
-        Options::Encrypted,
         Options::Min,
         Options::Limit,
         Options::Length

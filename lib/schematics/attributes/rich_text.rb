@@ -7,11 +7,8 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
-      include Behaviours::Encryptable
 
       def default = 'MyRichText'
-
-      def encrypted? = true
 
       def format(value)
         value&.to_plain_text
@@ -30,7 +27,7 @@ module Schematics
         RUBY
 
       def to_str = <<~RUBY
-        has_rich_text :#{name}, encrypted: true
+        has_rich_text :#{name}
       RUBY
 
       private
