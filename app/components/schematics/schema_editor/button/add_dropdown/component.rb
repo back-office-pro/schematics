@@ -20,7 +20,6 @@ module Schematics
 
           def unused_collection = [
             Attributes::Action,
-            Attributes::Blob,
             Attributes::Model,
             Attributes::ModelField,
             Attributes::Uuid,
