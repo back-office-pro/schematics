@@ -2,12 +2,13 @@
 en:
   activerecord:
     attributes:
-      active_storage/attachment:
+      active_storage/blob:
+        attachments: File
         byte_size: Byte size
         content_type: Content type
         filename: Filename
     models:
-      active_storage/attachment:
+      active_storage/blob:
         gender: male
         one: File
         other: Files
