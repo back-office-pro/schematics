@@ -3,11 +3,9 @@ en:
   activerecord:
     attributes:
       active_storage/attachment:
-        blob: File
         byte_size: Byte size
         content_type: Content type
         filename: Filename
-        record: Record
     models:
       active_storage/attachment:
         gender: male
