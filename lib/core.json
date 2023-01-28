@@ -149,10 +149,10 @@
     "name": "active_storage/attachment",
     "options": {
       "existing": true,
+      "hidden": true,
       "icon": "file",
       "descriptor": "filename",
       "actions": [
-        "index",
         "show",
         "destroy"
       ]
@@ -169,17 +169,37 @@
       {
         "name": "byte_size",
         "type": "byte"
+      }
+    ]
+  },
+  {
+    "name": "active_storage/blob",
+    "options": {
+      "existing": true,
+      "icon": "file",
+      "descriptor": "filename",
+      "actions": [
+        "index",
+        "show",
+        "destroy"
+      ]
+    },
+    "attributes": [
+      {
+        "name": "attachments",
+        "type": "attachments"
       },
       {
-        "name": "blob",
-        "type": "blob"
+        "name": "filename",
+        "type": "string"
       },
       {
-        "name": "record",
-        "type": "belongs_to",
-        "options": {
-          "polymorphic": true
-        }
+        "name": "content_type",
+        "type": "mime"
+      },
+      {
+        "name": "byte_size",
+        "type": "byte"
       }
     ]
   },
