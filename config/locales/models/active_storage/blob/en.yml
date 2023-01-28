@@ -2,12 +2,8 @@
 en:
   activerecord:
     attributes:
-<<<<<<<< HEAD:config/locales/models/active_storage/blob/en.yml
       active_storage/blob:
         attachments: File
-========
-      active_storage/attachment:
->>>>>>>> main:config/locales/models/active_storage/attachment/en.yml
         byte_size: Byte size
         content_type: Content type
         filename: Filename
