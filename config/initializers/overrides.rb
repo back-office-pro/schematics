@@ -30,7 +30,7 @@ OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 Rails.configuration.to_prepare do
   Application
     .constants
-    .select { Object.const_defined?(_1) }
+    .select(&Object.method(:const_defined?))
     .each { Object.const_get(_1).prepend(Application.const_get(_1)) }
 
   ActiveStorage.singleton_class.module_eval do

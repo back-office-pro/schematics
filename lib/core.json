@@ -149,10 +149,10 @@
     "name": "active_storage/blob",
     "options": {
       "existing": true,
+      "hidden": true,
       "icon": "file",
       "descriptor": "filename",
       "actions": [
-        "index",
         "show",
         "destroy"
       ]
