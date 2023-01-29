@@ -8,10 +8,9 @@ module Schematics
 
       # :reek:ControlParameter
       def call(filter_params, ability, sort_params = nil)
-        filter_params = parse_filter_params(filter_params)
         pagy_search(
           includes: entity.includes,
-          where: filter_params.except(:with_deleted),
+          where: parse_filter_params(filter_params).except(:with_deleted),
           order: parse_sort_params(sort_params),
           scope_results: lambda { |results|
             results

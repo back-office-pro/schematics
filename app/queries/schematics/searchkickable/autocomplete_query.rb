@@ -7,12 +7,11 @@ module Schematics
       LIMIT = 5
 
       def call(params, field, ability)
-        params = parse_params(params)
         search(
           select: field,
           load: false,
           includes: entity.includes,
-          where: params.except(:with_deleted),
+          where: parse_filter_params(params).except(:with_deleted),
           order: { field.to_sym => { order: :asc } },
           scope_results: lambda { |results|
             results
