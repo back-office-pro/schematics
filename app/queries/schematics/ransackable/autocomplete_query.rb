@@ -2,17 +2,11 @@
 
 module Schematics
   module Ransackable
-    class AutocompleteQuery < ApplicationQuery
-      include Filterable
+    class AutocompleteQuery < ListQuery
       LIMIT = 5
 
-      def call(params, field, ability)
-        left_joins(entity.joins)
-          .ransack(parse_filter_params(params))
-          .tap { _1.sorts = "#{field} asc" }
-          .result(distinct: true)
-          .preload(entity.includes)
-          .accessible_by(ability)
+      def call(params, ability, field)
+        super
           .limit(LIMIT)
           .pluck(entity.find_field_by_name(field).to_sql)
       end

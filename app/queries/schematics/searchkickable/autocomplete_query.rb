@@ -6,9 +6,9 @@ module Schematics
       include Filterable
       LIMIT = 5
 
-      def call(params, field, ability)
+      def call(params, ability, field)
         search(
-          select: field,
+          select: field.to_sym,
           load: false,
           includes: entity.includes,
           where: parse_filter_params(params).except(:with_deleted),
@@ -19,7 +19,7 @@ module Schematics
               .accessible_by(ability)
           }
         ).limit(LIMIT)
-          .map(&field)
+          .map(&field.to_sym)
           .map(&:to_s)
           .uniq
       end

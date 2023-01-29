@@ -49,7 +49,7 @@ module Schematics
 
     def autocomplete
       authorize! :index, model_class
-      render json: model_class.autocomplete(filter_params, params.require(:field), current_ability)
+      render json: model_class.autocomplete(filter_params, current_ability, params.require(:field))
     end
 
     def index

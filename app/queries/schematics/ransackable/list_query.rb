@@ -8,13 +8,21 @@ module Schematics
 
       # :reek:ControlParameter
       def call(filter_params, ability, sort_params = nil)
-        left_joins(entity.joins)
-          .ransack(parse_filter_params(filter_params))
+        ransack(parse_filter_params(filter_params))
           .tap { _1.sorts = parse_sort_params(sort_params) }
-          .result
+          .result(distinct: true)
+          .select("#{table_name}.*, #{virtual_database_fields}")
+          .left_joins(entity.joins)
           .preload(entity.includes)
           .accessible_by(ability)
       end
+
+      protected
+
+      def virtual_database_fields = entity
+        .virtuals
+        .map(&:to_sql)
+        .join(',')
     end
   end
 end
