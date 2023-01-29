@@ -11,7 +11,7 @@ module Schematics
         left_joins(entity.joins)
           .ransack(parse_filter_params(filter_params))
           .tap { _1.sorts = parse_sort_params(sort_params) }
-          .result(distinct: true)
+          .result
           .preload(entity.includes)
           .accessible_by(ability)
       end
