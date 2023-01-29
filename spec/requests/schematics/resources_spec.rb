@@ -17,7 +17,7 @@ RSpec.describe 'Resources' do
 
       before do
         allow(Tenant).to receive(:search_engine).and_return(search_engine)
-        ApiKey.include(Tenant.search_engine.concern)
+        ApiKey.include(search_engine.concern)
         ApiKey.try(:reindex)
         do_request
       end
