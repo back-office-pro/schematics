@@ -18,7 +18,9 @@ module Schematics
       def parse_sort_params(params)
         return "#{implicit_order_column} desc" unless params
 
-        params.map { |param| param.start_with?('-') ? "#{param[1..]} desc" : "#{param} asc" }
+        params
+          .split(',')
+          .map { |param| param.start_with?('-') ? "#{param[1..]} desc" : "#{param} asc" }
       end
 
       def parse_filter_params(params)

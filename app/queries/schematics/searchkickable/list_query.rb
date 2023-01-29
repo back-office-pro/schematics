@@ -21,9 +21,7 @@ module Schematics
       private
 
       def parse_sort_params(params)
-        unless params
-          return { implicit_order_column.to_sym => { order: :desc, unmapped_type: 'long' } }
-        end
+        return { implicit_order_column.to_sym => { order: :desc, unmapped_type: 'long' } } unless params # rubocop:disable Layout/LineLength
 
         ordering = {}
         sort_order = { '+': :asc, '-': :desc }

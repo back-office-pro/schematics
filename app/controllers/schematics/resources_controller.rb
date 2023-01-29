@@ -3,7 +3,6 @@
 module Schematics
   class ResourcesController < ApplicationController # rubocop:disable Metrics/ClassLength
     include Fillable
-    include Sortable
     include Filterable
     include Readable
     include Calendarable
@@ -245,7 +244,7 @@ module Schematics
     end
 
     def set_resources
-      @resources = model_class.list(filter_params, current_ability, sort_params)
+      @resources = model_class.list(filter_params, current_ability, params[:sort])
       return if params.key?(:all_pages)
 
       @calendar, @pagy, @resources = pagy_calendar(
