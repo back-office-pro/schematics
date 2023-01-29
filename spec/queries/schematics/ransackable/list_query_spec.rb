@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Ransackable::SearchListQuery do
+RSpec.describe Schematics::Ransackable::ListQuery do
   subject(:query) { described_class.new(model_class) }
 
   include_context 'with user'

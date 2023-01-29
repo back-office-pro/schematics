@@ -2,7 +2,7 @@
 
 module Schematics
   module Searchkickable
-    class SearchListQuery < ApplicationQuery
+    class ListQuery < ApplicationQuery
       # :reek:ControlParameter
       def call(filter_params, ability, sort_params = nil)
         filter_params = parse_filter_params(filter_params)

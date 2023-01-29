@@ -6,7 +6,7 @@ module Schematics
 
     included do
       scope :autocomplete, AutocompleteQuery.new(self) # rubocop:disable Rails/ScopeArgs
-      scope :search_list, SearchListQuery.new(self) # rubocop:disable Rails/ScopeArgs
+      scope :list, ListQuery.new(self) # rubocop:disable Rails/ScopeArgs
     end
 
     def ransackable_attributes(*)

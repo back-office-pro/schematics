@@ -2,7 +2,7 @@
 
 module Schematics
   module Ransackable
-    class SearchListQuery < ApplicationQuery
+    class ListQuery < ApplicationQuery
       # :reek:ControlParameter
       def call(filter_params, ability, sort_params = nil)
         left_joins(entity.joins)
