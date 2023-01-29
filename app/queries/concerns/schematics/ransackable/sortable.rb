@@ -6,11 +6,10 @@ module Schematics
       extend ActiveSupport::Concern
 
       def parse_sort_params(params)
-        return "#{implicit_order_column} desc" unless params
-
         params
-          .split(',')
-          .map { |param| param.start_with?('-') ? "#{param[1..]} desc" : "#{param} asc" }
+          &.split(',')
+          &.map { |param| param.start_with?('-') ? "#{param[1..]} desc" : "#{param} asc" } ||
+          "#{implicit_order_column} desc"
       end
     end
   end

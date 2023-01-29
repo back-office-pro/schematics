@@ -6,18 +6,16 @@ module Schematics
       extend ActiveSupport::Concern
 
       def parse_sort_params(params)
-        return { implicit_order_column.to_sym => { order: :desc, unmapped_type: 'long' } } unless params # rubocop:disable Layout/LineLength
-
-        ordering = {}
-        sort_order = { '+': :asc, '-': :desc }
         params
-          .split(',')
-          .each do |param|
-            sort_sign = param.match?(/\A[+-]/) ? param.slice!(0) : '+'
-            ordering[param] = { order: sort_order[sort_sign.to_sym] }
-          end
-        ordering
+          &.split(',')
+          &.map { { _1 => { order: sort_order[_1.match?(/\A[+-]/) ? _1.slice!(0) : '+'] } } }
+          &.reduce(:merge) ||
+          { implicit_order_column.to_sym => { order: :desc, unmapped_type: 'long' } }
       end
+
+      private
+
+      def sort_order = { '+' => :asc, '-' => :desc } # rubocop:disable Style/StringHashKeys
     end
   end
 end
