@@ -118,19 +118,19 @@ describe Schematics::Entities::Router do
   end
 
   context 'when entity has a one-level namespace' do
-    let(:name) { 'active_storage/blob' }
+    let(:name) { 'active_storage/attachment' }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
         namespace :active_storage do
-          resources :blobs, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'ActiveStorage::Blob' do
+          resources :attachments, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'ActiveStorage::Attachment' do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
           get :autocomplete, on: :collection
           post :duplicate, on: :member
           collection do
-            resources :imports, only: %i[new create], as: 'active_storage_blob_imports'
+            resources :imports, only: %i[new create], as: 'active_storage_attachment_imports'
           end
           resources :comments, only: %i[new create edit update], shallow: true
         end
