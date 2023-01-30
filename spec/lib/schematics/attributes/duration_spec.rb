@@ -21,7 +21,7 @@ describe Schematics::Attributes::Duration do
   its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('duration') }
   its(:open_api_type) { is_expected.to eq(Integer) }
-  its(:icon) { is_expected.to eq(:timer) }
+  its(:icon) { is_expected.to eq(:hourglass) }
 
   describe '#format' do
     subject { attribute.format(value) }
