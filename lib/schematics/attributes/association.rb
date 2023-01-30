@@ -12,6 +12,7 @@ module Schematics
       include Behaviours::Preloadable
 
       delegate :descriptor, :default, to: :inverse_entity
+      delegate :to_sql, to: :descriptor
       delegate :polymorphic?, to: :options
 
       validates :association_type,
@@ -64,8 +65,6 @@ module Schematics
         RUBY
 
       def search_column = :"#{name}_#{descriptor.name}"
-
-      def to_sql = "#{inverse_entity.table_name.pluralize}.#{descriptor.name}"
 
       def to_str
         if polymorphic?
