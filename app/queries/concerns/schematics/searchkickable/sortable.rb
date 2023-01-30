@@ -5,6 +5,7 @@ module Schematics
     module Sortable
       extend ActiveSupport::Concern
 
+      # :reek:ControlParameter
       def parse_sort_params(params)
         params
           &.split(',')
