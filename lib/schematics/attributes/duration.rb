@@ -7,7 +7,7 @@ module Schematics
         value && ActiveSupport::Duration.build(value).inspect
       end
 
-      def icon = :timer
+      def icon = :hourglass
     end
   end
 end
