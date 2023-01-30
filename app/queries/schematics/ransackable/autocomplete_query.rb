@@ -8,7 +8,8 @@ module Schematics
       def call(params, ability, field)
         super
           .limit(LIMIT)
-          .pluck(entity.find_field_by_name(field).to_sql)
+          .map(&field.to_sym)
+          .map(&:to_s)
       end
     end
   end
