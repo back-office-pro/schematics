@@ -17,7 +17,7 @@ RSpec.describe Schematics::Ransackable::AutocompleteQuery do
   before { other_user }
 
   describe '.call' do
-    subject { query.call(params, field, ability) }
+    subject { query.call(params, ability, field) }
 
     context 'when looking for john' do
       let(:params) { { email_i_cont: 'john' } }
