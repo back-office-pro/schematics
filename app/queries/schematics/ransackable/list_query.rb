@@ -11,18 +11,11 @@ module Schematics
         ransack(parse_filter_params(filter_params))
           .tap { _1.sorts = parse_sort_params(sort_params) }
           .result(distinct: true)
-          .select("#{table_name}.*, #{virtual_database_fields}")
+          .select(arel_table[::Arel.star], *entity.virtuals.map(&:to_sql))
           .left_joins(entity.joins)
           .preload(entity.includes)
           .accessible_by(ability)
       end
-
-      protected
-
-      def virtual_database_fields = entity
-        .virtuals
-        .map(&:to_sql)
-        .join(',')
     end
   end
 end
