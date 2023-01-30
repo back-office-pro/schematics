@@ -44,7 +44,7 @@ module Schematics
         Options::Wrapper.new(options: @options)
       end
 
-      def to_sql = "#{entity.table_name.pluralize}.#{name}"
+      def to_sql = "#{entity.table_name.pluralize}.#{column_name}"
 
       def to_str = ''
 

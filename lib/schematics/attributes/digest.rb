@@ -17,14 +17,13 @@ module Schematics
         Options::Min
       )
 
+      def column_name = "#{super}_digest"
+
       def default = 'Azerty1!'
 
       def icon = :key
 
-      def permitted_params = [
-        super,
-        :"#{super}_confirmation"
-      ]
+      def permitted_params = [name.to_sym, :"#{name}_confirmation"]
 
       def to_str = super + <<~RUBY
         has_secure_password :#{name}, validations: false

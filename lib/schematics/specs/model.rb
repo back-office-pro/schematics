@@ -136,7 +136,7 @@ module Schematics
             when Attributes::Digest
               is_expected.to have_secure_password(element.name.to_sym)
               is_expected
-                .to have_db_column(:"#{element.column_name}_digest")
+                .to have_db_column(element.column_name.to_sym)
                 .of_type(:string)
                 .with_options(element.migration_options)
               is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?

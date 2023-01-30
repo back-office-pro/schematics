@@ -119,8 +119,9 @@ module Schematics
           when Attributes::Address
             find_field(input, type: :select).set(element.default)
           when Attributes::Digest
-            fill_in input, with: element.default
-            fill_in "#{entity.name}[#{element.column_name}_confirmation]", with: element.default
+            element
+              .permitted_params
+              .each { |param| fill_in "#{entity.name}[#{param}]", with: element.default }
           when Attributes::Date
             fill_in input, with: element.default.to_date
           when Attributes::Array

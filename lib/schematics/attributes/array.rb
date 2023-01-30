@@ -19,9 +19,7 @@ module Schematics
 
       def open_api_type = [::String]
 
-      def permitted_params = {
-        super => []
-      }
+      def permitted_params = { super => [] }
     end
   end
 end
