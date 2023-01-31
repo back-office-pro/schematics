@@ -4,6 +4,14 @@ fr:
     attributes:
       user:
         avatar: Avatar
+        created_comments:
+          one: Commentaire créé
+          other: Commentaires créés
+          zero: Aucun commentaire créé
+        created_meetings:
+          one: Réunion créée
+          other: Réunions créées
+          zero: Aucune réunion créée
         email: E-mail
         first_name: Prénom
         full_name: Nom complet
@@ -15,8 +23,20 @@ fr:
         password: Mot de passe
         password_challenge: Mot de passe actuel
         password_confirmation: Confirmation mot de passe
+        received_messages:
+          one: Message reçu
+          other: Messages reçus
+          zero: Aucun message reçu
         remember_me: Se souvenir de moi
+        requested_tasks:
+          one: Tâche demandée
+          other: Tâches demandées
+          zero: Aucune tâche demandée
         role: Rôle
+        sent_messages:
+          one: Message envoyé
+          other: Messages envoyés
+          zero: Aucun message envoyé
         time_zone: Fuseau horaire
     models:
       user:

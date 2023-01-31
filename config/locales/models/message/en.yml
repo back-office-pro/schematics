@@ -5,15 +5,7 @@ en:
       message:
         author: Author
         content: Content
-        received_messages:
-          one: Received message
-          other: Received messages
-          zero: No message received
         recipient: Recipient
-        sent_messages:
-          one: Sent message
-          other: Sent messages
-          zero: No message sent
         subject: Subject
     models:
       message:
