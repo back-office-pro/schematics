@@ -81,7 +81,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mail', '~> 2.8.1.rc2' # TODO: remove when 2.8.1 is released
-  spec.add_dependency 'oj', '~> 3.13.23'
+  spec.add_dependency 'oj', '~> 3.14.0'
   spec.add_dependency 'pagy', '~> 6.0.1'
   spec.add_dependency 'paper_trail', '~> 14.0.0'
   spec.add_dependency 'paranoia', '~> 2.6.1'
@@ -105,7 +105,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.3.0'
   spec.add_dependency 'sidekiq', '~> 7.0.3'
-  spec.add_dependency 'sidekiq-scheduler', '~> 5.0.0'
+  spec.add_dependency 'sidekiq-scheduler', '~> 5.0.1'
   spec.add_dependency 'slim', '~> 5.0.0'
   spec.add_dependency 'strip_attributes', '~> 1.13.0'
   spec.add_dependency 'stripe', '~> 8.1.0'
