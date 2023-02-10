@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sprockets-rails', '~> 3.4.2'
   spec.add_development_dependency 'stimulus-rails', '~> 1.2.1'
   spec.add_development_dependency 'turbo-rails', '~> 1.3.3'
-  spec.add_development_dependency 'zeitwerk', '~> 2.6.6'
+  spec.add_development_dependency 'zeitwerk', '~> 2.6.7'
   spec.add_dependency 'aasm', '~> 5.5.0'
   spec.add_dependency 'active_link_to', '~> 1.0.5'
   spec.add_dependency 'active_model_serializers', '~> 0.10.13'
