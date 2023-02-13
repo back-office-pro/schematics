@@ -20,7 +20,6 @@ en:
     messages:
       assignment: must not contain assignment
       color: is not a valid hexadecimal color code
-      english: is not an english word
       function: is not valid
       ip_address: is not a valid IP address
       mime_type: is not a valid MIME type

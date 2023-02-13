@@ -31,7 +31,6 @@ module Schematics
 
       validates :attributes, presence: true
       validates :actions, inclusion: { in: :default_actions }
-      validates :name, english: true, unless: :core?
       validates :name,
                 presence: true,
                 singular: true,
