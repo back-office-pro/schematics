@@ -13,7 +13,7 @@ pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schem
 pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.3.0/js/fontawesome.js'
 pin '@github/hotkey', to: 'https://unpkg.com/@github/hotkey@2.0.1/dist/index.js'
 pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.6/dist/esm/index.js'
-pin 'autosize', to: 'https://unpkg.com/autosize@6.0.0/dist/autosize.esm.js'
+pin 'autosize', to: 'https://unpkg.com/autosize@6.0.1/dist/autosize.esm.js'
 pin 'bootstrap', to: 'https://unpkg.com/bootstrap@5.2.3/dist/js/bootstrap.esm.js'
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js'
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js'
