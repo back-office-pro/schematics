@@ -24,7 +24,7 @@ namespace :schematics do
     namespace :encryption do
       desc 'Generate database encryption credentials'
       task init: :environment do
-        sh %[EDITOR='echo "$(rails db:encryption:init | tail -n +2)" >> ' rails credentials:edit]
+        `EDITOR='echo "$(rails db:encryption:init | tail -n +2)" >> ' rails credentials:edit`
       end
     end
 
