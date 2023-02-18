@@ -104,6 +104,7 @@ module Schematics
     config.action_dispatch.rescue_responses['ActiveRecord::PendingMigrationError'] = :service_unavailable # rubocop:disable Layout/LineLength
 
     # Active Record
+    config.active_record.enumerate_columns_in_select_statements = true
     config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
     config.active_record.query_log_tags_enabled = true
