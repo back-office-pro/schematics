@@ -27,6 +27,7 @@ loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")
 loader.ignore("#{__dir__}/json_web_token.rb")
 loader.ignore("#{__dir__}/object.rb")
+loader.ignore("#{__dir__}/rubygems_plugin.rb")
 loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 

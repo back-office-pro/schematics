@@ -120,7 +120,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def edit_gitignore
     append_to_file '.gitignore', <<~TEXT
       /.env
-      /node_modules
     TEXT
   end
 
@@ -134,15 +133,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'app/javascript/controllers/hello_controller.js'
     remove_file 'config/locales/en.yml'
   end
-
-  def run_yarn_init
-    run 'yarn init -yp'
-  end
-
-  def add_yarn_dependencies = ::JSON
-    .parse(File.read(File.join(root_path, 'package.json')))
-    .fetch('dependencies')
-    .each { |dependency, version| run "yarn add #{dependency}@#{version}" }
 
   def precompile_assets
     return unless env.production?
