@@ -11,6 +11,7 @@ ActiveRecordDoctor.configure do
     versions
     friendly_id_slugs
     good_jobs
+    good_job_batches
     good_job_processes
     good_job_settings
   ]
