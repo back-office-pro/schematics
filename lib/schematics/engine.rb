@@ -65,13 +65,13 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
-      def join_config(*pathnames)
-        root.join(*pathnames.unshift('config'))
+      def config_for(name)
+        YAML.load_file root.join('config', "#{name}.yml")
       end
 
       def credentials = ActiveSupport::EncryptedConfiguration.new(
-        config_path: join_config('credentials.yml.enc'),
-        key_path: join_config('master.key'),
+        config_path: root.join('config', 'credentials.yml.enc'),
+        key_path: root.join('config', 'master.key'),
         env_key: 'SCHEMATICS_MASTER_KEY',
         raise_if_missing_key: true
       )
@@ -126,7 +126,7 @@ module Schematics
     config.assets.css_compressor = :sass if Rails.env.production?
 
     # Importmap
-    config.importmap.paths << join_config('importmap.rb')
+    config.importmap.paths << root.join('config', 'importmap.rb')
 
     # i18n
     config.i18n.default_locale = :en

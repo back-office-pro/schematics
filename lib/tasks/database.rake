@@ -17,7 +17,7 @@ namespace :schematics do
 
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
-      task.config_path = Schematics::Engine.join_config('active_record_doctor.rb')
+      task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')
       task.setup = -> { Rails.application.eager_load! }
     end
 
