@@ -121,6 +121,7 @@ module Schematics
     # Assets
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
+    config.assets.paths << root.join('node_modules')
     config.assets.precompile += %w[schematics_manifest.js]
     config.assets.js_compressor  = :terser if Rails.env.production?
     config.assets.css_compressor = :sass if Rails.env.production?
