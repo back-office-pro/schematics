@@ -124,6 +124,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def edit_gitignore
     append_to_file '.gitignore', <<~TEXT
       /.env
+      /node_modules
     TEXT
   end
 
