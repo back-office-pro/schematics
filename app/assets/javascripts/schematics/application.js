@@ -1,3 +1,7 @@
+import 'trix'
+import '@rails/actiontext'
+import '@hotwired/turbo-rails'
+import 'controllers'
 import 'chartkick'
 import 'Chart.bundle'
 import { application } from 'controllers/application'
