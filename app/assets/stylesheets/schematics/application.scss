@@ -1,5 +1,7 @@
 $flag-icons-path: 'flag-icons/flags';
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import 'trix';
+@import 'actiontext';
 @import 'flag-icons/sass/flag-icons';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
@@ -8,7 +10,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'rails_bootstrap_forms';
 @import 'timeline';
 @import 'tom_select';
-@import 'trix';
+@import 'trix_editor';
 @import 'swagger';
 @import 'navbar/component';
 @import 'footer/component';
