@@ -13,7 +13,7 @@ html lang=I18n.locale dir='ltr'
     = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
     = render Schematics::Favicon::Component.new
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
-    = javascript_importmap_tags
+    = javascript_importmap_tags('schematics/application')
     = render Schematics::ThemeCustomStylesheet::Component.new
     = render Schematics::InlineJavascript::Component.new
   body data-controller='application'

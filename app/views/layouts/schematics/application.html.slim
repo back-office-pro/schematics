@@ -13,8 +13,7 @@ html lang=I18n.locale dir='ltr'
     = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
     = render Schematics::Favicon::Component.new
     = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
-    = javascript_importmap_tags
-    = javascript_import_module_tag 'schematics/application'
+    = javascript_importmap_tags('schematics/application')
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = render Schematics::GoogleMapIncludeTag::Component.new
     = render Schematics::ThemeCustomStylesheet::Component.new
