@@ -49,6 +49,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     YAML
   end
 
+  def edit_application_mailer
+    comment_lines 'app/mailers/application_mailer.rb', /default from:/
+  end
+
   def install_rspec
     rails_command 'generate rspec:install'
   end
