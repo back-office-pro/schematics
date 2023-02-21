@@ -1,10 +1,18 @@
 # frozen_string_literal: true
 
+pin 'trix'
+pin '@rails/actiontext', to: 'actiontext.js'
+pin '@hotwired/turbo-rails', to: 'turbo.js', preload: true
+pin '@hotwired/stimulus', to: 'stimulus.js', preload: true
+pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
+
 pin 'chartkick', to: 'chartkick.js', preload: true
 pin 'Chart.bundle', to: 'Chart.bundle.js', preload: true
+# pin 'application', preload: true
 pin 'schematics/application', preload: true
 pin 'pagy-module', preload: true
 
+# pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schematics', 'controllers'), # rubocop:disable Layout/LineLength
              under: 'controllers',
              to: 'schematics/controllers',
