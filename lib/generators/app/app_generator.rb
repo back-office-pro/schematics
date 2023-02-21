@@ -70,7 +70,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def install_action_text
-    rails_command 'action_text:install'
+    rails_command 'action_text:install:migrations'
   end
 
   def reset_database
@@ -128,15 +128,24 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     TEXT
   end
 
-  def remove_public_html_files
+  def remove_unused_files
+    remove_file 'app/views/layouts/application.html.erb'
+    remove_file 'app/views/layouts/mailer.html.erb'
+    remove_file 'app/views/layouts/mailer.text.erb'
+    remove_file 'config/initializers/assets.rb'
+    remove_file 'config/initializers/content_security_policy.rb'
+    remove_file 'config/initializers/filter_parameter_logging.rb'
+    remove_file 'config/initializers/inflections.rb'
+    remove_file 'config/initializers/permissions_policy.rb'
+    remove_file 'config/locales/en.yml'
     remove_file 'public/404.html'
     remove_file 'public/422.html'
     remove_file 'public/500.html'
-  end
-
-  def remove_unused_files
-    remove_file 'app/javascript/controllers/hello_controller.js'
-    remove_file 'config/locales/en.yml'
+    remove_file 'public/apple-touch-icon-precomposed.png'
+    remove_file 'public/apple-touch-icon.png'
+    remove_file 'public/favicon.ico'
+    remove_file '.ruby-version'
+    remove_file 'README.md'
   end
 
   def precompile_assets
@@ -196,6 +205,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     database: 'postgresql',
     skip_jbuilder: true,
     skip_test: true,
+    skip_keeps: true,
+    skip_javascript: true,
     dummy_app: true
   }
 
