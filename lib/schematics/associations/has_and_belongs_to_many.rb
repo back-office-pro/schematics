@@ -10,7 +10,7 @@ module Schematics
 
       def column_name = "#{name.singularize}_ids"
 
-      def default = nil
+      def default = []
 
       def permitted_params = { super => [] }
 

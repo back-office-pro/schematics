@@ -29,7 +29,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:name) { is_expected.to eq('permissions') }
   its(:column_name) { is_expected.to eq('permission_ids') }
   its(:class_name) { is_expected.to eq('Permission') }
-  its(:default) { is_expected.to be_nil }
+  its(:default) { is_expected.to be_empty }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
   its(:allowed_names) { is_expected.to include('users', 'roles') }
