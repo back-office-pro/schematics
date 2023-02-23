@@ -1,0 +1,14 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join('tmp/storage') %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join('storage') %>
+
+amazon:
+  service: TenantS3
+  access_key_id: <%= Schematics::Engine.credentials.dig(:aws, :access_key_id) %>
+  secret_access_key: <%= Schematics::Engine.credentials.dig(:aws, :secret_access_key) %>
+  region: us-east-1
+  bucket: back-office.pro

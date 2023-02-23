@@ -17,10 +17,6 @@ module Backend
 
     alias profiler_store_options cache_store_options
 
-    def queue_adapter
-      return :test if Rails.env.test?
-
-      :good_job
-    end
+    def queue_adapter = :good_job
   end
 end
