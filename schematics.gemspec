@@ -2,9 +2,11 @@
 
 $LOAD_PATH.push File.expand_path('lib', __dir__)
 
+require 'schematics/version'
+
 Gem::Specification.new do |spec|
   spec.name = 'schematics'
-  spec.version = '1.0.0'
+  spec.version = Schematics::VERSION
   spec.author = 'Maxence De Rous'
   spec.email = 'maxence.derous@gmail.com'
   spec.homepage = 'https://www.back-office.pro'

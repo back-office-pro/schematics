@@ -112,6 +112,7 @@ module Schematics
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
 
     # Assets
+    config.assets.version = VERSION
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
