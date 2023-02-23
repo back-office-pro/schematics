@@ -43,6 +43,8 @@ class Tenant
       .module_parent_name
       .underscore
 
+    def database_name = "#{name}_#{Rails.env}"
+
     def subdomain = name.dasherize
 
     def human = name.humanize

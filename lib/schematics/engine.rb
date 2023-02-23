@@ -66,7 +66,9 @@ module Schematics
 
     class << self
       def config_for(name)
-        YAML.load_file root.join('config', "#{name}.yml")
+        ActiveSupport::ConfigurationFile
+          .parse(root.join('config', "#{name}.yml"))
+          .deep_symbolize_keys
       end
 
       def credentials = ActiveSupport::EncryptedConfiguration.new(
@@ -89,15 +91,8 @@ module Schematics
       generator.jbuilder nil
     end
 
-    # Security
-    config.force_ssl = Rails.env.production?
-    config.require_master_key = true
-
     # Logs
     config.log_file_size = 100.megabytes # TODO: enabled when upgrading to Rails 7.1
-
-    # Action Controller
-    config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
@@ -114,17 +109,14 @@ module Schematics
     config.active_record.encryption.extend_queries = true
 
     # Mailer
-    config.action_mailer.delivery_method = :sendmail
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
-    config.action_mailer.raise_delivery_errors = Rails.env.development?
 
     # Assets
+    config.assets.version = VERSION
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
     config.assets.precompile += %w[schematics_manifest.js]
-    config.assets.js_compressor  = :terser if Rails.env.production?
-    config.assets.css_compressor = :sass if Rails.env.production?
 
     # Importmap
     config.importmap.paths << root.join('config', 'importmap.rb')
@@ -132,21 +124,10 @@ module Schematics
     # i18n
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en fr]
-    config.i18n.raise_on_missing_translations = !Rails.env.production?
-
-    # Active Job
-    config.before_configuration do
-      config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
-    end
-
-    # Cache
-    config.before_configuration do |app|
-      app.config.cache_store = ::Tenant.backend.cache_store, ::Tenant.backend.cache_store_options
-    end
 
     # Active Storage
     config.after_initialize do
-      config.active_storage.service = :amazon if Rails.env.production?
+      config.active_storage.service_configurations = config_for(:storage)
       config.active_storage.replace_on_assign_to_many = false
       config.active_storage.track_variants = false
     end

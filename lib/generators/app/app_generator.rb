@@ -38,21 +38,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     template 'config/nginx.conf'
   end
 
-  def edit_storage_configuration
-    append_file 'config/storage.yml', <<~YAML
-      amazon:
-        service: TenantS3
-        access_key_id: <%= Schematics::Engine.credentials.dig(:aws, :access_key_id) %>
-        secret_access_key: <%= Schematics::Engine.credentials.dig(:aws, :secret_access_key) %>
-        region: us-east-1
-        bucket: back-office.pro
-    YAML
-  end
-
-  def edit_application_mailer
-    comment_lines 'app/mailers/application_mailer.rb', /default from:/
-  end
-
   def install_rspec
     rails_command 'generate rspec:install'
   end
@@ -70,7 +55,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def install_action_text
-    rails_command 'action_text:install'
+    rails_command 'action_text:install:migrations'
   end
 
   def reset_database
@@ -128,15 +113,44 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     TEXT
   end
 
-  def remove_public_html_files
-    remove_file 'public/404.html'
-    remove_file 'public/422.html'
-    remove_file 'public/500.html'
+  def edit_application_mailer
+    comment_lines 'app/mailers/application_mailer.rb', /default from:/
+    comment_lines 'app/mailers/application_mailer.rb', /layout/
+  end
+
+  def edit_asset_manifest
+    gsub_file 'app/assets/config/manifest.js', %r{//= link_tree ../images\n}, ''
+    gsub_file 'app/assets/config/manifest.js', %r{//= link_tree ../../../vendor/javascript .js\n}, '' # rubocop:disable Layout/LineLength
   end
 
   def remove_unused_files
-    remove_file 'app/javascript/controllers/hello_controller.js'
+    remove_file 'app/views/layouts/application.html.erb'
+    remove_file 'app/views/layouts/mailer.html.erb'
+    remove_file 'app/views/layouts/mailer.text.erb'
+    remove_file 'config/initializers/assets.rb'
+    remove_file 'config/initializers/content_security_policy.rb'
+    remove_file 'config/initializers/filter_parameter_logging.rb'
+    remove_file 'config/initializers/inflections.rb'
+    remove_file 'config/initializers/permissions_policy.rb'
     remove_file 'config/locales/en.yml'
+    remove_file 'config/cable.yml'
+    remove_file 'config/database.yml'
+    remove_file 'config/storage.yml'
+    remove_file 'config/importmap.rb'
+    remove_file 'config/routes.rb'
+    remove_file 'config/environments/development.rb'
+    remove_file 'config/environments/production.rb'
+    remove_file 'config/environments/test.rb'
+    remove_file 'db/seeds.rb'
+    remove_file 'public/404.html'
+    remove_file 'public/422.html'
+    remove_file 'public/500.html'
+    remove_file 'public/apple-touch-icon-precomposed.png'
+    remove_file 'public/apple-touch-icon.png'
+    remove_file 'public/favicon.ico'
+    remove_file 'vendor/javascript/.keep'
+    remove_file '.ruby-version'
+    remove_file 'README.md'
   end
 
   def precompile_assets
@@ -149,6 +163,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     git add: '-A'
     git commit: "-m 'initial commit'"
     git branch: '-M main'
+    git clean: '-f -d'
   end
 
   def create_github_repo
@@ -194,12 +209,13 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def default_options = {
     database: 'postgresql',
-    skip_jbuilder: true,
     skip_test: true,
+    skip_keeps: true,
+    skip_hotwire: true,
     dummy_app: true
   }
 
-  def db_name = app_name.underscore
+  def db_username = app_name.underscore
 
   def db_password
     @db_password ||= SecureRandom.base58
@@ -225,7 +241,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def create_postgres_user
     ::PG
       .connect
-      .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
+      .exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
   rescue PG::Error
     nil
   end

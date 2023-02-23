@@ -20,10 +20,6 @@ module Backend
 
     alias profiler_store_options cache_store_options
 
-    def queue_adapter
-      return :test if Rails.env.test?
-
-      :sidekiq
-    end
+    def queue_adapter = :sidekiq
   end
 end
