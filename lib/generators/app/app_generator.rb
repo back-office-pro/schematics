@@ -215,7 +215,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     dummy_app: true
   }
 
-  def db_name = app_name.underscore
+  def db_username = app_name.underscore
 
   def db_password
     @db_password ||= SecureRandom.base58
@@ -241,7 +241,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def create_postgres_user
     ::PG
       .connect
-      .exec("CREATE USER #{db_name} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
+      .exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
   rescue PG::Error
     nil
   end
