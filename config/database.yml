@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: <%= Tenant.name %>_development
+  database: <%= Tenant.database_name %>
 
 test:
   <<: *default
-  database: <%= Tenant.name %>_test
+  database: <%= Tenant.database_name %>
 
 production:
   <<: *default
-  database: <%= Tenant.name %>_production
+  database: <%= Tenant.database_name %>
   username: <%= Tenant.name %>
   password: <%= ENV['DATABASE_PASSWORD'] %>

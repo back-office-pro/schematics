@@ -8,4 +8,4 @@ test:
 production:
   adapter: <%= ENV['BACKEND'] %>
   url: <%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379' } %>
-  channel_prefix: <%= Tenant.name %>_production
+  channel_prefix: <%= Tenant.database_name %>
