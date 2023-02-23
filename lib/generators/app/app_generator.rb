@@ -124,6 +124,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def remove_unused_files
+    remove_file 'app/helpers/application_helper.rb'
     remove_file 'app/views/layouts/application.html.erb'
     remove_file 'app/views/layouts/mailer.html.erb'
     remove_file 'app/views/layouts/mailer.text.erb'
