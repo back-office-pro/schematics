@@ -15,11 +15,7 @@ module Schematics
         @default ||= Rack::Test::UploadedFile.new(file, content_type)
       end
 
-      def json_default = {
-        filename:,
-        content_type:,
-        data:
-      }.transform_keys(&:to_s)
+      def json_default = { filename:, content_type:, data: }.transform_keys(&:to_s)
 
       private
 
