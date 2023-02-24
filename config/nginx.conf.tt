@@ -1,21 +1,21 @@
-<%- if https? -%>
+<% if Rails.env.production? %>
 server {
-  server_name <%= app_name %>.back-office.pro;
+  server_name <%= Tenant.host %>;
   listen 80;
   listen [::]:80;
 
   location / {
-    return 301 https://<%= app_name %>.back-office.pro$request_uri;
+    return 301 https://<%= Tenant.host %>$request_uri;
   }
 }
 
 server {
-  server_name <%= app_name %>.back-office.pro;
+  server_name <%= Tenant.host %>;
   listen [::]:443 ssl;
   listen 443 ssl;
 
   location / {
-    return 301 https://www.<%= app_name %>.back-office.pro$request_uri;
+    return 301 https://www.<%= Tenant.host %>$request_uri;
   }
 
   ssl_certificate /etc/letsencrypt/live/back-office.pro/fullchain.pem;
@@ -23,14 +23,14 @@ server {
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
-<%- else -%>
+<% else %>
 server {
-  server_name <%= app_name %>.back-office.pro;
+  server_name <%= Tenant.host %>;
   listen 80;
   listen [::]:80;
 
   location / {
-    proxy_pass http://localhost:<%= port %>;
+    proxy_pass http://<%= Tenant.host %>:<%= Tenant.port %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
@@ -38,4 +38,4 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 }
-<%- end -%>
+<% end %>

@@ -67,9 +67,16 @@ module Schematics
 
     class << self
       def config_for(name)
-        ActiveSupport::ConfigurationFile
-          .parse(root.join('config', "#{name}.yml"))
-          .deep_symbolize_keys
+        case name
+        when :nginx
+          ERB
+            .new(File.read(root.join('config', "#{name}.conf.tt")))
+            .result
+        else
+          ActiveSupport::ConfigurationFile
+            .parse(root.join('config', "#{name}.yml"))
+            .deep_symbolize_keys
+        end
       end
 
       def credentials = ActiveSupport::EncryptedConfiguration.new(

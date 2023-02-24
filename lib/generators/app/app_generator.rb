@@ -34,10 +34,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     template 'github/workflows/build.yml', '.github/workflows/build.yml'
   end
 
-  def create_nginx_config_file
-    template 'config/nginx.conf'
-  end
-
   def install_rspec
     rails_command 'generate rspec:install'
   end
@@ -191,7 +187,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def deploy_nginx_subdomain
     return if container?
     return if env.development?
-    return unless nginx?
 
     rails_command 'schematics:nginx:deploy', env:
   end
@@ -260,8 +255,4 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     .next
 
   def port = DEFAULT_PORT + database_index
-
-  def https? = Dir.exist?('/etc/letsencrypt/live')
-
-  def nginx? = Dir.exist?('/etc/nginx')
 end
