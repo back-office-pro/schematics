@@ -5,7 +5,6 @@ module Schematics
     module Template
       module Trigger
         class Component < ApplicationComponent
-          renders_one_form :form
           option :form
 
           def entity = Entities::Entity.new(schema:)

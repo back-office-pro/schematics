@@ -7,7 +7,6 @@ module Schematics
         class Component < Fields::Component
           delegate :validators, :extensions, :attributes_param_key, to: :field
           delegate :attached?, to: :value
-          renders_one_form :form
 
           alias accept extensions
 

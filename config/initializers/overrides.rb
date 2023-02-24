@@ -12,7 +12,6 @@ require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
-require 'view_component/renders_one_form'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator

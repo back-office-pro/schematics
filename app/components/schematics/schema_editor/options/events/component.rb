@@ -6,7 +6,6 @@ module Schematics
       module Events
         class Component < ApplicationComponent
           delegate :object, to: :builder, private: true
-          renders_one_form :builder
           option :builder
           option :name
 

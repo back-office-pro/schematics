@@ -125,6 +125,9 @@ module Schematics
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en fr]
 
+    # ViewComponent
+    config.view_component.capture_compatibility_patch_enabled = true
+
     # Active Storage
     config.after_initialize do
       config.active_storage.service_configurations = config_for(:storage)

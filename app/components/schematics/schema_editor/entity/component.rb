@@ -7,7 +7,6 @@ module Schematics
         delegate :default_actions, :actions, :icon, :descriptor, to: 'builder.object'
         delegate :allowed_field_names, to: :descriptor
         delegate :index, to: :builder
-        renders_one_form :builder
         option :builder
 
         def actions_collection = default_actions

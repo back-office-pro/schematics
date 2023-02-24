@@ -4,7 +4,6 @@ module Schematics
   module SchemaEditor
     module Trigger
       class Component < ApplicationComponent
-        renders_one_form :builder
         option :builder
 
         def collection = Schematics::Trigger::ACTIONS
