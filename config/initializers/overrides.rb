@@ -8,6 +8,8 @@ require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'open_api/override/router'
 require 'open_api/router'
+require 'puma/configuration'
+require 'puma/override/configuration'
 require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
@@ -25,6 +27,8 @@ ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
+
+Puma::Configuration.prepend(Puma::Override::Configuration)
 
 Rails.configuration.to_prepare do
   Application

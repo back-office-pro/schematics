@@ -140,6 +140,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/database.yml'
     remove_file 'config/storage.yml'
     remove_file 'config/importmap.rb'
+    remove_file 'config/puma.rb'
     remove_file 'config/routes.rb'
     remove_file 'config/environments/development.rb'
     remove_file 'config/environments/production.rb'
