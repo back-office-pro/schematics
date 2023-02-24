@@ -3,6 +3,7 @@
 module Puma
   module Override
     module Configuration
+      # :reek:UtilityFunction
       def config_files = [Schematics::Engine.root.join('config', 'puma.rb').to_s]
     end
   end
