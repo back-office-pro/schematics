@@ -40,17 +40,9 @@ module Schematics
         @base64_encoded ||= Base64.encode64(read)
       end
 
-      def data = [
-        'data:',
-        content_type,
-        ';base64,',
-        base64_encoded
-      ].join
+      def data = ['data:', content_type, ';base64,', base64_encoded].join
 
-      def filename_array = [
-        'dummy',
-        ".#{@extension}"
-      ]
+      def filename_array = ['dummy', ".#{@extension}"]
 
       def filename = filename_array.join
 
