@@ -118,12 +118,14 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     comment_lines 'app/mailers/application_mailer.rb', /layout/
   end
 
-  def edit_asset_manifest
-    gsub_file 'app/assets/config/manifest.js', %r{//= link_tree ../images\n}, ''
-    gsub_file 'app/assets/config/manifest.js', %r{//= link_tree ../../../vendor/javascript .js\n}, '' # rubocop:disable Layout/LineLength
+  def empty_asset_manifest_file
+    remove_file 'app/assets/config/manifest.js'
+    create_file 'app/assets/config/manifest.js'
   end
 
   def remove_unused_files
+    remove_file 'app/assets/stylesheets/application.css'
+    remove_file 'app/javascript/application.js'
     remove_file 'app/helpers/application_helper.rb'
     remove_file 'app/views/layouts/application.html.erb'
     remove_file 'app/views/layouts/mailer.html.erb'
