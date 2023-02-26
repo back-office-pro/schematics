@@ -50,7 +50,7 @@ class Tenant
       .module_parent_name
       .underscore
 
-    def database_name = "#{name}_#{Rails.env}"
+    def production_name = "#{name}_production"
 
     def subdomain = name.dasherize
 
