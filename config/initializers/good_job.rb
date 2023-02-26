@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  opts = YAML.load_file Schematics::Engine.join_config('backend.yml')
+  opts = Schematics::Engine.config_for(:backend)
   config.good_job.execution_mode = :async
   config.good_job.enable_cron = true
   config.good_job.queues = opts[:queues].join(',')

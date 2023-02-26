@@ -1,21 +1,32 @@
 # frozen_string_literal: true
 
+pin 'trix', preload: true
+pin '@rails/actiontext', to: 'actiontext.js', preload: true
+pin '@hotwired/turbo-rails', to: 'turbo.js', preload: true
+pin '@hotwired/stimulus', to: 'stimulus.js', preload: true
+pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
+
 pin 'chartkick', to: 'chartkick.js', preload: true
 pin 'Chart.bundle', to: 'Chart.bundle.js', preload: true
-pin 'schematics/application', preload: true
 pin 'pagy-module', preload: true
 
+pin 'application', preload: true
+pin 'schematics/application', preload: true
+
+pin_all_from Rails.root.join('app/javascript/controllers'),
+             under: 'controllers',
+             preload: true
 pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schematics', 'controllers'), # rubocop:disable Layout/LineLength
              under: 'controllers',
              to: 'schematics/controllers',
              preload: true
 
-pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.2.1/js/fontawesome.js'
+pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.3.0/js/fontawesome.js'
 pin '@github/hotkey', to: 'https://unpkg.com/@github/hotkey@2.0.1/dist/index.js'
 pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.6/dist/esm/index.js'
-pin 'autosize', to: 'https://unpkg.com/autosize@5.0.2/dist/autosize.esm.js'
+pin 'autosize', to: 'https://unpkg.com/autosize@6.0.1/dist/autosize.esm.js'
 pin 'bootstrap', to: 'https://unpkg.com/bootstrap@5.2.3/dist/js/bootstrap.esm.js'
-pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.0/nodelibs/browser/path.js'
+pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js'
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js'
 pin 'sortablejs', to: 'https://unpkg.com/sortablejs@1.15.0/modular/sortable.esm.js'
 pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.15.5/index.js'

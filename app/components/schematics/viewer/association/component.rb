@@ -5,6 +5,7 @@ module Schematics
     module Association
       class Component < Viewer::Component
         with_collection_parameter :resources
+        delegate :reflection, to: '@resources.proxy_association', private: true
 
         def initialize(resources:, collapsed: true, highlight_text: nil)
           super(resources:)
@@ -52,9 +53,19 @@ module Schematics
               .class
               .human_attribute_name(@resources.first.name, count: @resources.size)
           else
-            model_class.human_name(count: @resources.size).humanize
+            reflection
+              .inverse_of
+              &.klass
+              &.human_attribute_name(reflection.name, count: @resources.size, default:)
+              &.humanize || default
           end
         end
+
+        private
+
+        def default = model_class
+          .human_name(count: @resources.size)
+          .humanize
       end
     end
   end

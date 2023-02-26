@@ -9,5 +9,6 @@ SimpleCov.start(:rails) do
     app/docs/schematics
     lib/generators/app
     lib/schematics/version.rb
+    lib/rubygems_plugin.rb
   ]
 end

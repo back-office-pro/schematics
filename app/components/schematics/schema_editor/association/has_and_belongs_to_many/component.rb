@@ -6,7 +6,6 @@ module Schematics
       module HasAndBelongsToMany
         class Component < ApplicationComponent
           delegate :allowed_names, to: 'builder.object'
-          renders_one_form :builder
           option :builder
 
           def collection = [Associations::HasAndBelongsToMany]

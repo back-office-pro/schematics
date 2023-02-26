@@ -6,7 +6,6 @@ module Schematics
       module Association
         module HasAndBelongsToMany
           class Component < ApplicationComponent
-            renders_one_form :form
             option :form
 
             def association = Associations::Association.build(

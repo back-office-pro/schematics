@@ -50,6 +50,8 @@ class Tenant
       .module_parent_name
       .underscore
 
+    def database_name = "#{name}_#{Rails.env}"
+
     def subdomain = name.dasherize
 
     def human = name.humanize
@@ -70,6 +72,20 @@ class Tenant
       &.preferred_locales
       &.first
       &.slice(0, 2)
+
+    def host
+      return "#{subdomain}.back-office.pro" if Rails.env.production?
+
+      'localhost'
+    end
+
+    def port
+      return if Rails.env.production?
+
+      ENV
+        .fetch('PORT', 3000)
+        .to_i
+    end
 
     private
 
@@ -93,19 +109,5 @@ class Tenant
       .to_sym
 
     def from = "no-reply@#{host}"
-
-    def host
-      return "#{subdomain}.back-office.pro" if Rails.env.production?
-
-      'localhost'
-    end
-
-    def port
-      return if Rails.env.production?
-
-      ENV
-        .fetch('PORT', 3000)
-        .to_i
-    end
   end
 end

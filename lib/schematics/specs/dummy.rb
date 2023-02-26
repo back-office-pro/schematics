@@ -15,11 +15,7 @@ module Schematics
         @default ||= Rack::Test::UploadedFile.new(file, content_type)
       end
 
-      def json_default = {
-        filename:,
-        content_type:,
-        data:
-      }.transform_keys(&:to_s)
+      def json_default = { filename:, content_type:, data: }.transform_keys(&:to_s)
 
       private
 
@@ -40,17 +36,9 @@ module Schematics
         @base64_encoded ||= Base64.encode64(read)
       end
 
-      def data = [
-        'data:',
-        content_type,
-        ';base64,',
-        base64_encoded
-      ].join
+      def data = ['data:', content_type, ';base64,', base64_encoded].join
 
-      def filename_array = [
-        'dummy',
-        ".#{@extension}"
-      ]
+      def filename_array = ['dummy', ".#{@extension}"]
 
       def filename = filename_array.join
 

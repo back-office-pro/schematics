@@ -17,14 +17,14 @@ namespace :schematics do
 
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
-      task.config_path = Schematics::Engine.join_config('active_record_doctor.rb')
+      task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')
       task.setup = -> { Rails.application.eager_load! }
     end
 
     namespace :encryption do
       desc 'Generate database encryption credentials'
       task init: :environment do
-        sh %[EDITOR='echo "$(rails db:encryption:init | tail -n +2)" >> ' rails credentials:edit]
+        `EDITOR='echo "$(rails db:encryption:init | tail -n +2)" >> ' rails credentials:edit`
       end
     end
 

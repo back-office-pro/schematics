@@ -2,11 +2,11 @@
 
 module Schematics
   class ApplicationComponent < ::ViewComponent::Base
-    include ::ViewComponent::RendersOneForm
     include ::Pagy::Backend
     include ::Pagy::Frontend
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
+    include ::Importmap::ImportmapTagsHelper
     include ApplicationHelper
     extend ::Dry::Initializer
 

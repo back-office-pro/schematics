@@ -25,7 +25,6 @@ module Schematics
 
       validates :options_keys, inclusion: { in: :available_options_names }
       validates :type, presence: true
-      validates :name, english: true, unless: :core?
       validates :name,
                 presence: true,
                 format: { with: Entities::Entity::NAME_REGEX, message: :name },

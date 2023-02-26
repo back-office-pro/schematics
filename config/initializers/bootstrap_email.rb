@@ -11,7 +11,7 @@ BootstrapEmail.configure do |config|
     'mailer.scss'
   )
   config.sass_load_paths = [
-    Rails.root.join('node_modules'),
+    Schematics::Engine.root.join('node_modules'),
     Schematics::Engine.root.join('app', 'assets', 'stylesheets', 'schematics')
   ]
 end

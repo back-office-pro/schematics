@@ -6,7 +6,6 @@ module Schematics
       class Component < ApplicationComponent
         delegate :class, to: 'builder.object', prefix: :attribute
         delegate :allowed_association_types, :icon, to: 'builder.object'
-        renders_one_form :builder
         option :builder
 
         def collection = Attributes

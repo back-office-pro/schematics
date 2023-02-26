@@ -7,7 +7,6 @@ require 'hash'
 require 'json_web_token'
 require 'object'
 require 'tenant'
-require 'validators/english_validator'
 require 'validators/singular_validator'
 require 'zeitwerk'
 require defined?(Rails::Engine) ? 'schematics/engine' : 'debug'
@@ -23,6 +22,7 @@ loader.ignore("#{__dir__}/backend")
 loader.ignore("#{__dir__}/generators")
 loader.ignore("#{__dir__}/i18n")
 loader.ignore("#{__dir__}/open_api")
+loader.ignore("#{__dir__}/puma")
 loader.ignore("#{__dir__}/rails")
 loader.ignore("#{__dir__}/search_engine")
 loader.ignore("#{__dir__}/validators")
@@ -31,6 +31,7 @@ loader.ignore("#{__dir__}/array.rb")
 loader.ignore("#{__dir__}/hash.rb")
 loader.ignore("#{__dir__}/json_web_token.rb")
 loader.ignore("#{__dir__}/object.rb")
+loader.ignore("#{__dir__}/rubygems_plugin.rb")
 loader.ignore("#{__dir__}/tenant.rb")
 loader.setup
 

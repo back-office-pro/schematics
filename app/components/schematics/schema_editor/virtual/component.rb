@@ -5,7 +5,6 @@ module Schematics
     module Virtual
       class Component < ApplicationComponent
         delegate :icon, to: 'builder.object'
-        renders_one_form :builder
         option :builder
 
         def title = t('.title')

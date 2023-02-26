@@ -26,7 +26,7 @@ module Schematics
       def content_type = 'application/octet-stream'
 
       def file(content)
-        file = Tempfile.new(filename)
+        file = Tempfile.new
         file.write(content)
         file.rewind
         file

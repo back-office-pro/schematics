@@ -4,6 +4,14 @@ en:
     attributes:
       user:
         avatar: Avatar
+        created_comments:
+          one: Created comment
+          other: Created comments
+          zero: No created comment
+        created_meetings:
+          one: Created meeting
+          other: Created meetings
+          zero: No created meeting
         email: Email
         first_name: First name
         full_name: Full name
@@ -15,8 +23,20 @@ en:
         password: Password
         password_challenge: Current password
         password_confirmation: Password confirmation
+        received_messages:
+          one: Received message
+          other: Received messages
+          zero: No message received
         remember_me: Remember me?
+        requested_tasks:
+          one: Requested task
+          other: Requested taks
+          zero: No requested task
         role: Role
+        sent_messages:
+          one: Sent message
+          other: Sent messages
+          zero: No message sent
         time_zone: Time zone
     models:
       user:

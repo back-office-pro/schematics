@@ -5,7 +5,6 @@ module Schematics
     module Template
       module Attribute
         class Component < ApplicationComponent
-          renders_one_form :form
           with_collection_parameter :constant
 
           def initialize(form:, constant:)

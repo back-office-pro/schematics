@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby Gem.ruby_version.to_s
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+end
+
+group :development do
+  gem "web-console"
+end
+

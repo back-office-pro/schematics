@@ -35,6 +35,7 @@ require 'pagy'
 require 'paper_trail'
 require 'paranoia'
 require 'phonelib'
+require 'puma'
 require 'rack-mini-profiler'
 require 'rack/attack'
 require 'rack/cors'
@@ -67,13 +68,22 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
-      def join_config(*pathnames)
-        root.join(*pathnames.unshift('config'))
+      def config_for(name)
+        case name
+        when :nginx
+          ERB
+            .new(File.read(root.join('config', "#{name}.conf.tt")))
+            .result
+        else
+          ActiveSupport::ConfigurationFile
+            .parse(root.join('config', "#{name}.yml"))
+            .deep_symbolize_keys
+        end
       end
 
       def credentials = ActiveSupport::EncryptedConfiguration.new(
-        config_path: join_config('credentials.yml.enc'),
-        key_path: join_config('master.key'),
+        config_path: root.join('config', 'credentials.yml.enc'),
+        key_path: root.join('config', 'master.key'),
         env_key: 'SCHEMATICS_MASTER_KEY',
         raise_if_missing_key: true
       )
@@ -91,21 +101,15 @@ module Schematics
       generator.jbuilder nil
     end
 
-    # Security
-    config.force_ssl = Rails.env.production?
-    config.require_master_key = true
-
     # Logs
     config.log_file_size = 100.megabytes # TODO: enabled when upgrading to Rails 7.1
-
-    # Action Controller
-    config.action_controller.action_on_unpermitted_parameters = :raise if Rails.env.development?
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
     config.action_dispatch.rescue_responses['ActiveRecord::PendingMigrationError'] = :service_unavailable # rubocop:disable Layout/LineLength
 
     # Active Record
+    config.active_record.enumerate_columns_in_select_statements = true
     config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
     config.active_record.query_log_tags_enabled = true
@@ -115,38 +119,28 @@ module Schematics
     config.active_record.encryption.extend_queries = true
 
     # Mailer
-    config.action_mailer.delivery_method = :sendmail
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
-    config.action_mailer.raise_delivery_errors = Rails.env.development?
 
     # Assets
+    config.assets.version = VERSION
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
+    config.assets.paths << root.join('node_modules')
     config.assets.precompile += %w[schematics_manifest.js]
-    config.assets.js_compressor  = :terser if Rails.env.production?
-    config.assets.css_compressor = :sass if Rails.env.production?
 
     # Importmap
-    config.importmap.paths << join_config('importmap.rb')
+    config.importmap.paths << root.join('config', 'importmap.rb')
 
     # i18n
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en fr]
-    config.i18n.raise_on_missing_translations = !Rails.env.production?
 
-    # Active Job
-    config.before_configuration do
-      config.active_job.queue_adapter = ::Tenant.backend.queue_adapter
-    end
-
-    # Cache
-    config.before_configuration do |app|
-      app.config.cache_store = ::Tenant.backend.cache_store, ::Tenant.backend.cache_store_options
-    end
+    # ViewComponent
+    config.view_component.capture_compatibility_patch_enabled = true
 
     # Active Storage
     config.after_initialize do
-      config.active_storage.service = :amazon if Rails.env.production?
+      config.active_storage.service_configurations = config_for(:storage)
       config.active_storage.replace_on_assign_to_many = false
       config.active_storage.track_variants = false
     end

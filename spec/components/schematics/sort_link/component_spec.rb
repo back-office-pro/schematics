@@ -6,6 +6,7 @@ RSpec.describe Schematics::SortLink::Component, type: :component do
   subject { render_inline described_class.new(field:, model_class:) }
 
   let(:model_class) { User }
+  let(:controller) { __vc_test_helpers_controller }
   let(:field) { model_class.entity.find_field_by_name('email') }
 
   context 'when emails are not ordered' do
