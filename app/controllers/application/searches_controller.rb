@@ -11,6 +11,8 @@ module Application
     end
 
     def show
+      @results = @results.results
+      @suggestions = @results.suggestions
       respond_to do |format|
         format.json { render json: @results.take(SEARCH_LIMIT), metadata: true }
         format.html
@@ -23,16 +25,9 @@ module Application
 
     def set_results
       @results = ::Tenant
-                 .schema
-                 .entities
-                 .select(&:multisearchable?)
-                 .reject(&:hidden?)
-                 .map do |entity|
-                   entity
-                     .model_class
-                     .search({ entity.multisearch_query => @resource.query }, current_ability)
-                     .load_async
-                 end.reject(&:empty?)
+                 .search_engine
+                 .multisearch
+                 .call(query: @resource.query, current_ability:)
     end
 
     def set_resource
