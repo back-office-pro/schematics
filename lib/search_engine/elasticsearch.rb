@@ -13,5 +13,7 @@ module SearchEngine
     end
 
     def pagy_backend = :pagy_searchkick
+
+    def multisearch = Application::Searches::Searchkick
   end
 end
