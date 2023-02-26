@@ -11,8 +11,8 @@ module Application
     end
 
     def show
-      @results = @results.results
       @suggestions = @results.suggestions
+      @results = @results.results
       respond_to do |format|
         format.json { render json: @results.take(SEARCH_LIMIT), metadata: true }
         format.html
