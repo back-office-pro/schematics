@@ -29,18 +29,8 @@ module Application
         .schema
         .entities
         .reject(&:hidden?)
-        .map(&method(:search))
-
-      def search(entity)
-        entity.model_class.search(
-          query,
-          includes: entity.includes,
-          match: :word_middle,
-          suggest: true,
-          misspellings: false,
-          scope_results: -> { _1.accessible_by(current_ability) }
-        )
-      end
+        .map(&:model_class)
+        .map { _1.multisearch(query, current_ability) }
     end
   end
 end
