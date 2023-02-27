@@ -4,25 +4,21 @@ module Application
   module Searches
     class Searchkick
       include Interactor
+      LIMIT = 5
       delegate :query, :current_ability, to: :context, private: true
 
       def call
-        context.suggestions = suggestions
+        context.suggestions = results.flat_map(&:suggestions).uniq
+        context.typeahead = results.flat_map(&:results).take(LIMIT)
         context.results = results
       end
 
       private
 
-      def results = multisearch.flat_map(&:results)
-
-      def suggestions = multisearch
-        .flat_map(&:suggestions)
-        .uniq
-
-      def multisearch
-        @multisearch ||= ::Searchkick
-                         .multi_search(searches)
-                         .reject(&:empty?)
+      def results
+        @results ||= ::Searchkick
+                     .multi_search(searches)
+                     .reject(&:empty?)
       end
 
       def searches = ::Tenant

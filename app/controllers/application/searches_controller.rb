@@ -3,7 +3,6 @@
 module Application
   module SearchesController
     extend ActiveSupport::Concern
-    SEARCH_LIMIT = 5
 
     prepended do
       before_action :set_results, only: :show
@@ -11,10 +10,8 @@ module Application
     end
 
     def show
-      @suggestions = @results.suggestions
-      @results = @results.results
       respond_to do |format|
-        format.json { render json: @results.take(SEARCH_LIMIT), metadata: true }
+        format.json { render json: @typeahead, metadata: true }
         format.html
       end
     end
@@ -24,10 +21,13 @@ module Application
     def i18n_title_path = 'searches'
 
     def set_results
-      @results = ::Tenant
-                 .search_engine
-                 .multisearch
-                 .call(query: @resource.query, current_ability:)
+      @results, @suggestions, @typeahead =
+        ::Tenant
+        .search_engine
+        .multisearch
+        .call(query: @resource.query, current_ability:)
+        .to_h
+        .values_at(:results, :suggestions, :typeahead)
     end
 
     def set_resource
