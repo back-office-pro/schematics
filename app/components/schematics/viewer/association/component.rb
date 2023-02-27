@@ -5,7 +5,6 @@ module Schematics
     module Association
       class Component < Viewer::Component
         with_collection_parameter :resources
-        delegate :reflection, to: '@resources.proxy_association', private: true
 
         def initialize(resources:, collapsed: true, highlight_text: nil)
           super(resources:)
@@ -44,7 +43,7 @@ module Schematics
           @id ||= "collapse-#{SecureRandom.base58}"
         end
 
-        def title
+        def title # rubocop:disable Metrics/CyclomaticComplexity
           case @resources.first
           when ::ActiveStorage::Attachment
             @resources
@@ -53,17 +52,22 @@ module Schematics
               .class
               .human_attribute_name(@resources.first.name, count: @resources.size)
           else
-            reflection
-              .inverse_of
+            @resources
+              .try(:proxy_association)
+              &.reflection
+              &.inverse_of
               &.klass
-              &.human_attribute_name(reflection.name, count: @resources.size, default:)
-              &.humanize || default
+              &.human_attribute_name(
+                @resources.proxy_association.reflection.name,
+                count: @resources.size,
+                default: default_title
+              )&.humanize || default_title
           end
         end
 
         private
 
-        def default = model_class
+        def default_title = model_class
           .human_name(count: @resources.size)
           .humanize
       end
