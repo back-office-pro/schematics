@@ -10,8 +10,6 @@ module Schematics
     include Versionable
     include Lockable
 
-    AUTOCOMPLETE_LIMIT = 5
-
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
     before_action :set_breadcrumb
