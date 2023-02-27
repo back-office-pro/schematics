@@ -4,7 +4,7 @@ module Schematics
   module Associations
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
-      delegate :includes, :icon, to: :inverse_entity
+      delegate :includes, :icon, :descriptor, to: :inverse_entity
 
       validates :name, inclusion: { in: :allowed_names }
 
