@@ -19,7 +19,7 @@ module Application
         .reject(&:hidden?)
         .select(&:multisearchable?)
         .map(&:model_class)
-        .map { _1.list({ _1.entity.multisearch_query => query }, current_ability) }
+        .map { _1.multisearch(query, current_ability) }
         .map(&:load_async)
         .reject(&:empty?)
     end
