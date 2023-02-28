@@ -58,5 +58,10 @@ end
 ActiveSupport.on_load(:action_text_rich_text) do
   ActionText::RichText.class_eval do
     include Schematics::SoftDeletable
+    class << self
+      def ransackable_attributes(*)
+        ['body']
+      end
+    end
   end
 end
