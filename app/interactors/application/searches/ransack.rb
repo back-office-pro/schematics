@@ -9,7 +9,7 @@ module Application
 
       def call
         context.suggestions = []
-        context.typeahead = results.take(LIMIT)
+        context.typeahead = results.map(&:first).take(LIMIT)
         context.results = results
       end
 
