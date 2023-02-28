@@ -106,6 +106,7 @@ module Schematics
       # :reek:FeatureEnvy
       def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
+        with_id_and_created_at_attrs = method != 'associations' && constant != 'migratable'
         predicate = non ? :grep_v : :grep
         constant = constant&.camelize&.to_sym
         mod = method&.camelize&.to_sym
@@ -115,6 +116,7 @@ module Schematics
         if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
           elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
         elsif Behaviours.const_defined?(constant)
+          elements = [id_attribute, *elements, created_at_attribute] if with_id_and_created_at_attrs
           elements = elements.public_send(predicate, Behaviours.const_get(constant))
           case constant
           when :Migratable
@@ -123,15 +125,6 @@ module Schematics
             elements
               .reject(&:hidden?)
               .reject(&:readonly?)
-          when :Listable, :Searchable, :Rangeable
-            elements
-              .push(created_at_attribute)
-              .reject(&:hidden?)
-          when :Renderable
-            elements
-              .unshift(id_attribute)
-              .push(created_at_attribute)
-              .reject(&:hidden?)
           else
             elements.reject(&:hidden?)
           end
