@@ -14,7 +14,6 @@ module Schematics
       def ransackable_attributes(*)
         entity
           .searchable_fields
-          .grep_v(Behaviours::Preloadable)
           .map(&:name)
       end
 
@@ -22,7 +21,8 @@ module Schematics
         entity
           .searchable_associations
           .map(&:name)
-          .concat(entity.preloadable_attributes.map(&:search_column_association))
+          .concat(entity.rich_text_attributes.map(&:search_column_association))
+          .concat(entity.attachment_attributes.map(&:search_column_association))
       end
 
       def ransortable_attributes(*)
