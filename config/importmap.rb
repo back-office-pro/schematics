@@ -29,7 +29,7 @@ pin 'bootstrap', to: 'https://unpkg.com/bootstrap@5.2.3/dist/js/bootstrap.esm.js
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js'
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js'
 pin 'sortablejs', to: 'https://unpkg.com/sortablejs@1.15.0/modular/sortable.esm.js'
-pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.16.0/index.js'
+pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.16.1/index.js'
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js'
 pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js'
 pin 'tom-select', to: 'https://unpkg.com/tom-select@2.2.2/dist/esm/tom-select.complete.js'
