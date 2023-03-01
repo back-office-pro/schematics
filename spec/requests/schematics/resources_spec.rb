@@ -11,9 +11,10 @@ RSpec.describe 'Resources' do
 
   before { [first_api_key, second_api_key] }
 
-  [SearchEngine::Postgresql.new, SearchEngine::Elasticsearch.new].each do |search_engine|
+  %w[postgresql elasticsearch].each do |search_engine_name|
     describe 'GET #api_keys' do
       let(:do_request) { get(api_keys_path, params:, headers:) }
+      let(:search_engine) { SearchEngine.const_get(search_engine_name.camelize).new }
 
       before do
         allow(Tenant).to receive(:search_engine).and_return(search_engine)
@@ -22,7 +23,9 @@ RSpec.describe 'Resources' do
         do_request
       end
 
-      context 'when searching first api key' do
+      after { ApiKey.reload_definitions! }
+
+      context "when searching first api key with #{search_engine_name}" do
         let(:params) { { filter: { name: 'first' } } }
         let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
@@ -30,7 +33,7 @@ RSpec.describe 'Resources' do
         it { expect(json_response).to contain_exactly(expected_response) }
       end
 
-      context 'when searching second api key' do
+      context "when searching second api key with #{search_engine_name}" do
         let(:params) { { filter: { name: 'second' } } }
         let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
@@ -38,7 +41,7 @@ RSpec.describe 'Resources' do
         it { expect(json_response).to contain_exactly(expected_response) }
       end
 
-      context 'when searching active api key' do
+      context "when searching active api key with #{search_engine_name}" do
         let(:params) { { filter: { active: true } } }
         let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
@@ -46,7 +49,7 @@ RSpec.describe 'Resources' do
         it { expect(json_response).to contain_exactly(expected_response) }
       end
 
-      context 'when searching not active api key' do
+      context "when searching not active api key with #{search_engine_name}" do
         let(:params) { { filter: { active: false } } }
         let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
@@ -54,7 +57,7 @@ RSpec.describe 'Resources' do
         it { expect(json_response).to contain_exactly(expected_response) }
       end
 
-      context 'when searching for not expired api key' do
+      context "when searching for not expired api key with #{search_engine_name}" do
         let(:params) { { filter: { expires_at: { gte: Time.current } } } }
         let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
@@ -62,7 +65,7 @@ RSpec.describe 'Resources' do
         it { expect(json_response).to contain_exactly(expected_response) }
       end
 
-      context 'when searching for expired api key' do
+      context "when searching for expired api key with #{search_engine_name}" do
         let(:params) { { filter: { expires_at: { lte: Time.current } } } }
         let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
