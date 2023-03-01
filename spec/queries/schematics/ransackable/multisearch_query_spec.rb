@@ -13,6 +13,8 @@ RSpec.describe Schematics::Ransackable::MultisearchQuery do
   let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
 
+  before { other_user }
+
   describe '.call' do
     subject { query.call(param, ability) }
 
