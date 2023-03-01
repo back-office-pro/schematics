@@ -23,7 +23,6 @@ module Application
                      .select(&:multisearchable?)
                      .map(&:model_class)
                      .map { _1.multisearch(query, current_ability) }
-                     .map(&:load_async)
                      .reject(&:empty?)
       end
     end

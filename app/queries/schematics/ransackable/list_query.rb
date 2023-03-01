@@ -19,6 +19,7 @@ module Schematics
           .left_joins(entity.joins)
           .preload(entity.includes)
           .accessible_by(ability)
+          .load_async
       end
     end
   end
