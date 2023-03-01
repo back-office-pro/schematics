@@ -45,7 +45,6 @@ describe Schematics::Attributes::References do
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:search_column) { is_expected.to eq(:user_full_name) }
-  its(:search_column_association) { is_expected.to eq('user') }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
 

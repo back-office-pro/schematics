@@ -64,9 +64,7 @@ module Schematics
           #{name}&.to_s
         RUBY
 
-      def search_column = :"#{search_column_association}_#{descriptor.name}"
-
-      alias search_column_association name
+      def search_column = :"#{name}_#{descriptor.name}"
 
       def to_str
         if polymorphic?
