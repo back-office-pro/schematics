@@ -10,7 +10,7 @@ pin 'chartkick', to: 'chartkick.js', preload: true
 pin 'Chart.bundle', to: 'Chart.bundle.js', preload: true
 pin 'pagy-module', preload: true
 
-pin 'application', preload: true
+pin 'application', preload: true if Rails.root.join('app/javascript/application.js').exist?
 pin 'schematics/application', preload: true
 
 pin_all_from Rails.root.join('app/javascript/controllers'),
