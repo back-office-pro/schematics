@@ -21,16 +21,16 @@ pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schem
              to: 'schematics/controllers',
              preload: true
 
-pin '@fortawesome/fontawesome-free', to: 'https://unpkg.com/@fortawesome/fontawesome-free@6.3.0/js/fontawesome.js'
-pin '@github/hotkey', to: 'https://unpkg.com/@github/hotkey@2.0.1/dist/index.js'
-pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.6/dist/esm/index.js'
-pin 'autosize', to: 'https://unpkg.com/autosize@6.0.1/dist/autosize.esm.js'
-pin 'bootstrap', to: 'https://unpkg.com/bootstrap@5.2.3/dist/js/bootstrap.esm.js'
-pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js'
-pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js'
-pin 'sortablejs', to: 'https://unpkg.com/sortablejs@1.15.0/modular/sortable.esm.js'
-pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.16.1/index.js'
-pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js'
-pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js'
-pin 'tom-select', to: 'https://unpkg.com/tom-select@2.2.2/dist/esm/tom-select.complete.js'
-pin 'tributejs', to: 'https://unpkg.com/tributejs@5.1.3/dist/tribute.esm.js'
+pin '@fortawesome/fontawesome-free', to: '@fortawesome/fontawesome-free/js/fontawesome.js', preload: true # rubocop:disable Layout/LineLength
+pin '@github/hotkey', to: '@github/hotkey/dist/index.js', preload: true
+pin '@popperjs/core', to: '@popperjs/core/dist/esm/index.js', preload: true
+pin 'autosize', to: 'autosize/dist/autosize.esm.js', preload: true
+pin 'bootstrap', to: 'bootstrap/dist/js/bootstrap.esm.js', preload: true
+pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js', preload: true
+pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js', preload: true
+pin 'sortablejs', to: 'sortablejs/modular/sortable.esm.js', preload: true
+pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@4.15.5/index.js', preload: true
+pin 'timeago.js', to: 'timeago.js/esm/index.js', preload: true
+pin 'timeago.fr.js', to: 'timeago.js/esm/lang/fr.js', preload: true
+pin 'tom-select', to: 'tom-select/dist/esm/tom-select.complete.js', preload: true
+pin 'tributejs', to: 'tributejs/dist/tribute.esm.js', preload: true
