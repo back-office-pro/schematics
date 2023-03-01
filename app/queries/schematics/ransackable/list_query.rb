@@ -11,7 +11,11 @@ module Schematics
         ransack(parse_filter_params(filter_params))
           .tap { _1.sorts = parse_sort_params(sort_params) }
           .result(distinct: true)
-          .select(arel_table[::Arel.star], *entity.virtuals.map(&:to_sql))
+          .select(
+            arel_table[::Arel.star],
+            *entity.virtuals.map(&:to_sql),
+            *entity.preloadable_attributes.map(&:to_sql)
+          )
           .left_joins(entity.joins)
           .preload(entity.includes)
           .accessible_by(ability)
