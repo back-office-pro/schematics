@@ -72,6 +72,12 @@ module Schematics
         tokens.map(&:to_sql)
       end
 
+      def search_alias = <<~RUBY
+        ransacker :#{name} do
+          Arel.sql("#{to_sql}")
+        end
+      RUBY
+
       def to_str = <<~RUBY
         define_attribute_method :#{name}
         def #{name}

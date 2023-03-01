@@ -17,9 +17,11 @@ describe Schematics::Entities::Entity do
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_core }
   it { is_expected.to be_existing }
+  it { is_expected.to be_multisearchable }
 
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:class_name) { is_expected.to eq('Entity') }
+  its(:multisearch_query) { is_expected.to eq(:name_i_cont) }
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }

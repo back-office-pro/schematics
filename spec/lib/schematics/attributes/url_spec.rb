@@ -22,6 +22,9 @@ describe Schematics::Attributes::Url do
   its(:icon) { is_expected.to eq(:wifi) }
   its(:default) { is_expected.to match(URI::DEFAULT_PARSER.make_regexp) }
   its(:validators) { is_expected.to eq(url: { allow_blank: true }) }
+  its(:search_column) { is_expected.to eq(:url) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:url_i_cont) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.url') }
   its(:to_s) { is_expected.to eq('schema:user_url') }

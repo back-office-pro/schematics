@@ -3,16 +3,12 @@
 module Schematics
   class ResourcesController < ApplicationController # rubocop:disable Metrics/ClassLength
     include Fillable
-    include Sortable
-    include Filterable
     include Searchable
     include Readable
     include Calendarable
     include Documentable
     include Versionable
     include Lockable
-
-    AUTOCOMPLETE_LIMIT = 5
 
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
@@ -51,9 +47,7 @@ module Schematics
 
     def autocomplete
       authorize! :index, model_class
-      field = params.require(:field).to_sym
-      @resources = model_class.search(**search_params.merge(select: field, load: false))
-      render json: @resources.limit(AUTOCOMPLETE_LIMIT).map(&field).map(&:to_s).uniq
+      render json: model_class.autocomplete(filter_params, current_ability, params.require(:field))
     end
 
     def index
@@ -248,12 +242,13 @@ module Schematics
     end
 
     def set_resources
-      return @resources = model_class.search(**search_params) if params.key?(:all_pages)
+      @resources = model_class.list(filter_params, current_ability, params[:sort])
+      return if params.key?(:all_pages)
 
       @calendar, @pagy, @resources = pagy_calendar(
-        model_class.pagy_search(**search_params),
+        @resources,
         month: { format: t('date.formats.month') },
-        pagy: { backend: :pagy_searchkick },
+        pagy: { backend: ::Tenant.search_engine.pagy_backend },
         active: entity.viewer == :calendar
       )
     end

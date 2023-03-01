@@ -13,11 +13,13 @@ module Schematics
         end
       end
 
+      def search_predicate = :eq
+
       def icon = :toggle_on
 
       def open_api_type = 'boolean'
 
-      def to_sql = super.join
+      def to_sql = "(#{super.join})"
     end
   end
 end

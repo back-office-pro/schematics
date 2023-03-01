@@ -13,6 +13,8 @@ module Schematics
       def icon = :toggle_on
 
       def open_api_type = 'boolean'
+
+      def search_predicate = :eq
     end
   end
 end

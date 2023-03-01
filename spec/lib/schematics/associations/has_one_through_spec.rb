@@ -45,6 +45,9 @@ describe Schematics::Associations::HasOneThrough do
   its(:class_name) { is_expected.to eq('User') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:weight) { is_expected.to eq(3) }
+  its(:search_column) { is_expected.to eq(:user_full_name) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:user_i_cont) }
   its('descriptor.name') { is_expected.to eq('full_name') }
 
   its(:search_data) do

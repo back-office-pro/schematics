@@ -22,6 +22,7 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
@@ -34,6 +35,14 @@ describe Schematics::Virtuals::Concatenation do
   its(:search_data) do
     is_expected.to eq <<~RUBY
       full_name: full_name&.to_s
+    RUBY
+  end
+
+  its(:search_alias) do
+    is_expected.to eq <<~RUBY
+      ransacker :full_name do
+        Arel.sql("CONCAT(users.first_name, ' ', profiles.last_name)")
+      end
     RUBY
   end
 

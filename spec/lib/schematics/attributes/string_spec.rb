@@ -22,6 +22,9 @@ describe Schematics::Attributes::String do
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to be_a(String) }
   its(:validators) { is_expected.to be_empty }
+  its(:search_column) { is_expected.to eq(:last_name) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:last_name_i_cont) }
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }

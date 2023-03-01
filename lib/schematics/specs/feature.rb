@@ -47,10 +47,7 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
-          record
-          role
-          model_class.reindex
-          login
+          [record, role, login]
         end
 
         if can?(:index)

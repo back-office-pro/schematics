@@ -17,6 +17,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
@@ -25,6 +26,9 @@ describe Schematics::Attributes::Text do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:font) }
   its(:default) { is_expected.to be_a(String) }
+  its(:search_column) { is_expected.to eq(:content) }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
 
   its(:search_data) do

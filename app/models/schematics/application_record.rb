@@ -8,7 +8,7 @@ module Schematics
     include Translatable
     include Attachable
     loadable concerns: [
-      Elasticsearchable,
+      ::Tenant.search_engine.concern,
       SoftDeletable,
       Trackable,
       Sluggable

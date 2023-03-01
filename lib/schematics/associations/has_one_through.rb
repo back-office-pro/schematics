@@ -28,6 +28,8 @@ module Schematics
         .concat <<~RUBY
           #{name}&.to_s
         RUBY
+
+      def search_column = :"#{name}_#{descriptor.name}"
     end
   end
 end

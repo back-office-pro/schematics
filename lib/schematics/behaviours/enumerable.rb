@@ -9,6 +9,8 @@ module Schematics
 
       def default = values.first
 
+      def search_predicate = :in
+
       def validators = super.merge(
         inclusion: { in: values },
         allow_blank:

@@ -17,7 +17,7 @@ module Schematics
 
       def open_api_type = ::Float
 
-      def to_sql = super.join
+      def to_sql = "(#{super.join})"
 
       private
 

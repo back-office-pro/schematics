@@ -173,6 +173,10 @@ module Schematics
         .flat_map(&:permitted_json_params)
         .push(:lock_version)
 
+      def joins = includes.excluding association_attributes
+        .select(&:polymorphic?)
+        .flat_map(&:preload)
+
       def includes = preloadable_elements
         .flat_map(&:preload)
         .compact
@@ -240,7 +244,20 @@ module Schematics
         .to_a
         .concat(attachments_attributes)
 
-      def model_elements = [self, descriptor, search_data] + triggers + elements + validators
+      def search_aliases
+        searchable_elements.map(&:search_alias)
+      end
+
+      def multisearchable? = multisearchable_fields.any?
+
+      def multisearch_query = multisearchable_fields
+        .map(&:search_column)
+        .join('_or_')
+        .concat('_i_cont')
+        .to_sym
+
+      def model_elements = [self, descriptor, search_data]
+        .concat(triggers, elements, validators, search_aliases)
 
       def start_date_attribute_name = date_attributes
         .find(&:start_date?)

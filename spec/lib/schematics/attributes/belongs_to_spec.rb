@@ -43,9 +43,14 @@ describe Schematics::Attributes::BelongsTo do
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq(:user) }
   its(:icon) { is_expected.to eq(:users) }
+  its(:to_sql) { is_expected.to eq("CONCAT(users.last_name, ' ', users.first_name)") }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
+  its(:search_column) { is_expected.to eq(:user_full_name) }
+  its(:search_column_association) { is_expected.to eq('user') }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:user_i_cont) }
 
   its(:available_options) do
     is_expected.to include(

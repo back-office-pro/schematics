@@ -4,7 +4,7 @@ detectors:
   LongParameterList:
     max_params: 5
   TooManyStatements:
-    max_statements: 17
+    max_statements: 18
     exclude:
       - inherited
       - remove_unused_files
@@ -15,7 +15,7 @@ detectors:
   RepeatedConditional:
     max_ifs: 15
   TooManyMethods:
-    max_methods: 52
+    max_methods: 54
   NestedIterators:
     max_allowed_nesting: 3
   BooleanParameter:

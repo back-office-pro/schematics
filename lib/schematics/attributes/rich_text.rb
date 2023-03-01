@@ -4,6 +4,7 @@ module Schematics
   module Attributes
     class RichText < Attribute
       include Behaviours::Renderable
+      include Behaviours::Multisearchable
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
@@ -25,6 +26,12 @@ module Schematics
         .concat <<~RUBY
           #{name}&.to_plain_text
         RUBY
+
+      def search_column = :"#{search_column_association}_body"
+
+      def search_column_association = "rich_text_#{name}"
+
+      def to_sql = 'action_text_rich_texts.body'
 
       def to_str = <<~RUBY
         has_rich_text :#{name}

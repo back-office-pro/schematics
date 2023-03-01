@@ -46,6 +46,12 @@ module Schematics
           (#{name}.filename.to_s if #{name}.attached?)
         RUBY
 
+      def search_column = :"#{search_column_association}_filename"
+
+      def search_column_association = "#{name}_blob"
+
+      def to_sql = 'active_storage_blobs.filename'
+
       def to_str = <<~RUBY
         has_one_base64_attached :#{name}
         accepts_nested_attributes_for :#{association_name},

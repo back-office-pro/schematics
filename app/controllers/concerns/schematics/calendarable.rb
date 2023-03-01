@@ -11,11 +11,14 @@ module Schematics
              private: true
 
     def pagy_calendar_filter(collection, from, to)
-      collection.third[:where][start_date_attribute_name] = {
-        gte: calendar_start_date || from,
-        lte: calendar_end_date || to
-      }
-      collection
+      ::Tenant
+        .search_engine
+        .pagy_calendar_filter(
+          collection,
+          start_date_attribute_name,
+          calendar_start_date || from,
+          calendar_end_date || to
+        )
     end
 
     def pagy_calendar_period(*)
@@ -31,12 +34,14 @@ module Schematics
 
     private
 
+    def filter_key = Ransack.options[:search_key]
+
     def calendar_end_date = params
-      .dig(:filter, end_date_attribute_name, :lte)
+      .dig(filter_key, end_date_attribute_name, :lte)
       &.in_time_zone
 
     def calendar_start_date = params
-      .dig(:filter, start_date_attribute_name, :gte)
+      .dig(filter_key, start_date_attribute_name, :gte)
       &.in_time_zone
   end
 end

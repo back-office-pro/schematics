@@ -90,6 +90,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-mini-profiler', '~> 3.0.0'
   spec.add_dependency 'rails', '~> 7.0.4'
   spec.add_dependency 'rails-i18n', '~> 7.0.6'
+  spec.add_dependency 'ransack', '~> 4.0.0'
+  spec.add_dependency 'ransack-enum', '~> 1.0.0'
   spec.add_dependency 'ratonvirus', '~> 0.4.2'
   spec.add_dependency 'ratonvirus-clamby', '~> 0.4.0'
   spec.add_dependency 'redis', '~> 5.0.6'

@@ -54,6 +54,9 @@ describe Schematics::Attributes::StateMachine do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:recycle) }
   its(:default) { is_expected.to eq('pending') }
+  its(:search_column) { is_expected.to eq(:state) }
+  its(:search_predicate) { is_expected.to eq(:in) }
+  its(:search_query) { is_expected.to eq(:state_in) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('orders.state') }
   its(:to_s) { is_expected.to eq('schema:order_state') }

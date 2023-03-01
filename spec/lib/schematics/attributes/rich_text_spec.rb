@@ -13,6 +13,7 @@ describe Schematics::Attributes::RichText do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
@@ -23,6 +24,11 @@ describe Schematics::Attributes::RichText do
   its(:preload) { is_expected.to eq(rich_text_summary: [embeds_attachments: :blob]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to eq('MyRichText') }
+  its(:to_sql) { is_expected.to eq('action_text_rich_texts.body') }
+  its(:search_column) { is_expected.to eq(:rich_text_summary_body) }
+  its(:search_column_association) { is_expected.to eq('rich_text_summary') }
+  its(:search_predicate) { is_expected.to eq(:i_cont) }
+  its(:search_query) { is_expected.to eq(:summary_i_cont) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

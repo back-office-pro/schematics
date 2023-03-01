@@ -29,8 +29,8 @@ module Schematics
         end
 
         def tbody_css_classes
-          params.dig(:filter, start_date_attribute_name).presence &&
-            params.dig(:filter, end_date_attribute_name).presence &&
+          params.dig(filter_key, start_date_attribute_name).presence &&
+            params.dig(filter_key, end_date_attribute_name).presence &&
             super
         end
 
@@ -39,6 +39,8 @@ module Schematics
         end
 
         private
+
+        def filter_key = Ransack.options[:search_key]
 
         def alert_border_css_classes_for(resource, date)
           return %w[rounded-0 border-start-0 border-end-0] if siblings_resource_for?(resource, date)
@@ -78,7 +80,7 @@ module Schematics
         end
 
         def calendar_start_date = params
-          .dig(:filter, start_date_attribute_name, :gte)
+          .dig(filter_key, start_date_attribute_name, :gte)
           &.to_date
       end
     end

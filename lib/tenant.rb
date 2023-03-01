@@ -3,11 +3,14 @@
 require 'active_support/core_ext/module/delegation'
 require 'backend/postgresql'
 require 'backend/redis'
+require 'search_engine/elasticsearch'
+require 'search_engine/postgresql'
 
 # :reek:Attribute
 class Tenant
   class << self
     DEFAULT_BACKEND = 'postgresql'
+    DEFAULT_SEARCH_ENGINE = 'postgresql'
     SEMAPHORE = Mutex.new.freeze
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
@@ -35,6 +38,10 @@ class Tenant
 
     def backend = Backend
       .const_get(env_backend)
+      .new
+
+    def search_engine = SearchEngine
+      .const_get(env_search_engine)
       .new
 
     def name = Rails
@@ -93,6 +100,11 @@ class Tenant
 
     def env_backend = ENV
       .fetch('BACKEND', DEFAULT_BACKEND)
+      .camelize
+      .to_sym
+
+    def env_search_engine = ENV
+      .fetch('SEARCH_ENGINE', DEFAULT_SEARCH_ENGINE)
       .camelize
       .to_sym
 

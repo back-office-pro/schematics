@@ -51,12 +51,17 @@ end
 
 ActiveSupport.on_load(:active_storage_blob) do
   ActiveStorage::Blob.class_eval do
-    include Schematics::Elasticsearchable
+    include Tenant.search_engine.concern
   end
 end
 
 ActiveSupport.on_load(:action_text_rich_text) do
   ActionText::RichText.class_eval do
     include Schematics::SoftDeletable
+    class << self
+      def ransackable_attributes(*)
+        ['body']
+      end
+    end
   end
 end
