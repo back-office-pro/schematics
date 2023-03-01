@@ -195,7 +195,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return if container?
     return if env.development?
 
-    rails_command 'server &', env:
+    run "puma-dev link -n #{app_name}"
   end
 
   private
