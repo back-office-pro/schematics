@@ -29,6 +29,7 @@ describe Schematics::Attributes::Attachment do
   its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to eq('png') }
   its(:search_column) { is_expected.to eq(:avatar_blob_filename) }
+  its(:search_column_association) { is_expected.to eq('avatar_blob') }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:avatar_i_cont) }
   it { is_expected.to be_image }

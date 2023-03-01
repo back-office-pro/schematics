@@ -26,7 +26,9 @@ module Schematics
         #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
       RUBY
 
-      def search_column = :"#{name}_blobs_filename"
+      def search_column = :"#{search_column_association}_filename"
+
+      def search_column_association = "#{name}_blobs"
 
       def to_str = <<~RUBY
         has_many_base64_attached :#{name}

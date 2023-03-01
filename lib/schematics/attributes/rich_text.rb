@@ -27,7 +27,9 @@ module Schematics
           #{name}&.to_plain_text
         RUBY
 
-      def search_column = :"rich_text_#{name}_body"
+      def search_column = :"#{search_column_association}_body"
+
+      def search_column_association = "rich_text_#{name}"
 
       def to_sql = 'action_text_rich_texts.body'
 

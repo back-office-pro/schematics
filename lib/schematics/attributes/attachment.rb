@@ -46,7 +46,9 @@ module Schematics
           (#{name}.filename.to_s if #{name}.attached?)
         RUBY
 
-      def search_column = :"#{name}_blob_filename"
+      def search_column = :"#{search_column_association}_filename"
+
+      def search_column_association = "#{name}_blob"
 
       def to_sql = 'active_storage_blobs.filename'
 
