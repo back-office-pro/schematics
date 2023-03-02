@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 Gem.post_install do |installer|
-  Dir.chdir(installer.gem_dir) { `yarn` } unless ENV['CI']
+  `cd #{installer.gem_dir} && yarn` unless ENV['CI']
 end
