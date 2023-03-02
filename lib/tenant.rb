@@ -54,6 +54,8 @@ class Tenant
 
     def subdomain = name.dasherize
 
+    def domain = 'back-office.pro'
+
     def human = name.humanize
 
     def index_name(model_name)
@@ -74,17 +76,9 @@ class Tenant
       &.slice(0, 2)
 
     def host
-      return "#{subdomain}.back-office.pro" if Rails.env.production?
+      return "#{subdomain}.#{domain}" if Rails.env.production?
 
       'localhost'
-    end
-
-    def port
-      return if Rails.env.production?
-
-      ENV
-        .fetch('PORT', 3000)
-        .to_i
     end
 
     private
@@ -109,5 +103,13 @@ class Tenant
       .to_sym
 
     def from = "no-reply@#{host}"
+
+    def port
+      return if Rails.env.production?
+
+      ENV
+        .fetch('PORT', 3000)
+        .to_i
+    end
   end
 end
