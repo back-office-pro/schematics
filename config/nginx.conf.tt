@@ -1,4 +1,4 @@
-<% if Rails.env.production? %>
+<% if Dir.exist?('/etc/letsencrypt/live') %>
 server {
   server_name <%= Tenant.host %>;
   listen 80;
@@ -6,6 +6,16 @@ server {
 
   location / {
     return 301 https://<%= Tenant.host %>$request_uri;
+  }
+}
+
+server {
+  server_name www.<%= Tenant.host %>;
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  location / {
+    return 301 https://www.<%= Tenant.host %>$request_uri;
   }
 }
 
@@ -18,8 +28,28 @@ server {
     return 301 https://www.<%= Tenant.host %>$request_uri;
   }
 
-  ssl_certificate /etc/letsencrypt/live/back-office.pro/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/back-office.pro/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/<%= Tenant.domain %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= Tenant.domain %>/privkey.pem;
+  include /etc/letsencrypt/options-ssl-nginx.conf;
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+  server_name www.<%= Tenant.host %>;
+  listen [::]:443 ssl default_server;
+  listen 443 ssl default_server;
+
+  location / {
+    proxy_pass https://<%= Tenant.subdomain %>.test:8443;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+
+  ssl_certificate /etc/letsencrypt/live/<%= Tenant.domain %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= Tenant.domain %>/privkey.pem;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
@@ -30,7 +60,7 @@ server {
   listen [::]:80;
 
   location / {
-    proxy_pass http://<%= Tenant.host %>:<%= Tenant.port %>;
+    proxy_pass http://<%= Tenant.subdomain %>.test:8080;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
