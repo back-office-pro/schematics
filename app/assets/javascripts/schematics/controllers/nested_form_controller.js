@@ -12,7 +12,7 @@ export default class extends ApplicationController {
     const content = template
       .innerHTML
       .replace(/NEW_RECORD/g, timestamp)
-      .replace(/INDEX/g, index == null ? timestamp : index)
+      .replace(/INDEX/g, index ?? timestamp)
     target.insertAdjacentHTML('afterbegin', content)
   }
 
