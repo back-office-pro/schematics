@@ -50,8 +50,6 @@ class Tenant
       .module_parent_name
       .underscore
 
-    def production_name = "#{name}_production"
-
     def subdomain = name.dasherize
 
     def domain = 'back-office.pro'

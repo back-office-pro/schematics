@@ -13,6 +13,6 @@ test:
 
 production:
   <<: *default
-  database: <%= Tenant.production_name %>
+  database: <%= Tenant.name %>_production
   username: <%= Tenant.name %>
   password: <%= ENV['DATABASE_PASSWORD'] %>

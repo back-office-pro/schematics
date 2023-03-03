@@ -28,7 +28,6 @@ Rails.application.configure do
 
   # Active Job
   config.active_job.queue_adapter = Tenant.backend.queue_adapter
-  config.active_job.queue_name_prefix = Tenant.production_name
 
   # Cache
   config.cache_store = Tenant.backend.cache_store, Tenant.backend.cache_store_options
