@@ -27,7 +27,7 @@ module Application
     end
 
     def touch!(request)
-      return if request.format.json?
+      return unless request.format.html?
 
       update!(updated_at: ::Time.current)
     end
