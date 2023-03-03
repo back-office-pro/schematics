@@ -70,6 +70,8 @@ class Tenant
 
     def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
 
+    def letsencrypt_path = "/etc/letsencrypt/live/#{domain}"
+
     def customer_locale = customer
       &.preferred_locales
       &.first

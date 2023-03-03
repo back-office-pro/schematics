@@ -1,4 +1,4 @@
-<% if Dir.exist?("/etc/letsencrypt/live/#{Tenant.domain}") %>
+<% if Dir.exist?(Tenant.letsencrypt_path) %>
 server {
   server_name <%= Tenant.host %>;
   listen 80;
@@ -28,8 +28,8 @@ server {
     return 301 https://www.<%= Tenant.host %>$request_uri;
   }
 
-  ssl_certificate /etc/letsencrypt/live/<%= Tenant.domain %>/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/<%= Tenant.domain %>/privkey.pem;
+  ssl_certificate <%= Tenant.letsencrypt_path %>/fullchain.pem;
+  ssl_certificate_key <%= Tenant.letsencrypt_path %>/privkey.pem;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
@@ -48,8 +48,8 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-  ssl_certificate /etc/letsencrypt/live/<%= Tenant.domain %>/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/<%= Tenant.domain %>/privkey.pem;
+  ssl_certificate <%= Tenant.letsencrypt_path %>/fullchain.pem;
+  ssl_certificate_key <%= Tenant.letsencrypt_path %>/privkey.pem;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
