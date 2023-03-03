@@ -182,19 +182,19 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     git push: '-u origin main'
   end
 
+  def run_application
+    return if container?
+    return if env.development?
+
+    run "puma-dev link -n #{app_name}"
+  end
+
   def deploy_nginx_subdomain
     return if container?
     return if env.development?
     return unless Dir.exist?('/etc/nginx')
 
     rails_command 'schematics:nginx:deploy', env:
-  end
-
-  def run_application
-    return if container?
-    return if env.development?
-
-    run "puma-dev link -n #{app_name}"
   end
 
   private
