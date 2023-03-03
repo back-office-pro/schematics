@@ -1,4 +1,4 @@
-<% if Dir.exist?('/etc/letsencrypt/live') %>
+<% if Dir.exist?("/etc/letsencrypt/live/#{Tenant.domain}") %>
 server {
   server_name <%= Tenant.host %>;
   listen 80;
