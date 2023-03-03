@@ -40,7 +40,7 @@ server {
   listen 443 ssl default_server;
 
   location / {
-    proxy_pass https://<%= Tenant.subdomain %>.test:8443;
+    proxy_pass https://<%= Tenant.subdomain %>.localhost;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
@@ -60,7 +60,7 @@ server {
   listen [::]:80;
 
   location / {
-    proxy_pass http://<%= Tenant.subdomain %>.test:8080;
+    proxy_pass http://<%= Tenant.subdomain %>.localhost;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
