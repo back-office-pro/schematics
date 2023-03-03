@@ -56,7 +56,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def reset_database
     return if container?
 
-    rails_command 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:reset', env:
+    rails_command 'db:reset', env:
   end
 
   def generate_schematics
@@ -204,16 +204,13 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     super.unshift File.expand_path('templates', __dir__)
   end
 
-  def include_all_railties? = true
-
   def env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
 
   def default_options = {
     database: 'postgresql',
     skip_test: true,
     skip_keeps: true,
-    skip_hotwire: true,
-    dummy_app: true
+    skip_hotwire: true
   }
 
   def db_username = app_name.underscore
