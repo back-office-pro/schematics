@@ -2,4 +2,4 @@ name: Build
 on: [push]
 jobs:
   shared:
-    uses: maksjs/schematics/.github/workflows/shared.yml@main
+    uses: back-office-pro/shared-workflows/.github/workflows/build.yml@main
