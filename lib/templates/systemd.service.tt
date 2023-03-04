@@ -1,0 +1,12 @@
+[Unit]
+Description=<%= Tenant.human %> HTTP server
+After=network.target
+
+[Service]
+User=deploy
+WorkingDirectory=/home/deploy/<%= Tenant.subdomain %>
+ExecStart=/home/deploy/<%= Tenant.subdomain %>/bin/rails server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

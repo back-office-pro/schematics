@@ -182,11 +182,12 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     git push: '-u origin main'
   end
 
-  def run_application
+  def deploy_systemd_service
     return if container?
     return if env.development?
+    return unless Dir.exist?('/etc/systemd')
 
-    run "puma-dev link -n #{app_name}"
+    rails_command 'schematics:systemd:deploy', env:
   end
 
   def deploy_nginx_subdomain
