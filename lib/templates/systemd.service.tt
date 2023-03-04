@@ -3,8 +3,9 @@ Description=<%= Tenant.human %> HTTP server
 After=network.target
 
 [Service]
-User=deploy
+User=root
 WorkingDirectory=/home/deploy/<%= Tenant.subdomain %>
+EnvironmentFile=/home/deploy/<%= Tenant.subdomain %>/.env
 ExecStart=/home/deploy/<%= Tenant.subdomain %>/bin/rails server
 Restart=always
 
