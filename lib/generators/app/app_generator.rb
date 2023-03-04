@@ -8,6 +8,7 @@ require 'pg'
 require 'rails/generators/rails/app/app_generator'
 
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
+  DEFAULT_PORT = 3000
   source_root superclass.source_root
 
   def initialize(generator, options = {})
@@ -250,4 +251,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     .getvalue(0, 0)
     .to_i
     .next
+
+  def port = DEFAULT_PORT + database_index
 end
