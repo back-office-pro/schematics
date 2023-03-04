@@ -73,7 +73,7 @@ class Tenant
 
     def systemd_service_path = "/etc/systemd/system/#{systemd_filename}"
 
-    def systemd_filename = "#{subdomain}.service"
+    def systemd_filename = "puma-#{subdomain}.service"
 
     def ssl? = Dir.exist?(ssl_path)
 
