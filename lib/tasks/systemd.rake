@@ -6,8 +6,8 @@ namespace :schematics do
     task deploy: :environment do
       File.write Tenant.systemd_service_path, Schematics::Engine.content_for('systemd.service')
       `systemctl daemon-reload`
-      `systemctl enable #{Tenant.subdomain}.service`
-      `systemctl start #{Tenant.subdomain}.service`
+      `systemctl enable #{Tenant.systemd_filename}`
+      `systemctl start #{Tenant.systemd_filename}`
     end
   end
 end

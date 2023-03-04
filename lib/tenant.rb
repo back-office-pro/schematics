@@ -71,7 +71,9 @@ class Tenant
 
     def ssl_path = "/etc/letsencrypt/live/#{domain}"
 
-    def systemd_service_path = "/etc/systemd/system/#{subdomain}.service"
+    def systemd_service_path = "/etc/systemd/system/#{systemd_filename}"
+
+    def systemd_filename = "#{subdomain}.service"
 
     def ssl? = Dir.exist?(ssl_path)
 
