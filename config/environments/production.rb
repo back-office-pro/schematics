@@ -9,7 +9,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Security
-  config.force_ssl = Dir.exist?(Tenant.letsencrypt_path)
+  config.force_ssl = Tenant.ssl?
   config.require_master_key = true
 
   # Assets

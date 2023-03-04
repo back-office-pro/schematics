@@ -68,7 +68,11 @@ class Tenant
 
     def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
 
-    def letsencrypt_path = "/etc/letsencrypt/live/#{domain}"
+    def ssl_path = "/etc/letsencrypt/live/#{domain}"
+
+    def systemd_service_path = "/etc/systemd/system/#{subdomain}.service"
+
+    def ssl? = Dir.exist?(ssl_path)
 
     def customer_locale = customer
       &.preferred_locales
