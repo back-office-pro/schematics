@@ -1,4 +1,8 @@
-<% if Dir.exist?(Tenant.letsencrypt_path) %>
+<% if Tenant.ssl? %>
+upstream <%= Tenant.name %> {
+  server unix:///<%= Tenant.name %>/tmp/puma.sock;
+}
+
 server {
   server_name <%= Tenant.host %>;
   listen 80;
@@ -28,8 +32,8 @@ server {
     return 301 https://www.<%= Tenant.host %>$request_uri;
   }
 
-  ssl_certificate <%= Tenant.letsencrypt_path %>/fullchain.pem;
-  ssl_certificate_key <%= Tenant.letsencrypt_path %>/privkey.pem;
+  ssl_certificate <%= Tenant.ssl_path %>/fullchain.pem;
+  ssl_certificate_key <%= Tenant.ssl_path %>/privkey.pem;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
@@ -40,7 +44,7 @@ server {
   listen 443 ssl default_server;
 
   location / {
-    proxy_pass https://<%= Tenant.subdomain %>.localhost;
+    proxy_pass http://<%= Tenant.name %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
@@ -48,8 +52,8 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-  ssl_certificate <%= Tenant.letsencrypt_path %>/fullchain.pem;
-  ssl_certificate_key <%= Tenant.letsencrypt_path %>/privkey.pem;
+  ssl_certificate <%= Tenant.ssl_path %>/fullchain.pem;
+  ssl_certificate_key <%= Tenant.ssl_path %>/privkey.pem;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
@@ -60,7 +64,7 @@ server {
   listen [::]:80;
 
   location / {
-    proxy_pass http://<%= Tenant.subdomain %>.localhost;
+    proxy_pass http://<%= Tenant.name %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
