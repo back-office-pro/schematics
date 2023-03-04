@@ -11,6 +11,7 @@ class Tenant
   class << self
     DEFAULT_BACKEND = 'postgresql'
     DEFAULT_SEARCH_ENGINE = 'postgresql'
+    DEFAULT_PORT = 3000
     SEMAPHORE = Mutex.new.freeze
 
     delegate :id, :email, to: :customer, prefix: true, allow_nil: true
@@ -85,6 +86,10 @@ class Tenant
       'localhost'
     end
 
+    def env_port = ENV
+      .fetch('PORT', DEFAULT_PORT)
+      .to_i
+
     private
 
     def data
@@ -109,11 +114,7 @@ class Tenant
     def from = "no-reply@#{host}"
 
     def port
-      return if Rails.env.production?
-
-      ENV
-        .fetch('PORT', 3000)
-        .to_i
+      env_port unless Rails.env.production?
     end
   end
 end
