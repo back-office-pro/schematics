@@ -69,17 +69,16 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
+      def content_for(name)
+        ERB
+          .new(File.read(root.join("lib/templates/#{name}.tt")))
+          .result
+      end
+
       def config_for(name)
-        case name
-        when :nginx
-          ERB
-            .new(File.read(root.join('config', "#{name}.conf.tt")))
-            .result
-        else
-          ActiveSupport::ConfigurationFile
-            .parse(root.join('config', "#{name}.yml"))
-            .deep_symbolize_keys
-        end
+        ActiveSupport::ConfigurationFile
+          .parse(root.join('config', "#{name}.yml"))
+          .deep_symbolize_keys
       end
 
       def credentials = ActiveSupport::EncryptedConfiguration.new(
