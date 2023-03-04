@@ -1,8 +1,4 @@
 <% if Tenant.ssl? %>
-upstream <%= Tenant.name %> {
-  server unix:///<%= Tenant.name %>/tmp/puma.sock;
-}
-
 server {
   server_name <%= Tenant.host %>;
   listen 80;
@@ -44,7 +40,7 @@ server {
   listen 443 ssl default_server;
 
   location / {
-    proxy_pass http://<%= Tenant.name %>;
+    proxy_pass http://localhost:<%= ENV['PORT'] %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
@@ -64,7 +60,7 @@ server {
   listen [::]:80;
 
   location / {
-    proxy_pass http://<%= Tenant.name %>;
+    proxy_pass http://localhost:<%= ENV['PORT'] %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
