@@ -1066,8 +1066,9 @@
         "options": {
           "default": {
             "users": 1,
+            "storage": 1,
             "entities": 1,
-            "storage": 1
+            "databases": 1
           }
         }
       }
