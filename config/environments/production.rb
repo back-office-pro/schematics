@@ -21,7 +21,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Public File Server
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = true
 
   # Active Storage
   config.active_storage.service = :amazon
