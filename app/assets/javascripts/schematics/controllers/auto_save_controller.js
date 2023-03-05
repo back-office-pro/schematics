@@ -58,7 +58,7 @@ export default class extends ApplicationController {
   get params () {
     return {
       draft: {
-        name: this.formTarget.id,
+        action: this.formTarget.getAttribute('action'),
         data: this.filteredFormData
       }
     }

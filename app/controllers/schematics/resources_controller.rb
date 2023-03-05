@@ -107,7 +107,7 @@ module Schematics
 
     def new
       @resource = model_class.new
-      @draft = current_user.drafts.find_by(name: "new_#{entity.table_name}")
+      @draft = current_user.drafts.find_by(action: polymorphic_path(@resource))
     end
 
     def edit; end

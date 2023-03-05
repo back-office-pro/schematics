@@ -621,7 +621,7 @@
     },
     "attributes": [
       {
-        "name": "name",
+        "name": "action",
         "type": "string",
         "options": {
           "required": true
