@@ -71,7 +71,7 @@ module Schematics
     class << self
       def content_for(name)
         ERB
-          .new(File.read(root.join("lib/templates/#{name}.tt")))
+          .new(root.join("lib/templates/#{name}.tt").read)
           .result
       end
 

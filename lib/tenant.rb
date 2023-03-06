@@ -65,17 +65,17 @@ class Tenant
 
     def default_mailer_options = { from: }
 
-    def nginx_sites_available_path = "/etc/nginx/sites-available/#{subdomain}"
+    def nginx_sites_available_path = Pathname.new("/etc/nginx/sites-available/#{subdomain}")
 
-    def nginx_sites_enabled_path = "/etc/nginx/sites-enabled/#{subdomain}"
+    def nginx_sites_enabled_path = Pathname.new("/etc/nginx/sites-enabled/#{subdomain}")
 
-    def ssl_path = "/etc/letsencrypt/live/#{domain}"
+    def ssl_path = Pathname.new("/etc/letsencrypt/live/#{domain}")
 
-    def systemd_service_path = "/etc/systemd/system/#{systemd_filename}"
+    def systemd_service_path = Pathname.new("/etc/systemd/system/#{systemd_filename}")
 
     def systemd_filename = "puma-#{subdomain}.service"
 
-    def ssl? = Dir.exist?(ssl_path)
+    def ssl? = ssl_path.exist?
 
     def customer_locale = customer
       &.preferred_locales
