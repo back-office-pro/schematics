@@ -7,6 +7,7 @@ module Application
     def load!
       PaperTrail.request(enabled: false) do
         update!(Load.call.data)
+        reload && update_env_file!
       end
     end
 
@@ -19,7 +20,7 @@ module Application
       .size
 
     def quota = Data
-      .define(:entities, :storage, :users)
+      .define(:entities, :storage, :users, :databases)
       .new(**metadata)
 
     def quota_entities_exceeded?
@@ -59,5 +60,30 @@ module Application
     def users_size = ::User
       .all
       .size
+
+    private
+
+    def search_engine
+      return 'elasticsearch' if quota.databases > 2
+
+      'postgresql'
+    end
+
+    def backend
+      return 'redis' if quota.databases > 1
+
+      'postgresql'
+    end
+
+    def update_env_file!
+      return unless metadata_previously_changed?
+
+      filepath = Rails.root.join('.env')
+      filepath.write filepath
+        .read
+        .gsub(/BACKEND=(.*)/, "BACKEND=#{backend}")
+        .gsub(/SEARCH_ENGINE=(.*)/, "SEARCH_ENGINE=#{search_engine}")
+      FileUtils.touch Rails.root.join('tmp/restart.txt')
+    end
   end
 end
