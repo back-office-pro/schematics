@@ -17,5 +17,5 @@ RSpec.describe Application::Permission::FeaturesQuery do
 
   before { permissions }
 
-  its(:call) { is_expected.to contain_exactly(*expected_permissions) }
+  its(:call) { is_expected.to match_array(expected_permissions) }
 end
