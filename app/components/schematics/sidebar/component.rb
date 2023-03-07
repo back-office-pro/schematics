@@ -3,6 +3,8 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
+      DENYLIST = [::Meeting, ::Message, ::Task].freeze
+
       def data = {
         controller: 'tooltip hotkey',
         'bs-toggle': 'tooltip',
@@ -10,12 +12,14 @@ module Schematics
         'bs-container': '.sidebar'
       }
 
-      def entities = ::Tenant
+      def model_classes = ::Tenant
         .schema
         .entities
         .reject(&:hidden?)
-        .select { can?(:index, _1.model_class) }
-        .sort_by { _1.model_class.human_name }
+        .filter_map(&:model_class)
+        .excluding(DENYLIST)
+        .select { can?(:index, _1) }
+        .sort_by(&:human_name)
 
       def toggled?
         preferences(:sidebar_toggled, false)
