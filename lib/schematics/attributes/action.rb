@@ -7,12 +7,11 @@ module Schematics
       def format(value)
         return unless value
 
-        scope = [:activerecord, :attributes, entity.name, name.pluralize]
-        translate(value.to_sym, default: nil, scope:) ||
-          translate('activerecord.events')
-            .values
-            .reduce(:merge)
-            .fetch(value.to_sym, value.humanize)
+        translate(
+          value.to_sym,
+          default: nil,
+          scope: [:activerecord, :attributes, entity.name, name.pluralize]
+        ) || translate(value.to_sym, default: value.humanize, scope: %i[activerecord events])
       end
 
       def icon = :hand_rock
