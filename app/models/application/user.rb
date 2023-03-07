@@ -32,9 +32,5 @@ module Application
     def to_s
       super.presence || email
     end
-
-    def typeahead_history(model, name)
-      TypeaheadHistoryQuery.call(searches, model, name)
-    end
   end
 end
