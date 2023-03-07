@@ -7,11 +7,10 @@
           - events.each_value do |action|
             th.text-primary = action
       tbody
-        - entities.each do |entity|
-          - model_class = entity.model_class
+        - model_classes.each do |model_class|
           tr
             td
-              = fa_icon entity.icon, class: 'fa-fw me-2 text-muted'
+              = fa_icon model_class.entity.icon, class: 'fa-fw me-2 text-muted'
               = model_class.human_name_plural.humanize
             - events.each_key do |action|
               - preference = "#{action}_#{model_class}"
