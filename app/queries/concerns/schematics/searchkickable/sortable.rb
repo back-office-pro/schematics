@@ -10,7 +10,7 @@ module Schematics
         params
           &.split(',')
           &.map { { _1 => { order: sort_order[_1.match?(/\A[+-]/) ? _1.slice!(0) : '+'] } } }
-          &.reduce(:merge) ||
+          &.reduce(&:merge) ||
           { implicit_order_column.to_sym => { order: :desc, unmapped_type: 'long' } }
       end
 
