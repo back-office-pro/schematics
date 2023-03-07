@@ -7,7 +7,7 @@ module Application
     def load!
       PaperTrail.request(enabled: false) do
         update!(Load.call.data)
-        reload && update_env_file!
+        update_env_file if metadata_previously_changed?
       end
     end
 
@@ -75,9 +75,8 @@ module Application
       'postgresql'
     end
 
-    def update_env_file!
-      return unless metadata_previously_changed?
-
+    def update_env_file
+      reload
       filepath = Rails.root.join('.env')
       filepath.write filepath
         .read
