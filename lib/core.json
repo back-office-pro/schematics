@@ -207,6 +207,7 @@
     "name": "configuration",
     "type": "singleton",
     "options": {
+      "hidden": true,
       "icon": "gear",
       "descriptor": "company_name"
     },
