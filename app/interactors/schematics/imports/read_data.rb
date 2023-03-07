@@ -35,7 +35,7 @@ module Schematics
       end
 
       def transform_key(key)
-        i18n_translations
+        translations
           &.invert
           &.dig(key)
       end
@@ -51,7 +51,7 @@ module Schematics
             .joins(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
         when Schematics::Attributes::Enum
-          i18n_translations
+          translations
             &.dig(field.name.pluralize.to_sym)
             &.invert
             &.dig(value)
@@ -70,10 +70,8 @@ module Schematics
         end
       end
 
-      def i18n_translations
-        @i18n_translations ||= ::I18n
-                               .t('.')
-                               .dig(i18n_scope, :attributes, model.underscore.to_sym)
+      def translations
+        @translations ||= ::I18n.t model.underscore.to_sym, scope: [i18n_scope, :attributes]
       end
     end
   end
