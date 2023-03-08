@@ -12,7 +12,7 @@
             data: data.merge('hotkey-shortcut-value': "Control+#{model_class.human_name.first}") do
             = fa_icon model_class.entity.icon, size: '2x'
             .mt-2.d-none class=('d-md-block' unless toggled?) = model_class.human_name_plural.humanize
-        - if !model_class.is_a?(Singleton) && is_active_link?(polymorphic_path(model_class))
+        - if is_active_link?(polymorphic_path(model_class))
           - model_class.entity.enum_attributes.each do |attribute|
             li.nav-item.text-center.mw-100.mb-2.px-3.d-none class=('d-md-block' unless toggled?)
               ul.list-group
