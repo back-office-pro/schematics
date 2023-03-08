@@ -4,7 +4,7 @@ module Application
   module Permission
     class FeaturesQuery < Schematics::ApplicationQuery
       def call = where(model: %w[Import Message Comment Meeting Task])
-        .or(where(model: 'Stat', action: 'show'))
+        .or(where(model: 'Chart', action: 'show'))
     end
   end
 end
