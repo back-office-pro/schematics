@@ -63,7 +63,6 @@ module Schematics
     def viewer_preferences = ::Tenant
       .schema
       .entities
-      .reject(&:hidden?)
       .flat_map(&:listable_elements)
       .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
   end
