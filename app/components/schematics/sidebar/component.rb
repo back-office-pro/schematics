@@ -3,7 +3,7 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
-      DENYLIST = [::Meeting, ::Message, ::Task].freeze
+      DENYLIST = [::Message, ::Task].freeze
 
       def data = {
         controller: 'tooltip hotkey',
