@@ -13,6 +13,9 @@ RSpec.describe Schematics::SessionAbility do
   it { is_expected.not_to be_able_to(:create, Session) }
   it { is_expected.not_to be_able_to(:read, Session) }
   it { is_expected.not_to be_able_to(:destroy, Session) }
+  it { is_expected.not_to be_able_to(:new, Session) }
+  it { is_expected.not_to be_able_to(:duplicate, Session) }
+  it { is_expected.not_to be_able_to(:import, Session) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
@@ -20,13 +23,19 @@ RSpec.describe Schematics::SessionAbility do
     it { is_expected.to be_able_to(:create, Session) }
     it { is_expected.to be_able_to(:read, Session) }
     it { is_expected.to be_able_to(:destroy, Session) }
+    it { is_expected.not_to be_able_to(:new, Session) }
+    it { is_expected.not_to be_able_to(:duplicate, Session) }
+    it { is_expected.not_to be_able_to(:import, Session) }
   end
 
   context 'when user is guest' do
     let(:user) { Schematics::Guest::User.new }
 
     it { is_expected.to be_able_to(:create, Session) }
+    it { is_expected.to be_able_to(:new, Session) }
     it { is_expected.not_to be_able_to(:read, Session) }
     it { is_expected.not_to be_able_to(:destroy, Session) }
+    it { is_expected.not_to be_able_to(:duplicate, Session) }
+    it { is_expected.not_to be_able_to(:import, Session) }
   end
 end
