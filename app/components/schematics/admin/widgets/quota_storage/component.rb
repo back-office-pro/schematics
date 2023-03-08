@@ -13,6 +13,10 @@ module Schematics
           def icon = :hdd
 
           def title = t('.title')
+
+          def render?
+            can?(:update, ::Licence)
+          end
         end
       end
     end

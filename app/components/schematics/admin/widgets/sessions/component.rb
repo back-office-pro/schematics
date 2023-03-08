@@ -10,6 +10,10 @@ module Schematics
           def caption = t('.caption')
 
           def title = t('.title')
+
+          def render?
+            can?(:index, ::Session)
+          end
         end
       end
     end

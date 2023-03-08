@@ -12,6 +12,10 @@ module Schematics
                    to: '::Licence.instance'
 
           def title = t('.title')
+
+          def render?
+            can?(:update, ::Licence)
+          end
         end
       end
     end

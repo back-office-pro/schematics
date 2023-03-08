@@ -12,6 +12,10 @@ module Schematics
           end
 
           def target = 'confirm-dialog-cancel-licence'
+
+          def render?
+            can?(:update, ::Licence)
+          end
         end
       end
     end
