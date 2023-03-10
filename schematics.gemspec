@@ -116,6 +116,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '~> 1.4.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 3.0.0.rc3'
+  spec.add_dependency 'view_component', '~> 3.0.0.rc4'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
