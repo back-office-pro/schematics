@@ -25,6 +25,10 @@ module Schematics
 
         version_path(version)
       end
+
+      def render?
+        can?(:show, version)
+      end
     end
   end
 end

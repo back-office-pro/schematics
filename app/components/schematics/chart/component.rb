@@ -19,6 +19,10 @@ module Schematics
         super
         @chart = chart
       end
+
+      def render?
+        can?(:show, @chart)
+      end
     end
   end
 end

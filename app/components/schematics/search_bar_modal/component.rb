@@ -13,6 +13,10 @@ module Schematics
         blur->search-bar#hideHistory
         blur->search-bar#hideResults
       ].join(' ')
+
+      def render?
+        can?(:create, ::Search)
+      end
     end
   end
 end

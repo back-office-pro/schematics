@@ -10,6 +10,10 @@ module Schematics
         super
         @stat = stat
       end
+
+      def render?
+        can?(:show, @stat)
+      end
     end
   end
 end

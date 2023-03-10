@@ -10,6 +10,10 @@ module Schematics
           'bs-toggle': 'modal',
           'bs-target': '#search-bar-modal'
         }
+
+        def render?
+          can?(:create, ::Search)
+        end
       end
     end
   end
