@@ -7,11 +7,17 @@ module Application
     def load!
       PaperTrail.request(enabled: false) do
         update!(Load.call.data)
-        update_env_file if metadata_previously_changed?
+        reload && update_env_file if metadata_previously_changed?
       end
     end
 
-    def active? = active
+    def after_enable
+      ::Stripe::Subscription.update(Load.call.id, cancel_at_period_end: false)
+    end
+
+    def after_cancel
+      ::Stripe::Subscription.update(Load.call.id, cancel_at_period_end: true)
+    end
 
     def entities_size = ::Tenant
       .schema
@@ -76,7 +82,6 @@ module Application
     end
 
     def update_env_file
-      reload
       filepath = Rails.root.join('.env')
       filepath.write filepath
         .read
