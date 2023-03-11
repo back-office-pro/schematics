@@ -19,7 +19,7 @@ module Schematics
       merge SearchAbility.new
       merge RoleAbility.new
       merge FeatureFlagAbility.new
-      merge LicenceAbility.new
+      merge LicenceAbility.new(user)
       merge SessionAbility.new(user)
     end
   end

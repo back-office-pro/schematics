@@ -4,15 +4,18 @@ module Schematics
   class LicenceAbility < ApplicationAbility
     delegate :quota_users_exceeded?,
              :quota_storage_exceeded?,
-             :active?,
+             :state_inactive?,
              to: '::Licence.instance',
              private: true
 
-    def initialize
+    def initialize(user)
       super
       cannot :create, ::User if quota_users_exceeded?
       cannot :create, ::ActiveStorage::Attachment if quota_storage_exceeded?
-      cannot %i[create update], :all unless active?
+      cannot %i[create update], :all if state_inactive?
+      return unless user.admin?
+
+      can %i[cancel enable], ::Licence
     end
   end
 end
