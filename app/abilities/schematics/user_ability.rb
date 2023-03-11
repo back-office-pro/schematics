@@ -10,7 +10,6 @@ module Schematics
 
       can :read, :admin_dashboard
       can :impersonate, ::User
-      can :update, ::Licence
       cannot :impersonate, ::User, role: ::Role.admin
     end
   end
