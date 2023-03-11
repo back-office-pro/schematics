@@ -4,9 +4,5 @@
       .row.g-0.align-items-center
         .col.text-center.p-4
           = fa_icon icon, size: '3x', class: 'd-inline-block'
-          h5.my-4 = model
-          = form_with model:, method: :patch, class: 'd-inline'
-            = render Schematics::ConfirmDialog::Component.new(target:, text: t('.warning'))
-          button.btn.btn-danger.btn-icon-split.btn-sm data-bs-toggle='modal' data-bs-target="##{target}"
-            span.icon = fa_icon :ban
-            span.text = t('.cancel')
+          h5.my-4 = resource
+          = render Schematics::Viewer::EventButtonGroup::Component.new(resource:, compact: false)
