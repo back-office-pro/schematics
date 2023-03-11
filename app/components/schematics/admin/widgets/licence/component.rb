@@ -7,14 +7,14 @@ module Schematics
         class Component < ApplicationComponent
           delegate :icon, to: '::Licence.entity'
 
-          def model
-            @model ||= ::Licence.instance
+          def resource
+            @resource ||= ::Licence.instance
           end
 
           def target = 'confirm-dialog-cancel-licence'
 
           def render?
-            can?(:update, ::Licence)
+            can?(:cancel, ::Licence)
           end
         end
       end

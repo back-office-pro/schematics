@@ -15,7 +15,7 @@ module Schematics
           def title = t('.title')
 
           def render?
-            can?(:update, ::Licence)
+            can?(:cancel, ::Licence)
           end
         end
       end
