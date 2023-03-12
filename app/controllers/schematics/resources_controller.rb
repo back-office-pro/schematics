@@ -9,9 +9,12 @@ module Schematics
     include Documentable
     include Versionable
     include Lockable
+    include Redirectable
 
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
+    before_action :redirect_to_resource_path, only: :show
+    before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
     before_action :read!, only: :show
     before_action :log_search!, only: :index
@@ -174,7 +177,7 @@ module Schematics
         respond_to do |format|
           format.html do
             notice = tscope(result.message, event: event.human.downcase)
-            redirect_back_or_to polymorphic_path(@resource), notice:
+            redirect_back_or_to trigger_redirect_path, notice:
           end
           format.json
         end
@@ -236,9 +239,6 @@ module Schematics
                   .then_tap { _1.with_deleted if request.delete? }
                   .load_async
                   .finder(params[:id])
-      return if request.path.start_with?(polymorphic_path(@resource))
-
-      redirect_to polymorphic_path(@resource), status: :moved_permanently
     end
 
     def set_resources
@@ -262,5 +262,6 @@ module Schematics
     end
 
     alias update_redirect_path create_redirect_path
+    alias trigger_redirect_path create_redirect_path
   end
 end
