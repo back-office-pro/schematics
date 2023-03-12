@@ -4,21 +4,6 @@ module Application
   module LicencesController
     extend ActiveSupport::Concern
 
-    def update
-      result = Licence::Update.call
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to schematics.admin_path, notice: t(result.message) }
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to schematics.admin_path, alert: t(result.message) }
-          format.json do
-            render json: { errors: [t(result.message)] }, status: :unprocessable_entity
-          end
-        end
-      end
-    end
+    def trigger_redirect_path = admin_path
   end
 end

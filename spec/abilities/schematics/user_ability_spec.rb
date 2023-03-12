@@ -11,7 +11,8 @@ RSpec.describe Schematics::UserAbility do
   let(:admin_role) { Role.create!(name: 'Admin') }
 
   it { is_expected.not_to be_able_to(:read, :admin_dashboard) }
-  it { is_expected.not_to be_able_to(:update, Licence) }
+  it { is_expected.not_to be_able_to(:impersonate, User) }
+  it { is_expected.not_to be_able_to(:impersonate, user) }
   it { is_expected.not_to be_able_to(:destroy, user) }
   it { is_expected.not_to be_able_to(:archive, user) }
 
@@ -19,6 +20,7 @@ RSpec.describe Schematics::UserAbility do
     let(:role) { admin_role }
 
     it { is_expected.to be_able_to(:read, :admin_dashboard) }
-    it { is_expected.to be_able_to(:update, Licence) }
+    it { is_expected.to be_able_to(:impersonate, User) }
+    it { is_expected.not_to be_able_to(:impersonate, user) }
   end
 end

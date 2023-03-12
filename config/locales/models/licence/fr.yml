@@ -3,13 +3,21 @@ fr:
   activerecord:
     attributes:
       licence:
-        active: Active
         metadata: Métadonnées
         plan: Plan
         plans:
           basic: Licence basique
           premium: Licence premium
           pro: Licence pro
+        state: Statut
+        states:
+          active: Active
+          canceled: Annulée
+          inactive: Inactive
+    events:
+      licence:
+        cancel: Arrêter abonnement
+        enable: Réactiver abonnement
     models:
       licence:
         gender: female

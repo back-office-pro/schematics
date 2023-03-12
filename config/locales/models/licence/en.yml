@@ -3,13 +3,21 @@ en:
   activerecord:
     attributes:
       licence:
-        active: Active
         metadata: Metadata
         plan: Plan
         plans:
           basic: Basic licence
           premium: Premium licence
           pro: Pro licence
+        state: State
+        states:
+          active: Active
+          canceled: Canceled
+          inactive: Inactive
+    events:
+      licence:
+        cancel: Cancel subscription
+        enable: Enable back subscription
     models:
       licence:
         gender: female

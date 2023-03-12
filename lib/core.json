@@ -1037,15 +1037,14 @@
       "descriptor": "plan",
       "icon": "id_badge",
       "hidden": true,
-      "actions": [
-        "update"
-      ]
+      "actions": []
     },
     "attributes": [
       {
         "name": "plan",
         "type": "enum",
         "options": {
+          "readonly": true,
           "default": "premium",
           "values": [
             "basic",
@@ -1055,16 +1054,37 @@
         }
       },
       {
-        "name": "active",
-        "type": "boolean",
+        "name": "state",
+        "type": "state_machine",
         "options": {
-          "default": true
+          "direct_assignment": true,
+          "default": "active",
+          "values": [
+            "active",
+            "canceled",
+            "inactive"
+          ],
+          "events": [
+            {
+              "name": "cancel",
+              "icon": "ban",
+              "from": "active",
+              "to": "canceled"
+            },
+            {
+              "name": "enable",
+              "icon": "check",
+              "from": "canceled",
+              "to": "active"
+            }
+          ]
         }
       },
       {
         "name": "metadata",
         "type": "jsonb",
         "options": {
+          "readonly": true,
           "default": {
             "users": 1,
             "storage": 1,
