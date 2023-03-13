@@ -17,7 +17,7 @@ export default class extends DropdownController {
     })
   }
 
-  get colors() {
+  get colors () {
     return ['primary', 'secondary', 'success', 'danger', 'warning']
   }
 }
