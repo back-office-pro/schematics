@@ -46,7 +46,7 @@
     = fa_icon(:xmark, class: 'text-danger')
 - when Schematics::Attributes::StateMachine
   h5.mb-0
-    span.badge.bg-secondary = field.format(value)
+    span.badge class="bg-#{badge_color}" = field.format(value)
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country

@@ -20,6 +20,11 @@ module Schematics
           .html_safe # rubocop:disable Rails/OutputSafety
       end
 
+      def badge_color = field
+        .events
+        .find { _1.to == value }
+        .try(:color) || :secondary
+
       def value
         resource.public_send(field.name)
       end

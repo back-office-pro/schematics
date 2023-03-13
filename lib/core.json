@@ -829,12 +829,14 @@
             {
               "name": "complete",
               "icon": "check",
+              "color": "success",
               "from": "in_progress",
               "to": "completed"
             },
             {
               "name": "abort",
               "icon": "ban",
+              "color": "danger",
               "from": [
                 "pending",
                 "in_progress"
@@ -1068,12 +1070,14 @@
             {
               "name": "cancel",
               "icon": "ban",
+              "color": "danger",
               "from": "active",
               "to": "canceled"
             },
             {
               "name": "enable",
               "icon": "check",
+              "color": "success",
               "from": "canceled",
               "to": "active"
             }

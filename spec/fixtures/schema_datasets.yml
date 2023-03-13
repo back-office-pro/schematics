@@ -131,11 +131,13 @@ one:
             events:
               - name: close
                 icon: xmark
+                color: danger
                 from: pending
                 to: closed
                 callback: $in_stock = false
               - name: refuse
                 icon: ban
+                color: danger
                 from: pending
                 to: refused
                 callback: $error.foo = true

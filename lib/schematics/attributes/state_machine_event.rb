@@ -11,10 +11,14 @@ module Schematics
 
       delegate :to_str, to: :trigger, prefix: true
       attr_accessor :entity, :name, :from, :to, :callback
-      attr_writer :icon
+      attr_writer :icon, :color
 
       def icon
         @icon&.to_sym || :location_arrow
+      end
+
+      def color
+        @color&.to_sym || :primary
       end
 
       def human

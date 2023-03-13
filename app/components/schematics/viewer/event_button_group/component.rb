@@ -10,13 +10,15 @@ module Schematics
 
         def compact? = compact
 
-        def css_classes = [
-          'btn',
-          'btn-primary',
-          'btn-sm',
-          { 'btn-icon-split': !compact? },
-          { 'ms-2': !compact? }
-        ]
+        def css_classes_for(event)
+          [
+            'btn',
+            "btn-#{event.color}",
+            'btn-sm',
+            { 'btn-icon-split': !compact? },
+            { 'ms-2': !compact? }
+          ]
+        end
 
         def data
           return { turbo_method: :patch, turbo_frame: '_top' } unless compact?
