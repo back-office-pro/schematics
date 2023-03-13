@@ -4,6 +4,7 @@ fr:
     attributes:
       schematics/attributes/state_machine_event:
         callback: Fonction
+        color: Couleur
         from: De
         icon: Icône
         name: Nom
