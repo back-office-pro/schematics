@@ -11,7 +11,7 @@ export default class extends DropdownController {
       maxOptions: this.colors.length,
       options: this.colors.map(value => ({ value, text: value })),
       render: {
-        option: ({ value }, escape) => `<div class='bg-${escape(value)} p-3'></div>`,
+        option: ({ value }, escape) => `<div><div class='bg-${escape(value)} rounded p-3'></div></div>`,
         item: ({ value }, escape) => `<div class='bg-${escape(value)}'></div>`
       }
     })
