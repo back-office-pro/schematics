@@ -23,6 +23,11 @@ module Schematics
               inclusion: { in: ACTIONS }
     attr_accessor :action, :callback
 
+    def method_name = [action, id]
+      .join('_')
+      .underscore
+      .to_sym
+
     def to_str
       case [action, callback]
       in ['before_create', *] | ['before_save', *] | ['before_destroy', *]
@@ -58,10 +63,6 @@ module Schematics
     end
 
     private
-
-    def method_name = [action, id]
-      .join('_')
-      .underscore
 
     def method_body
       return unless callback

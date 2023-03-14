@@ -17,8 +17,8 @@ module Schematics
         it { is_expected.to be_a(Loadable) }
 
         triggers.each do |trigger|
-          it { is_expected.to respond_to(trigger.action.to_sym) }
-          it { is_expected.to callback(trigger.action).public_send(trigger.action.split('_')) }
+          it { is_expected.to respond_to(trigger.method_name) }
+          it { is_expected.to callback(trigger.method_name).public_send(trigger.action.split('_')) }
         end
 
         attributes
@@ -126,6 +126,10 @@ module Schematics
                   .tap { _1.is_greater_than(-element.bound) if element.precision }
             when Attributes::Integer
               is_expected.to validate_numericality_of(element.name.to_sym).only_integer
+            when Attributes::StateMachine
+              element.events.each do |event|
+                is_expected.to respond_to(event.action)
+              end
             when Attributes::Enum
               is_expected
                 .to define_enum_for(element.name.to_sym)
@@ -156,9 +160,6 @@ module Schematics
               is_expected.to have_many_attached(element.name.to_sym)
             when Attributes::Attachment
               is_expected.to have_one_attached(element.name.to_sym)
-            when Attributes::StateMachineEvent
-              is_expected.to respond_to(:"after_#{element.name}")
-              is_expected.to callback(:"after_#{element.name}").after(element.name.to_sym)
             when Attributes::Association
               is_expected
                 .to belong_to(element.name.to_sym)
