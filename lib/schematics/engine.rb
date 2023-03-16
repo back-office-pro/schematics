@@ -137,6 +137,7 @@ module Schematics
 
     # ViewComponent
     config.view_component.capture_compatibility_patch_enabled = true
+    config.view_component.test_controller = 'Schematics::ApplicationController'
 
     # Active Storage
     config.after_initialize do
