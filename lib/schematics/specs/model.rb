@@ -18,7 +18,11 @@ module Schematics
 
         triggers.each do |trigger|
           it { is_expected.to respond_to(trigger.method_name) }
-          it { is_expected.to callback(trigger.method_name).public_send(trigger.action.split('_')) }
+          it do
+            is_expected
+              .to callback(trigger.method_name)
+              .public_send(*trigger.action.split('_'))
+          end
         end
 
         attributes
