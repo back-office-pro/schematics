@@ -3,14 +3,19 @@
 require 'action_view'
 
 module Schematics
-  module Attributes
+  module Options
     # :reek:Attribute :reek:InstanceVariableAssumption
     class StateMachineEvent
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
 
+      validates :name, presence: true
+      validates :from, :to, inclusion: { in: :values }
+
       delegate :to_str, to: :trigger, prefix: true
-      attr_accessor :entity, :name, :from, :to, :callback
+      delegate :entity, :values, to: :state_machine
+
+      attr_accessor :state_machine, :name, :from, :to, :callback
       attr_writer :icon, :color
 
       def icon
@@ -20,6 +25,8 @@ module Schematics
       def color
         @color&.to_sym || :primary
       end
+
+      def action = :"after_#{name}"
 
       def human
         translate(
@@ -36,8 +43,6 @@ module Schematics
       RUBY
 
       private
-
-      def action = "after_#{name}"
 
       def trigger
         @trigger ||= Trigger.new(action:, callback:)

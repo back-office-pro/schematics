@@ -6,8 +6,11 @@ module Schematics
       module Events
         class Component < ApplicationComponent
           delegate :object, to: :builder, private: true
+          delegate :values, to: :object
           option :builder
           option :name
+
+          def data = { controller: 'schema-editor--event-dropdown' }
 
           def icon_data(icon = :location_arrow)
             {
@@ -23,9 +26,13 @@ module Schematics
             }
           end
 
-          def events
-            object.events&.map { Attributes::StateMachineEvent.new(**_1) } || []
-          end
+          def floating = true
+
+          def required = true
+
+          def events = object
+            .events
+            &.map { Schematics::Options::StateMachineEvent.new(**_1) } || []
         end
       end
     end

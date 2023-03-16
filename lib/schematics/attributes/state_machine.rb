@@ -6,6 +6,7 @@ module Schematics
   module Attributes
     class StateMachine < Enum
       delegate :direct_assignment, to: :options
+      validates_associated :events
 
       def available_options = super.push(
         Options::Events,
@@ -25,9 +26,9 @@ module Schematics
         #{events_methods_to_str}
       RUBY
 
-      def events
-        options.events&.map { StateMachineEvent.new(entity:, **_1) } || []
-      end
+      def events = options
+        .events
+        &.map { Options::StateMachineEvent.new(state_machine: self, **_1) } || []
 
       private
 

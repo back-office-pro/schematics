@@ -3,7 +3,7 @@
 module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
-      DENYLIST = %i[Association Attribute Month StateMachineEvent Week Year].freeze
+      DENYLIST = %i[Association Attribute Month Week Year].freeze
       delegate :new_record?, to: :resource
       option :resource
 
