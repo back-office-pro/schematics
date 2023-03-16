@@ -20,6 +20,8 @@ module Application
 
     def i18n_title_path = 'searches'
 
+    def redirect_to_resource_path = nil
+
     def set_results
       @results, @suggestions, @typeahead =
         ::Tenant
