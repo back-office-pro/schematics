@@ -91,7 +91,7 @@ module Schematics
           events.each do |event|
             is_expected
               .to route(:patch, polymorphic_path(record, action: event.name))
-              .to params.merge(action: :trigger, id:, event: event.name)
+              .to params.merge(action: :trigger, id:, event: event.name).compact
           end
         end
       end
