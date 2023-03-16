@@ -10,7 +10,7 @@ module Schematics
       has_many :slugs,
                -> { order(created_at: :desc) },
                as: :sluggable,
-               dependent: :destroy,
+               dependent: :delete_all,
                class_name: 'FriendlyId::Slug',
                strict_loading: false,
                inverse_of: false
