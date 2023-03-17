@@ -4,12 +4,4 @@
   .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
     = render Schematics::CardHeading::Component.new(icon: :right_to_bracket, title:)
   .card-body.p-3
-    = bootstrap_form_with model: User.new,
-                          scope: :session,
-                          url: sessions_path,
-                          data: { turbo: false, action: 'submit->application#disableWith' } do |form|
-      = form.email_field :email, prepend: fa_icon(:envelope), required: true
-      = render Schematics::ResourceForm::Fields::Digest::Component.new(form:)
-      = form.check_box :remember_me, switch: true
-      = render Schematics::Button::Confirm::Component.new
-      = link_to t('.password_lost?'), schematics.new_password_reset_path, class: 'btn btn-link btn-sm text-decoration-none'
+    = render Schematics::AuthForm::Component.new
