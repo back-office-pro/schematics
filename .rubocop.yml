@@ -7,7 +7,7 @@ require:
 AllCops:
   NewCops: enable
   Exclude:
-    - spec/dummy/**/*
+    - spec/demo/**/*
     - vendor/**/*
 # rubocop
 Layout/LineLength:

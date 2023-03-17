@@ -2,10 +2,13 @@
 
 module Schematics
   class UserAbility < ApplicationAbility
+    delegate :demo?, to: '::Tenant', private: true
+
     def initialize(user)
       super
       cannot %i[destroy archive], user
       cannot :update, user, :role_id
+      cannot %i[update destroy archive], ::User, role: ::Role.admin if demo?
       return unless user.admin?
 
       can :read, :admin_dashboard

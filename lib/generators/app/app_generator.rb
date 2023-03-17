@@ -205,7 +205,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     super.unshift File.expand_path('templates', __dir__)
   end
 
-  def env = (app_path == 'spec/dummy' ? 'development' : 'production').inquiry
+  def env = (app_path == 'spec/demo' ? 'development' : 'production').inquiry
 
   def default_options = {
     database: 'postgresql',

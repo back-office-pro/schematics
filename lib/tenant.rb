@@ -77,6 +77,14 @@ class Tenant
 
     def ssl? = ssl_path.exist?
 
+    def demo? = name.eql?('demo')
+
+    def customer_password
+      return unless demo?
+
+      'Azerty1!'
+    end
+
     def customer_locale = customer
       &.preferred_locales
       &.first

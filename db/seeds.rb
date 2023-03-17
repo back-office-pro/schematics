@@ -4,7 +4,7 @@ PaperTrail.request(enabled: false) do
   Role.create!(name: 'Admin', permissions: Permission.create_all_entities_permissions!)
   Role.create!(name: 'Manager', permissions: Permission.features)
   Configuration.instance.update!(locale: Tenant.customer_locale)
-  User.create!(email: Tenant.customer_email, role: Role.admin)
+  User.create!(email: Tenant.customer_email, password: Tenant.customer_password, role: Role.admin)
   Stat.create!(agregate: 'count', model: 'User')
   Stat.create!(
     agregate: 'sum',
