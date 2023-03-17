@@ -1,7 +1,7 @@
 /.bundle
 /log/*.log
 /pkg
-/spec/dummy
+/spec/demo
 /coverage
 /config/master.key
 /node_modules

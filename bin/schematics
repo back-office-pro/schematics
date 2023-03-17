@@ -5,8 +5,8 @@
 require 'optparse'
 require_relative '../lib/generators/app/app_generator'
 
-app_name = ARGV.first || 'spec/dummy'
-log_name = ARGV.first || 'log/dummy'
+app_name = ARGV.first || 'spec/demo'
+log_name = ARGV.first || 'log/demo'
 options = {}
 
 $stdout.reopen("#{log_name}.log", 'w')
