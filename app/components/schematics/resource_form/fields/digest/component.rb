@@ -7,6 +7,7 @@ module Schematics
         class Component < ApplicationComponent
           option :form
           option :field, optional: true
+          option :value, optional: true
           option :name, default: proc { :password }, reader: false
           option :icon, default: proc { :key }, reader: false
           option :required, default: proc { true }
