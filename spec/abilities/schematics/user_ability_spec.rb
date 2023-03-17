@@ -23,4 +23,14 @@ RSpec.describe Schematics::UserAbility do
     it { is_expected.to be_able_to(:impersonate, User) }
     it { is_expected.not_to be_able_to(:impersonate, user) }
   end
+
+  context 'when on demo mode' do
+    let(:role) { admin_role }
+
+    before { allow(Tenant).to receive(:demo?).and_return(true) }
+
+    it { is_expected.not_to be_able_to(:update, user) }
+    it { is_expected.not_to be_able_to(:destroy, user) }
+    it { is_expected.not_to be_able_to(:archive, user) }
+  end
 end
