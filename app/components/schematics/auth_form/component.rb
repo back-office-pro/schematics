@@ -13,8 +13,10 @@ module Schematics
       def model
         return User.new unless demo?
 
-        User.new(email: Tenant.customer_email, password: Tenant.customer_password)
+        User.new(email: Tenant.customer_email)
       end
+
+      def value = Tenant.customer_password
 
       def data = { turbo: false, action: 'submit->application#disableWith' }
     end
