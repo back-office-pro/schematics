@@ -16,10 +16,7 @@ module Schematics
         User.new(email: Tenant.customer_email, password: Tenant.customer_password)
       end
 
-      def data = {
-        turbo: false,
-        action: 'submit->application#disableWith'
-      }
+      def data = { turbo: false, action: 'submit->application#disableWith' }
     end
   end
 end
