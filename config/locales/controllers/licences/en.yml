@@ -1,6 +1,0 @@
----
-en:
-  licences:
-    update:
-      failure: An error occured
-      success: Your subscription was successfully canceled
