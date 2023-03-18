@@ -267,10 +267,7 @@
       },
       {
         "name": "time_zone",
-        "type": "time_zone",
-        "options": {
-          "default": "UTC"
-        }
+        "type": "time_zone"
       },
       {
         "name": "theme_color",
