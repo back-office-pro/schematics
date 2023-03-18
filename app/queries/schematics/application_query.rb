@@ -8,8 +8,7 @@ module Schematics
     class << self
       delegate :call, to: :new
 
-      def module_class = module_parent
-        .to_s
+      def module_class = module_parent_name
         .delete_prefix('Application')
         .singularize
         .constantize
