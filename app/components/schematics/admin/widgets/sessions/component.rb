@@ -4,16 +4,7 @@ module Schematics
   module Admin
     module Widgets
       module Sessions
-        class Component < ApplicationComponent
-          delegate :icon, to: '::Session.entity'
-
-          def caption = t('.caption')
-
-          def title = t('.title')
-
-          def render?
-            can?(:index, ::Session)
-          end
+        class Component < Widgets::Component
         end
       end
     end

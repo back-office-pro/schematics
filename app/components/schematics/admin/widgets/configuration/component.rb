@@ -4,16 +4,12 @@ module Schematics
   module Admin
     module Widgets
       module Configuration
-        class Component < ApplicationComponent
-          delegate :icon, to: '::Configuration.entity'
+        class Component < Widgets::Component
+          def path = edit_configuration_path
 
-          def caption = t('.caption')
+          protected
 
-          def title = t('.title')
-
-          def render?
-            can?(:update, ::Configuration)
-          end
+          def action = :update
         end
       end
     end
