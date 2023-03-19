@@ -4,9 +4,9 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Schematics::AdminDashboardAbility do
-  subject(:ability) { described_class.new(ability) }
+  subject(:ability) { described_class.new(parent_ability) }
 
-  let(:ability) { Schematics::Ability.new(user) }
+  let(:parent_ability) { Schematics::Ability.new(user) }
   let(:user) { User.new(role:) }
   let(:role) { Role.new(permissions:) }
   let(:admin_role) { Role.create!(name: 'Admin') }
