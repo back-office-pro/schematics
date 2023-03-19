@@ -5,11 +5,14 @@ module Schematics
     class Component < ApplicationComponent
       DENYLIST = [
         ::ApiKey,
+        ::Chart,
         ::Message,
+        ::Meeting,
         ::Permission,
+        ::SchemaDataset,
+        ::Stat,
         ::Task,
-        ::Translation,
-        ::SchemaDataset
+        ::Translation
       ].freeze
 
       def data = {

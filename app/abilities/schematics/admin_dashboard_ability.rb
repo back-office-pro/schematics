@@ -10,6 +10,8 @@ module Schematics
                 ability.cannot?(:index, ::SchemaDataset) &&
                 ability.cannot?(:index, ::Session) &&
                 ability.cannot?(:index, ::Translation) &&
+                ability.cannot?(:index, ::Chart) &&
+                ability.cannot?(:index, ::Stat) &&
                 ability.cannot?(:update, ::Configuration) &&
                 ability.cannot?(:cancel, ::Licence)
 
