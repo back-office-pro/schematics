@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module Sessions
+      module SchemaDatasets
         class Component < Widgets::Component
         end
       end

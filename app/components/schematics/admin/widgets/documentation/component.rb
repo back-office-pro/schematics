@@ -4,14 +4,15 @@ module Schematics
   module Admin
     module Widgets
       module Documentation
-        class Component < ApplicationComponent
-          delegate :documentation_path, to: 'Schematics::Engine.routes.url_helpers'
+        class Component < Widgets::Component
+          def path = Schematics::Engine
+            .routes
+            .url_helpers
+            .documentation_path
 
-          def caption = t('.caption')
+          def icon = :book
 
-          def icon = :project_diagram
-
-          def title = t('.title')
+          def model_class = ::ApiKey
         end
       end
     end

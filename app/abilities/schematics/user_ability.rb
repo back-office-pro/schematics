@@ -11,7 +11,6 @@ module Schematics
       cannot %i[update destroy archive], ::User, role: ::Role.admin if demo?
       return unless user.admin?
 
-      can :read, :admin_dashboard
       can :impersonate, ::User
       cannot :impersonate, ::User, role: ::Role.admin
     end
