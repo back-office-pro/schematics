@@ -338,7 +338,7 @@
   {
     "name": "permission",
     "options": {
-      "icon": "key",
+      "icon": "lock",
       "descriptor": "name",
       "actions": [
         "index",
