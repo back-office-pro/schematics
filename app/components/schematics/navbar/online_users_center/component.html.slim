@@ -6,7 +6,7 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2
     role='button'
   }
     .position-relative
-      = fa_icon :users, class: 'fa-lg'
+      = fa_icon icon, class: 'fa-lg'
       .badge.bg-primary.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
         = sessions.size
   .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
@@ -15,6 +15,4 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2
     h5.dropdown-header.fw-bold
       = t('.title')
     .pre-scrollable.overflow-scroll
-      - sessions.each do |session|
-        .dropdown-item
-          = render Schematics::Navbar::OnlineUsersCenter::Preview::Component.new(session:)
+      = render Schematics::Navbar::OnlineUsersCenter::Preview::Component.with_collection(sessions)

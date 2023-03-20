@@ -4,6 +4,8 @@ module Schematics
   module Navbar
     module OnlineUsersCenter
       class Component < ApplicationComponent
+        delegate :icon, to: '::User.entity'
+
         def sessions
           @sessions ||= ::Session
                         .with_user_avatar

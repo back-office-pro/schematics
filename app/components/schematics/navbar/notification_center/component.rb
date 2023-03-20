@@ -4,13 +4,15 @@ module Schematics
   module Navbar
     module NotificationCenter
       class Component < ApplicationComponent
-        VERSIONS_LIMIT = 10
+        LIMIT = 10
         delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :read_notifications_at, :preferences, to: :current_user
 
         def display_unread_count
           unread_count >= 10 ? '9+' : unread_count
         end
+
+        def icon = :bell
 
         def icon_class
           return 'fa-lg' if unread_count.zero?
@@ -28,7 +30,7 @@ module Schematics
         def versions
           @versions ||= Version
                         .timeline(current_ability)
-                        .limit(VERSIONS_LIMIT)
+                        .limit(LIMIT)
         end
       end
     end

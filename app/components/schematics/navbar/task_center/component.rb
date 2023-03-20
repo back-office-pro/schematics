@@ -4,7 +4,8 @@ module Schematics
   module Navbar
     module TaskCenter
       class Component < ApplicationComponent
-        TASKS_LIMIT = 10
+        LIMIT = 10
+        delegate :icon, to: '::Task.entity'
 
         def display_pending_count
           pending_count >= 10 ? '9+' : pending_count
@@ -34,7 +35,7 @@ module Schematics
                      .pending
                      .preload(:applicant)
                      .order(created_at: :desc)
-                     .limit(TASKS_LIMIT)
+                     .limit(LIMIT)
         end
       end
     end

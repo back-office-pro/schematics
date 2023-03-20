@@ -1,10 +1,11 @@
-.row {
-  data-action='click->application#visit'
-  data-application-href-param=href
-  role='button'
-}
-  .col-auto.align-self-center
-    = render Schematics::Attachment::Component.avatar(user:)
-  .col.text-truncate
-    = user
-    .text-muted data-controller='timeago' datetime=updated_at
+.dropdown-item
+  .row {
+    data-action='click->application#visit'
+    data-application-href-param=href
+    role='button'
+  }
+    .col-auto.align-self-center
+      = render Schematics::Attachment::Component.avatar(user:)
+    .col.text-truncate
+      = user
+      .text-muted data-controller='timeago' datetime=updated_at
