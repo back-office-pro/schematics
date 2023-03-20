@@ -30,6 +30,7 @@ export default class extends ApplicationController {
   get options () {
     return {
       plugins: ['no_active_items', !this.required && 'remove_button'],
+      itemClass: this.multiple ? 'item bg-primary text-white' : 'item',
       onChange: this.setDependentDropdownsOptions.bind(this),
       render: {
         no_results: () => `<div class="option opacity-100 text-muted">
@@ -46,5 +47,9 @@ export default class extends ApplicationController {
 
   get required () {
     return this.element.getAttribute('required') === 'required'
+  }
+
+  get multiple () {
+    return this.element.getAttribute('multiple') === 'multiple'
   }
 }
