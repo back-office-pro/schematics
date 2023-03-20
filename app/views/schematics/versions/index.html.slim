@@ -10,7 +10,7 @@
                         main_app.polymorphic_path(version.model_class),
                         class: 'text-light',
                         data: { turbo_frame: '_top' }
-            .card.border-0.animate__animated.animate__zoomIn
+            .card.animate__animated.animate__zoomIn
               .card-body.p-3
                 = render Schematics::VersionPreview::Component.new(version:)
   = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)

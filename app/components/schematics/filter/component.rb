@@ -39,7 +39,6 @@ module Schematics
 
       def css_classes = [
         'form-control',
-        'border-0',
         'bg-transparent',
         'text-secondary',
         { 'fw-bold': active? }

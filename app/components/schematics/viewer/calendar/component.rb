@@ -43,9 +43,9 @@ module Schematics
         def filter_key = Ransack.options[:search_key]
 
         def alert_border_css_classes_for(resource, date)
-          return %w[rounded-0 border-start-0 border-end-0] if siblings_resource_for?(resource, date)
-          return %w[rounded-end border-start-0 me-2] if previous_resource_for?(resource, date)
-          return %w[rounded-start border-end-0 ms-2] if next_resource_for?(resource, date)
+          return %w[rounded-0] if siblings_resource_for?(resource, date)
+          return %w[rounded-end me-2] if previous_resource_for?(resource, date)
+          return %w[rounded-start ms-2] if next_resource_for?(resource, date)
 
           %w[rounded]
         end

@@ -1,6 +1,6 @@
 #search-bar-modal.modal.fade aria-hidden='true' tabindex='-1'
   .modal-dialog.modal-dialog-centered.modal-lg
-    .modal-content.border-0.shadow-sm
+    .modal-content.shadow-sm
       .modal-body
         = form_with model: Search.new, class: 'd-flex' do |f|
           .position-relative.w-100 data-controller='search-bar' data-search-bar-highlight-value='false'
@@ -8,7 +8,7 @@
                              required: true,
                              minlength: 3,
                              placeholder: t('.placeholder'),
-                             class: 'form-control border-0 bg-transparent',
+                             class: 'form-control bg-transparent',
                              autocomplete: 'off',
                              spellcheck: false,
                              data: { 'search-bar-target': 'input', action: }
@@ -19,7 +19,7 @@
               data-search-bar-target='history'
             }
               - history.each do |query|
-                li.list-group-item.list-group-item-action.p-2.border-0.text-start.text-truncate {
+                li.list-group-item.list-group-item-action.p-2.text-start.text-truncate {
                   data-action='mousedown->search-bar#selectItem'
                   data-search-bar-url-param=search_path(query)
                   role='button'

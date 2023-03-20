@@ -62,3 +62,7 @@
   @extend .text-secondary;
   @extend .fw-bold;
 }
+
+.pagy-bootstrap-nav {
+  @extend .shadow-sm;
+}

@@ -2,8 +2,8 @@
 .row.g-3
   - @resources.each do |resource|
     .col-lg-6
-      .card.shadow-sm.border-0.animate__animated.animate__zoomIn
-        .card-header.border-top-0.border-start-0.border-end-0.px-2.py-1
+      .card.shadow-sm.animate__animated.animate__zoomIn
+        .card-header.px-2.py-1
           .row.align-items-center
             .col.text-truncate
               = render Schematics::CardHeading::Component.new(icon: parent_model_class.entity.icon, title: resource.to_s)
