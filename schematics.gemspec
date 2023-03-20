@@ -65,7 +65,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'elasticsearch', '~> 7.17.7'
   spec.add_dependency 'ferrum', '~> 0.13.0'
   spec.add_dependency 'friendly_id', '~> 5.5.0'
-  spec.add_dependency 'git', '~> 1.17.2'
+  spec.add_dependency 'git', '~> 1.18.0'
   spec.add_dependency 'good_job', '~> 3.14.2'
   spec.add_dependency 'groupdate', '~> 6.2.0'
   spec.add_dependency 'hiredis', '~> 0.6.3'
