@@ -5,10 +5,15 @@ module Schematics
     module TaskCenter
       module Preview
         class Component < ApplicationComponent
-          delegate :applicant, :title, :created_at, to: :task
-          option :task
+          delegate :applicant, :title, :created_at, to: :@task
+          with_collection_parameter :task
 
-          def href = task_path(task)
+          def initialize(task:)
+            super
+            @task = task
+          end
+
+          def href = task_path(@task)
         end
       end
     end
