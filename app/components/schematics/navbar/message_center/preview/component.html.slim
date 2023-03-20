@@ -1,13 +1,14 @@
-.row {
-  data-action='click->application#visit'
-  data-application-href-param=href
-  role='button'
-}
-  .col-auto.align-self-center
-    = render Schematics::Avatar::Component.new(user: author)
-  .col.text-truncate
-    div class=css_class = subject
-    .text-muted
-      span = author
-      span.mx-1 -
-      span data-controller='timeago' datetime=created_at
+.dropdown-item
+  .row {
+    data-action='click->application#visit'
+    data-application-href-param=href
+    role='button'
+  }
+    .col-auto.align-self-center
+      = render Schematics::Avatar::Component.new(user: author)
+    .col.text-truncate
+      div class=css_class = subject
+      .text-muted
+        span = author
+        span.mx-1 -
+        span data-controller='timeago' datetime=created_at
