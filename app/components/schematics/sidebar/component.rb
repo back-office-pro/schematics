@@ -3,18 +3,6 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
-      DENYLIST = [
-        ::ApiKey,
-        ::Chart,
-        ::Message,
-        ::Meeting,
-        ::Permission,
-        ::SchemaDataset,
-        ::Stat,
-        ::Task,
-        ::Translation
-      ].freeze
-
       def data = {
         controller: 'tooltip hotkey',
         'bs-toggle': 'tooltip',
@@ -25,9 +13,9 @@ module Schematics
       def model_classes = ::Tenant
         .schema
         .entities
-        .reject(&:hidden?)
+        .reject(&:core?)
         .filter_map(&:model_class)
-        .excluding(DENYLIST)
+        .push(::Import, ::ActiveStorage::Blob)
         .select { can?(:index, _1) }
         .sort_by(&:human_name)
 
