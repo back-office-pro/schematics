@@ -12,6 +12,8 @@ module Schematics
                 ability.cannot?(:index, ::Translation) &&
                 ability.cannot?(:index, ::Chart) &&
                 ability.cannot?(:index, ::Stat) &&
+                ability.cannot?(:index, ::User) &&
+                ability.cannot?(:index, ::Role) &&
                 ability.cannot?(:update, ::Configuration) &&
                 ability.cannot?(:cancel, ::Licence)
 
