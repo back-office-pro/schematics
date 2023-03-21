@@ -6,14 +6,14 @@ module Schematics
       class Component < ApplicationComponent
         LIMIT = 10
 
-        def display_unread_count
-          unread_count >= 10 ? '9+' : unread_count
+        def display_count
+          count >= 10 ? '9+' : count
         end
 
         def icon = :envelope
 
         def icon_class
-          return 'fa-lg' if unread_count.zero?
+          return 'fa-lg' if count.zero?
 
           %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
         end
@@ -31,12 +31,12 @@ module Schematics
           config(:messages_feature_flag) && can?(:index, ::Message)
         end
 
-        def unread_count
-          @unread_count ||= current_user
-                            .received_messages
-                            .unread
-                            .load_async
-                            .size
+        def count
+          @count ||= current_user
+                     .received_messages
+                     .unread
+                     .load_async
+                     .size
         end
       end
     end
