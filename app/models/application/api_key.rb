@@ -5,7 +5,6 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
-      scope :active, ActiveQuery
       scope :with_permissions, -> { preload(:permissions) }
     end
 
