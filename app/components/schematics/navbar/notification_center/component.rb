@@ -8,23 +8,23 @@ module Schematics
         delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :read_notifications_at, :preferences, to: :current_user
 
-        def display_unread_count
-          unread_count >= 10 ? '9+' : unread_count
+        def display_count
+          count >= 10 ? '9+' : count
         end
 
         def icon = :bell
 
         def icon_class
-          return 'fa-lg' if unread_count.zero?
+          return 'fa-lg' if count.zero?
 
           %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
         end
 
-        def unread_count
-          @unread_count ||= Version
-                            .unread(read_notifications_at)
-                            .timeline(current_ability)
-                            .size
+        def count
+          @count ||= Version
+                     .unread(read_notifications_at)
+                     .timeline(current_ability)
+                     .size
         end
 
         def versions

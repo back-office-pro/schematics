@@ -8,11 +8,11 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2 data-controller='notificatio
   }
     .position-relative
       = fa_icon icon, data: { 'notification-center-target': 'icon' }, class: icon_class
-      - if unread_count.positive?
+      - if count.positive?
         .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn {
           data-notification-center-target='badge'
         }
-          = display_unread_count
+          = display_count
   .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
     aria-labelledby='notifications-dropdown'
   }
