@@ -915,7 +915,7 @@
     ],
     "virtuals": [
       {
-        "name": "active",
+        "name": "to_come",
         "function": "NOW() < $end_at"
       }
     ]

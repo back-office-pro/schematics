@@ -20,7 +20,8 @@ module Schematics
         def count
           @count ||= current_user
                      .meetings
-                     .active
+                     .to_come
+                     .today
                      .load_async
                      .size
         end
@@ -32,7 +33,7 @@ module Schematics
         def meetings
           @meetings ||= current_user
                         .meetings
-                        .active
+                        .to_come
                         .with_creator_avatar
                         .order(created_at: :desc)
                         .limit(LIMIT)

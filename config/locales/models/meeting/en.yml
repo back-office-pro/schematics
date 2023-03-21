@@ -3,13 +3,13 @@ en:
   activerecord:
     attributes:
       meeting:
-        active: Active
         content: Content
         creator: Creator
         end_at: End at
         location: Location
         start_at: Start at
         subject: Subject
+        to_come: To come
         url: URL
         users: Participants
     models:
