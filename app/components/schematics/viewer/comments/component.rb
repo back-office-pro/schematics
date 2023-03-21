@@ -12,7 +12,7 @@ module Schematics
         def comments = resource
           .comments
           .with_rich_text_content_and_embeds
-          .preload(:author)
+          .with_author_avatar
           .order(created_at: :desc)
 
         def model_class = ::Comment
