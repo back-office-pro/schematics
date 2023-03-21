@@ -7,22 +7,23 @@ module Schematics
         LIMIT = 10
         delegate :icon, to: '::Task.entity'
 
-        def display_pending_count
-          pending_count >= 10 ? '9+' : pending_count
+        def display_count
+          count >= 10 ? '9+' : count
         end
 
         def icon_class
-          return 'fa-lg' if pending_count.zero?
+          return 'fa-lg' if count.zero?
 
           %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
         end
 
-        def pending_count
-          @pending_count ||= current_user
-                             .tasks
-                             .pending
-                             .load_async
-                             .size
+        def count
+          @count ||= current_user
+                     .tasks
+                     .not_state_completed
+                     .not_state_aborted
+                     .load_async
+                     .size
         end
 
         def render?
@@ -32,9 +33,10 @@ module Schematics
         def tasks
           @tasks ||= current_user
                      .tasks
-                     .pending
-                     .preload(:applicant)
-                     .order(created_at: :desc)
+                     .not_state_completed
+                     .not_state_aborted
+                     .with_applicant_avatar
+                     .order(deadline: :asc)
                      .limit(LIMIT)
         end
       end

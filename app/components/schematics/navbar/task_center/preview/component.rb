@@ -5,7 +5,7 @@ module Schematics
     module TaskCenter
       module Preview
         class Component < ApplicationComponent
-          delegate :applicant, :title, :created_at, to: :@task
+          delegate :applicant, :title, :deadline, to: :@task
           with_collection_parameter :task
 
           def initialize(task:)
@@ -14,6 +14,10 @@ module Schematics
           end
 
           def href = task_path(@task)
+
+          def timeago_css_class
+            'invisible' unless deadline
+          end
         end
       end
     end
