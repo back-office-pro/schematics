@@ -9,9 +9,7 @@ module Schematics
 
       def icon = :align_justify
 
-      def to_sql
-        ::Arel.sql("CONCAT(#{super.join(', ')})")
-      end
+      def to_sql = "CONCAT(#{super.join(', ')})"
 
       def search_data = super
         .concat(' ')
