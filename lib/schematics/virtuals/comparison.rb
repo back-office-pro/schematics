@@ -20,6 +20,11 @@ module Schematics
       def open_api_type = 'boolean'
 
       def to_sql = "(#{super.join})"
+
+      def to_str = super + <<~RUBY
+        scope :#{name}, -> { where(Arel.sql("#{to_sql}")) }
+        scope :not_#{name}, -> { where.not(Arel.sql("#{to_sql}")) }
+      RUBY
     end
   end
 end

@@ -51,6 +51,8 @@ describe Schematics::Virtuals::Comparison do
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
+      scope :big_price, -> { where(Arel.sql("(categories.vat = 10 AND (products.created_at IS NULL OR NOW() < products.created_at))")) }
+      scope :not_big_price, -> { where.not(Arel.sql("(categories.vat = 10 AND (products.created_at IS NULL OR NOW() < products.created_at))")) }
     RUBY
   end
 
