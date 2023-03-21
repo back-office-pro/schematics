@@ -1,0 +1,11 @@
+.dropdown-item
+  .row {
+    data-action='click->application#visit'
+    data-application-href-param=href
+    role='button'
+  }
+    .col-auto.align-self-center
+      = render Schematics::Avatar::Component.new(user: creator)
+    .col.text-truncate
+      = subject
+      .text-muted data-controller='timeago' datetime=start_at
