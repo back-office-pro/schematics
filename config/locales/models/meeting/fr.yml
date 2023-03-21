@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       meeting:
+        active: Active
         content: Contenu
         creator: Créateur
         end_at: Fin le

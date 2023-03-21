@@ -912,6 +912,12 @@
         "name": "location",
         "type": "address"
       }
+    ],
+    "virtuals": [
+      {
+        "name": "active",
+        "function": "NOW() < $end_at"
+      }
     ]
   },
   {
