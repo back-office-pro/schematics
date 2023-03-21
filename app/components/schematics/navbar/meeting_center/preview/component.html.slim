@@ -8,4 +8,8 @@
       = render Schematics::Avatar::Component.new(user: creator)
     .col.text-truncate
       = subject
-      .text-muted data-controller='timeago' datetime=start_at
+      .text-muted
+        span data-controller='timeago' datetime=start_at
+        - if location
+          span.mx-1 -
+          span = location

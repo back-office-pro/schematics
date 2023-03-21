@@ -5,7 +5,7 @@ module Schematics
     module MeetingCenter
       module Preview
         class Component < ApplicationComponent
-          delegate :creator, :subject, :start_at, to: :@meeting
+          delegate :creator, :subject, :start_at, :location, to: :@meeting
           with_collection_parameter :meeting
 
           def initialize(meeting:)
