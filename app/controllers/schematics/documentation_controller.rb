@@ -13,7 +13,7 @@ module Schematics
     private
 
     def json = ::OpenApi
-      .generate_docs(!Rails.env.test?)
+      .generate_docs(true)
       .fetch(:open_api)
   end
 end
