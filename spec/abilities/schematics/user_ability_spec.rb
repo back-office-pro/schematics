@@ -12,6 +12,7 @@ RSpec.describe Schematics::UserAbility do
 
   it { is_expected.not_to be_able_to(:impersonate, User) }
   it { is_expected.not_to be_able_to(:impersonate, user) }
+  it { is_expected.not_to be_able_to(:update, user, :role_id) }
   it { is_expected.not_to be_able_to(:destroy, user) }
   it { is_expected.not_to be_able_to(:archive, user) }
 
