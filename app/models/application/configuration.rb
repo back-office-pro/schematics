@@ -9,10 +9,11 @@ module Application
     prepended do
       after_initialize :set_chartkick_options
       attribute :company_name, default: -> { ::Tenant.human }
+      attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
     end
 
     def time_zone
-      super || LOCALE_TO_TIME_ZONE[locale.to_sym]
+      super || LOCALE_TO_TIME_ZONE[locale&.to_sym]
     end
 
     private
