@@ -6,6 +6,7 @@ module Schematics
       super
       cannot %i[destroy archive], user
       cannot :update, user, %i[role role_id]
+      can :update, user, :password_challenge
       return unless user.admin?
 
       can :impersonate, ::User
