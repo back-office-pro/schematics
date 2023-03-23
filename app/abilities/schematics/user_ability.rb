@@ -5,8 +5,8 @@ module Schematics
     def initialize(user)
       super
       cannot %i[destroy archive], user
+      can :update, user
       cannot :update, user, %i[role role_id]
-      can :update, user, :password_challenge
       return unless user.admin?
 
       can :impersonate, ::User
