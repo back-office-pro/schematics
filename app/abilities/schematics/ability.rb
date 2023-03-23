@@ -20,6 +20,7 @@ module Schematics
       merge RoleAbility.new
       merge AdminDashboardAbility.new(self)
       merge FeatureFlagAbility.new
+      merge DemoAbility.new
       merge LicenceAbility.new(user)
       merge SessionAbility.new(user)
     end
