@@ -111,7 +111,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sprockets-rails', '~> 3.4.2'
   spec.add_dependency 'stimulus-rails', '~> 1.2.1'
   spec.add_dependency 'strip_attributes', '~> 1.13.0'
-  spec.add_dependency 'stripe', '~> 8.3.0'
+  spec.add_dependency 'stripe', '~> 8.4.0'
   spec.add_dependency 'terser', '~> 1.1.14'
   spec.add_dependency 'turbo-rails', '~> 1.4.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
