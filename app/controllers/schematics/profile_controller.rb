@@ -47,7 +47,6 @@ module Schematics
     def attributes = entity
       .fillable_elements
       .insert(2, password_challenge_attribute)
-      .grep_v(Attributes::Association)
 
     def password_challenge_attribute = Attributes::Digest.new(
       entity:,
@@ -57,8 +56,6 @@ module Schematics
 
     def model_class = ::User
 
-    def permitted_params = super
-      .excluding(:role_id)
-      .push(:password_challenge)
+    def permitted_params = super.push(:password_challenge)
   end
 end
