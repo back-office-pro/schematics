@@ -1,5 +1,3 @@
-![GitHub CI](https://github.com/maksjs/schematics/actions/workflows/build.yml/badge.svg)
-
 # Schematics
 
 Dependencies choices details.
