@@ -77,7 +77,7 @@ class Tenant
 
     def ssl? = ssl_path.exist?
 
-    def demo? = name.eql?('demo')
+    def demo? = name.eql?('demo') && !Rails.env.test?
 
     def customer_password
       return unless demo?
