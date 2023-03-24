@@ -224,13 +224,15 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def root_path = File.expand_path('../../..', __dir__)
 
-  def gem_path
-    return '/app' if container?
-    return root_path if env.development?
+  def gem_options
+    return { path: '/app' } if container?
+    return { path: root_path } if env.development?
+
+    { github: 'back-office-pro/schematics' }
   end
 
   def add_gem
-    gem 'schematics', **{ path: gem_path }.compact
+    gem 'schematics', gem_options
   end
 
   def clean_app_path
