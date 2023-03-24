@@ -6,7 +6,7 @@ module Schematics
 
     def resource_params = params
       .require(entity.name.to_sym)
-      .permit(permitted_params)
+      .permit(permitted_params.excluding(disallowed_params))
       .with_defaults(resource_defaults)
 
     private
@@ -15,6 +15,10 @@ module Schematics
       return entity.permitted_json_params if request.format.json?
 
       entity.permitted_params
+    end
+
+    def disallowed_params
+      current_ability.disallowed_params(action_name.to_sym, @resource || model_class)
     end
 
     def resource_defaults = entity
