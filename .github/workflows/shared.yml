@@ -1,6 +1,47 @@
 name: Shared
 on: [workflow_call]
 jobs:
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GITHUB__COM: x-access-token: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 # TODO: add to secrets
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.1
+      - name: Install postgres
+        run: |
+          sudo apt-get update
+          sudo apt-get -yqq install libpq-dev libvips-dev
+      - name: Setup Database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
+        run: bin/rails db:migrate:reset
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
+        run: bundle exec rspec
   brakeman:
     name: Brakeman
     runs-on: ubuntu-latest

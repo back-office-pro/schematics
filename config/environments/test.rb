@@ -42,4 +42,11 @@ Rails.application.configure do
 
   # Cache
   config.cache_store = :null_store
+
+  # Active Record
+  if ENV['CI'].present?
+    config.active_record.encryption.primary_key = 'test'
+    config.active_record.encryption.deterministic_key = 'test'
+    config.active_record.encryption.key_derivation_salt = 'test'
+  end
 end
