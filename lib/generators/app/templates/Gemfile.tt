@@ -4,10 +4,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby Gem.ruby_version.to_s
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug", "1.7.0", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
   gem "web-console"
 end
 
+<%- if container? -%>
+gem "schematics", path: "/app"
+<%- elsif env.development? -%>
+gem "schematics", path: "<%= root_path %>"
+<%- else -%>
+gem "schematics", ENV['CI'] && { github: "back-office-pro/schematics" }
+<%- end -%>

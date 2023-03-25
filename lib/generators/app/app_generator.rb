@@ -21,11 +21,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     super
   end
 
-  def run_bundle
-    add_gem
-    super
-  end
-
   def create_env_file
     template '.env'
   end
@@ -223,17 +218,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def container? = options[:container]
 
   def root_path = File.expand_path('../../..', __dir__)
-
-  def gem_options
-    return { path: '/app' } if container?
-    return { path: root_path } if env.development?
-
-    { github: 'back-office-pro/schematics' }
-  end
-
-  def add_gem
-    gem 'schematics', gem_options
-  end
 
   def clean_app_path
     FileUtils.rm_rf app_path
