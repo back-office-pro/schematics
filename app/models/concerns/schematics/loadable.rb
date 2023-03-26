@@ -13,7 +13,7 @@ module Schematics
     end
 
     class_methods do
-      attr_reader :concerns
+      attr_accessor :concerns
 
       def inherited(subclass)
         super
@@ -54,7 +54,7 @@ module Schematics
       private
 
       def loadable(concerns: [])
-        @concerns = concerns
+        self.concerns = concerns
       end
     end
 
