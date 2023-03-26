@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'schematics'
   spec.add_development_dependency 'brakeman', '~> 5.4.1'
   spec.add_development_dependency 'bundler-audit', '~> 0.9.1'
+  spec.add_development_dependency 'debug', '~> 1.7.1'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
   spec.add_development_dependency 'isolator', '~> 0.8.0'
   spec.add_development_dependency 'reek', '~> 6.1.4'
@@ -56,7 +57,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chartkick', '~> 5.0.1'
   spec.add_dependency 'chroma', '~> 0.2.0'
   spec.add_dependency 'countries', '~> 5.3.1'
-  spec.add_dependency 'debug', '1.7.0'
   spec.add_dependency 'derailed_benchmarks', '~> 2.1.2'
   spec.add_dependency 'dotenv-rails', '~> 2.8.1'
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
@@ -117,6 +117,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
   spec.add_dependency 'view_component', '~> 3.0.0.rc5'
-  spec.add_dependency 'web-console', '~> 4.2.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end

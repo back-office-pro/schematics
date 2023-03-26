@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
-require 'debug'
-require 'web-console'
 
 Rails.application.configure do
   # Configuration
