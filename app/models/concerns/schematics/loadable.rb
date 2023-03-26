@@ -13,6 +13,7 @@ module Schematics
     end
 
     class_methods do
+      # :reek:Attribute
       attr_accessor :concerns
 
       def inherited(subclass)
