@@ -10,6 +10,8 @@ module Schematics
 
         def css_classes = %w[btn btn-sm btn-icon-split ms-2]
 
+        def data = { turbo_frame: '_top' }
+
         def render?
           can?(:import, model_class)
         end

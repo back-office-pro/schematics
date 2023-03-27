@@ -8,6 +8,8 @@ module Schematics
         option :model_class
         option :resource, optional: true
 
+        def data = { turbo_frame: '_top' }
+
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-2]
 
         def path = new_polymorphic_path([resource, model_class].compact, format: nil)
