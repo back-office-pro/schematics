@@ -319,7 +319,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "permissions"
+        "name": "permissions",
+        "options": {
+          "group_by": "model"
+        }
       }
     ],
     "attributes": [
@@ -964,7 +967,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "permissions"
+        "name": "permissions",
+        "options": {
+          "group_by": "model"
+        }
       }
     ],
     "attributes": [
