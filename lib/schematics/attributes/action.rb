@@ -11,7 +11,10 @@ module Schematics
           value.to_sym,
           default: nil,
           scope: [:activerecord, :attributes, entity.name, name.pluralize]
-        ) || translate(value.to_sym, default: value.humanize, scope: %i[activerecord events])
+        ) || translate(:events, scope: 'activerecord')
+          .values
+          .reduce(&:merge)
+          .fetch(value.to_sym, value.humanize)
       end
 
       def icon = :hand_rock
