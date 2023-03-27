@@ -6,7 +6,7 @@
         = fa_icon :box_archive, class: 'me-2'
         = value
     - else
-      = link_to(value.to_s, value)
+      = render Schematics::ResourceLinkTo::Component.new(resource: value)
 - when Schematics::Attributes::Jsonb
   - case value
   - when Schematics::Schema

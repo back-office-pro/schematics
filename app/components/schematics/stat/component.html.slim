@@ -9,9 +9,8 @@
             = value_formatted
         .col-auto
           - if model_class
-            - if can?(:index, model_class)
-              = link_to fa_icon(icon, size: '2x'), model_class, class: 'text-light'
-            - else
-              = fa_icon icon, size: '2x', class: 'text-light'
+            = render Schematics::ResourceLinkTo::Component.new(resource: model_class) do |c|
+              - c.with_body do
+                = fa_icon icon, size: '2x', class: 'text-light'
           - else
             = fa_icon :triangle_exclamation, size: '2x', class: 'text-danger'

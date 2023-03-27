@@ -1,0 +1,4 @@
+- if can?(ability, resource)
+  = link_to body || resource.to_s, polymorphic_path(resource), class: css_classes, data:
+- else
+  = body || resource.to_s

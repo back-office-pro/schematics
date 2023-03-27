@@ -7,7 +7,7 @@
     = render Schematics::Avatar::Component.new(user:)
   .col.text-truncate
     - if item
-      = link_to item.to_s, item, class: 'text-decoration-none', data:
+      = render Schematics::ResourceLinkTo::Component.new(resource: item, css_classes: 'text-decoration-none')
     - else
       .text-muted = version.reify(dup: true).to_s
     .text-muted data-controller='timeago' datetime=created_at

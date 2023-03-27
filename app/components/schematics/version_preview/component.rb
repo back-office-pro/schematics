@@ -7,8 +7,6 @@ module Schematics
       delegate :user, :item, :created_at, :icon, :object, to: :version
       option :version
 
-      def data = { turbo_frame: '_top' }
-
       def action
         return unless href
 
