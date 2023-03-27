@@ -5,3 +5,11 @@
   padding-bottom: 0;
   padding-top: 0;
 }
+
+.ts-dropdown .optgroup-header {
+  font-size: inherit;
+}
+
+.ts-dropdown .optgroup::before {
+  content: none;
+}
