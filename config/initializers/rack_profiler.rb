@@ -9,9 +9,5 @@ Rack::MiniProfiler.config.tap do |config|
   config.enable_hotwire_turbo_drive_support = true
   config.storage = Tenant.backend.profiler_store
   config.storage_options = Tenant.backend.profiler_store_options
-  config.skip_paths = [
-    %r{/admin(.*)},
-    %r{/favicon.ico},
-    %r{/assets(.*)}
-  ]
+  config.skip_paths = [%r{/assets(.*)}]
 end
