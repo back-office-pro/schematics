@@ -2,7 +2,7 @@
 fr:
   titles:
     comparisons:
-      show: Comparaison
+      show: Comparaison %{resource}
     imports:
       create: Importer des %{parent_human_name_plural}
       index: Liste des %{human_name_plural}
