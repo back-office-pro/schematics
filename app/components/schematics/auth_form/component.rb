@@ -4,7 +4,7 @@ module Schematics
   module AuthForm
     class Component < ApplicationComponent
       delegate :new_password_reset_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :demo?, to: '::Tenant', private: true
+      delegate :demo?, :customer_email, :customer_password, to: '::Tenant', private: true
 
       def url = sessions_path
 
@@ -13,10 +13,10 @@ module Schematics
       def model
         return User.new unless demo?
 
-        User.new(email: Tenant.customer_email)
+        User.new(email: customer_email)
       end
 
-      def value = Tenant.customer_password
+      def value = customer_password
 
       def data = { turbo: false, action: 'submit->application#disableWith' }
     end
