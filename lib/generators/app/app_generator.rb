@@ -143,6 +143,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'public/apple-touch-icon-precomposed.png'
     remove_file 'public/apple-touch-icon.png'
     remove_file 'vendor/javascript/.keep'
+    remove_file '.gitattributes'
+    remove_file '.rspec'
     remove_file '.ruby-version'
     remove_file 'README.md'
   end
