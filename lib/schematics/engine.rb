@@ -126,7 +126,7 @@ module Schematics
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
-    config.assets.precompile += %w[schematics_manifest.js]
+    config.assets.precompile += %w[manifest.js schematics_manifest.js]
 
     # Importmap
     config.importmap.paths << root.join('config', 'importmap.rb')
@@ -143,6 +143,14 @@ module Schematics
     config.after_initialize do
       config.active_storage.replace_on_assign_to_many = false
       config.active_storage.track_variants = false
+    end
+
+    # Sprockets monkey-patch
+    config.before_configuration do
+      Sprockets::Railtie
+        .instance
+        .initializers
+        .reject! { _1.name == :set_default_precompile }
     end
   end
 end

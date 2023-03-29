@@ -109,19 +109,12 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     comment_lines 'app/mailers/application_mailer.rb', /layout/
   end
 
-  def empty_asset_manifest_file
-    remove_file 'app/assets/config/manifest.js'
-    create_file 'app/assets/config/manifest.js'
-  end
-
   def remove_unused_files
     remove_file 'app/assets/stylesheets/application.css'
-    remove_file 'app/javascript/application.js'
     remove_file 'app/helpers/application_helper.rb'
     remove_file 'app/views/layouts/application.html.erb'
     remove_file 'app/views/layouts/mailer.html.erb'
     remove_file 'app/views/layouts/mailer.text.erb'
-    remove_file 'config/initializers/assets.rb'
     remove_file 'config/initializers/content_security_policy.rb'
     remove_file 'config/initializers/filter_parameter_logging.rb'
     remove_file 'config/initializers/inflections.rb'
@@ -130,19 +123,12 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/cable.yml'
     remove_file 'config/database.yml'
     remove_file 'config/storage.yml'
-    remove_file 'config/importmap.rb'
     remove_file 'config/puma.rb'
     remove_file 'config/routes.rb'
     remove_file 'config/environments/development.rb'
     remove_file 'config/environments/production.rb'
     remove_file 'config/environments/test.rb'
     remove_file 'db/seeds.rb'
-    remove_file 'public/404.html'
-    remove_file 'public/422.html'
-    remove_file 'public/500.html'
-    remove_file 'public/apple-touch-icon-precomposed.png'
-    remove_file 'public/apple-touch-icon.png'
-    remove_file 'vendor/javascript/.keep'
     remove_file '.gitattributes'
     remove_file '.rspec'
     remove_file '.ruby-version'
@@ -208,7 +194,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     database: 'postgresql',
     skip_test: true,
     skip_keeps: true,
-    skip_hotwire: true
+    skip_javascript: true,
+    skip_asset_pipeline: true
   }
 
   def db_username = app_name.underscore
