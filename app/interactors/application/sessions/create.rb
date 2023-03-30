@@ -21,7 +21,7 @@ module Application
 
         session = current_session.login!(user)
         context.current_session_id = session.id
-        context.jwt = ::JsonWebToken.encode(auth_token: session.auth_token)
+        context.jwt = JWT::AuthToken.encode(session.auth_token)
         cookies.permanent.encrypted[:auth_token] = session.auth_token if remember_me?
       end
 

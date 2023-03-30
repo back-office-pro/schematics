@@ -13,7 +13,7 @@ RSpec.describe 'Sessions' do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { 'Azerty1!' }
       let(:remember_me) { true }
-      let(:auth_token) { JsonWebToken.encode(auth_token: Session.last.auth_token) }
+      let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
 
       before { do_request }
 
