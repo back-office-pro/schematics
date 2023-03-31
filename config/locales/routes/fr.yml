@@ -12,6 +12,7 @@ fr:
     configuration: configuration
     delete: supprimer
     edit: editer
+    groups: groupes
     login: connexion
     logout: deconnexion
     meetings: reunions

@@ -6,6 +6,7 @@ en:
         applicant: Applicant
         content: Content
         deadline: Deadline
+        groups: Groups
         late: Late
         state: State
         states:

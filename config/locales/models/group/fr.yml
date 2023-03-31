@@ -1,0 +1,11 @@
+---
+fr:
+  activerecord:
+    attributes:
+      group:
+        name: Nom
+    models:
+      group:
+        gender: male
+        one: Groupe
+        other: Groupes

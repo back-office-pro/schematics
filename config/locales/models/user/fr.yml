@@ -15,6 +15,7 @@ fr:
         email: E-mail
         first_name: Prénom
         full_name: Nom complet
+        groups: Groupes
         last_name: Nom
         locale: Langue
         locales:
