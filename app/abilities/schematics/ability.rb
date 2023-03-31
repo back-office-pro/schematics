@@ -23,6 +23,7 @@ module Schematics
       merge DemoAbility.new
       merge LicenceAbility.new(user)
       merge SessionAbility.new(user)
+      merge GroupAbility.new(user)
     end
   end
 end
