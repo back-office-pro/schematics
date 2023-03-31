@@ -5,6 +5,12 @@
       "icon": "users",
       "descriptor": "full_name"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "groups"
+      }
+    ],
     "virtuals": [
       {
         "name": "full_name",
@@ -97,6 +103,24 @@
       {
         "name": "reset_password_sent_at",
         "type": "timestamp"
+      }
+    ]
+  },
+  {
+    "name": "group",
+    "options": {
+      "icon": "people_group",
+      "descriptor": "name"
+    },
+    "attributes": [
+      {
+        "name": "name",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "limit": 50
+        }
       }
     ]
   },
@@ -777,6 +801,10 @@
       {
         "type": "has_and_belongs_to_many",
         "name": "users"
+      },
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "groups"
       }
     ],
     "attributes": [
@@ -863,6 +891,10 @@
       {
         "type": "has_and_belongs_to_many",
         "name": "users"
+      },
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "groups"
       }
     ],
     "attributes": [
