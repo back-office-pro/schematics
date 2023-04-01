@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     def redirect_to_resource_path
-      return if request.path == polymorphic_path(@resource)
+      return if request.path.start_with? polymorphic_path(@resource)
 
       redirect_to polymorphic_path(@resource), status: :moved_permanently
     end

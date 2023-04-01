@@ -5,7 +5,6 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
-      skip_before_action :redirect_to_resource_path
       before_action :set_results, only: :show
       after_action -> { flash.clear }
     end
