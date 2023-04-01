@@ -3,8 +3,8 @@
 module Schematics
   module Footer
     class Component < ApplicationComponent
-      delegate :domain, to: '::Tenant', private: true
-      delegate :current_version, :entity, to: '::SchemaDataset'
+      delegate :domain, to: ::Tenant, private: true
+      delegate :current_version, :entity, to: ::SchemaDataset
       delegate :icon, to: :entity
       delegate :year, to: '::Time.current'
 

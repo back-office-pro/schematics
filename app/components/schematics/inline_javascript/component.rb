@@ -3,7 +3,7 @@
 module Schematics
   module InlineJavascript
     class Component < ApplicationComponent
-      delegate :credentials, to: 'Schematics::Engine'
+      delegate :credentials, to: Engine
       delegate :dashboard_read_notifications_path,
                :documentation_path,
                :preferences_path,

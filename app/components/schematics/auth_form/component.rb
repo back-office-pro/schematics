@@ -4,7 +4,7 @@ module Schematics
   module AuthForm
     class Component < ApplicationComponent
       delegate :new_password_reset_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :demo?, :customer_email, :customer_password, to: '::Tenant', private: true
+      delegate :demo?, :customer_email, :customer_password, to: ::Tenant, private: true
 
       def url = sessions_path
 

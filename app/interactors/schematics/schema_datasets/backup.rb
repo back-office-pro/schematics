@@ -5,7 +5,7 @@ module Schematics
     class Backup
       include Interactor
 
-      delegate :create_and_upload!, to: 'ActiveStorage::Blob', private: true
+      delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :force, to: :context, private: true
       delegate :current_database,

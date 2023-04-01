@@ -6,7 +6,7 @@ module Schematics
       include Interactor
 
       delegate :schema_dataset, to: :context, private: true
-      delegate :reload!, to: '::OpenApi::Router', private: true
+      delegate :reload!, to: ::OpenApi::Router, private: true
       delegate :migration_old_and_changed_entities,
                :migration_new_and_changed_entities,
                :migration_changed_entities,
