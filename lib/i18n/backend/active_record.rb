@@ -7,10 +7,9 @@ module I18n
       include Memoize
 
       delegate :available_locales, to: 'Rails.configuration.i18n'
-      delegate :normalize_flat_keys, to: Flatten
 
       def lookup(locale, key, scope = [], options = EMPTY_HASH)
-        key = normalize_flat_keys(locale, key, scope, '.')
+        key = Flatten.normalize_flat_keys(locale, key, scope, '.')
         case key.split('.')
         in ['activerecord', 'models', *]
           fetch(locale, key + count_to_key(options[:count]))
