@@ -32,15 +32,17 @@ module I18n
 
       def fetch(locale, key)
         Rails.cache.fetch("translations/#{locale}/#{key}") do
-          format_lookup ::Translation.lookup(locale, key)
+          format_lookup ::Translation.lookup(locale, key), key
         end
       end
 
-      def format_lookup(translations)
+      def format_lookup(translations, key)
         return if translations.empty?
         return translations.values.first if translations.size == 1
 
         translations
+          .transform_keys { _1.delete_prefix("#{key}.") }
+          .flatten_to_nested
       end
     end
   end
