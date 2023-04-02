@@ -5,11 +5,9 @@ module Application
     class LookupQuery < Schematics::ApplicationQuery
       def call(locale, key)
         where(locale:)
-          .where('key LIKE ?', "#{key}%")
+          .where('key ~* ?', "#{key}(\\.|$)")
           .pluck(:key, :value)
           .to_h
-          .transform_keys { _1.split('.').last }
-          .symbolize_keys
       end
     end
   end
