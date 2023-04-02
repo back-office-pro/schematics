@@ -13,4 +13,12 @@ class Hash
         end
       end
   end
+
+  def flatten_to_nested(separator = '.')
+    each_with_object({}) do |(key, value), all|
+      key_parts = key.split(separator).map!(&:to_sym)
+      leaf = key_parts[0...-1].reduce(all) { |acc, elem| acc[elem] ||= {} }
+      leaf[key_parts.last] = value
+    end
+  end
 end
