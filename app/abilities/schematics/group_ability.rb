@@ -6,7 +6,7 @@ module Schematics
       super
       return if user.groups.empty?
 
-      cannot :manage, model_classes, groups: { id: ::Group.excluding(user.groups) }
+      cannot :manage, model_classes, groups: { id: ::Group.excluding(user.groups).ids }
     end
 
     private
