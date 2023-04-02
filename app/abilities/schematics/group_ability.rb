@@ -14,7 +14,8 @@ module Schematics
     def model_classes = ::Tenant
       .schema
       .entities
-      .select { |entity| entity.has_and_belongs_to_many_associations.any? { _1.name == 'groups' } }
+      .flat_map(&:has_and_belongs_to_many_associations)
+      .select { _1.name == ::Group.table_name }
       .map(&:model_class)
   end
 end
