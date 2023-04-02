@@ -14,6 +14,7 @@ class Hash
       end
   end
 
+  # :reek:FeatureEnvy
   def flatten_to_nested(separator = '.')
     each_with_object({}) do |(key, value), all|
       key_parts = key.split(separator).map!(&:to_sym)
