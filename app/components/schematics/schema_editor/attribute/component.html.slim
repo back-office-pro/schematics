@@ -13,6 +13,10 @@
       - when Schematics::Attributes::BelongsTo
         = builder.select :name, allowed_association_types, {}, { required: true, data: { controller: 'dropdown' } }
       - else
-        = builder.text_field :name, required: true, maxlength: 50, class: 'entity_field_name'
+        = builder.text_field :name,
+                             required: true,
+                             maxlength: 50,
+                             class: 'entity_field_name',
+                             data: { controller: 'schema-editor--special-characters' }
       = builder.select :type, collection, {}, { required: true, data: { controller: 'dropdown' } }
       = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)

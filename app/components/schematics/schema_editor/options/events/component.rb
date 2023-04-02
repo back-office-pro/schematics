@@ -12,6 +12,8 @@ module Schematics
 
           def data = { controller: 'schema-editor--event-dropdown' }
 
+          def name_data = { controller: 'schema-editor--special-characters' }
+
           def icon_data(icon = :location_arrow)
             {
               controller: 'dropdowns--fa-icons-dropdown',

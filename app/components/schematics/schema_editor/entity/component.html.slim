@@ -9,7 +9,11 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
     .card-body
       = builder.hidden_field :id
-      = builder.text_field :name, floating: true, required: true, maxlength: 50
+      = builder.text_field :name,
+                           floating: true,
+                           required: true,
+                           maxlength: 50,
+                           data: { controller: 'schema-editor--special-characters' }
       = builder.fields_for :options do |options_form|
         = options_form.select :descriptor, allowed_field_names, {}, { data: { controller: 'schema-editor--descriptor-dropdown' } }
         = options_form.select :actions,
