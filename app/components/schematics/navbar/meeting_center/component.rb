@@ -22,6 +22,7 @@ module Schematics
                      .meetings
                      .to_come
                      .today
+                     .accessible_by(current_ability)
                      .load_async
                      .size
         end
@@ -34,6 +35,7 @@ module Schematics
           @meetings ||= current_user
                         .meetings
                         .to_come
+                        .accessible_by(current_ability)
                         .with_creator_avatar
                         .order(created_at: :desc)
                         .limit(LIMIT)
