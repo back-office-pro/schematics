@@ -6,7 +6,15 @@ module Schematics
       super
       return if user.groups.empty?
 
-      cannot :manage, [::Task, ::Meeting], groups: { id: Group.excluding(user.groups) }
+      cannot :manage, model_classes, groups: { id: ::Group.excluding(user.groups) }
     end
+
+    private
+
+    def model_classes = ::Tenant
+      .schema
+      .entities
+      .select { |entity| entity.has_and_belongs_to_many_associations.any? { _1.name == 'groups' } }
+      .map(&:model_class)
   end
 end
