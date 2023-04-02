@@ -9,8 +9,10 @@ module Schematics
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
 
-      validates :name, presence: true
       validates :from, :to, inclusion: { in: :values }
+      validates :name,
+                presence: true,
+                format: { with: Entities::Entity::NAME_REGEX, message: :name }
 
       delegate :to_str, to: :trigger, prefix: true
       delegate :entity, :values, to: :state_machine
