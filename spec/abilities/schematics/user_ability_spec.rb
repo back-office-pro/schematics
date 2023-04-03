@@ -15,6 +15,8 @@ RSpec.describe Schematics::UserAbility do
   it { is_expected.to be_able_to(:update, user) }
   it { is_expected.not_to be_able_to(:update, user, :role) }
   it { is_expected.not_to be_able_to(:update, user, :role_id) }
+  it { is_expected.not_to be_able_to(:update, user, :groups) }
+  it { is_expected.not_to be_able_to(:update, user, :group_ids) }
   it { is_expected.not_to be_able_to(:destroy, user) }
   it { is_expected.not_to be_able_to(:archive, user) }
 
