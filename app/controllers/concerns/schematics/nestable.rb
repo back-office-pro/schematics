@@ -23,8 +23,7 @@ module Schematics
     def parent_model_class = ::Tenant
       .schema
       .entities
-      .map { [_1.class_name, _1.model_class] }
-      .to_h
+      .to_h { [_1.class_name, _1.model_class] }
       .fetch(parent_model_name)
 
     def parent_model_name = params[:model_name]
