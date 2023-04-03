@@ -1,11 +1,17 @@
 li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start
   a#account-dropdown.nav-link.dropdown-toggle aria-expanded='false' data-bs-toggle='dropdown' href='#' role='button'
     .row.g-2.align-items-center
-      .col.d-none.d-lg-inline.text-end
+      .col-auto.d-none.d-lg-inline.text-end
         .text-primary = current_user
-        .small.text-muted
-          = fa_icon Role.entity.icon, class: 'me-2'
-          = current_user.role
+        #carouselMyAcccount.carousel.carousel-fade.slide data-bs-ride='carousel'
+          .carousel-inner
+            .carousel-item.active
+              = fa_icon Role.entity.icon, class: 'me-2'
+              = role
+            - groups.each do |group|
+              .carousel-item
+                = fa_icon Group.entity.icon, class: 'me-2'
+                = group.name
       .col
         = render Schematics::Attachment::Component.avatar(user: current_user)
   .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
