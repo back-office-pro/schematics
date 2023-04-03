@@ -1,11 +1,9 @@
-footer.py-3
-  .row.mx-2.text-secondary
+footer.py-4
+  .row.mx-1.text-secondary
     .col
       | &copy; #{year} #{config(:company_name)}
     .col.text-end.text-nowrap
-      - if current_version
-        = fa_icon icon, class: 'text-primary me-2'
-        = t('.version', current_version:)
+      = current_version
       = fa_icon :rocket, class: 'text-primary mx-2'
       = t('.powered_by')
       = link_to website_url, class: 'ms-1' do
