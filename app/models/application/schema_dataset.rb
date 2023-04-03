@@ -38,5 +38,8 @@ module Application
       .with_deleted
       .where(created_at: ..created_at)
       .size
+      .to_f
+      .to_s
+      .prepend('v')
   end
 end
