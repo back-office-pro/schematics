@@ -22,6 +22,7 @@ module Schematics
                      .tasks
                      .not_state_completed
                      .not_state_aborted
+                     .accessible_by(current_ability)
                      .load_async
                      .size
         end
@@ -35,6 +36,7 @@ module Schematics
                      .tasks
                      .not_state_completed
                      .not_state_aborted
+                     .accessible_by(current_ability)
                      .with_applicant_avatar
                      .order(deadline: :asc)
                      .limit(LIMIT)

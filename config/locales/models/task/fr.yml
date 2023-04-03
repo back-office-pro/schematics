@@ -6,6 +6,7 @@ fr:
         applicant: Demandeur
         content: Contenu
         deadline: Date limite
+        groups: Groupes
         late: En retard
         state: Etat
         states:

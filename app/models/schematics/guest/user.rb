@@ -14,6 +14,8 @@ module Schematics
 
       def drafts = ::Draft.none
 
+      def groups = []
+
       def preferences = {}
 
       def role = ::Role.new(permissions:)

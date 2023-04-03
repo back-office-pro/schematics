@@ -12,9 +12,21 @@ module Schematics
       include Behaviours::Preloadable
       include ::ActiveModel::API
 
-      delegate :entity, :required?, :column_name, :association_type, :options, to: :belongs_to
-      delegate :descriptor, :class_name, :icon, :includes, :schema, :existing?, to: :entity
       delegate :hidden?, to: :options
+      delegate :entity,
+               :required?,
+               :column_name,
+               :association_type,
+               :options,
+               to: :belongs_to
+      delegate :descriptor,
+               :class_name,
+               :model_class,
+               :icon,
+               :includes,
+               :schema,
+               :existing?,
+               to: :entity
       attr_accessor :belongs_to, :prefixed
 
       validates :name, presence: true
