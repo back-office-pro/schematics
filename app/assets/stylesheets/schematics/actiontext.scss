@@ -22,6 +22,14 @@
 
 trix-toolbar {
   width: 100%;
+
+  .trix-button-group {
+    border: 0;
+
+    .trix-button {
+      border: 0;
+    }
+  }
 }
 
 trix-editor.form-control {
