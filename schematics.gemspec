@@ -79,6 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'mobility', '~> 1.3.0.rc1'
+  spec.add_dependency 'mobility-ransack', '~> 1.2.2'
   spec.add_dependency 'oj', '~> 3.14.2'
   spec.add_dependency 'pagy', '~> 6.0.3'
   spec.add_dependency 'paper_trail', '~> 14.0.0'

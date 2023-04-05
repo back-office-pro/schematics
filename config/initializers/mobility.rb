@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mobility'
-
 Mobility.configure do
   plugins do
     backend :key_value, type: :string, association_name: :translations, class_name: 'Translation'
