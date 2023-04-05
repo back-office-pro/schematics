@@ -955,7 +955,6 @@
     "name": "translation",
     "options": {
       "icon": "language",
-      "descriptor": "key",
       "actions": [
         "index",
         "update",
