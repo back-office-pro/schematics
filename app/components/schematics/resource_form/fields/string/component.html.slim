@@ -1,1 +1,5 @@
-= form.text_field name.to_sym, prepend:, hide_label:, required:, control_class:, maxlength:, minlength:
+- if translated?
+  - available_locales.each do |locale|
+    = form.text_field :"#{name}_#{locale}", label:, prepend:, hide_label:, required:, control_class:, maxlength:, minlength:
+- else
+  = form.text_field name.to_sym, prepend:, hide_label:, required:, control_class:, maxlength:, minlength: 
