@@ -7,7 +7,6 @@ fr:
         auth_token: Clé API
         expires_at: Expire le
         name: Nom
-        permissions: Permissions
     models:
       api_key:
         gender: female

@@ -12,7 +12,6 @@ en:
           sum: Sum
         field: Field
         model: Data
-        roles: Roles
     models:
       stat:
         gender: female

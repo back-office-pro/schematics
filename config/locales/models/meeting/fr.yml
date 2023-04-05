@@ -6,13 +6,15 @@ fr:
         content: Contenu
         creator: Créateur
         end_at: Fin le
-        groups: Groupes
         location: Lieu
         start_at: Début le
         subject: Sujet
         to_come: A venir
         url: URL
-        users: Participants
+        users:
+          one: Participant
+          other: Participants
+          zero: Aucun participant
     models:
       meeting:
         gender: female

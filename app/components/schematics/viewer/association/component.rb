@@ -43,7 +43,7 @@ module Schematics
           @id ||= "collapse-#{SecureRandom.base58}"
         end
 
-        def title # rubocop:disable Metrics/CyclomaticComplexity
+        def title
           case @resources.first
           when ::ActiveStorage::Attachment
             @resources
@@ -52,22 +52,20 @@ module Schematics
               .class
               .human_attribute_name(@resources.first.name, count: @resources.size)
           else
-            @resources
-              .try(:proxy_association)
-              &.reflection
-              &.inverse_of
-              &.klass
-              &.human_attribute_name(
-                @resources.proxy_association.reflection.name,
-                count: @resources.size,
-                default: default_title
-              )&.humanize || default_title
+            association_reflection
+              &.active_record
+              &.human_attribute_name(association_reflection.name, count: @resources.size, default:)
+              &.humanize || default
           end
         end
 
         private
 
-        def default_title = model_class
+        def association_reflection = @resources
+          .try(:proxy_association)
+          .try(:reflection)
+
+        def default = model_class
           .human_name(count: @resources.size)
           .humanize
       end
