@@ -119,6 +119,7 @@
         "options": {
           "unique": true,
           "required": true,
+          "translated": true,
           "limit": 50
         }
       }
@@ -351,6 +352,7 @@
         "options": {
           "unique": true,
           "required": true,
+          "translated": true,
           "limit": 50
         }
       }
@@ -961,6 +963,14 @@
       ]
     },
     "attributes": [
+      {
+        "name": "translatable",
+        "type": "belongs_to",
+        "options": {
+          "polymorphic": true,
+          "readonly": true
+        }
+      },
       {
         "name": "locale",
         "type": "enum",
