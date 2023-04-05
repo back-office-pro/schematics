@@ -8,6 +8,7 @@ fr:
         locales:
           en: Anglais
           fr: Français
+        translatable: Enregistrement
         value: Valeur
     models:
       translation:
