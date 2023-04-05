@@ -10,6 +10,7 @@ module Schematics
           .limit(LIMIT)
           .map(&field.to_sym)
           .map(&:to_s)
+          .uniq
       end
     end
   end
