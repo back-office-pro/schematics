@@ -48,7 +48,7 @@ RSpec.describe Schematics::Imports::InsertData do
       end
 
       it { is_expected.to be_a_failure }
-      its(:errors) { is_expected.to eq('Error' => 'name Role1 has already been taken') }
+      its(:errors) { is_expected.to eq('Error' => 'Name Role1 has already been taken') }
     end
   end
 end
