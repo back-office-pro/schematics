@@ -6,11 +6,12 @@ require 'cancan/matchers'
 RSpec.describe Schematics::MessageAbility do
   subject(:ability) { described_class.new(user) }
 
-  let(:user) { User.new }
-  let(:other_user) { User.new }
+  include_context 'with user'
+
+  let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
+  let(:message) { Message.new(author:, users:) }
   let(:author) { nil }
   let(:users) { [] }
-  let(:message) { Message.new(author:, users:) }
 
   it { is_expected.not_to be_able_to(:duplicate, Message) }
   it { is_expected.not_to be_able_to(:import, Message) }
