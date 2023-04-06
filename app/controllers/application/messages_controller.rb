@@ -5,7 +5,7 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
-      before_action :read!, only: :show
+      before_action :read!, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
     end
 
     def read!
