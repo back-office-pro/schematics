@@ -5,8 +5,8 @@ module Schematics
     extend ActiveSupport::Concern
 
     def read!
-      return unless @resource.readable?
-      return unless current_user == @resource.recipient
+      return unless @resource.try(:readable?)
+      return if @resource.users.exclude?(current_user)
 
       Version
         .where(event: 'show', item: @resource, user: current_user)

@@ -5,8 +5,11 @@ fr:
       message:
         author: Auteur
         content: Contenu
-        recipient: Destinataire
         subject: Sujet
+        users:
+          one: Destinataire
+          other: Destinataires
+          zero: Aucun destinataire
     models:
       message:
         gender: male

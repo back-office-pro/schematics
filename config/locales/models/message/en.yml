@@ -5,8 +5,11 @@ en:
       message:
         author: Author
         content: Content
-        recipient: Recipient
         subject: Subject
+        users:
+          one: Recipient
+          other: Recipients
+          zero: No recipient
     models:
       message:
         gender: male
