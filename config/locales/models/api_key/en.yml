@@ -7,6 +7,10 @@ en:
         auth_token: API key
         expires_at: Expires at
         name: Name
+        permissions:
+          one: Permission
+          other: Permissions
+          zero: No permission
     models:
       api_key:
         gender: female

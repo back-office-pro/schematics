@@ -12,6 +12,10 @@ en:
           sum: Sum
         field: Field
         model: Data
+        roles:
+          one: Role
+          other: Roles
+          zero: No role
     models:
       stat:
         gender: female

@@ -20,6 +20,10 @@ fr:
           pie: Diagramme circulaire
           scatter: Nuage de points
         model: Donnée
+        roles:
+          one: Rôle
+          other: Rôles
+          zero: Aucun rôle
         x_field: Attribut en abscisse
         y_field: Attribut en ordonnée
     models:

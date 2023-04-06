@@ -20,6 +20,10 @@ en:
           pie: Pie chart
           scatter: Scatter chart
         model: Data
+        roles:
+          one: Role
+          other: Roles
+          zero: No role
         x_field: X field
         y_field: Y field
     models:

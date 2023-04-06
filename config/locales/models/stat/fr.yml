@@ -12,6 +12,10 @@ fr:
           sum: Somme
         field: Attribut
         model: Donnée
+        roles:
+          one: Rôle
+          other: Rôles
+          zero: Aucun rôle
     models:
       stat:
         gender: female

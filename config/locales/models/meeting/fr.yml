@@ -6,6 +6,10 @@ fr:
         content: Contenu
         creator: Créateur
         end_at: Fin le
+        groups:
+          one: Groupe
+          other: Groupes
+          zero: Aucun groupe
         location: Lieu
         start_at: Début le
         subject: Sujet

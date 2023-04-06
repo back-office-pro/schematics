@@ -4,6 +4,10 @@ fr:
     attributes:
       role:
         name: Nom
+        permissions:
+          one: Permission
+          other: Permissions
+          zero: Aucune permission
     models:
       role:
         gender: male
