@@ -130,6 +130,12 @@
       "icon": "inbox",
       "descriptor": "subject"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "users"
+      }
+    ],
     "attributes": [
       {
         "name": "subject",
@@ -153,17 +159,6 @@
           "required": true,
           "inverse": {
             "name": "sent_messages"
-          }
-        }
-      },
-      {
-        "name": "recipient",
-        "type": "belongs_to",
-        "options": {
-          "required": true,
-          "type": "user",
-          "inverse": {
-            "name": "received_messages"
           }
         }
       }
