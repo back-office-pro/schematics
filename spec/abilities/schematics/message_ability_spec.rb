@@ -9,15 +9,15 @@ RSpec.describe Schematics::MessageAbility do
   let(:user) { User.new }
   let(:other_user) { User.new }
   let(:author) { nil }
-  let(:recipient) { nil }
-  let(:message) { Message.new(author:, recipient:) }
+  let(:users) { [] }
+  let(:message) { Message.new(author:, users:) }
 
   it { is_expected.not_to be_able_to(:duplicate, Message) }
   it { is_expected.not_to be_able_to(:import, Message) }
 
-  context 'when the user is not the author or the recipient' do
+  context 'when the user is not the author or among recipients' do
     let(:author) { other_user }
-    let(:recipient) { other_user }
+    let(:users) { [other_user] }
 
     it { is_expected.not_to be_able_to(:show, message) }
     it { is_expected.not_to be_able_to(:update, message) }
@@ -27,7 +27,7 @@ RSpec.describe Schematics::MessageAbility do
 
   context 'when the user is the author' do
     let(:author) { user }
-    let(:recipient) { other_user }
+    let(:users) { [other_user] }
 
     it { is_expected.to be_able_to(:show, message) }
     it { is_expected.to be_able_to(:update, message) }
@@ -35,9 +35,9 @@ RSpec.describe Schematics::MessageAbility do
     it { is_expected.to be_able_to(:archive, message) }
   end
 
-  context 'when the user is the recipient' do
+  context 'when the user is among recipients' do
     let(:author) { other_user }
-    let(:recipient) { user }
+    let(:users) { [user] }
 
     it { is_expected.to be_able_to(:show, message) }
     it { is_expected.not_to be_able_to(:update, message) }
