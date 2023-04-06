@@ -14,7 +14,7 @@ module Schematics
           end
 
           def css_class
-            'fw-bold' if unread?
+            'fw-bold' if unread?(current_user)
           end
 
           def href = message_path(@message)
