@@ -11,10 +11,6 @@ module Schematics
         def tbody_css_classes
           params[:page].presence && super
         end
-
-        def tr_css_classes_for(resource)
-          %w[fw-bold] if resource.unread?
-        end
       end
     end
   end
