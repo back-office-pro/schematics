@@ -13,8 +13,8 @@ module Application
 
     def readable? = true
 
-    def unread?(user)
-      !Schematics::Version.exists?(event: 'show', item: self, user:)
+    def read?(user)
+      versions.exists?(event: 'show', user:)
     end
 
     def mentions = content
