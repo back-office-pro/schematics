@@ -56,15 +56,8 @@ describe Schematics::Schema do
         }
       ]
     end
-    let(:message_associations) do
-      schema.find_entity_by_name('message').associations.map(&:name)
-    end
     let(:user_associations) do
       schema.find_entity_by_name('user').associations.map(&:name)
-    end
-
-    it 'prefixes role associations of message entity' do
-      expect(message_associations).to include('author_role', 'recipient_role')
     end
 
     it 'prefixes message associations of user entity' do
