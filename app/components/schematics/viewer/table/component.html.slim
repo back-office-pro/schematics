@@ -8,7 +8,7 @@
             = render Schematics::EmptyResource::Component.new
       - else
         - resources.each do |resource|
-          = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr, css_classes: tr_css_classes_for(resource)) do |c|
+          = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr) do |c|
             - c.with_resource do
               td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
                 = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)

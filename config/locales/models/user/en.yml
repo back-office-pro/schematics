@@ -24,13 +24,13 @@ en:
         locales:
           en: English
           fr: French
-        password: Password
-        password_challenge: Current password
-        password_confirmation: Password confirmation
-        received_messages:
+        messages:
           one: Received message
           other: Received messages
           zero: No message received
+        password: Password
+        password_challenge: Current password
+        password_confirmation: Password confirmation
         remember_me: Remember me?
         requested_tasks:
           one: Requested task

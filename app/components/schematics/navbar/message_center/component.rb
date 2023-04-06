@@ -20,7 +20,7 @@ module Schematics
 
         def messages
           @messages ||= current_user
-                        .received_messages
+                        .messages
                         .with_rich_text_content_and_embeds
                         .with_author_avatar
                         .order(created_at: :desc)
@@ -33,7 +33,7 @@ module Schematics
 
         def count
           @count ||= current_user
-                     .received_messages
+                     .messages
                      .unread
                      .load_async
                      .size

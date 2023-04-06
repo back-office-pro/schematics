@@ -4,7 +4,6 @@ module Schematics
   class ResourcesController < ApplicationController # rubocop:disable Metrics/ClassLength
     include Fillable
     include Searchable
-    include Readable
     include Calendarable
     include Documentable
     include Versionable
@@ -16,7 +15,6 @@ module Schematics
     before_action :redirect_to_resource_path, only: :show
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
-    before_action :read!, only: :show
     before_action :log_search!, only: :index
     after_action :assign_etag, only: %i[show update]
 

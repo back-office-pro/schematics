@@ -12,6 +12,8 @@ module Schematics
 
       delegate :admin?, to: :role
 
+      def id = nil
+
       def drafts = ::Draft.none
 
       def groups = []

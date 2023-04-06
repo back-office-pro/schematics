@@ -11,6 +11,10 @@ module Application
       }
     end
 
+    def read?(user)
+      versions.exists?(event: 'show', user:)
+    end
+
     def mentions = content
       .body
       .attachables
