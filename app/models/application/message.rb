@@ -11,8 +11,6 @@ module Application
       }
     end
 
-    def readable? = true
-
     def read?(user)
       versions.exists?(event: 'show', user:)
     end

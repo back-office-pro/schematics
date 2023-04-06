@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
-module Schematics
-  module Readable
+module Application
+  module MessagesController
     extend ActiveSupport::Concern
 
+    prepended do
+      before_action :read!, only: :show
+    end
+
     def read!
-      return unless @resource.try(:readable?)
       return if @resource.users.exclude?(current_user)
 
-      Version
+      Schematics::Version
         .where(event: 'show', item: @resource, user: current_user)
         .first_or_create!
     end
