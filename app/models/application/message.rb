@@ -11,6 +11,12 @@ module Application
       }
     end
 
+    def readable? = true
+
+    def unread?(user)
+      !Schematics::Version.exists?(event: 'show', item: self, user:)
+    end
+
     def mentions = content
       .body
       .attachables
