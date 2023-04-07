@@ -17,7 +17,7 @@ module Schematics
       def i18n = t('javascript')
         .deep_transform_keys { _1.to_s.camelize(:lower) }
         .to_json
-        .html_safe # rubocop:disable Rails/OutputSafety
+        .html_safe
 
       def maps_api_key = credentials
         .gcloud
