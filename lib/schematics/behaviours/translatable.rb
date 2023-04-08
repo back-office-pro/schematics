@@ -15,7 +15,7 @@ module Schematics
         return super unless translated?
 
         super + <<~RUBY
-          translates :#{name}, type: :#{database_type}
+          translates :#{name}, type: :#{database_type == 'text' ? 'text' : 'string'}
         RUBY
       end
     end
