@@ -17,7 +17,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Permission.destroy!(model:, action:)
+      Permission.destroy_by(model:, action:)
     end
   end
 
