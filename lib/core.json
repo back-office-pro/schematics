@@ -963,14 +963,6 @@
     },
     "attributes": [
       {
-        "name": "translatable",
-        "type": "belongs_to",
-        "options": {
-          "polymorphic": true,
-          "readonly": true
-        }
-      },
-      {
         "name": "locale",
         "type": "enum",
         "options": {

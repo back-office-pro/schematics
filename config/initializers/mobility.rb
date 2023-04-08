@@ -2,7 +2,7 @@
 
 Mobility.configure do
   plugins do
-    backend :key_value, type: :string, association_name: :translations, class_name: 'Translation'
+    backend :key_value
     active_record
     reader
     writer

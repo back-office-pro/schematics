@@ -8,7 +8,6 @@ en:
         locales:
           en: English
           fr: French
-        translatable: Record
         value: Value
     models:
       translation:
