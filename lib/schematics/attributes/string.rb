@@ -4,7 +4,6 @@ module Schematics
   module Attributes
     class String < Text
       include Behaviours::Listable
-      include Behaviours::Translatable
 
       delegate :limit, to: :options
 
