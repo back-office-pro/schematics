@@ -4,6 +4,10 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Citext < String
+      def available_options = super.push(
+        Options::Translated
+      )
+
       def case_sensitive? = false
 
       def database_type = 'citext'

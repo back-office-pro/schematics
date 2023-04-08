@@ -9,11 +9,6 @@ module Schematics
       include Behaviours::Multisearchable
       include Behaviours::Searchable
       include Behaviours::Fillable
-      include Behaviours::Translatable
-
-      def available_options = super.push(
-        Options::Translated
-      )
 
       def default = SecureRandom.base58
 

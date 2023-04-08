@@ -2,7 +2,7 @@
 
 Mobility.configure do
   plugins do
-    backend :key_value
+    backend :key_value, type: :string
     active_record
     ransack
     reader
