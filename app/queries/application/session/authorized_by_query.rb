@@ -6,6 +6,7 @@ module Application
       def call(auth_token, id)
         preload(:slugs)
           .with_user_avatar
+          .with_user_groups
           .with_user_permissions
           .with_user_drafts
           .with_user_slugs
