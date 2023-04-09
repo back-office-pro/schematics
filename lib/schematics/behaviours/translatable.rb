@@ -3,12 +3,20 @@
 module Schematics
   module Behaviours
     module Translatable
+      include Preloadable
+      AVAILABLES_LOCALES = %i[en fr].freeze
       delegate :translated?, to: :options
+
+      def preload
+        return unless translated?
+
+        :string_translations
+      end
 
       def permitted_params
         return super unless translated?
 
-        %i[en fr].map { :"#{name}_#{_1}" }
+        AVAILABLES_LOCALES.map { :"#{name}_#{_1}" }
       end
 
       def to_str
