@@ -17,7 +17,12 @@ module Schematics
     scope :timeline, Versions::TimelineQuery
     scope :with_item, -> { preload(:item) }
     scope :with_user, lambda {
-      preload(user: [:groups, { avatar_attachment: { blob: :variant_records } }])
+      preload(
+        user: [
+          { groups: :string_translations },
+          { avatar_attachment: { blob: :variant_records } }
+        ]
+      )
     }
 
     def icon
