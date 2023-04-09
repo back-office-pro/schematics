@@ -63,4 +63,14 @@ describe Schematics::Attributes::Citext do
       RUBY
     end
   end
+
+  context 'when attribute is translated' do
+    let(:options) { { translated: true } }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        translates :last_name, type: :string
+      RUBY
+    end
+  end
 end
