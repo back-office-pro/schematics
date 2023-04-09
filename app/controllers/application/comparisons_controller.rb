@@ -20,7 +20,7 @@ module Application
 
     def set_resources
       @resources = parent_model_class
-                   .preload(parent_model_class.entity.includes)
+                   .preload_all
                    .where(id: @resource.ids)
                    .accessible_by(current_ability)
                    .load_async

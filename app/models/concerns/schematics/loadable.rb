@@ -42,6 +42,8 @@ module Schematics
         end
       end
 
+      def preload_all = preload(entity.includes)
+
       def reload_definitions!
         Object.__send__(:remove_const, name.to_sym)
         load ::Rails.root.join('app', 'models', "#{name.underscore}.rb")
