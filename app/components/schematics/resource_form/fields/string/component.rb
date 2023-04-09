@@ -17,9 +17,9 @@ module Schematics
             length || min
           end
 
-          def label = resource
-            .class
-            .human_attribute_name(name)
+          def i18n_label(locale)
+            t(".#{locale}", attribute_name: resource.class.human_attribute_name(name))
+          end
         end
       end
     end
