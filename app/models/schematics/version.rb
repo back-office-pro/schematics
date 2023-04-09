@@ -15,8 +15,10 @@ module Schematics
     scope :read_messages, Versions::ReadMessagesQuery
     scope :filter_by_user_preferences, Versions::FilterByUserPreferencesQuery
     scope :timeline, Versions::TimelineQuery
-    scope :with_user, -> { preload(user: [avatar_attachment: [blob: :variant_records]]) }
     scope :with_item, -> { preload(:item) }
+    scope :with_user, lambda {
+      preload(user: [:groups, { avatar_attachment: { blob: :variant_records } }])
+    }
 
     def icon
       {
