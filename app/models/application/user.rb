@@ -7,7 +7,7 @@ module Application
     PASSWORD_RESET_TOKEN_DURATION = 2.hours.freeze
 
     prepended do
-      scope :with_role, -> { preload(:role) }
+      scope :with_role, -> { preload(role: :string_translations) }
       after_create_commit { Schematics::UserMailer.new_account(self).deliver_later }
       attribute :remember_me, :boolean
       attribute :time_zone, default: -> { ::Configuration.instance.time_zone }
