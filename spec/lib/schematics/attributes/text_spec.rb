@@ -52,4 +52,14 @@ describe Schematics::Attributes::Text do
       RUBY
     end
   end
+
+  context 'when translated' do
+    let(:options) { { translated: true } }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        translates :content, type: :text
+      RUBY
+    end
+  end
 end
