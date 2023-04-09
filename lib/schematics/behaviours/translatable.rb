@@ -10,7 +10,7 @@ module Schematics
       def preload
         return unless translated?
 
-        :string_translations
+        :"#{translatable_type}_translations"
       end
 
       def permitted_params
@@ -23,9 +23,11 @@ module Schematics
         return super unless translated?
 
         super + <<~RUBY
-          translates :#{name}
+          translates :#{name}, type: :#{translatable_type}
         RUBY
       end
+
+      def translatable_type = 'text'
     end
   end
 end

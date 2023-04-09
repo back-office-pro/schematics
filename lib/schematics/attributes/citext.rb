@@ -13,6 +13,8 @@ module Schematics
       def case_sensitive? = false
 
       def database_type = 'citext'
+
+      def translatable_type = 'string'
     end
   end
 end

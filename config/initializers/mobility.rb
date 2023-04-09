@@ -2,7 +2,7 @@
 
 Mobility.configure do
   plugins do
-    backend :key_value, type: :string
+    backend :key_value
     active_record
     ransack
     reader
@@ -11,7 +11,6 @@ Mobility.configure do
     query
     cache
     dirty
-
 
     # Column Fallback
     #

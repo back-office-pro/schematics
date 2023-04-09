@@ -9,20 +9,15 @@ module Schematics
       include Behaviours::Multisearchable
       include Behaviours::Searchable
       include Behaviours::Fillable
+      include Behaviours::Translatable
+
+      def available_options = super.push(
+        Options::Translated
+      )
 
       def default = SecureRandom.base58
 
       def icon = :font
-
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_s
-        RUBY
-
-      def format(value)
-        value&.to_s
-      end
     end
   end
 end

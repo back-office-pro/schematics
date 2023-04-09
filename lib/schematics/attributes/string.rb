@@ -2,8 +2,13 @@
 
 module Schematics
   module Attributes
-    class String < Text
+    class String < Attribute
+      include Behaviours::Renderable
+      include Behaviours::Multisearchable
+      include Behaviours::Searchable
+      include Behaviours::Fillable
       include Behaviours::Listable
+
       delegate :limit, to: :options
 
       def available_options = super.push(
@@ -26,6 +31,16 @@ module Schematics
           is: options.length
         }
       )
+
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
+
+      def format(value)
+        value&.to_s
+      end
     end
   end
 end
