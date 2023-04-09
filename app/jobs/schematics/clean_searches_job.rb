@@ -4,8 +4,8 @@ module Schematics
   class CleanSearchesJob < ApplicationJob
     DELAY = 1.year.freeze
 
-    def perform
-      ::Search.destroy_by(created_at: ..DELAY.ago)
-    end
+    def perform = ::Search
+      .preload_all
+      .destroy_by(created_at: ..DELAY.ago)
   end
 end

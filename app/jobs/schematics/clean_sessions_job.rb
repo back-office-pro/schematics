@@ -4,8 +4,8 @@ module Schematics
   class CleanSessionsJob < ApplicationJob
     DELAY = 1.year.freeze
 
-    def perform
-      ::Session.destroy_by(created_at: ..DELAY.ago)
-    end
+    def perform = ::Session
+      .preload_all
+      .destroy_by(created_at: ..DELAY.ago)
   end
 end

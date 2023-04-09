@@ -4,8 +4,8 @@ module Schematics
   class CleanComparisonsJob < ApplicationJob
     DELAY = 30.days.freeze
 
-    def perform
-      ::Comparison.destroy_by(created_at: ..DELAY.ago)
-    end
+    def perform = ::Comparison
+      .preload_all
+      .destroy_by(created_at: ..DELAY.ago)
   end
 end
