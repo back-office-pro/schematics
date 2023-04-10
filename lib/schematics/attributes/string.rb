@@ -2,13 +2,8 @@
 
 module Schematics
   module Attributes
-    class String < Attribute
-      include Behaviours::Renderable
-      include Behaviours::Multisearchable
-      include Behaviours::Searchable
-      include Behaviours::Fillable
+    class String < Text
       include Behaviours::Listable
-
       delegate :limit, to: :options
 
       def available_options = super.push(
@@ -19,6 +14,8 @@ module Schematics
       )
 
       def database_type = 'string'
+
+      def translatable_type = 'string'
 
       def default = SecureRandom.base58(limit || 10)
 
@@ -31,16 +28,6 @@ module Schematics
           is: options.length
         }
       )
-
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_s
-        RUBY
-
-      def format(value)
-        value&.to_s
-      end
     end
   end
 end

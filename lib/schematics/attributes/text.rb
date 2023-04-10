@@ -19,6 +19,16 @@ module Schematics
       def default = SecureRandom.base58
 
       def icon = :font
+
+      def search_data = super
+        .concat(' ')
+        .concat <<~RUBY
+          #{name}&.to_s
+        RUBY
+
+      def format(value)
+        value&.to_s
+      end
     end
   end
 end
