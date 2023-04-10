@@ -5,6 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
+      extend Mobility
       translates :slug, type: :string
       extend FriendlyId
       friendly_id entity.descriptor.name.to_sym
