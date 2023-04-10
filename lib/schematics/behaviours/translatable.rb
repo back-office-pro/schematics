@@ -16,7 +16,9 @@ module Schematics
       def permitted_params
         return super unless translated?
 
-        AVAILABLES_LOCALES.map { :"#{name}_#{_1}" }
+        AVAILABLES_LOCALES
+          .map { :"#{name}_#{_1}" }
+          .unshift(super)
       end
 
       def to_str

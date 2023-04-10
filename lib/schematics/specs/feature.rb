@@ -94,7 +94,7 @@ module Schematics
 
       private
 
-      def fill_form # rubocop:disable Metrics/CyclomaticComplexity
+      def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"
           case element
@@ -126,6 +126,14 @@ module Schematics
             fill_in input, with: element.default.to_date
           when Attributes::Array
             fill_in "#{input}[]", with: element.default
+          when Behaviours::Translatable
+            if element.translated?
+              Behaviours::Translatable::AVAILABLES_LOCALES.each do |locale|
+                fill_in "#{entity.name}[#{element.column_name}_#{locale}]", with: element.default
+              end
+            else
+              fill_in input, with: element.default
+            end
           else
             fill_in input, with: element.default
           end
