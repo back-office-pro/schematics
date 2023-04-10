@@ -15,6 +15,8 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
   it { is_expected.not_to be_case_sensitive }
 
   its(:database_type) { is_expected.to eq('citext') }
@@ -30,6 +32,7 @@ describe Schematics::Attributes::Citext do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
+  its(:preload) { is_expected.to be_nil }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -59,6 +62,19 @@ describe Schematics::Attributes::Citext do
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :last_name, {:presence=>true}
+      RUBY
+    end
+  end
+
+  context 'when attribute is translated' do
+    let(:options) { { translated: true } }
+
+    its(:permitted_params) { is_expected.to eq(%i[last_name last_name_en last_name_fr]) }
+    its(:preload) { is_expected.to eq(:string_translations) }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        translates :last_name, type: :string
       RUBY
     end
   end

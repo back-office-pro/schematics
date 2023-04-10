@@ -38,7 +38,7 @@ module Schematics
         when Entities::Singleton
           instance
         else
-          find(id)
+          friendly.find(id)
         end
       end
 

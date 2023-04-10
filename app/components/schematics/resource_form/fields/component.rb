@@ -4,7 +4,8 @@ module Schematics
   module ResourceForm
     module Fields
       class Component < ApplicationComponent
-        delegate :name, :icon, :required?, to: :field
+        delegate :available_locales, to: 'Schematics::Engine.config.i18n'
+        delegate :name, :icon, :options, :required?, to: :field
         delegate :layout, to: :form
 
         option :form
@@ -39,6 +40,14 @@ module Schematics
         def resource = form.object
 
         def value = resource.public_send(name.to_sym)
+
+        def i18n_label(locale)
+          translate(
+            locale,
+            scope: %i[schematics application resource_form field],
+            attribute_name: resource.class.human_attribute_name(name)
+          )
+        end
 
         protected
 

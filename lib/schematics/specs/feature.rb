@@ -94,7 +94,8 @@ module Schematics
 
       private
 
-      def fill_form # rubocop:disable Metrics/CyclomaticComplexity
+      # :reek:FeatureEnvy
+      def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"
           case element
@@ -107,7 +108,14 @@ module Schematics
           when Attributes::Attachment
             attach_file input, element.default.path
           when Attributes::RichText
-            find_field(input, type: :hidden).set(element.default)
+            if element.translated?
+              Behaviours::Translatable::AVAILABLES_LOCALES.each do |locale|
+                find_field("#{entity.name}[#{element.column_name}_#{locale}]", type: :hidden)
+                  .set(element.default)
+              end
+            else
+              find_field(input, type: :hidden).set(element.default)
+            end
           when Attributes::BelongsTo
             select element.inverse_entity.model_class.first.to_s,
                    from: input,
@@ -126,6 +134,14 @@ module Schematics
             fill_in input, with: element.default.to_date
           when Attributes::Array
             fill_in "#{input}[]", with: element.default
+          when Behaviours::Translatable
+            if element.translated?
+              Behaviours::Translatable::AVAILABLES_LOCALES.each do |locale|
+                fill_in "#{entity.name}[#{element.column_name}_#{locale}]", with: element.default
+              end
+            else
+              fill_in input, with: element.default
+            end
           else
             fill_in input, with: element.default
           end

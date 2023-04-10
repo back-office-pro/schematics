@@ -5,7 +5,6 @@ module Schematics
     module Fields
       module HasAndBelongsToMany
         class Component < BelongsTo::Component
-          delegate :options, to: :field, private: true
           delegate :group_by, to: :options, private: true
 
           def collection

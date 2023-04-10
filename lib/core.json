@@ -119,6 +119,7 @@
         "options": {
           "unique": true,
           "required": true,
+          "translated": true,
           "limit": 50
         }
       }
@@ -351,6 +352,7 @@
         "options": {
           "unique": true,
           "required": true,
+          "translated": true,
           "limit": 50
         }
       }

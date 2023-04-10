@@ -17,11 +17,12 @@ describe Schematics::Attributes::RichText do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
 
   its(:database_type) { is_expected.to eq('rich_text') }
   its(:column_name) { is_expected.to eq('summary') }
   its(:open_api_type) { is_expected.to eq(String) }
-  its(:preload) { is_expected.to eq(rich_text_summary: [embeds_attachments: :blob]) }
+  its(:preload) { is_expected.to eq([{ rich_text_summary: [embeds_attachments: :blob] }]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to eq('MyRichText') }
   its(:to_sql) { is_expected.to eq('action_text_rich_texts.body') }
@@ -40,5 +41,26 @@ describe Schematics::Attributes::RichText do
     is_expected.to eq <<~RUBY
       has_rich_text :summary
     RUBY
+  end
+
+  context 'when translated' do
+    let(:options) { { translated: true } }
+
+    its(:permitted_params) { is_expected.to eq(%i[summary summary_en summary_fr]) }
+
+    its(:preload) do
+      is_expected.to eq(
+        [
+          { rich_text_summary: [embeds_attachments: :blob] },
+          :rich_text_translations
+        ]
+      )
+    end
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        translates :summary, backend: :action_text, column_fallback: false
+      RUBY
+    end
   end
 end

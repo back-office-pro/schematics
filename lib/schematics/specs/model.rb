@@ -140,7 +140,7 @@ module Schematics
                 .with_values(element.values)
                 .with_prefix
             when Attributes::RichText
-              is_expected.to have_rich_text(element.name.to_sym)
+              is_expected.to have_rich_text(element.name.to_sym) unless element.translated?
             when Attributes::Digest
               is_expected.to have_secure_password(element.name.to_sym)
               is_expected

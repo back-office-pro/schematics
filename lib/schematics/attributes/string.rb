@@ -15,6 +15,8 @@ module Schematics
 
       def database_type = 'string'
 
+      def translatable_type = 'string'
+
       def default = SecureRandom.base58(limit || 10)
 
       def icon = :align_justify

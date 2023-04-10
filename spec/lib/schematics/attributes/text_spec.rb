@@ -20,6 +20,8 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
 
   its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
@@ -30,12 +32,7 @@ describe Schematics::Attributes::Text do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
-
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      content: content&.to_s
-    RUBY
-  end
+  its(:preload) { is_expected.to be_nil }
 
   context 'when hidden' do
     let(:options) { { hidden: true } }
@@ -55,6 +52,19 @@ describe Schematics::Attributes::Text do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         attribute :content, default: -> { "text" }
+      RUBY
+    end
+  end
+
+  context 'when translated' do
+    let(:options) { { translated: true } }
+
+    its(:permitted_params) { is_expected.to eq(%i[content content_en content_fr]) }
+    its(:preload) { is_expected.to eq(:text_translations) }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        translates :content, type: :text
       RUBY
     end
   end
