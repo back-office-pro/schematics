@@ -32,6 +32,7 @@ describe Schematics::Attributes::Citext do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
+  its(:preload) { is_expected.to be_nil }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

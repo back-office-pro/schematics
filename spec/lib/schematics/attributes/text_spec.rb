@@ -32,6 +32,7 @@ describe Schematics::Attributes::Text do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
+  its(:preload) { is_expected.to be_nil }
 
   context 'when hidden' do
     let(:options) { { hidden: true } }
