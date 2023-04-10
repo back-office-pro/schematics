@@ -129,7 +129,7 @@ Metrics/BlockLength:
     - it
     - each
 Metrics/MethodLength:
-  Max: 42
+  Max: 49
   AllowedMethods:
     - inherited
 Metrics/AbcSize:

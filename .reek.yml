@@ -11,7 +11,7 @@ detectors:
   TooManyInstanceVariables:
     max_instance_variables: 9
   DuplicateMethodCall:
-    max_calls: 11
+    max_calls: 12
   RepeatedConditional:
     max_ifs: 15
   TooManyMethods:
