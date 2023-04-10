@@ -8,6 +8,11 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Fillable
+      include Behaviours::Translatable
+
+      def available_options = super.push(
+        Options::Translated
+      )
 
       def default = 'MyRichText'
 
@@ -17,9 +22,10 @@ module Schematics
 
       def icon = :align_justify
 
-      def preload = {
-        association_name => [embeds_attachments: :blob]
-      }
+      def preload = [
+        { association_name => [embeds_attachments: :blob] },
+        (super if translated?)
+      ].compact
 
       def search_data = super
         .concat(' ')
@@ -33,9 +39,19 @@ module Schematics
 
       def to_sql = 'action_text_rich_texts.body'
 
-      def to_str = <<~RUBY
-        has_rich_text :#{name}
-      RUBY
+      def to_str
+        if translated?
+          <<~RUBY
+            translates :#{name}, backend: :action_text, column_fallback: false
+          RUBY
+        else
+          <<~RUBY
+            has_rich_text :#{name}
+          RUBY
+        end
+      end
+
+      def translatable_type = 'rich_text'
 
       private
 
