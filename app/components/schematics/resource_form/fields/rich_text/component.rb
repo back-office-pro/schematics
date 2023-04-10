@@ -5,6 +5,8 @@ module Schematics
     module Fields
       module RichText
         class Component < Fields::Component
+          delegate :translated?, to: :field, private: true
+
           def data = { controller: 'mentions' }
         end
       end
