@@ -20,6 +20,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
 
   its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
@@ -55,6 +56,9 @@ describe Schematics::Attributes::Text do
 
   context 'when translated' do
     let(:options) { { translated: true } }
+
+    its(:permitted_params) { is_expected.to eq(%i[content content_en content_fr]) }
+    its(:preload) { is_expected.to eq(:text_translations) }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
