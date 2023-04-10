@@ -55,6 +55,10 @@
   == stars(value)
 - when Schematics::Attributes::Token
   = render Schematics::Button::Clipboard::Component.new(value:)
+- when Schematics::Attributes::Percentage
+  .progress.fs-6
+    .progress-bar role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100' style="width: #{value}%"
+      = field.format(value)
 - when Schematics::Behaviours::Searchable
   = highlight field.format(value), highlight_text
 - else
