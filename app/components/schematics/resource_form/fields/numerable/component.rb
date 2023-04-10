@@ -5,7 +5,6 @@ module Schematics
     module Fields
       module Numerable
         class Component < Fields::Component
-          delegate :options, to: :field, private: true
           delegate :greater_than,
                    :greater_than_or_equal_to,
                    :less_than,

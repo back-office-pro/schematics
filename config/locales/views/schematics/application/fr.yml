@@ -11,9 +11,9 @@ fr:
         subtitle: Cette action est irréversible
         title: Etes-vous sûr ?
         warning: 'Supprimer @{f:la |m:le |fv:l''|mv:l''}%{human_name} %{resource} entraînera également la suppression définitive des éléments suivants :'
-      form:
+      resource:
+        empty: Aucune donnée disponible
+      resource_form:
         field:
           en: "%{attribute_name} en anglais"
           fr: "%{attribute_name} en français"
-      resource:
-        empty: Aucune donnée disponible
