@@ -49,7 +49,7 @@ module Schematics
     def headers = elements
       .stable_sort_by(&:weight)
       .map(&:name)
-      .map { |name| human_attribute_name(name) }
+      .map(&method(:human_attribute_name))
 
     def line = ::Array.new(elements.size)
   end
