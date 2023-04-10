@@ -59,7 +59,7 @@ describe Schematics::Attributes::RichText do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        translates :summary, backend: :action_text
+        translates :summary, backend: :action_text, column_fallback: false
       RUBY
     end
   end
