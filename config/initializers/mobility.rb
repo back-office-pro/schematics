@@ -11,8 +11,10 @@ Mobility.configure do
     query
     cache
     dirty
-    column_fallback
+    column_fallback true
+    fallbacks
     presence
     locale_accessors
+    attribute_methods
   end
 end
