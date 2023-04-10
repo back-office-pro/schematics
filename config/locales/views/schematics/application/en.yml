@@ -11,5 +11,9 @@ en:
         subtitle: This action is irreversible
         title: Are you sure?
         warning: 'Removing the %{human_name} %{resource} will also result in the permanent removal of the following:'
+      form:
+        field:
+          en: "%{attribute_name} in english"
+          fr: "%{attribute_name} in french"
       resource:
         empty: No data available

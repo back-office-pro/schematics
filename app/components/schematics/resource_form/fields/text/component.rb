@@ -5,15 +5,9 @@ module Schematics
     module Fields
       module Text
         class Component < Fields::Component
-          delegate :options, to: :field, private: true
-          delegate :translated?, to: :options
-          delegate :available_locales, to: 'Schematics::Engine.config.i18n'
+          delegate :options, :translated?, to: :field, private: true
 
           def data = { controller: 'autosize' }
-
-          def i18n_label(locale)
-            t(".#{locale}", attribute_name: resource.class.human_attribute_name(name))
-          end
         end
       end
     end
