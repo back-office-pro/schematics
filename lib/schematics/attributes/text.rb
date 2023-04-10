@@ -9,6 +9,7 @@ module Schematics
       include Behaviours::Multisearchable
       include Behaviours::Searchable
       include Behaviours::Fillable
+      include Behaviours::Preloadable
       include Behaviours::Translatable
 
       def available_options = super.push(

@@ -3,7 +3,6 @@
 module Schematics
   module Behaviours
     module Translatable
-      include Preloadable
       AVAILABLES_LOCALES = %i[en fr].freeze
       delegate :translated?, to: :options
 
