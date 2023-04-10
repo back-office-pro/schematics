@@ -58,6 +58,8 @@ ActiveSupport.on_load(:active_storage_blob) do
 end
 
 ActiveSupport.on_load(:action_text_rich_text) do
+  require 'mobility/action_text'
+
   ActionText::RichText.class_eval do
     include Schematics::SoftDeletable
     class << self
