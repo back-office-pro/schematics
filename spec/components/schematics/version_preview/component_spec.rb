@@ -7,7 +7,11 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
 
   include_context 'with user'
 
+  let(:permissions) { Permission.create_all_entities_permissions! }
+  let(:role) { Role.create!(name: 'Admin', permissions:) }
   let(:version) { Schematics::Version.create!(event:, item: user, user:, object:) }
+
+  before { allow(vc_test_controller).to receive(:current_user).and_return(user) }
 
   context 'when version has a create event' do
     let(:event) { 'create' }
