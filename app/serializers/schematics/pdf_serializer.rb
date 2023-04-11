@@ -2,9 +2,17 @@
 
 module Schematics
   class PdfSerializer
-    delegate :render, to: :controller, private: true
+    delegate :render, to: :renderer, private: true
     delegate :human_name, to: :model_class, private: true
     delegate :default_url_options, to: '::Tenant', private: true
+    delegate :key_generator, to: '::Rails.application', private: true
+    delegate :cookies_rotations,
+             :signed_cookie_salt,
+             :encrypted_cookie_salt,
+             :encrypted_signed_cookie_salt,
+             :authenticated_encrypted_cookie_salt,
+             :use_authenticated_cookie_encryption,
+             to: '::Rails.configuration.action_dispatch', private: true
 
     def initialize(resource)
       @resource = resource
@@ -41,13 +49,24 @@ module Schematics
       .build(**default_url_options)
       .to_s
 
-    def controller
-      @controller ||= "#{model_class.to_s.pluralize}Controller".constantize
-    end
+    def renderer = "#{model_class.to_s.pluralize}Controller"
+      .constantize
+      .renderer
+      .new(**action_dispatch_options)
 
     def model_class
       @resource.class
     end
+
+    def action_dispatch_options = {
+      'action_dispatch.key_generator': key_generator,
+      'action_dispatch.cookies_rotations': cookies_rotations,
+      'action_dispatch.signed_cookie_salt': signed_cookie_salt,
+      'action_dispatch.encrypted_cookie_salt': encrypted_cookie_salt,
+      'action_dispatch.encrypted_signed_cookie_salt': encrypted_signed_cookie_salt,
+      'action_dispatch.authenticated_encrypted_cookie_salt': authenticated_encrypted_cookie_salt,
+      'action_dispatch.use_authenticated_cookie_encryption': use_authenticated_cookie_encryption
+    }
 
     def pdf_options = {
       header_template: PdfHeader::Component.new(resource: @resource).to_html,
