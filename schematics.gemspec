@@ -87,7 +87,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paper_trail', '~> 14.0.0'
   spec.add_dependency 'paranoia', '~> 2.6.1'
   spec.add_dependency 'pg', '~> 1.4.6'
-  spec.add_dependency 'phonelib', '~> 0.8.0'
+  spec.add_dependency 'phonelib', '~> 0.8.1'
   spec.add_dependency 'puma', '~> 6.2.1'
   spec.add_dependency 'rack-attack', '~> 6.6.1'
   spec.add_dependency 'rack-cors', '~> 2.0.0'
