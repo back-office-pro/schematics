@@ -12,8 +12,7 @@ module Schematics
     end
 
     def logout
-      reset_session
-      cookies.delete(:auth_token)
+      logout_user!
       redirect_to main_app.login_path, notice: t('.success')
     end
 

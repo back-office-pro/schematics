@@ -5,6 +5,7 @@ module Application
     extend ActiveSupport::Concern
 
     prepended do
+      before_action :logout_user!, only: :create
       skip_before_action :authenticate_user!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
       layout 'schematics/auth', only: %i[new create]
 

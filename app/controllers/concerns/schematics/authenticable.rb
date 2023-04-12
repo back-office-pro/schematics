@@ -53,5 +53,10 @@ module Schematics
     def touch_session!
       current_session.touch!(request)
     end
+
+    def logout_user!
+      reset_session
+      cookies.delete(:auth_token)
+    end
   end
 end
