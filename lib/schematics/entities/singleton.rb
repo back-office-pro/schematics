@@ -11,7 +11,7 @@ module Schematics
 
       def created_at_attribute = super.tap { _1.options = { hidden: true } }
 
-      def to_str = <<~RUBY
+      def to_str = super + <<~RUBY # rubocop:disable Style/StringConcatenation
         include Schematics::Singleton
       RUBY
     end
