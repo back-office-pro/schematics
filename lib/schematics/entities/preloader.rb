@@ -23,6 +23,8 @@ module Schematics
       private
 
       def first_level_scopes = preloadable_elements
+        .grep_v(Attributes::RichText)
+        .grep_v(Attributes::Attachments)
         .map { |element| [element.name, Array.wrap(element.preload)] }
         .reject { _2.empty? }
         .map { |name, preload| scope_to_str(name, preload) }
