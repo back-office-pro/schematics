@@ -32,10 +32,10 @@ OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 Puma::Configuration.prepend(Puma::Override::Configuration)
 
 Rails.configuration.to_prepare do
-  Application
+  Core
     .constants
     .select(&Object.method(:const_defined?))
-    .each { Object.const_get(_1).prepend(Application.const_get(_1)) }
+    .each { Object.const_get(_1).prepend(Core.const_get(_1)) }
 
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false

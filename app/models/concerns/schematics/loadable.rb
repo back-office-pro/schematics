@@ -47,11 +47,11 @@ module Schematics
       def reload_definitions!
         Object.__send__(:remove_const, name.to_sym)
         load ::Rails.root.join('app', 'models', "#{name.underscore}.rb")
-        return unless ::Application.const_defined?(name.to_sym)
+        return unless ::Core.const_defined?(name.to_sym)
 
         Object
           .const_get(name.to_sym)
-          .prepend(Application.const_get(name.to_sym))
+          .prepend(Core.const_get(name.to_sym))
       end
 
       private

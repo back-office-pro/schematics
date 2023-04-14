@@ -14,6 +14,6 @@ module SearchEngine
 
     def pagy_backend = :pagy
 
-    def multisearch = Application::Searches::Ransack
+    def multisearch = Core::Searches::Ransack
   end
 end
