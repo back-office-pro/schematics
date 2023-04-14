@@ -4,10 +4,6 @@ module Application
   module ApiKey
     extend ActiveSupport::Concern
 
-    prepended do
-      scope :with_permissions, -> { preload(:permissions) }
-    end
-
     def login!(*) = self
 
     def touch!(request)

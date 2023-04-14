@@ -6,9 +6,6 @@ module Application
 
     prepended do
       scope :unread, UnreadQuery
-      scope :with_author_avatar, lambda {
-        preload(author: { avatar_attachment: { blob: :variant_records } })
-      }
     end
 
     def read?(user)

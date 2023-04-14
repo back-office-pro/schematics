@@ -42,6 +42,7 @@ module Schematics
       attr_writer :id, :options
 
       delegate :core?, :existing?, :hidden?, to: :options
+      delegate :joins, :includes, :to_str, to: :preloader
 
       class << self
         def build(type: 'entity', **kwargs)
@@ -100,8 +101,6 @@ module Schematics
       def elements = fields + associations
 
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
-
-      def to_str = ''
 
       # :reek:FeatureEnvy
       def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -172,15 +171,6 @@ module Schematics
       def permitted_json_params = fillable_elements
         .flat_map(&:permitted_json_params)
         .push(:lock_version)
-
-      def joins = includes.excluding association_attributes
-        .select(&:polymorphic?)
-        .flat_map(&:preload)
-
-      def includes = preloadable_elements
-        .flat_map(&:preload)
-        .compact
-        .uniq
 
       def events
         state_machine_attributes.flat_map(&:events)
@@ -270,6 +260,8 @@ module Schematics
         &.to_sym
 
       protected
+
+      def preloader = Preloader.new(self)
 
       def search_data_elements = searchable_elements
         .map(&:search_data)

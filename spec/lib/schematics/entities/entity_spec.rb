@@ -3,13 +3,20 @@
 describe Schematics::Entities::Entity do
   subject(:entity) { described_class.new(name:, attributes:, options:) }
 
-  let(:name) { 'entity' }
+  let(:name) { 'discussion' }
   let(:options) { { core: true, existing: true } }
   let(:attributes) do
     [
       {
-        name: 'name',
-        type: 'string'
+        name: 'content',
+        type: 'rich_text'
+      },
+      {
+        name: 'record',
+        type: 'belongs_to',
+        options: {
+          polymorphic: true
+        }
       }
     ]
   end
@@ -20,19 +27,36 @@ describe Schematics::Entities::Entity do
   it { is_expected.to be_multisearchable }
 
   its(:icon) { is_expected.to eq(:square_caret_right) }
-  its(:class_name) { is_expected.to eq('Entity') }
-  its(:multisearch_query) { is_expected.to eq(:name_i_cont) }
+  its(:class_name) { is_expected.to eq('Discussion') }
+  its(:multisearch_query) { is_expected.to eq(:rich_text_content_body_i_cont) }
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
-  its(:to_str) { is_expected.to be_blank }
+  its(:joins) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
+
+  its(:includes) do
+    is_expected.to eq(
+      [
+        { rich_text_content: [embeds_attachments: :blob] },
+        :record
+      ]
+    )
+  end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
       def search_data = {
-        name: name&.to_s,
+        content: content&.to_plain_text,
+        record: record&.to_s,
         created_at:
       }
+    RUBY
+  end
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      scope :with_content, -> { preload([{:rich_text_content=>[{:embeds_attachments=>:blob}]}]) }
+      scope :with_record, -> { preload([:record]) }
     RUBY
   end
 end
