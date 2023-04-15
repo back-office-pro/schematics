@@ -13,6 +13,8 @@ describe Schematics::Options::StateMachineEvent do
   let(:icon) { 'check' }
   let(:color) { 'success' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
+
   its(:action) { is_expected.to eq(:after_complete) }
   its(:icon) { is_expected.to eq(:check) }
   its(:color) { is_expected.to eq(:success) }

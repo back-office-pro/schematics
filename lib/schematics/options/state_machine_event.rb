@@ -8,6 +8,7 @@ module Schematics
     class StateMachineEvent
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
+      include Behaviours::Identifiable
 
       validates :from, :to, inclusion: { in: :values }
       validates :name,
@@ -18,7 +19,7 @@ module Schematics
       delegate :entity, :values, to: :state_machine
 
       attr_accessor :state_machine, :name, :from, :to, :callback
-      attr_writer :icon, :color
+      attr_writer :id, :icon, :color
 
       def icon
         @icon&.to_sym || :location_arrow
