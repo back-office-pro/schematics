@@ -148,10 +148,6 @@ module Schematics
           .find { |field| field.name == name.to_s }
       end
 
-      def find_attribute_by_id(id)
-        attributes.find { _1.id == id }
-      end
-
       def find_event_by_name(name)
         events.find { _1.name == name }
       end
