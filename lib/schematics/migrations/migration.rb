@@ -52,10 +52,12 @@ module Schematics
           if current_entity
             @build_commands.push(
               rename_entity_command(new_entity, current_entity, :build),
-              add_permission_commands(new_entity, current_entity)
+              add_action_permission_commands(new_entity, current_entity),
+              add_event_permission_commands(new_entity, current_entity),
+              rename_event_permission_commands(new_entity, current_entity)
             )
             new_entity.attributes.each do |new_attribute|
-              current_attribute = current_entity.find_attribute_by_id(new_attribute.id)
+              current_attribute = current_entity.attributes.find { _1.id == new_attribute.id }
               if current_attribute
                 @build_commands.push(
                   rename_attribute_command(new_entity, current_attribute, new_attribute),
@@ -87,7 +89,8 @@ module Schematics
           if new_entity
             @clean_commands.push(
               rename_entity_command(current_entity, new_entity, :clean),
-              remove_permission_commands(current_entity, new_entity),
+              remove_action_permission_commands(current_entity, new_entity),
+              remove_event_permission_commands(current_entity, new_entity),
               remove_attribute_commands(current_entity, new_entity)
             )
           else
@@ -124,22 +127,59 @@ module Schematics
       def remove_attribute_commands(entity, new_entity)
         entity
           .attributes
-          .reject { |attribute| new_entity.find_attribute_by_id(attribute.id) }
+          .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
           .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute: attribute.name) }
       end
 
-      def add_permission_commands(entity, current_entity)
+      def add_action_permission_commands(entity, current_entity)
         entity
           .actions
           .difference(current_entity.actions)
           .map { |attribute| Commands::AddPermission.new(entity:, attribute:) }
       end
 
-      def remove_permission_commands(entity, new_entity)
+      def remove_action_permission_commands(entity, new_entity)
         entity
           .actions
           .difference(new_entity.actions)
           .map { |attribute| Commands::RemovePermission.new(entity:, attribute:) }
+      end
+
+      def rename_event_permission_command(entity, current_event, new_event)
+        return unless current_event
+        return if current_event.name == new_event.name
+
+        Commands::RenamePermission.new(
+          entity:,
+          attribute: current_event.name,
+          target: new_event.name
+        )
+      end
+
+      def remove_event_permission_commands(entity, new_entity)
+        entity
+          .events
+          .reject { |event| new_entity.events.find { _1.id == event.id } }
+          .map { |event| Commands::RemovePermission.new(entity:, attribute: event.name) }
+      end
+
+      def add_event_permission_commands(entity, current_entity)
+        entity
+          .events
+          .reject { |event| current_entity.events.find { _1.id == event.id } }
+          .map { |event| Commands::AddPermission.new(entity:, attribute: event.name) }
+      end
+
+      def rename_event_permission_commands(entity, current_entity)
+        entity
+          .events
+          .map do |event|
+            rename_event_permission_command(
+              entity,
+              current_entity.events.find { _1.id == event.id },
+              event
+            )
+          end
       end
     end
   end
