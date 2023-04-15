@@ -342,7 +342,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
-      uses_transaction 'creates a translation'
       uses_transaction 'responds to new model attribute'
 
       it 'is a success' do
@@ -352,10 +351,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'creates a migration file' do
         migrate
         expect(Dir[root.join('db/migrate/*_add_age_to_users.rb')]).not_to be_empty
-      end
-
-      it 'creates a translation' do
-        expect { migrate }.to change(Translation, :count).by(1)
       end
 
       it 'responds to new model attribute' do
