@@ -104,9 +104,7 @@ Style/RequireOrder:
     - bin/importmap
     - Capfile
     - lib/schematics.rb
-    - lib/schematics/commands/create_entity.rb
-    - lib/schematics/commands/destroy_entity.rb
-    - lib/schematics/commands/rename_entity.rb
+    - lib/schematics/commands/*.rb
     - app/controllers/schematics/resources_controller.rb
 Metrics/BlockLength:
   AllowedMethods:

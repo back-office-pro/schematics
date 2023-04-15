@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'generators/permission/permission_generator'
 require 'rails/generators'
+require 'generators/permission/permission_generator'
 
 module Schematics
   module Commands
