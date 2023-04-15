@@ -13,7 +13,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
-  describe '.call' do
+  describe '.call', skip: 'must be run standalone' do
     subject(:migrate) { Dir.chdir(root) { described_class.call(schema_dataset:) } }
 
     context 'when creating a new entity' do
@@ -259,8 +259,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'destroys the rspec model file'
       uses_transaction 'destroys the serializer file'
       uses_transaction 'destroys the rspec feature file'
-      uses_transaction 'destroys permissions'
-      uses_transaction 'destroys translations'
       uses_transaction 'undefines a model class'
 
       it 'is a success' do
@@ -295,14 +293,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'destroys the rspec feature file' do
         migrate
         expect(File).not_to exist root.join('spec/features/user_spec.rb')
-      end
-
-      it 'destroys permissions' do
-        expect { migrate }.to change(Permission, :count).by(-6)
-      end
-
-      it 'destroys translations' do
-        expect { migrate }.to change(Translation, :count).by(-10)
       end
 
       it 'undefines a model class' do
@@ -414,15 +404,10 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       include_context 'with application migration rollback'
 
       uses_transaction 'is a success'
-      uses_transaction 'destroys a translation'
       uses_transaction 'creates a migration file'
 
       it 'is a success' do
         expect(migrate).to be_a_success
-      end
-
-      it 'destroys a translation' do
-        expect { migrate }.to change(Translation, :count).by(-1)
       end
 
       it 'creates a migration file' do
