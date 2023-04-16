@@ -1,5 +1,9 @@
 class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
-  def change
+  def up
     change_column :<%= table_name %>, :<%= @column_name %>, :<%= attributes.first.type %><%= attributes.first.inject_options %>
+  end
+
+  def down
+    change_column :<%= table_name %>, :<%= @column_name %>, :<%= @old_column_type %>
   end
 end

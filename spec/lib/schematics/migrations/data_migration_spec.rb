@@ -534,4 +534,348 @@ describe Schematics::Migrations::DataMigration do
       it { is_expected.to eq(['client']) }
     end
   end
+
+  context 'when adding a new action' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          options: {
+            actions: ['show']
+          }
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          options: {
+            actions: %w[show create]
+          }
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::AddPermission) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when removing an action' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          options: {
+            actions: %w[show create]
+          }
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          options: {
+            actions: ['show']
+          }
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemovePermission) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when adding a new event' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'state_machine'
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'state_machine',
+              options: {
+                events: [
+                  {
+                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+                    name: 'close',
+                    from: 'pending',
+                    to: 'closed'
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::AddPermission) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when removing an event' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'state_machine',
+              options: {
+                events: [
+                  {
+                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+                    name: 'close',
+                    from: 'pending',
+                    to: 'closed'
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'state_machine'
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemovePermission) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when renaming an event' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'state_machine',
+              options: {
+                events: [
+                  {
+                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+                    name: 'close',
+                    from: 'pending',
+                    to: 'closed'
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'state_machine',
+              options: {
+                events: [
+                  {
+                    id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
+                    name: 'cancel',
+                    from: 'pending',
+                    to: 'closed'
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RenamePermission) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
 end

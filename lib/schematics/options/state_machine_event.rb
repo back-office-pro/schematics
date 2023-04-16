@@ -8,6 +8,7 @@ module Schematics
     class StateMachineEvent
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
+      include Behaviours::Identifiable
 
       validates :from, :to, inclusion: { in: :values }
       validates :name,

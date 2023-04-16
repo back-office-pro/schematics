@@ -46,33 +46,23 @@ module Schematics
 
       private
 
-      def generate_build_commands # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def generate_build_commands
         @new_entities.each do |new_entity|
           current_entity = @current_entities.find { _1.id == new_entity.id }
           if current_entity
-            if current_entity.name != new_entity.name
-              @build_commands << Commands::RenameEntity.new(
-                entity: new_entity,
-                attribute: current_entity.name,
-                target: :build
-              )
-            end
+            @build_commands.push(
+              rename_entity_command(new_entity, current_entity, :build),
+              add_action_permission_commands(new_entity, current_entity),
+              add_event_permission_commands(new_entity, current_entity),
+              rename_event_permission_commands(new_entity, current_entity)
+            )
             new_entity.attributes.each do |new_attribute|
-              current_attribute = current_entity.find_attribute_by_id(new_attribute.id)
+              current_attribute = current_entity.attributes.find { _1.id == new_attribute.id }
               if current_attribute
-                if current_attribute.name != new_attribute.name
-                  @build_commands << Commands::RenameAttribute.new(
-                    entity: new_entity,
-                    attribute: current_attribute.name,
-                    target: new_attribute.name
-                  )
-                end
-                if current_attribute.database_type != new_attribute.database_type
-                  @build_commands << Commands::ChangeAttribute.new(
-                    entity: new_entity,
-                    attribute: new_attribute.name
-                  )
-                end
+                @build_commands.push(
+                  rename_attribute_command(new_entity, current_attribute, new_attribute),
+                  change_attribute_command(new_entity, current_attribute, new_attribute)
+                )
               else
                 @build_commands << Commands::AddAttribute.new(
                   entity: new_entity,
@@ -81,11 +71,15 @@ module Schematics
               end
             end
           else
-            @build_commands << Commands::CreateEntity.new(entity: new_entity)
-            @build_commands << Commands::CreateEntityCounterCaches.new(entity: new_entity)
-            @build_commands << Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity) # rubocop:disable Layout/LineLength
+            @build_commands.push(
+              Commands::CreateEntity.new(entity: new_entity),
+              Commands::CreateEntityCounterCaches.new(entity: new_entity),
+              Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity)
+            )
           end
         end
+        @build_commands.flatten!
+        @build_commands.compact!
         @build_commands.sort_by!(&:weight)
       end
 
@@ -93,27 +87,103 @@ module Schematics
         @current_entities.each do |current_entity|
           new_entity = @new_entities.find { _1.id == current_entity.id }
           if new_entity
-            if new_entity.name != current_entity.name
-              @clean_commands << Commands::RenameEntity.new(
-                entity: current_entity,
-                attribute: new_entity.name,
-                target: :clean
-              )
-            end
-            current_entity.attributes.each do |current_attribute|
-              new_attribute = new_entity.find_attribute_by_id(current_attribute.id)
-              next if new_attribute
-
-              @clean_commands << Commands::RemoveAttribute.new(
-                entity: current_entity,
-                attribute: current_attribute.name
-              )
-            end
+            @clean_commands.push(
+              rename_entity_command(current_entity, new_entity, :clean),
+              remove_action_permission_commands(current_entity, new_entity),
+              remove_event_permission_commands(current_entity, new_entity),
+              remove_attribute_commands(current_entity, new_entity)
+            )
           else
             @clean_commands << Commands::DestroyEntity.new(entity: current_entity)
           end
         end
+        @clean_commands.flatten!
+        @clean_commands.compact!
         @clean_commands.sort_by!(&:weight)
+      end
+
+      def change_attribute_command(entity, current_attribute, new_attribute)
+        return if current_attribute.database_type == new_attribute.database_type
+
+        Commands::ChangeAttribute.new(
+          entity:,
+          attribute: new_attribute.name,
+          target: current_attribute.database_type
+        )
+      end
+
+      def rename_attribute_command(entity, current_attribute, new_attribute)
+        return if current_attribute.name == new_attribute.name
+
+        Commands::RenameAttribute.new(
+          entity:,
+          attribute: current_attribute.name,
+          target: new_attribute.name
+        )
+      end
+
+      def rename_entity_command(entity, other_entity, target)
+        return if entity.name == other_entity.name
+
+        Commands::RenameEntity.new(entity:, attribute: other_entity.name, target:)
+      end
+
+      def remove_attribute_commands(entity, new_entity)
+        entity
+          .attributes
+          .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
+          .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute: attribute.name) }
+      end
+
+      def add_action_permission_commands(entity, current_entity)
+        entity
+          .actions
+          .difference(current_entity.actions)
+          .map { |attribute| Commands::AddPermission.new(entity:, attribute:) }
+      end
+
+      def remove_action_permission_commands(entity, new_entity)
+        entity
+          .actions
+          .difference(new_entity.actions)
+          .map { |attribute| Commands::RemovePermission.new(entity:, attribute:) }
+      end
+
+      def rename_event_permission_command(entity, current_event, new_event)
+        return unless current_event
+        return if current_event.name == new_event.name
+
+        Commands::RenamePermission.new(
+          entity:,
+          attribute: current_event.name,
+          target: new_event.name
+        )
+      end
+
+      def remove_event_permission_commands(entity, new_entity)
+        entity
+          .events
+          .reject { |event| new_entity.events.find { _1.id == event.id } }
+          .map { |event| Commands::RemovePermission.new(entity:, attribute: event.name) }
+      end
+
+      def add_event_permission_commands(entity, current_entity)
+        entity
+          .events
+          .reject { |event| current_entity.events.find { _1.id == event.id } }
+          .map { |event| Commands::AddPermission.new(entity:, attribute: event.name) }
+      end
+
+      def rename_event_permission_commands(entity, current_entity)
+        entity
+          .events
+          .map do |event|
+            rename_event_permission_command(
+              entity,
+              current_entity.events.find { _1.id == event.id },
+              event
+            )
+          end
       end
     end
   end

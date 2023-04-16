@@ -39,7 +39,7 @@ module Schematics
                 exclusion: { in: :reserved_names, message: :reserved_name }
 
       attr_accessor :schema, :name
-      attr_writer :id, :options
+      attr_writer :options
 
       delegate :core?, :existing?, :hidden?, to: :options
       delegate :joins, :includes, :to_str, to: :preloader
@@ -146,10 +146,6 @@ module Schematics
           .push(created_at_attribute)
           .push(id_attribute)
           .find { |field| field.name == name.to_s }
-      end
-
-      def find_attribute_by_id(id)
-        attributes.find { _1.id == id }
       end
 
       def find_event_by_name(name)

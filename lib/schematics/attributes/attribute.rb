@@ -19,7 +19,7 @@ module Schematics
       delegate :core?, to: :entity, private: true
       delegate :keys, to: :options, prefix: true, private: true
       attr_accessor :entity, :name
-      attr_writer :id, :options
+      attr_writer :options
 
       accepts_nested_attributes_for :options
 
