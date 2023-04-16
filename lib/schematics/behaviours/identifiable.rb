@@ -3,6 +3,7 @@
 module Schematics
   module Behaviours
     module Identifiable
+      # :reek:Attribute
       attr_writer :id
 
       def id

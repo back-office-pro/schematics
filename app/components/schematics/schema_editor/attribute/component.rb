@@ -8,6 +8,7 @@ module Schematics
         delegate :allowed_association_types, :icon, to: 'builder.object'
         option :builder
 
+        # :reek:NilCheck
         def template? = builder
           .object
           .name
