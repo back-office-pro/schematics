@@ -105,7 +105,11 @@ module Schematics
       def change_attribute_command(entity, current_attribute, new_attribute)
         return if current_attribute.database_type == new_attribute.database_type
 
-        Commands::ChangeAttribute.new(entity:, attribute: new_attribute.name)
+        Commands::ChangeAttribute.new(
+          entity:,
+          attribute: new_attribute.name,
+          target: current_attribute.database_type
+        )
       end
 
       def rename_attribute_command(entity, current_attribute, new_attribute)

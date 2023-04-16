@@ -22,9 +22,10 @@ module ActiveRecord
             @old_table_name = normalize_table_name Regexp.last_match(1)
             @new_table_name = normalize_table_name Regexp.last_match(2)
             @migration_template = rename_table_migration_template_path
-          when /^change_(.+)_in_(.+)/
+          when /^change_(.+)_column_(.*)_in_(.+)/
             @column_name = Regexp.last_match(1)
-            @table_name = normalize_table_name Regexp.last_match(2)
+            @old_column_type = Regexp.last_match(2)
+            @table_name = normalize_table_name Regexp.last_match(3)
             @migration_template = change_column_migration_template_path
           else
             super

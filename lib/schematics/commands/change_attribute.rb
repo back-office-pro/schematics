@@ -9,7 +9,7 @@ module Schematics
       def generators = [
         Rails::Generators::MigrationGenerator.new(
           [
-            "change_#{attribute}_in_#{table_name.pluralize}",
+            "change_#{attribute}_column_#{target}_in_#{table_name.pluralize}",
             "schema:#{name}_#{attribute}"
           ]
         )

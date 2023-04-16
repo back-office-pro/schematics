@@ -473,5 +473,52 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         expect(User.new).to respond_to(:surname)
       end
     end
+
+    context 'when changing attribute type' do
+      let(:current_data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'user',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'user',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'citext'
+              }
+            ]
+          }
+        ]
+      end
+
+      include_context 'with application migration rollback'
+
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+
+      it 'is a success' do
+        expect(migrate).to be_a_success
+      end
+
+      it 'creates a migration file' do
+        migrate
+        expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_users.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+      end
+    end
   end
 end
