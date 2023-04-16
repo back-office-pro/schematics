@@ -19,7 +19,7 @@ module Schematics
       delegate :entity, :values, to: :state_machine
 
       attr_accessor :state_machine, :name, :from, :to, :callback
-      attr_writer :id, :icon, :color
+      attr_writer :icon, :color
 
       def icon
         @icon&.to_sym || :location_arrow

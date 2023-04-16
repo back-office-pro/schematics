@@ -39,7 +39,7 @@ module Schematics
                 exclusion: { in: :reserved_names, message: :reserved_name }
 
       attr_accessor :schema, :name
-      attr_writer :id, :options
+      attr_writer :options
 
       delegate :core?, :existing?, :hidden?, to: :options
       delegate :joins, :includes, :to_str, to: :preloader

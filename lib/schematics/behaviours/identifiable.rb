@@ -3,6 +3,8 @@
 module Schematics
   module Behaviours
     module Identifiable
+      attr_writer :id
+
       def id
         @id ||= SecureRandom.uuid
       end
