@@ -8,7 +8,7 @@
           = render Schematics::SchemaEditor::Button::AddDropdown::Component.new(builder:)
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
     .card-body
-      = builder.hidden_field :id
+      = builder.hidden_field :id unless template?
       = builder.text_field :name,
                            floating: true,
                            required: true,
