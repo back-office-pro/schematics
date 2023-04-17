@@ -4,10 +4,6 @@ en:
     attributes:
       user:
         avatar: Avatar
-        created_comments:
-          one: Created comment
-          other: Created comments
-          zero: No created comment
         created_meetings:
           one: Created meeting
           other: Created meetings

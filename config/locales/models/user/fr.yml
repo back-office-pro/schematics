@@ -4,10 +4,6 @@ fr:
     attributes:
       user:
         avatar: Avatar
-        created_comments:
-          one: Commentaire créé
-          other: Commentaires créés
-          zero: Aucun commentaire créé
         created_meetings:
           one: Réunion créée
           other: Réunions créées

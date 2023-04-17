@@ -780,10 +780,7 @@
         "name": "author",
         "type": "references",
         "options": {
-          "required": true,
-          "inverse": {
-            "name": "created_comments"
-          }
+          "required": true
         }
       }
     ]
