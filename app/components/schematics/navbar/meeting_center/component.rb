@@ -28,7 +28,7 @@ module Schematics
         end
 
         def render?
-          config(:meetings_feature_flag) && can?(:index, ::Meeting)
+          can?(:index, ::Meeting)
         end
 
         def meetings

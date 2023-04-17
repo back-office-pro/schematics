@@ -28,7 +28,7 @@ module Schematics
         end
 
         def render?
-          config(:messages_feature_flag) && can?(:index, ::Message)
+          can?(:index, ::Message)
         end
 
         def count

@@ -28,7 +28,7 @@ module Schematics
         end
 
         def render?
-          config(:tasks_feature_flag) && can?(:index, ::Task)
+          can?(:index, ::Task)
         end
 
         def tasks
