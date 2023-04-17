@@ -12,7 +12,6 @@ fr:
     configuration: configuration
     delete: supprimer
     edit: editer
-    groups: groupes
     login: connexion
     logout: deconnexion
     meetings: reunions
@@ -26,5 +25,6 @@ fr:
     stats: statistiques
     tasks: taches
     translations: traductions
+    user_groups: groupes-utilisateurs
     users: utilisateurs
     versions: historique

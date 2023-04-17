@@ -2,10 +2,10 @@
 en:
   activerecord:
     attributes:
-      group:
+      user_group:
         name: Name
     models:
-      group:
+      user_group:
         gender: male
-        one: Group
-        other: Groups
+        one: User group
+        other: User groups

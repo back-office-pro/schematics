@@ -6,10 +6,6 @@ en:
         applicant: Applicant
         content: Content
         deadline: Deadline
-        groups:
-          one: Group
-          other: Groups
-          zero: No group
         late: Late
         state: State
         states:
@@ -18,6 +14,10 @@ en:
           in_progress: In progress
           pending: Pending
         title: Title
+        user_groups:
+          one: User group
+          other: User groups
+          zero: No user group
         users:
           one: Assigned
           other: Assigneds

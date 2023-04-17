@@ -4,7 +4,7 @@ module Schematics
   module Navbar
     module MyAccount
       class Component < ApplicationComponent
-        delegate :role, :groups, to: :current_user
+        delegate :role, :user_groups, to: :current_user
         delegate :admin_path,
                  :logout_path,
                  :edit_profile_path,

@@ -8,7 +8,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "groups"
+        "name": "user_groups"
       }
     ],
     "virtuals": [
@@ -107,7 +107,7 @@
     ]
   },
   {
-    "name": "group",
+    "name": "user_group",
     "options": {
       "icon": "people_group",
       "descriptor": "name"
@@ -798,7 +798,7 @@
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "groups"
+        "name": "user_groups"
       }
     ],
     "attributes": [
@@ -888,7 +888,7 @@
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "groups"
+        "name": "user_groups"
       }
     ],
     "attributes": [

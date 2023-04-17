@@ -11,10 +11,6 @@ fr:
         email: E-mail
         first_name: Prénom
         full_name: Nom complet
-        groups:
-          one: Groupe
-          other: Groupes
-          zero: Aucun groupe
         last_name: Nom
         locale: Langue
         locales:
@@ -38,6 +34,10 @@ fr:
           other: Messages envoyés
           zero: Aucun message envoyé
         time_zone: Fuseau horaire
+        user_groups:
+          one: Groupe d'utilisateur
+          other: Groupes d'utilisateurs
+          zero: Aucun groupe d'utilisateur
     models:
       user:
         gender: male

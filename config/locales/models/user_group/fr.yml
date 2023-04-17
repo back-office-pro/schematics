@@ -1,0 +1,11 @@
+---
+fr:
+  activerecord:
+    attributes:
+      user_group:
+        name: Nom
+    models:
+      user_group:
+        gender: male
+        one: Groupe d'utilisateur
+        other: Groupes d'utilisateurs

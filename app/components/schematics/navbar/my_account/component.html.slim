@@ -8,10 +8,10 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start
             .carousel-item.active
               = fa_icon Role.entity.icon, class: 'me-2'
               = role
-            - groups.each do |group|
+            - user_groups.each do |user_group|
               .carousel-item
-                = fa_icon Group.entity.icon, class: 'me-2'
-                = group
+                = fa_icon UserGroup.entity.icon, class: 'me-2'
+                = user_group
       .col
         = render Schematics::Attachment::Component.avatar(user: current_user)
   .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {

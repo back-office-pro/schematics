@@ -6,7 +6,7 @@ module Schematics
       super
       cannot %i[destroy archive], user
       can :update, user
-      cannot :update, user, %i[role role_id groups group_ids]
+      cannot :update, user, %i[role role_id user_groups user_group_ids]
       return unless user.admin?
 
       can :impersonate, ::User

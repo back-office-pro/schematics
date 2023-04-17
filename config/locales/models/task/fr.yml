@@ -6,10 +6,6 @@ fr:
         applicant: Demandeur
         content: Contenu
         deadline: Date limite
-        groups:
-          one: Groupe
-          other: Groupes
-          zero: Aucun groupe
         late: En retard
         state: Etat
         states:
@@ -18,6 +14,10 @@ fr:
           in_progress: En cours
           pending: En attente
         title: Titre
+        user_groups:
+          one: Groupe d'utilisateur
+          other: Groupes d'utilisateurs
+          zero: Aucun groupe d'utilisateur
         users:
           one: Assigné
           other: Assignés

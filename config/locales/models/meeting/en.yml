@@ -6,15 +6,15 @@ en:
         content: Content
         creator: Creator
         end_at: End at
-        groups:
-          one: Group
-          other: Groups
-          zero: No group
         location: Location
         start_at: Start at
         subject: Subject
         to_come: To come
         url: URL
+        user_groups:
+          one: User group
+          other: User groups
+          zero: No user group
         users:
           one: Participant
           other: Participants

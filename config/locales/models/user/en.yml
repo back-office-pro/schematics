@@ -11,10 +11,6 @@ en:
         email: Email
         first_name: First name
         full_name: Full name
-        groups:
-          one: Group
-          other: Groups
-          zero: No group
         last_name: Last name
         locale: Locale
         locales:
@@ -38,6 +34,10 @@ en:
           other: Sent messages
           zero: No message sent
         time_zone: Time zone
+        user_groups:
+          one: User group
+          other: User groups
+          zero: No user group
     models:
       user:
         gender: male

@@ -6,15 +6,15 @@ fr:
         content: Contenu
         creator: Créateur
         end_at: Fin le
-        groups:
-          one: Groupe
-          other: Groupes
-          zero: Aucun groupe
         location: Lieu
         start_at: Début le
         subject: Sujet
         to_come: A venir
         url: URL
+        user_groups:
+          one: Groupe d'utilisateur
+          other: Groupes d'utilisateurs
+          zero: Aucun groupe d'utilisateur
         users:
           one: Participant
           other: Participants
