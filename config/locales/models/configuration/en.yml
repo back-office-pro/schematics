@@ -9,6 +9,7 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
+        content_management_system_feature_flag: Enable content management system
         locale: Locale
         locales:
           en: English
