@@ -3,7 +3,6 @@ en:
   activerecord:
     attributes:
       article:
-        article_category: Article category
         author: Author
         content: Content
         state: State

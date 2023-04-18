@@ -1198,32 +1198,6 @@
         "options": {
           "required": true
         }
-      },
-      {
-        "name": "article_category",
-        "type": "belongs_to",
-        "options": {
-          "required": true
-        }
-      }
-    ]
-  },
-  {
-    "name": "article_category",
-    "options": {
-      "descriptor": "title",
-      "icon": "paperclip"
-    },
-    "attributes": [
-      {
-        "name": "title",
-        "type": "citext",
-        "options": {
-          "unique": true,
-          "required": true,
-          "translated": true,
-          "limit": 100
-        }
       }
     ]
   }

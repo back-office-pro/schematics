@@ -3,7 +3,6 @@ fr:
   activerecord:
     attributes:
       article:
-        article_category: Catégorie d'article
         author: Auteur
         content: Contenu
         state: Etat
