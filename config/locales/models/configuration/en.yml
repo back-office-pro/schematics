@@ -3,13 +3,13 @@ en:
   activerecord:
     attributes:
       configuration:
+        articles_feature_flag: Enable content management system
         comments_feature_flag: Enable comments
         company_address: Company address
         company_logo: Company Logo
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
-        content_management_system_feature_flag: Enable content management system
         locale: Locale
         locales:
           en: English

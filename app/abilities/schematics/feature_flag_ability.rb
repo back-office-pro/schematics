@@ -6,7 +6,7 @@ module Schematics
              :comments_feature_flag,
              :tasks_feature_flag,
              :meetings_feature_flag,
-             :content_management_system_feature_flag,
+             :articles_feature_flag,
              to: :config,
              private: true
 
@@ -16,7 +16,7 @@ module Schematics
       cannot :manage, ::Comment unless comments_feature_flag
       cannot :manage, ::Meeting unless meetings_feature_flag
       cannot :manage, ::Task unless tasks_feature_flag
-      cannot :manage, [::Article, ::ArticleCategory] unless content_management_system_feature_flag
+      cannot :manage, ::Article unless articles_feature_flag
     end
 
     private

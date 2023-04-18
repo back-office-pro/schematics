@@ -3,13 +3,13 @@ fr:
   activerecord:
     attributes:
       configuration:
+        articles_feature_flag: Activer le système de gestion de contenu
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
         company_logo: Logo de la société
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
-        content_management_system_feature_flag: Activer le système de gestion de contenu
         locale: Langue
         locales:
           en: Anglais
