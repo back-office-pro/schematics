@@ -327,6 +327,14 @@
           "cached": true,
           "default": true
         }
+      },
+      {
+        "name": "content_management_system_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
+        }
       }
     ]
   },
@@ -1129,6 +1137,92 @@
             "entities": 1,
             "databases": 1
           }
+        }
+      }
+    ]
+  },
+  {
+    "name": "article",
+    "options": {
+      "descriptor": "title",
+      "icon": "newspaper"
+    },
+    "attributes": [
+      {
+        "name": "title",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "translated": true,
+          "limit": 100
+        }
+      },
+      {
+        "name": "content",
+        "type": "rich_text",
+        "options": {
+          "required": true,
+          "translated": true
+        }
+      },
+      {
+        "name": "state",
+        "type": "state_machine",
+        "options": {
+          "required": true,
+          "default": "draft",
+          "values": [
+            "draft",
+            "published"
+          ],
+          "events": [
+            {
+              "name": "publish",
+              "icon": "arrow_trend_up",
+              "from": "draft",
+              "to": "published"
+            },
+            {
+              "name": "unpublish",
+              "icon": "arrow_trend_down",
+              "from": "published",
+              "to": "draft"
+            }
+          ]
+        }
+      },
+      {
+        "name": "author",
+        "type": "references",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "name": "article_category",
+        "type": "belongs_to",
+        "options": {
+          "required": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "article_category",
+    "options": {
+      "descriptor": "title",
+      "icon": "paperclip"
+    },
+    "attributes": [
+      {
+        "name": "title",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "translated": true,
+          "limit": 100
         }
       }
     ]
