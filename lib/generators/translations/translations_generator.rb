@@ -4,41 +4,6 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
   delegate :available_locales, to: 'Schematics::Engine.config.i18n'
   class_option :rename, type: :string
 
-  def generate_route_translations
-    return unless generating?
-
-    PaperTrail.request(enabled: false) do
-      available_locales.each do |locale|
-        Translation.create!(
-          locale:,
-          key: "routes.#{entity.name.pluralize}",
-          value: translate(entity.name.pluralize, locale:).parameterize(separator: '-')
-        )
-      end
-    end
-  end
-
-  def destroy_route_translations
-    return unless destroying?
-
-    PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
-        locale: available_locales,
-        key: "routes.#{entity.name.pluralize}"
-      )
-    end
-  end
-
-  def rename_route_translations
-    return unless renaming?
-
-    PaperTrail.request(enabled: false) do
-      Translation
-        .where(key: "routes.#{old_name.pluralize}")
-        .update_all(key: "routes.#{entity.name.pluralize}") # rubocop:disable Rails/SkipsModelValidations
-    end
-  end
-
   def generate_model_gender_translations
     return unless generating?
 
