@@ -1,0 +1,11 @@
+---
+fr:
+  activerecord:
+    attributes:
+      article_category:
+        title: Titre
+    models:
+      article_category:
+        gender: female
+        one: Catégorie d'article
+        other: Catégories d'articles

@@ -1,0 +1,22 @@
+---
+fr:
+  activerecord:
+    attributes:
+      article:
+        article_category: Catégorie d'article
+        author: Auteur
+        content: Contenu
+        state: Etat
+        states:
+          draft: Brouillon
+          published: Publié
+        title: Titre
+    events:
+      article:
+        publish: Publier
+        unpublish: Dépublier
+    models:
+      article:
+        gender: male
+        one: Article
+        other: Articles

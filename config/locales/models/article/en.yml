@@ -1,0 +1,22 @@
+---
+en:
+  activerecord:
+    attributes:
+      article:
+        article_category: Article category
+        author: Author
+        content: Content
+        state: State
+        states:
+          draft: Draft
+          published: Published
+        title: Title
+    events:
+      article:
+        publish: Publish
+        unpublish: Unpublish
+    models:
+      article:
+        gender: male
+        one: Article
+        other: Articles
