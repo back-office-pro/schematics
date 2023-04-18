@@ -24,7 +24,7 @@ module Schematics
       private
 
       def editable?(element)
-        enable_buttons?(element) && !element.is_a?(Behaviours::Preloadable)
+        enable_buttons?(element) && !element.is_a?(Attributes::Attachment)
       end
 
       def enable_buttons?(element)
