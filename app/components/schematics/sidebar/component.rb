@@ -15,7 +15,7 @@ module Schematics
         .entities
         .reject(&:core?)
         .filter_map(&:model_class)
-        .push(::Import, ::ActiveStorage::Blob, ::Article)
+        .push(::Import, ::ActiveStorage::Blob)
         .select { can?(:index, _1) }
         .sort_by(&:human_name)
 
