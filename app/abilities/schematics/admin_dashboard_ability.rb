@@ -2,20 +2,25 @@
 
 module Schematics
   class AdminDashboardAbility < ApplicationAbility
-    def initialize(ability) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    ADMIN_MODEL_CLASSES = [
+      ::ApiKey,
+      ::ApiRequest,
+      ::Permission,
+      ::SchemaDataset,
+      ::Session,
+      ::Translation,
+      ::Chart,
+      ::Stat,
+      ::User,
+      ::UserGroup,
+      ::Role,
+      ::Configuration,
+      ::Licence
+    ].freeze
+
+    def initialize(ability)
       super
-      return if ability.cannot?(:index, ::ApiKey) &&
-                ability.cannot?(:index, ::ApiRequest) &&
-                ability.cannot?(:index, ::Permission) &&
-                ability.cannot?(:index, ::SchemaDataset) &&
-                ability.cannot?(:index, ::Session) &&
-                ability.cannot?(:index, ::Translation) &&
-                ability.cannot?(:index, ::Chart) &&
-                ability.cannot?(:index, ::Stat) &&
-                ability.cannot?(:index, ::User) &&
-                ability.cannot?(:index, ::Role) &&
-                ability.cannot?(:update, ::Configuration) &&
-                ability.cannot?(:cancel, ::Licence)
+      return if ADMIN_MODEL_CLASSES.all? { ability.cannot?(:index, _1) }
 
       can :read, :admin_dashboard
     end
