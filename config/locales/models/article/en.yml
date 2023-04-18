@@ -5,6 +5,7 @@ en:
       article:
         author: Author
         content: Content
+        image: Image
         state: State
         states:
           draft: Draft

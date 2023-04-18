@@ -1159,6 +1159,18 @@
         }
       },
       {
+        "name": "image",
+        "type": "attachment",
+        "options": {
+          "content_type": [
+            "png",
+            "jpeg",
+            "jpg"
+          ],
+          "size": 2
+        }
+      },
+      {
         "name": "content",
         "type": "rich_text",
         "options": {
