@@ -1,1 +1,2 @@
 = render Schematics::ResourceDetails::Component.new(resource: @resource)
+= render Schematics::Viewer::RichText::Component.with_collection(model_class.entity.rich_text_attributes, resource: @resource)
