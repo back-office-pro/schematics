@@ -9,7 +9,13 @@ RSpec.describe TranslationsGenerator do
   let(:name) { 'task' }
   let(:behavior) { :invoke }
   let(:options) { [] }
-  let(:translation) { Translation.create!(locale: 'en', key: 'routes.tasks', value: 'tasks') }
+  let(:translation) do
+    Translation.create!(
+      locale: 'en',
+      key: 'activerecord.models.task.gender',
+      value: 'female'
+    )
+  end
 
   before { translation }
 
@@ -20,7 +26,7 @@ RSpec.describe TranslationsGenerator do
       it 'creates translations' do
         expect { invoke_all }
           .to change(Translation, :count)
-          .by(34)
+          .by(32)
       end
     end
 
@@ -41,8 +47,8 @@ RSpec.describe TranslationsGenerator do
       it 'updates translations' do
         expect { invoke_all }
           .to change { translation.reload.key }
-          .from('routes.tasks')
-          .to('routes.meetings')
+          .from('activerecord.models.task.gender')
+          .to('activerecord.models.meeting.gender')
       end
     end
   end

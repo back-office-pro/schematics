@@ -102,7 +102,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       end
 
       it 'creates translations' do
-        expect { migrate }.to change(Translation, :count).by(10)
+        expect { migrate }.to change(Translation, :count).by(8)
       end
 
       it 'defines a model class' do
