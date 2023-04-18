@@ -3,7 +3,7 @@ en:
   activerecord:
     attributes:
       configuration:
-        articles_feature_flag: Enable content management system
+        articles_feature_flag: Enable articles
         comments_feature_flag: Enable comments
         company_address: Company address
         company_logo: Company Logo
