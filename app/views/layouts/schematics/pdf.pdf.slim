@@ -2,9 +2,11 @@ doctype html
 html
   head
     meta charset='utf-8'
+    = render Schematics::ApplicationStylesheetLink::Component.new
     = stylesheet_link_tag 'schematics/themes/light', media: 'all'
     = stylesheet_link_tag 'schematics/application', media: 'all'
     = render Schematics::JavascriptImportmap::Component.new
+    = render Schematics::ThemeCustomStylesheet::Component.new
   body
     = yield
     = yield :charts_js
