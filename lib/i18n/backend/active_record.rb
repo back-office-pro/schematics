@@ -18,6 +18,8 @@ module I18n
         else
           nil
         end
+      rescue StandardError
+        nil
       end
 
       private
