@@ -13,11 +13,11 @@ module I18n
         case key.split('.')
         in ['activerecord', 'models', *]
           fetch(locale, key + count_to_key(options[:count]))
-        in ['routes', *] | ['activerecord', 'attributes', *] | ['activerecord', 'events', *]
+        in ['activerecord', 'attributes', *] | ['activerecord', 'events', *]
           fetch(locale, key)
+        else
+          nil
         end
-      rescue StandardError
-        nil
       end
 
       private
@@ -34,6 +34,8 @@ module I18n
         Rails.cache.fetch("translations/#{locale}/#{key}") do
           format_lookup ::Translation.lookup(locale, key), key
         end
+      rescue StandardError
+        nil
       end
 
       def format_lookup(translations, key)
