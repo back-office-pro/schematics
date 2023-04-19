@@ -5,7 +5,7 @@ module Schematics
     skip_before_action :authenticate_user!
 
     def show
-      @posts = ::BlogPost.state_published.all
+      @posts = ::BlogPost.state_published
     end
   end
 end
