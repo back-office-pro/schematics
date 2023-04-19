@@ -15,11 +15,13 @@ module Schematics
               .comments
               .with_rich_text_content_and_embeds
               .with_author_avatar
-              .order(created_at: :desc)
+              .order(created_at: :desc), items:
           )
         end
 
         def model_class = ::Comment
+
+        def items = 10
 
         def title = "#{count} #{human_name(count:)}"
       end
