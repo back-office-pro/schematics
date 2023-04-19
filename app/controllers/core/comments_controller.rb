@@ -8,7 +8,7 @@ module Core
       include Schematics::Nestable
     end
 
-    def create_redirect_path = polymorphic_path(record)
+    def resource_path = polymorphic_path(record, comments: '').chop
 
     def parent_model_name
       @resource.try(:record_type) || super
@@ -19,7 +19,5 @@ module Core
     end
 
     def resource_defaults = super.merge(record:)
-
-    def update_redirect_path = polymorphic_path(record)
   end
 end

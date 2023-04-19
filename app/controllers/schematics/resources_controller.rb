@@ -91,7 +91,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to polymorphic_path(@resource), notice: tscope(result.message)
+            redirect_to resource_path, notice: tscope(result.message)
           end
           format.json { render json: @resource, status: :created, location: @resource }
         end
@@ -108,7 +108,7 @@ module Schematics
 
     def new
       @resource = model_class.new
-      @draft = current_user.drafts.find_by(action: polymorphic_path(@resource))
+      @draft = current_user.drafts.find_by(action: polymorphic_path(model_class))
     end
 
     def edit; end
@@ -118,7 +118,7 @@ module Schematics
       result = Resources::Create.call(resource: @resource)
       if result.success?
         respond_to do |format|
-          format.html { redirect_to create_redirect_path, notice: tscope(result.message) }
+          format.html { redirect_to resource_path, notice: tscope(result.message) }
           format.json { render json: @resource, status: :created, location: @resource }
         end
       else
@@ -152,7 +152,7 @@ module Schematics
       if result.success?
         respond_to do |format|
           format.html do
-            redirect_to update_redirect_path, notice: tscope(result.message)
+            redirect_to resource_path, notice: tscope(result.message)
           end
           format.json
         end
@@ -175,7 +175,7 @@ module Schematics
         respond_to do |format|
           format.html do
             notice = tscope(result.message, event: event.human.downcase)
-            redirect_back_or_to trigger_redirect_path, notice:
+            redirect_back_or_to resource_path, notice:
           end
           format.json
         end
@@ -215,7 +215,7 @@ module Schematics
 
     protected
 
-    def create_redirect_path = polymorphic_path(@resource)
+    def resource_path = polymorphic_path(@resource)
 
     def i18n_title_path = 'schematics.resources'
 
@@ -259,8 +259,5 @@ module Schematics
         **kwargs.merge(human_name:, gender:)
       )
     end
-
-    alias update_redirect_path create_redirect_path
-    alias trigger_redirect_path create_redirect_path
   end
 end

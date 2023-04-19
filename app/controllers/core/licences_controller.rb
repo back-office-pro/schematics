@@ -4,6 +4,6 @@ module Core
   module LicencesController
     extend ActiveSupport::Concern
 
-    def trigger_redirect_path = admin_path
+    def resource_path = admin_path
   end
 end
