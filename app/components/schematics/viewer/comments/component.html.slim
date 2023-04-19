@@ -1,4 +1,5 @@
 #comments.offcanvas.offcanvas-end {
+  data-controller='offcanvas'
   aria-labelledby='commentsLabel'
   tabindex='-1'
   data-bs-scroll='true'
@@ -9,4 +10,6 @@
       = render Schematics::Button::Add::Component.new(model_class:, resource:)
     button.btn-close.text-reset.ms-2 aria-label='Close' data-bs-dismiss='offcanvas' type='button'
   .offcanvas-body.pt-0
-    = render Schematics::CommentPreview::Component.with_collection(comments)
+    = turbo_frame_tag 'comments', data: { turbo_action: 'advance' } do
+      = render Schematics::CommentPreview::Component.with_collection(@comments)
+      = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
