@@ -16,7 +16,7 @@ module Schematics
               .with_title
               .with_rich_text_content_and_embeds
               .with_author_avatar
-              .find_by!(slug: params[:slug])
+              .finder(params[:slug])
     end
   end
 end
