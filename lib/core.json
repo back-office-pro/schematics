@@ -329,7 +329,7 @@
         }
       },
       {
-        "name": "articles_feature_flag",
+        "name": "blog_feature_flag",
         "type": "boolean",
         "options": {
           "cached": true,
@@ -1142,7 +1142,7 @@
     ]
   },
   {
-    "name": "article",
+    "name": "blog_post",
     "options": {
       "descriptor": "title",
       "icon": "newspaper"

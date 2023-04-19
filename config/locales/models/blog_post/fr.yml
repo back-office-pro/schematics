@@ -2,7 +2,7 @@
 fr:
   activerecord:
     attributes:
-      article:
+      blog_post:
         author: Auteur
         content: Contenu
         image: Image
@@ -12,11 +12,11 @@ fr:
           published: Publié
         title: Titre
     events:
-      article:
+      blog_post:
         publish: Publier
         unpublish: Dépublier
     models:
-      article:
+      blog_post:
         gender: male
-        one: Article
-        other: Articles
+        one: Article de blog
+        other: Articles de blog

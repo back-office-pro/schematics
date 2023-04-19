@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module Articles
+      module BlogPosts
         class Component < Widgets::Component
         end
       end

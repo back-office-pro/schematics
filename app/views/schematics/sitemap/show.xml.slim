@@ -2,8 +2,8 @@ doctype xml
 urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
   url
     loc = root_url
-    lastmod = @articles.last&.updated_at&.xmlschema
-  - @articles.find_each do |article|
+    lastmod = @posts.last&.updated_at&.xmlschema
+  - @posts.find_each do |post|
     url
-      loc = main_app.article_url(article)
-      lastmod = article.updated_at.xmlschema
+      loc = main_app.blog_post_url(post)
+      lastmod = post.updated_at.xmlschema

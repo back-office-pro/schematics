@@ -11,7 +11,7 @@ fr:
     schematics:
       blog:
         index: Blog
-        show: Blog - "%{article}"
+        show: Blog - "%{post}"
       dashboard:
         admin: Administration
         home: Tableau de bord
