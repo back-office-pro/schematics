@@ -1,0 +1,10 @@
+.card.shadow-sm.animate__animated.animate__zoomIn
+  .card-body.p-3
+    h5 = link_to title, path
+    p = caption
+    .row
+      .col-auto.align-self-center
+        = render Schematics::Attachment::Component.avatar(user: author)
+      .col
+        = author
+        .text-muted data-controller='timeago' datetime=created_at

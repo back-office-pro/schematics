@@ -1,2 +1,4 @@
-- @posts.each do |post|
-  = link_to post.title, blog_path(post)
+.d-flex.justify-content-center.text-white.mb-4.pb-4
+  = render Schematics::Attachment::Component.company_logo(attachment: config(:company_logo), icon: :door_open)
+= render Schematics::BlogPostPreview::Component.with_collection(@posts)
+= render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
