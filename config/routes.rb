@@ -10,6 +10,7 @@ Schematics::Engine.routes.draw do
     resource :sitemap, only: :show, format: :xml, controller: :sitemap
     resource :documentation, only: :show, controller: :documentation
     resource :profile, only: %i[edit update], controller: :profile
+    resources :blog, only: %i[index show], controller: :blog, param: :slug, format: :html
     resources :password_resets, only: %i[new create edit update], param: :token
     resources :versions, only: %i[index show] do
       patch :revert, on: :member

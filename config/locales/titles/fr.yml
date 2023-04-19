@@ -9,6 +9,9 @@ fr:
       new: Importer des %{parent_human_name_plural}
       show: "%{resource}"
     schematics:
+      blog:
+        index: Blog
+        show: Blog - "%{article}"
       dashboard:
         admin: Administration
         home: Tableau de bord
