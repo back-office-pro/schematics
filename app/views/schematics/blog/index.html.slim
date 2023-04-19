@@ -1,4 +1,4 @@
 .d-flex.justify-content-center.text-white.mb-4.pb-4
-  = render Schematics::Attachment::Component.company_logo(attachment: config(:company_logo), icon: :door_open)
+  = render Schematics::Attachment::Component.company_logo(attachment: config(:company_logo), icon: BlogPost.entity.icon)
 = render Schematics::BlogPostPreview::Component.with_collection(@posts)
 = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
