@@ -132,6 +132,7 @@ module Schematics
 
     # Importmap
     config.importmap.paths << root.join('config', 'importmap.rb')
+    config.importmap.cache_sweepers << root.join('app', 'assets', 'javascripts')
 
     # i18n
     config.i18n.default_locale = :en
