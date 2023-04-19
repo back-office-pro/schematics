@@ -1,0 +1,4 @@
+User-agent: *
+Sitemap: https://<%= Tenant.host %>/sitemap.xml
+Allow: /blog/*
+Disallow: /
