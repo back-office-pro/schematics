@@ -25,6 +25,6 @@ module Schematics
       @resource = model_class.finder(params[:slug])
     end
 
-    def create_redirect_path = blog_index_path
+    def resource_path = blog_index_path
   end
 end
