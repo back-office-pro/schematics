@@ -3,7 +3,7 @@ import { Offcanvas } from 'bootstrap'
 
 export default class extends ApplicationController {
   connect () {
-    if (window.location.hash.substring(1) === this.element.id) {
+    if (window.location.search.substring(1).startsWith(this.element.id)) {
       new Offcanvas(this.element).show()
     }
   }
