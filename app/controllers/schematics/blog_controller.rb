@@ -3,20 +3,20 @@
 module Schematics
   class BlogController < ApplicationController
     skip_before_action :authenticate_user!
-    layout 'schematics/jumbotron'
+    layout 'schematics/blog'
 
     def index
-      @posts = ::BlogPost.state_published.all
+      @pagy, @posts = pagy(model_class)
     end
 
     def show
-      @post = ::BlogPost
-              .state_published
-              .with_attached_image
-              .with_title
-              .with_rich_text_content_and_embeds
-              .with_author_avatar
-              .finder(params[:slug])
+      @post = model_class.finder(params[:slug])
     end
+
+    private
+
+    def model_class = ::BlogPost
+      .preload_all
+      .state_published
   end
 end
