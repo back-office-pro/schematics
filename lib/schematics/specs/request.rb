@@ -31,6 +31,7 @@ module Schematics
         subject { response }
 
         let(:record) { default.tap(&:save!) }
+        let(:route_key) { model_class.model_name.singular_route_key.to_sym }
         let(:auth_token) { JWT::AuthToken.encode(session.auth_token) }
         let(:headers) { { 'Authorization' => "Bearer #{auth_token}" } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
@@ -96,13 +97,13 @@ module Schematics
 
           unless entity.is_a?(Entities::Singleton)
             it 'should be not found' do
-              get "/#{model_class.model_name.route_key}/foo", headers:, as: :html
+              get polymorphic_path([route_key], id: 'foo'), headers:, as: :html
               redirect_path = ability.can?(:index, model_class) ? index_path : root_path
               is_expected.to redirect_to(redirect_path)
             end
 
             it 'should be not found API' do
-              get "/#{model_class.model_name.route_key}/foo", headers:, as: :json
+              get polymorphic_path([route_key], id: 'foo'), headers:, as: :json
               is_expected.to have_http_status(:not_found)
             end
           end
