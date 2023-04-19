@@ -4,9 +4,12 @@ h5.text-center.text-white.mb-4 = title
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-body.p-3
     == content
-.row.mt-4.text-white
+.row.py-4.text-white
   .col-auto.align-self-center
     = render Schematics::Attachment::Component.avatar(user: author)
   .col
     = author
     .text-muted data-controller='timeago' datetime=created_at
+  .col-auto
+    = link_to blog_index_path, class: 'text-white' do
+      = fa_icon :circle_chevron_left, class: 'fa-2x'
