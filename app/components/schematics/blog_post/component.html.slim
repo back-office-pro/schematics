@@ -1,10 +1,10 @@
 .d-flex.justify-content-center.text-white.mb-4
-  = render Schematics::Attachment::Component.new(attachment: image, class: 'rounded')
-h5.text-center.mb-4 = title
+  = render Schematics::Attachment::Component.new(attachment: image, class: 'rounded') if image.attached?
+h5.text-center.text-white.mb-4 = title
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-body.p-3
     == content
-.row.mt-4
+.row.mt-4.text-white
   .col-auto.align-self-center
     = render Schematics::Attachment::Component.avatar(user: author)
   .col
