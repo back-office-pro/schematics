@@ -11,7 +11,7 @@ en:
     schematics:
       blog:
         index: Blog
-        show: "%{post}"
+        show: "%{resource}"
       dashboard:
         admin: Administration
         home: Dashboard
