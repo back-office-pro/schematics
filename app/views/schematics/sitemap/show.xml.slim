@@ -5,5 +5,5 @@ urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
     lastmod = @posts.last&.updated_at&.xmlschema
   - @posts.find_each do |post|
     url
-      loc = main_app.blog_post_url(post)
+      loc = blog_url(post)
       lastmod = post.updated_at.xmlschema
