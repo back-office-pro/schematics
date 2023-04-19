@@ -6,7 +6,7 @@ module Schematics
 
     skip_before_action :authenticate_user!
     before_action :set_user, only: %i[edit update]
-    layout 'schematics/auth'
+    layout 'schematics/jumbotron'
     delegate :entity, :human_name, :gender, to: :model_class, private: true
 
     def new; end

@@ -2,7 +2,7 @@
 
 module Schematics
   class ExceptionController < ApplicationController
-    layout 'schematics/auth', except: :not_found
+    layout 'schematics/jumbotron', except: :not_found
 
     def internal_server_error
       respond_to do |format|

@@ -7,7 +7,7 @@ module Core
     prepended do
       before_action :logout_user!, only: :create
       skip_before_action :authenticate_user!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
-      layout 'schematics/auth', only: %i[new create]
+      layout 'schematics/jumbotron', only: %i[new create]
 
       api :create, 'Create a session' do
         data 'session[email]', ::String, required: true
