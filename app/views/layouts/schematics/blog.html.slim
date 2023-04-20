@@ -16,5 +16,6 @@ html lang=I18n.locale dir='ltr'
     = render Schematics::JavascriptImportmap::Component.new
     = render Schematics::ThemeCustomStylesheet::Component.new
   body.bg-primary data-controller='application'
+    = render Schematics::Toast::Component.with_collection(flash.to_a)
     .container.col-lg-6.mt-4.pt-4
       = yield
