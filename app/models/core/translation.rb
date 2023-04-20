@@ -7,5 +7,7 @@ module Core
     prepended do
       scope :lookup, LookupQuery
     end
+
+    def cache_key = [model_name.plural, locale, key].join('/')
   end
 end
