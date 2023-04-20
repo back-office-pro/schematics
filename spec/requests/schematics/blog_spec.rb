@@ -8,7 +8,7 @@ RSpec.describe 'Blog' do
   let(:post) { BlogPost.create!(title: 'My Title', content: 'My Content', author: user) }
   let(:accept_header) { 'text/html' }
 
-  before { post }
+  before { post.publish! }
 
   describe 'GET #index' do
     let(:do_request) { get(blog_index_path, headers:) }
