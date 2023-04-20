@@ -31,7 +31,7 @@ module I18n
       end
 
       def fetch(locale, key)
-        Rails.cache.fetch("translations/#{locale}/#{key}") do
+        Rails.cache.fetch("translations/#{locale}/#{key}/value") do
           format_lookup ::Translation.lookup(locale, key), key
         end
       rescue StandardError

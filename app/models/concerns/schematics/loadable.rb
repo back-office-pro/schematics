@@ -33,6 +33,12 @@ module Schematics
         .map(&:name)
         .map(&:to_sym)
 
+      def cached_attributes = entity
+        .attributes
+        .select(&:cached?)
+        .map(&:name)
+        .map(&:to_sym)
+
       def finder(id)
         case entity
         when Entities::Singleton

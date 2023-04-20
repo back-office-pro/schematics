@@ -7,7 +7,7 @@ module Schematics
              :tasks_feature_flag,
              :meetings_feature_flag,
              :blog_feature_flag,
-             to: :config,
+             to: ::Configuration,
              private: true
 
     def initialize
@@ -17,12 +17,6 @@ module Schematics
       cannot :manage, ::Meeting unless meetings_feature_flag
       cannot :manage, ::Task unless tasks_feature_flag
       cannot :manage, ::BlogPost unless blog_feature_flag
-    end
-
-    private
-
-    def config
-      @config ||= ::Configuration.instance
     end
   end
 end

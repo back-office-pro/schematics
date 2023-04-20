@@ -3,6 +3,8 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
+      delegate :company_name, to: ::Configuration
+
       def data = {
         controller: 'tooltip hotkey',
         'bs-toggle': 'tooltip',

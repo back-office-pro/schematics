@@ -13,14 +13,5 @@ module Schematics
         **kwargs
       )
     end
-
-    def config(key)
-      Rails.cache.fetch("configuration/#{key}") do
-        ::Configuration
-          .with_attached_company_logo
-          .instance
-          .public_send(key)
-      end
-    end
   end
 end

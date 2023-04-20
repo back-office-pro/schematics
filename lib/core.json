@@ -266,6 +266,7 @@
         "name": "company_logo",
         "type": "attachment",
         "options": {
+          "cached": true,
           "content_type": [
             "png",
             "jpeg",
@@ -278,6 +279,7 @@
         "name": "locale",
         "type": "enum",
         "options": {
+          "cached": true,
           "values": [
             "en",
             "fr"
@@ -286,7 +288,10 @@
       },
       {
         "name": "time_zone",
-        "type": "time_zone"
+        "type": "time_zone",
+        "options": {
+          "cached": true
+        }
       },
       {
         "name": "theme_color",
@@ -988,7 +993,10 @@
       },
       {
         "name": "value",
-        "type": "string"
+        "type": "string",
+        "options": {
+          "cached": true
+        }
       }
     ]
   },
