@@ -12,6 +12,20 @@ module Core
       attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
     end
 
+    class_methods do
+      def method_missing(method_name, *, &)
+        return super if cached_attributes.exclude?(method_name)
+
+        Rails.cache.fetch("configuration/#{method_name}") do
+          with_attached_company_logo.instance.public_send(method_name)
+        end
+      end
+
+      def respond_to_missing?(method_name, *)
+        cached_attributes.include?(method_name) || super
+      end
+    end
+
     def time_zone
       super || LOCALE_TO_TIME_ZONE[locale&.to_sym]
     end
