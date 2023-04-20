@@ -1,2 +1,4 @@
 User-agent: *
+Sitemap: /sitemap.xml
+Allow: /blog/*
 Disallow: /

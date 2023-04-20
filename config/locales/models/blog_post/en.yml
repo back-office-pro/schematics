@@ -1,0 +1,22 @@
+---
+en:
+  activerecord:
+    attributes:
+      blog_post:
+        author: Author
+        content: Content
+        image: Image
+        state: State
+        states:
+          draft: Draft
+          published: Published
+        title: Title
+    events:
+      blog_post:
+        publish: Publish
+        unpublish: Unpublish
+    models:
+      blog_post:
+        gender: male
+        one: Blog post
+        other: Blog posts

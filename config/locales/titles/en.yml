@@ -9,6 +9,9 @@ en:
       new: Import %{parent_human_name_plural}
       show: "%{resource}"
     schematics:
+      blog:
+        index: Blog
+        show: "%{resource}"
       dashboard:
         admin: Administration
         home: Dashboard

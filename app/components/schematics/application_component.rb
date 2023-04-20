@@ -14,6 +14,7 @@ module Schematics
              :current_ability,
              :can?,
              :content_security_policy_nonce,
+             :content_security_policy?,
              to: :helpers
 
     def preferences(key, default = nil)
