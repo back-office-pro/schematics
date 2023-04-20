@@ -1,0 +1,18 @@
+head
+  meta charset='utf-8'
+  meta name='turbo-cache-control' content='no-preview'
+  meta name='viewport' content='width=device-width,initial-scale=1'
+  meta name='theme-color' content=theme_color
+  title #{company_name} - #{title}
+  = csrf_meta_tags
+  = csp_meta_tag
+  = render Schematics::ApplicationStylesheetLink::Component.new
+  = render Schematics::ThemeStylesheetLink::Component.new(theme: 'light')
+  = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
+  = render Schematics::Favicon::Component.new
+  = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
+  = render Schematics::JavascriptImportmap::Component.new
+  = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
+  = render Schematics::GoogleMapIncludeTag::Component.new
+  = render Schematics::ThemeCustomStylesheet::Component.new
+  = render Schematics::InlineJavascript::Component.new
