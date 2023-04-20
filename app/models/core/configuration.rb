@@ -16,9 +16,7 @@ module Core
       def method_missing(method_name, *, &)
         return super if cached_attributes.exclude?(method_name)
 
-        Rails.cache.fetch("configuration/#{method_name}") do
-          with_attached_company_logo.instance.public_send(method_name)
-        end
+        Rails.cache.fetch("configuration/#{method_name}") { instance.public_send(method_name) }
       end
 
       def respond_to_missing?(method_name, *)
