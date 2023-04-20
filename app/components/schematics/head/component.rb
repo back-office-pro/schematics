@@ -4,10 +4,7 @@ module Schematics
   module Head
     class Component < ApplicationComponent
       delegate :title, to: :helpers
-
-      def theme_color = config(:theme_color)
-
-      def company_name = config(:company_name)
+      delegate :theme_color, :company_name, to: ::Configuration
     end
   end
 end

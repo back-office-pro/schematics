@@ -9,8 +9,8 @@ module Core
     prepended do
       after_create_commit { Schematics::UserMailer.new_account(self).deliver_later }
       attribute :remember_me, :boolean
-      attribute :time_zone, default: -> { ::Configuration.instance.time_zone }
-      attribute :locale, default: -> { ::Configuration.instance.locale }
+      attribute :time_zone, default: -> { ::Configuration.time_zone }
+      attribute :locale, default: -> { ::Configuration.locale }
       delegate :admin?, to: :role
     end
 

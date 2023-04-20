@@ -13,7 +13,7 @@ Schematics::Engine.routes.draw do
     resources :versions, only: %i[index show] do
       patch :revert, on: :member
     end
-    constraints -> { Configuration.instance.blog_feature_flag } do
+    constraints -> { Configuration.blog_feature_flag } do
       resources :blog, only: %i[index show], controller: :blog, param: :slug, format: :html
       resource :sitemap, only: :show, format: :xml, controller: :sitemap
     end

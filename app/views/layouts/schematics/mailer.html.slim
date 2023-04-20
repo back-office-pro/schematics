@@ -8,7 +8,7 @@ html
     .min-vh-100.bg-primary
       .container.my-4
         .text-center.my-4
-          = render Schematics::Attachment::Component.company_logo(attachment: config(:company_logo), icon: :building)
+          = render Schematics::Attachment::Component.company_logo(attachment: Configuration.company_logo, icon: :building)
         .card.shadow-sm.my-4
           .card-body.p-3
             = yield
