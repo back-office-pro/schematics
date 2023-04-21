@@ -15,5 +15,7 @@ describe Schematics::Commands::RenameAttribute do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its([1]) { is_expected.to be_a(TranslationGenerator) }
+    its(:size) { is_expected.to eq(2) }
   end
 end
