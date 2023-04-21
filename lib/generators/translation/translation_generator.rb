@@ -2,42 +2,35 @@
 
 class TranslationGenerator < Rails::Generators::NamedBase
   delegate :available_locales, to: 'Schematics::Engine.config.i18n'
-
-  class_option :field, type: :string
   class_option :rename, type: :string
 
-  def generate_model_attribute_translation
+  def generate_model_translation
     return unless generating?
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        Translation.create!(
-          locale:,
-          key: "activerecord.attributes.#{entity.name}.#{field}",
-          value: translate(field, locale:)
-        )
+        Translation.create!(locale:, key:, value: translate(value, locale:))
       end
     end
   end
 
-  def destroy_model_attribute_translation
+  def destroy_model_translation
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
-        locale: available_locales,
-        key: "activerecord.attributes.#{entity.name}.#{field}"
-      )
+      Translation.destroy_by(locale: available_locales, key:)
     end
   end
 
-  def rename_model_attribute_translation
+  def rename_model_translation
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      Translation
-        .where(key: "activerecord.attributes.#{old_name}.#{field}")
-        .update_all(key: "activerecord.attributes.#{entity.name}.#{field}") # rubocop:disable Rails/SkipsModelValidations
+      available_locales.each do |locale|
+        Translation
+          .where(key: "activerecord.#{old_name}", locale:)
+          .update!(key:, value: translate(value, locale:))
+      end
     end
   end
 
@@ -48,6 +41,12 @@ class TranslationGenerator < Rails::Generators::NamedBase
     .find_entity_by_name(name.underscore)
 
   def old_name = options[:rename]
+
+  def key = "activerecord.#{name}"
+
+  def value = name
+    .split('.')
+    .last
 
   # :reek:NilCheck
   def generating?
