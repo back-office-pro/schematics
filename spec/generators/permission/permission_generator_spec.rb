@@ -4,13 +4,9 @@ require 'rails_helper'
 require 'generators/permission/permission_generator'
 
 RSpec.describe PermissionGenerator do
-  subject(:generator) { described_class.new([name], options, behavior:) }
+  subject(:generator) { described_class.new(['user'], options, behavior:) }
 
-  let(:name) { 'user' }
-  let(:model) { 'User' }
-  let(:behavior) { :invoke }
-  let(:options) { [] }
-  let(:permission) { Permission.create!(model:, action: 'create') }
+  let(:permission) { Permission.create!(model: 'User', action: 'create') }
   let(:admin_role) { Role.create!(name: 'Admin') }
 
   before { [permission, admin_role] }
@@ -19,6 +15,7 @@ RSpec.describe PermissionGenerator do
     subject(:invoke_all) { generator.invoke_all }
 
     context 'when invoking' do
+      let(:behavior) { :invoke }
       let(:options) { ['--action=create'] }
 
       it 'creates admin permission' do
@@ -40,6 +37,7 @@ RSpec.describe PermissionGenerator do
     end
 
     context 'when renaming' do
+      let(:behavior) { :invoke }
       let(:options) { ['--action=show', '--rename=create'] }
 
       it 'updates permission' do
