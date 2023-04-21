@@ -2,6 +2,7 @@
 
 require 'rails/generators'
 require 'rails/generators/rails/migration/migration_generator'
+require 'generators/translation/translation_generator'
 
 module Schematics
   module Commands
@@ -12,7 +13,8 @@ module Schematics
             "remove_#{attribute}_from_#{table_name.pluralize}",
             "schema:#{name}_#{attribute}"
           ]
-        )
+        ),
+        TranslationGenerator.new(["attributes.#{name}.#{attribute}"], behavior: :revoke)
       ]
 
       def weight = 3
