@@ -12,5 +12,6 @@ describe Schematics::Commands::RemoveTranslation do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(TranslationGenerator) }
+    its(:size) { is_expected.to eq(1) }
   end
 end
