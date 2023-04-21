@@ -33,6 +33,7 @@ describe Schematics::Commands::CreateEntityCounterCaches do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its(:size) { is_expected.to eq(1) }
 
     context 'when entity class already exists' do
       let(:options) { { existing: true } }

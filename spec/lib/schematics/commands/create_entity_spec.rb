@@ -47,11 +47,14 @@ describe Schematics::Commands::CreateEntity do
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([6]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its(:size) { is_expected.to eq(7) }
 
     context 'when entity class already exists' do
       let(:options) { { existing: true } }
 
       its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldControllerGenerator) }
+      its([1]) { is_expected.to be_a(Rails::Generators::SerializerGenerator) }
+      its(:size) { is_expected.to eq(2) }
     end
   end
 end

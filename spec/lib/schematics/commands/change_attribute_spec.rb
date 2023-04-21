@@ -15,5 +15,6 @@ describe Schematics::Commands::ChangeAttribute do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its(:size) { is_expected.to eq(1) }
   end
 end

@@ -45,5 +45,6 @@ describe Schematics::Commands::DestroyEntity do
     its([3]) { is_expected.to be_a(PermissionsGenerator) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its(:size) { is_expected.to eq(6) }
   end
 end

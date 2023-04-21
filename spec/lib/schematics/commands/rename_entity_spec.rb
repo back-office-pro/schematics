@@ -22,6 +22,7 @@ describe Schematics::Commands::RenameEntity do
       its([2]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
       its([3]) { is_expected.to be_a(TranslationsGenerator) }
       its([4]) { is_expected.to be_a(PermissionsGenerator) }
+      its(:size) { is_expected.to eq(5) }
     end
 
     context 'when cleaning' do
@@ -29,6 +30,7 @@ describe Schematics::Commands::RenameEntity do
 
       its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
       its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+      its(:size) { is_expected.to eq(2) }
     end
   end
 end
