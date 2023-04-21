@@ -2,6 +2,7 @@
 
 module Schematics
   module Migrations
+    # :reek:DataClump
     class Migration # rubocop:disable Metrics/ClassLength
       attr_reader :build_commands, :clean_commands
 
@@ -52,9 +53,10 @@ module Schematics
           if current_entity
             @build_commands.push(
               rename_entity_command(new_entity, current_entity, :build),
-              add_action_permission_commands(new_entity, current_entity),
-              add_event_permission_commands(new_entity, current_entity),
-              rename_event_permission_commands(new_entity, current_entity)
+              add_permission_commands(new_entity, current_entity),
+              rename_permission_commands(new_entity, current_entity),
+              add_translation_commands(new_entity, current_entity),
+              rename_translation_commands(new_entity, current_entity)
             )
             new_entity.attributes.each do |new_attribute|
               current_attribute = current_entity.attributes.find { _1.id == new_attribute.id }
@@ -89,9 +91,9 @@ module Schematics
           if new_entity
             @clean_commands.push(
               rename_entity_command(current_entity, new_entity, :clean),
-              remove_action_permission_commands(current_entity, new_entity),
-              remove_event_permission_commands(current_entity, new_entity),
-              remove_attribute_commands(current_entity, new_entity)
+              remove_permission_commands(current_entity, new_entity),
+              remove_attribute_commands(current_entity, new_entity),
+              remove_translation_commands(current_entity, new_entity)
             )
           else
             @clean_commands << Commands::DestroyEntity.new(entity: current_entity)
@@ -149,7 +151,7 @@ module Schematics
           .map { |attribute| Commands::RemovePermission.new(entity:, attribute:) }
       end
 
-      def rename_event_permission_command(entity, current_event, new_event)
+      def rename_permission_command(entity, current_event, new_event)
         return unless current_event
         return if current_event.name == new_event.name
 
@@ -174,16 +176,80 @@ module Schematics
           .map { |event| Commands::AddPermission.new(entity:, attribute: event.name) }
       end
 
-      def rename_event_permission_commands(entity, current_entity)
+      def rename_permission_commands(entity, current_entity)
         entity
           .events
           .map do |event|
-            rename_event_permission_command(
+            rename_permission_command(
               entity,
               current_entity.events.find { _1.id == event.id },
               event
             )
           end
+      end
+
+      def add_permission_commands(entity, current_entity)
+        add_action_permission_commands(entity, current_entity) +
+          add_event_permission_commands(entity, current_entity)
+      end
+
+      def remove_permission_commands(entity, new_entity)
+        remove_action_permission_commands(entity, new_entity) +
+          remove_event_permission_commands(entity, new_entity)
+      end
+
+      def add_translation_commands(entity, current_entity)
+        %i[virtuals events].flat_map do |items|
+          entity
+            .public_send(items)
+            .reject { |item| current_entity.public_send(items).find { _1.id == item.id } }
+            .map do |item|
+              Commands::AddTranslation.new(
+                entity:,
+                attribute: [items, entity.name, item.name].join('.')
+              )
+            end
+        end
+      end
+
+      def rename_translation_commands(entity, current_entity)
+        %i[virtuals events].flat_map do |items|
+          entity
+            .public_send(items)
+            .map do |item|
+              rename_translation_command(
+                entity,
+                current_entity.public_send(items).find { _1.id == item.id },
+                item,
+                items
+              )
+            end
+        end
+      end
+
+      def rename_translation_command(entity, current_item, new_item, items)
+        return unless current_item
+        return if current_item.name == new_item.name
+
+        Commands::RenameTranslation.new(
+          entity:,
+          attribute: [items, entity.name, current_item.name].join('.'),
+          target: [items, entity.name, new_item.name].join('.')
+        )
+      end
+
+      def remove_translation_commands(entity, new_entity)
+        %i[virtuals events].flat_map do |items|
+          entity
+            .public_send(items)
+            .reject { |item| new_entity.public_send(items).find { _1.id == item.id } }
+            .map do |item|
+              Commands::RemoveTranslation.new(
+                entity:,
+                attribute: [items, entity.name, item.name].join('.')
+              )
+            end
+        end
       end
     end
   end
