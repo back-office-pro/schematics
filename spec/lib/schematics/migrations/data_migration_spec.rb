@@ -693,7 +693,8 @@ describe Schematics::Migrations::DataMigration do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::AddPermission) }
-      its(:size) { is_expected.to eq(1) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::AddTranslation) }
+      its(:size) { is_expected.to eq(2) }
     end
 
     describe '#clean_commands' do
@@ -773,7 +774,8 @@ describe Schematics::Migrations::DataMigration do
       subject { migration.clean_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RemovePermission) }
-      its(:size) { is_expected.to eq(1) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::RemoveTranslation) }
+      its(:size) { is_expected.to eq(2) }
     end
 
     describe '#new_entities' do
@@ -851,6 +853,185 @@ describe Schematics::Migrations::DataMigration do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RenamePermission) }
+      its([1]) { is_expected.to be_a(Schematics::Commands::RenameTranslation) }
+      its(:size) { is_expected.to eq(2) }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when adding a new virtual' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client'
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          virtuals: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'full_name',
+              function: '$last_name $first_name'
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::AddTranslation) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when removing a virtual' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          virtuals: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'full_name',
+              function: '$last_name $first_name'
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client'
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemoveTranslation) }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  context 'when renaming a virtual' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          virtuals: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'full_name',
+              function: '$last_name $first_name'
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          virtuals: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'full_client_name',
+              function: '$last_name $first_name'
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its([0]) { is_expected.to be_a(Schematics::Commands::RenameTranslation) }
       its(:size) { is_expected.to eq(1) }
     end
 
