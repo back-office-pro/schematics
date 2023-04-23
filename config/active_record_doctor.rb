@@ -14,28 +14,34 @@ ActiveRecordDoctor.configure do
     good_job_batches
     good_job_processes
     good_job_settings
+    good_job_executions
+    mobility_string_translations
+    mobility_text_translations
   ]
 
-  global :ignore_models, [
-    'ActionMailbox::Record',
-    'ActionMailbox::InboundEmail',
-    'ActiveStorage::Record',
-    'ActiveStorage::Blob',
-    'ActiveStorage::Attachment',
-    'ActiveStorage::VariantRecord',
-    'ActionText::EncryptedRichText',
-    'ActionText::RichText',
-    'ActionText::Record',
-    'PaperTrail::Version',
-    'Schematics::ApplicationRecord',
-    'Schematics::Version',
-    'FriendlyId::Slug',
-    'ApplicationRecord',
-    'GoodJob::BaseRecord',
-    'GoodJob::BatchRecord',
-    'GoodJob::Execution',
-    'GoodJob::ActiveJobJob',
-    'GoodJob::Job'
+  global :ignore_models, %w[
+    ActionMailbox::Record
+    ActionMailbox::InboundEmail
+    ActiveStorage::Record
+    ActiveStorage::Blob
+    ActiveStorage::Attachment
+    ActiveStorage::VariantRecord
+    ActionText::EncryptedRichText
+    ActionText::RichText
+    ActionText::Record
+    PaperTrail::Version
+    Schematics::ApplicationRecord
+    Schematics::Version
+    FriendlyId::Slug
+    ApplicationRecord
+    GoodJob::BaseRecord
+    GoodJob::BatchRecord
+    GoodJob::Execution
+    GoodJob::ActiveJobJob
+    GoodJob::Job
+    GoodJob::DiscreteExecution
+    Mobility::Backends::ActionText::PlainTextTranslation
+    Mobility::Backends::ActionText::RichTextTranslation
   ]
 
   detector :missing_foreign_keys, enabled: false
