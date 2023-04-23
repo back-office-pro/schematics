@@ -66,8 +66,8 @@ module Schematics
       def create_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
-            "create_join_table_#{association.entity.name.pluralize}_#{association.name}",
-            "#{association.entity.name.pluralize}:join_table_first",
+            "create_join_table_#{association.entity.table_name.pluralize}_#{association.name}",
+            "#{association.entity.table_name.pluralize}:join_table_first",
             "#{association.name}:join_table_second"
           ]
         )
