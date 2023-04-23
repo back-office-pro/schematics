@@ -57,8 +57,8 @@ module Schematics
       def drop_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
-            "drop_join_table_#{association.entity.name.pluralize}_#{association.name}",
-            association.entity.name.pluralize,
+            "drop_join_table_#{association.entity.table_name.pluralize}_#{association.name}",
+            association.entity.table_name.pluralize,
             association.name
           ]
         )
