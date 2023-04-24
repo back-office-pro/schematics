@@ -65,7 +65,7 @@ describe Schematics::Schema do
     end
   end
 
-  context 'when there are reserved words' do
+  context 'when there are dangerous attributes' do
     let(:data) do
       [
         {

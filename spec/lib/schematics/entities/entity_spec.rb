@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Entities::Entity do
-  subject(:entity) { described_class.new(name:, attributes:, options:) }
+  subject(:entity) { described_class.new(schema:, name:, attributes:, options:) }
 
+  let(:schema) { Schematics::Schema.new }
   let(:name) { 'discussion' }
   let(:options) { { core: true, existing: true } }
   let(:attributes) do
@@ -25,6 +26,7 @@ describe Schematics::Entities::Entity do
   it { is_expected.to be_core }
   it { is_expected.to be_existing }
   it { is_expected.to be_multisearchable }
+  it { is_expected.to be_valid }
 
   its(:icon) { is_expected.to eq(:square_caret_right) }
   its(:class_name) { is_expected.to eq('Discussion') }
@@ -57,5 +59,17 @@ describe Schematics::Entities::Entity do
     is_expected.to eq <<~RUBY
       scope :with_record, -> { preload([:record]) }
     RUBY
+  end
+
+  context 'when entity name is dangerous' do
+    let(:name) { 'association' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when entity name is already taken' do
+    let(:name) { 'user' }
+
+    it { is_expected.not_to be_valid }
   end
 end

@@ -34,6 +34,7 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_valid }
 
   its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }
@@ -130,5 +131,17 @@ describe Schematics::Attributes::BelongsTo do
     end
 
     its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
+  end
+
+  context 'when attribute name is dangerous' do
+    let(:name) { 'association' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when attribute name is already taken' do
+    let(:name) { 'type' }
+
+    it { is_expected.not_to be_valid }
   end
 end

@@ -5,7 +5,18 @@ describe Schematics::Options::StateMachineEvent do
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
   let(:state_machine) { Schematics::Attributes::StateMachine.new(entity:, name: 'state', options:) }
-  let(:options) { { values: %w[pending in_progress completed aborted] } }
+  let(:options) do
+    {
+      values: %w[pending in_progress completed aborted],
+      events: [
+        {
+          name: 'process',
+          from: 'pending',
+          to: 'in_progress'
+        }
+      ]
+    }
+  end
 
   let(:name) { 'complete' }
   let(:from) { 'in_progress' }
@@ -14,6 +25,7 @@ describe Schematics::Options::StateMachineEvent do
   let(:color) { 'success' }
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
+  it { is_expected.to be_valid }
 
   its(:action) { is_expected.to eq(:after_complete) }
   its(:icon) { is_expected.to eq(:check) }
@@ -32,5 +44,17 @@ describe Schematics::Options::StateMachineEvent do
     is_expected.to eq <<~RUBY
       def after_complete; end
     RUBY
+  end
+
+  context 'when event name is dangerous' do
+    let(:name) { 'association' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when event name is already taken' do
+    let(:name) { 'process' }
+
+    it { is_expected.not_to be_valid }
   end
 end

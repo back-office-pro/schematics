@@ -10,7 +10,11 @@ describe Schematics::Virtuals::Calculation do
         descriptor: 'full_name'
       },
       attributes: [
-        { name: 'price', type: 'float' }
+        { name: 'price', type: 'float' },
+        { name: 'category', type: 'belongs_to' }
+      ],
+      virtuals: [
+        { name: 'discount_price', function: '$price - 10' }
       ]
     )
   end
@@ -30,6 +34,7 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
+  it { is_expected.to be_valid }
 
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
@@ -57,6 +62,18 @@ describe Schematics::Virtuals::Calculation do
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
     RUBY
+  end
+
+  context 'when virtual name is dangerous' do
+    let(:name) { 'association' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when virtual name is already taken' do
+    let(:name) { 'discount_price' }
+
+    it { is_expected.not_to be_valid }
   end
 
   describe '#format' do
