@@ -29,6 +29,7 @@ fr:
       assignment: ne doit pas contenir d'assignement
       color: n'est pas un code hexadécimal de couleur valide
       content_type_invalid: a un type de fichier non valide
+      dangerous_attribute: est un nom réservé
       dimension_height_equal_to: doit avoir une hauteur égale à %{length} pixels
       dimension_height_greater_than_or_equal_to: doit avoir une hauteur supérieure ou égale à %{length} pixels
       dimension_height_inclusion: doit avoir une hauteur comprise entre %{min} et %{max} pixels
@@ -48,7 +49,6 @@ fr:
       name: doit contenir uniquement des lettres minuscules ou tirets du bas
       numerable: "$%{name} n'est pas une variable numérique"
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
-      reserved_name: est un nom réservé
       singular: n'est pas au singulier
     virtuals:
       name: "%{name} n'est pas défini"
