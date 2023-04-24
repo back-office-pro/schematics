@@ -26,9 +26,13 @@ module Schematics
         #{events_methods_to_str}
       RUBY
 
-      def events = options
-        .events
-        &.map { Options::StateMachineEvent.new(state_machine: self, **_1) } || []
+      def events
+        @events ||= Array(
+          options
+            .events
+            &.map { Options::StateMachineEvent.new(state_machine: self, **_1) }
+        )
+      end
 
       private
 

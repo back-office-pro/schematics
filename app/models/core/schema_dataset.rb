@@ -6,7 +6,7 @@ module Core
 
     prepended do
       serialize :data, Schematics::Schema
-      attribute :data, default: -> { current_data || [] }
+      attribute :data, default: -> { Array(current_data) }
       validates_associated :data
       delegate :build_commands,
                :clean_commands,

@@ -19,9 +19,7 @@ module Schematics
         @field_name || 'id'
       end
 
-      def joins
-        field.try(:preload) || []
-      end
+      def joins = Array(field.try(:preload))
 
       def to_str = <<~RUBY
         def to_s
