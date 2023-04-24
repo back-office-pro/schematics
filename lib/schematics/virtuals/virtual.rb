@@ -24,9 +24,10 @@ module Schematics
                 format: { with: Tokens::Tokenizer::REGEX, message: :function }
       validates :name,
                 presence: true,
+                uniqueness: { scope: %i[entity virtuals] },
                 format: { with: Entities::Entity::NAME_REGEX, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :reserved_names, message: :reserved_name }
+                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
       validates :preload, inclusion: { in: :allowed_references }
       validates :variables, inclusion: { in: :allowed_variables }
       validate :assignment_token?
@@ -94,11 +95,6 @@ module Schematics
       def method_body = tokens
         .map(&:value)
         .join
-
-      def reserved_names = ::ActiveRecord::AttributeMethods
-        .dangerous_attribute_methods
-        .to_a
-        .concat(entity.virtuals.excluding(self).map(&:name))
 
       def allowed_references = entity
         .association_attributes

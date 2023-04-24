@@ -2,6 +2,7 @@
 
 require 'active_model/nested_attributes'
 require 'active_model/validations/associated'
+require 'active_model/validations/uniqueness'
 require 'array'
 require 'hash'
 require 'object'

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_record'
-require 'active_record/attribute_methods'
 require 'active_support/core_ext/array/access'
 require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inflections'
@@ -34,9 +32,10 @@ module Schematics
       validates :name,
                 presence: true,
                 singular: true,
+                uniqueness: { scope: %i[schema entities] },
                 format: { with: NAME_REGEX, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :reserved_names, message: :reserved_name }
+                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
 
       attr_accessor :schema, :name
       attr_writer :options
@@ -282,11 +281,6 @@ module Schematics
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
-
-      def reserved_names = ::ActiveRecord::AttributeMethods
-        .dangerous_attribute_methods
-        .to_a
-        .concat(schema.entities.excluding(self).map(&:name))
     end
   end
 end

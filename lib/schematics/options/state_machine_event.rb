@@ -13,7 +13,10 @@ module Schematics
       validates :from, :to, inclusion: { in: :values }
       validates :name,
                 presence: true,
-                format: { with: Entities::Entity::NAME_REGEX, message: :name }
+                uniqueness: { scope: %i[state_machine events] },
+                format: { with: Entities::Entity::NAME_REGEX, message: :name },
+                length: { maximum: 50 },
+                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
 
       delegate :to_str, to: :trigger, prefix: true
       delegate :entity, :values, to: :state_machine
