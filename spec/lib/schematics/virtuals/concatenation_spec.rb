@@ -11,7 +11,11 @@ describe Schematics::Virtuals::Concatenation do
       },
       attributes: [
         { name: 'first_name', type: 'string' },
-        { name: 'last_name', type: 'string' }
+        { name: 'last_name', type: 'string' },
+        { name: 'profile', type: 'belongs_to' }
+      ],
+      virtuals: [
+        { name: 'name', function: '$first_name $last_name' }
       ]
     )
   end
@@ -25,6 +29,7 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_valid }
 
   its(:open_api_type) { is_expected.to eq(String) }
   its(:to_sql) { is_expected.to eq("CONCAT(users.first_name, ' ', profiles.last_name)") }
@@ -55,5 +60,17 @@ describe Schematics::Virtuals::Concatenation do
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
     RUBY
+  end
+
+  context 'when virtual name is dangerous' do
+    let(:name) { 'association' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when virtual name is already taken' do
+    let(:name) { 'name' }
+
+    it { is_expected.not_to be_valid }
   end
 end

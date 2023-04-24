@@ -32,9 +32,13 @@ module Schematics
 
           def required = true
 
-          def events = object
-            .events
-            &.map { Schematics::Options::StateMachineEvent.new(**_1) } || []
+          def maxlength = 50
+
+          def events = Array(
+            object
+              .events
+              &.map { Schematics::Options::StateMachineEvent.new(**_1) }
+          )
         end
       end
     end

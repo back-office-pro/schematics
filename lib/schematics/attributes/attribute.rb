@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_record'
-require 'active_record/attribute_methods'
 require 'active_support/core_ext/securerandom'
 
 module Schematics
@@ -27,9 +25,10 @@ module Schematics
       validates :type, presence: true
       validates :name,
                 presence: true,
+                uniqueness: { scope: %i[entity attributes] },
                 format: { with: Entities::Entity::NAME_REGEX, message: :name },
                 length: { maximum: 50 },
-                exclusion: { in: :reserved_names, message: :reserved_name }
+                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
 
       class << self
         def build(type:, **kwargs)
@@ -52,11 +51,6 @@ module Schematics
       protected
 
       def available_options_names = available_options.map(&:name)
-
-      def reserved_names = ::ActiveRecord::AttributeMethods
-        .dangerous_attribute_methods
-        .to_a
-        .concat(entity.attributes.excluding(self).map(&:name))
     end
   end
 end
