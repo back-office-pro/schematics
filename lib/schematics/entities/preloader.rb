@@ -25,7 +25,7 @@ module Schematics
       def first_level_scopes = preloadable_elements
         .grep_v(Attributes::RichText)
         .grep_v(Attributes::Attachments)
-        .map { |element| [element.name, Array(element.preload)] }
+        .map { |element| [element.name, Array.wrap(element.preload)] }
         .reject { _2.empty? }
         .map { |name, preload| scope_to_str(name, preload) }
 
@@ -49,7 +49,7 @@ module Schematics
       def second_level_scope_array(attribute, element)
         [
           "#{attribute.name}_#{element.name}",
-          { attribute.name.to_sym => Array(element.preload) }
+          { attribute.name.to_sym => Array.wrap(element.preload) }
         ]
       end
 
