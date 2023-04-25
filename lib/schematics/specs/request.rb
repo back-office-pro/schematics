@@ -8,10 +8,11 @@ module Schematics
     module Request # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST  = %w[Search Session Comparison SchemaDataset Comment].freeze
-      UPDATE_DENYLIST  = %w[Licence SchemaDataset].freeze
-      SHOW_DENYLIST    = %w[ActiveStorage::Attachment ActiveStorage::Blob Search].freeze
-      DESTROY_DENYLIST = %w[ActiveStorage::Attachment ActiveStorage::Blob Session].freeze
+      CREATE_DENYLIST    = %w[Search Session Comparison SchemaDataset Comment].freeze
+      UPDATE_DENYLIST    = %w[Licence SchemaDataset].freeze
+      SHOW_DENYLIST      = %w[ActiveStorage::Attachment ActiveStorage::Blob].freeze
+      DESTROY_DENYLIST   = %w[ActiveStorage::Attachment ActiveStorage::Blob Session].freeze
+      NOT_FOUND_DENYLIST = %w[Search].freeze
 
       included do
         include Rails.application.routes.url_helpers
@@ -95,7 +96,7 @@ module Schematics
             is_expected.to have_http_status(status)
           end
 
-          unless entity.is_a?(Entities::Singleton)
+          if !entity.is_a?(Entities::Singleton) && NOT_FOUND_DENYLIST.exclude?(model_class.to_s)
             it 'should be not found' do
               get polymorphic_path(route_key, id: 'foo'), headers:, as: :html
               redirect_path = ability.can?(:index, model_class) ? index_path : root_path
