@@ -55,6 +55,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'db:reset', env:
   end
 
+  def generate_schematics
+    rails_command 'schematics:generate'
+  end
+
   def encrypt_database
     rails_command 'schematics:db:encryption:init', env:
   end
