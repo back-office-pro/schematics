@@ -32,3 +32,6 @@
     schematics/load_licence_job:
       cron: 0 1 * * *
       class: Schematics::LoadLicenceJob
+    schematics/migrate_core_job:
+      cron: 0 1 * * *
+      class: Schematics::MigrateCoreJob
