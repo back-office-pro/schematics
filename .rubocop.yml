@@ -130,7 +130,6 @@ Metrics/MethodLength:
   Max: 49
   AllowedMethods:
     - inherited
-    - change
 Metrics/AbcSize:
   Max: 50
 # rubocop-rspec
