@@ -24,6 +24,6 @@ class User < Schematics::ApplicationRecord
   end
 
   def to_s
-    super.presence || email
+    full_name.presence || email
   end
 end
