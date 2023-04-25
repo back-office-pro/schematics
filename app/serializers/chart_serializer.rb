@@ -2,6 +2,5 @@
 
 class ChartSerializer < ActiveModel::Serializer
   include Schematics::JsonSerializer
-
   delegate :serializable_hash, to: :object
 end
