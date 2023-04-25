@@ -14,9 +14,9 @@ module Core
 
     def i18n_title_path = 'comparisons'
 
-    def parent_model_class = @resource
-      .model
-      .try(:safe_constantize)
+    def parent_model_name
+      @resource.try(:model) || super
+    end
 
     def set_resources
       @resources = parent_model_class
