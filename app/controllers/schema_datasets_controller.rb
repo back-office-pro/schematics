@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SchemaDatasetsController < Schematics::ResourcesController
+  private
+
   def permitted_params
     {
       entities_attributes: [
