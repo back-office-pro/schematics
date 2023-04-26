@@ -27,9 +27,7 @@ describe Schematics::Migrations::DataMigration do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::CreateEntity) }
-      its([1]) { is_expected.to be_a(Schematics::Commands::CreateEntityCounterCaches) }
-      its([2]) { is_expected.to be_a(Schematics::Commands::CreateEntityPolymorphicCounterCaches) }
-      its(:size) { is_expected.to eq(3) }
+      its(:size) { is_expected.to eq(1) }
     end
 
     describe '#clean_commands' do

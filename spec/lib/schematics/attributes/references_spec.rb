@@ -70,8 +70,7 @@ describe Schematics::Attributes::References do
                  foreign_key: 'user_id',
                  inverse_of: :entities,
                  optional: true,
-                 autosave: true,
-                 counter_cache: :entities_count
+                 autosave: true
     RUBY
   end
 
@@ -93,8 +92,7 @@ describe Schematics::Attributes::References do
                    foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: false,
-                   autosave: true,
-                   counter_cache: :entities_count
+                   autosave: true
       RUBY
     end
   end
@@ -117,8 +115,7 @@ describe Schematics::Attributes::References do
                    inverse_of: :entities,
                    optional: true,
                    polymorphic: true,
-                   autosave: true,
-                   counter_cache: :entities_count
+                   autosave: true
       RUBY
     end
   end

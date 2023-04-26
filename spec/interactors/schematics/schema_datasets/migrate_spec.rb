@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe Schematics::SchemaDatasets::Migrate do
   let(:schema_dataset) { SchemaDataset.new(data:, state:) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
-  let(:admin_role) { Role.find_or_create_by!(name: 'Admin') }
   let(:current_data) { initial_data }
   let(:state) { :in_progress }
   let(:root) { Rails.root }
@@ -38,8 +37,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
   end
 
   before do
-    admin_role
     Tenant.schema = schema
+    allow(Role).to receive(:admin).and_return(Role.new)
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
@@ -52,7 +51,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       let(:current_data) { [] }
       let(:data) { initial_data }
       let(:commits_steps) { 1 }
-      let(:migrations_steps) { 4 }
+      let(:migrations_steps) { 1 }
       let(:rollback_reload) do
         schema_dataset.migration_new_and_changed_entities.each do |entity|
           Object.__send__(:remove_const, entity.class_name.to_sym)
@@ -66,9 +65,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
-      uses_transaction 'creates a slug migration file'
-      uses_transaction 'creates a lock_version migration file'
-      uses_transaction 'creates a counter cache migration file'
       uses_transaction 'creates a model file'
       uses_transaction 'creates a controller file'
       uses_transaction 'creates a rspec model file'
@@ -85,21 +81,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'creates a migration file' do
         migrate
         expect(Dir[root.join('db/migrate/*_create_prospects.rb')]).not_to be_empty
-      end
-
-      it 'creates a slug migration file' do
-        migrate
-        expect(Dir[root.join('db/migrate/*_add_slug_to_prospects.rb')]).not_to be_empty
-      end
-
-      it 'creates a lock_version migration file' do
-        migrate
-        expect(Dir[root.join('db/migrate/*_add_lock_version_to_prospects.rb')]).not_to be_empty
-      end
-
-      it 'creates a counter cache migration file' do
-        migrate
-        expect(Dir[root.join('db/migrate/*_add_comments_count_to_prospects.rb')]).not_to be_empty
       end
 
       it 'creates a model file' do
@@ -158,7 +139,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 5 }
+      let(:migrations_steps) { 2 }
       let(:rollback_reload) do
         schema_dataset.migration_new_and_changed_entities.each do |entity|
           Object.__send__(:remove_const, entity.class_name.to_sym)
@@ -256,7 +237,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     context 'when destroying an entity' do
       let(:data) { [] }
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 5 }
+      let(:migrations_steps) { 2 }
       let(:rollback_reload) { nil }
 
       before { create_prospect_entity }
@@ -342,7 +323,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 5 }
+      let(:migrations_steps) { 2 }
       let(:rollback_reload) do
         Object.__send__(:remove_const, :Prospect)
         Object.__send__(:remove_const, :ProspectsController)
@@ -384,7 +365,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 5 }
+      let(:migrations_steps) { 2 }
       let(:rollback_reload) do
         Object.__send__(:remove_const, :Prospect)
         Object.__send__(:remove_const, :ProspectsController)
@@ -433,7 +414,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 5 }
+      let(:migrations_steps) { 2 }
       let(:rollback_reload) do
         Object.__send__(:remove_const, :Prospect)
         Object.__send__(:remove_const, :ProspectsController)
@@ -483,7 +464,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 5 }
+      let(:migrations_steps) { 2 }
       let(:rollback_reload) do
         Object.__send__(:remove_const, :Prospect)
         Object.__send__(:remove_const, :ProspectsController)

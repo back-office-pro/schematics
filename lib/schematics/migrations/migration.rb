@@ -73,11 +73,7 @@ module Schematics
               end
             end
           else
-            @build_commands.push(
-              Commands::CreateEntity.new(entity: new_entity),
-              Commands::CreateEntityCounterCaches.new(entity: new_entity),
-              Commands::CreateEntityPolymorphicCounterCaches.new(entity: new_entity)
-            )
+            @build_commands << Commands::CreateEntity.new(entity: new_entity)
           end
         end
         @build_commands.flatten!

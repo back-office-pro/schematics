@@ -75,8 +75,7 @@ module Schematics
                        inverse_of: :#{inverse_association_name.pluralize},
                        optional: #{!required?},
                        polymorphic: true,
-                       autosave: true,
-                       counter_cache: :#{inverse_association_name.pluralize}_count
+                       autosave: true
           RUBY
         else
           <<~RUBY
@@ -86,8 +85,7 @@ module Schematics
                        foreign_key: '#{column_name}',
                        inverse_of: :#{inverse_association_name.pluralize},
                        optional: #{!required?},
-                       autosave: true,
-                       counter_cache: :#{inverse_association_name.pluralize}_count
+                       autosave: true
           RUBY
         end
       end
