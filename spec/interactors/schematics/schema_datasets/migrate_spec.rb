@@ -3,9 +3,39 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::SchemaDatasets::Migrate do
-  let(:schema_dataset) { SchemaDataset.new(data:, state: :in_progress) }
+  let(:schema_dataset) { SchemaDataset.new(data:, state:) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:admin_role) { Role.find_or_create_by!(name: 'Admin') }
+  let(:current_data) { initial_data }
+  let(:state) { :in_progress }
+  let(:root) { Rails.root }
+  let(:initial_data) do
+    [
+      {
+        id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+        name: 'prospect',
+        attributes: [
+          {
+            id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+            name: 'first_name',
+            type: 'string'
+          }
+        ]
+      }
+    ]
+  end
+  let(:create_prospect_entity) do
+    Tenant.schema = Schematics::Schema.new(data: [])
+    Dir.chdir(root) do
+      described_class.call(schema_dataset: SchemaDataset.new(data: initial_data, state:))
+    end
+  end
+  let(:rollback_commit) { Git.init(root).reset_hard("HEAD~#{commits_steps}") }
+  let(:rollback_migration) do
+    Dir.chdir(root) do
+      ActiveRecord::Base.connection.migration_context.rollback(migrations_steps)
+    end
+  end
 
   before do
     admin_role
@@ -13,26 +43,26 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
-  describe '.call', skip: 'must be run standalone' do
+  after { [rollback_migration, rollback_commit, rollback_reload] }
+
+  describe '.call' do
     subject(:migrate) { Dir.chdir(root) { described_class.call(schema_dataset:) } }
 
     context 'when creating a new entity' do
       let(:current_data) { [] }
-      let(:data) do
-        [
-          {
-            name: 'prospect',
-            attributes: [
-              {
-                name: 'name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
+      let(:data) { initial_data }
+      let(:commits_steps) { 1 }
+      let(:migrations_steps) { 4 }
+      let(:rollback_reload) do
+        schema_dataset.migration_new_and_changed_entities.each do |entity|
+          Object.__send__(:remove_const, entity.class_name.to_sym)
+          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
+        end
+        schema_dataset.migration_old_and_changed_entities.each do |entity|
+          load root.join('app', 'models', "#{entity.name}.rb")
+          load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+        end
       end
-
-      include_context 'with application migration rollback', 4
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -112,21 +142,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
     end
 
     context 'when renaming an entity' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
       let(:data) do
         [
           {
@@ -142,8 +157,16 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 5 }
+      let(:rollback_reload) do
+        schema_dataset.migration_new_and_changed_entities.each do |entity|
+          Object.__send__(:remove_const, entity.class_name.to_sym)
+          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
+        end
+      end
 
-      include_context 'with application migration rollback'
+      before { create_prospect_entity }
 
       uses_transaction 'is a success'
       uses_transaction 'destroys the model file'
@@ -166,32 +189,32 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'destroys the model file' do
         migrate
-        expect(File).not_to exist root.join('app/models/user.rb')
+        expect(File).not_to exist root.join('app/models/prospect.rb')
       end
 
       it 'destroys the controller file' do
         migrate
-        expect(File).not_to exist root.join('app/controllers/users_controller.rb')
+        expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
       end
 
       it 'destroys the rspec model file' do
         migrate
-        expect(File).not_to exist root.join('spec/models/user_spec.rb')
+        expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
       end
 
       it 'destroys the serializer file' do
         migrate
-        expect(File).not_to exist root.join('app/serializers/user_serializer.rb')
+        expect(File).not_to exist root.join('app/serializers/prospect_serializer.rb')
       end
 
       it 'destroys the rspec feature file' do
         migrate
-        expect(File).not_to exist root.join('spec/features/user_spec.rb')
+        expect(File).not_to exist root.join('spec/features/prospect_spec.rb')
       end
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_rename_users_to_clients.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients.rb')]).not_to be_empty
       end
 
       it 'creates a model file' do
@@ -221,7 +244,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'undefines a model class' do
         migrate
-        expect { User }.to raise_error(NameError)
+        expect { Prospect }.to raise_error(NameError)
       end
 
       it 'defines a model class' do
@@ -232,25 +255,11 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
     context 'when destroying an entity' do
       let(:data) { [] }
-      let(:current_data) do
-        [
-          {
-            name: 'user',
-            attributes: [
-              {
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                name: 'last_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 5 }
+      let(:rollback_reload) { nil }
 
-      include_context 'with application migration rollback'
+      before { create_prospect_entity }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -259,6 +268,8 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'destroys the rspec model file'
       uses_transaction 'destroys the serializer file'
       uses_transaction 'destroys the rspec feature file'
+      uses_transaction 'destroys permissions'
+      uses_transaction 'destroys translations'
       uses_transaction 'undefines a model class'
 
       it 'is a success' do
@@ -267,61 +278,54 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_drop_users.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_drop_prospects.rb')]).not_to be_empty
       end
 
       it 'destroys the model file' do
         migrate
-        expect(File).not_to exist root.join('app/models/user.rb')
+        expect(File).not_to exist root.join('app/models/prospect.rb')
       end
 
       it 'destroys the controller file' do
         migrate
-        expect(File).not_to exist root.join('app/controllers/users_controller.rb')
+        expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
       end
 
       it 'destroys the rspec model file' do
         migrate
-        expect(File).not_to exist root.join('spec/models/user_spec.rb')
+        expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
       end
 
       it 'destroys the serializer file' do
         migrate
-        expect(File).not_to exist root.join('app/serializers/user_serializer.rb')
+        expect(File).not_to exist root.join('app/serializers/prospect_serializer.rb')
       end
 
       it 'destroys the rspec feature file' do
         migrate
-        expect(File).not_to exist root.join('spec/features/user_spec.rb')
+        expect(File).not_to exist root.join('spec/features/prospect_spec.rb')
+      end
+
+      it 'destroys permissions' do
+        expect { migrate }.to change(Permission, :count).by(-6)
+      end
+
+      it 'destroys translations' do
+        expect { migrate }.to change(Translation, :count).by(-8)
       end
 
       it 'undefines a model class' do
         migrate
-        expect { User }.to raise_error(NameError)
+        expect { Prospect }.to raise_error(NameError)
       end
     end
 
     context 'when adding a new attribute' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
       let(:data) do
         [
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
+            name: 'prospect',
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -330,18 +334,25 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
               },
               {
                 id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-                name: 'age',
-                type: 'integer'
+                name: 'last_name',
+                type: 'string'
               }
             ]
           }
         ]
       end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 5 }
+      let(:rollback_reload) do
+        Object.__send__(:remove_const, :Prospect)
+        Object.__send__(:remove_const, :ProspectsController)
+      end
 
-      include_context 'with application migration rollback'
+      before { create_prospect_entity }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
+      uses_transaction 'creates translations'
       uses_transaction 'responds to new model attribute'
 
       it 'is a success' do
@@ -350,56 +361,41 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_add_age_to_users.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_add_last_name_to_prospects.rb')]).not_to be_empty
+      end
+
+      it 'creates translations' do
+        expect { migrate }.to change(Translation, :count).by(2)
       end
 
       it 'responds to new model attribute' do
         migrate
-        expect(User.new).to respond_to(:age)
+        expect(Prospect.new).to respond_to(:last_name)
       end
     end
 
     context 'when removing an attribute' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-                name: 'last_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
       let(:data) do
         [
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
+            name: 'prospect'
           }
         ]
       end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 5 }
+      let(:rollback_reload) do
+        Object.__send__(:remove_const, :Prospect)
+        Object.__send__(:remove_const, :ProspectsController)
+      end
 
-      include_context 'with application migration rollback'
+      before { create_prospect_entity }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
+      uses_transaction 'destroys translations'
+      uses_transaction 'does not respond to old model attribute'
 
       it 'is a success' do
         expect(migrate).to be_a_success
@@ -407,44 +403,28 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_remove_last_name_from_users.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects.rb')]).not_to be_empty
+      end
+
+      it 'destroys translations' do
+        expect { migrate }.to change(Translation, :count).by(-2)
+      end
+
+      it 'does not respond to old model attribute' do
+        migrate
+        expect(Prospect.new).not_to respond_to(:first_name)
       end
     end
 
     context 'when renaming an attribute' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
-                name: 'last_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
       let(:data) do
         [
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
+            name: 'prospect',
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              },
-              {
-                id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
                 name: 'surname',
                 type: 'string'
               }
@@ -452,11 +432,18 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 5 }
+      let(:rollback_reload) do
+        Object.__send__(:remove_const, :Prospect)
+        Object.__send__(:remove_const, :ProspectsController)
+      end
 
-      include_context 'with application migration rollback'
+      before { create_prospect_entity }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
+      uses_transaction 'does not respond to old model attribute'
       uses_transaction 'responds to new model attribute'
 
       it 'is a success' do
@@ -465,36 +452,26 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_rename_last_name_to_surname_in_users.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+      end
+
+      it 'does not respond to old model attribute' do
+        migrate
+        expect(Prospect.new).not_to respond_to(:first_name)
       end
 
       it 'responds to new model attribute' do
         migrate
-        expect(User.new).to respond_to(:surname)
+        expect(Prospect.new).to respond_to(:surname)
       end
     end
 
     context 'when changing attribute type' do
-      let(:current_data) do
-        [
-          {
-            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
-            attributes: [
-              {
-                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
-                name: 'first_name',
-                type: 'string'
-              }
-            ]
-          }
-        ]
-      end
       let(:data) do
         [
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'user',
+            name: 'prospect',
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -505,8 +482,14 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
           }
         ]
       end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 5 }
+      let(:rollback_reload) do
+        Object.__send__(:remove_const, :Prospect)
+        Object.__send__(:remove_const, :ProspectsController)
+      end
 
-      include_context 'with application migration rollback'
+      before { create_prospect_entity }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -517,7 +500,7 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_users.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
   end
