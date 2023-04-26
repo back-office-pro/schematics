@@ -6,9 +6,13 @@ require 'generators/translation/translation_generator'
 module Schematics
   module Commands
     class RemoveTranslation < Command
-      def generators = [
+      def generators = [translation_generator].compact
+
+      def translation_generator
+        return if core?
+
         TranslationGenerator.new([attribute], behavior: :revoke)
-      ]
+      end
 
       def weight = 4
     end
