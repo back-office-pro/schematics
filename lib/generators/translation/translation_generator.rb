@@ -36,10 +36,6 @@ class TranslationGenerator < Rails::Generators::NamedBase
 
   private
 
-  def entity = ::Tenant
-    .schema
-    .find_entity_by_name(name.underscore)
-
   def old_name = options[:rename]
 
   def key = "activerecord.#{name}"
