@@ -144,7 +144,7 @@ RSpec/ExampleLength:
     - array
     - hash
 RSpec/MultipleMemoizedHelpers:
-  Max: 10
+  Max: 14
 RSpec/EmptyExampleGroup:
   Exclude:
     - spec/*/core/**/*
