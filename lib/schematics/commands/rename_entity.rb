@@ -56,7 +56,7 @@ module Schematics
         return if core?
 
         Rails::Generators::ScaffoldGenerator.new(
-          [name, *migratable_attributes.map(&:to_s)],
+          [name, *migratable_attributes],
           ['--skip-resource-route', '--skip-migration'],
           behavior:
         )

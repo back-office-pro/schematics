@@ -30,13 +30,13 @@ module Schematics
         return if core?
 
         Rails::Generators::ScaffoldGenerator.new(
-          [name, *migratable_attributes.map(&:to_s)],
+          [name, *migratable_attributes],
           ['--skip-resource-route']
         )
       end
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["create_#{table_name.pluralize}", *migratable_attributes.map(&:to_s)],
+        ["create_#{table_name.pluralize}", *migratable_attributes],
         ['--timestamps=true', '--primary_key_type=uuid']
       )
 
