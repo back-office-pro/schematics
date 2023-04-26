@@ -144,7 +144,13 @@ RSpec/ExampleLength:
     - array
     - hash
 RSpec/MultipleMemoizedHelpers:
-  Max: 10
+  Max: 14
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - spec/*/core/**/*
+RSpec/FilePath:
+  Exclude:
+    - spec/requests/core/**/*
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true

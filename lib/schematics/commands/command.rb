@@ -11,7 +11,6 @@ module Schematics
       delegate :name,
                :table_name,
                :class_name,
-               :migratable_attributes,
                :association_attributes,
                :core?,
                :existing?,
@@ -29,6 +28,11 @@ module Schematics
       def has_and_belongs_to_many_associations = entity # rubocop:disable Naming/PredicateName
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
+
+      def migratable_attributes = entity
+        .migratable_attributes
+        .push('slug:string:uniq', 'lock_version:integer')
+        .map(&:to_s)
     end
   end
 end

@@ -34,8 +34,9 @@ module Schematics
       end
 
       def load_files(entity)
-        load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
-        load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+        root = entity.core? ? Engine.root : ::Rails.root
+        load root.join('app', 'models', "#{entity.name}.rb")
+        load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
       end
     end
   end

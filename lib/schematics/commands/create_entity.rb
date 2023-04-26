@@ -16,26 +16,35 @@ module Schematics
         return [scaffold_controller_generator, serializer_generator] if existing?
 
         [
-          scaffold_generator,
+          scaffold_generator || migration_generator,
           feature_generator,
           translations_generator,
           permissions_generator,
-          slug_migration_generator,
-          lock_version_migration_generator,
           has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
         ].compact.flatten
       end
 
       private
 
-      def scaffold_generator = Rails::Generators::ScaffoldGenerator.new(
-        [
-          name,
-          *migratable_attributes.map(&:to_s)
-        ], ['--skip-resource-route']
+      def scaffold_generator
+        return if core?
+
+        Rails::Generators::ScaffoldGenerator.new(
+          [name, *migratable_attributes],
+          ['--skip-resource-route']
+        )
+      end
+
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        ["create_#{table_name.pluralize}", *migratable_attributes],
+        ['--timestamps=true', '--primary_key_type=uuid']
       )
 
-      def feature_generator = Rspec::Generators::FeatureGenerator.new([name])
+      def feature_generator
+        return if core?
+
+        Rspec::Generators::FeatureGenerator.new([name])
+      end
 
       def translations_generator
         return if core?
@@ -49,20 +58,6 @@ module Schematics
         PermissionsGenerator.new([name])
       end
 
-      def slug_migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "add_slug_to_#{table_name.pluralize}",
-          'slug:string:uniq'
-        ]
-      )
-
-      def lock_version_migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "add_lock_version_to_#{table_name.pluralize}",
-          'lock_version:integer'
-        ]
-      )
-
       def create_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
@@ -74,10 +69,14 @@ module Schematics
       end
 
       def scaffold_controller_generator
+        return if core?
+
         Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
       end
 
       def serializer_generator
+        return if core?
+
         Rails::Generators::SerializerGenerator.new([name])
       end
     end

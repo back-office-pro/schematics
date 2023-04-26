@@ -5,7 +5,8 @@ describe Schematics::Commands::DestroyEntity do
 
   include_context 'with custom generated attribute'
 
-  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, associations:) }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name:, attributes:, associations:) }
   let(:name) { 'assembly' }
   let(:attributes) do
     [

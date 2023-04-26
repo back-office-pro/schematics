@@ -7,7 +7,7 @@ RSpec.describe Core::Session::ActiveQuery do
 
   let(:first_session) { Session.create!(user:) }
   let(:second_session) do
-    Session.create!(user:, updated_at: Time.current - Core::Session::ACTIVE_DELAY)
+    Session.create!(user:, updated_at: Time.current - Session::ACTIVE_DELAY)
   end
 
   before { [first_session, second_session] }

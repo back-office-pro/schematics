@@ -22,6 +22,8 @@ module Schematics
       private
 
       def feature_generator
+        return if core?
+
         Rspec::Generators::FeatureGenerator.new([name], [], behavior: :revoke)
       end
 
@@ -32,27 +34,23 @@ module Schematics
       end
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "drop_#{table_name.pluralize}",
-          *migratable_attributes.map(&:to_s)
-        ],
-        ['--timestamps=true']
+        ["drop_#{table_name.pluralize}", *migratable_attributes],
+        ['--timestamps=true', '--primary_key_type=uuid']
       )
 
       def permissions_generator
-        return if core?
-
         PermissionsGenerator.new([name], [], behavior: :revoke)
       end
 
-      def scaffold_generator = Rails::Generators::ScaffoldGenerator.new(
-        [
-          name,
-          *migratable_attributes.map(&:to_s)
-        ],
-        ['--skip-resource-route', '--skip-migration'],
-        behavior: :revoke
-      )
+      def scaffold_generator
+        return if core?
+
+        Rails::Generators::ScaffoldGenerator.new(
+          [name, *migratable_attributes],
+          ['--skip-resource-route', '--skip-migration'],
+          behavior: :revoke
+        )
+      end
 
       def drop_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(

@@ -7,15 +7,20 @@ require 'generators/translation/translation_generator'
 module Schematics
   module Commands
     class RemoveAttribute < Command
-      def generators = [
-        Rails::Generators::MigrationGenerator.new(
-          [
-            "remove_#{attribute}_from_#{table_name.pluralize}",
-            "schema:#{name}_#{attribute}"
-          ]
-        ),
-        TranslationGenerator.new(["attributes.#{name}.#{attribute}"], behavior: :revoke)
-      ]
+      def generators = [migration_generator, translation_generator].compact
+
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "remove_#{attribute}_from_#{table_name.pluralize}",
+          "schema:#{name}_#{attribute}"
+        ]
+      )
+
+      def translation_generator
+        return if core?
+
+        TranslationGenerator.new(["attributes.#{name}.#{attribute}"], [], behavior: :revoke)
+      end
 
       def weight = 3
     end
