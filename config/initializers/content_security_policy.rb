@@ -12,7 +12,7 @@ end
 
 Rails.configuration.content_security_policy_nonce_directives = %w[script-src]
 Rails.configuration.content_security_policy_report_only = Rails.env.development?
-Rails.configuration.content_security_policy_nonce_generator = lambda { |request|
+Rails.configuration.content_security_policy_nonce_generator = lambda do |request|
   (request.env['HTTP_TURBO_REFERRER'].presence && request.env['HTTP_X_TURBO_NONCE']) ||
     SecureRandom.base64(16)
-}
+end
