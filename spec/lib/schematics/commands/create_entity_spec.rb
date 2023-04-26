@@ -5,7 +5,10 @@ describe Schematics::Commands::CreateEntity do
 
   include_context 'with custom generated attribute'
 
-  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:, associations:, options:) }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) do
+    Schematics::Entities::Entity.new(schema:, name:, attributes:, associations:, options:)
+  end
   let(:name) { 'assembly' }
   let(:options) { {} }
   let(:attributes) do
@@ -45,9 +48,7 @@ describe Schematics::Commands::CreateEntity do
     its([2]) { is_expected.to be_a(TranslationsGenerator) }
     its([3]) { is_expected.to be_a(PermissionsGenerator) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-    its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-    its([6]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-    its(:size) { is_expected.to eq(7) }
+    its(:size) { is_expected.to eq(5) }
 
     context 'when entity class already exists' do
       let(:options) { { existing: true } }

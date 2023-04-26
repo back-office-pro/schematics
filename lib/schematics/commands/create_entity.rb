@@ -20,8 +20,6 @@ module Schematics
           feature_generator,
           translations_generator,
           permissions_generator,
-          slug_migration_generator,
-          lock_version_migration_generator,
           has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
         ].compact.flatten
       end
@@ -59,20 +57,6 @@ module Schematics
 
         PermissionsGenerator.new([name])
       end
-
-      def slug_migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "add_slug_to_#{table_name.pluralize}",
-          'slug:string:uniq'
-        ]
-      )
-
-      def lock_version_migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "add_lock_version_to_#{table_name.pluralize}",
-          'lock_version:integer'
-        ]
-      )
 
       def create_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
