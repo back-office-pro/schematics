@@ -48,9 +48,10 @@ module Schematics
 
       def old_table_name = old_name.tr('/', '_')
 
-      def permissions_generator
-        PermissionsGenerator.new([name], ["--rename=#{old_class_name}"])
-      end
+      def permissions_generator = PermissionsGenerator.new(
+        [name],
+        ["--rename=#{old_class_name}"]
+      )
 
       def scaffold_generator(behavior: :invoke)
         return if core?
