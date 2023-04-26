@@ -5,7 +5,8 @@ describe Schematics::Commands::RenameEntity do
 
   include_context 'with custom generated attribute'
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'prospect') }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'prospect') }
   let(:attribute) { 'client' }
   let(:target) { nil }
 
