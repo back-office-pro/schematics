@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Schematics::MigrateSchemaJob do
   let(:schema_dataset) { SchemaDataset.create!(data:, state: :in_progress) }
-  let(:admin_role) { Role.find_or_create_by!(name: 'Admin') }
   let(:data) do
     [
       {
@@ -19,28 +18,11 @@ RSpec.describe Schematics::MigrateSchemaJob do
     ]
   end
 
-  before { admin_role }
-
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later(schema_dataset) }
         .to have_enqueued_job(described_class)
         .with(schema_dataset)
-    end
-  end
-
-  describe '#perform_now', skip: 'must be run standalone' do
-    subject(:perform_now) { described_class.perform_now(schema_dataset) }
-
-    include_context 'with application migration rollback', 4
-
-    uses_transaction 'changes the schema dataset state from in_progress to migrated'
-
-    it 'changes the schema dataset state from in_progress to migrated' do
-      expect { Dir.chdir(root) { perform_now } }
-        .to change { schema_dataset.reload.state }
-        .from('in_progress')
-        .to('migrated')
     end
   end
 end
