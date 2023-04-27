@@ -3,12 +3,12 @@
   template#schema-editor-events-input data-nested-form-target='templates'
     .col-6.schema-editor-events-input
       = builder.fields_for name, Schematics::Options::StateMachineEvent.new do |events_form|
-        = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[][name]", maxlength:, floating:, required: }
-        = events_form.select :icon, [], {}, { data: icon_data, name: "#{events_form.object_name}[][icon]" }
-        = events_form.select :color, [], {}, { data: color_data, name: "#{events_form.object_name}[][color]" }
-        = events_form.select :from, [], {}, { data:, name: "#{events_form.object_name}[][from][]", floating:, required: }
-        = events_form.select :to, [], {}, { data:, name: "#{events_form.object_name}[][to]", floating:, required: }
-        = events_form.text_field :callback, { name: "#{events_form.object_name}[][callback]", floating: }
+        = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[NEW_RECORD][name]", maxlength:, floating:, required: }
+        = events_form.select :icon, [], {}, { data: icon_data, name: "#{events_form.object_name}[NEW_RECORD][icon]" }
+        = events_form.select :color, [], {}, { data: color_data, name: "#{events_form.object_name}[NEW_RECORD][color]" }
+        = events_form.select :from, [], {}, { data:, name: "#{events_form.object_name}[NEW_RECORD][from][]", floating:, required: }
+        = events_form.select :to, [], {}, { data:, name: "#{events_form.object_name}[NEW_RECORD][to]", floating:, required: }
+        = events_form.text_field :callback, { name: "#{events_form.object_name}[NEW_RECORD][callback]", floating: }
       .btn.btn-sm.btn-danger {
         data-action='click->nested-form#remove:prevent:stop'
         data-nested-form-wrapper-param='.schema-editor-events-input'
@@ -17,17 +17,20 @@
         data-bs-title=t('.remove')
       } = fa_icon :trash
   .row.g-2#schema-editor-events-inputs data-nested-form-target='targets'
-    - events.each do |event|
+    - events.each_with_index do |event, index|
       .col-6.schema-editor-events-input
         = builder.fields_for name, event do |events_form|
-          = events_form.hidden_field :id
-          = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[][name]", maxlength:, floating:, required: }
-          = events_form.select :icon, [], {}, { data: icon_data(event.icon), name: "#{events_form.object_name}[][icon]" }
-          = events_form.select :color, [], {}, { data: color_data(event.color), name: "#{events_form.object_name}[][color]" }
+          = events_form.hidden_field :id, { name: "#{events_form.object_name}[#{index}][id]" }
+          = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[#{index}][name]", maxlength:, floating:, required: }
+          = events_form.select :icon, [], {}, { data: icon_data(event.icon), name: "#{events_form.object_name}[#{index}][icon]" }
+          = events_form.select :color, [], {}, { data: color_data(event.color), name: "#{events_form.object_name}[#{index}][color]" }
           - Array(event.from).each do |value|
-            = events_form.select :from, values, { selected: value }, { data:, name: "#{events_form.object_name}[][from][]", floating:, required: }
-          = events_form.select :to, values, {}, { data:, name: "#{events_form.object_name}[][to]", floating:, required: }
-          = events_form.text_field :callback, { name: "#{events_form.object_name}[][callback]", floating: }
+            = events_form.select :from,
+                                 values,
+                                 { selected: value },
+                                 { data:, name: "#{events_form.object_name}[#{index}][from][]", floating:, required: }
+          = events_form.select :to, values, {}, { data:, name: "#{events_form.object_name}[#{index}][to]", floating:, required: }
+          = events_form.text_field :callback, { name: "#{events_form.object_name}[#{index}][callback]", floating: }
         .btn.btn-sm.btn-danger {
           data-action='click->nested-form#remove:prevent:stop'
           data-nested-form-wrapper-param='.schema-editor-events-input'
