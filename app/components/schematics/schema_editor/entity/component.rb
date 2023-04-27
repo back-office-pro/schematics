@@ -4,7 +4,7 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        delegate :default_actions, :actions, :icon, :descriptor, to: 'builder.object'
+        delegate :default_actions, :icon, :descriptor, to: 'builder.object'
         delegate :allowed_field_names, to: :descriptor
         delegate :index, to: :builder
         option :builder

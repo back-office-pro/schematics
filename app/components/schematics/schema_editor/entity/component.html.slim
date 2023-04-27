@@ -18,7 +18,7 @@
         = options_form.select :descriptor, allowed_field_names, {}, { data: { controller: 'schema-editor--descriptor-dropdown' } }
         = options_form.select :actions,
                               actions_collection,
-                              { selected: actions, include_hidden: false },
+                              { include_hidden: false },
                               { multiple: true, data: { controller: 'dropdown' } }
         = options_form.select :icon,
                               [],
