@@ -3,16 +3,8 @@ import ApplicationController from 'controllers/application_controller'
 export default class extends ApplicationController {
   initialize () {
     this.parentNode = this.modalElement.parentNode
-  }
-
-  connect () {
     this.element.addEventListener('show.bs.modal', this.appendToBody.bind(this))
     this.element.addEventListener('hidden.bs.modal', this.moveBackToParentNode.bind(this))
-  }
-
-  disconnect () {
-    this.element.removeEventListener('show.bs.modal', this.appendToBody.bind(this))
-    this.element.removeEventListener('hidden.bs.modal', this.moveBackToParentNode.bind(this))
   }
 
   appendToBody () {
