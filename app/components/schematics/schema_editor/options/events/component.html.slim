@@ -11,7 +11,7 @@
                              { include_hidden: },
                              { data:, name: "#{events_form.object_name}[NEW_RECORD][from][]", multiple:, floating:, required: }
         = events_form.select :to, [], {}, { data:, name: "#{events_form.object_name}[NEW_RECORD][to]", floating:, required: }
-        = events_form.text_field :callback, { name: "#{events_form.object_name}[NEW_RECORD][callback]", floating: }
+        = events_form.text_field :callback, { data: callback_data, name: "#{events_form.object_name}[NEW_RECORD][callback]", floating: }
       .btn.btn-sm.btn-danger {
         data-action='click->nested-form#remove:prevent:stop'
         data-nested-form-wrapper-param='.schema-editor-events-input'
@@ -32,7 +32,7 @@
                                { include_hidden: },
                                { data:, name: "#{events_form.object_name}[#{index}][from][]", multiple:, floating:, required: }
           = events_form.select :to, values, {}, { data:, name: "#{events_form.object_name}[#{index}][to]", floating:, required: }
-          = events_form.text_field :callback, { name: "#{events_form.object_name}[#{index}][callback]", floating: }
+          = events_form.text_field :callback, { data: callback_data, name: "#{events_form.object_name}[#{index}][callback]", floating: }
         .btn.btn-sm.btn-danger {
           data-action='click->nested-form#remove:prevent:stop'
           data-nested-form-wrapper-param='.schema-editor-events-input'

@@ -28,6 +28,15 @@ module Schematics
             }
           end
 
+          def callback_data = {
+            controller: 'popover',
+            'bs-toggle': 'popover',
+            'bs-trigger': 'hover',
+            'bs-content': Schematics::SchemaEditor::Trigger::Popover::Component.new.to_html,
+            'bs-placement': 'bottom',
+            'bs-html': true
+          }
+
           def floating = true
 
           def required = true
