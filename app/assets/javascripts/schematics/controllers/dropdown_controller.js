@@ -8,10 +8,6 @@ export default class extends ApplicationController {
     new TomSelect(this.element, this.options) // eslint-disable-line no-new
   }
 
-  disconnect () {
-    this.element.tomselect.destroy()
-  }
-
   setDependentDropdownsOptions (value) {
     document
       .querySelectorAll(`[data-dropdown-depends-on="${this.element.name}"]`)
