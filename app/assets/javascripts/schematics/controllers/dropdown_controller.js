@@ -4,7 +4,7 @@ import TomSelect from 'tom-select'
 /* global I18n */
 
 export default class extends ApplicationController {
-  connect () {
+  initialize () {
     new TomSelect(this.element, this.options) // eslint-disable-line no-new
   }
 
