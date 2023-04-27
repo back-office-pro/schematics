@@ -31,6 +31,25 @@ RSpec.describe Core::SchemaDatasetMapper do
                   'readonly' => 'false',
                   'min' => '50'
                 }
+              },
+              '1' => {
+                'id' => '456',
+                'type' => 'state_machine',
+                'name' => 'state',
+                'options_attributes' => {
+                  'values' => %w[
+                    pending
+                    closed
+                  ],
+                  'events' => {
+                    '0' => {
+                      'id' => '789',
+                      'name' => 'close',
+                      'from' => 'pending',
+                      'to' => 'closed'
+                    }
+                  }
+                }
               }
             },
             'virtuals_attributes' => {
@@ -80,6 +99,25 @@ RSpec.describe Core::SchemaDatasetMapper do
                 options: {
                   required: true,
                   min: 50
+                }
+              },
+              {
+                id: '456',
+                name: 'state',
+                type: 'state_machine',
+                options: {
+                  values: %w[
+                    pending
+                    closed
+                  ],
+                  events: [
+                    {
+                      id: '789',
+                      name: 'close',
+                      from: 'pending',
+                      to: 'closed'
+                    }
+                  ]
                 }
               }
             ],

@@ -36,6 +36,8 @@ module Core
                         value.to_i
                       in /^(\d)+\.(\d)+$/
                         value.to_f
+                      in Hash
+                        value.values
                       else
                         value
                       end
@@ -63,6 +65,8 @@ module Core
                         value.to_i
                       in /^(\d)+\.(\d)+$/
                         value.to_f
+                      in Hash
+                        value.values
                       else
                         value
                       end
