@@ -32,6 +32,10 @@ module Schematics
 
           def required = true
 
+          def multiple = true
+
+          def include_hidden = false
+
           def maxlength = 50
 
           def events = Array(
