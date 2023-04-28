@@ -46,6 +46,7 @@ ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     self.implicit_order_column = 'created_at'
     include Schematics::Loadable
+    include Schematics::Serializable
     include Schematics::Translatable
     loadable concerns: [Schematics::SoftDeletable]
   end
