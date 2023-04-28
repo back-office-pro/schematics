@@ -1,49 +1,69 @@
 # frozen_string_literal: true
 
 module Schematics
-  module JsonSerializer
-    extend ActiveSupport::Concern
+  class JsonSerializer
+    delegate :class, to: :@resource, prefix: :model, private: true
+    delegate :attachable_sgid, to: :@resource, private: true
+    delegate :entity, to: :model_class, private: true
+    delegate :descriptor,
+             :icon,
+             :renderable_elements,
+             :has_many_and_through_and_belongs_to_many_associations,
+             :find_field_by_name,
+             to: :entity, private: true
 
-    included do
-      attribute :_metadata, if: :metadata?
-
-      entity.renderable_elements.stable_sort_by(&:weight).each do |element|
-        case element
-        when Attributes::Attachment, Attributes::RichText
-          attribute element.name.to_sym do
-            element.format object.public_send(element.name.to_sym)
-          end
-        when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
-          has_one element.name.to_sym, serializer: element.descriptor.serializer_class
-        when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
-          has_many element.name.to_sym, serializer: element.descriptor.serializer_class, if: :show?
-        else
-          attribute element.name.to_sym
-        end
-      end
+    def initialize(resource, options)
+      @resource = resource
+      @options = options || {}
     end
 
-    class_methods do
-      delegate :entity, to: :model_class
+    def content = elements
+      .stable_sort_by(&:weight)
+      .to_h(&method(:foo))
+      .merge(metadata)
 
-      def model_class = name
-        .chomp('Serializer')
-        .constantize
+    def metadata
+      return {} unless metadata?
+
+      {
+        'Metadata' => {
+          'icon' => icon.to_s.dasherize,
+          'descriptor' => @resource.to_s,
+          'url' => Rails.application.routes.url_helpers.polymorphic_path(@resource),
+          'sgid' => attachable_sgid
+        }
+      }
     end
 
-    def _metadata = {
-      icon: self.class.entity.icon.to_s.dasherize,
-      descriptor: object.to_s,
-      url: Rails.application.routes.url_helpers.polymorphic_path(object),
-      sgid: object.attachable_sgid
-    }
+    def metadata? = @options[:metadata]
 
-    def metadata?
-      instance_options[:metadata]
-    end
+    def association? = @options[:association]
 
     def show?
-      instance_options[:template] == 'show'
+      @options[:template] == 'show'
+    end
+
+    def elements
+      return [find_field_by_name('id'), find_field_by_name(descriptor.name)].reject(&:hidden?) if association?
+      return renderable_elements if show?
+
+      renderable_elements.excluding(has_many_and_through_and_belongs_to_many_associations)
+    end
+
+    def foo(element)
+      [
+        element.name.camelize(:lower),
+        case element
+        when Attributes::Attachment, Attributes::RichText
+          element.format @resource.public_send(element.name.to_sym)
+        when Attributes::Association, Associations::Association
+          @resource
+            .public_send(element.name.to_sym)
+            .as_json(association: true)
+        else
+          @resource.public_send(element.name.to_sym)
+        end
+      ]
     end
   end
 end
