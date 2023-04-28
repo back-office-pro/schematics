@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_model_serializers'
 require 'active_support/core_ext/module/delegation'
 
 module Schematics
@@ -26,21 +25,6 @@ module Schematics
           #{name}_formatted || id
         end
       RUBY
-
-      def serializer_class
-        descriptor = name
-        case entity
-        when Singleton
-          Class.new(::ActiveModel::Serializer) do
-            attribute descriptor
-          end
-        when Entity
-          Class.new(::ActiveModel::Serializer) do
-            attribute :id
-            attribute descriptor if descriptor != 'id'
-          end
-        end
-      end
 
       def allowed_field_names = entity
         .fields
