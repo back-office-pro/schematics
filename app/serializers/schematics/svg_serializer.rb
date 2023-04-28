@@ -4,7 +4,6 @@ module Schematics
   class SvgSerializer
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :human_name, to: :model_class, private: true
-    delegate :to_json, to: :json_serializer, private: true
 
     def initialize(resource)
       @resource = resource
@@ -20,12 +19,8 @@ module Schematics
 
     private
 
-    def json_serializer
-      @json_serializer ||= ::ActiveModelSerializers::SerializableResource.new(@resource)
-    end
-
     def qr_code
-      @qr_code ||= RQRCode::QRCode.new(to_json)
+      @qr_code ||= RQRCode::QRCode.new(@resource.as_json)
     end
   end
 end
