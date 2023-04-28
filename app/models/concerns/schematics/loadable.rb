@@ -30,7 +30,7 @@ module Schematics
 
       def filter_attributes = entity
         .non_renderable_attributes
-        .map(&:name)
+        .map(&:column_name)
         .map(&:to_sym)
 
       def cached_attributes = entity

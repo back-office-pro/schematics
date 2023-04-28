@@ -18,7 +18,7 @@ module Schematics
       def hidden_attributes = entity
         .attributes
         .select(&:hidden?)
-        .map(&:name)
+        .map(&:column_name)
         .map(&:to_sym)
     end
 
