@@ -2,5 +2,5 @@
 en:
   javascript:
     typeahead:
-      not_found: No result
+      notFound: No result
       pending: Loading...
