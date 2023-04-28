@@ -54,8 +54,7 @@ describe Schematics::Commands::CreateEntity do
       let(:options) { { existing: true } }
 
       its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldControllerGenerator) }
-      its([1]) { is_expected.to be_a(Rails::Generators::SerializerGenerator) }
-      its(:size) { is_expected.to eq(2) }
+      its(:size) { is_expected.to eq(1) }
     end
   end
 end
