@@ -42,5 +42,14 @@ module Schematics
     def model_class
       item_type.safe_constantize
     end
+
+    def serializable_hash(*) = {
+      id:,
+      createdAt: created_at,
+      event:,
+      item:,
+      user: user.as_json(association: true),
+      objectChanges: object_changes
+    }
   end
 end
