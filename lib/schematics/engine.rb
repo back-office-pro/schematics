@@ -3,7 +3,6 @@
 require 'aasm'
 require 'action_controller'
 require 'active_link_to'
-require 'active_model_serializers'
 require 'active_storage_base64'
 require 'active_storage_validations'
 require 'bootstrap_form'
