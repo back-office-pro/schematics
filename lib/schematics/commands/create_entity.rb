@@ -13,7 +13,7 @@ module Schematics
   module Commands
     class CreateEntity < Command
       def generators
-        return [scaffold_controller_generator, serializer_generator] if existing?
+        return [scaffold_controller_generator, serializer_generator].compact if existing?
 
         [
           scaffold_generator || migration_generator,
