@@ -78,13 +78,11 @@ Dependencies choices details.
 
 ### API JSON
 
-:star: **active_model_serializers**
+:star: **from scratch**
 
-~~from scratch~~
+~~active_model_serializers~~
 
-:-1: Works badly with `ActionText` and `Attachment`
-
-:-1: We need `olive_banch` to camelize keys
+:-1: Generates more files
 
 ~~fast_jsonapi~~
 
