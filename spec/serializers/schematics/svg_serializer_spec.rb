@@ -7,7 +7,7 @@ RSpec.describe Schematics::SvgSerializer do
 
   include_context 'with user'
 
-  its(:file) { is_expected.to be_a(String) }
+  its(:content) { is_expected.to be_a(String) }
   its(:filename) { is_expected.to eq('user-doe-john.svg') }
   its(:extension) { is_expected.to eq(:svg) }
   its(:content_type) { is_expected.to eq('image/svg+xml') }

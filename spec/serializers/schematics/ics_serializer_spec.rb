@@ -9,7 +9,7 @@ RSpec.describe Schematics::IcsSerializer do
     Meeting.new(start_at: Time.current, end_at: Time.current, subject: 'Work', slug: 'work')
   end
 
-  its(:file) { is_expected.to be_a(String) }
+  its(:content) { is_expected.to be_a(String) }
   its(:filename) { is_expected.to eq('meeting-work.ics') }
   its(:extension) { is_expected.to eq(:ics) }
   its(:content_type) { is_expected.to eq('text/calendar') }
