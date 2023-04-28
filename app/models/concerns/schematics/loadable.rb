@@ -83,5 +83,13 @@ module Schematics
             .order(created_at: :desc)
         end.compact_blank
     end
+
+    def serializable_hash(options = nil)
+      Rails.cache.fetch("#{cache_key_with_version}/serializable_hash_with_#{options}") do
+        JsonSerializer
+          .new(self, options)
+          .content
+      end
+    end
   end
 end
