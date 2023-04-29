@@ -16,7 +16,7 @@ export default class extends ApplicationController {
     this.tribute.detach(this.element)
   }
 
-  replaced ({ detail: { item: { original: { Metadata: { sgid, descriptor, icon, url } } } } }) {
+  replaced ({ detail: { item: { original: { _metadata: { sgid, descriptor, icon, url } } } } }) {
     const attachment = new Trix.Attachment({ sgid, content: this.template(descriptor, icon, url) })
     this.editor.insertAttachment(attachment)
     this.editor.insertString(' ')
@@ -64,7 +64,7 @@ export default class extends ApplicationController {
         },
         {
           trigger: '#',
-          lookup: ({ Metadata: { descriptor } }) => descriptor,
+          lookup: ({ _metadata: { descriptor } }) => descriptor,
           values: this.search.bind(this)
         }
       ]
