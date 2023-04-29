@@ -80,6 +80,8 @@ Dependencies choices details.
 
 :star: **from scratch**
 
+:+1: Most personalizable solution
+
 ~~active_model_serializers~~
 
 :-1: Generates more files
