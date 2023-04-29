@@ -25,7 +25,7 @@ export default class extends ApplicationController {
     Turbo.visit(url)
   }
 
-  suggestionTemplate ({ Metadata: { descriptor, icon, url } }) {
+  suggestionTemplate ({ _metadata: { descriptor, icon, url } }) {
     return `
       <li class="list-group-item list-group-item-action p-2 text-start text-truncate" data-action="mousedown->search-bar#selectItem" data-search-bar-url-param="${url}" role="button">
         <i class="fa fa-${icon} text-secondary fa-fw me-2"></i>

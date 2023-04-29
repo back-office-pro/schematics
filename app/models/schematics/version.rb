@@ -2,6 +2,7 @@
 
 module Schematics
   class Version < PaperTrail::Version
+    include Serializable
     include Translatable
 
     EVENTS = %w[create update destroy archive restore import duplicate].freeze
@@ -41,6 +42,17 @@ module Schematics
 
     def model_class
       item_type.safe_constantize
+    end
+
+    def serialized_json(*)
+      {
+        id:,
+        createdAt: created_at,
+        event:,
+        item: item.as_json(association: false),
+        user: user.as_json(association: true),
+        objectChanges: object_changes
+      }
     end
   end
 end

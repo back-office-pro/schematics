@@ -35,12 +35,18 @@ Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false
   end
+  ActionText::Attachable.class_eval do
+    def as_json(*)
+      super
+    end
+  end
 end
 
 ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     self.implicit_order_column = 'created_at'
     include Schematics::Loadable
+    include Schematics::Serializable
     include Schematics::Translatable
     loadable concerns: [Schematics::SoftDeletable]
   end

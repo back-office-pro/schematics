@@ -68,7 +68,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'creates a model file'
       uses_transaction 'creates a controller file'
       uses_transaction 'creates a rspec model file'
-      uses_transaction 'creates a serializer file'
       uses_transaction 'creates a rspec feature file'
       uses_transaction 'creates permissions'
       uses_transaction 'creates translations'
@@ -96,11 +95,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'creates a rspec model file' do
         migrate
         expect(File).to exist root.join('spec/models/prospect_spec.rb')
-      end
-
-      it 'creates a serializer file' do
-        migrate
-        expect(File).to exist root.join('app/serializers/prospect_serializer.rb')
       end
 
       it 'creates a rspec feature file' do
@@ -153,13 +147,11 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'destroys the model file'
       uses_transaction 'destroys the controller file'
       uses_transaction 'destroys the rspec model file'
-      uses_transaction 'destroys the serializer file'
       uses_transaction 'destroys the rspec feature file'
       uses_transaction 'creates a migration file'
       uses_transaction 'creates a model file'
       uses_transaction 'creates a controller file'
       uses_transaction 'creates a rspec model file'
-      uses_transaction 'creates a serializer file'
       uses_transaction 'creates a rspec feature file'
       uses_transaction 'undefines a model class'
       uses_transaction 'defines a model class'
@@ -181,11 +173,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'destroys the rspec model file' do
         migrate
         expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
-      end
-
-      it 'destroys the serializer file' do
-        migrate
-        expect(File).not_to exist root.join('app/serializers/prospect_serializer.rb')
       end
 
       it 'destroys the rspec feature file' do
@@ -211,11 +198,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'creates a rspec model file' do
         migrate
         expect(File).to exist root.join('spec/models/client_spec.rb')
-      end
-
-      it 'creates a serializer file' do
-        migrate
-        expect(File).to exist root.join('app/serializers/client_serializer.rb')
       end
 
       it 'creates a rspec feature file' do
@@ -247,7 +229,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       uses_transaction 'destroys the model file'
       uses_transaction 'destroys the controller file'
       uses_transaction 'destroys the rspec model file'
-      uses_transaction 'destroys the serializer file'
       uses_transaction 'destroys the rspec feature file'
       uses_transaction 'destroys permissions'
       uses_transaction 'destroys translations'
@@ -275,11 +256,6 @@ RSpec.describe Schematics::SchemaDatasets::Migrate do
       it 'destroys the rspec model file' do
         migrate
         expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
-      end
-
-      it 'destroys the serializer file' do
-        migrate
-        expect(File).not_to exist root.join('app/serializers/prospect_serializer.rb')
       end
 
       it 'destroys the rspec feature file' do
