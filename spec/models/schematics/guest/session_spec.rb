@@ -15,7 +15,6 @@ RSpec.describe Schematics::Guest::Session do
   its(:ip) { is_expected.to eq('0.0.0.0') }
   its(:user_agent) { is_expected.to eq('Rails Testing') }
   its(:touch!) { is_expected.to be_truthy }
-  its(:user) { is_expected.to be_a(Schematics::Guest::User) }
 
   describe '#user' do
     subject { session.user }
