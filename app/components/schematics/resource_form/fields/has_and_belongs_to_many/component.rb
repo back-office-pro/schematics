@@ -23,6 +23,8 @@ module Schematics
             .humanize
             .pluralize
 
+          protected
+
           def attribute_name = super.singularize
         end
       end
