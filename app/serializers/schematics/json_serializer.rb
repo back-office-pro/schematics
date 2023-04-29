@@ -19,18 +19,18 @@ module Schematics
 
     def content = elements
       .stable_sort_by(&:weight)
-      .to_h(&method(:foo))
+      .to_h(&method(:element_to_array))
       .merge(metadata)
 
     def metadata
       return {} unless metadata?
 
       {
-        'Metadata' => {
-          'icon' => icon.to_s.dasherize,
-          'descriptor' => @resource.to_s,
-          'url' => Rails.application.routes.url_helpers.polymorphic_path(@resource),
-          'sgid' => attachable_sgid
+        _metadata: {
+          icon: icon.to_s.dasherize,
+          descriptor: @resource.to_s,
+          url: Rails.application.routes.url_helpers.polymorphic_path(@resource),
+          sgid: attachable_sgid
         }
       }
     end
@@ -44,22 +44,25 @@ module Schematics
     end
 
     def elements
-      return [find_field_by_name('id'), find_field_by_name(descriptor.name)].reject(&:hidden?) if association?
+      return association_elements if association?
       return renderable_elements if show?
 
       renderable_elements.excluding(has_many_and_through_and_belongs_to_many_associations)
     end
 
-    def foo(element)
+    def association_elements = [
+      find_field_by_name('id'),
+      find_field_by_name(descriptor.name)
+    ].uniq.reject(&:hidden?)
+
+    def element_to_array(element)
       [
         element.name.camelize(:lower),
         case element
         when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
         when Attributes::Association, Associations::Association
-          @resource
-            .public_send(element.name.to_sym)
-            .as_json(association: true)
+          @resource.public_send(element.name.to_sym).as_json(association: true)
         else
           @resource.public_send(element.name.to_sym)
         end
