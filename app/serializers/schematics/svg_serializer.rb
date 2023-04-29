@@ -19,12 +19,8 @@ module Schematics
 
     private
 
-    def serialized_json
-      @serialized_json ||= ActiveSupport::JSON.encode(@resource.serialized_json)
-    end
-
     def qr_code
-      @qr_code ||= RQRCode::QRCode.new(serialized_json)
+      @qr_code ||= RQRCode::QRCode.new(@resource.to_json(root: false))
     end
   end
 end
