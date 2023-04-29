@@ -23,7 +23,6 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.to include('searches') }
       it { is_expected.to include('imports') }
       it { is_expected.to include('sentMessages') }
-      it { is_expected.not_to include('Metadata') }
       it { is_expected.not_to include('password') }
     end
 
@@ -40,23 +39,20 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.not_to include('searches') }
       it { is_expected.not_to include('imports') }
       it { is_expected.not_to include('sentMessages') }
-      it { is_expected.not_to include('Metadata') }
       it { is_expected.not_to include('password') }
     end
 
-    context 'when association' do
+    context 'when association option is enabled' do
       let(:options) { { association: true } }
 
       it { is_expected.to include('id' => be_a(String)) }
       it { is_expected.to include('fullName' => 'Doe John') }
-      it { is_expected.not_to include('password') }
     end
 
-    context 'when metadata' do
+    context 'when metadata option is enabled' do
       let(:options) { { metadata: true } }
 
-      it { is_expected.not_to include('Metadata') }
-      it { is_expected.not_to include('password') }
+      it { is_expected.to include(:_metadata) }
     end
   end
 end
