@@ -49,8 +49,8 @@ module Schematics
         id:,
         createdAt: created_at,
         event:,
-        item: item.cached_serialized_json,
-        user: user.cached_serialized_json(association: true),
+        item: item.as_json(association: false),
+        user: user.as_json(association: true),
         objectChanges: object_changes
       }
     end
