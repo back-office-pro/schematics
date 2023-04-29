@@ -33,6 +33,8 @@ class Chart < Schematics::ApplicationRecord
     model.safe_constantize
   end
 
+  alias cached_serialized_json serialized_json
+
   def serialized_json(*) # rubocop:disable Metrics/CyclomaticComplexity
     return unless model_class
 

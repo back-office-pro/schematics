@@ -44,17 +44,15 @@ module Schematics
       item_type.safe_constantize
     end
 
-    def serialized_json(options = nil)
-      Rails.cache.fetch("#{cache_key_with_version}/serialized_json_with_#{options}") do
-        {
-          id:,
-          createdAt: created_at,
-          event:,
-          item: item.serialized_json,
-          user: user.serialized_json(association: true),
-          objectChanges: object_changes
-        }
-      end
+    def serialized_json(*)
+      {
+        id:,
+        createdAt: created_at,
+        event:,
+        item: item.cached_serialized_json,
+        user: user.cached_serialized_json(association: true),
+        objectChanges: object_changes
+      }
     end
   end
 end
