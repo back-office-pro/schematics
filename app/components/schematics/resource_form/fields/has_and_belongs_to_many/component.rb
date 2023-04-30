@@ -19,9 +19,7 @@ module Schematics
               .sort
           end
 
-          def label = attribute_name
-            .humanize
-            .pluralize
+          def label = super.pluralize
 
           protected
 
