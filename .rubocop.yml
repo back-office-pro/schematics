@@ -148,9 +148,11 @@ RSpec/MultipleMemoizedHelpers:
   Max: 14
 RSpec/EmptyExampleGroup:
   Exclude:
+    - spec/*/active_storage/**/*
     - spec/*/core/**/*
 RSpec/FilePath:
   Exclude:
+    - spec/requests/active_storage/**/*
     - spec/requests/core/**/*
 # rubocop-rails
 Rails/SaveBang:

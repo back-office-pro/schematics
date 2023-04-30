@@ -51,14 +51,23 @@ module Schematics
       def preload_all = preload(entity.includes)
 
       def reload_definitions!
+        return false unless model_filepath
+
         Object.__send__(:remove_const, name.to_sym)
-        load (entity.core? ? Engine : ::Rails).root.join('app', 'models', "#{name.underscore}.rb")
+        load(model_filepath)
       end
 
       private
 
       def loadable(concerns: [])
         self.concerns = concerns
+      end
+
+      def model_filepath
+        return if entity.existing?
+        return Engine.root.join('app', 'models', 'core', "#{name.underscore}.rb") if entity.core?
+
+        ::Rails.root.join('app', 'models', "#{name.underscore}.rb")
       end
     end
 

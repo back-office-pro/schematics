@@ -34,9 +34,16 @@ module Schematics
       end
 
       def load_files(entity)
-        root = entity.core? ? Engine.root : ::Rails.root
-        load root.join('app', 'models', "#{entity.name}.rb")
-        load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+        case entity
+        when proc(&:existing?)
+          load Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+        when proc(&:core?)
+          load Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
+          load Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
+        else
+          load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
+          load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+        end
       end
     end
   end
