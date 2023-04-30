@@ -5,14 +5,6 @@ class SessionsController < Schematics::ResourcesController
   skip_before_action :authenticate_user!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
   layout 'schematics/jumbotron', only: %i[new create]
 
-  api :create, 'Create a session' do
-    data 'session[email]', String, required: true
-    data 'session[password]', String, required: true
-    data 'session[remember_me]', 'boolean'
-    response 200, 'Success', :json
-    response 401, 'Not Authorized', :json
-  end
-
   def create
     result = Core::Sessions::Create.call(
       resource_params:,
