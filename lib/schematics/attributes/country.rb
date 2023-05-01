@@ -8,6 +8,8 @@ module Schematics
     class Country < String
       include Behaviours::Enumerable
 
+      def available_options = super.excluding(Options::Translated)
+
       def icon = :earth_europe
 
       # :reek:FeatureEnvy

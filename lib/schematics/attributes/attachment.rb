@@ -22,7 +22,7 @@ module Schematics
         Options::Width,
         Options::Height,
         Options::ContentType
-      )
+      ).excluding(Options::Default)
 
       def permitted_params = [
         super,

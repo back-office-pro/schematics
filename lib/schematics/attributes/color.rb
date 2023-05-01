@@ -6,6 +6,8 @@ module Schematics
     class Color < String
       REGEX = /\A#(?:\h{3}){1,2}\z/
 
+      def available_options = super.excluding(Options::Translated)
+
       def default = '#000000'
 
       def icon = :palette

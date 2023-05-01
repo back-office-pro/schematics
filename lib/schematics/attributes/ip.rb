@@ -6,6 +6,8 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Ip < String
+      def available_options = super.excluding(Options::Translated)
+
       def default = '::1'
 
       def icon = :network_wired

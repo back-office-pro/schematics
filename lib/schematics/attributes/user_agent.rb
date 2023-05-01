@@ -6,6 +6,8 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class UserAgent < String
+      def available_options = super.excluding(Options::Translated)
+
       def icon = :computer
 
       def format(value)

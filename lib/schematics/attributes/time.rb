@@ -3,6 +3,11 @@
 module Schematics
   module Attributes
     class Time < Datetime
+      def available_options = super.excluding(
+        Options::StartDate,
+        Options::EndDate
+      )
+
       def format(value)
         value && localize(value, format: :time)
       end

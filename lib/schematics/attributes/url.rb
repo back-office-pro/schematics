@@ -3,6 +3,8 @@
 module Schematics
   module Attributes
     class Url < Citext
+      def available_options = super.excluding(Options::Translated)
+
       def default = "https://www.#{SecureRandom.base58}.com"
 
       def icon = :wifi

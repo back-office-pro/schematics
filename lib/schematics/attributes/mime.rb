@@ -8,6 +8,8 @@ module Schematics
     class Mime < String
       include Behaviours::Enumerable
 
+      def available_options = super.excluding(Options::Translated)
+
       def icon = :file
 
       def format(value)

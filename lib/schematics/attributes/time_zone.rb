@@ -8,6 +8,8 @@ module Schematics
     class TimeZone < String
       include Behaviours::Enumerable
 
+      def available_options = super.excluding(Options::Translated)
+
       def icon = :clock
 
       def format(value)
