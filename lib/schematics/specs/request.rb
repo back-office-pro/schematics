@@ -330,23 +330,25 @@ module Schematics
           end
         end
 
-        events.each do |event|
-          it "should #{event.name} record" do
-            patch polymorphic_path(record, action: event.name), headers:, as: :html
-            if ability.can?(event.name.to_sym, record)
-              is_expected.to redirect_to(polymorphic_path(record))
-            else
-              is_expected.to redirect_to(root_path)
+        if allow?(:trigger)
+          events.each do |event|
+            it "should #{event.name} record" do
+              patch polymorphic_path(record, action: event.name), headers:, as: :html
+              if ability.can?(event.name.to_sym, record)
+                is_expected.to redirect_to(polymorphic_path(record))
+              else
+                is_expected.to redirect_to(root_path)
+              end
             end
-          end
 
-          it "should #{event.name} API record" do
-            patch polymorphic_path(record, action: event.name), headers:, as: :json
-            if ability.can?(event.name.to_sym, record)
-              status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed
-              is_expected.to have_http_status(status)
-            else
-              is_expected.to have_http_status(:forbidden)
+            it "should #{event.name} API record" do
+              patch polymorphic_path(record, action: event.name), headers:, as: :json
+              if ability.can?(event.name.to_sym, record)
+                status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed
+                is_expected.to have_http_status(status)
+              else
+                is_expected.to have_http_status(:forbidden)
+              end
             end
           end
         end

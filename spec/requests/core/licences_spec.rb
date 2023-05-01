@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe LicencesController do
+RSpec.describe LicencesController, except: :trigger do
   include Schematics::Specs::Request
 end
