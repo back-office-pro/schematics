@@ -4,6 +4,7 @@ export default class extends ApplicationController {
   initialize () {
     this.parentNode = this.modalElement.parentNode
     this.element.addEventListener('show.bs.modal', this.appendToBody.bind(this))
+    this.element.addEventListener('hide.bs.modal', this.checkFormValidity.bind(this))
     this.element.addEventListener('hidden.bs.modal', this.moveBackToParentNode.bind(this))
   }
 
@@ -13,6 +14,12 @@ export default class extends ApplicationController {
 
   moveBackToParentNode () {
     this.parentNode.appendChild(this.modalElement)
+  }
+
+  checkFormValidity (e) {
+    Array
+      .from(this.modalElement.querySelectorAll('input, select'))
+      .every(_ => _.reportValidity()) || e.preventDefault()
   }
 
   get modalElement () {
