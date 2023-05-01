@@ -1,8 +1,9 @@
 ---
 en:
-  add_association: Add a one-to-many association
   add_attribute: Add a %{type} attribute
+  add_belongs_to: Add a one-to-many association
   add_habtm_association: Add a many-to-many association
+  add_references: Add a current user association
   add_trigger: Add a trigger
   add_virtual: Add a virtual field
   title: Add a field

@@ -12,7 +12,7 @@ module Schematics
             Attributes::Attachment,
             Attributes::Boolean,
             Attributes::Date,
-            Attributes::Enum,
+            Attributes::StateMachine,
             Attributes::Integer,
             Attributes::String,
             Attributes::Text
@@ -32,7 +32,12 @@ module Schematics
             .constants
             .excluding(SchemaEditor::Component::DENYLIST)
             .map(&Attributes.method(:const_get))
-            .excluding(Attributes::BelongsTo, most_used_collection, unused_collection)
+            .excluding(
+              Attributes::BelongsTo,
+              Attributes::References,
+              most_used_collection,
+              unused_collection
+            )
             .sort_by { _1.model_name.human }
 
           def title = t('.title')
