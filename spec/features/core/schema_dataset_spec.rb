@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe SchemaDataset do
+RSpec.describe SchemaDataset, except: :update do
   include Schematics::Specs::Feature
 end

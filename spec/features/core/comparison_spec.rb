@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Comparison do
+RSpec.describe Comparison, except: :create do
   include Schematics::Specs::Feature
 end

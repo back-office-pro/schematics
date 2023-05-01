@@ -7,9 +7,6 @@ module Schematics
     module Feature # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST = %w[Search Session Comparison SchemaDataset Comment].freeze
-      UPDATE_DENYLIST = %w[Licence SchemaDataset].freeze
-
       included do
         include Rails.application.routes.url_helpers
         delegate :t, to: ::I18n
@@ -60,7 +57,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && CREATE_DENYLIST.exclude?(model_class.to_s)
+        if can?(:create)
           scenario "creating a #{entity.name}" do
             if ability.can?(:new, model_class)
               visit new_polymorphic_path(model_class)
@@ -71,7 +68,7 @@ module Schematics
           end
         end
 
-        if can?(:update) && UPDATE_DENYLIST.exclude?(model_class.to_s)
+        if can?(:update)
           scenario "updating a #{entity.name}" do
             if ability.can?(:edit, record)
               visit edit_polymorphic_path(record)
@@ -85,10 +82,18 @@ module Schematics
 
       class_methods do
         delegate :entity, :human_name, :human_name_plural, to: :model_class
-        delegate :can?, :default, to: :entity
+        delegate :default, to: :entity
 
         def model_class
           description.constantize
+        end
+
+        def allow?(action)
+          Array(metadata[:except]).exclude?(action)
+        end
+
+        def can?(action)
+          entity.can?(action) && allow?(action)
         end
       end
 

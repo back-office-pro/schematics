@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Session do
+RSpec.describe Session, except: :create do
   include Schematics::Specs::Feature
 end
