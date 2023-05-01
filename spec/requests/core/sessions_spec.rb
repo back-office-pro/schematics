@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SessionsController do # rubocop:disable RSpec/MultipleDescribes
+RSpec.describe SessionsController, except: %i[create destroy] do # rubocop:disable RSpec/MultipleDescribes
   include Schematics::Specs::Request
 end
 

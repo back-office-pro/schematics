@@ -8,12 +8,6 @@ module Schematics
     module Request # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      CREATE_DENYLIST    = %w[Search Session Comparison SchemaDataset Comment].freeze
-      UPDATE_DENYLIST    = %w[Licence SchemaDataset].freeze
-      SHOW_DENYLIST      = %w[ActiveStorage::Attachment ActiveStorage::Blob].freeze
-      DESTROY_DENYLIST   = %w[ActiveStorage::Attachment ActiveStorage::Blob Session].freeze
-      NOT_FOUND_DENYLIST = %w[Search].freeze
-
       included do
         include Rails.application.routes.url_helpers
         delegate :root_path,
@@ -78,7 +72,7 @@ module Schematics
           end
         end
 
-        if can?(:show) && SHOW_DENYLIST.exclude?(model_class.to_s)
+        if can?(:show)
           %i[html pdf svg ics].each do |as|
             it "should show #{as.upcase} record" do
               get(polymorphic_path(record), headers:, as:)
@@ -96,7 +90,7 @@ module Schematics
             is_expected.to have_http_status(status)
           end
 
-          if !entity.is_a?(Entities::Singleton) && NOT_FOUND_DENYLIST.exclude?(model_class.to_s)
+          if !entity.is_a?(Entities::Singleton) && allow?(:not_found)
             it 'should be not found' do
               get polymorphic_path(route_key, id: 'foo'), headers:, as: :html
               redirect_path = ability.can?(:index, model_class) ? index_path : root_path
@@ -110,7 +104,7 @@ module Schematics
           end
         end
 
-        if can?(:update) && UPDATE_DENYLIST.exclude?(model_class.to_s)
+        if can?(:update)
           it 'should get edit' do
             get edit_polymorphic_path(record), headers:, as: :html
             if ability.can?(:edit, record)
@@ -145,7 +139,7 @@ module Schematics
           end
         end
 
-        if can?(:create) && CREATE_DENYLIST.exclude?(model_class.to_s)
+        if can?(:create)
           it 'should get new' do
             get new_polymorphic_path(model_class), headers:, as: :html
             if ability.can?(:new, model_class)
@@ -241,7 +235,7 @@ module Schematics
           end
         end
 
-        if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_class.to_s)
+        if can?(:destroy)
           it 'should get delete' do
             get polymorphic_path(record, action: :delete), headers:, as: :html
             if ability.can?(:destroy, record)
@@ -336,25 +330,23 @@ module Schematics
           end
         end
 
-        if UPDATE_DENYLIST.exclude?(model_class.to_s)
-          events.each do |event|
-            it "should #{event.name} record" do
-              patch polymorphic_path(record, action: event.name), headers:, as: :html
-              if ability.can?(event.name.to_sym, record)
-                is_expected.to redirect_to(polymorphic_path(record))
-              else
-                is_expected.to redirect_to(root_path)
-              end
+        events.each do |event|
+          it "should #{event.name} record" do
+            patch polymorphic_path(record, action: event.name), headers:, as: :html
+            if ability.can?(event.name.to_sym, record)
+              is_expected.to redirect_to(polymorphic_path(record))
+            else
+              is_expected.to redirect_to(root_path)
             end
+          end
 
-            it "should #{event.name} API record" do
-              patch polymorphic_path(record, action: event.name), headers:, as: :json
-              if ability.can?(event.name.to_sym, record)
-                status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
-                is_expected.to have_http_status(status)
-              else
-                is_expected.to have_http_status(:forbidden)
-              end
+          it "should #{event.name} API record" do
+            patch polymorphic_path(record, action: event.name), headers:, as: :json
+            if ability.can?(event.name.to_sym, record)
+              status = record.public_send(:"may_#{event.name}?") ? :no_content : :method_not_allowed
+              is_expected.to have_http_status(status)
+            else
+              is_expected.to have_http_status(:forbidden)
             end
           end
         end
@@ -365,13 +357,20 @@ module Schematics
         delegate :entity, to: :model_class
         delegate :fillable_elements,
                  :fillable_attributes,
-                 :can?,
                  :events,
                  :default,
                  to: :entity
 
         def controller_class
           description.constantize
+        end
+
+        def allow?(action)
+          Array(metadata[:except]).exclude?(action)
+        end
+
+        def can?(action)
+          entity.can?(action) && allow?(action)
         end
 
         # :reek:FeatureEnvy

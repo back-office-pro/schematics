@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe CommentsController do
+RSpec.describe CommentsController, except: :create do
   include Schematics::Specs::Request
 end
