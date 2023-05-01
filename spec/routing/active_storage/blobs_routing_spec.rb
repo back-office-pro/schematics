@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ActiveStorage::BlobsController do
+RSpec.describe ActiveStorage::BlobsController, except: %i[show destroy] do
   include Schematics::Specs::Routing
 end

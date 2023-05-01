@@ -7,10 +7,6 @@ module Schematics
     module Routing # rubocop:disable Metrics/ModuleLength
       extend ActiveSupport::Concern
 
-      UPDATE_DENYLIST = %w[Comment].freeze
-      SHOW_DENYLIST = %w[ActiveStorage::Attachment ActiveStorage::Blob].freeze
-      DESTROY_DENYLIST = %w[ActiveStorage::Attachment ActiveStorage::Blob].freeze
-
       included do
         include Rails.application.routes.url_helpers
         delegate :model_class,
@@ -36,7 +32,7 @@ module Schematics
               .to route(:get, polymorphic_path(model_class, action: :autocomplete))
               .to params.merge(action: :autocomplete)
           end
-          if can?(:show) && SHOW_DENYLIST.exclude?(model_name)
+          if can?(:show)
             is_expected
               .to route(:get, polymorphic_path(record))
               .to params.merge(action: :show, id:).compact
@@ -64,7 +60,7 @@ module Schematics
               .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
               .to params.merge(controller: 'imports', action: :create)
           end
-          if can?(:update) && UPDATE_DENYLIST.exclude?(model_name)
+          if can?(:update)
             is_expected
               .to route(:get, edit_polymorphic_path(record))
               .to params.merge(id:, action: :edit).compact
@@ -72,7 +68,7 @@ module Schematics
               .to route(:patch, polymorphic_path(record))
               .to params.merge(id:, action: :update).compact
           end
-          if can?(:destroy) && DESTROY_DENYLIST.exclude?(model_name)
+          if can?(:destroy)
             is_expected
               .to route(:delete, polymorphic_path(record))
               .to params.merge(id:, action: :destroy)
@@ -99,7 +95,7 @@ module Schematics
       class_methods do
         delegate :model_class, :controller_path, to: :controller_class
         delegate :entity, to: :model_class
-        delegate :can?, :events, :default, to: :entity
+        delegate :events, :default, to: :entity
         alias_method :controller, :controller_path
 
         def controller_class
@@ -108,6 +104,14 @@ module Schematics
 
         def model_name
           model_class.to_s
+        end
+
+        def allow?(action)
+          Array(metadata[:except]).exclude?(action)
+        end
+
+        def can?(action)
+          entity.can?(action) && allow?(action)
         end
 
         # :reek:UtilityFunction
