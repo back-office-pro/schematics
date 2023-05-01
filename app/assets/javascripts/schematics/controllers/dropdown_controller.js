@@ -25,7 +25,7 @@ export default class extends ApplicationController {
 
   get options () {
     return {
-      plugins: ['no_active_items', !this.required && 'remove_button'],
+      plugins: ['no_active_items', 'no_backspace_delete', this.removable && 'remove_button'],
       itemClass: this.multiple ? 'item bg-primary text-white' : 'item',
       onChange: this.setDependentDropdownsOptions.bind(this),
       render: {
@@ -39,6 +39,10 @@ export default class extends ApplicationController {
         </div>`
       }
     }
+  }
+
+  get removable () {
+    return !this.required || this.multiple
   }
 
   get required () {
