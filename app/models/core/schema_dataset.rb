@@ -2,7 +2,7 @@
 
 class SchemaDataset < Schematics::ApplicationRecord
   serialize :data, Schematics::Schema
-  attribute :data, default: -> { Array(current_data) }
+  attribute :data, default: -> { current_data || [] }
   validates_associated :data
   delegate :build_commands,
            :clean_commands,

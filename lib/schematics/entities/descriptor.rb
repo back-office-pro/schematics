@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/array/wrap'
 require 'active_support/core_ext/module/delegation'
 
 module Schematics
@@ -18,7 +19,9 @@ module Schematics
         @field_name || 'id'
       end
 
-      def joins = Array(field.try(:preload))
+      def joins
+        Array.wrap(field.try(:preload))
+      end
 
       def to_str = <<~RUBY
         def to_s
