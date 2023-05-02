@@ -88,7 +88,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def load_schemadataset_fixture
     return unless env.development?
 
-    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures" FIXTURES=schema_datasets'
+    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures/core" FIXTURES=schema_datasets'
   end
 
   def reindex_searchkick
