@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Schematics::SchemaEditor::Component, type: :component do
   subject { render_inline described_class.new(resource:) }
 
-  let(:resource) { SchemaDataset.new(data:) }
+  let(:resource) { Core::SchemaDataset.new(data:) }
   let(:data) do
     [
       {

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::MigrateSchemaJob do
-  let(:schema_dataset) { SchemaDataset.create!(data:, state: :in_progress) }
+  let(:schema_dataset) { Core::SchemaDataset.create!(data:, state: :in_progress) }
   let(:data) do
     [
       {
