@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe BlogPost do
+RSpec.describe Core::BlogPost do
   include Schematics::Specs::Model
 end

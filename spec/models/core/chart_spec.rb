@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Chart do
+RSpec.describe Core::Chart do
   include Schematics::Specs::Model
 end

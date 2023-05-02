@@ -10,8 +10,8 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:json_response) { JSON.parse(response.body) }
   let(:accept_header) { 'application/json' }
   let(:headers) { { 'Accept' => accept_header } }
-  let(:permissions) { Permission.create_all_entities_permissions! }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
+  let(:permissions) { Core::Permission.create_all_entities_permissions! }
+  let(:admin_role) { Core::Role.create!(name: 'Admin', permissions:) }
 
   before { [admin_role, user] }
 end
@@ -19,7 +19,7 @@ end
 RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
-  let(:session) { Session.create!(user:) }
+  let(:session) { Core::Session.create!(user:) }
   let(:auth_token) { JWT::AuthToken.encode(session.auth_token) }
   let(:headers) do
     {
@@ -32,7 +32,7 @@ end
 RSpec.shared_context 'with import' do
   include_context 'with user'
 
-  let(:import) { Import.create!(file:, model:, author: user) }
+  let(:import) { Core::Import.create!(file:, model:, author: user) }
   let(:model) { 'Role' }
   let(:file) do
     ActiveStorage::Blob.create_and_upload!(
@@ -46,9 +46,9 @@ end
 RSpec.shared_context 'with user' do
   let(:reset_password_sent_at) { nil }
   let(:preferences) { {} }
-  let(:role) { Role.create!(name: 'Manager') }
+  let(:role) { Core::Role.create!(name: 'Manager') }
   let(:user) do
-    User.create!(
+    Core::User.create!(
       email: 'john.doe@nowhere.com',
       password: 'Azerty1!',
       first_name: 'John',

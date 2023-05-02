@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class BlogPost < Schematics::ApplicationRecord
+module Core
+  class BlogPost < Schematics::ApplicationRecord
+  end
 end

@@ -4,7 +4,7 @@ module Schematics
   class SearchAbility < ApplicationAbility
     def initialize
       super
-      can %i[create show], ::Search
+      can %i[create show], Core::Search
     end
   end
 end

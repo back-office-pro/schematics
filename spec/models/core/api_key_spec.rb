@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiKey do
+RSpec.describe Core::ApiKey do
   include Schematics::Specs::Model
 end

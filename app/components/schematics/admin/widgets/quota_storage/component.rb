@@ -8,14 +8,14 @@ module Schematics
           delegate :storage_size,
                    :quota,
                    :quota_storage_percentage,
-                   to: '::Licence.instance'
+                   to: 'Core::Licence.instance'
 
           def icon = :hdd
 
           def title = t('.title')
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, Core::Licence)
           end
         end
       end

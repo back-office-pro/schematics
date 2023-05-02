@@ -7,9 +7,9 @@ class PermissionGenerator < Rails::Generators::NamedBase
   def generate_permission
     return unless generating?
 
-    Permission.reload_definitions!
+    Core::Permission.reload_definitions!
     PaperTrail.request(enabled: false) do
-      Role.admin.permissions.push(Permission.create!(model:, action:))
+      Role.admin.permissions.push(Core::Permission.create!(model:, action:))
     end
   end
 
@@ -17,7 +17,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Permission.destroy_by(model:, action:)
+      Core::Permission.destroy_by(model:, action:)
     end
   end
 
@@ -25,7 +25,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      Permission.where(model:, action: old_action).update!(action:)
+      Core::Permission.where(model:, action: old_action).update!(action:)
     end
   end
 

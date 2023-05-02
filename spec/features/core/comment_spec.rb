@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Comment, except: :create do
+RSpec.describe Core::Comment, except: :create do
   include Schematics::Specs::Feature
 end

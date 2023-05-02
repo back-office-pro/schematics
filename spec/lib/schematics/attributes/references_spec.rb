@@ -36,14 +36,14 @@ describe Schematics::Attributes::References do
   its(:database_type) { is_expected.to eq('references') }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
-  its(:association_type) { is_expected.to eq('user') }
+  its(:association_type) { is_expected.to eq('core/user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
-  its(:class_name) { is_expected.to eq('User') }
+  its(:class_name) { is_expected.to eq('Core::User') }
   its(:preload) { is_expected.to eq(:user) }
   its(:icon) { is_expected.to eq(:users) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
-  its(:allowed_association_types) { is_expected.to include('user', 'role') }
+  its(:allowed_association_types) { is_expected.to include('core/user', 'core/role') }
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
@@ -66,7 +66,7 @@ describe Schematics::Attributes::References do
     is_expected.to eq <<~RUBY
       belongs_to :user,
                  -> { with_deleted },
-                 class_name: 'User',
+                 class_name: 'Core::User',
                  foreign_key: 'user_id',
                  inverse_of: :entities,
                  optional: true,
@@ -88,7 +88,7 @@ describe Schematics::Attributes::References do
       is_expected.to eq <<~RUBY
         belongs_to :user,
                    -> { with_deleted },
-                   class_name: 'User',
+                   class_name: 'Core::User',
                    foreign_key: 'user_id',
                    inverse_of: :entities,
                    optional: false,

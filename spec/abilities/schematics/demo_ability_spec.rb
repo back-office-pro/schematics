@@ -6,8 +6,8 @@ require 'cancan/matchers'
 RSpec.describe Schematics::DemoAbility do
   subject(:ability) { described_class.new }
 
-  let(:user) { User.new(role:) }
-  let(:role) { Role.create!(name: 'Admin') }
+  let(:user) { Core::User.new(role:) }
+  let(:role) { Core::Role.create!(name: 'Admin') }
 
   before { allow(Tenant).to receive(:demo?).and_return(true) }
 

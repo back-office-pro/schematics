@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe ApiKey do
+RSpec.describe Core::ApiKey do
   include Schematics::Specs::Feature
 end

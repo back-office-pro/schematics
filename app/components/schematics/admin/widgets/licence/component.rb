@@ -5,16 +5,16 @@ module Schematics
     module Widgets
       module Licence
         class Component < ApplicationComponent
-          delegate :icon, to: '::Licence.entity'
+          delegate :icon, to: 'Core::Licence.entity'
 
           def resource
-            @resource ||= ::Licence.instance
+            @resource ||= Core::Licence.instance
           end
 
           def target = 'confirm-dialog-cancel-licence'
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, Core::Licence)
           end
         end
       end

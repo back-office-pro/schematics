@@ -68,7 +68,7 @@ describe Schematics::Entities::Entity do
   end
 
   context 'when entity name is already taken' do
-    let(:name) { 'user' }
+    let(:name) { 'core/user' }
 
     it { is_expected.not_to be_valid }
   end

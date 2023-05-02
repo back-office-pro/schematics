@@ -18,7 +18,7 @@ module Schematics
 
     private
 
-    def model_class = ::BlogPost
+    def model_class = Core::BlogPost
 
     def set_resource
       @resource = model_class

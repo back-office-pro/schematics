@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UserGroup do
+RSpec.describe Core::UserGroup do
   include Schematics::Specs::Model
 end

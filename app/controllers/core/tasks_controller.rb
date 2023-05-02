@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class TasksController < Schematics::ResourcesController
+module Core
+  class TasksController < Schematics::ResourcesController
+  end
 end

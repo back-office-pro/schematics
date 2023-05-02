@@ -6,11 +6,11 @@ require 'cancan/matchers'
 RSpec.describe Schematics::CommentAbility do
   subject(:ability) { described_class.new(user) }
 
-  let(:user) { User.new }
-  let(:comment) { Comment.new(author:) }
+  let(:user) { Core::User.new }
+  let(:comment) { Core::Comment.new(author:) }
 
-  it { is_expected.not_to be_able_to(:import, Comment) }
-  it { is_expected.not_to be_able_to(:duplicate, Comment) }
+  it { is_expected.not_to be_able_to(:import, Core::Comment) }
+  it { is_expected.not_to be_able_to(:duplicate, Core::Comment) }
 
   context 'when the user is not the author' do
     let(:author) { nil }

@@ -7,10 +7,10 @@ RSpec.describe Schematics::Ransackable::ListQuery do
 
   include_context 'with user'
 
-  let(:model_class) { User }
-  let(:permissions) { Permission.create_all_entities_permissions! }
-  let(:role) { Role.create!(name: 'Admin', permissions:) }
-  let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
+  let(:model_class) { Core::User }
+  let(:permissions) { Core::Permission.create_all_entities_permissions! }
+  let(:role) { Core::Role.create!(name: 'Admin', permissions:) }
+  let(:other_user) { Core::User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
 
   before { other_user }

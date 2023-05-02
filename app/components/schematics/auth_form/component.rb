@@ -11,9 +11,9 @@ module Schematics
       def scope = :session
 
       def model
-        return ::User.new unless demo?
+        return Core::User.new unless demo?
 
-        ::User.new(email: customer_email)
+        Core::User.new(email: customer_email)
       end
 
       def value = customer_password

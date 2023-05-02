@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe SchemaDataset do
+RSpec.describe Core::SchemaDataset do
   include Schematics::Specs::Model
 end

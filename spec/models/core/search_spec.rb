@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Search do
+RSpec.describe Core::Search do
   include Schematics::Specs::Model
 end

@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe SchemaDatasetsController do
+RSpec.describe Core::SchemaDatasetsController do
   include Schematics::Specs::Routing
 end

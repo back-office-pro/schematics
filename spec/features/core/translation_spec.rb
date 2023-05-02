@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Translation do
+RSpec.describe Core::Translation do
   include Schematics::Specs::Feature
 end

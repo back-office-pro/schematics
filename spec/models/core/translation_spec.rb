@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Translation do
+RSpec.describe Core::Translation do
   include Schematics::Specs::Model
 end

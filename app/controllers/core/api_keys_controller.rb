@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class ApiKeysController < Schematics::ResourcesController
+module Core
+  class ApiKeysController < Schematics::ResourcesController
+  end
 end

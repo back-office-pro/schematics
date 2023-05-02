@@ -19,7 +19,7 @@ module Schematics
           )
         end
 
-        def model_class = ::Comment
+        def model_class = Core::Comment
 
         def items = 10
 

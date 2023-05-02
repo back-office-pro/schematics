@@ -28,7 +28,7 @@ module Schematics
         end
 
         def render?
-          can?(:index, ::Message)
+          can?(:index, Core::Message)
         end
 
         def count

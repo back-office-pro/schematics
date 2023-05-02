@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Task do
+RSpec.describe Core::Task do
   include Schematics::Specs::Model
 end

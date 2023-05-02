@@ -9,7 +9,7 @@ describe Schematics::Schema do
   its(:root_route) { is_expected.to eq('dashboard#home') }
 
   describe '#find_entity_by_name' do
-    subject { schema.find_entity_by_name('user') }
+    subject { schema.find_entity_by_name('core/user') }
 
     it { is_expected.to be_a(Schematics::Entities::Entity) }
   end

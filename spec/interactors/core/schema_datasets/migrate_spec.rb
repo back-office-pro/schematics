@@ -38,7 +38,7 @@ RSpec.describe Core::SchemaDatasets::Migrate do
 
   before do
     Tenant.schema = schema
-    allow(Role).to receive(:admin).and_return(Role.new)
+    allow(Core::Role).to receive(:admin).and_return(Core::Role.new)
     allow(schema_dataset).to receive(:valid?).and_return(true)
   end
 
@@ -103,11 +103,11 @@ RSpec.describe Core::SchemaDatasets::Migrate do
       end
 
       it 'creates permissions' do
-        expect { migrate }.to change(Permission, :count).by(6)
+        expect { migrate }.to change(Core::Permission, :count).by(6)
       end
 
       it 'creates translations' do
-        expect { migrate }.to change(Translation, :count).by(8)
+        expect { migrate }.to change(Core::Translation, :count).by(8)
       end
 
       it 'defines a model class' do

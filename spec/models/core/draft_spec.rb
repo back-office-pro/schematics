@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Draft do
+RSpec.describe Core::Draft do
   include Schematics::Specs::Model
 end

@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Chart do
+RSpec.describe Core::Chart do
   include Schematics::Specs::Feature
 end

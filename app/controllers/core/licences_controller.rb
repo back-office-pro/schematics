@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class LicencesController < Schematics::ResourcesController
-  protected
+module Core
+  class LicencesController < Schematics::ResourcesController
+    protected
 
-  def resource_path = admin_path
+    def resource_path = admin_path
+  end
 end

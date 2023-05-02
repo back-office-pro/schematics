@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Schematics::CsvTemplateSerializer do
   subject(:serializer) { described_class.new(model_class) }
 
-  let(:model_class) { Permission }
+  let(:model_class) { Core::Permission }
 
   its(:file) { is_expected.to be_a(Tempfile) }
   its(:filename) { is_expected.to eq('permissions.csv') }

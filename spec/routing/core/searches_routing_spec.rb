@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe SearchesController do
+RSpec.describe Core::SearchesController do
   include Schematics::Specs::Routing
 end

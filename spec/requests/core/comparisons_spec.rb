@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ComparisonsController, except: :create do
+RSpec.describe Core::ComparisonsController, except: :create do
   include Schematics::Specs::Request
 end

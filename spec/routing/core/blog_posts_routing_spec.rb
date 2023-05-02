@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe BlogPostsController do
+RSpec.describe Core::BlogPostsController do
   include Schematics::Specs::Routing
 end

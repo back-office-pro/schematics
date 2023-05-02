@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Import do
+RSpec.describe Core::Import do
   include Schematics::Specs::Model
 end

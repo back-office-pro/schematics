@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe User do
+RSpec.describe Core::User do
   include Schematics::Specs::Model
 end

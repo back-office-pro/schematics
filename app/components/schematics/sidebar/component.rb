@@ -3,7 +3,7 @@
 module Schematics
   module Sidebar
     class Component < ApplicationComponent
-      delegate :company_name, to: ::Configuration
+      delegate :company_name, to: Core::Configuration
 
       def data = {
         controller: 'tooltip hotkey',

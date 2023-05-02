@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Draft do
+RSpec.describe Core::Draft do
   include Schematics::Specs::Feature
 end

@@ -40,7 +40,7 @@ module Core
         .cast(resource_params[:remember_me])
 
       def user
-        context.resource || ::User.find_by(email: resource_params[:email])
+        context.resource || Core::User.find_by(email: resource_params[:email])
       end
     end
   end

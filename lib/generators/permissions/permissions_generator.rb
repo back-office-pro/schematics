@@ -6,9 +6,9 @@ class PermissionsGenerator < Rails::Generators::NamedBase
   def generate_permissions
     return unless generating?
 
-    Permission.reload_definitions!
+    Core::Permission.reload_definitions!
     PaperTrail.request(enabled: false) do
-      Role.admin.permissions.push(Permission.create_entity_permissions!(entity))
+      Role.admin.permissions.push(Core::Permission.create_entity_permissions!(entity))
     end
   end
 
@@ -16,9 +16,9 @@ class PermissionsGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Permission.destroy_by(model:)
-      Chart.destroy_by(model:)
-      Stat.destroy_by(model:)
+      Core::Permission.destroy_by(model:)
+      Core::Chart.destroy_by(model:)
+      Core::Stat.destroy_by(model:)
       Schematics::Version.destroy_by(item_type: model)
     end
   end
@@ -28,9 +28,9 @@ class PermissionsGenerator < Rails::Generators::NamedBase
 
     PaperTrail.request(enabled: false) do
       # rubocop:disable Rails/SkipsModelValidations
-      Permission.where(model: old_model).update_all(model:)
-      Chart.where(model: old_model).update_all(model:)
-      Stat.where(model: old_model).update_all(model:)
+      Core::Permission.where(model: old_model).update_all(model:)
+      Core::Chart.where(model: old_model).update_all(model:)
+      Core::Stat.where(model: old_model).update_all(model:)
       Schematics::Version.where(item_type: old_model).update_all(item_type: model)
       # rubocop:enable Rails/SkipsModelValidations
     end

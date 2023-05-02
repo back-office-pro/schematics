@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class PermissionsController < Schematics::ResourcesController
+module Core
+  class PermissionsController < Schematics::ResourcesController
+  end
 end

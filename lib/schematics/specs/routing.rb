@@ -37,10 +37,10 @@ module Schematics
               .to route(:get, polymorphic_path(record))
               .to params.merge(action: :show, id:).compact
             is_expected
-              .to route(:get, new_polymorphic_path([record, ::Comment], format: nil))
+              .to route(:get, new_polymorphic_path([record, Core::Comment], format: nil))
               .to params.merge(controller: 'comments', parent_id => id, action: :new).compact
             is_expected
-              .to route(:post, polymorphic_path([record, ::Comment], format: nil))
+              .to route(:post, polymorphic_path([record, Core::Comment], format: nil))
               .to params.merge(controller: 'comments', parent_id => id, action: :create).compact
           end
           if can?(:create)
@@ -54,10 +54,10 @@ module Schematics
               .to route(:post, polymorphic_path(record, action: :duplicate))
               .to params.merge(id:, action: :duplicate)
             is_expected
-              .to route(:get, new_polymorphic_path([model_class, ::Import], format: nil))
+              .to route(:get, new_polymorphic_path([model_class, Core::Import], format: nil))
               .to params.merge(controller: 'imports', action: :new)
             is_expected
-              .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
+              .to route(:post, polymorphic_path([model_class, Core::Import], format: nil))
               .to params.merge(controller: 'imports', action: :create)
           end
           if can?(:update)

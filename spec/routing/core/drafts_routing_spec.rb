@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe DraftsController do
+RSpec.describe Core::DraftsController do
   include Schematics::Specs::Routing
 end

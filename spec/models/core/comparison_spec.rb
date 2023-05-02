@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Comparison do
+RSpec.describe Core::Comparison do
   include Schematics::Specs::Model
 end

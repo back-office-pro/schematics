@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Licence do
+RSpec.describe Core::Licence do
   include Schematics::Specs::Feature
 end

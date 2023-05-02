@@ -17,7 +17,7 @@ module Schematics
 
         def company_logo(icon:)
           new(
-            attachment: ::Configuration.with_attached_company_logo.company_logo,
+            attachment: Core::Configuration.with_attached_company_logo.company_logo,
             width: 300,
             height: 150,
             replacement: { icon: }

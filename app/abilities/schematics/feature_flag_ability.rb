@@ -7,16 +7,16 @@ module Schematics
              :tasks_feature_flag,
              :meetings_feature_flag,
              :blog_feature_flag,
-             to: ::Configuration,
+             to: Core::Configuration,
              private: true
 
     def initialize
       super
-      cannot :manage, ::Message unless messages_feature_flag
-      cannot :manage, ::Comment unless comments_feature_flag
-      cannot :manage, ::Meeting unless meetings_feature_flag
-      cannot :manage, ::Task unless tasks_feature_flag
-      cannot :manage, ::BlogPost unless blog_feature_flag
+      cannot :manage, Core::Message unless messages_feature_flag
+      cannot :manage, Core::Comment unless comments_feature_flag
+      cannot :manage, Core::Meeting unless meetings_feature_flag
+      cannot :manage, Core::Task unless tasks_feature_flag
+      cannot :manage, Core::BlogPost unless blog_feature_flag
     end
   end
 end

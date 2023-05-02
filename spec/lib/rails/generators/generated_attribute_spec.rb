@@ -76,7 +76,7 @@ describe Rails::Generators::GeneratedAttribute do
   end
 
   context 'when column is schema email' do
-    let(:column_definition) { 'schema:user_email' }
+    let(:column_definition) { 'schema:core_user_email' }
 
     its(:name) { is_expected.to eq('email') }
     its(:column_name) { is_expected.to eq('email') }
@@ -95,7 +95,7 @@ describe Rails::Generators::GeneratedAttribute do
   end
 
   context 'when column is schema references' do
-    let(:column_definition) { 'schema:message_author' }
+    let(:column_definition) { 'schema:core_message_author' }
 
     its(:name) { is_expected.to eq('author') }
     its(:column_name) { is_expected.to eq('author_id') }

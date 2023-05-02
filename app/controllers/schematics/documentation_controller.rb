@@ -3,7 +3,7 @@
 module Schematics
   class DocumentationController < ApplicationController
     def show
-      authorize! :index, ::ApiKey
+      authorize! :index, Core::ApiKey
       respond_to do |format|
         format.html
         format.json { render json: }

@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe RolesController do
+RSpec.describe Core::RolesController do
   include Schematics::Specs::Routing
 end

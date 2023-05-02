@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class Search < Schematics::ApplicationRecord
-  scope :history, ::Core::Searches::HistoryQuery
-  scope :typeahead_history, ::Core::Searches::TypeaheadHistoryQuery
+module Core
+  class Search < Schematics::ApplicationRecord
+    scope :history, Searches::HistoryQuery
+    scope :typeahead_history, Searches::TypeaheadHistoryQuery
+  end
 end

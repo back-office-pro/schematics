@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe BlogPost do
+RSpec.describe Core::BlogPost do
   include Schematics::Specs::Feature
 end

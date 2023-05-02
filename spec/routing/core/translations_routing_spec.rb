@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe TranslationsController do
+RSpec.describe Core::TranslationsController do
   include Schematics::Specs::Routing
 end

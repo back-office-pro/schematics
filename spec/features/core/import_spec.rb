@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Import do
+RSpec.describe Core::Import do
   include Schematics::Specs::Feature
 end

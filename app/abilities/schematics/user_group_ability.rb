@@ -8,7 +8,7 @@ module Schematics
 
       cannot :manage,
              model_classes,
-             user_groups: { id: ::UserGroup.excluding(user.user_groups).ids }
+             user_groups: { id: Core::UserGroup.excluding(user.user_groups).ids }
     end
 
     private
@@ -17,7 +17,7 @@ module Schematics
       .schema
       .entities
       .flat_map(&:has_and_belongs_to_many_associations)
-      .select { _1.association_type == ::UserGroup.entity.name }
+      .select { _1.association_type == Core::UserGroup.entity.name }
       .map(&:model_class)
   end
 end

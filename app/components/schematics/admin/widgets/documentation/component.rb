@@ -12,7 +12,7 @@ module Schematics
 
           def icon = :book
 
-          def model_class = ::ApiKey
+          def model_class = Core::ApiKey
         end
       end
     end

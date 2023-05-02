@@ -6,7 +6,7 @@ module Schematics
       super
       return unless user.admin?
 
-      can :read, ::ApiRequest
+      can :read, Core::ApiRequest
     end
   end
 end

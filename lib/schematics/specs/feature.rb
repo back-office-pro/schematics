@@ -23,10 +23,13 @@ module Schematics
         let(:record) { default.tap(&:save!) }
         let(:ability) { Ability.new(user) }
         let(:role) do
-          ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+          Core::Role.create!(
+            name: 'Admin',
+            permissions: Core::Permission.create_all_entities_permissions!
+          )
         end
         let(:user) do
-          ::User.create!(
+          Core::User.create!(
             email: 'admin@admin.com',
             password: 'Azerty1!',
             first_name: 'John',
@@ -36,8 +39,8 @@ module Schematics
         end
         let(:login) do
           visit login_path
-          fill_in ::User.human_attribute_name('email'), with: user.email
-          fill_in ::User.human_attribute_name('password'), with: 'Azerty1!'
+          fill_in Core::User.human_attribute_name('email'), with: user.email
+          fill_in Core::User.human_attribute_name('password'), with: 'Azerty1!'
           click_on t('schematics.application.button.confirm')
           is_expected.to have_text t('sessions.create.success')
         end

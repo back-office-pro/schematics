@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Licence do
+RSpec.describe Core::Licence do
   include Schematics::Specs::Model
 end

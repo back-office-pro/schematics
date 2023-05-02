@@ -8,13 +8,13 @@ RSpec.describe Schematics::MessageAbility do
 
   include_context 'with user'
 
-  let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
-  let(:message) { Message.new(author:, recipients:) }
+  let(:other_user) { Core::User.create!(email: 'jane.doe@nowhere.com', role:) }
+  let(:message) { Core::Message.new(author:, recipients:) }
   let(:author) { nil }
   let(:recipients) { [] }
 
-  it { is_expected.not_to be_able_to(:duplicate, Message) }
-  it { is_expected.not_to be_able_to(:import, Message) }
+  it { is_expected.not_to be_able_to(:duplicate, Core::Message) }
+  it { is_expected.not_to be_able_to(:import, Core::Message) }
 
   context 'when the user is not the author or among recipients' do
     let(:author) { other_user }

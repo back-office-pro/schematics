@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Message do
+RSpec.describe Core::Message do
   include Schematics::Specs::Model
 end

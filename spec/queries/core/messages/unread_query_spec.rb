@@ -7,7 +7,7 @@ RSpec.describe Core::Messages::UnreadQuery do
 
   let(:version) { Schematics::Version.create!(event: 'show', item: message, user:) }
   let(:message) do
-    Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipients: [user])
+    Core::Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipients: [user])
   end
 
   before { message }

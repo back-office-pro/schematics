@@ -5,10 +5,10 @@ require 'rails_helper'
 RSpec.describe Core::Charts::AccessibleByRoleQuery do
   subject(:query) { described_class }
 
-  let(:manager_role) { Role.create!(name: 'Manager') }
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:manager_role) { Core::Role.create!(name: 'Manager') }
+  let(:admin_role) { Core::Role.create!(name: 'Admin') }
   let(:first_chart) do
-    Chart.create!(
+    Core::Chart.create!(
       kind: 'line',
       agregate: 'count',
       model: 'User',
@@ -16,7 +16,7 @@ RSpec.describe Core::Charts::AccessibleByRoleQuery do
     )
   end
   let(:second_chart) do
-    Chart.create!(
+    Core::Chart.create!(
       kind: 'line',
       agregate: 'count',
       model: 'User',
@@ -25,7 +25,7 @@ RSpec.describe Core::Charts::AccessibleByRoleQuery do
     )
   end
   let(:third_chart) do
-    Chart.create!(
+    Core::Chart.create!(
       kind: 'line',
       agregate: 'count',
       model: 'User',

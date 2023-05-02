@@ -2,7 +2,7 @@
 
 module Schematics
   class LoadLicenceJob < ApplicationJob
-    def perform = ::Licence
+    def perform = Core::Licence
       .instance
       .load!
   end

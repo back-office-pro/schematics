@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UserGroupsController do
+RSpec.describe Core::UserGroupsController do
   include Schematics::Specs::Routing
 end

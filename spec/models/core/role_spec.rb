@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Role do
+RSpec.describe Core::Role do
   include Schematics::Specs::Model
 end

@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Message do
+RSpec.describe Core::Message do
   include Schematics::Specs::Feature
 end

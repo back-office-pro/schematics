@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ComparisonsController do
+RSpec.describe Core::ComparisonsController do
   include Schematics::Specs::Routing
 end

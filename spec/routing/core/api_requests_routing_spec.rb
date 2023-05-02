@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiRequestsController do
+RSpec.describe Core::ApiRequestsController do
   include Schematics::Specs::Routing
 end

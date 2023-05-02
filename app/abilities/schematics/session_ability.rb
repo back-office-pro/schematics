@@ -6,12 +6,12 @@ module Schematics
       super
       case user
       when Guest::User
-        can :create, ::Session
+        can :create, Core::Session
       when proc(&:admin?)
-        can %i[create read destroy], ::Session
-        cannot :new, ::Session
+        can %i[create read destroy], Core::Session
+        cannot :new, Core::Session
       end
-      cannot %i[duplicate import], ::Session
+      cannot %i[duplicate import], Core::Session
     end
   end
 end

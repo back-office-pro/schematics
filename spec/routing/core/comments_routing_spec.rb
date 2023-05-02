@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe CommentsController, except: :update do
+RSpec.describe Core::CommentsController, except: :update do
   include Schematics::Specs::Routing
 end

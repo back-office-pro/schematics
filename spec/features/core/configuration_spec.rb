@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Configuration do
+RSpec.describe Core::Configuration do
   include Schematics::Specs::Feature
 end

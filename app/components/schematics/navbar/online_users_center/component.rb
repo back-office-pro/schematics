@@ -4,10 +4,10 @@ module Schematics
   module Navbar
     module OnlineUsersCenter
       class Component < ApplicationComponent
-        delegate :icon, to: '::User.entity'
+        delegate :icon, to: 'Core::User.entity'
 
         def sessions
-          @sessions ||= ::Session
+          @sessions ||= Core::Session
                         .with_user_avatar
                         .active
                         .select('DISTINCT ON (user_id) *')

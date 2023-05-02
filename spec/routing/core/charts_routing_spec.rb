@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ChartsController do
+RSpec.describe Core::ChartsController do
   include Schematics::Specs::Routing
 end

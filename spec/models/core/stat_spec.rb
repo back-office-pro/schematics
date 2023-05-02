@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Stat do
+RSpec.describe Core::Stat do
   include Schematics::Specs::Model
 end

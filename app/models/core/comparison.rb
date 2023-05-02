@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class Comparison < Schematics::ApplicationRecord
+module Core
+  class Comparison < Schematics::ApplicationRecord
+  end
 end

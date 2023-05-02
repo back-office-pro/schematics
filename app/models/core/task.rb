@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class Task < Schematics::ApplicationRecord
+module Core
+  class Task < Schematics::ApplicationRecord
+  end
 end

@@ -5,16 +5,16 @@ module Schematics
     module Widgets
       module QuotaUsers
         class Component < ApplicationComponent
-          delegate :icon, to: '::User.entity'
+          delegate :icon, to: 'Core::User.entity'
           delegate :users_size,
                    :quota,
                    :quota_users_percentage,
-                   to: '::Licence.instance'
+                   to: 'Core::Licence.instance'
 
           def title = t('.title')
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, Core::Licence)
           end
         end
       end

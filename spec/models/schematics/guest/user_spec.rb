@@ -7,7 +7,7 @@ RSpec.describe Schematics::Guest::User do
 
   let(:time_zone) { 'UTC' }
   let(:locale) { 'en' }
-  let(:permissions) { [Permission.new(action: 'create', model: 'User')] }
+  let(:permissions) { [Core::Permission.new(action: 'create', model: 'User')] }
 
   it { is_expected.not_to be_admin }
 

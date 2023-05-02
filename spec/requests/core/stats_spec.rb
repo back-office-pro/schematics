@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe StatsController do
+RSpec.describe Core::StatsController do
   include Schematics::Specs::Request
 end

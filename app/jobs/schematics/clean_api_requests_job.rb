@@ -4,7 +4,7 @@ module Schematics
   class CleanApiRequestsJob < ApplicationJob
     DELAY = 1.year.freeze
 
-    def perform = ::ApiRequest
+    def perform = Core::ApiRequest
       .preload_all
       .destroy_by(created_at: ..DELAY.ago)
   end

@@ -6,11 +6,11 @@ require 'cancan/matchers'
 RSpec.describe Schematics::UserAbility do
   subject(:ability) { described_class.new(user) }
 
-  let(:role) { Role.new }
-  let(:user) { User.new(role:) }
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:role) { Core::Role.new }
+  let(:user) { Core::User.new(role:) }
+  let(:admin_role) { Core::Role.create!(name: 'Admin') }
 
-  it { is_expected.not_to be_able_to(:impersonate, User) }
+  it { is_expected.not_to be_able_to(:impersonate, Core::User) }
   it { is_expected.not_to be_able_to(:impersonate, user) }
   it { is_expected.to be_able_to(:update, user) }
   it { is_expected.not_to be_able_to(:update, user, :role) }
@@ -23,7 +23,7 @@ RSpec.describe Schematics::UserAbility do
   context 'when user is admin' do
     let(:role) { admin_role }
 
-    it { is_expected.to be_able_to(:impersonate, User) }
+    it { is_expected.to be_able_to(:impersonate, Core::User) }
     it { is_expected.not_to be_able_to(:impersonate, user) }
   end
 end

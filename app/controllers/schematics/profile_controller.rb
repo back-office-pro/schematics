@@ -54,7 +54,7 @@ module Schematics
       options: { required: true }
     )
 
-    def model_class = ::User
+    def model_class = Core::User
 
     def permitted_params = super.push(:password_challenge)
   end

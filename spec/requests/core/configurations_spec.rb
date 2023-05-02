@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ConfigurationsController do
+RSpec.describe Core::ConfigurationsController do
   include Schematics::Specs::Request
 end

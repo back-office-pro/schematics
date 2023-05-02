@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe MeetingsController do
+RSpec.describe Core::MeetingsController do
   include Schematics::Specs::Request
 end

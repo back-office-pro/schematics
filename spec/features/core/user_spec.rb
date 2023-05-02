@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe User do
+RSpec.describe Core::User do
   include Schematics::Specs::Feature
 end

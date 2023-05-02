@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe MessagesController do
+RSpec.describe Core::MessagesController do
   include Schematics::Specs::Routing
 end

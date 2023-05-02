@@ -12,11 +12,13 @@ RSpec.describe PermissionsGenerator do
   let(:model) { 'User' }
   let(:behavior) { :invoke }
   let(:options) { [] }
-  let(:permission) { Permission.create!(model:, action: 'create') }
-  let(:chart) { Chart.create!(kind: 'line', agregate: 'count', model:, x_field: 'User#full_name') }
-  let(:stat) { Stat.create!(agregate: 'count', model:) }
+  let(:permission) { Core::Permission.create!(model:, action: 'create') }
+  let(:stat) { Core::Stat.create!(agregate: 'count', model:) }
   let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
-  let(:admin_role) { Role.create!(name: 'Admin', created_at: Time.current.yesterday) }
+  let(:admin_role) { Core::Role.create!(name: 'Admin', created_at: Time.current.yesterday) }
+  let(:chart) do
+    Core::Chart.create!(kind: 'line', agregate: 'count', model:, x_field: 'User#full_name')
+  end
 
   before { [permission, chart, stat, version, admin_role] }
 
@@ -36,19 +38,19 @@ RSpec.describe PermissionsGenerator do
 
       it 'destroys permissions' do
         expect { invoke_all }
-          .to change(Permission, :count)
+          .to change(Core::Permission, :count)
           .by(-1)
       end
 
       it 'destroys charts' do
         expect { invoke_all }
-          .to change(Chart, :count)
+          .to change(Core::Chart, :count)
           .by(-1)
       end
 
       it 'destroys stats' do
         expect { invoke_all }
-          .to change(Stat, :count)
+          .to change(Core::Stat, :count)
           .by(-1)
       end
 

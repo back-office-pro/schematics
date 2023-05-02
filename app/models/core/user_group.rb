@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class UserGroup < Schematics::ApplicationRecord
+module Core
+  class UserGroup < Schematics::ApplicationRecord
+  end
 end

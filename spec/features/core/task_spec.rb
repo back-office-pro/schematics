@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Task do
+RSpec.describe Core::Task do
   include Schematics::Specs::Feature
 end

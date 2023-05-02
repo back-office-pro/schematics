@@ -32,13 +32,16 @@ module Schematics
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
-        let(:session) { ::Session.create!(user:) }
+        let(:session) { Core::Session.create!(user:) }
         let(:index_path) { polymorphic_path(model_class) }
         let(:role) do
-          ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+          Core::Role.create!(
+            name: 'Admin',
+            permissions: Core::Permission.create_all_entities_permissions!
+          )
         end
         let(:user) do
-          ::User.create!(email: 'admin@admin.com', first_name: 'John', last_name: 'Doe', role:)
+          Core::User.create!(email: 'admin@admin.com', first_name: 'John', last_name: 'Doe', role:)
         end
 
         before do
@@ -150,7 +153,7 @@ module Schematics
           end
 
           it 'should get new import' do
-            get new_polymorphic_path([model_class, ::Import], format: nil), headers:, as: :html
+            get new_polymorphic_path([model_class, Core::Import], format: nil), headers:, as: :html
             if ability.can?(:import, model_class)
               is_expected.to have_http_status(:success)
             else

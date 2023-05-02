@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class MeetingsController < Schematics::ResourcesController
+module Core
+  class MeetingsController < Schematics::ResourcesController
+  end
 end

@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Permission do
+RSpec.describe Core::Permission do
   include Schematics::Specs::Model
 end

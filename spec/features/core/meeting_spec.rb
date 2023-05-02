@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Meeting do
+RSpec.describe Core::Meeting do
   include Schematics::Specs::Feature
 end

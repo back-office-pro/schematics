@@ -15,7 +15,7 @@ module Schematics
       ].join(' ')
 
       def render?
-        can?(:create, ::Search)
+        can?(:create, Core::Search)
       end
     end
   end

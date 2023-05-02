@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
-class Meeting < Schematics::ApplicationRecord
-  scope :today, ::Core::Meetings::TodayQuery
+module Core
+  class Meeting < Schematics::ApplicationRecord
+    scope :today, Meetings::TodayQuery
+  end
 end

@@ -9,8 +9,8 @@ module Schematics
       cannot :update, user, %i[role role_id user_groups user_group_ids]
       return unless user.admin?
 
-      can :impersonate, ::User
-      cannot :impersonate, ::User, role: ::Role.admin
+      can :impersonate, Core::User
+      cannot :impersonate, Core::User, role: Core::Role.admin
     end
   end
 end

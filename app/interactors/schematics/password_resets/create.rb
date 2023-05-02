@@ -16,7 +16,7 @@ module Schematics
 
       private
 
-      def user = ::User.find_by(email:)
+      def user = Core::User.find_by(email:)
     end
   end
 end

@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class ConfigurationsController < Schematics::ResourcesController
+module Core
+  class ConfigurationsController < Schematics::ResourcesController
+  end
 end

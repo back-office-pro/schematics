@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Comment do
+RSpec.describe Core::Comment do
   include Schematics::Specs::Model
 end

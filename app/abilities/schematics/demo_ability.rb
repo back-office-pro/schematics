@@ -8,8 +8,8 @@ module Schematics
       super
       return unless demo?
 
-      cannot %i[destroy archive], ::User, role: ::Role.admin
-      cannot :update, ::User, %i[password password_confirmation email], role: ::Role.admin
+      cannot %i[destroy archive], Core::User, role: Core::Role.admin
+      cannot :update, Core::User, %i[password password_confirmation email], role: Core::Role.admin
     end
   end
 end

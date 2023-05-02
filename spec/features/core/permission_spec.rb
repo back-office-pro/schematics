@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Permission do
+RSpec.describe Core::Permission do
   include Schematics::Specs::Feature
 end

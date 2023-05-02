@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class Draft < Schematics::ApplicationRecord
+module Core
+  class Draft < Schematics::ApplicationRecord
+  end
 end

@@ -18,8 +18,6 @@ module Schematics
     before_action :log_search!, only: :index
     after_action :assign_etag, only: %i[show update]
 
-    prepend_view_path Engine.root.join('app', 'views', 'core')
-
     authorize_resource instance_name: :resource, except: %i[autocomplete trigger]
 
     delegate :model_class, to: :class

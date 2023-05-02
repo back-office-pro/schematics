@@ -4,7 +4,7 @@ module Schematics
   class RoleAbility < ApplicationAbility
     def initialize
       super
-      cannot %i[update destroy archive], ::Role.admin
+      cannot %i[update destroy archive], Core::Role.admin
     end
   end
 end

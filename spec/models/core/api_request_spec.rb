@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiRequest do
+RSpec.describe Core::ApiRequest do
   include Schematics::Specs::Model
 end

@@ -6,8 +6,8 @@ require 'generators/permission/permission_generator'
 RSpec.describe PermissionGenerator do
   subject(:generator) { described_class.new(['user'], options, behavior:) }
 
-  let(:permission) { Permission.create!(model: 'User', action: 'create') }
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:permission) { Core::Permission.create!(model: 'User', action: 'create') }
+  let(:admin_role) { Core::Role.create!(name: 'Admin') }
 
   before { [permission, admin_role] }
 
@@ -31,7 +31,7 @@ RSpec.describe PermissionGenerator do
 
       it 'destroys permission' do
         expect { invoke_all }
-          .to change(Permission, :count)
+          .to change(Core::Permission, :count)
           .by(-1)
       end
     end

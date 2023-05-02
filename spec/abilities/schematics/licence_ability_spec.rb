@@ -6,18 +6,18 @@ require 'cancan/matchers'
 RSpec.describe Schematics::LicenceAbility do
   subject(:ability) { described_class.new(user) }
 
-  let(:role) { Role.new }
-  let(:user) { User.new(role:) }
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:role) { Core::Role.new }
+  let(:user) { Core::User.new(role:) }
+  let(:admin_role) { Core::Role.create!(name: 'Admin') }
 
-  it { is_expected.not_to be_able_to(:cancel, Licence) }
-  it { is_expected.not_to be_able_to(:enable, Licence) }
+  it { is_expected.not_to be_able_to(:cancel, Core::Licence) }
+  it { is_expected.not_to be_able_to(:enable, Core::Licence) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
 
-    it { is_expected.to be_able_to(:cancel, Licence) }
-    it { is_expected.to be_able_to(:enable, Licence) }
+    it { is_expected.to be_able_to(:cancel, Core::Licence) }
+    it { is_expected.to be_able_to(:enable, Core::Licence) }
   end
 
   context 'when storage quota is exceeded' do
@@ -37,7 +37,7 @@ RSpec.describe Schematics::LicenceAbility do
         .and_return(true)
     end
 
-    it { is_expected.not_to be_able_to(:create, User) }
+    it { is_expected.not_to be_able_to(:create, Core::User) }
   end
 
   context 'when licence is inactive' do

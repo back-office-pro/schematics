@@ -55,7 +55,7 @@ module Schematics
 
     private
 
-    def model_class = ::User
+    def model_class = Core::User
 
     def set_user
       @user = model_class

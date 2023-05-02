@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Configuration do
+RSpec.describe Core::Configuration do
   include Schematics::Specs::Model
 end

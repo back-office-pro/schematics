@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
-class DraftsController < Schematics::ResourcesController
-  after_action :touch_session!, only: :update
+module Core
+  class DraftsController < Schematics::ResourcesController
+    after_action :touch_session!, only: :update
+  end
 end

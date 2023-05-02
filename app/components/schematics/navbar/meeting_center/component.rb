@@ -5,7 +5,7 @@ module Schematics
     module MeetingCenter
       class Component < ApplicationComponent
         LIMIT = 10
-        delegate :icon, to: '::Meeting.entity'
+        delegate :icon, to: 'Core::Meeting.entity'
 
         def display_count
           count >= 10 ? '9+' : count
@@ -28,7 +28,7 @@ module Schematics
         end
 
         def render?
-          can?(:index, ::Meeting)
+          can?(:index, Core::Meeting)
         end
 
         def meetings

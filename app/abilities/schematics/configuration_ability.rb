@@ -6,7 +6,7 @@ module Schematics
       super
       return unless user.admin?
 
-      can %i[show update], ::Configuration
+      can %i[show update], Core::Configuration
     end
   end
 end

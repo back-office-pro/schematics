@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Meeting do
+RSpec.describe Core::Meeting do
   include Schematics::Specs::Model
 end

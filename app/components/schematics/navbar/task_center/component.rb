@@ -5,7 +5,7 @@ module Schematics
     module TaskCenter
       class Component < ApplicationComponent
         LIMIT = 10
-        delegate :icon, to: '::Task.entity'
+        delegate :icon, to: 'Core::Task.entity'
 
         def display_count
           count >= 10 ? '9+' : count
@@ -28,7 +28,7 @@ module Schematics
         end
 
         def render?
-          can?(:index, ::Task)
+          can?(:index, Core::Task)
         end
 
         def tasks

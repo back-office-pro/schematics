@@ -3,20 +3,20 @@
 module Schematics
   class AdminDashboardAbility < ApplicationAbility
     ADMIN_MODEL_CLASSES = [
-      ::ApiKey,
-      ::ApiRequest,
-      ::BlogPost,
-      ::Permission,
-      ::SchemaDataset,
-      ::Session,
-      ::Translation,
-      ::Chart,
-      ::Stat,
-      ::User,
-      ::UserGroup,
-      ::Role,
-      ::Configuration,
-      ::Licence
+      Core::ApiKey,
+      Core::ApiRequest,
+      Core::BlogPost,
+      Core::Permission,
+      Core::SchemaDataset,
+      Core::Session,
+      Core::Translation,
+      Core::Chart,
+      Core::Stat,
+      Core::User,
+      Core::UserGroup,
+      Core::Role,
+      Core::Configuration,
+      Core::Licence
     ].freeze
 
     def initialize(ability)

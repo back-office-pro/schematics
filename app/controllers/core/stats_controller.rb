@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class StatsController < Schematics::ResourcesController
+module Core
+  class StatsController < Schematics::ResourcesController
+  end
 end
