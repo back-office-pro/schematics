@@ -102,12 +102,6 @@ module Schematics
       generator.jbuilder nil
     end
 
-    # Autoload
-    config.autoload_paths += [
-      root.join('app', 'models', 'core'),
-      root.join('app', 'controllers', 'core')
-    ]
-
     # Logs
     config.log_file_size = 100.megabytes # TODO: enabled when upgrading to Rails 7.1
 
