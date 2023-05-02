@@ -8,7 +8,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/user_groups"
+        "name": "user_groups",
+        "options": {
+          "type": "core/user_group"
+        }
       }
     ],
     "virtuals": [
@@ -356,9 +359,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/permissions",
+        "name": "permissions",
         "options": {
-          "group_by": "model"
+          "group_by": "model",
+          "type": "core/permission"
         }
       }
     ],
@@ -485,7 +489,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/roles"
+        "name": "roles",
+        "options": {
+          "type": "core/role"
+        }
       }
     ],
     "attributes": [
@@ -552,7 +559,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/roles"
+        "name": "roles",
+        "options": {
+          "type": "core/role"
+        }
       }
     ],
     "attributes": [
@@ -818,7 +828,10 @@
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/user_groups"
+        "name": "user_groups",
+        "options": {
+          "type": "core/user_group"
+        }
       }
     ],
     "attributes": [
@@ -911,7 +924,10 @@
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/user_groups"
+        "name": "user_groups",
+        "options": {
+          "type": "core/user_group"
+        }
       }
     ],
     "attributes": [
@@ -1019,9 +1035,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "core/permissions",
+        "name": "permissions",
         "options": {
-          "group_by": "model"
+          "group_by": "model",
+          "type": "core/permission"
         }
       }
     ],
