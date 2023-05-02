@@ -1,6 +1,6 @@
 [
   {
-    "name": "user",
+    "name": "core/user",
     "options": {
       "icon": "users",
       "descriptor": "full_name"
@@ -8,7 +8,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "user_groups"
+        "name": "core/user_groups"
       }
     ],
     "virtuals": [
@@ -93,7 +93,8 @@
         "name": "role",
         "type": "belongs_to",
         "options": {
-          "required": true
+          "required": true,
+          "type": "core/role"
         }
       },
       {
@@ -107,7 +108,7 @@
     ]
   },
   {
-    "name": "user_group",
+    "name": "core/user_group",
     "options": {
       "icon": "people_group",
       "descriptor": "name"
@@ -126,7 +127,7 @@
     ]
   },
   {
-    "name": "message",
+    "name": "core/message",
     "options": {
       "icon": "inbox",
       "descriptor": "subject"
@@ -136,7 +137,7 @@
         "type": "has_and_belongs_to_many",
         "name": "recipients",
         "options": {
-          "type": "user"
+          "type": "core/user"
         }
       }
     ],
@@ -227,7 +228,7 @@
     ]
   },
   {
-    "name": "configuration",
+    "name": "core/configuration",
     "type": "singleton",
     "options": {
       "hidden": true,
@@ -347,7 +348,7 @@
     ]
   },
   {
-    "name": "role",
+    "name": "core/role",
     "options": {
       "icon": "user_lock",
       "descriptor": "name"
@@ -355,7 +356,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "permissions",
+        "name": "core/permissions",
         "options": {
           "group_by": "model"
         }
@@ -375,7 +376,7 @@
     ]
   },
   {
-    "name": "permission",
+    "name": "core/permission",
     "options": {
       "icon": "lock",
       "descriptor": "name",
@@ -410,7 +411,7 @@
     ]
   },
   {
-    "name": "import",
+    "name": "core/import",
     "options": {
       "icon": "cloud_arrow_up",
       "actions": [
@@ -477,14 +478,14 @@
     ]
   },
   {
-    "name": "chart",
+    "name": "core/chart",
     "options": {
       "icon": "chart_line"
     },
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "roles"
+        "name": "core/roles"
       }
     ],
     "attributes": [
@@ -544,14 +545,14 @@
     ]
   },
   {
-    "name": "stat",
+    "name": "core/stat",
     "options": {
       "icon": "stopwatch_20"
     },
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "roles"
+        "name": "core/roles"
       }
     ],
     "attributes": [
@@ -587,7 +588,7 @@
     ]
   },
   {
-    "name": "search",
+    "name": "core/search",
     "options": {
       "icon": "magnifying_glass",
       "descriptor": "query",
@@ -620,7 +621,7 @@
     ]
   },
   {
-    "name": "comparison",
+    "name": "core/comparison",
     "options": {
       "icon": "scale_balanced",
       "descriptor": "model",
@@ -645,7 +646,7 @@
     ]
   },
   {
-    "name": "draft",
+    "name": "core/draft",
     "options": {
       "icon": "floppy_disk",
       "hidden": true,
@@ -678,7 +679,7 @@
     ]
   },
   {
-    "name": "session",
+    "name": "core/session",
     "options": {
       "icon": "user_shield",
       "hidden": true,
@@ -721,7 +722,7 @@
     ]
   },
   {
-    "name": "schema_dataset",
+    "name": "core/schema_dataset",
     "options": {
       "icon": "diagram_project",
       "actions": [
@@ -766,7 +767,7 @@
     ]
   },
   {
-    "name": "comment",
+    "name": "core/comment",
     "options": {
       "icon": "comment",
       "actions": [
@@ -802,7 +803,7 @@
     ]
   },
   {
-    "name": "task",
+    "name": "core/task",
     "options": {
       "icon": "list_check",
       "descriptor": "title"
@@ -812,12 +813,12 @@
         "type": "has_and_belongs_to_many",
         "name": "assigneds",
         "options": {
-          "type": "user"
+          "type": "core/user"
         }
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "user_groups"
+        "name": "core/user_groups"
       }
     ],
     "attributes": [
@@ -895,7 +896,7 @@
     ]
   },
   {
-    "name": "meeting",
+    "name": "core/meeting",
     "options": {
       "icon": "headset",
       "descriptor": "subject"
@@ -905,12 +906,12 @@
         "type": "has_and_belongs_to_many",
         "name": "participants",
         "options": {
-          "type": "user"
+          "type": "core/user"
         }
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "user_groups"
+        "name": "core/user_groups"
       }
     ],
     "attributes": [
@@ -971,7 +972,7 @@
     ]
   },
   {
-    "name": "translation",
+    "name": "core/translation",
     "options": {
       "icon": "language",
       "descriptor": "key",
@@ -1010,7 +1011,7 @@
     ]
   },
   {
-    "name": "api_key",
+    "name": "core/api_key",
     "options": {
       "icon": "key",
       "descriptor": "name"
@@ -1018,7 +1019,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "permissions",
+        "name": "core/permissions",
         "options": {
           "group_by": "model"
         }
@@ -1051,7 +1052,7 @@
     ]
   },
   {
-    "name": "api_request",
+    "name": "core/api_request",
     "options": {
       "icon": "server",
       "hidden": true,
@@ -1065,7 +1066,8 @@
         "name": "api_key",
         "type": "belongs_to",
         "options": {
-          "required": true
+          "required": true,
+          "type": "core/api_key"
         }
       },
       {
@@ -1092,7 +1094,7 @@
     ]
   },
   {
-    "name": "licence",
+    "name": "core/licence",
     "type": "singleton",
     "options": {
       "descriptor": "plan",
@@ -1159,7 +1161,7 @@
     ]
   },
   {
-    "name": "blog_post",
+    "name": "core/blog_post",
     "options": {
       "descriptor": "title",
       "icon": "newspaper"
