@@ -9,8 +9,8 @@ RSpec.describe Core::Searches::TypeaheadHistoryQuery do
 
   let(:model) { 'User' }
   let(:name) { 'email' }
-  let(:first_search) { Search.create!(model:, filters: { email: 'foo' }, user:) }
-  let(:second_search) { Search.create!(model:, filters: { email: 'bar' }, user:) }
+  let(:first_search) { Core::Search.create!(model:, filters: { email: 'foo' }, user:) }
+  let(:second_search) { Core::Search.create!(model:, filters: { email: 'bar' }, user:) }
 
   before { [first_search, second_search] }
 

@@ -7,21 +7,21 @@ RSpec.describe Core::Translations::LookupQuery do
 
   let(:locale) { 'en' }
   let(:first_translation) do
-    Translation.create!(
+    Core::Translation.create!(
       locale:,
       key: 'activerecord.attributes.schema_dataset.state',
       value: 'State'
     )
   end
   let(:second_translation) do
-    Translation.create!(
+    Core::Translation.create!(
       locale:,
       key: 'activerecord.attributes.schema_dataset.states.pending',
       value: 'Pending'
     )
   end
   let(:third_translation) do
-    Translation.create!(
+    Core::Translation.create!(
       locale:,
       key: 'activerecord.attributes.schema_dataset.states.in_progress',
       value: 'In progress'

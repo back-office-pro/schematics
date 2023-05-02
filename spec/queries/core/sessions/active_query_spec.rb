@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe Core::Sessions::ActiveQuery do
   include_context 'with user'
 
-  let(:first_session) { Session.create!(user:) }
+  let(:first_session) { Core::Session.create!(user:) }
   let(:second_session) do
-    Session.create!(user:, updated_at: Time.current - Session::ACTIVE_DELAY)
+    Core::Session.create!(user:, updated_at: Time.current - Core::Session::ACTIVE_DELAY)
   end
 
   before { [first_session, second_session] }

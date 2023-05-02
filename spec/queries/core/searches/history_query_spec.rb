@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe Core::Searches::HistoryQuery do
   include_context 'with user'
 
-  let(:first_search) { Search.create!(query: 'foo', user:) }
-  let(:second_search) { Search.create!(query: 'bar', user:) }
+  let(:first_search) { Core::Search.create!(query: 'foo', user:) }
+  let(:second_search) { Core::Search.create!(query: 'bar', user:) }
 
   before { [first_search, second_search] }
 
