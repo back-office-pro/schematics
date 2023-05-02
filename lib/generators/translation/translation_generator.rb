@@ -9,7 +9,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        Translation.create!(locale:, key:, value: translate(value, locale:))
+        Core::Translation.create!(locale:, key:, value: translate(value, locale:))
       end
     end
   end
@@ -18,7 +18,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(locale: available_locales, key:)
+      Core::Translation.destroy_by(locale: available_locales, key:)
     end
   end
 

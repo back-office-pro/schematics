@@ -9,7 +9,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        Translation.create!(
+        Core::Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.gender",
           value: 'male'
@@ -22,7 +22,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
+      Core::Translation.destroy_by(
         locale: available_locales,
         key: "activerecord.models.#{entity.name}.gender"
       )
@@ -44,7 +44,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        Translation.create!(
+        Core::Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.one",
           value: translate(entity.name, locale:)
@@ -57,7 +57,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
+      Core::Translation.destroy_by(
         locale: available_locales,
         key: "activerecord.models.#{entity.name}.one"
       )
@@ -79,7 +79,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        Translation.create!(
+        Core::Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.other",
           value: translate(entity.name.pluralize, locale:)
@@ -92,7 +92,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
+      Core::Translation.destroy_by(
         locale: available_locales,
         key: "activerecord.models.#{entity.name}.other"
       )
@@ -115,7 +115,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.fields.each do |field|
-          Translation.create!(
+          Core::Translation.create!(
             locale:,
             key: "activerecord.attributes.#{entity.name}.#{field.name}",
             value: translate(field.name, locale:)
@@ -130,7 +130,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       entity.fields.each do |field|
-        Translation.destroy_by(
+        Core::Translation.destroy_by(
           locale: available_locales,
           key: "activerecord.attributes.#{entity.name}.#{field.name}"
         )
@@ -157,7 +157,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
           enum.values.each do |value|
-            Translation.create!(
+            Core::Translation.create!(
               locale:,
               key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}",
               value: translate(value, locale:)
@@ -166,7 +166,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
           next unless enum.is_a?(Schematics::Attributes::StateMachine)
 
           enum.events.map(&:name).each do |event|
-            Translation.create!(
+            Core::Translation.create!(
               locale:,
               key: "activerecord.events.#{entity.name}.#{event}",
               value: translate(event, locale:)
@@ -183,7 +183,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       entity.enum_attributes.each do |enum|
         enum.values.each do |value|
-          Translation.destroy_by(
+          Core::Translation.destroy_by(
             locale: available_locales,
             key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}"
           )
@@ -191,7 +191,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         next unless enum.is_a?(Schematics::Attributes::StateMachine)
 
         enum.events.map(&:name).each do |event|
-          Translation.destroy_by(
+          Core::Translation.destroy_by(
             locale: available_locales,
             key: "activerecord.events.#{entity.name}.#{event}"
           )

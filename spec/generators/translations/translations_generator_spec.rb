@@ -10,7 +10,7 @@ RSpec.describe TranslationsGenerator do
   let(:behavior) { :invoke }
   let(:options) { [] }
   let(:translation) do
-    Translation.create!(
+    Core::Translation.create!(
       locale: 'en',
       key: 'activerecord.models.task.gender',
       value: 'female'

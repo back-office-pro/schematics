@@ -7,7 +7,7 @@ RSpec.describe TranslationGenerator do
   subject(:generator) { described_class.new([name], options, behavior:) }
 
   let(:translation) do
-    Translation.create!(
+    Core::Translation.create!(
       locale: 'en',
       key: 'activerecord.attributes.task.title',
       value: 'Title'
@@ -26,7 +26,7 @@ RSpec.describe TranslationGenerator do
 
       it 'create translations' do
         expect { invoke_all }
-          .to change(Translation, :count)
+          .to change(Core::Translation, :count)
           .by(2)
       end
     end
