@@ -65,7 +65,7 @@ module Schematics
 
       def model_filepath
         return if entity.existing?
-        return Engine.root.join('app', 'models', 'core', "#{name.underscore}.rb") if entity.core?
+        return Engine.root.join('app', 'models', "#{name.underscore}.rb") if entity.core?
 
         ::Rails.root.join('app', 'models', "#{name.underscore}.rb")
       end

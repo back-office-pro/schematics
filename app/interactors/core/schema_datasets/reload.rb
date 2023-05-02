@@ -38,8 +38,8 @@ module Core
         when proc(&:existing?)
           load Schematics::Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         when proc(&:core?)
-          load Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-          load Schematics::Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
+          load Schematics::Engine.root.join('app', 'models', "#{entity.name}.rb")
+          load Schematics::Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         else
           load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
           load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
