@@ -9,7 +9,7 @@ module Schematics
 
       def migration_options = {}
 
-      def prefixed_name = "#{entity.table_name}_#{name}"
+      def prefixed_name = "#{entity.table_name}_#{name.tr('/', '_')}"
 
       def to_s = "schema:#{prefixed_name}"
 
