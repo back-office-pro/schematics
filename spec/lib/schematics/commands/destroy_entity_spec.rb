@@ -30,7 +30,7 @@ describe Schematics::Commands::DestroyEntity do
     [
       {
         type: 'has_and_belongs_to_many',
-        name: 'parts'
+        name: 'users'
       }
     ]
   end
