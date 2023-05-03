@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Core
-  module Licence
+  module Licences
     class Load
       include Interactor
       delegate :name, to: :product, allow_nil: true, private: true

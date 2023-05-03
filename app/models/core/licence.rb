@@ -4,17 +4,17 @@
 class Licence < Schematics::ApplicationRecord
   def load!
     PaperTrail.request(enabled: false) do
-      update!(::Core::Licence::Load.call.data)
+      update!(::Core::Licences::Load.call.data)
       reload && update_env_file if metadata_previously_changed?
     end
   end
 
   def after_enable
-    Stripe::Subscription.update(::Core::Licence::Load.call.id, cancel_at_period_end: false)
+    Stripe::Subscription.update(::Core::Licences::Load.call.id, cancel_at_period_end: false)
   end
 
   def after_cancel
-    Stripe::Subscription.update(::Core::Licence::Load.call.id, cancel_at_period_end: true)
+    Stripe::Subscription.update(::Core::Licences::Load.call.id, cancel_at_period_end: true)
   end
 
   def entities_size = Tenant
