@@ -5,7 +5,7 @@ class Stat < Schematics::ApplicationRecord
   delegate :icon, :find_field_by_name, to: :entity, allow_nil: true
   delegate :to_sql, :format, to: :entity_field, allow_nil: true
 
-  scope :accessible_by_role, ::Core::Stat::AccessibleByRoleQuery
+  scope :accessible_by_role, ::Core::Stats::AccessibleByRoleQuery
 
   def model_class
     model.safe_constantize

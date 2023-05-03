@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Message < Schematics::ApplicationRecord
-  scope :unread, ::Core::Message::UnreadQuery
+  scope :unread, ::Core::Messages::UnreadQuery
 
   def read?(user)
     versions.exists?(event: 'show', user:)

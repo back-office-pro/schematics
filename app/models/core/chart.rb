@@ -3,7 +3,7 @@
 class Chart < Schematics::ApplicationRecord
   delegate :entity, to: :model_class, allow_nil: true, private: true
   delegate :find_field_by_name, to: :entity, allow_nil: true
-  scope :accessible_by_role, ::Core::Chart::AccessibleByRoleQuery
+  scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
 
   def border_width
     (%w[line area].include?(kind) && 1) || 0

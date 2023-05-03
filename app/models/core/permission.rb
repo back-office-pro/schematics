@@ -2,7 +2,7 @@
 
 # :reek:MissingSafeMethod
 class Permission < Schematics::ApplicationRecord
-  scope :features, ::Core::Permission::FeaturesQuery
+  scope :features, ::Core::Permissions::FeaturesQuery
 
   class << self
     def create_all_entities_permissions! = Tenant
