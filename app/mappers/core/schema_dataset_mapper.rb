@@ -1,35 +1,12 @@
 # frozen_string_literal: true
 
 module Core
-  module SchemaDatasetMapperFunctions
-    extend Dry::Transformer::Registry
-
-    module_function
-
-    def cast_option_value(value)
-      case value
-      in 'true'
-        true
-      in 'false'
-        false
-      in /^(\d)+$/
-        value.to_i
-      in /^(\d)+\.(\d)+$/
-        value.to_f
-      in Hash
-        value.values
-      else
-        value
-      end
-    end
-  end
-
   class SchemaDatasetMapper < Dry::Transformer::Pipe
     import Dry::Transformer::ArrayTransformations
     import Dry::Transformer::HashTransformations
     import Dry::Transformer::Conditional
 
-    cast_option_value = SchemaDatasetMapperFunctions[:cast_option_value]
+    cast_option_value = Schematics::Transformable[:cast_option_value]
 
     # rubocop:disable Metrics/BlockLength
     define! do
