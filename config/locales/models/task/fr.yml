@@ -4,6 +4,10 @@ fr:
     attributes:
       task:
         applicant: Demandeur
+        assigneds:
+          one: Assigné
+          other: Assignés
+          zero: Aucun assigné
         content: Contenu
         deadline: Date limite
         late: En retard
@@ -18,10 +22,6 @@ fr:
           one: Groupe d'utilisateur
           other: Groupes d'utilisateurs
           zero: Aucun groupe d'utilisateur
-        users:
-          one: Assigné
-          other: Assignés
-          zero: Aucun assigné
     events:
       task:
         abort: Annuler

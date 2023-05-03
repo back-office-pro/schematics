@@ -7,6 +7,10 @@ fr:
         creator: Créateur
         end_at: Fin le
         location: Lieu
+        participants:
+          one: Participant
+          other: Participants
+          zero: Aucun participant
         start_at: Début le
         subject: Sujet
         to_come: A venir
@@ -15,10 +19,6 @@ fr:
           one: Groupe d'utilisateur
           other: Groupes d'utilisateurs
           zero: Aucun groupe d'utilisateur
-        users:
-          one: Participant
-          other: Participants
-          zero: Aucun participant
     models:
       meeting:
         gender: female

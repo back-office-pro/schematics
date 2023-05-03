@@ -5,8 +5,10 @@ require 'rails_helper'
 RSpec.describe Core::Messages::UnreadQuery do
   include_context 'with user'
 
-  let(:message) { Message.create!(subject: 'Foo', content: 'Lorem', author: user, users: [user]) }
   let(:version) { Schematics::Version.create!(event: 'show', item: message, user:) }
+  let(:message) do
+    Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipients: [user])
+  end
 
   before { message }
 

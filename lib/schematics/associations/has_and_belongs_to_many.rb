@@ -4,9 +4,9 @@ module Schematics
   module Associations
     class HasAndBelongsToMany < Association
       include Behaviours::Fillable
-      delegate :includes, :icon, :descriptor, to: :inverse_entity
+      delegate :includes, :icon, :descriptor, :class_name, to: :inverse_entity
 
-      validates :name, inclusion: { in: :allowed_names }
+      validates :association_type, inclusion: { in: :allowed_association_types }
 
       def column_name = "#{name.singularize}_ids"
 
@@ -17,16 +17,17 @@ module Schematics
       def source = inverse_of.pluralize
 
       def to_str = <<~RUBY
-        #{type} :#{name}
+        #{type} :#{name}, class_name: '#{class_name}'
       RUBY
 
-      def inverse_entity = schema.find_entity_by_name(name.singularize)
+      def inverse_entity = schema.find_entity_by_name(association_type)
 
-      def allowed_names = entity
+      def association_type = super.singularize
+
+      def allowed_association_types = entity
         .schema
         .entities
         .map(&:name)
-        .map(&:pluralize)
         .sort
     end
   end

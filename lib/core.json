@@ -134,7 +134,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "users"
+        "name": "recipients",
+        "options": {
+          "type": "user"
+        }
       }
     ],
     "attributes": [
@@ -807,7 +810,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "users"
+        "name": "assigneds",
+        "options": {
+          "type": "user"
+        }
       },
       {
         "type": "has_and_belongs_to_many",
@@ -897,7 +903,10 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "users"
+        "name": "participants",
+        "options": {
+          "type": "user"
+        }
       },
       {
         "type": "has_and_belongs_to_many",

@@ -75,7 +75,7 @@ module Schematics
     def add_has_and_belongs_to_many_associations = entities
       .flat_map(&:has_and_belongs_to_many_associations)
       .each do |habtm|
-        find_entity_by_name(habtm.name.singularize)
+        find_entity_by_name(habtm.association_type)
           &.associations
           &.push(
             Associations::Association.build(

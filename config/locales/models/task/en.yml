@@ -4,6 +4,10 @@ en:
     attributes:
       task:
         applicant: Applicant
+        assigneds:
+          one: Assigned
+          other: Assigneds
+          zero: No assigned
         content: Content
         deadline: Deadline
         late: Late
@@ -18,10 +22,6 @@ en:
           one: User group
           other: User groups
           zero: No user group
-        users:
-          one: Assigned
-          other: Assigneds
-          zero: No assigned
     events:
       task:
         abort: Abort

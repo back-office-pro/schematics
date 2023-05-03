@@ -32,12 +32,12 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:default) { is_expected.to be_empty }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
-  its(:allowed_names) { is_expected.to include('users', 'roles') }
+  its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:weight) { is_expected.to eq(3) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      has_and_belongs_to_many :permissions
+      has_and_belongs_to_many :permissions, class_name: 'Permission'
     RUBY
   end
 end
