@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
-RSpec.describe Schematics::ActiveStorage::AttachmentAbility do
+RSpec.describe ActiveStorage::AttachmentAbility do
   subject(:ability) { described_class.new(user) }
 
   let(:role) { Role.new }

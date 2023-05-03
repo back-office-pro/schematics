@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
-RSpec.describe Schematics::ActiveStorage::BlobAbility do
+RSpec.describe ActiveStorage::BlobAbility do
   subject(:ability) { described_class.new }
 
   let(:filename) { %w[.env master.key db.dump] }
