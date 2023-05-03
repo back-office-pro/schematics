@@ -71,7 +71,10 @@ RSpec.describe Core::SchemaDatasetMapper do
             'has_and_belongs_to_many_associations_attributes' => {
               '0' => {
                 'name' => 'products',
-                'type' => 'has_and_belongs_to_many'
+                'type' => 'has_and_belongs_to_many',
+                'options_attributes' => {
+                  'required' => 'true'
+                }
               }
             }
           }
@@ -140,7 +143,10 @@ RSpec.describe Core::SchemaDatasetMapper do
             associations: [
               {
                 name: 'products',
-                type: 'has_and_belongs_to_many'
+                type: 'has_and_belongs_to_many',
+                options: {
+                  required: true
+                }
               }
             ]
           }

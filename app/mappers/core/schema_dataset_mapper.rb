@@ -1,10 +1,35 @@
 # frozen_string_literal: true
 
 module Core
+  module SchemaDatasetMapperFunctions
+    extend Dry::Transformer::Registry
+
+    module_function
+
+    def cast_option_value(value)
+      case value
+      in 'true'
+        true
+      in 'false'
+        false
+      in /^(\d)+$/
+        value.to_i
+      in /^(\d)+\.(\d)+$/
+        value.to_f
+      in Hash
+        value.values
+      else
+        value
+      end
+    end
+  end
+
   class SchemaDatasetMapper < Dry::Transformer::Pipe
     import Dry::Transformer::ArrayTransformations
     import Dry::Transformer::HashTransformations
     import Dry::Transformer::Conditional
+
+    cast_option_value = SchemaDatasetMapperFunctions[:cast_option_value]
 
     # rubocop:disable Metrics/BlockLength
     define! do
@@ -25,24 +50,7 @@ module Core
               map_array do
                 rename_keys options_attributes: :options
                 guard -> { _1.key?(:options) } do
-                  map_value :options, lambda { |options|
-                    options.transform_values do |value|
-                      case value
-                      in 'true'
-                        true
-                      in 'false'
-                        false
-                      in /^(\d)+$/
-                        value.to_i
-                      in /^(\d)+\.(\d)+$/
-                        value.to_f
-                      in Hash
-                        value.values
-                      else
-                        value
-                      end
-                    end
-                  }
+                  map_value :options, -> { _1.transform_values(&cast_option_value.method(:call)) }
                   map_value :options, -> { _1.compact_blank }
                 end
               end
@@ -54,24 +62,7 @@ module Core
               map_array do
                 rename_keys options_attributes: :options
                 guard -> { _1.key?(:options) } do
-                  map_value :options, lambda { |options|
-                    options.transform_values do |value|
-                      case value
-                      in 'true'
-                        true
-                      in 'false'
-                        false
-                      in /^(\d)+$/
-                        value.to_i
-                      in /^(\d)+\.(\d)+$/
-                        value.to_f
-                      in Hash
-                        value.values
-                      else
-                        value
-                      end
-                    end
-                  }
+                  map_value :options, -> { _1.transform_values(&cast_option_value.method(:call)) }
                   map_value :options, -> { _1.compact_blank }
                 end
               end
@@ -82,6 +73,15 @@ module Core
           end
           guard -> { _1.key?(:associations) } do
             map_value :associations, -> { _1.values }
+            map_value :associations do
+              map_array do
+                rename_keys options_attributes: :options
+                guard -> { _1.key?(:options) } do
+                  map_value :options, -> { _1.transform_values(&cast_option_value.method(:call)) }
+                  map_value :options, -> { _1.compact_blank }
+                end
+              end
+            end
           end
         end
       end

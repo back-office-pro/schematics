@@ -136,6 +136,7 @@
         "type": "has_and_belongs_to_many",
         "name": "recipients",
         "options": {
+          "required": true,
           "type": "user"
         }
       }
@@ -357,6 +358,7 @@
         "type": "has_and_belongs_to_many",
         "name": "permissions",
         "options": {
+          "required": true,
           "group_by": "model"
         }
       }
@@ -812,6 +814,7 @@
         "type": "has_and_belongs_to_many",
         "name": "assigneds",
         "options": {
+          "required": true,
           "type": "user"
         }
       },
@@ -905,6 +908,7 @@
         "type": "has_and_belongs_to_many",
         "name": "participants",
         "options": {
+          "required": true,
           "type": "user"
         }
       },
@@ -1020,6 +1024,7 @@
         "type": "has_and_belongs_to_many",
         "name": "permissions",
         "options": {
+          "required": true,
           "group_by": "model"
         }
       }

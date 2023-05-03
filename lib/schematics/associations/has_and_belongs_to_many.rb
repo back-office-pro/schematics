@@ -3,10 +3,22 @@
 module Schematics
   module Associations
     class HasAndBelongsToMany < Association
+      include Behaviours::Identifiable
+      include Behaviours::Validatable
       include Behaviours::Fillable
-      delegate :includes, :icon, :descriptor, :class_name, to: :inverse_entity
+      include ::ActiveModel::NestedAttributes
+
+      delegate :includes, :descriptor, :class_name, to: :inverse_entity
 
       validates :association_type, inclusion: { in: :allowed_association_types }
+
+      accepts_nested_attributes_for :options
+
+      def available_options = super.excluding(Options::Default)
+
+      def icon
+        inverse_entity&.icon || :link
+      end
 
       def column_name = "#{name.singularize}_ids"
 

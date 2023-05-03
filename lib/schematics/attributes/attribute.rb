@@ -36,6 +36,11 @@ module Schematics
         end
       end
 
+      def available_options = super.push(
+        Options::Hidden,
+        Options::Cached
+      )
+
       def open_api_type = ::String
 
       def options
