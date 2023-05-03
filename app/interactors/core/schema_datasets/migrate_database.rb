@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Schematics
+module Core
   module SchemaDatasets
     class MigrateDatabase
       include Interactor

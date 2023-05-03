@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Imports::ValidateData do
+RSpec.describe Core::Imports::ValidateData do
   include_context 'with import'
 
   describe '.call' do

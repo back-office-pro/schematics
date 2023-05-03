@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
-module Schematics
+module Core
   module SchemaDatasets
-    class CleanIndices
+    class Reindex
       include Interactor
 
       delegate :schema_dataset, to: :context, private: true
-      delegate :migration_old_entities, to: :schema_dataset, private: true
+      delegate :migration_new_and_changed_entities, to: :schema_dataset, private: true
 
       def call
         return unless ::Tenant.search_engine.indexable?
 
-        migration_old_entities
+        migration_new_and_changed_entities
           .filter_map(&:model_class)
-          .map(&:search_index)
-          .map(&:clean_indices)
+          .each(&:reindex)
       end
     end
   end

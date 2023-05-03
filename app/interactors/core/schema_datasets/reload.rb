@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Schematics
+module Core
   module SchemaDatasets
     class Reload
       include Interactor
@@ -36,10 +36,10 @@ module Schematics
       def load_files(entity)
         case entity
         when proc(&:existing?)
-          load Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
+          load Schematics::Engine.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         when proc(&:core?)
-          load Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
-          load Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
+          load Schematics::Engine.root.join('app', 'models', 'core', "#{entity.name}.rb")
+          load Schematics::Engine.root.join('app', 'controllers', 'core', "#{entity.name.pluralize}_controller.rb") # rubocop:disable Layout/LineLength
         else
           load ::Rails.root.join('app', 'models', "#{entity.name}.rb")
           load ::Rails.root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")

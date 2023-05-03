@@ -2,7 +2,7 @@
 
 require 'csv'
 
-module Schematics
+module Core
   module Imports
     class ReadData
       include Interactor

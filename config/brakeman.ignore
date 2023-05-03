@@ -15,7 +15,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -26,40 +26,6 @@
       "location": {
         "type": "template",
         "template": "schematics/resources/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "10f972cb66dd87c88c6e91e434992a606e6e6624bef470b456f019d1db11f226",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/imports/new.html.slim",
-      "line": 11,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceForm::Component.new(:resource => model_class.preload_all.preload(:slugs).then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]), :url => polymorphic_path([parent_model_class, Import], :format => nil), :cancel_path => parent_model_class), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "ImportsController",
-          "method": "new",
-          "line": 12,
-          "file": "app/controllers/imports_controller.rb",
-          "rendered": {
-            "name": "imports/new",
-            "file": "app/views/imports/new.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "imports/new"
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
@@ -83,7 +49,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -117,7 +83,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -151,7 +117,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -185,7 +151,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -219,7 +185,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -239,29 +205,6 @@
       "note": "ViewComponent false positive"
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "59b7dd06747d2cdffd4d973ad590037f4e13c13ae84de93f64af74596f28de74",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/schematics/schema_datasets/backup.rb",
-      "line": 19,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "IO.popen(\"pg_dump -Fc #{current_database}\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Schematics::SchemaDatasets::Backup",
-        "method": "call"
-      },
-      "user_input": "current_database",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "Safe"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "640cf3733bf2a9afa8fbb91f75b5565a1940f3841e6deb503550ba8a95eb9347",
@@ -276,7 +219,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -310,7 +253,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -330,6 +273,29 @@
       "note": "ViewComponent false positive"
     },
     {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "64d4940963052ffef11e5edb88d4703d589e3bcacc5ebda5eca4b8a150029c6f",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/core/schema_datasets/backup.rb",
+      "line": 19,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "IO.popen(\"pg_dump -Fc #{current_database}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Core::SchemaDatasets::Backup",
+        "method": "call"
+      },
+      "user_input": "current_database",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "7a58b4d0c856cd4fae66b3dba8da627b73ab98196fc86eac21971d44ee7ae5c6",
@@ -344,7 +310,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -378,7 +344,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -412,7 +378,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 72,
+          "line": 74,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -423,40 +389,6 @@
       "location": {
         "type": "template",
         "template": "schematics/resources/delete"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "9d71a19ee4ced4d0d3ccf8cd57243b7739f4d4d696c23ffbaf5e7a4277fe0161",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/searches/show.html.slim",
-      "line": 9,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::Viewer::Association::Component.with_collection(@results, :collapsed => false, :highlight_text => model_class.preload_all.preload(:slugs).then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]).query), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "SearchesController",
-          "method": "show",
-          "line": 10,
-          "file": "app/controllers/searches_controller.rb",
-          "rendered": {
-            "name": "searches/show",
-            "file": "app/views/searches/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "searches/show"
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
@@ -480,7 +412,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 72,
+          "line": 74,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -514,7 +446,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -548,7 +480,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -582,7 +514,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 78,
+          "line": 80,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -616,7 +548,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 115,
+          "line": 117,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -650,7 +582,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 115,
+          "line": 117,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -670,6 +602,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2023-04-25 14:25:01 +0200",
+  "updated": "2023-05-03 14:36:24 +0200",
   "brakeman_version": "5.4.1"
 }

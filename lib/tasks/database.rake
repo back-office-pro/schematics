@@ -7,7 +7,7 @@ namespace :schematics do
   namespace :db do
     desc 'Perform database backup'
     task backup: :environment do
-      Schematics::SchemaDatasets::Backup.call(force: true)
+      Core::SchemaDatasets::Backup.call(force: true)
     end
 
     desc 'Load engine seed'

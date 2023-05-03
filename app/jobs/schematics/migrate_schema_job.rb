@@ -13,7 +13,7 @@ module Schematics
           end
           schema_dataset.migration # force migration to be set before changing schema
           ::Tenant.schema = schema_dataset.data
-          SchemaDatasets::Reload.call(schema_dataset:)
+          Core::SchemaDatasets::Reload.call(schema_dataset:)
           Thread.current.kill
         end
       end
@@ -21,7 +21,7 @@ module Schematics
 
     # :reek:UncommunicativeVariableName
     def perform(schema_dataset)
-      SchemaDatasets::Migrate.call(schema_dataset:)
+      Core::SchemaDatasets::Migrate.call(schema_dataset:)
     rescue StandardError => e
       PaperTrail.request(enabled: false) do
         schema_dataset.state_error!

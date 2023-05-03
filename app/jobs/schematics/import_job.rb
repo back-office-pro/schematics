@@ -3,7 +3,7 @@
 module Schematics
   class ImportJob < ApplicationJob
     def perform(import)
-      result = Imports::ImportData.call(import:)
+      result = Core::Imports::ImportData.call(import:)
       if result.success?
         import.status_finished!
         import.model_class.try(:reindex)

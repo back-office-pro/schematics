@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::SchemaDatasets::Migrate do
+RSpec.describe Core::SchemaDatasets::Migrate do
   let(:schema_dataset) { SchemaDataset.new(data:, state:) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:current_data) { initial_data }

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Imports::ImportData do
+RSpec.describe Core::Imports::ImportData do
   include_context 'with import'
 
   describe '.call' do
