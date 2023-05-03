@@ -9,7 +9,6 @@ module Schematics
       delegate :call, to: :new
 
       def module_class = module_parent_name
-        .delete_prefix('Core')
         .singularize
         .constantize
     end
