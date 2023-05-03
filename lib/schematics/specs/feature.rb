@@ -100,7 +100,7 @@ module Schematics
       private
 
       # :reek:FeatureEnvy
-      def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+      def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         entity.fillable_elements.each do |element|
           input = "#{entity.name}[#{element.column_name}]"
           case element
