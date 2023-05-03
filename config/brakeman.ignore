@@ -15,7 +15,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -49,7 +49,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -83,7 +83,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -117,7 +117,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -151,7 +151,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -185,7 +185,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -196,6 +196,74 @@
       "location": {
         "type": "template",
         "template": "schematics/resources/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "561f8b1459f8807b4181fa0bc73ae7d2865a26b927d02e0ae869f26965bced56",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/core/imports/new.html.slim",
+      "line": 11,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::ResourceForm::Component.new(:resource => model_class.preload_all.preload(:slugs).then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]), :url => polymorphic_path([parent_model_class, Import], :format => nil), :cancel_path => parent_model_class), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Core::ImportsController",
+          "method": "new",
+          "line": 13,
+          "file": "app/controllers/core/imports_controller.rb",
+          "rendered": {
+            "name": "core/imports/new",
+            "file": "app/views/core/imports/new.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "core/imports/new"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "5a55995e07aba8cba8e4509b567a4a493c364c72bc2c60b4bb21e608f438aa31",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/core/searches/show.html.slim",
+      "line": 9,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::Viewer::Association::Component.with_collection(@results, :collapsed => false, :highlight_text => model_class.preload_all.preload(:slugs).then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]).query), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Core::SearchesController",
+          "method": "show",
+          "line": 11,
+          "file": "app/controllers/core/searches_controller.rb",
+          "rendered": {
+            "name": "core/searches/show",
+            "file": "app/views/core/searches/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "core/searches/show"
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
@@ -219,7 +287,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -253,7 +321,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -310,7 +378,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -344,7 +412,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -378,7 +446,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 74,
+          "line": 72,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -412,7 +480,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 74,
+          "line": 72,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -446,7 +514,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -480,7 +548,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -514,7 +582,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "show",
-          "line": 80,
+          "line": 78,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/show",
@@ -548,7 +616,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 117,
+          "line": 115,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -582,7 +650,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 117,
+          "line": 115,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -602,6 +670,6 @@
       "note": "ViewComponent false positive"
     }
   ],
-  "updated": "2023-05-03 14:36:24 +0200",
+  "updated": "2023-05-03 15:51:40 +0200",
   "brakeman_version": "5.4.1"
 }
