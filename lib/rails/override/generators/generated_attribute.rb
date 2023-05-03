@@ -22,7 +22,8 @@ module Rails
           super,
           'algorithm: :concurrently',
           ("using: :#{schema_attribute.database_index_type}" if schema_attribute),
-          ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table'))
+          ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table')),
+          "name: :ix_#{SecureRandom.base58}"
         ].compact.join(', ')
 
         def name
