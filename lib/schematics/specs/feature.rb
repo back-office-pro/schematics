@@ -112,15 +112,6 @@ module Schematics
             attach_file "#{input}[]", element.default.first.path
           when Attributes::Attachment
             attach_file input, element.default.path
-          when Attributes::RichText
-            if element.translated?
-              Behaviours::Translatable::AVAILABLES_LOCALES.each do |locale|
-                find_field("#{entity.name}[#{element.column_name}_#{locale}]", type: :hidden)
-                  .set(element.default)
-              end
-            else
-              find_field(input, type: :hidden).set(element.default)
-            end
           when Attributes::BelongsTo
             select element.inverse_entity.model_class.first.to_s,
                    from: input,
