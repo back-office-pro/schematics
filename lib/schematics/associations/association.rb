@@ -43,9 +43,9 @@ module Schematics
       def weight = 3
 
       def name
-        return [inverse_of, source].join('_') if prefixed
+        return [inverse_of, source].join('_').tr('/', '_') if prefixed
 
-        source
+        source.tr('/', '_')
       end
 
       def source = belongs_to.inverse_association_name
