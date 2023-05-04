@@ -4,3 +4,5 @@ en:
     attributes:
       schematics/entities/entity:
         name: Name
+    models:
+      schematics/entities/entity: Entity
