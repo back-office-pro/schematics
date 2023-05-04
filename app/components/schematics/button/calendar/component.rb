@@ -9,7 +9,7 @@ module Schematics
         delegate :viewer, to: :entity, private: true
         option :resource
 
-        def css_classes = %w[btn btn-sm btn-icon-split ms-2]
+        def css_classes = %w[btn btn-sm btn-icon-split ms-1]
 
         def render?
           viewer == :calendar

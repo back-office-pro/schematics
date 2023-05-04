@@ -14,7 +14,7 @@ module Schematics
           'btn-danger',
           'btn-sm',
           { 'btn-icon-split': !compact? },
-          { 'ms-2': !compact? }
+          { 'ms-1': !compact? }
         ]
 
         def render?

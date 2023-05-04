@@ -7,7 +7,7 @@ module Schematics
         delegate :email, to: :resource
         option :resource
 
-        def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-2]
+        def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
         def data = { turbo: false }
 

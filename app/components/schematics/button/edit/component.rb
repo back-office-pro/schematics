@@ -16,7 +16,7 @@ module Schematics
           'btn-primary',
           'btn-sm',
           { 'btn-icon-split': !compact? },
-          { 'ms-2': !compact? }
+          { 'ms-1': !compact? }
         ]
 
         def data
