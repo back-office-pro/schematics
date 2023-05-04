@@ -2,20 +2,27 @@ import ApplicationController from 'controllers/application_controller'
 import Tribute from 'tributejs'
 
 export default class extends ApplicationController {
-  connect () {
+  initialize () {
     this.tribute = new Tribute(this.options)
     this.tribute.attach(this.element)
   }
 
-  disconnect () {
-    this.tribute.detach(this.element)
-  }
-
   get inputs () {
     return this
-      .element
+      .parentElement
       .closest('.schema-editor-entity')
       .querySelectorAll('.entity_field_name')
+  }
+
+  get modalId () {
+    return this
+      .element
+      .closest('.modal')
+      ?.getAttribute('id')
+  }
+
+  get parentElement () {
+    return this.modalId ? document.querySelector(`span[data-bs-target="#${this.modalId}"]`) : this.element
   }
 
   get collection () {
