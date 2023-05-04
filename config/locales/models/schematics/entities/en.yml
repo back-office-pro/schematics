@@ -6,3 +6,4 @@ en:
         name: Name
     models:
       schematics/entities/entity: Entity
+      schematics/entities/singleton: Singleton
