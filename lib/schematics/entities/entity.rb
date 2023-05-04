@@ -93,6 +93,8 @@ module Schematics
         @triggers ||= []
       end
 
+      def available_options = [Options::Hidden]
+
       def weight = has_many_and_through_and_belongs_to_many_associations.size
 
       def fields = attributes + virtuals

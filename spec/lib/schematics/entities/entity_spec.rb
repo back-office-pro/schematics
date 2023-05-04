@@ -35,6 +35,7 @@ describe Schematics::Entities::Entity do
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
   its(:joins) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
+  its(:available_options) { is_expected.to include(Schematics::Options::Hidden) }
 
   its(:includes) do
     is_expected.to eq(

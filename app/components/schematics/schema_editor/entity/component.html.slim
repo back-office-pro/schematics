@@ -3,9 +3,10 @@
     .card-header.px-2.py-1
       .row.align-items-center
         .col.text-truncate
-          = render Schematics::CardHeading::Component.new(icon: SchemaDataset.entity.icon, title: t('.title'))
+          = render Schematics::CardHeading::Component.new(icon:, title:)
         .col-auto
           = render Schematics::SchemaEditor::Button::AddDropdown::Component.new(builder:)
+          = render Schematics::SchemaEditor::Button::Options::Component.new(builder:)
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-entity')
     .card-body
       = builder.hidden_field :id unless template?
@@ -14,16 +15,7 @@
                            required: true,
                            maxlength: 50,
                            data: { controller: 'schema-editor--special-characters' }
-      = builder.fields_for :options do |options_form|
-        = options_form.select :descriptor, allowed_field_names, {}, { data: { controller: 'schema-editor--descriptor-dropdown' } }
-        = options_form.select :actions,
-                              actions_collection,
-                              { selected: actions, include_hidden: false },
-                              { multiple: true, data: { controller: 'dropdown' } }
-        = options_form.select :icon,
-                              [],
-                              {},
-                              { data: { controller: 'dropdowns--fa-icons-dropdown', 'dropdowns--fa-icons-dropdown-selected-value': icon } }
+      = render Schematics::SchemaEditor::Options::Modal::Entity::Component.new(builder:)
   .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
     = builder.fields_for :attributes do |attributes_builder|
       = render Schematics::SchemaEditor::Attribute::Component.new(builder: attributes_builder)

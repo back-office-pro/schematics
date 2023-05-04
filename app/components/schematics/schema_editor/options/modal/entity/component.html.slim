@@ -1,0 +1,23 @@
+.modal.fade {
+  id=target
+  data-controller='modal'
+  aria-hidden='true'
+  aria-labelledby="#{target}-label"
+  tabindex='-1'
+}
+  .modal-dialog.modal-dialog-centered
+    .modal-content.shadow-sm
+      .modal-header.pb-1
+        = render Schematics::CardHeading::Component.new(icon: SchemaDataset.entity.icon, title:)
+        button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
+      .modal-body
+        = builder.fields_for :options do |options_form|
+          = options_form.select :descriptor, allowed_field_names, {}, { data: { controller: 'schema-editor--descriptor-dropdown' } }
+          = options_form.select :actions,
+                                actions_collection,
+                                { selected: actions, include_hidden: false },
+                                { multiple: true, data: { controller: 'dropdown' } }
+          = options_form.select :icon,
+                                [],
+                                {},
+                                { data: { controller: 'dropdowns--fa-icons-dropdown', 'dropdowns--fa-icons-dropdown-selected-value': icon } }
