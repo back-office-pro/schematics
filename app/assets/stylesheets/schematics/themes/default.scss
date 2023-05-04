@@ -31,6 +31,8 @@
 // Tribute
 
 .tribute-container {
+  z-index: 1090;
+
   ul {
     @extend .list-group;
     @extend .list-group-striped !optional;
