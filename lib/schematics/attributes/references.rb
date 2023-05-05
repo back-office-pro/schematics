@@ -5,9 +5,7 @@ module Schematics
     # :reek:InstanceVariableAssumption
     class References < Association
       # by convention, this attribute will always be set to current user
-      def options
-        Options::Wrapper.new(options: (@options || {}).merge(type: 'user'))
-      end
+      def options = super.tap { _1.merge!(type: 'user') }
     end
   end
 end

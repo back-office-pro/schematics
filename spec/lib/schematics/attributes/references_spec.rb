@@ -47,6 +47,8 @@ describe Schematics::Attributes::References do
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
+  its(:options) { is_expected.to include(:type) }
+  its('options.type') { is_expected.to eq('user') }
 
   its(:available_options) do
     is_expected.to include(
