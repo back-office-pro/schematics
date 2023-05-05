@@ -24,6 +24,7 @@ describe Schematics::Virtuals::Comparison do
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
@@ -33,6 +34,7 @@ describe Schematics::Virtuals::Comparison do
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:weight) { is_expected.to eq(1) }
+  its(:available_options) { is_expected.to be_empty }
 
   its(:to_sql) do
     is_expected.to eq <<~SQL.squish

@@ -25,6 +25,7 @@ describe Schematics::Virtuals::Concatenation do
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -36,6 +37,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:weight) { is_expected.to eq(1) }
+  its(:available_options) { is_expected.to be_empty }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

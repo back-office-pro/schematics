@@ -8,20 +8,14 @@ module Schematics
     class Attribute
       include Behaviours::Identifiable
       include Behaviours::Inspectable
+      include Behaviours::Optionable
       include Behaviours::Migratable
       include Behaviours::Validatable
-      include ::ActiveModel::API
-      include ::ActiveModel::NestedAttributes
 
-      delegate :hidden?, :cached?, to: :options
-      delegate :core?, to: :entity, private: true
-      delegate :keys, to: :options, prefix: true, private: true
+      delegate :cached?, to: :options
+
       attr_accessor :entity, :name
-      attr_writer :options
 
-      accepts_nested_attributes_for :options
-
-      validates :options_keys, inclusion: { in: :available_options_names }
       validates :type, presence: true
       validates :name,
                 presence: true,
@@ -43,19 +37,11 @@ module Schematics
 
       def open_api_type = ::String
 
-      def options
-        Options::Wrapper.new(options: @options)
-      end
-
       def to_sql = "#{entity.table_name.pluralize}.#{column_name}"
 
       def to_str = ''
 
       def weight = 1
-
-      protected
-
-      def available_options_names = available_options.map(&:name)
     end
   end
 end

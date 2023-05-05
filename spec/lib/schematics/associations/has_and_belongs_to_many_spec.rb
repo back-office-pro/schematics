@@ -22,6 +22,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
@@ -35,9 +36,17 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
-  its(:available_options) { is_expected.to include(Schematics::Options::Required) }
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to include(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Type,
+      Schematics::Options::GroupBy
+    )
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

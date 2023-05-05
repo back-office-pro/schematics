@@ -6,18 +6,13 @@ module Schematics
     class Virtual
       include Behaviours::Identifiable
       include Behaviours::Inspectable
+      include Behaviours::Optionable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
-      include ::ActiveModel::API
-      include ::ActiveModel::NestedAttributes
 
-      delegate :hidden?, to: :options
       attr_accessor :entity, :name, :function
-      attr_writer :options
-
-      accepts_nested_attributes_for :options
 
       validates :function,
                 presence: true,
@@ -46,8 +41,6 @@ module Schematics
         end
       end
 
-      def available_options = []
-
       def format(value)
         case value
         when NoMethodError
@@ -58,10 +51,6 @@ module Schematics
       end
 
       def open_api_type = ::String
-
-      def options
-        Options::Wrapper.new(options: @options)
-      end
 
       def preload = tokens
         .grep(Tokens::Variable)
