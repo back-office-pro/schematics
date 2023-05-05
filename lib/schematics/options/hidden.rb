@@ -4,6 +4,8 @@ module Schematics
   module Options
     class Hidden < Option
       class << self
+        def hidden? = true
+
         def input_type = :boolean
       end
     end
