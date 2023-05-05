@@ -5,6 +5,7 @@ module Schematics
     module Options
       module Events
         class Component < ApplicationComponent
+          delegate :collection, to: Schematics::Options::Icon, prefix: :icons
           delegate :object, to: :builder, private: true
           delegate :values, to: :object
           option :builder
@@ -14,12 +15,7 @@ module Schematics
 
           def name_data = { controller: 'schema-editor--special-characters' }
 
-          def icon_data(icon = :location_arrow)
-            {
-              controller: 'dropdowns--fa-icons-dropdown',
-              'dropdowns--fa-icons-dropdown-selected-value': icon.to_s.dasherize
-            }
-          end
+          def icon_data = { controller: 'dropdowns--fa-icons-dropdown' }
 
           def color_data(color = :primary)
             {

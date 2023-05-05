@@ -9,8 +9,7 @@ module Schematics
     # :reek:Attribute, :reek:InstanceVariableAssumption
     class Entity # rubocop:disable Metrics/ClassLength
       include Behaviours::Identifiable
-      include ::ActiveModel::API
-      include ::ActiveModel::NestedAttributes
+      include Behaviours::Optionable
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
       NAME_REGEX = %r{\A([a-z_/]+)\z}
@@ -19,7 +18,6 @@ module Schematics
       accepts_nested_attributes_for :virtuals
       accepts_nested_attributes_for :triggers
       accepts_nested_attributes_for :has_and_belongs_to_many_associations
-      accepts_nested_attributes_for :options
 
       validates_associated :attributes
       validates_associated :virtuals
@@ -38,9 +36,8 @@ module Schematics
                 exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
 
       attr_accessor :schema, :name
-      attr_writer :options
 
-      delegate :core?, :existing?, :hidden?, to: :options
+      delegate :core?, :existing?, to: :options
       delegate :joins, :includes, :to_str, to: :preloader
 
       class << self
@@ -73,10 +70,6 @@ module Schematics
         options.actions&.map(&:to_sym) || default_actions
       end
 
-      def options
-        Options::Wrapper.new(options: @options)
-      end
-
       def associations
         @associations ||= []
       end
@@ -93,7 +86,14 @@ module Schematics
         @triggers ||= []
       end
 
-      def available_options = [Options::Hidden]
+      def available_options = [
+        Options::Core,
+        Options::Hidden,
+        Options::Existing,
+        Options::Descriptor.new(collection: descriptor.allowed_field_names),
+        Options::Actions.new(collection: default_actions),
+        Options::Icon
+      ]
 
       def weight = has_many_and_through_and_belongs_to_many_associations.size
 

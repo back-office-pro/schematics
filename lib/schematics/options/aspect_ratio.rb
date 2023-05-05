@@ -8,6 +8,8 @@ module Schematics
 
         def multiple? = false
 
+        def controller = 'dropdown'
+
         # rubocop:disable Naming/VariableNumber
         def collection = %i[
           landspace
