@@ -59,6 +59,9 @@
   .progress.fs-6
     .progress-bar role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100' style="width: #{value}%"
       = field.format(value)
+- when Schematics::Attributes::Array
+  - value.each do |element|
+    span.badge.bg-primary.me-1 = element
 - when Schematics::Behaviours::Searchable
   = highlight field.format(value), highlight_text
 - else

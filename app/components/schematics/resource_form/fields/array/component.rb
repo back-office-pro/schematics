@@ -5,6 +5,7 @@ module Schematics
     module Fields
       module Array
         class Component < Fields::Component
+          def data = { controller: 'dropdown', 'dropdown-create-value': true }
         end
       end
     end

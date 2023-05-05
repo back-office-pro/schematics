@@ -23,7 +23,7 @@ module Schematics
       ]
 
       def search_data = <<~RUBY
-        #{name}: #{name}.map(&:filename).map(&:to_s).map(&:downcase)
+        #{name}: #{name}.map(&:filename).map(&:to_s).join(',')
       RUBY
 
       def search_column = :"#{search_column_association}_filename"
