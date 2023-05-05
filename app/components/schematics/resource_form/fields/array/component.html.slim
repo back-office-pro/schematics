@@ -1,1 +1,4 @@
-= form.text_field name.to_sym, prepend:, hide_label:, required:, control_class:, multiple:
+= form.select name.to_sym,
+              value,
+              { prepend:, include_hidden:, hide_label: },
+              { multiple:, data:, required:, control_class: }
