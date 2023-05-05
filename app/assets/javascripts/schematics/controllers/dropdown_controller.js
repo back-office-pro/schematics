@@ -28,6 +28,7 @@ export default class extends ApplicationController {
       plugins: ['no_active_items', 'no_backspace_delete', this.removable && 'remove_button'],
       itemClass: this.multiple ? 'item bg-primary text-white' : 'item',
       onChange: this.setDependentDropdownsOptions.bind(this),
+      maxOptions: null,
       render: {
         no_results: () => `<div class="option opacity-100 text-muted">
           <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>
