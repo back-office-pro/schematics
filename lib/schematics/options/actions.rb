@@ -2,6 +2,7 @@
 
 module Schematics
   module Options
+    # :reek:Attribute :reek:InstanceVariableAssumption
     class Actions < Option
       include ::ActiveModel::API
 

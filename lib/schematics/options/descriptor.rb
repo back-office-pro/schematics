@@ -2,6 +2,7 @@
 
 module Schematics
   module Options
+    # :reek:Attribute
     class Descriptor < Option
       include ::ActiveModel::API
 
