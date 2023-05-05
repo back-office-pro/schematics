@@ -19,6 +19,8 @@ module Schematics
         @field_name || 'id'
       end
 
+      alias to_s field_name
+
       def joins
         Array.wrap(field.try(:preload))
       end
