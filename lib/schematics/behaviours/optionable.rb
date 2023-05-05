@@ -7,6 +7,7 @@ module Schematics
     # :reek:Attribute
     module Optionable
       extend ActiveSupport::Concern
+
       include ::ActiveModel::API
       include ::ActiveModel::NestedAttributes
 
