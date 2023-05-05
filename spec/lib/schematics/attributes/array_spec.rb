@@ -14,6 +14,7 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
 
   its(:icon) { is_expected.to eq(:list) }
   its(:database_index_type) { is_expected.to eq(:gin) }
@@ -29,6 +30,15 @@ describe Schematics::Attributes::Array do
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
   its(:migration_options) { is_expected.to eq(array: true) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
+  its(:search_column) { is_expected.to eq(:ids) }
+  its(:search_predicate) { is_expected.to eq(:any) }
+  its(:search_query) { is_expected.to eq(:ids_any) }
+
+  its(:search_data) do
+    is_expected.to eq <<~RUBY
+      ids: ids&.join(',')
+    RUBY
+  end
 
   describe '#format' do
     subject { attribute.format(value) }
