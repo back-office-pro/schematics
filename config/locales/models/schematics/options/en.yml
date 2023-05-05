@@ -18,6 +18,7 @@ en:
         events: Events
         greater_than: Greater than
         greater_than_or_equal_to: Greater than or equal to
+        group_by: Group by
         height: Height
         hidden: Hidden
         icon: Icon
