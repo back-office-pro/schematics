@@ -26,6 +26,9 @@
                                     { selected: object.try(option.name), include_hidden: false }.compact,
                                     { multiple: option.multiple?, data: { controller: option.controller } }
             - when :array
-              = render Schematics::SchemaEditor::Options::Array::Component.new(builder: options_form, name: option.name)
+              = options_form.select option.name,
+                                    Array(options_form.object.public_send(option.name)),
+                                    { include_hidden: false },
+                                    { multiple: true, data: { controller: 'dropdown', 'dropdown-create-value': true } }
             - when :events
               = render Schematics::SchemaEditor::Options::Events::Component.new(builder: options_form, name: option.name)
