@@ -24,7 +24,7 @@
               = options_form.select option.name,
                                     option.collection,
                                     { include_hidden: false },
-                                    { multiple: option.multiple?, data: { controller: 'dropdown' } }
+                                    { multiple: option.multiple?, data: { controller: option.controller } }
             - when :array
               = render Schematics::SchemaEditor::Options::Array::Component.new(builder: options_form, name: option.name)
             - when :events
