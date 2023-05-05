@@ -8,6 +8,7 @@ fr:
         cached: En cache
         confirm: Confirmation
         content_type: Type de contenu
+        core: Noyau
         default: Valeur par défaut
         depends_on: Dépend de
         descriptor: Descripteur
@@ -16,6 +17,7 @@ fr:
         end_date: Date de fin
         equal_to: Egal à
         events: Evènements
+        existing: Existant
         greater_than: Supérieur à
         greater_than_or_equal_to: Supérieur ou égal à
         group_by: Groupé par
