@@ -306,6 +306,14 @@
         }
       },
       {
+        "name": "hosts",
+        "type": "array",
+        "options": {
+          "cached": true,
+          "default": []
+        }
+      },
+      {
         "name": "messages_feature_flag",
         "type": "boolean",
         "options": {

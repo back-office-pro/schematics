@@ -10,6 +10,7 @@ fr:
         company_name: Nom de la société
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
+        hosts: Domaines API autorisés
         locale: Langue
         locales:
           en: Anglais
