@@ -13,8 +13,9 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
 
-  its(:icon) { is_expected.to eq(:table) }
+  its(:icon) { is_expected.to eq(:list) }
   its(:database_index_type) { is_expected.to eq(:gin) }
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ids') }
@@ -28,4 +29,12 @@ describe Schematics::Attributes::Array do
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
   its(:migration_options) { is_expected.to eq(array: true) }
   its(:available_options) { is_expected.to include(Schematics::Options::Default) }
+
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { %w[foo bar] }
+
+    it { is_expected.to eq('foo, bar') }
+  end
 end
