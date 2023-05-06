@@ -2,11 +2,7 @@
 
 module Schematics
   class CsvTemplateSerializer
-    delegate :entity,
-             :human_attribute_name,
-             :human_name_plural,
-             to: :@model_class,
-             private: true
+    delegate :entity, :human_name_plural, to: :@model_class, private: true
 
     def initialize(model_class)
       @model_class = model_class
@@ -14,7 +10,7 @@ module Schematics
 
     def content
       generate do |file|
-        2.times { file << line }
+        10.times { file << line }
       end
     end
 
@@ -52,5 +48,9 @@ module Schematics
       .map(&method(:human_attribute_name))
 
     def line = ::Array.new(elements.size)
+
+    def human_attribute_name(name)
+      @model_class.human_attribute_name(name, count: 2)
+    end
   end
 end
