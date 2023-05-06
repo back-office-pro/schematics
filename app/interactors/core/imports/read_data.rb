@@ -43,8 +43,7 @@ module Core
       def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         return unless value
 
-        field = entity.find_field_by_name(key.to_s)
-        case field
+        case field = entity.find_field_by_name(key.to_s)
         when Schematics::Attributes::Association
           field
             .model_class
