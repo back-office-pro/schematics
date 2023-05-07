@@ -44,7 +44,7 @@ module Schematics
         { 'fw-bold': active? }
       ]
 
-      def filter_name = "filter[#{name}]"
+      def filter_name = "#{filter_key}[#{name}]"
 
       def name
         field.try(:name) || field
@@ -54,7 +54,11 @@ module Schematics
         this.form.requestSubmit()
       JAVASCRIPT
 
-      def value = params.dig(Ransack.options[:search_key], name)
+      def value = params.dig(filter_key, name)
+
+      protected
+
+      def filter_key = Ransack.options[:search_key]
     end
   end
 end
