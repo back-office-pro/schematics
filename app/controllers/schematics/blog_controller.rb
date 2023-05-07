@@ -2,6 +2,7 @@
 
 module Schematics
   class BlogController < ApplicationController
+    include Searchable
     include Redirectable
 
     skip_before_action :authenticate_user!
@@ -11,7 +12,7 @@ module Schematics
     layout 'schematics/blog'
 
     def index
-      @pagy, @posts = pagy(model_class.preload_all.state_published)
+      @pagy, @posts = pagy(model_class.state_published.list(filter_params, current_ability))
     end
 
     def show; end
