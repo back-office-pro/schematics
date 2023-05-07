@@ -15,15 +15,16 @@ module Schematics
           route_base controller_path
 
           entity = model_class.entity
+          filter_key = Ransack.options[:search_key]
 
           if entity.can?(:index)
             api :index, "List #{entity.name.pluralize}" do
               query :page, ::Integer, desc: 'Page number'
               query :items, ::Integer, desc: 'Items per page'
-              query 'filter[with_deleted]', 'boolean', desc: 'Display archives'
+              query "#{filter_key}[with_deleted]", 'boolean', desc: 'Display archives'
 
               entity.searchable_elements.each do |element|
-                query "filter[#{element.name}]",
+                query "#{filter_key}[#{element.name}]",
                       element.open_api_type,
                       desc: "Filter by #{element.name}"
               end
