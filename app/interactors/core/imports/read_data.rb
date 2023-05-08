@@ -47,7 +47,7 @@ module Core
         when Schematics::Attributes::Association
           field
             .model_class
-            .joins(field.descriptor.joins)
+            .left_joins(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
         when Schematics::Attributes::Enum
           translations
