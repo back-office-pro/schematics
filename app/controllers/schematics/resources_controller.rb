@@ -58,7 +58,7 @@ module Schematics
 
       respond_to do |format|
         format.html
-        format.json { render json: @resources, metadata: params.key?(:metadata) }
+        format.json { render json: @resources.to_a, metadata: params.key?(:metadata) }
         format.csv do
           GenerateCsvJob.perform_later(
             current_user,
