@@ -8,7 +8,8 @@ RSpec.describe Schematics::LicenceAbility do
 
   let(:role) { Role.new }
   let(:user) { User.new(role:) }
-  let(:admin_role) { Role.create!(name: 'Admin') }
+  let(:permissions) { Permission.create_entities_permissions! }
+  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
 
   it { is_expected.not_to be_able_to(:cancel, Licence) }
   it { is_expected.not_to be_able_to(:enable, Licence) }

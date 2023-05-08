@@ -4,7 +4,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Role.create!(
     name_en: 'Admin',
     name_fr: 'Administrateur',
-    permissions: Permission.create_all_entities_permissions!
+    permissions: Permission.create_entities_permissions!
   )
   Role.create!(
     name_en: 'User',

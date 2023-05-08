@@ -7,7 +7,7 @@ RSpec.describe Schematics::DemoAbility do
   subject(:ability) { described_class.new }
 
   let(:user) { User.new(role:) }
-  let(:role) { Role.create!(name: 'Admin') }
+  let(:role) { Role.create!(name: 'Admin', permissions: Permission.create_entities_permissions!) }
 
   before { allow(Tenant).to receive(:demo?).and_return(true) }
 

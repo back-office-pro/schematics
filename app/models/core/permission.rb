@@ -5,7 +5,7 @@ class Permission < Schematics::ApplicationRecord
   scope :features, ::Core::Permissions::FeaturesQuery
 
   class << self
-    def create_all_entities_permissions! = Tenant
+    def create_entities_permissions! = Tenant
       .schema
       .entities
       .reject(&:hidden?)
