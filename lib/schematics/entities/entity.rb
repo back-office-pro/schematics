@@ -220,9 +220,11 @@ module Schematics
 
       def default_actions = %i[index show create update destroy archive]
 
-      def default
-        model_class.new(**non_state_machine_attributes.to_h { [_1.name, _1.default] })
-      end
+      def default = model_class.new(
+        **non_state_machine_attributes
+          .concat(has_and_belongs_to_many_associations.reject(&:hidden?))
+          .to_h { [_1.name, _1.default] }
+      )
 
       def router = Router.new(self)
 

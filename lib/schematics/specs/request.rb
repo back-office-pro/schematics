@@ -35,7 +35,7 @@ module Schematics
         let(:session) { ::Session.create!(user:) }
         let(:index_path) { polymorphic_path(model_class) }
         let(:role) do
-          ::Role.create!(name: 'Admin', permissions: ::Permission.create_all_entities_permissions!)
+          ::Role.create!(name: 'Admin', permissions: ::Permission.create_entities_permissions!)
         end
         let(:user) do
           ::User.create!(email: 'admin@admin.com', first_name: 'John', last_name: 'Doe', role:)
@@ -376,13 +376,14 @@ module Schematics
         end
 
         # :reek:FeatureEnvy
-        def params(format = nil)
+        def params(format = nil) # rubocop:disable Metrics/CyclomaticComplexity
           {
             entity.table_name.to_sym => fillable_elements.to_h do |element|
               [
                 element.column_name.to_sym,
                 element.public_send([format, 'default'].compact.join('_'))
                        .then_tap { _1.save! && _1.id if element.is_a?(Attributes::Association) }
+                       .then_tap { _1.map(&:save!) && _1.map(&:id) if element.is_a?(Associations::HasAndBelongsToMany) } # rubocop:disable Layout/LineLength
               ]
             end
           }
