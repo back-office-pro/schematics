@@ -11,20 +11,26 @@ RSpec.describe Core::Imports::ValidateData do
     context 'when data are valid' do
       let(:data) do
         {
-          1 => { 'name' => 'Role1' },
-          2 => { 'name' => 'Role2' }
+          1 => { 'email' => 'john.doe@back-office.pro', 'role' => role },
+          2 => { 'email' => 'jane.doe@back-office.pro', 'role' => role }
         }
       end
       let(:expected_data) do
         [
           {
-            'name' => 'Role1',
-            'slug' => 'role1',
+            'email' => 'john.doe@back-office.pro',
+            'locale' => 'en',
+            'preferences' => {},
+            'time_zone' => 'UTC',
+            'role_id' => role.id,
             'lock_version' => 0
           },
           {
-            'name' => 'Role2',
-            'slug' => 'role2',
+            'email' => 'jane.doe@back-office.pro',
+            'locale' => 'en',
+            'preferences' => {},
+            'time_zone' => 'UTC',
+            'role_id' => role.id,
             'lock_version' => 0
           }
         ]
@@ -38,15 +44,18 @@ RSpec.describe Core::Imports::ValidateData do
     context 'when data are not valid' do
       let(:data) do
         {
-          1 => { 'name' => 'Role1' },
-          2 => { 'name' => '' }
+          1 => { 'email' => 'john.doe@back-office.pro', 'role' => role },
+          2 => { 'email' => '', 'role' => role }
         }
       end
       let(:expected_data) do
         [
           {
-            'name' => 'Role1',
-            'slug' => 'role1',
+            'email' => 'john.doe@back-office.pro',
+            'locale' => 'en',
+            'preferences' => {},
+            'time_zone' => 'UTC',
+            'role_id' => role.id,
             'lock_version' => 0
           },
           ActiveRecord::RecordInvalid

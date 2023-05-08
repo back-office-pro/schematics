@@ -12,12 +12,12 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
-            'name' => 'Role1',
-            'slug' => 'role1'
+            'email' => 'john.doe@back-office.pro',
+            'role_id' => role.id
           },
           {
-            'name' => 'Role2',
-            'slug' => 'role2'
+            'email' => 'jane.doe@back-office.pro',
+            'role_id' => role.id
           }
         ]
       end
@@ -37,18 +37,21 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
-            'name' => 'Role1',
-            'slug' => 'role1'
+            'email' => 'john.doe@back-office.pro',
+            'role_id' => role.id
           },
           {
-            'name' => 'Role1',
-            'slug' => 'role1'
+            'email' => 'john.doe@back-office.pro',
+            'role_id' => role.id
           }
         ]
       end
 
       it { is_expected.to be_a_failure }
-      its(:errors) { is_expected.to eq('Error' => 'Name Role1 has already been taken') }
+
+      its(:errors) do
+        is_expected.to eq('Error' => 'Email john.doe@back-office.pro has already been taken')
+      end
     end
   end
 end
