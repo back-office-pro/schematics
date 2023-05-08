@@ -10,7 +10,8 @@ RSpec.describe Core::Meetings::TodayQuery do
       subject: 'First meeting',
       creator: user,
       start_at: Time.current,
-      end_at: 1.hour.from_now
+      end_at: 1.hour.from_now,
+      participants: [user]
     )
   end
   let(:second_meeting) do
@@ -18,7 +19,8 @@ RSpec.describe Core::Meetings::TodayQuery do
       subject: 'Second meeting',
       creator: user,
       start_at: Time.current.yesterday,
-      end_at: Time.current.yesterday + 1.hour
+      end_at: Time.current.yesterday + 1.hour,
+      participants: [user]
     )
   end
   let(:third_meeting) do
@@ -26,7 +28,8 @@ RSpec.describe Core::Meetings::TodayQuery do
       subject: 'Third meeting',
       creator: user,
       start_at: Time.current.tomorrow,
-      end_at: Time.current.tomorrow + 1.hour
+      end_at: Time.current.tomorrow + 1.hour,
+      participants: [user]
     )
   end
 
