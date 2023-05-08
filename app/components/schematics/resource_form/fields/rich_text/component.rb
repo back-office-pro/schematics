@@ -14,7 +14,7 @@ module Schematics
             rich_text_area(name, **options)
               .gsub(
                 '<input type="hidden"',
-                '<input required="required" class="trix-editor-hidden-input"'
+                '<input type="text" required="required" class="trix-editor-hidden-input"'
               )
           end
 
