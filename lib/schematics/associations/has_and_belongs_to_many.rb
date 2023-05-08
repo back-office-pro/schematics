@@ -26,7 +26,7 @@ module Schematics
 
       def column_name = "#{name.singularize}_ids"
 
-      def default = []
+      def default = [inverse_entity.default]
 
       def permitted_params = { super => [] }
 
