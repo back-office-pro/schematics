@@ -8,6 +8,10 @@ export default class extends ApplicationController {
     new TomSelect(this.element, this.options) // eslint-disable-line no-new
   }
 
+  static get values () {
+    return { create: { type: Boolean, default: false } }
+  }
+
   setDependentDropdownsOptions (value) {
     document
       .querySelectorAll(`[data-dropdown-depends-on="${this.element.name}"]`)
@@ -28,6 +32,9 @@ export default class extends ApplicationController {
       plugins: ['no_active_items', 'no_backspace_delete', this.removable && 'remove_button'],
       itemClass: this.multiple ? 'item bg-primary text-white' : 'item',
       onChange: this.setDependentDropdownsOptions.bind(this),
+      maxOptions: null,
+      create: this.createValue,
+      createOnBlur: this.createValue,
       render: {
         no_results: () => `<div class="option opacity-100 text-muted">
           <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>
@@ -36,6 +43,9 @@ export default class extends ApplicationController {
         loading: () => `<div class="option opacity-100 text-muted">
           <i class="fa fa-spinner fa-spin text-secondary fa-fw me-2"></i>
           ${I18n.typeahead.pending}
+        </div>`,
+        option_create: (data, escape) => `<div class="create option opacity-100">
+          ${I18n.typeahead.add} <strong>${escape(data.input)}</strong>&hellip;
         </div>`
       }
     }

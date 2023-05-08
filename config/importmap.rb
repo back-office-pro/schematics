@@ -26,6 +26,7 @@ pin '@github/hotkey', to: '@github/hotkey/dist/index.js', preload: true
 pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.7/dist/esm/index.js', preload: true
 pin 'autosize', to: 'autosize/dist/autosize.esm.js', preload: true
 pin 'bootstrap', to: 'bootstrap/dist/js/bootstrap.esm.js', preload: true
+pin 'file-saver', to: 'https://ga.jspm.io/npm:file-saver@2.0.5/dist/FileSaver.js', preload: true
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js', preload: true
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js', preload: true
 pin 'sortablejs', to: 'sortablejs/modular/sortable.esm.js', preload: true

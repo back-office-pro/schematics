@@ -23,6 +23,7 @@ describe Schematics::Entities::Entity do
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_core }
   it { is_expected.to be_existing }
   it { is_expected.to be_multisearchable }
@@ -35,6 +36,17 @@ describe Schematics::Entities::Entity do
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
   its(:joins) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to include(
+      Schematics::Options::Core,
+      Schematics::Options::Hidden,
+      Schematics::Options::Existing,
+      Schematics::Options::Descriptor,
+      Schematics::Options::Actions,
+      Schematics::Options::Icon
+    )
+  end
 
   its(:includes) do
     is_expected.to eq(

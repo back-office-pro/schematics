@@ -16,7 +16,7 @@ export default class extends DropdownController {
     return this
       .element
       .closest('.modal-body')
-      .querySelectorAll('#nested-form-array-inputs input')
+      .querySelectorAll('select[data-dropdown-create-value="true"] option')
   }
 
   get collection () {

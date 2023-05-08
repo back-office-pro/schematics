@@ -3,6 +3,8 @@
 module Schematics
   module Options
     class Option
+      delegate :hidden?, :name, to: :class
+
       class << self
         def hidden? = false
 

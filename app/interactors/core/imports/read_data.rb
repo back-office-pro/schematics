@@ -43,12 +43,11 @@ module Core
       def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         return unless value
 
-        field = entity.find_field_by_name(key.to_s)
-        case field
+        case field = entity.find_field_by_name(key.to_s)
         when Schematics::Attributes::Association
           field
             .model_class
-            .joins(field.descriptor.joins)
+            .left_joins(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
         when Schematics::Attributes::Enum
           translations

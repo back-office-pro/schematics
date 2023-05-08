@@ -3,6 +3,10 @@ import ApplicationController from 'controllers/application_controller'
 /* global Turbo, I18n, routes */
 
 export default class extends ApplicationController {
+  initialize () {
+    this.search = this.debounce(this.search)
+  }
+
   static get targets () {
     return ['input', 'history', 'results']
   }

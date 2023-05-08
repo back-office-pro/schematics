@@ -12,12 +12,12 @@ export default class extends ApplicationController {
   }
 
   connect () {
-    this.formTarget.addEventListener('change', this.save.bind(this))
+    this.formTarget.addEventListener('change', this.debounce(this.save))
     this.formTarget.addEventListener('submit', this.clear.bind(this))
   }
 
   disconnect () {
-    this.formTarget.removeEventListener('change', this.save.bind(this))
+    this.formTarget.removeEventListener('change', this.debounce(this.save))
     this.formTarget.removeEventListener('submit', this.clear.bind(this))
   }
 

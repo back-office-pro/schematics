@@ -8,6 +8,8 @@ module Schematics
       class << self
         def input_type = :select
 
+        def controller = 'dropdown'
+
         def multiple? = true
 
         def collection = ::Mime::EXTENSION_LOOKUP

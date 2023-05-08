@@ -3,14 +3,30 @@
 module Schematics
   module Associations
     class HasAndBelongsToMany < Association
+      include Behaviours::Identifiable
+      include Behaviours::Optionable
+      include Behaviours::Validatable
       include Behaviours::Fillable
-      delegate :includes, :icon, :descriptor, :class_name, to: :inverse_entity
+
+      delegate :includes, :descriptor, :class_name, to: :inverse_entity
+      delegate :options, to: :belongs_to
 
       validates :association_type, inclusion: { in: :allowed_association_types }
 
+      def available_options = [
+        Options::Required,
+        Options::Hidden,
+        Options::Type,
+        Options::GroupBy
+      ]
+
+      def icon
+        inverse_entity&.icon || :link
+      end
+
       def column_name = "#{name.singularize}_ids"
 
-      def default = []
+      def default = [inverse_entity.default]
 
       def permitted_params = { super => [] }
 

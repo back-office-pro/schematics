@@ -15,9 +15,12 @@ RSpec.describe PermissionsGenerator do
   let(:permission) { Core::Permission.create!(model:, action: 'create') }
   let(:stat) { Core::Stat.create!(agregate: 'count', model:) }
   let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
-  let(:admin_role) { Core::Role.create!(name: 'Admin', created_at: Time.current.yesterday) }
-  let(:chart) do
-    Core::Chart.create!(kind: 'line', agregate: 'count', model:, x_field: 'User#full_name')
+  let(:admin_role) do
+    Core::Role.create!(
+      name: 'Admin',
+      permissions: Core::Permission.create_entities_permissions!,
+      created_at: Time.current.yesterday
+    )
   end
 
   before { [permission, chart, stat, version, admin_role] }
@@ -39,7 +42,7 @@ RSpec.describe PermissionsGenerator do
       it 'destroys permissions' do
         expect { invoke_all }
           .to change(Core::Permission, :count)
-          .by(-1)
+          .by(-7)
       end
 
       it 'destroys charts' do

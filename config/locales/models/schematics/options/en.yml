@@ -8,6 +8,7 @@ en:
         cached: Cached
         confirm: Confirm
         content_type: Content type
+        core: Core
         default: Default value
         depends_on: Depends on
         descriptor: Descriptor
@@ -16,8 +17,10 @@ en:
         end_date: End date
         equal_to: Equal to
         events: Events
+        existing: Existing
         greater_than: Greater than
         greater_than_or_equal_to: Greater than or equal to
+        group_by: Group by
         height: Height
         hidden: Hidden
         icon: Icon

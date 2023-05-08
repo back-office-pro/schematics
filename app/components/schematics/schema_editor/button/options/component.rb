@@ -5,8 +5,9 @@ module Schematics
     module Button
       module Options
         class Component < ApplicationComponent
-          delegate :id, :available_options, to: :field
-          option :field
+          delegate :object, to: :builder, private: true
+          delegate :id, :available_options, to: :object, private: true
+          option :builder
 
           def render?
             available_options

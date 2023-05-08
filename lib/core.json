@@ -140,6 +140,7 @@
         "type": "has_and_belongs_to_many",
         "name": "recipients",
         "options": {
+          "required": true,
           "type": "core/user"
         }
       }
@@ -309,6 +310,14 @@
         }
       },
       {
+        "name": "hosts",
+        "type": "array",
+        "options": {
+          "cached": true,
+          "default": []
+        }
+      },
+      {
         "name": "messages_feature_flag",
         "type": "boolean",
         "options": {
@@ -361,6 +370,7 @@
         "type": "has_and_belongs_to_many",
         "name": "permissions",
         "options": {
+          "required": true,
           "group_by": "model",
           "type": "core/permission"
         }
@@ -823,6 +833,7 @@
         "type": "has_and_belongs_to_many",
         "name": "assigneds",
         "options": {
+          "required": true,
           "type": "core/user"
         }
       },
@@ -919,6 +930,7 @@
         "type": "has_and_belongs_to_many",
         "name": "participants",
         "options": {
+          "required": true,
           "type": "core/user"
         }
       },
@@ -1037,6 +1049,7 @@
         "type": "has_and_belongs_to_many",
         "name": "permissions",
         "options": {
+          "required": true,
           "group_by": "model",
           "type": "core/permission"
         }

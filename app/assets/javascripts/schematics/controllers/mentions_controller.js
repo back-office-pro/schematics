@@ -60,12 +60,12 @@ export default class extends ApplicationController {
         {
           trigger: '@',
           lookup: 'fullName',
-          values: this.fetchUsers.bind(this)
+          values: this.debounce(this.fetchUsers)
         },
         {
           trigger: '#',
           lookup: ({ _metadata: { descriptor } }) => descriptor,
-          values: this.search.bind(this)
+          values: this.debounce(this.search)
         }
       ]
     }

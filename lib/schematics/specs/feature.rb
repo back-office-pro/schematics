@@ -9,6 +9,7 @@ module Schematics
 
       included do
         include Rails.application.routes.url_helpers
+        delegate :available_locales, to: 'Schematics::Engine.config.i18n'
         delegate :t, to: ::I18n
         delegate :entity,
                  :model_class,
@@ -23,10 +24,7 @@ module Schematics
         let(:record) { default.tap(&:save!) }
         let(:ability) { Ability.new(user) }
         let(:role) do
-          Core::Role.create!(
-            name: 'Admin',
-            permissions: Core::Permission.create_all_entities_permissions!
-          )
+          Core::Role.create!(name: 'Admin', permissions: Core::Permission.create_entities_permissions!)
         end
         let(:user) do
           Core::User.create!(
@@ -108,7 +106,9 @@ module Schematics
           input = "#{entity.name}[#{element.column_name}]"
           case element
           when Associations::HasAndBelongsToMany
-            # Do nothing
+            select element.inverse_entity.model_class.first.to_s,
+                   from: "#{input}[]",
+                   match: :first
           when Attributes::Boolean
             check(input)
           when Attributes::Attachments
@@ -116,13 +116,14 @@ module Schematics
           when Attributes::Attachment
             attach_file input, element.default.path
           when Attributes::RichText
+            type = element.required? ? :text : :hidden
             if element.translated?
-              Behaviours::Translatable::AVAILABLES_LOCALES.each do |locale|
-                find_field("#{entity.name}[#{element.column_name}_#{locale}]", type: :hidden)
+              available_locales.each do |locale|
+                find_field("#{entity.name}[#{element.column_name}_#{locale}]", type:)
                   .set(element.default)
               end
             else
-              find_field(input, type: :hidden).set(element.default)
+              find_field(input, type:).set(element.default)
             end
           when Attributes::BelongsTo
             select element.inverse_entity.model_class.first.to_s,
@@ -141,10 +142,10 @@ module Schematics
           when Attributes::Date
             fill_in input, with: element.default.to_date
           when Attributes::Array
-            fill_in "#{input}[]", with: element.default
+            find_field("#{input}[]", type: :select).set(element.default)
           when Behaviours::Translatable
             if element.translated?
-              Behaviours::Translatable::AVAILABLES_LOCALES.each do |locale|
+              available_locales.each do |locale|
                 fill_in "#{entity.name}[#{element.column_name}_#{locale}]", with: element.default
               end
             else

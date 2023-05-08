@@ -18,6 +18,7 @@ loader.enable_reloading
 loader.ignore("#{__dir__}/active_model")
 loader.ignore("#{__dir__}/active_record")
 loader.ignore("#{__dir__}/active_storage")
+loader.ignore("#{__dir__}/arel")
 loader.ignore("#{__dir__}/backend")
 loader.ignore("#{__dir__}/generators")
 loader.ignore("#{__dir__}/i18n")

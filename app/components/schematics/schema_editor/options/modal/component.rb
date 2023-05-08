@@ -5,7 +5,8 @@ module Schematics
     module Options
       module Modal
         class Component < ApplicationComponent
-          delegate :icon, :id, to: 'builder.object'
+          delegate :object, to: :builder
+          delegate :icon, :id, to: :object
           option :builder
 
           def available_options = builder

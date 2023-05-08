@@ -5,7 +5,6 @@ module Schematics
     ADMIN_MODEL_CLASSES = [
       Core::ApiKey,
       Core::ApiRequest,
-      Core::BlogPost,
       Core::Permission,
       Core::SchemaDataset,
       Core::Session,

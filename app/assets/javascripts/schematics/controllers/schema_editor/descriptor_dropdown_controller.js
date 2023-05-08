@@ -13,10 +13,17 @@ export default class extends DropdownController {
   }
 
   get inputs () {
-    return this
-      .element
+    return document
+      .querySelector(`span[data-bs-target="#${this.modalId}"]`)
       .closest('.schema-editor-entity')
       .querySelectorAll('.entity_field_name')
+  }
+
+  get modalId () {
+    return this
+      .element
+      .closest('.modal')
+      .getAttribute('id')
   }
 
   get collection () {

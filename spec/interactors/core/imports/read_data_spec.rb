@@ -10,8 +10,8 @@ RSpec.describe Core::Imports::ReadData do
 
     let(:expected_data) do
       {
-        1 => { name: 'Role1' },
-        2 => { name: 'Role2' }
+        1 => { email: 'john.doe@back-office.pro', role: },
+        2 => { email: 'jane.doe@back-office.pro', role: }
       }
     end
 

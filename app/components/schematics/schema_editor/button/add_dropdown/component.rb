@@ -24,8 +24,7 @@ module Schematics
             Attributes::ModelField,
             Attributes::Uuid,
             Attributes::Locale,
-            Attributes::Timestamp,
-            Attributes::Array
+            Attributes::Timestamp
           ]
 
           def advanced_collection = Attributes

@@ -1,4 +1,9 @@
 .d-flex.justify-content-center.text-white.mb-4.pb-4
-  = render Schematics::Attachment::Component.company_logo(icon: BlogPost.entity.icon)
-= render Schematics::BlogPostPreview::Component.with_collection(@posts)
-= render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
+  = link_to blog_index_path do
+    = render Schematics::Attachment::Component.company_logo(icon: BlogPost.entity.icon)
+= render Schematics::BlogSearch::Component.new(field: :title)
+- if @posts.empty?
+  = render Schematics::EmptyResource::Component.new
+- else
+  = render Schematics::BlogPostPreview::Component.with_collection(@posts)
+  = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)

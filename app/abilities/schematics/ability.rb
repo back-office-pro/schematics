@@ -16,6 +16,7 @@ module Schematics
       merge CommentAbility.new(user)
       merge SchemaDatasetAbility.new
       merge ComparisonAbility.new
+      merge BlogAbility.new
       merge SearchAbility.new
       merge RoleAbility.new
       merge AdminDashboardAbility.new(self)

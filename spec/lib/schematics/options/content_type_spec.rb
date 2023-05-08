@@ -10,6 +10,7 @@ describe Schematics::Options::ContentType do
   its(:name) { is_expected.to eq(:content_type) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq(['png']) }
+  its(:controller) { is_expected.to eq('dropdown') }
 
   it { is_expected.to be_multiple }
 end

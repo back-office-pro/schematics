@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Schematics::CleanApiRequestsJob do
   let(:created_at) { described_class::DELAY.ago }
-  let(:api_key) { ApiKey.create!(name: 'API key') }
+  let(:permissions) { [Permission.create!(action: 'index', model: 'User')] }
+  let(:api_key) { ApiKey.create!(name: 'API key', permissions:) }
   let(:api_requests) do
     [
       ApiRequest.create!(api_key:, created_at:),

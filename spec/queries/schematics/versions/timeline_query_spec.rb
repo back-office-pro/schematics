@@ -10,9 +10,8 @@ RSpec.describe Schematics::Versions::TimelineQuery do
   let(:ability) { Schematics::Ability.new(user) }
   let(:first_version) { Schematics::Version.create!(event: 'create', item: user, user:) }
   let(:second_version) { Schematics::Version.create!(event: 'update', item: user, user:) }
-  let(:admin_role) do
-    Core::Role.create!(name: 'Admin', permissions: Permission.create_all_entities_permissions!)
-  end
+  let(:permissions) { Core::Permission.create_entities_permissions! }
+  let(:admin_role) { Core::Role.create!(name: 'Admin', permissions:) }
 
   before do
     admin_role

@@ -24,4 +24,12 @@ export default class extends Controller {
     }
     return fetch(url, options)
   }
+
+  debounce (callback, delay = 200) {
+    let timer
+    return (...args) => {
+      clearTimeout(timer)
+      timer = setTimeout(() => callback.apply(this, args), delay)
+    }
+  }
 }

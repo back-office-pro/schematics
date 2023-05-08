@@ -7,7 +7,7 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
 
   include_context 'with user'
 
-  let(:permissions) { Core::Permission.create_all_entities_permissions! }
+  let(:permissions) { Core::Permission.create_entities_permissions! }
   let(:role) { Core::Role.create!(name: 'Admin', permissions:) }
   let(:version) { Schematics::Version.create!(event:, item: user, user:, object:) }
 

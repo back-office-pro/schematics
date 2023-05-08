@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Core::Permissions::FeaturesQuery do
-  let(:permissions) { Core::Permission.create_all_entities_permissions! }
+  let(:permissions) { Core::Permission.create_entities_permissions! }
   let(:expected_permissions) do
     [
       Core::Permission.where(model: 'Core::Import').to_a,

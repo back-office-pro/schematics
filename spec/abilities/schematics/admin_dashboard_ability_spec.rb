@@ -9,8 +9,10 @@ RSpec.describe Schematics::AdminDashboardAbility do
   let(:parent_ability) { Schematics::Ability.new(user) }
   let(:user) { Core::User.new(role:) }
   let(:role) { Core::Role.new(permissions:) }
-  let(:admin_role) { Core::Role.create!(name: 'Admin') }
   let(:permissions) { [] }
+  let(:admin_role) do
+    Core::Role.create!(name: 'Admin', permissions: Core::Permission.create_entities_permissions!)
+  end
 
   before { admin_role }
 

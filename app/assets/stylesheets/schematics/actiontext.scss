@@ -35,3 +35,9 @@ trix-toolbar {
 trix-editor.form-control {
   height: auto;
 }
+
+.trix-editor-hidden-input {
+  float: left;
+  opacity: 0;
+  width: 0;
+}

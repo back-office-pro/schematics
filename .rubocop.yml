@@ -128,9 +128,10 @@ Metrics/BlockLength:
     - it
     - each
 Metrics/MethodLength:
-  Max: 49
+  Max: 34
   AllowedMethods:
     - inherited
+    - fill_form
 Metrics/AbcSize:
   Max: 50
 # rubocop-rspec

@@ -10,7 +10,7 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:json_response) { JSON.parse(response.body) }
   let(:accept_header) { 'application/json' }
   let(:headers) { { 'Accept' => accept_header } }
-  let(:permissions) { Core::Permission.create_all_entities_permissions! }
+  let(:permissions) { Core::Permission.create_entities_permissions! }
   let(:admin_role) { Core::Role.create!(name: 'Admin', permissions:) }
 
   before { [admin_role, user] }
@@ -33,11 +33,11 @@ RSpec.shared_context 'with import' do
   include_context 'with user'
 
   let(:import) { Core::Import.create!(file:, model:, author: user) }
-  let(:model) { 'Role' }
+  let(:model) { 'Core::User' }
   let(:file) do
     ActiveStorage::Blob.create_and_upload!(
-      io: File.open(file_fixture('roles.csv'), 'rb'),
-      filename: 'roles.csv',
+      io: File.open(file_fixture('users.csv'), 'rb'),
+      filename: 'users.csv',
       content_type: Mime[:csv].to_s
     ).signed_id
   end
@@ -46,7 +46,12 @@ end
 RSpec.shared_context 'with user' do
   let(:reset_password_sent_at) { nil }
   let(:preferences) { {} }
-  let(:role) { Core::Role.create!(name: 'Manager') }
+  let(:role) do
+    Core::Role.create!(
+      name: 'Manager',
+      permissions: [Core::Permission.create!(action: 'index', model: 'Import')]
+    )
+  end
   let(:user) do
     Core::User.create!(
       email: 'john.doe@nowhere.com',

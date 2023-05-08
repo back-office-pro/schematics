@@ -8,7 +8,7 @@ module Schematics
         delegate :icon, to: 'Core::Import.entity'
         option :model_class
 
-        def css_classes = %w[btn btn-sm btn-icon-split ms-2]
+        def css_classes = %w[btn btn-sm btn-icon-split ms-1]
 
         def data = { turbo_frame: '_top' }
 

@@ -6,8 +6,20 @@ RSpec.describe 'Resources' do
   include_context 'with authenticated user'
 
   let(:role) { admin_role }
-  let(:first_api_key) { ApiKey.create!(name: 'First key', expires_at: Time.current.yesterday) }
-  let(:second_api_key) { ApiKey.create!(name: 'Second key', expires_at: Time.current.tomorrow) }
+  let(:first_api_key) do
+    ApiKey.create!(
+      name: 'First key',
+      expires_at: Time.current.yesterday,
+      permissions:
+    )
+  end
+  let(:second_api_key) do
+    ApiKey.create!(
+      name: 'Second key',
+      expires_at: Time.current.tomorrow,
+      permissions:
+    )
+  end
 
   before { [first_api_key, second_api_key] }
 

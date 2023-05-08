@@ -16,7 +16,7 @@ module Schematics
             "btn-#{event.color}",
             'btn-sm',
             { 'btn-icon-split': !compact? },
-            { 'ms-2': !compact? }
+            { 'ms-1': !compact? }
           ]
         end
 

@@ -10,6 +10,7 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
+        hosts: Authorized API domains
         locale: Locale
         locales:
           en: English
