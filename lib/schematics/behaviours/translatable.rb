@@ -3,7 +3,6 @@
 module Schematics
   module Behaviours
     module Translatable
-      AVAILABLES_LOCALES = %i[en fr].freeze
       delegate :translated?, to: :options
 
       def preload
@@ -15,7 +14,8 @@ module Schematics
       def permitted_params
         return super unless translated?
 
-        AVAILABLES_LOCALES
+        I18n
+          .available_locales
           .map { :"#{name}_#{_1}" }
           .unshift(super)
       end
