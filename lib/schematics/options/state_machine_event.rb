@@ -9,19 +9,15 @@ module Schematics
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
       include Behaviours::Identifiable
+      include Behaviours::Nameable
 
       validates :from, :to, inclusion: { in: :values }
-      validates :name,
-                presence: true,
-                uniqueness: { scope: %i[state_machine events] },
-                format: { with: Entities::Entity::NAME_REGEX, message: :name },
-                length: { maximum: 50 },
-                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
+      validates :name, uniqueness: { scope: %i[state_machine events] }
 
       delegate :to_str, to: :trigger, prefix: true
       delegate :entity, :values, to: :state_machine
 
-      attr_accessor :state_machine, :name, :from, :to, :callback
+      attr_accessor :state_machine, :from, :to, :callback
       attr_writer :icon, :color
 
       def icon

@@ -9,20 +9,16 @@ module Schematics
       include Behaviours::Identifiable
       include Behaviours::Inspectable
       include Behaviours::Optionable
+      include Behaviours::Nameable
       include Behaviours::Migratable
       include Behaviours::Validatable
 
       delegate :cached?, to: :options
 
-      attr_accessor :entity, :name
+      attr_accessor :entity
 
       validates :type, presence: true
-      validates :name,
-                presence: true,
-                uniqueness: { scope: %i[entity attributes] },
-                format: { with: Entities::Entity::NAME_REGEX, message: :name },
-                length: { maximum: 50 },
-                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
+      validates :name, uniqueness: { scope: %i[entity attributes] }
 
       class << self
         def build(type:, **kwargs)

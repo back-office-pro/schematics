@@ -25,6 +25,7 @@ describe Schematics::Options::StateMachineEvent do
   let(:color) { 'success' }
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_valid }
 
   its(:action) { is_expected.to eq(:after_complete) }

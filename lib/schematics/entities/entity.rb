@@ -10,9 +10,9 @@ module Schematics
     class Entity # rubocop:disable Metrics/ClassLength
       include Behaviours::Identifiable
       include Behaviours::Optionable
+      include Behaviours::Nameable
 
       MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
-      NAME_REGEX = %r{\A([a-z_/]+)\z}
 
       accepts_nested_attributes_for :attributes
       accepts_nested_attributes_for :virtuals
@@ -27,15 +27,9 @@ module Schematics
 
       validates :attributes, presence: true
       validates :actions, inclusion: { in: :default_actions }
-      validates :name,
-                presence: true,
-                singular: true,
-                uniqueness: { scope: %i[schema entities] },
-                format: { with: NAME_REGEX, message: :name },
-                length: { maximum: 50 },
-                exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
+      validates :name, singular: true, uniqueness: { scope: %i[schema entities] }
 
-      attr_accessor :schema, :name
+      attr_accessor :schema
 
       delegate :core?, :existing?, to: :options
       delegate :joins, :includes, :to_str, to: :preloader
