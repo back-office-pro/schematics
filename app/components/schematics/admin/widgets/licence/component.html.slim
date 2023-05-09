@@ -3,6 +3,6 @@
     .card-body.p-3
       .row.g-0.align-items-center
         .col.text-center.p-4
-          = fa_icon icon, size: '3x', class: 'd-inline-block'
-          h5.my-4 = resource
+          = fa_icon icon, size: '3x', class: 'd-inline-block text-primary'
+          h5.text-primary.my-4 = resource
           = render Schematics::Viewer::EventButtonGroup::Component.new(resource:, compact: false)
