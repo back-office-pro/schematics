@@ -17,7 +17,7 @@ module Schematics
 
       validates :function,
                 presence: true,
-                format: { with: Tokens::Tokenizer::REGEX, message: :function }
+                format: { with: Tokens::Tokenizer.parser, message: :function }
       validates :name, uniqueness: { scope: %i[entity virtuals] }
       validates :preload, inclusion: { in: :allowed_references }
       validates :variables, inclusion: { in: :allowed_variables }

@@ -3,6 +3,8 @@
 module Schematics
   module Tokens
     class Parenthesis < Token
+      REGEX = /(\(|\))/
+      PRECEDENCE = 6
     end
   end
 end

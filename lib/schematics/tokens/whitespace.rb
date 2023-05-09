@@ -4,6 +4,9 @@ module Schematics
   module Tokens
     # :reek:SubclassedFromCoreClass
     class Whitespace < String
+      REGEX = /(\s+)/
+      PRECEDENCE = 11
+
       def initialize(*)
         super(' ')
       end

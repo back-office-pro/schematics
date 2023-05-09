@@ -4,6 +4,9 @@ module Schematics
   module Tokens
     # :reek:InstanceVariableAssumption
     class Combinator < Token
+      REGEX = /(\s*(?:&&|\|\|)\s*)/
+      PRECEDENCE = 1
+
       def to_sql =
         case @value.strip
         when '&&' then ' AND '

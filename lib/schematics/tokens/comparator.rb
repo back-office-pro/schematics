@@ -4,6 +4,9 @@ module Schematics
   module Tokens
     # :reek:InstanceVariableAssumption
     class Comparator < Token
+      REGEX = /(\s*(?:==\s*NULL|!=\s*NULL|<=|>=|<|>|!=|==)\s*)/
+      PRECEDENCE = 3
+
       def to_sql =
         case @value.delete(' ')
         when '==NULL' then ' IS NULL'

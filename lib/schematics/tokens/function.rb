@@ -4,6 +4,9 @@ module Schematics
   module Tokens
     # :reek:InstanceVariableAssumption
     class Function < Token
+      REGEX = /(\w+\(\))/
+      PRECEDENCE = 5
+
       def to_str =
         case @value
         when 'NOW()'

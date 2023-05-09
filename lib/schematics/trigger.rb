@@ -17,7 +17,7 @@ module Schematics
 
     validates :callback,
               presence: true,
-              format: { with: Tokens::Tokenizer::REGEX, message: :function }
+              format: { with: Tokens::Tokenizer.parser, message: :function }
     validates :action,
               presence: true,
               inclusion: { in: ACTIONS }
