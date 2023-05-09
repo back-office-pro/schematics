@@ -1,0 +1,15 @@
+---
+en:
+  routes:
+    active_storage: storage
+    admin: admin
+    blobs: files
+    comments: comments
+    delete: delete
+    edit: edit
+    login: login
+    logout: logout
+    new: new
+    password_resets: passwords
+    profile: profile
+    versions: timeline
