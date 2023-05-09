@@ -4,12 +4,8 @@ module Schematics
   module SchemaEditor
     module Template
       module Trigger
-        class Component < ApplicationComponent
-          option :form
-
-          def entity = Entities::Entity.new(schema:)
-
-          def schema = form.object
+        class Component < Template::Component
+          def trigger = Schematics::Trigger.new
         end
       end
     end

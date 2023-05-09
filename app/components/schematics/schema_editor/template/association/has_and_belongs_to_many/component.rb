@@ -5,18 +5,12 @@ module Schematics
     module Template
       module Association
         module HasAndBelongsToMany
-          class Component < ApplicationComponent
-            option :form
-
+          class Component < Template::Component
             def association = Associations::Association.build(
               type: 'has_and_belongs_to_many',
               entity:,
               name: 'NEW_HABTM_ASSOCIATION'
             )
-
-            def entity = Entities::Entity.new(schema:)
-
-            def schema = form.object
           end
         end
       end

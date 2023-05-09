@@ -4,12 +4,7 @@ module Schematics
   module SchemaEditor
     module Template
       module Entity
-        class Component < ApplicationComponent
-          option :form
-
-          def entity = Entities::Entity.new(schema:)
-
-          def schema = form.object
+        class Component < Template::Component
         end
       end
     end
