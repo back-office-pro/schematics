@@ -9,8 +9,7 @@ module Schematics
 
       included do
         include Rails.application.routes.url_helpers
-        delegate :available_locales, to: 'Schematics::Engine.config.i18n'
-        delegate :t, to: ::I18n
+        delegate :available_locales, :t, to: ::I18n
         delegate :entity,
                  :model_class,
                  :human_name,

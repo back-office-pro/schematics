@@ -4,7 +4,7 @@ module Schematics
   module ResourceForm
     module Fields
       class Component < ApplicationComponent
-        delegate :available_locales, to: 'Schematics::Engine.config.i18n'
+        delegate :available_locales, to: ::I18n
         delegate :name, :icon, :options, :required?, to: :field
         delegate :layout, to: :form
 
