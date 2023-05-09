@@ -5,26 +5,9 @@ module Schematics
     class Token
       attr_reader :value
 
-      class << self
-        # :reek:LongParameterList
-        def build((combinator, operator, comparator, assignment, function, parenthesis, variable, boolean, string, number, *whitespace), table_name) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Layout/LineLength
-          return Combinator.new(combinator) if combinator
-          return Operator.new(operator) if operator
-          return Comparator.new(comparator) if comparator
-          return Assignment.new(assignment) if assignment
-          return Function.new(function) if function
-          return Parenthesis.new(parenthesis) if parenthesis
-          return Variable.new(variable, table_name) if variable
-          return Boolean.new(boolean) if boolean
-          return String.new(string) if string
-          return Number.new(number) if number
-
-          Whitespace.new if whitespace
-        end
-      end
-
-      def initialize(value)
+      def initialize(value, prefix = nil)
         @value = value
+        @prefix = prefix
       end
 
       def to_sql = @value
