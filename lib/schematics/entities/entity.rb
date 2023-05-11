@@ -12,8 +12,6 @@ module Schematics
       include Behaviours::Optionable
       include Behaviours::Nameable
 
-      MISSING_REGEX = /(non_)?([a-zA-Z_]+)_(attributes|virtuals|associations|fields|elements)/
-
       accepts_nested_attributes_for :attributes
       accepts_nested_attributes_for :virtuals
       accepts_nested_attributes_for :triggers
@@ -33,6 +31,7 @@ module Schematics
 
       delegate :core?, :existing?, to: :options
       delegate :joins, :includes, :to_str, to: :preloader
+      delegate :method_missing, :receptor_respond_to_missing?, to: :receptor, private: true
 
       class << self
         def build(type: 'entity', **kwargs)
@@ -97,42 +96,8 @@ module Schematics
 
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
 
-      # :reek:FeatureEnvy
-      def method_missing(method_name, *, &) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
-        with_id_and_created_at_attrs = method != 'associations' && constant != 'migratable'
-        predicate = non ? :grep_v : :grep
-        constant = constant&.camelize&.to_sym
-        mod = method&.camelize&.to_sym
-        return super unless mod || constant
-
-        elements = public_send(method.to_sym)
-        if Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)
-          elements.public_send(predicate, Schematics.const_get(mod).const_get(constant))
-        elsif Behaviours.const_defined?(constant)
-          elements = [id_attribute, *elements, created_at_attribute] if with_id_and_created_at_attrs
-          elements = elements.public_send(predicate, Behaviours.const_get(constant))
-          case constant
-          when :Migratable
-            elements
-          when :Fillable
-            elements
-              .reject(&:hidden?)
-              .reject(&:readonly?)
-          else
-            elements.reject(&:hidden?)
-          end
-        end
-      end
-
-      def respond_to_missing?(method_name, *) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        _non, constant, method = method_name.to_s.scan(MISSING_REGEX).flatten
-        constant = constant&.camelize&.to_sym
-        mod = method&.camelize&.to_sym
-        return super unless mod || constant
-
-        (Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)) ||
-          Behaviours.const_defined?(constant)
+      def respond_to_missing?(method_name, *)
+        receptor_respond_to_missing?(method_name) || super
       end
 
       def find_field_by_name(name)
@@ -252,15 +217,6 @@ module Schematics
         &.name
         &.to_sym
 
-      protected
-
-      def preloader = Preloader.new(self)
-
-      def search_data_elements = searchable_elements
-        .map(&:search_data)
-        .map(&:squish)
-        .join(",\n  ")
-
       def id_attribute = Attributes::Uuid.new(
         entity: self,
         name: 'id',
@@ -272,6 +228,17 @@ module Schematics
         name: 'created_at',
         options: { readonly: true }
       )
+
+      protected
+
+      def preloader = Preloader.new(self)
+
+      def receptor = Receptor.new(self)
+
+      def search_data_elements = searchable_elements
+        .map(&:search_data)
+        .map(&:squish)
+        .join(",\n  ")
 
       def created_at_attributes = [
         Attributes::Date.new(entity: self, name: 'created_at/day'),
