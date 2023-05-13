@@ -134,6 +134,8 @@ Metrics/MethodLength:
     - fill_form
 Metrics/AbcSize:
   Max: 50
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
 # rubocop-rspec
 RSpec/DescribedClassModuleWrapping:
   Enabled: true
