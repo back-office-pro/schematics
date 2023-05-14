@@ -46,7 +46,7 @@ module Schematics
 
     private
 
-    def generate_build_commands
+    def generate_build_commands # rubocop:disable Metrics/PerceivedComplexity
       @new_schema.entities.each do |new_entity|
         current_entity = @current_schema&.entities&.find { _1.id == new_entity.id }
         if current_entity
