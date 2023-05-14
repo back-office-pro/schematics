@@ -46,17 +46,9 @@ module Schematics
 
     private
 
-    def new_schema_entities = @new_schema
-      .entities
-      .reject(&:existing?)
-
-    def current_schema_entities = Array @current_schema
-      &.entities
-      &.reject(&:existing?)
-
     def generate_build_commands
-      new_schema_entities.each do |new_entity|
-        current_entity = current_schema_entities.find { _1.id == new_entity.id }
+      @new_schema.entities.each do |new_entity|
+        current_entity = @current_schema&.entities&.find { _1.id == new_entity.id }
         if current_entity
           @build_commands.push(
             rename_entity_command(new_entity, current_entity, :build),
@@ -89,8 +81,8 @@ module Schematics
     end
 
     def generate_clean_commands
-      current_schema_entities.each do |current_entity|
-        new_entity = new_schema_entities.find { _1.id == current_entity.id }
+      @current_schema&.entities&.each do |current_entity|
+        new_entity = @new_schema.entities.find { _1.id == current_entity.id }
         if new_entity
           @clean_commands.push(
             rename_entity_command(current_entity, new_entity, :clean),

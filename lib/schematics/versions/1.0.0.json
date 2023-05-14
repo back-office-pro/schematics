@@ -190,6 +190,7 @@
     ]
   },
   {
+    "id": "1d9b55cd-8946-4dba-969b-ab6477905453",
     "name": "active_storage/attachment",
     "options": {
       "existing": true,
@@ -203,20 +204,24 @@
     },
     "attributes": [
       {
+        "id": "d2c01e25-5c3c-440d-974e-3a46fd3eaf94",
         "name": "filename",
         "type": "string"
       },
       {
+        "id": "89c06c3e-9482-4e1b-ae62-f283cd93e8fd",
         "name": "content_type",
         "type": "mime"
       },
       {
+        "id": "daa1a72d-621e-43f8-b44f-67b761fc82f1",
         "name": "byte_size",
         "type": "byte"
       }
     ]
   },
   {
+    "id": "323a9f3b-1a3d-45fc-807a-771cbf655868",
     "name": "active_storage/blob",
     "options": {
       "existing": true,
@@ -230,18 +235,22 @@
     },
     "attributes": [
       {
+        "id": "97844370-a0fd-49ab-9d29-076a77bafa8a",
         "name": "attachments",
         "type": "attachments"
       },
       {
+        "id": "a353baca-1280-49b4-a307-81fe6298b669",
         "name": "filename",
         "type": "string"
       },
       {
+        "id": "f70dda2b-c4f1-4483-b46a-18ebbdb45e67",
         "name": "content_type",
         "type": "mime"
       },
       {
+        "id": "31eb49c2-a1d8-4b5d-8dc5-53f9a0341b0a",
         "name": "byte_size",
         "type": "byte"
       }
