@@ -25,7 +25,7 @@ class SchemaDataset < Schematics::ApplicationRecord
   end
 
   def migration
-    @migration ||= Schematics::Migrations::DataMigration.new(data, Tenant.schema)
+    @migration ||= Schematics::Migration.new(data, Tenant.schema)
   end
 
   def version = self
