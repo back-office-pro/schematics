@@ -1,5 +1,6 @@
 [
   {
+    "id": "f553f3dd-cbca-451f-a88a-bcab317e4ded",
     "name": "user",
     "options": {
       "icon": "users",
@@ -13,12 +14,14 @@
     ],
     "virtuals": [
       {
+        "id": "773faa33-bb43-470c-a7ae-3662a0cfd5b4",
         "name": "full_name",
         "function": "$last_name $first_name"
       }
     ],
     "attributes": [
       {
+        "id": "b5472fa4-7d4e-4d63-b87d-19fb8ad06853",
         "name": "email",
         "type": "email",
         "options": {
@@ -27,6 +30,7 @@
         }
       },
       {
+        "id": "6f7d38a3-015e-4872-b757-419acded9179",
         "name": "password",
         "type": "digest",
         "options": {
@@ -35,6 +39,7 @@
         }
       },
       {
+        "id": "7d190b66-026e-4091-958a-3e5a224cb25b",
         "name": "password_reset_token",
         "type": "token",
         "options": {
@@ -42,6 +47,7 @@
         }
       },
       {
+        "id": "9d59c4fb-384f-4d90-9b90-b1028b4df315",
         "name": "first_name",
         "type": "string",
         "options": {
@@ -49,6 +55,7 @@
         }
       },
       {
+        "id": "7098a646-7f90-475d-b54e-4cffa6138216",
         "name": "last_name",
         "type": "string",
         "options": {
@@ -56,6 +63,7 @@
         }
       },
       {
+        "id": "c99050fc-cb70-42c8-bfdb-85deea8e1e50",
         "name": "avatar",
         "type": "attachment",
         "options": {
@@ -68,6 +76,7 @@
         }
       },
       {
+        "id": "1ed44211-caea-4e16-9d1c-e8ec5570317b",
         "name": "locale",
         "type": "enum",
         "options": {
@@ -78,10 +87,12 @@
         }
       },
       {
+        "id": "2c77cd2b-6be3-4602-80a4-a76d9d09891b",
         "name": "time_zone",
         "type": "time_zone"
       },
       {
+        "id": "069d725c-5ea4-4f39-b170-1fb9fa5b0ff4",
         "name": "preferences",
         "type": "jsonb",
         "options": {
@@ -90,6 +101,7 @@
         }
       },
       {
+        "id": "45ebd7e7-13bc-4c45-877c-2e00dd446ecc",
         "name": "role",
         "type": "belongs_to",
         "options": {
@@ -97,16 +109,19 @@
         }
       },
       {
+        "id": "c127bf53-14de-44cb-bb88-5fbe250328d4",
         "name": "read_notifications_at",
         "type": "timestamp"
       },
       {
+        "id": "2243c375-1c04-43d5-9e29-64725726db00",
         "name": "reset_password_sent_at",
         "type": "timestamp"
       }
     ]
   },
   {
+    "id": "6357fbc1-7cbe-4aef-9fd7-27a7ce65fbe9",
     "name": "user_group",
     "options": {
       "icon": "people_group",
@@ -114,6 +129,7 @@
     },
     "attributes": [
       {
+        "id": "9c7dd8d2-cafe-40e3-a968-685525e6f351",
         "name": "name",
         "type": "citext",
         "options": {
@@ -126,6 +142,7 @@
     ]
   },
   {
+    "id": "777b2d2a-e701-4380-bae2-401d4afde826",
     "name": "message",
     "options": {
       "icon": "inbox",
@@ -143,6 +160,7 @@
     ],
     "attributes": [
       {
+        "id": "ae7d1bd7-b7fc-4ba9-91e6-0e35b318cc5b",
         "name": "subject",
         "type": "string",
         "options": {
@@ -151,6 +169,7 @@
         }
       },
       {
+        "id": "effd8030-d05c-4e5f-8a95-ce862070f29a",
         "name": "content",
         "type": "rich_text",
         "options": {
@@ -158,6 +177,7 @@
         }
       },
       {
+        "id": "d16c64fb-5745-4671-93ed-539f36e5680d",
         "name": "author",
         "type": "references",
         "options": {
@@ -228,6 +248,7 @@
     ]
   },
   {
+    "id": "8e7a7ff3-95fa-45e8-8c5f-65be6ffe465f",
     "name": "configuration",
     "type": "singleton",
     "options": {
@@ -237,6 +258,7 @@
     },
     "attributes": [
       {
+        "id": "a421f50f-6d4c-4ef9-9191-59537db9d05b",
         "name": "company_name",
         "type": "string",
         "options": {
@@ -245,6 +267,7 @@
         }
       },
       {
+        "id": "4f70ad5b-4888-4bcd-ad3c-a67f6a540c2f",
         "name": "company_address",
         "type": "address",
         "options": {
@@ -252,6 +275,7 @@
         }
       },
       {
+        "id": "b618cf42-cb61-466a-b157-50fccef6e9ec",
         "name": "company_website",
         "type": "url",
         "options": {
@@ -259,6 +283,7 @@
         }
       },
       {
+        "id": "d69eed87-139e-49d7-a0d3-73f5be294493",
         "name": "company_registration_number",
         "type": "string",
         "options": {
@@ -267,6 +292,7 @@
         }
       },
       {
+        "id": "0c40e185-16f2-4de9-9bf5-4615e85ca4be",
         "name": "company_logo",
         "type": "attachment",
         "options": {
@@ -280,6 +306,7 @@
         }
       },
       {
+        "id": "9db0bb4d-42c3-4481-b178-57abcd72022e",
         "name": "locale",
         "type": "enum",
         "options": {
@@ -291,6 +318,7 @@
         }
       },
       {
+        "id": "a410a1cf-2256-4e37-a220-3cafe3ddc25b",
         "name": "time_zone",
         "type": "time_zone",
         "options": {
@@ -298,6 +326,7 @@
         }
       },
       {
+        "id": "4708edee-089a-4329-95cc-e232f610f3ec",
         "name": "theme_color",
         "type": "color",
         "options": {
@@ -306,6 +335,7 @@
         }
       },
       {
+        "id": "d2d42519-f8f9-48a5-8b23-de269e92a655",
         "name": "hosts",
         "type": "array",
         "options": {
@@ -314,6 +344,7 @@
         }
       },
       {
+        "id": "0243413d-251d-4b40-a81a-930871d7959f",
         "name": "messages_feature_flag",
         "type": "boolean",
         "options": {
@@ -322,6 +353,7 @@
         }
       },
       {
+        "id": "81735182-5906-48ec-be00-addeb2a2344c",
         "name": "comments_feature_flag",
         "type": "boolean",
         "options": {
@@ -330,6 +362,7 @@
         }
       },
       {
+        "id": "ff7fe39e-56ba-46b6-b77d-182d175de392",
         "name": "tasks_feature_flag",
         "type": "boolean",
         "options": {
@@ -338,6 +371,7 @@
         }
       },
       {
+        "id": "deede896-a297-4169-be1a-04879ed8249b",
         "name": "meetings_feature_flag",
         "type": "boolean",
         "options": {
@@ -346,6 +380,7 @@
         }
       },
       {
+        "id": "7a16fb5b-c5a3-4036-9da7-fa9bf19c3fa4",
         "name": "blog_feature_flag",
         "type": "boolean",
         "options": {
@@ -356,6 +391,7 @@
     ]
   },
   {
+    "id": "a3644cc6-2a6c-46de-a539-1b50b31a5a2b",
     "name": "role",
     "options": {
       "icon": "user_lock",
@@ -373,6 +409,7 @@
     ],
     "attributes": [
       {
+        "id": "bef80aaa-21bf-42a3-aa8a-e70845df914e",
         "name": "name",
         "type": "citext",
         "options": {
@@ -385,6 +422,7 @@
     ]
   },
   {
+    "id": "244d9a9e-c054-4d9e-b28a-0de7136822ed",
     "name": "permission",
     "options": {
       "icon": "lock",
@@ -396,6 +434,7 @@
     },
     "attributes": [
       {
+        "id": "aa48f457-700c-4da4-98e0-c72cb4c81a03",
         "name": "model",
         "type": "model",
         "options": {
@@ -404,6 +443,7 @@
         }
       },
       {
+        "id": "1b2948d0-cecc-43dc-9521-fc36d1685d37",
         "name": "action",
         "type": "action",
         "options": {
@@ -414,12 +454,14 @@
     ],
     "virtuals": [
       {
+        "id": "f917c25b-7d14-4456-bda5-c031aeb13bab",
         "name": "name",
         "function": "$action $model"
       }
     ]
   },
   {
+    "id": "02cdd9d6-50a0-492b-ad70-e996755c7107",
     "name": "import",
     "options": {
       "icon": "cloud_arrow_up",
@@ -430,6 +472,7 @@
     },
     "attributes": [
       {
+        "id": "b67c6416-1018-4be9-b61b-1b43009bcd42",
         "name": "file",
         "type": "attachment",
         "options": {
@@ -440,6 +483,7 @@
         }
       },
       {
+        "id": "015a4490-8de8-488c-940a-245dd7a93391",
         "name": "model",
         "type": "model",
         "options": {
@@ -448,6 +492,7 @@
         }
       },
       {
+        "id": "4fcae220-2ea7-47b8-9a70-2ec366443ec3",
         "name": "status",
         "type": "enum",
         "options": {
@@ -462,6 +507,7 @@
         }
       },
       {
+        "id": "364cc2f8-e5ca-441e-8006-effa95a9489a",
         "name": "progress",
         "type": "percentage",
         "options": {
@@ -471,6 +517,7 @@
         }
       },
       {
+        "id": "59bf39d4-41a3-4e3a-af55-876646f43a1e",
         "name": "import_errors",
         "type": "jsonb",
         "options": {
@@ -478,6 +525,7 @@
         }
       },
       {
+        "id": "95740a09-5cce-49b4-a761-79a98ef342fe",
         "name": "author",
         "type": "references",
         "options": {
@@ -487,6 +535,7 @@
     ]
   },
   {
+    "id": "73182bc8-fc45-417d-a86c-39217b125968",
     "name": "chart",
     "options": {
       "icon": "chart_line"
@@ -499,6 +548,7 @@
     ],
     "attributes": [
       {
+        "id": "8f56a948-4c4f-4e6c-a3eb-9a584ac52280",
         "name": "kind",
         "type": "enum",
         "options": {
@@ -515,6 +565,7 @@
         }
       },
       {
+        "id": "f7a2050f-e4c0-4a02-a8fa-d55f3a2b7667",
         "name": "agregate",
         "type": "enum",
         "options": {
@@ -529,6 +580,7 @@
         }
       },
       {
+        "id": "7c1b6051-484c-439f-9a2c-64584d743721",
         "name": "model",
         "type": "model",
         "options": {
@@ -536,6 +588,7 @@
         }
       },
       {
+        "id": "07b21dfa-faab-4698-8f3d-2ae53a12c7ca",
         "name": "y_field",
         "type": "model_field",
         "options": {
@@ -544,6 +597,7 @@
         }
       },
       {
+        "id": "4f051fc6-279a-46e7-8f88-a8bec43b0b5c",
         "name": "x_field",
         "type": "model_field",
         "options": {
@@ -554,6 +608,7 @@
     ]
   },
   {
+    "id": "7c95c59f-1260-4220-ae74-c6f852c36d97",
     "name": "stat",
     "options": {
       "icon": "stopwatch_20"
@@ -566,6 +621,7 @@
     ],
     "attributes": [
       {
+        "id": "8d0b75db-3eba-4cfc-abe8-26e5f2d52ee7",
         "name": "agregate",
         "type": "enum",
         "options": {
@@ -580,6 +636,7 @@
         }
       },
       {
+        "id": "eaf8be0f-5874-4a61-9042-ac8de769a059",
         "name": "model",
         "type": "model",
         "options": {
@@ -587,6 +644,7 @@
         }
       },
       {
+        "id": "1487f76c-d495-4f47-8294-26d0f214e0c7",
         "name": "field",
         "type": "model_field",
         "options": {
@@ -597,6 +655,7 @@
     ]
   },
   {
+    "id": "861b3bee-adba-4103-bfd3-60ff3e8ba8e3",
     "name": "search",
     "options": {
       "icon": "magnifying_glass",
@@ -609,18 +668,22 @@
     },
     "attributes": [
       {
+        "id": "96a92812-022a-4745-b971-10224442aabe",
         "name": "query",
         "type": "string"
       },
       {
+        "id": "c7a3dea1-2759-46e6-88b7-b8c470e9f50d",
         "name": "model",
         "type": "model"
       },
       {
+        "id": "6cd7ec30-d813-426a-8ed8-83f2c4052722",
         "name": "filters",
         "type": "jsonb"
       },
       {
+        "id": "436bde6d-61ee-4126-b330-3397db8bd729",
         "name": "user",
         "type": "references",
         "options": {
@@ -630,6 +693,7 @@
     ]
   },
   {
+    "id": "d4f5e09a-a6a5-4468-ab8e-d64ce2c08f6a",
     "name": "comparison",
     "options": {
       "icon": "scale_balanced",
@@ -642,6 +706,7 @@
     },
     "attributes": [
       {
+        "id": "eeb8f06d-a108-4385-8aba-398c43c05ac5",
         "name": "model",
         "type": "model",
         "options": {
@@ -649,12 +714,14 @@
         }
       },
       {
+        "id": "b932ef4d-10f1-43d3-8262-157c4bf6bf33",
         "name": "ids",
         "type": "array"
       }
     ]
   },
   {
+    "id": "2772e631-160a-4f1c-b6ed-f61cb74c7e24",
     "name": "draft",
     "options": {
       "icon": "floppy_disk",
@@ -668,6 +735,7 @@
     },
     "attributes": [
       {
+        "id": "d9ea4305-2804-4db6-8a76-5dad720cf317",
         "name": "action",
         "type": "string",
         "options": {
@@ -675,10 +743,12 @@
         }
       },
       {
+        "id": "d3de2e09-88f2-4f02-b4ac-3d6af2e87745",
         "name": "data",
         "type": "jsonb"
       },
       {
+        "id": "d37c6c94-4bd4-4207-8e42-33ea84275062",
         "name": "user",
         "type": "references",
         "options": {
@@ -688,6 +758,7 @@
     ]
   },
   {
+    "id": "9e9b51cc-2212-44da-9e17-2bc4ef7684c3",
     "name": "session",
     "options": {
       "icon": "user_shield",
@@ -701,6 +772,7 @@
     },
     "attributes": [
       {
+        "id": "2a8c0fc5-ae21-4c9f-b0a1-adb40fd29cd8",
         "name": "auth_token",
         "type": "token",
         "options": {
@@ -708,6 +780,7 @@
         }
       },
       {
+        "id": "128c6935-606d-4ff4-994a-8ef6868741aa",
         "name": "user_agent",
         "type": "user_agent",
         "options": {
@@ -715,6 +788,7 @@
         }
       },
       {
+        "id": "7fb23ea4-f191-4011-aa7a-907466ac9d8f",
         "name": "ip",
         "type": "ip",
         "options": {
@@ -722,6 +796,7 @@
         }
       },
       {
+        "id": "e05f71d2-e586-4b72-8525-3a35d1adb101",
         "name": "user",
         "type": "references",
         "options": {
@@ -731,6 +806,7 @@
     ]
   },
   {
+    "id": "ad1315cf-5547-452c-8aad-5fc6bda45fec",
     "name": "schema_dataset",
     "options": {
       "icon": "diagram_project",
@@ -744,10 +820,12 @@
     },
     "attributes": [
       {
+        "id": "b8de2f59-e280-4e19-88c3-63ee6522e27f",
         "name": "data",
         "type": "jsonb"
       },
       {
+        "id": "f92548b7-4015-48a6-a670-45258b324b2c",
         "name": "state",
         "type": "state_machine",
         "options": {
@@ -762,6 +840,7 @@
           ],
           "events": [
             {
+              "id": "953d195e-ee9c-46c2-87c0-6f199153b3b9",
               "name": "migrate",
               "icon": "arrow_trend_up",
               "from": [
@@ -776,6 +855,7 @@
     ]
   },
   {
+    "id": "6ee8d01c-645e-4f70-a13e-4ac60a805407",
     "name": "comment",
     "options": {
       "icon": "comment",
@@ -787,6 +867,7 @@
     },
     "attributes": [
       {
+        "id": "048ecdf3-15eb-4ae2-97fd-03add5605294",
         "name": "record",
         "type": "belongs_to",
         "options": {
@@ -796,6 +877,7 @@
         }
       },
       {
+        "id": "6c30235c-987c-46cf-8a3b-f8408b8eccc0",
         "name": "content",
         "type": "rich_text",
         "options": {
@@ -803,6 +885,7 @@
         }
       },
       {
+        "id": "0052cbc2-fb5d-45fa-b5e2-0d094f347007",
         "name": "author",
         "type": "references",
         "options": {
@@ -812,6 +895,7 @@
     ]
   },
   {
+    "id": "67104f1d-214c-4fdc-8ea7-34809d88c96c",
     "name": "task",
     "options": {
       "icon": "list_check",
@@ -833,6 +917,7 @@
     ],
     "attributes": [
       {
+        "id": "81e95603-ecb2-49a7-8798-a4c471d49e62",
         "name": "title",
         "type": "string",
         "options": {
@@ -841,10 +926,12 @@
         }
       },
       {
+        "id": "ca603a30-c1c6-4a84-a93c-f38475649cb8",
         "name": "content",
         "type": "rich_text"
       },
       {
+        "id": "b31c84ab-40e2-44be-8944-96a2785bb0dc",
         "name": "applicant",
         "type": "references",
         "options": {
@@ -855,10 +942,12 @@
         }
       },
       {
+        "id": "331fc923-f91b-468c-b056-f7a1b0b2bc06",
         "name": "deadline",
         "type": "datetime"
       },
       {
+        "id": "7821c242-c70d-4142-aeb6-bae5b2b8b2d2",
         "name": "state",
         "type": "state_machine",
         "options": {
@@ -872,12 +961,14 @@
           ],
           "events": [
             {
+              "id": "6481f659-3443-447a-a55b-42e0ed2c2791",
               "name": "start",
               "icon": "hammer",
               "from": "pending",
               "to": "in_progress"
             },
             {
+              "id": "045da474-fc93-4265-b819-5f4f4ce02582",
               "name": "complete",
               "icon": "check",
               "color": "success",
@@ -885,6 +976,7 @@
               "to": "completed"
             },
             {
+              "id": "c500fd95-4399-470e-be08-8c4f4976df7c",
               "name": "abort",
               "icon": "ban",
               "color": "danger",
@@ -900,12 +992,14 @@
     ],
     "virtuals": [
       {
+        "id": "52e1d161-9cdd-4d7e-b176-df571a1798d6",
         "name": "late",
         "function": "$deadline != NULL && NOW() > $deadline"
       }
     ]
   },
   {
+    "id": "a08c730c-21ae-48f1-b2f9-9ba7c58316bc",
     "name": "meeting",
     "options": {
       "icon": "headset",
@@ -927,6 +1021,7 @@
     ],
     "attributes": [
       {
+        "id": "2c67a2de-89a6-489d-915c-1302dc2ade9d",
         "name": "subject",
         "type": "string",
         "options": {
@@ -935,10 +1030,12 @@
         }
       },
       {
+        "id": "b44ebbec-97cc-4778-a716-c7356544de75",
         "name": "content",
         "type": "rich_text"
       },
       {
+        "id": "5d33382f-6e9e-4bf9-94f0-6f0115eb8fec",
         "name": "creator",
         "type": "references",
         "options": {
@@ -949,6 +1046,7 @@
         }
       },
       {
+        "id": "f12c8c38-397a-4f99-bfcc-7d27ebe533aa",
         "name": "start_at",
         "type": "datetime",
         "options": {
@@ -958,6 +1056,7 @@
         }
       },
       {
+        "id": "0673c510-3014-4657-b1bb-91c92ed46b35",
         "name": "end_at",
         "type": "datetime",
         "options": {
@@ -967,22 +1066,26 @@
         }
       },
       {
+        "id": "e873aeea-efb6-467b-bd99-266800bf22e1",
         "name": "url",
         "type": "url"
       },
       {
+        "id": "37d1ada5-9fe5-4442-a6c2-f9ec3630af2b",
         "name": "location",
         "type": "address"
       }
     ],
     "virtuals": [
       {
+        "id": "d55b77da-44c7-4744-8672-d9a29ac26178",
         "name": "to_come",
         "function": "NOW() < $end_at"
       }
     ]
   },
   {
+    "id": "778d5456-6ae6-4e05-b227-83e919d13adb",
     "name": "translation",
     "options": {
       "icon": "language",
@@ -995,6 +1098,7 @@
     },
     "attributes": [
       {
+        "id": "52822228-9285-47fe-bf86-8e3424fdb103",
         "name": "locale",
         "type": "enum",
         "options": {
@@ -1006,6 +1110,7 @@
         }
       },
       {
+        "id": "df614863-630f-4c19-bb53-ac73f2c1e14e",
         "name": "key",
         "type": "locale",
         "options": {
@@ -1013,6 +1118,7 @@
         }
       },
       {
+        "id": "27a16a09-23e0-4ed5-a670-6793e09d1769",
         "name": "value",
         "type": "string",
         "options": {
@@ -1022,6 +1128,7 @@
     ]
   },
   {
+    "id": "2e5e613f-3dd2-4433-94f9-642b680b6a98",
     "name": "api_key",
     "options": {
       "icon": "key",
@@ -1039,6 +1146,7 @@
     ],
     "attributes": [
       {
+        "id": "5344e05a-a819-4c47-a731-c0fb3cfde40c",
         "name": "name",
         "type": "citext",
         "options": {
@@ -1048,22 +1156,26 @@
         }
       },
       {
+        "id": "113664da-9180-44ef-9cce-fc0a1df31520",
         "name": "auth_token",
         "type": "token"
       },
       {
+        "id": "ec0c5304-ba4b-46fd-add0-dda7ff8f7e37",
         "name": "expires_at",
         "type": "datetime"
       }
     ],
     "virtuals": [
       {
+        "id": "9c470aa1-b356-4402-a48f-98a6dcc49ad3",
         "name": "active",
         "function": "$expires_at == NULL || NOW() < $expires_at"
       }
     ]
   },
   {
+    "id": "8a922064-c7ff-40a9-b19f-9ce509b32f5b",
     "name": "api_request",
     "options": {
       "icon": "server",
@@ -1075,6 +1187,7 @@
     },
     "attributes": [
       {
+        "id": "f6cda82e-a4b5-4a5f-8f87-b79f4b360ff2",
         "name": "api_key",
         "type": "belongs_to",
         "options": {
@@ -1082,14 +1195,17 @@
         }
       },
       {
+        "id": "ee776a34-11fb-4e82-a31d-4a5c426a3a30",
         "name": "ip",
         "type": "ip"
       },
       {
+        "id": "2346fcff-55db-498a-906d-b5d417eb6496",
         "name": "endpoint",
         "type": "string"
       },
       {
+        "id": "561ddd7c-96af-4a66-bbe7-2ab5f69bd43f",
         "name": "request_method",
         "type": "enum",
         "options": {
@@ -1105,6 +1221,7 @@
     ]
   },
   {
+    "id": "b08023c8-ff1f-4e3e-b1f6-a6b149fab14b",
     "name": "licence",
     "type": "singleton",
     "options": {
@@ -1115,6 +1232,7 @@
     },
     "attributes": [
       {
+        "id": "b810d540-09a8-4cdd-8fea-13d304434513",
         "name": "plan",
         "type": "enum",
         "options": {
@@ -1128,6 +1246,7 @@
         }
       },
       {
+        "id": "6ee822eb-a6b4-4fa1-9980-2c14299f717b",
         "name": "state",
         "type": "state_machine",
         "options": {
@@ -1140,6 +1259,7 @@
           ],
           "events": [
             {
+              "id": "5afbe15d-3fa0-4485-8ab6-8600eed525a1",
               "name": "cancel",
               "icon": "ban",
               "color": "danger",
@@ -1147,6 +1267,7 @@
               "to": "canceled"
             },
             {
+              "id": "d6c55457-49e0-46af-9ee7-05a9cb8f53a3",
               "name": "enable",
               "icon": "check",
               "color": "success",
@@ -1157,6 +1278,7 @@
         }
       },
       {
+        "id": "1464fc93-a61e-4482-8b22-80d1ec999039",
         "name": "metadata",
         "type": "jsonb",
         "options": {
@@ -1172,6 +1294,7 @@
     ]
   },
   {
+    "id": "56bee738-9642-4609-b254-f9b5ed4c93c8",
     "name": "blog_post",
     "options": {
       "descriptor": "title",
@@ -1179,6 +1302,7 @@
     },
     "attributes": [
       {
+        "id": "7fc78d89-be52-40ef-96aa-09cbef75a1fd",
         "name": "title",
         "type": "citext",
         "options": {
@@ -1189,6 +1313,7 @@
         }
       },
       {
+        "id": "32bbaacc-f85f-43a0-a789-91f3e9835312",
         "name": "image",
         "type": "attachment",
         "options": {
@@ -1201,6 +1326,7 @@
         }
       },
       {
+        "id": "67b14bb5-87f6-4f0a-96bc-68fd9d7faf08",
         "name": "content",
         "type": "rich_text",
         "options": {
@@ -1209,6 +1335,7 @@
         }
       },
       {
+        "id": "59d898c8-764d-4afc-b20c-2cd7b3d2fd0e",
         "name": "state",
         "type": "state_machine",
         "options": {
@@ -1220,12 +1347,14 @@
           ],
           "events": [
             {
+              "id": "b35420a2-b677-4deb-ba3a-b9055135ed55",
               "name": "publish",
               "icon": "arrow_trend_up",
               "from": "draft",
               "to": "published"
             },
             {
+              "id": "63788727-ebc7-4a03-b0fc-56b997527455",
               "name": "unpublish",
               "icon": "arrow_trend_down",
               "from": "published",
@@ -1235,6 +1364,7 @@
         }
       },
       {
+        "id": "a403e012-955b-4b3a-bff1-d90b4315945a",
         "name": "author",
         "type": "references",
         "options": {
