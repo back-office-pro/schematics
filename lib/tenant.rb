@@ -18,7 +18,7 @@ class Tenant
 
     def schema
       SEMAPHORE.synchronize do
-        @schema ||= Schematics::Schema.new(data:)
+        @schema ||= Schematics::Schema.new(data:, version:)
       end
     end
 
@@ -126,5 +126,9 @@ class Tenant
     def port
       env_port unless Rails.env.production?
     end
+
+    def version = Rails
+      .cache
+      .fetch('CORE_VERSION') { Schematics::VERSION }
   end
 end
