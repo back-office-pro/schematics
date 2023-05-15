@@ -3,8 +3,7 @@ footer.py-4
     .col
       | &copy; #{year} #{company_name}
     .col.text-end.text-nowrap
-      = render Schematics::ResourceLinkTo::Component.new(resource:, css_classes:) do |c|
-        - c.with_body { current_version }
+      = render Schematics::ResourceLinkTo::Component.new(resource:, css_classes:)
       = fa_icon :rocket, class: 'text-primary me-2'
       = t('.powered_by')
       = link_to website_url, class: 'ms-1' do

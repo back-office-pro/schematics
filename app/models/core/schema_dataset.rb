@@ -36,4 +36,6 @@ class SchemaDataset < Schematics::ApplicationRecord
     .to_f
     .to_s
     .prepend('v')
+
+  alias to_s version
 end
