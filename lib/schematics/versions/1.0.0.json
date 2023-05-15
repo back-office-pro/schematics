@@ -474,6 +474,7 @@
     "name": "import",
     "options": {
       "icon": "cloud_arrow_up",
+      "descriptor": "model",
       "actions": [
         "index",
         "show"
