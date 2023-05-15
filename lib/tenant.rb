@@ -127,8 +127,8 @@ class Tenant
       env_port unless Rails.env.production?
     end
 
-    def version = Rails
-      .cache
-      .fetch('CORE_VERSION') { Schematics::VERSION }
+    def version
+      Rails.cache&.fetch('CORE_VERSION') || Schematics::VERSION
+    end
   end
 end
