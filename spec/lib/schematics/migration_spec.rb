@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Migrations::DataMigration do
+describe Schematics::Migration do
   subject(:migration) { described_class.new(new_schema, current_schema) }
 
   let(:new_schema) { Schematics::Schema.new(data: new_data) }

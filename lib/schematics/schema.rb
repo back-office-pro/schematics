@@ -11,7 +11,7 @@ module Schematics
 
     accepts_nested_attributes_for :entities
     validates_associated :entities
-    attr_reader :entities
+    attr_reader :entities, :version
 
     class << self
       def load(data)
@@ -23,9 +23,10 @@ module Schematics
       end
     end
 
-    def initialize(data: [])
+    def initialize(data: [], version: VERSION)
       data = ::JSON.parse(data) if data.is_a?(::String)
       @data = data.map(&:deep_symbolize_keys)
+      @version = version
       self.entities = core_data.concat(@data)
     end
 
@@ -59,8 +60,10 @@ module Schematics
     private
 
     def core_data = ::JSON
-      .parse(File.read(File.expand_path('../core.json', __dir__)), symbolize_names: true)
+      .parse(File.read(core_data_filepath), symbolize_names: true)
       .tap { |json| json.each { _1[:options]&.store(:core, true) } }
+
+    def core_data_filepath = File.expand_path(File.join('versions', "#{version}.json"), __dir__)
 
     def add_associations_and_check_for_name_collisions
       add_has_and_belongs_to_many_associations
