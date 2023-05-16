@@ -52,8 +52,8 @@ module Schematics
       respond_to do |format|
         format.json { head :not_found }
         format.any do
-          alert = t('schematics.application.record_not_found.alert', human_name:, gender:)
-          redirect_to index_path, alert:
+          redirect_to index_path,
+                      alert: t('schematics.application.record_not_found.alert', human_name:, gender:) # rubocop:disable Layout/LineLength
         end
       end
     end
