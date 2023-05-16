@@ -147,6 +147,10 @@ module Schematics
     config.view_component.capture_compatibility_patch_enabled = true
     config.view_component.test_controller = 'Schematics::ApplicationController'
 
+    # Responders
+    config.responders.error_status = :unprocessable_entity
+    config.responders.redirect_status = :see_other
+
     # Active Storage
     config.after_initialize do
       config.active_storage.replace_on_assign_to_many = false
