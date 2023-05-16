@@ -9,24 +9,7 @@ module Schematics
         resource: current_user,
         resource_params: { preferences: current_user.preferences.merge(preference_params) }
       )
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to edit_preferences_path, notice: t(result.message)
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = t(result.message)
-            render :edit, status: :unprocessable_entity
-          end
-          format.json do
-            render json: { errors: [t(result.message)] }, status: :unprocessable_entity
-          end
-        end
-      end
+      respond_with result, location: edit_preferences_path
     end
 
     private

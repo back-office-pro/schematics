@@ -4,16 +4,8 @@ module Schematics
   class DocumentationController < ApplicationController
     def show
       authorize! :index, ::ApiKey
-      respond_to do |format|
-        format.html
-        format.json { render json: }
-      end
+      @documentation = ::OpenApi.generate_docs(!Rails.env.test?)
+      respond_with @documentation.fetch(:open_api)
     end
-
-    private
-
-    def json = ::OpenApi
-      .generate_docs(!Rails.env.test?)
-      .fetch(:open_api)
   end
 end
