@@ -7,7 +7,7 @@ module Schematics
       delegate :version, to: :context, private: true
 
       before do
-        @resource = version.reify.unstale
+        @resource = version.reify(unversioned_attributes: :preserve).unstale
         @resource.paper_trail_event = :revert
       end
 
