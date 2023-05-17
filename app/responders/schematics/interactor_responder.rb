@@ -3,10 +3,13 @@
 module Schematics
   # :reek:ManualDispatch :reek:ModuleInitialize
   module InteractorResponder
+    delegate :t, to: :controller, private: true
+
     def initialize(controller, resources, options = {})
       super
       return unless interactor?
 
+      @flash_interpolation_options = options.delete(:flash_interpolation_options)
       @notice = t(resource.message, **mount_i18n_options(:notice))
       @alert = t(resource.message, **mount_i18n_options(:alert))
       @redirect_on_failure = options.delete(:redirect_on_failure) { false }
@@ -34,37 +37,25 @@ module Schematics
       return super unless interactor?
       return __send__("#{format}_resource_errors") if respond_to?("#{format}_resource_errors")
 
-      controller_errors
+      errors
     end
 
     def json_resource_errors
       return super unless interactor?
 
-      { errors: controller_errors }
+      { errors: }
     end
 
-    private
+    def controller_interpolation_options
+      @flash_interpolation_options
+    end
+
+    protected
 
     def interactor?
       resource.is_a?(::Interactor::Context)
     end
 
-    def t(message, **kwargs)
-      case controller
-      when ResourcesController
-        controller.tscope(message, **kwargs)
-      else
-        controller.translate(message, **kwargs)
-      end
-    end
-
-    def controller_errors
-      case controller
-      when ResourcesController
-        resource.resource.errors
-      else
-        [t(resource.message)]
-      end
-    end
+    def errors = [t(resource.message)]
   end
 end

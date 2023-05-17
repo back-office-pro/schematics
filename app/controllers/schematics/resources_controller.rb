@@ -18,6 +18,7 @@ module Schematics
     before_action :log_search!, only: :index
     after_action :assign_etag, only: %i[show update]
 
+    responders :flash, ResourceResponder
     respond_to :html, except: :autocomplete
     respond_to :json, except: %i[new edit delete]
     respond_to :svg, :ics, only: :show
@@ -109,12 +110,9 @@ module Schematics
       event = entity.find_event_by_name(params.require(:event))
       authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
-      respond_with(result) do |format|
-        format.html do
-          redirect_back_or_to resource_path,
-                              notice: tscope(result.message, event: event.human.downcase)
-        end
-      end
+      respond_with result,
+                   location: -> { request.referer || resource_path },
+                   flash_interpolation_options: { event: event.human.downcase }
     end
 
     def destroy

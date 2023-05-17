@@ -14,7 +14,14 @@ module Schematics
 
     def revert
       result = Versions::Revert.call(version: @version)
-      respond_with result, location: main_app.polymorphic_path(@version.item)
+      respond_with(
+        result,
+        location: main_app.polymorphic_path(@version.item),
+        flash_interpolation_options: {
+          human_name: @version.model_class.human_name,
+          gender: @version.model_class.gender
+        }
+      )
     end
 
     def show
@@ -26,10 +33,5 @@ module Schematics
     private
 
     def model_class = Version
-
-    def flash_interpolation_options = {
-      human_name: @version.model_class.human_name,
-      gender: @version.model_class.gender
-    }
   end
 end
