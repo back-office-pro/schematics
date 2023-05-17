@@ -17,6 +17,7 @@ module Schematics
       respond_with(
         result,
         location: main_app.polymorphic_path(@version.item),
+        redirect_on_failure: true,
         flash_interpolation_options: {
           human_name: @version.model_class.human_name,
           gender: @version.model_class.gender
