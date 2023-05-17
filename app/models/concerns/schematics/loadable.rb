@@ -79,18 +79,26 @@ module Schematics
         &.format(public_send(attr)) || public_send(attr)
     end
 
-    def associations(current_ability:, only: nil)
+    def associations(current_ability)
       self
         .class
         .entity
         .association_elements
-        .select(&only)
-        .map do |association|
-          public_send(association.name)
-            .preload(association.includes)
-            .accessible_by(current_ability)
-            .order(created_at: :desc)
-        end.compact_blank
+        .map { public_send(_1.name).preload(_1.includes) }
+        .map { _1.accessible_by(current_ability).order(created_at: :desc) }
+        .compact_blank
+    end
+
+    def dependent_associations(current_ability)
+      self
+        .class
+        .entity
+        .association_elements
+        .grep_v(Associations::HasAndBelongsToMany)
+        .select(&:required?)
+        .map { public_send(_1.name).preload(_1.includes) }
+        .map { _1.accessible_by(current_ability).order(created_at: :desc) }
+        .compact_blank
     end
   end
 end
