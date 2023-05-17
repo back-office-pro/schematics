@@ -49,6 +49,7 @@ describe Schematics::Associations::HasOne do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_one :entity,
+              -> { with_deleted },
               class_name: 'Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,

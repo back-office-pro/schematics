@@ -48,6 +48,7 @@ describe Schematics::Associations::HasManyThrough do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_many :attributes,
+              -> { with_deleted },
               class_name: 'Attribute',
               foreign_key: 'entity_id',
               through: :entities,

@@ -59,6 +59,7 @@ describe Schematics::Associations::HasOneThrough do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_one :user,
+              -> { with_deleted },
               class_name: 'User',
               foreign_key: 'user_id',
               through: :entity,

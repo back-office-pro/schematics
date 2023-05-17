@@ -33,6 +33,7 @@ describe Schematics::Associations::HasMany do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_many :entities,
+              -> { with_deleted },
               class_name: 'Entity',
               foreign_key: 'schema_id',
               inverse_of: :schema,
@@ -50,6 +51,7 @@ describe Schematics::Associations::HasMany do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         has_many :entities,
+                -> { with_deleted },
                 class_name: 'Entity',
                 foreign_key: 'schema_id',
                 inverse_of: :schema,

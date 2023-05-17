@@ -54,6 +54,7 @@ module Schematics
 
       def to_str = <<~RUBY.chomp
         #{type} :#{name},
+                -> { with_deleted },
                 class_name: '#{class_name}',
                 foreign_key: '#{column_name}'
       RUBY
