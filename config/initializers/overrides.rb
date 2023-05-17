@@ -43,6 +43,20 @@ Rails.configuration.to_prepare do
   end
 end
 
+Rails.configuration.to_prepare do
+  require 'mobility/backends/action_text'
+  require 'mobility/backends/active_record/key_value'
+  require 'mobility/override/backends/active_record/key_value'
+
+  Mobility::Backends::ActionText::RichTextTranslation.include(Schematics::SoftDeletable)
+  Mobility::Backends::ActionText::PlainTextTranslation.include(Schematics::SoftDeletable)
+  Mobility::Backends::ActiveRecord::KeyValue::StringTranslation.include(Schematics::SoftDeletable)
+  Mobility::Backends::ActiveRecord::KeyValue::TextTranslation.include(Schematics::SoftDeletable)
+  Mobility::Backends::ActiveRecord::KeyValue
+    .singleton_class
+    .prepend(Mobility::Override::Backends::ActiveRecord::KeyValue)
+end
+
 ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     self.implicit_order_column = 'created_at'
