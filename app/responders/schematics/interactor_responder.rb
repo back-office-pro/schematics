@@ -4,14 +4,15 @@ module Schematics
   # :reek:ManualDispatch :reek:ModuleInitialize
   module InteractorResponder
     delegate :t, to: :controller, private: true
+    delegate :message, to: :resource, private: true
 
     def initialize(controller, resources, options = {})
       super
       return unless interactor?
 
       @flash_interpolation_options = options.delete(:flash_interpolation_options)
-      @notice = t(resource.message, **mount_i18n_options(:notice))
-      @alert = t(resource.message, **mount_i18n_options(:alert))
+      @notice = t(message, **mount_i18n_options(:notice))
+      @alert = t(message, **mount_i18n_options(:alert))
       @redirect_on_failure = options.delete(:redirect_on_failure) { false }
     end
 
@@ -47,7 +48,10 @@ module Schematics
     end
 
     def controller_interpolation_options
-      @flash_interpolation_options
+      return super unless @flash_interpolation_options
+      return unless super
+
+      super.merge(@flash_interpolation_options)
     end
 
     protected

@@ -126,14 +126,6 @@ module Schematics
       gender:
     )
 
-    def tscope(message, **kwargs)
-      translate(
-        message[1..],
-        scope: [:schematics, :resources, action_name],
-        **kwargs.merge(human_name:, gender:)
-      )
-    end
-
     protected
 
     def resource_path = polymorphic_path(@resource)
@@ -172,5 +164,7 @@ module Schematics
         active: entity.viewer == :calendar
       )
     end
+
+    def flash_interpolation_options = { human_name:, gender: }
   end
 end
