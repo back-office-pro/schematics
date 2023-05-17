@@ -16,13 +16,7 @@ module Schematics
         resource: current_user,
         password: resource_params[:password_challenge]
       )
-      switch_locale do
-        switch_beginning_of_week do
-          switch_time_zone do
-            respond_with result, location: edit_profile_path
-          end
-        end
-      end
+      respond_with result, location: edit_profile_path
     end
 
     private
