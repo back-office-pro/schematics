@@ -48,10 +48,7 @@ module Schematics
     end
 
     def controller_interpolation_options
-      return super unless @flash_interpolation_options
-      return unless super
-
-      super.merge(@flash_interpolation_options)
+      (super || {}).merge(@flash_interpolation_options || {})
     end
 
     protected
