@@ -16,30 +16,7 @@ module Schematics
         resource: current_user,
         password: resource_params[:password_challenge]
       )
-      if result.success?
-        respond_to do |format|
-          format.html do
-            switch_locale do
-              switch_beginning_of_week do
-                switch_time_zone do
-                  redirect_to edit_profile_path, notice: t(result.message)
-                end
-              end
-            end
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = t(result.message)
-            render :edit, status: :unprocessable_entity
-          end
-          format.json do
-            render json: { errors: [t(result.message)] }, status: :unprocessable_entity
-          end
-        end
-      end
+      respond_with result, location: edit_profile_path
     end
 
     private

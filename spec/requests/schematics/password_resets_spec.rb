@@ -14,8 +14,8 @@ RSpec.describe 'Password Resets' do
 
       before { do_request }
 
-      it { is_expected.to have_http_status(:no_content) }
-      its(:body) { is_expected.to be_blank }
+      it { is_expected.to have_http_status(:created) }
+      its(:body) { is_expected.to eq('null') }
     end
 
     context 'when email does not exist' do

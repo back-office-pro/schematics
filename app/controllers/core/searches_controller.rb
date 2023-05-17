@@ -5,10 +5,7 @@ class SearchesController < Schematics::ResourcesController
   after_action -> { flash.clear }
 
   def show
-    respond_to do |format|
-      format.json { render json: @typeahead, metadata: true }
-      format.html
-    end
+    respond_with @typeahead, metadata: true
   end
 
   protected

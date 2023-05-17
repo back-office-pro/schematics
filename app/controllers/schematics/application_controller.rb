@@ -6,6 +6,7 @@ module Schematics
     include Localizable
     include Authenticable
     include Entitleable
+    include Respondable
     include Rescuable
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }

@@ -18,6 +18,11 @@ module Schematics
     before_action :log_search!, only: :index
     after_action :assign_etag, only: %i[show update]
 
+    responders :flash, ResourceResponder
+    respond_to :html, except: :autocomplete
+    respond_to :json, except: %i[new edit delete]
+    respond_to :svg, :ics, only: :show
+
     prepend_view_path Engine.root.join('app', 'views', 'core')
 
     authorize_resource instance_name: :resource, except: %i[autocomplete trigger]
@@ -35,29 +40,18 @@ module Schematics
 
     def archive
       result = Resources::Archive.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to index_path, notice: tscope(result.message) }
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to index_path, alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
-        end
-      end
+      respond_with result, location: index_path, redirect_on_failure: true
     end
 
     def autocomplete
       authorize! :index, model_class
-      render json: model_class.autocomplete(filter_params, current_ability, params.require(:field))
+      respond_with model_class.autocomplete(filter_params, current_ability, params.require(:field))
     end
 
     def index
       return unless stale?(@resources)
 
-      respond_to do |format|
-        format.html
+      respond_with do |format|
         format.json { render json: @resources.to_a, metadata: params.key?(:metadata) }
         format.csv do
           GenerateCsvJob.perform_later(
@@ -75,11 +69,7 @@ module Schematics
     def show
       return unless stale?(@resource)
 
-      respond_to do |format|
-        format.json { render json: @resource }
-        format.svg { render svg: @resource }
-        format.ics { render ics: @resource }
-        format.html
+      respond_with(@resource) do |format|
         format.pdf do
           GeneratePdfJob.perform_later(current_user, @resource)
           head :accepted
@@ -90,22 +80,7 @@ module Schematics
     def duplicate
       @resource = @resource.dup
       result = Resources::Duplicate.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to resource_path, notice: tscope(result.message)
-          end
-          format.json { render json: @resource, status: :created, location: @resource }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :new, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
-      end
+      respond_with result, location: resource_path
     end
 
     def new
@@ -118,95 +93,32 @@ module Schematics
     def create
       @resource = model_class.new(resource_params)
       result = Resources::Create.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to resource_path, notice: tscope(result.message) }
-          format.json { render json: @resource, status: :created, location: @resource }
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :new, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
-      end
+      respond_with result, location: resource_path
     end
 
     def restore
       result = Resources::Restore.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to index_path, notice: tscope(result.message) }
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to index_path, alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
-        end
-      end
+      respond_with result, location: index_path, redirect_on_failure: true
     end
 
     def update
       result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to resource_path, notice: tscope(result.message)
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :edit, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
-      end
+      respond_with result, location: resource_path
     end
 
     def trigger
       event = entity.find_event_by_name(params.require(:event))
       authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            notice = tscope(result.message, event: event.human.downcase)
-            redirect_back_or_to resource_path, notice:
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = tscope(result.message)
-            render :show, status: :unprocessable_entity
-          end
-          format.json { render json: @resource.errors, status: :unprocessable_entity }
-        end
-      end
+      respond_with result,
+                   location: -> { request.referer || resource_path },
+                   action: :show,
+                   flash_interpolation_options: { event: event.human.downcase }
     end
 
     def destroy
       result = Resources::Destroy.call(resource: @resource)
-      if result.success?
-        respond_to do |format|
-          format.html do
-            redirect_to index_path, notice: tscope(result.message), status: :see_other
-          end
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to index_path, alert: tscope(result.message) }
-          format.json { render json: tscope(result.message), status: :server_error }
-        end
-      end
+      respond_with result, location: index_path, redirect_on_failure: true
     end
 
     def view_assigns = super.merge(
@@ -254,12 +166,6 @@ module Schematics
       )
     end
 
-    def tscope(message, **kwargs)
-      translate(
-        message[1..],
-        scope: [:schematics, :resources, action_name],
-        **kwargs.merge(human_name:, gender:)
-      )
-    end
+    def flash_interpolation_options = { human_name:, gender: }
   end
 end

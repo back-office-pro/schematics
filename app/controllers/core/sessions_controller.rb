@@ -12,14 +12,12 @@ class SessionsController < Schematics::ResourcesController
       current_session:,
       current_ability:
     )
-    if result.success?
-      session[:current_session_id] = result.current_session_id
-      respond_to do |format|
+    respond_with do |format|
+      if result.success?
+        session[:current_session_id] = result.current_session_id
         format.html { redirect_to session[:return_to] || root_path, notice: t(result.message) }
         format.json { render json: { auth_token: result.jwt } }
-      end
-    else
-      respond_to do |format|
+      else
         format.html do
           flash.now[:alert] = t(result.message)
           render :new, status: :unauthorized

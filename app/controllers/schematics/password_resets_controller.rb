@@ -15,42 +15,12 @@ module Schematics
 
     def create
       result = PasswordResets::Create.call(resource_params)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to main_app.login_path, notice: t(result.message) }
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = t(result.message)
-            render :new, status: :unprocessable_entity
-          end
-          format.json do
-            render json: { errors: [t(result.message)] }, status: :unprocessable_entity
-          end
-        end
-      end
+      respond_with result, location: main_app.login_path
     end
 
     def update
       result = PasswordResets::Update.call(user: @user, user_params: resource_params)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to main_app.login_path, notice: t(result.message) }
-          format.json
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = t(result.message)
-            render :edit, status: :unprocessable_entity
-          end
-          format.json do
-            render json: { errors: [t(result.message)] }, status: :unprocessable_entity
-          end
-        end
-      end
+      respond_with result, location: main_app.login_path
     end
 
     private
