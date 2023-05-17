@@ -112,6 +112,7 @@ module Schematics
       result = Resources::Trigger.call(resource: @resource, event:)
       respond_with result,
                    location: -> { request.referer || resource_path },
+                   action: :show,
                    flash_interpolation_options: { event: event.human.downcase }
     end
 
