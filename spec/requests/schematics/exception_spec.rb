@@ -22,4 +22,13 @@ RSpec.describe 'Exception' do
     it { is_expected.to have_http_status(:internal_server_error) }
     its(:body) { is_expected.to eq('null') }
   end
+
+  describe '503' do
+    let(:do_request) { get(maintenance_mode_path, headers:) }
+
+    before { do_request }
+
+    it { is_expected.to have_http_status(:service_unavailable) }
+    its(:body) { is_expected.to eq('null') }
+  end
 end
