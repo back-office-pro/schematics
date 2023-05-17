@@ -5,8 +5,8 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
+      responders :flash, InteractorResponder
       respond_to :html, :json
-      responders :flash, Schematics::InteractorResponder
     end
   end
 end
