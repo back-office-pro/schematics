@@ -9,7 +9,7 @@ module Schematics
 
       class << self
         public :new, :allocate
-        alias_method :instance, :first_or_create
+        alias_method :instance, :first_or_initialize
       end
     end
 
