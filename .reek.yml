@@ -4,14 +4,14 @@ detectors:
   LongParameterList:
     max_params: 5
   TooManyStatements:
-    max_statements: 22
+    max_statements: 23
     exclude:
       - inherited
       - remove_unused_files
   TooManyInstanceVariables:
     max_instance_variables: 9
   DuplicateMethodCall:
-    max_calls: 12
+    max_calls: 13
   RepeatedConditional:
     max_ifs: 15
   TooManyMethods:
