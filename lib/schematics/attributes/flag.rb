@@ -7,6 +7,8 @@ module Schematics
 
       def open_api_type = [super]
 
+      def permitted_params = { super => [] }
+
       def format(values)
         Array(values)
           .map(&:to_s)
