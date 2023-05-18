@@ -118,96 +118,98 @@ module Schematics
           end
         end
 
-        elements.each do |element|
-          it do
-            case element
-            when Attributes::Url
-              is_expected.to validate_url_of(element.name.to_sym)
-            when Attributes::Decimal
-              is_expected
-                .to validate_numericality_of(element.name.to_sym)
-                  .tap { _1.is_less_than(element.bound) if element.precision }
-                  .tap { _1.is_greater_than(-element.bound) if element.precision }
-            when Attributes::Integer
-              is_expected.to validate_numericality_of(element.name.to_sym).only_integer
-            when Attributes::StateMachine
-              element.events.each do |event|
-                is_expected.to respond_to(event.action)
-              end
-            when Attributes::Enum
-              is_expected
-                .to define_enum_for(element.name.to_sym)
-                .with_values(element.values)
-                .with_prefix
-            when Attributes::RichText
-              is_expected.to have_rich_text(element.name.to_sym) unless element.translated?
-            when Attributes::Digest
-              is_expected.to have_secure_password(element.name.to_sym)
-              is_expected
-                .to have_db_column(element.column_name.to_sym)
-                .of_type(:string)
-                .with_options(element.migration_options)
-              is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?
-              is_expected
-                .to validate_length_of(element.name.to_sym)
-                  .tap { _1.is_at_least(element.options.min) if element.options.min }
-              is_expected
-                .to validate_length_of(element.name.to_sym)
-                .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
-            when Attributes::Token
-              is_expected.to have_secure_token(element.name.to_sym)
-              is_expected
-                .to have_db_column(element.column_name.to_sym)
-                .of_type(:string)
-                .with_options(element.migration_options)
-            when Attributes::Attachments
-              is_expected.to have_many_attached(element.name.to_sym)
-            when Attributes::Attachment
-              is_expected.to have_one_attached(element.name.to_sym)
-            when Attributes::Association
-              is_expected
-                .to belong_to(element.name.to_sym)
+        elements
+          .grep_v(Attributes::Flag)
+          .each do |element|
+            it do
+              case element
+              when Attributes::Url
+                is_expected.to validate_url_of(element.name.to_sym)
+              when Attributes::Decimal
+                is_expected
+                  .to validate_numericality_of(element.name.to_sym)
+                    .tap { _1.is_less_than(element.bound) if element.precision }
+                    .tap { _1.is_greater_than(-element.bound) if element.precision }
+              when Attributes::Integer
+                is_expected.to validate_numericality_of(element.name.to_sym).only_integer
+              when Attributes::StateMachine
+                element.events.each do |event|
+                  is_expected.to respond_to(event.action)
+                end
+              when Attributes::Enum
+                is_expected
+                  .to define_enum_for(element.name.to_sym)
+                  .with_values(element.values)
+                  .with_prefix
+              when Attributes::RichText
+                is_expected.to have_rich_text(element.name.to_sym) unless element.translated?
+              when Attributes::Digest
+                is_expected.to have_secure_password(element.name.to_sym)
+                is_expected
+                  .to have_db_column(element.column_name.to_sym)
+                  .of_type(:string)
+                  .with_options(element.migration_options)
+                is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?
+                is_expected
+                  .to validate_length_of(element.name.to_sym)
+                    .tap { _1.is_at_least(element.options.min) if element.options.min }
+                is_expected
+                  .to validate_length_of(element.name.to_sym)
+                  .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
+              when Attributes::Token
+                is_expected.to have_secure_token(element.name.to_sym)
+                is_expected
+                  .to have_db_column(element.column_name.to_sym)
+                  .of_type(:string)
+                  .with_options(element.migration_options)
+              when Attributes::Attachments
+                is_expected.to have_many_attached(element.name.to_sym)
+              when Attributes::Attachment
+                is_expected.to have_one_attached(element.name.to_sym)
+              when Attributes::Association
+                is_expected
+                  .to belong_to(element.name.to_sym)
+                    .with_foreign_key(element.column_name)
+                    .inverse_of(element.inverse_association_name.pluralize.to_sym)
+                    .tap { _1.class_name(element.class_name) unless element.polymorphic? }
+                    .tap { _1.optional unless element.required? }
+                is_expected
+                  .to have_db_column(element.column_name.to_sym)
+                  .of_type(:uuid)
+              when Virtuals::Virtual
+                is_expected.to respond_to(element.name.to_sym)
+              when Associations::HasAndBelongsToMany
+                is_expected.to have_and_belong_to_many(element.name.to_sym)
+              when Associations::HasManyThrough
+                is_expected
+                  .to have_many(element.name.to_sym)
+                  .class_name(element.class_name)
                   .with_foreign_key(element.column_name)
-                  .inverse_of(element.inverse_association_name.pluralize.to_sym)
-                  .tap { _1.class_name(element.class_name) unless element.polymorphic? }
-                  .tap { _1.optional unless element.required? }
-              is_expected
-                .to have_db_column(element.column_name.to_sym)
-                .of_type(:uuid)
-            when Virtuals::Virtual
-              is_expected.to respond_to(element.name.to_sym)
-            when Associations::HasAndBelongsToMany
-              is_expected.to have_and_belong_to_many(element.name.to_sym)
-            when Associations::HasManyThrough
-              is_expected
-                .to have_many(element.name.to_sym)
-                .class_name(element.class_name)
-                .with_foreign_key(element.column_name)
-                .through(element.through.name.to_sym)
-                .source(element.source.to_sym)
-            when Associations::HasMany
-              is_expected
-                .to have_many(element.name.to_sym)
-                .class_name(element.class_name)
-                .with_foreign_key(element.column_name)
-                .inverse_of(element.inverse_of.to_sym)
-                .dependent(element.required? ? :destroy : :nullify)
-            when Associations::HasOne
-              is_expected
-                .to have_one(element.name.to_sym)
-                .class_name(element.class_name)
-                .with_foreign_key(element.column_name)
-                .inverse_of(element.inverse_of.to_sym)
-            when Associations::HasOneThrough
-              is_expected
-                .to have_one(element.name.to_sym)
-                .class_name(element.class_name)
-                .with_foreign_key(element.column_name)
-                .through(element.through.name.to_sym)
-                .source(element.source.to_sym)
+                  .through(element.through.name.to_sym)
+                  .source(element.source.to_sym)
+              when Associations::HasMany
+                is_expected
+                  .to have_many(element.name.to_sym)
+                  .class_name(element.class_name)
+                  .with_foreign_key(element.column_name)
+                  .inverse_of(element.inverse_of.to_sym)
+                  .dependent(element.required? ? :destroy : :nullify)
+              when Associations::HasOne
+                is_expected
+                  .to have_one(element.name.to_sym)
+                  .class_name(element.class_name)
+                  .with_foreign_key(element.column_name)
+                  .inverse_of(element.inverse_of.to_sym)
+              when Associations::HasOneThrough
+                is_expected
+                  .to have_one(element.name.to_sym)
+                  .class_name(element.class_name)
+                  .with_foreign_key(element.column_name)
+                  .through(element.through.name.to_sym)
+                  .source(element.source.to_sym)
+              end
             end
           end
-        end
       end
 
       class_methods do
