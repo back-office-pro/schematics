@@ -5,12 +5,14 @@ fr:
       licence:
         metadata: Métadonnées
         plan: Plan
-        plans:
+        state: Statut
+    enums:
+      licence:
+        plan:
           basic: Licence basique
           premium: Licence premium
           pro: Licence pro
-        state: Statut
-        states:
+        state:
           active: Active
           canceled: Annulée
           inactive: Inactive

@@ -9,7 +9,9 @@ en:
         model: Data
         progress: Progress
         status: Status
-        statuses:
+    enums:
+      import:
+        status:
           error: Error
           finished: Finished
           in_progress: In progress

@@ -4,18 +4,20 @@ en:
     attributes:
       stat:
         agregate: Agregate
-        agregates:
-          average: Average
-          count: Count
-          maximum: Maximum
-          minimum: Minimum
-          sum: Sum
         field: Field
         model: Data
         roles:
           one: Role
           other: Roles
           zero: No role
+    enums:
+      stat:
+        agregate:
+          average: Average
+          count: Count
+          maximum: Maximum
+          minimum: Minimum
+          sum: Sum
     models:
       stat:
         gender: female

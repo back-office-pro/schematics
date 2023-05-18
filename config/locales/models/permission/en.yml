@@ -4,7 +4,11 @@ en:
     attributes:
       permission:
         action: Action
-        actions:
+        model: Data
+        name: Name
+    enums:
+      permission:
+        action:
           archive: Archive
           create: Add
           destroy: Delete
@@ -15,8 +19,6 @@ en:
           restore: Restore
           show: View
           update: Edit
-        model: Data
-        name: Name
     models:
       permission:
         gender: female

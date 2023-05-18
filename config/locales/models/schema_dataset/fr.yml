@@ -5,7 +5,9 @@ fr:
       schema_dataset:
         data: Données
         state: Etat
-        states:
+    enums:
+      schema_dataset:
+        state:
           error: Erreur
           in_progress: En cours
           migrated: Migrée

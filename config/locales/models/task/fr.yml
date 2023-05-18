@@ -12,16 +12,18 @@ fr:
         deadline: Date limite
         late: En retard
         state: Etat
-        states:
-          aborted: Annulée
-          completed: Complétée
-          in_progress: En cours
-          pending: En attente
         title: Titre
         user_groups:
           one: Groupe d'utilisateur
           other: Groupes d'utilisateurs
           zero: Aucun groupe d'utilisateur
+    enums:
+      task:
+        state:
+          aborted: Annulée
+          completed: Complétée
+          in_progress: En cours
+          pending: En attente
     events:
       task:
         abort: Annuler

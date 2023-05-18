@@ -13,9 +13,6 @@ en:
         full_name: Full name
         last_name: Last name
         locale: Locale
-        locales:
-          en: English
-          fr: French
         messages:
           one: Received message
           other: Received messages
@@ -38,6 +35,11 @@ en:
           one: User group
           other: User groups
           zero: No user group
+    enums:
+      user:
+        locale:
+          en: English
+          fr: French
     models:
       user:
         gender: male

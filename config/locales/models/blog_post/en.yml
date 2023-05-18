@@ -7,10 +7,12 @@ en:
         content: Content
         image: Image
         state: State
-        states:
+        title: Title
+    enums:
+      blog_post:
+        state:
           draft: Draft
           published: Published
-        title: Title
     events:
       blog_post:
         publish: Publish

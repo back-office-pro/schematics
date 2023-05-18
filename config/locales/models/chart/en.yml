@@ -4,21 +4,7 @@ en:
     attributes:
       chart:
         agregate: Agregate
-        agregates:
-          average: Average
-          count: Count
-          maximum: Maximum
-          minimum: Minimum
-          sum: Sum
         kind: Type
-        kinds:
-          area: Area chart
-          bar: Bar chart
-          column: Column chart
-          geo: Geo chart
-          line: Line chart
-          pie: Pie chart
-          scatter: Scatter chart
         model: Data
         roles:
           one: Role
@@ -26,6 +12,22 @@ en:
           zero: No role
         x_field: X field
         y_field: Y field
+    enums:
+      chart:
+        agregate:
+          average: Average
+          count: Count
+          maximum: Maximum
+          minimum: Minimum
+          sum: Sum
+        kind:
+          area: Area chart
+          bar: Bar chart
+          column: Column chart
+          geo: Geo chart
+          line: Line chart
+          pie: Pie chart
+          scatter: Scatter chart
     models:
       chart:
         gender: male

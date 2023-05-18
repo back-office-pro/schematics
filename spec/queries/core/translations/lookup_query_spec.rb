@@ -16,14 +16,14 @@ RSpec.describe Core::Translations::LookupQuery do
   let(:second_translation) do
     Translation.create!(
       locale:,
-      key: 'activerecord.attributes.schema_dataset.states.pending',
+      key: 'activerecord.enums.schema_dataset.state.pending',
       value: 'Pending'
     )
   end
   let(:third_translation) do
     Translation.create!(
       locale:,
-      key: 'activerecord.attributes.schema_dataset.states.in_progress',
+      key: 'activerecord.enums.schema_dataset.state.in_progress',
       value: 'In progress'
     )
   end
@@ -47,24 +47,24 @@ RSpec.describe Core::Translations::LookupQuery do
     end
 
     context 'when key is enum root' do
-      let(:key) { 'activerecord.attributes.schema_dataset.states' }
+      let(:key) { 'activerecord.enums.schema_dataset.state' }
       let(:expected_data) do
         {
-          'activerecord.attributes.schema_dataset.states.in_progress' => 'In progress',
-          'activerecord.attributes.schema_dataset.states.pending' => 'Pending'
+          'activerecord.enums.schema_dataset.state.in_progress' => 'In progress',
+          'activerecord.enums.schema_dataset.state.pending' => 'Pending'
         }
       end
 
       it { is_expected.to eq(expected_data) }
     end
 
-    context 'when key is model root' do
-      let(:key) { 'activerecord.attributes.schema_dataset' }
+    context 'when key is root' do
+      let(:key) { 'activerecord' }
       let(:expected_data) do
         {
           'activerecord.attributes.schema_dataset.state' => 'State',
-          'activerecord.attributes.schema_dataset.states.in_progress' => 'In progress',
-          'activerecord.attributes.schema_dataset.states.pending' => 'Pending'
+          'activerecord.enums.schema_dataset.state.in_progress' => 'In progress',
+          'activerecord.enums.schema_dataset.state.pending' => 'Pending'
         }
       end
 
