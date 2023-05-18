@@ -4,7 +4,7 @@ describe Schematics::Attributes::Flag do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'product') }
-  let(:name) { 'state' }
+  let(:name) { 'states' }
   let(:options) { { values: %w[available available_soon not_available] } }
 
   it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
@@ -20,17 +20,18 @@ describe Schematics::Attributes::Flag do
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
 
   its(:database_type) { is_expected.to eq('integer') }
-  its(:column_name) { is_expected.to eq('state') }
+  its(:column_name) { is_expected.to eq('states') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:icon) { is_expected.to eq(:list_ol) }
   its(:default) { is_expected.to eq(['available']) }
-  its(:search_column) { is_expected.to eq(:state) }
+  its(:search_column) { is_expected.to eq(:states) }
   its(:search_predicate) { is_expected.to eq(:in) }
-  its(:search_query) { is_expected.to eq(:state_in) }
+  its(:search_query) { is_expected.to eq(:states_in) }
   its(:weight) { is_expected.to eq(1) }
-  its(:to_sql) { is_expected.to eq('products.state') }
-  its(:to_s) { is_expected.to eq('schema:product_state') }
-  its(:search_data) { is_expected.to eq('state:') }
+  its(:to_sql) { is_expected.to eq('products.states') }
+  its(:to_s) { is_expected.to eq('schema:product_states') }
+  its(:search_data) { is_expected.to eq('states:') }
+  its(:permitted_params) { is_expected.to eq(states: []) }
 
   its(:available_options) do
     is_expected.to include(
@@ -62,13 +63,13 @@ describe Schematics::Attributes::Flag do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :state, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>true}
+      validates :states, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>true}
     RUBY
   end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      enummer state: [:available, :available_soon, :not_available], _prefix: true
+      enummer states: [:available, :available_soon, :not_available], _prefix: true
     RUBY
   end
 
@@ -99,7 +100,7 @@ describe Schematics::Attributes::Flag do
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :state, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}}
+        validates :states, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}}
       RUBY
     end
   end
