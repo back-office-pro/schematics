@@ -11,6 +11,8 @@ module Schematics
 
           def data = { controller: 'dropdown' }
 
+          def multiple = field.is_a?(Attributes::Flag)
+
           protected
 
           def attribute_name = resource
