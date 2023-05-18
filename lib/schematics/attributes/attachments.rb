@@ -5,10 +5,8 @@ module Schematics
     class Attachments < Attachment
       def default = [super]
 
-      def format(value)
-        value.map do |attachment|
-          Rails.application.routes.url_helpers.url_for(attachment)
-        end
+      def format(values)
+        values.map(&Rails.application.routes.url_helpers.method(:url_for))
       end
 
       def json_default = [super]
