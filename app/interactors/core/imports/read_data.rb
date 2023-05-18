@@ -35,7 +35,7 @@ module Core
       end
 
       def transform_key(key)
-        translations
+        attributes_translations
           &.invert
           &.dig(key)
       end
@@ -50,8 +50,8 @@ module Core
             .left_joins(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
         when Schematics::Attributes::Enum
-          translations
-            &.dig(field.name.pluralize.to_sym)
+          enums_translations
+            &.dig(field.name.to_sym)
             &.invert
             &.dig(value)
         when Schematics::Attributes::Country
@@ -69,8 +69,12 @@ module Core
         end
       end
 
-      def translations
-        @translations ||= ::I18n.t model.underscore.to_sym, scope: [i18n_scope, :attributes]
+      def attributes_translations
+        ::I18n.t(model.underscore.to_sym, scope: [i18n_scope, :attributes])
+      end
+
+      def enums_translations
+        ::I18n.t(model.underscore.to_sym, scope: [i18n_scope, :enums])
       end
     end
   end
