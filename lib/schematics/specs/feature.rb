@@ -9,7 +9,8 @@ module Schematics
 
       included do
         include Rails.application.routes.url_helpers
-        delegate :available_locales, :t, to: ::Configuration
+        delegate :t, to: ::I18n
+        delegate :available_locales, to: ::Configuration
         delegate :entity,
                  :model_class,
                  :human_name,
@@ -127,6 +128,10 @@ module Schematics
           when Attributes::BelongsTo
             select element.inverse_entity.model_class.first.to_s,
                    from: input,
+                   match: :first
+          when Attributes::Flag
+            select element.format(element.default),
+                   from: "#{input}[]",
                    match: :first
           when Behaviours::Enumerable
             select element.format(element.default),
