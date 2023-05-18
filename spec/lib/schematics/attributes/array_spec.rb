@@ -25,7 +25,7 @@ describe Schematics::Attributes::Array do
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
-  its(:default) { is_expected.to be_empty }
+  its(:default) { is_expected.to be_all(String) }
   its(:permitted_params) { is_expected.to eq(ids: []) }
   its(:to_sql) { is_expected.to eq('comparisons.ids') }
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
@@ -42,9 +42,9 @@ describe Schematics::Attributes::Array do
   end
 
   describe '#format' do
-    subject { attribute.format(value) }
+    subject { attribute.format(values) }
 
-    let(:value) { %w[foo bar] }
+    let(:values) { %w[foo bar] }
 
     it { is_expected.to eq('foo, bar') }
   end

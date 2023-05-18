@@ -11,13 +11,13 @@ module Schematics
 
       def database_type = 'string'
 
-      def default = []
+      def default = [SecureRandom.base58]
 
       def icon = :list
 
       def migration_options = super.merge(array: true)
 
-      def open_api_type = [::String]
+      def open_api_type = [super]
 
       def permitted_params = { super => [] }
 
@@ -29,8 +29,8 @@ module Schematics
           #{name}&.join(',')
         RUBY
 
-      def format(value)
-        value&.join(', ')
+      def format(values)
+        values&.join(', ')
       end
     end
   end
