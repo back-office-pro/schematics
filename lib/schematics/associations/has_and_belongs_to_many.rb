@@ -8,7 +8,7 @@ module Schematics
       include Behaviours::Validatable
       include Behaviours::Fillable
 
-      delegate :includes, :descriptor, :class_name, to: :inverse_entity
+      delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
       delegate :options, to: :belongs_to
 
       validates :association_type, inclusion: { in: :allowed_association_types }
