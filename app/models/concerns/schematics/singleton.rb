@@ -9,12 +9,7 @@ module Schematics
 
       class << self
         public :new, :allocate
-
-        def instance
-          PaperTrail.request(enabled: false) do
-            first_or_create!
-          end
-        end
+        alias_method :instance, :first_or_initialize
       end
     end
 

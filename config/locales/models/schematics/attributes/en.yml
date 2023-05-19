@@ -25,6 +25,7 @@ en:
       schematics/attributes/duration: Duration
       schematics/attributes/email: Email
       schematics/attributes/enum: Enum
+      schematics/attributes/flag: Flag
       schematics/attributes/float: Float
       schematics/attributes/integer: Integer
       schematics/attributes/ip: IP address

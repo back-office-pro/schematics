@@ -159,7 +159,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
           enum.values.each do |value|
             Translation.create!(
               locale:,
-              key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}",
+              key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}",
               value: translate(value, locale:)
             )
           end
@@ -185,7 +185,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         enum.values.each do |value|
           Translation.destroy_by(
             locale: available_locales,
-            key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}"
+            key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}"
           )
         end
         next unless enum.is_a?(Schematics::Attributes::StateMachine)
@@ -207,8 +207,8 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
       entity.enum_attributes.each do |enum|
         enum.values.each do |value|
           Translation
-            .where(key: "activerecord.attributes.#{old_name}.#{enum.name.pluralize}.#{value}")
-            .update_all(key: "activerecord.attributes.#{entity.name}.#{enum.name.pluralize}.#{value}") # rubocop:disable Rails/SkipsModelValidations, Layout/LineLength
+            .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{value}")
+            .update_all(key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}") # rubocop:disable Rails/SkipsModelValidations
         end
         next unless enum.is_a?(Schematics::Attributes::StateMachine)
 

@@ -25,6 +25,7 @@ fr:
       schematics/attributes/duration: Durée
       schematics/attributes/email: E-mail
       schematics/attributes/enum: Enumération
+      schematics/attributes/flag: Enumération multiple
       schematics/attributes/float: Nombre à virgule (float)
       schematics/attributes/integer: Nombre entier
       schematics/attributes/ip: Adresse IP

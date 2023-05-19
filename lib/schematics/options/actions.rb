@@ -15,7 +15,7 @@ module Schematics
       def controller = 'dropdown'
 
       def collection = @collection
-        .map { [I18n.t(_1, scope: %i[activerecord attributes permission actions]), _1] }
+        .map { [I18n.t(_1, scope: %i[activerecord enums permission action]), _1] }
         .sort
     end
   end

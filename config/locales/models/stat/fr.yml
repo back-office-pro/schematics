@@ -4,18 +4,20 @@ fr:
     attributes:
       stat:
         agregate: Agrégat
-        agregates:
-          average: Moyenne
-          count: Total
-          maximum: Maximum
-          minimum: Minimum
-          sum: Somme
         field: Attribut
         model: Donnée
         roles:
           one: Rôle
           other: Rôles
           zero: Aucun rôle
+    enums:
+      stat:
+        agregate:
+          average: Moyenne
+          count: Total
+          maximum: Maximum
+          minimum: Minimum
+          sum: Somme
     models:
       stat:
         gender: female

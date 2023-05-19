@@ -7,10 +7,12 @@ fr:
         content: Contenu
         image: Image
         state: Etat
-        states:
+        title: Titre
+    enums:
+      blog_post:
+        state:
           draft: Brouillon
           published: Publié
-        title: Titre
     events:
       blog_post:
         publish: Publier

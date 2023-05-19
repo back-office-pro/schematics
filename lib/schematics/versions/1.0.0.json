@@ -315,6 +315,19 @@
         }
       },
       {
+        "id": "522b11ff-b617-4011-b76a-9c92ddb9996b",
+        "name": "available_locales",
+        "type": "flag",
+        "options": {
+          "cached": true,
+          "required": true,
+          "values": [
+            "en",
+            "fr"
+          ]
+        }
+      },
+      {
         "id": "9db0bb4d-42c3-4481-b178-57abcd72022e",
         "name": "locale",
         "type": "enum",

@@ -7,7 +7,9 @@ en:
         endpoint: Endpoint
         ip: IP address
         request_method: Method
-        request_methods:
+    enums:
+      api_request:
+        request_method:
           DELETE: DELETE
           GET: GET
           PATCH: PATCH

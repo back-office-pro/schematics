@@ -5,10 +5,12 @@ en:
       translation:
         key: Key
         locale: Locale
-        locales:
+        value: Value
+    enums:
+      translation:
+        locale:
           en: English
           fr: French
-        value: Value
     models:
       translation:
         gender: female

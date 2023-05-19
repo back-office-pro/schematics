@@ -4,21 +4,7 @@ fr:
     attributes:
       chart:
         agregate: Agrégat
-        agregates:
-          average: Moyenne
-          count: Total
-          maximum: Maximum
-          minimum: Minimum
-          sum: Somme
         kind: Type
-        kinds:
-          area: Aires empilées
-          bar: Diagramme en bâtons
-          column: Histogramme
-          geo: Géographique
-          line: Courbes
-          pie: Diagramme circulaire
-          scatter: Nuage de points
         model: Donnée
         roles:
           one: Rôle
@@ -26,6 +12,22 @@ fr:
           zero: Aucun rôle
         x_field: Attribut en abscisse
         y_field: Attribut en ordonnée
+    enums:
+      chart:
+        agregate:
+          average: Moyenne
+          count: Total
+          maximum: Maximum
+          minimum: Minimum
+          sum: Somme
+        kind:
+          area: Aires empilées
+          bar: Diagramme en bâtons
+          column: Histogramme
+          geo: Géographique
+          line: Courbes
+          pie: Diagramme circulaire
+          scatter: Nuage de points
     models:
       chart:
         gender: male

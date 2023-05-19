@@ -3,6 +3,7 @@ en:
   activerecord:
     attributes:
       configuration:
+        available_locales: Available locales
         blog_feature_flag: Enable blog
         comments_feature_flag: Enable comments
         company_address: Company address
@@ -12,14 +13,18 @@ en:
         company_website: Company website
         hosts: Authorized API domains
         locale: Locale
-        locales:
-          en: English
-          fr: French
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
         tasks_feature_flag: Enable tasks
         theme_color: Theme color
         time_zone: Time zone
+    enums:
+      available_locales:
+        en: English
+        fr: French
+      locale:
+        en: English
+        fr: French
     models:
       configuration:
         gender: female

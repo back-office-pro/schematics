@@ -27,6 +27,8 @@
         = render Schematics::ResourceForm::Fields::Color::Component.new(form:, field:)
       - when Schematics::Attributes::ModelField
         = render Schematics::ResourceForm::Fields::ModelField::Component.new(form:, field:)
+      - when Schematics::Attributes::Flag
+        = render Schematics::ResourceForm::Fields::Flag::Component.new(form:, field:)
       - when Schematics::Behaviours::Enumerable
         = render Schematics::ResourceForm::Fields::Enumerable::Component.new(form:, field:)
       - when Schematics::Attributes::String

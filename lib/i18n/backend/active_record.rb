@@ -13,7 +13,7 @@ module I18n
         case key.split('.')
         in ['activerecord', 'models', *]
           fetch(locale, key + count_to_key(options[:count]))
-        in ['activerecord', 'attributes', *] | ['activerecord', 'events', *]
+        in ['activerecord', 'attributes', *] | ['activerecord', 'enums', *] | ['activerecord', 'events', *] # rubocop:disable Layout/LineLength
           fetch(locale, key)
         else
           nil

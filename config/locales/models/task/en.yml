@@ -12,16 +12,18 @@ en:
         deadline: Deadline
         late: Late
         state: State
-        states:
-          aborted: Aborted
-          completed: Completed
-          in_progress: In progress
-          pending: Pending
         title: Title
         user_groups:
           one: User group
           other: User groups
           zero: No user group
+    enums:
+      task:
+        state:
+          aborted: Aborted
+          completed: Completed
+          in_progress: In progress
+          pending: Pending
     events:
       task:
         abort: Abort
