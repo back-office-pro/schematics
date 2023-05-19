@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::LoadLicenceJob do
-  let(:licence) { Licence.instance }
+  let(:licence) { Licence.instance.tap(&:save!) }
 
   describe '#perform_later' do
     it 'queues the job' do
