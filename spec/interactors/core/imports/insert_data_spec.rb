@@ -12,12 +12,28 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
-            'email' => 'john.doe@back-office.pro',
-            'role_id' => role.id
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: 'en',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'john-doe',
+            time_zone: 'UTC'
           },
           {
-            'email' => 'jane.doe@back-office.pro',
-            'role_id' => role.id
+            email: 'jane.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'Jane',
+            locale: 'fr',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'jane-doe',
+            time_zone: 'Paris'
           }
         ]
       end
@@ -37,12 +53,28 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
-            'email' => 'john.doe@back-office.pro',
-            'role_id' => role.id
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: 'en',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'john-doe',
+            time_zone: 'UTC'
           },
           {
-            'email' => 'john.doe@back-office.pro',
-            'role_id' => role.id
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: 'en',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'john-doe',
+            time_zone: 'UTC'
           }
         ]
       end

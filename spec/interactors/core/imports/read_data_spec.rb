@@ -10,8 +10,26 @@ RSpec.describe Core::Imports::ReadData do
 
     let(:expected_data) do
       {
-        1 => { email: 'john.doe@back-office.pro', role: },
-        2 => { email: 'jane.doe@back-office.pro', role: }
+        1 => {
+          email: 'john.doe@back-office.pro',
+          first_name: 'Doe',
+          last_name: 'John',
+          locale: :en,
+          password: 'Azerty1!',
+          time_zone: 'UTC',
+          user_groups:,
+          role:
+        },
+        2 => {
+          email: 'jane.doe@back-office.pro',
+          first_name: 'Doe',
+          last_name: 'Jane',
+          locale: :fr,
+          password: 'Azerty1!',
+          time_zone: 'Paris',
+          user_groups:,
+          role:
+        }
       }
     end
 

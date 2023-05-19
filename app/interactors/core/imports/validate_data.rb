@@ -17,6 +17,7 @@ module Core
           resource.validate!
           resource
             .attributes
+            .symbolize_keys
             .compact
         rescue StandardError => e
           @errors[::I18n.t('.line', line:)] = e

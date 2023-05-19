@@ -1,3 +1,3 @@
-Email,Role
-john.doe@back-office.pro,Manager
-jane.doe@back-office.pro,Manager
+Email,Password,First name,Last name,Avatar,Locale,Time zone,Role,User groups
+john.doe@back-office.pro,Azerty1!,Doe,John,,English,UTC,Manager,MyGroup
+jane.doe@back-office.pro,Azerty1!,Doe,Jane,,French,Paris,Manager,MyGroup

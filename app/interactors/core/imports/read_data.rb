@@ -6,16 +6,18 @@ module Core
   module Imports
     class ReadData
       include Interactor
+      VALUES_SEPARATOR = ';'
 
       delegate :import, to: :context, private: true
       delegate :model_class, :file, :model, to: :import, private: true
       delegate :entity, :i18n_scope, to: :model_class, private: true
+      delegate :fillable_elements, to: :entity, private: true
 
       before { context.data = Concurrent::Hash.new }
 
       def call
         CSV.foreach(filepath, headers: true).with_index(1) do |row, line|
-          context.data[line] = convert_row(row.to_h)
+          context.data[line] = convert_row(row.to_h.compact)
         end
       end
 
@@ -28,7 +30,7 @@ module Core
       def convert_row(row)
         row.to_h do |key, value|
           [
-            transform_key(key) || key.parameterize(separator: '_'),
+            transform_key(key) || key.parameterize(separator: '_').to_sym,
             transform_value(transform_key(key), value) || value
           ]
         end
@@ -43,7 +45,16 @@ module Core
       def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         return unless value
 
-        case field = entity.find_field_by_name(key.to_s)
+        case field = fillable_elements.find { _1.name == key.to_s }
+        when Schematics::Associations::HasAndBelongsToMany
+          value
+            .split(VALUES_SEPARATOR)
+            .map do |descriptor|
+              field
+                .model_class
+                .left_joins(field.descriptor.joins)
+                .find_by("#{field.descriptor.to_sql} = ?", descriptor)
+            end
         when Schematics::Attributes::Association
           field
             .model_class
@@ -58,19 +69,19 @@ module Core
           ISO3166::Country
             .find_country_by_any_name(value)
             &.alpha2
-        when Schematics::Attributes::TimeZone
-          value
-            .split
-            .second
         when Schematics::Attributes::Mime
           Mime::Type
             .lookup_by_extension(value.downcase)
             &.__send__(:string)
+        when Schematics::Attributes::Array, Schematics::Attributes::Flag
+          value.split(VALUES_SEPARATOR)
         end
       end
 
       def attributes_translations
-        ::I18n.t(model.underscore.to_sym, scope: [i18n_scope, :attributes])
+        ::I18n
+          .t(model.underscore.to_sym, scope: [i18n_scope, :attributes])
+          .transform_values { _1.try(:fetch, :other) || _1 }
       end
 
       def enums_translations

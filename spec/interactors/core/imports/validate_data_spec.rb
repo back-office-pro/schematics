@@ -11,27 +11,53 @@ RSpec.describe Core::Imports::ValidateData do
     context 'when data are valid' do
       let(:data) do
         {
-          1 => { 'email' => 'john.doe@back-office.pro', 'role' => role },
-          2 => { 'email' => 'jane.doe@back-office.pro', 'role' => role }
+          1 => {
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: :en,
+            password: 'Azerty1!',
+            time_zone: 'UTC',
+            user_groups:,
+            role:
+          },
+          2 => {
+            email: 'jane.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'Jane',
+            locale: :fr,
+            password: 'Azerty1!',
+            time_zone: 'Paris',
+            user_groups:,
+            role:
+          }
         }
       end
       let(:expected_data) do
         [
           {
-            'email' => 'john.doe@back-office.pro',
-            'locale' => 'en',
-            'preferences' => {},
-            'time_zone' => 'UTC',
-            'role_id' => role.id,
-            'lock_version' => 0
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: 'en',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'john-doe',
+            time_zone: 'UTC'
           },
           {
-            'email' => 'jane.doe@back-office.pro',
-            'locale' => 'en',
-            'preferences' => {},
-            'time_zone' => 'UTC',
-            'role_id' => role.id,
-            'lock_version' => 0
+            email: 'jane.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'Jane',
+            locale: 'fr',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'jane-doe',
+            time_zone: 'Paris'
           }
         ]
       end
@@ -44,19 +70,41 @@ RSpec.describe Core::Imports::ValidateData do
     context 'when data are not valid' do
       let(:data) do
         {
-          1 => { 'email' => 'john.doe@back-office.pro', 'role' => role },
-          2 => { 'email' => '', 'role' => role }
+          1 => {
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: :en,
+            password: 'Azerty1!',
+            time_zone: 'UTC',
+            user_groups:,
+            role:
+          },
+          2 => {
+            email: '',
+            first_name: 'Doe',
+            last_name: 'Jane',
+            locale: :fr,
+            password: 'Azerty1!',
+            time_zone: 'Paris',
+            user_groups:,
+            role:
+          }
         }
       end
       let(:expected_data) do
         [
           {
-            'email' => 'john.doe@back-office.pro',
-            'locale' => 'en',
-            'preferences' => {},
-            'time_zone' => 'UTC',
-            'role_id' => role.id,
-            'lock_version' => 0
+            email: 'john.doe@back-office.pro',
+            first_name: 'Doe',
+            last_name: 'John',
+            locale: 'en',
+            lock_version: 0,
+            password_digest: String,
+            preferences: {},
+            role_id: role.id,
+            slug: 'john-doe',
+            time_zone: 'UTC'
           },
           ActiveRecord::RecordInvalid
         ]
