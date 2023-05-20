@@ -67,7 +67,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'friendly_id', '~> 5.4.2'
   spec.add_dependency 'friendly_id-mobility', '~> 1.0.4'
   spec.add_dependency 'git', '~> 1.18.0'
-  spec.add_dependency 'good_job', '~> 3.15.7'
+  spec.add_dependency 'good_job', '~> 3.15.8'
   spec.add_dependency 'groupdate', '~> 6.2.1'
   spec.add_dependency 'hiredis', '~> 0.6.3'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
