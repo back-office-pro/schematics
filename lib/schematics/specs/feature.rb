@@ -45,6 +45,7 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
+          Configuration.instance.update!(available_locales: I18n.available_locales.map(&:to_s))
           [record, role, login]
         end
 
