@@ -151,7 +151,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def create_github_repo
     return if env.development?
 
-    rails_command 'schematics:repo:create', env:
+    rails_command 'generate repository', env:
   end
 
   def add_remote_to_repo
@@ -169,17 +169,15 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def deploy_systemd_service
     return if container?
     return if env.development?
-    return unless Dir.exist?('/etc/systemd')
 
-    rails_command 'schematics:systemd:deploy', env:
+    rails_command 'generate systemd', env:
   end
 
   def deploy_nginx_subdomain
     return if container?
     return if env.development?
-    return unless Dir.exist?('/etc/nginx')
 
-    rails_command 'schematics:nginx:deploy', env:
+    rails_command 'generate nginx', env:
   end
 
   private

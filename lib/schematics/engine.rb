@@ -72,12 +72,6 @@ module Schematics
     isolate_namespace Schematics
 
     class << self
-      def content_for(name)
-        ERB
-          .new(root.join("lib/templates/#{name}.tt").read)
-          .result
-      end
-
       def config_for(name)
         ActiveSupport::ConfigurationFile
           .parse(root.join('config', "#{name}.yml"))
