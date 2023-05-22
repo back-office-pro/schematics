@@ -9,6 +9,7 @@ module Core
       delegate :schema_dataset, to: :context, private: true
       delegate :id, to: :schema_dataset, private: true
 
+      # :reek:UncommunicativeVariableName
       def call
         add(all: true)
         commit("Migration #{id}", allow_empty: true)
