@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+require 'rails/generators'
+require 'rails/generators/rails/migration/migration_generator'
+require 'generators/translation/translation_generator'
+
+module Schematics
+  module Commands
+    class RemoveAssociation < Command
+      def generators = [migration_generator, translation_generator].compact
+
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "drop_join_table_#{table_name.pluralize}_#{attribute.pluralize}",
+          table_name.pluralize,
+          attribute.pluralize
+        ]
+      )
+
+      def translation_generator
+        return if core?
+
+        TranslationGenerator.new(["attributes.#{name}.#{attribute.pluralize}"])
+      end
+
+      def weight = 3
+    end
+  end
+end

@@ -26,7 +26,7 @@ RSpec.describe TranslationsGenerator do
       it 'creates translations' do
         expect { invoke_all }
           .to change(Translation, :count)
-          .by(32)
+          .by(36)
       end
     end
 

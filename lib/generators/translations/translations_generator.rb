@@ -114,11 +114,11 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        entity.fields.each do |field|
+        entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
           Translation.create!(
             locale:,
-            key: "activerecord.attributes.#{entity.name}.#{field.name}",
-            value: translate(field.name, locale:)
+            key: "activerecord.attributes.#{entity.name}.#{element.name}",
+            value: translate(element.name, locale:)
           )
         end
       end
@@ -129,10 +129,10 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      entity.fields.each do |field|
+      entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
         Translation.destroy_by(
           locale: available_locales,
-          key: "activerecord.attributes.#{entity.name}.#{field.name}"
+          key: "activerecord.attributes.#{entity.name}.#{element.name}"
         )
       end
     end
@@ -142,10 +142,10 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      entity.fields.each do |field|
+      entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
         Translation
-          .where(key: "activerecord.attributes.#{old_name}.#{field.name}")
-          .update_all(key: "activerecord.attributes.#{entity.name}.#{field.name}") # rubocop:disable Rails/SkipsModelValidations
+          .where(key: "activerecord.attributes.#{old_name}.#{element.name}")
+          .update_all(key: "activerecord.attributes.#{entity.name}.#{element.name}") # rubocop:disable Rails/SkipsModelValidations
       end
     end
   end

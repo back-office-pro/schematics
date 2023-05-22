@@ -55,7 +55,8 @@ module Schematics
             add_permission_commands(new_entity, current_entity),
             rename_permission_commands(new_entity, current_entity),
             add_translation_commands(new_entity, current_entity),
-            rename_translation_commands(new_entity, current_entity)
+            rename_translation_commands(new_entity, current_entity),
+            add_association_commands(new_entity, current_entity)
           )
           new_entity.attributes.each do |new_attribute|
             current_attribute = current_entity.attributes.find { _1.id == new_attribute.id }
@@ -88,7 +89,8 @@ module Schematics
             rename_entity_command(current_entity, new_entity, :clean),
             remove_permission_commands(current_entity, new_entity),
             remove_attribute_commands(current_entity, new_entity),
-            remove_translation_commands(current_entity, new_entity)
+            remove_translation_commands(current_entity, new_entity),
+            remove_association_commands(current_entity, new_entity)
           )
         else
           @clean_commands << Commands::DestroyEntity.new(entity: current_entity)
@@ -245,6 +247,24 @@ module Schematics
             )
           end
       end
+    end
+
+    def add_association_commands(entity, current_entity)
+      entity
+        .has_and_belongs_to_many_associations
+        .reject(&:hidden?)
+        .map(&:association_type)
+        .difference(current_entity.has_and_belongs_to_many_associations.reject(&:hidden?).map(&:association_type)) # rubocop:disable Layout/LineLength
+        .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
+    end
+
+    def remove_association_commands(entity, new_entity)
+      entity
+        .has_and_belongs_to_many_associations
+        .reject(&:hidden?)
+        .map(&:association_type)
+        .difference(new_entity.has_and_belongs_to_many_associations.reject(&:hidden?).map(&:association_type)) # rubocop:disable Layout/LineLength
+        .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
     end
   end
 end
