@@ -13,6 +13,8 @@ module Core
         add(all: true)
         commit("Migration #{id}", allow_empty: true)
         push('origin', 'main') if Rails.env.production?
+      rescue Git::FailedError => e
+        Rollbar.error(e, 'Git push error')
       end
 
       private
