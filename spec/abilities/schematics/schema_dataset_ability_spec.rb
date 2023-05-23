@@ -15,6 +15,7 @@ RSpec.describe Schematics::SchemaDatasetAbility do
     let(:state) { :in_progress }
 
     it { is_expected.not_to be_able_to(:update, schema_dataset) }
+    it { is_expected.not_to be_able_to(:archive, schema_dataset) }
   end
 
   context 'when the migration is done' do
