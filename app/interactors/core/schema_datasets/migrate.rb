@@ -11,8 +11,7 @@ module Core
                CleanIndices,
                Reload,
                Reindex,
-               Commit,
-               UpdateState
+               Commit
     end
   end
 end
