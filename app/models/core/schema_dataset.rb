@@ -12,6 +12,7 @@ class SchemaDataset < Schematics::ApplicationRecord
            :old_and_changed_entities,
            to: :migration,
            prefix: true
+  # :reek:Attribute
   attr_writer :version
 
   class << self
