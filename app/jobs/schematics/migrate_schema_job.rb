@@ -7,13 +7,15 @@ module Schematics
         return if ::Tenant.backend.concurrency.zero?
 
         Thread.new(record) do |schema_dataset|
+          schema_dataset_with_old_migration = schema_dataset.dup.tap(&:migration)
           loop do
             sleep 1
-            break if schema_dataset.reload.migrated?
+            break unless schema_dataset.reload.in_progress?
           end
-          schema_dataset.migration # force migration to be set before changing schema
-          ::Tenant.schema = schema_dataset.data
-          Core::SchemaDatasets::Reload.call(schema_dataset:)
+          if schema_dataset.migrated?
+            ::Tenant.schema = schema_dataset.data
+            Core::SchemaDatasets::Reload.call(schema_dataset: schema_dataset_with_old_migration)
+          end
           Thread.current.kill
         end
       end
@@ -22,6 +24,9 @@ module Schematics
     # :reek:UncommunicativeVariableName
     def perform(schema_dataset)
       Core::SchemaDatasets::Migrate.call(schema_dataset:)
+      PaperTrail.request(enabled: false) do
+        schema_dataset.state_migrated!
+      end
     rescue StandardError => e
       PaperTrail.request(enabled: false) do
         schema_dataset.state_error!
