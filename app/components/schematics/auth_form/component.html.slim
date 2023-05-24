@@ -1,5 +1,5 @@
 = bootstrap_form_with model:, scope:, url:, data: do |form|
-  = form.email_field :email, prepend: fa_icon(:envelope), required: true
+  = form.email_field :email, prepend: fa_icon(:envelope)
   = render Schematics::ResourceForm::Fields::Digest::Component.new(form:, value:)
   = form.check_box :remember_me, switch: true
   = render Schematics::Button::Confirm::Component.new
