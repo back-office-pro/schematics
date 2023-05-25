@@ -4,6 +4,7 @@ en:
     attributes:
       schema_dataset:
         data: Data
+        data_version: Version
         state: State
     enums:
       schema_dataset:
