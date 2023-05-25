@@ -5,6 +5,7 @@ en:
       schematics/options/wrapper:
         actions: Actions
         aspect_ratio: Aspect ratio
+        auto_increment: Auto increment
         cached: Cached
         confirm: Confirm
         content_type: Content type
@@ -37,6 +38,7 @@ en:
         readonly: Readonly
         required: Required
         scale: Scale
+        separator: Separator
         size: Size
         start_date: Start date
         translated: Translated
