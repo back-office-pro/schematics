@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Percentage < Float
       def format(value)
-        value && number_to_percentage(value, **{ precision: }.compact)
+        value && number_to_percentage(value, **{ precision:, separator: }.compact)
       end
 
       def icon = :percent

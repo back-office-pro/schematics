@@ -5,7 +5,7 @@ require 'active_model/validations/comparability'
 module Schematics
   module Behaviours
     module Numerable
-      delegate :unit, :precision, to: :options
+      delegate :unit, :precision, :separator, to: :options
 
       def available_options = super.push(
         Options::GreaterThan,
@@ -24,13 +24,15 @@ module Schematics
         else
           case unit
           when 'bytes'
-            number_to_human_size(value, **{ precision: }.compact)
+            number_to_human_size(value, **{ precision:, separator: }.compact)
           when '%'
-            number_to_percentage(value, **{ precision: }.compact)
+            number_to_percentage(value, **{ precision:, separator: }.compact)
           when '€', '$', '£'
-            number_to_currency(value, **{ unit:, precision: }.compact)
+            number_to_currency(value, **{ unit:, precision:, separator: }.compact)
           else
-            [number_with_precision(value, **{ precision: }.compact), unit].compact.join(' ')
+            [number_with_precision(value, **{ precision:, separator: }.compact), unit]
+              .compact
+              .join(' ')
           end
         end
       end

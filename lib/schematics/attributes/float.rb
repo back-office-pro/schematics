@@ -9,10 +9,12 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
       include Behaviours::Numerable
+      include Behaviours::Incrementable
 
       def available_options = super.push(
         Options::Unit,
-        Options::Precision
+        Options::Precision,
+        Options::Separator
       )
 
       def database_type = 'float'

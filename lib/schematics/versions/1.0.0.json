@@ -833,6 +833,7 @@
     "name": "schema_dataset",
     "options": {
       "icon": "diagram_project",
+      "descriptor": "data_version",
       "actions": [
         "index",
         "show",
@@ -842,6 +843,16 @@
       ]
     },
     "attributes": [
+      {
+        "id": "1d3d3e66-6fcd-4527-8835-8ac69a56c3a8",
+        "name": "data_version",
+        "type": "float",
+        "options": {
+          "auto_increment": true,
+          "precision": 1,
+          "separator": "."
+        }
+      },
       {
         "id": "b8de2f59-e280-4e19-88c3-63ee6522e27f",
         "name": "data",

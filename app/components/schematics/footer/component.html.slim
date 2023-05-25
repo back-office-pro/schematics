@@ -3,8 +3,12 @@ footer.py-4
     .col
       | &copy; #{year} #{company_name}
     .col.text-end.text-nowrap
-      = render Schematics::ResourceLinkTo::Component.new(resource:, css_classes:)
-      = fa_icon :rocket, class: 'text-primary me-2'
+      - if resource
+        = render Schematics::ResourceLinkTo::Component.new(resource:, css_classes:) do |c|
+          - c.with_body do
+            = fa_icon :code_branch, class: 'me-2'
+            = current
+      = fa_icon :rocket, class: 'text-primary ms-1 me-2'
       = t('.powered_by')
       = link_to website_url, class: 'ms-1' do
         = image_tag 'schematics/logo.svg'

@@ -23,6 +23,7 @@ describe Schematics::Attributes::Decimal do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Incrementable) }
 
   its(:database_type) { is_expected.to eq('decimal') }
   its(:default) { is_expected.to eq('9.99') }
@@ -42,8 +43,10 @@ describe Schematics::Attributes::Decimal do
       Schematics::Options::OtherThan,
       Schematics::Options::Unit,
       Schematics::Options::Precision,
+      Schematics::Options::Separator,
       Schematics::Options::Scale,
-      Schematics::Options::Default
+      Schematics::Options::Default,
+      Schematics::Options::AutoIncrement
     )
   end
 

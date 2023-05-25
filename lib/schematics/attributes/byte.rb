@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     class Byte < Float
       def format(value)
-        value && number_to_human_size(value, **{ precision: }.compact)
+        value && number_to_human_size(value, **{ precision:, separator: }.compact)
       end
 
       def icon = :weight_hanging

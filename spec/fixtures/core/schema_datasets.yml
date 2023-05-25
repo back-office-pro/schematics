@@ -1,5 +1,6 @@
 one:
   state: pending
+  data_version: 1.0
   data:
     - id: <%= SecureRandom.uuid %>
       name: client
