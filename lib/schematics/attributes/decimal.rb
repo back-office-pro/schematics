@@ -9,13 +9,15 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
       include Behaviours::Numerable
+      include Behaviours::Incrementable
 
       delegate :scale, to: :options
 
       def available_options = super.push(
         Options::Unit,
         Options::Precision,
-        Options::Scale
+        Options::Scale,
+        Options::Separator
       )
 
       def bound

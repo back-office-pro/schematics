@@ -9,10 +9,9 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Rangeable
       include Behaviours::Numerable
+      include Behaviours::Incrementable
 
-      def available_options = super.push(
-        Options::Unit
-      )
+      def available_options = super.push(Options::Unit)
 
       def database_type = 'integer'
 
