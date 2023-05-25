@@ -14,8 +14,7 @@ export default class extends ApplicationController {
   async compare () {
     const params = { comparison: { model: this.modelValue, ids: this.ids() } }
     const response = await this.fetchAPI(routes.comparisons, 'POST', params)
-    const { pathname } = new URL(response.headers.get('Location'))
-    Turbo.visit(pathname)
+    Turbo.visit(response.headers.get('Location'))
   }
 
   toggleButton () {
