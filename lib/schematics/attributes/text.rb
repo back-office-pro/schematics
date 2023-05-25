@@ -12,10 +12,6 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Translatable
 
-      def available_options = super.push(
-        Options::Translated
-      )
-
       def default = SecureRandom.base58
 
       def icon = :font

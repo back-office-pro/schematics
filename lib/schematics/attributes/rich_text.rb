@@ -10,9 +10,7 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Translatable
 
-      def available_options = super
-        .push(Options::Translated)
-        .excluding(Options::Default)
+      def available_options = super.excluding(Options::Default)
 
       def default = 'MyRichText'
 

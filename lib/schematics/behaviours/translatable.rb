@@ -5,6 +5,8 @@ module Schematics
     module Translatable
       delegate :translated?, to: :options
 
+      def available_options = super.push(Options::Translated)
+
       def preload
         return unless translated?
 
