@@ -23,6 +23,7 @@ describe Schematics::Attributes::Integer do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Rangeable) }
   it { is_expected.to be_a(Schematics::Behaviours::Numerable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Incrementable) }
 
   its(:database_type) { is_expected.to eq('integer') }
   its(:default) { is_expected.to eq(1) }
@@ -42,7 +43,8 @@ describe Schematics::Attributes::Integer do
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan,
       Schematics::Options::Unit,
-      Schematics::Options::Default
+      Schematics::Options::Default,
+      Schematics::Options::AutoIncrement
     )
   end
 
@@ -52,6 +54,18 @@ describe Schematics::Attributes::Integer do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         attribute :price, default: -> { 10 }
+      RUBY
+    end
+  end
+
+  context 'when integer is auto incrementable' do
+    let(:options) { { auto_increment: true } }
+
+    it { is_expected.to be_readonly }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        attribute :price, default: -> { with_deleted.last&.price.to_i.next }
       RUBY
     end
   end

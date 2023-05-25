@@ -50,7 +50,8 @@ describe Schematics::Virtuals::Calculation do
     is_expected.to eq(
       [
         Schematics::Options::Unit,
-        Schematics::Options::Precision
+        Schematics::Options::Precision,
+        Schematics::Options::Separator
       ]
     )
   end
