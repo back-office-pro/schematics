@@ -12,8 +12,6 @@ class SchemaDataset < Schematics::ApplicationRecord
            :old_and_changed_entities,
            to: :migration,
            prefix: true
-  # :reek:Attribute
-  attr_writer :version
 
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
@@ -29,10 +27,4 @@ class SchemaDataset < Schematics::ApplicationRecord
   def migration
     @migration ||= Schematics::Migration.new(data, Tenant.schema)
   end
-
-  def version
-    @version ||= self.class.with_deleted.where(created_at: ..created_at).size.to_f.to_s.prepend('v')
-  end
-
-  alias to_s version
 end
