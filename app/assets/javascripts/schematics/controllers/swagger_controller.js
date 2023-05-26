@@ -1,8 +1,6 @@
 import ApplicationController from 'controllers/application_controller'
 import { SwaggerUIBundle } from 'swagger-ui-dist'
 
-/* global routes */
-
 export default class extends ApplicationController {
   connect () {
     SwaggerUIBundle({
