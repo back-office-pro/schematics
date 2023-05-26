@@ -1406,5 +1406,35 @@
         }
       }
     ]
+  },
+  {
+    "id": "0ecd7baa-db51-418a-8201-f2a93d5a44d8",
+    "name": "documentation",
+    "options": {
+      "icon": "book",
+      "descriptor": "data_version",
+      "actions": [
+        "index",
+        "show",
+        "archive"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "62050484-8575-4302-b7ba-329e95feaaad",
+        "name": "data_version",
+        "type": "float",
+        "options": {
+          "readonly": true,
+          "precision": 1,
+          "separator": "."
+        }
+      },
+      {
+        "id": "c3002ee2-99f1-46e9-af79-5658eda849cf",
+        "name": "data",
+        "type": "jsonb"
+      }
+    ]
   }
 ]
