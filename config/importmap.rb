@@ -23,7 +23,7 @@ pin_all_from Schematics::Engine.root.join('app', 'assets', 'javascripts', 'schem
 
 pin '@fortawesome/fontawesome-free', to: '@fortawesome/fontawesome-free/js/fontawesome.js', preload: true # rubocop:disable Layout/LineLength
 pin '@github/hotkey', to: '@github/hotkey/dist/index.js', preload: true
-pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.7/dist/esm/index.js', preload: true
+pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.8/dist/esm/index.js', preload: true
 pin 'autosize', to: 'autosize/dist/autosize.esm.js', preload: true
 pin 'bootstrap', to: 'bootstrap/dist/js/bootstrap.esm.js', preload: true
 pin 'file-saver', to: 'https://ga.jspm.io/npm:file-saver@2.0.5/dist/FileSaver.js', preload: true
