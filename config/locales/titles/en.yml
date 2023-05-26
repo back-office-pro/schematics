@@ -15,8 +15,6 @@ en:
       dashboard:
         admin: Administration
         home: Dashboard
-      documentation:
-        show: API documentation
       exception:
         internal_server_error: Something went wrong
         maintenance_mode: Maintenance in progress
