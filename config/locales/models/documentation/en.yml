@@ -7,6 +7,6 @@ en:
         data_version: Version
     models:
       documentation:
-        gender: male
+        gender: female
         one: Documentation
         other: Documentations
