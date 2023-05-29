@@ -26,6 +26,7 @@ module Schematics
       PaperTrail.request(enabled: false) do
         Core::SchemaDatasets::Migrate.call(schema_dataset:)
         schema_dataset.state_migrated!
+        ::Documentation.create!(data_version: schema_dataset.data_version)
       rescue StandardError => e
         schema_dataset.state_error!
         Rollbar.error(e, 'Migration error')

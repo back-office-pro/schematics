@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      documentation:
+        data: Data
+        data_version: Version
+    models:
+      documentation:
+        gender: female
+        one: Documentation
+        other: Documentations

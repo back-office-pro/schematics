@@ -1,12 +1,14 @@
 import ApplicationController from 'controllers/application_controller'
 import { SwaggerUIBundle } from 'swagger-ui-dist'
 
-/* global routes */
-
 export default class extends ApplicationController {
+  static get values () {
+    return { spec: Object }
+  }
+
   connect () {
     SwaggerUIBundle({
-      url: routes.documentation,
+      spec: this.specValue,
       domNode: this.element,
       docExpansion: 'none',
       presets: [

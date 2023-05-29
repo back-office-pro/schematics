@@ -9,9 +9,11 @@
       = render Schematics::ResourceLinkTo::Component.new(resource: value)
 - when Schematics::Attributes::Jsonb
   - case value
-  - when Schematics::Schema
+  - in Schematics::Schema
     = render Schematics::Viewer::Schema::Component.new(schema: value)
-  - when Hash
+  - in { openapi:, tags:, paths:, security:, components: }
+    = render Schematics::Viewer::Swagger::Component.new(spec: value)
+  - else
     table
       - value.each do |key, value|
         tr
