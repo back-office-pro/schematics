@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
-  spec.add_development_dependency 'brakeman', '~> 6.0.0'
+  spec.add_development_dependency 'brakeman', '~> 5.4.1'
   spec.add_development_dependency 'bundler-audit', '~> 0.9.1'
   spec.add_development_dependency 'debug', '~> 1.8.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
