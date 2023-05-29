@@ -7,12 +7,12 @@ module Core
 
       delegate :add, :commit, :push, to: :git, private: true
       delegate :schema_dataset, to: :context, private: true
-      delegate :version, to: :schema_dataset, private: true
+      delegate :data_version, to: :schema_dataset, private: true
 
       # :reek:UncommunicativeVariableName
       def call
         add(all: true)
-        commit("Migration #{version}", allow_empty: true)
+        commit("Migration #{data_version}", allow_empty: true)
         push('origin', 'main') if Rails.env.production?
       rescue Git::FailedError => e
         Rollbar.error(e, 'Git push error')

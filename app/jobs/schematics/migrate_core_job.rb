@@ -12,7 +12,7 @@ module Schematics
     private
 
     def schema_dataset = ::SchemaDataset.new(
-      version: "core-#{VERSION}",
+      data_version: "core-#{VERSION}",
       data: ::Tenant.schema.as_json
     )
   end
