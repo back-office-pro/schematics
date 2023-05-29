@@ -13,12 +13,12 @@ module Core
     define! do
       unwrap :open_api
       guard -> { _1.key?(:core) } do
-        map_value :tags, -> { _1.reject! { |doc| tags.any? { |tag| doc[:name].eql?(tag) } } }
-        map_value :paths, -> { _1.reject! { |doc| paths.any? { |path| doc.starts_with?(path) } } }
+        map_value :tags, -> { _1.reject { |doc| tags.any? { |tag| doc[:name].eql?(tag) } } }
+        map_value :paths, -> { _1.reject { |key| paths.any? { |path| key.starts_with?(path) } } }
       end
       guard -> { !_1.key?(:core) } do
-        map_value :tags, -> { _1.reject! { |doc| tags.none? { |tag| doc[:name].eql?(tag) } } }
-        map_value :paths, -> { _1.reject! { |doc| paths.none? { |path| doc.starts_with?(path) } } }
+        map_value :tags, -> { _1.reject { |doc| tags.none? { |tag| doc[:name].eql?(tag) } } }
+        map_value :paths, -> { _1.reject { |key| paths.none? { |path| key.starts_with?(path) } } }
       end
       reject_keys [:core]
     end
