@@ -11,6 +11,6 @@ class Documentation < Schematics::ApplicationRecord
   end
 
   def data = super
-    .deep_symbolize_keys
-    .deep_merge mapper.call(generate_docs(!Rails.env.test?).merge(core: true))
+    &.deep_symbolize_keys
+    &.deep_merge mapper.call(generate_docs(!Rails.env.test?).merge(core: true))
 end

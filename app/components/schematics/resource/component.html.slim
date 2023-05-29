@@ -15,7 +15,7 @@
     = render Schematics::Viewer::Swagger::Component.new(spec: value)
   - else
     table
-      - value.each do |key, value|
+      - value&.each do |key, value|
         tr
           th = key
           td = value
