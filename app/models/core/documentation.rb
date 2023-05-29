@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class Documentation < Schematics::ApplicationRecord
-  attribute :data, default: -> { mapper.call(open_api_data) }
-  delegate :mapper, :open_api_data, to: :class, private: true
+  attribute :data, default: -> { mapper.call generate_docs(!Rails.env.test?) }
+  delegate :mapper, :generate_docs, to: :class, private: true
 
   class << self
-    def mapper = ::Core::DocumentationMapper.new
+    delegate :generate_docs, to: OpenApi
 
-    def open_api_data = OpenApi.generate_docs(!Rails.env.test?)
+    def mapper = ::Core::DocumentationMapper.new
   end
 
   def data = super
     .deep_symbolize_keys
-    .deep_merge mapper.call(open_api_data.merge(core: true))
+    .deep_merge mapper.call(generate_docs(!Rails.env.test?).merge(core: true))
 end
