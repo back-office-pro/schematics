@@ -25,6 +25,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_root
+    return drop_database if destroying?
+
     super if generating?
   end
 
@@ -83,12 +85,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     rails_command 'db:create', env:
-  end
-
-  def drop_database
-    return unless destroying?
-
-    rails_command 'db:drop', env:
   end
 
   def drop_postgres_user
@@ -316,4 +312,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     .next
 
   def port = DEFAULT_PORT + database_index
+
+  def drop_database = `cd #{app_path} && RAILS_ENV=#{env} rails db:drop`
 end
