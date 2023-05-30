@@ -3,7 +3,6 @@
 module Schematics
   # :reek:Attribute
   class Trigger
-    include Behaviours::Identifiable
     include ::ActiveModel::API
 
     ACTIONS = %w[
@@ -23,10 +22,9 @@ module Schematics
               inclusion: { in: ACTIONS }
     attr_accessor :action, :callback
 
-    def method_name = [action, id]
-      .join('_')
-      .underscore
-      .to_sym
+    def method_name
+      @method_name ||= [action, SecureRandom.uuid].join('_').underscore.to_sym
+    end
 
     def to_str
       case [action, callback]
