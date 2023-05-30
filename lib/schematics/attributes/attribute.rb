@@ -6,7 +6,6 @@ module Schematics
   module Attributes
     # :reek:Attribute :reek:InstanceVariableAssumption
     class Attribute
-      include Behaviours::Identifiable
       include Behaviours::Inspectable
       include Behaviours::Optionable
       include Behaviours::Nameable
@@ -15,7 +14,7 @@ module Schematics
 
       delegate :cached?, to: :options
 
-      attr_accessor :entity
+      attr_accessor :id, :entity
 
       validates :type, presence: true
       validates :name, uniqueness: { scope: %i[entity attributes] }

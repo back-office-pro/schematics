@@ -8,7 +8,6 @@ module Schematics
   module Entities
     # :reek:Attribute, :reek:InstanceVariableAssumption
     class Entity # rubocop:disable Metrics/ClassLength
-      include Behaviours::Identifiable
       include Behaviours::Optionable
       include Behaviours::Nameable
 
@@ -27,7 +26,7 @@ module Schematics
       validates :actions, inclusion: { in: :default_actions }
       validates :name, singular: true, uniqueness: { scope: %i[schema entities] }
 
-      attr_accessor :schema
+      attr_accessor :id, :schema
 
       delegate :core?, :existing?, to: :options
       delegate :joins, :includes, :to_str, to: :preloader

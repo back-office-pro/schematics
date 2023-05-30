@@ -4,7 +4,6 @@ module Schematics
   # :reek:Attribute :reek:InstanceVariableAssumption
   module Virtuals
     class Virtual
-      include Behaviours::Identifiable
       include Behaviours::Inspectable
       include Behaviours::Optionable
       include Behaviours::Nameable
@@ -13,7 +12,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      attr_accessor :entity, :function
+      attr_accessor :id, :entity, :function
 
       validates :function,
                 presence: true,
