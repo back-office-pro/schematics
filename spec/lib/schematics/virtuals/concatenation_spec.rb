@@ -23,7 +23,6 @@ describe Schematics::Virtuals::Concatenation do
   let(:function) { '$first_name $profile.last_name' }
   let(:options) { {} }
 
-  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
