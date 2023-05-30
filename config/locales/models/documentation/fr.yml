@@ -3,8 +3,9 @@ fr:
   activerecord:
     attributes:
       documentation:
+        app_version: Version de l'application
+        core_version: Version du noyau
         data: Données
-        data_version: Version
     models:
       documentation:
         gender: female

@@ -1412,7 +1412,7 @@
     "name": "documentation",
     "options": {
       "icon": "book",
-      "descriptor": "data_version",
+      "descriptor": "app_version",
       "actions": [
         "index",
         "show",
@@ -1422,12 +1422,20 @@
     "attributes": [
       {
         "id": "62050484-8575-4302-b7ba-329e95feaaad",
-        "name": "data_version",
+        "name": "app_version",
         "type": "float",
         "options": {
           "readonly": true,
           "precision": 1,
           "separator": "."
+        }
+      },
+      {
+        "id": "a65ae864-e30d-4b32-9a11-4d135f9df737",
+        "name": "core_version",
+        "type": "string",
+        "options": {
+          "readonly": true
         }
       },
       {

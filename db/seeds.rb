@@ -15,7 +15,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     available_locales: I18n.available_locales.map(&:to_s),
     locale: Tenant.customer_locale
   )
-  Documentation.create!(data_version: 0)
+  Documentation.create!
   User.create!(email: Tenant.customer_email, password: Tenant.customer_password, role: Role.admin)
   Stat.create!(agregate: 'count', model: 'User')
   Stat.create!(
