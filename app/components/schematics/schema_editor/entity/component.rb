@@ -8,12 +8,6 @@ module Schematics
         delegate :index, to: :builder
         option :builder
 
-        # :reek:NilCheck
-        def template? = builder
-          .object
-          .name
-          .nil?
-
         def title = builder
           .object
           .class
