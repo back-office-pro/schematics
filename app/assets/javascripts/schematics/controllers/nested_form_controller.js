@@ -1,5 +1,7 @@
 import ApplicationController from 'controllers/application_controller'
 
+/* global crypto */
+
 export default class extends ApplicationController {
   static get targets () {
     return ['targets', 'templates']
@@ -12,6 +14,7 @@ export default class extends ApplicationController {
     const content = template
       .innerHTML
       .replace(/NEW_RECORD/g, timestamp)
+      .replace(/RANDOM_UUID/g, crypto.randomUUID())
       .replace(/INDEX/g, index ?? timestamp)
     target.insertAdjacentHTML('afterbegin', content)
   }
