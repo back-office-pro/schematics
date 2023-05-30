@@ -13,7 +13,11 @@ OptionParser
   .new do |opts|
     opts.on('--name', '--name=NAME', 'Application name') { app_name = log_name = _1 }
     opts.on('--container', 'Run into docker') { options[:container] = true }
-    opts.on('--destroy', 'Destroy application') { options[:behavior] = :revoke }
+    opts.on('--destroy', 'Destroy application') do
+      options[:behavior] = :revoke
+      printf "\e[31mAre you sure? Press 'y' to continue: \e[0m"
+      exit unless $stdin.gets.chomp == 'y'
+    end
   end.parse!
 
 $stdout.reopen("#{log_name}.log", 'w')

@@ -313,5 +313,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def port = DEFAULT_PORT + database_index
 
-  def drop_database = `cd #{app_path} && RAILS_ENV=#{env} rails db:drop`
+  def drop_database
+    `cd #{app_path} && RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
+  end
 end
