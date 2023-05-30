@@ -6,7 +6,7 @@ module Schematics
       class Component < ApplicationComponent
         option :form
 
-        def entity = Entities::Entity.new(schema:)
+        def entity = Entities::Entity.new(schema:, id: 'RANDOM_UUID')
 
         def schema = form.object
       end

@@ -13,9 +13,9 @@ module Schematics
             @constant = constant
           end
 
-          def attribute = @constant.new(entity:)
+          def attribute = @constant.new(id: 'RANDOM_UUID', entity:)
 
-          def entity = Entities::Entity.new(schema:)
+          def entity = Entities::Entity.new(id: 'RANDOM_UUID', schema:)
 
           def schema = @form.object
         end

@@ -2,7 +2,8 @@
   = builder.label name, class: 'form-label'
   template#schema-editor-events-input data-nested-form-target='templates'
     .col-6.schema-editor-events-input
-      = builder.fields_for name, Schematics::Options::StateMachineEvent.new do |events_form|
+      = builder.fields_for name, Schematics::Options::StateMachineEvent.new(id: 'RANDOM_UUID') do |events_form|
+        = events_form.hidden_field :id, { name: "#{events_form.object_name}[NEW_RECORD][id]" }
         = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[NEW_RECORD][name]", maxlength:, floating: }
         = events_form.select :icon, icons_collection, {}, { data: icon_data, name: "#{events_form.object_name}[NEW_RECORD][icon]" }
         = events_form.select :color, [], {}, { data: color_data, name: "#{events_form.object_name}[NEW_RECORD][color]" }
