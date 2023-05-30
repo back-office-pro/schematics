@@ -54,6 +54,7 @@ RSpec.describe Core::SchemaDatasetMapper do
             },
             'virtuals_attributes' => {
               '0' => {
+                'id' => '1011',
                 'name' => 'price',
                 'function' => '$foo',
                 'options_attributes' => {
@@ -126,6 +127,7 @@ RSpec.describe Core::SchemaDatasetMapper do
             ],
             virtuals: [
               {
+                id: '1011',
                 name: 'price',
                 function: '$foo',
                 options: {
