@@ -14,7 +14,7 @@ class SchemaDataset < Schematics::ApplicationRecord
            prefix: true
 
   class << self
-    delegate :version, :data, to: :current, prefix: true, allow_nil: true
+    delegate :data_version, :data, to: :current, prefix: true, allow_nil: true
 
     def current = migrated.last
   end
