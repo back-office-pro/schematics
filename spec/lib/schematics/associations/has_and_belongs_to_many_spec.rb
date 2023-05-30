@@ -7,7 +7,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
-      name: 'permission',
+      name: 'role',
       options: {
         descriptor: 'name'
       },
@@ -28,6 +28,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('has_and_belongs_to_many') }
+  its(:id) { is_expected.to eq('role_permissions') }
   its(:name) { is_expected.to eq('permissions') }
   its(:column_name) { is_expected.to eq('permission_ids') }
   its(:class_name) { is_expected.to eq('Permission') }
