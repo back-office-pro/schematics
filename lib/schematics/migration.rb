@@ -3,34 +3,28 @@
 module Schematics
   # :reek:DataClump
   class Migration # rubocop:disable Metrics/ClassLength
-    attr_reader :build_commands, :clean_commands
-
     def initialize(new_schema, current_schema = nil)
       @new_schema = new_schema
       @current_schema = current_schema
-      @build_commands = []
-      @clean_commands = []
-      generate_build_commands
-      generate_clean_commands
     end
 
-    def new_entities = @build_commands
+    def new_entities = build_commands
       .grep(Commands::CreateEntity)
-      .concat(@build_commands.grep(Commands::RenameEntity))
+      .concat(build_commands.grep(Commands::RenameEntity))
       .map(&:entity)
       .uniq
 
-    def old_entities = @clean_commands
+    def old_entities = clean_commands
       .grep(Commands::DestroyEntity)
-      .concat(@clean_commands.grep(Commands::RenameEntity))
+      .concat(clean_commands.grep(Commands::RenameEntity))
       .map(&:entity)
       .uniq
 
-    def changed_entities = @build_commands
+    def changed_entities = build_commands
       .grep(Commands::RenameAttribute)
-      .concat(@build_commands.grep(Commands::ChangeAttribute))
-      .concat(@build_commands.grep(Commands::AddAttribute))
-      .concat(@clean_commands.grep(Commands::RemoveAttribute))
+      .concat(build_commands.grep(Commands::ChangeAttribute))
+      .concat(build_commands.grep(Commands::AddAttribute))
+      .concat(clean_commands.grep(Commands::RemoveAttribute))
       .map(&:entity)
       .excluding(new_entities)
       .excluding(old_entities)
@@ -44,62 +38,41 @@ module Schematics
       .concat(changed_entities)
       .uniq
 
-    private
-
-    def generate_build_commands # rubocop:disable Metrics/PerceivedComplexity
-      @new_schema.entities.each do |new_entity|
+    def build_commands
+      @new_schema.entities.map do |new_entity|
         current_entity = @current_schema&.entities&.find { _1.id == new_entity.id }
-        if current_entity
-          @build_commands.push(
-            rename_entity_command(new_entity, current_entity, :build),
-            add_permission_commands(new_entity, current_entity),
-            rename_permission_commands(new_entity, current_entity),
-            add_translation_commands(new_entity, current_entity),
-            rename_translation_commands(new_entity, current_entity),
-            add_association_commands(new_entity, current_entity)
-          )
-          new_entity.attributes.each do |new_attribute|
-            current_attribute = current_entity.attributes.find { _1.id == new_attribute.id }
-            if current_attribute
-              @build_commands.push(
-                rename_attribute_command(new_entity, current_attribute, new_attribute),
-                change_attribute_command(new_entity, current_attribute, new_attribute)
-              )
-            else
-              @build_commands << Commands::AddAttribute.new(
-                entity: new_entity,
-                attribute: new_attribute.name
-              )
-            end
-          end
-        else
-          @build_commands << Commands::CreateEntity.new(entity: new_entity)
-        end
-      end
-      @build_commands.flatten!
-      @build_commands.compact!
-      @build_commands.sort_by!(&:weight)
+        next Commands::CreateEntity.new(entity: new_entity) unless current_entity
+
+        [
+          rename_entity_command(new_entity, current_entity, :build),
+          add_permission_commands(new_entity, current_entity),
+          rename_permission_commands(new_entity, current_entity),
+          add_translation_commands(new_entity, current_entity),
+          rename_translation_commands(new_entity, current_entity),
+          add_association_commands(new_entity, current_entity),
+          add_attribute_commands(new_entity, current_entity)
+        ]
+      end.flatten!.compact!.sort_by!(&:weight)
     end
 
-    def generate_clean_commands
-      @current_schema&.entities&.each do |current_entity|
+    def clean_commands
+      return [] unless @current_schema
+
+      @current_schema.entities.map do |current_entity|
         new_entity = @new_schema.entities.find { _1.id == current_entity.id }
-        if new_entity
-          @clean_commands.push(
-            rename_entity_command(current_entity, new_entity, :clean),
-            remove_permission_commands(current_entity, new_entity),
-            remove_attribute_commands(current_entity, new_entity),
-            remove_translation_commands(current_entity, new_entity),
-            remove_association_commands(current_entity, new_entity)
-          )
-        else
-          @clean_commands << Commands::DestroyEntity.new(entity: current_entity)
-        end
-      end
-      @clean_commands.flatten!
-      @clean_commands.compact!
-      @clean_commands.sort_by!(&:weight)
+        next Commands::DestroyEntity.new(entity: current_entity) unless new_entity
+
+        [
+          rename_entity_command(current_entity, new_entity, :clean),
+          remove_permission_commands(current_entity, new_entity),
+          remove_attribute_commands(current_entity, new_entity),
+          remove_translation_commands(current_entity, new_entity),
+          remove_association_commands(current_entity, new_entity)
+        ]
+      end.flatten!.compact!.sort_by!(&:weight)
     end
+
+    private
 
     def change_attribute_command(entity, current_attribute, new_attribute)
       return if current_attribute.database_type == new_attribute.database_type
@@ -265,6 +238,20 @@ module Schematics
         .map(&:association_type)
         .difference(new_entity.has_and_belongs_to_many_associations.reject(&:hidden?).map(&:association_type)) # rubocop:disable Layout/LineLength
         .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
+    end
+
+    def add_attribute_commands(entity, current_entity)
+      entity
+        .attributes
+        .map do |attribute|
+          current_attribute = current_entity.attributes.find { _1.id == attribute.id }
+          next Commands::AddAttribute.new(entity:, attribute: attribute.name) unless current_attribute # rubocop:disable Layout/LineLength
+
+          [
+            rename_attribute_command(entity, current_attribute, attribute),
+            change_attribute_command(entity, current_attribute, attribute)
+          ]
+        end
     end
   end
 end
