@@ -52,7 +52,7 @@ module Schematics
           add_association_commands(new_entity, current_entity),
           add_attribute_commands(new_entity, current_entity)
         ]
-      end.flatten!.compact!.sort_by!(&:weight)
+      end.flatten.compact.sort_by(&:weight)
     end
 
     def clean_commands
@@ -69,7 +69,7 @@ module Schematics
           remove_translation_commands(current_entity, new_entity),
           remove_association_commands(current_entity, new_entity)
         ]
-      end.flatten!.compact!.sort_by!(&:weight)
+      end.flatten.compact.sort_by(&:weight)
     end
 
     private
