@@ -6,7 +6,10 @@
         = events_form.hidden_field :id, { name: "#{events_form.object_name}[NEW_RECORD][id]" }
         = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[NEW_RECORD][name]", maxlength:, floating: }
         = events_form.select :icon, icons_collection, {}, { data: icon_data, name: "#{events_form.object_name}[NEW_RECORD][icon]" }
-        = events_form.select :color, [], {}, { data: color_data, name: "#{events_form.object_name}[NEW_RECORD][color]" }
+        = events_form.select :color,
+                             colors_collection,
+                             {},
+                             { data: color_data, name: "#{events_form.object_name}[NEW_RECORD][color]" }
         = events_form.select :from,
                              [],
                              { include_hidden: },
@@ -27,7 +30,7 @@
           = events_form.hidden_field :id, { name: "#{events_form.object_name}[#{index}][id]" }
           = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[#{index}][name]", maxlength:, floating: }
           = events_form.select :icon, icons_collection, {}, { data: icon_data, name: "#{events_form.object_name}[#{index}][icon]" }
-          = events_form.select :color, [], {}, { data: color_data(event.color), name: "#{events_form.object_name}[#{index}][color]" }
+          = events_form.select :color, colors_collection, {}, { data: color_data, name: "#{events_form.object_name}[#{index}][color]" }
           = events_form.select :from,
                                values,
                                { include_hidden: },
