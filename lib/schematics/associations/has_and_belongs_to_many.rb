@@ -8,11 +8,13 @@ module Schematics
       include Behaviours::Fillable
 
       delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
-      delegate :options, :prefixed_name, to: :belongs_to
+      delegate :options, to: :belongs_to
 
       validates :association_type, inclusion: { in: :allowed_association_types }
 
-      alias id prefixed_name
+      def id
+        @id ||= SecureRandom.uuid
+      end
 
       def available_options = [
         Options::Required,
