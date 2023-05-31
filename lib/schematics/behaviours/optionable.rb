@@ -18,7 +18,7 @@ module Schematics
 
       included do
         accepts_nested_attributes_for :options
-        validates :options_keys, inclusion: { in: :available_options_names }
+        validates :options_keys, inclusion: { in: :allowed_options_names }
       end
 
       def available_options = []
@@ -27,7 +27,7 @@ module Schematics
 
       protected
 
-      def available_options_names = available_options.map(&:name)
+      def allowed_options_names = available_options.map(&:name)
     end
   end
 end
