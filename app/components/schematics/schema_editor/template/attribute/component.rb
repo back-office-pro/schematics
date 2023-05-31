@@ -4,8 +4,9 @@ module Schematics
   module SchemaEditor
     module Template
       module Attribute
-        class Component < ApplicationComponent
+        class Component < Template::Component
           with_collection_parameter :constant
+          attr_reader :form
 
           def initialize(form:, constant:)
             super
@@ -14,10 +15,6 @@ module Schematics
           end
 
           def attribute = @constant.new(id: 'RANDOM_UUID', entity:)
-
-          def entity = Entities::Entity.new(id: 'RANDOM_UUID', schema:)
-
-          def schema = @form.object
         end
       end
     end
