@@ -110,7 +110,7 @@ describe Schematics::Entities::Router do
         resource :configuration, only: [:show, :update, :edit], model_name: 'Configuration' do
           resources :comments, only: %i[new create edit update], shallow: true
         end
-        resolve "Configuration" do |resource, options|
+        resolve 'Configuration' do |resource, options|
           [:configuration, options]
         end
       RUBY
@@ -175,7 +175,7 @@ describe Schematics::Entities::Router do
           resources :comments, only: %i[new create edit update], shallow: true
         end
         end
-        resolve "Main::Licence" do |resource, options|
+        resolve 'Main::Licence' do |resource, options|
           [:licence, options]
         end
       RUBY

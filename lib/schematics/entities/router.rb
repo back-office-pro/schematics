@@ -44,7 +44,7 @@ module Schematics
         return unless @entity.is_a?(Singleton)
 
         <<~RUBY
-          resolve "#{class_name}" do |resource, options|
+          resolve '#{class_name}' do |resource, options|
             [:#{resource}, options]
           end
         RUBY
