@@ -8,6 +8,7 @@ module Schematics
           delegate :collection, to: Schematics::Options::Icon, prefix: :icons
           delegate :object, to: :builder, private: true
           delegate :values, to: :object
+
           option :builder
           option :name
 
@@ -17,12 +18,7 @@ module Schematics
 
           def icon_data = { controller: 'dropdowns--fa-icons-dropdown' }
 
-          def color_data(color = :primary)
-            {
-              controller: 'dropdowns--colors-dropdown',
-              'dropdowns--colors-dropdown-selected-value': color
-            }
-          end
+          def color_data = { controller: 'dropdowns--colors-dropdown' }
 
           def callback_data = {
             controller: 'popover schema-editor--variable-typeahead',
@@ -32,6 +28,10 @@ module Schematics
             'bs-placement': 'bottom',
             'bs-html': true
           }
+
+          def state_machine_event = Schematics::Options::StateMachineEvent.new(id: 'RANDOM_UUID')
+
+          def colors_collection = Schematics::Options::StateMachineEvent::COLORS
 
           def floating = true
 

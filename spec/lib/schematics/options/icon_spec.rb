@@ -14,6 +14,6 @@ describe Schematics::Options::Icon do
 
   its(:name) { is_expected.to eq(:icon) }
   its(:input_type) { is_expected.to eq(:select) }
-  its(:collection) { is_expected.to eq(%w[box users]) }
+  its(:collection) { is_expected.to eq(%i[box users]) }
   its(:controller) { is_expected.to eq('dropdowns--fa-icons-dropdown') }
 end

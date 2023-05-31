@@ -24,7 +24,6 @@ describe Schematics::Options::StateMachineEvent do
   let(:icon) { 'check' }
   let(:color) { 'success' }
 
-  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_valid }
 

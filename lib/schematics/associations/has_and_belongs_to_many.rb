@@ -3,7 +3,6 @@
 module Schematics
   module Associations
     class HasAndBelongsToMany < Association
-      include Behaviours::Identifiable
       include Behaviours::Optionable
       include Behaviours::Validatable
       include Behaviours::Fillable
@@ -12,6 +11,10 @@ module Schematics
       delegate :options, to: :belongs_to
 
       validates :association_type, inclusion: { in: :allowed_association_types }
+
+      def id
+        @id ||= SecureRandom.uuid
+      end
 
       def available_options = [
         Options::Required,

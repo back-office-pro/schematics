@@ -38,7 +38,6 @@ describe Schematics::Attributes::StateMachine do
     }
   end
 
-  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -76,7 +75,8 @@ describe Schematics::Attributes::StateMachine do
       enum :state, {:pending=>0, :closed=>1, :refused=>2}, prefix: true, default: "pending"
       aasm column: :#{name}, enum: true, no_direct_assignment: true do
         state :pending, initial: true
-        state :closed, :refused
+        state :closed
+        state :refused
         event :close, after_commit: :after_close do
           transitions from: [:pending], to: :closed
         end
@@ -99,5 +99,18 @@ describe Schematics::Attributes::StateMachine do
       rescue StandardError
       end
     RUBY
+  end
+
+  context 'when there is only one value' do
+    let(:options) { { values: ['pending'] } }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        enum :state, {:pending=>0}, prefix: true
+        aasm column: :#{name}, enum: true, no_direct_assignment: true do
+          state :pending, initial: true
+        end
+      RUBY
+    end
   end
 end

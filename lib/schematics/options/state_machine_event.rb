@@ -8,16 +8,19 @@ module Schematics
     class StateMachineEvent
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
-      include Behaviours::Identifiable
       include Behaviours::Nameable
+
+      COLORS = %i[primary secondary success danger warning].freeze
 
       validates :from, :to, inclusion: { in: :values }
       validates :name, uniqueness: { scope: %i[state_machine events] }
+      validates :icon, inclusion: { in: Icon.collection }
+      validates :color, inclusion: { in: COLORS }
 
       delegate :to_str, to: :trigger, prefix: true
       delegate :entity, :values, to: :state_machine
 
-      attr_accessor :state_machine, :from, :to, :callback
+      attr_accessor :id, :state_machine, :from, :to, :callback
       attr_writer :icon, :color
 
       def icon

@@ -7,7 +7,6 @@ describe Schematics::Attributes::Timestamp do
   let(:name) { 'reset_password_sent_at' }
   let(:options) { {} }
 
-  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }

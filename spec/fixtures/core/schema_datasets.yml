@@ -135,7 +135,7 @@ one:
               - id: <%= SecureRandom.uuid %>
                 name: close
                 icon: xmark
-                color: danger
+                color: warning
                 from: pending
                 to: closed
                 callback: $in_stock = false

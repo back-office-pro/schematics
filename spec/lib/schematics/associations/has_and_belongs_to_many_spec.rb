@@ -7,7 +7,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   let(:entity) do
     Schematics::Entities::Entity.new(
       schema:,
-      name: 'permission',
+      name: 'role',
       options: {
         descriptor: 'name'
       },
@@ -20,7 +20,6 @@ describe Schematics::Associations::HasAndBelongsToMany do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'permissions')
   end
 
-  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }

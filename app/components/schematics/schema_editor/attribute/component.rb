@@ -8,12 +8,6 @@ module Schematics
         delegate :allowed_association_types, :icon, to: 'builder.object'
         option :builder
 
-        # :reek:NilCheck
-        def template? = builder
-          .object
-          .name
-          .nil?
-
         def collection = Attributes
           .constants
           .excluding(SchemaEditor::Component::DENYLIST)

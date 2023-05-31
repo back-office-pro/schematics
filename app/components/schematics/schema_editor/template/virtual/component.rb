@@ -5,7 +5,7 @@ module Schematics
     module Template
       module Virtual
         class Component < Template::Component
-          def virtual = Virtuals::Calculation.new(entity:)
+          def virtual = Virtuals::Calculation.new(id: 'RANDOM_UUID', entity:)
         end
       end
     end

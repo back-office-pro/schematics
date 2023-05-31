@@ -22,7 +22,6 @@ describe Schematics::Virtuals::Comparison do
   let(:function) { '$category.vat == 10 && ($created_at == NULL || NOW() < $created_at)' }
   let(:options) { {} }
 
-  it { is_expected.to be_a(Schematics::Behaviours::Identifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }

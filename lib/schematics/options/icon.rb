@@ -10,9 +10,9 @@ module Schematics
 
         def controller = 'dropdowns--fa-icons-dropdown'
 
-        def collection
-          YAML.load_file(File.expand_path('../../icons.yml', __dir__))
-        end
+        def collection = YAML
+          .load_file(File.expand_path('../../icons.yml', __dir__))
+          .map(&:to_sym)
       end
     end
   end
