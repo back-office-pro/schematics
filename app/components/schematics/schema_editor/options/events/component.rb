@@ -29,6 +29,8 @@ module Schematics
             'bs-html': true
           }
 
+          def state_machine_event = Schematics::Options::StateMachineEvent.new(id: 'RANDOM_UUID')
+
           def colors_collection = Schematics::Options::StateMachineEvent::COLORS
 
           def floating = true
