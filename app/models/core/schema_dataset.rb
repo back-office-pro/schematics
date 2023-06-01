@@ -4,6 +4,7 @@ class SchemaDataset < Schematics::ApplicationRecord
   serialize :data, Schematics::Schema
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
+  delegate :to_yaml, to: :fixture
   delegate :build_commands,
            :clean_commands,
            :old_entities,
@@ -27,4 +28,8 @@ class SchemaDataset < Schematics::ApplicationRecord
   def migration
     @migration ||= Schematics::Migration.new(data, Tenant.schema)
   end
+
+  private
+
+  def fixture = { one: { state:, data_version:, data: data.as_json } }.deep_stringify_keys
 end
