@@ -6,8 +6,6 @@ module Schematics
       return if Rails.cache.fetch('CORE_VERSION') == VERSION
 
       Core::SchemaDatasets::Migrate.call(schema_dataset:)
-      ::Documentation.create!
-      Rails.cache.write('CORE_VERSION', VERSION)
     end
 
     private
