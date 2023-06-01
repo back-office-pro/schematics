@@ -148,8 +148,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'searchkick:reindex:all', env:
   end
 
-  def create_spec_fixtures_directory
-    create_file 'spec/fixtures/.gitkeep'
+  def create_schema_datasets_fixture_file
+    create_file 'spec/fixtures/schema_datasets.yml'
   end
 
   def edit_gitignore
