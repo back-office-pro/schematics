@@ -23,11 +23,9 @@ module Schematics
 
     # :reek:UncommunicativeVariableName
     def perform(schema_dataset)
+      Core::SchemaDatasets::Migrate.call(schema_dataset:)
+    rescue StandardError => e
       PaperTrail.request(enabled: false) do
-        Core::SchemaDatasets::Migrate.call(schema_dataset:)
-        schema_dataset.state_migrated!
-        ::Documentation.create!
-      rescue StandardError => e
         schema_dataset.state_error!
         Rollbar.error(e, 'Migration error')
       end

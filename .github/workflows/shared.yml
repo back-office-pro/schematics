@@ -39,6 +39,14 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
         run: bin/rails db:migrate:reset
+      - name: Load fixtures
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
+          FIXTURES_PATH: spec/fixtures
+          FIXTURES: schema_datasets
+        run: bin/rails db:fixtures:load
       - name: Run tests
         env:
           RAILS_ENV: test
