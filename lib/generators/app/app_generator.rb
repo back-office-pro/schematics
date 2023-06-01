@@ -206,6 +206,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     git clean: '-f -d'
   end
 
+  def create_spec_fixtures_directory
+    empty_directory 'spec/fixtures'
+  end
+
   def create_github_repo
     return if env.development?
     return unless generating?
