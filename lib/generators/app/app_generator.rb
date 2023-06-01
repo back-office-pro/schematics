@@ -148,6 +148,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'searchkick:reindex:all', env:
   end
 
+  def create_spec_fixtures_directory
+    create_file 'spec/fixtures/.gitkeep'
+  end
+
   def edit_gitignore
     return unless generating?
 
@@ -204,10 +208,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     git commit: "-m 'initial commit'"
     git branch: '-M main'
     git clean: '-f -d'
-  end
-
-  def create_spec_fixtures_directory
-    empty_directory 'spec/fixtures'
   end
 
   def create_github_repo
