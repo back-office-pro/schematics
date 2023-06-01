@@ -14,10 +14,7 @@ module Schematics
         @flash = flash
       end
 
-      def css_class = {
-        notice: 'success',
-        alert: 'danger'
-      }[type.to_sym]
+      def css_class = { notice: 'success', alert: 'danger' }[type.to_sym]
     end
   end
 end
