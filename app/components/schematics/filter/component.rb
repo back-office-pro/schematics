@@ -37,12 +37,12 @@ module Schematics
         "#{preference} d-none"
       end
 
-      def css_classes = [
+      def css_classes = class_names(
         'form-control',
         'bg-transparent',
         'text-secondary',
-        { 'fw-bold': active? }
-      ]
+        'fw-bold': active?
+      )
 
       def filter_name = "#{filter_key}[#{name}]"
 

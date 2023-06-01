@@ -11,13 +11,13 @@ module Schematics
         def compact? = compact
 
         def css_classes_for(event)
-          [
+          class_names(
             'btn',
             "btn-#{event.color}",
             'btn-sm',
-            { 'btn-icon-split': !compact? },
-            { 'ms-1': !compact? }
-          ]
+            'btn-icon-split': !compact?,
+            'ms-1': !compact?
+          )
         end
 
         def data

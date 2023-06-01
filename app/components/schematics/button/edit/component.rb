@@ -11,13 +11,13 @@ module Schematics
 
         def compact? = compact
 
-        def css_classes = [
+        def css_classes = class_names(
           'btn',
           'btn-primary',
           'btn-sm',
-          { 'btn-icon-split': !compact? },
-          { 'ms-1': !compact? }
-        ]
+          'btn-icon-split': !compact?,
+          'ms-1': !compact?
+        )
 
         def data
           return { turbo_frame: '_top' } unless compact?

@@ -16,9 +16,7 @@ module Schematics
           def id = "carousel-#{resource.id}"
 
           def css_classes(index)
-            return %w[carousel-item text-center] unless index.zero?
-
-            %w[carousel-item text-center active]
+            class_names('carousel-item', 'text-center', active: index.zero?)
           end
         end
       end
