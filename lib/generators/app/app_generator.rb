@@ -24,6 +24,29 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
       .exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
   end
 
+  def destroy_github_repo
+    return if env.development?
+    return unless destroying?
+
+    rails_command 'destroy repository', env:
+  end
+
+  def destroy_systemd_service
+    return if container?
+    return if env.development?
+    return unless destroying?
+
+    rails_command 'destroy systemd', env:
+  end
+
+  def destroy_nginx_subdomain
+    return if container?
+    return if env.development?
+    return unless destroying?
+
+    rails_command 'destroy nginx', env:
+  end
+
   def create_root
     return drop_database if destroying?
 
@@ -217,13 +240,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'generate repository', env:
   end
 
-  def destroy_github_repo
-    return if env.development?
-    return unless destroying?
-
-    rails_command 'destroy repository', env:
-  end
-
   def add_remote_to_repo
     return if env.development?
     return unless generating?
@@ -246,28 +262,12 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'generate systemd', env:
   end
 
-  def destroy_systemd_service
-    return if container?
-    return if env.development?
-    return unless destroying?
-
-    rails_command 'destroy systemd', env:
-  end
-
   def deploy_nginx_subdomain
     return if container?
     return if env.development?
     return unless generating?
 
     rails_command 'generate nginx', env:
-  end
-
-  def destroy_nginx_subdomain
-    return if container?
-    return if env.development?
-    return unless destroying?
-
-    rails_command 'destroy nginx', env:
   end
 
   def destroy_root
