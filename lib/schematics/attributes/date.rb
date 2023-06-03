@@ -2,6 +2,7 @@
 
 require 'active_model/validations/comparability'
 require 'active_support/core_ext/time/zones'
+require 'active_support/time'
 
 module Schematics
   module Attributes
