@@ -29,10 +29,19 @@ describe Schematics::Attributes::Array do
   its(:to_sql) { is_expected.to eq('comparisons.ids') }
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
   its(:migration_options) { is_expected.to eq(array: true) }
-  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
   its(:search_column) { is_expected.to eq(:ids) }
   its(:search_predicate) { is_expected.to eq(:any) }
   its(:search_query) { is_expected.to eq(:ids_any) }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly
+    )
+  end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
@@ -46,5 +55,11 @@ describe Schematics::Attributes::Array do
     let(:values) { %w[foo bar] }
 
     it { is_expected.to eq('foo, bar') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
   end
 end

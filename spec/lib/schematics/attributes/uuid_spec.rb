@@ -20,4 +20,10 @@ describe Schematics::Attributes::Uuid do
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:id_card) }
   its(:validators) { is_expected.to be_empty }
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
+  end
 end

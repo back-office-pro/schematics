@@ -24,11 +24,15 @@ describe Schematics::Attributes::Digest do
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
   its(:icon) { is_expected.to eq(:key) }
 
-  its(:available_options) do
-    is_expected.to include(
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
       Schematics::Options::Confirm,
-      Schematics::Options::Min,
-      Schematics::Options::Default
+      Schematics::Options::Min
     )
   end
 
@@ -63,5 +67,11 @@ describe Schematics::Attributes::Digest do
         }
       )
     end
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
   end
 end

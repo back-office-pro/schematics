@@ -31,10 +31,14 @@ describe Schematics::Attributes::Enum do
   its(:to_s) { is_expected.to eq('schema:product_state') }
   its(:search_data) { is_expected.to eq('state:') }
 
-  its(:available_options) do
-    is_expected.to include(
-      Schematics::Options::Values,
-      Schematics::Options::Default
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Values
     )
   end
 
@@ -124,5 +128,19 @@ describe Schematics::Attributes::Enum do
     let(:value) { 'available' }
 
     it { is_expected.to eq('Available') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Flag,
+        Schematics::Attributes::StateMachine
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
   end
 end

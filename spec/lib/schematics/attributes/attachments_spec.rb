@@ -86,4 +86,10 @@ describe Schematics::Attributes::Attachments do
       RUBY
     end
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Attachment) }
+  end
 end

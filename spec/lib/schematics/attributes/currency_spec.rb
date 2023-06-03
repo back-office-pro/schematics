@@ -32,4 +32,20 @@ describe Schematics::Attributes::Currency do
 
     it { is_expected.to eq('$100,000.00') }
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Float,
+        Schematics::Attributes::Byte,
+        Schematics::Attributes::Percentage,
+        Schematics::Attributes::Rating
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
+  end
 end

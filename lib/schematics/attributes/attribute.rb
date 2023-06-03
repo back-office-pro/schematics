@@ -23,6 +23,22 @@ module Schematics
         def build(type:, **kwargs)
           Attributes.const_get(type.camelize.to_sym).new(**kwargs)
         end
+
+        def collection = module_parent
+          .constants
+          .map(&module_parent.method(:const_get))
+          .excluding(Attribute, Association, Month, Week, Year)
+
+        def attribute_ancestors = ancestors
+          .select { _1.module_parent == module_parent }
+          .excluding(Attribute)
+
+        def compatible_types = collection
+          .map(&:attribute_ancestors)
+          .select(&attribute_ancestors.method(:intersect?))
+          .flatten
+          .uniq
+          .excluding(Association)
       end
 
       def available_options = super.push(

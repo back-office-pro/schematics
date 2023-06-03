@@ -34,7 +34,12 @@ describe Schematics::Attributes::Integer do
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
       Schematics::Options::GreaterThan,
       Schematics::Options::GreaterThanOrEqualTo,
       Schematics::Options::EqualTo,
@@ -42,7 +47,6 @@ describe Schematics::Attributes::Integer do
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan,
       Schematics::Options::Unit,
-      Schematics::Options::Default,
       Schematics::Options::AutoIncrement
     )
   end
@@ -75,5 +79,11 @@ describe Schematics::Attributes::Integer do
     let(:value) { 100 }
 
     it { is_expected.to eq('$100') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Duration) }
   end
 end

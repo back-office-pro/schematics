@@ -32,8 +32,18 @@ describe Schematics::Attributes::Text do
   its(:search_column) { is_expected.to eq(:content) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
-  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
   its(:preload) { is_expected.to be_nil }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Translated
+    )
+  end
 
   context 'when hidden' do
     let(:options) { { hidden: true } }
@@ -68,5 +78,33 @@ describe Schematics::Attributes::Text do
         translates :content, type: :text
       RUBY
     end
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::String,
+        Schematics::Attributes::Action,
+        Schematics::Attributes::Address,
+        Schematics::Attributes::Citext,
+        Schematics::Attributes::Color,
+        Schematics::Attributes::Country,
+        Schematics::Attributes::Email,
+        Schematics::Attributes::Ip,
+        Schematics::Attributes::Locale,
+        Schematics::Attributes::Mime,
+        Schematics::Attributes::ModelField,
+        Schematics::Attributes::Model,
+        Schematics::Attributes::Phone,
+        Schematics::Attributes::TimeZone,
+        Schematics::Attributes::UserAgent,
+        Schematics::Attributes::Url
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
   end
 end

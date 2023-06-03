@@ -22,10 +22,19 @@ describe Schematics::Attributes::Boolean do
   its(:column_name) { is_expected.to eq('toggle') }
   its(:open_api_type) { is_expected.to eq('boolean') }
   its(:icon) { is_expected.to eq(:toggle_on) }
-  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
   its(:search_column) { is_expected.to eq(:toggle) }
   its(:search_predicate) { is_expected.to eq(:eq) }
   its(:search_query) { is_expected.to eq(:toggle_eq) }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly
+    )
+  end
 
   context 'when there is a default value' do
     let(:options) { { default: true } }
@@ -35,5 +44,11 @@ describe Schematics::Attributes::Boolean do
         attribute :toggle, default: -> { true }
       RUBY
     end
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
   end
 end

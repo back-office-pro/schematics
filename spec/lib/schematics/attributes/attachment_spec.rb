@@ -36,7 +36,11 @@ describe Schematics::Attributes::Attachment do
   it { is_expected.to be_image }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Readonly,
       Schematics::Options::Size,
       Schematics::Options::AspectRatio,
       Schematics::Options::Min,
@@ -133,5 +137,11 @@ describe Schematics::Attributes::Attachment do
         validates :avatar, {:antivirus=>true, :content_type=>[:png, :jpg, :jpeg]}
       RUBY
     end
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Attachments) }
   end
 end

@@ -31,14 +31,20 @@ describe Schematics::Attributes::Date do
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
       Schematics::Options::GreaterThan,
       Schematics::Options::GreaterThanOrEqualTo,
       Schematics::Options::EqualTo,
       Schematics::Options::LessThan,
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan,
-      Schematics::Options::Default
+      Schematics::Options::StartDate,
+      Schematics::Options::EndDate
     )
   end
 
@@ -72,5 +78,19 @@ describe Schematics::Attributes::Date do
     let(:value) { Time.parse('01/01/2021 00:00 +0000').in_time_zone }
 
     it { is_expected.to eq('Friday 01 January, 2021') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Datetime,
+        Schematics::Attributes::Time
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
   end
 end

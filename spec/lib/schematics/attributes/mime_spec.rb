@@ -47,4 +47,32 @@ describe Schematics::Attributes::Mime do
 
     it { is_expected.to eq('PNG') }
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::String,
+        Schematics::Attributes::Text,
+        Schematics::Attributes::Action,
+        Schematics::Attributes::Address,
+        Schematics::Attributes::Citext,
+        Schematics::Attributes::Color,
+        Schematics::Attributes::Country,
+        Schematics::Attributes::Email,
+        Schematics::Attributes::Ip,
+        Schematics::Attributes::Locale,
+        Schematics::Attributes::ModelField,
+        Schematics::Attributes::Model,
+        Schematics::Attributes::Phone,
+        Schematics::Attributes::TimeZone,
+        Schematics::Attributes::UserAgent,
+        Schematics::Attributes::Url
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
+  end
 end

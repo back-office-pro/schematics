@@ -31,4 +31,10 @@ describe Schematics::Attributes::Duration do
 
     it { is_expected.to eq('1 minute and 40 seconds') }
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Integer) }
+  end
 end

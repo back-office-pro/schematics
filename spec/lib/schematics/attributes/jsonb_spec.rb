@@ -27,7 +27,16 @@ describe Schematics::Attributes::Jsonb do
   its(:permitted_params) { is_expected.to eq(preferences: {}) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
-  its(:available_options) { is_expected.to include(Schematics::Options::Default) }
+
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly
+    )
+  end
 
   context 'when there is a default' do
     let(:options) { { default: { theme: 'light', sidebar_toggled: false } } }
@@ -37,5 +46,11 @@ describe Schematics::Attributes::Jsonb do
         attribute :preferences, default: -> { {"theme":"light","sidebar_toggled":false} }
       RUBY
     end
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
   end
 end

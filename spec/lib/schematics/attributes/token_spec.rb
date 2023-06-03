@@ -32,4 +32,10 @@ describe Schematics::Attributes::Token do
       has_secure_token :auth_token, length: 32
     RUBY
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
+  end
 end

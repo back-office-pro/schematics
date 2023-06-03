@@ -51,8 +51,11 @@ describe Schematics::Attributes::References do
   its(:options) { is_expected.to include(:type) }
   its('options.type') { is_expected.to eq('user') }
 
-  its(:available_options) do
-    is_expected.to include(
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
       Schematics::Options::Inverse,
       Schematics::Options::Type,
       Schematics::Options::Polymorphic
@@ -133,5 +136,11 @@ describe Schematics::Attributes::References do
     end
 
     its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::BelongsTo) }
   end
 end

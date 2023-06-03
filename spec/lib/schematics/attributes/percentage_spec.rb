@@ -33,4 +33,20 @@ describe Schematics::Attributes::Percentage do
 
     it { is_expected.to eq('100.000%') }
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Float,
+        Schematics::Attributes::Currency,
+        Schematics::Attributes::Rating,
+        Schematics::Attributes::Byte
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
+  end
 end

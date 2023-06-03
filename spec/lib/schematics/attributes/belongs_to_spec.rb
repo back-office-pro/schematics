@@ -53,11 +53,15 @@ describe Schematics::Attributes::BelongsTo do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
 
-  its(:available_options) do
-    is_expected.to include(
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
       Schematics::Options::Inverse,
       Schematics::Options::Type,
-      Schematics::Options::Polymorphic
+      Schematics::Options::Polymorphic,
+      Schematics::Options::Readonly
     )
   end
 
@@ -141,5 +145,11 @@ describe Schematics::Attributes::BelongsTo do
     let(:name) { 'type' }
 
     it { is_expected.not_to be_valid }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::References) }
   end
 end

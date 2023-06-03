@@ -33,7 +33,11 @@ describe Schematics::Attributes::Decimal do
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Readonly,
       Schematics::Options::GreaterThan,
       Schematics::Options::GreaterThanOrEqualTo,
       Schematics::Options::EqualTo,
@@ -69,5 +73,11 @@ describe Schematics::Attributes::Decimal do
     let(:value) { '100.02' }
 
     it { is_expected.to eq('$100.02') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
   end
 end

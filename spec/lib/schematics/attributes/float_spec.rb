@@ -33,7 +33,12 @@ describe Schematics::Attributes::Float do
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
       Schematics::Options::GreaterThan,
       Schematics::Options::GreaterThanOrEqualTo,
       Schematics::Options::EqualTo,
@@ -43,7 +48,6 @@ describe Schematics::Attributes::Float do
       Schematics::Options::Unit,
       Schematics::Options::Precision,
       Schematics::Options::Separator,
-      Schematics::Options::Default,
       Schematics::Options::AutoIncrement
     )
   end
@@ -54,5 +58,21 @@ describe Schematics::Attributes::Float do
     let(:value) { 100.099 }
 
     it { is_expected.to eq('100.099 kg') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Byte,
+        Schematics::Attributes::Currency,
+        Schematics::Attributes::Percentage,
+        Schematics::Attributes::Rating
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
   end
 end

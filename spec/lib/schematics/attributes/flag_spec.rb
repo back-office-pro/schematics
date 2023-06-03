@@ -32,10 +32,14 @@ describe Schematics::Attributes::Flag do
   its(:search_data) { is_expected.to eq('states:') }
   its(:permitted_params) { is_expected.to eq(states: []) }
 
-  its(:available_options) do
-    is_expected.to include(
-      Schematics::Options::Values,
-      Schematics::Options::Default
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Values
     )
   end
 
@@ -110,5 +114,19 @@ describe Schematics::Attributes::Flag do
     let(:values) { %w[available available_soon] }
 
     it { is_expected.to eq('Available, Available soon') }
+  end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Enum,
+        Schematics::Attributes::StateMachine
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
   end
 end

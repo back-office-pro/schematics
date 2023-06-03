@@ -27,10 +27,8 @@ module Schematics
             Attributes::Timestamp
           ]
 
-          def advanced_collection = Attributes
-            .constants
-            .excluding(SchemaEditor::Component::DENYLIST)
-            .map(&Attributes.method(:const_get))
+          def advanced_collection = Attributes::Attribute
+            .collection
             .excluding(
               Attributes::BelongsTo,
               Attributes::References,

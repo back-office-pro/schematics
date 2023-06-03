@@ -60,4 +60,18 @@ describe Schematics::Attributes::Datetime do
 
     it { is_expected.to eq('Friday 01 January, 2021 at 10:00') }
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Date,
+        Schematics::Attributes::Time
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
+  end
 end

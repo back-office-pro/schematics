@@ -35,4 +35,18 @@ describe Schematics::Attributes::Time do
 
     it { is_expected.to eq('10:00') }
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Date,
+        Schematics::Attributes::Datetime
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
+  end
 end

@@ -23,4 +23,10 @@ describe Schematics::Attributes::Timestamp do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.reset_password_sent_at') }
   its(:to_s) { is_expected.to eq('schema:user_reset_password_sent_at') }
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    it { is_expected.to contain_exactly(described_class) }
+  end
 end

@@ -6,30 +6,16 @@ module Schematics
       class Component < ApplicationComponent
         delegate :class, to: 'builder.object', prefix: :attribute
         delegate :allowed_association_types, :icon, to: 'builder.object'
+        delegate :compatible_types, to: :attribute_class, private: true
         option :builder
 
-        def collection = Attributes
-          .constants
-          .excluding(SchemaEditor::Component::DENYLIST)
-          .map(&Attributes.method(:const_get))
-          .select(&method(:compatible_types))
+        def collection = compatible_types
           .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
           .sort
 
         def title = attribute_class
           .model_name
           .human
-
-        private
-
-        def compatible_types(constant)
-          return true if constant == attribute_class
-
-          constant.superclass != Attributes::Attribute && (
-            constant.superclass == attribute_class ||
-            constant.superclass == attribute_class.superclass
-          )
-        end
       end
     end
   end

@@ -30,4 +30,20 @@ describe Schematics::Attributes::Rating do
       validates :rating, {:numericality=>{:allow_blank=>true, :in=>0..5}}
     RUBY
   end
+
+  describe '.compatible_types' do
+    subject { described_class.compatible_types }
+
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Float,
+        Schematics::Attributes::Currency,
+        Schematics::Attributes::Percentage,
+        Schematics::Attributes::Byte
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
+  end
 end

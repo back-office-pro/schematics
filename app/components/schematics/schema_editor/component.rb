@@ -3,14 +3,9 @@
 module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
-      DENYLIST = %i[Association Attribute Month Week Year].freeze
       delegate :new_record?, to: :resource
+      delegate :collection, to: Schematics::Attributes::Attribute, prefix: :attributes
       option :resource
-
-      def attribute_constants_collection = Attributes
-        .constants
-        .excluding(DENYLIST)
-        .map(&Attributes.method(:const_get))
 
       def data = { 'auto-save-target': 'form' }
 
