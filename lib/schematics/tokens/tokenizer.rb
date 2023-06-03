@@ -16,9 +16,9 @@ module Schematics
 
       def parser = Regexp.union(token_classes.map { _1::REGEX })
 
-      def token_classes = Tokens
+      def token_classes = module_parent
         .constants
-        .map(&Tokens.method(:const_get))
+        .map(&module_parent.method(:const_get))
         .excluding(self, Token)
         .sort_by { _1::PRECEDENCE }
     end
