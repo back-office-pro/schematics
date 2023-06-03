@@ -38,7 +38,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:weight) { is_expected.to eq(3) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,
       Schematics::Options::Type,

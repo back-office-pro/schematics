@@ -38,7 +38,7 @@ describe Schematics::Entities::Entity do
   its(:joins) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
-    is_expected.to include(
+    is_expected.to contain_exactly(
       Schematics::Options::Core,
       Schematics::Options::Hidden,
       Schematics::Options::Existing,

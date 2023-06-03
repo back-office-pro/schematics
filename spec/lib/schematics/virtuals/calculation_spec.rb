@@ -46,12 +46,10 @@ describe Schematics::Virtuals::Calculation do
   its(:weight) { is_expected.to eq(1) }
 
   its(:available_options) do
-    is_expected.to eq(
-      [
-        Schematics::Options::Unit,
-        Schematics::Options::Precision,
-        Schematics::Options::Separator
-      ]
+    is_expected.to contain_exactly(
+      Schematics::Options::Unit,
+      Schematics::Options::Precision,
+      Schematics::Options::Separator
     )
   end
 
