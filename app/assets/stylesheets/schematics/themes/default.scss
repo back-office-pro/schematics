@@ -1,4 +1,9 @@
 @import 'bootstrap/scss/bootstrap';
+
+@function mix($color1, $color2, $weight) {
+  @return color-mix($color1, $color2, $weight)
+}
+
 @import 'tom-select/dist/scss/tom-select.bootstrap5';
 
 // Bootstrap
