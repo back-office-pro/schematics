@@ -10,6 +10,12 @@ module Schematics
         .darken(5)
         .to_s
 
+      def theme_color_darken_rgb = theme_color_darken
+        .paint
+        .to_rgb
+        .scan(/\d+/)
+        .join(', ')
+
       def theme_color_rgb = theme_color
         .paint
         .to_rgb
