@@ -29,7 +29,7 @@ module Schematics
 
       def enable_buttons?(element)
         editable &&
-          can?(:update, resource) &&
+          can?(:update, resource, element.name.to_sym) &&
           element.is_a?(Behaviours::Fillable) &&
           !element.readonly?
       end
