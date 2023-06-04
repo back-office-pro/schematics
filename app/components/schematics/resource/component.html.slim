@@ -58,8 +58,8 @@
 - when Schematics::Attributes::Token
   = render Schematics::Button::Clipboard::Component.new(value:)
 - when Schematics::Attributes::Percentage
-  .progress.fs-6
-    .progress-bar role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100' style="width: #{value}%"
+  .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100' 
+    .progress-bar style="width: #{value}%"
       = field.format(value)
 - when Schematics::Attributes::Array
   - value.each do |element|
