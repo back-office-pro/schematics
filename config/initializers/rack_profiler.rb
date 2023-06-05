@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'rack-mini-profiler'
+
+Rack::MiniProfilerRails.initialize!(Rails.application) if Rails.env.development?
+
 Rack::MiniProfiler.config.tap do |config|
   config.position = 'bottom-left'
   config.start_hidden = Rails.env.production?
