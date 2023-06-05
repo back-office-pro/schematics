@@ -2,8 +2,8 @@
 fr:
   routes:
     active_storage: stockage
-    api_chart: performance-api
     admin: administration
+    api_chart: performance-api
     blobs: fichiers
     comments: commentaires
     delete: supprimer
