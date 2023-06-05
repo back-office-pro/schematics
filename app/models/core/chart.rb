@@ -5,6 +5,10 @@ class Chart < Schematics::ApplicationRecord
   delegate :find_field_by_name, to: :entity, allow_nil: true
   scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
 
+  class << self
+    def api = first
+  end
+
   def border_width
     (%w[line area].include?(kind) && 1) || 0
   end

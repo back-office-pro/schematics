@@ -6,7 +6,7 @@ module Schematics
 
     included do
       before_action :authenticate_user!
-      before_action :touch_session!
+      around_action :touch_session!
       helper_method :current_user, :current_session
     end
 
@@ -50,7 +50,8 @@ module Schematics
       session[:return_to] = request.original_url
     end
 
-    def touch_session!
+    def touch_session!(&)
+      session[:response_time] = Benchmark.realtime(&)
       current_session.touch!(request)
     end
 

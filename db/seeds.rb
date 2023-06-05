@@ -23,6 +23,13 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     model: 'ActiveStorage::Blob',
     field: 'ActiveStorage::Blob#byte_size'
   )
+  Chart.new(
+    kind: 'bar',
+    agregate: 'average',
+    model: 'ApiRequest',
+    x_field: 'ApiRequest#endpoint',
+    y_field: 'ApiRequest#response_time'
+  ).save(validate: false) # rubocop:disable Rails/SaveBang
   Chart.create!(
     kind: 'column',
     agregate: 'count',
