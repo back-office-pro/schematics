@@ -7,6 +7,7 @@ en:
         endpoint: Endpoint
         ip: IP address
         request_method: Method
+        response_time: Response time
     enums:
       api_request:
         request_method:

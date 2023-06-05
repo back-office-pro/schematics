@@ -1231,18 +1231,25 @@
       {
         "id": "ee776a34-11fb-4e82-a31d-4a5c426a3a30",
         "name": "ip",
-        "type": "ip"
+        "type": "ip",
+        "options": {
+          "readonly": true
+        }
       },
       {
         "id": "2346fcff-55db-498a-906d-b5d417eb6496",
         "name": "endpoint",
-        "type": "string"
+        "type": "string",
+        "options": {
+          "readonly": true
+        }
       },
       {
         "id": "561ddd7c-96af-4a66-bbe7-2ab5f69bd43f",
         "name": "request_method",
         "type": "enum",
         "options": {
+          "readonly": true,
           "values": [
             "GET",
             "POST",
@@ -1250,6 +1257,15 @@
             "PATCH",
             "DELETE"
           ]
+        }
+      },
+      {
+        "id": "0f4f54af-0998-479f-9171-c70c95e6d92a",
+        "name": "response_time",
+        "type": "integer",
+        "options": {
+          "readonly": true,
+          "unit": "ms"
         }
       }
     ]
