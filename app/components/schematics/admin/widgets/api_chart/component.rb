@@ -5,8 +5,6 @@ module Schematics
     module Widgets
       module ApiChart
         class Component < ApplicationComponent
-          delegate :api_chart_path, to: 'Schematics::Engine.routes.url_helpers'
-
           def icon = :signal
 
           def caption = t('.caption')
@@ -14,7 +12,7 @@ module Schematics
           def title = t('.title')
 
           def render?
-            can?(:index, ::Chart)
+            can?(:show, ::Chart.api)
           end
         end
       end
