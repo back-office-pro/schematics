@@ -11,6 +11,7 @@ RSpec.describe Schematics::RoleAbility do
 
   before { admin_role }
 
+  it { is_expected.not_to be_able_to(:duplicate, admin_role) }
   it { is_expected.not_to be_able_to(:update, admin_role) }
   it { is_expected.not_to be_able_to(:destroy, admin_role) }
   it { is_expected.not_to be_able_to(:archive, admin_role) }
