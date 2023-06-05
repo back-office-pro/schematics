@@ -18,6 +18,7 @@ module Schematics
       merge ComparisonAbility.new
       merge BlogAbility.new
       merge SearchAbility.new
+      merge ChartAbility.new
       merge RoleAbility.new
       merge AdminDashboardAbility.new(self)
       merge FeatureFlagAbility.new
