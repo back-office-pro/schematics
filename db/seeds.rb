@@ -29,7 +29,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     model: 'ApiRequest',
     x_field: 'ApiRequest#endpoint',
     y_field: 'ApiRequest#response_time'
-  ).save(validate: false)
+  ).save(validate: false) # rubocop:disable Rails/SaveBang
   Chart.create!(
     kind: 'column',
     agregate: 'count',
