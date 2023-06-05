@@ -10,7 +10,8 @@ class ApiKey < Schematics::ApplicationRecord
         api_key: self,
         ip: request.ip,
         request_method: request.method,
-        endpoint: request.original_fullpath
+        endpoint: request.original_fullpath,
+        response_time: (request.session[:response_time] * 1000).to_i
       )
     end
   end
