@@ -2,6 +2,7 @@
 fr:
   routes:
     active_storage: stockage
+    api_chart: performance-api
     admin: administration
     blobs: fichiers
     comments: commentaires
