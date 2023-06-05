@@ -9,6 +9,8 @@ en:
       new: Import %{parent_human_name_plural}
       show: "%{resource}"
     schematics:
+      api_chart:
+        show: API Performance
       blog:
         index: Blog
         show: "%{resource}"
