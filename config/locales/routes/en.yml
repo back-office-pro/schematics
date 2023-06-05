@@ -3,7 +3,6 @@ en:
   routes:
     active_storage: storage
     admin: admin
-    api_chart: api-performance
     blobs: files
     comments: comments
     delete: delete
