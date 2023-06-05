@@ -18,6 +18,7 @@
                   ytitle: @resource.ytitle,
                   suffix: @resource.suffix,
                   nonce: content_security_policy_nonce,
+                  height: '600px',
                   download: { filename: @resource.filename },
                   dataset: { borderWidth: @resource.border_width }
 = render Schematics::Viewer::Comments::Component.new(resource: @resource)
