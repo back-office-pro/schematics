@@ -61,7 +61,7 @@ ul.list-group.list-group-striped li:nth-of-type(even),
 
 .navbar {
   @extend .navbar-light;
-  background: $white;
+  @extend .bg-white;
 }
 
 #settings-dropdown { // scss-lint:disable IdSelector

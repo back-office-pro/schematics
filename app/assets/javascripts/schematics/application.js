@@ -14,7 +14,7 @@ const setNavbarScrolled = () => {
   document
     .querySelector('nav.navbar')
     ?.classList
-    ?.toggle('scrolled', window.scrollY > 25)
+    ?.toggle('bg-opacity-75', window.scrollY > 25)
 }
 
 const setTurboHeaders = (event) => {

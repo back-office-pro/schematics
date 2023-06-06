@@ -87,18 +87,13 @@ iframe.google-map {
 .pagy-items-selector-js input,
 .ss-main .ss-search input,
 ul.list-group.list-group-striped li:nth-of-type(even),
-.ts-dropdown div:nth-of-type(even),
-.navbar.scrolled:hover {
+.ts-dropdown div:nth-of-type(even) {
   @extend .bg-dark;
 }
 
 .navbar {
   @extend .navbar-dark;
   @extend .bg-dark;
-
-  &.scrolled {
-    background: rgba(48, 48, 48, .6) !important; // scss-lint:disable ColorVariable
-  }
 }
 
 #settings-dropdown { // scss-lint:disable IdSelector
