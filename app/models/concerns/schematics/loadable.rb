@@ -57,6 +57,10 @@ module Schematics
         load(model_filepath)
       end
 
+      def print_model
+        print entity.model_elements.map(&:to_str).join # rubocop:disable Rails/Output
+      end
+
       private
 
       def loadable(concerns: [])
