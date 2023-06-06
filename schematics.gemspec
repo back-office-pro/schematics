@@ -85,7 +85,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'oj', '~> 3.15.0'
   spec.add_dependency 'pagy', '~> 6.0.4'
   spec.add_dependency 'paper_trail', '~> 14.0.0'
-  spec.add_dependency 'paranoia', '~> 2.6.1'
+  spec.add_dependency 'paranoia', '~> 2.6.2'
   spec.add_dependency 'pg', '~> 1.5.3'
   spec.add_dependency 'phonelib', '~> 0.8.2'
   spec.add_dependency 'puma', '~> 6.3.0'
