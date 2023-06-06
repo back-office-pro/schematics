@@ -1,3 +1,41 @@
+$secondary: #95a5a6;
+$input-btn-focus-width: 0;
+$input-padding-y: .5rem;
+$input-padding-x: .5rem;
+$input-group-addon-padding-x: .75rem;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$popover-body-padding-y: 0;
+$popover-body-padding-x: 0;
+$card-border-width: 0;
+$dropdown-border-width: 0;
+$input-border-width: 0;
+$btn-border-width: 0;
+$accordion-border-width: 0;
+$offcanvas-border-width: 0;
+$toast-border-width: 0;
+$modal-content-border-width: 0;
+$modal-header-border-width: 0;
+$modal-footer-border-width: 0;
+$pagination-border-width: 0;
+$list-group-border-width: 0;
+$form-select-border-width: 0;
+$alert-border-width: 0;
+$nav-tabs-border-width: 0;
+
+$font-size-root: 12px;
+$enable-caret: false;
+$badge-padding-y: .25em;
+$badge-padding-x: .5em;
+$zindex-dropdown: 1035;
+$offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
+
 @import 'bootstrap/scss/bootstrap';
 
 @function mix($color1, $color2, $weight) {
