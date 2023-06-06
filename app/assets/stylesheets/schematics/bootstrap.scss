@@ -11,6 +11,7 @@ $input-group-addon-padding-x: .75rem;
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/utilities';
 
+$body-bg: $light;
 $popover-body-padding-y: 0;
 $popover-body-padding-x: 0;
 $card-border-width: 0;
@@ -34,7 +35,9 @@ $enable-caret: false;
 $badge-padding-y: .25em;
 $badge-padding-x: .5em;
 $zindex-dropdown: 1035;
+$accordion-button-active-bg: $card-cap-bg;
 $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
+$offcanvas-bg-color: $light;
 
 @import 'bootstrap/scss/bootstrap';
 
