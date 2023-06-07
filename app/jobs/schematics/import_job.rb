@@ -4,12 +4,12 @@ module Schematics
   class ImportJob < ApplicationJob
     def perform(import)
       result = Core::Imports::ImportData.call(import:)
-      if result.success?
-        import.status_finished!
-        import.model_class.try(:reindex)
-      else
-        import.update!(status: 'error', import_errors: result.errors)
-      end
+      return import.update!(status: 'error', import_errors: result.errors) if result.failure?
+
+      import
+        .tap(&:status_finished!)
+        .model_class
+        .try(:reindex)
     end
   end
 end
