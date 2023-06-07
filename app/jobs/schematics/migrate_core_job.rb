@@ -5,14 +5,12 @@ module Schematics
     def perform
       return if Rails.cache.fetch('CORE_VERSION') == VERSION
 
-      Core::SchemaDatasets::Migrate.call(schema_dataset:)
+      result = Core::SchemaDatasets::Migrate.call(schema_dataset:)
+      Rails.cache.write('CORE_VERSION', VERSION) if result.success?
     end
 
     private
 
-    def schema_dataset = ::SchemaDataset.new(
-      data_version: VERSION,
-      data: ::Tenant.schema.as_json
-    )
+    def schema_dataset = ::SchemaDataset.new(data: ::Tenant.schema.as_json)
   end
 end

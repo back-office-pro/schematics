@@ -5,10 +5,17 @@ module Core
     class MigrateDatabase
       include Interactor
 
-      delegate :migration_context, to: 'ActiveRecord::Base.connection', private: true
-      delegate :migrate, to: :migration_context, private: true
+      delegate :fail!, to: :context, private: true
+      delegate :connection, :transaction, to: ::ActiveRecord::Base, private: true
+      delegate :migrate, to: 'connection.migration_context', private: true
 
-      alias call migrate
+      # :reek:UncommunicativeVariableName
+      def call
+        transaction { migrate }
+      rescue StandardError => e
+        Rollbar.error(e, '[Migration] MigrateDatabase error')
+        fail!
+      end
     end
   end
 end
