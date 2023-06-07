@@ -20,7 +20,7 @@ describe Rails::Generators::GeneratedAttribute do
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
-      is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
+      is_expected.to eq(", where: 'deleted_at IS NULL'")
     end
   end
 
@@ -37,7 +37,7 @@ describe Rails::Generators::GeneratedAttribute do
     it { is_expected.to have_uniq_index }
 
     its(:inject_index_options) do
-      is_expected.to eq(", unique: true, algorithm: :concurrently, where: 'deleted_at IS NULL'")
+      is_expected.to eq(", unique: true, where: 'deleted_at IS NULL'")
     end
   end
 
@@ -54,7 +54,7 @@ describe Rails::Generators::GeneratedAttribute do
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
-      is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
+      is_expected.to eq(", where: 'deleted_at IS NULL'")
     end
   end
 
@@ -71,7 +71,7 @@ describe Rails::Generators::GeneratedAttribute do
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
-      is_expected.to eq(", algorithm: :concurrently, where: 'deleted_at IS NULL'")
+      is_expected.to eq(", where: 'deleted_at IS NULL'")
     end
   end
 
@@ -89,7 +89,7 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:inject_index_options) do
       is_expected.to eq <<~TEXT.chomp
-        , unique: true, algorithm: :concurrently, using: :btree, where: 'deleted_at IS NULL'
+        , unique: true, using: :btree, where: 'deleted_at IS NULL'
       TEXT
     end
   end
@@ -107,7 +107,7 @@ describe Rails::Generators::GeneratedAttribute do
     it { is_expected.not_to have_uniq_index }
 
     its(:inject_index_options) do
-      is_expected.to eq(", algorithm: :concurrently, using: :btree, where: 'deleted_at IS NULL'")
+      is_expected.to eq(", using: :btree, where: 'deleted_at IS NULL'")
     end
   end
 end

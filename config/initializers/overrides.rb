@@ -26,7 +26,6 @@ Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
-ActiveRecord::Migration.define_method(:disable_ddl_transaction) { true }
 
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 
