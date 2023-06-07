@@ -7,7 +7,7 @@ module Core
 
       RECORD_NOT_UNIQUE_REGEX = /Key \((.+)\)=\((.+)\)/
 
-      delegate :import, :data, to: :context, private: true
+      delegate :import, :data, :fail!, to: :context, private: true
       delegate :model_class, :model, :author, to: :import, private: true
       delegate :human_attribute_name, :insert_all!, to: :model_class, private: true
 
@@ -16,7 +16,7 @@ module Core
         record_ids = insert_all!(data).pluck('id') # rubocop:disable Rails/SkipsModelValidations
         Schematics::Version.insert_all(record_ids.map(&method(:version))) # rubocop:disable Rails/SkipsModelValidations
       rescue ActiveRecord::RecordNotUnique => e
-        context.fail! errors: { 'Error' => record_not_unique(e) } # rubocop:disable Style/StringHashKeys
+        fail! errors: { 'Error' => record_not_unique(e) } # rubocop:disable Style/StringHashKeys
       end
 
       private

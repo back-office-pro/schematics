@@ -5,7 +5,7 @@ module Core
     class ValidateData
       include Interactor
 
-      delegate :import, :data, to: :context, private: true
+      delegate :import, :data, :fail!, to: :context, private: true
       delegate :model_class, to: :import, private: true
 
       before { @errors = Concurrent::Hash.new }
@@ -24,7 +24,7 @@ module Core
         ensure
           import.update!(progress: (line / data.size) * 100)
         end
-        context.fail!(errors: @errors) if @errors.any?
+        fail!(errors: @errors) if @errors.any?
       end
     end
   end
