@@ -15,7 +15,7 @@ module Core
         commit("Migration #{data_version}", allow_empty: true)
         push('origin', 'main') if Rails.env.production?
       rescue Git::FailedError => e
-        Rollbar.error(e, 'Git push error')
+        Rollbar.error(e, '[Migration] Commit error')
       end
 
       private
