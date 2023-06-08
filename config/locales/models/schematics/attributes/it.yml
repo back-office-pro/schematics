@@ -1,0 +1,51 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/attributes/attribute:
+        name: Nome
+        type: Tipo
+    models:
+      schematics/attributes/action: Azione
+      schematics/attributes/address: Indirizzo
+      schematics/attributes/array: Array
+      schematics/attributes/attachment: Documento
+      schematics/attributes/attachments: Documenti
+      schematics/attributes/belongs_to: Associazione uno-a-molti
+      schematics/attributes/boolean: Booleano
+      schematics/attributes/byte: Byte
+      schematics/attributes/citext: Case insensitive testo
+      schematics/attributes/color: Colore
+      schematics/attributes/country: Paese
+      schematics/attributes/currency: Valuta
+      schematics/attributes/date: Data
+      schematics/attributes/datetime: Data e ora
+      schematics/attributes/decimal: Decimal
+      schematics/attributes/digest: Password
+      schematics/attributes/duration: Durata
+      schematics/attributes/email: E-mail
+      schematics/attributes/enum: Enumerazione
+      schematics/attributes/flag: Enumerazione multipla
+      schematics/attributes/float: Numero in virgola mobile
+      schematics/attributes/integer: Numero intero
+      schematics/attributes/ip: Indirizzo IP
+      schematics/attributes/jsonb: JSON
+      schematics/attributes/locale: Lingue
+      schematics/attributes/mime: Tipo MIME
+      schematics/attributes/model: Modello
+      schematics/attributes/model_field: Attributo di modello
+      schematics/attributes/percentage: Percentuale
+      schematics/attributes/phone: Numero di telefono
+      schematics/attributes/rating: Valutazione
+      schematics/attributes/references: Utente corrente
+      schematics/attributes/rich_text: Rich text editor
+      schematics/attributes/state_machine: Macchina a stati
+      schematics/attributes/string: Stringa
+      schematics/attributes/text: Testo
+      schematics/attributes/time: Ora
+      schematics/attributes/time_zone: Fuso orario
+      schematics/attributes/timestamp: Timestamp
+      schematics/attributes/token: Token
+      schematics/attributes/url: URL
+      schematics/attributes/user_agent: Dispositivo
+      schematics/attributes/uuid: Identificatore unico

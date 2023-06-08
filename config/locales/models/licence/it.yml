@@ -1,0 +1,27 @@
+---
+it:
+  activerecord:
+    attributes:
+      licence:
+        metadata: Metadati
+        plan: Piano
+        state: Stato
+    enums:
+      licence:
+        plan:
+          basic: Licenza di base
+          premium: Licenza premium
+          pro: Licenza pro
+        state:
+          active: Attiva
+          canceled: Cancellata
+          inactive: Inattiva
+    events:
+      licence:
+        cancel: Annullare abbonamento
+        enable: Riattivare abbonamento
+    models:
+      licence:
+        gender: female
+        one: Licenza
+        other: Licenze

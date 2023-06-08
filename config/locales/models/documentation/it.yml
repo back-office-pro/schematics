@@ -1,0 +1,13 @@
+---
+it:
+  activerecord:
+    attributes:
+      documentation:
+        app_version: Versione dell'applicazione
+        core_version: Versione del nucleo
+        data: Dati
+    models:
+      documentation:
+        gender: female
+        one: Documentazione
+        other: Documentazioni

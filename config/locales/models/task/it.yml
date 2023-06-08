@@ -1,0 +1,36 @@
+---
+it:
+  activerecord:
+    attributes:
+      task:
+        applicant: Richiedente
+        assigneds:
+          one: Assegnato
+          other: Assegnati
+          zero: Nessun assegnato
+        content: Contenuto
+        deadline: Scadenza
+        late: Tardi
+        state: Stato
+        title: Titolo
+        user_groups:
+          one: Gruppo di utenti
+          other: Gruppi di utenti
+          zero: Nessun gruppo di utenti
+    enums:
+      task:
+        state:
+          aborted: Annullato
+          completed: Finito
+          in_progress: In corso
+          pending: In sospeso
+    events:
+      task:
+        abort: Annullare
+        complete: Completare
+        start: Iniziare
+    models:
+      task:
+        gender: male
+        one: Compito
+        other: Compiti

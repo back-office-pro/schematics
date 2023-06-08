@@ -3,5 +3,5 @@ en:
   schematics:
     versions:
       revert:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully reverted

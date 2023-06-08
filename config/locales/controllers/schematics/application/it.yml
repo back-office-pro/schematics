@@ -1,0 +1,18 @@
+---
+it:
+  schematics:
+    application:
+      access_denied:
+        alert: Accesso negato
+      authenticate_user:
+        alert: Si prega di autenticarsi
+      invalid_transition:
+        alert: Azione non autorizzata
+      parameter_missing:
+        alert: Si è verificato un errore
+      record_not_found:
+        alert: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} non è stato trovat@{f:a|m:o|fv:a|mv:o}"
+      stale_object_error:
+        alert: Si è verificata una modifica durante la modifica
+      unknown_format:
+        alert: Formato sconosciuto

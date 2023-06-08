@@ -32,14 +32,15 @@ fr:
           zero: Aucun message envoyé
         time_zone: Fuseau horaire
         user_groups:
-          one: Groupe d'utilisateur
+          one: Groupe d'utilisateurs
           other: Groupes d'utilisateurs
-          zero: Aucun groupe d'utilisateur
+          zero: Aucun groupe d'utilisateurs
     enums:
       user:
         locale:
           en: Anglais
           fr: Français
+          it: Italien
     models:
       user:
         gender: male

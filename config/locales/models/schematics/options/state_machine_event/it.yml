@@ -1,0 +1,11 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/options/state_machine_event:
+        callback: Funzione
+        color: Colore
+        from: Da
+        icon: Icona
+        name: Nome
+        to: A

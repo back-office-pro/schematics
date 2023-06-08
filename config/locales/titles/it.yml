@@ -1,0 +1,53 @@
+---
+it:
+  titles:
+    comparisons:
+      show: Confronto %{resource}
+    imports:
+      create: Importare %{parent_human_name_plural}
+      index: Listare delle %{human_name_plural}
+      new: Importare delle %{parent_human_name_plural}
+      show: "%{resource}"
+    schematics:
+      blog:
+        index: Blog
+        show: "%{resource}"
+      dashboard:
+        admin: Amministrazione
+        home: Dashboard
+      exception:
+        internal_server_error: Qualcosa è andato storto
+        maintenance_mode: Manutenzione in corso
+        not_found: Pagina non trovata
+        schema_error: Errore dello schema
+      password_resets:
+        create: Reimpostazione della password
+        edit: Nuova password
+        new: Reimpostazione della password
+        update: Nuova password
+      preferences:
+        edit: Preferenze di notifica
+        update: Preferenze di notifica
+      profile:
+        edit: Editare il mio profilo
+        update: Editare il mio profilo
+      resources:
+        create: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
+        delete: Cancellare %{resource}
+        duplicate: Duplicare %{resource}
+        edit: Editare %{resource}
+        index: Listare delle %{human_name_plural}
+        new: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
+        show: "%{resource}"
+        update: Editare %{resource}
+      versions:
+        index: Storico
+        show: Storico
+    searches:
+      show: Ricerca "%{resource}"
+    sessions:
+      create: Login
+      delete: Cancellare %{resource}
+      index: Lista di %{human_name_plural}
+      new: Login
+      show: "%{resource}"

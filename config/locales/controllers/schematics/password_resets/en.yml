@@ -7,5 +7,5 @@ en:
         success: Email sent with password reset instructions
       update:
         expired: Password reset has expired
-        failure: An error occured
+        failure: An error occurred
         success: Password has been reset!

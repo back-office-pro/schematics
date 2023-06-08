@@ -23,9 +23,11 @@ fr:
         available_locales:
           en: Anglais
           fr: Français
+          it: Italien
         locale:
           en: Anglais
           fr: Français
+          it: Italien
     models:
       configuration:
         gender: female

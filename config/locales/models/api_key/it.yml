@@ -1,0 +1,18 @@
+---
+it:
+  activerecord:
+    attributes:
+      api_key:
+        active: Attiva
+        auth_token: Chiave API
+        expires_at: Scade alle
+        name: Nome
+        permissions:
+          one: Autorizzazione
+          other: Autorizzazioni
+          zero: Nessuna autorizzazione
+    models:
+      api_key:
+        gender: female
+        one: Chiave API
+        other: Chiavi API

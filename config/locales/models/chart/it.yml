@@ -1,0 +1,35 @@
+---
+it:
+  activerecord:
+    attributes:
+      chart:
+        agregate: Aggregato
+        kind: Tipo
+        model: Data
+        roles:
+          one: Ruolo
+          other: Ruoli
+          zero: Nessun ruolo
+        x_field: Attributo sulle ascisse
+        y_field: Attributo di ordinata
+    enums:
+      chart:
+        agregate:
+          average: Media
+          count: Totale
+          maximum: Massimo
+          minimum: Minimo
+          sum: Somma
+        kind:
+          area: Grafico ad area
+          bar: Grafico a barre
+          column: Istogramma
+          geo: Grafico geografico
+          line: Grafico a linee
+          pie: Grafico a torta
+          scatter: Grafico a dispersione
+    models:
+      chart:
+        gender: male
+        one: Grafico
+        other: Grafici

@@ -1,0 +1,14 @@
+---
+it:
+  activerecord:
+    attributes:
+      search:
+        filters: Filtri
+        model: Data
+        query: Quesito
+        user: Utente
+    models:
+      search:
+        gender: female
+        one: Ricerca
+        other: Ricerche

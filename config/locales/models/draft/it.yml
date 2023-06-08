@@ -1,0 +1,13 @@
+---
+it:
+  activerecord:
+    attributes:
+      draft:
+        action: Azione
+        data: Dati
+        user: Utente
+    models:
+      draft:
+        gender: female
+        one: Bozza
+        other: Bozze

@@ -1,0 +1,7 @@
+---
+it:
+  javascript:
+    typeahead:
+      add: Aggiungere
+      notFound: Nessun risultato
+      pending: Caricamento...

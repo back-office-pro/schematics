@@ -1,0 +1,19 @@
+---
+it:
+  activerecord:
+    attributes:
+      translation:
+        key: Chiave
+        locale: Lingua
+        value: Valore
+    enums:
+      translation:
+        locale:
+          en: Inglese
+          fr: Francese
+          it: Italiano
+    models:
+      translation:
+        gender: female
+        one: Traduzione
+        other: Traduzioni

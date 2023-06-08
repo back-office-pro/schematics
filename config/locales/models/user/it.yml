@@ -1,0 +1,48 @@
+---
+it:
+  activerecord:
+    attributes:
+      user:
+        avatar: Avatar
+        created_meetings:
+          one: Riunione creata
+          other: Riunioni create
+          zero: Nessuna riunione creata
+        email: E-mail
+        first_name: Nome
+        full_name: Nome completo
+        last_name: Cognome
+        locale: Lingua
+        messages:
+          one: Messaggio ricevuto
+          other: Messaggi ricevuti
+          zero: Nessun messaggio ricevuto
+        password: Password
+        password_challenge: Password corrente
+        password_confirmation: Conferma della password
+        remember_me: Ricordarsi di me?
+        requested_tasks:
+          one: Compito richiesto
+          other: Compiti richiesti
+          zero: Nessun compito richiesto
+        role: Ruolo
+        sent_messages:
+          one: Messaggio inviato
+          other: Messaggi inviati
+          zero: Nessun messaggio inviato
+        time_zone: Fuso orario
+        user_groups:
+          one: Gruppo di utenti
+          other: Gruppi di utenti
+          zero: Nessun gruppo di utenti
+    enums:
+      user:
+        locale:
+          en: Inglese
+          fr: Francese
+          it: Italiano
+    models:
+      user:
+        gender: male
+        one: Utente
+        other: Utenti

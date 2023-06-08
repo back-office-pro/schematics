@@ -47,7 +47,7 @@ describe Schematics::Attributes::RichText do
   context 'when translated' do
     let(:options) { { translated: true } }
 
-    its(:permitted_params) { is_expected.to eq(%i[summary summary_en summary_fr]) }
+    its(:permitted_params) { is_expected.to eq(%i[summary summary_en summary_fr summary_it]) }
 
     its(:preload) do
       is_expected.to eq(

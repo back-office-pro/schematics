@@ -136,7 +136,7 @@ module Schematics
 
     # i18n
     config.i18n.default_locale = :en
-    config.i18n.available_locales = %i[en fr]
+    config.i18n.available_locales = %i[en fr it]
     config.i18n.fallbacks = true
 
     # ViewComponent

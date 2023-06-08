@@ -3,7 +3,7 @@ en:
   activerecord:
     attributes:
       stat:
-        agregate: Agregate
+        agregate: Aggregate
         field: Field
         model: Data
         roles:

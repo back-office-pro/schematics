@@ -3,4 +3,4 @@ en:
   schematics:
     dashboard:
       logout:
-        success: Logged out !
+        success: Logged out!

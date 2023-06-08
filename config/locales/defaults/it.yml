@@ -1,0 +1,86 @@
+---
+it:
+  attributes:
+    created_at: Data di creazione
+    created_at/day: Giorno
+    created_at/month: Mese
+    created_at/week: Settimana
+    created_at/year: Anno
+    id: Identificatore
+  by: per
+  date:
+    formats:
+      long: "%A %d %B %Y alle %H:%M"
+      month: "%B %Y"
+      short: "%A %d %B %Y"
+      time: "%H:%M"
+      week: Settimana %W
+      year: Anno %Y
+  errors:
+    messages:
+      antivirus_client_error: impossibile elaborare per la scansione antivirus
+      antivirus_file_not_found: impossibile trovare per la scansione antivirus
+      antivirus_virus_detected: contiene un virus
+      aspect_ratio_is_not: deve avere proporzioni %{aspect_ratio}
+      aspect_ratio_not_landscape: deve essere un'immagine di tipo paesaggio
+      aspect_ratio_not_portrait: deve essere un'immagine di tipo verticale
+      aspect_ratio_not_square: deve essere un'immagine quadrata
+      aspect_ratio_unknown: ha un rapporto d'aspetto sconosciuto
+      assignment: non deve contenere l'assegnazione
+      color: non è un codice colore esadecimale valido
+      content_type_invalid: ha un tipo di file non valido
+      dangerous_attribute: è un nome riservato
+      dimension_height_equal_to: deve avere un'altezza di %{length} pixels
+      dimension_height_greater_than_or_equal_to: deve avere un'altezza maggiore o uguale a %{length} pixels
+      dimension_height_inclusion: deve avere un'altezza compresa tra %{min} e %{max} pixels
+      dimension_height_less_than_or_equal_to: deve avere un'altezza minore o uguale a %{length} pixels
+      dimension_max_inclusion: deve avere dimensioni minore o uguale a %{width} x %{height} pixels
+      dimension_min_inclusion: deve avere dimensioni maggiore o uguale a %{width} x %{height} pixels
+      dimension_width_equal_to: deve avere una larghezza uguale a %{length} pixels
+      dimension_width_greater_than_or_equal_to: deve avere una larghezza maggiore o uguale a %{length} pixels
+      dimension_width_inclusion: deve avere una larghezza compresa tra %{min} e %{max} pixels
+      dimension_width_less_than_or_equal_to: deve avere una larghezza inferiore o uguale a %{length} pixels
+      file_size_out_of_range: ha un peso di %{file_size} che non rientra nei limiti richiesti
+      function: non è valido
+      image_metadata_missing: non è un'immagine valida
+      ip_address: non è un indirizzo IP valido
+      limit_out_of_range: ha un numero di file al di fuori dei limiti
+      mime_type: non è un tipo MIME valido
+      name: deve contenere solo lettere minuscole o trattino basso
+      numerable: "$%{name} non è una variabile numerica"
+      password: deve contenere almeno un numero, una lettera minuscola, una lettera maiuscola e un carattere speciale
+      singular: non è singolare
+    virtuals:
+      name: "%{name} non è definito"
+      nil: una variabile non ha valore
+      type: conversione da %{source} in %{target}
+      types:
+        integer: numero intero
+        string: stringa
+  'false': falso
+  helpers:
+    label:
+      destroy: Eliminare?
+  i18n:
+    inflections:
+      gender:
+        f: female
+        female: :@f
+        female_vowel: :@fv
+        fv: female_vowel
+        m: male
+        male: :@m
+        male_vowel: :@mv
+        mv: male_vowel
+  line: Linea %{line}
+  of: di
+  prompt: Selezionare @{f:una |m:un |fv:un'|mv:un'|un(a) }%{attribute_name}
+  time:
+    formats:
+      long: "%A %d %B %Y alle %H:%M"
+      month: "%B %Y"
+      short: "%A %d %B %Y"
+      time: "%H:%M"
+      week: Settimana %W
+      year: Anno %Y
+  'true': vero

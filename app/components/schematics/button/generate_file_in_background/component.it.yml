@@ -1,0 +1,8 @@
+---
+it:
+  all_pages: Tutte le pagine
+  current_page: Pagina corrente
+  download_as_csv: Scaricare come CSV
+  download_csv_template: Scaricare il modello CSV
+  download_pdf: Scaricare come PDF
+  loading: Generazione...

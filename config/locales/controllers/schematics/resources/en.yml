@@ -3,23 +3,23 @@ en:
   schematics:
     resources:
       archive:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully archived
       create:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully created
       destroy:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully destroyed
       duplicate:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully duplicated
       restore:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully restored
       trigger:
-        failure: An error occured
+        failure: An error occurred
         success: The %{event} action on the %{human_name} was sucessfully done
       update:
-        failure: An error occured
+        failure: An error occurred
         success: The %{human_name} was successfully updated

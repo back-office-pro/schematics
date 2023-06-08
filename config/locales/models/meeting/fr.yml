@@ -16,9 +16,9 @@ fr:
         to_come: A venir
         url: URL
         user_groups:
-          one: Groupe d'utilisateur
+          one: Groupe d'utilisateurs
           other: Groupes d'utilisateurs
-          zero: Aucun groupe d'utilisateur
+          zero: Aucun groupe d'utilisateurs
     models:
       meeting:
         gender: female

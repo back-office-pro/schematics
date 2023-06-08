@@ -1,0 +1,20 @@
+---
+it:
+  schematics:
+    application:
+      button:
+        add: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
+        confirm: Convalidare
+        destroy: Eliminare definitivamente
+        loading: Carico...
+      delete:
+        subtitle: Quest'azione è irreversibile
+        title: È sicuro?
+        warning: 'Eliminare @{f:la |m:il |fv:l''|mv:l''}%{human_name} %{resource} comporterà anche la rimozione permanente di quanto segue:'
+      resource:
+        empty: Nessuna data disponibile
+      resource_form:
+        field:
+          en: "%{attribute_name} in inglese"
+          fr: "%{attribute_name} in francese"
+          it: "%{attribute_name} in italiano"

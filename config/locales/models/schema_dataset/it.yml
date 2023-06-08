@@ -1,0 +1,23 @@
+---
+it:
+  activerecord:
+    attributes:
+      schema_dataset:
+        data: Dati
+        data_version: Versione
+        state: Stato
+    enums:
+      schema_dataset:
+        state:
+          error: Errore
+          in_progress: In corso
+          migrated: Migrata
+          pending: In sospeso
+    events:
+      schema_dataset:
+        migrate: Migrare
+    models:
+      schema_dataset:
+        gender: female
+        one: Versione dell'applicazione
+        other: Versioni dell'applicazione

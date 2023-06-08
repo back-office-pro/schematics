@@ -3,5 +3,5 @@ en:
   schematics:
     preferences:
       update:
-        failure: An error occured
+        failure: An error occurred
         success: Preferences were successfully updated

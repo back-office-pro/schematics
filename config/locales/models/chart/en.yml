@@ -3,7 +3,7 @@ en:
   activerecord:
     attributes:
       chart:
-        agregate: Agregate
+        agregate: Aggregate
         kind: Type
         model: Data
         roles:

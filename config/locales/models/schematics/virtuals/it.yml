@@ -1,0 +1,11 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/virtuals/virtual:
+        function: Funzione
+        name: Nome
+    models:
+      schematics/virtuals/calculation: Calcolo
+      schematics/virtuals/comparison: Confronto
+      schematics/virtuals/concatenation: Concatenazione

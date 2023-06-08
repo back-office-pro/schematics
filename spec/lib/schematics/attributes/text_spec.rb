@@ -70,7 +70,7 @@ describe Schematics::Attributes::Text do
   context 'when translated' do
     let(:options) { { translated: true } }
 
-    its(:permitted_params) { is_expected.to eq(%i[content content_en content_fr]) }
+    its(:permitted_params) { is_expected.to eq(%i[content content_en content_fr content_it]) }
     its(:preload) { is_expected.to eq(:text_translations) }
 
     its(:to_str) do

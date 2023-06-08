@@ -1,0 +1,34 @@
+---
+it:
+  activerecord:
+    attributes:
+      configuration:
+        available_locales: Lingue disponibili
+        blog_feature_flag: Attivare il blog
+        comments_feature_flag: Attivare i commenti
+        company_address: Indirizzo dell'azienda
+        company_logo: Logo dell'azienda
+        company_name: Nome dell'azienda
+        company_registration_number: Codice fiscale dell'azienda
+        company_website: Sito web aziendale
+        hosts: Domini API consentiti
+        locale: Lingua
+        meetings_feature_flag: Attivare le riunioni
+        messages_feature_flag: Attivare la messaggistica interna
+        tasks_feature_flag: Attivare i compiti
+        theme_color: Colore del tema
+        time_zone: Fuso orario
+    enums:
+      available_locales:
+        en: Inglese
+        fr: Francese
+        it: Italiano
+      locale:
+        en: Inglese
+        fr: Francese
+        it: Italiano
+    models:
+      configuration:
+        gender: female
+        one: Configurazione
+        other: Configurazione
