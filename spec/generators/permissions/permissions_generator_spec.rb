@@ -13,8 +13,8 @@ RSpec.describe PermissionsGenerator do
   let(:behavior) { :invoke }
   let(:options) { [] }
   let(:permission) { Permission.create!(model:, action: 'create') }
-  let(:chart) { Chart.create!(kind: 'line', agregate: 'count', model:, x_field: 'User#full_name') }
-  let(:stat) { Stat.create!(agregate: 'count', model:) }
+  let(:chart) { Chart.create!(kind: 'line', aggregate: 'count', model:, x_field: 'User#full_name') }
+  let(:stat) { Stat.create!(aggregate: 'count', model:) }
   let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
   let(:admin_role) do
     Role.create!(

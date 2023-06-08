@@ -19,28 +19,28 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   )
   Documentation.create!
   User.create!(email: Tenant.customer_email, password: Tenant.customer_password, role: Role.admin)
-  Stat.create!(agregate: 'count', model: 'User')
+  Stat.create!(aggregate: 'count', model: 'User')
   Stat.create!(
-    agregate: 'sum',
+    aggregate: 'sum',
     model: 'ActiveStorage::Blob',
     field: 'ActiveStorage::Blob#byte_size'
   )
   Chart.new(
     kind: 'bar',
-    agregate: 'average',
+    aggregate: 'average',
     model: 'ApiRequest',
     x_field: 'ApiRequest#endpoint',
     y_field: 'ApiRequest#response_time'
   ).save(validate: false) # rubocop:disable Rails/SaveBang
   Chart.create!(
     kind: 'column',
-    agregate: 'count',
+    aggregate: 'count',
     model: 'Meeting',
     x_field: 'Meeting#created_at/month'
   )
   Chart.create!(
     kind: 'column',
-    agregate: 'count',
+    aggregate: 'count',
     model: 'Task',
     x_field: 'Task#created_at/month'
   )

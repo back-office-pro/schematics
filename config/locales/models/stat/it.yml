@@ -3,7 +3,7 @@ it:
   activerecord:
     attributes:
       stat:
-        agregate: Aggregato
+        aggregate: Aggregato
         field: Attributo
         model: Data
         roles:
@@ -12,7 +12,7 @@ it:
           zero: Nessun ruolo
     enums:
       stat:
-        agregate:
+        aggregate:
           average: Media
           count: Totale
           maximum: Massimo

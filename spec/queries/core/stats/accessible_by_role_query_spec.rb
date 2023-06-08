@@ -8,9 +8,9 @@ RSpec.describe Core::Stats::AccessibleByRoleQuery do
   let(:permissions) { Permission.create_entities_permissions! }
   let(:manager_role) { Role.create!(name: 'Manager', permissions:) }
   let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
-  let(:first_stat) { Stat.create!(agregate: 'count', model: 'User') }
-  let(:second_stat) { Stat.create!(agregate: 'count', model: 'User', roles: [admin_role]) }
-  let(:third_stat) { Stat.create!(agregate: 'count', model: 'User', roles: [manager_role]) }
+  let(:first_stat) { Stat.create!(aggregate: 'count', model: 'User') }
+  let(:second_stat) { Stat.create!(aggregate: 'count', model: 'User', roles: [admin_role]) }
+  let(:third_stat) { Stat.create!(aggregate: 'count', model: 'User', roles: [manager_role]) }
 
   before { [first_stat, second_stat, third_stat] }
 

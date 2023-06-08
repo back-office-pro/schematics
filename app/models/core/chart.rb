@@ -43,7 +43,7 @@ class Chart < Schematics::ApplicationRecord
     model_class
       .left_joins(joins)
       .public_send(entity_x_field.group_method, entity_x_field.to_sql)
-      .public_send(agregate.to_sym, entity_y_field&.to_sql || :all)
+      .public_send(aggregate.to_sym, entity_y_field&.to_sql || :all)
       .to_h do |key, value|
         [entity_x_field.format(key), entity_y_field&.format(value) || value]
       end
@@ -76,7 +76,7 @@ class Chart < Schematics::ApplicationRecord
     return unless model_class
 
     [
-      agregate_formatted,
+      aggregate_formatted,
       I18n.t('of'),
       (model_class.human_attribute_name(entity_y_field.name).pluralize.downcase if entity_y_field),
       (I18n.t('of') if entity_y_field),

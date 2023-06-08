@@ -3,7 +3,7 @@ it:
   activerecord:
     attributes:
       chart:
-        agregate: Aggregato
+        aggregate: Aggregato
         kind: Tipo
         model: Data
         roles:
@@ -14,7 +14,7 @@ it:
         y_field: Attributo di ordinata
     enums:
       chart:
-        agregate:
+        aggregate:
           average: Media
           count: Totale
           maximum: Massimo

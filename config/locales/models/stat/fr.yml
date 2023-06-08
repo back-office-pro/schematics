@@ -3,7 +3,7 @@ fr:
   activerecord:
     attributes:
       stat:
-        agregate: Agrégat
+        aggregate: Agrégat
         field: Attribut
         model: Donnée
         roles:
@@ -12,7 +12,7 @@ fr:
           zero: Aucun rôle
     enums:
       stat:
-        agregate:
+        aggregate:
           average: Moyenne
           count: Total
           maximum: Maximum

@@ -8,8 +8,8 @@ RSpec.describe Schematics::CsvSerializer do
   let(:preferences) { {} }
   let(:resources) do
     [
-      Stat.new(agregate: :count, model: 'User', field: 'User#email'),
-      Stat.new(agregate: :count, model: 'User', field: 'User#email')
+      Stat.new(aggregate: :count, model: 'User', field: 'User#email'),
+      Stat.new(aggregate: :count, model: 'User', field: 'User#email')
     ]
   end
 

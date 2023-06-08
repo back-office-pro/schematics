@@ -11,7 +11,7 @@ RSpec.describe Core::Charts::AccessibleByRoleQuery do
   let(:first_chart) do
     Chart.create!(
       kind: 'line',
-      agregate: 'count',
+      aggregate: 'count',
       model: 'User',
       x_field: 'User#full_name'
     )
@@ -19,7 +19,7 @@ RSpec.describe Core::Charts::AccessibleByRoleQuery do
   let(:second_chart) do
     Chart.create!(
       kind: 'line',
-      agregate: 'count',
+      aggregate: 'count',
       model: 'User',
       x_field: 'User#full_name',
       roles: [admin_role]
@@ -28,7 +28,7 @@ RSpec.describe Core::Charts::AccessibleByRoleQuery do
   let(:third_chart) do
     Chart.create!(
       kind: 'line',
-      agregate: 'count',
+      aggregate: 'count',
       model: 'User',
       x_field: 'User#full_name',
       roles: [manager_role]

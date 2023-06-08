@@ -29,7 +29,7 @@ class Stat < Schematics::ApplicationRecord
     return unless model_class
 
     [
-      agregate_formatted,
+      aggregate_formatted,
       I18n.t('of'),
       (model_class.human_attribute_name(entity_field.name).pluralize.downcase if entity_field),
       (I18n.t('of') if entity_field),
@@ -38,7 +38,7 @@ class Stat < Schematics::ApplicationRecord
   end
 
   def value
-    model_class&.public_send(agregate.to_sym, to_sql || :all)
+    model_class&.public_send(aggregate.to_sym, to_sql || :all)
   rescue ActiveRecord::StatementInvalid
     nil
   end

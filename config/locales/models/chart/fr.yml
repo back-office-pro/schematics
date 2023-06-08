@@ -3,7 +3,7 @@ fr:
   activerecord:
     attributes:
       chart:
-        agregate: Agrégat
+        aggregate: Agrégat
         kind: Type
         model: Donnée
         roles:
@@ -14,7 +14,7 @@ fr:
         y_field: Attribut en ordonnée
     enums:
       chart:
-        agregate:
+        aggregate:
           average: Moyenne
           count: Total
           maximum: Maximum

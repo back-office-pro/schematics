@@ -592,7 +592,7 @@
       },
       {
         "id": "f7a2050f-e4c0-4a02-a8fa-d55f3a2b7667",
-        "name": "agregate",
+        "name": "aggregate",
         "type": "enum",
         "options": {
           "required": true,
@@ -648,7 +648,7 @@
     "attributes": [
       {
         "id": "8d0b75db-3eba-4cfc-abe8-26e5f2d52ee7",
-        "name": "agregate",
+        "name": "aggregate",
         "type": "enum",
         "options": {
           "required": true,

@@ -9,7 +9,7 @@ RSpec.describe Schematics::ChartAbility do
   let(:chart) do
     Chart.create!(
       kind: 'line',
-      agregate: 'count',
+      aggregate: 'count',
       model: 'User',
       x_field: 'User#full_name'
     )
