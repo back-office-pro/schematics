@@ -14,9 +14,9 @@ fr:
         state: Etat
         title: Titre
         user_groups:
-          one: Groupe d'utilisateur
+          one: Groupe d'utilisateurs
           other: Groupes d'utilisateurs
-          zero: Aucun groupe d'utilisateur
+          zero: Aucun groupe d'utilisateurs
     enums:
       task:
         state:

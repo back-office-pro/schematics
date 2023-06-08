@@ -7,5 +7,5 @@ fr:
     models:
       user_group:
         gender: male
-        one: Groupe d'utilisateur
+        one: Groupe d'utilisateurs
         other: Groupes d'utilisateurs
