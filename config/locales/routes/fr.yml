@@ -7,6 +7,7 @@ fr:
     comments: commentaires
     delete: supprimer
     edit: editer
+    imports: importations
     login: connexion
     logout: deconnexion
     new: nouveau
