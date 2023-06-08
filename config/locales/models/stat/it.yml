@@ -1,0 +1,25 @@
+---
+it:
+  activerecord:
+    attributes:
+      stat:
+        agregate: Aggregato
+        field: Attributo
+        model: Data
+        roles:
+          one: Ruolo
+          other: Ruoli
+          zero: Nessun ruolo
+    enums:
+      stat:
+        agregate:
+          average: Media
+          count: Totale
+          maximum: Massimo
+          minimum: Minimo
+          sum: Somma
+    models:
+      stat:
+        gender: female
+        one: Statistica
+        other: Statistiche

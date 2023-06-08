@@ -1,0 +1,8 @@
+---
+it:
+  activerecord:
+    models:
+      schematics/version:
+        gender: female
+        one: Versione
+        other: Versioni

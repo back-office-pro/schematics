@@ -1,0 +1,26 @@
+---
+it:
+  activerecord:
+    attributes:
+      permission:
+        action: Azione
+        model: Data
+        name: Nome
+    enums:
+      permission:
+        action:
+          archive: Archiviare
+          create: Aggiungere
+          destroy: Cancellare
+          duplicate: Duplicare
+          import: Importare
+          index: Listare
+          read: Leggere
+          restore: Restaurare
+          show: Consultare
+          update: Editare
+    models:
+      permission:
+        gender: female
+        one: Autorizzazione
+        other: Autorizzazioni

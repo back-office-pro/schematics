@@ -1,0 +1,7 @@
+---
+it:
+  schematics:
+    profile:
+      update:
+        failure: Password errata
+        success: Il suo profilo è stato aggiornato correttamente

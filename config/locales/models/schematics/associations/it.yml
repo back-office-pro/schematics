@@ -1,0 +1,9 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/associations/association:
+        name: Nome
+        type: Tipo
+    models:
+      schematics/associations/has_and_belongs_to_many: Associazione molti-a-molti

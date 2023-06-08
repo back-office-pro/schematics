@@ -1,0 +1,26 @@
+---
+it:
+  activerecord:
+    attributes:
+      meeting:
+        content: Contenuto
+        creator: Creatore
+        end_at: Fine il
+        location: Luogo
+        participants:
+          one: Partecipante
+          other: Partecipanti
+          zero: Nessun partecipante
+        start_at: Inizia da
+        subject: Soggetto
+        to_come: A venire
+        url: URL
+        user_groups:
+          one: Gruppo di utenti
+          other: Gruppi di utenti
+          zero: Nessun gruppo di utenti
+    models:
+      meeting:
+        gender: male
+        one: Riunione
+        other: Riunioni

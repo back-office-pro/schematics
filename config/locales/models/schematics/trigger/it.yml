@@ -1,0 +1,14 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/trigger:
+        action: Azione
+        actions:
+          after_create: Dopo la creazione
+          after_destroy: Dopo la cancellazione
+          after_save: Dopo il salvataggio
+          before_create: Prima della creazione
+          before_destroy: Prima della cancellazione
+          before_save: Prima di salvare
+        callback: Funzione

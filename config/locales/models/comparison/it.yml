@@ -1,0 +1,12 @@
+---
+it:
+  activerecord:
+    attributes:
+      comparison:
+        ids: Risorse
+        model: Data
+    models:
+      comparison:
+        gender: male
+        one: Confronto
+        other: Confronti

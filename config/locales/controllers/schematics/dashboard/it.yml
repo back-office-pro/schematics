@@ -1,0 +1,6 @@
+---
+it:
+  schematics:
+    dashboard:
+      logout:
+        success: Disconnesso!

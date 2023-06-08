@@ -1,0 +1,7 @@
+---
+it:
+  schematics:
+    preferences:
+      update:
+        failure: Si è verificato un errore
+        success: Le preferenze sono state aggiornate correttamente

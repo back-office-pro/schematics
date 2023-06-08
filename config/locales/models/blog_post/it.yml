@@ -1,0 +1,24 @@
+---
+it:
+  activerecord:
+    attributes:
+      blog_post:
+        author: Autore
+        content: Contenuto
+        image: Immagine
+        state: Stato
+        title: Titolo
+    enums:
+      blog_post:
+        state:
+          draft: Bozza
+          published: Pubblicato
+    events:
+      blog_post:
+        publish: Pubblicare
+        unpublish: Annullare la pubblicazione
+    models:
+      blog_post:
+        gender: male
+        one: Post del blog
+        other: Posts del blog

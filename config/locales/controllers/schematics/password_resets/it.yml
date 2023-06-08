@@ -1,0 +1,11 @@
+---
+it:
+  schematics:
+    password_resets:
+      create:
+        failure: Email sconosciuta
+        success: E-mail inviata con le istruzioni per la reimpostazione della password
+      update:
+        expired: La reimpostazione della password è scaduta
+        failure: Si è verificato un errore
+        success: La password è stata reimpostata!

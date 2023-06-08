@@ -1,0 +1,13 @@
+---
+it:
+  activerecord:
+    attributes:
+      comment:
+        author: Autore
+        content: Contenuto
+        record: Registrazione
+    models:
+      comment:
+        gender: male
+        one: Commento
+        other: Commenti

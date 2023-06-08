@@ -1,0 +1,14 @@
+---
+it:
+  activerecord:
+    attributes:
+      active_storage/blob:
+        attachments: File
+        byte_size: Dimensione
+        content_type: Tipo di contenuto
+        filename: Filename
+    models:
+      active_storage/blob:
+        gender: male
+        one: File
+        other: Files

@@ -1,0 +1,17 @@
+---
+it:
+  activerecord:
+    attributes:
+      message:
+        author: Autore
+        content: Contenuto
+        recipients:
+          one: Destinatario
+          other: Destinatari
+          zero: Nessun destinatario
+        subject: Soggetto
+    models:
+      message:
+        gender: male
+        one: Messaggio
+        other: Messaggi

@@ -1,0 +1,49 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/options/wrapper:
+        actions: Azioni
+        aspect_ratio: Proporzioni
+        auto_increment: Incremento automatico
+        cached: Memorizzato nella cache
+        confirm: Conferma
+        content_type: Tipo di contenuto
+        core: Nucleo
+        default: Valore predefinito
+        depends_on: Dipende di
+        descriptor: Descrittore
+        direct_assignment: Assegnazione diretta
+        encrypted: Criptato
+        end_date: Data di fine
+        equal_to: Uguale a
+        events: Eventi
+        existing: Esistente
+        greater_than: Maggiore di
+        greater_than_or_equal_to: Maggiore o uguale a
+        group_by: Raggruppato per
+        height: Altezza
+        hidden: Nascosto
+        icon: Icona
+        inverse: Inverso
+        length: Lunghezza
+        less_than: Minore di
+        less_than_or_equal_to: Minore o uguale a
+        limit: Limite
+        max: Massimo
+        min: Minimo
+        other_than: Altro che
+        polymorphic: Polimorfico
+        precision: Precisione
+        readonly: Sola lettura
+        required: Obbligatorio
+        scale: Scala
+        separator: Separatore
+        size: Dimensione
+        start_date: Data di inizio
+        translated: Tradotto
+        type: Tipo
+        unique: Unico
+        unit: Unità
+        values: Valori
+        width: Larghezza

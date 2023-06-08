@@ -1,0 +1,16 @@
+---
+it:
+  routes:
+    active_storage: immagazzinamento
+    admin: amministrazione
+    blobs: files
+    comments: commenti
+    delete: cancellare
+    edit: editare
+    imports: importazioni
+    login: connessione
+    logout: disconnessione
+    new: nuovo
+    password_resets: passwords
+    profile: profilo
+    versions: storico

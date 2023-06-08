@@ -1,0 +1,15 @@
+---
+it:
+  activerecord:
+    attributes:
+      role:
+        name: Nome
+        permissions:
+          one: Autorizzazione
+          other: Autorizzazioni
+          zero: Nessuna autorizzazione
+    models:
+      role:
+        gender: male
+        one: Ruolo
+        other: Ruoli

@@ -1,0 +1,25 @@
+---
+it:
+  schematics:
+    resources:
+      archive:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} archiviat@{f:a|m:o|fv:a|mv:o} correttamente"
+      create:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} creat@{f:a|m:o|fv:a|mv:o} correttamente"
+      destroy:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} eliminat@{f:a|m:o|fv:a|mv:o} correttamente"
+      duplicate:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} duplicat@{f:a|m:o|fv:a|mv:o} correttamente"
+      restore:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} ripristinat@{f:a|m:o|fv:a|mv:o} correttamente"
+      trigger:
+        failure: Si è verificato un errore
+        success: L'azione %{event} @{f:sulla |m:sull'|fv:sull'|mv:sull'}%{human_name} è stata eseguita correttamente
+      update:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} aggiornat@{f:a|m:o|fv:a|mv:o} correttamente"

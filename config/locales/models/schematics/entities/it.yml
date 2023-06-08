@@ -1,0 +1,9 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/entities/entity:
+        name: Nome
+    models:
+      schematics/entities/entity: Entità
+      schematics/entities/singleton: Entità singola
