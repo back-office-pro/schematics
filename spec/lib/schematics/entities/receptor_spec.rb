@@ -28,7 +28,10 @@ describe Schematics::Entities::Receptor do
     [
       {
         name: 'subject',
-        type: 'string'
+        type: 'string',
+        options: {
+          readonly: true
+        }
       },
       {
         name: 'content',
@@ -109,7 +112,7 @@ describe Schematics::Entities::Receptor do
   describe '#fillable_elements' do
     subject { receptor.fillable_elements.map(&:name) }
 
-    it { is_expected.to contain_exactly('content', 'record', 'subject', 'participants') }
+    it { is_expected.to contain_exactly('content', 'record', 'participants') }
   end
 
   describe '#validatable_elements' do
@@ -189,7 +192,7 @@ describe Schematics::Entities::Receptor do
   describe '#fillable_attributes' do
     subject { receptor.fillable_attributes.map(&:name) }
 
-    it { is_expected.to contain_exactly('content', 'record', 'subject') }
+    it { is_expected.to contain_exactly('content', 'record') }
   end
 
   describe '#validatable_attributes' do
