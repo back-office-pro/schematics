@@ -10,11 +10,6 @@ RSpec.describe Schematics::AdminDashboardAbility do
   let(:user) { User.new(role:) }
   let(:role) { Role.new(permissions:) }
   let(:permissions) { [] }
-  let(:admin_role) do
-    Role.create!(name: 'Admin', permissions: Permission.create_entities_permissions!)
-  end
-
-  before { admin_role }
 
   it { is_expected.not_to be_able_to(:read, :admin_dashboard) }
 

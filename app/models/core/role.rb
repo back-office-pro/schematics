@@ -2,7 +2,7 @@
 
 class Role < Schematics::ApplicationRecord
   class << self
-    def admin = first
+    def admin = first_or_initialize
   end
 
   def admin? = eql?(self.class.admin)
