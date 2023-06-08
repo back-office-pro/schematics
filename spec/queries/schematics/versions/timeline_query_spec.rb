@@ -6,18 +6,13 @@ RSpec.describe Schematics::Versions::TimelineQuery do
   subject(:query) { described_class }
 
   include_context 'with user'
+  include_context 'with admin role'
 
   let(:ability) { Schematics::Ability.new(user) }
   let(:first_version) { Schematics::Version.create!(event: 'create', item: user, user:) }
   let(:second_version) { Schematics::Version.create!(event: 'update', item: user, user:) }
-  let(:permissions) { Permission.create_entities_permissions! }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
 
-  before do
-    admin_role
-    first_version
-    second_version
-  end
+  before { [first_version, second_version] }
 
   describe '.call' do
     subject { query.call(ability, versions) }

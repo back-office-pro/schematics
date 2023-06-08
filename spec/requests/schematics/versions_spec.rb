@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Versions' do
   include_context 'with authenticated user'
+  include_context 'with admin role'
 
   let(:role) { admin_role }
   let(:version) do

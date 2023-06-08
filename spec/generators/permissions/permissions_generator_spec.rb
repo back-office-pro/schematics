@@ -7,6 +7,7 @@ RSpec.describe PermissionsGenerator do
   subject(:generator) { described_class.new([name], options, behavior:) }
 
   include_context 'with user'
+  include_context 'with admin role'
 
   let(:name) { 'user' }
   let(:model) { 'User' }
@@ -16,15 +17,8 @@ RSpec.describe PermissionsGenerator do
   let(:chart) { Chart.create!(kind: 'line', aggregate: 'count', model:, x_field: 'User#full_name') }
   let(:stat) { Stat.create!(aggregate: 'count', model:) }
   let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
-  let(:admin_role) do
-    Role.create!(
-      name: 'Admin',
-      permissions: Permission.create_entities_permissions!,
-      created_at: Time.current.yesterday
-    )
-  end
 
-  before { [permission, chart, stat, version, admin_role] }
+  before { [permission, chart, stat, version] }
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }

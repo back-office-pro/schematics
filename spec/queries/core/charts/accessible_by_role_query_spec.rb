@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe Core::Charts::AccessibleByRoleQuery do
   subject(:query) { described_class }
 
-  let(:permissions) { Permission.create_entities_permissions! }
+  include_context 'with admin role'
+
   let(:manager_role) { Role.create!(name: 'Manager', permissions:) }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
   let(:first_chart) do
     Chart.create!(
       kind: 'line',

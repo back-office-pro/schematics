@@ -6,9 +6,9 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
   subject { render_inline described_class.new(version:) }
 
   include_context 'with user'
+  include_context 'with admin role'
 
-  let(:permissions) { Permission.create_entities_permissions! }
-  let(:role) { Role.create!(name: 'Admin', permissions:) }
+  let(:role) { admin_role }
   let(:version) { Schematics::Version.create!(event:, item: user, user:, object:) }
 
   before { allow(vc_test_controller).to receive(:current_user).and_return(user) }

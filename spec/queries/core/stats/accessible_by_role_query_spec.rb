@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe Core::Stats::AccessibleByRoleQuery do
   subject(:query) { described_class }
 
-  let(:permissions) { Permission.create_entities_permissions! }
+  include_context 'with admin role'
+
   let(:manager_role) { Role.create!(name: 'Manager', permissions:) }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
   let(:first_stat) { Stat.create!(aggregate: 'count', model: 'User') }
   let(:second_stat) { Stat.create!(aggregate: 'count', model: 'User', roles: [admin_role]) }
   let(:third_stat) { Stat.create!(aggregate: 'count', model: 'User', roles: [manager_role]) }

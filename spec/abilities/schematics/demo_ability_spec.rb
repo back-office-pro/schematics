@@ -6,8 +6,10 @@ require 'cancan/matchers'
 RSpec.describe Schematics::DemoAbility do
   subject(:ability) { described_class.new }
 
+  include_context 'with admin role'
+
   let(:user) { User.new(role:) }
-  let(:role) { Role.create!(name: 'Admin', permissions: Permission.create_entities_permissions!) }
+  let(:role) { admin_role }
 
   before { allow(Tenant).to receive(:demo?).and_return(true) }
 

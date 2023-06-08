@@ -6,12 +6,11 @@ require 'generators/permission/permission_generator'
 RSpec.describe PermissionGenerator do
   subject(:generator) { described_class.new(['user'], options, behavior:) }
 
-  let(:permission) { Permission.create!(model: 'User', action: 'create') }
-  let(:admin_role) do
-    Role.create!(name: 'Admin', permissions: Permission.create_entities_permissions!)
-  end
+  include_context 'with admin role'
 
-  before { [permission, admin_role] }
+  let(:permission) { Permission.create!(model: 'User', action: 'create') }
+
+  before { permission }
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }

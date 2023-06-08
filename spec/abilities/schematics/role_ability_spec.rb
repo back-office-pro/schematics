@@ -6,10 +6,7 @@ require 'cancan/matchers'
 RSpec.describe Schematics::RoleAbility do
   subject(:ability) { described_class.new }
 
-  let(:permissions) { Permission.create_entities_permissions! }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
-
-  before { admin_role }
+  include_context 'with admin role'
 
   it { is_expected.not_to be_able_to(:duplicate, admin_role) }
   it { is_expected.not_to be_able_to(:update, admin_role) }

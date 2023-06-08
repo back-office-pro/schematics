@@ -10,10 +10,8 @@ RSpec.shared_context 'with unauthenticated user' do
   let(:json_response) { JSON.parse(response.body) }
   let(:accept_header) { 'application/json' }
   let(:headers) { { 'Accept' => accept_header } }
-  let(:permissions) { Permission.create_entities_permissions! }
-  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
 
-  before { [admin_role, user] }
+  before { user }
 end
 
 RSpec.shared_context 'with authenticated user' do
@@ -27,6 +25,13 @@ RSpec.shared_context 'with authenticated user' do
       'Authorization' => "Bearer #{auth_token}"
     }
   end
+end
+
+RSpec.shared_context 'with admin role' do
+  let(:permissions) { Permission.create_entities_permissions! }
+  let(:admin_role) { Role.create!(name: 'Admin', permissions:) }
+
+  before { admin_role }
 end
 
 RSpec.shared_context 'with import' do

@@ -6,10 +6,10 @@ RSpec.describe Schematics::Searchkickable::MultisearchQuery do
   subject(:query) { described_class.new(model_class) }
 
   include_context 'with user'
+  include_context 'with admin role'
 
   let(:model_class) { User }
-  let(:permissions) { Permission.create_entities_permissions! }
-  let(:role) { Role.create!(name: 'Admin', permissions:) }
+  let(:role) { admin_role }
   let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
 
