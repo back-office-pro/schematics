@@ -27,7 +27,7 @@ RSpec.describe TranslationGenerator do
       it 'create translations' do
         expect { invoke_all }
           .to change(Translation, :count)
-          .by(2)
+          .by(3)
       end
     end
 

@@ -107,7 +107,7 @@ RSpec.describe Core::SchemaDatasets::Migrate do
       end
 
       it 'creates translations' do
-        expect { migrate }.to change(Translation, :count).by(8)
+        expect { migrate }.to change(Translation, :count).by(12)
       end
 
       it 'defines a model class' do
@@ -268,7 +268,7 @@ RSpec.describe Core::SchemaDatasets::Migrate do
       end
 
       it 'destroys translations' do
-        expect { migrate }.to change(Translation, :count).by(-8)
+        expect { migrate }.to change(Translation, :count).by(-12)
       end
 
       it 'undefines a model class' do
@@ -322,7 +322,7 @@ RSpec.describe Core::SchemaDatasets::Migrate do
       end
 
       it 'creates translations' do
-        expect { migrate }.to change(Translation, :count).by(2)
+        expect { migrate }.to change(Translation, :count).by(3)
       end
 
       it 'responds to new model attribute' do
@@ -364,7 +364,7 @@ RSpec.describe Core::SchemaDatasets::Migrate do
       end
 
       it 'destroys translations' do
-        expect { migrate }.to change(Translation, :count).by(-2)
+        expect { migrate }.to change(Translation, :count).by(-3)
       end
 
       it 'does not respond to old model attribute' do
