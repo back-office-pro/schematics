@@ -3,7 +3,7 @@
 class Configuration < Schematics::ApplicationRecord
   include Schematics::Cacheable
 
-  LOCALE_TO_TIME_ZONE = { fr: 'Paris', en: 'UTC' }.freeze
+  LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
 
   after_initialize :set_chartkick_options, :set_application_hosts
   attribute :company_name, default: -> { Tenant.human }
