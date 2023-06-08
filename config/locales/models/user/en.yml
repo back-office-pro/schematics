@@ -40,6 +40,7 @@ en:
         locale:
           en: English
           fr: French
+          it: Italian
     models:
       user:
         gender: male

@@ -22,9 +22,11 @@ en:
       available_locales:
         en: English
         fr: French
+        it: Italian
       locale:
         en: English
         fr: French
+        it: Italian
     models:
       configuration:
         gender: female

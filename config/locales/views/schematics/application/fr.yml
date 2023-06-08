@@ -17,3 +17,4 @@ fr:
         field:
           en: "%{attribute_name} en anglais"
           fr: "%{attribute_name} en français"
+          it: "%{attribute_name} en italien"
