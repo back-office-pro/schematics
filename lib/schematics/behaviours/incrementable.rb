@@ -5,7 +5,9 @@ module Schematics
     module Incrementable
       delegate :auto_increment?, to: :options
 
-      alias readonly? auto_increment?
+      def readonly?
+        super || auto_increment?
+      end
 
       def available_options = super.push(Options::AutoIncrement)
 
