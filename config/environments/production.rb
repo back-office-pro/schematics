@@ -50,6 +50,7 @@ Rails.application.configure do
   config.log_level = :info
   config.log_tags = [:request_id]
   config.log_formatter = Logger::Formatter.new
+  config.lograge.enabled = true
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger = ActiveSupport::Logger.new($stdout)

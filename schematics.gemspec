@@ -79,6 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwt', '~> 2.7.0'
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
+  spec.add_dependency 'lograge', '~> 0.12.0'
   spec.add_dependency 'mobility', '~> 1.3.0.rc1'
   spec.add_dependency 'mobility-actiontext', '~> 1.1.1'
   spec.add_dependency 'mobility-ransack', '~> 1.2.2'
