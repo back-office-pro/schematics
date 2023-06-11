@@ -4,7 +4,7 @@ module Schematics
   class PdfSerializer
     delegate :render, to: :renderer, private: true
     delegate :human_name, to: :model_class, private: true
-    delegate :default_url_options, to: '::Tenant', private: true
+    delegate :default_url_options, to: ::Tenant, private: true
     delegate :key_generator, to: '::Rails.application', private: true
     delegate :cookies_rotations,
              :signed_cookie_salt,
