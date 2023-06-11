@@ -9,7 +9,8 @@ export default class extends ApplicationController {
   get options () {
     return {
       filter: 'input',
-      preventOnFilter: false
+      preventOnFilter: false,
+      animation: 150
     }
   }
 }
