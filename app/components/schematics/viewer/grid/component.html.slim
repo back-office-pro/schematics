@@ -21,7 +21,7 @@
                                 = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
                                 = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                                 = render Schematics::Viewer::Grid::Carousel::Component.new(resource:)
-                            tbody data-controller='sortable'
+                            tbody
                               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                                 tr.animate__slideInRight class=col_preference_class(field)
                                   th.text-nowrap
