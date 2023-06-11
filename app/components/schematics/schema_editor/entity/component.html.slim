@@ -12,7 +12,7 @@
       = builder.hidden_field :id
       = builder.text_field :name, floating: true, maxlength: 50, data: { controller: 'schema-editor--special-characters' }
       = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)
-  .row.g-3.mt-1 id="fields-#{index}" data-nested-form-target='targets'
+  .row.g-3.mt-1 id="fields-#{index}" data-controller='sortable' data-nested-form-target='targets'
     = builder.fields_for :attributes do |attributes_builder|
       = render Schematics::SchemaEditor::Attribute::Component.new(builder: attributes_builder)
     = builder.fields_for :virtuals do |virtuals_builder|

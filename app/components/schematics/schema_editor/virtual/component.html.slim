@@ -2,7 +2,7 @@
   .card.shadow-sm
     .card-header.px-2.py-1
       .row.align-items-center
-        .col.text-truncate
+        .col.text-truncate.cursor-grab
           = render Schematics::CardHeading::Component.new(icon:, title:)
         .col-auto
           = render Schematics::SchemaEditor::Button::Options::Component.new(builder:)
