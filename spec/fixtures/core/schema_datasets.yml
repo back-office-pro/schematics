@@ -160,6 +160,9 @@ one:
             required: true
     - id: <%= SecureRandom.uuid %>
       name: order
+      associations:
+        - type: has_and_belongs_to_many
+          name: users
       virtuals:
         - id: <%= SecureRandom.uuid %>
           name: reference
