@@ -1,5 +1,5 @@
 import ApplicationController from 'controllers/application_controller'
-import saveAs from 'file-saver'
+import { saveAs } from 'file-saver'
 
 export default class extends ApplicationController {
   static get targets () {

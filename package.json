@@ -9,10 +9,12 @@
     "animate.css": "~4.1.1",
     "autosize": "~6.0.1",
     "bootstrap": "~5.2.3",
+    "file-saver-es": "~2.0.5",
     "flag-icons": "~6.7.0",
     "sortablejs": "~1.15.0",
     "swagger-ui-dist": "~4.19.0",
     "swagger-ui-themes": "~3.0.1",
+    "timeago.js": "~4.0.2",
     "tom-select": "~2.2.2",
     "tributejs": "~5.1.3"
   }
