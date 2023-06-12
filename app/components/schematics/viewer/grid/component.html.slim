@@ -25,7 +25,7 @@
                               - entity.listable_elements.stable_sort_by(&:weight).each do |field|
                                 tr.animate__slideInRight class=col_preference_class(field)
                                   th.text-nowrap
-                                    = fa_icon field.icon, class: 'fa-fw me-2 text-muted'
+                                    = fa_icon field.icon, class: 'fa-fw me-2 text-body-secondary'
                                     = model_class.human_attribute_name(field.name)
                                   td.text-nowrap
                                     = render Schematics::Resource::Component.new(resource:, field:)

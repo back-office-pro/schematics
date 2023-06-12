@@ -12,6 +12,12 @@
   left: initial;
 }
 
+// TODO: Remove after upgrading to Bootstrap@5.3
+
+.text-body-secondary {
+  @extend .text-muted;
+}
+
 // Turbo
 
 .turbo-progress-bar {

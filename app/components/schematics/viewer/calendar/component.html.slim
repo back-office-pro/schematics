@@ -12,7 +12,7 @@
             tr
               - week.each do |date|
                 td.calendar-day.p-0 class=td_class_for(date)
-                  .text-muted.ps-2.pt-1 = date.day
+                  .text-body-secondary.ps-2.pt-1 = date.day
                   - resources_for(date).each do |resource|
                     = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: alert_css_classes_for(resource, date)) do |c|
                       - c.with_resource do

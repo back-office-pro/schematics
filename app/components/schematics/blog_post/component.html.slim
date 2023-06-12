@@ -9,7 +9,7 @@ h5.text-center.text-white.mb-4 = title
     = render Schematics::Attachment::Component.avatar(user: author)
   .col
     = author
-    .text-muted data-controller='timeago' datetime=created_at
+    .text-body-secondary data-controller='timeago' datetime=created_at
   .col-auto
     = link_to blog_index_path, class: 'text-white' do
       = fa_icon :circle_chevron_left, class: 'fa-2x'

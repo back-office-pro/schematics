@@ -17,4 +17,4 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2
       = t('.title')
     .pre-scrollable.overflow-scroll
       = render Schematics::Navbar::MessageCenter::Preview::Component.with_collection(messages)
-    = link_to t('.show_all'), messages_path, class: 'dropdown-item text-muted text-center small'
+    = link_to t('.show_all'), messages_path, class: 'dropdown-item text-body-secondary text-center small'

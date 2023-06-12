@@ -22,4 +22,4 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2 data-controller='notificatio
       - versions.each do |version|
         .dropdown-item
           = render Schematics::VersionPreview::Component.new(version:)
-    = link_to t('.show_all'), versions_path, class: 'dropdown-item text-muted text-center small'
+    = link_to t('.show_all'), versions_path, class: 'dropdown-item text-body-secondary text-center small'

@@ -2,7 +2,7 @@
 - when Schematics::Associations::Association, Schematics::Attributes::Association
   - if value
     - if value.deleted?
-      .text-muted
+      .text-body-secondary
         = fa_icon :box_archive, class: 'me-2'
         = value
     - else
