@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_storage_base64', '~> 2.0.0'
   spec.add_dependency 'active_storage_validations', '~> 1.0.4'
   spec.add_dependency 'after_commit_everywhere', '~> 1.3.0'
-  spec.add_dependency 'aws-sdk-s3', '~> 1.123.1'
+  spec.add_dependency 'aws-sdk-s3', '~> 1.123.2'
   spec.add_dependency 'bcrypt', '~> 3.1.18'
   spec.add_dependency 'bootsnap', '~> 1.16.0'
   spec.add_dependency 'bootstrap-email', '~> 1.4.0'
@@ -122,6 +122,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '~> 1.4.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 3.1.0'
+  spec.add_dependency 'view_component', '~> 3.2.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
