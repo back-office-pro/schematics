@@ -5,6 +5,7 @@
 //= link @fortawesome/fontawesome-free/js/fontawesome.js
 //= link @fortawesome/fontawesome-free/svgs/solid/rocket.svg
 //= link @github/hotkey/dist/index.js
+//= link @popperjs/core/dist/esm/index.js
 //= link autosize/dist/autosize.esm.js
 //= link bootstrap/dist/js/bootstrap.esm.js
 //= link pagy-module.js
