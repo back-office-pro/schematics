@@ -41,6 +41,8 @@ $offcanvas-bg-color: $light;
 
 @import 'bootstrap/scss/bootstrap';
 
+// TODO: Remove after tom-select is upgraded to Bootstrap@5.3
+
 @function mix($color1, $color2, $weight) {
   @return color-mix($color1, $color2, $weight)
 }
@@ -56,12 +58,6 @@ $offcanvas-bg-color: $light;
 
 .fixed-top {
   left: initial;
-}
-
-// TODO: Remove after upgrading to Bootstrap@5.3
-
-.text-body-secondary {
-  @extend .text-muted;
 }
 
 // Turbo
