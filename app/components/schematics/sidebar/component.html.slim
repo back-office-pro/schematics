@@ -1,8 +1,8 @@
 .col.bg-primary.sidebar data-controller='sidebar' class=('toggled' if toggled?)
-  .sidebar-sticky.sticky-top
+  .sidebar-sticky.sticky-top.overflow-x-hidden.overflow-y-auto
     .sidebar-brand.fs-5.fw-bolder.text-uppercase.d-flex.align-items-center.text-white.text-nowrap.justify-content-center
       = company_name
-    ul.nav.flex-column.flex-nowrap
+    ul.nav.flex-column.flex-nowrap.overflow-y-auto
       li.nav-item.mb-3
       - model_classes.each do |model_class|
         li.nav-item.text-center.mw-100.mb-2

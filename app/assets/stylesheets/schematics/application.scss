@@ -143,3 +143,13 @@ svg {
 .cursor-grab {
   cursor: grab;
 }
+
+// TODO: Remove after upgrading to Bootstrap@5.3
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
