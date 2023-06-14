@@ -2,20 +2,18 @@
 
 # :reek:MissingSafeMethod
 class Licence < Schematics::ApplicationRecord
+  GATEWAY = ::Core::Licences::Stripe
+
   def load!
     PaperTrail.request(enabled: false) do
-      update!(::Core::Licences::Load.call.data)
+      update!(GATEWAY::Load.call.data)
       reload && update_env_file if metadata_previously_changed?
     end
   end
 
-  def after_enable
-    Stripe::Subscription.update(::Core::Licences::Load.call.id, cancel_at_period_end: false)
-  end
+  def after_enable = GATEWAY::Enable.call
 
-  def after_cancel
-    Stripe::Subscription.update(::Core::Licences::Load.call.id, cancel_at_period_end: true)
-  end
+  def after_cancel = GATEWAY::Cancel.call
 
   def entities_size = Tenant
     .schema
