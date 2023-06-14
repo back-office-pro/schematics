@@ -6,6 +6,7 @@ module Schematics
 
     included do
       include ::Singleton
+      include Cacheable
 
       class << self
         public :new, :allocate
