@@ -14,8 +14,6 @@ class Tenant
     DEFAULT_PORT = 3000
     SEMAPHORE = Mutex.new.freeze
 
-    delegate :id, :email, to: :customer, prefix: true, allow_nil: true
-
     def schema
       SEMAPHORE.synchronize do
         @schema ||= Schematics::Schema.new(data:, version:)
@@ -25,15 +23,6 @@ class Tenant
     def schema=(value)
       SEMAPHORE.synchronize do
         @schema = value
-      end
-    end
-
-    def customer
-      SEMAPHORE.synchronize do
-        @customer ||= ::Stripe::Customer
-                      .search(query: "name:'#{subdomain}'")
-                      .data
-                      .first
       end
     end
 
@@ -70,17 +59,6 @@ class Tenant
     def ssl? = ssl_path.exist?
 
     def demo? = name.eql?('demo') && !Rails.env.test?
-
-    def customer_password
-      return unless demo?
-
-      'Azerty1!'
-    end
-
-    def customer_locale = customer
-      &.preferred_locales
-      &.first
-      &.slice(0, 2)
 
     def host
       return "#{subdomain}.#{domain}" if Rails.env.production?

@@ -1286,6 +1286,24 @@
     },
     "attributes": [
       {
+        "id": "90decead-8b55-499f-b7a1-30c0fc3849ad",
+        "name": "email",
+        "type": "email",
+        "options": {
+          "readonly": true,
+          "cached": true
+        }
+      },
+      {
+        "id": "7944825a-473a-4a87-911f-e9d169807655",
+        "name": "default_locale",
+        "type": "locale",
+        "options": {
+          "readonly": true,
+          "cached": true
+        }
+      },
+      {
         "id": "b810d540-09a8-4cdd-8fea-13d304434513",
         "name": "plan",
         "type": "enum",

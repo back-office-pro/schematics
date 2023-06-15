@@ -15,10 +15,10 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   )
   Configuration.instance.update!(
     available_locales: I18n.available_locales.map(&:to_s),
-    locale: Tenant.customer_locale
+    locale: Licence.default_locale
   )
   Documentation.create!
-  User.create!(email: Tenant.customer_email, password: Tenant.customer_password, role: Role.admin)
+  User.create!(email: Licence.email, password: Licence.default_password, role: Role.admin)
   Stat.create!(aggregate: 'count', model: 'User')
   Stat.create!(
     aggregate: 'sum',
