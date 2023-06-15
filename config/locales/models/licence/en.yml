@@ -3,6 +3,8 @@ en:
   activerecord:
     attributes:
       licence:
+        default_locale: Default locale
+        email: Email
         metadata: Metadata
         plan: Plan
         state: State
