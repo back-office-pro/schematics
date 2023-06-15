@@ -51,7 +51,12 @@ end
 RSpec.shared_context 'with user' do
   let(:reset_password_sent_at) { nil }
   let(:preferences) { {} }
-  let(:user_groups) { [UserGroup.create!(name: 'MyGroup')] }
+  let(:user_groups) do
+    [
+      UserGroup.create!(name: 'My Group 1'),
+      UserGroup.create!(name: 'My Group 2')
+    ]
+  end
   let(:role) do
     Role.create!(
       name: 'Manager',
