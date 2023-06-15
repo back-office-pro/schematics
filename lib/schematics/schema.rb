@@ -134,7 +134,7 @@ module Schematics
         entity
           .association_attributes
           .reject(&:polymorphic?)
-          .each { |parent| find_has_one_through_associations(entity, parent) }
+          .each(&method(:find_has_one_through_associations).curry.call(entity))
       end
     end
 
