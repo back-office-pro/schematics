@@ -37,8 +37,6 @@ module Schematics
         .push('id')
         .sort
 
-      private
-
       def field
         entity.find_field_by_name(field_name)
       end

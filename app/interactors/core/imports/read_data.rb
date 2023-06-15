@@ -49,17 +49,9 @@ module Core
         when Schematics::Associations::HasAndBelongsToMany
           value
             .split(VALUES_SEPARATOR)
-            .map do |descriptor|
-              field
-                .model_class
-                .left_joins(field.descriptor.joins)
-                .find_by("#{field.descriptor.to_sql} = ?", descriptor)
-            end
+            .map(&method(:association_value).curry.call(field))
         when Schematics::Attributes::Association
-          field
-            .model_class
-            .left_joins(field.descriptor.joins)
-            .find_by("#{field.descriptor.to_sql} = ?", value)
+          association_value(field, value)
         when Schematics::Attributes::Enum
           enums_translations
             &.dig(field.name.to_sym)
@@ -86,6 +78,22 @@ module Core
 
       def enums_translations
         ::I18n.t(model.underscore.to_sym, scope: [i18n_scope, :enums])
+      end
+
+      def association_value(field, value)
+        case field.descriptor.field
+        when Schematics::Behaviours::Translatable
+          field
+            .model_class
+            .i18n
+            .left_joins(field.descriptor.joins)
+            .find_by(field.descriptor.to_s => value)
+        else
+          field
+            .model_class
+            .left_joins(field.descriptor.joins)
+            .find_by("#{field.descriptor.to_sql} = ?", value)
+        end
       end
     end
   end
