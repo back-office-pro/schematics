@@ -6,7 +6,7 @@ class Licence < Schematics::ApplicationRecord
 
   def load!
     PaperTrail.request(enabled: false) do
-      update!(GATEWAY::Load.call.data)
+      update!(GATEWAY::Fetch.call.data)
       reload && update_env_file if metadata_previously_changed?
     end
   end

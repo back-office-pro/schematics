@@ -8,7 +8,7 @@ module Core
 
         before { context.params = { cancel_at_period_end: true } }
 
-        organize Load, Update
+        organize Fetch, Update
       end
     end
   end

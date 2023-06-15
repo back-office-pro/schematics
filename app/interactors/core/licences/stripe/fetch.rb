@@ -3,7 +3,7 @@
 module Core
   module Licences
     module Stripe
-      class Load
+      class Fetch
         include Interactor
         delegate :name, to: :product, allow_nil: true, private: true
         delegate :id, :cancel_at_period_end, to: :subscription, allow_nil: true, private: true
