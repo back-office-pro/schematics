@@ -4,12 +4,6 @@
 class Licence < Schematics::ApplicationRecord
   GATEWAY = ::Core::Licences::Stripe
 
-  class << self
-    def default_password
-      'Azerty1!' if Tenant.demo?
-    end
-  end
-
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)

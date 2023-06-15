@@ -60,6 +60,12 @@ class Tenant
 
     def demo? = name.eql?('demo') && !Rails.env.test?
 
+    def default_password
+      return unless demo?
+
+      'Azerty1!'
+    end
+
     def host
       return "#{subdomain}.#{domain}" if Rails.env.production?
 
