@@ -888,6 +888,16 @@
             }
           ]
         }
+      },
+      {
+        "id": "8c2f6734-09d3-4eed-8d28-3082beb262f6",
+        "name": "progress",
+        "type": "percentage",
+        "options": {
+          "readonly": true,
+          "precision": 1,
+          "default": 0.0
+        }
       }
     ]
   },

@@ -5,6 +5,7 @@ en:
       schema_dataset:
         data: Data
         data_version: Version
+        progress: Progress
         state: State
     enums:
       schema_dataset:
