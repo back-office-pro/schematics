@@ -519,7 +519,7 @@
       },
       {
         "id": "4fcae220-2ea7-47b8-9a70-2ec366443ec3",
-        "name": "status",
+        "name": "state",
         "type": "enum",
         "options": {
           "required": true,

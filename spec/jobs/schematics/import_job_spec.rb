@@ -21,9 +21,9 @@ RSpec.describe Schematics::ImportJob do
         expect { perform_now }.to change(import.model_class, :count).by(2)
       end
 
-      it 'changes the import status from in_progress to finished' do
+      it 'changes the import state from in_progress to finished' do
         expect { perform_now }
-          .to change { import.reload.status }
+          .to change { import.reload.state }
           .from('in_progress')
           .to('finished')
       end
@@ -36,9 +36,9 @@ RSpec.describe Schematics::ImportJob do
         expect { perform_now }.not_to change(import.model_class, :count)
       end
 
-      it 'changes the import status from in_progress to error' do
+      it 'changes the import state from in_progress to error' do
         expect { perform_now }
-          .to change { import.reload.status }
+          .to change { import.reload.state }
           .from('in_progress')
           .to('error')
       end

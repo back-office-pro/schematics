@@ -8,10 +8,10 @@ en:
         import_errors: Errors
         model: Data
         progress: Progress
-        status: Status
+        state: State
     enums:
       import:
-        status:
+        state:
           error: Error
           finished: Finished
           in_progress: In progress
