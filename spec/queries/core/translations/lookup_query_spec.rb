@@ -9,21 +9,21 @@ RSpec.describe Core::Translations::LookupQuery do
   let(:first_translation) do
     Translation.create!(
       locale:,
-      key: 'activerecord.attributes.schema_dataset.state',
+      key: 'activerecord.attributes.migration.state',
       value: 'State'
     )
   end
   let(:second_translation) do
     Translation.create!(
       locale:,
-      key: 'activerecord.enums.schema_dataset.state.pending',
+      key: 'activerecord.enums.migration.state.pending',
       value: 'Pending'
     )
   end
   let(:third_translation) do
     Translation.create!(
       locale:,
-      key: 'activerecord.enums.schema_dataset.state.in_progress',
+      key: 'activerecord.enums.migration.state.in_progress',
       value: 'In progress'
     )
   end
@@ -34,24 +34,24 @@ RSpec.describe Core::Translations::LookupQuery do
     subject { query.call(locale, key) }
 
     context 'when key does not exist' do
-      let(:key) { 'activerecord.attributes.schema_dataset.foo' }
+      let(:key) { 'activerecord.attributes.migration.foo' }
 
       it { is_expected.to be_empty }
     end
 
     context 'when key is an attribute' do
-      let(:key) { 'activerecord.attributes.schema_dataset.state' }
-      let(:expected_data) { { 'activerecord.attributes.schema_dataset.state' => 'State' } }
+      let(:key) { 'activerecord.attributes.migration.state' }
+      let(:expected_data) { { 'activerecord.attributes.migration.state' => 'State' } }
 
       it { is_expected.to eq(expected_data) }
     end
 
     context 'when key is enum root' do
-      let(:key) { 'activerecord.enums.schema_dataset.state' }
+      let(:key) { 'activerecord.enums.migration.state' }
       let(:expected_data) do
         {
-          'activerecord.enums.schema_dataset.state.in_progress' => 'In progress',
-          'activerecord.enums.schema_dataset.state.pending' => 'Pending'
+          'activerecord.enums.migration.state.in_progress' => 'In progress',
+          'activerecord.enums.migration.state.pending' => 'Pending'
         }
       end
 
@@ -62,9 +62,9 @@ RSpec.describe Core::Translations::LookupQuery do
       let(:key) { 'activerecord' }
       let(:expected_data) do
         {
-          'activerecord.attributes.schema_dataset.state' => 'State',
-          'activerecord.enums.schema_dataset.state.in_progress' => 'In progress',
-          'activerecord.enums.schema_dataset.state.pending' => 'Pending'
+          'activerecord.attributes.migration.state' => 'State',
+          'activerecord.enums.migration.state.in_progress' => 'In progress',
+          'activerecord.enums.migration.state.pending' => 'Pending'
         }
       end
 

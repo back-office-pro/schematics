@@ -1,29 +1,6 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "64d4940963052ffef11e5edb88d4703d589e3bcacc5ebda5eca4b8a150029c6f",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/interactors/core/schema_datasets/backup.rb",
-      "line": 19,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "IO.popen(\"pg_dump -Fc #{current_database}\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Core::SchemaDatasets::Backup",
-        "method": "call"
-      },
-      "user_input": "current_database",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": "Safe"
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "7aa7124642d554b67e0aebc4c937c69c5dd83d4c78b318d9098c88364b1cd7cb",
@@ -158,8 +135,31 @@
         22
       ],
       "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "fee42946fe6c82de980fc03c67e78686fee8d748e2c370a5f68a503c4efa5253",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/core/migrations/backup.rb",
+      "line": 19,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "IO.popen(\"pg_dump -Fc #{current_database}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Core::Migrations::Backup",
+        "method": "call"
+      },
+      "user_input": "current_database",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "Safe"
     }
   ],
-  "updated": "2023-05-18 00:27:39 +0200",
+  "updated": "2023-06-17 11:14:03 +0200",
   "brakeman_version": "5.4.1"
 }

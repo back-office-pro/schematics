@@ -1,0 +1,24 @@
+---
+en:
+  activerecord:
+    attributes:
+      migration:
+        data: Data
+        data_version: Version
+        progress: Progress
+        state: State
+    enums:
+      migration:
+        state:
+          error: Error
+          finished: Finished
+          in_progress: In progress
+          pending: Pending
+    events:
+      migration:
+        migrate: Migrate
+    models:
+      migration:
+        gender: female
+        one: Migration
+        other: Migrations

@@ -4,7 +4,7 @@ namespace :schematics do
   desc 'Generate schema application'
   task generate: :environment do
     Rails.cache.write('CORE_VERSION', Schematics::VERSION)
-    Schematics::Migration
+    Schematics::Migrator
       .new(Tenant.schema)
       .build_commands
       .flat_map(&:generators)

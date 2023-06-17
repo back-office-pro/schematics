@@ -81,7 +81,7 @@ class Tenant
     def data
       JSON.parse ActiveRecord::Base
         .connection
-        .execute('SELECT data FROM schema_datasets WHERE state = 2 ORDER BY created_at DESC LIMIT 1') # rubocop:disable Layout/LineLength
+        .execute('SELECT data FROM migrations WHERE state = 2 ORDER BY created_at DESC LIMIT 1')
         .getvalue(0, 0)
     rescue StandardError
       []

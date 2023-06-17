@@ -14,7 +14,7 @@ module Schematics
       merge ConfigurationAbility.new(user)
       merge ApiRequestAbility.new(user)
       merge CommentAbility.new(user)
-      merge SchemaDatasetAbility.new
+      merge MigrationAbility.new
       merge ComparisonAbility.new
       merge BlogAbility.new
       merge SearchAbility.new

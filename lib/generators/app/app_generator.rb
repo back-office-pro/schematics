@@ -157,11 +157,11 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:credentials:backup', env:
   end
 
-  def load_schemadataset_fixture
+  def load_migration_fixture
     return unless env.development?
     return unless generating?
 
-    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures/core" FIXTURES=schema_datasets'
+    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures/core" FIXTURES=migrations'
   end
 
   def reindex_searchkick
@@ -171,8 +171,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'searchkick:reindex:all', env:
   end
 
-  def create_schema_datasets_fixture_file
-    create_file 'spec/fixtures/schema_datasets.yml'
+  def create_migrations_fixture_file
+    create_file 'spec/fixtures/migrations.yml'
   end
 
   def edit_gitignore

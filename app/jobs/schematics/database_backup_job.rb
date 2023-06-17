@@ -2,6 +2,6 @@
 
 module Schematics
   class DatabaseBackupJob < ApplicationJob
-    def perform = Core::SchemaDatasets::Backup.call(force: true)
+    def perform = Core::Migrations::Backup.call(force: true)
   end
 end

@@ -6,15 +6,15 @@ module Schematics
       def wait_for(record)
         return if ::Tenant.backend.concurrency.zero?
 
-        Thread.new(record) do |schema_dataset|
-          schema_dataset_with_old_migration = schema_dataset.dup.tap(&:migration)
+        Thread.new(record) do |migration|
+          migration_with_old_migrator = migration.dup.tap(&:migrator)
           loop do
             sleep 1
-            break unless schema_dataset.reload.in_progress?
+            break unless migration.reload.in_progress?
           end
-          if schema_dataset.migrated?
-            ::Tenant.schema = schema_dataset.data
-            Core::SchemaDatasets::Reload.call(schema_dataset: schema_dataset_with_old_migration)
+          if migration.finished?
+            ::Tenant.schema = migration.data
+            Core::Migrations::Reload.call(migration: migration_with_old_migrator)
           end
           Thread.current.kill
         end
@@ -22,12 +22,12 @@ module Schematics
     end
 
     # :reek:UncommunicativeVariableName
-    def perform(schema_dataset)
-      result = Core::SchemaDatasets::Migrate.call(schema_dataset:)
-      return schema_dataset.state_error! if result.failure?
+    def perform(migration)
+      result = Core::Migrations::Migrate.call(migration:)
+      return migration.state_error! if result.failure?
 
-      schema_dataset
-        .tap(&:state_migrated!)
+      migration
+        .tap(&:state_finished!)
         .dump!
     end
   end

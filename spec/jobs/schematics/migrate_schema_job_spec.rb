@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::MigrateSchemaJob do
-  let(:schema_dataset) { SchemaDataset.create!(data:, state: :in_progress) }
+  let(:migration) { Migration.create!(data:, state: :in_progress) }
   let(:data) do
     [
       {
@@ -20,9 +20,9 @@ RSpec.describe Schematics::MigrateSchemaJob do
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(schema_dataset) }
+      expect { described_class.perform_later(migration) }
         .to have_enqueued_job(described_class)
-        .with(schema_dataset)
+        .with(migration)
     end
   end
 end

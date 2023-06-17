@@ -833,7 +833,7 @@
   },
   {
     "id": "ad1315cf-5547-452c-8aad-5fc6bda45fec",
-    "name": "schema_dataset",
+    "name": "migration",
     "options": {
       "icon": "diagram_project",
       "descriptor": "data_version",
@@ -872,7 +872,7 @@
           "values": [
             "pending",
             "in_progress",
-            "migrated",
+            "finished",
             "error"
           ],
           "events": [

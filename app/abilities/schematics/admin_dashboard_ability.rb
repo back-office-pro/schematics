@@ -6,7 +6,7 @@ module Schematics
       ::ApiKey,
       ::ApiRequest,
       ::Permission,
-      ::SchemaDataset,
+      ::Migration,
       ::Session,
       ::Translation,
       ::Chart,

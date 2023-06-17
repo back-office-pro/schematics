@@ -4,7 +4,7 @@ module Schematics
   module SchemaEditor
     module Entity
       class Component < ApplicationComponent
-        delegate :icon, to: '::SchemaDataset.entity'
+        delegate :icon, to: '::Migration.entity'
         delegate :index, to: :builder
         option :builder
 

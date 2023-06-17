@@ -9,7 +9,7 @@ module Schematics
     end
 
     def assign_version
-      response.headers['Version'] = ::SchemaDataset.current_data_version
+      response.headers['Version'] = ::Migration.current_data_version
     end
   end
 end

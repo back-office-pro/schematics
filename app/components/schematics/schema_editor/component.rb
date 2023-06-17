@@ -17,9 +17,9 @@ module Schematics
         .sort_by(&:name)
 
       def url
-        return schema_datasets_path if new_record?
+        return migrations_path if new_record?
 
-        schema_dataset_path(resource)
+        migration_path(resource)
       end
 
       def form_method
