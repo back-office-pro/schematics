@@ -45,7 +45,7 @@ body {
   transition: ease-in-out .3s;
 
   .container-fluid {
-    min-height: calc(100vh - 3.5rem - 5.5rem);
+    min-height: calc(100vh - 3.5rem - 3.5rem - 1rem);
   }
 
   &.toggled {
