@@ -11,6 +11,6 @@
           - if model_class
             = render Schematics::ResourceLinkTo::Component.new(resource: model_class) do |c|
               - c.with_body do
-                = fa_icon icon, size: '2x', class: 'text-light'
+                = fa_icon icon, size: '2x', class: 'text-body-secondary'
           - else
             = fa_icon :triangle_exclamation, size: '2x', class: 'text-danger'
