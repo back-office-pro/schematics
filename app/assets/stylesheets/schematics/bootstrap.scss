@@ -1,5 +1,5 @@
 $secondary: #95a5a6;
-$input-btn-focus-width: 0;
+$focus-ring-box-shadow: none;
 $input-padding-y: .5rem;
 $input-padding-x: .5rem;
 $input-group-addon-padding-x: .75rem;
@@ -34,6 +34,10 @@ $enable-caret: false;
 $badge-padding-y: .25em;
 $badge-padding-x: .5em;
 $zindex-dropdown: 1035;
+
+$input-bg: $input-group-addon-bg;
+$input-focus-bg: $input-group-addon-bg;
+$form-select-bg: $input-group-addon-bg;
 $accordion-button-active-bg: $card-cap-bg;
 $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 
