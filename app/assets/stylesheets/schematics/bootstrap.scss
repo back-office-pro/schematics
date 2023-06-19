@@ -58,6 +58,10 @@ $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
   @extend .border-primary;
 }
 
+ul.list-group.list-group-striped li:nth-of-type(even) {
+  @extend .bg-body-tertiary;
+}
+
 .fixed-top {
   left: initial;
 }
@@ -75,7 +79,10 @@ $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 .ts-dropdown.form-select {
   @extend .border-0;
   @extend .shadow-sm;
-  @extend .list-group-striped !optional;
+
+  div:nth-of-type(even) {
+    @extend .bg-body-tertiary;
+  }
 }
 
 // Tribute
@@ -85,8 +92,11 @@ $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 
   ul {
     @extend .list-group;
-    @extend .list-group-striped !optional;
     @extend .shadow-sm;
+
+    li:nth-of-type(even) {
+      @extend .bg-body-tertiary;
+    }
   }
 
   li {
