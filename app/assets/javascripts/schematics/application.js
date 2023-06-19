@@ -10,7 +10,7 @@ import Rollbar from 'rollbar'
 
 /* global environment, mapsApiKey, rollbarClientKey, Chartkick */
 
-const setNavbarScrolled = () => {	
+const setNavbarScrolled = () => {
   document
     .querySelector('nav.navbar')
     ?.classList
