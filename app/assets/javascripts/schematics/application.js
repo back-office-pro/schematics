@@ -10,6 +10,13 @@ import Rollbar from 'rollbar'
 
 /* global environment, mapsApiKey, rollbarClientKey, Chartkick */
 
+const setNavbarScrolled = () => {	
+  document
+    .querySelector('nav.navbar')
+    ?.classList
+    ?.toggle('bg-opacity-75', window.scrollY > 25)
+}
+
 const setTurboHeaders = (event) => {
   const nonce = document.querySelector('meta[name="csp-nonce"]')?.content
   event.detail.fetchOptions.headers['Turbo-Referrer'] = window.location.href
@@ -45,6 +52,7 @@ application.handleError = (error, message, detail = {}) => {
 
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 document.addEventListener('turbo:load', Pagy.init)
+document.addEventListener('scroll', setNavbarScrolled)
 document.addEventListener('turbo:before-fetch-request', setTurboHeaders)
 document.addEventListener('turbo:before-fetch-request', animateTurboFrame)
 document.addEventListener('turbo:before-cache', setTurboNonces)

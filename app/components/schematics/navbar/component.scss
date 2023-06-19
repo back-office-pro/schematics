@@ -1,6 +1,10 @@
 .navbar {
   height: 3.5rem;
 
+  &:hover {
+    --bs-bg-opacity: 1;
+  }
+
   .navbar-nav {
     height: 3.5rem;
   }
