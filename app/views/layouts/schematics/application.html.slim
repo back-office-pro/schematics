@@ -1,5 +1,5 @@
 doctype html
-html lang=I18n.locale dir='ltr'
+= render Schematics::RootElement::Component.new do
   = render Schematics::Head::Component.new
   body data-controller='application'
     = turbo_stream_from current_user
