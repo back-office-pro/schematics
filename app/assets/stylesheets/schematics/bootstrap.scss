@@ -129,3 +129,12 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
 .pagy-bootstrap-nav {
   @extend .shadow-sm;
 }
+
+// Dark mode
+
+@include color-mode(dark) {
+  svg,
+  iframe.google-map {
+    filter: invert(90%);
+  }
+}
