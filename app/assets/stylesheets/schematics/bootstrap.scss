@@ -123,6 +123,7 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
   @extend .border-0;
   @extend .text-secondary;
   @extend .fw-bold;
+  @extend .bg-transparent;
 }
 
 .pagy-bootstrap-nav {
