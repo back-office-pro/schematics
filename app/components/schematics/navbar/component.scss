@@ -10,18 +10,18 @@
   }
 }
 
-html[data-bs-theme="dark"] {
+@include color-mode(dark) {
   .navbar-nav {
     .nav-link.switch-theme.dark {
-      display: none;
+      @extend .d-none;
     }
   }
 }
 
-html[data-bs-theme="light"] {
+@include color-mode(light) {
   .navbar-nav {
     .nav-link.switch-theme.light {
-      display: none;
+      @extend .d-none;
     }
   }
 }

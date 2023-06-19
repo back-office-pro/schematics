@@ -133,8 +133,7 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
 // Dark mode
 
 @include color-mode(dark) {
-  svg,
-  iframe.google-map {
+  svg {
     filter: invert(90%);
   }
 }
