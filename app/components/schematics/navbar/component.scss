@@ -9,19 +9,3 @@
     height: 3.5rem;
   }
 }
-
-@include color-mode(dark) {
-  .navbar-nav {
-    .nav-link.switch-theme.dark {
-      @extend .d-none;
-    }
-  }
-}
-
-@include color-mode(light) {
-  .navbar-nav {
-    .nav-link.switch-theme.light {
-      @extend .d-none;
-    }
-  }
-}
