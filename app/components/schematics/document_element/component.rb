@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module RootElement
+  module DocumentElement
     class Component < ApplicationComponent
       delegate :locale, to: ::I18n
 

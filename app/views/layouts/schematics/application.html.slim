@@ -1,6 +1,5 @@
 doctype html
-= render Schematics::RootElement::Component.new do
-  = render Schematics::Head::Component.new
+= render Schematics::DocumentElement::Component.new do
   body data-controller='application'
     = turbo_stream_from current_user
     = render Schematics::Toast::Component.with_collection(flash.to_a)
