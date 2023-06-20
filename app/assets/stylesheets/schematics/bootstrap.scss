@@ -43,8 +43,6 @@ $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 $toast-background-color: rgba(var(--#{$prefix}body-bg-rgb), 1);
 
 @import 'bootstrap/scss/bootstrap';
-@import 'light';
-@import 'dark';
 
 // TODO: Remove after tom-select is upgraded to Bootstrap@5.3
 
@@ -131,4 +129,35 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
 
 .pagy-bootstrap-nav {
   @extend .shadow-sm;
+}
+
+// Light theme
+
+@include color-mode(light) {
+  .navbar-nav {
+    .nav-link.switch-theme.light {
+      @extend .d-none;
+    }
+  }
+}
+
+// Dark theme
+
+@include color-mode(dark) {
+  .navbar-nav {
+    .nav-link.switch-theme.dark {
+      @extend .d-none;
+    }
+  }
+
+  a:not(.nav-link):not(.text-danger),
+  .btn-link,
+  .text-primary {
+    @extend .text-white;
+  }
+
+  svg,
+  iframe.google-map {
+    filter: invert(90%);
+  }
 }
