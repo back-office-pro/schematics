@@ -5,7 +5,7 @@
         - @versions.each do |version|
           li
             .timeline-icon.bg-primary
-              = fa_icon version.icon, size: '2x', class: 'text-body-tertiary'
+              = fa_icon version.icon, size: '2x', class: 'text-white'
             .card.animate__animated.animate__zoomIn
               .card-body.p-3
                 = render Schematics::VersionPreview::Component.new(version:)
