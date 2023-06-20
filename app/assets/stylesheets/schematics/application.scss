@@ -1,7 +1,7 @@
 $flag-icons-path: 'flag-icons/flags';
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import 'themes/default';
 @import 'actiontext';
-@import 'bootstrap';
 @import 'flag-icons/sass/flag-icons';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
@@ -24,7 +24,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'placeholder/component';
 @import 'trix_attachment/component';
 @import 'schema_editor/button/add_dropdown/component';
-@import 'google_map/component';
 
 // Variables
 

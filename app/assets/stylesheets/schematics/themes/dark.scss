@@ -1,0 +1,18 @@
+@include color-mode(dark) {
+  .navbar-nav {
+    .nav-link.switch-theme.dark {
+      @extend .d-none;
+    }
+  }
+
+  a:not(.nav-link):not(.text-danger),
+  .btn-link,
+  .text-primary {
+    @extend .text-white;
+  }
+
+  svg,
+  iframe.google-map {
+    filter: invert(90%);
+  }
+}

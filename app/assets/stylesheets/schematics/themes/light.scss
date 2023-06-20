@@ -1,0 +1,7 @@
+@include color-mode(light) {
+  .navbar-nav {
+    .nav-link.switch-theme.light {
+      @extend .d-none;
+    }
+  }
+}
