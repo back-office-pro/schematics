@@ -19,7 +19,7 @@ $input-border-width: 0;
 $btn-border-width: 0;
 $accordion-border-width: 0;
 $offcanvas-border-width: 0;
-$toast-border-width: 0;
+$toast-border-width: 0rem;
 $modal-content-border-width: 0;
 $modal-header-border-width: 0;
 $modal-footer-border-width: 0;
@@ -40,6 +40,7 @@ $input-focus-bg: $input-group-addon-bg;
 $form-select-bg: $input-group-addon-bg;
 $accordion-button-active-bg: $card-cap-bg;
 $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
+$toast-background-color: rgba(var(--#{$prefix}body-bg-rgb), 1);
 
 @import 'bootstrap/scss/bootstrap';
 
@@ -133,6 +134,12 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
 // Dark mode
 
 @include color-mode(dark) {
+  a:not(.nav-link):not(.text-danger),
+  .btn-link,
+  .text-primary {
+    @extend .text-white;
+  }
+
   svg {
     filter: invert(90%);
   }
