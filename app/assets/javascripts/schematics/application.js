@@ -11,11 +11,9 @@ import Rollbar from 'rollbar'
 /* global matchMedia, environment, mapsApiKey, rollbarClientKey, Chartkick */
 
 const setTheme = () => {
-  const currentTheme = document.documentElement.getAttribute('data-bs-theme')
-  const preferredTheme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  if (currentTheme !== preferredTheme) {
-    document.documentElement.setAttribute('data-bs-theme', preferredTheme)
-  }
+  document
+    .documentElement
+    .setAttribute('data-bs-theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
 }
 
 const setNavbarScrolled = () => {
@@ -59,7 +57,6 @@ application.handleError = (error, message, detail = {}) => {
 }
 
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
-document.addEventListener('turbo:load', setTheme)
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', setNavbarScrolled)
 document.addEventListener('turbo:before-fetch-request', setTurboHeaders)

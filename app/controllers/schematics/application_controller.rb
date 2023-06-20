@@ -8,6 +8,7 @@ module Schematics
     include Entitleable
     include Respondable
     include Rescuable
+    include Themeable
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
     before_action { Rack::MiniProfiler.authorize_request unless Rails.env.test? }
