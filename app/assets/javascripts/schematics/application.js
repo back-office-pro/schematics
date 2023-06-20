@@ -8,7 +8,15 @@ import { application } from 'controllers/application'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global environment, mapsApiKey, rollbarClientKey, Chartkick */
+/* global matchMedia, environment, mapsApiKey, rollbarClientKey, Chartkick */
+
+const setTheme = () => {
+  const currentTheme = document.documentElement.getAttribute('data-bs-theme')
+  const preferredTheme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  if (currentTheme === 'auto') {
+    document.documentElement.setAttribute('data-bs-theme', preferredTheme)
+  }
+}
 
 const setNavbarScrolled = () => {
   document
@@ -51,6 +59,7 @@ application.handleError = (error, message, detail = {}) => {
 }
 
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
+document.addEventListener('DOMContentLoaded', setTheme)
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', setNavbarScrolled)
 document.addEventListener('turbo:before-fetch-request', setTurboHeaders)
