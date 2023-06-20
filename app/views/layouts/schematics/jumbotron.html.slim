@@ -1,6 +1,5 @@
 doctype html
-html lang=I18n.locale dir='ltr'
-  = render Schematics::Head::Component.new
+= render Schematics::DocumentElement::Component.new do
   body data-controller='application'
     = render Schematics::Toast::Component.with_collection(flash.to_a)
     .p-0.m-0.d-flex.align-items-center.min-vh-100.bg-primary

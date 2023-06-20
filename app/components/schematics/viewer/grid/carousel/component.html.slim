@@ -1,4 +1,4 @@
-.carousel.carousel-dark.slide id=id data-bs-ride='carousel'
+.carousel.slide id=id data-bs-ride='carousel'
   .carousel-inner
     - attachments.each_with_index do |attachment, index|
       = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: css_classes(index)) do |c|

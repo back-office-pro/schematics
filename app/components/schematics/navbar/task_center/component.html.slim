@@ -13,7 +13,7 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2
   .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
     aria-labelledby='tasks-dropdown'
   }
-    h5.dropdown-header.fw-bold
+    h5.dropdown-header.bg-body-tertiary.fw-bold
       = t('.title')
     .pre-scrollable.overflow-scroll
       = render Schematics::Navbar::TaskCenter::Preview::Component.with_collection(tasks)

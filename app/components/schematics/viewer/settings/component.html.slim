@@ -1,5 +1,5 @@
 .dropdown.position-static data-controller='viewer-settings'
-  button#settings-dropdown.btn.btn-sm.dropdown-toggle {
+  button#settings-dropdown.btn.btn-sm.bg-body-tertiary.dropdown-toggle {
     aria-expanded='false'
     data-bs-toggle='dropdown'
     type='button'
@@ -9,7 +9,7 @@
     aria-labelledby='settings-dropdown'
     data-action='click->viewer-settings#keepOpened:stop'
   }
-    h5.dropdown-header.fw-bold
+    h5.dropdown-header.bg-body-tertiary.fw-bold
       = t('.title')
     - if can?(:restore, model_class)
       .dropdown-item

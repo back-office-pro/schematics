@@ -7,8 +7,6 @@ head
   = csrf_meta_tags
   = csp_meta_tag
   = render Schematics::ApplicationStylesheetLink::Component.new
-  = render Schematics::ThemeStylesheetLink::Component.new(theme: 'light')
-  = render Schematics::ThemeStylesheetLink::Component.new(theme: 'dark')
   = render Schematics::Favicon::Component.new
   = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
   = render Schematics::JavascriptImportmap::Component.new

@@ -1,0 +1,163 @@
+$secondary: #95a5a6;
+$focus-ring-box-shadow: none;
+$input-padding-y: .5rem;
+$input-padding-x: .5rem;
+$input-group-addon-padding-x: .75rem;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$popover-body-padding-y: 0;
+$popover-body-padding-x: 0;
+$card-border-width: 0;
+$dropdown-border-width: 0;
+$input-border-width: 0;
+$btn-border-width: 0;
+$accordion-border-width: 0;
+$offcanvas-border-width: 0;
+$toast-border-width: 0rem; // scss-lint:disable ZeroUnit
+$modal-content-border-width: 0;
+$modal-header-border-width: 0;
+$modal-footer-border-width: 0;
+$pagination-border-width: 0;
+$list-group-border-width: 0;
+$form-select-border-width: 0;
+$alert-border-width: 0;
+$nav-tabs-border-width: 0;
+
+$font-size-root: 12px;
+$enable-caret: false;
+$badge-padding-y: .25em;
+$badge-padding-x: .5em;
+$zindex-dropdown: 1035;
+
+$input-bg: $input-group-addon-bg;
+$input-focus-bg: $input-group-addon-bg;
+$form-select-bg: $input-group-addon-bg;
+$accordion-button-active-bg: $card-cap-bg;
+$offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
+$toast-background-color: rgba(var(--#{$prefix}body-bg-rgb), 1);
+
+@import 'bootstrap/scss/bootstrap';
+
+// TODO: Remove after tom-select is upgraded to Bootstrap@5.3
+
+@function mix($color1, $color2, $weight) {
+  @return color-mix($color1, $color2, $weight)
+}
+
+@import 'tom-select/dist/scss/tom-select.bootstrap5';
+
+// Bootstrap
+
+.form-check-input:checked {
+  @extend .bg-primary;
+  @extend .border-primary;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(even) {
+  @extend .bg-body-tertiary;
+}
+
+.fixed-top {
+  left: initial;
+}
+
+// Turbo
+
+.turbo-progress-bar {
+  @extend .bg-primary;
+}
+
+// Tom Select
+
+.ts-dropdown,
+.ts-dropdown.form-control,
+.ts-dropdown.form-select {
+  @extend .border-0;
+  @extend .shadow-sm;
+
+  div:nth-of-type(even) {
+    @extend .bg-body-tertiary;
+  }
+}
+
+// Tribute
+
+.tribute-container {
+  z-index: 1090;
+
+  ul {
+    @extend .list-group;
+    @extend .shadow-sm;
+
+    li:nth-of-type(even) {
+      @extend .bg-body-tertiary;
+    }
+  }
+
+  li {
+    @extend .list-group-item;
+    @extend .list-group-item-action;
+    @extend .p-2;
+    @extend .border-0;
+    @extend .text-start;
+    @extend .text-truncate;
+    cursor: pointer;
+  }
+}
+
+// Timeline
+
+.timeline > li > .card::after {
+  border-left-color: $card-bg;
+  border-right-color: $card-bg;
+}
+
+// Pagy
+
+.pagy-items-selector-js input {
+  @extend .border-0;
+  @extend .text-secondary;
+  @extend .fw-bold;
+  @extend .bg-transparent;
+}
+
+.pagy-bootstrap-nav {
+  @extend .shadow-sm;
+}
+
+// Light theme
+
+@include color-mode(light) {
+  .navbar-nav {
+    .nav-link.switch-theme.light {
+      @extend .d-none;
+    }
+  }
+}
+
+// Dark theme
+
+@include color-mode(dark) {
+  .navbar-nav {
+    .nav-link.switch-theme.dark {
+      @extend .d-none;
+    }
+  }
+
+  a:not(.nav-link):not(.text-danger),
+  .btn-link,
+  .text-primary {
+    @extend .text-white;
+  }
+
+  svg,
+  iframe.google-map {
+    filter: invert(90%);
+  }
+}

@@ -5,12 +5,6 @@
         .col.text-center.p-4
           = fa_icon icon, size: '3x', class: 'd-inline-block text-primary'
           h5.text-primary.my-4 = title
-          .progress.fs-6.my-2
-            .progress-bar {
-                role='progressbar'
-                aria-valuenow=entities_size
-                aria-valuemin='0'
-                aria-valuemax=quota.entities
-                style="width: #{quota_entities_percentage}%"
-              }
+          .progress.fs-6.my-2 role='progressbar' aria-valuenow=entities_size aria-valuemin='0' aria-valuemax=quota.entities
+            .progress-bar style="width: #{quota_entities_percentage}%"
               | #{entities_size} / #{quota.entities}

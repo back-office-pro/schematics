@@ -1,6 +1,7 @@
 $flag-icons-path: 'flag-icons/flags';
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'actiontext';
+@import 'bootstrap';
 @import 'flag-icons/sass/flag-icons';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
@@ -44,7 +45,7 @@ body {
   transition: ease-in-out .3s;
 
   .container-fluid {
-    min-height: calc(100vh - 3.5rem - 5.5rem);
+    min-height: calc(100vh - 3.5rem - 2.5rem - .5rem);
   }
 
   &.toggled {
@@ -142,14 +143,4 @@ svg {
 
 .cursor-grab {
   cursor: grab;
-}
-
-// TODO: Remove after upgrading to Bootstrap@5.3
-
-.overflow-x-hidden {
-  overflow-x: hidden;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
 }
