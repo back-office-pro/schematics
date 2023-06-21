@@ -12,6 +12,8 @@ module Schematics
         @post = post
       end
 
+      def path = blog_path(@post)
+
       def caption = content
         .to_plain_text
         .truncate(100)
