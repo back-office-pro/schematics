@@ -139,6 +139,16 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
   @extend .shadow-sm;
 }
 
+// Forms - Chrome autocomplete
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 30px $input-bg inset;
+  -webkit-text-fill-color: $input-color;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 // Light theme
 
 @include color-mode(light) {
