@@ -111,6 +111,14 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
   }
 }
 
+// Trix
+
+.trix-button {
+  @extend .border-0;
+  @extend .rounded;
+  @extend .bg-body-tertiary;
+}
+
 // Timeline
 
 .timeline > li > .card::after {
