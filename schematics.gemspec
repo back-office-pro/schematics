@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'isolator', '~> 0.9.0'
   spec.add_development_dependency 'reek', '~> 6.1.4'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.53.0'
+  spec.add_development_dependency 'rubocop', '~> 1.53.1'
   spec.add_development_dependency 'rubocop-performance', '~> 1.18.0'
   spec.add_development_dependency 'rubocop-rails', '~> 2.20.2'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
@@ -122,6 +122,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '~> 1.4.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 3.2.0'
+  spec.add_dependency 'view_component', '~> 3.3.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
