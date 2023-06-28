@@ -11,9 +11,9 @@ export default class extends ApplicationController {
     return this.targets.has('badge') && this.badgeTarget.classList.contains('animate__zoomIn')
   }
 
-  async readNotifications () {
+  readNotifications () {
     if (this.hasNotifications()) {
-      await this.fetchAPI(routes.dashboardReadNotifications, 'POST')
+      this.fetchAPI(routes.dashboardReadNotifications, 'POST')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
       this.iconTarget.classList.remove('animate__animated')
