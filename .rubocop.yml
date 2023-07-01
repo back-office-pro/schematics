@@ -147,6 +147,7 @@ RSpec/ExampleLength:
   CountAsOne:
     - array
     - hash
+    - heredoc
 RSpec/MultipleMemoizedHelpers:
   Max: 14
 RSpec/EmptyExampleGroup:
