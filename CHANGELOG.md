@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed mailer styles SASS compilation.
+- Fixed mailer styles SASS compilation
+- Fixed database encryption generation after upgrading to Rails 7.0.6 (https://github.com/rails/rails/pull/44910)
 
 ## [1.0.0] - 2023-06-21
 
