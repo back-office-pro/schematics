@@ -28,7 +28,7 @@ pin 'autosize', to: 'autosize/dist/autosize.esm.js', preload: true
 pin 'bootstrap', to: 'bootstrap/dist/js/bootstrap.esm.js', preload: true
 pin 'file-saver', to: 'file-saver-es/src/FileSaver.js', preload: true
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js', preload: true
-pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.1/dist/rollbar.umd.js', preload: true
+pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.2/dist/rollbar.umd.js', preload: true
 pin 'sortablejs', to: 'sortablejs/modular/sortable.esm.js', preload: true
 pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.1.0/index.js', preload: true
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js', preload: true
