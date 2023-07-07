@@ -19,14 +19,15 @@ it:
         theme_color: Colore del tema
         time_zone: Fuso orario
     enums:
-      available_locales:
-        en: Inglese
-        fr: Francese
-        it: Italiano
-      locale:
-        en: Inglese
-        fr: Francese
-        it: Italiano
+      configuration:
+        available_locales:
+          en: Inglese
+          fr: Francese
+          it: Italiano
+        locale:
+          en: Inglese
+          fr: Francese
+          it: Italiano
     models:
       configuration:
         gender: female

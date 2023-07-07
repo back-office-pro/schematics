@@ -19,14 +19,15 @@ en:
         theme_color: Theme color
         time_zone: Time zone
     enums:
-      available_locales:
-        en: English
-        fr: French
-        it: Italian
-      locale:
-        en: English
-        fr: French
-        it: Italian
+      configuration:
+        available_locales:
+          en: English
+          fr: French
+          it: Italian
+        locale:
+          en: English
+          fr: French
+          it: Italian
     models:
       configuration:
         gender: female
