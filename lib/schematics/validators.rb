@@ -24,7 +24,8 @@ module Schematics
     def human(validators: compact_validators)
       validators
         .map(&method(:humanize))
-        .map { _1.join(' ') }
+        .each_with_object(' ')
+        .map(&:join)
         .compact_blank
     end
 
