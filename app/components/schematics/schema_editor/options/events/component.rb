@@ -43,11 +43,7 @@ module Schematics
 
           def maxlength = 50
 
-          def events = Array(
-            object
-              .events
-              &.map { Schematics::Options::StateMachineEvent.new(**_1) }
-          )
+          def events = Array(object.events&.map(&Schematics::Options::StateMachineEvent))
         end
       end
     end

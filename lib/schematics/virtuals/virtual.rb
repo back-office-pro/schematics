@@ -27,6 +27,8 @@ module Schematics
           klass(**kwargs).new(**kwargs)
         end
 
+        def to_proc = proc { build(**_1) }
+
         def klass(entity:, function:, **)
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
           return Comparison  if tokens.any?(Tokens::Comparator)

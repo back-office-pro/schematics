@@ -36,22 +36,33 @@ module Schematics
         def build(type: 'entity', **kwargs)
           Entities.const_get(type.camelize.to_sym).new(**kwargs)
         end
+
+        def to_proc = proc { build(**_1) }
       end
 
       def attributes=(attributes)
-        @attributes = attributes.map { Attributes::Attribute.build(entity: self, **_1) }
+        @attributes = attributes
+                      .each_with_object(entity: self)
+                      .map(&:merge)
+                      .map(&Attributes::Attribute)
       end
 
       def virtuals=(virtuals)
-        @virtuals = virtuals.map { Virtuals::Virtual.build(entity: self, **_1) }
+        @virtuals = virtuals
+                    .each_with_object(entity: self)
+                    .map(&:merge)
+                    .map(&Virtuals::Virtual)
       end
 
       def triggers=(triggers)
-        @triggers = triggers.map { Trigger.new(**_1) }
+        @triggers = triggers.map(&Trigger)
       end
 
       def associations=(associations)
-        @associations = associations.map { Associations::Association.build(entity: self, **_1) }
+        @associations = associations
+                        .each_with_object(entity: self)
+                        .map(&:merge)
+                        .map(&Associations::Association)
       end
 
       def descriptor

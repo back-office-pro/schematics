@@ -30,7 +30,9 @@ module Schematics
         @events ||= Array(
           options
             .events
-            &.map { Options::StateMachineEvent.new(state_machine: self, **_1) }
+            &.each_with_object(state_machine: self)
+            &.map(&:merge)
+            &.map(&Options::StateMachineEvent)
         )
       end
 

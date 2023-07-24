@@ -22,6 +22,10 @@ module Schematics
               inclusion: { in: ACTIONS }
     attr_accessor :action, :callback
 
+    class << self
+      def to_proc = proc { new(**_1) }
+    end
+
     def method_name
       @method_name ||= [action, SecureRandom.uuid].join('_').underscore.to_sym
     end

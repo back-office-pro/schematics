@@ -23,6 +23,10 @@ module Schematics
       attr_accessor :id, :state_machine, :from, :to, :callback
       attr_writer :icon, :color
 
+      class << self
+        def to_proc = proc { new(**_1) }
+      end
+
       def icon
         @icon&.to_sym || :location_arrow
       end

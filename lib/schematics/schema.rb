@@ -33,7 +33,10 @@ module Schematics
     def as_json = @data
 
     def entities=(entities)
-      @entities = entities.map { Entities::Entity.build(schema: self, **_1) }
+      @entities = entities
+                  .each_with_object(schema: self)
+                  .map(&:merge)
+                  .map(&Entities::Entity)
       add_associations_and_check_for_name_collisions
     end
 

@@ -36,6 +36,8 @@ module Schematics
           belongs_to ||= Attributes::BelongsTo.new(entity:, name:, options:)
           Associations.const_get(type.camelize.to_sym).new(belongs_to:)
         end
+
+        def to_proc = proc { build(**_1) }
       end
 
       def open_api_type = [{ id!: ::String }]
