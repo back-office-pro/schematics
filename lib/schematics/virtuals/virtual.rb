@@ -23,8 +23,8 @@ module Schematics
       validate :assignment_token?
 
       class << self
-        def build(**kwargs)
-          klass(**kwargs).new(**kwargs)
+        def build(**)
+          klass(**).new(**)
         end
 
         def to_proc = proc { build(**_1) }

@@ -8,10 +8,10 @@ module Schematics
           delegate :translated?, to: :options, private: true
           delegate :rich_text_area, to: :form, private: true
 
-          def required_rich_text_area(name, **options)
-            return rich_text_area(name, **options) unless required?
+          def required_rich_text_area(name, **)
+            return rich_text_area(name, **) unless required?
 
-            rich_text_area(name, **options)
+            rich_text_area(name, **)
               .gsub(
                 '<input type="hidden"',
                 '<input type="text" required="required" class="trix-editor-hidden-input"'

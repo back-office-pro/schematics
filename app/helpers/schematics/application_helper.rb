@@ -4,13 +4,13 @@ module Schematics
   module ApplicationHelper
     # :reek:UnusedParameters
     # :reek:LongParameterList
-    def fa_icon(icon, style: 'solid', class: nil, size: nil, animation: nil, **kwargs) # rubocop:disable Metrics/ParameterLists
+    def fa_icon(icon, style: 'solid', class: nil, size: nil, animation: nil, **) # rubocop:disable Metrics/ParameterLists
       tag.i(
         class: [style, icon.to_s.dasherize, size, animation]
           .compact
           .map { "fa-#{_1}" }
           .push(binding.local_variable_get(:class)),
-        **kwargs
+        **
       )
     end
   end

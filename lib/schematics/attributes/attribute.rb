@@ -20,8 +20,8 @@ module Schematics
       validates :name, uniqueness: { scope: %i[entity attributes] }
 
       class << self
-        def build(type:, **kwargs)
-          Attributes.const_get(type.camelize.to_sym).new(**kwargs)
+        def build(type:, **)
+          Attributes.const_get(type.camelize.to_sym).new(**)
         end
 
         def to_proc = proc { build(**_1) }

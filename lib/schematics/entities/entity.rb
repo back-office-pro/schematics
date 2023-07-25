@@ -33,8 +33,8 @@ module Schematics
       delegate :method_missing, :receptor_respond_to_missing?, to: :receptor, private: true
 
       class << self
-        def build(type: 'entity', **kwargs)
-          Entities.const_get(type.camelize.to_sym).new(**kwargs)
+        def build(type: 'entity', **)
+          Entities.const_get(type.camelize.to_sym).new(**)
         end
 
         def to_proc = proc { build(**_1) }

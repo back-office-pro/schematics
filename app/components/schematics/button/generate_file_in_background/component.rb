@@ -10,16 +10,16 @@ module Schematics
         option :dropdown, default: proc { false }
 
         class << self
-          def csv_template(**kwargs)
-            new(extension: :csv, text: :download_csv_template, **kwargs)
+          def csv_template(**)
+            new(extension: :csv, text: :download_csv_template, **)
           end
 
-          def csv(**kwargs)
-            new(extension: :csv, text: :download_as_csv, **kwargs)
+          def csv(**)
+            new(extension: :csv, text: :download_as_csv, **)
           end
 
-          def pdf(**kwargs)
-            new(extension: :pdf, text: :download_pdf, **kwargs)
+          def pdf(**)
+            new(extension: :pdf, text: :download_pdf, **)
           end
         end
 
