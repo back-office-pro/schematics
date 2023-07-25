@@ -6,13 +6,11 @@ module Schematics
       class Component < ApplicationComponent
         delegate :icon, to: '::User.entity'
 
-        def sessions
-          @sessions ||= ::Session
-                        .with_user_avatar
-                        .active
-                        .select('DISTINCT ON (user_id) *')
-                        .order(:user_id, updated_at: :desc)
-        end
+        memoize def sessions = ::Session
+          .with_user_avatar
+          .active
+          .select('DISTINCT ON (user_id) *')
+          .order(:user_id, updated_at: :desc)
       end
     end
   end

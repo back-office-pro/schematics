@@ -6,8 +6,8 @@ module Schematics
       delegate :title, :favicon, :description, to: :object, allow_nil: true
       option :url
 
-      def object
-        @object ||= ::LinkThumbnailer.generate(url)
+      memoize def object
+        ::LinkThumbnailer.generate(url)
       rescue ::LinkThumbnailer::Exceptions
         nil
       end

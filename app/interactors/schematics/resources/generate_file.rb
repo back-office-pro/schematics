@@ -24,8 +24,8 @@ module Schematics
 
       private
 
-      def blob
-        @blob ||= ::ActiveStorage::Blob.create_and_upload!(io: file, filename:, content_type:)
+      memoize def blob
+        ::ActiveStorage::Blob.create_and_upload!(io: file, filename:, content_type:)
       end
 
       def url = url_for(blob)

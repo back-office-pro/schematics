@@ -22,11 +22,9 @@ module Schematics
 
     def dashboard_preferences = %i[sidebar_toggled theme]
 
-    def permitted_preference_params
-      @permitted_preference_params ||= timeline_preferences
-                                       .concat(viewer_preferences)
-                                       .concat(dashboard_preferences)
-    end
+    memoize def permitted_preference_params = timeline_preferences
+      .concat(viewer_preferences)
+      .concat(dashboard_preferences)
 
     def preference_params = params
       .require(:preferences)

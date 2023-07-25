@@ -14,9 +14,7 @@ module Schematics
           @resource = resource
         end
 
-        def id
-          @id ||= "collapse-#{@attribute.id}"
-        end
+        memoize def id = "collapse-#{@attribute.id}"
 
         def render?
           value.present?

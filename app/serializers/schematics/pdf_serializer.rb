@@ -31,15 +31,11 @@ module Schematics
 
     def extension = :pdf
 
-    def file
-      @file ||= begin
-        file = Tempfile.new
-        file.binmode
-        file.write(content)
-        file.rewind
-        file
-      end
-    end
+    memoize def file = Tempfile
+      .new
+      .tap(&:binmode)
+      .tap { _1.write(content) }
+      .tap(&:rewind)
 
     def filename = "#{human_name.dasherize}-#{@resource.slug}.#{extension}"
 
@@ -81,20 +77,16 @@ module Schematics
       format: :A4
     }
 
-    def browser
-      @browser ||= Ferrum::Browser.new(browser_options:)
-    end
+    memoize def browser = Ferrum::Browser.new(browser_options:)
 
     def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
 
-    def template
-      @template ||= render(
-        action: :show,
-        formats: :pdf,
-        layout: 'layouts/schematics/pdf',
-        locals: { resource: @resource },
-        assigns: { resource: @resource }
-      )
-    end
+    memoize def template = render(
+      action: :show,
+      formats: :pdf,
+      layout: 'layouts/schematics/pdf',
+      locals: { resource: @resource },
+      assigns: { resource: @resource }
+    )
   end
 end

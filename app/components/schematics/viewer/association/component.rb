@@ -39,9 +39,7 @@ module Schematics
           end
         end
 
-        def id
-          @id ||= "collapse-#{SecureRandom.base58}"
-        end
+        memoize def id = "collapse-#{SecureRandom.base58}"
 
         def title
           case @resources.first

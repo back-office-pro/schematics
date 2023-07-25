@@ -300,9 +300,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def db_username = app_name.underscore
 
-  def db_password
-    @db_password ||= SecureRandom.base58
-  end
+  memoize def db_password = SecureRandom.base58
 
   def container? = options[:container]
 

@@ -101,9 +101,7 @@ module Schematics
         errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
       end
 
-      def tokens
-        @tokens ||= Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
-      end
+      memoize def tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
     end
   end
 end

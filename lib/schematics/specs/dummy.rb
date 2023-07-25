@@ -11,30 +11,20 @@ module Schematics
         @extension = extension
       end
 
-      def default
-        @default ||= Rack::Test::UploadedFile.new(file, content_type)
-      end
+      memoize def default = Rack::Test::UploadedFile.new(file, content_type)
 
       def json_default = { filename:, content_type:, data: }.transform_keys(&:to_s)
 
       private
 
-      def file
-        @file ||= begin
-          file = Tempfile.new(filename_array)
-          file.write(content_type)
-          file.rewind
-          file
-        end
-      end
+      memoize def file = Tempfile
+        .new(filename_array)
+        .tap { _1.write(content_type) }
+        .tap(&:rewind)
 
-      def read
-        @read ||= File.read(file)
-      end
+      memoize def read = File.read(file)
 
-      def base64_encoded
-        @base64_encoded ||= Base64.encode64(read)
-      end
+      memoize def base64_encoded = Base64.encode64(read)
 
       def data = ['data:', content_type, ';base64,', base64_encoded].join
 

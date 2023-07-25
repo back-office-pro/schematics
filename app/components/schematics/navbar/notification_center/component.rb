@@ -20,18 +20,14 @@ module Schematics
           %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
         end
 
-        def count
-          @count ||= Version
-                     .unread(read_notifications_at)
-                     .timeline(current_ability)
-                     .size
-        end
+        memoize def count = Version
+          .unread(read_notifications_at)
+          .timeline(current_ability)
+          .size
 
-        def versions
-          @versions ||= Version
-                        .timeline(current_ability)
-                        .limit(LIMIT)
-        end
+        memoize def versions = Version
+          .timeline(current_ability)
+          .limit(LIMIT)
       end
     end
   end

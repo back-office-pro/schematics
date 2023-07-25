@@ -53,9 +53,7 @@ module Schematics
 
       private
 
-      def trigger
-        @trigger ||= Trigger.new(action:, callback:)
-      end
+      memoize def trigger = Trigger.new(action:, callback:)
     end
   end
 end

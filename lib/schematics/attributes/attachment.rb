@@ -139,9 +139,7 @@ module Schematics
 
       protected
 
-      def dummy
-        @dummy ||= Specs::Dummy.new(extension)
-      end
+      memoize def dummy = Specs::Dummy.new(extension)
     end
   end
 end

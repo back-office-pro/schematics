@@ -27,19 +27,17 @@ module Schematics
 
     private
 
-    def calendar
-      @calendar ||= begin
-        calendar = Icalendar::Calendar.new
-        calendar.event do |event|
-          event.dtstart = dtstart
-          event.dtend = dtend
-          event.summary = summary
-          event.description = description
-          event.url = url
-          event.location = location
-        end
-        calendar
+    memoize def calendar
+      calendar = Icalendar::Calendar.new
+      calendar.event do |event|
+        event.dtstart = dtstart
+        event.dtend = dtend
+        event.summary = summary
+        event.description = description
+        event.url = url
+        event.location = location
       end
+      calendar
     end
 
     def dtstart

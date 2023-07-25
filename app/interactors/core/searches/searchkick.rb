@@ -15,11 +15,9 @@ module Core
 
       private
 
-      def results
-        @results ||= ::Searchkick
-                     .multi_search(searches)
-                     .reject(&:empty?)
-      end
+      memoize def results = ::Searchkick
+        .multi_search(searches)
+        .reject(&:empty?)
 
       def searches = ::Tenant
         .schema

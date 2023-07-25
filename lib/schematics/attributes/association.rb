@@ -100,9 +100,7 @@ module Schematics
           .first
       end
 
-      def inverse_association
-        @inverse_association ||= Associations::Association.build(belongs_to: self, **inverse)
-      end
+      memoize def inverse_association = Associations::Association.build(belongs_to: self, **inverse)
 
       def icon
         return :link unless inverse_entity

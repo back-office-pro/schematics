@@ -7,9 +7,7 @@ module Schematics
         class Component < ApplicationComponent
           delegate :icon, to: '::Licence.entity'
 
-          def resource
-            @resource ||= ::Licence.instance
-          end
+          memoize def resource = ::Licence.instance
 
           def target = 'confirm-dialog-cancel-licence'
 

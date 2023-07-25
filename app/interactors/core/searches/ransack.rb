@@ -15,16 +15,14 @@ module Core
 
       private
 
-      def results
-        @results ||= ::Tenant
-                     .schema
-                     .entities
-                     .reject(&:hidden?)
-                     .select(&:multisearchable?)
-                     .map(&:model_class)
-                     .map { _1.multisearch(query, current_ability) }
-                     .reject(&:empty?)
-      end
+      memoize def results = ::Tenant
+        .schema
+        .entities
+        .reject(&:hidden?)
+        .select(&:multisearchable?)
+        .map(&:model_class)
+        .map { _1.multisearch(query, current_ability) }
+        .reject(&:empty?)
     end
   end
 end

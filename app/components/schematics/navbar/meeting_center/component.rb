@@ -17,29 +17,25 @@ module Schematics
           %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
         end
 
-        def count
-          @count ||= current_user
-                     .meetings
-                     .to_come
-                     .today
-                     .accessible_by(current_ability)
-                     .load_async
-                     .size
-        end
+        memoize def count = current_user
+          .meetings
+          .to_come
+          .today
+          .accessible_by(current_ability)
+          .load_async
+          .size
 
         def render?
           can?(:index, ::Meeting)
         end
 
-        def meetings
-          @meetings ||= current_user
-                        .meetings
-                        .to_come
-                        .accessible_by(current_ability)
-                        .with_creator_avatar
-                        .order(created_at: :desc)
-                        .limit(LIMIT)
-        end
+        memoize def meetings = current_user
+          .meetings
+          .to_come
+          .accessible_by(current_ability)
+          .with_creator_avatar
+          .order(created_at: :desc)
+          .limit(LIMIT)
       end
     end
   end

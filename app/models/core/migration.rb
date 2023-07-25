@@ -25,9 +25,7 @@ class Migration < Schematics::ApplicationRecord
     Schematics::MigrateSchemaJob.perform_later(self)
   end
 
-  def migrator
-    @migrator ||= Schematics::Migrator.new(data, Tenant.schema)
-  end
+  memoize def migrator = Schematics::Migrator.new(data, Tenant.schema)
 
   def dump! = Rails
     .root

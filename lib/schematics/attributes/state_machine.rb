@@ -26,15 +26,13 @@ module Schematics
         #{events_methods_to_str}
       RUBY
 
-      def events
-        @events ||= Array(
-          options
-            .events
-            &.each_with_object(state_machine: self)
-            &.map(&:merge)
-            &.map(&Options::StateMachineEvent)
-        )
-      end
+      memoize def events = Array(
+        options
+          .events
+          &.each_with_object(state_machine: self)
+          &.map(&:merge)
+          &.map(&Options::StateMachineEvent)
+      )
 
       private
 

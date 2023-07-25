@@ -19,8 +19,6 @@ module Schematics
 
     private
 
-    def qr_code
-      @qr_code ||= RQRCode::QRCode.new(@resource.to_json(root: false))
-    end
+    memoize def qr_code = RQRCode::QRCode.new(@resource.to_json(root: false))
   end
 end

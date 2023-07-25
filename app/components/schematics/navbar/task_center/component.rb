@@ -17,30 +17,26 @@ module Schematics
           %w[fa-lg animate__animated animate__pulse animate__slower animate__infinite]
         end
 
-        def count
-          @count ||= current_user
-                     .tasks
-                     .not_state_completed
-                     .not_state_aborted
-                     .accessible_by(current_ability)
-                     .load_async
-                     .size
-        end
+        memoize def count = current_user
+          .tasks
+          .not_state_completed
+          .not_state_aborted
+          .accessible_by(current_ability)
+          .load_async
+          .size
 
         def render?
           can?(:index, ::Task)
         end
 
-        def tasks
-          @tasks ||= current_user
-                     .tasks
-                     .not_state_completed
-                     .not_state_aborted
-                     .accessible_by(current_ability)
-                     .with_applicant_avatar
-                     .order(deadline: :asc)
-                     .limit(LIMIT)
-        end
+        memoize def tasks = current_user
+          .tasks
+          .not_state_completed
+          .not_state_aborted
+          .accessible_by(current_ability)
+          .with_applicant_avatar
+          .order(deadline: :asc)
+          .limit(LIMIT)
       end
     end
   end

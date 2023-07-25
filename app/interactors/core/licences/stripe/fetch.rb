@@ -25,22 +25,16 @@ module Core
 
         private
 
-        def product
-          @product ||= product_id && ::Stripe::Product.retrieve(product_id)
-        end
+        memoize def product = product_id && ::Stripe::Product.retrieve(product_id)
 
-        def subscription
-          @subscription ||= ::Stripe::Subscription
-                            .list(customer: customer_id, status: 'active')
-                            .first
-        end
+        memoize def subscription = ::Stripe::Subscription
+          .list(customer: customer_id, status: 'active')
+          .first
 
-        def customer
-          @customer ||= ::Stripe::Customer
-                        .search(query: "name:'#{subdomain}'")
-                        .data
-                        .first
-        end
+        memoize def customer = ::Stripe::Customer
+          .search(query: "name:'#{subdomain}'")
+          .data
+          .first
 
         def data = {
           email: customer_email,

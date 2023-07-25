@@ -19,9 +19,7 @@ module Core
 
       private
 
-      def git
-        @git ||= ::Git.init
-      end
+      memoize def git = ::Git.init
 
       def migration_version
         migration.data_version || "core #{Schematics::VERSION}"

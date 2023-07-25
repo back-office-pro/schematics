@@ -13,9 +13,7 @@ module Schematics
           add_state_machine_clusters
         end
 
-        def output
-          @output ||= graph.output(svg: ::String)
-        end
+        memoize def output = graph.output(svg: ::String)
 
         def render?
           schema.present?
@@ -27,17 +25,15 @@ module Schematics
           .entities
           .reject(&:core?)
 
-        def graph
-          @graph ||= GraphViz.digraph('schema') do |graph|
-            graph[:bgcolor] = 'transparent'
-            graph.node[:shape] = 'plaintext'
-            graph.node[:fontname] = 'Helvetica, Arial, sans-serif'
-            graph.node[:fontsize] = 10
-            graph.node[:style] = 'filled'
-            graph.node[:fillcolor] = 'gray97'
-            graph.edge[:fontname] = 'Helvetica, Arial, sans-serif'
-            graph.edge[:fontsize] = 10
-          end
+        memoize def graph = GraphViz.digraph('schema') do |graph|
+          graph[:bgcolor] = 'transparent'
+          graph.node[:shape] = 'plaintext'
+          graph.node[:fontname] = 'Helvetica, Arial, sans-serif'
+          graph.node[:fontsize] = 10
+          graph.node[:style] = 'filled'
+          graph.node[:fillcolor] = 'gray97'
+          graph.edge[:fontname] = 'Helvetica, Arial, sans-serif'
+          graph.edge[:fontsize] = 10
         end
 
         def add_association_edges

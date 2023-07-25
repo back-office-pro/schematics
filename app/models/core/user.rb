@@ -13,9 +13,9 @@ class User < Schematics::ApplicationRecord
     password_digest.present?
   end
 
-  def online?
-    @online ||= sessions.active.exists?
-  end
+  memoize def online? = sessions
+    .active
+    .exists?
 
   def password_reset_token_expired?
     return false unless confirmed?

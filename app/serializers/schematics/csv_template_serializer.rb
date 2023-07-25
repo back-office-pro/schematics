@@ -18,14 +18,10 @@ module Schematics
 
     def extension = :csv
 
-    def file
-      @file ||= begin
-        file = Tempfile.new
-        file.write(content)
-        file.rewind
-        file
-      end
-    end
+    memoize def file = Tempfile
+      .new
+      .tap { _1.write(content) }
+      .tap(&:rewind)
 
     def filename = "#{human_name_plural.dasherize}.#{extension}"
 

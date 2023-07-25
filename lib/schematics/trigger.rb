@@ -26,9 +26,10 @@ module Schematics
       def to_proc = proc { new(**_1) }
     end
 
-    def method_name
-      @method_name ||= [action, SecureRandom.uuid].join('_').underscore.to_sym
-    end
+    memoize def method_name = [action, SecureRandom.uuid]
+      .join('_')
+      .underscore
+      .to_sym
 
     def to_str
       case [action, callback]

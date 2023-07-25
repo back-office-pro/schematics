@@ -12,9 +12,8 @@ module Schematics
 
       validates :association_type, inclusion: { in: :allowed_association_types }
 
-      def id
-        @id ||= SecureRandom.uuid
-      end
+      # :reek:UtilityFunction
+      memoize def id = SecureRandom.uuid
 
       def available_options = [
         Options::Required,
