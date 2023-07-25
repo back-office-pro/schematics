@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'memery'
+
 class Object
   include Memery
 
