@@ -4,22 +4,18 @@ module Schematics
   module Viewer
     module ResourceLink
       class Component < ApplicationComponent
-        renders_one :resource
-        delegate :deleted?, to: :@resource
-
-        def initialize(resource:, tag_name: :div, css_classes: nil)
-          super
-          @resource = resource
-          @tag_name = tag_name
-          @css_classes = css_classes
-        end
+        renders_one :body
+        delegate :deleted?, to: :resource, private: true
+        option :resource
+        option :tag_name, default: proc { :div }
+        option :css_classes, optional: true
 
         def data
           return unless visitable?
 
           {
             action: 'click->application#visit',
-            'application-href-param': polymorphic_path(@resource)
+            'application-href-param': polymorphic_path(resource)
           }
         end
 
@@ -32,7 +28,7 @@ module Schematics
         private
 
         def visitable?
-          !deleted? && can?(:show, @resource)
+          !deleted? && can?(:show, resource)
         end
       end
     end
