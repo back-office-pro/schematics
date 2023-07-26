@@ -2,7 +2,7 @@
 it:
   all_pages: Tutte le pagine
   current_page: Pagina corrente
-  download_as_csv: Scaricare come CSV
-  download_csv_template: Scaricare il modello CSV
-  download_pdf: Scaricare come PDF
+  download_as_csv: Scarica come CSV
+  download_csv_template: Scarica il modello CSV
+  download_pdf: Scarica come PDF
   loading: Generazione...
