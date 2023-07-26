@@ -10,6 +10,8 @@ module Schematics
           alias accept extensions
 
           def help = render AttachmentValidators::Component.new(validators:)
+
+          def signed_ids = value.map(&:signed_id)
         end
       end
     end
