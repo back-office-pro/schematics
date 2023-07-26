@@ -10,13 +10,6 @@ module Schematics
           def prompt = t('prompt', attribute_name:)
 
           def data = { controller: 'dropdown' }
-
-          protected
-
-          def attribute_name = resource
-            .class
-            .human_attribute_name(name)
-            .downcase
         end
       end
     end

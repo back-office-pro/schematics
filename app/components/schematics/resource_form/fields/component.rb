@@ -45,7 +45,7 @@ module Schematics
           translate(
             locale,
             scope: %i[schematics application resource_form field],
-            attribute_name: resource.class.human_attribute_name(name)
+            attribute_name: attribute_name.humanize
           )
         end
 
@@ -54,6 +54,11 @@ module Schematics
         def inline?
           layout == :inline
         end
+
+        def attribute_name = resource
+          .class
+          .human_attribute_name(name)
+          .downcase
       end
     end
   end

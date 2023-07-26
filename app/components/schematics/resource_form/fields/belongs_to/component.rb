@@ -19,13 +19,6 @@ module Schematics
           def data = { controller: 'dropdown' }
 
           def label = attribute_name.humanize
-
-          protected
-
-          def attribute_name = resource
-            .class
-            .human_attribute_name(name)
-            .downcase
         end
       end
     end
