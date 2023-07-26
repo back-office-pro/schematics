@@ -20,7 +20,7 @@ module Schematics
 
           def color_data = { controller: 'dropdowns--colors-dropdown' }
 
-          def callback_data = {
+          def popover_data = {
             controller: 'popover schema-editor--variable-typeahead',
             'bs-toggle': 'popover',
             'bs-trigger': 'hover',
