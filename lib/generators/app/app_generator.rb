@@ -161,7 +161,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless env.development?
     return unless generating?
 
-    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures/core" FIXTURES=migrations'
+    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures"'
   end
 
   def reindex_searchkick

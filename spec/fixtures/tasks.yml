@@ -1,0 +1,12 @@
+---
+one:
+  id: b95bae8d-d517-4d0d-99db-afaa549dd5bb
+  title: Add more products
+  applicant_id: <%= User.first.id %>
+  state: pending
+two:
+  id: 97110c02-ee32-4ccf-a145-6a0f104afd6e
+  title: Clean up old files
+  applicant_id: <%= User.first.id %>
+  deadline: <%= Time.current.tomorrow %>
+  state: in_progress

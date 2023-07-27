@@ -1,0 +1,7 @@
+---
+one:
+  task_id: b95bae8d-d517-4d0d-99db-afaa549dd5bb
+  user_id: <%= User.first.id %>
+two:
+  task_id: 97110c02-ee32-4ccf-a145-6a0f104afd6e
+  user_id: <%= User.first.id %>

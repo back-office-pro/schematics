@@ -1,0 +1,13 @@
+---
+one:
+  api_key: one
+  ip: 127.0.0.1
+  endpoint: /tasks
+  request_method: GET
+  response_time: 100
+two:
+  api_key: two
+  ip: 127.0.0.1
+  endpoint: /users
+  request_method: GET
+  response_time: 120

@@ -1,0 +1,9 @@
+---
+one:
+  id: a44e9214-c886-4ad4-91df-a55ec049270b
+  subject: First company meetup
+  creator_id: <%= User.first.id %>
+  start_at: <%= Time.current %>
+  end_at: <%= Time.current.tomorrow %>
+  url: https://meet.google.com
+  location: 38 Grove Road London

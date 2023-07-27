@@ -1,0 +1,6 @@
+---
+one:
+  model: User
+  state: finished
+  progress: 100
+  author_id: <%= User.first.id %>

@@ -1,0 +1,43 @@
+---
+one:
+  event: create
+  item_id: f22740e6-7580-4f20-9abc-4def403c2834
+  item_type: ApiKey
+  whodunnit: <%= User.first.id %>
+two:
+  event: create
+  item_id: 7ed2c4db-6dfb-4d7b-94fb-86781f99aa08
+  item_type: ApiKey
+  whodunnit: <%= User.first.id %>
+three:
+  event: create
+  item: one (BlogPost)
+  whodunnit: <%= User.first.id %>
+four:
+  event: create
+  item: one (Import)
+  whodunnit: <%= User.first.id %>
+five:
+  event: create
+  item_id: a44e9214-c886-4ad4-91df-a55ec049270b
+  item_type: Meeting
+  whodunnit: <%= User.first.id %>
+six:
+  event: create
+  item_id: 1676e074-4c72-4f6c-901d-fb502a351480
+  item_type: Message
+  whodunnit: <%= User.first.id %>
+seven:
+  event: create
+  item_id: b95bae8d-d517-4d0d-99db-afaa549dd5bb
+  item_type: Task
+  whodunnit: <%= User.first.id %>
+height:
+  event: create
+  item_id: 97110c02-ee32-4ccf-a145-6a0f104afd6e
+  item_type: Task
+  whodunnit: <%= User.first.id %>
+nine:
+  event: create
+  item: one (UserGroup)
+  whodunnit: <%= User.first.id %>

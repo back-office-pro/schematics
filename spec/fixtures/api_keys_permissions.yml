@@ -1,0 +1,7 @@
+---
+one:
+  api_key_id: f22740e6-7580-4f20-9abc-4def403c2834
+  permission_id: <%= Permission.first.id %>
+two:
+  api_key_id: 7ed2c4db-6dfb-4d7b-94fb-86781f99aa08
+  permission_id: <%= Permission.second.id %>

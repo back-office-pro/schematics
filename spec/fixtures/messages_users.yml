@@ -1,0 +1,4 @@
+---
+one:
+  message_id: 1676e074-4c72-4f6c-901d-fb502a351480
+  user_id: <%= User.first.id %>
