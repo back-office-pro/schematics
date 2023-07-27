@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'zeitwerk', '~> 2.6.9'
   spec.add_dependency 'aasm', '~> 5.5.0'
   spec.add_dependency 'active_link_to', '~> 1.0.5'
-  spec.add_dependency 'active_record_doctor', '~> 1.11.0'
+  spec.add_dependency 'active_record_doctor', '~> 1.12.0'
   spec.add_dependency 'active_storage_base64', '~> 2.0.0'
   spec.add_dependency 'active_storage_validations', '~> 1.0.4'
   spec.add_dependency 'after_commit_everywhere', '~> 1.3.1'
