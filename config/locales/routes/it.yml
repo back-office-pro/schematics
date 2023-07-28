@@ -12,5 +12,6 @@ it:
     logout: disconnessione
     new: nuovo
     password_resets: passwords
+    preferences: preferenze
     profile: profilo
     versions: storico

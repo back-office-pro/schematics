@@ -12,5 +12,6 @@ fr:
     logout: deconnexion
     new: nouveau
     password_resets: mots-de-passe
+    preferences: preferences
     profile: profil
     versions: historique

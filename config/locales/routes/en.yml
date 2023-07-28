@@ -12,5 +12,6 @@ en:
     logout: logout
     new: new
     password_resets: passwords
+    preferences: preferences
     profile: profile
     versions: timeline
