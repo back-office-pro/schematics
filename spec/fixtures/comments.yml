@@ -1,0 +1,6 @@
+---
+one:
+  id: 04bf11b8-1f99-46c3-baeb-9984eb69db44
+  record_id: a44e9214-c886-4ad4-91df-a55ec049270b
+  record_type: Meeting
+  author_id: <%= User.first.id %>
