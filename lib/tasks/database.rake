@@ -25,10 +25,8 @@ namespace :schematics do
       desc 'Generate database encryption credentials'
       task init: :environment do
         config = `rails db:encryption:init | tail -n +2`
-        command = <<~RUBY
-          File.write(ARGV[0], File.read(ARGV[0]) + %(#{config}))
-        RUBY
-        `EDITOR='ruby -e "#{command}"' rails credentials:edit`
+        credentials = Rails.application.credentials
+        credentials.write(credentials.read + config)
       end
     end
   end
