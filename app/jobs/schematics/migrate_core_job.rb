@@ -3,10 +3,9 @@
 module Schematics
   class MigrateCoreJob < ApplicationJob
     def perform
-      return if Rails.cache.fetch('CORE_VERSION') == VERSION
+      return if ::Tenant.version == VERSION
 
-      result = Core::Migrations::Migrate.call(migration:)
-      Rails.cache.write('CORE_VERSION', VERSION) if result.success?
+      Core::Migrations::Migrate.call(migration:)
     end
 
     private

@@ -76,6 +76,15 @@ class Tenant
       .fetch('PORT', DEFAULT_PORT)
       .to_i
 
+    def version
+      ActiveRecord::Base
+        .connection
+        .execute('SELECT core_version FROM documentations ORDER BY created_at DESC LIMIT 1')
+        .getvalue(0, 0)
+    rescue StandardError
+      Schematics::VERSION
+    end
+
     private
 
     def data
@@ -101,10 +110,6 @@ class Tenant
 
     def port
       env_port unless Rails.env.production?
-    end
-
-    def version
-      Rails.cache&.fetch('CORE_VERSION') || Schematics::VERSION
     end
   end
 end
