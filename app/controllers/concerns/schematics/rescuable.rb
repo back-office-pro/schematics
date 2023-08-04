@@ -58,11 +58,11 @@ module Schematics
       end
     end
 
-    def stale_object_error
+    def stale_object_error(exception)
       respond_to do |format|
         format.json { head :precondition_failed }
         format.html do
-          @resource.errors.add(:base, :stale)
+          exception.record.errors.add(:base, :stale)
           flash.now[:alert] = t('schematics.application.stale_object_error.alert')
           render :edit, status: :precondition_failed
         end
