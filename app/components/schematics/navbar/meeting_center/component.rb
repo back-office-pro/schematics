@@ -23,7 +23,7 @@ module Schematics
           .today
           .accessible_by(current_ability)
           .load_async
-          .size
+          .count
 
         def render?
           can?(:index, ::Meeting)

@@ -33,7 +33,7 @@ module Schematics
           .messages
           .unread
           .load_async
-          .size
+          .count
       end
     end
   end

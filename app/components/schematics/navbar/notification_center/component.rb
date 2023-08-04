@@ -23,7 +23,7 @@ module Schematics
         memoize def count = Version
           .unread(read_notifications_at)
           .timeline(current_ability)
-          .size
+          .count
 
         memoize def versions = Version
           .timeline(current_ability)

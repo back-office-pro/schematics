@@ -23,7 +23,7 @@ module Schematics
           .not_state_aborted
           .accessible_by(current_ability)
           .load_async
-          .size
+          .count
 
         def render?
           can?(:index, ::Task)
