@@ -15,7 +15,7 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'support/simplecov' if RSpec.configuration.files_to_run.length > 200
+require 'support/simplecov' if RSpec.configuration.files_to_run.size > 200
 require 'support/i18n'
 require 'support/overrides'
 require 'rspec/its'
