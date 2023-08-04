@@ -14,6 +14,10 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.index [:key], unique: true
+
+      t.index :filename, using: :btree, where: 'deleted_at IS NULL'
+      t.index :content_type, using: :btree, where: 'deleted_at IS NULL'
+      t.index :byte_size, using: :btree, where: 'deleted_at IS NULL'
     end
 
     create_table :active_storage_attachments, id: :uuid do |t|
