@@ -9,8 +9,8 @@ module Schematics
         option :calendar, optional: true
         option :human_name_plural, optional: true
 
-        def nav_parameter
-          calendar&.fetch(:month) || pagy
+        def css_classes
+          'mb-3' if calendar && pages > 1
         end
 
         def render?
