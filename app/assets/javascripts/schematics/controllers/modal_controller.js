@@ -16,10 +16,10 @@ export default class extends ApplicationController {
     this.parentNode.appendChild(this.modalElement)
   }
 
-  checkFormValidity (e) {
+  checkFormValidity (event) {
     Array
       .from(this.modalElement.querySelectorAll('input, select'))
-      .every(_ => _.reportValidity()) || e.preventDefault()
+      .every(_ => _.reportValidity()) || event.preventDefault()
   }
 
   get modalElement () {

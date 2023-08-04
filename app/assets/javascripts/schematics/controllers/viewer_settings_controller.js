@@ -5,8 +5,8 @@ import ApplicationController from 'controllers/application_controller'
 export default class extends ApplicationController {
   keepOpened () {}
 
-  toggleColumn (e) {
-    const { id, checked } = e.target
+  toggleColumn (event) {
+    const { id, checked } = event.target
     document.querySelectorAll(`.${id}`).forEach(element => {
       element.classList.add('animate__animated')
       element.classList.toggle('d-none')
