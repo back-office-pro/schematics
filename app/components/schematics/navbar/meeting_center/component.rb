@@ -8,7 +8,7 @@ module Schematics
         delegate :icon, to: '::Meeting.entity'
 
         def display_count
-          count >= 10 ? '9+' : count
+          count >= LIMIT ? '9+' : count
         end
 
         def icon_class
