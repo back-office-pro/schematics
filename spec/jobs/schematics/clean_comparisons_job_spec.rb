@@ -20,7 +20,7 @@ RSpec.describe Schematics::CleanComparisonsJob do
   describe '#perform_now' do
     before { comparisons }
 
-    it 'cleans comparisons' do
+    it 'destroys comparisons' do
       expect { described_class.perform_now }
         .to change(Comparison.with_deleted, :count)
         .by(-2)

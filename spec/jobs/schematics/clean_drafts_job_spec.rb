@@ -22,7 +22,7 @@ RSpec.describe Schematics::CleanDraftsJob do
   describe '#perform_now' do
     before { drafts }
 
-    it 'cleans drafts' do
+    it 'destroys drafts' do
       expect { described_class.perform_now }
         .to change(Draft.with_deleted, :count)
         .by(-2)
