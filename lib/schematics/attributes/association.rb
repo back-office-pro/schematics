@@ -54,8 +54,9 @@ module Schematics
 
       def preload
         return if association_type == entity.name # prevent self inclusion
+        return super if descriptor.joins.empty?
 
-        super
+        { super => descriptor.joins }
       end
 
       def search_data = super
