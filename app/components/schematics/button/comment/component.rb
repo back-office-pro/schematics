@@ -6,12 +6,15 @@ module Schematics
       class Component < ApplicationComponent
         delegate :comments_feature_flag, to: ::Configuration, private: true
         delegate :icon, to: '::Comment.entity'
-        delegate :size, to: 'resource.comments'
         option :resource
 
         def display_count
-          size >= 10 ? '9+' : size
+          count >= 10 ? '9+' : count
         end
+
+        memoize def count = resource
+          .comments
+          .count
 
         def render? = comments_feature_flag
       end
