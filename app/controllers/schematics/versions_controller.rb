@@ -2,7 +2,8 @@
 
 module Schematics
   class VersionsController < ApplicationController
-    load_and_authorize_resource class: Version
+    authorize_resource class: Version
+    before_action :set_version, only: %i[show revert]
     delegate :human_name, :gender, to: :model_class, private: true
 
     def index
@@ -34,5 +35,13 @@ module Schematics
     private
 
     def model_class = Version
+
+    def set_version
+      @version = model_class
+                 .with_user
+                 .with_item
+                 .load_async
+                 .find(params[:id])
+    end
   end
 end
