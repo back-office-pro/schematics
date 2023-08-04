@@ -29,6 +29,21 @@
     schematics/clean_api_requests_job:
       cron: 0 1 * * *
       class: Schematics::CleanApiRequestsJob
+    schematics/clean_api_keys_job:
+      cron: 0 1 * * *
+      class: Schematics::CleanApiKeysJob
+    schematics/clean_meetings_job:
+      cron: 0 1 * * *
+      class: Schematics::CleanMeetingsJob
+    schematics/clean_tasks_job:
+      cron: 0 1 * * *
+      class: Schematics::CleanTasksJob
+    schematics/clean_imports_job:
+      cron: 0 1 * * *
+      class: Schematics::CleanImportsJob
+    schematics/clean_messages_job:
+      cron: 0 1 * * *
+      class: Schematics::CleanMessagesJob
     schematics/load_licence_job:
       cron: 0 1 * * *
       class: Schematics::LoadLicenceJob
