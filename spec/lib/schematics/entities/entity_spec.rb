@@ -35,7 +35,7 @@ describe Schematics::Entities::Entity do
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:viewer) { is_expected.to eq(:table) }
-  its(:joins) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
+  its(:joins) { is_expected.to be_empty }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
