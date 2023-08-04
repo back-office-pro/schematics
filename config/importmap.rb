@@ -30,7 +30,7 @@ pin 'file-saver', to: 'file-saver-es/src/FileSaver.js', preload: true
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js', preload: true
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.2/dist/rollbar.umd.js', preload: true
 pin 'sortablejs', to: 'sortablejs/modular/sortable.esm.js', preload: true
-pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.1.3/index.js', preload: true
+pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.2.0/index.js', preload: true
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js', preload: true
 pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js', preload: true
 pin 'timeago.it.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/it.js', preload: true
