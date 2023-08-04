@@ -25,6 +25,7 @@ module Schematics
       @resource = model_class
                   .preload_all
                   .state_published
+                  .load_async
                   .finder(params[:slug])
     end
 
