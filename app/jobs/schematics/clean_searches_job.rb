@@ -6,6 +6,6 @@ module Schematics
 
     def perform = ::Search
       .preload_all
-      .destroy_by(created_at: ..DELAY.ago)
+      .delete_by(created_at: ..DELAY.ago)
   end
 end

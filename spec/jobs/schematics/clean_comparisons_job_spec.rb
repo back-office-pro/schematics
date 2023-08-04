@@ -21,7 +21,9 @@ RSpec.describe Schematics::CleanComparisonsJob do
     before { comparisons }
 
     it 'cleans comparisons' do
-      expect { described_class.perform_now }.to change(Comparison, :count).by(-2)
+      expect { described_class.perform_now }
+        .to change(Comparison.with_deleted, :count)
+        .by(-2)
     end
   end
 end

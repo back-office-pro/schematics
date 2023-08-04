@@ -24,7 +24,9 @@ RSpec.describe Schematics::CleanDatabaseBackupsJob do
     before { backups }
 
     it 'cleans backups' do
-      expect { described_class.perform_now }.to change(ActiveStorage::Blob, :count).by(-2)
+      expect { described_class.perform_now }
+        .to change(ActiveStorage::Blob.with_deleted, :count)
+        .by(-2)
     end
   end
 end
