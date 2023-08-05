@@ -10,11 +10,19 @@ module Schematics
         option :human_name_plural, optional: true
 
         def css_classes
-          'mb-3' if calendar && pages > 1
+          'mb-3' if calendar? && pages?
+        end
+
+        def pages?
+          pages > 1
+        end
+
+        def calendar?
+          calendar.present?
         end
 
         def render?
-          calendar.presence || pages > 1
+          calendar? || pages?
         end
       end
     end
