@@ -3,6 +3,7 @@
 module Schematics
   module Loadable
     extend ActiveSupport::Concern
+    ASSOCIATIONS_LIMIT = 100
 
     included do
       include ActiveStorageSupport::SupportForBase64
@@ -83,6 +84,7 @@ module Schematics
         &.format(public_send(attr)) || public_send(attr)
     end
 
+    # :reek:BooleanParameter :reek:ControlParameter
     def associations(current_ability, dependent: false)
       self
         .class
@@ -90,7 +92,8 @@ module Schematics
         .association_elements
         .tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
         .map { public_send(_1.name).preload(_1.includes) }
-        .map { _1.accessible_by(current_ability).order(created_at: :desc).limit(100) }
+        .map { _1.accessible_by(current_ability).order(created_at: :desc) }
+        .map { _1.limit(ASSOCIATIONS_LIMIT) }
         .compact_blank
     end
   end

@@ -14,7 +14,7 @@ module Schematics
         end
 
         def display_count
-          size >= 100 ? '99+' : size
+          size >= Loadable::ASSOCIATIONS_LIMIT ? '99+' : size
         end
 
         def collapse_css_class
