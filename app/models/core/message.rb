@@ -2,6 +2,7 @@
 
 class Message < Schematics::ApplicationRecord
   scope :unread, ::Core::Messages::UnreadQuery
+  scope :read, ::Core::Messages::ReadQuery
 
   def read?(user)
     versions.exists?(event: 'show', user:)

@@ -6,8 +6,7 @@ module Schematics
 
     def perform = ::Message
       .preload_all
-      .unread
-      .invert_where
-      .destroy_by(created_at: ..DELAY.ago)
+      .read
+      .destroy_by(versions: { created_at: ..DELAY.ago })
   end
 end

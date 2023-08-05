@@ -12,22 +12,30 @@ RSpec.describe Schematics::CleanMessagesJob do
         subject: 'First message',
         content: 'Lorem',
         author: user,
-        recipients: [user],
-        created_at:
+        recipients: [user]
       ),
       Message.create!(
         subject: 'Second message',
         content: 'Lorem',
         author: user,
-        recipients: [user],
-        created_at:
+        recipients: [user]
       )
     ]
   end
   let(:versions) do
     [
-      Schematics::Version.create!(event: 'show', item: messages.first, user:),
-      Schematics::Version.create!(event: 'show', item: messages.second, user:)
+      Schematics::Version.create!(
+        event: 'show',
+        item: messages.first,
+        user:,
+        created_at:
+      ),
+      Schematics::Version.create!(
+        event: 'show',
+        item: messages.second,
+        user:,
+        created_at:
+      )
     ]
   end
 
