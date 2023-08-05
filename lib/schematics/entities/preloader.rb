@@ -4,8 +4,8 @@ module Schematics
   module Entities
     class Preloader
       delegate :preloadable_elements,
-               :preloadable_virtuals,
                :association_attributes,
+               :virtuals,
                to: :@entity,
                private: true
 
@@ -13,7 +13,7 @@ module Schematics
         @entity = entity
       end
 
-      def joins = preloadable_virtuals
+      def joins = virtuals
         .flat_map(&:preload)
         .compact
         .uniq
