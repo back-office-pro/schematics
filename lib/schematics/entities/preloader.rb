@@ -4,6 +4,7 @@ module Schematics
   module Entities
     class Preloader
       delegate :preloadable_elements,
+               :preloadable_fields,
                :preloadable_virtuals,
                :association_attributes,
                to: :@entity,
@@ -18,7 +19,7 @@ module Schematics
         .compact
         .uniq
 
-      def includes = preloadable_elements
+      def includes = preloadable_fields
         .flat_map(&:preload)
         .compact
         .uniq
