@@ -69,7 +69,7 @@ module Schematics
     def show
       return unless stale?(@resource)
 
-      respond_with(@resource) do |format|
+      respond_with(@resource, current_ability:) do |format|
         format.pdf do
           GeneratePdfJob.perform_later(current_user, @resource)
           head :accepted

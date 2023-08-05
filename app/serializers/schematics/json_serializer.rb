@@ -45,7 +45,7 @@ module Schematics
 
     def elements
       return association_elements if association?
-      return renderable_elements if show?
+      return renderable_elements if show? && !metadata?
 
       renderable_elements.excluding(has_many_and_through_and_belongs_to_many_associations)
     end
@@ -61,10 +61,13 @@ module Schematics
         case element
         when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
-        when Associations::HasMany, Associations::HasManyThrough
+        when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
           @resource
             .public_send(element.name.to_sym)
             .preload(element.includes)
+            .accessible_by(@options[:current_ability])
+            .limit(Loadable::ASSOCIATIONS_LIMIT)
+            .order(created_at: :desc)
             .as_json(association: true)
         when Attributes::Association, Associations::Association
           @resource
