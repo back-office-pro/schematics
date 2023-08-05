@@ -67,7 +67,9 @@ module Schematics
             .preload(element.includes)
             .as_json(association: true)
         when Attributes::Association, Associations::Association
-          @resource.public_send(element.name.to_sym).as_json(association: true)
+          @resource
+            .public_send(element.name.to_sym)
+            .as_json(association: true)
         else
           @resource.public_send(element.name.to_sym)
         end
