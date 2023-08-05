@@ -16,7 +16,7 @@ module Schematics
     scope :read_messages, Versions::ReadMessagesQuery
     scope :filter_by_user_preferences, Versions::FilterByUserPreferencesQuery
     scope :timeline, Versions::TimelineQuery
-    scope :with_item, -> { preload(:item) }
+    scope :with_item, -> { preload(item: ::Tenant.schema.entities.flat_map(&:includes).uniq) }
     scope :with_user, lambda {
       preload(
         user: [
