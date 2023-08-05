@@ -90,7 +90,7 @@ module Schematics
         .class
         .entity
         .association_elements
-        .tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
+        .then_tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
         .map { public_send(_1.name).preload(_1.includes) }
         .map { _1.accessible_by(current_ability).order(created_at: :desc) }
         .map { _1.limit(ASSOCIATIONS_LIMIT) }
