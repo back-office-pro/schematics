@@ -61,6 +61,11 @@ module Schematics
         case element
         when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
+        when Associations::HasMany, Associations::HasManyThrough
+          @resource
+            .public_send(element.name.to_sym)
+            .preload(element.includes)
+            .as_json(association: true)
         when Attributes::Association, Associations::Association
           @resource.public_send(element.name.to_sym).as_json(association: true)
         else
