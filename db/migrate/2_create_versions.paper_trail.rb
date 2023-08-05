@@ -12,9 +12,6 @@ class CreateVersions < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :versions, :item_id, using: :btree, where: 'deleted_at IS NULL'
-    add_index :versions, :item_type, using: :btree, where: 'deleted_at IS NULL'
-    add_index :versions, :event, using: :btree, where: 'deleted_at IS NULL'
-    add_index :versions, :whodunnit, using: :btree, where: 'deleted_at IS NULL'
+    add_index :versions, %i[item_type item_id]
   end
 end
