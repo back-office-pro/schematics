@@ -7,7 +7,7 @@ class Licence < Schematics::ApplicationRecord
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)
-      reload && update_env_file if metadata_previously_changed?
+      setup
     end
   end
 
@@ -77,6 +77,13 @@ class Licence < Schematics::ApplicationRecord
     'postgresql'
   end
 
+  def setup
+    return unless metadata_previously_changed?
+
+    reindex_models(search_engine)
+    update_env_file
+  end
+
   def update_env_file
     filepath = Rails.root.join('.env')
     filepath.write filepath
@@ -84,5 +91,17 @@ class Licence < Schematics::ApplicationRecord
       .gsub(/BACKEND=(.*)/, "BACKEND=#{backend}")
       .gsub(/SEARCH_ENGINE=(.*)/, "SEARCH_ENGINE=#{search_engine}")
     FileUtils.touch Rails.root.join('tmp/restart.txt')
+  end
+
+  def reindex_models(previous_search_engine)
+    reload
+    return if previous_search_engine == search_engine
+    return unless search_engine == 'elasticsearch'
+
+    Tenant
+      .schema
+      .entities
+      .filter_map(&:model_class)
+      .each(&:reindex)
   end
 end
