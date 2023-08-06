@@ -3,6 +3,74 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
+      "fingerprint": "09ab838b56312296fab0f1e73a52dbd65ce8113a8e45fe4ab93aafe9eae352c2",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/resources/edit.html.slim",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::ResourceForm::Component.new(:resource => model_class.preload_all.then_tap do\n _1.preload(:slugs) unless entity.existing?\n end.then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id])), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::ResourcesController",
+          "method": "edit",
+          "line": 92,
+          "file": "app/controllers/schematics/resources_controller.rb",
+          "rendered": {
+            "name": "schematics/resources/edit",
+            "file": "app/views/schematics/resources/edit.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/resources/edit"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "28d48dee1de583027ba17fa35fe72893e38c0cb0fda1c1815c31944b5e5caa79",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/resources/delete.html.slim",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::Viewer::Association::Component.with_collection(model_class.preload_all.then_tap do\n _1.preload(:slugs) unless entity.existing?\n end.then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]).associations(current_ability, :dependent => true)), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::ResourcesController",
+          "method": "delete",
+          "line": 68,
+          "file": "app/controllers/schematics/resources_controller.rb",
+          "rendered": {
+            "name": "schematics/resources/delete",
+            "file": "app/views/schematics/resources/delete.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/resources/delete"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
       "fingerprint": "2f566a9a96423d242ecba7fdcb8ac3fdf568a61fbda80e6b205662046cc59902",
       "check_name": "Render",
       "message": "Render path contains parameter value",
@@ -26,244 +94,6 @@
       "location": {
         "type": "template",
         "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "930d11c3077e6968ee4229370875929f9741a7692e676c272d2d744a8da4b92e",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/versions/show.html.slim",
-      "line": 23,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.with_user.with_item.load_async.find(params[:id]).item), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::VersionsController",
-          "method": "show",
-          "line": 33,
-          "file": "app/controllers/schematics/versions_controller.rb",
-          "rendered": {
-            "name": "schematics/versions/show",
-            "file": "app/views/schematics/versions/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "96f766c2860a5aad466e01452b04650e505b98a76d5ec0f81eeb6e0a62b86dd6",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/resources/delete.html.slim",
-      "line": 12,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::Viewer::Association::Component.with_collection(model_class.preload_all.preload(:slugs).then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]).associations(current_ability, :dependent => true)), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "delete",
-          "line": 68,
-          "file": "app/controllers/schematics/resources_controller.rb",
-          "rendered": {
-            "name": "schematics/resources/delete",
-            "file": "app/views/schematics/resources/delete.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/resources/delete"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "af615dea00371f61eeabbee8297bfd407a266efa74a3581ce0be68e2676773f7",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/versions/show.html.slim",
-      "line": 8,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => title), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::VersionsController",
-          "method": "show",
-          "line": 33,
-          "file": "app/controllers/schematics/versions_controller.rb",
-          "rendered": {
-            "name": "schematics/versions/show",
-            "file": "app/views/schematics/versions/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "af615dea00371f61eeabbee8297bfd407a266efa74a3581ce0be68e2676773f7",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/versions/show.html.slim",
-      "line": 21,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => title), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::VersionsController",
-          "method": "show",
-          "line": 33,
-          "file": "app/controllers/schematics/versions_controller.rb",
-          "rendered": {
-            "name": "schematics/versions/show",
-            "file": "app/views/schematics/versions/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "bc5fbac480406ab568a862f89ff616d5949eca8c1be0043392b5c89fcec6ca11",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/resources/delete.html.slim",
-      "line": 15,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::Button::Cancel::Component.new(:path => model_class.preload_all.preload(:slugs).then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id])), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "delete",
-          "line": 68,
-          "file": "app/controllers/schematics/resources_controller.rb",
-          "rendered": {
-            "name": "schematics/resources/delete",
-            "file": "app/views/schematics/resources/delete.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/resources/delete"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "e165772300853efd929172278a63368eaade381322bdaecb7f534b0efa506c33",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/versions/show.html.slim",
-      "line": 10,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::Button::Revert::Component.new(:version => model_class.with_user.with_item.load_async.find(params[:id])), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::VersionsController",
-          "method": "show",
-          "line": 33,
-          "file": "app/controllers/schematics/versions_controller.rb",
-          "rendered": {
-            "name": "schematics/versions/show",
-            "file": "app/views/schematics/versions/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "e7b0e3d187db360468e5bb345f3239af674e7debe80e1195376def311e053ca6",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/resources/edit.html.slim",
-      "line": 10,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceForm::Component.new(:resource => model_class.preload_all.then_tap do\n _1.preload(:slugs) unless entity.existing?\n end.then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id])), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "edit",
-          "line": 92,
-          "file": "app/controllers/schematics/resources_controller.rb",
-          "rendered": {
-            "name": "schematics/resources/edit",
-            "file": "app/views/schematics/resources/edit.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/resources/edit"
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
@@ -343,29 +173,131 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "dfe1e5ec0602c0cb6f544627fcc62ba4bc15475ad92f31e00e50b9f98d4490f9",
+      "fingerprint": "930d11c3077e6968ee4229370875929f9741a7692e676c272d2d744a8da4b92e",
       "check_name": "Render",
       "message": "Render path contains parameter value",
-      "file": "app/views/schematics/resources/delete.html.slim",
-      "line": 12,
+      "file": "app/views/schematics/versions/show.html.slim",
+      "line": 23,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::Viewer::Association::Component.with_collection(model_class.preload_all.then_tap do\n _1.preload(:slugs) unless entity.existing?\n end.then_tap do\n _1.with_deleted if request.delete?\n end.load_async.finder(params[:id]).dependent_associations(current_ability)), {})",
+      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.with_user.with_item.load_async.find(params[:id]).item), {})",
       "render_path": [
         {
           "type": "controller",
-          "class": "Schematics::ResourcesController",
-          "method": "delete",
-          "line": 68,
-          "file": "app/controllers/schematics/resources_controller.rb",
+          "class": "Schematics::VersionsController",
+          "method": "show",
+          "line": 33,
+          "file": "app/controllers/schematics/versions_controller.rb",
           "rendered": {
-            "name": "schematics/resources/delete",
-            "file": "app/views/schematics/resources/delete.html.slim"
+            "name": "schematics/versions/show",
+            "file": "app/views/schematics/versions/show.html.slim"
           }
         }
       ],
       "location": {
         "type": "template",
-        "template": "schematics/resources/delete"
+        "template": "schematics/versions/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "af615dea00371f61eeabbee8297bfd407a266efa74a3581ce0be68e2676773f7",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/versions/show.html.slim",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => title), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::VersionsController",
+          "method": "show",
+          "line": 33,
+          "file": "app/controllers/schematics/versions_controller.rb",
+          "rendered": {
+            "name": "schematics/versions/show",
+            "file": "app/views/schematics/versions/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/versions/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "af615dea00371f61eeabbee8297bfd407a266efa74a3581ce0be68e2676773f7",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/versions/show.html.slim",
+      "line": 21,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => title), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::VersionsController",
+          "method": "show",
+          "line": 33,
+          "file": "app/controllers/schematics/versions_controller.rb",
+          "rendered": {
+            "name": "schematics/versions/show",
+            "file": "app/views/schematics/versions/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/versions/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "e165772300853efd929172278a63368eaade381322bdaecb7f534b0efa506c33",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/versions/show.html.slim",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::Button::Revert::Component.new(:version => model_class.with_user.with_item.load_async.find(params[:id])), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::VersionsController",
+          "method": "show",
+          "line": 33,
+          "file": "app/controllers/schematics/versions_controller.rb",
+          "rendered": {
+            "name": "schematics/versions/show",
+            "file": "app/views/schematics/versions/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/versions/show"
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
@@ -398,6 +330,6 @@
       "note": "Safe"
     }
   ],
-  "updated": "2023-08-04 11:42:53 +0200",
+  "updated": "2023-08-06 19:16:42 +0200",
   "brakeman_version": "5.4.1"
 }
