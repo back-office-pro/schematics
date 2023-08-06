@@ -18,6 +18,6 @@ module Schematics
       .entities
       .flat_map(&:has_and_belongs_to_many_associations)
       .select { _1.association_type == ::UserGroup.entity.name }
-      .map(&:model_class)
+      .filter_map(&:model_class)
   end
 end

@@ -23,7 +23,7 @@ module Core
         .schema
         .entities
         .reject(&:hidden?)
-        .map(&:model_class)
+        .filter_map(&:model_class)
         .map { _1.multisearch(query, current_ability) }
     end
   end
