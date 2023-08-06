@@ -69,6 +69,7 @@ end
 ActiveSupport.on_load(:active_storage_blob) do
   ActiveStorage::Blob.class_eval do
     include Tenant.search_engine.concern
+    def versions = Schematics::Version.none
   end
 end
 
