@@ -59,8 +59,11 @@ module Schematics
       [
         element.name.camelize(:lower),
         case element
-        when Attributes::Attachment, Attributes::RichText
-          element.format @resource.public_send(element.name.to_sym)
+        when Attributes::Attachments
+          element.format @resource
+            .public_send(element.name.to_sym)
+            .preload(element.includes)
+            .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
         when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
           @resource
             .public_send(element.name.to_sym)
@@ -69,10 +72,12 @@ module Schematics
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)
             .as_json(association: true)
-        when Attributes::Association, Associations::Association
+        when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
           @resource
             .public_send(element.name.to_sym)
             .as_json(association: true)
+        when Attributes::Attachment, Attributes::RichText
+          element.format @resource.public_send(element.name.to_sym)
         else
           @resource.public_send(element.name.to_sym)
         end
