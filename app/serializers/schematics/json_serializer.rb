@@ -64,9 +64,7 @@ module Schematics
             .public_send(element.name.to_sym)
             .preload(element.includes)
             .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
-        when Associations::HasMany,
-             Associations::HasManyThrough,
-             Associations::HasAndBelongsToMany
+        when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
           @resource
             .public_send(element.name.to_sym)
             .preload(element.includes)
@@ -74,17 +72,16 @@ module Schematics
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)
             .as_json(association: true)
-        when Attributes::Association,
-             Associations::HasOne,
-             Associations::HasOneThrough
+        when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
           @resource
             .public_send(element.name.to_sym)
             .as_json(association: true)
-        when Attributes::Attachment,
-             Attributes::RichText,
-             Virtuals::Concatenation,
-             Virtuals::Calculation
+        when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
+        when Virtuals::Virtual
+          @resource
+            .public_send(element.name.to_sym)
+            .then_tap { _1.try(:original_message) }
         else
           @resource.public_send(element.name.to_sym)
         end
