@@ -65,7 +65,7 @@ module Schematics
           @resource
             .public_send(element.name.to_sym)
             .preload(element.includes)
-            .accessible_by(@options[:current_ability])
+            .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)
             .as_json(association: true)
