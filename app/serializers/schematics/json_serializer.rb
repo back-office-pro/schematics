@@ -55,7 +55,7 @@ module Schematics
       find_field_by_name(descriptor.name)
     ].uniq.reject(&:hidden?)
 
-    def element_to_array(element)
+    def element_to_array(element) # rubocop:disable Metrics/CyclomaticComplexity
       [
         element.name.camelize(:lower),
         case element
