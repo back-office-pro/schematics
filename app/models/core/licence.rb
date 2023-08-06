@@ -93,6 +93,7 @@ class Licence < Schematics::ApplicationRecord
     FileUtils.touch Rails.root.join('tmp/restart.txt')
   end
 
+  # :reek:ControlParameter
   def reindex_models(previous_search_engine)
     reload
     return if previous_search_engine == search_engine
