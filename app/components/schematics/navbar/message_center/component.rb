@@ -7,7 +7,7 @@ module Schematics
         LIMIT = 10
 
         def display_count
-          count >= LIMIT ? '9+' : count
+          count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
 
         def icon = :envelope

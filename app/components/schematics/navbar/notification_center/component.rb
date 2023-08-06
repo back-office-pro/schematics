@@ -9,7 +9,7 @@ module Schematics
         delegate :read_notifications_at, :preferences, to: :current_user
 
         def display_count
-          count >= LIMIT ? '9+' : count
+          count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
 
         def icon = :bell
