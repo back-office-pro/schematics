@@ -129,7 +129,7 @@ module Schematics
 
     protected
 
-    def resource_path = polymorphic_path(@resource)
+    def resource_path = main_app.polymorphic_path(@resource)
 
     def i18n_title_path = 'schematics.resources'
 

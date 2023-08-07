@@ -78,7 +78,7 @@ class Licence < Schematics::ApplicationRecord
   def setup
     return unless metadata_previously_changed?
 
-    reindex_models(search_engine)
+    reindex_models
     update_env_file
   end
 
@@ -91,16 +91,19 @@ class Licence < Schematics::ApplicationRecord
     FileUtils.touch Rails.root.join('tmp/restart.txt')
   end
 
-  # :reek:ControlParameter
-  def reindex_models(previous_search_engine)
-    reload
-    return if previous_search_engine == search_engine
-    return unless search_engine == 'elasticsearch'
+  def reindex_models
+    return unless search_engine_changed_to_elasticsearch?(search_engine)
 
     Tenant
       .schema
       .entities
       .filter_map(&:model_class)
       .each(&:reindex)
+  end
+
+  # :reek:ControlParameter
+  def search_engine_changed_to_elasticsearch?(previous_search_engine)
+    reload
+    previous_search_engine == 'postgresql' && search_engine == 'elasticsearch'
   end
 end
