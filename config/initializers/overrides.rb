@@ -69,6 +69,10 @@ end
 ActiveSupport.on_load(:active_storage_blob) do
   ActiveStorage::Blob.class_eval do
     include Tenant.search_engine.concern
+    has_many :slugs,
+             class_name: 'FriendlyId::Slug',
+             as: :sluggable
+    def versions = Schematics::Version.none
   end
 end
 
