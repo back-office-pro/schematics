@@ -148,7 +148,7 @@ module Schematics
     def set_resource
       @resource = model_class
                   .preload_all
-                  .then_tap { _1.preload(:slugs) unless entity.existing? }
+                  .preload(:slugs)
                   .then_tap { _1.with_deleted if request.delete? }
                   .load_async
                   .finder(params[:id])
