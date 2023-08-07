@@ -22,8 +22,10 @@ RSpec.describe Schematics::CleanSearchesJob do
   describe '#perform_now' do
     before { searches }
 
-    it 'cleans searches' do
-      expect { described_class.perform_now }.to change(Search, :count).by(-2)
+    it 'destroys searches' do
+      expect { described_class.perform_now }
+        .to change(Search.with_deleted, :count)
+        .by(-2)
     end
   end
 end

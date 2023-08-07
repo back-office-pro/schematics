@@ -6,6 +6,6 @@ module Schematics
 
     def perform = ::ActiveStorage::Blob
       .preload_all
-      .destroy_by(filename: 'db.dump', created_at: ..DELAY.ago)
+      .delete_by(filename: 'db.dump', created_at: ..DELAY.ago)
   end
 end

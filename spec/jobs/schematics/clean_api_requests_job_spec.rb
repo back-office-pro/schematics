@@ -22,8 +22,10 @@ RSpec.describe Schematics::CleanApiRequestsJob do
   describe '#perform_now' do
     before { api_requests }
 
-    it 'cleans API requests' do
-      expect { described_class.perform_now }.to change(ApiRequest, :count).by(-2)
+    it 'destroys API requests' do
+      expect { described_class.perform_now }
+        .to change(ApiRequest.with_deleted, :count)
+        .by(-2)
     end
   end
 end

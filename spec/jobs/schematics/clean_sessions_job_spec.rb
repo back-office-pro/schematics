@@ -22,8 +22,10 @@ RSpec.describe Schematics::CleanSessionsJob do
   describe '#perform_now' do
     before { sessions }
 
-    it 'cleans sessions' do
-      expect { described_class.perform_now }.to change(Session, :count).by(-2)
+    it 'destroys sessions' do
+      expect { described_class.perform_now }
+        .to change(Session.with_deleted, :count)
+        .by(-2)
     end
   end
 end
