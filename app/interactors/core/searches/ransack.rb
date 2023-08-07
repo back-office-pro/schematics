@@ -20,7 +20,7 @@ module Core
         .entities
         .reject(&:hidden?)
         .select(&:multisearchable?)
-        .map(&:model_class)
+        .filter_map(&:model_class)
         .map { _1.multisearch(query, current_ability) }
         .reject(&:empty?)
     end

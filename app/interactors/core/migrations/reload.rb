@@ -19,10 +19,10 @@ module Core
         migrator_old_and_changed_entities.each(&method(:remove_constants))
         migrator_new_and_changed_entities.each(&method(:load_files))
         migrator_changed_entities
-          .map(&:model_class)
+          .filter_map(&:model_class)
           .each(&:reset_column_information)
         migrator_changed_entities
-          .map(&:model_class)
+          .filter_map(&:model_class)
           .each(&:define_attribute_methods)
       end
 
