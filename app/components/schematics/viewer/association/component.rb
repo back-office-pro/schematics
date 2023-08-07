@@ -4,12 +4,17 @@ module Schematics
   module Viewer
     module Association
       class Component < Viewer::Component
+        delegate :size, to: :resources, private: true
         with_collection_parameter :resources
 
         def initialize(resources:, collapsed: true, highlight_text: nil)
           super(resources:)
           @collapsed = collapsed
           @highlight_text = highlight_text
+        end
+
+        def display_count
+          size >= Loadable::ASSOCIATIONS_LIMIT ? "#{Loadable::ASSOCIATIONS_LIMIT.pred}+" : size
         end
 
         def collapse_css_class
@@ -48,11 +53,11 @@ module Schematics
               .first
               .record
               .class
-              .human_attribute_name(@resources.first.name, count: @resources.size)
+              .human_attribute_name(@resources.first.name, count: size)
           else
             association_reflection
               &.active_record
-              &.human_attribute_name(association_reflection.name, count: @resources.size, default:)
+              &.human_attribute_name(association_reflection.name, count: size, default:)
               &.humanize || default
           end
         end
@@ -64,7 +69,7 @@ module Schematics
           .try(:reflection)
 
         def default = model_class
-          .human_name(count: @resources.size)
+          .human_name(count: size)
           .humanize
       end
     end

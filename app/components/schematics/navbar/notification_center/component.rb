@@ -9,7 +9,7 @@ module Schematics
         delegate :read_notifications_at, :preferences, to: :current_user
 
         def display_count
-          count >= 10 ? '9+' : count
+          count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
 
         def icon = :bell
@@ -23,7 +23,7 @@ module Schematics
         memoize def count = Version
           .unread(read_notifications_at)
           .timeline(current_ability)
-          .size
+          .count
 
         memoize def versions = Version
           .timeline(current_ability)

@@ -45,7 +45,7 @@ module Schematics
 
     def elements
       return association_elements if association?
-      return renderable_elements if show?
+      return renderable_elements if show? && !metadata?
 
       renderable_elements.excluding(has_many_and_through_and_belongs_to_many_associations)
     end
@@ -55,14 +55,33 @@ module Schematics
       find_field_by_name(descriptor.name)
     ].uniq.reject(&:hidden?)
 
-    def element_to_array(element)
+    def element_to_array(element) # rubocop:disable Metrics/CyclomaticComplexity
       [
         element.name.camelize(:lower),
         case element
+        when Attributes::Attachments
+          element.format @resource
+            .public_send(element.name.to_sym)
+            .preload(element.includes)
+            .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
+        when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
+          @resource
+            .public_send(element.name.to_sym)
+            .preload(element.includes)
+            .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
+            .limit(Loadable::ASSOCIATIONS_LIMIT)
+            .order(created_at: :desc)
+            .as_json(association: true)
+        when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
+          @resource
+            .public_send(element.name.to_sym)
+            .as_json(association: true)
         when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
-        when Attributes::Association, Associations::Association
-          @resource.public_send(element.name.to_sym).as_json(association: true)
+        when Virtuals::Virtual
+          @resource
+            .public_send(element.name.to_sym)
+            .then_tap { _1.try(:original_message) }
         else
           @resource.public_send(element.name.to_sym)
         end

@@ -7,7 +7,7 @@ module Schematics
         LIMIT = 10
 
         def display_count
-          count >= 10 ? '9+' : count
+          count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
 
         def icon = :envelope
@@ -33,7 +33,7 @@ module Schematics
           .messages
           .unread
           .load_async
-          .size
+          .count
       end
     end
   end

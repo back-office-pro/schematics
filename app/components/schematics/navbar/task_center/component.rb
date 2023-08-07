@@ -8,7 +8,7 @@ module Schematics
         delegate :icon, to: '::Task.entity'
 
         def display_count
-          count >= 10 ? '9+' : count
+          count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
 
         def icon_class
@@ -23,7 +23,7 @@ module Schematics
           .not_state_aborted
           .accessible_by(current_ability)
           .load_async
-          .size
+          .count
 
         def render?
           can?(:index, ::Task)

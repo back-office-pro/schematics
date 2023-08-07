@@ -3,7 +3,8 @@
 describe Schematics::Entities::Preloader do
   subject(:router) { described_class.new(entity) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name:, attributes:) }
+  let(:schema) { Schematics::Schema.new }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name:, attributes:) }
   let(:name) { 'discussion' }
   let(:attributes) do
     [
@@ -21,7 +22,7 @@ describe Schematics::Entities::Preloader do
     ]
   end
 
-  its(:joins) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
+  its(:joins) { is_expected.to be_empty }
 
   its(:includes) do
     is_expected.to eq(

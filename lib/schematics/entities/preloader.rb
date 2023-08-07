@@ -3,15 +3,24 @@
 module Schematics
   module Entities
     class Preloader
-      delegate :preloadable_elements, :association_attributes, to: :@entity, private: true
+      delegate :preloadable_elements,
+               :association_attributes,
+               :virtuals,
+               to: :@entity,
+               private: true
 
       def initialize(entity)
         @entity = entity
       end
 
-      def joins = includes.excluding(polymorphic_associations_preload)
+      def joins = virtuals
+        .flat_map(&:preload)
+        .compact
+        .uniq
 
       def includes = preloadable_elements
+        .grep_v(Associations::HasMany)
+        .grep_v(Associations::HasManyThrough)
         .flat_map(&:preload)
         .compact
         .uniq
@@ -52,10 +61,6 @@ module Schematics
           { attribute.name.to_sym => Array.wrap(element.preload) }
         ]
       end
-
-      def polymorphic_associations_preload = association_attributes
-        .select(&:polymorphic?)
-        .flat_map(&:preload)
     end
   end
 end

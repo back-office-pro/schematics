@@ -59,9 +59,7 @@ class Licence < Schematics::ApplicationRecord
     ActiveStorage::Blob.sum(&:byte_size)
   end
 
-  def users_size = User
-    .all
-    .size
+  memoize def users_size = User.count
 
   private
 

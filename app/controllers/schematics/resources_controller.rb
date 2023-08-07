@@ -69,7 +69,7 @@ module Schematics
     def show
       return unless stale?(@resource)
 
-      respond_with(@resource) do |format|
+      respond_with(@resource, ability: current_ability) do |format|
         format.pdf do
           GeneratePdfJob.perform_later(current_user, @resource)
           head :accepted
@@ -148,7 +148,7 @@ module Schematics
     def set_resource
       @resource = model_class
                   .preload_all
-                  .preload(:slugs)
+                  .then_tap { _1.preload(:slugs) unless entity.existing? }
                   .then_tap { _1.with_deleted if request.delete? }
                   .load_async
                   .finder(params[:id])
