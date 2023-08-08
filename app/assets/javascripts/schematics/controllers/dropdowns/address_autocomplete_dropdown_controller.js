@@ -26,6 +26,7 @@ export default class extends DropdownController {
       valueField: 'description',
       searchField: 'description',
       labelField: 'description',
+      sortField: 'description',
       shouldLoad: this.isValid,
       load: this.debounce(this.getPlacePredictions)
     })
