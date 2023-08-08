@@ -6,15 +6,13 @@ module Schematics
   module Associations
     class HasOneThrough < AssociationThrough
       include Behaviours::Searchable
-      delegate :descriptor, :preload, to: :belongs_to
+      delegate :descriptor, :class_name, :preload, to: :belongs_to
 
       def open_api_type = super.first
 
       def source = belongs_to.name
 
       def inverse_of = through.name
-
-      def class_name = source.camelize
 
       def to_str = super
         .chomp
