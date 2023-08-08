@@ -6,19 +6,33 @@ module Schematics
       module BelongsTo
         class Component < Fields::Component
           delegate :column_name, :inverse_entity, to: :field
-          delegate :model_class, to: :inverse_entity
+          delegate :model_class, :descriptor, to: :inverse_entity
           delegate :gender, to: :model_class, private: true
 
-          def collection = model_class
-            .all
+          memoize def collection = model_class
+            .preload_all
+            .accessible_by(current_ability)
+            .order(created_at: :desc)
+            .limit(Loadable::ASSOCIATIONS_LIMIT)
+            .to_a
+            .union(::Array.wrap(value))
+            .compact
             .map { [_1.to_s, _1.id] }
             .sort
 
           def prompt = t('prompt', gender:, attribute_name:)
 
-          def data = { controller: 'dropdown' }
+          def data = {
+            controller: 'dropdowns--association-dropdown',
+            'dropdowns--association-dropdown-field-value': descriptor.name,
+            'dropdowns--association-dropdown-url-value': url
+          }
 
           def label = attribute_name.humanize
+
+          protected
+
+          def url = polymorphic_path(model_class, format: :json)
         end
       end
     end

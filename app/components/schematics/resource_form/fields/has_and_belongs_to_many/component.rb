@@ -7,11 +7,13 @@ module Schematics
         class Component < BelongsTo::Component
           delegate :group_by, to: :options, private: true
 
-          def collection
+          memoize def collection
             return super unless group_by
 
             model_class
+              .preload_all
               .all
+              .accessible_by(current_ability)
               .group_by(&:"#{group_by}_formatted")
               .to_h
               .transform_values { |value| value.map { [_1.to_s, _1.id] } }
