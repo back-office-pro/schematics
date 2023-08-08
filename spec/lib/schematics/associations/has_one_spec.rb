@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 describe Schematics::Associations::HasOne do
-  subject(:association) { described_class.new(belongs_to:) }
+  subject(:association) do
+    Schematics::Associations::Association.build(
+      type: 'has_one',
+      entity:,
+      name: 'schema'
+    )
+  end
 
   let(:entity) do
     Schematics::Entities::Entity.new(
@@ -13,16 +19,6 @@ describe Schematics::Associations::HasOne do
         { name: 'type', type: 'string' }
       ]
     )
-  end
-  let(:options) do
-    {
-      inverse: {
-        type: 'has_one'
-      }
-    }
-  end
-  let(:belongs_to) do
-    Schematics::Attributes::BelongsTo.new(entity:, name: 'schema', options:)
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }

@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 describe Schematics::Associations::HasAndBelongsToMany do
-  subject(:association) { described_class.new(belongs_to:) }
+  subject(:association) do
+    Schematics::Associations::Association.build(
+      type: 'has_and_belongs_to_many',
+      entity:,
+      name: 'permissions'
+    )
+  end
 
   let(:schema) { Schematics::Schema.new }
   let(:entity) do
@@ -15,9 +21,6 @@ describe Schematics::Associations::HasAndBelongsToMany do
         { name: 'name', type: 'string' }
       ]
     )
-  end
-  let(:belongs_to) do
-    Schematics::Attributes::BelongsTo.new(entity:, name: 'permissions')
   end
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
