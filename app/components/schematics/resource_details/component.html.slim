@@ -1,8 +1,8 @@
 .table-responsive
   table.table.mb-0.table-striped.table-borderless
-    tbody data-controller='sortable'
+    tbody
       - elements.stable_sort_by(&:weight).each do |element|
-        tr.cursor-grab
+        tr
           th.text-nowrap
             = fa_icon element.icon, class: 'fa-fw me-2 text-body-secondary'
             = model_class.human_attribute_name(element.name)
