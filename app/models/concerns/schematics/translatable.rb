@@ -4,10 +4,6 @@ module Schematics
   module Translatable
     extend ActiveSupport::Concern
 
-    included do
-      extend Mobility
-    end
-
     class_methods do
       def gender = [
         ::I18n.t(:gender, scope: [i18n_scope, :models, model_name.i18n_key], default: 'male'),
