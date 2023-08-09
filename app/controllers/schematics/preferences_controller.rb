@@ -20,7 +20,12 @@ module Schematics
       value
     end
 
-    def dashboard_preferences = %i[sidebar_toggled theme]
+    def dashboard_preferences = [
+      :sidebar_toggled,
+      :theme,
+      { stats: [] },
+      { charts: [] }
+    ]
 
     memoize def permitted_preference_params = timeline_preferences
       .concat(viewer_preferences)

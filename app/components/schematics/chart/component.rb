@@ -4,7 +4,8 @@ module Schematics
   module Chart
     class Component < ApplicationComponent
       with_collection_parameter :chart
-      delegate :icon,
+      delegate :id,
+               :icon,
                :kind,
                :suffix,
                :type,
