@@ -27,7 +27,8 @@ module I18n
         return '' if count.nil?
         return '.zero' if count.zero?
         return '.one' if count == 1
-        return '.other' if count > 1
+
+        '.other' if count > 1
       end
 
       def fetch(locale, key)

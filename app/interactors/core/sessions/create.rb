@@ -28,7 +28,7 @@ module Core
       private
 
       def fail!(message: '.failure')
-        return super if cannot?(:impersonate, user)
+        super if cannot?(:impersonate, user)
       end
 
       def password
