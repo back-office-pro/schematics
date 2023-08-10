@@ -4,7 +4,7 @@ module Core
   module Sessions
     class AuthorizedByQuery < Schematics::ApplicationQuery
       def call(auth_token, id)
-        preload(:slugs)
+        with_slugs
           .with_user_avatar
           .with_user_user_groups_name
           .with_user_role_permissions

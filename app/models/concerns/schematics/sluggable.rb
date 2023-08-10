@@ -7,6 +7,7 @@ module Schematics
     included do
       extend FriendlyId
       friendly_id entity.descriptor.name.to_sym
+      scope :with_slugs, -> { preload(:slugs) }
     end
   end
 end

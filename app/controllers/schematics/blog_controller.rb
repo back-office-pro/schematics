@@ -24,7 +24,7 @@ module Schematics
     def set_resource
       @resource = model_class
                   .preload_all
-                  .preload(:slugs)
+                  .with_slugs
                   .state_published
                   .load_async
                   .finder(params[:slug])
