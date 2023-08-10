@@ -34,7 +34,9 @@ module Schematics
           .not_state_completed
           .not_state_aborted
           .accessible_by(current_ability)
+          .with_applicant
           .with_applicant_avatar
+          .with_string_translations
           .order(deadline: :asc)
           .limit(LIMIT)
       end

@@ -19,6 +19,7 @@ module Schematics
     scope :with_user, lambda {
       preload(
         user: [
+          :string_translations,
           { user_groups: :string_translations },
           { avatar_attachment: { blob: :variant_records } }
         ]

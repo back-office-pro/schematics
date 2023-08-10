@@ -45,7 +45,7 @@ module Schematics
         when Entities::Singleton
           instance
         else
-          find(id)
+          friendly.find(id)
         end
       end
 
@@ -91,7 +91,7 @@ module Schematics
         .entity
         .association_elements
         .then_tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
-        .map { public_send(_1.name).preload(_1.includes) }
+        .map { public_send(_1.name).preload(_1.includes).with_string_translations }
         .map { _1.accessible_by(current_ability).order(created_at: :desc) }
         .map { _1.limit(ASSOCIATIONS_LIMIT) }
         .compact_blank

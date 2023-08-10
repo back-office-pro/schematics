@@ -148,6 +148,7 @@ module Schematics
     def set_resource
       @resource = model_class
                   .preload_all
+                  .with_string_translations
                   .with_slugs
                   .then_tap { _1.with_deleted if request.delete? }
                   .load_async

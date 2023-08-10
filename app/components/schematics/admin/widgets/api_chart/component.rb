@@ -11,8 +11,12 @@ module Schematics
 
           def title = t('.title')
 
+          memoize def resource = ::Chart
+            .with_string_translations
+            .api
+
           def render?
-            can?(:show, ::Chart.api)
+            can?(:show, resource)
           end
         end
       end
