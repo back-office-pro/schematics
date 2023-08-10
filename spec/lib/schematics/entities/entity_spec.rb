@@ -52,7 +52,7 @@ describe Schematics::Entities::Entity do
     is_expected.to eq(
       [
         { rich_text_content: [embeds_attachments: :blob] },
-        :record
+        { record: :string_translations }
       ]
     )
   end
@@ -69,7 +69,7 @@ describe Schematics::Entities::Entity do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      scope :with_record, -> { preload([:record]) }
+      scope :with_record, -> { preload([{:record=>:string_translations}]) }
     RUBY
   end
 

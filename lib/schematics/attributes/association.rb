@@ -55,7 +55,7 @@ module Schematics
       def preload
         return if association_type == entity.name # prevent self inclusion
 
-        { super => [:string_translations] }
+        { super => :string_translations }
       end
 
       def search_data = super
