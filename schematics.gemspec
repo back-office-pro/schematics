@@ -77,6 +77,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'importmap-rails', '~> 1.2.1'
   spec.add_dependency 'interactor', '~> 3.1.2'
   spec.add_dependency 'jwt', '~> 2.7.1'
+  spec.add_dependency 'letter_opener', '~> 1.8.1'
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'lograge', '~> 0.13.0'
