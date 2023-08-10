@@ -41,6 +41,16 @@ RSpec.describe Schematics::LicenceAbility do
     it { is_expected.not_to be_able_to(:create, User) }
   end
 
+  context 'when api keys quota is exceeded' do
+    before do
+      allow(Licence.instance)
+        .to receive(:quota_api_keys_exceeded?)
+        .and_return(true)
+    end
+
+    it { is_expected.not_to be_able_to(:create, ApiKey) }
+  end
+
   context 'when licence is inactive' do
     before do
       allow(Licence.instance)

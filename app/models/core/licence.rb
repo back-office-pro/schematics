@@ -22,7 +22,7 @@ class Licence < Schematics::ApplicationRecord
     .size
 
   def quota = Data
-    .define(:entities, :storage, :users, :databases)
+    .define(:entities, :storage, :users, :api_keys, :databases)
     .new(**metadata)
 
   def quota_entities_exceeded?
@@ -55,11 +55,23 @@ class Licence < Schematics::ApplicationRecord
     users_size * 100 / quota.users
   end
 
+  def quota_api_keys_exceeded?
+    return true unless active?
+
+    api_keys_size >= quota.api_keys
+  end
+
+  def quota_api_keys_percentage
+    api_keys_size * 100 / quota.api_keys
+  end
+
   def storage_size
     ActiveStorage::Blob.sum(&:byte_size)
   end
 
   memoize def users_size = User.count
+
+  memoize def api_keys_size = ApiKey.count
 
   private
 
