@@ -7,6 +7,7 @@ module Schematics
         delegate :icon, to: '::User.entity'
 
         memoize def sessions = ::Session
+          .with_user
           .with_user_avatar
           .active
           .select('DISTINCT ON (user_id) *')

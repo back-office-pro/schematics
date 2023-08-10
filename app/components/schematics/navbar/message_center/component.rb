@@ -21,7 +21,9 @@ module Schematics
         memoize def messages = current_user
           .messages
           .with_rich_text_content_and_embeds
+          .with_author
           .with_author_avatar
+          .with_string_translations
           .order(created_at: :desc)
           .limit(LIMIT)
 

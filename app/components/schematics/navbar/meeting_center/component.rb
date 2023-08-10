@@ -33,7 +33,9 @@ module Schematics
           .meetings
           .to_come
           .accessible_by(current_ability)
+          .with_creator
           .with_creator_avatar
+          .with_string_translations
           .order(created_at: :desc)
           .limit(LIMIT)
       end
