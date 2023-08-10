@@ -44,10 +44,8 @@ module Schematics
         case entity
         when Entities::Singleton
           instance
-        when Sluggable
-          friendly.find(id)
         else
-          find(id)
+          friendly.find(id)
         end
       end
 
