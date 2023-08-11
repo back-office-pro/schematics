@@ -59,16 +59,12 @@ end
 ActiveSupport.on_load(:active_storage_record) do
   ActiveStorage::Record.class_eval do
     self.implicit_order_column = 'created_at'
+
     include Schematics::Loadable
     include Schematics::Serializable
     include Schematics::Translatable
-    loadable concerns: [Schematics::SoftDeletable]
-  end
-end
 
-ActiveSupport.on_load(:active_storage_blob) do
-  ActiveStorage::Blob.class_eval do
-    include Tenant.search_engine.concern
+    loadable concerns: [Schematics::SoftDeletable]
 
     scope :with_string_translations, -> { self }
     scope :with_slugs, -> { self }
@@ -78,6 +74,12 @@ ActiveSupport.on_load(:active_storage_blob) do
     end
 
     def versions = Schematics::Version.none
+  end
+end
+
+ActiveSupport.on_load(:active_storage_blob) do
+  ActiveStorage::Blob.class_eval do
+    include Tenant.search_engine.concern
   end
 end
 
