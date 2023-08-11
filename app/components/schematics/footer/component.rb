@@ -9,15 +9,13 @@ module Schematics
       delegate :icon, to: :entity
       delegate :year, to: '::Time.current'
 
-      def current = ::Migration
+      def resource = ::Migration
         .with_string_translations
         .current
 
       def website_url = "https://www.#{domain}"
 
       def css_classes = %w[text-decoration-none]
-
-      alias resource current
     end
   end
 end
