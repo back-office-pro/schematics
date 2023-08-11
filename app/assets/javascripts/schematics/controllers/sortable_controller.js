@@ -15,6 +15,7 @@ export default class extends ApplicationController {
   get options () {
     return {
       filter: 'input',
+      draggable: '.cursor-grab',
       preventOnFilter: false,
       animation: 150,
       group: this.groupValue,
