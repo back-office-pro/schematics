@@ -18,6 +18,8 @@ class Migration < Schematics::ApplicationRecord
     delegate :data_version, :data, to: :current, prefix: true, allow_nil: true
 
     def current = finished.last
+
+    def core = new(data: Tenant.schema.as_json, data_version: current_data_version)
   end
 
   def after_migrate
@@ -27,14 +29,7 @@ class Migration < Schematics::ApplicationRecord
 
   memoize def migrator = Schematics::Migrator.new(data, Tenant.schema)
 
-  def dump! = Rails
-    .root
-    .join('spec/fixtures/migrations.yml')
-    .write(fixture)
-
-  private
-
-  def fixture = { one: { state:, data_version:, data: data.as_json } }
+  def to_yaml = { one: { state: 'finished', data_version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
 end

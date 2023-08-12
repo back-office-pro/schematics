@@ -5,11 +5,7 @@ module Schematics
     def perform
       return if ::Tenant.version == VERSION
 
-      Core::Migrations::Migrate.call(migration:)
+      Core::Migrations::Migrate.call(migration: ::Migration.core)
     end
-
-    private
-
-    def migration = ::Migration.new(data: ::Tenant.schema.as_json)
   end
 end

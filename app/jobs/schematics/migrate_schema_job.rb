@@ -26,9 +26,7 @@ module Schematics
       result = Core::Migrations::Migrate.call(migration:)
       return migration.state_error! if result.failure?
 
-      migration
-        .tap(&:state_finished!)
-        .dump!
+      migration.state_finished!
     end
   end
 end
