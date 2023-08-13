@@ -176,3 +176,5 @@ Rails/TableNameAssignment:
 # rubocop-performance
 Performance/MethodObjectAsBlock:
   Enabled: false
+Performance/MapMethodChain:
+  Enabled: false
