@@ -15,7 +15,7 @@ module Schematics
             .order(created_at: :desc)
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .to_a
-            .union(::Array.wrap(value))
+            .union(Array(value))
             .compact
             .map { [_1.to_s, _1.id] }
             .sort
