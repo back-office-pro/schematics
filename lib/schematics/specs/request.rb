@@ -364,7 +364,7 @@ module Schematics
                  to: :entity
 
         def controller_class
-          description.constantize
+          top_level_description.constantize
         end
 
         def allow?(action)

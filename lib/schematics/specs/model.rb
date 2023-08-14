@@ -227,7 +227,7 @@ module Schematics
                  to: :entity
 
         def model_class
-          description.constantize
+          top_level_description.constantize
         end
       end
     end

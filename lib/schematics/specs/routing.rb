@@ -99,7 +99,7 @@ module Schematics
         alias_method :controller, :controller_path
 
         def controller_class
-          description.constantize
+          top_level_description.constantize
         end
 
         def model_name

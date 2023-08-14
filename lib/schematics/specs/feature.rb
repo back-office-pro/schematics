@@ -87,7 +87,7 @@ module Schematics
         delegate :default, to: :entity
 
         def model_class
-          description.constantize
+          top_level_description.constantize
         end
 
         def allow?(action)
