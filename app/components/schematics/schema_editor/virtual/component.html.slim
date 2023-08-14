@@ -9,6 +9,6 @@
           = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-virtual')
     .card-body
       = builder.hidden_field :id
-      = builder.text_field :name, maxlength: 50, class: 'entity_field_name', data: { controller: 'schema-editor--special-characters' }
+      = builder.text_field :name, maxlength: 50, class: 'entity-field-name', data: { controller: 'schema-editor--special-characters' }
       = builder.text_field(:function, data:)
       = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)

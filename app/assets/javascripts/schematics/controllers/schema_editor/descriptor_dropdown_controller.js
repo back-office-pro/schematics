@@ -16,7 +16,7 @@ export default class extends DropdownController {
     return document
       .querySelector(`span[data-bs-target="#${this.modalId}"]`)
       .closest('.schema-editor-entity')
-      .querySelectorAll('.entity_field_name')
+      .querySelectorAll('.entity-field-name')
   }
 
   get modalId () {
