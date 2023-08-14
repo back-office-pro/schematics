@@ -1366,8 +1366,8 @@
         "options": {
           "readonly": true,
           "default": {
-            "users": 1,
-            "api_keys": 1,
+            "users": 3,
+            "api_keys": 2,
             "storage": 1,
             "entities": 1,
             "databases": 1
