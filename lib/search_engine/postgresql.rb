@@ -15,5 +15,7 @@ module SearchEngine
     def pagy_backend = :pagy
 
     def multisearch = Core::Searches::Ransack
+
+    def initialize! = nil
   end
 end

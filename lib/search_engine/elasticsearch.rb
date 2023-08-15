@@ -15,5 +15,10 @@ module SearchEngine
     def pagy_backend = :pagy_searchkick
 
     def multisearch = Core::Searches::Searchkick
+
+    def initialize! = ::Searchkick
+      .models
+      .reject { _1.search_index.exists? }
+      .each(&:reindex)
   end
 end

@@ -44,7 +44,7 @@ preload_app!
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
-# Run with backend
+# Run with Backend
 case Tenant.backend
 when Backend::Redis
   x = nil
@@ -54,3 +54,6 @@ when Backend::Redis
   end
   on_worker_shutdown { x&.stop }
 end
+
+# Initialize Search Engine
+Tenant.search_engine.initialize!
