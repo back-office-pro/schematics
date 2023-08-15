@@ -8,7 +8,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
   describe 'POST #create' do
     include_context 'with unauthenticated user'
 
-    let(:do_request) { post('/sessions', params:, headers:) }
+    let(:do_request) { post(url, params:, headers:) }
+    let(:url) { Rails.application.routes.url_helpers.sessions_path }
     let(:params) { { session: { email:, password:, remember_me: } } }
 
     context 'when credentials are correct' do
