@@ -11,6 +11,6 @@ class Message < Schematics::ApplicationRecord
   def mentions = content
     .body
     .attachables
-    .grep(::User)
+    .grep(User)
     .uniq
 end
