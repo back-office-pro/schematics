@@ -8,7 +8,6 @@ export default class extends ApplicationController {
 
   connect () {
     install(this.element, this.shortcutValue)
-    this.element.title = this.shortcutValue
   }
 
   disconnect () {

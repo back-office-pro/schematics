@@ -7,9 +7,11 @@ module Schematics
         delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
         delegate :breadcrumb_trail, to: :helpers
 
+        def title = 'Control+h'
+
         def data = {
           controller: 'hotkey',
-          'hotkey-shortcut-value': 'Control+h'
+          'hotkey-shortcut-value': title
         }
       end
     end

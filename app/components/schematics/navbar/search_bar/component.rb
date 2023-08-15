@@ -4,9 +4,11 @@ module Schematics
   module Navbar
     module SearchBar
       class Component < ApplicationComponent
+        def title = 'Control+s'
+
         def data = {
           controller: 'hotkey',
-          'hotkey-shortcut-value': 'Control+s',
+          'hotkey-shortcut-value': title,
           'bs-toggle': 'modal',
           'bs-target': '#search-bar-modal'
         }
