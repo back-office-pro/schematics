@@ -8,7 +8,8 @@ export default class extends DropdownController {
 
   get options () {
     return Object.assign(super.options, {
-      onFocus: this.setCollection.bind(this)
+      onFocus: this.setCollection.bind(this),
+      sortField: 'value'
     })
   }
 
@@ -31,6 +32,5 @@ export default class extends DropdownController {
       .from(this.inputs)
       .map(_ => _.value)
       .map(value => ({ value, text: value }))
-      .sort((a, b) => a.text - b.text)
   }
 }
