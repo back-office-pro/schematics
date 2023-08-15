@@ -51,7 +51,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
     end
   end
 
@@ -116,7 +116,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
     end
   end
 
@@ -185,7 +185,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(['client']) }
+      it { is_expected.to eq(%w[chart client]) }
     end
   end
 
@@ -259,7 +259,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(['client']) }
+      it { is_expected.to eq(%w[chart client]) }
     end
   end
 
@@ -334,7 +334,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(['client']) }
+      it { is_expected.to be_empty }
     end
   end
 
@@ -410,7 +410,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
     end
   end
 
@@ -460,7 +460,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
     end
   end
 
@@ -529,7 +529,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(['client']) }
+      it { is_expected.to eq(%w[chart client]) }
     end
   end
 
@@ -655,7 +655,14 @@ describe Schematics::Migrator do
             {
               id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
               name: 'state',
-              type: 'state_machine'
+              type: 'state_machine',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ]
+              }
             }
           ]
         }
@@ -672,6 +679,11 @@ describe Schematics::Migrator do
               name: 'state',
               type: 'state_machine',
               options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ],
                 events: [
                   {
                     id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
@@ -716,7 +728,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(['client']) }
     end
   end
 
@@ -732,6 +744,11 @@ describe Schematics::Migrator do
               name: 'state',
               type: 'state_machine',
               options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ],
                 events: [
                   {
                     id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
@@ -755,7 +772,14 @@ describe Schematics::Migrator do
             {
               id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
               name: 'state',
-              type: 'state_machine'
+              type: 'state_machine',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ]
+              }
             }
           ]
         }
@@ -791,7 +815,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(['client']) }
     end
   end
 
@@ -807,6 +831,11 @@ describe Schematics::Migrator do
               name: 'state',
               type: 'state_machine',
               options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ],
                 events: [
                   {
                     id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
@@ -832,6 +861,11 @@ describe Schematics::Migrator do
               name: 'state',
               type: 'state_machine',
               options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ],
                 events: [
                   {
                     id: '3cdbd211-8786-4ef0-a3a6-15b29b117654',
@@ -876,7 +910,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(['client']) }
     end
   end
 
@@ -933,7 +967,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[chart client]) }
     end
   end
 
@@ -990,7 +1024,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[chart client]) }
     end
   end
 
@@ -1054,7 +1088,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to be_empty }
+      it { is_expected.to eq(%w[chart client]) }
     end
   end
 
@@ -1110,7 +1144,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(['client']) }
+      it { is_expected.to eq(%w[user client]) }
     end
   end
 
@@ -1166,7 +1200,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(['client']) }
+      it { is_expected.to eq(%w[user client]) }
     end
   end
 end

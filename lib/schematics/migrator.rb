@@ -12,33 +12,29 @@ module Schematics
       .grep(Commands::CreateEntity)
       .concat(build_commands.grep(Commands::RenameEntity))
       .map(&:entity)
-      .uniq
 
     def old_entities = clean_commands
       .grep(Commands::DestroyEntity)
       .concat(clean_commands.grep(Commands::RenameEntity))
       .map(&:entity)
-      .uniq
 
-    def changed_entities = build_commands
-      .grep(Commands::RenameAttribute)
-      .concat(build_commands.grep(Commands::ChangeAttribute))
-      .concat(build_commands.grep(Commands::AddAttribute))
-      .concat(build_commands.grep(Commands::AddAssociation))
-      .concat(clean_commands.grep(Commands::RemoveAttribute))
-      .concat(clean_commands.grep(Commands::RemoveAssociation))
-      .map(&:entity)
-      .excluding(new_entities)
-      .excluding(old_entities)
-      .uniq
+    def changed_entities = Array(
+      @current_schema
+        &.entities
+        &.excluding(old_entities)
+        &.reject do |current_entity|
+          @new_schema
+            .entities
+            .find { _1.id == current_entity.id }
+            .model_elements
+            .flat_map(&:to_str)
+            .eql?(current_entity.model_elements.flat_map(&:to_str))
+        end
+    )
 
-    def new_and_changed_entities = new_entities
-      .concat(changed_entities)
-      .uniq
+    def new_and_changed_entities = new_entities.concat(changed_entities)
 
-    def old_and_changed_entities = old_entities
-      .concat(changed_entities)
-      .uniq
+    def old_and_changed_entities = old_entities.concat(changed_entities)
 
     def build_commands
       @new_schema.entities.map do |new_entity|
