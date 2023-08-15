@@ -29,13 +29,13 @@ export default class extends ApplicationController {
     return Array
       .from(this.inputs)
       .map(input => ({ key: input.value, value: input.value }))
-      .sort((a, b) => a.text - b.text)
+      .sort((a, b) => a.value.localeCompare(b.value))
   }
 
   get options () {
     return {
       trigger: '$',
-      values: this.collection,
+      values: (text, callback) => callback(this.collection),
       menuItemLimit: 5,
       noMatchTemplate: () => null
     }
