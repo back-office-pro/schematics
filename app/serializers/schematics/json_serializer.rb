@@ -10,7 +10,8 @@ module Schematics
              :renderable_elements,
              :has_many_and_through_and_belongs_to_many_associations,
              :find_field_by_name,
-             to: :entity, private: true
+             to: :entity,
+             private: true
 
     def initialize(resource, options)
       @resource = resource
@@ -21,6 +22,8 @@ module Schematics
       .stable_sort_by(&:weight)
       .to_h(&method(:element_to_array))
       .merge(metadata)
+
+    private
 
     def metadata
       return {} unless metadata?
