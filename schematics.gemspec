@@ -96,7 +96,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-cors', '~> 2.0.0'
   spec.add_dependency 'rack-mini-profiler', '~> 3.1.1'
   spec.add_dependency 'rails', '~> 7.0.7'
-  spec.add_dependency 'rails-i18n', '~> 7.0.7'
+  spec.add_dependency 'rails-i18n', '~> 7.0.8'
   spec.add_dependency 'ransack', '~> 4.0.0'
   spec.add_dependency 'ransack-enum', '~> 1.0.0'
   spec.add_dependency 'ratonvirus', '~> 0.4.2'
