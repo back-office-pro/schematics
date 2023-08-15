@@ -2,15 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe SessionsController, except: %i[create destroy] do # rubocop:disable RSpec/MultipleDescribes
+RSpec.describe SessionsController, except: %i[create destroy] do
   include Schematics::Specs::Request
-end
 
-RSpec.describe 'Sessions' do
   describe 'POST #create' do
     include_context 'with unauthenticated user'
 
-    let(:do_request) { post(sessions_path, params:, headers:) }
+    let(:do_request) { post('/sessions', params:, headers:) }
     let(:params) { { session: { email:, password:, remember_me: } } }
 
     context 'when credentials are correct' do
