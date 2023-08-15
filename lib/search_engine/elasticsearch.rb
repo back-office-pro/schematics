@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module SearchEngine
+  # :reek:MissingSafeMethod
   class Elasticsearch
     def indexable? = true
 
@@ -16,6 +17,7 @@ module SearchEngine
 
     def multisearch = Core::Searches::Searchkick
 
+    # :reek:UtilityFunction
     def initialize! = ::Searchkick
       .models
       .reject { _1.search_index.exists? }
