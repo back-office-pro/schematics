@@ -1,0 +1,3 @@
+.form-check.form-switch
+  = check_box 'preferences', preference, { class: 'form-check-input', checked: checked? }, 'true', 'false'
+  = label_tag preference, '', class: 'form-check-label', for: "preferences_#{preference}"

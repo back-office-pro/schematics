@@ -13,12 +13,8 @@
               = fa_icon model_class.entity.icon, class: 'fa-fw me-2 text-body-secondary'
               = model_class.human_name_plural.humanize
             - events.each_key do |action|
-              - preference = "#{action}_#{model_class}"
               td
-                - if can?(action.to_sym, model_class)
-                  .form-check.form-switch
-                    = check_box 'preferences', preference, { class: 'form-check-input', checked: preferences(preference, true) }, 'true', 'false'
-                    = label_tag preference, '', class: 'form-check-label', for: "preferences_#{preference}"
+                = render Schematics::PreferencesTable::Toggle::Component.new(action:, model_class:)
   .m-3
     = render Schematics::Button::Confirm::Component.new
     = render Schematics::Button::Cancel::Component.new(path: root_path)
