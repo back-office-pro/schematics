@@ -35,6 +35,10 @@ RSpec.describe Core::Migrations::Migrate do
       ActiveRecord::Base.connection.migration_context.rollback(migrations_steps)
     end
   end
+  let(:rollback_reload) do
+    Object.__send__(:remove_const, :Prospect)
+    Object.__send__(:remove_const, :ProspectsController)
+  end
 
   before do
     Tenant.schema = schema
@@ -52,16 +56,6 @@ RSpec.describe Core::Migrations::Migrate do
       let(:data) { initial_data }
       let(:commits_steps) { 1 }
       let(:migrations_steps) { 1 }
-      let(:rollback_reload) do
-        migration.migrator_new_and_changed_entities.each do |entity|
-          Object.__send__(:remove_const, entity.class_name.to_sym)
-          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
-        end
-        migration.migrator_old_and_changed_entities.each do |entity|
-          load root.join('app', 'models', "#{entity.name}.rb")
-          load root.join('app', 'controllers', "#{entity.name.pluralize}_controller.rb")
-        end
-      end
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -135,10 +129,8 @@ RSpec.describe Core::Migrations::Migrate do
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
       let(:rollback_reload) do
-        migration.migrator_new_and_changed_entities.each do |entity|
-          Object.__send__(:remove_const, entity.class_name.to_sym)
-          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
-        end
+        Object.__send__(:remove_const, :Client)
+        Object.__send__(:remove_const, :ClientsController)
       end
 
       before { create_prospect_entity }
@@ -300,10 +292,6 @@ RSpec.describe Core::Migrations::Migrate do
       end
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
-      let(:rollback_reload) do
-        Object.__send__(:remove_const, :Prospect)
-        Object.__send__(:remove_const, :ProspectsController)
-      end
 
       before { create_prospect_entity }
 
@@ -342,10 +330,6 @@ RSpec.describe Core::Migrations::Migrate do
       end
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
-      let(:rollback_reload) do
-        Object.__send__(:remove_const, :Prospect)
-        Object.__send__(:remove_const, :ProspectsController)
-      end
 
       before { create_prospect_entity }
 
@@ -391,10 +375,6 @@ RSpec.describe Core::Migrations::Migrate do
       end
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
-      let(:rollback_reload) do
-        Object.__send__(:remove_const, :Prospect)
-        Object.__send__(:remove_const, :ProspectsController)
-      end
 
       before { create_prospect_entity }
 
@@ -441,10 +421,6 @@ RSpec.describe Core::Migrations::Migrate do
       end
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
-      let(:rollback_reload) do
-        Object.__send__(:remove_const, :Prospect)
-        Object.__send__(:remove_const, :ProspectsController)
-      end
 
       before { create_prospect_entity }
 
@@ -480,10 +456,8 @@ RSpec.describe Core::Migrations::Migrate do
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 3 }
       let(:rollback_reload) do
-        migration.migrator_new_and_changed_entities.each do |entity|
-          Object.__send__(:remove_const, entity.class_name.to_sym)
-          Object.__send__(:remove_const, :"#{entity.class_name.pluralize}Controller".to_sym)
-        end
+        Object.__send__(:remove_const, :Client)
+        Object.__send__(:remove_const, :ClientsController)
       end
 
       before { create_prospect_entity }
