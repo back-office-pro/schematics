@@ -552,5 +552,18 @@ RSpec.describe Core::Migrations::Migrate do
         expect(Client.new).to respond_to(:surname)
       end
     end
+
+    context 'when migrating core' do
+      let(:migration) { Migration.core }
+      let(:commits_steps) { 0 }
+      let(:migrations_steps) { 0 }
+      let(:rollback_reload) { nil }
+
+      uses_transaction 'is a success'
+
+      it 'is a success' do
+        expect(migrate).to be_a_success
+      end
+    end
   end
 end
