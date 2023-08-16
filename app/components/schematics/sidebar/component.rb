@@ -5,13 +5,6 @@ module Schematics
     class Component < ApplicationComponent
       delegate :company_name, to: ::Configuration
 
-      def data = {
-        controller: 'tooltip hotkey',
-        'bs-toggle': 'tooltip',
-        'bs-placement': 'bottom',
-        'bs-container': '.sidebar'
-      }
-
       def model_classes = ::Tenant
         .schema
         .entities
