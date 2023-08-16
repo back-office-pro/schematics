@@ -50,6 +50,6 @@ module Schematics
       .schema
       .entities
       .flat_map(&:listable_elements)
-      .map { |element| "col_#{element.entity.table_name}_#{element.name}" }
+      .map { "col_#{_1.entity.id}_#{_1.id}" }
   end
 end

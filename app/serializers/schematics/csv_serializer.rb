@@ -20,7 +20,7 @@ module Schematics
 
     def elements = entity
       .listable_elements
-      .select { @preferences.fetch("col_#{_1.entity.table_name}_#{_1.name}", true) }
+      .select { @preferences.fetch("col_#{_1.entity.id}_#{_1.id}", true) }
 
     def line(resource)
       elements.stable_sort_by(&:weight).map do |element|

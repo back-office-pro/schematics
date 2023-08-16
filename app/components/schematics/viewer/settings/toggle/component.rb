@@ -6,7 +6,6 @@ module Schematics
       module Toggle
         class Component < ApplicationComponent
           delegate :entity, to: :@field, private: true
-          delegate :table_name, to: :entity, private: true
           delegate :model_class, to: :entity, private: true
 
           with_collection_parameter :field
@@ -16,7 +15,7 @@ module Schematics
             @field = field
           end
 
-          def preference = "col_#{table_name}_#{@field.name}"
+          def preference = "col_#{entity.id}_#{@field.id}"
 
           def label = model_class.human_attribute_name(@field.name)
 

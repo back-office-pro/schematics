@@ -27,7 +27,9 @@ RSpec.describe Schematics::CsvSerializer do
   end
 
   context 'with preferences' do
-    let(:preferences) { { 'col_stat_field' => false } }
+    let(:preferences) { { "col_#{entity_id}_#{field_id}" => false } }
+    let(:entity_id) { Stat.entity.id }
+    let(:field_id) { Stat.entity.find_field_by_name('field').id }
 
     its(:content) do
       is_expected.to eq <<~CSV
