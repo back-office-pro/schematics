@@ -19,7 +19,7 @@ export default class extends ApplicationController {
     target.insertAdjacentHTML('afterbegin', content)
   }
 
-  remove (event) {
-    event.target.closest(event.params.wrapper).remove()
+  remove ({ target, params }) {
+    target.closest(params.wrapper).remove()
   }
 }

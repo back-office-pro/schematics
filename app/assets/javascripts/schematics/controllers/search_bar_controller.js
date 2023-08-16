@@ -92,9 +92,9 @@ export default class extends ApplicationController {
     return this.inputTarget.value.length >= this.inputTarget.getAttribute('minlength')
   }
 
-  async search (event) {
+  async search ({ key }) {
     if (this.isValid()) {
-      if (event.key === 'Enter') {
+      if (key === 'Enter') {
         this.hideHistory()
         this.hideResults()
       } else {
