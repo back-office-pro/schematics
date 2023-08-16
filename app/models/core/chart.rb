@@ -19,6 +19,8 @@ class Chart < Schematics::ApplicationRecord
     .transform_values { _1.next * 3 }
     .fetch(size)
 
+  def max_col_size = [12, col_size * 2].min
+
   def filename
     to_s.parameterize
   end

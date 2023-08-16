@@ -7,6 +7,7 @@ RSpec.describe Chart do
 
   its(:border_width) { is_expected.to eq(1) }
   its(:col_size) { is_expected.to eq(3) }
+  its(:max_col_size) { is_expected.to eq(6) }
   its(:filename) { is_expected.to eq('count-of-users-by-identifier') }
   its(:icon) { is_expected.to eq(:chart_line) }
   its(:model_class) { is_expected.to eq(User) }

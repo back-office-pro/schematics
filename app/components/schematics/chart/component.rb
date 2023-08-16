@@ -12,6 +12,7 @@ module Schematics
                :xtitle,
                :ytitle,
                :col_size,
+               :max_col_size,
                :filename,
                :border_width,
                to: :@chart
@@ -25,7 +26,7 @@ module Schematics
 
       def col_classes = [
         "col-xl-#{col_size}",
-        "col-md-#{[12, col_size * 2].min}"
+        "col-md-#{max_col_size}"
       ]
 
       def render?
