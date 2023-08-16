@@ -11,7 +11,7 @@ module Schematics
                :type,
                :xtitle,
                :ytitle,
-               :css_id,
+               :col_size,
                :filename,
                :border_width,
                to: :@chart
@@ -20,6 +20,13 @@ module Schematics
         super
         @chart = chart
       end
+
+      def id = "chart-#{@chart.id}"
+
+      def col_classes = [
+        "col-xl-#{col_size}",
+        "col-md-#{[12, col_size * 2].min}"
+      ]
 
       def render?
         can?(:show, @chart)

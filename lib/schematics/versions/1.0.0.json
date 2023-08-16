@@ -591,6 +591,21 @@
         }
       },
       {
+        "id": "151115fc-1fd4-4f21-86aa-b3c5b5e372ca",
+        "name": "size",
+        "type": "enum",
+        "options": {
+          "required": true,
+          "default": "medium",
+          "values": [
+            "small",
+            "medium",
+            "large",
+            "extra_large"
+          ]
+        }
+      },
+      {
         "id": "f7a2050f-e4c0-4a02-a8fa-d55f3a2b7667",
         "name": "aggregate",
         "type": "enum",

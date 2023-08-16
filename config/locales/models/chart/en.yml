@@ -10,6 +10,7 @@ en:
           one: Role
           other: Roles
           zero: No role
+        size: Size
         x_field: X field
         y_field: Y field
     enums:
@@ -28,6 +29,11 @@ en:
           line: Line chart
           pie: Pie chart
           scatter: Scatter chart
+        size:
+          extra_large: Extra large
+          large: Large
+          medium: Medium
+          small: Small
     models:
       chart:
         gender: male

@@ -13,7 +13,11 @@ class Chart < Schematics::ApplicationRecord
     (%w[line area].include?(kind) && 1) || 0
   end
 
-  def css_id = "chart-#{id}"
+  def col_size = self
+    .class
+    .sizes
+    .transform_values { _1.next * 3 }
+    .fetch(size)
 
   def filename
     to_s.parameterize

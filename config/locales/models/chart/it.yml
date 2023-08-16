@@ -10,6 +10,7 @@ it:
           one: Ruolo
           other: Ruoli
           zero: Nessun ruolo
+        size: Dimensione
         x_field: Attributo sulle ascisse
         y_field: Attributo di ordinata
     enums:
@@ -28,6 +29,11 @@ it:
           line: Grafico a linee
           pie: Grafico a torta
           scatter: Grafico a dispersione
+        size:
+          extra_large: Molto grande
+          large: Grande
+          medium: Medio
+          small: Piccolo
     models:
       chart:
         gender: male

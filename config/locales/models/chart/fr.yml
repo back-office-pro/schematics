@@ -10,6 +10,7 @@ fr:
           one: Rôle
           other: Rôles
           zero: Aucun rôle
+        size: Taille
         x_field: Attribut en abscisse
         y_field: Attribut en ordonnée
     enums:
@@ -28,6 +29,11 @@ fr:
           line: Courbes
           pie: Diagramme circulaire
           scatter: Nuage de points
+        size:
+          extra_large: Très grand
+          large: Grand
+          medium: Moyen
+          small: Petit
     models:
       chart:
         gender: male

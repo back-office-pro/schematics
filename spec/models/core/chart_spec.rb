@@ -6,7 +6,7 @@ RSpec.describe Chart do
   include Schematics::Specs::Model
 
   its(:border_width) { is_expected.to eq(1) }
-  its(:css_id) { is_expected.to start_with('chart-') }
+  its(:col_size) { is_expected.to eq(3) }
   its(:filename) { is_expected.to eq('count-of-users-by-identifier') }
   its(:icon) { is_expected.to eq(:chart_line) }
   its(:model_class) { is_expected.to eq(User) }
