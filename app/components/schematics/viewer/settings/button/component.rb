@@ -20,9 +20,12 @@ module Schematics
           }[@viewer]
 
           def data = {
+            controller: 'tooltip',
             action: 'click->viewer-settings#switchLayout:prevent',
             'viewer-settings-viewer-param': @viewer,
-            'viewer-settings-preference-param': "viewer_#{@entity.id}"
+            'viewer-settings-preference-param': "viewer_#{@entity.id}",
+            'bs-toggle': 'tooltip',
+            'bs-title': t(".#{@viewer}")
           }
         end
       end
