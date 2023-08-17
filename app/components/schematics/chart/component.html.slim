@@ -5,7 +5,7 @@
     .card-body.p-3
       = public_send type,
                     chart_path(@chart, format: :json),
-                    id:,
+                    id: css_id,
                     xtitle:,
                     ytitle:,
                     suffix:,

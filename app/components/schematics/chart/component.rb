@@ -22,7 +22,7 @@ module Schematics
         @chart = chart
       end
 
-      def id = "chart-#{@chart.id}"
+      def css_id = "chart-#{id}"
 
       def col_classes = [
         "col-xl-#{col_size}",
