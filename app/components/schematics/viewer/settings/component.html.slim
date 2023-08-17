@@ -1,8 +1,10 @@
 .btn-group.position-static data-controller='viewer-settings'
-  .dropdown.position-static
+  .dropdown.position-static data-bs-toggle='dropdown'
     button#settings-dropdown.btn.btn-sm.bg-body-tertiary.dropdown-toggle {
       aria-expanded='false'
-      data-bs-toggle='dropdown'
+      data-controller='tooltip'
+      data-bs-toggle='tooltip'
+      data-bs-title=title
       type='button'
     }
       = fa_icon :ellipsis_vertical
@@ -11,7 +13,7 @@
       data-action='click->viewer-settings#keepOpened:stop'
     }
       h5.dropdown-header.bg-body-tertiary.fw-bold
-        = t('.title')
+        = title
       - if can?(:restore, model_class)
         .dropdown-item
           = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)

@@ -8,6 +8,8 @@ module Schematics
         delegate :viewer, to: :helpers, private: true
         option :entity
 
+        def title = t('.title')
+
         def viewers = entity
           .viewers
           .excluding(viewer)
