@@ -1,7 +1,10 @@
 = link_to url, class: 'text-decoration-none' do
   - if object
-    = image_tag favicon
-    span.ms-1.align-middle = title
-    .text-body-secondary = description
+    .row.g-2.align-items-center
+      .col-auto.text-center
+        = image_tag favicon, class: 'favicon'
+      .col
+        = title
+        .text-body-secondary = description
   - else
     = url
