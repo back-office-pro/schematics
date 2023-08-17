@@ -1,67 +1,73 @@
-button.btn.btn-sm.btn-primary.me-1.dropdown-toggle aria-expanded='false' data-bs-toggle='dropdown'
-  = fa_icon :plus
-.dropdown-menu.dropdown-menu-end.shadow-sm.animate__animated.animate__zoomIn.p-0 {
-    aria-labelledby='entity-dropdown'
+span data-bs-toggle='dropdown'
+  button.btn.btn-sm.btn-primary.me-1.dropdown-toggle {
+    aria-expanded='false'
+    data-controller='tooltip'
+    data-bs-toggle='tooltip'
+    data-bs-title=title
   }
-  h5.dropdown-header.bg-body-tertiary.fw-bold
-    = title
-  .pre-scrollable.overflow-scroll
-    - [most_used_collection, advanced_collection].each do |collection|
-      - collection.each do |constant|
-        .dropdown-item {
-          data-action='click->nested-form#add:prevent'
-          data-nested-form-template-id-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}"
-          data-nested-form-target-id-param="fields-#{index}"
-          data-nested-form-index-param=index
-          role='button'
-        }
-          = fa_icon constant.new(entity:).icon, class: 'fa-fw me-2'
-          = t('.add_attribute', type: constant.model_name.human.downcase)
+    = fa_icon :plus
+  .dropdown-menu.dropdown-menu-end.shadow-sm.animate__animated.animate__zoomIn.p-0 {
+      aria-labelledby='entity-dropdown'
+    }
+    h5.dropdown-header.bg-body-tertiary.fw-bold
+      = title
+    .pre-scrollable.overflow-scroll
+      - [most_used_collection, advanced_collection].each do |collection|
+        - collection.each do |constant|
+          .dropdown-item {
+            data-action='click->nested-form#add:prevent'
+            data-nested-form-template-id-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}"
+            data-nested-form-target-id-param="fields-#{index}"
+            data-nested-form-index-param=index
+            role='button'
+          }
+            = fa_icon constant.new(entity:).icon, class: 'fa-fw me-2'
+            = t('.add_attribute', type: constant.model_name.human.downcase)
+        .dropdown-divider
+      .dropdown-item {
+        data-action='click->nested-form#add:prevent'
+        data-nested-form-template-id-param='schema-editor-virtual'
+        data-nested-form-target-id-param="fields-#{index}"
+        data-nested-form-index-param=index
+        role='button'
+      }
+        = fa_icon :plus, class: 'fa-fw me-2'
+        = t('.add_virtual')
       .dropdown-divider
-    .dropdown-item {
-      data-action='click->nested-form#add:prevent'
-      data-nested-form-template-id-param='schema-editor-virtual'
-      data-nested-form-target-id-param="fields-#{index}"
-      data-nested-form-index-param=index
-      role='button'
-    }
-      = fa_icon :plus, class: 'fa-fw me-2'
-      = t('.add_virtual')
-    .dropdown-divider
-    .dropdown-item {
-      data-action='click->nested-form#add:prevent'
-      data-nested-form-template-id-param='schema-editor-trigger'
-      data-nested-form-target-id-param="fields-#{index}"
-      data-nested-form-index-param=index
-      role='button'
-    }
-      = fa_icon :atom, class: 'fa-fw me-2'
-      = t('.add_trigger')
-    .dropdown-divider
-    .dropdown-item {
-      data-action='click->nested-form#add:prevent'
-      data-nested-form-template-id-param='schema-editor-attribute-belongs-to'
-      data-nested-form-target-id-param="fields-#{index}"
-      data-nested-form-index-param=index
-      role='button'
-    }
-      = fa_icon :link, class: 'fa-fw me-2'
-      = t('.add_belongs_to')
-    .dropdown-item {
-      data-action='click->nested-form#add:prevent'
-      data-nested-form-template-id-param='schema-editor-habtm-association'
-      data-nested-form-target-id-param="fields-#{index}"
-      data-nested-form-index-param=index
-      role='button'
-    }
-      = fa_icon :link, class: 'fa-fw me-2'
-      = t('.add_habtm_association')
-    .dropdown-item {
-      data-action='click->nested-form#add:prevent'
-      data-nested-form-template-id-param='schema-editor-attribute-references'
-      data-nested-form-target-id-param="fields-#{index}"
-      data-nested-form-index-param=index
-      role='button'
-    }
-      = fa_icon :users, class: 'fa-fw me-2'
-      = t('.add_references')
+      .dropdown-item {
+        data-action='click->nested-form#add:prevent'
+        data-nested-form-template-id-param='schema-editor-trigger'
+        data-nested-form-target-id-param="fields-#{index}"
+        data-nested-form-index-param=index
+        role='button'
+      }
+        = fa_icon :atom, class: 'fa-fw me-2'
+        = t('.add_trigger')
+      .dropdown-divider
+      .dropdown-item {
+        data-action='click->nested-form#add:prevent'
+        data-nested-form-template-id-param='schema-editor-attribute-belongs-to'
+        data-nested-form-target-id-param="fields-#{index}"
+        data-nested-form-index-param=index
+        role='button'
+      }
+        = fa_icon :link, class: 'fa-fw me-2'
+        = t('.add_belongs_to')
+      .dropdown-item {
+        data-action='click->nested-form#add:prevent'
+        data-nested-form-template-id-param='schema-editor-habtm-association'
+        data-nested-form-target-id-param="fields-#{index}"
+        data-nested-form-index-param=index
+        role='button'
+      }
+        = fa_icon :link, class: 'fa-fw me-2'
+        = t('.add_habtm_association')
+      .dropdown-item {
+        data-action='click->nested-form#add:prevent'
+        data-nested-form-template-id-param='schema-editor-attribute-references'
+        data-nested-form-target-id-param="fields-#{index}"
+        data-nested-form-index-param=index
+        role='button'
+      }
+        = fa_icon :users, class: 'fa-fw me-2'
+        = t('.add_references')
