@@ -5,7 +5,12 @@ module Schematics
     module Settings
       class Component < ApplicationComponent
         delegate :listable_elements, :table_name, :model_class, to: :entity
+        delegate :viewer, to: :helpers, private: true
         option :entity
+
+        def viewers = entity
+          .viewers
+          .excluding(viewer)
       end
     end
   end
