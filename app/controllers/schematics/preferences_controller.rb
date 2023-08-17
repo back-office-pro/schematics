@@ -29,6 +29,7 @@ module Schematics
 
     memoize def permitted_preference_params = timeline_preferences
       .concat(viewer_preferences)
+      .concat(viewer_col_preferences)
       .concat(dashboard_preferences)
 
     def preference_params = params
@@ -47,6 +48,11 @@ module Schematics
       end
 
     def viewer_preferences = ::Tenant
+      .schema
+      .entities
+      .map { "viewer_#{_1.id}" }
+
+    def viewer_col_preferences = ::Tenant
       .schema
       .entities
       .flat_map(&:listable_elements)

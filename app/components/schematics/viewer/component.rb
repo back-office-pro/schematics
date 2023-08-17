@@ -8,8 +8,8 @@ module Schematics
       option :resources
 
       class << self
-        def build(resources:)
-          case resources.klass.entity.viewer
+        def build(resources:, viewer:)
+          case viewer
           when :table
             Table::Component.new(resources:)
           when :grid
