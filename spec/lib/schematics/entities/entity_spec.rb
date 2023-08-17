@@ -34,7 +34,7 @@ describe Schematics::Entities::Entity do
   its(:multisearch_query) { is_expected.to eq(:rich_text_content_body_i_cont) }
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
-  its(:viewer) { is_expected.to eq(:table) }
+  its(:viewers) { is_expected.to eq([:table]) }
   its(:joins) { is_expected.to be_empty }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength

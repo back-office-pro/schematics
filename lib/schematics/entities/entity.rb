@@ -166,12 +166,11 @@ module Schematics
         options.icon&.to_sym || :square_caret_right
       end
 
-      def viewer
-        return :calendar if start_date_attribute_name && end_date_attribute_name
-        return :grid if attachment_attributes.any?(&:image?)
-
-        :table
-      end
+      def viewers = {
+        calendar: start_date_attribute_name && end_date_attribute_name,
+        grid: attachment_attributes.any?(&:image?),
+        table: true
+      }.compact_blank.keys
 
       def can?(action)
         actions.include?(action.to_sym)
