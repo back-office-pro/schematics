@@ -6,13 +6,13 @@ module Schematics
       class Component < ApplicationComponent
         delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
-        delegate :viewer, to: :entity, private: true
+        delegate :viewers, to: :entity, private: true
         option :resource
 
         def css_classes = %w[btn btn-sm btn-icon-split ms-1]
 
         def render?
-          viewer != :calendar
+          viewers.exclude?(:calendar)
         end
       end
     end
