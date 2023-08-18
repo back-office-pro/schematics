@@ -6,7 +6,10 @@ module Schematics
       class Component < Grid::Component
         def elements = super.grep_v(Attributes::Address)
 
-        def address = resource.public_send(entity.address_attributes.first.name)
+        def attribute = entity
+          .address_attributes
+          .first
+          .name
       end
     end
   end
