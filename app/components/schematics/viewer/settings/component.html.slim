@@ -1,10 +1,10 @@
 .btn-group.position-static data-controller='viewer-settings'
   .dropdown.position-static data-controller='tooltip' data-bs-toggle='tooltip' data-bs-title=title
-    button#settings-dropdown.btn.btn-sm.bg-body-tertiary.dropdown-toggle {
+    a#settings-dropdown.btn.btn-sm.bg-body-tertiary.dropdown-toggle {
       data-bs-toggle='dropdown'
       data-bs-auto-close='outside'
       aria-expanded='false'
-      type='button'
+      role='button'
     }
       = fa_icon :ellipsis_vertical
     .dropdown-menu.shadow-sm.dropdown-menu-start.animate__animated.animate__zoomIn.p-0 {
