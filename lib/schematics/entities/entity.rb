@@ -169,6 +169,7 @@ module Schematics
       def viewers = {
         calendar: start_date_attribute_name && end_date_attribute_name,
         grid: attachment_attributes.any?(&:image?),
+        map: address_attributes.any?,
         table: true
       }.compact_blank.keys
 
