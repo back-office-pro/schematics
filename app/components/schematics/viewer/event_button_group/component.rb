@@ -20,6 +20,10 @@ module Schematics
           )
         end
 
+        def icon_class
+          'fa-fw' if compact?
+        end
+
         def data
           return { turbo_method: :patch, turbo_frame: '_top' } unless compact?
 
