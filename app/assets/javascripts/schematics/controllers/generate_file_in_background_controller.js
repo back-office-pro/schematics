@@ -19,7 +19,7 @@ export default class extends ApplicationController {
   run ({ params: { allPages } }) {
     let timer = 1
     const loadingText = this.loadingTarget.textContent
-    this.buttonTarget.disabled = true
+    this.buttonTarget.classList.add('disabled')
     this.fetchAPI(this.url(allPages))
     setInterval(() => { this.loadingTarget.textContent = `${loadingText} (${timer++})` }, 1000)
   }

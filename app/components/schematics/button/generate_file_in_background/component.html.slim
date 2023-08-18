@@ -4,11 +4,12 @@
       data-generate-file-in-background-extension-value=extension
       data-generate-file-in-background-url-value=url
   }
-    button#generate-file-in-background-button.btn.btn-sm.btn-icon-split {
+    a#generate-file-in-background-button.btn.btn-sm.btn-icon-split {
       data-generate-file-in-background-target='button'
       data-action=action
       data-bs-toggle=toggle
       aria-expanded='false'
+      role='button'
     }
       span.icon = fa_icon(icon)
       span.icon.d-none = fa_icon :spinner, animation: 'spin'
