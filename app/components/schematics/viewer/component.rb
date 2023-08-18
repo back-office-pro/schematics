@@ -9,14 +9,7 @@ module Schematics
 
       class << self
         def build(resources:, viewer:)
-          case viewer
-          when :table
-            Table::Component.new(resources:)
-          when :grid
-            Grid::Component.new(resources:)
-          when :calendar
-            Calendar::Component.new(resources:)
-          end
+          Viewer.const_get(viewer.to_s.camelize)::Component.new(resources:)
         end
       end
 
