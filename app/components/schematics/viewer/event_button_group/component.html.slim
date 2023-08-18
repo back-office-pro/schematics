@@ -3,5 +3,5 @@
             title: (event.human if compact?),
             data:,
             class: css_classes_for(event) do
-              span.icon = fa_icon event.icon
+              span.icon = fa_icon event.icon, class: ('fa-fw' if compact?)
               span.text.d-none.d-lg-inline = event.human unless compact?
