@@ -1,10 +1,6 @@
 = link_to url, class: 'text-decoration-none' do
   - if object
-    .row.g-2.align-items-center
-      .col-auto.text-center
-        = image_tag favicon, class: 'favicon'
-      .col
-        = title
-        .text-body-secondary = description
+    = image_tag favicon, class: 'float-start me-2 progress'
+    = title
   - else
     = url

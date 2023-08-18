@@ -3,7 +3,7 @@
 module Schematics
   module LinkPreview
     class Component < ApplicationComponent
-      delegate :title, :favicon, :description, to: :object, allow_nil: true
+      delegate :title, :favicon, to: :object, allow_nil: true
       option :url
 
       memoize def object
