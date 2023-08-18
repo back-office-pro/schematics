@@ -7,6 +7,10 @@ module Schematics
         def tbody_css_classes
           params[:page].presence && super
         end
+
+        def groups = resources
+          .to_a
+          .in_groups_of(3, false)
       end
     end
   end

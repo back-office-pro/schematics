@@ -25,6 +25,10 @@ module Schematics
       def model_class = resources.klass
 
       def tbody_css_classes = %w[animate__animated animate__slideInRight]
+
+      def elements = entity
+        .listable_elements
+        .stable_sort_by(&:weight)
     end
   end
 end
