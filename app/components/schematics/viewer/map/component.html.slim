@@ -1,0 +1,33 @@
+.table-responsive data-controller='comparison' data-comparison-model-value=model_class
+  table.table.table-borderless.mb-0
+    = render Schematics::Filter::Component.new(model_class:)
+    tbody class=tbody_css_classes
+      tr
+      - if resources.empty?
+        td.pt-4 colspan='100%'
+          = render Schematics::EmptyResource::Component.new
+      - else
+          td.p-0 colspan='100%'
+            - groups.each do |group|
+              .row.g-0
+                - group.each do |resource|
+                  .col-xl-4
+                    .card
+                      .card-body.p-0
+                        table.table.mb-0.table-striped.table-borderless
+                          thead
+                            tr
+                              td colspan='2'
+                                = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
+                                = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
+                                = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: 'text-center') do |c|
+                                  - c.with_body do
+                                    = render Schematics::GoogleMap::Component.new(address:)
+                            tbody
+                              - elements.each do |field|
+                                tr.animate__slideInRight class=col_preference_class(field)
+                                  th.text-nowrap
+                                    = fa_icon field.icon, class: 'fa-fw me-2 text-body-secondary'
+                                    = model_class.human_attribute_name(field.name)
+                                  td.text-truncate
+                                    = render Schematics::Resource::Component.new(resource:, field:)
