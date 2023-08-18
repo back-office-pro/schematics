@@ -91,7 +91,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paranoia', '~> 2.6.2'
   spec.add_dependency 'pg', '~> 1.5.3'
   spec.add_dependency 'phonelib', '~> 0.8.2'
-  spec.add_dependency 'puma', '~> 6.3.0'
+  spec.add_dependency 'puma', '~> 6.3.1'
   spec.add_dependency 'rack-attack', '~> 6.7.0'
   spec.add_dependency 'rack-cors', '~> 2.0.0'
   spec.add_dependency 'rack-mini-profiler', '~> 3.1.1'
