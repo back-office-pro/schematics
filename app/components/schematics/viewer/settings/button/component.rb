@@ -16,7 +16,8 @@ module Schematics
           def icon = {
             table: :table,
             grid: :grip_vertical,
-            calendar: :calendar_days
+            calendar: :calendar_days,
+            map: :map_location_dot
           }[@viewer]
 
           def data = {
