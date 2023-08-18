@@ -3,8 +3,6 @@ import ApplicationController from 'controllers/application_controller'
 /* global routes */
 
 export default class extends ApplicationController {
-  keepOpened () {}
-
   toggleColumn ({ target: { id, checked } }) {
     document.querySelectorAll(`.${id}`).forEach(element => {
       element.classList.add('animate__animated')
