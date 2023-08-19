@@ -18,7 +18,7 @@
                           thead
                             tr
                               td colspan='2'
-                                .d-inline-flex.position-absolute
+                                .d-inline-flex.position-absolute.z-1
                                   = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
                                   = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                                 = render Schematics::Viewer::Grid::Carousel::Component.new(resource:)
