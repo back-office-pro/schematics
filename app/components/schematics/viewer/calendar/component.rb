@@ -10,7 +10,7 @@ module Schematics
                  private: true
 
         def alert_css_classes_for(resource, date)
-          %w[alert alert-secondary calendar lh-lg text-truncate mb-1 p-2]
+          %w[alert alert-secondary calendar text-truncate mb-1 p-2 rounded-0]
             .concat alert_border_css_classes_for(resource, date)
         end
 
