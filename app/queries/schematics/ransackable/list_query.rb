@@ -15,7 +15,6 @@ module Schematics
           .result
           .left_joins(entity.joins)
           .accessible_by(ability)
-          .load_async
       end
     end
   end
