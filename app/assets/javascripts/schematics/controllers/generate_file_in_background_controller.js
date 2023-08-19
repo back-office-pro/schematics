@@ -1,5 +1,6 @@
 import ApplicationController from 'controllers/application_controller'
 import { saveAs } from 'file-saver'
+import { Dropdown } from 'bootstrap'
 
 export default class extends ApplicationController {
   static get targets () {
@@ -19,6 +20,7 @@ export default class extends ApplicationController {
   run ({ params: { allPages } }) {
     let timer = 1
     const loadingText = this.loadingTarget.textContent
+    Dropdown.getInstance(this.buttonTarget)?.hide()
     this.buttonTarget.classList.add('disabled')
     this.fetchAPI(this.url(allPages))
     setInterval(() => { this.loadingTarget.textContent = `${loadingText} (${timer++})` }, 1000)
