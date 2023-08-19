@@ -4,7 +4,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   visit ({ target, params: { href } }) {
-    if (!target.closest('a, .btn-group')) {
+    if (!target.closest('a, .btn-group, .form-check')) {
       Turbo.visit(href)
     }
   }
