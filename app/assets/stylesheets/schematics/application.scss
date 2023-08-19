@@ -71,6 +71,7 @@ body {
 
   .icon {
     background: rgba(0, 0 , 0, .15); // scss-lint:disable ColorVariable
+    border-radius: .25rem;
     display: inline-block;
     padding: .375rem .75rem;
   }
