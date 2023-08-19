@@ -19,6 +19,10 @@ module Schematics
           'ms-1': !compact?
         )
 
+        def icon_class
+          'fa-fw' if compact?
+        end
+
         def data
           return { turbo_frame: '_top' } unless compact?
 

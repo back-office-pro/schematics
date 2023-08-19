@@ -5,15 +5,11 @@ module Schematics
     class Component < ApplicationComponent
       option :address, reader: false
 
-      def render?
-        @address.present?
-      end
-
-      def url = "https://www.google.com/maps/embed/v1/place?q=#{address}&key=#{api_key}"
+      def url = "https://www.google.com/maps/embed/v1/place?q=#{address}&key=#{api_key}&zoom=6"
 
       private
 
-      def address = CGI.escape(@address)
+      def address = CGI.escape(@address || ' ')
 
       def api_key = Engine
         .credentials
