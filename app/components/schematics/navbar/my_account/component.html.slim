@@ -1,5 +1,9 @@
 li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start
-  a#account-dropdown.nav-link.dropdown-toggle aria-expanded='false' data-bs-toggle='dropdown' href='#' role='button'
+  a#account-dropdown.nav-link.dropdown-toggle {
+    aria-expanded='false'
+    data-bs-toggle='dropdown'
+    role='button'
+  }
     .row.g-2.align-items-center
       .col-auto.d-none.d-lg-inline.text-end
         .text-primary = current_user
