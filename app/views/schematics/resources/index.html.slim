@@ -4,7 +4,8 @@
             class: 'animate__animated animate__zoomIn' do
   = submit_tag nil, name: nil, class: 'd-none'
   = turbo_frame_tag 'viewer', data: { turbo_action: 'advance' } do
-    = hidden_field_tag :sort, params[:sort]
+    - %i[sort items month_page].each do |query|
+      = hidden_field_tag query, params[query]
     .card.shadow-sm.w-100
       .card-header.px-2.py-1
         .row.align-items-center
