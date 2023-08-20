@@ -1,11 +1,11 @@
 name: Shared
 on: [workflow_call]
+env:
+  BUNDLE_GITHUB__COM: x-access-token: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 # TODO: add to secrets
 jobs:
   rspec:
     name: RSpec
     runs-on: ubuntu-latest
-    env:
-      BUNDLE_GITHUB__COM: x-access-token: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 # TODO: add to secrets
     services:
       postgres:
         image: postgres:latest
@@ -22,13 +22,11 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v3
+      - run: rm Gemfile.lock
       - uses: ruby/setup-ruby@v1
         with:
+          bundler-cache: true
           ruby-version: 3.2.1
-      - name: Bundle install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
       - name: Install postgres and dependencies
         run: |
           sudo apt-get update
@@ -58,10 +56,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: artplan1/brakeman-action@v1.2.1
+      - run: rm Gemfile.lock
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.1
+      - name: Run brakeman
+        run: bundle exec brakeman --no-pager --no-exit-on-error
   bundler_audit:
     name: Bundler audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: andrewmcodes/bundler-audit-action@main
+      - run: rm Gemfile.lock
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.1
+      - name: Run bundler-audit
+        run: bundle exec bundle-audit

@@ -17,8 +17,6 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
-  spec.add_development_dependency 'brakeman', '~> 5.4.1'
-  spec.add_development_dependency 'bundler-audit', '~> 0.9.1'
   spec.add_development_dependency 'debug', '~> 1.8.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
   spec.add_development_dependency 'isolator', '~> 0.10.0'
@@ -46,7 +44,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bootsnap', '~> 1.16.0'
   spec.add_dependency 'bootstrap-email', '~> 1.4.0'
   spec.add_dependency 'bootstrap_form', '~> 5.2.3'
+  spec.add_dependency 'brakeman', '~> 5.4.1'
   spec.add_dependency 'browser', '~> 5.3.1'
+  spec.add_dependency 'bundler-audit', '~> 0.9.1'
   spec.add_dependency 'cancancan', '~> 3.5.0'
   spec.add_dependency 'capistrano', '~> 3.17.3'
   spec.add_dependency 'capistrano3-puma', '~> 6.0.0.beta.1'
