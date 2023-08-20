@@ -7,6 +7,7 @@ module Schematics
     include Calendarable
     include Documentable
     include Versionable
+    include Viewable
     include Lockable
     include Redirectable
 
@@ -30,7 +31,7 @@ module Schematics
     delegate :model_class, to: :class
     delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
 
-    helper_method :model_class, :viewer
+    helper_method :model_class
 
     class << self
       def model_class = controller_path
@@ -166,11 +167,6 @@ module Schematics
         active: viewer == :calendar
       )
     end
-
-    def viewer = current_user
-      .preferences
-      .fetch("viewer_#{entity.id}", entity.viewers.first)
-      .to_sym
 
     def flash_interpolation_options = { human_name:, gender: }
   end

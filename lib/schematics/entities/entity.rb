@@ -166,13 +166,6 @@ module Schematics
         options.icon&.to_sym || :square_caret_right
       end
 
-      def viewers = {
-        calendar: start_date_attribute_name && end_date_attribute_name,
-        grid: attachment_attributes.any?(&:image?),
-        map: address_attributes.any?,
-        table: true
-      }.compact_blank.keys
-
       def can?(action)
         actions.include?(action.to_sym)
       end

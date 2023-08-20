@@ -16,4 +16,4 @@
         .dropdown-item
           = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
       = render Schematics::Viewer::Settings::Toggle::Component.with_collection(listable_elements.stable_sort_by(&:weight))
-  = render Schematics::Viewer::Settings::Button::Component.with_collection(viewers, entity:)
+  = render Schematics::Viewer::Settings::Button::Component.with_collection(other_viewers, entity:)
