@@ -23,7 +23,7 @@
                                   = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
                                 = render Schematics::Viewer::ResourceLink::Component.new(resource:, css_classes: 'text-center') do |c|
                                   - c.with_body do
-                                    = render Schematics::GoogleMap::Component.new(address: resource.public_send(attribute))
+                                    = render Schematics::GoogleMap::Component.new(address: resource.public_send(attribute.name))
                             tbody
                               - elements.each do |field|
                                 tr.animate__slideInRight class=col_preference_class(field)
