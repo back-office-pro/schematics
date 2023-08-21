@@ -3,6 +3,5 @@
 module Schematics
   class ApplicationMailer < ::ApplicationMailer
     layout 'schematics/mailer'
-    helper ApplicationHelper
   end
 end
