@@ -207,8 +207,9 @@ module Schematics
         .concat('_i_cont')
         .to_sym
 
-      def model_elements = [self, descriptor, search_data]
-        .concat(triggers, elements, validators, search_aliases)
+      def model_elements = elements
+        .concat(triggers, validators, search_aliases)
+        .push(self, descriptor, search_data)
 
       def start_date_attribute_name = date_attributes
         .find(&:start_date?)
