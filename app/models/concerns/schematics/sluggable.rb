@@ -6,7 +6,10 @@ module Schematics
 
     included do
       extend Mobility
-      translates :slug, type: :string
+      translates :slug,
+                 type: :string,
+                 column_fallback: false,
+                 fallbacks: false
 
       extend FriendlyId
       friendly_id entity.descriptor.name.to_sym
