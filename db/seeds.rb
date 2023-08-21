@@ -14,7 +14,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     permissions: Permission.features
   )
   Configuration.instance.update!(
-    available_locales: I18n.available_locales.map(&:to_s),
+    available_locales: [Licence.default_locale],
     locale: Licence.default_locale
   )
   Documentation.create!
