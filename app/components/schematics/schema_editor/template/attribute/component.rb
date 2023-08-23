@@ -6,7 +6,6 @@ module Schematics
       module Attribute
         class Component < Template::Component
           with_collection_parameter :constant
-          attr_reader :form
 
           def initialize(form:, constant:)
             super
