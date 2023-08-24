@@ -51,7 +51,7 @@ module Schematics
 
       def scope_to_str(name, preload)
         <<~RUBY
-          scope :with_#{name}, -> { preload(#{preload}) }
+          scope :with_#{name}, -> { includes(#{preload}) }
         RUBY
       end
 

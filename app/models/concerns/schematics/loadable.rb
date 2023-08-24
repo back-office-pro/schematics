@@ -49,7 +49,7 @@ module Schematics
         end
       end
 
-      def preload_all = preload(entity.includes)
+      def preload_all = includes(entity.includes)
 
       def reload_definitions!
         return false unless model_filepath
@@ -91,7 +91,7 @@ module Schematics
         .entity
         .association_elements
         .then_tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
-        .map { public_send(_1.name).preload(_1.includes).with_string_translations }
+        .map { public_send(_1.name).includes(_1.includes).with_string_translations }
         .map { _1.accessible_by(current_ability).order(created_at: :desc) }
         .map { _1.limit(ASSOCIATIONS_LIMIT) }
         .compact_blank

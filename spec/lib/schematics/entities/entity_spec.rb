@@ -68,7 +68,7 @@ describe Schematics::Entities::Entity do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      scope :with_record, -> { preload([{:record=>:string_translations}]) }
+      scope :with_record, -> { includes([{:record=>:string_translations}]) }
     RUBY
   end
 
