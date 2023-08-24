@@ -5,6 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       delegate :rich_text_area_tag, to: :helpers
       delegate :persisted?, to: :resource, private: true
+      delegate :nested_associations, to: 'resource.class.entity'
 
       option :resource
       option :url, optional: true
@@ -21,7 +22,7 @@ module Schematics
         .headers['Turbo-Frame']
         .present?
 
-      def data = { 'auto-save-target': 'form' }
+      def data = { controller: 'nested-form', 'auto-save-target': 'form' }
 
       def layout
         return :inline if turbo?
