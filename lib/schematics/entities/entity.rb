@@ -134,12 +134,10 @@ module Schematics
       def permitted_params = fillable_elements
         .flat_map(&:permitted_params)
         .push(:lock_version)
-        .concat(nested_associations.map(&:nested_permitted_params))
 
       def permitted_json_params = fillable_elements
         .flat_map(&:permitted_json_params)
         .push(:lock_version)
-        .concat(nested_associations.map(&:nested_permitted_json_params))
 
       def events
         state_machine_attributes.flat_map(&:events)
@@ -234,7 +232,6 @@ module Schematics
       def model_elements = elements
         .concat(triggers, validators, search_aliases)
         .push(self, descriptor, search_data)
-        .concat(nested_associations.map(&:nested_to_str))
 
       def start_date_attribute_name = date_attributes
         .find(&:start_date?)
@@ -257,11 +254,6 @@ module Schematics
         name: 'created_at',
         options: { readonly: true }
       )
-
-      def nested_associations = has_many_associations
-        .map(&:belongs_to)
-        .grep_v(Attributes::References)
-        .reject(&:polymorphic?)
 
       protected
 
