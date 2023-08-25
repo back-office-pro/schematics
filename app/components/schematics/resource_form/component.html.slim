@@ -5,12 +5,5 @@
       = render Schematics::ResourceForm::Fields::Component.new(form:, field:)
       = render Schematics::Button::Confirm::Component.new(compact: true) if turbo?
       = render Schematics::Button::Cancel::Component.new(path: cancel_path, compact: true) if turbo?
-  - nested_associations.each do |attribute|
-    = render Schematics::ResourceForm::Button::Add::Component.new(attribute:)
-    = render Schematics::ResourceForm::Template::Component.new(form:, attribute:)
-    #nested-associations data-nested-form-target='targets'
-      = form.fields_for attribute.entity.name.pluralize do |fields|
-        - attribute.entity.fillable_elements.excluding(attribute).stable_sort_by(&:weight).each do |field|
-          = render Schematics::ResourceForm::Fields::Component.new(form: fields, field:)
   = render Schematics::Button::Confirm::Component.new
   = render Schematics::Button::Cancel::Component.new(path: cancel_path)
