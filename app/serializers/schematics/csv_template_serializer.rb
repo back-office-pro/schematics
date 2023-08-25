@@ -27,9 +27,9 @@ module Schematics
 
     protected
 
-    def elements
-      entity.fillable_elements
-    end
+    def elements = entity
+      .fillable_elements
+      .grep_v(Associations::HasMany)
 
     def generate(col_sep: ',')
       CSV.generate(headers: true, col_sep:) do |file|
