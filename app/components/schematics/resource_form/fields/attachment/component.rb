@@ -11,6 +11,10 @@ module Schematics
           alias accept extensions
 
           def help = render AttachmentValidators::Component.new(validators:)
+
+          def required
+            super unless value.attached?
+          end
         end
       end
     end
