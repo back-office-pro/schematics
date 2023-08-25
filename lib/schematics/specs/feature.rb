@@ -110,6 +110,8 @@ module Schematics
             select element.inverse_entity.model_class.first.to_s,
                    from: "#{input}[]",
                    match: :first
+          when Associations::HasMany
+            # do nothing
           when Attributes::Boolean
             check(input)
           when Attributes::Attachments
