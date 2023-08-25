@@ -4,7 +4,7 @@ module Schematics
   module ResourceForm
     module Fields
       module Phone
-        class Component < Fields::Component
+        class Component < String::Component
         end
       end
     end
