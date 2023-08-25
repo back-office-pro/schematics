@@ -30,6 +30,7 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_valid }
+  it { is_expected.to be_nested }
 
   its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }
