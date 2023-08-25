@@ -1,6 +1,6 @@
-template id="nested-association-#{field.id}" data-nested-form-target='templates'
-  div class="nested-association-#{field.id}"
-    = form.fields_for field.entity.name.pluralize, model_class.new, child_index: 'NEW_RECORD' do |fields|
-      - elements.each do |element|
-        = render Schematics::ResourceForm::Fields::Component.new(form: fields, field: element)
+template id=id data-nested-form-target='templates'
+  div class=id
+    = form.fields_for name, model_class.new, child_index: 'NEW_RECORD' do |form|
+      - elements.each do |field|
+        = render Schematics::ResourceForm::Fields::Component.new(form:, field:)
     = render Schematics::ResourceForm::Button::Remove::Component.new(field:)

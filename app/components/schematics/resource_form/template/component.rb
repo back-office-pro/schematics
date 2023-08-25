@@ -4,11 +4,13 @@ module Schematics
   module ResourceForm
     module Template
       class Component < ApplicationComponent
-        delegate :entity, :belongs_to, to: :field, private: true
+        delegate :entity, :belongs_to, :name, to: :field, private: true
         delegate :model_class, :fillable_elements, to: :entity, private: true
 
         option :form
         option :field
+
+        def id = "nested-association-#{name}"
 
         def elements = fillable_elements
           .grep_v(Associations::HasMany)

@@ -7,6 +7,8 @@ module Schematics
         class Component < ApplicationComponent
           option :field
 
+          def wrapper = ".nested-association-#{field.name}"
+
           def title = t('.title')
         end
       end
