@@ -5,8 +5,15 @@ module Schematics
     module Button
       module Add
         class Component < ApplicationComponent
-          delegate :human_name, :gender, to: 'attribute.entity.model_class'
-          option :attribute
+          delegate :entity, to: :field, private: true
+          delegate :model_class, to: :entity, private: true
+          delegate :human_name, :gender, to: :model_class
+
+          option :field
+
+          def render?
+            can?(:create, model_class)
+          end
         end
       end
     end

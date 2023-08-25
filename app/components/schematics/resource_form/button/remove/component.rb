@@ -5,7 +5,7 @@ module Schematics
     module Button
       module Remove
         class Component < ApplicationComponent
-          option :attribute
+          option :field
 
           def title = t('.title')
         end
