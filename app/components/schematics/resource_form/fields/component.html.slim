@@ -5,9 +5,9 @@
   - if field.nested?
     = render Schematics::ResourceForm::Button::Add::Component.new(field:)
     = render Schematics::ResourceForm::Template::Component.new(form:, field:)
-    #nested-associations data-nested-form-target='targets'
+    div id="nested-associations-#{field.name}" data-nested-form-target='targets'
       = form.fields_for field.entity.name.pluralize do |fields|
-        - field.entity.fillable_elements.grep_v(Associations::HasMany).excluding(field.belongs_to).stable_sort_by(&:weight).each do |field|
+        - field.entity.fillable_elements.grep_v(Schematics::Associations::HasMany).excluding(field.belongs_to).stable_sort_by(&:weight).each do |field|
           = render Schematics::ResourceForm::Fields::Component.new(form: fields, field:)
 - when Schematics::Attributes::BelongsTo
   = render Schematics::ResourceForm::Fields::BelongsTo::Component.new(form:, field:)

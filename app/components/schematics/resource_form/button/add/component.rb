@@ -11,7 +11,9 @@ module Schematics
 
           option :field
 
-          def id = "nested-association-#{name}"
+          def template_id = "nested-association-#{name}"
+
+          def target_id = "nested-associations-#{name}"
 
           def render?
             can?(:create, model_class)

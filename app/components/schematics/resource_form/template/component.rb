@@ -12,6 +12,8 @@ module Schematics
 
         def id = "nested-association-#{name}"
 
+        alias css_class id
+
         def elements = fillable_elements
           .grep_v(Associations::HasMany)
           .excluding(belongs_to)

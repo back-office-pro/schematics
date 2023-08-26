@@ -1,5 +1,5 @@
 template id=id data-nested-form-target='templates'
-  div class=id
+  div class=css_class
     = form.fields_for name, model_class.new, child_index: 'NEW_RECORD' do |form|
       - elements.each do |field|
         = render Schematics::ResourceForm::Fields::Component.new(form:, field:)

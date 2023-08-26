@@ -5,9 +5,10 @@ module Schematics
     module Button
       module Remove
         class Component < ApplicationComponent
+          delegate :name, to: :field, private: true
           option :field
 
-          def wrapper = ".nested-association-#{field.name}"
+          def wrapper = ".nested-association-#{name}"
 
           def title = t('.title')
         end
