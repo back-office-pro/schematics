@@ -26,6 +26,7 @@ describe Schematics::Associations::HasMany do
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }
@@ -35,6 +36,14 @@ describe Schematics::Associations::HasMany do
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:weight) { is_expected.to eq(3) }
   its('descriptor.name') { is_expected.to eq('type') }
+
+  its(:permitted_params) do
+    is_expected.to eq(entities_attributes: %i[type lock_version id _destroy])
+  end
+
+  its(:permitted_json_params) do
+    is_expected.to eq(entities_attributes: %i[type lock_version id _destroy])
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

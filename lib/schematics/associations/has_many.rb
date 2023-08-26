@@ -6,6 +6,7 @@ module Schematics
   module Associations
     class HasMany < Association
       include Behaviours::Fillable
+      delegate :nested?, to: :belongs_to
 
       def permitted_params
         return unless nested?
@@ -25,7 +26,7 @@ module Schematics
           attributes_param_key => entity
             .permitted_json_params
             .excluding(super)
-            .push(:id, :destroy)
+            .push(:id, :_destroy)
         }
       end
 
