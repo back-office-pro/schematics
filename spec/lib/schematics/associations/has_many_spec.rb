@@ -45,6 +45,7 @@ describe Schematics::Associations::HasMany do
               foreign_key: 'schema_id',
               inverse_of: :schema,
               dependent: :nullify
+      accepts_nested_attributes_for :entities
     RUBY
   end
 
@@ -66,6 +67,7 @@ describe Schematics::Associations::HasMany do
                 foreign_key: 'schema_id',
                 inverse_of: :schema,
                 dependent: :destroy
+        accepts_nested_attributes_for :entities
       RUBY
     end
   end

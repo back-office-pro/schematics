@@ -15,6 +15,7 @@ module Schematics
       delegate :hidden?, to: :options
       delegate :entity,
                :required?,
+               :nested?,
                :column_name,
                :association_type,
                :options,
