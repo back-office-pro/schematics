@@ -5,13 +5,13 @@ module Schematics
     module Fields
       module HasMany
         class Component < Fields::Component
-          delegate :belongs_to, :nested?, to: :field, private: true
+          delegate :belongs_to, :nested?, :entity, to: :field, private: true
+          delegate :model_class, :fillable_elements, to: :entity, private: true
+          delegate :human_name, to: :model_class
 
           def id = "nested-associations-#{name}"
 
-          def elements = field
-            .entity
-            .fillable_elements
+          def elements = fillable_elements
             .grep_v(Schematics::Associations::HasMany)
             .excluding(belongs_to)
             .stable_sort_by(&:weight)
