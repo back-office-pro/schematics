@@ -30,6 +30,8 @@ module Schematics
         }
       end
 
+      def default = [entity.default]
+
       def source = super.pluralize
 
       protected
