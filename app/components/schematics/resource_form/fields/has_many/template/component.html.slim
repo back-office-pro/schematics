@@ -3,4 +3,4 @@ template id=id data-nested-form-target='templates'
     = form.fields_for name, model_class.new, child_index: 'NEW_RECORD' do |form|
       - elements.each do |field|
         = render Schematics::ResourceForm::Fields::Component.new(form:, field:)
-    = render Schematics::ResourceForm::Button::Remove::Component.new(field:)
+    = render Schematics::ResourceForm::Fields::HasMany::Button::Remove::Component.new(field:)
