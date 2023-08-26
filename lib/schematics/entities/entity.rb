@@ -133,10 +133,12 @@ module Schematics
 
       def permitted_params = fillable_elements
         .flat_map(&:permitted_params)
+        .compact
         .push(:lock_version)
 
       def permitted_json_params = fillable_elements
         .flat_map(&:permitted_json_params)
+        .compact
         .push(:lock_version)
 
       def events

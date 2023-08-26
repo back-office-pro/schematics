@@ -10,13 +10,23 @@ module Schematics
       def permitted_params
         return unless nested?
 
-        { attributes_param_key => entity.permitted_params.push(:id, :_destroy) }
+        {
+          attributes_param_key => entity
+            .permitted_params
+            .excluding(super)
+            .push(:id, :_destroy)
+        }
       end
 
       def permitted_json_params
         return unless nested?
 
-        { attributes_param_key => entity.permitted_json_params.push(:id, :destroy) }
+        {
+          attributes_param_key => entity
+            .permitted_json_params
+            .excluding(super)
+            .push(:id, :destroy)
+        }
       end
 
       def source = super.pluralize
