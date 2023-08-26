@@ -18,7 +18,6 @@ module Schematics
             alias css_class id
 
             def elements = fillable_elements
-              .grep_v(Associations::HasMany)
               .excluding(belongs_to)
               .stable_sort_by(&:weight)
           end
