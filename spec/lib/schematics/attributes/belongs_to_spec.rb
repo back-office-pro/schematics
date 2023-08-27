@@ -17,13 +17,7 @@ describe Schematics::Attributes::BelongsTo do
     )
   end
   let(:name) { 'user' }
-  let(:options) do
-    {
-      inverse: {
-        type: 'has_many'
-      }
-    }
-  end
+  let(:options) { { inverse_association_type: 'has_many' } }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
@@ -42,6 +36,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
+  its(:inverse_association_type) { is_expected.to eq('has_many') }
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq(user: :string_translations) }
   its(:icon) { is_expected.to eq(:users) }
@@ -58,7 +53,8 @@ describe Schematics::Attributes::BelongsTo do
       Schematics::Options::Required,
       Schematics::Options::Hidden,
       Schematics::Options::Cached,
-      Schematics::Options::Inverse,
+      Schematics::Options::InverseAssociationName,
+      Schematics::Options::InverseAssociationType,
       Schematics::Options::Type,
       Schematics::Options::Polymorphic,
       Schematics::Options::Readonly
@@ -123,15 +119,10 @@ describe Schematics::Attributes::BelongsTo do
     end
   end
 
-  context 'when inverse association is has_one' do
-    let(:options) do
-      {
-        inverse: {
-          type: 'has_one'
-        }
-      }
-    end
+  context 'when inverse association type is has_one' do
+    let(:options) { { inverse_association_type: 'has_one' } }
 
+    its(:inverse_association_type) { is_expected.to eq('has_one') }
     its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
   end
 

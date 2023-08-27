@@ -19,9 +19,7 @@ describe Schematics::Commands::DestroyEntity do
         type: 'belongs_to',
         options: {
           type: 'user',
-          inverse: {
-            name: 'assemblies'
-          }
+          inverse_association_name: 'assemblies'
         }
       }
     ]
