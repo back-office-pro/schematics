@@ -12,7 +12,7 @@ module Schematics
 
         # rubocop:disable Naming/VariableNumber
         def collection = %i[
-          landspace
+          landscape
           square
           is_16_9
           is_4_3
