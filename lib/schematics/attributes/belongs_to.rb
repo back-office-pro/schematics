@@ -9,7 +9,7 @@ module Schematics
 
       def inverse_association_type
         return super if polymorphic?
-        return super if super == 'has_one'
+        return super if options.inverse_association_type == 'has_one'
 
         'nested_has_many'
       end

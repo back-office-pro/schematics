@@ -53,10 +53,6 @@ module Schematics
         options.inverse_association_type || 'has_many'
       end
 
-      def inverse_association_type
-        inverse[:type] || 'has_many'
-      end
-
       def preload
         return [] if association_type == entity.name # prevent self inclusion
 
