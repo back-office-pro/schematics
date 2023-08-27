@@ -31,6 +31,11 @@ fr:
         hidden: Caché
         icon: Icône
         inverse: Inverse
+        inverse_association_name: Nom d'association
+        inverse_association_type: Type d'association
+        inverse_association_types:
+          has_many: Un-à-plusieurs
+          has_one: Un-à-un
         length: Longueur
         less_than: Inférieur à
         less_than_or_equal_to: Inférieur ou égal à

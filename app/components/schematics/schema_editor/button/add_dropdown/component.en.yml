@@ -1,7 +1,7 @@
 ---
 en:
   add_attribute: Add a %{type} attribute
-  add_belongs_to: Add a one-to-many association
+  add_belongs_to: Add an association
   add_habtm_association: Add a many-to-many association
   add_references: Add a current user association
   add_trigger: Add a trigger

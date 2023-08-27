@@ -30,7 +30,11 @@ en:
         height: Height
         hidden: Hidden
         icon: Icon
-        inverse: Inverse
+        inverse_association_name: Association name
+        inverse_association_type: Association type
+        inverse_association_types:
+          has_many: One-to-many
+          has_one: One-to-one
         length: Length
         less_than: Less than
         less_than_or_equal_to: Less than or equal to
