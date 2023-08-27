@@ -7,6 +7,16 @@ describe Schematics::Options::AspectRatio do
 
   its(:name) { is_expected.to eq(:aspect_ratio) }
   its(:input_type) { is_expected.to eq(:select) }
-  its(:collection) { is_expected.to eq(%i[landscape square is_16_9 is_4_3]) } # rubocop:disable Naming/VariableNumber
   its(:controller) { is_expected.to eq('dropdown') }
+
+  its(:collection) do
+    is_expected.to eq(
+      [
+        %w[16/9 is_16_9],
+        %w[4/3 is_4_3],
+        %w[Landscape landscape],
+        %w[Square square]
+      ]
+    )
+  end
 end

@@ -10,14 +10,9 @@ module Schematics
 
         def controller = 'dropdown'
 
-        # rubocop:disable Naming/VariableNumber
-        def collection = %i[
-          landscape
-          square
-          is_16_9
-          is_4_3
-        ]
-        # rubocop:enable Naming/VariableNumber
+        def collection = %w[landscape square is_16_9 is_4_3]
+          .map { [I18n.t(_1, scope: %i[activemodel attributes schematics/options/wrapper aspect_ratios]), _1] } # rubocop:disable Layout/LineLength
+          .sort
       end
     end
   end

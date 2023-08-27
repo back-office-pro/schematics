@@ -5,6 +5,11 @@ en:
       schematics/options/wrapper:
         actions: Actions
         aspect_ratio: Aspect ratio
+        aspect_ratios:
+          is_16_9: 16/9
+          is_4_3: 4/3
+          landscape: Landscape
+          square: Square
         auto_increment: Auto increment
         cached: Cached
         confirm: Confirm
