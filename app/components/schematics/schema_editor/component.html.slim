@@ -4,6 +4,7 @@
   = render Schematics::SchemaEditor::Template::Trigger::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Association::HasAndBelongsToMany::Component.new(form:)
   = render Schematics::SchemaEditor::Template::Attribute::Component.with_collection(attributes_collection, form:)
+  = render Schematics::SchemaEditor::Template::Attribute::BelongsToHasOne::Component.new(form:)
   .row.g-3.pb-3#entities data-nested-form-target='targets'
     = form.fields_for :entities, entities do |builder|
       = render Schematics::SchemaEditor::Entity::Component.new(builder:)
