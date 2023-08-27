@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-describe Schematics::Options::Inverse do
+describe Schematics::Options::InverseAssociationName do
   subject { described_class }
 
   it { is_expected.to be_hidden }
 
-  its(:name) { is_expected.to eq(:inverse) }
+  its(:name) { is_expected.to eq(:inverse_association_name) }
   its(:input_type) { is_expected.to eq(:string) }
 end

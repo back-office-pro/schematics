@@ -2,7 +2,7 @@
 
 module Schematics
   module Options
-    class Inverse < Option
+    class InverseAssociationName < Option
       class << self
         def hidden? = true
 

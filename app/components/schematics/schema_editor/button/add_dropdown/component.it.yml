@@ -1,7 +1,8 @@
 ---
 it:
   add_attribute: Aggiungere un attributo %{type}
-  add_belongs_to: Aggiungere un'associazione uno-a-molti
+  add_belongs_to_has_one: Aggiungere un'associazione uno-a-uno
+  add_belongs_to_has_many: Aggiungere un'associazione uno-a-molti
   add_habtm_association: Aggiungere un'associazione molti-a-molti
   add_references: Aggiungere un'associazione utente corrente
   add_trigger: Aggiungere un grilletto

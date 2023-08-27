@@ -11,7 +11,7 @@ it:
       schematics/attributes/array: Array
       schematics/attributes/attachment: Documento
       schematics/attributes/attachments: Documenti
-      schematics/attributes/belongs_to: Associazione uno-a-molti
+      schematics/attributes/belongs_to: Associazione
       schematics/attributes/boolean: Booleano
       schematics/attributes/byte: Byte
       schematics/attributes/citext: Case insensitive testo

@@ -1,7 +1,8 @@
 ---
 fr:
   add_attribute: Ajouter un attribut %{type}
-  add_belongs_to: Ajouter une association un-à-plusieurs
+  add_belongs_to_has_one: Ajouter une association un-à-un
+  add_belongs_to_has_many: Ajouter une association un-à-plusieurs
   add_habtm_association: Ajouter une association plusieurs-à-plusieurs
   add_references: Ajouter une association à l'utilisateur courant
   add_trigger: Ajouter un déclencheur

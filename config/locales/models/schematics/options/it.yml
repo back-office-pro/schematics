@@ -30,7 +30,11 @@ it:
         height: Altezza
         hidden: Nascosto
         icon: Icona
-        inverse: Inverso
+        inverse_association_name: Nome dell'associazione
+        inverse_association_type: Tipo di associazione
+        inverse_association_types:
+          has_many: Uno-a-molti
+          has_one: Uno-a-uno
         length: Lunghezza
         less_than: Minore di
         less_than_or_equal_to: Minore o uguale a
