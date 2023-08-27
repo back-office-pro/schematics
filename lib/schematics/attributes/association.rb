@@ -20,7 +20,8 @@ module Schematics
                 unless: :polymorphic?
 
       def available_options = super.push(
-        Options::Inverse,
+        Options::InverseAssociationName,
+        Options::InverseAssociationType,
         Options::Type,
         Options::Polymorphic
       )
@@ -40,16 +41,16 @@ module Schematics
 
       def model_class = class_name.safe_constantize
 
-      def inverse
-        options.inverse || {}
-      end
-
       def association_type
         options.type || name
       end
 
       def inverse_association_name
-        inverse[:name] || entity.table_name
+        options.inverse_association_name || entity.table_name
+      end
+
+      def inverse_association_type
+        options.inverse_association_type || 'has_many'
       end
 
       def preload
@@ -100,7 +101,11 @@ module Schematics
           .first
       end
 
-      memoize def inverse_association = Associations::Association.build(belongs_to: self, **inverse)
+      memoize def inverse_association = Associations::Association.build(
+        type: inverse_association_type,
+        name: inverse_association_name,
+        belongs_to: self
+      )
 
       def icon
         return :link unless inverse_entity
