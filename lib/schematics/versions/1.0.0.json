@@ -183,9 +183,7 @@
         "type": "references",
         "options": {
           "required": true,
-          "inverse": {
-            "name": "sent_messages"
-          }
+          "inverse_association_name": "sent_messages"
         }
       }
     ]
@@ -998,9 +996,7 @@
         "type": "references",
         "options": {
           "required": true,
-          "inverse": {
-            "name": "requested_tasks"
-          }
+          "inverse_association_name": "requested_tasks"
         }
       },
       {
@@ -1102,9 +1098,7 @@
         "type": "references",
         "options": {
           "required": true,
-          "inverse": {
-            "name": "created_meetings"
-          }
+          "inverse_association_name": "created_meetings"
         }
       },
       {
