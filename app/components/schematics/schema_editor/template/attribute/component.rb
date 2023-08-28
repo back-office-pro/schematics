@@ -7,13 +7,30 @@ module Schematics
         class Component < Template::Component
           with_collection_parameter :constant
 
-          def initialize(form:, constant:)
+          class << self
+            def belongs_to_has_one(form:)
+              new(
+                form:,
+                constant: Attributes::BelongsTo,
+                options: { inverse_association_type: 'has_one' },
+                slug: 'belongs-to-has-one'
+              )
+            end
+          end
+
+          def initialize(form:, constant:, options: nil, slug: nil)
             super
             @form = form
             @constant = constant
+            @options = options
+            @slug = slug || @constant.to_s.demodulize.underscore.dasherize
           end
 
-          def attribute = @constant.new(id: 'RANDOM_UUID', entity:)
+          def attribute = @constant.new(
+            id: 'RANDOM_UUID',
+            entity:,
+            options: @options
+          )
         end
       end
     end

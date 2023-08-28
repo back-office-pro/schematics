@@ -1,4 +1,0 @@
-template id="schema-editor-attribute-belongs-to-has-one" data-nested-form-target='templates'
-  = form.fields_for :entities, entity, child_index: 'INDEX' do |entity_builder|
-    = entity_builder.fields_for :attributes, attribute, child_index: 'NEW_RECORD' do |builder|
-      = render Schematics::SchemaEditor::Attribute::Component.new(builder:)
