@@ -47,7 +47,7 @@ class Chart < Schematics::ApplicationRecord
     return unless model_class
 
     model_class
-      .preload_all
+      .eager_load(joins)
       .public_send(entity_x_field.group_method, entity_x_field.to_sql)
       .public_send(aggregate.to_sym, entity_y_field&.to_sql || :all)
       .to_h do |key, value|
@@ -99,4 +99,9 @@ class Chart < Schematics::ApplicationRecord
   def entity_y_field
     y_field && find_field_by_name(y_field.split('#').last)
   end
+
+  def joins = [
+    entity_x_field.try(:preload),
+    entity_y_field.try(:preload)
+  ].compact.flatten.uniq
 end
