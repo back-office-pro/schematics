@@ -13,6 +13,7 @@ module Schematics
           @pagy, @comments = pagy(
             resource
               .comments
+              .with_string_translations
               .with_rich_text_content_and_embeds
               .with_author_avatar
               .order(created_at: :desc), items:
