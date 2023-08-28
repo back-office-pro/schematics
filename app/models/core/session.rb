@@ -6,10 +6,10 @@ class Session < Schematics::ApplicationRecord
 
   scope :active, ::Core::Sessions::ActiveQuery
   scope :authorized_by, ::Core::Sessions::AuthorizedByQuery
-  scope :with_user_slugs, -> { includes(user: :slugs) }
-  scope :with_user_user_groups_name, -> { includes(user: { user_groups: :string_translations }) }
-  scope :with_user_role_permissions, -> { includes(user: { role: :permissions }) }
-  scope :with_user_role_name, -> { includes(user: { role: :string_translations }) }
+  scope :with_user_slugs, -> { preload(user: :slugs) }
+  scope :with_user_user_groups_name, -> { preload(user: { user_groups: :string_translations }) }
+  scope :with_user_role_permissions, -> { preload(user: { role: :permissions }) }
+  scope :with_user_role_name, -> { preload(user: { role: :string_translations }) }
 
   def login!(user)
     case user
