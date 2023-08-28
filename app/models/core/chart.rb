@@ -47,7 +47,7 @@ class Chart < Schematics::ApplicationRecord
     return unless model_class
 
     model_class
-      .eager_load(joins)
+      .left_joins(joins)
       .public_send(entity_x_field.group_method, entity_x_field.to_sql)
       .public_send(aggregate.to_sym, entity_y_field&.to_sql || :all)
       .to_h do |key, value|
