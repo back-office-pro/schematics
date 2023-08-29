@@ -14,6 +14,8 @@ module Schematics
 
         def title = t('.title')
 
+        def prompt = t('prompt', attribute_name:)
+
         def data = {
           controller: 'popover schema-editor--variable-typeahead',
           'bs-toggle': 'popover',
@@ -22,6 +24,12 @@ module Schematics
           'bs-placement': 'bottom',
           'bs-html': true
         }
+
+        private
+
+        def attribute_name = Schematics::Trigger
+          .human_attribute_name('action')
+          .downcase
       end
     end
   end
