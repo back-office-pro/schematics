@@ -15,6 +15,13 @@ module Schematics
             .reject(&:hidden?)
             .sort_by(&:input_type)
 
+          def include_blank(name)
+            t 'prompt', attribute_name: Schematics::Options::Wrapper
+              .human_attribute_name(name)
+              .singularize
+              .downcase
+          end
+
           def render?
             available_options.any?
           end

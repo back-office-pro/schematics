@@ -23,12 +23,12 @@
             - when :select
               = options_form.select option.name,
                                     option.collection,
-                                    { selected: object.try(option.name), include_hidden: false }.compact,
+                                    { selected: object.try(option.name), include_hidden: false, include_blank: include_blank(option.name) }.compact,
                                     { multiple: option.multiple?, data: { controller: option.controller } }
             - when :array
               = options_form.select option.name,
                                     Array(options_form.object.public_send(option.name)),
-                                    { include_hidden: false },
+                                    { include_hidden: false, include_blank: include_blank(option.name) },
                                     { multiple: true, data: { controller: 'dropdown', 'dropdown-create-value': true } }
             - when :events
               = render Schematics::SchemaEditor::Options::Events::Component.new(builder: options_form, name: option.name)
