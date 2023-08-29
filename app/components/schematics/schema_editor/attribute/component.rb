@@ -13,9 +13,17 @@ module Schematics
           .map { [_1.model_name.human, _1.to_s.demodulize.underscore] }
           .sort
 
+        def prompt = t('prompt', attribute_name:)
+
         def title = attribute_class
           .model_name
           .human
+
+        private
+
+        def attribute_name = Attributes::Attribute
+          .human_attribute_name('name')
+          .downcase
       end
     end
   end
