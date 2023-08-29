@@ -9,7 +9,7 @@ module Schematics
             [value].compact
           end
 
-          def prompt = t('prompt', gender: :female, attribute_name:)
+          def prompt = t('prompt', attribute_name:)
 
           def autocomplete = 'new-address'
 
