@@ -5,16 +5,19 @@
       = builder.fields_for name, state_machine_event do |events_form|
         = events_form.hidden_field :id, { name: "#{events_form.object_name}[NEW_RECORD][id]" }
         = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[NEW_RECORD][name]", maxlength:, floating: }
-        = events_form.select :icon, icons_collection, {}, { data: icon_data, name: "#{events_form.object_name}[NEW_RECORD][icon]" }
+        = events_form.select :icon,
+                             icons_collection,
+                             { include_blank: include_blank('icon') },
+                             { data: icon_data, name: "#{events_form.object_name}[NEW_RECORD][icon]" }
         = events_form.select :color,
                              colors_collection,
-                             {},
+                             { include_blank: include_blank('color') },
                              { data: color_data, name: "#{events_form.object_name}[NEW_RECORD][color]" }
         = events_form.select :from,
                              [],
-                             { include_hidden: },
+                             { include_hidden:, include_blank: },
                              { data:, name: "#{events_form.object_name}[NEW_RECORD][from][]", multiple:, floating:, required: }
-        = events_form.select :to, [], {}, { data:, name: "#{events_form.object_name}[NEW_RECORD][to]", floating:, required: }
+        = events_form.select :to, [], { include_blank: }, { data:, name: "#{events_form.object_name}[NEW_RECORD][to]", floating:, required: }
         = events_form.text_field :callback, { data: popover_data, name: "#{events_form.object_name}[NEW_RECORD][callback]", floating: }
       .btn.btn-sm.btn-danger {
         data-action='click->nested-form#remove:prevent:stop'
@@ -29,13 +32,19 @@
         = builder.fields_for name, event do |events_form|
           = events_form.hidden_field :id, { name: "#{events_form.object_name}[#{index}][id]" }
           = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[#{index}][name]", maxlength:, floating: }
-          = events_form.select :icon, icons_collection, {}, { data: icon_data, name: "#{events_form.object_name}[#{index}][icon]" }
-          = events_form.select :color, colors_collection, {}, { data: color_data, name: "#{events_form.object_name}[#{index}][color]" }
+          = events_form.select :icon,
+                               icons_collection,
+                               { include_blank: include_blank('icon') },
+                               { data: icon_data, name: "#{events_form.object_name}[#{index}][icon]" }
+          = events_form.select :color,
+                               colors_collection,
+                               { include_blank: include_blank('color') },
+                               { data: color_data, name: "#{events_form.object_name}[#{index}][color]" }
           = events_form.select :from,
                                values,
-                               { include_hidden: },
+                               { include_hidden:, include_blank: },
                                { data:, name: "#{events_form.object_name}[#{index}][from][]", multiple:, floating:, required: }
-          = events_form.select :to, values, {}, { data:, name: "#{events_form.object_name}[#{index}][to]", floating:, required: }
+          = events_form.select :to, values, { include_blank: }, { data:, name: "#{events_form.object_name}[#{index}][to]", floating:, required: }
           = events_form.text_field :callback, { data: popover_data, name: "#{events_form.object_name}[#{index}][callback]", floating: }
         .btn.btn-sm.btn-danger {
           data-action='click->nested-form#remove:prevent:stop'

@@ -44,6 +44,12 @@ module Schematics
           def maxlength = 50
 
           def events = Array(object.events&.map(&Schematics::Options::StateMachineEvent))
+
+          def include_blank(name = nil)
+            attribute_name = Schematics::Options::Wrapper.human_attribute_name('values') unless name
+            attribute_name ||= Schematics::Options::StateMachineEvent.human_attribute_name(name)
+            t('prompt', attribute_name: attribute_name.singularize.downcase)
+          end
         end
       end
     end
