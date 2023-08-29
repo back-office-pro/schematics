@@ -18,6 +18,14 @@ module Schematics
             .sort
 
           def title = t('.title')
+
+          def include_blank = t('prompt', attribute_name:)
+
+          private
+
+          def attribute_name = Associations::HasAndBelongsToMany
+            .human_attribute_name('name')
+            .downcase
         end
       end
     end
