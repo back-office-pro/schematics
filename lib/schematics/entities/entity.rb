@@ -92,7 +92,7 @@ module Schematics
         Options::Core,
         Options::Hidden,
         Options::Existing,
-        Options::Descriptor.new(collection: descriptor.allowed_field_names),
+        Options::Descriptor.new(collection: descriptor.allowed_field_names.excluding('id')),
         Options::Actions.new(collection: default_actions),
         Options::Icon
       ]
