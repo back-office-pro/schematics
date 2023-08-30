@@ -3,9 +3,7 @@
 module Schematics
   module Behaviours
     module Preloadable
-      def preload = name.to_sym
-
-      def eager_loading_method = :includes
+      def preload = [name.to_sym]
     end
   end
 end

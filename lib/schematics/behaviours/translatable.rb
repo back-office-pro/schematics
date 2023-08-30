@@ -8,9 +8,9 @@ module Schematics
       def available_options = super.push(Options::Translated)
 
       def preload
-        return unless translated?
+        return [] unless translated?
 
-        :"#{translatable_type}_translations"
+        [:"#{translatable_type}_translations"]
       end
 
       def permitted_params

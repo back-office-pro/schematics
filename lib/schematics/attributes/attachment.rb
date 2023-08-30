@@ -34,9 +34,7 @@ module Schematics
         permitted_params.second
       ]
 
-      def preload = {
-        association_name => [blob: :variant_records]
-      }
+      def preload = [association_name => [blob: :variant_records]]
 
       def includes = { blob: :variant_records }
 
