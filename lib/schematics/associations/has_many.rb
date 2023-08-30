@@ -7,14 +7,14 @@ module Schematics
     class HasMany < Association
       def source = super.pluralize
 
-      def to_str = super
+      protected
+
+      def relationship_to_str = super
         .concat(",\n")
         .concat <<~RUBY.indent(8)
           inverse_of: :#{inverse_of},
           dependent: :#{dependent}
         RUBY
-
-      private
 
       def dependent
         return :destroy if required?

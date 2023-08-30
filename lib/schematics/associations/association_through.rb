@@ -10,7 +10,9 @@ module Schematics
 
       def type = super.chomp('_through')
 
-      def to_str = super
+      protected
+
+      def relationship_to_str = super
         .concat(",\n")
         .concat <<~RUBY.indent(8)
           through: :#{through.name},
