@@ -82,6 +82,8 @@ describe Schematics::Attributes::References do
       }
     end
 
+    it { is_expected.to be_required }
+
     its(:to_str) do
       is_expected.to eq <<~RUBY
         belongs_to :user,
@@ -102,6 +104,8 @@ describe Schematics::Attributes::References do
         inverse_association_type: 'has_many'
       }
     end
+
+    it { is_expected.to be_polymorphic }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

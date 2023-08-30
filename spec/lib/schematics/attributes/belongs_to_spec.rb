@@ -86,6 +86,8 @@ describe Schematics::Attributes::BelongsTo do
       }
     end
 
+    it { is_expected.to be_required }
+
     its(:to_str) do
       is_expected.to eq <<~RUBY
         belongs_to :user,
@@ -105,6 +107,8 @@ describe Schematics::Attributes::BelongsTo do
         polymorphic: true
       }
     end
+
+    it { is_expected.to be_polymorphic }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

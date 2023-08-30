@@ -30,6 +30,8 @@ describe Schematics::Associations::HasMany do
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }
   its(:class_name) { is_expected.to eq('Entity') }
+  its(:column_name) { is_expected.to eq('schema_id') }
+  its(:inverse_of) { is_expected.to eq('schema') }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:weight) { is_expected.to eq(3) }
   its('descriptor.name') { is_expected.to eq('type') }
@@ -51,6 +53,8 @@ describe Schematics::Associations::HasMany do
         required: true
       }
     end
+
+    it { is_expected.to be_required }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
