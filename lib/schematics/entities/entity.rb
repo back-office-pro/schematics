@@ -125,7 +125,7 @@ module Schematics
       def check_for_association_name_collisions
         associations.each do |association|
           association.prefixed = associations
-                                 .reject { _1 == association }
+                                 .excluding(association)
                                  .any? { _1.source == association.source }
         end
       end
