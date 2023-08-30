@@ -26,4 +26,12 @@ describe Schematics::Attributes::Uuid do
 
     it { is_expected.to contain_exactly(described_class) }
   end
+
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'f44b9276-0b51-45ba-ad48-99704ff83e34' }
+
+    it { is_expected.to eq(value) }
+  end
 end

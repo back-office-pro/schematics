@@ -10,6 +10,12 @@ module Schematics
       def default = SecureRandom.uuid
 
       def icon = :id_card
+
+      def format(value)
+        return value unless entity.model_class
+
+        "#{entity.model_class.model_name.human} ##{value}"
+      end
     end
   end
 end
