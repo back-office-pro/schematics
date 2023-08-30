@@ -21,7 +21,11 @@ module Schematics
 
       def to_sql = "(#{super.join})"
 
-      def to_str = super + <<~RUBY
+      def to_str = super.concat(scopes_to_str)
+
+      private
+
+      def scopes_to_str = <<~RUBY
         scope :#{name}, -> { where(Arel.sql("#{to_sql}")) }
         scope :not_#{name}, -> { where.not(Arel.sql("#{to_sql}")) }
       RUBY
