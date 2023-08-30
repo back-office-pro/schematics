@@ -35,7 +35,7 @@ describe Schematics::Attributes::References do
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:inverse_association_type) { is_expected.to eq('has_many') }
   its(:class_name) { is_expected.to eq('User') }
-  its(:preload) { is_expected.to eq(user: :string_translations) }
+  its(:preload) { is_expected.to eq([user: :string_translations]) }
   its(:icon) { is_expected.to eq(:users) }
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
@@ -43,7 +43,6 @@ describe Schematics::Attributes::References do
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
-  its(:eager_loading_method) { is_expected.to eq(:includes) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -65,6 +64,20 @@ describe Schematics::Attributes::References do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      scope :with_user, -> { includes([{:user=>:string_translations}]) }
+      scope :with_user_avatar, -> { includes({:user=>[{:avatar_attachment=>[{:blob=>:variant_records}]}]}) }
+      scope :with_user_role, -> { includes({:user=>[{:role=>:string_translations}]}) }
+      scope :with_user_user_groups, -> { includes({:user=>[:user_groups]}) }
+      scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
+      scope :with_user_imports, -> { includes({:user=>[:imports]}) }
+      scope :with_user_searches, -> { includes({:user=>[:searches]}) }
+      scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
+      scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
+      scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
+      scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
+      scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
+      scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
+      scope :with_user_comments, -> { includes({:user=>[:comments]}) }
       belongs_to :user,
                  -> { with_deleted },
                  class_name: 'User',
@@ -87,6 +100,20 @@ describe Schematics::Attributes::References do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
+        scope :with_user, -> { includes([{:user=>:string_translations}]) }
+        scope :with_user_avatar, -> { includes({:user=>[{:avatar_attachment=>[{:blob=>:variant_records}]}]}) }
+        scope :with_user_role, -> { includes({:user=>[{:role=>:string_translations}]}) }
+        scope :with_user_user_groups, -> { includes({:user=>[:user_groups]}) }
+        scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
+        scope :with_user_imports, -> { includes({:user=>[:imports]}) }
+        scope :with_user_searches, -> { includes({:user=>[:searches]}) }
+        scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
+        scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
+        scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
+        scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
+        scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
+        scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
+        scope :with_user_comments, -> { includes({:user=>[:comments]}) }
         belongs_to :user,
                    -> { with_deleted },
                    class_name: 'User',
@@ -107,10 +134,10 @@ describe Schematics::Attributes::References do
     end
 
     it { is_expected.to be_polymorphic }
-    its(:eager_loading_method) { is_expected.to eq(:preload) }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
+        scope :with_user, -> { preload([{:user=>:string_translations}]) }
         belongs_to :user,
                    -> { with_deleted },
                    foreign_key: 'user_id',
