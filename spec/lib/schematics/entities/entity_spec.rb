@@ -35,6 +35,7 @@ describe Schematics::Entities::Entity do
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:joins) { is_expected.to be_empty }
+  its(:to_str) { is_expected.to be_blank }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -63,12 +64,6 @@ describe Schematics::Entities::Entity do
         record: record&.to_s,
         created_at:
       }
-    RUBY
-  end
-
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      scope :with_record, -> { preload([{:record=>:string_translations}]) }
     RUBY
   end
 
