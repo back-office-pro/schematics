@@ -32,7 +32,7 @@ describe Schematics::Attributes::Text do
   its(:search_column) { is_expected.to eq(:content) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
-  its(:preload) { is_expected.to be_nil }
+  its(:preload) { is_expected.to be_empty }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -71,7 +71,7 @@ describe Schematics::Attributes::Text do
     let(:options) { { translated: true } }
 
     its(:permitted_params) { is_expected.to eq(%i[content content_en content_fr content_it]) }
-    its(:preload) { is_expected.to eq(:text_translations) }
+    its(:preload) { is_expected.to eq([:text_translations]) }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY

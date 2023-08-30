@@ -49,7 +49,7 @@ module Schematics
         end
       end
 
-      def preload_all = preload(entity.includes)
+      def preload_all = includes(entity.includes).preload(entity.preload)
 
       def reload_definitions!
         return false unless model_filepath

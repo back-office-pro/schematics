@@ -35,6 +35,9 @@ describe Schematics::Entities::Entity do
   its(:model_class) { is_expected.to be_nil }
   its(:weight) { is_expected.to eq(0) }
   its(:joins) { is_expected.to be_empty }
+  its(:to_str) { is_expected.to be_blank }
+  its(:includes) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
+  its(:preload) { is_expected.to eq([{ record: :string_translations }]) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -47,15 +50,6 @@ describe Schematics::Entities::Entity do
     )
   end
 
-  its(:includes) do
-    is_expected.to eq(
-      [
-        { rich_text_content: [embeds_attachments: :blob] },
-        { record: :string_translations }
-      ]
-    )
-  end
-
   its(:search_data) do
     is_expected.to eq <<~RUBY
       def search_data = {
@@ -63,12 +57,6 @@ describe Schematics::Entities::Entity do
         record: record&.to_s,
         created_at:
       }
-    RUBY
-  end
-
-  its(:to_str) do
-    is_expected.to eq <<~RUBY
-      scope :with_record, -> { preload([{:record=>:string_translations}]) }
     RUBY
   end
 

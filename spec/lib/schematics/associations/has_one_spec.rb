@@ -46,6 +46,7 @@ describe Schematics::Associations::HasOne do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      scope :with_entity, -> { includes([:entity]) }
       has_one :entity,
               -> { with_deleted },
               class_name: 'Entity',

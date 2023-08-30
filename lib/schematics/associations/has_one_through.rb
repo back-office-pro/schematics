@@ -14,13 +14,6 @@ module Schematics
 
       def inverse_of = through.name
 
-      def to_str = super
-        .chomp
-        .concat(",\n")
-        .concat <<~RUBY.indent(8)
-          autosave: true
-        RUBY
-
       def search_data = super
         .concat(' ')
         .concat <<~RUBY
@@ -28,6 +21,15 @@ module Schematics
         RUBY
 
       def search_column = :"#{name}_#{descriptor.name}"
+
+      protected
+
+      def association_to_str = super
+        .chomp
+        .concat(",\n")
+        .concat <<~RUBY.indent(8)
+          autosave: true
+        RUBY
     end
   end
 end

@@ -29,7 +29,6 @@ module Schematics
       attr_accessor :id, :schema
 
       delegate :core?, :existing?, to: :options
-      delegate :joins, :includes, :to_str, to: :preloader
       delegate :method_missing, :receptor_respond_to_missing?, to: :receptor, private: true
 
       class << self
@@ -190,6 +189,27 @@ module Schematics
 
       def router = Router.new(self)
 
+      def joins = virtuals
+        .flat_map(&:preload)
+        .compact
+        .uniq
+
+      def includes = preloadable_elements
+        .grep_v(Associations::HasMany)
+        .grep_v(Associations::HasManyThrough)
+        .flat_map(&:preload)
+        .excluding(preload)
+        .compact
+        .uniq
+
+      def preload = association_attributes
+        .select(&:polymorphic?)
+        .flat_map(&:preload)
+        .compact
+        .uniq
+
+      def to_str = ''
+
       def association_elements = has_many_and_through_and_belongs_to_many_associations
         .reject(&:existing?)
         .to_a
@@ -234,8 +254,6 @@ module Schematics
       )
 
       protected
-
-      def preloader = Preloader.new(self)
 
       def receptor = Receptor.new(self)
 

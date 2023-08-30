@@ -9,13 +9,6 @@ module Schematics
 
       def open_api_type = super.first
 
-      def to_str = super
-        .concat(",\n")
-        .concat <<~RUBY.indent(8)
-          inverse_of: :#{inverse_of},
-          autosave: true
-        RUBY
-
       def search_data = super
         .concat(' ')
         .concat <<~RUBY
@@ -23,6 +16,15 @@ module Schematics
         RUBY
 
       def search_column = :"#{name}_#{descriptor.name}"
+
+      protected
+
+      def association_to_str = super
+        .concat(",\n")
+        .concat <<~RUBY.indent(8)
+          inverse_of: :#{inverse_of},
+          autosave: true
+        RUBY
     end
   end
 end

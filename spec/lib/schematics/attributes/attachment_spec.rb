@@ -26,7 +26,7 @@ describe Schematics::Attributes::Attachment do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_blobs.filename') }
   its(:to_s) { is_expected.to eq('schema:user_avatar') }
-  its(:preload) { is_expected.to eq(avatar_attachment: [blob: :variant_records]) }
+  its(:preload) { is_expected.to eq([avatar_attachment: [blob: :variant_records]]) }
   its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to eq('png') }
   its(:search_column) { is_expected.to eq(:avatar_blob_filename) }

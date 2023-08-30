@@ -51,6 +51,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      scope :with_permissions, -> { includes([:permissions]) }
       has_and_belongs_to_many :permissions, class_name: 'Permission'
     RUBY
   end
