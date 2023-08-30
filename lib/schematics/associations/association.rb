@@ -54,11 +54,11 @@ module Schematics
 
       def inverse_of = belongs_to.name
 
-      def to_str = scope_to_str.concat(relationship_to_str)
+      def to_str = scope_to_str.concat(association_to_str)
 
       protected
 
-      def relationship_to_str = <<~RUBY.chomp
+      def association_to_str = <<~RUBY.chomp
         #{type} :#{name},
                 -> { with_deleted },
                 class_name: '#{class_name}',

@@ -69,7 +69,7 @@ module Schematics
 
       def to_str = scope_to_str
         .concat(second_level_scopes_to_str)
-        .concat(relationship_to_str)
+        .concat(association_to_str)
 
       def inverse_entity
         return entity.schema.find_entity_by_name(association_type) unless polymorphic?
@@ -102,7 +102,7 @@ module Schematics
 
       protected
 
-      def relationship_to_str
+      def association_to_str
         if polymorphic?
           <<~RUBY
             belongs_to :#{name},

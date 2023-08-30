@@ -24,7 +24,7 @@ module Schematics
 
       protected
 
-      def relationship_to_str = super
+      def association_to_str = super
         .chomp
         .concat(",\n")
         .concat <<~RUBY.indent(8)
