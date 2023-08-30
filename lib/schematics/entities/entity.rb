@@ -198,6 +198,13 @@ module Schematics
         .grep_v(Associations::HasMany)
         .grep_v(Associations::HasManyThrough)
         .flat_map(&:preload)
+        .excluding(preload)
+        .compact
+        .uniq
+
+      def preload = association_attributes
+        .select(&:polymorphic?)
+        .flat_map(&:preload)
         .compact
         .uniq
 

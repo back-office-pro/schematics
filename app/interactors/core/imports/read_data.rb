@@ -86,12 +86,12 @@ module Core
           field
             .model_class
             .i18n
-            .left_joins(field.descriptor.joins)
+            .eager_load(field.descriptor.joins)
             .find_by(field.descriptor.to_s => value)
         else
           field
             .model_class
-            .left_joins(field.descriptor.joins)
+            .eager_load(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
         end
       end

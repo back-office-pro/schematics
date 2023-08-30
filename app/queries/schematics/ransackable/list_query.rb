@@ -13,7 +13,7 @@ module Schematics
           .ransack(parse_filter_params(filter_params))
           .tap { _1.sorts = parse_sort_params(sort_params) }
           .result
-          .left_joins(entity.joins)
+          .references(entity.joins)
           .accessible_by(ability)
       end
     end
