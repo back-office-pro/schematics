@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe Schematics::Associations::NestedHasMany do
+describe Schematics::Associations::HasManyNested do
   subject(:association) do
     Schematics::Associations::Association.build(
-      type: 'nested_has_many',
+      type: 'has_many_nested',
       entity:,
       name: 'schema',
       options:

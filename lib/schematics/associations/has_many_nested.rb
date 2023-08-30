@@ -2,7 +2,7 @@
 
 module Schematics
   module Associations
-    class NestedHasMany < HasMany
+    class HasManyNested < HasMany
       include Behaviours::Fillable
 
       def permitted_params = {
