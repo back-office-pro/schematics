@@ -49,6 +49,7 @@ describe Schematics::Associations::HasManyThrough do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      scope :with_attributes, -> { includes([:attributes]) }
       has_many :attributes,
               -> { with_deleted },
               class_name: 'Attribute',

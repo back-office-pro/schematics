@@ -38,6 +38,7 @@ describe Schematics::Associations::HasMany do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
+      scope :with_entities, -> { includes([:entities]) }
       has_many :entities,
               -> { with_deleted },
               class_name: 'Entity',
@@ -58,6 +59,7 @@ describe Schematics::Associations::HasMany do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
+        scope :with_entities, -> { includes([:entities]) }
         has_many :entities,
                 -> { with_deleted },
                 class_name: 'Entity',
