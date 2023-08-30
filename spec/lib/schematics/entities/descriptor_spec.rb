@@ -23,7 +23,7 @@ describe Schematics::Entities::Descriptor do
   its(:to_str) do
     is_expected.to eq <<~RUBY
       def to_s
-        type_formatted || id
+        type_formatted
       end
     RUBY
   end

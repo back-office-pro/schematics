@@ -24,7 +24,7 @@ module Schematics
 
       def to_str = <<~RUBY
         def to_s
-          #{name}_formatted || id
+          #{name}_formatted
         end
       RUBY
 
