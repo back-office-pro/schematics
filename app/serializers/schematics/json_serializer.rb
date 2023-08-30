@@ -65,12 +65,12 @@ module Schematics
         when Attributes::Attachments
           element.format @resource
             .public_send(element.name.to_sym)
-            .preload(element.includes)
+            .includes(element.includes)
             .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
         when Associations::HasMany, Associations::HasManyThrough, Associations::HasAndBelongsToMany
           @resource
             .public_send(element.name.to_sym)
-            .preload(element.includes)
+            .includes(element.includes)
             .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)

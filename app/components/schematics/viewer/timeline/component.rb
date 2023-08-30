@@ -11,7 +11,7 @@ module Schematics
 
         def before_render
           @pagy, @versions = pagy(
-            Version.timeline(current_ability, versions.preload(item: entity.includes)),
+            Version.timeline(current_ability, versions.includes(item: entity.includes)),
             items:
           )
         end

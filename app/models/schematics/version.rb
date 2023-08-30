@@ -17,7 +17,7 @@ module Schematics
     scope :timeline, Versions::TimelineQuery
     scope :with_item, -> { preload(item: ::Tenant.schema.entities.flat_map(&:includes).uniq) }
     scope :with_user, lambda {
-      preload(
+      includes(
         user: [
           :string_translations,
           { user_groups: :string_translations },
