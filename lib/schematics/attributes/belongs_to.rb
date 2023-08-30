@@ -7,12 +7,8 @@ module Schematics
 
       def available_options = super.excluding(Options::Default)
 
-      def inverse_association_type
-        return super if polymorphic?
-        return super if options.inverse_association_type == 'has_one'
-
-        'has_many_nested'
-      end
+      def inverse_association_type = super
+        .then_tap { "#{super}_nested" if !polymorphic? && super == 'has_many' }
     end
   end
 end
