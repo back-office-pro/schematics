@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/object/blank'
+
 module Schematics
   module Entities
     class Preloader
@@ -31,35 +33,34 @@ module Schematics
 
       private
 
+      # :reek:FeatureEnvy
       def first_level_scopes = preloadable_elements
         .grep_v(Attributes::RichText)
-        .grep_v(Attributes::Attachments)
-        .map { |element| [element.name, Array.wrap(element.preload)] }
-        .reject { _2.empty? }
-        .map { |name, preload| scope_to_str(name, preload) }
+        .grep_v(Attributes::Attachment)
+        .select { _1.preload.present? }
+        .map { scope_to_str(_1.name, Array.wrap(_1.preload), _1.eager_loading_method) }
 
+      # :reek:FeatureEnvy
       def second_level_scopes = association_attributes
         .reject(&:polymorphic?)
         .map do |attribute|
           attribute
             .inverse_entity
             .preloadable_elements
-            .map { |element| second_level_scope_array(attribute, element) }
-            .reject { _2.values.first.empty? }
-            .map { |name, preload| scope_to_str(name, preload) }
+            .select { _1.preload.present? }
+            .map do |element|
+              scope_to_str(
+                "#{attribute.name}_#{element.name}",
+                { attribute.name.to_sym => Array.wrap(element.preload) },
+                element.eager_loading_method
+              )
+            end
         end
 
-      def scope_to_str(name, preload)
+      def scope_to_str(name, preload, eager_loading_method)
         <<~RUBY
-          scope :with_#{name}, -> { preload(#{preload}) }
+          scope :with_#{name}, -> { #{eager_loading_method}(#{preload}) }
         RUBY
-      end
-
-      def second_level_scope_array(attribute, element)
-        [
-          "#{attribute.name}_#{element.name}",
-          { attribute.name.to_sym => Array.wrap(element.preload) }
-        ]
       end
     end
   end

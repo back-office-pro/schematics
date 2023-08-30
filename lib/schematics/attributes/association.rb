@@ -67,6 +67,12 @@ module Schematics
 
       def search_column = :"#{name}_#{descriptor.name}"
 
+      def eager_loading_method
+        return super unless polymorphic?
+
+        :preload
+      end
+
       def to_str
         if polymorphic?
           <<~RUBY

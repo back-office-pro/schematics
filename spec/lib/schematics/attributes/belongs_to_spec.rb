@@ -47,6 +47,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
+  its(:eager_loading_method) { is_expected.to eq(:includes) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -109,6 +110,7 @@ describe Schematics::Attributes::BelongsTo do
     end
 
     it { is_expected.to be_polymorphic }
+    its(:eager_loading_method) { is_expected.to eq(:preload) }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
