@@ -170,7 +170,7 @@ module Schematics
                 is_expected
                   .to belong_to(element.name.to_sym)
                     .with_foreign_key(element.column_name)
-                    .inverse_of(element.inverse_association_name.pluralize.to_sym)
+                    .inverse_of(element.inverse_association.name.to_sym)
                     .tap { _1.class_name(element.class_name) unless element.polymorphic? }
                     .tap { _1.optional unless element.required? }
                 is_expected

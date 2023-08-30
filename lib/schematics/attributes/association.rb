@@ -73,7 +73,7 @@ module Schematics
             belongs_to :#{name},
                        -> { with_deleted },
                        foreign_key: '#{column_name}',
-                       inverse_of: :#{inverse_association_name.pluralize},
+                       inverse_of: :#{inverse_association.name},
                        optional: #{!required?},
                        polymorphic: true,
                        autosave: true
@@ -84,7 +84,7 @@ module Schematics
                        -> { with_deleted },
                        class_name: '#{class_name}',
                        foreign_key: '#{column_name}',
-                       inverse_of: :#{inverse_association_name.pluralize},
+                       inverse_of: :#{inverse_association.name},
                        optional: #{!required?},
                        autosave: true
           RUBY
