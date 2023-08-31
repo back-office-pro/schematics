@@ -13,6 +13,10 @@ it:
         full_name: Nome completo
         last_name: Cognome
         locale: Lingua
+        meetings:
+          one: Riunione partecipata
+          other: Riunioni partecipate
+          zero: Nessuna riunione partecipata
         messages:
           one: Messaggio ricevuto
           other: Messaggi ricevuti
@@ -30,6 +34,10 @@ it:
           one: Messaggio inviato
           other: Messaggi inviati
           zero: Nessun messaggio inviato
+        tasks:
+          one: Compito assegnato
+          other: Compiti assegnati
+          zero: Nessun compito assegnato
         time_zone: Fuso orario
         user_groups:
           one: Gruppo di utenti

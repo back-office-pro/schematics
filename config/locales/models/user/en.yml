@@ -13,6 +13,10 @@ en:
         full_name: Full name
         last_name: Last name
         locale: Locale
+        meetings:
+          one: Attended meeting
+          other: Attended meetings
+          zero: No attended meeting
         messages:
           one: Received message
           other: Received messages
@@ -23,13 +27,17 @@ en:
         remember_me: Remember me?
         requested_tasks:
           one: Requested task
-          other: Requested taks
+          other: Requested tasks
           zero: No requested task
         role: Role
         sent_messages:
           one: Sent message
           other: Sent messages
           zero: No message sent
+        tasks:
+          one: Assigned task
+          other: Assigned tasks
+          zero: No assigned task
         time_zone: Time zone
         user_groups:
           one: User group
