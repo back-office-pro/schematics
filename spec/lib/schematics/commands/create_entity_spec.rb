@@ -19,11 +19,7 @@ describe Schematics::Commands::CreateEntity do
       },
       {
         name: 'owner',
-        type: 'belongs_to',
-        options: {
-          type: 'user',
-          inverse_association_name: 'assemblies'
-        }
+        type: 'references'
       }
     ]
   end
