@@ -1,0 +1,19 @@
+---
+it:
+  activemodel:
+    models:
+      schematics/commands/add_association: Aggiungere un'associazione molti-a-molti tra %{name} e %{attribute}
+      schematics/commands/add_attribute: Aggiungere un attributo %{attribute} a %{name}
+      schematics/commands/add_permission: Aggiungere un'autorizzazione %{attribute} a %{name}
+      schematics/commands/add_translation: Aggiungere una traduzione a %{name}
+      schematics/commands/change_attribute: Modificare l'attributo %{attribute} di %{name} in tipo %{target}
+      schematics/commands/create_entity: Aggiungere un'entità %{name}
+      schematics/commands/destroy_entity: Rimuovere l'entità %{name}
+      schematics/commands/remove_association: Rimuovere l'associazione molti-a-molti tra %{name} e %{attribute}
+      schematics/commands/remove_attribute: Rimuovere l'attributo %{attribute} di %{name}
+      schematics/commands/remove_permission: Rimuovere l'autorizzazione %{attribute} di %{name}
+      schematics/commands/remove_translation: Rimuovere una traduzione di %{name}
+      schematics/commands/rename_attribute: Rinominare l'attributo %{attribute} di %{name} in %{target}
+      schematics/commands/rename_entity: Rinominare l'entità %{name} in %{attribute}
+      schematics/commands/rename_permission: Rinominare l'autorizzazione %{attribute} di %{name} in %{target}
+      schematics/commands/rename_translation: Rinominare una traduzione di %{name}

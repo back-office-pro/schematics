@@ -7,7 +7,9 @@ module Schematics
     # :reek:Attribute
     class Command
       include ::ActiveModel::API
+      include ::ActiveModel::Naming
 
+      delegate :human, to: :model_name, private: true
       delegate :name,
                :table_name,
                :class_name,
@@ -20,6 +22,8 @@ module Schematics
       attr_accessor :entity, :attribute, :target
 
       def generators = []
+
+      def to_s = human(name: name.humanize, attribute:, target:)
 
       def weight = 1
 

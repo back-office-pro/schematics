@@ -8,6 +8,7 @@ describe Schematics::Commands::AddAttribute do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'first_name' }
 
+  its(:to_s) { is_expected.to eq('Add an attribute first_name to Client') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do

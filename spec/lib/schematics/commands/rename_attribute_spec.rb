@@ -9,6 +9,7 @@ describe Schematics::Commands::RenameAttribute do
   let(:attribute) { 'first_name' }
   let(:target) { 'name' }
 
+  its(:to_s) { is_expected.to eq('Rename the attribute first_name of Client to name') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do

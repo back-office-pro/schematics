@@ -10,6 +10,7 @@ describe Schematics::Commands::RenameEntity do
   let(:attribute) { 'client' }
   let(:target) { nil }
 
+  its(:to_s) { is_expected.to eq('Rename the entity Prospect to client') }
   its(:weight) { is_expected.to eq(1) }
 
   describe '#generators' do
