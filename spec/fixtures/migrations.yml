@@ -74,9 +74,11 @@ one:
           options:
             precision: 2
             unit: €
-        - name: big_price
+        - id: <%= SecureRandom.uuid %>
+          name: big_price
           function: $price > 100 && $vat >= 10
-        - name: reference
+        - id: <%= SecureRandom.uuid %>
+          name: reference
           function: ref-$id-$sub_category.id
       attributes:
         - id: <%= SecureRandom.uuid %>
