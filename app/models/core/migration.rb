@@ -27,9 +27,19 @@ class Migration < Schematics::ApplicationRecord
     Schematics::MigrateSchemaJob.perform_later(self)
   end
 
-  memoize def migrator = Schematics::Migrator.new(data, Tenant.schema)
+  memoize def migrator = Schematics::Migrator.new(data, previously_migrated_schema)
 
   def to_yaml = { one: { state: 'finished', data_version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
+
+  private
+
+  def previously_migrated_schema = self
+    .class
+    .finished
+    .excluding(self)
+    .order(created_at: :desc)
+    .find_by(created_at: ..created_at)
+    &.data || Schematics::Schema.new
 end

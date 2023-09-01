@@ -43,7 +43,7 @@ RSpec.describe Core::Migrations::Migrate do
   before do
     Tenant.schema = schema
     allow(Role).to receive(:admin).and_return(Role.new)
-    allow(migration).to receive(:valid?).and_return(true)
+    allow(migration).to receive_messages(valid?: true, previously_migrated_schema: schema)
   end
 
   after { [rollback_migration, rollback_commit, rollback_reload] }
