@@ -3,10 +3,10 @@
     = fields.hidden_field :id, value: attachment.id
     = fields.hidden_field :_destroy, value: true
   = render Schematics::ConfirmDialog::Component.new(target:)
-span data-bs-toggle='modal' data-bs-target="##{target}"
-  button.btn.btn-danger.btn-sm.float-end {
-    data-controller='tooltip'
-    data-bs-toggle='tooltip'
-    data-bs-placement='left'
-    data-bs-title=t('schematics.application.button.destroy')
-  } = fa_icon :trash
+button.btn.btn-danger.btn-sm.float-end {
+  data-bs-toggle='modal'
+  data-bs-target="##{target}"
+  data-controller='tooltip'
+  data-bs-placement='left'
+  data-bs-title=t('schematics.application.button.destroy')
+} = fa_icon :trash

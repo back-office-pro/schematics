@@ -21,8 +21,7 @@ module Schematics
 
         def data = {
           controller: 'tooltip hotkey',
-          'bs-toggle': 'tooltip',
-          'bs-placement': 'bottom',
+          'bs-placement': 'right',
           'bs-container': '.sidebar',
           'hotkey-shortcut-value': shortcut
         }

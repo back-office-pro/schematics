@@ -9,9 +9,7 @@ module Schematics
         def data = {
           turbo_method: :delete,
           turbo_frame: '_top',
-          controller: 'tooltip',
-          'bs-toggle': 'tooltip',
-          'bs-placement': 'top'
+          controller: 'tooltip'
         }
 
         def render?

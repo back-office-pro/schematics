@@ -12,7 +12,6 @@ module Schematics
           controller: 'clipboard',
           action: 'click->clipboard#copy',
           'clipboard-text-value': value,
-          'bs-toggle': 'tooltip',
           'bs-placement': 'right',
           'bs-trigger': 'manual',
           'bs-title': fa_icon(:check, class: 'me-2 text-success') + t('.tooltip'),

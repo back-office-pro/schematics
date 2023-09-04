@@ -25,7 +25,6 @@ module Schematics
             action: 'click->viewer-settings#switchLayout:prevent',
             'viewer-settings-viewer-param': @viewer,
             'viewer-settings-preference-param': "viewer_#{@entity.id}",
-            'bs-toggle': 'tooltip',
             'bs-title': t(".#{@viewer}")
           }
         end

@@ -23,16 +23,10 @@ module Schematics
           'fa-fw' if compact?
         end
 
-        def data
-          return { turbo_frame: '_top' } unless compact?
-
-          {
-            turbo_frame: '_top',
-            controller: 'tooltip',
-            'bs-toggle': 'tooltip',
-            'bs-placement': 'top'
-          }
-        end
+        def data = {
+          turbo_frame: '_top',
+          controller: ('tooltip' if compact?)
+        }.compact
 
         def render?
           can?(:edit, resource)
