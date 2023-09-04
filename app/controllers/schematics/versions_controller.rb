@@ -29,12 +29,15 @@ module Schematics
     def show
       return unless stale?(@version)
 
+      @previous_item = @version.reify(dup: true)
       respond_with @version
     end
 
     private
 
     def model_class = Version
+
+    def index_path = versions_path
 
     def set_version
       @version = model_class

@@ -15,7 +15,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 68,
+          "line": 69,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -26,6 +26,40 @@
       "location": {
         "type": "template",
         "template": "schematics/resources/delete"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "1c04c7b3fdcf563d1d5a28c93c5dc6cad89d1938925ff517be492fb8f40d58fc",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/versions/show.html.slim",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => model_class.with_user.with_item.load_async.find(params[:id]).reify(:dup => true)), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::VersionsController",
+          "method": "show",
+          "line": 34,
+          "file": "app/controllers/schematics/versions_controller.rb",
+          "rendered": {
+            "name": "schematics/versions/show",
+            "file": "app/views/schematics/versions/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/versions/show"
       },
       "user_input": "params[:id]",
       "confidence": "Weak",
@@ -49,7 +83,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 92,
+          "line": 93,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -83,7 +117,41 @@
           "type": "controller",
           "class": "Schematics::VersionsController",
           "method": "show",
-          "line": 33,
+          "line": 34,
+          "file": "app/controllers/schematics/versions_controller.rb",
+          "rendered": {
+            "name": "schematics/versions/show",
+            "file": "app/views/schematics/versions/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "schematics/versions/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "ViewComponent false positive"
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "45d6c77b325c6d49044972d9b90368b15c8a7011533293167d8ea618fad2a943",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/schematics/versions/show.html.slim",
+      "line": 21,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => model_class.with_user.with_item.load_async.find(params[:id]).item), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Schematics::VersionsController",
+          "method": "show",
+          "line": 34,
           "file": "app/controllers/schematics/versions_controller.rb",
           "rendered": {
             "name": "schematics/versions/show",
@@ -117,75 +185,7 @@
           "type": "controller",
           "class": "Schematics::VersionsController",
           "method": "show",
-          "line": 33,
-          "file": "app/controllers/schematics/versions_controller.rb",
-          "rendered": {
-            "name": "schematics/versions/show",
-            "file": "app/views/schematics/versions/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "af615dea00371f61eeabbee8297bfd407a266efa74a3581ce0be68e2676773f7",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/versions/show.html.slim",
-      "line": 8,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => title), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::VersionsController",
-          "method": "show",
-          "line": 33,
-          "file": "app/controllers/schematics/versions_controller.rb",
-          "rendered": {
-            "name": "schematics/versions/show",
-            "file": "app/views/schematics/versions/show.html.slim"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "schematics/versions/show"
-      },
-      "user_input": "params[:id]",
-      "confidence": "Weak",
-      "cwe_id": [
-        22
-      ],
-      "note": "ViewComponent false positive"
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "af615dea00371f61eeabbee8297bfd407a266efa74a3581ce0be68e2676773f7",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/schematics/versions/show.html.slim",
-      "line": 21,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => title), {})",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "Schematics::VersionsController",
-          "method": "show",
-          "line": 33,
+          "line": 34,
           "file": "app/controllers/schematics/versions_controller.rb",
           "rendered": {
             "name": "schematics/versions/show",
@@ -219,7 +219,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "delete",
-          "line": 68,
+          "line": 69,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/delete",
@@ -253,7 +253,7 @@
           "type": "controller",
           "class": "Schematics::VersionsController",
           "method": "show",
-          "line": 33,
+          "line": 34,
           "file": "app/controllers/schematics/versions_controller.rb",
           "rendered": {
             "name": "schematics/versions/show",
@@ -287,7 +287,7 @@
           "type": "controller",
           "class": "Schematics::ResourcesController",
           "method": "edit",
-          "line": 92,
+          "line": 93,
           "file": "app/controllers/schematics/resources_controller.rb",
           "rendered": {
             "name": "schematics/resources/edit",
@@ -330,6 +330,6 @@
       "note": "Safe"
     }
   ],
-  "updated": "2023-08-10 21:50:37 +0200",
+  "updated": "2023-09-04 09:56:04 +0200",
   "brakeman_version": "5.4.1"
 }

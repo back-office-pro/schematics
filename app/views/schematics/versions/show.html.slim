@@ -5,11 +5,11 @@
       .card-header.px-2.py-1
         .row.align-items-center
           .col.text-truncate
-            = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title:)
+            = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title: @previous_item)
           .col-auto
             = render Schematics::Button::Revert::Component.new(version: @version)
       .card-body.p-0
-        = render Schematics::ResourceDetails::Component.new(resource: @version.reify(dup: true))
+        = render Schematics::ResourceDetails::Component.new(resource: @previous_item)
   .col-lg-1.my-3.mx-0.text-center
     = fa_icon :arrow_right, size: '4x', class: 'text-secondary d-none d-lg-inline-block'
     = fa_icon :arrow_down, size: '4x', class: 'text-secondary d-inline-block d-lg-none'
@@ -18,6 +18,6 @@
       .card-header.px-2.py-1
         .row.align-items-center
           .col.text-truncate
-            = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title:)
+            = render Schematics::CardHeading::Component.new(icon: @version.entity.icon, title: @version.item)
       .card-body.p-0
         = render Schematics::ResourceDetails::Component.new(resource: @version.item)
