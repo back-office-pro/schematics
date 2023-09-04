@@ -4,7 +4,6 @@ module Schematics
   module Resources
     class GenerateFile
       include Interactor
-      include Rails.application.routes.url_helpers
 
       delegate :user, :serializer, :dropdown, :component_method, to: :context, private: true
       delegate :file, :filename, :extension, :content_type, to: :serializer, private: true
@@ -28,7 +27,11 @@ module Schematics
         ::ActiveStorage::Blob.create_and_upload!(io: file, filename:, content_type:)
       end
 
-      def url = url_for(blob)
+      def url = ::Rails
+        .application
+        .routes
+        .url_helpers
+        .url_for(blob)
     end
   end
 end
