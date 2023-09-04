@@ -116,7 +116,7 @@ module Schematics
 
           it 'should update record' do
             patch polymorphic_path(record), params:, headers:, as: :html
-            redirect_path = ability.can?(:update, record) ? polymorphic_path(record) : root_path
+            redirect_path = ability.can?(:update, record) ? polymorphic_path(record.reload) : root_path # rubocop:disable Layout/LineLength
             is_expected.to redirect_to(redirect_path)
           end
 

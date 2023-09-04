@@ -37,7 +37,7 @@ module UUID
       end
       num.to_s(16).rjust(32, '0').unpack('A8A4A4A4A12').join('-')
     rescue StandardError
-      suid
+      nil
     end
   end
 end
