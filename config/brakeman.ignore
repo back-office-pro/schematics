@@ -37,13 +37,13 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "1c04c7b3fdcf563d1d5a28c93c5dc6cad89d1938925ff517be492fb8f40d58fc",
+      "fingerprint": "201e7f4a6299d748e715536d2dd46c1ab8ec89ddd6348fe88e618d04b1eface2",
       "check_name": "Render",
       "message": "Render path contains parameter value",
       "file": "app/views/schematics/versions/show.html.slim",
-      "line": 8,
+      "line": 10,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => model_class.with_user.with_item.load_async.find(params[:id]).reify(:dup => true)), {})",
+      "code": "render(action => Schematics::Button::Revert::Component.new(:version => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id]))), {})",
       "render_path": [
         {
           "type": "controller",
@@ -105,13 +105,13 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "2f566a9a96423d242ecba7fdcb8ac3fdf568a61fbda80e6b205662046cc59902",
+      "fingerprint": "28ea293ab866c616683d183280314edaba7c42e6ff0cc0dfeb3a0a11dae6074f",
       "check_name": "Render",
       "message": "Render path contains parameter value",
       "file": "app/views/schematics/versions/show.html.slim",
       "line": 12,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.with_user.with_item.load_async.find(params[:id]).reify(:dup => true)), {})",
+      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id])).reify(:dup => true)), {})",
       "render_path": [
         {
           "type": "controller",
@@ -139,13 +139,13 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "45d6c77b325c6d49044972d9b90368b15c8a7011533293167d8ea618fad2a943",
+      "fingerprint": "29d26468b4e8fc0d50983180bc6d027e7a0607569c5778129157d0bcf684fc30",
       "check_name": "Render",
       "message": "Render path contains parameter value",
       "file": "app/views/schematics/versions/show.html.slim",
       "line": 21,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(params[:id]).entity.icon, :title => model_class.with_user.with_item.load_async.find(params[:id]).item), {})",
+      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id])).entity.icon, :title => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id])).item), {})",
       "render_path": [
         {
           "type": "controller",
@@ -173,13 +173,13 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "930d11c3077e6968ee4229370875929f9741a7692e676c272d2d744a8da4b92e",
+      "fingerprint": "89ed7e2527972008b057eb76b9f844d2c82c192d133e60bd991b09b696658278",
       "check_name": "Render",
       "message": "Render path contains parameter value",
       "file": "app/views/schematics/versions/show.html.slim",
-      "line": 23,
+      "line": 8,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.with_user.with_item.load_async.find(params[:id]).item), {})",
+      "code": "render(action => Schematics::CardHeading::Component.new(:icon => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id])).entity.icon, :title => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id])).reify(:dup => true)), {})",
       "render_path": [
         {
           "type": "controller",
@@ -241,13 +241,13 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
-      "fingerprint": "e165772300853efd929172278a63368eaade381322bdaecb7f534b0efa506c33",
+      "fingerprint": "da66b0e81377baf08d3e848662fa005082c71aa8bcd1bac35fd0ca7031f6cd5f",
       "check_name": "Render",
       "message": "Render path contains parameter value",
       "file": "app/views/schematics/versions/show.html.slim",
-      "line": 10,
+      "line": 23,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => Schematics::Button::Revert::Component.new(:version => model_class.with_user.with_item.load_async.find(params[:id])), {})",
+      "code": "render(action => Schematics::ResourceDetails::Component.new(:resource => model_class.with_user.with_item.load_async.find(UUID::Shortener.expand(params[:id])).item), {})",
       "render_path": [
         {
           "type": "controller",
@@ -330,6 +330,6 @@
       "note": "Safe"
     }
   ],
-  "updated": "2023-09-04 09:56:04 +0200",
+  "updated": "2023-09-04 11:36:26 +0200",
   "brakeman_version": "5.4.1"
 }
