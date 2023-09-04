@@ -13,6 +13,8 @@ module Schematics
       delegate :name, :entity, :to_sql, to: :field
       attr_accessor :entity, :field_name
 
+      alias to_s field_name
+
       def joins = Array(field.try(:preload))
 
       def to_str = <<~RUBY
