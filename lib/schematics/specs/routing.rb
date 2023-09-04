@@ -19,7 +19,7 @@ module Schematics
                  to: :class
 
         let(:record) { default.tap(&:save!) }
-        let(:id) { (record.slug || record.id) unless record.is_a?(::Singleton) }
+        let(:id) { record.to_param unless record.is_a?(::Singleton) }
         let(:parent_id) { :"#{model_class.model_name.param_key}_id" }
         let(:params) { { locale:, model_name:, controller: } }
 
