@@ -16,9 +16,10 @@ describe Schematics::Entities::Descriptor do
   end
   let(:field_name) { 'type' }
 
-  its(:to_s) { is_expected.to eq('type') }
+  its(:field_name) { is_expected.to eq('type') }
   its(:joins) { is_expected.to be_empty }
-  its(:allowed_field_names) { is_expected.to eq(%w[id type]) }
+  its(:allowed_field_names) { is_expected.to eq(%w[type]) }
+  its(:field) { is_expected.to be_a(Schematics::Attributes::String) }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

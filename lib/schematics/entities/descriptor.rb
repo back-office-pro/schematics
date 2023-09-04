@@ -11,14 +11,7 @@ module Schematics
       validates :field_name, allow_nil: true, inclusion: { in: :allowed_field_names }
 
       delegate :name, :entity, :to_sql, to: :field
-      attr_accessor :entity
-      attr_writer :field_name
-
-      def field_name
-        @field_name || 'id'
-      end
-
-      alias to_s field_name
+      attr_accessor :entity, :field_name
 
       def joins = Array(field.try(:preload))
 
@@ -31,11 +24,10 @@ module Schematics
       def allowed_field_names = entity
         .fields
         .map(&:name)
-        .push('id')
         .sort
 
       def field
-        entity.find_field_by_name(field_name)
+        entity.find_field_by_name(@field_name || 'id')
       end
     end
   end
