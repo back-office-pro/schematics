@@ -7,6 +7,7 @@ require 'array'
 require 'hash'
 require 'object'
 require 'tenant'
+require 'uuid/shortener'
 require 'validators/singular_validator'
 require 'zeitwerk'
 require defined?(Rails::Engine) ? 'schematics/engine' : 'debug'
@@ -28,6 +29,7 @@ loader.ignore("#{__dir__}/open_api")
 loader.ignore("#{__dir__}/puma")
 loader.ignore("#{__dir__}/rails")
 loader.ignore("#{__dir__}/search_engine")
+loader.ignore("#{__dir__}/uuid")
 loader.ignore("#{__dir__}/validators")
 loader.ignore("#{__dir__}/view_component")
 loader.ignore("#{__dir__}/array.rb")
