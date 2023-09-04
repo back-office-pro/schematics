@@ -3,6 +3,7 @@
 module Schematics
   class Version < PaperTrail::Version
     include Serializable
+    include Shortenable
     include Translatable
 
     EVENTS = %w[create update destroy archive restore import duplicate].freeze

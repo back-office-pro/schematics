@@ -7,6 +7,7 @@ module Schematics
     include Loadable
     include Duplicable
     include Serializable
+    include Shortenable
     include Translatable
     include Attachable
     loadable concerns: [

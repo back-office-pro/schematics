@@ -32,6 +32,6 @@ describe Schematics::Attributes::Uuid do
 
     let(:value) { 'f44b9276-0b51-45ba-ad48-99704ff83e34' }
 
-    it { is_expected.to eq(value) }
+    it { is_expected.to eq('7qYFbIainX1Hc1YMP0gQ5e') }
   end
 end

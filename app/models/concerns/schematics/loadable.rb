@@ -45,7 +45,7 @@ module Schematics
         when Entities::Singleton
           instance
         else
-          friendly.find(id)
+          find_by(id: UUID::Shortener.expand(id)) || friendly.find(id)
         end
       end
 
