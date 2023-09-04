@@ -12,7 +12,7 @@ module Schematics
                  fallbacks: false
 
       extend FriendlyId
-      friendly_id entity.descriptor.slug_name
+      friendly_id entity.descriptor.field_name || :to_param
 
       scope :with_string_translations, -> { includes(:string_translations) }
       scope :with_slugs, -> { includes(:slugs) }
@@ -20,7 +20,7 @@ module Schematics
       def should_generate_new_friendly_id? = true
 
       def normalize_friendly_id(value)
-        value.to_s.parameterize(preserve_case: true)
+        value.to_s.parameterize(preserve_case: friendly_id_config.base.eql?(:to_param))
       end
     end
   end
