@@ -37,7 +37,7 @@ module Schematics
       .tap { _1.write(content) }
       .tap(&:rewind)
 
-    def filename = "#{human_name.dasherize}-#{@resource.slug}.#{extension}"
+    def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
 
     private
 

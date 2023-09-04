@@ -15,7 +15,7 @@ module Schematics
 
     def content = qr_code.as_svg
 
-    def filename = "#{human_name.dasherize}-#{@resource.slug}.#{extension}"
+    def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
 
     private
 
