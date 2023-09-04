@@ -10,3 +10,5 @@
 /schematics-*.gem
 /vendor
 /tmp
+/doc
+/.yardoc
