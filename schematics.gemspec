@@ -104,7 +104,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis', '~> 5.0.7'
   spec.add_dependency 'responders', '~> 3.1.0'
   spec.add_dependency 'rollbar', '~> 3.4.0'
-  spec.add_dependency 'route_translator', '~> 14.0.0'
+  spec.add_dependency 'route_translator', '~> 14.0.1'
   spec.add_dependency 'rqrcode', '~> 2.2.0'
   spec.add_dependency 'rspec-rails', '~> 6.0.3'
   spec.add_dependency 'ruby-graphviz', '~> 1.2.5'
