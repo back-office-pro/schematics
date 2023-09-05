@@ -21,7 +21,11 @@ module Schematics
 
       def default = [entity.default]
 
-      def to_str = super + <<~RUBY
+      def to_str = super.concat(accepts_nested_attributes_for_to_str)
+
+      private
+
+      def accepts_nested_attributes_for_to_str = <<~RUBY
         accepts_nested_attributes_for :#{name}
       RUBY
     end
