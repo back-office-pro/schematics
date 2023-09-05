@@ -35,7 +35,8 @@ class RepositoryGenerator < Rails::Generators::Base
   # :reek:FeatureEnvy
   def http(type, code, url, body = nil)
     uri = URI.parse(url)
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+    options = { open_timeout: 1, read_timeout: 1, write_timeout: 1, use_ssl: true }
+    response = Net::HTTP.start(uri.hostname, uri.port, **options) do |http|
       http.request(
         Net::HTTP
           .const_get(type.to_s.camelize)

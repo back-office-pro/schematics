@@ -14,7 +14,11 @@ module Backend
 
     def cache_store = :redis_cache_store
 
-    def cache_store_options = { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379') }
+    def cache_store_options = {
+      url: ENV.fetch('REDIS_URL', 'redis://localhost:6379'),
+      connect_timeout: 1,
+      timeout: 1
+    }
 
     def profiler_store = Rack::MiniProfiler::RedisStore
 
