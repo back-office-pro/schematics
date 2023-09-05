@@ -284,10 +284,12 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
       .exec(query)
   end
 
-  def database_index = pg_exec("SELECT COUNT(datname) FROM pg_database WHERE datname LIKE '%_#{env}'")
-    .getvalue(0, 0)
-    .to_i
-    .next
+  def database_index
+    pg_exec("SELECT COUNT(datname) FROM pg_database WHERE datname LIKE '%_#{env}'")
+      .getvalue(0, 0)
+      .to_i
+      .next
+  end
 
   def port = DEFAULT_PORT + database_index
 
