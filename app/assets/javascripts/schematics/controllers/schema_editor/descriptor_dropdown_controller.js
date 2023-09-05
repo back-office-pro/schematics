@@ -15,7 +15,7 @@ export default class extends DropdownController {
 
   get inputs () {
     return document
-      .querySelector(`span[data-bs-target="#${this.modalId}"]`)
+      .querySelector(`div[data-bs-target="#${this.modalId}"]`)
       .closest('.schema-editor-entity')
       .querySelectorAll('.entity-field-name')
   }

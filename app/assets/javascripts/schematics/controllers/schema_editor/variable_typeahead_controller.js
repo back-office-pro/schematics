@@ -22,7 +22,7 @@ export default class extends ApplicationController {
   }
 
   get parentElement () {
-    return this.modalId ? document.querySelector(`span[data-bs-target="#${this.modalId}"]`) : this.element
+    return this.modalId ? document.querySelector(`div[data-bs-target="#${this.modalId}"]`) : this.element
   }
 
   get collection () {
