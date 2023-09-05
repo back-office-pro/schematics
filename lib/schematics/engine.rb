@@ -57,7 +57,6 @@ require 'ruby-graphviz'
 require 'ruby-vips'
 require 'sassc-rails'
 require 'schematics/version'
-require 'searchkick'
 require 'slim'
 require 'sprockets/railtie'
 require 'stimulus-rails'
@@ -124,6 +123,7 @@ module Schematics
 
     # Mailer
     config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
+    config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }
 
     # Assets
     config.assets.version = VERSION

@@ -19,9 +19,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def create_postgres_user
     return unless generating?
 
-    ::PG
-      .connect
-      .exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
+    pg_exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
   end
 
   def create_root
@@ -93,9 +91,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def drop_postgres_user
     return unless destroying?
 
-    ::PG
-      .connect
-      .exec("DROP USER #{db_username}")
+    pg_exec("DROP USER #{db_username}")
   end
 
   def generate_schematics
@@ -282,9 +278,13 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   def root_path = File.expand_path('../../..', __dir__)
 
-  def database_index = ::PG
-    .connect
-    .exec("SELECT COUNT(datname) FROM pg_database WHERE datname LIKE '%_#{env}'")
+  def pg_exec(query)
+    ::PG
+      .connect(connect_timeout: 1)
+      .exec(query)
+  end
+
+  def database_index = pg_exec("SELECT COUNT(datname) FROM pg_database WHERE datname LIKE '%_#{env}'")
     .getvalue(0, 0)
     .to_i
     .next

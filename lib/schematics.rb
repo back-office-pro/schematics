@@ -12,7 +12,8 @@ require 'validators/singular_validator'
 require 'zeitwerk'
 require defined?(Rails::Engine) ? 'schematics/engine' : 'debug'
 
-Regexp.timeout = 1.0
+Regexp.timeout = 1
+$stdin.timeout = 1
 
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
