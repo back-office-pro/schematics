@@ -32,11 +32,18 @@ class RepositoryGenerator < Rails::Generators::Base
     .credentials
     .github[:access_token]
 
+  def http_options = {
+    open_timeout: 1,
+    read_timeout: 1,
+    write_timeout: 1,
+    use_ssl: true,
+    max_retries: 5
+  }
+
   # :reek:FeatureEnvy
   def http(type, code, url, body = nil)
     uri = URI.parse(url)
-    options = { open_timeout: 1, read_timeout: 1, write_timeout: 1, use_ssl: true }
-    response = Net::HTTP.start(uri.hostname, uri.port, **options) do |http|
+    response = Net::HTTP.start(uri.hostname, uri.port, **http_options) do |http|
       http.request(
         Net::HTTP
           .const_get(type.to_s.camelize)
