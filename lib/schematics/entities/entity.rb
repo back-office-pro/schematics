@@ -122,11 +122,13 @@ module Schematics
       end
 
       def check_for_association_name_collisions
-        associations.each do |association|
-          association.prefixed = associations
-                                 .excluding(association)
-                                 .any? { _1.source == association.source }
-        end
+        associations
+          .grep_v(Associations::HasAndBelongsToMany)
+          .each do |association|
+            association.prefixed = associations
+                                   .excluding(association)
+                                   .any? { _1.source == association.source }
+          end
       end
 
       def permitted_params = fillable_elements
