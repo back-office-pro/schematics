@@ -7,7 +7,7 @@ module Schematics
         module Template
           class Component < ApplicationComponent
             delegate :entity, :belongs_to, :name, to: :field, private: true
-            delegate :model_class, :fillable_elements, to: :entity, private: true
+            delegate :model_class, :fillable_elements, :icon, to: :entity, private: true
             delegate :human_name, to: :model_class
 
             option :form

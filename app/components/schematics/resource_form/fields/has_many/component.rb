@@ -6,7 +6,7 @@ module Schematics
       module HasMany
         class Component < Fields::Component
           delegate :belongs_to, :entity, to: :field, private: true
-          delegate :model_class, :fillable_elements, to: :entity, private: true
+          delegate :model_class, :fillable_elements, :icon, to: :entity, private: true
           delegate :human_name, to: :model_class
 
           def id = "nested-associations-#{name}"
