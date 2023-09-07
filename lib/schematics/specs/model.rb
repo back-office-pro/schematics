@@ -187,6 +187,14 @@ module Schematics
                   .with_foreign_key(element.column_name)
                   .through(element.through.name.to_sym)
                   .source(element.source.to_sym)
+              when Associations::HasManyNested
+                is_expected.to accept_nested_attributes_for(element.name.to_sym)
+                is_expected
+                  .to have_many(element.name.to_sym)
+                  .class_name(element.class_name)
+                  .with_foreign_key(element.column_name)
+                  .inverse_of(element.inverse_of.to_sym)
+                  .dependent(element.required? ? :destroy : :nullify)
               when Associations::HasMany
                 is_expected
                   .to have_many(element.name.to_sym)
