@@ -42,7 +42,7 @@ module Schematics
 
           if entity.can?(:create)
             api :create, "Create #{entity.name}" do
-              entity.fillable_elements.each do |element|
+              entity.fillable_elements.grep_v(Associations::HasManyNested).each do |element|
                 data "#{entity.name}[#{element.column_name}]",
                      element.open_api_type,
                      default: element.options.default,
@@ -64,7 +64,7 @@ module Schematics
             api :update, "Update #{entity.name}" do
               path :id, ::String unless entity.is_a?(Entities::Singleton)
 
-              entity.fillable_elements.each do |element|
+              entity.fillable_elements.grep_v(Associations::HasManyNested).each do |element|
                 data "#{entity.name}[#{element.column_name}]",
                      element.open_api_type,
                      default: element.options.default,
