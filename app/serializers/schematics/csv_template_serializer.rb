@@ -29,7 +29,7 @@ module Schematics
 
     def elements = entity
       .fillable_elements
-      .grep_v(Associations::HasMany)
+      .grep_v(Associations::HasManyNested)
 
     def generate(col_sep: ',')
       CSV.generate(headers: true, col_sep:) do |file|
