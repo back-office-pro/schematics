@@ -154,10 +154,11 @@ RSpec/EmptyExampleGroup:
   Exclude:
     - spec/*/active_storage/**/*
     - spec/*/core/**/*
-RSpec/FilePath:
+RSpec/SpecFilePathFormat:
   Exclude:
     - spec/requests/active_storage/**/*
     - spec/requests/core/**/*
+    - spec/routing/**/*
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true
