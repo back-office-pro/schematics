@@ -22,7 +22,7 @@ module Core
         rescue StandardError => e
           @errors[::I18n.t('.line', line:)] = e
         ensure
-          import.update!(progress: (line / data.size) * 100)
+          import.reload.update!(progress: (line / data.size) * 100)
         end
         fail!(errors: @errors) if @errors.any?
       end
