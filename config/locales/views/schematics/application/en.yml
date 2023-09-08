@@ -7,6 +7,7 @@ en:
         confirm: Confirm
         destroy: Delete permanently
         loading: Processing...
+        remove: Remove the %{human_name}
       delete:
         subtitle: This action is irreversible
         title: Are you sure?

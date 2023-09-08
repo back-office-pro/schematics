@@ -7,12 +7,13 @@ module Schematics
         module Button
           module Remove
             class Component < ApplicationComponent
-              delegate :name, to: :field, private: true
+              delegate :entity, :name, to: :field, private: true
+              delegate :model_class, to: :entity, private: true
+              delegate :human_name, :gender, to: :model_class
+
               option :field
 
               def wrapper = ".nested-association-#{name}"
-
-              def title = t('.title')
             end
           end
         end
