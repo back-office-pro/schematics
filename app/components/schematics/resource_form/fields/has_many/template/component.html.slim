@@ -1,5 +1,5 @@
 template id=id data-nested-form-target='templates'
-  div.animate__animated.animate__zoomIn class=css_class
+  .animate__animated.animate__zoomIn class=css_class
     = form.fields_for name, model_class.new, child_index: 'NEW_RECORD' do |form|
       = field_set_tag fa_icon(icon, class: 'me-2') + human_name.humanize do
         - elements.each do |field|
