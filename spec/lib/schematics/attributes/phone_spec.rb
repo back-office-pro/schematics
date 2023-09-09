@@ -20,6 +20,7 @@ describe Schematics::Attributes::Phone do
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('phone') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:input_name) { is_expected.to eq('user[phone]') }
   its(:icon) { is_expected.to eq(:phone) }
   its(:default) { is_expected.to match(/\d+/) }
   its(:validators) { is_expected.to eq(phone: { allow_blank: true }) }

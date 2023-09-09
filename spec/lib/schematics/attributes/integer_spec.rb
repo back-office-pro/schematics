@@ -28,6 +28,7 @@ describe Schematics::Attributes::Integer do
   its(:default) { is_expected.to eq(1) }
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq(Integer) }
+  its(:input_name) { is_expected.to eq('entity[price]') }
   its(:unit) { is_expected.to eq('$') }
   its(:precision) { is_expected.to be_zero }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, only_integer: true }) }

@@ -27,6 +27,7 @@ describe Schematics::Attributes::Decimal do
   its(:database_type) { is_expected.to eq('decimal') }
   its(:default) { is_expected.to eq('9.99') }
   its(:column_name) { is_expected.to eq('price') }
+  its(:input_name) { is_expected.to eq('entity[price]') }
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }

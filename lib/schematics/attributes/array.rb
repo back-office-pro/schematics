@@ -21,6 +21,8 @@ module Schematics
 
       def permitted_params = { super => [] }
 
+      def input_name = "#{super}[]"
+
       def search_predicate = :any
 
       def search_data = super

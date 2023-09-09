@@ -20,6 +20,7 @@ describe Schematics::Attributes::UserAgent do
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('user_agent') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:input_name) { is_expected.to eq('session[user_agent]') }
   its(:icon) { is_expected.to eq(:computer) }
 
   describe '#format' do

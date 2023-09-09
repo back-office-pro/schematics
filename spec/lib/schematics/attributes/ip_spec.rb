@@ -18,6 +18,7 @@ describe Schematics::Attributes::Ip do
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ip') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:input_name) { is_expected.to eq('session[ip]') }
   its(:default) { is_expected.to eq('::1') }
   its(:icon) { is_expected.to eq(:network_wired) }
 

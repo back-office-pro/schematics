@@ -36,6 +36,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:class_name) { is_expected.to eq('Permission') }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
+  its(:input_name) { is_expected.to eq('role[permission_ids][]') }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }

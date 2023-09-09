@@ -25,6 +25,7 @@ describe Schematics::Attributes::TimeZone do
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('time_zone') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:input_name) { is_expected.to eq('user[time_zone]') }
   its(:icon) { is_expected.to eq(:clock) }
   its(:default) { is_expected.to eq('Paris') }
   its(:search_column) { is_expected.to eq(:time_zone) }

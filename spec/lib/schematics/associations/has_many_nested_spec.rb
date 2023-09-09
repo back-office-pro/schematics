@@ -32,6 +32,7 @@ describe Schematics::Associations::HasManyNested do
   its(:name) { is_expected.to eq('entities') }
   its(:class_name) { is_expected.to eq('Entity') }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
+  its(:input_name) { is_expected.to eq('entity[entities_attributes]') }
   its(:weight) { is_expected.to eq(3) }
   its('descriptor.name') { is_expected.to eq('type') }
 
