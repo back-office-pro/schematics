@@ -7,6 +7,7 @@ fr:
         confirm: Valider
         destroy: Supprimer définitivement
         loading: Chargement...
+        remove: Supprimer @{f:la |m:le |fv:l''|mv:l''}%{human_name}
       delete:
         subtitle: Cette action est irréversible
         title: Etes-vous sûr ?

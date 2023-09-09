@@ -5,6 +5,8 @@ require 'active_support/core_ext/string/indent'
 module Schematics
   module Associations
     class HasMany < Association
+      def type = 'has_many'
+
       def source = super.pluralize
 
       protected

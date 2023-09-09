@@ -104,60 +104,56 @@ module Schematics
       # :reek:FeatureEnvy
       def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         entity.fillable_elements.each do |element|
-          input = "#{entity.name}[#{element.column_name}]"
           case element
           when Associations::HasAndBelongsToMany
-            select element.inverse_entity.model_class.first.to_s,
-                   from: "#{input}[]",
+            select element.model_class.first.to_s,
+                   from: element.input_name,
                    match: :first
+          when Associations::HasMany
+            # do nothing
           when Attributes::Boolean
-            check(input)
+            check(element.input_name)
           when Attributes::Attachments
-            attach_file "#{input}[]", element.default.first.path
+            attach_file element.input_name, element.default.first.path
           when Attributes::Attachment
-            attach_file input, element.default.path
+            attach_file element.input_name, element.default.path
           when Attributes::RichText
             type = element.required? ? :text : :hidden
             if element.translated?
               available_locales.each do |locale|
-                find_field("#{entity.name}[#{element.column_name}_#{locale}]", type:)
+                find_field("#{entity.table_name}[#{element.column_name}_#{locale}]", type:)
                   .set(element.default)
               end
             else
-              find_field(input, type:).set(element.default)
+              find_field(element.input_name, type:).set(element.default)
             end
           when Attributes::BelongsTo
             select element.inverse_entity.model_class.first.to_s,
-                   from: input,
-                   match: :first
-          when Attributes::Flag
-            select element.format(element.default),
-                   from: "#{input}[]",
+                   from: element.input_name,
                    match: :first
           when Behaviours::Enumerable
             select element.format(element.default),
-                   from: input,
+                   from: element.input_name,
                    match: :first
-          when Attributes::Address
-            find_field(input, type: :select).set(element.default)
+          when Attributes::Address, Attributes::Array
+            find_field(element.input_name, type: :select).set(element.default)
           when Attributes::Digest
             element
               .permitted_params
-              .each { |param| fill_in "#{entity.name}[#{param}]", with: element.default }
+              .each { |param| fill_in "#{entity.table_name}[#{param}]", with: element.default }
           when Attributes::Date
-            fill_in input, with: element.default.to_date
-          when Attributes::Array
-            find_field("#{input}[]", type: :select).set(element.default)
+            fill_in element.input_name, with: element.default.to_date
           when Behaviours::Translatable
             if element.translated?
               available_locales.each do |locale|
-                fill_in "#{entity.name}[#{element.column_name}_#{locale}]", with: element.default
+                fill_in "#{entity.table_name}[#{element.column_name}_#{locale}]",
+                        with: element.default
               end
             else
-              fill_in input, with: element.default
+              fill_in element.input_name, with: element.default
             end
           else
-            fill_in input, with: element.default
+            fill_in element.input_name, with: element.default
           end
         end
       end

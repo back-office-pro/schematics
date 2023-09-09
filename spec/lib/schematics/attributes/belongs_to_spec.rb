@@ -36,7 +36,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
-  its(:inverse_association_type) { is_expected.to eq('has_many') }
+  its(:inverse_association_type) { is_expected.to eq('has_many_nested') }
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq([user: :string_translations]) }
   its(:icon) { is_expected.to eq(:users) }
@@ -44,6 +44,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:weight) { is_expected.to eq(2) }
   its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasMany) }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
+  its(:input_name) { is_expected.to eq('entity[user_id]') }
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }

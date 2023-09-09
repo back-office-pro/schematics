@@ -20,6 +20,7 @@ describe Schematics::Attributes::Locale do
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('key') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:input_name) { is_expected.to eq('translation[key]') }
   its(:icon) { is_expected.to eq(:language) }
 
   describe '.compatible_types' do

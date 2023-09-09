@@ -22,6 +22,7 @@ describe Schematics::Attributes::Color do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:palette) }
   its(:default) { is_expected.to eq('#000000') }
+  its(:input_name) { is_expected.to eq('entity[color]') }
 
   its(:validators) do
     is_expected.to eq(allow_blank: true, format: { with: described_class::REGEX, message: :color })

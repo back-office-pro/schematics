@@ -43,7 +43,7 @@ module Schematics
           if entity.can?(:create)
             api :create, "Create #{entity.name}" do
               entity.fillable_elements.each do |element|
-                data "#{entity.name}[#{element.column_name}]",
+                data element.input_name,
                      element.open_api_type,
                      default: element.options.default,
                      required: element.required?
@@ -65,7 +65,7 @@ module Schematics
               path :id, ::String unless entity.is_a?(Entities::Singleton)
 
               entity.fillable_elements.each do |element|
-                data "#{entity.name}[#{element.column_name}]",
+                data element.input_name,
                      element.open_api_type,
                      default: element.options.default,
                      required: element.required?

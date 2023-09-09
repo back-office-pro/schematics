@@ -9,6 +9,8 @@ module Schematics
 
       def permitted_params = { super => [] }
 
+      def input_name = "#{super}[]"
+
       def format(values)
         Array(values)
           .map(&:to_s)

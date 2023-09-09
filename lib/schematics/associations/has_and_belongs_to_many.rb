@@ -32,6 +32,8 @@ module Schematics
 
       def permitted_params = { super => [] }
 
+      def input_name = "#{super}[]"
+
       def source = inverse_of.pluralize
 
       def inverse_entity = schema.find_entity_by_name(association_type)

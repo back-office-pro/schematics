@@ -20,6 +20,8 @@ module Schematics
         super.second
       ]
 
+      def input_name = "#{super}[]"
+
       def search_data = <<~RUBY
         #{name}: #{name}.map(&:filename).map(&:to_s).join(',')
       RUBY

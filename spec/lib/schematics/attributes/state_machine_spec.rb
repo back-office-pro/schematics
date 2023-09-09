@@ -53,6 +53,7 @@ describe Schematics::Attributes::StateMachine do
   its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('state') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:input_name) { is_expected.to eq('order[state]') }
   its(:icon) { is_expected.to eq(:recycle) }
   its(:default) { is_expected.to eq('pending') }
   its(:search_column) { is_expected.to eq(:state) }

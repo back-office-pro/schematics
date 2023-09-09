@@ -4,7 +4,7 @@ module Schematics
   class ImportJob < ApplicationJob
     def perform(import)
       result = Core::Imports::ImportData.call(import:)
-      return import.update!(state: 'error', import_errors: result.errors) if result.failure?
+      return import.reload.update!(state: 'error', import_errors: result.errors) if result.failure?
 
       import
         .tap(&:state_finished!)

@@ -29,6 +29,7 @@ describe Schematics::Attributes::Attachments do
   its(:preload) { is_expected.to eq([files_attachments: [blob: :variant_records]]) }
   its(:includes) { is_expected.to eq(blob: :variant_records) }
   its(:extension) { is_expected.to eq('png') }
+  its(:input_name) { is_expected.to eq('directory[files][]') }
   its(:search_column) { is_expected.to eq(:files_blobs_filename) }
   its(:search_column_association) { is_expected.to eq('files_blobs') }
   its(:search_predicate) { is_expected.to eq(:i_cont) }

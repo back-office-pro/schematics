@@ -16,6 +16,8 @@ module Schematics
 
       def permitted_params = column_name.to_sym
 
+      def input_name = "#{entity.table_name}[#{column_name}]"
+
       def to_str
         return super unless options.default
 
