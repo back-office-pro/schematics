@@ -2,6 +2,6 @@
 
 module ActiveStorage
   class BlobsController < Schematics::ResourcesController
-    skip_before_action :redirect_to_resource_path, only: :show
+    skip_before_action :redirect_to_resource_path, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
   end
 end
