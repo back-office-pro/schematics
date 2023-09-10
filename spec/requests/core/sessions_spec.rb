@@ -36,5 +36,19 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       it { expect(cookies[:auth_token]).to be_nil }
       its(:body) { is_expected.to be_blank }
     end
+
+    context 'when brute forcing credentials' do
+      let(:email) { 'john.doe@nowhere.com' }
+      let(:password) { 'qwerty' }
+      let(:remember_me) { false }
+      let(:memory_store) { ActiveSupport::Cache.lookup_store(:memory_store) }
+
+      before do
+        allow(Rack::Attack.cache).to receive(:store).and_return(memory_store)
+        10.times { post(url, params:, headers:) }
+      end
+
+      it { is_expected.to have_http_status(:too_many_requests) }
+    end
   end
 end
