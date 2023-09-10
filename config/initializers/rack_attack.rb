@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
-Rack::Attack.safelist_ip('127.0.0.1')
-Rack::Attack.safelist_ip('::1')
-Rack::Attack.throttle('requests by ip', limit: 5, period: 2, &:ip)
-Rack::Attack.throttle('limit logins per email', limit: 6, period: 60) do |req|
-  req.params['session']['email'].to_s.downcase.gsub(/\s+/, '') if req.path == '/login' && req.post?
+module Rack
+  class Attack
+    throttle('req/ip', limit: 300, period: 5.minutes) do |req|
+      req.ip unless req.path.start_with?('/assets')
+    end
+
+    throttle('logins/email', limit: 5, period: 20.seconds) do |req|
+      if req.path == Rails.application.routes.url_helpers.sessions_path && req.post?
+        req.params['session']['email'].to_s.downcase.gsub(/\s+/, '')
+      end
+    end
+
+    throttle('logins/ip', limit: 5, period: 20.seconds) do |req|
+      req.ip if req.path == Rails.application.routes.url_helpers.sessions_path && req.post?
+    end
+  end
 end
