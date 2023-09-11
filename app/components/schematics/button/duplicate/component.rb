@@ -8,6 +8,8 @@ module Schematics
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
+        def form = { class: 'd-inline' }
+
         def render?
           can?(:duplicate, resource)
         end
