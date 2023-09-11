@@ -9,8 +9,6 @@ module Schematics
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
-        def data = { turbo: false }
-
         def form = { class: 'd-inline' }
 
         def params = { session: { email: } }

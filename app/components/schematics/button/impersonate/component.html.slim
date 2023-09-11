@@ -1,3 +1,5 @@
-= button_to sessions_path, method: :post, params:, class: css_classes, form:, data: do
+= button_to sessions_path, method: :post, params:, class: css_classes, form: do
   span.icon = fa_icon :people_arrows_left_right
+  span.icon.d-none = fa_icon :spinner, animation: 'spin'
   span.text.d-none.d-lg-inline = t('.text', user: resource)
+  span.text.d-none = t('schematics.application.button.loading')

@@ -18,8 +18,6 @@ module Schematics
       end
 
       def value = default_password
-
-      def data = { turbo: false, action: 'submit->application#disableWith' }
     end
   end
 end
