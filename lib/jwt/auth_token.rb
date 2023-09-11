@@ -18,7 +18,7 @@ module JWT
 
     def secret = Rails
       .application
-      .secrets
+      .credentials
       .secret_key_base
   end
 end
