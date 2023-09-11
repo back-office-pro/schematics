@@ -10,7 +10,8 @@ class SessionsController < Schematics::ResourcesController
       resource_params:,
       cookies:,
       current_session:,
-      current_ability:
+      current_ability:,
+      omniauth: request.env['omniauth.auth']
     )
     respond_with do |format|
       if result.success?
