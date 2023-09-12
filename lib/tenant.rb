@@ -44,6 +44,8 @@ class Tenant
 
     def domain = 'back-office.pro'
 
+    def organization = domain.parameterize
+
     def human = name.humanize
 
     def index_name(model_name)

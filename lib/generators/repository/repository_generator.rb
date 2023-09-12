@@ -7,7 +7,7 @@ class RepositoryGenerator < Rails::Generators::Base
     http(
       :post,
       201,
-      'https://api.github.com/orgs/back-office-pro/repos',
+      "https://api.github.com/orgs/#{Tenant.organization}/repos",
       { name: Tenant.subdomain, private: true }
     )
   end
@@ -15,7 +15,7 @@ class RepositoryGenerator < Rails::Generators::Base
   def destroy_repository
     return unless destroying?
 
-    http :delete, 204, "https://api.github.com/repos/back-office-pro/#{Tenant.subdomain}"
+    http :delete, 204, "https://api.github.com/repos/#{Tenant.organization}/#{Tenant.subdomain}"
   end
 
   private
