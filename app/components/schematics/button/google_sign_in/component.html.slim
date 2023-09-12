@@ -1,3 +1,4 @@
-= link_to path, data:, class: css_classes do
-  span.icon = fa_icon :google, style: 'brands'
-  span.text = t('.text')
+= form_with url:, method:, data: do
+  = button_tag class: css_classes do
+    span.icon = fa_icon :google, style: 'brands'
+    span.text = t('.text')
