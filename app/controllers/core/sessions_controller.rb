@@ -7,7 +7,7 @@ class SessionsController < Schematics::ResourcesController
 
   def create
     result = Core::Sessions::Create.call(
-      resource_params: request.env['omniauth.auth']&.info || resource_params,
+      resource_params:,
       cookies:,
       current_session:,
       current_ability:
@@ -32,4 +32,8 @@ class SessionsController < Schematics::ResourcesController
   def i18n_title_path = 'sessions'
 
   def permitted_params = %i[email password remember_me]
+
+  def resource_params
+    request.env['omniauth.auth']&.info || super
+  end
 end
