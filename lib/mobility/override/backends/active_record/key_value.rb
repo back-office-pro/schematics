@@ -15,7 +15,7 @@ module Mobility
                            as: belongs_to,
                            class_name: class_name.name,
                            inverse_of: belongs_to,
-                           autosave: false,
+                           autosave: true,
                            dependent: :destroy
           end
         end
