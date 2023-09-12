@@ -113,7 +113,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'searchkick', '~> 5.3.0'
   spec.add_dependency 'shoulda-callback-matchers', '~> 1.1.4'
   spec.add_dependency 'shoulda-matchers', '~> 5.3.0'
-  spec.add_dependency 'sidekiq', '~> 7.1.2'
+  spec.add_dependency 'sidekiq', '~> 7.1.3'
   spec.add_dependency 'sidekiq-scheduler', '~> 5.0.3'
   spec.add_dependency 'slim', '~> 5.1.1'
   spec.add_dependency 'sprockets-rails', '~> 3.4.2'
