@@ -7,12 +7,11 @@ module Core
       include Schematics::Interactable
 
       delegate :authenticate, :confirmed?, to: :user, private: true
-      delegate :cannot?, to: :current_ability, private: true
+      delegate :can?, to: :current_ability, private: true
       delegate :cookies,
                :current_session,
                :current_ability,
                :resource_params,
-               :omniauth,
                to: :context,
                private: true
 
@@ -29,10 +28,12 @@ module Core
       private
 
       def fail!(message: '.failure')
-        super if cannot?(:impersonate, user) || !omniauth
+        super unless omniauth? || can?(:impersonate, user)
       end
 
-      def email = resource_params[:email] || omniauth.info.email
+      def omniauth?
+        resource_params.is_a?(OmniAuth::AuthHash::InfoHash)
+      end
 
       def password
         context.password || resource_params[:password]
@@ -43,7 +44,9 @@ module Core
         .cast(resource_params[:remember_me])
 
       def user
-        context.resource || ::User.find_by(email:) || Schematics::Guest::User.new
+        context.resource ||
+          ::User.find_by(email: resource_params[:email]) ||
+          Schematics::Guest::User.new
       end
     end
   end

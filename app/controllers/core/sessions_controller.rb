@@ -7,11 +7,10 @@ class SessionsController < Schematics::ResourcesController
 
   def create
     result = Core::Sessions::Create.call(
-      resource_params:,
+      resource_params: request.env['omniauth.auth']&.info || resource_params,
       cookies:,
       current_session:,
-      current_ability:,
-      omniauth: request.env['omniauth.auth']
+      current_ability:
     )
     respond_with do |format|
       if result.success?
