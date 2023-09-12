@@ -8,9 +8,7 @@ module Schematics
 
         def data = { turbo: false }
 
-        def method = :post
-
-        def url = '/auth/google_oauth2'
+        def path = '/auth/google_oauth2'
       end
     end
   end
