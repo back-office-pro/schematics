@@ -28,11 +28,11 @@ module Core
       private
 
       def fail!(message: '.failure')
-        super unless omniauth? || can?(:impersonate, user)
+        super unless omniauthenticated? || can?(:impersonate, user)
       end
 
-      def omniauth?
-        resource_params.is_a?(OmniAuth::AuthHash::InfoHash)
+      def omniauthenticated?
+        resource_params.is_a?(OmniAuth::AuthHash::InfoHash) && user.id
       end
 
       def password
