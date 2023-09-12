@@ -10,6 +10,7 @@ RSpec.describe Schematics::Guest::User do
   let(:permissions) { [Permission.new(action: 'create', model: 'User')] }
 
   it { is_expected.not_to be_admin }
+  it { is_expected.to be_confirmed }
 
   its(:id) { is_expected.to be_nil }
   its(:user_groups) { is_expected.to be_empty }
@@ -18,4 +19,5 @@ RSpec.describe Schematics::Guest::User do
   its(:locale) { is_expected.to eq('en') }
   its(:time_zone) { is_expected.to eq('UTC') }
   its(:role) { is_expected.to be_a(Role) }
+  its(:authenticate) { is_expected.to be_falsy }
 end
