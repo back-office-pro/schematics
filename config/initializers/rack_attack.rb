@@ -2,18 +2,25 @@
 
 module Rack
   class Attack
+    class << self
+      def sessions_paths = ::I18n
+        .available_locales
+        .map { ::Rails.application.routes.url_helpers.public_send(:"sessions_#{_1}_path") }
+        .uniq
+    end
+
     throttle('req/ip', limit: 300, period: 5.minutes) do |req|
       req.ip unless req.path.start_with?('/assets')
     end
 
     throttle('logins/email', limit: 5, period: 20.seconds) do |req|
-      if req.path == Rails.application.routes.url_helpers.sessions_path && req.post?
+      if sessions_paths.include?(req.path) && req.post?
         req.params['session']['email'].to_s.downcase.gsub(/\s+/, '')
       end
     end
 
     throttle('logins/ip', limit: 5, period: 20.seconds) do |req|
-      req.ip if req.path == Rails.application.routes.url_helpers.sessions_path && req.post?
+      req.ip if sessions_paths.include?(req.path) && req.post?
     end
   end
 end
