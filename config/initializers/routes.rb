@@ -6,6 +6,7 @@ Rails.application.routes.prepend do
   mount Schematics::Engine, at: '/'
   mount Tenant.backend.engine, at: '/backend'
   localized do
+    get 'auth/:provider/callback', to: 'sessions#create', as: :omniauth_login
     get 'login', to: 'sessions#new', as: :login
     Tenant
       .schema

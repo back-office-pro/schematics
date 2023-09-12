@@ -6,8 +6,8 @@ module Core
     class Create
       include Schematics::Interactable
 
-      delegate :authenticate, to: :user, allow_nil: true, private: true
-      delegate :cannot?, to: :current_ability, private: true
+      delegate :authenticate, :confirmed?, to: :user, private: true
+      delegate :can?, to: :current_ability, private: true
       delegate :cookies,
                :current_session,
                :current_ability,
@@ -16,7 +16,7 @@ module Core
                private: true
 
       def call
-        fail!(message: '.unconfirmed') if user && !user.confirmed?
+        fail!(message: '.unconfirmed') unless confirmed?
         fail! unless authenticate(password) # TODO: use authenticate_by when upgrading to Rails 7.1
 
         session = current_session.login!(user)
@@ -28,7 +28,11 @@ module Core
       private
 
       def fail!(message: '.failure')
-        super if cannot?(:impersonate, user)
+        super unless omniauthenticated? || can?(:impersonate, user)
+      end
+
+      def omniauthenticated?
+        resource_params.is_a?(OmniAuth::AuthHash::InfoHash) && user.id
       end
 
       def password
@@ -40,7 +44,9 @@ module Core
         .cast(resource_params[:remember_me])
 
       def user
-        context.resource || ::User.find_by(email: resource_params[:email])
+        context.resource ||
+          ::User.find_by(email: resource_params[:email]) ||
+          Schematics::Guest::User.new
       end
     end
   end
