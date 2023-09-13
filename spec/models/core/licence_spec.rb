@@ -5,7 +5,9 @@ require 'rails_helper'
 RSpec.describe Licence do
   include Schematics::Specs::Model
 
-  let(:metadata) { { users: 3, api_keys: 2, databases: 1, storage: 1, entities: 1 } }
+  let(:metadata) do
+    { users: 3, api_keys: 2, databases: 1, storage: 1, entities: 1, support: 1 }
+  end
 
   before { record.metadata = metadata }
 
@@ -13,6 +15,8 @@ RSpec.describe Licence do
   it { is_expected.not_to be_quota_storage_exceeded }
   it { is_expected.not_to be_quota_users_exceeded }
   it { is_expected.not_to be_quota_api_keys_exceeded }
+  it { is_expected.not_to be_email_support }
+  it { is_expected.to be_live_support }
 
   its(:quota_entities_percentage) { is_expected.to be_zero }
   its(:quota_storage_percentage) { is_expected.to be_zero }
@@ -28,8 +32,10 @@ RSpec.describe Licence do
   its(:quota) { is_expected.to have_attributes(**metadata) }
 
   describe 'load!' do
-    let(:new_metadata) { { users: 1000, api_keys: 100, databases: 3, storage: 100, entities: 100 } }
     let(:context) { double('context', data: { metadata: new_metadata }) } # rubocop:disable RSpec/VerifiedDoubles
+    let(:new_metadata) do
+      { users: 1000, api_keys: 100, databases: 3, storage: 100, entities: 100, support: 1 }
+    end
 
     before do
       allow(described_class::GATEWAY::Fetch).to receive(:call).and_return(context)
