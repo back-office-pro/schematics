@@ -161,7 +161,9 @@ RSpec/SpecFilePathFormat:
     - spec/routing/**/*
 RSpec/DescribeClass:
   Exclude:
+    - spec/config/**/*
     - spec/db/migrate/*
+    - spec/generators/app/templates/**/*
     - spec/lib/templates/**/*
 # rubocop-rails
 Rails/SaveBang:
