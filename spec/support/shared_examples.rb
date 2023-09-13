@@ -19,10 +19,10 @@ RSpec.shared_examples 'a monkey patched class method' do |method_name, checksum|
   it { is_expected.to eq(checksum), "#{method} original source has changed" }
 end
 
-RSpec.shared_examples 'an overridden template file' do |dependency, path, checksum|
+RSpec.shared_examples 'an overridden file' do |dependency, path, checksum|
   subject { Digest::SHA256.file(full_path) }
 
   let(:full_path) { Gem.loaded_specs[dependency.to_s].full_gem_path + path }
 
-  it { is_expected.to eq(checksum), "#{full_path} original template has changed" }
+  it { is_expected.to eq(checksum), "#{full_path} original file has changed" }
 end
