@@ -5,7 +5,9 @@ module Schematics
     class Url < Citext
       def available_options = super.excluding(Options::Translated)
 
-      def default = "https://www.#{SecureRandom.base58}.com"
+      def default = ::URI::HTTPS
+        .build(host: "www.#{SecureRandom.base58}.com")
+        .to_s
 
       def icon = :wifi
 

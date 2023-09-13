@@ -4,18 +4,18 @@ class RepositoryGenerator < Rails::Generators::Base
   def generate_repository
     return unless generating?
 
-    http(
-      :post,
-      201,
-      "https://api.github.com/orgs/#{Tenant.organization}/repos",
-      { name: Tenant.subdomain, private: true }
-    )
+    http :post,
+         201,
+         URI::HTTPS.build(host:, path: "/orgs/#{Tenant.organization}/repos"),
+         { name: Tenant.subdomain, private: true }
   end
 
   def destroy_repository
     return unless destroying?
 
-    http :delete, 204, "https://api.github.com/repos/#{Tenant.organization}/#{Tenant.subdomain}"
+    http :delete,
+         204,
+         URI::HTTPS.build(host:, path: "/repos/#{Tenant.organization}/#{Tenant.subdomain}")
   end
 
   private
@@ -27,6 +27,8 @@ class RepositoryGenerator < Rails::Generators::Base
   def destroying?
     behavior == :revoke
   end
+
+  def host = 'api.github.com'
 
   def access_token = Schematics::Engine
     .credentials
@@ -41,8 +43,7 @@ class RepositoryGenerator < Rails::Generators::Base
   }
 
   # :reek:FeatureEnvy
-  def http(type, code, url, body = nil)
-    uri = URI.parse(url)
+  def http(type, code, uri, body = nil)
     response = Net::HTTP.start(uri.hostname, uri.port, **http_options) do |http|
       http.request(
         Net::HTTP

@@ -13,7 +13,9 @@ module Schematics
         .with_string_translations
         .current
 
-      def website_url = "https://www.#{domain}"
+      def website_url = ::URI::HTTPS
+        .build(host: "www.#{domain}")
+        .to_s
 
       def css_classes = %w[text-decoration-none]
     end
