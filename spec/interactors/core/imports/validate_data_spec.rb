@@ -12,7 +12,7 @@ RSpec.describe Core::Imports::ValidateData do
       let(:data) do
         {
           1 => {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: :en,
@@ -22,7 +22,7 @@ RSpec.describe Core::Imports::ValidateData do
             role:
           },
           2 => {
-            email: 'jane.doe@back-office.pro',
+            email: 'jane.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'Jane',
             locale: :fr,
@@ -36,7 +36,7 @@ RSpec.describe Core::Imports::ValidateData do
       let(:expected_data) do
         [
           {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: 'en',
@@ -48,7 +48,7 @@ RSpec.describe Core::Imports::ValidateData do
             time_zone: 'UTC'
           },
           {
-            email: 'jane.doe@back-office.pro',
+            email: 'jane.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'Jane',
             locale: 'fr',
@@ -71,7 +71,7 @@ RSpec.describe Core::Imports::ValidateData do
       let(:data) do
         {
           1 => {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: :en,
@@ -95,7 +95,7 @@ RSpec.describe Core::Imports::ValidateData do
       let(:expected_data) do
         [
           {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: 'en',

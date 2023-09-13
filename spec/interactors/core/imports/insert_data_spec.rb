@@ -12,7 +12,7 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: 'en',
@@ -24,7 +24,7 @@ RSpec.describe Core::Imports::InsertData do
             time_zone: 'UTC'
           },
           {
-            email: 'jane.doe@back-office.pro',
+            email: 'jane.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'Jane',
             locale: 'fr',
@@ -53,7 +53,7 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: 'en',
@@ -65,7 +65,7 @@ RSpec.describe Core::Imports::InsertData do
             time_zone: 'UTC'
           },
           {
-            email: 'john.doe@back-office.pro',
+            email: 'john.doe@somewhere.com',
             first_name: 'Doe',
             last_name: 'John',
             locale: 'en',
@@ -82,7 +82,7 @@ RSpec.describe Core::Imports::InsertData do
       it { is_expected.to be_a_failure }
 
       its(:errors) do
-        is_expected.to eq('Error' => 'Email john.doe@back-office.pro has already been taken')
+        is_expected.to eq('Error' => 'Email john.doe@somewhere.com has already been taken')
       end
     end
   end
