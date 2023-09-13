@@ -18,6 +18,7 @@
 require 'support/simplecov' if RSpec.configuration.files_to_run.size > 200
 require 'support/i18n'
 require 'support/overrides'
+require 'support/shared_examples'
 require 'rspec/its'
 
 RSpec.configure do |config|
