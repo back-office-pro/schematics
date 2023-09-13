@@ -25,7 +25,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   # Active Support
-  config.active_support.deprecation = :log
+  config.active_support.deprecation = :raise
   config.active_support.disallowed_deprecation = :raise
   config.active_support.disallowed_deprecation_warnings = []
 
