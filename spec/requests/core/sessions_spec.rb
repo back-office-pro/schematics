@@ -20,6 +20,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
 
       before { do_request }
 
+      after { cookies.delete(:auth_token) }
+
       it { is_expected.to have_http_status(:success) }
       it { expect(json_response).to eq('auth_token' => auth_token) }
       it { expect(cookies[:auth_token]).not_to be_nil }
@@ -49,6 +51,37 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       end
 
       it { is_expected.to have_http_status(:too_many_requests) }
+    end
+
+    context 'when login with an existing google account' do
+      let(:email) { 'john.doe@nowhere.com' }
+      let(:password) { nil }
+      let(:remember_me) { nil }
+      let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+
+      before do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new({ info: { email: } })
+        do_request
+      end
+
+      it { is_expected.to have_http_status(:success) }
+      it { expect(json_response).to eq('auth_token' => auth_token) }
+      it { expect(cookies[:auth_token]).to be_nil }
+    end
+
+    context 'when login with a non existing google account' do
+      let(:email) { 'jane.doe@nowhere.com' }
+      let(:password) { nil }
+      let(:remember_me) { nil }
+
+      before do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new({ info: { email: } })
+        do_request
+      end
+
+      it { is_expected.to have_http_status(:unauthorized) }
+      it { expect(cookies[:auth_token]).to be_nil }
+      its(:body) { is_expected.to be_blank }
     end
   end
 end
