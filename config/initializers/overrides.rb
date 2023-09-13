@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_record/connection_adapters/abstract/schema_definitions'
-require 'active_record/migration'
 require 'active_record/override/connection_adapters/table_definition'
 require 'active_record/override/generators/migration_generator'
 require 'active_storage/service/tenant_s3_service'
