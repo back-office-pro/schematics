@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Password Resets' do
+RSpec.describe 'PasswordResets' do
   include_context 'with unauthenticated user'
 
   describe 'POST #create' do

@@ -159,6 +159,9 @@ RSpec/SpecFilePathFormat:
     - spec/requests/active_storage/**/*
     - spec/requests/core/**/*
     - spec/routing/**/*
+RSpec/DescribeClass:
+  Exclude:
+    - spec/lib/templates/**/*
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true
