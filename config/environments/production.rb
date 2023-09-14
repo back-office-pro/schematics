@@ -11,6 +11,7 @@ Rails.application.configure do
   # Security
   config.force_ssl = Tenant.ssl?
   config.require_master_key = true
+  config.hosts << Tenant.host if Tenant.ssl?
 
   # Assets
   config.assets.compile = false
