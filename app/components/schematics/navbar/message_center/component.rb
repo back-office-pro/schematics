@@ -5,12 +5,11 @@ module Schematics
     module MessageCenter
       class Component < ApplicationComponent
         LIMIT = 10
+        delegate :icon, to: '::Message.entity'
 
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count
         end
-
-        def icon = :envelope
 
         def icon_class
           return 'fa-lg' if count.zero?

@@ -146,7 +146,7 @@
     "id": "777b2d2a-e701-4380-bae2-401d4afde826",
     "name": "message",
     "options": {
-      "icon": "inbox",
+      "icon": "envelope",
       "descriptor": "subject"
     },
     "associations": [
