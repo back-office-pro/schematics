@@ -1,0 +1,16 @@
+.dropdown.d-inline-block
+  a#support-dropdown.dropdown-toggle.text-decoration-none aria-expanded='false' data-bs-toggle='dropdown' role='button'
+    = t('.text')
+  .dropdown-menu.shadow-sm.animate__animated.animate__zoomIn.p-0.mb-2 aria-labelledby='support-dropdown'
+    h5.dropdown-header.bg-body-tertiary.fw-bold = t('.title')
+    = link_to documentation_url, class: 'dropdown-item' do
+      = fa_icon Documentation.entity.icon, class: 'fa-fw me-3'
+      = t('.documentation')
+    - if email_support?
+      = mail_to support_email, class: 'dropdown-item' do
+        = fa_icon Message.entity.icon, class: 'fa-fw me-3'
+        = t('.support')
+    - if live_support?
+      .dropdown-item data-controller='support' data-action='click->support#open' role='button'
+        = fa_icon Meeting.entity.icon, class: 'fa-fw me-3'
+        = t('.support')

@@ -8,6 +8,7 @@ Rails.configuration.content_security_policy do |policy|
   policy.object_src :none
   policy.script_src :self, :https
   policy.style_src :self, :https, :unsafe_inline
+  policy.connect_src :self, :https, :wss
 end
 
 Rails.configuration.content_security_policy_nonce_directives = %w[script-src]

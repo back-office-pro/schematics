@@ -5,10 +5,11 @@ import 'controllers'
 import 'chartkick'
 import 'Chart.bundle'
 import { application } from 'controllers/application'
+import { Crisp } from 'crisp-sdk-web'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global matchMedia, environment, mapsApiKey, rollbarClientKey, Chartkick */
+/* global matchMedia, environment, crispClientId, mapsApiKey, rollbarClientKey, Chartkick */
 
 const setTheme = () => {
   document
@@ -56,7 +57,9 @@ application.handleError = (error, message, detail = {}) => {
   rollbar.error(error)
 }
 
+Crisp.configure(crispClientId, { autoload: false })
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
+
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', setNavbarScrolled)
 document.addEventListener('turbo:before-fetch-request', setTurboHeaders)

@@ -30,6 +30,12 @@ module Schematics
         .to_json
         .html_safe # rubocop:disable Rails/OutputSafety
 
+      def crisp_client_id = credentials
+        .crisp
+        .fetch(:client_id)
+        .to_json
+        .html_safe # rubocop:disable Rails/OutputSafety
+
       def routes = {
         comparisons: comparisons_path,
         dashboardReadNotifications: dashboard_read_notifications_path,

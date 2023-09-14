@@ -26,6 +26,7 @@ pin '@github/hotkey', to: '@github/hotkey/dist/index.js', preload: true
 pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.8/dist/esm/index.js', preload: true
 pin 'autosize', to: 'autosize/dist/autosize.esm.js', preload: true
 pin 'bootstrap', to: 'bootstrap/dist/js/bootstrap.esm.js', preload: true
+pin 'crisp-sdk-web', to: 'crisp-sdk-web/dist/crisp.esm.js', preload: true
 pin 'file-saver', to: 'file-saver-es/src/FileSaver.js', preload: true
 pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.js', preload: true
 pin 'pluralize', to: 'pluralize-esm/dist/index.js', preload: true
