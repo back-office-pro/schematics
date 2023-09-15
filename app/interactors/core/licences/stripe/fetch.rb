@@ -42,7 +42,7 @@ module Core
           state: subscription_state,
           plan: product_name,
           metadata: product_metadata
-        }
+        }.compact
 
         def subscription_state
           return :inactive unless subscription_id
