@@ -28,6 +28,7 @@ en:
       task:
         abort: Abort
         complete: Complete
+        reopen: Reopen
         start: Start
     models:
       task:

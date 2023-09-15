@@ -1043,6 +1043,16 @@
                 "in_progress"
               ],
               "to": "aborted"
+            },
+            {
+              "id": "0ea2cb5d-cd58-4dc1-816b-9df297c45ef5",
+              "name": "reopen",
+              "icon": "arrow_rotate_left",
+              "from": [
+                "completed",
+                "aborted"
+              ],
+              "to": "pending"
             }
           ]
         }

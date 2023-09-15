@@ -28,6 +28,7 @@ it:
       task:
         abort: Annullare
         complete: Completare
+        reopen: Riaprire
         start: Iniziare
     models:
       task:
