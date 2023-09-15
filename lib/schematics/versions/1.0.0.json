@@ -1328,7 +1328,7 @@
         "type": "enum",
         "options": {
           "readonly": true,
-          "default": "premium",
+          "default": "basic",
           "values": [
             "basic",
             "pro",
