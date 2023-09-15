@@ -122,11 +122,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sprockets-rails', '~> 3.4.2'
   spec.add_dependency 'stimulus-rails', '~> 1.2.2'
   spec.add_dependency 'strip_attributes', '~> 1.13.0'
-  spec.add_dependency 'stripe', '~> 9.2.0'
+  spec.add_dependency 'stripe', '~> 9.3.0'
   spec.add_dependency 'terser', '~> 1.1.18'
   spec.add_dependency 'turbo-rails', '~> 1.4.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.1.4'
-  spec.add_dependency 'view_component', '~> 3.5.0'
+  spec.add_dependency 'view_component', '~> 3.6.0'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
