@@ -17,6 +17,7 @@ en:
     events:
       migration:
         migrate: Migrate
+        rollback: Rollback
     models:
       migration:
         gender: female

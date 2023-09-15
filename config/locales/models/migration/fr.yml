@@ -17,6 +17,7 @@ fr:
     events:
       migration:
         migrate: Migrer
+        rollback: Revenir en arrière
     models:
       migration:
         gender: female
