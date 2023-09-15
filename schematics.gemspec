@@ -61,7 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
   spec.add_dependency 'dry-transformer', '~> 1.0.1'
   spec.add_dependency 'easy_translate', '~> 0.5.1'
-  spec.add_dependency 'elasticsearch', '~> 7.17.8'
+  spec.add_dependency 'elasticsearch', '>= 7.17.8', '< 8.11.0'
   spec.add_dependency 'enummer', '~> 1.0.3'
   spec.add_dependency 'ferrum', '~> 0.14.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
