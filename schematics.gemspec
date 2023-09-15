@@ -64,7 +64,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'elasticsearch', '~> 7.17.8'
   spec.add_dependency 'enummer', '~> 1.0.3'
   spec.add_dependency 'ferrum', '~> 0.14.0'
-  spec.add_dependency 'friendly_id', '~> 5.4.2'
+  spec.add_dependency 'friendly_id', '>= 5.4.2', '< 5.6.0'
   spec.add_dependency 'friendly_id-mobility', '~> 1.0.4'
   spec.add_dependency 'git', '~> 1.18.0'
   spec.add_dependency 'good_job', '~> 3.18.2'
