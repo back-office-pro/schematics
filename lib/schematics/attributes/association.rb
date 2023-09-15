@@ -97,6 +97,8 @@ module Schematics
       def allowed_association_types = entity
         .schema
         .entities
+        .reject(&:hidden?)
+        .reject(&:existing?)
         .map(&:name)
         .sort
 

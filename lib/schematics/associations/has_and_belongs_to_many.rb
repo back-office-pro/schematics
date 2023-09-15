@@ -8,7 +8,7 @@ module Schematics
       include Behaviours::Fillable
 
       delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
-      delegate :options, to: :belongs_to
+      delegate :options, :allowed_association_types, to: :belongs_to
 
       validates :association_type, inclusion: { in: :allowed_association_types }
 
@@ -39,12 +39,6 @@ module Schematics
       def inverse_entity = schema.find_entity_by_name(association_type)
 
       def association_type = super.singularize
-
-      def allowed_association_types = entity
-        .schema
-        .entities
-        .map(&:name)
-        .sort
 
       protected
 
