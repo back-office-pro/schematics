@@ -6,6 +6,7 @@ module Schematics
       super
       can(:revert, Version, user:)
       cannot :revert, Version, object: nil
+      cannot :revert, Version.where(item: ::Migration.finished)
       user
         .role
         .permissions
