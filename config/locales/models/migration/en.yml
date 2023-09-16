@@ -14,6 +14,7 @@ en:
           finished: Finished
           in_progress: In progress
           pending: Pending
+          rollbacking: Rollbacking
     events:
       migration:
         migrate: Migrate
