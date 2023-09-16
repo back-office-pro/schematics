@@ -6,6 +6,7 @@ module Schematics
       super
       cannot :import, ::Migration
       cannot :update, ::Migration.finished
+      cannot :rollback, ::Migration.excluding(::Migration.current)
       cannot :create, ::Migration if ::Migration.any? && !::Migration.last.finished?
       cannot :archive, ::Migration.current if ::Migration.current
       cannot %i[archive update], ::Migration.in_progress
