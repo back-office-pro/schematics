@@ -26,7 +26,7 @@ module Schematics
       def layout
         return :inline if turbo?
 
-        :default
+        :vertical
       end
     end
   end
