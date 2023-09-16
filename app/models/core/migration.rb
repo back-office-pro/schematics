@@ -5,7 +5,6 @@ class Migration < Schematics::ApplicationRecord
   serialize :data, Schematics::Schema
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
-  delegate :data, to: :previous_migration, prefix: true
   delegate :build_commands,
            :clean_commands,
            :old_entities,
@@ -29,11 +28,13 @@ class Migration < Schematics::ApplicationRecord
   end
 
   def after_rollback_event
-    Schematics::MigrateSchemaJob.wait_for(previous_migration)
-    Schematics::MigrateSchemaJob.perform_later(previous_migration)
+    @migrator = Schematics::Migrator.new(previously_migrated_schema, data)
+    after_migrate_event
   end
 
-  memoize def migrator = Schematics::Migrator.new(data, previous_migration_data)
+  def migrator
+    @migrator ||= Schematics::Migrator.new(data, previously_migrated_schema)
+  end
 
   def to_yaml = { one: { state: 'finished', data_version:, data: data.as_json } }
     .deep_stringify_keys
@@ -41,10 +42,11 @@ class Migration < Schematics::ApplicationRecord
 
   private
 
-  def previous_migration = self
+  def previously_migrated_schema = self
     .class
     .finished
     .excluding(self)
     .order(created_at: :desc)
-    .find_by(created_at: ..created_at) || self.class.new(data: Schematics::Schema.new)
+    .find_by(created_at: ..created_at)
+    &.data || Schematics::Schema.new
 end
