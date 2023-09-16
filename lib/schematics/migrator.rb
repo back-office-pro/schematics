@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  # :reek:DataClump :reek:MissingSafeMethod
+  # :reek:DataClump
   class Migrator # rubocop:disable Metrics/ClassLength
     def initialize(new_schema, current_schema = nil)
       @new_schema = new_schema
       @current_schema = current_schema
-    end
-
-    def reverse!
-      @new_schema, @current_schema = @current_schema, @new_schema
     end
 
     def new_entities = build_commands
