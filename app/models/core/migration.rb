@@ -28,7 +28,7 @@ class Migration < Schematics::ApplicationRecord
     Schematics::MigrateSchemaJob.perform_later(self)
   end
 
-  def after_rollback
+  def after_rollback_event
     Schematics::MigrateSchemaJob.wait_for(previous_migration)
     Schematics::MigrateSchemaJob.perform_later(previous_migration)
   end
