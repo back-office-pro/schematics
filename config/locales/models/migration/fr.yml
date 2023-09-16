@@ -14,7 +14,7 @@ fr:
           finished: Terminée
           in_progress: En cours
           pending: En attente
-          rollbacking: Retour en arrière
+          rollbacking: Retour en arrière en cours
     events:
       migration:
         migrate: Migrer

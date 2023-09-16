@@ -14,7 +14,7 @@ it:
           finished: Finita
           in_progress: In corso
           pending: In sospeso
-          rollbacking: Tornare indietro
+          rollbacking: Rollback in corso
     events:
       migration:
         migrate: Migrare
