@@ -37,7 +37,7 @@ class Migration < Schematics::ApplicationRecord
 
   def finalize!(failure)
     return state_error! if failure
-    return state_pending! if rollbacking?
+    return update!(state: 'pending', progress: 0) if rollbacking?
 
     state_finished!
   end
