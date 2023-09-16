@@ -28,13 +28,10 @@ class Migration < Schematics::ApplicationRecord
   end
 
   def after_rollback_event
-    @migrator = Schematics::Migrator.new(previously_migrated_schema, data)
-    after_migrate_event
+    migrator.reverse! && after_migrate_event
   end
 
-  def migrator
-    @migrator ||= Schematics::Migrator.new(data, previously_migrated_schema)
-  end
+  memoize def migrator = Schematics::Migrator.new(data, previously_migrated_schema)
 
   def to_yaml = { one: { state: 'finished', data_version:, data: data.as_json } }
     .deep_stringify_keys
