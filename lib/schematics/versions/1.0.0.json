@@ -911,6 +911,7 @@
             "pending",
             "in_progress",
             "finished",
+            "rollbacking",
             "error"
           ],
           "events": [
@@ -929,7 +930,7 @@
               "name": "rollback",
               "icon": "arrow_rotate_left",
               "from": "finished",
-              "to": "pending"
+              "to": "rollbacking"
             }
           ]
         }
