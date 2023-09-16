@@ -35,7 +35,7 @@ module Schematics
         @color&.to_sym || :primary
       end
 
-      def action = :"after_#{name}"
+      def action = :"after_#{name}_event"
 
       def human
         translate(

@@ -27,14 +27,14 @@ describe Schematics::Options::StateMachineEvent do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_valid }
 
-  its(:action) { is_expected.to eq(:after_complete) }
+  its(:action) { is_expected.to eq(:after_complete_event) }
   its(:icon) { is_expected.to eq(:check) }
   its(:color) { is_expected.to eq(:success) }
   its(:human) { is_expected.to eq('Complete') }
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      event :complete, after_commit: :after_complete do
+      event :complete, after_commit: :after_complete_event do
         transitions from: [:in_progress], to: :completed
       end
     RUBY
@@ -42,7 +42,7 @@ describe Schematics::Options::StateMachineEvent do
 
   its(:trigger_to_str) do
     is_expected.to eq <<~RUBY
-      def after_complete; end
+      def after_complete_event; end
     RUBY
   end
 

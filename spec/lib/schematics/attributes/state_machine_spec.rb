@@ -84,23 +84,23 @@ describe Schematics::Attributes::StateMachine do
         state :pending, initial: true
         state :closed
         state :refused
-        event :close, after_commit: :after_close do
+        event :close, after_commit: :after_close_event do
           transitions from: [:pending], to: :closed
         end
-        event :refuse, after_commit: :after_refuse do
+        event :refuse, after_commit: :after_refuse_event do
           transitions from: [:pending], to: :refused
         end
-        event :reopen, after_commit: :after_reopen do
+        event :reopen, after_commit: :after_reopen_event do
           transitions from: [:closed, :refused], to: :pending
         end
       end
-      def after_close
+      def after_close_event
         self.in_stock = false
         save!
       rescue StandardError
       end
-      def after_refuse; end
-      def after_reopen
+      def after_refuse_event; end
+      def after_reopen_event
         self.in_stock = true
         save!
       rescue StandardError

@@ -6,14 +6,14 @@ describe Schematics::Trigger do
   before { allow(SecureRandom).to receive(:uuid).and_return('abcd-123e') }
 
   context 'when trigger is coming from state machine' do
-    let(:action) { 'after_close' }
+    let(:action) { 'after_close_event' }
     let(:callback) { '$in_stock = true' }
 
-    its(:method_name) { is_expected.to eq(:after_close_abcd_123e) }
+    its(:method_name) { is_expected.to eq(:after_close_event_abcd_123e) }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        def after_close
+        def after_close_event
           self.in_stock = true
           save!
         rescue StandardError

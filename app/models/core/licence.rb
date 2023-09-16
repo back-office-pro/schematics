@@ -11,9 +11,9 @@ class Licence < Schematics::ApplicationRecord
     end
   end
 
-  def after_enable = GATEWAY::Enable.call
+  def after_enable_event = GATEWAY::Enable.call
 
-  def after_cancel = GATEWAY::Cancel.call
+  def after_cancel_event = GATEWAY::Cancel.call
 
   def entities_size = Tenant
     .schema

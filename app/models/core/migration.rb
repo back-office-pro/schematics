@@ -22,7 +22,7 @@ class Migration < Schematics::ApplicationRecord
     def core = new(data: Tenant.schema.as_json, data_version: current_data_version)
   end
 
-  def after_migrate
+  def after_migrate_event
     Schematics::MigrateSchemaJob.wait_for(self)
     Schematics::MigrateSchemaJob.perform_later(self)
   end
