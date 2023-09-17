@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Button
+    module BackHome
+      class Component < ApplicationComponent
+        delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
+
+        def icon = :house
+
+        def css_classes = %w[btn btn-primary btn-sm btn-icon-split me-1]
+      end
+    end
+  end
+end

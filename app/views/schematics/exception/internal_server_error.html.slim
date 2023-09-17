@@ -2,7 +2,5 @@
   = fa_icon :bomb, size: '7x'
   h3.mt-4.pt-4 = t('titles.schematics.exception.internal_server_error')
   .mt-4
-    = link_to root_path, class: 'btn btn-primary btn-sm btn-icon-split me-1' do
-      span.icon = fa_icon :house
-      span.text = t('.back')
+    = render Schematics::Button::BackHome::Component.new
     = render Schematics::Button::Support::Component.new
