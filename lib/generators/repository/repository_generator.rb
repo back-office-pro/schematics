@@ -4,18 +4,17 @@ class RepositoryGenerator < Rails::Generators::Base
   def generate_repository
     return unless generating?
 
-    http :post,
-         201,
-         URI::HTTPS.build(host:, path: "/orgs/#{Tenant.organization}/repos"),
-         { name: Tenant.subdomain, private: true }
+    client.create_repository(
+      Tenant.subdomain,
+      organization: Tenant.organization,
+      private: true
+    )
   end
 
   def destroy_repository
     return unless destroying?
 
-    http :delete,
-         204,
-         URI::HTTPS.build(host:, path: "/repos/#{Tenant.organization}/#{Tenant.subdomain}")
+    client.delete_repository("#{Tenant.organization}/#{Tenant.subdomain}")
   end
 
   private
@@ -28,31 +27,11 @@ class RepositoryGenerator < Rails::Generators::Base
     behavior == :revoke
   end
 
-  def host = 'api.github.com'
-
   def access_token = Schematics::Engine
     .credentials
     .github[:access_token]
 
-  def http_options = {
-    open_timeout: 1,
-    read_timeout: 1,
-    write_timeout: 1,
-    use_ssl: true,
-    max_retries: 5
-  }
+  def connection_options = { request: { open_timeout: 1, timeout: 1 } }
 
-  # :reek:FeatureEnvy
-  def http(type, code, uri, body = nil)
-    response = Net::HTTP.start(uri.hostname, uri.port, **http_options) do |http|
-      http.request(
-        Net::HTTP
-          .const_get(type.to_s.camelize)
-          .new(uri)
-          .tap { _1.basic_auth(access_token, 'x-oauth-basic') }
-          .tap { _1.body = body&.to_json }
-      )
-    end
-    raise response.body.to_s if response.code != code.to_s
-  end
+  memoize def client = Octokit::Client.new(access_token:, connection_options:)
 end
