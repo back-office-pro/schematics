@@ -410,6 +410,15 @@
           "cached": true,
           "default": true
         }
+      },
+      {
+        "id": "91e4fa58-a6cb-4954-9a3d-87db6c9714c1",
+        "name": "google_sign_in_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
+        }
       }
     ]
   },

@@ -11,6 +11,7 @@ it:
         company_name: Nome dell'azienda
         company_registration_number: Codice fiscale dell'azienda
         company_website: Sito web aziendale
+        google_sign_in_feature_flag: Attivare l'accesso con l'account Google
         hosts: Domini API consentiti
         locale: Lingua
         meetings_feature_flag: Attivare le riunioni

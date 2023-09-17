@@ -11,6 +11,7 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
+        google_sign_in_feature_flag: Enable Google sign in
         hosts: Authorized API domains
         locale: Locale
         meetings_feature_flag: Enable meetings
