@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 class Import < Schematics::ApplicationRecord
   after_create_commit { Schematics::ImportJob.perform_later(self) }
 
