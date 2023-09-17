@@ -16,12 +16,12 @@ RSpec.describe Schematics::ImportJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(import) }
 
-    context 'when there are no import error' do
+    context 'when there is no import error' do
       it 'imports the resources' do
         expect { perform_now }.to change(import.model_class, :count).by(2)
       end
 
-      it 'changes the import state from in_progress to finished' do
+      it 'changes import state from in_progress to finished' do
         expect { perform_now }
           .to change { import.reload.state }
           .from('in_progress')
@@ -32,18 +32,18 @@ RSpec.describe Schematics::ImportJob do
     context 'when there are import errors' do
       let(:model) { 'Permission' }
 
-      it 'does not import the resources' do
+      it 'does not import resources' do
         expect { perform_now }.not_to change(import.model_class, :count)
       end
 
-      it 'changes the import state from in_progress to error' do
+      it 'changes import state from in_progress to error' do
         expect { perform_now }
           .to change { import.reload.state }
           .from('in_progress')
           .to('error')
       end
 
-      it 'stores the import errors' do
+      it 'stores import errors' do
         expect { perform_now }
           .to change { import.reload.import_errors }
           .to match('Line 1' => String, 'Line 2' => String)
