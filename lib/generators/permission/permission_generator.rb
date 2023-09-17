@@ -41,9 +41,8 @@ class PermissionGenerator < Rails::Generators::NamedBase
 
   def old_action = options[:rename]
 
-  # :reek:NilCheck
   def generating?
-    behavior == :invoke && old_action.nil?
+    behavior == :invoke && !old_action
   end
 
   def destroying?
@@ -51,6 +50,6 @@ class PermissionGenerator < Rails::Generators::NamedBase
   end
 
   def renaming?
-    behavior == :invoke && old_action.present?
+    behavior == :invoke && old_action
   end
 end

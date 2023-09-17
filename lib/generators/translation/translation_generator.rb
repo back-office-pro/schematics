@@ -44,9 +44,8 @@ class TranslationGenerator < Rails::Generators::NamedBase
     .split('.')
     .last
 
-  # :reek:NilCheck
   def generating?
-    behavior == :invoke && old_name.nil?
+    behavior == :invoke && !old_name
   end
 
   def destroying?
@@ -54,7 +53,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
   end
 
   def renaming?
-    behavior == :invoke && old_name.present?
+    behavior == :invoke && old_name
   end
 
   # :reek:FeatureEnvy

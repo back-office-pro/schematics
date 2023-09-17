@@ -24,7 +24,7 @@ module I18n
 
       # :reek:NilCheck
       def count_to_key(count)
-        return '' if count.nil?
+        return '' unless count
         return '.zero' if count.zero?
         return '.one' if count == 1
 
