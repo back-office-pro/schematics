@@ -8,6 +8,7 @@
       .col.text-truncate
         = render Schematics::CardHeading::Component.new(icon: :plus, title:)
       .col-auto
+        = render Schematics::Button::Help::Component.new(model_class:)
         = render Schematics::Button::RestoreDraft::Component.new(draft: @draft)
         = render Schematics::Button::Draft::Component.new
   .card-body.p-3
