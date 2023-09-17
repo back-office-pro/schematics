@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Button
+    module Support
+      module Live
+        class Component < Support::Component
+          delegate :live_support?, to: '::Licence.instance', private: true
+          delegate :icon, to: '::Meeting.entity'
+
+          def data = { controller: 'support', action: 'click->support#open' }
+
+          alias render? live_support?
+        end
+      end
+    end
+  end
+end

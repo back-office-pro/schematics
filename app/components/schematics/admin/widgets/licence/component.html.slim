@@ -6,3 +6,4 @@
           = fa_icon icon, size: '3x', class: 'd-inline-block text-primary'
           h5.text-primary.my-4 = resource
           = render Schematics::Viewer::EventButtonGroup::Component.new(resource:, compact: false)
+          = render Schematics::Button::Support::Component.new if inactive?

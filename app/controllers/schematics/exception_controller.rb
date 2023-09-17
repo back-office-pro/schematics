@@ -17,7 +17,7 @@ module Schematics
     end
 
     def schema_error
-      respond_with nil, status: :unknown_error
+      respond_with nil, status: :not_acceptable
     end
   end
 end

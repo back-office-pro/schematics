@@ -6,11 +6,4 @@
     = link_to documentation_url, class: 'dropdown-item' do
       = fa_icon Documentation.entity.icon, class: 'fa-fw me-3'
       = t('.documentation')
-    - if email_support?
-      = mail_to support_email, class: 'dropdown-item' do
-        = fa_icon Message.entity.icon, class: 'fa-fw me-3'
-        = t('.support')
-    - if live_support?
-      .dropdown-item data-controller='support' data-action='click->support#open' role='button'
-        = fa_icon Meeting.entity.icon, class: 'fa-fw me-3'
-        = t('.support')
+    = render Schematics::Button::Support::Component.dropdown_item
