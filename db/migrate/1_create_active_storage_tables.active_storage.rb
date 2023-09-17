@@ -13,8 +13,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
 
       t.timestamps
 
-      t.index [:key], unique: true
-
+      t.index :key, using: :btree, unique: true, where: 'deleted_at IS NULL'
       t.index :filename, using: :btree, where: 'deleted_at IS NULL'
       t.index :content_type, using: :btree, where: 'deleted_at IS NULL'
       t.index :byte_size, using: :btree, where: 'deleted_at IS NULL'
@@ -29,7 +28,8 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
 
       t.index %i[record_type record_id name blob_id],
               name: 'index_active_storage_attachments_uniqueness',
-              unique: true
+              unique: true,
+              where: 'deleted_at IS NULL'
       t.foreign_key :active_storage_blobs, column: :blob_id
     end
 
@@ -41,7 +41,8 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
 
       t.index %i[blob_id variation_digest],
               name: 'index_active_storage_variant_records_uniqueness',
-              unique: true
+              unique: true,
+              where: 'deleted_at IS NULL'
       t.foreign_key :active_storage_blobs, column: :blob_id
     end
   end

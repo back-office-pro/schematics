@@ -12,7 +12,8 @@ class CreateActionTextTables < ActiveRecord::Migration[7.0]
 
       t.index %i[record_type record_id name locale],
               name: :index_action_text_rich_texts_uniqueness,
-              unique: true
+              unique: true,
+              where: 'deleted_at IS NULL'
     end
   end
 end

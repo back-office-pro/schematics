@@ -12,12 +12,15 @@ class CreateStringTranslations < ActiveRecord::Migration[7.0]
     add_index :mobility_string_translations,
               %i[translatable_id translatable_type locale key],
               unique: true,
-              name: :index_mobility_string_translations_on_keys
+              name: :index_mobility_string_translations_on_keys,
+              where: 'deleted_at IS NULL'
     add_index :mobility_string_translations,
               %i[translatable_id translatable_type key],
-              name: :index_mobility_string_translations_on_translatable_attribute
+              name: :index_mobility_string_translations_on_translatable_attribute,
+              where: 'deleted_at IS NULL'
     add_index :mobility_string_translations,
               %i[translatable_type key value locale],
-              name: :index_mobility_string_translations_on_query_keys
+              name: :index_mobility_string_translations_on_query_keys,
+              where: 'deleted_at IS NULL'
   end
 end

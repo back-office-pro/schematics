@@ -128,7 +128,7 @@ Metrics/BlockLength:
     - it
     - each
 Metrics/MethodLength:
-  Max: 34
+  Max: 35
   AllowedMethods:
     - inherited
     - fill_form
