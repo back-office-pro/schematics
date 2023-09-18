@@ -3,13 +3,17 @@
 module Schematics
   module LinkPreview
     class Component < ApplicationComponent
-      delegate :title, :favicon, to: :object, allow_nil: true
+      delegate :favicon, to: :object, allow_nil: true
       option :url
 
       memoize def object
-        ::LinkThumbnailer.generate(url)
+        ::LinkThumbnailer.generate(url, http_open_timeout: 1, http_read_timeout: 1)
       rescue ::LinkThumbnailer::Exceptions
         nil
+      end
+
+      def title
+        object&.title.presence || url
       end
 
       def render?
