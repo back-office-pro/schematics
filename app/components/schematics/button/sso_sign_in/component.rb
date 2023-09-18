@@ -14,6 +14,8 @@ module Schematics
 
         def icon = :fingerprint
 
+        def form = { class: 'd-inline' }
+
         def render?
           sso_metadata_url.present?
         end

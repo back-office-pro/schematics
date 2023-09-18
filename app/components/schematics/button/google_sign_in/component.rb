@@ -14,6 +14,8 @@ module Schematics
 
         def icon = :google
 
+        def form = { class: 'd-inline' }
+
         def render? = google_sign_in_feature_flag
       end
     end
