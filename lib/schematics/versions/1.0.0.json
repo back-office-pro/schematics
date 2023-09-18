@@ -359,7 +359,7 @@
       },
       {
         "id": "d2d42519-f8f9-48a5-8b23-de269e92a655",
-        "name": "hosts",
+        "name": "origins",
         "type": "array",
         "options": {
           "cached": true,

@@ -2,7 +2,7 @@
 
 Rails.configuration.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins { Configuration.hosts.push(Tenant.host) }
+    origins { Configuration.origins.push(Tenant.host) }
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head]

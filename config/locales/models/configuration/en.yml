@@ -12,10 +12,10 @@ en:
         company_registration_number: Company registration number
         company_website: Company website
         google_sign_in_feature_flag: Enable Google sign in
-        hosts: Authorized API domains
         locale: Locale
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
+        origins: Authorized API domains
         tasks_feature_flag: Enable tasks
         theme_color: Theme color
         time_zone: Time zone

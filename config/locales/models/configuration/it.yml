@@ -12,10 +12,10 @@ it:
         company_registration_number: Codice fiscale dell'azienda
         company_website: Sito web aziendale
         google_sign_in_feature_flag: Attivare l'accesso con l'account Google
-        hosts: Domini API consentiti
         locale: Lingua
         meetings_feature_flag: Attivare le riunioni
         messages_feature_flag: Attivare la messaggistica interna
+        origins: Domini API consentiti
         tasks_feature_flag: Attivare i compiti
         theme_color: Colore del tema
         time_zone: Fuso orario

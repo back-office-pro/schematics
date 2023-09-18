@@ -12,10 +12,10 @@ fr:
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
         google_sign_in_feature_flag: Activer la connexion avec le compte Google
-        hosts: Domaines API autorisés
         locale: Langue
         meetings_feature_flag: Activer les réunions
         messages_feature_flag: Activer la messagerie interne
+        origins: Domaines API autorisés
         tasks_feature_flag: Activer les tâches
         theme_color: Couleur du thème
         time_zone: Fuseau horaire
