@@ -16,6 +16,8 @@ it:
         meetings_feature_flag: Attivare le riunioni
         messages_feature_flag: Attivare la messaggistica interna
         origins: Domini API consentiti
+        sso_sign_in_feature_flag: Attivare l'accesso SSO
+        sso_metadata_url: URL dei metadati del provider di identità SSO
         tasks_feature_flag: Attivare i compiti
         theme_color: Colore del tema
         time_zone: Fuso orario

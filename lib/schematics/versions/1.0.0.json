@@ -367,6 +367,14 @@
         }
       },
       {
+        "id": "628d4f6d-3f93-459d-806a-8ebff0a9b94c",
+        "name": "sso_metadata_url",
+        "type": "url",
+        "options": {
+          "cached": true
+        }
+      },
+      {
         "id": "0243413d-251d-4b40-a81a-930871d7959f",
         "name": "messages_feature_flag",
         "type": "boolean",
@@ -414,6 +422,15 @@
       {
         "id": "91e4fa58-a6cb-4954-9a3d-87db6c9714c1",
         "name": "google_sign_in_feature_flag",
+        "type": "boolean",
+        "options": {
+          "cached": true,
+          "default": true
+        }
+      },
+      {
+        "id": "78982ab6-c183-41c8-a461-1eebf526cca8",
+        "name": "sso_sign_in_feature_flag",
         "type": "boolean",
         "options": {
           "cached": true,
