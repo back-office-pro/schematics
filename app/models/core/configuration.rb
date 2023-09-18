@@ -3,7 +3,7 @@
 class Configuration < Schematics::ApplicationRecord
   LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
 
-  after_initialize :set_chartkick_options, :set_application_hosts
+  after_initialize :set_chartkick_options
   attribute :company_name, default: -> { Tenant.human }
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
@@ -12,11 +12,6 @@ class Configuration < Schematics::ApplicationRecord
   end
 
   private
-
-  def set_application_hosts = Rails
-    .configuration
-    .hosts
-    .push(*hosts)
 
   def set_chartkick_options = Chartkick
     .options
