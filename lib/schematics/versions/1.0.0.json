@@ -368,8 +368,16 @@
       },
       {
         "id": "628d4f6d-3f93-459d-806a-8ebff0a9b94c",
-        "name": "sso_metadata_url",
+        "name": "sso_service_url",
         "type": "url",
+        "options": {
+          "cached": true
+        }
+      },
+      {
+        "id": "111f7891-3b79-4750-9ef7-816b189fea63",
+        "name": "sso_cert_fingerprint",
+        "type": "string",
         "options": {
           "cached": true
         }
