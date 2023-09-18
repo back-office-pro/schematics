@@ -6,6 +6,7 @@
         .col.text-truncate
           = render Schematics::CardHeading::Component.new(icon: :right_to_bracket, title:)
         .col-auto
+          = render Schematics::Button::SsoSignIn::Component.new
           = render Schematics::Button::GoogleSignIn::Component.new
   .card-body.p-3
     = render Schematics::AuthForm::Component.new

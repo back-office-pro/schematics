@@ -16,6 +16,8 @@ en:
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
         origins: Authorized API domains
+        sso_cert_fingerprint: SSO certificate fingerprint
+        sso_service_url: SSO identity provider URL
         tasks_feature_flag: Enable tasks
         theme_color: Theme color
         time_zone: Time zone

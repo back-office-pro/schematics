@@ -7,6 +7,8 @@ require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'arel/override/predications'
 require 'jwt/auth_token'
+require 'onelogin/override/ruby-saml/settings'
+require 'onelogin/ruby-saml/settings'
 require 'open_api/override/router'
 require 'open_api/router'
 require 'puma/configuration'
@@ -29,6 +31,8 @@ ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 
 Puma::Configuration.prepend(Puma::Override::Configuration)
+
+OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
