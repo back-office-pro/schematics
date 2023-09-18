@@ -427,15 +427,6 @@
           "cached": true,
           "default": true
         }
-      },
-      {
-        "id": "78982ab6-c183-41c8-a461-1eebf526cca8",
-        "name": "sso_sign_in_feature_flag",
-        "type": "boolean",
-        "options": {
-          "cached": true,
-          "default": true
-        }
       }
     ]
   },
