@@ -4,9 +4,9 @@ module Schematics
   module Button
     module Cancel
       class Component < ApplicationComponent
-        option :path, default: proc { '' }
+        option :path, default: -> { '' }
         option :data, optional: true
-        option :compact, default: proc { false }
+        option :compact, default: -> { false }
 
         def compact? = compact
 

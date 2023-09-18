@@ -6,7 +6,7 @@ module Schematics
       class Component < ApplicationComponent
         delegate :entity, to: 'resource.class', private: true
         option :resource
-        option :compact, default: proc { true }
+        option :compact, default: -> { true }
 
         def compact? = compact
 

@@ -8,11 +8,11 @@ module Schematics
           option :form
           option :field, optional: true
           option :value, optional: true
-          option :name, default: proc { :password }, reader: false
-          option :icon, default: proc { :key }, reader: false
-          option :required, default: proc { true }
-          option :confirm, default: proc { false }
-          option :autocomplete, default: proc { true }, reader: false
+          option :name, default: -> { :password }, reader: false
+          option :icon, default: -> { :key }, reader: false
+          option :required, default: -> { true }
+          option :confirm, default: -> { false }
+          option :autocomplete, default: -> { true }, reader: false
 
           def data = { action: 'click->password#toggle' }
 

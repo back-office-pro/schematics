@@ -3,9 +3,9 @@
 module Schematics
   module Placeholder
     class Component < ApplicationComponent
-      option :visible, default: proc { true }
-      option :size, default: proc { 16 }
-      option :cols, default: proc { 1 }
+      option :visible, default: -> { true }
+      option :size, default: -> { 16 }
+      option :cols, default: -> { 1 }
 
       def col_class = "col-#{12 / cols}"
 

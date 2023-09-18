@@ -23,7 +23,7 @@ module Schematics
     attr_accessor :action, :callback
 
     class << self
-      def to_proc = proc { new(**_1) }
+      def to_proc = -> { new(**_1) }
     end
 
     memoize def method_name = [action, SecureRandom.uuid]

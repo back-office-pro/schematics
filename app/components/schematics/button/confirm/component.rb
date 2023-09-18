@@ -4,7 +4,7 @@ module Schematics
   module Button
     module Confirm
       class Component < ApplicationComponent
-        option :compact, default: proc { false }
+        option :compact, default: -> { false }
 
         def compact? = compact
 

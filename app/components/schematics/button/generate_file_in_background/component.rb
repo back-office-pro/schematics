@@ -7,7 +7,7 @@ module Schematics
         option :extension
         option :text
         option :url, optional: true
-        option :dropdown, default: proc { false }
+        option :dropdown, default: -> { false }
 
         class << self
           def csv_template(**)

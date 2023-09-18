@@ -36,7 +36,7 @@ module Schematics
           Entities.const_get(type.camelize.to_sym).new(**)
         end
 
-        def to_proc = proc { build(**_1) }
+        def to_proc = -> { build(**_1) }
       end
 
       def attributes=(attributes)

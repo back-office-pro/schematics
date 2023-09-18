@@ -5,7 +5,7 @@ module Schematics
     module Destroy
       class Component < ApplicationComponent
         option :resource
-        option :compact, default: proc { true }
+        option :compact, default: -> { true }
 
         def compact? = compact
 

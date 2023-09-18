@@ -3,7 +3,7 @@
 module Schematics
   module EmptyResource
     class Component < ApplicationComponent
-      option :suggestions, default: proc { [] }
+      option :suggestions, default: -> { [] }
     end
   end
 end

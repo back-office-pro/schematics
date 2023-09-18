@@ -7,7 +7,7 @@ module Schematics
         renders_one :body
         delegate :deleted?, to: :resource, private: true
         option :resource
-        option :tag_name, default: proc { :div }
+        option :tag_name, default: -> { :div }
         option :css_classes, optional: true
 
         def data

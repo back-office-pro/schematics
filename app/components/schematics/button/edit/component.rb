@@ -7,7 +7,7 @@ module Schematics
         delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
         option :resource
-        option :compact, default: proc { true }
+        option :compact, default: -> { true }
 
         def compact? = compact
 

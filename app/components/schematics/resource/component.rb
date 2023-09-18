@@ -5,7 +5,7 @@ module Schematics
     class Component < ApplicationComponent
       option :resource
       option :field
-      option :enable_buttons, default: proc { false }
+      option :enable_buttons, default: -> { false }
       option :highlight_text, optional: true
 
       def enable_buttons? = enable_buttons

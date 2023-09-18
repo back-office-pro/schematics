@@ -4,7 +4,7 @@ module Schematics
   module Button
     module Support
       class Component < ApplicationComponent
-        option :wrapper_css_classes, default: proc { 'btn btn-primary btn-sm btn-icon-split' }
+        option :wrapper_css_classes, default: -> { 'btn btn-primary btn-sm btn-icon-split' }
         option :icon_css_classes, optional: true
 
         class << self

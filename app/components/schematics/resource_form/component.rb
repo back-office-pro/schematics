@@ -8,8 +8,8 @@ module Schematics
 
       option :resource
       option :url, optional: true
-      option :attributes, default: proc { resource.class.entity.fillable_elements }
-      option :cancel_path, default: proc { resource }
+      option :attributes, default: -> { resource.class.entity.fillable_elements }
+      option :cancel_path, default: -> { resource }
 
       def attributes
         return super unless persisted?

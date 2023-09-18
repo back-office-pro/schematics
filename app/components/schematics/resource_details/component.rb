@@ -5,8 +5,8 @@ module Schematics
     class Component < ApplicationComponent
       delegate :entity, to: :model_class
       option :resource
-      option :model_class, default: proc { resource.class }
-      option :editable, default: proc { false }
+      option :model_class, default: -> { resource.class }
+      option :editable, default: -> { false }
 
       def component_for(field)
         return EditInPlace::Component.new(resource:, field:) if editable?(field)

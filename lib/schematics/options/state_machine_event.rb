@@ -24,7 +24,7 @@ module Schematics
       attr_writer :icon, :color
 
       class << self
-        def to_proc = proc { new(**_1) }
+        def to_proc = -> { new(**_1) }
       end
 
       def icon
