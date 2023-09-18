@@ -32,7 +32,7 @@ module Core
       end
 
       def omniauthenticated?
-        resource_params.is_a?(OmniAuth::AuthHash::InfoHash) && user.id
+        resource_params.is_a?(OmniAuth::AuthHash::InfoHash) && user.id.present?
       end
 
       def password
