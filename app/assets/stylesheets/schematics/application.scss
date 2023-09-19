@@ -115,10 +115,15 @@ a[role="button"].disabled .text.d-none.d-lg-inline {
 }
 
 button[disabled] .icon.d-none,
-button[disabled] .text.d-none:not(.d-lg-inline),
-a[role="button"].disabled .icon.d-none,
-a[role="button"].disabled .text.d-none:not(.d-lg-inline) {
+a[role="button"].disabled .icon.d-none {
   display: initial !important;
+}
+
+@media (min-width: 992px) {
+  button[disabled] .text.d-none:not(.d-lg-inline),
+  a[role="button"].disabled .text.d-none:not(.d-lg-inline) {
+    display: initial !important;
+  }
 }
 
 form label.required::after {
