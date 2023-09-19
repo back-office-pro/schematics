@@ -8,16 +8,16 @@ module Schematics
           option :form
           option :field, optional: true
           option :value, optional: true
-          option :name, default: -> { :password }, reader: false
-          option :icon, default: -> { :key }, reader: false
+          option :name, default: -> { :password }
+          option :icon, default: -> { :key }
           option :required, default: -> { true }
           option :confirm, default: -> { false }
-          option :autocomplete, default: -> { true }, reader: false
+          option :autocomplete, default: -> { true }
 
           def data = { action: 'click->password#toggle' }
 
           def icon
-            field.try(:icon) || @icon
+            field.try(:icon) || super
           end
 
           def inputs_count
@@ -25,7 +25,7 @@ module Schematics
           end
 
           def name
-            field.try(:name) || @name
+            field.try(:name) || super
           end
 
           def required?
@@ -35,7 +35,7 @@ module Schematics
           end
 
           def autocomplete
-            'new-password' unless @autocomplete
+            'new-password' unless super
           end
 
           private
