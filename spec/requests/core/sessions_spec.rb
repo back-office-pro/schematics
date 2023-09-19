@@ -53,7 +53,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       it { is_expected.to have_http_status(:too_many_requests) }
     end
 
-    context 'when login with an existing google account' do
+    context 'when login with an existing omniauth account' do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { nil }
       let(:remember_me) { nil }
@@ -69,7 +69,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       it { expect(cookies[:auth_token]).to be_nil }
     end
 
-    context 'when login with a non existing google account' do
+    context 'when login with a non existing omniauth account' do
       let(:email) { 'jane.doe@nowhere.com' }
       let(:password) { nil }
       let(:remember_me) { nil }
