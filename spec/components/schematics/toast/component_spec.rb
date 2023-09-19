@@ -14,7 +14,7 @@ RSpec.describe Schematics::Toast::Component, type: :component do
     let(:text) { component.translate('.notice') }
 
     it { is_expected.to have_css('.bg-success') }
-    it { is_expected.to have_selector('strong', text:) }
+    it { is_expected.to have_css('strong', text:) }
     it { is_expected.to have_text(message) }
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Schematics::Toast::Component, type: :component do
     let(:text) { component.translate('.alert') }
 
     it { is_expected.to have_css('.bg-danger') }
-    it { is_expected.to have_selector('strong', text:) }
+    it { is_expected.to have_css('strong', text:) }
     it { is_expected.to have_text(message) }
   end
 end

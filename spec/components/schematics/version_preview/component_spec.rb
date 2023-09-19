@@ -18,9 +18,9 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
     let(:object) { nil }
 
     it { is_expected.to have_link(user.to_s, href: user_path(user)) }
-    it { is_expected.not_to have_selector('.row[role]') }
-    it { is_expected.not_to have_selector('.row[data-action]') }
-    it { is_expected.not_to have_selector('.row[data-application-href-param]') }
+    it { is_expected.not_to have_css('.row[role]') }
+    it { is_expected.not_to have_css('.row[data-action]') }
+    it { is_expected.not_to have_css('.row[data-application-href-param]') }
   end
 
   context 'when version has a update event' do
@@ -28,9 +28,9 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
     let(:object) { user.as_json }
 
     it { is_expected.to have_link(user.to_s, href: user_path(user)) }
-    it { is_expected.to have_selector('.row[role]') }
-    it { is_expected.to have_selector('.row[data-action]') }
-    it { is_expected.to have_selector('.row[data-application-href-param]') }
+    it { is_expected.to have_css('.row[role]') }
+    it { is_expected.to have_css('.row[data-action]') }
+    it { is_expected.to have_css('.row[data-application-href-param]') }
   end
 
   context 'when version has a destroy event' do
@@ -40,8 +40,8 @@ RSpec.describe Schematics::VersionPreview::Component, type: :component do
     before { user.really_destroy! }
 
     it { is_expected.not_to have_link(user.to_s, href: user_path(user)) }
-    it { is_expected.not_to have_selector('.row[role]') }
-    it { is_expected.not_to have_selector('.row[data-action]') }
-    it { is_expected.not_to have_selector('.row[data-application-href-param]') }
+    it { is_expected.not_to have_css('.row[role]') }
+    it { is_expected.not_to have_css('.row[data-action]') }
+    it { is_expected.not_to have_css('.row[data-application-href-param]') }
   end
 end

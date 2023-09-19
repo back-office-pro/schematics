@@ -10,27 +10,27 @@ RSpec.describe Schematics::SortLink::Component, type: :component do
 
   context 'when emails are not ordered' do
     it { is_expected.to have_link('Email', href: users_path(sort: 'email')) }
-    it { is_expected.to have_selector('i', class: 'fa-envelope text-secondary') }
+    it { is_expected.to have_css('i', class: 'fa-envelope text-secondary') }
   end
 
   context 'when emails are not ordered and first names are in descendant order' do
     before { allow(vc_test_controller).to receive(:params).and_return(sort: '-first_name') }
 
     it { is_expected.to have_link('Email', href: users_path(sort: '-first_name,email')) }
-    it { is_expected.to have_selector('i', class: 'fa-envelope text-secondary') }
+    it { is_expected.to have_css('i', class: 'fa-envelope text-secondary') }
   end
 
   context 'when emails are in ascendant order' do
     before { allow(vc_test_controller).to receive(:params).and_return(sort: 'email') }
 
     it { is_expected.to have_link('Email', href: users_path(sort: '-email')) }
-    it { is_expected.to have_selector('i', class: 'fa-sort-down text-danger') }
+    it { is_expected.to have_css('i', class: 'fa-sort-down text-danger') }
   end
 
   context 'when emails are in descendant order' do
     before { allow(vc_test_controller).to receive(:params).and_return(sort: '-email') }
 
     it { is_expected.to have_link('Email', href: users_path(sort: 'email')) }
-    it { is_expected.to have_selector('i', class: 'fa-sort-up text-success') }
+    it { is_expected.to have_css('i', class: 'fa-sort-up text-success') }
   end
 end
