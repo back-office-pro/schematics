@@ -8,9 +8,15 @@ module Schematics
         delegate :icon, to: '::Import.entity'
         option :model_class
 
-        def css_classes = %w[btn btn-sm btn-icon-split ms-1]
+        def data = {
+          turbo_frame: '_top',
+          controller: 'tooltip',
+          'bs-custom-class': 'compacted-button-tooltip'
+        }
 
-        def data = { turbo_frame: '_top' }
+        def title = t('.text', human_name_plural:)
+
+        def css_classes = %w[btn btn-sm btn-icon-split ms-1]
 
         def render?
           can?(:import, model_class)

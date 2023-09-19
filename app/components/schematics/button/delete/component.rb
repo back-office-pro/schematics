@@ -7,6 +7,11 @@ module Schematics
         option :resource
         option :compact, default: -> { true }
 
+        def data = {
+          controller: 'tooltip',
+          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
+        }.compact
+
         def compact? = compact
 
         def css_classes = class_names(
@@ -20,6 +25,8 @@ module Schematics
         def icon_class
           'fa-fw' if compact?
         end
+
+        def title = t('schematics.application.button.destroy')
 
         def render?
           can?(:delete, resource)

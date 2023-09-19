@@ -25,17 +25,14 @@ module Schematics
 
         def data = {
           turbo_frame: '_top',
-          controller: ('tooltip' if compact?)
+          controller: 'tooltip',
+          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
         }.compact
+
+        def title = t('.text')
 
         def render?
           can?(:edit, resource)
-        end
-
-        def title
-          return unless compact?
-
-          t('.text')
         end
       end
     end

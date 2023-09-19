@@ -1,5 +1,10 @@
-button.btn.btn-sm.btn-icon-split.ms-1.pe-none.d-none data-auto-save-target='button'
+button.btn.btn-sm.btn-icon-split.ms-1.d-none {
+  data-controller='tooltip'
+  data-auto-save-target='button'
+  data-bs-custom-class='compacted-button-tooltip'
+  data-bs-title=title
+}
   span.icon = fa_icon(icon)
   span.text.d-none.d-lg-inline
-    = t('.text')
+    = title
     span.ms-1 data-controller='timeago' data-auto-save-target='timeago'

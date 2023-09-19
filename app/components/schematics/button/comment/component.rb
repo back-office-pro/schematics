@@ -17,6 +17,10 @@ module Schematics
           .comments
           .count
 
+        def title = ::Comment
+          .human_name_plural
+          .humanize
+
         def render? = comments_feature_flag
       end
     end

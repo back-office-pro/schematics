@@ -9,6 +9,10 @@ module Schematics
         delegate :viewers, to: :helpers, private: true
         option :resource
 
+        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+
+        def title = t('.text')
+
         def css_classes = %w[btn btn-sm btn-icon-split ms-1]
 
         def render?

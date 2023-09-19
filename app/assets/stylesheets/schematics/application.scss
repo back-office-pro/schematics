@@ -83,6 +83,14 @@ body {
   }
 }
 
+// Tooltips
+
+@media (min-width: 992px) {
+  .compacted-button-tooltip {
+    display: none;
+  }
+}
+
 // Forms
 
 input[type='search']::-webkit-search-decoration:hover,

@@ -13,6 +13,7 @@ module Schematics
 
         option :wrapper_css_classes, default: -> { 'btn btn-sm btn-icon-split' }
         option :text_css_classes, default: -> { 'd-none d-lg-inline' }
+        option :tooltip, default: -> { true }
         option :icon_css_classes, optional: true
         option :model_class, optional: true
 
@@ -20,9 +21,16 @@ module Schematics
           def dropdown_item = new(
             wrapper_css_classes: 'dropdown-item',
             icon_css_classes: 'fa-fw me-3',
-            text_css_classes: ''
+            text_css_classes: '',
+            tooltip: false
           )
         end
+
+        def data
+          { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' } if tooltip
+        end
+
+        def title = t('.text')
 
         def url = ::URI::HTTPS
           .build(host: "www.#{domain}", path:)

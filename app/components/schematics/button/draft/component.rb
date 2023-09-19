@@ -5,6 +5,8 @@ module Schematics
     module Draft
       class Component < ApplicationComponent
         delegate :icon, to: '::Draft.entity'
+
+        def title = t('.text')
       end
     end
   end

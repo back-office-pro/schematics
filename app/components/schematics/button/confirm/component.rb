@@ -6,6 +6,10 @@ module Schematics
       class Component < ApplicationComponent
         option :compact, default: -> { false }
 
+        def data
+          { controller: 'tooltip' } if compact?
+        end
+
         def compact? = compact
 
         def css_classes = class_names(
@@ -20,6 +24,8 @@ module Schematics
         def icon_class
           'fa-fw' if compact?
         end
+
+        def title = t('schematics.application.button.confirm')
       end
     end
   end

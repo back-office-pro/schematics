@@ -5,6 +5,8 @@ module Schematics
     module Button
       module AddEntity
         class Component < ApplicationComponent
+          def title = t('.text')
+
           def render? = !::Licence
             .instance
             .quota_entities_exceeded?

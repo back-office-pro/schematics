@@ -2,6 +2,9 @@ button.btn.btn-sm.btn-primary.btn-icon-split.ms-1 {
   data-action='click->nested-form#add:prevent'
   data-nested-form-template-id-param='schema-editor-entity'
   data-nested-form-target-id-param='entities'
+  data-controller='tooltip'
+  data-bs-custom-class='compacted-button-tooltip'
+  data-bs-title=title
 }
   span.icon = fa_icon :plus
-  span.text.d-none.d-lg-inline = t('.text')
+  span.text.d-none.d-lg-inline = title

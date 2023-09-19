@@ -14,11 +14,13 @@ module Schematics
           .entity
           .find_field_by_name(name)
 
+        def target = "confirm-dialog-#{resource.id}-#{attachment.id}"
+
+        def title = t('schematics.application.button.destroy')
+
         def render?
           resource && can?(:destroy, attachment)
         end
-
-        def target = "confirm-dialog-#{resource.id}-#{attachment.id}"
       end
     end
   end

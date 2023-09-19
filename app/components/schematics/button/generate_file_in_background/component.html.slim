@@ -5,15 +5,18 @@
       data-generate-file-in-background-url-value=url
   }
     a#generate-file-in-background-button.btn.btn-sm.btn-icon-split.ms-1 {
+      data-controller='tooltip'
       data-generate-file-in-background-target='button'
       data-action=action
       data-bs-toggle=toggle
+      data-bs-title=title
+      data-bs-custom-class='compacted-button-tooltip'
       aria-expanded='false'
       role='button'
     }
       span.icon = fa_icon(icon)
       span.icon.d-none = fa_icon :spinner, animation: 'spin'
-      span.text.d-none.d-lg-inline = t(".#{text}")
+      span.text.d-none.d-lg-inline = title
       span.text.d-none data-generate-file-in-background-target='loading' = t('.loading')
     .dropdown-menu.w-100.shadow-sm.animate__animated.animate__zoomIn.mt-0 {
       aria-labelledby='generate-file-in-background-button'

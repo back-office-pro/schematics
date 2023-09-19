@@ -28,7 +28,8 @@ module Schematics
         def data = {
           turbo_method: :patch,
           turbo_frame: '_top',
-          controller: ('tooltip' if compact?)
+          controller: 'tooltip',
+          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
         }.compact
 
         def events = entity

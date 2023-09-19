@@ -5,10 +5,16 @@ module Schematics
     module Cancel
       class Component < ApplicationComponent
         option :path, default: -> { '' }
-        option :data, optional: true
+        option :data, default: -> { {} }
         option :compact, default: -> { false }
 
         def compact? = compact
+
+        def data
+          return super unless compact?
+
+          super.merge(controller: 'tooltip')
+        end
 
         def css_classes = class_names(
           'btn',
@@ -20,6 +26,8 @@ module Schematics
         def icon_class
           'fa-fw' if compact?
         end
+
+        def title = t('.title')
       end
     end
   end

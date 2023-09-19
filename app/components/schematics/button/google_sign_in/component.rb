@@ -8,7 +8,13 @@ module Schematics
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
-        def data = { turbo: false }
+        def data = {
+          controller: 'tooltip',
+          'bs-custom-class': 'compacted-button-tooltip',
+          turbo: false
+        }
+
+        def title = t('.text')
 
         def path = '/auth/google_oauth2'
 

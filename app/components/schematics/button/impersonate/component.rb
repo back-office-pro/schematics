@@ -7,6 +7,10 @@ module Schematics
         delegate :email, to: :resource
         option :resource
 
+        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+
+        def title = t('.text', user: resource)
+
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
         def form = { class: 'd-inline' }

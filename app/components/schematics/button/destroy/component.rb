@@ -23,21 +23,18 @@ module Schematics
 
         def data = {
           turbo_frame: '_top',
+          controller: 'tooltip',
           'bs-toggle': 'modal',
           'bs-target': "##{target}",
-          controller: ('tooltip' if compact?)
+          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
         }.compact
-
-        def render?
-          can?(:destroy, resource)
-        end
 
         def target = "confirm-dialog-#{resource.id}"
 
-        def title
-          return unless compact?
+        def title = t('schematics.application.button.destroy')
 
-          t('schematics.application.button.destroy')
+        def render?
+          can?(:destroy, resource)
         end
       end
     end

@@ -8,6 +8,8 @@ module Schematics
         delegate :icon, to: '::Draft.entity'
         option :draft
 
+        def title = t('.text')
+
         def render?
           draft.present?
         end

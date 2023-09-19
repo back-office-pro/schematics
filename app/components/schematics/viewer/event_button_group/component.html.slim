@@ -1,6 +1,6 @@
 - events.each do |event|
   = link_to polymorphic_path(resource, action: event.name),
-            title: (event.human if compact?),
+            title: event.human,
             data:,
             class: css_classes_for(event) do
               span.icon = fa_icon event.icon, class: icon_class

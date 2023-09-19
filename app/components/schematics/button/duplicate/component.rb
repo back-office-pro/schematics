@@ -6,6 +6,10 @@ module Schematics
       class Component < ApplicationComponent
         option :resource
 
+        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+
+        def title = t('.text')
+
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
         def form = { class: 'd-inline' }

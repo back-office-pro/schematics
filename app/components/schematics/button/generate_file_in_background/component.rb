@@ -23,6 +23,8 @@ module Schematics
           end
         end
 
+        def title = t(".#{text}")
+
         def action
           'click->generate-file-in-background#run' unless dropdown?
         end

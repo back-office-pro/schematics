@@ -8,7 +8,13 @@ module Schematics
         option :model_class
         option :resource, optional: true
 
-        def data = { turbo_frame: '_top' }
+        def data = {
+          turbo_frame: '_top',
+          controller: 'tooltip',
+          'bs-custom-class': 'compacted-button-tooltip'
+        }
+
+        def title = t('schematics.application.button.add', human_name:, gender:)
 
         def css_classes = %w[btn btn-primary btn-sm btn-icon-split ms-1]
 
