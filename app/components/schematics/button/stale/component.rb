@@ -7,7 +7,7 @@ module Schematics
         delegate :version_path, to: 'Schematics::Engine.routes.url_helpers'
         option :resource
 
-        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+        def data = { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' }
 
         def title = t('.text')
 

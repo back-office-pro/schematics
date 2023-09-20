@@ -27,7 +27,7 @@ module Schematics
         end
 
         def data
-          { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' } if tooltip
+          { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' } if tooltip
         end
 
         def title = t('.text')

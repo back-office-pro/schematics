@@ -13,7 +13,7 @@ module Schematics
 
         def data = {
           controller: 'tooltip',
-          'bs-custom-class': 'compacted-button-tooltip',
+          'bs-custom-class': 'responsive-button-tooltip',
           turbo: false
         }
 

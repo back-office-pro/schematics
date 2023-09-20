@@ -26,7 +26,7 @@ module Schematics
           controller: 'tooltip',
           'bs-toggle': 'modal',
           'bs-target': "##{target}",
-          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
+          'bs-custom-class': ('responsive-button-tooltip' unless compact?)
         }.compact
 
         def target = "confirm-dialog-#{resource.id}"

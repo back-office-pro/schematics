@@ -9,7 +9,7 @@ module Schematics
 
         def data = {
           controller: 'tooltip',
-          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
+          'bs-custom-class': ('responsive-button-tooltip' unless compact?)
         }.compact
 
         def compact? = compact

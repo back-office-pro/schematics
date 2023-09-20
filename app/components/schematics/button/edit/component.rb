@@ -26,7 +26,7 @@ module Schematics
         def data = {
           turbo_frame: '_top',
           controller: 'tooltip',
-          'bs-custom-class': ('compacted-button-tooltip' unless compact?)
+          'bs-custom-class': ('responsive-button-tooltip' unless compact?)
         }.compact
 
         def title = t('.text')

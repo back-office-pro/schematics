@@ -6,7 +6,7 @@ module Schematics
       class Component < ApplicationComponent
         option :resource
 
-        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+        def data = { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' }
 
         def title = t('.text')
 

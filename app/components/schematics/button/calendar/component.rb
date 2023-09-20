@@ -9,7 +9,7 @@ module Schematics
         delegate :viewers, to: :helpers, private: true
         option :resource
 
-        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+        def data = { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' }
 
         def title = t('.text')
 

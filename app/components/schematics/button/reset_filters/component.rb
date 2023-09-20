@@ -7,7 +7,7 @@ module Schematics
         DENYLIST = %i[controller action locale page items model_name].freeze
         option :model_class
 
-        def data = { controller: 'tooltip', 'bs-custom-class': 'compacted-button-tooltip' }
+        def data = { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' }
 
         def title = t('.text')
 
