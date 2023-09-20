@@ -10,6 +10,8 @@ module Schematics
 
       def call
         fail! unless resource.save
+      rescue ActiveRecord::RecordNotUnique => e
+        fail!
       end
     end
   end
