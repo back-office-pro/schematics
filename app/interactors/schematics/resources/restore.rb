@@ -10,7 +10,7 @@ module Schematics
 
       def call
         fail! unless resource.restore(recursive: true)
-      rescue ActiveRecord::RecordNotUnique => e
+      rescue ActiveRecord::RecordNotUnique
         fail!
       end
     end
