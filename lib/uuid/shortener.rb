@@ -16,7 +16,7 @@ module UUID
       return unless uuid
 
       num = uuid.tr('-', '').to_i(16)
-      return '0' if num.zero?
+      return ALPHABET.first if num.zero?
       return if num.negative?
 
       str = ''
