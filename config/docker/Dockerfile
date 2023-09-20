@@ -1,4 +1,4 @@
-FROM ruby:3.2.1-alpine
+FROM ruby:3.2.2-alpine
 
 RUN apk add --update --no-cache \
     --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
