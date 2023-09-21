@@ -15,13 +15,11 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
+    its(:inject_index_options) { is_expected.to eq(", where: 'deleted_at IS NULL'") }
+
     it { is_expected.not_to be_required }
     it { is_expected.not_to have_index }
     it { is_expected.not_to have_uniq_index }
-
-    its(:inject_index_options) do
-      is_expected.to eq(", where: 'deleted_at IS NULL'")
-    end
   end
 
   context 'when column is string and unique' do
@@ -32,13 +30,11 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
+    its(:inject_index_options) { is_expected.to eq(", unique: true, where: 'deleted_at IS NULL'") }
+
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.to have_uniq_index }
-
-    its(:inject_index_options) do
-      is_expected.to eq(", unique: true, where: 'deleted_at IS NULL'")
-    end
   end
 
   context 'when column is string and has index' do
@@ -49,13 +45,11 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
+    its(:inject_index_options) { is_expected.to eq(", where: 'deleted_at IS NULL'") }
+
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
-
-    its(:inject_index_options) do
-      is_expected.to eq(", where: 'deleted_at IS NULL'")
-    end
   end
 
   context 'when column is references' do
@@ -66,13 +60,11 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(foreign_key: true) }
+    its(:inject_index_options) { is_expected.to eq(", where: 'deleted_at IS NULL'") }
+
     it { is_expected.not_to be_required }
     it { is_expected.not_to have_index }
     it { is_expected.not_to have_uniq_index }
-
-    its(:inject_index_options) do
-      is_expected.to eq(", where: 'deleted_at IS NULL'")
-    end
   end
 
   context 'when column is schema email' do
@@ -83,15 +75,11 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:citext) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
+    its(:inject_index_options) { is_expected.to eq(", using: :btree, where: 'deleted_at IS NULL'") }
+
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
-    it { is_expected.to have_uniq_index }
-
-    its(:inject_index_options) do
-      is_expected.to eq <<~TEXT.chomp
-        , unique: true, using: :btree, where: 'deleted_at IS NULL'
-      TEXT
-    end
+    it { is_expected.not_to have_uniq_index }
   end
 
   context 'when column is schema references' do
@@ -102,13 +90,11 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:references) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(index: { where: 'deleted_at IS NULL' }) }
+    its(:inject_index_options) { is_expected.to eq(", using: :btree, where: 'deleted_at IS NULL'") }
+
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
     it { is_expected.not_to have_uniq_index }
-
-    its(:inject_index_options) do
-      is_expected.to eq(", using: :btree, where: 'deleted_at IS NULL'")
-    end
   end
 
   it_behaves_like 'a monkey patched instance super method',

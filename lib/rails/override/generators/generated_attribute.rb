@@ -12,12 +12,6 @@ module Rails
           (schema_attribute && !virtual? && !token? && !password_digest?) || join_table? || super
         end
 
-        def has_uniq_index? # rubocop:disable Naming/PredicateName
-          return schema_attribute.unique? if schema_attribute
-
-          super
-        end
-
         def inject_index_options = [super, inject_index_type, inject_index_where]
           .compact
           .join(', ')
