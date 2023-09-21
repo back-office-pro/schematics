@@ -111,47 +111,43 @@ describe Rails::Generators::GeneratedAttribute do
     end
   end
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :column_name,
-                  'c30e46955471cae44e0dc3019a548b26f16dcab4b10b4fdf919e511bd35c0347'
+                  'f4208221e6c245551b55c7ab7e52b2f21e52ff9f4b4a8dbf548202972369cd45'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :has_index?,
-                  'c2c54719f5aa2b50bb11123c4fedf0299584be9351842dcfad3ee411744ed143'
+                  '1737fbde5d76e5195924f54599506b353ef94c897d069c65054cb92ea22387c7'
 
-  it_behaves_like 'a monkey patched instance method',
-                  :has_uniq_index?,
-                  '71951234f1a9fa31146c33744a3e4674f33b30c302b17a31051b5beb314d95e4'
-
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :inject_index_options,
-                  'c7d83adfe8dca3c9f5ab09fe13eaaef231fd9442b15982f2aa4c84e0791a6e3b'
+                  'f94f3e6427b118efcf79584543e98caeaf911f80b11e73cef28202cc2539e4c9'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :name,
-                  'dcfc737644cd3a33f97d93e3f017abcfec2c0d59b5fb82140e36996b4263e27b'
+                  '533bca45b3ba14b751bb61487cc502df6887840081339d4184e999199f9571e4'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :options_for_migration,
-                  '775b5e51791e66f42f49671f68480b0ecb418633df2d4bc1fc01c9d342030184'
+                  'fd2e945dbb711be9d9ecc3eb60ebb2cb9cba1c2eb08d4ce8c99c5964b221ff2f'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :plural_name,
-                  'f65a4953c6c61b1785a2bd7b778b395c44ded5ab4266b36c224cf998076fa279'
+                  '7de443f57b916b73cfd285863011a703b64b08fb7fe6a11bc8632281a0caf4f3'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :reference?,
-                  '8a53cedbddff22a4cb2951df128d7d1a3df31ca3e4b4f3171b6a52b0e5c48670'
+                  '852b8392f8a0d72997cb7a0aa0a4c531af7da74ed6515e9c0caf4a3443eea532'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :required?,
-                  '7816a4aa14fd677625e9d8d68a4ca7acf36dc6330f6ce36865e465f32b74df68'
+                  'e37b612dcb78dfd1c36a35b267868ca9e9c021b38ffae82066cdc5fa65a3e1a9'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched instance super method',
                   :type,
-                  '476913719212cb12627952aef9a39e2efeeace4d32e506cde333c9f85851c424'
+                  '533bca45b3ba14b751bb61487cc502df6887840081339d4184e999199f9571e4'
 
-  it_behaves_like 'a monkey patched instance method',
+  it_behaves_like 'a monkey patched class super method',
                   :valid_type?,
-                  '7da6bde00e94f9de3a9cc6ee17b1197b29fd01d27fc139fe3061c4e2d6bef5f2'
+                  '0a03809101a53a28fb58ccd7047aa8c89d6cd02f633f2a9039875b8d988eea2c'
 end
