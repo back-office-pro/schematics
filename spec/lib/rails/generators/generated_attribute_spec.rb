@@ -120,6 +120,10 @@ describe Rails::Generators::GeneratedAttribute do
                   '1737fbde5d76e5195924f54599506b353ef94c897d069c65054cb92ea22387c7'
 
   it_behaves_like 'a monkey patched instance super method',
+                  :has_uniq_index?,
+                  'd6e16cbc10a955f483bd6907d95dee85fad84bbc6ecc0809176b785269283a4c'
+
+  it_behaves_like 'a monkey patched instance super method',
                   :inject_index_options,
                   'f94f3e6427b118efcf79584543e98caeaf911f80b11e73cef28202cc2539e4c9'
 
