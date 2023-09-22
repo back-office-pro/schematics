@@ -51,7 +51,7 @@ module Rails
         end
 
         def inject_index_where
-          "where: 'deleted_at IS NULL'" unless join_table? || has_uniq_index?
+          "where: 'deleted_at IS NULL'" unless join_table? || has_uniq_index? || token?
         end
 
         def join_table?
