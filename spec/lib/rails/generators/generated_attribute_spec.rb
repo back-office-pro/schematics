@@ -30,7 +30,7 @@ describe Rails::Generators::GeneratedAttribute do
     its(:type) { is_expected.to eq(:string) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to be_empty }
-    its(:inject_index_options) { is_expected.to eq(", unique: true") }
+    its(:inject_index_options) { is_expected.to eq(', unique: true') }
 
     it { is_expected.not_to be_required }
     it { is_expected.to have_index }
