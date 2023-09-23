@@ -9,6 +9,7 @@ require 'object'
 require 'tenant'
 require 'uuid/shortener'
 require 'validators/singular_validator'
+require 'validators/uniqueness_with_deleted_validator'
 require 'zeitwerk'
 require defined?(Rails::Engine) ? 'schematics/engine' : 'debug'
 
