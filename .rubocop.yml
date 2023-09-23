@@ -154,6 +154,8 @@ RSpec/EmptyExampleGroup:
   Exclude:
     - spec/*/active_storage/**/*
     - spec/*/core/**/*
+RSpec/FilePath:
+  Enabled: false
 RSpec/SpecFilePathFormat:
   Exclude:
     - spec/requests/active_storage/**/*
