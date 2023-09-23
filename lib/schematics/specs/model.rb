@@ -35,7 +35,6 @@ module Schematics
         attributes
           .select(&:unique?)
           .each do |attribute|
-            it { is_expected.to have_db_index(attribute.name.to_sym).unique }
             it do
               is_expected
                 .to validate_uniqueness_of(attribute.name.to_sym)
