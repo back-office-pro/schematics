@@ -9,7 +9,7 @@ module Rails
         end
 
         def has_index? # rubocop:disable Naming/PredicateName
-          !virtual? && !token? && !password_digest?
+          (schema_attribute && !virtual? && !token? && !password_digest?) || join_table? || super
         end
 
         def has_uniq_index? # rubocop:disable Naming/PredicateName
@@ -18,11 +18,9 @@ module Rails
           super
         end
 
-        def inject_index_options = [
-          super,
-          ("using: :#{schema_attribute.database_index_type}" if schema_attribute),
-          ("where: 'deleted_at IS NULL'" unless @type.start_with?('join_table'))
-        ].compact.join(', ')
+        def inject_index_options = [super, inject_index_type, inject_index_where]
+          .compact
+          .join(', ')
 
         def name
           schema_attribute&.name || super
@@ -32,10 +30,9 @@ module Rails
           schema_attribute&.migration_options || super
         end
 
-        def plural_name = [
-          super,
-          ('column_options: { type: :uuid }' if @type == :join_table_second)
-        ].compact.join(', ')
+        def plural_name = [super, join_table_column_options]
+          .compact
+          .join(', ')
 
         def reference?(*)
           schema_attribute.is_a?(Schematics::Attributes::Association) || super
@@ -50,6 +47,22 @@ module Rails
         def valid_type?(*) = true
 
         private
+
+        def join_table_column_options
+          'column_options: { type: :uuid }' if @type == :join_table_second
+        end
+
+        def inject_index_type
+          "using: :#{schema_attribute.database_index_type}" if schema_attribute
+        end
+
+        def inject_index_where
+          "where: 'deleted_at IS NULL'" unless join_table?
+        end
+
+        def join_table?
+          @type.start_with?('join_table')
+        end
 
         def schema_attribute
           @schema_attribute ||= ::Tenant
