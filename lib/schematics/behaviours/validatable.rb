@@ -16,7 +16,7 @@ module Schematics
       def validators = Schematics::Validators.new(
         name:,
         validators: {
-          uniqueness: ({ case_sensitive: case_sensitive?, allow_blank: } if unique?),
+          uniqueness_with_deleted: ({ case_sensitive: case_sensitive?, allow_blank: } if unique?),
           presence: required?
         }
       )

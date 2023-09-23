@@ -46,11 +46,14 @@ describe Schematics::Attributes::Citext do
     let(:options) { { unique: true } }
 
     it { is_expected.to be_unique }
-    its(:validators) { is_expected.to eq(uniqueness: { case_sensitive: false, allow_blank: true }) }
+
+    its(:validators) do
+      is_expected.to eq(uniqueness_with_deleted: { case_sensitive: false, allow_blank: true })
+    end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :last_name, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}}
+        validates :last_name, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}}
       RUBY
     end
   end

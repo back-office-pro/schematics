@@ -50,14 +50,14 @@ describe Schematics::Attributes::Email do
 
     its(:validators) do
       is_expected.to eq(
-        uniqueness: { case_sensitive: false, allow_blank: true },
+        uniqueness_with_deleted: { case_sensitive: false, allow_blank: true },
         email: { allow_blank: true }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true}}
+        validates :email, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true}}
       RUBY
     end
   end

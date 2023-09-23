@@ -50,14 +50,14 @@ describe Schematics::Attributes::Phone do
 
     its(:validators) do
       is_expected.to eq(
-        uniqueness: { case_sensitive: true, allow_blank: true },
+        uniqueness_with_deleted: { case_sensitive: true, allow_blank: true },
         phone: { allow_blank: true }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :phone, {:uniqueness=>{:case_sensitive=>true, :allow_blank=>true}, :phone=>{:allow_blank=>true}}
+        validates :phone, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}, :phone=>{:allow_blank=>true}}
       RUBY
     end
   end

@@ -50,14 +50,14 @@ describe Schematics::Attributes::Url do
 
     its(:validators) do
       is_expected.to eq(
-        uniqueness: { case_sensitive: false, allow_blank: true },
+        uniqueness_with_deleted: { case_sensitive: false, allow_blank: true },
         url: { allow_blank: true }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :url, {:uniqueness=>{:case_sensitive=>false, :allow_blank=>true}, :url=>{:allow_blank=>true}}
+        validates :url, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :url=>{:allow_blank=>true}}
       RUBY
     end
   end
