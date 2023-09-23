@@ -133,7 +133,7 @@ RSpec.describe Core::Migrations::Migrate do
         Object.__send__(:remove_const, :ClientsController)
       end
 
-      before { create_prospect_entity }
+      before { [create_prospect_entity, migrate] }
 
       uses_transaction 'is a success'
       uses_transaction 'destroys the model file'
@@ -153,57 +153,46 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'destroys the model file' do
-        migrate
         expect(File).not_to exist root.join('app/models/prospect.rb')
       end
 
       it 'destroys the controller file' do
-        migrate
         expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
       end
 
       it 'destroys the rspec model file' do
-        migrate
         expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
       end
 
       it 'destroys the rspec feature file' do
-        migrate
         expect(File).not_to exist root.join('spec/features/prospect_spec.rb')
       end
 
       it 'creates a migration file' do
-        migrate
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients.rb')]).not_to be_empty
       end
 
       it 'creates a model file' do
-        migrate
         expect(File).to exist root.join('app/models/client.rb')
       end
 
       it 'creates a controller file' do
-        migrate
         expect(File).to exist root.join('app/controllers/clients_controller.rb')
       end
 
       it 'creates a rspec model file' do
-        migrate
         expect(File).to exist root.join('spec/models/client_spec.rb')
       end
 
       it 'creates a rspec feature file' do
-        migrate
         expect(File).to exist root.join('spec/features/client_spec.rb')
       end
 
       it 'undefines a model class' do
-        migrate
         expect { Prospect }.to raise_error(NameError)
       end
 
       it 'defines a model class' do
-        migrate
         expect { Client }.not_to raise_error
       end
     end
@@ -376,7 +365,7 @@ RSpec.describe Core::Migrations::Migrate do
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
 
-      before { create_prospect_entity }
+      before { [create_prospect_entity, migrate] }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -388,17 +377,14 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a migration file' do
-        migrate
         expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
 
       it 'does not respond to old model attribute' do
-        migrate
         expect(Prospect.new).not_to respond_to(:first_name)
       end
 
       it 'responds to new model attribute' do
-        migrate
         expect(Prospect.new).to respond_to(:surname)
       end
     end
@@ -422,7 +408,7 @@ RSpec.describe Core::Migrations::Migrate do
       let(:commits_steps) { 2 }
       let(:migrations_steps) { 2 }
 
-      before { create_prospect_entity }
+      before { [create_prospect_entity, migrate] }
 
       uses_transaction 'is a success'
       uses_transaction 'creates a migration file'
@@ -432,8 +418,43 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a migration file' do
-        migrate
         expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+      end
+    end
+
+    context 'when changing attribute uniqueness' do
+      let(:data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'prospect',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string',
+                options: {
+                  unique: true
+                }
+              }
+            ]
+          }
+        ]
+      end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 2 }
+
+      before { [create_prospect_entity, migrate] }
+
+      uses_transaction 'is a success'
+      uses_transaction 'creates a migration file'
+
+      it 'is a success' do
+        expect(migrate).to be_a_success
+      end
+
+      it 'creates a migration file' do
+        expect(Dir[root.join('db/migrate/*_change_first_name_index_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 
@@ -460,7 +481,7 @@ RSpec.describe Core::Migrations::Migrate do
         Object.__send__(:remove_const, :ClientsController)
       end
 
-      before { create_prospect_entity }
+      before { [create_prospect_entity, migrate] }
 
       uses_transaction 'is a success'
       uses_transaction 'destroys the model file'
@@ -483,72 +504,58 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'destroys the model file' do
-        migrate
         expect(File).not_to exist root.join('app/models/prospect.rb')
       end
 
       it 'destroys the controller file' do
-        migrate
         expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
       end
 
       it 'destroys the rspec model file' do
-        migrate
         expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
       end
 
       it 'destroys the rspec feature file' do
-        migrate
         expect(File).not_to exist root.join('spec/features/prospect_spec.rb')
       end
 
       it 'creates a rename table migration file' do
-        migrate
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients.rb')]).not_to be_empty
       end
 
       it 'creates a rename attribute migration file' do
-        migrate
         expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_clients.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
 
       it 'creates a model file' do
-        migrate
         expect(File).to exist root.join('app/models/client.rb')
       end
 
       it 'creates a controller file' do
-        migrate
         expect(File).to exist root.join('app/controllers/clients_controller.rb')
       end
 
       it 'creates a rspec model file' do
-        migrate
         expect(File).to exist root.join('spec/models/client_spec.rb')
       end
 
       it 'creates a rspec feature file' do
-        migrate
         expect(File).to exist root.join('spec/features/client_spec.rb')
       end
 
       it 'undefines a model class' do
-        migrate
         expect { Prospect }.to raise_error(NameError)
       end
 
       it 'defines a model class' do
-        migrate
         expect { Client }.not_to raise_error
       end
 
       it 'does not respond to old model attribute' do
-        migrate
         expect(Client.new).not_to respond_to(:first_name)
       end
 
       it 'responds to new model attribute' do
-        migrate
         expect(Client.new).to respond_to(:surname)
       end
     end

@@ -1,0 +1,6 @@
+class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+  def change
+    remove_index :<%= table_name %>, column: :<%= @column_name %>
+    add_index :<%= table_name %>, :<%= @column_name %><%= attributes.first.inject_index_options %>
+  end
+end

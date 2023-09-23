@@ -4,7 +4,7 @@ module ActiveRecord
   module Override
     module Generators
       module MigrationGenerator
-        def set_local_assigns!
+        def set_local_assigns! # rubocop:disable Metrics/CyclomaticComplexity
           case file_name
           when /^drop_join_table_(.+)/
             @join_tables = attributes.map(&:plural_name)
@@ -27,12 +27,20 @@ module ActiveRecord
             @old_column_type = Regexp.last_match(2)
             @table_name = normalize_table_name Regexp.last_match(3)
             @migration_template = change_column_migration_template_path
+          when /^change_(.+)_index_in_(.+)/
+            @column_name = Regexp.last_match(1)
+            @table_name = normalize_table_name Regexp.last_match(2)
+            @migration_template = change_index_migration_template_path
           else
             super
           end
         end
 
         private
+
+        def change_index_migration_template_path
+          templates_path.join('change_index_migration.rb')
+        end
 
         def change_column_migration_template_path
           templates_path.join('change_column_migration.rb')

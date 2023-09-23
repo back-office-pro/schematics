@@ -7,6 +7,7 @@ en:
       schematics/commands/add_permission: Add a permission %{attribute} to %{name}
       schematics/commands/add_translation: Add a translation to %{name}
       schematics/commands/change_attribute: Change attribute %{attribute} of %{name} to %{target} type
+      schematics/commands/change_attribute_uniqueness: Change %{attribute} attribute uniqueness of %{name}
       schematics/commands/create_entity: Add an entity %{name}
       schematics/commands/destroy_entity: Remove the %{name} entity
       schematics/commands/remove_association: Remove the many-to-many association between %{name} and %{attribute}

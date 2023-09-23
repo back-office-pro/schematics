@@ -72,6 +72,12 @@ module Schematics
 
     private
 
+    def change_attribute_uniqueness_command(entity, current_attribute, new_attribute)
+      return if current_attribute.unique? == new_attribute.unique?
+
+      Commands::ChangeAttributeUniqueness.new(entity:, attribute: new_attribute.name)
+    end
+
     def change_attribute_command(entity, current_attribute, new_attribute)
       return if current_attribute.database_type == new_attribute.database_type
 
@@ -247,7 +253,8 @@ module Schematics
 
           [
             rename_attribute_command(entity, current_attribute, attribute),
-            change_attribute_command(entity, current_attribute, attribute)
+            change_attribute_command(entity, current_attribute, attribute),
+            change_attribute_uniqueness_command(entity, current_attribute, attribute)
           ]
         end
     end

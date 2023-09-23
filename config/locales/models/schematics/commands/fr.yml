@@ -7,6 +7,7 @@ fr:
       schematics/commands/add_permission: Ajout d'une permission %{attribute} à %{name}
       schematics/commands/add_translation: Ajout d'une traduction à %{name}
       schematics/commands/change_attribute: Changer l'attribut %{attribute} de %{name} en type %{target}
+      schematics/commands/change_attribute_uniqueness: Changer l'unicité de l'attribut %{attribute} de %{name}
       schematics/commands/create_entity: Ajout d'une entité %{name}
       schematics/commands/destroy_entity: Suppression de l'entité %{name}
       schematics/commands/remove_association: Suppression de l'association plusieurs-à-plusieurs entre %{name} et %{attribute}
