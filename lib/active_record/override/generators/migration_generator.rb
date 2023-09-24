@@ -36,6 +36,10 @@ module ActiveRecord
           end
         end
 
+        def validate_file_name! = file_name
+          .concat('_')
+          .concat(SecureRandom.uuid.underscore)
+
         private
 
         def change_index_migration_template_path

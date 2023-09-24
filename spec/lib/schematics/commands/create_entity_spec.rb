@@ -43,7 +43,8 @@ describe Schematics::Commands::CreateEntity do
     its([2]) { is_expected.to be_a(TranslationsGenerator) }
     its([3]) { is_expected.to be_a(PermissionsGenerator) }
     its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-    its(:size) { is_expected.to eq(5) }
+    its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+    its(:size) { is_expected.to eq(6) }
 
     context 'when entity class already exists' do
       let(:options) { { existing: true } }

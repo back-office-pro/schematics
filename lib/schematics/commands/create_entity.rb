@@ -15,10 +15,11 @@ module Schematics
         return [scaffold_controller_generator].compact if existing?
 
         [
-          scaffold_generator || migration_generator,
+          scaffold_generator,
           feature_generator,
           translations_generator,
           permissions_generator,
+          migration_generator,
           has_and_belongs_to_many_associations.map(&method(:create_join_table_migration_generator))
         ].compact.flatten
       end
@@ -30,7 +31,7 @@ module Schematics
 
         Rails::Generators::ScaffoldGenerator.new(
           [name, *migratable_attributes],
-          ['--skip-resource-route']
+          ['--skip-resource-route', '--skip-migration']
         )
       end
 
