@@ -22,7 +22,9 @@ module Core
         rescue StandardError => e
           @errors[::I18n.t('.line', line:)] = e
         ensure
-          import.reload.update!(progress: (line / data.size) * 100)
+          PaperTrail.request(enabled: false) do
+            import.reload.update!(progress: (line / data.size) * 100)
+          end
         end
         fail!(errors: @errors) if @errors.any?
       end
