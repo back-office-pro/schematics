@@ -7,14 +7,13 @@ module Schematics
         return if ::Tenant.backend.concurrency.zero?
 
         Thread.new(record) do |migration|
-          migration_with_old_migrator = migration.dup.tap(&:migrator)
           loop do
             sleep 1
             break unless migration.reload.in_progress?
           end
           if migration.finished?
             ::Tenant.schema = migration.data
-            Core::Migrations::Reload.call(migration: migration_with_old_migrator)
+            Core::Migrations::Reload.call(migration:)
           end
           Thread.current.kill
         end
