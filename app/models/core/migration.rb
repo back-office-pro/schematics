@@ -35,6 +35,7 @@ class Migration < Schematics::ApplicationRecord
     Schematics::Migrator.new(data, previously_migrated_schema)
   end
 
+  # :reek:ControlParameter
   def finalize!(failure)
     return state_error! if failure
     return update!(state: 'pending', progress: 0) if rollbacking?
