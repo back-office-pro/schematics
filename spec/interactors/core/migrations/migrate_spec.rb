@@ -73,7 +73,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_create_prospects.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
       end
 
       it 'creates a model file' do
@@ -169,7 +169,7 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a migration file' do
-        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
       end
 
       it 'creates a model file' do
@@ -221,7 +221,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_drop_prospects.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
       end
 
       it 'destroys the model file' do
@@ -295,7 +295,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_add_last_name_to_prospects.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_add_last_name_to_prospects_*.rb')]).not_to be_empty
       end
 
       it 'creates translations' do
@@ -333,7 +333,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'creates a migration file' do
         migrate
-        expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects_*.rb')]).not_to be_empty
       end
 
       it 'destroys translations' do
@@ -377,7 +377,7 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a migration file' do
-        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
 
       it 'does not respond to old model attribute' do
@@ -418,7 +418,7 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a migration file' do
-        expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 
@@ -454,7 +454,7 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a migration file' do
-        expect(Dir[root.join('db/migrate/*_change_first_name_index_in_prospects.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_change_first_name_index_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 
