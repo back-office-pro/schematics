@@ -35,6 +35,12 @@ class Migration < Schematics::ApplicationRecord
     Schematics::Migrator.new(data, previously_migrated_schema)
   end
 
+  def commit_message
+    return "Rollback v#{data_version} (core v#{Schematics::VERSION})" if rollbacking?
+
+    "Migration v#{data_version} (core v#{Schematics::VERSION})"
+  end
+
   # :reek:ControlParameter
   def finalize!(failure)
     return state_error! if failure
