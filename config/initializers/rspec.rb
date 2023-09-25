@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   require 'active_storage_validations/matchers'
   require 'paper_trail/frameworks/rspec'
   require 'rspec/rails'

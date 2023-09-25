@@ -8,6 +8,6 @@ FriendlyId.defaults do |config|
   end
 end
 
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   require 'friendly_id/mobility'
 end

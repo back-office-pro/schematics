@@ -34,7 +34,7 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false
   end
@@ -45,7 +45,7 @@ Rails.configuration.to_prepare do
   end
 end
 
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   require 'mobility/backends/action_text'
   require 'mobility/backends/active_record/key_value'
   require 'mobility/override/backends/active_record/key_value'
@@ -59,7 +59,7 @@ Rails.configuration.to_prepare do
     .prepend(Mobility::Override::Backends::ActiveRecord::KeyValue)
 end
 
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   FriendlyId::Slug.include(Schematics::SoftDeletable)
 end
 

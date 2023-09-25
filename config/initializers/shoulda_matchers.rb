@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   require 'shoulda/callback/matchers'
   require 'shoulda/matchers'
 
