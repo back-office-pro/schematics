@@ -14,9 +14,11 @@ it:
           finished: Finita
           in_progress: In corso
           pending: In sospeso
+          rollbacking: Rollback in corso
     events:
       migration:
         migrate: Migrare
+        rollback: Tornare indietro
     models:
       migration:
         gender: female

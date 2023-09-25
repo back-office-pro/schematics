@@ -11,7 +11,7 @@ module Schematics
             sleep 1
             break unless migration.reload.in_progress?
           end
-          if migration.finished?
+          unless migration.error?
             ::Tenant.schema = migration.data
             Core::Migrations::Reload.call(migration:)
           end
@@ -22,10 +22,7 @@ module Schematics
 
     # :reek:UncommunicativeVariableName
     def perform(migration)
-      result = Core::Migrations::Migrate.call(migration:)
-      return migration.state_error! if result.failure?
-
-      migration.state_finished!
+      migration.finalize! Core::Migrations::Migrate.call(migration:).failure?
     end
   end
 end

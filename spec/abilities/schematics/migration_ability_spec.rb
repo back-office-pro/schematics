@@ -10,6 +10,9 @@ RSpec.describe Schematics::MigrationAbility do
   let(:migration) { Migration.new(state:) }
 
   it { is_expected.not_to be_able_to(:import, Migration) }
+  it { is_expected.not_to be_able_to(:update, migration) }
+  it { is_expected.not_to be_able_to(:migrate, migration) }
+  it { is_expected.not_to be_able_to(:rollback, migration) }
 
   context 'when the migration is in progress' do
     let(:state) { :in_progress }

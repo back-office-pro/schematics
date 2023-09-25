@@ -27,7 +27,27 @@ class Migration < Schematics::ApplicationRecord
     Schematics::MigrateSchemaJob.perform_later(self)
   end
 
-  memoize def migrator = Schematics::Migrator.new(data, previously_migrated_schema)
+  alias after_rollback_event after_migrate_event
+
+  memoize def migrator
+    return Schematics::Migrator.new(previously_migrated_schema, data) if rollbacking?
+
+    Schematics::Migrator.new(data, previously_migrated_schema)
+  end
+
+  def commit_message
+    return "Rollback v#{data_version} (core v#{Schematics::VERSION})" if rollbacking?
+
+    "Migration v#{data_version} (core v#{Schematics::VERSION})"
+  end
+
+  # :reek:ControlParameter
+  def finalize!(failure)
+    return state_error! if failure
+    return update!(state: 'pending', progress: 0) if rollbacking?
+
+    state_finished!
+  end
 
   def to_yaml = { one: { state: 'finished', data_version:, data: data.as_json } }
     .deep_stringify_keys

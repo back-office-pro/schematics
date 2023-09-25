@@ -6,13 +6,17 @@ module Core
       include Interactor
 
       delegate :migration, to: :context, private: true
-      delegate :data_version, to: :migration, private: true
+      delegate :data_version, :rollbacking?, to: :migration, private: true
 
       def call
         PaperTrail.request(enabled: false) do
-          ::Documentation.create!(app_version: data_version)
+          rollbacking? ? documentation.really_destroy! : documentation.save!
         end
       end
+
+      private
+
+      memoize def documentation = ::Documentation.find_or_initialize_by(app_version: data_version)
     end
   end
 end
