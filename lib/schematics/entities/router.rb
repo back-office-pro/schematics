@@ -124,7 +124,7 @@ module Schematics
 
       def event_route(event)
         <<~RUBY
-          patch :#{event.name}, action: :trigger, event: '#{event.name}', on: :member
+          patch '#{event.state_machine_name}/#{event.name}', action: :trigger, event: '#{event.suffixed_name}', on: :member
         RUBY
       end
 
