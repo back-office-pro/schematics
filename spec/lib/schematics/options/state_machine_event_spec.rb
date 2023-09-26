@@ -27,6 +27,7 @@ describe Schematics::Options::StateMachineEvent do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_valid }
 
+  its(:suffixed_name) { is_expected.to eq('complete_state') }
   its(:action) { is_expected.to eq(:after_complete_event) }
   its(:icon) { is_expected.to eq(:check) }
   its(:color) { is_expected.to eq(:success) }
