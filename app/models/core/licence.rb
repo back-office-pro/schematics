@@ -26,7 +26,7 @@ class Licence < Schematics::ApplicationRecord
     .new(**metadata)
 
   def quota_entities_exceeded?
-    return true unless active?
+    return true unless state_active?
 
     entities_size >= quota.entities
   end
@@ -36,7 +36,7 @@ class Licence < Schematics::ApplicationRecord
   end
 
   def quota_storage_exceeded?
-    return true unless active?
+    return true unless state_active?
 
     storage_size >= quota.storage
   end
@@ -46,7 +46,7 @@ class Licence < Schematics::ApplicationRecord
   end
 
   def quota_users_exceeded?
-    return true unless active?
+    return true unless state_active?
 
     users_size >= quota.users
   end
@@ -56,7 +56,7 @@ class Licence < Schematics::ApplicationRecord
   end
 
   def quota_api_keys_exceeded?
-    return true unless active?
+    return true unless state_active?
 
     api_keys_size >= quota.api_keys
   end
