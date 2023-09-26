@@ -4,7 +4,7 @@ module Schematics
   class BlogAbility < ApplicationAbility
     def initialize
       super
-      can :read, ::BlogPost, state: :published
+      can :read, ::BlogPost.state_published
     end
   end
 end
