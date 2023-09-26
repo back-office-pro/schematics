@@ -45,10 +45,10 @@ module Core
         }.compact
 
         def subscription_state
-          return :inactive unless subscription_id
-          return :canceled if subscription_cancel_at_period_end
+          return ::Licence::STATE_STATE_INACTIVE unless subscription_id
+          return ::Licence::STATE_STATE_CANCELED if subscription_cancel_at_period_end
 
-          :active
+          ::Licence::STATE_STATE_ACTIVE
         end
 
         def product_id = subscription

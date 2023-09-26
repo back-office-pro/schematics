@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::MigrateSchemaJob do
-  let(:migration) { Migration.create!(data:, state: :in_progress) }
+  let(:migration) { Migration.create!(data:, state:) }
+  let(:state) { Migration::STATE_STATE_IN_PROGRESS }
   let(:data) do
     [
       {
