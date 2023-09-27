@@ -9,7 +9,8 @@ module Schematics
     included do
       has_paper_trail ignore: DENYLIST,
                       skip: hidden_attributes + filter_attributes,
-                      versions: { class_name: 'Schematics::Version' }
+                      versions: { class_name: 'Schematics::Version' },
+                      on: %i[create update destroy]
     end
 
     class_methods do
