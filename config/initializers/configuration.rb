@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-Rails.configuration.after_initialize do
+Rails.configuration.to_prepare do
   Rails.configuration.active_storage.service_configurations = Schematics::Engine.config_for(:storage) # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config/environments'].unshift Schematics::Engine.root.join('config', 'environments') # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config/database'].unshift Schematics::Engine.root.join('config', 'database.yml') # rubocop:disable Layout/LineLength
