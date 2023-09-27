@@ -12,6 +12,7 @@ RSpec.describe Core::Permissions::FeaturesQuery do
       Permission.where(model: 'Meeting').to_a,
       Permission.where(model: 'Task').to_a,
       Permission.where(model: 'Chart', action: 'show'),
+      Permission.where(model: 'Stat', action: 'show'),
       Permission.where(model: 'ActiveStorage::Blob', action: 'index')
     ].flatten
   end
