@@ -333,7 +333,9 @@ module Schematics
         if allow?(:trigger)
           events.each do |event|
             it "should #{event.name} record" do
-              patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record]), headers:, as: :html # rubocop:disable Layout/LineLength
+              patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
+                    headers:,
+                    as: :html
               if ability.can?(event.name.to_sym, record)
                 is_expected.to redirect_to(polymorphic_path(record))
               else
@@ -342,7 +344,9 @@ module Schematics
             end
 
             it "should #{event.name} API record" do
-              patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record]), headers:, as: :json # rubocop:disable Layout/LineLength
+              patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
+                    headers:,
+                    as: :html
               if ability.can?(event.name.to_sym, record)
                 status = record.public_send(:"may_#{event.suffixed_name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
                 is_expected.to have_http_status(status)
