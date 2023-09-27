@@ -31,7 +31,7 @@ class RepositoryGenerator < Rails::Generators::Base
     .credentials
     .github[:access_token]
 
-  def connection_options = { request: { open_timeout: 1, timeout: 1 } }
+  def connection_options = { request: { open_timeout: 5, timeout: 5 } }
 
   memoize def client = Octokit::Client.new(access_token:, connection_options:)
 end
