@@ -2,7 +2,7 @@
 
 module SearchEngine
   # :reek:MissingSafeMethod
-  class Elasticsearch
+  class Opensearch
     def indexable? = true
 
     def concern = Schematics::Searchkickable

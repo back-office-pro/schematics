@@ -84,7 +84,7 @@ class Licence < Schematics::ApplicationRecord
   private
 
   def search_engine
-    return 'elasticsearch' if quota.databases > 2
+    return 'opensearch' if quota.databases > 2
 
     'postgresql'
   end

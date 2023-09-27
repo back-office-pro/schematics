@@ -3,7 +3,7 @@
 require 'active_support/core_ext/module/delegation'
 require 'backend/postgresql'
 require 'backend/redis'
-require 'search_engine/elasticsearch'
+require 'search_engine/opensearch'
 require 'search_engine/postgresql'
 
 # :reek:Attribute
