@@ -19,6 +19,7 @@ module Schematics
 
       delegate :to_str, to: :trigger, prefix: true
       delegate :entity, :values, to: :state_machine
+      delegate :name, to: :state_machine, prefix: true
 
       attr_accessor :id, :state_machine, :from, :to, :callback
       attr_writer :icon, :color
@@ -36,6 +37,8 @@ module Schematics
       end
 
       def action = :"after_#{name}_event"
+
+      def suffixed_name = "#{name}_#{state_machine_name}"
 
       def human
         translate(

@@ -6,7 +6,7 @@ module Schematics
       module Licence
         class Component < ApplicationComponent
           delegate :icon, to: '::Licence.entity'
-          delegate :inactive?, to: :resource
+          delegate :state_inactive?, to: :resource
 
           memoize def resource = ::Licence.instance
 

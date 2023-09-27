@@ -6,11 +6,11 @@ module Core
       include Interactor
 
       delegate :migration, to: :context, private: true
-      delegate :data_version, :rollbacking?, to: :migration, private: true
+      delegate :data_version, :state_rollbacking?, to: :migration, private: true
 
       def call
         PaperTrail.request(enabled: false) do
-          rollbacking? ? documentation.really_destroy! : documentation.save!
+          state_rollbacking? ? documentation.really_destroy! : documentation.save!
         end
       end
 

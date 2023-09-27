@@ -86,8 +86,8 @@ module Schematics
           end
           events.each do |event|
             is_expected
-              .to route(:patch, polymorphic_path(record, action: event.name))
-              .to params.merge(action: :trigger, id:, event: event.name).compact
+              .to route(:patch, polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record])) # rubocop:disable Layout/LineLength
+              .to params.merge(action: :trigger, id:, event: event.suffixed_name).compact
           end
         end
       end

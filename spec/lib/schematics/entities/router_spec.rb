@@ -73,9 +73,9 @@ describe Schematics::Entities::Router do
           delete :restore, on: :member
           get :autocomplete, on: :collection
           post :duplicate, on: :member
-          patch :close, action: :trigger, event: 'close', on: :member
-          patch :refuse, action: :trigger, event: 'refuse', on: :member
-          patch :reopen, action: :trigger, event: 'reopen', on: :member
+          patch 'state/close', action: :trigger, event: 'close_state', on: :member
+          patch 'state/refuse', action: :trigger, event: 'refuse_state', on: :member
+          patch 'state/reopen', action: :trigger, event: 'reopen_state', on: :member
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
           end

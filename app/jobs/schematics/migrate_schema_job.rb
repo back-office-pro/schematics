@@ -9,9 +9,9 @@ module Schematics
         Thread.new(record) do |migration|
           loop do
             sleep 1
-            break unless migration.reload.in_progress?
+            break unless migration.reload.state_in_progress?
           end
-          unless migration.error?
+          unless migration.state_error?
             ::Tenant.schema = migration.data
             Core::Migrations::Reload.call(migration:)
           end

@@ -1,5 +1,5 @@
 - events.each do |event|
-  = link_to polymorphic_path(resource, action: event.name),
+  = link_to polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, resource]),
             title: event.human,
             data:,
             class: css_classes_for(event) do

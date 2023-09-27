@@ -17,7 +17,7 @@ class Migration < Schematics::ApplicationRecord
   class << self
     delegate :data_version, :data, to: :current, prefix: true, allow_nil: true
 
-    def current = finished.last
+    def current = state_finished.last
 
     def core = new(data: Tenant.schema.as_json, data_version: current_data_version)
   end
@@ -30,13 +30,13 @@ class Migration < Schematics::ApplicationRecord
   alias after_rollback_event after_migrate_event
 
   memoize def migrator
-    return Schematics::Migrator.new(previously_migrated_schema, data) if rollbacking?
+    return Schematics::Migrator.new(previously_migrated_schema, data) if state_rollbacking?
 
     Schematics::Migrator.new(data, previously_migrated_schema)
   end
 
   def commit_message
-    return "Rollback v#{data_version} (core v#{Schematics::VERSION})" if rollbacking?
+    return "Rollback v#{data_version} (core v#{Schematics::VERSION})" if state_rollbacking?
 
     "Migration v#{data_version} (core v#{Schematics::VERSION})"
   end
@@ -44,12 +44,12 @@ class Migration < Schematics::ApplicationRecord
   # :reek:ControlParameter
   def finalize!(failure)
     return state_error! if failure
-    return update!(state: 'pending', progress: 0) if rollbacking?
+    return update!(state: STATE_STATE_IN_PROGRESS, progress: 0) if state_rollbacking?
 
     state_finished!
   end
 
-  def to_yaml = { one: { state: 'finished', data_version:, data: data.as_json } }
+  def to_yaml = { one: { state: STATE_STATE_FINISHED, data_version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
 
@@ -57,7 +57,7 @@ class Migration < Schematics::ApplicationRecord
 
   def previously_migrated_schema = self
     .class
-    .finished
+    .state_finished
     .excluding(self)
     .order(created_at: :desc)
     .find_by(created_at: ..created_at)

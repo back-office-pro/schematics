@@ -12,7 +12,7 @@ RSpec.describe Migration do
     is_expected.to eq <<~YAML
       ---
       one:
-        state: finished
+        state: :finished
         data_version: 1.5
         data: []
     YAML

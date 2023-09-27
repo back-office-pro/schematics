@@ -18,7 +18,7 @@ module Schematics
       def readonly? = true
 
       def to_str = super + <<~RUBY.squeeze("\n")
-        aasm column: :#{name}, enum: true, no_direct_assignment: #{!direct_assignment} do
+        aasm :#{name}, column: :#{name}, enum: true, namespace: :#{name}, create_scopes: false, no_direct_assignment: #{!direct_assignment} do
           state :#{values.first}, initial: true
         #{states_to_str}
         #{events_to_str}

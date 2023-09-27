@@ -6,7 +6,7 @@ require 'cancan/matchers'
 RSpec.describe Schematics::MigrationAbility do
   subject(:ability) { described_class.new }
 
-  let(:state) { :pending }
+  let(:state) { Migration::STATE_STATE_PENDING }
   let(:migration) { Migration.new(state:) }
 
   it { is_expected.not_to be_able_to(:import, Migration) }
@@ -15,14 +15,14 @@ RSpec.describe Schematics::MigrationAbility do
   it { is_expected.not_to be_able_to(:rollback, migration) }
 
   context 'when the migration is in progress' do
-    let(:state) { :in_progress }
+    let(:state) { Migration::STATE_STATE_IN_PROGRESS }
 
     it { is_expected.not_to be_able_to(:update, migration) }
     it { is_expected.not_to be_able_to(:archive, migration) }
   end
 
   context 'when the migration is finished' do
-    let(:state) { :finished }
+    let(:state) { Migration::STATE_STATE_FINISHED }
 
     it { is_expected.not_to be_able_to(:update, migration) }
   end

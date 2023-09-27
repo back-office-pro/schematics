@@ -6,7 +6,7 @@ RSpec.describe Core::Migrations::Migrate do
   let(:migration) { Migration.new(data:, state:) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:current_data) { initial_data }
-  let(:state) { :in_progress }
+  let(:state) { Migration::STATE_STATE_IN_PROGRESS }
   let(:root) { Rails.root }
   let(:initial_data) do
     [

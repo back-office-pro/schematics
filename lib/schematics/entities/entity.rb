@@ -121,6 +121,10 @@ module Schematics
         events.find { _1.name == name }
       end
 
+      def find_event_by_suffixed_name(name)
+        events.find { _1.suffixed_name == name }
+      end
+
       def check_for_association_name_collisions
         associations
           .grep_v(Associations::HasAndBelongsToMany)

@@ -108,7 +108,7 @@ module Schematics
     end
 
     def trigger
-      event = entity.find_event_by_name(params.require(:event))
+      event = entity.find_event_by_suffixed_name(params.require(:event))
       authorize! event.name.to_sym, @resource
       result = Resources::Trigger.call(resource: @resource, event:)
       respond_with result,
