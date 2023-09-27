@@ -12,6 +12,10 @@ module Schematics
 
           def help = render AttachmentValidators::Component.new(validators:)
 
+          def label = t('helpers.label.destroy')
+
+          def wrapper_class = 'text-secondary float-end me-0'
+
           def required
             super unless value.attached?
           end
