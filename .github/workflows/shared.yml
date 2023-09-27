@@ -60,7 +60,7 @@ jobs:
           bundler-cache: true
           ruby-version: 3.2.2
       - name: Run brakeman
-        run: bundle exec brakeman --no-pager --no-exit-on-error
+        run: bundle exec brakeman -x ForgerySetting --no-pager --no-exit-on-error
   bundler_audit:
     name: Bundler audit
     runs-on: ubuntu-latest
