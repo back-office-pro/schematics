@@ -3,9 +3,9 @@
 module Schematics
   class ImportJob < ApplicationJob
     def perform(import)
-      import.finalize! Core::Imports::ImportData
-        .call(import:)
-        .errors
+      PaperTrail.request(enabled: false) do
+        import.finalize! Core::Imports::ImportData.call(import:).errors
+      end
     end
   end
 end
