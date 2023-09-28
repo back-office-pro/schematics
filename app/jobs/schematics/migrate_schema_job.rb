@@ -28,7 +28,9 @@ module Schematics
 
     # :reek:UncommunicativeVariableName
     def perform(migration)
-      migration.finalize! Core::Migrations::Migrate.call(migration:).failure?
+      PaperTrail.request(enabled: false) do
+        migration.finalize! Core::Migrations::Migrate.call(migration:).failure?
+      end
     end
   end
 end

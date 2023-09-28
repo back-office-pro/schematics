@@ -41,9 +41,7 @@ module Core
         @index.increment
         return unless persisted?
 
-        PaperTrail.request(enabled: false) do
-          migration.update!(progress: (@index.value / total) * 100)
-        end
+        migration.update!(progress: (@index.value / total) * 100)
       end
 
       def total = migrator_clean_commands
