@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'schematics'
   spec.add_development_dependency 'debug', '~> 1.8.0'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.12'
-  spec.add_development_dependency 'isolator', '~> 0.10.0'
+  spec.add_development_dependency 'isolator', '~> 0.11.0'
   spec.add_development_dependency 'reek', '~> 6.1.4'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
   spec.add_development_dependency 'rubocop', '~> 1.56.3'
