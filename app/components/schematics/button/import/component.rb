@@ -18,6 +18,8 @@ module Schematics
 
         def css_classes = %w[btn btn-sm btn-icon-split ms-1]
 
+        def path = new_polymorphic_path([model_class, ::Import], format: nil)
+
         def render?
           can?(:import, model_class)
         end

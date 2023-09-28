@@ -21,6 +21,13 @@ module Schematics
           )
         end
 
+        def path_for(event)
+          polymorphic_path(
+            [event.state_machine_name.to_sym, event.name.to_sym, resource],
+            format: nil
+          )
+        end
+
         def icon_class
           'fa-fw' if compact?
         end
