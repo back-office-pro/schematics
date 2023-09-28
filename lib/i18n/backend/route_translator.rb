@@ -6,7 +6,7 @@ module I18n
       include Base
       include Memoize
 
-      delegate :available_locales, to: ::I18n
+      delegate :available_locales, to: 'Rails.configuration.i18n'
 
       def lookup(locale, key, scope = [], _options = EMPTY_HASH)
         case [scope, key]
