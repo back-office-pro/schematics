@@ -85,7 +85,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mobility', '~> 1.3.0.rc1'
   spec.add_dependency 'mobility-actiontext', '~> 1.1.1'
   spec.add_dependency 'mobility-ransack', '~> 1.2.2'
-  spec.add_dependency 'octokit', '~> 7.1.0'
+  spec.add_dependency 'octokit', '~> 7.2.0'
   spec.add_dependency 'oj', '~> 3.16.1'
   spec.add_dependency 'omniauth', '~> 2.1.1'
   spec.add_dependency 'omniauth-google-oauth2', '~> 1.1.1'
