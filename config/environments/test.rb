@@ -4,7 +4,7 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Configuration
-  config.cache_classes = true
+  config.enable_reloading = false
   config.consider_all_requests_local = true
   config.eager_load = ENV['CI'].present?
 
@@ -13,11 +13,12 @@ Rails.application.configure do
   config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.hour.to_i}" } # rubocop:disable Style/StringHashKeys
 
   # Action Dispatch
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = :rescuable
 
   # Action Controller
   config.action_controller.perform_caching = false
   config.action_controller.allow_forgery_protection = false
+  config.action_controller.raise_on_missing_callback_actions = true
 
   # Active Job
   config.active_job.queue_adapter = :test
