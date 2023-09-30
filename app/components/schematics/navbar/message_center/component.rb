@@ -33,8 +33,8 @@ module Schematics
         memoize def count = current_user
           .messages
           .unread
-          .load_async
-          .count
+          .async_count
+          .value
       end
     end
   end
