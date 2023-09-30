@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
+class CreateActiveStorageTables < ActiveRecord::Migration[7.1]
   def change
     create_table :active_storage_blobs, id: :uuid do |t|
       t.string   :key,          null: false
@@ -9,7 +9,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
       t.text     :metadata
       t.string   :service_name, null: false
       t.bigint   :byte_size,    null: false
-      t.string   :checksum,     null: false
+      t.string   :checksum
 
       t.timestamps
 
@@ -27,7 +27,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.index %i[record_type record_id name blob_id],
-              name: 'index_active_storage_attachments_uniqueness',
+              name: :index_active_storage_attachments_uniqueness,
               unique: true,
               where: 'deleted_at IS NULL'
       t.foreign_key :active_storage_blobs, column: :blob_id
@@ -40,7 +40,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.index %i[blob_id variation_digest],
-              name: 'index_active_storage_variant_records_uniqueness',
+              name: :index_active_storage_variant_records_uniqueness,
               unique: true,
               where: 'deleted_at IS NULL'
       t.foreign_key :active_storage_blobs, column: :blob_id
