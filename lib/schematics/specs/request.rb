@@ -115,7 +115,7 @@ module Schematics
           end
 
           it 'should update record' do
-            patch polymorphic_path(record), params:, headers:, as: :html
+            patch(polymorphic_path(record), params:, headers:)
             redirect_path = ability.can?(:update, record) ? polymorphic_path(record.reload) : root_path # rubocop:disable Layout/LineLength
             is_expected.to redirect_to(redirect_path)
           end
@@ -127,7 +127,7 @@ module Schematics
           end
 
           it 'should be a bad request' do
-            patch polymorphic_path(record), params: {}, headers: headers_with_referer, as: :html
+            patch polymorphic_path(record), params: {}, headers: headers_with_referer
             redirect_path = ability.can?(:update, record) ? edit_profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
@@ -160,12 +160,12 @@ module Schematics
 
           it 'should create record' do
             if ability.can?(:create, model_class)
-              expect { post index_path, params:, headers:, as: :html }
+              expect { post index_path, params:, headers: }
                 .to change(model_class, :count)
                 .by(1)
               is_expected.to redirect_to(polymorphic_path(model_class.last))
             else
-              expect { post index_path, params:, headers:, as: :html }
+              expect { post index_path, params:, headers: }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -185,7 +185,7 @@ module Schematics
           end
 
           it 'should be a bad request' do
-            post index_path, params: {}, headers: headers_with_referer, as: :html
+            post index_path, params: {}, headers: headers_with_referer
             redirect_path = ability.can?(:create, model_class) ? edit_profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
@@ -199,17 +199,17 @@ module Schematics
           it 'should duplicate record' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
-                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :html }
+                expect { post polymorphic_path(record, action: :duplicate), headers: }
                   .not_to change(model_class, :count)
                 is_expected.to have_http_status(:unprocessable_entity)
               else
-                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :html }
+                expect { post polymorphic_path(record, action: :duplicate), headers: }
                   .to change(model_class, :count)
                   .by(1)
                 is_expected.to redirect_to(polymorphic_path(model_class.last))
               end
             else
-              expect { post polymorphic_path(record, action: :duplicate), headers:, as: :html }
+              expect { post polymorphic_path(record, action: :duplicate), headers: }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -247,12 +247,12 @@ module Schematics
 
           it 'should destroy record' do
             if ability.can?(:destroy, record)
-              expect { delete polymorphic_path(record), headers:, as: :html }
+              expect { delete polymorphic_path(record), headers: }
                 .to change(model_class, :count)
                 .by(-1)
               is_expected.to redirect_to(index_path)
             else
-              expect { delete polymorphic_path(record), headers:, as: :html }
+              expect { delete polymorphic_path(record), headers: }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -276,12 +276,12 @@ module Schematics
           it 'should archive record' do
             record.restore
             if ability.can?(:archive, record)
-              expect { delete polymorphic_path(record, action: :archive), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :archive), headers: }
                 .to change(model_class, :count)
                 .by(-1)
               is_expected.to redirect_to(index_path)
             else
-              expect { delete polymorphic_path(record, action: :archive), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :archive), headers: }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -304,12 +304,12 @@ module Schematics
           it 'should restore record' do
             record.destroy!
             if ability.can?(:restore, record)
-              expect { delete polymorphic_path(record, action: :restore), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :restore), headers: }
                 .to change(model_class, :count)
                 .by(1)
               is_expected.to redirect_to(index_path)
             else
-              expect { delete polymorphic_path(record, action: :restore), headers:, as: :html }
+              expect { delete polymorphic_path(record, action: :restore), headers: }
                 .not_to change(model_class, :count)
               is_expected.to redirect_to(root_path)
             end
@@ -333,9 +333,7 @@ module Schematics
         if allow?(:trigger)
           events.each do |event|
             it "should #{event.name} record" do
-              patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
-                    headers:,
-                    as: :html
+              patch(polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), headers:) # rubocop:disable Layout/LineLength
               if ability.can?(event.name.to_sym, record)
                 is_expected.to redirect_to(polymorphic_path(record))
               else
@@ -346,7 +344,7 @@ module Schematics
             it "should #{event.name} API record" do
               patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
                     headers:,
-                    as: :html
+                    as: :json
               if ability.can?(event.name.to_sym, record)
                 status = record.public_send(:"may_#{event.suffixed_name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
                 is_expected.to have_http_status(status)
