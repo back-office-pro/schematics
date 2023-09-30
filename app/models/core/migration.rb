@@ -2,7 +2,7 @@
 
 # :reek:MissingSafeMethod
 class Migration < Schematics::ApplicationRecord
-  serialize :data, Schematics::Schema
+  serialize :data, coder: Schematics::Schema
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
   delegate :build_commands,
