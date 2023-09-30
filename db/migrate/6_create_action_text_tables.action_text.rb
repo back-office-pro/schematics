@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateActionTextTables < ActiveRecord::Migration[7.0]
+class CreateActionTextTables < ActiveRecord::Migration[7.1]
   def change
     create_table :action_text_rich_texts, id: :uuid do |t|
       t.string     :name, null: false
