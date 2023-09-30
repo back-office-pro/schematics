@@ -520,11 +520,11 @@ RSpec.describe Core::Migrations::Migrate do
       end
 
       it 'creates a rename table migration file' do
-        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
       end
 
       it 'creates a rename attribute migration file' do
-        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_clients.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_clients_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
 
       it 'creates a model file' do
