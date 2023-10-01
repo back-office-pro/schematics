@@ -47,7 +47,6 @@ it:
       limit_out_of_range: ha un numero di file al di fuori dei limiti
       mime_type: non è un tipo MIME valido
       name: deve contenere solo lettere minuscole o trattino basso
-      numerable: "$%{name} non è una variabile numerica"
       password: deve contenere almeno un numero, una lettera minuscola, una lettera maiuscola e un carattere speciale
       singular: non è singolare
     virtuals:
