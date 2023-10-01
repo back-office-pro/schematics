@@ -35,7 +35,7 @@ export default class extends ApplicationController {
   get options () {
     return {
       trigger: '$',
-      values: (text, callback) => callback(this.collection),
+      values: (_, callback) => callback(this.collection),
       menuItemLimit: 5,
       noMatchTemplate: () => null
     }
