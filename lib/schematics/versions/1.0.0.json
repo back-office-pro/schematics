@@ -17,6 +17,11 @@
         "id": "773faa33-bb43-470c-a7ae-3662a0cfd5b4",
         "name": "full_name",
         "function": "$last_name $first_name"
+      },
+      {
+        "id": "225d0bf6-63d5-4594-8067-5a6a970494ee",
+        "name": "confirmed",
+        "function": "$password_digest != NULL"
       }
     ],
     "attributes": [

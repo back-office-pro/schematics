@@ -10,10 +10,6 @@ class User < Schematics::ApplicationRecord
   validate :secure_password_challenge
   delegate :admin?, to: :role
 
-  def confirmed?
-    password_digest.present?
-  end
-
   memoize def online? = sessions
     .active
     .exists?
