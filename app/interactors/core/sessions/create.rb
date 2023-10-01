@@ -35,18 +35,14 @@ module Core
         resource_params.is_a?(OmniAuth::AuthHash::InfoHash) && user.id.present?
       end
 
-      def password
-        context.password || resource_params[:password]
-      end
+      def password = resource_params[:password]
 
       def remember_me? = ::ActiveModel::Type::Boolean
         .new
         .cast(resource_params[:remember_me])
 
       def user
-        context.resource ||
-          ::User.find_by(email: resource_params[:email]) ||
-          Schematics::Guest::User.new
+        ::User.find_by(email: resource_params[:email]) || Schematics::Guest::User.new
       end
     end
   end
