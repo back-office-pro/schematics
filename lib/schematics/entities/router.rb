@@ -19,10 +19,9 @@ module Schematics
         @entity = entity
       end
 
-      def to_str = [
-        route_definition,
-        resolver
-      ].compact.join
+      def to_str = [route_definition, resolver]
+        .compact
+        .join
 
       private
 
