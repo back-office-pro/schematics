@@ -3,5 +3,5 @@ en:
   schematics:
     profile:
       update:
-        failure: Wrong password
+        failure: An error occurred
         success: Your profile was successfully updated

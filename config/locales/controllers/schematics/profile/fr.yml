@@ -3,5 +3,5 @@ fr:
   schematics:
     profile:
       update:
-        failure: Mauvais mot de passe
+        failure: Une erreur est survenue
         success: Votre profil a été mis à jour avec succès

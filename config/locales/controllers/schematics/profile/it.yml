@@ -3,5 +3,5 @@ it:
   schematics:
     profile:
       update:
-        failure: Password errata
+        failure: Si è verificato un errore
         success: Il suo profilo è stato aggiornato correttamente
