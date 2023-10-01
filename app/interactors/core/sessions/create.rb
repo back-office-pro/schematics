@@ -6,7 +6,6 @@ module Core
     class Create
       include Schematics::Interactable
 
-      delegate :authenticate_by, to: ::User, private: true
       delegate :confirmed?, to: :user, private: true
       delegate :can?, to: :current_ability, private: true
       delegate :cookies,
@@ -16,9 +15,11 @@ module Core
                to: :context,
                private: true
 
+      before { @user = ::User.authenticate_by(email:, password:) }
+
       def call
         fail!(message: '.unconfirmed') unless confirmed?
-        fail! unless authenticate_by(email:, password:)
+        fail! unless @user
 
         session = current_session.login!(user)
         context.current_session_id = session.id
@@ -44,8 +45,8 @@ module Core
         .new
         .cast(resource_params[:remember_me])
 
-      def user
-        ::User.find_by(email:) || Schematics::Guest::User.new
+      memoize def user
+        @user || ::User.find_by(email:) || Schematics::Guest::User.new
       end
     end
   end
