@@ -20,7 +20,7 @@ module Schematics
       validates :name, uniqueness: { scope: %i[entity virtuals] }
       validates :preload, inclusion: { in: :allowed_references }
       validates :variables, inclusion: { in: :allowed_variables }
-      validate :assignment_token?
+      validate :tokens_cannot_have_assignment
 
       class << self
         def build(**)
@@ -97,7 +97,7 @@ module Schematics
         .renderable_elements
         .map(&:name)
 
-      def assignment_token?
+      def tokens_cannot_have_assignment
         errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
       end
 
