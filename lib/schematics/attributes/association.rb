@@ -67,9 +67,9 @@ module Schematics
 
       def search_column = :"#{name}_#{descriptor.name}"
 
-      def to_str = scope_to_str
-        .concat(second_level_scopes_to_str)
-        .concat(association_to_str)
+      def to_str = [scope_to_str, second_level_scopes_to_str, association_to_str]
+        .compact
+        .join
 
       def inverse_entity
         return entity.schema.find_entity_by_name(association_type) unless polymorphic?
@@ -141,7 +141,7 @@ module Schematics
       end
 
       def second_level_scopes_to_str
-        return '' if polymorphic?
+        return if polymorphic?
 
         inverse_entity
           .preloadable_elements
