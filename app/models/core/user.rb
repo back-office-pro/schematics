@@ -7,6 +7,7 @@ class User < Schematics::ApplicationRecord
   attribute :remember_me, :boolean
   attribute :time_zone, default: -> { ::Configuration.time_zone }
   attribute :locale, default: -> { ::Configuration.locale }
+  validate :secure_password_challenge
   delegate :admin?, to: :role
 
   def confirmed?
@@ -25,5 +26,15 @@ class User < Schematics::ApplicationRecord
 
   def to_s
     full_name.presence || email
+  end
+
+  private
+
+  def secure_password_challenge
+    return unless password_challenge
+    return unless password_digest_was
+    return if BCrypt::Password.new(password_digest_was).is_password?(password_challenge)
+
+    errors.add(:password_challenge)
   end
 end
