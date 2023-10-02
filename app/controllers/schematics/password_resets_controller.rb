@@ -30,7 +30,7 @@ module Schematics
     def set_user
       @user = model_class
               .with_role
-              .find_by!(password_reset_token: params[:token])
+              .find_by_token_for(:password_reset, params[:token])
     end
 
     def index_path = new_password_reset_path
