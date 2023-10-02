@@ -4,4 +4,3 @@ fr:
     create:
       failure: L'e-mail ou le mot de passe est invalide
       success: Connecté !
-      unconfirmed: Votre compte n'a pas de mot de passe configuré

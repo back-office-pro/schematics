@@ -4,7 +4,6 @@ it:
     attributes:
       user:
         avatar: Avatar
-        confirmed: Confermato
         created_meetings:
           one: Riunione creata
           other: Riunioni create

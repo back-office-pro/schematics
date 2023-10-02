@@ -6,7 +6,6 @@ module Core
     class Create
       include Schematics::Interactable
 
-      delegate :confirmed?, to: :user, private: true
       delegate :can?, to: :current_ability, private: true
       delegate :cookies,
                :current_session,
@@ -18,8 +17,7 @@ module Core
       before { @user = ::User.authenticate_by(email:, password:) }
 
       def call
-        fail!(message: '.unconfirmed') unless confirmed?
-        fail! unless @user
+        fail! unless authenticated? || omniauthenticated? || impersonated?
 
         session = current_session.login!(user)
         context.current_session_id = session.id
@@ -29,8 +27,12 @@ module Core
 
       private
 
-      def fail!(message: '.failure')
-        super unless omniauthenticated? || can?(:impersonate, user)
+      def authenticated?
+        @user.present?
+      end
+
+      def impersonated?
+        can?(:impersonate, user)
       end
 
       def omniauthenticated?

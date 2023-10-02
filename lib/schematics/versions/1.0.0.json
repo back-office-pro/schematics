@@ -17,11 +17,6 @@
         "id": "773faa33-bb43-470c-a7ae-3662a0cfd5b4",
         "name": "full_name",
         "function": "$last_name $first_name"
-      },
-      {
-        "id": "225d0bf6-63d5-4594-8067-5a6a970494ee",
-        "name": "confirmed",
-        "function": "$password_digest != NULL"
       }
     ],
     "attributes": [
@@ -41,14 +36,6 @@
         "options": {
           "confirm": true,
           "min": 8
-        }
-      },
-      {
-        "id": "7d190b66-026e-4091-958a-3e5a224cb25b",
-        "name": "password_reset_token",
-        "type": "token",
-        "options": {
-          "hidden": true
         }
       },
       {
@@ -117,11 +104,6 @@
       {
         "id": "c127bf53-14de-44cb-bb88-5fbe250328d4",
         "name": "read_notifications_at",
-        "type": "timestamp"
-      },
-      {
-        "id": "2243c375-1c04-43d5-9e29-64725726db00",
-        "name": "reset_password_sent_at",
         "type": "timestamp"
       }
     ]

@@ -4,4 +4,3 @@ it:
     create:
       failure: L'indirizzo e-mail o la password non sono validi
       success: Connesso!
-      unconfirmed: La password non è impostata per l'account

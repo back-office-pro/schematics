@@ -25,12 +25,6 @@ module Schematics
 
       private
 
-      def allowed_variables = super.concat(
-        entity
-          .non_renderable_attributes
-          .map(&:column_name)
-      )
-
       def scopes_to_str = <<~RUBY
         scope :#{name}, -> { where(Arel.sql("#{to_sql}")) }
         scope :not_#{name}, -> { where.not(Arel.sql("#{to_sql}")) }

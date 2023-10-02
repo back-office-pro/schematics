@@ -21,8 +21,6 @@ module Schematics
       def preferences = {}
 
       def role = ::Role.new(permissions:)
-
-      def confirmed? = true
     end
   end
 end

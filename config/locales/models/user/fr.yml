@@ -4,7 +4,6 @@ fr:
     attributes:
       user:
         avatar: Avatar
-        confirmed: Confirmé
         created_meetings:
           one: Réunion créée
           other: Réunions créées
