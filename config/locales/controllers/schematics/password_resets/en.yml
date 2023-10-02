@@ -3,7 +3,6 @@ en:
   schematics:
     password_resets:
       create:
-        failure: Unknown email
         success: Email sent with password reset instructions
       update:
         expired: Password reset has expired
