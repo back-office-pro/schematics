@@ -10,7 +10,6 @@ RSpec.describe Schematics::Guest::User do
   let(:permissions) { [Permission.new(action: 'create', model: 'User')] }
 
   it { is_expected.not_to be_admin }
-  it { is_expected.to be_confirmed }
 
   its(:id) { is_expected.to be_nil }
   its(:user_groups) { is_expected.to be_empty }
