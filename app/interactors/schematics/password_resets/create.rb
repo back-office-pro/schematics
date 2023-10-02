@@ -7,11 +7,7 @@ module Schematics
       delegate :email, to: :context, private: true
 
       def call
-        fail! unless user
-
-        user.regenerate_password_reset_token
-        user.update!(reset_password_sent_at: ::Time.current)
-        UserMailer.password_reset(user).deliver_later
+        UserMailer.password_reset(user).deliver_later if user
       end
 
       private

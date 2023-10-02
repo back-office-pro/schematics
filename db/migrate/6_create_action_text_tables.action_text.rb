@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Upgrade to Migration[7.1] when https://github.com/rails/rails/pull/46241 is released
 class CreateActionTextTables < ActiveRecord::Migration[7.0]
   def change
     create_table :action_text_rich_texts, id: :uuid do |t|

@@ -4,7 +4,7 @@ describe Schematics::Attributes::Timestamp do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
-  let(:name) { 'reset_password_sent_at' }
+  let(:name) { 'read_notifications_at' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -15,14 +15,14 @@ describe Schematics::Attributes::Timestamp do
 
   its(:database_type) { is_expected.to eq('datetime') }
   its(:default) { is_expected.to be_a(String) }
-  its(:column_name) { is_expected.to eq('reset_password_sent_at') }
+  its(:column_name) { is_expected.to eq('read_notifications_at') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
   its(:icon) { is_expected.to eq(:clock) }
   its(:validators) { is_expected.to be_empty }
   its('validators.to_str') { is_expected.to be_blank }
   its(:weight) { is_expected.to eq(1) }
-  its(:to_sql) { is_expected.to eq('users.reset_password_sent_at') }
-  its(:to_s) { is_expected.to eq('schema:user_reset_password_sent_at') }
+  its(:to_sql) { is_expected.to eq('users.read_notifications_at') }
+  its(:to_s) { is_expected.to eq('schema:user_read_notifications_at') }
 
   describe '.compatible_types' do
     subject { described_class.compatible_types }

@@ -9,8 +9,8 @@ module Core
         where(model:, query: nil)
           .order(created_at: :desc)
           .limit(LIMIT)
-          .load_async
-          .pluck(:filters)
+          .async_pluck(:filters)
+          .value
           .pluck(name)
           .uniq
           .compact

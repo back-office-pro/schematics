@@ -39,14 +39,6 @@
         }
       },
       {
-        "id": "7d190b66-026e-4091-958a-3e5a224cb25b",
-        "name": "password_reset_token",
-        "type": "token",
-        "options": {
-          "hidden": true
-        }
-      },
-      {
         "id": "9d59c4fb-384f-4d90-9b90-b1028b4df315",
         "name": "first_name",
         "type": "string",
@@ -112,11 +104,6 @@
       {
         "id": "c127bf53-14de-44cb-bb88-5fbe250328d4",
         "name": "read_notifications_at",
-        "type": "timestamp"
-      },
-      {
-        "id": "2243c375-1c04-43d5-9e29-64725726db00",
-        "name": "reset_password_sent_at",
         "type": "timestamp"
       }
     ]

@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'PasswordResets' do
+  include ActiveSupport::Testing::TimeHelpers
+
   include_context 'with unauthenticated user'
 
   describe 'POST #create' do
@@ -20,18 +22,23 @@ RSpec.describe 'PasswordResets' do
 
     context 'when email does not exist' do
       let(:email) { 'foo@foo.com' }
-      let(:expected_response) do
-        {
-          'errors' => [
-            I18n.t('schematics.password_resets.create.failure')
-          ]
-        }
-      end
 
       before { do_request }
 
-      it { is_expected.to have_http_status(:unprocessable_entity) }
-      it { expect(json_response).to eq(expected_response) }
+      it { is_expected.to have_http_status(:created) }
+      its(:body) { is_expected.to eq('null') }
+    end
+
+    context 'when enumerating accounts' do
+      let(:email) { 'foo@foo.com' }
+      let(:memory_store) { ActiveSupport::Cache.lookup_store(:memory_store) }
+
+      before do
+        allow(Rack::Attack.cache).to receive(:store).and_return(memory_store)
+        10.times { post(password_resets_path, params:, headers:) }
+      end
+
+      it { is_expected.to have_http_status(:too_many_requests) }
     end
   end
 
@@ -40,10 +47,9 @@ RSpec.describe 'PasswordResets' do
     let(:params) { { user: { password:, password_confirmation: } } }
 
     context 'when not expired token exists and password is confirmed' do
-      let(:token) { user.password_reset_token }
+      let(:token) { user.generate_token_for(:password_reset) }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
-      let(:reset_password_sent_at) { Time.current }
 
       before { do_request }
 
@@ -52,10 +58,9 @@ RSpec.describe 'PasswordResets' do
     end
 
     context 'when not expired token exists and password is not confirmed' do
-      let(:token) { user.password_reset_token }
+      let(:token) { user.generate_token_for(:password_reset) }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1' }
-      let(:reset_password_sent_at) { Time.current }
       let(:expected_response) do
         {
           'errors' => [
@@ -71,10 +76,10 @@ RSpec.describe 'PasswordResets' do
     end
 
     context 'when token has expired' do
-      let(:token) { user.password_reset_token }
+      let(:token) { user.generate_token_for(:password_reset) }
+      let(:time) { User::PASSWORD_RESET_TOKEN_DURATION.from_now.advance(minutes: 1) }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
-      let(:reset_password_sent_at) { Time.current - User::PASSWORD_RESET_TOKEN_DURATION }
       let(:expected_response) do
         {
           'errors' => [
@@ -83,7 +88,7 @@ RSpec.describe 'PasswordResets' do
         }
       end
 
-      before { do_request }
+      before { [token, travel_to(time) { do_request }] }
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
       it { expect(json_response).to eq(expected_response) }
@@ -95,8 +100,7 @@ RSpec.describe 'PasswordResets' do
 
       before { do_request }
 
-      it { is_expected.to have_http_status(:not_found) }
-      its(:body) { is_expected.to be_blank }
+      it { is_expected.to have_http_status(:bad_request) }
     end
   end
 end

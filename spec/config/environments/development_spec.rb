@@ -4,5 +4,5 @@ describe 'Development environment config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/environments/development.rb.tt',
-                  'f41570617bc596f654a09313be18342af6b2411a7cad9ec860e6ff41973f9023'
+                  '92235d8845a27f542baf4fd5d133b1b4e320b08007c990b5180d81b69a068242'
 end

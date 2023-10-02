@@ -148,8 +148,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     append_to_file '.gitignore', <<~TEXT
-      /.env
-      /node_modules
       /Gemfile.lock
     TEXT
   end
@@ -265,6 +263,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_test: true,
     skip_keeps: true,
     skip_javascript: true,
+    skip_hotwire: true,
+    skip_docker: true,
     skip_asset_pipeline: true
   }
 

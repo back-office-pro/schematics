@@ -4,5 +4,5 @@ describe 'Database config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/databases/postgresql.yml.tt',
-                  'b590d8c6cb1a7dbae92339d983e2a30d1e062e5b90425b90d50da715dbdc10dc'
+                  '5bf8434b9077c5ea433a780153d20f9ae88b256b730e80e59d9b01f3518954be'
 end

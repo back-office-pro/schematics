@@ -8,8 +8,8 @@ RSpec.describe Schematics::CleanImportsJob do
   let(:created_at) { described_class::DELAY.ago }
   let(:imports) do
     [
-      Import.create!(file:, model:, author: user, created_at:),
-      Import.create!(file:, model:, author: user, created_at:)
+      Import.create!(file:, model:, author: user, state:, created_at:),
+      Import.create!(file:, model:, author: user, state:, created_at:)
     ]
   end
 
@@ -23,6 +23,8 @@ RSpec.describe Schematics::CleanImportsJob do
     before { imports }
 
     context 'when imports are in progress' do
+      let(:state) { :in_progress }
+
       it 'does not archive imports' do
         expect { described_class.perform_now }.not_to change(Import, :count)
       end
@@ -33,7 +35,7 @@ RSpec.describe Schematics::CleanImportsJob do
     end
 
     context 'when imports are finished' do
-      before { imports.each(&:state_finished!) }
+      let(:state) { :finished }
 
       it 'archives imports' do
         expect { described_class.perform_now }
@@ -47,7 +49,7 @@ RSpec.describe Schematics::CleanImportsJob do
     end
 
     context 'when imports are in error' do
-      before { imports.each(&:state_error!) }
+      let(:state) { :error }
 
       it 'archives imports' do
         expect { described_class.perform_now }

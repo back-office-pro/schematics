@@ -3,6 +3,11 @@
 module Rack
   class Attack
     class << self
+      def password_resets_paths = ::I18n
+        .available_locales
+        .map { ::Schematics::Engine.routes.url_helpers.public_send(:"password_resets_#{_1}_path") }
+        .uniq
+
       def sessions_paths = ::I18n
         .available_locales
         .map { ::Rails.application.routes.url_helpers.public_send(:"sessions_#{_1}_path") }
@@ -21,6 +26,10 @@ module Rack
 
     throttle('logins/ip', limit: 5, period: 20.seconds) do |req|
       req.ip if sessions_paths.include?(req.path) && req.post?
+    end
+
+    throttle('password_resets/ip', limit: 5, period: 1.minute) do |req|
+      req.ip if password_resets_paths.include?(req.path) && req.post?
     end
   end
 end

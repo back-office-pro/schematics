@@ -9,14 +9,8 @@ module Schematics
     def edit; end
 
     def update
-      result = Profile::Update.call(
-        current_session:,
-        current_ability:,
-        resource_params: resource_params.except(:password_challenge),
-        resource: current_user,
-        password: resource_params[:password_challenge]
-      )
-      respond_with result, location: edit_profile_path
+      result = Resources::Update.call(resource: current_user, resource_params:)
+      switch_localization { respond_with result, location: edit_profile_path }
     end
 
     private

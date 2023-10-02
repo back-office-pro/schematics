@@ -112,7 +112,7 @@ module Schematics
     ]
 
     # Logs
-    config.log_file_size = 100.megabytes # TODO: enabled when upgrading to Rails 7.1
+    config.log_file_size = 100.megabytes
 
     # Action Dispatch
     config.action_dispatch.signed_cookie_digest = 'SHA256'
@@ -129,7 +129,7 @@ module Schematics
     config.active_record.encryption.extend_queries = true
 
     # Mailer
-    config.action_mailer.preview_path = root.join('spec', 'mailers', 'previews')
+    config.action_mailer.preview_paths << root.join('spec', 'mailers', 'previews')
     config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }
 
     # Assets

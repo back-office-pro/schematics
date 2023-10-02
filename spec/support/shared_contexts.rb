@@ -49,7 +49,6 @@ RSpec.shared_context 'with import' do
 end
 
 RSpec.shared_context 'with user' do
-  let(:reset_password_sent_at) { nil }
   let(:preferences) { {} }
   let(:user_groups) do
     [
@@ -70,7 +69,6 @@ RSpec.shared_context 'with user' do
       first_name: 'John',
       last_name: 'Doe',
       role:,
-      reset_password_sent_at:,
       preferences:,
       user_groups:
     )

@@ -22,8 +22,8 @@ module Schematics
           .to_come
           .today
           .accessible_by(current_ability)
-          .load_async
-          .count
+          .async_count
+          .value
 
         def render?
           can?(:index, ::Meeting)

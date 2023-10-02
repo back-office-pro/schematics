@@ -10,8 +10,8 @@ module Core
         .not(query: nil)
         .order(created_at: :desc)
         .limit(LIMIT)
-        .load_async
-        .pluck(:query)
+        .async_pluck(:query)
+        .value
         .uniq
     end
   end

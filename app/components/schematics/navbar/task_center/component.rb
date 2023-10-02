@@ -22,8 +22,8 @@ module Schematics
           .not_state_completed
           .not_state_aborted
           .accessible_by(current_ability)
-          .load_async
-          .count
+          .async_count
+          .value
 
         def render?
           can?(:index, ::Task)

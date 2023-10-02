@@ -4,14 +4,15 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Configuration
-  config.cache_classes = true
+  config.enable_reloading = false
   config.consider_all_requests_local = false
   config.eager_load = true
 
   # Security
+  config.assume_ssl = Tenant.ssl?
   config.force_ssl = Tenant.ssl?
+  config.hosts = [Tenant.host] if Tenant.ssl?
   config.require_master_key = true
-  config.hosts << Tenant.host if Tenant.ssl?
 
   # Assets
   config.assets.compile = false
@@ -49,13 +50,9 @@ Rails.application.configure do
 
   # Logger
   config.log_level = :info
-  config.log_tags = [:request_id]
-  config.log_formatter = Logger::Formatter.new
   config.lograge.enabled = true
-
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
-    logger = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
-  end
+  config.logger = ActiveSupport::Logger
+                  .new($stdout)
+                  .tap  { |logger| logger.formatter = Logger::Formatter.new }
+                  .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 end

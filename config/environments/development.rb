@@ -4,7 +4,7 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Configuration
-  config.cache_classes = false
+  config.enable_reloading = true
   config.consider_all_requests_local = true
   config.eager_load = false
   config.server_timing = true
@@ -15,6 +15,7 @@ Rails.application.configure do
 
   # Active Job
   config.active_job.queue_adapter = Tenant.backend.queue_adapter
+  config.active_job.verbose_enqueue_logs = true
 
   # Active Storage
   config.active_storage.service = :local
@@ -32,11 +33,13 @@ Rails.application.configure do
   # Active Record
   config.active_record.migration_error = :page_load
   config.active_record.verbose_query_logs = true
+  config.active_record.db_warnings_action = :raise
 
   # Action Controller
   config.action_controller.action_on_unpermitted_parameters = :raise
   config.action_controller.perform_caching = true
   config.action_controller.enable_fragment_cache_logging = true
+  config.action_controller.raise_on_missing_callback_actions = true
 
   # i18n
   config.i18n.raise_on_missing_translations = true
