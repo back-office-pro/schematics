@@ -24,18 +24,6 @@ const setNavbarScrolled = () => {
     ?.toggle('bg-opacity-75', window.scrollY > 25)
 }
 
-const setTurboHeaders = (event) => {
-  const nonce = document.querySelector('meta[name="csp-nonce"]')?.content
-  event.detail.fetchOptions.headers['Turbo-Referrer'] = window.location.href
-  event.detail.fetchOptions.headers['X-Turbo-Nonce'] = nonce
-}
-
-const setTurboNonces = () => {
-  document.querySelectorAll('script[nonce]').forEach(element => {
-    element.setAttribute('nonce', element.nonce)
-  })
-}
-
 const animateTurboFrame = ({ target }) => {
   target.classList.add('animate__fadeOut')
   target.addEventListener('animationend', () => {
@@ -62,7 +50,5 @@ Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', setNavbarScrolled)
-document.addEventListener('turbo:before-fetch-request', setTurboHeaders)
 document.addEventListener('turbo:before-fetch-request', animateTurboFrame)
-document.addEventListener('turbo:before-cache', setTurboNonces)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
