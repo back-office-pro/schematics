@@ -23,6 +23,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
 
   its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
@@ -64,6 +65,7 @@ describe Schematics::Attributes::Text do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         attribute :content, default: -> { "text" }
+        normalizes :content, with: -> { _1.strip }
       RUBY
     end
   end
@@ -77,6 +79,7 @@ describe Schematics::Attributes::Text do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         translates :content, type: :text
+        normalizes :content, with: -> { _1.strip }
       RUBY
     end
   end

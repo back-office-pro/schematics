@@ -14,6 +14,7 @@ describe Schematics::Attributes::Ip do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ip') }

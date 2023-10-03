@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Fillable
       include Behaviours::Preloadable
       include Behaviours::Translatable
+      include Behaviours::Normalizable
 
       def default = SecureRandom.base58
 
