@@ -3,10 +3,7 @@ source "https://rubygems.org"
 ruby Gem.ruby_version.to_s
 
 <%- if env.development? -%>
-group :development do
-  gem "web-console"
-  gem "error_highlight"
-end
+gem "web-console", group: :development
 <%- end -%>
 <%- if container? -%>
 gem "schematics", path: "/app"
