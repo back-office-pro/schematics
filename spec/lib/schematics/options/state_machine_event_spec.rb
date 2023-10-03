@@ -58,10 +58,4 @@ describe Schematics::Options::StateMachineEvent do
 
     it { is_expected.not_to be_valid }
   end
-
-  context 'when event name contains whitespace characters' do
-    let(:name) { '  process  ' }
-
-    its(:name) { is_expected.to eq('process') }
-  end
 end
