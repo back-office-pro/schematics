@@ -6,7 +6,7 @@ Rails.configuration.content_security_policy do |policy|
   policy.frame_src :self, :https
   policy.img_src :self, :https, :data
   policy.object_src :none
-  policy.script_src :self, :https
+  policy.script_src :self, :https, :strict_dynamic
   policy.style_src :self, :https, :unsafe_inline
   policy.connect_src :self, :https, :wss
 end
