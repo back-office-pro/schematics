@@ -12,7 +12,7 @@ module Schematics
 
       NAME_REGEX = %r{\A([a-z_/]+)\z}
 
-      attr_accessor :name
+      attr_reader :name
 
       delegate :dangerous_attribute_methods, to: ::ActiveRecord::AttributeMethods, private: true
 
@@ -22,6 +22,10 @@ module Schematics
                   format: { with: NAME_REGEX, message: :name },
                   length: { maximum: 50 },
                   exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
+      end
+
+      def name=(value)
+        @name = value&.strip
       end
     end
   end

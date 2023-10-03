@@ -71,4 +71,10 @@ describe Schematics::Entities::Entity do
 
     it { is_expected.not_to be_valid }
   end
+
+  context 'when entity name contains whitespace characters' do
+    let(:name) { '  user  ' }
+
+    its(:name) { is_expected.to eq('user') }
+  end
 end
