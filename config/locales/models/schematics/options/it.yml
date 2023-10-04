@@ -41,6 +41,12 @@ it:
         limit: Limite
         max: Massimo
         min: Minimo
+        normalization: Formattazione
+        normalizations:
+          capitalize: Maiuscole alla prima parola
+          downcase: Minuscolo
+          titleize: Maiuscole a ogni parola
+          upcase: Maiuscole
         other_than: Altro che
         polymorphic: Polimorfico
         precision: Precisione
