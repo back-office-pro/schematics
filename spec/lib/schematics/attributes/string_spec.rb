@@ -44,7 +44,8 @@ describe Schematics::Attributes::String do
       Schematics::Options::Unique,
       Schematics::Options::Min,
       Schematics::Options::Limit,
-      Schematics::Options::Length
+      Schematics::Options::Length,
+      Schematics::Options::Normalization
     )
   end
 

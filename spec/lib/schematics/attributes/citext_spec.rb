@@ -84,7 +84,7 @@ describe Schematics::Attributes::Citext do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         translates :last_name, type: :string
-        normalizes :last_name, with: -> { _1.strip }
+        normalizes :last_name, with: -> { _1.strip.itself }
       RUBY
     end
   end
