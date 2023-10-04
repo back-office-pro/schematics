@@ -22,6 +22,7 @@ describe Schematics::Attributes::ModelField do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('part') }
@@ -47,7 +48,8 @@ describe Schematics::Attributes::ModelField do
       Schematics::Options::Limit,
       Schematics::Options::Length,
       Schematics::Options::DependsOn,
-      Schematics::Options::Type
+      Schematics::Options::Type,
+      Schematics::Options::Normalization
     )
   end
 

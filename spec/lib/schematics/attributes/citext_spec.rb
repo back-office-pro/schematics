@@ -18,6 +18,7 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
   it { is_expected.not_to be_case_sensitive }
 
   its(:database_type) { is_expected.to eq('citext') }
@@ -83,6 +84,7 @@ describe Schematics::Attributes::Citext do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         translates :last_name, type: :string
+        normalizes :last_name, with: -> { _1.strip.itself }
       RUBY
     end
   end

@@ -41,6 +41,12 @@ en:
         limit: Limit
         max: Max
         min: Min
+        normalization: Formatting
+        normalizations:
+          capitalize: Capitalize
+          downcase: Lowercase
+          titleize: Capitalize each word
+          upcase: Uppercase
         other_than: Other than
         polymorphic: Polymorphic
         precision: Precision

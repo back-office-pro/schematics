@@ -16,6 +16,7 @@ describe Schematics::Attributes::Email do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
 
   its(:database_type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('email') }
@@ -40,6 +41,12 @@ describe Schematics::Attributes::Email do
   its(:search_data) do
     is_expected.to eq <<~RUBY
       email: email&.to_s
+    RUBY
+  end
+
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      normalizes :email, with: -> { _1.strip.downcase }
     RUBY
   end
 

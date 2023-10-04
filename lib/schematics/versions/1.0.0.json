@@ -43,7 +43,8 @@
         "name": "first_name",
         "type": "string",
         "options": {
-          "limit": 50
+          "limit": 50,
+          "normalization": "titleize"
         }
       },
       {
@@ -51,7 +52,8 @@
         "name": "last_name",
         "type": "string",
         "options": {
-          "limit": 50
+          "limit": 50,
+          "normalization": "upcase"
         }
       },
       {

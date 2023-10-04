@@ -124,7 +124,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'slim', '~> 5.1.1'
   spec.add_dependency 'sprockets-rails', '~> 3.4.2'
   spec.add_dependency 'stimulus-rails', '~> 1.2.2'
-  spec.add_dependency 'strip_attributes', '~> 1.13.0'
   spec.add_dependency 'stripe', '~> 9.3.0'
   spec.add_dependency 'terser', '~> 1.1.18'
   spec.add_dependency 'turbo-rails', '~> 1.4.0'

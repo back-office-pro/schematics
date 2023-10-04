@@ -18,11 +18,13 @@ one:
           type: string
           options:
             required: true
+            normalization: capitalize
         - id: <%= SecureRandom.uuid %>
           name: last_name
           type: string
           options:
             required: true
+            normalization: upcase
         - id: <%= SecureRandom.uuid %>
           name: age
           type: float
