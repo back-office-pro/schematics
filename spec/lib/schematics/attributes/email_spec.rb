@@ -44,6 +44,12 @@ describe Schematics::Attributes::Email do
     RUBY
   end
 
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      normalizes :email, with: -> { _1.strip.downcase }
+    RUBY
+  end
+
   context 'when email is unique' do
     let(:options) { { unique: true } }
 

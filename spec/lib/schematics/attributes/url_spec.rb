@@ -44,6 +44,12 @@ describe Schematics::Attributes::Url do
     RUBY
   end
 
+  its(:to_str) do
+    is_expected.to eq <<~RUBY
+      normalizes :url, with: -> { _1.strip.downcase }
+    RUBY
+  end
+
   context 'when url is unique' do
     let(:options) { { unique: true } }
 
