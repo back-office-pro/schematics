@@ -7,10 +7,9 @@ module Schematics
       include Behaviours::Enumerable
       delegate :depends_on, to: :options
 
-      def available_options = super.push(
-        Options::DependsOn,
-        Options::Type
-      )
+      def available_options = super
+        .excluding(Options::Translated, Options::Normalization)
+        .push(Options::DependsOn, Options::Type)
 
       def collection = super.sort
 

@@ -24,6 +24,20 @@ describe Schematics::Attributes::Locale do
   its(:input_name) { is_expected.to eq('translation[key]') }
   its(:icon) { is_expected.to eq(:language) }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

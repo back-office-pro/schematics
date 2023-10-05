@@ -30,6 +30,24 @@ describe Schematics::Attributes::Datetime do
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::GreaterThan,
+      Schematics::Options::GreaterThanOrEqualTo,
+      Schematics::Options::EqualTo,
+      Schematics::Options::LessThan,
+      Schematics::Options::LessThanOrEqualTo,
+      Schematics::Options::OtherThan,
+      Schematics::Options::StartDate,
+      Schematics::Options::EndDate
+    )
+  end
+
   context 'when date is required' do
     let(:options) { { required: true } }
 

@@ -24,6 +24,14 @@ describe Schematics::Attributes::Timestamp do
   its(:to_sql) { is_expected.to eq('users.read_notifications_at') }
   its(:to_s) { is_expected.to eq('schema:user_read_notifications_at') }
 
+  its(:available_options) do
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached
+    )
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

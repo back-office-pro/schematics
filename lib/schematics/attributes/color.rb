@@ -6,7 +6,10 @@ module Schematics
     class Color < String
       REGEX = /\A#(?:\h{3}){1,2}\z/
 
-      def available_options = super.excluding(Options::Translated)
+      def available_options = super.excluding(
+        Options::Translated,
+        Options::Normalization
+      )
 
       def default = '#000000'
 

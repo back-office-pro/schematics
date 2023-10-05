@@ -35,6 +35,20 @@ describe Schematics::Attributes::Model do
   its(:to_sql) { is_expected.to eq('permissions.model') }
   its(:to_s) { is_expected.to eq('schema:permission_model') }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
+  end
+
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :model, {:inclusion=>{:in=>["Permission"]}, :allow_blank=>true}

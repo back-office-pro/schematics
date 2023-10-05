@@ -3,6 +3,8 @@
 module Schematics
   module Attributes
     class Duration < Integer
+      def available_options = super.excluding(Options::AutoIncrement)
+
       def format(value)
         value && ActiveSupport::Duration.build(value).inspect
       end

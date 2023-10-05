@@ -4,6 +4,11 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Locale < String
+      def available_options = super.excluding(
+        Options::Translated,
+        Options::Normalization
+      )
+
       def format(value)
         value
           &.split('.')

@@ -36,6 +36,22 @@ describe Schematics::Attributes::Attachments do
   its(:search_query) { is_expected.to eq(:files_i_cont) }
   it { is_expected.to be_image }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Readonly,
+      Schematics::Options::Size,
+      Schematics::Options::AspectRatio,
+      Schematics::Options::Min,
+      Schematics::Options::Max,
+      Schematics::Options::Width,
+      Schematics::Options::Height,
+      Schematics::Options::ContentType
+    )
+  end
+
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :files, {:antivirus=>true}

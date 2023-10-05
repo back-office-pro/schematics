@@ -29,6 +29,22 @@ describe Schematics::Attributes::Time do
   its(:to_sql) { is_expected.to eq('messages.hour') }
   its(:to_s) { is_expected.to eq('schema:message_hour') }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::GreaterThan,
+      Schematics::Options::GreaterThanOrEqualTo,
+      Schematics::Options::EqualTo,
+      Schematics::Options::LessThan,
+      Schematics::Options::LessThanOrEqualTo,
+      Schematics::Options::OtherThan
+    )
+  end
+
   describe '#format' do
     subject { attribute.format(value) }
 

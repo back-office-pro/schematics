@@ -42,14 +42,12 @@ describe Schematics::Attributes::ModelField do
       Schematics::Options::Cached,
       Schematics::Options::Default,
       Schematics::Options::Readonly,
-      Schematics::Options::Translated,
       Schematics::Options::Unique,
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
       Schematics::Options::DependsOn,
-      Schematics::Options::Type,
-      Schematics::Options::Normalization
+      Schematics::Options::Type
     )
   end
 

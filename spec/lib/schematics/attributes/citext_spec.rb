@@ -37,6 +37,22 @@ describe Schematics::Attributes::Citext do
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
   its(:preload) { is_expected.to be_empty }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Translated,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length,
+      Schematics::Options::Normalization
+    )
+  end
+
   its(:search_data) do
     is_expected.to eq <<~RUBY
       last_name: last_name&.to_s

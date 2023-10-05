@@ -6,6 +6,11 @@ module Schematics
     class Model < String
       include Behaviours::Enumerable
 
+      def available_options = super.excluding(
+        Options::Translated,
+        Options::Normalization
+      )
+
       def collection = super.sort
 
       def format(value)

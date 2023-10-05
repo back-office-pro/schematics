@@ -4,7 +4,10 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Phone < String
-      def available_options = super.excluding(Options::Translated)
+      def available_options = super.excluding(
+        Options::Translated,
+        Options::Normalization
+      )
 
       def default = ::Array
         .new(10) { rand(10) }

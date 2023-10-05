@@ -25,6 +25,20 @@ describe Schematics::Attributes::Color do
   its(:default) { is_expected.to eq('#000000') }
   its(:input_name) { is_expected.to eq('entity[color]') }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
+  end
+
   its(:validators) do
     is_expected.to eq(allow_blank: true, format: { with: described_class::REGEX, message: :color })
   end

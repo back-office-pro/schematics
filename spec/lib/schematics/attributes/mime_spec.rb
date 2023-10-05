@@ -32,6 +32,20 @@ describe Schematics::Attributes::Mime do
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
   its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
+  end
+
   its(:validators) do
     is_expected.to eq(inclusion: { in: ['image/png'] }, allow_blank: true)
   end

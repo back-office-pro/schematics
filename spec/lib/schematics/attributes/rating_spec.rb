@@ -26,6 +26,25 @@ describe Schematics::Attributes::Rating do
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, in: 0..5 }) }
   its(:icon) { is_expected.to eq(:star) }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::GreaterThan,
+      Schematics::Options::GreaterThanOrEqualTo,
+      Schematics::Options::EqualTo,
+      Schematics::Options::LessThan,
+      Schematics::Options::LessThanOrEqualTo,
+      Schematics::Options::OtherThan,
+      Schematics::Options::Unit,
+      Schematics::Options::Precision,
+      Schematics::Options::Separator
+    )
+  end
+
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :rating, {:numericality=>{:allow_blank=>true, :in=>0..5}}

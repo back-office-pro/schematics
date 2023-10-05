@@ -21,6 +21,14 @@ describe Schematics::Attributes::Uuid do
   its(:icon) { is_expected.to eq(:id_card) }
   its(:validators) { is_expected.to be_empty }
 
+  its(:available_options) do
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached
+    )
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

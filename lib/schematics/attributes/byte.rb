@@ -3,6 +3,8 @@
 module Schematics
   module Attributes
     class Byte < Float
+      def available_options = super.excluding(Options::AutoIncrement)
+
       def format(value)
         value && number_to_human_size(value, **{ precision:, separator: }.compact)
       end

@@ -37,6 +37,20 @@ describe Schematics::Attributes::TimeZone do
   its(:to_s) { is_expected.to eq('schema:user_time_zone') }
   its(:collection) { is_expected.to eq([['(GMT+01:00) Paris', 'Paris']]) }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
+  end
+
   its(:validators) do
     is_expected.to eq(inclusion: { in: ['Paris'] }, allow_blank: true)
   end

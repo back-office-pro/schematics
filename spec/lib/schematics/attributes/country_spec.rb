@@ -38,6 +38,20 @@ describe Schematics::Attributes::Country do
   its(:search_predicate) { is_expected.to eq(:in) }
   its(:search_query) { is_expected.to eq(:country_in) }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
+    )
+  end
+
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
       validates :country, {:inclusion=>{:in=>["FR"]}, :allow_blank=>true}

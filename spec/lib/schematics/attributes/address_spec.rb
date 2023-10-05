@@ -24,6 +24,21 @@ describe Schematics::Attributes::Address do
   its(:input_name) { is_expected.to eq('entity[address]') }
   its(:icon) { is_expected.to eq(:location_dot) }
 
+  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached,
+      Schematics::Options::Default,
+      Schematics::Options::Readonly,
+      Schematics::Options::Unique,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length,
+      Schematics::Options::Normalization
+    )
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

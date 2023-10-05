@@ -26,6 +26,14 @@ describe Schematics::Attributes::Token do
   its(:validators) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:key) }
 
+  its(:available_options) do
+    is_expected.to contain_exactly(
+      Schematics::Options::Required,
+      Schematics::Options::Hidden,
+      Schematics::Options::Cached
+    )
+  end
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       encrypts :auth_token, deterministic: true
