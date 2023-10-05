@@ -12,7 +12,10 @@ RSpec.describe 'Dashboard' do
   describe 'GET #admin' do
     let(:do_request) { get(admin_path, headers:) }
 
-    before { do_request }
+    before do
+      Licence.instance.save!
+      do_request
+    end
 
     it { is_expected.to have_http_status(:success) }
   end
