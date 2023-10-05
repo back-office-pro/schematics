@@ -4,10 +4,8 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Locale < String
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
       def format(value)
         value

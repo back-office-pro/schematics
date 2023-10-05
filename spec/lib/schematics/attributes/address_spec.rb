@@ -17,6 +17,8 @@ describe Schematics::Attributes::Address do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('address') }

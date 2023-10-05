@@ -6,10 +6,8 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class UserAgent < String
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
       def icon = :computer
 

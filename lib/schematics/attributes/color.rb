@@ -4,12 +4,10 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Color < String
-      REGEX = /\A#(?:\h{3}){1,2}\z/
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      REGEX = /\A#(?:\h{3}){1,2}\z/
 
       def default = '#000000'
 

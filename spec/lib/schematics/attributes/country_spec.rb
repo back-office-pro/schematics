@@ -21,7 +21,9 @@ describe Schematics::Attributes::Country do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('country') }
@@ -37,6 +39,7 @@ describe Schematics::Attributes::Country do
   its(:search_column) { is_expected.to eq(:country) }
   its(:search_predicate) { is_expected.to eq(:in) }
   its(:search_query) { is_expected.to eq(:country_in) }
+  its(:normalization) { is_expected.to be_nil }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

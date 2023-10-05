@@ -16,13 +16,16 @@ describe Schematics::Attributes::Action do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('action') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('permission[action]') }
   its(:icon) { is_expected.to eq(:hand_rock) }
+  its(:normalization) { is_expected.to be_nil }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

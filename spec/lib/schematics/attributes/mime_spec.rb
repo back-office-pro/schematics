@@ -19,7 +19,9 @@ describe Schematics::Attributes::Mime do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('content_type') }
@@ -31,6 +33,7 @@ describe Schematics::Attributes::Mime do
   its(:to_sql) { is_expected.to eq('active_storage_attachments.content_type') }
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
   its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
+  its(:normalization) { is_expected.to be_nil }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

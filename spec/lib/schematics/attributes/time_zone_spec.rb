@@ -21,7 +21,9 @@ describe Schematics::Attributes::TimeZone do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('time_zone') }
@@ -36,6 +38,7 @@ describe Schematics::Attributes::TimeZone do
   its(:to_sql) { is_expected.to eq('users.time_zone') }
   its(:to_s) { is_expected.to eq('schema:user_time_zone') }
   its(:collection) { is_expected.to eq([['(GMT+01:00) Paris', 'Paris']]) }
+  its(:normalization) { is_expected.to be_nil }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -7,11 +7,8 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class Mime < String
       include Behaviours::Enumerable
-
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
       def icon = :file
 

@@ -5,11 +5,12 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class ModelField < String
       include Behaviours::Enumerable
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
+
       delegate :depends_on, to: :options
 
-      def available_options = super
-        .excluding(Options::Translated, Options::Normalization)
-        .push(Options::DependsOn, Options::Type)
+      def available_options = super.push(Options::DependsOn, Options::Type)
 
       def collection = super.sort
 

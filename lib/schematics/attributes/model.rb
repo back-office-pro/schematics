@@ -5,11 +5,8 @@ module Schematics
     # :reek:SubclassedFromCoreClass
     class Model < String
       include Behaviours::Enumerable
-
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
       def collection = super.sort
 

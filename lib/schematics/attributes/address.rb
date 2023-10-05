@@ -4,7 +4,7 @@ module Schematics
   module Attributes
     # :reek:SubclassedFromCoreClass
     class Address < String
-      def available_options = super.excluding(Options::Translated)
+      include Behaviours::Untranslatable
 
       def icon = :location_dot
     end

@@ -3,10 +3,8 @@
 module Schematics
   module Attributes
     class Url < Citext
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
       def default = ::URI::HTTPS
         .build(host: "www.#{SecureRandom.base58}.com")

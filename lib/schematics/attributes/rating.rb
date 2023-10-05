@@ -3,7 +3,7 @@
 module Schematics
   module Attributes
     class Rating < Float
-      def available_options = super.excluding(Options::AutoIncrement)
+      include Behaviours::Unincrementable
 
       def icon = :star
 

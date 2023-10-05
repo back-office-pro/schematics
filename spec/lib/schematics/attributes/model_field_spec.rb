@@ -22,7 +22,9 @@ describe Schematics::Attributes::ModelField do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('part') }
@@ -34,6 +36,7 @@ describe Schematics::Attributes::ModelField do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('assemblies.part') }
   its(:to_s) { is_expected.to eq('schema:assembly_part') }
+  its(:normalization) { is_expected.to be_nil }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -14,7 +14,9 @@ describe Schematics::Attributes::Ip do
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
+  it { is_expected.not_to be_translated }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('ip') }
@@ -22,6 +24,7 @@ describe Schematics::Attributes::Ip do
   its(:input_name) { is_expected.to eq('session[ip]') }
   its(:default) { is_expected.to eq('::1') }
   its(:icon) { is_expected.to eq(:network_wired) }
+  its(:normalization) { is_expected.to be_nil }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

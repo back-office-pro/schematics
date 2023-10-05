@@ -3,10 +3,8 @@
 module Schematics
   module Attributes
     class Email < Citext
-      def available_options = super.excluding(
-        Options::Translated,
-        Options::Normalization
-      )
+      include Behaviours::Untranslatable
+      include Behaviours::Unnormalizable
 
       def default = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
 
