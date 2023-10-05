@@ -6,7 +6,7 @@ module Schematics
       def url
         return url_for(company_logo) if company_logo.attached?
 
-        asset_path('@fortawesome/fontawesome-free/svgs/solid/rocket.svg')
+        asset_path('schematics/logo.svg')
       end
 
       private
