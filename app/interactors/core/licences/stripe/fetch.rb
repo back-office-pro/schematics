@@ -27,12 +27,8 @@ module Core
 
         memoize def product = product_id && ::Stripe::Product.retrieve(product_id)
 
-        memoize def subscription = ::Stripe::Subscription
-          .list(customer: customer_id, status: 'active')
-          .first
-
         memoize def customer = ::Stripe::Customer
-          .search(query: "name:'#{subdomain}'")
+          .search(query: "name:'#{subdomain}'", expand: ['data.subscriptions'])
           .data
           .first
 
@@ -43,6 +39,10 @@ module Core
           plan: product_name,
           metadata: product_metadata
         }.compact
+
+        def subscription = customer
+          &.subscriptions
+          &.find { %w[active trialing].include?(_1.status) }
 
         def subscription_state
           return ::Licence::STATE_STATE_INACTIVE unless subscription_id
