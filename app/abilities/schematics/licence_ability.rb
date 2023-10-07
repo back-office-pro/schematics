@@ -11,8 +11,8 @@ module Schematics
 
     def initialize(user)
       super
-      cannot :create, ::User if quota_users_exceeded?
-      cannot :create, ::ApiKey if quota_api_keys_exceeded?
+      cannot %i[create restore], ::User if quota_users_exceeded?
+      cannot %i[create restore], ::ApiKey if quota_api_keys_exceeded?
       cannot :create, ::ActiveStorage::Attachment if quota_storage_exceeded?
       cannot %i[create update], :all if state_inactive?
       return unless user.admin?

@@ -39,6 +39,7 @@ RSpec.describe Schematics::LicenceAbility do
     end
 
     it { is_expected.not_to be_able_to(:create, User) }
+    it { is_expected.not_to be_able_to(:restore, User) }
   end
 
   context 'when api keys quota is exceeded' do
@@ -49,6 +50,7 @@ RSpec.describe Schematics::LicenceAbility do
     end
 
     it { is_expected.not_to be_able_to(:create, ApiKey) }
+    it { is_expected.not_to be_able_to(:restore, ApiKey) }
   end
 
   context 'when licence is inactive' do

@@ -12,7 +12,7 @@
     }
       h5.dropdown-header.bg-body-tertiary.fw-bold
         = title
-      - if can?(:restore, model_class)
+      - if can?(:archive, model_class)
         .dropdown-item
           = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
       = render Schematics::Viewer::Settings::Toggle::Component.with_collection(listable_elements.stable_sort_by(&:weight))
