@@ -1,7 +1,7 @@
 name: Shared
 on: [workflow_call]
 env:
-  BUNDLE_GITHUB__COM: x-access-token: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 # TODO: add to secrets
+  BUNDLE_GITHUB__COM: ${{ secrets.BUNDLE_GITHUB__COM }}
 jobs:
   rspec:
     name: RSpec
@@ -34,13 +34,13 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
-          SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
+          SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
         run: bin/rails db:migrate:reset
       - name: Load fixtures
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
-          SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
+          SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
           FIXTURES_PATH: spec/fixtures
           FIXTURES: migrations
         run: bin/rails db:fixtures:load
@@ -48,7 +48,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
-          SCHEMATICS_MASTER_KEY: 9320b2d60bac0a7a53c32a87e008cc80 # TODO: add to secrets
+          SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
         run: bundle exec rspec
   brakeman:
     name: Brakeman
