@@ -55,7 +55,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '~> 3.39.2'
   spec.add_dependency 'chartkick', '~> 5.0.3'
   spec.add_dependency 'chroma', '~> 0.2.0'
-  spec.add_dependency 'countries', '~> 5.6.0'
+  spec.add_dependency 'countries', '~> 5.7.0'
   spec.add_dependency 'derailed_benchmarks', '~> 2.1.2'
   spec.add_dependency 'dotenv-rails', '~> 2.8.1'
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
