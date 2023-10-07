@@ -1,7 +1,7 @@
 name: Shared
 on: [workflow_call]
 env:
-  BUNDLE_GITHUB__COM: ${{ secrets.BUNDLE_GITHUB__COM }}
+  BUNDLE_GITHUB__COM: x-access-token:${{ secrets.BUNDLE_GITHUB__COM }}
 jobs:
   rspec:
     name: RSpec
