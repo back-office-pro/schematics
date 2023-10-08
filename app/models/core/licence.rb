@@ -82,6 +82,7 @@ class Licence < Schematics::ApplicationRecord
   def storage_size = ActiveStorage::Blob
     .with_deleted
     .sum(&:byte_size)
+    .bytes
 
   memoize def users_size = User.count
 
