@@ -5,6 +5,7 @@ class Migration < Schematics::ApplicationRecord
   serialize :data, coder: Schematics::Schema
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
+  validate :quota_entities_cannot_be_exceeded
   delegate :build_commands,
            :clean_commands,
            :old_entities,
@@ -54,6 +55,12 @@ class Migration < Schematics::ApplicationRecord
     .to_yaml
 
   private
+
+  def quota_entities_cannot_be_exceeded
+    return if data.entities.reject(&:core?).size < Licence.instance.quota_entities # rubocop:disable Performance/Count
+
+    errors.add(:data, :too_many_entities)
+  end
 
   def previously_migrated_schema = self
     .class

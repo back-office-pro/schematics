@@ -3,7 +3,7 @@
 module Schematics
   module SchemaEditor
     class Component < ApplicationComponent
-      delegate :new_record?, to: :resource
+      delegate :new_record?, :errors, to: :resource
       delegate :collection, to: Schematics::Attributes::Attribute, prefix: :attributes
       option :resource
 
