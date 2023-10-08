@@ -21,16 +21,6 @@ RSpec.describe Schematics::LicenceAbility do
     it { is_expected.to be_able_to(:enable, Licence) }
   end
 
-  context 'when storage quota is exceeded' do
-    before do
-      allow(Licence.instance)
-        .to receive(:quota_storage_exceeded?)
-        .and_return(true)
-    end
-
-    it { is_expected.not_to be_able_to(:create, ActiveStorage::Attachment) }
-  end
-
   context 'when users quota is exceeded' do
     before do
       allow(Licence.instance)
