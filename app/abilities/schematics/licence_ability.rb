@@ -4,7 +4,6 @@ module Schematics
   class LicenceAbility < ApplicationAbility
     delegate :quota_users_exceeded?,
              :quota_api_keys_exceeded?,
-             :quota_storage_exceeded?,
              :state_inactive?,
              to: '::Licence.instance',
              private: true
