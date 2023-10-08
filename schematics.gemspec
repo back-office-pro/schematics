@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-s3', '~> 1.136.0'
   spec.add_dependency 'bcrypt', '~> 3.1.19'
   spec.add_dependency 'bootsnap', '~> 1.16.0'
-  spec.add_dependency 'bootstrap-email', '~> 1.4.0'
+  spec.add_dependency 'bootstrap-email', '~> 1.4.1'
   spec.add_dependency 'bootstrap_form', '~> 5.3.2'
   spec.add_dependency 'brakeman', '~> 6.0.1'
   spec.add_dependency 'browser', '~> 5.3.1'
