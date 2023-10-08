@@ -49,6 +49,7 @@ fr:
       name: doit contenir uniquement des lettres minuscules ou tirets du bas
       password: doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial
       singular: n'est pas au singulier
+      storage_quota: la capacité de stockage est dépassée
     virtuals:
       name: "%{name} n'est pas défini"
       nil: une variable n'a pas de valeur

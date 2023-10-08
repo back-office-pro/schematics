@@ -22,7 +22,7 @@ describe Schematics::Attributes::Attachments do
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:icon) { is_expected.to eq(:file_image) }
   its(:default) { is_expected.to be_all(Rack::Test::UploadedFile) }
-  its(:validators) { is_expected.to eq(antivirus: true) }
+  its(:validators) { is_expected.to eq(antivirus: true, storage_quota: true) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('active_storage_blobs.filename') }
   its(:to_s) { is_expected.to eq('schema:directory_files') }
@@ -54,7 +54,7 @@ describe Schematics::Attributes::Attachments do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :files, {:antivirus=>true}
+      validates :files, {:antivirus=>true, :storage_quota=>true}
     RUBY
   end
 
@@ -95,11 +95,14 @@ describe Schematics::Attributes::Attachments do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq(presence: true, antivirus: true, attached: true) }
+
+    its(:validators) do
+      is_expected.to eq(presence: true, antivirus: true, storage_quota: true, attached: true)
+    end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {:presence=>true, :antivirus=>true, :attached=>true}
+        validates :files, {:presence=>true, :antivirus=>true, :storage_quota=>true, :attached=>true}
       RUBY
     end
   end
