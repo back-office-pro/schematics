@@ -4,6 +4,8 @@
 class Licence < Schematics::ApplicationRecord
   GATEWAY = ::Core::Licences::Stripe
 
+  delegate :entities, :users, :api_keys, :databases, to: :quota, prefix: true
+
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)
@@ -28,41 +30,41 @@ class Licence < Schematics::ApplicationRecord
   def quota_entities_exceeded?
     return true unless state_active?
 
-    entities_size >= quota.entities
+    entities_size >= quota_entities
   end
 
   def quota_entities_percentage
-    entities_size * 100 / quota.entities
+    entities_size * 100 / quota_entities
   end
 
   def quota_storage_exceeded?
     return true unless state_active?
 
-    storage_size >= quota.storage
+    storage_size >= quota_storage
   end
 
   def quota_storage_percentage
-    storage_size * 100 / quota.storage.gigabytes
+    storage_size * 100 / quota_storage
   end
 
   def quota_users_exceeded?
     return true unless state_active?
 
-    users_size >= quota.users
+    users_size >= quota_users
   end
 
   def quota_users_percentage
-    users_size * 100 / quota.users
+    users_size * 100 / quota_users
   end
 
   def quota_api_keys_exceeded?
     return true unless state_active?
 
-    api_keys_size >= quota.api_keys
+    api_keys_size >= quota_api_keys
   end
 
   def quota_api_keys_percentage
-    api_keys_size * 100 / quota.api_keys
+    api_keys_size * 100 / quota_api_keys
   end
 
   def live_support? = quota
@@ -72,6 +74,10 @@ class Licence < Schematics::ApplicationRecord
   def email_support? = quota
     .support
     .zero?
+
+  def quota_storage = quota
+    .storage
+    .gigabytes
 
   def storage_size = ActiveStorage::Blob
     .with_deleted
@@ -84,13 +90,13 @@ class Licence < Schematics::ApplicationRecord
   private
 
   def search_engine
-    return 'opensearch' if quota.databases > 2
+    return 'opensearch' if quota_databases > 2
 
     'postgresql'
   end
 
   def backend
-    return 'redis' if quota.databases > 1
+    return 'redis' if quota_databases > 1
 
     'postgresql'
   end

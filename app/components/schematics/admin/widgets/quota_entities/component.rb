@@ -6,7 +6,7 @@ module Schematics
       module QuotaEntities
         class Component < ApplicationComponent
           delegate :entities_size,
-                   :quota,
+                   :quota_entities,
                    :quota_entities_percentage,
                    to: '::Licence.instance'
 

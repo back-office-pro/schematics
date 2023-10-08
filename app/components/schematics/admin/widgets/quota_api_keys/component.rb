@@ -7,7 +7,7 @@ module Schematics
         class Component < ApplicationComponent
           delegate :icon, to: '::ApiKey.entity'
           delegate :api_keys_size,
-                   :quota,
+                   :quota_api_keys,
                    :quota_api_keys_percentage,
                    to: '::Licence.instance'
 

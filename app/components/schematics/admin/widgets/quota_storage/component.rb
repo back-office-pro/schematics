@@ -6,7 +6,7 @@ module Schematics
       module QuotaStorage
         class Component < ApplicationComponent
           delegate :storage_size,
-                   :quota,
+                   :quota_storage,
                    :quota_storage_percentage,
                    to: '::Licence.instance'
 

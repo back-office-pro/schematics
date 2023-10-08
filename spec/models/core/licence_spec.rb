@@ -31,6 +31,12 @@ RSpec.describe Licence do
   its(:quota) { is_expected.to be_a(Data) }
   its(:quota) { is_expected.to have_attributes(**metadata) }
 
+  its(:quota_users) { is_expected.to eq(3) }
+  its(:quota_api_keys) { is_expected.to eq(2) }
+  its(:quota_databases) { is_expected.to eq(1) }
+  its(:quota_storage) { is_expected.to eq(1.gigabyte) }
+  its(:quota_entities) { is_expected.to eq(1) }
+
   describe 'load!' do
     let(:context) { double('context', data: { metadata: new_metadata }) } # rubocop:disable RSpec/VerifiedDoubles
     let(:new_metadata) do

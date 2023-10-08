@@ -6,6 +6,6 @@
           = link_to users_path, class: 'text-decoration-none' do
             = fa_icon icon, size: '3x', class: 'd-inline-block'
             h5.my-4 = title
-            .progress.fs-6.my-2 role='progressbar' aria-valuenow=users_size aria-valuemin='0' aria-valuemax=quota.users
+            .progress.fs-6.my-2 role='progressbar' aria-valuenow=users_size aria-valuemin='0' aria-valuemax=quota_users
               .progress-bar style="width: #{quota_users_percentage}%"
-                | #{users_size} / #{quota.users}
+                | #{users_size} / #{quota_users}

@@ -7,7 +7,7 @@ module Schematics
         class Component < ApplicationComponent
           delegate :icon, to: '::User.entity'
           delegate :users_size,
-                   :quota,
+                   :quota_users,
                    :quota_users_percentage,
                    to: '::Licence.instance'
 
