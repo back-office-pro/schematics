@@ -24,6 +24,7 @@ Rails.application.configure do
 
   # Public File Server
   config.public_file_server.enabled = true
+  config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.year.to_i}" } # rubocop:disable Style/StringHashKeys
 
   # Active Storage
   config.active_storage.service = :amazon
