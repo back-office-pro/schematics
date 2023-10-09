@@ -12,7 +12,6 @@ RSpec.describe Licence do
   before { record.metadata = metadata }
 
   it { is_expected.not_to be_quota_entities_exceeded }
-  it { is_expected.not_to be_quota_storage_exceeded }
   it { is_expected.not_to be_quota_users_exceeded }
   it { is_expected.not_to be_quota_api_keys_exceeded }
   it { is_expected.not_to be_email_support }
@@ -37,7 +36,23 @@ RSpec.describe Licence do
   its(:quota_storage) { is_expected.to eq(1.gigabyte) }
   its(:quota_entities) { is_expected.to eq(1) }
 
-  describe 'load!' do
+  describe '#quota_storage_will_be_exceeded?' do
+    subject { record.quota_storage_will_be_exceeded?(size) }
+
+    context 'when size is greater than storage quota' do
+      let(:size) { 2.gigabytes }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when size is lower than storage quota' do
+      let(:size) { 2.bytes }
+
+      it { is_expected.to be_falsy }
+    end
+  end
+
+  describe '#load!' do
     let(:context) { double('context', data: { metadata: new_metadata }) } # rubocop:disable RSpec/VerifiedDoubles
     let(:new_metadata) do
       { users: 1000, api_keys: 100, databases: 3, storage: 100, entities: 100, support: 1 }
