@@ -12,7 +12,7 @@ module Schematics
       super
       cannot %i[create restore], ::User if quota_users_exceeded?
       cannot %i[create restore], ::ApiKey if quota_api_keys_exceeded?
-      cannot %i[create update], :all if state_inactive?
+      cannot %i[create restore update], :all if state_inactive?
       return unless user.admin?
 
       can %i[cancel enable], ::Licence
