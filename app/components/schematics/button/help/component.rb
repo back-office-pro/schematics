@@ -6,7 +6,7 @@ module Schematics
       class Component < ApplicationComponent
         ALLOWLIST = [::Migration, ::Import, ::Stat, ::Chart, ::Configuration, ::Role].freeze
 
-        delegate :domain, to: ::Tenant, private: true
+        delegate :url, to: ::Tenant, private: true
         delegate :model_name, to: :model_class, allow_nil: true, private: true
         delegate :singular_route_key, to: :model_name, allow_nil: true, private: true
         delegate :icon, to: '::Documentation.entity'
@@ -32,17 +32,11 @@ module Schematics
 
         def title = t('.text')
 
-        def url = ::URI::HTTPS
-          .build(host: "www.#{domain}", path:)
-          .to_s
+        def path = File.join(['/docs', singular_route_key].compact)
 
         def render?
           !model_class || ALLOWLIST.include?(model_class)
         end
-
-        private
-
-        def path = File.join(['/docs', singular_route_key].compact)
       end
     end
   end

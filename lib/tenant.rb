@@ -44,6 +44,10 @@ class Tenant
 
     def domain = 'back-office.pro'
 
+    def url(path: nil) = URI::HTTPS
+      .build(host: "www.#{domain}", path:)
+      .to_s
+
     def organization = domain.parameterize
 
     def human = name.humanize
