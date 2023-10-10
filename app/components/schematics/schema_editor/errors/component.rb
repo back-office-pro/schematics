@@ -6,6 +6,10 @@ module Schematics
       class Component < ApplicationComponent
         option :errors
 
+        def messages = errors
+          .full_messages
+          .join(', ')
+
         def render?
           errors.any?
         end
