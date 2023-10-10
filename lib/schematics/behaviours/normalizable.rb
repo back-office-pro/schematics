@@ -7,9 +7,13 @@ module Schematics
 
       def available_options = super.push(Options::Normalization)
 
-      def to_str = super + <<~RUBY
-        normalizes :#{name}, with: -> { _1.strip.#{normalization || :itself} }
-      RUBY
+      def to_str
+        return super if entity.existing?
+
+        super + <<~RUBY
+          normalizes :#{name}, with: -> { _1.strip.#{normalization || :itself} }
+        RUBY
+      end
     end
   end
 end
