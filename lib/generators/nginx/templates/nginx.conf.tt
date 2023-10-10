@@ -1,41 +1,6 @@
 <% if Tenant.ssl? %>
 server {
   server_name <%= Tenant.host %>;
-  listen 80;
-  listen [::]:80;
-
-  location / {
-    return 301 https://<%= Tenant.host %>$request_uri;
-  }
-}
-
-server {
-  server_name www.<%= Tenant.host %>;
-  listen 80 default_server;
-  listen [::]:80 default_server;
-
-  location / {
-    return 301 https://www.<%= Tenant.host %>$request_uri;
-  }
-}
-
-server {
-  server_name <%= Tenant.host %>;
-  listen [::]:443 ssl;
-  listen 443 ssl;
-
-  location / {
-    return 301 https://www.<%= Tenant.host %>$request_uri;
-  }
-
-  ssl_certificate <%= Tenant.ssl_path %>/fullchain.pem;
-  ssl_certificate_key <%= Tenant.ssl_path %>/privkey.pem;
-  include /etc/letsencrypt/options-ssl-nginx.conf;
-  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-}
-
-server {
-  server_name www.<%= Tenant.host %>;
   listen [::]:443 ssl default_server;
   listen 443 ssl default_server;
 
@@ -48,16 +13,16 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-  ssl_certificate <%= Tenant.ssl_path %>/fullchain.pem;
-  ssl_certificate_key <%= Tenant.ssl_path %>/privkey.pem;
+  ssl_certificate <%= Tenant.ssl_path.join('fullchain.pem') %>;
+  ssl_certificate_key <%= Tenant.ssl_path.join('privkey.pem') %>;
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 <% else %>
 server {
   server_name <%= Tenant.host %>;
-  listen 80;
-  listen [::]:80;
+  listen 80 default_server;
+  listen [::]:80 default_server;
 
   location / {
     proxy_pass http://localhost:<%= Tenant.env_port %>;
