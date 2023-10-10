@@ -3,7 +3,7 @@ fr:
   activerecord:
     attributes:
       migration:
-        data: Schema
+        data: Données
         data_version: Version
         progress: Progression
         state: Etat
