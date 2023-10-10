@@ -27,10 +27,6 @@ class Licence < Schematics::ApplicationRecord
     .define(:entities, :storage, :users, :api_keys, :databases, :support)
     .new(**metadata)
 
-  def quota_entities_exceeded?
-    entities_size >= quota_entities
-  end
-
   def quota_entities_percentage
     entities_size * 100 / quota_entities
   end

@@ -11,7 +11,6 @@ RSpec.describe Licence do
 
   before { record.metadata = metadata }
 
-  it { is_expected.not_to be_quota_entities_exceeded }
   it { is_expected.not_to be_quota_users_exceeded }
   it { is_expected.not_to be_quota_api_keys_exceeded }
   it { is_expected.not_to be_email_support }
