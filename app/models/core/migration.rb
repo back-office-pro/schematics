@@ -6,6 +6,7 @@ class Migration < Schematics::ApplicationRecord
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
   validate :quota_entities_cannot_be_exceeded
+  delegate :quota_entities, to: 'Licence.instance', private: true
   delegate :build_commands,
            :clean_commands,
            :old_entities,
@@ -57,10 +58,15 @@ class Migration < Schematics::ApplicationRecord
   private
 
   def quota_entities_cannot_be_exceeded
-    return if data.entities.reject(&:core?).size < Licence.instance.quota_entities # rubocop:disable Performance/Count
+    return if data_size <= quota_entities
 
-    errors.add(:data, :too_many_entities)
+    errors.add(:base, :too_many_entities, data_size:, quota_entities:)
   end
+
+  def data_size = data
+    .entities
+    .reject(&:core?) # rubocop:disable Performance/Count
+    .size
 
   def previously_migrated_schema = self
     .class
