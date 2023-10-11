@@ -16,10 +16,10 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.to include('id' => be_a(String)) }
       it { is_expected.to include('email' => 'john.doe@nowhere.com') }
       it { is_expected.to include('firstName' => 'John') }
-      it { is_expected.to include('lastName' => 'Doe') }
+      it { is_expected.to include('lastName' => 'DOE') }
       it { is_expected.to include('locale' => 'en') }
       it { is_expected.to include('timeZone' => 'UTC') }
-      it { is_expected.to include('fullName' => 'Doe John') }
+      it { is_expected.to include('fullName' => 'DOE John') }
       it { is_expected.to include('createdAt') }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
       it { is_expected.to include('userGroups') }
@@ -38,10 +38,10 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.to include('id' => be_a(String)) }
       it { is_expected.to include('email' => 'john.doe@nowhere.com') }
       it { is_expected.to include('firstName' => 'John') }
-      it { is_expected.to include('lastName' => 'Doe') }
+      it { is_expected.to include('lastName' => 'DOE') }
       it { is_expected.to include('locale' => 'en') }
       it { is_expected.to include('timeZone' => 'UTC') }
-      it { is_expected.to include('fullName' => 'Doe John') }
+      it { is_expected.to include('fullName' => 'DOE John') }
       it { is_expected.to include('createdAt') }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
       it { is_expected.not_to include('userGroups') }
@@ -58,7 +58,7 @@ RSpec.describe Schematics::JsonSerializer do
       let(:options) { { association: true } }
 
       it { is_expected.to include('id' => be_a(String)) }
-      it { is_expected.to include('fullName' => 'Doe John') }
+      it { is_expected.to include('fullName' => 'DOE John') }
     end
 
     context 'when metadata option is enabled' do
@@ -67,7 +67,7 @@ RSpec.describe Schematics::JsonSerializer do
         {
           _metadata: {
             icon: 'users',
-            descriptor: 'Doe John',
+            descriptor: 'DOE John',
             url: Rails.application.routes.url_helpers.polymorphic_path(user),
             sgid: be_a(String)
           }
@@ -77,10 +77,10 @@ RSpec.describe Schematics::JsonSerializer do
       it { is_expected.to include('id' => be_a(String)) }
       it { is_expected.to include('email' => 'john.doe@nowhere.com') }
       it { is_expected.to include('firstName' => 'John') }
-      it { is_expected.to include('lastName' => 'Doe') }
+      it { is_expected.to include('lastName' => 'DOE') }
       it { is_expected.to include('locale' => 'en') }
       it { is_expected.to include('timeZone' => 'UTC') }
-      it { is_expected.to include('fullName' => 'Doe John') }
+      it { is_expected.to include('fullName' => 'DOE John') }
       it { is_expected.to include('createdAt') }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
       it { is_expected.not_to include('userGroups') }
