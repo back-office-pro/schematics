@@ -58,6 +58,7 @@ class Migration < Schematics::ApplicationRecord
   private
 
   def quota_entities_cannot_be_exceeded
+    return unless data
     return if data_size <= quota_entities
 
     errors.add(:base, :too_many_entities, data_size:, quota_entities:)
