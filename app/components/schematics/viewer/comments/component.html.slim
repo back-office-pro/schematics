@@ -10,6 +10,6 @@
       = render Schematics::Button::Add::Component.new(model_class:, resource:)
     button.btn-close.text-reset.ms-2 aria-label='Close' data-bs-dismiss='offcanvas' type='button'
   .offcanvas-body.pt-0
-    = turbo_frame_tag 'comments', data: { turbo_action: 'advance' } do
+    turbo-frame#comments data-turbo-action='advance'
       = render Schematics::CommentPreview::Component.with_collection(@comments)
       = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
