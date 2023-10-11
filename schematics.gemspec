@@ -80,7 +80,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'letter_opener', '~> 1.8.1'
   spec.add_dependency 'link_thumbnailer', '~> 3.4.0'
   spec.add_dependency 'loaf', '~> 0.10.0'
-  spec.add_dependency 'lograge', '~> 0.13.0'
+  spec.add_dependency 'lograge', '~> 0.14.0'
   spec.add_dependency 'memery', '~> 1.5.0'
   spec.add_dependency 'mobility', '~> 1.3.0.rc1'
   spec.add_dependency 'mobility-actiontext', '~> 1.1.1'
