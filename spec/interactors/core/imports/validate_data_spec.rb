@@ -13,8 +13,8 @@ RSpec.describe Core::Imports::ValidateData do
         {
           1 => {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'Doe',
             locale: :en,
             password: 'Azerty1!',
             time_zone: 'UTC',
@@ -23,8 +23,8 @@ RSpec.describe Core::Imports::ValidateData do
           },
           2 => {
             email: 'jane.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'Jane',
+            first_name: 'Jane',
+            last_name: 'Doe',
             locale: :fr,
             password: 'Azerty1!',
             time_zone: 'Paris',
@@ -37,26 +37,26 @@ RSpec.describe Core::Imports::ValidateData do
         [
           {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'DOE',
             locale: 'en',
             lock_version: 0,
             password_digest: String,
             preferences: {},
             role_id: role.id,
-            slug: 'john-doe',
+            slug: 'doe-john-2',
             time_zone: 'UTC'
           },
           {
             email: 'jane.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'Jane',
+            first_name: 'Jane',
+            last_name: 'DOE',
             locale: 'fr',
             lock_version: 0,
             password_digest: String,
             preferences: {},
             role_id: role.id,
-            slug: 'jane-doe',
+            slug: 'doe-jane',
             time_zone: 'Paris'
           }
         ]
@@ -72,8 +72,8 @@ RSpec.describe Core::Imports::ValidateData do
         {
           1 => {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'Doe',
             locale: :en,
             password: 'Azerty1!',
             time_zone: 'UTC',
@@ -82,8 +82,8 @@ RSpec.describe Core::Imports::ValidateData do
           },
           2 => {
             email: '',
-            first_name: 'Doe',
-            last_name: 'Jane',
+            first_name: 'Jane',
+            last_name: 'Doe',
             locale: :fr,
             password: 'Azerty1!',
             time_zone: 'Paris',
@@ -96,14 +96,14 @@ RSpec.describe Core::Imports::ValidateData do
         [
           {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'DOE',
             locale: 'en',
             lock_version: 0,
             password_digest: String,
             preferences: {},
             role_id: role.id,
-            slug: 'john-doe',
+            slug: 'doe-john-2',
             time_zone: 'UTC'
           },
           ActiveRecord::RecordInvalid

@@ -12,8 +12,8 @@ RSpec.describe Core::Imports::ReadData do
       {
         1 => {
           email: 'john.doe@somewhere.com',
-          first_name: 'Doe',
-          last_name: 'John',
+          first_name: 'John',
+          last_name: 'Doe',
           locale: :en,
           password: 'Azerty1!',
           time_zone: 'UTC',
@@ -22,8 +22,8 @@ RSpec.describe Core::Imports::ReadData do
         },
         2 => {
           email: 'jane.doe@somewhere.com',
-          first_name: 'Doe',
-          last_name: 'Jane',
+          first_name: 'Jane',
+          last_name: 'Doe',
           locale: :fr,
           password: 'Azerty1!',
           time_zone: 'Paris',

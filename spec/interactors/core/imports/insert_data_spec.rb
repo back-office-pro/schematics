@@ -13,8 +13,8 @@ RSpec.describe Core::Imports::InsertData do
         [
           {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'Doe',
             locale: 'en',
             lock_version: 0,
             password_digest: String,
@@ -25,8 +25,8 @@ RSpec.describe Core::Imports::InsertData do
           },
           {
             email: 'jane.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'Jane',
+            first_name: 'Jane',
+            last_name: 'Doe',
             locale: 'fr',
             lock_version: 0,
             password_digest: String,
@@ -54,8 +54,8 @@ RSpec.describe Core::Imports::InsertData do
         [
           {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'Doe',
             locale: 'en',
             lock_version: 0,
             password_digest: String,
@@ -66,8 +66,8 @@ RSpec.describe Core::Imports::InsertData do
           },
           {
             email: 'john.doe@somewhere.com',
-            first_name: 'Doe',
-            last_name: 'John',
+            first_name: 'John',
+            last_name: 'Doe',
             locale: 'en',
             lock_version: 0,
             password_digest: String,
