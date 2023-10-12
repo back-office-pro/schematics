@@ -9,16 +9,8 @@ module Schematics
       delegate :file, :filename, :extension, :content_type, to: :serializer, private: true
 
       def call
-        ::ActiveStorage::PurgeJob
-          .set(wait: 5.minutes)
-          .perform_later(blob)
-        ::Turbo::StreamsChannel.broadcast_replace_to(
-          user,
-          target: 'generate_file_in_background',
-          content: Button::GenerateFileInBackground::Component
-            .public_send(component_method || extension, dropdown:, url:)
-            .to_html
-        )
+        ::ActiveStorage::PurgeJob.set(wait: 5.minutes).perform_later(blob)
+        ::Turbo::StreamsChannel.broadcast_replace_to(user, target:, renderable:)
       end
 
       private
@@ -26,6 +18,11 @@ module Schematics
       memoize def blob
         ::ActiveStorage::Blob.create_and_upload!(io: file, filename:, content_type:)
       end
+
+      def renderable = Button::GenerateFileInBackground::Component
+        .public_send(component_method || extension, dropdown:, url:)
+
+      def target = 'generate_file_in_background'
 
       def url = ::Rails
         .application

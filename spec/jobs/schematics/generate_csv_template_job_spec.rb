@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GenerateCsvTemplateJob do
+  include Turbo::Broadcastable::TestHelper
   include_context 'with user'
 
   let(:model_class) { User }
@@ -18,6 +19,8 @@ RSpec.describe Schematics::GenerateCsvTemplateJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(user, model_class) }
 
+    let(:stream) { capture_turbo_stream_broadcasts(user) { perform_now } }
+
     it 'uploads a blob' do
       expect { perform_now }
         .to change(ActiveStorage::Blob, :count)
@@ -30,11 +33,12 @@ RSpec.describe Schematics::GenerateCsvTemplateJob do
         .with(an_instance_of(ActiveStorage::Blob))
     end
 
-    it 'broadcasts to user', skip: 'not supported' do
-      expect { perform_now }
-        .to have_broadcasted_to(user)
-        .from_channel(Turbo::StreamsChannel)
-        .with(a_hash_including(target: 'generate_file_in_background'))
+    it 'broadcasts replace to user' do
+      expect(stream.first['action']).to eq('replace')
+    end
+
+    it 'broadcasts to user target' do
+      expect(stream.first['target']).to eq('generate_file_in_background')
     end
   end
 end
