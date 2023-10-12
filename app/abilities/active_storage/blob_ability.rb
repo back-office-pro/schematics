@@ -5,6 +5,7 @@ module ActiveStorage
     def initialize
       super
       cannot :read, ::ActiveStorage::Blob, filename: %w[.env master.key db.dump]
+      cannot :read, ::ActiveStorage::Blob, attachments: { name: 'preview_image' }
     end
   end
 end

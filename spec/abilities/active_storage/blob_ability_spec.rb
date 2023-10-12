@@ -7,6 +7,8 @@ RSpec.describe ActiveStorage::BlobAbility do
   subject(:ability) { described_class.new }
 
   let(:filename) { %w[.env master.key db.dump] }
+  let(:attachments) { { name: 'preview_image' } }
 
   it { is_expected.not_to be_able_to(:read, ActiveStorage::Blob, filename:) }
+  it { is_expected.not_to be_able_to(:read, ActiveStorage::Blob, attachments:) }
 end
