@@ -24,12 +24,13 @@ const setNavbarScrolled = () => {
     ?.toggle('bg-opacity-75', window.scrollY > 25)
 }
 
-const animateTurboFrame = ({ target }) => {
-  target.classList.add('animate__fadeOut')
-  target.addEventListener('animationend', () => {
-    target.classList.remove('animate__fadeOut')
-    target.classList.add('animate__fadeIn')
-  })
+const animateTurboFrame = ({ detail }) => {
+  if (document.startViewTransition) {
+    const originalRender = detail.render
+    detail.render = (currentElement, newElement) => {
+      document.startViewTransition(() => originalRender(currentElement, newElement))
+    }
+  }
 }
 
 const defaultErrorHandler = application.handleError.bind(application)
@@ -50,5 +51,5 @@ Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('scroll', setNavbarScrolled)
-document.addEventListener('turbo:before-fetch-request', animateTurboFrame)
+document.addEventListener('turbo:before-frame-render', animateTurboFrame)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
