@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'action_dispatch/middleware/debug_exceptions'
-require 'action_dispatch/override/debug_exceptions'
 require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_record/override/connection_adapters/table_definition'
 require 'active_record/override/generators/migration_generator'
@@ -36,8 +34,6 @@ OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 Puma::Configuration.prepend(Puma::Override::Configuration)
 
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
-
-ActionDispatch::DebugExceptions.prepend(ActionDispatch::Override::DebugExceptions)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do

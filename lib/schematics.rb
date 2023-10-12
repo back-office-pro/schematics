@@ -17,7 +17,6 @@ $stdin.timeout = 1
 
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
-loader.ignore("#{__dir__}/action_dispatch")
 loader.ignore("#{__dir__}/active_model")
 loader.ignore("#{__dir__}/active_record")
 loader.ignore("#{__dir__}/active_storage")
