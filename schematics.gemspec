@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'isolator', '~> 0.11.0'
   spec.add_development_dependency 'reek', '~> 6.1.4'
   spec.add_development_dependency 'rspec-its', '~> 1.3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.57.0'
+  spec.add_development_dependency 'rubocop', '~> 1.57.1'
   spec.add_development_dependency 'rubocop-performance', '~> 1.19.1'
   spec.add_development_dependency 'rubocop-rails', '~> 2.21.2'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
