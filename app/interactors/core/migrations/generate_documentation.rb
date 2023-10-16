@@ -7,11 +7,12 @@ module Core
 
       delegate :migration, to: :context, private: true
       delegate :data_version, :state_rollbacking?, to: :migration, private: true
+      delegate :really_destroy!, :save!, to: :documentation, private: true
 
       def call
-        PaperTrail.request(enabled: false) do
-          state_rollbacking? ? documentation.really_destroy! : documentation.save!
-        end
+        return save! unless state_rollbacking?
+
+        really_destroy!
       end
 
       private
