@@ -19,10 +19,9 @@ module Core
       def call
         fail! unless authenticated? || omniauthenticated? || impersonated?
 
-        session = current_session.login!(user)
         context.current_session_id = session.id
         context.jwt = JWT::AuthToken.encode(session.auth_token)
-        cookies.permanent.encrypted[:auth_token] = session.auth_token if remember_me?
+        cookies.permanent.encrypted[:auth_token] = cookie if remember_me?
       end
 
       private
@@ -46,6 +45,12 @@ module Core
       def remember_me? = ::ActiveModel::Type::Boolean
         .new
         .cast(resource_params[:remember_me])
+
+      def cookie = { value: session.auth_token, httponly: true }
+
+      memoize def session
+        current_session.login!(user)
+      end
 
       memoize def user
         @user || ::User.find_by(email:) || Schematics::Guest::User.new
