@@ -40,6 +40,9 @@ fr:
         new: Ajouter @{f:une nouvelle|m:un nouveau|fv:une nouvelle|mv:un nouvel} %{human_name}
         show: "%{resource}"
         update: Editer %{resource}
+      sudos:
+        create: Accéder à une zone protégée
+        new: Accéder à une zone protégée
       versions:
         index: Historique
         show: Historique
