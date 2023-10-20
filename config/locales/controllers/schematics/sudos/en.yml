@@ -1,0 +1,7 @@
+---
+en:
+  schematics:
+    sudos:
+      create:
+        failure: The password is invalid
+        success: Access allowed!

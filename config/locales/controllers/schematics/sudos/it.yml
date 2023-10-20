@@ -1,0 +1,7 @@
+---
+it:
+  schematics:
+    sudos:
+      create:
+        failure: La password non è valida
+        success: Accesso consentito!
