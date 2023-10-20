@@ -11,6 +11,7 @@ module Schematics
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from ActionController::UnknownFormat, with: :unknown_format
+      rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :invalid_token
     end
 
     def access_denied
@@ -86,6 +87,17 @@ module Schematics
           format.any do
             redirect_to schematics.root_path,
                         alert: t('schematics.application.unknown_format.alert')
+          end
+        end
+      end
+    end
+
+    def invalid_token
+      switch_localization do
+        respond_to do |format|
+          format.json { head :bad_request }
+          format.any do
+            redirect_to index_path, alert: t('schematics.application.invalid_token.alert')
           end
         end
       end

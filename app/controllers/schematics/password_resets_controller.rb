@@ -19,7 +19,7 @@ module Schematics
     end
 
     def update
-      result = PasswordResets::Update.call(user: @user, user_params: resource_params)
+      result = Resources::Update.call(resource: @user, resource_params:)
       respond_with result, location: main_app.login_path
     end
 
@@ -32,7 +32,7 @@ module Schematics
     def set_user
       @user = model_class
               .with_role
-              .find_by_token_for(:password_reset, params[:token])
+              .find_by_token_for!(:password_reset, params[:token])
     end
 
     def index_path = new_password_reset_path

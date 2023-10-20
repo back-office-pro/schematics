@@ -6,6 +6,8 @@ en:
         alert: Access denied
       authenticate_user:
         alert: Please authenticate
+      invalid_token:
+        alert: Jeton expiré ou non valide
       invalid_transition:
         alert: Action not authorized
       parameter_missing:

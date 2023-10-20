@@ -6,6 +6,8 @@ fr:
         alert: Accès non autorisé
       authenticate_user:
         alert: Veuillez vous authentifier
+      invalid_token:
+        alert: Token expired or invalid
       invalid_transition:
         alert: Action non autorisée
       parameter_missing:

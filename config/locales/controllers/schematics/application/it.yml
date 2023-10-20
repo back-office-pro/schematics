@@ -6,6 +6,8 @@ it:
         alert: Accesso negato
       authenticate_user:
         alert: Si prega di autenticarsi
+      invalid_token:
+        alert: Token scaduto o non valido
       invalid_transition:
         alert: Azione non autorizzata
       parameter_missing:

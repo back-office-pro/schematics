@@ -80,27 +80,21 @@ RSpec.describe 'PasswordResets' do
       let(:time) { User::PASSWORD_RESET_TOKEN_DURATION.from_now.advance(minutes: 1) }
       let(:password) { 'Azerty1!' }
       let(:password_confirmation) { 'Azerty1!' }
-      let(:expected_response) do
-        {
-          'errors' => [
-            I18n.t('schematics.password_resets.update.expired')
-          ]
-        }
-      end
 
       before { [token, travel_to(time) { do_request }] }
 
-      it { is_expected.to have_http_status(:unprocessable_entity) }
-      it { expect(json_response).to eq(expected_response) }
+      it { is_expected.to have_http_status(:bad_request) }
+      its(:body) { is_expected.to be_blank }
     end
 
-    context 'when token does not exist' do
+    context 'when token is invalid' do
       let(:token) { 'foo' }
       let(:params) { {} }
 
       before { do_request }
 
       it { is_expected.to have_http_status(:bad_request) }
+      its(:body) { is_expected.to be_blank }
     end
   end
 end
