@@ -24,6 +24,8 @@ module Schematics
 
       def touch!(*) = true
 
+      def sudo? = false
+
       def user = User.new(locale:)
     end
   end
