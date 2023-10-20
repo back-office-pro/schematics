@@ -5,6 +5,7 @@ module Schematics
     include ::Pagy::Backend
     include Localizable
     include Authenticable
+    include Sudoable
     include Entitleable
     include Respondable
     include Rescuable
