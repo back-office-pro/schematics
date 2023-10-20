@@ -2,23 +2,30 @@
 
 module Schematics
   class SudosController < ApplicationController
+    include Fillable
+
+    before_action :require_return_to!
+    delegate :entity, to: :model_class, private: true
+
     def new; end
 
     def create
-      if current_user.authenticate(resource_params[:password])
-        current_session.sudo!
-        return_to_path = session[:return_to]
-        session.delete(:return_to)
-        redirect_to return_to_path
-      else
-        render :new
-      end
+      result = Sudos::Create.call(current_session:, current_user:, resource_params:)
+      respond_with result, location:
     end
 
     private
 
-    def resource_params = params
-      .require(:user)
-      .permit(:password)
+    def model_class = ::User
+
+    def permitted_params = %i[password]
+
+    def require_return_to!
+      redirect_to(root_path) unless session.key?(:return_to)
+    end
+
+    def location = session
+      .fetch(:return_to, root_path)
+      .tap { session.delete(:return_to) }
   end
 end
