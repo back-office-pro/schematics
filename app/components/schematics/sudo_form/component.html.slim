@@ -1,0 +1,7 @@
+.alert.alert-danger
+  = fa_icon :triangle_exclamation, class: 'me-3'
+  = t('.warning')
+= bootstrap_form_with model:, url: do |form|
+  = render Schematics::ResourceForm::Fields::Digest::Component.new(form:)
+  = render Schematics::Button::Confirm::Component.new
+  = render Schematics::Button::Cancel::Component.new(path: root_path)
