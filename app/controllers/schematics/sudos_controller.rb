@@ -3,7 +3,6 @@
 module Schematics
   class SudosController < ApplicationController
     include Fillable
-
     before_action :require_return_to!
     delegate :entity, to: :model_class, private: true
 
@@ -25,7 +24,7 @@ module Schematics
     end
 
     def location = session
-      .fetch(:return_to, root_path)
+      .fetch(:return_to)
       .tap { session.delete(:return_to) }
   end
 end
