@@ -5,6 +5,5 @@ fr:
       create:
         success: E-mail envoyé avec les instructions pour réinitialiser le mot de passe
       update:
-        expired: La requête de réinitialisation a expirée
         failure: Une erreur est survenue
         success: Votre mot de passe a été réinitialisé !
