@@ -11,6 +11,8 @@ class Session < Schematics::ApplicationRecord
   scope :with_user_role_permissions, -> { includes(user: { role: :permissions }) }
   scope :with_user_role_name, -> { includes(user: { role: :string_translations }) }
 
+  after_create_commit :sudo!
+
   def login!(user)
     case user
     when self.user
@@ -25,4 +27,12 @@ class Session < Schematics::ApplicationRecord
 
     update!(updated_at: Time.current)
   end
+
+  def sudo? = Rails
+    .cache
+    .read("#{cache_key}/sudo")
+
+  def sudo! = Rails
+    .cache
+    .write("#{cache_key}/sudo", true, expires_in: ACTIVE_DELAY)
 end
