@@ -27,6 +27,8 @@ module Schematics
 
     def model_class = ::User
 
+    def permitted_params = %i[email password password_confirmation]
+
     def set_user
       @user = model_class
               .with_role
