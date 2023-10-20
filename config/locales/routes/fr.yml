@@ -14,4 +14,5 @@ fr:
     password_resets: mots-de-passe
     preferences: preferences
     profile: profil
+    sudo: acces-restreint
     versions: historique
