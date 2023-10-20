@@ -45,7 +45,6 @@ ActiveRecordDoctor.configure do
   ]
 
   detector :missing_foreign_keys, enabled: false
-  detector :missing_unique_indexes, enabled: false
   detector :missing_non_null_constraint, enabled: false
   detector :incorrect_length_validation, enabled: false
 end
