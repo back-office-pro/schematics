@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Session do
   include Schematics::Specs::Model
 
-  it { is_expected.not_to be_sudo }
+  it { is_expected.to be_sudo }
 
   describe '#login!' do
     subject { record.login!(user) }

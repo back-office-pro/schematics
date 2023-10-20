@@ -849,6 +849,11 @@
         }
       },
       {
+        "id": "83fd932a-6a64-4e83-b1d4-4489b3c04072",
+        "name": "sudo_at",
+        "type": "timestamp"
+      },
+      {
         "id": "e05f71d2-e586-4b72-8525-3a35d1adb101",
         "name": "user",
         "type": "references",

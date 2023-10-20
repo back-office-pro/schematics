@@ -28,11 +28,11 @@ class Session < Schematics::ApplicationRecord
     update!(updated_at: Time.current)
   end
 
-  def sudo? = Rails
-    .cache
-    .read("#{cache_key}/sudo")
+  def sudo?
+    sudo_at&.after?(ACTIVE_DELAY.ago)
+  end
 
-  def sudo! = Rails
-    .cache
-    .write("#{cache_key}/sudo", true, expires_in: ACTIVE_DELAY)
+  def sudo!
+    update!(sudo_at: Time.current)
+  end
 end
