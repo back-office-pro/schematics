@@ -24,6 +24,8 @@ module Schematics
         Options::ContentType
       ).excluding(Options::Default)
 
+      def database_type = 'attachment'
+
       def permitted_params = [
         super,
         { attributes_param_key => %i[id _destroy] }

@@ -28,7 +28,7 @@ describe Schematics::Attributes::References do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:database_type) { is_expected.to eq('references') }
+  its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
   its(:association_type) { is_expected.to eq('user') }

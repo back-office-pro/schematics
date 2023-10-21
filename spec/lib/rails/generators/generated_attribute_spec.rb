@@ -99,7 +99,7 @@ describe Rails::Generators::GeneratedAttribute do
 
     its(:name) { is_expected.to eq('author') }
     its(:column_name) { is_expected.to eq('author_id') }
-    its(:type) { is_expected.to eq(:references) }
+    its(:type) { is_expected.to eq(:belongs_to) }
     its(:attr_options) { is_expected.to be_empty }
     its(:options_for_migration) { is_expected.to eq(index: { where: 'deleted_at IS NULL' }) }
     it { is_expected.not_to be_required }

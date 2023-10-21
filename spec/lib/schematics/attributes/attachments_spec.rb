@@ -17,7 +17,7 @@ describe Schematics::Attributes::Attachments do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:database_type) { is_expected.to eq('attachments') }
+  its(:database_type) { is_expected.to eq('attachment') }
   its(:column_name) { is_expected.to eq('files') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:icon) { is_expected.to eq(:file_image) }

@@ -26,6 +26,8 @@ module Schematics
         Options::Polymorphic
       )
 
+      def database_type = 'belongs_to'
+
       def open_api_type = { id!: ::String }
 
       def column_name = "#{super}_id"
