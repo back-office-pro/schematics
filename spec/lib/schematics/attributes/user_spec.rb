@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schematics::Attributes::References do
+describe Schematics::Attributes::User do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:schema) { Schematics::Schema.new }
@@ -88,7 +88,7 @@ describe Schematics::Attributes::References do
     RUBY
   end
 
-  context 'when references is required' do
+  context 'when association is required' do
     let(:options) do
       {
         required: true,
@@ -125,7 +125,7 @@ describe Schematics::Attributes::References do
     end
   end
 
-  context 'when references is polymorphic' do
+  context 'when association is polymorphic' do
     let(:options) do
       {
         polymorphic: true,

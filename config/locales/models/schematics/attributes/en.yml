@@ -37,7 +37,6 @@ en:
       schematics/attributes/percentage: Percentage
       schematics/attributes/phone: Phone number
       schematics/attributes/rating: Rating
-      schematics/attributes/references: Current user
       schematics/attributes/rich_text: Rich text editor
       schematics/attributes/state_machine: State machine
       schematics/attributes/string: String
@@ -47,5 +46,6 @@ en:
       schematics/attributes/timestamp: Timestamp
       schematics/attributes/token: Token
       schematics/attributes/url: URL
+      schematics/attributes/user: Current user
       schematics/attributes/user_agent: User Agent
       schematics/attributes/uuid: UUID

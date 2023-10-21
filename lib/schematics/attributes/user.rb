@@ -2,7 +2,7 @@
 
 module Schematics
   module Attributes
-    class References < Association
+    class User < Association
       def association_type = 'user'
     end
   end

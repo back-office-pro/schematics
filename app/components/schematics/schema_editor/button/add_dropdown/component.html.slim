@@ -72,10 +72,10 @@ span data-bs-toggle='dropdown'
         = t('.add_habtm_association')
       .dropdown-item {
         data-action='click->nested-form#add:prevent'
-        data-nested-form-template-id-param='schema-editor-attribute-references'
+        data-nested-form-template-id-param='schema-editor-attribute-user'
         data-nested-form-target-id-param="fields-#{index}"
         data-nested-form-index-param=index
         role='button'
       }
         = fa_icon :users, class: 'fa-fw me-2'
-        = t('.add_references')
+        = t('.add_user_association')

@@ -16,7 +16,7 @@ describe Schematics::Commands::DestroyEntity do
       },
       {
         name: 'owner',
-        type: 'references'
+        type: 'user'
       }
     ]
   end

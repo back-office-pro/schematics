@@ -37,7 +37,6 @@ it:
       schematics/attributes/percentage: Percentuale
       schematics/attributes/phone: Numero di telefono
       schematics/attributes/rating: Valutazione
-      schematics/attributes/references: Utente corrente
       schematics/attributes/rich_text: Rich text editor
       schematics/attributes/state_machine: Macchina a stati
       schematics/attributes/string: Stringa
@@ -47,5 +46,6 @@ it:
       schematics/attributes/timestamp: Timestamp
       schematics/attributes/token: Token
       schematics/attributes/url: URL
+      schematics/attributes/user: Utente corrente
       schematics/attributes/user_agent: Dispositivo
       schematics/attributes/uuid: Identificatore unico

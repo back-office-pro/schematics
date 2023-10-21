@@ -169,7 +169,7 @@
       {
         "id": "d16c64fb-5745-4671-93ed-539f36e5680d",
         "name": "author",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true,
           "inverse_association_name": "sent_messages"
@@ -565,7 +565,7 @@
       {
         "id": "95740a09-5cce-49b4-a761-79a98ef342fe",
         "name": "author",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true
         }
@@ -738,7 +738,7 @@
       {
         "id": "436bde6d-61ee-4126-b330-3397db8bd729",
         "name": "user",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true
         }
@@ -803,7 +803,7 @@
       {
         "id": "d37c6c94-4bd4-4207-8e42-33ea84275062",
         "name": "user",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true
         }
@@ -856,7 +856,7 @@
       {
         "id": "e05f71d2-e586-4b72-8525-3a35d1adb101",
         "name": "user",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true
         }
@@ -974,7 +974,7 @@
       {
         "id": "0052cbc2-fb5d-45fa-b5e2-0d094f347007",
         "name": "author",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true
         }
@@ -1020,7 +1020,7 @@
       {
         "id": "b31c84ab-40e2-44be-8944-96a2785bb0dc",
         "name": "applicant",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true,
           "inverse_association_name": "requested_tasks"
@@ -1132,7 +1132,7 @@
       {
         "id": "5d33382f-6e9e-4bf9-94f0-6f0115eb8fec",
         "name": "creator",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true,
           "inverse_association_name": "created_meetings"
@@ -1496,7 +1496,7 @@
       {
         "id": "a403e012-955b-4b3a-bff1-d90b4315945a",
         "name": "author",
-        "type": "references",
+        "type": "user",
         "options": {
           "required": true
         }

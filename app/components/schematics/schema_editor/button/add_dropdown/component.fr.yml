@@ -4,7 +4,7 @@ fr:
   add_belongs_to_has_one: Ajouter une association un-à-un
   add_belongs_to_has_many: Ajouter une association un-à-plusieurs
   add_habtm_association: Ajouter une association plusieurs-à-plusieurs
-  add_references: Ajouter une association à l'utilisateur courant
+  add_user_association: Ajouter une association à l'utilisateur courant
   add_trigger: Ajouter un déclencheur
   add_virtual: Ajouter un champ virtuel
   title: Ajouter un champ

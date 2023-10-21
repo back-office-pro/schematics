@@ -31,7 +31,7 @@ module Schematics
             .collection
             .excluding(
               Attributes::BelongsTo,
-              Attributes::References,
+              Attributes::User,
               most_used_collection,
               unused_collection
             )

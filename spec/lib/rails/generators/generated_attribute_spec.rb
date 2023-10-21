@@ -94,7 +94,7 @@ describe Rails::Generators::GeneratedAttribute do
     end
   end
 
-  context 'when column is schema references' do
+  context 'when column is schema user' do
     let(:column_definition) { 'schema:message_author' }
 
     its(:name) { is_expected.to eq('author') }

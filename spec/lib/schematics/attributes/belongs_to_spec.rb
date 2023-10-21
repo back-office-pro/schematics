@@ -175,6 +175,6 @@ describe Schematics::Attributes::BelongsTo do
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
-    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::References) }
+    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::User) }
   end
 end

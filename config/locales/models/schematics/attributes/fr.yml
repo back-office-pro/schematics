@@ -37,7 +37,6 @@ fr:
       schematics/attributes/percentage: Pourcentage
       schematics/attributes/phone: Numéro de téléphone
       schematics/attributes/rating: Notation
-      schematics/attributes/references: Utilisateur courant
       schematics/attributes/rich_text: Editeur de texte riche
       schematics/attributes/state_machine: Machine à état
       schematics/attributes/string: Chaîne de caractères
@@ -47,5 +46,6 @@ fr:
       schematics/attributes/timestamp: Timestamp
       schematics/attributes/token: Jeton unique
       schematics/attributes/url: URL
+      schematics/attributes/user: Utilisateur courant
       schematics/attributes/user_agent: Agent utilisateur
       schematics/attributes/uuid: Identifiant unique

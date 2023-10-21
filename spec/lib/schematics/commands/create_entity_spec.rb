@@ -19,7 +19,7 @@ describe Schematics::Commands::CreateEntity do
       },
       {
         name: 'owner',
-        type: 'references'
+        type: 'user'
       }
     ]
   end
