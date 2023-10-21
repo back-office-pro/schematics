@@ -18,7 +18,7 @@ module Schematics
       return unless current_session.is_a?(Guest::Session)
 
       respond_to do |format|
-        format.json { head :unauthorized }
+        format.json { request_http_token_authentication }
         format.any do
           store_location
           redirect_to main_app.login_path,
