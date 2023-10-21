@@ -15,4 +15,5 @@ it:
     preferences: preferenze
     profile: profilo
     sudo: accesso-limitato
+    sudos: accessi-limitati
     versions: storico

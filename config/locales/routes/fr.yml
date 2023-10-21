@@ -15,4 +15,5 @@ fr:
     preferences: preferences
     profile: profil
     sudo: acces-restreint
+    sudos: acces-restreints
     versions: historique
