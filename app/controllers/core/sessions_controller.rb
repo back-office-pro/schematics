@@ -22,7 +22,7 @@ class SessionsController < Schematics::ResourcesController
           flash.now[:alert] = t(result.message)
           render :new, status: :unauthorized
         end
-        format.json { head :unauthorized }
+        format.json { request_http_token_authentication }
       end
     end
   end

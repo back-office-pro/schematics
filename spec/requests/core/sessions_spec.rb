@@ -36,7 +36,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
 
       it { is_expected.to have_http_status(:unauthorized) }
       it { expect(cookies[:auth_token]).to be_nil }
-      its(:body) { is_expected.to be_blank }
+      its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
     end
 
     context 'when brute forcing credentials' do
@@ -81,7 +81,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
 
       it { is_expected.to have_http_status(:unauthorized) }
       it { expect(cookies[:auth_token]).to be_nil }
-      its(:body) { is_expected.to be_blank }
+      its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
     end
   end
 end
