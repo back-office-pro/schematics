@@ -3,14 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Core::Sessions::ActiveQuery do
+  include ActiveSupport::Testing::TimeHelpers
+
   include_context 'with user'
 
   let(:first_session) { Session.create!(user:) }
-  let(:second_session) do
-    Session.create!(user:, updated_at: Time.current - Session::ACTIVE_DELAY)
-  end
+  let(:second_session) { Session.create!(user:) }
+  let(:time) { Time.current - Session::ACTIVE_DELAY }
 
-  before { [first_session, second_session] }
+  before { [first_session, travel_to(time) { second_session }] }
 
   its(:call) { is_expected.to contain_exactly(first_session) }
 end
