@@ -1,0 +1,7 @@
+---
+fr:
+  schematics:
+    sudos:
+      create:
+        failure: Le mot de passe est invalide
+        success: Accès autorisé !

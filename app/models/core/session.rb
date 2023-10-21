@@ -11,6 +11,8 @@ class Session < Schematics::ApplicationRecord
   scope :with_user_role_permissions, -> { includes(user: { role: :permissions }) }
   scope :with_user_role_name, -> { includes(user: { role: :string_translations }) }
 
+  after_create_commit :sudo!
+
   def login!(user)
     case user
     when self.user
@@ -24,5 +26,13 @@ class Session < Schematics::ApplicationRecord
     return unless request.format.html?
 
     update!(updated_at: Time.current)
+  end
+
+  def sudo?
+    sudo_at&.after?(ACTIVE_DELAY.ago)
+  end
+
+  def sudo!
+    update!(sudo_at: Time.current)
   end
 end

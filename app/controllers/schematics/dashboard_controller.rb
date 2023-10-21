@@ -2,6 +2,8 @@
 
 module Schematics
   class DashboardController < ApplicationController
+    before_action :require_sudo!, only: :admin
+
     def admin
       authorize! :read, :admin_dashboard
     end

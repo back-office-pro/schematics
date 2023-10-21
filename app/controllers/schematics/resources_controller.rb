@@ -17,6 +17,7 @@ module Schematics
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
     before_action :log_search!, only: :index
+    before_action :require_sudo!, only: :delete
     after_action :assign_etag, only: %i[show update]
 
     responders :flash, ResourceResponder

@@ -6,9 +6,11 @@ Schematics::Engine.routes.draw do
   localized do
     draw :dashboard
     draw :exceptions
+    get 'sudo', to: 'sudos#new', as: :sudo
     resource :preferences, only: %i[edit update]
     resource :profile, only: %i[edit update], controller: :profile
     resources :password_resets, only: %i[new create edit update], param: :token
+    resources :sudos, only: :create
     resources :versions, only: %i[index show] do
       patch :revert, on: :member
     end

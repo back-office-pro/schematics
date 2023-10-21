@@ -14,4 +14,6 @@ en:
     password_resets: passwords
     preferences: preferences
     profile: profile
+    sudo: restricted-access
+    sudos: restricted-access
     versions: timeline

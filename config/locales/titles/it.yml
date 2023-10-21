@@ -40,6 +40,9 @@ it:
         new: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
         show: "%{resource}"
         update: Editare %{resource}
+      sudos:
+        create: Accesso a un'area protetta
+        new: Accesso a un'area protetta
       versions:
         index: Storico
         show: Storico

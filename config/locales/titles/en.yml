@@ -40,6 +40,9 @@ en:
         new: Add a new %{human_name}
         show: "%{resource}"
         update: Edit %{resource}
+      sudos:
+        create: Access to a protected area
+        new: Access to a protected area
       versions:
         index: Timeline
         show: Timeline

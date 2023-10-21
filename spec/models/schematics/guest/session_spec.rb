@@ -11,6 +11,8 @@ RSpec.describe Schematics::Guest::Session do
 
   before { request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-US' }
 
+  it { is_expected.not_to be_sudo }
+
   its(:locale) { is_expected.to eq(:en) }
   its(:ip) { is_expected.to eq('0.0.0.0') }
   its(:user_agent) { is_expected.to eq('Rails Testing') }
