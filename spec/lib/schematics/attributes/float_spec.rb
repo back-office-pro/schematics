@@ -58,7 +58,7 @@ describe Schematics::Attributes::Float do
 
     let(:value) { 100.099 }
 
-    it { is_expected.to eq('100 kg') }
+    it { is_expected.to eq('100.099 kg') }
   end
 
   describe '.compatible_types' do
