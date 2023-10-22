@@ -33,7 +33,7 @@ module Schematics
 
     def current_session
       ::Session.authorized_by(auth_token, session[:current_session_id]).first ||
-        ::ApiKey.with_permissions.active.find_by(auth_token:) ||
+        ::ApiKey.with_permissions.active.find_by(auth_token: request.headers['X-API-Key']) ||
         Guest::Session.new(request:)
     end
 
