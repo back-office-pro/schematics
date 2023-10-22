@@ -3,6 +3,13 @@
 @import 'animate.css/animate';
 
 .swagger-ui {
+  .scheme-container {
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+  }
+
   .wrapper {
     max-width: initial;
     padding: 0;
