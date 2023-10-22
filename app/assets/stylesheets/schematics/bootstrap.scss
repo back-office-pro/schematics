@@ -178,4 +178,8 @@ input:-webkit-autofill:focus {
   iframe.google-map {
     filter: invert(90%);
   }
+
+  .swagger-ui .dialog-ux .modal-ux {
+    @extend .bg-dark;
+  }
 }
