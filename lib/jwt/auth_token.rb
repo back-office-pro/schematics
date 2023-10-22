@@ -13,7 +13,7 @@ module JWT
     def decode(auth_token, *)
       module_parent.decode(auth_token, secret)[0]['auth_token']
     rescue JWT::DecodeError
-      auth_token
+      nil
     end
 
     def secret = Rails
