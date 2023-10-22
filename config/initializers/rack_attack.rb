@@ -20,7 +20,7 @@ module Rack
 
     throttle('logins/email', limit: 5, period: 20.seconds) do |req|
       if sessions_paths.include?(req.path) && req.post?
-        req.params['session']['email'].to_s.downcase.gsub(/\s+/, '')
+        req.params.dig('session', 'email')&.to_s&.downcase&.gsub(/\s+/, '')
       end
     end
 
