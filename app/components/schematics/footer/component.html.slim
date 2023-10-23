@@ -1,7 +1,8 @@
 footer
   .row.mx-1.text-secondary.align-items-center.h-100
-    .col
-      | &copy; #{year} #{company_name} -
+    .col.text-start.text-nowrap
+      | &copy; #{year} #{company_name}
+      = render Schematics::Footer::Network::Component.new
       = render Schematics::Footer::HelpCenter::Component.new
     .col.text-end.text-nowrap
       .d-none.d-sm-inline
