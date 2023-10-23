@@ -5,13 +5,13 @@ footer
       = render Schematics::Footer::Network::Component.new
       = render Schematics::Footer::HelpCenter::Component.new
     .col.text-end.text-nowrap
+      - if resource
+        = render Schematics::ResourceLinkTo::Component.new(resource:, css_classes:) do |c|
+          - c.with_body do
+            = fa_icon :code_branch, class: 'me-2'
+            = resource
+      = fa_icon :rocket, class: 'text-primary mx-1'
       .d-none.d-sm-inline
-        - if resource
-          = render Schematics::ResourceLinkTo::Component.new(resource:, css_classes:) do |c|
-            - c.with_body do
-              = fa_icon :code_branch, class: 'me-2'
-              = resource
-        = fa_icon :rocket, class: 'text-primary ms-1 me-2'
-        = t('.powered_by')
+        span.ms-1 = t('.powered_by')
       = link_to website_url, class: 'ms-1' do
         = image_tag 'schematics/logo.svg'
