@@ -93,7 +93,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'omniauth-saml', '~> 2.1.0'
   spec.add_dependency 'opensearch-ruby', '~> 3.0.1'
   spec.add_dependency 'pagy', '~> 6.1.0'
-  spec.add_dependency 'paper_trail', '~> 15.0.0'
+  spec.add_dependency 'paper_trail', '~> 15.1.0'
   spec.add_dependency 'paranoia', '~> 2.6.3'
   spec.add_dependency 'pg', '~> 1.5.4'
   spec.add_dependency 'phonelib', '~> 0.8.4'
