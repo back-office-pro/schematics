@@ -13,6 +13,7 @@ Rails.application.configure do
   config.force_ssl = Tenant.ssl?
   config.hosts = [Tenant.host] if Tenant.ssl?
   config.require_master_key = true
+  config.sandbox_by_default = true
 
   # Assets
   config.assets.compile = false
