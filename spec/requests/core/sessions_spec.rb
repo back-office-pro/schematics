@@ -14,7 +14,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
 
     context 'when credentials are correct' do
       let(:email) { 'john.doe@nowhere.com' }
-      let(:password) { 'Azerty1!' }
+      let(:password) { 'Azerty1234?!' }
       let(:remember_me) { true }
       let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
 

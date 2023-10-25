@@ -69,7 +69,7 @@ class Tenant
     def default_password
       return unless demo?
 
-      'Azerty1!'
+      'Azerty1234?!'
     end
 
     def host

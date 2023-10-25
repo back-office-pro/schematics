@@ -48,8 +48,8 @@ RSpec.describe 'PasswordResets' do
 
     context 'when not expired token exists and password is confirmed' do
       let(:token) { user.generate_token_for(:password_reset) }
-      let(:password) { 'Azerty1!' }
-      let(:password_confirmation) { 'Azerty1!' }
+      let(:password) { 'Azerty1234?!' }
+      let(:password_confirmation) { 'Azerty1234?!' }
 
       before { do_request }
 
@@ -59,7 +59,7 @@ RSpec.describe 'PasswordResets' do
 
     context 'when not expired token exists and password is not confirmed' do
       let(:token) { user.generate_token_for(:password_reset) }
-      let(:password) { 'Azerty1!' }
+      let(:password) { 'Azerty1234?!' }
       let(:password_confirmation) { 'Azerty1' }
       let(:expected_response) do
         {
@@ -78,8 +78,8 @@ RSpec.describe 'PasswordResets' do
     context 'when token has expired' do
       let(:token) { user.generate_token_for(:password_reset) }
       let(:time) { User::PASSWORD_RESET_TOKEN_DURATION.from_now.advance(minutes: 1) }
-      let(:password) { 'Azerty1!' }
-      let(:password_confirmation) { 'Azerty1!' }
+      let(:password) { 'Azerty1234?!' }
+      let(:password_confirmation) { 'Azerty1234?!' }
 
       before { [token, travel_to(time) { do_request }] }
 

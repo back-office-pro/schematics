@@ -19,7 +19,7 @@ module Schematics
 
       def column_name = "#{super}_digest"
 
-      def default = 'Azerty1!'
+      def default = 'Azerty1234?!'
 
       def icon = :key
 
@@ -31,6 +31,7 @@ module Schematics
 
       def validators = super.merge(
         allow_blank:,
+        not_pwned: { on_error: :valid },
         confirmation: ({ allow_blank: } if confirm?),
         format: { with: REGEX, message: :password },
         length: {

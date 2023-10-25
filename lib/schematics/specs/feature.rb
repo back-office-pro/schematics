@@ -29,7 +29,7 @@ module Schematics
         let(:user) do
           ::User.create!(
             email: 'admin@admin.com',
-            password: 'Azerty1!',
+            password: 'Azerty1234?!',
             first_name: 'John',
             last_name: 'Doe',
             role:
@@ -38,7 +38,7 @@ module Schematics
         let(:login) do
           visit login_path
           fill_in ::User.human_attribute_name('email'), with: user.email
-          fill_in ::User.human_attribute_name('password'), with: 'Azerty1!'
+          fill_in ::User.human_attribute_name('password'), with: 'Azerty1234?!'
           click_on t('schematics.application.button.confirm')
           is_expected.to have_text t('sessions.create.success')
         end

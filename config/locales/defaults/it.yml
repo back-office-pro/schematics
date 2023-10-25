@@ -28,7 +28,9 @@ it:
       ip_address: non è un indirizzo IP valido
       mime_type: non è un tipo MIME valido
       name: deve contenere solo lettere minuscole o trattino basso
+      not_pwned: è apparso in precedenza in una violazione dei dati e non deve essere utilizzato
       password: deve contenere almeno un numero, una lettera minuscola, una lettera maiuscola e un carattere speciale
+      pwned_error: non è stato possibile verificarle rispetto alle violazioni dei dati passate
       singular: non è singolare
       storage_quota: la capacità di archiviazione è stata superata
       too_many_entities: Lo schema contiene più entità di quelle consentite dalla licenza (%{data_size}/%{quota_entities})

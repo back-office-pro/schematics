@@ -35,7 +35,7 @@
         "type": "digest",
         "options": {
           "confirm": true,
-          "min": 8
+          "min": 12
         }
       },
       {

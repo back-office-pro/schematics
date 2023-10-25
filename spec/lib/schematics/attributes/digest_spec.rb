@@ -21,7 +21,7 @@ describe Schematics::Attributes::Digest do
   its(:column_name) { is_expected.to eq('password_digest') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('entity[password_digest]') }
-  its(:default) { is_expected.to eq('Azerty1!') }
+  its(:default) { is_expected.to eq('Azerty1234?!') }
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
   its(:icon) { is_expected.to eq(:key) }
 
@@ -41,6 +41,7 @@ describe Schematics::Attributes::Digest do
     is_expected.to eq(
       {
         allow_blank: true,
+        not_pwned: { on_error: :valid },
         format: { with: described_class::REGEX, message: :password },
         length: { maximum: 72 }
       }
@@ -62,6 +63,7 @@ describe Schematics::Attributes::Digest do
       is_expected.to eq(
         {
           allow_blank: true,
+          not_pwned: { on_error: :valid },
           confirmation: { allow_blank: true },
           format: { with: described_class::REGEX, message: :password },
           length: { maximum: 72 }

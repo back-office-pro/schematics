@@ -10,7 +10,7 @@ RSpec.describe 'Profile' do
     let(:params) { { user: { password_challenge: } } }
 
     context 'when password_challenge is right' do
-      let(:password_challenge) { 'Azerty1!' }
+      let(:password_challenge) { 'Azerty1234?!' }
 
       before { do_request }
 
