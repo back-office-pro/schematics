@@ -21,6 +21,8 @@ module Schematics
             api :index, "List #{entity.name.pluralize}" do
               query :page, ::Integer, desc: 'Page number'
               query :items, ::Integer, desc: 'Items per page'
+              query :sort, ::String, desc: 'Sort fields list separated by comma'
+
               query "#{filter_key}[with_deleted]", 'boolean', desc: 'Display archives'
 
               entity.searchable_elements.each do |element|
@@ -38,6 +40,20 @@ module Schematics
               ]
               response 401, 'Not Authorized', :json
             end
+
+            api :autocomplete, "Autocomplete #{entity.name.pluralize}" do
+              query :field, ::String, desc: 'Field to autocomplete'
+
+              entity.searchable_elements.each do |element|
+                query "#{filter_key}[#{element.name}]",
+                      element.open_api_type,
+                      desc: "Filter by #{element.name}"
+              end
+
+              response 200, 'Success', :json
+              response 401, 'Not Authorized', :json
+              response 400, 'Bad Request', :json
+            end
           end
 
           if entity.can?(:create)
@@ -52,6 +68,15 @@ module Schematics
               body :json, data: entity
                 .fillable_elements
                 .to_h { [_1.name, _1.open_api_type] }
+
+              response 201, 'Success', :json
+              response 401, 'Not Authorized', :json
+              response 400, 'Bad Request', :json
+              response 422, 'Unprocessable entity', :json
+            end
+
+            api :duplicate, "Duplicate #{entity.name}" do
+              path :id, ::String
 
               response 201, 'Success', :json
               response 401, 'Not Authorized', :json
