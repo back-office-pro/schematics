@@ -14,6 +14,10 @@ module Schematics
           def elements = fillable_elements
             .excluding(belongs_to)
             .stable_sort_by(&:weight)
+
+          def render?
+            can?(:create, model_class)
+          end
         end
       end
     end
