@@ -4,9 +4,9 @@ module Schematics
   module EditInPlace
     class Component < ApplicationComponent
       option :resource
-      option :field
+      option :element
 
-      def frame_id = dom_id(resource, field.name)
+      def frame_id = dom_id(resource, element.name)
     end
   end
 end

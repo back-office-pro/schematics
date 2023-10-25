@@ -1,5 +1,5 @@
 span.text-body-tertiary = '-' if value.nil?
-- case field
+- case element
 - when Schematics::Associations::Association, Schematics::Attributes::Association
   - if value
     - if value.deleted?
@@ -30,7 +30,7 @@ span.text-body-tertiary = '-' if value.nil?
   - if value.attached?
     = render Schematics::Button::DestroyAttachment::Component.new(resource:, attachment: value.attachment) if enable_buttons?
     - if value.representable?
-      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: field.icon)
+      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: element.icon)
       span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
         = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
     - else
@@ -38,7 +38,7 @@ span.text-body-tertiary = '-' if value.nil?
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
   span.text-danger
     = fa_icon(:triangle_exclamation, class: 'me-2')
-    = field.format(value)
+    = element.format(value)
 - when Schematics::Attributes::Boolean, Schematics::Virtuals::Comparison
   - case value
   - when TrueClass
@@ -47,7 +47,7 @@ span.text-body-tertiary = '-' if value.nil?
     = fa_icon(:xmark, class: 'text-danger')
 - when Schematics::Attributes::StateMachine
   h5.mb-0
-    span.badge class="bg-#{badge_color}" = field.format(value)
+    span.badge class="bg-#{badge_color}" = element.format(value)
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Country
@@ -59,11 +59,11 @@ span.text-body-tertiary = '-' if value.nil?
 - when Schematics::Attributes::Percentage
   .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100'
     .progress-bar style="width: #{value}%"
-      = field.format(value)
+      = element.format(value)
 - when Schematics::Attributes::Array
   - value.each do |element|
     span.badge.bg-primary.me-1 = element
 - when Schematics::Behaviours::Searchable
-  = highlight field.format(value), highlight_text
+  = highlight element.format(value), highlight_text
 - else
-  = field.format(value)
+  = element.format(value)

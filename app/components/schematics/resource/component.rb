@@ -4,7 +4,7 @@ module Schematics
   module Resource
     class Component < ApplicationComponent
       option :resource
-      option :field
+      option :element
       option :enable_buttons, default: -> { false }
       option :highlight_text, optional: true
 
@@ -20,13 +20,13 @@ module Schematics
           .html_safe # rubocop:disable Rails/OutputSafety
       end
 
-      def badge_color = field
+      def badge_color = element
         .events
         .find { _1.to == value }
         .try(:color) || :secondary
 
       def value
-        resource.public_send(field.name)
+        resource.public_send(element.name)
       end
     end
   end
