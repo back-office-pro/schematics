@@ -6,7 +6,7 @@ module JWT
   module AuthToken
     module_function
 
-    def encode(auth_token, exp = 1.day.from_now.to_i)
+    def encode(auth_token, exp = 1.hour.from_now.to_i)
       module_parent.encode({ auth_token:, exp: }, secret)
     end
 
