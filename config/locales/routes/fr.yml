@@ -3,9 +3,13 @@ fr:
   routes:
     active_storage: stockage
     admin: administration
+    archive: archiver
+    attachments: fichiers
+    autocomplete: auto-completion
     blobs: fichiers
     comments: commentaires
     delete: supprimer
+    duplicate: dupliquer
     edit: editer
     imports: importations
     login: connexion
@@ -14,6 +18,7 @@ fr:
     password_resets: mots-de-passe
     preferences: preferences
     profile: profil
+    restore: restaurer
     sudo: acces-restreint
     sudos: acces-restreints
     versions: historique

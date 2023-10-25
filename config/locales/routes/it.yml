@@ -3,9 +3,13 @@ it:
   routes:
     active_storage: immagazzinamento
     admin: amministrazione
+    archive: archiviare
+    attachments: files
+    autocomplete: completamento-automatico
     blobs: files
     comments: commenti
     delete: cancellare
+    duplicate: duplicare
     edit: editare
     imports: importazioni
     login: connessione
@@ -14,6 +18,7 @@ it:
     password_resets: passwords
     preferences: preferenze
     profile: profilo
+    restore: restaurare
     sudo: accesso-limitato
     sudos: accessi-limitati
     versions: storico
