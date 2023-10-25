@@ -4,6 +4,18 @@ module Schematics
   module Sluggable
     extend ActiveSupport::Concern
 
+    RESERVED_WORDS = %i[
+      new
+      edit
+      delete
+      archive
+      restore
+      autocomplete
+      duplicate
+      imports
+      comments
+    ].freeze
+
     included do
       extend Mobility
       translates :slug,
