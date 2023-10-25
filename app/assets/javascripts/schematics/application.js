@@ -24,7 +24,7 @@ const setNavbarScrolled = () => {
     ?.toggle('bg-opacity-75', window.scrollY > 25)
 }
 
-const animateTurboFrame = ({ detail }) => {
+const startViewTransition = ({ detail }) => {
   if (document.startViewTransition) {
     const originalRender = detail.render
     detail.render = (currentElement, newElement) => {
@@ -50,6 +50,7 @@ Crisp.configure(crispClientId, { autoload: false })
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 
 document.addEventListener('turbo:load', Pagy.init)
+document.addEventListener('turbo:before-render', startViewTransition)
+document.addEventListener('turbo:before-frame-render', startViewTransition)
 document.addEventListener('scroll', setNavbarScrolled)
-document.addEventListener('turbo:before-frame-render', animateTurboFrame)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
