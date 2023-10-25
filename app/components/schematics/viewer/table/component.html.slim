@@ -14,6 +14,6 @@
                 .d-inline-flex
                   = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
                   = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
-              - elements.each do |field|
-                td.text-truncate.text-center.align-middle.animate__slideInDown class=col_preference_class(field)
-                  = render Schematics::Resource::Component.new(resource:, field:)
+              - elements.each do |element|
+                td.text-truncate.text-center.align-middle.animate__slideInDown class=col_preference_class(element)
+                  = render Schematics::ResourceDetails::Element::Component.new(resource:, element:)

@@ -25,10 +25,10 @@
                                   - c.with_body do
                                     = render Schematics::GoogleMap::Component.new(address: resource.public_send(attribute.name))
                             tbody
-                              - elements.each do |field|
-                                tr.animate__slideInRight class=col_preference_class(field)
+                              - elements.each do |element|
+                                tr.animate__slideInRight class=col_preference_class(element)
                                   th.text-nowrap
-                                    = fa_icon field.icon, class: 'fa-fw me-2 text-body-secondary'
-                                    = model_class.human_attribute_name(field.name)
+                                    = fa_icon element.icon, class: 'fa-fw me-2 text-body-secondary'
+                                    = model_class.human_attribute_name(element.name)
                                   td.text-truncate
-                                    = render Schematics::Resource::Component.new(resource:, field:)
+                                    = render Schematics::ResourceDetails::Element::Component.new(resource:, element:)

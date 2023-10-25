@@ -1,0 +1,4 @@
+- if editable?
+  = render Schematics::EditInPlace::Component.new(resource:, element:)
+- else
+  = render Schematics::Resource::Component.new(resource:, element:, enable_buttons: enable_buttons?)
