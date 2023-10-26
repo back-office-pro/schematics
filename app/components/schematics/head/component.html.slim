@@ -8,6 +8,7 @@ head
   = csp_meta_tag
   = render Schematics::ApplicationStylesheetLink::Component.new
   = render Schematics::Favicon::Component.new
+  = tag :link, rel: 'manifest', href: '/manifest.json', crossorigin: 'use-credentials'
   = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
   = render Schematics::JavascriptImportmap::Component.new
   = javascript_include_tag 'https://www.gstatic.com/charts/loader.js', nonce: true
