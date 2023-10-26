@@ -15,5 +15,6 @@ export default class extends ApplicationController {
       .normalize('NFD')
       .replace(/\p{Diacritic}/gu, '')
       .replace(/[\s-/]+/g, '_')
+      .toLowerCase()
   }
 }
