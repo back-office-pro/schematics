@@ -10,10 +10,10 @@
         - resources.each do |resource|
           = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr) do |c|
             - c.with_body do
-              td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
+              td.col-1.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
                 .d-inline-flex
                   = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
                   = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
               - elements.each do |element|
-                td.text-truncate.text-center.align-middle.animate__slideInDown class=col_preference_class(element)
+                td.col-2.text-truncate.text-center.align-middle.animate__slideInDown class=col_preference_class(element)
                   = render Schematics::ResourceDetails::Element::Component.new(resource:, element:)
