@@ -17,6 +17,10 @@ module Schematics
         super.select { can?(:update, resource, _1.name) }
       end
 
+      def wrapper_class
+        'd-flex' if turbo?
+      end
+
       def turbo? = request
         .headers['Turbo-Frame']
         .present?

@@ -2,7 +2,7 @@
   = form.hidden_field :lock_version
   - attributes.stable_sort_by(&:weight).each do |field|
     = turbo_frame_tag dom_id(resource, field.name) do
-      .d-flex
+      div class=wrapper_class
         = render Schematics::ResourceForm::Fields::Component.new(form:, field:)
         = render Schematics::Button::Confirm::Component.new(compact: true) if turbo?
         = render Schematics::Button::Cancel::Component.new(path: cancel_path, compact: true) if turbo?
