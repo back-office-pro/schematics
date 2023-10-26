@@ -56,9 +56,5 @@ document.addEventListener('scroll', setNavbarScrolled)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
 
 if (navigator.serviceWorker) {
-  const registration = await navigator.serviceWorker.register('/service_worker.js', { scope: '/' })
-  await navigator.serviceWorker.ready
-  if ('SyncManager' in window) {
-    await registration.sync.register('sync-forms')
-  }
+  navigator.serviceWorker.register('/service_worker.js', { scope: '/' })
 }
