@@ -94,7 +94,7 @@ module Schematics
 
     def create
       @resource = model_class.new(resource_params)
-      result = Resources::Create.call(resource: @resource)
+      result = Resources::Create.call(resource: @resource, draft: @draft)
       respond_with result, location: resource_path
     end
 
@@ -104,7 +104,7 @@ module Schematics
     end
 
     def update
-      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
+      result = Resources::UpdateAndCache.call(resource: @resource, draft: @draft, resource_params:)
       respond_with result, location: resource_path
     end
 
