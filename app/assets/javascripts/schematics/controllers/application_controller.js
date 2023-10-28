@@ -21,7 +21,9 @@ export default class extends Controller {
         }
       })
     } else {
-      localStorage.setItem(`sync:${url}`, JSON.stringify(Array.from(arguments)))
+      if (method !== 'GET') {
+        localStorage.setItem(`sync:${btoa(url)}`, JSON.stringify(Array.from(arguments)))
+      }
       return new Response('null')
     }
   }
