@@ -83,7 +83,7 @@ export default class extends ApplicationController {
   }
 
   get denylist () {
-    return ['authenticity_token', 'password', 'lock_version']
+    return ['authenticity_token', 'password', 'lock_version', '_method']
   }
 
   get timeagoController () {
