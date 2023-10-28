@@ -13,7 +13,7 @@ module Core
                to: :migration,
                private: true
 
-      before { reload! }
+      before :reload!
 
       def call
         migrator_old_and_changed_entities.each(&method(:remove_constants))
