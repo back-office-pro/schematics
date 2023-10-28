@@ -13,12 +13,10 @@ export default class extends ApplicationController {
 
   connect () {
     this.formTarget.addEventListener('change', this.debounce(this.save))
-    this.formTarget.addEventListener('submit', this.clear.bind(this))
   }
 
   disconnect () {
     this.formTarget.removeEventListener('change', this.debounce(this.save))
-    this.formTarget.removeEventListener('submit', this.clear.bind(this))
   }
 
   async save () {
@@ -45,10 +43,6 @@ export default class extends ApplicationController {
           .querySelector(`[name='${key}']`)
           ?.setAttribute('value', value)
       )
-  }
-
-  clear () {
-    this.fetchAPI(this.url, 'DELETE')
   }
 
   hideRestoreButton () {
