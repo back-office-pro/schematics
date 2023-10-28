@@ -10,6 +10,7 @@ module Schematics
     include Viewable
     include Lockable
     include Redirectable
+    include Draftable
 
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
@@ -87,12 +88,9 @@ module Schematics
 
     def new
       @resource = model_class.new
-      @draft = current_user.drafts.find_by(action: polymorphic_path(model_class))
     end
 
-    def edit
-      @draft = current_user.drafts.find_by(action: polymorphic_path(@resource))
-    end
+    def edit; end
 
     def create
       @resource = model_class.new(resource_params)
