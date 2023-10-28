@@ -22,6 +22,7 @@ export default class extends Controller {
       })
     } else {
       localStorage.setItem(`sync:${url}`, JSON.stringify(Array.from(arguments)))
+      return new Response('null')
     }
   }
 
