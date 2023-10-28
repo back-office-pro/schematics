@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 
-/* global Turbo, fetch, localStorage */
+/* global Turbo, fetch, localStorage, Response */
 
 export default class extends Controller {
   visit ({ target, params: { href } }) {
