@@ -5,7 +5,7 @@ module Schematics
     def initialize(user)
       super
       can :create, ::Draft
-      can %i[show update destroy], ::Draft, user:
+      can :update, ::Draft, user:
     end
   end
 end
