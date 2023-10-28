@@ -90,7 +90,9 @@ module Schematics
       @draft = current_user.drafts.find_by(action: polymorphic_path(model_class))
     end
 
-    def edit; end
+    def edit
+      @draft = current_user.drafts.find_by(action: polymorphic_path(@resource))
+    end
 
     def create
       @resource = model_class.new(resource_params)
