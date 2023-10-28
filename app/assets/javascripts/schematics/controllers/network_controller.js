@@ -7,6 +7,10 @@ export default class extends ApplicationController {
     return ['online', 'offline']
   }
 
+  initialize () {
+    this.sync()
+  }
+
   connect () {
     window.addEventListener('online', this.toggle.bind(this))
     window.addEventListener('online', this.sync.bind(this))
