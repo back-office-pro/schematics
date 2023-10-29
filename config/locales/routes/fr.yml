@@ -4,7 +4,7 @@ fr:
     active_storage: stockage
     admin: administration
     archive: archiver
-    attachments: fichiers
+    attachments: attachements
     autocomplete: auto-completion
     blobs: fichiers
     comments: commentaires
