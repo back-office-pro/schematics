@@ -8,8 +8,8 @@ RSpec.describe Schematics::CleanDraftsJob do
   let(:created_at) { described_class::DELAY.ago }
   let(:drafts) do
     [
-      Draft.create!(action: '/users', user:, created_at:),
-      Draft.create!(action: '/users', user:, created_at:)
+      Draft.create!(record: user, user:, created_at:),
+      Draft.create!(record: user, user:, created_at:)
     ]
   end
 
