@@ -780,23 +780,22 @@
       "icon": "floppy_disk",
       "hidden": true,
       "actions": [
-        "create",
         "update"
       ]
     },
     "attributes": [
       {
-        "id": "d9ea4305-2804-4db6-8a76-5dad720cf317",
-        "name": "action",
-        "type": "string",
-        "options": {
-          "required": true
-        }
-      },
-      {
         "id": "d3de2e09-88f2-4f02-b4ac-3d6af2e87745",
         "name": "data",
         "type": "jsonb"
+      },
+      {
+        "id": "d9ea4305-2804-4db6-8a76-5dad720cf317",
+        "name": "record",
+        "type": "belongs_to",
+        "options": {
+          "polymorphic": true
+        }
       },
       {
         "id": "d37c6c94-4bd4-4207-8e42-33ea84275062",

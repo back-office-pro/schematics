@@ -3,8 +3,8 @@ fr:
   activerecord:
     attributes:
       draft:
-        action: Action
         data: Données
+        record: Enregistrement
         user: Utilisateur
     models:
       draft:
