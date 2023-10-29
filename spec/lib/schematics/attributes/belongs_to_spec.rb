@@ -77,12 +77,13 @@ describe Schematics::Attributes::BelongsTo do
       scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
       scope :with_user_imports, -> { includes({:user=>[:imports]}) }
       scope :with_user_searches, -> { includes({:user=>[:searches]}) }
-      scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
+      scope :with_user_user_drafts, -> { includes({:user=>[:user_drafts]}) }
       scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
       scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
       scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
       scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
       scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
+      scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
       scope :with_user_comments, -> { includes({:user=>[:comments]}) }
       belongs_to :user,
                  -> { with_deleted },
@@ -112,12 +113,13 @@ describe Schematics::Attributes::BelongsTo do
         scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
         scope :with_user_imports, -> { includes({:user=>[:imports]}) }
         scope :with_user_searches, -> { includes({:user=>[:searches]}) }
-        scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
+        scope :with_user_user_drafts, -> { includes({:user=>[:user_drafts]}) }
         scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
         scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
         scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
         scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
         scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
+        scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
         scope :with_user_comments, -> { includes({:user=>[:comments]}) }
         belongs_to :user,
                    -> { with_deleted },
@@ -138,6 +140,8 @@ describe Schematics::Attributes::BelongsTo do
     end
 
     it { is_expected.to be_polymorphic }
+
+    its(:permitted_params) { is_expected.to eq(%i[user_id user_type]) }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
