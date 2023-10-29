@@ -14,7 +14,7 @@ module Schematics
 
       def id = nil
 
-      def drafts = ::Draft.none
+      def user_drafts = ::Draft.none
 
       def user_groups = []
 
