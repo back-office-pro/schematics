@@ -10,10 +10,10 @@ module Schematics
     include Viewable
     include Lockable
     include Redirectable
-    include Draftable
 
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
+    before_action :set_draft, only: %i[new edit create duplicate update]
     before_action :redirect_to_resource_path, only: :show
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
@@ -166,6 +166,15 @@ module Schematics
         month: { format: t('date.formats.month') },
         pagy: { backend: ::Tenant.search_engine.pagy_backend },
         active: viewer == :calendar
+      )
+    end
+
+    def set_draft
+      return if entity.hidden?
+
+      @draft = current_user.user_drafts.find_or_create_by!(
+        record_type: model_class,
+        record_id: @resource&.id
       )
     end
 
