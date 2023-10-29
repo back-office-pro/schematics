@@ -20,12 +20,7 @@ export default class extends ApplicationController {
   }
 
   async save () {
-    if (Object.keys(this.draftValue).length === 0) {
-      const response = await this.fetchAPI(routes.drafts, 'POST', this.params)
-      this.draftValue = await response.json()
-    } else {
-      this.fetchAPI(this.url, 'PUT', this.params)
-    }
+    this.fetchAPI(this.url, 'PUT', this.params)
     this.hasRestoreButtonTarget && this.hideRestoreButton()
     this.buttonTarget.classList.remove('d-none')
     this.timeagoTarget.setAttribute('datetime', new Date().toJSON())
@@ -50,16 +45,11 @@ export default class extends ApplicationController {
   }
 
   get params () {
-    return {
-      draft: {
-        action: this.formTarget.getAttribute('action'),
-        data: this.filteredFormData
-      }
-    }
+    return { draft: { data: this.filteredFormData } }
   }
 
   get url () {
-    return [routes.drafts, this.draftValue.id].join('/')
+    return routes.draft.replace(':id', this.draftValue.id)
   }
 
   get formData () {
