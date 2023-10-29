@@ -2,6 +2,7 @@
 
 Schematics::Engine.routes.draw do
   root Tenant.schema.root_route
+  draw :pwa
 
   localized do
     draw :dashboard

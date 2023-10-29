@@ -3,8 +3,8 @@ it:
   activerecord:
     attributes:
       draft:
-        action: Azione
         data: Dati
+        record: Registrazione
         user: Utente
     models:
       draft:

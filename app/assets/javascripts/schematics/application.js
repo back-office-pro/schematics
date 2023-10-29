@@ -54,3 +54,7 @@ document.addEventListener('turbo:before-render', startViewTransition)
 document.addEventListener('turbo:before-frame-render', startViewTransition)
 document.addEventListener('scroll', setNavbarScrolled)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
+
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/service_worker.js', { scope: '/' })
+}

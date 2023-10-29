@@ -1,0 +1,25 @@
+{
+  "name": "<%= Configuration.company_name %>",
+  "short_name": "<%= Configuration.company_name %>",
+  "background_color": "<%= Configuration.theme_color %>",
+  "theme_color": "<%= Configuration.theme_color %>",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "icons": [
+    <% if @logo.attached? %>
+      {
+        "src": "<%= main_app.url_for(@logo) %>",
+        "sizes": "any",
+        "type": "<%= @logo.content_type %>"
+      }
+    <% else %>
+      {
+        "src": "<%= asset_path('schematics/logo.svg') %>",
+        "sizes": "any",
+        "type": "image/svg+xml"
+      }
+    <% end %>
+  ]
+}

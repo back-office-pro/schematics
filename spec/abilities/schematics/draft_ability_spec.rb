@@ -9,8 +9,5 @@ RSpec.describe Schematics::DraftAbility do
   let(:user) { User.new }
   let(:draft) { Draft.new(user:) }
 
-  it { is_expected.to be_able_to(:create, Draft) }
-  it { is_expected.to be_able_to(:show, draft) }
   it { is_expected.to be_able_to(:update, draft) }
-  it { is_expected.to be_able_to(:destroy, draft) }
 end

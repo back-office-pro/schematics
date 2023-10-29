@@ -13,6 +13,7 @@ module Schematics
 
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
+    before_action :set_draft, only: %i[new edit create duplicate update]
     before_action :redirect_to_resource_path, only: :show
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
@@ -87,14 +88,13 @@ module Schematics
 
     def new
       @resource = model_class.new
-      @draft = current_user.drafts.find_by(action: polymorphic_path(model_class))
     end
 
     def edit; end
 
     def create
       @resource = model_class.new(resource_params)
-      result = Resources::Create.call(resource: @resource)
+      result = Resources::Create.call(resource: @resource, draft: @draft)
       respond_with result, location: resource_path
     end
 
@@ -104,7 +104,7 @@ module Schematics
     end
 
     def update
-      result = Resources::UpdateAndCache.call(resource: @resource, resource_params:)
+      result = Resources::UpdateAndCache.call(resource: @resource, draft: @draft, resource_params:)
       respond_with result, location: resource_path
     end
 
@@ -166,6 +166,13 @@ module Schematics
         month: { format: t('date.formats.month') },
         pagy: { backend: ::Tenant.search_engine.pagy_backend },
         active: viewer == :calendar
+      )
+    end
+
+    def set_draft
+      @draft = current_user.user_drafts.find_or_create_by!(
+        record_type: model_class,
+        record_id: @resource&.id
       )
     end
 

@@ -13,21 +13,14 @@ export default class extends ApplicationController {
 
   connect () {
     this.formTarget.addEventListener('change', this.debounce(this.save))
-    this.formTarget.addEventListener('submit', this.clear.bind(this))
   }
 
   disconnect () {
     this.formTarget.removeEventListener('change', this.debounce(this.save))
-    this.formTarget.removeEventListener('submit', this.clear.bind(this))
   }
 
   async save () {
-    if (Object.keys(this.draftValue).length === 0) {
-      const response = await this.fetchAPI(routes.drafts, 'POST', this.params)
-      this.draftValue = await response.json()
-    } else {
-      this.fetchAPI(this.url, 'PUT', this.params)
-    }
+    this.fetchAPI(this.url, 'PUT', this.params)
     this.hasRestoreButtonTarget && this.hideRestoreButton()
     this.buttonTarget.classList.remove('d-none')
     this.timeagoTarget.setAttribute('datetime', new Date().toJSON())
@@ -47,25 +40,16 @@ export default class extends ApplicationController {
       )
   }
 
-  clear () {
-    this.fetchAPI(this.url, 'DELETE')
-  }
-
   hideRestoreButton () {
     this.restoreButtonTarget.classList.add('d-none')
   }
 
   get params () {
-    return {
-      draft: {
-        action: this.formTarget.getAttribute('action'),
-        data: this.filteredFormData
-      }
-    }
+    return { draft: { data: this.filteredFormData } }
   }
 
   get url () {
-    return [routes.drafts, this.draftValue.id].join('/')
+    return routes.draft.replace(':id', this.draftValue.id)
   }
 
   get formData () {
@@ -83,7 +67,7 @@ export default class extends ApplicationController {
   }
 
   get denylist () {
-    return ['authenticity_token', 'password', 'lock_version']
+    return ['authenticity_token', '_method', 'password', 'lock_version']
   }
 
   get timeagoController () {

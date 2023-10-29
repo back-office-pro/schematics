@@ -3,6 +3,7 @@
 class SessionsController < Schematics::ResourcesController
   before_action :logout_user!, only: :create
   skip_before_action :authenticate_user!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
+  skip_before_action :set_draft, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
   layout 'schematics/jumbotron', only: %i[new create]
 
   def create

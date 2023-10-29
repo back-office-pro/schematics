@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 
-/* global Turbo, fetch */
+/* global Turbo, fetch, localStorage, Response */
 
 export default class extends Controller {
   visit ({ target, params: { href } }) {
@@ -10,16 +10,22 @@ export default class extends Controller {
   }
 
   fetchAPI (url, method = 'GET', data) {
-    const options = {
-      method,
-      body: data && JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content,
-        Accept: 'application/json'
+    if (navigator.onLine) {
+      return fetch(url, {
+        method,
+        body: data && JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content,
+          Accept: 'application/json'
+        }
+      })
+    } else {
+      if (method !== 'GET') {
+        localStorage.setItem(`sync:${btoa(url)}`, JSON.stringify(Array.from(arguments)))
       }
+      return new Response('null')
     }
-    return fetch(url, options)
   }
 
   debounce (callback, delay = 200) {

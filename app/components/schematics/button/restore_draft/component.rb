@@ -10,9 +10,9 @@ module Schematics
 
         def title = t('.text')
 
-        def render?
-          draft.present?
-        end
+        def render? = draft
+          .data
+          .present?
       end
     end
   end
