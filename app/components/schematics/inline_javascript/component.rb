@@ -39,7 +39,7 @@ module Schematics
       def routes = {
         comparisons: comparisons_path,
         dashboardReadNotifications: dashboard_read_notifications_path,
-        drafts: drafts_path,
+        draft: draft_path(id: ':id'),
         preferences: preferences_path,
         searches: searches_path,
         users: users_path

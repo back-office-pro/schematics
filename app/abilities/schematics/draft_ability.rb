@@ -4,7 +4,6 @@ module Schematics
   class DraftAbility < ApplicationAbility
     def initialize(user)
       super
-      can :create, ::Draft
       can :update, ::Draft, user:
     end
   end
