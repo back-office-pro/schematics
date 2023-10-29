@@ -170,8 +170,6 @@ module Schematics
     end
 
     def set_draft
-      return if entity.hidden?
-
       @draft = current_user.user_drafts.find_or_create_by!(
         record_type: model_class,
         record_id: @resource&.id
