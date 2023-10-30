@@ -18,5 +18,5 @@ fr:
     models:
       import:
         gender: male
-        one: Import
-        other: Imports
+        one: Importation
+        other: Importations
