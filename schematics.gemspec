@@ -130,6 +130,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '~> 1.5.0'
   spec.add_dependency 'validate_url', '~> 1.0.15'
   spec.add_dependency 'valid_email', '~> 0.2.0'
-  spec.add_dependency 'view_component', '~> 3.6.0'
+  spec.add_dependency 'view_component', '>= 3.6', '< 3.8'
   spec.add_dependency 'zero-rails_openapi', '~> 2.1.5'
 end
