@@ -7,8 +7,8 @@ module Schematics
         ALLOWLIST = [::Migration, ::Import, ::Stat, ::Chart, ::Configuration, ::Role].freeze
 
         delegate :url, to: ::Tenant, private: true
-        delegate :model_name, to: :model_class, allow_nil: true, private: true
-        delegate :singular_route_key, to: :model_name, allow_nil: true, private: true
+        delegate :human_name_plural, to: :model_class, allow_nil: true, private: true
+        delegate :locale, to: :current_user, private: true
         delegate :icon, to: '::Documentation.entity'
 
         option :wrapper_css_classes, default: -> { 'btn btn-sm btn-icon-split' }
@@ -32,7 +32,7 @@ module Schematics
 
         def title = t('.text')
 
-        def path = File.join(['/docs', singular_route_key].compact)
+        def path = File.join(['/docs', locale, human_name_plural.to_s].compact)
 
         def render?
           !model_class || ALLOWLIST.include?(model_class)
