@@ -60,7 +60,7 @@ jobs:
         with:
           node-version: 20
       - name: Install standard
-        run: npm install -g standard
+        run: yarn global add standard
       - name: Run standard
         run: standard
   rspec:
