@@ -7,11 +7,9 @@ it:
     attachments: allegati
     autocomplete: completamento-automatico
     blobs: files
-    comments: commenti
     delete: cancellare
     duplicate: duplicare
     edit: editare
-    imports: importazioni
     login: connessione
     logout: disconnessione
     new: nuovo

@@ -7,11 +7,9 @@ en:
     attachments: attachments
     autocomplete: autocomplete
     blobs: files
-    comments: comments
     delete: delete
     duplicate: duplicate
     edit: edit
-    imports: imports
     login: login
     logout: logout
     new: new

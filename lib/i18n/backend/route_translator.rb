@@ -11,7 +11,7 @@ module I18n
       def lookup(locale, key, scope = [], _options = EMPTY_HASH)
         case [scope, key]
         in [:routes, model]
-          resolve(locale, nil, :"activerecord.models.#{model.singularize}.other", default: nil)
+          resolve(locale, nil, :"activerecord.models.#{model.to_s.singularize}.other", default: nil)
             &.gsub(/\b\w{1,2}\b/, '')
             &.parameterize(separator: '-')
         else
