@@ -47,7 +47,7 @@ module Schematics
 
         if can?(:index)
           %i[html csv].each do |as|
-            it "should get #{as.upcase} index" do
+            it "gets #{as.upcase} index" do
               get(index_path, headers:, as:)
               if ability.can?(:index, model_class)
                 is_expected.to have_http_status(:success)
@@ -57,13 +57,13 @@ module Schematics
             end
           end
 
-          it 'should get API index' do
+          it 'gets API index' do
             get index_path, headers:, as: :json
             status = ability.can?(:index, model_class) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
 
-          it 'should get API autocomplete' do
+          it 'gets API autocomplete' do
             get polymorphic_path(model_class, action: :autocomplete, field: 'id'),
                 headers:,
                 as: :json
@@ -74,7 +74,7 @@ module Schematics
 
         if can?(:show)
           %i[html pdf svg ics].each do |as|
-            it "should show #{as.upcase} record" do
+            it "shows #{as.upcase} record" do
               get(polymorphic_path(record), headers:, as:)
               if ability.can?(:show, record)
                 is_expected.to have_http_status(:success)
@@ -84,20 +84,20 @@ module Schematics
             end
           end
 
-          it 'should show API record' do
+          it 'shows API record' do
             get polymorphic_path(record), headers:, as: :json
             status = ability.can?(:show, record) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
 
           if !entity.is_a?(Entities::Singleton) && allow?(:not_found)
-            it 'should be not found' do
+            it 'is not found' do
               get polymorphic_path(route_key, id: 'foo'), headers:, as: :html
               redirect_path = ability.can?(:index, model_class) ? index_path : root_path
               is_expected.to redirect_to(redirect_path)
             end
 
-            it 'should be not found API' do
+            it 'is not found API' do
               get polymorphic_path(route_key, id: 'foo'), headers:, as: :json
               is_expected.to have_http_status(:not_found)
             end
@@ -105,7 +105,7 @@ module Schematics
         end
 
         if can?(:update)
-          it 'should get edit' do
+          it 'gets edit' do
             get edit_polymorphic_path(record), headers:, as: :html
             if ability.can?(:edit, record)
               is_expected.to have_http_status(:success)
@@ -114,25 +114,25 @@ module Schematics
             end
           end
 
-          it 'should update record' do
+          it 'updates record' do
             patch(polymorphic_path(record), params:, headers:)
             redirect_path = ability.can?(:update, record) ? polymorphic_path(record.reload) : root_path # rubocop:disable Layout/LineLength
             is_expected.to redirect_to(redirect_path)
           end
 
-          it 'should update API record' do
+          it 'updates API record' do
             patch polymorphic_path(record), params: params(:json), headers:, as: :json
             status = ability.can?(:update, record) ? :success : :forbidden
             is_expected.to have_http_status(status)
           end
 
-          it 'should be a bad request' do
+          it 'is a bad request' do
             patch polymorphic_path(record), params: {}, headers: headers_with_referer
             redirect_path = ability.can?(:update, record) ? edit_profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
-          it 'should be a bad request API' do
+          it 'is a bad request API' do
             patch polymorphic_path(record), params: {}, headers:, as: :json
             status = ability.can?(:update, record) ? :bad_request : :forbidden
             is_expected.to have_http_status(status)
@@ -140,7 +140,7 @@ module Schematics
         end
 
         if can?(:create)
-          it 'should get new' do
+          it 'gets new' do
             get new_polymorphic_path(model_class), headers:, as: :html
             if ability.can?(:new, model_class)
               is_expected.to have_http_status(:success)
@@ -149,7 +149,7 @@ module Schematics
             end
           end
 
-          it 'should get new import' do
+          it 'gets new import' do
             get new_polymorphic_path([model_class, ::Import], format: nil), headers:, as: :html
             if ability.can?(:import, model_class)
               is_expected.to have_http_status(:success)
@@ -158,7 +158,7 @@ module Schematics
             end
           end
 
-          it 'should create record' do
+          it 'creates record' do
             if ability.can?(:create, model_class)
               expect { post index_path, params:, headers: }
                 .to change(model_class, :count)
@@ -171,7 +171,7 @@ module Schematics
             end
           end
 
-          it 'should create API record' do
+          it 'creates API record' do
             if ability.can?(:create, model_class)
               expect { post index_path, params: params(:json), headers:, as: :json }
                 .to change(model_class, :count)
@@ -184,19 +184,19 @@ module Schematics
             end
           end
 
-          it 'should be a bad request' do
+          it 'is a bad request' do
             post index_path, params: {}, headers: headers_with_referer
             redirect_path = ability.can?(:create, model_class) ? edit_profile_path : root_path
             is_expected.to redirect_to(redirect_path)
           end
 
-          it 'should be a bad request API' do
+          it 'is a bad request API' do
             post index_path, params: {}, headers:, as: :json
             status = ability.can?(:create, model_class) ? :bad_request : :forbidden
             is_expected.to have_http_status(status)
           end
 
-          it 'should duplicate record' do
+          it 'duplicates record' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
                 expect { post polymorphic_path(record, action: :duplicate), headers: }
@@ -215,7 +215,7 @@ module Schematics
             end
           end
 
-          it 'should duplicate record API' do
+          it 'duplicates record API' do
             if ability.can?(:duplicate, record)
               if fillable_attributes.any?(&:unique?)
                 expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
@@ -236,7 +236,7 @@ module Schematics
         end
 
         if can?(:destroy)
-          it 'should get delete' do
+          it 'gets delete' do
             get polymorphic_path(record, action: :delete), headers:, as: :html
             if ability.can?(:destroy, record)
               is_expected.to have_http_status(:success)
@@ -245,7 +245,7 @@ module Schematics
             end
           end
 
-          it 'should destroy record' do
+          it 'destroys record' do
             if ability.can?(:destroy, record)
               expect { delete polymorphic_path(record), headers: }
                 .to change(model_class, :count)
@@ -258,7 +258,7 @@ module Schematics
             end
           end
 
-          it 'should destroy API record' do
+          it 'destroys API record' do
             if ability.can?(:destroy, record)
               expect { delete polymorphic_path(record), headers:, as: :json }
                 .to change(model_class, :count)
@@ -273,7 +273,7 @@ module Schematics
         end
 
         if can?(:archive)
-          it 'should archive record' do
+          it 'archives record' do
             record.restore
             if ability.can?(:archive, record)
               expect { delete polymorphic_path(record, action: :archive), headers: }
@@ -287,7 +287,7 @@ module Schematics
             end
           end
 
-          it 'should archive API record' do
+          it 'archives API record' do
             record.restore
             if ability.can?(:archive, record)
               expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
@@ -301,7 +301,7 @@ module Schematics
             end
           end
 
-          it 'should restore record' do
+          it 'restores record' do
             record.destroy!
             if ability.can?(:restore, record)
               expect { delete polymorphic_path(record, action: :restore), headers: }
@@ -315,7 +315,7 @@ module Schematics
             end
           end
 
-          it 'should restore API record' do
+          it 'restores API record' do
             record.destroy!
             if ability.can?(:restore, record)
               expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
@@ -332,7 +332,7 @@ module Schematics
 
         if allow?(:trigger)
           events.each do |event|
-            it "should #{event.name} record" do
+            it "#{event.name} record" do
               patch(polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), headers:) # rubocop:disable Layout/LineLength
               if ability.can?(event.name.to_sym, record)
                 is_expected.to redirect_to(polymorphic_path(record))
@@ -341,7 +341,7 @@ module Schematics
               end
             end
 
-            it "should #{event.name} API record" do
+            it "#{event.name} API record" do
               patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
                     headers:,
                     as: :json
