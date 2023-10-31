@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
   spec.add_development_dependency 'debug', '~> 1.8.0'
+  spec.add_development_dependency 'fuubar', '~> 2.5.1'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.13'
   spec.add_development_dependency 'isolator', '~> 0.11.0'
   spec.add_development_dependency 'reek', '~> 6.1.4'
