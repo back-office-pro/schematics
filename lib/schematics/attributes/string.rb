@@ -4,13 +4,16 @@ module Schematics
   module Attributes
     class String < Text
       include Behaviours::Listable
+      include Behaviours::Encryptable
+
       delegate :limit, to: :options
 
       def available_options = super.push(
         Options::Unique,
         Options::Min,
         Options::Limit,
-        Options::Length
+        Options::Length,
+        Options::Encrypted
       )
 
       def database_type = 'string'
