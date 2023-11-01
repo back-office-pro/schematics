@@ -39,6 +39,7 @@ en:
           other: Assigned tasks
           zero: No assigned task
         time_zone: Time zone
+        two_factor: Two-factor authentication
         user_groups:
           one: User group
           other: User groups

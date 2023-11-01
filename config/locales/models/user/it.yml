@@ -39,6 +39,7 @@ it:
           other: Compiti assegnati
           zero: Nessun compito assegnato
         time_zone: Fuso orario
+        two_factor: Autenticazione a due fattori
         user_groups:
           one: Gruppo di utenti
           other: Gruppi di utenti

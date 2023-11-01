@@ -17,6 +17,11 @@
         "id": "773faa33-bb43-470c-a7ae-3662a0cfd5b4",
         "name": "full_name",
         "function": "$last_name $first_name"
+      },
+      {
+        "id": "a6e776d5-aca7-480d-88fb-b8019370e817",
+        "name": "two_factor",
+        "function": "$otp_secret != NULL"
       }
     ],
     "attributes": [
