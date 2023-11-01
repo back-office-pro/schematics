@@ -10,10 +10,14 @@ module Schematics
       delegate :sudo!, to: :session, private: true
 
       def call
-        fail! unless authenticate(resource_params[:password])
+        fail! unless authenticate(password)
 
         sudo!
       end
+
+      private
+
+      def password = resource_params[:password]
     end
   end
 end
