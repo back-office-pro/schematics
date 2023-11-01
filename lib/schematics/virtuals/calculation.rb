@@ -19,7 +19,7 @@ module Schematics
       def to_sql = "(#{super.join})"
 
       def allowed_variables = entity
-        .numerable_fields
+        .numerable_elements
         .map(&:name)
     end
   end
