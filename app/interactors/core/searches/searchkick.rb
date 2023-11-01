@@ -5,7 +5,7 @@ module Core
     class Searchkick
       include Interactor
       LIMIT = 5
-      delegate :query, :current_ability, to: :context, private: true
+      delegate :query, :ability, to: :context, private: true
 
       def call
         context.suggestions = results.flat_map(&:suggestions).uniq
@@ -24,7 +24,7 @@ module Core
         .entities
         .reject(&:hidden?)
         .filter_map(&:model_class)
-        .map { _1.multisearch(query, current_ability) }
+        .map { _1.multisearch(query, ability) }
     end
   end
 end

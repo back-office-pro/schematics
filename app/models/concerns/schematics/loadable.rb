@@ -84,14 +84,14 @@ module Schematics
     end
 
     # :reek:BooleanParameter :reek:ControlParameter
-    def associations(current_ability, dependent: false)
+    def associations(ability, dependent: false)
       self
         .class
         .entity
         .association_elements
         .then_tap { _1.grep_v(Associations::HasAndBelongsToMany).select(&:required?) if dependent }
         .map { public_send(_1.name).includes(_1.includes).with_string_translations }
-        .map { _1.accessible_by(current_ability).order(created_at: :desc) }
+        .map { _1.accessible_by(ability).order(created_at: :desc) }
         .map { _1.limit(ASSOCIATIONS_LIMIT) }
         .compact_blank
     end

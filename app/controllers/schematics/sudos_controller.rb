@@ -8,7 +8,7 @@ module Schematics
     def new; end
 
     def create
-      result = Sudos::Create.call(current_session:, current_user:, resource_params:)
+      result = Sudos::Create.call(session: current_session, user: current_user, resource_params:)
       respond_with result, location: -> { return_to_path.tap { session.delete(:return_to) } }
     end
 

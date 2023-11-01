@@ -17,7 +17,7 @@ class SearchesController < Schematics::ResourcesController
       Tenant
       .search_engine
       .multisearch
-      .call(query: @resource.query, current_ability:)
+      .call(query: @resource.query, ability: current_ability)
       .to_h
       .values_at(:results, :suggestions, :typeahead)
   end

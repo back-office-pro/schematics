@@ -5,7 +5,7 @@ module Core
     class Ransack
       include Interactor
       LIMIT = 5
-      delegate :query, :current_ability, to: :context, private: true
+      delegate :query, :ability, to: :context, private: true
 
       def call
         context.suggestions = []
@@ -21,7 +21,7 @@ module Core
         .reject(&:hidden?)
         .select(&:multisearchable?)
         .filter_map(&:model_class)
-        .map { _1.multisearch(query, current_ability) }
+        .map { _1.multisearch(query, ability) }
         .reject(&:empty?)
     end
   end

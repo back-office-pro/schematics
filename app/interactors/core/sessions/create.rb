@@ -6,13 +6,8 @@ module Core
     class Create
       include Schematics::Interactable
 
-      delegate :can?, to: :current_ability, private: true
-      delegate :cookies,
-               :current_session,
-               :current_ability,
-               :resource_params,
-               to: :context,
-               private: true
+      delegate :can?, to: :ability, private: true
+      delegate :cookies, :ability, :resource_params, to: :context, private: true
 
       before { @user = ::User.authenticate_by(email:, password:) }
 
@@ -48,9 +43,9 @@ module Core
 
       def cookie = { value: session.auth_token, httponly: true }
 
-      memoize def session
-        current_session.login!(user)
-      end
+      memoize def session = context
+        .session
+        .login!(user)
 
       memoize def user
         @user || ::User.find_by(email:) || Schematics::Guest::User.new

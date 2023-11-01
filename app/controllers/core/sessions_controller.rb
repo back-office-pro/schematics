@@ -10,8 +10,8 @@ class SessionsController < Schematics::ResourcesController
     result = Core::Sessions::Create.call(
       resource_params:,
       cookies:,
-      current_session:,
-      current_ability:
+      session: current_session,
+      ability: current_ability
     )
     respond_with do |format|
       if result.success?

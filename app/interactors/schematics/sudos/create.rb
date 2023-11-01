@@ -5,16 +5,14 @@ module Schematics
     class Create
       include Interactable
 
-      delegate :current_user,
-               :current_session,
-               :resource_params,
-               to: :context,
-               private: true
+      delegate :user, :session, :resource_params, to: :context, private: true
+      delegate :authenticate, to: :user, private: true
+      delegate :sudo!, to: :session, private: true
 
       def call
-        fail! unless current_user.authenticate(resource_params[:password])
+        fail! unless authenticate(resource_params[:password])
 
-        current_session.sudo!
+        sudo!
       end
     end
   end
