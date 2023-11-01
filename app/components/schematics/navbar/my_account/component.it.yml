@@ -4,4 +4,5 @@ it:
   edit_preferences: Editare preferenze
   edit_profile: Editare il mio profilo
   logout: Disconnessione
+  new_one_time_password: Autenticazione a due fattori
   title: Il mio account

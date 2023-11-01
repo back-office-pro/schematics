@@ -29,6 +29,9 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start
     = link_to edit_preferences_path, class: 'dropdown-item' do
       = fa_icon :bell, class: 'fa-fw me-3'
       = t('.edit_preferences')
+    = link_to new_one_time_password_path, class: 'dropdown-item' do
+      = fa_icon :mobile_screen, class: 'fa-fw me-3'
+      = t('.new_one_time_password')
     - if can?(:read, :admin_dashboard)
       = link_to admin_path, class: 'dropdown-item text-danger' do
         = fa_icon :shield_alt, class: 'fa-fw me-3'
