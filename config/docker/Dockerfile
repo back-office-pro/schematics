@@ -8,7 +8,7 @@ RUN apk --update add --virtual \
     runtime-deps postgresql-client build-base libxml2-dev \
     libxslt-dev nodejs yarn libffi-dev readline \
     build-base postgresql-dev sqlite-dev libc-dev linux-headers \
-    readline-dev file git tzdata graphviz clamav clamav-daemon bash \
+    readline-dev file git tzdata graphviz clamav clamav-daemon chromium bash \
     && rm -rf /var/cache/apk/*
 
 ARG APP_NAME
