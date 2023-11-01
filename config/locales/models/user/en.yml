@@ -21,6 +21,7 @@ en:
           one: Received message
           other: Received messages
           zero: No message received
+        otp_attempt: Code
         password: Password
         password_challenge: Current password
         password_confirmation: Password confirmation
