@@ -44,6 +44,7 @@ describe Schematics::Virtuals::Calculation do
   its(:unit) { is_expected.to eq('$') }
   its(:precision) { is_expected.to eq(2) }
   its(:weight) { is_expected.to eq(1) }
+  its(:allowed_variables) { is_expected.to eq(%w[price discount_price]) }
 
   its(:available_options) do
     is_expected.to contain_exactly(

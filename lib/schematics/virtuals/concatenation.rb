@@ -17,7 +17,11 @@ module Schematics
           #{name}&.to_s
         RUBY
 
-      protected
+      def allowed_variables = entity
+        .renderable_elements
+        .map(&:name)
+
+      private
 
       def method_body = tokens
         .map(&:to_str)

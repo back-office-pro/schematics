@@ -11,7 +11,8 @@ describe Schematics::Virtuals::Comparison do
       },
       attributes: [
         { name: 'price', type: 'float' },
-        { name: 'category', type: 'belongs_to' }
+        { name: 'category', type: 'belongs_to' },
+        { name: 'sold_at', type: 'datetime' }
       ],
       virtuals: [
         { name: 'discount_price', function: '$price - 10' }
@@ -19,7 +20,7 @@ describe Schematics::Virtuals::Comparison do
     )
   end
   let(:name) { 'big_price' }
-  let(:function) { '$category.vat == 10 && ($created_at == NULL || NOW() < $created_at)' }
+  let(:function) { '$category.vat == 10 && ($sold_at == NULL || NOW() < $sold_at)' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -35,17 +36,18 @@ describe Schematics::Virtuals::Comparison do
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
+  its(:allowed_variables) { is_expected.to eq(%w[price category sold_at discount_price]) }
 
   its(:to_sql) do
     is_expected.to eq <<~SQL.squish
-      (categories.vat = 10 AND (products.created_at IS NULL OR NOW() < products.created_at))
+      (categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))
     SQL
   end
 
   its(:search_alias) do
     is_expected.to eq <<~RUBY
       ransacker :big_price do
-        Arel.sql("(categories.vat = 10 AND (products.created_at IS NULL OR NOW() < products.created_at))")
+        Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")
       end
     RUBY
   end
@@ -54,12 +56,12 @@ describe Schematics::Virtuals::Comparison do
     is_expected.to eq <<~RUBY
       define_attribute_method :big_price
       def big_price
-        self.category.vat == 10 && (self.created_at == nil || Time.current < self.created_at)
+        self.category.vat == 10 && (self.sold_at == nil || Time.current < self.sold_at)
       rescue StandardError => e
         e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
       end
-      scope :big_price, -> { where(Arel.sql("(categories.vat = 10 AND (products.created_at IS NULL OR NOW() < products.created_at))")) }
-      scope :not_big_price, -> { where.not(Arel.sql("(categories.vat = 10 AND (products.created_at IS NULL OR NOW() < products.created_at))")) }
+      scope :big_price, -> { where(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")) }
+      scope :not_big_price, -> { where.not(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")) }
     RUBY
   end
 

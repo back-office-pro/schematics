@@ -93,10 +93,6 @@ module Schematics
         .reject(&:with_references?)
         .map(&:raw_value)
 
-      def allowed_variables = entity
-        .renderable_elements
-        .map(&:name)
-
       def tokens_cannot_have_assignment
         errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
       end

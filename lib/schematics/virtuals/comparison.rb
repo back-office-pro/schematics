@@ -23,6 +23,10 @@ module Schematics
 
       def to_str = super.concat(scopes_to_str)
 
+      def allowed_variables = entity
+        .elements
+        .map(&:name)
+
       private
 
       def scopes_to_str = <<~RUBY

@@ -38,6 +38,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
+  its(:allowed_variables) { is_expected.to eq(%w[id first_name last_name profile name created_at]) }
 
   its(:search_data) do
     is_expected.to eq <<~RUBY
