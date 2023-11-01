@@ -21,8 +21,8 @@ fr:
         not_found: Page non trouvée
         schema_error: Erreur schéma
       one_time_passwords:
-        create: Paramétrer l'authentification deux facteurs
-        new: Paramétrer l'authentification deux facteurs
+        create: Paramétrer l'authentification à deux facteurs
+        new: Paramétrer l'authentification à deux facteurs
       password_resets:
         create: Mot de passe oublié
         edit: Nouveau mot de passe
