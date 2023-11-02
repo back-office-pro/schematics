@@ -11,7 +11,7 @@ fr:
     login: connexion
     logout: deconnexion
     new: nouveau
-    one_time_passwords: mots-de-passe-unique
+    one_time_password: mot-de-passe-unique
     password_resets: mots-de-passe
     preferences: preferences
     profile: profil

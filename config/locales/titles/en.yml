@@ -20,9 +20,9 @@ en:
         maintenance_mode: Maintenance in progress
         not_found: Page not found
         schema_error: Schema error
-      one_time_passwords:
-        create: Set up two-factor authentication
-        new: Set up two-factor authentication
+      one_time_password:
+        edit: Set up two-factor authentication
+        update: Set up two-factor authentication
       password_resets:
         create: Password reset
         edit: New password

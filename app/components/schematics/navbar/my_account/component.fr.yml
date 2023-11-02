@@ -1,8 +1,8 @@
 ---
 fr:
   admin_zone: Zone administrateur
+  edit_one_time_password: Double authentification
   edit_preferences: Editer préférences
   edit_profile: Editer mon profil
   logout: Déconnexion
-  new_one_time_password: Double authentification
   title: Mon compte

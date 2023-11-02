@@ -20,9 +20,9 @@ it:
         maintenance_mode: Manutenzione in corso
         not_found: Pagina non trovata
         schema_error: Errore dello schema
-      one_time_passwords:
-        create: Configurare l'autenticazione a due fattori
-        new: Configurare l'autenticazione a due fattori
+      one_time_password:
+        edit: Configurare l'autenticazione a due fattori
+        update: Configurare l'autenticazione a due fattori
       password_resets:
         create: Reimpostazione della password
         edit: Nuova password

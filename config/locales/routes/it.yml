@@ -11,7 +11,7 @@ it:
     login: connessione
     logout: disconnessione
     new: nuovo
-    one_time_passwords: passwords-monouso
+    one_time_password: password-monouso
     password_resets: passwords
     preferences: preferenze
     profile: profilo
