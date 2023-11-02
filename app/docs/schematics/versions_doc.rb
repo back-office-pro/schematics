@@ -32,16 +32,16 @@ module Schematics
           objectChanges: {}
         }
       ]
-      response 404, 'Not Found', :json
       response 401, 'Not Authorized', :json
+      response 404, 'Not Found', :json
     end
 
     api :revert, 'Revert version' do
       path :id, ::String
       response 204, 'Success', :json
+      response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
       response 404, 'Not Found', :json
-      response 400, 'Bad Request', :json
       response 422, 'Unprocessable entity', :json
     end
   end

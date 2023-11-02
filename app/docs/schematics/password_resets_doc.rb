@@ -12,11 +12,10 @@ module Schematics
 
     api :update, 'Update user password' do
       path :token, ::String
-      data 'user[password]', ::String
-      data 'user[password_confirmation]', ::String
+      data 'user[password]', ::String, required: true
+      data 'user[password_confirmation]', ::String, required: true
       response 204, 'Success', :json
       response 400, 'Bad Request', :json
-      response 404, 'Not Found', :json
       response 422, 'Unprocessable entity', :json
     end
   end

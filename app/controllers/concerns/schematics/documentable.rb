@@ -51,8 +51,8 @@ module Schematics
               end
 
               response 200, 'Success', :json
-              response 401, 'Not Authorized', :json
               response 400, 'Bad Request', :json
+              response 401, 'Not Authorized', :json
             end
           end
 
@@ -70,8 +70,8 @@ module Schematics
                 .to_h { [_1.name, _1.open_api_type] }
 
               response 201, 'Success', :json
-              response 401, 'Not Authorized', :json
               response 400, 'Bad Request', :json
+              response 401, 'Not Authorized', :json
               response 422, 'Unprocessable entity', :json
             end
 
@@ -79,8 +79,8 @@ module Schematics
               path :id, ::String
 
               response 201, 'Success', :json
-              response 401, 'Not Authorized', :json
               response 400, 'Bad Request', :json
+              response 401, 'Not Authorized', :json
               response 422, 'Unprocessable entity', :json
             end
           end
@@ -101,9 +101,9 @@ module Schematics
                 .to_h { [_1.name, _1.open_api_type] }
 
               response 204, 'Success', :json
+              response 400, 'Bad Request', :json
               response 401, 'Not Authorized', :json
               response 404, 'Not Found', :json
-              response 400, 'Bad Request', :json
               response 422, 'Unprocessable entity', :json
             end
           end
@@ -116,8 +116,8 @@ module Schematics
                 .renderable_elements
                 .stable_sort_by(&:weight)
                 .to_h { [_1.name.camelize(:lower), _1.open_api_type] }
-              response 404, 'Not Found', :json
               response 401, 'Not Authorized', :json
+              response 404, 'Not Found', :json
             end
           end
 
@@ -125,9 +125,9 @@ module Schematics
             api :destroy, "Destroy #{entity.name}" do
               path :id, ::String
 
-              response :no_content, 'Success', :json
-              response 404, 'Not Found', :json
+              response 204, 'Success', :json
               response 401, 'Not Authorized', :json
+              response 404, 'Not Found', :json
             end
           end
 
@@ -135,17 +135,17 @@ module Schematics
             api :archive, "Archive #{entity.name}" do
               path :id, ::String
 
-              response :no_content, 'Success', :json
-              response 404, 'Not Found', :json
+              response 204, 'Success', :json
               response 401, 'Not Authorized', :json
+              response 404, 'Not Found', :json
             end
 
             api :restore, "Restore #{entity.name}" do
               path :id, ::String
 
-              response :no_content, 'Success', :json
-              response 404, 'Not Found', :json
+              response 204, 'Success', :json
               response 401, 'Not Authorized', :json
+              response 404, 'Not Found', :json
             end
           end
 

@@ -6,6 +6,7 @@ module Schematics
 
     api :update, 'Update current user preferences' do
       response 204, 'Success', :json
+      response 401, 'Not Authorized', :json
     end
   end
 end

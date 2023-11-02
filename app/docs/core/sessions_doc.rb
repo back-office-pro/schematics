@@ -9,6 +9,7 @@ module Core
       data 'session[password]', String, required: true
       data 'session[remember_me]', 'boolean'
       response 200, 'Success', :json
+      response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
     end
   end
