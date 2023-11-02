@@ -4,6 +4,8 @@ module Schematics
   module Fillable
     extend ActiveSupport::Concern
 
+    delegate :entity, to: :model_class, private: true
+
     def resource_params = params
       .require(entity.name.to_sym)
       .permit(permitted_params.excluding(disallowed_params))

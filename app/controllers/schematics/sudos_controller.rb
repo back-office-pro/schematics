@@ -3,7 +3,6 @@
 module Schematics
   class SudosController < ApplicationController
     include Fillable
-    delegate :entity, to: :model_class, private: true
 
     def new; end
 

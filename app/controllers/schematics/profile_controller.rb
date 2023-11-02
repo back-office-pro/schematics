@@ -3,7 +3,6 @@
 module Schematics
   class ProfileController < ApplicationController
     include Fillable
-    delegate :entity, to: :model_class, private: true
     helper_method :attributes
 
     def edit; end

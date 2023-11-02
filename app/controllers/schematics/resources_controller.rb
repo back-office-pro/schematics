@@ -31,7 +31,7 @@ module Schematics
     authorize_resource instance_name: :resource, except: %i[autocomplete trigger]
 
     delegate :model_class, to: :class
-    delegate :entity, :human_name, :human_name_plural, :gender, to: :model_class
+    delegate :human_name, :human_name_plural, :gender, to: :model_class
 
     helper_method :model_class
 
