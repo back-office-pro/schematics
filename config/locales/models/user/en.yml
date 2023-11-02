@@ -31,6 +31,7 @@ en:
           other: Requested tasks
           zero: No requested task
         role: Role
+        second_factor: Two-factor authentication
         sent_messages:
           one: Sent message
           other: Sent messages
@@ -40,7 +41,6 @@ en:
           other: Assigned tasks
           zero: No assigned task
         time_zone: Time zone
-        two_factor: Two-factor authentication
         user_groups:
           one: User group
           other: User groups

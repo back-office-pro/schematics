@@ -31,6 +31,7 @@ fr:
           other: Tâches demandées
           zero: Aucune tâche demandée
         role: Rôle
+        second_factor: Double authentification
         sent_messages:
           one: Message envoyé
           other: Messages envoyés
@@ -40,7 +41,6 @@ fr:
           other: Tâches assignées
           zero: Aucune tâche assignée
         time_zone: Fuseau horaire
-        two_factor: Double authentification
         user_groups:
           one: Groupe d'utilisateurs
           other: Groupes d'utilisateurs

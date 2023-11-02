@@ -20,7 +20,7 @@
       },
       {
         "id": "a6e776d5-aca7-480d-88fb-b8019370e817",
-        "name": "two_factor",
+        "name": "second_factor",
         "function": "$otp_secret != NULL"
       }
     ],
