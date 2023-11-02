@@ -21,7 +21,7 @@ fr:
           one: Message reçu
           other: Messages reçus
           zero: Aucun message reçu
-        otp_attempt: Code
+        otp_enabled: Double authentification
         password: Mot de passe
         password_challenge: Mot de passe actuel
         password_confirmation: Confirmation mot de passe
@@ -31,7 +31,6 @@ fr:
           other: Tâches demandées
           zero: Aucune tâche demandée
         role: Rôle
-        second_factor: Double authentification
         sent_messages:
           one: Message envoyé
           other: Messages envoyés

@@ -21,7 +21,7 @@ it:
           one: Messaggio ricevuto
           other: Messaggi ricevuti
           zero: Nessun messaggio ricevuto
-        otp_attempt: Codice
+        otp_enabled: Autenticazione a due fattori
         password: Password
         password_challenge: Password corrente
         password_confirmation: Conferma della password
@@ -31,7 +31,6 @@ it:
           other: Compiti richiesti
           zero: Nessun compito richiesto
         role: Ruolo
-        second_factor: Autenticazione a due fattori
         sent_messages:
           one: Messaggio inviato
           other: Messaggi inviati
