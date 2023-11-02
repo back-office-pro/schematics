@@ -1,0 +1,11 @@
+---
+en:
+  activemodel:
+    attributes:
+      schematics/one_time_password:
+        attempt: Code
+    models:
+      schematics/one_time_password:
+        gender: male
+        one: One time password
+        other: One time passwords

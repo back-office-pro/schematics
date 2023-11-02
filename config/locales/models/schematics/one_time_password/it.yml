@@ -1,0 +1,11 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/one_time_password:
+        attempt: Codice
+    models:
+      schematics/one_time_password:
+        gender: female
+        one: Password monouso
+        other: Password monousi
