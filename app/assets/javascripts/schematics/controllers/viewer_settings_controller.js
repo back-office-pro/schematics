@@ -8,11 +8,12 @@ export default class extends ApplicationController {
       element.classList.add('animate__animated')
       element.classList.toggle('d-none')
     })
-    this.fetchAPI(routes.preferences, 'PUT', { preferences: { [id]: checked } })
+    this.fetchAPI(routes.preferences, 'PUT', { user: { preferences: { [id]: checked } } })
   }
 
   async switchLayout ({ target, params: { viewer, preference } }) {
-    await this.fetchAPI(routes.preferences, 'PUT', { preferences: { [preference]: viewer } })
+    const data = { user: { preferences: { [preference]: viewer } } }
+    await this.fetchAPI(routes.preferences, 'PUT', data)
     target.closest('form').requestSubmit()
   }
 }

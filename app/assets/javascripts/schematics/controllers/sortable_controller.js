@@ -23,7 +23,7 @@ export default class extends ApplicationController {
         set: (sortable) => {
           if (this.groupValue !== '') {
             const preferences = { [this.groupValue]: sortable.toArray() }
-            this.fetchAPI(routes.preferences, 'PUT', { preferences })
+            this.fetchAPI(routes.preferences, 'PUT', { user: { preferences } })
           }
         }
       }

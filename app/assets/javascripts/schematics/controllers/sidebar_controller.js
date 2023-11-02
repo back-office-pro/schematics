@@ -8,6 +8,7 @@ export default class extends ApplicationController {
     this.element.querySelectorAll('.d-none').forEach(_ => _.classList.toggle('d-md-block'))
     document.querySelector('.content').classList.toggle('toggled')
     const sidebarToggled = this.element.classList.contains('toggled')
-    this.fetchAPI(routes.preferences, 'PUT', { preferences: { sidebar_toggled: sidebarToggled } })
+    const data = { user: { preferences: { sidebar_toggled: sidebarToggled } } }
+    this.fetchAPI(routes.preferences, 'PUT', data)
   }
 }

@@ -1,20 +1,38 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:MissingSafeMethod
   class PreferencesController < ApplicationController
+    include Fillable
+
     def edit; end
 
     def update
-      result = Resources::Update.call(
-        resource: current_user,
-        resource_params: { preferences: current_user.preferences.merge(preference_params) }
-      )
+      result = Resources::Update.call(resource: current_user, resource_params:)
       respond_with result, location: edit_preferences_path
     end
 
     private
 
-    def cast_param_value(value)
+    def model_class = ::User
+
+    def resource_params = super.tap(&method(:cast_and_merge_preferences!))
+
+    memoize def permitted_params = {
+      preferences: timeline_preferences
+        .concat(viewer_preferences)
+        .concat(viewer_col_preferences)
+        .concat(dashboard_preferences)
+    }
+
+    def cast_and_merge_preferences!(params)
+      params
+        .fetch(:preferences)
+        .transform_values!(&method(:cast_preference_value))
+        .reverse_merge!(current_user.preferences)
+    end
+
+    def cast_preference_value(value)
       return value == 'true' if %w[true false].include?(value)
 
       value
@@ -26,16 +44,6 @@ module Schematics
       { stats: [] },
       { charts: [] }
     ]
-
-    memoize def permitted_preference_params = timeline_preferences
-      .concat(viewer_preferences)
-      .concat(viewer_col_preferences)
-      .concat(dashboard_preferences)
-
-    def preference_params = params
-      .require(:preferences)
-      .permit(permitted_preference_params)
-      .transform_values(&method(:cast_param_value))
 
     def timeline_preferences = ::Tenant
       .schema

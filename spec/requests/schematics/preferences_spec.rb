@@ -16,7 +16,7 @@ RSpec.describe 'Preferences' do
 
   describe 'PUT #update' do
     let(:do_request) { put(preferences_path, params:, headers:) }
-    let(:params) { { preferences: { theme: 'light' } } }
+    let(:params) { { user: { preferences: { theme: 'light' } } } }
 
     before { do_request }
 

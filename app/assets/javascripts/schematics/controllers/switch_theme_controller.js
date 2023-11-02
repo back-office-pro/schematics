@@ -5,6 +5,6 @@ import ApplicationController from 'controllers/application_controller'
 export default class extends ApplicationController {
   switchTheme ({ params: { theme } }) {
     document.documentElement.setAttribute('data-bs-theme', theme)
-    this.fetchAPI(routes.preferences, 'PUT', { preferences: { theme } })
+    this.fetchAPI(routes.preferences, 'PUT', { user: { preferences: { theme } } })
   }
 }
