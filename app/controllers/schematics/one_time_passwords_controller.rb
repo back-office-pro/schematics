@@ -24,6 +24,6 @@ module Schematics
     def resource_params = params
       .require(:one_time_password)
       .permit(:secret, :attempt)
-      .with_defaults(user: :current_user)
+      .with_defaults(user: current_user)
   end
 end
