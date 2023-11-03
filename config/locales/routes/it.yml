@@ -4,9 +4,7 @@ it:
     active_storage: immagazzinamento
     admin: amministrazione
     archive: archiviare
-    attachments: allegati
     autocomplete: completamento-automatico
-    blobs: files
     delete: cancellare
     duplicate: duplicare
     edit: editare
@@ -19,4 +17,3 @@ it:
     restore: restaurare
     sudo: accesso-limitato
     sudos: accessi-limitati
-    versions: storico

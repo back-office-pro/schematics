@@ -4,9 +4,7 @@ fr:
     active_storage: stockage
     admin: administration
     archive: archiver
-    attachments: attachements
     autocomplete: auto-completion
-    blobs: fichiers
     delete: supprimer
     duplicate: dupliquer
     edit: editer
@@ -19,4 +17,3 @@ fr:
     restore: restaurer
     sudo: acces-restreint
     sudos: acces-restreints
-    versions: historique

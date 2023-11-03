@@ -4,5 +4,5 @@ it:
     models:
       schematics/version:
         gender: female
-        one: Versione
-        other: Versioni
+        one: Storico
+        other: Storico

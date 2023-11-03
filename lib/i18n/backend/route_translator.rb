@@ -6,12 +6,21 @@ module I18n
       include Base
       include Memoize
 
+      PREFIXES = %w[
+        activerecord.models.
+        activerecord.models.schematics/
+        activerecord.models.active_storage/
+        activemodel.models.schematics/
+      ].freeze
+
       delegate :available_locales, to: 'Rails.configuration.i18n'
 
       def lookup(locale, key, scope = [], _options = EMPTY_HASH)
         case [scope, key]
         in [:routes, model]
-          resolve(locale, nil, :"activerecord.models.#{model.to_s.singularize}.other", default: nil)
+          PREFIXES
+            .filter_map { resolve(locale, nil, :"#{_1}#{model.to_s.singularize}.other", default: nil) } # rubocop:disable Layout/LineLength
+            .first
             &.gsub(/\b\w{1,2}\b/, '')
             &.parameterize(separator: '-')
         else

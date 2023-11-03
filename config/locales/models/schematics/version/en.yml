@@ -4,5 +4,5 @@ en:
     models:
       schematics/version:
         gender: female
-        one: Version
-        other: Versions
+        one: Timeline
+        other: Timeline

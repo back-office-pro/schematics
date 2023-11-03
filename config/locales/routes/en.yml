@@ -4,9 +4,7 @@ en:
     active_storage: storage
     admin: admin
     archive: archive
-    attachments: attachments
     autocomplete: autocomplete
-    blobs: files
     delete: delete
     duplicate: duplicate
     edit: edit
@@ -19,4 +17,3 @@ en:
     restore: restore
     sudo: restricted-access
     sudos: restricted-access
-    versions: timeline

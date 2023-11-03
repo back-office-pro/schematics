@@ -9,5 +9,5 @@ it:
     models:
       active_storage/attachment:
         gender: male
-        one: File
-        other: Files
+        one: Allegato
+        other: Allegati
