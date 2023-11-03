@@ -6,9 +6,9 @@ module Schematics
     include ::ActiveModel::Attributes
     TOKEN_DURATION = 30
 
-    attribute :secret, default: -> { ::ROTP::Base32.random }
     attribute :user
     attribute :attempt
+    attribute :secret, default: -> { ::ROTP::Base32.random }
 
     memoize def qr_code = ::RQRCode::QRCode.new(provisioning_uri)
 
