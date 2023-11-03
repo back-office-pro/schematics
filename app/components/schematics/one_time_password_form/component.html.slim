@@ -1,7 +1,7 @@
 .alert.alert-secondary
   = fa_icon :circle_info, class: 'me-3'
   = t('.info')
-= bootstrap_form_with model:, url:, method: :patch do |form|
+= bootstrap_form_with model: do |form|
   = form.hidden_field :secret
   .text-center == qr_code.as_svg(module_size: 4)
   = render Schematics::ResourceForm::Fields::Digest::Component.new(form:, name: :attempt)

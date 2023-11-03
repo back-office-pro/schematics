@@ -2,9 +2,8 @@
 
 module Schematics
   module OneTimePasswords
-    class Update
+    class Create
       include Interactable
-
       delegate :resource, to: :context, private: true
       delegate :user, :verify, :secret, to: :resource, private: true
 

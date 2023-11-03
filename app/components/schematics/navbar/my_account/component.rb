@@ -8,8 +8,8 @@ module Schematics
         delegate :admin_path,
                  :logout_path,
                  :edit_profile_path,
-                 :edit_one_time_password_path,
                  :edit_preferences_path,
+                 :new_one_time_password_path,
                  to: 'Schematics::Engine.routes.url_helpers'
       end
     end
