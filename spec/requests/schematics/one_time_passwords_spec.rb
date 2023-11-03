@@ -6,7 +6,7 @@ RSpec.describe 'OneTimePasswords' do
   include_context 'with authenticated user'
 
   describe 'GET #new' do
-    let(:do_request) { get(new_one_time_password_path, headers:) }
+    let(:do_request) { get(new_one_time_passwords_path, headers:) }
     let(:accept_header) { 'text/html' }
 
     before { do_request }
@@ -37,7 +37,7 @@ RSpec.describe 'OneTimePasswords' do
   end
 
   describe 'DELETE #destroy' do
-    let(:do_request) { delete(one_time_password_path, headers:) }
+    let(:do_request) { delete(one_time_passwords_path, headers:) }
 
     before { do_request }
 

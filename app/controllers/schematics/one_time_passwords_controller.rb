@@ -11,12 +11,12 @@ module Schematics
     def create
       @resource = OneTimePassword.new(resource_params)
       result = OneTimePasswords::Create.call(resource: @resource)
-      respond_with result, location: new_one_time_password_path
+      respond_with result, location: new_one_time_passwords_path
     end
 
     def destroy
       result = Resources::Update.call(resource: current_user, resource_params: { otp_secret: nil })
-      respond_with result, location: new_one_time_password_path, redirect_on_failure: true
+      respond_with result, location: new_one_time_passwords_path, redirect_on_failure: true
     end
 
     private
