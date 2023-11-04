@@ -5,18 +5,18 @@ module Schematics
     module MyAccount
       class Component < ApplicationComponent
         delegate :role, :user_groups, :otp_enabled?, to: :current_user
+        delegate :url_helpers, to: 'Schematics::Engine.routes', private: true
         delegate :admin_path,
                  :logout_path,
                  :edit_profile_path,
                  :edit_preferences_path,
                  :new_one_time_passwords_path,
-                 :one_time_passwords_path,
-                 to: 'Schematics::Engine.routes.url_helpers'
+                 to: :url_helpers
 
-        def otp_path
-          return one_time_passwords_path if otp_enabled?
+        def one_time_passwords_path
+          return new_one_time_passwords_path unless otp_enabled?
 
-          new_one_time_passwords_path
+          url_helpers.one_time_passwords_path
         end
       end
     end
