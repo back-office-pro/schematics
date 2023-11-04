@@ -1,9 +1,8 @@
 .alert.alert-secondary
   = fa_icon :circle_info, class: 'me-3'
   = t('.info')
-= bootstrap_form_with model: do |form|
-  = form.hidden_field :secret
+= bootstrap_form_with model:, url: do |form|
   .text-center == qr_code.as_svg(module_size: 4)
-  = render Schematics::ResourceForm::Fields::Digest::Component.new(form:, name: :attempt)
+  = render Schematics::ResourceForm::Fields::Digest::Component.new(form:, name: :otp_attempt)
   = render Schematics::Button::Confirm::Component.new
   = render Schematics::Button::Cancel::Component.new(path: root_path)

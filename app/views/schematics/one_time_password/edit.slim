@@ -1,4 +1,4 @@
-- breadcrumb title, new_one_time_passwords_path
+- breadcrumb title, edit_one_time_password_path
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
     .row.align-items-center
@@ -7,4 +7,5 @@
       .col-auto
         = render Schematics::Button::DestroyOtp::Component.new
   .card-body.p-3
-    = render Schematics::OneTimePasswordForm::Component.new(resource: @resource)
+    = render Schematics::OneTimePasswordForm::Component.new
+    = render Schematics::OneTimePasswordBackupCodes::Component.new

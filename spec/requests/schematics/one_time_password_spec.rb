@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe 'OneTimePasswords' do
+RSpec.describe 'OneTimePassword' do
   include_context 'with authenticated user'
 
-  describe 'GET #new' do
-    let(:do_request) { get(new_one_time_passwords_path, headers:) }
+  describe 'GET #edit' do
+    let(:do_request) { get(edit_one_time_password_path, headers:) }
     let(:accept_header) { 'text/html' }
 
     before { do_request }
@@ -14,19 +14,25 @@ RSpec.describe 'OneTimePasswords' do
     it { is_expected.to have_http_status(:success) }
   end
 
-  describe 'POST #create' do
-    let(:do_request) { post(one_time_passwords_path, params:, headers:) }
-    let(:params) { { one_time_password: { attempt:, secret: } } }
+  describe 'PUT #update' do
+    let(:do_request) { put(one_time_password_path, params:, headers:) }
+    let(:params) { { user: { otp_attempt: } } }
 
     before { do_request }
 
+    context 'when attempt is correct' do
+      let(:otp_attempt) { user.otp_code }
+
+      it { is_expected.to have_http_status(:no_content) }
+      its(:body) { is_expected.to be_blank }
+    end
+
     context 'when attempt is wrong' do
-      let(:secret) { ROTP::Base32.random }
-      let(:attempt) { '123456' }
+      let(:otp_attempt) { 'abcd' }
       let(:expected_response) do
         {
           'errors' => [
-            I18n.t('schematics.one_time_passwords.create.failure')
+            I18n.t('schematics.one_time_password.update.failure')
           ]
         }
       end
@@ -37,7 +43,7 @@ RSpec.describe 'OneTimePasswords' do
   end
 
   describe 'DELETE #destroy' do
-    let(:do_request) { delete(one_time_passwords_path, headers:) }
+    let(:do_request) { delete(one_time_password_path, headers:) }
 
     before { do_request }
 
