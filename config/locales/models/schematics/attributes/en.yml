@@ -34,6 +34,7 @@ en:
       schematics/attributes/mime: MIME type
       schematics/attributes/model: Model
       schematics/attributes/model_field: Model field
+      schematics/attributes/one_time_password: One time password
       schematics/attributes/percentage: Percentage
       schematics/attributes/phone: Phone number
       schematics/attributes/rating: Rating
@@ -42,10 +43,10 @@ en:
       schematics/attributes/string: String
       schematics/attributes/text: Text
       schematics/attributes/time: Time
-      schematics/attributes/time_zone: Time Zone
+      schematics/attributes/time_zone: Time zone
       schematics/attributes/timestamp: Timestamp
       schematics/attributes/token: Token
       schematics/attributes/url: URL
       schematics/attributes/user: Current user
-      schematics/attributes/user_agent: User Agent
+      schematics/attributes/user_agent: User agent
       schematics/attributes/uuid: UUID

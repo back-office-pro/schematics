@@ -34,6 +34,7 @@ fr:
       schematics/attributes/mime: Type MIME
       schematics/attributes/model: Modèle
       schematics/attributes/model_field: Champ de modèle
+      schematics/attributes/one_time_password: Mot de passe unique
       schematics/attributes/percentage: Pourcentage
       schematics/attributes/phone: Numéro de téléphone
       schematics/attributes/rating: Notation
