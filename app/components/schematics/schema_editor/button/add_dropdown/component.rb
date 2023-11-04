@@ -24,7 +24,6 @@ module Schematics
             Attributes::ModelField,
             Attributes::Uuid,
             Attributes::Locale,
-            Attributes::OneTimePassword,
             Attributes::Timestamp
           ]
 
