@@ -4,7 +4,6 @@ module Schematics
   module Attributes
     class String < Text
       include Behaviours::Listable
-
       delegate :limit, to: :options
 
       def available_options = super.push(
