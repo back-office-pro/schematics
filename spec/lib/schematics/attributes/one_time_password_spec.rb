@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-describe Schematics::Attributes::Token do
+describe Schematics::Attributes::OneTimePassword do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
-  let(:name) { 'auth_token' }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
+  let(:name) { 'otp_secret' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -12,19 +12,19 @@ describe Schematics::Attributes::Token do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_encrypted }
 
-  its(:database_type) { is_expected.to eq('token') }
-  its(:column_name) { is_expected.to eq('auth_token') }
+  its(:database_type) { is_expected.to eq('string') }
+  its(:column_name) { is_expected.to eq('otp_secret') }
   its(:open_api_type) { is_expected.to eq(String) }
-  its(:default) { is_expected.to be_a(String) }
+  its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to be_empty }
-  its(:icon) { is_expected.to eq(:key) }
+  its(:icon) { is_expected.to eq(:mobile_screen) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -37,8 +37,10 @@ describe Schematics::Attributes::Token do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      encrypts :auth_token, deterministic: true
-      has_secure_token :auth_token, length: 32
+      encrypts :otp_secret, deterministic: true
+      has_one_time_password column_name: :otp_secret,
+                            after_column_name: :otp_last_at,
+                            one_time_backup_codes: true
     RUBY
   end
 

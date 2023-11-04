@@ -23,6 +23,7 @@ fr:
       one_time_passwords:
         create: Paramétrer l'authentification à deux facteurs
         new: Paramétrer l'authentification à deux facteurs
+        show: Codes de récupération d’authentification à deux facteurs
       password_resets:
         create: Mot de passe oublié
         edit: Nouveau mot de passe

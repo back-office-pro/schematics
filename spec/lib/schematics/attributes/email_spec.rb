@@ -42,8 +42,7 @@ describe Schematics::Attributes::Email do
       Schematics::Options::Unique,
       Schematics::Options::Min,
       Schematics::Options::Limit,
-      Schematics::Options::Length,
-      Schematics::Options::Encrypted
+      Schematics::Options::Length
     )
   end
 

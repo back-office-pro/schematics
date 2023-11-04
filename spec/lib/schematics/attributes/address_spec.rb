@@ -37,8 +37,7 @@ describe Schematics::Attributes::Address do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
-      Schematics::Options::Normalization,
-      Schematics::Options::Encrypted
+      Schematics::Options::Normalization
     )
   end
 

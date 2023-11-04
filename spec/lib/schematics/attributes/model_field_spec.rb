@@ -50,8 +50,7 @@ describe Schematics::Attributes::ModelField do
       Schematics::Options::Limit,
       Schematics::Options::Length,
       Schematics::Options::DependsOn,
-      Schematics::Options::Type,
-      Schematics::Options::Encrypted
+      Schematics::Options::Type
     )
   end
 

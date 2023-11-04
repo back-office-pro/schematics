@@ -5,6 +5,8 @@ module Schematics
     module Encryptable
       delegate :encrypted?, to: :options
 
+      def available_options = super.push(Options::Encrypted)
+
       def to_str
         return super unless encrypted?
 

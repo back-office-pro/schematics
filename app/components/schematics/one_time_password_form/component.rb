@@ -4,10 +4,14 @@ module Schematics
   module OneTimePasswordForm
     class Component < ApplicationComponent
       delegate :root_path, :one_time_passwords_path, to: 'Schematics::Engine.routes.url_helpers'
-      delegate :qr_code, to: :resource
-      option :resource
+      delegate :company_name, to: ::Configuration, private: true
+      delegate :provisioning_uri, to: :current_user, private: true
 
-      alias model resource
+      def model = ::User.new
+
+      def url = one_time_passwords_path
+
+      def qr_code = ::RQRCode::QRCode.new provisioning_uri(nil, issuer: company_name)
     end
   end
 end

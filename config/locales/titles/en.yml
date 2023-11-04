@@ -23,6 +23,7 @@ en:
       one_time_passwords:
         create: Set up two-factor authentication
         new: Set up two-factor authentication
+        show: Two-factor authentication recovery codes
       password_resets:
         create: Password reset
         edit: New password

@@ -4,14 +4,17 @@ module Schematics
   module OneTimePasswords
     class Create
       include Interactable
-      delegate :resource, to: :context, private: true
-      delegate :user, :verify, :secret, to: :resource, private: true
+      delegate :user, :resource_params, to: :context, private: true
 
       def call
-        fail! unless verify
+        fail! unless user.authenticate_otp(otp_attempt)
 
-        user.update!(otp_secret: secret)
+        user.update!(otp_last_at: ::Time.current)
       end
+
+      private
+
+      def otp_attempt = resource_params[:otp_attempt]
     end
   end
 end

@@ -21,8 +21,9 @@ it:
         not_found: Pagina non trovata
         schema_error: Errore dello schema
       one_time_passwords:
-        create: Configurare l'autenticazione a due fattori
-        new: Configurare l'autenticazione a due fattori
+        create: Autenticazione a due fattori
+        new: Autenticazione a due fattori
+        show: Autenticazione a due fattori
       password_resets:
         create: Reimpostazione della password
         edit: Nuova password

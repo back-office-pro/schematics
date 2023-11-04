@@ -19,9 +19,9 @@
         "function": "$last_name $first_name"
       },
       {
-        "id": "a6e776d5-aca7-480d-88fb-b8019370e817",
+        "id": "c3e7ccc4-2727-4b1d-9e4b-4b8932aae3a9",
         "name": "otp_enabled",
-        "function": "$otp_secret != NULL"
+        "function": "$otp_last_at != NULL"
       }
     ],
     "attributes": [
@@ -111,11 +111,21 @@
       {
         "id": "4ad24291-a015-45ad-972a-e685c9ee5cdc",
         "name": "otp_secret",
-        "type": "string",
+        "type": "one_time_password"
+      },
+      {
+        "id": "bd7a0d23-d403-4e00-ba58-d04318f2f21c",
+        "name": "otp_backup_codes",
+        "type": "jsonb",
         "options": {
           "hidden": true,
           "encrypted": true
         }
+      },
+      {
+        "id": "c1feda91-1320-4956-80d7-bba7b14dca13",
+        "name": "otp_last_at",
+        "type": "timestamp"
       },
       {
         "id": "c127bf53-14de-44cb-bb88-5fbe250328d4",

@@ -5,6 +5,7 @@ module Schematics
     class Jsonb < Attribute
       include Behaviours::Fillable
       include Behaviours::Renderable
+      include Behaviours::Encryptable
 
       def database_index_type = :gin
 
