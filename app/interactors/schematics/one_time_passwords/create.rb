@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Schematics
-  module OneTimePassword
-    class Update
+  module OneTimePasswords
+    class Create
       include Interactable
       delegate :user, :resource_params, to: :context, private: true
 

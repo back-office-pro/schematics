@@ -9,9 +9,15 @@ module Schematics
                  :logout_path,
                  :edit_profile_path,
                  :edit_preferences_path,
-                 :edit_one_time_password_path,
-                 :one_time_password_path,
+                 :new_one_time_passwords_path,
+                 :one_time_passwords_path,
                  to: 'Schematics::Engine.routes.url_helpers'
+
+        def otp_path
+          return one_time_passwords_path if otp_enabled?
+
+          new_one_time_passwords_path
+        end
       end
     end
   end

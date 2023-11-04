@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Schematics
-  class OneTimePasswordDoc < ApplicationDoc
-    route_base OneTimePasswordController.controller_path
+  class OneTimePasswordsDoc < ApplicationDoc
+    route_base OneTimePasswordsController.controller_path
 
     api :update, 'Update current user 2FA setup' do
       data 'user[otp_attempt]', ::String, required: true

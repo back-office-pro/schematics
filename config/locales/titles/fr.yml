@@ -20,10 +20,10 @@ fr:
         maintenance_mode: Maintenance en cours
         not_found: Page non trouvée
         schema_error: Erreur schéma
-      one_time_password:
-        edit: Paramétrer l'authentification à deux facteurs
+      one_time_passwords:
+        new: Paramétrer l'authentification à deux facteurs
         show: Codes de récupération d’authentification à deux facteurs
-        update: Paramétrer l'authentification à deux facteurs
+        create: Paramétrer l'authentification à deux facteurs
       password_resets:
         create: Mot de passe oublié
         edit: Nouveau mot de passe

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module OneTimePassword
+  module OneTimePasswords
     class Destroy
       include Interactable
       delegate :user, to: :context, private: true
