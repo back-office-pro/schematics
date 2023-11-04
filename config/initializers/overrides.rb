@@ -43,6 +43,11 @@ Rails.configuration.to_prepare do
       super
     end
   end
+  ActiveModel::OneTimePassword::InstanceMethodsOnActivation.class_eval do
+    def serializable_hash(*)
+      super
+    end
+  end
 end
 
 Rails.configuration.to_prepare do
