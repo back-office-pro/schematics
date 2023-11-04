@@ -7,7 +7,7 @@ module Schematics
 
     def show
       if current_user.otp_enabled?
-        respond_with current_user.otp_backup_codes
+        respond_with codes: current_user.otp_backup_codes
       else
         respond_with do |format|
           format.json
