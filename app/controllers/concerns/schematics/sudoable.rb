@@ -8,7 +8,7 @@ module Schematics
       return if current_session.sudo?
 
       store_location
-      redirect_to sudo_path
+      redirect_to schematics.sudo_path
     end
   end
 end
