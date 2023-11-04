@@ -10,7 +10,6 @@ module Schematics
         respond_with codes: current_user.otp_backup_codes
       else
         respond_with do |format|
-          format.json
           format.html { redirect_to(new_one_time_passwords_path) }
         end
       end
