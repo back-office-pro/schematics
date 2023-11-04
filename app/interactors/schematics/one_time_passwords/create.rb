@@ -8,8 +8,6 @@ module Schematics
 
       def call
         fail! unless user.authenticate_otp(otp_attempt)
-
-        user.update!(otp_last_at: ::Time.current)
       end
 
       private

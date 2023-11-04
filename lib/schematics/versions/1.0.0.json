@@ -125,7 +125,10 @@
       {
         "id": "c1feda91-1320-4956-80d7-bba7b14dca13",
         "name": "otp_last_at",
-        "type": "timestamp"
+        "type": "integer",
+        "options": {
+          "hidden": true
+        }
       },
       {
         "id": "c127bf53-14de-44cb-bb88-5fbe250328d4",
