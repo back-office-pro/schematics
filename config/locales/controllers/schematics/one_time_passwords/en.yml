@@ -1,0 +1,10 @@
+---
+en:
+  schematics:
+    one_time_passwords:
+      create:
+        failure: The code is invalid
+        success: Two-factor authentication was successfully configured
+      destroy:
+        failure: An error occurred
+        success: Two-factor authentication was successfully deactivated

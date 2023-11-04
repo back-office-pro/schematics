@@ -9,6 +9,7 @@ module Schematics
                  :logout_path,
                  :edit_profile_path,
                  :edit_preferences_path,
+                 :one_time_passwords_path,
                  to: 'Schematics::Engine.routes.url_helpers'
       end
     end

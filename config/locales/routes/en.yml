@@ -11,6 +11,7 @@ en:
     login: login
     logout: logout
     new: new
+    one_time_passwords: one-time-passwords
     password_resets: passwords
     preferences: preferences
     profile: profile
