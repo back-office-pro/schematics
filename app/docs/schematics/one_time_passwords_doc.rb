@@ -5,7 +5,7 @@ module Schematics
     route_base OneTimePasswordsController.controller_path
 
     api :show, 'Get current user 2FA recovery codes' do
-      response 204, 'Success', :json
+      response 200, 'Success', :json
       response 401, 'Not Authorized', :json
     end
 
