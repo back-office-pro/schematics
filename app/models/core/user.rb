@@ -20,19 +20,6 @@ class User < Schematics::ApplicationRecord
     .active
     .exists?
 
-  def otp_backup_codes
-    return [] unless otp_enabled?
-
-    super
-  end
-
-  def disable_otp
-    otp_regenerate_secret
-    otp_regenerate_backup_codes
-    self.otp_enabled = false
-    save
-  end
-
   def to_s
     full_name.presence || email
   end
