@@ -4,7 +4,12 @@ module Schematics
   class OneTimePasswordsDoc < ApplicationDoc
     route_base OneTimePasswordsController.controller_path
 
-    api :update, 'Update current user 2FA setup' do
+    api :show, 'Get current user 2FA recovery codes' do
+      response 204, 'Success', :json
+      response 401, 'Not Authorized', :json
+    end
+
+    api :create, 'Create current user 2FA setup' do
       data 'user[otp_attempt]', ::String, required: true
       response 204, 'Success', :json
       response 401, 'Not Authorized', :json
