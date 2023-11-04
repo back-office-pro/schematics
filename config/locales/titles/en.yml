@@ -21,8 +21,9 @@ en:
         not_found: Page not found
         schema_error: Schema error
       one_time_password:
-        edit: Two-factor authentication
-        update: Two-factor authentication
+        edit: Set up two-factor authentication
+        show: Two-factor authentication recovery codes
+        update: Set up two-factor authentication
       password_resets:
         create: Password reset
         edit: New password

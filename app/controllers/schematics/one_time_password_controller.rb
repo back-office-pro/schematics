@@ -3,13 +3,17 @@
 module Schematics
   class OneTimePasswordController < ApplicationController
     include Fillable
-    before_action :require_sudo!, only: :edit
+    before_action :require_sudo!, only: %i[show edit]
+
+    def show
+      respond_with current_user.otp_backup_codes
+    end
 
     def edit; end
 
     def update
       result = OneTimePassword::Update.call(user: current_user, resource_params:)
-      respond_with result, location: edit_one_time_password_path
+      respond_with result, location: one_time_password_path
     end
 
     def destroy

@@ -10,7 +10,7 @@ Schematics::Engine.routes.draw do
     get 'sudo', to: 'sudos#new', as: :sudo
     resource :preferences, only: %i[edit update]
     resource :profile, only: %i[edit update], controller: :profile
-    resource :one_time_password, only: %i[edit update destroy], controller: :one_time_password
+    resource :one_time_password, only: %i[show edit update destroy], controller: :one_time_password
     resources :password_resets, only: %i[new create edit update], param: :token
     resources :sudos, only: :create
     resources :versions, only: %i[index show] do

@@ -21,8 +21,9 @@ fr:
         not_found: Page non trouvée
         schema_error: Erreur schéma
       one_time_password:
-        edit: Authentification à deux facteurs
-        update: Authentification à deux facteurs
+        edit: Paramétrer l'authentification à deux facteurs
+        show: Codes de récupération d’authentification à deux facteurs
+        update: Paramétrer l'authentification à deux facteurs
       password_resets:
         create: Mot de passe oublié
         edit: Nouveau mot de passe

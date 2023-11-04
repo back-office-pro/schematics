@@ -1,0 +1,12 @@
+- breadcrumb title, one_time_password_path
+.card.shadow-sm.animate__animated.animate__zoomIn
+  .card-header.px-2.py-1
+    .row.align-items-center
+      .col.text-truncate
+        = render Schematics::CardHeading::Component.new(icon: :floppy_disk, title:)
+      .col-auto
+        = render Schematics::Button::DestroyOtp::Component.new
+  .card-body.p-3
+    ul.list-group.list-group-striped
+      - current_user.otp_backup_codes.each do |code|
+        li.list-group-item = code
