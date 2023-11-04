@@ -6,7 +6,14 @@ module Schematics
     before_action :require_sudo!, only: %i[show new]
 
     def show
-      respond_with current_user.otp_backup_codes
+      if current_user.otp_enabled?
+        respond_with current_user.otp_backup_codes
+      else
+        respond_with do |format|
+          format.json
+          format.html { redirect_to(new_one_time_passwords_path) }
+        end
+      end
     end
 
     def new; end

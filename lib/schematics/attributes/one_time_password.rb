@@ -14,7 +14,9 @@ module Schematics
       def icon = :mobile_screen
 
       def to_str = super + <<~RUBY
-        has_one_time_password column_name: :#{name}
+        has_one_time_password column_name: :#{name},
+                              after_column_name: :otp_last_at,
+                              one_time_backup_codes: true
       RUBY
     end
   end

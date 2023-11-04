@@ -7,7 +7,10 @@ module Schematics
       delegate :user, to: :context, private: true
 
       def call
-        fail! unless user.disable_otp
+        user.otp_regenerate_secret
+        user.otp_regenerate_backup_codes
+        user.otp_last_at = nil
+        fail! unless user.save
       end
     end
   end

@@ -5,6 +5,15 @@ require 'rails_helper'
 RSpec.describe 'OneTimePasswords' do
   include_context 'with authenticated user'
 
+  describe 'GET #show' do
+    let(:do_request) { get(one_time_passwords_path, headers:) }
+
+    before { do_request }
+
+    it { is_expected.to have_http_status(:success) }
+    its(:body) { is_expected.to eq('null') }
+  end
+
   describe 'GET #new' do
     let(:do_request) { get(new_one_time_passwords_path, headers:) }
     let(:accept_header) { 'text/html' }

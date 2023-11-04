@@ -17,6 +17,11 @@
         "id": "773faa33-bb43-470c-a7ae-3662a0cfd5b4",
         "name": "full_name",
         "function": "$last_name $first_name"
+      },
+      {
+        "id": "c3e7ccc4-2727-4b1d-9e4b-4b8932aae3a9",
+        "name": "otp_enabled",
+        "function": "$otp_last_at != NULL"
       }
     ],
     "attributes": [
@@ -119,12 +124,8 @@
       },
       {
         "id": "c1feda91-1320-4956-80d7-bba7b14dca13",
-        "name": "otp_enabled",
-        "type": "boolean",
-        "options": {
-          "readonly": true,
-          "default": false
-        }
+        "name": "otp_last_at",
+        "type": "timestamp"
       },
       {
         "id": "c127bf53-14de-44cb-bb88-5fbe250328d4",
