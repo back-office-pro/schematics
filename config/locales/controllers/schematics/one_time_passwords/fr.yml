@@ -2,9 +2,9 @@
 fr:
   schematics:
     one_time_passwords:
-      destroy:
-        failure: Une erreur est survenue
-        success: L'authentification à deux facteurs a été désactivée avec succès
       create:
         failure: Le code est invalide
         success: L'authentification à deux facteurs a été configurée avec succès
+      destroy:
+        failure: Une erreur est survenue
+        success: L'authentification à deux facteurs a été désactivée avec succès

@@ -1,8 +1,8 @@
 ---
 it:
   admin_zone: Area di amministrazione
-  one_time_password: Autenticazione a due fattori
   edit_preferences: Editare preferenze
   edit_profile: Editare il mio profilo
   logout: Disconnessione
+  one_time_password: Autenticazione a due fattori
   title: Il mio account
