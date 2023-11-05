@@ -32,7 +32,7 @@ module Schematics
             password: 'Azerty1234?!',
             first_name: 'John',
             last_name: 'Doe',
-            otp_last_at: 1,
+            otp_last_at: 1.year.ago.to_i,
             role:
           )
         end
