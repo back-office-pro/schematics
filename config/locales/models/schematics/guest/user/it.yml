@@ -1,0 +1,6 @@
+---
+it:
+  activemodel:
+    attributes:
+      schematics/guest/user:
+        otp_attempt: Codice
