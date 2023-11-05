@@ -4,11 +4,14 @@ module Core
   module Sessions
     class Impersonate
       include Schematics::Interactable
-      delegate :can?, to: :ability, private: true
+      delegate :cannot?, to: :ability, private: true
       delegate :ability, :resource_params, to: :context, private: true
 
       def call
-        context.user ||= user if can?(:impersonate, user)
+        return if cannot?(:impersonate, user)
+
+        context.user = user
+        context.otp_token = nil
       end
 
       private

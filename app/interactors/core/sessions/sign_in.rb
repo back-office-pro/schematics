@@ -4,10 +4,12 @@ module Core
   module Sessions
     class SignIn
       include Schematics::Interactable
-      delegate :user, :cookies, :resource_params, to: :context, private: true
+      delegate :user, :otp_token, :cookies, :resource_params, to: :context, private: true
 
       def call
         fail! unless user
+
+        return if otp_token
 
         context.current_session_id = session.id
         context.jwt = JWT::AuthToken.encode(session.auth_token)
