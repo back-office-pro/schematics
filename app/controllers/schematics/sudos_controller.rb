@@ -8,7 +8,7 @@ module Schematics
 
     def create
       result = Sudos::Create.call(session: current_session, user: current_user, resource_params:)
-      respond_with result, location: -> { return_to_path.tap { session.delete(:return_to) } }
+      respond_with result, location: -> { return_to_path }
     end
 
     private
@@ -16,7 +16,5 @@ module Schematics
     def model_class = ::User
 
     def permitted_params = %i[password]
-
-    def return_to_path = session.fetch(:return_to, root_path)
   end
 end

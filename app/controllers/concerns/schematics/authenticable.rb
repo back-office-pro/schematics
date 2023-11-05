@@ -56,9 +56,12 @@ module Schematics
     end
 
     def logout_user!
-      @return_to_path = session[:return_to]
-      reset_session
+      session.delete(:current_session_id)
       cookies.delete(:auth_token)
     end
+
+    def return_to_path = session
+      .fetch(:return_to, schematics.root_path)
+      .tap { session.delete(:return_to) }
   end
 end
