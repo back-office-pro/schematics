@@ -21,6 +21,10 @@ module Schematics
       def preferences = {}
 
       def role = ::Role.new(permissions:)
+
+      def provisioning_uri(*)
+        nil
+      end
     end
   end
 end
