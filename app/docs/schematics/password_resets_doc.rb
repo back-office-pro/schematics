@@ -6,7 +6,7 @@ module Schematics
 
     api :create, 'Create a password reset request' do
       data 'user[email]', ::String, required: true
-      response 204, 'Success', :json
+      response 201, 'Success', :json
       response 422, 'Unprocessable entity', :json
     end
 
