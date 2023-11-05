@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'OneTimePasswords' do
-  include_context 'with authenticated user'
-
   describe 'GET #show' do
+    include_context 'with authenticated user'
+  
     let(:do_request) { get(one_time_passwords_path, headers:) }
 
     before { do_request }
@@ -14,8 +14,10 @@ RSpec.describe 'OneTimePasswords' do
     its(:body) { is_expected.to eq('null') }
   end
 
-  describe 'GET #new' do
-    let(:do_request) { get(new_one_time_passwords_path, headers:) }
+  describe 'GET #edit' do
+    include_context 'with authenticated user'
+  
+    let(:do_request) { get(edit_one_time_passwords_path, headers:) }
     let(:accept_header) { 'text/html' }
 
     before { do_request }
@@ -24,7 +26,42 @@ RSpec.describe 'OneTimePasswords' do
   end
 
   describe 'POST #create' do
+    include_context 'with unauthenticated user'
+  
     let(:do_request) { post(one_time_passwords_path, params:, headers:) }
+    let(:params) { { user: { otp_token:, otp_attempt: } } }
+
+    before { do_request }
+
+    context 'when attempt is correct' do
+      let(:otp_token) { user.generate_token_for(:one_time_password) }
+      let(:otp_attempt) { user.otp_code }
+      let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+
+      it { is_expected.to have_http_status(:success) }
+      it { expect(json_response).to eq('auth_token' => auth_token) }
+    end
+
+    context 'when attempt is wrong' do
+      let(:otp_token) { user.generate_token_for(:one_time_password) }
+      let(:otp_attempt) { 'abcd' }
+      let(:expected_response) do
+        {
+          'errors' => [
+            I18n.t('schematics.one_time_passwords.update.failure')
+          ]
+        }
+      end
+
+      it { is_expected.to have_http_status(:unauthorized) }
+      its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
+    end
+  end
+
+  describe 'PUT #update' do
+    include_context 'with authenticated user'
+  
+    let(:do_request) { put(one_time_passwords_path, params:, headers:) }
     let(:params) { { user: { otp_attempt: } } }
 
     before { do_request }
@@ -32,8 +69,8 @@ RSpec.describe 'OneTimePasswords' do
     context 'when attempt is correct' do
       let(:otp_attempt) { user.otp_code }
 
-      it { is_expected.to have_http_status(:created) }
-      its(:body) { is_expected.to eq('null') }
+      it { is_expected.to have_http_status(:no_content) }
+      its(:body) { is_expected.to be_blank }
     end
 
     context 'when attempt is wrong' do
@@ -41,7 +78,7 @@ RSpec.describe 'OneTimePasswords' do
       let(:expected_response) do
         {
           'errors' => [
-            I18n.t('schematics.one_time_passwords.create.failure')
+            I18n.t('schematics.one_time_passwords.update.failure')
           ]
         }
       end
@@ -52,6 +89,8 @@ RSpec.describe 'OneTimePasswords' do
   end
 
   describe 'DELETE #destroy' do
+    include_context 'with authenticated user'
+  
     let(:do_request) { delete(one_time_passwords_path, headers:) }
 
     before { do_request }

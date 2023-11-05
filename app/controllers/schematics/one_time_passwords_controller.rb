@@ -61,12 +61,18 @@ module Schematics
 
     def model_class = ::User
 
-    def permitted_params = %i[otp_attempt]
+    def permitted_params = %i[otp_token otp_attempt remember_me]
+
+    def resource_defaults = { remember_me: session[:remember_me] }
+
+    def otp_token
+      session[:otp_token] || resource_params[:otp_token]
+    end
 
     def set_user
       @user = model_class
               .with_role
-              .find_by_token_for!(:one_time_password, session[:otp_token])
+              .find_by_token_for!(:one_time_password, otp_token)
     end
   end
 end
