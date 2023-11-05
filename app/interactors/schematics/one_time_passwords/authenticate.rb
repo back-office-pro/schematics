@@ -2,7 +2,7 @@
 
 module Schematics
   module OneTimePasswords
-    class Update
+    class Authenticate
       include Interactable
       delegate :user, :resource_params, to: :context, private: true
 
