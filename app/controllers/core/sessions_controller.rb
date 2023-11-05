@@ -15,9 +15,15 @@ class SessionsController < Schematics::ResourcesController
     )
     respond_with do |format|
       if result.success?
-        session[:current_session_id] = result.current_session_id
-        format.html { redirect_to return_to_path, notice: t(result.message) }
-        format.json { render json: { auth_token: result.jwt } }
+        if result.otp_token
+          session[:otp_token] = result.otp_token
+          format.html { redirect_to schematics.new_one_time_passwords_path, notice: t('.challenge') } # rubocop:disable Layout/LineLength
+          format.json { render json: { otp_token: result.otp_token } }
+        else
+          session[:current_session_id] = result.current_session_id
+          format.html { redirect_to return_to_path, notice: t(result.message) }
+          format.json { render json: { auth_token: result.jwt } }
+        end
       else
         format.html do
           flash.now[:alert] = t(result.message)
