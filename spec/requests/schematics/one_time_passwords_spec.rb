@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'OneTimePasswords' do
   describe 'GET #show' do
     include_context 'with authenticated user'
-  
+
     let(:do_request) { get(one_time_passwords_path, headers:) }
 
     before { do_request }
@@ -16,7 +16,7 @@ RSpec.describe 'OneTimePasswords' do
 
   describe 'GET #edit' do
     include_context 'with authenticated user'
-  
+
     let(:do_request) { get(edit_one_time_passwords_path, headers:) }
     let(:accept_header) { 'text/html' }
 
@@ -27,7 +27,7 @@ RSpec.describe 'OneTimePasswords' do
 
   describe 'POST #create' do
     include_context 'with unauthenticated user'
-  
+
     let(:do_request) { post(one_time_passwords_path, params:, headers:) }
     let(:params) { { user: { otp_token:, otp_attempt: } } }
 
@@ -60,7 +60,7 @@ RSpec.describe 'OneTimePasswords' do
 
   describe 'PUT #update' do
     include_context 'with authenticated user'
-  
+
     let(:do_request) { put(one_time_passwords_path, params:, headers:) }
     let(:params) { { user: { otp_attempt: } } }
 
@@ -90,7 +90,7 @@ RSpec.describe 'OneTimePasswords' do
 
   describe 'DELETE #destroy' do
     include_context 'with authenticated user'
-  
+
     let(:do_request) { delete(one_time_passwords_path, headers:) }
 
     before { do_request }
