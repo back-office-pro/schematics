@@ -83,5 +83,29 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       it { expect(cookies[:auth_token]).to be_nil }
       its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
     end
+
+    context 'when impersonating with admin role' do
+      include_context 'with authenticated user'
+      include_context 'with admin role'
+
+      let(:role) { admin_role }
+      let(:email) { other_user.email }
+      let(:password) { nil }
+      let(:remember_me) { nil }
+      let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role: other_role) }
+      let(:other_role) do
+        Role.create!(
+          name: 'Manager',
+          permissions: [Permission.create!(action: 'index', model: 'Import')]
+        )
+      end
+      let(:other_auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+
+      before { [other_user, do_request] }
+
+      it { is_expected.to have_http_status(:success) }
+      it { expect(json_response).to eq('auth_token' => other_auth_token) }
+      it { expect(cookies[:auth_token]).to be_nil }
+    end
   end
 end
