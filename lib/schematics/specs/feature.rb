@@ -32,21 +32,25 @@ module Schematics
             password: 'Azerty1234?!',
             first_name: 'John',
             last_name: 'Doe',
+            otp_last_at: 1,
             role:
           )
         end
-        let(:login) do
+        let(:login_with_2fa) do
           visit login_path
           fill_in ::User.human_attribute_name('email'), with: user.email
           fill_in ::User.human_attribute_name('password'), with: 'Azerty1234?!'
           click_on t('schematics.application.button.confirm')
-          is_expected.to have_text t('sessions.create.success')
+          is_expected.to have_text t('sessions.create.challenge')
+          fill_in ::User.human_attribute_name('otp_attempt'), with: user.otp_code
+          click_on t('schematics.application.button.confirm')
+          is_expected.to have_text t('schematics.one_time_passwords.create.success')
         end
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
           Configuration.instance.update!(available_locales: I18n.available_locales.map(&:to_s))
-          [record, role, login]
+          [record, role, login_with_2fa]
         end
 
         if can?(:index)
