@@ -14,7 +14,7 @@ module Core
 
       private
 
-      def user = ::User.authenticate_by(email:, password:)
+      memoize def user = ::User.authenticate_by(email:, password:)
 
       def otp_token
         generate_token_for(:one_time_password) if otp_enabled?
