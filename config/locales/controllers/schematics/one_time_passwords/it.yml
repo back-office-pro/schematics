@@ -4,7 +4,10 @@ it:
     one_time_passwords:
       create:
         failure: Il codice non è valido
-        success: L'autenticazione a due fattori è stata configurata correttamente
+        success: Connesso!
       destroy:
         failure: Si è verificato un errore
         success: L'autenticazione a due fattori è stata disabilitata correttamente
+      update:
+        failure: Il codice non è valido
+        success: L'autenticazione a due fattori è stata configurata correttamente

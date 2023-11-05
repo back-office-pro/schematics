@@ -4,7 +4,10 @@ en:
     one_time_passwords:
       create:
         failure: The code is invalid
-        success: Two-factor authentication was successfully configured
+        success: Logged in!
       destroy:
         failure: An error occurred
         success: Two-factor authentication was successfully deactivated
+      update:
+        failure: The code is invalid
+        success: Two-factor authentication was successfully configured

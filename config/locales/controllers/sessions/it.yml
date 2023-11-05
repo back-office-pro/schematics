@@ -2,5 +2,6 @@
 it:
   sessions:
     create:
+      challenge: Fornisci il tuo codice di autenticazione a due fattori
       failure: L'indirizzo e-mail o la password non sono validi
       success: Connesso!
