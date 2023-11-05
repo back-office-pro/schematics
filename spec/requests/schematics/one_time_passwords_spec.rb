@@ -27,22 +27,27 @@ RSpec.describe 'OneTimePasswords' do
     include_context 'with unauthenticated user'
 
     let(:do_request) { post(one_time_passwords_path, params:, headers:) }
-    let(:params) { { user: { otp_token:, otp_attempt: } } }
+    let(:params) { { user: { otp_token:, otp_attempt:, remember_me: } } }
 
     before { do_request }
 
     context 'when attempt is correct' do
       let(:otp_token) { user.generate_token_for(:one_time_password) }
       let(:otp_attempt) { user.otp_code }
+      let(:remember_me) { true }
       let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+
+      after { cookies.delete(:auth_token) }
 
       it { is_expected.to have_http_status(:success) }
       it { expect(json_response).to eq('auth_token' => auth_token) }
+      it { expect(cookies[:auth_token]).not_to be_nil }
     end
 
     context 'when attempt is wrong' do
       let(:otp_token) { user.generate_token_for(:one_time_password) }
       let(:otp_attempt) { 'abcd' }
+      let(:remember_me) { false }
       let(:expected_response) do
         {
           'errors' => [
@@ -52,6 +57,7 @@ RSpec.describe 'OneTimePasswords' do
       end
 
       it { is_expected.to have_http_status(:unauthorized) }
+      it { expect(cookies[:auth_token]).to be_nil }
       its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
     end
   end
