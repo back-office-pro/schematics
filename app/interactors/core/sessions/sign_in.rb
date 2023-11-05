@@ -9,11 +9,13 @@ module Core
       def call
         fail! unless user
 
-        return if otp_token
-
-        context.current_session_id = session.id
-        context.jwt = JWT::AuthToken.encode(session.auth_token)
-        cookies.permanent.encrypted[:auth_token] = cookie if remember_me?
+        if otp_token
+          context.message = '.challenge'
+        else
+          context.current_session_id = session.id
+          context.jwt = JWT::AuthToken.encode(session.auth_token)
+          cookies.permanent.encrypted[:auth_token] = cookie if remember_me?
+        end
       end
 
       private
