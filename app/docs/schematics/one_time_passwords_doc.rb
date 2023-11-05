@@ -12,9 +12,9 @@ module Schematics
     api :create, 'Unlock two-factor session' do
       data 'user[otp_token]', ::String, required: true
       data 'user[otp_attempt]', ::String, required: true
-      response 204, 'Success', :json
+      response 201, 'Success', :json
       response 400, 'Bad Request', :json
-      response 422, 'Unprocessable entity', :json
+      response 401, 'Not Authorized', :json
     end
 
     api :update, 'Update current user 2FA setup' do
