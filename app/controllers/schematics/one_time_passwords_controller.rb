@@ -5,7 +5,6 @@ module Schematics
     include Fillable
 
     skip_before_action :authenticate_user!, only: %i[new create]
-    before_action :set_user, only: %i[new create]
     before_action :require_sudo!, only: %i[show edit]
     layout 'schematics/jumbotron', only: %i[new create]
 
@@ -19,11 +18,14 @@ module Schematics
       end
     end
 
-    def new; end
+    def new
+      @user = model_class.find_by_token_for!(:one_time_password, session[:otp_token])
+    end
 
     def edit; end
 
     def create
+      @user = model_class.find_by_token_for!(:one_time_password, resource_params[:otp_token])
       result = OneTimePasswords::Create.call(
         user: @user,
         session: current_session,
@@ -57,22 +59,17 @@ module Schematics
 
     private
 
-    def index_path = root_path
+    def index_path
+      schematics.root_path
+    end
 
     def model_class = ::User
 
     def permitted_params = %i[otp_token otp_attempt remember_me]
 
-    def resource_defaults = { remember_me: session[:remember_me] }
-
-    def otp_token
-      session[:otp_token] || resource_params[:otp_token]
-    end
-
-    def set_user
-      @user = model_class
-              .with_role
-              .find_by_token_for!(:one_time_password, otp_token)
-    end
+    def resource_defaults = {
+      otp_token: session[:otp_token],
+      remember_me: session[:session_remember_me]
+    }
   end
 end
