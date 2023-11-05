@@ -17,7 +17,7 @@ class SessionsController < Schematics::ResourcesController
       if result.success?
         if result.otp_token
           session[:otp_token] = result.otp_token
-          session[:remember_me] = resource_params[:remember_me]
+          session[:session_remember_me] = resource_params[:remember_me]
           format.html { redirect_to schematics.new_one_time_passwords_path, notice: t(result.message) } # rubocop:disable Layout/LineLength
           format.json { render json: { otp_token: result.otp_token } }
         else
