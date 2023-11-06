@@ -9,7 +9,7 @@ Schematics::Engine.routes.draw do
     draw :exceptions
     get 'sudo', to: 'sudos#new', as: :sudo
     resource :preferences, only: %i[edit update]
-    resource :one_time_passwords, only: %i[show new create destroy]
+    resource :one_time_passwords, only: %i[show edit new update create destroy]
     resource :profile, only: %i[edit update], controller: :profile
     resources :password_resets, only: %i[new create edit update], param: :token
     resources :sudos, only: :create

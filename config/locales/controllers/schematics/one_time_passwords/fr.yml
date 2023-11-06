@@ -4,7 +4,10 @@ fr:
     one_time_passwords:
       create:
         failure: Le code est invalide
-        success: L'authentification à deux facteurs a été configurée avec succès
+        success: Connecté !
       destroy:
         failure: Une erreur est survenue
         success: L'authentification à deux facteurs a été désactivée avec succès
+      update:
+        failure: Le code est invalide
+        success: L'authentification à deux facteurs a été configurée avec succès

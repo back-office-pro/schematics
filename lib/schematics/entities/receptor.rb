@@ -23,7 +23,7 @@ module Schematics
           elements = [id_attribute, *elements, created_at_attribute] if with_id_and_created_at_attrs
           elements = elements.public_send(predicate, Behaviours.const_get(constant))
           case constant
-          when :Migratable
+          when :Migratable, :Validatable
             elements
           when :Fillable
             elements

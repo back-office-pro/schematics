@@ -2,6 +2,7 @@
 
 class User < Schematics::ApplicationRecord
   PASSWORD_RESET_TOKEN_DURATION = 24.hours.freeze
+  ONE_TIME_PASSWORD_DURATION = 10.minutes.freeze
 
   attribute :time_zone, default: -> { ::Configuration.time_zone }
   attribute :locale, default: -> { ::Configuration.locale }
@@ -14,6 +15,10 @@ class User < Schematics::ApplicationRecord
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_TOKEN_DURATION do
     password_salt&.last(10)
+  end
+
+  generates_token_for :one_time_password, expires_in: ONE_TIME_PASSWORD_DURATION do
+    otp_last_at
   end
 
   memoize def online? = sessions

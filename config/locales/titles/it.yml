@@ -22,8 +22,10 @@ it:
         schema_error: Errore dello schema
       one_time_passwords:
         create: Autenticazione a due fattori
+        edit: Configurare l'autenticazione a due fattori
         new: Autenticazione a due fattori
-        show: Autenticazione a due fattori
+        show: Codici di ripristino dell'autenticazione a due fattori
+        update: Configurare l'autenticazione a due fattori
       password_resets:
         create: Reimpostazione della password
         edit: Nuova password

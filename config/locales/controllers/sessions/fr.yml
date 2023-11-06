@@ -2,5 +2,6 @@
 fr:
   sessions:
     create:
+      challenge: Veuillez fournir votre code d'authentification à deux facteurs
       failure: L'e-mail ou le mot de passe est invalide
       success: Connecté !

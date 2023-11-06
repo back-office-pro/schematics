@@ -18,4 +18,5 @@ RSpec.describe Schematics::Guest::User do
   its(:locale) { is_expected.to eq('en') }
   its(:time_zone) { is_expected.to eq('UTC') }
   its(:role) { is_expected.to be_a(Role) }
+  its(:provisioning_uri) { is_expected.to be_nil }
 end

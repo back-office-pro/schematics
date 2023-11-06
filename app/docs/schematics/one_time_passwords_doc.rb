@@ -9,9 +9,19 @@ module Schematics
       response 401, 'Not Authorized', :json
     end
 
-    api :create, 'Create current user 2FA setup' do
+    api :create, 'Unlock two-factor session' do
+      data 'user[otp_token]', ::String, required: true
+      data 'user[otp_attempt]', ::String, required: true
+      data 'user[remember_me]', 'boolean'
+      response 201, 'Success', :json
+      response 400, 'Bad Request', :json
+      response 401, 'Not Authorized', :json
+    end
+
+    api :update, 'Update current user 2FA setup' do
       data 'user[otp_attempt]', ::String, required: true
       response 204, 'Success', :json
+      response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
       response 422, 'Unprocessable entity', :json
     end
