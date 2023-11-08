@@ -3,7 +3,7 @@
 module Schematics
   module HotkeysModal
     class Component < ApplicationComponent
-      ALPHABET = [*'0'..'9', *'a'..'z']
+      ALPHABET = [*'1'..'9', *'a'..'z']
                  .without('h', 's')
                  .freeze
 
