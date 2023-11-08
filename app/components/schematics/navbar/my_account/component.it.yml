@@ -3,6 +3,7 @@ it:
   admin_zone: Area di amministrazione
   edit_preferences: Editare preferenze
   edit_profile: Editare il mio profilo
+  hotkeys: Scorciatoie da tastiera
   logout: Disconnessione
   one_time_passwords: Autenticazione a due fattori
   title: Il mio account

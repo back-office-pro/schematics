@@ -32,6 +32,9 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start
     = link_to one_time_passwords_path, class: 'dropdown-item' do
       = fa_icon :mobile_screen, class: 'fa-fw me-3'
       = t('.one_time_passwords')
+    button.dropdown-item data-bs-toggle='modal' data-bs-target='#hotkeys-modal'
+      = fa_icon :keyboard, class: 'fa-fw me-3'
+      = t('.hotkeys')
     - if can?(:read, :admin_dashboard)
       = link_to admin_path, class: 'dropdown-item text-danger' do
         = fa_icon :shield_alt, class: 'fa-fw me-3'
