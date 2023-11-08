@@ -4,6 +4,7 @@ doctype html
     = turbo_stream_from current_user
     = render Schematics::Toast::Component.with_collection(flash.to_a)
     = render Schematics::SearchBarModal::Component.new
+    = render Schematics::HotkeysModal::Component.new
     = render Schematics::Layout::Component.new do
       = yield
     = yield :charts_js
