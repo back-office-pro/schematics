@@ -7,6 +7,8 @@ module Schematics
       option :text, default: -> { t('schematics.application.delete.subtitle') }
 
       def label = "#{target}-label"
+
+      def title = t('schematics.application.delete.title')
     end
   end
 end
