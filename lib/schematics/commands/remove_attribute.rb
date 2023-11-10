@@ -11,15 +11,15 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         [
-          "remove_#{attribute}_from_#{table_name.pluralize}",
-          "schema:#{name}_#{attribute}"
+          "remove_#{attribute.name}_from_#{table_name.pluralize}",
+          attribute.to_s
         ]
       )
 
       def translation_generator
         return if core?
 
-        TranslationGenerator.new(["attributes.#{name}.#{attribute}"], [], behavior: :revoke)
+        TranslationGenerator.new(["attributes.#{name}.#{attribute.name}"], [], behavior: :revoke)
       end
 
       def weight = 3

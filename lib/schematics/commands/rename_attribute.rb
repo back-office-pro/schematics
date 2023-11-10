@@ -11,7 +11,7 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         [
-          "rename_#{attribute}_to_#{target}_in_#{table_name.pluralize}"
+          "rename_#{attribute.column_name}_to_#{target.column_name}_in_#{table_name.pluralize}"
         ]
       )
 
@@ -19,8 +19,8 @@ module Schematics
         return if core?
 
         TranslationGenerator.new(
-          ["attributes.#{name}.#{target}"],
-          ["--rename=attributes.#{name}.#{attribute}"],
+          ["attributes.#{name}.#{target.name}"],
+          ["--rename=attributes.#{name}.#{attribute.name}"],
           behavior: :revoke
         )
       end

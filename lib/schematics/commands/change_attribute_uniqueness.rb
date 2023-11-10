@@ -9,8 +9,8 @@ module Schematics
       def generators = [
         Rails::Generators::MigrationGenerator.new(
           [
-            "change_#{attribute}_index_in_#{table_name.pluralize}",
-            "schema:#{name}_#{attribute}"
+            "change_#{attribute.column_name}_index_in_#{table_name.pluralize}",
+            attribute.to_s
           ]
         )
       ]

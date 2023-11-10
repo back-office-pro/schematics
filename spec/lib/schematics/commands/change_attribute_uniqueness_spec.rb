@@ -6,7 +6,7 @@ describe Schematics::Commands::ChangeAttributeUniqueness do
   include_context 'with custom generated attribute'
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
-  let(:attribute) { 'first_name' }
+  let(:attribute) { Schematics::Attributes::String.new(entity:, name: 'first_name') }
 
   its(:to_s) { is_expected.to eq('Change first_name attribute uniqueness of Client') }
   its(:weight) { is_expected.to eq(3) }

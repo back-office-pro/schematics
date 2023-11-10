@@ -6,7 +6,7 @@ describe Schematics::Commands::ChangeAttribute do
   include_context 'with custom generated attribute'
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
-  let(:attribute) { 'first_name' }
+  let(:attribute) { Schematics::Attributes::String.new(entity:, name: 'first_name') }
   let(:target) { 'string' }
 
   its(:to_s) { is_expected.to eq('Change attribute first_name of Client to string type') }

@@ -75,7 +75,7 @@ module Schematics
     def change_attribute_uniqueness_command(entity, current_attribute, new_attribute)
       return if current_attribute.unique? == new_attribute.unique?
 
-      Commands::ChangeAttributeUniqueness.new(entity:, attribute: new_attribute.name)
+      Commands::ChangeAttributeUniqueness.new(entity:, attribute: new_attribute)
     end
 
     def change_attribute_command(entity, current_attribute, new_attribute)
@@ -83,7 +83,7 @@ module Schematics
 
       Commands::ChangeAttribute.new(
         entity:,
-        attribute: new_attribute.name,
+        attribute: new_attribute,
         target: current_attribute.database_type
       )
     end
@@ -93,22 +93,22 @@ module Schematics
 
       Commands::RenameAttribute.new(
         entity:,
-        attribute: current_attribute.name,
-        target: new_attribute.name
+        attribute: current_attribute,
+        target: new_attribute
       )
     end
 
     def rename_entity_command(entity, other_entity, target)
       return if entity.name == other_entity.name
 
-      Commands::RenameEntity.new(entity:, attribute: other_entity.name, target:)
+      Commands::RenameEntity.new(entity:, attribute: other_entity, target:)
     end
 
     def remove_attribute_commands(entity, new_entity)
       entity
         .attributes
         .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
-        .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute: attribute.name) }
+        .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute:) }
     end
 
     def add_action_permission_commands(entity, current_entity)
@@ -249,7 +249,7 @@ module Schematics
         .attributes
         .map do |attribute|
           current_attribute = current_entity.attributes.find { _1.id == attribute.id }
-          next Commands::AddAttribute.new(entity:, attribute: attribute.name) unless current_attribute # rubocop:disable Layout/LineLength
+          next Commands::AddAttribute.new(entity:, attribute:) unless current_attribute
 
           [
             rename_attribute_command(entity, current_attribute, attribute),

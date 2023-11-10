@@ -23,7 +23,11 @@ module Schematics
 
       def generators = []
 
-      def to_s = human(name: name.humanize, attribute:, target:)
+      def to_s = human(
+        name: name.humanize,
+        attribute: attribute.try(:name) || attribute,
+        target: target.try(:name) || target
+      )
 
       def weight = 1
 

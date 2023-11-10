@@ -7,7 +7,7 @@ describe Schematics::Commands::RenameEntity do
 
   let(:schema) { Schematics::Schema.new }
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'prospect') }
-  let(:attribute) { 'client' }
+  let(:attribute) { Schematics::Entities::Entity.new(schema:, name: 'client') }
   let(:target) { nil }
 
   its(:to_s) { is_expected.to eq('Rename the entity Prospect to client') }
