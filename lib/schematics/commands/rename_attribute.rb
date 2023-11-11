@@ -9,11 +9,16 @@ module Schematics
     class RenameAttribute < Command
       def generators = [migration_generator, translation_generator].compact
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "rename_#{attribute.column_name}_to_#{target.column_name}_in_#{table_name.pluralize}"
-        ]
-      )
+      def migration_generator
+        case attribute
+        when Behaviours::Migratable
+          Rails::Generators::MigrationGenerator.new(
+            [
+              "rename_#{attribute.column_name}_to_#{target.column_name}_in_#{table_name.pluralize}"
+            ]
+          )
+        end
+      end
 
       def translation_generator
         return if core?

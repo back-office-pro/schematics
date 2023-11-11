@@ -6,14 +6,21 @@ require 'rails/generators/rails/migration/migration_generator'
 module Schematics
   module Commands
     class ChangeAttribute < Command
-      def generators = [
-        Rails::Generators::MigrationGenerator.new(
+      def generators
+        case attribute
+        when Behaviours::Migratable
           [
-            "change_#{attribute.column_name}_column_#{target}_in_#{table_name.pluralize}",
-            attribute.to_s
+            Rails::Generators::MigrationGenerator.new(
+              [
+                "change_#{attribute.column_name}_column_#{target}_in_#{table_name.pluralize}",
+                attribute.to_s
+              ]
+            )
           ]
-        )
-      ]
+        else
+          super
+        end
+      end
 
       def weight = 3
     end

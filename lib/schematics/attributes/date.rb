@@ -7,6 +7,7 @@ require 'active_support/time'
 module Schematics
   module Attributes
     class Date < Attribute
+      include Behaviours::Migratable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable

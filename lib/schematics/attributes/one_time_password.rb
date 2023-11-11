@@ -3,6 +3,7 @@
 module Schematics
   module Attributes
     class OneTimePassword < Attribute
+      include Behaviours::Migratable
       include Behaviours::Encryptable
 
       def database_type = 'string'

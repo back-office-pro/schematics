@@ -6,6 +6,7 @@ require 'active_support/core_ext/string/inflections'
 module Schematics
   module Attributes
     class Association < Attribute # rubocop:disable Metrics/ClassLength
+      include Behaviours::Migratable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable

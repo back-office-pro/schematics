@@ -3,6 +3,7 @@
 module Schematics
   module Attributes
     class Digest < Attribute
+      include Behaviours::Migratable
       include Behaviours::Fillable
       REGEX = /
         (?=.*\d)           # contain at least one number

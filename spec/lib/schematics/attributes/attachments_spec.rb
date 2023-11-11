@@ -10,14 +10,13 @@ describe Schematics::Attributes::Attachments do
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:database_type) { is_expected.to eq('attachment') }
+  its(:database_type) { is_expected.to eq('attachments') }
   its(:column_name) { is_expected.to eq('files') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:icon) { is_expected.to eq(:file_image) }

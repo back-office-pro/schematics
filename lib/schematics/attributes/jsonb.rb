@@ -3,6 +3,7 @@
 module Schematics
   module Attributes
     class Jsonb < Attribute
+      include Behaviours::Migratable
       include Behaviours::Fillable
       include Behaviours::Renderable
       include Behaviours::Encryptable

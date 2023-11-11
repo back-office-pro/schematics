@@ -9,7 +9,6 @@ module Schematics
       include Behaviours::Inspectable
       include Behaviours::Optionable
       include Behaviours::Nameable
-      include Behaviours::Migratable
       include Behaviours::Validatable
 
       delegate :cached?, to: :options
@@ -48,9 +47,17 @@ module Schematics
         Options::Cached
       )
 
+      def column_name = name
+
+      def database_type = type
+
       def open_api_type = ::String
 
+      def prefixed_name = "#{entity.table_name}_#{name}"
+
       def to_sql = "#{entity.table_name.pluralize}.#{column_name}"
+
+      def to_s = "schema:#{prefixed_name}"
 
       def to_str = ''
 

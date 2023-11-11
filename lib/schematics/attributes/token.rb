@@ -5,6 +5,7 @@ require 'active_support/core_ext/securerandom'
 module Schematics
   module Attributes
     class Token < Attribute
+      include Behaviours::Migratable
       include Behaviours::Renderable
       include Behaviours::Encryptable
       LENGTH = 32

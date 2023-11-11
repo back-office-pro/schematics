@@ -3,6 +3,8 @@
 module Schematics
   module Attributes
     class Timestamp < Attribute
+      include Behaviours::Migratable
+
       def database_type = 'datetime'
 
       def default = ::Time.current.to_fs(:db)

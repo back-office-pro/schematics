@@ -64,13 +64,13 @@ describe Schematics::Entities::Receptor do
   describe '#migratable_elements' do
     subject { receptor.migratable_elements.map(&:name) }
 
-    it { is_expected.to contain_exactly('subject', 'content', 'record') }
+    it { is_expected.to contain_exactly('subject', 'record') }
   end
 
   describe '#non_migratable_elements' do
     subject { receptor.non_migratable_elements.map(&:name) }
 
-    it { is_expected.to contain_exactly('participants', 'preview') }
+    it { is_expected.to contain_exactly('content', 'participants', 'preview') }
   end
 
   describe '#preloadable_elements' do
@@ -144,13 +144,13 @@ describe Schematics::Entities::Receptor do
   describe '#migratable_attributes' do
     subject { receptor.migratable_attributes.map(&:name) }
 
-    it { is_expected.to contain_exactly('subject', 'content', 'record') }
+    it { is_expected.to contain_exactly('subject', 'record') }
   end
 
   describe '#non_migratable_attributes' do
     subject { receptor.non_migratable_attributes.map(&:name) }
 
-    it { is_expected.to be_empty }
+    it { is_expected.to contain_exactly('content') }
   end
 
   describe '#preloadable_attributes' do

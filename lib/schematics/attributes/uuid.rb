@@ -5,6 +5,7 @@ require 'active_support/core_ext/securerandom'
 module Schematics
   module Attributes
     class Uuid < Attribute
+      include Behaviours::Migratable
       include Behaviours::Renderable
 
       def default = SecureRandom.uuid

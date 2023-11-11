@@ -5,6 +5,7 @@ require 'active_support/core_ext/securerandom'
 module Schematics
   module Attributes
     class Text < Attribute
+      include Behaviours::Migratable
       include Behaviours::Renderable
       include Behaviours::Multisearchable
       include Behaviours::Searchable

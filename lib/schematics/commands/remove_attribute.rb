@@ -9,12 +9,17 @@ module Schematics
     class RemoveAttribute < Command
       def generators = [migration_generator, translation_generator].compact
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "remove_#{attribute.name}_from_#{table_name.pluralize}",
-          attribute.to_s
-        ]
-      )
+      def migration_generator
+        case attribute
+        when Behaviours::Migratable
+          Rails::Generators::MigrationGenerator.new(
+            [
+              "remove_#{attribute.name}_from_#{table_name.pluralize}",
+              attribute.to_s
+            ]
+          )
+        end
+      end
 
       def translation_generator
         return if core?

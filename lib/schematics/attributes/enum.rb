@@ -3,6 +3,7 @@
 module Schematics
   module Attributes
     class Enum < Attribute
+      include Behaviours::Migratable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable

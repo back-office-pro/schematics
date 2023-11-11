@@ -3,6 +3,7 @@
 module Schematics
   module Attributes
     class Array < Attribute
+      include Behaviours::Migratable
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Fillable
