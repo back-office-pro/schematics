@@ -4,5 +4,5 @@ describe 'Production environment config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/environments/production.rb.tt',
-                  '35f08a9a63cf252c2459cec03a7c72438b3a040ac1e0e1cd243e833346288b2a'
+                  'd8bcd31ded98774a2b0303bec233e0bdcba075db8034d4cb3f5998a8785bfe49'
 end

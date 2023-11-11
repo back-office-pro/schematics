@@ -4,5 +4,5 @@ describe 'Test environment config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/environments/test.rb.tt',
-                  'a6e2ad769b375b3f20afb4c3ffe6595fa7543fb47fb30c6e4f0b89bebdefcb2d'
+                  '040fb10cc2925a65e7b2cebb41be499871f2f963424bc484d27fe8d76a411fb2'
 end
