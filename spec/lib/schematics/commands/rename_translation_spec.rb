@@ -7,6 +7,8 @@ describe Schematics::Commands::RenameTranslation do
   let(:attribute) { 'attributes.client.surname' }
   let(:target) { 'attributes.client.name' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
   its(:to_spec) { is_expected.to eq('Rename a client translation') }
   its(:weight) { is_expected.to eq(4) }
 

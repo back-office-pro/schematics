@@ -8,6 +8,8 @@ describe Schematics::Commands::RemoveAssociation do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'user' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
   its(:to_spec) { is_expected.to eq('Remove the many-to-many association between client and user') }
   its(:weight) { is_expected.to eq(3) }
 

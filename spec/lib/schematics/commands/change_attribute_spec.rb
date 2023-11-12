@@ -10,6 +10,8 @@ describe Schematics::Commands::ChangeAttribute do
   let(:type) { 'citext' }
   let(:target) { 'string' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
   its(:to_spec) { is_expected.to eq('Change first_name attribute type of client') }
   its(:weight) { is_expected.to eq(3) }
 

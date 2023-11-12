@@ -6,6 +6,8 @@ describe Schematics::Commands::AddPermission do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'create' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
   its(:to_spec) { is_expected.to eq('Add a permission create to client') }
   its(:weight) { is_expected.to eq(4) }
 

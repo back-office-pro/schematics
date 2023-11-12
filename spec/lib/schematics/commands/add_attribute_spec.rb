@@ -9,6 +9,8 @@ describe Schematics::Commands::AddAttribute do
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:type) { 'string' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
   its(:to_spec) { is_expected.to eq('Add an attribute first_name to client') }
   its(:weight) { is_expected.to eq(3) }
 
