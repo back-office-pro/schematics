@@ -6,7 +6,7 @@ describe Schematics::Commands::RemoveTranslation do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'attributes.client.name' }
 
-  its(:to_spec) { is_expected.to eq('Remove a Client translation') }
+  its(:to_spec) { is_expected.to eq('Remove a client translation') }
   its(:weight) { is_expected.to eq(4) }
 
   describe '#generators' do

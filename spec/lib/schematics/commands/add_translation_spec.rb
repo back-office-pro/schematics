@@ -6,7 +6,7 @@ describe Schematics::Commands::AddTranslation do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'attributes.client.name' }
 
-  its(:to_spec) { is_expected.to eq('Add a translation to Client') }
+  its(:to_spec) { is_expected.to eq('Add a translation to client') }
   its(:weight) { is_expected.to eq(4) }
 
   describe '#generators' do

@@ -29,7 +29,7 @@ describe Schematics::Commands::DestroyEntity do
     ]
   end
 
-  its(:to_spec) { is_expected.to eq('Remove the Assembly entity') }
+  its(:to_spec) { is_expected.to eq('Remove the assembly entity') }
   its(:weight) { is_expected.to eq(1) }
 
   describe '#generators' do

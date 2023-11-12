@@ -10,7 +10,7 @@ describe Schematics::Commands::ChangeAttribute do
   let(:type) { 'citext' }
   let(:target) { 'string' }
 
-  its(:to_spec) { is_expected.to eq('Change first_name attribute type of Client') }
+  its(:to_spec) { is_expected.to eq('Change first_name attribute type of client') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do

@@ -8,7 +8,7 @@ describe Schematics::Commands::RemoveAssociation do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'user' }
 
-  its(:to_spec) { is_expected.to eq('Remove the many-to-many association between Client and user') }
+  its(:to_spec) { is_expected.to eq('Remove the many-to-many association between client and user') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do
