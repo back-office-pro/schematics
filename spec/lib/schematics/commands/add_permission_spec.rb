@@ -6,7 +6,7 @@ describe Schematics::Commands::AddPermission do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'create' }
 
-  its(:to_s) { is_expected.to eq('Add a permission create to Client') }
+  its(:to_spec) { is_expected.to eq('Add a permission create to Client') }
   its(:weight) { is_expected.to eq(4) }
 
   describe '#generators' do

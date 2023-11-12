@@ -6,7 +6,7 @@ describe Schematics::Commands::RemovePermission do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { 'create' }
 
-  its(:to_s) { is_expected.to eq('Remove the create permission of Client') }
+  its(:to_spec) { is_expected.to eq('Remove the create permission of Client') }
   its(:weight) { is_expected.to eq(4) }
 
   describe '#generators' do

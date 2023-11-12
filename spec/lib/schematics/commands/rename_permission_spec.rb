@@ -7,7 +7,7 @@ describe Schematics::Commands::RenamePermission do
   let(:attribute) { 'create' }
   let(:target) { 'show' }
 
-  its(:to_s) { is_expected.to eq('Rename the permission create of Client to show') }
+  its(:to_spec) { is_expected.to eq('Rename the permission create of Client to show') }
   its(:weight) { is_expected.to eq(4) }
 
   describe '#generators' do
