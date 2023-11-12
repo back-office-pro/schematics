@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'action_view'
 require 'active_support/core_ext/array/access'
 require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inflections'
@@ -8,8 +9,10 @@ module Schematics
   module Entities
     # :reek:Attribute, :reek:InstanceVariableAssumption
     class Entity # rubocop:disable Metrics/ClassLength
+      include Behaviours::Specifiable
       include Behaviours::Optionable
       include Behaviours::Nameable
+      include ::ActionView::Helpers::TranslationHelper
 
       accepts_nested_attributes_for :attributes
       accepts_nested_attributes_for :virtuals
@@ -54,7 +57,10 @@ module Schematics
       end
 
       def triggers=(triggers)
-        @triggers = triggers.map(&Trigger)
+        @triggers = triggers
+                    .each_with_object(entity: self)
+                    .map(&:merge)
+                    .map(&Trigger)
       end
 
       def associations=(associations)
@@ -274,6 +280,14 @@ module Schematics
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
+
+      def spec_interpolations = {
+        name: name.pluralize,
+        descriptor: descriptor.name,
+        actions: actions
+          .map { translate(_1, scope: %i[activerecord enums permission action]) }
+          .join(', ')
+      }
     end
   end
 end
