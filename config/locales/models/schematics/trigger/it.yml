@@ -12,3 +12,4 @@ it:
           before_destroy: Prima della cancellazione
           before_save: Prima di salvare
         callback: Funzione
+        to_spec: Un(a) %{entity_name} ha un trigger **%{action}** la cui funzione è `%{callback}`

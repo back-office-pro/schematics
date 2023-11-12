@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 describe Schematics::Trigger do
-  subject { described_class.new(action:, callback:) }
+  subject { described_class.new(entity:, action:, callback:) }
+
+  let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
 
   before { allow(SecureRandom).to receive(:uuid).and_return('abcd-123e') }
 
@@ -10,6 +12,12 @@ describe Schematics::Trigger do
     let(:callback) { '$in_stock = true' }
 
     its(:method_name) { is_expected.to eq(:after_close_event_abcd_123e) }
+
+    its(:to_spec) do
+      is_expected.to eq <<~TEXT.chomp
+        A task has a **after close event** trigger which function is `$in_stock = true`
+      TEXT
+    end
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
@@ -30,6 +38,12 @@ describe Schematics::Trigger do
 
       its(:method_name) { is_expected.to eq(:after_create_abcd_123e) }
 
+      its(:to_spec) do
+        is_expected.to eq <<~TEXT.chomp
+          A task has a **after creation** trigger which function is `$in_stock = true`
+        TEXT
+      end
+
       its(:to_str) do
         is_expected.to eq <<~RUBY
           after_create :after_create_abcd_123e
@@ -46,6 +60,12 @@ describe Schematics::Trigger do
       let(:action) { 'before_create' }
 
       its(:method_name) { is_expected.to eq(:before_create_abcd_123e) }
+
+      its(:to_spec) do
+        is_expected.to eq <<~TEXT.chomp
+          A task has a **before creation** trigger which function is `$in_stock = true`
+        TEXT
+      end
 
       its(:to_str) do
         is_expected.to eq <<~RUBY

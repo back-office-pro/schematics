@@ -12,3 +12,4 @@ en:
           before_destroy: Before deletion
           before_save: Before save
         callback: Callback
+        to_spec: A %{entity_name} has a **%{action}** trigger which function is `%{callback}`
