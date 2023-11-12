@@ -12,7 +12,7 @@ describe Schematics::Commands::RenameAttribute do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Rename the attribute first_name of client to name') }
+  its(:to_spec) { is_expected.to eq('Rename the attribute first name of client to name') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do

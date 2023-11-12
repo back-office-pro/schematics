@@ -85,8 +85,8 @@ module Schematics
       action: translate(
         action,
         scope: %i[activemodel attributes schematics/trigger actions],
-        default: action.humanize
-      ).downcase
+        default: action
+      )
     )
   end
 end

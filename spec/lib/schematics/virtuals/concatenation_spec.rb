@@ -43,7 +43,7 @@ describe Schematics::Virtuals::Concatenation do
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp
-      A user has a **full_name** virtual field which function is `$first_name $profile.last_name`
+      A user has a **full name** virtual field which function is `$first_name $profile.last_name`
     TEXT
   end
 

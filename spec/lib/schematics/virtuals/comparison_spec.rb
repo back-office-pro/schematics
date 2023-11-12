@@ -41,7 +41,7 @@ describe Schematics::Virtuals::Comparison do
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp
-      A product has a **big_price** virtual field which function is `$category.vat == 10 && ($sold_at == NULL || NOW() < $sold_at)`
+      A product has a **big price** virtual field which function is `$category.vat == 10 && ($sold_at == NULL || NOW() < $sold_at)`
     TEXT
   end
 

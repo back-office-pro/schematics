@@ -5,11 +5,20 @@ module Schematics
     module Specifiable
       def to_spec = self
         .class
-        .human_attribute_name(:to_spec, **spec_interpolations)
+        .human_attribute_name(
+          :to_spec,
+          **spec_interpolations
+            .compact
+            .except(:function, :callback)
+            .transform_values(&:humanize)
+            .transform_values(&:downcase)
+            .merge(function: spec_interpolations[:function])
+            .merge(callback: spec_interpolations[:callback])
+        )
 
       protected
 
-      def spec_interpolations = { entity_name: entity.name.humanize.downcase }
+      def spec_interpolations = { entity_name: entity.name }
     end
   end
 end

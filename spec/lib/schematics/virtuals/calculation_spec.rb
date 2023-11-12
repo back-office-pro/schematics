@@ -49,7 +49,7 @@ describe Schematics::Virtuals::Calculation do
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp
-      A product has a **tax_inclusive_price** virtual field which function is `$price ** $category.vat`
+      A product has a **tax inclusive price** virtual field which function is `$price ** $category.vat`
     TEXT
   end
 
