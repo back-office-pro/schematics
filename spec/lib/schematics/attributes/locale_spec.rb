@@ -7,6 +7,7 @@ describe Schematics::Attributes::Locale do
   let(:name) { 'key' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -26,6 +27,7 @@ describe Schematics::Attributes::Locale do
   its(:input_name) { is_expected.to eq('translation[key]') }
   its(:icon) { is_expected.to eq(:language) }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A translation has a **key** attribute of type *locale*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

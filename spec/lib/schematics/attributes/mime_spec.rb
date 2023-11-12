@@ -9,6 +9,7 @@ describe Schematics::Attributes::Mime do
 
   before { allow(Mime::LOOKUP).to receive(:keys).and_return(['image/png']) }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -34,6 +35,12 @@ describe Schematics::Attributes::Mime do
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
   its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
   its(:normalization) { is_expected.to be_nil }
+
+  its(:to_spec) do
+    is_expected.to eq <<~TEXT.chomp
+      A active storage/attachment has a **content type** attribute of type *mime type*
+    TEXT
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

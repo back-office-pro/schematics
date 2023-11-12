@@ -7,6 +7,7 @@ describe Schematics::Attributes::Duration do
   let(:name) { 'duration' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -26,6 +27,7 @@ describe Schematics::Attributes::Duration do
   its(:open_api_type) { is_expected.to eq(Integer) }
   its(:input_name) { is_expected.to eq('movie[duration]') }
   its(:icon) { is_expected.to eq(:hourglass) }
+  its(:to_spec) { is_expected.to eq('A movie has a **duration** attribute of type *duration*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

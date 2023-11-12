@@ -7,6 +7,7 @@ describe Schematics::Attributes::String do
   let(:name) { 'last_name' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -32,6 +33,7 @@ describe Schematics::Attributes::String do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
+  its(:to_spec) { is_expected.to eq('A user has a **last name** attribute of type *string*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

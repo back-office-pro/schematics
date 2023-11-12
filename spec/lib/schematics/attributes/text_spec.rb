@@ -11,6 +11,7 @@ describe Schematics::Attributes::Text do
     }
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -35,6 +36,7 @@ describe Schematics::Attributes::Text do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
+  its(:to_spec) { is_expected.to eq('A entity has a **content** attribute of type *text*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

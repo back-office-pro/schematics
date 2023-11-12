@@ -7,6 +7,7 @@ describe Schematics::Attributes::Token do
   let(:name) { 'auth_token' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -25,6 +26,7 @@ describe Schematics::Attributes::Token do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:key) }
+  its(:to_spec) { is_expected.to eq('A entity has a **auth token** attribute of type *token*') }
 
   its(:validators) do
     is_expected.to eq({ uniqueness_with_deleted: { case_sensitive: true, allow_blank: true } })

@@ -7,6 +7,7 @@ describe Schematics::Attributes::Uuid do
   let(:name) { 'id' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -20,6 +21,7 @@ describe Schematics::Attributes::Uuid do
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:id_card) }
   its(:validators) { is_expected.to be_empty }
+  its(:to_spec) { is_expected.to eq('A entity has a **id** attribute of type *uuid*') }
 
   its(:available_options) do
     is_expected.to contain_exactly(

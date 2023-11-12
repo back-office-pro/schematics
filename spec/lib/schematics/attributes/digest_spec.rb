@@ -7,6 +7,7 @@ describe Schematics::Attributes::Digest do
   let(:name) { 'password' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -24,6 +25,7 @@ describe Schematics::Attributes::Digest do
   its(:default) { is_expected.to eq('Azerty1234?!') }
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }
   its(:icon) { is_expected.to eq(:key) }
+  its(:to_spec) { is_expected.to eq('A entity has a **password** attribute of type *password*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

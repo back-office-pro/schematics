@@ -12,6 +12,7 @@ describe Schematics::Attributes::Model do
     allow(schema).to receive(:entities).and_return([entity])
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -37,6 +38,7 @@ describe Schematics::Attributes::Model do
   its(:to_sql) { is_expected.to eq('permissions.model') }
   its(:to_s) { is_expected.to eq('schema:permission_model') }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A permission has a **model** attribute of type *model*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

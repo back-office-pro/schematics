@@ -7,6 +7,7 @@ describe Schematics::Attributes::Array do
   let(:name) { 'ids' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -33,6 +34,7 @@ describe Schematics::Attributes::Array do
   its(:search_column) { is_expected.to eq(:ids) }
   its(:search_predicate) { is_expected.to eq(:any) }
   its(:search_query) { is_expected.to eq(:ids_any) }
+  its(:to_spec) { is_expected.to eq('A comparison has a **ids** attribute of type *array*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

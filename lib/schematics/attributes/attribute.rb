@@ -6,6 +6,7 @@ module Schematics
   module Attributes
     # :reek:Attribute :reek:InstanceVariableAssumption
     class Attribute
+      include Behaviours::Specifiable
       include Behaviours::Inspectable
       include Behaviours::Optionable
       include Behaviours::Nameable
@@ -62,6 +63,10 @@ module Schematics
       def to_str = ''
 
       def weight = 1
+
+      protected
+
+      def spec_interpolations = super.merge(name:, type: model_name.human)
     end
   end
 end

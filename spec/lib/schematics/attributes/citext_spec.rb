@@ -7,6 +7,7 @@ describe Schematics::Attributes::Citext do
   let(:name) { 'last_name' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -36,6 +37,10 @@ describe Schematics::Attributes::Citext do
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
   its(:preload) { is_expected.to be_empty }
+
+  its(:to_spec) do
+    is_expected.to eq('A user has a **last name** attribute of type *case insensitive text*')
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

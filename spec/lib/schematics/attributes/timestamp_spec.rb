@@ -7,6 +7,7 @@ describe Schematics::Attributes::Timestamp do
   let(:name) { 'read_notifications_at' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -23,6 +24,10 @@ describe Schematics::Attributes::Timestamp do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.read_notifications_at') }
   its(:to_s) { is_expected.to eq('schema:user_read_notifications_at') }
+
+  its(:to_spec) do
+    is_expected.to eq('A user has a **read notifications at** attribute of type *timestamp*')
+  end
 
   its(:available_options) do
     is_expected.to contain_exactly(

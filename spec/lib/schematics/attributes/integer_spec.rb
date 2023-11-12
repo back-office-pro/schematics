@@ -11,6 +11,7 @@ describe Schematics::Attributes::Integer do
     }
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -33,6 +34,7 @@ describe Schematics::Attributes::Integer do
   its(:precision) { is_expected.to be_zero }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
+  its(:to_spec) { is_expected.to eq('A entity has a **price** attribute of type *integer*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -7,6 +7,7 @@ describe Schematics::Attributes::Currency do
   let(:name) { 'price' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -27,6 +28,7 @@ describe Schematics::Attributes::Currency do
   its(:input_name) { is_expected.to eq('product[price]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:money_bill_wave) }
+  its(:to_spec) { is_expected.to eq('A product has a **price** attribute of type *currency*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

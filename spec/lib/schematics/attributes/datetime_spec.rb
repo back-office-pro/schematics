@@ -7,6 +7,7 @@ describe Schematics::Attributes::Datetime do
   let(:name) { 'created_at' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -29,6 +30,7 @@ describe Schematics::Attributes::Datetime do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
+  its(:to_spec) { is_expected.to eq('A user has a **created at** attribute of type *datetime*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

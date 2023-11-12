@@ -4,6 +4,7 @@ en:
     attributes:
       schematics/attributes/attribute:
         name: Name
+        to_spec: A %{entity_name} has a **%{name}** attribute of type *%{type}*
         type: Type
     models:
       schematics/attributes/action: Action
