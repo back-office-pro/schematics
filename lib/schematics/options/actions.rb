@@ -5,6 +5,7 @@ module Schematics
     # :reek:Attribute :reek:InstanceVariableAssumption
     class Actions < Option
       include ::ActiveModel::API
+      include ::ActionView::Helpers::TranslationHelper
 
       attr_writer :collection
 
@@ -15,7 +16,7 @@ module Schematics
       def controller = 'dropdown'
 
       def collection = @collection
-        .map { [I18n.t(_1, scope: %i[activerecord enums permission action]), _1] }
+        .map { [translate(_1, scope: %i[activerecord enums permission action]), _1] }
         .sort
     end
   end
