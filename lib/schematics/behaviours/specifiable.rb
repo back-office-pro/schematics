@@ -9,7 +9,7 @@ module Schematics
 
       protected
 
-      def spec_interpolations = { entity_name: entity.name }
+      def spec_interpolations = { entity_name: entity.name.humanize.downcase }
     end
   end
 end
