@@ -7,7 +7,6 @@ module Schematics
     # :reek:Attribute
     class Command
       include ::ActiveModel::API
-      include ::ActiveModel::Naming
 
       delegate :human, to: :model_name, private: true
       delegate :name,
