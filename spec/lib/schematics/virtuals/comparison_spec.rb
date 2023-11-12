@@ -23,6 +23,7 @@ describe Schematics::Virtuals::Comparison do
   let(:function) { '$category.vat == 10 && ($sold_at == NULL || NOW() < $sold_at)' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -37,6 +38,12 @@ describe Schematics::Virtuals::Comparison do
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
   its(:allowed_variables) { is_expected.to eq(%w[price category sold_at discount_price]) }
+
+  its(:to_spec) do
+    is_expected.to eq <<~TEXT.chomp
+      A product has a **big_price** virtual field which function is `$category.vat == 10 && ($sold_at == NULL || NOW() < $sold_at)`
+    TEXT
+  end
 
   its(:to_sql) do
     is_expected.to eq <<~SQL.squish
