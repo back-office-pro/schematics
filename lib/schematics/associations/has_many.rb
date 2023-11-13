@@ -23,6 +23,8 @@ module Schematics
 
         :nullify
       end
+
+      def spec_interpolations = super.merge(entity_name: inverse_of)
     end
   end
 end

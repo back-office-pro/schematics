@@ -7,6 +7,7 @@ module Schematics
   module Associations
     # :reek:Attribute
     class Association
+      include Behaviours::Specifiable
       include Behaviours::Inspectable
       include Behaviours::Renderable
       include Behaviours::Preloadable
@@ -26,6 +27,7 @@ module Schematics
                :includes,
                :schema,
                :existing?,
+               :core?,
                to: :entity
       attr_accessor :belongs_to, :prefixed
 
@@ -68,6 +70,8 @@ module Schematics
       def scope_to_str = <<~RUBY
         scope :with_#{name}, -> { includes(#{preload}) }
       RUBY
+
+      def spec_interpolations = super.merge(name:)
     end
   end
 end

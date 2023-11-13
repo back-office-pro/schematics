@@ -21,6 +21,7 @@ describe Schematics::Associations::HasOne do
     )
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
@@ -36,6 +37,7 @@ describe Schematics::Associations::HasOne do
   its(:search_column) { is_expected.to eq(:entity_type) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:entity_i_cont) }
+  its(:to_spec) { is_expected.to eq('A schema has one **entity**') }
   its('descriptor.name') { is_expected.to eq('type') }
 
   its(:search_data) do

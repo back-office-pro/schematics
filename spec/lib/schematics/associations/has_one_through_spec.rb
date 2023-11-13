@@ -35,6 +35,7 @@ describe Schematics::Associations::HasOneThrough do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'entity')
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
@@ -50,6 +51,7 @@ describe Schematics::Associations::HasOneThrough do
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
+  its(:to_spec) { is_expected.to eq('A attribute has one **user** through **entity**') }
   its('descriptor.name') { is_expected.to eq('full_name') }
 
   its(:search_data) do

@@ -23,6 +23,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     )
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
@@ -40,6 +41,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }
+  its(:to_spec) { is_expected.to eq('A role has many **permissions**') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
