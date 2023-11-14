@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'action_view'
 require 'active_support/core_ext/array/access'
 require 'active_support/core_ext/securerandom'
 require 'active_support/core_ext/string/inflections'
@@ -12,7 +11,6 @@ module Schematics
       include Behaviours::Specifiable
       include Behaviours::Optionable
       include Behaviours::Nameable
-      include ::ActionView::Helpers::TranslationHelper
 
       accepts_nested_attributes_for :attributes
       accepts_nested_attributes_for :virtuals
