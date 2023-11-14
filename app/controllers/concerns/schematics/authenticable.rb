@@ -41,7 +41,7 @@ module Schematics
       @current_user ||= current_session.user
     end
 
-    def http_token = authenticate_with_http_token(&JWT::AuthToken.method(:decode))
+    def http_token = authenticate_with_http_token(&Session.method(:decode_auth_token))
 
     def store_location
       return unless request.get? || request.head?

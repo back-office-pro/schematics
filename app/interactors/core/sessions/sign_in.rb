@@ -12,8 +12,7 @@ module Core
         if otp_token
           context.message = '.challenge'
         else
-          context.current_session_id = session.id
-          context.jwt = JWT::AuthToken.encode(session.auth_token)
+          context.session = session
           cookies.permanent.encrypted[:auth_token] = cookie if remember_me?
         end
       end
@@ -24,7 +23,7 @@ module Core
         .new
         .cast(resource_params[:remember_me])
 
-      def cookie = { value: session.auth_token, httponly: true }
+      def cookie = { value: session.id, httponly: true }
 
       memoize def session = context
         .session

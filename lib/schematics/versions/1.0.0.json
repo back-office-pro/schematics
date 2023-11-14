@@ -849,14 +849,6 @@
     },
     "attributes": [
       {
-        "id": "2a8c0fc5-ae21-4c9f-b0a1-adb40fd29cd8",
-        "name": "auth_token",
-        "type": "token",
-        "options": {
-          "hidden": true
-        }
-      },
-      {
         "id": "128c6935-606d-4ff4-994a-8ef6868741aa",
         "name": "user_agent",
         "type": "user_agent",

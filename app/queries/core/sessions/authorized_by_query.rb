@@ -11,7 +11,7 @@ module Core
           .with_user_role_name
           .with_user_drafts
           .with_user_slugs
-          .where(auth_token:)
+          .where(id: auth_token)
           .or(active.where(id:))
           .load_async
       end

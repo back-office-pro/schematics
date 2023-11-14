@@ -41,7 +41,7 @@ RSpec.describe Core::Sessions::AuthorizedByQuery do
     end
 
     context 'when auth_token is right but session does not exist' do
-      let(:auth_token) { session.auth_token }
+      let(:auth_token) { session.id }
       let(:session_id) { nil }
       let(:time) { Time.current }
 
@@ -49,7 +49,7 @@ RSpec.describe Core::Sessions::AuthorizedByQuery do
     end
 
     context 'when auth_token is right and session is active' do
-      let(:auth_token) { session.auth_token }
+      let(:auth_token) { session.id }
       let(:session_id) { session.id }
       let(:time) { Time.current }
 
@@ -57,7 +57,7 @@ RSpec.describe Core::Sessions::AuthorizedByQuery do
     end
 
     context 'when auth_token is right but session has expired' do
-      let(:auth_token) { session.auth_token }
+      let(:auth_token) { session.id }
       let(:session_id) { session.id }
       let(:time) { Time.current - Session::ACTIVE_DELAY }
 

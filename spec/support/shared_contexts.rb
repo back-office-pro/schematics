@@ -18,7 +18,7 @@ RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
   let(:session) { Session.create!(user:) }
-  let(:auth_token) { JWT::AuthToken.encode(session.auth_token) }
+  let(:auth_token) { session.signed_id }
   let(:headers) do
     {
       'Accept' => accept_header,

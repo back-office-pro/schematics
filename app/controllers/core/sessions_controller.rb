@@ -21,9 +21,9 @@ class SessionsController < Schematics::ResourcesController
           format.html { redirect_to schematics.new_one_time_passwords_path, notice: t(result.message) } # rubocop:disable Layout/LineLength
           format.json { render json: { otp_token: result.otp_token } }
         else
-          session[:current_session_id] = result.current_session_id
+          session[:current_session_id] = result.session.id
           format.html { redirect_to return_to_path, notice: t(result.message) }
-          format.json { render json: { auth_token: result.jwt } }
+          format.json { render json: { auth_token: result.session.signed_id } }
         end
       else
         format.html do

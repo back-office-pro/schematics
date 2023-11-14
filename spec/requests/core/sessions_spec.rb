@@ -16,7 +16,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { 'Azerty1234?!' }
       let(:remember_me) { true }
-      let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+      let(:auth_token) { Session.last.signed_id }
 
       before { do_request }
 
@@ -57,7 +57,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { nil }
       let(:remember_me) { nil }
-      let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+      let(:auth_token) { Session.last.signed_id }
 
       before do
         Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new({ info: { email: } })
@@ -99,7 +99,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
           permissions: [Permission.create!(action: 'index', model: 'Import')]
         )
       end
-      let(:other_auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+      let(:other_auth_token) { Session.last.signed_id }
 
       before { [other_user, do_request] }
 

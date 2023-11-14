@@ -34,9 +34,9 @@ module Schematics
       )
       respond_with do |format|
         if result.success?
-          session[:current_session_id] = result.current_session_id
+          session[:current_session_id] = result.session.id
           format.html { redirect_to return_to_path, notice: t(result.message) }
-          format.json { render json: { auth_token: result.jwt } }
+          format.json { render json: { auth_token: result.session.signed_id } }
         else
           format.html do
             flash.now[:alert] = t(result.message)

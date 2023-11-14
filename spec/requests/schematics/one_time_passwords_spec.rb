@@ -35,7 +35,7 @@ RSpec.describe 'OneTimePasswords' do
       let(:otp_token) { user.generate_token_for(:one_time_password) }
       let(:otp_attempt) { user.otp_code }
       let(:remember_me) { true }
-      let(:auth_token) { JWT::AuthToken.encode(Session.last.auth_token) }
+      let(:auth_token) { Session.last.signed_id }
 
       after { cookies.delete(:auth_token) }
 

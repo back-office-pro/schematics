@@ -27,7 +27,7 @@ module Schematics
 
         let(:record) { default.tap(&:save!) }
         let(:route_key) { [model_class.model_name.singular_route_key.to_sym] }
-        let(:auth_token) { JWT::AuthToken.encode(session.auth_token) }
+        let(:auth_token) { session.signed_id }
         let(:headers) { { 'Authorization' => "Bearer #{auth_token}" } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys

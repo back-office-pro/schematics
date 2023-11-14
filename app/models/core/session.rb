@@ -13,6 +13,12 @@ class Session < Schematics::ApplicationRecord
 
   after_create_commit :sudo!
 
+  class << self
+    def decode_auth_token(token, *)
+      signed_id_verifier.verified(token, purpose: name.underscore)
+    end
+  end
+
   def login!(user)
     case user
     when self.user
