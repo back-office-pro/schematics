@@ -15,7 +15,7 @@ describe Schematics::Trigger do
 
     its(:to_spec) do
       is_expected.to eq <<~TEXT.chomp
-        A task has a **after close event** trigger which function is `$in_stock = true`
+        A task has a **after close** trigger which function is `$in_stock = true`
       TEXT
     end
 

@@ -85,7 +85,7 @@ module Schematics
       action: translate(
         action,
         scope: %i[activemodel attributes schematics/trigger actions],
-        default: action
+        default: action.delete_suffix('_event')
       )
     )
   end
