@@ -12,8 +12,7 @@ module Schematics
             .except(:function, :callback)
             .transform_values(&:humanize)
             .transform_values(&:downcase)
-            .merge(function: spec_interpolations[:function])
-            .merge(callback: spec_interpolations[:callback])
+            .merge(spec_interpolations.slice(:function, :callback))
         )
 
       protected
