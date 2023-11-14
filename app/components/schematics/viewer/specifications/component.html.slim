@@ -1,0 +1,56 @@
+.card.shadow-sm.animate__animated.animate__zoomIn
+  .card-header.px-2.py-1
+    = render Schematics::CardHeading::Component.new(icon:, title:)
+  .card-body.p-0
+    - entities.each do |entity|
+      ul.list-group.list-group-striped
+        li.list-group-item
+          = fa_icon entity.icon, class: 'fa-fw me-2'
+          == interpolate(entity)
+        - entity.options.each do |(key, value)|
+          li.list-group-item
+            = fa_icon :gear, class: 'fa-fw invisible me-2'
+            = fa_icon :gear, class: 'fa-fw me-2'
+            == Schematics::Options::Wrapper.human_attribute_name(key)
+            == value
+        - entity.attributes.each do |attribute|
+          li.list-group-item
+            = fa_icon attribute.icon, class: 'fa-fw invisible me-2'
+            = fa_icon attribute.icon, class: 'fa-fw me-2'
+            == interpolate(attribute)
+          - attribute.options.each do |(key, value)|
+            li.list-group-item
+              = fa_icon :gear, class: 'fa-fw invisible me-2'
+              = fa_icon :gear, class: 'fa-fw invisible me-2'
+              = fa_icon :gear, class: 'fa-fw me-2'
+              == Schematics::Options::Wrapper.human_attribute_name(key)
+              == value
+        - entity.virtuals.each do |virtual|
+          li.list-group-item
+            = fa_icon virtual.icon, class: 'fa-fw invisible me-2'
+            = fa_icon virtual.icon, class: 'fa-fw me-2'
+            == interpolate(virtual)
+          - virtual.options.each do |(key, value)|
+            li.list-group-item
+              = fa_icon :gear, class: 'fa-fw invisible me-2'
+              = fa_icon :gear, class: 'fa-fw invisible me-2'
+              = fa_icon :gear, class: 'fa-fw me-2'
+              == Schematics::Options::Wrapper.human_attribute_name(key)
+              == value
+        - entity.associations.reject(&:core?).each do |association|
+          li.list-group-item
+            = fa_icon association.icon, class: 'fa-fw invisible me-2'
+            = fa_icon association.icon, class: 'fa-fw me-2'
+            == interpolate(association)
+          - association.options.each do |(key, value)|
+            li.list-group-item
+              = fa_icon :gear, class: 'fa-fw invisible me-2'
+              = fa_icon :gear, class: 'fa-fw invisible me-2'
+              = fa_icon :gear, class: 'fa-fw me-2'
+              == Schematics::Options::Wrapper.human_attribute_name(key)
+              == value
+        - entity.triggers.each do |trigger|
+          li.list-group-item
+            = fa_icon :atom, class: 'fa-fw invisible me-2'
+            = fa_icon :atom, class: 'fa-fw me-2'
+            == interpolate(trigger)
