@@ -281,13 +281,7 @@ module Schematics
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
 
-      def spec_interpolations = {
-        name: name.pluralize,
-        descriptor: descriptor.name,
-        actions: actions
-          .map { translate(_1, scope: %i[activerecord enums permission action]) }
-          .join(', ')
-      }
+      def spec_interpolations = { name: name.pluralize }
     end
   end
 end
