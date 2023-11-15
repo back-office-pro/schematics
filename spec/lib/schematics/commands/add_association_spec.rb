@@ -10,8 +10,11 @@ describe Schematics::Commands::AddAssociation do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Add a many-to-many association between client and user') }
   its(:weight) { is_expected.to eq(3) }
+
+  its(:to_spec) do
+    is_expected.to eq('Add a many-to-many association between **client** and **user**')
+  end
 
   describe '#generators' do
     subject { command.generators }

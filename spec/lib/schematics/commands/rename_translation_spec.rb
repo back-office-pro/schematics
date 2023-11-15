@@ -9,7 +9,7 @@ describe Schematics::Commands::RenameTranslation do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Rename a client translation') }
+  its(:to_spec) { is_expected.to eq('Rename a **client** translation') }
   its(:weight) { is_expected.to eq(4) }
 
   describe '#generators' do

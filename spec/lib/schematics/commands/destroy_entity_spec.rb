@@ -31,7 +31,7 @@ describe Schematics::Commands::DestroyEntity do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Remove the assembly entity') }
+  its(:to_spec) { is_expected.to eq('Remove the **assembly** entity') }
   its(:weight) { is_expected.to eq(1) }
 
   describe '#generators' do

@@ -12,7 +12,7 @@ describe Schematics::Commands::RenameEntity do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Rename the entity prospect to client') }
+  its(:to_spec) { is_expected.to eq('Rename the entity **prospect** to **client**') }
   its(:weight) { is_expected.to eq(1) }
 
   describe '#generators' do

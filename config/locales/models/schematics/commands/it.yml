@@ -3,34 +3,34 @@ it:
   activemodel:
     attributes:
       schematics/commands/add_association:
-        to_spec: Aggiungere un'associazione molti-a-molti tra %{entity_name} e %{attribute}
+        to_spec: Aggiungere un'associazione molti-a-molti tra **%{entity_name}** e **%{attribute}**
       schematics/commands/add_attribute:
-        to_spec: Aggiungere un attributo %{attribute} a %{entity_name}
+        to_spec: Aggiungere un attributo **%{attribute}** a **%{entity_name}**
       schematics/commands/add_permission:
-        to_spec: Aggiungere un'autorizzazione %{attribute} a %{entity_name}
+        to_spec: Aggiungere un'autorizzazione **%{attribute}** a **%{entity_name}**
       schematics/commands/add_translation:
-        to_spec: Aggiungere una traduzione a %{entity_name}
+        to_spec: Aggiungere una traduzione a **%{entity_name}**
       schematics/commands/change_attribute:
-        to_spec: Modificare il tipo dell'attributo %{attribute} di %{entity_name}
+        to_spec: Modificare il tipo dell'attributo **%{attribute}** di **%{entity_name}**
       schematics/commands/change_attribute_uniqueness:
-        to_spec: Modificare l'unicità dell'attributo %{attribute} di %{entity_name}
+        to_spec: Modificare l'unicità dell'attributo **%{attribute}** di **%{entity_name}**
       schematics/commands/create_entity:
-        to_spec: Aggiungere un'entità %{entity_name}
+        to_spec: Aggiungere un'entità **%{entity_name}**
       schematics/commands/destroy_entity:
-        to_spec: Rimuovere l'entità %{entity_name}
+        to_spec: Rimuovere l'entità **%{entity_name}**
       schematics/commands/remove_association:
-        to_spec: Rimuovere l'associazione molti-a-molti tra %{entity_name} e %{attribute}
+        to_spec: Rimuovere l'associazione molti-a-molti tra **%{entity_name}** e **%{attribute}**
       schematics/commands/remove_attribute:
-        to_spec: Rimuovere l'attributo %{attribute} di %{entity_name}
+        to_spec: Rimuovere l'attributo **%{attribute}** di **%{entity_name}**
       schematics/commands/remove_permission:
-        to_spec: Rimuovere l'autorizzazione %{attribute} di %{entity_name}
+        to_spec: Rimuovere l'autorizzazione **%{attribute}** di **%{entity_name}**
       schematics/commands/remove_translation:
-        to_spec: Rimuovere una traduzione di %{entity_name}
+        to_spec: Rimuovere una traduzione di **%{entity_name}**
       schematics/commands/rename_attribute:
-        to_spec: Rinominare l'attributo %{attribute} di %{entity_name} in %{target}
+        to_spec: Rinominare l'attributo **%{attribute}** di **%{entity_name}** in **%{target}**
       schematics/commands/rename_entity:
-        to_spec: Rinominare l'entità %{entity_name} in %{attribute}
+        to_spec: Rinominare l'entità **%{entity_name}** in **%{attribute}**
       schematics/commands/rename_permission:
-        to_spec: Rinominare l'autorizzazione %{attribute} di %{entity_name} in %{target}
+        to_spec: Rinominare l'autorizzazione **%{attribute}** di **%{entity_name}** in **%{target}**
       schematics/commands/rename_translation:
-        to_spec: Rinominare una traduzione di %{entity_name}
+        to_spec: Rinominare una traduzione di **%{entity_name}**

@@ -34,7 +34,7 @@ describe Schematics::Commands::CreateEntity do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Add an entity assembly') }
+  its(:to_spec) { is_expected.to eq('Add an entity **assembly**') }
   its(:weight) { is_expected.to eq(1) }
 
   describe '#generators' do
