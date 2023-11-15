@@ -3,7 +3,7 @@ fr:
   activemodel:
     attributes:
       schematics/commands/add_association:
-        to_spec: Ajout d'une association plusieurs-à-plusieurs entre ****%{entity_name}**** et ****%{attribute}****
+        to_spec: Ajout d'une association plusieurs-à-plusieurs entre **%{entity_name}** et **%{attribute}**
       schematics/commands/add_attribute:
         to_spec: Ajout d'un attribut **%{attribute}** à **%{entity_name}**
       schematics/commands/add_permission:
