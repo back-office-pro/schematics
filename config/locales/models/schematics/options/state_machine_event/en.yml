@@ -9,3 +9,4 @@ en:
         icon: Icon
         name: Name
         to: To
+        to_spec: A %{entity_name} has a %{name} event from %{from} to %{to}

@@ -9,3 +9,4 @@ it:
         icon: Icona
         name: Nome
         to: A
+        to_spec: Un(a) %{entity_name} ha un evento %{name} da %{from} a %{to}
