@@ -33,7 +33,10 @@ describe Schematics::Options::StateMachineEvent do
   its(:icon) { is_expected.to eq(:check) }
   its(:color) { is_expected.to eq(:success) }
   its(:human) { is_expected.to eq('Complete') }
-  its(:to_spec) { is_expected.to eq('A task has a complete event from in progress to completed') }
+
+  its(:to_spec) do
+    is_expected.to eq('A task has a **complete** event from *in progress* to *completed*')
+  end
 
   its(:to_str) do
     is_expected.to eq <<~RUBY

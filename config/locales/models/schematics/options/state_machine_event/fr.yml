@@ -9,4 +9,4 @@ fr:
         icon: Icône
         name: Nom
         to: A
-        to_spec: Un(e) %{entity_name} a un évènement %{name} de %{from} à %{to}
+        to_spec: Un(e) %{entity_name} a un évènement **%{name}** de *%{from}* à *%{to}*
