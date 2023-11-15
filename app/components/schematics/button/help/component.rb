@@ -32,7 +32,7 @@ module Schematics
 
         def title = t('.text')
 
-        def path = File.join(['/docs', locale, human_name_plural.to_s].compact)
+        def path = File.join(['/docs', locale, human_name_plural.to_s.parameterize].compact)
 
         def render?
           !model_class || ALLOWLIST.include?(model_class)
