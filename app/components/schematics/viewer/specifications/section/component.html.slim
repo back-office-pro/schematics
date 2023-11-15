@@ -1,0 +1,12 @@
+li.list-group-item
+  - indent.times do
+    = fa_icon icon, class: 'fa-fw invisible me-2'
+  = fa_icon icon, class: 'fa-fw me-2'
+  == value_formatted
+- options.each do |(key, value)|
+  li.list-group-item
+    - indent.next.times do
+      = fa_icon :gear, class: 'fa-fw invisible me-2'
+    = fa_icon :gear, class: 'fa-fw me-2'
+    == Schematics::Options::Wrapper.human_attribute_name(key)
+    = value

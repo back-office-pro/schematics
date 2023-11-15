@@ -16,6 +16,7 @@ module Schematics
       delegate :hidden?, to: :options
       delegate :entity,
                :required?,
+               :polymorphic?,
                :column_name,
                :association_type,
                :options,
@@ -27,7 +28,6 @@ module Schematics
                :includes,
                :schema,
                :existing?,
-               :core?,
                to: :entity
       attr_accessor :belongs_to, :prefixed
 
