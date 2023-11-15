@@ -5,6 +5,6 @@
     - entities.each do |entity|
       ul.list-group.list-group-striped
         = render Schematics::Viewer::Specifications::Section::Component.new(element: entity)
-        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.fields.sort_by(&:weight))
-        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.associations.reject(&:polymorphic?))
-        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.triggers)
+        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.fields.sort_by(&:weight), indent: 1)
+        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.associations.reject(&:polymorphic?), indent: 1)
+        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.triggers, icon: :atom, indent: 1)
