@@ -3,5 +3,4 @@
 div id=id data-nested-form-target='targets'
   = form.fields_for name do |form|
     = field_set_tag fa_icon(icon, class: 'me-2') + human_name.humanize do
-      - elements.each do |field|
-        = render Schematics::ResourceForm::Fields::Component.new(form:, field:)
+      = render Schematics::ResourceForm::Fields::Component.with_collection(elements, form:)

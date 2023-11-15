@@ -8,8 +8,15 @@ module Schematics
         delegate :name, :icon, :options, :required?, to: :field
         delegate :layout, to: :form
 
-        option :form
-        option :field
+        with_collection_parameter :field
+
+        attr_reader :field, :form
+
+        def initialize(field:, form:)
+          super
+          @field = field
+          @form = form
+        end
 
         alias required required?
 
