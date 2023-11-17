@@ -18,6 +18,8 @@ module Schematics
         Options::Min
       )
 
+      def database_type = 'string'
+
       def column_name = "#{super}_digest"
 
       def default = 'Azerty1234?!'

@@ -17,7 +17,7 @@ describe Schematics::Attributes::Digest do
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
-  its(:database_type) { is_expected.to eq('digest') }
+  its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('password_digest') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('entity[password_digest]') }
