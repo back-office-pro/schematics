@@ -7,6 +7,7 @@ describe Schematics::Attributes::Percentage do
   let(:name) { 'progress' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -28,6 +29,7 @@ describe Schematics::Attributes::Percentage do
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:unit) { is_expected.to eq('%') }
   its(:icon) { is_expected.to eq(:percent) }
+  its(:to_spec) { is_expected.to eq('A import has a **progress** attribute of type *percentage*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

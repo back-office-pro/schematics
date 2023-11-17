@@ -7,6 +7,7 @@ describe Schematics::Attributes::UserAgent do
   let(:name) { 'user_agent' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -26,6 +27,10 @@ describe Schematics::Attributes::UserAgent do
   its(:input_name) { is_expected.to eq('session[user_agent]') }
   its(:icon) { is_expected.to eq(:computer) }
   its(:normalization) { is_expected.to be_nil }
+
+  its(:to_spec) do
+    is_expected.to eq('A session has a **user agent** attribute of type *user agent*')
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -5,5 +5,15 @@ fr:
       schematics/associations/association:
         name: Nom
         type: Type
+      schematics/associations/has_and_belongs_to_many:
+        to_spec: Un(e) %{entity_name} a plusieurs **%{name}**
+      schematics/associations/has_many:
+        to_spec: Un(e) %{entity_name} a plusieurs **%{name}**
+      schematics/associations/has_many_through:
+        to_spec: Un(e) %{entity_name} a plusieurs **%{name}** à travers **%{through}**
+      schematics/associations/has_one:
+        to_spec: Un(e) %{entity_name} a un(e) **%{name}**
+      schematics/associations/has_one_through:
+        to_spec: Un(e) %{entity_name} a un(e) **%{name}** à travers **%{through}**
     models:
       schematics/associations/has_and_belongs_to_many: Association plusieurs-à-plusieurs

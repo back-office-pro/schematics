@@ -5,5 +5,15 @@ it:
       schematics/associations/association:
         name: Nome
         type: Tipo
+      schematics/associations/has_and_belongs_to_many:
+        to_spec: Un(a) %{entity_name} ha molti many **%{name}**
+      schematics/associations/has_many:
+        to_spec: Un(a) %{entity_name} ha molti **%{name}**
+      schematics/associations/has_many_through:
+        to_spec: Un(a) %{entity_name} ha molti **%{name}** tramite **%{through}**
+      schematics/associations/has_one:
+        to_spec: Un(a) %{entity_name} ha un(a) **%{name}**
+      schematics/associations/has_one_through:
+        to_spec: Un(a) %{entity_name} ha un(a) **%{name}** tramite **%{through}**
     models:
       schematics/associations/has_and_belongs_to_many: Associazione molti-a-molti

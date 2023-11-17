@@ -4,6 +4,7 @@ module Schematics
   # :reek:Attribute :reek:InstanceVariableAssumption
   module Virtuals
     class Virtual
+      include Behaviours::Specifiable
       include Behaviours::Inspectable
       include Behaviours::Optionable
       include Behaviours::Nameable
@@ -98,6 +99,8 @@ module Schematics
       end
 
       memoize def tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
+
+      def spec_interpolations = super.merge(name:, function:)
     end
   end
 end

@@ -12,3 +12,4 @@ fr:
           before_destroy: Avant suppression
           before_save: Avant sauvegarde
         callback: Fonction
+        to_spec: Un(e) %{entity_name} a un déclencheur **%{action}** dont la fonction est `%{callback}`

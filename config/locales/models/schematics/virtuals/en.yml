@@ -5,6 +5,7 @@ en:
       schematics/virtuals/virtual:
         function: Function
         name: Name
+        to_spec: A %{entity_name} has a **%{name}** virtual field which function is `%{function}`
     models:
       schematics/virtuals/calculation: Calculation
       schematics/virtuals/comparison: Comparison

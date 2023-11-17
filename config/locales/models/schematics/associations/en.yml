@@ -5,5 +5,15 @@ en:
       schematics/associations/association:
         name: Name
         type: Type
+      schematics/associations/has_and_belongs_to_many:
+        to_spec: A %{entity_name} has many **%{name}**
+      schematics/associations/has_many:
+        to_spec: A %{entity_name} has many **%{name}**
+      schematics/associations/has_many_through:
+        to_spec: A %{entity_name} has many **%{name}** through **%{through}**
+      schematics/associations/has_one:
+        to_spec: A %{entity_name} has one **%{name}**
+      schematics/associations/has_one_through:
+        to_spec: A %{entity_name} has one **%{name}** through **%{through}**
     models:
       schematics/associations/has_and_belongs_to_many: Many-to-many association

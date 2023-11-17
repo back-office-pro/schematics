@@ -7,6 +7,7 @@ describe Schematics::Attributes::Jsonb do
   let(:name) { 'preferences' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -29,6 +30,7 @@ describe Schematics::Attributes::Jsonb do
   its(:permitted_params) { is_expected.to eq(preferences: {}) }
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
+  its(:to_spec) { is_expected.to eq('A user has a **preferences** attribute of type *json*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

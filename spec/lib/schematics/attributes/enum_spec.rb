@@ -7,6 +7,7 @@ describe Schematics::Attributes::Enum do
   let(:name) { 'state' }
   let(:options) { { values: %w[available available_soon not_available] } }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -31,6 +32,7 @@ describe Schematics::Attributes::Enum do
   its(:to_sql) { is_expected.to eq('products.state') }
   its(:to_s) { is_expected.to eq('schema:product_state') }
   its(:search_data) { is_expected.to eq('state:') }
+  its(:to_spec) { is_expected.to eq('A product has a **state** attribute of type *enum*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
+require 'action_view'
+
 module Schematics
   # :reek:Attribute
   class Trigger
+    include Behaviours::Specifiable
     include ::ActiveModel::API
+    include ::ActionView::Helpers::TranslationHelper
 
     ACTIONS = %w[
       after_create
@@ -20,7 +24,7 @@ module Schematics
     validates :action,
               presence: true,
               inclusion: { in: ACTIONS }
-    attr_accessor :action, :callback
+    attr_accessor :entity, :action, :callback
 
     class << self
       def to_proc = -> { new(**_1) }
@@ -75,5 +79,14 @@ module Schematics
         .map(&:value)
         .join
     end
+
+    def spec_interpolations = super.merge(
+      callback:,
+      action: translate(
+        action,
+        scope: %i[activemodel attributes schematics/trigger actions],
+        default: action.delete_suffix('_event')
+      )
+    )
   end
 end

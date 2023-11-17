@@ -7,6 +7,7 @@ describe Schematics::Attributes::Byte do
   let(:name) { 'byte_size' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -27,6 +28,10 @@ describe Schematics::Attributes::Byte do
   its(:input_name) { is_expected.to eq('active_storage_attachment[byte_size]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:weight_hanging) }
+
+  its(:to_spec) do
+    is_expected.to eq('A active storage/attachment has a **byte size** attribute of type *byte*')
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

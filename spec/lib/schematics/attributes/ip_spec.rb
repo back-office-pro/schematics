@@ -7,6 +7,7 @@ describe Schematics::Attributes::Ip do
   let(:name) { 'ip' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -25,6 +26,7 @@ describe Schematics::Attributes::Ip do
   its(:default) { is_expected.to eq('::1') }
   its(:icon) { is_expected.to eq(:network_wired) }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A session has a **ip** attribute of type *ip address*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

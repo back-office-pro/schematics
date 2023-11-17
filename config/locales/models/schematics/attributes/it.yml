@@ -4,6 +4,7 @@ it:
     attributes:
       schematics/attributes/attribute:
         name: Nome
+        to_spec: Un(a) %{entity_name} ha un attributo **%{name}** di tipo *%{type}*
         type: Tipo
     models:
       schematics/attributes/action: Azione

@@ -23,6 +23,7 @@ describe Schematics::Virtuals::Concatenation do
   let(:function) { '$first_name $profile.last_name' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -39,6 +40,12 @@ describe Schematics::Virtuals::Concatenation do
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
   its(:allowed_variables) { is_expected.to eq(%w[id first_name last_name profile name created_at]) }
+
+  its(:to_spec) do
+    is_expected.to eq <<~TEXT.chomp
+      A user has a **full name** virtual field which function is `$first_name $profile.last_name`
+    TEXT
+  end
 
   its(:search_data) do
     is_expected.to eq <<~RUBY

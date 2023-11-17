@@ -6,6 +6,7 @@ module Schematics
   module Commands
     # :reek:Attribute
     class Command
+      include Behaviours::Specifiable
       include ::ActiveModel::API
 
       delegate :human, to: :model_name, private: true
@@ -22,12 +23,6 @@ module Schematics
 
       def generators = []
 
-      def to_s = human(
-        name: name.humanize,
-        attribute: attribute.try(:name) || attribute,
-        target: target.try(:name) || target
-      )
-
       def weight = 1
 
       protected
@@ -40,6 +35,11 @@ module Schematics
         .migratable_attributes
         .push('slug:string:uniq', 'lock_version:integer')
         .map(&:to_s)
+
+      def spec_interpolations = super.merge(
+        attribute: attribute.try(:name) || attribute,
+        target: target.try(:name) || target
+      )
     end
   end
 end

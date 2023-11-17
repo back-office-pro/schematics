@@ -17,6 +17,7 @@ describe Schematics::Attributes::User do
   let(:name) { 'user' }
   let(:options) { { inverse_association_type: 'has_many' } }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -43,6 +44,7 @@ describe Schematics::Attributes::User do
   its(:search_column) { is_expected.to eq(:user_full_name) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
+  its(:to_spec) { is_expected.to eq('A entity has a **user** attribute of type *current user*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

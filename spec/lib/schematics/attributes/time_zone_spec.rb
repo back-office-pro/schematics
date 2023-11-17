@@ -11,6 +11,7 @@ describe Schematics::Attributes::TimeZone do
     allow(ActiveSupport::TimeZone).to receive(:all).and_return([ActiveSupport::TimeZone['Paris']])
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -39,6 +40,7 @@ describe Schematics::Attributes::TimeZone do
   its(:to_s) { is_expected.to eq('schema:user_time_zone') }
   its(:collection) { is_expected.to eq([['(GMT+01:00) Paris', 'Paris']]) }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A user has a **time zone** attribute of type *time zone*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

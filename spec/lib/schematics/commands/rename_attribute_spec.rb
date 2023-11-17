@@ -10,8 +10,13 @@ describe Schematics::Commands::RenameAttribute do
   let(:target) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'name') }
   let(:type) { 'string' }
 
-  its(:to_s) { is_expected.to eq('Rename the attribute first_name of Client to name') }
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
   its(:weight) { is_expected.to eq(3) }
+
+  its(:to_spec) do
+    is_expected.to eq('Rename the attribute **first name** of **client** to **name**')
+  end
 
   describe '#generators' do
     subject { command.generators }

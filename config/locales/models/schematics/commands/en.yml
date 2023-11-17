@@ -1,20 +1,36 @@
 ---
 en:
   activemodel:
-    models:
-      schematics/commands/add_association: Add a many-to-many association between %{name} and %{attribute}
-      schematics/commands/add_attribute: Add an attribute %{attribute} to %{name}
-      schematics/commands/add_permission: Add a permission %{attribute} to %{name}
-      schematics/commands/add_translation: Add a translation to %{name}
-      schematics/commands/change_attribute: Change %{attribute} attribute type of %{name}
-      schematics/commands/change_attribute_uniqueness: Change %{attribute} attribute uniqueness of %{name}
-      schematics/commands/create_entity: Add an entity %{name}
-      schematics/commands/destroy_entity: Remove the %{name} entity
-      schematics/commands/remove_association: Remove the many-to-many association between %{name} and %{attribute}
-      schematics/commands/remove_attribute: Remove the attribute %{attribute} of %{name}
-      schematics/commands/remove_permission: Remove the %{attribute} permission of %{name}
-      schematics/commands/remove_translation: Remove a %{name} translation
-      schematics/commands/rename_attribute: Rename the attribute %{attribute} of %{name} to %{target}
-      schematics/commands/rename_entity: Rename the entity %{name} to %{attribute}
-      schematics/commands/rename_permission: Rename the permission %{attribute} of %{name} to %{target}
-      schematics/commands/rename_translation: Rename a %{name} translation
+    attributes:
+      schematics/commands/add_association:
+        to_spec: Add a many-to-many association between **%{entity_name}** and **%{attribute}**
+      schematics/commands/add_attribute:
+        to_spec: Add an attribute **%{attribute}** to **%{entity_name}**
+      schematics/commands/add_permission:
+        to_spec: Add a permission **%{attribute}** to **%{entity_name}**
+      schematics/commands/add_translation:
+        to_spec: Add a translation to **%{entity_name}**
+      schematics/commands/change_attribute:
+        to_spec: Change **%{attribute}** attribute type of **%{entity_name}**
+      schematics/commands/change_attribute_uniqueness:
+        to_spec: Change **%{attribute}** attribute uniqueness of **%{entity_name}**
+      schematics/commands/create_entity:
+        to_spec: Add an entity **%{entity_name}**
+      schematics/commands/destroy_entity:
+        to_spec: Remove the **%{entity_name}** entity
+      schematics/commands/remove_association:
+        to_spec: Remove the many-to-many association between **%{entity_name}** and **%{attribute}**
+      schematics/commands/remove_attribute:
+        to_spec: Remove the attribute **%{attribute}** of **%{entity_name}**
+      schematics/commands/remove_permission:
+        to_spec: Remove the **%{attribute}** permission of **%{entity_name}**
+      schematics/commands/remove_translation:
+        to_spec: Remove a **%{entity_name}** translation
+      schematics/commands/rename_attribute:
+        to_spec: Rename the attribute **%{attribute}** of **%{entity_name}** to **%{target}**
+      schematics/commands/rename_entity:
+        to_spec: Rename the entity **%{entity_name}** to **%{attribute}**
+      schematics/commands/rename_permission:
+        to_spec: Rename the permission **%{attribute}** of **%{entity_name}** to **%{target}**
+      schematics/commands/rename_translation:
+        to_spec: Rename a **%{entity_name}** translation

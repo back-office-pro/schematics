@@ -30,6 +30,8 @@ module Schematics
         .concat <<~RUBY.indent(8)
           autosave: true
         RUBY
+
+      def spec_interpolations = super.merge(entity_name: through.inverse_association_name)
     end
   end
 end

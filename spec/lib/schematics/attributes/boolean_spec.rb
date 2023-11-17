@@ -7,6 +7,7 @@ describe Schematics::Attributes::Boolean do
   let(:name) { 'toggle' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -26,6 +27,7 @@ describe Schematics::Attributes::Boolean do
   its(:search_column) { is_expected.to eq(:toggle) }
   its(:search_predicate) { is_expected.to eq(:eq) }
   its(:search_query) { is_expected.to eq(:toggle_eq) }
+  its(:to_spec) { is_expected.to eq('A entity has a **toggle** attribute of type *boolean*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

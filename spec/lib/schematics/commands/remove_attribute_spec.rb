@@ -9,7 +9,9 @@ describe Schematics::Commands::RemoveAttribute do
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:type) { 'string' }
 
-  its(:to_s) { is_expected.to eq('Remove the attribute first_name of Client') }
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
+  its(:to_spec) { is_expected.to eq('Remove the attribute **first name** of **client**') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do

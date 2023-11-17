@@ -7,6 +7,7 @@ describe Schematics::Attributes::Color do
   let(:name) { 'color' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -27,6 +28,7 @@ describe Schematics::Attributes::Color do
   its(:default) { is_expected.to eq('#000000') }
   its(:input_name) { is_expected.to eq('entity[color]') }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A entity has a **color** attribute of type *color*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

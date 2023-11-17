@@ -1,0 +1,10 @@
+.card.shadow-sm.animate__animated.animate__zoomIn
+  .card-header.px-2.py-1
+    = render Schematics::CardHeading::Component.new(icon:, title:)
+  .card-body.p-0
+    - entities.each do |entity|
+      ul.list-group.list-group-striped
+        = render Schematics::Viewer::Specifications::Section::Component.new(element: entity, options: true)
+        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.fields.sort_by(&:weight), indent: 1, options: true)
+        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.associations.reject(&:polymorphic?), indent: 1)
+        = render Schematics::Viewer::Specifications::Section::Component.with_collection(entity.triggers, icon: :atom, indent: 1)

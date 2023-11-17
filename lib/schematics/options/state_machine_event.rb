@@ -8,6 +8,7 @@ module Schematics
     class StateMachineEvent
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
+      include Behaviours::Specifiable
       include Behaviours::Nameable
 
       COLORS = %i[primary secondary success danger warning].freeze
@@ -56,7 +57,9 @@ module Schematics
 
       private
 
-      memoize def trigger = Trigger.new(action:, callback:)
+      memoize def trigger = Trigger.new(entity:, action:, callback:)
+
+      def spec_interpolations = super.merge(name:, from: Array(from).to_sentence, to:)
     end
   end
 end

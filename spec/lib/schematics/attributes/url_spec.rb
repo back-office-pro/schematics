@@ -7,6 +7,7 @@ describe Schematics::Attributes::Url do
   let(:name) { 'url' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -31,6 +32,7 @@ describe Schematics::Attributes::Url do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.url') }
   its(:to_s) { is_expected.to eq('schema:user_url') }
+  its(:to_spec) { is_expected.to eq('A user has a **url** attribute of type *url*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

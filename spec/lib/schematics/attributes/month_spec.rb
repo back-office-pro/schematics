@@ -7,6 +7,7 @@ describe Schematics::Attributes::Month do
   let(:name) { 'created_at/month' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -20,6 +21,10 @@ describe Schematics::Attributes::Month do
 
   its(:group_method) { is_expected.to eq(:group_by_month) }
   its(:to_sql) { is_expected.to eq('users.created_at') }
+
+  its(:to_spec) do
+    is_expected.to eq('A user has a **created at/month** attribute of type *datetime*')
+  end
 
   describe '#format' do
     subject { attribute.format(value) }

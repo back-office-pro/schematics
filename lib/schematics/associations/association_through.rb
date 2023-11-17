@@ -18,6 +18,8 @@ module Schematics
           through: :#{through.name},
           source: :#{source}
         RUBY
+
+      def spec_interpolations = super.merge(through: through.name)
     end
   end
 end

@@ -27,6 +27,7 @@ describe Schematics::Virtuals::Calculation do
     }
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -45,6 +46,12 @@ describe Schematics::Virtuals::Calculation do
   its(:precision) { is_expected.to eq(2) }
   its(:weight) { is_expected.to eq(1) }
   its(:allowed_variables) { is_expected.to eq(%w[price discount_price]) }
+
+  its(:to_spec) do
+    is_expected.to eq <<~TEXT.chomp
+      A product has a **tax inclusive price** virtual field which function is `$price ** $category.vat`
+    TEXT
+  end
 
   its(:available_options) do
     is_expected.to contain_exactly(

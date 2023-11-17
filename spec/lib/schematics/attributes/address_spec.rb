@@ -7,6 +7,7 @@ describe Schematics::Attributes::Address do
   let(:name) { 'address' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -25,6 +26,7 @@ describe Schematics::Attributes::Address do
   its(:open_api_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('entity[address]') }
   its(:icon) { is_expected.to eq(:location_dot) }
+  its(:to_spec) { is_expected.to eq('A entity has a **address** attribute of type *address*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

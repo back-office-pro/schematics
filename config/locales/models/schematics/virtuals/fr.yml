@@ -5,6 +5,7 @@ fr:
       schematics/virtuals/virtual:
         function: Fonction
         name: Nom
+        to_spec: Un(e) %{entity_name} a un champ virtuel **%{name}** dont la fonction est `%{function}`
     models:
       schematics/virtuals/calculation: Calcul
       schematics/virtuals/comparison: Comparaison

@@ -7,6 +7,7 @@ describe Schematics::Attributes::Phone do
   let(:name) { 'phone' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -34,6 +35,7 @@ describe Schematics::Attributes::Phone do
   its(:to_sql) { is_expected.to eq('users.phone') }
   its(:to_s) { is_expected.to eq('schema:user_phone') }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A user has a **phone** attribute of type *phone number*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -11,6 +11,7 @@ describe Schematics::Attributes::Country do
     allow(ISO3166::Country).to receive(:codes).and_return(['FR'])
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -40,6 +41,7 @@ describe Schematics::Attributes::Country do
   its(:search_predicate) { is_expected.to eq(:in) }
   its(:search_query) { is_expected.to eq(:country_in) }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A user has a **country** attribute of type *country*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

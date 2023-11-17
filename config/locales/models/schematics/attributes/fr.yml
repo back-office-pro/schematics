@@ -4,6 +4,7 @@ fr:
     attributes:
       schematics/attributes/attribute:
         name: Nom
+        to_spec: Un(e) %{entity_name} a un attribut **%{name}** de type *%{type}*
         type: Type
     models:
       schematics/attributes/action: Action

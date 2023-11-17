@@ -7,6 +7,7 @@ describe Schematics::Attributes::Action do
   let(:name) { 'action' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -26,6 +27,7 @@ describe Schematics::Attributes::Action do
   its(:input_name) { is_expected.to eq('permission[action]') }
   its(:icon) { is_expected.to eq(:hand_rock) }
   its(:normalization) { is_expected.to be_nil }
+  its(:to_spec) { is_expected.to eq('A permission has a **action** attribute of type *action*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

@@ -9,7 +9,9 @@ describe Schematics::Commands::ChangeAttributeUniqueness do
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:type) { 'string' }
 
-  its(:to_s) { is_expected.to eq('Change first_name attribute uniqueness of Client') }
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+
+  its(:to_spec) { is_expected.to eq('Change **first name** attribute uniqueness of **client**') }
   its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do

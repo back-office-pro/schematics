@@ -4,6 +4,7 @@ fr:
     attributes:
       schematics/entities/entity:
         name: Nom
+        to_spec: Nous gérons des **%{name}**
     models:
       schematics/entities/entity: Entité
       schematics/entities/singleton: Entité unique

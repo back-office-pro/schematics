@@ -22,6 +22,7 @@ describe Schematics::Entities::Entity do
     ]
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_core }
@@ -38,6 +39,7 @@ describe Schematics::Entities::Entity do
   its(:to_str) { is_expected.to be_blank }
   its(:includes) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
   its(:preload) { is_expected.to eq([{ record: :string_translations }]) }
+  its(:to_spec) { is_expected.to eq('We manage **discussions**') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

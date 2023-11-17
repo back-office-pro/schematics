@@ -25,6 +25,8 @@ module Schematics
           inverse_of: :#{inverse_of},
           autosave: true
         RUBY
+
+      def spec_interpolations = super.merge(entity_name: inverse_of)
     end
   end
 end

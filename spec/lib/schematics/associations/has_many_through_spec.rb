@@ -34,6 +34,7 @@ describe Schematics::Associations::HasManyThrough do
     Schematics::Attributes::BelongsTo.new(entity:, name: 'entity')
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
@@ -45,6 +46,7 @@ describe Schematics::Associations::HasManyThrough do
   its(:source) { is_expected.to eq('attributes') }
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:weight) { is_expected.to eq(3) }
+  its(:to_spec) { is_expected.to eq('A schema has many **attributes** through **entities**') }
   its('descriptor.name') { is_expected.to eq('name') }
 
   its(:to_str) do

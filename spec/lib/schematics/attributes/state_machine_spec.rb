@@ -38,6 +38,7 @@ describe Schematics::Attributes::StateMachine do
     }
   end
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -63,6 +64,7 @@ describe Schematics::Attributes::StateMachine do
   its(:to_sql) { is_expected.to eq('orders.state') }
   its(:to_s) { is_expected.to eq('schema:order_state') }
   its(:search_data) { is_expected.to eq('state:') }
+  its(:to_spec) { is_expected.to eq('A order has a **state** attribute of type *state machine*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

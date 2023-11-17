@@ -7,6 +7,7 @@ describe Schematics::Attributes::RichText do
   let(:name) { 'summary' }
   let(:options) { {} }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
@@ -31,6 +32,10 @@ describe Schematics::Attributes::RichText do
   its(:search_column_association) { is_expected.to eq('rich_text_summary') }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:summary_i_cont) }
+
+  its(:to_spec) do
+    is_expected.to eq('A entity has a **summary** attribute of type *rich text editor*')
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
