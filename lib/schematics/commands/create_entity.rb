@@ -62,8 +62,8 @@ module Schematics
         Rails::Generators::MigrationGenerator.new(
           [
             "create_join_table_#{association.entity.table_name.pluralize}_#{association.inverse_entity.table_name.pluralize}", # rubocop:disable Layout/LineLength
-            "#{association.entity.table_name.pluralize}:join_table_first",
-            "#{association.inverse_entity.table_name.pluralize}:join_table_second"
+            association.entity.table_name.pluralize,
+            association.inverse_entity.table_name.pluralize
           ]
         )
       end
