@@ -5,7 +5,6 @@ module Schematics
     module Specifications
       module Section
         class Component < ApplicationComponent
-          delegate :human_attribute_name, to: 'Schematics::Options::Wrapper'
           with_collection_parameter :element
 
           def initialize(element:, indent: 0, options: false, icon: nil, item_class: nil)
