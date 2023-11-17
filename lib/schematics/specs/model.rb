@@ -67,27 +67,30 @@ module Schematics
           end
         end
 
-        fillable_attributes
-          .grep_v(Behaviours::Preloadable)
-          .each do |attribute|
-            it do
-              is_expected.to allow_value(nil).for(attribute.name.to_sym) if attribute.allow_blank
-              is_expected.to allow_value(attribute.default).for(attribute.name.to_sym)
-            end
+        fillable_attributes.each do |attribute|
+          it do
+            is_expected.to allow_value(nil).for(attribute.name.to_sym) if attribute.allow_blank
+            is_expected.to allow_value(attribute.default).for(attribute.name.to_sym)
           end
+        end
 
-        renderable_attributes
-          .grep_v(Behaviours::Preloadable)
-          .grep_v(Attributes::Token)
-          .grep_v(Attributes::Uuid)
+        migratable_attributes
+          .grep_v(Attributes::Association)
           .each do |attribute|
-            it { is_expected.to have_db_index(attribute.name.to_sym) }
             it do
               is_expected
                 .to have_db_column(attribute.column_name.to_sym)
                 .of_type(attribute.database_type.to_sym)
                 .with_options(attribute.migration_options)
             end
+          end
+
+        searchable_attributes
+          .grep_v(Attributes::Association)
+          .grep_v(Attributes::Attachment)
+          .grep_v(Attributes::RichText)
+          .each do |attribute|
+            it { is_expected.to have_db_index(attribute.name.to_sym) }
           end
 
         attachments_attributes.each do |attribute|
@@ -145,10 +148,6 @@ module Schematics
                 is_expected.to have_rich_text(element.name.to_sym) unless element.translated?
               when Attributes::Digest
                 is_expected.to have_secure_password(element.name.to_sym)
-                is_expected
-                  .to have_db_column(element.column_name.to_sym)
-                  .of_type(:string)
-                  .with_options(element.migration_options)
                 is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?
                 is_expected
                   .to validate_length_of(element.name.to_sym)
@@ -158,10 +157,6 @@ module Schematics
                   .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
               when Attributes::Token
                 is_expected.to have_secure_token(element.name.to_sym)
-                is_expected
-                  .to have_db_column(element.column_name.to_sym)
-                  .of_type(:string)
-                  .with_options(element.migration_options)
               when Attributes::Attachments
                 is_expected.to have_many_attached(element.name.to_sym)
               when Attributes::Attachment
@@ -225,7 +220,8 @@ module Schematics
         delegate :elements,
                  :attributes,
                  :triggers,
-                 :renderable_attributes,
+                 :migratable_attributes,
+                 :searchable_attributes,
                  :fillable_attributes,
                  :attachments_attributes,
                  :enumerable_attributes,
