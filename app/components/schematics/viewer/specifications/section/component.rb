@@ -8,16 +8,13 @@ module Schematics
           delegate :human_attribute_name, to: 'Schematics::Options::Wrapper'
           with_collection_parameter :element
 
-          def initialize(element:, indent: 0, icon: nil, item_class: nil)
+          def initialize(element:, indent: 0, options: false, icon: nil, item_class: nil)
             super
             @element = element
             @indent = indent
+            @options = options
             @icon = icon || element.icon
             @item_class = item_class
-          end
-
-          def options
-            @element.try(:options) || []
           end
 
           def interpolate(element)

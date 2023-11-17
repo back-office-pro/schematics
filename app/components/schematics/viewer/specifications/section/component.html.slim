@@ -3,25 +3,26 @@ li.list-group-item class=@item_class
     = fa_icon @icon, class: 'fa-fw invisible me-2'
   = fa_icon @icon, class: 'fa-fw me-2'
   == interpolate(@element)
-- options.each do |(key, value)|
-  li.list-group-item
-    - @indent.next.times do
-      = fa_icon :gear, class: 'fa-fw invisible me-2'
-    = fa_icon :gear, class: 'fa-fw me-2'
-    - case [key, value]
-    - in [*, TrueClass]
-      = human_attribute_name(key)
-    - in [:events, *]
-      = human_attribute_name(key)
-      - value.each_with_object(state_machine: @element).map(&:merge).map(&Schematics::Options::StateMachineEvent).each do |event|
-        li.list-group-item
-          - @indent.next.next.times do
-            = fa_icon :repeat, class: 'fa-fw invisible me-2'
-          = fa_icon :repeat, class: 'fa-fw me-2'
-          == interpolate(event)
-    - in [*, Array]
-      = human_attribute_name(key)
-      span.ms-1.fw-bold = value.to_sentence
-    - else
-      = human_attribute_name(key)
-      span.ms-1.fw-bold = value
+- if @options
+  - @element.options.each do |(key, value)|
+    li.list-group-item
+      - @indent.next.times do
+        = fa_icon :gear, class: 'fa-fw invisible me-2'
+      = fa_icon :gear, class: 'fa-fw me-2'
+      - case [key, value]
+      - in [*, TrueClass]
+        = human_attribute_name(key)
+      - in [:events, *]
+        = human_attribute_name(key)
+        - value.each_with_object(state_machine: @element).map(&:merge).map(&Schematics::Options::StateMachineEvent).each do |event|
+          li.list-group-item
+            - @indent.next.next.times do
+              = fa_icon :repeat, class: 'fa-fw invisible me-2'
+            = fa_icon :repeat, class: 'fa-fw me-2'
+            == interpolate(event)
+      - in [*, Array]
+        = human_attribute_name(key)
+        span.ms-1.fw-bold = value.to_sentence
+      - else
+        = human_attribute_name(key)
+        span.ms-1.fw-bold = value
