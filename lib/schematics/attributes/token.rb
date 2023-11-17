@@ -10,7 +10,11 @@ module Schematics
       include Behaviours::Encryptable
       LENGTH = 32
 
+      def database_type = 'string'
+
       def encrypted? = true
+
+      def unique? = true
 
       def default = SecureRandom.base58
 

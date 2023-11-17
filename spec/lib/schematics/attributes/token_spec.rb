@@ -18,13 +18,23 @@ describe Schematics::Attributes::Token do
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_encrypted }
+  it { is_expected.to be_unique }
 
-  its(:database_type) { is_expected.to eq('token') }
+  its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('auth_token') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
-  its(:validators) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:key) }
+
+  its(:validators) do
+    is_expected.to eq({ uniqueness_with_deleted: { case_sensitive: true, allow_blank: true } })
+  end
+
+  its('validators.to_str') do
+    is_expected.to eq <<~RUBY
+      validates :auth_token, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}}
+    RUBY
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
