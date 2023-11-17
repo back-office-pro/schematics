@@ -136,10 +136,6 @@ describe Rails::Generators::GeneratedAttribute do
                   'fd2e945dbb711be9d9ecc3eb60ebb2cb9cba1c2eb08d4ce8c99c5964b221ff2f'
 
   it_behaves_like 'a monkey patched instance super method',
-                  :plural_name,
-                  '7de443f57b916b73cfd285863011a703b64b08fb7fe6a11bc8632281a0caf4f3'
-
-  it_behaves_like 'a monkey patched instance super method',
                   :reference?,
                   '852b8392f8a0d72997cb7a0aa0a4c531af7da74ed6515e9c0caf4a3443eea532'
 

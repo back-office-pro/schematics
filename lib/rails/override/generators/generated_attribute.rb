@@ -9,7 +9,7 @@ module Rails
         end
 
         def has_index? # rubocop:disable Naming/PredicateName
-          (schema_attribute && !virtual? && !token? && !password_digest?) || join_table? || super
+          schema_attribute.is_a?(Schematics::Behaviours::Searchable) || has_uniq_index? || super
         end
 
         def has_uniq_index? # rubocop:disable Naming/PredicateName
@@ -30,10 +30,6 @@ module Rails
           schema_attribute&.migration_options || super
         end
 
-        def plural_name = [super, join_table_column_options]
-          .compact
-          .join(', ')
-
         def reference?(*)
           schema_attribute.is_a?(Schematics::Attributes::Association) || super
         end
@@ -48,20 +44,12 @@ module Rails
 
         private
 
-        def join_table_column_options
-          'column_options: { type: :uuid }' if @type == :join_table_second
-        end
-
         def inject_index_type
           "using: :#{schema_attribute.database_index_type}" if schema_attribute
         end
 
         def inject_index_where
-          "where: 'deleted_at IS NULL'" unless join_table?
-        end
-
-        def join_table?
-          @type.start_with?('join_table')
+          "where: 'deleted_at IS NULL'"
         end
 
         def schema_attribute
