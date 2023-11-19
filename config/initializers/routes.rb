@@ -8,6 +8,7 @@ Rails.application.routes.prepend do
   mount Tenant.backend.engine, at: '/backend'
   localized do
     get 'auth/:provider/callback', to: 'sessions#create', as: :omniauth_login
+    get 'up', to: 'rails/health#show', as: :health_check
     get 'login', to: 'sessions#new', as: :login
     Tenant
       .schema
