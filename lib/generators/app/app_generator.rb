@@ -17,6 +17,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_postgres_user
+    return if container?
     return unless generating?
 
     pg_exec("CREATE USER #{db_username} WITH ENCRYPTED PASSWORD '#{db_password}' CREATEDB")
@@ -89,6 +90,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def drop_postgres_user
+    return if container?
     return unless destroying?
 
     pg_exec("DROP USER #{db_username}")
@@ -128,12 +130,14 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def backup_credentials
+    return if container?
     return unless generating?
 
     rails_command 'schematics:credentials:backup', env:
   end
 
   def load_migration_fixture
+    return if container?
     return unless env.development?
     return unless generating?
 
