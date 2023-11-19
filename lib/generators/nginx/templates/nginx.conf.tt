@@ -1,8 +1,8 @@
-<% if Tenant.ssl? %>
+<%- if Tenant.ssl? -%>
 server {
   server_name <%= Tenant.host %>;
-  listen [::]:443 ssl default_server;
-  listen 443 ssl default_server;
+  listen [::]:443 ssl;
+  listen 443 ssl;
 
   location / {
     proxy_pass http://localhost:<%= Tenant.env_port %>;
@@ -18,11 +18,11 @@ server {
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
-<% else %>
+<%- else -%>
 server {
   server_name <%= Tenant.host %>;
-  listen 80 default_server;
-  listen [::]:80 default_server;
+  listen 80;
+  listen [::]:80;
 
   location / {
     proxy_pass http://localhost:<%= Tenant.env_port %>;
@@ -33,4 +33,4 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 }
-<% end %>
+<%- end -%>
