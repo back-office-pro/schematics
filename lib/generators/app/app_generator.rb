@@ -48,6 +48,11 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     template '.env'
   end
 
+  def create_docker_entrypoint_file
+    template 'docker-entrypoint', 'bin/docker-entrypoint'
+    chmod 'bin/docker-entrypoint', 0o755 & ~File.umask, verbose: false
+  end
+
   def create_github_workflow_file
     template 'github/workflows/build.yml', '.github/workflows/build.yml'
   end
