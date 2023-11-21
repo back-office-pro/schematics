@@ -8,10 +8,10 @@ RUN apk --update add --virtual \
     runtime-deps postgresql-client build-base libxml2-dev \
     libxslt-dev nodejs yarn libffi-dev readline \
     build-base postgresql-dev sqlite-dev libc-dev linux-headers \
-    readline-dev file git tzdata graphviz clamav clamav-daemon chromium bash \
+    readline-dev file git tzdata graphviz bash \
     && rm -rf /var/cache/apk/*
 
-ARG APP_NAME
+ARG BUNDLE_GITHUB__COM
 
 RUN git config --global user.name "back-office"
 RUN git config --global user.email "support@back-office.pro"
@@ -20,14 +20,9 @@ RUN git config --global init.defaultBranch "main"
 WORKDIR /app
 COPY . /app
 
-RUN bundle install --jobs=4 --retry=3
+RUN BUNDLE_GITHUB__COM=$BUNDLE_GITHUB__COM bundle install --jobs=4 --retry=3
 
-WORKDIR /home
-RUN ruby /app/bin/schematics $APP_NAME --container
-
-WORKDIR /home/$APP_NAME
-
-ENTRYPOINT ["/app/config/docker/docker-entrypoint.sh"]
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+ENTRYPOINT ["bin/rails", "schematics:docker:entrypoint"]
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
 
 EXPOSE 3000

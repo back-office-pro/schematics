@@ -15,30 +15,52 @@ services:
         hard: -1
     ports:
       - 9200:9200
-  db:
-    image: postgres:latest
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data 
+  postgres:
+    image: postgres:16
     ports:
       - 5432:5432
     volumes:
-      - dbdata:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
   redis:
     image: redis:latest
     ports:
       - 6379:6379
+    volumes:
+      - redis-data:/var/lib/redis
+  clamav:
+    image: clamav/clamav:latest
+    ports:
+      - 3310:3310
+    volumes:
+      - clamav-data:/var/lib/clamav
+  chrome:
+    image: browserless/chrome:latest
+    ports:
+      - 3333:3333
   web:
     build:
-      context: .
-      dockerfile: ./config/docker/Dockerfile
+      context: $PWD
+      dockerfile: $DOCKERFILE_PATH
     ports:
       - 3000:3000
     depends_on:
       - opensearch
-      - db
+      - postgres
       - redis
+      - clamav
+      - chrome
     environment:
+      - DATABASE_URL=postgres://postgres@postgres
       - REDIS_URL=redis://redis:6379
       - OPENSEARCH_URL=http://opensearch:9200
-    volumes:
-      - .:/app
+      - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
+      - PORT=3000
 volumes:
-  dbdata:
+  opensearch-data:
+  postgres-data:
+  redis-data:
+  clamav-data:
