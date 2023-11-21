@@ -114,7 +114,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rollbar', '~> 3.4.1'
   spec.add_dependency 'route_translator', '~> 14.1.0'
   spec.add_dependency 'rqrcode', '~> 2.2.0'
-  spec.add_dependency 'rspec-rails', '~> 6.0.4'
+  spec.add_dependency 'rspec-rails', '~> 6.1.0'
   spec.add_dependency 'ruby-graphviz', '~> 1.2.5'
   spec.add_dependency 'ruby-vips', '~> 2.2.0'
   spec.add_dependency 'sassc-rails', '~> 2.1.2'
