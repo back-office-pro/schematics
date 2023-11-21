@@ -6,7 +6,7 @@ ruby Gem.ruby_version.to_s
 gem "web-console", group: :development
 <%- end -%>
 <%- if container? -%>
-gem "schematics", path: "/app"
+gem "schematics", github: "back-office-pro/schematics"
 <%- elsif env.development? -%>
 gem "schematics", path: "<%= root_path %>"
 <%- else -%>
