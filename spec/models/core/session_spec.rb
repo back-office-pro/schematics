@@ -7,6 +7,10 @@ RSpec.describe Session do
 
   it { is_expected.to be_sudo }
 
+  it 'marks the session as sudo after create' do
+    expect { record.save! }.to change(record, :sudo_at)
+  end
+
   describe '#login!' do
     subject { record.login!(user) }
 

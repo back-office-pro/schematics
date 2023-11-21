@@ -7,6 +7,12 @@ RSpec.describe Import do
 
   its(:model_class) { is_expected.to eq(User) }
 
+  it 'enqueues an import job after create' do
+    expect { record.save! }
+      .to have_enqueued_job(Schematics::ImportJob)
+      .with(record)
+  end
+
   describe '#finalize!' do
     subject(:finalize!) { record.finalize!(errors) }
 
