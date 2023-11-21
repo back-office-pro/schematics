@@ -22,7 +22,7 @@ COPY . /app
 
 RUN BUNDLE_GITHUB__COM=$BUNDLE_GITHUB__COM bundle install --jobs=4 --retry=3
 
-ENTRYPOINT ["bin/rails", "schematics:docker:entrypoint"]
+ENTRYPOINT ["bin/docker-entrypoint"]
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]
 
 EXPOSE 3000
