@@ -4,7 +4,16 @@ module Schematics
   module Button
     module Help
       class Component < ApplicationComponent
-        ALLOWLIST = [::Migration, ::Import, ::Stat, ::Chart, ::Configuration, ::Role].freeze
+        ALLOWLIST = [
+          ::Migration,
+          ::Import,
+          ::Stat,
+          ::Chart,
+          ::Configuration,
+          ::Role,
+          ::ApiKey,
+          ::UserGroup
+        ].freeze
 
         delegate :url, to: ::Tenant, private: true
         delegate :human_name_plural, to: :model_class, allow_nil: true, private: true
@@ -32,11 +41,18 @@ module Schematics
 
         def title = t('.text')
 
-        def path = File.join(['/docs', locale, human_name_plural.to_s.parameterize].compact)
+        def path = File.join(['/docs', locale, slug].compact)
 
         def render?
           !model_class || ALLOWLIST.include?(model_class)
         end
+
+        private
+
+        def slug = human_name_plural
+          .to_s
+          .gsub(/\b\w{1,2}\b/, '')
+          .parameterize(separator: '-')
       end
     end
   end
