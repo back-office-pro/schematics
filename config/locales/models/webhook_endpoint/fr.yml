@@ -8,5 +8,5 @@ fr:
     models:
       webhook_endpoint:
         gender: male
-        one: Webhook
-        other: Webhooks
+        one: Point d'entrée de webhook
+        other: Points d'entrée de webhook

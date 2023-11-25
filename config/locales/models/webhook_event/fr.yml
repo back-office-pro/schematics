@@ -3,13 +3,13 @@ fr:
   activerecord:
     attributes:
       webhook_event:
-        event: Event
+        event: Événement
         payload: Payload
-        response: Response
-        status: Status
-        webhook_endpoint: Webhook
+        response_body: Corps de réponse
+        response_code: Code de réponse
+        webhook_endpoint: Point d'entrée de webhook
     models:
       webhook_event:
         gender: male
-        one: Webhook event
-        other: Webhook events
+        one: Événement de webhook
+        other: Événements de webhook
