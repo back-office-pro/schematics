@@ -1566,5 +1566,83 @@
         "type": "jsonb"
       }
     ]
+  },
+  {
+    "id": "5458b34a-cf0e-48cf-abf4-7ce0579d2cf7",
+    "name": "webhook_endpoint",
+    "options": {
+      "icon": "sitemap"
+    },
+    "attributes": [
+      {
+        "id": "e26406ff-6c3e-4ec3-a4bc-4fa077c74987",
+        "name": "url",
+        "type": "url",
+        "options": {
+          "unique": true,
+          "required": true
+        }
+      },
+      {
+        "id": "6b2aabe3-03f2-4a51-be12-62457a46b771",
+        "name": "subscriptions",
+        "type": "array",
+        "options": {
+          "required": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "a44b6f34-94f3-43af-8ba7-0f7d1534b4be",
+    "name": "webhook_event",
+    "options": {
+      "icon": "server",
+      "hidden": true,
+      "actions": [
+        "index",
+        "show"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "693210a1-5012-4a98-bf58-39d33ed921bb",
+        "name": "event",
+        "type": "string",
+        "options": {
+          "required": true,
+          "readonly": true
+        }
+      },
+      {
+        "id": "136731ab-ae61-4435-bf1b-9a7772804450",
+        "name": "payload",
+        "type": "jsonb",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "d70604e6-3669-4279-b9a0-942e226f4ad2",
+        "name": "response",
+        "type": "jsonb",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "9834050c-f14d-4c7e-9289-582b46b229c0",
+        "name": "status",
+        "type": "integer",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "4305846a-e22c-42b6-b7b2-ecfbac3ec36a",
+        "name": "webhook_endpoint",
+        "type": "belongs_to"
+      }
+    ]
   }
 ]
