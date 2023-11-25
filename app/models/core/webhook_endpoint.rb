@@ -3,7 +3,7 @@
 class WebhookEndpoint < Schematics::ApplicationRecord
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery
 
-  attribute :subscriptions, default: -> {
+  attribute :subscriptions, default: lambda {
     Tenant
       .schema
       .entities
