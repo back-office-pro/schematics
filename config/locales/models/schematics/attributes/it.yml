@@ -39,6 +39,7 @@ it:
       schematics/attributes/percentage: Percentuale
       schematics/attributes/phone: Numero di telefono
       schematics/attributes/rating: Valutazione
+      schematics/attributes/response_code: Codice di risposta
       schematics/attributes/rich_text: Rich text editor
       schematics/attributes/state_machine: Macchina a stati
       schematics/attributes/string: Stringa

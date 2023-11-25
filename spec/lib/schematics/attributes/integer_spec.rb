@@ -87,6 +87,14 @@ describe Schematics::Attributes::Integer do
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
-    it { is_expected.to contain_exactly(described_class, Schematics::Attributes::Duration) }
+    let(:expected_compatible_types) do
+      [
+        described_class,
+        Schematics::Attributes::Duration,
+        Schematics::Attributes::ResponseCode
+      ]
+    end
+
+    it { is_expected.to match_array(expected_compatible_types) }
   end
 end

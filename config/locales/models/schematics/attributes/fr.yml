@@ -39,6 +39,7 @@ fr:
       schematics/attributes/percentage: Pourcentage
       schematics/attributes/phone: Numéro de téléphone
       schematics/attributes/rating: Notation
+      schematics/attributes/response_code: Code de réponse
       schematics/attributes/rich_text: Editeur de texte riche
       schematics/attributes/state_machine: Machine à état
       schematics/attributes/string: Chaîne de caractères

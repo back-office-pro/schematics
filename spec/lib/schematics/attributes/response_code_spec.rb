@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-describe Schematics::Attributes::Duration do
+describe Schematics::Attributes::ResponseCode do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'movie') }
-  let(:name) { 'duration' }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'api_request') }
+  let(:name) { 'status' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -23,11 +23,14 @@ describe Schematics::Attributes::Duration do
   it { is_expected.not_to be_auto_increment }
 
   its(:database_type) { is_expected.to eq('integer') }
-  its(:column_name) { is_expected.to eq('duration') }
+  its(:column_name) { is_expected.to eq('status') }
   its(:open_api_type) { is_expected.to eq(Integer) }
-  its(:input_name) { is_expected.to eq('movie[duration]') }
-  its(:icon) { is_expected.to eq(:hourglass) }
-  its(:to_spec) { is_expected.to eq('A movie has a **duration** attribute of type *duration*') }
+  its(:input_name) { is_expected.to eq('api_request[status]') }
+  its(:icon) { is_expected.to eq(:hashtag) }
+
+  its(:to_spec) do
+    is_expected.to eq('A api request has a **status** attribute of type *response code*')
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -41,17 +44,16 @@ describe Schematics::Attributes::Duration do
       Schematics::Options::EqualTo,
       Schematics::Options::LessThan,
       Schematics::Options::LessThanOrEqualTo,
-      Schematics::Options::OtherThan,
-      Schematics::Options::Unit
+      Schematics::Options::OtherThan
     )
   end
 
   describe '#format' do
     subject { attribute.format(value) }
 
-    let(:value) { 100 }
+    let(:value) { 200 }
 
-    it { is_expected.to eq('1 minute and 40 seconds') }
+    it { is_expected.to eq('200 OK') }
   end
 
   describe '.compatible_types' do
@@ -61,7 +63,7 @@ describe Schematics::Attributes::Duration do
       [
         described_class,
         Schematics::Attributes::Integer,
-        Schematics::Attributes::ResponseCode
+        Schematics::Attributes::Duration
       ]
     end
 
