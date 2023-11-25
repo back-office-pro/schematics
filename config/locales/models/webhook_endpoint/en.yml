@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      webhook_endpoint:
+        subscriptions: Subscriptions
+        url: URL
+    models:
+      webhook_endpoint:
+        gender: male
+        one: Webhook
+        other: Webhooks

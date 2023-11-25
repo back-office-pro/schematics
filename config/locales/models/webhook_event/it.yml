@@ -1,0 +1,15 @@
+---
+it:
+  activerecord:
+    attributes:
+      webhook_event:
+        event: Event
+        payload: Payload
+        response: Response
+        status: Status
+        webhook_endpoint: Webhook
+    models:
+      webhook_event:
+        gender: male
+        one: Webhook event
+        other: Webhook events
