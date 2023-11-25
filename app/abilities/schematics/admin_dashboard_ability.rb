@@ -14,7 +14,9 @@ module Schematics
       ::User,
       ::UserGroup,
       ::Role,
-      ::Documentation
+      ::Documentation,
+      ::WebhookEvent,
+      ::WebhookEndpoint
     ].freeze
 
     def initialize(ability)
