@@ -14,11 +14,11 @@ module Schematics
       merge ConfigurationAbility.new(user)
       merge ApiRequestAbility.new(user)
       merge CommentAbility.new(user)
+      merge ChartAbility.new(user)
       merge MigrationAbility.new
       merge ComparisonAbility.new
       merge BlogAbility.new
       merge SearchAbility.new
-      merge ChartAbility.new
       merge RoleAbility.new
       merge AdminDashboardAbility.new(self)
       merge FeatureFlagAbility.new
