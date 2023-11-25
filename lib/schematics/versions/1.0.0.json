@@ -1336,6 +1336,14 @@
         }
       },
       {
+        "id": "a6813635-3548-4f26-ac03-ef2b998b8d43",
+        "name": "response_code",
+        "type": "response_code",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
         "id": "0f4f54af-0998-479f-9171-c70c95e6d92a",
         "name": "response_time",
         "type": "integer",

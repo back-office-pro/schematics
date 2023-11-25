@@ -7,6 +7,7 @@ it:
         endpoint: Endpoint
         ip: Indirizzo IP
         request_method: Metodo
+        response_code: Codice di risposta
         response_time: Tempo di risposta
     enums:
       api_request:

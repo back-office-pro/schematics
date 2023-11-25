@@ -52,7 +52,7 @@ module Schematics
 
     def touch_session!(&)
       session[:response_time] = Benchmark.realtime(&)
-      current_session.touch!(request)
+      current_session.touch!(request, response)
     end
 
     def logout_user!

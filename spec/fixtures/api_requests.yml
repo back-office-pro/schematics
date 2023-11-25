@@ -4,10 +4,12 @@ one:
   ip: 127.0.0.1
   endpoint: /tasks
   request_method: GET
+  response_code: 200
   response_time: 100
 two:
   api_key_id: 7ed2c4db-6dfb-4d7b-94fb-86781f99aa08
   ip: 127.0.0.1
   endpoint: /users
   request_method: GET
+  response_code: 200
   response_time: 120

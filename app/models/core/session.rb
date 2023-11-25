@@ -28,7 +28,7 @@ class Session < Schematics::ApplicationRecord
     end
   end
 
-  def touch!(request)
+  def touch!(request, *)
     return unless request.format.html?
 
     update!(updated_at: Time.current)

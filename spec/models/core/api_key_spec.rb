@@ -9,9 +9,10 @@ RSpec.describe ApiKey do
   its(:user) { is_expected.to be_a(Schematics::Guest::User) }
 
   describe '#touch!' do
-    subject { record.touch!(request) }
+    subject { record.touch!(request, response) }
 
     let(:request) { ActionController::TestRequest.create({}) }
+    let(:response) { ActionDispatch::TestResponse.create }
 
     before do
       request.path = '/api-keys'
@@ -23,6 +24,7 @@ RSpec.describe ApiKey do
     its(:ip) { is_expected.to eq('0.0.0.0') }
     its(:request_method) { is_expected.to eq('GET') }
     its(:endpoint) { is_expected.to eq('/api-keys') }
+    its(:response_code) { is_expected.to eq(200) }
     its(:response_time) { is_expected.to eq(100) }
   end
 end
