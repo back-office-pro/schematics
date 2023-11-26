@@ -20,7 +20,6 @@ require 'support/i18n'
 require 'support/overrides'
 require 'support/shared_examples'
 require 'rspec/its'
-require 'webmock/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
