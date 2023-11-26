@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WebhookEndpoint < Schematics::ApplicationRecord
-  TIMEOUT_OPTIONS = { open_timeout: 5, read_timeout: 5, write_timeout: 5 }.freeze
+  TIMEOUT_OPTIONS = { open_timeout: 5, read_timeout: 5, write_timeout: 5, max_retries: 0 }.freeze
 
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery
 
