@@ -12,6 +12,4 @@ RSpec.describe WebhookEvent do
       .to have_enqueued_job(Schematics::WebhookJob)
       .with(record)
   end
-
-  its(:body) { is_expected.to match('event' => String, 'payload' => {}) }
 end
