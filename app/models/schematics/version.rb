@@ -64,7 +64,7 @@ module Schematics
 
     def broadcast_webhook_event
       PaperTrail.request(enabled: false) do
-        ::WebhookEndpoint.broadcast_all(webhook_event, item.as_json(association: false))
+        ::WebhookEndpoint.broadcast_all(webhook_event, item&.as_json(association: false))
       end
     end
   end
