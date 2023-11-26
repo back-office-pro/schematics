@@ -13,7 +13,7 @@ class WebhookEndpoint < Schematics::ApplicationRecord
   }
 
   class << self
-    def broadcast(event, payload)
+    def broadcast_all(event, payload)
       ActiveJob.perform_all_later(
         subscribed(event)
           .map { WebhookEvent.create!(webhook_endpoint: _1, event:, payload:) }
@@ -21,4 +21,6 @@ class WebhookEndpoint < Schematics::ApplicationRecord
       )
     end
   end
+
+  def uri = URI(url)
 end
