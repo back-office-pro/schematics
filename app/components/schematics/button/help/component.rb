@@ -12,7 +12,8 @@ module Schematics
           ::Configuration,
           ::Role,
           ::ApiKey,
-          ::UserGroup
+          ::UserGroup,
+          ::WebhookEndpoint
         ].freeze
 
         delegate :url, to: ::Tenant, private: true
