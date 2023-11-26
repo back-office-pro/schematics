@@ -11,8 +11,8 @@ module Schematics
           resource:,
           resource_params: {
             state: WebhookEvent::STATE_STATE_BROADCASTED,
-            response_body: JSON.parse(webhook_event.response.body),
-            response_code: webhook_event.response.code
+            response_body: JSON.parse(resource.response.body),
+            response_code: resource.response.code
           }
         )
       rescue StandardError => e
