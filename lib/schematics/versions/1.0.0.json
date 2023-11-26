@@ -1623,6 +1623,30 @@
         }
       },
       {
+        "id": "eadb42c6-4607-47ba-86e7-40d96cd52298",
+        "name": "state",
+        "type": "state_machine",
+        "options": {
+          "required": true,
+          "direct_assignment": true,
+          "default": "pending",
+          "values": [
+            "pending",
+            "broadcasted",
+            "error"
+          ],
+          "events": [
+            {
+              "id": "f771a45d-15bc-49ae-8009-6cf2f45f0be9",
+              "name": "retry",
+              "icon": "rotate",
+              "from": "error",
+              "to": "pending"
+            }
+          ]
+        }
+      },
+      {
         "id": "d70604e6-3669-4279-b9a0-942e226f4ad2",
         "name": "response_body",
         "type": "jsonb",
