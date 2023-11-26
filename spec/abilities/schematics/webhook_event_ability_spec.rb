@@ -12,10 +12,12 @@ RSpec.describe Schematics::WebhookEventAbility do
   let(:user) { User.new(role:) }
 
   it { is_expected.not_to be_able_to(:read, WebhookEvent) }
+  it { is_expected.not_to be_able_to(:retry, WebhookEvent) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
 
     it { is_expected.to be_able_to(:read, WebhookEvent) }
+    it { is_expected.to be_able_to(:retry, WebhookEvent) }
   end
 end

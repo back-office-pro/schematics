@@ -6,7 +6,7 @@ module Schematics
       super
       return unless user.admin?
 
-      can :read, ::WebhookEvent
+      can %i[read retry], ::WebhookEvent
     end
   end
 end
