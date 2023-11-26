@@ -6,6 +6,7 @@ module Core
       include Interactor
       delegate :webhook_event, to: :context, private: true
 
+      # :reek:UncommunicativeVariableName
       def call
         webhook_event.update!(
           state: ::WebhookEvent::STATE_STATE_BROADCASTED,
