@@ -939,6 +939,7 @@
               "id": "07ad0c5f-790a-4a7e-bf90-92968d3659d3",
               "name": "rollback",
               "icon": "arrow_rotate_left",
+              "color": "danger",
               "from": "finished",
               "to": "rollbacking"
             }
@@ -1511,6 +1512,7 @@
               "id": "63788727-ebc7-4a03-b0fc-56b997527455",
               "name": "unpublish",
               "icon": "arrow_trend_down",
+              "color": "danger",
               "from": "published",
               "to": "draft"
             }
