@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       webhook_endpoint:
+        secret_key: Clé secrète
         subscriptions: Souscriptions
         url: URL
     models:

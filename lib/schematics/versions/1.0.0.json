@@ -1584,6 +1584,11 @@
         }
       },
       {
+        "id": "2148c7c5-c148-4e8c-88d7-63f5714c71b7",
+        "name": "secret_key",
+        "type": "token"
+      },
+      {
         "id": "6b2aabe3-03f2-4a51-be12-62457a46b771",
         "name": "subscriptions",
         "type": "array",
