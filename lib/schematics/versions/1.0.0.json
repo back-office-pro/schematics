@@ -1624,7 +1624,7 @@
       },
       {
         "id": "d70604e6-3669-4279-b9a0-942e226f4ad2",
-        "name": "response",
+        "name": "response_body",
         "type": "jsonb",
         "options": {
           "readonly": true
@@ -1632,8 +1632,8 @@
       },
       {
         "id": "9834050c-f14d-4c7e-9289-582b46b229c0",
-        "name": "status",
-        "type": "integer",
+        "name": "response_code",
+        "type": "response_code",
         "options": {
           "readonly": true
         }
@@ -1641,7 +1641,10 @@
       {
         "id": "4305846a-e22c-42b6-b7b2-ecfbac3ec36a",
         "name": "webhook_endpoint",
-        "type": "belongs_to"
+        "type": "belongs_to",
+        "options": {
+          "required": true
+        }
       }
     ]
   }
