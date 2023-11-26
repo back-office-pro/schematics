@@ -27,6 +27,8 @@ module Schematics
       )
     }
 
+    after_create_commit :broadcast_webhook_event
+
     def icon
       {
         update: :pen_to_square,
@@ -45,6 +47,8 @@ module Schematics
       item_type.safe_constantize
     end
 
+    def webhook_event = "#{item_type.underscore}.#{event}"
+
     def serialized_json(*)
       {
         id:,
@@ -54,6 +58,12 @@ module Schematics
         user: user.as_json(association: true),
         objectChanges: object_changes
       }
+    end
+
+    private
+
+    def broadcast_webhook_event
+      ::WebhookEndpoint.broadcast_all(webhook_event, item.as_json(association: false))
     end
   end
 end
