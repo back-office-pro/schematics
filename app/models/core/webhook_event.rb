@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
 class WebhookEvent < Schematics::ApplicationRecord
-  class << self
-    def response_code_from_exception(exception)
-      case exception
-      when Timeout::TimeoutError
-        504
-      else
-        500
-      end
-    end
-  end
+  EXCEPTION_RESPONSE_CODE = { Timeout::TimeoutError => 504 }.freeze
 
   def after_retry_event
     Schematics::WebhookJob.perform_later(self)
