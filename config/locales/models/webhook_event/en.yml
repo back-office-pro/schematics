@@ -7,7 +7,17 @@ en:
         payload: Payload
         response_body: Response body
         response_code: Response code
+        state: State
         webhook_endpoint: Webhook endpoint
+    enums:
+      webhook_event:
+        state:
+          broadcasted: Broadcasted
+          error: Error
+          pending: Pending
+    events:
+      webhook_event:
+        retry: Retry
     models:
       webhook_event:
         gender: male
