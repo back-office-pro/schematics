@@ -5,23 +5,17 @@ module Schematics
     retry_on StandardError, wait: :polynomially_longer, attempts: 5
 
     # :reek:UncommunicativeVariableName
-    def perform(resource)
+    def perform(webhook_event)
       PaperTrail.request(enabled: false) do
-        Resources::Update.call(
-          resource:,
-          resource_params: {
-            state: WebhookEvent::STATE_STATE_BROADCASTED,
-            response_body: JSON.parse(resource.response.body),
-            response_code: resource.response.code
-          }
+        webhook_event.update!(
+          state: WebhookEvent::STATE_STATE_BROADCASTED,
+          response_body: JSON.parse(resource.response.body),
+          response_code: resource.response.code
         )
       rescue StandardError => e
-        Resources::Update.call(
-          resource:,
-          resource_params: {
-            state: WebhookEvent::STATE_STATE_ERROR,
-            response_body: { error: e.message }
-          }
+        webhook_event.update!(
+          state: WebhookEvent::STATE_STATE_ERROR,
+          response_body: { error: e.message }
         )
         raise e
       end
