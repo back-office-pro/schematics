@@ -24,8 +24,6 @@ class WebhookEndpoint < Schematics::ApplicationRecord
     end
   end
 
-  def uri = URI(url)
-
   def request(body)
     Net::HTTP.start(uri.hostname, uri.port, **TIMEOUT_OPTIONS.merge(use_ssl:)) do |http|
       http.request(
@@ -38,6 +36,8 @@ class WebhookEndpoint < Schematics::ApplicationRecord
   end
 
   private
+
+  def uri = URI(url)
 
   def use_ssl
     uri.scheme == 'https'
