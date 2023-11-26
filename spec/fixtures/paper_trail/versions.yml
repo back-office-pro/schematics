@@ -41,3 +41,11 @@ nine:
   event: create
   item: one (UserGroup)
   whodunnit: <%= User.first.id %>
+ten:
+  event: create
+  item: one (WebhookEndpoint)
+  whodunnit: <%= User.first.id %>
+eleven:
+  event: create
+  item: two (WebhookEndpoint)
+  whodunnit: <%= User.first.id %>

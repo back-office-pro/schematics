@@ -1,0 +1,9 @@
+---
+one:
+  url: https://jsonplaceholder.typicode.com/todos
+  subscriptions:
+    - meeting.create
+two:
+  url: https://www.nonexistingwebsite.com/todos
+  subscriptions:
+    - meeting.create
