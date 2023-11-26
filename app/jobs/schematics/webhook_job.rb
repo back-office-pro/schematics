@@ -2,16 +2,19 @@
 
 module Schematics
   class WebhookJob < ApplicationJob
+    retry_on StandardError, wait: :polynomially_longer, attempts: 5
+
+    # :reek:UncommunicativeVariableName
     def perform(webhook_event)
-      response = Net::HTTP.start(uri.hostname, uri.port, **http_options) do |http|
-        http.request(
-          Net::HTTP
-            .const_get(webhook_event.webhook_endpoint.method.camelize)
-            .new(uri)
-            .tap { _1.body = webhook_event.payload.to_json }
-        )
-      end
-      webhook_event.update!(response: response.body, status: response.code)
+      response = Net::HTTP.post_form(webhook_event.webhook_endpoint.uri, webhook_event.body)
+      webhook_event.update!(
+        state: WebhookEvent::STATE_STATE_BROADCASTED,
+        response_body: JSON.parse(response.body),
+        response_code: response.code
+      )
+    rescue StandardError => e
+      webhook_event.state_error!
+      raise e
     end
   end
 end
