@@ -1,9 +1,11 @@
 ---
 one:
   url: https://jsonplaceholder.typicode.com/todos
+  secret_key: <%= SecureRandom.uuid %>
   subscriptions:
     - meeting.create
 two:
   url: https://www.nonexistingwebsite.com/todos
+  secret_key: <%= SecureRandom.uuid %>
   subscriptions:
     - meeting.create
