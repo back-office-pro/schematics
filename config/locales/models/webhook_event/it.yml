@@ -4,7 +4,7 @@ it:
     attributes:
       webhook_event:
         event: Evento
-        payload: Payload
+        payload: Contenuto
         response_body: Corpo della risposta
         response_code: Codice di risposta
         state: Stato
