@@ -5,7 +5,9 @@ class WebhookEvent < Schematics::ApplicationRecord
     Schematics::WebhookJob.perform_later(self)
   end
 
-  memoize def response = webhook_endpoint.request(body)
+  memoize def response
+    webhook_endpoint.request(body)
+  end
 
   private
 
