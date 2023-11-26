@@ -20,8 +20,7 @@ module Schematics
           resource:,
           resource_params: {
             state: WebhookEvent::STATE_STATE_ERROR,
-            response_body: { error: e.message },
-            response_code: WebhookEvent::EXCEPTION_RESPONSE_CODE[exception.class] || 500
+            response_body: { error: e.message }
           }
         )
         raise e

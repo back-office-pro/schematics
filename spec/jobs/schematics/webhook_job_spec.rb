@@ -18,4 +18,24 @@ RSpec.describe Schematics::WebhookJob do
         .with(webhook_event)
     end
   end
+
+  describe '#perform_now' do
+    subject(:perform_now) { described_class.perform_now(webhook_event) }
+
+    before { stub_request(:post, webhook_endpoint.url).to_return(body: '{}', status: 200) }
+
+    it 'updates the response code' do
+      expect { perform_now }
+        .to change(webhook_event, :response_code)
+        .from(nil)
+        .to(200)
+    end
+
+    it 'updates the response body' do
+      expect { perform_now }
+        .to change(webhook_event, :response_body)
+        .from(nil)
+        .to({})
+    end
+  end
 end
