@@ -4,7 +4,7 @@ module Core
   module WebhookEndpoints
     class SubscribedQuery < Schematics::ApplicationQuery
       def call(event)
-        where(events: [event])
+        eager_load(:events).where(events: { id: [event.id] })
       end
     end
   end
