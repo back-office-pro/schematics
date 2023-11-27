@@ -10,7 +10,7 @@ RSpec.describe WebhookEndpoint do
 
     let(:body) { { 'event' => 'user.update', 'payload' => {} } }
 
-    before { stub_request(:post, record.url).to_return(status: 200) }
+    before { stub_request(:get, record.url).to_return(status: 200) }
 
     it { is_expected.to be_a(Net::HTTPOK) }
   end
