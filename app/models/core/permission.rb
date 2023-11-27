@@ -18,5 +18,7 @@ class Permission < Schematics::ApplicationRecord
     end
   end
 
-  def webhook_event = "#{model.underscore}.#{action}"
+  def webhook_event
+    "#{model.underscore}.#{action}" if %w[index show].exclude?(action)
+  end
 end
