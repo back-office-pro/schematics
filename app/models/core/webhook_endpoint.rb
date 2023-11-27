@@ -18,7 +18,8 @@ class WebhookEndpoint < Schematics::ApplicationRecord
   def request(body)
     Net::HTTP.start(uri.hostname, uri.port, **TIMEOUT_OPTIONS.merge(use_ssl:)) do |http|
       http.request(
-        Net::HTTP::Post
+        Net::HTTP
+          .const_get(request_method.downcase.camelize)
           .new(uri)
           .tap { _1['X-BackOffice-Signature'] = secret_key }
           .tap { _1.form_data = body }

@@ -3,12 +3,21 @@ fr:
   activerecord:
     attributes:
       webhook_endpoint:
+        request_method: Méthode
         secret_key: Clé secrète
         subscriptions:
           one: Souscription
           other: Souscriptions
           zero: Aucune souscription
         url: URL
+    enums:
+      webhook_endpoint:
+        request_method:
+          DELETE: DELETE
+          GET: GET
+          PATCH: PATCH
+          POST: POST
+          PUT: PUT
     models:
       webhook_endpoint:
         gender: male

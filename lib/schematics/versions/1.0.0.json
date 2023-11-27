@@ -1595,6 +1595,21 @@
         }
       },
       {
+        "id": "3da674e7-9686-4c5c-b312-f32b5ecd1bcf",
+        "name": "request_method",
+        "type": "enum",
+        "options": {
+          "default": "POST",
+          "values": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      {
         "id": "2148c7c5-c148-4e8c-88d7-63f5714c71b7",
         "name": "secret_key",
         "type": "token"
