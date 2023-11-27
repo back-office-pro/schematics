@@ -2,6 +2,7 @@
 
 class WebhookEndpoint < Schematics::ApplicationRecord
   TIMEOUT_OPTIONS = { open_timeout: 5, read_timeout: 5, write_timeout: 5, max_retries: 0 }.freeze
+  HEADER_SIGNATURE_KEY = 'X-BackOffice-Signature'.freeze
 
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery
 
@@ -21,7 +22,7 @@ class WebhookEndpoint < Schematics::ApplicationRecord
         Net::HTTP
           .const_get(request_method.downcase.camelize)
           .new(uri)
-          .tap { _1['X-BackOffice-Signature'] = secret_key }
+          .tap { _1[HEADER_SIGNATURE_KEY] = secret_key }
           .tap { _1.form_data = body }
       )
     end
