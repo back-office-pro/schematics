@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WebhookEvent < Schematics::ApplicationRecord
+class WebhookRequest < Schematics::ApplicationRecord
   def after_retry_event
     Schematics::WebhookJob.perform_later(self)
   end
@@ -11,5 +11,5 @@ class WebhookEvent < Schematics::ApplicationRecord
 
   private
 
-  def body = { event:, payload: }.stringify_keys
+  def body = { event: event.webhook_event, payload: }.stringify_keys
 end

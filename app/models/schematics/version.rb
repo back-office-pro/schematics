@@ -47,8 +47,6 @@ module Schematics
       item_type.safe_constantize
     end
 
-    def webhook_event = "#{item_type.underscore}.#{event}"
-
     def serialized_json(*)
       {
         id:,
@@ -64,7 +62,10 @@ module Schematics
 
     def broadcast_webhook_event
       PaperTrail.request(enabled: false) do
-        ::WebhookEndpoint.broadcast_all(webhook_event, item&.as_json(association: false))
+        WebhookEndpoint.broadcast_all(
+          Permission.find_by(model: item_type, action: event),
+          item&.as_json(association: false)
+        )
       end
     end
   end

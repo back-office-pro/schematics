@@ -5,13 +5,11 @@ class WebhookEndpoint < Schematics::ApplicationRecord
 
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery
 
-  attribute :subscriptions, default: -> { Permission.webhook_events }
-
   class << self
     def broadcast_all(event, payload)
       ActiveJob.perform_all_later(
         subscribed(event)
-          .map { WebhookEvent.create!(webhook_endpoint: _1, event:, payload:) }
+          .map { WebhookRequest.create!(webhook_endpoint: _1, event:, payload:) }
           .map(&Schematics::WebhookJob.method(:new))
       )
     end

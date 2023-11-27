@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module WebhookEvents
+      module WebhookRequests
         class Component < Widgets::Component
         end
       end

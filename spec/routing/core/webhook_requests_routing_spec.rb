@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe WebhookEventsController do
+RSpec.describe WebhookRequestsController do
   include Schematics::Specs::Routing
 end

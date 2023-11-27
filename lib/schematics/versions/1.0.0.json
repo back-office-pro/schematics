@@ -1573,6 +1573,17 @@
     "options": {
       "icon": "sitemap"
     },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "subscriptions",
+        "options": {
+          "required": true,
+          "type": "permission",
+          "group_by": "model"
+        }
+      }
+    ],
     "attributes": [
       {
         "id": "e26406ff-6c3e-4ec3-a4bc-4fa077c74987",
@@ -1587,20 +1598,12 @@
         "id": "2148c7c5-c148-4e8c-88d7-63f5714c71b7",
         "name": "secret_key",
         "type": "token"
-      },
-      {
-        "id": "6b2aabe3-03f2-4a51-be12-62457a46b771",
-        "name": "subscriptions",
-        "type": "array",
-        "options": {
-          "required": true
-        }
       }
     ]
   },
   {
     "id": "a44b6f34-94f3-43af-8ba7-0f7d1534b4be",
-    "name": "webhook_event",
+    "name": "webhook_request",
     "options": {
       "icon": "server",
       "hidden": true,
@@ -1613,10 +1616,10 @@
       {
         "id": "693210a1-5012-4a98-bf58-39d33ed921bb",
         "name": "event",
-        "type": "string",
+        "type": "belongs_to",
         "options": {
           "required": true,
-          "readonly": true
+          "type": "permission"
         }
       },
       {

@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe WebhookEvent do
+RSpec.describe WebhookRequest do
   include Schematics::Specs::Feature
 end

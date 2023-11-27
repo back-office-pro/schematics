@@ -13,7 +13,6 @@ RSpec.describe Schematics::Version do
 
   its(:model_class) { is_expected.to eq(User) }
   its(:icon) { is_expected.to eq(:pen_to_square) }
-  its(:webhook_event) { is_expected.to eq('user.update') }
 
   its(:serialized_json) do
     is_expected.to include(:event, :id, :createdAt, :item, :user, :objectChanges)

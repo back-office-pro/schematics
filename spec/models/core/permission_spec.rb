@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe Permission do
   include Schematics::Specs::Model
 
+  its(:webhook_event) { is_expected.to start_with('user.') }
+
   describe '.create_entities_permissions!' do
     subject(:create_entities_permissions!) do
       described_class.create_entities_permissions!

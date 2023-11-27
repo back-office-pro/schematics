@@ -4,7 +4,10 @@ en:
     attributes:
       webhook_endpoint:
         secret_key: Secret key
-        subscriptions: Subscriptions
+        subscriptions:
+          one: Subscription
+          other: Subscriptions
+          zero: No subscription
         url: URL
     models:
       webhook_endpoint:

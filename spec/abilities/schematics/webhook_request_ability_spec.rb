@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
-RSpec.describe Schematics::WebhookEventAbility do
+RSpec.describe Schematics::WebhookRequestAbility do
   subject(:ability) { described_class.new(user) }
 
   include_context 'with admin role'
@@ -11,13 +11,13 @@ RSpec.describe Schematics::WebhookEventAbility do
   let(:role) { Role.new }
   let(:user) { User.new(role:) }
 
-  it { is_expected.not_to be_able_to(:read, WebhookEvent) }
-  it { is_expected.not_to be_able_to(:retry, WebhookEvent) }
+  it { is_expected.not_to be_able_to(:read, WebhookRequest) }
+  it { is_expected.not_to be_able_to(:retry, WebhookRequest) }
 
   context 'when user is admin' do
     let(:role) { admin_role }
 
-    it { is_expected.to be_able_to(:read, WebhookEvent) }
-    it { is_expected.to be_able_to(:retry, WebhookEvent) }
+    it { is_expected.to be_able_to(:read, WebhookRequest) }
+    it { is_expected.to be_able_to(:retry, WebhookRequest) }
   end
 end

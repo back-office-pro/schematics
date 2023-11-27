@@ -1,11 +1,9 @@
 ---
 one:
+  id: 118ecf22-30f5-4622-ad8c-a3755be55e6c
   url: https://jsonplaceholder.typicode.com/todos
   secret_key: <%= SecureRandom.uuid %>
-  subscriptions:
-    - meeting.create
 two:
+  id: 0037f59c-5ab5-422e-8c21-d47f03c9401e
   url: https://www.nonexistingwebsite.com/todos
   secret_key: <%= SecureRandom.uuid %>
-  subscriptions:
-    - meeting.create

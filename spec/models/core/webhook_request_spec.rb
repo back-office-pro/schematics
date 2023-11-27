@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WebhookEvent do
+RSpec.describe WebhookRequest do
   include Schematics::Specs::Model
 
   before do

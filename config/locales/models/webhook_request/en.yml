@@ -2,7 +2,7 @@
 en:
   activerecord:
     attributes:
-      webhook_event:
+      webhook_request:
         event: Event
         payload: Payload
         response_body: Response body
@@ -10,16 +10,16 @@ en:
         state: State
         webhook_endpoint: Webhook endpoint
     enums:
-      webhook_event:
+      webhook_request:
         state:
           broadcasted: Broadcasted
           error: Error
           pending: Pending
     events:
-      webhook_event:
+      webhook_request:
         retry: Retry
     models:
-      webhook_event:
-        gender: male
-        one: Webhook event
-        other: Webhook events
+      webhook_request:
+        gender: female
+        one: Webhook request
+        other: Webhook requests

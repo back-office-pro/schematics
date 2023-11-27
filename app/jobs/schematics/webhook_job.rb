@@ -4,9 +4,9 @@ module Schematics
   class WebhookJob < ApplicationJob
     retry_on StandardError, wait: :polynomially_longer, attempts: 5
 
-    def perform(webhook_event)
+    def perform(webhook_request)
       PaperTrail.request(enabled: false) do
-        Core::WebhookEvents::Fetch.call(webhook_event:)
+        Core::WebhookRequests::Fetch.call(webhook_request:)
       end
     end
   end

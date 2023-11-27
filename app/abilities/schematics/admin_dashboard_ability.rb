@@ -15,7 +15,7 @@ module Schematics
       ::UserGroup,
       ::Role,
       ::Documentation,
-      ::WebhookEvent,
+      ::WebhookRequest,
       ::WebhookEndpoint
     ].freeze
 

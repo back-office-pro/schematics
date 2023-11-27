@@ -4,7 +4,7 @@ module Core
   module WebhookEndpoints
     class SubscribedQuery < Schematics::ApplicationQuery
       def call(event)
-        where(arel_table[:subscriptions].any(event))
+        where(subscriptions: [event])
       end
     end
   end
