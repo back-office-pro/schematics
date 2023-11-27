@@ -5,14 +5,7 @@ class WebhookEndpoint < Schematics::ApplicationRecord
 
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery
 
-  attribute :subscriptions, default: lambda {
-    Tenant
-      .schema
-      .entities
-      .reject(&:hidden?)
-      .reject(&:existing?)
-      .map { "#{_1.name}.created" }
-  }
+  attribute :subscriptions, default: -> { Permission.webhook_events }
 
   class << self
     def broadcast_all(event, payload)
