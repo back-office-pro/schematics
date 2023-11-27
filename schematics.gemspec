@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_storage_base64', '~> 3.0.0'
   spec.add_dependency 'active_storage_validations', '~> 1.1.3'
   spec.add_dependency 'after_commit_everywhere', '~> 1.3.1'
-  spec.add_dependency 'aws-sdk-s3', '~> 1.139.0'
+  spec.add_dependency 'aws-sdk-s3', '>= 1.139', '< 1.141'
   spec.add_dependency 'bcrypt', '~> 3.1.20'
   spec.add_dependency 'bootsnap', '~> 1.17.0'
   spec.add_dependency 'bootstrap-email', '~> 1.4.1'
