@@ -1580,7 +1580,8 @@
         "options": {
           "required": true,
           "type": "permission",
-          "group_by": "model"
+          "group_by": "model",
+          "filter_by": "webhook_event"
         }
       }
     ],

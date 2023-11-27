@@ -19,7 +19,8 @@ module Schematics
         Options::Required,
         Options::Hidden,
         Options::Type,
-        Options::GroupBy
+        Options::GroupBy,
+        Options::FilterBy
       ]
 
       def icon

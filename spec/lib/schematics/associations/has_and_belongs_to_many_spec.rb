@@ -48,7 +48,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
       Schematics::Options::Required,
       Schematics::Options::Hidden,
       Schematics::Options::Type,
-      Schematics::Options::GroupBy
+      Schematics::Options::GroupBy,
+      Schematics::Options::FilterBy
     )
   end
 
