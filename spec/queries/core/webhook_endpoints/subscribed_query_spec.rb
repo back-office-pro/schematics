@@ -11,13 +11,13 @@ RSpec.describe Core::WebhookEndpoints::SubscribedQuery do
   let(:first_webhook_endpoint) do
     WebhookEndpoint.create!(
       url: 'https://www.nowhere.com/1',
-      subscriptions: [first_event]
+      events: [first_event]
     )
   end
   let(:second_webhook_endpoint) do
     WebhookEndpoint.create!(
       url: 'https://www.nowhere.com/2',
-      subscriptions: [second_event]
+      events: [second_event]
     )
   end
 

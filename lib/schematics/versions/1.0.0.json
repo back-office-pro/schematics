@@ -1576,7 +1576,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "subscriptions",
+        "name": "events",
         "options": {
           "required": true,
           "type": "permission",

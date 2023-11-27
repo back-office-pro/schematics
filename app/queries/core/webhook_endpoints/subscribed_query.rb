@@ -4,7 +4,7 @@ module Core
   module WebhookEndpoints
     class SubscribedQuery < Schematics::ApplicationQuery
       def call(event)
-        where(subscriptions: [event])
+        where(events: [event])
       end
     end
   end

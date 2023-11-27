@@ -8,7 +8,7 @@ RSpec.describe Schematics::WebhookJob do
   let(:webhook_endpoint) do
     WebhookEndpoint.create!(
       url: 'https://www.nowhere.com',
-      subscriptions: [event]
+      events: [event]
     )
   end
 

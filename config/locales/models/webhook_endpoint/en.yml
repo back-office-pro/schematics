@@ -3,12 +3,12 @@ en:
   activerecord:
     attributes:
       webhook_endpoint:
+        events:
+          one: Event
+          other: Events
+          zero: No event
         request_method: Method
         secret_key: Secret key
-        subscriptions:
-          one: Subscription
-          other: Subscriptions
-          zero: No subscription
         url: URL
     enums:
       webhook_endpoint:
