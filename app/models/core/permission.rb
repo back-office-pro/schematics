@@ -20,6 +20,6 @@ class Permission < Schematics::ApplicationRecord
     def webhook_events = where
       .not(action: %w[index show])
       .pluck(:model, :action)
-      .map { "#{_1.first.underscore}.#{_1.second}"}
+      .map { "#{_1.first.underscore}.#{_1.second}" }
   end
 end
