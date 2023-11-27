@@ -7,7 +7,7 @@ module Schematics
         class Component < BelongsTo::Component
           delegate :group_by, :filter_by, to: :options, private: true
 
-          memoize def collection
+          memoize def collection # rubocop:disable Metrics/CyclomaticComplexity
             return super unless group_by
 
             model_class
