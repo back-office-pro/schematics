@@ -43,4 +43,21 @@ RSpec.describe Migration do
       end
     end
   end
+
+  describe '.core' do
+    subject { described_class.core }
+
+    before { record.state_finished! }
+
+    it { is_expected.to be_a(described_class) }
+    it { is_expected.to have_attributes(data_version: 1.5) }
+  end
+
+  describe '.current' do
+    subject { described_class.current }
+
+    before { record.state_finished! }
+
+    it { is_expected.to eq(record) }
+  end
 end

@@ -7,4 +7,10 @@ RSpec.describe Role do
 
   it { is_expected.not_to be_admin }
   its(:permission_ids) { is_expected.to eq(Permission.features.ids) }
+
+  describe '.admin' do
+    subject { described_class.admin }
+
+    it { is_expected.to be_a(described_class) }
+  end
 end

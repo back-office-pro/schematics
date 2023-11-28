@@ -30,4 +30,11 @@ RSpec.describe Chart do
     its(:xtitle) { is_expected.to be_nil }
     its(:ytitle) { is_expected.to be_nil }
   end
+
+  describe '.api' do
+    subject { described_class.api }
+
+    it { is_expected.to be_a(described_class) }
+    it { is_expected.to have_attributes(model: 'ApiRequest') }
+  end
 end
