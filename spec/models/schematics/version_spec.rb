@@ -7,6 +7,15 @@ RSpec.describe Schematics::Version do
 
   include_context 'with user'
 
+  let(:webhook_endpoint) do
+    WebhookEndpoint.create!(
+      url: 'https://www.nowhere.com',
+      events: [Permission.create!(model: 'User', action: 'update')]
+    )
+  end
+
+  before { webhook_endpoint }
+
   let(:event) { 'update' }
   let(:item) { user }
   let(:object) { user.as_json }
@@ -16,5 +25,12 @@ RSpec.describe Schematics::Version do
 
   its(:serialized_json) do
     is_expected.to include(:event, :id, :createdAt, :item, :user, :objectChanges)
+  end
+
+  it 'enqueues a webhook job after create' do
+    expect { version.save! }
+      .to have_enqueued_job(Schematics::WebhookJob)
+      .with(WebhookRequest)
+      .on_queue('webhooks')
   end
 end
