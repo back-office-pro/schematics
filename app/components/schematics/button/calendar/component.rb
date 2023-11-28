@@ -6,7 +6,7 @@ module Schematics
       class Component < ApplicationComponent
         delegate :class, to: :resource, prefix: :model, private: true
         delegate :entity, to: :model_class, private: true
-        delegate :viewers, to: :helpers, private: true
+        use_helpers :viewers
         option :resource
 
         def data = { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' }

@@ -3,8 +3,8 @@
 module Schematics
   module Head
     class Component < ApplicationComponent
-      delegate :title, to: :helpers
       delegate :theme_color, :company_name, to: ::Configuration
+      use_helpers :title
     end
   end
 end

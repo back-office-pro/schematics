@@ -2,20 +2,20 @@
 
 module Schematics
   class ApplicationComponent < ::ViewComponent::Base
+    include ::ViewComponent::UseHelpers
     include ::Pagy::Backend
     include ::Pagy::Frontend
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
     include ::Importmap::ImportmapTagsHelper
-    include ApplicationHelper
     extend ::Dry::Initializer
 
-    delegate :current_user,
-             :current_ability,
-             :can?,
-             :content_security_policy_nonce,
-             :content_security_policy?,
-             to: :helpers
+    use_helpers :current_user,
+                :current_ability,
+                :can?,
+                :fa_icon,
+                :content_security_policy_nonce,
+                :content_security_policy?
 
     def preferences(key, default = nil)
       current_user

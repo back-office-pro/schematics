@@ -3,8 +3,8 @@
 module Schematics
   module ResourceForm
     class Component < ApplicationComponent
-      delegate :rich_text_area_tag, to: :helpers
       delegate :persisted?, to: :resource, private: true
+      use_helpers :rich_text_area_tag
 
       option :resource
       option :url, optional: true

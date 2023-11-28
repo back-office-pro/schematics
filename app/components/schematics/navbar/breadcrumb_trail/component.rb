@@ -5,7 +5,7 @@ module Schematics
     module BreadcrumbTrail
       class Component < ApplicationComponent
         delegate :root_path, to: 'Schematics::Engine.routes.url_helpers'
-        delegate :breadcrumb_trail, to: :helpers
+        use_helpers :breadcrumb_trail
 
         def title = 'Control+h'
 
