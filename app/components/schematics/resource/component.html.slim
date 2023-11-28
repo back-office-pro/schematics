@@ -9,7 +9,7 @@ span.text-body-tertiary = '-' if value.nil?
     - else
       = render Schematics::ResourceLinkTo::Component.new(resource: value)
 - when Schematics::Attributes::Jsonb
-  - case value&.symbolize_keys
+  - case value.try(:symbolize_keys)
   - in Schematics::Schema
     = render Schematics::Viewer::Schema::Component.new(schema: value)
   - in { openapi:, tags:, paths:, security:, components: }

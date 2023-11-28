@@ -1,0 +1,25 @@
+---
+fr:
+  activerecord:
+    attributes:
+      webhook_endpoint:
+        events:
+          one: Évènement
+          other: Évènements
+          zero: Aucun évènement
+        request_method: Méthode
+        secret_key: Clé secrète
+        url: URL
+    enums:
+      webhook_endpoint:
+        request_method:
+          DELETE: DELETE
+          GET: GET
+          PATCH: PATCH
+          POST: POST
+          PUT: PUT
+    models:
+      webhook_endpoint:
+        gender: male
+        one: Point d'entrée de webhook
+        other: Points d'entrée de webhook

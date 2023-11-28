@@ -4,8 +4,9 @@ detectors:
   LongParameterList:
     max_params: 5
   TooManyStatements:
-    max_statements: 23
+    max_statements: 20
     exclude:
+      - initialize
       - inherited
       - remove_unused_files
   TooManyInstanceVariables:

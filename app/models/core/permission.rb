@@ -17,4 +17,8 @@ class Permission < Schematics::ApplicationRecord
         .map { |action| create!(model: entity.class_name, action:) }
     end
   end
+
+  def webhook_event
+    "#{model.underscore}.#{action}" if %w[index show].exclude?(action)
+  end
 end

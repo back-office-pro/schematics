@@ -1566,5 +1566,134 @@
         "type": "jsonb"
       }
     ]
+  },
+  {
+    "id": "5458b34a-cf0e-48cf-abf4-7ce0579d2cf7",
+    "name": "webhook_endpoint",
+    "options": {
+      "icon": "sitemap"
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "events",
+        "options": {
+          "required": true,
+          "type": "permission",
+          "group_by": "model",
+          "filter_by": "webhook_event"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": "e26406ff-6c3e-4ec3-a4bc-4fa077c74987",
+        "name": "url",
+        "type": "url",
+        "options": {
+          "unique": true,
+          "required": true
+        }
+      },
+      {
+        "id": "3da674e7-9686-4c5c-b312-f32b5ecd1bcf",
+        "name": "request_method",
+        "type": "enum",
+        "options": {
+          "default": "POST",
+          "values": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "2148c7c5-c148-4e8c-88d7-63f5714c71b7",
+        "name": "secret_key",
+        "type": "token"
+      }
+    ]
+  },
+  {
+    "id": "a44b6f34-94f3-43af-8ba7-0f7d1534b4be",
+    "name": "webhook_request",
+    "options": {
+      "icon": "server",
+      "hidden": true,
+      "actions": [
+        "index",
+        "show"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "693210a1-5012-4a98-bf58-39d33ed921bb",
+        "name": "event",
+        "type": "belongs_to",
+        "options": {
+          "required": true,
+          "type": "permission"
+        }
+      },
+      {
+        "id": "136731ab-ae61-4435-bf1b-9a7772804450",
+        "name": "payload",
+        "type": "jsonb",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "eadb42c6-4607-47ba-86e7-40d96cd52298",
+        "name": "state",
+        "type": "state_machine",
+        "options": {
+          "required": true,
+          "direct_assignment": true,
+          "default": "pending",
+          "values": [
+            "pending",
+            "broadcasted",
+            "error"
+          ],
+          "events": [
+            {
+              "id": "f771a45d-15bc-49ae-8009-6cf2f45f0be9",
+              "name": "retry",
+              "icon": "rotate",
+              "from": "error",
+              "to": "pending"
+            }
+          ]
+        }
+      },
+      {
+        "id": "d70604e6-3669-4279-b9a0-942e226f4ad2",
+        "name": "response_body",
+        "type": "jsonb",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "9834050c-f14d-4c7e-9289-582b46b229c0",
+        "name": "response_code",
+        "type": "response_code",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "4305846a-e22c-42b6-b7b2-ecfbac3ec36a",
+        "name": "webhook_endpoint",
+        "type": "belongs_to",
+        "options": {
+          "required": true
+        }
+      }
+    ]
   }
 ]

@@ -41,3 +41,13 @@ nine:
   event: create
   item: one (UserGroup)
   whodunnit: <%= User.first.id %>
+ten:
+  event: create
+  item_id: 118ecf22-30f5-4622-ad8c-a3755be55e6c
+  item_type: WebhookEndpoint
+  whodunnit: <%= User.first.id %>
+eleven:
+  event: create
+  item_id: 0037f59c-5ab5-422e-8c21-d47f03c9401e
+  item_type: WebhookEndpoint
+  whodunnit: <%= User.first.id %>

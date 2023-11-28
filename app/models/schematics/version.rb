@@ -27,6 +27,8 @@ module Schematics
       )
     }
 
+    after_create_commit :broadcast_webhook_event
+
     def icon
       {
         update: :pen_to_square,
@@ -54,6 +56,20 @@ module Schematics
         user: user.as_json(association: true),
         objectChanges: object_changes
       }
+    end
+
+    private
+
+    memoize def webhook_event
+      Permission.find_by(model: item_type, action: event)
+    end
+
+    def broadcast_webhook_event
+      return unless webhook_event
+
+      PaperTrail.request(enabled: false) do
+        WebhookEndpoint.broadcast_all(webhook_event, item&.as_json(association: false))
+      end
     end
   end
 end
