@@ -49,6 +49,17 @@ RSpec.describe Schematics::WebhookJob do
       end
     end
 
+    context 'when the request is successful but the body is not a valid JSON' do
+      before { stub_request(:post, webhook_endpoint.url).to_return(body: 'OK', status: 200) }
+
+      it 'updates the response body' do
+        expect { perform_now }
+          .to change(webhook_request, :response_body)
+          .from(nil)
+          .to('OK')
+      end
+    end
+
     context 'when there is a timeout error' do
       before do
         stub_request(:post, webhook_endpoint.url).to_raise(Timeout::Error.new('Timeout'))

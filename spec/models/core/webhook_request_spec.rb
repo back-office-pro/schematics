@@ -7,7 +7,7 @@ RSpec.describe WebhookRequest do
 
   before do
     record.state_error!
-    stub_request(:get, record.webhook_endpoint.url).to_return(status: 200)
+    stub_request(:get, record.webhook_endpoint.url).to_return(body: '{}', status: 200)
   end
 
   it 'enqueues a webhook job after retry' do
@@ -18,4 +18,5 @@ RSpec.describe WebhookRequest do
   end
 
   its(:response) { is_expected.to be_a(Net::HTTPOK) }
+  its(:parsed_response_body) { is_expected.to be_empty }
 end

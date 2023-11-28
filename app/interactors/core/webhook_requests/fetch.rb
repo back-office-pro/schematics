@@ -10,7 +10,7 @@ module Core
       def call
         webhook_request.update!(
           state: ::WebhookRequest::STATE_STATE_BROADCASTED,
-          response_body: JSON.parse(webhook_request.response.body),
+          response_body: webhook_request.parsed_response_body,
           response_code: webhook_request.response.code
         )
       rescue StandardError => e
