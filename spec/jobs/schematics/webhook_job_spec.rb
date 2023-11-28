@@ -17,26 +17,56 @@ RSpec.describe Schematics::WebhookJob do
       expect { described_class.perform_later(webhook_request) }
         .to have_enqueued_job(described_class)
         .with(webhook_request)
+        .on_queue('webhooks')
     end
   end
 
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(webhook_request) }
 
-    before { stub_request(:post, webhook_endpoint.url).to_return(body: '{}', status: 200) }
+    context 'when the request is successful' do
+      before { stub_request(:post, webhook_endpoint.url).to_return(body: '{}', status: 200) }
 
-    it 'updates the response code' do
-      expect { perform_now }
-        .to change(webhook_request, :response_code)
-        .from(nil)
-        .to(200)
+      it 'updates the state from pending to broadcasted' do
+        expect { perform_now }
+          .to change(webhook_request, :state)
+          .from(WebhookRequest::STATE_STATE_PENDING.to_s)
+          .to(WebhookRequest::STATE_STATE_BROADCASTED.to_s)
+      end
+
+      it 'updates the response code' do
+        expect { perform_now }
+          .to change(webhook_request, :response_code)
+          .from(nil)
+          .to(200)
+      end
+
+      it 'updates the response body' do
+        expect { perform_now }
+          .to change(webhook_request, :response_body)
+          .from(nil)
+          .to({})
+      end
     end
 
-    it 'updates the response body' do
-      expect { perform_now }
-        .to change(webhook_request, :response_body)
-        .from(nil)
-        .to({})
+    context 'when there is a timeout error' do
+      before do
+        stub_request(:post, webhook_endpoint.url).to_raise(Timeout::Error.new('Timeout'))
+      end
+
+      it 'updates the state from pending to error' do
+        expect { perform_now }
+          .to change(webhook_request, :state)
+          .from(WebhookRequest::STATE_STATE_PENDING.to_s)
+          .to(WebhookRequest::STATE_STATE_ERROR.to_s)
+      end
+
+      it 'updates the response body' do
+        expect { perform_now }
+          .to change(webhook_request, :response_body)
+          .from(nil)
+          .to('error' => 'Timeout')
+      end
     end
   end
 end
