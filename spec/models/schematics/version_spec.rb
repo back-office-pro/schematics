@@ -7,18 +7,17 @@ RSpec.describe Schematics::Version do
 
   include_context 'with user'
 
+  let(:event) { 'update' }
+  let(:item) { user }
+  let(:object) { user.as_json }
   let(:webhook_endpoint) do
     WebhookEndpoint.create!(
       url: 'https://www.nowhere.com',
-      events: [Permission.create!(model: 'User', action: 'update')]
+      events: [Permission.create!(model: item.class, action: event)]
     )
   end
 
   before { webhook_endpoint }
-
-  let(:event) { 'update' }
-  let(:item) { user }
-  let(:object) { user.as_json }
 
   its(:model_class) { is_expected.to eq(User) }
   its(:icon) { is_expected.to eq(:pen_to_square) }
