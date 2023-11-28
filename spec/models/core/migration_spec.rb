@@ -24,22 +24,22 @@ RSpec.describe Migration do
     context 'when migration has succeeded' do
       let(:failure) { false }
 
-      it 'changes migration state from in_progress to finished' do
+      it 'changes migration state from pending to finished' do
         expect { finalize! }
           .to change(record, :state)
-          .from('pending')
-          .to('finished')
+          .from(described_class::STATE_STATE_PENDING.to_s)
+          .to(described_class::STATE_STATE_FINISHED.to_s)
       end
     end
 
     context 'when migration has failed' do
       let(:failure) { true }
 
-      it 'changes migration state from in_progress to error' do
+      it 'changes migration state from pending to error' do
         expect { finalize! }
           .to change(record, :state)
-          .from('pending')
-          .to('error')
+          .from(described_class::STATE_STATE_PENDING.to_s)
+          .to(described_class::STATE_STATE_ERROR.to_s)
       end
     end
   end
