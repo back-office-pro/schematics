@@ -60,12 +60,15 @@ module Schematics
 
     private
 
+    memoize def webhook_event
+      Permission.find_by(model: item_type, action: event)
+    end
+
     def broadcast_webhook_event
+      return unless webhook_event
+
       PaperTrail.request(enabled: false) do
-        WebhookEndpoint.broadcast_all(
-          Permission.find_by(model: item_type, action: event),
-          item&.as_json(association: false)
-        )
+        WebhookEndpoint.broadcast_all(webhook_event, item&.as_json(association: false))
       end
     end
   end
