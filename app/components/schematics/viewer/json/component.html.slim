@@ -1,0 +1,10 @@
+- case value
+- when Hash
+  table.table.mb-0.table-striped.table-borderless
+    tbody
+      - value.each do |key, value|
+        tr
+          th = key
+          td = render Schematics::Viewer::Json::Component.new(value:)
+- else
+  = value

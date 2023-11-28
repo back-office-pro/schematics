@@ -15,12 +15,7 @@ span.text-body-tertiary = '-' if value.nil?
   - in { openapi:, tags:, paths:, security:, components: }
     = render Schematics::Viewer::Swagger::Component.new(spec: value)
   - else
-    table.table.mb-0.table-striped.table-borderless
-      tbody
-        - value&.each do |key, value|
-          tr
-            th = key
-            td = value
+    = render Schematics::Viewer::Json::Component.new(value:)
 - when Schematics::Attributes::Url
   = render Schematics::LinkPreview::Component.new(url: value)
 - when Schematics::Attributes::Color
