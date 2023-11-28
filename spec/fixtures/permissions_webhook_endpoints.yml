@@ -1,7 +1,7 @@
 ---
 one:
   webhook_endpoint_id: 118ecf22-30f5-4622-ad8c-a3755be55e6c
-  permission_id: <%= Permission.first.id %>
+  permission_id: <%= Permission.third.id %>
 two:
   webhook_endpoint_id: 0037f59c-5ab5-422e-8c21-d47f03c9401e
-  permission_id: <%= Permission.second.id %>
+  permission_id: <%= Permission.fourth.id %>
