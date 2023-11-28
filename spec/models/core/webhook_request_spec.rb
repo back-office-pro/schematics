@@ -14,6 +14,7 @@ RSpec.describe WebhookRequest do
     expect { record.retry! }
       .to have_enqueued_job(Schematics::WebhookJob)
       .with(record)
+      .on_queue('webhooks')
   end
 
   its(:response) { is_expected.to be_a(Net::HTTPOK) }

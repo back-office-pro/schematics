@@ -2,6 +2,7 @@
 
 module Schematics
   class WebhookJob < ApplicationJob
+    queue_as :webhooks
     retry_on StandardError, wait: :polynomially_longer, attempts: 5
 
     def perform(webhook_request)
