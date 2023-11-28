@@ -11,6 +11,8 @@ RSpec.describe Role do
   describe '.admin' do
     subject { described_class.admin }
 
-    it { is_expected.to be_a(described_class) }
+    include_context 'with admin role'
+
+    it { is_expected.to eq(admin_role) }
   end
 end
