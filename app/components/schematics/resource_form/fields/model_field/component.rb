@@ -11,7 +11,7 @@ module Schematics
             .collection
             .map { _1.push(class: model_field_collection_class(_1.second, field)) }
 
-          def prompt = t('prompt', attribute_name:)
+          def prompt = t('prompt', attribute_name: attribute_name.downcase)
 
           def data = {
             controller: 'dropdown',

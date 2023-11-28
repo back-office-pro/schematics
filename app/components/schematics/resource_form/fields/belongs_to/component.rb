@@ -20,7 +20,7 @@ module Schematics
             .map { [_1.to_s, _1.id] }
             .sort
 
-          def prompt = t('prompt', gender:, attribute_name:)
+          def prompt = t('prompt', gender:, attribute_name: attribute_name.downcase)
 
           def data = {
             controller: 'dropdowns--association-dropdown',
@@ -28,7 +28,7 @@ module Schematics
             'dropdowns--association-dropdown-url-value': url
           }
 
-          def label = attribute_name.humanize
+          alias label attribute_name
 
           protected
 

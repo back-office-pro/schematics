@@ -9,7 +9,7 @@ module Schematics
             [value].compact
           end
 
-          def prompt = t('prompt', attribute_name:)
+          def prompt = t('prompt', attribute_name: attribute_name.downcase)
 
           def autocomplete = 'new-address'
 

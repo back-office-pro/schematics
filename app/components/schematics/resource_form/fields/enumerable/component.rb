@@ -7,7 +7,7 @@ module Schematics
         class Component < Fields::Component
           delegate :collection, to: :field
 
-          def prompt = t('prompt', attribute_name:)
+          def prompt = t('prompt', attribute_name: attribute_name.downcase)
 
           def data = { controller: 'dropdown' }
         end
