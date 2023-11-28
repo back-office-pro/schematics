@@ -60,7 +60,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       let(:auth_token) { Session.last.signed_id }
 
       before do
-        Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new({ info: { email: } })
+        Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new(info: { email: })
         do_request
       end
 
@@ -75,7 +75,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       let(:remember_me) { nil }
 
       before do
-        Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new({ info: { email: } })
+        Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new(info: { email: })
         do_request
       end
 
