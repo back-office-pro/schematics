@@ -8,12 +8,12 @@ module Schematics
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
     include ::Importmap::ImportmapTagsHelper
+    include ApplicationHelper
     extend ::Dry::Initializer
 
     use_helpers :current_user,
                 :current_ability,
                 :can?,
-                :fa_icon,
                 :content_security_policy_nonce,
                 :content_security_policy?
 
