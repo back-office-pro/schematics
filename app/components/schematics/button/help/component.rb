@@ -16,8 +16,8 @@ module Schematics
           ::WebhookEndpoint
         ].freeze
 
-        delegate :url, to: ::Tenant, private: true
-        delegate :human_name_plural, to: :model_class, allow_nil: true, private: true
+        delegate :entity, :human_name_plural, to: :model_class, allow_nil: true, private: true
+        delegate :core?, to: :entity, allow_nil: true, private: true
         delegate :locale, to: :current_user, private: true
         delegate :icon, to: '::Documentation.entity'
 
@@ -36,19 +36,30 @@ module Schematics
           )
         end
 
-        def data
-          { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' } if tooltip
-        end
+        def data = {
+          'bs-toggle': ('offcanvas' unless core?),
+          'bs-target': ('#documentation' unless core?),
+          controller: ('tooltip' if tooltip),
+          'bs-custom-class': ('responsive-button-tooltip' if tooltip)
+        }.compact
 
         def title = t('.text')
 
-        def path = File.join(['/docs', locale, slug].compact)
+        def url
+          ::Tenant.url(path:) if external_doc?
+        end
 
         def render?
-          !model_class || ALLOWLIST.include?(model_class)
+          external_doc? || !core?
         end
 
         private
+
+        def external_doc?
+          !model_class || ALLOWLIST.include?(model_class)
+        end
+
+        def path = File.join(['/docs', locale, slug].compact)
 
         def slug = human_name_plural
           .to_s
