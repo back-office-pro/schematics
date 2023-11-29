@@ -13,3 +13,4 @@
         = render Schematics::Button::Draft::Component.new
   .card-body.p-3
     = render Schematics::ResourceForm::Component.new(resource: @resource)
+= render Schematics::Viewer::Documentation::Component.new(model_class:)
