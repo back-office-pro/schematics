@@ -2,6 +2,8 @@
 
 module Schematics
   class MigrateSchemaJob < ApplicationJob
+    queue_as :migrations
+
     class << self
       delegate :info, to: :logger, private: true
 

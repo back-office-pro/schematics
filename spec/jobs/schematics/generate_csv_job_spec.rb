@@ -14,6 +14,7 @@ RSpec.describe Schematics::GenerateCsvJob do
       expect { described_class.perform_later(user, resources, dropdown) }
         .to have_enqueued_job(described_class)
         .with(user, resources, dropdown)
+        .on_queue('exports')
     end
   end
 
@@ -32,6 +33,7 @@ RSpec.describe Schematics::GenerateCsvJob do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .with(an_instance_of(ActiveStorage::Blob))
+        .on_queue('cleanups')
     end
 
     it 'broadcasts replace to user' do

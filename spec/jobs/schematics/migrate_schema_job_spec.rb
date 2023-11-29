@@ -24,6 +24,7 @@ RSpec.describe Schematics::MigrateSchemaJob do
       expect { described_class.perform_later(migration) }
         .to have_enqueued_job(described_class)
         .with(migration)
+        .on_queue('migrations')
     end
   end
 end

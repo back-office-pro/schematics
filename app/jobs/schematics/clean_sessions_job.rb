@@ -3,6 +3,7 @@
 module Schematics
   class CleanSessionsJob < ApplicationJob
     DELAY = 1.year.freeze
+    queue_as :cleanups
 
     def perform = ::Session
       .preload_all

@@ -3,6 +3,7 @@
 module Schematics
   class CleanApiKeysJob < ApplicationJob
     DELAY = 1.year.freeze
+    queue_as :cleanups
 
     def perform = ::ApiKey
       .preload_all

@@ -3,6 +3,7 @@
 module Schematics
   class CleanDraftsJob < ApplicationJob
     DELAY = 1.year.freeze
+    queue_as :cleanups
 
     def perform = ::Draft
       .preload_all

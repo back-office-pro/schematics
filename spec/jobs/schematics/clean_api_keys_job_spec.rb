@@ -13,7 +13,9 @@ RSpec.describe Schematics::CleanApiKeysJob do
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later }.to have_enqueued_job(described_class)
+      expect { described_class.perform_later }
+        .to have_enqueued_job(described_class)
+        .on_queue('cleanups')
     end
   end
 

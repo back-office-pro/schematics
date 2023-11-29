@@ -3,6 +3,7 @@
 module Schematics
   class CleanMessagesJob < ApplicationJob
     DELAY = 1.year.freeze
+    queue_as :cleanups
 
     def perform = ::Message
       .preload_all

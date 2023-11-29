@@ -13,6 +13,7 @@ RSpec.describe Schematics::GeneratePdfJob do
       expect { described_class.perform_later(user, resource) }
         .to have_enqueued_job(described_class)
         .with(user, resource)
+        .on_queue('exports')
     end
   end
 
@@ -31,6 +32,7 @@ RSpec.describe Schematics::GeneratePdfJob do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
         .with(an_instance_of(ActiveStorage::Blob))
+        .on_queue('cleanups')
     end
 
     it 'broadcasts replace to user' do

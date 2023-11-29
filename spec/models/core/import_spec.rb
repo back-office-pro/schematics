@@ -11,6 +11,7 @@ RSpec.describe Import do
     expect { record.save! }
       .to have_enqueued_job(Schematics::ImportJob)
       .with(record)
+      .on_queue('imports')
   end
 
   describe '#finalize!' do

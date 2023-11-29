@@ -2,10 +2,15 @@
 :concurrency: 2
 :queues:
   - default
-  - searchkick
-  - rollbar
+  - migrations
+  - imports
+  - exports
   - mailers
   - webhooks
+  - backups
+  - cleanups
+  - searchkick
+  - rollbar
 :scheduler:
   :dynamic: true
   :schedule:

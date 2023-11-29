@@ -3,6 +3,7 @@
 module Schematics
   class CleanDatabaseBackupsJob < ApplicationJob
     DELAY = 30.days.freeze
+    queue_as :cleanups
 
     def perform = ::ActiveStorage::Blob
       .preload_all

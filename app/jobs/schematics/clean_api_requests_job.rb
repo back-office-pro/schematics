@@ -3,6 +3,7 @@
 module Schematics
   class CleanApiRequestsJob < ApplicationJob
     DELAY = 1.year.freeze
+    queue_as :cleanups
 
     def perform = ::ApiRequest
       .preload_all

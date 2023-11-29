@@ -10,6 +10,7 @@ RSpec.describe Schematics::ImportJob do
       expect { described_class.perform_later(import) }
         .to have_enqueued_job(described_class)
         .with(import)
+        .on_queue('imports')
     end
   end
 

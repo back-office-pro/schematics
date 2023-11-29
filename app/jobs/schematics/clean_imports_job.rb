@@ -3,6 +3,7 @@
 module Schematics
   class CleanImportsJob < ApplicationJob
     DELAY = 1.year.freeze
+    queue_as :cleanups
 
     def perform = ::Import
       .preload_all

@@ -2,6 +2,8 @@
 
 module Schematics
   class MigrateCoreJob < ApplicationJob
+    queue_as :migrations
+
     def perform
       return if ::Tenant.version == VERSION
 
