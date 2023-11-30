@@ -49,6 +49,8 @@ module Schematics
         def value = resource.public_send(name.to_sym)
 
         def i18n_label(locale)
+          return attribute_name if available_locales.one?
+
           translate(
             locale,
             scope: %i[schematics application resource_form field],
