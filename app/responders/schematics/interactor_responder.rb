@@ -25,7 +25,7 @@ module Schematics
     def display(resource, given_options = {})
       return super unless interactor?
 
-      super resource.resource, given_options
+      super(resource.resource, given_options)
     end
 
     def has_errors? # rubocop:disable Naming/PredicateName

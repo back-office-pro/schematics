@@ -13,7 +13,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   source_root superclass.source_root
 
   def initialize(generator, options = {})
-    super generator, options.merge(default_options), options
+    super(generator, options.merge(default_options), options)
   end
 
   def create_postgres_user

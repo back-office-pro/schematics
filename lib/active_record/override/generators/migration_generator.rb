@@ -37,7 +37,7 @@ module ActiveRecord
         end
 
         def migration_template(source, destination)
-          super templates_path.join(source), destination
+          super(templates_path.join(source), destination)
         end
 
         def validate_file_name! = file_name

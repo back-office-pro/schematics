@@ -14,7 +14,7 @@ module Schematics
               .preload_all
               .all
               .accessible_by(current_ability)
-              .select(&(filter_by&.to_sym || :itself))
+              .select(&filter_by&.to_sym || :itself)
               .group_by(&:"#{group_by}_formatted")
               .to_h
               .transform_values { |value| value.map { [_1.to_s, _1.id] } }
