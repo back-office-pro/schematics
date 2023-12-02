@@ -1,6 +1,5 @@
 # frozen_string_literal: false
 
-# Make sure i18n translations are available
 Rails.configuration.after_initialize do
   Chartkick.options = {
     refresh: 60,
