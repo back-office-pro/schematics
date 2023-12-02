@@ -10,7 +10,7 @@ describe Schematics::Commands::AddAssociation do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:weight) { is_expected.to eq(3) }
+  its(:weight) { is_expected.to eq(2) }
 
   its(:to_spec) do
     is_expected.to eq('Add a many-to-many association between **client** and **user**')

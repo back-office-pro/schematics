@@ -9,7 +9,7 @@ describe Schematics::Commands::AddTranslation do
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
   its(:to_spec) { is_expected.to eq('Add a translation to **client**') }
-  its(:weight) { is_expected.to eq(4) }
+  its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do
     subject { command.generators }

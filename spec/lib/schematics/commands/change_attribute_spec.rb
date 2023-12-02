@@ -13,7 +13,7 @@ describe Schematics::Commands::ChangeAttribute do
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
   its(:to_spec) { is_expected.to eq('Change **first name** attribute type of **client**') }
-  its(:weight) { is_expected.to eq(3) }
+  its(:weight) { is_expected.to eq(2) }
 
   describe '#generators' do
     subject { command.generators }

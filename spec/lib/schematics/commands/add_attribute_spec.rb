@@ -12,7 +12,7 @@ describe Schematics::Commands::AddAttribute do
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
   its(:to_spec) { is_expected.to eq('Add an attribute **first name** to **client**') }
-  its(:weight) { is_expected.to eq(3) }
+  its(:weight) { is_expected.to eq(2) }
 
   describe '#generators' do
     subject { command.generators }

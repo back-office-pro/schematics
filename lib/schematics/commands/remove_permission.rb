@@ -10,7 +10,7 @@ module Schematics
         PermissionGenerator.new([name], ["--action=#{attribute}"], behavior: :revoke)
       ]
 
-      def weight = 4
+      def weight = 3
     end
   end
 end

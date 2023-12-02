@@ -23,7 +23,7 @@ module Schematics
         TranslationGenerator.new(["attributes.#{name}.#{attribute.pluralize}"])
       end
 
-      def weight = 3
+      def weight = 2
     end
   end
 end

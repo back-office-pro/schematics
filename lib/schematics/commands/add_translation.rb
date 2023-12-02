@@ -14,7 +14,7 @@ module Schematics
         TranslationGenerator.new([attribute])
       end
 
-      def weight = 4
+      def weight = 3
     end
   end
 end

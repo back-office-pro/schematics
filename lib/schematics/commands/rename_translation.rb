@@ -14,7 +14,7 @@ module Schematics
         TranslationGenerator.new([target], ["--rename=#{attribute}"], behavior: :revoke)
       end
 
-      def weight = 4
+      def weight = 3
     end
   end
 end

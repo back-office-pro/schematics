@@ -9,7 +9,7 @@ describe Schematics::Commands::RemoveTranslation do
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
   its(:to_spec) { is_expected.to eq('Remove a **client** translation') }
-  its(:weight) { is_expected.to eq(4) }
+  its(:weight) { is_expected.to eq(3) }
 
   describe '#generators' do
     subject { command.generators }
