@@ -75,7 +75,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'hiredis', '~> 0.6.3'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
   spec.add_dependency 'i18n-inflector', '~> 2.6.7'
-  spec.add_dependency 'icalendar', '~> 2.10.0'
+  spec.add_dependency 'icalendar', '~> 2.10.1'
   spec.add_dependency 'image_processing', '~> 1.12.2'
   spec.add_dependency 'importmap-rails', '~> 1.2.3'
   spec.add_dependency 'interactor', '~> 3.1.2'
