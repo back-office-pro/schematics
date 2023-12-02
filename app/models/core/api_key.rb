@@ -2,8 +2,6 @@
 
 # :reek:MissingSafeMethod
 class ApiKey < Schematics::ApplicationRecord
-  HEADER_API_KEY = 'X-API-Key'
-
   def login!(*) = self
 
   def touch!(request, response)
