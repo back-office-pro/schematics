@@ -4,7 +4,7 @@ it:
     attributes:
       webhook_endpoint:
         events:
-          one: Envento
+          one: Evento
           other: Enventi
           zero: Nessun evento
         request_method: Metodo
