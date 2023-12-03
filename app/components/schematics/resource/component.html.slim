@@ -30,7 +30,7 @@ span.text-body-tertiary = '-' if value.nil?
       span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
         = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
     - else
-      = link_to value.filename, value
+      = render Schematics::ResourceLinkTo::Component.new(resource: value.attachment)
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
   span.text-danger
     = fa_icon(:triangle_exclamation, class: 'me-2')
