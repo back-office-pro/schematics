@@ -13,3 +13,4 @@
 //= link sortablejs/modular/sortable.esm.js
 //= link tom-select/dist/esm/tom-select.complete.js
 //= link tributejs/dist/tribute.esm.js
+//= link trix/dist/trix.esm.js

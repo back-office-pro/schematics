@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-pin 'trix', preload: true
-pin '@rails/actiontext', to: 'actiontext.js', preload: true
+pin '@rails/actiontext', to: 'actiontext.esm.js', preload: true
 pin '@hotwired/turbo-rails', to: 'turbo.js', preload: true
 pin '@hotwired/stimulus', to: 'stimulus.js', preload: true
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
@@ -38,3 +37,4 @@ pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js', pr
 pin 'timeago.it.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/it.js', preload: true
 pin 'tom-select', to: 'tom-select/dist/esm/tom-select.complete.js', preload: true
 pin 'tributejs', to: 'tributejs/dist/tribute.esm.js', preload: true
+pin 'trix', to: 'trix/dist/trix.esm.js', preload: true
