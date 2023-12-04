@@ -9,8 +9,8 @@ module Schematics
     end
 
     def title
-      t(action_name, scope: [:titles, i18n_title_path], default: nil, **view_assigns.symbolize_keys) || # rubocop:disable Layout/LineLength
-        t(action_name, scope: %i[titles schematics resources], **view_assigns.symbolize_keys)
+      t(action_name, scope: [:titles, i18n_title_path], default: nil, **view_assigns) ||
+        t(action_name, scope: %i[titles schematics resources], **view_assigns)
     end
 
     private
