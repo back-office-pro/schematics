@@ -1,6 +1,7 @@
 $flag-icons-path: 'flag-icons/flags';
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
-@import 'actiontext';
+@import 'action_text';
+@import 'active_storage';
 @import 'bootstrap';
 @import 'flag-icons/sass/flag-icons';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
@@ -23,7 +24,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'viewer/grid/carousel/component';
 @import 'edit_in_place/component';
 @import 'placeholder/component';
-@import 'trix_attachment/component';
 @import 'schema_editor/button/add_dropdown/component';
 
 // Variables
