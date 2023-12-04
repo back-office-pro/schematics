@@ -8,11 +8,10 @@ module Schematics
       helper_method :title
     end
 
-    def title = translate(
-      action_name,
-      scope: [:titles, i18n_title_path],
-      **view_assigns.symbolize_keys
-    )
+    def title
+      t(action_name, scope: [:titles, i18n_title_path], default: nil, **view_assigns.symbolize_keys) || # rubocop:disable Layout/LineLength
+        t(action_name, scope: %i[titles schematics resources], **view_assigns.symbolize_keys)
+    end
 
     private
 

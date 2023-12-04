@@ -5,9 +5,7 @@ it:
       show: Confronto %{resource}
     imports:
       create: Importare %{parent_human_name_plural}
-      index: Lista delle %{human_name_plural}
       new: Importare delle %{parent_human_name_plural}
-      show: "%{resource}"
     schematics:
       blog:
         index: Blog
@@ -56,7 +54,4 @@ it:
       show: Ricerca "%{resource}"
     sessions:
       create: Login
-      delete: Cancellare %{resource}
-      index: Lista di %{human_name_plural}
       new: Login
-      show: "%{resource}"
