@@ -26,9 +26,9 @@ span.text-body-tertiary = '-' if value.nil?
   - if value.attached?
     = render Schematics::Button::DestroyAttachment::Component.new(resource:, attachment: value.attachment) if enable_buttons?
     - if value.representable?
-      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value, icon: element.icon)
+      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value.attachment, icon: element.icon)
       span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
-        = render Schematics::Attachment::Component.new(attachment: value, class: 'rounded', role: 'button')
+        = render Schematics::Attachment::Component.new(attachment: value.attachment, class: 'rounded', role: 'button')
     - else
       = render Schematics::ResourceLinkTo::Component.new(resource: value.attachment)
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
@@ -48,6 +48,11 @@ span.text-body-tertiary = '-' if value.nil?
   == value
 - when Schematics::Attributes::Country
   span.fi.rounded class="fi-#{value&.downcase}"
+- when Schematics::Attributes::Model
+  - if (resource = value&.safe_constantize)
+    = render Schematics::ResourceLinkTo::Component.new(resource:)
+  - else
+    = value
 - when Schematics::Attributes::Rating
   == stars(value)
 - when Schematics::Attributes::ResponseCode
