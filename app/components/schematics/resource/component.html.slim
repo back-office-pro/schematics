@@ -49,10 +49,7 @@ span.text-body-tertiary = '-' if value.nil?
 - when Schematics::Attributes::Country
   span.fi.rounded class="fi-#{value&.downcase}"
 - when Schematics::Attributes::Model
-  - if (resource = value&.safe_constantize)
-    = render Schematics::ResourceLinkTo::Component.new(resource:)
-  - else
-    = value
+  = render Schematics::ResourceLinkTo::Component.new(resource: value)
 - when Schematics::Attributes::Rating
   == stars(value)
 - when Schematics::Attributes::ResponseCode

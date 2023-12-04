@@ -9,12 +9,62 @@ module Schematics
 
       def data = { turbo_frame: '_top' }
 
+      def human_name_with_icon
+        fa_icon(icon, class: 'text-primary me-2') + human_name
+      end
+
+      def authorized?
+        case resource
+        when String
+          can?(ability, resource.safe_constantize)
+        else
+          can?(ability, resource)
+        end
+      end
+
+      def path
+        case resource
+        when String
+          polymorphic_path(resource.safe_constantize)
+        else
+          polymorphic_path(resource)
+        end
+      end
+
+      def render?
+        resource.present?
+      end
+
+      private
+
       def ability
         case resource
-        when Class
+        when Class, String
           :index
         else
           :show
+        end
+      end
+
+      def human_name
+        case resource
+        when Class
+          resource.model_name.human
+        when String
+          resource.safe_constantize&.model_name&.human || resource
+        else
+          resource.to_s
+        end
+      end
+
+      def icon
+        case resource
+        when Class
+          resource.entity.icon
+        when String
+          resource.safe_constantize&.entity&.icon || :question
+        else
+          resource.class.entity.icon
         end
       end
     end
