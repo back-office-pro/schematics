@@ -5,9 +5,10 @@ module Schematics
     class Component < ApplicationComponent
       renders_one :body
       option :resource
-      option :css_classes, optional: true
 
       def data = { turbo_frame: '_top' }
+
+      def css_classes = %w[text-decoration-none]
 
       def human_name_with_icon
         fa_icon(icon, class: 'text-primary me-2') + human_name

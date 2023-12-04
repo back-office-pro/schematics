@@ -6,10 +6,8 @@
   .col-auto.align-self-center
     = render Schematics::Avatar::Component.new(user:)
   .col.text-truncate
-    - if item
-      = render Schematics::ResourceLinkTo::Component.new(resource: item, css_classes: 'text-decoration-none')
-    - else
-      .text-body-secondary = version.reify(dup: true).to_s
+    = render Schematics::ResourceLinkTo::Component.new(resource: item)
+    .text-body-secondary = version.reify(dup: true).to_s unless item
     .text-body-tertiary data-controller='timeago' datetime=created_at
   .col-auto.align-self-center
     = fa_icon(icon, size: '2x', class: 'fa-fw text-body-tertiary')

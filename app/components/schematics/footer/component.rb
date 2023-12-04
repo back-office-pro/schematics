@@ -11,8 +11,6 @@ module Schematics
       def resource = ::Migration
         .with_string_translations
         .current
-
-      def css_classes = %w[text-decoration-none]
     end
   end
 end
