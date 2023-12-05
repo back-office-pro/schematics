@@ -12,7 +12,7 @@ module Schematics
         def data = {
           controller: 'popover schema-editor--variable-typeahead',
           'bs-trigger': 'hover',
-          'bs-content': Popover::Component.new.to_html,
+          'bs-content': __schema_editor_virtual_popover,
           'bs-placement': 'bottom',
           'bs-html': true
         }
