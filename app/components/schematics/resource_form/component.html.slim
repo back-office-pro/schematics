@@ -3,8 +3,8 @@
   - attributes.stable_sort_by(&:weight).each do |field|
     = turbo_frame_tag dom_id(resource, field.name) do
       div class=wrapper_class
-        = component('resource_form/fields', form:, field:)
-        = component('button/confirm', compact: true) if turbo?
-        = component('button/cancel', path: cancel_path, compact: true) if turbo?
-  = component 'button/confirm'
-  = component 'button/cancel', path: cancel_path
+        = __resource_form_fields(form:, field:)
+        = __button_confirm(compact: true) if turbo?
+        = __button_cancel(path: cancel_path, compact: true) if turbo?
+  = __button_confirm
+  = __button_cancel(path: cancel_path)

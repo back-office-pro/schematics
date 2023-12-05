@@ -9,7 +9,7 @@
             = value_formatted
         .col-auto
           - if model_class
-            = component :resource_link_to, resource: model_class do |c|
+            = __resource_link_to(resource: model_class) do |c|
               - c.with_body do
                 = fa_icon icon, size: '2x', class: 'text-body-tertiary'
           - else

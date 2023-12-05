@@ -14,6 +14,6 @@
         = title
       - if can?(:archive, model_class)
         .dropdown-item
-          = component 'filter/checkbox', field: :with_deleted
-      = component 'viewer/settings/toggle', listable_elements.stable_sort_by(&:weight)
-  = component 'viewer/settings/button', other_viewers, entity:
+          = __filter_checkbox(field: :with_deleted)
+      = __viewer_settings_toggle(listable_elements.stable_sort_by(&:weight))
+  = __viewer_settings_button(other_viewers, entity:)

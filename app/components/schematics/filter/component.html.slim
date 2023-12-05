@@ -1,12 +1,12 @@
 thead
   tr
     th.align-top.pb-0 rowspan='2'
-      = component('viewer/settings', entity:)
-      = component('button/compare')
+      = __viewer_settings(entity:)
+      = __button_compare
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
       th.text-nowrap.text-center.pb-0.animate__slideInDown class=col_preference_class(field)
-        = component :sort_link, field:, model_class:
+        = __sort_link(field:, model_class:)
   tr
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
       td.align-middle.text-center.p-0.animate__slideInDown.overflow-visible class=col_preference_class(field)
-        = component :filter, :build, field:, model_class:
+        = __filter(:build, field:, model_class:)

@@ -1,12 +1,12 @@
 .d-flex.justify-content-center.text-white.mb-4
-  = component(:attachment, attachment: image, class: 'rounded') if image.attached?
+  = __attachment(attachment: image, class: 'rounded') if image.attached?
 h5.text-center.text-white.mb-4 = title
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-body.p-3
     == content
 .row.py-4.text-white
   .col-auto.align-self-center
-    = component :attachment, :avatar, user: author
+    = __attachment(:avatar, user: author)
   .col
     = author
     .text-body-secondary data-controller='timeago' datetime=created_at

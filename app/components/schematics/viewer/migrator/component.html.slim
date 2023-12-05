@@ -1,7 +1,7 @@
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
-    = component :card_heading, icon:, title:
+    = __card_heading(icon:, title:)
   .card-body.p-0
     ul.list-group.list-group-striped
-      = component 'viewer/specifications/section', migrator_build_commands, icon: :plus, item_class: 'text-success'
-      = component 'viewer/specifications/section', migrator_clean_commands, icon: :minus, item_class: 'text-danger'
+      = __viewer_specifications_section(migrator_build_commands, icon: :plus, item_class: 'text-success')
+      = __viewer_specifications_section(migrator_clean_commands, icon: :minus, item_class: 'text-danger')

@@ -10,13 +10,13 @@
       .card-header.px-2.py-1
         .row.align-items-center
           .col.text-truncate
-            = component :card_heading, icon: :table, title:
+            = __card_heading(icon: :table, title:)
           .col-auto
-            = component('button/generate_file_in_background', :csv, dropdown: @pagy.pages > 1) if @resources.any?
-            = component('button/import', model_class:)
-            = component('button/add', model_class:)
-            = component('button/reset_filters', model_class:)
+            = __button_generate_file_in_background(:csv, dropdown: @pagy.pages > 1) if @resources.any?
+            = __button_import(model_class:)
+            = __button_add(model_class:)
+            = __button_reset_filters(model_class:)
       .card-body.p-0
-        = component(:placeholder, visible: false)
-        = component(:viewer, :build, resources: @resources, viewer:)
-    = component 'viewer/pagination', human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar
+        = __placeholder(visible: false)
+        = __viewer(:build, resources: @resources, viewer:)
+    = __viewer_pagination(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)

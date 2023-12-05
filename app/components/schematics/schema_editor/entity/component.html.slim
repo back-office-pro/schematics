@@ -3,21 +3,21 @@
     .card-header.px-2.py-1
       .row.align-items-center
         .col.text-truncate
-          = component :card_heading, icon:, title:
+          = __card_heading(icon:, title:)
         .col-auto
-          = component('schema_editor/button/add_dropdown', builder:)
-          = component('schema_editor/button/options', builder:)
-          = component('schema_editor/button/remove', wrapper: '.schema-editor-entity')
+          = __schema_editor_button_add_dropdown(builder:)
+          = __schema_editor_button_options(builder:)
+          = __schema_editor_button_remove(wrapper: '.schema-editor-entity')
     .card-body
       = builder.hidden_field :id
       = builder.text_field :name, floating: true, maxlength: 50, class: 'entity-name', data: { controller: 'schema-editor--special-characters' }
-      = component 'schema_editor/options/modal', builder:
+      = __schema_editor_options_modal(builder:)
   .row.g-3.mt-1 id="fields-#{index}" data-controller='sortable' data-nested-form-target='targets'
     = builder.fields_for :attributes do |attributes_builder|
-      = component 'schema_editor/attribute', builder: attributes_builder
+      = __schema_editor_attribute(builder: attributes_builder)
     = builder.fields_for :virtuals do |virtuals_builder|
-      = component 'schema_editor/virtual', builder: virtuals_builder
+      = __schema_editor_virtual(builder: virtuals_builder)
     = builder.fields_for :triggers do |triggers_builder|
-      = component 'schema_editor/trigger', builder: triggers_builder
+      = __schema_editor_trigger(builder: triggers_builder)
     = builder.fields_for :has_and_belongs_to_many_associations do |habtm_associations_builder|
-      = component 'schema_editor/association/has_and_belongs_to_many', builder: habtm_associations_builder
+      = __schema_editor_association_has_and_belongs_to_many(builder: habtm_associations_builder)

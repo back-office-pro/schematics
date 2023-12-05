@@ -1,4 +1,4 @@
 template#schema-editor-trigger data-nested-form-target='templates'
   = form.fields_for :entities, entity, child_index: 'INDEX' do |entity_builder|
     = entity_builder.fields_for :triggers, trigger, child_index: 'NEW_RECORD' do |builder|
-      = component 'schema_editor/trigger', builder:
+      = __schema_editor_trigger(builder:)

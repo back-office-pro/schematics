@@ -17,7 +17,7 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.border-start
                 = fa_icon UserGroup.entity.icon, class: 'me-2'
                 = user_group
       .col
-        = component :attachment, :avatar, user: current_user
+        = __attachment(:avatar, user: current_user)
   .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
     aria-labelledby='account-dropdown'
   }

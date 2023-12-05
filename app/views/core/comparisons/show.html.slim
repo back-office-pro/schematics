@@ -6,6 +6,6 @@
         .card-header.px-2.py-1
           .row.align-items-center
             .col.text-truncate
-              = component :card_heading, icon: parent_model_class.entity.icon, title: resource.to_s
+              = __card_heading(icon: parent_model_class.entity.icon, title: resource.to_s)
         .card-body.p-0
-          = component :resource_details, resource:, model_class: parent_model_class
+          = __resource_details(resource:, model_class: parent_model_class)

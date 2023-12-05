@@ -5,7 +5,7 @@
     role='button'
   }
     .col-auto.align-self-center
-      = component :avatar, user: author
+      = __avatar(user: author)
     .col.text-truncate
       div class=css_class = subject
       .text-body-tertiary data-controller='timeago' datetime=created_at

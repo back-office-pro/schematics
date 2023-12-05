@@ -4,7 +4,7 @@
     p = caption
     .row
       .col-auto.align-self-center
-        = component :attachment, :avatar, user: author
+        = __attachment(:avatar, user: author)
       .col
         = author
         .text-body-secondary data-controller='timeago' datetime=created_at

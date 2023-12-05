@@ -1,10 +1,10 @@
 doctype html
-= component :document_element do
+= __document_element do
   body data-controller='application'
     = turbo_stream_from current_user
-    = component :toast, flash.to_a
-    = component :search_bar_modal
-    = component :hotkeys_modal
-    = component :layout do
+    = __toast(flash.to_a)
+    = __search_bar_modal
+    = __hotkeys_modal
+    = __layout do
       = yield
     = yield :charts_js

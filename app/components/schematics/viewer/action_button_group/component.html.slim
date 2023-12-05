@@ -1,7 +1,7 @@
 .btn-group
   - if deleted?
-    = component('button/restore', resource:)
+    = __button_restore(resource:)
   - else
-    = component('button/edit', resource:)
-    = component('viewer/event_button_group', resource:)
-    = component('button/archive', resource:)
+    = __button_edit(resource:)
+    = __viewer_event_button_group(resource:)
+    = __button_archive(resource:)

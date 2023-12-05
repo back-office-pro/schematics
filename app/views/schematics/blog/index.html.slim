@@ -1,9 +1,9 @@
 .d-flex.justify-content-center.text-white.mb-4.pb-4
   = link_to blog_index_path do
-    = component :attachment, :company_logo, icon: BlogPost.entity.icon
-= component :blog_search, field: :title
+    = __attachment(:company_logo, icon: BlogPost.entity.icon)
+= __blog_search(field: :title)
 - if @posts.empty?
-  = component :empty_resource
+  = __empty_resource
 - else
-  = component :blog_post_preview, @posts
-  = component 'viewer/pagination', pagy: @pagy
+  = __blog_post_preview(@posts)
+  = __viewer_pagination(pagy: @pagy)

@@ -1,5 +1,5 @@
 .position-relative
-  = component :resource_link_to, resource: user do |c|
+  = __resource_link_to(resource: user) do |c|
     - c.with_body do
-      = component :attachment, :avatar, user:, title: user
+      = __attachment(:avatar, user:, title: user)
   .badge.rounded-circle.animate__animated.animate__zoomIn.d-block.p-1.border.border-white.position-absolute.top-0.end-0 class=badge_css_class

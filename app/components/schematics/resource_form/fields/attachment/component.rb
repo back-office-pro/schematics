@@ -10,9 +10,7 @@ module Schematics
 
           alias accept extensions
 
-          def help
-            component(:attachment_validator, validators.human)
-          end
+          def help = __attachment_validator(validators.human)
 
           def label = t('helpers.label.destroy')
 

@@ -3,21 +3,21 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = component :card_heading, icon: :eye, title:
+        = __card_heading(icon: :eye, title:)
       .col-auto
-        = component 'button/generate_file_in_background', :pdf
-        = component 'button/qr_code', resource: @resource
-        = component 'button/calendar', resource: @resource
-        = component 'button/impersonate', resource: @resource
-        = component 'button/comment', resource: @resource
-        = component 'button/edit', resource: @resource, compact: false
-        = component 'button/duplicate', resource: @resource
-        = component 'viewer/event_button_group', resource: @resource, compact: false
+        = __button_generate_file_in_background(:pdf)
+        = __button_qr_code(resource: @resource)
+        = __button_calendar(resource: @resource)
+        = __button_impersonate(resource: @resource)
+        = __button_comment(resource: @resource)
+        = __button_edit(resource: @resource, compact: false)
+        = __button_duplicate(resource: @resource)
+        = __viewer_event_button_group(resource: @resource, compact: false)
         - action = @resource.associations(current_ability, dependent: true).any? ? :delete : :destroy
-        = component "button/#{action}", resource: @resource, compact: false
+        = public_send("__button_#{action}", resource: @resource, compact: false)
   .card-body.p-0
-    = component :resource_details, resource: @resource, editable: true
-= component 'viewer/rich_text', model_class.entity.rich_text_attributes, resource: @resource
-= component 'viewer/association', @resource.associations(current_ability)
-= component 'viewer/comments', resource: @resource
-= component 'viewer/timeline', resource: @resource
+    = __resource_details(resource: @resource, editable: true)
+= __viewer_rich_text(model_class.entity.rich_text_attributes, resource: @resource)
+= __viewer_association(@resource.associations(current_ability))
+= __viewer_comments(resource: @resource)
+= __viewer_timeline(resource: @resource)

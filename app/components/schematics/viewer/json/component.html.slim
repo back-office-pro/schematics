@@ -5,6 +5,6 @@
       - value.each do |key, value|
         tr
           th = key
-          td = component 'viewer/json', value:
+          td = __viewer_json(value:)
 - else
   = value

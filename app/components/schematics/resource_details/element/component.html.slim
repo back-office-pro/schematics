@@ -1,4 +1,4 @@
 - if editable?
-  = component :edit_in_place, resource:, element:
+  = __edit_in_place(resource:, element:)
 - else
-  = component :resource, resource:, element:, enable_buttons: enable_buttons?
+  = __resource(resource:, element:, enable_buttons: enable_buttons?)

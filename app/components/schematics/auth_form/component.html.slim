@@ -1,6 +1,6 @@
 = bootstrap_form_with model:, scope:, url: do |form|
   = form.email_field :email, prepend: fa_icon(:envelope)
-  = component('resource_form/fields/digest', form:, value:)
+  = __resource_form_fields_digest(form:, value:)
   = form.check_box :remember_me, switch: true
-  = component 'button/confirm'
+  = __button_confirm
   = link_to t('.password_lost?'), new_password_reset_path, class: 'btn btn-link btn-sm text-decoration-none'

@@ -1,7 +1,7 @@
 - breadcrumb title, polymorphic_path(@resource, action: :delete)
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
-    = component :card_heading, icon: :trash, title:
+    = __card_heading(icon: :trash, title:)
   .card-body.p-3
     .alert.alert-danger
       h5.alert-heading
@@ -9,7 +9,7 @@
         = t('schematics.application.delete.title')
       = t('schematics.application.delete.subtitle')
     .text-secondary = t('schematics.application.delete.warning', human_name: @human_name, gender: @gender, resource: @resource)
-    = component 'viewer/association', @resource.associations(current_ability, dependent: true)
+    = __viewer_association(@resource.associations(current_ability, dependent: true))
     = form_with model: @resource, method: :delete, class: 'mt-3' do
-      = component 'button/confirm'
-      = component 'button/cancel', path: @resource
+      = __button_confirm
+      = __button_cancel(path: @resource)

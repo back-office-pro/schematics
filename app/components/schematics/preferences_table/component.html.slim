@@ -14,7 +14,7 @@
               = model_class.human_name_plural.humanize
             - events.each_key do |action|
               td
-                = component 'preferences_table/toggle', action:, model_class:
+                = __preferences_table_toggle(action:, model_class:)
   .m-3
-    = component 'button/confirm'
-    = component 'button/cancel', path: root_path
+    = __button_confirm
+    = __button_cancel(path: root_path)

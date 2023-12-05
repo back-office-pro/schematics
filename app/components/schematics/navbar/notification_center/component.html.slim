@@ -20,5 +20,5 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2 data-controller='notificatio
     .pre-scrollable.overflow-scroll
       - versions.each do |version|
         .dropdown-item
-          = component :version_preview, version:
+          = __version_preview(version:)
     = link_to t('.show_all'), versions_path, class: 'dropdown-item text-body-secondary text-center small'

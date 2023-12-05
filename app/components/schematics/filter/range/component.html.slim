@@ -1,4 +1,4 @@
 .input-group.flex-nowrap
-  = component 'filter/range/bound', field:, comparison: :gte
+  = __filter_range_bound(field:, comparison: :gte)
   .me-2
-  = component 'filter/range/bound', field:, comparison: :lte
+  = __filter_range_bound(field:, comparison: :lte)

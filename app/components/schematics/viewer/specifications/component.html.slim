@@ -1,5 +1,5 @@
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
-    = component :card_heading, icon:, title:
+    = __card_heading(icon:, title:)
   .card-body.p-0
-    = component 'viewer/specifications/entity', entities
+    = __viewer_specifications_entity(entities)

@@ -3,9 +3,9 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = component :card_heading, icon: :floppy_disk, title:
+        = __card_heading(icon: :floppy_disk, title:)
       .col-auto
-        = component 'button/destroy_otp'
+        = __button_destroy_otp
   .card-body.p-0
     ul.list-group.list-group-striped
       - current_user.otp_backup_codes.each do |code|

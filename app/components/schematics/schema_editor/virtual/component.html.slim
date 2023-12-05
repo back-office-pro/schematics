@@ -3,12 +3,12 @@
     .card-header.px-2.py-1
       .row.align-items-center
         .col.text-truncate
-          = component :card_heading, icon:, title:
+          = __card_heading(icon:, title:)
         .col-auto
-          = component('schema_editor/button/options', builder:)
-          = component('schema_editor/button/remove', wrapper: '.schema-editor-virtual')
+          = __schema_editor_button_options(builder:)
+          = __schema_editor_button_remove(wrapper: '.schema-editor-virtual')
     .card-body
       = builder.hidden_field :id
       = builder.text_field :name, maxlength: 50, class: 'entity-field-name', data: { controller: 'schema-editor--special-characters' }
       = builder.text_field(:function, data:)
-      = component 'schema_editor/options/modal', builder:
+      = __schema_editor_options_modal(builder:)

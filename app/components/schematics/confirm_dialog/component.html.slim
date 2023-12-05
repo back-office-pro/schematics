@@ -9,11 +9,11 @@
   .modal-dialog.modal-dialog-centered.modal-sm
     .modal-content.shadow-sm
       .modal-header.pb-1
-        = component :card_heading, title:, modal_title: true
+        = __card_heading(title:, modal_title: true)
         button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
       .modal-body.text-center
         = fa_icon :triangle_exclamation, size: '2x', class: 'text-danger'
         .pt-2 = text
       .modal-footer
-        = component 'button/confirm'
-        = component 'button/cancel', data: { 'bs-dismiss': 'modal' }
+        = __button_confirm
+        = __button_cancel(data: { 'bs-dismiss': 'modal' })

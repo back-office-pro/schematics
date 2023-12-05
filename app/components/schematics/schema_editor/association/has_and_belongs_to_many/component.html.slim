@@ -3,11 +3,11 @@
     .card-header.px-2.py-1
       .row.align-items-center
         .col.text-truncate
-          = component :card_heading, icon:, title:
+          = __card_heading(icon:, title:)
         .col-auto
-          = component('schema_editor/button/options', builder:)
-          = component('schema_editor/button/remove', wrapper: '.schema-editor-habtm-association')
+          = __schema_editor_button_options(builder:)
+          = __schema_editor_button_remove(wrapper: '.schema-editor-habtm-association')
     .card-body
       = builder.select :name, allowed_names, { include_blank: }, { required: true, data: { controller: 'schema-editor--habtm-association-dropdown' } }
       = builder.select :type, collection, { required: true }, { required: true, data: { controller: 'dropdown' } }
-      = component 'schema_editor/options/modal', builder:
+      = __schema_editor_options_modal(builder:)

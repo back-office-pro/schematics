@@ -9,7 +9,7 @@
         aria-controls=id
         class=header_button_css_class
       }
-        = component :card_heading, icon:, title:
+        = __card_heading(icon:, title:)
         .badge.bg-primary.text-white.p-2.me-3 = display_count
   .accordion-collapse.collapse class=collapse_css_class id=id
     .accordion-body.p-0
@@ -24,13 +24,13 @@
                   = model_class.human_attribute_name(element.name)
           tbody
             - @resources.each do |resource|
-              = component 'viewer/resource_link', resource:, tag_name: :tr do |c|
+              = __viewer_resource_link(resource:, tag_name: :tr) do |c|
                 - c.with_body do
                   td.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
                     .btn-group
-                      = component('button/edit', resource:)
-                      = component('button/archive', resource:)
-                      = component('button/destroy_attachment', resource: resource.try(:record), attachment: resource)
+                      = __button_edit(resource:)
+                      = __button_archive(resource:)
+                      = __button_destroy_attachment(resource: resource.try(:record), attachment: resource)
                   - entity.listable_elements.stable_sort_by(&:weight).each do |element|
                     td.text-truncate.text-center.align-middle class=col_preference_class(element)
-                      = component :resource, resource:, element:, highlight_text: @highlight_text
+                      = __resource(resource:, element:, highlight_text: @highlight_text)

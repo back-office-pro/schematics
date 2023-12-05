@@ -1,6 +1,6 @@
 doctype html
-= component :document_element do
+= __document_element do
   body.bg-primary data-controller='application'
-    = component :toast, flash.to_a
+    = __toast(flash.to_a)
     .container.col-lg-6.mt-4.pt-4
       = yield

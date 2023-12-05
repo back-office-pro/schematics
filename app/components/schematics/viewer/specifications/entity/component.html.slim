@@ -1,5 +1,5 @@
 ul.list-group.list-group-striped
-  = component 'viewer/specifications/section', element: @entity, options: true
-  = component 'viewer/specifications/section', fields, indent: 1, options: true
-  = component 'viewer/specifications/section', associations, indent: 1
-  = component 'viewer/specifications/section', triggers, icon: :atom, indent: 1
+  = __viewer_specifications_section(element: @entity, options: true)
+  = __viewer_specifications_section(fields, indent: 1, options: true)
+  = __viewer_specifications_section(associations, indent: 1)
+  = __viewer_specifications_section(triggers, icon: :atom, indent: 1)

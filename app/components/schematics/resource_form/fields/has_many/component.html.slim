@@ -1,6 +1,6 @@
-= component('resource_form/fields/has_many/button/add', field:)
-= component('resource_form/fields/has_many/template', form:, field:)
+= __resource_form_fields_has_many_button_add(field:)
+= __resource_form_fields_has_many_template(form:, field:)
 div id=id data-nested-form-target='targets'
   = form.fields_for name do |form|
     = field_set_tag fa_icon(icon, class: 'me-2') + human_name.humanize do
-      = component 'resource_form/fields', elements, form:
+      = __resource_form_fields(elements, form:)

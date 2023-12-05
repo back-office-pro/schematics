@@ -2,8 +2,8 @@
 - if @results.empty?
   .card.shadow-sm.mb-3.animate__animated.animate__zoomIn
     .card-header.px-2.py-1
-      = component :card_heading, icon: :magnifying_glass, title:
+      = __card_heading(icon: :magnifying_glass, title:)
     .card-body.p-3
-      = component :empty_resource, suggestions: @suggestions
+      = __empty_resource(suggestions: @suggestions)
 - else
-  = component 'viewer/association', @results, collapsed: false, highlight_text: @resource.query
+  = __viewer_association(@results, collapsed: false, highlight_text: @resource.query)

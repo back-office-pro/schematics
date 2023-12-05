@@ -5,7 +5,7 @@
     role='button'
   }
     .col-auto.align-self-center
-      = component :attachment, :avatar, user:
+      = __attachment(:avatar, user:)
     .col.text-truncate
       = user
       .text-body-tertiary data-controller='timeago' datetime=updated_at

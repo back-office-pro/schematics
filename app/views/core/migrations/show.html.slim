@@ -3,18 +3,18 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = component :card_heading, icon: :eye, title:
+        = __card_heading(icon: :eye, title:)
       .col-auto
-        = component 'button/generate_file_in_background', :pdf
-        = component 'button/comment', resource: @resource
-        = component 'button/edit', resource: @resource, compact: false
-        = component 'viewer/event_button_group', resource: @resource, compact: false
+        = __button_generate_file_in_background(:pdf)
+        = __button_comment(resource: @resource)
+        = __button_edit(resource: @resource, compact: false)
+        = __viewer_event_button_group(resource: @resource, compact: false)
   .card-body.p-3
-    = component 'viewer/schema', schema: @resource.data
+    = __viewer_schema(schema: @resource.data)
 .row.g-3.mt-1
   .col-xl-9.col-md-12
-    = component 'viewer/specifications', schema: @resource.data
+    = __viewer_specifications(schema: @resource.data)
   .col-xl-3.col-md-12
-    = component 'viewer/migrator', resource: @resource
-= component 'viewer/comments', resource: @resource
-= component 'viewer/timeline', resource: @resource
+    = __viewer_migrator(resource: @resource)
+= __viewer_comments(resource: @resource)
+= __viewer_timeline(resource: @resource)

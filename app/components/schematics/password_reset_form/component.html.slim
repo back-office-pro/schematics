@@ -1,4 +1,4 @@
 = bootstrap_form_with model:, url: do |form|
   = form.email_field :email, prepend: fa_icon(:envelope)
-  = component 'button/confirm'
-  = component 'button/cancel', path: login_path
+  = __button_confirm
+  = __button_cancel(path: login_path)

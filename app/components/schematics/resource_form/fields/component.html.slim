@@ -1,49 +1,49 @@
 - case field
 - when Schematics::Associations::HasAndBelongsToMany
-  = component 'resource_form/fields/has_and_belongs_to_many', form:, field:
+  = __resource_form_fields_has_and_belongs_to_many(form:, field:)
 - when Schematics::Associations::HasMany
-  = component 'resource_form/fields/has_many', form:, field:
+  = __resource_form_fields_has_many(form:, field:)
 - when Schematics::Attributes::BelongsTo
-  = component 'resource_form/fields/belongs_to', form:, field:
+  = __resource_form_fields_belongs_to(form:, field:)
 - when Schematics::Attributes::Time
-  = component 'resource_form/fields/time', form:, field:
+  = __resource_form_fields_time(form:, field:)
 - when Schematics::Attributes::Datetime
-  = component 'resource_form/fields/datetime', form:, field:
+  = __resource_form_fields_datetime(form:, field:)
 - when Schematics::Attributes::Date
-  = component 'resource_form/fields/date', form:, field:
+  = __resource_form_fields_date(form:, field:)
 - when Schematics::Attributes::Array
-  = component 'resource_form/fields/array', form:, field:
+  = __resource_form_fields_array(form:, field:)
 - when Schematics::Attributes::Address
-  = component 'resource_form/fields/address', form:, field:
+  = __resource_form_fields_address(form:, field:)
 - when Schematics::Attributes::Email
-  = component 'resource_form/fields/email', form:, field:
+  = __resource_form_fields_email(form:, field:)
 - when Schematics::Attributes::Url
-  = component 'resource_form/fields/url', form:, field:
+  = __resource_form_fields_url(form:, field:)
 - when Schematics::Attributes::Phone
-  = component 'resource_form/fields/phone', form:, field:
+  = __resource_form_fields_phone(form:, field:)
 - when Schematics::Attributes::Color
-  = component 'resource_form/fields/color', form:, field:
+  = __resource_form_fields_color(form:, field:)
 - when Schematics::Attributes::ModelField
-  = component 'resource_form/fields/model_field', form:, field:
+  = __resource_form_fields_model_field(form:, field:)
 - when Schematics::Attributes::Flag
-  = component 'resource_form/fields/flag', form:, field:
+  = __resource_form_fields_flag(form:, field:)
 - when Schematics::Behaviours::Enumerable
-  = component 'resource_form/fields/enumerable', form:, field:
+  = __resource_form_fields_enumerable(form:, field:)
 - when Schematics::Attributes::String
-  = component 'resource_form/fields/string', form:, field:
+  = __resource_form_fields_string(form:, field:)
 - when Schematics::Attributes::Text, Schematics::Attributes::Jsonb
-  = component 'resource_form/fields/text', form:, field:
+  = __resource_form_fields_text(form:, field:)
 - when Schematics::Attributes::Rating
-  = component 'resource_form/fields/rating', form:, field:
+  = __resource_form_fields_rating(form:, field:)
 - when Schematics::Attributes::RichText
-  = component 'resource_form/fields/rich_text', form:, field:
+  = __resource_form_fields_rich_text(form:, field:)
 - when Schematics::Attributes::Attachments
-  = component 'resource_form/fields/attachments', form:, field:
+  = __resource_form_fields_attachments(form:, field:)
 - when Schematics::Attributes::Attachment
-  = component 'resource_form/fields/attachment', form:, field:
+  = __resource_form_fields_attachment(form:, field:)
 - when Schematics::Attributes::Digest
-  = component 'resource_form/fields/digest', form:, field:, autocomplete: false
+  = __resource_form_fields_digest(form:, field:, autocomplete: false)
 - when Schematics::Attributes::Boolean
-  = component 'resource_form/fields/boolean', form:, field:
+  = __resource_form_fields_boolean(form:, field:)
 - when Schematics::Behaviours::Numerable
-  = component 'resource_form/fields/numerable', form:, field:
+  = __resource_form_fields_numerable(form:, field:)

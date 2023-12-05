@@ -6,11 +6,11 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = component :card_heading, icon: :plus, title:
+        = __card_heading(icon: :plus, title:)
       .col-auto
-        = component('button/help', model_class:)
-        = component('button/restore_draft', draft: @draft)
-        = component('button/draft')
+        = __button_help(model_class:)
+        = __button_restore_draft(draft: @draft)
+        = __button_draft
   .card-body.p-3
-    = component :resource_form, resource: @resource
-= component 'viewer/documentation', model_class:
+    = __resource_form(resource: @resource)
+= __viewer_documentation(model_class:)

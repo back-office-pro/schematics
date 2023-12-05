@@ -4,9 +4,9 @@
   role=role
 }
   .col-auto.align-self-center
-    = component :avatar, user:
+    = __avatar(user:)
   .col.text-truncate
-    = component :resource_link_to, resource: item
+    = __resource_link_to(resource: item)
     .text-body-secondary = version.reify(dup: true).to_s unless item
     .text-body-tertiary data-controller='timeago' datetime=created_at
   .col-auto.align-self-center

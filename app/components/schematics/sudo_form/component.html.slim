@@ -2,6 +2,6 @@
   = fa_icon :triangle_exclamation, class: 'me-3'
   = t('.warning')
 = bootstrap_form_with model:, url: do |form|
-  = component('resource_form/fields/digest', form:)
-  = component('button/confirm')
-  = component('button/cancel', path: root_path)
+  = __resource_form_fields_digest(form:)
+  = __button_confirm
+  = __button_cancel(path: root_path)

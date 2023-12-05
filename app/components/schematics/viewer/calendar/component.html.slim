@@ -1,6 +1,6 @@
 .table-responsive data-controller='comparison' data-comparison-model-value=model_class
   table.table.table-borderless.mb-0
-    = component :filter, model_class:
+    = __filter(model_class:)
     tbody
       table.table.table-borderless.mb-0
         thead
@@ -14,10 +14,10 @@
                 td.calendar-day.p-0 class=td_class_for(date)
                   .text-body-secondary.ps-2.pt-1 = date.day
                   - resources_for(date).each do |resource|
-                    = component 'viewer/resource_link', resource:, css_classes: alert_css_classes_for(resource, date) do |c|
+                    = __viewer_resource_link(resource:, css_classes: alert_css_classes_for(resource, date)) do |c|
                       - c.with_body do
                         - unless previous_resource_for?(resource, date)
                           .d-inline-flex
-                            = component('viewer/switch_button_group', resource:, resources:)
-                            = component('viewer/action_button_group', resource:)
+                            = __viewer_switch_button_group(resource:, resources:)
+                            = __viewer_action_button_group(resource:)
                         span.ms-2.lh-lg = resource
