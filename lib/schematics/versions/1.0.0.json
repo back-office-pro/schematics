@@ -790,7 +790,8 @@
         "name": "model",
         "type": "model",
         "options": {
-          "required": true
+          "required": true,
+          "filter_by": "nil"
         }
       },
       {

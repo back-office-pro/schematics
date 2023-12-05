@@ -8,6 +8,8 @@ module Schematics
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
 
+      def available_options = super.push(Options::FilterBy)
+
       def collection = super.sort
 
       def format(value)
@@ -22,8 +24,12 @@ module Schematics
       def values = entity
         .schema
         .entities
-        .reject(&:hidden?)
+        .reject(&filter_by)
         .map(&:class_name)
+
+      private
+
+      def filter_by = :"#{options.filter_by || 'hidden'}?"
     end
   end
 end
