@@ -9,7 +9,7 @@ module Schematics
 
       class << self
         def build(resources:, viewer:)
-          Viewer.const_get(viewer.to_s.camelize)::Component.new(resources:)
+          module_parent.const_get(viewer.to_s.camelize)::Component.new(resources:)
         end
       end
 
