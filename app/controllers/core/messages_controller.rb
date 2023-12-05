@@ -3,7 +3,7 @@
 # :reek:MissingSafeMethod
 class MessagesController < Schematics::ResourcesController
   before_action :read!, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
-  before_action :set_draft, only: %i[reply new edit create duplicate update]
+  before_action :set_draft, only: %i[reply new edit create duplicate update] # rubocop:disable Rails/LexicallyScopedActionFilter
 
   def reply; end
 
