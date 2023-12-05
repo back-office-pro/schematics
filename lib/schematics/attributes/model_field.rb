@@ -29,14 +29,12 @@ module Schematics
         .schema
         .entities
         .reject(&:hidden?)
-        .flat_map(&:"#{field_type}_fields")
+        .flat_map(&fields_type)
         .map(&:method_name)
 
       private
 
-      def field_type
-        options.type || 'renderable_with_created_ats'
-      end
+      def fields_type = :"#{options.type || 'renderable_with_created_ats'}_fields"
     end
   end
 end
