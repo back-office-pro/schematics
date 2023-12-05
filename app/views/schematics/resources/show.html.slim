@@ -3,21 +3,21 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :eye, title:)
+        = component :card_heading, icon: :eye, title:
       .col-auto
-        = render Schematics::Button::GenerateFileInBackground::Component.pdf
-        = render Schematics::Button::QrCode::Component.new(resource: @resource)
-        = render Schematics::Button::Calendar::Component.new(resource: @resource)
-        = render Schematics::Button::Impersonate::Component.new(resource: @resource)
-        = render Schematics::Button::Comment::Component.new(resource: @resource)
-        = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
-        = render Schematics::Button::Duplicate::Component.new(resource: @resource)
-        = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
-        - constant = @resource.associations(current_ability, dependent: true).any? ? :Delete : :Destroy
-        = render Schematics::Button.const_get(constant)::Component.new(resource: @resource, compact: false)
+        = component 'button/generate_file_in_background', :pdf
+        = component 'button/qr_code', resource: @resource
+        = component 'button/calendar', resource: @resource
+        = component 'button/impersonate', resource: @resource
+        = component 'button/comment', resource: @resource
+        = component 'button/edit', resource: @resource, compact: false
+        = component 'button/duplicate', resource: @resource
+        = component 'viewer/event_button_group', resource: @resource, compact: false
+        - action = @resource.associations(current_ability, dependent: true).any? ? :delete : :destroy
+        = component "button/#{action}", resource: @resource, compact: false
   .card-body.p-0
-    = render Schematics::ResourceDetails::Component.new(resource: @resource, editable: true)
-= render Schematics::Viewer::RichText::Component.with_collection(model_class.entity.rich_text_attributes, resource: @resource)
-= render Schematics::Viewer::Association::Component.with_collection(@resource.associations(current_ability))
-= render Schematics::Viewer::Comments::Component.new(resource: @resource)
-= render Schematics::Viewer::Timeline::Component.new(resource: @resource)
+    = component :resource_details, resource: @resource, editable: true
+= component 'viewer/rich_text', model_class.entity.rich_text_attributes, resource: @resource
+= component 'viewer/association', @resource.associations(current_ability)
+= component 'viewer/comments', resource: @resource
+= component 'viewer/timeline', resource: @resource

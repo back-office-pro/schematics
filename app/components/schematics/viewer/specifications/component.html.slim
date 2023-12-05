@@ -1,5 +1,5 @@
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
-    = render Schematics::CardHeading::Component.new(icon:, title:)
+    = component :card_heading, icon:, title:
   .card-body.p-0
-    = render Schematics::Viewer::Specifications::Entity::Component.with_collection(entities)
+    = component 'viewer/specifications/entity', entities

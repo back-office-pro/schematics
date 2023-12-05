@@ -1,4 +1,4 @@
 .input-group.flex-nowrap
-  = render Schematics::Filter::Range::Bound::Component.new(field:, comparison: :gte)
+  = component 'filter/range/bound', field:, comparison: :gte
   .me-2
-  = render Schematics::Filter::Range::Bound::Component.new(field:, comparison: :lte)
+  = component 'filter/range/bound', field:, comparison: :lte

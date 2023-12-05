@@ -2,10 +2,10 @@ doctype html
 html
   head
     meta charset='utf-8'
-    = render Schematics::ApplicationStylesheetLink::Component.new
+    = component :application_stylesheet_link
     = stylesheet_link_tag 'schematics/application', media: 'all'
-    = render Schematics::JavascriptImportmap::Component.new
-    = render Schematics::ThemeCustomStylesheet::Component.new
+    = component :javascript_importmap
+    = component :theme_custom_stylesheet
   body
     = yield
     = yield :charts_js

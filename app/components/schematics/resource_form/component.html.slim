@@ -3,8 +3,8 @@
   - attributes.stable_sort_by(&:weight).each do |field|
     = turbo_frame_tag dom_id(resource, field.name) do
       div class=wrapper_class
-        = render Schematics::ResourceForm::Fields::Component.new(form:, field:)
-        = render Schematics::Button::Confirm::Component.new(compact: true) if turbo?
-        = render Schematics::Button::Cancel::Component.new(path: cancel_path, compact: true) if turbo?
-  = render Schematics::Button::Confirm::Component.new
-  = render Schematics::Button::Cancel::Component.new(path: cancel_path)
+        = component('resource_form/fields', form:, field:)
+        = component('button/confirm', compact: true) if turbo?
+        = component('button/cancel', path: cancel_path, compact: true) if turbo?
+  = component 'button/confirm'
+  = component 'button/cancel', path: cancel_path

@@ -6,12 +6,12 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :pen_to_square, title:)
+        = component :card_heading, icon: :pen_to_square, title:
       .col-auto
-        = render Schematics::Button::Help::Component.new(model_class:)
-        = render Schematics::Button::RestoreDraft::Component.new(draft: @draft)
-        = render Schematics::Button::Draft::Component.new
-        = render Schematics::Button::Stale::Component.new(resource: @resource)
+        = component('button/help', model_class:)
+        = component('button/restore_draft', draft: @draft)
+        = component('button/draft')
+        = component('button/stale', resource: @resource)
   .card-body.p-3
-    = render Schematics::ResourceForm::Component.new(resource: @resource)
-= render Schematics::Viewer::Documentation::Component.new(model_class:)
+    = component :resource_form, resource: @resource
+= component 'viewer/documentation', model_class:

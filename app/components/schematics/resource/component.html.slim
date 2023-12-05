@@ -7,30 +7,30 @@ span.text-body-tertiary = '-' if value.nil?
         = fa_icon :box_archive, class: 'me-2'
         = value
     - else
-      = render Schematics::ResourceLinkTo::Component.new(resource: value)
+      = component :resource_link_to, resource: value
 - when Schematics::Attributes::Jsonb
   - case value
   - in Schematics::Schema
-    = render Schematics::Viewer::Schema::Component.new(schema: value)
+    = component 'viewer/schema', schema: value
   - in { openapi:, tags:, paths:, security:, components: }
-    = render Schematics::Viewer::Swagger::Component.new(spec: value)
+    = component 'viewer/swagger', spec: value
   - else
-    = render Schematics::Viewer::Json::Component.new(value:)
+    = component 'viewer/json', value:
 - when Schematics::Attributes::Url
-  = render Schematics::LinkPreview::Component.new(url: value)
+  = component :link_preview, url: value
 - when Schematics::Attributes::Color
   .btn.p-2.pe-none style="background: #{value};"
 - when Schematics::Attributes::Attachments
-  = render Schematics::Viewer::Association::Component.new(resources: value, highlight_text:)
+  = component 'viewer/association', resources: value, highlight_text:
 - when Schematics::Attributes::Attachment
   - if value.attached?
-    = render Schematics::Button::DestroyAttachment::Component.new(resource:, attachment: value.attachment) if enable_buttons?
+    = component('button/destroy_attachment', resource:, attachment: value.attachment) if enable_buttons?
     - if value.representable?
-      = render Schematics::AttachmentPreviewModal::Component.new(attachment: value.attachment, icon: element.icon)
+      = component :attachment_preview_modal, attachment: value.attachment, icon: element.icon
       span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
-        = render Schematics::Attachment::Component.new(attachment: value.attachment, class: 'rounded', role: 'button')
+        = component :attachment, attachment: value.attachment, class: 'rounded', role: 'button'
     - else
-      = render Schematics::ResourceLinkTo::Component.new(resource: value.attachment)
+      = component :resource_link_to, resource: value.attachment
 - when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
   span.text-danger
     = fa_icon(:triangle_exclamation, class: 'me-2')
@@ -49,13 +49,13 @@ span.text-body-tertiary = '-' if value.nil?
 - when Schematics::Attributes::Country
   span.fi.rounded class="fi-#{value&.downcase}"
 - when Schematics::Attributes::Model
-  = render Schematics::ResourceLinkTo::Component.new(resource: value)
+  = component :resource_link_to, resource: value
 - when Schematics::Attributes::Rating
   == stars(value)
 - when Schematics::Attributes::ResponseCode
   span.badge.bg-primary = element.format(value)
 - when Schematics::Attributes::Token
-  = render Schematics::Button::Clipboard::Component.new(value:)
+  = component 'button/clipboard', value:
 - when Schematics::Attributes::Percentage
   .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax='100'
     .progress-bar style="width: #{value}%"

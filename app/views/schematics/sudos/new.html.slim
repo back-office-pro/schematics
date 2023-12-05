@@ -1,6 +1,6 @@
 - breadcrumb title, sudo_path
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
-    = render Schematics::CardHeading::Component.new(icon: :shield_halved, title:)
+    = component :card_heading, icon: :shield_halved, title:
   .card-body.p-3
-    = render Schematics::SudoForm::Component.new
+    = component :sudo_form

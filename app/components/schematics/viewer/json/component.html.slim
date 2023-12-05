@@ -5,6 +5,6 @@
       - value.each do |key, value|
         tr
           th = key
-          td = render Schematics::Viewer::Json::Component.new(value:)
+          td = component 'viewer/json', value:
 - else
   = value

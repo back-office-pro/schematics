@@ -6,6 +6,6 @@
         .card-header.px-2.py-1
           .row.align-items-center
             .col.text-truncate
-              = render Schematics::CardHeading::Component.new(icon: parent_model_class.entity.icon, title: resource.to_s)
+              = component :card_heading, icon: parent_model_class.entity.icon, title: resource.to_s
         .card-body.p-0
-          = render Schematics::ResourceDetails::Component.new(resource:, model_class: parent_model_class)
+          = component :resource_details, resource:, model_class: parent_model_class

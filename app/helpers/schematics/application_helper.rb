@@ -13,5 +13,20 @@ module Schematics
         **
       )
     end
+
+    def component(path, method_or_collection = :new, **params, &)
+      case method_or_collection
+      when Enumerable
+        render Schematics
+          .const_get(path.to_s.camelize)
+          .const_get(:Component)
+          .with_collection(method_or_collection, **params), &
+      else
+        render Schematics
+          .const_get(path.to_s.camelize)
+          .const_get(:Component)
+          .public_send(method_or_collection, **params), &
+      end
+    end
   end
 end

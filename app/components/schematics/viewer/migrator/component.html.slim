@@ -1,7 +1,7 @@
 .card.shadow-sm.animate__animated.animate__zoomIn
   .card-header.px-2.py-1
-    = render Schematics::CardHeading::Component.new(icon:, title:)
+    = component :card_heading, icon:, title:
   .card-body.p-0
     ul.list-group.list-group-striped
-      = render Schematics::Viewer::Specifications::Section::Component.with_collection(migrator_build_commands, icon: :plus, item_class: 'text-success')
-      = render Schematics::Viewer::Specifications::Section::Component.with_collection(migrator_clean_commands, icon: :minus, item_class: 'text-danger')
+      = component 'viewer/specifications/section', migrator_build_commands, icon: :plus, item_class: 'text-success'
+      = component 'viewer/specifications/section', migrator_clean_commands, icon: :minus, item_class: 'text-danger'

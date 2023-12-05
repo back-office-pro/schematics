@@ -1,6 +1,6 @@
 doctype html
-= render Schematics::DocumentElement::Component.new do
+= component :document_element do
   body.bg-primary data-controller='application'
-    = render Schematics::Toast::Component.with_collection(flash.to_a)
+    = component :toast, flash.to_a
     .container.col-lg-6.mt-4.pt-4
       = yield

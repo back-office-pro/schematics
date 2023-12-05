@@ -3,11 +3,11 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :plus, title:)
+        = component :card_heading, icon: :plus, title:
       .col-auto
-        = render Schematics::Button::Help::Component.new(model_class:)
-        = render Schematics::SchemaEditor::Button::AddEntity::Component.new
-        = render Schematics::Button::RestoreDraft::Component.new(draft: @draft)
-        = render Schematics::Button::Draft::Component.new
+        = component('button/help', model_class:)
+        = component('schema_editor/button/add_entity')
+        = component('button/restore_draft', draft: @draft)
+        = component('button/draft')
   .card-body.p-3
-    = render Schematics::SchemaEditor::Component.new(resource: @resource)
+    = component :schema_editor, resource: @resource

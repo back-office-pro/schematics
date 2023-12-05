@@ -3,10 +3,10 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :eye, title:)
+        = component :card_heading, icon: :eye, title:
       .col-auto
-        = render Schematics::Button::GenerateFileInBackground::Component.pdf
-        = render Schematics::Button::Comment::Component.new(resource: @resource)
+        = component 'button/generate_file_in_background', :pdf
+        = component 'button/comment', resource: @resource
   .card-body.p-3
-    = render Schematics::Viewer::Swagger::Component.new(spec: @resource.data)
-= render Schematics::Viewer::Comments::Component.new(resource: @resource)
+    = component 'viewer/swagger', spec: @resource.data
+= component 'viewer/comments', resource: @resource

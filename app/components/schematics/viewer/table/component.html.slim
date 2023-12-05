@@ -1,19 +1,19 @@
 .table-responsive data-controller='comparison' data-comparison-model-value=model_class
   table.table.table-borderless.mb-0 class=table_css_classes
-    = render Schematics::Filter::Component.new(model_class:)
+    = component :filter, model_class:
     tbody class=tbody_css_classes
       - if resources.empty?
         tr
           td.pt-4 colspan='100%'
-            = render Schematics::EmptyResource::Component.new
+            = component :empty_resource
       - else
         - resources.each do |resource|
-          = render Schematics::Viewer::ResourceLink::Component.new(resource:, tag_name: :tr) do |c|
+          = component 'viewer/resource_link', resource:, tag_name: :tr do |c|
             - c.with_body do
               td.col-1.text-nowrap.px-2.py-0.align-middle.start-0.sticky-top
                 .d-inline-flex
-                  = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
-                  = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
+                  = component('viewer/switch_button_group', resource:, resources:)
+                  = component('viewer/action_button_group', resource:)
               - elements.each do |element|
                 td.col-2.text-truncate.text-center.align-middle.animate__slideInDown class=col_preference_class(element)
-                  = render Schematics::ResourceDetails::Element::Component.new(resource:, element:)
+                  = component 'resource_details/element', resource:, element:

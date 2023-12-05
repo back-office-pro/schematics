@@ -1,11 +1,11 @@
 .table-responsive data-controller='comparison' data-comparison-model-value=model_class
   table.table.table-borderless.mb-0
-    = render Schematics::Filter::Component.new(model_class:)
+    = component :filter, model_class:
     tbody class=tbody_css_classes
       tr
       - if resources.empty?
         td.pt-4 colspan='100%'
-          = render Schematics::EmptyResource::Component.new
+          = component :empty_resource
       - else
           td.p-0 colspan='100%'
             - groups.each do |group|
@@ -19,9 +19,9 @@
                             tr
                               td colspan='2'
                                 .d-inline-flex.position-absolute.z-1
-                                  = render Schematics::Viewer::SwitchButtonGroup::Component.new(resource:, resources:)
-                                  = render Schematics::Viewer::ActionButtonGroup::Component.new(resource:)
-                                = render Schematics::Viewer::Grid::Carousel::Component.new(resource:)
+                                  = component('viewer/switch_button_group', resource:, resources:)
+                                  = component('viewer/action_button_group', resource:)
+                                = component 'viewer/grid/carousel', resource:
                             tbody
                               - elements.each do |element|
                                 tr.animate__slideInRight class=col_preference_class(element)
@@ -29,4 +29,4 @@
                                     = fa_icon element.icon, class: 'fa-fw me-2 text-body-secondary'
                                     = model_class.human_attribute_name(element.name)
                                   td.text-truncate
-                                    = render Schematics::ResourceDetails::Element::Component.new(resource:, element:)
+                                    = component 'resource_details/element', resource:, element:

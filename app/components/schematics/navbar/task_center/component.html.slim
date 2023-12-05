@@ -15,5 +15,5 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2
     h5.dropdown-header.bg-body-tertiary.fw-bold
       = t('.title')
     .pre-scrollable.overflow-scroll
-      = render Schematics::Navbar::TaskCenter::Preview::Component.with_collection(tasks)
+      = component 'navbar/task_center/preview', tasks
     = link_to t('.show_all'), tasks_path, class: 'dropdown-item text-body-secondary text-center small'

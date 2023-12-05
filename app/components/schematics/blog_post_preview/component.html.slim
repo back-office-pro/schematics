@@ -4,7 +4,7 @@
     p = caption
     .row
       .col-auto.align-self-center
-        = render Schematics::Attachment::Component.avatar(user: author)
+        = component :attachment, :avatar, user: author
       .col
         = author
         .text-body-secondary data-controller='timeago' datetime=created_at

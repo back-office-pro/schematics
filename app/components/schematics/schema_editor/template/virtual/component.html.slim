@@ -1,4 +1,4 @@
 template#schema-editor-virtual data-nested-form-target='templates'
   = form.fields_for :entities, entity, child_index: 'INDEX' do |entity_builder|
     = entity_builder.fields_for :virtuals, virtual, child_index: 'NEW_RECORD' do |builder|
-      = render Schematics::SchemaEditor::Virtual::Component.new(builder:)
+      = component 'schema_editor/virtual', builder:

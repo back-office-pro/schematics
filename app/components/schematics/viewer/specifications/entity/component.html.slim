@@ -1,5 +1,5 @@
 ul.list-group.list-group-striped
-  = render Schematics::Viewer::Specifications::Section::Component.new(element: @entity, options: true)
-  = render Schematics::Viewer::Specifications::Section::Component.with_collection(fields, indent: 1, options: true)
-  = render Schematics::Viewer::Specifications::Section::Component.with_collection(associations, indent: 1)
-  = render Schematics::Viewer::Specifications::Section::Component.with_collection(triggers, icon: :atom, indent: 1)
+  = component 'viewer/specifications/section', element: @entity, options: true
+  = component 'viewer/specifications/section', fields, indent: 1, options: true
+  = component 'viewer/specifications/section', associations, indent: 1
+  = component 'viewer/specifications/section', triggers, icon: :atom, indent: 1

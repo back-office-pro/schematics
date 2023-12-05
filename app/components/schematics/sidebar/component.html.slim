@@ -4,7 +4,7 @@
       = company_name
     ul.nav.flex-column.flex-nowrap.overflow-y-auto
       li.nav-item.mb-3
-      = render Schematics::Sidebar::Item::Component.with_collection(model_classes)
+      = component 'sidebar/item', model_classes
     button#sidebar-toggle.btn.text-secondary.text-end.py-3.w-100 data-action='click->sidebar#toggle'
       .d-none.me-3 class=('d-md-block' unless toggled?) = fa_icon :chevron_left, class: 'fa-lg'
       .d-none.me-3 class=('d-md-block' if toggled?) = fa_icon :chevron_right, class: 'fa-lg'

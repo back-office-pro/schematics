@@ -3,18 +3,18 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :eye, title:)
+        = component :card_heading, icon: :eye, title:
       .col-auto
-        = render Schematics::Button::GenerateFileInBackground::Component.pdf
-        = render Schematics::Button::Comment::Component.new(resource: @resource)
-        = render Schematics::Button::Edit::Component.new(resource: @resource, compact: false)
-        = render Schematics::Viewer::EventButtonGroup::Component.new(resource: @resource, compact: false)
+        = component 'button/generate_file_in_background', :pdf
+        = component 'button/comment', resource: @resource
+        = component 'button/edit', resource: @resource, compact: false
+        = component 'viewer/event_button_group', resource: @resource, compact: false
   .card-body.p-3
-    = render Schematics::Viewer::Schema::Component.new(schema: @resource.data)
+    = component 'viewer/schema', schema: @resource.data
 .row.g-3.mt-1
   .col-xl-9.col-md-12
-    = render Schematics::Viewer::Specifications::Component.new(schema: @resource.data)
+    = component 'viewer/specifications', schema: @resource.data
   .col-xl-3.col-md-12
-    = render Schematics::Viewer::Migrator::Component.new(resource: @resource)
-= render Schematics::Viewer::Comments::Component.new(resource: @resource)
-= render Schematics::Viewer::Timeline::Component.new(resource: @resource)
+    = component 'viewer/migrator', resource: @resource
+= component 'viewer/comments', resource: @resource
+= component 'viewer/timeline', resource: @resource

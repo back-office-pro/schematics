@@ -1,7 +1,7 @@
 .btn-group
   - if deleted?
-    = render Schematics::Button::Restore::Component.new(resource:)
+    = component('button/restore', resource:)
   - else
-    = render Schematics::Button::Edit::Component.new(resource:)
-    = render Schematics::Viewer::EventButtonGroup::Component.new(resource:)
-    = render Schematics::Button::Archive::Component.new(resource:)
+    = component('button/edit', resource:)
+    = component('viewer/event_button_group', resource:)
+    = component('button/archive', resource:)

@@ -3,9 +3,9 @@
   .card-header.px-2.py-1
     .row.align-items-center
       .col.text-truncate
-        = render Schematics::CardHeading::Component.new(icon: :floppy_disk, title:)
+        = component :card_heading, icon: :floppy_disk, title:
       .col-auto
-        = render Schematics::Button::DestroyOtp::Component.new
+        = component 'button/destroy_otp'
   .card-body.p-0
     ul.list-group.list-group-striped
       - current_user.otp_backup_codes.each do |code|

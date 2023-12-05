@@ -5,7 +5,7 @@
     role='button'
   }
     .col-auto.align-self-center
-      = render Schematics::Avatar::Component.new(user: creator)
+      = component :avatar, user: creator
     .col.text-truncate
       = subject
       .text-body-tertiary

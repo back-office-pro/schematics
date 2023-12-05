@@ -8,5 +8,5 @@
               = fa_icon version.icon, size: '2x', class: 'text-white'
             .card.animate__animated.animate__zoomIn
               .card-body.p-3
-                = render Schematics::VersionPreview::Component.new(version:)
-  = render Schematics::Viewer::Pagination::Component.new(pagy: @pagy)
+                = component :version_preview, version:
+  = component 'viewer/pagination', pagy: @pagy

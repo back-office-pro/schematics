@@ -1,6 +1,6 @@
-= render Schematics::ResourceForm::Fields::HasMany::Button::Add::Component.new(field:)
-= render Schematics::ResourceForm::Fields::HasMany::Template::Component.new(form:, field:)
+= component('resource_form/fields/has_many/button/add', field:)
+= component('resource_form/fields/has_many/template', form:, field:)
 div id=id data-nested-form-target='targets'
   = form.fields_for name do |form|
     = field_set_tag fa_icon(icon, class: 'me-2') + human_name.humanize do
-      = render Schematics::ResourceForm::Fields::Component.with_collection(elements, form:)
+      = component 'resource_form/fields', elements, form:

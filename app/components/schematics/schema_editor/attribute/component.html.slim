@@ -3,10 +3,10 @@
     .card-header.px-2.py-1
       .row.align-items-center
         .col.text-truncate
-          = render Schematics::CardHeading::Component.new(icon:, title:)
+          = component :card_heading, icon:, title:
         .col-auto
-          = render Schematics::SchemaEditor::Button::Options::Component.new(builder:)
-          = render Schematics::SchemaEditor::Button::Remove::Component.new(wrapper: '.schema-editor-attribute')
+          = component('schema_editor/button/options', builder:)
+          = component('schema_editor/button/remove', wrapper: '.schema-editor-attribute')
     .card-body
       = builder.hidden_field :id
       - case builder.object
@@ -18,4 +18,4 @@
       - else
         = builder.text_field :name, maxlength: 50, class: 'entity-field-name', data: { controller: 'schema-editor--special-characters' }
       = builder.select :type, collection, {}, { required: true, data: { controller: 'dropdown' } }
-      = render Schematics::SchemaEditor::Options::Modal::Component.new(builder:)
+      = component 'schema_editor/options/modal', builder:

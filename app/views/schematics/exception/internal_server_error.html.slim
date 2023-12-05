@@ -2,5 +2,5 @@
   = fa_icon :bomb, size: '7x'
   h3.mt-4.pt-4 = t('titles.schematics.exception.internal_server_error')
   .mt-4
-    = render Schematics::Button::BackHome::Component.new
-    = render Schematics::Button::Support::Component.new
+    = component 'button/back_home'
+    = component 'button/support'

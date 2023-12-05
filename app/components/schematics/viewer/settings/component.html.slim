@@ -14,6 +14,6 @@
         = title
       - if can?(:archive, model_class)
         .dropdown-item
-          = render Schematics::Filter::Checkbox::Component.new(field: :with_deleted)
-      = render Schematics::Viewer::Settings::Toggle::Component.with_collection(listable_elements.stable_sort_by(&:weight))
-  = render Schematics::Viewer::Settings::Button::Component.with_collection(other_viewers, entity:)
+          = component 'filter/checkbox', field: :with_deleted
+      = component 'viewer/settings/toggle', listable_elements.stable_sort_by(&:weight)
+  = component 'viewer/settings/button', other_viewers, entity:

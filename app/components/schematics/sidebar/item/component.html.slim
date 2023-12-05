@@ -2,5 +2,5 @@ li.nav-item.text-center.mw-100.mb-2
   = active_link_to path, class: css_classes, title:, data: do
     = fa_icon icon, size: '2x'
     .mt-2.d-none class=toggled_class = human_name_plural.humanize
-= render Schematics::Sidebar::Segment::Component.with_collection(enum_attributes, model_class: @model_class)
+= component 'sidebar/segment', enum_attributes, model_class: @model_class
 li.nav-item.mb-2

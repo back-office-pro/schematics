@@ -15,5 +15,5 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2
     h5.dropdown-header.bg-body-tertiary.fw-bold
       = t('.title')
     .pre-scrollable.overflow-scroll
-      = render Schematics::Navbar::MeetingCenter::Preview::Component.with_collection(meetings)
+      = component 'navbar/meeting_center/preview', meetings
     = link_to t('.show_all'), meetings_path, class: 'dropdown-item text-body-secondary text-center small'

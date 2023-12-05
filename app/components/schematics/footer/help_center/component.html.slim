@@ -3,5 +3,5 @@
     = t('.text')
   .dropdown-menu.shadow-sm.animate__animated.animate__zoomIn.p-0.mb-2 aria-labelledby='support-dropdown'
     h5.dropdown-header.bg-body-tertiary.fw-bold = t('.title')
-    = render Schematics::Button::Help::Component.dropdown_item
-    = render Schematics::Button::Support::Component.dropdown_item
+    = component 'button/help', :dropdown_item
+    = component 'button/support', :dropdown_item

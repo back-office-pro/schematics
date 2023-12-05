@@ -5,7 +5,7 @@
     role='button'
   }
     .col-auto.align-self-center
-      = render Schematics::Attachment::Component.avatar(user:)
+      = component :attachment, :avatar, user:
     .col.text-truncate
       = user
       .text-body-tertiary data-controller='timeago' datetime=updated_at

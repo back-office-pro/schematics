@@ -1,11 +1,11 @@
 nav.navbar.navbar-expand.bg-body-tertiary.p-0.sticky-top
-  = render Schematics::Navbar::BreadcrumbTrail::Component.new
+  = component 'navbar/breadcrumb_trail'
   ul.navbar-nav.ms-auto.p-2
-    = render Schematics::Navbar::NotificationCenter::Component.new
-    = render Schematics::Navbar::MessageCenter::Component.new
-    = render Schematics::Navbar::TaskCenter::Component.new
-    = render Schematics::Navbar::MeetingCenter::Component.new
-    = render Schematics::Navbar::SearchBar::Component.new
-    = render Schematics::Navbar::SwitchTheme::Component.new
-    = render Schematics::Navbar::OnlineUsersCenter::Component.new
-    = render Schematics::Navbar::MyAccount::Component.new
+    = component 'navbar/notification_center'
+    = component 'navbar/message_center'
+    = component 'navbar/task_center'
+    = component 'navbar/meeting_center'
+    = component 'navbar/search_bar'
+    = component 'navbar/switch_theme'
+    = component 'navbar/online_users_center'
+    = component 'navbar/my_account'

@@ -1,8 +1,8 @@
 .container-fluid.p-0.bg-body-tertiary
   .row.g-0.h-100
-    = render Schematics::Sidebar::Component.new
+    = component :sidebar
     .col.content.d-flex.flex-column class=css_class
-      = render Schematics::Navbar::Component.new
+      = component :navbar
       .container-fluid.my-1.px-3
         = content
-      = render Schematics::Footer::Component.new
+      = component :footer

@@ -14,7 +14,7 @@
               = model_class.human_name_plural.humanize
             - events.each_key do |action|
               td
-                = render Schematics::PreferencesTable::Toggle::Component.new(action:, model_class:)
+                = component 'preferences_table/toggle', action:, model_class:
   .m-3
-    = render Schematics::Button::Confirm::Component.new
-    = render Schematics::Button::Cancel::Component.new(path: root_path)
+    = component 'button/confirm'
+    = component 'button/cancel', path: root_path

@@ -2,5 +2,5 @@ template id=id data-nested-form-target='templates'
   .animate__animated.animate__zoomIn class=css_class
     = form.fields_for name, model_class.new, child_index: 'NEW_RECORD' do |form|
       = field_set_tag fa_icon(icon, class: 'me-2') + human_name.humanize do
-        = render Schematics::ResourceForm::Fields::Component.with_collection(elements, form:)
-    = render Schematics::ResourceForm::Fields::HasMany::Button::Remove::Component.new(field:)
+        = component 'resource_form/fields', elements, form:
+    = component 'resource_form/fields/has_many/button/remove', field:
