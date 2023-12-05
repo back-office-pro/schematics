@@ -6,7 +6,7 @@ module Schematics
       super
       cannot %i[read update duplicate destroy archive import], ::Message
       can %i[read update destroy archive], ::Message, author: user
-      can :read, ::Message, recipients: { id: [user.id] }
+      can %i[read reply], ::Message, recipients: { id: [user.id] }
     end
   end
 end

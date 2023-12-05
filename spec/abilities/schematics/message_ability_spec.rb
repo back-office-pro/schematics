@@ -21,6 +21,7 @@ RSpec.describe Schematics::MessageAbility do
     let(:recipients) { [other_user] }
 
     it { is_expected.not_to be_able_to(:read, message) }
+    it { is_expected.not_to be_able_to(:reply, message) }
     it { is_expected.not_to be_able_to(:update, message) }
     it { is_expected.not_to be_able_to(:destroy, message) }
     it { is_expected.not_to be_able_to(:archive, message) }
@@ -31,6 +32,7 @@ RSpec.describe Schematics::MessageAbility do
     let(:recipients) { [other_user] }
 
     it { is_expected.to be_able_to(:read, message) }
+    it { is_expected.not_to be_able_to(:reply, message) }
     it { is_expected.to be_able_to(:update, message) }
     it { is_expected.to be_able_to(:destroy, message) }
     it { is_expected.to be_able_to(:archive, message) }
@@ -41,6 +43,7 @@ RSpec.describe Schematics::MessageAbility do
     let(:recipients) { [user] }
 
     it { is_expected.to be_able_to(:read, message) }
+    it { is_expected.to be_able_to(:reply, message) }
     it { is_expected.not_to be_able_to(:update, message) }
     it { is_expected.not_to be_able_to(:destroy, message) }
     it { is_expected.not_to be_able_to(:archive, message) }
