@@ -15,7 +15,6 @@ fr:
     password_resets: mots-de-passe
     preferences: preferences
     profile: profil
-    reply: repondre
     restore: restaurer
     sudo: acces-restreint
     sudos: acces-restreints

@@ -6,8 +6,9 @@ fr:
     imports:
       create: Importer des %{parent_human_name_plural}
       new: Importer des %{parent_human_name_plural}
-    messages:
-      reply: Répondre
+    message_replies:
+      new: Répondre
+      create: Répondre
     schematics:
       blog:
         index: Blog

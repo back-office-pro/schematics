@@ -5,6 +5,11 @@ it:
       message:
         author: Autore
         content: Contenuto
+        parent: In risposta a
+        replies:
+          one: Risposta
+          other: Risposte
+          zero: Nessuna risposta
         recipients:
           one: Destinatario
           other: Destinatari

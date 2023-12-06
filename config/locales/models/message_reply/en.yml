@@ -1,0 +1,8 @@
+---
+en:
+  activerecord:
+    models:
+      message_reply:
+        gender: female
+        one: Reply
+        other: Replies
