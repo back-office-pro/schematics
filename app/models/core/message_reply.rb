@@ -4,12 +4,12 @@ class MessageReply < Message
   class << self
     delegate :entity, to: Message
 
-    def from(message)
+    def from(parent)
       Message.new(
-        subject: message.subject.dup.prepend('RE: '),
-        recipients: message.recipients,
+        subject: parent.subject.dup.prepend('RE: '),
+        recipients: parent.recipients,
         content: <<~HTML
-          <blockquote>#{message.content}</blockquote>
+          <blockquote>#{parent.content}</blockquote>
           <br />
         HTML
       )

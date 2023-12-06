@@ -7,9 +7,9 @@ class MessageRepliesController < Schematics::ResourcesController
     @resource = model_class.from(record)
   end
 
-  def resource_path = message_path(@resource)
-
   private
+
+  def resource_path = message_path(@resource)
 
   def resource_defaults = super.merge(parent: record)
 end
