@@ -791,7 +791,7 @@
         "type": "model",
         "options": {
           "required": true,
-          "filter_by": "nil"
+          "allow_hidden": true
         }
       },
       {

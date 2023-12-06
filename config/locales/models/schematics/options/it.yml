@@ -4,6 +4,7 @@ it:
     attributes:
       schematics/options/wrapper:
         actions: Azioni
+        allow_hidden: Con nascosto
         aspect_ratio: Proporzioni
         aspect_ratios:
           is_16_9: 16/9
@@ -24,6 +25,7 @@ it:
         equal_to: Uguale a
         events: Eventi
         existing: Esistente
+        filter_by: Filtra per
         greater_than: Maggiore di
         greater_than_or_equal_to: Maggiore o uguale a
         group_by: Raggruppato per

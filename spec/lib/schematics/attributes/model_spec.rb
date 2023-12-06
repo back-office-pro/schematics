@@ -51,7 +51,7 @@ describe Schematics::Attributes::Model do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
-      Schematics::Options::FilterBy
+      Schematics::Options::AllowHidden
     )
   end
 

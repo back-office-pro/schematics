@@ -8,7 +8,9 @@ module Schematics
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
 
-      def available_options = super.push(Options::FilterBy)
+      delegate :allow_hidden?, to: :options
+
+      def available_options = super.push(Options::AllowHidden)
 
       def collection = super.sort
 
@@ -24,12 +26,8 @@ module Schematics
       def values = entity
         .schema
         .entities
-        .reject(&filter_by)
+        .then_tap { _1.reject(&:hidden?) unless allow_hidden? }
         .map(&:class_name)
-
-      private
-
-      def filter_by = :"#{options.filter_by || 'hidden'}?"
     end
   end
 end

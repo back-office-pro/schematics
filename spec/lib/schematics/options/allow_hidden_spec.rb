@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+describe Schematics::Options::AllowHidden do
+  subject { described_class }
+
+  it { is_expected.to be_hidden }
+
+  its(:name) { is_expected.to eq(:allow_hidden) }
+  its(:input_type) { is_expected.to eq(:boolean) }
+end
