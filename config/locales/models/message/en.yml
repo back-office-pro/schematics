@@ -6,14 +6,14 @@ en:
         author: Author
         content: Content
         parent: In response to
-        replies:
-          one: Reply
-          other: Replies
-          zero: No reply
         recipients:
           one: Recipient
           other: Recipients
           zero: No recipient
+        replies:
+          one: Reply
+          other: Replies
+          zero: No reply
         subject: Subject
     models:
       message:
