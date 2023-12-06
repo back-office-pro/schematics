@@ -9,10 +9,6 @@ class MessagesController < Schematics::ResourcesController
 
   private
 
-  def i18n_title_path = 'messages'
-
-  private
-
   def read!
     return if @resource.recipients.exclude?(current_user)
 
