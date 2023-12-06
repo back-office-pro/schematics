@@ -131,8 +131,6 @@ module Schematics
 
     def resource_path = main_app.polymorphic_path(@resource)
 
-    def i18n_title_path = 'schematics.resources'
-
     def index_path
       return main_app.polymorphic_path(model_class) if can?(:index, model_class)
 

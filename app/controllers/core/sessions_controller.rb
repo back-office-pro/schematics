@@ -37,8 +37,6 @@ class SessionsController < Schematics::ResourcesController
 
   private
 
-  def i18n_title_path = 'sessions'
-
   def permitted_params = %i[email password remember_me]
 
   def resource_params

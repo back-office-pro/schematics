@@ -18,8 +18,6 @@ class ImportsController < Schematics::ResourcesController
 
   protected
 
-  def i18n_title_path = 'imports'
-
   def resource_defaults
     super.merge(model: parent_model_class.to_s)
   end

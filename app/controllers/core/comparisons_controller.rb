@@ -8,8 +8,6 @@ class ComparisonsController < Schematics::ResourcesController
 
   protected
 
-  def i18n_title_path = 'comparisons'
-
   def parent_model_name
     @resource.try(:model) || super
   end

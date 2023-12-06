@@ -10,8 +10,6 @@ class SearchesController < Schematics::ResourcesController
 
   protected
 
-  def i18n_title_path = 'searches'
-
   def set_results
     @results, @suggestions, @typeahead =
       Tenant
