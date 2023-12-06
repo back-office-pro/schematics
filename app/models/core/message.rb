@@ -9,6 +9,7 @@ class Message < Schematics::ApplicationRecord
     .new(
       subject: subject.dup.prepend('RE: '),
       recipients:,
+      parent: self,
       content: <<~HTML
         <blockquote>#{content}</blockquote>
         <br />
