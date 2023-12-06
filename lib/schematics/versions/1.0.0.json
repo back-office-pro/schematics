@@ -201,15 +201,6 @@
           "required": true,
           "inverse_association_name": "sent_messages"
         }
-      },
-      {
-        "id": "220d83aa-4511-4821-91af-471139cf073c",
-        "name": "parent",
-        "type": "belongs_to",
-        "options": {
-          "readonly": true,
-          "type": "message"
-        }
       }
     ]
   },

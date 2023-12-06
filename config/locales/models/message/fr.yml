@@ -5,7 +5,6 @@ fr:
       message:
         author: Auteur
         content: Contenu
-        parent: En réponse à
         recipients:
           one: Destinataire
           other: Destinataires
