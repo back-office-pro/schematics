@@ -2,6 +2,7 @@
 
 class MessageRepliesController < Schematics::ResourcesController
   include Schematics::Nestable
+  before_action -> { authorize!(:reply, model_class) }
 
   def new
     @resource = model_class.from(record)
