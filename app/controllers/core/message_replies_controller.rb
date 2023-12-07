@@ -2,15 +2,19 @@
 
 class MessageRepliesController < Schematics::ResourcesController
   include Schematics::Nestable
-  before_action -> { authorize!(:reply, model_class) }
+
+  skip_authorize_resource
+  before_action -> { authorize!(:reply, Message) }
+
+  class << self
+    def model_class = Message
+  end
 
   def new
-    @resource = model_class.from(record)
+    @resource = record.new_reply
   end
 
   private
-
-  def resource_path = message_path(@resource)
 
   def resource_defaults = super.merge(parent: record)
 end
