@@ -9,7 +9,7 @@ RSpec.describe Schematics::MessageAbility do
   include_context 'with user'
 
   let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
-  let(:message) { Message.new(author:, recipients:) }
+  let(:message) { Message.create!(subject: 'Foo', content: 'Lorem', author:, recipients:) }
   let(:author) { nil }
   let(:recipients) { [] }
 
@@ -47,5 +47,27 @@ RSpec.describe Schematics::MessageAbility do
     it { is_expected.not_to be_able_to(:update, message) }
     it { is_expected.not_to be_able_to(:destroy, message) }
     it { is_expected.not_to be_able_to(:archive, message) }
+  end
+
+  context 'when the user is the author but there is a reply' do
+    let(:author) { user }
+    let(:recipients) { [other_user] }
+    let(:reply) do
+      Message.create!(
+        subject: 'RE: Foo',
+        content: 'Lorem',
+        author:,
+        recipients:,
+        parent: message
+      )
+    end
+
+    before { reply }
+
+    it { is_expected.to be_able_to(:read, message) }
+    it { is_expected.not_to be_able_to(:reply, message) }
+    it { is_expected.not_to be_able_to(:update, message) }
+    it { is_expected.not_to be_able_to(:destroy, message) }
+    it { is_expected.to be_able_to(:archive, message) }
   end
 end
