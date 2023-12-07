@@ -26,7 +26,11 @@ module Schematics
 
     def parent_model_name = params[:model_name]
 
-    def record = parent_model_class.finder(params[:"#{parent_model_class.model_name.param_key}_id"])
+    def record = parent_model_class
+      .preload_all
+      .with_string_translations
+      .load_async
+      .finder(params[:"#{parent_model_class.model_name.param_key}_id"])
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)
