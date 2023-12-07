@@ -16,7 +16,7 @@ RSpec.describe Message do
   describe '#new_reply' do
     subject { record.new_reply }
 
-    it { is_expected.to be_a(Message) }
+    it { is_expected.to be_a(described_class) }
     its(:subject) { is_expected.to start_with('RE:') }
   end
 end
