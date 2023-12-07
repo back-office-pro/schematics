@@ -4,6 +4,8 @@
 class MessagesController < Schematics::ResourcesController
   before_action :read!, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
 
+  private
+
   def read!
     return if @resource.recipients.exclude?(current_user)
 
