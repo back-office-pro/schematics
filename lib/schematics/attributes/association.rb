@@ -56,11 +56,7 @@ module Schematics
         options.inverse_association_type || 'has_many'
       end
 
-      def preload
-        return [] if association_type == entity.name # prevent self inclusion
-
-        [name.to_sym => :string_translations]
-      end
+      def preload = [name.to_sym => :string_translations]
 
       def search_data = super
         .concat(' ')
