@@ -21,7 +21,9 @@ module Schematics
           .human_name_plural
           .humanize
 
-        def render? = comments_feature_flag
+        def render?
+          comments_feature_flag && can?(:create, ::Comment)
+        end
       end
     end
   end
