@@ -24,7 +24,7 @@ RSpec.describe Session do
       include_context 'with user'
 
       it { is_expected.to be_a(described_class) }
-      it { is_expected.to have_attributes(user:) }
+      its(:user) { is_expected.to eq(user) }
     end
   end
 

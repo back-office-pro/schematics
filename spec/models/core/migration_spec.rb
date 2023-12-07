@@ -50,7 +50,7 @@ RSpec.describe Migration do
     before { record.state_finished! }
 
     it { is_expected.to be_a(described_class) }
-    it { is_expected.to have_attributes(data_version: 1.5) }
+    its(:data_version) { is_expected.to eq(1.5) }
   end
 
   describe '.current' do

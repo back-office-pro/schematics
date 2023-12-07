@@ -35,6 +35,6 @@ RSpec.describe Chart do
     subject { described_class.api }
 
     it { is_expected.to be_a(described_class) }
-    it { is_expected.to have_attributes(model: 'ApiRequest') }
+    its(:model) { is_expected.to eq('ApiRequest') }
   end
 end
