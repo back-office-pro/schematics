@@ -5,6 +5,7 @@ module Schematics
     include Fillable
     include Searchable
     include Calendarable
+    include Documentable
     include Versionable
     include Viewable
     include Lockable
@@ -35,8 +36,6 @@ module Schematics
     helper_method :model_class
 
     class << self
-      include Documentable
-
       def model_class = controller_path
         .classify
         .constantize
