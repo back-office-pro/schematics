@@ -6,9 +6,6 @@ en:
     imports:
       create: Import %{parent_human_name_plural}
       new: Import %{parent_human_name_plural}
-    message_replies:
-      create: Reply
-      new: Reply
     schematics:
       blog:
         index: Blog
@@ -21,6 +18,9 @@ en:
         maintenance_mode: Maintenance in progress
         not_found: Page not found
         schema_error: Schema error
+      message_replies:
+        create: Reply
+        new: Reply
       one_time_passwords:
         create: Two-factor authentication
         edit: Set up two-factor authentication

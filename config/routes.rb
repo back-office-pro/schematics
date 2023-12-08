@@ -7,6 +7,7 @@ Schematics::Engine.routes.draw do
   localized do
     draw :dashboard
     draw :exceptions
+    draw :message_replies
     get 'sudo', to: 'sudos#new', as: :sudo
     resource :preferences, only: %i[edit update]
     resource :one_time_passwords, only: %i[show edit new update create destroy]

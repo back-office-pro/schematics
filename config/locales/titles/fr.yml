@@ -6,9 +6,6 @@ fr:
     imports:
       create: Importer des %{parent_human_name_plural}
       new: Importer des %{parent_human_name_plural}
-    message_replies:
-      create: Répondre
-      new: Répondre
     schematics:
       blog:
         index: Blog
@@ -21,6 +18,9 @@ fr:
         maintenance_mode: Maintenance en cours
         not_found: Page non trouvée
         schema_error: Erreur schéma
+      message_replies:
+        create: Répondre
+        new: Répondre
       one_time_passwords:
         create: Authentification à deux facteurs
         edit: Paramétrer l'authentification à deux facteurs
