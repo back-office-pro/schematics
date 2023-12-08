@@ -10,12 +10,12 @@ fr:
     edit: editer
     login: connexion
     logout: deconnexion
-    message_replies: reponses
     new: nouveau
     one_time_passwords: mots-de-passe-uniques
     password_resets: mots-de-passe
     preferences: preferences
     profile: profil
+    replies: reponses
     restore: restaurer
     sudo: acces-restreint
     sudos: acces-restreints
