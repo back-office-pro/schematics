@@ -4,7 +4,7 @@ class MessageRepliesController < Schematics::ResourcesController
   include Schematics::Nestable
 
   skip_authorize_resource
-  before_action -> { authorize!(:reply, Message) }
+  before_action -> { authorize!(:reply, record) }
 
   class << self
     def model_class = Message
