@@ -6,6 +6,7 @@ require:
   - rubocop-thread_safety
 AllCops:
   NewCops: enable
+  DisplayStyleGuide: true
   Exclude:
     - spec/demo/**/*
     - vendor/**/*
