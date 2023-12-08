@@ -14,8 +14,10 @@ module Schematics
         subclass.class_eval do
           route_base controller_path
 
-          entity = model_class.entity
+          entity = model_class&.entity
           filter_key = Ransack.options[:search_key]
+
+          return unless entity
 
           if entity.can?(:index)
             api :index, "List #{entity.name.pluralize}" do

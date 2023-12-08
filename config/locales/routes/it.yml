@@ -15,6 +15,7 @@ it:
     password_resets: passwords
     preferences: preferenze
     profile: profilo
+    replies: risposte
     restore: restaurare
     sudo: accesso-limitato
     sudos: accessi-limitati

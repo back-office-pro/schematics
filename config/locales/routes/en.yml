@@ -15,6 +15,7 @@ en:
     password_resets: passwords
     preferences: preferences
     profile: profile
+    replies: replies
     restore: restore
     sudo: restricted-access
     sudos: restricted-access

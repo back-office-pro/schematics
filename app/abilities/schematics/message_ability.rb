@@ -5,8 +5,11 @@ module Schematics
     def initialize(user)
       super
       cannot %i[read update duplicate destroy archive import], ::Message
-      can %i[read update destroy archive], ::Message, author: user
-      can :read, ::Message, recipients: { id: [user.id] }
+      can %i[read reply update destroy archive], ::Message, author: user
+      can %i[read reply], ::Message, recipients: { id: [user.id] }
+      cannot %i[reply update destroy], ::Message do |parent|
+        ::Message.exists?(parent:)
+      end
     end
   end
 end

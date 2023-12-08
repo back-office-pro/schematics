@@ -5,10 +5,15 @@ en:
       message:
         author: Author
         content: Content
+        parent: In response to
         recipients:
           one: Recipient
           other: Recipients
           zero: No recipient
+        replies:
+          one: Reply
+          other: Replies
+          zero: No reply
         subject: Subject
     models:
       message:

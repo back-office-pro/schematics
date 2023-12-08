@@ -12,7 +12,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
 
-      delegate :descriptor, :default, to: :inverse_entity
+      delegate :descriptor, to: :inverse_entity
       delegate :to_sql, to: :descriptor
       delegate :polymorphic?, to: :options
 
@@ -28,6 +28,12 @@ module Schematics
       )
 
       def database_type = 'belongs_to'
+
+      def default
+        return if association_type == entity.name # prevent infinite loop
+
+        inverse_entity.default
+      end
 
       def open_api_type = { id!: ::String }
 

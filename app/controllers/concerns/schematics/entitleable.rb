@@ -16,5 +16,7 @@ module Schematics
     private
 
     def i18n_title_path = controller_path.tr('/', '.')
+
+    def view_assigns = super.symbolize_keys
   end
 end

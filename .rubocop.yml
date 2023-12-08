@@ -6,6 +6,7 @@ require:
   - rubocop-thread_safety
 AllCops:
   NewCops: enable
+  DisplayStyleGuide: true
   Exclude:
     - spec/demo/**/*
     - vendor/**/*
@@ -152,12 +153,14 @@ RSpec/MultipleMemoizedHelpers:
   Max: 14
 RSpec/EmptyExampleGroup:
   Exclude:
+    - spec/requests/schematics/message_replies_spec.rb
     - spec/*/active_storage/**/*
     - spec/*/core/**/*
 RSpec/FilePath:
   Enabled: false
 RSpec/SpecFilePathFormat:
   Exclude:
+    - spec/requests/schematics/message_replies_spec.rb
     - spec/requests/active_storage/**/*
     - spec/requests/core/**/*
     - spec/routing/**/*

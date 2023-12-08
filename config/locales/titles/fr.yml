@@ -18,6 +18,9 @@ fr:
         maintenance_mode: Maintenance en cours
         not_found: Page non trouvée
         schema_error: Erreur schéma
+      message_replies:
+        create: Répondre
+        new: Répondre
       one_time_passwords:
         create: Authentification à deux facteurs
         edit: Paramétrer l'authentification à deux facteurs

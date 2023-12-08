@@ -38,7 +38,7 @@ module Schematics
     class << self
       def model_class = controller_path
         .classify
-        .constantize
+        .safe_constantize
     end
 
     def archive
@@ -123,9 +123,7 @@ module Schematics
       respond_with result, location: index_path, redirect_on_failure: true
     end
 
-    def view_assigns = super
-      .symbolize_keys
-      .merge(human_name_plural:, human_name:, gender:)
+    def view_assigns = super.merge(human_name_plural:, human_name:, gender:)
 
     protected
 
