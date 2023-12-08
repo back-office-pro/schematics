@@ -38,7 +38,7 @@ module Schematics
     class << self
       def model_class = controller_path
         .classify
-        .constantize
+        .safe_constantize
     end
 
     def archive
