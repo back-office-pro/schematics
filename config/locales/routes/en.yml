@@ -10,6 +10,7 @@ en:
     edit: edit
     login: login
     logout: logout
+    message_replies: replies
     new: new
     one_time_passwords: one-time-passwords
     password_resets: passwords

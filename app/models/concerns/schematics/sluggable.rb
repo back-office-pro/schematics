@@ -14,6 +14,7 @@ module Schematics
       duplicate
       imports
       comments
+      message_replies
     ].freeze
 
     included do

@@ -10,6 +10,7 @@ it:
     edit: editare
     login: connessione
     logout: disconnessione
+    message_replies: risposte
     new: nuovo
     one_time_passwords: password-monousi
     password_resets: passwords

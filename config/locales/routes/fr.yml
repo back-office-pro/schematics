@@ -10,6 +10,7 @@ fr:
     edit: editer
     login: connexion
     logout: deconnexion
+    message_replies: reponses
     new: nouveau
     one_time_passwords: mots-de-passe-uniques
     password_resets: mots-de-passe
