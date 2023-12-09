@@ -13,6 +13,7 @@ RSpec.describe Schematics::MessageAbility do
   let(:author) { nil }
   let(:recipients) { [] }
 
+  it { is_expected.not_to be_able_to(:comment, Message) }
   it { is_expected.not_to be_able_to(:duplicate, Message) }
   it { is_expected.not_to be_able_to(:import, Message) }
 

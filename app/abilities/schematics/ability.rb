@@ -9,12 +9,12 @@ module Schematics
       merge ActiveStorage::BlobAbility.new
       merge VersionAbility.new(user)
       merge UserAbility.new(user)
+      merge CommentAbility.new(user)
       merge MessageAbility.new(user)
       merge DraftAbility.new(user)
       merge ConfigurationAbility.new(user)
       merge ApiRequestAbility.new(user)
       merge WebhookRequestAbility.new(user)
-      merge CommentAbility.new(user)
       merge ChartAbility.new(user)
       merge MigrationAbility.new
       merge ComparisonAbility.new

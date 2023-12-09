@@ -22,7 +22,9 @@ module Schematics
           .humanize
 
         def render?
-          comments_feature_flag && can?(:create, ::Comment)
+          comments_feature_flag &&
+            can?(:create, ::Comment) &&
+            can?(:comment, resource.class)
         end
       end
     end

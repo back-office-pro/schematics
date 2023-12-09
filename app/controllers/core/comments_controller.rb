@@ -3,6 +3,8 @@
 class CommentsController < Schematics::ResourcesController
   include Schematics::Nestable
 
+  before_action -> { authorize!(:comment, parent_model_class) }
+
   protected
 
   def resource_path = polymorphic_path(record, comments: '').chop
