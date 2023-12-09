@@ -12,6 +12,7 @@ export default class extends ApplicationController {
   }
 
   async compare () {
+    this.buttonTarget.disabled = true
     const params = { comparison: { model: this.modelValue, ids: this.ids() } }
     const response = await this.fetchAPI(routes.comparisons, 'POST', params)
     Turbo.visit(response.headers.get('Location'))
