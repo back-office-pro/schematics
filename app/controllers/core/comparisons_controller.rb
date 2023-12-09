@@ -5,6 +5,7 @@ class ComparisonsController < Schematics::ResourcesController
 
   skip_before_action :set_breadcrumb, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
   before_action :set_resources, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
+  before_action -> { authorize!(:show, parent_model_class) }, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
 
   protected
 
