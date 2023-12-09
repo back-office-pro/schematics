@@ -6,6 +6,7 @@ module Schematics
 
     skip_authorize_resource
     before_action -> { authorize!(:reply, record) }
+    helper_method :attributes
 
     class << self
       def model_class = ::Message
@@ -17,6 +18,12 @@ module Schematics
 
     private
 
-    def resource_defaults = super.merge(parent: record)
+    def attributes = entity.rich_text_attributes
+
+    def resource_defaults = super.merge(
+      subject: record.new_reply.subject,
+      recipients: record.new_reply.recipients,
+      parent: record
+    )
   end
 end

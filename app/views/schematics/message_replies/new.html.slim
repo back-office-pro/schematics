@@ -6,4 +6,4 @@
       .col.text-truncate
         = __card_heading(icon: :reply, title:)
   .card-body.p-3
-    = __resource_form(resource: @resource, url: message_replies_path(record), cancel_path: record)
+    = __resource_form(resource: @resource, url: message_replies_path(record), attributes:, cancel_path: record)
