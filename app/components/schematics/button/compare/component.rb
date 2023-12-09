@@ -6,6 +6,8 @@ module Schematics
       class Component < ApplicationComponent
         option :model_class
 
+        def title = t('.text')
+
         def render?
           can?(:create, ::Comparison) && can?(:show, model_class)
         end
