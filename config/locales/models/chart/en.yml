@@ -11,8 +11,8 @@ en:
           other: Roles
           zero: No role
         size: Size
-        x_field: X field
-        y_field: Y field
+        x_field: X-axis attribute
+        y_field: Y-axis attribute
     enums:
       chart:
         aggregate:
