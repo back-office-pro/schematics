@@ -4,6 +4,8 @@ class Configuration < Schematics::ApplicationRecord
   LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
 
   after_initialize :set_chartkick_options
+  after_update :set_chartkick_options
+
   attribute :company_name, default: -> { Tenant.human }
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
