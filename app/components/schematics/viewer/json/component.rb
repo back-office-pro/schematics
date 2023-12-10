@@ -2,7 +2,7 @@
 
 module Schematics
   module Viewer
-    module Json
+    module JSON
       class Component < ApplicationComponent
         option :value
       end

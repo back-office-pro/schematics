@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::JsonSerializer do
+RSpec.describe Schematics::JSONSerializer do
   subject(:serializer) { described_class.new(user, options) }
 
   include_context 'with user'

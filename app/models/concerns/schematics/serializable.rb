@@ -11,7 +11,7 @@ module Schematics
     end
 
     def serialized_json(options = nil)
-      JsonSerializer.new(self, options).content
+      JSONSerializer.new(self, options).content
     end
 
     def serializable_hash(options = nil)
