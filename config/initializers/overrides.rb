@@ -29,9 +29,9 @@ ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
+Chartkick.singleton_class.prepend(Chartkick::Override)
 
 Puma::Configuration.prepend(Puma::Override::Configuration)
-
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 
 Rails.configuration.to_prepare do
