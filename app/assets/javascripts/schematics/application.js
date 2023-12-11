@@ -33,6 +33,13 @@ const startViewTransition = ({ detail }) => {
   }
 }
 
+const redirectOnFrameMissing = (event) => {
+  if (event.detail.response.redirected) {
+    event.preventDefault()
+    event.detail.visit(event.detail.response)
+  }
+}
+
 const defaultErrorHandler = application.handleError.bind(application)
 const rollbar = new Rollbar({
   accessToken: rollbarClientKey,
@@ -52,6 +59,7 @@ Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('turbo:before-render', startViewTransition)
 document.addEventListener('turbo:before-frame-render', startViewTransition)
+document.addEventListener('turbo:frame-missing', redirectOnFrameMissing)
 document.addEventListener('scroll', setNavbarScrolled)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
 
