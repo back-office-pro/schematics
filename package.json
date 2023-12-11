@@ -11,7 +11,7 @@
     "bootstrap": "~5.3.2",
     "crisp-sdk-web": "~1.0.21",
     "file-saver-es": "~2.0.5",
-    "flag-icons": "~7.0.3",
+    "flag-icons": "~7.1.0",
     "pluralize-esm": "~9.0.5",
     "sortablejs": "~1.15.1",
     "swagger-ui-dist": "~5.10.3",
