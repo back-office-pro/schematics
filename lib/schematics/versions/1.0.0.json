@@ -450,7 +450,7 @@
         "type": "boolean",
         "options": {
           "cached": true,
-          "default": true
+          "default": false
         }
       },
       {
