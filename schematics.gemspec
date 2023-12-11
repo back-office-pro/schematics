@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
-  spec.add_development_dependency 'debug', '~> 1.8.0'
+  spec.add_development_dependency 'debug', '~> 1.9.0'
   spec.add_development_dependency 'fuubar', '~> 2.5.1'
   spec.add_development_dependency 'i18n-tasks', '~> 1.0.13'
   spec.add_development_dependency 'isolator', '~> 1.0.1'
@@ -70,7 +70,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'friendly_id', '~> 5.4.2'
   spec.add_dependency 'friendly_id-mobility', '~> 1.0.4'
   spec.add_dependency 'git', '~> 1.18.0'
-  spec.add_dependency 'good_job', '~> 3.21.2'
+  spec.add_dependency 'good_job', '~> 3.21.3'
   spec.add_dependency 'groupdate', '~> 6.4.0'
   spec.add_dependency 'hiredis', '~> 0.6.3'
   spec.add_dependency 'i18n-beginning_of_week', '~> 0.1.0'
