@@ -4,6 +4,8 @@ Rails.configuration.after_initialize do
   Chartkick.options = {
     refresh: 60,
     html: Schematics::ChartPlaceholder::Component.new.to_html,
+    colors: -> { Configuration.color_palette },
+    empty: -> { I18n.t('schematics.application.resource.empty') },
     content_for: :charts_js,
     library: {
       # Google Charts
