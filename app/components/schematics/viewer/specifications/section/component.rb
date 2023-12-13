@@ -19,8 +19,8 @@ module Schematics
           def interpolate(element)
             element
               .to_spec
-              .gsub(/\*\*(.*?+)\*\*/, '<b>\1</b>')
-              .gsub(/\*(.*?+)\*/, '<i>\1</i>')
+              .gsub(/\*\*(.*?)\*\*/, '<b>\1</b>')
+              .gsub(/\*(.*?)\*/, '<i>\1</i>')
               .gsub(/`(.+)`/, '<code>\1</code>')
           end
         end
