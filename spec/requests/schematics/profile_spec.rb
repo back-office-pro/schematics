@@ -7,7 +7,16 @@ RSpec.describe 'Profile' do
 
   describe 'PUT #update' do
     let(:do_request) { put(profile_path, params:, headers:) }
-    let(:params) { { user: { password_challenge: } } }
+    let(:params) do
+      {
+        user: {
+          password_challenge:,
+          first_name: 'John',
+          last_name: 'Doe',
+          locale: 'en'
+        }
+      }
+    end
 
     context 'when password_challenge is right' do
       let(:password_challenge) { 'Azerty1234?!' }
