@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "~6.5.1",
-    "@github/hotkey": "~3.0.1",
+    "@github/hotkey": "~3.1.0",
     "@popperjs/core": "~2.11.8",
     "animate.css": "~4.1.1",
     "autosize": "~6.0.1",
@@ -14,7 +14,7 @@
     "flag-icons": "~7.1.0",
     "pluralize-esm": "~9.0.5",
     "sortablejs": "~1.15.1",
-    "swagger-ui-dist": "~5.10.3",
+    "swagger-ui-dist": "~5.10.5",
     "swagger-ui-themes": "~3.0.1",
     "timeago.js": "~4.0.2",
     "tom-select": "2.2.2",
