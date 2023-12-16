@@ -5,8 +5,7 @@ module Schematics
     module Fields
       module BelongsTo
         class Component < Fields::Component
-          delegate :column_name, :inverse_entity, to: :field
-          delegate :model_class, :descriptor, to: :inverse_entity
+          delegate :column_name, :model_class, :descriptor, to: :field
           delegate :gender, to: :model_class, private: true
 
           memoize def collection = model_class
