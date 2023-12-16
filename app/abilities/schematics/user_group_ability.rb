@@ -4,11 +4,11 @@ module Schematics
   class UserGroupAbility < ApplicationAbility
     def initialize(user)
       super
-      return if user.user_groups.empty?
-
-      cannot :manage,
-             model_classes,
-             user_groups: { id: ::UserGroup.excluding(user.user_groups).ids }
+      model_classes.each do |model_class|
+        cannot :read, model_class.where.associated(:user_groups) do |object|
+          !object.user_groups.intersect?(user.user_groups)
+        end
+      end
     end
 
     private
@@ -17,7 +17,8 @@ module Schematics
       .schema
       .entities
       .flat_map(&:has_and_belongs_to_many_associations)
-      .select { _1.association_type == ::UserGroup.entity.name }
+      .select { _1.model_class == ::UserGroup }
+      .map(&:entity)
       .filter_map(&:model_class)
   end
 end
