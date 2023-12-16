@@ -39,11 +39,11 @@ module Schematics
         end
         let(:login_with_2fa) do
           visit login_path
-          fill_in ::User.human_attribute_name('email'), with: user.email
-          fill_in ::User.human_attribute_name('password'), with: 'Azerty1234?!'
+          fill_in 'session[email]', with: user.email
+          fill_in 'session[password]', with: user.password
           click_button t('schematics.application.button.confirm')
           is_expected.to have_text t('sessions.create.challenge')
-          fill_in ::User.human_attribute_name('otp_attempt'), with: user.otp_code
+          fill_in 'user[otp_attempt]', with: user.otp_code
           click_button t('schematics.application.button.confirm')
           is_expected.to have_text t('schematics.one_time_passwords.create.success')
         end
