@@ -33,6 +33,7 @@ module Schematics
             first_name: 'John',
             last_name: 'Doe',
             otp_last_at: 1.year.ago.to_i,
+            user_groups: UserGroup.all,
             role:
           )
         end
@@ -40,10 +41,10 @@ module Schematics
           visit login_path
           fill_in ::User.human_attribute_name('email'), with: user.email
           fill_in ::User.human_attribute_name('password'), with: 'Azerty1234?!'
-          click_on t('schematics.application.button.confirm')
+          click_button t('schematics.application.button.confirm')
           is_expected.to have_text t('sessions.create.challenge')
           fill_in ::User.human_attribute_name('otp_attempt'), with: user.otp_code
-          click_on t('schematics.application.button.confirm')
+          click_button t('schematics.application.button.confirm')
           is_expected.to have_text t('schematics.one_time_passwords.create.success')
         end
 
@@ -54,7 +55,7 @@ module Schematics
         end
 
         if can?(:index)
-          scenario 'visiting the index' do
+          it 'visits the index' do
             if ability.can?(:index, model_class)
               visit polymorphic_path(model_class)
               text = t('titles.schematics.resources.index', human_name_plural:)
@@ -64,22 +65,22 @@ module Schematics
         end
 
         if can?(:create)
-          scenario "creating a #{entity.name}" do
+          it "creates a #{entity.name}" do
             if ability.can?(:new, model_class)
               visit new_polymorphic_path(model_class)
               fill_form
-              click_on t('schematics.application.button.confirm')
+              click_button t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.create.success', human_name:)
             end
           end
         end
 
         if can?(:update)
-          scenario "updating a #{entity.name}" do
+          it "updates a #{entity.name}" do
             if ability.can?(:edit, record)
               visit edit_polymorphic_path(record)
               fill_form
-              click_on t('schematics.application.button.confirm')
+              click_button t('schematics.application.button.confirm')
               is_expected.to have_text t('schematics.resources.update.success', human_name:)
             end
           end
@@ -109,7 +110,7 @@ module Schematics
       def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         entity.fillable_elements.each do |element|
           case element
-          when Associations::HasAndBelongsToMany
+          when Associations::HasAndBelongsToMany, Attributes::BelongsTo
             select element.model_class.first.to_s,
                    from: element.input_name,
                    match: :first
@@ -131,10 +132,6 @@ module Schematics
             else
               find_field(element.input_name, type:).set(element.default)
             end
-          when Attributes::BelongsTo
-            select element.inverse_entity.model_class.first.to_s,
-                   from: element.input_name,
-                   match: :first
           when Behaviours::Enumerable
             select element.format(element.default),
                    from: element.input_name,
