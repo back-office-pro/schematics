@@ -74,3 +74,16 @@ RSpec.shared_context 'with user' do
     )
   end
 end
+
+RSpec.shared_context 'with login' do
+  include_context 'with user'
+
+  before do
+    visit login_path
+    within '.card-body' do
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
+      click_button
+    end
+  end
+end
