@@ -7,8 +7,12 @@ RSpec.describe 'Blog' do
 
   let(:post) { BlogPost.create!(title: 'My Title', content: 'My Content', author: user) }
   let(:accept_header) { 'text/html' }
+  let(:available_locales) { I18n.available_locales.map(&:to_s) }
 
-  before { post.publish! }
+  before do
+    Configuration.instance.update!(available_locales:, blog_feature_flag: true)
+    post.publish!
+  end
 
   describe 'GET #index' do
     let(:do_request) { get(blog_index_path, headers:) }
