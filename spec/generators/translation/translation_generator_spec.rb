@@ -13,8 +13,21 @@ RSpec.describe TranslationGenerator do
       value: 'Title'
     )
   end
+  let(:body) do
+    {
+      data: {
+        translations: [
+          { translatedText: 'Subtitle' }
+        ]
+      }
+    }.to_json
+  end
 
-  before { translation }
+  before do
+    translation
+    stub_request(:post, %r{https://translation.googleapis.com/language/translate/v2})
+      .to_return(body:, status: 200)
+  end
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }
