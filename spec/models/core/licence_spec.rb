@@ -6,10 +6,65 @@ RSpec.describe Licence do
   include Schematics::Specs::Model
 
   let(:metadata) do
-    { users: 3, api_keys: 2, databases: 1, storage: 1, entities: 1, support: 1 }
+    {
+      users: 3,
+      api_keys: 2,
+      databases: 1,
+      storage: 1,
+      entities: 1,
+      support: 1
+    }
+  end
+  let(:new_metadata) do
+    {
+      users: 1000,
+      api_keys: 100,
+      databases: 3,
+      storage: 100,
+      entities: 100,
+      support: 1
+    }
+  end
+  let(:search_body) do
+    {
+      data: [
+        {
+          id: 'cus_1',
+          email: 'john.doe@nowhere.com',
+          preferred_locales: [],
+          subscriptions: [
+            {
+              id: 'sub_1',
+              status: 'active',
+              cancel_at_period_end: false,
+              plan: {
+                product: 'prod_1'
+              }
+            }
+          ]
+        }
+      ]
+    }
+  end
+  let(:product_body) do
+    {
+      name: 'premium',
+      metadata: new_metadata
+    }
+  end
+  let(:subscription_stub_request) do
+    stub_request(:post, 'https://api.stripe.com/v1/subscriptions/sub_1')
+      .to_return(status: 200)
   end
 
-  before { record.metadata = metadata }
+  before do
+    record.metadata = metadata
+    stub_request(:get, %r{https://api.stripe.com/v1/customers/search})
+      .to_return(body: search_body.to_json, status: 200)
+    stub_request(:get, 'https://api.stripe.com/v1/products/prod_1')
+      .to_return(body: product_body.to_json, status: 200)
+    subscription_stub_request
+  end
 
   it { is_expected.not_to be_quota_users_exceeded }
   it { is_expected.not_to be_quota_api_keys_exceeded }
@@ -35,6 +90,16 @@ RSpec.describe Licence do
   its(:quota_storage) { is_expected.to eq(1.gigabyte) }
   its(:quota_entities) { is_expected.to eq(1) }
 
+  it 'sends a gateway request after enable' do
+    record.tap(&:cancel!).enable!
+    expect(subscription_stub_request).to have_been_requested.twice
+  end
+
+  it 'sends a gateway request after cancel' do
+    record.cancel!
+    expect(subscription_stub_request).to have_been_requested.once
+  end
+
   describe '#quota_storage_will_be_exceeded?' do
     subject { record.quota_storage_will_be_exceeded?(size) }
 
@@ -52,25 +117,28 @@ RSpec.describe Licence do
   end
 
   describe '#load!' do
-    let(:context) { double('context', data: { metadata: new_metadata }) } # rubocop:disable RSpec/VerifiedDoubles
-    let(:new_metadata) do
-      { users: 1000, api_keys: 100, databases: 3, storage: 100, entities: 100, support: 1 }
-    end
+    subject(:load!) { record.load! }
 
     before do
-      allow(described_class::GATEWAY::Fetch).to receive(:call).and_return(context)
       allow(record).to receive(:update_env_file).and_return(nil)
     end
 
     it 'updates licence metadata' do
-      expect { record.load! }
+      expect { load! }
         .to change(record, :metadata)
         .from(metadata.stringify_keys)
         .to(new_metadata.stringify_keys)
     end
 
+    it 'updates licence plan' do
+      expect { load! }
+        .to change(record, :plan)
+        .from('basic')
+        .to('premium')
+    end
+
     it 'updates .env file' do
-      record.load!
+      load!
       expect(record).to have_received(:update_env_file)
     end
   end
