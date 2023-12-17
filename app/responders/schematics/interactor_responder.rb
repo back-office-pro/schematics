@@ -36,7 +36,7 @@ module Schematics
 
     def resource_errors
       return super unless interactor?
-      return __send__("#{format}_resource_errors") if respond_to?("#{format}_resource_errors")
+      return __send__(:"#{format}_resource_errors") if respond_to?(:"#{format}_resource_errors")
 
       errors
     end

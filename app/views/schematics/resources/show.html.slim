@@ -15,7 +15,7 @@
         = __button_duplicate(resource: @resource)
         = __viewer_event_button_group(resource: @resource, compact: false)
         - action = @resource.associations(current_ability, dependent: true).any? ? :delete : :destroy
-        = public_send("__button_#{action}", resource: @resource, compact: false)
+        = public_send(:"__button_#{action}", resource: @resource, compact: false)
   .card-body.p-0
     = __resource_details(resource: @resource, editable: true)
 = __viewer_rich_text(model_class.entity.rich_text_attributes, resource: @resource)
