@@ -18,6 +18,13 @@ RSpec.describe Migration do
     YAML
   end
 
+  it 'enqueues a migrate schema job after migrate' do
+    expect { record.migrate! }
+      .to have_enqueued_job(Schematics::MigrateSchemaJob)
+      .with(record)
+      .on_queue('migrations')
+  end
+
   describe '#finalize!' do
     subject(:finalize!) { record.finalize!(failure) }
 
