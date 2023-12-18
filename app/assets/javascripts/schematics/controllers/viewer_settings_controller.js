@@ -11,9 +11,9 @@ export default class extends ApplicationController {
     this.fetchAPI(routes.preferences, 'PUT', { user: { preferences: { [id]: checked } } })
   }
 
-  async switchLayout ({ target, params: { viewer, preference } }) {
+  async switchLayout ({ params: { viewer, preference } }) {
     const data = { user: { preferences: { [preference]: viewer } } }
     await this.fetchAPI(routes.preferences, 'PUT', data)
-    target.closest('form').requestSubmit()
+    document.getElementById('filters').requestSubmit()
   }
 }
