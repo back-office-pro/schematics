@@ -6,10 +6,11 @@ require 'generators/translations/translations_generator'
 RSpec.describe TranslationsGenerator do
   subject(:generator) { described_class.new([name], options, behavior:) }
 
+  include_context 'with google translate stubs'
+
   let(:name) { 'task' }
   let(:behavior) { :invoke }
   let(:options) { [] }
-  let(:body) { { data: { translations: [] } }.to_json }
   let(:translation) do
     Translation.create!(
       locale: 'en',
@@ -18,11 +19,7 @@ RSpec.describe TranslationsGenerator do
     )
   end
 
-  before do
-    translation
-    stub_request(:post, %r{https://translation.googleapis.com/language/translate/v2})
-      .to_return(body:, status: 200)
-  end
+  before { translation }
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }

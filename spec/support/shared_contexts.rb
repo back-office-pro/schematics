@@ -87,3 +87,72 @@ RSpec.shared_context 'with login' do
     end
   end
 end
+
+RSpec.shared_context 'with stripe stubs' do
+  let(:new_metadata) do
+    {
+      users: 1000,
+      api_keys: 100,
+      databases: 3,
+      storage: 100,
+      entities: 100,
+      support: 1
+    }
+  end
+  let(:search_body) do
+    {
+      data: [
+        {
+          id: 'cus_1',
+          email: 'john.doe@nowhere.com',
+          preferred_locales: [],
+          subscriptions: [
+            {
+              id: 'sub_1',
+              status: 'active',
+              cancel_at_period_end: false,
+              plan: {
+                product: 'prod_1'
+              }
+            }
+          ]
+        }
+      ]
+    }
+  end
+  let(:product_body) do
+    {
+      name: 'premium',
+      metadata: new_metadata
+    }
+  end
+  let(:subscription_stub_request) do
+    stub_request(:post, 'https://api.stripe.com/v1/subscriptions/sub_1')
+      .to_return(status: 200)
+  end
+
+  before do
+    stub_request(:get, %r{https://api.stripe.com/v1/customers/search})
+      .to_return(body: search_body.to_json, status: 200)
+    stub_request(:get, 'https://api.stripe.com/v1/products/prod_1')
+      .to_return(body: product_body.to_json, status: 200)
+    subscription_stub_request
+  end
+end
+
+RSpec.shared_context 'with google translate stubs' do
+  let(:body) do
+    {
+      data: {
+        translations: [
+          { translatedText: 'Subtitle' }
+        ]
+      }
+    }.to_json
+  end
+
+  before do
+    stub_request(:post, %r{https://translation.googleapis.com/language/translate/v2})
+      .to_return(body:, status: 200)
+  end
+end
