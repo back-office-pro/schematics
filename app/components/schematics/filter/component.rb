@@ -50,6 +50,8 @@ module Schematics
         field.try(:name) || field
       end
 
+      def form = 'filters'
+
       def onchange = <<~JAVASCRIPT.squish
         this.form.requestSubmit()
       JAVASCRIPT

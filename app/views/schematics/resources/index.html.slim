@@ -1,22 +1,16 @@
-= form_with url: main_app.polymorphic_path(model_class),
-            method: :get,
-            data: { turbo_frame: 'viewer', controller: 'filters' },
-            class: 'animate__animated animate__zoomIn' do
-  = submit_tag nil, name: nil, class: 'd-none'
-  = turbo_frame_tag 'viewer', data: { turbo_action: 'advance' } do
-    - %i[sort items month_page].each do |query|
-      = hidden_field_tag query, params[query]
-    .card.shadow-sm.w-100
-      .card-header.px-2.py-1
-        .row.align-items-center
-          .col.text-truncate
-            = __card_heading(icon: :table, title:)
-          .col-auto
-            = __button_generate_file_in_background(:csv, dropdown: @pagy.pages > 1) if @resources.any?
-            = __button_import(model_class:)
-            = __button_add(model_class:)
-            = __button_reset_filters(model_class:)
-      .card-body.p-0
-        = __placeholder(visible: false)
-        = __viewer(:build, resources: @resources, viewer:)
-    = __viewer_pagination(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)
+= turbo_frame_tag 'viewer', data: { turbo_action: 'advance' } do
+  .card.shadow-sm.w-100
+    .card-header.px-2.py-1
+      .row.align-items-center
+        .col.text-truncate
+          = __card_heading(icon: :table, title:)
+        .col-auto
+          = __button_generate_file_in_background(:csv, dropdown: @pagy.pages > 1) if @resources.any?
+          = __button_import(model_class:)
+          = __button_add(model_class:)
+          = __button_reset_filters(model_class:)
+    .card-body.p-0
+      = __placeholder(visible: false)
+      = __filters_form(model_class:)
+      = __viewer(:build, resources: @resources, viewer:)
+  = __viewer_pagination(human_name_plural: @human_name_plural, pagy: @pagy, calendar: @calendar)
