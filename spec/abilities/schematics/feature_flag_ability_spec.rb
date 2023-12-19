@@ -14,7 +14,6 @@ RSpec.describe Schematics::FeatureFlagAbility do
       end
     end
   end
-  let(:available_locales) { I18n.available_locales.map(&:to_s) }
 
   it { is_expected.to be_able_to(:manage, Message) }
   it { is_expected.to be_able_to(:manage, Comment) }
@@ -23,31 +22,31 @@ RSpec.describe Schematics::FeatureFlagAbility do
   it { is_expected.not_to be_able_to(:manage, BlogPost) }
 
   context 'when messages are disabled' do
-    before { Configuration.instance.update!(available_locales:, messages_feature_flag: false) }
+    before { Configuration.instance.update!(messages_feature_flag: false) }
 
     it { is_expected.not_to be_able_to(:manage, Message) }
   end
 
   context 'when comments are disabled' do
-    before { Configuration.instance.update!(available_locales:, comments_feature_flag: false) }
+    before { Configuration.instance.update!(comments_feature_flag: false) }
 
     it { is_expected.not_to be_able_to(:manage, Comment) }
   end
 
   context 'when tasks are disabled' do
-    before { Configuration.instance.update!(available_locales:, tasks_feature_flag: false) }
+    before { Configuration.instance.update!(tasks_feature_flag: false) }
 
     it { is_expected.not_to be_able_to(:manage, Task) }
   end
 
   context 'when meetings are disabled' do
-    before { Configuration.instance.update!(available_locales:, meetings_feature_flag: false) }
+    before { Configuration.instance.update!(meetings_feature_flag: false) }
 
     it { is_expected.not_to be_able_to(:manage, Meeting) }
   end
 
   context 'when blog is disabled' do
-    before { Configuration.instance.update!(available_locales:, blog_feature_flag: true) }
+    before { Configuration.instance.update!(blog_feature_flag: true) }
 
     it { is_expected.to be_able_to(:manage, BlogPost) }
   end

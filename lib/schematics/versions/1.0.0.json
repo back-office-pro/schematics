@@ -345,7 +345,6 @@
         "type": "flag",
         "options": {
           "cached": true,
-          "required": true,
           "values": [
             "en",
             "fr",

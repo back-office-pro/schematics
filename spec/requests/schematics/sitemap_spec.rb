@@ -8,10 +8,9 @@ RSpec.describe 'Sitemap' do
   describe 'GET #show' do
     let(:do_request) { get(sitemap_path, headers:) }
     let(:accept_header) { 'application/xml' }
-    let(:available_locales) { I18n.available_locales.map(&:to_s) }
 
     before do
-      Configuration.instance.update!(available_locales:, blog_feature_flag: true)
+      Configuration.instance.update!(blog_feature_flag: true)
       do_request
     end
 
