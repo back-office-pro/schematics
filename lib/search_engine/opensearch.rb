@@ -18,9 +18,12 @@ module SearchEngine
     def multisearch = Core::Searches::Searchkick
 
     # :reek:UtilityFunction
-    def initialize! = ::Searchkick
-      .models
-      .reject { _1.search_index.exists? }
-      .each(&:reindex)
+    def initialize!
+      Rails.application.eager_load!
+      ::Searchkick
+        .models
+        .reject { _1.search_index.exists? }
+        .each(&:reindex)
+    end
   end
 end
