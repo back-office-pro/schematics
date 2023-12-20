@@ -140,7 +140,7 @@ RSpec.shared_context 'with stripe stubs' do
   end
 end
 
-RSpec.shared_context 'with google translate stubs' do
+RSpec.shared_context 'with google translate stub' do
   let(:body) do
     {
       data: {
@@ -154,5 +154,11 @@ RSpec.shared_context 'with google translate stubs' do
   before do
     stub_request(:post, %r{https://translation.googleapis.com/language/translate/v2})
       .to_return(body:, status: 200)
+  end
+end
+
+RSpec.shared_context 'with password pwned stub' do
+  before do
+    stub_request(:get, %r{https://api.pwnedpasswords.com}).to_return(status: 200)
   end
 end

@@ -6,7 +6,7 @@ require 'generators/translations/translations_generator'
 RSpec.describe TranslationsGenerator do
   subject(:generator) { described_class.new([name], options, behavior:) }
 
-  include_context 'with google translate stubs'
+  include_context 'with google translate stub'
 
   let(:name) { 'task' }
   let(:behavior) { :invoke }
