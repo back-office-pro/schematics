@@ -41,7 +41,7 @@ module Schematics
         dashboardReadNotifications: dashboard_read_notifications_path,
         draft: draft_path(id: ':id'),
         preferences: preferences_path,
-        searches: searches_path,
+        searches: autocomplete_searches_path,
         users: users_path
       }.to_json.html_safe # rubocop:disable Rails/OutputSafety
     end

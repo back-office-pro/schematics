@@ -114,6 +114,8 @@ export default class extends ApplicationController {
   }
 
   get url () {
-    return [routes.searches, this.inputTarget.value].join('/')
+    const searchParams = new URLSearchParams()
+    searchParams.set('q', this.inputTarget.value)
+    return `${routes.searches}?${searchParams}`
   }
 }

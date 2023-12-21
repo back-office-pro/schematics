@@ -33,7 +33,9 @@ export default class extends ApplicationController {
   }
 
   async search (text, callback) {
-    const url = [routes.searches, text].join('/')
+    const searchParams = new URLSearchParams()
+    searchParams.set('q', text)
+    const url = `${routes.searches}?${searchParams}`
     const response = await this.fetchAPI(url)
     const results = await response.json()
     callback(results)

@@ -751,6 +751,7 @@
       "descriptor": "query",
       "hidden": true,
       "actions": [
+        "index",
         "create",
         "show"
       ]
