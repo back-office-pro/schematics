@@ -7,6 +7,9 @@ RSpec.describe 'Resources' do
   include_context 'with admin role'
 
   let(:role) { admin_role }
+  let(:column_css_class) do
+    "col_#{User.entity.id}_#{User.entity.find_field_by_name('email').id}"
+  end
 
   it 'filters by email', :js do # rubocop:disable RSpec/ExampleLength
     visit users_path
@@ -25,5 +28,21 @@ RSpec.describe 'Resources' do
     find('.card-body turbo-frame', match: :first).click_button
     sleep(5) # Turbo
     expect(user.reload.email).to eq('admin@nowhere.com')
+  end
+
+  it 'compares permissions', :js do # rubocop:disable RSpec/ExampleLength
+    visit permissions_path
+    check Permission.last.id
+    check Permission.second_to_last.id
+    find('.table').click_button
+    sleep(5) # Turbo
+    expect(page).to have_current_path(comparison_path(Comparison.last))
+  end
+
+  it 'hides user email column', :js do
+    visit users_path
+    find_by_id('settings-dropdown').click
+    uncheck column_css_class
+    expect(find("th.#{column_css_class}", visible: :all)).not_to be_visible
   end
 end
