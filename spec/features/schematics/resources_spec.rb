@@ -45,4 +45,13 @@ RSpec.describe 'Resources' do
     uncheck column_css_class
     expect(find("th.#{column_css_class}", visible: :all)).not_to be_visible
   end
+
+  it 'automatically saves the form content', :js do # rubocop:disable RSpec/ExampleLength
+    visit new_user_path
+    fill_in('user[email]', with: user.email).send_keys(:tab)
+    sleep(5) # Ajax
+    refresh
+    find('.card-header').click_button
+    expect(page).to have_field('user_email', with: user.email)
+  end
 end
