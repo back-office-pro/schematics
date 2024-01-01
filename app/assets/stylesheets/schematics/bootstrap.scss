@@ -15,7 +15,7 @@ $popover-body-padding-y: 0;
 $popover-body-padding-x: 0;
 $card-border-width: 0;
 $dropdown-border-width: 0;
-$input-border-width: 0;
+$input-border-width: 0px; // scss-lint:disable ZeroUnit
 $btn-border-width: 0;
 $accordion-border-width: 0;
 $offcanvas-border-width: 0;
@@ -43,13 +43,6 @@ $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 $toast-background-color: rgba(var(--#{$prefix}body-bg-rgb), 1);
 
 @import 'bootstrap/scss/bootstrap';
-
-// TODO: Remove after tom-select is upgraded to Bootstrap@5.3
-
-@function mix($color1, $color2, $weight) {
-  @return color-mix($color1, $color2, $weight)
-}
-
 @import 'tom-select/dist/scss/tom-select.bootstrap5';
 
 // Bootstrap
