@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
-  spec.required_ruby_version = '>= 3.2.2'
+  spec.required_ruby_version = '>= 3.3.0'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro:9292/private'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
@@ -43,6 +43,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_storage_base64', '~> 3.0.0'
   spec.add_dependency 'active_storage_validations', '~> 1.1.4'
   spec.add_dependency 'after_commit_everywhere', '~> 1.3.1'
+  # TODO: remove anyway_config when https://github.com/palkan/anyway_config/issues/144 is fixed
+  spec.add_dependency 'anyway_config', '2.5.4'
   spec.add_dependency 'aws-sdk-s3', '~> 1.142.0'
   spec.add_dependency 'bcrypt', '~> 3.1.20'
   spec.add_dependency 'bootsnap', '~> 1.17.0'
