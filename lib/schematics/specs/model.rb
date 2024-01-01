@@ -68,10 +68,8 @@ module Schematics
         end
 
         fillable_attributes.each do |attribute|
-          it do
-            is_expected.to allow_value(nil).for(attribute.name.to_sym) if attribute.allow_blank
-            is_expected.to allow_value(attribute.default).for(attribute.name.to_sym)
-          end
+          it { is_expected.to allow_value(nil).for(attribute.name.to_sym) unless attribute.required? } # rubocop:disable Layout/LineLength
+          it { is_expected.to allow_value(attribute.default).for(attribute.name.to_sym) }
         end
 
         migratable_attributes
@@ -93,6 +91,10 @@ module Schematics
             it { is_expected.to have_db_index(attribute.name.to_sym) }
           end
 
+        normalizable_attributes.each do |attribute|
+          it { is_expected.to normalize(attribute.name.to_sym).from('').to(nil) }
+        end
+
         attachments_attributes.each do |attribute|
           it do
             is_expected
@@ -108,6 +110,12 @@ module Schematics
             is_expected
               .to validate_dimensions_of(attribute.name.to_sym)
                 .tap { _1.height(attribute.options.height) if attribute.options.height }
+            is_expected
+              .to validate_content_type_of(attribute.name.to_sym)
+                .tap { _1.allowing(*attribute.options.content_type) if attribute.options.content_type } # rubocop:disable Layout/LineLength
+            is_expected
+              .to validate_aspect_ratio_of(attribute.name.to_sym)
+                .tap { _1.allowing(attribute.options.aspect_ratio) if attribute.options.aspect_ratio } # rubocop:disable Layout/LineLength
           end
         end
 
@@ -226,6 +234,7 @@ module Schematics
                  :attachments_attributes,
                  :enumerable_attributes,
                  :numerable_attributes,
+                 :normalizable_attributes,
                  :string_attributes,
                  :default,
                  to: :entity
