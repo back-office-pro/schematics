@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Core::Migrations::Migrate do
+  include_context 'with google translate stub'
+
   let(:migration) { Migration.new(data:, state:) }
   let(:schema) { Schematics::Schema.new(data: current_data) }
   let(:current_data) { initial_data }
