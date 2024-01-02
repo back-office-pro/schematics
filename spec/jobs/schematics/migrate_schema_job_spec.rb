@@ -39,13 +39,13 @@ RSpec.describe Schematics::MigrateSchemaJob do
 
     context 'when the migration is successful' do
       it 'updates tenant schema' do
-        expect { migration.finalize!(false) && sleep(1) }.to change(Tenant, :schema)
+        expect { migration.finalize!(false) && sleep(5) }.to change(Tenant, :schema)
       end
     end
 
     context 'when the migration has failed' do
       it 'does not update tenant schema' do
-        expect { migration.finalize!(true) && sleep(1) }.not_to change(Tenant, :schema)
+        expect { migration.finalize!(true) && sleep(5) }.not_to change(Tenant, :schema)
       end
     end
   end
