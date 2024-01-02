@@ -9,7 +9,7 @@ module Schematics
 
       current_user
         .searches
-        .create!(model: model_class, filters: filter_params)
+        .create!(model: model_class.to_s, filters: filter_params)
     end
 
     def filter_params
