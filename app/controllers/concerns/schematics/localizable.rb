@@ -8,6 +8,7 @@ module Schematics
       around_action :switch_localization
     end
 
+    # TODO: remove rubocop:disable when Rubocop or Ruby is upgraded
     def switch_localization(&block) # rubocop:disable Naming/BlockForwarding
       ::I18n.with_locale(current_user.locale) do
         ::Time.use_zone(current_user.time_zone) do
