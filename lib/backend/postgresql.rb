@@ -9,13 +9,13 @@ module Backend
 
     def engine = ::GoodJob::Engine
 
-    def cache_store = :file_store
+    def cache_store = :solid_cache_store
 
-    def cache_store_options = ::Rails.root.join('tmp/cache')
+    def cache_store_options = {}
 
     def profiler_store = Rack::MiniProfiler::MemoryStore
 
-    def profiler_store_options = nil
+    alias profiler_store_options cache_store_options
 
     def queue_adapter = :good_job
   end

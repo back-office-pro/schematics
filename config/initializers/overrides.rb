@@ -70,42 +70,41 @@ Rails.configuration.to_prepare do
 end
 
 ActiveSupport.on_load(:active_storage_record) do
-  ActiveStorage::Record.class_eval do
-    self.implicit_order_column = 'created_at'
+  self.implicit_order_column = 'created_at'
 
-    include Schematics::Loadable
-    include Schematics::Serializable
-    include Schematics::Shortenable
-    include Schematics::Translatable
+  include Schematics::Loadable
+  include Schematics::Serializable
+  include Schematics::Shortenable
+  include Schematics::Translatable
 
-    loadable concerns: [Schematics::SoftDeletable]
+  loadable concerns: [Schematics::SoftDeletable]
 
-    scope :with_string_translations, -> { self }
-    scope :with_slugs, -> { self }
+  scope :with_string_translations, -> { self }
+  scope :with_slugs, -> { self }
 
-    class << self
-      alias_method :finder, :find
-    end
-
-    def versions = Schematics::Version.none
+  class << self
+    alias_method :finder, :find
   end
+
+  def versions = Schematics::Version.none
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
-  ActiveStorage::Blob.class_eval do
-    include Tenant.search_engine.concern
-  end
+  include Tenant.search_engine.concern
 end
 
 ActiveSupport.on_load(:action_text_rich_text) do
   require 'mobility/action_text'
 
-  ActionText::RichText.class_eval do
-    include Schematics::SoftDeletable
-    class << self
-      def ransackable_attributes(*)
-        ['body']
-      end
+  include Schematics::SoftDeletable
+
+  class << self
+    def ransackable_attributes(*)
+      ['body']
     end
   end
+end
+
+ActiveSupport.on_load(:solid_cache_entry) do
+  encrypts :value
 end
