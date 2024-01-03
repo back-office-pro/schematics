@@ -103,7 +103,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paranoia', '~> 2.6.3'
   spec.add_dependency 'pg', '~> 1.5.4'
   spec.add_dependency 'phonelib', '~> 0.8.6'
-  spec.add_dependency 'puma', '~> 6.4.0'
+  spec.add_dependency 'puma', '~> 6.4.1'
   spec.add_dependency 'pwned', '~> 2.4.1'
   spec.add_dependency 'rack-attack', '~> 6.7.0'
   spec.add_dependency 'rack-cors', '~> 2.0.0'
