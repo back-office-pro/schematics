@@ -42,6 +42,7 @@ ActiveRecordDoctor.configure do
     GoodJob::DiscreteExecution
     Mobility::Backends::ActionText::PlainTextTranslation
     Mobility::Backends::ActionText::RichTextTranslation
+    SolidCache::Entry
   ]
 
   detector :missing_foreign_keys, enabled: false
