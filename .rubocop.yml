@@ -171,6 +171,9 @@ RSpec/DescribeClass:
     - spec/db/migrate/*
     - spec/generators/app/templates/**/*
     - spec/lib/templates/**/*
+RSpec/RemoveConst:
+  Exclude:
+    - spec/interactors/core/migrations/migrate_spec.rb
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true
