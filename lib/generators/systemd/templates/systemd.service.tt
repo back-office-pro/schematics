@@ -1,12 +1,13 @@
 [Unit]
-Description=<%= Tenant.human %> HTTP server
+Description=<%= Tenant.human %> HTTP Server
 After=network.target
+Requires=puma-<%= Tenant.subdomain %>.socket
 
 [Service]
 User=root
-WorkingDirectory=/home/deploy/<%= Tenant.subdomain %>
-EnvironmentFile=/home/deploy/<%= Tenant.subdomain %>/.env
-ExecStart=/home/deploy/<%= Tenant.subdomain %>/bin/rails server
+WorkingDirectory=<%= Rails.root %>
+EnvironmentFile=<%= Rails.root.join('.env') %>
+ExecStart=<%= Rails.root.join('bin', 'rails') %> server
 Restart=always
 
 [Install]

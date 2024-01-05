@@ -8,18 +8,20 @@ class SystemdGenerator < Rails::Generators::Base
     return unless systemd_path.exist?
 
     template 'systemd.service', service_path
+    template 'systemd.socket', socket_path
     `systemctl daemon-reload`
-    `systemctl enable #{filename}`
-    `systemctl start #{filename}`
+    `systemctl enable #{socket_filename} #{service_filename}`
+    `systemctl start #{socket_filename} #{service_filename}`
   end
 
   def destroy_service
     return unless destroying?
     return unless systemd_path.exist?
 
-    `systemctl stop #{filename}`
-    `systemctl disable #{filename}`
+    `systemctl stop #{socket_filename} #{service_filename}`
+    `systemctl disable #{socket_filename} #{service_filename}`
     File.delete service_path
+    File.delete socket_path
     `systemctl daemon-reload`
     `systemctl reset-failed`
   end
@@ -36,7 +38,11 @@ class SystemdGenerator < Rails::Generators::Base
 
   def systemd_path = Pathname.new('/etc/systemd')
 
-  def service_path = systemd_path.join('system', filename)
+  def service_path = systemd_path.join('system', service_filename)
 
-  def filename = "puma-#{Tenant.subdomain}.service"
+  def socket_path = systemd_path.join('system', socket_filename)
+
+  def service_filename = "puma-#{Tenant.subdomain}.service"
+
+  def socket_filename = "puma-#{Tenant.subdomain}.socket"
 end
