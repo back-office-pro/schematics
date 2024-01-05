@@ -9,7 +9,6 @@ require 'rails/generators/rails/app/app_generator'
 
 # :reek:RepeatedConditional
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
-  DEFAULT_PORT = 3000
   source_root superclass.source_root
 
   def initialize(generator, options = {})
@@ -308,8 +307,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
       .to_i
       .next
   end
-
-  def port = DEFAULT_PORT + database_index
 
   def drop_database
     `cd #{app_path} && RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`

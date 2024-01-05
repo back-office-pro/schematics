@@ -58,7 +58,6 @@ services:
       - REDIS_URL=redis://redis:6379
       - OPENSEARCH_URL=http://opensearch:9200
       - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
-      - PORT=3000
 volumes:
   opensearch-data:
   postgres-data:

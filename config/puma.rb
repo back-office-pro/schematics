@@ -4,11 +4,14 @@ max_threads_count = ENV.fetch('RAILS_MAX_THREADS', 5)
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { max_threads_count }
 threads min_threads_count, max_threads_count
 
-worker_timeout 3600 if ENV.fetch('RAILS_ENV', 'development') == 'development'
-
-port ENV.fetch('PORT', 3000)
+if ENV.fetch('RAILS_ENV', 'development') == 'development'
+  worker_timeout 3600
+  port Tenant::DEFAULT_PORT
+end
 
 environment ENV.fetch('RAILS_ENV', 'development')
+
+bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 

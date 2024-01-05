@@ -8,10 +8,11 @@ require 'search_engine/postgresql'
 
 # :reek:Attribute
 class Tenant
+  DEFAULT_PORT = 3000
+  DEFAULT_BACKEND = 'postgresql'
+  DEFAULT_SEARCH_ENGINE = 'postgresql'
+
   class << self
-    DEFAULT_BACKEND = 'postgresql'
-    DEFAULT_SEARCH_ENGINE = 'postgresql'
-    DEFAULT_PORT = 3000
     SEMAPHORE = Mutex.new.freeze
 
     def schema
@@ -78,10 +79,6 @@ class Tenant
       'localhost'
     end
 
-    def env_port = ENV
-      .fetch('PORT', DEFAULT_PORT)
-      .to_i
-
     def version
       ActiveRecord::Base
         .connection
@@ -115,7 +112,7 @@ class Tenant
     def from = "no-reply@#{host}"
 
     def port
-      env_port unless Rails.env.production?
+      DEFAULT_PORT unless Rails.env.production?
     end
   end
 end
