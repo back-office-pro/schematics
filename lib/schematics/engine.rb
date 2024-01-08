@@ -123,8 +123,7 @@ module Schematics
     config.active_record.enumerate_columns_in_select_statements = true
     config.active_record.async_query_executor = :global_thread_pool
     config.active_record.strict_loading_by_default = true
-    # TODO: enable query_log_tags when https://github.com/rails/solid_cache/pull/112 is merged
-    config.active_record.query_log_tags_enabled = false
+    config.active_record.query_log_tags_enabled = true
     config.active_record.action_on_strict_loading_violation = :log
     config.active_record.warn_on_records_fetched_greater_than = 100
     config.active_record.encryption.support_unencrypted_data = true

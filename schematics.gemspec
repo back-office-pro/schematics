@@ -128,7 +128,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sidekiq', '~> 7.2.0'
   spec.add_dependency 'sidekiq-scheduler', '~> 5.0.3'
   spec.add_dependency 'slim', '~> 5.2.0'
-  spec.add_dependency 'solid_cache', '~> 0.2.0'
+  spec.add_dependency 'solid_cache', '~> 0.3.0'
   spec.add_dependency 'sprockets-rails', '~> 3.4.2'
   spec.add_dependency 'stimulus-rails', '~> 1.3.3'
   spec.add_dependency 'stripe', '~> 10.5.0'
