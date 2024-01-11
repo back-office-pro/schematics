@@ -3,6 +3,11 @@
 module Schematics
   module Attributes
     class Attachments < Attachment
+      def available_options = super.push(
+        Options::Min,
+        Options::Max
+      )
+
       def default = [super]
 
       def format(values)
@@ -29,6 +34,13 @@ module Schematics
       def search_column = :"#{search_column_association}_filename"
 
       def search_column_association = "#{name}_blobs"
+
+      def validators = super.merge(
+        limit: {
+          min: options.min,
+          max: options.max
+        }
+      )
 
       def to_str = <<~RUBY
         has_many_base64_attached :#{name}

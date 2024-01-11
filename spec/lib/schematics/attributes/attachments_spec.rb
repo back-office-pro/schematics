@@ -108,6 +108,34 @@ describe Schematics::Attributes::Attachments do
     end
   end
 
+  context 'when min option is defined' do
+    let(:options) { { min: 1 } }
+
+    its(:validators) do
+      is_expected.to eq(antivirus: true, storage_quota: true, limit: { min: 1 })
+    end
+
+    its('validators.to_str') do
+      is_expected.to eq <<~RUBY
+        validates :files, {:antivirus=>true, :storage_quota=>true, :limit=>{:min=>1}}
+      RUBY
+    end
+  end
+
+  context 'when max option is defined' do
+    let(:options) { { max: 1 } }
+
+    its(:validators) do
+      is_expected.to eq(antivirus: true, storage_quota: true, limit: { max: 1 })
+    end
+
+    its('validators.to_str') do
+      is_expected.to eq <<~RUBY
+        validates :files, {:antivirus=>true, :storage_quota=>true, :limit=>{:max=>1}}
+      RUBY
+    end
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

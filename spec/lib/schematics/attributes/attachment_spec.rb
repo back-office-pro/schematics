@@ -45,8 +45,6 @@ describe Schematics::Attributes::Attachment do
       Schematics::Options::Readonly,
       Schematics::Options::Size,
       Schematics::Options::AspectRatio,
-      Schematics::Options::Min,
-      Schematics::Options::Max,
       Schematics::Options::Width,
       Schematics::Options::Height,
       Schematics::Options::ContentType

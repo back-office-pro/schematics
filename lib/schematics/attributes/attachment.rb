@@ -17,8 +17,6 @@ module Schematics
       def available_options = super.push(
         Options::Size,
         Options::AspectRatio,
-        Options::Min,
-        Options::Max,
         Options::Width,
         Options::Height,
         Options::ContentType
@@ -74,10 +72,6 @@ module Schematics
           less_than: options.size&.megabytes
         },
         aspect_ratio: options.aspect_ratio,
-        limit: {
-          min: options.min,
-          max: options.max
-        },
         dimension: {
           width: options.width,
           height: options.height
