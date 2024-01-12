@@ -3,7 +3,7 @@
 module Schematics
   module Behaviours
     module Enumerable
-      delegate :values, to: :options
+      def values = Array(options.values)
 
       def collection = values.map { [format(_1), _1] }
 
