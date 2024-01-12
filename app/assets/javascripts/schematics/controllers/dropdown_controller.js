@@ -9,7 +9,10 @@ export default class extends ApplicationController {
   }
 
   static get values () {
-    return { create: { type: Boolean, default: false } }
+    return {
+      create: { type: Boolean, default: false },
+      createFilter: { type: String }
+    }
   }
 
   setDependentDropdownsOptions (value) {
@@ -35,6 +38,7 @@ export default class extends ApplicationController {
       maxOptions: null,
       create: this.createValue,
       createOnBlur: this.createValue,
+      createFilter: this.createFilterValue,
       render: {
         no_results: () => `<div class="option opacity-100 text-body-secondary">
           <i class="fa fa-exclamation-triangle text-secondary fa-fw me-2"></i>

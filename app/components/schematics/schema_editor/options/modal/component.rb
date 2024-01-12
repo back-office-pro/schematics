@@ -9,6 +9,12 @@ module Schematics
           delegate :icon, :id, to: :object
           option :builder
 
+          def data = {
+            controller: 'dropdown',
+            'dropdown-create-value': true,
+            'dropdown-create-filter-value': '^[a-z_][a-z_]+$'
+          }
+
           def available_options = builder
             .object
             .available_options

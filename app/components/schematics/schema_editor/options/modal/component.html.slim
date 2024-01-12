@@ -28,6 +28,6 @@
               = options_form.select option.name,
                                     Array(options_form.object.public_send(option.name)),
                                     { include_hidden: false, include_blank: include_blank(option.name) },
-                                    { multiple: true, data: { controller: 'dropdown', 'dropdown-create-value': true } }
+                                    { multiple: true, data: }
             - when :events
               = __schema_editor_options_events(builder: options_form, name: option.name)
