@@ -46,7 +46,6 @@ describe Schematics::Attributes::Byte do
       Schematics::Options::LessThan,
       Schematics::Options::LessThanOrEqualTo,
       Schematics::Options::OtherThan,
-      Schematics::Options::Unit,
       Schematics::Options::Precision,
       Schematics::Options::Separator
     )

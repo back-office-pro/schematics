@@ -5,6 +5,8 @@ module Schematics
     class Byte < Float
       include Behaviours::Unincrementable
 
+      def available_options = super.excluding(Options::Unit)
+
       def format(value)
         value && number_to_human_size(value, **{ precision:, separator: }.compact)
       end
