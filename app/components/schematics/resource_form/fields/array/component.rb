@@ -5,6 +5,8 @@ module Schematics
     module Fields
       module Array
         class Component < Fields::Component
+          def value = Array(super)
+
           def prompt = t('prompt', attribute_name: attribute_name.downcase.singularize)
 
           def data = { controller: 'dropdown', 'dropdown-create-value': true }
