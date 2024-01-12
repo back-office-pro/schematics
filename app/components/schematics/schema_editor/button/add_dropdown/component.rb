@@ -18,22 +18,12 @@ module Schematics
             Attributes::Text
           ].sort_by { _1.model_name.human }
 
-          def unused_collection = [
-            Attributes::Action,
-            Attributes::Model,
-            Attributes::ModelField,
-            Attributes::Uuid,
-            Attributes::Locale,
-            Attributes::Timestamp
-          ]
-
           def advanced_collection = Attributes::Attribute
             .collection
             .excluding(
               Attributes::BelongsTo,
               Attributes::User,
-              most_used_collection,
-              unused_collection
+              most_used_collection
             )
             .sort_by { _1.model_name.human }
 

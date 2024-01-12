@@ -26,21 +26,26 @@ module Schematics
 
         def to_proc = -> { build(**_1) }
 
-        def collection = module_parent
-          .constants
-          .map(&module_parent.method(:const_get))
-          .excluding(Attribute, Association, Month, Week, Year)
+        def collection = attributes_classes
+          .excluding(Action, Model, ModelField, Uuid, Locale, Timestamp)
 
         def attribute_ancestors = ancestors
           .select { _1.module_parent == module_parent }
           .excluding(Attribute)
 
-        def compatible_types = collection
+        def compatible_types = attributes_classes
           .map(&:attribute_ancestors)
           .select(&attribute_ancestors.method(:intersect?))
           .flatten
           .uniq
           .excluding(Association)
+
+        private
+
+        def attributes_classes = module_parent
+          .constants
+          .map(&module_parent.method(:const_get))
+          .excluding(Attribute, Association, Month, Week, Year)
       end
 
       def available_options = super.push(
