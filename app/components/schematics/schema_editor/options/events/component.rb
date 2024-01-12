@@ -5,12 +5,13 @@ module Schematics
     module Options
       module Events
         class Component < ApplicationComponent
+          delegate :name, to: :option
           delegate :collection, to: Schematics::Options::Icon, prefix: :icons
           delegate :object, to: :builder, private: true
           delegate :values, to: :object
 
           option :builder
-          option :name
+          option :option
 
           def data = { controller: 'schema-editor--event-dropdown' }
 

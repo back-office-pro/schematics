@@ -12,22 +12,4 @@
       .modal-body
         = builder.fields_for :options do |options_form|
           - available_options.each do |option|
-            - case option.input_type
-            - when :boolean
-              = options_form.check_box option.name, { switch: true }, 'true', 'false'
-            - when :string
-              = options_form.text_field option.name, floating: true
-            - when :integer
-              = options_form.number_field option.name, floating: true
-            - when :select
-              = options_form.select option.name,
-                                    option.collection,
-                                    { selected: object.try(option.name), include_hidden: false, include_blank: include_blank(option.name) }.compact,
-                                    { multiple: option.multiple?, data: { controller: option.controller } }
-            - when :array
-              = options_form.select option.name,
-                                    Array(options_form.object.public_send(option.name)),
-                                    { include_hidden: false, include_blank: include_blank(option.name) },
-                                    { multiple: true, data: }
-            - when :events
-              = __schema_editor_options_events(builder: options_form, name: option.name)
+            = public_send(:"__schema_editor_options_#{option.input_type}", builder: options_form, object:, option:)

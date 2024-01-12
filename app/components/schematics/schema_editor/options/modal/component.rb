@@ -9,24 +9,10 @@ module Schematics
           delegate :icon, :id, to: :object
           option :builder
 
-          def data = {
-            controller: 'dropdown',
-            'dropdown-create-value': true,
-            'dropdown-create-filter-value': '^[a-z_][a-z_]+$'
-          }
-
-          def available_options = builder
-            .object
+          def available_options = object
             .available_options
             .reject(&:hidden?)
             .sort_by(&:input_type)
-
-          def include_blank(name)
-            t 'prompt', attribute_name: Schematics::Options::Wrapper
-              .human_attribute_name(name)
-              .singularize
-              .downcase
-          end
 
           def render?
             available_options.any?
@@ -34,8 +20,7 @@ module Schematics
 
           def target = "schema-editor-options-modal-#{id}"
 
-          def title = builder
-            .object
+          def title = object
             .class
             .model_name
             .human
