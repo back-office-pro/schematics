@@ -4,7 +4,13 @@ module Schematics
   module Options
     class Separator < Option
       class << self
-        def input_type = :string
+        def input_type = :select
+
+        def controller = 'dropdown'
+
+        def multiple? = false
+
+        def collection = %w[, .]
       end
     end
   end
