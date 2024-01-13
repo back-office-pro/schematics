@@ -23,7 +23,7 @@ export default class extends DropdownController {
       labelField: this.fieldValue,
       sortField: this.fieldValue,
       shouldLoad: this.isValid.bind(this),
-      load: this.debounce(this.search)
+      load: this.search.bind(this)
     })
   }
 }
