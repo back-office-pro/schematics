@@ -19,7 +19,7 @@ export default class extends DropdownController {
     return this
       .element
       .closest('.modal-body')
-      .querySelectorAll('select[data-dropdown-create-value="true"] option')
+      .querySelectorAll('select[data-dropdown-create-value="true"] option:not([value=""])')
   }
 
   get collection () {
