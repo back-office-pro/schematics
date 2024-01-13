@@ -9,7 +9,7 @@ module Schematics
 
           def prompt = t('prompt', attribute_name: attribute_name.downcase)
 
-          def data = { controller: 'dropdown' }
+          def data = { controller: 'schema-editor--event-dropdown' }
         end
       end
     end

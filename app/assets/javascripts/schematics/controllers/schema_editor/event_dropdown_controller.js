@@ -2,8 +2,10 @@ import DropdownController from 'controllers/dropdown_controller'
 
 export default class extends DropdownController {
   setCollection () {
-    this.element.tomselect.clearOptions()
-    this.element.tomselect.addOptions(this.collection)
+    if (this.collection.length) {
+      this.element.tomselect.clearOptions()
+      this.element.tomselect.addOptions(this.collection)
+    }
   }
 
   get options () {
