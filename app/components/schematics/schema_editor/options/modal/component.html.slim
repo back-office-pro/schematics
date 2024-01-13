@@ -12,4 +12,4 @@
       .modal-body
         = builder.fields_for :options do |options_form|
           - available_options.each do |option|
-            = public_send(:"__schema_editor_options_#{option.input_type}", builder: options_form, object:, option:)
+            = __schema_editor_options_inputs(:build, builder: options_form, object:, option:)

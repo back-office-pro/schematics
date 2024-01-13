@@ -3,7 +3,7 @@
 module Schematics
   module SchemaEditor
     module Options
-      module Polymorphic
+      module Inputs
         class Component < ApplicationComponent
           delegate :name, to: :option
 
@@ -11,9 +11,13 @@ module Schematics
           option :option
           option :object
 
-          def field = object
-            .dup
-            .tap { _1.name = name }
+          class << self
+            def build(builder:, option:, object:)
+              module_parent
+                .const_get(option.input_type.to_s.camelize)::Component
+                .new(builder:, option:, object:)
+            end
+          end
         end
       end
     end
