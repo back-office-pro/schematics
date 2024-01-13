@@ -13,7 +13,7 @@ module Schematics
           option :builder
           option :option
 
-          def data = { controller: 'schema-editor--event-dropdown' }
+          def data = { controller: 'schema-editor--modal-dropdown' }
 
           def name_data = { controller: 'schema-editor--special-characters' }
 
