@@ -35,6 +35,8 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 
+SassC::Engine.define_method(:load_paths) { super.flatten }
+
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
     def use_relative_model_naming? = false
