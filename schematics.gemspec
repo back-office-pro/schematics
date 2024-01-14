@@ -71,7 +71,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ferrum', '~> 0.14.0'
   spec.add_dependency 'friendly_id', '~> 5.4.2'
   spec.add_dependency 'friendly_id-mobility', '~> 1.0.4'
-  spec.add_dependency 'git', '~> 1.19.0'
+  spec.add_dependency 'git', '~> 1.19.1'
   spec.add_dependency 'good_job', '~> 3.22.0'
   spec.add_dependency 'groupdate', '~> 6.4.0'
   spec.add_dependency 'hiredis', '~> 0.6.3'
