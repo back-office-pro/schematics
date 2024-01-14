@@ -34,3 +34,8 @@ registerRoute(
   new Route(({ request }) => request.destination === 'image',
     new CacheFirst({ cacheName: 'assets-images' }))
 )
+
+registerRoute(
+  new Route(({ request }) => request.destination === 'font',
+    new CacheFirst({ cacheName: 'assets-fonts' }))
+)
