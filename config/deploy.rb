@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lock '~> 3.17.1'
+lock '3.18.0'
 
 app_name = File.basename(Dir.getwd)
 
