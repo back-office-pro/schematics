@@ -17,6 +17,7 @@ require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
+require 'sassc/override/engine'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator
@@ -34,8 +35,7 @@ Chartkick.singleton_class.prepend(Chartkick::Override)
 Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
-
-SassC::Engine.define_method(:load_paths) { super.flatten }
+SassC::Engine.prepend(SassC::Override::Engine)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
