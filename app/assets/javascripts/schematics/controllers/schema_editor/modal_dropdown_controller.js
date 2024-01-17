@@ -2,7 +2,7 @@ import DropdownController from 'controllers/dropdown_controller'
 
 export default class extends DropdownController {
   setCollection () {
-    if (this.collection.length) {
+    if (this.inputs != null) {
       this.element.tomselect.clearOptions()
       this.element.tomselect.addOptions(this.collection)
     }
@@ -19,7 +19,7 @@ export default class extends DropdownController {
     return this
       .element
       .closest('.modal-body')
-      .querySelectorAll('select[data-dropdown-create-value="true"] option:not([value=""])')
+      ?.querySelectorAll('select[data-dropdown-create-value="true"] option:not([value=""])')
   }
 
   get collection () {
