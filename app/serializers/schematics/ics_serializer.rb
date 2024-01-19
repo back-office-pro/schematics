@@ -21,7 +21,7 @@ module Schematics
 
     def extension = :ics
 
-    def content = calendar.to_ical
+    def content = calendar&.to_ical
 
     def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
 
@@ -37,14 +37,18 @@ module Schematics
         event.url = url
         event.location = location
       end
-      calendar
+      calendar if dtstart && dtend
     end
 
     def dtstart
+      return unless start_date_attribute_name
+
       Icalendar::Values::DateTime.new @resource.public_send(start_date_attribute_name)
     end
 
     def dtend
+      return unless end_date_attribute_name
+
       Icalendar::Values::DateTime.new @resource.public_send(end_date_attribute_name)
     end
 
