@@ -4,5 +4,13 @@ module Schematics
   class ApplicationMailer < ::ApplicationMailer
     layout 'schematics/mailer'
     helper ApplicationHelper
+
+    protected
+
+    def mail_to(user)
+      ::I18n.with_locale(user.locale) do
+        bootstrap_mail to: email_address_with_name(user.email, user.full_name)
+      end
+    end
   end
 end
