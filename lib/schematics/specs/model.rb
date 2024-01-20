@@ -165,6 +165,9 @@ module Schematics
                   .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
               when Attributes::Token
                 is_expected.to have_secure_token(element.name.to_sym)
+                is_expected.to encrypt(element.name.to_sym).deterministic(true)
+              when Attributes::OneTimePassword
+                is_expected.to encrypt(element.name.to_sym).deterministic(true)
               when Attributes::Attachments
                 is_expected.to have_many_attached(element.name.to_sym)
               when Attributes::Attachment
