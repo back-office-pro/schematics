@@ -1,0 +1,9 @@
+---
+en:
+  schematics:
+    resource_mailer:
+      forward:
+        body:
+          first: Hello %{recipient},
+          second: "%{sender} would like to forward you these attachments."
+        subject: Documents have been sent to you
