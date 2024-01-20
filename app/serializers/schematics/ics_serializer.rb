@@ -21,7 +21,7 @@ module Schematics
 
     def extension = :ics
 
-    def content = calendar&.to_ical
+    memoize def content = calendar&.to_ical
 
     def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
 

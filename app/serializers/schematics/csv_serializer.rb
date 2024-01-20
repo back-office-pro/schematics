@@ -8,7 +8,7 @@ module Schematics
       @preferences = preferences
     end
 
-    def content
+    memoize def content
       generate do |file|
         @resources.each do |resource|
           file << line(resource)

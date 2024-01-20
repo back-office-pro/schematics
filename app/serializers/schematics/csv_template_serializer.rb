@@ -8,7 +8,7 @@ module Schematics
       @model_class = model_class
     end
 
-    def content
+    memoize def content
       generate do |file|
         10.times { file << line }
       end

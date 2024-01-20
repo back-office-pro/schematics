@@ -13,7 +13,7 @@ module Schematics
 
     def extension = :svg
 
-    def content = qr_code.as_svg
+    memoize def content = qr_code.as_svg
 
     def filename = "#{human_name.dasherize}-#{@resource.to_param}.#{extension}"
 

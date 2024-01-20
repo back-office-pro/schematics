@@ -18,7 +18,7 @@ module Schematics
       @options = options || {}
     end
 
-    def content = elements
+    memoize def content = elements
       .stable_sort_by(&:weight)
       .to_h(&method(:element_to_array))
       .merge(metadata)
