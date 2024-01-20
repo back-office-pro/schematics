@@ -4,12 +4,14 @@ fr:
     user_mailer:
       new_account:
         body:
-          first: Pour configurer votre mot de passe, cliquez sur le lien ci-dessous.
+          first: Bonjour %{user},
           link: Cliquez ici
+          second: Pour configurer votre mot de passe, cliquez sur le lien ci-dessous.
         subject: Activez votre compte
       password_reset:
         body:
-          first: Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous.
+          first: Bonjour %{user},
           link: Cliquez ici
-          second: Si vous n'avez pas demandé de réinitialisation de votre mot de passe, ignorez cet e-mail et votre mot de passe ne sera pas modifié.
+          second: Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous.
+          third: Si vous n'avez pas demandé de réinitialisation de votre mot de passe, ignorez cet e-mail et votre mot de passe ne sera pas modifié.
         subject: Récupération mot de passe perdu

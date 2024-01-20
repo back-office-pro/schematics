@@ -3,11 +3,13 @@
 module Schematics
   class UserMailer < ApplicationMailer
     def new_account(user)
+      @user = user
       @token = user.generate_token_for(:password_reset)
       mail_to(user)
     end
 
     def password_reset(user)
+      @user = user
       @token = user.generate_token_for(:password_reset)
       mail_to(user)
     end

@@ -4,12 +4,14 @@ it:
     user_mailer:
       new_account:
         body:
-          first: Per impostare la password, fa clic sul link sottostante.
+          first: Buongiorno %{user},
           link: Clicca qui
+          second: Per impostare la password, fa clic sul link sottostante.
         subject: Attiva il suo account
       password_reset:
         body:
-          first: Per reimpostare la password, fa clic sul link sottostante.
+          first: Buongiorno %{user},
           link: Clicca qui
-          second: Se non ha richiesto la reimpostazione della password, ignora questa e-mail e la sua password non verrà modificata.
+          second: Per reimpostare la password, fa clic sul link sottostante.
+          third: Se non ha richiesto la reimpostazione della password, ignora questa e-mail e la sua password non verrà modificata.
         subject: Reimpostazione della password

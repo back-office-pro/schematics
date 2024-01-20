@@ -9,7 +9,7 @@ RSpec.describe Schematics::UserMailer do
     subject(:mail) { described_class.new_account(user) }
 
     let(:expected_subject) { I18n.t('schematics.user_mailer.new_account.subject') }
-    let(:expected_body) { I18n.t('schematics.user_mailer.new_account.body.first') }
+    let(:expected_body) { I18n.t('schematics.user_mailer.new_account.body.second') }
 
     its(:to) { is_expected.to eq(['john.doe@nowhere.com']) }
     its(:from) { is_expected.to eq(['no-reply@localhost']) }
@@ -21,7 +21,7 @@ RSpec.describe Schematics::UserMailer do
     subject(:mail) { described_class.password_reset(user) }
 
     let(:expected_subject) { I18n.t('schematics.user_mailer.password_reset.subject') }
-    let(:expected_body) { I18n.t('schematics.user_mailer.password_reset.body.first') }
+    let(:expected_body) { I18n.t('schematics.user_mailer.password_reset.body.second') }
 
     its(:to) { is_expected.to eq(['john.doe@nowhere.com']) }
     its(:from) { is_expected.to eq(['no-reply@localhost']) }
