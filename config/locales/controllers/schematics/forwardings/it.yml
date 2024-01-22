@@ -1,0 +1,7 @@
+---
+it:
+  schematics:
+    forwardings:
+      create:
+        failure: Si è verificato un errore
+        success: "@{f:La |m:Il |fv:L'|mv:L'}%{human_name} è stat@{f:a|m:o|fv:a|mv:o} inoltrat@{f:a|m:o|fv:a|mv:o} correttamente"
