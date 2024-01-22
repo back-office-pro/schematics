@@ -2,12 +2,8 @@
 
 module Schematics
   class ResourceMailerPreview < ActionMailer::Preview
-    def forward_resource
+    def forward
       ResourceMailer.forward(::User.first, ::User.first, ::User.first)
-    end
-
-    def forward_resources
-      ResourceMailer.forward(::User.first, ::User.first, [::User.first])
     end
   end
 end

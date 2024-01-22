@@ -2,20 +2,18 @@
 
 module Schematics
   class ResourceMailer < ApplicationMailer
-    def forward(sender, recipient, resources)
-      case resources
-      when Enumerable
-        serializer = CsvSerializer.new(resources, sender.preferences)
-        attachments[serializer.filename] = serializer.content
-      else
-        [PdfSerializer, SvgSerializer, IcsSerializer]
-          .each_with_object(resources)
+    SERIALIZERS = [PdfSerializer, SvgSerializer, IcsSerializer].freeze
+
+    def forward(sender, recipient, resource)
+      @sender = sender
+      @recipient = recipient
+      ::I18n.with_locale(recipient.locale) do
+        SERIALIZERS
+          .each_with_object(resource)
           .map(&:new)
           .select(&:content)
           .each { attachments[_1.filename] = _1.content }
       end
-      @sender = sender
-      @recipient = recipient
       mail_to(recipient)
     end
   end
