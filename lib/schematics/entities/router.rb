@@ -85,7 +85,8 @@ module Schematics
         duplicate_route,
         events.map(&method(:event_route)),
         import_routes,
-        comment_routes
+        comment_routes,
+        forward_route
       ].compact.join.indent(2).chomp
 
       def delete_route
@@ -110,6 +111,14 @@ module Schematics
 
         <<~RUBY
           get :autocomplete, on: :collection
+        RUBY
+      end
+
+      def forward_route
+        return unless can?(:show)
+
+        <<~RUBY
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         RUBY
       end
 

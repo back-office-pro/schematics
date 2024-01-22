@@ -22,6 +22,7 @@ describe Schematics::Entities::Router do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
       RUBY
     end
@@ -80,6 +81,7 @@ describe Schematics::Entities::Router do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
       RUBY
     end
@@ -97,6 +99,7 @@ describe Schematics::Entities::Router do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
       RUBY
     end
@@ -109,6 +112,7 @@ describe Schematics::Entities::Router do
       is_expected.to eq <<~RUBY
         resource :configuration, only: [:show, :update, :edit], model_name: 'Configuration' do
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
         resolve 'Configuration' do |resource, options|
           [:configuration, options]
@@ -133,6 +137,7 @@ describe Schematics::Entities::Router do
             resources :imports, only: %i[new create], as: 'active_storage_attachment_imports'
           end
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
         end
       RUBY
@@ -157,6 +162,7 @@ describe Schematics::Entities::Router do
             resources :imports, only: %i[new create], as: 'i18n_backend_active_record_translation_imports'
           end
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
         end
         end
@@ -173,6 +179,7 @@ describe Schematics::Entities::Router do
         namespace :main do
           resource :licence, only: [:show, :update, :edit], model_name: 'Main::Licence' do
           resources :comments, only: %i[new create edit update], shallow: true
+          resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
         end
         resolve 'Main::Licence' do |resource, options|

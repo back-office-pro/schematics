@@ -42,6 +42,9 @@ module Schematics
             is_expected
               .to route(:post, polymorphic_path([record, ::Comment], format: nil))
               .to params.merge(controller: 'comments', parent_id => id, action: :create).compact
+            is_expected
+              .to route(:post, polymorphic_path([record, :forwardings], format: nil))
+              .to params.merge(controller: 'schematics/forwardings', parent_id => id, action: :create).compact # rubocop:disable Layout/LineLength
           end
           if can?(:create)
             is_expected
