@@ -12,8 +12,12 @@ module Schematics
 
     private
 
+    def forwarding_params = params
+      .require(:forwarding)
+      .permit(recipient_ids: [])
+
     def recipients
-      ::User.find(params.require(:recipients))
+      ::User.find(forwarding_params[:recipient_ids])
     end
 
     def index_path
