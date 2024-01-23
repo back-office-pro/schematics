@@ -15,6 +15,7 @@ module Schematics
       imports
       comments
       replies
+      forwardings
     ].freeze
 
     included do

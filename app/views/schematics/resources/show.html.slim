@@ -8,6 +8,7 @@
         = __button_generate_file_in_background(:pdf)
         = __button_qr_code(resource: @resource)
         = __button_calendar(resource: @resource)
+        = __button_forward
         = __button_impersonate(resource: @resource)
         = __button_reply(resource: @resource)
         = __button_comment(resource: @resource)
@@ -22,3 +23,4 @@
 = __viewer_association(@resource.associations(current_ability))
 = __viewer_comments(resource: @resource)
 = __viewer_timeline(resource: @resource)
+= __forward_modal(resource: @resource)

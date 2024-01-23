@@ -9,6 +9,7 @@ module Schematics
       helper_method :record
       delegate :human_name,
                :human_name_plural,
+               :gender,
                to: :parent_model_class,
                prefix: :parent,
                allow_nil: true

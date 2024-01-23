@@ -6,6 +6,7 @@
         = __card_heading(icon: :eye, title:)
       .col-auto
         = __button_generate_file_in_background(:pdf)
+        = __button_forward
         = __button_comment(resource: @resource)
         = __button_edit(resource: @resource, compact: false)
         = __viewer_event_button_group(resource: @resource, compact: false)
@@ -18,3 +19,4 @@
     = __viewer_migrator(resource: @resource)
 = __viewer_comments(resource: @resource)
 = __viewer_timeline(resource: @resource)
+= __forward_modal(resource: @resource)

@@ -1,0 +1,11 @@
+#forward-modal.modal.fade aria-hidden='true' tabindex='-1'
+  .modal-dialog.modal-dialog-centered.modal-lg
+    .modal-content.shadow-sm
+      .modal-body
+        = bootstrap_form_with model:, url:, method:, scope:, layout: do |form|
+          .col-11
+            = __resource_form_fields_has_and_belongs_to_many(form:, field:)
+          .col-1.text-center
+            = form.button class: 'btn' do
+              span.icon = fa_icon :paper_plane, class: 'fa-lg'
+              span.icon.d-none = fa_icon :spinner, animation: 'spin'

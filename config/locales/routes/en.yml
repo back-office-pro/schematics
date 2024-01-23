@@ -8,6 +8,7 @@ en:
     delete: delete
     duplicate: duplicate
     edit: edit
+    forwardings: forwardings
     login: login
     logout: logout
     new: new
