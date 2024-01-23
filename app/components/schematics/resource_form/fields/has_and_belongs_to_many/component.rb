@@ -24,6 +24,12 @@ module Schematics
 
           def label = super.pluralize
 
+          def control_class
+            return %w[form-select] unless inline?
+
+            %w[form-select bg-transparent]
+          end
+
           protected
 
           def attribute_name = super.singularize
