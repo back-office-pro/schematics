@@ -40,8 +40,8 @@ RSpec.describe 'OneTimePasswords' do
       after { cookies.delete(:auth_token) }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(json_response).to eq('auth_token' => auth_token) }
       it { expect(cookies[:auth_token]).not_to be_nil }
+      its(:parsed_body) { is_expected.to eq('auth_token' => auth_token) }
     end
 
     context 'when attempt is wrong' do
@@ -86,7 +86,7 @@ RSpec.describe 'OneTimePasswords' do
       end
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
-      it { expect(json_response).to eq(expected_response) }
+      its(:parsed_body) { is_expected.to eq(expected_response) }
     end
   end
 

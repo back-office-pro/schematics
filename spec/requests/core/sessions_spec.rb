@@ -23,8 +23,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       after { cookies.delete(:auth_token) }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(json_response).to eq('auth_token' => auth_token) }
       it { expect(cookies[:auth_token]).not_to be_nil }
+      its(:parsed_body) { is_expected.to eq('auth_token' => auth_token) }
     end
 
     context 'when credentials are wrong' do
@@ -65,8 +65,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       end
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(json_response).to eq('auth_token' => auth_token) }
       it { expect(cookies[:auth_token]).to be_nil }
+      its(:parsed_body) { is_expected.to eq('auth_token' => auth_token) }
     end
 
     context 'when login with a non existing omniauth account' do
@@ -104,8 +104,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       before { [other_user, do_request] }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(json_response).to eq('auth_token' => other_auth_token) }
       it { expect(cookies[:auth_token]).to be_nil }
+      its(:parsed_body) { is_expected.to eq('auth_token' => other_auth_token) }
     end
   end
 end

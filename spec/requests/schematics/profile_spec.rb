@@ -40,7 +40,7 @@ RSpec.describe 'Profile' do
       before { do_request }
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
-      it { expect(json_response).to eq(expected_response) }
+      its(:parsed_body) { is_expected.to eq(expected_response) }
     end
   end
 end

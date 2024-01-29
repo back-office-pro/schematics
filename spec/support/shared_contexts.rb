@@ -7,7 +7,6 @@ RSpec.shared_context 'with unauthenticated user' do
 
   include_context 'with user'
 
-  let(:json_response) { JSON.parse(response.body) }
   let(:accept_header) { 'application/json' }
   let(:headers) { { 'Accept' => accept_header } }
 

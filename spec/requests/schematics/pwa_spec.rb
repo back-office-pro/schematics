@@ -39,6 +39,6 @@ RSpec.describe 'PWA' do
     before { do_request }
 
     it { is_expected.to have_http_status(:success) }
-    it { expect(json_response).to match(expected_response) }
+    its(:parsed_body) { is_expected.to match(expected_response) }
   end
 end

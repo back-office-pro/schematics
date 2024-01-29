@@ -43,7 +43,7 @@ RSpec.describe 'Resources' do
         let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
         it { is_expected.to have_http_status(:success) }
-        it { expect(json_response).to contain_exactly(expected_response) }
+        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
       end
 
       context "when searching second api key with #{search_engine_name}" do
@@ -51,7 +51,7 @@ RSpec.describe 'Resources' do
         let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
         it { is_expected.to have_http_status(:success) }
-        it { expect(json_response).to contain_exactly(expected_response) }
+        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
       end
 
       context "when searching active api key with #{search_engine_name}" do
@@ -59,7 +59,7 @@ RSpec.describe 'Resources' do
         let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
         it { is_expected.to have_http_status(:success) }
-        it { expect(json_response).to contain_exactly(expected_response) }
+        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
       end
 
       context "when searching not active api key with #{search_engine_name}" do
@@ -67,7 +67,7 @@ RSpec.describe 'Resources' do
         let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
         it { is_expected.to have_http_status(:success) }
-        it { expect(json_response).to contain_exactly(expected_response) }
+        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
       end
 
       context "when searching for not expired api key with #{search_engine_name}" do
@@ -75,7 +75,7 @@ RSpec.describe 'Resources' do
         let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
         it { is_expected.to have_http_status(:success) }
-        it { expect(json_response).to contain_exactly(expected_response) }
+        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
       end
 
       context "when searching for expired api key with #{search_engine_name}" do
@@ -83,7 +83,7 @@ RSpec.describe 'Resources' do
         let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
         it { is_expected.to have_http_status(:success) }
-        it { expect(json_response).to contain_exactly(expected_response) }
+        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
       end
     end
   end
