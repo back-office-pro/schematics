@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'fuubar', '2.5.1'
   spec.add_development_dependency 'i18n-tasks', '1.0.13'
   spec.add_development_dependency 'isolator', '1.0.1'
-  spec.add_development_dependency 'reek', '6.2.0'
+  spec.add_development_dependency 'reek', '6.3.0'
   spec.add_development_dependency 'rspec-its', '1.3.0'
   spec.add_development_dependency 'rubocop', '1.59.0'
   spec.add_development_dependency 'rubocop-performance', '1.20.2'
