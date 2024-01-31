@@ -1,2 +1,5 @@
-= __resource_details(resource: @resource)
-= __viewer_rich_text(model_class.entity.rich_text_attributes, resource: @resource)
+- if @template
+  .container-fluid == @template.interpolate(@resource)
+- else
+  = __resource_details(resource: @resource)
+  = __viewer_rich_text(model_class.entity.rich_text_attributes, resource: @resource)

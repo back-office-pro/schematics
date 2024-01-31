@@ -16,6 +16,7 @@ module Schematics
 
     def initialize(resource)
       @resource = resource
+      @template = ::Template.find_by(model: model_class.to_s)
     end
 
     memoize def content
@@ -85,8 +86,8 @@ module Schematics
       action: :show,
       formats: :pdf,
       layout: 'layouts/schematics/pdf',
-      locals: { resource: @resource },
-      assigns: { resource: @resource }
+      locals: { resource: @resource, template: @template },
+      assigns: { resource: @resource, template: @template }
     )
   end
 end
