@@ -18,6 +18,12 @@ RSpec.describe Template do
       it { is_expected.to eq('Email: john.doe@nowhere.com') }
     end
 
+    context 'when content has a nested variable' do
+      let(:content) { 'Role: %<role_name>s' }
+
+      it { is_expected.to eq('Role: Manager') }
+    end
+
     context 'when content has an unknown variable' do
       let(:content) { 'Email: %<foo>s' }
 
