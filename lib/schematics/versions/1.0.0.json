@@ -1706,5 +1706,33 @@
         }
       }
     ]
+  },
+  {
+    "id": "58d73948-9292-41d5-b27d-ceafcf628f34",
+    "name": "template",
+    "options": {
+      "icon": "file_signature",
+      "descriptor": "model"
+    },
+    "attributes": [
+      {
+        "id": "3cbbdb59-43be-4648-ab39-d0d6eda48aa7",
+        "name": "model",
+        "type": "model",
+        "options": {
+          "unique": true,
+          "required": true
+        }
+      },
+      {
+        "id": "e18c96a6-ecbd-4a77-9945-7af5cd4ea99c",
+        "name": "content",
+        "type": "text",
+        "options": {
+          "required": true,
+          "translated": true
+        }
+      }
+    ]
   }
 ]
