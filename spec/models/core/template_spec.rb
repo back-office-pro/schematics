@@ -12,34 +12,85 @@ RSpec.describe Template do
 
     before { record.content = content }
 
-    context 'when content is well formatted' do
-      let(:content) { 'Email: %<email>s' }
+    context 'when content has a variable' do
+      let(:content) { 'Email: {{ email }}' }
 
       it { is_expected.to eq('Email: john.doe@nowhere.com') }
     end
 
     context 'when content has a nested variable' do
-      let(:content) { 'Role: %<role_name>s' }
+      let(:content) { 'Role: {{ role_name }}' }
 
       it { is_expected.to eq('Role: Manager') }
     end
 
     context 'when content has an unknown variable' do
-      let(:content) { 'Email: %<foo>s' }
+      let(:content) { 'Email: {{ foo }}' }
 
-      it { is_expected.to eq('foo is not defined') }
+      it { is_expected.to eq('Email: ') }
+    end
+
+    context 'when content has a filter' do
+      let(:content) { 'Email: {{ email | upcase }}' }
+
+      it { is_expected.to eq('Email: JOHN.DOE@NOWHERE.COM') }
+    end
+
+    context 'when content has an unknown filter' do
+      let(:content) { 'Email: {{ email | titleize }}' }
+
+      it { is_expected.to eq('Email: ') }
     end
 
     context 'when content has a syntax error' do
-      let(:content) { 'Email: %(foo>s' }
+      let(:content) { 'Email: {{ foo }' }
 
-      it { is_expected.to eq('malformed format string - %(') }
+      it { is_expected.to be_nil }
+    end
+  end
+
+  describe '#interpolation_errors' do
+    subject { record.interpolation_errors }
+
+    before do
+      record.content = content
+      record.interpolate(user)
     end
 
-    context 'when content has HTML tags' do
-      let(:content) { "<b>Foo</b><script>alert('ok')></script>" }
+    context 'when content has a variable' do
+      let(:content) { 'Email: {{ email }}' }
 
-      it { is_expected.to eq(content) }
+      it { is_expected.to be_empty }
+    end
+
+    context 'when content has a nested variable' do
+      let(:content) { 'Role: {{ role_name }}' }
+
+      it { is_expected.to be_empty }
+    end
+
+    context 'when content has an unknown variable' do
+      let(:content) { 'Email: {{ foo }}' }
+
+      it { is_expected.to all(be_a(Liquid::UndefinedVariable)) }
+    end
+
+    context 'when content has a filter' do
+      let(:content) { 'Email: {{ email | upcase }}' }
+
+      it { is_expected.to be_empty }
+    end
+
+    context 'when content has an unknown filter' do
+      let(:content) { 'Email: {{ email | titleize }}' }
+
+      it { is_expected.to all(be_a(Liquid::UndefinedFilter)) }
+    end
+
+    context 'when content has a syntax error' do
+      let(:content) { 'Email: {{ foo }' }
+
+      it { is_expected.to all(be_a(Liquid::SyntaxError)) }
     end
   end
 end
