@@ -51,3 +51,7 @@ eleven:
   item_id: 0037f59c-5ab5-422e-8c21-d47f03c9401e
   item_type: WebhookEndpoint
   whodunnit: <%= User.first.id %>
+twelve:
+  event: create
+  item: one (Template)
+  whodunnit: <%= User.first.id %>
