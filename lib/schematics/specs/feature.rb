@@ -50,12 +50,12 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
-          [record, role, login_with_2fa]
         end
 
         if can?(:index)
           it 'visits the index' do
             if ability.can?(:index, model_class)
+              login_with_2fa
               visit polymorphic_path(model_class)
               text = t('titles.schematics.resources.index', human_name_plural:)
               is_expected.to have_selector 'h6', text:
@@ -66,6 +66,7 @@ module Schematics
         if can?(:create)
           it "creates a #{entity.name}" do
             if ability.can?(:new, model_class)
+              login_with_2fa
               visit new_polymorphic_path(model_class)
               fill_form
               click_button t('schematics.application.button.confirm')
@@ -76,7 +77,9 @@ module Schematics
 
         if can?(:update)
           it "updates a #{entity.name}" do
+            record
             if ability.can?(:edit, record)
+              login_with_2fa
               visit edit_polymorphic_path(record)
               fill_form
               click_button t('schematics.application.button.confirm')
@@ -109,7 +112,11 @@ module Schematics
       def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
         entity.fillable_elements.each do |element|
           case element
-          when Associations::HasAndBelongsToMany, Attributes::BelongsTo
+          when Associations::HasAndBelongsToMany
+            select element.model_class.find(&element.filter_by).to_s,
+                   from: element.input_name,
+                   match: :first
+          when Attributes::BelongsTo
             select element.model_class.first.to_s,
                    from: element.input_name,
                    match: :first

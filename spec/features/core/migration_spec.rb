@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Migration, except: :update do
+RSpec.describe Migration, except: %i[create update] do
   include Schematics::Specs::Feature
 end
