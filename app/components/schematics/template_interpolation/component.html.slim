@@ -1,0 +1,5 @@
+.container-fluid
+  == interpolation
+  ul.list-group.list-group-striped
+    - interpolation_errors.each do |error|
+      li.list-group-item.text-danger = error
