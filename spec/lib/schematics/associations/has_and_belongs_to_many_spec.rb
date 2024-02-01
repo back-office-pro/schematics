@@ -42,6 +42,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }
   its(:to_spec) { is_expected.to eq('A role has many **permissions**') }
+  its(:group_by) { is_expected.to be_nil }
+  its(:filter_by) { is_expected.to eq(:itself) }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -58,5 +60,17 @@ describe Schematics::Associations::HasAndBelongsToMany do
       scope :with_permissions, -> { includes([:permissions]) }
       has_and_belongs_to_many :permissions, class_name: 'Permission'
     RUBY
+  end
+
+  context 'when association is grouped' do
+    let(:options) { { group_by: 'model' } }
+
+    its(:group_by) { is_expected.to eq(:model_formatted) }
+  end
+
+  context 'when association is filtered' do
+    let(:options) { { filter_by: 'model' } }
+
+    its(:filter_by) { is_expected.to eq(:model) }
   end
 end

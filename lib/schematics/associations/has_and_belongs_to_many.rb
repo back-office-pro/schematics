@@ -41,6 +41,14 @@ module Schematics
 
       def association_type = super.singularize
 
+      def group_by
+        :"#{options.group_by}_formatted" if options.group_by
+      end
+
+      def filter_by
+        options.filter_by&.to_sym || :itself
+      end
+
       protected
 
       def association_to_str = <<~RUBY
