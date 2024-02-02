@@ -1,5 +1,9 @@
 .container-fluid
   == interpolation
-  ul.list-group.list-group-striped
-    - interpolation_errors.each do |error|
-      li.list-group-item.text-danger = error
+  - if interpolation_errors.any?
+    ul.list-group.list-group-striped
+      li.list-group-item.text-danger = t('.warning')
+      - interpolation_errors.each do |error|
+        li.list-group-item.text-danger
+          = fa_icon :triangle_exclamation, class: 'me-2'
+          = error.to_s(false)
