@@ -19,9 +19,21 @@ RSpec.describe Template do
     end
 
     context 'when content has a nested variable' do
-      let(:content) { 'Role: {{ role_name }}' }
+      let(:content) { 'Role: {{ role.name }}' }
 
       it { is_expected.to eq('Role: Manager') }
+    end
+
+    context 'when content has an association iteration' do
+      let(:content) do
+        <<~LIQUID
+          {% for user_group in user_groups -%}
+            {{ user_group.name }}
+          {%- endfor %}
+        LIQUID
+      end
+
+      it { is_expected.to eq('My Group 2My Group 1') }
     end
 
     context 'when content has an unknown variable' do
@@ -64,7 +76,19 @@ RSpec.describe Template do
     end
 
     context 'when content has a nested variable' do
-      let(:content) { 'Role: {{ role_name }}' }
+      let(:content) { 'Role: {{ role.name }}' }
+
+      it { is_expected.to be_empty }
+    end
+
+    context 'when content has an association iteration' do
+      let(:content) do
+        <<~LIQUID
+          {% for user_group in user_groups -%}
+            {{ user_group.name }}
+          {%- endfor %}
+        LIQUID
+      end
 
       it { is_expected.to be_empty }
     end
