@@ -12,6 +12,12 @@ RSpec.describe Schematics::JSONSerializer do
 
     context 'when template is show' do
       let(:options) { { template: 'show' } }
+      let(:expected_user_groups) do
+        [
+          { 'id' => be_a(String), 'name' => 'My Group 2' },
+          { 'id' => be_a(String), 'name' => 'My Group 1' }
+        ]
+      end
 
       it { is_expected.to include('id' => be_a(String)) }
       it { is_expected.to include('email' => 'john.doe@nowhere.com') }
@@ -20,9 +26,9 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('locale' => 'en') }
       it { is_expected.to include('timeZone' => 'UTC') }
       it { is_expected.to include('fullName' => 'DOE John') }
-      it { is_expected.to include('createdAt') }
+      it { is_expected.to include('createdAt' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
-      it { is_expected.to include('userGroups') }
+      it { is_expected.to include('userGroups' => expected_user_groups) }
       it { is_expected.to include('sentMessages') }
       it { is_expected.to include('imports') }
       it { is_expected.to include('searches') }
@@ -42,7 +48,7 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('locale' => 'en') }
       it { is_expected.to include('timeZone' => 'UTC') }
       it { is_expected.to include('fullName' => 'DOE John') }
-      it { is_expected.to include('createdAt') }
+      it { is_expected.to include('createdAt' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
       it { is_expected.not_to include('userGroups') }
       it { is_expected.not_to include('sentMessages') }
@@ -81,7 +87,7 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('locale' => 'en') }
       it { is_expected.to include('timeZone' => 'UTC') }
       it { is_expected.to include('fullName' => 'DOE John') }
-      it { is_expected.to include('createdAt') }
+      it { is_expected.to include('createdAt' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
       it { is_expected.not_to include('userGroups') }
       it { is_expected.not_to include('sentMessages') }
@@ -92,6 +98,77 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.not_to include('comments') }
       it { is_expected.not_to include('password') }
       it { is_expected.to include(expected_metadata) }
+    end
+
+    context 'when underscore option is enabled' do
+      let(:options) { { template: 'show', underscore: true } }
+      let(:expected_user_groups) do
+        [
+          { 'id' => be_a(String), 'name' => 'My Group 2' },
+          { 'id' => be_a(String), 'name' => 'My Group 1' }
+        ]
+      end
+
+      it { is_expected.to include('id' => be_a(String)) }
+      it { is_expected.to include('email' => 'john.doe@nowhere.com') }
+      it { is_expected.to include('first_name' => 'John') }
+      it { is_expected.to include('last_name' => 'DOE') }
+      it { is_expected.to include('locale' => 'en') }
+      it { is_expected.to include('time_zone' => 'UTC') }
+      it { is_expected.to include('full_name' => 'DOE John') }
+      it { is_expected.to include('created_at' => be_a(ActiveSupport::TimeWithZone)) }
+      it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
+      it { is_expected.to include('user_groups' => expected_user_groups) }
+      it { is_expected.to include('sent_messages') }
+      it { is_expected.to include('imports') }
+      it { is_expected.to include('searches') }
+      it { is_expected.to include('drafts') }
+      it { is_expected.to include('sessions') }
+      it { is_expected.to include('comments') }
+      it { is_expected.not_to include('password') }
+    end
+
+    context 'when expand option is enabled' do
+      let(:options) { { template: 'show', expand: true } }
+      let(:expected_role) do
+        {
+          'createdAt' => be_a(String),
+          'id' => be_a(String),
+          'name' => 'Manager'
+        }
+      end
+      let(:expected_user_groups) do
+        [
+          {
+            'createdAt' => be_a(String),
+            'id' => be_a(String),
+            'name' => 'My Group 2'
+          },
+          {
+            'createdAt' => be_a(String),
+            'id' => be_a(String),
+            'name' => 'My Group 1'
+          }
+        ]
+      end
+
+      it { is_expected.to include('id' => be_a(String)) }
+      it { is_expected.to include('email' => 'john.doe@nowhere.com') }
+      it { is_expected.to include('firstName' => 'John') }
+      it { is_expected.to include('lastName' => 'DOE') }
+      it { is_expected.to include('locale' => 'en') }
+      it { is_expected.to include('timeZone' => 'UTC') }
+      it { is_expected.to include('fullName' => 'DOE John') }
+      it { is_expected.to include('createdAt' => be_a(ActiveSupport::TimeWithZone)) }
+      it { is_expected.to include('role' => expected_role) }
+      it { is_expected.to include('userGroups' => expected_user_groups) }
+      it { is_expected.to include('sentMessages') }
+      it { is_expected.to include('imports') }
+      it { is_expected.to include('searches') }
+      it { is_expected.to include('drafts') }
+      it { is_expected.to include('sessions') }
+      it { is_expected.to include('comments') }
+      it { is_expected.not_to include('password') }
     end
   end
 end

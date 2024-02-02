@@ -3,7 +3,7 @@
 class Template < Schematics::ApplicationRecord
   def interpolate(resource)
     liquid_template.render(
-      resource.cached_serialized_json(template: 'show').transform_keys(&:underscore),
+      resource.serialized_json(template: 'show', expand: true, underscore: true),
       { strict_variables: true, strict_filters: true }
     )
   rescue Liquid::SyntaxError
