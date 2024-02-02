@@ -51,7 +51,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
+      it { is_expected.to eq(%w[permission import chart stat search comparison template]) }
     end
   end
 
@@ -116,7 +116,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
+      it { is_expected.to eq(%w[permission import chart stat search comparison template]) }
     end
   end
 
@@ -410,7 +410,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
+      it { is_expected.to eq(%w[permission import chart stat search comparison template]) }
     end
   end
 
@@ -460,7 +460,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart stat search comparison]) }
+      it { is_expected.to eq(%w[permission import chart stat search comparison template]) }
     end
   end
 

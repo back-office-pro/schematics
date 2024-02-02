@@ -5,7 +5,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
     Schematics::Associations::Association.build(
       type: 'has_and_belongs_to_many',
       entity:,
-      name: 'permissions'
+      name: 'permissions',
+      options:
     )
   end
 
@@ -22,6 +23,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
       ]
     )
   end
+  let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
