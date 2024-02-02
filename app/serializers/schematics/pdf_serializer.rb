@@ -16,6 +16,7 @@ module Schematics
 
     def initialize(resource)
       @resource = resource
+      @template = ::Template.find_by(model: model_class.to_s)
     end
 
     memoize def content
@@ -81,12 +82,22 @@ module Schematics
 
     def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
 
-    memoize def template = render(
-      action: :show,
-      formats: :pdf,
-      layout: 'layouts/schematics/pdf',
-      locals: { resource: @resource },
-      assigns: { resource: @resource }
-    )
+    memoize def template
+      if @template
+        render(
+          TemplateInterpolation::Component.new(template: @template, resource: @resource),
+          layout: 'layouts/schematics/pdf',
+          formats: :pdf
+        )
+      else
+        render(
+          action: :show,
+          formats: :pdf,
+          layout: 'layouts/schematics/pdf',
+          locals: { resource: @resource },
+          assigns: { resource: @resource }
+        )
+      end
+    end
   end
 end

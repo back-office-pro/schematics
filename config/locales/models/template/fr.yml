@@ -1,0 +1,12 @@
+---
+fr:
+  activerecord:
+    attributes:
+      template:
+        content: Contenu
+        model: Donnée
+    models:
+      template:
+        gender: male
+        one: Modèle
+        other: Modèles

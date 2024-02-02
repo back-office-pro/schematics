@@ -1,0 +1,4 @@
+---
+one:
+  model: User
+  content: <b>{{ email }}</b>

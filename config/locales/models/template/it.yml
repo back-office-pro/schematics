@@ -1,0 +1,12 @@
+---
+it:
+  activerecord:
+    attributes:
+      template:
+        content: Contenuto
+        model: Data
+    models:
+      template:
+        gender: male
+        one: Modello
+        other: Modelli

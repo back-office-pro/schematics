@@ -83,6 +83,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'interactor', '3.1.2'
   spec.add_dependency 'letter_opener', '1.8.1'
   spec.add_dependency 'link_thumbnailer', '3.4.0'
+  spec.add_dependency 'liquid', '5.4.0'
   spec.add_dependency 'loaf', '0.10.0'
   spec.add_dependency 'lograge', '0.14.0'
   spec.add_dependency 'memery', '1.5.0'
