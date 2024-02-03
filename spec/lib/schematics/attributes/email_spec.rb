@@ -119,7 +119,8 @@ describe Schematics::Attributes::Email do
         Schematics::Attributes::Phone,
         Schematics::Attributes::TimeZone,
         Schematics::Attributes::UserAgent,
-        Schematics::Attributes::Url
+        Schematics::Attributes::Url,
+        Schematics::Attributes::Code
       ]
     end
 

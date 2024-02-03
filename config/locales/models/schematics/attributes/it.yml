@@ -16,6 +16,7 @@ it:
       schematics/attributes/boolean: Booleano
       schematics/attributes/byte: Byte
       schematics/attributes/citext: Case insensitive testo
+      schematics/attributes/code: Codice
       schematics/attributes/color: Colore
       schematics/attributes/country: Paese
       schematics/attributes/currency: Valuta

@@ -16,6 +16,8 @@ module Schematics
 
       def default = SecureRandom.base58
 
+      def database_type = 'text'
+
       def icon = :font
 
       def search_data = super

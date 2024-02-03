@@ -91,7 +91,8 @@ describe Schematics::Attributes::ModelField do
         Schematics::Attributes::Phone,
         Schematics::Attributes::TimeZone,
         Schematics::Attributes::UserAgent,
-        Schematics::Attributes::Url
+        Schematics::Attributes::Url,
+        Schematics::Attributes::Code
       ]
     end
 

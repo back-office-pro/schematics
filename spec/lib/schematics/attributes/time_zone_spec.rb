@@ -106,7 +106,8 @@ describe Schematics::Attributes::TimeZone do
         Schematics::Attributes::Model,
         Schematics::Attributes::Phone,
         Schematics::Attributes::UserAgent,
-        Schematics::Attributes::Url
+        Schematics::Attributes::Url,
+        Schematics::Attributes::Code
       ]
     end
 

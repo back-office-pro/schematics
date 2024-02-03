@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-describe Schematics::Attributes::Citext do
+describe Schematics::Attributes::Code do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
-  let(:name) { 'last_name' }
-  let(:options) { {} }
+  let(:entity) { Schematics::Entities::Entity.new(name: 'template') }
+  let(:name) { 'content' }
+  let(:options) do
+    {
+      limit: 100
+    }
+  end
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
@@ -13,34 +17,26 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Listable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
-  it { is_expected.not_to be_case_sensitive }
 
-  its(:database_type) { is_expected.to eq('citext') }
-  its(:column_name) { is_expected.to eq('last_name') }
+  its(:database_type) { is_expected.to eq('text') }
+  its(:column_name) { is_expected.to eq('content') }
   its(:open_api_type) { is_expected.to eq(String) }
-  its(:input_name) { is_expected.to eq('user[last_name]') }
-  its(:icon) { is_expected.to eq(:align_justify) }
+  its(:input_name) { is_expected.to eq('template[content]') }
+  its(:icon) { is_expected.to eq(:code) }
   its(:default) { is_expected.to be_a(String) }
-  its(:validators) { is_expected.to be_empty }
-  its('validators.to_str') { is_expected.to be_blank }
-  its(:search_column) { is_expected.to eq(:last_name) }
+  its(:search_column) { is_expected.to eq(:content) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
-  its(:search_query) { is_expected.to eq(:last_name_i_cont) }
-  its(:weight) { is_expected.to eq(1) }
-  its(:to_sql) { is_expected.to eq('users.last_name') }
-  its(:to_s) { is_expected.to eq('schema:user_last_name') }
+  its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
-
-  its(:to_spec) do
-    is_expected.to eq('A user has a **last name** attribute of type *case insensitive text*')
-  end
+  its(:to_spec) { is_expected.to eq('A template has a **content** attribute of type *code*') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -50,62 +46,44 @@ describe Schematics::Attributes::Citext do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Translated,
-      Schematics::Options::Unique,
-      Schematics::Options::Min,
-      Schematics::Options::Limit,
-      Schematics::Options::Length,
-      Schematics::Options::Normalization
+      Schematics::Options::Normalization,
+      Schematics::Options::Language
     )
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      last_name: last_name&.to_s
-    RUBY
+  context 'when hidden' do
+    let(:options) { { hidden: true } }
+
+    it { is_expected.to be_hidden }
   end
 
-  context 'when attribute is unique' do
-    let(:options) { { unique: true } }
+  context 'when readonly' do
+    let(:options) { { readonly: true } }
 
-    it { is_expected.to be_unique }
-
-    its(:validators) do
-      is_expected.to eq(uniqueness_with_deleted: { case_sensitive: false, allow_blank: true })
-    end
-
-    its('validators.to_str') do
-      is_expected.to eq <<~RUBY
-        validates :last_name, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}}
-      RUBY
-    end
+    it { is_expected.to be_readonly }
   end
 
-  context 'when attribute is required' do
-    let(:options) { { required: true } }
-
-    it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq(presence: true) }
-
-    its('validators.to_str') do
-      is_expected.to eq <<~RUBY
-        validates :last_name, {:presence=>true}
-      RUBY
-    end
-  end
-
-  context 'when attribute is translated' do
-    let(:options) { { translated: true } }
-
-    its(:permitted_params) do
-      is_expected.to eq(%i[last_name last_name_en last_name_fr last_name_it])
-    end
-
-    its(:preload) { is_expected.to eq([:string_translations]) }
+  context 'when there is a default value' do
+    let(:options) { { default: 'text' } }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        translates :last_name, type: :string
-        normalizes :last_name, with: -> { _1.strip.itself.presence }
+        attribute :content, default: -> { "text" }
+        normalizes :content, with: -> { _1.strip.itself.presence }
+      RUBY
+    end
+  end
+
+  context 'when translated' do
+    let(:options) { { translated: true } }
+
+    its(:permitted_params) { is_expected.to eq(%i[content content_en content_fr content_it]) }
+    its(:preload) { is_expected.to eq([:text_translations]) }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        translates :content, type: :text
+        normalizes :content, with: -> { _1.strip.itself.presence }
       RUBY
     end
   end
@@ -116,10 +94,11 @@ describe Schematics::Attributes::Citext do
     let(:expected_compatible_types) do
       [
         described_class,
-        Schematics::Attributes::String,
         Schematics::Attributes::Text,
+        Schematics::Attributes::String,
         Schematics::Attributes::Action,
         Schematics::Attributes::Address,
+        Schematics::Attributes::Citext,
         Schematics::Attributes::Color,
         Schematics::Attributes::Country,
         Schematics::Attributes::Email,
@@ -131,8 +110,7 @@ describe Schematics::Attributes::Citext do
         Schematics::Attributes::Phone,
         Schematics::Attributes::TimeZone,
         Schematics::Attributes::UserAgent,
-        Schematics::Attributes::Url,
-        Schematics::Attributes::Code
+        Schematics::Attributes::Url
       ]
     end
 
