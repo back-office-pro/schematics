@@ -1727,10 +1727,11 @@
       {
         "id": "e18c96a6-ecbd-4a77-9945-7af5cd4ea99c",
         "name": "content",
-        "type": "text",
+        "type": "code",
         "options": {
           "required": true,
-          "translated": true
+          "translated": true,
+          "language": "liquid"
         }
       }
     ]
