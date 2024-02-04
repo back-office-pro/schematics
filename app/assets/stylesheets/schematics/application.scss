@@ -12,6 +12,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'timeline';
 @import 'tom_select';
 @import 'swagger';
+@import 'monaco_editor';
 @import 'navbar/component';
 @import 'footer/component';
 @import 'sidebar/component';
@@ -140,14 +141,6 @@ form label.required::after {
 
 .pagy-bootstrap-nav .pagination {
   margin-bottom: 0;
-}
-
-// Code editor
-
-.monaco-editor {
-  --vscode-editor-background: transparent !important;
-  --vscode-editorGutter-background: transparent !important;
-  height: 250px !important;
 }
 
 // SVG responsiveness
