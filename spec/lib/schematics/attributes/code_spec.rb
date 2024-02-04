@@ -36,7 +36,10 @@ describe Schematics::Attributes::Code do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
-  its(:to_spec) { is_expected.to eq('A template has a **content** attribute of type *code editor*') } # rubocop:disable Layout/LineLength
+
+  its(:to_spec) do
+    is_expected.to eq('A template has a **content** attribute of type *code editor*')
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
