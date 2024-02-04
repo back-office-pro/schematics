@@ -169,7 +169,8 @@ input:-webkit-autofill:focus {
 
   svg,
   iframe.google-map,
-  pre {
+  pre,
+  .monaco-editor {
     filter: invert(90%);
   }
 
