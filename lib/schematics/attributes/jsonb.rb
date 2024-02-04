@@ -17,8 +17,6 @@ module Schematics
       def open_api_type = {}
 
       def permitted_params = { super => {} }
-
-      def language = 'json'
     end
   end
 end

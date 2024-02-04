@@ -31,10 +31,12 @@
   = __resource_form_fields_enumerable(form:, field:)
 - when Schematics::Attributes::String
   = __resource_form_fields_string(form:, field:)
-- when Schematics::Attributes::Code, Schematics::Attributes::Jsonb
+- when Schematics::Attributes::Code
   = __resource_form_fields_code(form:, field:)
 - when Schematics::Attributes::Text
   = __resource_form_fields_text(form:, field:)
+- when Schematics::Attributes::Jsonb
+  = __resource_form_fields_jsonb(form:, field:)
 - when Schematics::Attributes::Rating
   = __resource_form_fields_rating(form:, field:)
 - when Schematics::Attributes::RichText
