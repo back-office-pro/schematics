@@ -37,6 +37,7 @@ it:
         inverse_association_types:
           has_many: Uno-a-molti
           has_one: Uno-a-uno
+        language: Linguaggio
         length: Lunghezza
         less_than: Minore di
         less_than_or_equal_to: Minore o uguale a

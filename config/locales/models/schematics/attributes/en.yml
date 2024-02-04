@@ -16,6 +16,7 @@ en:
       schematics/attributes/boolean: Boolean
       schematics/attributes/byte: Byte
       schematics/attributes/citext: Case insensitive text
+      schematics/attributes/code: Code editor
       schematics/attributes/color: Color
       schematics/attributes/country: Country
       schematics/attributes/currency: Currency

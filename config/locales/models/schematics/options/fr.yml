@@ -38,6 +38,7 @@ fr:
         inverse_association_types:
           has_many: Un-à-plusieurs
           has_one: Un-à-un
+        language: Langage
         length: Longueur
         less_than: Inférieur à
         less_than_or_equal_to: Inférieur ou égal à

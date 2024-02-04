@@ -37,6 +37,7 @@ en:
         inverse_association_types:
           has_many: One-to-many
           has_one: One-to-one
+        language: Language
         length: Length
         less_than: Less than
         less_than_or_equal_to: Less than or equal to

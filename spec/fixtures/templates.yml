@@ -1,4 +1,19 @@
 ---
 one:
   model: User
-  content: <b>{{ email }}</b>
+  content: |
+    <table>
+      <tbody>
+        <tr>
+          <th>{{ email }}</th>
+          <td>{{ first_name }}</td>
+          <td>{{ last_name }}</td>
+          <td>{{ role.name }}</td>
+          <td>
+            {% for user_group in user_groups %}
+              {{ user_group.name }}
+            {% endfor %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
