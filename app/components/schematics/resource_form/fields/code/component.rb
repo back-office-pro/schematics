@@ -13,7 +13,7 @@ module Schematics
             controller: 'code-editor',
             'code-editor-initial-value-value': value,
             'code-editor-language-value': language,
-            'code-editor-theme-readonly-value': readonly?
+            'code-editor-readonly-value': readonly?
           }
 
           def data = { 'code-editor-target': 'input' }
