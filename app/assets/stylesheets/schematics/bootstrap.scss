@@ -168,7 +168,8 @@ input:-webkit-autofill:focus {
   }
 
   svg,
-  iframe.google-map {
+  iframe.google-map,
+  pre {
     filter: invert(90%);
   }
 

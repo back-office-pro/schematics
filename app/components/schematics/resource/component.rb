@@ -20,6 +20,12 @@ module Schematics
           .html_safe # rubocop:disable Rails/OutputSafety
       end
 
+      def code_highlight(code)
+        return code unless lexer_class
+
+        ::Rouge::Formatters::HTML.new.format(lexer_class.new.lex(code))
+      end
+
       def badge_color = element
         .events
         .find { _1.to == value }
@@ -28,6 +34,10 @@ module Schematics
       def value
         resource.public_send(element.name)
       end
+
+      private
+
+      def lexer_class = ::Rouge::Lexer.find(element.language)
     end
   end
 end

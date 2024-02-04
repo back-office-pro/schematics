@@ -46,6 +46,9 @@ span.text-body-tertiary = '-' if value.nil?
     span.badge class="bg-#{badge_color}" = element.format(value)
 - when Schematics::Attributes::RichText
   == value
+- when Schematics::Attributes::Code
+  pre
+    code == code_highlight(value)
 - when Schematics::Attributes::Country
   span.fi.rounded class="fi-#{value&.downcase}"
 - when Schematics::Attributes::Model
