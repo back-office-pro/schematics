@@ -5,7 +5,7 @@ module Schematics
     module Fields
       module Text
         class Component < Fields::Component
-          delegate :translated?, to: :options
+          delegate :translated?, to: :field
 
           def data = { controller: 'autosize' }
         end

@@ -5,8 +5,8 @@ module Schematics
     module Fields
       module RichText
         class Component < Fields::Component
-          delegate :translated?, to: :options, private: true
           delegate :rich_text_area, to: :form, private: true
+          delegate :translated?, to: :field
 
           def required_rich_text_area(name, **)
             return rich_text_area(name, **) unless required?
