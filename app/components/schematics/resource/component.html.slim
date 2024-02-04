@@ -15,7 +15,8 @@ span.text-body-tertiary = '-' if value.nil?
   - in { openapi:, tags:, paths:, security:, components: }
     = __viewer_swagger(spec: value)
   - else
-    = __viewer_json(value:)
+    pre.mb-0
+      code == code_highlight(JSON.pretty_generate(value))
 - when Schematics::Attributes::Url
   = __link_preview(url: value)
 - when Schematics::Attributes::Color
@@ -47,7 +48,7 @@ span.text-body-tertiary = '-' if value.nil?
 - when Schematics::Attributes::RichText
   == value
 - when Schematics::Attributes::Code
-  pre
+  pre.mb-0
     code == code_highlight(value)
 - when Schematics::Attributes::Country
   span.fi.rounded class="fi-#{value&.downcase}"
