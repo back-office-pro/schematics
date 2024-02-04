@@ -24,7 +24,7 @@ describe Schematics::Attributes::Code do
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
 
   its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
@@ -46,7 +46,6 @@ describe Schematics::Attributes::Code do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Translated,
-      Schematics::Options::Normalization,
       Schematics::Options::Language
     )
   end
