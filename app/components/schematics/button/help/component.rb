@@ -38,16 +38,20 @@ module Schematics
         end
 
         def data = {
-          'bs-toggle': ('offcanvas' unless core?),
-          'bs-target': ('#documentation' unless core?),
+          'bs-toggle': ('offcanvas' if model_class && !core?),
+          'bs-target': ('#documentation' if model_class && !core?),
           controller: ('tooltip' if tooltip),
           'bs-custom-class': ('responsive-button-tooltip' if tooltip)
         }.compact
 
         def title = t('.text')
 
+        def target = '_blank'
+
         def url
-          ::Tenant.url(path:) if external_doc?
+          return '#' unless external_doc?
+
+          ::Tenant.url(path:)
         end
 
         def render?
