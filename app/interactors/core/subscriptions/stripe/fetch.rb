@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Core
-  module Licences
+  module Subscriptions
     module Stripe
       class Fetch
         include Interactor
@@ -45,10 +45,10 @@ module Core
           &.find { %w[active trialing].include?(_1.status) }
 
         def subscription_state
-          return ::Licence::STATE_STATE_INACTIVE unless subscription_id
-          return ::Licence::STATE_STATE_CANCELED if subscription_cancel_at_period_end
+          return ::Subscription::STATE_STATE_INACTIVE unless subscription_id
+          return ::Subscription::STATE_STATE_CANCELED if subscription_cancel_at_period_end
 
-          ::Licence::STATE_STATE_ACTIVE
+          ::Subscription::STATE_STATE_ACTIVE
         end
 
         def product_id = subscription

@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe LicencesController do
+RSpec.describe SubscriptionsController do
   include Schematics::Specs::Routing
 end

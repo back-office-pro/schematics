@@ -9,12 +9,12 @@ module Schematics
           delegate :users_size,
                    :quota_users,
                    :quota_users_percentage,
-                   to: '::Licence.instance'
+                   to: '::Subscription.instance'
 
           def title = t('.title')
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, ::Subscription)
           end
         end
       end

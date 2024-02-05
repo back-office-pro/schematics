@@ -8,14 +8,14 @@ module Schematics
           delegate :entities_size,
                    :quota_entities,
                    :quota_entities_percentage,
-                   to: '::Licence.instance'
+                   to: '::Subscription.instance'
 
           def icon = :bezier_curve
 
           def title = t('.title')
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, ::Subscription)
           end
         end
       end

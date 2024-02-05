@@ -50,9 +50,9 @@
     schematics/clean_messages_job:
       cron: 0 1 * * *
       class: Schematics::CleanMessagesJob
-    schematics/load_licence_job:
+    schematics/load_subscription_job:
       cron: 0 1 * * *
-      class: Schematics::LoadLicenceJob
+      class: Schematics::LoadSubscriptionJob
     schematics/migrate_core_job:
       cron: 0 1 * * *
       class: Schematics::MigrateCoreJob

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class LicenceAbility < ApplicationAbility
+  class SubscriptionAbility < ApplicationAbility
     delegate :quota_users_exceeded?,
              :quota_api_keys_exceeded?,
              :state_inactive?,
-             to: '::Licence.instance',
+             to: '::Subscription.instance',
              private: true
 
     def initialize(user)
@@ -15,7 +15,7 @@ module Schematics
       cannot %i[create restore update], :all if state_inactive?
       return unless user.admin?
 
-      can %i[cancel enable], ::Licence
+      can %i[cancel enable], ::Subscription
     end
   end
 end

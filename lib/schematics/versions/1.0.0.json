@@ -1368,7 +1368,7 @@
   },
   {
     "id": "b08023c8-ff1f-4e3e-b1f6-a6b149fab14b",
-    "name": "licence",
+    "name": "subscription",
     "type": "singleton",
     "options": {
       "descriptor": "plan",

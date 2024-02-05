@@ -6,7 +6,7 @@ class Migration < Schematics::ApplicationRecord
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
   validate :quota_entities_cannot_be_exceeded
-  delegate :quota_entities, to: 'Licence.instance', private: true
+  delegate :quota_entities, to: 'Subscription.instance', private: true
   delegate :build_commands,
            :clean_commands,
            :old_entities,

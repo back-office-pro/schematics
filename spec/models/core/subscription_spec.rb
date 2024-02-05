@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Licence do
+RSpec.describe Subscription do
   include Schematics::Specs::Model
 
   include_context 'with stripe stubs'
@@ -79,14 +79,14 @@ RSpec.describe Licence do
       allow(record).to receive(:update_env_file).and_return(nil)
     end
 
-    it 'updates licence metadata' do
+    it 'updates subscription metadata' do
       expect { load! }
         .to change(record, :metadata)
         .from(metadata.stringify_keys)
         .to(new_metadata.stringify_keys)
     end
 
-    it 'updates licence plan' do
+    it 'updates subscription plan' do
       expect { load! }
         .to change(record, :plan)
         .from('basic')

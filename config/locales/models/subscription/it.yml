@@ -2,28 +2,28 @@
 it:
   activerecord:
     attributes:
-      licence:
+      subscription:
         default_locale: Lingua predefinita
         email: E-mail
         metadata: Metadati
         plan: Piano
         state: Stato
     enums:
-      licence:
+      subscription:
         plan:
-          basic: Licenza di base
-          premium: Licenza premium
-          pro: Licenza pro
+          basic: Abbonamento di base
+          premium: Abbonamento premium
+          pro: Abbonamento pro
         state:
           active: Attiva
           canceled: Cancellata
           inactive: Inattiva
     events:
-      licence:
+      subscription:
         cancel: Annullare abbonamento
         enable: Riattivare abbonamento
     models:
-      licence:
-        gender: female
-        one: Licenza
-        other: Licenze
+      subscription:
+        gender: male
+        one: Abbonamento
+        other: Abbonamento

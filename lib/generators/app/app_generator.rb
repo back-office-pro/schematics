@@ -125,11 +125,11 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'db:migrate', env:
   end
 
-  def load_licence
+  def load_subscription
     return if container?
     return unless generating?
 
-    rails_command 'schematics:licence:load', env:
+    rails_command 'schematics:subscription:load', env:
   end
 
   def seed_database

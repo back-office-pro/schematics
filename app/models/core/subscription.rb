@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class Licence < Schematics::ApplicationRecord
-  GATEWAY = ::Core::Licences::Stripe
+class Subscription < Schematics::ApplicationRecord
+  GATEWAY = ::Core::Subscriptions::Stripe
 
   delegate :entities, :users, :api_keys, :databases, to: :quota, prefix: true
 

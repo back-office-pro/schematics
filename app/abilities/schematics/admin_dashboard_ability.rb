@@ -22,7 +22,7 @@ module Schematics
     def initialize(ability)
       super
       return if ADMIN_MODEL_CLASSES.all? { ability.cannot?(:index, _1) } &&
-                ability.cannot?(:cancel, ::Licence) &&
+                ability.cannot?(:cancel, ::Subscription) &&
                 ability.cannot?(:update, ::Configuration) &&
                 ability.cannot?(:show, ::Chart.api)
 

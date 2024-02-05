@@ -36,7 +36,7 @@ namespace :schematics do
     rescue ActiveRecord::NoDatabaseError
       `bin/rails db:create`
       `bin/rails db:migrate`
-      `bin/rails schematics:licence:load`
+      `bin/rails schematics:subscription:load`
       `bin/rails schematics:db:seed`
       `bin/rails schematics:credentials:backup`
     ensure

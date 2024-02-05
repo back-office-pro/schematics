@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::LoadLicenceJob do
-  let(:licence) { Licence.instance.tap(&:save!) }
+RSpec.describe Schematics::LoadSubscriptionJob do
+  let(:subscription) { Subscription.instance.tap(&:save!) }
 
   describe '#perform_later' do
     it 'queues the job' do
@@ -16,8 +16,8 @@ RSpec.describe Schematics::LoadLicenceJob do
   describe '#perform_now' do
     include_context 'with stripe stubs'
 
-    it 'loads licence from gateway' do
-      expect { described_class.perform_now }.to(change { licence.reload.metadata })
+    it 'loads subscription from gateway' do
+      expect { described_class.perform_now }.to(change { subscription.reload.metadata })
     end
   end
 end

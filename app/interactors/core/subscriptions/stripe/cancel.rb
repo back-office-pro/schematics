@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Core
-  module Licences
+  module Subscriptions
     module Stripe
-      class Enable
+      class Cancel
         include Interactor::Organizer
 
-        before { context.params = { cancel_at_period_end: false } }
+        before { context.params = { cancel_at_period_end: true } }
 
         organize Fetch, Update
       end

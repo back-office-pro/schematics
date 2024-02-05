@@ -3,17 +3,15 @@
 module Schematics
   module Admin
     module Widgets
-      module Licence
+      module Subscription
         class Component < ApplicationComponent
-          delegate :icon, to: '::Licence.entity'
+          delegate :icon, to: '::Subscription.entity'
           delegate :state_inactive?, to: :resource
 
-          memoize def resource = ::Licence.instance
-
-          def target = 'confirm-dialog-cancel-licence'
+          memoize def resource = ::Subscription.instance
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, ::Subscription)
           end
         end
       end

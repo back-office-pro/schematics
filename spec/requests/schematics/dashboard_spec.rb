@@ -13,7 +13,7 @@ RSpec.describe 'Dashboard' do
     let(:do_request) { get(admin_path, headers:) }
 
     before do
-      Licence.instance.save!
+      Subscription.instance.save!
       do_request
     end
 

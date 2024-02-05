@@ -9,12 +9,12 @@ module Schematics
           delegate :api_keys_size,
                    :quota_api_keys,
                    :quota_api_keys_percentage,
-                   to: '::Licence.instance'
+                   to: '::Subscription.instance'
 
           def title = t('.title')
 
           def render?
-            can?(:cancel, ::Licence)
+            can?(:cancel, ::Subscription)
           end
         end
       end

@@ -24,7 +24,7 @@ module Schematics
       merge AdminDashboardAbility.new(self)
       merge FeatureFlagAbility.new
       merge DemoAbility.new
-      merge LicenceAbility.new(user)
+      merge SubscriptionAbility.new(user)
       merge SessionAbility.new(user)
       merge UserGroupAbility.new(user)
     end

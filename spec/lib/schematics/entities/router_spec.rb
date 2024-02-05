@@ -172,18 +172,18 @@ describe Schematics::Entities::Router do
   end
 
   context 'when entity is a singleton and has a one-level namespace' do
-    let(:entity) { Schematics::Entities::Singleton.new(name: 'main/licence') }
+    let(:entity) { Schematics::Entities::Singleton.new(name: 'main/subscription') }
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
         namespace :main do
-          resource :licence, only: [:show, :update, :edit], model_name: 'Main::Licence' do
+          resource :subscription, only: [:show, :update, :edit], model_name: 'Main::Subscription' do
           resources :comments, only: %i[new create edit update], shallow: true
           resources :forwardings, controller: 'schematics/forwardings', only: :create
         end
         end
-        resolve 'Main::Licence' do |resource, options|
-          [:licence, options]
+        resolve 'Main::Subscription' do |resource, options|
+          [:subscription, options]
         end
       RUBY
     end

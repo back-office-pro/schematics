@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 namespace :schematics do
-  namespace :licence do
-    desc 'Load licence from gateway'
+  namespace :subscription do
+    desc 'Load subscription from gateway'
     task load: :environment do
-      Licence.instance.load!
+      Subscription.instance.load!
     end
   end
 end
