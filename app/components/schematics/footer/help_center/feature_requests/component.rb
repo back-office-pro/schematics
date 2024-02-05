@@ -13,7 +13,7 @@ module Schematics
             .build(host:, path:)
             .to_s
 
-          def target = :blank
+          def target = '_blank'
 
           def icon_css_classes = %w[fa-fw me-3]
 

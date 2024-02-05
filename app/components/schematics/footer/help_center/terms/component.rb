@@ -13,6 +13,8 @@ module Schematics
 
           def path = '/terms-and-conditions'
 
+          def target = '_blank'
+
           def icon_css_classes = %w[fa-fw me-3]
 
           def wrapper_css_classes = %w[dropdown-item]
