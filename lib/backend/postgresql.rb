@@ -11,11 +11,11 @@ module Backend
 
     def cache_store = :solid_cache_store
 
-    def cache_store_options = {}
+    def cache_store_options = { active_record_instrumentation: false }
 
     def profiler_store = Rack::MiniProfiler::MemoryStore
 
-    alias profiler_store_options cache_store_options
+    def profiler_store_options = nil
 
     def queue_adapter = :good_job
   end
