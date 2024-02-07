@@ -24,7 +24,7 @@ module Schematics
             entity
               .renderable_elements_without_has_many_associations
               .stable_sort_by(&:weight)
-              .to_h(&:open_api_schema)
+              .to_h { [_1.name, _1.open_api_type] }
           ]
           response 401, 'Not Authorized', :json
         end
