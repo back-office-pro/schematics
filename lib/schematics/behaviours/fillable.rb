@@ -18,6 +18,8 @@ module Schematics
 
       def input_name = "#{entity.table_name}[#{column_name}]"
 
+      def open_api_body = [name, open_api_type]
+
       def to_str
         return super unless options.default
 
