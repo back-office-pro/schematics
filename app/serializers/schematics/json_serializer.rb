@@ -77,11 +77,11 @@ module Schematics
             .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)
-            .as_json(association: !expand?)
+            .as_json(association: !expand?, underscore:)
         when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
           @resource
             .public_send(element.name.to_sym)
-            .as_json(association: !expand?)
+            .as_json(association: !expand?, underscore:)
         when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
         when Virtuals::Virtual
