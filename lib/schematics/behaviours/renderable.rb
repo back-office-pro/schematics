@@ -15,6 +15,8 @@ module Schematics
       end
 
       def method_name = [entity.class_name, name].join('#')
+
+      def open_api_schema = [name, open_api_type]
     end
   end
 end
