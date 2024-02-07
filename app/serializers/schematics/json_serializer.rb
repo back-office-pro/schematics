@@ -44,8 +44,6 @@ module Schematics
 
     def expand? = @options[:expand]
 
-    def underscore? = @options[:underscore]
-
     def show?
       @options[:template] == 'show'
     end
@@ -64,7 +62,7 @@ module Schematics
 
     def element_to_array(element) # rubocop:disable Metrics/CyclomaticComplexity
       [
-        element.name.then_tap { _1.camelize(:lower) unless underscore? },
+        element.name,
         case element
         when Attributes::Attachments
           element.format @resource
@@ -78,11 +76,11 @@ module Schematics
             .then_tap { _1.accessible_by(@options[:ability]) if @options.key?(:ability) }
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .order(created_at: :desc)
-            .as_json(association: !expand?, underscore:)
+            .as_json(association: !expand?)
         when Attributes::Association, Associations::HasOne, Associations::HasOneThrough
           @resource
             .public_send(element.name.to_sym)
-            .as_json(association: !expand?, underscore:)
+            .as_json(association: !expand?)
         when Attributes::Attachment, Attributes::RichText
           element.format @resource.public_send(element.name.to_sym)
         when Virtuals::Virtual
