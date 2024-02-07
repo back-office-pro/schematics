@@ -50,11 +50,11 @@ module Schematics
     def serialized_json(*)
       {
         id:,
-        createdAt: created_at,
+        created_at:,
         event:,
         item: item.as_json(association: false),
         user: user.as_json(association: true),
-        objectChanges: object_changes
+        object_changes:
       }
     end
 

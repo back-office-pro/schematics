@@ -23,7 +23,7 @@ RSpec.describe Schematics::Version do
   its(:icon) { is_expected.to eq(:pen_to_square) }
 
   its(:serialized_json) do
-    is_expected.to include(:event, :id, :createdAt, :item, :user, :objectChanges)
+    is_expected.to include(:event, :id, :created_at, :item, :user, :object_changes)
   end
 
   it 'enqueues a webhook job after create' do
