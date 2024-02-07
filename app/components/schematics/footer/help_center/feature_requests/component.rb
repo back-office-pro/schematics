@@ -15,6 +15,8 @@ module Schematics
 
           def target = '_blank'
 
+          def rel = 'noreferrer'
+
           def icon_css_classes = %w[fa-fw me-3]
 
           def wrapper_css_classes = %w[dropdown-item]

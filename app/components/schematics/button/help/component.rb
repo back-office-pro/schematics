@@ -46,7 +46,13 @@ module Schematics
 
         def title = t('.text')
 
-        def target = '_blank'
+        def target
+          '_blank' if external_doc?
+        end
+
+        def rel
+          'noreferrer' if external_doc?
+        end
 
         def url
           return '#' unless external_doc?
