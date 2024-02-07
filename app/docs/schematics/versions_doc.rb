@@ -7,14 +7,15 @@ module Schematics
     api :index, 'History' do
       query :page, ::Integer, desc: 'Page number'
       query :items, ::Integer, desc: 'Items per page'
+
       response 200, 'Success', :json, data: [
         {
           id: ::String,
-          createdAt: ::DateTime,
+          created_at: ::DateTime,
           event: ::String,
           user: {},
           item: {},
-          objectChanges: {}
+          object_changes: {}
         }
       ]
       response 401, 'Not Authorized', :json
@@ -22,14 +23,15 @@ module Schematics
 
     api :show, 'Show diff' do
       path :id, ::String
+
       response 200, 'Success', :json, data: [
         {
           id: ::String,
-          createdAt: ::DateTime,
+          created_at: ::DateTime,
           event: ::String,
           user: {},
           item: {},
-          objectChanges: {}
+          object_changes: {}
         }
       ]
       response 401, 'Not Authorized', :json
@@ -38,6 +40,7 @@ module Schematics
 
     api :revert, 'Revert version' do
       path :id, ::String
+
       response 204, 'Success', :json
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json

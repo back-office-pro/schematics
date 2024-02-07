@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SudosDoc < ApplicationDoc
-    route_base SudosController.controller_path
+  class ForwardingsDoc < ApplicationDoc
+    route_base ForwardingsController.controller_path
 
-    api :create, 'Create a sudo request' do
-      data 'user[password]', ::String, required: true
+    api :create, 'Forward a resource by e-mail' do
+      data 'forwarding[recipient_ids][]', [::String], required: true
 
       body :json, data: {
-        user: {
-          password: ::String
+        forwarding: {
+          recipient_ids: [::String]
         }
       }
 

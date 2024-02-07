@@ -5,9 +5,8 @@ module OpenApi
     module Router
       SEMAPHORE = Mutex.new.freeze
 
-      delegate :routes, to: 'Schematics::Engine.routes', prefix: :schematics, private: true
-      delegate :routes, to: 'Rails.application.routes', prefix: :rails, private: true
-      delegate :reload_routes!, to: 'Rails.application', private: true
+      delegate :reload_routes!, to: '::Rails.application', private: true
+      delegate :available_locales, :default_locale, to: ::I18n, private: true
 
       def routes
         SEMAPHORE.synchronize do
@@ -29,6 +28,24 @@ module OpenApi
       private
 
       def formatter = ActionDispatch::Routing::ConsoleFormatter::Sheet.new
+
+      def rails_routes = ::Rails
+        .application
+        .routes
+        .routes
+        .reject(&method(:localized?))
+
+      def schematics_routes = ::Schematics::Engine
+        .routes
+        .routes
+        .reject(&method(:localized?))
+
+      def localized?(route)
+        available_locales
+          .excluding(default_locale)
+          .map(&:to_s)
+          .include?(route.scope_options[:locale])
+      end
     end
   end
 end

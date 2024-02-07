@@ -13,13 +13,29 @@ module Schematics
       data 'user[otp_token]', ::String, required: true
       data 'user[otp_attempt]', ::String, required: true
       data 'user[remember_me]', 'boolean'
-      response 201, 'Success', :json
+
+      body :json, data: {
+        user: {
+          otp_token: ::String,
+          otp_attempt: ::String,
+          remember_me: 'boolean'
+        }
+      }
+
+      response 200, 'Success', :json, data: { auth_token: ::String }
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
     end
 
     api :update, 'Update current user 2FA setup' do
       data 'user[otp_attempt]', ::String, required: true
+
+      body :json, data: {
+        user: {
+          otp_attempt: ::String
+        }
+      }
+
       response 204, 'Success', :json
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json

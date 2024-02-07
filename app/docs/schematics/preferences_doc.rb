@@ -7,6 +7,16 @@ module Schematics
     api :update, 'Update current user preferences' do
       data 'user[preferences][theme]', ::String
       data 'user[preferences][sidebar_toggled]', 'boolean'
+
+      body :json, data: {
+        user: {
+          preferences: {
+            theme: ::String,
+            sidebar_toggled: 'boolean'
+          }
+        }
+      }
+
       response 204, 'Success', :json
       response 401, 'Not Authorized', :json
     end
