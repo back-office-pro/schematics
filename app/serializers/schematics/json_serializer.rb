@@ -7,6 +7,7 @@ module Schematics
     delegate :entity, to: :model_class, private: true
     delegate :descriptor,
              :icon,
+             :renderable_elements,
              :renderable_elements_without_has_many_associations,
              :find_field_by_name,
              to: :entity,
