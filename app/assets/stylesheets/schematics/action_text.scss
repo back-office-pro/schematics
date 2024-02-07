@@ -26,6 +26,20 @@ trix-toolbar {
   .trix-button-group {
     border: 0;
   }
+
+  .trix-dialog {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    font-size: inherit;
+    left: inherit;
+    padding: 0;
+
+    .trix-input {
+      background: transparent;
+      border: 0;
+    }
+  }
 }
 
 trix-editor.form-control {
