@@ -5,10 +5,19 @@ module Core
     route_base SessionsController.controller_path
 
     api :create, 'Create a session' do
-      data 'session[email]', String, required: true
-      data 'session[password]', String, required: true
+      data 'session[email]', ::String, required: true
+      data 'session[password]', ::String, required: true
       data 'session[remember_me]', 'boolean'
-      response 200, 'Success', :json
+
+      body :json, data: {
+        session: {
+          email: ::String,
+          password: ::String,
+          remember_me: 'boolean'
+        }
+      }
+
+      response 200, 'Success', :json, data: { auth_token: ::String }
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
     end

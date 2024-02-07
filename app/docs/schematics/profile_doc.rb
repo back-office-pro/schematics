@@ -13,6 +13,20 @@ module Schematics
       data 'user[last_name]', ::String
       data 'user[avatar]', ::String
       data 'user[locale]', ::String
+
+      body :json, data: {
+        user: {
+          email: ::String,
+          password: ::String,
+          password_confirmation: ::String,
+          password_challenge: ::String,
+          first_name: ::String,
+          last_name: ::String,
+          avatar: ::String,
+          locale: ::String
+        }
+      }
+
       response 204, 'Success', :json
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json

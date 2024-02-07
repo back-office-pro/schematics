@@ -6,6 +6,13 @@ module Schematics
 
     api :create, 'Create a sudo request' do
       data 'user[password]', ::String, required: true
+
+      body :json, data: {
+        user: {
+          password: ::String
+        }
+      }
+
       response 201, 'Success', :json
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
