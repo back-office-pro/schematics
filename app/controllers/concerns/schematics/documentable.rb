@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Documentable # rubocop:disable Metrics/ModuleLength
+  module Documentable
     extend ActiveSupport::Concern
 
     included do
@@ -9,157 +9,19 @@ module Schematics
     end
 
     class_methods do
-      def inherited(subclass) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+      def inherited(subclass) # rubocop:disable Metrics/CyclomaticComplexity
         super
         subclass.class_eval do
           route_base controller_path
+          return unless model_class
 
-          entity = model_class&.entity
-          filter_key = Ransack.options[:search_key]
-
-          return unless entity
-
-          if entity.can?(:index)
-            api :index, "List #{entity.name.pluralize}" do
-              query :page, ::Integer, desc: 'Page number'
-              query :items, ::Integer, desc: 'Items per page'
-              query :sort, ::String, desc: 'Sort fields list separated by comma'
-
-              query "#{filter_key}[with_deleted]", 'boolean', desc: 'Display archives'
-
-              entity.searchable_elements.each do |element|
-                query "#{filter_key}[#{element.name}]",
-                      element.open_api_type,
-                      desc: "Filter by #{element.name}"
-              end
-
-              response 200, 'Success', :json, data: [
-                entity
-                  .renderable_elements
-                  .stable_sort_by(&:weight)
-                  .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
-                  .to_h { [_1.name, _1.open_api_type] }
-              ]
-              response 401, 'Not Authorized', :json
-            end
-
-            api :autocomplete, "Autocomplete #{entity.name.pluralize}" do
-              query :field, ::String, desc: 'Field to autocomplete'
-
-              entity.searchable_elements.each do |element|
-                query "#{filter_key}[#{element.name}]",
-                      element.open_api_type,
-                      desc: "Filter by #{element.name}"
-              end
-
-              response 200, 'Success', :json
-              response 400, 'Bad Request', :json
-              response 401, 'Not Authorized', :json
-            end
-          end
-
-          if entity.can?(:create)
-            api :create, "Create #{entity.name}" do
-              entity.fillable_elements.each do |element|
-                data element.input_name,
-                     element.open_api_type,
-                     default: element.options.default,
-                     required: element.required?
-              end
-
-              body :json, data: entity
-                .fillable_elements
-                .to_h { [_1.name, _1.open_api_type] }
-
-              response 201, 'Success', :json
-              response 400, 'Bad Request', :json
-              response 401, 'Not Authorized', :json
-              response 422, 'Unprocessable entity', :json
-            end
-
-            api :duplicate, "Duplicate #{entity.name}" do
-              path :id, ::String
-
-              response 201, 'Success', :json
-              response 400, 'Bad Request', :json
-              response 401, 'Not Authorized', :json
-              response 422, 'Unprocessable entity', :json
-            end
-          end
-
-          if entity.can?(:update)
-            api :update, "Update #{entity.name}" do
-              path :id, ::String unless entity.is_a?(Entities::Singleton)
-
-              entity.fillable_elements.each do |element|
-                data element.input_name,
-                     element.open_api_type,
-                     default: element.options.default,
-                     required: element.required?
-              end
-
-              body :json, data: entity
-                .fillable_elements
-                .to_h { [_1.name, _1.open_api_type] }
-
-              response 204, 'Success', :json
-              response 400, 'Bad Request', :json
-              response 401, 'Not Authorized', :json
-              response 404, 'Not Found', :json
-              response 422, 'Unprocessable entity', :json
-            end
-          end
-
-          if entity.can?(:show)
-            api :show, "Show #{entity.name}" do
-              path :id, ::String unless entity.is_a?(Entities::Singleton)
-
-              response 200, 'Success', :json, data: entity
-                .renderable_elements
-                .stable_sort_by(&:weight)
-                .to_h { [_1.name, _1.open_api_type] }
-              response 401, 'Not Authorized', :json
-              response 404, 'Not Found', :json
-            end
-          end
-
-          if entity.can?(:destroy)
-            api :destroy, "Destroy #{entity.name}" do
-              path :id, ::String
-
-              response 204, 'Success', :json
-              response 401, 'Not Authorized', :json
-              response 404, 'Not Found', :json
-            end
-          end
-
-          if entity.can?(:archive)
-            api :archive, "Archive #{entity.name}" do
-              path :id, ::String
-
-              response 204, 'Success', :json
-              response 401, 'Not Authorized', :json
-              response 404, 'Not Found', :json
-            end
-
-            api :restore, "Restore #{entity.name}" do
-              path :id, ::String
-
-              response 204, 'Success', :json
-              response 401, 'Not Authorized', :json
-              response 404, 'Not Found', :json
-            end
-          end
-
-          entity.events.each do
-            api :trigger do
-              path :id, ::String unless entity.is_a?(Entities::Singleton)
-
-              response 204, 'Success', :json
-              response 401, 'Not Authorized', :json
-              response 404, 'Not Found', :json
-            end
-          end
+          include Indexable, Autocompletable if model_class.entity.can?(:index)
+          include Creatable, Duplicable if model_class.entity.can?(:create)
+          include Archivable, Restorable if model_class.entity.can?(:archive)
+          include Showable if model_class.entity.can?(:show)
+          include Updatable if model_class.entity.can?(:update)
+          include Destroyable if model_class.entity.can?(:destroy)
+          include Triggerable
         end
       end
     end
