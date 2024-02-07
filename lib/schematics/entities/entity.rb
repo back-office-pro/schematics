@@ -109,6 +109,10 @@ module Schematics
 
       def renderable_with_created_ats_fields = renderable_fields + created_at_attributes
 
+      def renderable_elements_without_has_many_associations
+        renderable_elements.excluding(has_many_and_through_and_belongs_to_many_associations)
+      end
+
       def respond_to_missing?(method_name, *)
         receptor_respond_to_missing?(method_name) || super
       end
@@ -153,10 +157,6 @@ module Schematics
 
       def validators
         validatable_elements.filter_map(&:validators)
-      end
-
-      def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
-        has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
       end
 
       def class_name
@@ -266,6 +266,10 @@ module Schematics
       protected
 
       def receptor = Receptor.new(self)
+
+      def has_many_and_through_and_belongs_to_many_associations # rubocop:disable Naming/PredicateName
+        has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
+      end
 
       def search_data_elements = searchable_elements
         .map(&:search_data)

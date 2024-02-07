@@ -9,8 +9,7 @@ module Schematics
       option :editable, default: -> { false }
 
       def elements = entity
-        .renderable_elements
-        .excluding(entity.has_many_and_through_and_belongs_to_many_associations)
+        .renderable_elements_without_has_many_associations
         .grep_v(Attributes::RichText)
         .grep_v(Attributes::Attachments)
         .grep_v(Attributes::Uuid)

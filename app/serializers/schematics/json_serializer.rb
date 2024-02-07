@@ -7,8 +7,7 @@ module Schematics
     delegate :entity, to: :model_class, private: true
     delegate :descriptor,
              :icon,
-             :renderable_elements,
-             :has_many_and_through_and_belongs_to_many_associations,
+             :renderable_elements_without_has_many_associations,
              :find_field_by_name,
              to: :entity,
              private: true
@@ -54,7 +53,7 @@ module Schematics
       return association_elements if association?
       return renderable_elements if show? && !metadata?
 
-      renderable_elements.excluding(has_many_and_through_and_belongs_to_many_associations)
+      renderable_elements_without_has_many_associations
     end
 
     def association_elements = [
