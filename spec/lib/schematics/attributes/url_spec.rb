@@ -44,7 +44,8 @@ describe Schematics::Attributes::Url do
       Schematics::Options::Unique,
       Schematics::Options::Min,
       Schematics::Options::Limit,
-      Schematics::Options::Length
+      Schematics::Options::Length,
+      Schematics::Options::Scheme
     )
   end
 
@@ -81,6 +82,19 @@ describe Schematics::Attributes::Url do
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
         validates :url, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :url=>{:allow_blank=>true}}
+      RUBY
+    end
+  end
+
+  context 'when url has schemes' do
+    let(:options) { { schemes: ['https'] } }
+
+    its(:default) { is_expected.to start_with('https') }
+    its(:validators) { is_expected.to eq(url: { allow_blank: true, schemes: ['https'] }) }
+
+    its('validators.to_str') do
+      is_expected.to eq <<~RUBY
+        validates :url, {:url=>{:allow_blank=>true, :schemes=>["https"]}}
       RUBY
     end
   end

@@ -55,6 +55,7 @@ en:
         readonly: Readonly
         required: Required
         scale: Scale
+        scheme: Protocol
         separator: Separator
         size: Size
         start_date: Start date

@@ -5,8 +5,12 @@ module Schematics
     class Url < Citext
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
+      delegate :schemes, to: :options
 
-      def default = ::URI::HTTPS
+      def available_options = super.push(Options::Scheme)
+
+      def default = ::URI
+        .const_get(schemes&.first&.upcase || :HTTPS)
         .build(host: "www.#{SecureRandom.base58}.com")
         .to_s
 
@@ -15,7 +19,7 @@ module Schematics
       def normalization = :downcase
 
       def validators = super.merge(
-        url: { allow_blank: }
+        url: { allow_blank:, schemes: }
       )
     end
   end
