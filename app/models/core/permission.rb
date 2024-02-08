@@ -18,6 +18,10 @@ class Permission < Schematics::ApplicationRecord
     end
   end
 
+  def model_class
+    model.safe_constantize
+  end
+
   def webhook_event
     "#{model.underscore}.#{action}" if %w[index show].exclude?(action)
   end
@@ -26,5 +30,5 @@ class Permission < Schematics::ApplicationRecord
     .application
     .routes
     .url_helpers
-    .polymorphic_url(model.safe_constantize)
+    .polymorphic_url(model_class)
 end
