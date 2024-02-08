@@ -92,6 +92,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mobility-ransack', '1.2.2'
   spec.add_dependency 'octokit', '8.1.0'
   spec.add_dependency 'oj', '3.16.3'
+  spec.add_dependency 'olive_branch', '4.0.1'
   spec.add_dependency 'omniauth', '2.1.2'
   spec.add_dependency 'omniauth-google-oauth2', '1.1.1'
   spec.add_dependency 'omniauth-rails_csrf_protection', '1.0.1'

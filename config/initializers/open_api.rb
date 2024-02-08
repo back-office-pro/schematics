@@ -4,6 +4,7 @@ require 'open_api'
 
 Rails.configuration.after_initialize do
   OpenApi::Config.class_eval do
+    self.default_run_dry = true
     self.doc_location = [
       Schematics::Engine.root.join('app', 'docs', '**', '*_doc.rb'),
       Schematics::Engine.root.join('app', 'controllers', '**', '*.rb')

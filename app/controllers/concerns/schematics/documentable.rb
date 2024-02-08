@@ -15,6 +15,7 @@ module Schematics
           route_base controller_path
           return unless model_class
 
+          include Inflectable
           include Indexable, Autocompletable if model_class.entity.can?(:index)
           include Creatable, Duplicable if model_class.entity.can?(:create)
           include Archivable, Restorable if model_class.entity.can?(:archive)
