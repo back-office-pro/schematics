@@ -21,4 +21,10 @@ class Permission < Schematics::ApplicationRecord
   def webhook_event
     "#{model.underscore}.#{action}" if %w[index show].exclude?(action)
   end
+
+  def webhook_url = Rails
+    .application
+    .routes
+    .url_helpers
+    .polymorphic_url(model.safe_constantize)
 end

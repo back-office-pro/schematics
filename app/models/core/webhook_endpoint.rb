@@ -4,6 +4,8 @@ class WebhookEndpoint < Schematics::ApplicationRecord
   TIMEOUT_OPTIONS = { open_timeout: 5, read_timeout: 5, write_timeout: 5, max_retries: 0 }.freeze
   HEADER_SIGNATURE_KEY = 'X-BackOffice-Signature'
 
+  validates :url, exclusion: { in: :denied_urls }
+
   scope :subscribed, ::Core::WebhookEndpoints::SubscribedQuery
 
   class << self
@@ -35,4 +37,8 @@ class WebhookEndpoint < Schematics::ApplicationRecord
   def use_ssl
     uri.scheme == 'https'
   end
+
+  def denied_urls = events
+    .map(&:webhook_url)
+    .uniq
 end
