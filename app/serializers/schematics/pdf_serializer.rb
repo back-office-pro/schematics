@@ -79,7 +79,7 @@ module Schematics
       format: :A4
     }
 
-    memoize def browser = Ferrum::Browser.new(browser_options:, timeout: 5)
+    memoize def browser = Ferrum::Browser.new(browser_options:, timeout: 5, process_timeout: 10)
 
     def browser_options = { 'no-sandbox': nil, 'disable-setuid-sandbox': nil }
 
