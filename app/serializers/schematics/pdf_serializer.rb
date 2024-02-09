@@ -4,7 +4,7 @@ module Schematics
   class PdfSerializer
     delegate :render, to: :renderer, private: true
     delegate :human_name, to: :model_class, private: true
-    delegate :default_url_options, to: ::Tenant, private: true
+    delegate :default_url_options, :ssl?, to: ::Tenant, private: true
     delegate :key_generator, to: '::Rails.application', private: true
     delegate :cookies_rotations,
              :signed_cookie_salt,
@@ -42,7 +42,8 @@ module Schematics
 
     private
 
-    def assets_url = URI::HTTP
+    def assets_url = URI
+      .const_get(ssl? ? :HTTPS : :HTTP)
       .build(**default_url_options)
       .to_s
 
