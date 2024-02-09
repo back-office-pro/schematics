@@ -7,6 +7,7 @@ module Schematics
     include ::Pagy::Frontend
     include ::Turbo::StreamsHelper
     include ::Turbo::FramesHelper
+    include ::Turbo::DriveHelper
     include ::Importmap::ImportmapTagsHelper
     include ApplicationHelper
     extend ::Dry::Initializer
