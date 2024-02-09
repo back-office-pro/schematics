@@ -44,6 +44,7 @@ module OpenApi
         available_locales
           .excluding(default_locale)
           .map(&:to_s)
+          .push(nil)
           .include?(route.scope_options[:locale])
       end
     end
