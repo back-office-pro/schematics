@@ -57,7 +57,6 @@ Crisp.configure(crispClientId, { autoload: false })
 Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
 
 document.addEventListener('turbo:load', Pagy.init)
-document.addEventListener('turbo:before-render', startViewTransition)
 document.addEventListener('turbo:before-frame-render', startViewTransition)
 document.addEventListener('turbo:frame-missing', redirectOnFrameMissing)
 document.addEventListener('scroll', setNavbarScrolled)
