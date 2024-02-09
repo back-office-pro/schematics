@@ -16,7 +16,7 @@ span.text-body-tertiary = '-' if value.nil?
     = __viewer_swagger(spec: value)
   - else
     pre.mb-0
-      code == code_highlight(JSON.pretty_generate(value), language: 'json')
+      code == code_highlight(JSON.pretty_generate(value), language: 'json') if value
 - when Schematics::Attributes::Url
   = __link_preview(url: value)
 - when Schematics::Attributes::Color
