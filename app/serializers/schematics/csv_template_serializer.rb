@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class CsvTemplateSerializer
+  class CSVTemplateSerializer
     delegate :entity, :human_name_plural, to: :@model_class, private: true
 
     def initialize(model_class)

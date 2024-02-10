@@ -10,7 +10,7 @@ class ImportsController < Schematics::ResourcesController
     super
     respond_with do |format|
       format.csv do
-        Schematics::GenerateCsvTemplateJob.perform_later(current_user, parent_model_class)
+        Schematics::GenerateCSVTemplateJob.perform_later(current_user, parent_model_class)
         head :accepted
       end
     end

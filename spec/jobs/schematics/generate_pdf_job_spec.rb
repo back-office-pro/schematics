@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::GeneratePdfJob do
+RSpec.describe Schematics::GeneratePDFJob do
   include Turbo::Broadcastable::TestHelper
   include_context 'with user'
 

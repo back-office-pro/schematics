@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class GenerateCsvTemplateJob < ApplicationJob
+  class GenerateCSVTemplateJob < ApplicationJob
     queue_as :exports
 
     def perform(user, model_class)
-      serializer = CsvTemplateSerializer.new(model_class)
+      serializer = CSVTemplateSerializer.new(model_class)
       Resources::GenerateFile.call(user:, serializer:, component_method: :csv_template)
     end
   end

@@ -2,11 +2,11 @@
 
 ActiveSupport.on_load(:action_controller) do
   ActionController::Renderers.add(:svg) do |resource, _options|
-    serializer = Schematics::SvgSerializer.new(resource)
+    serializer = Schematics::SVGSerializer.new(resource)
     send_data serializer.content, filename: serializer.filename
   end
   ActionController::Renderers.add(:ics) do |resource, _options|
-    serializer = Schematics::IcsSerializer.new(resource)
+    serializer = Schematics::ICSSerializer.new(resource)
     send_data serializer.content, filename: serializer.filename
   end
 end

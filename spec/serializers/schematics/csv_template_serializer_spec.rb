@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::CsvTemplateSerializer do
+RSpec.describe Schematics::CSVTemplateSerializer do
   subject(:serializer) { described_class.new(model_class) }
 
   let(:model_class) { Permission }

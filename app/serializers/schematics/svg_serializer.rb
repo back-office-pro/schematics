@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class SvgSerializer
+  class SVGSerializer
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :human_name, to: :model_class, private: true
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module PdfFooter
+  module PDFFooter
     class Component < ApplicationComponent
       delegate :theme_color,
                :company_website,

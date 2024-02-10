@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class PdfSerializer
+  class PDFSerializer
     delegate :render, to: :renderer, private: true
     delegate :human_name, to: :model_class, private: true
     delegate :default_url_options, :ssl?, to: ::Tenant, private: true
@@ -67,8 +67,8 @@ module Schematics
     }
 
     def pdf_options = {
-      header_template: PdfHeader::Component.new(resource: @resource).to_html,
-      footer_template: PdfFooter::Component.new.to_html,
+      header_template: PDFHeader::Component.new(resource: @resource).to_html,
+      footer_template: PDFFooter::Component.new.to_html,
       display_header_footer: true,
       margin_top: 0.5,
       margin_bottom: 0.5,

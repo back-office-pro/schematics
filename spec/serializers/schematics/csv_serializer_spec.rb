@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::CsvSerializer do
+RSpec.describe Schematics::CSVSerializer do
   subject(:serializer) { described_class.new(resources, preferences) }
 
   let(:preferences) { {} }

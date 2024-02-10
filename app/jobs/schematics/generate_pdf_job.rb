@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Schematics
-  class GeneratePdfJob < ApplicationJob
+  class GeneratePDFJob < ApplicationJob
     queue_as :exports
 
     def perform(user, resource)
-      serializer = PdfSerializer.new(resource)
+      serializer = PDFSerializer.new(resource)
       Resources::GenerateFile.call(user:, serializer:)
     end
   end

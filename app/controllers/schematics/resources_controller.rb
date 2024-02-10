@@ -57,7 +57,7 @@ module Schematics
       respond_with do |format|
         format.json { render json: @resources.to_a, metadata: params.key?(:metadata) }
         format.csv do
-          GenerateCsvJob.perform_later(
+          GenerateCSVJob.perform_later(
             current_user,
             @resources.to_a,
             params.key?(:all_pages) || @pagy.pages > 1
@@ -74,7 +74,7 @@ module Schematics
 
       respond_with(@resource, ability: current_ability) do |format|
         format.pdf do
-          GeneratePdfJob.perform_later(current_user, @resource)
+          GeneratePDFJob.perform_later(current_user, @resource)
           head :accepted
         end
       end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::GenerateCsvTemplateJob do
+RSpec.describe Schematics::GenerateCSVTemplateJob do
   include Turbo::Broadcastable::TestHelper
   include_context 'with user'
 

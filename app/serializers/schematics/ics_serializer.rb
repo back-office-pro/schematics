@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class IcsSerializer
+  class ICSSerializer
     delegate :class, to: :@resource, prefix: :model, private: true
     delegate :human_name, :entity, to: :model_class, private: true
     delegate :start_date_attribute_name,

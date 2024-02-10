@@ -2,7 +2,7 @@
 
 module Schematics
   class ResourceMailer < ApplicationMailer
-    SERIALIZERS = [PdfSerializer, SvgSerializer, IcsSerializer].freeze
+    SERIALIZERS = [PDFSerializer, SVGSerializer, ICSSerializer].freeze
 
     def forward(sender, recipient, resource)
       @sender = sender

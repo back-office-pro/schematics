@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class CsvSerializer < CsvTemplateSerializer
+  class CSVSerializer < CSVTemplateSerializer
     def initialize(resources, preferences)
       super(resources.first.class)
       @resources = resources

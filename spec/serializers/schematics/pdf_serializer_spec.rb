@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::PdfSerializer do
+RSpec.describe Schematics::PDFSerializer do
   subject(:serializer) { described_class.new(user) }
 
   include_context 'with user'

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::SvgSerializer do
+RSpec.describe Schematics::SVGSerializer do
   subject(:serializer) { described_class.new(user) }
 
   include_context 'with user'

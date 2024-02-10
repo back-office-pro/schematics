@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::IcsSerializer do
+RSpec.describe Schematics::ICSSerializer do
   subject(:serializer) { described_class.new(resource) }
 
   include_context 'with user'
