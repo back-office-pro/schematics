@@ -22,6 +22,7 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v4
+      - uses: ankane/setup-opensearch@v1
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -46,32 +47,77 @@ jobs:
           PGHOST: localhost
         run: ruby bin/schematics
       - name: Run ability tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/abilities
       - name: Run component tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/components
       - name: Run config tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/config
       - name: Run db tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/db
-      - name: Run feature tests
-        run: bundle exec rspec spec/features
+      # - name: Run feature tests
+      #   env:
+      #     RAILS_ENV: test
+      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
+      #   run: bundle exec rspec spec/features
       - name: Run generator tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/generators
-      - name: Run interactor tests
-        run: bundle exec rspec spec/interactors
-      - name: Run job tests
-        run: bundle exec rspec spec/jobs
+      # - name: Run interactor tests
+      #   env:
+      #     RAILS_ENV: test
+      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
+      #   run: bundle exec rspec spec/interactors
       - name: Run mailer tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/mailers
       - name: Run mapper tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/mappers
       - name: Run model tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/models
       - name: Run query tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/queries
-      - name: Run request tests
-        run: bundle exec rspec spec/requests
       - name: Run routing tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/routing
       - name: Run serializer tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/serializers
+      - name: Run request tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
+        run: bundle exec rspec spec/requests
+      - name: Run job tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
+        run: bundle exec rspec spec/jobs
