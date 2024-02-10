@@ -134,9 +134,6 @@ module Schematics
     # Mailer
     config.action_mailer.preview_paths << root.join('spec', 'mailers', 'previews')
     config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }
-    config.after_initialize do
-      config.action_mailer.deliver_later_queue_name = :mailers
-    end
 
     # Assets
     config.assets.version = VERSION
