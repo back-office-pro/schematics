@@ -1,6 +1,6 @@
 = turbo_frame_tag 'viewer', data: { turbo_action: 'advance' } do
   .card.shadow-sm.w-100
-    .card-header.px-2.py-1
+    .card-header.px-2.py-1 data-turbo-permanent='true'
       .row.align-items-center
         .col.text-truncate
           = __card_heading(icon: :table, title:)

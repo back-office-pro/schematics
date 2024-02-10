@@ -1,8 +1,12 @@
 head
   meta charset='utf-8'
-  meta name='turbo-cache-control' content='no-preview'
   meta name='viewport' content='width=device-width,initial-scale=1'
   meta name='theme-color' content=theme_color
+  meta name='view-transition' content='same-origin'
+  meta name='turbo-prefetch' content='true'
+  = turbo_refreshes_with method: :morph, scroll: :preserve
+  = turbo_exempts_page_from_preview_tag
+  = content_for :head
   title #{company_name} - #{title}
   = csrf_meta_tags
   = csp_meta_tag
