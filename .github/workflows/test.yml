@@ -1,0 +1,77 @@
+name: Test
+on: [workflow_dispatch]
+env:
+  SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
+jobs:
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.3.0
+      - name: Install postgres and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -yqq install libpq-dev libvips-dev graphviz
+      - name: Install app generator gems
+        run: |
+          gem install rails
+          gem install pg
+      - name: Git configuration
+        run: |
+          git config --global user.name "back-office"
+          git config --global user.email "support@back-office.pro"
+      - name: Generate test application
+        env:
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGDATABASE: test
+          PGHOST: localhost
+        run: ruby bin/schematics
+      - name: Run ability tests
+        run: bundle exec rspec spec/abilities
+      - name: Run component tests
+        run: bundle exec rspec spec/components
+      - name: Run config tests
+        run: bundle exec rspec spec/config
+      - name: Run db tests
+        run: bundle exec rspec spec/db
+      - name: Run feature tests
+        run: bundle exec rspec spec/features
+      - name: Run generator tests
+        run: bundle exec rspec spec/generators
+      - name: Run interactor tests
+        run: bundle exec rspec spec/interactors
+      - name: Run job tests
+        run: bundle exec rspec spec/jobs
+      - name: Run mailer tests
+        run: bundle exec rspec spec/mailers
+      - name: Run mapper tests
+        run: bundle exec rspec spec/mappers
+      - name: Run model tests
+        run: bundle exec rspec spec/models
+      - name: Run query tests
+        run: bundle exec rspec spec/queries
+      - name: Run request tests
+        run: bundle exec rspec spec/requests
+      - name: Run routing tests
+        run: bundle exec rspec spec/routing
+      - name: Run serializer tests
+        run: bundle exec rspec spec/serializers

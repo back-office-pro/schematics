@@ -20,9 +20,11 @@ OptionParser
     end
   end.parse!
 
-$stdout.reopen("#{log_name}.log", 'w')
-$stdout.sync = true
-$stderr.reopen($stdout)
+if ENV['CI'].blank?
+  $stdout.reopen("#{log_name}.log", 'w')
+  $stdout.sync = true
+  $stderr.reopen($stdout)
+end
 
 AppGenerator
   .new([app_name], **options)
