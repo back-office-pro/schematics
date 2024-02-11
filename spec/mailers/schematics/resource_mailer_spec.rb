@@ -8,9 +8,17 @@ RSpec.describe Schematics::ResourceMailer do
   describe '#forward' do
     subject(:mail) { described_class.forward(user, user, resource) }
 
-    let(:meeting) { Meeting.new(start_at: Time.current, end_at: Time.current, subject: 'Work') }
     let(:expected_subject) { I18n.t('schematics.resource_mailer.forward.subject') }
     let(:expected_body) { I18n.t('schematics.resource_mailer.forward.body.second', sender: user) }
+    let(:meeting) do
+      Meeting.create!(
+        subject: 'My meeting',
+        creator: user,
+        start_at: Time.current,
+        end_at: 1.hour.from_now,
+        participants: [user]
+      )
+    end
 
     context 'when resource is not calenderable' do
       let(:resource) { user }
