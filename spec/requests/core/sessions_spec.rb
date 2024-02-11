@@ -64,6 +64,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
         do_request
       end
 
+      after { Rails.application.env_config['omniauth.auth'] = nil }
+
       it { is_expected.to have_http_status(:success) }
       it { expect(cookies[:auth_token]).to be_nil }
       its(:parsed_body) { is_expected.to eq('auth_token' => auth_token) }
@@ -78,6 +80,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
         Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new(info: { email: })
         do_request
       end
+
+      after { Rails.application.env_config['omniauth.auth'] = nil }
 
       it { is_expected.to have_http_status(:unauthorized) }
       it { expect(cookies[:auth_token]).to be_nil }
