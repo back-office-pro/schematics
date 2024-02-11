@@ -3,7 +3,6 @@
 module Schematics
   class ApplicationMailer < ::ApplicationMailer
     self.deliver_later_queue_name = :mailers
-
     layout 'schematics/mailer'
     helper ApplicationHelper
 
