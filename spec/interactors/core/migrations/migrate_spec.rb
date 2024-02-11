@@ -32,6 +32,7 @@ RSpec.describe Core::Migrations::Migrate do
     end
   end
   let(:rollback_commit) { Git.init(root).reset_hard("HEAD~#{commits_steps}") }
+  let(:rollback_transaction) { [Permission, Translation].each(&:delete_all) }
   let(:rollback_migration) do
     Dir.chdir(root) do
       ActiveRecord::Base.connection.migration_context.rollback(migrations_steps)
@@ -48,7 +49,7 @@ RSpec.describe Core::Migrations::Migrate do
     allow(migration).to receive_messages(valid?: true, previously_migrated_schema: schema)
   end
 
-  after { [rollback_migration, rollback_commit, rollback_reload] }
+  after { [rollback_migration, rollback_commit, rollback_reload, rollback_transaction] }
 
   describe '.call' do
     subject(:migrate) { Dir.chdir(root) { described_class.call(migration:) } }
