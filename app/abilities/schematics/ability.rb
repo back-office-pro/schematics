@@ -13,7 +13,7 @@ module Schematics
       merge MessageAbility.new(user)
       merge DraftAbility.new(user)
       merge ConfigurationAbility.new(user)
-      merge ApiRequestAbility.new(user)
+      merge APIRequestAbility.new(user)
       merge WebhookRequestAbility.new(user)
       merge ChartAbility.new(user)
       merge MigrationAbility.new

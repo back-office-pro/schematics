@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # :reek:MissingSafeMethod
-class ApiKey < Schematics::ApplicationRecord
+class APIKey < Schematics::ApplicationRecord
   def login!(*) = self
 
   def touch!(request, response)
     PaperTrail.request(enabled: false) do
-      ApiRequest.create!(
+      APIRequest.create!(
         api_key: self,
         ip: request.ip,
         request_method: request.method,

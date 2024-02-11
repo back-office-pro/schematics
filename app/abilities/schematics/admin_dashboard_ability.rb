@@ -3,8 +3,8 @@
 module Schematics
   class AdminDashboardAbility < ApplicationAbility
     ADMIN_MODEL_CLASSES = [
-      ::ApiKey,
-      ::ApiRequest,
+      ::APIKey,
+      ::APIRequest,
       ::Permission,
       ::Migration,
       ::Session,

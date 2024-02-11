@@ -9,7 +9,7 @@ import { Crisp } from 'crisp-sdk-web'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global matchMedia, environment, crispClientId, mapsApiKey, rollbarClientKey, Chartkick */
+/* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick */
 
 const setTheme = () => {
   document
@@ -54,7 +54,7 @@ application.handleError = (error, message, detail = {}) => {
 }
 
 Crisp.configure(crispClientId, { autoload: false })
-Chartkick.configure({ language: document.documentElement.lang, mapsApiKey })
+Chartkick.configure({ language: document.documentElement.lang, mapsAPIKey })
 
 document.addEventListener('turbo:load', Pagy.init)
 document.addEventListener('turbo:before-frame-render', startViewTransition)

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiKey do
+RSpec.describe APIKey do
   include Schematics::Specs::Model
 
   its(:login!) { is_expected.to eq(record) }
@@ -19,7 +19,7 @@ RSpec.describe ApiKey do
       request.session[:response_time] = 0.1
     end
 
-    it { is_expected.to be_a(ApiRequest) }
+    it { is_expected.to be_a(APIRequest) }
     its(:api_key) { is_expected.to eq(record) }
     its(:ip) { is_expected.to eq('0.0.0.0') }
     its(:request_method) { is_expected.to eq('GET') }

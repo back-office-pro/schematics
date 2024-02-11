@@ -34,10 +34,10 @@
       class: Schematics::CleanSessionsJob
     schematics/clean_api_requests_job:
       cron: 0 1 * * *
-      class: Schematics::CleanApiRequestsJob
+      class: Schematics::CleanAPIRequestsJob
     schematics/clean_api_keys_job:
       cron: 0 1 * * *
-      class: Schematics::CleanApiKeysJob
+      class: Schematics::CleanAPIKeysJob
     schematics/clean_meetings_job:
       cron: 0 1 * * *
       class: Schematics::CleanMeetingsJob

@@ -74,7 +74,7 @@ class Subscription < Schematics::ApplicationRecord
 
   memoize def users_size = User.count
 
-  memoize def api_keys_size = ApiKey.count
+  memoize def api_keys_size = APIKey.count
 
   private
 

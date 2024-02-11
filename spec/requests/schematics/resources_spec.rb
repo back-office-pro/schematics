@@ -8,14 +8,14 @@ RSpec.describe 'Resources' do
 
   let(:role) { admin_role }
   let(:first_api_key) do
-    ApiKey.create!(
+    APIKey.create!(
       name: 'First key',
       expires_at: Time.current.yesterday,
       permissions:
     )
   end
   let(:second_api_key) do
-    ApiKey.create!(
+    APIKey.create!(
       name: 'Second key',
       expires_at: Time.current.tomorrow,
       permissions:
@@ -31,12 +31,12 @@ RSpec.describe 'Resources' do
 
       before do
         allow(Tenant).to receive(:search_engine).and_return(search_engine)
-        ApiKey.include(search_engine.concern)
-        ApiKey.try(:reindex)
+        APIKey.include(search_engine.concern)
+        APIKey.try(:reindex)
         do_request
       end
 
-      after { ApiKey.reload_definitions! }
+      after { APIKey.reload_definitions! }
 
       context "when searching first api key with #{search_engine_name}" do
         let(:params) { { filter: { name: 'first' } } }

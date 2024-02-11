@@ -39,8 +39,8 @@ RSpec.describe Schematics::SubscriptionAbility do
         .and_return(true)
     end
 
-    it { is_expected.not_to be_able_to(:create, ApiKey) }
-    it { is_expected.not_to be_able_to(:restore, ApiKey) }
+    it { is_expected.not_to be_able_to(:create, APIKey) }
+    it { is_expected.not_to be_able_to(:restore, APIKey) }
   end
 
   context 'when subscription is inactive' do

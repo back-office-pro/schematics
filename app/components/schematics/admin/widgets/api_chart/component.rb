@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module ApiChart
+      module APIChart
         class Component < ApplicationComponent
           def icon = :signal
 

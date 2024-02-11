@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::CleanApiRequestsJob do
+RSpec.describe Schematics::CleanAPIRequestsJob do
   let(:created_at) { described_class::DELAY.ago }
   let(:permissions) { [Permission.create!(action: 'index', model: 'User')] }
-  let(:api_key) { ApiKey.create!(name: 'API key', permissions:) }
+  let(:api_key) { APIKey.create!(name: 'API key', permissions:) }
   let(:api_requests) do
     [
-      ApiRequest.create!(api_key:, created_at:),
-      ApiRequest.create!(api_key:, created_at:)
+      APIRequest.create!(api_key:, created_at:),
+      APIRequest.create!(api_key:, created_at:)
     ]
   end
 
@@ -26,7 +26,7 @@ RSpec.describe Schematics::CleanApiRequestsJob do
 
     it 'destroys API requests' do
       expect { described_class.perform_now }
-        .to change(ApiRequest.with_deleted, :count)
+        .to change(APIRequest.with_deleted, :count)
         .by(-2)
     end
   end

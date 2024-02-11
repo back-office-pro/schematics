@@ -11,7 +11,7 @@ module Schematics
           ::Chart,
           ::Configuration,
           ::Role,
-          ::ApiKey,
+          ::APIKey,
           ::UserGroup,
           ::WebhookEndpoint,
           ::Template

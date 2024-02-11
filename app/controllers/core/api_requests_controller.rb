@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class ApiRequestsController < Schematics::ResourcesController
+class APIRequestsController < Schematics::ResourcesController
 end

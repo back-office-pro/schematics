@@ -35,7 +35,7 @@ module Schematics
 
     def current_session
       ::Session.authorized_by(auth_token, session[:current_session_id]).first ||
-        ::ApiKey.with_permissions.active.find_by(auth_token: api_key) ||
+        ::APIKey.with_permissions.active.find_by(auth_token: api_key) ||
         Guest::Session.new(request:)
     end
 

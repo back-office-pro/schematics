@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::CleanApiKeysJob do
+RSpec.describe Schematics::CleanAPIKeysJob do
   let(:permissions) { [Permission.create!(action: 'index', model: 'User')] }
   let(:api_keys) do
     [
-      ApiKey.create!(name: 'First API key', permissions:, expires_at:),
-      ApiKey.create!(name: 'Second API key', permissions:, expires_at:)
+      APIKey.create!(name: 'First API key', permissions:, expires_at:),
+      APIKey.create!(name: 'Second API key', permissions:, expires_at:)
     ]
   end
 
@@ -26,11 +26,11 @@ RSpec.describe Schematics::CleanApiKeysJob do
       let(:expires_at) { nil }
 
       it 'does not archive API keys' do
-        expect { described_class.perform_now }.not_to change(ApiKey, :count)
+        expect { described_class.perform_now }.not_to change(APIKey, :count)
       end
 
       it 'does not destroy API keys' do
-        expect { described_class.perform_now }.not_to change(ApiKey.with_deleted, :count)
+        expect { described_class.perform_now }.not_to change(APIKey.with_deleted, :count)
       end
     end
 
@@ -39,12 +39,12 @@ RSpec.describe Schematics::CleanApiKeysJob do
 
       it 'archives API keys' do
         expect { described_class.perform_now }
-          .to change(ApiKey, :count)
+          .to change(APIKey, :count)
           .by(-2)
       end
 
       it 'does not destroy API keys' do
-        expect { described_class.perform_now }.not_to change(ApiKey.with_deleted, :count)
+        expect { described_class.perform_now }.not_to change(APIKey.with_deleted, :count)
       end
     end
   end

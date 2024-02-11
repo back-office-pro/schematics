@@ -2,12 +2,12 @@
 one:
   event: create
   item_id: f22740e6-7580-4f20-9abc-4def403c2834
-  item_type: ApiKey
+  item_type: APIKey
   whodunnit: <%= User.first.id %>
 two:
   event: create
   item_id: 7ed2c4db-6dfb-4d7b-94fb-86781f99aa08
-  item_type: ApiKey
+  item_type: APIKey
   whodunnit: <%= User.first.id %>
 three:
   event: create

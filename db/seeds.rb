@@ -28,9 +28,9 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Chart.new(
     kind: 'bar',
     aggregate: 'average',
-    model: 'ApiRequest',
-    x_field: 'ApiRequest#endpoint',
-    y_field: 'ApiRequest#response_time'
+    model: 'APIRequest',
+    x_field: 'APIRequest#endpoint',
+    y_field: 'APIRequest#response_time'
   ).save(validate: false) # rubocop:disable Rails/SaveBang
   Chart.create!(
     kind: 'column',

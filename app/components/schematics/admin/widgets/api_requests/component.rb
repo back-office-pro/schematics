@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module ApiRequests
+      module APIRequests
         class Component < Widgets::Component
         end
       end

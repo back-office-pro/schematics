@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApiRequestAbility < ApplicationAbility
+  class APIRequestAbility < ApplicationAbility
     def initialize(user)
       super
       return unless user.admin?
 
-      can :read, ::ApiRequest
+      can :read, ::APIRequest
     end
   end
 end

@@ -6,7 +6,7 @@ class Chart < Schematics::ApplicationRecord
   scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
 
   class << self
-    def api = find_or_initialize_by(model: 'ApiRequest')
+    def api = find_or_initialize_by(model: 'APIRequest')
   end
 
   def border_width

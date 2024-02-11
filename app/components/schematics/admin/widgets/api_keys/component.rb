@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module ApiKeys
+      module APIKeys
         class Component < Widgets::Component
         end
       end
