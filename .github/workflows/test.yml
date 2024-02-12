@@ -23,6 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ankane/setup-opensearch@v1
+      - uses: browser-actions/setup-chrome@v1
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -66,11 +67,11 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/db
-      # - name: Run feature tests
-      #   env:
-      #     RAILS_ENV: test
-      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
-      #   run: bundle exec rspec spec/features
+      - name: Run feature tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
+        run: bundle exec rspec spec/features
       - name: Run generator tests
         env:
           RAILS_ENV: test
