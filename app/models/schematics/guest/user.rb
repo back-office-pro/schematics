@@ -16,7 +16,7 @@ module Schematics
 
       def user_drafts = ::Draft.none
 
-      def user_groups = []
+      def user_groups = ::UserGroup.none
 
       def preferences = {}
 
