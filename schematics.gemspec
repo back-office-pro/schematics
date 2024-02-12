@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
+  spec.add_development_dependency 'cuprite', '0.15'
   spec.add_development_dependency 'debug', '1.9.1'
   spec.add_development_dependency 'fuubar', '2.5.1'
   spec.add_development_dependency 'i18n-tasks', '1.0.13'
@@ -31,7 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-thread_safety', '0.5.1'
   spec.add_development_dependency 'rubycritic', '4.9.0'
   spec.add_development_dependency 'scss_lint', '0.60.0'
-  spec.add_development_dependency 'selenium-webdriver', '4.17.0'
   spec.add_development_dependency 'simplecov', '0.22.0'
   spec.add_development_dependency 'slim_lint', '0.26.0'
   spec.add_development_dependency 'webmock', '3.20.0'

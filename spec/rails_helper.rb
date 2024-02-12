@@ -11,6 +11,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'isolator'
 require 'paper_trail/frameworks/rspec'
+require 'support/capybara'
 require 'support/shared_contexts'
 require 'support/view_component'
 require 'support/webmock'

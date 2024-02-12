@@ -14,19 +14,19 @@ RSpec.describe 'Resources' do
   it 'filters by email', :js do # rubocop:disable RSpec/ExampleLength
     visit users_path
     fill_in 'filter[email]', with: user.email
-    sleep(5) # Ajax
+    page.driver.wait_for_network_idle # Ajax
     find('ul[data-typeahead-target="results"] > li:first-child').click
-    sleep(5) # Turbo
+    page.driver.wait_for_network_idle # Turbo
     expect(page).to have_current_path(users_path(filter: { email: user.email }))
   end
 
   it 'edits email in place', :js do # rubocop:disable RSpec/ExampleLength
     visit user_path(user)
     first('.card-body .edit-in-place').click
-    sleep(5) # Turbo
+    page.driver.wait_for_network_idle # Turbo
     fill_in 'user[email]', with: 'admin@nowhere.com'
     first('.card-body turbo-frame').click_button
-    sleep(5) # Turbo
+    page.driver.wait_for_network_idle # Turbo
     expect(user.reload.email).to eq('admin@nowhere.com')
   end
 
@@ -35,7 +35,7 @@ RSpec.describe 'Resources' do
     check Permission.last.id
     check Permission.second_to_last.id
     find('.table').click_button
-    sleep(5) # Turbo
+    page.driver.wait_for_network_idle # Turbo
     expect(page).to have_current_path(comparison_path(Comparison.last))
   end
 
@@ -51,6 +51,7 @@ RSpec.describe 'Resources' do
     fill_in('user[email]', with: user.email).send_keys(:tab)
     sleep(5) # Ajax
     refresh
+    sleep(5)
     find('.card-header').click_button
     expect(page).to have_field('user_email', with: user.email)
   end

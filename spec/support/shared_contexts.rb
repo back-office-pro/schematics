@@ -83,6 +83,7 @@ RSpec.shared_context 'with login' do
       fill_in 'session[email]', with: user.email
       fill_in 'session[password]', with: user.password
       click_button
+      page.driver.wait_for_network_idle
     end
   end
 end
