@@ -14,13 +14,17 @@ module Schematics
 
       def id = nil
 
-      def user_drafts = ::Draft.none
-
       def user_groups = ::UserGroup.none
 
       def preferences = {}
 
       def role = ::Role.new(permissions:)
+
+      def otp_enabled? = false
+
+      def update(*) = false
+
+      def authenticate(*) = false
 
       def provisioning_uri(*)
         nil
