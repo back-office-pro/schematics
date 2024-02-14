@@ -9,7 +9,7 @@ module Schematics
     def resource_params = params
       .require(entity.name.to_sym)
       .permit(permitted_params.excluding(disallowed_params))
-      .with_defaults(resource_defaults)
+      .merge(resource_defaults)
 
     private
 
@@ -25,6 +25,7 @@ module Schematics
 
     def resource_defaults = entity
       .user_attributes
-      .to_h { |attribute| [attribute.name, current_user] }
+      .to_h { |attribute| [attribute.column_name, current_user.id] }
+      .compact
   end
 end
