@@ -43,6 +43,10 @@ module Schematics
       @current_user ||= current_session.user
     end
 
+    def current_user?
+      current_user in ::User
+    end
+
     def http_token = authenticate_with_http_token(&Session.method(:decode_auth_token))
 
     def store_location
@@ -53,8 +57,7 @@ module Schematics
     end
 
     def touch_session!(&)
-      session[:response_time] = Benchmark.realtime(&)
-      current_session.touch!(request, response)
+      current_session.touch!(request, response, Benchmark.realtime(&))
     end
 
     def logout_user!
