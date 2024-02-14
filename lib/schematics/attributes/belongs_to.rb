@@ -3,10 +3,6 @@
 module Schematics
   module Attributes
     class BelongsTo < Association
-      include Behaviours::Fillable
-
-      def available_options = super.excluding(Options::Default)
-
       def permitted_params
         return super unless polymorphic?
 

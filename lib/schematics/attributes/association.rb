@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
+      include Behaviours::Fillable
 
       delegate :descriptor, to: :inverse_entity
       delegate :to_sql, to: :descriptor
@@ -20,12 +21,14 @@ module Schematics
                 inclusion: { in: :allowed_association_types },
                 unless: :polymorphic?
 
-      def available_options = super.push(
-        Options::InverseAssociationName,
-        Options::InverseAssociationType,
-        Options::Type,
-        Options::Polymorphic
-      )
+      def available_options = super
+        .excluding(Options::Default)
+        .push(
+          Options::InverseAssociationName,
+          Options::InverseAssociationType,
+          Options::Type,
+          Options::Polymorphic
+        )
 
       def database_type = 'belongs_to'
 
