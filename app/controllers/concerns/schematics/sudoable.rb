@@ -5,6 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     def require_sudo!
+      return unless request.format.html?
       return if current_session.sudo?
 
       store_location
