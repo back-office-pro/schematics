@@ -2,7 +2,7 @@
 
 # :reek:MissingSafeMethod
 class MessagesController < Schematics::ResourcesController
-  before_action :read!, only: :show
+  before_action :read!, only: :show # rubocop:disable Rails/LexicallyScopedActionFilter
 
   private
 
