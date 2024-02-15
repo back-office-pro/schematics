@@ -20,6 +20,8 @@ RSpec.describe User do
 
     let(:model) { 'User' }
 
+    before { record.save! }
+
     context 'when there are filters' do
       let(:filters) { { email: 'john.doe@nowhere.com' } }
 
@@ -42,6 +44,8 @@ RSpec.describe User do
 
     let(:record_type) { record.class }
     let(:record_id) { record.id }
+
+    before { record.save! }
 
     it 'creates a new draft' do
       expect { find_or_create_draft! }
