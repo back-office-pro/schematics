@@ -13,11 +13,11 @@ module Schematics
 
     before_action :set_resource, except: %i[index new create autocomplete]
     before_action :set_resources, only: :index
-    before_action :set_draft, only: %i[new edit create duplicate update], if: :current_user?
+    before_action :set_draft, only: %i[new edit create duplicate update]
     before_action :redirect_to_resource_path, only: :show
     before_action :redirect_to_edit_resource_path, only: :edit
     before_action :set_breadcrumb
-    before_action :log_search!, only: :index, if: :current_user?
+    before_action :log_search!, only: :index
     before_action :require_sudo!, only: :delete
     after_action :assign_etag, only: %i[show update]
 
@@ -164,10 +164,7 @@ module Schematics
     end
 
     def set_draft
-      @draft = current_user
-               .user_drafts
-               .with_string_translations
-               .find_or_create_by!(record_type: model_class.to_s, record_id: @resource&.id)
+      @draft = current_user.find_or_create_draft!(model_class.to_s, @resource&.id)
     end
 
     def flash_interpolation_options = { human_name:, gender: }

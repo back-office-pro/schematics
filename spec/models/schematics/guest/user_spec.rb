@@ -19,6 +19,8 @@ RSpec.describe Schematics::Guest::User do
   its(:time_zone) { is_expected.to eq('UTC') }
   its(:role) { is_expected.to be_a(Role) }
   its(:provisioning_uri) { is_expected.to be_nil }
+  its(:find_or_create_draft!) { is_expected.to be_nil }
   its(:update) { is_expected.to be_falsy }
   its(:authenticate) { is_expected.to be_falsy }
+  its(:log_search!) { is_expected.to be_falsy }
 end

@@ -26,9 +26,11 @@ module Schematics
 
       def authenticate(*) = false
 
-      def provisioning_uri(*)
-        nil
-      end
+      def log_search!(*) = false
+
+      def find_or_create_draft!(*) = nil
+
+      def provisioning_uri(*) = nil
     end
   end
 end

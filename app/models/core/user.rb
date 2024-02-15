@@ -29,6 +29,16 @@ class User < Schematics::ApplicationRecord
     full_name.presence || email
   end
 
+  def log_search!(model, filters)
+    searches.create!(model:, filters:) if filters.any?
+  end
+
+  def find_or_create_draft!(record_type, record_id)
+    user_drafts
+      .with_string_translations
+      .find_or_create_by!(record_type:, record_id:)
+  end
+
   private
 
   def secure_password_challenge
