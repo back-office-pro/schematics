@@ -8,7 +8,7 @@ module Schematics
       included do
         entity = model_class.entity
         api :show, "Show #{entity.name}" do
-          path :id, ::String unless entity.is_a?(Entities::Singleton)
+          path :id, ::String unless entity in Entities::Singleton
 
           response 200, 'Success', :json, data: entity
             .renderable_elements

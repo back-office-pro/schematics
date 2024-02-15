@@ -8,7 +8,7 @@ module Core
       delegate :otp_enabled?, :generate_token_for, to: :user, allow_nil: true, private: true
 
       def call
-        return unless resource_params.is_a?(OmniAuth::AuthHash::InfoHash)
+        return unless resource_params in OmniAuth::AuthHash::InfoHash
 
         context.user = user
         context.otp_token = otp_token

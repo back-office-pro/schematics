@@ -24,7 +24,7 @@ module Schematics
     end
 
     def initialize(data: [], version: VERSION)
-      data = ::JSON.parse(data) if data.is_a?(::String)
+      data = ::JSON.parse(data) if data in ::String
       @data = data.map(&:deep_symbolize_keys)
       @version = version
       self.entities = core_data.concat(@data)

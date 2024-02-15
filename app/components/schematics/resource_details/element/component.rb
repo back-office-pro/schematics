@@ -9,13 +9,13 @@ module Schematics
         option :editable, default: -> { true }
 
         def editable?
-          enable_buttons? && !element.is_a?(Attributes::Attachment)
+          enable_buttons? && !(element in Attributes::Attachment)
         end
 
         def enable_buttons?
           editable &&
             can?(:update, resource, element.name.to_sym) &&
-            element.is_a?(Behaviours::Fillable) &&
+            (element in Behaviours::Fillable) &&
             !element.readonly?
         end
       end

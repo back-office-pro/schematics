@@ -54,7 +54,7 @@ module Schematics
     protected
 
     def interactor?
-      resource.is_a?(::Interactor::Context)
+      resource in ::Interactor::Context
     end
 
     def errors = [t(resource.message)]

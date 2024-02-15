@@ -163,7 +163,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
               value: translate(value, locale:)
             )
           end
-          next unless enum.is_a?(Schematics::Attributes::StateMachine)
+          next unless enum in Schematics::Attributes::StateMachine
 
           enum.events.map(&:name).each do |event|
             Translation.create!(
@@ -188,7 +188,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
             key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}"
           )
         end
-        next unless enum.is_a?(Schematics::Attributes::StateMachine)
+        next unless enum in Schematics::Attributes::StateMachine
 
         enum.events.map(&:name).each do |event|
           Translation.destroy_by(
@@ -210,7 +210,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
             .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{value}")
             .update_all(key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}") # rubocop:disable Rails/SkipsModelValidations
         end
-        next unless enum.is_a?(Schematics::Attributes::StateMachine)
+        next unless enum in Schematics::Attributes::StateMachine
 
         enum.events.map(&:name).each do |event|
           Translation

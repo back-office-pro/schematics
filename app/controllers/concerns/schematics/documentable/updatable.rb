@@ -8,7 +8,7 @@ module Schematics
       included do
         entity = model_class.entity
         api :update, "Update #{entity.name}" do
-          path :id, ::String unless entity.is_a?(Entities::Singleton)
+          path :id, ::String unless entity in Entities::Singleton
 
           entity.fillable_elements.each do |element|
             data element.input_name,

@@ -32,7 +32,7 @@ span.text-body-tertiary = '-' if value.nil?
         = __attachment(attachment: value.attachment, class: 'rounded', role: 'button')
     - else
       = __resource_link_to(resource: value.attachment)
-- when value.is_a?(StandardError) && Schematics::Virtuals::Virtual
+- when (value in StandardError) && Schematics::Virtuals::Virtual
   span.text-danger
     = fa_icon(:triangle_exclamation, class: 'me-2')
     = element.format(value)

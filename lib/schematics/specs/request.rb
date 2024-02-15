@@ -90,7 +90,7 @@ module Schematics
             is_expected.to have_http_status(status)
           end
 
-          if !entity.is_a?(Entities::Singleton) && allow?(:not_found)
+          if !(entity in Entities::Singleton) && allow?(:not_found)
             it 'is not found' do
               get polymorphic_path(route_key, id: 'foo'), headers:, as: :html
               redirect_path = ability.can?(:index, model_class) ? index_path : root_path
@@ -384,8 +384,8 @@ module Schematics
               [
                 element.column_name.to_sym,
                 element.public_send([format, 'default'].compact.join('_'))
-                       .then_tap { _1.save! && _1.id if element.is_a?(Attributes::Association) }
-                       .then_tap { _1.map(&:save!) && _1.map(&:id) if element.is_a?(Associations::HasAndBelongsToMany) } # rubocop:disable Layout/LineLength
+                       .then_tap { _1.save! && _1.id if element in Attributes::Association }
+                       .then_tap { _1.map(&:save!) && _1.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
               ]
             end
           }

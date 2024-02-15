@@ -17,7 +17,7 @@ module Schematics
     def api_key = request.headers['X-API-Key']
 
     def authenticate_user!
-      return unless current_session.is_a?(Guest::Session)
+      return unless current_session in Guest::Session
 
       respond_to do |format|
         format.json { request_http_token_authentication }

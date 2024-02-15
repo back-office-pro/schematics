@@ -9,7 +9,7 @@ module Rails
         end
 
         def has_index? # rubocop:disable Naming/PredicateName
-          schema_attribute.is_a?(Schematics::Behaviours::Searchable) || has_uniq_index? || super
+          (schema_attribute in Schematics::Behaviours::Searchable) || has_uniq_index? || super
         end
 
         def has_uniq_index? # rubocop:disable Naming/PredicateName
@@ -31,7 +31,7 @@ module Rails
         end
 
         def reference?(*)
-          schema_attribute.is_a?(Schematics::Attributes::Association) || super
+          (schema_attribute in Schematics::Attributes::Association) || super
         end
 
         def required? = false

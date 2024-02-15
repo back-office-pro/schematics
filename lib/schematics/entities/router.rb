@@ -40,7 +40,7 @@ module Schematics
         .reverse
 
       def resolver
-        return unless @entity.is_a?(Singleton)
+        return unless @entity in Singleton
 
         <<~RUBY
           resolve '#{class_name}' do |resource, options|
