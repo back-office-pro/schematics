@@ -14,6 +14,6 @@ Rails.configuration.after_initialize do
       Schematics::ApplicationDoc
     ]
     bearer_auth :token
-    api_key :api_key, field: 'X-API-Key'
+    api_key :api_key, field: 'x-api-key'
   end
 end

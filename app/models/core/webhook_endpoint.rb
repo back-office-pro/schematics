@@ -2,7 +2,7 @@
 
 class WebhookEndpoint < Schematics::ApplicationRecord
   TIMEOUT_OPTIONS = { open_timeout: 5, read_timeout: 5, write_timeout: 5, max_retries: 0 }.freeze
-  HEADER_SIGNATURE_KEY = 'X-BackOffice-Signature'
+  HEADER_SIGNATURE_KEY = 'x-backoffice-signature'
 
   validates :url, exclusion: { in: :denied_urls }
 

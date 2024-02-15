@@ -14,7 +14,7 @@ module Schematics
 
     def auth_token = http_token || cookies.permanent.encrypted[:auth_token]
 
-    def api_key = request.headers['X-API-Key']
+    def api_key = request.headers['x-api-key']
 
     def authenticate_user!
       return unless current_session in Guest::Session

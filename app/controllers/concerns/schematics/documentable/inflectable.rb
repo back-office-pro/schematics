@@ -7,7 +7,7 @@ module Schematics
 
       included do
         api_dry :all do
-          header 'X-API-Inflection',
+          header 'x-api-inflection',
                  ::String,
                  desc: 'Inflect payload keys. Possible values are camel, dash, snake or pascal.'
         end
