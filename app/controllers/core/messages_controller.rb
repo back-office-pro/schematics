@@ -2,7 +2,7 @@
 
 # :reek:MissingSafeMethod
 class MessagesController < Schematics::ResourcesController
-  before_action :read!, only: :show, if: :current_user?
+  before_action :read!, only: :show
 
   private
 
