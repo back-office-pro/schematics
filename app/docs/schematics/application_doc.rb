@@ -8,7 +8,6 @@ module Schematics
       def inherited(subclass)
         super
         subclass.include(Documentable::Inflectable)
-        subclass.include(Documentable::Pageable)
       end
     end
   end
