@@ -43,10 +43,6 @@ module Schematics
       @current_user ||= current_session.user
     end
 
-    def current_user?
-      current_user in ::User
-    end
-
     def http_token = authenticate_with_http_token(&Session.method(:decode_auth_token))
 
     def store_location

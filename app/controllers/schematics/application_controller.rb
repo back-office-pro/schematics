@@ -16,6 +16,8 @@ module Schematics
     before_action :set_paper_trail_whodunnit
     after_action { pagy_headers_merge(@pagy) if @pagy }
 
-    alias paper_trail_enabled_for_controller current_user?
+    def paper_trail_enabled_for_controller
+      current_user in ::User
+    end
   end
 end
