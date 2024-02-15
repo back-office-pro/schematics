@@ -15,6 +15,8 @@ RSpec.describe Schematics::Searchkickable::ListQuery do
 
   before { [user, other_user, User.include(Schematics::Searchkickable).tap(&:reindex)] }
 
+  after { User.reload_definitions! }
+
   describe '.call' do
     subject { pagy_search.first.search(pagy_search.second, **pagy_search.third) }
 

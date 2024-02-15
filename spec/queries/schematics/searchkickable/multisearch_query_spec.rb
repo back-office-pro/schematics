@@ -15,6 +15,8 @@ RSpec.describe Schematics::Searchkickable::MultisearchQuery do
 
   before { [user, other_user, User.include(Schematics::Searchkickable).tap(&:reindex)] }
 
+  after { User.reload_definitions! }
+
   describe '.call' do
     subject { query.call(param, ability) }
 
