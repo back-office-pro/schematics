@@ -5,11 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     def log_search!
-      return if filter_params.empty?
-
-      current_user
-        .searches
-        .create!(model: model_class.to_s, filters: filter_params)
+      current_user.log_search!(model_class.to_s, filter_params)
     end
 
     def filter_params

@@ -9,15 +9,13 @@ RSpec.describe APIKey do
   its(:user) { is_expected.to be_a(Schematics::Guest::User) }
 
   describe '#touch!' do
-    subject { record.touch!(request, response) }
+    subject { record.touch!(request, response, response_time) }
 
     let(:request) { ActionController::TestRequest.create({}) }
     let(:response) { ActionDispatch::TestResponse.create }
+    let(:response_time) { 0.1 }
 
-    before do
-      request.path = '/api-keys'
-      request.session[:response_time] = 0.1
-    end
+    before { request.path = '/api-keys' }
 
     it { is_expected.to be_a(APIRequest) }
     its(:api_key) { is_expected.to eq(record) }

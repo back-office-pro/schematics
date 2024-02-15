@@ -29,14 +29,15 @@ module Schematics
         let(:route_key) { [model_class.model_name.singular_route_key.to_sym] }
         let(:auth_token) { session.signed_id }
         let(:headers) { { 'Authorization' => "Bearer #{auth_token}" } } # rubocop:disable Style/StringHashKeys
+        let(:api_key_headers) { { 'x-api-key' => api_key.auth_token } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys
         let(:ability) { Ability.new(user) }
         let(:session) { ::Session.create!(user:) }
+        let(:permissions) { ::Permission.create_entities_permissions! }
+        let(:api_key) { ::APIKey.create!(name: 'API key', permissions:) }
         let(:index_path) { polymorphic_path(model_class) }
-        let(:role) do
-          ::Role.create!(name: 'Admin', permissions: ::Permission.create_entities_permissions!)
-        end
+        let(:role) { ::Role.create!(name: 'Admin', permissions:) }
         let(:user) do
           ::User.create!(email: 'admin@admin.com', first_name: 'John', last_name: 'Doe', role:)
         end
@@ -58,17 +59,21 @@ module Schematics
           end
 
           it 'gets API index' do
-            get index_path, headers:, as: :json
-            status = ability.can?(:index, model_class) ? :success : :forbidden
-            is_expected.to have_http_status(status)
+            [headers, api_key_headers].each do |headers|
+              get index_path, headers:, as: :json
+              status = ability.can?(:index, model_class) ? :success : :forbidden
+              is_expected.to have_http_status(status)
+            end
           end
 
           it 'gets API autocomplete' do
-            get polymorphic_path(model_class, action: :autocomplete, field: 'id'),
-                headers:,
-                as: :json
-            status = ability.can?(:index, model_class) ? :success : :forbidden
-            is_expected.to have_http_status(status)
+            [headers, api_key_headers].each do |headers|
+              get polymorphic_path(model_class, action: :autocomplete, field: 'id'),
+                  headers:,
+                  as: :json
+              status = ability.can?(:index, model_class) ? :success : :forbidden
+              is_expected.to have_http_status(status)
+            end
           end
         end
 
@@ -85,9 +90,11 @@ module Schematics
           end
 
           it 'shows API record' do
-            get polymorphic_path(record), headers:, as: :json
-            status = ability.can?(:show, record) ? :success : :forbidden
-            is_expected.to have_http_status(status)
+            [headers, api_key_headers].each do |headers|
+              get polymorphic_path(record), headers:, as: :json
+              status = ability.can?(:show, record) ? :success : :forbidden
+              is_expected.to have_http_status(status)
+            end
           end
 
           if !(entity in Entities::Singleton) && allow?(:not_found)
@@ -98,8 +105,10 @@ module Schematics
             end
 
             it 'is not found API' do
-              get polymorphic_path(route_key, id: 'foo'), headers:, as: :json
-              is_expected.to have_http_status(:not_found)
+              [headers, api_key_headers].each do |headers|
+                get polymorphic_path(route_key, id: 'foo'), headers:, as: :json
+                is_expected.to have_http_status(:not_found)
+              end
             end
           end
         end
@@ -121,9 +130,11 @@ module Schematics
           end
 
           it 'updates API record' do
-            patch polymorphic_path(record), params: params(:json), headers:, as: :json
-            status = ability.can?(:update, record) ? :success : :forbidden
-            is_expected.to have_http_status(status)
+            [headers, api_key_headers].each do |headers|
+              patch polymorphic_path(record), params: params(:json), headers:, as: :json
+              status = ability.can?(:update, record) ? :success : :forbidden
+              is_expected.to have_http_status(status)
+            end
           end
 
           it 'is a bad request' do
@@ -133,9 +144,11 @@ module Schematics
           end
 
           it 'is a bad request API' do
-            patch polymorphic_path(record), params: {}, headers:, as: :json
-            status = ability.can?(:update, record) ? :bad_request : :forbidden
-            is_expected.to have_http_status(status)
+            [headers, api_key_headers].each do |headers|
+              patch polymorphic_path(record), params: {}, headers:, as: :json
+              status = ability.can?(:update, record) ? :bad_request : :forbidden
+              is_expected.to have_http_status(status)
+            end
           end
         end
 
@@ -172,15 +185,17 @@ module Schematics
           end
 
           it 'creates API record' do
-            if ability.can?(:create, model_class)
-              expect { post index_path, params: params(:json), headers:, as: :json }
-                .to change(model_class, :count)
-                .by(1)
-              is_expected.to have_http_status(:created)
-            else
-              expect { post index_path, params: params(:json), headers:, as: :json }
-                .not_to change(model_class, :count)
-              is_expected.to have_http_status(:forbidden)
+            [headers, api_key_headers].each do |headers|
+              if ability.can?(:create, model_class)
+                expect { post index_path, params: params(:json), headers:, as: :json }
+                  .to change(model_class, :count)
+                  .by(1)
+                is_expected.to have_http_status(:created)
+              else
+                expect { post index_path, params: params(:json), headers:, as: :json }
+                  .not_to change(model_class, :count)
+                is_expected.to have_http_status(:forbidden)
+              end
             end
           end
 
@@ -191,9 +206,11 @@ module Schematics
           end
 
           it 'is a bad request API' do
-            post index_path, params: {}, headers:, as: :json
-            status = ability.can?(:create, model_class) ? :bad_request : :forbidden
-            is_expected.to have_http_status(status)
+            [headers, api_key_headers].each do |headers|
+              post index_path, params: {}, headers:, as: :json
+              status = ability.can?(:create, model_class) ? :bad_request : :forbidden
+              is_expected.to have_http_status(status)
+            end
           end
 
           it 'duplicates record' do
@@ -216,21 +233,23 @@ module Schematics
           end
 
           it 'duplicates record API' do
-            if ability.can?(:duplicate, record)
-              if fillable_attributes.any?(&:unique?)
-                expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
-                  .not_to change(model_class, :count)
-                is_expected.to have_http_status(:unprocessable_entity)
+            [headers, api_key_headers].each do |headers|
+              if ability.can?(:duplicate, record)
+                if fillable_attributes.any?(&:unique?)
+                  expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
+                    .not_to change(model_class, :count)
+                  is_expected.to have_http_status(:unprocessable_entity)
+                else
+                  expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
+                    .to change(model_class, :count)
+                    .by(1)
+                  is_expected.to have_http_status(:created)
+                end
               else
                 expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
-                  .to change(model_class, :count)
-                  .by(1)
-                is_expected.to have_http_status(:created)
+                  .not_to change(model_class, :count)
+                is_expected.to have_http_status(:forbidden)
               end
-            else
-              expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
-                .not_to change(model_class, :count)
-              is_expected.to have_http_status(:forbidden)
             end
           end
         end
@@ -259,15 +278,18 @@ module Schematics
           end
 
           it 'destroys API record' do
-            if ability.can?(:destroy, record)
-              expect { delete polymorphic_path(record), headers:, as: :json }
-                .to change(model_class, :count)
-                .by(-1)
-              is_expected.to have_http_status(:no_content)
-            else
-              expect { delete polymorphic_path(record), headers:, as: :json }
-                .not_to change(model_class, :count)
-              is_expected.to have_http_status(:forbidden)
+            [headers, api_key_headers].each do |headers|
+              record = default.tap(&:save!)
+              if ability.can?(:destroy, record)
+                expect { delete polymorphic_path(record), headers:, as: :json }
+                  .to change(model_class, :count)
+                  .by(-1)
+                is_expected.to have_http_status(:no_content)
+              else
+                expect { delete polymorphic_path(record), headers:, as: :json }
+                  .not_to change(model_class, :count)
+                is_expected.to have_http_status(:forbidden)
+              end
             end
           end
         end
@@ -288,16 +310,18 @@ module Schematics
           end
 
           it 'archives API record' do
-            record.restore
-            if ability.can?(:archive, record)
-              expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
-                .to change(model_class, :count)
-                .by(-1)
-              is_expected.to have_http_status(:no_content)
-            else
-              expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
-                .not_to change(model_class, :count)
-              is_expected.to have_http_status(:forbidden)
+            [headers, api_key_headers].each do |headers|
+              record.restore
+              if ability.can?(:archive, record)
+                expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
+                  .to change(model_class, :count)
+                  .by(-1)
+                is_expected.to have_http_status(:no_content)
+              else
+                expect { delete polymorphic_path(record, action: :archive), headers:, as: :json }
+                  .not_to change(model_class, :count)
+                is_expected.to have_http_status(:forbidden)
+              end
             end
           end
 
@@ -316,16 +340,18 @@ module Schematics
           end
 
           it 'restores API record' do
-            record.destroy!
-            if ability.can?(:restore, record)
-              expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
-                .to change(model_class, :count)
-                .by(1)
-              is_expected.to have_http_status(:no_content)
-            else
-              expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
-                .not_to change(model_class, :count)
-              is_expected.to have_http_status(:forbidden)
+            [headers, api_key_headers].each do |headers|
+              record.destroy!
+              if ability.can?(:restore, record)
+                expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
+                  .to change(model_class, :count)
+                  .by(1)
+                is_expected.to have_http_status(:no_content)
+              else
+                expect { delete polymorphic_path(record, action: :restore), headers:, as: :json }
+                  .not_to change(model_class, :count)
+                is_expected.to have_http_status(:forbidden)
+              end
             end
           end
         end
@@ -342,14 +368,16 @@ module Schematics
             end
 
             it "#{event.name} API record" do
-              patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
-                    headers:,
-                    as: :json
-              if ability.can?(event.name.to_sym, record)
-                status = record.public_send(:"may_#{event.suffixed_name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
-                is_expected.to have_http_status(status)
-              else
-                is_expected.to have_http_status(:forbidden)
+              [headers, api_key_headers].each do |headers|
+                patch polymorphic_path([event.state_machine_name.to_sym, event.name.to_sym, record], format: nil), # rubocop:disable Layout/LineLength
+                      headers:,
+                      as: :json
+                if ability.can?(event.name.to_sym, record)
+                  status = record.public_send(:"may_#{event.suffixed_name}?") ? :no_content : :method_not_allowed # rubocop:disable Layout/LineLength
+                  is_expected.to have_http_status(status)
+                else
+                  is_expected.to have_http_status(:forbidden)
+                end
               end
             end
           end

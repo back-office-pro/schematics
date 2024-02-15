@@ -27,7 +27,7 @@ describe Schematics::Attributes::User do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
-  it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
 
   its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }
@@ -54,7 +54,8 @@ describe Schematics::Attributes::User do
       Schematics::Options::InverseAssociationName,
       Schematics::Options::InverseAssociationType,
       Schematics::Options::Type,
-      Schematics::Options::Polymorphic
+      Schematics::Options::Polymorphic,
+      Schematics::Options::Readonly
     )
   end
 

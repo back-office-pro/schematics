@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 module Schematics
   module Guest
     class User
@@ -14,17 +15,23 @@ module Schematics
 
       def id = nil
 
-      def user_drafts = ::Draft.none
-
       def user_groups = ::UserGroup.none
 
       def preferences = {}
 
       def role = ::Role.new(permissions:)
 
-      def provisioning_uri(*)
-        nil
-      end
+      def otp_enabled? = false
+
+      def update(*) = false
+
+      def authenticate(*) = false
+
+      def log_search!(*) = false
+
+      def find_or_create_draft!(*) = nil
+
+      def provisioning_uri(*) = nil
     end
   end
 end

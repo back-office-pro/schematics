@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 class User < Schematics::ApplicationRecord
   PASSWORD_RESET_TOKEN_DURATION = 24.hours.freeze
   ONE_TIME_PASSWORD_DURATION = 10.minutes.freeze
@@ -27,6 +28,16 @@ class User < Schematics::ApplicationRecord
 
   def to_s
     full_name.presence || email
+  end
+
+  def log_search!(model, filters)
+    searches.create!(model:, filters:) if filters.any?
+  end
+
+  def find_or_create_draft!(record_type, record_id)
+    user_drafts
+      .with_string_translations
+      .find_or_create_by!(record_type:, record_id:)
   end
 
   private

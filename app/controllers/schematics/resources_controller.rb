@@ -164,10 +164,7 @@ module Schematics
     end
 
     def set_draft
-      @draft = current_user
-               .user_drafts
-               .with_string_translations
-               .find_or_create_by!(record_type: model_class.to_s, record_id: @resource&.id)
+      @draft = current_user.find_or_create_draft!(model_class.to_s, @resource&.id)
     end
 
     def flash_interpolation_options = { human_name:, gender: }

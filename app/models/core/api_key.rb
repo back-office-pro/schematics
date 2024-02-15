@@ -4,7 +4,7 @@
 class APIKey < Schematics::ApplicationRecord
   def login!(*) = self
 
-  def touch!(request, response)
+  def touch!(request, response, response_time)
     PaperTrail.request(enabled: false) do
       APIRequest.create!(
         api_key: self,
@@ -12,7 +12,7 @@ class APIKey < Schematics::ApplicationRecord
         request_method: request.method,
         endpoint: request.original_fullpath,
         response_code: response.response_code,
-        response_time: (request.session[:response_time] * 1000).to_i
+        response_time: (response_time * 1000).to_i
       )
     end
   end
