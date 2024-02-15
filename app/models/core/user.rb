@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 class User < Schematics::ApplicationRecord
   PASSWORD_RESET_TOKEN_DURATION = 24.hours.freeze
   ONE_TIME_PASSWORD_DURATION = 10.minutes.freeze

@@ -14,4 +14,39 @@ RSpec.describe User do
       .with(record)
       .on_queue('mailers')
   end
+
+  describe '#log_search!' do
+    subject(:log_search!) { record.log_search!(model, filters) }
+
+    let(:model) { 'User' }
+
+    context 'when there are filters' do
+      let(:filters) { { email: 'john.doe@nowhere.com' } }
+
+      it 'creates a new search' do
+        expect { log_search! }.to change(record.searches, :count).by(1)
+      end
+    end
+
+    context 'when filters are empty' do
+      let(:filters) { {} }
+
+      it 'does not create a new search' do
+        expect { log_search! }.not_to change(record.searches, :count)
+      end
+    end
+  end
+
+  describe '#find_or_create_draft!' do
+    subject(:find_or_create_draft!) { record.find_or_create_draft!(record_type, record_id) }
+
+    let(:record_type) { record.class }
+    let(:record_id) { record.id }
+
+    it 'creates a new draft' do
+      expect { find_or_create_draft! }
+        .to change(record.user_drafts, :count)
+        .by(1)
+    end
+  end
 end
