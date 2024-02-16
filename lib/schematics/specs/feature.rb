@@ -120,7 +120,7 @@ module Schematics
             select element.model_class.first.to_s,
                    from: element.input_name,
                    match: :first
-          when Associations::HasMany
+          when Associations::HasMany, Attributes::User
             # do nothing
           when Attributes::Boolean
             check(element.input_name)
