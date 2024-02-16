@@ -8,32 +8,16 @@ module Schematics
       query :page, ::Integer, desc: 'Page number'
       query :items, ::Integer, desc: 'Items per page'
 
-      response 200, 'Success', :json, data: [
-        {
-          id: ::String,
-          created_at: ::DateTime,
-          event: ::String,
-          user: {},
-          item: {},
-          object_changes: {}
-        }
-      ]
+      response 200, 'Success', :json,
+               data: [Version::OPEN_API_SCHEMA],
+               headers: ::Pagy::DEFAULT[:headers].invert.transform_values { ::Integer }
       response 401, 'Not Authorized', :json
     end
 
-    api :show, 'Show diff' do
+    api :show, 'Show version' do
       path :id, ::String
 
-      response 200, 'Success', :json, data: [
-        {
-          id: ::String,
-          created_at: ::DateTime,
-          event: ::String,
-          user: {},
-          item: {},
-          object_changes: {}
-        }
-      ]
+      response 200, 'Success', :json, data: Version::OPEN_API_SCHEMA
       response 401, 'Not Authorized', :json
       response 404, 'Not Found', :json
     end
