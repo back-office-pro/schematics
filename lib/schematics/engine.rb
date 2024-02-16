@@ -154,6 +154,7 @@ module Schematics
     # ViewComponent
     config.view_component.capture_compatibility_patch_enabled = true
     config.view_component.test_controller = 'Schematics::ApplicationController'
+    config.view_component.show_previews = false
 
     # Responders
     config.responders.error_status = :unprocessable_entity
