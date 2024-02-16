@@ -191,6 +191,7 @@ module Schematics
                   .to change(model_class, :count)
                   .by(1)
                 is_expected.to have_http_status(:created)
+                model_class.last.really_destroy!
               else
                 expect { post index_path, params: params(:json), headers:, as: :json }
                   .not_to change(model_class, :count)
@@ -234,6 +235,7 @@ module Schematics
 
           it 'duplicates record API' do
             [headers, api_key_headers].each do |headers|
+              record
               if ability.can?(:duplicate, record)
                 if fillable_attributes.any?(&:unique?)
                   expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
