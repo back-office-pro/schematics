@@ -10,7 +10,6 @@ module Schematics
       include AASM
       attribute_method_suffix '_formatted'
       attribute :lock_version, default: 0
-      broadcasts_refreshes
     end
 
     class_methods do
