@@ -7,6 +7,8 @@ module Backend
 
     def concurrency = 0
 
+    def max_threads = 13
+
     def engine = ::GoodJob::Engine
 
     def cache_store = :solid_cache_store

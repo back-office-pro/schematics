@@ -8,6 +8,8 @@ module Backend
   class Redis
     def concurrency = 2
 
+    def max_threads = 5
+
     def engine = ::Sidekiq::Web
 
     alias engine_middleware engine

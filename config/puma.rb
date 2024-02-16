@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-max_threads_count = ENV.fetch('RAILS_MAX_THREADS', 10)
+max_threads_count = ENV.fetch('RAILS_MAX_THREADS', Tenant.backend.max_threads)
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { max_threads_count }
 threads min_threads_count, max_threads_count
 
@@ -21,8 +21,7 @@ preload_app!
 
 plugin :tmp_restart
 
-case Tenant.backend
-when Backend::Redis
+if Tenant.backend in Backend::Redis
   x = nil
   on_worker_boot do
     x = Sidekiq.configure_embed {} # rubocop:disable Lint/EmptyBlock
