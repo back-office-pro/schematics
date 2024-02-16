@@ -38,7 +38,7 @@ module Schematics
         inverse_entity.default
       end
 
-      def open_api_type = { id!: ::String }
+      def open_api_type = { id!: super }
 
       def column_name = "#{super}_id"
 

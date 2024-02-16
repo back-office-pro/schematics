@@ -20,12 +20,9 @@ module Schematics
                   desc: "Filter by #{element.name}"
           end
 
-          response 200, 'Success', :json, data: [
-            entity
-              .renderable_elements_without_has_many_associations
-              .stable_sort_by(&:weight)
-              .to_h { [_1.name, _1.open_api_type] }
-          ]
+          response 200, 'Success', :json,
+                   data: [entity.open_api_schema],
+                   headers: ::Pagy::DEFAULT[:headers].invert.transform_values { ::Integer }
           response 401, 'Not Authorized', :json
         end
       end

@@ -10,10 +10,7 @@ module Schematics
         api :show, "Show #{entity.name}" do
           path :id, ::String unless entity in Entities::Singleton
 
-          response 200, 'Success', :json, data: entity
-            .renderable_elements
-            .stable_sort_by(&:weight)
-            .to_h { [_1.name, _1.open_api_type] }
+          response 200, 'Success', :json, data: entity.open_api_schema_with_associations
           response 401, 'Not Authorized', :json
           response 404, 'Not Found', :json
         end

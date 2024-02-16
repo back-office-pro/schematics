@@ -17,11 +17,7 @@ module Schematics
                  required: element.required?
           end
 
-          body :json, data: {
-            entity.name.to_sym => entity
-              .fillable_elements
-              .to_h { [_1.name, _1.open_api_type] }
-          }
+          body :json, data: entity.open_api_body
 
           response 204, 'Success', :json
           response 400, 'Bad Request', :json

@@ -24,6 +24,7 @@ describe Schematics::Associations::HasManyNested do
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }

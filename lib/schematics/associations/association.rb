@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Inspectable
       include Behaviours::Renderable
       include Behaviours::Preloadable
+      include Behaviours::Documentable
       include ::ActiveModel::API
 
       delegate :hidden?, to: :options
@@ -42,7 +43,7 @@ module Schematics
         def to_proc = -> { build(**_1) }
       end
 
-      def open_api_type = [{ id!: ::String }]
+      def open_api_type = [{ id!: super }]
 
       def weight = 3
 

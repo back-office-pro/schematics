@@ -9,17 +9,9 @@ module Schematics
 
       data 'message[content]', ::String, required: true
 
-      body :json, data: {
-        message: {
-          content: ::String
-        }
-      }
+      body :json, data: ::Message.entity.open_api_body
 
-      response 201, 'Success', :json, data: ::Message
-        .entity
-        .renderable_elements_without_has_many_associations
-        .stable_sort_by(&:weight)
-        .to_h { [_1.name, _1.open_api_type] }
+      response 201, 'Success', :json, data: ::Message.entity.open_api_schema
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
       response 422, 'Unprocessable entity', :json

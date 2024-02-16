@@ -8,6 +8,7 @@ describe Schematics::Attributes::Flag do
   let(:options) { { values: %w[available available_soon not_available] } }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }

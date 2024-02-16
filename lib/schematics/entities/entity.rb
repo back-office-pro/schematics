@@ -263,6 +263,16 @@ module Schematics
         options: { readonly: true }
       )
 
+      def open_api_body = { name.to_sym => fillable_elements.to_h(&:to_open_api) }
+
+      def open_api_schema_with_associations = renderable_elements
+        .stable_sort_by(&:weight)
+        .to_h(&:to_open_api)
+
+      def open_api_schema = renderable_elements_without_has_many_associations
+        .stable_sort_by(&:weight)
+        .to_h(&:to_open_api)
+
       protected
 
       def receptor = Receptor.new(self)

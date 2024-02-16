@@ -11,6 +11,7 @@ module Schematics
       include Behaviours::Optionable
       include Behaviours::Nameable
       include Behaviours::Validatable
+      include Behaviours::Documentable
 
       delegate :cached?, to: :options
 
@@ -56,8 +57,6 @@ module Schematics
       def column_name = name
 
       def database_type = type
-
-      def open_api_type = ::String
 
       def prefixed_name = "#{entity.table_name}_#{name}"
 

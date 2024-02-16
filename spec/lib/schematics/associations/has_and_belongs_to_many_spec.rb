@@ -26,6 +26,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Documentable) }
   it { is_expected.to be_a(Schematics::Behaviours::Inspectable) }
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }

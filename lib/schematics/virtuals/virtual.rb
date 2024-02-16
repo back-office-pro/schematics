@@ -12,6 +12,7 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
+      include Behaviours::Documentable
 
       attr_accessor :id, :entity, :function
 
@@ -47,8 +48,6 @@ module Schematics
           super
         end
       end
-
-      def open_api_type = ::String
 
       def preload = tokens
         .grep(Tokens::Variable)
