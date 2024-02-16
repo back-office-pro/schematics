@@ -33,7 +33,6 @@ RSpec.describe Schematics::MigrateSchemaJob do
 
     before do
       allow(Tenant).to receive(:backend).and_return(Backend::Redis.new)
-      allow(Core::Migrations::Reload).to receive(:call).and_return(nil)
       wait_for
     end
 
