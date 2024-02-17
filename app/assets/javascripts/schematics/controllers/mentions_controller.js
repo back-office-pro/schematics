@@ -61,7 +61,7 @@ export default class extends ApplicationController {
       collection: [
         {
           trigger: '@',
-          lookup: 'fullName',
+          lookup: 'full_name',
           values: this.debounce(this.fetchUsers)
         },
         {
