@@ -6,6 +6,7 @@
   - imports
   - exports
   - mailers
+  - notifications
   - webhooks
   - backups
   - cleanups
