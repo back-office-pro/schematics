@@ -9,7 +9,7 @@ import { Crisp } from 'crisp-sdk-web'
 import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick */
+/* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix */
 
 const setTheme = () => {
   document
@@ -64,4 +64,8 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
 
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/service_worker.js', { scope: '/' })
+}
+
+for (const [key, value] of Object.entries(I18n.trix)) {
+  Trix.config.lang[key] = value
 }

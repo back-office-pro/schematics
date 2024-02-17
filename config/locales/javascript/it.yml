@@ -1,6 +1,33 @@
 ---
 it:
   javascript:
+    trix:
+      GB: GB
+      KB: KB
+      MB: MB
+      PB: PB
+      TB: TB
+      attachFiles: Allega file
+      bold: Grassetto
+      bullets: Puntati
+      byte: Byte
+      bytes: Bytes
+      captionPlaceholder: Aggiungi una didascalia...
+      code: Codice
+      heading1: Titolo
+      indent: Aumenta il rientro
+      italic: Corsivo
+      link: Collegamento
+      numbers: Numeri
+      outdent: Diminuisce il rientro
+      quote: Citazione
+      redo: Ripetire
+      remove: Eliminare
+      strike: Sbarramento
+      undo: Annullare
+      unlink: Scollegare
+      url: URL
+      urlPlaceholder: Inserisci un URL...
     typeahead:
       add: Aggiungere
       notFound: Nessun risultato

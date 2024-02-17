@@ -1,6 +1,33 @@
 ---
 fr:
   javascript:
+    trix:
+      GB: Go
+      KB: Ko
+      MB: Mo
+      PB: Po
+      TB: To
+      attachFiles: Joindre des fichiers
+      bold: Gras
+      bullets: Puces
+      byte: Octet
+      bytes: Octets
+      captionPlaceholder: Ajouter une légende...
+      code: Code
+      heading1: Titre
+      indent: Augmenter l'indentation
+      italic: Italique
+      link: Lien
+      numbers: Nombres
+      outdent: Diminuer l'indentation
+      quote: Citation
+      redo: Rétablir
+      remove: Supprimer
+      strike: Barrer
+      undo: Annuler
+      unlink: Dissocier
+      url: URL
+      urlPlaceholder: Entrez une URL...
     typeahead:
       add: Ajouter
       notFound: Aucun résultat
