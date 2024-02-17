@@ -6,7 +6,6 @@ module Schematics
     include Searchable
     include Calendarable
     include Documentable
-    include Versionable
     include Viewable
     include Lockable
     include Redirectable
@@ -20,6 +19,7 @@ module Schematics
     before_action :log_search!, only: :index
     before_action :require_sudo!, only: :delete
     after_action :assign_etag, only: %i[show update]
+    after_action :assign_api_version
 
     responders :flash, ResourceResponder
     respond_to :html, except: :autocomplete

@@ -5,10 +5,14 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_action :assign_version
+      after_action :assign_api_core_version
     end
 
-    def assign_version
+    def assign_api_core_version
+      response.headers['x-api-core-version'] = VERSION
+    end
+
+    def assign_api_version
       response.headers['x-api-version'] = ::Migration.current_data_version
     end
   end
