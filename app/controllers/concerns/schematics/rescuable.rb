@@ -68,6 +68,8 @@ module Schematics
     end
 
     def stale_object_error(exception)
+      return unless action_name == 'update'
+
       switch_localization do
         respond_to do |format|
           format.json { head :precondition_failed }

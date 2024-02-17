@@ -29,7 +29,7 @@ class Session < Schematics::ApplicationRecord
   end
 
   def touch!(request, *)
-    unstale.update!(updated_at: Time.current) if request.format.html?
+    update!(updated_at: Time.current) if request.format.html?
   end
 
   def sudo?
