@@ -59,7 +59,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '3.40.0'
   spec.add_dependency 'chartkick', '5.0.5'
   spec.add_dependency 'chroma', '0.2.0'
-  spec.add_dependency 'countries', '5.7.1'
+  spec.add_dependency 'countries', '5.7.2'
   spec.add_dependency 'dartsass-sprockets', '3.1.0'
   spec.add_dependency 'derailed_benchmarks', '2.1.2'
   spec.add_dependency 'dotenv', '3.0.2'
