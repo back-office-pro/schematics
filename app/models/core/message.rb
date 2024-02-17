@@ -19,9 +19,7 @@ class Message < Schematics::ApplicationRecord
     versions.exists?(event: 'show', user:)
   end
 
-  def mentions = content
-    .body
-    .attachables
-    .grep(User)
-    .uniq
+  protected
+
+  def notify_mentions = nil
 end

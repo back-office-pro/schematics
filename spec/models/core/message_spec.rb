@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Message do
   include Schematics::Specs::Model
 
-  its(:mentions) { is_expected.to be_empty }
+  its(:notify_mentions) { is_expected.to be_nil }
 
   describe '#read?' do
     subject { record.read?(record.author) }
