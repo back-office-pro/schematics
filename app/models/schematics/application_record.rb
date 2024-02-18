@@ -9,6 +9,7 @@ module Schematics
     include Serializable
     include Shortenable
     include Translatable
+    include Mentionable
     include Attachable
     loadable concerns: [
       ::Tenant.search_engine.concern,

@@ -47,7 +47,8 @@ module Schematics
         archive: :box_archive,
         restore: :trash_arrow_up,
         show: :eye,
-        duplicate: :clone
+        duplicate: :clone,
+        mention: :quote_left
       }[event.to_sym] || entity.find_event_by_name(event).try(:icon)
     end
 

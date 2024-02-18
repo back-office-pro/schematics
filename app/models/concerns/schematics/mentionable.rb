@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Mentionable
+    extend ActiveSupport::Concern
+
+    included do
+      after_create_commit :notify_mentions, if: :mentions?
+    end
+
+    def mentions = self
+      .class
+      .entity
+      .rich_text_attributes
+      .map(&:name)
+      .map(&method(:public_send))
+      .map(&:body)
+      .map(&:attachables)
+      .flatten
+      .grep(User)
+      .uniq
+
+    protected
+
+    def mentions?
+      mentions.any?
+    end
+
+    def notify_mentions
+      NotifyMentionsJob.perform_later(self)
+    end
+  end
+end

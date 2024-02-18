@@ -4,6 +4,7 @@ module Schematics
   class VersionAbility < ApplicationAbility
     def initialize(user)
       super
+      can(:read, Version, event: 'mention', user:)
       can(:revert, Version, user:)
       cannot :revert, Version, object: nil
       cannot :revert, Version.where(item: ::Migration.state_finished)
