@@ -5,13 +5,15 @@ require 'rails_helper'
 RSpec.describe Comment do
   include Schematics::Specs::Model
 
-  context 'when there are mentions' do
-    before { allow(record).to receive(:mentions).and_return([User.new]) }
+  include_context 'with user'
 
-    it 'sends notifications after create' do
+  context 'when there are mentions' do
+    before { allow(record).to receive(:mentions).and_return([user]) }
+
+    it 'sends notifications after save' do
       expect { record.save! }
-        .to have_enqueued_job(Schematics::NotifyMentionsJob)
-        .with(record)
+        .to have_enqueued_job(Schematics::NotifyJob)
+        .with(record, 'mention', user)
         .on_queue('notifications')
     end
   end

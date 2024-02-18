@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_create_commit :notify_mentions, if: :mentions?
+      after_save_commit :notify_mentions, if: :mentions?
     end
 
     def mentions = self
@@ -27,7 +27,7 @@ module Schematics
     end
 
     def notify_mentions
-      NotifyMentionsJob.perform_later(self)
+      ::ActiveJob.perform_all_later mentions.map { NotifyJob.new(self, 'mention', _1) }
     end
   end
 end

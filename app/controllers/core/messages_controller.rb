@@ -9,8 +9,6 @@ class MessagesController < Schematics::ResourcesController
   def read!
     return if @resource.recipients.exclude?(current_user)
 
-    Schematics::Version
-      .where(event: 'show', item: @resource, user: current_user)
-      .first_or_create!
+    Schematics::NotifyJob.perform_later(@resource, 'show', current_user)
   end
 end
