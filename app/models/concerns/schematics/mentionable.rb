@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_create_commit :notify_mentions
+      after_create_commit :notify_mentions, if: :mentions?
     end
 
     def mentions = self
@@ -22,8 +22,12 @@ module Schematics
 
     protected
 
+    def mentions?
+      mentions.any?
+    end
+
     def notify_mentions
-      NotifyMentionsJob.perform_later(self) if mentions.any?
+      NotifyMentionsJob.perform_later(self)
     end
   end
 end

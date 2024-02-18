@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Message do
   include Schematics::Specs::Model
 
-  its(:notify_mentions) { is_expected.to be_nil }
+  its(:mentions?) { is_expected.to be_falsy }
 
   context 'when there are mentions' do
     before { allow(record).to receive(:mentions).and_return([User.new]) }

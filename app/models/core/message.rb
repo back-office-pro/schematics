@@ -21,5 +21,5 @@ class Message < Schematics::ApplicationRecord
 
   protected
 
-  def notify_mentions = nil
+  def mentions? = false
 end
