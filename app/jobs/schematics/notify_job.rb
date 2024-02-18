@@ -5,7 +5,7 @@ module Schematics
     queue_as :notifications
 
     def perform(item, event, user)
-      Version.where(item:, event:, user:).first_or_create!
+      Version.find_or_create_by!(item:, event:, user:)
     end
   end
 end
