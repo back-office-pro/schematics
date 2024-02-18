@@ -7,6 +7,17 @@ RSpec.describe Message do
 
   its(:notify_mentions) { is_expected.to be_nil }
 
+  context 'when there are mentions' do
+    before { allow(record).to receive(:mentions).and_return([User.new]) }
+
+    it 'does not send notifications after create' do
+      expect { record.save! }
+        .not_to have_enqueued_job(Schematics::NotifyMentionsJob)
+        .with(record)
+        .on_queue('notifications')
+    end
+  end
+
   describe '#read?' do
     subject { record.read?(record.author) }
 
