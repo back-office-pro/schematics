@@ -12,7 +12,7 @@ class User < Schematics::ApplicationRecord
 
   delegate :admin?, to: :role
 
-  after_create_commit { Schematics::UserMailer.new_account(self).deliver_later }
+  after_create_commit :deliver_new_account_mailer
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_TOKEN_DURATION do
     password_salt&.last(10)
@@ -41,6 +41,10 @@ class User < Schematics::ApplicationRecord
   end
 
   private
+
+  def deliver_new_account_mailer = Schematics::UserMailer
+    .new_account(self)
+    .deliver_later
 
   def secure_password_challenge
     return unless password_challenge
