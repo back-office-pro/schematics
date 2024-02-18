@@ -17,7 +17,7 @@ module Schematics
       .map(&:body)
       .map(&:attachables)
       .flatten
-      .grep(User)
+      .grep(::User)
       .uniq
 
     protected
