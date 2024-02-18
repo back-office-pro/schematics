@@ -85,7 +85,7 @@ module Sidekiq
           memo << [cb['callback'], event_name, cb['opts'], bid, parent_bid]
         end
 
-        opts = { bid:, event: event_name }
+        opts = { 'bid' => bid, 'event' => event_name } # rubocop:disable Style/StringHashKeys
 
         if callback_batch
           cb_opts = callback_args.first&.at(2) || opts
