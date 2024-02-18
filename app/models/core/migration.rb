@@ -24,9 +24,24 @@ class Migration < Schematics::ApplicationRecord
     def core = new(data: Tenant.schema.as_json, data_version: current_data_version)
   end
 
+  def on_success(_status, options)
+    migration = self.class.find(options['id'])
+    return if migration.state_error?
+
+    ::Tenant.schema = migration.data
+    ::Core::Migrations::Reload.call(migration:)
+  end
+
   def after_migrate_event
-    Schematics::MigrateSchemaJob.wait_for(self)
-    Schematics::MigrateSchemaJob.perform_later(self)
+    if Tenant.backend.concurrency.zero?
+      Schematics::MigrateSchemaJob.perform_later(self)
+    else
+      batch = Sidekiq::Batch.new
+      batch.on(:success, self.class, id:)
+      batch.jobs do
+        Schematics::MigrateSchemaJob.perform_later(self)
+      end
+    end
   end
 
   alias after_rollback_event after_migrate_event

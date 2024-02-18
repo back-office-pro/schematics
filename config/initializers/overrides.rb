@@ -18,6 +18,7 @@ require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
 require 'sassc/override/engine'
+require 'sidekiq/override/batch'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator
@@ -31,6 +32,9 @@ ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 Chartkick.singleton_class.prepend(Chartkick::Override)
+
+Sidekiq::Batch.singleton_class.prepend(Sidekiq::Override::Batch)
+Sidekiq::Batch.prepend(Sidekiq::Override::Batch)
 
 Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
