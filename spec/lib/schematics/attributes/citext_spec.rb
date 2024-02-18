@@ -26,6 +26,7 @@ describe Schematics::Attributes::Citext do
   its(:database_type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('last_name') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:open_api_filter_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('user[last_name]') }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:default) { is_expected.to be_a(String) }

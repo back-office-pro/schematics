@@ -40,6 +40,7 @@ describe Schematics::Virtuals::Calculation do
   it { is_expected.to be_valid }
 
   its(:open_api_type) { is_expected.to eq(Float) }
+  its(:open_api_filter_type) { is_expected.to eq(Float) }
   its(:to_sql) { is_expected.to eq('(products.price ^ categories.vat)') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:square_root_alt) }

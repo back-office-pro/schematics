@@ -23,6 +23,7 @@ describe Schematics::Attributes::Date do
   its(:database_type) { is_expected.to eq('date') }
   its(:column_name) { is_expected.to eq('created_at') }
   its(:open_api_type) { is_expected.to eq(Date) }
+  its(:open_api_filter_type) { is_expected.to eq(Date) }
   its(:input_name) { is_expected.to eq('user[created_at]') }
   its(:icon) { is_expected.to eq(:calendar_days) }
   its(:default) { is_expected.to be_a(String) }

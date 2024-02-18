@@ -23,6 +23,7 @@ describe Schematics::Attributes::Boolean do
   its(:default) { is_expected.to be_falsy }
   its(:column_name) { is_expected.to eq('toggle') }
   its(:open_api_type) { is_expected.to eq('boolean') }
+  its(:open_api_filter_type) { is_expected.to eq('boolean') }
   its(:input_name) { is_expected.to eq('entity[toggle]') }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:search_column) { is_expected.to eq(:toggle) }

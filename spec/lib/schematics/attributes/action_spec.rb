@@ -25,6 +25,7 @@ describe Schematics::Attributes::Action do
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('action') }
   its(:open_api_type) { is_expected.to eq(String) }
+  its(:open_api_filter_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('permission[action]') }
   its(:icon) { is_expected.to eq(:hand_rock) }
   its(:normalization) { is_expected.to be_nil }

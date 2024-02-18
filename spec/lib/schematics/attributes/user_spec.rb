@@ -33,6 +33,7 @@ describe Schematics::Attributes::User do
   its(:database_type) { is_expected.to eq('belongs_to') }
   its(:column_name) { is_expected.to eq('user_id') }
   its(:open_api_type) { is_expected.to eq(id!: String) }
+  its(:open_api_filter_type) { is_expected.to eq(String) }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
   its(:inverse_association_type) { is_expected.to eq('has_many') }

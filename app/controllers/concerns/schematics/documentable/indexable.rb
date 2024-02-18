@@ -16,7 +16,7 @@ module Schematics
 
           entity.searchable_elements.each do |element|
             query "#{Ransack.options[:search_key]}[#{element.name}]",
-                  element.open_api_type,
+                  element.open_api_filter_type,
                   desc: "Filter by #{element.name}"
           end
 

@@ -31,6 +31,7 @@ describe Schematics::Attributes::Decimal do
   its(:column_name) { is_expected.to eq('price') }
   its(:input_name) { is_expected.to eq('entity[price]') }
   its(:open_api_type) { is_expected.to eq(Float) }
+  its(:open_api_filter_type) { is_expected.to eq(Float) }
   its(:unit) { is_expected.to eq('$') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber

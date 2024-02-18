@@ -23,6 +23,7 @@ describe Schematics::Attributes::Flag do
   its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('states') }
   its(:open_api_type) { is_expected.to eq([String]) }
+  its(:open_api_filter_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('product[states][]') }
   its(:icon) { is_expected.to eq(:list_ol) }
   its(:default) { is_expected.to eq(['available']) }

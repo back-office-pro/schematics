@@ -26,6 +26,7 @@ describe Schematics::Attributes::ResponseCode do
   its(:database_type) { is_expected.to eq('integer') }
   its(:column_name) { is_expected.to eq('status') }
   its(:open_api_type) { is_expected.to eq(Integer) }
+  its(:open_api_filter_type) { is_expected.to eq(Integer) }
   its(:input_name) { is_expected.to eq('api_request[status]') }
   its(:icon) { is_expected.to eq(:hashtag) }
 

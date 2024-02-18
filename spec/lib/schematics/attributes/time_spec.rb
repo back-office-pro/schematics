@@ -23,6 +23,7 @@ describe Schematics::Attributes::Time do
   its(:database_type) { is_expected.to eq('time') }
   its(:column_name) { is_expected.to eq('hour') }
   its(:open_api_type) { is_expected.to eq(DateTime) }
+  its(:open_api_filter_type) { is_expected.to eq(DateTime) }
   its(:input_name) { is_expected.to eq('message[hour]') }
   its(:icon) { is_expected.to eq(:clock) }
   its(:validators) { is_expected.to be_empty }
