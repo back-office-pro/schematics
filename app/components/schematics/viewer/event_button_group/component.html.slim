@@ -2,6 +2,10 @@
   = link_to path_for(event),
             title: event.human,
             data:,
+            role:,
+            onclick:,
             class: css_classes_for(event) do
               span.icon = fa_icon event.icon, class: icon_class
-              span.text.d-none.d-lg-inline = event.human unless compact?
+              span.icon.d-none = fa_icon :spinner, class: icon_class, animation: 'spin'
+              span.text.d-none.d-xxl-inline = event.human unless compact?
+              span.text.d-none = t('schematics.application.button.loading') unless compact?

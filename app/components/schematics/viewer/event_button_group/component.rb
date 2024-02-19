@@ -32,6 +32,12 @@ module Schematics
           'fa-fw' if compact?
         end
 
+        def role = 'button'
+
+        def onclick = <<~JAVASCRIPT
+          this.classList.add('disabled')
+        JAVASCRIPT
+
         def data = {
           turbo_method: :patch,
           turbo_frame: '_top',
