@@ -11,7 +11,7 @@ module Schematics
         def data = {
           turbo_frame: '_top',
           controller: 'tooltip',
-          'bs-custom-class': 'responsive-button-tooltip'
+          'bs-custom-class': 'responsive-button-tooltip-lg'
         }
 
         def title = t('schematics.application.button.add', human_name:, gender:)

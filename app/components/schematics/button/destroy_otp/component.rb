@@ -6,7 +6,10 @@ module Schematics
       class Component < ApplicationComponent
         delegate :one_time_passwords_path, to: 'Schematics::Engine.routes.url_helpers'
 
-        def data = { controller: 'tooltip', 'bs-custom-class': 'responsive-button-tooltip' }
+        def data = {
+          controller: 'tooltip',
+          'bs-custom-class': 'responsive-button-tooltip-lg'
+        }
 
         def title = t('.text')
 

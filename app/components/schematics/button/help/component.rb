@@ -41,7 +41,7 @@ module Schematics
           'bs-toggle': ('offcanvas' if model_class && !core?),
           'bs-target': ('#documentation' if model_class && !core?),
           controller: ('tooltip' if tooltip),
-          'bs-custom-class': ('responsive-button-tooltip' if tooltip)
+          'bs-custom-class': ('responsive-button-tooltip-lg' if tooltip)
         }.compact
 
         def title = t('.text')

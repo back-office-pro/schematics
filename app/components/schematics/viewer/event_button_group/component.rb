@@ -36,7 +36,7 @@ module Schematics
           turbo_method: :patch,
           turbo_frame: '_top',
           controller: 'tooltip',
-          'bs-custom-class': ('responsive-button-tooltip' unless compact?)
+          'bs-custom-class': ('responsive-button-tooltip-xxl' unless compact?)
         }.compact
 
         def events = entity
