@@ -5,6 +5,10 @@ module Schematics
     module Dropdown
       class Component < Filter::Component
         delegate :collection, to: :field
+
+        def data
+          super.merge(controller: 'dropdown')
+        end
       end
     end
   end

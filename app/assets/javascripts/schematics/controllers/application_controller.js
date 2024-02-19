@@ -13,6 +13,10 @@ export default class extends Controller {
     target.closest('a').classList.add('disabled')
   }
 
+  submitForm ({ target }) {
+    target.form.requestSubmit()
+  }
+
   fetchAPI (url, method = 'GET', data) {
     if (navigator.onLine) {
       return fetch(url, {

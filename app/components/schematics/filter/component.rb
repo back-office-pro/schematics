@@ -52,9 +52,7 @@ module Schematics
 
       def form = 'filters'
 
-      def onchange = <<~JAVASCRIPT.squish
-        this.form.requestSubmit()
-      JAVASCRIPT
+      def data = { action: 'change->application#submitForm' }
 
       def value = params.dig(filter_key, name)
 
