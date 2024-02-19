@@ -9,8 +9,17 @@ module Schematics
         def data = {
           turbo_method: :delete,
           turbo_frame: '_top',
-          controller: 'tooltip'
+          controller: 'tooltip',
+          action: 'click->application#disableWith'
         }
+
+        def role = 'button'
+
+        def title = t('.title')
+
+        def css_classes = %w[btn btn-danger btn-sm]
+
+        def icon_class = 'fa-fw'
 
         def render?
           can?(:restore, resource)

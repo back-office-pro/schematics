@@ -34,14 +34,11 @@ module Schematics
 
         def role = 'button'
 
-        def onclick = <<~JAVASCRIPT
-          this.classList.add('disabled')
-        JAVASCRIPT
-
         def data = {
           turbo_method: :patch,
           turbo_frame: '_top',
           controller: 'tooltip',
+          action: 'click->application#disableWith',
           'bs-custom-class': ('responsive-button-tooltip-xxl' unless compact?)
         }.compact
 

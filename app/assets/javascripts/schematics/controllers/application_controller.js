@@ -9,6 +9,10 @@ export default class extends Controller {
     }
   }
 
+  disableWith ({ target }) {
+    target.closest('a').classList.add('disabled')
+  }
+
   fetchAPI (url, method = 'GET', data) {
     if (navigator.onLine) {
       return fetch(url, {
