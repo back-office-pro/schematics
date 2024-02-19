@@ -14,7 +14,7 @@ module Schematics
       .rich_text_attributes
       .map(&:name)
       .map(&method(:public_send))
-      .map(&:body)
+      .filter_map(&:body)
       .map(&:attachables)
       .flatten
       .grep(::User)
