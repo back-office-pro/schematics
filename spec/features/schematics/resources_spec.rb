@@ -56,4 +56,17 @@ RSpec.describe 'Resources' do
     find('.card-header').click_button
     expect(page).to have_field('user_email', with: user.email)
   end
+
+  it 'downloads a CSV file', :js, skip: 'not supported by driver' do
+    visit permissions_path
+    find_by_id('generate_file_in_background').click
+    page.driver.downloads.wait { first('#generate_file_in_background .dropdown-item').click }
+    expect(page.driver.downloads.files.first['suggestedFilename']).to eq('permissions.csv')
+  end
+
+  it 'downloads a PDF file', :js, skip: 'not supported by driver' do
+    visit user_path(user)
+    page.driver.downloads.wait { find_by_id('generate_file_in_background').click }
+    expect(page.driver.downloads.files.first['suggestedFilename']).to eq('user-john-doe.pdf')
+  end
 end
