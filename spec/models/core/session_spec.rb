@@ -31,6 +31,8 @@ RSpec.describe Session do
   describe '#touch!' do
     let(:request) { ActionController::TestRequest.create({}) }
 
+    before { record.save! }
+
     it 'updates updated_at timestamp' do
       expect { record.touch!(request) }.to change(record, :updated_at)
     end
