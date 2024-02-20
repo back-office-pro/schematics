@@ -1,16 +1,15 @@
 = turbo_frame_tag 'generate_file_in_background' do
   .dropdown.d-inline-block {
-      data-controller='generate-file-in-background'
+      data-controller='generate-file-in-background tooltip'
       data-generate-file-in-background-extension-value=extension
       data-generate-file-in-background-url-value=url
+      data-bs-custom-class='responsive-button-tooltip-lg'
+      data-bs-title=title
   }
     a#generate-file-in-background-button.btn.btn-sm.btn-icon-split.ms-1 {
-      data-controller='tooltip'
       data-generate-file-in-background-target='button'
       data-action=action
       data-bs-toggle=toggle
-      data-bs-title=title
-      data-bs-custom-class='responsive-button-tooltip-lg'
       aria-expanded='false'
       role='button'
     }
