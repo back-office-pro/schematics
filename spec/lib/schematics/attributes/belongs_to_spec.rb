@@ -90,6 +90,7 @@ describe Schematics::Attributes::BelongsTo do
       scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
       scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
       scope :with_user_comments, -> { includes({:user=>[:comments]}) }
+      scope :with_user_emailings, -> { includes({:user=>[:emailings]}) }
       belongs_to :user,
                  -> { with_deleted },
                  class_name: 'User',
@@ -127,6 +128,7 @@ describe Schematics::Attributes::BelongsTo do
         scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
         scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
         scope :with_user_comments, -> { includes({:user=>[:comments]}) }
+        scope :with_user_emailings, -> { includes({:user=>[:emailings]}) }
         belongs_to :user,
                    -> { with_deleted },
                    class_name: 'User',
