@@ -1,7 +1,0 @@
----
-en:
-  schematics:
-    forwardings:
-      create:
-        failure: An error occurred
-        success: The %{human_name} was successfully forwarded
