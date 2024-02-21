@@ -1,0 +1,17 @@
+---
+en:
+  activerecord:
+    attributes:
+      emailing:
+        recipients:
+          one: Recipient
+          other: Recipients
+          zero: No recipient
+        record: Record
+        sender: Sender
+        template: Template
+    models:
+      emailing:
+        gender: male
+        one: Emailing
+        other: Emailings
