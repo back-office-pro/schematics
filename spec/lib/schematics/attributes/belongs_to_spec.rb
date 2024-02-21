@@ -87,6 +87,7 @@ describe Schematics::Attributes::BelongsTo do
       scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
       scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
       scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
+      scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
       scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
       scope :with_user_comments, -> { includes({:user=>[:comments]}) }
       belongs_to :user,
@@ -123,6 +124,7 @@ describe Schematics::Attributes::BelongsTo do
         scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
         scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
         scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
+        scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
         scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
         scope :with_user_comments, -> { includes({:user=>[:comments]}) }
         belongs_to :user,
