@@ -7,7 +7,7 @@ class Emailing < Schematics::ApplicationRecord
 
   def deliver_emails
     recipients.each do |recipient|
-      ResourceMailer.forward(sender, recipient, record).deliver_later
+      Schematics::ResourceMailer.forward(sender, recipient, record).deliver_later
     end
   end
 end
