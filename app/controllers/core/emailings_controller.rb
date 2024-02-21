@@ -4,9 +4,14 @@ class EmailingsController < Schematics::ResourcesController
   include Schematics::Nestable
 
   skip_authorize_resource only: %i[new create]
-  before_action -> { authorize!(:show, record) }, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
+  before_action :authorize_create!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
 
   protected
+
+  def authorize_create!
+    authorize!(:show, record)
+    authorize!(:email, parent_model_class)
+  end
 
   def parent_model_name
     @resource.try(:record_type) || super
