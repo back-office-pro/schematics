@@ -1,0 +1,17 @@
+---
+it:
+  activerecord:
+    attributes:
+      emailing:
+        recipients:
+          one: Destinatario
+          other: Destinatari
+          zero: Nessun destinatario
+        record: Registrazione
+        sender: Mittente
+        template: Modello
+    models:
+      emailing:
+        gender: male
+        one: Invio di e-mail
+        other: Invii di e-mail

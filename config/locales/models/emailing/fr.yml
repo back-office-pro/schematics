@@ -1,0 +1,17 @@
+---
+fr:
+  activerecord:
+    attributes:
+      emailing:
+        recipients:
+          one: Destinataire
+          other: Destinataires
+          zero: Aucun destinataire
+        record: Enregistrement
+        sender: Expéditeur
+        template: Modèle
+    models:
+      emailing:
+        gender: male
+        one: Envoi d'e-mails
+        other: Envois d'e-mails
