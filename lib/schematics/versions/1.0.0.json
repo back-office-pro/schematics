@@ -1712,7 +1712,7 @@
     "name": "template",
     "options": {
       "icon": "file_signature",
-      "descriptor": "model"
+      "descriptor": "name"
     },
     "attributes": [
       {
