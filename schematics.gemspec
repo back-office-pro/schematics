@@ -122,7 +122,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rqrcode', '2.2.0'
   spec.add_dependency 'rspec-rails', '6.1.1'
   spec.add_dependency 'ruby-graphviz', '1.2.5'
-  spec.add_dependency 'ruby-vips', '2.2.0'
+  spec.add_dependency 'ruby-vips', '2.2.1'
   spec.add_dependency 'searchkick', '5.3.1'
   spec.add_dependency 'shoulda-callback-matchers', '1.1.4'
   spec.add_dependency 'shoulda-matchers', '6.1.0'
