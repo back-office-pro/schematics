@@ -43,8 +43,11 @@ module Schematics
               .to route(:post, polymorphic_path([record, ::Comment], format: nil))
               .to params.merge(controller: 'comments', parent_id => id, action: :create).compact
             is_expected
-              .to route(:post, polymorphic_path([record, :forwardings], format: nil))
-              .to params.merge(controller: 'schematics/forwardings', parent_id => id, action: :create).compact # rubocop:disable Layout/LineLength
+              .to route(:get, new_polymorphic_path([record, ::Emailing], format: nil))
+              .to params.merge(controller: 'emailings', parent_id => id, action: :new).compact
+            is_expected
+              .to route(:post, polymorphic_path([record, ::Emailing], format: nil))
+              .to params.merge(controller: 'emailings', parent_id => id, action: :create).compact
           end
           if can?(:create)
             is_expected
