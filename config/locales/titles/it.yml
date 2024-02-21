@@ -3,6 +3,9 @@ it:
   titles:
     comparisons:
       show: Confronto %{resource}
+    emailings:
+      create: Inviare via e-mail
+      new: Inviare via e-mail
     imports:
       create: Importare %{parent_human_name_plural}
       new: Importare %{parent_human_name_plural}
