@@ -4,6 +4,7 @@ module Schematics
   class ApplicationRecord < ::ApplicationRecord
     self.abstract_class = true
     self.implicit_order_column = 'created_at'
+    self.inheritance_column = '__disabled__'
     include Loadable
     include Duplicable
     include Serializable
