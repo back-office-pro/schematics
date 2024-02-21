@@ -1,5 +1,7 @@
 ---
 one:
+  name: User custom PDF
+  type: pdf
   model: User
   content: |
     <table>
