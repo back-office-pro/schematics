@@ -12,7 +12,7 @@ module ActiveModel
                   .map(&attribute)
                   .exclude?(value)
 
-        record.errors.add(attribute, :taken, **options.merge(value:))
+        record.errors.add(attribute, :taken, **options.except(:scope).merge(value:))
       end
     end
 
