@@ -8,7 +8,6 @@ it:
     delete: cancellare
     duplicate: duplicare
     edit: editare
-    forwardings: spedizioni
     login: connessione
     logout: disconnessione
     new: nuovo
