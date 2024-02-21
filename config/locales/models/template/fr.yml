@@ -5,6 +5,13 @@ fr:
       template:
         content: Contenu
         model: Donnée
+        name: Nom
+        type: Type
+    enums:
+      template:
+        type:
+          email: E-mail
+          pdf: PDF
     models:
       template:
         gender: male
