@@ -10,7 +10,7 @@ module Schematics
         .entities
         .reject(&:core?)
         .filter_map(&:model_class)
-        .push(::Import, ::ActiveStorage::Blob)
+        .push(::Import, ::Emailing, ::ActiveStorage::Blob)
         .select { can?(:index, _1) }
         .sort_by(&:human_name)
 
