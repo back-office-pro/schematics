@@ -5,6 +5,13 @@ en:
       template:
         content: Content
         model: Data
+        name: Name
+        type: Type
+    enums:
+      template:
+        type:
+          email: Email
+          pdf: PDF
     models:
       template:
         gender: male
