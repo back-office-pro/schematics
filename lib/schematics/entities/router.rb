@@ -118,7 +118,7 @@ module Schematics
         return unless can?(:show)
 
         <<~RUBY
-          resources :emailings, only: %i[new create], as: '#{table_name}_emailings'
+          resources :emailings, only: %i[new create]
         RUBY
       end
 
