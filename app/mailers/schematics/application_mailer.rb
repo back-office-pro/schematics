@@ -8,9 +8,10 @@ module Schematics
 
     protected
 
-    def mail_to(user)
+    def mail_to(user, subject = nil)
       ::I18n.with_locale(user.locale) do
-        bootstrap_mail to: email_address_with_name(user.email, user.full_name)
+        to = email_address_with_name(user.email, user.full_name)
+        bootstrap_mail(**{ to:, subject: }.compact)
       end
     end
   end
