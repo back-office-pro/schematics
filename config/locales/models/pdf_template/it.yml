@@ -1,0 +1,12 @@
+---
+it:
+  activerecord:
+    attributes:
+      pdf_template:
+        content: Contenuto
+        model: Data
+    models:
+      pdf_template:
+        gender: male
+        one: Modello PDF
+        other: Modelli PDF
