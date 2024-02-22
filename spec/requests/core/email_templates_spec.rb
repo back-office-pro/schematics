@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe TemplatesController do
+RSpec.describe EmailTemplatesController do
   include Schematics::Specs::Request
 end
