@@ -1,9 +1,0 @@
----
-fr:
-  schematics:
-    resource_mailer:
-      forward:
-        body:
-          first: Bonjour %{recipient},
-          second: "%{sender} souhaite vous transmettre ces pièces jointes."
-        subject: Des documents vous ont été transmis

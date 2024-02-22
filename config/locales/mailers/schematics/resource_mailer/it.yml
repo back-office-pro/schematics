@@ -1,9 +1,0 @@
----
-it:
-  schematics:
-    resource_mailer:
-      forward:
-        body:
-          first: Buongiorno %{recipient},
-          second: "%{sender} desidera inoltrare questi allegati."
-        subject: I documenti ti sono stati inviati
