@@ -4,4 +4,13 @@ require 'rails_helper'
 
 RSpec.describe Emailing do
   include Schematics::Specs::Model
+
+  its(:serializers) { is_expected.to be_empty }
+
+  it 'sends a mail after create' do
+    expect { record.save! }
+      .to have_enqueued_mail(Schematics::EmailingMailer, :dispatch)
+      .with(record, record.recipients.first)
+      .on_queue('mailers')
+  end
 end
