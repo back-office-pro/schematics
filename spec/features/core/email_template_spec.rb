@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Template do
+RSpec.describe EmailTemplate do
   include Schematics::Specs::Feature
 end

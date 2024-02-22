@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe TemplatesController do
+RSpec.describe PDFTemplatesController do
   include Schematics::Specs::Routing
 end
