@@ -1,0 +1,12 @@
+---
+fr:
+  activerecord:
+    attributes:
+      email_template:
+        content: Contenu
+        name: Nom
+    models:
+      email_template:
+        gender: male
+        one: Modèle d'e-mail
+        other: Modèles d'e-mail
