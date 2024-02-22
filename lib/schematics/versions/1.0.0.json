@@ -1709,44 +1709,54 @@
   },
   {
     "id": "58d73948-9292-41d5-b27d-ceafcf628f34",
-    "name": "template",
+    "name": "pdf_template",
     "options": {
-      "icon": "file_signature",
-      "descriptor": "name"
+      "icon": "file_pdf",
+      "descriptor": "model"
     },
     "attributes": [
-      {
-        "id": "12916841-274d-487e-9534-d643651b3be2",
-        "name": "name",
-        "type": "citext",
-        "options": {
-          "unique": true,
-          "required": true,
-          "translated": true,
-          "limit": 50
-        }
-      },
-      {
-        "id": "adb795de-c9af-4883-bce1-87669525a92a",
-        "name": "type",
-        "type": "enum",
-        "options": {
-          "values": [
-            "pdf",
-            "email"
-          ]
-        }
-      },
       {
         "id": "3cbbdb59-43be-4648-ab39-d0d6eda48aa7",
         "name": "model",
         "type": "model",
         "options": {
+          "unique": true,
           "required": true
         }
       },
       {
         "id": "e18c96a6-ecbd-4a77-9945-7af5cd4ea99c",
+        "name": "content",
+        "type": "code",
+        "options": {
+          "required": true,
+          "translated": true,
+          "language": "liquid"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ae17219b-937c-4d9a-ac96-6d218e8be434",
+    "name": "email_template",
+    "options": {
+      "icon": "file_signature",
+      "descriptor": "subject"
+    },
+    "attributes": [
+      {
+        "id": "74e7c6cd-2fac-4158-b611-d3ff3a659fae",
+        "name": "subject",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "translated": true,
+          "limit": 100
+        }
+      },
+      {
+        "id": "f67f476d-7020-433d-8900-d9b1d95c0dda",
         "name": "content",
         "type": "code",
         "options": {
@@ -1780,7 +1790,7 @@
     "attributes": [
       {
         "id": "8cdb0579-e55d-4afb-91ae-47d7b9035d81",
-        "name": "template",
+        "name": "email_template",
         "type": "belongs_to",
         "options": {
           "required": true
@@ -1791,6 +1801,7 @@
         "name": "record",
         "type": "belongs_to",
         "options": {
+          "required": true,
           "polymorphic": true,
           "readonly": true
         }
@@ -1802,6 +1813,30 @@
         "options": {
           "required": true,
           "inverse_association_name": "sent_emails"
+        }
+      },
+      {
+        "id": "2a821df0-0984-483e-bc50-4396d30944cc",
+        "name": "pdf_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
+        }
+      },
+      {
+        "id": "093dbaf0-7932-4154-92bf-5fd51bdb39e4",
+        "name": "svg_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
+        }
+      },
+      {
+        "id": "842d0f00-4680-42a2-a308-26f280a8cde5",
+        "name": "ics_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
         }
       }
     ]
