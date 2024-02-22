@@ -3,13 +3,16 @@ fr:
   activerecord:
     attributes:
       emailing:
+        email_template: Modèle
+        ics_attachment: Attacher le iCalendar
+        pdf_attachment: Attacher le PDF
         recipients:
           one: Destinataire
           other: Destinataires
           zero: Aucun destinataire
         record: Enregistrement
         sender: Expéditeur
-        template: Modèle
+        svg_attachment: Attacher le QR Code
     models:
       emailing:
         gender: male
