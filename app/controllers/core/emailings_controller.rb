@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 class EmailingsController < Schematics::ResourcesController
   include Schematics::Nestable
 
