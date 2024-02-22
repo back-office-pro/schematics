@@ -1,8 +1,6 @@
 ---
 one:
-  name: User custom PDF
-  type: pdf
-  model: User
+  subject: Welcome!
   content: |
     <table>
       <tbody>

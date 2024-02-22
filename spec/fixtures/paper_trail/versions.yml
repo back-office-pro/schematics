@@ -53,5 +53,9 @@ eleven:
   whodunnit: <%= User.first.id %>
 twelve:
   event: create
-  item: one (Template)
+  item: one (PDFTemplate)
+  whodunnit: <%= User.first.id %>
+thirteen:
+  event: create
+  item: one (EmailTemplate)
   whodunnit: <%= User.first.id %>
