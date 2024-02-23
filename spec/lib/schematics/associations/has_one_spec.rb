@@ -9,8 +9,10 @@ describe Schematics::Associations::HasOne do
     )
   end
 
+  let(:schema) { Schematics::Schema.new(data: [{ name: 'schema' }]) }
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -58,11 +60,5 @@ describe Schematics::Associations::HasOne do
               inverse_of: :schema,
               autosave: true
     RUBY
-  end
-
-  context 'when association has a name collision' do
-    before { association.prefixed = true }
-
-    its(:name) { is_expected.to eq('schema_entity') }
   end
 end

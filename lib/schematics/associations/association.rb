@@ -21,6 +21,7 @@ module Schematics
                :column_name,
                :association_type,
                :options,
+               :inverse_entity,
                to: :belongs_to
       delegate :descriptor,
                :class_name,
@@ -30,7 +31,7 @@ module Schematics
                :schema,
                :existing?,
                to: :entity
-      attr_accessor :belongs_to, :prefixed
+      attr_accessor :belongs_to
 
       validates :name, presence: true
 
@@ -43,14 +44,21 @@ module Schematics
         def to_proc = -> { build(**_1) }
       end
 
+      def initialize(*)
+        super
+        @name = source
+      end
+
+      def original_name = @name
+
       def open_api_type = [{ id!: super }]
 
       def weight = 3
 
       def name
-        return [inverse_of, source].join('_') if prefixed
+        return [inverse_of, original_name].join('_') if prefixed?
 
-        source
+        original_name
       end
 
       def source = belongs_to.inverse_association_name
@@ -60,6 +68,11 @@ module Schematics
       def to_str = scope_to_str.concat(association_to_str)
 
       protected
+
+      def prefixed? = inverse_entity
+        .associations
+        .excluding(self)
+        .any? { _1.original_name == original_name }
 
       def association_to_str = <<~RUBY.chomp
         #{type} :#{name},

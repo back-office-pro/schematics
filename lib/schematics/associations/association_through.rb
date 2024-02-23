@@ -12,11 +12,16 @@ module Schematics
 
       protected
 
+      def prefixed? = entity
+        .associations
+        .excluding(self)
+        .any? { _1.original_name == original_name }
+
       def association_to_str = super
         .concat(",\n")
         .concat <<~RUBY.indent(8)
           through: :#{through.name},
-          source: :#{source}
+          source: :#{name}
         RUBY
 
       def spec_interpolations = super.merge(through: through.name)

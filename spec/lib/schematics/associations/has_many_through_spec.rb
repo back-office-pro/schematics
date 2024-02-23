@@ -5,8 +5,12 @@ describe Schematics::Associations::HasManyThrough do
     described_class.new(belongs_to: through, through: belongs_to.inverse_association)
   end
 
+  let(:schema) do
+    Schematics::Schema.new(data: [{ name: 'schema' }, { name: 'entity' }])
+  end
   let(:entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'attribute',
       options: {
         descriptor: 'name'
@@ -18,6 +22,7 @@ describe Schematics::Associations::HasManyThrough do
   end
   let(:through_entity) do
     Schematics::Entities::Entity.new(
+      schema:,
       name: 'entity',
       options: {
         descriptor: 'type'
@@ -60,11 +65,5 @@ describe Schematics::Associations::HasManyThrough do
               through: :entities,
               source: :attributes
     RUBY
-  end
-
-  context 'when association has a name collision' do
-    before { association.prefixed = true }
-
-    its(:name) { is_expected.to eq('entity_attributes') }
   end
 end

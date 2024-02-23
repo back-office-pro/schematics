@@ -186,7 +186,7 @@ module Schematics
                   .class_name(element.class_name)
                   .with_foreign_key(element.column_name)
                   .through(element.through.name.to_sym)
-                  .source(element.source.to_sym)
+                  .source(element.name.to_sym)
               when Associations::HasManyNested
                 is_expected.to accept_nested_attributes_for(element.name.to_sym)
                 is_expected
@@ -214,7 +214,7 @@ module Schematics
                   .class_name(element.class_name)
                   .with_foreign_key(element.column_name)
                   .through(element.through.name.to_sym)
-                  .source(element.source.to_sym)
+                  .source(element.name.to_sym)
               end
             end
           end

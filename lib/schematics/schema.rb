@@ -28,6 +28,7 @@ module Schematics
       @data = data.map(&:deep_symbolize_keys)
       @version = version
       self.entities = core_data.concat(@data)
+      add_associations
     end
 
     def as_json = @data
@@ -37,7 +38,6 @@ module Schematics
                   .each_with_object(schema: self)
                   .map(&:merge)
                   .map(&Entities::Entity)
-      add_associations_and_check_for_name_collisions
     end
 
     def find_entity_by_name(name)
@@ -68,13 +68,12 @@ module Schematics
 
     def core_data_filepath = File.expand_path(File.join('versions', "#{version}.json"), __dir__)
 
-    def add_associations_and_check_for_name_collisions
+    def add_associations
       add_has_and_belongs_to_many_associations
       add_inverse_associations
       add_has_many_through_associations
       add_has_one_through_associations
       add_inverse_polymorphic_associations
-      entities.each(&:check_for_association_name_collisions)
     end
 
     # :reek:FeatureEnvy

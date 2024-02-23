@@ -83,9 +83,9 @@ describe Schematics::Attributes::User do
       scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
       scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
       scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
-      scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
-      scope :with_user_comments, -> { includes({:user=>[:comments]}) }
-      scope :with_user_emailings, -> { includes({:user=>[:emailings]}) }
+      scope :with_user_record_drafts, -> { includes({:user=>[:record_drafts]}) }
+      scope :with_user_record_comments, -> { includes({:user=>[:record_comments]}) }
+      scope :with_user_record_emailings, -> { includes({:user=>[:record_emailings]}) }
       belongs_to :user,
                  -> { with_deleted },
                  class_name: 'User',
@@ -122,9 +122,9 @@ describe Schematics::Attributes::User do
         scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
         scope :with_user_blog_posts, -> { includes({:user=>[:blog_posts]}) }
         scope :with_user_sent_emails, -> { includes({:user=>[:sent_emails]}) }
-        scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
-        scope :with_user_comments, -> { includes({:user=>[:comments]}) }
-        scope :with_user_emailings, -> { includes({:user=>[:emailings]}) }
+        scope :with_user_record_drafts, -> { includes({:user=>[:record_drafts]}) }
+        scope :with_user_record_comments, -> { includes({:user=>[:record_comments]}) }
+        scope :with_user_record_emailings, -> { includes({:user=>[:record_emailings]}) }
         belongs_to :user,
                    -> { with_deleted },
                    class_name: 'User',

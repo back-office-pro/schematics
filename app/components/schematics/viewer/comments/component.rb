@@ -12,7 +12,7 @@ module Schematics
         def before_render
           @pagy, @comments = pagy(
             resource
-              .comments
+              .record_comments
               .with_string_translations
               .with_rich_text_content_and_embeds
               .with_author_avatar

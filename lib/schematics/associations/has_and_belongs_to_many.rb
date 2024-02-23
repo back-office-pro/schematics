@@ -51,6 +51,8 @@ module Schematics
 
       protected
 
+      def prefixed? = false
+
       def association_to_str = <<~RUBY
         #{type} :#{name}, class_name: '#{class_name}'
       RUBY
