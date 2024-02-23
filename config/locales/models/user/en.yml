@@ -9,6 +9,10 @@ en:
           other: Created meetings
           zero: No created meeting
         email: Email
+        emailings:
+          one: Received email
+          other: Received emails
+          zero: No email received
         first_name: First name
         full_name: Full name
         last_name: Last name
@@ -32,6 +36,10 @@ en:
           other: Requested tasks
           zero: No requested task
         role: Role
+        sent_emails:
+          one: Sent email
+          other: Sent emails
+          zero: No email sent
         sent_messages:
           one: Sent message
           other: Sent messages

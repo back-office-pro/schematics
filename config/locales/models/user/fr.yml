@@ -9,6 +9,10 @@ fr:
           other: Réunions créées
           zero: Aucune réunion créée
         email: E-mail
+        emailings:
+          one: E-mail reçu
+          other: E-mails reçus
+          zero: Aucun e-mail reçu
         first_name: Prénom
         full_name: Nom complet
         last_name: Nom
@@ -32,6 +36,10 @@ fr:
           other: Tâches demandées
           zero: Aucune tâche demandée
         role: Rôle
+        sent_emails:
+          one: E-mail envoyé
+          other: E-mails envoyés
+          zero: Aucun e-mail envoyé
         sent_messages:
           one: Message envoyé
           other: Messages envoyés
