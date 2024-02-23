@@ -59,8 +59,3 @@ thirteen:
   event: create
   item: one (EmailTemplate)
   whodunnit: <%= User.first.id %>
-fourteen:
-  event: create
-  item_id: d9f74a4c-98c0-478c-87ed-845ac86243bb
-  item_type: Emailing
-  whodunnit: <%= User.first.id %>
