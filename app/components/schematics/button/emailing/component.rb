@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Button
+    module Emailing
+      class Component < ApplicationComponent
+        delegate :icon, to: '::Emailing.entity'
+        option :resource
+
+        def data = {
+          turbo_frame: '_top',
+          controller: 'tooltip',
+          'bs-custom-class': 'responsive-button-tooltip-xxl'
+        }
+
+        def title = t('.text')
+
+        def css_classes = %w[btn btn-sm btn-icon-split ms-1]
+
+        def path = new_polymorphic_path([resource, ::Emailing], format: nil)
+
+        def render?
+          can?(:email, resource)
+        end
+      end
+    end
+  end
+end

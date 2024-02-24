@@ -1709,9 +1709,9 @@
   },
   {
     "id": "58d73948-9292-41d5-b27d-ceafcf628f34",
-    "name": "template",
+    "name": "pdf_template",
     "options": {
-      "icon": "file_signature",
+      "icon": "file_pdf",
       "descriptor": "model"
     },
     "attributes": [
@@ -1732,6 +1732,111 @@
           "required": true,
           "translated": true,
           "language": "liquid"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ae17219b-937c-4d9a-ac96-6d218e8be434",
+    "name": "email_template",
+    "options": {
+      "icon": "file_signature",
+      "descriptor": "subject"
+    },
+    "attributes": [
+      {
+        "id": "74e7c6cd-2fac-4158-b611-d3ff3a659fae",
+        "name": "subject",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "translated": true,
+          "limit": 100
+        }
+      },
+      {
+        "id": "f67f476d-7020-433d-8900-d9b1d95c0dda",
+        "name": "content",
+        "type": "code",
+        "options": {
+          "required": true,
+          "translated": true,
+          "language": "liquid"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ac10defd-9a7b-4668-8486-fec4ea35420e",
+    "name": "emailing",
+    "options": {
+      "icon": "paper_plane",
+      "actions": [
+        "index",
+        "show"
+      ]
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "recipients",
+        "options": {
+          "required": true,
+          "type": "user"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": "8cdb0579-e55d-4afb-91ae-47d7b9035d81",
+        "name": "email_template",
+        "type": "belongs_to",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "id": "d9ee5139-9b3f-4798-aa54-299258ef2ce2",
+        "name": "record",
+        "type": "belongs_to",
+        "options": {
+          "required": true,
+          "polymorphic": true,
+          "readonly": true
+        }
+      },
+      {
+        "id": "0eabbdc8-3192-4c2a-9512-ad01888022f4",
+        "name": "sender",
+        "type": "user",
+        "options": {
+          "required": true,
+          "inverse_association_name": "sent_emails"
+        }
+      },
+      {
+        "id": "2a821df0-0984-483e-bc50-4396d30944cc",
+        "name": "pdf_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
+        }
+      },
+      {
+        "id": "093dbaf0-7932-4154-92bf-5fd51bdb39e4",
+        "name": "svg_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
+        }
+      },
+      {
+        "id": "842d0f00-4680-42a2-a308-26f280a8cde5",
+        "name": "ics_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
         }
       }
     ]

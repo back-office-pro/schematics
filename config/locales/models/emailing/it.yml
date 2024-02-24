@@ -1,0 +1,20 @@
+---
+it:
+  activerecord:
+    attributes:
+      emailing:
+        email_template: Modello
+        ics_attachment: Allegare iCalendar
+        pdf_attachment: Allegare PDF
+        recipients:
+          one: Destinatario
+          other: Destinatari
+          zero: Nessun destinatario
+        record: Registrazione
+        sender: Mittente
+        svg_attachment: Allegare QR Code
+    models:
+      emailing:
+        gender: male
+        one: Invio di e-mail
+        other: Invii di e-mail

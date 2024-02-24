@@ -86,7 +86,7 @@ module Schematics
         events.map(&method(:event_route)),
         import_routes,
         comment_routes,
-        forward_route
+        emailing_route
       ].compact.join.indent(2).chomp
 
       def delete_route
@@ -114,11 +114,11 @@ module Schematics
         RUBY
       end
 
-      def forward_route
+      def emailing_route
         return unless can?(:show)
 
         <<~RUBY
-          resources :forwardings, controller: 'schematics/forwardings', only: :create
+          resources :emailings, only: %i[new create]
         RUBY
       end
 

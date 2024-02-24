@@ -1,0 +1,20 @@
+---
+en:
+  activerecord:
+    attributes:
+      emailing:
+        email_template: Template
+        ics_attachment: Attach iCalendar
+        pdf_attachment: Attach PDF
+        recipients:
+          one: Recipient
+          other: Recipients
+          zero: No recipient
+        record: Record
+        sender: Sender
+        svg_attachment: Attach QR Code
+    models:
+      emailing:
+        gender: male
+        one: Emailing
+        other: Emailings

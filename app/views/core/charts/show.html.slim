@@ -6,7 +6,7 @@
         = __card_heading(icon: :eye, title:)
       .col-auto
         = __button_generate_file_in_background(:pdf)
-        = __button_forward
+        = __button_emailing(resource: @resource)
         = __button_comment(resource: @resource)
         = __button_edit(resource: @resource, compact: false)
         = __button_duplicate(resource: @resource)
@@ -22,4 +22,3 @@
                   dataset: { borderWidth: @resource.border_width }
 = __viewer_comments(resource: @resource)
 = __viewer_timeline(resource: @resource)
-= __forward_modal(resource: @resource)

@@ -7,7 +7,7 @@ RSpec.describe Schematics::PDFSerializer do
 
   include_context 'with user'
 
-  let(:template) { Template.create!(model: 'User', content: 'Custom template') }
+  let(:template) { PDFTemplate.create!(model: 'User', content: 'Custom template') }
 
   its(:file) { is_expected.to be_a(Tempfile) }
   its(:filename) { is_expected.to eq('user-doe-john.pdf') }

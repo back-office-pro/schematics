@@ -3,6 +3,9 @@ en:
   titles:
     comparisons:
       show: "%{resource} comparison"
+    emailings:
+      create: Send by email
+      new: Send by email
     imports:
       create: Import %{parent_human_name_plural}
       new: Import %{parent_human_name_plural}
