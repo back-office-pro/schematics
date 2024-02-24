@@ -1,7 +1,7 @@
 ---
 one:
   id: d9f74a4c-98c0-478c-87ed-845ac86243bb
-  email_template: one (EmailTemplate)
+  email_template_id: a64a65ea-6378-42bb-b142-e95a8845706e
   record_id: a44e9214-c886-4ad4-91df-a55ec049270b
   record_type: Meeting
   sender_id: <%= User.first.id %>
