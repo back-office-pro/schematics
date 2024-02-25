@@ -14,7 +14,7 @@ it:
           one: Risposta
           other: Risposte
           zero: Nessuna risposta
-        subject: Soggetto
+        subject: Oggetto
     models:
       message:
         gender: male

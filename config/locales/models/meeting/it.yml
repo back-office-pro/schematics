@@ -12,7 +12,7 @@ it:
           other: Partecipanti
           zero: Nessun partecipante
         start_at: Inizia da
-        subject: Soggetto
+        subject: Oggetto
         to_come: A venire
         url: URL
         user_groups:

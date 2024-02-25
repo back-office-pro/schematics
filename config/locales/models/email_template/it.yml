@@ -4,9 +4,9 @@ it:
     attributes:
       email_template:
         content: Contenuto
-        subject: Soggetto
+        subject: Oggetto
     models:
       email_template:
         gender: male
-        one: Modello email
-        other: Modelli email
+        one: Modello di e-mail
+        other: Modelli di e-mail
