@@ -4,7 +4,7 @@ fr:
     attributes:
       email_template:
         content: Contenu
-        name: Nom
+        subject: Sujet
     models:
       email_template:
         gender: male
