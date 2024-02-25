@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationController < ::ApplicationController
+  class ApplicationController < ::Tenant.application_controller_class
     include ::Pagy::Backend
     include Localizable
     include Authenticable

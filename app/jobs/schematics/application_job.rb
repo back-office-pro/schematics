@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationJob < ::ApplicationJob
+  class ApplicationJob < ::Tenant.application_job_class
     include Rollbar::ActiveJob
 
     retry_on ActiveRecord::Deadlocked

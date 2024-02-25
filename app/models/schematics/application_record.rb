@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationRecord < ::ApplicationRecord
-    self.abstract_class = true
+  class ApplicationRecord < ::Tenant.application_record_class
+    primary_abstract_class
+
     self.implicit_order_column = 'created_at'
     self.inheritance_column = nil
+
     include Loadable
     include Duplicable
     include Serializable
@@ -12,6 +14,7 @@ module Schematics
     include Translatable
     include Mentionable
     include Attachable
+
     loadable concerns: [
       ::Tenant.search_engine.concern,
       SoftDeletable,

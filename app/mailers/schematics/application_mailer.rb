@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class ApplicationMailer < ::ApplicationMailer
+  class ApplicationMailer < ::Tenant.application_mailer_class
     self.deliver_later_queue_name = :mailers
     layout 'schematics/mailer'
     helper ApplicationHelper

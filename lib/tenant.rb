@@ -41,6 +41,30 @@ class Tenant
       .module_parent_name
       .underscore
 
+    def application_record_class
+      return ApplicationRecord if defined?(ApplicationRecord)
+
+      ActiveRecord::Base
+    end
+
+    def application_controller_class
+      return ApplicationController if defined?(ApplicationController)
+
+      ActionController::Base
+    end
+
+    def application_job_class
+      return ApplicationJob if defined?(ApplicationJob)
+
+      ActiveJob::Base
+    end
+
+    def application_mailer_class
+      return ApplicationMailer if defined?(ApplicationMailer)
+
+      ActionMailer::Base
+    end
+
     def subdomain = name.dasherize
 
     def domain = 'back-office.pro'
