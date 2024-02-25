@@ -166,19 +166,11 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     TEXT
   end
 
-  def edit_application_mailer
-    return unless generating?
-
-    comment_lines 'app/mailers/application_mailer.rb', /default from:/
-    comment_lines 'app/mailers/application_mailer.rb', /layout/
-  end
-
   def remove_unused_files
     remove_file 'app/assets/stylesheets/application.css'
+    remove_file 'app/controllers/application_controller.rb'
     remove_file 'app/helpers/application_helper.rb'
     remove_file 'app/views/layouts/application.html.erb'
-    remove_file 'app/views/layouts/mailer.html.erb'
-    remove_file 'app/views/layouts/mailer.text.erb'
     remove_file 'bin/bundle'
     remove_file 'bin/rake'
     remove_file 'bin/setup'
@@ -187,15 +179,18 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/initializers/inflections.rb'
     remove_file 'config/initializers/permissions_policy.rb'
     remove_file 'config/locales/en.yml'
-    remove_file 'config/cable.yml'
-    remove_file 'config/database.yml'
-    remove_file 'config/storage.yml'
     remove_file 'config/puma.rb'
     remove_file 'config/routes.rb'
     remove_file 'config/environments/development.rb'
     remove_file 'config/environments/production.rb'
     remove_file 'config/environments/test.rb'
-    remove_file 'db/seeds.rb'
+    remove_file 'public/404.html'
+    remove_file 'public/422.html'
+    remove_file 'public/500.html'
+    remove_file 'public/apple-touch-icon-precomposed.png'
+    remove_file 'public/apple-touch-icon.png'
+    remove_file 'public/favicon.ico'
+    remove_file 'public/robots.txt'
     remove_file '.gitattributes'
     remove_file '.rspec'
     remove_file '.ruby-version'
@@ -282,6 +277,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_javascript: true,
     skip_hotwire: true,
     skip_docker: true,
+    skip_action_mailer: true,
+    skip_active_job: true,
+    skip_action_cable: true,
+    skip_active_record: true,
     skip_asset_pipeline: true
   }
 
