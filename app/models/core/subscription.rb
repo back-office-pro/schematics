@@ -79,22 +79,18 @@ class Subscription < Schematics::ApplicationRecord
   private
 
   def search_engine
-    return 'opensearch' if quota_databases > 2
-
-    'postgresql'
-  end
-
-  def backend
-    return 'redis' if quota_databases > 1
-
-    'postgresql'
+    case quota_databases
+    when 2
+      'opensearch'
+    else
+      'postgresql'
+    end
   end
 
   def update_env_file
     filepath = Rails.root.join('.env')
     filepath.write filepath
       .read
-      .gsub(/BACKEND=(.*)/, "BACKEND=#{backend}")
       .gsub(/SEARCH_ENGINE=(.*)/, "SEARCH_ENGINE=#{search_engine}")
     FileUtils.touch Rails.root.join('tmp/restart.txt')
   end
