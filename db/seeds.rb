@@ -20,6 +20,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Documentation.create!
   User.create!(email: Subscription.email, password: Tenant.default_password, role: Role.admin)
   Stat.create!(aggregate: 'count', model: 'User')
+  Stat.create!(aggregate: 'count', model: 'Emailing')
   Stat.create!(
     aggregate: 'sum',
     model: 'ActiveStorage::Blob',
