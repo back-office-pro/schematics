@@ -13,12 +13,12 @@ module Schematics
       def human_name(options = {})
         model_name
           .human(options)
-          .downcase
+          .humanize(capitalize: false)
       end
 
       def human_name_plural = model_name
         .human(count: 2)
-        .downcase
+        .humanize(capitalize: false)
     end
   end
 end
