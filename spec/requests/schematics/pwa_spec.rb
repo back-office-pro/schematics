@@ -41,13 +41,4 @@ RSpec.describe 'PWA' do
     it { is_expected.to have_http_status(:success) }
     its(:parsed_body) { is_expected.to match(expected_response) }
   end
-
-  describe 'GET #robots' do
-    let(:do_request) { get(robots_path, headers:) }
-    let(:accept_header) { 'text/plain' }
-
-    before { do_request }
-
-    it { is_expected.to have_http_status(:success) }
-  end
 end

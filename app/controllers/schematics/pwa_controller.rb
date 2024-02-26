@@ -6,8 +6,6 @@ module Schematics
 
     def service_worker; end
 
-    def robots; end
-
     def manifest
       @logo = ::Configuration.with_attached_company_logo.company_logo
     end

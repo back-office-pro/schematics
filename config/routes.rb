@@ -2,6 +2,7 @@
 
 Schematics::Engine.routes.draw do
   root Tenant.schema.root_route
+  resources :robots, only: :index
   draw :pwa
 
   localized do
