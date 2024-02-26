@@ -62,7 +62,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'countries', '6.0.0'
   spec.add_dependency 'dartsass-sprockets', '3.1.0'
   spec.add_dependency 'derailed_benchmarks', '2.1.2'
-  spec.add_dependency 'dotenv', '3.0.2'
+  spec.add_dependency 'dotenv', '3.0.3'
   spec.add_dependency 'dry-initializer', '3.1.1'
   spec.add_dependency 'dry-transformer', '1.0.1'
   spec.add_dependency 'easy_translate', '0.5.1'
