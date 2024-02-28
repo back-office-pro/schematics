@@ -13,7 +13,14 @@ module Backend
 
     def cache_store = :solid_cache_store
 
-    def cache_store_options = { active_record_instrumentation: false }
+    def cache_store_options = {
+      active_record_instrumentation: false,
+      expiry_method: :job,
+      expiry_queue: :cleanups,
+      max_age: 2.weeks.to_i,
+      max_entries: 1000,
+      max_size: 1.gigabyte
+    }
 
     def profiler_store = Rack::MiniProfiler::MemoryStore
 
