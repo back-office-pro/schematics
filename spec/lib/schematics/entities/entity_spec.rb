@@ -62,6 +62,18 @@ describe Schematics::Entities::Entity do
     RUBY
   end
 
+  context 'when entity name is not singular' do
+    let(:name) { 'discussions' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when entity name is reserved' do
+    let(:name) { 'paper_trail_version' }
+
+    it { is_expected.not_to be_valid }
+  end
+
   context 'when entity name is dangerous' do
     let(:name) { 'association' }
 

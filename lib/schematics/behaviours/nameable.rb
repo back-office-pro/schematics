@@ -11,10 +11,48 @@ module Schematics
       extend ActiveSupport::Concern
 
       NAME_REGEX = %r{\A([a-z_/]+)\z}
+      NAME_DENYLIST = %w[
+        aasm
+        aasm_read_state
+        aasm_write_state
+        aasm_write_state_without_persistence
+        as_json
+        associations
+        attribute_formatted
+        authenticate
+        cached_serialized_json
+        destroy_without_paranoia
+        friendly_id
+        friendly_id_config
+        normalize_friendly_id
+        otp_after_column_name
+        otp_backup_codes_column_name
+        otp_backup_codes_count
+        otp_column_name
+        otp_counter_based
+        otp_counter_column_name
+        otp_digits
+        otp_interval
+        otp_one_time_backup_codes
+        paper_trail
+        paper_trail_event
+        paper_trail_options
+        paranoia_column
+        paranoia_sentinel_value
+        really_delete
+        search_data
+        serialized_json
+        slug
+        slugs
+        to_s
+        version
+        version_association_name
+        version_class_name
+        versions
+        versions_association_name
+      ].freeze
 
       attr_accessor :name
-
-      delegate :dangerous_attribute_methods, to: ::ActiveRecord::AttributeMethods, private: true
 
       included do
         validates :name,
@@ -23,6 +61,12 @@ module Schematics
                   length: { maximum: 50 },
                   exclusion: { in: :dangerous_attribute_methods, message: :dangerous_attribute }
       end
+
+      # :reek:UtilityFunction
+      def dangerous_attribute_methods = ::ActiveRecord::AttributeMethods
+        .dangerous_attribute_methods
+        .dup
+        .merge(self.class::NAME_DENYLIST)
     end
   end
 end

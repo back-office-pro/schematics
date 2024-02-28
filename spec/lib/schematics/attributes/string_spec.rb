@@ -102,6 +102,12 @@ describe Schematics::Attributes::String do
     end
   end
 
+  context 'when attribute name is reserved' do
+    let(:name) { 'slug' }
+
+    it { is_expected.not_to be_valid }
+  end
+
   context 'when attribute name is dangerous' do
     let(:name) { 'association' }
 

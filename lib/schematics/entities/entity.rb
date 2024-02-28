@@ -12,6 +12,28 @@ module Schematics
       include Behaviours::Optionable
       include Behaviours::Nameable
 
+      NAME_DENYLIST = %w[
+        action_text_rich_text
+        active_storage_attachment
+        active_storage_blob
+        active_storage_variant_record
+        friendly_id_slug
+        good_job
+        good_job_batch
+        good_job_execution
+        good_job_process
+        good_job_setting
+        mobility_string_translation
+        mobility_text_translation
+        one_time_password
+        paper_trail_version
+        password_reset
+        preference
+        solid_cache_entry
+        sudo
+        version
+      ].freeze
+
       accepts_nested_attributes_for :attributes
       accepts_nested_attributes_for :virtuals
       accepts_nested_attributes_for :triggers

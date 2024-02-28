@@ -74,6 +74,12 @@ describe Schematics::Virtuals::Comparison do
     RUBY
   end
 
+  context 'when virtual name is reserved' do
+    let(:name) { 'otp_column_name' }
+
+    it { is_expected.not_to be_valid }
+  end
+
   context 'when virtual name is dangerous' do
     let(:name) { 'association' }
 

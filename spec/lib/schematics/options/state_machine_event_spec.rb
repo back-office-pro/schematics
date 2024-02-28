@@ -52,6 +52,12 @@ describe Schematics::Options::StateMachineEvent do
     RUBY
   end
 
+  context 'when event name is reserved' do
+    let(:name) { 'aasm' }
+
+    it { is_expected.not_to be_valid }
+  end
+
   context 'when event name is dangerous' do
     let(:name) { 'association' }
 
