@@ -3,7 +3,7 @@
 module Schematics
   module Entities
     class Singleton < Entity
-      def default_actions = %i[show update]
+      DEFAULT_ACTIONS = %i[show update].freeze
 
       def id_attribute = super.tap { _1.options = { hidden: true } }
 

@@ -13,6 +13,8 @@ describe Schematics::Entities::Singleton do
     ]
   end
 
+  its(:actions) { is_expected.to eq(%i[show update]) }
+
   its(:to_str) do
     is_expected.to eq <<~RUBY
       include Schematics::Singleton

@@ -12,6 +12,7 @@ module Schematics
       include Behaviours::Optionable
       include Behaviours::Nameable
 
+      DEFAULT_ACTIONS = %i[index show create update destroy archive].freeze
       NAME_DENYLIST = %w[
         action_text_rich_text
         active_storage_attachment
@@ -44,7 +45,7 @@ module Schematics
       validates_associated :has_and_belongs_to_many_associations
       validates_associated :descriptor
 
-      validates :actions, inclusion: { in: :default_actions }
+      validates :actions, inclusion: { in: self::DEFAULT_ACTIONS }
       validates :name, singular: true, uniqueness: { scope: %i[schema entities] }
       validates :icon, inclusion: { in: Options::Icon.collection }
 
@@ -94,7 +95,7 @@ module Schematics
       end
 
       def actions
-        options.actions&.map(&:to_sym) || default_actions
+        options.actions&.map(&:to_sym) || self.class::DEFAULT_ACTIONS
       end
 
       def associations
@@ -118,7 +119,7 @@ module Schematics
         Options::Hidden,
         Options::Existing,
         Options::Descriptor.new(collection: descriptor.allowed_field_names),
-        Options::Actions.new(collection: default_actions),
+        Options::Actions.new(collection: self.class::DEFAULT_ACTIONS),
         Options::Icon
       ]
 
@@ -210,8 +211,6 @@ module Schematics
           #{search_data_elements}
         }
       RUBY
-
-      def default_actions = %i[index show create update destroy archive]
 
       def default = model_class.new(
         **non_state_machine_attributes
