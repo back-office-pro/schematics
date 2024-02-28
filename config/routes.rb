@@ -2,7 +2,7 @@
 
 Schematics::Engine.routes.draw do
   root Tenant.schema.root_route
-  resources :robots, only: :index
+  get 'robots.txt', to: 'robots#index', as: :robots
   draw :pwa
 
   localized do
