@@ -8,7 +8,6 @@ ActiveRecordDoctor.configure do
     active_storage_attachments
     active_storage_variant_records
     action_text_rich_texts
-    versions
     friendly_id_slugs
     good_jobs
     good_job_batches
@@ -17,6 +16,7 @@ ActiveRecordDoctor.configure do
     good_job_executions
     mobility_string_translations
     mobility_text_translations
+    paper_trail_versions
   ]
 
   global :ignore_models, %w[
