@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateVersions < ActiveRecord::Migration[7.1]
+class CreatePaperTrailVersions < ActiveRecord::Migration[7.1]
   def change
-    create_table :versions, id: :uuid do |t|
+    create_table :paper_trail_versions, id: :uuid do |t|
       t.string   :item_type, null: false
       t.uuid     :item_id,   null: false
       t.string   :event,     null: false
@@ -12,6 +12,6 @@ class CreateVersions < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    add_index :versions, %i[item_type item_id]
+    add_index :paper_trail_versions, %i[item_type item_id]
   end
 end

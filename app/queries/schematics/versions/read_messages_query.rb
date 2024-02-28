@@ -5,9 +5,9 @@ module Schematics
     class ReadMessagesQuery < ApplicationQuery
       def call = where(
         <<~SQL.squish
-          versions.item_type = 'Message' AND
-          versions.item_id = messages.id AND
-          versions.event = 'show'
+          paper_trail_versions.item_type = 'Message' AND
+          paper_trail_versions.item_id = messages.id AND
+          paper_trail_versions.event = 'show'
         SQL
       )
     end

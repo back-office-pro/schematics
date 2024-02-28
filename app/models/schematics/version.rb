@@ -2,6 +2,8 @@
 
 module Schematics
   class Version < PaperTrail::Version
+    self.table_name = :paper_trail_versions # rubocop:disable Rails/TableNameAssignment
+
     include Serializable
     include Shortenable
     include Translatable
