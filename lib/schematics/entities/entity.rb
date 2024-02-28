@@ -28,7 +28,6 @@ module Schematics
         one_time_password
         paper_trail_version
         password_reset
-        preference
         solid_cache_entry
         sudo
         version
