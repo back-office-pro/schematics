@@ -80,8 +80,14 @@ describe Schematics::Virtuals::Comparison do
     it { is_expected.not_to be_valid }
   end
 
-  context 'when virtual name is already taken' do
+  context 'when virtual name is already taken by another virtual' do
     let(:name) { 'discount_price' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when virtual name is already taken by another attribute' do
+    let(:name) { 'price' }
 
     it { is_expected.not_to be_valid }
   end

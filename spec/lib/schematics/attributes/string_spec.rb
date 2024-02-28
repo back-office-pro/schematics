@@ -3,7 +3,20 @@
 describe Schematics::Attributes::String do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
-  let(:entity) { Schematics::Entities::Entity.new(name: 'user') }
+  let(:entity) do
+    Schematics::Entities::Entity.new(
+      name: 'user',
+      options: {
+        descriptor: 'full_name'
+      },
+      attributes: [
+        { name: 'first_name', type: 'string' }
+      ],
+      virtuals: [
+        { name: 'full_name', function: '$first_name $last_name' }
+      ]
+    )
+  end
   let(:name) { 'last_name' }
   let(:options) { {} }
 
@@ -19,6 +32,7 @@ describe Schematics::Attributes::String do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_valid }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('last_name') }
@@ -86,6 +100,24 @@ describe Schematics::Attributes::String do
         validates :last_name, {:presence=>true}
       RUBY
     end
+  end
+
+  context 'when attribute name is dangerous' do
+    let(:name) { 'association' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when attribute name is already taken by another attribute' do
+    let(:name) { 'first_name' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when attribute name is already taken by another virtual' do
+    let(:name) { 'full_name' }
+
+    it { is_expected.not_to be_valid }
   end
 
   describe '.compatible_types' do

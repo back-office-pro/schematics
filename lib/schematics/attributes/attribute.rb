@@ -18,7 +18,7 @@ module Schematics
       attr_accessor :id, :entity
 
       validates :type, presence: true
-      validates :name, uniqueness: { scope: %i[entity attributes] }
+      validates :name, uniqueness: { scope: %i[entity fields] }
 
       class << self
         def build(type:, **)

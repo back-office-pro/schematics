@@ -4,18 +4,7 @@ describe Schematics::Attributes::BelongsTo do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:schema) { Schematics::Schema.new }
-  let(:entity) do
-    Schematics::Entities::Entity.new(
-      schema:,
-      name: 'entity',
-      options: {
-        descriptor: 'type'
-      },
-      attributes: [
-        { name: 'type', type: 'string' }
-      ]
-    )
-  end
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'entity') }
   let(:name) { 'user' }
   let(:options) { { inverse_association_type: 'has_many' } }
 
@@ -170,18 +159,6 @@ describe Schematics::Attributes::BelongsTo do
 
     its(:inverse_association_type) { is_expected.to eq('has_one') }
     its(:inverse_association) { is_expected.to be_a(Schematics::Associations::HasOne) }
-  end
-
-  context 'when attribute name is dangerous' do
-    let(:name) { 'association' }
-
-    it { is_expected.not_to be_valid }
-  end
-
-  context 'when attribute name is already taken' do
-    let(:name) { 'type' }
-
-    it { is_expected.not_to be_valid }
   end
 
   describe '.compatible_types' do

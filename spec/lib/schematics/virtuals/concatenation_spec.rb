@@ -80,8 +80,14 @@ describe Schematics::Virtuals::Concatenation do
     it { is_expected.not_to be_valid }
   end
 
-  context 'when virtual name is already taken' do
+  context 'when virtual name is already taken by another virtual' do
     let(:name) { 'name' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when virtual name is already taken by another attribute' do
+    let(:name) { 'first_name' }
 
     it { is_expected.not_to be_valid }
   end
