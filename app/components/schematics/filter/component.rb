@@ -28,7 +28,7 @@ module Schematics
 
       def attribute_name = model_class
         .human_attribute_name(name)
-        .downcase
+        .humanize(capitalize: false)
 
       def col_preference_class(field)
         preference = "col_#{entity.id}_#{field.id}"
