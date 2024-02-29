@@ -203,7 +203,7 @@ module Schematics
       end
 
       def actions_with_events
-        actions.concat(events.map(&:name))
+        actions + events.map(&:name)
       end
 
       def search_data = <<~RUBY
