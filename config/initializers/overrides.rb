@@ -70,6 +70,7 @@ end
 
 Rails.configuration.to_prepare do
   FriendlyId::Slug.include(Schematics::SoftDeletable)
+  Turbo::Streams::Broadcasts::ApplicationController = Class.new(ActionController::Base)
 end
 
 ActiveSupport.on_load(:active_storage_record) do
