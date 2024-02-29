@@ -18,7 +18,10 @@ module Schematics
       object_changes: {}
     }.freeze
 
-    belongs_to :user, class_name: 'User', foreign_key: :whodunnit, inverse_of: :versions
+    belongs_to :user,
+               class_name: 'User',
+               foreign_key: :whodunnit,
+               inverse_of: :paper_trail_versions
 
     delegate :entity, :human_name, :gender, to: :model_class, allow_nil: true
 

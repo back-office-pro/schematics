@@ -17,7 +17,7 @@ module Schematics
         def css_classes = %w[btn btn-danger btn-sm btn-icon-split ms-1]
 
         def last_version = resource
-          .versions
+          .paper_trail_versions
           .last
 
         def render?

@@ -4,9 +4,9 @@ fr:
     attributes:
       migration:
         data: Données
-        data_version: Version
         progress: Progression
         state: Etat
+        version: Version
     enums:
       migration:
         state:

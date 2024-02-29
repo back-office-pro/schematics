@@ -89,7 +89,7 @@ ActiveSupport.on_load(:active_storage_record) do
     alias_method :finder, :find
   end
 
-  def versions = Schematics::Version.none
+  def paper_trail_versions = Schematics::Version.none
 end
 
 ActiveSupport.on_load(:active_storage_blob) do

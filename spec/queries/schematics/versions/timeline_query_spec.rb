@@ -39,20 +39,20 @@ RSpec.describe Schematics::Versions::TimelineQuery do
     end
 
     context 'when timeline is local without permissions and preferences' do
-      let(:versions) { user.versions }
+      let(:versions) { user.paper_trail_versions }
 
       it { is_expected.to eq([second_version, first_version]) }
     end
 
     context 'when timeline is local with permissions but without preferences' do
-      let(:versions) { user.versions }
+      let(:versions) { user.paper_trail_versions }
       let(:role) { admin_role }
 
       it { is_expected.to eq([second_version, first_version]) }
     end
 
     context 'when timeline is local with permissions and preferences' do
-      let(:versions) { user.versions }
+      let(:versions) { user.paper_trail_versions }
       let(:role) { admin_role }
       let(:preferences) { { 'create_User' => false } }
 

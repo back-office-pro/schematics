@@ -16,7 +16,7 @@ class Message < Schematics::ApplicationRecord
     )
 
   def read?(user)
-    versions.exists?(event: 'show', user:)
+    paper_trail_versions.exists?(event: 'show', user:)
   end
 
   protected

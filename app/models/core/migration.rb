@@ -17,11 +17,11 @@ class Migration < Schematics::ApplicationRecord
            prefix: true
 
   class << self
-    delegate :data_version, :data, to: :current, prefix: true, allow_nil: true
+    delegate :version, :data, to: :current, prefix: true, allow_nil: true
 
     def current = state_finished.last
 
-    def core = new(data: Tenant.schema.as_json, data_version: current_data_version)
+    def core = new(data: Tenant.schema.as_json, version: current_version)
   end
 
   def on_success(_status, options)
@@ -53,9 +53,9 @@ class Migration < Schematics::ApplicationRecord
   end
 
   def commit_message
-    return "Rollback v#{data_version} (core v#{Schematics::VERSION})" if state_rollbacking?
+    return "Rollback v#{version} (core v#{Schematics::VERSION})" if state_rollbacking?
 
-    "Migration v#{data_version} (core v#{Schematics::VERSION})"
+    "Migration v#{version} (core v#{Schematics::VERSION})"
   end
 
   # :reek:ControlParameter
@@ -66,7 +66,7 @@ class Migration < Schematics::ApplicationRecord
     state_finished!
   end
 
-  def to_yaml = { one: { state: STATE_STATE_FINISHED, data_version:, data: data.as_json } }
+  def to_yaml = { one: { state: STATE_STATE_FINISHED, version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
 

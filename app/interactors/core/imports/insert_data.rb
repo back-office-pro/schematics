@@ -14,7 +14,7 @@ module Core
       # :reek:UncommunicativeVariableName
       def call
         record_ids = insert_all!(data).pluck('id') # rubocop:disable Rails/SkipsModelValidations
-        Schematics::Version.insert_all(record_ids.map(&method(:version))) # rubocop:disable Rails/SkipsModelValidations
+        Schematics::Version.insert_all(record_ids.map(&method(:paper_trail_version))) # rubocop:disable Rails/SkipsModelValidations
       rescue ActiveRecord::RecordNotUnique => e
         fail! errors: { 'Error' => record_not_unique(e) } # rubocop:disable Style/StringHashKeys
       end
@@ -26,7 +26,7 @@ module Core
         [human_attribute_name(key), value, ::I18n.t('errors.messages.taken')].join(' ')
       end
 
-      def version(id)
+      def paper_trail_version(id)
         {
           item_type: model,
           item_id: id,

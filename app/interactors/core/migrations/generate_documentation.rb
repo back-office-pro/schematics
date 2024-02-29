@@ -6,7 +6,7 @@ module Core
       include Interactor
 
       delegate :migration, to: :context, private: true
-      delegate :data_version, :state_rollbacking?, to: :migration, private: true
+      delegate :version, :state_rollbacking?, to: :migration, private: true
       delegate :really_destroy!, :save!, to: :documentation, private: true
 
       def call
@@ -17,7 +17,7 @@ module Core
 
       private
 
-      memoize def documentation = ::Documentation.find_or_initialize_by(app_version: data_version)
+      memoize def documentation = ::Documentation.find_or_initialize_by(app_version: version)
     end
   end
 end

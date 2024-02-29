@@ -895,7 +895,7 @@
     "name": "migration",
     "options": {
       "icon": "diagram_project",
-      "descriptor": "data_version",
+      "descriptor": "version",
       "actions": [
         "index",
         "show",
@@ -907,7 +907,7 @@
     "attributes": [
       {
         "id": "1d3d3e66-6fcd-4527-8835-8ac69a56c3a8",
-        "name": "data_version",
+        "name": "version",
         "type": "float",
         "options": {
           "auto_increment": true,

@@ -13,7 +13,7 @@ RSpec.describe Migration do
       ---
       one:
         state: :finished
-        data_version: 1.5
+        version: 1.5
         data: []
     YAML
   end
@@ -57,7 +57,7 @@ RSpec.describe Migration do
     before { record.state_finished! }
 
     it { is_expected.to be_a(described_class) }
-    its(:data_version) { is_expected.to eq(1.5) }
+    its(:version) { is_expected.to eq(1.5) }
   end
 
   describe '.current' do

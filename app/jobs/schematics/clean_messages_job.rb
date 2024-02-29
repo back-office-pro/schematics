@@ -8,6 +8,6 @@ module Schematics
     def perform = ::Message
       .preload_all
       .read
-      .destroy_by(versions: { created_at: ..DELAY.ago })
+      .destroy_by(paper_trail_versions: { created_at: ..DELAY.ago })
   end
 end

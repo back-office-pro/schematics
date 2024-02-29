@@ -37,6 +37,8 @@ module Schematics
         paper_trail
         paper_trail_event
         paper_trail_options
+        paper_trail_version
+        paper_trail_versions
         paranoia_column
         paranoia_sentinel_value
         really_delete
@@ -45,10 +47,8 @@ module Schematics
         slug
         slugs
         to_s
-        version
         version_association_name
         version_class_name
-        versions
         versions_association_name
       ].freeze
 
