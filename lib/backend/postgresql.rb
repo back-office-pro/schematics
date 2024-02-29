@@ -18,7 +18,7 @@ module Backend
       expiry_method: :job,
       expiry_queue: :cleanups,
       max_age: 2.weeks.to_i,
-      max_entries: 1000,
+      max_entries: 2000,
       max_size: 1.gigabyte
     }
 
