@@ -9,11 +9,11 @@ ActiveRecordDoctor.configure do
     active_storage_variant_records
     action_text_rich_texts
     friendly_id_slugs
-    solid_queue_jobs
-    solid_queue_semaphores
     mobility_string_translations
     mobility_text_translations
     paper_trail_versions
+    solid_queue_jobs
+    solid_queue_semaphores
   ]
 
   global :ignore_models, %w[
@@ -31,6 +31,9 @@ ActiveRecordDoctor.configure do
     Schematics::Version
     FriendlyId::Slug
     ApplicationRecord
+    Mobility::Backends::ActionText::PlainTextTranslation
+    Mobility::Backends::ActionText::RichTextTranslation
+    SolidCache::Entry
     SolidQueue::Semaphore
     SolidQueue::Process
     SolidQueue::Pause
@@ -38,9 +41,6 @@ ActiveRecordDoctor.configure do
     SolidQueue::ScheduledExecution
     SolidQueue::BlockedExecution
     SolidQueue::ReadyExecution
-    Mobility::Backends::ActionText::PlainTextTranslation
-    Mobility::Backends::ActionText::RichTextTranslation
-    SolidCache::Entry
   ]
 
   detector :missing_foreign_keys, enabled: false
