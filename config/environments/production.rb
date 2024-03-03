@@ -31,10 +31,17 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   # Active Job
-  config.active_job.queue_adapter = Tenant.backend.queue_adapter
+  config.active_job.queue_adapter = :good_job
 
   # Cache
-  config.cache_store = Tenant.backend.cache_store, Tenant.backend.cache_store_options
+  config.cache_store = :solid_cache_store, {
+    active_record_instrumentation: false,
+    expiry_method: :job,
+    expiry_queue: :cleanups,
+    max_age: 2.weeks.to_i,
+    max_entries: 2000,
+    max_size: 1.gigabyte
+  }
 
   # Mailer
   config.action_mailer.perform_caching = false

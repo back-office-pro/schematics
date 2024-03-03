@@ -277,13 +277,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
       .exec(query)
   end
 
-  def database_index
-    pg_exec("SELECT COUNT(datname) FROM pg_database WHERE datname LIKE '%_#{env}'")
-      .getvalue(0, 0)
-      .to_i
-      .next
-  end
-
   def drop_database
     `cd #{app_path} && RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
   end

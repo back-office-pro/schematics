@@ -11,7 +11,7 @@ Rack::MiniProfiler.config.tap do |config|
   config.authorization_mode = :allow_authorized
   config.base_url_path = '/profiler'
   config.enable_hotwire_turbo_drive_support = true
-  config.storage = Tenant.backend.profiler_store
-  config.storage_options = Tenant.backend.profiler_store_options
+  config.storage = Rack::MiniProfiler::MemoryStore
+  config.storage_options = nil
   config.skip_paths = [%r{/assets(.*)}]
 end
