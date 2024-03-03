@@ -62,10 +62,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations'
   end
 
-  def install_good_job
+  def install_solid_queue
     return unless generating?
 
-    rails_command 'generate good_job:install'
+    rails_command 'solid_queue:install:migrations'
   end
 
   def install_solid_cache

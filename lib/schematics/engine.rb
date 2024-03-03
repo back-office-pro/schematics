@@ -22,7 +22,6 @@ require 'faraday/retry'
 require 'ferrum'
 require 'friendly_id'
 require 'git'
-require 'good_job'
 require 'groupdate'
 require 'i18n-inflector'
 require 'i18n/beginning_of_week'
@@ -35,6 +34,7 @@ require 'link_thumbnailer'
 require 'liquid'
 require 'loaf'
 require 'lograge'
+require 'mission_control/jobs'
 require 'mobility'
 require 'mobility/ransack'
 require 'octokit'
@@ -67,6 +67,7 @@ require 'schematics/version'
 require 'searchkick'
 require 'slim'
 require 'solid_cache'
+require 'solid_queue'
 require 'sprockets/railtie'
 require 'stimulus-rails'
 require 'terser'
@@ -148,6 +149,9 @@ module Schematics
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en fr it]
     config.i18n.fallbacks = true
+
+    # MissionControl
+    config.mission_control.jobs.base_controller_class = 'Schematics::ApplicationController'
 
     # ViewComponent
     config.view_component.capture_compatibility_patch_enabled = true

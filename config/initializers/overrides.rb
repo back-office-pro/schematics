@@ -68,6 +68,8 @@ end
 Rails.configuration.to_prepare do
   FriendlyId::Slug.include(Schematics::SoftDeletable)
   Turbo::Streams::Broadcasts::ApplicationController = Class.new(ActionController::Base) # rubocop:disable Style/MutableConstant, Rails/ApplicationController
+  MissionControl::Jobs::ApplicationController::ApplicationJob = Schematics::ApplicationJob
+  MissionControl::Jobs::NavigationHelper::ApplicationJob = Schematics::ApplicationJob
 end
 
 ActiveSupport.on_load(:active_storage_record) do

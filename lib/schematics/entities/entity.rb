@@ -19,11 +19,15 @@ module Schematics
         active_storage_blob
         active_storage_variant_record
         friendly_id_slug
-        good_job
-        good_job_batch
-        good_job_execution
-        good_job_process
-        good_job_setting
+        solid_queue_job
+        solid_queue_scheduled_execution
+        solid_queue_ready_execution
+        solid_queue_claimed_execution
+        solid_queue_blocked_execution
+        solid_queue_failed_execution
+        solid_queue_pause
+        solid_queue_process
+        solid_queue_semaphore
         mobility_string_translation
         mobility_text_translation
         one_time_password

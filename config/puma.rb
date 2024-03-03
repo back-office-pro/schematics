@@ -20,5 +20,6 @@ workers ENV.fetch('WEB_CONCURRENCY', 0)
 preload_app!
 
 plugin :tmp_restart
+plugin :solid_queue
 
 Tenant.search_engine.initialize!
