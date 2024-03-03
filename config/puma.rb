@@ -15,8 +15,6 @@ bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 
-workers ENV.fetch('WEB_CONCURRENCY', 0)
-
 preload_app!
 
 plugin :tmp_restart
