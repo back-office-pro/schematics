@@ -12,6 +12,5 @@ Rack::MiniProfiler.config.tap do |config|
   config.base_url_path = '/profiler'
   config.enable_hotwire_turbo_drive_support = true
   config.storage = Rack::MiniProfiler::MemoryStore
-  config.storage_options = nil
   config.skip_paths = [%r{/assets(.*)}]
 end
