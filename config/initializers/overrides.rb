@@ -70,6 +70,9 @@ Rails.configuration.to_prepare do
   Turbo::Streams::Broadcasts::ApplicationController = Class.new(ActionController::Base) # rubocop:disable Style/MutableConstant, Rails/ApplicationController
   MissionControl::Jobs::ApplicationController::ApplicationJob = Schematics::ApplicationJob
   MissionControl::Jobs::NavigationHelper::ApplicationJob = Schematics::ApplicationJob
+  SolidQueue::Configuration::DEFAULT_CONFIG_FILE_PATH = Schematics::Engine
+    .root
+    .join(SolidQueue::Configuration::DEFAULT_CONFIG_FILE_PATH)
 end
 
 ActiveSupport.on_load(:active_storage_record) do
