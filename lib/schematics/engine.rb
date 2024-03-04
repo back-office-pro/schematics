@@ -151,7 +151,7 @@ module Schematics
     config.i18n.fallbacks = true
 
     # MissionControl
-    config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthentificationController' # rubocop:disable Layout/LineLength
+    config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'
 
     # ViewComponent
     config.view_component.capture_compatibility_patch_enabled = true
