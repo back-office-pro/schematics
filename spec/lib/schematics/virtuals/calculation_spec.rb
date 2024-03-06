@@ -75,7 +75,7 @@ describe Schematics::Virtuals::Calculation do
   end
 
   context 'when virtual name is reserved' do
-    let(:name) { 'version' }
+    let(:name) { 'paper_trail_version' }
 
     it { is_expected.not_to be_valid }
   end

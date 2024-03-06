@@ -75,7 +75,7 @@ describe Schematics::Virtuals::Concatenation do
   end
 
   context 'when virtual name is reserved' do
-    let(:name) { 'versions' }
+    let(:name) { 'paper_trail_versions' }
 
     it { is_expected.not_to be_valid }
   end
