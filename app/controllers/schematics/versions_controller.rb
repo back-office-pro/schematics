@@ -44,7 +44,7 @@ module Schematics
                  .with_user
                  .with_item
                  .load_async
-                 .find(UUID::Shortener.expand(params[:id]))
+                 .find_by_decoded_uuid!(params[:id])
     end
   end
 end

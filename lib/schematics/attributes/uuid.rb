@@ -13,7 +13,7 @@ module Schematics
       def icon = :id_card
 
       def format(value)
-        [entity.model_class&.model_name&.human, UUID::Shortener.shorten(value)]
+        [entity.model_class&.model_name&.human, ::BasedUUID.encode(uuid: value)]
           .compact
           .join(' ')
       end

@@ -4,6 +4,20 @@ module Schematics
   module Shortenable
     extend ActiveSupport::Concern
 
-    def to_param = UUID::Shortener.shorten(id)
+    included do
+      has_based_uuid prefix: false
+    end
+
+    class_methods do
+      def find_by_decoded_uuid!(id)
+        find ::BasedUUID.decode(id)
+      rescue ::ArgumentError
+        find(id)
+      end
+    end
+
+    def to_param
+      based_uuid&.encode('UTF-8') || super
+    end
   end
 end
