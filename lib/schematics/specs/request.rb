@@ -410,14 +410,16 @@ module Schematics
         # :reek:FeatureEnvy
         def params(format = nil) # rubocop:disable Metrics/CyclomaticComplexity
           {
-            entity.table_name.to_sym => fillable_elements.to_h do |element|
-              [
-                element.column_name.to_sym,
-                element.public_send([format, 'default'].compact.join('_'))
-                       .then_tap { _1.save! && _1.id if element in Attributes::Association }
-                       .then_tap { _1.map(&:save!) && _1.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
-              ]
-            end
+            entity.table_name.to_sym => fillable_elements
+              .grep_v(Associations::HasManyNested)
+              .to_h do |element|
+                [
+                  element.column_name.to_sym,
+                  element.public_send([format, 'default'].compact.join('_'))
+                         .then_tap { _1.save! && _1.id if element in Attributes::Association }
+                         .then_tap { _1.map(&:save!) && _1.map(&:id) if element in Associations::HasAndBelongsToMany } # rubocop:disable Layout/LineLength
+                ]
+              end
           }
         end
       end
