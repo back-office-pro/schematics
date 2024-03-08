@@ -38,6 +38,11 @@ module Schematics
             'new-password' unless super
           end
 
+          def eye_icons
+            fa_icon(:eye, class: 'icon', role: 'button', data:) +
+              fa_icon(:eye_slash, class: 'icon d-none', role: 'button', data:)
+          end
+
           private
 
           def confirm?
