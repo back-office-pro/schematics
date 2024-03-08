@@ -13,6 +13,8 @@ module Schematics
       def icon = :id_card
 
       def format(value)
+        return unless value
+
         [entity.model_class&.model_name&.human, ::BasedUUID.encode(uuid: value)]
           .compact
           .join(' ')
