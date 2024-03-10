@@ -53,7 +53,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'browser', '5.3.1'
   spec.add_dependency 'bundler-audit', '0.9.1'
   spec.add_dependency 'cancancan', '3.5.0'
-  spec.add_dependency 'capistrano', '3.18.0'
+  spec.add_dependency 'capistrano', '3.18.1'
   spec.add_dependency 'capistrano3-puma', '6.0.0.beta.1'
   spec.add_dependency 'capistrano-bundler', '2.1.0'
   spec.add_dependency 'capistrano-rails', '1.6.3'
