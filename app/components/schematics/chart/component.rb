@@ -15,6 +15,7 @@ module Schematics
                :max_col_size,
                :filename,
                :border_width,
+               :colors,
                to: :@chart
 
       def initialize(chart:)
@@ -23,6 +24,8 @@ module Schematics
       end
 
       def css_id = "chart-#{id}"
+
+      def empty = t('schematics.application.resource.empty')
 
       def col_classes = [
         "col-xl-#{col_size}",

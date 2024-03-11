@@ -4,6 +4,7 @@ fr:
     attributes:
       chart:
         aggregate: Agrégat
+        color: Couleur
         kind: Type
         model: Donnée
         roles:

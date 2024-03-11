@@ -4,6 +4,7 @@ it:
     attributes:
       chart:
         aggregate: Aggregato
+        color: Colore
         kind: Tipo
         model: Data
         roles:

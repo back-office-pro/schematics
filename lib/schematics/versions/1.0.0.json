@@ -654,6 +654,11 @@
         }
       },
       {
+        "id": "ae380d15-e90b-41f1-9dcf-b4338811bfbf",
+        "name": "color",
+        "type": "color"
+      },
+      {
         "id": "f7a2050f-e4c0-4a02-a8fa-d55f3a2b7667",
         "name": "aggregate",
         "type": "enum",

@@ -5,6 +5,8 @@ class Chart < Schematics::ApplicationRecord
   delegate :find_field_by_name, to: :entity, allow_nil: true
   scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
 
+  attribute :color, default: -> { ::Configuration.theme_color }
+
   class << self
     def api = find_or_initialize_by(model: 'APIRequest')
   end
@@ -42,6 +44,12 @@ class Chart < Schematics::ApplicationRecord
   def model_class
     model.safe_constantize
   end
+
+  def colors = color
+    .dup
+    .paint
+    .palette
+    .analogous(as: :hex)
 
   def serialized_json(*) # rubocop:disable Metrics/CyclomaticComplexity
     return unless model_class

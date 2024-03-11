@@ -18,6 +18,8 @@ RSpec.describe Chart do
   its(:ytitle) { is_expected.to eq('Count of users') }
   its(:serialized_json) { is_expected.to be_empty }
   its(:cached_serialized_json) { is_expected.to be_empty }
+  its(:color) { is_expected.to eq('#000000') }
+  its(:colors) { is_expected.to be_all('#000000') }
 
   context 'when model_class does not exist' do
     before { record.model = 'NotExistingModel' }

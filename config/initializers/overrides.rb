@@ -6,7 +6,6 @@ require 'active_record/override/generators/migration_generator'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'arel/override/predications'
-require 'chartkick/override/chartkick'
 require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'open_api/override/router'
@@ -31,7 +30,6 @@ ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
 ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
-Chartkick.singleton_class.prepend(Chartkick::Override)
 
 Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
