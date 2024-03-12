@@ -1,7 +1,7 @@
 doctype html
 = __document_element do
   body data-controller='application'
-    = turbo_stream_from current_user
+    = turbo_stream_from current_user, :generate_file_in_background
     = __toast(flash.to_a)
     = __search_bar_modal
     = __hotkeys_modal
