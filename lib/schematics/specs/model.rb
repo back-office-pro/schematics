@@ -95,21 +95,26 @@ module Schematics
               .to accept_nested_attributes_for(attribute.association_name)
               .allow_destroy(true)
             is_expected.to validate_attached_of(attribute.name.to_sym) if attribute.required?
-            is_expected
-              .to validate_size_of(attribute.name.to_sym)
-                .tap { _1.less_than(attribute.options.size.megabytes) if attribute.options.size }
-            is_expected
-              .to validate_dimensions_of(attribute.name.to_sym)
-                .tap { _1.width(attribute.options.width) if attribute.options.width }
-            is_expected
-              .to validate_dimensions_of(attribute.name.to_sym)
-                .tap { _1.height(attribute.options.height) if attribute.options.height }
-            is_expected
-              .to validate_content_type_of(attribute.name.to_sym)
-                .tap { _1.allowing(*attribute.options.content_type) if attribute.options.content_type } # rubocop:disable Layout/LineLength
-            is_expected
-              .to validate_aspect_ratio_of(attribute.name.to_sym)
-                .tap { _1.allowing(attribute.options.aspect_ratio) if attribute.options.aspect_ratio } # rubocop:disable Layout/LineLength
+            if attribute.options.size
+              is_expected.to validate_size_of(attribute.name.to_sym)
+                .less_than(attribute.options.size.megabytes)
+            end
+            if attribute.options.width
+              is_expected.to validate_dimensions_of(attribute.name.to_sym)
+                .width(attribute.options.width)
+            end
+            if attribute.options.height
+              is_expected.to validate_dimensions_of(attribute.name.to_sym)
+                .height(attribute.options.height)
+            end
+            if attribute.options.content_type
+              is_expected.to validate_content_type_of(attribute.name.to_sym)
+                .allowing(*attribute.options.content_type)
+            end
+            if attribute.options.aspect_ratio
+              is_expected.to validate_aspect_ratio_of(attribute.name.to_sym)
+                .allowing(attribute.options.aspect_ratio)
+            end
           end
         end
 
