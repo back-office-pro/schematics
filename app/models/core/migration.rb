@@ -66,7 +66,7 @@ class Migration < Schematics::ApplicationRecord
     state_finished!
   end
 
-  def to_yaml = { one: { state: STATE_STATE_FINISHED, version:, data: data.as_json } }
+  def to_yaml = { one: { state: STATE_STATE_FINISHED.to_s, version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
 
