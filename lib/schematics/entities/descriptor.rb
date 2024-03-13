@@ -10,7 +10,7 @@ module Schematics
 
       validates :field_name, allow_nil: true, inclusion: { in: :allowed_field_names }
 
-      delegate :name, :entity, :to_sql, to: :field
+      delegate :name, :to_sql, to: :field
       attr_accessor :entity, :field_name
 
       alias to_s field_name
