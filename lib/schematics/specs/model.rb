@@ -96,23 +96,28 @@ module Schematics
               .allow_destroy(true)
             is_expected.to validate_attached_of(attribute.name.to_sym) if attribute.required?
             if attribute.options.size
-              is_expected.to validate_size_of(attribute.name.to_sym)
+              is_expected
+                .to validate_size_of(attribute.name.to_sym)
                 .less_than(attribute.options.size.megabytes)
             end
             if attribute.options.width
-              is_expected.to validate_dimensions_of(attribute.name.to_sym)
+              is_expected
+                .to validate_dimensions_of(attribute.name.to_sym)
                 .width(attribute.options.width)
             end
             if attribute.options.height
-              is_expected.to validate_dimensions_of(attribute.name.to_sym)
+              is_expected
+                .to validate_dimensions_of(attribute.name.to_sym)
                 .height(attribute.options.height)
             end
             if attribute.options.content_type
-              is_expected.to validate_content_type_of(attribute.name.to_sym)
+              is_expected
+                .to validate_content_type_of(attribute.name.to_sym)
                 .allowing(*attribute.options.content_type)
             end
             if attribute.options.aspect_ratio
-              is_expected.to validate_aspect_ratio_of(attribute.name.to_sym)
+              is_expected
+                .to validate_aspect_ratio_of(attribute.name.to_sym)
                 .allowing(attribute.options.aspect_ratio)
             end
           end
@@ -158,10 +163,8 @@ module Schematics
                 is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?
                 is_expected
                   .to validate_length_of(element.name.to_sym)
-                    .tap { _1.is_at_least(element.options.min) if element.options.min }
-                is_expected
-                  .to validate_length_of(element.name.to_sym)
                   .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
+                    .tap { _1.is_at_least(element.options.min) if element.options.min }
               when Attributes::Token
                 is_expected.to have_secure_token(element.name.to_sym)
                 is_expected.to encrypt(element.name.to_sym).deterministic(true)
