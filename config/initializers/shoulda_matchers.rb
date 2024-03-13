@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.configuration.to_prepare do
+  next unless Rails.env.test?
+
   require 'shoulda/callback/matchers'
   require 'shoulda/matchers'
 
