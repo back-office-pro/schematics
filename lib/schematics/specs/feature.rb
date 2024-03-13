@@ -17,6 +17,7 @@ module Schematics
                  :human_name_plural,
                  :can?,
                  :default,
+                 :default_associations,
                  to: :class
 
         subject { page }
@@ -65,6 +66,7 @@ module Schematics
 
         if can?(:create)
           it "creates a #{entity.name}" do
+            default_associations.each(&:save!)
             if ability.can?(:new, model_class)
               login_with_2fa
               visit new_polymorphic_path(model_class)
@@ -91,7 +93,7 @@ module Schematics
 
       class_methods do
         delegate :entity, :human_name, :human_name_plural, to: :model_class
-        delegate :default, to: :entity
+        delegate :default, :default_associations, to: :entity
 
         def model_class
           top_level_description.constantize
@@ -110,7 +112,7 @@ module Schematics
 
       # :reek:FeatureEnvy
       def fill_form # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
-        entity.fillable_elements.each do |element|
+        form_elements.each do |element|
           case element
           when Associations::HasAndBelongsToMany
             select element.model_class.find(&element.filter_by).to_s,
@@ -120,8 +122,6 @@ module Schematics
             select element.model_class.first.to_s,
                    from: element.input_name,
                    match: :first
-          when Associations::HasMany, Attributes::User
-            # do nothing
           when Attributes::Boolean
             check(element.input_name)
           when Attributes::Attachments
@@ -164,6 +164,11 @@ module Schematics
           end
         end
       end
+
+      def form_elements = entity
+        .fillable_elements
+        .grep_v(Associations::HasMany)
+        .grep_v(Attributes::User)
     end
   end
 end

@@ -218,6 +218,11 @@ module Schematics
           .to_h { [_1.name, _1.default] }
       )
 
+      def default_associations = belongs_to_attributes
+        .concat(has_and_belongs_to_many_associations.reject(&:hidden?))
+        .filter_map(&:default)
+        .flatten
+
       def router = Router.new(self)
 
       def joins = virtuals
