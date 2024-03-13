@@ -56,12 +56,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     template 'github/workflows/build.yml', '.github/workflows/build.yml'
   end
 
-  def install_rspec
-    return unless generating?
-
-    rails_command 'generate rspec:install'
-  end
-
   def install_migrations
     return unless generating?
 
@@ -192,7 +186,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'public/favicon.ico'
     remove_file 'public/robots.txt'
     remove_file '.gitattributes'
-    remove_file '.rspec'
     remove_file '.ruby-version'
     remove_file 'README.md'
   end

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../config/environment'
 
 <% module_namespacing do -%>
 RSpec.describe <%= controller_class_name %>Controller, <%= type_metatag(:request) %> do
