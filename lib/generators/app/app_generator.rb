@@ -148,10 +148,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures"'
   end
 
-  def create_migrations_fixture_file
-    create_file 'spec/fixtures/migrations.yml'
-  end
-
   def edit_gitignore
     return unless generating?
 
