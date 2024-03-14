@@ -30,16 +30,20 @@ namespace :schematics do
     end
 
     desc 'Docker entrypoint'
-    task entrypoint: :environment do
-      sleep 10 # wait for postgres to be ready
-      ActiveRecord::Base.connection
-    rescue ActiveRecord::NoDatabaseError
+    task :entrypoint do # rubocop:disable Rails/RakeEnvironment
+      puts 'Waiting for postgres to be ready...'
+      sleep 30
+      puts 'Creating database...'
       `bin/rails db:create`
+      puts 'Migrating database...'
       `bin/rails db:migrate`
+      puts 'Loading subscription...'
       `bin/rails schematics:subscription:load`
+      puts 'Seeding database...'
       `bin/rails schematics:db:seed`
+      puts 'Credentials backup...'
       `bin/rails schematics:credentials:backup`
-    ensure
+      puts 'Removing pid file...'
       `rm -rf tmp/pids/server.pid`
     end
   end
