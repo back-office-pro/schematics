@@ -8,10 +8,14 @@ RUN apk --update add --virtual \
     runtime-deps postgresql-client build-base libxml2-dev \
     libxslt-dev nodejs yarn libffi-dev readline \
     build-base postgresql-dev sqlite-dev libc-dev linux-headers \
-    readline-dev file git tzdata graphviz bash \
+    readline-dev file git tzdata graphviz jemalloc bash \
     && rm -rf /var/cache/apk/*
 
 ARG BUNDLE_GITHUB__COM
+
+ENV MALLOC_ARENA_MAX=2
+ENV RUBY_YJIT_ENABLE=1
+ENV LD_PRELOAD="/usr/lib/libjemalloc.so.2"
 
 RUN git config --global user.name "back-office"
 RUN git config --global user.email "support@back-office.pro"
