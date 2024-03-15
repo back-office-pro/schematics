@@ -40,13 +40,15 @@ services:
   chrome:
     image: browserless/chrome:latest
     ports:
-      - 3333:3333
+      - 3333:3000
   web:
     build:
       context: $PWD
       dockerfile: $DOCKERFILE_PATH
     ports:
       - 3000:3000
+    volumes:
+      - storage-data:/app/storage
     depends_on:
       - opensearch
       - postgres
@@ -57,9 +59,11 @@ services:
       - DATABASE_URL=postgres://postgres@postgres
       - REDIS_URL=redis://redis:6379
       - OPENSEARCH_URL=http://opensearch:9200
+      - CHROME_URL=http://chrome:3333
       - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
   opensearch-data:
   postgres-data:
   redis-data:
   clamav-data:
+  storage-data:
