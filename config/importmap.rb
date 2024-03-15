@@ -29,7 +29,7 @@ pin 'path', to: 'https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/path.j
 pin 'pluralize', to: 'pluralize-esm/dist/index.js'
 pin 'rollbar', to: 'https://ga.jspm.io/npm:rollbar@2.26.3/dist/rollbar.umd.js'
 pin 'sortablejs', to: 'sortablejs/modular/sortable.esm.js'
-pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.11.10/index.js'
+pin 'swagger-ui-dist', to: 'https://ga.jspm.io/npm:swagger-ui-dist@5.12.0/index.js'
 pin 'timeago.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/index.js'
 pin 'timeago.fr.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/fr.js'
 pin 'timeago.it.js', to: 'https://unpkg.com/timeago.js@4.0.2/esm/lang/it.js'
