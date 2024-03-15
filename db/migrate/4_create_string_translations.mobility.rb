@@ -11,7 +11,6 @@ class CreateStringTranslations < ActiveRecord::Migration[7.1]
     end
     add_index :mobility_string_translations,
               %i[translatable_id translatable_type locale key],
-              unique: true,
               name: :index_mobility_string_translations_on_keys,
               where: 'deleted_at IS NULL'
     add_index :mobility_string_translations,
