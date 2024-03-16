@@ -11,8 +11,8 @@ module Core
                CleanIndices,
                Reload,
                Reindex,
-               GenerateFixture,
                GenerateDocumentation,
+               GenerateFixture,
                Commit
     end
   end
