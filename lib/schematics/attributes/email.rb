@@ -16,7 +16,8 @@ module Schematics
         email: {
           allow_blank:,
           ban_disposable_email: true,
-          partial: true
+          partial: true,
+          mx_with_fallback: true
         }
       )
     end
