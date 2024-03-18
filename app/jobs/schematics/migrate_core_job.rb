@@ -7,7 +7,7 @@ module Schematics
     def perform
       return if ::Tenant.version == VERSION
 
-      Core::Migrations::CopyAndMigrate.call(migration: ::Migration.core)
+      Core::Migrations::Migrate.call(migration: ::Migration.core)
     end
   end
 end
