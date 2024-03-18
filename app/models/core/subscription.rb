@@ -92,6 +92,6 @@ class Subscription < Schematics::ApplicationRecord
     filepath.write filepath
       .read
       .gsub(/SEARCH_ENGINE=(.*)/, "SEARCH_ENGINE=#{search_engine}")
-    FileUtils.touch Rails.root.join('tmp/restart.txt')
+    ::Core::Migrations::Restart.call
   end
 end
