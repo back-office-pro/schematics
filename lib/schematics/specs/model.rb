@@ -179,6 +179,7 @@ module Schematics
                   .to belong_to(element.name.to_sym)
                     .with_foreign_key(element.column_name)
                     .inverse_of(element.inverse_association.name.to_sym)
+                    .strict_loading
                     .tap { _1.class_name(element.class_name) unless element.polymorphic? }
                     .tap { _1.optional unless element.required? }
                 is_expected
@@ -187,7 +188,9 @@ module Schematics
               when Virtuals::Virtual
                 is_expected.to respond_to(element.name.to_sym)
               when Associations::HasAndBelongsToMany
-                is_expected.to have_and_belong_to_many(element.name.to_sym)
+                is_expected
+                  .to have_and_belong_to_many(element.name.to_sym)
+                  .strict_loading
               when Associations::HasManyThrough
                 is_expected
                   .to have_many(element.name.to_sym)
@@ -195,6 +198,7 @@ module Schematics
                   .with_foreign_key(element.column_name)
                   .through(element.through.name.to_sym)
                   .source(element.source.to_sym)
+                  .strict_loading
               when Associations::HasManyNested
                 is_expected.to accept_nested_attributes_for(element.name.to_sym)
                 is_expected
@@ -203,6 +207,7 @@ module Schematics
                   .with_foreign_key(element.column_name)
                   .inverse_of(element.inverse_of.to_sym)
                   .dependent(element.required? ? :destroy : :nullify)
+                  .strict_loading
               when Associations::HasMany
                 is_expected
                   .to have_many(element.name.to_sym)
@@ -210,12 +215,14 @@ module Schematics
                   .with_foreign_key(element.column_name)
                   .inverse_of(element.inverse_of.to_sym)
                   .dependent(element.required? ? :destroy : :nullify)
+                  .strict_loading
               when Associations::HasOne
                 is_expected
                   .to have_one(element.name.to_sym)
                   .class_name(element.class_name)
                   .with_foreign_key(element.column_name)
                   .inverse_of(element.inverse_of.to_sym)
+                  .strict_loading
               when Associations::HasOneThrough
                 is_expected
                   .to have_one(element.name.to_sym)
@@ -223,6 +230,7 @@ module Schematics
                   .with_foreign_key(element.column_name)
                   .through(element.through.name.to_sym)
                   .source(element.source.to_sym)
+                  .strict_loading
               end
             end
           end

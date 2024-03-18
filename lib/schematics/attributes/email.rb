@@ -13,7 +13,11 @@ module Schematics
       def normalization = :downcase
 
       def validators = super.merge(
-        email: { allow_blank: }
+        email: {
+          allow_blank:,
+          ban_disposable_email: true,
+          partial: true
+        }
       )
     end
   end

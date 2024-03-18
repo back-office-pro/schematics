@@ -27,7 +27,6 @@ describe Schematics::Attributes::Email do
   its(:input_name) { is_expected.to eq('user[email]') }
   its(:icon) { is_expected.to eq(:envelope) }
   its(:default) { is_expected.to match(URI::MailTo::EMAIL_REGEXP) }
-  its(:validators) { is_expected.to eq(email: { allow_blank: true }) }
   its(:search_column) { is_expected.to eq(:email) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:email_i_cont) }
@@ -35,6 +34,16 @@ describe Schematics::Attributes::Email do
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
   its(:to_spec) { is_expected.to eq('A user has a **email** attribute of type *email*') }
+
+  its(:validators) do
+    is_expected.to eq(
+      email: {
+        allow_blank: true,
+        ban_disposable_email: true,
+        partial: true
+      }
+    )
+  end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
@@ -52,7 +61,7 @@ describe Schematics::Attributes::Email do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :email, {:email=>{:allow_blank=>true}}
+      validates :email, {:email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true}}
     RUBY
   end
 
@@ -76,13 +85,17 @@ describe Schematics::Attributes::Email do
     its(:validators) do
       is_expected.to eq(
         uniqueness_with_deleted: { case_sensitive: false, allow_blank: true },
-        email: { allow_blank: true }
+        email: {
+          allow_blank: true,
+          ban_disposable_email: true,
+          partial: true
+        }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true}}
+        validates :email, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true}}
       RUBY
     end
   end
@@ -91,11 +104,21 @@ describe Schematics::Attributes::Email do
     let(:options) { { required: true } }
 
     it { is_expected.to be_required }
-    its(:validators) { is_expected.to eq(presence: true, email: { allow_blank: false }) }
+
+    its(:validators) do
+      is_expected.to eq(
+        presence: true,
+        email: {
+          allow_blank: false,
+          ban_disposable_email: true,
+          partial: true
+        }
+      )
+    end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:presence=>true, :email=>{:allow_blank=>false}}
+        validates :email, {:presence=>true, :email=>{:allow_blank=>false, :ban_disposable_email=>true, :partial=>true}}
       RUBY
     end
   end
