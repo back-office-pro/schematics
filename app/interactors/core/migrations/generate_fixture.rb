@@ -7,7 +7,7 @@ module Core
       delegate :migration, to: :context, private: true
 
       def call
-        fixtures_path.mkdir unless fixtures_path.exist?
+        FileUtils.mkdir_p(fixtures_path)
         fixtures_path.join('migrations.yml').write(migration.to_yaml)
       end
 
