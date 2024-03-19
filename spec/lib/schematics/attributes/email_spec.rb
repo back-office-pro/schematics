@@ -40,8 +40,7 @@ describe Schematics::Attributes::Email do
       email: {
         allow_blank: true,
         ban_disposable_email: true,
-        partial: true,
-        mx_with_fallback: true
+        partial: true
       }
     )
   end
@@ -62,7 +61,7 @@ describe Schematics::Attributes::Email do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :email, {:email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true, :mx_with_fallback=>true}}
+      validates :email, {:email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true}}
     RUBY
   end
 
@@ -89,15 +88,14 @@ describe Schematics::Attributes::Email do
         email: {
           allow_blank: true,
           ban_disposable_email: true,
-          partial: true,
-          mx_with_fallback: true
+          partial: true
         }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true, :mx_with_fallback=>true}}
+        validates :email, {:uniqueness_with_deleted=>{:case_sensitive=>false, :allow_blank=>true}, :email=>{:allow_blank=>true, :ban_disposable_email=>true, :partial=>true}}
       RUBY
     end
   end
@@ -113,15 +111,14 @@ describe Schematics::Attributes::Email do
         email: {
           allow_blank: false,
           ban_disposable_email: true,
-          partial: true,
-          mx_with_fallback: true
+          partial: true
         }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :email, {:presence=>true, :email=>{:allow_blank=>false, :ban_disposable_email=>true, :partial=>true, :mx_with_fallback=>true}}
+        validates :email, {:presence=>true, :email=>{:allow_blank=>false, :ban_disposable_email=>true, :partial=>true}}
       RUBY
     end
   end
