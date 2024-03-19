@@ -74,18 +74,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'solid_cache:install:migrations'
   end
 
-  def install_active_storage
-    return unless generating?
-
-    rails_command 'active_storage:install'
-  end
-
-  def install_action_text
-    return unless generating?
-
-    rails_command 'action_text:install:migrations'
-  end
-
   def create_database
     return if container?
     return unless generating?
