@@ -29,7 +29,7 @@ module Schematics
         end
         let(:user) do
           ::User.create!(
-            email: 'admin@admin.com',
+            email: 'john.doe@nowhere.com',
             password: 'Azerty1234?!',
             first_name: 'John',
             last_name: 'Doe',

@@ -39,7 +39,7 @@ module Schematics
         let(:index_path) { polymorphic_path(model_class) }
         let(:role) { ::Role.create!(name: 'Admin', permissions:) }
         let(:user) do
-          ::User.create!(email: 'admin@admin.com', first_name: 'John', last_name: 'Doe', role:)
+          ::User.create!(email: 'john.doe@nowhere.com', first_name: 'John', last_name: 'Doe', role:)
         end
 
         before do
