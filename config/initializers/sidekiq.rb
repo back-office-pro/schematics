@@ -3,10 +3,10 @@
 Sidekiq.strict_args!(false) # TODO: rm when https://github.com/hotwired/turbo-rails/issues/535 fixed
 Sidekiq::Web.use(Rack::Auth::Basic) do |username, password|
   ActiveSupport::SecurityUtils.secure_compare(
-    Schematics::Engine.credentials.backend[:username],
+    Schematics::Engine.credentials.basic_auth[:username],
     username
   ) && ActiveSupport::SecurityUtils.secure_compare(
-    Schematics::Engine.credentials.backend[:password],
+    Schematics::Engine.credentials.basic_auth[:password],
     password
   )
 end
