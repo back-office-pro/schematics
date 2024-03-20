@@ -30,6 +30,7 @@ module Schematics
         solid_queue_failed_execution
         solid_queue_job
         solid_queue_ready_execution
+        solid_queue_recurring_execution
         solid_queue_scheduled_execution
         solid_queue_semaphore
         solid_queue_pause

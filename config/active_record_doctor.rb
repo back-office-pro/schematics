@@ -38,6 +38,7 @@ ActiveRecordDoctor.configure do
     SolidQueue::Process
     SolidQueue::Pause
     SolidQueue::Job
+    SolidQueue::RecurringExecution
     SolidQueue::ScheduledExecution
     SolidQueue::BlockedExecution
     SolidQueue::ReadyExecution
