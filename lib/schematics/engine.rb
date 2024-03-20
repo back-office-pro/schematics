@@ -154,6 +154,7 @@ module Schematics
 
     # MissionControl
     config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'
+    config.mission_control.jobs.show_console_help = false
 
     # ViewComponent
     config.view_component.capture_compatibility_patch_enabled = true
