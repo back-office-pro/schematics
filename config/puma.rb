@@ -21,7 +21,10 @@ preload_app!
 
 plugin :tmp_restart
 
-if Tenant.backend in Backend::Redis
+case Tenant.backend
+when Backend::Postgresql
+  plugin :solid_queue
+when Backend::Redis
   x = nil
   on_worker_boot do
     x = Sidekiq.configure_embed {} # rubocop:disable Lint/EmptyBlock
