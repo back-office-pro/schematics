@@ -3,13 +3,11 @@
 module Backend
   # :reek:UtilityFunction
   class Postgresql
-    delegate :middleware, to: :engine, prefix: true
-
     def concurrency = 0
 
-    def max_threads = 13
+    def max_threads = 5
 
-    def engine = ::GoodJob::Engine
+    def engine = ::MissionControl::Jobs::Engine
 
     def cache_store = :solid_cache_store
 
@@ -26,6 +24,6 @@ module Backend
 
     def profiler_store_options = nil
 
-    def queue_adapter = :good_job
+    def queue_adapter = :solid_queue
   end
 end
