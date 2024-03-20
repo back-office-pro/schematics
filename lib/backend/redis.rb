@@ -12,8 +12,6 @@ module Backend
 
     def engine = ::Sidekiq::Web
 
-    alias engine_middleware engine
-
     def cache_store = :redis_cache_store
 
     def cache_store_options = {
