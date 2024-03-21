@@ -9,14 +9,11 @@ ActiveRecordDoctor.configure do
     active_storage_variant_records
     action_text_rich_texts
     friendly_id_slugs
-    good_jobs
-    good_job_batches
-    good_job_processes
-    good_job_settings
-    good_job_executions
     mobility_string_translations
     mobility_text_translations
     paper_trail_versions
+    solid_queue_jobs
+    solid_queue_semaphores
   ]
 
   global :ignore_models, %w[
@@ -34,15 +31,17 @@ ActiveRecordDoctor.configure do
     Schematics::Version
     FriendlyId::Slug
     ApplicationRecord
-    GoodJob::BaseRecord
-    GoodJob::BatchRecord
-    GoodJob::Execution
-    GoodJob::ActiveJobJob
-    GoodJob::Job
-    GoodJob::DiscreteExecution
     Mobility::Backends::ActionText::PlainTextTranslation
     Mobility::Backends::ActionText::RichTextTranslation
     SolidCache::Entry
+    SolidQueue::Semaphore
+    SolidQueue::Process
+    SolidQueue::Pause
+    SolidQueue::Job
+    SolidQueue::RecurringExecution
+    SolidQueue::ScheduledExecution
+    SolidQueue::BlockedExecution
+    SolidQueue::ReadyExecution
   ]
 
   detector :missing_foreign_keys, enabled: false
