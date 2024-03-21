@@ -5,5 +5,5 @@ Rails.application.configure do
   SolidQueue::Configuration::WORKER_DEFAULTS[:queues] = opts[:queues]
   SolidQueue::Configuration::DISPATCHER_DEFAULTS[:recurring_tasks] = opts
     .dig(:scheduler, :schedule)
-    .transform_values { _1.transform_keys({ cron: :schedule }) }
+    .transform_values { _1.transform_keys(cron: :schedule) }
 end
