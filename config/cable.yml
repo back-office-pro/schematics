@@ -1,10 +1,8 @@
 development:
-  adapter: <%= ENV['BACKEND'] %>
-  url: <%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379' } %>
+  adapter: postgresql
 
 test:
   adapter: test
 
 production:
-  adapter: <%= ENV['BACKEND'] %>
-  url: <%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379' } %>
+  adapter: postgresql
