@@ -43,6 +43,7 @@ jobs:
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
           FIXTURES_PATH: spec/fixtures
           FIXTURES: migrations
+        if: ${{ hashFiles('spec/fixtures/migrations.yml') != '' }}
         run: bin/rails db:fixtures:load
       - name: Run tests
         env:
@@ -60,7 +61,7 @@ jobs:
           bundler-cache: true
           ruby-version: 3.3.0
       - name: Run brakeman
-        run: bundle exec brakeman -x ForgerySetting --no-pager --no-exit-on-error
+        run: bundle exec brakeman -x ForgerySetting --no-pager --no-exit-on-error --force
   bundler_audit:
     name: Bundler audit
     runs-on: ubuntu-latest
