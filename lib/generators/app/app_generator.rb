@@ -59,19 +59,19 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def install_migrations
     return unless generating?
 
-    rails_command 'schematics:install:migrations'
+    rails_command 'schematics:install:migrations', env:
   end
 
   def install_solid_queue
     return unless generating?
 
-    rails_command 'solid_queue:install:migrations'
+    rails_command 'solid_queue:install:migrations', env:
   end
 
   def install_solid_cache
     return unless generating?
 
-    rails_command 'solid_cache:install:migrations'
+    rails_command 'solid_cache:install:migrations', env:
   end
 
   def create_database
@@ -91,7 +91,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def generate_schematics
     return unless generating?
 
-    rails_command 'schematics:generate'
+    rails_command 'schematics:generate', env:
   end
 
   def encrypt_database
@@ -133,7 +133,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless env.development?
     return unless generating?
 
-    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures"'
+    rails_command 'db:fixtures:load FIXTURES_PATH="../fixtures"', env:
   end
 
   def edit_gitignore
