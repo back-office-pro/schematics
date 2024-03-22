@@ -10,7 +10,12 @@ module Schematics
 
       def call
         ::ActiveStorage::PurgeJob.set(wait: 5.minutes).perform_later(blob)
-        ::Turbo::StreamsChannel.broadcast_replace_to(user, target:, renderable:)
+        ::Turbo::StreamsChannel.broadcast_replace_to(
+          user,
+          :generate_file_in_background,
+          target: 'generate_file_in_background',
+          renderable:
+        )
       end
 
       private
@@ -21,8 +26,6 @@ module Schematics
 
       def renderable = Button::GenerateFileInBackground::Component
         .public_send(component_method || extension, dropdown:, url:)
-
-      def target = 'generate_file_in_background'
 
       def url = ::Rails
         .application
