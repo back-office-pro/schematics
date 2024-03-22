@@ -16,7 +16,7 @@ Puma::Plugin.create do
         Thread.new { monitor_puma }
         SolidQueue::Supervisor.start(
           mode: :all,
-          load_from: Schematics::Engine.root.join('config', 'solid_queue.yml')
+          load_configuration_from: Schematics::Engine.root.join('config', 'solid_queue.yml')
         )
       end
 
