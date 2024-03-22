@@ -5,7 +5,7 @@ module Backend
   class Postgresql
     def concurrency = 0
 
-    def max_threads = 5
+    def max_threads = 7
 
     def engine = ::MissionControl::Jobs::Engine
 
