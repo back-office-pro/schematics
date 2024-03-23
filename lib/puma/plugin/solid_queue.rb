@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# TODO: remove when https://github.com/rails/solid_queue/issues/180 is fixed
+# TODO: remove when https://github.com/rails/solid_queue/pull/185 is merged
 
 require 'puma/plugin'
 
@@ -14,10 +14,7 @@ Puma::Plugin.create do
     launcher.events.on_booted do
       @solid_queue_pid = fork do
         Thread.new { monitor_puma }
-        SolidQueue::Supervisor.start(
-          mode: :all,
-          load_configuration_from: Schematics::Engine.root.join('config', 'solid_queue.yml')
-        )
+        SolidQueue::Supervisor.start(mode: :all)
       end
 
       in_background do
