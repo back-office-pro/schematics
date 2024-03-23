@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
-require 'backend/postgresql'
-require 'backend/redis'
 require 'search_engine/opensearch'
 require 'search_engine/postgresql'
 
 # :reek:Attribute
 class Tenant
   DEFAULT_PORT = 3000
-  DEFAULT_BACKEND = 'postgresql'
   DEFAULT_SEARCH_ENGINE = 'postgresql'
 
   class << self
@@ -26,10 +23,6 @@ class Tenant
         @schema = value
       end
     end
-
-    def backend = Backend
-      .const_get(env_backend)
-      .new
 
     def search_engine = SearchEngine
       .const_get(env_search_engine)
@@ -122,11 +115,6 @@ class Tenant
     rescue StandardError
       []
     end
-
-    def env_backend = ENV
-      .fetch('BACKEND', DEFAULT_BACKEND)
-      .camelize
-      .to_sym
 
     def env_search_engine = ENV
       .fetch('SEARCH_ENGINE', DEFAULT_SEARCH_ENGINE)

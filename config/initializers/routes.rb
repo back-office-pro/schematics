@@ -5,7 +5,7 @@ Rails.configuration.exceptions_app = Rails.application.routes
 Rails.application.routes.prepend do
   direct(:website) { Tenant.url }
   mount Schematics::Engine, at: '/'
-  mount Tenant.backend.engine, at: '/backend'
+  mount MissionControl::Jobs::Engine, at: '/internal/jobs'
   localized do
     get 'auth/:provider/callback', to: 'sessions#create', as: :omniauth_login
     get 'up', to: 'rails/health#show', as: :health_check

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-max_threads_count = ENV.fetch('RAILS_MAX_THREADS', Tenant.backend.max_threads)
+max_threads_count = ENV.fetch('RAILS_MAX_THREADS', 7)
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { max_threads_count }
 threads min_threads_count, max_threads_count
 
@@ -15,22 +15,9 @@ bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 
-workers ENV.fetch('WEB_CONCURRENCY', Tenant.backend.concurrency)
-
 preload_app!
 
 plugin :tmp_restart
-
-case Tenant.backend
-when Backend::Postgresql
-  plugin :solid_queue
-when Backend::Redis
-  x = nil
-  on_worker_boot do
-    x = Sidekiq.configure_embed {} # rubocop:disable Lint/EmptyBlock
-    x.run
-  end
-  on_worker_shutdown { x&.stop }
-end
+plugin :solid_queue
 
 Tenant.search_engine.initialize!

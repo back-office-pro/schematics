@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# TODO: remove when https://github.com/rails/solid_queue/issues/180 is fixed
+# TODO: remove when https://github.com/rails/solid_queue/pull/185 is merged
 
 require 'puma/plugin'
 

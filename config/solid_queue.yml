@@ -1,0 +1,60 @@
+---
+workers:
+  - queues:
+    - default
+    - migrations
+    - imports
+    - exports
+    - mailers
+    - notifications
+    - webhooks
+    - backups
+    - cleanups
+    - searchkick
+    - rollbar
+dispatchers:
+  - polling_interval: 1
+    batch_size: 500
+    recurring_tasks:
+      schematics/database_backup_job:
+        schedule: 0 0 * * *
+        class: Schematics::DatabaseBackupJob
+      schematics/clean_database_backups_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanDatabaseBackupsJob
+      schematics/clean_comparisons_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanComparisonsJob
+      schematics/clean_drafts_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanDraftsJob
+      schematics/clean_searches_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanSearchesJob
+      schematics/clean_sessions_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanSessionsJob
+      schematics/clean_api_requests_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanAPIRequestsJob
+      schematics/clean_api_keys_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanAPIKeysJob
+      schematics/clean_meetings_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanMeetingsJob
+      schematics/clean_tasks_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanTasksJob
+      schematics/clean_imports_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanImportsJob
+      schematics/clean_messages_job:
+        schedule: 0 1 * * *
+        class: Schematics::CleanMessagesJob
+      schematics/load_subscription_job:
+        schedule: 0 1 * * *
+        class: Schematics::LoadSubscriptionJob
+      schematics/migrate_core_job:
+        schedule: 0 1 * * *
+        class: Schematics::MigrateCoreJob

@@ -25,12 +25,6 @@ services:
       - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
-  redis:
-    image: redis:latest
-    ports:
-      - 6379:6379
-    volumes:
-      - redis-data:/var/lib/redis
   clamav:
     image: clamav/clamav:latest
     ports:
@@ -52,18 +46,15 @@ services:
     depends_on:
       - opensearch
       - postgres
-      - redis
       - clamav
       - chrome
     environment:
       - DATABASE_URL=postgres://postgres@postgres
-      - REDIS_URL=redis://redis:6379
       - OPENSEARCH_URL=http://opensearch:9200
       - CHROME_URL=http://chrome:3333
       - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
   opensearch-data:
   postgres-data:
-  redis-data:
   clamav-data:
   storage-data:
