@@ -43,10 +43,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     super if generating?
   end
 
-  def create_env_file
-    template '.env'
-  end
-
   def create_docker_entrypoint_file
     template 'docker-entrypoint', 'bin/docker-entrypoint'
     chmod 'bin/docker-entrypoint', 0o755 & ~File.umask, verbose: false

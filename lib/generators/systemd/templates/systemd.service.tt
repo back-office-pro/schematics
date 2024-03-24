@@ -6,7 +6,6 @@ Requires=puma-<%= Tenant.subdomain %>.socket
 [Service]
 User=root
 WorkingDirectory=<%= Rails.root %>
-EnvironmentFile=<%= Rails.root.join('.env') %>
 ExecStart=<%= Rails.root.join('bin', 'rails') %> server
 Restart=always
 
