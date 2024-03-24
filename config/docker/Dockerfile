@@ -15,6 +15,7 @@ ARG BUNDLE_GITHUB__COM
 
 ENV MALLOC_ARENA_MAX=2
 ENV RUBY_YJIT_ENABLE=1
+ENV RAILS_ENV=production
 ENV LD_PRELOAD="/usr/lib/libjemalloc.so.2"
 
 RUN git config --global user.name "back-office"
