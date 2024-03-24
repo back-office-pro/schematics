@@ -9,7 +9,7 @@ class Subscription < Schematics::ApplicationRecord
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)
-      reload && update_env_file if metadata_previously_changed?
+      ::Core::Migrations::Restart.call if metadata_previously_changed?
     end
   end
 
@@ -75,23 +75,4 @@ class Subscription < Schematics::ApplicationRecord
   memoize def users_size = User.count
 
   memoize def api_keys_size = APIKey.count
-
-  private
-
-  def search_engine
-    case quota_databases
-    when 2
-      'opensearch'
-    else
-      'postgresql'
-    end
-  end
-
-  def update_env_file
-    filepath = Rails.root.join('.env')
-    filepath.write filepath
-      .read
-      .gsub(/SEARCH_ENGINE=(.*)/, "SEARCH_ENGINE=#{search_engine}")
-    ::Core::Migrations::Restart.call
-  end
 end

@@ -75,10 +75,6 @@ RSpec.describe Subscription do
   describe '#load!' do
     subject(:load!) { record.load! }
 
-    before do
-      allow(record).to receive(:update_env_file).and_return(nil)
-    end
-
     it 'updates subscription metadata' do
       expect { load! }
         .to change(record, :metadata)
@@ -91,11 +87,6 @@ RSpec.describe Subscription do
         .to change(record, :plan)
         .from('basic')
         .to('premium')
-    end
-
-    it 'updates .env file' do
-      load!
-      expect(record).to have_received(:update_env_file)
     end
   end
 end
