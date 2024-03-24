@@ -15,6 +15,12 @@ namespace :schematics do
       Schematics::Engine.load_seed
     end
 
+    desc 'Store database password in credentials'
+    task :password, [:password] => :environment do |_task, args|
+      credentials = Rails.application.credentials
+      credentials.write(credentials.read + "database_password: #{args[:password]}")
+    end
+
     ActiveRecordDoctor::Rake::Task.new do |task|
       task.deps = [:environment]
       task.config_path = Schematics::Engine.root.join('config', 'active_record_doctor.rb')

@@ -88,6 +88,13 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     pg_exec("DROP USER #{db_username}")
   end
 
+  def store_database_password
+    return if container?
+    return unless generating?
+
+    rails_command "schematics:db:password[#{db_password}]", env:
+  end
+
   def generate_schematics
     return unless generating?
 
