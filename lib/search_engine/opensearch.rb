@@ -19,11 +19,8 @@ module SearchEngine
 
     # :reek:UtilityFunction
     def initialize!
-      Rails.application.eager_load!
-      ::Searchkick
-        .models
-        .reject { _1.search_index.exists? }
-        .each(&:reindex)
+      ::Rails.application.eager_load!
+      ::Searchkick.models.each(&:reindex)
     end
   end
 end
