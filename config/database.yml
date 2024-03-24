@@ -19,4 +19,4 @@ production:
   <<: *default
   database: <%= Tenant.name %>_production
   username: <%= Tenant.name %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.credentials.database_password %>
