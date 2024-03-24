@@ -125,7 +125,7 @@ class Tenant
           .execute("SELECT metadata -> 'databases' FROM subscriptions")
           .getvalue(0, 0)
           .to_i
-          .prev
+          .pred
       )
     rescue StandardError
       DEFAULT_SEARCH_ENGINE
