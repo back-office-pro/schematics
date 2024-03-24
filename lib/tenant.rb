@@ -7,7 +7,7 @@ require 'search_engine/postgresql'
 # :reek:Attribute
 class Tenant
   DEFAULT_PORT = 3000
-  DEFAULT_SEARCH_ENGINE = 'postgresql'
+  DEFAULT_SEARCH_ENGINE = :Postgresql
 
   class << self
     SEMAPHORE = Mutex.new.freeze
@@ -24,9 +24,11 @@ class Tenant
       end
     end
 
-    def search_engine = SearchEngine
-      .const_get(env_search_engine)
-      .new
+    def search_engine
+      SEMAPHORE.synchronize do
+        @search_engine ||= SearchEngine.const_get(search_engine_name).new
+      end
+    end
 
     def name = Rails
       .application
@@ -116,10 +118,18 @@ class Tenant
       []
     end
 
-    def env_search_engine = ENV
-      .fetch('SEARCH_ENGINE', DEFAULT_SEARCH_ENGINE)
-      .camelize
-      .to_sym
+    def search_engine_name
+      [DEFAULT_SEARCH_ENGINE, :Opensearch].at(
+        ActiveRecord::Base
+          .connection
+          .execute("SELECT metadata -> 'databases' FROM subscriptions")
+          .getvalue(0, 0)
+          .to_i
+          .prev
+      )
+    rescue StandardError
+      DEFAULT_SEARCH_ENGINE
+    end
 
     def from = "no-reply@#{host}"
 
