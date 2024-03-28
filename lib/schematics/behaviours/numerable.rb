@@ -27,7 +27,7 @@ module Schematics
             number_to_human_size(value, **{ precision:, separator: }.compact)
           when '%'
             number_to_percentage(value, **{ precision:, separator: }.compact)
-          when '€', '$', '£'
+          when '€', '$', '£', '¥'
             number_to_currency(value, **{ unit:, precision:, separator: }.compact)
           else
             [number_with_precision(value, **{ precision:, separator: }.compact), unit]
