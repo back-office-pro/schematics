@@ -2,7 +2,7 @@ import DropdownController from 'controllers/dropdown_controller'
 
 export default class extends DropdownController {
   setCollection () {
-    if (this.inputs != null) {
+    if (this.inputs?.length) {
       this.element.tomselect.clearOptions()
       this.element.tomselect.addOptions(this.collection)
     }
