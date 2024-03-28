@@ -5,6 +5,8 @@ module Schematics
     class Rating < Float
       include Behaviours::Unincrementable
 
+      def available_options = super.excluding(Options::Unit)
+
       def icon = :star
 
       def validators = super.merge(
