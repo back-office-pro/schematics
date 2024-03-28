@@ -9,11 +9,17 @@ module Schematics
 
       private
 
-      def query = { key: api_key, libraries: 'places', callback: 'Function.prototype' }.to_param
+      def query = { key: api_key, loading:, libraries:, callback: }.to_param
 
       def host = 'maps.googleapis.com'
 
       def path = '/maps/api/js'
+
+      def libraries = 'places'
+
+      def loading = 'async'
+
+      def callback = 'Function.prototype'
 
       def api_key = Engine
         .credentials
