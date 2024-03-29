@@ -91,7 +91,6 @@ module Schematics
 
       memoize def inverse_association = Associations::Association.build(
         type: inverse_association_type,
-        name: inverse_association_name,
         belongs_to: self
       )
 
