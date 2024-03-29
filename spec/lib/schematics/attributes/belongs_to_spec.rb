@@ -28,7 +28,7 @@ describe Schematics::Attributes::BelongsTo do
   its(:open_api_filter_type) { is_expected.to eq(String) }
   its(:association_type) { is_expected.to eq('user') }
   its(:inverse_association_name) { is_expected.to eq('entity') }
-  its(:inverse_association_type) { is_expected.to eq('has_many_nested') }
+  its(:inverse_association_type) { is_expected.to eq('has_many') }
   its(:class_name) { is_expected.to eq('User') }
   its(:preload) { is_expected.to eq([user: :string_translations]) }
   its(:icon) { is_expected.to eq(:users) }

@@ -9,8 +9,12 @@ module Schematics
         [super, :"#{name}_type"]
       end
 
-      def inverse_association_type = super
-        .then_tap { "#{super}_nested" if !polymorphic? && super == 'has_many' }
+      memoize def inverse_association
+        return super if polymorphic?
+        return super if inverse_association_type == 'has_one'
+
+        Associations::HasManyNested.new(belongs_to: self)
+      end
     end
   end
 end
