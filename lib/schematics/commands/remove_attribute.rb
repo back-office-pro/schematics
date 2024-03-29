@@ -13,10 +13,8 @@ module Schematics
         case attribute
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
-            [
-              "remove_#{attribute.name}_from_#{table_name.pluralize}",
-              attribute.to_s
-            ]
+            ["remove_#{attribute.name}_from_#{table_name.pluralize}", attribute.to_s],
+            ['--primary_key_type=uuid']
           )
         end
       end

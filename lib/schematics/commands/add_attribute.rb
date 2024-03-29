@@ -13,10 +13,8 @@ module Schematics
         case attribute
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
-            [
-              "add_#{attribute.name}_to_#{table_name.pluralize}",
-              attribute.to_s
-            ]
+            ["add_#{attribute.name}_to_#{table_name.pluralize}", attribute.to_s],
+            ['--primary_key_type=uuid']
           )
         end
       end
