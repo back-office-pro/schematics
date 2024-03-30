@@ -5,4 +5,5 @@ describe Schematics::Options::Height do
 
   its(:name) { is_expected.to eq(:height) }
   its(:input_type) { is_expected.to eq(:integer) }
+  its(:min) { is_expected.to be_zero }
 end

@@ -5,4 +5,5 @@ describe Schematics::Options::OtherThan do
 
   its(:name) { is_expected.to eq(:other_than) }
   its(:input_type) { is_expected.to eq(:integer) }
+  its(:min) { is_expected.to be_nil }
 end

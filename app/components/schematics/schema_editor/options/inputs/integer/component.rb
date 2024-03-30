@@ -6,6 +6,7 @@ module Schematics
       module Inputs
         module Integer
           class Component < Inputs::Component
+            delegate :min, to: :option
           end
         end
       end

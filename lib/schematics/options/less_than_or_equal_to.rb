@@ -5,6 +5,8 @@ module Schematics
     class LessThanOrEqualTo < CollectionOption
       class << self
         def input_type = :integer
+
+        def min = nil
       end
     end
   end

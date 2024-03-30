@@ -5,4 +5,5 @@ describe Schematics::Options::Min do
 
   its(:name) { is_expected.to eq(:min) }
   its(:input_type) { is_expected.to eq(:integer) }
+  its(:min) { is_expected.to be_zero }
 end
