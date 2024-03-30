@@ -50,9 +50,6 @@ describe Schematics::Attributes::Model do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Unique,
-      Schematics::Options::Min,
-      Schematics::Options::Limit,
-      Schematics::Options::Length,
       Schematics::Options::AllowHidden
     )
   end

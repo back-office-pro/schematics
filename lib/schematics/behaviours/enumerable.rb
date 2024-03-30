@@ -3,6 +3,12 @@
 module Schematics
   module Behaviours
     module Enumerable
+      def available_options = super.excluding(
+        Options::Min,
+        Options::Limit,
+        Options::Length
+      )
+
       def values = Array(options.values)
 
       def collection = values.map { [format(_1), _1] }
