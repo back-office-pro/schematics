@@ -249,6 +249,8 @@ one:
         - id: <%= SecureRandom.uuid %>
           name: quantity
           type: integer
+          options:
+            greater_than_or_equal_to: 1
         - id: <%= SecureRandom.uuid %>
           name: duration
           type: duration
