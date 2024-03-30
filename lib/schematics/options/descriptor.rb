@@ -2,16 +2,7 @@
 
 module Schematics
   module Options
-    # :reek:Attribute
-    class Descriptor < Option
-      include ::ActiveModel::API
-
-      attr_accessor :collection
-
-      def multiple? = false
-
-      def input_type = :select
-
+    class Descriptor < CollectionOption
       def controller = 'schema-editor--descriptor-dropdown'
     end
   end

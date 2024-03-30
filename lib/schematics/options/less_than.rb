@@ -2,9 +2,9 @@
 
 module Schematics
   module Options
-    class LessThan < Option
+    class LessThan < CollectionOption
       class << self
-        def input_type = :string
+        def input_type = :integer
       end
     end
   end

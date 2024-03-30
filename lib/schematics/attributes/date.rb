@@ -17,12 +17,12 @@ module Schematics
       delegate :start_date?, :end_date?, to: :options
 
       def available_options = super.push(
-        Options::GreaterThan,
-        Options::GreaterThanOrEqualTo,
-        Options::EqualTo,
-        Options::LessThan,
-        Options::LessThanOrEqualTo,
-        Options::OtherThan,
+        Options::GreaterThan.new(collection:),
+        Options::GreaterThanOrEqualTo.new(collection:),
+        Options::EqualTo.new(collection:),
+        Options::LessThan.new(collection:),
+        Options::LessThanOrEqualTo.new(collection:),
+        Options::OtherThan.new(collection:),
         Options::StartDate,
         Options::EndDate
       )
@@ -54,6 +54,12 @@ module Schematics
 
         ::Time.current.to_fs(:db)
       end
+
+      protected
+
+      def collection = entity
+        .date_attributes
+        .map(&:name)
     end
   end
 end
