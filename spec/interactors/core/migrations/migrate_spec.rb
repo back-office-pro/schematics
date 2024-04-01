@@ -199,6 +199,77 @@ RSpec.describe Core::Migrations::Migrate do
       end
     end
 
+    context 'when adding a new belongs_to association' do
+      let(:data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'prospect',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              },
+              {
+                id: 'fbd1feaa-f83d-4618-8cd0-1e2ad0b95491',
+                name: 'user',
+                type: 'belongs_to'
+              }
+            ]
+          }
+        ]
+      end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 2 }
+
+      before { create_prospect_entity }
+
+      uses_transaction 'migrates successfully'
+
+      it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
+        expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(3)
+        expect(Dir[root.join('db/migrate/*_add_user_to_prospects_*.rb')]).not_to be_empty
+        expect(Prospect.new).to respond_to(:user)
+      end
+    end
+
+    context 'when adding a new habtm association' do
+      let(:data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'prospect',
+            associations: [
+              {
+                name: 'users',
+                type: 'has_and_belongs_to_many'
+              }
+            ],
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 2 }
+
+      before { create_prospect_entity }
+
+      uses_transaction 'migrates successfully'
+
+      it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
+        expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(3)
+        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Prospect.new).to respond_to(:users)
+      end
+    end
+
     context 'when renaming an attribute' do
       let(:data) do
         [
