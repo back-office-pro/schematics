@@ -122,6 +122,7 @@ module Schematics
     # :reek:FeatureEnvy
     def find_has_many_through_associations(entity, parent)
       return if parent.entity == entity # prevent infinite loop
+      return if parent.association_type == entity.name # prevent infinite loop
 
       parent.entity.has_many_associations.each do |child|
         next if child.entity == parent.entity # prevent self association
@@ -146,6 +147,7 @@ module Schematics
     # :reek:FeatureEnvy
     def find_has_one_through_associations(entity, parent)
       return if parent.entity == entity # prevent infinite loop
+      return if parent.association_type == entity.name # prevent infinite loop
 
       find_entity_by_name(parent.association_type)&.association_attributes&.each do |child|
         next if child.entity == parent.entity # prevent self association
