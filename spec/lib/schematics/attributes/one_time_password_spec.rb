@@ -29,7 +29,7 @@ describe Schematics::Attributes::OneTimePassword do
   its(:icon) { is_expected.to eq(:mobile_screen) }
 
   its(:to_spec) do
-    is_expected.to eq('A user has a **otp secret** attribute of type *one time password*')
+    is_expected.to eq('A user has a **otp secret** attribute of type *one-time password*')
   end
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
