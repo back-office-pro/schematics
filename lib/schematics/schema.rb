@@ -125,7 +125,7 @@ module Schematics
       return if parent.association_type == entity.name # prevent infinite loop
 
       parent.entity.has_many_associations.each do |child|
-        next if child.entity == parent.entity # prevent self association
+        next if child.entity == parent.entity # prevent infinite loop
 
         entity.associations << Associations::HasManyThrough.new(
           belongs_to: child.belongs_to,
@@ -150,7 +150,7 @@ module Schematics
       return if parent.association_type == entity.name # prevent infinite loop
 
       find_entity_by_name(parent.association_type)&.association_attributes&.each do |child|
-        next if child.entity == parent.entity # prevent self association
+        next if child.entity == parent.entity # prevent infinite loop
 
         entity.associations << Associations::HasOneThrough.new(belongs_to: child, through: parent)
         find_has_one_through_associations(entity, child)
