@@ -10,6 +10,10 @@ module Schematics
       delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
       delegate :options, :allowed_association_types, to: :belongs_to
 
+      validates :name,
+                presence: true,
+                uniqueness: { scope: %i[entity has_and_belongs_to_many_associations] },
+                comparison: { other_than: :denied_name, unless: :hidden? }
       validates :association_type, inclusion: { in: :allowed_association_types }
 
       # :reek:UtilityFunction
@@ -54,6 +58,10 @@ module Schematics
       def association_to_str = <<~RUBY
         #{type} :#{name}, class_name: '#{class_name}'
       RUBY
+
+      def denied_name = entity
+        .name
+        .pluralize
     end
   end
 end

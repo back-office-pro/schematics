@@ -5,7 +5,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
     Schematics::Associations::Association.build(
       type: 'has_and_belongs_to_many',
       entity:,
-      name: 'permissions',
+      name:,
       options:
     )
   end
@@ -18,11 +18,15 @@ describe Schematics::Associations::HasAndBelongsToMany do
       options: {
         descriptor: 'name'
       },
+      associations: [
+        { name: 'users', type: 'has_and_belongs_to_many' }
+      ],
       attributes: [
         { name: 'name', type: 'string' }
       ]
     )
   end
+  let(:name) { 'permissions' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -75,5 +79,17 @@ describe Schematics::Associations::HasAndBelongsToMany do
     let(:options) { { filter_by: 'model' } }
 
     its(:filter_by) { is_expected.to eq(:model) }
+  end
+
+  context 'when association name is already taken by another association' do
+    let(:name) { 'users' }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when association name is the same as entity name' do
+    let(:name) { 'roles' }
+
+    it { is_expected.not_to be_valid }
   end
 end
