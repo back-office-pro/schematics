@@ -46,6 +46,8 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:permitted_params) { is_expected.to eq(permission_ids: []) }
   its(:input_name) { is_expected.to eq('role[permission_ids][]') }
   its(:allowed_association_types) { is_expected.to include('user', 'role') }
+  its(:association_type) { is_expected.to eq('permission') }
+  its(:inverse_association) { is_expected.to be_a(described_class) }
   its(:icon) { is_expected.to eq(:lock) }
   its(:weight) { is_expected.to eq(3) }
   its(:to_spec) { is_expected.to eq('A role has many **permissions**') }

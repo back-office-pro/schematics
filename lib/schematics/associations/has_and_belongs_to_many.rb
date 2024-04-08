@@ -41,6 +41,13 @@ module Schematics
 
       def association_type = super.singularize
 
+      memoize def inverse_association = Associations::Association.build(
+        type: 'has_and_belongs_to_many',
+        entity:,
+        name: entity.name,
+        options: { hidden: true }
+      )
+
       def group_by
         :"#{options.group_by}_formatted" if options.group_by
       end

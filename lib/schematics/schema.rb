@@ -80,28 +80,13 @@ module Schematics
     # :reek:FeatureEnvy
     def add_has_and_belongs_to_many_associations = entities
       .flat_map(&:has_and_belongs_to_many_associations)
-      .each do |habtm|
-        find_entity_by_name(habtm.association_type)
-          &.associations
-          &.push(
-            Associations::Association.build(
-              type: 'has_and_belongs_to_many',
-              entity: habtm.entity,
-              name: habtm.entity.name,
-              options: { hidden: true }
-            )
-          )
-      end
+      .each { _1.inverse_entity.associations << _1.inverse_association }
 
+    # :reek:FeatureEnvy
     def add_inverse_associations = entities
       .flat_map(&:association_attributes)
       .reject(&:polymorphic?)
-      .map(&:inverse_association)
-      .each do |association|
-        find_entity_by_name(association.association_type)
-          &.associations
-          &.push(association)
-      end
+      .each { _1.inverse_entity.associations << _1.inverse_association }
 
     def add_inverse_polymorphic_associations
       entities.each do |entity|
@@ -149,7 +134,7 @@ module Schematics
       return if parent.entity == entity # prevent infinite loop
       return if parent.association_type == entity.name # prevent infinite loop
 
-      find_entity_by_name(parent.association_type)&.association_attributes&.each do |child|
+      parent.inverse_entity.association_attributes.each do |child|
         next if child.entity == parent.entity # prevent infinite loop
 
         entity.associations << Associations::HasOneThrough.new(belongs_to: child, through: parent)
