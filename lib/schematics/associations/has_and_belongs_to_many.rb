@@ -7,7 +7,7 @@ module Schematics
       include Behaviours::Validatable
       include Behaviours::Fillable
 
-      delegate :includes, :descriptor, :class_name, :model_class, to: :inverse_entity
+      delegate :includes, :descriptor, :class_name, :model_class, :icon, to: :inverse_entity
       delegate :options, :allowed_association_types, to: :belongs_to
 
       validates :name,
@@ -26,10 +26,6 @@ module Schematics
         Options::GroupBy,
         Options::FilterBy
       ]
-
-      def icon
-        inverse_entity&.icon || :link
-      end
 
       def column_name = "#{name.singularize}_ids"
 
