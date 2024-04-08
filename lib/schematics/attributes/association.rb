@@ -95,7 +95,6 @@ module Schematics
       )
 
       def icon
-        return :link unless inverse_entity
         return :link if polymorphic?
 
         inverse_entity.icon
