@@ -13,7 +13,7 @@ en:
           square: Square
         auto_increment: Auto increment
         cached: Cached
-        confirm: Confirm
+        confirm: Confirmation
         content_type: Content type
         core: Core
         default: Default value
@@ -42,8 +42,8 @@ en:
         less_than: Less than
         less_than_or_equal_to: Less than or equal to
         limit: Limit
-        max: Max
-        min: Min
+        max: Maximum
+        min: Minimum
         normalization: Formatting
         normalizations:
           capitalize: Capitalize
