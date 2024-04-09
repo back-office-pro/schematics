@@ -22,6 +22,7 @@ it:
       antivirus_file_not_found: impossibile trovare per la scansione antivirus
       antivirus_virus_detected: contiene un virus
       assignment: non deve contenere l'assegnazione
+      circular: non deve essere in un anello circolare
       color: non è un codice colore esadecimale valido
       dangerous_attribute: è un nome riservato
       function: non è valido

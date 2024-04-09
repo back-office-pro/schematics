@@ -19,6 +19,7 @@ en:
   errors:
     messages:
       assignment: must not contain assignment
+      circular: must no be in a circular loop
       color: is not a valid hexadecimal color code
       dangerous_attribute: is a reserved name
       function: is not valid

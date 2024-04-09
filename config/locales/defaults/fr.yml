@@ -22,6 +22,7 @@ fr:
       antivirus_file_not_found: n'a pas pu être trouvé pour l'analyse du virus
       antivirus_virus_detected: contient un virus
       assignment: ne doit pas contenir d'affectation
+      circular: ne doit pas être dans une boucle circulaire
       color: n'est pas un code hexadécimal de couleur valide
       dangerous_attribute: est un nom réservé
       function: n'est pas valide
