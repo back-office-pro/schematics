@@ -26,7 +26,7 @@ en:
       schematics/attributes/digest: Password
       schematics/attributes/duration: Duration
       schematics/attributes/email: Email
-      schematics/attributes/enum: Enum
+      schematics/attributes/enum: Enumeration
       schematics/attributes/flag: Flag
       schematics/attributes/float: Float
       schematics/attributes/integer: Integer
@@ -36,7 +36,7 @@ en:
       schematics/attributes/mime: MIME type
       schematics/attributes/model: Model
       schematics/attributes/model_field: Model field
-      schematics/attributes/one_time_password: One time password
+      schematics/attributes/one_time_password: One-time password
       schematics/attributes/percentage: Percentage
       schematics/attributes/phone: Phone number
       schematics/attributes/rating: Rating
