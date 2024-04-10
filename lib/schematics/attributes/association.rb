@@ -20,6 +20,7 @@ module Schematics
       validates :association_type,
                 inclusion: { in: :allowed_association_types },
                 unless: :polymorphic?
+      validate :cannot_be_circular
 
       def available_options = super
         .excluding(Options::Default)
@@ -158,6 +159,20 @@ module Schematics
               scope :with_#{name}_#{element.name}, -> { includes(#{{ name.to_sym => element.preload }}) }
             RUBY
           end.join
+      end
+
+      def cannot_be_circular = inverse_entity
+        .association_attributes
+        .excluding(self)
+        .reject(&:polymorphic?)
+        .each(&method(:find_circular_association_loop))
+
+      def find_circular_association_loop(parent)
+        parent.inverse_entity.association_attributes.reject(&:polymorphic?).each do |child|
+          return errors.add(:name, :circular) if child.inverse_entity == inverse_entity
+
+          find_circular_association_loop(child)
+        end
       end
     end
   end

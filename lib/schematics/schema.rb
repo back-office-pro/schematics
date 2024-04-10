@@ -80,28 +80,13 @@ module Schematics
     # :reek:FeatureEnvy
     def add_has_and_belongs_to_many_associations = entities
       .flat_map(&:has_and_belongs_to_many_associations)
-      .each do |habtm|
-        find_entity_by_name(habtm.association_type)
-          &.associations
-          &.push(
-            Associations::Association.build(
-              type: 'has_and_belongs_to_many',
-              entity: habtm.entity,
-              name: habtm.entity.name,
-              options: { hidden: true }
-            )
-          )
-      end
+      .each { _1.inverse_entity.associations << _1.inverse_association }
 
+    # :reek:FeatureEnvy
     def add_inverse_associations = entities
       .flat_map(&:association_attributes)
       .reject(&:polymorphic?)
-      .map(&:inverse_association)
-      .each do |association|
-        find_entity_by_name(association.association_type)
-          &.associations
-          &.push(association)
-      end
+      .each { _1.inverse_entity.associations << _1.inverse_association }
 
     def add_inverse_polymorphic_associations
       entities.each do |entity|
@@ -128,6 +113,8 @@ module Schematics
           belongs_to: child.belongs_to,
           through: parent
         )
+        next if child.association_type == parent.entity.name # prevent infinite loop
+
         find_has_many_through_associations(entity, child)
       end
     end
@@ -141,11 +128,14 @@ module Schematics
       end
     end
 
+    # :reek:FeatureEnvy
     def find_has_one_through_associations(entity, parent)
-      find_entity_by_name(parent.association_type)&.association_attributes&.each do |child|
+      parent.inverse_entity.association_attributes.reject(&:polymorphic?).each do |child|
         next if child.entity == parent.entity # prevent self association
 
         entity.associations << Associations::HasOneThrough.new(belongs_to: child, through: parent)
+        next if parent.inverse_entity == child.entity # prevent infinite loop
+
         find_has_one_through_associations(entity, child)
       end
     end

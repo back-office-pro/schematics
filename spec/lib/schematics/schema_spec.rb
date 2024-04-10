@@ -83,4 +83,107 @@ describe Schematics::Schema do
     it { is_expected.not_to be_valid }
     its(:root_route) { is_expected.to eq('exception#schema_error') }
   end
+
+  context 'when there is a one-level circular association loop' do
+    let(:data) do
+      [
+        {
+          name: 'category',
+          attributes: [
+            {
+              name: 'sub_category',
+              type: 'belongs_to'
+            }
+          ]
+        },
+        {
+          name: 'sub_category',
+          attributes: [
+            {
+              name: 'category',
+              type: 'belongs_to'
+            }
+          ]
+        }
+      ]
+    end
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when there is a two-level circular association loop' do
+    let(:data) do
+      [
+        {
+          name: 'category',
+          attributes: [
+            {
+              name: 'sub_category',
+              type: 'belongs_to'
+            }
+          ]
+        },
+        {
+          name: 'sub_category',
+          attributes: [
+            {
+              name: 'product',
+              type: 'belongs_to'
+            }
+          ]
+        },
+        {
+          name: 'product',
+          attributes: [
+            {
+              name: 'category',
+              type: 'belongs_to'
+            }
+          ]
+        }
+      ]
+    end
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context 'when there is a more complex circular association loop' do
+    let(:data) do
+      [
+        {
+          name: 'category',
+          attributes: [
+            {
+              name: 'sub_category',
+              type: 'belongs_to'
+            }
+          ]
+        },
+        {
+          name: 'sub_category',
+          attributes: [
+            {
+              name: 'product',
+              type: 'belongs_to'
+            },
+            {
+              name: 'category',
+              type: 'belongs_to'
+            }
+          ]
+        },
+        {
+          name: 'product',
+          attributes: [
+            {
+              name: 'category',
+              type: 'belongs_to'
+            }
+          ]
+        }
+      ]
+    end
+
+    it { is_expected.not_to be_valid }
+  end
 end
