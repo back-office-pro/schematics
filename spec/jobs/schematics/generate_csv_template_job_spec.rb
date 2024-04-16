@@ -20,7 +20,9 @@ RSpec.describe Schematics::GenerateCSVTemplateJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(user, model_class) }
 
-    let(:stream) { capture_turbo_stream_broadcasts(user) { perform_now } }
+    let(:stream) do
+      capture_turbo_stream_broadcasts([user, :generate_file_in_background]) { perform_now }
+    end
 
     it 'uploads a blob' do
       expect { perform_now }
