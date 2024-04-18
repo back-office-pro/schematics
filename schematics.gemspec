@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'zeitwerk', '2.6.13'
   spec.add_dependency 'aasm', '5.5.0'
   spec.add_dependency 'active_link_to', '1.0.5'
-  spec.add_dependency 'active_model_otp', '2.3.2'
+  spec.add_dependency 'active_model_otp', '2.3.4'
   spec.add_dependency 'active_record_doctor', '1.14.0'
   spec.add_dependency 'active_storage_base64', '3.0.0'
   spec.add_dependency 'active_storage_validations', '1.1.4'
@@ -134,6 +134,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '2.0.5'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
-  spec.add_dependency 'view_component', '3.12.0'
-  spec.add_dependency 'zero-rails_openapi', '2.1.5'
+  spec.add_dependency 'view_component', '3.12.1'
+  spec.add_dependency 'zero-rails_openapi', '2.2.0'
 end
