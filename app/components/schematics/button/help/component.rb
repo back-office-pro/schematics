@@ -20,7 +20,6 @@ module Schematics
 
         delegate :entity, :human_name_plural, to: :model_class, allow_nil: true, private: true
         delegate :core?, to: :entity, allow_nil: true, private: true
-        delegate :locale, to: :current_user, private: true
         delegate :icon, to: '::Documentation.entity'
 
         option :wrapper_css_classes, default: -> { 'btn btn-sm btn-icon-split' }
@@ -71,7 +70,7 @@ module Schematics
           !model_class || ALLOWLIST.include?(model_class)
         end
 
-        def path = File.join(['/docs', locale, slug].compact)
+        def path = File.join([t('.path'), slug].compact)
 
         def slug = human_name_plural
           .to_s
