@@ -11,7 +11,7 @@ module Schematics
 
           def icon = :user_secret
 
-          def path = '/privacy-policy'
+          def path = t('.path')
 
           def target = '_blank'
 
