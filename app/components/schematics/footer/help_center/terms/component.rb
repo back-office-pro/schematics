@@ -11,7 +11,7 @@ module Schematics
 
           def icon = :file_contract
 
-          def path = '/terms-and-conditions'
+          def path = t('.path')
 
           def target = '_blank'
 
