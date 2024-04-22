@@ -155,8 +155,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'bin/bundle'
     remove_file 'bin/rake'
     remove_file 'bin/setup'
-    remove_file 'config/application.rb'
-    remove_file 'config/boot.rb'
     remove_file 'config/initializers/content_security_policy.rb'
     remove_file 'config/initializers/filter_parameter_logging.rb'
     remove_file 'config/initializers/inflections.rb'
