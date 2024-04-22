@@ -169,7 +169,9 @@ module Schematics
 
       def find_circular_association_loop(parent)
         parent.inverse_entity.association_attributes.reject(&:polymorphic?).each do |child|
-          return errors.add(:name, :circular) if child.inverse_entity == inverse_entity
+          if [inverse_entity, parent.entity].include?(child.inverse_entity)
+            return errors.add(:name, :circular)
+          end
 
           find_circular_association_loop(child)
         end

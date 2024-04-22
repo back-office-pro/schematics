@@ -176,7 +176,7 @@ describe Schematics::Schema do
           name: 'product',
           attributes: [
             {
-              name: 'category',
+              name: 'sub_category',
               type: 'belongs_to'
             }
           ]
