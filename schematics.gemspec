@@ -61,6 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chartkick', '5.0.6'
   spec.add_dependency 'chroma', '0.2.0'
   spec.add_dependency 'countries', '6.0.0'
+  spec.add_dependency 'csv', '3.3.0'
   spec.add_dependency 'dartsass-sprockets', '3.1.0'
   spec.add_dependency 'derailed_benchmarks', '2.1.2'
   spec.add_dependency 'dry-initializer', '3.1.1'
