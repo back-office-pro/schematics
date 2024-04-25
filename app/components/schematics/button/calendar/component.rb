@@ -16,7 +16,7 @@ module Schematics
 
         def title = t('.text')
 
-        def css_classes = %w[btn btn-sm btn-icon-split ms-1]
+        def css_classes = %w[btn btn-sm btn-icon-split bg-body-tertiary ms-1]
 
         def render?
           viewers.include?(:calendar)

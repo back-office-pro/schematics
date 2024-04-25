@@ -1,12 +1,12 @@
 - breadcrumb title, edit_polymorphic_path(@resource)
 .card.shadow-sm.animate__animated.animate__zoomIn data-controller='nested-form'
-  .card-header.px-2.py-1
+  .card-header.p-2
     .row.align-items-center
-      .col.text-truncate
+      .col.text-truncate.px-1
         = __card_heading(icon: :pen_to_square, title:)
       .col-auto
         = __button_help(model_class:)
         = __schema_editor_button_add_entity
         = __button_stale(resource: @resource)
-  .card-body.p-3
+  .card-body.p-3.pt-1
     = __schema_editor(resource: @resource)

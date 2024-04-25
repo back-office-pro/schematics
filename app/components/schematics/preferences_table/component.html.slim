@@ -5,7 +5,7 @@
         tr
           th
           - events.each_value do |action|
-            th.text-primary = action
+            th.text-primary.pt-0 = action
       tbody
         - model_classes.each do |model_class|
           tr

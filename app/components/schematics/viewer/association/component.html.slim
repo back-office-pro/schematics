@@ -1,7 +1,7 @@
-.accordion.shadow-sm.mt-3.animate__animated.animate__zoomIn
-  .accordion-item
+.accordion.shadow-sm.mt-3.animate__animated.animate__zoomIn.rounded-bottom
+  .accordion-item.rounded-bottom
     .accordion-header
-      button.accordion-button.py-1.pe-3.ps-2 {
+      button.accordion-button.py-1.pe-3.ps-2.rounded-bottom {
         type='button'
         data-bs-toggle='collapse'
         data-bs-target="##{id}"
@@ -13,7 +13,7 @@
         .badge.bg-primary.text-white.p-2.me-3 = display_count
   .accordion-collapse.collapse class=collapse_css_class id=id
     .accordion-body.p-0
-      .table-responsive
+      .table-responsive.rounded-bottom
         table.table.mb-0.table-striped.table-hover.table-borderless
           thead
             tr

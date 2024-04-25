@@ -2,9 +2,9 @@
 .row.g-0.align-items-center
   .col-lg
     .card.shadow-sm.animate__animated.animate__zoomIn
-      .card-header.px-2.py-1
+      .card-header.p-2
         .row.align-items-center
-          .col.text-truncate
+          .col.text-truncate.px-1
             = __card_heading(icon: @version.entity.icon, title: @previous_item)
           .col-auto
             = __button_revert(version: @version)
@@ -15,9 +15,9 @@
     = fa_icon :arrow_down, size: '4x', class: 'text-secondary d-inline-block d-lg-none'
   .col-lg
     .card.shadow-sm.animate__animated.animate__zoomIn
-      .card-header.px-2.py-1
+      .card-header.p-2
         .row.align-items-center
-          .col.text-truncate
+          .col.text-truncate.px-1
             = __card_heading(icon: @version.entity.icon, title: @version.item)
       .card-body.p-0
         = __resource_details(resource: @version.item)

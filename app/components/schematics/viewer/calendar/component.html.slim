@@ -1,8 +1,8 @@
-.table-responsive data-controller='comparison' data-comparison-model-value=model_class
+.table-responsive.rounded-bottom data-controller='comparison' data-comparison-model-value=model_class
   table.table.table-borderless.mb-0
     = __filter(model_class:)
     tbody
-      table.table.table-borderless.mb-0
+      table.table.table-borderless.table-striped-columns.mb-0
         thead
           tr
             - date_range.slice(0, 7).each do |day|

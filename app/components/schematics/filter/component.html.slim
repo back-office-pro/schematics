@@ -1,10 +1,10 @@
 thead
   tr
-    th.align-top.pb-0 rowspan='2'
+    th.align-top.py-0 rowspan='2'
       = __viewer_settings(entity:)
       = __button_compare(model_class:)
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|
-      th.text-nowrap.text-center.pb-0.animate__slideInDown class=col_preference_class(field)
+      th.text-nowrap.text-center.py-0.animate__slideInDown class=col_preference_class(field)
         = __sort_link(field:, model_class:)
   tr
     - entity.listable_elements.stable_sort_by(&:weight).each do |field|

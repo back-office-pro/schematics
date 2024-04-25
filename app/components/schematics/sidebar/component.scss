@@ -1,4 +1,5 @@
 .sidebar {
+  box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, .6); // scss-lint:disable ColorVariable
   flex: 0 0 12rem;
   max-width: 12rem;
   transition: ease-in-out .3s;
@@ -8,8 +9,10 @@
     max-width: 6rem;
   }
 
-  &:hover {
+  &:hover,
+  .segment {
     background: var(--bs-primary-darken) !important;
+    box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, .6); // scss-lint:disable ColorVariable
   }
 
   .sidebar-brand {

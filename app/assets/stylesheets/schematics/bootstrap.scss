@@ -35,9 +35,13 @@ $badge-padding-y: .25em;
 $badge-padding-x: .5em;
 $zindex-dropdown: 1035;
 
+$card-cap-bg: none;
 $input-bg: $input-group-addon-bg;
 $input-focus-bg: $input-group-addon-bg;
 $form-select-bg: $input-group-addon-bg;
+$table-striped-bg: $input-group-addon-bg;
+$dropdown-link-active-bg: $input-disabled-bg;
+$table-hover-bg: $input-disabled-bg;
 $accordion-button-active-bg: $card-cap-bg;
 $offcanvas-box-shadow: $modal-content-box-shadow-sm-up;
 $toast-background-color: rgba(var(--#{$prefix}body-bg-rgb), 1);
@@ -110,6 +114,7 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
   @extend .border-0;
   @extend .rounded;
   @extend .bg-body-tertiary;
+  @extend .me-1;
 }
 
 // Timeline

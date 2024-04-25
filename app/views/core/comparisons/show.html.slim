@@ -3,9 +3,9 @@
   - @resources.each do |resource|
     .col-lg-6
       .card.shadow-sm.animate__animated.animate__zoomIn
-        .card-header.px-2.py-1
+        .card-header.p-2
           .row.align-items-center
-            .col.text-truncate
+            .col.text-truncate.px-1
               = __card_heading(icon: parent_model_class.entity.icon, title: resource.to_s)
         .card-body.p-0
           = __resource_details(resource:, model_class: parent_model_class)

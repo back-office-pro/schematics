@@ -22,7 +22,7 @@ module Schematics
         delegate :core?, to: :entity, allow_nil: true, private: true
         delegate :icon, to: '::Documentation.entity'
 
-        option :wrapper_css_classes, default: -> { 'btn btn-sm btn-icon-split' }
+        option :wrapper_css_classes, default: -> { 'btn btn-sm btn-icon-split bg-body-tertiary' }
         option :text_css_classes, default: -> { 'd-none d-lg-inline' }
         option :tooltip, default: -> { true }
         option :icon_css_classes, optional: true
