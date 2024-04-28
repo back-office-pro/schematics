@@ -1401,6 +1401,15 @@
         }
       },
       {
+        "id": "8f589671-7d82-48fb-8cda-cbb95207c597",
+        "name": "business_sector",
+        "type": "string",
+        "options": {
+          "readonly": true,
+          "cached": true
+        }
+      },
+      {
         "id": "b810d540-09a8-4cdd-8fea-13d304434513",
         "name": "plan",
         "type": "enum",

@@ -7,8 +7,19 @@ module Core
         include Interactor
 
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
-        delegate :id, :email, to: :customer, allow_nil: true, prefix: true, private: true
         delegate :subdomain, to: ::Tenant, private: true
+        delegate :id,
+                 :email,
+                 :metadata,
+                 to: :customer,
+                 allow_nil: true,
+                 prefix: true,
+                 private: true
+        delegate :business_sector,
+                 to: :customer_metadata,
+                 prefix: true,
+                 allow_nil: true,
+                 private: true
         delegate :id,
                  :cancel_at_period_end,
                  to: :subscription,
@@ -35,6 +46,7 @@ module Core
         def data = {
           email: customer_email,
           default_locale: customer_locale,
+          business_sector: customer_metadata_business_sector,
           state: subscription_state,
           plan: product_name,
           metadata: product_metadata

@@ -3,6 +3,7 @@ en:
   activerecord:
     attributes:
       subscription:
+        business_sector: Business sector
         default_locale: Default locale
         email: Email
         metadata: Metadata
