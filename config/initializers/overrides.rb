@@ -16,7 +16,6 @@ require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
-require 'sassc/override/engine'
 require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
@@ -34,7 +33,6 @@ OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
-SassC::Engine.prepend(SassC::Override::Engine)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
 
 Rails.configuration.to_prepare do

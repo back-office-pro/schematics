@@ -170,7 +170,6 @@ RSpec/SpecFilePathFormat:
     - spec/requests/core/**/*
     - spec/routing/**/*
     - spec/lib/onelogin/ruby-saml/*
-    - spec/lib/sassc/**/*
 RSpec/DescribeClass:
   Exclude:
     - spec/config/**/*

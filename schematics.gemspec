@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'based_uuid', '0.6.4'
   spec.add_dependency 'bcrypt', '3.1.20'
   spec.add_dependency 'bootsnap', '1.18.3'
-  spec.add_dependency 'bootstrap-email', '1.4.1'
+  spec.add_dependency 'bootstrap-email', '1.5.1'
   spec.add_dependency 'bootstrap_form', '5.4.0'
   spec.add_dependency 'brakeman', '6.1.2'
   spec.add_dependency 'browser', '5.3.1'
