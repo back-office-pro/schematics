@@ -57,16 +57,33 @@ RSpec.describe 'Resources' do
     expect(page).to have_field('user_email', with: user.email)
   end
 
+  it 'automatically saves the form content even if offline', :js do # rubocop:disable RSpec/ExampleLength
+    visit new_user_path
+    page.driver.browser.network.offline_mode
+    fill_in('user[email]', with: user.email).send_keys(:tab)
+    page.driver.browser.network.emulate_network_conditions(
+      offline: false,
+      latency: 0,
+      download_throughput: 0,
+      upload_throughput: 0
+    )
+    sleep(5) # Ajax
+    refresh
+    sleep(5)
+    find('.card-header').click_button
+    expect(page).to have_field('user_email', with: user.email)
+  end
+
   it 'downloads a CSV file', :js, skip: 'not supported by driver' do
     visit permissions_path
     find_by_id('generate_file_in_background').click
-    page.driver.downloads.wait { first('#generate_file_in_background .dropdown-item').click }
-    expect(page.driver.downloads.files.first['suggestedFilename']).to eq('permissions.csv')
+    page.driver.browser.downloads.wait { first('#generate_file_in_background .dropdown-item').click } # rubocop:disable Layout/LineLength
+    expect(page.driver.browser.downloads.files.first['suggestedFilename']).to eq('permissions.csv')
   end
 
   it 'downloads a PDF file', :js, skip: 'not supported by driver' do
     visit user_path(user)
-    page.driver.downloads.wait { find_by_id('generate_file_in_background').click }
-    expect(page.driver.downloads.files.first['suggestedFilename']).to eq('user-john-doe.pdf')
+    page.driver.browser.downloads.wait { find_by_id('generate_file_in_background').click }
+    expect(page.driver.browser.downloads.files.first['suggestedFilename']).to eq('user-john-doe.pdf') # rubocop:disable Layout/LineLength
   end
 end
