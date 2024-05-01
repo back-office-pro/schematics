@@ -7,7 +7,11 @@ span.text-body-tertiary = '-' if value.nil?
         = fa_icon :box_archive, class: 'me-2'
         = value
     - else
-      = __resource_link_to(resource: value)
+      - case value
+      - when User
+        = __avatar(user: value, width: 18, height: 18, size: :xl)
+      - else
+        = __resource_link_to(resource: value)
 - when Schematics::Attributes::Jsonb
   - case value
   - in Schematics::Schema

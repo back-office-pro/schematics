@@ -4,12 +4,12 @@ module Schematics
   module Attachment
     class Component < ApplicationComponent
       class << self
-        def avatar(user:, title: nil)
+        def avatar(user:, width: 32, height: 32, size: :avatar, title: nil)
           new(
             attachment: user.avatar,
-            width: 36,
-            height: 36,
-            replacement: { icon: :circle_user, size: '2x' },
+            width:,
+            height:,
+            replacement: { icon: :circle_user, size: },
             class: 'align-middle rounded-circle',
             title:
           )
