@@ -32,7 +32,6 @@ export default class extends ApplicationController {
     for (const [key, value] of Object.entries({ ...localStorage })) {
       if (key.startsWith('sync:')) {
         this.fetchAPI(...JSON.parse(value))
-        localStorage.removeItem(key)
       }
     }
   }

@@ -18,7 +18,9 @@ export default class extends Controller {
   }
 
   fetchAPI (url, method = 'GET', data) {
+    const syncUrl = `sync:${btoa(url)}`
     if (navigator.onLine) {
+      localStorage.removeItem(syncUrl)
       return fetch(url, {
         method,
         body: data && JSON.stringify(data),
@@ -30,7 +32,7 @@ export default class extends Controller {
       })
     } else {
       if (method !== 'GET') {
-        localStorage.setItem(`sync:${btoa(url)}`, JSON.stringify(Array.from(arguments)))
+        localStorage.setItem(syncUrl, JSON.stringify(Array.from(arguments)))
       }
       return new Response('null')
     }
