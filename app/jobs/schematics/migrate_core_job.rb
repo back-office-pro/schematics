@@ -7,7 +7,9 @@ module Schematics
     def perform
       return if ::Tenant.version == VERSION
 
-      Core::Migrations::Migrate.call(migration: ::Migration.core)
+      PaperTrail.request(enabled: false) do
+        Core::Migrations::Migrate.call(migration: ::Migration.core)
+      end
     end
   end
 end
