@@ -1,8 +1,6 @@
 ---
 it:
   titles:
-    comparisons:
-      show: Confronto %{resource}
     emailings:
       create: Inviare via e-mail
       new: Inviare via e-mail

@@ -1,8 +1,6 @@
 ---
 en:
   titles:
-    comparisons:
-      show: "%{resource} comparison"
     emailings:
       create: Send by email
       new: Send by email

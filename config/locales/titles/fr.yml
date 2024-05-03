@@ -1,8 +1,6 @@
 ---
 fr:
   titles:
-    comparisons:
-      show: Comparaison %{resource}
     emailings:
       create: Envoyer par e-mail
       new: Envoyer par e-mail
