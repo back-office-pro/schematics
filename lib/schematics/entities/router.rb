@@ -8,7 +8,6 @@ module Schematics
     class Router # rubocop:disable Metrics/ClassLength
       delegate :name,
                :class_name,
-               :table_name,
                :actions,
                :events,
                :can?,
@@ -19,9 +18,11 @@ module Schematics
         @entity = entity
       end
 
-      def to_str = [route_definition, resolver]
-        .compact
-        .join
+      def to_str = [
+        namespace_nesting(resource_routes_definition),
+        scope_nesting(nested_resource_routes_definition),
+        resolver
+      ].compact.join
 
       private
 
@@ -39,6 +40,21 @@ module Schematics
         .tap(&:pop)
         .reverse
 
+      def nested_resource_routes = [
+        import_routes,
+        comparison_routes,
+        comment_routes,
+        emailing_routes
+      ].compact.join
+
+      def resource_routes = [
+        delete_route,
+        archive_routes,
+        autocomplete_route,
+        duplicate_route,
+        events.map(&method(:event_route))
+      ].compact.join
+
       def resolver
         return unless @entity in Singleton
 
@@ -49,45 +65,59 @@ module Schematics
         RUBY
       end
 
-      def route
+      def resource_routes_definition
         case @entity
         when Singleton
           <<~RUBY
             resource :#{resource}, only: #{routes}, model_name: '#{class_name}' do
-            #{resource_routes}
+            #{resource_routes.indent(2).chomp}
             end
           RUBY
         when Entity
           <<~RUBY
             resources :#{resource.pluralize}, only: #{routes}, model_name: '#{class_name}' do
-            #{resource_routes}
+            #{resource_routes.indent(2).chomp}
             end
           RUBY
         end
       end
 
-      def route_definition
-        return route unless namespaces
+      def nested_resource_routes_definition
+        case @entity
+        when Singleton
+          <<~RUBY
+            resource :#{resource}, only: [], model_name: '#{class_name}' do
+            #{nested_resource_routes.indent(2).chomp}
+            end
+          RUBY
+        when Entity
+          <<~RUBY
+            resources :#{resource.pluralize}, only: [], model_name: '#{class_name}' do
+            #{nested_resource_routes.indent(2).chomp}
+            end
+          RUBY
+        end
+      end
 
-        namespaces.reduce(route) do |code, namespace|
+      def namespace_nesting(source)
+        namespaces.reduce(source) do |code, namespace|
           <<~RUBY
             namespace :#{namespace} do
-              #{code.chomp}
+            #{code.indent(2).chomp}
             end
           RUBY
         end
       end
 
-      def resource_routes = [
-        delete_route,
-        archive_routes,
-        autocomplete_route,
-        duplicate_route,
-        events.map(&method(:event_route)),
-        import_routes,
-        comment_routes,
-        emailing_route
-      ].compact.join.indent(2).chomp
+      def scope_nesting(source)
+        namespaces.reduce(source) do |code, namespace|
+          <<~RUBY
+            scope path: :#{namespace}, as: :#{namespace} do
+            #{code.indent(2).chomp}
+            end
+          RUBY
+        end
+      end
 
       def delete_route
         return unless can?(:destroy)
@@ -114,14 +144,6 @@ module Schematics
         RUBY
       end
 
-      def emailing_route
-        return unless can?(:show)
-
-        <<~RUBY
-          resources :emailings, only: %i[new create]
-        RUBY
-      end
-
       def duplicate_route
         return unless can?(:create)
 
@@ -141,8 +163,26 @@ module Schematics
 
         <<~RUBY
           collection do
-            resources :imports, only: %i[new create], as: '#{table_name}_imports'
+            resources :imports, only: %i[new create], as: '#{class_name.demodulize.underscore}_imports'
           end
+        RUBY
+      end
+
+      def comparison_routes
+        return unless can?(:index)
+
+        <<~RUBY
+          collection do
+            resources :comparisons, only: :create, as: '#{class_name.demodulize.underscore}_comparisons'
+          end
+        RUBY
+      end
+
+      def emailing_routes
+        return unless can?(:show)
+
+        <<~RUBY
+          resources :emailings, only: %i[new create]
         RUBY
       end
 
@@ -150,7 +190,7 @@ module Schematics
         return unless can?(:show)
 
         <<~RUBY
-          resources :comments, only: %i[new create edit update], shallow: true
+          resources :comments, only: %i[new create]
         RUBY
       end
     end

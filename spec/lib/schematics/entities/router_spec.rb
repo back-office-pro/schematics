@@ -18,10 +18,15 @@ describe Schematics::Entities::Router do
           delete :restore, on: :member
           get :autocomplete, on: :collection
           post :duplicate, on: :member
+        end
+        resources :users, only: [], model_name: 'User' do
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
-          resources :comments, only: %i[new create edit update], shallow: true
+          collection do
+            resources :comparisons, only: :create, as: 'user_comparisons'
+          end
+          resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
         end
       RUBY
@@ -77,10 +82,15 @@ describe Schematics::Entities::Router do
           patch 'state/close', action: :trigger, event: 'close_state', on: :member
           patch 'state/refuse', action: :trigger, event: 'refuse_state', on: :member
           patch 'state/reopen', action: :trigger, event: 'reopen_state', on: :member
+        end
+        resources :users, only: [], model_name: 'User' do
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
-          resources :comments, only: %i[new create edit update], shallow: true
+          collection do
+            resources :comparisons, only: :create, as: 'user_comparisons'
+          end
+          resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
         end
       RUBY
@@ -95,10 +105,15 @@ describe Schematics::Entities::Router do
         resources :users, only: [:index, :show, :create, :new], model_name: 'User' do
           get :autocomplete, on: :collection
           post :duplicate, on: :member
+        end
+        resources :users, only: [], model_name: 'User' do
           collection do
             resources :imports, only: %i[new create], as: 'user_imports'
           end
-          resources :comments, only: %i[new create edit update], shallow: true
+          collection do
+            resources :comparisons, only: :create, as: 'user_comparisons'
+          end
+          resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
         end
       RUBY
@@ -111,7 +126,10 @@ describe Schematics::Entities::Router do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         resource :configuration, only: [:show, :update, :edit], model_name: 'Configuration' do
-          resources :comments, only: %i[new create edit update], shallow: true
+
+        end
+        resource :configuration, only: [], model_name: 'Configuration' do
+          resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
         end
         resolve 'Configuration' do |resource, options|
@@ -128,17 +146,24 @@ describe Schematics::Entities::Router do
       is_expected.to eq <<~RUBY
         namespace :active_storage do
           resources :attachments, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'ActiveStorage::Attachment' do
-          get :delete, on: :member
-          delete :archive, on: :member
-          delete :restore, on: :member
-          get :autocomplete, on: :collection
-          post :duplicate, on: :member
-          collection do
-            resources :imports, only: %i[new create], as: 'active_storage_attachment_imports'
+            get :delete, on: :member
+            delete :archive, on: :member
+            delete :restore, on: :member
+            get :autocomplete, on: :collection
+            post :duplicate, on: :member
           end
-          resources :comments, only: %i[new create edit update], shallow: true
-          resources :emailings, only: %i[new create]
         end
+        scope path: :active_storage, as: :active_storage do
+          resources :attachments, only: [], model_name: 'ActiveStorage::Attachment' do
+            collection do
+              resources :imports, only: %i[new create], as: 'attachment_imports'
+            end
+            collection do
+              resources :comparisons, only: :create, as: 'attachment_comparisons'
+            end
+            resources :comments, only: %i[new create]
+            resources :emailings, only: %i[new create]
+          end
         end
       RUBY
     end
@@ -151,21 +176,32 @@ describe Schematics::Entities::Router do
       is_expected.to eq <<~RUBY
         namespace :i18n do
           namespace :backend do
-          namespace :active_record do
-          resources :translations, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'I18n::Backend::ActiveRecord::Translation' do
-          get :delete, on: :member
-          delete :archive, on: :member
-          delete :restore, on: :member
-          get :autocomplete, on: :collection
-          post :duplicate, on: :member
-          collection do
-            resources :imports, only: %i[new create], as: 'i18n_backend_active_record_translation_imports'
+            namespace :active_record do
+              resources :translations, only: [:index, :show, :create, :update, :destroy, :new, :edit], model_name: 'I18n::Backend::ActiveRecord::Translation' do
+                get :delete, on: :member
+                delete :archive, on: :member
+                delete :restore, on: :member
+                get :autocomplete, on: :collection
+                post :duplicate, on: :member
+              end
+            end
           end
-          resources :comments, only: %i[new create edit update], shallow: true
-          resources :emailings, only: %i[new create]
         end
-        end
-        end
+        scope path: :i18n, as: :i18n do
+          scope path: :backend, as: :backend do
+            scope path: :active_record, as: :active_record do
+              resources :translations, only: [], model_name: 'I18n::Backend::ActiveRecord::Translation' do
+                collection do
+                  resources :imports, only: %i[new create], as: 'translation_imports'
+                end
+                collection do
+                  resources :comparisons, only: :create, as: 'translation_comparisons'
+                end
+                resources :comments, only: %i[new create]
+                resources :emailings, only: %i[new create]
+              end
+            end
+          end
         end
       RUBY
     end
@@ -178,9 +214,14 @@ describe Schematics::Entities::Router do
       is_expected.to eq <<~RUBY
         namespace :main do
           resource :subscription, only: [:show, :update, :edit], model_name: 'Main::Subscription' do
-          resources :comments, only: %i[new create edit update], shallow: true
-          resources :emailings, only: %i[new create]
+
+          end
         end
+        scope path: :main, as: :main do
+          resource :subscription, only: [], model_name: 'Main::Subscription' do
+            resources :comments, only: %i[new create]
+            resources :emailings, only: %i[new create]
+          end
         end
         resolve 'Main::Subscription' do |resource, options|
           [:subscription, options]
