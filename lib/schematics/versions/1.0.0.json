@@ -792,10 +792,8 @@
     "name": "comparison",
     "options": {
       "icon": "scale_balanced",
-      "descriptor": "model",
       "hidden": true,
       "actions": [
-        "create",
         "show"
       ]
     },

@@ -31,6 +31,9 @@ module Schematics
             is_expected
               .to route(:get, polymorphic_path(model_class, action: :autocomplete))
               .to params.merge(action: :autocomplete)
+            is_expected
+              .to route(:post, polymorphic_path([model_class, ::Comparison], format: nil))
+              .to params.merge(controller: :comparisons, action: :create)
           end
           if can?(:show)
             is_expected
@@ -38,16 +41,16 @@ module Schematics
               .to params.merge(action: :show, id:).compact
             is_expected
               .to route(:get, new_polymorphic_path([record, ::Comment], format: nil))
-              .to params.merge(controller: 'comments', parent_id => id, action: :new).compact
+              .to params.merge(controller: :comments, parent_id => id, action: :new).compact
             is_expected
               .to route(:post, polymorphic_path([record, ::Comment], format: nil))
-              .to params.merge(controller: 'comments', parent_id => id, action: :create).compact
+              .to params.merge(controller: :comments, parent_id => id, action: :create).compact
             is_expected
               .to route(:get, new_polymorphic_path([record, ::Emailing], format: nil))
-              .to params.merge(controller: 'emailings', parent_id => id, action: :new).compact
+              .to params.merge(controller: :emailings, parent_id => id, action: :new).compact
             is_expected
               .to route(:post, polymorphic_path([record, ::Emailing], format: nil))
-              .to params.merge(controller: 'emailings', parent_id => id, action: :create).compact
+              .to params.merge(controller: :emailings, parent_id => id, action: :create).compact
           end
           if can?(:create)
             is_expected
@@ -61,10 +64,10 @@ module Schematics
               .to params.merge(id:, action: :duplicate)
             is_expected
               .to route(:get, new_polymorphic_path([model_class, ::Import], format: nil))
-              .to params.merge(controller: 'imports', action: :new)
+              .to params.merge(controller: :imports, action: :new)
             is_expected
               .to route(:post, polymorphic_path([model_class, ::Import], format: nil))
-              .to params.merge(controller: 'imports', action: :create)
+              .to params.merge(controller: :imports, action: :create)
           end
           if can?(:update)
             is_expected
