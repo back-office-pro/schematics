@@ -1,5 +1,7 @@
 import SearchBarController from 'controllers/search_bar_controller'
 
+/* global routes */
+
 export default class extends SearchBarController {
   onSearch () {
     this.inputTarget.form.requestSubmit()
@@ -33,6 +35,6 @@ export default class extends SearchBarController {
     searchParams.set('field', element)
     searchParams.set(scope, decodeURI(this.inputTarget.value))
     searchParams.set('sort', element)
-    return `${window.location.pathname}/autocomplete?${searchParams}`
+    return `${window.location.pathname}/${routes.autocomplete}?${searchParams}`
   }
 }
