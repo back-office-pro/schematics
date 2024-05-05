@@ -84,7 +84,7 @@ ActiveSupport.on_load(:active_storage_record) do
   scope :with_slugs, -> { self }
 
   class << self
-    alias_method :finder, :find
+    alias_method :finder, :find_by_decoded_uuid!
   end
 
   def paper_trail_versions = Schematics::Version.none
