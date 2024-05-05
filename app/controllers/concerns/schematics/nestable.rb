@@ -31,7 +31,7 @@ module Schematics
       .preload_all
       .with_string_translations
       .load_async
-      .finder(params[:"#{parent_model_class.model_name.param_key}_id"])
+      .finder(params[:"#{parent_model_class.model_name.element}_id"])
 
     def set_breadcrumb
       return unless can?(:index, parent_model_class)
