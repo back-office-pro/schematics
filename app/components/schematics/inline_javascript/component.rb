@@ -37,7 +37,9 @@ module Schematics
         .html_safe # rubocop:disable Rails/OutputSafety
 
       def routes = {
+        archive: t('routes.archive'),
         autocomplete: t('routes.autocomplete'),
+        bulk_actions: t('routes.bulk_actions'),
         comparisons: ::Comparison.human_name_plural,
         dashboardReadNotifications: dashboard_read_notifications_path,
         draft: draft_path(id: ':id'),
