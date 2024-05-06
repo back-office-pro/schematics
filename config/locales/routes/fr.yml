@@ -5,6 +5,7 @@ fr:
     admin: administration
     archive: archiver
     autocomplete: auto-completion
+    bulk_actions: actions-groupees
     delete: supprimer
     duplicate: dupliquer
     edit: editer

@@ -5,6 +5,7 @@ en:
     admin: admin
     archive: archive
     autocomplete: autocomplete
+    bulk_actions: bulk-actions
     delete: delete
     duplicate: duplicate
     edit: edit
