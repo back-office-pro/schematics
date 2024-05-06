@@ -26,6 +26,11 @@ describe Schematics::Entities::Router do
           collection do
             resources :comparisons, only: :create, as: 'user_comparisons'
           end
+          collection do
+            resource :bulk_actions, only: [] do
+              delete :archive
+            end
+          end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
         end
@@ -89,6 +94,11 @@ describe Schematics::Entities::Router do
           end
           collection do
             resources :comparisons, only: :create, as: 'user_comparisons'
+          end
+          collection do
+            resource :bulk_actions, only: [] do
+              delete :archive
+            end
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
@@ -161,6 +171,11 @@ describe Schematics::Entities::Router do
             collection do
               resources :comparisons, only: :create, as: 'attachment_comparisons'
             end
+            collection do
+              resource :bulk_actions, only: [] do
+                delete :archive
+              end
+            end
             resources :comments, only: %i[new create]
             resources :emailings, only: %i[new create]
           end
@@ -196,6 +211,11 @@ describe Schematics::Entities::Router do
                 end
                 collection do
                   resources :comparisons, only: :create, as: 'translation_comparisons'
+                end
+                collection do
+                  resource :bulk_actions, only: [] do
+                    delete :archive
+                  end
                 end
                 resources :comments, only: %i[new create]
                 resources :emailings, only: %i[new create]

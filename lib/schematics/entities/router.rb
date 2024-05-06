@@ -43,6 +43,7 @@ module Schematics
       def nested_resource_routes = [
         import_routes,
         comparison_routes,
+        bulk_actions_routes,
         comment_routes,
         emailing_routes
       ].compact.join
@@ -174,6 +175,18 @@ module Schematics
         <<~RUBY
           collection do
             resources :comparisons, only: :create, as: '#{class_name.demodulize.underscore}_comparisons'
+          end
+        RUBY
+      end
+
+      def bulk_actions_routes
+        return unless can?(:archive)
+
+        <<~RUBY
+          collection do
+            resource :bulk_actions, only: [] do
+              delete :archive
+            end
           end
         RUBY
       end
