@@ -111,6 +111,24 @@ module Schematics
               end
             end
           end
+
+          it 'gets new emailing' do
+            get new_polymorphic_path([record, ::Emailing], format: nil), headers:, as: :html
+            if ability.can?(:email, model_class) && ability.can?(:show, record)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
+
+          it 'gets new comment' do
+            get new_polymorphic_path([record, ::Comment], format: nil), headers:, as: :html
+            if ability.can?(:comment, model_class) && ability.can?(:create, ::Comment)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
         end
 
         if can?(:update)
