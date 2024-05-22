@@ -8,7 +8,6 @@ AllCops:
   NewCops: enable
   DisplayStyleGuide: true
   Exclude:
-    - lib/puma/plugin/solid_queue.rb
     - spec/demo/**/*
     - vendor/**/*
 # rubocop
