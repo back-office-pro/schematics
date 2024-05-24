@@ -40,6 +40,10 @@ module Schematics
         .tap(&:pop)
         .reverse
 
+      def route_alias = class_name
+        .demodulize
+        .underscore
+
       def nested_resource_routes = [
         import_routes,
         comparison_routes,
@@ -164,7 +168,7 @@ module Schematics
 
         <<~RUBY
           collection do
-            resources :imports, only: %i[new create], as: '#{class_name.demodulize.underscore}_imports'
+            resources :imports, only: %i[new create], as: '#{route_alias}_imports'
           end
         RUBY
       end
@@ -174,7 +178,7 @@ module Schematics
 
         <<~RUBY
           collection do
-            resources :comparisons, only: :create, as: '#{class_name.demodulize.underscore}_comparisons'
+            resources :comparisons, only: :create, as: '#{route_alias}_comparisons'
           end
         RUBY
       end
@@ -184,7 +188,7 @@ module Schematics
 
         <<~RUBY
           collection do
-            resource :bulk_actions, only: [] do
+            resource :bulk_actions, only: [], as: '#{route_alias}_bulk_actions' do
               delete :archive
             end
           end
