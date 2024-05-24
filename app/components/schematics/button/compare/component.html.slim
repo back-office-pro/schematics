@@ -1,4 +1,8 @@
-button.btn.px-0.py-1.d-flex.d-none data-comparison-target='button' data-action='click->comparison#submit'
-  span.icon.d-none.me-2 = fa_icon :spinner, animation: 'spin'
-  span.text.d-lg-inline = title
-  span.text.d-none = t('schematics.application.button.loading')
+button.btn.btn-sm.d-none {
+  data-controller='tooltip'
+  data-comparison-target='button'
+  data-action='click->comparison#submit'
+  title=title
+}
+  span.icon = fa_icon icon, class: icon_class
+  span.icon.d-none = fa_icon :spinner, class: icon_class, animation: 'spin'

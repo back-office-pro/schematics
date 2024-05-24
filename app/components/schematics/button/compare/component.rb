@@ -4,9 +4,12 @@ module Schematics
   module Button
     module Compare
       class Component < ApplicationComponent
+        delegate :icon, to: '::Comparison.entity'
         option :model_class
 
         def title = t('.text')
+
+        def icon_class = 'fa-fw'
 
         def render?
           can?(:create, ::Comparison) && can?(:show, model_class)
