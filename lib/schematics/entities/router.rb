@@ -189,7 +189,7 @@ module Schematics
         <<~RUBY
           collection do
             resource :bulk_actions, only: [], as: '#{route_alias}_bulk_actions' do
-              delete :archive
+              delete :archive, controller: 'schematics/bulk_actions'
             end
           end
         RUBY
