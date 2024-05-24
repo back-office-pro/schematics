@@ -67,4 +67,12 @@ RSpec.describe Migration do
 
     it { is_expected.to eq(record) }
   end
+
+  describe '.scheduled' do
+    subject { described_class.scheduled }
+
+    before { record.state_scheduled! }
+
+    it { is_expected.to eq(record) }
+  end
 end

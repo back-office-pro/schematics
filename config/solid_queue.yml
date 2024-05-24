@@ -19,6 +19,9 @@ dispatchers:
       schematics/database_backup_job:
         schedule: 0 0 * * *
         class: Schematics::DatabaseBackupJob
+      schematics/load_subscription_job:
+        schedule: 0 0 * * *
+        class: Schematics::LoadSubscriptionJob
       schematics/clean_database_backups_job:
         schedule: 0 1 * * *
         class: Schematics::CleanDatabaseBackupsJob
@@ -52,9 +55,9 @@ dispatchers:
       schematics/clean_messages_job:
         schedule: 0 1 * * *
         class: Schematics::CleanMessagesJob
-      schematics/load_subscription_job:
-        schedule: 0 1 * * *
-        class: Schematics::LoadSubscriptionJob
       schematics/migrate_core_job:
         schedule: 0 1 * * *
         class: Schematics::MigrateCoreJob
+      schematics/migrate_schema_job:
+        schedule: 0 2 * * *
+        class: Schematics::MigrateSchemaJob

@@ -21,6 +21,8 @@ class Migration < Schematics::ApplicationRecord
 
     def current = state_finished.last
 
+    def scheduled = state_scheduled.last
+
     def core = new(data: Tenant.schema.as_json, version: current_version)
   end
 

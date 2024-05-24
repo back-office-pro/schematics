@@ -4,7 +4,9 @@ module Schematics
   class MigrateSchemaJob < ApplicationJob
     queue_as :migrations
 
-    def perform(migration)
+    def perform(migration = Migration.scheduled)
+      return unless migration
+
       PaperTrail.request(enabled: false) do
         migration.finalize! Core::Migrations::Migrate.call(migration:).failure?
       end

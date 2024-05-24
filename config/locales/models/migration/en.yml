@@ -15,10 +15,13 @@ en:
           in_progress: In progress
           pending: Pending
           rollbacking: Rollbacking
+          scheduled: Scheduled
     events:
       migration:
         migrate: Migrate
         rollback: Rollback
+        schedule: Schedule
+        unschedule: Unschedule
     models:
       migration:
         gender: female

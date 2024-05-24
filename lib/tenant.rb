@@ -112,7 +112,7 @@ class Tenant
     def data
       JSON.parse ActiveRecord::Base
         .connection
-        .execute('SELECT data FROM migrations WHERE state = 2 ORDER BY created_at DESC LIMIT 1')
+        .execute('SELECT data FROM migrations WHERE state = 3 ORDER BY created_at DESC LIMIT 1')
         .getvalue(0, 0)
     rescue StandardError
       []

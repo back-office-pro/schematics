@@ -933,6 +933,7 @@
           "default": "pending",
           "values": [
             "pending",
+            "scheduled",
             "in_progress",
             "finished",
             "rollbacking",
@@ -948,6 +949,25 @@
                 "error"
               ],
               "to": "in_progress"
+            },
+            {
+              "id": "673bb78c-fbec-4180-942c-9763a31977f3",
+              "name": "schedule",
+              "icon": "clock",
+              "color": "secondary",
+              "from": [
+                "pending",
+                "error"
+              ],
+              "to": "scheduled"
+            },
+            {
+              "id": "1555ef24-a3c9-4559-b027-0908119ed64b",
+              "name": "unschedule",
+              "icon": "ban",
+              "color": "secondary",
+              "from": "scheduled",
+              "to": "pending"
             },
             {
               "id": "07ad0c5f-790a-4a7e-bf90-92968d3659d3",

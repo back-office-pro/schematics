@@ -15,10 +15,13 @@ it:
           in_progress: In corso
           pending: In sospeso
           rollbacking: Rollback in corso
+          scheduled: Programmata
     events:
       migration:
         migrate: Migrare
         rollback: Tornare indietro
+        schedule: Programmare
+        unschedule: Deprogrammare
     models:
       migration:
         gender: female
