@@ -10,7 +10,7 @@ export default class extends ApplicationController {
   async submit () {
     this.buttonTarget.disabled = true
     const params = { bulk_action: { ids: this.ids() } }
-    const response = await this.fetchAPI(`${window.location.pathname}/${routes.bulk_actions}/${routes.archive}`, 'DELETE', params)
+    const response = await this.fetchAPI(`${window.location.pathname}/${routes.bulk_actions}/${routes.archive}`, 'POST', params)
     Turbo.visit(response.headers.get('Location'))
   }
 
