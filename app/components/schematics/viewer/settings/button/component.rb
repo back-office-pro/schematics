@@ -27,8 +27,6 @@ module Schematics
             'viewer-settings-preference-param': "viewer_#{@entity.id}",
             'bs-title': t(".#{@viewer}")
           }
-
-          def css_class = 'fa-fw'
         end
       end
     end
