@@ -1,0 +1,6 @@
+---
+fr:
+  schematics:
+    bulk_actions:
+      archive:
+        success: Déconnecté !
