@@ -7,7 +7,7 @@ module Schematics
     def archive
       authorize!(:archive, parent_model_class)
       BulkActionJob.perform_later(current_user, parent_model_class, bulk_action_params[:ids])
-      flash.now[:notice] = t('.success')
+      flash[:notice] = t('.success')
       respond_with nil, location: main_app.polymorphic_path(parent_model_class)
     end
 

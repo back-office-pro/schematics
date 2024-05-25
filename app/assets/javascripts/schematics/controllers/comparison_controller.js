@@ -1,12 +1,13 @@
 import BulkActionController from 'controllers/bulk_action_controller'
 
-/* global Turbo, routes */
+/* global routes */
 
 export default class extends BulkActionController {
-  async submit () {
-    this.buttonTarget.disabled = true
-    const params = { comparison: { ids: this.ids() } }
-    const response = await this.fetchAPI(`${window.location.pathname}/${routes.comparisons}`, 'POST', params)
-    Turbo.visit(response.headers.get('Location'))
+  get params () {
+    return { comparison: { ids: this.ids() } }
+  }
+
+  get url () {
+    return `${window.location.pathname}/${routes.comparisons}`
   }
 }

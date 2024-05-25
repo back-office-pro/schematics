@@ -9,9 +9,8 @@ export default class extends ApplicationController {
 
   async submit () {
     this.buttonTarget.disabled = true
-    const params = { bulk_action: { ids: this.ids() } }
-    const response = await this.fetchAPI(`${window.location.pathname}/${routes.bulk_actions}/${routes.archive}`, 'POST', params)
-    Turbo.visit(response.headers.get('Location'))
+    const response = await this.fetchAPI(this.url, 'POST', this.params)
+    Turbo.visit(response.headers.get('Location'), { action: 'replace' })
   }
 
   toggleButton () {
@@ -23,5 +22,13 @@ export default class extends ApplicationController {
       .switchTargets
       .filter(_ => _.checked)
       .map(_ => _.name)
+  }
+
+  get params () {
+    return { bulk_action: { ids: this.ids() } }
+  }
+
+  get url () {
+    return `${window.location.pathname}/${routes.bulk_actions}/${routes.archive}`
   }
 }

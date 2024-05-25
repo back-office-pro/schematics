@@ -14,6 +14,7 @@ RSpec.describe 'BulkActions' do
 
     before { do_request }
 
-    it { is_expected.to redirect_to(users_path) }
+    it { is_expected.to have_http_status(:created) }
+    its(:body) { is_expected.to eq('null') }
   end
 end
