@@ -28,7 +28,7 @@ describe Schematics::Entities::Router do
           end
           collection do
             resource :bulk_actions, only: [], as: 'user_bulk_actions' do
-              delete :archive, controller: 'schematics/bulk_actions'
+              post :archive, controller: 'schematics/bulk_actions'
             end
           end
           resources :comments, only: %i[new create]
@@ -97,7 +97,7 @@ describe Schematics::Entities::Router do
           end
           collection do
             resource :bulk_actions, only: [], as: 'user_bulk_actions' do
-              delete :archive, controller: 'schematics/bulk_actions'
+              post :archive, controller: 'schematics/bulk_actions'
             end
           end
           resources :comments, only: %i[new create]
@@ -173,7 +173,7 @@ describe Schematics::Entities::Router do
             end
             collection do
               resource :bulk_actions, only: [], as: 'attachment_bulk_actions' do
-                delete :archive, controller: 'schematics/bulk_actions'
+                post :archive, controller: 'schematics/bulk_actions'
               end
             end
             resources :comments, only: %i[new create]
@@ -214,7 +214,7 @@ describe Schematics::Entities::Router do
                 end
                 collection do
                   resource :bulk_actions, only: [], as: 'translation_bulk_actions' do
-                    delete :archive, controller: 'schematics/bulk_actions'
+                    post :archive, controller: 'schematics/bulk_actions'
                   end
                 end
                 resources :comments, only: %i[new create]
