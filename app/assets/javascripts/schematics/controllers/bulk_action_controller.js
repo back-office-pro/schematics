@@ -10,7 +10,7 @@ export default class extends ApplicationController {
   async submit () {
     this.buttonTarget.disabled = true
     const response = await this.fetchAPI(this.url, 'POST', this.params)
-    Turbo.visit(response.headers.get('Location'), { action: 'replace' })
+    Turbo.visit(response.headers.get('Location'))
   }
 
   toggleButton () {
