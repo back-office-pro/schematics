@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe 'BulkActions' do
+  include_context 'with authenticated user'
+  include_context 'with admin role'
+
+  let(:role) { admin_role }
+
+  describe 'POST #archive' do
+    let(:do_request) { post(archive_user_bulk_actions_path, params:, headers:) }
+    let(:params) { { bulk_action: { ids: [user.id] } } }
+
+    before { do_request }
+
+    it { is_expected.to redirect_to(users_path) }
+  end
+end
