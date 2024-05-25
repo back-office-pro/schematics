@@ -93,8 +93,8 @@ module Schematics
               .to route(:delete, polymorphic_path(record, action: :restore))
               .to params.merge(id:, action: :restore)
             is_expected
-              .to route(:post, polymorphic_path([model_class, :bulk_actions], action: :archive, format: nil)) # rubocop:disable Layout/LineLength
-              .to params.merge(controller: 'schematics/bulk_actions', action: :archive)
+              .to route(:post, polymorphic_path([model_class, :bulk_actions], format: nil))
+              .to params.merge(controller: 'schematics/bulk_actions', action: :create)
           end
           events.each do |event|
             is_expected

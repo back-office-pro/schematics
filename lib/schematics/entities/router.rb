@@ -188,9 +188,7 @@ module Schematics
 
         <<~RUBY
           collection do
-            resource :bulk_actions, only: [], as: '#{route_alias}_bulk_actions' do
-              post :archive, controller: 'schematics/bulk_actions'
-            end
+            resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: '#{route_alias}_bulk_actions'
           end
         RUBY
       end

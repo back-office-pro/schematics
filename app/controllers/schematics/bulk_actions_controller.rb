@@ -4,7 +4,7 @@ module Schematics
   class BulkActionsController < ApplicationController
     include Nestable
 
-    def archive
+    def create
       authorize!(:archive, parent_model_class)
       BulkActionJob.perform_later(current_user, parent_model_class, bulk_action_params[:ids])
       flash[:notice] = t('.success')

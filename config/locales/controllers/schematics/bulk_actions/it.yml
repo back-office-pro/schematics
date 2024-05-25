@@ -2,5 +2,5 @@
 it:
   schematics:
     bulk_actions:
-      archive:
-        success: Disconnesso!
+      create:
+        success: Archiviazione in corso...

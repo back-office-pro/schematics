@@ -27,9 +27,7 @@ describe Schematics::Entities::Router do
             resources :comparisons, only: :create, as: 'user_comparisons'
           end
           collection do
-            resource :bulk_actions, only: [], as: 'user_bulk_actions' do
-              post :archive, controller: 'schematics/bulk_actions'
-            end
+            resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'user_bulk_actions'
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
@@ -96,9 +94,7 @@ describe Schematics::Entities::Router do
             resources :comparisons, only: :create, as: 'user_comparisons'
           end
           collection do
-            resource :bulk_actions, only: [], as: 'user_bulk_actions' do
-              post :archive, controller: 'schematics/bulk_actions'
-            end
+            resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'user_bulk_actions'
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
@@ -172,9 +168,7 @@ describe Schematics::Entities::Router do
               resources :comparisons, only: :create, as: 'attachment_comparisons'
             end
             collection do
-              resource :bulk_actions, only: [], as: 'attachment_bulk_actions' do
-                post :archive, controller: 'schematics/bulk_actions'
-              end
+              resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'attachment_bulk_actions'
             end
             resources :comments, only: %i[new create]
             resources :emailings, only: %i[new create]
@@ -213,9 +207,7 @@ describe Schematics::Entities::Router do
                   resources :comparisons, only: :create, as: 'translation_comparisons'
                 end
                 collection do
-                  resource :bulk_actions, only: [], as: 'translation_bulk_actions' do
-                    post :archive, controller: 'schematics/bulk_actions'
-                  end
+                  resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'translation_bulk_actions'
                 end
                 resources :comments, only: %i[new create]
                 resources :emailings, only: %i[new create]

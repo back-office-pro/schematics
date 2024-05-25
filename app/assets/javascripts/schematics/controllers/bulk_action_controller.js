@@ -29,6 +29,6 @@ export default class extends ApplicationController {
   }
 
   get url () {
-    return `${window.location.pathname}/${routes.bulk_actions}/${routes.archive}`
+    return `${window.location.pathname}/${routes.bulk_actions}`
   }
 }
