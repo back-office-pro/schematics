@@ -8,9 +8,9 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     permissions: Permission.create_entities_permissions!
   )
   Role.create!(
-    name_en: 'User',
-    name_fr: 'Utilisateur',
-    name_it: 'Utente',
+    name_en: 'Collaborator',
+    name_fr: 'Collaborateur',
+    name_it: 'Collaboratore',
     permissions: Permission.features
   )
   Configuration.instance.update!(
