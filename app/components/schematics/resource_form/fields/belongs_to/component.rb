@@ -10,7 +10,6 @@ module Schematics
 
           memoize def collection = model_class
             .preload_all
-            .accessible_by(current_ability)
             .order(created_at: :desc)
             .limit(Loadable::ASSOCIATIONS_LIMIT)
             .to_a

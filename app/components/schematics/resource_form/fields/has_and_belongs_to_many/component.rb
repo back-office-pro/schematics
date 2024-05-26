@@ -13,7 +13,6 @@ module Schematics
             model_class
               .preload_all
               .all
-              .accessible_by(current_ability)
               .select(&filter_by)
               .group_by(&group_by)
               .to_h
