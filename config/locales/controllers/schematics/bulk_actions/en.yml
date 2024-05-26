@@ -1,0 +1,6 @@
+---
+en:
+  schematics:
+    bulk_actions:
+      create:
+        success: Processing...

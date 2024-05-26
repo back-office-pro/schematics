@@ -1,0 +1,6 @@
+---
+it:
+  schematics:
+    bulk_actions:
+      create:
+        success: Trattamento in corso...

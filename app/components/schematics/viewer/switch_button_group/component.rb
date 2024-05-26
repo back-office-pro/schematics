@@ -9,8 +9,9 @@ module Schematics
         option :resources
 
         def data = {
-          action: 'click->comparison#toggleButton',
-          'comparison-target': 'switch'
+          action: 'click->comparison#toggleButton click->bulk-action#toggleButton',
+          'comparison-target': 'switch',
+          'bulk-action-target': 'switch'
         }
 
         def render?

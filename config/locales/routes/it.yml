@@ -5,6 +5,7 @@ it:
     admin: amministrazione
     archive: archiviare
     autocomplete: completamento-automatico
+    bulk_actions: azioni-collettive
     delete: cancellare
     duplicate: duplicare
     edit: editare

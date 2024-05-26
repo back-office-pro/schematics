@@ -1,27 +1,13 @@
-import ApplicationController from 'controllers/application_controller'
+import BulkActionController from 'controllers/bulk_action_controller'
 
-/* global Turbo, routes */
+/* global routes */
 
-export default class extends ApplicationController {
-  static get targets () {
-    return ['button', 'switch']
+export default class extends BulkActionController {
+  get params () {
+    return { comparison: { ids: this.ids() } }
   }
 
-  async compare () {
-    this.buttonTarget.disabled = true
-    const params = { comparison: { ids: this.ids() } }
-    const response = await this.fetchAPI(`${window.location.pathname}/${routes.comparisons}`, 'POST', params)
-    Turbo.visit(response.headers.get('Location'))
-  }
-
-  toggleButton () {
-    this.buttonTarget.classList.toggle('d-none', this.ids().length < 2)
-  }
-
-  ids () {
-    return this
-      .switchTargets
-      .filter(_ => _.checked)
-      .map(_ => _.name)
+  get url () {
+    return `${window.location.pathname}/${routes.comparisons}`
   }
 }
