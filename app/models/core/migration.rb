@@ -24,6 +24,8 @@ class Migration < Schematics::ApplicationRecord
     def scheduled = state_scheduled.last
 
     def core = new(data: Tenant.schema.as_json, version: current_version)
+
+    def default = new(data: YAML.load_file(Subscription.migration_data_filepath))
   end
 
   def after_migrate_event

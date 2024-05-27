@@ -131,7 +131,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:credentials:backup', env:
   end
 
-  def load_migration_fixture
+  def load_fixtures
     return if container?
     return unless env.development?
     return unless generating?
