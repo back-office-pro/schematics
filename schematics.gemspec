@@ -52,7 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'brakeman', '6.1.2'
   spec.add_dependency 'browser', '6.0.0'
   spec.add_dependency 'bundler-audit', '0.9.1'
-  spec.add_dependency 'cancancan', '3.6.0'
+  spec.add_dependency 'cancancan', '3.6.1'
   spec.add_dependency 'capistrano', '3.18.1'
   spec.add_dependency 'capistrano3-puma', '6.0.0.beta.1'
   spec.add_dependency 'capistrano-bundler', '2.1.0'
