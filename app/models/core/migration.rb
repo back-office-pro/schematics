@@ -18,6 +18,7 @@ class Migration < Schematics::ApplicationRecord
 
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
+    delegate :business_sector, to: Subscription, private: true
 
     def current = state_finished.last
 
@@ -27,9 +28,7 @@ class Migration < Schematics::ApplicationRecord
 
     def default = new(
       data: YAML.load_file(
-        Schematics::Engine
-          .root
-          .join('db', 'seeds', 'migrations', "#{Subscription.business_sector}.yml")
+        Schematics::Engine.root.join('db', 'seeds', 'migrations', "#{business_sector}.yml")
       )
     )
   end
