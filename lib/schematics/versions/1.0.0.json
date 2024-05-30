@@ -1406,7 +1406,8 @@
         "type": "email",
         "options": {
           "readonly": true,
-          "cached": true
+          "cached": true,
+          "default": "support@back-office.pro"
         }
       },
       {
@@ -1424,7 +1425,8 @@
         "type": "string",
         "options": {
           "readonly": true,
-          "cached": true
+          "cached": true,
+          "default": "other"
         }
       },
       {
