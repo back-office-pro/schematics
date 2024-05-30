@@ -18,7 +18,7 @@ RSpec.describe Permission do
     it 'creates all entities permissions' do
       expect { create_entities_permissions! }
         .to change(described_class, :count)
-        .by(109)
+        .by(111)
     end
   end
 
