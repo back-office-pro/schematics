@@ -25,7 +25,13 @@ class Migration < Schematics::ApplicationRecord
 
     def core = new(data: Tenant.schema.as_json, version: current_version)
 
-    def default = new(data: YAML.load_file(Subscription.migration_data_filepath))
+    def default = new(
+      data: YAML.load_file(
+        Schematics::Engine
+          .root
+          .join('db', 'seeds', 'migrations', "#{Subscription.business_sector}.yml")
+      )
+    )
   end
 
   def after_migrate_event

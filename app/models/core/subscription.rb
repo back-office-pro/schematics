@@ -6,12 +6,6 @@ class Subscription < Schematics::ApplicationRecord
 
   delegate :entities, :users, :api_keys, :databases, to: :quota, prefix: true
 
-  class << self
-    def migration_data_filepath = Schematics::Engine
-      .root
-      .join('db', 'seeds', 'migrations', "#{business_sector}.yml")
-  end
-
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)
