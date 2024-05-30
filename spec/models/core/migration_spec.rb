@@ -75,4 +75,10 @@ RSpec.describe Migration do
 
     it { is_expected.to eq(record) }
   end
+
+  describe '.default' do
+    subject { described_class.default }
+
+    it { is_expected.to be_a(described_class) }
+  end
 end
