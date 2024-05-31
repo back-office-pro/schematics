@@ -48,10 +48,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     chmod 'bin/docker-entrypoint', 0o755 & ~File.umask, verbose: false
   end
 
-  def create_github_workflow_file
-    template 'github/workflows/ci.yml', '.github/workflows/ci.yml'
-  end
-
   def install_migrations
     return unless generating?
 
@@ -148,10 +144,13 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def remove_unused_files
+    remove_file '.github/dependabot.yml'
     remove_file 'app/assets/stylesheets/application.css'
     remove_file 'app/controllers/application_controller.rb'
     remove_file 'app/helpers/application_helper.rb'
     remove_file 'app/views/layouts/application.html.erb'
+    remove_file 'app/views/pwa/manifest.json.erb'
+    remove_file 'app/views/pwa/service-worker.js'
     remove_file 'bin/bundle'
     remove_file 'bin/rake'
     remove_file 'bin/setup'
@@ -166,11 +165,11 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/environments/production.rb'
     remove_file 'config/environments/test.rb'
     remove_file 'public/404.html'
+    remove_file 'public/406-unsupported-browser.html'
     remove_file 'public/422.html'
     remove_file 'public/500.html'
-    remove_file 'public/apple-touch-icon-precomposed.png'
-    remove_file 'public/apple-touch-icon.png'
-    remove_file 'public/favicon.ico'
+    remove_file 'public/icon.png'
+    remove_file 'public/icon.svg'
     remove_file 'public/robots.txt'
     remove_file '.gitattributes'
     remove_file '.ruby-version'
@@ -261,7 +260,9 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_active_job: true,
     skip_action_cable: true,
     skip_active_record: true,
-    skip_asset_pipeline: true
+    skip_asset_pipeline: true,
+    skip_rubocop: true,
+    skip_brakeman: true
   }
 
   def db_username = app_name.underscore
