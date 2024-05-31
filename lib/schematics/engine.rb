@@ -47,7 +47,6 @@ require 'paper_trail'
 require 'paranoia'
 require 'phonelib'
 require 'puma'
-require 'rack/attack'
 require 'rack/cors'
 require 'rails'
 require 'rails-i18n'
@@ -125,7 +124,6 @@ module Schematics
     config.active_record.strict_loading_by_default = true
     config.active_record.query_log_tags_enabled = true
     config.active_record.action_on_strict_loading_violation = :log
-    config.active_record.warn_on_records_fetched_greater_than = 100
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true
 
