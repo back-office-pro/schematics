@@ -5,7 +5,7 @@ module Schematics
     module HelpCenter
       module Terms
         class Component < ApplicationComponent
-          delegate :url, to: ::Tenant
+          delegate :url, to: '::Tenant'
 
           def title = t('.text')
 

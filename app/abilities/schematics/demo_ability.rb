@@ -2,7 +2,7 @@
 
 module Schematics
   class DemoAbility < ApplicationAbility
-    delegate :demo?, to: ::Tenant, private: true
+    delegate :demo?, to: '::Tenant', private: true
 
     def initialize
       super
