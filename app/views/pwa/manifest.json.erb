@@ -8,11 +8,11 @@
   "scope": "/",
   "id": "/",
   "icons": [
-    <% if @logo.attached? %>
+    <% if Configuration.with_attached_company_logo.company_logo.attached? %>
       {
-        "src": "<%= main_app.url_for(@logo) %>",
+        "src": "<%= main_app.url_for(Configuration.with_attached_company_logo.company_logo) %>",
         "sizes": "any",
-        "type": "<%= @logo.content_type %>"
+        "type": "<%= Configuration.with_attached_company_logo.company_logo.content_type %>"
       }
     <% else %>
       {
