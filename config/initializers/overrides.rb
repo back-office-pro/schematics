@@ -73,12 +73,12 @@ end
 ActiveSupport.on_load(:active_storage_record) do
   self.implicit_order_column = 'created_at'
 
-  include Schematics::Loadable
+  # include Schematics::Loadable
   include Schematics::Serializable
   include Schematics::Shortenable
   include Schematics::Translatable
 
-  loadable concerns: [Schematics::SoftDeletable]
+  # loadable concerns: [Schematics::SoftDeletable]
 
   scope :with_string_translations, -> { self }
   scope :with_slugs, -> { self }
