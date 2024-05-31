@@ -11,7 +11,7 @@ module Core
       delegate :force, to: :context, private: true
       delegate :current_database,
                :migration_context,
-               to: 'ActiveRecord::Base.connection',
+               to: 'ActiveRecord::Base.lease_connection',
                private: true
 
       def call

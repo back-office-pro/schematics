@@ -100,7 +100,7 @@ class Tenant
 
     def version
       ActiveRecord::Base
-        .connection
+        .lease_connection
         .execute('SELECT core_version FROM documentations ORDER BY created_at DESC LIMIT 1')
         .getvalue(0, 0)
     rescue StandardError
@@ -111,7 +111,7 @@ class Tenant
 
     def data
       JSON.parse ActiveRecord::Base
-        .connection
+        .lease_connection
         .execute('SELECT data FROM migrations WHERE state = 3 ORDER BY created_at DESC LIMIT 1')
         .getvalue(0, 0)
     rescue StandardError
@@ -121,7 +121,7 @@ class Tenant
     def search_engine_name
       [DEFAULT_SEARCH_ENGINE, :Opensearch].at(
         ActiveRecord::Base
-          .connection
+          .lease_connection
           .execute("SELECT metadata -> 'databases' FROM subscriptions")
           .getvalue(0, 0)
           .to_i
