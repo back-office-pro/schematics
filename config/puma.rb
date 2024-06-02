@@ -1,15 +1,20 @@
 # frozen_string_literal: true
 
-max_threads_count = ENV.fetch('RAILS_MAX_THREADS', 7)
-min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { max_threads_count }
-threads min_threads_count, max_threads_count
+threads_count = ENV.fetch('RAILS_MAX_THREADS', 7)
+threads threads_count, threads_count
 
-if ENV.fetch('RAILS_ENV', 'development') == 'development'
+rails_env = ENV.fetch('RAILS_ENV', 'development')
+environment rails_env
+
+case rails_env
+when 'production'
+  require 'concurrent-ruby'
+  workers_count = Integer(ENV.fetch('WEB_CONCURRENCY', Concurrent.available_processor_count))
+  workers workers_count if workers_count > 1
+when 'development'
   worker_timeout 3600
-  port Tenant::DEFAULT_PORT
+  port ENV.fetch('PORT', Tenant::DEFAULT_PORT)
 end
-
-environment ENV.fetch('RAILS_ENV', 'development')
 
 bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 
