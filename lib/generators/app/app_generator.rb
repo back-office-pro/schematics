@@ -49,7 +49,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def create_github_workflow_file
-    template 'github/workflows/build.yml', '.github/workflows/build.yml'
+    template 'github/workflows/ci.yml', '.github/workflows/ci.yml'
   end
 
   def install_migrations
