@@ -10,7 +10,7 @@ require 'object'
 require 'tenant'
 require 'validators/singular_validator'
 require 'zeitwerk'
-require defined?(Rails::Engine) ? 'schematics/engine' : 'debug'
+require defined?(Rails::Engine) ? 'schematics/engine' : 'debug/prelude'
 
 Regexp.timeout = 1
 $stdin.timeout = 1
