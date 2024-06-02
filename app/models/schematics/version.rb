@@ -46,7 +46,7 @@ module Schematics
       {
         update: :pen_to_square,
         create: :plus,
-        import: :cloud_arrow_up,
+        import: :cloud_arrow_down,
         revert: :arrow_rotate_left,
         destroy: :trash,
         archive: :box_archive,
