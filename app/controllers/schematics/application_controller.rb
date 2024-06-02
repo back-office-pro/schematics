@@ -18,8 +18,6 @@ module Schematics
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
-    rate_limit to: 300, within: 5.minutes
-
     allow_browser versions: :modern
 
     def paper_trail_enabled_for_controller
