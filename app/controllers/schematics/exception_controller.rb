@@ -2,7 +2,8 @@
 
 module Schematics
   class ExceptionController < ApplicationController
-    layout 'schematics/jumbotron', except: :not_found
+    skip_before_action :authenticate_user!
+    layout 'schematics/jumbotron'
 
     def internal_server_error
       respond_with nil, status: :internal_server_error
@@ -10,6 +11,10 @@ module Schematics
 
     def maintenance_mode
       respond_with nil, status: :service_unavailable
+    end
+
+    def unsupported_browser
+      respond_with nil, status: :not_acceptable
     end
 
     def not_found

@@ -19,6 +19,7 @@ fr:
         maintenance_mode: Maintenance en cours
         not_found: Page non trouvée
         schema_error: Erreur schéma
+        unsupported_browser: Merci de mettre à jour votre navigateur
       message_replies:
         create: Répondre
         new: Répondre

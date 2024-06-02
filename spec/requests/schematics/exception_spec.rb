@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Exception' do
-  include_context 'with authenticated user'
+  include_context 'with unauthenticated user'
 
   describe '404' do
     let(:do_request) { get(not_found_path, headers:) }
@@ -11,6 +11,15 @@ RSpec.describe 'Exception' do
     before { do_request }
 
     it { is_expected.to have_http_status(:not_found) }
+    its(:body) { is_expected.to eq('null') }
+  end
+
+  describe '406' do
+    let(:do_request) { get(unsupported_browser_path, headers:) }
+
+    before { do_request }
+
+    it { is_expected.to have_http_status(:not_acceptable) }
     its(:body) { is_expected.to eq('null') }
   end
 

@@ -19,6 +19,7 @@ en:
         maintenance_mode: Maintenance in progress
         not_found: Page not found
         schema_error: Schema error
+        unsupported_browser: Please update your browser
       message_replies:
         create: Reply
         new: Reply

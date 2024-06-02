@@ -19,6 +19,7 @@ it:
         maintenance_mode: Manutenzione in corso
         not_found: Pagina non trovata
         schema_error: Errore dello schema
+        unsupported_browser: Aggiorna il tuo browser
       message_replies:
         create: Rispondere
         new: Rispondere
