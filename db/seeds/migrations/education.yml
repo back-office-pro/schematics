@@ -1,0 +1,56 @@
+---
+- id: <%= SecureRandom.uuid %>
+  name: student
+  options:
+    icon: user_tie
+    descriptor: full_name
+  virtuals:
+    - id: <%= SecureRandom.uuid %>
+      name: full_name
+      function: $first_name $last_name
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: email
+      type: email
+      options:
+        unique: true
+        required: true
+    - id: <%= SecureRandom.uuid %>
+      name: first_name
+      type: string
+      options:
+        required: true
+        normalization: capitalize
+    - id: <%= SecureRandom.uuid %>
+      name: last_name
+      type: string
+      options:
+        required: true
+        normalization: upcase
+    - id: <%= SecureRandom.uuid %>
+      name: address
+      type: address
+      options:
+        required: true
+    - id: <%= SecureRandom.uuid %>
+      name: phone
+      type: phone
+      options:
+        required: true
+- id: <%= SecureRandom.uuid %>
+  name: training
+  options:
+    icon: person_chalkboard
+    descriptor: title
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: title
+      type: string
+      options:
+        unique: true
+        required: true
+    - id: <%= SecureRandom.uuid %>
+      name: content
+      type: rich_text
+      options:
+        required: true

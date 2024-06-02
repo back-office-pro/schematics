@@ -1,0 +1,79 @@
+---
+- id: <%= SecureRandom.uuid %>
+  name: category
+  options:
+    icon: box
+    descriptor: designation
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: designation
+      type: string
+      options:
+        unique: true
+        required: true
+- id: <%= SecureRandom.uuid %>
+  name: product
+  options:
+    descriptor: designation
+  virtuals:
+    - id: <%= SecureRandom.uuid %>
+      name: tax_inclusive_price
+      function: $price * (1 + $vat / 100)
+      options:
+        precision: 2
+        unit: €
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: designation
+      type: string
+      options:
+        unique: true
+        required: true
+        limit: 100
+    - id: <%= SecureRandom.uuid %>
+      name: price
+      type: currency
+      options:
+        precision: 2
+        unit: €
+    - id: <%= SecureRandom.uuid %>
+      name: vat
+      type: percentage
+      options:
+        precision: 1
+        default: 19.6
+    - id: <%= SecureRandom.uuid %>
+      name: quantity
+      type: integer
+      options:
+        default: 20
+    - id: <%= SecureRandom.uuid %>
+      name: category
+      type: belongs_to
+      options:
+        required: true
+- id: <%= SecureRandom.uuid %>
+  name: stock_movement
+  options:
+    icon: people_carry_box
+    actions:
+      - index
+      - show
+      - create
+      - destroy
+  triggers:
+    - action: after_create
+      callback: $product.quantity -= quantity
+    - action: after_destroy
+      callback: $product.quantity += quantity
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: quantity
+      type: integer
+      options:
+        greater_than_or_equal_to: 1
+    - id: <%= SecureRandom.uuid %>
+      name: product
+      type: belongs_to
+      options:
+        required: true
