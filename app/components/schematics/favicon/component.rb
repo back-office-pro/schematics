@@ -9,6 +9,12 @@ module Schematics
         asset_path('schematics/logo.svg')
       end
 
+      def type
+        return company_logo.content_type if company_logo.attached?
+
+        'image/svg+xml'
+      end
+
       private
 
       def company_logo = ::Configuration
