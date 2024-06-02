@@ -537,7 +537,7 @@
     "id": "02cdd9d6-50a0-492b-ad70-e996755c7107",
     "name": "import",
     "options": {
-      "icon": "cloud_arrow_up",
+      "icon": "cloud_arrow_down",
       "descriptor": "model",
       "actions": [
         "index",
@@ -1485,7 +1485,7 @@
             "users": 3,
             "api_keys": 2,
             "storage": 1,
-            "entities": 1,
+            "entities": 10,
             "databases": 1,
             "support": 0
           }
