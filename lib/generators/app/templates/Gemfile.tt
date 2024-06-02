@@ -1,7 +1,5 @@
 source "https://rubygems.org"
 
-ruby Gem.ruby_version.to_s
-
 <%- if env.development? -%>
 gem "web-console", group: :development
 <%- end -%>
