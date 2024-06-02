@@ -20,6 +20,8 @@ bind ENV.fetch('SOCKET', "unix://#{Rails.root.join('tmp/sockets/puma.sock')}")
 
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 
+preload_app!
+
 plugin :tmp_restart
 plugin :solid_queue
 

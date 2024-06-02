@@ -1,7 +1,6 @@
 ---
 workers:
-  - threads: 3
-    queues:
+  - queues:
     - default
     - migrations
     - imports
