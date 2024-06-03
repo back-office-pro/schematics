@@ -30,7 +30,7 @@ class Tenant
       end
     end
 
-    def name = Rails
+    def app_name = Rails
       .application
       .class
       .module_parent_name
@@ -60,7 +60,7 @@ class Tenant
       ActionMailer::Base
     end
 
-    def subdomain = name.dasherize
+    def subdomain = app_name.dasherize
 
     def domain = 'back-office.pro'
 
@@ -70,10 +70,10 @@ class Tenant
 
     def organization = domain.parameterize
 
-    def human = name.humanize
+    def human = app_name.humanize
 
     def index_name(model_name)
-      [name, model_name.plural, Rails.env].join('_')
+      [app_name, model_name.plural, Rails.env].join('_')
     end
 
     def default_url_options = { host:, port: }.compact
@@ -84,7 +84,7 @@ class Tenant
 
     def ssl? = ssl_path.exist?
 
-    def demo? = name.eql?('demo') && !Rails.env.test?
+    def demo? = app_name.eql?('demo') && !Rails.env.test?
 
     def default_password
       return unless demo?

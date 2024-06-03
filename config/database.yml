@@ -9,14 +9,14 @@ default: &default
 
 development:
   <<: *default
-  database: <%= Tenant.name %>_development
+  database: <%= Tenant.app_name %>_development
 
 test:
   <<: *default
-  database: <%= Tenant.name %>_test
+  database: <%= Tenant.app_name %>_test
 
 production:
   <<: *default
-  database: <%= Tenant.name %>_production
-  username: <%= Tenant.name %>
+  database: <%= Tenant.app_name %>_production
+  username: <%= Tenant.app_name %>
   password: <%= Rails.application.credentials.database_password %>

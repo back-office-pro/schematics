@@ -1,5 +1,5 @@
 <%- if Tenant.ssl? -%>
-upstream <%= Tenant.name %> {
+upstream <%= Tenant.app_name %> {
   server unix://<%= Rails.root.join('tmp', 'sockets', 'puma.sock') %>;
 }
 
@@ -9,13 +9,13 @@ server {
   listen 443 ssl;
 
   root <%= Rails.root.join('public') %>;
-  try_files $uri/index.html $uri @<%= Tenant.name %>;
+  try_files $uri/index.html $uri @<%= Tenant.app_name %>;
 
   access_log <%= Rails.root.join('log', 'nginx.access.log') %>;
   error_log <%= Rails.root.join('log', 'nginx.error.log') %> info;
 
-  location @<%= Tenant.name %> {
-    proxy_pass http://<%= Tenant.name %>;
+  location @<%= Tenant.app_name %> {
+    proxy_pass http://<%= Tenant.app_name %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
@@ -29,7 +29,7 @@ server {
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 <%- else -%>
-upstream <%= Tenant.name %> {
+upstream <%= Tenant.app_name %> {
   server unix://<%= Rails.root.join('tmp', 'sockets', 'puma.sock') %>;
 }
 
@@ -39,13 +39,13 @@ server {
   listen [::]:80;
 
   root <%= Rails.root.join('public') %>;
-  try_files $uri/index.html $uri @<%= Tenant.name %>;
+  try_files $uri/index.html $uri @<%= Tenant.app_name %>;
 
   access_log <%= Rails.root.join('log', 'nginx.access.log') %>;
   error_log <%= Rails.root.join('log', 'nginx.error.log') %> info;
 
-  location @<%= Tenant.name %> {
-    proxy_pass http://<%= Tenant.name %>;
+  location @<%= Tenant.app_name %> {
+    proxy_pass http://<%= Tenant.app_name %>;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
