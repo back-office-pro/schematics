@@ -7,7 +7,7 @@ module Core
         include Interactor
 
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
-        delegate :subdomain, to: '::Tenant', private: true
+        delegate :subdomain, to: ::Tenant, private: true
         delegate :id,
                  :email,
                  :metadata,
