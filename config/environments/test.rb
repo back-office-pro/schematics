@@ -42,7 +42,7 @@ Rails.application.configure do
   config.action_view.annotate_rendered_view_with_filenames = true
 
   # Cache
-  config.cache_store = :null_store
+  config.cache_store = :memory_store
 
   # Active Record
   if ENV['CI'].present?
