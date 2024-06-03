@@ -26,9 +26,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   # Active Support
-  # config.active_support.deprecation = :raise
-  # TODO: enable when https://github.com/rails/mission_control-jobs/pull/117 is deployed
-  config.active_support.disallowed_deprecation = :raise
+  # TODO: raise when https://github.com/rails/mission_control-jobs/pull/117 is deployed
+  config.active_support.deprecation = :log
+  config.active_support.disallowed_deprecation = :log
   config.active_support.disallowed_deprecation_warnings = []
 
   # Active Record
@@ -55,5 +55,14 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Cache
-  config.cache_store = :memory_store # TODO: https://github.com/rails/solid_cache/issues/178
+  config.cache_store =
+    :solid_cache_store,
+    {
+      active_record_instrumentation: false,
+      expiry_method: :job,
+      expiry_queue: :cleanups,
+      max_age: 2.weeks.to_i,
+      max_entries: 2000,
+      max_size: 1.gigabyte
+    }
 end

@@ -52,12 +52,12 @@ Rails.configuration.to_prepare do
 end
 
 Rails.configuration.to_prepare do
-  require 'mobility/backends/action_text'
+  # require 'mobility/backends/action_text'
   require 'mobility/backends/active_record/key_value'
   require 'mobility/override/backends/active_record/key_value'
 
-  Mobility::Backends::ActionText::RichTextTranslation.include(Schematics::SoftDeletable)
-  Mobility::Backends::ActionText::PlainTextTranslation.include(Schematics::SoftDeletable)
+  # Mobility::Backends::ActionText::RichTextTranslation.include(Schematics::SoftDeletable)
+  # Mobility::Backends::ActionText::PlainTextTranslation.include(Schematics::SoftDeletable)
   Mobility::Backends::ActiveRecord::KeyValue::StringTranslation.include(Schematics::SoftDeletable)
   Mobility::Backends::ActiveRecord::KeyValue::TextTranslation.include(Schematics::SoftDeletable)
   Mobility::Backends::ActiveRecord::KeyValue
@@ -108,4 +108,9 @@ end
 
 ActiveSupport.on_load(:solid_cache_entry) do
   encrypts :value
+  # remove when https://github.com/rails/solid_cache/issues/178 is fixed
+  class << self
+    def model = self
+    def scope_for_create = {}
+  end
 end
