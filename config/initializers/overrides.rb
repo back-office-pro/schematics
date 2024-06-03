@@ -108,7 +108,7 @@ end
 
 ActiveSupport.on_load(:solid_cache_entry) do
   encrypts :value
-  # remove when https://github.com/rails/solid_cache/issues/178 is fixed
+  # TODO: remove when https://github.com/rails/solid_cache/issues/178 is fixed
   class << self
     def model = self
     def scope_for_create = {}
