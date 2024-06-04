@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      has_based_uuid prefix: false
+      has_based_uuid prefix: false, uuid_column: :id
     end
 
     class_methods do

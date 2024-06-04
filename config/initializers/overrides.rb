@@ -79,6 +79,7 @@ ActiveSupport.on_load(:active_storage_record) do
 
   include Schematics::Loadable
   include Schematics::Serializable
+  include Schematics::Shortenable
   include Schematics::Translatable
 
   loadable concerns: [Schematics::SoftDeletable]
@@ -87,6 +88,8 @@ ActiveSupport.on_load(:active_storage_record) do
   scope :with_slugs, -> { self }
 
   class << self
+    alias_method :finder, :find_by_decoded_uuid!
+
     def validate_service_configuration(*) = nil
   end
 
