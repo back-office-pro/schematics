@@ -6,8 +6,8 @@ module Core
       include Interactor
 
       delegate :fail!, to: :context, private: true
-      delegate :lease_connection, :transaction, to: ::ActiveRecord::Base, private: true
-      delegate :migrate, to: 'lease_connection.migration_context', private: true
+      delegate :connection_pool, :transaction, to: ::ActiveRecord::Base, private: true
+      delegate :migrate, to: 'connection_pool.migration_context', private: true
 
       # :reek:UncommunicativeVariableName
       def call

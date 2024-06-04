@@ -5,14 +5,12 @@ module Core
     class Backup
       include Interactor
 
+      delegate :migration_context, to: 'ActiveRecord::Base.connection_pool', private: true
+      delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
       delegate :table_name, to: ::SolidCache::Entry, prefix: :solid_cache, private: true
       delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :force, to: :context, private: true
-      delegate :current_database,
-               :migration_context,
-               to: 'ActiveRecord::Base.lease_connection',
-               private: true
 
       def call
         return unless needs_migration? || force

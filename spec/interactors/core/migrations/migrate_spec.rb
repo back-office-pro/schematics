@@ -35,7 +35,7 @@ RSpec.describe Core::Migrations::Migrate do
   let(:rollback_transaction) { [Permission, Translation].each(&:delete_all) }
   let(:rollback_migration) do
     Dir.chdir(root) do
-      ActiveRecord::Base.lease_connection.migration_context.rollback(migrations_steps)
+      ActiveRecord::Base.connection_pool.migration_context.rollback(migrations_steps)
     end
   end
   let(:rollback_reload) do
