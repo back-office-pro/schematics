@@ -26,6 +26,7 @@ module Ransack
             base.join_sources
           end
 
+          # :reek:FeatureEnvy
           def build_joins(relation) # rubocop:disable Metrics/CyclomaticComplexity
             buckets = relation.joins_values + relation.left_outer_joins_values
             buckets = buckets.group_by do |join|
