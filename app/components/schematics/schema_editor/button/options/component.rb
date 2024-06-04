@@ -9,11 +9,9 @@ module Schematics
           delegate :id, :available_options, to: :object, private: true
           option :builder
 
-          def render?
-            available_options
-              .reject(&:hidden?)
-              .any?
-          end
+          def render? = available_options
+            .reject(&:hidden?)
+            .any?
 
           def target = "#schema-editor-options-modal-#{id}"
 
