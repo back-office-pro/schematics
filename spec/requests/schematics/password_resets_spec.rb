@@ -34,8 +34,6 @@ RSpec.describe 'PasswordResets' do
 
       before { 10.times { post(password_resets_path, params:, headers:) } }
 
-      after { Rails.cache.clear }
-
       it { is_expected.to have_http_status(:too_many_requests) }
     end
   end

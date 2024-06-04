@@ -46,8 +46,6 @@ RSpec.describe SessionsController, except: %i[create destroy] do
 
       before { 10.times { post(url, params:, headers:) } }
 
-      after { Rails.cache.clear }
-
       it { is_expected.to have_http_status(:too_many_requests) }
     end
 

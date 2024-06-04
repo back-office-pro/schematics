@@ -6,6 +6,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../spec/demo/config/environment', __dir__)
 require 'isolator'
 require 'paper_trail/frameworks/rspec'
+require 'support/cache'
 require 'support/capybara'
 require 'support/shared_contexts'
 require 'support/view_component'
