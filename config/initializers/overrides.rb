@@ -10,6 +10,7 @@ require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'open_api/override/router'
 require 'open_api/router'
+require 'paranoia/override/paranoia'
 require 'puma/configuration'
 require 'puma/override/configuration'
 require 'rails/generators'
@@ -36,6 +37,7 @@ OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
 Ransack::Adapters::ActiveRecord::Context.prepend(Ransack::Override::Adapters::ActiveRecord::Context)
+Paranoia.prepend(Paranoia::Override)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
