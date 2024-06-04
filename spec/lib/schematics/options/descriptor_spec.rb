@@ -7,7 +7,7 @@ describe Schematics::Options::Descriptor do
 
   it { is_expected.not_to be_multiple }
 
-  its(:name) { is_expected.to eq(:descriptor) }
+  its(:option_name) { is_expected.to eq(:descriptor) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq(%w[id first_name last_name]) }
   its(:controller) { is_expected.to eq('schema-editor--descriptor-dropdown') }

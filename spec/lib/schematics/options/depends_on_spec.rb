@@ -5,6 +5,6 @@ describe Schematics::Options::DependsOn do
 
   it { is_expected.to be_hidden }
 
-  its(:name) { is_expected.to eq(:depends_on) }
+  its(:option_name) { is_expected.to eq(:depends_on) }
   its(:input_type) { is_expected.to eq(:string) }
 end

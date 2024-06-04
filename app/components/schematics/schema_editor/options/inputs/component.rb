@@ -5,7 +5,7 @@ module Schematics
     module Options
       module Inputs
         class Component < ApplicationComponent
-          delegate :name, to: :option
+          delegate :option_name, to: :option
 
           option :builder
           option :option

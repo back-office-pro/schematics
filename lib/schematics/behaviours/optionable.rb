@@ -27,7 +27,7 @@ module Schematics
 
       protected
 
-      def allowed_options_names = available_options.map(&:name)
+      def allowed_options_names = available_options.map(&:option_name)
     end
   end
 end

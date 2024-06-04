@@ -3,6 +3,6 @@
 describe Schematics::Options::Required do
   subject { described_class }
 
-  its(:name) { is_expected.to eq(:required) }
+  its(:option_name) { is_expected.to eq(:required) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

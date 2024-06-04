@@ -5,7 +5,7 @@ describe Schematics::Options::AspectRatio do
 
   it { is_expected.not_to be_multiple }
 
-  its(:name) { is_expected.to eq(:aspect_ratio) }
+  its(:option_name) { is_expected.to eq(:aspect_ratio) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:controller) { is_expected.to eq('dropdown') }
 

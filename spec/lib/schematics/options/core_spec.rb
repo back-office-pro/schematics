@@ -5,6 +5,6 @@ describe Schematics::Options::Core do
 
   it { is_expected.to be_hidden }
 
-  its(:name) { is_expected.to eq(:core) }
+  its(:option_name) { is_expected.to eq(:core) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

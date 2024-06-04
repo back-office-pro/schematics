@@ -3,6 +3,6 @@
 describe Schematics::Options::Translated do
   subject { described_class }
 
-  its(:name) { is_expected.to eq(:translated) }
+  its(:option_name) { is_expected.to eq(:translated) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

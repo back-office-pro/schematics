@@ -5,6 +5,6 @@ describe Schematics::Options::DirectAssignment do
 
   it { is_expected.to be_hidden }
 
-  its(:name) { is_expected.to eq(:direct_assignment) }
+  its(:option_name) { is_expected.to eq(:direct_assignment) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

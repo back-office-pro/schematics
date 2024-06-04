@@ -10,7 +10,7 @@ module Schematics
 
             def data = { controller: }
 
-            def selected = object.try(name)
+            def selected = object.try(option_name)
 
             def include_hidden = false
 
@@ -19,7 +19,7 @@ module Schematics
             private
 
             def attribute_name = Schematics::Options::Wrapper
-              .human_attribute_name(name)
+              .human_attribute_name(option_name)
               .singularize
               .downcase
           end

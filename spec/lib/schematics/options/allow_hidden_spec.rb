@@ -5,6 +5,6 @@ describe Schematics::Options::AllowHidden do
 
   it { is_expected.to be_hidden }
 
-  its(:name) { is_expected.to eq(:allow_hidden) }
+  its(:option_name) { is_expected.to eq(:allow_hidden) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

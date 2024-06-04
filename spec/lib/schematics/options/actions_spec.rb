@@ -7,7 +7,7 @@ describe Schematics::Options::Actions do
 
   it { is_expected.to be_multiple }
 
-  its(:name) { is_expected.to eq(:actions) }
+  its(:option_name) { is_expected.to eq(:actions) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq([%w[Add create], %w[List index]]) }
   its(:controller) { is_expected.to eq('dropdown') }

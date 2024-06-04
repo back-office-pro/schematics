@@ -3,7 +3,7 @@
 describe Schematics::Options::EqualTo do
   subject { described_class }
 
-  its(:name) { is_expected.to eq(:equal_to) }
+  its(:option_name) { is_expected.to eq(:equal_to) }
   its(:input_type) { is_expected.to eq(:integer) }
   its(:min) { is_expected.to be_nil }
 end

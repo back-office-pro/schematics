@@ -3,6 +3,6 @@
 describe Schematics::Options::StartDate do
   subject { described_class }
 
-  its(:name) { is_expected.to eq(:start_date) }
+  its(:option_name) { is_expected.to eq(:start_date) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end

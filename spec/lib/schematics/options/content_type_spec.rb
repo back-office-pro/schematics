@@ -7,7 +7,7 @@ describe Schematics::Options::ContentType do
     allow(Mime::EXTENSION_LOOKUP).to receive(:keys).and_return(['png'])
   end
 
-  its(:name) { is_expected.to eq(:content_type) }
+  its(:option_name) { is_expected.to eq(:content_type) }
   its(:input_type) { is_expected.to eq(:select) }
   its(:collection) { is_expected.to eq(['png']) }
   its(:controller) { is_expected.to eq('dropdown') }

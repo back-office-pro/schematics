@@ -3,12 +3,12 @@
 module Schematics
   module Options
     class Option
-      delegate :hidden?, :name, to: :class
+      delegate :hidden?, :option_name, to: :class
 
       class << self
         def hidden? = false
 
-        def name = super
+        def option_name = name
           .demodulize
           .underscore
           .to_sym

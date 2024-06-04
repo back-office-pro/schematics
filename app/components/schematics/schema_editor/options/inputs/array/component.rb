@@ -13,7 +13,7 @@ module Schematics
             }
 
             def values
-              Array(object.public_send(name))
+              Array(object.public_send(option_name))
             end
           end
         end

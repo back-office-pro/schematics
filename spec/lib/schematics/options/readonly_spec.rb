@@ -3,6 +3,6 @@
 describe Schematics::Options::Readonly do
   subject { described_class }
 
-  its(:name) { is_expected.to eq(:readonly) }
+  its(:option_name) { is_expected.to eq(:readonly) }
   its(:input_type) { is_expected.to eq(:boolean) }
 end
