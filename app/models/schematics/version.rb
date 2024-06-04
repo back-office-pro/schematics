@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 module Schematics
-  class Version < PaperTrail::Version
+  class Version < ::Tenant.application_record_class
     self.table_name = :paper_trail_versions # rubocop:disable Rails/TableNameAssignment
 
+    include ::PaperTrail::VersionConcern
     include Serializable
     include Shortenable
     include Translatable
