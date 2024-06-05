@@ -149,5 +149,5 @@ describe Rails::Generators::GeneratedAttribute do
 
   it_behaves_like 'a monkey patched class super method',
                   :valid_type?,
-                  '4641d809c6777a4517783b7bc133a97680bdf3dbdf5c50fc7df42b5a2be8875d'
+                  '272809086174fcbc4d71dd8557096ee95512ffec4e7434e08c78f907b84dc49f'
 end

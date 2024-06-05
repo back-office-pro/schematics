@@ -10,12 +10,14 @@ require 'onelogin/override/ruby-saml/settings'
 require 'onelogin/ruby-saml/settings'
 require 'open_api/override/router'
 require 'open_api/router'
+require 'paranoia/override/paranoia'
 require 'puma/configuration'
 require 'puma/override/configuration'
 require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
+require 'ransack/override/adapters/active_record/context'
 require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
@@ -34,6 +36,8 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
+Ransack::Adapters::ActiveRecord::Context.prepend(Ransack::Override::Adapters::ActiveRecord::Context)
+Paranoia.prepend(Paranoia::Override)
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
@@ -85,6 +89,8 @@ ActiveSupport.on_load(:active_storage_record) do
 
   class << self
     alias_method :finder, :find_by_decoded_uuid!
+
+    def validate_service_configuration(*) = nil
   end
 
   def paper_trail_versions = Schematics::Version.none
@@ -108,4 +114,10 @@ end
 
 ActiveSupport.on_load(:solid_cache_entry) do
   encrypts :value
+  # TODO: remove when https://github.com/rails/solid_cache/issues/178 is fixed
+  class << self
+    def model = self
+
+    def scope_for_create = {}
+  end
 end

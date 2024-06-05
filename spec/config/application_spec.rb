@@ -4,5 +4,5 @@ describe 'Application config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/application.rb.tt',
-                  '3f5ea9fd7915f9bf6ccf7e0643c4ab42d9d7ebe742946c43483a458311d1b80a'
+                  '4a0d5db7cf6c55517b520c0c52e52f143d1d225e69c63d701eb75b8cf7f4ebfe'
 end

@@ -43,12 +43,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { 'qwerty' }
       let(:remember_me) { false }
-      let(:memory_store) { ActiveSupport::Cache.lookup_store(:memory_store) }
 
-      before do
-        allow(Rack::Attack.cache).to receive(:store).and_return(memory_store)
-        10.times { post(url, params:, headers:) }
-      end
+      before { 10.times { post(url, params:, headers:) } }
 
       it { is_expected.to have_http_status(:too_many_requests) }
     end

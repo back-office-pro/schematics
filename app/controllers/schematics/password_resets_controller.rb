@@ -6,7 +6,11 @@ module Schematics
 
     skip_before_action :authenticate_user!
     before_action :set_user, only: %i[edit update]
+
+    rate_limit to: 5, within: 1.minute, only: :create
+
     layout 'schematics/jumbotron'
+
     delegate :human_name, :gender, to: :model_class, private: true
 
     def new; end

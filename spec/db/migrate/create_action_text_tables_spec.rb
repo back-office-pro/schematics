@@ -4,5 +4,5 @@ describe 'ActionText migration file' do
   it_behaves_like 'an overridden file',
                   :actiontext,
                   '/db/migrate/20180528164100_create_action_text_tables.rb',
-                  '9845fff887f84520682c734bbeaf75458214059834b608a1b5b8d8aff9048120'
+                  'd1ed6e7cec840d3ee27b4c967858b30a14f343ac9888b920ad3d858594bfd8d5'
 end

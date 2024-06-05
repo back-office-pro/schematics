@@ -63,7 +63,7 @@ document.addEventListener('scroll', setNavbarScrolled)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
 
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('/service_worker.js', { scope: '/' })
+  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
 }
 
 for (const [key, value] of Object.entries(I18n.trix)) {
