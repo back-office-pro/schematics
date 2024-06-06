@@ -62,7 +62,7 @@ class Tenant
 
     def subdomain = app_name.dasherize
 
-    def domain = 'back-office.pro'
+    def domain = ENV.fetch('HOST', 'back-office.pro')
 
     def url(path: nil) = URI::HTTPS
       .build(host: "www.#{domain}", path:)
