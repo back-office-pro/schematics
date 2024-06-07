@@ -57,7 +57,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '3.40.0'
   spec.add_dependency 'chartkick', '5.0.7'
   spec.add_dependency 'chroma', '0.2.0'
-  spec.add_dependency 'concurrent-ruby', '1.3.1' # TODO: remove when deps are upgraded
+  spec.add_dependency 'concurrent-ruby', '1.3.2' # TODO: remove when deps are upgraded
   spec.add_dependency 'countries', '6.0.1'
   spec.add_dependency 'csv', '3.3.0'
   spec.add_dependency 'cuprite', '0.15'
@@ -128,7 +128,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'slim', '5.2.1'
   spec.add_dependency 'solid_cache', '0.6.0'
   spec.add_dependency 'solid_queue', '0.3.2'
-  spec.add_dependency 'sprockets-rails', '3.4.2'
+  spec.add_dependency 'sprockets-rails', '3.5.1'
   spec.add_dependency 'stimulus-rails', '1.3.3'
   spec.add_dependency 'stripe', '11.6.0'
   spec.add_dependency 'terser', '1.2.2'
