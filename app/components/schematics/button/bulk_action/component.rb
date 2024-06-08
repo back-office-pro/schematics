@@ -8,7 +8,7 @@ module Schematics
 
         def title = t('.text')
 
-        def icon_class = 'fa-fw'
+        def icon_class = 'fa-fw fa-lg'
 
         def render?
           can?(:archive, model_class)

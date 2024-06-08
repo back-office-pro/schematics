@@ -39,7 +39,7 @@ module Schematics
 
       def css_classes = class_names(
         'form-control',
-        'bg-transparent',
+        'rounded',
         'text-secondary',
         'fw-bold': active?
       )
