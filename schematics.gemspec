@@ -57,7 +57,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '3.40.0'
   spec.add_dependency 'chartkick', '5.0.7'
   spec.add_dependency 'chroma', '0.2.0'
-  spec.add_dependency 'concurrent-ruby', '1.3.2' # TODO: remove when deps are upgraded
+  spec.add_dependency 'concurrent-ruby', '1.3.3' # TODO: remove when deps are upgraded
   spec.add_dependency 'countries', '6.0.1'
   spec.add_dependency 'csv', '3.3.0'
   spec.add_dependency 'cuprite', '0.15'
@@ -91,7 +91,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mobility-actiontext', '1.1.1'
   spec.add_dependency 'mobility-ransack', '1.2.2'
   spec.add_dependency 'octokit', '8.1.0'
-  spec.add_dependency 'oj', '3.16.3'
+  spec.add_dependency 'oj', '3.16.4'
   spec.add_dependency 'olive_branch', '4.0.1'
   spec.add_dependency 'omniauth', '2.1.2'
   spec.add_dependency 'omniauth-google-oauth2', '1.1.2'
