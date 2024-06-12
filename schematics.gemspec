@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
-  spec.required_ruby_version = '>= 3.3.2'
+  spec.required_ruby_version = '>= 3.3.3'
   spec.metadata['allowed_push_host'] = 'https://www.back-office.pro:9292/private'
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
@@ -68,6 +68,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-transformer', '1.0.1'
   spec.add_dependency 'easy_translate', '0.5.1'
   spec.add_dependency 'enummer', '1.0.4'
+  spec.add_dependency 'faraday-multipart', '1.0.4'
   spec.add_dependency 'faraday-retry', '2.2.1'
   spec.add_dependency 'ferrum', '0.14.0'
   spec.add_dependency 'friendly_id', '5.4.2'
