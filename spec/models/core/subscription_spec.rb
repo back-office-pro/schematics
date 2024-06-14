@@ -28,9 +28,6 @@ RSpec.describe Subscription do
   it { is_expected.to be_live_support }
 
   its(:quota_entities_percentage) { is_expected.to be_zero }
-  its(:quota_storage_percentage) { is_expected.to be_zero }
-  its(:quota_users_percentage) { is_expected.to be_zero }
-  its(:quota_api_keys_percentage) { is_expected.to be_zero }
 
   its(:entities_size) { is_expected.to be_zero }
   its(:storage_size) { is_expected.to be_zero }

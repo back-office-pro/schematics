@@ -37,24 +37,12 @@ class Subscription < Schematics::ApplicationRecord
     storage_size + size.bytes >= quota_storage
   end
 
-  def quota_storage_percentage
-    storage_size * 100 / quota_storage
-  end
-
   def quota_users_exceeded?
     users_size >= quota_users
   end
 
-  def quota_users_percentage
-    users_size * 100 / quota_users
-  end
-
   def quota_api_keys_exceeded?
     api_keys_size >= quota_api_keys
-  end
-
-  def quota_api_keys_percentage
-    api_keys_size * 100 / quota_api_keys
   end
 
   def live_support? = quota
