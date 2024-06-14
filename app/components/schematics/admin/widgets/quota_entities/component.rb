@@ -28,7 +28,7 @@ module Schematics
           end
 
           def render?
-            can?(:create, ::Migration)
+            can?(:cancel, ::Subscription)
           end
         end
       end
