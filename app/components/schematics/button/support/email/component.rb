@@ -6,7 +6,7 @@ module Schematics
       module Email
         class Component < Support::Component
           delegate :domain, to: ::Tenant, private: true
-          delegate :email_support?, to: '::Subscription.instance', private: true
+          delegate :email_support?, to: ::Subscription, private: true
           delegate :icon, to: '::Message.entity'
 
           def support_email = "support@#{domain}"

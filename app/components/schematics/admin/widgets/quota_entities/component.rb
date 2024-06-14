@@ -5,14 +5,27 @@ module Schematics
     module Widgets
       module QuotaEntities
         class Component < ApplicationComponent
-          delegate :entities_size,
-                   :quota_entities,
-                   :quota_entities_percentage,
-                   to: '::Subscription.instance'
+          delegate :quota_entities, to: ::Subscription
 
           def icon = :bezier_curve
 
           def title = t('.title')
+
+          def entities_size = ::Tenant
+            .schema
+            .entities
+            .reject(&:core?) # rubocop:disable Performance/Count
+            .size
+
+          def percentage
+            entities_size * 100 / quota_entities
+          end
+
+          def background_css_class
+            return 'bg-danger' if entities_size >= quota_entities
+
+            'bg-success'
+          end
 
           def render?
             can?(:cancel, ::Subscription)

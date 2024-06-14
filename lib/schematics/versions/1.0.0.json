@@ -745,6 +745,27 @@
           "depends_on": "model",
           "type": "numerable"
         }
+      },
+      {
+        "id": "fbbf036e-2b27-4ce7-9ffc-e71b4e432d0a",
+        "name": "comparator",
+        "type": "enum",
+        "options": {
+          "default": "equal_to",
+          "values": [
+            "equal_to",
+            "greater_than",
+            "greater_than_or_equal_to",
+            "less_than",
+            "less_than_or_equal_to",
+            "other_than"
+          ]
+        }
+      },
+      {
+        "id": "733a4780-29e0-4903-b400-2aea3d4784cc",
+        "name": "threshold",
+        "type": "float"
       }
     ]
   },
@@ -1481,6 +1502,7 @@
         "type": "jsonb",
         "options": {
           "readonly": true,
+          "cached": true,
           "default": {
             "users": 3,
             "api_keys": 2,

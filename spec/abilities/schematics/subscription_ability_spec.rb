@@ -23,7 +23,7 @@ RSpec.describe Schematics::SubscriptionAbility do
 
   context 'when users quota is exceeded' do
     before do
-      allow(Subscription.instance)
+      allow(Subscription)
         .to receive(:quota_users_exceeded?)
         .and_return(true)
     end
@@ -34,7 +34,7 @@ RSpec.describe Schematics::SubscriptionAbility do
 
   context 'when api keys quota is exceeded' do
     before do
-      allow(Subscription.instance)
+      allow(Subscription)
         .to receive(:quota_api_keys_exceeded?)
         .and_return(true)
     end

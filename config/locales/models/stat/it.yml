@@ -4,12 +4,14 @@ it:
     attributes:
       stat:
         aggregate: Aggregato
+        comparator: Comparatore
         field: Attributo
         model: Data
         roles:
           one: Ruolo
           other: Ruoli
           zero: Nessun ruolo
+        threshold: Soglia di allerta
     enums:
       stat:
         aggregate:
@@ -18,6 +20,13 @@ it:
           maximum: Massimo
           minimum: Minimo
           sum: Somma
+        comparator:
+          equal_to: Uguale a
+          greater_than: Maggiore di
+          greater_than_or_equal_to: Maggiore o uguale a
+          less_than: Minore di
+          less_than_or_equal_to: Minore o uguale a
+          other_than: Altro che
     models:
       stat:
         gender: female
