@@ -19,8 +19,18 @@ class Stat < Schematics::ApplicationRecord
     title || I18n.t('errors.virtuals.name', name: model)
   end
 
+  def value
+    model_class&.public_send(aggregate.to_sym, to_sql || :all)
+  rescue ActiveRecord::StatementInvalid
+    nil
+  end
+
   def value_formatted
     format(value) || value || '-'
+  end
+
+  def exceeded?
+    value.public_send(comparator_sign, threshold)
   end
 
   private
@@ -41,9 +51,7 @@ class Stat < Schematics::ApplicationRecord
     ].compact.join(' ')
   end
 
-  def value
-    model_class&.public_send(aggregate.to_sym, to_sql || :all)
-  rescue ActiveRecord::StatementInvalid
-    nil
+  def comparator_sign
+    ActiveModel::Validations::Comparability::COMPARE_CHECKS[comparator.to_sym]
   end
 end
