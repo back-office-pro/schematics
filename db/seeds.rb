@@ -20,12 +20,28 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Documentation.create!
   Migration.default.save!
   User.create!(email: Subscription.email, password: Tenant.default_password, role: Role.admin)
-  Stat.create!(aggregate: 'count', model: 'User')
   Stat.create!(aggregate: 'count', model: 'Emailing')
+  Stat.create!(
+    aggregate: 'count',
+    model: 'User',
+    comparator: 'greater_than_or_equal_to',
+    threshold: Subscription.quota_users,
+    roles: [Role.admin]
+  )
+  Stat.create!(
+    aggregate: 'count',
+    model: 'APIKey',
+    comparator: 'greater_than_or_equal_to',
+    threshold: Subscription.quota_api_keys,
+    roles: [Role.admin]
+  )
   Stat.create!(
     aggregate: 'sum',
     model: 'ActiveStorage::Blob',
-    field: 'ActiveStorage::Blob#byte_size'
+    field: 'ActiveStorage::Blob#byte_size',
+    comparator: 'greater_than_or_equal_to',
+    threshold: Subscription.quota_storage,
+    roles: [Role.admin]
   )
   Chart.new(
     kind: 'bar',
