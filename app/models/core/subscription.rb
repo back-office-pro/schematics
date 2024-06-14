@@ -19,12 +19,6 @@ class Subscription < Schematics::ApplicationRecord
 
   def after_cancel_event = GATEWAY::Cancel.call
 
-  def entities_size = Tenant
-    .schema
-    .entities
-    .reject(&:core?) # rubocop:disable Performance/Count
-    .size
-
   def quota = Data
     .define(:entities, :storage, :users, :api_keys, :databases, :support)
     .new(**metadata)
