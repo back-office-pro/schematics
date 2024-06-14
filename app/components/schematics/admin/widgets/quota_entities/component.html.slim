@@ -6,5 +6,5 @@
           = fa_icon icon, size: '3x', class: 'd-inline-block text-primary'
           h5.text-primary.my-4 = title
           .progress.fs-6 role='progressbar' aria-valuenow=entities_size aria-valuemin='0' aria-valuemax=quota_entities
-            .progress-bar style="width: #{percentage}%"
-              | #{entities_size} / #{quota_entities}
+            .progress-bar class=background_css_class style="width: #{percentage}%"
+              = number_to_percentage(percentage, precision: 0)

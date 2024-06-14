@@ -22,20 +22,6 @@ RSpec.describe Subscription do
     record.metadata = metadata
   end
 
-  it { is_expected.not_to be_quota_users_exceeded }
-  it { is_expected.not_to be_quota_api_keys_exceeded }
-  it { is_expected.not_to be_email_support }
-  it { is_expected.to be_live_support }
-
-  its(:quota) { is_expected.to be_a(Data) }
-  its(:quota) { is_expected.to have_attributes(**metadata) }
-
-  its(:quota_users) { is_expected.to eq(3) }
-  its(:quota_api_keys) { is_expected.to eq(2) }
-  its(:quota_databases) { is_expected.to eq(1) }
-  its(:quota_storage) { is_expected.to eq(1.gigabyte) }
-  its(:quota_entities) { is_expected.to eq(1) }
-
   it 'sends a gateway request after enable' do
     record.tap(&:cancel!).enable!
     expect(subscription_stub_request).to have_been_requested.twice
@@ -44,22 +30,6 @@ RSpec.describe Subscription do
   it 'sends a gateway request after cancel' do
     record.cancel!
     expect(subscription_stub_request).to have_been_requested.once
-  end
-
-  describe '#quota_storage_will_be_exceeded?' do
-    subject { record.quota_storage_will_be_exceeded?(size) }
-
-    context 'when size is greater than storage quota' do
-      let(:size) { 2.gigabytes }
-
-      it { is_expected.to be_truthy }
-    end
-
-    context 'when size is lower than storage quota' do
-      let(:size) { 2.bytes }
-
-      it { is_expected.to be_falsy }
-    end
   end
 
   describe '#load!' do
@@ -78,5 +48,75 @@ RSpec.describe Subscription do
         .from('basic')
         .to('premium')
     end
+  end
+
+  describe '.quota_storage_will_be_exceeded?' do
+    subject { described_class.quota_storage_will_be_exceeded?(size) }
+
+    context 'when size is greater than storage quota' do
+      let(:size) { 2.gigabytes }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when size is lower than storage quota' do
+      let(:size) { 2.bytes }
+
+      it { is_expected.to be_falsy }
+    end
+  end
+
+  describe '.quota_api_keys_exceeded?' do
+    subject { described_class.quota_api_keys_exceeded? }
+
+    it { is_expected.to be_falsy }
+  end
+
+  describe '.quota_users_exceeded?' do
+    subject { described_class.quota_users_exceeded? }
+
+    it { is_expected.to be_falsy }
+  end
+
+  describe '.email_support?' do
+    subject { described_class.email_support? }
+
+    it { is_expected.to be_truthy }
+  end
+
+  describe '.live_support?' do
+    subject { described_class.live_support? }
+
+    it { is_expected.to be_falsy }
+  end
+
+  describe '.quota_users' do
+    subject { described_class.quota_users }
+
+    it { is_expected.to eq(3) }
+  end
+
+  describe '.quota_api_keys' do
+    subject { described_class.quota_api_keys }
+
+    it { is_expected.to eq(2) }
+  end
+
+  describe '.quota_databases' do
+    subject { described_class.quota_databases }
+
+    it { is_expected.to eq(1) }
+  end
+
+  describe '.quota_storage' do
+    subject { described_class.quota_storage }
+
+    it { is_expected.to eq(1.gigabyte) }
+  end
+
+  describe '.quota_entities' do
+    subject { described_class.quota_entities }
+
+    it { is_expected.to eq(10) }
   end
 end

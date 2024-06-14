@@ -2,10 +2,10 @@
 
 module Schematics
   class SubscriptionAbility < ApplicationAbility
+    delegate :state_inactive?, to: '::Subscription.instance', private: true
     delegate :quota_users_exceeded?,
              :quota_api_keys_exceeded?,
-             :state_inactive?,
-             to: '::Subscription.instance',
+             to: ::Subscription,
              private: true
 
     def initialize(user)
