@@ -27,12 +27,7 @@ RSpec.describe Subscription do
   it { is_expected.not_to be_email_support }
   it { is_expected.to be_live_support }
 
-  its(:quota_entities_percentage) { is_expected.to be_zero }
-
   its(:entities_size) { is_expected.to be_zero }
-  its(:storage_size) { is_expected.to be_zero }
-  its(:users_size) { is_expected.to be_zero }
-  its(:api_keys_size) { is_expected.to be_zero }
 
   its(:quota) { is_expected.to be_a(Data) }
   its(:quota) { is_expected.to have_attributes(**metadata) }

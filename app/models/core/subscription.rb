@@ -29,10 +29,6 @@ class Subscription < Schematics::ApplicationRecord
     .define(:entities, :storage, :users, :api_keys, :databases, :support)
     .new(**metadata)
 
-  def quota_entities_percentage
-    entities_size * 100 / quota_entities
-  end
-
   def quota_storage_will_be_exceeded?(size)
     storage_size + size.bytes >= quota_storage
   end
@@ -57,7 +53,9 @@ class Subscription < Schematics::ApplicationRecord
     .storage
     .gigabytes
 
-  def storage_size = ActiveStorage::Blob
+  private
+
+  memoize def storage_size = ActiveStorage::Blob
     .with_deleted
     .sum(&:byte_size)
     .bytes

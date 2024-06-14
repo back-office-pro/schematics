@@ -5,17 +5,18 @@ module Schematics
     module Widgets
       module QuotaEntities
         class Component < ApplicationComponent
-          delegate :entities_size,
-                   :quota_entities,
-                   :quota_entities_percentage,
-                   to: '::Subscription.instance'
+          delegate :entities_size, :quota_entities, to: '::Subscription.instance'
 
           def icon = :bezier_curve
 
           def title = t('.title')
 
+          def percentage
+            entities_size * 100 / quota_entities
+          end
+
           def render?
-            can?(:cancel, ::Subscription)
+            can?(:create, ::Migration)
           end
         end
       end
