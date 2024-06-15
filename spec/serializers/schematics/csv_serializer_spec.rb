@@ -33,9 +33,9 @@ RSpec.describe Schematics::CSVSerializer do
 
     its(:content) do
       is_expected.to eq <<~CSV
-      Aggregate,Data,Comparator,Alert threshold,Creation date
-      Count,User,Equal to,"",""
-      Count,User,Equal to,"",""
+        Aggregate,Data,Comparator,Alert threshold,Creation date
+        Count,User,Equal to,"",""
+        Count,User,Equal to,"",""
       CSV
     end
   end
