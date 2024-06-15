@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class Stat < Schematics::ApplicationRecord
+class Metric < Schematics::ApplicationRecord
   delegate :entity, to: :model_class, allow_nil: true, private: true
   delegate :find_field_by_name, to: :entity, allow_nil: true
   delegate :to_sql, :format, to: :entity_field, allow_nil: true
 
-  scope :accessible_by_role, ::Core::Stats::AccessibleByRoleQuery
+  scope :accessible_by_role, ::Core::Metrics::AccessibleByRoleQuery
 
   def model_class
     model.safe_constantize

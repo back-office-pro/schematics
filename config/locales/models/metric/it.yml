@@ -2,7 +2,7 @@
 it:
   activerecord:
     attributes:
-      stat:
+      metric:
         aggregate: Aggregato
         comparator: Comparatore
         field: Attributo
@@ -13,7 +13,7 @@ it:
           zero: Nessun ruolo
         threshold: Soglia di allerta
     enums:
-      stat:
+      metric:
         aggregate:
           average: Media
           count: Totale
@@ -28,7 +28,7 @@ it:
           less_than_or_equal_to: Minore o uguale a
           other_than: Altro che
     models:
-      stat:
+      metric:
         gender: female
-        one: Statistica
-        other: Statistiche
+        one: Metrica
+        other: Metriche

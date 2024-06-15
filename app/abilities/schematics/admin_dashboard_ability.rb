@@ -10,7 +10,7 @@ module Schematics
       ::Session,
       ::Translation,
       ::Chart,
-      ::Stat,
+      ::Metric,
       ::User,
       ::UserGroup,
       ::Role,

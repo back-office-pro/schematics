@@ -41,7 +41,7 @@ module Schematics
     def dashboard_preferences = [
       :sidebar_toggled,
       :theme,
-      { stats: [] },
+      { metrics: [] },
       { charts: [] }
     ]
 

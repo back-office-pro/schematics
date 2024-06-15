@@ -7,7 +7,7 @@ module Schematics
         ALLOWLIST = [
           ::Migration,
           ::Import,
-          ::Stat,
+          ::Metric,
           ::Chart,
           ::Configuration,
           ::Role,

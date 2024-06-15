@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe StatsController do
+RSpec.describe MetricsController do
   include Schematics::Specs::Routing
 end

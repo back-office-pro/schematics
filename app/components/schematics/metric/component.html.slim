@@ -4,7 +4,7 @@
       .row.g-3.align-items-center
         .col
           small.text-uppercase.text-truncate.text-primary.fw-bold
-            = @stat
+            = @metric
           - if threshold
             .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax=threshold
               .progress-bar class=background_css_class style="width: #{percentage}%"

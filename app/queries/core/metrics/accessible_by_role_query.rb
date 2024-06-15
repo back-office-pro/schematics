@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Core
-  module Stats
+  module Metrics
     class AccessibleByRoleQuery < Core::Charts::AccessibleByRoleQuery
     end
   end

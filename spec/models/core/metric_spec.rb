@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Stat do
+RSpec.describe Metric do
   include Schematics::Specs::Model
 
   it { is_expected.not_to be_exceeded }

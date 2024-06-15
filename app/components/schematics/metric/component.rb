@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Stat
+  module Metric
     class Component < ApplicationComponent
       delegate :id,
                :icon,
@@ -10,12 +10,12 @@ module Schematics
                :exceeded?,
                :value_formatted,
                :model_class,
-               to: :@stat
-      with_collection_parameter :stat
+               to: :@metric
+      with_collection_parameter :metric
 
-      def initialize(stat:)
+      def initialize(metric:)
         super
-        @stat = stat
+        @metric = metric
       end
 
       def background_css_class
@@ -29,7 +29,7 @@ module Schematics
       end
 
       def render?
-        can?(:show, @stat)
+        can?(:show, @metric)
       end
     end
   end

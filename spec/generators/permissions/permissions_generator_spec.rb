@@ -15,10 +15,10 @@ RSpec.describe PermissionsGenerator do
   let(:options) { [] }
   let(:permission) { Permission.create!(model:, action: 'create') }
   let(:chart) { Chart.create!(kind: 'line', aggregate: 'count', model:, x_field: 'User#full_name') }
-  let(:stat) { Stat.create!(aggregate: 'count', model:) }
+  let(:metric) { Metric.create!(aggregate: 'count', model:) }
   let(:version) { Schematics::Version.create!(event: 'create', item: user, user:) }
 
-  before { [permission, chart, stat, version] }
+  before { [permission, chart, metric, version] }
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }
@@ -46,9 +46,9 @@ RSpec.describe PermissionsGenerator do
           .by(-1)
       end
 
-      it 'destroys stats' do
+      it 'destroys metrics' do
         expect { invoke_all }
-          .to change(Stat, :count)
+          .to change(Metric, :count)
           .by(-1)
       end
 
@@ -77,9 +77,9 @@ RSpec.describe PermissionsGenerator do
           .to('Role')
       end
 
-      it 'updates stats' do
+      it 'updates metrics' do
         expect { invoke_all }
-          .to change { stat.reload.model }
+          .to change { metric.reload.model }
           .from('User')
           .to('Role')
       end

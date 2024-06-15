@@ -703,7 +703,7 @@
   },
   {
     "id": "7c95c59f-1260-4220-ae74-c6f852c36d97",
-    "name": "stat",
+    "name": "metric",
     "options": {
       "icon": "stopwatch_20"
     },

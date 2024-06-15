@@ -13,13 +13,13 @@ module Schematics
                 .with_string_translations
                 .accessible_by_role(current_user.role)
                 .excluding(::Chart.api)
-                .then_tap { _1.in_order_of(:id, chart_preferences) if chart_preferences }
+                .then_tap { _1.in_order_of(:id, charts_preferences) if charts_preferences }
                 .load_async
-      @stats = ::Stat
-               .with_string_translations
-               .accessible_by_role(current_user.role)
-               .then_tap { _1.in_order_of(:id, stats_preferences) if stats_preferences }
-               .load_async
+      @metrics = ::Metric
+                 .with_string_translations
+                 .accessible_by_role(current_user.role)
+                 .then_tap { _1.in_order_of(:id, metrics_preferences) if metrics_preferences }
+                 .load_async
     end
 
     def logout
@@ -33,8 +33,8 @@ module Schematics
 
     private
 
-    def chart_preferences = current_user.preferences['charts']
+    def charts_preferences = current_user.preferences['charts']
 
-    def stats_preferences = current_user.preferences['stats']
+    def metrics_preferences = current_user.preferences['metrics']
   end
 end

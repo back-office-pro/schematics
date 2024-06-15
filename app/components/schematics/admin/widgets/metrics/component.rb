@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module Stats
+      module Metrics
         class Component < Widgets::Component
         end
       end

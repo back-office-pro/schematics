@@ -18,7 +18,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
     PaperTrail.request(enabled: false) do
       Permission.destroy_by(model:)
       Chart.destroy_by(model:)
-      Stat.destroy_by(model:)
+      Metric.destroy_by(model:)
       Schematics::Version.destroy_by(item_type: model)
     end
   end
@@ -30,7 +30,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
       # rubocop:disable Rails/SkipsModelValidations
       Permission.where(model: old_model).update_all(model:)
       Chart.where(model: old_model).update_all(model:)
-      Stat.where(model: old_model).update_all(model:)
+      Metric.where(model: old_model).update_all(model:)
       Schematics::Version.where(item_type: old_model).update_all(item_type: model)
       # rubocop:enable Rails/SkipsModelValidations
     end

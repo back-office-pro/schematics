@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe Stat do
+RSpec.describe Metric do
   include Schematics::Specs::Feature
 end
