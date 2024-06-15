@@ -237,7 +237,7 @@ module Schematics
               if fillable_attributes.any?(&:unique?)
                 expect { post polymorphic_path(record, action: :duplicate), headers: }
                   .not_to change(model_class, :count)
-                is_expected.to have_http_status(:unprocessable_entity)
+                is_expected.to have_http_status(:unprocessable_content)
               else
                 expect { post polymorphic_path(record, action: :duplicate), headers: }
                   .to change(model_class, :count)
@@ -258,7 +258,7 @@ module Schematics
                 if fillable_attributes.any?(&:unique?)
                   expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
                     .not_to change(model_class, :count)
-                  is_expected.to have_http_status(:unprocessable_entity)
+                  is_expected.to have_http_status(:unprocessable_content)
                 else
                   expect { post polymorphic_path(record, action: :duplicate), headers:, as: :json }
                     .to change(model_class, :count)

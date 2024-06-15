@@ -157,7 +157,7 @@ module Schematics
     config.view_component.show_previews = false
 
     # Responders
-    config.responders.error_status = :unprocessable_entity
+    config.responders.error_status = :unprocessable_content
     config.responders.redirect_status = :see_other
 
     # Active Storage
