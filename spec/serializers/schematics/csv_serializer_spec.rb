@@ -8,8 +8,8 @@ RSpec.describe Schematics::CSVSerializer do
   let(:preferences) { {} }
   let(:resources) do
     [
-      Metric.new(aggregate: :count, model: 'User', field: 'User#email'),
-      Metric.new(aggregate: :count, model: 'User', field: 'User#email')
+      Metric.new(aggregate: 'count', model: 'User', field: 'User#email'),
+      Metric.new(aggregate: 'count', model: 'User', field: 'User#email')
     ]
   end
 
@@ -20,9 +20,9 @@ RSpec.describe Schematics::CSVSerializer do
 
   its(:content) do
     is_expected.to eq <<~CSV
-      Aggregate,Data,Field,Creation date
-      Count,User,Email,""
-      Count,User,Email,""
+      Aggregate,Data,Field,Comparator,Alert threshold,Creation date
+      Count,User,Email,Equal to,"",""
+      Count,User,Email,Equal to,"",""
     CSV
   end
 
@@ -33,9 +33,9 @@ RSpec.describe Schematics::CSVSerializer do
 
     its(:content) do
       is_expected.to eq <<~CSV
-        Aggregate,Data,Creation date
-        Count,User,""
-        Count,User,""
+      Aggregate,Data,Comparator,Alert threshold,Creation date
+      Count,User,Equal to,"",""
+      Count,User,Equal to,"",""
       CSV
     end
   end
