@@ -292,7 +292,7 @@ module Schematics
               is_expected.to redirect_to(index_path)
             else
               expect { delete polymorphic_path(record), headers: }
-                .not_to change(model_class, :count)
+                .not_to change(model_class.with_deleted, :count)
               is_expected.to redirect_to(root_path)
             end
           end
@@ -307,7 +307,7 @@ module Schematics
                 is_expected.to have_http_status(:no_content)
               else
                 expect { delete polymorphic_path(record), headers:, as: :json }
-                  .not_to change(model_class, :count)
+                  .not_to change(model_class.with_deleted, :count)
                 is_expected.to have_http_status(:forbidden)
               end
             end
