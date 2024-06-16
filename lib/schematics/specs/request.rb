@@ -287,7 +287,7 @@ module Schematics
           it 'destroys record' do
             if ability.can?(:destroy, record)
               expect { delete polymorphic_path(record), headers: }
-                .to change(model_class, :count)
+                .to change(model_class.with_deleted, :count)
                 .by(-1)
               is_expected.to redirect_to(index_path)
             else
@@ -302,7 +302,7 @@ module Schematics
               record = default.tap(&:save!)
               if ability.can?(:destroy, record)
                 expect { delete polymorphic_path(record), headers:, as: :json }
-                  .to change(model_class, :count)
+                  .to change(model_class.with_deleted, :count)
                   .by(-1)
                 is_expected.to have_http_status(:no_content)
               else
