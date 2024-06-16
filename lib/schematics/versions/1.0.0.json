@@ -1685,6 +1685,7 @@
         "name": "request_method",
         "type": "enum",
         "options": {
+          "required": true,
           "default": "POST",
           "values": [
             "GET",
