@@ -22,7 +22,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
+      Translation.delete_by(
         locale: available_locales,
         key: "activerecord.models.#{entity.name}.gender"
       )
@@ -57,7 +57,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
+      Translation.delete_by(
         locale: available_locales,
         key: "activerecord.models.#{entity.name}.one"
       )
@@ -92,7 +92,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(
+      Translation.delete_by(
         locale: available_locales,
         key: "activerecord.models.#{entity.name}.other"
       )
@@ -130,7 +130,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
-        Translation.destroy_by(
+        Translation.delete_by(
           locale: available_locales,
           key: "activerecord.attributes.#{entity.name}.#{element.name}"
         )
@@ -183,7 +183,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       entity.enum_attributes.each do |enum|
         enum.values.each do |value|
-          Translation.destroy_by(
+          Translation.delete_by(
             locale: available_locales,
             key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}"
           )
@@ -191,7 +191,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         next unless enum in Schematics::Attributes::StateMachine
 
         enum.events.map(&:name).each do |event|
-          Translation.destroy_by(
+          Translation.delete_by(
             locale: available_locales,
             key: "activerecord.events.#{entity.name}.#{event}"
           )

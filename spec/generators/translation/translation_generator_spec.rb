@@ -40,7 +40,7 @@ RSpec.describe TranslationGenerator do
 
       it 'destroys translation' do
         expect { invoke_all }
-          .to change(Translation, :count)
+          .to change(Translation.with_deleted, :count)
           .by(-1)
       end
     end

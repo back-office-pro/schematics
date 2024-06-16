@@ -18,7 +18,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.destroy_by(locale: available_locales, key:)
+      Translation.delete_by(locale: available_locales, key:)
     end
   end
 
