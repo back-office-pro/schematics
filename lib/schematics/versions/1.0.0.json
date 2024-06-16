@@ -747,10 +747,28 @@
         }
       },
       {
+        "id": "5ef55cc6-ec91-4801-92ba-c87c697e0a11",
+        "name": "trend_period",
+        "type": "enum",
+        "options": {
+          "required": true,
+          "default": "week",
+          "values": [
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "year"
+          ]
+        }
+      },
+      {
         "id": "fbbf036e-2b27-4ce7-9ffc-e71b4e432d0a",
         "name": "comparator",
         "type": "enum",
         "options": {
+          "required": true,
           "default": "equal_to",
           "values": [
             "equal_to",

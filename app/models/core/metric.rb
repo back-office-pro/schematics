@@ -19,8 +19,10 @@ class Metric < Schematics::ApplicationRecord
     title || I18n.t('errors.virtuals.name', name: model)
   end
 
-  def value
-    model_class&.public_send(aggregate.to_sym, to_sql || :all)
+  def value(period = :second)
+    model_class
+      &.where(updated_at: ..1.public_send(period).ago)
+      &.public_send(aggregate.to_sym, to_sql || :all)
   rescue ActiveRecord::StatementInvalid
     nil
   end
@@ -31,6 +33,10 @@ class Metric < Schematics::ApplicationRecord
 
   def exceeded?
     value.public_send(comparator_sign, threshold)
+  end
+
+  def trend
+    value <=> value(trend_period)
   end
 
   private

@@ -6,6 +6,7 @@ module Schematics
       delegate :id,
                :icon,
                :value,
+               :trend,
                :threshold,
                :exceeded?,
                :value_formatted,
@@ -26,6 +27,18 @@ module Schematics
 
       def percentage
         value * 100 / threshold
+      end
+
+      def trend_icon
+        return :arrow_trend_up if trend.positive?
+
+        :arrow_trend_down if trend.negative?
+      end
+
+      def trend_icon_css_classes
+        return %w[fa-lg ms-1 text-success] if trend.positive?
+
+        %w[fa-lg ms-1 text-danger] if trend.negative?
       end
 
       def render?

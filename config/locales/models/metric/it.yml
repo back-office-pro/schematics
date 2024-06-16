@@ -12,6 +12,7 @@ it:
           other: Ruoli
           zero: Nessun ruolo
         threshold: Soglia di allerta
+        trend_period: Periodo di tendenza
     enums:
       metric:
         aggregate:
@@ -27,6 +28,13 @@ it:
           less_than: Minore di
           less_than_or_equal_to: Minore o uguale a
           other_than: Altro che
+        trend_period:
+          day: Giorno
+          hour: Ora
+          minute: Minuto
+          month: Mese
+          week: Settimana
+          year: Anno
     models:
       metric:
         gender: female
