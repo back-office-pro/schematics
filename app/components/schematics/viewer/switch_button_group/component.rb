@@ -15,10 +15,21 @@ module Schematics
         }
 
         def render?
-          resources.reject(&:deleted?).size > 1 && # rubocop:disable Performance/Count
-            can?(:create, ::Comparison) &&
-            can?(:show, resource) &&
-            !deleted?
+          multi_resources? && (can_compare? || can_archive?) && !deleted?
+        end
+
+        private
+
+        def multi_resources?
+          resources.reject(&:deleted?).size > 1 # rubocop:disable Performance/Count
+        end
+
+        def can_compare?
+          can?(:create, ::Comparison) && can?(:show, resource)
+        end
+
+        def can_archive?
+          can?(:archive, resource)
         end
       end
     end
