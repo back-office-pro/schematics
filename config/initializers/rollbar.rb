@@ -6,5 +6,6 @@ Rollbar.configure do |config|
   config.use_active_job(queue: 'rollbar')
   config.environment = Rails.env
   config.async_json_payload = true
+  config.anonymize_user_ip = true
   config.person_method = :current_user
 end

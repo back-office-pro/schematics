@@ -45,6 +45,7 @@ const rollbar = new Rollbar({
   accessToken: rollbarClientKey,
   captureUncaught: true,
   captureUnhandledRejections: true,
+  captureIp: 'anonymize',
   environment
 })
 
