@@ -32,7 +32,7 @@ RSpec.describe PermissionGenerator do
 
       it 'destroys permission' do
         expect { invoke_all }
-          .to change(Permission, :count)
+          .to change(Permission.with_deleted, :count)
           .by(-2)
       end
     end

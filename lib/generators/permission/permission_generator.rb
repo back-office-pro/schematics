@@ -17,7 +17,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Permission.destroy_by(model:, action:)
+      Permission.delete_by(model:, action:)
     end
   end
 
@@ -31,7 +31,7 @@ class PermissionGenerator < Rails::Generators::NamedBase
 
   private
 
-  def entity = ::Tenant
+  def entity = Tenant
     .schema
     .find_entity_by_name(name.underscore)
 
