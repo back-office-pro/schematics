@@ -14,7 +14,9 @@ export default class extends ApplicationController {
   }
 
   toggleButton () {
-    this.buttonTarget.classList.toggle('d-none', this.ids().length < 2)
+    if (this.hasButtonTarget) {
+      this.buttonTarget.classList.toggle('d-none', this.ids().length < 2)
+    }
   }
 
   ids () {
