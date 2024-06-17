@@ -36,17 +36,17 @@ RSpec.describe PermissionsGenerator do
 
       it 'destroys permissions' do
         expect { invoke_all }
-          .to change(Permission, :count)
+          .to change(Permission.with_deleted, :count)
           .by(-7)
       end
 
-      it 'destroys charts' do
+      it 'archives charts' do
         expect { invoke_all }
           .to change(Chart, :count)
           .by(-1)
       end
 
-      it 'destroys metrics' do
+      it 'archives metrics' do
         expect { invoke_all }
           .to change(Metric, :count)
           .by(-1)

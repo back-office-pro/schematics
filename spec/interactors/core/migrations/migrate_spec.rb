@@ -130,8 +130,8 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect { expect(migrate).to be_a_success }
-          .to change(Permission, :count).by(-6)
-          .and change(Translation, :count).by(-12)
+          .to change(Permission.with_deleted, :count).by(-6)
+          .and change(Translation.with_deleted, :count).by(-12)
         expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
         expect(File).not_to exist root.join('app/models/prospect.rb')
         expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
@@ -193,7 +193,9 @@ RSpec.describe Core::Migrations::Migrate do
       uses_transaction 'migrates successfully'
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
-        expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(-3)
+        expect { expect(migrate).to be_a_success }
+          .to change(Translation.with_deleted, :count)
+          .by(-3)
         expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).not_to respond_to(:first_name)
       end
