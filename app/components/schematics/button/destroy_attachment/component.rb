@@ -4,17 +4,16 @@ module Schematics
   module Button
     module DestroyAttachment
       class Component < ApplicationComponent
-        delegate :name, to: :attachment
+        delegate :name, :record, to: :attachment
         delegate :attributes_param_key, to: :field
-        option :resource
         option :attachment
 
-        def field = resource
+        def field = record
           .class
           .entity
           .find_field_by_name(name)
 
-        def target = "confirm-dialog-#{resource.id}-#{attachment.id}"
+        def target = "confirm-dialog-#{record.id}-#{attachment.id}"
 
         def title = t('schematics.application.button.destroy')
 

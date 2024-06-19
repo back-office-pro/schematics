@@ -30,7 +30,7 @@
                     .btn-group
                       = __button_edit(resource:)
                       = __button_archive(resource:)
-                      = __button_destroy_attachment(resource: resource.try(:record), attachment: resource)
+                      = __button_destroy_attachment(attachment: resource)
                   - entity.listable_elements.stable_sort_by(&:weight).each do |element|
                     td.text-truncate.text-center.align-middle class=col_preference_class(element)
                       = __resource(resource:, element:, highlight_text: @highlight_text)

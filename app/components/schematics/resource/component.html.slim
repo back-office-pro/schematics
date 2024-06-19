@@ -29,7 +29,7 @@ span.text-body-tertiary = '-' if value.nil?
   = __viewer_association(resources: value, highlight_text:)
 - when Schematics::Attributes::Attachment
   - if value.attached?
-    = __button_destroy_attachment(resource:, attachment: value.attachment) if enable_buttons?
+    = __button_destroy_attachment(attachment: value.attachment) if enable_buttons?
     - if value.representable?
       = __attachment_preview_modal(attachment: value.attachment, icon: element.icon)
       span data-bs-toggle='modal' data-bs-target="#attachment-preview-modal-#{value.id}"
