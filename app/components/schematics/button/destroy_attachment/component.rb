@@ -19,7 +19,7 @@ module Schematics
         def title = t('schematics.application.button.destroy')
 
         def render?
-          resource && can?(:destroy, attachment)
+          can?(:destroy, attachment) && attachment in ::ActiveStorage::Attachment
         end
       end
     end
