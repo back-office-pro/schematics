@@ -36,7 +36,7 @@ class Metric < Schematics::ApplicationRecord
   end
 
   def trend
-    value <=> value(trend_period)
+    value.to_f <=> value(trend_period).to_f
   end
 
   private
