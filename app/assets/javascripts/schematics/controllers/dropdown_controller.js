@@ -19,7 +19,7 @@ export default class extends ApplicationController {
     document
       .querySelectorAll(`[data-dropdown-depends-on="${this.element.name}"]`)
       .forEach(element => {
-        element.tomselect.clear()
+        value && element.tomselect.clear()
         element.tomselect.clearOptions()
         element.tomselect.addOptions(
           Array
@@ -34,6 +34,7 @@ export default class extends ApplicationController {
     return {
       plugins: ['no_active_items', 'no_backspace_delete', this.removable && 'remove_button'],
       itemClass: this.multiple ? 'item bg-primary text-white' : 'item',
+      onInitialize: this.debounce(this.setDependentDropdownsOptions),
       onChange: this.setDependentDropdownsOptions.bind(this),
       maxOptions: null,
       create: this.createValue,
