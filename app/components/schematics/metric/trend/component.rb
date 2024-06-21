@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Metric
+    module Trend
+      class Component < ApplicationComponent
+        delegate :trend, :trend_progress, to: :metric, private: true
+        delegate :positive?, :negative?, :zero?, to: :trend, private: true
+        option :metric
+
+        def icon
+          return :arrow_trend_up if positive?
+
+          :arrow_trend_down if negative?
+        end
+
+        def css_class
+          return 'text-success' if positive?
+
+          'text-danger' if negative?
+        end
+
+        def percentage
+          (trend_progress.infinite? || trend_progress) * 100
+        end
+
+        def render?
+          !zero?
+        end
+      end
+    end
+  end
+end

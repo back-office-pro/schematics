@@ -5,14 +5,18 @@
         .col
           small.text-uppercase.text-truncate.text-primary.fw-bold
             = @metric
-            = fa_icon(trend_icon, class: trend_icon_css_classes) unless trend.zero?
           - if threshold
-            .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax=threshold
-              .progress-bar class=background_css_class style="width: #{percentage}%"
-                = number_to_percentage(percentage, precision: 0)
+            .row.g-2
+              .col
+                .progress.fs-6 role='progressbar' aria-valuenow=value aria-valuemin='0' aria-valuemax=threshold
+                  .progress-bar class=background_css_class style="width: #{percentage}%"
+                    = "#{value.to_f} / #{threshold}"
+              .col-auto.text-truncate.fw-bold
+                = __metric_trend(metric:)
           - else
             .mb-0.text-secondary.text-truncate.fw-bold
-              = value_formatted
+              span.me-1 = value_formatted
+              = __metric_trend(metric:)
         .col-auto
           - if model_class
             = __resource_link_to(resource: model_class) do |c|
