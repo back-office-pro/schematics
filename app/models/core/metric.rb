@@ -19,7 +19,7 @@ class Metric < Schematics::ApplicationRecord
     title || I18n.t('errors.virtuals.name', name: model)
   end
 
-  def value(period = :second)
+  memoize def value(period = :second)
     model_class
       &.where(updated_at: ..1.public_send(period).ago)
       &.public_send(aggregate.to_sym, to_sql || :all)
@@ -37,6 +37,10 @@ class Metric < Schematics::ApplicationRecord
 
   def trend
     value.to_f <=> value(trend_period).to_f
+  end
+
+  def trend_progress
+    ((value.to_f - value(trend_period).to_f) / value(trend_period).to_f)
   end
 
   private

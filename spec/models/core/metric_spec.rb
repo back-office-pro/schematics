@@ -13,6 +13,7 @@ RSpec.describe Metric do
   its(:icon) { is_expected.to eq(:users) }
   its(:value) { is_expected.to be_zero }
   its(:trend) { is_expected.to be_zero }
+  its(:trend_progress) { is_expected.to be_nan }
 
   context 'when model_class does not exist' do
     before { record.model = 'NotExistingModel' }
