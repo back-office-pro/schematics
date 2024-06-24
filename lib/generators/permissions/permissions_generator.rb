@@ -18,7 +18,9 @@ class PermissionsGenerator < Rails::Generators::NamedBase
     PaperTrail.request(enabled: false) do
       Permission.delete_by(model:)
       Schematics::Version.destroy_by(item_type: model)
-      model_classes_with(model).each(&:destroy_all)
+      schema_model_attributes.each do |attribute|
+        attribute.entity.model_class.destroy_by(attribute.name => model)
+      end
     end
   end
 
@@ -29,9 +31,13 @@ class PermissionsGenerator < Rails::Generators::NamedBase
       Schematics::Version
         .where(item_type: old_model)
         .update_all(item_type: model) # rubocop:disable Rails/SkipsModelValidations
-      model_classes_with(old_model)
-        .each_with_object(model:)
-        .each(&:update_all)
+      schema_model_attributes.each do |attribute|
+        attribute
+          .entity
+          .model_class
+          .where(attribute.name => old_model)
+          .update_all(attribute.name => model) # rubocop:disable Rails/SkipsModelValidations
+      end
     end
   end
 
@@ -57,15 +63,8 @@ class PermissionsGenerator < Rails::Generators::NamedBase
     behavior == :invoke && old_model
   end
 
-  def model_classes_with(model)
-    Tenant
-      .schema
-      .entities
-      .flat_map(&:model_attributes)
-      .map(&:entity)
-      .map(&:model_class)
-      .uniq
-      .each_with_object(model:)
-      .map(&:where)
-  end
+  def schema_model_attributes = Tenant
+    .schema
+    .entities
+    .flat_map(&:model_attributes)
 end
