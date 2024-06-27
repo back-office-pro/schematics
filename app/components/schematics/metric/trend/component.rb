@@ -4,6 +4,8 @@ module Schematics
   module Metric
     module Trend
       class Component < ApplicationComponent
+        MAX_PERCENTAGE = 9999
+
         delegate :trend, :trend_progress, to: :metric, private: true
         delegate :positive?, :negative?, :zero?, to: :trend, private: true
         option :metric
@@ -21,7 +23,7 @@ module Schematics
         end
 
         def percentage
-          (trend_progress.infinite? || trend_progress) * 100
+          [(trend_progress.infinite? || trend_progress) * 100, MAX_PERCENTAGE].min
         end
 
         def render?
