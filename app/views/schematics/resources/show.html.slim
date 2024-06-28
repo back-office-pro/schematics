@@ -14,6 +14,7 @@
         = __button_comment(resource: @resource)
         = __button_edit(resource: @resource, compact: false)
         = __button_duplicate(resource: @resource)
+        = __button_alert(resource: @resource)
         = __viewer_event_button_group(resource: @resource, compact: false)
         - action = @resource.associations(current_ability, dependent: true).any? ? :delete : :destroy
         = public_send(:"__button_#{action}", resource: @resource, compact: false)
