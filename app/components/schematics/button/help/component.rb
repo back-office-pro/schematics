@@ -5,6 +5,7 @@ module Schematics
     module Help
       class Component < ApplicationComponent
         ALLOWLIST = [
+          ::Alert,
           ::Migration,
           ::Import,
           ::Metric,
