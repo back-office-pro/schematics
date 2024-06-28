@@ -1,0 +1,19 @@
+li.nav-item.dropdown.d-flex.align-items-center.px-2.ms-2.bg-body-secondary.rounded.btn-transparent
+  a#alerts-dropdown.nav-link.dropdown-toggle {
+    aria-expanded='false'
+    data-bs-toggle='dropdown'
+    role='button'
+  }
+    .position-relative
+      = fa_icon icon, class: icon_class
+      - if count.positive?
+        .badge.bg-danger.rounded-pill.position-absolute.top-0.start-100.translate-middle.animate__animated.animate__zoomIn
+          = display_count
+  .dropdown-menu.shadow-sm.dropdown-menu-end.animate__animated.animate__zoomIn.p-0.mt-2 {
+    aria-labelledby='alerts-dropdown'
+  }
+    h5.dropdown-header.rounded-top.bg-body-tertiary.fw-bold
+      = t('.title')
+    .pre-scrollable.overflow-scroll
+      /= __navbar_alert_center_preview(alerts)
+    = link_to t('.show_all'), alerts_path, class: 'dropdown-item text-body-secondary text-center small'
