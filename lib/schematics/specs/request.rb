@@ -129,6 +129,15 @@ module Schematics
               is_expected.to redirect_to(root_path)
             end
           end
+
+          it 'gets new alert' do
+            get new_polymorphic_path([record, ::Alert], format: nil), headers:, as: :html
+            if ability.can?(:alert, model_class) && ability.can?(:create, ::Alert)
+              is_expected.to have_http_status(:success)
+            else
+              is_expected.to redirect_to(root_path)
+            end
+          end
         end
 
         if can?(:update)
