@@ -31,6 +31,7 @@ describe Schematics::Entities::Router do
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
+          resources :alerts, only: %i[new create]
         end
       RUBY
     end
@@ -98,6 +99,7 @@ describe Schematics::Entities::Router do
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
+          resources :alerts, only: %i[new create]
         end
       RUBY
     end
@@ -121,6 +123,7 @@ describe Schematics::Entities::Router do
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
+          resources :alerts, only: %i[new create]
         end
       RUBY
     end
@@ -137,6 +140,7 @@ describe Schematics::Entities::Router do
         resource :configuration, only: [], model_name: 'Configuration' do
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
+          resources :alerts, only: %i[new create]
         end
         resolve 'Configuration' do |resource, options|
           [:configuration, options]
@@ -172,6 +176,7 @@ describe Schematics::Entities::Router do
             end
             resources :comments, only: %i[new create]
             resources :emailings, only: %i[new create]
+            resources :alerts, only: %i[new create]
           end
         end
       RUBY
@@ -211,6 +216,7 @@ describe Schematics::Entities::Router do
                 end
                 resources :comments, only: %i[new create]
                 resources :emailings, only: %i[new create]
+                resources :alerts, only: %i[new create]
               end
             end
           end
@@ -233,6 +239,7 @@ describe Schematics::Entities::Router do
           resource :subscription, only: [], model_name: 'Main::Subscription' do
             resources :comments, only: %i[new create]
             resources :emailings, only: %i[new create]
+            resources :alerts, only: %i[new create]
           end
         end
         resolve 'Main::Subscription' do |resource, options|

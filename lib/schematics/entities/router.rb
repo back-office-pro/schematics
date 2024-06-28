@@ -49,7 +49,8 @@ module Schematics
         comparison_routes,
         bulk_actions_routes,
         comment_routes,
-        emailing_routes
+        emailing_routes,
+        alert_routes
       ].compact.join
 
       def resource_routes = [
@@ -206,6 +207,14 @@ module Schematics
 
         <<~RUBY
           resources :comments, only: %i[new create]
+        RUBY
+      end
+
+      def alert_routes
+        return unless can?(:show)
+
+        <<~RUBY
+          resources :alerts, only: %i[new create]
         RUBY
       end
     end

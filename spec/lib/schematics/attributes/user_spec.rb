@@ -86,6 +86,7 @@ describe Schematics::Attributes::User do
       scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
       scope :with_user_comments, -> { includes({:user=>[:comments]}) }
       scope :with_user_record_emailings, -> { includes({:user=>[:record_emailings]}) }
+      scope :with_user_alerts, -> { includes({:user=>[:alerts]}) }
       belongs_to :user,
                  -> { with_deleted },
                  class_name: 'User',
@@ -125,6 +126,7 @@ describe Schematics::Attributes::User do
         scope :with_user_drafts, -> { includes({:user=>[:drafts]}) }
         scope :with_user_comments, -> { includes({:user=>[:comments]}) }
         scope :with_user_record_emailings, -> { includes({:user=>[:record_emailings]}) }
+        scope :with_user_alerts, -> { includes({:user=>[:alerts]}) }
         belongs_to :user,
                    -> { with_deleted },
                    class_name: 'User',
