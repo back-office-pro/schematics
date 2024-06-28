@@ -1,0 +1,12 @@
+---
+it:
+  activerecord:
+    attributes:
+      alert:
+        function: Funzione
+        record: Registrazione
+    models:
+      alert:
+        gender: female
+        one: Allerta
+        other: Allerte

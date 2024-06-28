@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      alert:
+        function: Function
+        record: Record
+    models:
+      alert:
+        gender: female
+        one: Alert
+        other: Alerts

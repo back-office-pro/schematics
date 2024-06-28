@@ -1,0 +1,12 @@
+---
+fr:
+  activerecord:
+    attributes:
+      alert:
+        function: Fonction
+        record: Enregistrement
+    models:
+      alert:
+        gender: female
+        one: Alerte
+        other: Alertes
