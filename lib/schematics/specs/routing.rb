@@ -51,6 +51,12 @@ module Schematics
             is_expected
               .to route(:post, polymorphic_path([record, ::Emailing], format: nil))
               .to params.merge(controller: :emailings, parent_id => id, action: :create).compact
+            is_expected
+              .to route(:get, new_polymorphic_path([record, ::Alert], format: nil))
+              .to params.merge(controller: :alerts, parent_id => id, action: :new).compact
+            is_expected
+              .to route(:post, polymorphic_path([record, ::Alert], format: nil))
+              .to params.merge(controller: :alerts, parent_id => id, action: :create).compact
           end
           if can?(:create)
             is_expected
