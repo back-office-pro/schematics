@@ -17,6 +17,7 @@ module Schematics
       merge WebhookRequestAbility.new(user)
       merge ChartAbility.new(user)
       merge EmailingAbility.new
+      merge AlertAbility.new
       merge MigrationAbility.new
       merge ComparisonAbility.new
       merge BlogAbility.new
