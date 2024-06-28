@@ -1915,5 +1915,39 @@
         }
       }
     ]
+  },
+  {
+    "id": "07d1873f-6e45-4e37-b1d9-709940b59d91",
+    "name": "alert",
+    "options": {
+      "icon": "triangle_exclamation",
+      "actions": [
+        "index",
+        "show",
+        "update",
+        "archive",
+        "destroy"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "d4e27ebb-5d2b-433e-aa31-97af5a10e95e",
+        "name": "record",
+        "type": "belongs_to",
+        "options": {
+          "required": true,
+          "polymorphic": true,
+          "readonly": true
+        }
+      },
+      {
+        "id": "79ae390d-ce98-44b3-acd6-528b94ac3518",
+        "name": "function",
+        "type": "string",
+        "options": {
+          "required": true
+        }
+      }
+    ]
   }
 ]
