@@ -20,7 +20,7 @@ module Schematics
         memoize def count = Alert
           .count
 
-        memoize def versions = Alert
+        memoize def alerts = Alert
           .limit(LIMIT)
 
         def render?

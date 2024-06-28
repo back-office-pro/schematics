@@ -15,5 +15,5 @@ li.nav-item.dropdown.d-flex.align-items-center.px-2.ms-2.bg-body-secondary.round
     h5.dropdown-header.rounded-top.bg-body-tertiary.fw-bold
       = t('.title')
     .pre-scrollable.overflow-scroll
-      /= __navbar_alert_center_preview(alerts)
+      = __navbar_alert_center_preview(alerts)
     = link_to t('.show_all'), alerts_path, class: 'dropdown-item text-body-secondary text-center small'
