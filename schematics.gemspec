@@ -100,7 +100,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'omniauth-rails_csrf_protection', '1.0.2'
   spec.add_dependency 'omniauth-saml', '2.1.0'
   spec.add_dependency 'opensearch-ruby', '3.3.0'
-  spec.add_dependency 'pagy', '8.6.1'
+  spec.add_dependency 'pagy', '8.6.2'
   spec.add_dependency 'paper_trail', '15.1.0'
   spec.add_dependency 'paranoia', '2.6.3'
   spec.add_dependency 'pg', '1.5.6'
