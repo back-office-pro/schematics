@@ -64,8 +64,8 @@ module Schematics
                     <b>#{entity.name.humanize}</b>
                   </td>
                 </tr>
-                #{entity.non_association_attributes.map { "<tr><td align='left'>+ #{_1.name}</td></tr>" }.join}
-                #{entity.virtuals.map { "<tr><td align='left'>- #{_1.name}</td></tr>" }.join}
+                #{entity.non_association_attributes.map(&method(:attribute_template)).join}
+                #{entity.virtuals.map(&method(:virtual_template)).join}
               </table>>
             HTML
           end
@@ -87,6 +87,26 @@ module Schematics
                 end
               end
             end
+        end
+
+        def attribute_template(attribute)
+          <<~HTML.squish
+            <tr>
+              <td align='left'>
+                + #{attribute.name} :<i>#{attribute.type}</i>
+              </td>
+            </tr>
+          HTML
+        end
+
+        def virtual_template(virtual)
+          <<~HTML.squish
+            <tr>
+              <td align='left'>
+                - #{virtual.name} :<i>#{virtual.type}</i>
+              </td>
+            </tr>
+          HTML
         end
       end
     end
