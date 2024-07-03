@@ -17,6 +17,9 @@
     - in [*, Array]
       = human_attribute_name(key)
       span.ms-1.fw-bold = value.to_sentence
+    - in [*, String]
+      = human_attribute_name(key)
+      span.ms-1.fw-bold = value.humanize.downcase
     - else
       = human_attribute_name(key)
       span.ms-1.fw-bold = value
