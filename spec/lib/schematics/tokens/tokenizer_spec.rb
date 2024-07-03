@@ -89,5 +89,21 @@ describe Schematics::Tokens::Tokenizer do
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
     end
+
+    context 'when function has a negative number' do
+      let(:function) { '$price > -1' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
+    end
+
+    context 'when function is not spaced and has a negative number' do
+      let(:function) { '$price>-1' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
+    end
   end
 end

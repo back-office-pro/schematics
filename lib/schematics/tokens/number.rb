@@ -3,8 +3,8 @@
 module Schematics
   module Tokens
     class Number < Token
-      REGEX = /(\d*\.?\d+)/
-      PRECEDENCE = 10
+      REGEX = /(-?\d*\.?\d+)/
+      PRECEDENCE = 9
     end
   end
 end
