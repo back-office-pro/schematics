@@ -1,30 +1,53 @@
 ---
 - id: <%= SecureRandom.uuid %>
-  name: category
+  name: construction_site
   options:
-    icon: box
-    descriptor: designation
+    descriptor: location
+    icon: helmet_safety
   attributes:
     - id: <%= SecureRandom.uuid %>
-      name: designation
-      type: string
+      name: location
+      type: address
       options:
         unique: true
         required: true
 - id: <%= SecureRandom.uuid %>
-  name: product
+  name: construction_site_movement
   options:
-    descriptor: designation
-  virtuals:
-    - id: <%= SecureRandom.uuid %>
-      name: tax_inclusive_price
-      function: $price * (1 + $vat / 100)
+    icon: person_digging
+  associations:
+    - name: users
+      type: has_and_belongs_to_many
       options:
-        precision: 2
-        unit: €
+        required: true
   attributes:
     - id: <%= SecureRandom.uuid %>
-      name: designation
+      name: start_at
+      type: datetime
+      options:
+        required: true
+        start_date: true
+        less_than: end_at
+    - id: <%= SecureRandom.uuid %>
+      name: end_at
+      type: datetime
+      options:
+        required: true
+        end_date: true
+        greater_than: start_at
+    - id: <%= SecureRandom.uuid %>
+      name: construction_site
+      type: belongs_to
+      options:
+        required: true
+- id: <%= SecureRandom.uuid %>
+  name: part
+  options:
+    descriptor: reference
+    icon: box
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: reference
       type: string
       options:
         unique: true
@@ -35,23 +58,13 @@
       type: currency
       options:
         precision: 2
-        unit: €
-    - id: <%= SecureRandom.uuid %>
-      name: vat
-      type: percentage
-      options:
-        precision: 1
-        default: 19.6
+        unit: $
     - id: <%= SecureRandom.uuid %>
       name: quantity
       type: integer
       options:
-        default: 20
-    - id: <%= SecureRandom.uuid %>
-      name: category
-      type: belongs_to
-      options:
-        required: true
+        readonly: true
+        default: 0
 - id: <%= SecureRandom.uuid %>
   name: stock_movement
   options:
@@ -63,17 +76,22 @@
       - destroy
   triggers:
     - action: after_create
-      callback: $product.quantity -= quantity
+      callback: $part.quantity += quantity
     - action: after_destroy
-      callback: $product.quantity += quantity
+      callback: $part.quantity -= quantity
   attributes:
     - id: <%= SecureRandom.uuid %>
       name: quantity
       type: integer
       options:
-        greater_than_or_equal_to: 1
+        required: true
     - id: <%= SecureRandom.uuid %>
-      name: product
+      name: part
+      type: belongs_to
+      options:
+        required: true
+    - id: <%= SecureRandom.uuid %>
+      name: construction_site
       type: belongs_to
       options:
         required: true
