@@ -21,6 +21,7 @@ class Metric < Schematics::ApplicationRecord
 
   memoize def value(period = :second)
     model_class
+      &.preload_all
       &.where(updated_at: ..1.public_send(period).ago)
       &.public_send(aggregate.to_sym, to_sql || :all)
   rescue ActiveRecord::StatementInvalid
