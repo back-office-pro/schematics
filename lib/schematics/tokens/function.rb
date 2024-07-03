@@ -11,6 +11,8 @@ module Schematics
         case @value
         when 'NOW()'
           '#{Time.current}' # rubocop:disable Lint/InterpolationCheck
+        when 'RAND()'
+          '#{rand}' # rubocop:disable Lint/InterpolationCheck
         else
           super
         end
@@ -19,6 +21,8 @@ module Schematics
         case @value
         when 'NOW()'
           'Time.current'
+        when 'RAND()'
+          'rand'
         else
           super
         end
