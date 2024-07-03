@@ -46,7 +46,7 @@ describe Schematics::Trigger do
 
       its(:to_str) do
         is_expected.to eq <<~RUBY
-          after_create :after_create_abcd_123e
+          after_create_commit :after_create_abcd_123e
           def after_create_abcd_123e
             self.in_stock = true
             save!

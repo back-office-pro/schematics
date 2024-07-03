@@ -47,7 +47,7 @@ module Schematics
         RUBY
       in ['after_create', *] | ['after_save', *] | ['after_destroy', *]
         <<~RUBY
-          #{action} :#{method_name}
+          #{action}_commit :#{method_name}
           def #{method_name}
             #{method_body}
             save!
