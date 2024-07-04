@@ -1,5 +1,23 @@
 ---
 - id: <%= SecureRandom.uuid %>
+  name: worker_profile
+  options:
+    icon: user_check
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: daily_rate
+      type: currency
+      options:
+        required: true
+        precision: 2
+        unit: $
+    - id: <%= SecureRandom.uuid %>
+      name: user
+      type: belongs_to
+      options:
+        required: true
+        inverse_association_type: has_one
+- id: <%= SecureRandom.uuid %>
   name: construction_site
   options:
     descriptor: location
@@ -57,6 +75,7 @@
       name: price
       type: currency
       options:
+        required: true
         precision: 2
         unit: $
     - id: <%= SecureRandom.uuid %>
@@ -76,15 +95,23 @@
       - destroy
   triggers:
     - action: after_create
-      callback: $part.quantity += quantity
+      callback: $part.quantity -= $quantity
     - action: after_destroy
-      callback: $part.quantity -= quantity
+      callback: $part.quantity += $quantity
+  virtuals:
+    - id: <%= SecureRandom.uuid %>
+      name: cost
+      function: $part.price * $quantity
+      options:
+        precision: 2
+        unit: $
   attributes:
     - id: <%= SecureRandom.uuid %>
       name: quantity
       type: integer
       options:
         required: true
+        greater_than_or_equal_to: 1
     - id: <%= SecureRandom.uuid %>
       name: part
       type: belongs_to
@@ -92,6 +119,39 @@
         required: true
     - id: <%= SecureRandom.uuid %>
       name: construction_site
+      type: belongs_to
+      options:
+        required: true
+- id: <%= SecureRandom.uuid %>
+  name: order
+  options:
+    icon: truck_fast
+    actions:
+      - index
+      - show
+      - create
+      - destroy
+  triggers:
+    - action: after_create
+      callback: $part.quantity += $quantity
+    - action: after_destroy
+      callback: $part.quantity -= $quantity
+  virtuals:
+    - id: <%= SecureRandom.uuid %>
+      name: cost
+      function: $part.price * $quantity
+      options:
+        precision: 2
+        unit: $
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: quantity
+      type: integer
+      options:
+        required: true
+        greater_than_or_equal_to: 1
+    - id: <%= SecureRandom.uuid %>
+      name: part
       type: belongs_to
       options:
         required: true
