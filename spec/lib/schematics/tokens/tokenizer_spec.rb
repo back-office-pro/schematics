@@ -12,98 +12,146 @@ describe Schematics::Tokens::Tokenizer do
       let(:function) { 'welcome $first_name $last_name' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::String) }
+      its([0]) { is_expected.to have_attributes(value: 'welcome') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Whitespace) }
+      its([1]) { is_expected.to have_attributes(value: ' ') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([2]) { is_expected.to have_attributes(value: 'self.first_name') }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Whitespace) }
+      its([3]) { is_expected.to have_attributes(value: ' ') }
       its([4]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to have_attributes(value: 'self.last_name') }
     end
 
     context 'when function is a calculation' do
       let(:function) { '($price + 2)' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
+      its([0]) { is_expected.to have_attributes(value: '(') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([1]) { is_expected.to have_attributes(value: 'self.price') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Operator) }
+      its([2]) { is_expected.to have_attributes(value: ' + ') }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([3]) { is_expected.to have_attributes(value: '2') }
       its([4]) { is_expected.to be_a(Schematics::Tokens::Parenthesis) }
+      its([4]) { is_expected.to have_attributes(value: ')') }
     end
 
     context 'when function is a comparison' do
       let(:function) { '$price >= 100 && $vat != 20' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.price') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([1]) { is_expected.to have_attributes(value: ' >= ') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([2]) { is_expected.to have_attributes(value: '100') }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([3]) { is_expected.to have_attributes(value: ' && ') }
       its([4]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to have_attributes(value: 'self.vat') }
       its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([5]) { is_expected.to have_attributes(value: ' != ') }
       its([6]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([6]) { is_expected.to have_attributes(value: '20') }
     end
 
     context 'when function is a not spaced comparison' do
       let(:function) { '$price>=100&&$vat!=20' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.price') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([1]) { is_expected.to have_attributes(value: '>=') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([2]) { is_expected.to have_attributes(value: '100') }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([3]) { is_expected.to have_attributes(value: '&&') }
       its([4]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([4]) { is_expected.to have_attributes(value: 'self.vat') }
       its([5]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([5]) { is_expected.to have_attributes(value: '!=') }
       its([6]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([6]) { is_expected.to have_attributes(value: '20') }
     end
 
     context 'when function is a more complex comparison' do
       let(:function) { '$expires_at == NULL || NOW() < $expires_at' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.expires_at') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([1]) { is_expected.to have_attributes(value: ' == nil ') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([2]) { is_expected.to have_attributes(value: '|| ') }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([3]) { is_expected.to have_attributes(value: 'Time.current') }
       its([4]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([4]) { is_expected.to have_attributes(value: ' < ') }
       its([5]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([5]) { is_expected.to have_attributes(value: 'self.expires_at') }
     end
 
     context 'when function is a not spaced more complex comparison' do
       let(:function) { '$expires_at==NULL||NOW()<$expires_at' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.expires_at') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([1]) { is_expected.to have_attributes(value: ' == nil ') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Combinator) }
+      its([2]) { is_expected.to have_attributes(value: '||') }
       its([3]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([3]) { is_expected.to have_attributes(value: 'Time.current') }
       its([4]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([4]) { is_expected.to have_attributes(value: '<') }
       its([5]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([5]) { is_expected.to have_attributes(value: 'self.expires_at') }
     end
 
     context 'when function is an assignment' do
       let(:function) { '$in_stock = true' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.in_stock') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
+      its([1]) { is_expected.to have_attributes(value: ' = ') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
+      its([2]) { is_expected.to have_attributes(value: 'true') }
     end
 
     context 'when function is a not spaced assignment' do
       let(:function) { '$in_stock=true' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.in_stock') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Assignment) }
+      its([1]) { is_expected.to have_attributes(value: '=') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Boolean) }
+      its([2]) { is_expected.to have_attributes(value: 'true') }
     end
 
     context 'when function has a negative number' do
       let(:function) { '$price > -1' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.price') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([1]) { is_expected.to have_attributes(value: ' > ') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([2]) { is_expected.to have_attributes(value: '-1') }
     end
 
     context 'when function is not spaced and has a negative number' do
       let(:function) { '$price>-1' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Variable) }
+      its([0]) { is_expected.to have_attributes(value: 'self.price') }
       its([1]) { is_expected.to be_a(Schematics::Tokens::Comparator) }
+      its([1]) { is_expected.to have_attributes(value: '>') }
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
+      its([2]) { is_expected.to have_attributes(value: '-1') }
     end
   end
 end
