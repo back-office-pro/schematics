@@ -29,7 +29,7 @@ it:
       schematics/commands/rename_attribute:
         to_spec: Rinominare l'attributo **%{attribute}** di **%{entity_name}** in **%{target}**
       schematics/commands/rename_entity:
-        to_spec: Rinominare l'entità **%{entity_name}** in **%{attribute}**
+        to_spec: Rinominare l'entità **%{attribute}** in **%{entity_name}**
       schematics/commands/rename_permission:
         to_spec: Rinominare l'autorizzazione **%{attribute}** di **%{entity_name}** in **%{target}**
       schematics/commands/rename_translation:

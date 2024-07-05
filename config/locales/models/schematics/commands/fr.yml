@@ -29,7 +29,7 @@ fr:
       schematics/commands/rename_attribute:
         to_spec: Renommage de l'attribut **%{attribute}** de **%{entity_name}** à **%{target}**
       schematics/commands/rename_entity:
-        to_spec: Renommage de l'entité **%{entity_name}** à **%{attribute}**
+        to_spec: Renommage de l'entité **%{attribute}** à **%{entity_name}**
       schematics/commands/rename_permission:
         to_spec: Renommage de la permission **%{attribute}** de **%{entity_name}** à **%{target}**
       schematics/commands/rename_translation:
