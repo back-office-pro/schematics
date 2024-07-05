@@ -12,7 +12,7 @@ describe Schematics::Commands::RenameEntity do
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
-  its(:to_spec) { is_expected.to eq('Rename the entity **prospect** to **client**') }
+  its(:to_spec) { is_expected.to eq('Rename the entity **client** to **prospect**') }
   its(:weight) { is_expected.to eq(1) }
 
   describe '#generators' do
@@ -22,10 +22,15 @@ describe Schematics::Commands::RenameEntity do
       let(:target) { :build }
 
       its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([0]) { is_expected.to have_attributes(name: 'rename_clients_to_prospects') }
       its([1]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+      its([1]) { is_expected.to have_attributes(name: 'prospect') }
       its([2]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+      its([2]) { is_expected.to have_attributes(name: 'prospect') }
       its([3]) { is_expected.to be_a(TranslationsGenerator) }
+      its([3]) { is_expected.to have_attributes(name: 'prospect') }
       its([4]) { is_expected.to be_a(PermissionsGenerator) }
+      its([4]) { is_expected.to have_attributes(name: 'prospect') }
       its(:size) { is_expected.to eq(5) }
     end
 
@@ -33,7 +38,9 @@ describe Schematics::Commands::RenameEntity do
       let(:target) { :clean }
 
       its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+      its([0]) { is_expected.to have_attributes(name: 'prospect') }
       its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+      its([1]) { is_expected.to have_attributes(name: 'prospect') }
       its(:size) { is_expected.to eq(2) }
     end
   end

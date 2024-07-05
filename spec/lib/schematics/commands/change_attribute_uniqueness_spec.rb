@@ -19,6 +19,7 @@ describe Schematics::Commands::ChangeAttributeUniqueness do
 
     context 'when attribute is migratable' do
       its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([0]) { is_expected.to have_attributes(name: 'change_first_name_index_in_clients') }
       its(:size) { is_expected.to eq(1) }
     end
 

@@ -15,6 +15,7 @@ describe Schematics::Commands::AddTranslation do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(TranslationGenerator) }
+    its([0]) { is_expected.to have_attributes(name: attribute) }
     its(:size) { is_expected.to eq(1) }
   end
 end
