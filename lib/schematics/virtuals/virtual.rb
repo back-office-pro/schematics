@@ -34,10 +34,10 @@ module Schematics
 
         def klass(entity:, function:, **)
           tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
-          return Comparison  if tokens.any?(Tokens::Comparator)
-          return Calculation if tokens.any?(Tokens::Operator)
+          return Concatenation if tokens.any?(Tokens::String)
+          return Comparison if tokens.any?(Tokens::Comparator)
 
-          Concatenation
+          Calculation
         end
       end
 
