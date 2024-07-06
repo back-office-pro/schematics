@@ -58,7 +58,7 @@ module Schematics
 
       def spec_interpolations = super.merge(name:, from: Array(from).to_sentence, to:)
 
-      def i18n_prefix = :events
+      def i18n_scope = :events
     end
   end
 end
