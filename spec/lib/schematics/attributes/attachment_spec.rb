@@ -38,7 +38,7 @@ describe Schematics::Attributes::Attachment do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:avatar_i_cont) }
   its(:to_spec) { is_expected.to eq('A user has a **avatar** attribute of type *attachment*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.avatar') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.avatar') }
   it { is_expected.to be_image }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength

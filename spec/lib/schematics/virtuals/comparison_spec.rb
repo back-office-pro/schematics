@@ -41,7 +41,7 @@ describe Schematics::Virtuals::Comparison do
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
   its(:allowed_variables) { is_expected.to eq(%w[price category sold_at discount_price]) }
-  its(:i18n_key) { is_expected.to eq('attributes.product.big_price') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.big_price') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp

@@ -38,7 +38,7 @@ describe Schematics::Associations::HasMany do
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:weight) { is_expected.to eq(3) }
   its(:to_spec) { is_expected.to eq('A schema has many **entities**') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.entities') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.entities') }
   its('descriptor.name') { is_expected.to eq('type') }
 
   its(:to_str) do

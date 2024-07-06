@@ -38,7 +38,7 @@ describe Schematics::Attributes::Integer do
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, only_integer: true }) }
   its(:icon) { is_expected.to eq(:arrow_up_1_9) } # rubocop:disable Naming/VariableNumber
   its(:to_spec) { is_expected.to eq('A entity has a **price** attribute of type *integer*') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.price') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.price') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

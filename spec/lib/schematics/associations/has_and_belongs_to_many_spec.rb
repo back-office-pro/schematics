@@ -54,7 +54,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:to_spec) { is_expected.to eq('A role has many **permissions**') }
   its(:group_by) { is_expected.to be_nil }
   its(:filter_by) { is_expected.to eq(:itself) }
-  its(:i18n_key) { is_expected.to eq('attributes.role.permissions') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.role.permissions') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

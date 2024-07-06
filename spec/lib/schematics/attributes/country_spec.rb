@@ -45,7 +45,7 @@ describe Schematics::Attributes::Country do
   its(:search_query) { is_expected.to eq(:country_in) }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **country** attribute of type *country*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.country') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.country') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

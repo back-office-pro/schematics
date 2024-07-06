@@ -43,7 +43,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
   its(:allowed_variables) { is_expected.to eq(%w[id first_name last_name profile name created_at]) }
-  its(:i18n_key) { is_expected.to eq('attributes.user.full_name') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.full_name') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp

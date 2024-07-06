@@ -31,7 +31,7 @@ describe Schematics::Attributes::Locale do
   its(:icon) { is_expected.to eq(:language) }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A translation has a **key** attribute of type *locale*') }
-  its(:i18n_key) { is_expected.to eq('attributes.translation.key') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.translation.key') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

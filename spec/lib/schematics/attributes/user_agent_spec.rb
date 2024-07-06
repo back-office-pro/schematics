@@ -30,7 +30,7 @@ describe Schematics::Attributes::UserAgent do
   its(:input_name) { is_expected.to eq('session[user_agent]') }
   its(:icon) { is_expected.to eq(:computer) }
   its(:normalization) { is_expected.to be_nil }
-  its(:i18n_key) { is_expected.to eq('attributes.session.user_agent') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.session.user_agent') }
 
   its(:to_spec) do
     is_expected.to eq('A session has a **user agent** attribute of type *user agent*')

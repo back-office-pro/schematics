@@ -55,7 +55,7 @@ describe Schematics::Associations::HasOneThrough do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:user_i_cont) }
   its(:to_spec) { is_expected.to eq('A attribute has one **user** through **entity**') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.user') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.user') }
   its('descriptor.name') { is_expected.to eq('full_name') }
 
   its(:search_data) do

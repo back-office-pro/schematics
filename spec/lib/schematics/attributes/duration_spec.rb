@@ -31,7 +31,7 @@ describe Schematics::Attributes::Duration do
   its(:input_name) { is_expected.to eq('movie[duration]') }
   its(:icon) { is_expected.to eq(:hourglass) }
   its(:to_spec) { is_expected.to eq('A movie has a **duration** attribute of type *duration*') }
-  its(:i18n_key) { is_expected.to eq('attributes.movie.duration') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.movie.duration') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

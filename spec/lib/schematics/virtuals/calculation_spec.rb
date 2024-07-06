@@ -49,7 +49,7 @@ describe Schematics::Virtuals::Calculation do
   its(:precision) { is_expected.to eq(2) }
   its(:weight) { is_expected.to eq(1) }
   its(:allowed_variables) { is_expected.to eq(%w[price discount_price]) }
-  its(:i18n_key) { is_expected.to eq('attributes.product.tax_inclusive_price') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.tax_inclusive_price') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp

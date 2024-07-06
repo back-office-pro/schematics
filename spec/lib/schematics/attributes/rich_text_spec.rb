@@ -35,7 +35,7 @@ describe Schematics::Attributes::RichText do
   its(:search_column_association) { is_expected.to eq('rich_text_summary') }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:summary_i_cont) }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.summary') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.summary') }
 
   its(:to_spec) do
     is_expected.to eq('A entity has a **summary** attribute of type *rich text editor*')

@@ -35,7 +35,7 @@ describe Schematics::Attributes::Date do
   its(:to_sql) { is_expected.to eq('users.created_at') }
   its(:to_s) { is_expected.to eq('schema:user_created_at') }
   its(:to_spec) { is_expected.to eq('A user has a **created at** attribute of type *date*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.created_at') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.created_at') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

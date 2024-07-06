@@ -37,7 +37,7 @@ describe Schematics::Attributes::Flag do
   its(:search_data) { is_expected.to eq('states:') }
   its(:permitted_params) { is_expected.to eq(states: []) }
   its(:to_spec) { is_expected.to eq('A product has a **states** attribute of type *flag*') }
-  its(:i18n_key) { is_expected.to eq('attributes.product.states') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.states') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

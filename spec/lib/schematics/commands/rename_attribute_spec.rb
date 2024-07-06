@@ -25,7 +25,7 @@ describe Schematics::Commands::RenameAttribute do
       its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
       its([0]) { is_expected.to have_attributes(name: 'rename_first_name_to_name_in_clients') }
       its([1]) { is_expected.to be_a(TranslationGenerator) }
-      its([1]) { is_expected.to have_attributes(name: 'attributes.client.name') }
+      its([1]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.name') }
       its(:size) { is_expected.to eq(2) }
     end
 
@@ -33,7 +33,7 @@ describe Schematics::Commands::RenameAttribute do
       let(:type) { 'attachment' }
 
       its([0]) { is_expected.to be_a(TranslationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'attributes.client.name') }
+      its([0]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.name') }
       its(:size) { is_expected.to eq(1) }
     end
   end

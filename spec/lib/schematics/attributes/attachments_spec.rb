@@ -38,7 +38,7 @@ describe Schematics::Attributes::Attachments do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:files_i_cont) }
   its(:to_spec) { is_expected.to eq('A directory has a **files** attribute of type *attachments*') }
-  its(:i18n_key) { is_expected.to eq('attributes.directory.files') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.directory.files') }
   it { is_expected.to be_image }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength

@@ -9,7 +9,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
 
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
-        Translation.create!(locale:, key:, value: translate(value, locale:))
+        Translation.create!(locale:, key: name, value: translate(value, locale:))
       end
     end
   end
@@ -18,7 +18,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
     return unless destroying?
 
     PaperTrail.request(enabled: false) do
-      Translation.delete_by(locale: available_locales, key:)
+      Translation.delete_by(locale: available_locales, key: name)
     end
   end
 
@@ -28,8 +28,8 @@ class TranslationGenerator < Rails::Generators::NamedBase
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         Translation
-          .where(key: "activerecord.#{old_name}", locale:)
-          .update!(key:, value: translate(value, locale:))
+          .where(key: old_name, locale:)
+          .update!(key: name, value: translate(value, locale:))
       end
     end
   end
@@ -37,8 +37,6 @@ class TranslationGenerator < Rails::Generators::NamedBase
   private
 
   def old_name = options[:rename]
-
-  def key = "activerecord.#{name}"
 
   def value = name
     .split('.')

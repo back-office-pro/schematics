@@ -26,7 +26,7 @@ describe Schematics::Attributes::Timestamp do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.read_notifications_at') }
   its(:to_s) { is_expected.to eq('schema:user_read_notifications_at') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.read_notifications_at') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.read_notifications_at') }
 
   its(:to_spec) do
     is_expected.to eq('A user has a **read notifications at** attribute of type *timestamp*')

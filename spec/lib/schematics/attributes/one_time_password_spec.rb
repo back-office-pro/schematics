@@ -28,7 +28,7 @@ describe Schematics::Attributes::OneTimePassword do
   its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:mobile_screen) }
-  its(:i18n_key) { is_expected.to eq('attributes.user.otp_secret') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.otp_secret') }
 
   its(:to_spec) do
     is_expected.to eq('A user has a **otp secret** attribute of type *one-time password*')

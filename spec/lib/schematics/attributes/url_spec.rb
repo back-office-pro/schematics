@@ -36,7 +36,7 @@ describe Schematics::Attributes::Url do
   its(:to_sql) { is_expected.to eq('users.url') }
   its(:to_s) { is_expected.to eq('schema:user_url') }
   its(:to_spec) { is_expected.to eq('A user has a **url** attribute of type *url*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.url') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.url') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

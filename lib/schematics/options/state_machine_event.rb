@@ -43,7 +43,7 @@ module Schematics
       def suffixed_name = "#{name}_#{state_machine_name}"
 
       def human
-        translate("activerecord.#{i18n_key}", default: name.humanize)
+        translate(i18n_key, default: name.humanize)
       end
 
       def to_str = <<~RUBY

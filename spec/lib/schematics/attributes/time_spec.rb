@@ -33,7 +33,7 @@ describe Schematics::Attributes::Time do
   its(:to_sql) { is_expected.to eq('messages.hour') }
   its(:to_s) { is_expected.to eq('schema:message_hour') }
   its(:to_spec) { is_expected.to eq('A message has a **hour** attribute of type *time*') }
-  its(:i18n_key) { is_expected.to eq('attributes.message.hour') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.message.hour') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

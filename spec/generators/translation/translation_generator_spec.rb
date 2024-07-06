@@ -23,7 +23,7 @@ RSpec.describe TranslationGenerator do
 
     context 'when invoking' do
       let(:behavior) { :invoke }
-      let(:name) { 'attributes.task.subtitle' }
+      let(:name) { 'activerecord.attributes.task.subtitle' }
       let(:options) { [] }
 
       it 'create translations' do
@@ -35,7 +35,7 @@ RSpec.describe TranslationGenerator do
 
     context 'when revoking' do
       let(:behavior) { :revoke }
-      let(:name) { 'attributes.task.title' }
+      let(:name) { 'activerecord.attributes.task.title' }
       let(:options) { [] }
 
       it 'destroys translation' do
@@ -47,8 +47,8 @@ RSpec.describe TranslationGenerator do
 
     context 'when renaming' do
       let(:behavior) { :invoke }
-      let(:name) { 'attributes.task.subtitle' }
-      let(:options) { ['--rename=attributes.task.title'] }
+      let(:name) { 'activerecord.attributes.task.subtitle' }
+      let(:options) { ['--rename=activerecord.attributes.task.title'] }
 
       it 'updates translation key' do
         expect { invoke_all }

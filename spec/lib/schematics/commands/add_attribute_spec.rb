@@ -21,7 +21,7 @@ describe Schematics::Commands::AddAttribute do
       its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
       its([0]) { is_expected.to have_attributes(name: 'add_first_name_to_clients') }
       its([1]) { is_expected.to be_a(TranslationGenerator) }
-      its([1]) { is_expected.to have_attributes(name: 'attributes.client.first_name') }
+      its([1]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.first_name') }
       its(:size) { is_expected.to eq(2) }
     end
 
@@ -29,7 +29,7 @@ describe Schematics::Commands::AddAttribute do
       let(:type) { 'attachment' }
 
       its([0]) { is_expected.to be_a(TranslationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'attributes.client.first_name') }
+      its([0]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.first_name') }
       its(:size) { is_expected.to eq(1) }
     end
   end

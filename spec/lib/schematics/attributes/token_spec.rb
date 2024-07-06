@@ -29,7 +29,7 @@ describe Schematics::Attributes::Token do
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:key) }
   its(:to_spec) { is_expected.to eq('A entity has a **auth token** attribute of type *token*') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.auth_token') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.auth_token') }
 
   its(:validators) do
     is_expected.to eq(uniqueness_with_deleted: { case_sensitive: true, allow_blank: true })

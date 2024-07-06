@@ -40,7 +40,7 @@ describe Schematics::Attributes::Text do
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
   its(:to_spec) { is_expected.to eq('A entity has a **content** attribute of type *text*') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.content') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.content') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

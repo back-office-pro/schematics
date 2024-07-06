@@ -33,7 +33,7 @@ describe Schematics::Attributes::Jsonb do
   its(:to_sql) { is_expected.to eq('users.preferences') }
   its(:to_s) { is_expected.to eq('schema:user_preferences') }
   its(:to_spec) { is_expected.to eq('A user has a **preferences** attribute of type *json*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.preferences') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.preferences') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

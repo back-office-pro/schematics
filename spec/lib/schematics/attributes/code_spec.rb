@@ -39,7 +39,7 @@ describe Schematics::Attributes::Code do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
-  its(:i18n_key) { is_expected.to eq('attributes.template.content') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.template.content') }
 
   its(:to_spec) do
     is_expected.to eq('A template has a **content** attribute of type *code editor*')

@@ -34,7 +34,7 @@ describe Schematics::Options::StateMachineEvent do
   its(:icon) { is_expected.to eq(:check) }
   its(:color) { is_expected.to eq(:success) }
   its(:human) { is_expected.to eq('Complete') }
-  its(:i18n_key) { is_expected.to eq('events.task.complete') }
+  its(:i18n_key) { is_expected.to eq('activerecord.events.task.complete') }
 
   its(:to_spec) do
     is_expected.to eq('A task has a **complete** event from *in progress* to *completed*')

@@ -24,7 +24,7 @@ describe Schematics::Attributes::Uuid do
   its(:icon) { is_expected.to eq(:id_card) }
   its(:validators) { is_expected.to be_empty }
   its(:to_spec) { is_expected.to eq('A entity has a **id** attribute of type *uuid*') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.id') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.id') }
 
   its(:available_options) do
     is_expected.to contain_exactly(

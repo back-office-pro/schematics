@@ -35,7 +35,7 @@ describe Schematics::Attributes::Email do
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
   its(:to_spec) { is_expected.to eq('A user has a **email** attribute of type *email*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.email') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.email') }
 
   its(:validators) do
     is_expected.to eq(

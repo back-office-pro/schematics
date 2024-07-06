@@ -31,7 +31,7 @@ describe Schematics::Attributes::Byte do
   its(:input_name) { is_expected.to eq('active_storage_attachment[byte_size]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:weight_hanging) }
-  its(:i18n_key) { is_expected.to eq('attributes.active_storage/attachment.byte_size') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.active_storage/attachment.byte_size') } # rubocop:disable Layout/LineLength
 
   its(:to_spec) do
     is_expected.to eq('A active storage/attachment has a **byte size** attribute of type *byte*')

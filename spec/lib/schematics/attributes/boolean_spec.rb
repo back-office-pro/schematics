@@ -31,7 +31,7 @@ describe Schematics::Attributes::Boolean do
   its(:search_predicate) { is_expected.to eq(:eq) }
   its(:search_query) { is_expected.to eq(:toggle_eq) }
   its(:to_spec) { is_expected.to eq('A entity has a **toggle** attribute of type *boolean*') }
-  its(:i18n_key) { is_expected.to eq('attributes.entity.toggle') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.toggle') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

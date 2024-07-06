@@ -40,7 +40,7 @@ describe Schematics::Attributes::Citext do
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
   its(:preload) { is_expected.to be_empty }
-  its(:i18n_key) { is_expected.to eq('attributes.user.last_name') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.last_name') }
 
   its(:to_spec) do
     is_expected.to eq('A user has a **last name** attribute of type *case insensitive text*')

@@ -49,7 +49,7 @@ describe Schematics::Associations::HasManyThrough do
   its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
   its(:weight) { is_expected.to eq(3) }
   its(:to_spec) { is_expected.to eq('A schema has many **attributes** through **entities**') }
-  its(:i18n_key) { is_expected.to eq('attributes.attribute.attributes') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.attribute.attributes') }
   its('descriptor.name') { is_expected.to eq('name') }
 
   its(:to_str) do

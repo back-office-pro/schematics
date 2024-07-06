@@ -44,7 +44,7 @@ describe Schematics::Attributes::TimeZone do
   its(:collection) { is_expected.to eq([['(GMT+01:00) Paris', 'Paris']]) }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **time zone** attribute of type *time zone*') }
-  its(:i18n_key) { is_expected.to eq('attributes.user.time_zone') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.time_zone') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

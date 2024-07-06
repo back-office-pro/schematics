@@ -33,7 +33,7 @@ describe Schematics::Attributes::Percentage do
   its(:unit) { is_expected.to eq('%') }
   its(:icon) { is_expected.to eq(:percent) }
   its(:to_spec) { is_expected.to eq('A import has a **progress** attribute of type *percentage*') }
-  its(:i18n_key) { is_expected.to eq('attributes.import.progress') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.import.progress') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

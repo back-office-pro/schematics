@@ -28,7 +28,7 @@ describe Schematics::Commands::RemoveAssociation do
     its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
     its([0]) { is_expected.to have_attributes(name: 'drop_join_table_clients_users') }
     its([1]) { is_expected.to be_a(TranslationGenerator) }
-    its([1]) { is_expected.to have_attributes(name: 'attributes.client.users') }
+    its([1]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.users') }
     its(:size) { is_expected.to eq(2) }
   end
 end

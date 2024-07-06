@@ -42,7 +42,7 @@ describe Schematics::Attributes::Model do
   its(:to_s) { is_expected.to eq('schema:permission_model') }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A permission has a **model** attribute of type *model*') }
-  its(:i18n_key) { is_expected.to eq('attributes.permission.model') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.permission.model') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
