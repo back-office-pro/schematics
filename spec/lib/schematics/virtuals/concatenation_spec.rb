@@ -99,4 +99,10 @@ describe Schematics::Virtuals::Concatenation do
 
     it { is_expected.not_to be_valid }
   end
+
+  describe '.klass' do
+    subject { described_class.klass(entity:, function:) }
+
+    it { is_expected.to eq(described_class) }
+  end
 end

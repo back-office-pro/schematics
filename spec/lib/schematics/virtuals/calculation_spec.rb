@@ -107,4 +107,10 @@ describe Schematics::Virtuals::Calculation do
 
     it { is_expected.to eq('$100.10') }
   end
+
+  describe '.klass' do
+    subject { described_class.klass(entity:, function:) }
+
+    it { is_expected.to eq(described_class) }
+  end
 end

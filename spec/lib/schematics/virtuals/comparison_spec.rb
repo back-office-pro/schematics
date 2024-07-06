@@ -107,4 +107,10 @@ describe Schematics::Virtuals::Comparison do
 
     it { is_expected.to eq('TRUE') }
   end
+
+  describe '.klass' do
+    subject { described_class.klass(entity:, function:) }
+
+    it { is_expected.to eq(described_class) }
+  end
 end
