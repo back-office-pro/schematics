@@ -117,7 +117,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
           Translation.create!(
             locale:,
-            key: "activerecord.attributes.#{entity.name}.#{element.name}",
+            key: "activerecord.#{element.i18n_key}",
             value: translate(element.name, locale:)
           )
         end
@@ -132,7 +132,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
       entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
         Translation.delete_by(
           locale: available_locales,
-          key: "activerecord.attributes.#{entity.name}.#{element.name}"
+          key: "activerecord.#{element.i18n_key}"
         )
       end
     end
@@ -145,12 +145,12 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
       entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
         Translation
           .where(key: "activerecord.attributes.#{old_name}.#{element.name}")
-          .update_all(key: "activerecord.attributes.#{entity.name}.#{element.name}") # rubocop:disable Rails/SkipsModelValidations
+          .update_all(key: "activerecord.#{element.i18n_key}") # rubocop:disable Rails/SkipsModelValidations
       end
     end
   end
 
-  def generate_model_enums_translations # rubocop:disable Metrics/CyclomaticComplexity
+  def generate_model_enums_translations
     return unless generating?
 
     PaperTrail.request(enabled: false) do
@@ -165,11 +165,11 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
           end
           next unless enum in Schematics::Attributes::StateMachine
 
-          enum.events.map(&:name).each do |event|
+          enum.events.each do |event|
             Translation.create!(
               locale:,
-              key: "activerecord.events.#{entity.name}.#{event}",
-              value: translate(event, locale:)
+              key: "activerecord.#{event.i18n_key}",
+              value: translate(event.name, locale:)
             )
           end
         end
@@ -190,10 +190,10 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         end
         next unless enum in Schematics::Attributes::StateMachine
 
-        enum.events.map(&:name).each do |event|
+        enum.events.each do |event|
           Translation.delete_by(
             locale: available_locales,
-            key: "activerecord.events.#{entity.name}.#{event}"
+            key: "activerecord.#{event.i18n_key}"
           )
         end
       end
@@ -212,10 +212,10 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         end
         next unless enum in Schematics::Attributes::StateMachine
 
-        enum.events.map(&:name).each do |event|
+        enum.events.each do |event|
           Translation
             .where(key: "activerecord.events.#{old_name}.#{event}")
-            .update_all(key: "activerecord.events.#{entity.name}.#{event}") # rubocop:disable Rails/SkipsModelValidations
+            .update_all(key: "activerecord.#{event.i18n_key}") # rubocop:disable Rails/SkipsModelValidations
         end
       end
     end
