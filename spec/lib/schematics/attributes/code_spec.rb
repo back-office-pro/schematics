@@ -18,6 +18,7 @@ describe Schematics::Attributes::Code do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
@@ -38,6 +39,7 @@ describe Schematics::Attributes::Code do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
+  its(:i18n_key) { is_expected.to eq('attributes.template.content') }
 
   its(:to_spec) do
     is_expected.to eq('A template has a **content** attribute of type *code editor*')

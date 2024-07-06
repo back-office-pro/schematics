@@ -32,6 +32,7 @@ describe Schematics::Virtuals::Concatenation do
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_valid }
 
   its(:open_api_type) { is_expected.to eq(String) }
@@ -42,6 +43,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
   its(:allowed_variables) { is_expected.to eq(%w[id first_name last_name profile name created_at]) }
+  its(:i18n_key) { is_expected.to eq('attributes.user.full_name') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp

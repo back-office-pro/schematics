@@ -14,6 +14,7 @@ describe Schematics::Attributes::UserAgent do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -29,6 +30,7 @@ describe Schematics::Attributes::UserAgent do
   its(:input_name) { is_expected.to eq('session[user_agent]') }
   its(:icon) { is_expected.to eq(:computer) }
   its(:normalization) { is_expected.to be_nil }
+  its(:i18n_key) { is_expected.to eq('attributes.session.user_agent') }
 
   its(:to_spec) do
     is_expected.to eq('A session has a **user agent** attribute of type *user agent*')

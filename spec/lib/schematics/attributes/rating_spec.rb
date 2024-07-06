@@ -14,6 +14,7 @@ describe Schematics::Attributes::Rating do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -31,6 +32,7 @@ describe Schematics::Attributes::Rating do
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true, in: 0..5 }) }
   its(:icon) { is_expected.to eq(:star) }
   its(:to_spec) { is_expected.to eq('A product has a **rating** attribute of type *rating*') }
+  its(:i18n_key) { is_expected.to eq('attributes.product.rating') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

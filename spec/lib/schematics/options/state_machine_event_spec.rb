@@ -24,6 +24,7 @@ describe Schematics::Options::StateMachineEvent do
   let(:icon) { 'check' }
   let(:color) { 'success' }
 
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_valid }
@@ -33,6 +34,7 @@ describe Schematics::Options::StateMachineEvent do
   its(:icon) { is_expected.to eq(:check) }
   its(:color) { is_expected.to eq(:success) }
   its(:human) { is_expected.to eq('Complete') }
+  its(:i18n_key) { is_expected.to eq('events.task.complete') }
 
   its(:to_spec) do
     is_expected.to eq('A task has a **complete** event from *in progress* to *completed*')

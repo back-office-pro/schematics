@@ -31,6 +31,7 @@ describe Schematics::Virtuals::Comparison do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_valid }
 
   its(:open_api_type) { is_expected.to eq('boolean') }
@@ -40,6 +41,7 @@ describe Schematics::Virtuals::Comparison do
   its(:weight) { is_expected.to eq(1) }
   its(:available_options) { is_expected.to be_empty }
   its(:allowed_variables) { is_expected.to eq(%w[price category sold_at discount_price]) }
+  its(:i18n_key) { is_expected.to eq('attributes.product.big_price') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp

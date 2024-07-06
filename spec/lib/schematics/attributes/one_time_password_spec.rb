@@ -14,6 +14,7 @@ describe Schematics::Attributes::OneTimePassword do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
@@ -27,6 +28,7 @@ describe Schematics::Attributes::OneTimePassword do
   its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:mobile_screen) }
+  its(:i18n_key) { is_expected.to eq('attributes.user.otp_secret') }
 
   its(:to_spec) do
     is_expected.to eq('A user has a **otp secret** attribute of type *one-time password*')

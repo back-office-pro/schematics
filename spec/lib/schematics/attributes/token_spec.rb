@@ -14,6 +14,7 @@ describe Schematics::Attributes::Token do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
@@ -28,6 +29,7 @@ describe Schematics::Attributes::Token do
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:key) }
   its(:to_spec) { is_expected.to eq('A entity has a **auth token** attribute of type *token*') }
+  its(:i18n_key) { is_expected.to eq('attributes.entity.auth_token') }
 
   its(:validators) do
     is_expected.to eq(uniqueness_with_deleted: { case_sensitive: true, allow_blank: true })

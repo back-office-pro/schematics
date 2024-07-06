@@ -14,6 +14,7 @@ describe Schematics::Attributes::ResponseCode do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -29,6 +30,7 @@ describe Schematics::Attributes::ResponseCode do
   its(:open_api_filter_type) { is_expected.to eq(Integer) }
   its(:input_name) { is_expected.to eq('api_request[status]') }
   its(:icon) { is_expected.to eq(:hashtag) }
+  its(:i18n_key) { is_expected.to eq('attributes.api_request.status') }
 
   its(:to_spec) do
     is_expected.to eq('A api request has a **status** attribute of type *response code*')

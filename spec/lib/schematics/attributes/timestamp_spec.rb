@@ -14,6 +14,7 @@ describe Schematics::Attributes::Timestamp do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
 
   its(:database_type) { is_expected.to eq('datetime') }
   its(:default) { is_expected.to be_a(String) }
@@ -25,6 +26,7 @@ describe Schematics::Attributes::Timestamp do
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.read_notifications_at') }
   its(:to_s) { is_expected.to eq('schema:user_read_notifications_at') }
+  its(:i18n_key) { is_expected.to eq('attributes.user.read_notifications_at') }
 
   its(:to_spec) do
     is_expected.to eq('A user has a **read notifications at** attribute of type *timestamp*')

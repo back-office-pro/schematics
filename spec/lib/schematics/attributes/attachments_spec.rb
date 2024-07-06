@@ -17,6 +17,7 @@ describe Schematics::Attributes::Attachments do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
 
   its(:database_type) { is_expected.to eq('attachments') }
   its(:column_name) { is_expected.to eq('files') }
@@ -37,6 +38,7 @@ describe Schematics::Attributes::Attachments do
   its(:search_predicate) { is_expected.to eq(:i_cont) }
   its(:search_query) { is_expected.to eq(:files_i_cont) }
   its(:to_spec) { is_expected.to eq('A directory has a **files** attribute of type *attachments*') }
+  its(:i18n_key) { is_expected.to eq('attributes.directory.files') }
   it { is_expected.to be_image }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength

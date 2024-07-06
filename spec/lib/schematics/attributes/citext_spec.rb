@@ -14,6 +14,7 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -39,6 +40,7 @@ describe Schematics::Attributes::Citext do
   its(:to_sql) { is_expected.to eq('users.last_name') }
   its(:to_s) { is_expected.to eq('schema:user_last_name') }
   its(:preload) { is_expected.to be_empty }
+  its(:i18n_key) { is_expected.to eq('attributes.user.last_name') }
 
   its(:to_spec) do
     is_expected.to eq('A user has a **last name** attribute of type *case insensitive text*')

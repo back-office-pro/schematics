@@ -14,6 +14,7 @@ describe Schematics::Attributes::Email do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -34,6 +35,7 @@ describe Schematics::Attributes::Email do
   its(:to_sql) { is_expected.to eq('users.email') }
   its(:to_s) { is_expected.to eq('schema:user_email') }
   its(:to_spec) { is_expected.to eq('A user has a **email** attribute of type *email*') }
+  its(:i18n_key) { is_expected.to eq('attributes.user.email') }
 
   its(:validators) do
     is_expected.to eq(

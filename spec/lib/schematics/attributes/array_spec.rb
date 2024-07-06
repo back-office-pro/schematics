@@ -14,6 +14,7 @@ describe Schematics::Attributes::Array do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -37,6 +38,7 @@ describe Schematics::Attributes::Array do
   its(:search_predicate) { is_expected.to eq(:any) }
   its(:search_query) { is_expected.to eq(:ids_any) }
   its(:to_spec) { is_expected.to eq('A comparison has a **ids** attribute of type *array*') }
+  its(:i18n_key) { is_expected.to eq('attributes.comparison.ids') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

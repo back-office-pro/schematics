@@ -14,6 +14,7 @@ describe Schematics::Attributes::Byte do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -30,6 +31,7 @@ describe Schematics::Attributes::Byte do
   its(:input_name) { is_expected.to eq('active_storage_attachment[byte_size]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:weight_hanging) }
+  its(:i18n_key) { is_expected.to eq('attributes.active_storage/attachment.byte_size') }
 
   its(:to_spec) do
     is_expected.to eq('A active storage/attachment has a **byte size** attribute of type *byte*')

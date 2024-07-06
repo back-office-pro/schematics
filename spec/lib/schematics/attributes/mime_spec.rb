@@ -16,6 +16,7 @@ describe Schematics::Attributes::Mime do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -37,6 +38,7 @@ describe Schematics::Attributes::Mime do
   its(:to_s) { is_expected.to eq('schema:active_storage_attachment_content_type') }
   its(:collection) { is_expected.to eq([['PNG', 'image/png']]) }
   its(:normalization) { is_expected.to be_nil }
+  its(:i18n_key) { is_expected.to eq('attributes.active_storage/attachment.content_type') }
 
   its(:to_spec) do
     is_expected.to eq <<~TEXT.chomp

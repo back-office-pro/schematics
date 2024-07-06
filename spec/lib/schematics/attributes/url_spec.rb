@@ -14,6 +14,7 @@ describe Schematics::Attributes::Url do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -35,6 +36,7 @@ describe Schematics::Attributes::Url do
   its(:to_sql) { is_expected.to eq('users.url') }
   its(:to_s) { is_expected.to eq('schema:user_url') }
   its(:to_spec) { is_expected.to eq('A user has a **url** attribute of type *url*') }
+  its(:i18n_key) { is_expected.to eq('attributes.user.url') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

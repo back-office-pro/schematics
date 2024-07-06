@@ -18,6 +18,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
@@ -39,6 +40,7 @@ describe Schematics::Attributes::Text do
   its(:search_query) { is_expected.to eq(:content_i_cont) }
   its(:preload) { is_expected.to be_empty }
   its(:to_spec) { is_expected.to eq('A entity has a **content** attribute of type *text*') }
+  its(:i18n_key) { is_expected.to eq('attributes.entity.content') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

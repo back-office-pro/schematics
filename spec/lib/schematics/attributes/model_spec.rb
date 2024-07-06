@@ -19,6 +19,7 @@ describe Schematics::Attributes::Model do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -41,6 +42,7 @@ describe Schematics::Attributes::Model do
   its(:to_s) { is_expected.to eq('schema:permission_model') }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A permission has a **model** attribute of type *model*') }
+  its(:i18n_key) { is_expected.to eq('attributes.permission.model') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

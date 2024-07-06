@@ -8,6 +8,7 @@ module Schematics
     class StateMachineEvent
       include ::ActiveModel::API
       include ::ActionView::Helpers::TranslationHelper
+      include Behaviours::Internationalizable
       include Behaviours::Specifiable
       include Behaviours::Nameable
 
@@ -42,11 +43,7 @@ module Schematics
       def suffixed_name = "#{name}_#{state_machine_name}"
 
       def human
-        translate(
-          name.to_sym,
-          default: name.humanize,
-          scope: [:activerecord, :events, entity.name]
-        )
+        translate("activerecord.#{i18n_key}", default: name.humanize)
       end
 
       def to_str = <<~RUBY
@@ -60,6 +57,8 @@ module Schematics
       memoize def trigger = Trigger.new(entity:, action:, callback:)
 
       def spec_interpolations = super.merge(name:, from: Array(from).to_sentence, to:)
+
+      def i18n_prefix = :events
     end
   end
 end

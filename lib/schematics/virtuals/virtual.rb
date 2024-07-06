@@ -13,6 +13,7 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Preloadable
       include Behaviours::Documentable
+      include Behaviours::Internationalizable
 
       attr_accessor :id, :entity, :function
 

@@ -12,6 +12,7 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Preloadable
       include Behaviours::Documentable
+      include Behaviours::Internationalizable
       include ::ActiveModel::API
 
       delegate :hidden?, to: :options

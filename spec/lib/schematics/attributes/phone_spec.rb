@@ -14,6 +14,7 @@ describe Schematics::Attributes::Phone do
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -38,6 +39,7 @@ describe Schematics::Attributes::Phone do
   its(:to_s) { is_expected.to eq('schema:user_phone') }
   its(:normalization) { is_expected.to be_nil }
   its(:to_spec) { is_expected.to eq('A user has a **phone** attribute of type *phone number*') }
+  its(:i18n_key) { is_expected.to eq('attributes.user.phone') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(

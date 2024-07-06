@@ -37,6 +37,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
 
   its(:type) { is_expected.to eq('has_and_belongs_to_many') }
   its(:name) { is_expected.to eq('permissions') }
@@ -53,6 +54,7 @@ describe Schematics::Associations::HasAndBelongsToMany do
   its(:to_spec) { is_expected.to eq('A role has many **permissions**') }
   its(:group_by) { is_expected.to be_nil }
   its(:filter_by) { is_expected.to eq(:itself) }
+  its(:i18n_key) { is_expected.to eq('attributes.role.permissions') }
 
   its(:available_options) do # rubocop:disable RSpec/ExampleLength
     is_expected.to contain_exactly(
