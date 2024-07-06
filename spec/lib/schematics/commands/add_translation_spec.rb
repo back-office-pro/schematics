@@ -4,7 +4,7 @@ describe Schematics::Commands::AddTranslation do
   subject(:command) { described_class.new(entity:, attribute:) }
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
-  let(:attribute) { 'attributes.client.name' }
+  let(:attribute) { Schematics::Attributes::String.new(entity:, name: 'name') }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
@@ -14,8 +14,19 @@ describe Schematics::Commands::AddTranslation do
   describe '#generators' do
     subject { command.generators }
 
-    its([0]) { is_expected.to be_a(TranslationGenerator) }
-    its([0]) { is_expected.to have_attributes(name: attribute) }
-    its(:size) { is_expected.to eq(1) }
+    context 'when attribute is not a state machine event' do
+      its([0]) { is_expected.to be_a(TranslationGenerator) }
+      its([0]) { is_expected.to have_attributes(name: 'attributes.client.name') }
+      its(:size) { is_expected.to eq(1) }
+    end
+
+    context 'when attribute is a state machine event' do
+      let(:state_machine) { Schematics::Attributes::StateMachine.new(entity:, name: 'state') }
+      let(:attribute) { Schematics::Options::StateMachineEvent.new(state_machine:, name: 'follow') }
+
+      its([0]) { is_expected.to be_a(TranslationGenerator) }
+      its([0]) { is_expected.to have_attributes(name: 'events.client.follow') }
+      its(:size) { is_expected.to eq(1) }
+    end
   end
 end

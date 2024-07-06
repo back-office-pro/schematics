@@ -6,14 +6,20 @@ describe Schematics::Commands::RemoveAssociation do
   include_context 'with custom generated attribute'
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
-  let(:attribute) { 'user' }
+  let(:attribute) do
+    Schematics::Associations::Association.build(
+      type: 'has_and_belongs_to_many',
+      entity:,
+      name: 'users'
+    )
+  end
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
   its(:weight) { is_expected.to eq(2) }
 
   its(:to_spec) do
-    is_expected.to eq('Remove the many-to-many association between **client** and **user**')
+    is_expected.to eq('Remove the many-to-many association between **client** and **users**')
   end
 
   describe '#generators' do

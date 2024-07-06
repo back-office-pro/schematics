@@ -91,6 +91,7 @@ describe Schematics::Migrator do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([0]) { is_expected.to have_attributes(target: :build) }
       its(:size) { is_expected.to eq(1) }
     end
 
@@ -98,6 +99,7 @@ describe Schematics::Migrator do
       subject { migration.clean_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([0]) { is_expected.to have_attributes(target: :clean) }
       its(:size) { is_expected.to eq(1) }
     end
 
@@ -309,7 +311,9 @@ describe Schematics::Migrator do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::ChangeAttribute) }
+      its([0]) { is_expected.to have_attributes(target: 'string') }
       its([1]) { is_expected.to be_a(Schematics::Commands::ChangeAttribute) }
+      its([1]) { is_expected.to have_attributes(target: 'string') }
       its(:size) { is_expected.to eq(2) }
     end
 
@@ -384,6 +388,7 @@ describe Schematics::Migrator do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([0]) { is_expected.to have_attributes(target: :build) }
       its([1]) { is_expected.to be_a(Schematics::Commands::RenameAttribute) }
       its(:size) { is_expected.to eq(2) }
     end
@@ -392,6 +397,7 @@ describe Schematics::Migrator do
       subject { migration.clean_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RenameEntity) }
+      its([0]) { is_expected.to have_attributes(target: :clean) }
       its(:size) { is_expected.to eq(1) }
     end
 
@@ -561,6 +567,7 @@ describe Schematics::Migrator do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::AddPermission) }
+      its([0]) { is_expected.to have_attributes(attribute: :create) }
       its(:size) { is_expected.to eq(1) }
     end
 
@@ -623,6 +630,7 @@ describe Schematics::Migrator do
       subject { migration.clean_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RemovePermission) }
+      its([0]) { is_expected.to have_attributes(attribute: :create) }
       its(:size) { is_expected.to eq(1) }
     end
 
@@ -703,6 +711,7 @@ describe Schematics::Migrator do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::AddPermission) }
+      its([0]) { is_expected.to have_attributes(attribute: 'close') }
       its([1]) { is_expected.to be_a(Schematics::Commands::AddTranslation) }
       its(:size) { is_expected.to eq(2) }
     end
@@ -796,6 +805,7 @@ describe Schematics::Migrator do
       subject { migration.clean_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RemovePermission) }
+      its([0]) { is_expected.to have_attributes(attribute: 'close') }
       its([1]) { is_expected.to be_a(Schematics::Commands::RemoveTranslation) }
       its(:size) { is_expected.to eq(2) }
     end
@@ -885,6 +895,7 @@ describe Schematics::Migrator do
       subject { migration.build_commands }
 
       its([0]) { is_expected.to be_a(Schematics::Commands::RenamePermission) }
+      its([0]) { is_expected.to have_attributes(attribute: 'close', target: 'cancel') }
       its([1]) { is_expected.to be_a(Schematics::Commands::RenameTranslation) }
       its(:size) { is_expected.to eq(2) }
     end

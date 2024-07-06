@@ -11,7 +11,11 @@ module Schematics
       def translation_generator
         return if core?
 
-        TranslationGenerator.new([target], ["--rename=#{attribute}"], behavior: :revoke)
+        TranslationGenerator.new(
+          [target.i18n_key],
+          ["--rename=#{attribute.i18n_key}"],
+          behavior: :revoke
+        )
       end
 
       def weight = 3

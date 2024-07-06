@@ -24,8 +24,8 @@ module Schematics
         return if core?
 
         TranslationGenerator.new(
-          ["attributes.#{name}.#{target.name}"],
-          ["--rename=attributes.#{name}.#{attribute.name}"],
+          [target.i18n_key],
+          ["--rename=#{attribute.i18n_key}"],
           behavior: :revoke
         )
       end

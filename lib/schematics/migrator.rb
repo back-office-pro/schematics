@@ -91,11 +91,7 @@ module Schematics
     def rename_attribute_command(entity, current_attribute, new_attribute)
       return if current_attribute.name == new_attribute.name
 
-      Commands::RenameAttribute.new(
-        entity:,
-        attribute: current_attribute,
-        target: new_attribute
-      )
+      Commands::RenameAttribute.new(entity:, attribute: current_attribute, target: new_attribute)
     end
 
     def rename_entity_command(entity, other_entity, target)
@@ -177,12 +173,7 @@ module Schematics
         entity
           .public_send(items)
           .reject { |item| current_entity.public_send(items).find { _1.id == item.id } }
-          .map do |item|
-            Commands::AddTranslation.new(
-              entity:,
-              attribute: [items, entity.name, item.name].join('.')
-            )
-          end
+          .map { |attribute| Commands::AddTranslation.new(entity:, attribute:) }
       end
     end
 
@@ -194,22 +185,17 @@ module Schematics
             rename_translation_command(
               entity,
               current_entity.public_send(items).find { _1.id == item.id },
-              item,
-              items
+              item
             )
           end
       end
     end
 
-    def rename_translation_command(entity, current_item, new_item, items)
+    def rename_translation_command(entity, current_item, new_item)
       return unless current_item
       return if current_item.name == new_item.name
 
-      Commands::RenameTranslation.new(
-        entity:,
-        attribute: [items, entity.name, current_item.name].join('.'),
-        target: [items, entity.name, new_item.name].join('.')
-      )
+      Commands::RenameTranslation.new(entity:, attribute: current_item, target: new_item)
     end
 
     def remove_translation_commands(entity, new_entity)
@@ -217,12 +203,7 @@ module Schematics
         entity
           .public_send(items)
           .reject { |item| new_entity.public_send(items).find { _1.id == item.id } }
-          .map do |item|
-            Commands::RemoveTranslation.new(
-              entity:,
-              attribute: [items, entity.name, item.name].join('.')
-            )
-          end
+          .map { |attribute| Commands::RemoveTranslation.new(entity:, attribute:) }
       end
     end
 
@@ -230,18 +211,24 @@ module Schematics
       entity
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-        .map(&:association_type)
-        .difference(current_entity.has_and_belongs_to_many_associations.reject(&:hidden?).map(&:association_type)) # rubocop:disable Layout/LineLength
-        .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
+        .reject do |association|
+          current_entity
+            .has_and_belongs_to_many_associations
+            .reject(&:hidden?)
+            .find { _1.association_type == association.association_type }
+        end.map { |attribute| Commands::AddAssociation.new(entity:, attribute:) } # rubocop:disable Style/MultilineBlockChain
     end
 
     def remove_association_commands(entity, new_entity)
       entity
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-        .map(&:association_type)
-        .difference(new_entity.has_and_belongs_to_many_associations.reject(&:hidden?).map(&:association_type)) # rubocop:disable Layout/LineLength
-        .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
+        .reject do |association|
+          new_entity
+            .has_and_belongs_to_many_associations
+            .reject(&:hidden?)
+            .find { _1.association_type == association.association_type }
+        end.map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) } # rubocop:disable Style/MultilineBlockChain
     end
 
     def add_attribute_commands(entity, current_entity)

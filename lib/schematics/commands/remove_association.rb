@@ -11,16 +11,16 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         [
-          "drop_join_table_#{table_name.pluralize}_#{attribute.pluralize}",
+          "drop_join_table_#{table_name.pluralize}_#{attribute.name}",
           table_name.pluralize,
-          attribute.pluralize
+          attribute.name
         ]
       )
 
       def translation_generator
         return if core?
 
-        TranslationGenerator.new(["attributes.#{name}.#{attribute.pluralize}"])
+        TranslationGenerator.new([attribute.i18n_key])
       end
 
       def weight = 2
