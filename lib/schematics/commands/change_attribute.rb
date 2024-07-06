@@ -12,7 +12,7 @@ module Schematics
           [
             Rails::Generators::MigrationGenerator.new(
               [
-                "change_#{attribute.column_name}_column_#{target}_in_#{table_name.pluralize}",
+                "change_#{attribute.column_name}_column_#{target.database_type}_in_#{table_name.pluralize}", # rubocop:disable Layout/LineLength
                 attribute.to_s
               ]
             )
