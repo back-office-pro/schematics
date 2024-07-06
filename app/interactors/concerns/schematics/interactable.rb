@@ -7,9 +7,7 @@ module Schematics
     included do
       include Interactor
 
-      before do
-        context.message = '.success'
-      end
+      before { context.message = '.success' }
     end
 
     def fail!(message: '.failure')
