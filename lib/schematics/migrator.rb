@@ -204,27 +204,21 @@ module Schematics
     end
 
     def add_association_commands(entity, current_entity)
+      associations = current_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
       entity
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-        .reject do |association|
-          current_entity
-            .has_and_belongs_to_many_associations
-            .reject(&:hidden?)
-            .find { _1.association_type == association.association_type }
-        end.map { |attribute| Commands::AddAssociation.new(entity:, attribute:) } # rubocop:disable Style/MultilineBlockChain
+        .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
+        .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
     end
 
     def remove_association_commands(entity, new_entity)
+      associations = new_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
       entity
         .has_and_belongs_to_many_associations
         .reject(&:hidden?)
-        .reject do |association|
-          new_entity
-            .has_and_belongs_to_many_associations
-            .reject(&:hidden?)
-            .find { _1.association_type == association.association_type }
-        end.map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) } # rubocop:disable Style/MultilineBlockChain
+        .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
+        .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
     end
 
     def add_attribute_commands(entity, current_entity)
