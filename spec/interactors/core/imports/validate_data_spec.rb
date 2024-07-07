@@ -63,7 +63,7 @@ RSpec.describe Core::Imports::ValidateData do
       end
 
       it { is_expected.to be_a_success }
-      its('import.progress') { is_expected.to eq(100) }
+      its('import.progress') { is_expected.to eq(90) }
       its(:data) { is_expected.to match(expected_data) }
     end
 
@@ -111,7 +111,7 @@ RSpec.describe Core::Imports::ValidateData do
       end
 
       it { is_expected.to be_a_failure }
-      its('import.progress') { is_expected.to eq(100) }
+      its('import.progress') { is_expected.to eq(90) }
       its(:data) { is_expected.to match(expected_data) }
 
       its(:errors) do

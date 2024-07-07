@@ -3,10 +3,12 @@
 module Core
   module Migrations
     class Reindex
-      include Interactor
+      include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
       delegate :migrator_new_and_changed_entities, to: :migration, private: true
+
+      progressable migration: 75
 
       def call
         return unless ::Tenant.search_engine.indexable?

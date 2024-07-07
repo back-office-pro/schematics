@@ -3,13 +3,15 @@
 module Core
   module Imports
     class InsertData
-      include Interactor
+      include Schematics::Progressable
 
       RECORD_NOT_UNIQUE_REGEX = /Key \((.+)\)=\((.+)\)/
 
       delegate :import, :data, :fail!, to: :context, private: true
       delegate :model_class, :model, :author, to: :import, private: true
       delegate :human_attribute_name, :insert_all!, to: :model_class, private: true
+
+      progressable import: 100
 
       # :reek:UncommunicativeVariableName
       def call

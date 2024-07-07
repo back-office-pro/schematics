@@ -34,6 +34,7 @@ RSpec.describe Core::Imports::ReadData do
     end
 
     it { is_expected.to be_a_success }
+    its('import.progress') { is_expected.to eq(10) }
     its(:data) { is_expected.to eq(expected_data) }
   end
 end

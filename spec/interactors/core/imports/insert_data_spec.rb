@@ -39,6 +39,7 @@ RSpec.describe Core::Imports::InsertData do
       end
 
       it { is_expected.to be_a_success }
+      its('import.progress') { is_expected.to eq(100) }
 
       it 'inserts two resources' do
         expect { call }.to change(import.model_class, :count).by(2)
@@ -80,6 +81,7 @@ RSpec.describe Core::Imports::InsertData do
       end
 
       it { is_expected.to be_a_failure }
+      its('import.progress') { is_expected.to be_zero }
 
       its(:errors) do
         is_expected.to eq('Error' => 'Email john.doe@somewhere.com has already been taken')

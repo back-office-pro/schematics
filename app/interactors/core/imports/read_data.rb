@@ -3,13 +3,15 @@
 module Core
   module Imports
     class ReadData
-      include Interactor
+      include Schematics::Progressable
       VALUES_SEPARATOR = ';'
 
       delegate :import, to: :context, private: true
       delegate :model_class, :file, :model, to: :import, private: true
       delegate :entity, :i18n_scope, to: :model_class, private: true
       delegate :fillable_elements, to: :entity, private: true
+
+      progressable import: 10
 
       before { context.data = Concurrent::Hash.new }
 

@@ -3,11 +3,13 @@
 module Core
   module Migrations
     class MigrateDatabase
-      include Interactor
+      include Schematics::Progressable
 
       delegate :fail!, to: :context, private: true
       delegate :connection_pool, :transaction, to: ::ActiveRecord::Base, private: true
       delegate :migrate, to: 'connection_pool.migration_context', private: true
+
+      progressable migration: 60
 
       # :reek:UncommunicativeVariableName
       def call

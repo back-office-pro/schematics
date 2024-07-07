@@ -3,11 +3,13 @@
 module Core
   module Migrations
     class GenerateDocumentation
-      include Interactor
+      include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
       delegate :version, :state_rollbacking?, to: :migration, private: true
       delegate :really_destroy!, :save!, to: :documentation, private: true
+
+      progressable migration: 80
 
       def call
         return save! unless state_rollbacking?

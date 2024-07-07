@@ -3,11 +3,13 @@
 module Core
   module Migrations
     class Commit
-      include Interactor
+      include Schematics::Progressable
 
       delegate :add, :commit, :push, to: :git, private: true
       delegate :migration, to: :context, private: true
       delegate :commit_message, to: :migration, private: true
+
+      progressable migration: 100
 
       # :reek:UncommunicativeVariableName
       def call

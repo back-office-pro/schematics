@@ -587,7 +587,8 @@
         "options": {
           "readonly": true,
           "precision": 1,
-          "default": 0.0
+          "default": 0.0,
+          "less_than_or_equal_to": 100
         }
       },
       {
@@ -1026,7 +1027,8 @@
         "options": {
           "readonly": true,
           "precision": 1,
-          "default": 0.0
+          "default": 0.0,
+          "less_than_or_equal_to": 100
         }
       }
     ]

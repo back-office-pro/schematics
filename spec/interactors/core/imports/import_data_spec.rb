@@ -9,6 +9,7 @@ RSpec.describe Core::Imports::ImportData do
     subject(:call) { described_class.call(import:) }
 
     it { is_expected.to be_a_success }
+    its('import.progress') { is_expected.to eq(100) }
 
     it 'inserts two resources' do
       expect { call }.to change(import.model_class, :count).by(2)

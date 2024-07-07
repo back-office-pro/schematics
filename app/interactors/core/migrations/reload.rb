@@ -3,7 +3,7 @@
 module Core
   module Migrations
     class Reload
-      include Interactor
+      include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
       delegate :reload!, to: ::OpenApi::Router, private: true
@@ -12,6 +12,8 @@ module Core
                :migrator_changed_entities,
                to: :migration,
                private: true
+
+      progressable migration: 70
 
       before :reload!
 

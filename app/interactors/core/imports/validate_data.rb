@@ -3,10 +3,12 @@
 module Core
   module Imports
     class ValidateData
-      include Interactor
+      include Schematics::Progressable
 
       delegate :import, :data, :fail!, to: :context, private: true
       delegate :model_class, to: :import, private: true
+
+      progressable import: 90
 
       before { @errors = Concurrent::Hash.new }
 
@@ -22,7 +24,7 @@ module Core
         rescue StandardError => e
           @errors[::I18n.t('.line', line:)] = e
         ensure
-          import.reload.update!(progress: (line / data.size) * 100)
+          update_progress!(line / data.size * self.class.progress)
         end
         fail!(errors: @errors) if @errors.any?
       end

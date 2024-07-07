@@ -3,7 +3,7 @@
 module Core
   module Migrations
     class Backup
-      include Interactor
+      include Schematics::Progressable
 
       delegate :migration_context, to: 'ActiveRecord::Base.connection_pool', private: true
       delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
@@ -11,6 +11,8 @@ module Core
       delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :force, to: :context, private: true
+
+      progressable migration: 50
 
       def call
         return unless needs_migration? || force

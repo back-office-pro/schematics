@@ -3,8 +3,10 @@
 module Core
   module Migrations
     class GenerateFixture
-      include Interactor
+      include Schematics::Progressable
       delegate :migration, to: :context, private: true
+
+      progressable migration: 90
 
       def call
         FileUtils.mkdir_p(fixtures_path)
