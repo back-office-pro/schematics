@@ -24,7 +24,7 @@ module Core
         rescue StandardError => e
           @errors[::I18n.t('.line', line:)] = e
         ensure
-          update_progress!(line / data.size * self.class.progress)
+          update_progress!(line.to_f / data.size * self.class.progress)
         end
         fail!(errors: @errors) if @errors.any?
       end
