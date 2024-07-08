@@ -33,9 +33,11 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      Translation
-        .where(key: "activerecord.models.#{old_name}.gender")
-        .update_all(key: "activerecord.models.#{entity.name}.gender") # rubocop:disable Rails/SkipsModelValidations
+      available_locales.each do |locale|
+        Translation
+          .where(key: "activerecord.models.#{old_name}.gender", locale:)
+          .update!(key: "activerecord.models.#{entity.name}.gender")
+      end
     end
   end
 
@@ -68,9 +70,14 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      Translation
-        .where(key: "activerecord.models.#{old_name}.one")
-        .update_all(key: "activerecord.models.#{entity.name}.one") # rubocop:disable Rails/SkipsModelValidations
+      available_locales.each do |locale|
+        Translation
+          .where(key: "activerecord.models.#{old_name}.one", locale:)
+          .update!(
+            key: "activerecord.models.#{entity.name}.one",
+            value: translate(entity.name, locale:)
+          )
+      end
     end
   end
 
@@ -103,9 +110,14 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      Translation
-        .where(key: "activerecord.models.#{old_name}.other")
-        .update_all(key: "activerecord.models.#{entity.name}.other") # rubocop:disable Rails/SkipsModelValidations
+      available_locales.each do |locale|
+        Translation
+          .where(key: "activerecord.models.#{old_name}.other", locale:)
+          .update!(
+            key: "activerecord.models.#{entity.name}.other",
+            value: translate(entity.name.pluralize, locale:)
+          )
+      end
     end
   end
 
@@ -139,10 +151,12 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
-        Translation
-          .where(key: "activerecord.attributes.#{old_name}.#{element.name}")
-          .update_all(key: element.i18n_key) # rubocop:disable Rails/SkipsModelValidations
+      available_locales.each do |locale|
+        entity.fields.concat(entity.has_and_belongs_to_many_associations).each do |element|
+          Translation
+            .where(key: "activerecord.attributes.#{old_name}.#{element.name}", locale:)
+            .update!(key: element.i18n_key, value: translate(element.name, locale:))
+        end
       end
     end
   end
@@ -198,18 +212,23 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     return unless renaming?
 
     PaperTrail.request(enabled: false) do
-      entity.enum_attributes.each do |enum|
-        enum.values.each do |value|
-          Translation
-            .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{value}")
-            .update_all(key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}") # rubocop:disable Rails/SkipsModelValidations
-        end
-        next unless enum in Schematics::Attributes::StateMachine
+      available_locales.each do |locale|
+        entity.enum_attributes.each do |enum|
+          enum.values.each do |value|
+            Translation
+              .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{value}", locale:)
+              .update!(
+                key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}",
+                value: translate(value, locale:)
+              )
+          end
+          next unless enum in Schematics::Attributes::StateMachine
 
-        enum.events.each do |event|
-          Translation
-            .where(key: "activerecord.events.#{old_name}.#{event}")
-            .update_all(key: event.i18n_key) # rubocop:disable Rails/SkipsModelValidations
+          enum.events.each do |event|
+            Translation
+              .where(key: "activerecord.events.#{old_name}.#{event}", locale:)
+              .update!(key: event.i18n_key, value: translate(event.name, locale:))
+          end
         end
       end
     end
