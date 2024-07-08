@@ -30,7 +30,7 @@ describe Schematics::Entities::Entity do
   it { is_expected.to be_multisearchable }
   it { is_expected.to be_valid }
 
-  its(:icon) { is_expected.to eq(:square_caret_right) }
+  its(:icon) { is_expected.to eq(:circle_nodes) }
   its(:actions) { is_expected.to eq(%i[index show create update destroy archive]) }
   its(:class_name) { is_expected.to eq('Discussion') }
   its(:multisearch_query) { is_expected.to eq(:rich_text_content_body_i_cont) }

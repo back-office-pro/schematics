@@ -200,7 +200,7 @@ module Schematics
       end
 
       def icon
-        options.icon&.to_sym || :square_caret_right
+        options.icon&.to_sym || :circle_nodes
       end
 
       def can?(action)
