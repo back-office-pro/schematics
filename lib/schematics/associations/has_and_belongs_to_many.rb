@@ -47,8 +47,8 @@ module Schematics
 
       memoize def inverse_association = Associations::Association.build(
         type: 'has_and_belongs_to_many',
-        entity:,
-        name: entity.name,
+        entity: inverse_entity,
+        name: denied_name,
         options: { hidden: true }
       )
 
