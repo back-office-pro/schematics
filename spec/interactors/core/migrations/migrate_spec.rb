@@ -15,6 +15,10 @@ RSpec.describe Core::Migrations::Migrate do
       {
         id: '3cceed80-55c1-445f-a47b-44705c702c3d',
         name: 'prospect',
+        associations: [
+          type: 'has_and_belongs_to_many',
+          name: 'users'
+        ],
         attributes: [
           {
             id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -58,16 +62,17 @@ RSpec.describe Core::Migrations::Migrate do
       let(:current_data) { [] }
       let(:data) { initial_data }
       let(:commits_steps) { 1 }
-      let(:migrations_steps) { 1 }
+      let(:migrations_steps) { 2 }
 
       uses_transaction 'migrates successfully'
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect { expect(migrate).to be_a_success }
           .to change(Permission, :count).by(6)
-          .and change(Translation, :count).by(12)
+          .and change(Translation, :count).by(15)
         expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).to exist root.join('app/models/prospect.rb')
         expect(File).to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).to exist root.join('spec/models/prospect_spec.rb')
@@ -82,6 +87,10 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'users'
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -93,7 +102,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 5 }
       let(:rollback_reload) do
         Object.__send__(:remove_const, :Client)
         Object.__send__(:remove_const, :ClientsController)
@@ -107,6 +116,8 @@ RSpec.describe Core::Migrations::Migrate do
         expect(migrate).to be_a_success
         expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).not_to exist root.join('app/models/prospect.rb')
         expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
@@ -123,7 +134,7 @@ RSpec.describe Core::Migrations::Migrate do
     context 'when destroying an entity' do
       let(:data) { [] }
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 4 }
       let(:rollback_reload) { nil }
 
       before { create_prospect_entity }
@@ -133,9 +144,10 @@ RSpec.describe Core::Migrations::Migrate do
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect { expect(migrate).to be_a_success }
           .to change(Permission.with_deleted, :count).by(-6)
-          .and change(Translation.with_deleted, :count).by(-12)
+          .and change(Translation.with_deleted, :count).by(-15)
         expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
         expect(File).not_to exist root.join('app/models/prospect.rb')
         expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
         expect(File).not_to exist root.join('spec/models/prospect_spec.rb')
@@ -150,6 +162,10 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'users'
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -166,7 +182,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -185,12 +201,16 @@ RSpec.describe Core::Migrations::Migrate do
         [
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
-            name: 'prospect'
+            name: 'prospect',
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'users'
+            ]
           }
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -212,6 +232,10 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
+            associations: [
+              type: 'has_and_belongs_to_many',
+              name: 'users'
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -228,7 +252,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -252,6 +276,10 @@ RSpec.describe Core::Migrations::Migrate do
               {
                 name: 'users',
                 type: 'has_and_belongs_to_many'
+              },
+              {
+                name: 'user_groups',
+                type: 'has_and_belongs_to_many'
               }
             ],
             attributes: [
@@ -265,7 +293,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -274,8 +302,8 @@ RSpec.describe Core::Migrations::Migrate do
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(3)
         expect(migration.progress).to eq(100)
-        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Prospect.new).to respond_to(:users)
+        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_user_groups_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Prospect.new).to respond_to(:user_groups)
       end
     end
 
@@ -285,6 +313,12 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
+            associations: [
+              {
+                name: 'users',
+                type: 'has_and_belongs_to_many'
+              }
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -296,7 +330,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -317,6 +351,12 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
+            associations: [
+              {
+                name: 'users',
+                type: 'has_and_belongs_to_many'
+              }
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -328,7 +368,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -347,6 +387,12 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'prospect',
+            associations: [
+              {
+                name: 'users',
+                type: 'has_and_belongs_to_many'
+              }
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -361,7 +407,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 2 }
+      let(:migrations_steps) { 3 }
 
       before { create_prospect_entity }
 
@@ -380,6 +426,12 @@ RSpec.describe Core::Migrations::Migrate do
           {
             id: '3cceed80-55c1-445f-a47b-44705c702c3d',
             name: 'client',
+            associations: [
+              {
+                name: 'users',
+                type: 'has_and_belongs_to_many'
+              }
+            ],
             attributes: [
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
@@ -391,7 +443,7 @@ RSpec.describe Core::Migrations::Migrate do
         ]
       end
       let(:commits_steps) { 2 }
-      let(:migrations_steps) { 3 }
+      let(:migrations_steps) { 6 }
       let(:rollback_reload) do
         Object.__send__(:remove_const, :Client)
         Object.__send__(:remove_const, :ClientsController)
@@ -405,6 +457,8 @@ RSpec.describe Core::Migrations::Migrate do
         expect(migrate).to be_a_success
         expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
+        expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_clients_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).not_to exist root.join('app/models/prospect.rb')
         expect(File).not_to exist root.join('app/controllers/prospects_controller.rb')
@@ -423,7 +477,7 @@ RSpec.describe Core::Migrations::Migrate do
 
     context 'when migrating core' do
       let(:migration) { Migration.core }
-      let(:commits_steps) { 0 }
+      let(:commits_steps) { 1 }
       let(:migrations_steps) { 0 }
       let(:rollback_reload) { nil }
 

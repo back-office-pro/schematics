@@ -14,12 +14,14 @@ module Schematics
         case target
         in :build
           [
-            migration_generator,
             scaffold_generator,
             feature_generator,
             translations_generator,
-            permissions_generator
-          ].compact
+            permissions_generator,
+            migration_generator,
+            has_and_belongs_to_many_associations.map(&method(:rename_join_table_migration_generator)), # rubocop:disable Layout/LineLength
+            has_and_belongs_to_many_associations.map(&method(:rename_column_migration_generator))
+          ].compact.flatten
         in :clean
           [
             scaffold_generator(behavior: :revoke),
@@ -67,6 +69,39 @@ module Schematics
         return if core?
 
         TranslationsGenerator.new([name], ["--rename=#{old_name}"])
+      end
+
+      # :reek:FeatureEnvy
+      def rename_join_table_migration_generator(association)
+        Rails::Generators::MigrationGenerator.new(
+          [
+            [
+              'rename',
+              old_name.pluralize,
+              association.inverse_entity.table_name.pluralize,
+              'to',
+              association.entity.table_name.pluralize,
+              association.inverse_entity.table_name.pluralize
+            ].join('_')
+          ]
+        )
+      end
+
+      # :reek:FeatureEnvy
+      def rename_column_migration_generator(association)
+        Rails::Generators::MigrationGenerator.new(
+          [
+            [
+              'rename',
+              "#{old_name}_id",
+              'to',
+              "#{association.entity.table_name}_id",
+              'in',
+              association.entity.table_name.pluralize,
+              association.inverse_entity.table_name.pluralize
+            ].join('_')
+          ]
+        )
       end
     end
   end

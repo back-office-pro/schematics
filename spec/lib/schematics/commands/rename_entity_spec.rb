@@ -6,9 +6,17 @@ describe Schematics::Commands::RenameEntity do
   include_context 'with custom generated attribute'
 
   let(:schema) { Schematics::Schema.new }
-  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'prospect') }
-  let(:attribute) { Schematics::Entities::Entity.new(schema:, name: 'client') }
+  let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'prospect', associations:) }
+  let(:attribute) { Schematics::Entities::Entity.new(schema:, name: 'client', associations:) }
   let(:target) { nil }
+  let(:associations) do
+    [
+      {
+        type: 'has_and_belongs_to_many',
+        name: 'users'
+      }
+    ]
+  end
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 
@@ -21,17 +29,21 @@ describe Schematics::Commands::RenameEntity do
     context 'when building' do
       let(:target) { :build }
 
-      its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'rename_clients_to_prospects') }
-      its([1]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+      its([0]) { is_expected.to be_a(Rails::Generators::ScaffoldGenerator) }
+      its([0]) { is_expected.to have_attributes(name: 'prospect') }
+      its([1]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
       its([1]) { is_expected.to have_attributes(name: 'prospect') }
-      its([2]) { is_expected.to be_a(Rspec::Generators::FeatureGenerator) }
+      its([2]) { is_expected.to be_a(TranslationsGenerator) }
       its([2]) { is_expected.to have_attributes(name: 'prospect') }
-      its([3]) { is_expected.to be_a(TranslationsGenerator) }
+      its([3]) { is_expected.to be_a(PermissionsGenerator) }
       its([3]) { is_expected.to have_attributes(name: 'prospect') }
-      its([4]) { is_expected.to be_a(PermissionsGenerator) }
-      its([4]) { is_expected.to have_attributes(name: 'prospect') }
-      its(:size) { is_expected.to eq(5) }
+      its([4]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([4]) { is_expected.to have_attributes(name: 'rename_clients_to_prospects') }
+      its([5]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([5]) { is_expected.to have_attributes(name: 'rename_clients_users_to_prospects_users') }
+      its([6]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([6]) { is_expected.to have_attributes(name: 'rename_client_id_to_prospect_id_in_prospects_users') } # rubocop:disable Layout/LineLength
+      its(:size) { is_expected.to eq(7) }
     end
 
     context 'when cleaning' do
