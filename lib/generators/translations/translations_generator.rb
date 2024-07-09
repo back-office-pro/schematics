@@ -167,12 +167,8 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
-          enum.values.each do |value|
-            Translation.create!(
-              locale:,
-              key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}",
-              value: translate(value, locale:)
-            )
+          enum.enum_values.each do |value|
+            Translation.create!(locale:, key: value.i18n_key, value: translate(value, locale:))
           end
           next unless enum in Schematics::Attributes::StateMachine
 
@@ -193,11 +189,8 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       entity.enum_attributes.each do |enum|
-        enum.values.each do |value|
-          Translation.delete_by(
-            locale: available_locales,
-            key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}"
-          )
+        enum.enum_values.each do |value|
+          Translation.delete_by(locale: available_locales, key: value.i18n_key)
         end
         next unless enum in Schematics::Attributes::StateMachine
 
@@ -214,13 +207,10 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
-          enum.values.each do |value|
+          enum.enum_values.each do |value|
             Translation
               .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{value}", locale:)
-              .update!(
-                key: "activerecord.enums.#{entity.name}.#{enum.name}.#{value}",
-                value: translate(value, locale:)
-              )
+              .update!(key: value.i18n_key, value: translate(value, locale:))
           end
           next unless enum in Schematics::Attributes::StateMachine
 
