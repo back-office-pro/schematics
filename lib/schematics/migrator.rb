@@ -165,7 +165,7 @@ module Schematics
     end
 
     def add_translation_commands(entity, current_entity)
-      %i[virtuals events].flat_map do |items|
+      %i[virtuals events enum_values].flat_map do |items|
         entity
           .public_send(items)
           .reject { |item| current_entity.public_send(items).find { _1.id == item.id } }
@@ -195,7 +195,7 @@ module Schematics
     end
 
     def remove_translation_commands(entity, new_entity)
-      %i[virtuals events].flat_map do |items|
+      %i[virtuals events enum_values].flat_map do |items|
         entity
           .public_send(items)
           .reject { |item| new_entity.public_send(items).find { _1.id == item.id } }

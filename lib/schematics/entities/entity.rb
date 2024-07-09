@@ -179,6 +179,10 @@ module Schematics
         .flat_map(&:permitted_json_params)
         .push(:lock_version)
 
+      def enum_values
+        enum_attributes.flat_map(&:enum_values)
+      end
+
       def events
         state_machine_attributes.flat_map(&:events)
       end

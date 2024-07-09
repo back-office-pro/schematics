@@ -1052,6 +1052,263 @@ describe Schematics::Migrator do
     end
   end
 
+  context 'when adding a new enum value' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'enum',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'enum',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::AddTranslation) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Options::EnumValue)
+        )
+      end
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(['client']) }
+    end
+  end
+
+  context 'when removing an enum value' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'enum',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                  refused
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'enum',
+              options: {
+                values: %w[
+                  pending
+                  closed
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemoveTranslation) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Options::EnumValue)
+        )
+      end
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(['client']) }
+    end
+  end
+
+  context 'when renaming an enum value' do
+    let(:current_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'enum',
+              options: {
+                values: %w[
+                  pending
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+    let(:new_data) do
+      [
+        {
+          id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+          name: 'client',
+          attributes: [
+            {
+              id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+              name: 'state',
+              type: 'enum',
+              options: {
+                values: %w[
+                  closed
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    end
+
+    describe '#build_commands' do
+      subject { migration.build_commands }
+
+      its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::AddTranslation) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Options::EnumValue)
+        )
+      end
+    end
+
+    describe '#clean_commands' do
+      subject { migration.clean_commands }
+
+      its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(Schematics::Commands::RemoveTranslation) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          entity: kind_of(Schematics::Entities::Entity),
+          attribute: kind_of(Schematics::Options::EnumValue)
+        )
+      end
+    end
+
+    describe '#new_entities' do
+      subject { migration.new_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#old_entities' do
+      subject { migration.old_entities.map(&:name) }
+
+      it { is_expected.to be_empty }
+    end
+
+    describe '#changed_entities' do
+      subject { migration.changed_entities.map(&:name) }
+
+      it { is_expected.to eq(['client']) }
+    end
+  end
+
   context 'when adding a new virtual' do
     let(:current_data) do
       [
