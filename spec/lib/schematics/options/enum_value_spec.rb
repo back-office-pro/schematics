@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+describe Schematics::Options::EnumValue do
+  subject { described_class.new(enum:, value: 'completed') }
+
+  let(:entity) { Schematics::Entities::Entity.new(name: 'task') }
+  let(:enum) { Schematics::Attributes::Enum.new(entity:, name: 'state') }
+
+  it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_valid }
+
+  its(:i18n_key) { is_expected.to eq('activerecord.enums.task.state.completed') }
+end

@@ -26,6 +26,10 @@ module Schematics
         )
       end
 
+      memoize def enum_values
+        values.map { |value| Options::EnumValue.new(enum: self, value:) }
+      end
+
       def icon = :list_ol
 
       def to_str
