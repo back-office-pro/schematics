@@ -7,12 +7,12 @@ en:
         comparator: Comparator
         field: Field
         model: Data
+        period: Period
         roles:
           one: Role
           other: Roles
           zero: No role
         threshold: Alert threshold
-        trend_period: Trend period
     enums:
       metric:
         aggregate:
@@ -28,7 +28,7 @@ en:
           less_than: Less than
           less_than_or_equal_to: Less than or equal to
           other_than: Other than
-        trend_period:
+        period:
           day: Day
           hour: Hour
           minute: Minute
