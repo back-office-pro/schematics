@@ -8,7 +8,7 @@ RSpec.describe Metric do
   it { is_expected.not_to be_exceeded }
 
   its(:model_class) { is_expected.to eq(User) }
-  its(:to_s) { is_expected.to eq('Count of users') }
+  its(:to_s) { is_expected.to eq('Count of users by minute') }
   its(:value_formatted) { is_expected.to be_zero }
   its(:icon) { is_expected.to eq(:users) }
   its(:value) { is_expected.to be_zero }

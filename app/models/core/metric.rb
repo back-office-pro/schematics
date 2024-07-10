@@ -19,10 +19,10 @@ class Metric < Schematics::ApplicationRecord
     title || I18n.t('errors.virtuals.name', name: model)
   end
 
-  memoize def value(period = :second)
+  memoize def value(range = period_range)
     model_class
       &.preload_all
-      &.where(updated_at: ..1.public_send(period).ago)
+      &.where(created_at: range)
       &.public_send(aggregate.to_sym, to_sql || :all)
   rescue ActiveRecord::StatementInvalid
     nil
@@ -37,14 +37,24 @@ class Metric < Schematics::ApplicationRecord
   end
 
   def trend
-    value.to_f <=> value(trend_period).to_f
+    value.to_f <=> value(trend_range).to_f
   end
 
   def trend_progress
-    ((value.to_f - value(trend_period).to_f) / value(trend_period).to_f)
+    ((value.to_f - value(trend_range).to_f) / value(trend_range).to_f)
   end
 
   private
+
+  def period_range
+    return ..Time.current unless period
+
+    1.public_send(period).ago..
+  end
+
+  def trend_range
+    2.public_send(period || :weeks).ago..1.public_send(period || :week).ago
+  end
 
   def entity_field
     field && find_field_by_name(field.split('#').last)
@@ -58,7 +68,9 @@ class Metric < Schematics::ApplicationRecord
       I18n.t('of'),
       (model_class.human_attribute_name(entity_field.name).pluralize.downcase if entity_field),
       (I18n.t('of') if entity_field),
-      model_class.human_name_plural
+      model_class.human_name_plural,
+      (I18n.t('by') if period),
+      period_formatted&.downcase
     ].compact.join(' ')
   end
 
