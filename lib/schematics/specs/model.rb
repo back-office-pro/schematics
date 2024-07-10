@@ -90,6 +90,7 @@ module Schematics
         end
 
         attachments_attributes.each do |attribute|
+          it { is_expected.to have_many_attached(attribute.name.to_sym) }
           it do
             is_expected
               .to accept_nested_attributes_for(attribute.association_name)
@@ -123,7 +124,7 @@ module Schematics
           end
         end
 
-        string_attributes do |attribute|
+        string_attributes.each do |attribute|
           it do
             is_expected
               .to validate_length_of(attribute.name.to_sym)
@@ -133,122 +134,180 @@ module Schematics
           end
         end
 
-        elements
+        url_attributes.each do |attribute|
+          it { is_expected.to validate_url_of(attribute.name.to_sym) }
+        end
+
+        decimal_attributes.each do |attribute|
+          it do
+            is_expected
+              .to validate_numericality_of(attribute.name.to_sym)
+                .tap { _1.is_less_than(attribute.bound) if attribute.precision }
+                .tap { _1.is_greater_than(-attribute.bound) if attribute.precision }
+          end
+        end
+
+        integer_attributes.each do |attribute|
+          it { is_expected.to validate_numericality_of(attribute.name.to_sym).only_integer }
+        end
+
+        events.each do |event|
+          it { is_expected.to respond_to(event.action) }
+        end
+
+        enum_attributes
           .grep_v(Attributes::Flag)
-          .each do |element|
+          .each do |attribute|
             it do
-              case element
-              when Attributes::Url
-                is_expected.to validate_url_of(element.name.to_sym)
-              when Attributes::Decimal
-                is_expected
-                  .to validate_numericality_of(element.name.to_sym)
-                    .tap { _1.is_less_than(element.bound) if element.precision }
-                    .tap { _1.is_greater_than(-element.bound) if element.precision }
-              when Attributes::Integer
-                is_expected.to validate_numericality_of(element.name.to_sym).only_integer
-              when Attributes::StateMachine
-                element.events.each do |event|
-                  is_expected.to respond_to(event.action)
-                end
-              when Attributes::Enum
-                is_expected
-                  .to define_enum_for(element.name.to_sym)
-                  .with_values(element.values)
-                  .with_prefix
-              when Attributes::RichText
-                is_expected.to have_rich_text(element.name.to_sym) unless element.translated?
-              when Attributes::Digest
-                is_expected.to have_secure_password(element.name.to_sym)
-                is_expected.to validate_confirmation_of(element.name.to_sym) if element.confirm?
-                is_expected
-                  .to validate_length_of(element.name.to_sym)
-                  .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
-                    .tap { _1.is_at_least(element.options.min) if element.options.min }
-              when Attributes::Token
-                is_expected.to have_secure_token(element.name.to_sym)
-                is_expected.to encrypt(element.name.to_sym).deterministic(true)
-              when Attributes::OneTimePassword
-                is_expected.to encrypt(element.name.to_sym).deterministic(true)
-              when Attributes::Attachments
-                is_expected.to have_many_attached(element.name.to_sym)
-              when Attributes::Attachment
-                is_expected.to have_one_attached(element.name.to_sym)
-              when Attributes::Association
-                is_expected
-                  .to belong_to(element.name.to_sym)
-                    .with_foreign_key(element.column_name)
-                    .inverse_of(element.inverse_association.name.to_sym)
-                    .strict_loading
-                    .tap { _1.class_name(element.class_name) unless element.polymorphic? }
-                    .tap { _1.optional unless element.required? }
-                is_expected
-                  .to have_db_column(element.column_name.to_sym)
-                  .of_type(:uuid)
-              when Virtuals::Virtual
-                is_expected.to respond_to(element.name.to_sym)
-              when Associations::HasAndBelongsToMany
-                is_expected
-                  .to have_and_belong_to_many(element.name.to_sym)
-                  .strict_loading
-              when Associations::HasManyThrough
-                is_expected
-                  .to have_many(element.name.to_sym)
-                  .class_name(element.class_name)
-                  .with_foreign_key(element.column_name)
-                  .through(element.through.name.to_sym)
-                  .source(element.source.to_sym)
-                  .strict_loading
-              when Associations::HasManyNested
-                is_expected.to accept_nested_attributes_for(element.name.to_sym)
-                is_expected
-                  .to have_many(element.name.to_sym)
-                  .class_name(element.class_name)
-                  .with_foreign_key(element.column_name)
-                  .inverse_of(element.inverse_of.to_sym)
-                  .dependent(element.required? ? :destroy : :nullify)
-                  .strict_loading
-              when Associations::HasMany
-                is_expected
-                  .to have_many(element.name.to_sym)
-                  .class_name(element.class_name)
-                  .with_foreign_key(element.column_name)
-                  .inverse_of(element.inverse_of.to_sym)
-                  .dependent(element.required? ? :destroy : :nullify)
-                  .strict_loading
-              when Associations::HasOne
-                is_expected
-                  .to have_one(element.name.to_sym)
-                  .class_name(element.class_name)
-                  .with_foreign_key(element.column_name)
-                  .inverse_of(element.inverse_of.to_sym)
-                  .strict_loading
-              when Associations::HasOneThrough
-                is_expected
-                  .to have_one(element.name.to_sym)
-                  .class_name(element.class_name)
-                  .with_foreign_key(element.column_name)
-                  .through(element.through.name.to_sym)
-                  .source(element.source.to_sym)
-                  .strict_loading
-              end
+              is_expected
+                .to define_enum_for(attribute.name.to_sym)
+                .with_values(attribute.values)
+                .with_prefix
             end
           end
+
+        rich_text_attributes
+          .reject(&:translated?)
+          .each do |attribute|
+            it { is_expected.to have_rich_text(attribute.name.to_sym) }
+          end
+
+        digest_attributes.each do |attribute|
+          it { is_expected.to have_secure_password(attribute.name.to_sym) }
+          it do
+            is_expected.to validate_confirmation_of(attribute.name.to_sym) if attribute.confirm?
+            is_expected
+              .to validate_length_of(attribute.name.to_sym)
+              .is_at_most(::ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED)
+                .tap { _1.is_at_least(attribute.options.min) if attribute.options.min }
+          end
+        end
+
+        token_attributes.each do |attribute|
+          it { is_expected.to have_secure_token(attribute.name.to_sym) }
+          it { is_expected.to encrypt(attribute.name.to_sym).deterministic(true) }
+        end
+
+        one_time_password_attributes.each do |attribute|
+          it { is_expected.to encrypt(attribute.name.to_sym).deterministic(true) }
+        end
+
+        attachment_attributes.each do |attribute|
+          it { is_expected.to have_one_attached(attribute.name.to_sym) }
+        end
+
+        association_attributes.each do |attribute|
+          it { is_expected.to have_db_column(attribute.column_name.to_sym).of_type(:uuid) }
+          it do
+            is_expected
+              .to belong_to(attribute.name.to_sym)
+                .with_foreign_key(attribute.column_name)
+                .inverse_of(attribute.inverse_association.name.to_sym)
+                .strict_loading
+                .tap { _1.class_name(attribute.class_name) unless attribute.polymorphic? }
+                .tap { _1.optional unless attribute.required? }
+          end
+        end
+
+        virtuals.each do |virtual|
+          it { is_expected.to respond_to(virtual.name.to_sym) }
+        end
+
+        has_and_belongs_to_many_associations.each do |association|
+          it { is_expected.to have_and_belong_to_many(association.name.to_sym).strict_loading }
+        end
+
+        has_many_through_associations.each do |association|
+          it do
+            is_expected
+              .to have_many(association.name.to_sym)
+              .class_name(association.class_name)
+              .with_foreign_key(association.column_name)
+              .through(association.through.name.to_sym)
+              .source(association.source.to_sym)
+              .strict_loading
+          end
+        end
+
+        has_many_associations.each do |association|
+          it do
+            is_expected
+              .to have_many(association.name.to_sym)
+              .class_name(association.class_name)
+              .with_foreign_key(association.column_name)
+              .inverse_of(association.inverse_of.to_sym)
+              .dependent(association.required? ? :destroy : :nullify)
+              .strict_loading
+          end
+        end
+
+        has_many_nested_associations.each do |association|
+          it { is_expected.to accept_nested_attributes_for(association.name.to_sym) }
+          it do
+            is_expected
+              .to have_many(association.name.to_sym)
+              .class_name(association.class_name)
+              .with_foreign_key(association.column_name)
+              .inverse_of(association.inverse_of.to_sym)
+              .dependent(association.required? ? :destroy : :nullify)
+              .strict_loading
+          end
+        end
+
+        has_one_associations.each do |association|
+          it do
+            is_expected
+              .to have_one(association.name.to_sym)
+              .class_name(association.class_name)
+              .with_foreign_key(association.column_name)
+              .inverse_of(association.inverse_of.to_sym)
+              .strict_loading
+          end
+        end
+
+        has_one_through_associations.each do |association|
+          it do
+            is_expected
+              .to have_one(association.name.to_sym)
+              .class_name(association.class_name)
+              .with_foreign_key(association.column_name)
+              .through(association.through.name.to_sym)
+              .source(association.source.to_sym)
+              .strict_loading
+          end
+        end
       end
 
       class_methods do
         delegate :entity, to: :model_class
-        delegate :elements,
-                 :attributes,
+        delegate :attributes,
+                 :virtuals,
                  :triggers,
+                 :events,
                  :migratable_attributes,
                  :searchable_attributes,
                  :fillable_attributes,
-                 :attachments_attributes,
                  :enumerable_attributes,
                  :numerable_attributes,
                  :normalizable_attributes,
                  :string_attributes,
+                 :url_attributes,
+                 :decimal_attributes,
+                 :integer_attributes,
+                 :enum_attributes,
+                 :rich_text_attributes,
+                 :digest_attributes,
+                 :token_attributes,
+                 :one_time_password_attributes,
+                 :attachments_attributes,
+                 :attachment_attributes,
+                 :association_attributes,
+                 :has_and_belongs_to_many_associations,
+                 :has_many_through_associations,
+                 :has_many_associations,
+                 :has_many_nested_associations,
+                 :has_one_associations,
+                 :has_one_through_associations,
                  :default,
                  to: :entity
 
