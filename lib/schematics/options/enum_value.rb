@@ -2,6 +2,7 @@
 
 module Schematics
   module Options
+    # :reek:Attribute
     class EnumValue
       include ::ActiveModel::API
       include Behaviours::Internationalizable
