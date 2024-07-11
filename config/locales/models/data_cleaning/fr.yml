@@ -1,0 +1,23 @@
+---
+fr:
+  activerecord:
+    attributes:
+      data_cleaning:
+        field: Attribut
+        model: Donnée
+        period: Période
+        really_destroy: Supprimer définitivement
+    enums:
+      data_cleaning:
+        period:
+          day: Jour
+          hour: Heure
+          minute: Minute
+          month: Mois
+          week: Semaine
+          year: Année
+    models:
+      data_cleaning:
+        gender: male
+        one: Nettoyage de données
+        other: Nettoyages de données
