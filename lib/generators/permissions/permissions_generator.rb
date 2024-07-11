@@ -17,9 +17,17 @@ class PermissionsGenerator < Rails::Generators::NamedBase
 
     PaperTrail.request(enabled: false) do
       Permission.delete_by(model:)
-      Schematics::Version.destroy_by(item_type: model)
+      Schematics::Version
+        .where(item_type: model)
+        .in_batches
+        .destroy_all
       schema_model_attributes.each do |attribute|
-        attribute.entity.model_class.destroy_by(attribute.name => model)
+        attribute
+          .entity
+          .model_class
+          .where(attribute.name => model)
+          .in_batches
+          .destroy_all
       end
     end
   end
@@ -30,12 +38,14 @@ class PermissionsGenerator < Rails::Generators::NamedBase
     PaperTrail.request(enabled: false) do
       Schematics::Version
         .where(item_type: old_model)
+        .in_batches
         .update_all(item_type: model) # rubocop:disable Rails/SkipsModelValidations
       schema_model_attributes.each do |attribute|
         attribute
           .entity
           .model_class
           .where(attribute.name => old_model)
+          .in_batches
           .update_all(attribute.name => model) # rubocop:disable Rails/SkipsModelValidations
       end
     end
