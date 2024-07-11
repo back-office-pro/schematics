@@ -8,6 +8,10 @@ class Import < Schematics::ApplicationRecord
     model.safe_constantize
   end
 
+  def import_errors
+    super.transform_keys { |line| I18n.t('line', line:) }
+  end
+
   def finalize!(import_errors)
     return update!(state: 'error', import_errors:) if import_errors
 

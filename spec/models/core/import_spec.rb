@@ -6,6 +6,7 @@ RSpec.describe Import do
   include Schematics::Specs::Model
 
   its(:model_class) { is_expected.to eq(User) }
+  its(:import_errors) { is_expected.to be_empty }
 
   it 'enqueues an import job after create' do
     expect { record.save! }
@@ -29,7 +30,7 @@ RSpec.describe Import do
     end
 
     context 'when there are import errors' do
-      let(:errors) { { 'Line 1' => 'Name already taken' } }
+      let(:errors) { { 1 => 'Name already taken' } }
 
       it 'changes import state from in_progress to error' do
         expect { finalize! }
@@ -42,7 +43,7 @@ RSpec.describe Import do
         expect { finalize! }
           .to change(record, :import_errors)
           .from({})
-          .to(errors)
+          .to('Line 1' => 'Name already taken')
       end
     end
   end

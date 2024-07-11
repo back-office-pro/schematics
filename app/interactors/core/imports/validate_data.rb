@@ -22,7 +22,7 @@ module Core
             .symbolize_keys
             .compact
         rescue StandardError => e
-          @errors[::I18n.t('.line', line:)] = e
+          @errors[line] = e
         ensure
           update_progress!(line.to_f / data.size * self.class.progress)
         end
