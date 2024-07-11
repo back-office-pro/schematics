@@ -58,7 +58,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '3.40.0'
   spec.add_dependency 'chartkick', '5.0.7'
   spec.add_dependency 'chroma', '0.2.0'
-  spec.add_dependency 'concurrent-ruby', '1.3.3' # TODO: remove when deps are upgraded
   spec.add_dependency 'countries', '6.0.1'
   spec.add_dependency 'csv', '3.3.0'
   spec.add_dependency 'cuprite', '0.15.1'
@@ -111,7 +110,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-mini-profiler', '3.3.1'
   spec.add_dependency 'rails', '7.2.0.beta2'
   spec.add_dependency 'rails-i18n', '7.0.9'
-  spec.add_dependency 'ransack', '4.1.1'
+  spec.add_dependency 'ransack', '4.2.0'
   spec.add_dependency 'ransack-enum', '1.0.0'
   spec.add_dependency 'ratonvirus', '0.4.3'
   spec.add_dependency 'ratonvirus-clamby', '0.4.0'

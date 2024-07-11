@@ -17,7 +17,6 @@ require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
-require 'ransack/override/adapters/active_record/context'
 require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
@@ -36,7 +35,6 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
-Ransack::Adapters::ActiveRecord::Context.prepend(Ransack::Override::Adapters::ActiveRecord::Context)
 Paranoia.prepend(Paranoia::Override)
 
 Rails.configuration.to_prepare do
