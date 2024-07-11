@@ -8,6 +8,8 @@ module Schematics
     def perform = ::Message
       .preload_all
       .read
-      .destroy_by(paper_trail_versions: { created_at: ..DELAY.ago })
+      .where(paper_trail_versions: { created_at: ..DELAY.ago })
+      .in_batches
+      .destroy_all
   end
 end

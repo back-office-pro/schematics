@@ -9,6 +9,8 @@ module Schematics
       .preload_all
       .not_state_pending
       .not_state_in_progress
-      .destroy_by(created_at: ..DELAY.ago)
+      .where(created_at: ..DELAY.ago)
+      .in_batches
+      .destroy_all
   end
 end
