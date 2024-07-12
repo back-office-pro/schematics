@@ -2,14 +2,13 @@
 
 module Schematics
   class MigrateCoreJob < ApplicationJob
+    include Quietable
     queue_as :migrations
 
     def perform
       return if ::Tenant.version == VERSION
 
-      PaperTrail.request(enabled: false) do
-        Core::Migrations::Migrate.call(migration: ::Migration.core)
-      end
+      Core::Migrations::Migrate.call(migration: ::Migration.core)
     end
   end
 end

@@ -2,12 +2,11 @@
 
 module Schematics
   class ImportJob < ApplicationJob
+    include Quietable
     queue_as :imports
 
     def perform(import)
-      PaperTrail.request(enabled: false) do
-        import.finalize! Core::Imports::ImportData.call(import:).errors
-      end
+      import.finalize!(Core::Imports::ImportData.call(import:).errors)
     end
   end
 end

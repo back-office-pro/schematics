@@ -2,14 +2,13 @@
 
 module Schematics
   class WebhookJob < ApplicationJob
+    include Quietable
     queue_as :webhooks
 
     retry_on StandardError, wait: :polynomially_longer, attempts: 5
 
     def perform(webhook_request)
-      PaperTrail.request(enabled: false) do
-        Core::WebhookRequests::Fetch.call(webhook_request:)
-      end
+      Core::WebhookRequests::Fetch.call(webhook_request:)
     end
   end
 end
