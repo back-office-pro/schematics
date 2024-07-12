@@ -10,15 +10,19 @@ class DataCleaning < Schematics::ApplicationRecord
     model.safe_constantize
   end
 
+  def run_query! = model_class
+    .preload_all
+    .where(query_field => query_range)
+    .in_batches
+    .public_send(query_method)
+
+  private
+
   def query_method
     return :delete_all if really_destroy?
 
     :destroy_all
   end
-
-  def query_filters = { query_field => query_range }
-
-  private
 
   def query_field
     return :created_at unless field
