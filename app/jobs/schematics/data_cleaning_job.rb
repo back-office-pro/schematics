@@ -2,22 +2,19 @@
 
 module Schematics
   class DataCleaningJob < ApplicationJob
+    include Quietable
     queue_as :cleanups
 
-    def perform
-      PaperTrail.request(enabled: false) do
-        ::DataCleaning
-          .all
-          .select(&:model_class)
-          .each do |data_cleaning|
-            data_cleaning
-              .model_class
-              .preload_all
-              .where(data_cleaning.query_filters)
-              .in_batches
-              .public_send(data_cleaning.query_method)
-          end
+    def perform = ::DataCleaning
+      .all
+      .select(&:model_class)
+      .each do |data_cleaning|
+        data_cleaning
+          .model_class
+          .preload_all
+          .where(data_cleaning.query_filters)
+          .in_batches
+          .public_send(data_cleaning.query_method)
       end
-    end
   end
 end
