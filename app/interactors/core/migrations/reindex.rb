@@ -15,7 +15,7 @@ module Core
 
         migrator_new_and_changed_entities
           .filter_map(&:model_class)
-          .each(&:reindex)
+          .each(&:reindex_async)
       end
     end
   end

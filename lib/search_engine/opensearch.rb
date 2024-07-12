@@ -20,7 +20,7 @@ module SearchEngine
     # :reek:UtilityFunction
     def initialize!
       ::Rails.application.eager_load!
-      ::Searchkick.models.each(&:reindex)
+      ::Searchkick.models.each(&:reindex_async)
     end
   end
 end

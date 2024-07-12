@@ -22,6 +22,8 @@ module Schematics
     class_methods do
       def index_name = -> { ::Tenant.index_name(model_name) }
 
+      def reindex_async = reindex(mode: :async)
+
       def searchkick_elements = entity
         .searchable_elements
         .map(&:name)
