@@ -6,7 +6,7 @@ RSpec.describe DataCleaning do
   include Schematics::Specs::Model
   include ActiveSupport::Testing::TimeHelpers
 
-  before { travel_to(Time.current) }
+  before { freeze_time }
 
   its(:model_class) { is_expected.to eq(User) }
   its(:query_method) { is_expected.to eq(:destroy_all) }
