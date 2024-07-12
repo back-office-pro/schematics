@@ -5,6 +5,18 @@ describe Schematics::Migrator do
 
   let(:new_schema) { Schematics::Schema.new(data: new_data) }
   let(:current_schema) { Schematics::Schema.new(data: current_data) }
+  let(:entities_with_model_attributes) do
+    %w[
+      permission
+      import
+      chart
+      metric
+      search
+      comparison
+      pdf_template
+      data_cleaning
+    ]
+  end
 
   context 'when creating a new entity' do
     let(:current_data) { [] }
@@ -52,7 +64,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart metric search comparison pdf_template]) }
+      it { is_expected.to eq(entities_with_model_attributes) }
     end
   end
 
@@ -133,7 +145,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart metric search comparison pdf_template]) }
+      it { is_expected.to eq(entities_with_model_attributes) }
     end
   end
 
@@ -482,7 +494,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart metric search comparison pdf_template]) }
+      it { is_expected.to eq(entities_with_model_attributes) }
     end
   end
 
@@ -533,7 +545,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[permission import chart metric search comparison pdf_template]) }
+      it { is_expected.to eq(entities_with_model_attributes) }
     end
   end
 
