@@ -6,7 +6,7 @@ describe Schematics::Attributes::ModelField do
   let(:entity) { Schematics::Entities::Entity.new(schema:, name: 'assembly') }
   let(:schema) { Schematics::Schema.new }
   let(:name) { 'part' }
-  let(:options) { { type: 'numerable' } }
+  let(:options) { { type: 'numerable_fields' } }
 
   before do
     allow(schema).to receive(:entities).and_return([entity])
