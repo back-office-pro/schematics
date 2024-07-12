@@ -688,7 +688,7 @@
         "type": "model_field",
         "options": {
           "depends_on": "model",
-          "type": "numerable"
+          "type": "numerable_fields"
         }
       },
       {
@@ -744,7 +744,7 @@
         "type": "model_field",
         "options": {
           "depends_on": "model",
-          "type": "numerable"
+          "type": "numerable_fields"
         }
       },
       {
@@ -1909,6 +1909,65 @@
       {
         "id": "842d0f00-4680-42a2-a308-26f280a8cde5",
         "name": "ics_attachment",
+        "type": "boolean",
+        "options": {
+          "default": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "3efcdc64-9438-47b8-a32f-53b798a7f0bf",
+    "name": "data_cleaning",
+    "options": {
+      "icon": "broom",
+      "descriptor": "model",
+      "actions": [
+        "index",
+        "show",
+        "create",
+        "update",
+        "destroy"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "6c9cc8dd-502d-4756-97a8-d05e614d9c3c",
+        "name": "model",
+        "type": "model",
+        "options": {
+          "unique": true,
+          "required": true
+        }
+      },
+      {
+        "id": "d03df22a-44f2-4c61-a4a4-28f6a987abe9",
+        "name": "field",
+        "type": "model_field",
+        "options": {
+          "depends_on": "model",
+          "default": "created_at",
+          "type": "datetime_attributes"
+        }
+      },
+      {
+        "id": "7a9f4299-98c3-4165-a637-0186270a3cd1",
+        "name": "period",
+        "type": "enum",
+        "options": {
+          "required": true,
+          "values": [
+            "hour",
+            "day",
+            "week",
+            "month",
+            "year"
+          ]
+        }
+      },
+      {
+        "id": "12ca2b4b-b673-43d1-a41e-2160ab35a324",
+        "name": "really_destroy",
         "type": "boolean",
         "options": {
           "default": false
