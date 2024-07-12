@@ -8,10 +8,12 @@ RSpec.describe Schematics::CleanDatabaseBackupsJob do
   let(:byte_size) { 0 }
   let(:filename) { 'db.dump' }
   let(:backups) do
-    [
-      ActiveStorage::Blob.create!(key: 'backups/1', filename:, checksum:, byte_size:, created_at:),
-      ActiveStorage::Blob.create!(key: 'backups/2', filename:, checksum:, byte_size:, created_at:)
-    ]
+    ActiveStorage::Blob.create!(
+      [
+        { key: 'backups/1', filename:, checksum:, byte_size:, created_at: },
+        { key: 'backups/2', filename:, checksum:, byte_size:, created_at: }
+      ]
+    )
   end
 
   describe '#perform_later' do
