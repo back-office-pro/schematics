@@ -19,5 +19,5 @@ fr:
     models:
       data_cleaning:
         gender: male
-        one: Nettoyage de données
-        other: Nettoyages de données
+        one: Nettoyage des données
+        other: Nettoyages des données
