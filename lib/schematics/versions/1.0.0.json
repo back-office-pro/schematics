@@ -1946,7 +1946,6 @@
         "type": "model_field",
         "options": {
           "depends_on": "model",
-          "default": "created_at",
           "type": "datetime_attributes"
         }
       },
