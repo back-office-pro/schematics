@@ -28,12 +28,6 @@ dispatchers:
       schematics/clean_database_backups_job:
         schedule: every day at 1am
         class: Schematics::CleanDatabaseBackupsJob
-      schematics/clean_tasks_job:
-        schedule: every day at 1am
-        class: Schematics::CleanTasksJob
-      schematics/clean_messages_job:
-        schedule: every day at 1am
-        class: Schematics::CleanMessagesJob
       schematics/migrate_core_job:
         schedule: every day at 1am
         class: Schematics::MigrateCoreJob
