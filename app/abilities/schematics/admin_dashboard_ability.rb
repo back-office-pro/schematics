@@ -16,7 +16,9 @@ module Schematics
       ::Role,
       ::Documentation,
       ::WebhookRequest,
-      ::WebhookEndpoint
+      ::WebhookEndpoint,
+      ::PDFTemplate,
+      ::EmailTemplate
     ].freeze
 
     def initialize(ability)
