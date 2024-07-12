@@ -2,7 +2,8 @@
 
 class DataCleaning < Schematics::ApplicationRecord
   class << self
-    def internal = find_or_initialize_by(model: %w[Comparison Draft Search Session])
+    def internal = %w[APIRequest Comparison Draft Search Session]
+      .map { |model| find_or_initialize_by(model:) }
   end
 
   def model_class
@@ -15,5 +16,20 @@ class DataCleaning < Schematics::ApplicationRecord
     :destroy_all
   end
 
-  def query_fields = { field.to_sym => ..1.public_send(period).ago }
+  def query_filters = { query_field => query_range }
+
+  private
+
+  def query_field
+    return :created_at unless field
+
+    field
+      .split('#')
+      .second
+      .to_sym
+  end
+
+  def query_range
+    ..1.public_send(period).ago
+  end
 end
