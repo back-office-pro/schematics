@@ -22,8 +22,8 @@ module Schematics
     def update_progress!(progress = self.class.progress)
       context
         .public_send(self.class.resource_name)
-        .then_tap { _1.reload if _1.persisted? }
-        .update!(progress:)
+        &.then_tap { _1.reload if _1.persisted? }
+        &.update!(progress:)
     end
   end
 end
