@@ -35,7 +35,7 @@ module Schematics
       private
 
       def fields_type = options
-        .fetch(:type, 'renderable_with_created_ats_fields')
+        .fetch(:type, :renderable_with_created_ats_fields)
         .to_sym
     end
   end
