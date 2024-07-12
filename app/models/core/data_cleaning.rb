@@ -25,7 +25,7 @@ class DataCleaning < Schematics::ApplicationRecord
 
     field
       .split('#')
-      .second
+      .last
       .to_sym
   end
 
