@@ -9,7 +9,7 @@ class Import < Schematics::ApplicationRecord
   end
 
   def import_errors
-    super.transform_keys { |line| I18n.t('line', line:) }
+    super&.transform_keys { |line| I18n.t('line', line:) }
   end
 
   def finalize!(import_errors)
