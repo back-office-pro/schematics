@@ -25,6 +25,7 @@ class PermissionsGenerator < Rails::Generators::NamedBase
         attribute
           .entity
           .model_class
+          .preload_all
           .where(attribute.name => model)
           .in_batches
           .destroy_all
