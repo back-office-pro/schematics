@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod
 class DataCleaning < Schematics::ApplicationRecord
   class << self
     def internal = %w[APIRequest Comparison Draft Search Session]
