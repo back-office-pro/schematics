@@ -62,4 +62,15 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     model: 'Task',
     x_field: 'Task#created_at/month'
   )
+  DataCleaning.create!(model: 'APIKey', field: 'expires_at', period: 'year')
+  DataCleaning.create!(model: 'Meeting', field: 'end_at', period: 'year')
+  DataCleaning.create!(model: 'Import', period: 'year')
+  DataCleaning
+    .new(model: 'Comparison', period: 'month', really_destroy: true)
+    .save(validate: false) # rubocop:disable Rails/SaveBang
+  %w[APIRequest Draft Search Session].each do |model|
+    DataCleaning
+      .new(model:, period: 'year', really_destroy: true)
+      .save(validate: false)
+  end
 end
