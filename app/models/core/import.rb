@@ -16,7 +16,7 @@ class Import < Schematics::ApplicationRecord
     return update!(state: 'error', import_errors:) if import_errors
 
     state_finished!
-    model_class.try(:reindex_async)
+    model_class.try(:reindex)
   end
 
   private
