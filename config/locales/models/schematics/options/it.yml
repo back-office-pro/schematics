@@ -24,6 +24,7 @@ it:
         end_date: Data di fine
         equal_to: Uguale a
         events: Eventi
+        exclude: Escludere
         existing: Esistente
         filter_by: Filtra per
         greater_than: Maggiore di

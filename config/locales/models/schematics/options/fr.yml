@@ -24,6 +24,7 @@ fr:
         end_date: Date de fin
         equal_to: Egal à
         events: Evènements
+        exclude: Exclure
         existing: Existant
         filter_by: Filtrer par
         greater_than: Supérieur à

@@ -8,9 +8,12 @@ module Schematics
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
 
-      delegate :allow_hidden?, to: :options
+      delegate :allow_hidden?, :exclude, to: :options
 
-      def available_options = super.push(Options::AllowHidden)
+      def available_options = super.push(
+        Options::AllowHidden,
+        Options::Exclude
+      )
 
       def collection = super.sort
 
@@ -28,6 +31,7 @@ module Schematics
         .entities
         .then_tap { _1.reject(&:hidden?) unless allow_hidden? }
         .map(&:class_name)
+        .excluding(exclude)
     end
   end
 end

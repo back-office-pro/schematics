@@ -1937,7 +1937,15 @@
         "type": "model",
         "options": {
           "unique": true,
-          "required": true
+          "required": true,
+          "exclude": [
+            "DataCleaning",
+            "Translation",
+            "Migration",
+            "Permission",
+            "Role",
+            "User"
+          ]
         }
       },
       {
