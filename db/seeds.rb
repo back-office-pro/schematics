@@ -54,12 +54,6 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       }
     ]
   )
-  Chart.create!(
-    [
-      { kind: 'column', aggregate: 'count', model: 'Meeting', x_field: 'Meeting#created_at/month' },
-      { kind: 'column', aggregate: 'count', model: 'Task', x_field: 'Task#created_at/month' }
-    ]
-  )
   Chart.new(
     kind: 'bar',
     aggregate: 'average',
@@ -67,11 +61,10 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     x_field: 'APIRequest#endpoint',
     y_field: 'APIRequest#response_time'
   ).save(validate: false) # rubocop:disable Rails/SaveBang
-  DataCleaning.create!(
+  Chart.create!(
     [
-      { model: 'APIKey', field: 'APIKey#expires_at', period: 'year' },
-      { model: 'Meeting', field: 'Meeting#end_at', period: 'year' },
-      { model: 'Import', period: 'year' }
+      { kind: 'column', aggregate: 'count', model: 'Meeting', x_field: 'Meeting#created_at/month' },
+      { kind: 'column', aggregate: 'count', model: 'Task', x_field: 'Task#created_at/month' }
     ]
   )
   DataCleaning
@@ -82,4 +75,11 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       .new(model:, period: 'year', really_destroy: true)
       .save(validate: false)
   end
+  DataCleaning.create!(
+    [
+      { model: 'APIKey', field: 'APIKey#expires_at', period: 'year' },
+      { model: 'Meeting', field: 'Meeting#end_at', period: 'year' },
+      { model: 'Import', period: 'year' }
+    ]
+  )
 end
