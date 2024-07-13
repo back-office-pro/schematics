@@ -15,8 +15,8 @@ class Import < Schematics::ApplicationRecord
   def finalize!(import_errors)
     return update!(state: 'error', import_errors:) if import_errors
 
-    state_finished!
     model_class.try(:reindex)
+    state_finished!
   end
 
   private
