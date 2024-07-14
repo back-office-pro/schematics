@@ -11,15 +11,36 @@ RSpec.describe TranslationsGenerator do
   let(:name) { 'task' }
   let(:behavior) { :invoke }
   let(:options) { [] }
-  let(:translation) do
+  let(:first_translation) do
     Translation.create!(
       locale: 'en',
       key: 'activerecord.models.task.gender',
       value: 'female'
     )
   end
+  let(:second_translation) do
+    Translation.create!(
+      locale: 'en',
+      key: 'activerecord.attributes.task.title',
+      value: 'Title'
+    )
+  end
+  let(:third_translation) do
+    Translation.create!(
+      locale: 'en',
+      key: 'activerecord.enums.task.state.aborted',
+      value: 'Aborted'
+    )
+  end
+  let(:fourth_translation) do
+    Translation.create!(
+      locale: 'en',
+      key: 'activerecord.events.task.abort',
+      value: 'Abort'
+    )
+  end
 
-  before { translation }
+  before { [first_translation, second_translation, third_translation, fourth_translation] }
 
   describe '#invoke_all' do
     subject(:invoke_all) { generator.invoke_all }
@@ -38,7 +59,7 @@ RSpec.describe TranslationsGenerator do
       it 'destroys translations' do
         expect { invoke_all }
           .to change(Translation.with_deleted, :count)
-          .by(-1)
+          .by(-4)
       end
     end
 
@@ -48,7 +69,7 @@ RSpec.describe TranslationsGenerator do
 
       it 'updates translations' do
         expect { invoke_all }
-          .to change { translation.reload.key }
+          .to change { first_translation.reload.key }
           .from('activerecord.models.task.gender')
           .to('activerecord.models.meeting.gender')
       end

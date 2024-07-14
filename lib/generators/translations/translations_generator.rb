@@ -167,8 +167,12 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
-          enum.enum_values.each do |value|
-            Translation.create!(locale:, key: value.i18n_key, value: translate(value, locale:))
+          enum.enum_values.each do |enum_value|
+            Translation.create!(
+              locale:,
+              key: enum_value.i18n_key,
+              value: translate(enum_value.value, locale:)
+            )
           end
           next unless enum in Schematics::Attributes::StateMachine
 
@@ -189,8 +193,8 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
     PaperTrail.request(enabled: false) do
       entity.enum_attributes.each do |enum|
-        enum.enum_values.each do |value|
-          Translation.delete_by(locale: available_locales, key: value.i18n_key)
+        enum.enum_values.each do |enum_value|
+          Translation.delete_by(locale: available_locales, key: enum_value.i18n_key)
         end
         next unless enum in Schematics::Attributes::StateMachine
 
@@ -207,16 +211,16 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     PaperTrail.request(enabled: false) do
       available_locales.each do |locale|
         entity.enum_attributes.each do |enum|
-          enum.enum_values.each do |value|
+          enum.enum_values.each do |enum_value|
             Translation
-              .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{value}", locale:)
-              .update!(key: value.i18n_key, value: translate(value, locale:))
+              .where(key: "activerecord.enums.#{old_name}.#{enum.name}.#{enum_value.value}", locale:) # rubocop:disable Layout/LineLength
+              .update!(key: enum_value.i18n_key, value: translate(enum_value.value, locale:))
           end
           next unless enum in Schematics::Attributes::StateMachine
 
           enum.events.each do |event|
             Translation
-              .where(key: "activerecord.events.#{old_name}.#{event}", locale:)
+              .where(key: "activerecord.events.#{old_name}.#{event.name}", locale:)
               .update!(key: event.i18n_key, value: translate(event.name, locale:))
           end
         end
