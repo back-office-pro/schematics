@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe DataCleaning do
   include Schematics::Specs::Model
 
-  its(:model_class) { is_expected.to eq(User) }
+  its(:model_class) { is_expected.to eq(UserGroup) }
 
   describe '.internal' do
     subject { described_class.internal }
