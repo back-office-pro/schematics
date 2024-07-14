@@ -4,7 +4,7 @@ module Schematics
   module Tokens
     # :reek:InstanceVariableAssumption
     class Function < Token
-      REGEX = /(\w+\(\))/
+      REGEX = /(NOW\(\)|RAND\(\))/
       PRECEDENCE = 5
 
       def to_str =
