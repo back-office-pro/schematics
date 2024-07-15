@@ -1,5 +1,7 @@
 ---
 en:
+  aggregate_function: Aggregate function
+  arithmetic_function: Arithmetic function
   combinator: Combinator
   comparator: Comparator
   function: Function

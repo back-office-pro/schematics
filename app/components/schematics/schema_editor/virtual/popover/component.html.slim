@@ -4,6 +4,12 @@ table.table.mb-0.table-striped.table-borderless
       th = t('.function')
       td = 'NOW() RAND()'
     tr
+      th = t('.aggregate_function')
+      td = 'SUM($foo.bar) COUNT($foo.bar) AVG($foo.bar) MIN($foo.bar) MAX($foo.bar)'
+    tr
+      th = t('.arithmetic_function')
+      td = 'ABS($foo) ROUND($foo) CEIL($foo) FLOOR($foo)'
+    tr
       th = t('.combinator')
       td = '&& ||'
     tr
