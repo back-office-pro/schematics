@@ -1,6 +1,6 @@
 ---
 - id: <%= SecureRandom.uuid %>
-  name: student
+  name: customer
   options:
     icon: user_tie
     descriptor: full_name
@@ -49,8 +49,49 @@
       options:
         unique: true
         required: true
+        translated: true
     - id: <%= SecureRandom.uuid %>
-      name: content
-      type: rich_text
+      name: price
+      type: currency
       options:
         required: true
+        precision: 2
+        unit: $
+    - id: <%= SecureRandom.uuid %>
+      name: document
+      type: attachment
+      options:
+        content_type:
+          - pdf
+- id: <%= SecureRandom.uuid %>
+  name: purchase
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: customer
+      type: belongs_to
+      options:
+        required: true
+    - id: <%= SecureRandom.uuid %>
+      name: training
+      type: belongs_to
+      options:
+        required: true
+    - id: <%= SecureRandom.uuid %>
+      name: discount_code
+      type: belongs_to
+- id: <%= SecureRandom.uuid %>
+  name: discount_code
+  attributes:
+    - id: <%= SecureRandom.uuid %>
+      name: value
+      type: string
+      options:
+        required: true
+        normalization: capitalize
+    - id: <%= SecureRandom.uuid %>
+      name: percentage
+      type: percentage
+      options:
+        required: true
+        greater_than: 0
+        less_than_or_equal_to: 100
