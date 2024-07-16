@@ -4,6 +4,9 @@ describe Schematics::Tokens::Variable do
   subject(:token) { described_class.new(value, table_name) }
 
   let(:table_name) { 'entities' }
+  let(:value) { nil }
+
+  it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
 
   context 'when there is no reference' do
     let(:value) { 'type' }

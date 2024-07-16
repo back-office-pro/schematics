@@ -5,12 +5,14 @@ require 'active_support/core_ext/string/inflections'
 module Schematics
   module Tokens
     class Variable < Token
+      include Behaviours::Preloadable
+
       REGEX = /\$(\w+\.?\w+\?{0,1})/
       PRECEDENCE = 7
 
       def to_sql = [prefix, raw_value].join('.')
 
-      def to_str = '#{' + @value + '_formatted}' # rubocop:disable Style/StringConcatenation
+      def to_str = "\#{#{@value}_formatted}"
 
       def value = "self.#{@value}"
 
