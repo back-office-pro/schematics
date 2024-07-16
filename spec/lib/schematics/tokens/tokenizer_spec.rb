@@ -153,5 +153,19 @@ describe Schematics::Tokens::Tokenizer do
       its([2]) { is_expected.to be_a(Schematics::Tokens::Number) }
       its([2]) { is_expected.to have_attributes(value: '-1') }
     end
+
+    context 'when function is an aggregate function' do
+      let(:function) { 'SUM($stock_movements.cost)' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([0]) { is_expected.to have_attributes(value: 'stock_movements.sum(&:cost)') }
+    end
+
+    context 'when function is an arithmetic function' do
+      let(:function) { 'ABS($cost)' }
+
+      its([0]) { is_expected.to be_a(Schematics::Tokens::Function) }
+      its([0]) { is_expected.to have_attributes(value: 'self.cost.abs') }
+    end
   end
 end
