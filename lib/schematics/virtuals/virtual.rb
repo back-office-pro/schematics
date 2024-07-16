@@ -51,8 +51,9 @@ module Schematics
       end
 
       def preload = tokens
-        .grep(Tokens::Variable)
+        .grep(Behaviours::Preloadable)
         .flat_map(&:references)
+        .compact
         .uniq
         .map(&:to_sym)
 
