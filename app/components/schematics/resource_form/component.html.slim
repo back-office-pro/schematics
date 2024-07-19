@@ -4,7 +4,7 @@
     = turbo_frame_tag dom_id(resource, field.name) do
       div class=wrapper_class
         = __resource_form_fields(form:, field:)
-        = __button_confirm(compact: true) if turbo?
-        = __button_cancel(path: cancel_path, compact: true) if turbo?
+        = __button_confirm(compact: true) if turbo_frame_request?
+        = __button_cancel(path: cancel_path, compact: true) if turbo_frame_request?
   = __button_confirm
   = __button_cancel(path: cancel_path)

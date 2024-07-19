@@ -4,7 +4,7 @@ module Schematics
   module ResourceForm
     class Component < ApplicationComponent
       delegate :persisted?, to: :resource, private: true
-      use_helpers :rich_text_area_tag
+      use_helpers :rich_text_area_tag, :turbo_frame_request?
 
       option :resource
       option :url, optional: true
@@ -18,17 +18,13 @@ module Schematics
       end
 
       def wrapper_class
-        'd-flex' if turbo?
+        'd-flex' if turbo_frame_request?
       end
-
-      def turbo? = request
-        .headers['Turbo-Frame']
-        .present?
 
       def data = { controller: 'nested-form', 'auto-save-target': 'form' }
 
       def layout
-        return :inline if turbo?
+        return :inline if turbo_frame_request?
 
         :vertical
       end
