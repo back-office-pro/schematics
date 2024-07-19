@@ -4,6 +4,8 @@ module Schematics
   module Viewer
     module Comments
       class Component < ApplicationComponent
+        LIMIT = 10
+
         delegate :count, to: :@pagy
         delegate :entity, :human_name, to: :model_class
         delegate :icon, to: :entity
@@ -16,13 +18,11 @@ module Schematics
               .with_string_translations
               .with_rich_text_content_and_embeds
               .with_author_avatar
-              .order(created_at: :desc), items:
+              .order(created_at: :desc), limit: LIMIT
           )
         end
 
         def model_class = ::Comment
-
-        def items = 10
 
         def title = "#{count} #{human_name(count:)}"
       end

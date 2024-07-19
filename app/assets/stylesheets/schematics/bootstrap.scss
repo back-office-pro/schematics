@@ -126,7 +126,7 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
 
 // Pagy
 
-.pagy.items-selector-js input {
+.pagy.limit-selector-js input {
   @extend .border-0;
   @extend .text-secondary;
   @extend .fw-bold;

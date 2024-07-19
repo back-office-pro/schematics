@@ -4,7 +4,7 @@ require 'pagy/extras/bootstrap'
 require 'pagy/extras/calendar'
 require 'pagy/extras/headers'
 require 'pagy/extras/i18n'
-require 'pagy/extras/items'
+require 'pagy/extras/limit'
 require 'pagy/extras/overflow'
 require 'pagy/extras/searchkick'
 

@@ -9,7 +9,7 @@ module Schematics
         entity = model_class.entity
         api :index, "List #{entity.name.pluralize}" do
           query :page, ::Integer, desc: 'Page number'
-          query :items, ::Integer, desc: 'Items per page'
+          query :limit, ::Integer, desc: 'Items per page'
           query :sort, ::String, desc: 'Sort fields list separated by comma'
 
           query "#{Ransack.options[:search_key]}[with_deleted]", 'boolean', desc: 'Display archives'

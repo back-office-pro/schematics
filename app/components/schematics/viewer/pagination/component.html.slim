@@ -1,6 +1,6 @@
 .row.pt-3
   .col.d-none.d-xl-flex.text-secondary.ms-2.align-items-center.align-self-start
-    == pagy_items_selector_js(pagy, item_name: human_name_plural) if human_name_plural
+    == pagy_limit_selector_js(pagy, item_name: human_name_plural) if human_name_plural
   .col.d-flex.align-items-center.flex-column
     div class=css_classes == pagy_bootstrap_nav(pagy) if pages?
     == pagy_bootstrap_nav(calendar[:month]) if calendar?

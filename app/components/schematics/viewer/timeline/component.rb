@@ -4,7 +4,7 @@ module Schematics
   module Viewer
     module Timeline
       class Component < ApplicationComponent
-        ITEMS = 10
+        LIMIT = 10
 
         delegate :paper_trail_versions, to: :resource, private: true
         delegate :class, to: :resource, prefix: :model, private: true
@@ -17,7 +17,7 @@ module Schematics
               current_ability,
               paper_trail_versions.includes(item: entity.includes)
             ),
-            items: ITEMS
+            limit: LIMIT
           )
         end
 

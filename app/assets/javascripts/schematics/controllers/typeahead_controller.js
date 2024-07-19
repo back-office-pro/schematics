@@ -30,7 +30,7 @@ export default class extends SearchBarController {
     const element = scope.match(/filter\[(\w+)\]/)[1]
     const searchParams = new URLSearchParams(window.location.search)
     searchParams.delete('page')
-    searchParams.delete('items')
+    searchParams.delete('limit')
     searchParams.delete('sort')
     searchParams.set('field', element)
     searchParams.set(scope, decodeURI(this.inputTarget.value))

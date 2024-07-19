@@ -6,7 +6,7 @@ module Schematics
 
     api :index, 'History' do
       query :page, ::Integer, desc: 'Page number'
-      query :items, ::Integer, desc: 'Items per page'
+      query :limit, ::Integer, desc: 'Items per page'
 
       response 200, 'Success', :json,
                data: [Version::OPEN_API_SCHEMA],

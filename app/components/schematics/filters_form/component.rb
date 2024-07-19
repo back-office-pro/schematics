@@ -15,7 +15,7 @@ module Schematics
 
       def css_classes = %w[animate__animated animate__zoomIn]
 
-      def query_params = %i[sort items month_page]
+      def query_params = %i[sort limit month_page]
     end
   end
 end
