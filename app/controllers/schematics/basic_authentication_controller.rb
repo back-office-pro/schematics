@@ -2,7 +2,7 @@
 
 module Schematics
   class BasicAuthenticationController < ApplicationController
-    skip_before_action :authenticate_user!
+    allow_unauthenticated_access
     http_basic_authenticate_with(
       name: Engine.credentials.basic_auth[:username],
       password: Engine.credentials.basic_auth[:password]

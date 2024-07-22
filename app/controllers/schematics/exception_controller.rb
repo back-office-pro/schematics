@@ -2,7 +2,7 @@
 
 module Schematics
   class ExceptionController < ApplicationController
-    skip_before_action :authenticate_user!
+    allow_unauthenticated_access
     layout 'schematics/jumbotron'
 
     def internal_server_error

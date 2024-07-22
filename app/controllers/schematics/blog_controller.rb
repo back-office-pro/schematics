@@ -5,7 +5,7 @@ module Schematics
     include Searchable
     include Redirectable
 
-    skip_before_action :authenticate_user!
+    allow_unauthenticated_access
     before_action :set_resource, only: :show
     before_action :redirect_to_resource_path, only: :show
     delegate :entity, :human_name, :gender, to: :model_class, private: true

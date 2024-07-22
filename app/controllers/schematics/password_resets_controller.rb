@@ -4,7 +4,7 @@ module Schematics
   class PasswordResetsController < ApplicationController
     include Fillable
 
-    skip_before_action :authenticate_user!
+    allow_unauthenticated_access
     before_action :set_user, only: %i[edit update]
 
     rate_limit to: 5, within: 1.minute, only: :create

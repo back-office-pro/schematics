@@ -4,7 +4,7 @@ module Schematics
   class OneTimePasswordsController < ApplicationController
     include Fillable
 
-    skip_before_action :authenticate_user!, only: %i[new create]
+    allow_unauthenticated_access only: %i[new create]
     before_action :require_sudo!, only: %i[show edit]
     layout 'schematics/jumbotron', only: %i[new create]
 

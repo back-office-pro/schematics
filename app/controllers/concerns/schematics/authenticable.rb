@@ -10,6 +10,12 @@ module Schematics
       helper_method :current_user, :current_session
     end
 
+    class_methods do
+      def allow_unauthenticated_access(**options)
+        skip_before_action :authenticate_user!, **options
+      end
+    end
+
     private
 
     def auth_token = http_token || cookies.permanent.encrypted[:auth_token]

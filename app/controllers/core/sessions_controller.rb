@@ -3,7 +3,7 @@
 class SessionsController < Schematics::ResourcesController
   before_action :logout_user!, only: :create
 
-  skip_before_action :authenticate_user!, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
+  allow_unauthenticated_access only: %i[new create]
   skip_before_action :set_draft, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
 
   rate_limit to: 5, within: 20.seconds, only: :create

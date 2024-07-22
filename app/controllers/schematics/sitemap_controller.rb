@@ -2,7 +2,7 @@
 
 module Schematics
   class SitemapController < ApplicationController
-    skip_before_action :authenticate_user!
+    allow_unauthenticated_access
 
     def show
       @posts = ::BlogPost.state_published
