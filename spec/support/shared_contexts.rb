@@ -165,3 +165,23 @@ RSpec.shared_context 'with password pwned stub' do
     stub_request(:get, %r{https://api.pwnedpasswords.com}).to_return(status: 200)
   end
 end
+
+RSpec.shared_context 'with openai stub' do
+  let(:body) do
+    {
+      choices: [
+        {
+          message: {
+            role: 'assitant',
+            content: [{ name: 'assembly' }].to_json
+          }
+        }
+      ]
+    }.to_json
+  end
+
+  before do
+    stub_request(:post, 'https://api.openai.com/v1/chat/completions')
+      .to_return(body:, headers: { 'Content-Type' => 'application/json' }, status: 200)
+  end
+end
