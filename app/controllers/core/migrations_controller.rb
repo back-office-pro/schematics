@@ -3,7 +3,7 @@
 class MigrationsController < Schematics::ResourcesController
   private
 
-  def permitted_params = {
+  def permitted_params = super << {
     entities_attributes: [
       :id,
       :name,
@@ -15,7 +15,9 @@ class MigrationsController < Schematics::ResourcesController
     ]
   }
 
-  def resource_params = Core::MigrationMapper
-    .new
-    .call(super.to_h)
+  def resource_params
+    return super if super.key?(permitted_params.first)
+
+    Core::MigrationMapper.new.call(super.to_h)
+  end
 end
