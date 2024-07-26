@@ -2,6 +2,8 @@
 
 module Schematics
   class LoadSubscriptionJob < ApplicationJob
+    include Quietable
+
     def perform = ::Subscription
       .instance
       .load!

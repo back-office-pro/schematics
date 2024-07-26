@@ -19,6 +19,8 @@ RSpec.describe Schematics::MigrateSchemaJob do
     ]
   end
 
+  it { is_expected.to be_a(Schematics::Quietable) }
+
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later(migration) }
