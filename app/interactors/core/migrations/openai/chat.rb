@@ -17,9 +17,13 @@ module Core
 
         memoize def client = ::OpenAI::Client.new
 
-        memoize def response = client
-          .chat(parameters:)
-          .dig('choices', 0, 'message', 'content')
+        memoize def response
+          client
+            .chat(parameters:)
+            .dig('choices', 0, 'message', 'content')
+        rescue Faraday::Error
+          []
+        end
 
         def parameters = {
           model: 'gpt-4o',
