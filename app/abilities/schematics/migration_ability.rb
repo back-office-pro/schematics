@@ -4,7 +4,7 @@ module Schematics
   class MigrationAbility < ApplicationAbility
     def initialize
       super
-      cannot :import, ::Migration
+      cannot %i[import duplicate], ::Migration
       cannot :update, ::Migration.state_finished
       cannot :create, ::Migration if ::Migration.any? && !::Migration.last.state_finished?
       cannot :archive, ::Migration.current if ::Migration.current
