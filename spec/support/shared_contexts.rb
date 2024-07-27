@@ -172,8 +172,31 @@ RSpec.shared_context 'with openai stub' do
       choices: [
         {
           message: {
-            role: 'assitant',
-            content: [{ name: 'assembly' }].to_json
+            role: 'assistant',
+            content: [
+              {
+                id: '1fae2c0d-2d70-4cdc-b326-870a199129e7',
+                name: 'project',
+                attributes: [
+                  {
+                    id: '6eb8b9b3-c5a6-4729-a248-85d85f4cedbf3',
+                    name: 'name',
+                    type: 'string'
+                  }
+                ]
+              },
+              {
+                id: 'aeda009c-1c60-4695-b32d-584fdbc0a899',
+                name: 'material',
+                attributes: [
+                  {
+                    id: 'd081abf4-58f7-426a-8fc6-84006cc69d83',
+                    name: 'name',
+                    type: 'string'
+                  }
+                ]
+              }
+            ].to_json
           }
         }
       ]
