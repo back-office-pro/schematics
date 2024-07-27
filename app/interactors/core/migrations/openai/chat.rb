@@ -7,7 +7,7 @@ module Core
         include Interactor
 
         delegate :migration, to: :context, private: true
-        delegate :prompt, to: :migration, private: true
+        delegate :prompt, :data_before_type_cast, to: :migration, private: true
 
         def call
           context.data = JSON.parse(response, symbolize_names: true)
@@ -22,7 +22,7 @@ module Core
             .chat(parameters:)
             .dig('choices', 0, 'message', 'content')
         rescue Faraday::Error
-          []
+          JSON.parse(data_before_type_cast)
         end
 
         def parameters = {
