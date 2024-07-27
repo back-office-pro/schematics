@@ -962,7 +962,6 @@
         "name": "prompt",
         "type": "text",
         "options": {
-          "min": 100,
           "limit": 5000
         }
       },
