@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe MigrationsController, except: %i[update] do
+RSpec.describe MigrationsController, except: %i[create] do
   include Schematics::Specs::Request
 end
