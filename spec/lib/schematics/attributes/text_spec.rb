@@ -50,7 +50,10 @@ describe Schematics::Attributes::Text do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Translated,
-      Schematics::Options::Normalization
+      Schematics::Options::Normalization,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length
     )
   end
 

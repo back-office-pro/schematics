@@ -124,13 +124,13 @@ module Schematics
           end
         end
 
-        string_attributes.each do |attribute|
+        text_attributes.each do |attribute|
           it do
             is_expected
               .to validate_length_of(attribute.name.to_sym)
-                .tap { _1.is_at_least(attribute.options.min) if attribute.options.min }
-                .tap { _1.is_at_most(attribute.options.limit) if attribute.options.limit }
-                .tap { _1.is_equal_to(attribute.options.length) if attribute.options.length }
+                .tap { _1.is_at_least(attribute.min) if attribute.min }
+                .tap { _1.is_at_most(attribute.limit) if attribute.limit }
+                .tap { _1.is_equal_to(attribute.length) if attribute.length }
           end
         end
 
@@ -290,7 +290,7 @@ module Schematics
                  :enumerable_attributes,
                  :numerable_attributes,
                  :normalizable_attributes,
-                 :string_attributes,
+                 :text_attributes,
                  :url_attributes,
                  :decimal_attributes,
                  :integer_attributes,

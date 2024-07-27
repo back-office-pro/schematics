@@ -4,16 +4,7 @@ module Schematics
   module ResourceForm
     module Fields
       module String
-        class Component < Fields::Component
-          delegate :limit, :min, :length, :translated?, to: :options, private: true
-
-          def maxlength
-            length || limit
-          end
-
-          def minlength
-            length || min
-          end
+        class Component < Text::Component
         end
       end
     end

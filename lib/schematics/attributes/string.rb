@@ -4,30 +4,14 @@ module Schematics
   module Attributes
     class String < Text
       include Behaviours::Listable
-      delegate :limit, to: :options
 
-      def available_options = super.push(
-        Options::Unique,
-        Options::Min,
-        Options::Limit,
-        Options::Length
-      )
+      def available_options = super.push(Options::Unique)
 
       def database_type = 'string'
 
       def translatable_type = 'string'
 
-      def default = SecureRandom.base58(limit || 10)
-
       def icon = :align_justify
-
-      def validators = super.merge(
-        length: {
-          minimum: options.min,
-          maximum: options.limit,
-          is: options.length
-        }
-      )
     end
   end
 end

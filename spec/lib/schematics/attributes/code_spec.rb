@@ -53,6 +53,9 @@ describe Schematics::Attributes::Code do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Translated,
+      Schematics::Options::Min,
+      Schematics::Options::Limit,
+      Schematics::Options::Length,
       Schematics::Options::Language
     )
   end

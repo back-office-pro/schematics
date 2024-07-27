@@ -5,7 +5,15 @@ module Schematics
     module Fields
       module Text
         class Component < Fields::Component
-          delegate :translated?, to: :field
+          delegate :limit, :min, :length, :translated?, to: :field
+
+          def maxlength
+            length || limit
+          end
+
+          def minlength
+            length || min
+          end
 
           def data = { controller: 'autosize' }
         end

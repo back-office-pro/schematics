@@ -14,7 +14,15 @@ module Schematics
       include Behaviours::Translatable
       include Behaviours::Normalizable
 
-      def default = SecureRandom.base58
+      delegate :length, :limit, :min, to: :options
+
+      def available_options = super.push(
+        Options::Min,
+        Options::Limit,
+        Options::Length
+      )
+
+      def default = SecureRandom.base58(length || limit || min)
 
       def database_type = 'text'
 
@@ -29,6 +37,14 @@ module Schematics
       def format(value)
         value&.to_s
       end
+
+      def validators = super.merge(
+        length: {
+          minimum: min,
+          maximum: limit,
+          is: length
+        }
+      )
     end
   end
 end
