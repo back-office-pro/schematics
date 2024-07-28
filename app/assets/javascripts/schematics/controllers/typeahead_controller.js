@@ -7,10 +7,6 @@ export default class extends SearchBarController {
     this.inputTarget.form.requestSubmit()
   }
 
-  formatResults (results) {
-    return results
-  }
-
   selectItem ({ params: { value } }) {
     this.inputTarget.value = value
     this.onSearch()
