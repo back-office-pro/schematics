@@ -8,6 +8,7 @@ module Core
 
         delegate :migration, to: :context, private: true
         delegate :prompt, :data_before_type_cast, to: :migration, private: true
+        delegate :business_sector, to: ::Subscription, private: true
 
         def call
           context.data = JSON.parse(response, symbolize_names: true)
@@ -33,7 +34,7 @@ module Core
         }
 
         def content = <<~TEXT
-          Create a domain model for a construction web application.
+          Create a domain model for a #{business_sector} web application.
           Properties and entity names should be in snake case.
           Generate the domain model in JSON format.
           Entity name should be in name key.
