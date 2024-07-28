@@ -5,7 +5,7 @@ module Schematics
     include Quietable
 
     def perform(migration)
-      migration.update!(data: ::Migration::GATEWAY::Chat.call(migration:).data)
+      migration.update!(::Migration::GATEWAY::Chat.call(migration:).to_h.slice(:data))
     end
   end
 end
