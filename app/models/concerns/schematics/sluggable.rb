@@ -13,9 +13,11 @@ module Schematics
       autocomplete
       duplicate
       imports
+      comparisons
+      bulk_actions
       comments
-      replies
       emailings
+      replies
     ].freeze
 
     included do
