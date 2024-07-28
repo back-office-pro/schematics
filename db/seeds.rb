@@ -54,31 +54,38 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       }
     ]
   )
-  Chart.new(
-    kind: 'bar',
-    aggregate: 'average',
-    model: 'APIRequest',
-    x_field: 'APIRequest#endpoint',
-    y_field: 'APIRequest#response_time'
-  ).save(validate: false) # rubocop:disable Rails/SaveBang
-  Chart.create!(
+  Chart.create_without_validations!(
     [
-      { kind: 'column', aggregate: 'count', model: 'Meeting', x_field: 'Meeting#created_at/month' },
-      { kind: 'column', aggregate: 'count', model: 'Task', x_field: 'Task#created_at/month' }
+      {
+        kind: 'bar',
+        aggregate: 'average',
+        model: 'APIRequest',
+        x_field: 'APIRequest#endpoint',
+        y_field: 'APIRequest#response_time'
+      },
+      {
+        kind: 'column',
+        aggregate: 'count',
+        model: 'Meeting',
+        x_field: 'Meeting#created_at/month'
+      },
+      {
+        kind: 'column',
+        aggregate: 'count',
+        model: 'Task',
+        x_field: 'Task#created_at/month'
+      }
     ]
   )
-  DataCleaning
-    .new(model: 'Comparison', period: 'month', really_destroy: true)
-    .save(validate: false) # rubocop:disable Rails/SaveBang
-  %w[APIRequest Draft Search Session].each do |model|
-    DataCleaning
-      .new(model:, period: 'year', really_destroy: true)
-      .save(validate: false)
-  end
-  DataCleaning.create!(
+  DataCleaning.create_without_validations!(
     [
-      { model: 'APIKey', field: 'APIKey#expires_at', period: 'year' },
-      { model: 'Meeting', field: 'Meeting#end_at', period: 'year' },
+      { model: 'Comparison', period: 'month', really_destroy: true },
+      { model: 'APIRequest', period: 'year', really_destroy: true },
+      { model: 'Draft', period: 'year', really_destroy: true },
+      { model: 'Search', period: 'year', really_destroy: true },
+      { model: 'Session', period: 'year', really_destroy: true },
+      { model: 'APIKey', period: 'year', field: 'APIKey#expires_at' },
+      { model: 'Meeting', period: 'year', field: 'Meeting#end_at' },
       { model: 'Import', period: 'year' }
     ]
   )
