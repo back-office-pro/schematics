@@ -8,21 +8,21 @@ export default class extends ApplicationController {
   connect () {
     this.tribute = new Tribute(this.options)
     this.tribute.attach(this.element)
-    this.tribute.range.pasteHtml = this.pasteHtml.bind(this)
-    this.element.addEventListener('tribute-replaced', this.replaced.bind(this))
+    this.tribute.range.pasteHtml = this.#pasteHTML.bind(this)
+    this.element.addEventListener('tribute-replaced', this.#replaced.bind(this))
   }
 
   disconnect () {
     this.tribute.detach(this.element)
   }
 
-  replaced ({ detail: { item: { original: { _metadata: { sgid, descriptor, icon, url } } } } }) {
-    const attachment = new Trix.Attachment({ sgid, content: this.template(descriptor, icon, url) })
+  #replaced ({ detail: { item: { original: { _metadata: { sgid, descriptor, icon, url } } } } }) {
+    const attachment = new Trix.Attachment({ sgid, content: this.#template(descriptor, icon, url) })
     this.editor.insertAttachment(attachment)
     this.editor.insertString(' ')
   }
 
-  async fetchUsers (text, callback) {
+  async #fetchUsers (text, callback) {
     const searchParams = new URLSearchParams()
     searchParams.set('filter[full_name]', text)
     searchParams.set('metadata', true)
@@ -32,7 +32,7 @@ export default class extends ApplicationController {
     callback(users)
   }
 
-  async search (text, callback) {
+  async #search (text, callback) {
     const searchParams = new URLSearchParams()
     searchParams.set('q', text)
     const url = `${routes.searches}?${searchParams}`
@@ -41,13 +41,13 @@ export default class extends ApplicationController {
     callback(results)
   }
 
-  pasteHtml (_html, startPosition, endPosition) {
+  #pasteHTML (_html, startPosition, endPosition) {
     const position = this.editor.getPosition()
     this.editor.setSelectedRange([position - (endPosition - startPosition), position])
     this.editor.deleteInDirection('backward')
   }
 
-  template (descriptor, icon, url) {
+  #template (descriptor, icon, url) {
     return `<i class="fa fa-${icon} me-2"></i><a href="${url}">${descriptor}</a>`
   }
 
@@ -62,12 +62,12 @@ export default class extends ApplicationController {
         {
           trigger: '@',
           lookup: 'full_name',
-          values: this.debounce(this.fetchUsers)
+          values: this.debounce(this.#fetchUsers)
         },
         {
           trigger: '#',
           lookup: ({ _metadata }) => _metadata?.descriptor,
-          values: this.debounce(this.search)
+          values: this.debounce(this.#search)
         }
       ]
     }

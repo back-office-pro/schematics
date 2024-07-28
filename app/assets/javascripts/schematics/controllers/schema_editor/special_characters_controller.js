@@ -2,14 +2,14 @@ import ApplicationController from 'controllers/application_controller'
 
 export default class extends ApplicationController {
   connect () {
-    this.element.addEventListener('input', this.replaceSpecialCharacters)
+    this.element.addEventListener('input', this.#replaceSpecialCharacters)
   }
 
   disconnect () {
-    this.element.removeEventListener('input', this.replaceSpecialCharacters)
+    this.element.removeEventListener('input', this.#replaceSpecialCharacters)
   }
 
-  replaceSpecialCharacters () {
+  #replaceSpecialCharacters () {
     this.value = this
       .value
       .normalize('NFD')

@@ -6,7 +6,7 @@ export default class extends DropdownController {
     this.initialCollection = this.element.tomselect.options
   }
 
-  setCollection () {
+  #setCollection () {
     this.element.tomselect.clearOptions()
     this.element.tomselect.addOptions(this.initialCollection)
     this.element.tomselect.addOptions(this.collection)
@@ -14,7 +14,7 @@ export default class extends DropdownController {
 
   get options () {
     return Object.assign(super.options, {
-      onFocus: this.setCollection.bind(this),
+      onFocus: this.#setCollection.bind(this),
       sortField: 'value'
     })
   }

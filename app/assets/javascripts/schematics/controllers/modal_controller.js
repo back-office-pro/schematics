@@ -3,20 +3,20 @@ import ApplicationController from 'controllers/application_controller'
 export default class extends ApplicationController {
   initialize () {
     this.parentNode = this.modalElement.parentNode
-    this.element.addEventListener('show.bs.modal', this.appendToBody.bind(this))
-    this.element.addEventListener('hide.bs.modal', this.checkFormValidity.bind(this))
-    this.element.addEventListener('hidden.bs.modal', this.moveBackToParentNode.bind(this))
+    this.element.addEventListener('show.bs.modal', this.#appendToBody.bind(this))
+    this.element.addEventListener('hide.bs.modal', this.#checkFormValidity.bind(this))
+    this.element.addEventListener('hidden.bs.modal', this.#moveBackToParentNode.bind(this))
   }
 
-  appendToBody () {
+  #appendToBody () {
     document.body.appendChild(this.modalElement)
   }
 
-  moveBackToParentNode () {
+  #moveBackToParentNode () {
     this.parentNode.appendChild(this.modalElement)
   }
 
-  checkFormValidity (event) {
+  #checkFormValidity (event) {
     Array
       .from(this.modalElement.querySelectorAll('input, select'))
       .every(_ => _.reportValidity()) || event.preventDefault()

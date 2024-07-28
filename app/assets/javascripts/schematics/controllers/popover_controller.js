@@ -3,11 +3,11 @@ import { Popover } from 'bootstrap'
 
 export default class extends ApplicationController {
   connect () {
-    this.setTableAllowList()
+    this.#setTableAllowList()
     new Popover(this.element) // eslint-disable-line no-new
   }
 
-  setTableAllowList () {
+  #setTableAllowList () {
     Popover.Default.allowList.table = []
     Popover.Default.allowList.thead = []
     Popover.Default.allowList.tbody = []

@@ -12,24 +12,15 @@ export default class extends ApplicationController {
   }
 
   connect () {
-    this.formTarget.addEventListener('change', this.debounce(this.save))
+    this.formTarget.addEventListener('change', this.debounce(this.#save))
   }
 
   disconnect () {
-    this.formTarget.removeEventListener('change', this.debounce(this.save))
-  }
-
-  async save () {
-    this.fetchAPI(this.url, 'PUT', this.params)
-    this.hasRestoreButtonTarget && this.hideRestoreButton()
-    this.buttonTarget.classList.remove('d-none')
-    this.timeagoTarget.setAttribute('datetime', new Date().toJSON())
-    this.timeagoController.disconnect()
-    this.timeagoController.connect()
+    this.formTarget.removeEventListener('change', this.debounce(this.#save))
   }
 
   restore () {
-    this.hideRestoreButton()
+    this.#hideRestoreButton()
     Object
       .entries(this.draftValue.data)
       .forEach(([key, value]) =>
@@ -40,7 +31,16 @@ export default class extends ApplicationController {
       )
   }
 
-  hideRestoreButton () {
+  async #save () {
+    this.fetchAPI(this.url, 'PUT', this.params)
+    this.hasRestoreButtonTarget && this.#hideRestoreButton()
+    this.buttonTarget.classList.remove('d-none')
+    this.timeagoTarget.setAttribute('datetime', new Date().toJSON())
+    this.timeagoController.disconnect()
+    this.timeagoController.connect()
+  }
+
+  #hideRestoreButton () {
     this.restoreButtonTarget.classList.add('d-none')
   }
 

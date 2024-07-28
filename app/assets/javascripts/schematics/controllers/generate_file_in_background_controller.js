@@ -22,11 +22,11 @@ export default class extends ApplicationController {
     const loadingText = this.loadingTarget.textContent
     Dropdown.getInstance(this.buttonTarget)?.hide()
     this.buttonTarget.classList.add('disabled')
-    this.fetchAPI(this.url(allPages))
+    this.fetchAPI(this.#url(allPages))
     setInterval(() => { this.loadingTarget.textContent = `${loadingText} (${timer++})` }, 1000)
   }
 
-  url (allPages) {
+  #url (allPages) {
     const searchParams = new URLSearchParams(window.location.search)
     if (allPages) {
       searchParams.set('all_pages', true)

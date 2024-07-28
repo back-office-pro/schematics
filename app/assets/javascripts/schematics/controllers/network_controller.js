@@ -8,27 +8,27 @@ export default class extends ApplicationController {
   }
 
   initialize () {
-    this.sync()
+    this.#sync()
   }
 
   connect () {
-    window.addEventListener('online', this.toggle.bind(this))
-    window.addEventListener('online', this.sync.bind(this))
-    window.addEventListener('offline', this.toggle.bind(this))
+    window.addEventListener('online', this.#toggle.bind(this))
+    window.addEventListener('online', this.#sync.bind(this))
+    window.addEventListener('offline', this.#toggle.bind(this))
   }
 
   disconnect () {
-    window.removeEventListener('online', this.toggle.bind(this))
-    window.removeEventListener('online', this.sync.bind(this))
-    window.removeEventListener('offline', this.toggle.bind(this))
+    window.removeEventListener('online', this.#toggle.bind(this))
+    window.removeEventListener('online', this.#sync.bind(this))
+    window.removeEventListener('offline', this.#toggle.bind(this))
   }
 
-  toggle () {
+  #toggle () {
     this.onlineTarget.classList.toggle('d-none')
     this.offlineTarget.classList.toggle('d-none')
   }
 
-  sync () {
+  #sync () {
     for (const [key, value] of Object.entries({ ...localStorage })) {
       if (key.startsWith('sync:')) {
         this.fetchAPI(...JSON.parse(value))

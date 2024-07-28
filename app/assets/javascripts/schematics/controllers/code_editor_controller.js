@@ -16,11 +16,11 @@ export default class extends ApplicationController {
 
   initialize () {
     this.editor = editor.create(this.containerTarget, this.options)
-    this.editor.getModel().onDidChangeContent(this.setInputValue.bind(this))
-    this.setInputValue()
+    this.editor.getModel().onDidChangeContent(this.#setInputValue.bind(this))
+    this.#setInputValue()
   }
 
-  setInputValue () {
+  #setInputValue () {
     this.inputTarget.value = this.editor.getValue()
   }
 

@@ -7,16 +7,16 @@ export default class extends ApplicationController {
     return ['badge', 'icon']
   }
 
-  hasNotifications () {
-    return this.targets.has('badge') && this.badgeTarget.classList.contains('animate__zoomIn')
-  }
-
   readNotifications () {
-    if (this.hasNotifications()) {
+    if (this.#hasNotifications()) {
       this.fetchAPI(routes.dashboardReadNotifications, 'POST')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
       this.iconTarget.classList.remove('animate__animated')
     }
+  }
+
+  #hasNotifications () {
+    return this.targets.has('badge') && this.badgeTarget.classList.contains('animate__zoomIn')
   }
 }

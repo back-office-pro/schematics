@@ -3,7 +3,7 @@ import DropdownController from 'controllers/dropdown_controller'
 /* global google */
 
 export default class extends DropdownController {
-  async getPlacePredictions (input, callback) {
+  async #getPlacePredictions (input, callback) {
     try {
       const { predictions } = await this.service.getPlacePredictions({ input })
       callback(predictions)
@@ -13,7 +13,7 @@ export default class extends DropdownController {
     }
   }
 
-  isValid (input) {
+  #isValid (input) {
     return input.length >= 3
   }
 
@@ -27,8 +27,8 @@ export default class extends DropdownController {
       searchField: 'description',
       labelField: 'description',
       sortField: 'description',
-      shouldLoad: this.isValid,
-      load: this.getPlacePredictions.bind(this)
+      shouldLoad: this.#isValid,
+      load: this.#getPlacePredictions.bind(this)
     })
   }
 }

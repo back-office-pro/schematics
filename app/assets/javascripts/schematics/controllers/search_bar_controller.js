@@ -16,7 +16,7 @@ export default class extends ApplicationController {
   }
 
   onFocus () {
-    if (this.hasResults()) {
+    if (this.#hasResults()) {
       this.showResults()
       this.hideHistory()
     } else {
@@ -64,10 +64,6 @@ export default class extends ApplicationController {
     }
   }
 
-  hasResults () {
-    return this.resultsTarget.innerHTML !== ''
-  }
-
   clearResults () {
     this.resultsTarget.innerHTML = ''
   }
@@ -88,12 +84,8 @@ export default class extends ApplicationController {
     this.historyTarget.classList.remove('d-none')
   }
 
-  isValid () {
-    return this.inputTarget.value.length >= this.inputTarget.getAttribute('minlength')
-  }
-
   async search ({ key }) {
-    if (this.isValid()) {
+    if (this.#isValid()) {
       if (key === 'Enter') {
         this.hideHistory()
         this.hideResults()
@@ -111,6 +103,14 @@ export default class extends ApplicationController {
       this.clearResults()
       this.showHistory()
     }
+  }
+
+  #hasResults () {
+    return this.resultsTarget.innerHTML !== ''
+  }
+
+  #isValid () {
+    return this.inputTarget.value.length >= this.inputTarget.getAttribute('minlength')
   }
 
   get url () {

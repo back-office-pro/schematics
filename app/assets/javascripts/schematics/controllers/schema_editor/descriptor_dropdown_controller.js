@@ -1,14 +1,14 @@
 import DropdownController from 'controllers/dropdown_controller'
 
 export default class extends DropdownController {
-  setCollection () {
+  #setCollection () {
     this.element.tomselect.clearOptions()
     this.element.tomselect.addOptions(this.collection)
   }
 
   get options () {
     return Object.assign(super.options, {
-      onFocus: this.setCollection.bind(this),
+      onFocus: this.#setCollection.bind(this),
       sortField: 'value'
     })
   }

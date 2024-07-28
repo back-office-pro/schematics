@@ -15,7 +15,7 @@ export default class extends ApplicationController {
     }
   }
 
-  setDependentDropdownsOptions (value) {
+  #setDependentDropdownsOptions (value) {
     document
       .querySelectorAll(`[data-dropdown-depends-on="${this.element.name}"]`)
       .forEach(element => {
@@ -34,8 +34,8 @@ export default class extends ApplicationController {
     return {
       plugins: ['no_active_items', 'no_backspace_delete', this.removable && 'remove_button'],
       itemClass: this.multiple ? 'item bg-primary text-white' : 'item',
-      onInitialize: this.debounce(this.setDependentDropdownsOptions),
-      onChange: this.setDependentDropdownsOptions.bind(this),
+      onInitialize: this.debounce(this.#setDependentDropdownsOptions),
+      onChange: this.#setDependentDropdownsOptions.bind(this),
       maxOptions: null,
       create: this.createValue,
       createOnBlur: this.createValue,
