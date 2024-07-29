@@ -7,6 +7,7 @@ module Schematics
   module Attributes
     class Association < Attribute # rubocop:disable Metrics/ClassLength
       include Behaviours::Migratable
+      include Behaviours::Indexable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable

@@ -3,6 +3,7 @@
 module Schematics
   module Attributes
     class String < Text
+      include Behaviours::Indexable
       include Behaviours::Listable
 
       def available_options = super.push(Options::Unique)

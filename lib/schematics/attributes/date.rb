@@ -8,6 +8,7 @@ module Schematics
   module Attributes
     class Date < Attribute
       include Behaviours::Migratable
+      include Behaviours::Indexable
       include Behaviours::Listable
       include Behaviours::Renderable
       include Behaviours::Searchable

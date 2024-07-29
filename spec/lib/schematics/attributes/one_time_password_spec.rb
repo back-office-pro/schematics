@@ -20,6 +20,7 @@ describe Schematics::Attributes::OneTimePassword do
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Indexable) }
   it { is_expected.to be_encrypted }
 
   its(:database_type) { is_expected.to eq('string') }

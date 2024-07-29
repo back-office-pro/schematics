@@ -14,6 +14,7 @@ describe Schematics::Attributes::BelongsTo do
   it { is_expected.to be_a(Schematics::Behaviours::Optionable) }
   it { is_expected.to be_a(Schematics::Behaviours::Nameable) }
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Indexable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Listable) }

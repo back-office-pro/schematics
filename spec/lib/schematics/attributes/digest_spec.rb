@@ -15,10 +15,11 @@ describe Schematics::Attributes::Digest do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Searchable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Indexable) }
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('password_digest') }

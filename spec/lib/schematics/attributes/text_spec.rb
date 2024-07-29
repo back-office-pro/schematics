@@ -19,7 +19,6 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Migratable) }
   it { is_expected.to be_a(Schematics::Behaviours::Validatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
-  it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Multisearchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
@@ -27,6 +26,8 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
+  it { is_expected.not_to be_a(Schematics::Behaviours::Indexable) }
 
   its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }

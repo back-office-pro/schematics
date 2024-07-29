@@ -9,7 +9,7 @@ module Rails
         end
 
         def has_index? # rubocop:disable Naming/PredicateName
-          (schema_attribute in Schematics::Behaviours::Searchable) || has_uniq_index? || super
+          (schema_attribute in Schematics::Behaviours::Indexable) || has_uniq_index? || super
         end
 
         def has_uniq_index? # rubocop:disable Naming/PredicateName
