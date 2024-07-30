@@ -21,7 +21,7 @@ module Schematics
       validates :association_type,
                 inclusion: { in: :allowed_association_types },
                 unless: :polymorphic?
-      validate :cannot_be_circular
+      validate :cannot_be_circular, if: :inverse_entity
 
       def available_options = super
         .excluding(Options::Default)

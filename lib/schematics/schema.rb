@@ -88,12 +88,14 @@ module Schematics
     # :reek:FeatureEnvy
     def add_has_and_belongs_to_many_associations = entities
       .flat_map(&:has_and_belongs_to_many_associations)
+      .select(&:inverse_entity)
       .each { _1.inverse_entity.associations << _1.inverse_association }
 
     # :reek:FeatureEnvy
     def add_inverse_associations = entities
       .flat_map(&:association_attributes)
       .reject(&:polymorphic?)
+      .select(&:inverse_entity)
       .each { _1.inverse_entity.associations << _1.inverse_association }
 
     def add_inverse_polymorphic_associations
@@ -132,6 +134,7 @@ module Schematics
         entity
           .association_attributes
           .reject(&:polymorphic?)
+          .select(&:inverse_entity)
           .each(&method(:find_has_one_through_associations).curry.call(entity))
       end
     end
