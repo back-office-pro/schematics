@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'scss_lint', '0.60.0'
   spec.add_development_dependency 'simplecov', '0.22.0'
   spec.add_development_dependency 'slim_lint', '0.27.0'
-  spec.add_development_dependency 'zeitwerk', '2.6.16'
+  spec.add_development_dependency 'zeitwerk', '2.6.17'
   spec.add_dependency 'aasm', '5.5.0'
   spec.add_dependency 'active_link_to', '1.0.5'
   spec.add_dependency 'active_model_otp', '2.3.4'
