@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MigrationsController < Schematics::ResourcesController
+  rate_limit to: 5, within: 1.minute, only: %i[create update]
+
   private
 
   def permitted_params = super << {
