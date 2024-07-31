@@ -7,7 +7,7 @@ module Core
         include Interactor
 
         delegate :migration, to: :context, private: true
-        delegate :prompt, :data_before_type_cast, to: :migration, private: true
+        delegate :prompt, to: :migration, private: true
         delegate :business_sector, to: ::Subscription, private: true
         delegate :config_for, to: ::Schematics::Engine, private: true
 
@@ -19,15 +19,11 @@ module Core
 
         memoize def client = ::OpenAI::Client.new
 
-        memoize def responses
-          client
-            .chat(parameters:)
-            .dig('choices', 0, 'message', 'tool_calls')
-            .map { _1.dig('function', 'arguments') }
-            .map { JSON.parse(_1, symbolize_names: true) }
-        rescue Faraday::Error
-          JSON.parse(data_before_type_cast)
-        end
+        memoize def responses = client
+          .chat(parameters:)
+          .dig('choices', 0, 'message', 'tool_calls')
+          .map { _1.dig('function', 'arguments') }
+          .map { JSON.parse(_1, symbolize_names: true) }
 
         def parameters = {
           model: 'gpt-4o',
