@@ -23,7 +23,7 @@ module Schematics
             @form = form
             @constant = constant
             @options = options
-            @slug = slug || @constant.to_s.demodulize.underscore.dasherize
+            @slug = slug || @constant.type.dasherize
           end
 
           def attribute = @constant.new(

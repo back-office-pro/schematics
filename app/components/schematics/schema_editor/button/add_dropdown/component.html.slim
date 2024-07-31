@@ -15,7 +15,7 @@
         - collection.each do |constant|
           .dropdown-item {
             data-action='click->nested-form#add:prevent'
-            data-nested-form-template-id-param="schema-editor-attribute-#{constant.to_s.demodulize.underscore.dasherize}"
+            data-nested-form-template-id-param="schema-editor-attribute-#{constant.type.dasherize}"
             data-nested-form-target-id-param="fields-#{index}"
             data-nested-form-index-param=index
             role='button'
