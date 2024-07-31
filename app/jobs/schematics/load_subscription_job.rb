@@ -4,6 +4,8 @@ module Schematics
   class LoadSubscriptionJob < ApplicationJob
     include Quietable
 
+    retry_on Stripe::StripeError, wait: :polynomially_longer, attempts: 5
+
     def perform = ::Subscription
       .instance
       .load!

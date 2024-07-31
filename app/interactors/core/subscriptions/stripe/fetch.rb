@@ -30,8 +30,6 @@ module Core
         def call
           context.id = subscription_id
           context.data = data
-        rescue ::Stripe::StripeError
-          context.data = {}
         end
 
         private
