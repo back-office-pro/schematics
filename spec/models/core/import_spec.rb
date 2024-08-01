@@ -21,10 +21,10 @@ RSpec.describe Import do
     context 'when there is no import error' do
       let(:errors) { nil }
 
-      it 'changes import state from in_progress to finished' do
+      it 'changes import state from pending to finished' do
         expect { finalize! }
           .to change(record, :state)
-          .from('in_progress')
+          .from('pending')
           .to('finished')
       end
     end
@@ -32,10 +32,10 @@ RSpec.describe Import do
     context 'when there are import errors' do
       let(:errors) { { 1 => 'Name already taken' } }
 
-      it 'changes import state from in_progress to error' do
+      it 'changes import state from pending to error' do
         expect { finalize! }
           .to change(record, :state)
-          .from('in_progress')
+          .from('pending')
           .to('error')
       end
 
