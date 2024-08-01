@@ -24,6 +24,13 @@ RSpec.describe Schematics::MigrationAbility do
     it { is_expected.not_to be_able_to(:archive, migration) }
   end
 
+  context 'when the migration is rollbacking' do
+    let(:state) { Migration::STATE_STATE_ROLLBACKING }
+
+    it { is_expected.not_to be_able_to(:update, migration) }
+    it { is_expected.not_to be_able_to(:archive, migration) }
+  end
+
   context 'when the migration is finished' do
     let(:state) { Migration::STATE_STATE_FINISHED }
 
