@@ -77,10 +77,8 @@ module Schematics
             end
           end
 
-        searchable_attributes
+        indexable_attributes
           .grep_v(Attributes::Association)
-          .grep_v(Attributes::Attachment)
-          .grep_v(Attributes::RichText)
           .each do |attribute|
             it { is_expected.to have_db_index(attribute.name.to_sym) }
           end
@@ -285,7 +283,7 @@ module Schematics
                  :triggers,
                  :events,
                  :migratable_attributes,
-                 :searchable_attributes,
+                 :indexable_attributes,
                  :fillable_attributes,
                  :enumerable_attributes,
                  :numerable_attributes,
