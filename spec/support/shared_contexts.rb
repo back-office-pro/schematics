@@ -36,7 +36,7 @@ end
 RSpec.shared_context 'with import' do
   include_context 'with user'
 
-  let(:import) { Import.create!(file:, model:, author: user) }
+  let(:import) { Import.create!(file:, model:, author: user).reload }
   let(:model) { 'User' }
   let(:file) do
     ActiveStorage::Blob.create_and_upload!(
