@@ -3,24 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::CleanDatabaseBackupsJob do
-  let(:created_at) { described_class::DELAY.ago }
   let(:checksum) { 0 }
   let(:byte_size) { 0 }
   let(:filename) { 'db.dump' }
-  let(:today_backup) do
-    ActiveStorage::Blob.create!(
-      key: 'backups/1',
-      filename:,
-      checksum:,
-      byte_size:,
-      created_at: Time.current
-    )
-  end
   let(:backups) do
     ActiveStorage::Blob.create!(
       [
-        { key: 'backups/2', filename:, checksum:, byte_size:, created_at: },
-        { key: 'backups/3', filename:, checksum:, byte_size:, created_at: }
+        { key: 'backups/1', filename:, checksum:, byte_size: },
+        { key: 'backups/2', filename:, checksum:, byte_size: },
+        { key: 'backups/3', filename:, checksum:, byte_size: },
+        { key: 'backups/4', filename:, checksum:, byte_size: },
+        { key: 'backups/5', filename:, checksum:, byte_size: },
+        { key: 'backups/6', filename:, checksum:, byte_size: },
+        { key: 'backups/7', filename:, checksum:, byte_size: },
+        { key: 'backups/8', filename:, checksum:, byte_size: }
       ]
     )
   end
@@ -36,21 +32,10 @@ RSpec.describe Schematics::CleanDatabaseBackupsJob do
   describe '#perform_now' do
     before { backups }
 
-    context 'when there is no current day backup' do
-      it 'does not destroy backups' do
-        expect { described_class.perform_now }
-          .not_to change(ActiveStorage::Blob.with_deleted, :count)
-      end
-    end
-
-    context 'when there is a current day backup' do
-      before { today_backup }
-
-      it 'destroys backups' do
-        expect { described_class.perform_now }
-          .to change(ActiveStorage::Blob.with_deleted, :count)
-          .by(-2)
-      end
+    it 'destroys the 8th backup' do
+      expect { described_class.perform_now }
+        .to change(ActiveStorage::Blob.with_deleted, :count)
+        .by(-1)
     end
   end
 end

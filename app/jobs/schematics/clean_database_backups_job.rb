@@ -2,17 +2,14 @@
 
 module Schematics
   class CleanDatabaseBackupsJob < ApplicationJob
-    DELAY = 30.days.freeze
-
+    OFFSET = 7
     queue_as :cleanups
-    delegate :exists?, to: ::ActiveStorage::Blob, private: true
 
-    def perform
-      return unless exists?(filename: 'db.dump', created_at: Date.current.all_day)
-
-      ::ActiveStorage::Blob
-        .preload_all
-        .delete_by(filename: 'db.dump', created_at: ..DELAY.ago)
-    end
+    def perform = ::ActiveStorage::Blob
+      .preload_all
+      .where(filename: 'db.dump')
+      .order(created_at: :desc)
+      .offset(OFFSET)
+      .delete_all
   end
 end
