@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe Migration do
   include Schematics::Specs::Model
 
+  it { is_expected.not_to be_processing }
+
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
   its(:commit_message) { is_expected.to eq('Migration v1.5 (core v1.0.0)') }
 

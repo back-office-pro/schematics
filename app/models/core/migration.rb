@@ -60,6 +60,10 @@ class Migration < Schematics::ApplicationRecord
     state_finished!
   end
 
+  def processing?
+    state_in_progress? || state_rollbacking?
+  end
+
   def to_yaml = { one: { state: STATE_STATE_FINISHED.to_s, version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
