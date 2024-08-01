@@ -2,6 +2,8 @@
 
 # :reek:MissingSafeMethod
 class Migration < Schematics::ApplicationRecord
+  GATEWAY = ::Core::Migrations::OpenAI
+
   serialize :data, coder: Schematics::Schema
   attribute :data, default: -> { current_data || [] }
   validates_associated :data
@@ -15,6 +17,8 @@ class Migration < Schematics::ApplicationRecord
            :old_and_changed_entities,
            to: :migrator,
            prefix: true
+
+  after_save_commit :prompt_data, if: :prompt_previously_changed?
 
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
@@ -69,6 +73,10 @@ class Migration < Schematics::ApplicationRecord
     .to_yaml
 
   private
+
+  def prompt_data
+    Schematics::GenerateSchemaJob.perform_later(self)
+  end
 
   def quota_entities_cannot_be_exceeded
     return unless data

@@ -165,3 +165,54 @@ RSpec.shared_context 'with password pwned stub' do
     stub_request(:get, %r{https://api.pwnedpasswords.com}).to_return(status: 200)
   end
 end
+
+RSpec.shared_context 'with openai stub' do
+  let(:body) do
+    {
+      choices: [
+        {
+          message: {
+            role: 'assistant',
+            tool_calls: [
+              {
+                function: {
+                  arguments: {
+                    id: '1fae2c0d-2d70-4cdc-b326-870a199129e7',
+                    name: 'project',
+                    attributes: [
+                      {
+                        id: '6eb8b9b3-c5a6-4729-a248-85d85f4cedbf3',
+                        name: 'name',
+                        type: 'string'
+                      }
+                    ]
+                  }.to_json
+                }
+              },
+              {
+                function: {
+                  arguments: {
+                    id: 'aeda009c-1c60-4695-b32d-584fdbc0a899',
+                    name: 'material',
+                    attributes: [
+                      {
+                        id: 'd081abf4-58f7-426a-8fc6-84006cc69d83',
+                        name: 'name',
+                        type: 'string'
+                      }
+                    ]
+                  }.to_json
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }.to_json
+  end
+
+  before do
+    stub_request(:post, 'https://api.openai.com/v1/chat/completions')
+      .to_return(body:, headers: { 'Content-Type' => 'application/json' }, status: 200)
+  end
+end

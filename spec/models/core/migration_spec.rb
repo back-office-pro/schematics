@@ -27,6 +27,13 @@ RSpec.describe Migration do
       .on_queue('migrations')
   end
 
+  it 'enqueues a generate schema job after save' do
+    expect { record.save! }
+      .to have_enqueued_job(Schematics::GenerateSchemaJob)
+      .with(record)
+      .on_queue('default')
+  end
+
   describe '#finalize!' do
     subject(:finalize!) { record.finalize!(failure) }
 

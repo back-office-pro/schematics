@@ -7,7 +7,9 @@ module Schematics
       delegate :collection, to: Schematics::Attributes::Attribute, prefix: :attributes
       option :resource
 
-      def data = { 'auto-save-target': 'form' }
+      def data = { 'auto-save-target': 'form', 'bs-parent': '#selector' }
+
+      def css_classes = %w[schema-editor collapse show]
 
       def schema = resource.data
 

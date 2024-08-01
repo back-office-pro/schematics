@@ -5,6 +5,7 @@ en:
       migration:
         data: Data
         progress: Progress
+        prompt: Application description
         state: State
         version: Version
     enums:
