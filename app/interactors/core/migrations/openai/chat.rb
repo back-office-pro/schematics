@@ -35,7 +35,7 @@ module Core
               type: 'function',
               function: {
                 name: 'domainModel',
-                parameters: config_for(:json_schema)
+                parameters: JSON.parse(json_schema, symbolize_names: true)
               }
             }
           ],
@@ -47,6 +47,14 @@ module Core
             prompt && { role: 'user', content: prompt }
           ].compact
         }
+
+        def json_schema = ::ERB
+          .new(File.read(json_schema_filepath))
+          .result
+
+        def json_schema_filepath
+          File.expand_path('../../../../../lib/schema.json.erb', __dir__)
+        end
       end
     end
   end
