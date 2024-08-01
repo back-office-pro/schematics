@@ -28,6 +28,8 @@ module Core
         def parameters = {
           model: 'gpt-4o',
           temperature: 1,
+          frequency_penalty: 0,
+          presence_penalty: 0,
           tools: [
             {
               type: 'function',
