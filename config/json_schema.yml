@@ -24,6 +24,19 @@ properties:
         type: string
         enum: <%= Schematics::Options::Icon.collection.map(&:to_s) %>
         description: An icon which represents the entity in snake case
+  associations:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - has_and_belongs_to_many
+          description: The association type in snake case
+        name:
+          type: string
+          description: The has and belongs to many association name in snake case
   attributes:
     type: array
     items:
@@ -49,12 +62,20 @@ properties:
           type: string
           enum: <%= Schematics::Attributes::Attribute.collection.map(&:type) %>
           description: The property type in snake case
+        options:
+          type: object
+          properties:
+            required:
+              type: boolean
+              description: Is the property required or not
       required:
         - id
         - name
         - type
+        - options
 required:
   - id
   - name
   - options
+  - associations
   - attributes
