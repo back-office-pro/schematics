@@ -14,6 +14,7 @@ it:
         state:
           broadcasted: Trasmesso
           error: Errore
+          in_progress: In corso
           pending: In sospeso
     events:
       webhook_request:

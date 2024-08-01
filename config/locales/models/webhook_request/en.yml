@@ -14,6 +14,7 @@ en:
         state:
           broadcasted: Broadcasted
           error: Error
+          in_progress: In progress
           pending: Pending
     events:
       webhook_request:

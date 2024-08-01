@@ -15,6 +15,7 @@ it:
           error: Errore
           finished: Finita
           in_progress: In corso
+          pending: In sospeso
     models:
       import:
         gender: female

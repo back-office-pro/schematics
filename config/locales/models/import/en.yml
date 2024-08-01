@@ -15,6 +15,7 @@ en:
           error: Error
           finished: Finished
           in_progress: In progress
+          pending: Pending
     models:
       import:
         gender: male

@@ -572,8 +572,9 @@
         "options": {
           "required": true,
           "readonly": true,
-          "default": "in_progress",
+          "default": "pending",
           "values": [
+            "pending",
             "in_progress",
             "finished",
             "error"
@@ -1742,6 +1743,7 @@
           "default": "pending",
           "values": [
             "pending",
+            "in_progress",
             "broadcasted",
             "error"
           ],
