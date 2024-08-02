@@ -9,7 +9,6 @@ module Core
         delegate :migration, to: :context, private: true
         delegate :prompt, to: :migration, private: true
         delegate :business_sector, to: ::Subscription, private: true
-        delegate :config_for, to: ::Schematics::Engine, private: true
 
         def call
           context.data = responses
