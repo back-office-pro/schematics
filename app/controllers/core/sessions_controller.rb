@@ -6,7 +6,7 @@ class SessionsController < Schematics::ResourcesController
   allow_unauthenticated_access only: %i[new create]
   skip_before_action :set_draft, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
 
-  rate_limit to: 5, within: 1.minute, only: :create
+  rate_limit to: 5, within: 20.seconds, only: :create
 
   layout 'schematics/jumbotron', only: %i[new create]
 
