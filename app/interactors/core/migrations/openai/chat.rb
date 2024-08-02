@@ -9,6 +9,8 @@ module Core
         delegate :migration, to: :context, private: true
         delegate :prompt, to: :migration, private: true
         delegate :business_sector, to: ::Subscription, private: true
+        delegate :root, to: ::Schematics::Engine, private: true
+        delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
 
         def call
           context.data = responses
@@ -34,7 +36,7 @@ module Core
               type: 'function',
               function: {
                 name: 'domainModel',
-                parameters: JSON.parse(json_schema, symbolize_names: true)
+                parameters: parse(root.join('lib', 'schema.yml'))
               }
             }
           ],
@@ -46,14 +48,6 @@ module Core
             prompt && { role: 'user', content: prompt }
           ].compact
         }
-
-        def json_schema = ::ERB
-          .new(File.read(json_schema_filepath))
-          .result
-
-        def json_schema_filepath
-          File.expand_path('../../../../../lib/schema.json.erb', __dir__)
-        end
       end
     end
   end
