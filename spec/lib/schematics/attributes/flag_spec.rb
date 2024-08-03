@@ -116,6 +116,16 @@ describe Schematics::Attributes::Flag do
     end
   end
 
+  context 'when there is no value' do
+    let(:options) { {} }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        enummer states: [], _prefix: true
+      RUBY
+    end
+  end
+
   describe '#format' do
     subject { attribute.format(values) }
 
