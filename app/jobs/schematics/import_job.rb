@@ -6,7 +6,7 @@ module Schematics
     queue_as :imports
 
     def perform(import)
-      return if import.state_in_progress?
+      return unless import.state_pending?
 
       import.state_in_progress!
       import.finalize!(Core::Imports::ImportData.call(import:).errors)
