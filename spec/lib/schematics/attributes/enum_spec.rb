@@ -130,6 +130,16 @@ describe Schematics::Attributes::Enum do
     end
   end
 
+  context 'when there is no value' do
+    let(:options) { {} }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        enum :state, prefix: true
+      RUBY
+    end
+  end
+
   describe '#format' do
     subject { attribute.format(value) }
 

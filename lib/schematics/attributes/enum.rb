@@ -34,13 +34,19 @@ module Schematics
       def icon = :list_ol
 
       def to_str
-        if options.default
-          <<~RUBY
-            enum :#{name}, #{to_h}, prefix: true, default: #{options.default.to_json}
-          RUBY
+        if values.any?
+          if options.default
+            <<~RUBY
+              enum :#{name}, #{to_h}, prefix: true, default: #{options.default.to_json}
+            RUBY
+          else
+            <<~RUBY
+              enum :#{name}, #{to_h}, prefix: true
+            RUBY
+          end
         else
           <<~RUBY
-            enum :#{name}, #{to_h}, prefix: true
+            enum :#{name}, prefix: true
           RUBY
         end
       end
