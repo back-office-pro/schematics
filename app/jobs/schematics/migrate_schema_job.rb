@@ -7,8 +7,9 @@ module Schematics
 
     def perform(migration = ::Migration.scheduled)
       return unless migration
-      return if migration.processing?
+      return if migration.state_generating?
 
+      migration.state_in_progress! unless migration.state_rollbacking?
       migration.finalize!(Core::Migrations::Migrate.call(migration:).failure?)
     end
   end
