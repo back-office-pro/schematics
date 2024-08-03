@@ -20,6 +20,8 @@ class Migration < Schematics::ApplicationRecord
 
   after_save_commit :prompt_data, if: :prompt_previously_changed?
 
+  scope :processing, ::Core::Migrations::ProcessingQuery
+
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
     delegate :business_sector, to: Subscription, private: true
@@ -59,13 +61,13 @@ class Migration < Schematics::ApplicationRecord
   # :reek:ControlParameter
   def finalize!(failure)
     return state_error! if failure
-    return update!(state: STATE_STATE_IN_PROGRESS, progress: 0) if state_rollbacking?
+    return update!(state: STATE_STATE_PENDING, progress: 0) if state_rollbacking?
 
     state_finished!
   end
 
   def processing?
-    state_in_progress? || state_rollbacking?
+    state_in_progress? || state_rollbacking? || state_generating?
   end
 
   def to_yaml = { one: { state: STATE_STATE_FINISHED.to_s, version:, data: data.as_json } }
