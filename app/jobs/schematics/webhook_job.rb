@@ -9,6 +9,7 @@ module Schematics
 
     def perform(webhook_request)
       return if webhook_request.state_in_progress?
+      return if webhook_request.state_broadcasted?
 
       webhook_request.state_in_progress!
       Core::WebhookRequests::Fetch.call(webhook_request:)
