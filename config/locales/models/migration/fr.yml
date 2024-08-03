@@ -13,6 +13,7 @@ fr:
         state:
           error: Erreur
           finished: Terminée
+          generating: Génération en cours
           in_progress: En cours
           pending: En attente
           rollbacking: Retour en arrière en cours

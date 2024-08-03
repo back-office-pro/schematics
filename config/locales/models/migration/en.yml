@@ -13,6 +13,7 @@ en:
         state:
           error: Error
           finished: Finished
+          generating: Generating
           in_progress: In progress
           pending: Pending
           rollbacking: Rollbacking

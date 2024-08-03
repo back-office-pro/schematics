@@ -987,6 +987,7 @@
             "in_progress",
             "finished",
             "rollbacking",
+            "generating",
             "error"
           ],
           "events": [
