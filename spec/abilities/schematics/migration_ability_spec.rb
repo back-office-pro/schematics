@@ -31,6 +31,13 @@ RSpec.describe Schematics::MigrationAbility do
     it { is_expected.not_to be_able_to(:archive, migration) }
   end
 
+  context 'when the migration is generating' do
+    let(:state) { Migration::STATE_STATE_GENERATING }
+
+    it { is_expected.not_to be_able_to(:update, migration) }
+    it { is_expected.not_to be_able_to(:archive, migration) }
+  end
+
   context 'when the migration is finished' do
     let(:state) { Migration::STATE_STATE_FINISHED }
 
