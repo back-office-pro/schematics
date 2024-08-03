@@ -3,7 +3,7 @@
 module Schematics
   class EmailingMailerPreview < ActionMailer::Preview
     def dispatch
-      EmailingMailer.dispatch(::Emailing.first, ::User.first)
+      EmailingMailer.dispatch(::Emailing.take, ::User.take)
     end
   end
 end
