@@ -14,7 +14,7 @@ module Schematics
 
       COLORS = %i[primary secondary success danger warning].freeze
 
-      validates :from, :to, inclusion: { in: :values }
+      validates :from, :to, presence: true, inclusion: { in: :values }
       validates :name, uniqueness: { scope: %i[state_machine events] }
       validates :icon, inclusion: { in: Icon.collection }
       validates :color, inclusion: { in: COLORS }
