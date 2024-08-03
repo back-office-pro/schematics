@@ -19,7 +19,7 @@ module Schematics
 
       def to_str = super + <<~RUBY.squeeze("\n")
         aasm :#{name}, column: :#{name}, enum: true, namespace: :#{name}, create_scopes: false, no_direct_assignment: #{!direct_assignment} do
-          state :#{values.first}, initial: true
+        #{initial_state_to_str}
         #{states_to_str}
         #{events_to_str}
         end
@@ -35,6 +35,10 @@ module Schematics
       )
 
       private
+
+      def initial_state_to_str
+        "state :#{values.first}, initial: true".indent(2) if values.any?
+      end
 
       def states_to_str = values
         .drop(1)

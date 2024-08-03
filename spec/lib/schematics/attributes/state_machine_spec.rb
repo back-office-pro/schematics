@@ -128,6 +128,18 @@ describe Schematics::Attributes::StateMachine do
     end
   end
 
+  context 'when there is no value' do
+    let(:options) { {} }
+
+    its(:to_str) do
+      is_expected.to eq <<~RUBY
+        enum :state, prefix: true
+        aasm :state, column: :state, enum: true, namespace: :state, create_scopes: false, no_direct_assignment: true do
+        end
+      RUBY
+    end
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
