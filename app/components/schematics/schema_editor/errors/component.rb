@@ -8,7 +8,7 @@ module Schematics
 
         def messages = errors
           .full_messages
-          .join(', ')
+          .to_sentence
 
         def render?
           errors.any?
