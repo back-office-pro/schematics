@@ -7,7 +7,7 @@ module Core
         include Interactor
 
         delegate :migration, to: :context, private: true
-        delegate :prompt, to: :migration, private: true
+        delegate :prompt, to: :migration, allow_nil: true, private: true
         delegate :business_sector, to: ::Subscription, private: true
         delegate :root, to: ::Schematics::Engine, private: true
         delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
