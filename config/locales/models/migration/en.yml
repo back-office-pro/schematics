@@ -11,6 +11,7 @@ en:
     enums:
       migration:
         state:
+          editing: Edit mode
           error: Error
           finished: Finished
           generating: Generating

@@ -31,7 +31,7 @@ RSpec.describe Migration do
     expect { record.save! }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
       .with(record)
-      .on_queue('default')
+      .on_queue('migrations')
   end
 
   describe '#finalize!' do
@@ -40,10 +40,10 @@ RSpec.describe Migration do
     context 'when migration has succeeded' do
       let(:failure) { false }
 
-      it 'changes migration state from pending to finished' do
+      it 'changes migration state from editing to finished' do
         expect { finalize! }
           .to change(record, :state)
-          .from(described_class::STATE_STATE_PENDING.to_s)
+          .from(described_class::STATE_STATE_EDITING.to_s)
           .to(described_class::STATE_STATE_FINISHED.to_s)
       end
     end
@@ -51,10 +51,10 @@ RSpec.describe Migration do
     context 'when migration has failed' do
       let(:failure) { true }
 
-      it 'changes migration state from pending to error' do
+      it 'changes migration state from editing to error' do
         expect { finalize! }
           .to change(record, :state)
-          .from(described_class::STATE_STATE_PENDING.to_s)
+          .from(described_class::STATE_STATE_EDITING.to_s)
           .to(described_class::STATE_STATE_ERROR.to_s)
       end
     end

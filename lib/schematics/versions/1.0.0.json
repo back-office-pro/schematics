@@ -980,8 +980,9 @@
         "options": {
           "required": true,
           "direct_assignment": true,
-          "default": "pending",
+          "default": "editing",
           "values": [
+            "editing",
             "pending",
             "scheduled",
             "in_progress",
@@ -996,10 +997,10 @@
               "name": "migrate",
               "icon": "arrow_trend_up",
               "from": [
-                "pending",
+                "editing",
                 "error"
               ],
-              "to": "in_progress"
+              "to": "pending"
             },
             {
               "id": "673bb78c-fbec-4180-942c-9763a31977f3",
@@ -1007,7 +1008,7 @@
               "icon": "clock",
               "color": "secondary",
               "from": [
-                "pending",
+                "editing",
                 "error"
               ],
               "to": "scheduled"
@@ -1018,7 +1019,7 @@
               "icon": "ban",
               "color": "secondary",
               "from": "scheduled",
-              "to": "pending"
+              "to": "editing"
             },
             {
               "id": "07ad0c5f-790a-4a7e-bf90-92968d3659d3",

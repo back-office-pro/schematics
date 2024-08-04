@@ -3,12 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe Core::Migrations::ProcessingQuery do
-  let(:first_migration) { Migration.create!(state: Migration::STATE_STATE_IN_PROGRESS) }
-  let(:second_migration) { Migration.create!(state: Migration::STATE_STATE_ROLLBACKING) }
-  let(:third_migration) { Migration.create!(state: Migration::STATE_STATE_GENERATING) }
-  let(:fourth_migration) { Migration.create!(state: Migration::STATE_STATE_FINISHED) }
+  let(:first_migration) { Migration.create!(state: Migration::STATE_STATE_PENDING) }
+  let(:second_migration) { Migration.create!(state: Migration::STATE_STATE_IN_PROGRESS) }
+  let(:third_migration) { Migration.create!(state: Migration::STATE_STATE_ROLLBACKING) }
+  let(:fourth_migration) { Migration.create!(state: Migration::STATE_STATE_GENERATING) }
+  let(:fifth_migration) { Migration.create!(state: Migration::STATE_STATE_FINISHED) }
 
-  before { [first_migration, second_migration, third_migration, fourth_migration] }
+  before do
+    first_migration
+    second_migration
+    third_migration
+    fourth_migration
+    fifth_migration
+  end
 
-  its(:call) { is_expected.to contain_exactly(first_migration, second_migration, third_migration) }
+  its(:call) do # rubocop:disable RSpec/ExampleLength
+    is_expected.to contain_exactly(
+      first_migration,
+      second_migration,
+      third_migration,
+      fourth_migration
+    )
+  end
 end

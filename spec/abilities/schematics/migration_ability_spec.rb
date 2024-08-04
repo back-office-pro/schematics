@@ -6,7 +6,7 @@ require 'cancan/matchers'
 RSpec.describe Schematics::MigrationAbility do
   subject(:ability) { described_class.new }
 
-  let(:state) { Migration::STATE_STATE_PENDING }
+  let(:state) { Migration::STATE_STATE_EDITING }
   let(:migration) { Migration.new(state:) }
 
   it { is_expected.not_to be_able_to(:import, Migration) }

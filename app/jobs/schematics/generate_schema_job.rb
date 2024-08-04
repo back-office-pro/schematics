@@ -8,7 +8,7 @@ module Schematics
     retry_on Faraday::Error, wait: :polynomially_longer, attempts: 5
     retry_on ActiveRecord::RecordInvalid, wait: 10.seconds, attempts: 5
 
-    after_perform { _1.arguments.first.state_pending! }
+    after_perform { _1.arguments.first.state_editing! }
 
     def perform(migration)
       return if migration.processing?
