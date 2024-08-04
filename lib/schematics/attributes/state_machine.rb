@@ -19,7 +19,6 @@ module Schematics
 
       def to_str = super + <<~RUBY.squeeze("\n")
         aasm :#{name}, column: :#{name}, enum: true, namespace: :#{name}, create_scopes: false, no_direct_assignment: #{!direct_assignment} do
-        #{initial_state_to_str}
         #{states_to_str}
         #{events_to_str}
         end
@@ -36,13 +35,11 @@ module Schematics
 
       private
 
-      def initial_state_to_str
-        "state :#{values.first}, initial: true".indent(2) if values.any?
-      end
-
       def states_to_str = values
-        .drop(1)
-        .map { "state :#{_1}".indent(2) }
+        .map
+        .with_index { |value, index| ["state :#{value}", ('initial: true' if index.zero?)] }
+        .map(&:compact)
+        .map { _1.join(', ').indent(2) }
         .join("\n")
 
       def events_to_str = events
