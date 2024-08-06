@@ -8,6 +8,9 @@ RSpec.describe User do
   it { is_expected.not_to be_admin }
   it { is_expected.not_to be_online }
 
+  its(:preferences_charts) { is_expected.to be_empty }
+  its(:preferences_metrics) { is_expected.to be_empty }
+
   it 'sends a mail after create' do
     expect { record.save! }
       .to have_enqueued_mail(Schematics::UserMailer, :new_account)

@@ -17,12 +17,6 @@ module Schematics
                 :content_security_policy_nonce,
                 :content_security_policy?
 
-    def preferences(key, default = nil)
-      current_user
-        .preferences
-        .fetch(key.to_s, default)
-    end
-
     def to_html = ApplicationController
       .new
       .view_context

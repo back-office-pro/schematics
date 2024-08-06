@@ -3,9 +3,12 @@
 module Schematics
   module DocumentElement
     class Component < ApplicationComponent
+      delegate :preferences_theme, to: :current_user, private: true
       delegate :locale, to: ::I18n
 
-      def theme = preferences(:theme, preferred_theme)
+      def theme
+        preferences_theme || preferred_theme
+      end
 
       private
 

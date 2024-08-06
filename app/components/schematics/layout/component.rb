@@ -3,12 +3,10 @@
 module Schematics
   module Layout
     class Component < ApplicationComponent
-      def css_class
-        'toggled' if toggled?
-      end
+      delegate :preferences_sidebar_toggled, to: :current_user, private: true
 
-      def toggled?
-        preferences(:sidebar_toggled, false)
+      def css_class
+        'toggled' if preferences_sidebar_toggled
       end
     end
   end

@@ -4,6 +4,7 @@ module Schematics
   module Sidebar
     class Component < ApplicationComponent
       delegate :company_name, to: ::Configuration
+      delegate :preferences_sidebar_toggled, to: :current_user
 
       def model_classes = ::Tenant
         .schema
@@ -13,10 +14,6 @@ module Schematics
         .push(::Import, ::Emailing, ::ActiveStorage::Blob)
         .select { can?(:index, _1) }
         .sort_by(&:human_name)
-
-      def toggled?
-        preferences(:sidebar_toggled, false)
-      end
     end
   end
 end

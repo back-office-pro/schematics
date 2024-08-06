@@ -7,6 +7,7 @@ module Schematics
         class Component < ApplicationComponent
           delegate :entity, to: :@field, private: true
           delegate :model_class, to: :entity, private: true
+          delegate :preferences, to: :current_user, private: true
 
           with_collection_parameter :field
 
@@ -19,7 +20,9 @@ module Schematics
 
           def label = model_class.human_attribute_name(@field.name)
 
-          def checked? = preferences(preference, true)
+          def checked?
+            preferences.fetch(preference, true)
+          end
         end
       end
     end

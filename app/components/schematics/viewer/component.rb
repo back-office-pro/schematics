@@ -3,6 +3,7 @@
 module Schematics
   module Viewer
     class Component < ApplicationComponent
+      delegate :preferences, to: :current_user, private: true
       delegate :entity, to: :model_class
       delegate :icon, to: :entity
       option :resources
@@ -17,7 +18,7 @@ module Schematics
 
       def col_preference_class(field)
         preference = "col_#{entity.id}_#{field.id}"
-        return preference if preferences(preference, true)
+        return preference if preferences.fetch(preference, true)
 
         "#{preference} d-none"
       end

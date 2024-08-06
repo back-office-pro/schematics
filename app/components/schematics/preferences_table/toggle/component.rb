@@ -4,12 +4,15 @@ module Schematics
   module PreferencesTable
     module Toggle
       class Component < ApplicationComponent
+        delegate :preferences, to: :current_user, private: true
         option :action
         option :model_class
 
         def preference = "#{action}_#{model_class}"
 
-        def checked? = preferences(preference, true)
+        def checked?
+          preferences.fetch(preference, true)
+        end
 
         def render?
           can?(action.to_sym, model_class)

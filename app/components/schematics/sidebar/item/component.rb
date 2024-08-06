@@ -8,6 +8,7 @@ module Schematics
                    .without('h', 's')
                    .freeze
 
+        delegate :preferences_sidebar_toggled, to: :current_user, private: true
         delegate :human_name, :human_name_plural, :entity, to: :@model_class
         delegate :icon, :enum_attributes, to: :entity
         with_collection_parameter :model_class
@@ -32,14 +33,10 @@ module Schematics
         }
 
         def toggled_class
-          'd-md-block' unless toggled?
+          'd-md-block' unless preferences_sidebar_toggled
         end
 
         private
-
-        def toggled?
-          preferences(:sidebar_toggled, false)
-        end
 
         def shortcut = "Control+#{ALPHABET[@counter]}"
       end

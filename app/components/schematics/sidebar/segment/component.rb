@@ -4,6 +4,7 @@ module Schematics
   module Sidebar
     module Segment
       class Component < ApplicationComponent
+        delegate :preferences_sidebar_toggled, to: :current_user, private: true
         delegate :values, :format, to: :@attribute
         with_collection_parameter :attribute
 
@@ -20,17 +21,11 @@ module Schematics
         def css_classes = 'nav-link p-0 m-0 text-truncate'
 
         def toggled_class
-          'd-md-block' unless toggled?
+          'd-md-block' unless preferences_sidebar_toggled
         end
 
         def render?
           is_active_link?(polymorphic_path(@model_class))
-        end
-
-        private
-
-        def toggled?
-          preferences(:sidebar_toggled, false)
         end
       end
     end

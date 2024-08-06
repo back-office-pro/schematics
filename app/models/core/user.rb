@@ -8,6 +8,13 @@ class User < Schematics::ApplicationRecord
   attribute :time_zone, default: -> { ::Configuration.time_zone }
   attribute :locale, default: -> { ::Configuration.locale }
 
+  store_accessor :preferences,
+                 :charts,
+                 :metrics,
+                 :sidebar_toggled,
+                 :theme,
+                 prefix: true
+
   validate :secure_password_challenge
 
   delegate :admin?, to: :role
@@ -39,6 +46,10 @@ class User < Schematics::ApplicationRecord
       .with_string_translations
       .find_or_create_by!(record_type:, record_id:)
   end
+
+  def preferences_charts = Array(super)
+
+  def preferences_metrics = Array(super)
 
   private
 
