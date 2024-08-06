@@ -6,7 +6,7 @@ module Schematics
       class Component < ApplicationComponent
         LIMIT = 10
         delegate :versions_path, to: 'Schematics::Engine.routes.url_helpers'
-        delegate :read_notifications_at, :preferences, to: :current_user
+        delegate :read_notifications_at, to: :current_user
 
         def display_count
           count >= LIMIT ? "#{LIMIT.pred}+" : count
