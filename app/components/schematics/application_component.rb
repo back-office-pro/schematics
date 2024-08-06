@@ -23,12 +23,9 @@ module Schematics
         .fetch(key.to_s, default)
     end
 
-    def to_html = render_in view_context
-
-    private
-
-    def view_context
-      super || ActionView::Base.new(ActionView::LookupContext.new([]), {}, nil)
-    end
+    def to_html = ApplicationController
+      .new
+      .view_context
+      .render(self)
   end
 end
