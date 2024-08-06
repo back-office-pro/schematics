@@ -26,8 +26,8 @@ module Schematics
       mentions.any?
     end
 
-    def notify_mentions
-      ::ActiveJob.perform_all_later mentions.map { NotifyJob.new(self, 'mention', _1) }
-    end
+    def notify_mentions = ::ActiveJob.perform_all_later(
+      mentions.map { NotifyJob.new(self, 'mention', _1) }
+    )
   end
 end
