@@ -8,6 +8,9 @@ fr:
     created_at/year: Année
     id: Identifiant
   by: par
+  chat:
+    system: Vous allez créer un modèle de domaine en fonction des besoins de l’utilisateur
+    user: Créer une application web dans le secteur d’activité %{business_sector_formatted}
   date:
     formats:
       long: "%A %d %B %Y à %H:%M"

@@ -8,6 +8,9 @@ en:
     created_at/year: Year
     id: Identifier
   by: by
+  chat:
+    system: You will create a domain model according to user needs
+    user: Create a web application in the %{business_sector_formatted} business sector
   date:
     formats:
       long: "%A %d %B, %Y at %H:%M"
