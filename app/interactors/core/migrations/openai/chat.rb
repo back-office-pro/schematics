@@ -7,13 +7,12 @@ module Core
         include Interactor
 
         delegate :migration, to: :context, private: true
-        delegate :prompt, to: :migration, allow_nil: true, private: true
-        delegate :business_sector, to: ::Subscription, private: true
+        delegate :prompt, to: :migration, private: true
         delegate :root, to: ::Schematics::Engine, private: true
         delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
 
         def call
-          context.data = responses
+          context.data = responses.map(&method(:merge_uuids))
         end
 
         private
@@ -27,27 +26,32 @@ module Core
           .map { JSON.parse(_1, symbolize_names: true) }
 
         def parameters = {
-          model: 'gpt-4o',
+          model: 'gpt-4o-2024-08-06',
           temperature: 1,
           frequency_penalty: 0,
           presence_penalty: 0,
+          tool_choice: 'required',
           tools: [
             {
               type: 'function',
               function: {
-                name: 'domainModel',
-                parameters: parse(root.join('lib', 'schema.yml'))
+                name: 'schema',
+                parameters: parse(root.join('lib', 'schema.yml')),
+                strict: true
               }
             }
           ],
           messages: [
-            {
-              role: 'user',
-              content: "Create a domain model for a #{business_sector} web application"
-            },
-            prompt && { role: 'user', content: prompt }
-          ].compact
+            { role: 'system', content: I18n.t('chat.system') },
+            { role: 'user', content: prompt }
+          ]
         }
+
+        def merge_uuids(response)
+          response[:id] = SecureRandom.uuid
+          response[:attributes].each { _1.merge!(id: SecureRandom.uuid) }
+          response
+        end
       end
     end
   end

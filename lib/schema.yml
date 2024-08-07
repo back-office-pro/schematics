@@ -1,13 +1,9 @@
 ---
 type: object
 properties:
-  id:
-    type: string
-    description: A random RFC 4122 UUID
-    pattern: \w{8}-\w{4}-\w{4}-\w{4}-\w{12}
   name:
     type: string
-    description: The entity name in snake case
+    description: The entity name at singular, in snake case and in english
     not:
       enum: <%= Tenant
         .schema
@@ -20,11 +16,15 @@ properties:
     properties:
       descriptor:
         type: string
-        description: The property name which represents the most the entity
+        description: The attribute name which represents the most the entity
       icon:
         type: string
-        description: An icon which represents the entity in snake case
+        description: An icon which represents the entity
         enum: <%= Schematics::Options::Icon.collection.map(&:to_s) %>
+    additionalProperties: false
+    required:
+      - descriptor
+      - icon
   associations:
     type: array
     items:
@@ -32,25 +32,24 @@ properties:
       properties:
         type:
           type: string
-          description: The association type in snake case
+          description: The association type
           enum:
             - has_and_belongs_to_many
         name:
           type: string
-          description: The has and belongs to many association name in snake case
+          description: The has and belongs to many association name at plural, in snake case and in english
+      additionalProperties: false
+      required:
+        - type
+        - name
   attributes:
     type: array
     items:
       type: object
       properties:
-        id:
-          type: string
-          description: A random RFC 4122 UUID
-          pattern: \w{8}-\w{4}-\w{4}-\w{4}-\w{12}
         name:
           type: string
-          pattern: .*(?<!_id)$
-          description: The property name in snake case
+          description: The attribute name in snake case, in english and without id suffix
           not:
             enum: <%= ActiveRecord::AttributeMethods
               .dangerous_attribute_methods
@@ -61,21 +60,27 @@ properties:
               .map(&:to_s) %>
         type:
           type: string
-          description: The property type in snake case
+          description: The attribute type
           enum: <%= Schematics::Attributes::Attribute.collection.map(&:type) %>
         options:
           type: object
           properties:
             required:
               type: boolean
-              description: Is the property required or not
+              description: Is the attribute required or not
+              enum:
+                - true
+                - false
+          additionalProperties: false
+          required:
+            - required
+      additionalProperties: false
       required:
-        - id
         - name
         - type
         - options
+additionalProperties: false
 required:
-  - id
   - name
   - options
   - associations
