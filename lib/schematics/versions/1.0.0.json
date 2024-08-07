@@ -1475,11 +1475,26 @@
       {
         "id": "8f589671-7d82-48fb-8cda-cbb95207c597",
         "name": "business_sector",
-        "type": "string",
+        "type": "enum",
         "options": {
           "readonly": true,
           "cached": true,
-          "default": "other"
+          "default": "other",
+          "values": [
+            "healthcare",
+            "construction",
+            "manufacturing",
+            "education",
+            "energy",
+            "technology",
+            "finance",
+            "transportation",
+            "insurance",
+            "retail",
+            "agriculture",
+            "hospitality",
+            "other"
+          ]
         }
       },
       {

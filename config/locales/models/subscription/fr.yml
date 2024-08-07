@@ -11,6 +11,20 @@ fr:
         state: Statut
     enums:
       subscription:
+        business_sector:
+          agriculture: Agriculture
+          construction: Bâtiment
+          education: Education
+          energy: Energie
+          finance: Finance
+          healthcare: Santé
+          hospitality: Hôtellerie
+          insurance: Assurance
+          manufacturing: Fabrication
+          other: Autre
+          retail: Vente au détail
+          technology: Technologie
+          transportation: Transport
         plan:
           basic: Abonnement basique
           premium: Abonnement premium

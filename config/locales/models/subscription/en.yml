@@ -11,6 +11,20 @@ en:
         state: State
     enums:
       subscription:
+        business_sector:
+          agriculture: Agriculture
+          construction: Construction
+          education: Education
+          energy: Energy
+          finance: Finance
+          healthcare: Healthcare
+          hospitality: Hospitality
+          insurance: Insurance
+          manufacturing: Manufacturing
+          other: Other
+          retail: Retail
+          technology: Technology
+          transportation: Transportation
         plan:
           basic: Basic plan
           premium: Premium plan
