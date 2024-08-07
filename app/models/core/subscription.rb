@@ -8,6 +8,7 @@ class Subscription < Schematics::ApplicationRecord
 
   class << self
     delegate :entities, :users, :api_keys, :databases, to: :quota, prefix: true
+    delegate :business_sector_formatted, to: :instance
 
     def quota_storage_will_be_exceeded?(size)
       storage_size + size.bytes >= quota_storage
