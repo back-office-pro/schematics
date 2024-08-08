@@ -9,8 +9,10 @@ RSpec.describe Schematics::GenerateSchemaJob do
     it 'queues the job' do
       expect { described_class.perform_later(migration) }
         .to have_enqueued_job(described_class)
+        .exactly(:once)
         .with(migration)
         .on_queue('migrations')
+        .at(:no_wait)
     end
   end
 

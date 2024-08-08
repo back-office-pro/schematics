@@ -41,7 +41,7 @@ describe Schematics::Attributes::Array do
   its(:to_spec) { is_expected.to eq('A comparison has a **ids** attribute of type *array*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.comparison.ids') }
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

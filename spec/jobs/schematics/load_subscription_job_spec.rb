@@ -11,7 +11,9 @@ RSpec.describe Schematics::LoadSubscriptionJob do
     it 'queues the job' do
       expect { described_class.perform_later }
         .to have_enqueued_job(described_class)
+        .exactly(:once)
         .on_queue('default')
+        .at(:no_wait)
     end
   end
 

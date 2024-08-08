@@ -154,6 +154,7 @@ RSpec/ExampleLength:
     - array
     - hash
     - heredoc
+    - method_call
 RSpec/MultipleMemoizedHelpers:
   Max: 14
 RSpec/EmptyExampleGroup:

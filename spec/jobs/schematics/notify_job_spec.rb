@@ -11,8 +11,10 @@ RSpec.describe Schematics::NotifyJob do
     it 'queues the job' do
       expect { described_class.perform_later(comment, 'mention', user) }
         .to have_enqueued_job(described_class)
+        .exactly(:once)
         .with(comment, 'mention', user)
         .on_queue('notifications')
+        .at(:no_wait)
     end
   end
 

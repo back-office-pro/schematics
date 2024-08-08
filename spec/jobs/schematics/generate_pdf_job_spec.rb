@@ -3,17 +3,25 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GeneratePDFJob do
+  include ActiveSupport::Testing::TimeHelpers
   include Turbo::Broadcastable::TestHelper
+
   include_context 'with user'
 
   let(:resource) { user }
+
+  around do |example|
+    freeze_time { example.run }
+  end
 
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later(user, resource) }
         .to have_enqueued_job(described_class)
+        .exactly(:once)
         .with(user, resource)
         .on_queue('exports')
+        .at(:no_wait)
     end
   end
 
@@ -33,8 +41,10 @@ RSpec.describe Schematics::GeneratePDFJob do
     it 'queues the purge job' do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
+        .exactly(:once)
         .with(an_instance_of(ActiveStorage::Blob))
         .on_queue('cleanups')
+        .at(Schematics::Resources::GenerateFile::PURGE_WAIT.from_now)
     end
 
     it 'broadcasts replace to user' do

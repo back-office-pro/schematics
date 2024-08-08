@@ -3,18 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::GenerateCSVJob do
+  include ActiveSupport::Testing::TimeHelpers
   include Turbo::Broadcastable::TestHelper
+
   include_context 'with user'
 
   let(:resources) { [user] }
   let(:dropdown) { false }
 
+  around do |example|
+    freeze_time { example.run }
+  end
+
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later(user, resources, dropdown) }
         .to have_enqueued_job(described_class)
+        .exactly(:once)
         .with(user, resources, dropdown)
         .on_queue('exports')
+        .at(:no_wait)
     end
   end
 
@@ -34,8 +42,10 @@ RSpec.describe Schematics::GenerateCSVJob do
     it 'queues the purge job' do
       expect { perform_now }
         .to have_enqueued_job(ActiveStorage::PurgeJob)
+        .exactly(:once)
         .with(an_instance_of(ActiveStorage::Blob))
         .on_queue('cleanups')
+        .at(Schematics::Resources::GenerateFile::PURGE_WAIT.from_now)
     end
 
     it 'broadcasts replace to user' do

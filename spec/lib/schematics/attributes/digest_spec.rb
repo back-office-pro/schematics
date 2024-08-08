@@ -31,7 +31,7 @@ describe Schematics::Attributes::Digest do
   its(:to_spec) { is_expected.to eq('A entity has a **password** attribute of type *password*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.password') }
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

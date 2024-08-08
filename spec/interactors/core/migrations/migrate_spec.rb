@@ -216,7 +216,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       uses_transaction 'migrates successfully'
 
-      it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
+      it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect { expect(migrate).to be_a_success }
           .to change(Translation.with_deleted, :count)
           .by(-3)

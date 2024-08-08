@@ -23,15 +23,19 @@ RSpec.describe Migration do
   it 'enqueues a migrate schema job after migrate' do
     expect { record.migrate! }
       .to have_enqueued_job(Schematics::MigrateSchemaJob)
+      .exactly(:once)
       .with(record)
       .on_queue('migrations')
+      .at(:no_wait)
   end
 
   it 'enqueues a generate schema job after save' do
     expect { record.save! }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
+      .exactly(:once)
       .with(record)
       .on_queue('migrations')
+      .at(:no_wait)
   end
 
   describe '#finalize!' do

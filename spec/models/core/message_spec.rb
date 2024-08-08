@@ -15,8 +15,10 @@ RSpec.describe Message do
     it 'does not send notifications after save' do
       expect { record.save! }
         .not_to have_enqueued_job(Schematics::NotifyJob)
+        .exactly(:once)
         .with(record, 'mention', user)
         .on_queue('notifications')
+        .at(:no_wait)
     end
   end
 

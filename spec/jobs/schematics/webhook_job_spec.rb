@@ -18,8 +18,10 @@ RSpec.describe Schematics::WebhookJob do
     it 'queues the job' do
       expect { described_class.perform_later(webhook_request) }
         .to have_enqueued_job(described_class)
+        .exactly(:once)
         .with(webhook_request)
         .on_queue('webhooks')
+        .at(:no_wait)
     end
   end
 

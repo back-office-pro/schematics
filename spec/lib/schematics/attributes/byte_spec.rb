@@ -38,7 +38,7 @@ describe Schematics::Attributes::Byte do
     is_expected.to eq('A active storage/attachment has a **byte size** attribute of type *byte*')
   end
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

@@ -17,7 +17,7 @@ RSpec.describe Core::Migrations::ProcessingQuery do
     fifth_migration
   end
 
-  its(:call) do # rubocop:disable RSpec/ExampleLength
+  its(:call) do
     is_expected.to contain_exactly(
       first_migration,
       second_migration,

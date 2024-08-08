@@ -37,7 +37,7 @@ describe Schematics::Attributes::ResponseCode do
     is_expected.to eq('A api request has a **status** attribute of type *response code*')
   end
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

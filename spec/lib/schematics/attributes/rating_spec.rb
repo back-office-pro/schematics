@@ -35,7 +35,7 @@ describe Schematics::Attributes::Rating do
   its(:to_spec) { is_expected.to eq('A product has a **rating** attribute of type *rating*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.product.rating') }
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

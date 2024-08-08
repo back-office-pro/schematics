@@ -45,7 +45,7 @@ describe Schematics::Attributes::Model do
   its(:to_spec) { is_expected.to eq('A permission has a **model** attribute of type *model*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.permission.model') }
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

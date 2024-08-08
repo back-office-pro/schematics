@@ -46,7 +46,7 @@ describe Schematics::Attributes::Code do
     is_expected.to eq('A template has a **content** attribute of type *code editor*')
   end
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

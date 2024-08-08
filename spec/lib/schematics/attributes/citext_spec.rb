@@ -47,7 +47,7 @@ describe Schematics::Attributes::Citext do
     is_expected.to eq('A user has a **last name** attribute of type *case insensitive text*')
   end
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

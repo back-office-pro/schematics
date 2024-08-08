@@ -13,8 +13,10 @@ RSpec.describe Comment do
     it 'sends notifications after save' do
       expect { record.save! }
         .to have_enqueued_job(Schematics::NotifyJob)
+        .exactly(:once)
         .with(record, 'mention', user)
         .on_queue('notifications')
+        .at(:no_wait)
     end
   end
 end

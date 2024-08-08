@@ -4,12 +4,15 @@ module Schematics
   module Resources
     class GenerateFile
       include Interactor
+      PURGE_WAIT = 5.minutes.freeze
 
       delegate :user, :serializer, :dropdown, :component_method, to: :context, private: true
       delegate :file, :filename, :extension, :content_type, to: :serializer, private: true
 
       def call
-        ::ActiveStorage::PurgeJob.set(wait: 5.minutes).perform_later(blob)
+        ::ActiveStorage::PurgeJob
+          .set(wait: PURGE_WAIT)
+          .perform_later(blob)
         ::Turbo::StreamsChannel.broadcast_replace_to(
           user,
           :generate_file_in_background,

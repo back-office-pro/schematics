@@ -33,8 +33,10 @@ RSpec.describe WebhookEndpoint do
     it 'enqueues a webhook job' do
       expect { broadcast_all }
         .to have_enqueued_job(Schematics::WebhookJob)
+        .exactly(:once)
         .with(WebhookRequest)
         .on_queue('webhooks')
+        .at(:no_wait)
     end
   end
 end

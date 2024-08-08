@@ -37,7 +37,7 @@ describe Schematics::Attributes::UserAgent do
     is_expected.to eq('A session has a **user agent** attribute of type *user agent*')
   end
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,

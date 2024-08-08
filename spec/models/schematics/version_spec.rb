@@ -29,7 +29,9 @@ RSpec.describe Schematics::Version do
   it 'enqueues a webhook job after create' do
     expect { version.save! }
       .to have_enqueued_job(Schematics::WebhookJob)
+      .exactly(:once)
       .with(WebhookRequest)
       .on_queue('webhooks')
+      .at(:no_wait)
   end
 end

@@ -41,7 +41,7 @@ describe Schematics::Attributes::RichText do
     is_expected.to eq('A entity has a **summary** attribute of type *rich text editor*')
   end
 
-  its(:available_options) do # rubocop:disable RSpec/ExampleLength
+  its(:available_options) do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,
