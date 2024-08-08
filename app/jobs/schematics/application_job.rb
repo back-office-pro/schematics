@@ -5,6 +5,7 @@ module Schematics
     include Rollbar::ActiveJob
 
     retry_on ActiveRecord::Deadlocked
-    discard_on ActiveJob::DeserializationError
+    discard_on ActiveRecord::RecordNotFound,
+               ActiveJob::DeserializationError
   end
 end
