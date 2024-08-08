@@ -2,7 +2,7 @@
 
 # :reek:MissingSafeMethod
 class Migration < Schematics::ApplicationRecord
-  GATEWAY = ::Core::Migrations::OpenAI
+  GATEWAY = ::Core::Migrations::OpenAI::ChatGPT
 
   serialize :data, coder: Schematics::Schema
   attribute :data, default: -> { current_data || [] }

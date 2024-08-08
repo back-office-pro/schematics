@@ -2,6 +2,7 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'API'
+  inflect.acronym 'ChatGPT'
   inflect.acronym 'CSV'
   inflect.acronym 'ICS'
   inflect.acronym 'JSON'
