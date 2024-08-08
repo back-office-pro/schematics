@@ -3,7 +3,7 @@ type: object
 properties:
   name:
     type: string
-    description: The entity name at singular, in snake case and in english
+    description: The unique entity name at singular, in snake case and in english
   options:
     type: object
     properties:
@@ -30,7 +30,7 @@ properties:
             - has_and_belongs_to_many
         name:
           type: string
-          description: The has and belongs to many association name at plural, in snake case and in english
+          description: The unique has and belongs to many association name at plural, in snake case and in english
       additionalProperties: false
       required:
         - type
@@ -42,7 +42,7 @@ properties:
       properties:
         name:
           type: string
-          description: The attribute name in snake case, in english and without id suffix
+          description: The unique attribute name in snake case, in english and without id suffix
         type:
           type: string
           description: The attribute type
