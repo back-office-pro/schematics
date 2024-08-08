@@ -3,6 +3,7 @@
 require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_record/override/connection_adapters/table_definition'
 require 'active_record/override/generators/migration_generator'
+require 'active_storage/override/blob'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'arel/override/predications'
@@ -94,6 +95,7 @@ end
 
 ActiveSupport.on_load(:active_storage_blob) do
   include Tenant.search_engine.concern
+  prepend ActiveStorage::Override::Blob
 end
 
 ActiveSupport.on_load(:action_text_rich_text) do
