@@ -127,6 +127,7 @@ module Schematics
     config.active_record.action_on_strict_loading_violation = :log
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.extend_queries = true
+    config.active_record.queues.destroy = :cleanups
 
     # Active Job
     config.active_job.enqueue_after_transaction_commit = :always
