@@ -6,17 +6,18 @@ RSpec.describe Schematics::CleanDatabaseBackupsJob do
   let(:checksum) { 0 }
   let(:byte_size) { 0 }
   let(:filename) { 'db.dump' }
+  let(:content_type) { Mime[:binary].to_s }
   let(:backups) do
     ActiveStorage::Blob.create!(
       [
-        { key: 'backups/1', filename:, checksum:, byte_size: },
-        { key: 'backups/2', filename:, checksum:, byte_size: },
-        { key: 'backups/3', filename:, checksum:, byte_size: },
-        { key: 'backups/4', filename:, checksum:, byte_size: },
-        { key: 'backups/5', filename:, checksum:, byte_size: },
-        { key: 'backups/6', filename:, checksum:, byte_size: },
-        { key: 'backups/7', filename:, checksum:, byte_size: },
-        { key: 'backups/8', filename:, checksum:, byte_size: }
+        { key: 'backups/1', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/2', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/3', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/4', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/5', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/6', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/7', filename:, checksum:, byte_size:, content_type: },
+        { key: 'backups/8', filename:, checksum:, byte_size:, content_type: }
       ]
     )
   end

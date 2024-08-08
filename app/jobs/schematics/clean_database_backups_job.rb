@@ -10,6 +10,6 @@ module Schematics
       .where(filename: 'db.dump')
       .order(created_at: :desc)
       .offset(OFFSET)
-      .delete_all
+      .find_each(&:purge)
   end
 end
