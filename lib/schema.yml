@@ -4,13 +4,6 @@ properties:
   name:
     type: string
     description: The entity name at singular, in snake case and in english
-    not:
-      enum: <%= Tenant
-        .schema
-        .entities
-        .select(&:core?)
-        .map(&:name)
-        .concat(Schematics::Entities::Entity::NAME_DENYLIST) %>
   options:
     type: object
     properties:
@@ -50,14 +43,6 @@ properties:
         name:
           type: string
           description: The attribute name in snake case, in english and without id suffix
-          not:
-            enum: <%= ActiveRecord::AttributeMethods
-              .dangerous_attribute_methods
-              .dup
-              .merge(Schematics::Behaviours::Nameable::NAME_DENYLIST)
-              .merge(Schematics::Trackable::DENYLIST)
-              .to_a
-              .map(&:to_s) %>
         type:
           type: string
           description: The attribute type
@@ -68,9 +53,6 @@ properties:
             required:
               type: boolean
               description: Is the attribute required or not
-              enum:
-                - true
-                - false
           additionalProperties: false
           required:
             - required
