@@ -13,7 +13,7 @@ RSpec.describe Schematics::Resources::Archive do
       content_en: 'My content',
       content_fr: 'Mon contenu',
       content_it: 'Il mio contenuto',
-      image:,
+      image: image.signed_id,
       author: user
     )
   end
@@ -22,7 +22,7 @@ RSpec.describe Schematics::Resources::Archive do
       io: File.open(file_fixture('logo.png'), 'rb'),
       filename: 'logo.png',
       content_type: Mime[:png].to_s
-    ).signed_id
+    )
   end
   let(:version) { Schematics::Version.create!(event: 'create', item: resource, user:) }
 
@@ -71,6 +71,11 @@ RSpec.describe Schematics::Resources::Archive do
 
     it 'does not archive the version to keep it on timeline' do
       expect { call }.not_to change(Schematics::Version, :count)
+    end
+
+    it 'does not purge the image' do
+      call
+      expect(ActiveStorage::Blob.service).to exist(image.key)
     end
   end
 end
