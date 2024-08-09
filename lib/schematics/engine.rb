@@ -129,9 +129,6 @@ module Schematics
     config.active_record.encryption.extend_queries = true
     config.active_record.queues.destroy = :cleanups
 
-    # Active Job
-    config.active_job.enqueue_after_transaction_commit = :always
-
     # Mailer
     config.action_mailer.preview_paths << root.join('spec', 'mailers', 'previews')
     config.action_mailer.smtp_settings = { open_timeout: 1, read_timeout: 1 }
