@@ -33,12 +33,19 @@ RSpec.describe Schematics::CleanDatabaseBackupsJob do
   end
 
   describe '#perform_now' do
+    subject(:perform_now) { described_class.perform_now }
+
     before { backups }
 
     it 'destroys the 8th backup' do
-      expect { described_class.perform_now }
+      expect { perform_now }
         .to change(ActiveStorage::Blob.with_deleted, :count)
         .by(-1)
+    end
+
+    it 'purges the 8th backup' do
+      perform_now
+      expect(ActiveStorage::Blob.service).not_to exist('backups/8')
     end
   end
 end
