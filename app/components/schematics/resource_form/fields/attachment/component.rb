@@ -19,6 +19,11 @@ module Schematics
           def required
             super unless value.attached?
           end
+
+          def data = {
+            action: 'change->attachments-previewer#preview',
+            'attachments-previewer-target': 'input'
+          }
         end
       end
     end

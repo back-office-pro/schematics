@@ -1,3 +1,5 @@
 - signed_ids.each do |value|
   = form.hidden_field name.to_sym, multiple:, value:
-= form.file_field name.to_sym, help:, multiple:, include_hidden:, accept:, required:
+.mb-1 data-controller='attachments-previewer'
+  = form.file_field name.to_sym, help:, multiple:, include_hidden:, accept:, required:, data:
+  div data-attachments-previewer-target='container'

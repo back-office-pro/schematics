@@ -2,4 +2,6 @@
   = form.fields_for attributes_param_key, layout: :inline do |fields|
     = fields.hidden_field :id, value: value.id
     = fields.check_box :_destroy, switch:, label:, wrapper_class:
-= form.file_field name.to_sym, help:, accept:, required:
+.mb-1 data-controller='attachments-previewer'
+  = form.file_field name.to_sym, help:, accept:, required:, data:
+  div data-attachments-previewer-target='container'
