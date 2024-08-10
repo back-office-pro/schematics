@@ -160,6 +160,8 @@ module Schematics
               is_expected
                 .to define_enum_for(attribute.name.to_sym)
                 .with_values(attribute.values)
+                # TODO: add when https://github.com/thoughtbot/shoulda-matchers/pull/1632 is merged
+                # .with_default(attribute.options.default)
                 .with_prefix
             end
           end
