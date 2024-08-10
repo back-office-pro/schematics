@@ -6,6 +6,8 @@ module Core
       include Interactor
 
       def call
+        return unless ::Tenant.search_engine.indexable?
+
         FileUtils.touch ::Rails.root.join('tmp/restart.txt')
       end
     end

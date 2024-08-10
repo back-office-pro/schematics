@@ -14,4 +14,6 @@ preload_app!
 plugin :tmp_restart
 plugin :solid_queue
 
+solid_queue_mode Tenant.search_engine.backend_mode
+
 Tenant.search_engine.initialize!

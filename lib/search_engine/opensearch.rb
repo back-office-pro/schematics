@@ -15,6 +15,8 @@ module SearchEngine
 
     def pagy_backend = :pagy_searchkick
 
+    def backend_mode = :fork
+
     def multisearch = Core::Searches::Searchkick
 
     # :reek:UtilityFunction
