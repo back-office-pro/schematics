@@ -5,6 +5,7 @@ class Subscription < Schematics::ApplicationRecord
   GATEWAY = ::Core::Subscriptions::Stripe
 
   attribute :default_locale, default: -> { Rails.configuration.i18n.default_locale }
+  store_accessor :metadata, :databases, prefix: true
 
   class << self
     delegate :entities, :users, :api_keys, :databases, to: :quota, prefix: true
@@ -53,7 +54,9 @@ class Subscription < Schematics::ApplicationRecord
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)
-      ::Core::Migrations::Restart.call if metadata_previously_changed?
+      return unless saved_change_to_metadata_databases?
+
+      ::Core::Migrations::Restart.call(force: true)
     end
   end
 

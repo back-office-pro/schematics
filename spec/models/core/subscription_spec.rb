@@ -48,6 +48,10 @@ RSpec.describe Subscription do
         .from('basic')
         .to('premium')
     end
+
+    it 'restarts the server' do
+      expect { load! }.to change(Rails.root.join('tmp/restart.txt'), :mtime)
+    end
   end
 
   describe '.quota_storage_will_be_exceeded?' do
