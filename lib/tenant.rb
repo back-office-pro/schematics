@@ -6,10 +6,9 @@ require 'search_engine/postgresql'
 
 # :reek:Attribute
 class Tenant
-  DEFAULT_PORT = 3000
-  DEFAULT_SEARCH_ENGINE = :Postgresql
-
   class << self
+    DEFAULT_PORT = 3000
+    DEFAULT_SEARCH_ENGINE = :Postgresql
     SEMAPHORE = Mutex.new.freeze
 
     def schema
@@ -78,7 +77,7 @@ class Tenant
 
     def default_url_options = { host:, port: }.compact
 
-    def default_mailer_options = { from: }
+    def default_mailer_options = { from: "no-reply@#{host}" }
 
     def ssl_path = Pathname.new("/etc/letsencrypt/live/#{domain}")
 
@@ -96,6 +95,10 @@ class Tenant
       return "#{subdomain}.#{domain}" if Rails.env.production?
 
       'localhost'
+    end
+
+    def port
+      DEFAULT_PORT unless Rails.env.production?
     end
 
     def version
@@ -129,12 +132,6 @@ class Tenant
       )
     rescue StandardError
       DEFAULT_SEARCH_ENGINE
-    end
-
-    def from = "no-reply@#{host}"
-
-    def port
-      DEFAULT_PORT unless Rails.env.production?
     end
   end
 end
