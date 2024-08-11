@@ -123,10 +123,4 @@ RSpec.describe Subscription do
 
     it { is_expected.to eq(10) }
   end
-
-  describe '.business_sector_formatted' do
-    subject { described_class.business_sector_formatted }
-
-    it { is_expected.to eq('Other') }
-  end
 end
