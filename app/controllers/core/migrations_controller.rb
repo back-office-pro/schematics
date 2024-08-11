@@ -3,6 +3,15 @@
 class MigrationsController < Schematics::ResourcesController
   rate_limit to: 3, within: 1.minute, only: %i[create update]
 
+  def new
+    super
+    @resource.prompt = model_class.default_prompt
+  end
+
+  def edit
+    @resource.prompt ||= model_class.default_prompt
+  end
+
   private
 
   def permitted_params = super << {
