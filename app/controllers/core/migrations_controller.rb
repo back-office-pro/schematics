@@ -4,8 +4,7 @@ class MigrationsController < Schematics::ResourcesController
   rate_limit to: 3, within: 1.minute, only: %i[create update]
 
   def new
-    super
-    @resource.prompt = model_class.default_prompt
+    super && edit
   end
 
   def edit
