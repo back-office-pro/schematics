@@ -17,6 +17,8 @@ module Schematics
 
       def user_groups = ::UserGroup.none
 
+      def preferences = {}
+
       def preferences_theme = nil
 
       def role = ::Role.new(permissions:)
