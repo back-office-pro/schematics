@@ -6,7 +6,6 @@ class Migration < Schematics::ApplicationRecord
 
   serialize :data, coder: Schematics::Schema
   attribute :data, default: -> { current_data || [] }
-  attribute :prompt, default: -> { I18n.t('chat.user', business_sector_formatted:) }
 
   validates_associated :data
   validate :quota_entities_cannot_be_exceeded
@@ -26,7 +25,7 @@ class Migration < Schematics::ApplicationRecord
 
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
-    delegate :business_sector, :business_sector_formatted, to: Subscription, private: true
+    delegate :business_sector, to: Subscription, private: true
 
     def current = state_finished.last
 
@@ -38,6 +37,14 @@ class Migration < Schematics::ApplicationRecord
       data: ActiveSupport::ConfigurationFile.parse(
         Schematics::Engine.root.join('db', 'seeds', 'migrations', "#{business_sector}.yml")
       )
+    )
+
+    def default_prompt = I18n.t(
+      'chat.user',
+      business_sector: Subscription
+        .instance
+        .business_sector_formatted
+        .downcase
     )
   end
 

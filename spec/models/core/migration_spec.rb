@@ -94,4 +94,10 @@ RSpec.describe Migration do
 
     it { is_expected.to be_a(described_class) }
   end
+
+  describe '.default_prompt' do
+    subject { described_class.default_prompt }
+
+    it { is_expected.to eq('Create a web application in the other business sector') }
+  end
 end

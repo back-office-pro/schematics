@@ -10,7 +10,7 @@ fr:
   by: par
   chat:
     system: Vous allez créer un modèle de domaine en fonction des besoins de l’utilisateur
-    user: Créer une application web dans le secteur d’activité %{business_sector_formatted}
+    user: Créer une application web dans le secteur d’activité %{business_sector}
   date:
     formats:
       long: "%A %d %B %Y à %H:%M"
