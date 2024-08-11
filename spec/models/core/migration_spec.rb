@@ -98,6 +98,6 @@ RSpec.describe Migration do
   describe '.default_prompt' do
     subject { described_class.default_prompt }
 
-    it { is_expected.to eq('Create a web application in the other business sector') }
+    it { is_expected.to eq(I18n.t('chat.user', business_sector: 'other')) }
   end
 end
