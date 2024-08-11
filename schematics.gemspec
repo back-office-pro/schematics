@@ -110,7 +110,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-mini-profiler', '3.3.1'
   spec.add_dependency 'rails', '7.2.0.rc1'
   spec.add_dependency 'rails-i18n', '7.0.9'
-  spec.add_dependency 'ransack', '4.2.0'
+  spec.add_dependency 'ransack', '4.2.1'
   spec.add_dependency 'ransack-enum', '1.0.0'
   spec.add_dependency 'ratonvirus', '0.4.3'
   spec.add_dependency 'ratonvirus-clamby', '0.4.0'
