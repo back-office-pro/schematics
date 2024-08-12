@@ -2,6 +2,7 @@
 
 # :reek:MissingSafeMethod
 class Import < Schematics::ApplicationRecord
+  delegate :locale, to: :author
   after_create_commit :perform_import_job
 
   def model_class
