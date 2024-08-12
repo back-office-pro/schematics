@@ -13,8 +13,10 @@ module Schematics
     def perform(migration)
       return if migration.processing?
 
-      migration.state_generating!
-      migration.update!(::Migration::GATEWAY::Chat.call(migration:).to_h.slice(:data))
+      I18n.with_locale(migration.locale) do
+        migration.state_generating!
+        migration.update!(::Migration::GATEWAY::Chat.call(migration:).to_h.slice(:data))
+      end
     end
   end
 end
