@@ -80,7 +80,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'image_processing', '1.12.2'
   spec.add_dependency 'importmap-rails', '2.0.1'
   spec.add_dependency 'interactor', '3.1.2'
-  spec.add_dependency 'isolator', '1.0.1'
+  spec.add_dependency 'isolator', '1.1.0'
   spec.add_dependency 'letter_opener', '1.10.0'
   spec.add_dependency 'link_thumbnailer', '3.4.0'
   spec.add_dependency 'liquid', '5.5.1'
