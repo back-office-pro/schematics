@@ -20,9 +20,13 @@ module Schematics
     end
 
     def update_progress!(progress = self.class.progress)
-      context
-        .public_send(self.class.resource_name)
-        &.update!(progress:)
+      resource.update!(progress:) if resource&.persisted?
+    end
+
+    private
+
+    def resource
+      context.public_send(self.class.resource_name)
     end
   end
 end
