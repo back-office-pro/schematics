@@ -8,8 +8,10 @@ module Schematics
     def perform(import)
       return unless import.state_pending?
 
-      import.state_in_progress!
-      import.finalize!(Core::Imports::ImportData.call(import:).errors)
+      I18n.with_locale(import.locale) do
+        import.state_in_progress!
+        import.finalize!(Core::Imports::ImportData.call(import:).errors)
+      end
     end
   end
 end
