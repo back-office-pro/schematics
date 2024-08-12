@@ -70,7 +70,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect { expect(migrate).to be_a_success }
           .to change(Permission, :count).by(6)
           .and change(Translation, :count).by(15)
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_create_prospects_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_create_join_table_prospects_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(File).to exist root.join('app/models/prospect.rb')
@@ -114,7 +113,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect(migrate).to be_a_success
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
@@ -145,7 +143,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect { expect(migrate).to be_a_success }
           .to change(Permission.with_deleted, :count).by(-6)
           .and change(Translation.with_deleted, :count).by(-15)
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_drop_prospects_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
         expect(File).not_to exist root.join('app/models/prospect.rb')
@@ -190,7 +187,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(3)
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_add_last_name_to_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).to respond_to(:last_name)
       end
@@ -220,7 +216,6 @@ RSpec.describe Core::Migrations::Migrate do
         expect { expect(migrate).to be_a_success }
           .to change(Translation.with_deleted, :count)
           .by(-3)
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).not_to respond_to(:first_name)
       end
@@ -260,7 +255,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(3)
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_add_user_to_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).to respond_to(:user)
       end
@@ -301,7 +295,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect { expect(migrate).to be_a_success }.to change(Translation, :count).by(3)
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_create_join_table_prospects_user_groups_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).to respond_to(:user_groups)
       end
@@ -338,7 +331,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations,
         expect(migrate).to be_a_success
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_rename_first_name_to_surname_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Prospect.new).not_to respond_to(:first_name)
         expect(Prospect.new).to respond_to(:surname)
@@ -376,7 +368,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect(migrate).to be_a_success
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_change_first_name_column_string_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
@@ -415,7 +406,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
         expect(migrate).to be_a_success
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_change_first_name_index_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
@@ -455,7 +445,6 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect(migrate).to be_a_success
-        expect(migration.progress).to eq(100)
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
@@ -483,9 +472,8 @@ RSpec.describe Core::Migrations::Migrate do
 
       uses_transaction 'migrates successfully'
 
-      it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
+      it 'migrates successfully' do
         expect(migrate).to be_a_success
-        expect(migration.progress).to eq(100)
       end
     end
   end

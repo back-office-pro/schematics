@@ -75,6 +75,7 @@ describe Schematics::Attributes::BelongsTo do
       scope :with_user_searches, -> { includes({:user=>[:searches]}) }
       scope :with_user_user_drafts, -> { includes({:user=>[:user_drafts]}) }
       scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
+      scope :with_user_migrations, -> { includes({:user=>[:migrations]}) }
       scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
       scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
       scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }
@@ -113,6 +114,7 @@ describe Schematics::Attributes::BelongsTo do
         scope :with_user_searches, -> { includes({:user=>[:searches]}) }
         scope :with_user_user_drafts, -> { includes({:user=>[:user_drafts]}) }
         scope :with_user_sessions, -> { includes({:user=>[:sessions]}) }
+        scope :with_user_migrations, -> { includes({:user=>[:migrations]}) }
         scope :with_user_author_comments, -> { includes({:user=>[:author_comments]}) }
         scope :with_user_requested_tasks, -> { includes({:user=>[:requested_tasks]}) }
         scope :with_user_created_meetings, -> { includes({:user=>[:created_meetings]}) }

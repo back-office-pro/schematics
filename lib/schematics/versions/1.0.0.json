@@ -1042,6 +1042,11 @@
           "default": 0.0,
           "less_than_or_equal_to": 100
         }
+      },
+      {
+        "id": "1fe91bd1-672b-41fe-9ac8-3648d6ab36de",
+        "name": "author",
+        "type": "user"
       }
     ]
   },

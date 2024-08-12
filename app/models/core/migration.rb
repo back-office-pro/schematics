@@ -75,6 +75,10 @@ class Migration < Schematics::ApplicationRecord
     state_finished!
   end
 
+  def locale
+    author&.locale || ::Configuration.locale
+  end
+
   def processing?
     state_pending? || state_in_progress? || state_rollbacking? || state_generating?
   end

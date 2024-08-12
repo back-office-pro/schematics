@@ -3,6 +3,7 @@ it:
   activerecord:
     attributes:
       migration:
+        author: Autore
         data: Dati
         progress: Progresso
         prompt: Descrizione dell'applicazione

@@ -7,6 +7,7 @@ RSpec.describe Migration do
 
   it { is_expected.not_to be_processing }
 
+  its(:locale) { is_expected.to eq('en') }
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
   its(:commit_message) { is_expected.to eq('Migration v1.5 (core v1.0.0)') }
 
