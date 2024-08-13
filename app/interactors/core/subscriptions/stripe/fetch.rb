@@ -27,6 +27,8 @@ module Core
                  prefix: true,
                  private: true
 
+        after :log_data
+
         def call
           context.id = subscription_id
           context.data = data
@@ -74,6 +76,11 @@ module Core
           &.preferred_locales
           &.first
           &.slice(0, 2)
+
+        def log_data = Rails
+          .logger
+          .tagged('Stripe')
+          .info(context.data)
       end
     end
   end
