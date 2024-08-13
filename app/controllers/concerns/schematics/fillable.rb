@@ -11,7 +11,7 @@ module Schematics
       .permit(permitted_params.excluding(disallowed_params))
 
     def resource_params_with_defaults
-      resource_params.with_defaults(resource_defaults.compact)
+      resource_params.merge(resource_defaults.compact)
     end
 
     private
