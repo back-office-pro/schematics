@@ -126,7 +126,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ruby-vips', '2.2.2'
   spec.add_dependency 'searchkick', '5.3.1'
   spec.add_dependency 'shoulda-callback-matchers', '1.1.4'
-  spec.add_dependency 'shoulda-matchers', '6.3.0'
+  spec.add_dependency 'shoulda-matchers', '6.3.1'
   spec.add_dependency 'slim', '5.2.1'
   spec.add_dependency 'solid_cache', '0.7.0'
   spec.add_dependency 'solid_queue', '0.4.1'
