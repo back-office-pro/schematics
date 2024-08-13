@@ -3,6 +3,7 @@
 require 'active_support/core_ext/module/delegation'
 require 'search_engine/opensearch'
 require 'search_engine/postgresql'
+require 'uri'
 
 # :reek:Attribute
 class Tenant
