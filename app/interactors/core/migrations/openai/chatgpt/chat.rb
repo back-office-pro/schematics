@@ -12,6 +12,8 @@ module Core
           delegate :root, to: ::Schematics::Engine, private: true
           delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
 
+          after :log_data
+
           def call
             context.data = responses.map(&method(:merge_uuids))
           end
@@ -53,6 +55,11 @@ module Core
             response[:attributes].each { _1.merge!(id: SecureRandom.uuid) }
             response
           end
+
+          def log_data = Rails
+            .logger
+            .tagged('OpenAI', 'ChatGPT')
+            .info(context.data)
         end
       end
     end
