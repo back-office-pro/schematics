@@ -28,8 +28,8 @@ RSpec.describe Migration do
       .at(:no_wait)
   end
 
-  it 'enqueues a generate schema job after save' do
-    expect { record.save! }
+  it 'enqueues a generate schema job after updating prompt' do
+    expect { record.tap(&:save!).update!(prompt: I18n.t('chat.user')) }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
       .exactly(:once)
       .with(record)
