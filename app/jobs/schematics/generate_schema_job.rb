@@ -5,9 +5,12 @@ module Schematics
     include Quietable
     queue_as :migrations
 
-    retry_on ActiveRecord::RecordInvalid, wait: 10.seconds, attempts: 5
     retry_on Faraday::Error, wait: :polynomially_longer, attempts: 5 do |_job, error|
       Rollbar.error(error)
+    end
+
+    retry_on ActiveRecord::RecordInvalid, wait: 10.seconds, attempts: 5 do |_job, error|
+      Rollbar.error(error, error.record.data.as_json)
     end
 
     after_discard do |job|
