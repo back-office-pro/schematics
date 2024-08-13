@@ -93,7 +93,7 @@ module Schematics
     def edit; end
 
     def create
-      @resource = model_class.new(resource_params)
+      @resource = model_class.new(resource_params_with_defaults)
       result = Resources::Create.call(resource: @resource, draft: @draft)
       respond_with result, location: resource_path
     end

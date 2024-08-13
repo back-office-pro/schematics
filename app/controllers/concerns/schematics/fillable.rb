@@ -9,7 +9,10 @@ module Schematics
     def resource_params = params
       .require(entity.name.to_sym)
       .permit(permitted_params.excluding(disallowed_params))
-      .with_defaults(resource_defaults.compact)
+
+    def resource_params_with_defaults
+      resource_params.with_defaults(resource_defaults.compact)
+    end
 
     private
 
