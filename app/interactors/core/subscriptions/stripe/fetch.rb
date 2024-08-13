@@ -8,6 +8,7 @@ module Core
 
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
         delegate :subdomain, to: ::Tenant, private: true
+        delegate :logger, to: ::Rails, private: true
         delegate :id,
                  :email,
                  :metadata,
@@ -77,8 +78,7 @@ module Core
           &.first
           &.slice(0, 2)
 
-        def log_data = Rails
-          .logger
+        def log_data = logger
           .tagged('Stripe')
           .info(context.data)
       end

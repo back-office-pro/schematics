@@ -9,6 +9,7 @@ module Core
 
           delegate :migration, to: :context, private: true
           delegate :prompt, to: :migration, private: true
+          delegate :logger, to: ::Rails, private: true
           delegate :root, to: ::Schematics::Engine, private: true
           delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
 
@@ -56,8 +57,7 @@ module Core
             response
           end
 
-          def log_data = Rails
-            .logger
+          def log_data = logger
             .tagged('OpenAI', 'ChatGPT')
             .info(context.data)
         end
