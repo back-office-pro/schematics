@@ -8,12 +8,9 @@ properties:
     type: object
     properties:
       descriptor:
-        type: string
-        description: The attribute name which represents the most the entity
+        $ref: '#/$defs/descriptor'
       icon:
-        type: string
-        description: An icon which represents the entity
-        enum: <%= Schematics::Options::Icon.collection.map(&:to_s) %>
+        $ref: '#/$defs/icon'
     additionalProperties: false
     required:
       - descriptor
@@ -51,8 +48,7 @@ properties:
           type: object
           properties:
             required:
-              type: boolean
-              description: Is the attribute required or not
+              $ref: '#/$defs/required'
           additionalProperties: false
           required:
             - required
@@ -61,6 +57,138 @@ properties:
         - name
         - type
         - options
+$defs:
+  aspect_ratio:
+    type: string
+    description: Aspect ratio of the image
+    enum: <%= Schematics::Options::AspectRatio.collection.map(&:second) %>
+  auto_increment:
+    type: boolean
+    description: Is the number auto incrementable or not
+  confirm:
+    type: boolean
+    description: Has the password to be confirmed or not
+  content_type:
+    type: string
+    description: The content type of the attachment
+    enum: <%= Schematics::Options::ContentType.collection %>
+  descriptor:
+    type: string
+    description: The attribute name which represents the most the entity
+  equal_to:
+    type: number
+    description: The number should be equal to
+  events:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The unique event name in snake case and in english
+      icon:
+        $ref: '#/$defs/icon'
+      color:
+        type: string
+        description: The event style
+        enum: <%= Schematics::Options::StateMachineEvent::COLORS.map(&:to_s) %>
+      from:
+        type: string
+        description: The starting value of the event transition
+      to:
+        type: string
+        description: The ending value of the event transition
+    additionalProperties: false
+    required:
+      - name
+      - icon
+      - color
+      - from
+      - to
+  greater_than_or_equal_to:
+    type: number
+    description: The number should be greater than or equal to
+  greater_than:
+    type: number
+    description: The number should be greater than
+  height:
+    type: number
+    description: The height of the image in pixels
+  icon:
+    type: string
+    description: An icon which represents the entity
+    enum: <%= Schematics::Options::Icon.collection.map(&:to_s) %>
+  inverse_association_type:
+    type: string
+    description: The inverse type of the association
+    enum: <%= Schematics::Options::InverseAssociationType.collection.map(&:second) %>
+  language:
+    type: string
+    description: The language of the code editor
+    enum: <%= Schematics::Options::Language.collection %>
+  length:
+    type: number
+    description: The exact length of the text
+  less_than_or_equal_to:
+    type: number
+    description: The number should be less than or equal to
+  less_than:
+    type: number
+    description: The number should be less than
+  limit:
+    type: number
+    description: The maximum length of the text
+  max:
+    type: number
+    description: The maximum number of attachments
+  min:
+    type: number
+    description: The minimum length of the text
+  normalization:
+    type: string
+    description: The text formatting
+    enum: <%= Schematics::Options::Normalization.collection.map(&:second) %>
+  other_than:
+    type: number
+    description: The number should be other than
+  precision:
+    type: number
+    descripion: The number of digits in the number
+  readonly:
+    type: boolean
+    description: Is the attribute readonly or not
+  required:
+    type: boolean
+    description: Is the attribute required or not
+  scale:
+    type: number
+    description: The number of digits following the decimal point in the number
+  scheme:
+    type: string
+    description: The URL scheme
+    enum: <%= Schematics::Options::Scheme.collection %>
+  separator:
+    type: string
+    description: The number separator
+    enum: <%= Schematics::Options::Separator.collection %>
+  size:
+    type: number
+    description: The maximum size of the attachment in megabytes
+  translated:
+    type: boolean
+    description: Is the text translated or not
+  unique:
+    type: boolean
+    description: Is the text unique or not
+  unit:
+    type: string
+    description: The number unit
+  values:
+    type: array
+    description: The enumeration values
+    items:
+      type: string
+  width:
+    type: number
+    description: The width of the image in pixels
 additionalProperties: false
 required:
   - name
