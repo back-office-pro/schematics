@@ -21,8 +21,6 @@ class Migration < Schematics::ApplicationRecord
 
   after_save_commit :prompt_data, if: :prompt_previously_changed?
 
-  scope :processing, ::Core::Migrations::ProcessingQuery
-
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
     delegate :business_sector, to: Subscription, private: true
@@ -77,10 +75,6 @@ class Migration < Schematics::ApplicationRecord
 
   def locale
     author&.locale || ::Configuration.locale
-  end
-
-  def processing?
-    state_pending? || state_in_progress? || state_rollbacking? || state_generating?
   end
 
   def to_yaml = { one: { state: STATE_STATE_FINISHED.to_s, version:, data: data.as_json } }
