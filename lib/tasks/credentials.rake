@@ -7,7 +7,7 @@ namespace :schematics do
       filepath = Rails.root.join('config/master.key')
       ActiveStorage::Blob.create_and_upload!(
         key: File.join('backups', filepath.basename),
-        io: File.open(filepath),
+        io: filepath.open,
         filename: filepath.basename,
         content_type: Mime[:text].to_s
       )

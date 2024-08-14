@@ -19,7 +19,7 @@ RSpec.describe Schematics::Resources::Restore do
   end
   let(:image) do
     ActiveStorage::Blob.create_and_upload!(
-      io: File.open(file_fixture('logo.png'), 'rb'),
+      io: file_fixture('logo.png').open,
       filename: 'logo.png',
       content_type: Mime[:png].to_s
     ).signed_id
