@@ -6,6 +6,7 @@ module Schematics
 
     def show
       @posts = ::BlogPost.state_published
+      fresh_when(@posts)
     end
   end
 end
