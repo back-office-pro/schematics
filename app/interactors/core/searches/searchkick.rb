@@ -4,12 +4,11 @@ module Core
   module Searches
     class Searchkick
       include Interactor
-      LIMIT = 5
       delegate :query, :ability, to: :context, private: true
 
       def call
         context.suggestions = results.flat_map(&:suggestions).uniq
-        context.typeahead = results.flat_map(&:results).take(LIMIT)
+        context.typeahead = results.flat_map(&:results)
         context.results = results
       end
 

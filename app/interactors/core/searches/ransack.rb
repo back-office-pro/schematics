@@ -4,12 +4,11 @@ module Core
   module Searches
     class Ransack
       include Interactor
-      LIMIT = 5
       delegate :query, :ability, to: :context, private: true
 
       def call
         context.suggestions = []
-        context.typeahead = results.map(&:first).take(LIMIT)
+        context.typeahead = results.map(&:first)
         context.results = results
       end
 
