@@ -40,7 +40,7 @@ RSpec.shared_context 'with import' do
   let(:model) { 'User' }
   let(:file) do
     ActiveStorage::Blob.create_and_upload!(
-      io: File.open(file_fixture('users.csv'), 'rb'),
+      io: file_fixture('users.csv').open,
       filename: 'users.csv',
       content_type: Mime[:csv].to_s
     ).signed_id
@@ -167,48 +167,12 @@ RSpec.shared_context 'with password pwned stub' do
 end
 
 RSpec.shared_context 'with openai stub' do
-  let(:body) do
-    {
-      choices: [
-        {
-          message: {
-            role: 'assistant',
-            tool_calls: [
-              {
-                function: {
-                  arguments: {
-                    name: 'project',
-                    attributes: [
-                      {
-                        name: 'name',
-                        type: 'string'
-                      }
-                    ]
-                  }.to_json
-                }
-              },
-              {
-                function: {
-                  arguments: {
-                    name: 'material',
-                    attributes: [
-                      {
-                        name: 'name',
-                        type: 'string'
-                      }
-                    ]
-                  }.to_json
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }.to_json
-  end
-
   before do
     stub_request(:post, 'https://api.openai.com/v1/chat/completions')
-      .to_return(body:, headers: { 'Content-Type' => 'application/json' }, status: 200)
+      .to_return(
+        body: file_fixture('open_ai.json').read,
+        headers: { 'Content-Type' => 'application/json' },
+        status: 200
+      )
   end
 end
