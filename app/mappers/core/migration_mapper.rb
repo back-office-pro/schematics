@@ -8,7 +8,6 @@ module Core
 
     cast_option_value = Schematics::Transformable[:cast_option_value]
 
-    # rubocop:disable Metrics/BlockLength
     define! do
       deep_symbolize_keys
       rename_keys entities_attributes: :data
@@ -63,6 +62,5 @@ module Core
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

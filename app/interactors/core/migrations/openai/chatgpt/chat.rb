@@ -16,18 +16,14 @@ module Core
           after :log_data
 
           def call
-            context.data = responses.map(&method(:merge_uuids))
+            context.data = OpenAiMapper.new.call(responses).fetch(:data)
           end
 
           private
 
           memoize def client = ::OpenAI::Client.new
 
-          memoize def responses = client
-            .chat(parameters:)
-            .dig('choices', 0, 'message', 'tool_calls')
-            .map { _1.dig('function', 'arguments') }
-            .map { JSON.parse(_1, symbolize_names: true) }
+          memoize def responses = client.chat(parameters:)
 
           def parameters = {
             model: 'gpt-4o-2024-08-06',
@@ -50,12 +46,6 @@ module Core
               { role: 'user', content: prompt }
             ]
           }
-
-          def merge_uuids(response)
-            response[:id] = SecureRandom.uuid
-            response[:attributes].each { _1.merge!(id: SecureRandom.uuid) }
-            response
-          end
 
           def log_data = logger
             .tagged('OpenAI', 'ChatGPT')

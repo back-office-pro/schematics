@@ -129,6 +129,9 @@ Metrics/BlockLength:
     - to_prepare
     - it
     - each
+    - define!
+    - map_array
+    - map_values
 Metrics/MethodLength:
   Max: 35
   AllowedMethods:
