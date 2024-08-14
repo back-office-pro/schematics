@@ -13,6 +13,7 @@ module Schematics
 
     def index
       @pagy, @posts = pagy(model_class.state_published.list(filter_params, current_ability))
+      fresh_when(@posts)
     end
 
     def show; end
