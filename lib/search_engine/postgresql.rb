@@ -18,7 +18,5 @@ module SearchEngine
     def backend_mode = :async
 
     def multisearch = Core::Searches::Ransack
-
-    def initialize! = nil
   end
 end

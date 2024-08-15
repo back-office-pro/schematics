@@ -18,11 +18,5 @@ module SearchEngine
     def backend_mode = :fork
 
     def multisearch = Core::Searches::Searchkick
-
-    # :reek:UtilityFunction
-    def initialize!
-      ::Rails.application.eager_load!
-      ::Searchkick.models.each(&:reindex_async)
-    end
   end
 end

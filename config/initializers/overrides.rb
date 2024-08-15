@@ -90,6 +90,8 @@ ActiveSupport.on_load(:active_storage_record) do
     def validate_service_configuration(*) = nil
   end
 
+  def service_name = nil
+
   def paper_trail_versions = Schematics::Version.none
 end
 

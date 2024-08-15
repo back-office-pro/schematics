@@ -6,7 +6,7 @@ Rails.application.configure do
   # Configuration
   config.enable_reloading = true
   config.consider_all_requests_local = true
-  config.eager_load = false
+  config.eager_load = true
   config.server_timing = true
 
   # Public File Server
