@@ -14,6 +14,7 @@ ActiveRecordDoctor.configure do
     paper_trail_versions
     solid_queue_jobs
     solid_queue_semaphores
+    solid_queue_recurring_tasks
   ]
 
   global :ignore_models, %w[
@@ -42,6 +43,7 @@ ActiveRecordDoctor.configure do
     SolidQueue::ScheduledExecution
     SolidQueue::BlockedExecution
     SolidQueue::ReadyExecution
+    SolidQueue::RecurringTask
   ]
 
   detector :missing_foreign_keys, enabled: false
