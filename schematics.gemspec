@@ -119,7 +119,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rouge', '4.3.0'
   spec.add_dependency 'route_translator', '14.1.2'
   spec.add_dependency 'rqrcode', '2.2.0'
-  spec.add_dependency 'rspec-rails', '6.1.3'
+  spec.add_dependency 'rspec-rails', '6.1.4'
   spec.add_dependency 'ruby-graphviz', '1.2.5'
   spec.add_dependency 'ruby-openai', '7.1.0'
   spec.add_dependency 'ruby-progressbar', '1.13.0'
