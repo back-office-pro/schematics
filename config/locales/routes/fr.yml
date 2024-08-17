@@ -4,7 +4,7 @@ fr:
     active_storage: stockage
     admin: administration
     archive: archiver
-    autocomplete: auto-completion
+    autocompletions: auto-completions
     bulk_actions: actions-groupees
     delete: supprimer
     duplicate: dupliquer

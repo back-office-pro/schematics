@@ -10,7 +10,7 @@ module Schematics
       delete
       archive
       restore
-      autocomplete
+      autocompletions
       duplicate
       imports
       comparisons

@@ -4,7 +4,7 @@ it:
     active_storage: immagazzinamento
     admin: amministrazione
     archive: archiviare
-    autocomplete: completamento-automatico
+    autocompletions: completamenti-automatici
     bulk_actions: azioni-collettive
     delete: cancellare
     duplicate: duplicare
