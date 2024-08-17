@@ -131,7 +131,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'solid_cache', '0.7.0'
   spec.add_dependency 'solid_queue', '0.5.0'
   spec.add_dependency 'sprockets-rails', '3.5.2'
-  spec.add_dependency 'stimulus-rails', '1.3.3'
+  spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '12.5.0'
   spec.add_dependency 'terser', '1.2.3'
   spec.add_dependency 'turbo-rails', '2.0.6'
