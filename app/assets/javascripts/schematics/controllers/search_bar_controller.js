@@ -93,7 +93,7 @@ export default class extends ApplicationController {
         this.showResults()
         this.hideHistory()
         this.resultsTarget.innerHTML = this.pendingTemplate()
-        const response = await this.fetchAPI(this.url)
+        const response = await fetch()
         const results = await response.json()
         this.resultsTarget.innerHTML = (results.length === 0)
           ? this.notFoundTemplate()
@@ -103,6 +103,10 @@ export default class extends ApplicationController {
       this.clearResults()
       this.showHistory()
     }
+  }
+
+  fetch () {
+    return this.fetchAPI(this.url)
   }
 
   #hasResults () {

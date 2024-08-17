@@ -21,16 +21,17 @@ export default class extends SearchBarController {
     `
   }
 
-  get url () {
+  fetch () {
     const scope = this.inputTarget.getAttribute('name')
     const element = scope.match(/filter\[(\w+)\]/)[1]
-    const searchParams = new URLSearchParams(window.location.search)
-    searchParams.delete('page')
-    searchParams.delete('limit')
-    searchParams.delete('sort')
-    searchParams.set('field', element)
-    searchParams.set(scope, decodeURI(this.inputTarget.value))
-    searchParams.set('sort', element)
-    return `${window.location.pathname}/${routes.autocomplete}?${searchParams}`
+    return this.fetchAPI(this.url, 'POST', {
+      field: element,
+      sort: element,
+      [scope]: decodeURI(this.inputTarget.value)
+    })
+  }
+
+  get url () {
+    return `${window.location.pathname}/${routes.autocompletions}`
   }
 }
