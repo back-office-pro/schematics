@@ -16,7 +16,6 @@ describe Schematics::Entities::Router do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
-          get :autocomplete, on: :collection
           post :duplicate, on: :member
         end
         resources :users, only: [], model_name: 'User' do
@@ -28,6 +27,9 @@ describe Schematics::Entities::Router do
           end
           collection do
             resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'user_bulk_actions'
+          end
+          collection do
+            resources :autocompletions, only: :create, controller: 'schematics/autocompletions', as: 'user_autocompletions'
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
@@ -80,7 +82,6 @@ describe Schematics::Entities::Router do
           get :delete, on: :member
           delete :archive, on: :member
           delete :restore, on: :member
-          get :autocomplete, on: :collection
           post :duplicate, on: :member
           patch 'state/close', action: :trigger, event: 'close_state', on: :member
           patch 'state/refuse', action: :trigger, event: 'refuse_state', on: :member
@@ -96,6 +97,9 @@ describe Schematics::Entities::Router do
           collection do
             resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'user_bulk_actions'
           end
+          collection do
+            resources :autocompletions, only: :create, controller: 'schematics/autocompletions', as: 'user_autocompletions'
+          end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
         end
@@ -109,7 +113,6 @@ describe Schematics::Entities::Router do
     its(:to_str) do
       is_expected.to eq <<~RUBY
         resources :users, only: [:index, :show, :create, :new], model_name: 'User' do
-          get :autocomplete, on: :collection
           post :duplicate, on: :member
         end
         resources :users, only: [], model_name: 'User' do
@@ -118,6 +121,9 @@ describe Schematics::Entities::Router do
           end
           collection do
             resources :comparisons, only: :create, as: 'user_comparisons'
+          end
+          collection do
+            resources :autocompletions, only: :create, controller: 'schematics/autocompletions', as: 'user_autocompletions'
           end
           resources :comments, only: %i[new create]
           resources :emailings, only: %i[new create]
@@ -155,7 +161,6 @@ describe Schematics::Entities::Router do
             get :delete, on: :member
             delete :archive, on: :member
             delete :restore, on: :member
-            get :autocomplete, on: :collection
             post :duplicate, on: :member
           end
         end
@@ -169,6 +174,9 @@ describe Schematics::Entities::Router do
             end
             collection do
               resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'attachment_bulk_actions'
+            end
+            collection do
+              resources :autocompletions, only: :create, controller: 'schematics/autocompletions', as: 'attachment_autocompletions'
             end
             resources :comments, only: %i[new create]
             resources :emailings, only: %i[new create]
@@ -190,7 +198,6 @@ describe Schematics::Entities::Router do
                 get :delete, on: :member
                 delete :archive, on: :member
                 delete :restore, on: :member
-                get :autocomplete, on: :collection
                 post :duplicate, on: :member
               end
             end
@@ -208,6 +215,9 @@ describe Schematics::Entities::Router do
                 end
                 collection do
                   resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: 'translation_bulk_actions'
+                end
+                collection do
+                  resources :autocompletions, only: :create, controller: 'schematics/autocompletions', as: 'translation_autocompletions'
                 end
                 resources :comments, only: %i[new create]
                 resources :emailings, only: %i[new create]
