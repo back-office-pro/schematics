@@ -5,5 +5,5 @@ require 'solid_queue/configuration'
 describe SolidQueue::Configuration do
   it_behaves_like 'a monkey patched instance method',
                   :config_from,
-                  'b7a9d152abba7d24d6c7c817b058b5b43689d0a9d635cb87f1e63a8a8031abdf'
+                  '18af6f31d538af20590ef92ed70c43b37f9c41a4483d397e1f72c346c333363e'
 end
