@@ -13,6 +13,7 @@ module Schematics
         subject(:record) { default }
 
         it { is_expected.to be_valid }
+        it { is_expected.to be_versioned }
         it { is_expected.to have_implicit_order_column(:created_at) }
         it { is_expected.to be_a(Loadable) }
 
