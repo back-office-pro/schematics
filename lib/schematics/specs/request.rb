@@ -27,19 +27,22 @@ module Schematics
 
         let(:record) { default.tap(&:save!) }
         let(:route_key) { [model_class.model_name.singular_route_key.to_sym] }
-        let(:auth_token) { session.signed_id }
+        let(:auth_token) { @session.signed_id }
         let(:headers) { { 'Authorization' => "Bearer #{auth_token}" } } # rubocop:disable Style/StringHashKeys
-        let(:api_key_headers) { { 'x-api-key' => api_key.auth_token } } # rubocop:disable Style/StringHashKeys
+        let(:api_key_headers) { { 'x-api-key' => @api_key.auth_token } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }
         let(:headers_with_referer) { headers.merge('HTTP_REFERER' => edit_profile_url(host:)) } # rubocop:disable Style/StringHashKeys
-        let(:ability) { Ability.new(user) }
-        let(:session) { ::Session.create!(user:) }
-        let(:permissions) { ::Permission.create_entities_permissions! }
-        let(:api_key) { ::APIKey.create!(name: 'API key', permissions:) }
+        let(:ability) { Ability.new(@user) }
         let(:index_path) { polymorphic_path(model_class) }
-        let(:role) { ::Role.create!(name: 'Admin', permissions:) }
-        let(:user) do
-          ::User.create!(email: 'john.doe@nowhere.com', first_name: 'John', last_name: 'Doe', role:)
+
+        before_all do
+          PaperTrail.request(enabled: false) do
+            @permissions = ::Permission.create_entities_permissions!
+            @role = ::Role.create!(name: 'Admin', permissions: @permissions)
+            @user = ::User.create!(email: 'john.doe@everywhere.com', role: @role)
+            @api_key = ::APIKey.create!(name: 'API key', permissions: @permissions)
+            @session = ::Session.create!(user: @user)
+          end
         end
 
         before do

@@ -86,9 +86,9 @@ RSpec.describe SessionsController, except: %i[create destroy] do
 
     context 'when impersonating with admin role' do
       include_context 'with authenticated user'
-      include_context 'with admin role'
 
-      let(:role) { admin_role }
+      let(:role) { @role }
+      let(:session) { @session }
       let(:email) { other_user.email }
       let(:password) { nil }
       let(:remember_me) { nil }
