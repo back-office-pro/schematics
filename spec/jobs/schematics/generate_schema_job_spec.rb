@@ -24,5 +24,24 @@ RSpec.describe Schematics::GenerateSchemaJob do
     it 'loads data from gateway' do
       expect { perform_now }.to change(migration, :data)
     end
+
+    context 'when job has retried 5 times' do
+      before do
+        allow(migration)
+          .to receive(:update!)
+          .and_call_original
+        allow(migration)
+          .to receive(:update!)
+          .with(data: Hash)
+          .and_raise(ActiveRecord::RecordInvalid)
+        allow_any_instance_of(described_class) # rubocop:disable RSpec/AnyInstance
+          .to receive(:executions_for)
+          .and_return(5)
+      end
+
+      it 'switches state back to editing after discard' do
+        expect { perform_now }.not_to change(migration, :state)
+      end
+    end
   end
 end
