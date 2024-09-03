@@ -109,6 +109,7 @@ Style/RequireOrder:
     - lib/schematics.rb
     - lib/schematics/commands/*.rb
     - app/controllers/schematics/resources_controller.rb
+    - config/initializers/rspec.rb
 Metrics/BlockLength:
   AllowedMethods:
     - describe
@@ -181,6 +182,8 @@ RSpec/DescribeClass:
 RSpec/RemoveConst:
   Exclude:
     - spec/interactors/core/migrations/migrate_spec.rb
+RSpec/InstanceVariable:
+  AssignmentOnly: true
 # rubocop-rails
 Rails/SaveBang:
   Enabled: true

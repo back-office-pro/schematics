@@ -134,6 +134,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '12.5.0'
   spec.add_dependency 'terser', '1.2.3'
+  spec.add_dependency 'test-prof', '1.4.2'
   spec.add_dependency 'turbo-rails', '2.0.6'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'

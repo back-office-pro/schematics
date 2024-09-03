@@ -6,6 +6,8 @@ Rails.configuration.to_prepare do
   require 'active_storage_validations/matchers'
   require 'paper_trail/frameworks/rspec'
   require 'rspec/rails'
+  require 'test_prof/recipes/rspec/before_all'
+  require 'test_prof/before_all/isolator'
   require 'validate_url/rspec_matcher'
 
   # rails_helper
