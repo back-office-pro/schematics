@@ -4,5 +4,5 @@ describe 'RSpec Request spec template' do
   it_behaves_like 'an overridden file',
                   'rspec-rails',
                   '/lib/generators/rspec/scaffold/templates/request_spec.rb',
-                  'eddd62673ec69cd38c0a8d961a141688199cfb89ee2fe6b737c9ee053fae9bf2'
+                  'ac04b9c1a5a328efa4389ddf9b56a05c0d9615f13c34ff03f8d6f46250b1c44d'
 end
