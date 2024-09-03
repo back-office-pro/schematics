@@ -55,7 +55,7 @@ class Subscription < Schematics::ApplicationRecord
       update!(GATEWAY::Fetch.call.data)
       return unless saved_change_to_metadata_databases?
 
-      ::Core::Migrations::Restart.call(force: true)
+      ::Core::Migrations::Restart.call
     end
   end
 

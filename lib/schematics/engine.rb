@@ -148,6 +148,10 @@ module Schematics
     config.i18n.available_locales = %i[en fr it]
     config.i18n.fallbacks = true
 
+    # Solid Cache
+    # TODO: uncomment when upgrading to Rails 8
+    # config.solid_cache.encrypt = true
+
     # MissionControl
     config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'
     config.mission_control.jobs.show_console_help = false

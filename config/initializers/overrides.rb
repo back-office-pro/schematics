@@ -110,6 +110,7 @@ ActiveSupport.on_load(:action_text_rich_text) do
   end
 end
 
+# TODO: remove when upgrading to Rails 8
 ActiveSupport.on_load(:solid_cache_entry) do
   encrypts :value
 end

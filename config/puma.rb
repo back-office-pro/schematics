@@ -11,5 +11,3 @@ pidfile ENV['PIDFILE'] if ENV['PIDFILE']
 
 plugin :tmp_restart
 plugin :solid_queue
-
-solid_queue_mode Tenant.search_engine.backend_mode
