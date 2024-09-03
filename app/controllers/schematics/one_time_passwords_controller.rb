@@ -25,7 +25,10 @@ module Schematics
     def edit; end
 
     def create
-      @user = model_class.find_by_token_for!(:one_time_password, resource_params[:otp_token])
+      @user = model_class.find_by_token_for!(
+        :one_time_password,
+        resource_params_with_defaults[:otp_token]
+      )
       result = OneTimePasswords::Create.call(
         user: @user,
         session: current_session,
