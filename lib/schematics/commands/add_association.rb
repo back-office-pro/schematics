@@ -13,7 +13,7 @@ module Schematics
         [
           "create_join_table_#{table_name.pluralize}_#{attribute.name}",
           table_name.pluralize,
-          attribute.name
+          "#{attribute.name}:uniq"
         ]
       )
 

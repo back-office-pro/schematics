@@ -19,7 +19,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Mi
       <%- if attribute.reference? -%>
       t.references :<%= attribute.name %><%= attribute.inject_options %><%= foreign_key_type %>
       <%- else -%>
-      t.index <%= attribute.index_name %>
+      t.index <%= attribute.index_name %><%= attribute.inject_index_options %>
       <%- end -%>
     <%- end -%>
     end

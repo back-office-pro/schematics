@@ -49,7 +49,7 @@ module Rails
         end
 
         def inject_index_where
-          "where: 'deleted_at IS NULL'"
+          "where: 'deleted_at IS NULL'" unless index_name in Array
         end
 
         def schema_attribute

@@ -63,7 +63,7 @@ module Schematics
           [
             "create_join_table_#{association.entity.table_name.pluralize}_#{association.inverse_entity.table_name.pluralize}", # rubocop:disable Layout/LineLength
             association.entity.table_name.pluralize,
-            association.inverse_entity.table_name.pluralize
+            "#{association.inverse_entity.table_name.pluralize}:uniq"
           ]
         )
       end
