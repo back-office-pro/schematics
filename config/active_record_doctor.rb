@@ -49,4 +49,6 @@ ActiveRecordDoctor.configure do
   detector :missing_foreign_keys, enabled: false
   detector :missing_non_null_constraint, enabled: false
   detector :incorrect_length_validation, enabled: false
+  detector :table_without_primary_key, enabled: false
+  detector :incorrect_dependent_option, enabled: false
 end
