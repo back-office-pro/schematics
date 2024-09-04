@@ -9,6 +9,12 @@ module Schematics
         include Behaviours::Renderable
         delegate_missing_to :@exception
 
+        class << self
+          def build(exception)
+            exception.exception(Errors.const_get(exception.class.to_s).new(exception))
+          end
+        end
+
         def initialize(exception)
           @exception = exception
         end

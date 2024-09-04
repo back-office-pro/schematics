@@ -69,7 +69,7 @@ describe Schematics::Virtuals::Comparison do
       def big_price
         self.category.vat == 10 && (self.sold_at == nil || Time.current < self.sold_at)
       rescue StandardError => e
-        e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
+        Virtuals::Errors::StandardError.build(e)
       end
       scope :big_price, -> { where(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")) }
       scope :not_big_price, -> { where.not(Arel.sql("(categories.vat = 10 AND (products.sold_at IS NULL OR NOW() < products.sold_at))")) }

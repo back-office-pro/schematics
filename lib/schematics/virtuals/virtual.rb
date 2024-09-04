@@ -72,7 +72,7 @@ module Schematics
         def #{name}
           #{method_body}
         rescue StandardError => e
-          e.exception(Virtuals::Errors.const_get(e.class.to_s).new(e))
+          Virtuals::Errors::StandardError.build(e)
         end
       RUBY
 
