@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Rescuable
+  module Rescuable # rubocop:disable Metrics/ModuleLength
     extend ActiveSupport::Concern
 
     included do
@@ -12,6 +12,7 @@ module Schematics
       rescue_from ActiveRecord::StaleObjectError, with: :stale_object_error
       rescue_from ActionController::UnknownFormat, with: :unknown_format
       rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :invalid_token
+      rescue_from Schematics::TriggerError, with: :trigger_error
     end
 
     def access_denied
@@ -100,6 +101,17 @@ module Schematics
           format.json { head :bad_request }
           format.any do
             redirect_to index_path, alert: t('schematics.application.invalid_token.alert')
+          end
+        end
+      end
+    end
+
+    def trigger_error(exception)
+      switch_localization do
+        respond_to do |format|
+          format.any { redirect_to index_path, alert: exception.to_s }
+          format.json do
+            render json: { errors: [trigger: [exception.to_s]] }, status: :bad_request
           end
         end
       end
