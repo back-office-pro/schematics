@@ -25,7 +25,7 @@ RSpec.describe Schematics::GenerateSchemaJob do
       expect { perform_now }.to change(migration, :data)
     end
 
-    context 'when job has retried 5 times' do
+    context 'when job has retried 5 times because of a record invalid error' do
       before do
         allow(migration)
           .to receive(:update!)
@@ -34,6 +34,25 @@ RSpec.describe Schematics::GenerateSchemaJob do
           .to receive(:update!)
           .with(data: Hash)
           .and_raise(ActiveRecord::RecordInvalid)
+        allow_any_instance_of(described_class) # rubocop:disable RSpec/AnyInstance
+          .to receive(:executions_for)
+          .and_return(5)
+      end
+
+      it 'switches state back to editing after discard' do
+        expect { perform_now }.not_to change(migration, :state)
+      end
+    end
+
+    context 'when job has retried 5 times because of a faraday error' do
+      before do
+        allow(migration)
+          .to receive(:update!)
+          .and_call_original
+        allow(migration)
+          .to receive(:update!)
+          .with(data: Hash)
+          .and_raise(Faraday::Error)
         allow_any_instance_of(described_class) # rubocop:disable RSpec/AnyInstance
           .to receive(:executions_for)
           .and_return(5)
