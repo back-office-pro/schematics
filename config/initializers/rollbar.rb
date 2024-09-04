@@ -5,7 +5,6 @@ Rollbar.configure do |config|
   config.enabled = !Rails.env.test?
   config.use_active_job(queue: 'rollbar')
   config.environment = Rails.env
-  config.enable_rails_error_subscriber = true
   config.async_json_payload = true
   config.anonymize_user_ip = true
   config.person_method = :current_user
