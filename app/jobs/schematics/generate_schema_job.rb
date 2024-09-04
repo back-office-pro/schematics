@@ -7,7 +7,7 @@ module Schematics
 
     retry_on Faraday::Error, wait: :polynomially_longer, attempts: 5
     retry_on ActiveRecord::RecordInvalid, wait: 10.seconds, attempts: 5 do |_job, error|
-      Rollbar.error(error, '[Migration] GenerateSchema error')
+      Rollbar.error('[Migration] GenerateSchema error', data: error.record.data.to_json)
     end
 
     after_discard do |job|
