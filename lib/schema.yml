@@ -21,7 +21,7 @@ properties:
       icon:
         type: string
         description: An icon which represents the entity
-        enum: <%= Schematics::Options::Icon.collection.map(&:to_s) %>
+        enum: <%= Schematics::Options::Icon.collection.map(&:to_s).sample(100) %>
     additionalProperties: false
     required:
       - descriptor
@@ -151,7 +151,7 @@ $defs:
             icon:
               type: string
               description: An icon which represents the event
-              enum: <%= Schematics::Options::Icon.collection.map(&:to_s) %>
+              enum: <%= Schematics::Options::Icon.collection.map(&:to_s).sample(100) %>
             color:
               type: string
               description: The event style
