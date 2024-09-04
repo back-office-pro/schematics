@@ -3,6 +3,8 @@
 require 'action_view'
 
 module Schematics
+  class TriggerError < StandardError; end
+
   # :reek:Attribute
   class Trigger
     include Behaviours::Specifiable
@@ -42,7 +44,8 @@ module Schematics
           #{action} :#{method_name}
           def #{method_name}
             #{method_body}
-          rescue StandardError
+          rescue StandardError => e
+            raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
         RUBY
       in ['after_create', *] | ['after_save', *] | ['after_destroy', *]
@@ -51,7 +54,8 @@ module Schematics
           def #{method_name}
             #{method_body}
             save!
-          rescue StandardError
+          rescue StandardError => e
+            raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
         RUBY
       in [*, nil]
@@ -63,7 +67,8 @@ module Schematics
           def #{action}
             #{method_body}
             save!
-          rescue StandardError
+          rescue StandardError => e
+            raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
         RUBY
       end

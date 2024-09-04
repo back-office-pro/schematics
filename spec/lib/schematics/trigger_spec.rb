@@ -24,7 +24,8 @@ describe Schematics::Trigger do
         def after_close_event
           self.in_stock = true
           save!
-        rescue StandardError
+        rescue StandardError => e
+          raise TriggerError, Virtuals::Errors::StandardError.build(e)
         end
       RUBY
     end
@@ -50,7 +51,8 @@ describe Schematics::Trigger do
           def after_create_abcd_123e
             self.in_stock = true
             save!
-          rescue StandardError
+          rescue StandardError => e
+            raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
         RUBY
       end
@@ -72,7 +74,8 @@ describe Schematics::Trigger do
           before_create :before_create_abcd_123e
           def before_create_abcd_123e
             self.in_stock = true
-          rescue StandardError
+          rescue StandardError => e
+            raise TriggerError, Virtuals::Errors::StandardError.build(e)
           end
         RUBY
       end
