@@ -1,0 +1,21 @@
+---
+it:
+  activerecord:
+    attributes:
+      backup:
+        file: File
+        migration: Migration
+        state: State
+    enums:
+      backup:
+        state:
+          ready: Ready
+          restoring: Restoring
+    events:
+      backup:
+        restore: Restore
+    models:
+      backup:
+        gender: male
+        one: Backup
+        other: Backups
