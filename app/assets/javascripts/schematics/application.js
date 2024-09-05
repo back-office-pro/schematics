@@ -6,10 +6,9 @@ import 'chartkick'
 import 'Chart.bundle'
 import { application } from 'controllers/application'
 import { Crisp } from 'crisp-sdk-web'
-import Pagy from 'pagy-module'
 import Rollbar from 'rollbar'
 
-/* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix */
+/* global matchMedia, environment, crispClientId, mapsAPIKey, rollbarClientKey, Chartkick, I18n, Trix, Pagy */
 
 const setTheme = () => {
   document

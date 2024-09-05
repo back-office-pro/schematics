@@ -7,7 +7,6 @@ pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js'
 
 pin 'chartkick', to: 'chartkick.js'
 pin 'Chart.bundle', to: 'Chart.bundle.js'
-pin 'pagy-module'
 
 pin 'application' if Rails.root.join('app/javascript/application.js').exist?
 pin 'schematics/application'
