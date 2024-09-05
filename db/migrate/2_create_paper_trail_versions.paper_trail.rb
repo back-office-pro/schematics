@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreatePaperTrailVersions < ActiveRecord::Migration[7.1]
+class CreatePaperTrailVersions < ActiveRecord::Migration[7.2]
   def change
     create_table :paper_trail_versions, id: :uuid do |t|
       t.string   :item_type, null: false
