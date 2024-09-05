@@ -2022,5 +2022,54 @@
         }
       }
     ]
+  },
+  {
+    "id": "8bd6b418-ae92-4a8a-aee3-697c943417cd",
+    "name": "backup",
+    "options": {
+      "icon": "hard_drive",
+      "actions": [
+        "index",
+        "show"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "20db6500-c9e2-4d0e-a965-feb4b3beea2f",
+        "name": "file",
+        "type": "attachment",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "id": "9ec1a142-e066-440d-901e-8a4b3e3747e8",
+        "name": "migration",
+        "type": "belongs_to"
+      },
+      {
+        "id": "4820829b-0d56-4a73-a3eb-d110e147325e",
+        "name": "state",
+        "type": "state_machine",
+        "options": {
+          "required": true,
+          "default": "ready",
+          "values": [
+            "ready",
+            "restoring"
+          ],
+          "events": [
+            {
+              "id": "d02d71c7-45c3-4ad1-ac17-2158b38392fc",
+              "name": "restore",
+              "icon": "paint_roller",
+              "color": "danger",
+              "from": "ready",
+              "to": "restoring"
+            }
+          ]
+        }
+      }
+    ]
   }
 ]
