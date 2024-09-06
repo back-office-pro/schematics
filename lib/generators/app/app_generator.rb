@@ -54,12 +54,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations', env:
   end
 
-  def install_solid_queue
-    return unless generating?
-
-    rails_command 'solid_queue:install:migrations', env:
-  end
-
   def create_database
     return if container?
     return unless generating?

@@ -128,7 +128,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'shoulda-matchers', '6.4.0'
   spec.add_dependency 'slim', '5.2.1'
   spec.add_dependency 'solid_cache', '1.0.5'
-  spec.add_dependency 'solid_queue', '0.7.1'
+  spec.add_dependency 'solid_queue', '0.8.2'
   spec.add_dependency 'sprockets-rails', '3.5.2'
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '12.5.0'
