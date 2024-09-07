@@ -9,7 +9,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Mi
 <% end -%>
 <% end -%>
 <% if options[:timestamps] %>
-      t.timestamps
+      t.timestamps index: { where: 'deleted_at IS NULL' }
 <% end -%>
 <% attributes_with_index.each do |attribute| -%>
       t.index :<%= attribute.index_name %><%= attribute.inject_index_options %>

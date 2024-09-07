@@ -33,7 +33,7 @@ module Schematics
 
       def migratable_attributes = entity
         .migratable_attributes
-        .push('slug:string:uniq', 'lock_version:integer')
+        .push('slug:string:uniq', 'lock_version:integer', 'deleted_at:datetime:index')
         .map(&:to_s)
 
       def spec_interpolations = super.merge(

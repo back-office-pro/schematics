@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_record/connection_adapters/abstract/schema_definitions'
-require 'active_record/override/connection_adapters/table_definition'
 require 'active_record/override/generators/migration_generator'
 require 'active_storage/override/blob'
 require 'active_storage/service/tenant_s3_service'
@@ -21,13 +20,11 @@ require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
 MigrationGenerator = ActiveRecord::Override::Generators::MigrationGenerator
-TableDefinition = ActiveRecord::Override::ConnectionAdapters::TableDefinition
 
 Rails::Generators::GeneratedAttribute.singleton_class.prepend(GeneratedAttribute)
 Rails::Generators::GeneratedAttribute.prepend(GeneratedAttribute)
 
 ActiveRecord::Generators::MigrationGenerator.prepend(MigrationGenerator)
-ActiveRecord::ConnectionAdapters::TableDefinition.prepend(TableDefinition)
 
 OpenApi::Router.singleton_class.prepend(OpenApi::Override::Router)
 

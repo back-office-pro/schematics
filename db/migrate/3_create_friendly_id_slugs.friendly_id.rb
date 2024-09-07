@@ -8,8 +8,9 @@ class CreateFriendlyIdSlugs < ActiveRecord::Migration[7.2]
       t.string   :sluggable_type, limit: 50
       t.string   :scope
       t.string   :locale, null: false
+      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
 
-      t.timestamps
+      t.timestamps index: { where: 'deleted_at IS NULL' }
     end
     add_index :friendly_id_slugs, :locale, where: 'deleted_at IS NULL'
     add_index :friendly_id_slugs,

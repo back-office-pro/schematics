@@ -10,8 +10,9 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.2]
       t.string   :service_name, null: false
       t.bigint   :byte_size,    null: false
       t.string   :checksum
+      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
 
-      t.timestamps
+      t.timestamps index: { where: 'deleted_at IS NULL' }
 
       t.index :key, using: :btree, unique: true, where: 'deleted_at IS NULL'
       t.index :filename, using: :btree, where: 'deleted_at IS NULL'
@@ -23,8 +24,9 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.2]
       t.string     :name,   null: false
       t.references :record, null: false, polymorphic: true, index: false, type: :uuid
       t.references :blob,   null: false, type: :uuid
+      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
 
-      t.timestamps
+      t.timestamps index: { where: 'deleted_at IS NULL' }
 
       t.index %i[record_type record_id name blob_id],
               name: :index_active_storage_attachments_uniqueness,
@@ -36,8 +38,9 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.2]
     create_table :active_storage_variant_records, id: :uuid do |t|
       t.belongs_to :blob, null: false, index: false, type: :uuid
       t.string :variation_digest, null: false
+      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
 
-      t.timestamps
+      t.timestamps index: { where: 'deleted_at IS NULL' }
 
       t.index %i[blob_id variation_digest],
               name: :index_active_storage_variant_records_uniqueness,

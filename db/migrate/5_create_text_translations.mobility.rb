@@ -7,7 +7,8 @@ class CreateTextTranslations < ActiveRecord::Migration[7.2]
       t.string :key, null: false
       t.text :value
       t.references :translatable, polymorphic: true, index: false, type: :uuid
-      t.timestamps null: false
+      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
+      t.timestamps index: { where: 'deleted_at IS NULL' }
     end
     add_index :mobility_text_translations,
               %i[translatable_id translatable_type locale key],
