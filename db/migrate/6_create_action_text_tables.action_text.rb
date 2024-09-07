@@ -7,7 +7,7 @@ class CreateActionTextTables < ActiveRecord::Migration[7.0]
       t.text       :body, size: :long
       t.string     :locale
       t.references :record, null: false, polymorphic: true, index: false, type: :uuid
-      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
+      t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }
 

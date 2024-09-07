@@ -24,7 +24,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.2]
       t.string     :name,   null: false
       t.references :record, null: false, polymorphic: true, index: false, type: :uuid
       t.references :blob,   null: false, type: :uuid
-      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
+      t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }
 
@@ -37,8 +37,8 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.2]
 
     create_table :active_storage_variant_records, id: :uuid do |t|
       t.belongs_to :blob, null: false, index: false, type: :uuid
-      t.string :variation_digest, null: false
-      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
+      t.string     :variation_digest, null: false
+      t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }
 
