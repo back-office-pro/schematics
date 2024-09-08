@@ -54,6 +54,18 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations', env:
   end
 
+  def install_cache_migrations
+    return unless generating?
+
+    rails_command 'schematics:install:migrations MIGRATIONS_PATH=db/cache_migrate DATABASE=cache', env: # rubocop:disable Layout/LineLength
+  end
+
+  def install_queue_migrations
+    return unless generating?
+
+    rails_command 'schematics:install:migrations MIGRATIONS_PATH=db/queue_migrate DATABASE=queue', env: # rubocop:disable Layout/LineLength
+  end
+
   def create_database
     return if container?
     return unless generating?
