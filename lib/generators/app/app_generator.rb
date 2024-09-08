@@ -5,7 +5,12 @@ require 'active_support/core_ext/string/inquiry'
 require 'fileutils'
 require 'json'
 require 'pg'
+require 'rails'
 require 'rails/generators/rails/app/app_generator'
+require 'solid_cache'
+require 'solid_queue'
+require 'generators/solid_cache/install/install_generator'
+require 'generators/solid_queue/install/install_generator'
 
 # :reek:RepeatedConditional
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
@@ -92,6 +97,32 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     rails_command 'db:migrate', env:
+  end
+
+  def install_solid_queue_schema
+    return unless generating?
+
+    copy_file(
+      "#{SolidQueue::InstallGenerator.source_root}/db/queue_schema.rb",
+      'db/queue_schema.rb',
+      force: true
+    )
+  end
+
+  def install_solid_cache_schema
+    return unless generating?
+
+    copy_file(
+      "#{SolidCache::InstallGenerator.source_root}/db/cache_schema.rb",
+      'db/cache_schema.rb',
+      force: true
+    )
+  end
+
+  def prepare_database
+    return unless generating?
+
+    rails_command 'db:prepare', env:
   end
 
   def load_subscription
