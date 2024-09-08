@@ -54,18 +54,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations', env:
   end
 
-  def install_cache_migrations
-    return unless generating?
-
-    rails_command 'schematics:install:migrations MIGRATIONS_PATH=db/cache_migrate DATABASE=cache', env: # rubocop:disable Layout/LineLength
-  end
-
-  def install_queue_migrations
-    return unless generating?
-
-    rails_command 'schematics:install:migrations MIGRATIONS_PATH=db/queue_migrate DATABASE=queue', env: # rubocop:disable Layout/LineLength
-  end
-
   def create_database
     return if container?
     return unless generating?
@@ -104,6 +92,34 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     rails_command 'db:migrate', env:
+  end
+
+  def install_solid_queue
+    return unless generating?
+
+    remove_file 'db/queue_schema.rb'
+    rails_command('solid_queue:install', env:)
+    remove_file 'bin/jobs'
+    remove_file 'config/solid_queue.yml'
+  end
+
+  def install_solid_cache
+    return unless generating?
+
+    remove_file 'db/cache_schema.rb'
+    create_file 'config/database.yml', <<~YAML
+      production:
+        database: #{app_name}_production
+    YAML
+    rails_command('solid_cache:install', env:)
+    remove_file 'config/database.yml'
+    remove_file 'config/solid_cache.yml'
+  end
+
+  def prepare_database
+    return unless generating?
+
+    rails_command 'db:prepare', env:
   end
 
   def load_subscription

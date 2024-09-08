@@ -56,7 +56,5 @@ directories:
     UtilityFunction:
       enabled: false
 exclude_paths:
-  - db/cache_migrate
   - db/migrate
-  - db/queue_migrate
   - spec/demo
