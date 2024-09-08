@@ -93,7 +93,7 @@ export default class extends ApplicationController {
         this.showResults()
         this.hideHistory()
         this.resultsTarget.innerHTML = this.pendingTemplate()
-        const response = await fetch()
+        const response = await this.fetchAPI(this.url, this.method, this.params)
         const results = await response.json()
         this.resultsTarget.innerHTML = (results.length === 0)
           ? this.notFoundTemplate()
@@ -103,10 +103,6 @@ export default class extends ApplicationController {
       this.clearResults()
       this.showHistory()
     }
-  }
-
-  fetch () {
-    return this.fetchAPI(this.url)
   }
 
   #hasResults () {
@@ -121,5 +117,13 @@ export default class extends ApplicationController {
     const searchParams = new URLSearchParams()
     searchParams.set('q', this.inputTarget.value)
     return `${routes.searches}?${searchParams}`
+  }
+
+  get params () {
+    return null
+  }
+
+  get method () {
+    return 'GET'
   }
 }
