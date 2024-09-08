@@ -54,7 +54,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       }
     ]
   )
-  Chart.create_without_validations!(
+  Chart.create_without_validations(
     [
       {
         kind: 'bar',
@@ -77,7 +77,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       }
     ]
   )
-  DataCleaning.create_without_validations!(
+  DataCleaning.create_without_validations(
     [
       { model: 'Comparison', period: 'month', really_destroy: true },
       { model: 'APIRequest', period: 'year', really_destroy: true },

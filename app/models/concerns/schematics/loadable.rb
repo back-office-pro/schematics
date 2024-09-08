@@ -49,7 +49,7 @@ module Schematics
         end
       end
 
-      def create_without_validations!(attributes)
+      def create_without_validations(attributes)
         attributes.map { new(**_1).save(validate: false) } # rubocop:disable Rails/SaveBang
       end
 
