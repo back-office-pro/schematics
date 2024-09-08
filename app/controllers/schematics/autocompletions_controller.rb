@@ -3,13 +3,16 @@
 module Schematics
   class AutocompletionsController < ApplicationController
     include Nestable
+    include Searchable
+
+    delegate :entity, to: :parent_model_class, private: true
 
     def create
       authorize!(:index, parent_model_class)
-      respond_with parent_model_class.autocomplete(
+      render json: parent_model_class.autocomplete(
         filter_params,
         current_ability,
-        autocompletion_params
+        autocompletion_params[:field]
       )
     end
 
