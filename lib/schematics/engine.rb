@@ -149,8 +149,7 @@ module Schematics
     config.i18n.fallbacks = true
 
     # Solid Cache
-    # TODO: uncomment when upgrading to Rails 8
-    # config.solid_cache.encrypt = true
+    config.solid_cache.encrypt = false # TODO: enable when upgrading to Rails 8
 
     # MissionControl
     config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'
