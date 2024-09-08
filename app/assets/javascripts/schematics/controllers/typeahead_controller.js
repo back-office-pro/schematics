@@ -37,10 +37,7 @@ export default class extends SearchBarController {
   get params () {
     return {
       autocompletion: {
-        field: this
-          .inputTarget
-          .getAttribute('name')
-          .match(/filter\[(\w+)\]/)[1]
+        field: this.inputTarget.getAttribute('name').match(/filter\[(\w+)\]/)[1]
       }
     }
   }
