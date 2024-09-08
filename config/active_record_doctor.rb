@@ -44,6 +44,8 @@ ActiveRecordDoctor.configure do
     SolidQueue::BlockedExecution
     SolidQueue::ReadyExecution
     SolidQueue::RecurringTask
+    SolidQueue::ClaimedExecution
+    SolidQueue::FailedExecution
   ]
 
   detector :missing_foreign_keys, enabled: false
