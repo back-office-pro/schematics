@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Autocompletions' do
   include_context 'with authenticated user'
-  # include_context 'with admin role'
+  include_context 'with admin role'
 
-  # let(:role) { admin_role }
+  let(:role) { admin_role }
 
   describe 'POST #create' do
     let(:do_request) { post(user_autocompletions_path, params:, headers:) }
