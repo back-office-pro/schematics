@@ -9,12 +9,13 @@ RSpec.describe 'Autocompletions' do
   let(:role) { admin_role }
 
   describe 'POST #create' do
-    let(:do_request) { post(user_autocompletions_path, params:, headers:) }
+    let(:do_request) { post(path, params:, headers:) }
+    let(:path) { user_autocompletions_path(filter: { email: 'john' }) }
     let(:params) { { autocompletion: { field: 'email' } } }
 
     before { do_request }
 
-    it { is_expected.to have_http_status(:created) }
-    its(:body) { is_expected.to eq(['john.doe@nowhere.com']) }
+    it { is_expected.to have_http_status(:success) }
+    its(:parsed_body) { is_expected.to eq(['john.doe@nowhere.com']) }
   end
 end
