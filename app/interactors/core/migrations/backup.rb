@@ -7,7 +7,6 @@ module Core
 
       delegate :migration_context, to: 'ActiveRecord::Base.connection_pool', private: true
       delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
-      delegate :table_name, to: ::SolidCache::Entry, prefix: :solid_cache, private: true
       delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :force, to: :context, private: true
@@ -24,7 +23,7 @@ module Core
 
       private
 
-      def command = "pg_dump -Fc #{current_database} --exclude-table-data=#{solid_cache_table_name}"
+      def command = "pg_dump -Fc #{current_database}"
 
       def content_type = 'application/octet-stream'
 
