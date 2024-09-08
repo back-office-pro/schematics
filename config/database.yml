@@ -1,22 +1,40 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 7 } %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   connect_timeout: 1
   checkout_timeout: 1
   variables:
     statement_timeout: 5s
 
 development:
-  <<: *default
-  database: <%= Tenant.app_name %>_development
+  primary:
+    <<: *default
+    database: <%= Tenant.app_name %>_development
+  cache:
+    <<: *default
+    database: <%= Tenant.app_name %>_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: <%= Tenant.app_name %>_development_queue
+    migrations_paths: db/queue_migrate
 
 test:
   <<: *default
   database: <%= Tenant.app_name %>_test
 
 production:
-  <<: *default
-  database: <%= Tenant.app_name %>_production
-  username: <%= Tenant.app_name %>
-  password: <%= Rails.application.credentials.database_password %>
+  primary: &primary_production
+    <<: *default
+    database: <%= Tenant.app_name %>_production
+    username: <%= Tenant.app_name %>
+    password: <%= Rails.application.credentials.database_password %>
+  cache:
+    <<: *primary_production
+    database: <%= Tenant.app_name %>_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: <%= Tenant.app_name %>_production_queue
+    migrations_paths: db/queue_migrate
