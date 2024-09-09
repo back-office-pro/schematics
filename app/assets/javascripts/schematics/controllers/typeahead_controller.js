@@ -30,10 +30,6 @@ export default class extends SearchBarController {
     return `${window.location.pathname}/${routes.autocompletions}?${searchParams}`
   }
 
-  get method () {
-    return 'POST'
-  }
-
   get params () {
     return { autocompletion: { field: this.inputName.match(/filter\[(\w+)\]/)[1] } }
   }
