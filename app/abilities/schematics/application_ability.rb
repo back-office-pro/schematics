@@ -6,7 +6,6 @@ module Schematics
 
     def initialize(*)
       alias_action :duplicate, :import, to: :create
-      alias_action :index, to: :autocomplete
       alias_action :restore, to: :archive
       alias_action :delete, to: :destroy
     end
