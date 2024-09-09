@@ -5,9 +5,11 @@ module Core
     class AutocompleteQuery < Schematics::ApplicationQuery
       LIMIT = 5
 
-      def call(_, ability, query)
-        multisearch
-          .call(query, ability)
+      def call(_filter_params, ability, query)
+        ::Tenant
+          .search_engine
+          .multisearch
+          .call(query:, ability:)
           .to_h
           .fetch(:typeahead)
           .take(LIMIT)
