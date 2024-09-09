@@ -8,12 +8,12 @@ module Schematics
     delegate :entity, to: :parent_model_class, private: true
 
     def create
-      authorize!(:index, parent_model_class)
+      authorize!(:autocomplete, parent_model_class)
       render json: parent_model_class.autocomplete(
         filter_params,
         current_ability,
         autocompletion_params[:field]
-      )
+      ), metadata: true
     end
 
     private
