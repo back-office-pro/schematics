@@ -118,6 +118,6 @@ export default class extends ApplicationController {
   }
 
   get params () {
-    return { autocompletion: { field: this.inputTarget.value } }
+    return { autocompletion: { query: this.inputTarget.value } }
   }
 }
