@@ -26,7 +26,7 @@ export default class extends SearchBarController {
     searchParams.delete('page')
     searchParams.delete('limit')
     searchParams.delete('sort')
-    searchParams.set(this.inputTarget.getAttribute('name'), decodeURI(this.inputTarget.value))
+    searchParams.set(this.inputName, decodeURI(this.inputTarget.value))
     return `${window.location.pathname}/${routes.autocompletions}?${searchParams}`
   }
 
@@ -35,10 +35,10 @@ export default class extends SearchBarController {
   }
 
   get params () {
-    return {
-      autocompletion: {
-        field: this.inputTarget.getAttribute('name').match(/filter\[(\w+)\]/)[1]
-      }
-    }
+    return { autocompletion: { field: this.inputName.match(/filter\[(\w+)\]/)[1] } }
+  }
+
+  get inputName () {
+    return this.inputTarget.getAttribute('name')
   }
 }
