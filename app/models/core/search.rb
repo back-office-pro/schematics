@@ -3,12 +3,5 @@
 class Search < Schematics::ApplicationRecord
   scope :history, ::Core::Searches::HistoryQuery
   scope :typeahead_history, ::Core::Searches::TypeaheadHistoryQuery
-  scope :autocomplete, -> (_filter_params, ability, query) {
-    Tenant
-      .search_engine
-      .multisearch
-      .call(query:, ability:)
-      .to_h
-      .fetch(:typeahead)
-  }
+  scope :autocomplete, ::Core::Searches::AutocompleteQuery
 end
