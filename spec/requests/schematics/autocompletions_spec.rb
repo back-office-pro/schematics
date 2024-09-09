@@ -10,8 +10,9 @@ RSpec.describe 'Autocompletions' do
 
   describe 'POST #create' do
     let(:do_request) { post(path, params:, headers:) }
-    let(:path) { user_autocompletions_path(filter: { email: 'john' }) }
-    let(:params) { { autocompletion: { field: 'email' } } }
+    let(:path) { user_autocompletions_path(filter: { field => 'john' }) }
+    let(:params) { { autocompletion: { field: } } }
+    let(:field) { 'email' }
 
     before { do_request }
 
