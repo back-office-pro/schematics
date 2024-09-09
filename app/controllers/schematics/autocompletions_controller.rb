@@ -5,10 +5,10 @@ module Schematics
     include Nestable
     include Searchable
 
+    before_action :authorize_create!
     delegate :entity, to: :parent_model_class, private: true
 
     def create
-      authorize!(:autocomplete, parent_model_class)
       render json: parent_model_class.autocomplete(
         filter_params,
         current_ability,
@@ -21,5 +21,11 @@ module Schematics
     def autocompletion_params = params
       .require(:autocompletion)
       .permit(:field)
+
+    def authorize_create!
+      return if can?(:autocomplete, parent_model_class)
+
+      authorize!(:index, parent_model_class)
+    end
   end
 end
