@@ -6,14 +6,14 @@ module Schematics
     include Searchable
 
     before_action :authorize_create!, only: :create
+    before_action :set_results, only: :create
+
     delegate :entity, to: :parent_model_class, private: true
 
     def create
-      render json: parent_model_class.autocomplete(
-        filter_params,
-        current_ability,
-        autocompletion_params[:query]
-      ), metadata: true
+      return unless @results.all?(String) || stale?(@results)
+
+      render json: @results, metadata: true
     end
 
     private
@@ -26,6 +26,14 @@ module Schematics
       return if can?(:autocomplete, parent_model_class)
 
       authorize!(:index, parent_model_class)
+    end
+
+    def set_results
+      @results = parent_model_class.autocomplete(
+        filter_params,
+        current_ability,
+        autocompletion_params[:query]
+      )
     end
   end
 end
