@@ -5,12 +5,7 @@ require 'active_support/core_ext/string/inquiry'
 require 'fileutils'
 require 'json'
 require 'pg'
-require 'rails'
 require 'rails/generators/rails/app/app_generator'
-require 'solid_cache'
-require 'solid_queue'
-require 'generators/solid_cache/install/install_generator'
-require 'generators/solid_queue/install/install_generator'
 
 # :reek:RepeatedConditional
 class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/ClassLength
@@ -99,24 +94,18 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'db:migrate', env:
   end
 
-  def install_solid_queue_schema
+  def install_solid_queue
     return unless generating?
 
-    copy_file(
-      "#{SolidQueue::InstallGenerator.source_root}/db/queue_schema.rb",
-      'db/queue_schema.rb',
-      force: true
-    )
+    remove_file 'db/queue_schema.rb'
+    rails_command 'solid_queue:install', env:
   end
 
-  def install_solid_cache_schema
+  def install_solid_cache
     return unless generating?
 
-    copy_file(
-      "#{SolidCache::InstallGenerator.source_root}/db/cache_schema.rb",
-      'db/cache_schema.rb',
-      force: true
-    )
+    remove_file 'db/cache_schema.rb'
+    rails_command 'solid_cache:install', env:
   end
 
   def prepare_database
@@ -171,6 +160,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'app/views/pwa/manifest.json.erb'
     remove_file 'app/views/pwa/service-worker.js'
     remove_file 'bin/bundle'
+    remove_file 'bin/jobs'
     remove_file 'bin/rake'
     remove_file 'bin/setup'
     remove_file 'config/initializers/content_security_policy.rb'
@@ -178,8 +168,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/initializers/inflections.rb'
     remove_file 'config/initializers/permissions_policy.rb'
     remove_file 'config/locales/en.yml'
+    remove_file 'config/cache.yml'
     remove_file 'config/puma.rb'
     remove_file 'config/routes.rb'
+    remove_file 'config/solid_queue.yml'
     remove_file 'config/environments/development.rb'
     remove_file 'config/environments/production.rb'
     remove_file 'config/environments/test.rb'

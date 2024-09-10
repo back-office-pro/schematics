@@ -106,7 +106,6 @@ Style/RequireOrder:
     - spec/**/*
     - bin/importmap
     - Capfile
-    - lib/generators/app/app_generator.rb
     - lib/schematics.rb
     - lib/schematics/commands/*.rb
     - app/controllers/schematics/resources_controller.rb
