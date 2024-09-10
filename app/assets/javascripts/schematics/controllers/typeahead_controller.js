@@ -22,15 +22,19 @@ export default class extends SearchBarController {
   }
 
   get url () {
-    const scope = this.inputTarget.getAttribute('name')
-    const element = scope.match(/filter\[(\w+)\]/)[1]
     const searchParams = new URLSearchParams(window.location.search)
     searchParams.delete('page')
     searchParams.delete('limit')
     searchParams.delete('sort')
-    searchParams.set('field', element)
-    searchParams.set(scope, decodeURI(this.inputTarget.value))
-    searchParams.set('sort', element)
-    return `${window.location.pathname}/${routes.autocomplete}?${searchParams}`
+    searchParams.set(this.inputName, decodeURI(this.inputTarget.value))
+    return `${window.location.pathname}/${routes.autocompletions}?${searchParams}`
+  }
+
+  get params () {
+    return { autocompletion: { query: this.inputName.match(/filter\[(\w+)\]/)[1] } }
+  }
+
+  get inputName () {
+    return this.inputTarget.getAttribute('name')
   }
 }

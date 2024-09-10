@@ -4,7 +4,7 @@ en:
     active_storage: storage
     admin: admin
     archive: archive
-    autocomplete: autocomplete
+    autocompletions: autocompletions
     bulk_actions: bulk-actions
     delete: delete
     duplicate: duplicate

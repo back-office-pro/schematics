@@ -48,6 +48,7 @@ module Schematics
         import_routes,
         comparison_routes,
         bulk_actions_routes,
+        autocompletions_routes,
         comment_routes,
         emailing_routes
       ].compact.join
@@ -55,7 +56,6 @@ module Schematics
       def resource_routes = [
         delete_route,
         archive_routes,
-        autocomplete_route,
         duplicate_route,
         events.map(&method(:event_route))
       ].compact.join
@@ -141,14 +141,6 @@ module Schematics
         RUBY
       end
 
-      def autocomplete_route
-        return unless can?(:index)
-
-        <<~RUBY
-          get :autocomplete, on: :collection
-        RUBY
-      end
-
       def duplicate_route
         return unless can?(:create)
 
@@ -189,6 +181,16 @@ module Schematics
         <<~RUBY
           collection do
             resources :bulk_actions, only: :create, controller: 'schematics/bulk_actions', as: '#{route_alias}_bulk_actions'
+          end
+        RUBY
+      end
+
+      def autocompletions_routes
+        return unless can?(:index)
+
+        <<~RUBY
+          collection do
+            resources :autocompletions, only: :create, controller: 'schematics/autocompletions', as: '#{route_alias}_autocompletions'
           end
         RUBY
       end

@@ -10,7 +10,7 @@ module Schematics
     include Lockable
     include Redirectable
 
-    before_action :set_resource, except: %i[index new create autocomplete]
+    before_action :set_resource, except: %i[index new create]
     before_action :set_resources, only: :index
     before_action :set_draft, only: %i[new edit create duplicate update]
     before_action :redirect_to_resource_path, only: :show
@@ -22,13 +22,13 @@ module Schematics
     after_action :assign_api_version
 
     responders :flash, ResourceResponder
-    respond_to :html, except: :autocomplete
+    respond_to :html
     respond_to :json, except: %i[new edit delete]
     respond_to :svg, :ics, only: :show
 
     prepend_view_path Engine.root.join('app', 'views', 'core')
 
-    authorize_resource instance_name: :resource, except: %i[autocomplete trigger]
+    authorize_resource instance_name: :resource, except: :trigger
 
     delegate :model_class, to: :class
     delegate :human_name, :human_name_plural, :gender, to: :model_class
@@ -44,11 +44,6 @@ module Schematics
     def archive
       result = Resources::Archive.call(resource: @resource)
       respond_with result, location: index_path, redirect_on_failure: true
-    end
-
-    def autocomplete
-      authorize! :index, model_class
-      respond_with model_class.autocomplete(filter_params, current_ability, params.require(:field))
     end
 
     def index

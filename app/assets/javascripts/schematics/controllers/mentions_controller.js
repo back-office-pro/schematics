@@ -32,11 +32,8 @@ export default class extends ApplicationController {
     callback(users)
   }
 
-  async #search (text, callback) {
-    const searchParams = new URLSearchParams()
-    searchParams.set('q', text)
-    const url = `${routes.searches}?${searchParams}`
-    const response = await this.fetchAPI(url)
+  async #search (query, callback) {
+    const response = await this.fetchAPI(routes.searches, 'POST', { autocompletion: { query } })
     const results = await response.json()
     callback(results)
   }

@@ -29,8 +29,8 @@ module Schematics
               .to route(:get, polymorphic_path(model_class))
               .to params.merge(action: :index)
             is_expected
-              .to route(:get, polymorphic_path(model_class, action: :autocomplete))
-              .to params.merge(action: :autocomplete)
+              .to route(:post, polymorphic_path([model_class, :autocompletions], format: nil))
+              .to params.merge(controller: 'schematics/autocompletions', action: :create)
             is_expected
               .to route(:post, polymorphic_path([model_class, ::Comparison], format: nil))
               .to params.merge(controller: :comparisons, action: :create)

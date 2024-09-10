@@ -68,16 +68,6 @@ module Schematics
               is_expected.to have_http_status(status)
             end
           end
-
-          it 'gets API autocomplete' do
-            [headers, api_key_headers].each do |headers|
-              get polymorphic_path(model_class, action: :autocomplete, field: 'id'),
-                  headers:,
-                  as: :json
-              status = ability.can?(:index, model_class) ? :success : :forbidden
-              is_expected.to have_http_status(status)
-            end
-          end
         end
 
         if can?(:show)

@@ -16,7 +16,7 @@ module Schematics
           return unless model_class
 
           include Inflectable
-          include Indexable, Autocompletable if model_class.entity.can?(:index)
+          include Indexable if model_class.entity.can?(:index)
           include Creatable, Duplicable if model_class.entity.can?(:create)
           include Archivable, Restorable if model_class.entity.can?(:archive)
           include Showable if model_class.entity.can?(:show)
