@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
+  # :reek:MissingSafeMethod
   class AutocompletionsController < ApplicationController
     include Nestable
     include Searchable
