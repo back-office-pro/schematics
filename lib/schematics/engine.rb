@@ -149,11 +149,7 @@ module Schematics
     config.i18n.fallbacks = true
 
     # Solid Cache
-    config.solid_cache.connects_to = { database: { writing: :cache } }
     config.solid_cache.encrypt = false # TODO: enable when upgrading to Rails 8
-
-    # Solid Queue
-    config.solid_queue.connects_to = { database: { writing: :queue } }
 
     # MissionControl
     config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'
