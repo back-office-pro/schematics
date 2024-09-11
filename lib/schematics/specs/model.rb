@@ -214,7 +214,13 @@ module Schematics
         end
 
         has_and_belongs_to_many_associations.each do |association|
-          it { is_expected.to have_and_belong_to_many(association.name.to_sym).strict_loading }
+          it do
+            is_expected
+              .to have_and_belong_to_many(association.name.to_sym)
+              .class_name(association.class_name)
+              .join_table(association.join_table)
+              .strict_loading
+          end
         end
 
         has_many_through_associations.each do |association|

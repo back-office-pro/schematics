@@ -60,10 +60,20 @@ module Schematics
         options.filter_by&.to_sym || :itself
       end
 
+      def join_table = [entity, inverse_entity]
+        .map(&:table_name)
+        .map(&:pluralize)
+        .sort
+        .join('_')
+
       protected
 
       def association_to_str = <<~RUBY
-        #{type} :#{name}, class_name: '#{class_name}'
+        has_and_belongs_to_many :#{name},
+                                class_name: '#{class_name}',
+                                join_table: '#{join_table}',
+                                foreign_key: '#{entity.table_name}_id',
+                                association_foreign_key: '#{inverse_entity.table_name}_id'
       RUBY
 
       def denied_name = entity
