@@ -80,7 +80,7 @@ module Core
 
         def log_data = logger
           .tagged('Stripe')
-          .info(context.data)
+          .info(context.data.to_json)
       end
     end
   end

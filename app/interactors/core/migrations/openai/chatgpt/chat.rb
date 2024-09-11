@@ -49,7 +49,7 @@ module Core
 
           def log_data = logger
             .tagged('OpenAI', 'ChatGPT')
-            .info(context.data)
+            .info(context.data.to_json)
         end
       end
     end
