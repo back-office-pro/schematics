@@ -51,7 +51,7 @@ module Schematics
         end
       end
 
-      private
+      protected
 
       def to_h = values
         .map(&:to_sym)

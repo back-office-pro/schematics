@@ -20,7 +20,7 @@ module Schematics
 
       def to_str
         <<~RUBY
-          enummer #{name}: #{values.map(&:to_sym)}, _prefix: true
+          enummer #{name}: #{to_h}, _prefix: true
         RUBY
       end
     end

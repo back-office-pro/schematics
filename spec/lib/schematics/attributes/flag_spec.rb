@@ -80,7 +80,7 @@ describe Schematics::Attributes::Flag do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      enummer states: [:available, :available_soon, :not_available], _prefix: true
+      enummer states: {:available=>0, :available_soon=>1, :not_available=>2}, _prefix: true
     RUBY
   end
 
@@ -121,7 +121,7 @@ describe Schematics::Attributes::Flag do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        enummer states: [], _prefix: true
+        enummer states: {}, _prefix: true
       RUBY
     end
   end
