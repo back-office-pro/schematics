@@ -19,9 +19,7 @@ properties:
         type: string
         description: The attribute name which represents the most the entity
       icon:
-        type: string
-        description: An icon which represents the entity
-        enum: <%= Schematics::Options::Icon.collection.map(&:to_s).sample(100) %>
+        $ref: '#/$defs/icon'
     additionalProperties: false
     required:
       - descriptor
@@ -149,9 +147,7 @@ $defs:
             name:
               $ref: '#/$defs/name'
             icon:
-              type: string
-              description: An icon which represents the event
-              enum: <%= Schematics::Options::Icon.collection.map(&:to_s).sample(100) %>
+              $ref: '#/$defs/icon'
             color:
               type: string
               description: The event style
@@ -401,6 +397,10 @@ $defs:
       width:
         type: number
         description: The width of the image in pixels
+  icon:
+    type: string
+    description: An icon which represents the entity or event
+    enum: <%= Schematics::Options::Icon.collection.map(&:to_s).sample(250) %>
   name:
     type: string
     description: |
