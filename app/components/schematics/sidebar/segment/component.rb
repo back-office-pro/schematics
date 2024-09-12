@@ -15,7 +15,7 @@ module Schematics
         end
 
         def path(value)
-          polymorphic_path(@model_class, filter: { @attribute.name => value })
+          polymorphic_path(@model_class, filter_key => { @attribute.name => value })
         end
 
         def css_classes = 'nav-link p-0 m-0 text-truncate'
@@ -27,6 +27,10 @@ module Schematics
         def render?
           is_active_link?(polymorphic_path(@model_class))
         end
+
+        private
+
+        def filter_key = Ransack.options[:search_key]
       end
     end
   end
