@@ -5,7 +5,7 @@ properties:
     type: string
     description: |
       The unique entity name at singular, in snake case and in english.
-      The name should not be among <%= Tenant
+      The name must not be among <%= Tenant
         .schema
         .entities
         .select(&:core?)
@@ -26,23 +26,23 @@ properties:
     required:
       - descriptor
       - icon
-  associations:
-    type: array
-    items:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The association type
-          enum:
-            - has_and_belongs_to_many
-        name:
-          type: string
-          description: The unique has and belongs to many association name at plural, in snake case and in english
-      additionalProperties: false
-      required:
-        - type
-        - name
+  # associations:
+  #   type: array
+  #   items:
+  #     type: object
+  #     properties:
+  #       type:
+  #         type: string
+  #         description: The association type
+  #         enum:
+  #           - has_and_belongs_to_many
+  #       name:
+  #         type: string
+  #         description: The unique many-to-many association name at plural, in snake case and in english
+  #     additionalProperties: false
+  #     required:
+  #       - type
+  #       - name
   attributes:
     type: array
     items:
@@ -405,7 +405,7 @@ $defs:
     type: string
     description: |
       The name is unique, in snake case, in english and without id suffix.
-      The name should not be among <%= ActiveRecord::AttributeMethods
+      The name must not be among <%= ActiveRecord::AttributeMethods
         .dangerous_attribute_methods
         .dup
         .merge(Schematics::Behaviours::Nameable::NAME_DENYLIST)
@@ -524,7 +524,7 @@ $defs:
     properties:
       type:
         type: string
-        description: An attribute which represents a belongs to association
+        description: A one-to-many association
         enum:
           - belongs_to
       name:
@@ -1424,5 +1424,5 @@ additionalProperties: false
 required:
   - name
   - options
-  - associations
+  # - associations
   - attributes
