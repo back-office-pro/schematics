@@ -25,11 +25,13 @@ module Core
           map_value :attributes do
             map_array -> { _1.merge(id: SecureRandom.uuid) }
             map_array do
-              map_value :options, -> { _1.compact_blank }
-              map_value :options do
-                guard -> { _1.key?(:events) } do
-                  map_value :events do
-                    map_array -> { _1.merge(id: SecureRandom.uuid) }
+              guard -> { _1.key?(:options) } do
+                map_value :options, -> { _1.compact_blank }
+                map_value :options do
+                  guard -> { _1.key?(:events) } do
+                    map_value :events do
+                      map_array -> { _1.merge(id: SecureRandom.uuid) }
+                    end
                   end
                 end
               end
