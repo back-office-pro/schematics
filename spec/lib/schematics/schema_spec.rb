@@ -186,4 +186,31 @@ describe Schematics::Schema do
 
     it { is_expected.not_to be_valid }
   end
+
+  context 'when there is a habtm circular association loop' do
+    let(:data) do
+      [
+        {
+          name: 'category',
+          associations: [
+            {
+              name: 'sub_categories',
+              type: 'has_and_belongs_to_many'
+            }
+          ]
+        },
+        {
+          name: 'sub_category',
+          associations: [
+            {
+              name: 'categories',
+              type: 'has_and_belongs_to_many'
+            }
+          ]
+        }
+      ]
+    end
+
+    it { is_expected.not_to be_valid }
+  end
 end
