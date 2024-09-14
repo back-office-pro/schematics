@@ -152,6 +152,9 @@ $defs:
               type: string
               description: The event style
               enum: <%= Schematics::Options::StateMachineEvent::COLORS.map(&:to_s) %>
+            confirm:
+              type: boolean
+              descrition: Does the event action need to be confirmed
             from:
               type: string
               description: The starting value of the event transition
@@ -163,6 +166,7 @@ $defs:
             - name
             - icon
             - color
+            - confirm
             - from
             - to
   greater_than_or_equal_to:

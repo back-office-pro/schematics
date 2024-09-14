@@ -5,6 +5,7 @@ fr:
       schematics/options/state_machine_event:
         callback: Fonction
         color: Couleur
+        confirm: Demander confirmation
         from: De
         icon: Icône
         name: Nom

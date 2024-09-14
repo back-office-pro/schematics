@@ -999,6 +999,7 @@
               "id": "953d195e-ee9c-46c2-87c0-6f199153b3b9",
               "name": "migrate",
               "icon": "arrow_trend_up",
+              "confirm": true,
               "from": [
                 "editing",
                 "error"
@@ -1029,6 +1030,7 @@
               "name": "rollback",
               "icon": "arrow_rotate_left",
               "color": "danger",
+              "confirm": true,
               "from": "finished",
               "to": "rollbacking"
             }
@@ -1537,6 +1539,7 @@
               "name": "cancel",
               "icon": "ban",
               "color": "danger",
+              "confirm": true,
               "from": "active",
               "to": "canceled"
             },
