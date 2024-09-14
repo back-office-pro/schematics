@@ -42,7 +42,7 @@ module Core
               }
             ],
             messages: [
-              { role: 'system', content: I18n.t('chat.system') },
+              { role: 'system', content: I18n.t('migrations.openai.chatgpt.system') },
               { role: 'user', content: prompt }
             ]
           }

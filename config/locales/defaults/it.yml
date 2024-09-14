@@ -8,9 +8,6 @@ it:
     created_at/year: Anno
     id: Identificatore
   by: per
-  chat:
-    system: Creerai un modello di dominio di almeno tre entità in base alle esigenze dell'utente
-    user: Creare un'applicazione Web nel settore di attività %{business_sector}
   date:
     formats:
       long: "%A %d %B %Y alle %H:%M"

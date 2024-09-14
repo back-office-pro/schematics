@@ -8,9 +8,6 @@ en:
     created_at/year: Year
     id: Identifier
   by: by
-  chat:
-    system: You will create a domain model of at least three entities according to user needs
-    user: Create a web application in the %{business_sector} business sector
   date:
     formats:
       long: "%A %d %B, %Y at %H:%M"

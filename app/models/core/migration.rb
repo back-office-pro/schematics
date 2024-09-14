@@ -38,7 +38,7 @@ class Migration < Schematics::ApplicationRecord
     )
 
     def default_prompt = I18n.t(
-      'chat.user',
+      'migrations.openai.chatgpt.user',
       business_sector: Subscription
         .instance
         .business_sector_formatted

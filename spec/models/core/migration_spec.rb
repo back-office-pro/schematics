@@ -29,7 +29,7 @@ RSpec.describe Migration do
   end
 
   it 'enqueues a generate schema job after updating prompt' do
-    expect { record.tap(&:save!).update!(prompt: I18n.t('chat.user')) }
+    expect { record.tap(&:save!).update!(prompt: 'prompt') }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
       .exactly(:once)
       .with(record)
@@ -97,6 +97,6 @@ RSpec.describe Migration do
   describe '.default_prompt' do
     subject { described_class.default_prompt }
 
-    it { is_expected.to eq(I18n.t('chat.user', business_sector: 'other')) }
+    it { is_expected.to eq('Create a web application in the other business sector') }
   end
 end
