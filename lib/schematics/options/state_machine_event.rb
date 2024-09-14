@@ -23,7 +23,7 @@ module Schematics
       delegate :entity, :values, to: :state_machine
       delegate :name, to: :state_machine, prefix: true
 
-      attr_accessor :id, :state_machine, :from, :to, :callback
+      attr_accessor :id, :state_machine, :from, :to, :callback, :confirm
       attr_writer :icon, :color
 
       class << self
