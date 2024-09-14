@@ -1052,6 +1052,14 @@
         "id": "1fe91bd1-672b-41fe-9ac8-3648d6ab36de",
         "name": "author",
         "type": "user"
+      },
+      {
+        "id": "2e280284-4b40-4ff0-b3aa-9087a52b8de9",
+        "name": "backup",
+        "type": "attachment",
+        "options": {
+          "hidden": true
+        }
       }
     ]
   },
@@ -2041,11 +2049,6 @@
         "options": {
           "required": true
         }
-      },
-      {
-        "id": "9ec1a142-e066-440d-901e-8a4b3e3747e8",
-        "name": "migration",
-        "type": "belongs_to"
       },
       {
         "id": "4820829b-0d56-4a73-a3eb-d110e147325e",
