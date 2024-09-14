@@ -1,0 +1,8 @@
+---
+it:
+  default: Conferma la sua azione
+  migration:
+    migrate: Questa azione potrebbe comportare la perdita di dati
+    rollback: Questa azione potrebbe comportare la perdita di dati
+  subscription:
+    cancel: Puo riattivare il suo abbonamento in qualsiasi momento prima della data di scadenza corrente
