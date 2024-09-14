@@ -23,6 +23,10 @@ module Schematics
           enummer #{name}: #{to_h}, _prefix: true
         RUBY
       end
+
+      def validators
+        super.merge inclusion: { in: values.map(&:to_sym) }
+      end
     end
   end
 end

@@ -54,9 +54,7 @@ describe Schematics::Attributes::Flag do
   its(:validators) do
     is_expected.to eq(
       {
-        inclusion: {
-          in: %w[available available_soon not_available]
-        },
+        inclusion: { in: %i[available available_soon not_available] },
         allow_blank: true
       }
     )
@@ -74,7 +72,7 @@ describe Schematics::Attributes::Flag do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :states, {:inclusion=>{:in=>["available", "available_soon", "not_available"]}, :allow_blank=>true}
+      validates :states, {:inclusion=>{:in=>[:available, :available_soon, :not_available]}, :allow_blank=>true}
     RUBY
   end
 
@@ -104,14 +102,14 @@ describe Schematics::Attributes::Flag do
 
     its(:validators) do
       is_expected.to eq(
-        inclusion: { in: %w[available available_soon not_available] },
+        inclusion: { in: %i[available available_soon not_available] },
         presence: true
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :states, {:presence=>true, :inclusion=>{:in=>["available", "available_soon", "not_available"]}}
+        validates :states, {:presence=>true, :inclusion=>{:in=>[:available, :available_soon, :not_available]}}
       RUBY
     end
   end
