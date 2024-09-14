@@ -51,7 +51,8 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
                   from: 'pending',
                   to: 'refused',
                   icon: 'user',
-                  color: 'danger'
+                  color: 'danger',
+                  confirm: true
                 },
                 {
                   id: '407ac568-dc72-45c5-83d4-f6207e5db604',
@@ -247,6 +248,12 @@ RSpec.describe Schematics::SchemaEditor::Component, type: :component do
         'migration[entities_attributes][0][attributes_attributes][1][options_attributes][events][1][id]', # rubocop:disable Layout/LineLength
         with: '701c443e-0c8b-4aa1-b9bd-aa264ea11045',
         type: 'hidden'
+      )
+    end
+
+    it 'has a checked confirm option' do
+      expect(component).to have_checked_field(
+        'migration[entities_attributes][0][attributes_attributes][1][options_attributes][events][1][confirm]' # rubocop:disable Layout/LineLength
       )
     end
 
