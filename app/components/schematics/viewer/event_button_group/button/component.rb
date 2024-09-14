@@ -1,0 +1,48 @@
+# frozen_string_literal: true
+
+module Schematics
+  module Viewer
+    module EventButtonGroup
+      module Button
+        class Component < ApplicationComponent
+          option :resource
+          option :event
+          option :compact
+          option :last, default: -> { false }
+
+          def compact? = compact
+
+          def last? = last
+
+          def css_classes
+            class_names(
+              'btn',
+              "btn-#{event.color}",
+              'btn-sm',
+              'btn-icon-split': !compact?,
+              'ms-1': !compact?,
+              'me-1': !compact? && last?
+            )
+          end
+
+          def url = polymorphic_path(
+            [event.state_machine_name.to_sym, event.name.to_sym, resource],
+            format: nil
+          )
+
+          def icon_class
+            'fa-fw' if compact?
+          end
+
+          def data = {
+            turbo_method: :patch,
+            turbo_frame: '_top',
+            controller: 'tooltip',
+            action: 'click->application#disableWith',
+            'bs-custom-class': ('responsive-button-tooltip-xxl' unless compact?)
+          }.compact
+        end
+      end
+    end
+  end
+end
