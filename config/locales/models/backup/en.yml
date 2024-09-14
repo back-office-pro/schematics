@@ -4,7 +4,6 @@ en:
     attributes:
       backup:
         file: File
-        migration: Migration
         state: State
     enums:
       backup:

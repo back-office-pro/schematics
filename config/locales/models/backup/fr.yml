@@ -3,19 +3,18 @@ fr:
   activerecord:
     attributes:
       backup:
-        file: File
-        migration: Migration
-        state: State
+        file: Fichier
+        state: Etat
     enums:
       backup:
         state:
-          ready: Ready
-          restoring: Restoring
+          ready: Prêt
+          restoring: Restauration en cours
     events:
       backup:
-        restore: Restore
+        restore: Restaurer
     models:
       backup:
-        gender: male
-        one: Backup
-        other: Backups
+        gender: female
+        one: Sauvegarde
+        other: Sauvegardes

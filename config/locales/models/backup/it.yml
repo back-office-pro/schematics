@@ -4,16 +4,15 @@ it:
     attributes:
       backup:
         file: File
-        migration: Migration
-        state: State
+        state: Stato
     enums:
       backup:
         state:
-          ready: Ready
-          restoring: Restoring
+          ready: Pronto
+          restoring: Restaurazione in corso
     events:
       backup:
-        restore: Restore
+        restore: Restaurare
     models:
       backup:
         gender: male
