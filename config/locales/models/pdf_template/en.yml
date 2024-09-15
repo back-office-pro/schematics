@@ -8,5 +8,5 @@ en:
     models:
       pdf_template:
         gender: male
-        one: PDF Template
-        other: PDF Templates
+        one: PDF template
+        other: PDF templates
