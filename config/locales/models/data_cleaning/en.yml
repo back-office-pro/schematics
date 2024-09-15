@@ -12,7 +12,6 @@ en:
         period:
           day: Day
           hour: Hour
-          minute: Minute
           month: Month
           week: Week
           year: Year

@@ -12,7 +12,6 @@ it:
         period:
           day: Giorno
           hour: Ora
-          minute: Minuto
           month: Mese
           week: Settimana
           year: Anno
