@@ -2,7 +2,7 @@
 it:
   default: Conferma la sua azione
   migration:
-    migrate: Questa azione potrebbe comportare la perdita di dati
-    rollback: Questa azione potrebbe comportare la perdita di dati
+    migrate: Questa azione può portare alla perdita di dati e all'interruzione temporanea del servizio
+    rollback: Questa azione può portare alla perdita di dati e all'interruzione temporanea del servizio
   subscription:
     cancel: Puo riattivare il suo abbonamento in qualsiasi momento prima della data di scadenza corrente

@@ -2,7 +2,7 @@
 fr:
   default: Merci de confirmer votre action
   migration:
-    migrate: Cette action peut entraîner des pertes de données
-    rollback: Cette action peut entraîner des pertes de données
+    migrate: Cette action peut entraîner des pertes de données et une coupure de service temporaire
+    rollback: Cette action peut entraîner des pertes de données et une coupure de service temporaire
   subscription:
     cancel: Vous pouvez réactiver votre abonnement à tout moment avant l'échéance en cours

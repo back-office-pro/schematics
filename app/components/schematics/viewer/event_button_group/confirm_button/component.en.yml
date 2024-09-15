@@ -2,7 +2,7 @@
 en:
   default: Please confirm your action
   migration:
-    migrate: This action can result in data loss
-    rollback: This action can result in data loss
+    migrate: This action can lead to data loss and temporary service interruption
+    rollback: This action can lead to data loss and temporary service interruption
   subscription:
     cancel: You can reactivate your subscription at any time before the current expiry date
