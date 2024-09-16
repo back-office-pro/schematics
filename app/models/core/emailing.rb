@@ -3,11 +3,11 @@
 class Emailing < Schematics::ApplicationRecord
   after_create_commit :deliver_emails
 
-  def serializers = %i[pdf svg ics]
-    .select { public_send(:"#{_1}_attachment?") }
-    .map(&:upcase)
-    .map { "#{_1}Serializer" }
-    .map(&Schematics.method(:const_get))
+  def serializers = [
+    (Schematics::PDFSerializer if pdf_attachment?),
+    (Schematics::ICSSerializer if ics_attachment?),
+    (Schematics::SVGSerializer if svg_attachment?)
+  ].compact
 
   private
 
