@@ -138,7 +138,6 @@ Metrics/MethodLength:
   AllowedMethods:
     - inherited
     - fill_form
-    - change
   CountAsOne:
     - array
     - hash
