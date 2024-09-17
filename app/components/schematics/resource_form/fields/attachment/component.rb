@@ -17,7 +17,7 @@ module Schematics
           def wrapper_class = 'text-secondary float-end me-0'
 
           def required
-            super unless value.attached?
+            super unless attached?
           end
 
           def data = {
