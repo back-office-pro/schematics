@@ -24,7 +24,7 @@ export default class extends ApplicationController {
         element.tomselect.addOptions(
           Array
             .from(element.options)
-            .filter(option => option.value.startsWith(value))
+            .filter(option => option.value.startsWith(value?.concat('#')))
             .map(option => ({ value: option.value, text: option.text }))
         )
       })
