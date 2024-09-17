@@ -43,6 +43,7 @@ Rails.application.configure do
   config.cache_store =
     :solid_cache_store,
     {
+      active_record_instrumentation: false,
       expiry_method: :job,
       expiry_queue: :cleanups,
       max_age: 2.weeks.to_i,
