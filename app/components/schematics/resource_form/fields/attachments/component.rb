@@ -5,7 +5,9 @@ module Schematics
     module Fields
       module Attachments
         class Component < Attachment::Component
-          def signed_ids = value.map(&:signed_id)
+          def signed_ids = value
+            .select(&:persisted?)
+            .map(&:signed_id)
         end
       end
     end
