@@ -11,7 +11,7 @@ module Schematics
       def css_classes = %w[text-decoration-none]
 
       def human_name_with_icon
-        fa_icon(icon, class: 'text-primary me-2') + human_name
+        fa_icon(icon, class: 'fa-fw text-primary me-2') + human_name
       end
 
       def authorized?
