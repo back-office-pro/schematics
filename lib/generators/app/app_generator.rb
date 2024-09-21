@@ -111,6 +111,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def prepare_database
     return unless generating?
 
+    remove_file 'config/cache.yml'
     rails_command 'db:prepare', env:
   end
 
@@ -168,7 +169,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/initializers/inflections.rb'
     remove_file 'config/initializers/permissions_policy.rb'
     remove_file 'config/locales/en.yml'
-    remove_file 'config/cache.yml'
     remove_file 'config/puma.rb'
     remove_file 'config/queue.yml'
     remove_file 'config/recurring.yml'
