@@ -10,16 +10,14 @@ module OpenApi
 
       def routes
         SEMAPHORE.synchronize do
-          @routes ||= begin
-            reload_routes!
-            ActionDispatch::Routing::RoutesInspector.new(rails_routes).format(formatter) +
-              ActionDispatch::Routing::RoutesInspector.new(schematics_routes).format(formatter)
-          end
+          @routes ||= ActionDispatch::Routing::RoutesInspector.new(rails_routes).format(formatter) +
+                      ActionDispatch::Routing::RoutesInspector.new(schematics_routes).format(formatter) # rubocop:disable Layout/LineLength
         end
       end
 
       def reload!
         SEMAPHORE.synchronize do
+          reload_routes!
           instance_variable_set(:@routes, nil)
           instance_variable_set(:@routes_list, nil)
         end
