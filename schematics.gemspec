@@ -75,7 +75,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'groupdate', '6.4.0'
   spec.add_dependency 'i18n-beginning_of_week', '0.1.0'
   spec.add_dependency 'i18n-inflector', '2.6.7'
-  spec.add_dependency 'icalendar', '2.10.2'
+  spec.add_dependency 'icalendar', '2.10.3'
   spec.add_dependency 'image_processing', '1.13.0'
   spec.add_dependency 'importmap-rails', '2.0.1'
   spec.add_dependency 'interactor', '3.1.2'
