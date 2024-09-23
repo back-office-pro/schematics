@@ -16,8 +16,18 @@ module Core
         return if state_rollbacking?
         return unless needs_migration?
 
-        migration.backup.attach(Backups::Create.call.file)
+        migration.backup.attach(file)
       end
+
+      private
+
+      def file = ::Backups::Create
+        .call(tables:)
+        .file
+
+      def tables = migration
+        .migrator_old_and_changed_entities
+        .map(&:table_name)
     end
   end
 end
