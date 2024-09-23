@@ -55,7 +55,7 @@ RSpec.describe Schematics::UserGroupAbility do
     it { is_expected.to be_able_to(:read, meeting) }
   end
 
-  context 'when user groups are indentical' do
+  context 'when user groups are identical' do
     let(:user_groups) { [first_user_group] }
     let(:other_user_groups) { [first_user_group] }
 

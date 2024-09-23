@@ -19,7 +19,7 @@ en:
         success: The %{human_name} was successfully restored
       trigger:
         failure: An error occurred
-        success: The %{event} action on the %{human_name} was sucessfully done
+        success: The %{event} action on the %{human_name} was successfully done
       update:
         failure: An error occurred
         success: The %{human_name} was successfully updated

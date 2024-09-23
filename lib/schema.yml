@@ -154,7 +154,7 @@ $defs:
               enum: <%= Schematics::Options::StateMachineEvent::COLORS.map(&:to_s) %>
             confirm:
               type: boolean
-              descrition: Does the event action need to be confirmed
+              description: Does the event action need to be confirmed
             from:
               type: string
               description: The starting value of the event transition
