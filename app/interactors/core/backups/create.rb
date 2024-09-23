@@ -3,6 +3,7 @@
 module Core
   module Backups
     class Create
+      include Interactor
       delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
 
       def call
@@ -10,7 +11,7 @@ module Core
           context.key = key
           context.filename = filename
           context.content_type = content_type
-          context.file = file(io.read)
+          context.io = file(io.read)
         end
       end
 
