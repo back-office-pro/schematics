@@ -8,9 +8,7 @@ module Schematics
     retry_on IOError, wait: :polynomially_longer, attempts: 5
 
     def perform
-      backup = ::Backup.new
-      backup.file.attach(**Core::Backups::Create.call.to_h)
-      backup.save!
+      ::Backup.create!(file: Core::Backups::Create.call.to_h)
     end
   end
 end

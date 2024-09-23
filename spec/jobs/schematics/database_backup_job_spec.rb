@@ -15,7 +15,7 @@ RSpec.describe Schematics::DatabaseBackupJob do
 
   describe '#perform_now' do
     it 'performs database backup' do
-      expect { described_class.perform_now }.to change(ActiveStorage::Blob, :count).by(1)
+      expect { described_class.perform_now }.to change(Backup, :count).by(1)
     end
   end
 end
