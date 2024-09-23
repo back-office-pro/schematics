@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+module Core
+  module Migrations
+    class Restore
+      include Schematics::Progressable
+
+      delegate :migration, to: :context, private: true
+      delegate :state_rollbacking?, :backup, to: :migration, private: true
+
+      progressable migration: 50
+
+      def call
+        return unless state_rollbacking?
+        return unless backup.attached?
+
+        Backups::Restore.call(backup:)
+      end
+    end
+  end
+end
