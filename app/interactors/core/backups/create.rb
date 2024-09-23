@@ -5,13 +5,11 @@ module Core
     class Create
       include Interactor
       delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
+      delegate :build_after_unfurling, to: ::ActiveStorage::Blob, private: true
 
       def call
         IO.popen(command) do |io|
-          context.key = key
-          context.filename = filename
-          context.content_type = content_type
-          context.io = file(io.read)
+          context.file = build_after_unfurling(key:, filename:, content_type:, io: file(io.read))
         end
       end
 
