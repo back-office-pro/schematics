@@ -8,7 +8,7 @@ module Schematics
     retry_on IOError, wait: :polynomially_longer, attempts: 5
 
     def perform(backup)
-      ::Core::Backups::Restore.call(backup:)
+      ::Core::Backups::Restore.call(backup: backup.file)
       backup.state_ready!
     end
   end
