@@ -12,7 +12,7 @@ fr:
           restoring: Restauration en cours
     events:
       backup:
-        restore: Restaurer
+        restore_database: Restaurer la base de données
     models:
       backup:
         gender: female

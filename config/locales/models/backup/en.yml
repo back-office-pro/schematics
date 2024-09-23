@@ -12,7 +12,7 @@ en:
           restoring: Restoring
     events:
       backup:
-        restore: Restore
+        restore_database: Restore database
     models:
       backup:
         gender: male

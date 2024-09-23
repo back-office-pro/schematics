@@ -2064,7 +2064,7 @@
           "events": [
             {
               "id": "d02d71c7-45c3-4ad1-ac17-2158b38392fc",
-              "name": "restore",
+              "name": "restore_database",
               "icon": "paint_roller",
               "color": "danger",
               "confirm": true,
