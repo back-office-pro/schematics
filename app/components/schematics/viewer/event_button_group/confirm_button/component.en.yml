@@ -1,7 +1,7 @@
 ---
 en:
   backup:
-    restore: This action can lead to data loss and temporary service interruption
+    restore_database: This action can lead to data loss and temporary service interruption
   default: Please confirm your action
   migration:
     migrate: This action can lead to data loss and temporary service interruption
