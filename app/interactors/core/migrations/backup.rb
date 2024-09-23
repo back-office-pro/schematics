@@ -16,7 +16,7 @@ module Core
         return if state_rollbacking?
         return unless needs_migration?
 
-        migration.backup.attach(**Backups::Create.call.to_h)
+        migration.backup.attach(Backups::Create.call.file)
       end
     end
   end
