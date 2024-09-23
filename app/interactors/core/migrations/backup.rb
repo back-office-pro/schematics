@@ -21,7 +21,7 @@ module Core
 
       private
 
-      def file = ::Backups::Create
+      def file = Backups::Create
         .call(tables:)
         .file
 
