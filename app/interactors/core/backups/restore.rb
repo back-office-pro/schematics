@@ -6,8 +6,8 @@ module Core
       include Interactor
       delegate :backup, to: :context, private: true
 
-      def call = backup.open do |file|
-        `pg_restore -Fc #{file.path}`
+      def call
+        backup.open { |file| `pg_restore #{file.path}` }
       end
     end
   end
