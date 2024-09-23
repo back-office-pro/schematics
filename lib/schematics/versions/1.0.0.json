@@ -2067,6 +2067,7 @@
               "name": "restore",
               "icon": "paint_roller",
               "color": "danger",
+              "confirm": true,
               "from": "ready",
               "to": "restoring"
             }
