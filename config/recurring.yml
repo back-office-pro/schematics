@@ -1,12 +1,9 @@
 ---
-schematics/clean_database_backups_job:
-  class: Schematics::CleanDatabaseBackupsJob
-  schedule: every day at 1am
 schematics/data_cleaning_job:
   class: Schematics::DataCleaningJob
   schedule: every hour
-schematics/database_backup_job:
-  class: Schematics::DatabaseBackupJob
+schematics/generate_backup_job:
+  class: Schematics::GenerateBackupJob
   schedule: every day at midnight
 schematics/load_subscription_job:
   class: Schematics::LoadSubscriptionJob

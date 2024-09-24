@@ -2,13 +2,13 @@
 
 module Core
   module Migrations
-    class Restore
+    class RestoreBackup
       include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
       delegate :state_rollbacking?, :backup, to: :migration, private: true
 
-      progressable migration: 50
+      progressable migration: 60
 
       def call
         return unless state_rollbacking?

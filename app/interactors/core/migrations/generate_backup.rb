@@ -2,7 +2,7 @@
 
 module Core
   module Migrations
-    class Backup
+    class GenerateBackup
       include Schematics::Progressable
 
       delegate :migration_context, to: 'ActiveRecord::Base.connection_pool', private: true

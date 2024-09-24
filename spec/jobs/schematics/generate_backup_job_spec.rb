@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::DatabaseBackupJob do
+RSpec.describe Schematics::GenerateBackupJob do
   describe '#perform_later' do
     it 'queues the job' do
       expect { described_class.perform_later }
@@ -15,7 +15,9 @@ RSpec.describe Schematics::DatabaseBackupJob do
 
   describe '#perform_now' do
     it 'performs database backup' do
-      expect { described_class.perform_now }.to change(Backup, :count).by(1)
+      expect { described_class.perform_now }
+        .to change(Backup, :count)
+        .by(1)
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class DatabaseBackupJob < ApplicationJob
+  class GenerateBackupJob < ApplicationJob
     include Quietable
     queue_as :backups
 

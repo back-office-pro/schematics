@@ -7,9 +7,9 @@ module Core
 
       organize Copy,
                Generate,
-               Backup,
+               GenerateBackup,
                MigrateDatabase,
-               Restore,
+               RestoreBackup,
                CleanIndices,
                Reload,
                Reindex,
