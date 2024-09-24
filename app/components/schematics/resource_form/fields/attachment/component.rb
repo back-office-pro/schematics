@@ -9,9 +9,9 @@ module Schematics
           delegate :content_type, to: :options
           delegate :attached?, to: :value
 
-          def accept = Array(content_type)
-            .map { ".#{_1}" }
-            .join(',')
+          def accept = content_type
+            &.map { ".#{_1}" }
+            &.join(',')
 
           def help = __attachment_validator(validators.human)
 
