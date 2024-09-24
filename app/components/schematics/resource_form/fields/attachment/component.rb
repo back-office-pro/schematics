@@ -5,10 +5,13 @@ module Schematics
     module Fields
       module Attachment
         class Component < Fields::Component
-          delegate :validators, :extensions, :attributes_param_key, to: :field
+          delegate :validators, :attributes_param_key, to: :field
+          delegate :content_type, to: :options
           delegate :attached?, to: :value
 
-          alias accept extensions
+          def accept = Array(content_type)
+            .map { ".#{_1}" }
+            .join(',')
 
           def help = __attachment_validator(validators.human)
 

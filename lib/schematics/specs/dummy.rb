@@ -7,8 +7,10 @@ require 'rack/test/uploaded_file'
 module Schematics
   module Specs
     class Dummy
+      DEFAULT_EXTENSION = 'png'
+
       def initialize(extension)
-        @extension = extension
+        @extension = extension || DEFAULT_EXTENSION
       end
 
       memoize def default = Rack::Test::UploadedFile.new(file, content_type)

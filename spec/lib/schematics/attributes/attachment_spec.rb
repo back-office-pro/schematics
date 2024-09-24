@@ -23,7 +23,7 @@ describe Schematics::Attributes::Attachment do
   its(:column_name) { is_expected.to eq('avatar') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:open_api_filter_type) { is_expected.to eq(String) }
-  its(:icon) { is_expected.to eq(:file_image) }
+  its(:icon) { is_expected.to eq(:file) }
   its(:default) { is_expected.to be_a(Rack::Test::UploadedFile) }
   its(:validators) { is_expected.to eq(antivirus: true, storage_quota: true) }
   its(:weight) { is_expected.to eq(1) }
@@ -31,7 +31,7 @@ describe Schematics::Attributes::Attachment do
   its(:to_s) { is_expected.to eq('schema:user_avatar') }
   its(:preload) { is_expected.to eq([avatar_attachment: [blob: :variant_records]]) }
   its(:includes) { is_expected.to eq(blob: :variant_records) }
-  its(:extension) { is_expected.to eq('png') }
+  its(:extension) { is_expected.to be_nil }
   its(:input_name) { is_expected.to eq('user[avatar]') }
   its(:search_column) { is_expected.to eq(:avatar_blob_filename) }
   its(:search_column_association) { is_expected.to eq('avatar_blob') }
@@ -39,7 +39,7 @@ describe Schematics::Attributes::Attachment do
   its(:search_query) { is_expected.to eq(:avatar_i_cont) }
   its(:to_spec) { is_expected.to eq('A user has a **avatar** attribute of type *attachment*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.user.avatar') }
-  it { is_expected.to be_image }
+  it { is_expected.not_to be_image }
 
   its(:available_options) do
     is_expected.to contain_exactly(
@@ -140,6 +140,10 @@ describe Schematics::Attributes::Attachment do
 
   context 'when content_type option is defined' do
     let(:options) { { content_type: %w[png jpg jpeg] } }
+
+    it { is_expected.to be_image }
+    its(:extension) { is_expected.to eq('png') }
+    its(:icon) { is_expected.to eq(:file_image) }
 
     its(:validators) do
       is_expected.to eq(antivirus: true, storage_quota: true, content_type: %i[png jpg jpeg])

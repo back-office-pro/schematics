@@ -55,14 +55,9 @@ module Schematics
                                       reject_if: :all_blank
       RUBY
 
-      def extension
-        options.content_type&.first || 'png'
-      end
-
-      def extensions = options
+      def extension = options
         .content_type
-        &.map { ".#{_1}" }
-        &.join(',')
+        &.first
 
       def validators = super.merge(
         antivirus: true,
@@ -117,7 +112,7 @@ module Schematics
           mov: :file_video,
           wmv: :file_video,
           mp4: :file_video
-        }[extension.to_sym] || :file
+        }[extension&.to_sym] || :file
       end
 
       def image?

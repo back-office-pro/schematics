@@ -23,7 +23,7 @@ describe Schematics::Attributes::Attachments do
   its(:column_name) { is_expected.to eq('files') }
   its(:open_api_type) { is_expected.to eq([String]) }
   its(:open_api_filter_type) { is_expected.to eq(String) }
-  its(:icon) { is_expected.to eq(:file_image) }
+  its(:icon) { is_expected.to eq(:file) }
   its(:default) { is_expected.to be_all(Rack::Test::UploadedFile) }
   its(:validators) { is_expected.to eq(antivirus: true, storage_quota: true) }
   its(:weight) { is_expected.to eq(1) }
@@ -31,7 +31,7 @@ describe Schematics::Attributes::Attachments do
   its(:to_s) { is_expected.to eq('schema:directory_files') }
   its(:preload) { is_expected.to eq([files_attachments: [blob: :variant_records]]) }
   its(:includes) { is_expected.to eq(blob: :variant_records) }
-  its(:extension) { is_expected.to eq('png') }
+  its(:extension) { is_expected.to be_nil }
   its(:input_name) { is_expected.to eq('directory[files][]') }
   its(:search_column) { is_expected.to eq(:files_blobs_filename) }
   its(:search_column_association) { is_expected.to eq('files_blobs') }
@@ -39,7 +39,7 @@ describe Schematics::Attributes::Attachments do
   its(:search_query) { is_expected.to eq(:files_i_cont) }
   its(:to_spec) { is_expected.to eq('A directory has a **files** attribute of type *attachments*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.directory.files') }
-  it { is_expected.to be_image }
+  it { is_expected.not_to be_image }
 
   its(:available_options) do
     is_expected.to contain_exactly(
