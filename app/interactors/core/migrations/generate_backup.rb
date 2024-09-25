@@ -14,6 +14,7 @@ module Core
 
       def call
         return if state_rollbacking?
+        return if tables.empty?
         return unless needs_migration?
 
         migration.backup.attach(file)
@@ -26,8 +27,9 @@ module Core
         .file
 
       def tables = migration
-        .migrator_old_and_changed_entities
+        .migrator_old_entities
         .map(&:table_name)
+        .map(&:pluralize)
     end
   end
 end
