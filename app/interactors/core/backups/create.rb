@@ -20,7 +20,7 @@ module Core
       def command = "pg_dump -Fc #{current_database} #{table_options}"
 
       def table_options = Array(tables)
-        .map { "--table=#{_1}" }
+        .map { "-t #{_1}" }
         .join(' ')
 
       def content_type = 'application/octet-stream'
