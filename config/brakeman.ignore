@@ -1,0 +1,29 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "1fb0db20292186827f55eec92f679921019bc39dc641b55b7fa391054adaa6d6",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/interactors/core/backups/restore.rb",
+      "line": 15,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "`pg_restore -vc -d #{current_database} #{file}`",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Core::Backups::Restore",
+        "method": "call"
+      },
+      "user_input": "current_database",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "False positive"
+    }
+  ],
+  "updated": "2024-09-25 18:05:47 +0200",
+  "brakeman_version": "6.2.1"
+}

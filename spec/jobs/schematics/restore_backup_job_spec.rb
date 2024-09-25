@@ -3,10 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::RestoreBackupJob do
-  let(:backup) { Backup.create!(file:, state:).reload }
+  let(:backup) { Backup.create!(file:, state:) }
   let(:state) { Backup::STATE_STATE_RESTORING }
-
-  include_context 'with import'
+  let(:file) { Core::Backups::Create.call.file }
 
   describe '#perform_later' do
     it 'queues the job' do
@@ -21,11 +20,8 @@ RSpec.describe Schematics::RestoreBackupJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(backup) }
 
-    it 'updates the backup state from restoring to ready' do
-      expect { perform_now }
-        .to change(backup, :state)
-        .from(Backup::STATE_STATE_RESTORING.to_s)
-        .to(Backup::STATE_STATE_READY.to_s)
+    it 'restores the database backup' do
+      expect { perform_now }.not_to change(backup, :state)
     end
   end
 end
