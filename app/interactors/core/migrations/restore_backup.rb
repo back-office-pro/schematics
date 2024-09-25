@@ -7,12 +7,13 @@ module Core
 
       delegate :migration, to: :context, private: true
       delegate :state_rollbacking?, :backup, to: :migration, private: true
+      delegate :attached?, to: :backup, private: true
 
       progressable migration: 60
 
       def call
         return unless state_rollbacking?
-        return unless backup.attached?
+        return unless attached?
 
         Backups::Restore.call(backup:)
       end
