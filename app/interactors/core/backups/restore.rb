@@ -12,7 +12,7 @@ module Core
       before :disconnect!
 
       def call
-        backup.open { |file| `pg_restore -vc -d #{current_database} #{file.path}` }
+        backup.open { |file| `pg_restore -v -d #{current_database} #{file.path}` }
       end
     end
   end

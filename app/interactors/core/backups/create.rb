@@ -17,7 +17,7 @@ module Core
 
       private
 
-      def command = "pg_dump -Fc #{current_database} #{table_options}"
+      def command = "pg_dump -Fc -a #{current_database} #{table_options}"
 
       def table_options = Array(tables)
         .map { "-t #{_1}" }
