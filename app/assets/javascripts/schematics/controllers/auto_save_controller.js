@@ -3,8 +3,12 @@ import ApplicationController from 'controllers/application_controller'
 /* global FormData, File, routes */
 
 export default class extends ApplicationController {
+  static get outlets () {
+    return ['timeago']
+  }
+
   static get targets () {
-    return ['form', 'button', 'restoreButton', 'timeago']
+    return ['form', 'button', 'restoreButton']
   }
 
   static get values () {
@@ -35,9 +39,9 @@ export default class extends ApplicationController {
     this.fetchAPI(this.url, 'PUT', this.params)
     this.hasRestoreButtonTarget && this.#hideRestoreButton()
     this.buttonTarget.classList.remove('d-none')
-    this.timeagoTarget.setAttribute('datetime', new Date().toJSON())
-    this.timeagoController.disconnect()
-    this.timeagoController.connect()
+    this.timeagoOutletElement.setAttribute('datetime', new Date().toJSON())
+    this.timeagoOutlet.disconnect()
+    this.timeagoOutlet.connect()
   }
 
   #hideRestoreButton () {
@@ -68,9 +72,5 @@ export default class extends ApplicationController {
 
   get denylist () {
     return ['authenticity_token', '_method', 'password', 'lock_version']
-  }
-
-  get timeagoController () {
-    return this.application.getControllerForElementAndIdentifier(this.timeagoTarget, 'timeago')
   }
 }
