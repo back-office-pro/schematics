@@ -20,7 +20,7 @@ module Schematics
     end
 
     def update_progress!(progress = self.class.progress)
-      resource.update!(progress:) if resource&.persisted?
+      resource.reload.update!(progress:) if resource&.persisted?
     end
 
     private
