@@ -17,11 +17,19 @@ module Core
 
       private
 
-      def command = "pg_dump -Fc -a #{current_database} #{table_options}"
+      def command = "pg_dump #{options}"
 
-      def table_options = Array(tables)
-        .map { "-t #{_1}" }
-        .join(' ')
+      def options = [
+        '-Fc',
+        ('-a' if table_options.any?),
+        ('-c' if table_options.empty?),
+        table_options,
+        current_database
+      ].flatten.compact.join(' ')
+
+      def table_options
+        Array(tables).map { "-t #{_1}" }
+      end
 
       def content_type = 'application/octet-stream'
 
