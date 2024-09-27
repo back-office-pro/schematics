@@ -19,9 +19,15 @@ describe Schematics::Commands::ChangeAttribute do
     subject { command.generators }
 
     context 'when attribute is migratable' do
-      its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'change_first_name_column_string_in_clients') } # rubocop:disable Layout/LineLength
       its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          name: 'change_first_name_column_string_in_clients',
+          behavior: :invoke
+        )
+      end
     end
 
     context 'when attribute is not migratable' do

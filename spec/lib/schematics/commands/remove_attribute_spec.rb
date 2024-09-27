@@ -18,19 +18,37 @@ describe Schematics::Commands::RemoveAttribute do
     subject { command.generators }
 
     context 'when attribute is migratable' do
-      its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'remove_first_name_from_clients') }
-      its([1]) { is_expected.to be_a(TranslationGenerator) }
-      its([1]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.first_name') }
       its(:size) { is_expected.to eq(2) }
+      its([0]) { is_expected.to be_a(Rails::Generators::MigrationGenerator) }
+      its([1]) { is_expected.to be_a(TranslationGenerator) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          name: 'remove_first_name_from_clients',
+          behavior: :invoke
+        )
+      end
+
+      its([1]) do
+        is_expected.to have_attributes(
+          name: 'activerecord.attributes.client.first_name',
+          behavior: :revoke
+        )
+      end
     end
 
     context 'when attribute is not migratable' do
       let(:type) { 'attachment' }
 
-      its([0]) { is_expected.to be_a(TranslationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.first_name') }
       its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(TranslationGenerator) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          name: 'activerecord.attributes.client.first_name',
+          behavior: :revoke
+        )
+      end
     end
   end
 end

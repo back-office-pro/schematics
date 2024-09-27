@@ -15,7 +15,7 @@ describe Schematics::Commands::AddPermission do
     subject { command.generators }
 
     its([0]) { is_expected.to be_a(PermissionGenerator) }
-    its([0]) { is_expected.to have_attributes(name: 'client') }
+    its([0]) { is_expected.to have_attributes(name: 'client', behavior: :invoke) }
     its(:size) { is_expected.to eq(1) }
   end
 end

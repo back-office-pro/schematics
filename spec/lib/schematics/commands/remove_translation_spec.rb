@@ -15,18 +15,30 @@ describe Schematics::Commands::RemoveTranslation do
     subject { command.generators }
 
     context 'when attribute is not a state machine event' do
-      its([0]) { is_expected.to be_a(TranslationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'activerecord.attributes.client.name') }
       its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(TranslationGenerator) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          name: 'activerecord.attributes.client.name',
+          behavior: :revoke
+        )
+      end
     end
 
     context 'when attribute is a state machine event' do
       let(:state_machine) { Schematics::Attributes::StateMachine.new(entity:, name: 'state') }
       let(:attribute) { Schematics::Options::StateMachineEvent.new(state_machine:, name: 'follow') }
 
-      its([0]) { is_expected.to be_a(TranslationGenerator) }
-      its([0]) { is_expected.to have_attributes(name: 'activerecord.events.client.follow') }
       its(:size) { is_expected.to eq(1) }
+      its([0]) { is_expected.to be_a(TranslationGenerator) }
+
+      its([0]) do
+        is_expected.to have_attributes(
+          name: 'activerecord.events.client.follow',
+          behavior: :revoke
+        )
+      end
     end
   end
 end
