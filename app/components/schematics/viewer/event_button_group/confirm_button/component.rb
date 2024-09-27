@@ -5,6 +5,8 @@ module Schematics
     module EventButtonGroup
       module ConfirmButton
         class Component < Button::Component
+          def form_css_classes = %w[d-inline btn-check position-relative]
+
           def text = t(
             event.name,
             default: t('.default'),

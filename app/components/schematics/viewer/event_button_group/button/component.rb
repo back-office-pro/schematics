@@ -14,7 +14,7 @@ module Schematics
 
           def last? = last
 
-          def css_classes
+          def button_css_classes
             class_names(
               'btn',
               "btn-#{event.color}",

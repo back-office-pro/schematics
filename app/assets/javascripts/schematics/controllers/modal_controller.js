@@ -9,11 +9,11 @@ export default class extends ApplicationController {
   }
 
   #appendToBody () {
-    document.body.appendChild(this.modalElement)
+    document.body.append(this.modalElement)
   }
 
   #moveBackToParentNode () {
-    this.parentNode.appendChild(this.modalElement)
+    this.parentNode.prepend(this.modalElement)
   }
 
   #checkFormValidity (event) {
