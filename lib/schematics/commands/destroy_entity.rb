@@ -55,7 +55,7 @@ module Schematics
       def drop_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
-            "drop_join_table_#{association.entity.table_name.pluralize}_#{association.inverse_entity.table_name.pluralize}", # rubocop:disable Layout/LineLength
+            "drop_join_table_#{association.join_table}",
             association.entity.table_name.pluralize,
             association.inverse_entity.table_name.pluralize
           ]

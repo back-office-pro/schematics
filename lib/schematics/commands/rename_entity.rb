@@ -80,8 +80,7 @@ module Schematics
               old_name.pluralize,
               association.inverse_entity.table_name.pluralize,
               'to',
-              association.entity.table_name.pluralize,
-              association.inverse_entity.table_name.pluralize
+              association.join_table
             ].join('_')
           ]
         )
@@ -97,8 +96,7 @@ module Schematics
               'to',
               "#{association.entity.table_name}_id",
               'in',
-              association.entity.table_name.pluralize,
-              association.inverse_entity.table_name.pluralize
+              association.join_table
             ].join('_')
           ]
         )

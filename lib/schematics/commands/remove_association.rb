@@ -11,7 +11,7 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         [
-          "drop_join_table_#{table_name.pluralize}_#{attribute.name}",
+          "drop_join_table_#{attribute.join_table}",
           table_name.pluralize,
           attribute.name
         ]

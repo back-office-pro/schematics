@@ -11,7 +11,7 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         [
-          "create_join_table_#{table_name.pluralize}_#{attribute.name}",
+          "create_join_table_#{attribute.join_table}",
           table_name.pluralize,
           "#{attribute.name}:uniq"
         ]
