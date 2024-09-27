@@ -1058,7 +1058,10 @@
         "name": "backup",
         "type": "attachment",
         "options": {
-          "hidden": true
+          "hidden": true,
+          "content_type": [
+            "binary"
+          ]
         }
       }
     ]
@@ -2047,7 +2050,10 @@
         "name": "file",
         "type": "attachment",
         "options": {
-          "required": true
+          "required": true,
+          "content_type": [
+            "binary"
+          ]
         }
       },
       {
