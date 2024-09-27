@@ -6,7 +6,7 @@ module Schematics
     queue_as :backups
 
     def perform(backup)
-      ::Core::Backups::Restore.call(backup: backup.file)
+      ::Core::Backups::Restore.call(backup: backup.file, clean: true)
       backup.reload.state_ready!
     end
   end
