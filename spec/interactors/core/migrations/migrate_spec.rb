@@ -114,7 +114,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect(migrate).to be_a_success
-        expect(migration.backup).to be_attached
+        expect(migration.backup).not_to be_attached
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
@@ -220,7 +220,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect { expect(migrate).to be_a_success }
           .to change(Translation.with_deleted, :count)
           .by(-3)
-        expect(migration.backup).not_to be_attached
+        expect(migration.backup).to be_attached
         expect(Dir[root.join('db/migrate/*_remove_first_name_from_prospects_*.rb')]).not_to be_empty
         expect(Prospect.new).not_to respond_to(:first_name)
       end
@@ -487,7 +487,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
         expect(migrate).to be_a_success
-        expect(migration.backup).to be_attached
+        expect(migration.backup).not_to be_attached
         expect(Dir[root.join('db/migrate/*_rename_prospects_to_clients_*.rb')]).not_to be_empty
         expect(Dir[root.join('db/migrate/*_rename_prospects_users_to_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
         expect(Dir[root.join('db/migrate/*_rename_prospect_id_to_client_id_in_clients_users_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
