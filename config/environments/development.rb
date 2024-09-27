@@ -11,7 +11,7 @@ Rails.application.configure do
 
   # Public File Server
   config.public_file_server.enabled = true
-  config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{2.days.to_i}" } # rubocop:disable Style/StringHashKeys
+  config.public_file_server.headers = { 'cache-control' => "public, max-age=#{2.days.to_i}" } # rubocop:disable Style/StringHashKeys
 
   # Active Job
   config.active_job.queue_adapter = :solid_queue

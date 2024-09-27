@@ -10,7 +10,7 @@ Rails.application.configure do
 
   # Public File Server
   config.public_file_server.enabled = true
-  config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.hour.to_i}" } # rubocop:disable Style/StringHashKeys
+  config.public_file_server.headers = { 'cache-control' => "public, max-age=#{1.hour.to_i}" } # rubocop:disable Style/StringHashKeys
 
   # Action Dispatch
   config.action_dispatch.show_exceptions = :rescuable
