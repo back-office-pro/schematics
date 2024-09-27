@@ -39,6 +39,7 @@ module Core
             .migrator
             .clean_commands
             .grep(Schematics::Commands::RemoveAssociation)
+            .map(&:attribute)
             .map(&:join_table)
         )
     end
