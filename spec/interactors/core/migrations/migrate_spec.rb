@@ -334,6 +334,7 @@ RSpec.describe Core::Migrations::Migrate do
         expect { expect(migrate).to be_a_success }
           .to change(Translation.with_deleted, :count)
           .by(-3)
+        expect(migration.backup).to be_attached
         expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
         expect(Prospect.new).not_to respond_to(:users)
       end
