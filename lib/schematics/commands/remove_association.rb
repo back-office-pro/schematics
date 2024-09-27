@@ -20,7 +20,7 @@ module Schematics
       def translation_generator
         return if core?
 
-        TranslationGenerator.new([attribute.i18n_key])
+        TranslationGenerator.new([attribute.i18n_key], [], behavior: :revoke)
       end
 
       def weight = 2
