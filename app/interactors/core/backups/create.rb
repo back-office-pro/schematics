@@ -17,12 +17,10 @@ module Core
 
       private
 
-      def command = "pg_dump #{options}"
-
-      def options = [
+      def command = [
+        'pg_dump',
         '-Fc',
         ('-a' if table_options.any?),
-        ('-c' if table_options.empty?),
         table_options,
         current_database
       ].flatten.compact.join(' ')
