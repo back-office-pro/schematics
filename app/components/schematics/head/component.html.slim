@@ -22,4 +22,4 @@ head
   = __theme_custom_stylesheet
   = __rouge_theme_stylesheet
   = __inline_javascript
-  link rel='manifest' href='/manifest.json' crossorigin='use-credentials'
+  = tag.link rel: 'manifest', href: pwa_manifest_path(format: :json), crossorigin: 'use-credentials'
