@@ -8,7 +8,7 @@ module Core
       delegate :migration_context, to: 'ActiveRecord::Base.connection_pool', private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :migration, to: :context, private: true
-      delegate :state_rollbacking?, to: :migration, private: true
+      delegate :state_rollbacking?, :migrator_clean_commands, to: :migration, private: true
 
       progressable migration: 50
 
@@ -26,22 +26,18 @@ module Core
         .call(tables:)
         .file
 
-      def tables = migration
-        .migrator
-        .clean_commands
+      def join_tables = migrator_clean_commands
+        .grep(Schematics::Commands::RemoveAssociation)
+        .map(&:attribute)
+        .map(&:join_table)
+
+      def tables = migrator_clean_commands
         .grep(Schematics::Commands::DestroyEntity)
-        .concat(migration.migrator.clean_commands.grep(Schematics::Commands::RemoveAttribute))
+        .concat(migrator_clean_commands.grep(Schematics::Commands::RemoveAttribute))
         .map(&:entity)
         .map(&:table_name)
         .map(&:pluralize)
-        .concat(
-          migration
-            .migrator
-            .clean_commands
-            .grep(Schematics::Commands::RemoveAssociation)
-            .map(&:attribute)
-            .map(&:join_table)
-        )
+        .concat(join_tables)
     end
   end
 end
