@@ -300,6 +300,38 @@ RSpec.describe Core::Migrations::Migrate do
       end
     end
 
+    context 'when removing a habtm association' do
+      let(:data) do
+        [
+          {
+            id: '3cceed80-55c1-445f-a47b-44705c702c3d',
+            name: 'prospect',
+            attributes: [
+              {
+                id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
+                name: 'first_name',
+                type: 'string'
+              }
+            ]
+          }
+        ]
+      end
+      let(:commits_steps) { 2 }
+      let(:migrations_steps) { 3 }
+
+      before { create_prospect_entity }
+
+      uses_transaction 'migrates successfully'
+
+      it 'migrates successfully' do # rubocop:disable RSpec/MultipleExpectations
+        expect { expect(migrate).to be_a_success }
+          .to change(Translation.with_deleted, :count)
+          .by(-3)
+        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_users_*.rb')]).not_to be_empty
+        expect(Prospect.new).not_to respond_to(:users)
+      end
+    end
+
     context 'when renaming an attribute' do
       let(:data) do
         [
