@@ -27,9 +27,20 @@ module Core
         .file
 
       def tables = migration
-        .migrator_old_entities
+        .migrator
+        .clean_commands
+        .grep(Schematics::Commands::DestroyEntity)
+        .concat(migration.migrator.clean_commands.grep(Schematics::Commands::RemoveAttribute))
+        .map(&:entity)
         .map(&:table_name)
         .map(&:pluralize)
+        .concat(
+          migration
+            .migrator
+            .clean_commands
+            .grep(Schematics::Commands::RemoveAssociation)
+            .map(&:join_table)
+        )
     end
   end
 end
