@@ -11,6 +11,8 @@ module Core
                :migrator_build_commands,
                :persisted?,
                :data,
+               :previously_migrated_schema,
+               :state_rollbacking?,
                to: :migration,
                private: true
 
@@ -23,7 +25,7 @@ module Core
         migrator_clean_commands
           .flat_map(&:generators)
           .each(&method(:invoke))
-        ::Tenant.schema = data
+        ::Tenant.schema = state_rollbacking? ? previously_migrated_schema : data
         migrator_build_commands
           .flat_map(&:generators)
           .each(&method(:invoke))
