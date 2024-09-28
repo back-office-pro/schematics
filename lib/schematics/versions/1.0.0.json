@@ -1052,6 +1052,17 @@
         "id": "1fe91bd1-672b-41fe-9ac8-3648d6ab36de",
         "name": "author",
         "type": "user"
+      },
+      {
+        "id": "2e280284-4b40-4ff0-b3aa-9087a52b8de9",
+        "name": "backup",
+        "type": "attachment",
+        "options": {
+          "hidden": true,
+          "content_type": [
+            "binary"
+          ]
+        }
       }
     ]
   },
@@ -2019,6 +2030,55 @@
         "type": "boolean",
         "options": {
           "default": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "8bd6b418-ae92-4a8a-aee3-697c943417cd",
+    "name": "backup",
+    "options": {
+      "icon": "hard_drive",
+      "actions": [
+        "index",
+        "show"
+      ]
+    },
+    "attributes": [
+      {
+        "id": "20db6500-c9e2-4d0e-a965-feb4b3beea2f",
+        "name": "file",
+        "type": "attachment",
+        "options": {
+          "required": true,
+          "content_type": [
+            "binary"
+          ]
+        }
+      },
+      {
+        "id": "4820829b-0d56-4a73-a3eb-d110e147325e",
+        "name": "state",
+        "type": "state_machine",
+        "options": {
+          "required": true,
+          "direct_assignment": true,
+          "default": "ready",
+          "values": [
+            "ready",
+            "restoring"
+          ],
+          "events": [
+            {
+              "id": "d02d71c7-45c3-4ad1-ac17-2158b38392fc",
+              "name": "restore_database",
+              "icon": "paint_roller",
+              "color": "danger",
+              "confirm": true,
+              "from": "ready",
+              "to": "restoring"
+            }
+          ]
         }
       }
     ]

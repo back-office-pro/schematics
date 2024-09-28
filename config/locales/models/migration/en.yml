@@ -4,6 +4,7 @@ en:
     attributes:
       migration:
         author: Author
+        backup: Backup
         data: Data
         progress: Progress
         prompt: Application description

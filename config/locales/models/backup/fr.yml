@@ -1,0 +1,20 @@
+---
+fr:
+  activerecord:
+    attributes:
+      backup:
+        file: Fichier
+        state: Etat
+    enums:
+      backup:
+        state:
+          ready: Prêt
+          restoring: Restauration en cours
+    events:
+      backup:
+        restore_database: Restaurer la base de données
+    models:
+      backup:
+        gender: female
+        one: Sauvegarde
+        other: Sauvegardes

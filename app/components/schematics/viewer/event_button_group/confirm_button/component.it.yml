@@ -1,5 +1,7 @@
 ---
 it:
+  backup:
+    restore_database: Questa azione può portare alla perdita di dati e all'interruzione temporanea del servizio
   default: Conferma la sua azione
   migration:
     migrate: Questa azione può portare alla perdita di dati e all'interruzione temporanea del servizio
