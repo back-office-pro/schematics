@@ -33,6 +33,10 @@
       background: var(--bs-white) !important;
     }
   }
+
+  .nav-link > div::first-letter {
+    font-weight: bold;
+  }
 }
 
 .sidebar-sticky {
