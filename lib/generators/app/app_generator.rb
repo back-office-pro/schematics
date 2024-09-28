@@ -108,9 +108,17 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'solid_cache:install', env:
   end
 
+  def install_solid_cable
+    return unless generating?
+
+    remove_file 'db/cable_schema.rb'
+    rails_command 'solid_cable:install', env:
+  end
+
   def prepare_database
     return unless generating?
 
+    remove_file 'config/cable.yml'
     remove_file 'config/cache.yml'
     rails_command 'db:prepare', env:
   end

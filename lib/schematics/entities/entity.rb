@@ -24,6 +24,7 @@ module Schematics
         one_time_password
         paper_trail_version
         password_reset
+        solid_cable_message
         solid_cache_entry
         solid_queue_blocked_execution
         solid_queue_claimed_execution

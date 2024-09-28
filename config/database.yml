@@ -11,6 +11,10 @@ development:
   primary:
     <<: *default
     database: <%= Tenant.app_name %>_development
+  cable:
+    <<: *default
+    database: <%= Tenant.app_name %>_development_cable
+    migrations_paths: db/cable_migrate
   cache:
     <<: *default
     database: <%= Tenant.app_name %>_development_cache
@@ -30,6 +34,10 @@ production:
     database: <%= Tenant.app_name %>_production
     username: <%= Tenant.app_name %>
     password: <%= Rails.application.credentials.database_password %>
+  cable:
+    <<: *primary_production
+    database: <%= Tenant.app_name %>_production_cable
+    migrations_paths: db/cable_migrate
   cache:
     <<: *primary_production
     database: <%= Tenant.app_name %>_production_cache
