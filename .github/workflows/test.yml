@@ -132,6 +132,7 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/interactors
       - name: Run job tests
+        if: always()
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
