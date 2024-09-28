@@ -12,16 +12,7 @@ module Schematics
 
             def selected = object.try(option_name)
 
-            def include_hidden = false
-
             def include_blank = t('prompt', attribute_name:)
-
-            private
-
-            def attribute_name = Schematics::Options::Wrapper
-              .human_attribute_name(option_name)
-              .singularize
-              .downcase
           end
         end
       end

@@ -5,7 +5,7 @@ module Schematics
     module Options
       module Inputs
         module Array
-          class Component < Select::Component
+          class Component < Inputs::Component
             def data = {
               controller: 'dropdown',
               'dropdown-create-value': true,
@@ -15,6 +15,8 @@ module Schematics
             def values
               Array(object.public_send(option_name))
             end
+
+            def include_blank = t('prompt', attribute_name:)
           end
         end
       end

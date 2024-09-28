@@ -36,8 +36,6 @@ module Schematics
 
             def multiple = true
 
-            def include_hidden = false
-
             def maxlength = 50
 
             def events = Array(object.events&.map(&Schematics::Options::StateMachineEvent))

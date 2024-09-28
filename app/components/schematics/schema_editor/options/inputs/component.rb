@@ -18,6 +18,15 @@ module Schematics
                 .new(builder:, option:, object:)
             end
           end
+
+          def include_hidden = false
+
+          protected
+
+          def attribute_name = Schematics::Options::Wrapper
+            .human_attribute_name(option_name)
+            .singularize
+            .downcase
         end
       end
     end
