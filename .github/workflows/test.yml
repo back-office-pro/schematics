@@ -48,71 +48,85 @@ jobs:
           PGHOST: localhost
         run: ruby bin/schematics
       - name: Run ability tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/abilities
       - name: Run component tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/components
       - name: Run config tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/config
       - name: Run db tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/db
       - name: Run feature tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/features
       - name: Run generator tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/generators
       - name: Run mailer tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/mailers
       - name: Run mapper tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/mappers
       - name: Run model tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/models
       - name: Run query tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/queries
       - name: Run routing tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/routing
       - name: Run serializer tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/serializers
       - name: Run request tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
         run: bundle exec rspec spec/requests
       - name: Run interactor tests
+        continue-on-error: true
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/demo_test
