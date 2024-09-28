@@ -30,7 +30,7 @@ RSpec.describe Migration do
   end
 
   it 'enqueues a generate schema job after updating prompt' do
-    expect { record.tap(&:save!).update!(prompt: 'prompt') }
+    expect { record.tap(&:save!).reload.update!(prompt: 'prompt') }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
       .exactly(:once)
       .with(record)
