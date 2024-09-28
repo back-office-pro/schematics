@@ -4,10 +4,10 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 `cd spec/demo && rails db:test:prepare`
 require File.expand_path('../spec/demo/config/environment', __dir__)
-require 'isolator'
 require 'paper_trail/frameworks/rspec'
 require 'support/cache'
 require 'support/capybara'
+require 'support/isolator'
 require 'support/shared_contexts'
 require 'support/view_component'
 require 'support/webmock'
