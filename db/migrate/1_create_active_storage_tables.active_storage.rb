@@ -23,7 +23,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.2]
     create_table :active_storage_attachments, id: :uuid do |t|
       t.string     :name,   null: false
       t.references :record, null: false, polymorphic: true, index: false, type: :uuid
-      t.references :blob,   null: false, type: :uuid
+      t.references :blob,   null: false, type: :uuid, index: { where: 'deleted_at IS NULL' }
       t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }

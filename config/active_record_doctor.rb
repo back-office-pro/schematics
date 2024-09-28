@@ -1,22 +1,6 @@
 # frozen_string_literal: true
 
 ActiveRecordDoctor.configure do
-  global :ignore_tables, %w[
-    ar_internal_metadata
-    schema_migrations
-    active_storage_blobs
-    active_storage_attachments
-    active_storage_variant_records
-    action_text_rich_texts
-    friendly_id_slugs
-    mobility_string_translations
-    mobility_text_translations
-    paper_trail_versions
-    solid_queue_jobs
-    solid_queue_semaphores
-    solid_queue_recurring_tasks
-  ]
-
   global :ignore_models, %w[
     ActionMailbox::Record
     ActionMailbox::InboundEmail
@@ -34,6 +18,7 @@ ActiveRecordDoctor.configure do
     ApplicationRecord
     Mobility::Backends::ActionText::PlainTextTranslation
     Mobility::Backends::ActionText::RichTextTranslation
+    SolidCable::Message
     SolidCache::Entry
     SolidQueue::Semaphore
     SolidQueue::Process
