@@ -15,8 +15,6 @@ module Schematics
             def values
               Array(object.public_send(option_name))
             end
-
-            def include_blank = t('prompt', attribute_name:)
           end
         end
       end

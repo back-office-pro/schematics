@@ -41,9 +41,9 @@ module Schematics
             def events = Array(object.events&.map(&Schematics::Options::StateMachineEvent))
 
             def include_blank(name = nil)
-              attribute_name = Schematics::Options::Wrapper.human_attribute_name('values') unless name # rubocop:disable Layout/LineLength
-              attribute_name ||= Schematics::Options::StateMachineEvent.human_attribute_name(name)
-              t('prompt', attribute_name: attribute_name.singularize.downcase)
+              param = attribute_name('values') unless name
+              param ||= Schematics::Options::StateMachineEvent.human_attribute_name(name)
+              super(param)
             end
           end
         end

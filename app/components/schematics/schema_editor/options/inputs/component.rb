@@ -21,12 +21,15 @@ module Schematics
 
           def include_hidden = false
 
+          def include_blank(name = attribute_name)
+            t('prompt', attribute_name: name.singularize.downcase)
+          end
+
           protected
 
-          def attribute_name = Schematics::Options::Wrapper
-            .human_attribute_name(option_name)
-            .singularize
-            .downcase
+          def attribute_name(name = option_name)
+            Schematics::Options::Wrapper.human_attribute_name(name)
+          end
         end
       end
     end

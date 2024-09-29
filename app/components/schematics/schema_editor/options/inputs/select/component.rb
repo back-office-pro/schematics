@@ -11,8 +11,6 @@ module Schematics
             def data = { controller: }
 
             def selected = object.try(option_name)
-
-            def include_blank = t('prompt', attribute_name:)
           end
         end
       end
