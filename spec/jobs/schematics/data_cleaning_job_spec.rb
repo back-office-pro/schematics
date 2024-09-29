@@ -47,7 +47,7 @@ RSpec.describe Schematics::DataCleaningJob do
       [
         { model: 'APIKey', field: 'APIKey#expires_at', period: 'year' },
         { model: 'Meeting', field: 'Meeting#end_at', period: 'year' },
-        { model: 'Import', period: 'year' }
+        { model: 'Import', period: 'year', really_destroy: true }
       ]
     )
   end
@@ -67,17 +67,19 @@ RSpec.describe Schematics::DataCleaningJob do
   end
 
   describe '#perform_now' do
+    subject(:perform_now) { described_class.perform_now }
+
     context 'when API keys are active' do
       let(:expires_at) { nil }
 
       before { api_keys }
 
       it 'does not archive API keys' do
-        expect { described_class.perform_now }.not_to change(APIKey, :count)
+        expect { perform_now }.not_to change(APIKey, :count)
       end
 
       it 'does not destroy API keys' do
-        expect { described_class.perform_now }.not_to change(APIKey.with_deleted, :count)
+        expect { perform_now }.not_to change(APIKey.with_deleted, :count)
       end
     end
 
@@ -87,34 +89,39 @@ RSpec.describe Schematics::DataCleaningJob do
       before { api_keys }
 
       it 'archives API keys' do
-        expect { described_class.perform_now }
+        expect { perform_now }
           .to change(APIKey, :count)
           .by(-2)
       end
 
       it 'does not destroy API keys' do
-        expect { described_class.perform_now }.not_to change(APIKey.with_deleted, :count)
+        expect { perform_now }.not_to change(APIKey.with_deleted, :count)
       end
     end
 
-    it 'archives imports' do
-      expect { described_class.perform_now }
-        .to change(Import, :count)
+    it 'destroys imports' do
+      expect { perform_now }
+        .to change(Import.with_deleted, :count)
         .by(-2)
     end
 
-    it 'does not destroy imports' do
-      expect { described_class.perform_now }.not_to change(Import.with_deleted, :count)
+    it 'purges import files' do
+      expect { perform_now }
+        .to have_enqueued_job(ActiveStorage::PurgeJob)
+        .exactly(:twice)
+        .with(file)
+        .on_queue('cleanups')
+        .at(:no_wait)
     end
 
     it 'archives meetings' do
-      expect { described_class.perform_now }
+      expect { perform_now }
         .to change(Meeting, :count)
         .by(-2)
     end
 
     it 'does not destroy meetings' do
-      expect { described_class.perform_now }.not_to change(Meeting.with_deleted, :count)
+      expect { perform_now }.not_to change(Meeting.with_deleted, :count)
     end
   end
 end

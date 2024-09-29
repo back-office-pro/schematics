@@ -14,15 +14,14 @@ class DataCleaning < Schematics::ApplicationRecord
   def run_query! = model_class
     .preload_all
     .where(query_field => query_range)
-    .in_batches
-    .public_send(query_method)
+    .find_each(&query_method)
 
   private
 
   def query_method
-    return :delete_all if really_destroy?
+    return :really_destroy! if really_destroy?
 
-    :destroy_all
+    :destroy!
   end
 
   def query_field
