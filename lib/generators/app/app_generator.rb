@@ -98,28 +98,30 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     remove_file 'db/queue_schema.rb'
-    rails_command 'solid_queue:install', env:
+    rails_command('solid_queue:install', env:)
+    remove_file 'config/queue.yml'
+    remove_file 'config/recurring.yml'
   end
 
   def install_solid_cache
     return unless generating?
 
     remove_file 'db/cache_schema.rb'
-    rails_command 'solid_cache:install', env:
+    rails_command('solid_cache:install', env:)
+    remove_file 'config/cache.yml'
   end
 
   def install_solid_cable
     return unless generating?
 
     remove_file 'db/cable_schema.rb'
-    rails_command 'solid_cable:install', env:
+    rails_command('solid_cable:install', env:)
+    remove_file 'config/cable.yml'
   end
 
   def prepare_database
     return unless generating?
 
-    remove_file 'config/cable.yml'
-    remove_file 'config/cache.yml'
     rails_command 'db:prepare', env:
   end
 
@@ -178,8 +180,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/initializers/permissions_policy.rb'
     remove_file 'config/locales/en.yml'
     remove_file 'config/puma.rb'
-    remove_file 'config/queue.yml'
-    remove_file 'config/recurring.yml'
     remove_file 'config/routes.rb'
     remove_file 'config/environments/development.rb'
     remove_file 'config/environments/production.rb'
