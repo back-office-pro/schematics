@@ -49,7 +49,7 @@ module Schematics
       def to_sql = 'active_storage_blobs.filename'
 
       def to_str = <<~RUBY
-        has_one_base64_attached :#{name}
+        #{attached_method} :#{name}
         accepts_nested_attributes_for :#{association_name},
                                       allow_destroy: true,
                                       reject_if: :all_blank
@@ -128,6 +128,8 @@ module Schematics
       protected
 
       memoize def dummy = Specs::Dummy.new(extension)
+
+      def attached_method = :has_one_base64_attached
     end
   end
 end
