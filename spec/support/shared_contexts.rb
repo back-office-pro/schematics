@@ -98,7 +98,6 @@ RSpec.shared_context 'with blog post' do
   end
 
   before do
-    resource
     resource.update!(
       title_en: 'My new title',
       title_fr: 'Mon nouveau titre',
