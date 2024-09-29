@@ -39,5 +39,10 @@ RSpec.describe Schematics::Resources::Restore do
         .to change(ActiveStorage::Attachment, :count)
         .by(1)
     end
+
+    it 'serves the image' do
+      call
+      expect(ActiveStorage::Blob.service).to exist(image.key)
+    end
   end
 end

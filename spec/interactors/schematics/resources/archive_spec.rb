@@ -42,6 +42,10 @@ RSpec.describe Schematics::Resources::Archive do
         .by(-1)
     end
 
+    it 'does not archive the active storage blob to keep it on file storage list' do
+      expect { call }.not_to change(ActiveStorage::Blob, :count)
+    end
+
     it 'does not archive the version to keep it on timeline' do
       expect { call }.not_to change(Schematics::Version, :count)
     end
