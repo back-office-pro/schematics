@@ -3,38 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::Resources::Archive do
-  include_context 'with user'
+  include_context 'with blog post'
 
-  let(:resource) do
-    BlogPost.create!(
-      title_en: 'My title',
-      title_fr: 'Mon titre',
-      title_it: 'Il mio titolo',
-      content_en: 'My content',
-      content_fr: 'Mon contenu',
-      content_it: 'Il mio contenuto',
-      image: image.signed_id,
-      author: user
-    )
-  end
-  let(:image) do
-    ActiveStorage::Blob.create_and_upload!(
-      io: file_fixture('logo.png').open,
-      filename: 'logo.png',
-      content_type: Mime[:png].to_s
-    )
-  end
   let(:version) { Schematics::Version.create!(event: 'create', item: resource, user:) }
 
-  before do
-    resource
-    resource.update!(
-      title_en: 'My new title',
-      title_fr: 'Mon nouveau titre',
-      title_it: 'Il mio nuovo titolo'
-    )
-    version
-  end
+  before { version }
 
   describe '.call' do
     subject(:call) { described_class.call(resource:) }
@@ -74,8 +47,12 @@ RSpec.describe Schematics::Resources::Archive do
     end
 
     it 'does not purge the image' do
-      call
-      expect(ActiveStorage::Blob.service).to exist(image.key)
+      expect { call }
+        .not_to have_enqueued_job(ActiveStorage::PurgeJob)
+        .exactly(:once)
+        .with(image)
+        .on_queue('cleanups')
+        .at(:no_wait)
     end
   end
 end
