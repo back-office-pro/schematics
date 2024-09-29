@@ -43,7 +43,7 @@ RSpec.shared_context 'with import' do
       io: file_fixture('users.csv').open,
       filename: 'users.csv',
       content_type: Mime[:csv].to_s
-    ).signed_id
+    )
   end
 end
 
@@ -70,6 +70,39 @@ RSpec.shared_context 'with user' do
       role:,
       preferences:,
       user_groups:
+    )
+  end
+end
+
+RSpec.shared_context 'with blog post' do
+  include_context 'with user'
+
+  let(:resource) do
+    BlogPost.create!(
+      title_en: 'My title',
+      title_fr: 'Mon titre',
+      title_it: 'Il mio titolo',
+      content_en: 'My content',
+      content_fr: 'Mon contenu',
+      content_it: 'Il mio contenuto',
+      image:,
+      author: user
+    )
+  end
+  let(:image) do
+    ActiveStorage::Blob.create_and_upload!(
+      io: file_fixture('logo.png').open,
+      filename: 'logo.png',
+      content_type: Mime[:png].to_s
+    )
+  end
+
+  before do
+    resource
+    resource.update!(
+      title_en: 'My new title',
+      title_fr: 'Mon nouveau titre',
+      title_it: 'Il mio nuovo titolo'
     )
   end
 end
