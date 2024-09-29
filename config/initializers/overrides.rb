@@ -2,6 +2,7 @@
 
 require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_record/override/generators/migration_generator'
+require 'active_storage/override/attachment'
 require 'active_storage/override/blob'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
@@ -88,6 +89,10 @@ ActiveSupport.on_load(:active_storage_record) do
   end
 
   def paper_trail_versions = Schematics::Version.none
+end
+
+ActiveSupport.on_load(:active_storage_attachment) do
+  prepend ActiveStorage::Override::Attachment
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
