@@ -6,16 +6,13 @@ module Core
       include Schematics::Progressable
 
       delegate :migration, to: :context, private: true
-      delegate :state_rollbacking?, :backup, to: :migration, private: true
+      delegate :backup, to: :migration, private: true
       delegate :attached?, to: :backup, private: true
 
       progressable migration: 60
 
       def call
-        return unless state_rollbacking?
-        return unless attached?
-
-        Backups::Restore.call(backup:)
+        Backups::Restore.call(backup:) if attached?
       end
     end
   end
