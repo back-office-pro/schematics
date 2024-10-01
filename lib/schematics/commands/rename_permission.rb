@@ -9,8 +9,7 @@ module Schematics
       def generators = [
         PermissionGenerator.new(
           [name],
-          ["--action=#{target}", "--rename=#{attribute}"],
-          behavior: :revoke
+          ["--action=#{target}", "--rename=#{attribute}"]
         )
       ]
 
