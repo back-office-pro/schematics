@@ -8,12 +8,11 @@ module Core
       delegate :migration_context, to: 'ActiveRecord::Base.connection_pool', private: true
       delegate :needs_migration?, to: :migration_context, private: true
       delegate :migration, to: :context, private: true
-      delegate :state_rollbacking?, :migrator_clean_commands, to: :migration, private: true
+      delegate :migrator_clean_commands, to: :migration, private: true
 
       progressable migration: 50
 
       def call
-        return if state_rollbacking?
         return if tables.empty?
         return unless needs_migration?
 

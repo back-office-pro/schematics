@@ -9,7 +9,6 @@ module Core
                Generate,
                GenerateBackup,
                MigrateDatabase,
-               RestoreBackup,
                CleanIndices,
                Reload,
                Reindex,
