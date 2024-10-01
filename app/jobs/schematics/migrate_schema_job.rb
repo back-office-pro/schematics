@@ -10,7 +10,7 @@ module Schematics
       return if migration.state_generating?
       return if migration.state_in_progress?
 
-      migration.state_in_progress! unless migration.state_rollbacking?
+      migration.state_in_progress!
       migration.finalize!(Core::Migrations::Migrate.call(migration:).failure?)
     end
   end
