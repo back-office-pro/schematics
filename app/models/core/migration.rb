@@ -51,7 +51,9 @@ class Migration < Schematics::ApplicationRecord
     Schematics::MigrateSchemaJob.perform_later(self)
   end
 
-  alias after_rollback_event after_migrate_event
+  def after_rollback_event
+    Schematics::RollbackSchemaJob.perform_later(self)
+  end
 
   memoize def migrator
     return Schematics::Migrator.new(previously_migrated_schema, data) if state_rollbacking?

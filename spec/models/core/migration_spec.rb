@@ -28,6 +28,15 @@ RSpec.describe Migration do
       .at(:no_wait)
   end
 
+  it 'enqueues a rollback schema job after rollback' do
+    expect { record.tap { _1.finalize!(false) }.reload.rollback! }
+      .to have_enqueued_job(Schematics::RollbackSchemaJob)
+      .exactly(:once)
+      .with(record)
+      .on_queue('migrations')
+      .at(:no_wait)
+  end
+
   it 'enqueues a generate schema job after updating prompt' do
     expect { record.tap(&:save!).reload.update!(prompt: 'prompt') }
       .to have_enqueued_job(Schematics::GenerateSchemaJob)
