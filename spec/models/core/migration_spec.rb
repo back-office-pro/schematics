@@ -8,7 +8,6 @@ RSpec.describe Migration do
   its(:locale) { is_expected.to eq('en') }
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
   its(:commit_message) { is_expected.to eq('Migration v1.5 (core v1.0.0)') }
-  its(:previously_migrated_schema) { is_expected.to be_a(Schematics::Schema) }
 
   its(:to_yaml) do
     is_expected.to eq <<~YAML

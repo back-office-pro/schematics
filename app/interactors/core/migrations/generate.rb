@@ -9,10 +9,8 @@ module Core
       delegate :migration, :fail!, to: :context, private: true
       delegate :migrator_clean_commands,
                :migrator_build_commands,
+               :migrator_new_schema,
                :persisted?,
-               :data,
-               :previously_migrated_schema,
-               :state_rollbacking?,
                to: :migration,
                private: true
 
@@ -25,7 +23,7 @@ module Core
         migrator_clean_commands
           .flat_map(&:generators)
           .each(&method(:invoke))
-        ::Tenant.schema = state_rollbacking? ? previously_migrated_schema : data
+        ::Tenant.schema = migrator_new_schema
         migrator_build_commands
           .flat_map(&:generators)
           .each(&method(:invoke))

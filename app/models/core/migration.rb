@@ -16,6 +16,7 @@ class Migration < Schematics::ApplicationRecord
            :changed_entities,
            :new_and_changed_entities,
            :old_and_changed_entities,
+           :new_schema,
            to: :migrator,
            prefix: true
 
@@ -77,14 +78,6 @@ class Migration < Schematics::ApplicationRecord
     author&.locale || ::Configuration.locale
   end
 
-  def previously_migrated_schema = self
-    .class
-    .state_finished
-    .excluding(self)
-    .order(created_at: :desc)
-    .find_by(created_at: ..created_at)
-    &.data || Schematics::Schema.new
-
   def to_yaml = { one: { state: STATE_STATE_FINISHED.to_s, version:, data: data.as_json } }
     .deep_stringify_keys
     .to_yaml
@@ -106,4 +99,12 @@ class Migration < Schematics::ApplicationRecord
     .entities
     .reject(&:core?) # rubocop:disable Performance/Count
     .size
+
+  def previously_migrated_schema = self
+    .class
+    .state_finished
+    .excluding(self)
+    .order(created_at: :desc)
+    .find_by(created_at: ..created_at)
+    &.data || Schematics::Schema.new
 end
