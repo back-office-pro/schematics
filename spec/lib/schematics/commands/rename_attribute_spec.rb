@@ -36,7 +36,7 @@ describe Schematics::Commands::RenameAttribute do
       its([1]) do
         is_expected.to have_attributes(
           name: 'activerecord.attributes.client.name',
-          behavior: :revoke
+          behavior: :invoke
         )
       end
     end
@@ -50,7 +50,7 @@ describe Schematics::Commands::RenameAttribute do
       its([0]) do
         is_expected.to have_attributes(
           name: 'activerecord.attributes.client.name',
-          behavior: :revoke
+          behavior: :invoke
         )
       end
     end

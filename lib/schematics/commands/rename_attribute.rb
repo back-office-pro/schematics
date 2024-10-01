@@ -25,8 +25,7 @@ module Schematics
 
         TranslationGenerator.new(
           [target.i18n_key],
-          ["--rename=#{attribute.i18n_key}"],
-          behavior: :revoke
+          ["--rename=#{attribute.i18n_key}"]
         )
       end
 
