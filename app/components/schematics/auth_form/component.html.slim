@@ -4,6 +4,6 @@
                      autofocus: true,
                      prepend: fa_icon(:envelope)
   = __resource_form_fields_digest(form:, value:)
-  = form.check_box :remember_me, switch: true
+  = form.checkbox :remember_me, switch: true
   = __button_confirm
   = link_to t('.password_lost?'), new_password_reset_path, class: 'btn btn-link btn-sm text-decoration-none'

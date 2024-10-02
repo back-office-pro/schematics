@@ -4,7 +4,7 @@
     .col-6.schema-editor-events-input
       = builder.fields_for option_name, state_machine_event do |events_form|
         = events_form.hidden_field :id, { name: "#{events_form.object_name}[NEW_RECORD][id]" }
-        = events_form.check_box :confirm, { switch: true, name: "#{events_form.object_name}[NEW_RECORD][confirm]" }, 'true', 'false'
+        = events_form.checkbox :confirm, { switch: true, name: "#{events_form.object_name}[NEW_RECORD][confirm]" }, 'true', 'false'
         = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[NEW_RECORD][name]", maxlength:, floating: }
         = events_form.select :icon,
                              icons_collection,
@@ -31,7 +31,7 @@
       .col-6.schema-editor-events-input
         = builder.fields_for option_name, event do |events_form|
           = events_form.hidden_field :id, { name: "#{events_form.object_name}[#{index}][id]" }
-          = events_form.check_box :confirm, { switch: true, name: "#{events_form.object_name}[#{index}][confirm]" }, 'true', 'false'
+          = events_form.checkbox :confirm, { switch: true, name: "#{events_form.object_name}[#{index}][confirm]" }, 'true', 'false'
           = events_form.text_field :name, { data: name_data, name: "#{events_form.object_name}[#{index}][name]", maxlength:, floating: }
           = events_form.select :icon,
                                icons_collection,
