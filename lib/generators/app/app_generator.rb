@@ -179,6 +179,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'app/views/pwa/manifest.json.erb'
     remove_file 'app/views/pwa/service-worker.js'
     remove_file 'bin/bundle'
+    remove_file 'bin/dev'
     remove_file 'bin/jobs'
     remove_file 'bin/rake'
     remove_file 'bin/setup'
@@ -192,6 +193,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/environments/development.rb'
     remove_file 'config/environments/production.rb'
     remove_file 'config/environments/test.rb'
+    remove_file 'public/400.html'
     remove_file 'public/404.html'
     remove_file 'public/406-unsupported-browser.html'
     remove_file 'public/422.html'
@@ -274,7 +276,9 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_active_record: true,
     skip_asset_pipeline: true,
     skip_rubocop: true,
-    skip_brakeman: true
+    skip_brakeman: true,
+    skip_thruster: true,
+    skip_kamal: true
   }
 
   def container? = options[:container]
