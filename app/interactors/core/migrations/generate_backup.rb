@@ -32,7 +32,6 @@ module Core
 
       def tables = migrator_clean_commands
         .grep(Schematics::Commands::DestroyEntity)
-        .concat(migrator_clean_commands.grep(Schematics::Commands::RemoveAttribute))
         .map(&:entity)
         .map(&:table_name)
         .map(&:pluralize)
