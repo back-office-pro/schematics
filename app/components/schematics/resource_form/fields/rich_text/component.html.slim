@@ -1,5 +1,5 @@
 - if translated?
   - available_locales.each do |locale|
-    == required_rich_text_area :"#{name}_#{locale}", label: i18n_label(locale), data:, required:
+    == required_rich_textarea :"#{name}_#{locale}", label: i18n_label(locale), data:, required:
 - else
-  == required_rich_text_area name.to_sym, data:
+  == required_rich_textarea name.to_sym, data:
