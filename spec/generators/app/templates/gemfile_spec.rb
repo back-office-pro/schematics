@@ -6,5 +6,5 @@ describe 'Gemfile template' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/Gemfile.tt',
-                  'a4c9272377f18955f2f698a36bb12c23052dfc98da135b9017f8f727322b77e9'
+                  'de63a152f8bb39b9e3514dab90723ae937dd7e79ab310d8ec1dd9ca1c3c80f6d'
 end
