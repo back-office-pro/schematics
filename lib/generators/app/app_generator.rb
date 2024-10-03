@@ -183,7 +183,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     remove_file 'config/initializers/content_security_policy.rb'
     remove_file 'config/initializers/filter_parameter_logging.rb'
     remove_file 'config/initializers/inflections.rb'
-    remove_file 'config/initializers/permissions_policy.rb'
     remove_file 'config/locales/en.yml'
     remove_file 'config/puma.rb'
     remove_file 'config/routes.rb'
