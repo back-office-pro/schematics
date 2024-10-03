@@ -7,8 +7,10 @@ module Core
         include Interactor
 
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
+        delegate :customers, :products, to: 'client.v1', private: true
+        delegate :credentials, to: ::Schematics::Engine, private: true
         delegate :subdomain, to: ::Tenant, private: true
-        delegate :logger, to: ::Rails, private: true
+        delegate :logger, :env, to: ::Rails, private: true
         delegate :id,
                  :email,
                  :metadata,
@@ -37,9 +39,11 @@ module Core
 
         private
 
-        memoize def product = product_id && ::Stripe::Product.retrieve(product_id)
+        memoize def client = ::Stripe::StripeClient.new(api_key)
 
-        memoize def customer = ::Stripe::Customer
+        memoize def product = product_id && products.retrieve(product_id)
+
+        memoize def customer = customers
           .search(query: "name:'#{subdomain}'", expand: ['data.subscriptions'])
           .data
           .first
@@ -77,6 +81,10 @@ module Core
           &.preferred_locales
           &.first
           &.slice(0, 2)
+
+        def api_key
+          credentials.dig(:stripe, env.to_sym, :secret_key)
+        end
 
         def log_data = logger
           .tagged('Stripe')
