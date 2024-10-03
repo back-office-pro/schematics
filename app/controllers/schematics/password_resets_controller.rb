@@ -30,7 +30,7 @@ module Schematics
     private
 
     def set_user
-      @user = model_class
+      @user = model_class # rubocop:disable Rails/DynamicFindBy
               .with_role
               .find_by_password_reset_token!(params[:token])
     end
