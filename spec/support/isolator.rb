@@ -2,4 +2,4 @@
 
 require 'isolator'
 
-Isolator.adapters.action_cable.disable!
+# Isolator.adapters.action_cable.disable!
