@@ -30,9 +30,9 @@ module Schematics
     private
 
     def set_user
-      # TODO: use find_by_password_reset_token!(params[:token]) when upgrading to Rails 8
-      @user = model_class.with_role.find_by_token_for(:new_account, params[:token]) ||
-              model_class.with_role.find_by_token_for!(:password_reset, params[:token])
+      @user = model_class
+              .with_role
+              .find_by_password_reset_token!(params[:token])
     end
 
     def model_class = ::User
