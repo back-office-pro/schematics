@@ -3,7 +3,6 @@
 # :reek:MissingSafeMethod
 class User < Schematics::ApplicationRecord
   NEW_ACCOUNT_TOKEN_DURATION = 24.hours.freeze
-  PASSWORD_RESET_TOKEN_DURATION = 15.minutes.freeze
   ONE_TIME_PASSWORD_DURATION = 10.minutes.freeze
 
   attribute :time_zone, default: -> { ::Configuration.time_zone_with_fallback }
@@ -19,11 +18,6 @@ class User < Schematics::ApplicationRecord
   delegate :admin?, to: :role
 
   after_create_commit :deliver_new_account_mailer
-
-  # TODO: remove when upgrading to Rails 8
-  generates_token_for :password_reset, expires_in: PASSWORD_RESET_TOKEN_DURATION do
-    password_salt&.last(10)
-  end
 
   generates_token_for :new_account, expires_in: NEW_ACCOUNT_TOKEN_DURATION do
     password_salt&.last(10)
