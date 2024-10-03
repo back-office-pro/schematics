@@ -59,6 +59,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Active Record
+  config.active_record.attributes_for_inspect = %i[id]
   config.active_record.dump_schema_after_migration = false
   config.active_record.attributes_for_inspect = %i[id]
 
@@ -66,8 +67,8 @@ Rails.application.configure do
   config.log_level = :info
   config.log_tags = [:request_id]
   config.lograge.enabled = true
-  config.logger = ActiveSupport::Logger
-                  .new($stdout)
-                  .tap  { |logger| logger.formatter = Logger::Formatter.new }
-                  .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
+  config.logger = ActiveSupport::TaggedLogging.logger($stdout)
+
+  # Health check
+  config.silence_healthcheck_path = '/up'
 end
