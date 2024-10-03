@@ -56,9 +56,6 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :sendmail
 
-  # i18n
-  config.i18n.fallbacks = true
-
   # Active Support
   config.active_support.report_deprecations = false
 
