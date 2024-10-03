@@ -94,9 +94,17 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:db:encryption:init', env:
   end
 
+  def migrate_database
+    return if container?
+    return unless generating?
+
+    rails_command 'db:migrate', env:
+  end
+
   def install_solid_queue
     return unless generating?
 
+    remove_file 'db/queue_schema.rb'
     rails_command('solid_queue:install', env:)
     remove_file 'config/queue.yml'
     remove_file 'config/recurring.yml'
@@ -105,6 +113,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def install_solid_cache
     return unless generating?
 
+    remove_file 'db/cache_schema.rb'
     rails_command('solid_cache:install', env:)
     remove_file 'config/cache.yml'
   end
@@ -112,15 +121,9 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   def install_solid_cable
     return unless generating?
 
+    remove_file 'db/cable_schema.rb'
     rails_command('solid_cable:install', env:)
     remove_file 'config/cable.yml'
-  end
-
-  def migrate_database
-    return if container?
-    return unless generating?
-
-    rails_command 'db:migrate', env:
   end
 
   def prepare_database
