@@ -37,6 +37,8 @@ namespace :schematics do
       `bin/rails db:create`
       puts 'Migrating database...'
       `bin/rails db:migrate`
+      puts 'Preparing database...'
+      `bin/rails db:prepare`
       puts 'Loading subscription...'
       `bin/rails schematics:subscription:load`
       puts 'Seeding database...'

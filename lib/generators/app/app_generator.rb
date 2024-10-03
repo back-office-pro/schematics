@@ -120,6 +120,7 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
   end
 
   def prepare_database
+    return if container?
     return unless generating?
 
     rails_command 'db:prepare', env:
