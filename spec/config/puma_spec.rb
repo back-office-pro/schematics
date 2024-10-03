@@ -6,5 +6,5 @@ describe 'Puma config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/puma.rb.tt',
-                  'cfe84d8cc244ffdee5e74eafc3d4bb19c55e2838b9960740899f7cbd9249df66'
+                  'a46fd60290a33526f7dc606d60f56d5143096c075a5878137a7edb197ee4cfcf'
 end
