@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 FriendlyId.defaults do |config|
-  config.use :reserved, :history, :mobility, :sequentially_slugged
+  config.use :reserved, :history, :sequentially_slugged
   config.treat_reserved_as_conflict = true
   config.reserved_words = Schematics::Sluggable::RESERVED_WORDS.flat_map do |word|
     I18n.available_locales.map { |locale| I18n.t(word, scope: :routes, locale:) }
   end
 end
 
-Rails.configuration.to_prepare do
-  require 'friendly_id/mobility'
-end
+# Rails.configuration.to_prepare do
+#   require 'friendly_id/mobility'
+# end

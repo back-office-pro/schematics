@@ -7,7 +7,7 @@ class CreateFriendlyIdSlugs < ActiveRecord::Migration[8.0]
       t.uuid     :sluggable_id,   null: false
       t.string   :sluggable_type, limit: 50
       t.string   :scope
-      t.string   :locale, null: false
+      t.string   :locale # , null: false
       t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }
