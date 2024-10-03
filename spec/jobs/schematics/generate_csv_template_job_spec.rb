@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'turbo/broadcastable/test_helper'
 
 RSpec.describe Schematics::GenerateCSVTemplateJob do
   include ActiveSupport::Testing::TimeHelpers

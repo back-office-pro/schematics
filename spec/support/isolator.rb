@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-require 'isolator'
+# require 'isolator'
 
 # Isolator.adapters.action_cable.disable!
