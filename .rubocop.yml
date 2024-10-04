@@ -160,7 +160,7 @@ RSpec/ExampleLength:
     - heredoc
     - method_call
 RSpec/MultipleMemoizedHelpers:
-  Max: 17
+  Max: 18
 RSpec/EmptyExampleGroup:
   Exclude:
     - spec/requests/schematics/message_replies_spec.rb

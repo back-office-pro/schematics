@@ -14,6 +14,7 @@ RSpec.describe Core::Migrations::Migrate do
   let(:rollback_state) { Migration::STATE_STATE_ROLLBACKING }
   let(:root) { Rails.root }
   let(:restart_file) { root.join('tmp/restart.txt') }
+  let(:rollback_user_transaction) { [User, Role, UserGroup].each(&:delete_all) }
   let(:rollback_migration) { Migration.new(data:, version: 2.0, state: rollback_state) }
   let(:rollback_initial_migration) do
     Migration.new(data: initial_data, version: 1.0, state: rollback_state)
@@ -430,7 +431,7 @@ RSpec.describe Core::Migrations::Migrate do
 
       before { [migrate_prospect_entity, prospect] }
 
-      after { rollback_prospect_entity }
+      after { [rollback_prospect_entity, rollback_user_transaction] }
 
       uses_transaction 'migrates and rollbacks successfully'
 
