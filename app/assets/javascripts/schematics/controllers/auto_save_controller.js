@@ -27,12 +27,11 @@ export default class extends ApplicationController {
     this.#hideRestoreButton()
     Object
       .entries(this.draftValue.data)
-      .forEach(([key, value]) =>
-        this
-          .element
-          .querySelector(`[name='${key}']`)
-          ?.setAttribute('value', value)
-      )
+      .forEach(([key, value]) => {
+        const input = this.element.querySelector(`[name='${key}']`)
+        input?.setAttribute('value', value)
+        input?.tomselect?.setValue(value)
+      })
   }
 
   async #save () {
