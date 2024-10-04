@@ -24,7 +24,11 @@ module Schematics
         destroy_without_paranoia
         friendly_id
         friendly_id_config
+        interpolate
+        interpolation_errors
+        liquid_template
         normalize_friendly_id
+        notify_mentions
         otp_after_column_name
         otp_backup_codes_column_name
         otp_backup_codes_count
@@ -42,11 +46,14 @@ module Schematics
         paranoia_column
         paranoia_sentinel_value
         really_delete
+        rich_text_mentions
         search_data
         serialized_json
         slug
         slugs
+        to_param
         to_s
+        unstale
         version_association_name
         version_class_name
         versions_association_name
