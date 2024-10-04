@@ -18,15 +18,23 @@ module Schematics
           polymorphic_path(@model_class, filter_key => { @attribute.name => value })
         end
 
-        def css_classes = 'nav-link p-0 m-0 text-truncate'
+        def css_classes(value)
+          class_names(
+            'nav-link',
+            'p-0',
+            'm-0',
+            'text-truncate',
+            active: current_page?(path(value), check_parameters: true)
+          )
+        end
 
         def toggled_class
           'd-md-block' unless preferences_sidebar_toggled
         end
 
-        def render?
-          is_active_link?(polymorphic_path(@model_class))
-        end
+        def render? = request
+          .path
+          .start_with?(polymorphic_path(@model_class))
 
         private
 

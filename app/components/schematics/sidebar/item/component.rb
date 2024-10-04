@@ -21,7 +21,14 @@ module Schematics
 
         def path = polymorphic_path(@model_class)
 
-        def css_classes = 'nav-link p-0 m-0 text-secondary text-nowrap'
+        def css_classes = class_names(
+          'nav-link',
+          'p-0',
+          'm-0',
+          'text-secondary',
+          'text-nowrap',
+          active: request.path.start_with?(path)
+        )
 
         def title = "#{human_name_plural.humanize} (#{shortcut})"
 
