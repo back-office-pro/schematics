@@ -7,6 +7,7 @@ module Schematics
     include Authenticable
     include Sudoable
     include Entitleable
+    include Breadcrumbable
     include Respondable
     include Rescuable
     include Themeable

@@ -81,7 +81,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'isolator', '1.1.0'
   spec.add_dependency 'letter_opener', '1.10.0'
   spec.add_dependency 'liquid', '5.5.1'
-  spec.add_dependency 'loaf', '0.10.0'
   spec.add_dependency 'lograge', '0.14.0'
   spec.add_dependency 'memery', '1.6.0'
   spec.add_dependency 'mission_control-jobs', '0.3.1'
