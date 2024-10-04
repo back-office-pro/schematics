@@ -8,11 +8,13 @@ module Schematics
           option :resource
           option :event
           option :compact
-          option :last, default: -> { false }
+          option :last
 
           def compact? = compact
 
-          def last? = last
+          def last?
+            event == last
+          end
 
           def button_css_classes
             class_names(
