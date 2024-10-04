@@ -5,10 +5,10 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_save_commit :notify_mentions, if: :mentions?
+      after_save_commit :notify_mentions, if: :rich_text_mentions?
     end
 
-    def mentions = self
+    def rich_text_mentions = self
       .class
       .entity
       .rich_text_attributes
@@ -22,12 +22,12 @@ module Schematics
 
     protected
 
-    def mentions?
-      mentions.any?
+    def rich_text_mentions?
+      rich_text_mentions.any?
     end
 
     def notify_mentions = ::ActiveJob.perform_all_later(
-      mentions.map { NotifyJob.new(self, 'mention', _1) }
+      rich_text_mentions.map { NotifyJob.new(self, 'mention', _1) }
     )
   end
 end

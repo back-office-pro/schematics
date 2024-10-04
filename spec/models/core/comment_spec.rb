@@ -8,7 +8,7 @@ RSpec.describe Comment do
   include_context 'with user'
 
   context 'when there are mentions' do
-    before { allow(record).to receive(:mentions).and_return([user]) }
+    before { allow(record).to receive(:rich_text_mentions).and_return([user]) }
 
     it 'sends notifications after save' do
       expect { record.save! }

@@ -21,5 +21,5 @@ class Message < Schematics::ApplicationRecord
 
   protected
 
-  def mentions? = false
+  def rich_text_mentions? = false
 end

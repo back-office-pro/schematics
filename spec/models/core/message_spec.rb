@@ -7,10 +7,10 @@ RSpec.describe Message do
 
   include_context 'with user'
 
-  its(:mentions?) { is_expected.to be_falsy }
+  its(:rich_text_mentions?) { is_expected.to be_falsy }
 
   context 'when there are mentions' do
-    before { allow(record).to receive(:mentions).and_return([user]) }
+    before { allow(record).to receive(:rich_text_mentions).and_return([user]) }
 
     it 'does not send notifications after save' do
       expect { record.save! }
