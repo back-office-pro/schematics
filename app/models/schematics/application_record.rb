@@ -13,6 +13,7 @@ module Schematics
     include Shortenable
     include Translatable
     include Mentionable
+    include Previewable
     include Attachable
 
     loadable concerns: [
