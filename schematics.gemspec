@@ -118,7 +118,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'responders', '3.1.1'
   spec.add_dependency 'rollbar', '3.6.0'
   spec.add_dependency 'rouge', '4.5.1'
-  spec.add_dependency 'routes_lazy_routes', '0.4.3' # TODO: remove when upgrading to Rails 8
   spec.add_dependency 'route_translator', '14.2.0'
   spec.add_dependency 'rqrcode', '2.2.0'
   spec.add_dependency 'rspec-rails', '7.1.0'
