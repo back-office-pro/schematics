@@ -4,7 +4,7 @@ module Schematics
   module ResourceForm
     class Component < ApplicationComponent
       delegate :persisted?, to: :resource, private: true
-      use_helpers :rich_textarea_tag, :turbo_frame_request?
+      use_helpers :rich_text_area_tag, :turbo_frame_request?
 
       option :resource
       option :url, optional: true
