@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails'
 require 'rails/generators/generated_attribute'
 
 describe Rails::Generators::GeneratedAttribute do
