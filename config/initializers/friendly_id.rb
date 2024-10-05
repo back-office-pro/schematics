@@ -13,7 +13,7 @@ Rails.configuration.to_prepare do
 
   FriendlyId::Mobility::FinderMethods.class_eval do
     def exists_by_friendly_id?(id)
-      exists?("#{name.underscore.pluralize}.#{friendly_id_config.query_field} = ?", id) ||
+      where("#{name.underscore.pluralize}.#{friendly_id_config.query_field} = ?", id).exists? ||
         joins(:slugs).where(slug_history_clause(id)).exists?
     end
   end
