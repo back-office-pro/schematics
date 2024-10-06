@@ -53,6 +53,17 @@ RSpec.describe 'PasswordResets' do
       its(:body) { is_expected.to be_blank }
     end
 
+    context 'when using the new account token and password is confirmed' do
+      let(:token) { user.generate_token_for(:new_account) }
+      let(:password) { 'Azerty1234?!' }
+      let(:password_confirmation) { 'Azerty1234?!' }
+
+      before { do_request }
+
+      it { is_expected.to have_http_status(:no_content) }
+      its(:body) { is_expected.to be_blank }
+    end
+
     context 'when not expired token exists and password is not confirmed' do
       let(:token) { user.generate_token_for(:password_reset) }
       let(:password) { 'Azerty1234?!' }
