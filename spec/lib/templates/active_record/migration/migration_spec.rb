@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_record'
+
 describe 'Rails Migration template' do
   it_behaves_like 'an overridden file',
                   :activerecord,

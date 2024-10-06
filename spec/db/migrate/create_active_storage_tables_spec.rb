@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_storage'
+
 describe 'ActiveStorage migration file' do
   it_behaves_like 'an overridden file',
                   :activestorage,

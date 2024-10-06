@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rspec/rails/active_record'
+
 describe 'RSpec Routing spec template' do
   it_behaves_like 'an overridden file',
                   'rspec-rails',

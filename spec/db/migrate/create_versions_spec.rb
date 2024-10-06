@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'rails'
+require 'paper_trail'
+
 describe 'PaperTrail versions migration file' do
   it_behaves_like 'an overridden file',
                   :paper_trail,

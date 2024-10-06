@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mobility'
+
 describe 'Mobility string translations migration file' do
   it_behaves_like 'an overridden file',
                   :mobility,

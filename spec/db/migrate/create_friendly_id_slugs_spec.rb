@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'friendly_id'
+
 describe 'FriendlyId slugs migration file' do
   it_behaves_like 'an overridden file',
                   :friendly_id,

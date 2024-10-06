@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'action_text'
+
 describe 'ActionText migration file' do
   it_behaves_like 'an overridden file',
                   :actiontext,

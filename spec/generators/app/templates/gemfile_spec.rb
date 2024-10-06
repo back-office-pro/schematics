@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails'
+
 describe 'Gemfile template' do
   it_behaves_like 'an overridden file',
                   :railties,
