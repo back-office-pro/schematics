@@ -21,6 +21,7 @@ module Schematics
         attribute_formatted
         authenticate
         cached_serialized_json
+        changed_link_preview_urls
         destroy_without_paranoia
         friendly_id
         friendly_id_config
@@ -28,7 +29,6 @@ module Schematics
         interpolate
         interpolation_errors
         liquid_template
-        link_preview_urls
         normalize_friendly_id
         notify_mentions
         otp_after_column_name

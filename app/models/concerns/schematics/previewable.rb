@@ -5,24 +5,25 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_save_commit :generate_link_previews, if: :link_preview_urls?
+      after_save_commit :generate_link_previews, if: :changed_link_preview_urls?
     end
 
-    def link_preview_urls = self
+    def changed_link_preview_urls = self
       .class
       .entity
       .url_attributes
       .map(&:name)
+      .select { public_send(:"#{_1}_previously_changed?") }
       .filter_map(&method(:public_send))
 
     protected
 
-    def link_preview_urls?
-      link_preview_urls.any?
+    def changed_link_preview_urls?
+      changed_link_preview_urls.any?
     end
 
     def generate_link_previews = ::ActiveJob.perform_all_later(
-      link_preview_urls.map(&GenerateLinkPreviewJob.method(:new))
+      changed_link_preview_urls.map(&GenerateLinkPreviewJob.method(:new))
     )
   end
 end
