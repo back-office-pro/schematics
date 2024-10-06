@@ -92,6 +92,14 @@ ActiveSupport.on_load(:active_storage_record) do
 end
 
 ActiveSupport.on_load(:active_storage_attachment) do
+  belongs_to :blob,
+             -> { with_deleted },
+             class_name: 'ActiveStorage::Blob',
+             autosave: true,
+             inverse_of: :attachments
+
+  after_restore -> { blob&.restore! }
+
   prepend ActiveStorage::Override::Attachment
 end
 

@@ -40,6 +40,12 @@ RSpec.describe Schematics::Resources::Restore do
         .by(1)
     end
 
+    it 'restores the active storage blob' do
+      expect { call }
+        .to change(ActiveStorage::Blob, :count)
+        .by(1)
+    end
+
     it 'serves the image' do
       call
       expect(ActiveStorage::Blob.service).to exist(image.key)

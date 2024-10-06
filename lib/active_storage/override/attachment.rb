@@ -4,7 +4,9 @@ module ActiveStorage
   module Override
     module Attachment
       def purge_dependent_blob_later
-        super if destroyed?
+        return super if destroyed?
+
+        blob&.destroy!
       end
     end
   end
