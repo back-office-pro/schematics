@@ -8,6 +8,6 @@ module Schematics
     def perform = ::DataCleaning
       .all
       .select(&:model_class)
-      .each(&:run_query!)
+      .each { |data_cleaning| Core::DataCleanings::Run.call(data_cleaning:) }
   end
 end

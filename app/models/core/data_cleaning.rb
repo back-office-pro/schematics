@@ -11,13 +11,6 @@ class DataCleaning < Schematics::ApplicationRecord
     model.safe_constantize
   end
 
-  def run_query! = model_class
-    .preload_all
-    .where(query_field => query_range)
-    .find_each(&query_method)
-
-  private
-
   def query_method
     return :really_destroy! if really_destroy?
 
