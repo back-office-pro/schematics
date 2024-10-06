@@ -2,10 +2,13 @@
 
 module Schematics
   class GenerateLinkPreviewJob < ApplicationJob
+    include Quietable
+    queue_as :default
+
     retry_on OpenURI::HTTPError, wait: :polynomially_longer, attempts: 5
 
     def perform(url)
-      LinkPreviews::Create.call(url:)
+      Core::LinkPreviews::Process.call(url:)
     end
   end
 end

@@ -9,7 +9,6 @@ RSpec.describe Schematics::GenerateLinkPreviewJob do
       <html>
         <head>
           <title>Anywhere</title>
-          <link rel='icon' href='https://www.anywhere.com/favicon.png' />
         </head>
         <body>
         </body>
@@ -18,6 +17,8 @@ RSpec.describe Schematics::GenerateLinkPreviewJob do
   end
 
   before { stub_request(:get, url).to_return(body:, status: 200) }
+
+  it { is_expected.to be_a(Schematics::Quietable) }
 
   describe '#perform_later' do
     it 'queues the job' do
@@ -33,11 +34,10 @@ RSpec.describe Schematics::GenerateLinkPreviewJob do
   describe '#perform_now' do
     subject(:perform_now) { described_class.perform_now(url) }
 
-    it 'caches the link preview informations' do
+    it 'creates the link preview' do
       expect { perform_now }
-        .to change { Rails.cache.fetch('link_preview:https://www.anywhere.com') }
-        .from(nil)
-        .to(title: 'Anywhere', favicon: 'https://www.anywhere.com/favicon.png')
+        .to change(LinkPreview, :count)
+        .by(1)
     end
   end
 end

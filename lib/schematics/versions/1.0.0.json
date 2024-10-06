@@ -2083,5 +2083,56 @@
         }
       }
     ]
+  },
+  {
+    "id": "336d735e-52a0-4f23-bf9d-c95a8351eaad",
+    "name": "link_preview",
+    "options": {
+      "descriptor": "title",
+      "icon": "link",
+      "hidden": true,
+      "actions": []
+    },
+    "attributes": [
+      {
+        "id": "79788187-2325-4156-9d62-a8b90b9ffa9b",
+        "name": "url",
+        "type": "url",
+        "options": {
+          "required": true,
+          "readonly": true
+        }
+      },
+      {
+        "id": "374c84af-71ef-40d3-bdc1-4134b3b9a8e8",
+        "name": "title",
+        "type": "string",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "babf26b6-77b6-4e70-a416-de4b04fe9832",
+        "name": "description",
+        "type": "string",
+        "options": {
+          "readonly": true
+        }
+      },
+      {
+        "id": "112c3128-8ac0-443b-8b7e-5c4eaeda607a",
+        "name": "image",
+        "type": "attachment",
+        "options": {
+          "readonly": true,
+          "content_type": [
+            "png",
+            "jpeg",
+            "jpg"
+          ],
+          "size": 2
+        }
+      }
+    ]
   }
 ]

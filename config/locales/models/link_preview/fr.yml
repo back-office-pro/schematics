@@ -1,0 +1,14 @@
+---
+fr:
+  activerecord:
+    attributes:
+      link_preview:
+        description: Description
+        image: Image
+        title: Titre
+        url: URL
+    models:
+      link_preview:
+        gender: male
+        one: Aperçu de lien
+        other: Aperçus de lien

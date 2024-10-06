@@ -81,6 +81,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   DataCleaning.create_without_validations(
     [
       { model: 'Backup', period: 'week', really_destroy: true },
+      { model: 'LinkPreview', period: 'week', really_destroy: true },
       { model: 'Comparison', period: 'month', really_destroy: true },
       { model: 'APIRequest', period: 'year', really_destroy: true },
       { model: 'Draft', period: 'year', really_destroy: true },
