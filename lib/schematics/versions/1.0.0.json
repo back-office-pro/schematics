@@ -2050,6 +2050,7 @@
         "name": "file",
         "type": "attachment",
         "options": {
+          "hidden": true,
           "required": true,
           "content_type": [
             "binary"
