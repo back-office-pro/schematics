@@ -56,6 +56,7 @@ require 'responders'
 require 'rollbar'
 require 'rouge'
 require 'route_translator'
+require 'routes_lazy_routes' # TODO: remove when upgrading to Rails 8
 require 'rqrcode'
 require 'ruby-graphviz'
 require 'ruby-vips'

@@ -21,6 +21,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     available_locales: [Subscription.default_locale],
     locale: Subscription.default_locale
   )
+  OpenApi::Router.reload!
   Documentation.create!
   Migration.default.save!
   User.create!(email: Subscription.email, password: Tenant.default_password, role: Role.admin)
