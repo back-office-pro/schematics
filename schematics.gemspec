@@ -132,7 +132,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sprockets-rails', '3.5.2'
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '13.0.0'
-  spec.add_dependency 'terser', '1.2.3'
+  spec.add_dependency 'terser', '1.2.4'
   spec.add_dependency 'test-prof', '1.4.2'
   spec.add_dependency 'turbo-rails', '2.0.10'
   spec.add_dependency 'validate_url', '1.0.15'
