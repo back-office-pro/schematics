@@ -5,10 +5,9 @@ require 'rails_helper'
 RSpec.describe WebhookRequest do
   include Schematics::Specs::Model
 
-  before do
-    record.state_error!
-    stub_request(:get, record.webhook_endpoint.url).to_return(body: '{}', status: 200)
-  end
+  before { record.state_error! }
+
+  its(:body) { is_expected.to match('event' => String, 'payload' => {}) }
 
   it 'enqueues a webhook job after retry' do
     expect { record.retry! }
@@ -18,7 +17,4 @@ RSpec.describe WebhookRequest do
       .on_queue('webhooks')
       .at(:no_wait)
   end
-
-  its(:response) { is_expected.to be_a(Net::HTTPOK) }
-  its(:parsed_response_body) { is_expected.to be_empty }
 end

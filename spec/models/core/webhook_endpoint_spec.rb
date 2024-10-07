@@ -12,16 +12,6 @@ RSpec.describe WebhookEndpoint do
     it { is_expected.not_to be_valid }
   end
 
-  describe '#request' do
-    subject(:request) { record.request(body) }
-
-    let(:body) { { 'event' => 'user.update', 'payload' => {} } }
-
-    before { stub_request(:get, record.url).to_return(status: 200) }
-
-    it { is_expected.to be_a(Net::HTTPOK) }
-  end
-
   describe '.broadcast_all' do
     subject(:broadcast_all) { described_class.broadcast_all(event, payload) }
 

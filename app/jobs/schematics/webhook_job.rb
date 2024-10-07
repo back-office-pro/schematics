@@ -12,7 +12,7 @@ module Schematics
       return if webhook_request.state_broadcasted?
 
       webhook_request.state_in_progress!
-      Core::WebhookRequests::Fetch.call(webhook_request:)
+      Core::WebhookRequests::Request.call(webhook_request:)
     end
   end
 end
