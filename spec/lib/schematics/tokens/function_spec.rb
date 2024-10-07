@@ -23,7 +23,7 @@ describe Schematics::Tokens::Function do
     its(:to_str) { is_expected.to eq('#{rand}') } # rubocop:disable Lint/InterpolationCheck
   end
 
-  context 'when function is SUM' do
+  context 'when function is SUM with reference' do
     let(:value) { 'SUM($parts.price)' }
 
     its(:value) { is_expected.to eq('parts.sum(&:price)') }
@@ -31,7 +31,15 @@ describe Schematics::Tokens::Function do
     its(:to_str) { is_expected.to eq('#{parts.sum(&:price)}') } # rubocop:disable Lint/InterpolationCheck
   end
 
-  context 'when function is AVG' do
+  context 'when function is SUM without reference' do
+    let(:value) { 'SUM($parts)' }
+
+    its(:value) { is_expected.to eq('self.parts.sum') }
+    its(:to_sql) { is_expected.to eq('SUM(parts)') }
+    its(:to_str) { is_expected.to eq('#{self.parts.sum}') } # rubocop:disable Lint/InterpolationCheck
+  end
+
+  context 'when function is AVG with reference' do
     let(:value) { 'AVG($parts.price)' }
 
     its(:value) { is_expected.to eq('parts.average(&:price)') }
@@ -39,7 +47,15 @@ describe Schematics::Tokens::Function do
     its(:to_str) { is_expected.to eq('#{parts.average(&:price)}') } # rubocop:disable Lint/InterpolationCheck
   end
 
-  context 'when function is MIN' do
+  context 'when function is AVG without reference' do
+    let(:value) { 'AVG($parts)' }
+
+    its(:value) { is_expected.to eq('self.parts.avg') }
+    its(:to_sql) { is_expected.to eq('AVG(parts)') }
+    its(:to_str) { is_expected.to eq('#{self.parts.avg}') } # rubocop:disable Lint/InterpolationCheck
+  end
+
+  context 'when function is MIN with reference' do
     let(:value) { 'MIN($parts.price)' }
 
     its(:value) { is_expected.to eq('parts.minimum(&:price)') }
@@ -47,7 +63,15 @@ describe Schematics::Tokens::Function do
     its(:to_str) { is_expected.to eq('#{parts.minimum(&:price)}') } # rubocop:disable Lint/InterpolationCheck
   end
 
-  context 'when function is MAX' do
+  context 'when function is MIN without reference' do
+    let(:value) { 'MIN($parts)' }
+
+    its(:value) { is_expected.to eq('self.parts.min') }
+    its(:to_sql) { is_expected.to eq('MIN(parts)') }
+    its(:to_str) { is_expected.to eq('#{self.parts.min}') } # rubocop:disable Lint/InterpolationCheck
+  end
+
+  context 'when function is MAX with reference' do
     let(:value) { 'MAX($parts.price)' }
 
     its(:value) { is_expected.to eq('parts.maximum(&:price)') }
@@ -55,12 +79,28 @@ describe Schematics::Tokens::Function do
     its(:to_str) { is_expected.to eq('#{parts.maximum(&:price)}') } # rubocop:disable Lint/InterpolationCheck
   end
 
-  context 'when function is COUNT' do
+  context 'when function is MAX without reference' do
+    let(:value) { 'MAX($parts)' }
+
+    its(:value) { is_expected.to eq('self.parts.max') }
+    its(:to_sql) { is_expected.to eq('MAX(parts)') }
+    its(:to_str) { is_expected.to eq('#{self.parts.max}') } # rubocop:disable Lint/InterpolationCheck
+  end
+
+  context 'when function is COUNT with reference' do
     let(:value) { 'COUNT($parts.price)' }
 
     its(:value) { is_expected.to eq('parts.count(&:price)') }
     its(:to_sql) { is_expected.to eq('COUNT(parts.price)') }
     its(:to_str) { is_expected.to eq('#{parts.count(&:price)}') } # rubocop:disable Lint/InterpolationCheck
+  end
+
+  context 'when function is COUNT without reference' do
+    let(:value) { 'COUNT($parts)' }
+
+    its(:value) { is_expected.to eq('self.parts.count') }
+    its(:to_sql) { is_expected.to eq('COUNT(parts)') }
+    its(:to_str) { is_expected.to eq('#{self.parts.count}') } # rubocop:disable Lint/InterpolationCheck
   end
 
   context 'when function is ABS' do

@@ -35,7 +35,11 @@ module Schematics
         in 'RAND()'
           'rand'
         in /(SUM|COUNT|AVG|MIN|MAX).*/
-          "#{references.first}.#{METHODS[Regexp.last_match(1).to_sym]}(&:#{variable_raw_value})"
+          if references.empty?
+            "#{variable_value}.#{Regexp.last_match(1).downcase}"
+          else
+            "#{references.first}.#{METHODS[Regexp.last_match(1).to_sym]}(&:#{variable_raw_value})"
+          end
         in /(ABS|ROUND|CEIL|FLOOR).*/
           "#{variable_value}.#{Regexp.last_match(1).downcase}"
         else
