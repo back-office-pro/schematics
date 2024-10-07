@@ -3,12 +3,12 @@
 module Core
   module LinkPreviews
     class Upsert
-      include Interactor
+      include Schematics::Interactable
       delegate :url, :title, :description, :image, to: :context, private: true
 
-      def call = ::LinkPreview
-        .find_or_initialize_by(url:)
-        .update!(title:, description:, image: blob)
+      def call
+        fail! unless link_preview.update(title:, description:, image: blob)
+      end
 
       private
 
@@ -18,6 +18,10 @@ module Core
 
       memoize def blob
         ::ActiveStorage::Blob.create_and_upload!(io:, filename:) if image
+      end
+
+      memoize def link_preview
+        ::LinkPreview.find_or_initialize_by(url:)
       end
 
       def filename
