@@ -15,17 +15,12 @@ module Core
 
       before { context.data = Concurrent::Hash.new }
 
-      def call
-        CSV.foreach(filepath, headers: true).with_index(1) do |row, line|
-          context.data[line] = convert_row(row.to_h.compact)
-        end
-      end
+      def call = ::CSV
+        .parse(file.download, headers: true, encoding: 'utf-8')
+        .each
+        .with_index(1) { |row, line| context.data[line] = convert_row(row.to_h.compact) }
 
       private
-
-      def filepath = ::ActiveStorage::Blob
-        .service
-        .path_for(file.key)
 
       def convert_row(row)
         row.to_h do |key, value|
