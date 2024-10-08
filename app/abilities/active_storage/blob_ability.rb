@@ -4,8 +4,10 @@ module ActiveStorage
   class BlobAbility < Schematics::ApplicationAbility
     def initialize
       super
-      cannot :read, ::ActiveStorage::Blob, filename: %w[master.key db.dump]
+      cannot :read, ::ActiveStorage::Blob, filename: 'master.key'
       cannot :read, ::ActiveStorage::Blob, attachments: { name: 'preview_image' }
+      cannot :read, ::ActiveStorage::Blob, attachments: { record_type: 'Backup' }
+      cannot :read, ::ActiveStorage::Blob, attachments: { record_type: 'LinkPreview' }
     end
   end
 end
