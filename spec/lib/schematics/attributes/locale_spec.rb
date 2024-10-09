@@ -48,6 +48,14 @@ describe Schematics::Attributes::Locale do
     )
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'activerecord.attributes.translation.value' }
+
+    it { is_expected.to eq('Translation / Value') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

@@ -48,6 +48,14 @@ describe Schematics::Attributes::Action do
     )
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'index' }
+
+    it { is_expected.to eq('List') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

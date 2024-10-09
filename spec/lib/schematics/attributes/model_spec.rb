@@ -64,6 +64,14 @@ describe Schematics::Attributes::Model do
     RUBY
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'Permission' }
+
+    it { is_expected.to eq('Permission') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

@@ -95,6 +95,14 @@ describe Schematics::Attributes::Text do
     end
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'MyText' }
+
+    it { is_expected.to eq('MyText') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

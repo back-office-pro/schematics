@@ -84,6 +84,14 @@ describe Schematics::Attributes::Country do
     end
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'FR' }
+
+    it { is_expected.to eq('France') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

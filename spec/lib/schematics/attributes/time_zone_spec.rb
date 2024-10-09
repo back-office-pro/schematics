@@ -87,6 +87,14 @@ describe Schematics::Attributes::TimeZone do
     end
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'Paris' }
+
+    it { is_expected.to eq('(GMT+01:00) Paris') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 
