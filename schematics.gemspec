@@ -71,7 +71,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'friendly_id', '5.4.2'
   spec.add_dependency 'friendly_id-mobility', '1.0.4'
   spec.add_dependency 'git', '2.3.0'
-  spec.add_dependency 'groupdate', '6.5.0'
+  spec.add_dependency 'groupdate', '6.5.1'
   spec.add_dependency 'i18n-beginning_of_week', '0.1.0'
   spec.add_dependency 'i18n-inflector', '2.6.7'
   spec.add_dependency 'icalendar', '2.10.3'
@@ -137,7 +137,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '2.0.10'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
-  spec.add_dependency 'view_component', '3.16.0'
+  spec.add_dependency 'view_component', '3.17.0'
   spec.add_dependency 'webmock', '3.24.0'
   spec.add_dependency 'zero-rails_openapi', '2.2.0'
 end
