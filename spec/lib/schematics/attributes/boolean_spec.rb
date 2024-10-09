@@ -54,6 +54,14 @@ describe Schematics::Attributes::Boolean do
     end
   end
 
+  describe '#format' do
+    subject { attribute.format(value) }
+
+    let(:value) { 'true' }
+
+    it { is_expected.to eq('TRUE') }
+  end
+
   describe '.compatible_types' do
     subject { described_class.compatible_types }
 

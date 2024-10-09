@@ -17,6 +17,10 @@ module Schematics
       def open_api_type = 'boolean'
 
       def search_predicate = :eq
+
+      def format(value)
+        translate(value, default: value.to_s).upcase
+      end
     end
   end
 end
