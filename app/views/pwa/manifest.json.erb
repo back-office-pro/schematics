@@ -10,7 +10,7 @@
   "icons": [
     <% if Configuration.with_attached_company_logo.company_logo.attached? %>
       {
-        "src": "<%= main_app.url_for(Configuration.with_attached_company_logo.company_logo) %>",
+        "src": "<%= rails_blob_path(Configuration.with_attached_company_logo.company_logo) %>",
         "sizes": "any",
         "type": "<%= Configuration.with_attached_company_logo.company_logo.content_type %>"
       }
