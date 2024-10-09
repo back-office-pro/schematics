@@ -37,7 +37,7 @@ module Schematics
         .application
         .routes
         .url_helpers
-        .url_for(blob)
+        .rails_blob_path(blob)
     end
   end
 end
