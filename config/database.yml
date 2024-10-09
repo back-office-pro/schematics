@@ -1,48 +1,57 @@
 default: &default
-  adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 7 } %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+
+postgresql: &postgresql
+  <<: *default
+  adapter: postgresql
   connect_timeout: 1
   checkout_timeout: 1
   variables:
     statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', '5s') %>
 
+sqlite3: &sqlite3
+  <<: *default
+  adapter: sqlite3
+  timeout: 5000
+  default_transaction_mode: IMMEDIATE
+
 development:
   primary:
-    <<: *default
+    <<: *postgresql
     database: <%= Tenant.app_name %>_development
   cable:
-    <<: *default
-    database: <%= Tenant.app_name %>_development_cable
+    <<: *sqlite3
+    database: storage/development_cable.sqlite3
     migrations_paths: db/cable_migrate
   cache:
-    <<: *default
-    database: <%= Tenant.app_name %>_development_cache
+    <<: *sqlite3
+    database: storage/development_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *default
-    database: <%= Tenant.app_name %>_development_queue
+    <<: *sqlite3
+    database: storage/development_queue.sqlite3
     migrations_paths: db/queue_migrate
 
 test:
-  <<: *default
+  <<: *postgresql
   database: <%= Tenant.app_name %>_test
 
 production:
-  primary: &primary_production
-    <<: *default
+  primary:
+    <<: *postgresql
     database: <%= Tenant.app_name %>_production
     username: <%= Tenant.app_name %>
     password: <%= Rails.application.credentials.database_password %>
   cable:
-    <<: *primary_production
-    database: <%= Tenant.app_name %>_production_cable
+    <<: *sqlite3
+    database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
   cache:
-    <<: *primary_production
-    database: <%= Tenant.app_name %>_production_cache
+    <<: *sqlite3
+    database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *primary_production
-    database: <%= Tenant.app_name %>_production_queue
+    <<: *sqlite3
+    database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate
