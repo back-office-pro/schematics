@@ -3,8 +3,8 @@
 module Schematics
   module Favicon
     class Component < ApplicationComponent
-      def url
-        return url_for(company_logo) if company_logo.attached?
+      def path
+        return rails_blob_path(company_logo) if company_logo.attached?
 
         asset_path('schematics/logo.svg')
       end
