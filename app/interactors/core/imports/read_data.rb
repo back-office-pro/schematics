@@ -76,7 +76,7 @@ module Core
             .model_class
             .i18n
             .eager_load(field.descriptor.joins)
-            .find_by("#{field.descriptor.to_sql} = ?", value)
+            .find_by(field.descriptor.name => value)
         else
           field
             .model_class
