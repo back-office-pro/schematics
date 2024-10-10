@@ -7,7 +7,6 @@ module ActiveRecord
       module SQLite3Adapter
         def configure_connection
           super
-
           return unless @config[:timeout]
 
           timeout = self.class.type_cast_config_to_integer(@config[:timeout])
