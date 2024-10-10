@@ -130,6 +130,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'solid_cache', '1.0.6'
   spec.add_dependency 'solid_queue', '1.0.0'
   spec.add_dependency 'sprockets-rails', '3.5.2'
+  spec.add_dependency 'sqlite3', '2.1.0'
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '13.0.0'
   spec.add_dependency 'terser', '1.2.4'

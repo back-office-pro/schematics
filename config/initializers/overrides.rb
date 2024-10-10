@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'active_record/connection_adapters/abstract/schema_definitions'
+require 'active_record/connection_adapters/sqlite3_adapter'
+require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
 require 'active_storage/override/attachment'
 require 'active_storage/override/blob'
@@ -33,6 +35,11 @@ Puma::Configuration.prepend(Puma::Override::Configuration)
 OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
+
+# TODO: remove when upgrading to Rails 8
+ActiveSupport.on_load(:active_record_sqlite3adapter) do
+  prepend ActiveRecord::Override::ConnectionAdapters::SQLite3Adapter
+end
 
 Rails.configuration.to_prepare do
   ActiveStorage.singleton_class.module_eval do
