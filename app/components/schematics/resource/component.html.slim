@@ -56,6 +56,9 @@ span.text-body-tertiary = '-' if value.nil?
     code == code_highlight(value, language: element.language)
 - when Schematics::Attributes::Country
   span.fi.rounded class="fi-#{value&.downcase}"
+- when Schematics::Attributes::Phone
+  span.fi.rounded.me-2 class="fi-#{phone_country}"
+  = element.format(value)
 - when Schematics::Attributes::Model
   = __resource_link_to(resource: value)
 - when Schematics::Attributes::Rating

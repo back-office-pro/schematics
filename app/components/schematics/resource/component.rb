@@ -27,6 +27,11 @@ module Schematics
         ::Rouge::Formatters::HTML.new.format(lexer.new.lex(code))
       end
 
+      def phone_country = ::Phonelib
+        .parse(value)
+        .valid_country
+        &.downcase
+
       def badge_color = element
         .events
         .find { _1.to == value }
