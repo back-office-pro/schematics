@@ -37,7 +37,7 @@ module Schematics
         .application
         .routes
         .url_helpers
-        .rails_blob_path(blob)
+        .rails_blob_path(blob, disposition: 'attachment')
     end
   end
 end
