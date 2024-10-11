@@ -8,12 +8,9 @@ module Schematics
       include Behaviours::Unnormalizable
 
       def default = ::Array
-        .new(10) { rand(10) }
+        .new(8) { rand(8) }
         .join
-
-      def format(value)
-        value && number_to_phone(value)
-      end
+        .prepend('+3306')
 
       def icon = :phone
 

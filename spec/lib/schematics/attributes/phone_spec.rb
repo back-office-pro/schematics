@@ -30,7 +30,7 @@ describe Schematics::Attributes::Phone do
   its(:open_api_filter_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('user[phone]') }
   its(:icon) { is_expected.to eq(:phone) }
-  its(:default) { is_expected.to match(/\d+/) }
+  its(:default) { is_expected.to match(/\+3306\d{8}/) }
   its(:validators) { is_expected.to eq(phone: { allow_blank: true }) }
   its(:search_column) { is_expected.to eq(:phone) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }
@@ -103,9 +103,9 @@ describe Schematics::Attributes::Phone do
   describe '#format' do
     subject { attribute.format(value) }
 
-    let(:value) { '0613336807' }
+    let(:value) { '+330611223344' }
 
-    it { is_expected.to eq('061-333-6807') }
+    it { is_expected.to eq('+330611223344') }
   end
 
   describe '.compatible_types' do
