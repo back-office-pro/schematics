@@ -31,6 +31,14 @@ it:
           en: Inglese
           fr: Francese
           it: Italiano
+    groups:
+      configuration:
+        appareance: Apparenza
+        company: Azienda
+        feature_flag: Funzionalità
+        locale: Lingua
+        security: Sicurezza
+        sso: SSO
     models:
       configuration:
         gender: female
