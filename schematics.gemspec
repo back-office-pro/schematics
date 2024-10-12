@@ -119,7 +119,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rqrcode', '2.2.0'
   spec.add_dependency 'rspec-rails', '7.0.1'
   spec.add_dependency 'ruby-graphviz', '1.2.5'
-  spec.add_dependency 'ruby-openai', '7.2.0'
+  spec.add_dependency 'ruby-openai', '7.3.0'
   spec.add_dependency 'ruby-progressbar', '1.13.0'
   spec.add_dependency 'ruby-vips', '2.2.2'
   spec.add_dependency 'searchkick', '5.4.0'
