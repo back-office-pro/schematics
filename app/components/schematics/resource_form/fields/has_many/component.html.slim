@@ -2,5 +2,17 @@
 = __resource_form_fields_has_many_template(form:, field:)
 div id=id data-nested-form-target='targets'
   = form.fields_for name do |form|
-    = field_set_tag fa_icon(icon, class: 'me-2') + human_name.humanize do
-      = __resource_form_fields(elements, form:)
+    .accordion.shadow-sm.mb-3.animate__animated.animate__zoomIn.rounded-bottom
+      .accordion-item
+        .accordion-header.bg-body-tertiary
+          button.accordion-button.collapsed.py-1.pe-3.ps-1 {
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target="#collapse-#{id}"
+            aria-expanded='false'
+            aria-controls="collapse-#{id}"
+          }
+            = __card_heading(icon:, title: human_name.humanize)
+        .accordion-collapse.collapse id="collapse-#{id}"
+          .accordion-body.pb-1
+            = __resource_form_fields(elements, form:)
