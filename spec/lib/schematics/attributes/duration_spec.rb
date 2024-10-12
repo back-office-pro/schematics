@@ -36,6 +36,7 @@ describe Schematics::Attributes::Duration do
 
   its(:available_options) do
     is_expected.to contain_exactly(
+      Schematics::Options::GroupBy,
       Schematics::Options::Required,
       Schematics::Options::Hidden,
       Schematics::Options::Cached,
