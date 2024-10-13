@@ -6,7 +6,15 @@ module Schematics
     class Function < Token
       include Behaviours::Preloadable
 
-      REGEX = /((?:NOW|RAND|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\((?:\$\w+\.?\w+\?{0,1})?\))/
+      REGEX = %r{((?:NOW|RAND|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\([\$\w\.\s\*\+\-/]*\))}
+      VARIABLE_REGEX = /(SUM|COUNT|AVG|MIN|MAX|ABS|ROUND|CEIL|FLOOR)\(#{Variable::REGEX}\)/
+      OPERATOR_REGEX = /
+        (SUM|COUNT|AVG|MIN|MAX)\(
+          #{Variable::REGEX}
+          #{Operator::REGEX}
+          #{Variable::REGEX}
+        \)
+      /x
       PRECEDENCE = 5
       METHODS = {
         COUNT: :count,
@@ -16,13 +24,9 @@ module Schematics
         MAX: :maximum
       }.freeze
 
-      delegate :references, to: :variable, allow_nil: true
-      delegate :raw_value,
-               :value,
-               to: :variable,
-               prefix: true,
-               allow_nil: true,
-               private: true
+      def references = variables
+        .flat_map(&:references)
+        .uniq
 
       def to_sql = super.tr('$', '')
 
@@ -34,23 +38,37 @@ module Schematics
           'Time.current'
         in 'RAND()'
           'rand'
-        in /(SUM|COUNT|AVG|MIN|MAX).*/
-          if references.empty?
-            "#{variable_value}.#{Regexp.last_match(1).downcase}"
-          else
-            "#{references.first}.#{METHODS[Regexp.last_match(1).to_sym]}(&:#{variable_raw_value})"
-          end
-        in /(ABS|ROUND|CEIL|FLOOR).*/
-          "#{variable_value}.#{Regexp.last_match(1).downcase}"
+        in OPERATOR_REGEX
+          variables
+            .map { __send__(call, _1, Regexp.last_match(1)) }
+            .insert(1, Regexp.last_match(3))
+            .join
+        in VARIABLE_REGEX
+          __send__(call, variables.first, Regexp.last_match(1))
         else
           super
         end
 
       private
 
-      memoize def variable
-        Variable.new(@value[Variable::REGEX, 1]) if @value[Variable::REGEX, 1]
+      def call
+        return :method_call if references.empty?
+
+        :parameterized_method_call
       end
+
+      def parameterized_method_call(variable, method)
+        "#{variable.references.first}.#{METHODS[method.to_sym]}(&:#{variable.raw_value})"
+      end
+
+      def method_call(variable, method)
+        "#{variable.value}.#{method.downcase}"
+      end
+
+      memoize def variables = @value
+        .scan(Variable::REGEX)
+        .flatten
+        .map(&Variable.method(:new))
     end
   end
 end
