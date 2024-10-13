@@ -48,6 +48,7 @@ en:
         index: List of %{human_name_plural}
         new: Add a new %{human_name}
         show: "%{resource}"
+        trigger: "%{resource}"
         update: Edit %{resource}
       sudos:
         create: Access to a protected area

@@ -48,6 +48,7 @@ it:
         index: Lista delle %{human_name_plural}
         new: Aggiungere @{f:una nuova|m:un nuovo|fv:una nuova|mv:un nuovo} %{human_name}
         show: "%{resource}"
+        trigger: "%{resource}"
         update: Editare %{resource}
       sudos:
         create: Accesso a un'area protetta
