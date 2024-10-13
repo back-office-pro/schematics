@@ -3,10 +3,10 @@
 module Schematics
   module Behaviours
     module Fillable
-      delegate :group_by, :readonly?, to: :options
+      delegate :group, :readonly?, to: :options
 
       def available_options = super.push(
-        Options::GroupBy,
+        Options::Group,
         Options::Default,
         Options::Readonly
       )

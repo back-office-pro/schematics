@@ -298,7 +298,7 @@
         "options": {
           "cached": true,
           "limit": 25,
-          "group_by": "company"
+          "group": "company"
         }
       },
       {
@@ -307,7 +307,7 @@
         "type": "address",
         "options": {
           "cached": true,
-          "group_by": "company"
+          "group": "company"
         }
       },
       {
@@ -316,7 +316,7 @@
         "type": "url",
         "options": {
           "cached": true,
-          "group_by": "company"
+          "group": "company"
         }
       },
       {
@@ -326,7 +326,7 @@
         "options": {
           "cached": true,
           "limit": 14,
-          "group_by": "company"
+          "group": "company"
         }
       },
       {
@@ -341,7 +341,7 @@
             "jpg"
           ],
           "size": 2,
-          "group_by": "company"
+          "group": "company"
         }
       },
       {
@@ -355,7 +355,7 @@
             "fr",
             "it"
           ],
-          "group_by": "locale"
+          "group": "locale"
         }
       },
       {
@@ -369,7 +369,7 @@
             "fr",
             "it"
           ],
-          "group_by": "locale"
+          "group": "locale"
         }
       },
       {
@@ -378,7 +378,7 @@
         "type": "time_zone",
         "options": {
           "cached": true,
-          "group_by": "locale"
+          "group": "locale"
         }
       },
       {
@@ -388,7 +388,7 @@
         "options": {
           "cached": true,
           "default": "#2c3e50",
-          "group_by": "appareance"
+          "group": "appareance"
         }
       },
       {
@@ -398,7 +398,7 @@
         "options": {
           "cached": true,
           "default": [],
-          "group_by": "security"
+          "group": "security"
         }
       },
       {
@@ -407,7 +407,7 @@
         "type": "url",
         "options": {
           "cached": true,
-          "group_by": "sso"
+          "group": "sso"
         }
       },
       {
@@ -416,7 +416,7 @@
         "type": "string",
         "options": {
           "cached": true,
-          "group_by": "sso"
+          "group": "sso"
         }
       },
       {
@@ -426,7 +426,7 @@
         "options": {
           "cached": true,
           "default": true,
-          "group_by": "feature_flag"
+          "group": "feature_flag"
         }
       },
       {
@@ -436,7 +436,7 @@
         "options": {
           "cached": true,
           "default": true,
-          "group_by": "feature_flag"
+          "group": "feature_flag"
         }
       },
       {
@@ -446,7 +446,7 @@
         "options": {
           "cached": true,
           "default": true,
-          "group_by": "feature_flag"
+          "group": "feature_flag"
         }
       },
       {
@@ -456,7 +456,7 @@
         "options": {
           "cached": true,
           "default": true,
-          "group_by": "feature_flag"
+          "group": "feature_flag"
         }
       },
       {
@@ -466,7 +466,7 @@
         "options": {
           "cached": true,
           "default": false,
-          "group_by": "feature_flag"
+          "group": "feature_flag"
         }
       },
       {
@@ -476,7 +476,7 @@
         "options": {
           "cached": true,
           "default": true,
-          "group_by": "feature_flag"
+          "group": "feature_flag"
         }
       }
     ]
