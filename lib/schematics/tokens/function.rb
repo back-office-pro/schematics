@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/array/access'
+
 module Schematics
   module Tokens
     # :reek:InstanceVariableAssumption
@@ -7,22 +9,8 @@ module Schematics
       include Behaviours::Preloadable
 
       REGEX = %r{((?:NOW|RAND|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\([\$\w\.\s\*\+\-/]*\))}
-      VARIABLE_REGEX = /(SUM|COUNT|AVG|MIN|MAX|ABS|ROUND|CEIL|FLOOR)\(#{Variable::REGEX}\)/
-      OPERATOR_REGEX = /
-        (SUM|COUNT|AVG|MIN|MAX)\(
-          #{Variable::REGEX}
-          #{Operator::REGEX}
-          #{Variable::REGEX}
-        \)
-      /x
+      CAPTURING_REGEX = /(NOW|RAND|SUM|AVG|MIN|MAX|COUNT|ABS|ROUND|CEIL|FLOOR)\((.*)\)/
       PRECEDENCE = 5
-      METHODS = {
-        COUNT: :count,
-        SUM: :sum,
-        AVG: :average,
-        MIN: :minimum,
-        MAX: :maximum
-      }.freeze
 
       def references = variables
         .flat_map(&:references)
@@ -38,37 +26,30 @@ module Schematics
           'Time.current'
         in 'RAND()'
           'rand'
-        in OPERATOR_REGEX
-          variables
-            .map { __send__(call, _1, Regexp.last_match(1)) }
-            .insert(1, Regexp.last_match(3))
-            .join
-        in VARIABLE_REGEX
-          __send__(call, variables.first, Regexp.last_match(1))
         else
-          super
+          tokens
+            .each_with_object(name)
+            .map(&:fn_value)
+            .join
         end
 
       private
 
-      def call
-        return :method_call if references.empty?
+      memoize def tokens = Tokenizer.tokenize(body)
 
-        :parameterized_method_call
-      end
+      def variables = tokens.grep(Variable)
 
-      def parameterized_method_call(variable, method)
-        "#{variable.references.first}.#{METHODS[method.to_sym]}(&:#{variable.raw_value})"
-      end
-
-      def method_call(variable, method)
-        "#{variable.value}.#{method.downcase}"
-      end
-
-      memoize def variables = @value
-        .scan(Variable::REGEX)
+      def body = @value
+        .scan(CAPTURING_REGEX)
         .flatten
-        .map(&Variable.method(:new))
+        .second
+
+      def name = @value
+        .scan(CAPTURING_REGEX)
+        .flatten
+        .first
+        .downcase
+        .to_sym
     end
   end
 end

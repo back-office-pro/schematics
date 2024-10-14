@@ -9,6 +9,7 @@ module Schematics
 
       REGEX = /\$(\w+\.?\w+\?{0,1})/
       PRECEDENCE = 7
+      FN_METHODS = { avg: :average, min: :minimum, max: :maximum }.freeze
 
       def to_sql = [prefix, raw_value].join('.')
 
@@ -19,6 +20,12 @@ module Schematics
       def raw_value = @value
         .split('.')
         .last
+
+      def fn_value(name)
+        return "#{value}.#{name}" unless with_references?
+
+        "#{references.first}.#{FN_METHODS.fetch(name, name)}(&:#{raw_value})"
+      end
 
       def with_references? = references.any?
 

@@ -29,4 +29,22 @@ describe Schematics::Tokens::Variable do
     its(:to_sql) { is_expected.to eq('schemas.title') }
     its(:to_str) { is_expected.to eq('#{schema.title_formatted}') } # rubocop:disable Lint/InterpolationCheck
   end
+
+  describe '#fn_value' do
+    subject(:fn_value) { token.fn_value(name) }
+
+    let(:name) { :sum }
+
+    context 'when there is no reference' do
+      let(:value) { 'type' }
+
+      it { is_expected.to eq('self.type.sum') }
+    end
+
+    context 'when there is some reference' do
+      let(:value) { 'schema.title' }
+
+      it { is_expected.to eq('schema.sum(&:title)') }
+    end
+  end
 end

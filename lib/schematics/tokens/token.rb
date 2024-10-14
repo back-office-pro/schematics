@@ -10,6 +10,10 @@ module Schematics
         @prefix = prefix
       end
 
+      def fn_value(*)
+        value
+      end
+
       def to_sql = @value
 
       def to_str = @value
