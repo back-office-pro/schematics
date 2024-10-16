@@ -250,8 +250,13 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
   # :reek:FeatureEnvy
   def translate(text, locale:)
-    EasyTranslate.translate(text.humanize, to: locale)
+    EasyTranslate.translate(text.humanize, to: locale, key: api_key)
   rescue EasyTranslate::EasyTranslateException
     text.humanize
   end
+
+  def api_key = Schematics::Engine
+    .credentials
+    .gcloud
+    .fetch(:api_key)
 end
