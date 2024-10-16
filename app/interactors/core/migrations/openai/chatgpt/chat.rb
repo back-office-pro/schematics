@@ -10,7 +10,7 @@ module Core
           delegate :migration, to: :context, private: true
           delegate :prompt, to: :migration, private: true
           delegate :logger, to: ::Rails, private: true
-          delegate :root, to: ::Schematics::Engine, private: true
+          delegate :root, :credentials, to: ::Schematics::Engine, private: true
           delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
 
           after :log_data
@@ -21,7 +21,11 @@ module Core
 
           private
 
-          memoize def client = ::OpenAI::Client.new
+          memoize def client = ::OpenAI::Client.new(
+            access_token: credentials.openai[:access_token],
+            request_timeout: 240,
+            log_errors: true
+          )
 
           memoize def responses = client.chat(parameters:)
 
