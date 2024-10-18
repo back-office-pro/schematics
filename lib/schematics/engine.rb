@@ -86,8 +86,8 @@ module Schematics
       end
 
       def credentials = ActiveSupport::EncryptedConfiguration.new(
-        config_path: root.join('config', 'credentials.yml.enc'),
-        key_path: root.join('config', 'master.key'),
+        config_path: root.join('config', 'credentials', "#{Rails.env}.yml.enc"),
+        key_path: root.join('config', 'credentials', "#{Rails.env}.key"),
         env_key: 'SCHEMATICS_MASTER_KEY',
         raise_if_missing_key: true
       )

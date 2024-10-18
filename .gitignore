@@ -3,7 +3,9 @@
 /pkg
 /spec/demo
 /coverage
-/config/master.key
+/config/credentials/development.key
+/config/credentials/test.key
+/config/credentials/production.key
 /node_modules
 /Gemfile.lock
 /yarn.lock
