@@ -478,6 +478,26 @@
           "default": true,
           "group": "feature_flag"
         }
+      },
+      {
+        "id": "b40047e7-e1a0-4a01-86ca-cce4d53f2e53",
+        "name": "openai_access_token",
+        "type": "string",
+        "options": {
+          "cached": true,
+          "encrypted": true,
+          "group": "api_key"
+        }
+      },
+      {
+        "id": "b4a2fc76-3ad1-4278-b477-f0f8ecb59a2a",
+        "name": "gcloud_api_key",
+        "type": "string",
+        "options": {
+          "cached": true,
+          "encrypted": true,
+          "group": "api_key"
+        }
       }
     ]
   },

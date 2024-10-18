@@ -11,10 +11,12 @@ it:
         company_name: Nome dell'azienda
         company_registration_number: Codice fiscale dell'azienda
         company_website: Sito web aziendale
+        gcloud_api_key: Chiave API di Google Cloud
         google_sign_in_feature_flag: Attivare l'accesso con l'account Google
         locale: Lingua
         meetings_feature_flag: Attivare le riunioni
         messages_feature_flag: Attivare la messaggistica interna
+        openai_access_token: Token di accesso OpenAI
         origins: Domini API consentiti
         sso_cert_fingerprint: Impronta digitale del certificato SSO
         sso_service_url: URL del provider di identità SSO
@@ -33,6 +35,7 @@ it:
           it: Italiano
     groups:
       configuration:
+        api_key: Chiavi API
         appareance: Apparenza
         company: Azienda
         feature_flag: Funzionalità

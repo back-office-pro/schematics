@@ -10,8 +10,9 @@ module Core
           delegate :migration, to: :context, private: true
           delegate :prompt, to: :migration, private: true
           delegate :logger, to: ::Rails, private: true
-          delegate :root, :credentials, to: ::Schematics::Engine, private: true
+          delegate :root, to: ::Schematics::Engine, private: true
           delegate :parse, to: ::ActiveSupport::ConfigurationFile, private: true
+          delegate :openai_access_token_with_fallback, to: ::Configuration, private: true
 
           after :log_data
 
@@ -22,7 +23,7 @@ module Core
           private
 
           memoize def client = ::OpenAI::Client.new(
-            access_token: credentials.openai[:access_token],
+            access_token: openai_access_token_with_fallback,
             request_timeout: 240,
             log_errors: true
           )

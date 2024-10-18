@@ -11,10 +11,12 @@ en:
         company_name: Company name
         company_registration_number: Company registration number
         company_website: Company website
+        gcloud_api_key: Google Cloud API key
         google_sign_in_feature_flag: Enable Google sign in
         locale: Locale
         meetings_feature_flag: Enable meetings
         messages_feature_flag: Enable internal messaging
+        openai_access_token: OpenAI access token
         origins: Authorized API domains
         sso_cert_fingerprint: SSO certificate fingerprint
         sso_service_url: SSO identity provider URL
@@ -33,6 +35,7 @@ en:
           it: Italian
     groups:
       configuration:
+        api_key: API keys
         appareance: Appareance
         company: Company
         feature_flag: Features

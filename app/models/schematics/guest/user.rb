@@ -8,7 +8,7 @@ module Schematics
       include ::ActiveModel::Attributes
 
       attribute :permissions, default: -> { [] }
-      attribute :time_zone, default: -> { ::Configuration.time_zone }
+      attribute :time_zone, default: -> { ::Configuration.time_zone_with_fallback }
       attribute :locale, default: -> { ::Configuration.locale }
 
       delegate :admin?, to: :role

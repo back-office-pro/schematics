@@ -3,13 +3,15 @@
 module Schematics
   module GoogleMapIncludeTag
     class Component < ApplicationComponent
+      delegate :gcloud_api_key_with_fallback, to: ::Configuration, private: true
+
       def url = ::URI::HTTPS
         .build(host:, path:, query:)
         .to_s
 
       private
 
-      def query = { key: api_key, loading:, libraries:, callback: }.to_param
+      def query = { key: gcloud_api_key_with_fallback, loading:, libraries:, callback: }.to_param
 
       def host = 'maps.googleapis.com'
 
@@ -20,10 +22,6 @@ module Schematics
       def loading = 'async'
 
       def callback = 'Function.prototype'
-
-      def api_key = Engine
-        .credentials
-        .gcloud[:api_key]
     end
   end
 end

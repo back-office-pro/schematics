@@ -3,6 +3,7 @@
 module Schematics
   module GoogleMap
     class Component < ApplicationComponent
+      delegate :gcloud_api_key_with_fallback, to: ::Configuration, private: true
       option :address
 
       def url = ::URI::HTTPS
@@ -11,17 +12,13 @@ module Schematics
 
       private
 
-      def query = { q: address, key: api_key, zoom: }.to_param
+      def query = { q: address, key: gcloud_api_key_with_fallback, zoom: }.to_param
 
       def host = 'www.google.com'
 
       def path = '/maps/embed/v1/place'
 
       def address = CGI.escape(super || ' ')
-
-      def api_key = Engine
-        .credentials
-        .gcloud[:api_key]
 
       def zoom = 6
     end

@@ -6,7 +6,7 @@ class User < Schematics::ApplicationRecord
   PASSWORD_RESET_TOKEN_DURATION = 15.minutes.freeze
   ONE_TIME_PASSWORD_DURATION = 10.minutes.freeze
 
-  attribute :time_zone, default: -> { ::Configuration.time_zone }
+  attribute :time_zone, default: -> { ::Configuration.time_zone_with_fallback }
   attribute :locale, default: -> { ::Configuration.locale }
 
   store_accessor :preferences,
