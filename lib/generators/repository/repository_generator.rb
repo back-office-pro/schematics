@@ -29,7 +29,8 @@ class RepositoryGenerator < Rails::Generators::Base
 
   def access_token = Schematics::Engine
     .credentials
-    .github[:access_token]
+    .github
+    .access_token
 
   def connection_options = { request: { open_timeout: 5, timeout: 5 } }
 

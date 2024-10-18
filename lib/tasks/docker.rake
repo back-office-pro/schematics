@@ -2,7 +2,7 @@
 
 DOCKERFILE_PATH = Schematics::Engine.root.join('config', 'docker', 'Dockerfile').freeze
 DOCKER_COMPOSE_PATH = Schematics::Engine.root.join('config', 'docker', 'docker-compose.yml').freeze
-BUNDLE_GITHUB__COM = Schematics::Engine.credentials.github[:access_token].freeze
+BUNDLE_GITHUB__COM = Schematics::Engine.credentials.github.access_token.freeze
 
 def run(command, *args)
   system(
