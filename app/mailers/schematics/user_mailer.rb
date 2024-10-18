@@ -2,6 +2,9 @@
 
 module Schematics
   class UserMailer < ApplicationMailer
+    delegate :eager_load!, to: ::RoutesLazyRoutes, private: true
+    before_action :eager_load! # TODO: remove when upgrading to Rails 8
+
     def new_account(user)
       @user = user
       @token = user.generate_token_for(:new_account)
