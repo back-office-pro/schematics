@@ -26,6 +26,7 @@ describe Schematics::Attributes::Text do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Listable) }
   it { is_expected.not_to be_a(Schematics::Behaviours::Indexable) }
 
@@ -55,7 +56,8 @@ describe Schematics::Attributes::Text do
       Schematics::Options::Normalization,
       Schematics::Options::Min,
       Schematics::Options::Limit,
-      Schematics::Options::Length
+      Schematics::Options::Length,
+      Schematics::Options::Encrypted
     )
   end
 

@@ -21,6 +21,7 @@ describe Schematics::Attributes::Url do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:database_type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('url') }
@@ -51,7 +52,8 @@ describe Schematics::Attributes::Url do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
-      Schematics::Options::Scheme
+      Schematics::Options::Scheme,
+      Schematics::Options::Encrypted
     )
   end
 

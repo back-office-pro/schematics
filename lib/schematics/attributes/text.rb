@@ -13,6 +13,7 @@ module Schematics
       include Behaviours::Preloadable
       include Behaviours::Translatable
       include Behaviours::Normalizable
+      include Behaviours::Encryptable
 
       delegate :length, :limit, :min, to: :options
 

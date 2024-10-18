@@ -34,6 +34,7 @@ describe Schematics::Attributes::String do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.to be_valid }
 
   its(:database_type) { is_expected.to eq('string') }
@@ -67,7 +68,8 @@ describe Schematics::Attributes::String do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
-      Schematics::Options::Normalization
+      Schematics::Options::Normalization,
+      Schematics::Options::Encrypted
     )
   end
 

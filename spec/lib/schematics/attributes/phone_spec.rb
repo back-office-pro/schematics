@@ -20,6 +20,7 @@ describe Schematics::Attributes::Phone do
   it { is_expected.to be_a(Schematics::Behaviours::Renderable) }
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
   it { is_expected.not_to be_translated }
@@ -53,7 +54,8 @@ describe Schematics::Attributes::Phone do
       Schematics::Options::Unique,
       Schematics::Options::Min,
       Schematics::Options::Limit,
-      Schematics::Options::Length
+      Schematics::Options::Length,
+      Schematics::Options::Encrypted
     )
   end
 

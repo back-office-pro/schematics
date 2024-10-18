@@ -23,6 +23,7 @@ describe Schematics::Attributes::Mime do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Enumerable) }
+  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.to be_a(Schematics::Behaviours::Unnormalizable) }
   it { is_expected.to be_a(Schematics::Behaviours::Untranslatable) }
   it { is_expected.not_to be_translated }
@@ -55,7 +56,8 @@ describe Schematics::Attributes::Mime do
       Schematics::Options::Cached,
       Schematics::Options::Default,
       Schematics::Options::Readonly,
-      Schematics::Options::Unique
+      Schematics::Options::Unique,
+      Schematics::Options::Encrypted
     )
   end
 
