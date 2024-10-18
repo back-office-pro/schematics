@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bootsnap', '1.18.4'
   spec.add_dependency 'bootstrap-email', '1.5.1'
   spec.add_dependency 'bootstrap_form', '5.4.0'
-  spec.add_dependency 'brakeman', '6.2.1'
+  spec.add_dependency 'brakeman', '6.2.2'
   spec.add_dependency 'browser', '6.0.0'
   spec.add_dependency 'bundler-audit', '0.9.2'
   spec.add_dependency 'cancancan', '3.6.1'
@@ -138,7 +138,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '2.0.11'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
-  spec.add_dependency 'view_component', '3.17.0'
+  spec.add_dependency 'view_component', '3.18.0'
   spec.add_dependency 'webmock', '3.24.0'
   spec.add_dependency 'zero-rails_openapi', '2.2.0'
 end
