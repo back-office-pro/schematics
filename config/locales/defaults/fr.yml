@@ -47,8 +47,10 @@ fr:
   i18n:
     inflections:
       gender:
+        default: male
         f: female
         female: :@f
+        female_pronoun: une
         female_vowel: :@fv
         fv: female_vowel
         m: male

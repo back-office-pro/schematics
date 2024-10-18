@@ -12,7 +12,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
         Translation.create!(
           locale:,
           key: "activerecord.models.#{entity.name}.gender",
-          value: 'male'
+          value: translate("one #{entity.name}", locale:, key: :gender)
         )
       end
     end
@@ -248,15 +248,7 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
     behavior == :invoke && old_name
   end
 
-  # :reek:FeatureEnvy
-  def translate(text, locale:)
-    EasyTranslate.translate(text.humanize, to: locale, key: api_key)
-  rescue EasyTranslate::EasyTranslateException
-    text.humanize
+  def translate(text, locale:, key: :value)
+    Core::Translations::Translate.call(text:, locale:).public_send(key)
   end
-
-  def api_key = Schematics::Engine
-    .credentials
-    .gcloud
-    .fetch(:api_key)
 end

@@ -54,15 +54,7 @@ class TranslationGenerator < Rails::Generators::NamedBase
     behavior == :invoke && old_name
   end
 
-  # :reek:FeatureEnvy
   def translate(text, locale:)
-    EasyTranslate.translate(text.humanize, to: locale, key: api_key)
-  rescue EasyTranslate::EasyTranslateException
-    text.humanize
+    Core::Translations::Translate.call(text:, locale:).value
   end
-
-  def api_key = Schematics::Engine
-    .credentials
-    .gcloud
-    .fetch(:api_key)
 end

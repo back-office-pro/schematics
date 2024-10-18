@@ -40,6 +40,19 @@ en:
   helpers:
     label:
       destroy: Delete?
+  i18n:
+    inflections:
+      gender:
+        default: male
+        f: female
+        female: :@f
+        female_pronoun: a
+        female_vowel: :@fv
+        fv: female_vowel
+        m: male
+        male: :@m
+        male_vowel: :@mv
+        mv: male_vowel
   line: Line %{line}
   of: of
   prompt: Select a %{attribute_name}
