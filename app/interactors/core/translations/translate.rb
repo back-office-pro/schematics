@@ -11,7 +11,7 @@ module Core
       delegate :t, to: ::I18n, private: true
 
       def call
-        context.value = translate(text.humanize, to: locale, key:)
+        context.value = translate(text.humanize, to: locale, key: gcloud_api_key_with_fallback)
         context.gender = gender
       rescue ::EasyTranslate::EasyTranslateException
         context.value = text.humanize
@@ -19,8 +19,6 @@ module Core
       end
 
       private
-
-      alias key gcloud_api_key_with_fallback
 
       def gender
         return t('i18n.inflections.gender.f', locale:) if female?
