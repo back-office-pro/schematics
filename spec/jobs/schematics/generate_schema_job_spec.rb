@@ -39,8 +39,11 @@ RSpec.describe Schematics::GenerateSchemaJob do
           .and_return(5)
       end
 
-      it 'switches state back to editing after discard' do
-        expect { perform_now }.not_to change(migration, :state)
+      it 'changes migration state from editing to no solution after discard' do
+        expect { perform_now }
+          .to change(migration, :state)
+          .from(Migration::STATE_STATE_EDITING.to_s)
+          .to(Migration::STATE_STATE_NO_SOLUTION.to_s)
       end
     end
 
@@ -58,8 +61,11 @@ RSpec.describe Schematics::GenerateSchemaJob do
           .and_return(5)
       end
 
-      it 'switches state back to editing after discard' do
-        expect { perform_now }.not_to change(migration, :state)
+      it 'changes migration state from editing to no solution after discard' do
+        expect { perform_now }
+          .to change(migration, :state)
+          .from(Migration::STATE_STATE_EDITING.to_s)
+          .to(Migration::STATE_STATE_NO_SOLUTION.to_s)
       end
     end
   end

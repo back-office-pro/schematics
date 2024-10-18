@@ -18,6 +18,7 @@ it:
           finished: Finita
           generating: Generazione in corso
           in_progress: In corso
+          no_solution: Nessuna soluzione
           pending: In sospeso
           rollbacking: Rollback in corso
           scheduled: Programmata

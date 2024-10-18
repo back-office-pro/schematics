@@ -5,6 +5,8 @@ module Schematics
     include Quietable
     queue_as :migrations
 
+    discard_on Faraday::UnauthorizedError
+
     retry_on Faraday::Error, wait: :polynomially_longer, attempts: 5
     retry_on ActiveRecord::RecordInvalid, wait: 10.seconds, attempts: 5 do |_job, error|
       Rollbar.error('[Migration] GenerateSchema error', data: error.record.data.to_json)
@@ -12,7 +14,7 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        job.arguments.first.reload.state_editing!
+        job.arguments.first.reload.state_no_solution!
       end
     end
 

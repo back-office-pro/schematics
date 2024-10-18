@@ -1030,7 +1030,8 @@
             "finished",
             "rollbacking",
             "generating",
-            "error"
+            "error",
+            "no_solution"
           ],
           "events": [
             {
@@ -1040,7 +1041,8 @@
               "confirm": true,
               "from": [
                 "editing",
-                "error"
+                "error",
+                "no_solution"
               ],
               "to": "pending"
             },
@@ -1051,7 +1053,8 @@
               "color": "secondary",
               "from": [
                 "editing",
-                "error"
+                "error",
+                "no_solution"
               ],
               "to": "scheduled"
             },

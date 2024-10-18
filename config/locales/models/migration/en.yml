@@ -18,6 +18,7 @@ en:
           finished: Finished
           generating: Generating
           in_progress: In progress
+          no_solution: No solution
           pending: Pending
           rollbacking: Rollbacking
           scheduled: Scheduled
