@@ -12,21 +12,23 @@ module Core
 
       def call
         context.value = translate(text.humanize, to: locale, key: gcloud_api_key_with_fallback)
-        context.gender = gender
+        context.gender = t(gender, scope:, locale:)
       rescue ::EasyTranslate::EasyTranslateException
         context.value = text.humanize
-        context.gender = t('i18n.inflections.gender.default', locale:)
+        context.gender = t(:default, scope:, locale:)
       end
 
       private
 
-      def gender
-        return t('i18n.inflections.gender.f', locale:) if female?
+      def scope = %i[i18n inflections gender]
 
-        t('i18n.inflections.gender.m', locale:)
+      def gender
+        return :f if female?
+
+        :m
       end
 
-      def female_pronoun = t('i18n.inflections.gender.female_pronoun', locale:)
+      def female_pronoun = t(:female_pronoun, scope:, locale:)
 
       def female? = context
         .value
