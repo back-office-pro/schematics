@@ -23,6 +23,12 @@ module Schematics
         let(:parent_id) { :"#{model_class.model_name.param_key}_id" }
         let(:params) { { locale:, model_name:, controller: } }
 
+        before do
+          allow_any_instance_of(ActiveStorageValidations::ContentTypeSpoofDetector)
+            .to receive(:spoofed?)
+            .and_return(false)
+        end
+
         it do
           if can?(:index)
             is_expected

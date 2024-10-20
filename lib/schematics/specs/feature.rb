@@ -51,6 +51,9 @@ module Schematics
 
         before do
           allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
+          allow_any_instance_of(ActiveStorageValidations::ContentTypeSpoofDetector)
+            .to receive(:spoofed?)
+            .and_return(false)
         end
 
         if can?(:index)

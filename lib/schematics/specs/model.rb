@@ -12,6 +12,12 @@ module Schematics
 
         subject(:record) { default }
 
+        before do
+          allow_any_instance_of(ActiveStorageValidations::ContentTypeSpoofDetector)
+            .to receive(:spoofed?)
+            .and_return(false)
+        end
+
         it { is_expected.to be_valid }
         it { is_expected.to be_versioned }
         it { is_expected.to have_implicit_order_column(:created_at) }
@@ -90,6 +96,15 @@ module Schematics
 
         attachments_attributes.each do |attribute|
           it { is_expected.to have_many_attached(attribute.name.to_sym) }
+        end
+
+        attachment_attributes
+          .grep_v(Attributes::Attachments)
+          .each do |attribute|
+            it { is_expected.to have_one_attached(attribute.name.to_sym) }
+          end
+
+        attachment_attributes.each do |attribute|
           it do
             is_expected
               .to accept_nested_attributes_for(attribute.association_name)
@@ -119,6 +134,16 @@ module Schematics
               is_expected
                 .to validate_aspect_ratio_of(attribute.name.to_sym)
                 .allowing(attribute.options.aspect_ratio)
+            end
+            if attribute.options.min
+              is_expected
+                .to validate_limit_of(attribute.name.to_sym)
+                .min(attribute.options.min)
+            end
+            if attribute.options.max
+              is_expected
+                .to validate_limit_of(attribute.name.to_sym)
+                .max(attribute.options.max)
             end
           end
         end
@@ -190,10 +215,6 @@ module Schematics
 
         one_time_password_attributes.each do |attribute|
           it { is_expected.to encrypt(attribute.name.to_sym).deterministic(true) }
-        end
-
-        attachment_attributes.each do |attribute|
-          it { is_expected.to have_one_attached(attribute.name.to_sym) }
         end
 
         association_attributes.each do |attribute|
