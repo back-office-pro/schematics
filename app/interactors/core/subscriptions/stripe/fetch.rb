@@ -6,11 +6,11 @@ module Core
       class Fetch
         include Interactor
 
+        delegate :secret_key, to: 'Schematics::Engine.credentials.stripe', private: true
         delegate :name, to: :product, allow_nil: true, prefix: true, private: true
         delegate :customers, :products, to: 'client.v1', private: true
-        delegate :credentials, to: ::Schematics::Engine, private: true
         delegate :subdomain, to: ::Tenant, private: true
-        delegate :logger, :env, to: ::Rails, private: true
+        delegate :logger, to: ::Rails, private: true
         delegate :id,
                  :email,
                  :metadata,
@@ -39,7 +39,7 @@ module Core
 
         private
 
-        memoize def client = ::Stripe::StripeClient.new(api_key)
+        memoize def client = ::Stripe::StripeClient.new(secret_key)
 
         memoize def product = product_id && products.retrieve(product_id)
 
@@ -81,10 +81,6 @@ module Core
           &.preferred_locales
           &.first
           &.slice(0, 2)
-
-        def api_key
-          credentials.dig(:stripe, env.to_sym, :secret_key)
-        end
 
         def log_data = logger
           .tagged('Stripe')
