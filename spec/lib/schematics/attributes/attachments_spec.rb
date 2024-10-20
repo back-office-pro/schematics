@@ -103,12 +103,12 @@ describe Schematics::Attributes::Attachments do
     it { is_expected.to be_required }
 
     its(:validators) do
-      is_expected.to eq(presence: true, antivirus: true, storage_quota: true, attached: true)
+      is_expected.to eq(attached: true, antivirus: true, storage_quota: true)
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :files, {:presence=>true, :antivirus=>true, :storage_quota=>true, :attached=>true}
+        validates :files, {:attached=>true, :antivirus=>true, :storage_quota=>true}
       RUBY
     end
   end

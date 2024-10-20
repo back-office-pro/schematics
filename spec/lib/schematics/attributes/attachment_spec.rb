@@ -101,12 +101,12 @@ describe Schematics::Attributes::Attachment do
     it { is_expected.to be_required }
 
     its(:validators) do
-      is_expected.to eq(presence: true, antivirus: true, storage_quota: true, attached: true)
+      is_expected.to eq(attached: true, antivirus: true, storage_quota: true)
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:presence=>true, :antivirus=>true, :storage_quota=>true, :attached=>true}
+        validates :avatar, {:attached=>true, :antivirus=>true, :storage_quota=>true}
       RUBY
     end
   end
@@ -147,12 +147,20 @@ describe Schematics::Attributes::Attachment do
     its(:icon) { is_expected.to eq(:file_image) }
 
     its(:validators) do
-      is_expected.to eq(antivirus: true, storage_quota: true, content_type: %i[png jpg jpeg])
+      is_expected.to eq(
+        antivirus: true,
+        storage_quota: true,
+        content_type: {
+          with: %i[png jpg jpeg]
+          # TODO: uncomment when fixed
+          # spoofing_protection: true
+        }
+      )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:antivirus=>true, :storage_quota=>true, :content_type=>[:png, :jpg, :jpeg]}
+        validates :avatar, {:antivirus=>true, :storage_quota=>true, :content_type=>{:with=>[:png, :jpg, :jpeg]}}
       RUBY
     end
   end

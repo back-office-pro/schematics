@@ -21,6 +21,11 @@ module Schematics
       self
     end
 
+    def rename_keys(hash)
+      validators.transform_keys!(hash)
+      self
+    end
+
     def human(validators: compact_validators)
       validators
         .map(&method(:humanize))

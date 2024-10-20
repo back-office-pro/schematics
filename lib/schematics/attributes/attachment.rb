@@ -59,20 +59,25 @@ module Schematics
         .content_type
         &.first
 
-      def validators = super.merge(
-        antivirus: true,
-        storage_quota: true,
-        attached: required?,
-        size: {
-          less_than: options.size&.megabytes
-        },
-        aspect_ratio: options.aspect_ratio,
-        dimension: {
-          width: options.width,
-          height: options.height
-        },
-        content_type: options.content_type&.map(&:to_sym)
-      )
+      def validators = super
+        .rename_keys(presence: :attached)
+        .merge(
+          antivirus: true,
+          storage_quota: true,
+          size: {
+            less_than: options.size&.megabytes
+          },
+          aspect_ratio: options.aspect_ratio,
+          dimension: {
+            width: options.width,
+            height: options.height
+          },
+          content_type: options.content_type && {
+            with: options.content_type.map(&:to_sym)
+            # TODO: uncomment it when fixed
+            # spoofing_protection: true
+          }
+        )
 
       def format(value)
         Rails.application.routes.url_helpers.url_for(value) if value.attached?
