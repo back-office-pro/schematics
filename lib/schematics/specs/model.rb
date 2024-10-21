@@ -96,6 +96,18 @@ module Schematics
 
         attachments_attributes.each do |attribute|
           it { is_expected.to have_many_attached(attribute.name.to_sym) }
+          it do
+            if attribute.options.min
+              is_expected
+                .to validate_limit_of(attribute.name.to_sym)
+                .min(attribute.options.min)
+            end
+            if attribute.options.max
+              is_expected
+                .to validate_limit_of(attribute.name.to_sym)
+                .max(attribute.options.max)
+            end
+          end
         end
 
         attachment_attributes
@@ -134,16 +146,6 @@ module Schematics
               is_expected
                 .to validate_aspect_ratio_of(attribute.name.to_sym)
                 .allowing(attribute.options.aspect_ratio)
-            end
-            if attribute.options.min
-              is_expected
-                .to validate_limit_of(attribute.name.to_sym)
-                .min(attribute.options.min)
-            end
-            if attribute.options.max
-              is_expected
-                .to validate_limit_of(attribute.name.to_sym)
-                .max(attribute.options.max)
             end
           end
         end
