@@ -11,7 +11,7 @@ module Schematics
       def css_classes = %w[text-decoration-none]
 
       def human_name_with_icon
-        fa_icon(icon, class: ['fa-fw', 'text-primary', "me-#{padding_size}"]) + human_name
+        fa_icon(icon, class: icon_css_classes) + human_name
       end
 
       def authorized?
@@ -38,7 +38,13 @@ module Schematics
 
       protected
 
-      def padding_size = 2
+      def margin_size = 2
+
+      def icon_css_classes = [
+        'fa-fw',
+        'text-primary',
+        "me-#{margin_size}"
+      ]
 
       def ability
         case resource

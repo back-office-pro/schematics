@@ -14,7 +14,7 @@ module Schematics
 
       protected
 
-      def padding_size = 1
+      def margin_size = 1
 
       def icon
         case resource
