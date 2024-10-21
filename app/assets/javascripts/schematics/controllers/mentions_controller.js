@@ -45,7 +45,11 @@ export default class extends ApplicationController {
   }
 
   #template (descriptor, icon, url) {
-    return `<i class="fa fa-${icon} me-2"></i><a href="${url}">${descriptor}</a>`
+    if (url.startsWith(routes.users)) {
+      return `<i class="fa fa-at me-1"></i><a href="${url}" class="fw-bold">${descriptor}</a>`
+    } else {
+      return `<i class="fa fa-${icon} me-1"></i><a href="${url}">${descriptor}</a>`
+    }
   }
 
   get options () {
