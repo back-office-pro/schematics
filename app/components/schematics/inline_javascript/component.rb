@@ -6,6 +6,7 @@ module Schematics
       delegate :credentials, to: Engine, private: true
       delegate :dashboard_read_notifications_path,
                :preferences_path,
+               :emojis_path,
                to: 'Schematics::Engine.routes.url_helpers',
                private: true
 
@@ -43,7 +44,8 @@ module Schematics
         draft: draft_path(id: ':id'),
         preferences: preferences_path,
         searches: search_autocompletions_path,
-        users: users_path
+        users: users_path,
+        emojis: emojis_path
       }.to_json.html_safe
     end
   end

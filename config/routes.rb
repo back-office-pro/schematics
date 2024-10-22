@@ -3,6 +3,7 @@
 Schematics::Engine.routes.draw do
   root Tenant.schema.root_route
   get 'robots.txt', to: 'robots#index', as: :robots
+  get 'emojis.json', to: 'emojis#index', as: :emojis
 
   localized do
     draw :dashboard

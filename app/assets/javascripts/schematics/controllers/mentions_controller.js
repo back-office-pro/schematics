@@ -16,9 +16,14 @@ export default class extends ApplicationController {
     this.tribute.detach(this.element)
   }
 
-  #replaced ({ detail: { item: { original: { _metadata: { sgid, descriptor, icon, url } } } } }) {
-    const attachment = new Trix.Attachment({ sgid, content: this.#template(descriptor, icon, url) })
-    this.editor.insertAttachment(attachment)
+  #replaced ({ detail: { item: { original } } }) {
+    if (original._metadata) {
+      const { sgid, descriptor, icon, url } = original._metadata
+      const attachment = new Trix.Attachment({ sgid, content: this.#template(descriptor, icon, url) })
+      this.editor.insertAttachment(attachment)
+    } else {
+      this.editor.insertString(original.value)
+    }
     this.editor.insertString(' ')
   }
 
@@ -38,6 +43,15 @@ export default class extends ApplicationController {
     callback(results)
   }
 
+  async #fetchEmojis (_, callback) {
+    if (this.emojis == null) {
+      const response = await this.fetchAPI(routes.emojis)
+      const results = await response.json()
+      this.emojis = Object.entries(results).flatMap(this.#formatEmojis)
+    }
+    callback(this.emojis)
+  }
+
   #pasteHTML (_html, startPosition, endPosition) {
     const position = this.editor.getPosition()
     this.editor.setSelectedRange([position - (endPosition - startPosition), position])
@@ -50,6 +64,10 @@ export default class extends ApplicationController {
     } else {
       return `<i class="fa fa-${icon} me-1"></i><a href="${url}">${descriptor}</a>`
     }
+  }
+
+  #formatEmojis ([key, values]) {
+    return values.map(value => ({ key: `${value} :${key}:`, value }))
   }
 
   get options () {
@@ -69,6 +87,10 @@ export default class extends ApplicationController {
           trigger: '#',
           lookup: ({ _metadata }) => _metadata?.descriptor,
           values: this.debounce(this.#search)
+        },
+        {
+          trigger: ':',
+          values: this.debounce(this.#fetchEmojis)
         }
       ]
     }
