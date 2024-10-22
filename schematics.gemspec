@@ -130,7 +130,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'solid_cache', '1.0.6'
   spec.add_dependency 'solid_queue', '1.0.0'
   spec.add_dependency 'sprockets-rails', '3.5.2'
-  spec.add_dependency 'sqlite3', '2.1.0'
+  spec.add_dependency 'sqlite3', '2.1.1'
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '13.0.1'
   spec.add_dependency 'terser', '1.2.4'
@@ -138,7 +138,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '2.0.11'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
-  spec.add_dependency 'view_component', '3.18.0'
+  spec.add_dependency 'view_component', '3.19.0'
   spec.add_dependency 'webmock', '3.24.0'
   spec.add_dependency 'zero-rails_openapi', '2.2.0'
 end
