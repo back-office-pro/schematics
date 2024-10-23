@@ -2,5 +2,6 @@
 it:
   calendar: Visualizzazione calendario
   grid: Visualizzazione griglia
+  kanban: Visualizzazione della lavagna Kanban
   map: Visualizzazione mappa
   table: Visualizzazione tabella

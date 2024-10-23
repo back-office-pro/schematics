@@ -12,7 +12,8 @@ module Schematics
       calendar: entity.start_date_attribute_name && entity.end_date_attribute_name,
       grid: entity.attachment_attributes.any?(&:image?),
       map: entity.address_attributes.any?,
-      table: true
+      table: true,
+      kanban: entity.enum_attributes.reject(&:readonly?).any?
     }.compact_blank.keys
 
     def viewer = current_user

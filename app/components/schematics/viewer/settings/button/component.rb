@@ -17,7 +17,8 @@ module Schematics
             table: :table,
             grid: :grip_vertical,
             calendar: :calendar_days,
-            map: :map_location_dot
+            map: :map_location_dot,
+            kanban: :table_columns
           }[@viewer]
 
           def data = {

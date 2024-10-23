@@ -5,28 +5,32 @@ import Sortable from 'sortablejs'
 
 export default class extends ApplicationController {
   static get values () {
-    return { group: { type: String } }
+    return {
+      group: { type: String },
+      targets: { type: Array, default: [] }
+    }
   }
 
   connect () {
     Sortable.create(this.element, this.options)
   }
 
+  save (sortable) {
+    if (this.groupValue !== '') {
+      const preferences = { [this.groupValue]: sortable.toArray() }
+      this.fetchAPI(routes.preferences, 'PUT', { user: { preferences } })
+    }
+  }
+
   get options () {
     return {
-      filter: 'input',
+      filter: '.sortable-disabled, input',
       draggable: '.cursor-grab',
       preventOnFilter: false,
       animation: 150,
-      group: this.groupValue,
-      store: {
-        set: (sortable) => {
-          if (this.groupValue !== '') {
-            const preferences = { [this.groupValue]: sortable.toArray() }
-            this.fetchAPI(routes.preferences, 'PUT', { user: { preferences } })
-          }
-        }
-      }
+      ghostClass: 'opacity-50',
+      group: { name: this.groupValue, put: this.targetsValue },
+      store: { set: this.save.bind(this) }
     }
   }
 }

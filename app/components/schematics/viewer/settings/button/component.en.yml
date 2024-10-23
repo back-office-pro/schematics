@@ -2,5 +2,6 @@
 en:
   calendar: Calendar view
   grid: Grid view
+  kanban: Kanban view
   map: Map view
   table: Table view

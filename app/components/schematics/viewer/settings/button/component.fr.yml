@@ -2,5 +2,6 @@
 fr:
   calendar: Affichage en calendrier
   grid: Affichage en grille
+  kanban: Affichage en tableau Kanban
   map: Affichage en carte
   table: Affichage en tableau
