@@ -10,6 +10,7 @@ RSpec.describe User do
 
   its(:preferences_charts) { is_expected.to be_empty }
   its(:preferences_metrics) { is_expected.to be_empty }
+  its(:preferences_rankings) { is_expected.to be_empty }
 
   it 'sends a mail after create' do
     expect { record.save! }
