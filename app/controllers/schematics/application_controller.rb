@@ -19,7 +19,12 @@ module Schematics
 
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
-    allow_browser versions: :modern
+    # TODO: use a named block on Rails 8
+    allow_browser versions: :modern, block: lambda {
+      render 'schematics/exception/unsupported_browser',
+             status: :not_acceptable,
+             layout: 'schematics/jumbotron'
+    }
 
     def paper_trail_enabled_for_controller
       current_user in ::User

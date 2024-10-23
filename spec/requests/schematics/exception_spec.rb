@@ -14,15 +14,6 @@ RSpec.describe 'Exception' do
     its(:body) { is_expected.to eq('null') }
   end
 
-  describe '406' do
-    let(:do_request) { get(unsupported_browser_path, headers:) }
-
-    before { do_request }
-
-    it { is_expected.to have_http_status(:not_acceptable) }
-    its(:body) { is_expected.to eq('null') }
-  end
-
   describe '500' do
     let(:do_request) { get(internal_server_error_path, headers:) }
 

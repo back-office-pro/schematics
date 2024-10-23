@@ -13,10 +13,6 @@ module Schematics
       respond_with nil, status: :service_unavailable
     end
 
-    def unsupported_browser
-      respond_with nil, status: :not_acceptable
-    end
-
     def not_found
       respond_with nil, status: :not_found
     end
