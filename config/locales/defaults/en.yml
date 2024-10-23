@@ -56,6 +56,7 @@ en:
   line: Line %{line}
   of: of
   prompt: Select a %{attribute_name}
+  since: since one
   time:
     formats:
       long: "%A %d %B, %Y at %H:%M"

@@ -62,6 +62,7 @@ it:
   line: Linea %{line}
   of: di
   prompt: Selezionare @{f:una |m:un |fv:un'|mv:un'|un(a) }%{attribute_name}
+  since: da un(a)
   time:
     formats:
       long: "%A %d %B %Y alle %H:%M"

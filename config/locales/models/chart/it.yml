@@ -7,6 +7,7 @@ it:
         color: Colore
         kind: Tipo
         model: Data
+        period: Periodo
         roles:
           one: Ruolo
           other: Ruoli
@@ -30,6 +31,13 @@ it:
           line: Grafico a linee
           pie: Grafico a torta
           scatter: Grafico a dispersione
+        period:
+          day: Giorno
+          hour: Ora
+          minute: Minuto
+          month: Mese
+          week: Settimana
+          year: Anno
         size:
           extra_large: Molto grande
           large: Grande

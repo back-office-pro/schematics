@@ -738,6 +738,21 @@
           "required": true,
           "depends_on": "model"
         }
+      },
+      {
+        "id": "89cf4566-db4c-4412-b5b6-cbb43dfbd6f8",
+        "name": "period",
+        "type": "enum",
+        "options": {
+          "values": [
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "year"
+          ]
+        }
       }
     ]
   },

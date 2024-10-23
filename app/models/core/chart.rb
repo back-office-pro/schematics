@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Chart < Schematics::ApplicationRecord
-  delegate :entity, to: :model_class, allow_nil: true, private: true
-  delegate :find_field_by_name, to: :entity, allow_nil: true
-  scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
+  include ::Core::Measurable
 
+  scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
   attribute :color, default: -> { ::Configuration.theme_color }
 
   class << self
@@ -41,10 +40,6 @@ class Chart < Schematics::ApplicationRecord
     }[kind.to_sym]
   end
 
-  def model_class
-    model.safe_constantize
-  end
-
   def colors = color
     .dup
     .paint
@@ -56,6 +51,7 @@ class Chart < Schematics::ApplicationRecord
 
     model_class
       .preload_all
+      .where(created_at: period_range)
       .public_send(entity_x_field.group_method, entity_x_field.to_sql)
       .public_send(aggregate.to_sym, entity_y_field&.to_sql || :all)
       .to_h do |key, value|
@@ -74,7 +70,13 @@ class Chart < Schematics::ApplicationRecord
   def to_s
     return I18n.t('errors.virtuals.name', name: model) unless model_class
 
-    [ytitle, I18n.t('by'), xtitle&.downcase].compact.join(' ')
+    [
+      ytitle,
+      I18n.t('by'),
+      xtitle&.downcase,
+      (I18n.t('since') if period),
+      period_formatted&.downcase
+    ].compact.join(' ')
   end
 
   def type = :"#{kind}_chart"
@@ -86,25 +88,11 @@ class Chart < Schematics::ApplicationRecord
     model_class.human_attribute_name(entity_x_field.name)
   end
 
-  def ytitle
-    return unless model_class
-
-    [
-      aggregate_formatted,
-      I18n.t('of'),
-      (model_class.human_attribute_name(entity_y_field.name).pluralize.downcase if entity_y_field),
-      (I18n.t('of') if entity_y_field),
-      model_class.human_name_plural
-    ].compact.join(' ')
-  end
+  def ytitle = title_for(entity_y_field)
 
   private
 
-  def entity_x_field
-    x_field && find_field_by_name(x_field.split('#').last)
-  end
+  def entity_x_field = find_entity_field(x_field)
 
-  def entity_y_field
-    y_field && find_field_by_name(y_field.split('#').last)
-  end
+  def entity_y_field = find_entity_field(y_field)
 end

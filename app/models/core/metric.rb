@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 class Metric < Schematics::ApplicationRecord
-  delegate :entity, to: :model_class, allow_nil: true, private: true
-  delegate :find_field_by_name, to: :entity, allow_nil: true
-  delegate :to_sql, :format, to: :entity_field, allow_nil: true
+  include ::Core::Measurable
 
+  delegate :to_sql, :format, to: :entity_field, allow_nil: true, private: true
   scope :accessible_by_role, ::Core::Metrics::AccessibleByRoleQuery
-
-  def model_class
-    model.safe_constantize
-  end
-
-  def icon
-    entity&.icon || :triangle_exclamation
-  end
 
   def to_s
     title || I18n.t('errors.virtuals.name', name: model)
@@ -46,30 +37,18 @@ class Metric < Schematics::ApplicationRecord
 
   private
 
-  def period_range
-    return ..Time.current unless period
-
-    1.public_send(period).ago..
-  end
-
   def trend_range
     2.public_send(period || :weeks).ago..1.public_send(period || :week).ago
   end
 
-  def entity_field
-    field && find_field_by_name(field.split('#').last)
-  end
+  def entity_field = find_entity_field(field)
 
   def title
     return unless model_class
 
     [
-      aggregate_formatted,
-      I18n.t('of'),
-      (model_class.human_attribute_name(entity_field.name).pluralize.downcase if entity_field),
-      (I18n.t('of') if entity_field),
-      model_class.human_name_plural,
-      (I18n.t('by') if period),
+      title_for(entity_field),
+      (I18n.t('since') if period),
       period_formatted&.downcase
     ].compact.join(' ')
   end

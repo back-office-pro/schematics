@@ -62,7 +62,8 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         aggregate: 'average',
         model: 'APIRequest',
         x_field: 'APIRequest#endpoint',
-        y_field: 'APIRequest#response_time'
+        y_field: 'APIRequest#response_time',
+        period: 'month'
       },
       {
         kind: 'column',

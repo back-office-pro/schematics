@@ -60,6 +60,7 @@ fr:
   line: Ligne %{line}
   of: des
   prompt: Sélectionner @{f:une|m:un|fv:une|mv:un|un(e)} %{attribute_name}
+  since: depuis un(e)
   time:
     formats:
       long: "%A %d %B %Y à %H:%M"
