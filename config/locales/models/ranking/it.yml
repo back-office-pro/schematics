@@ -1,0 +1,35 @@
+---
+it:
+  activerecord:
+    attributes:
+      ranking:
+        aggregate: Aggregato
+        aggregate_field: Attributo di aggregato
+        model: Data
+        model_field: Attributo di data
+        period: Periodo
+        roles:
+          one: Ruolo
+          other: Ruoli
+          zero: Nessun ruolo
+        size: Dimensione
+    enums:
+      ranking:
+        aggregate:
+          average: Media
+          count: Totale
+          maximum: Massimo
+          minimum: Minimo
+          sum: Somma
+        period:
+          day: Giorno
+          hour: Ora
+          minute: Minuto
+          month: Mese
+          week: Settimana
+          year: Anno
+    models:
+      ranking:
+        gender: female
+        one: Classifica
+        other: Classifiche

@@ -1,0 +1,35 @@
+---
+en:
+  activerecord:
+    attributes:
+      ranking:
+        aggregate: Aggregate
+        aggregate_field: Aggregate attribute
+        model: Data
+        model_field: Data attribute
+        period: Period
+        roles:
+          one: Role
+          other: Roles
+          zero: No role
+        size: Size
+    enums:
+      ranking:
+        aggregate:
+          average: Average
+          count: Count
+          maximum: Maximum
+          minimum: Minimum
+          sum: Sum
+        period:
+          day: Day
+          hour: Hour
+          minute: Minute
+          month: Month
+          week: Week
+          year: Year
+    models:
+      ranking:
+        gender: male
+        one: Ranking
+        other: Rankings
