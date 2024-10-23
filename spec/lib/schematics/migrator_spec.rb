@@ -15,6 +15,7 @@ describe Schematics::Migrator do
       comparison
       pdf_template
       data_cleaning
+      ranking
     ]
   end
 
@@ -221,7 +222,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[chart client]) }
+      it { is_expected.to eq(%w[chart ranking client]) }
     end
   end
 
@@ -303,7 +304,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[chart client]) }
+      it { is_expected.to eq(%w[chart ranking client]) }
     end
   end
 
@@ -621,7 +622,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[chart client]) }
+      it { is_expected.to eq(%w[chart ranking client]) }
     end
   end
 
@@ -1381,7 +1382,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[chart client]) }
+      it { is_expected.to eq(%w[chart ranking client]) }
     end
   end
 
@@ -1445,7 +1446,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[chart client]) }
+      it { is_expected.to eq(%w[chart ranking client]) }
     end
   end
 
@@ -1517,7 +1518,7 @@ describe Schematics::Migrator do
     describe '#changed_entities' do
       subject { migration.changed_entities.map(&:name) }
 
-      it { is_expected.to eq(%w[chart client]) }
+      it { is_expected.to eq(%w[chart ranking client]) }
     end
   end
 
