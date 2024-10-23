@@ -5,10 +5,10 @@
       tr colspan='100%'
         - values.each do |value|
           td
-            .card.kanban-card.shadow-sm.animate__animated.animate__zoomIn
-              .card-header.p-1.bg-body-tertiary.text-center
+            .card.kanban-card.bg-body-tertiary.shadow-sm.animate__animated.animate__zoomIn
+              .card-header.p-1.text-center
                 = __card_heading(icon: :clipboard_check, title: format(value))
-              .card-body.bg-body-tertiary.py-0 {
+              .card-body.py-0 {
                 data-controller='kanban'
                 data-kanban-group-value=value
                 data-kanban-targets-value=values.excluding(value)

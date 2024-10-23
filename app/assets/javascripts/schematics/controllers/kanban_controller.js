@@ -8,9 +8,7 @@ export default class extends SortableController {
     })
   }
 
-  save (_sortable) {
-    // do nothing
-  }
+  save (_) {}
 
   async #move ({ from, to, item, clone }) {
     const value = to.getAttribute('data-kanban-group-value')
