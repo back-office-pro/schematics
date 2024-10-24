@@ -50,11 +50,10 @@ module Schematics
                     .tap { _1.merge!(allow_blank:) if _1.any? }
       )
 
-      def default
-        return ::Time.current.tomorrow.to_fs(:db) if options.greater_than
-
-        ::Time.current.to_fs(:db)
-      end
+      def default = ::Time
+        .current
+        .then_tap { _1.tomorrow if options.greater_than || options.greater_than_or_equal_to }
+        .to_fs(:db)
 
       protected
 
