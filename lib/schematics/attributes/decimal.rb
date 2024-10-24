@@ -26,7 +26,9 @@ module Schematics
         10**(precision - scale.to_i)
       end
 
-      def default = '9.99'
+      def default
+        super&.to_s || '9.99'
+      end
 
       def open_api_type = ::Float
 

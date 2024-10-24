@@ -65,6 +65,12 @@ module Schematics
             is_expected
               .to validate_numericality_of(attribute.name.to_sym)
                 .tap { _1.allow_nil unless attribute.required? }
+                .tap { _1.is_equal_to(attribute.equal_to) if attribute.equal_to }
+                .tap { _1.is_less_than(attribute.less_than) if attribute.less_than }
+                .tap { _1.is_other_than(attribute.other_than) if attribute.other_than }
+                .tap { _1.is_greater_than(attribute.greater_than) if attribute.greater_than }
+                .tap { _1.is_less_than_or_equal_to(attribute.less_than_or_equal_to) if attribute.less_than_or_equal_to } # rubocop:disable Layout/LineLength
+                .tap { _1.is_greater_than_or_equal_to(attribute.greater_than_or_equal_to) if attribute.greater_than_or_equal_to } # rubocop:disable Layout/LineLength
           end
         end
 

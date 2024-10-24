@@ -21,7 +21,7 @@ module Schematics
 
       def database_type = 'float'
 
-      def default = 1.5
+      def default = super.to_f
 
       def open_api_type = ::Float
     end

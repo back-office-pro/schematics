@@ -17,7 +17,7 @@ module Schematics
 
       def database_type = 'integer'
 
-      def default = 1
+      def default = super.to_i
 
       def open_api_type = ::Integer
 

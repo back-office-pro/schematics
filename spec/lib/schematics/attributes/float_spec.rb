@@ -29,7 +29,7 @@ describe Schematics::Attributes::Float do
   it { is_expected.to be_a(Schematics::Behaviours::Incrementable) }
 
   its(:database_type) { is_expected.to eq('float') }
-  its(:default) { is_expected.to eq(1.5) }
+  its(:default) { is_expected.to be_zero }
   its(:column_name) { is_expected.to eq('weight') }
   its(:open_api_type) { is_expected.to eq(Float) }
   its(:open_api_filter_type) { is_expected.to eq(Float) }

@@ -6,7 +6,7 @@ RSpec.describe Metric do
   include Schematics::Specs::Model
 
   it { is_expected.to be_a(Core::Measurable) }
-  it { is_expected.not_to be_exceeded }
+  it { is_expected.to be_exceeded }
 
   its(:model_class) { is_expected.to eq(User) }
   its(:to_s) { is_expected.to eq('Count of users since one minute') }

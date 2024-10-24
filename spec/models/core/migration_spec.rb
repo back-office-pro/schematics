@@ -7,14 +7,14 @@ RSpec.describe Migration do
 
   its(:locale) { is_expected.to eq('en') }
   its(:migrator) { is_expected.to be_a(Schematics::Migrator) }
-  its(:commit_message) { is_expected.to eq('Migration v1.5 (core v1.0.0)') }
+  its(:commit_message) { is_expected.to eq('Migration v0.0 (core v1.0.0)') }
 
   its(:to_yaml) do
     is_expected.to eq <<~YAML
       ---
       one:
         state: finished
-        version: 1.5
+        version: 0.0
         data: []
     YAML
   end
@@ -78,7 +78,7 @@ RSpec.describe Migration do
     before { record.state_finished! }
 
     it { is_expected.to be_a(described_class) }
-    its(:version) { is_expected.to eq(1.5) }
+    its(:version) { is_expected.to be_zero }
   end
 
   describe '.current' do

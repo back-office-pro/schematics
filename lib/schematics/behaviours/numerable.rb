@@ -5,7 +5,16 @@ require 'active_model/validations/comparability'
 module Schematics
   module Behaviours
     module Numerable
-      delegate :unit, :precision, :separator, to: :options
+      delegate :unit,
+               :precision,
+               :separator,
+               :greater_than,
+               :greater_than_or_equal_to,
+               :less_than,
+               :less_than_or_equal_to,
+               :equal_to,
+               :other_than,
+               to: :options
 
       def available_options = super.push(
         Options::GreaterThan,
@@ -15,6 +24,14 @@ module Schematics
         Options::LessThanOrEqualTo,
         Options::OtherThan
       )
+
+      def default
+        equal_to ||
+          greater_than_or_equal_to ||
+          greater_than&.next ||
+          less_than_or_equal_to ||
+          less_than&.pred
+      end
 
       # :reek:NilCheck
       def format(value)

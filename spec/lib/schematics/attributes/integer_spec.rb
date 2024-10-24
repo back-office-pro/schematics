@@ -29,7 +29,7 @@ describe Schematics::Attributes::Integer do
   it { is_expected.to be_a(Schematics::Behaviours::Incrementable) }
 
   its(:database_type) { is_expected.to eq('integer') }
-  its(:default) { is_expected.to eq(1) }
+  its(:default) { is_expected.to be_zero }
   its(:column_name) { is_expected.to eq('price') }
   its(:open_api_type) { is_expected.to eq(Integer) }
   its(:open_api_filter_type) { is_expected.to eq(Integer) }

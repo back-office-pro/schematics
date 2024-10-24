@@ -10,10 +10,12 @@ module Schematics
                    :less_than,
                    :less_than_or_equal_to,
                    :equal_to,
-                   to: :options,
+                   :precision,
+                   :unit,
+                   to: :field,
                    private: true
 
-          def step = (10**-field.precision.to_i).to_f
+          def step = (10**-precision.to_i).to_f
 
           def min
             equal_to || greater_than_or_equal_to || greater_than
@@ -26,7 +28,7 @@ module Schematics
           def prepend
             return if inline?
 
-            field.unit || super
+            unit || super
           end
         end
       end
