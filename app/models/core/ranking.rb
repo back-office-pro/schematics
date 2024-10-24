@@ -18,20 +18,14 @@ class Ranking < Schematics::ApplicationRecord
   def to_s
     return I18n.t('errors.virtuals.name', name: model) unless model_class
 
-    [
-      aggregate_title,
-      I18n.t('by'),
-      model_title&.downcase,
-      (I18n.t('since') if period),
-      period_formatted&.downcase
-    ].compact.join(' ')
+    [aggregate_title, model_title, period_title].compact.join(' ')
   end
 
   def model_title
     return unless model_class
     return unless entity_model_field
 
-    model_class.human_attribute_name(entity_model_field.name)
+    [I18n.t('by'), model_class.human_attribute_name(entity_model_field.name).downcase].join(' ')
   end
 
   def aggregate_title = title_for(entity_aggregate_field)
