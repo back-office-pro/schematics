@@ -11,8 +11,8 @@ class Ranking < Schematics::ApplicationRecord
       &.where(created_at: period_range)
       &.group(entity_model_field.to_sql)
       &.public_send(aggregate.to_sym, entity_aggregate_field&.to_sql || :all)
-  #rescue ActiveRecord::StatementInvalid
-  #  []
+    # rescue ActiveRecord::StatementInvalid
+    #   []
   end
 
   def to_s
