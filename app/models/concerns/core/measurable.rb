@@ -25,6 +25,12 @@ module Core
       1.public_send(period).ago..
     end
 
+    def period_title
+      return unless period
+
+      [I18n.t('since'), period_formatted.downcase].join(' ')
+    end
+
     def title_for(field)
       return unless model_class
 

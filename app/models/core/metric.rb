@@ -46,11 +46,7 @@ class Metric < Schematics::ApplicationRecord
   def title
     return unless model_class
 
-    [
-      title_for(entity_field),
-      (I18n.t('since') if period),
-      period_formatted&.downcase
-    ].compact.join(' ')
+    [title_for(entity_field), period_title].compact.join(' ')
   end
 
   def comparator_sign

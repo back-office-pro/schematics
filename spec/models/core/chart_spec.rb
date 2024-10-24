@@ -16,7 +16,7 @@ RSpec.describe Chart do
   its(:suffix) { is_expected.to be_nil }
   its(:to_s) { is_expected.to eq('Count of users by identifier since one minute') }
   its(:type) { is_expected.to eq(:line_chart) }
-  its(:xtitle) { is_expected.to eq('Identifier') }
+  its(:xtitle) { is_expected.to eq('by identifier') }
   its(:ytitle) { is_expected.to eq('Count of users') }
   its(:serialized_json) { is_expected.to be_empty }
   its(:cached_serialized_json) { is_expected.to be_empty }
