@@ -13,7 +13,7 @@ module Schematics
       grid: entity.attachment_attributes.any?(&:image?),
       map: entity.address_attributes.any?,
       table: true,
-      kanban: entity.enum_attributes.none?(&:readonly?)
+      kanban: entity.enum_attributes.reject(&:readonly?).any?
     }.compact_blank.keys
 
     def viewer = current_user
