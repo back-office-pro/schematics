@@ -25,17 +25,14 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Documentation.create!
   Migration.default.save!
   User.create!(email: Subscription.email, password: Tenant.default_password, role: Role.admin)
-  Ranking.create!(
+  Ranking.create_without_validations(
     [
       {
-        aggregate: 'count',
-        model: 'Task',
-        model_field: 'Task#applicant'
-      },
-      {
-        aggregate: 'count',
-        model: 'Meeting',
-        model_field: 'Meeting#creator'
+        aggregate: 'average',
+        model: 'APIRequest',
+        model_field: 'APIRequest#endpoint',
+        aggregate_field: 'APIRequest#response_time',
+        period: 'month'
       }
     ]
   )
