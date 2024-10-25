@@ -25,12 +25,13 @@ module Schematics
         Options::OtherThan
       )
 
-      def default
+      def default # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         equal_to ||
           greater_than_or_equal_to ||
           greater_than&.next ||
           less_than_or_equal_to ||
-          less_than&.pred
+          less_than&.pred ||
+          other_than&.next
       end
 
       # :reek:NilCheck
