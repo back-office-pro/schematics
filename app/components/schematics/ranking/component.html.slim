@@ -2,11 +2,14 @@
   .card.shadow-sm.animate__animated.animate__zoomIn
     .card-header.px-1.py-2
       = __card_heading(icon:, title: @ranking)
-    .card-body.p-3
-      table.table.mb-0.table-striped.table-borderless
-        tbody
-          - values.each.with_index(1) do |value, index|
-            tr
-              td = index
-              td = model_field_formatted
-              td = value
+    .card-body.p-0
+      - if values.empty?
+        = __empty_resource
+      - else
+        table.table.mb-0.table-striped.table-borderless
+          tbody
+            - values.each.with_index(1) do |(resource, value), rank|
+              tr
+                th.text-center.text-primary = rank
+                td.text-center = resource
+                td.text-center = value
