@@ -46,17 +46,13 @@ class Chart < Schematics::ApplicationRecord
     .palette
     .analogous(as: :hex)
 
-  def serialized_json(*) # rubocop:disable Metrics/CyclomaticComplexity
-    return unless model_class
-
+  def serialized_json(*) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     model_class
-      .preload_all
-      .where(created_at: period_range)
-      .public_send(entity_x_field.group_method, entity_x_field.to_sql)
-      .public_send(aggregate.to_sym, entity_y_field&.to_sql || :all)
-      .to_h do |key, value|
-        [entity_x_field.format(key), entity_y_field&.format(value) || value]
-      end
+      &.preload_all
+      &.where(created_at: period_range)
+      &.public_send(entity_x_field.group_method, entity_x_field.to_sql)
+      &.public_send(aggregate.to_sym, entity_y_field&.to_sql || :all)
+      &.to_h { |key, value| [entity_x_field.format(key), entity_y_field&.format(value) || value] }
   rescue ActiveRecord::StatementInvalid
     nil
   end
