@@ -5,14 +5,18 @@ class Ranking < Schematics::ApplicationRecord
 
   scope :accessible_by_role, ::Core::Rankings::AccessibleByRoleQuery
 
-  def values
+  memoize def values # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     model_class
       &.preload_all
       &.where(created_at: period_range)
       &.group(entity_model_field.to_sql)
+      &.order(entity_model_field.to_sql => :desc)
       &.public_send(aggregate.to_sym, entity_aggregate_field&.to_sql || :all)
-    # rescue ActiveRecord::StatementInvalid
-    #   []
+      &.map do |field, value|
+        [entity_model_field.format(field), entity_aggregate_field&.format(value) || value]
+      end
+  rescue ActiveRecord::StatementInvalid
+    []
   end
 
   def to_s
