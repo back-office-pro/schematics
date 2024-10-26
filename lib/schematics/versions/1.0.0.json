@@ -2205,21 +2205,6 @@
     ],
     "attributes": [
       {
-        "id": "b7d261b1-cf3c-4008-88d4-321f2eb13efc",
-        "name": "aggregate",
-        "type": "enum",
-        "options": {
-          "required": true,
-          "values": [
-            "count",
-            "sum",
-            "maximum",
-            "minimum",
-            "average"
-          ]
-        }
-      },
-      {
         "id": "f12c9ba0-ac15-49a7-9671-27bf7a15758c",
         "name": "model",
         "type": "model",
@@ -2229,20 +2214,12 @@
       },
       {
         "id": "4869a534-5e7e-4513-80c8-3860bc3e95d2",
-        "name": "aggregate_field",
-        "type": "model_field",
-        "options": {
-          "depends_on": "model",
-          "type": "numerable_fields"
-        }
-      },
-      {
-        "id": "1fd14ddf-781c-4148-8c6f-e541cbe9adc1",
-        "name": "model_field",
+        "name": "field",
         "type": "model_field",
         "options": {
           "required": true,
-          "depends_on": "model"
+          "depends_on": "model",
+          "type": "numerable_fields"
         }
       },
       {
