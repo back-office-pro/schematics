@@ -3,40 +3,38 @@
 class Ranking < Schematics::ApplicationRecord
   include ::Core::Measurable
 
+  delegate :to_sql, :name, to: :entity_field, allow_nil: true, private: true
   scope :accessible_by_role, ::Core::Rankings::AccessibleByRoleQuery
 
-  memoize def values # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  memoize def resources(ability) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     model_class
       &.preload_all
+      &.accessible_by(ability)
       &.where(created_at: period_range)
-      &.group(entity_model_field.to_sql)
-      &.order(entity_model_field.to_sql => :desc)
-      &.public_send(aggregate.to_sym, entity_aggregate_field&.to_sql || :all)
-      &.map do |field, value|
-        [entity_model_field.format(field), entity_aggregate_field&.format(value) || value]
-      end
+      &.order(to_sql => :desc)
+      &.limit(size)
   rescue ActiveRecord::StatementInvalid
     []
   end
 
+  def field_name_formatted = :"#{name}_formatted"
+
   def to_s
-    return I18n.t('errors.virtuals.name', name: model) unless model_class
-
-    [aggregate_title, model_title, period_title].compact.join(' ')
+    title || I18n.t('errors.virtuals.name', name: model)
   end
-
-  def model_title
-    return unless model_class
-    return unless entity_model_field
-
-    [I18n.t('by'), model_class.human_attribute_name(entity_model_field.name).downcase].join(' ')
-  end
-
-  def aggregate_title = title_for(entity_aggregate_field)
 
   private
 
-  def entity_model_field = find_entity_field(model_field)
+  def entity_field = find_entity_field(field)
 
-  def entity_aggregate_field = find_entity_field(aggregate_field)
+  def title
+    return unless model_class
+
+    [
+      (model_class.human_attribute_name(name) if entity_field),
+      (I18n.t('of') if entity_field),
+      model_class.human_name_plural,
+      period_title
+    ].compact.join(' ')
+  end
 end
