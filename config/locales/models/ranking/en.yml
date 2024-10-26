@@ -3,10 +3,8 @@ en:
   activerecord:
     attributes:
       ranking:
-        aggregate: Aggregate
-        aggregate_field: Aggregate attribute
+        field: Attribute
         model: Data
-        model_field: Data attribute
         period: Period
         roles:
           one: Role
