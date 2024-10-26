@@ -3,13 +3,13 @@
     .card-header.px-1.py-2
       = __card_heading(icon:, title: @ranking)
     .card-body.p-0
-      - if values.empty?
+      - if resources.empty?
         = __empty_resource
       - else
         table.table.mb-0.table-striped.table-borderless
           tbody
-            - values.each.with_index(1) do |(resource, value), rank|
+            - resources.each.with_index(1) do |resource, rank|
               tr
                 th.text-center.text-primary = rank
-                td.text-center = resource
-                td.text-center = value
+                td.text-center = __resource_link_to(resource:)
+                td.text-center = resource.public_send(field_name_formatted)

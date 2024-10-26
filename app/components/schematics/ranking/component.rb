@@ -3,10 +3,8 @@
 module Schematics
   module Ranking
     class Component < ApplicationComponent
-      delegate :id, :icon, :values, to: :@ranking
+      delegate :id, :icon, :resources, :field_name_formatted, to: :@ranking
       with_collection_parameter :ranking
-
-      attr_reader :ranking
 
       def initialize(ranking:)
         super
