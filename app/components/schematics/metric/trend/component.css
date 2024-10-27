@@ -1,0 +1,29 @@
+@property --percentage {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --v1 {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --v2 {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.count-up {
+  --v1: calc(var(--percentage) - 0.5);
+  --v2: calc((var(--percentage) - var(--v1)) * 10 - 0.5);
+
+  counter-reset: v1 var(--v1) v2 var(--v2);
+  transition: --percentage 3s;
+}
+
+.count-up::before {
+  content: counter(v1) '.' counter(v2, decimal) '%';
+}

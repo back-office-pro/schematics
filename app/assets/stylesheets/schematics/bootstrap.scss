@@ -1,3 +1,5 @@
+/* stylelint-disable scss/at-extend-no-missing-placeholder */
+
 $secondary: #95a5a6;
 $focus-ring-box-shadow: none;
 $input-padding-y: .5rem;
@@ -15,11 +17,11 @@ $popover-body-padding-y: 0;
 $popover-body-padding-x: 0;
 $card-border-width: 0;
 $dropdown-border-width: 0;
-$input-border-width: 0px; // scss-lint:disable ZeroUnit
+$input-border-width: 0px;
 $btn-border-width: 0;
 $accordion-border-width: 0;
 $offcanvas-border-width: 0;
-$toast-border-width: 0rem; // scss-lint:disable ZeroUnit
+$toast-border-width: 0rem;
 $modal-content-border-width: 0;
 $modal-header-border-width: 0;
 $modal-footer-border-width: 0;
@@ -28,13 +30,11 @@ $list-group-border-width: 0;
 $form-select-border-width: 0;
 $alert-border-width: 0;
 $nav-tabs-border-width: 0;
-
 $font-size-root: 12px;
 $enable-caret: false;
 $badge-padding-y: .25em;
 $badge-padding-x: .5em;
 $zindex-dropdown: 1035;
-
 $card-cap-bg: none;
 $input-bg: $input-group-addon-bg;
 $input-focus-bg: $input-group-addon-bg;
@@ -104,6 +104,7 @@ ul.list-group.list-group-striped li:nth-of-type(even) {
     @extend .border-0;
     @extend .text-start;
     @extend .text-truncate;
+
     cursor: pointer;
   }
 }
@@ -166,7 +167,7 @@ input:-webkit-autofill:focus {
     }
   }
 
-  a:not(.nav-link):not(.text-danger),
+  a:not(.nav-link, .text-danger),
   .btn-link,
   .text-primary {
     @extend .text-white;

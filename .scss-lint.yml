@@ -1,9 +1,0 @@
-scss_files: 'app/**/*.scss'
-
-linters:
-  ImportantRule:
-    enabled: false
-  QualifyingElement:
-    enabled: false
-  PlaceholderInExtend:
-    enabled: false

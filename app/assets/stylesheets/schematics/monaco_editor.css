@@ -1,0 +1,7 @@
+.monaco-editor {
+  --vscode-editor-background: transparent !important;
+  --vscode-editorGutter-background: transparent !important; /* stylelint-disable-line custom-property-pattern */
+  --vscode-focusBorder: transparent !important; /* stylelint-disable-line custom-property-pattern */
+
+  height: 250px !important;
+}

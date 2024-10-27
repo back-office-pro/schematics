@@ -31,16 +31,18 @@ jobs:
           bundler-cache: true
       - name: Run Slim lint
         run: bundle exec slim-lint
-  scss_lint:
-    name: SCSS lint
+  stylelint:
+    name: Stylelint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/setup-node@v4
         with:
-          bundler-cache: true
-      - name: Run SCSS lint
-        run: bundle exec scss-lint
+          cache: yarn
+      - name: Install dependencies
+        run: yarn --immutable --immutable-cache --check-cache
+      - name: Run stylelint
+        run: yarn stylelint
   i18n:
     name: i18n lint
     runs-on: ubuntu-latest
@@ -57,10 +59,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - name: Install standard
-        run: yarn global add standard
+        with:
+          cache: yarn
+      - name: Install dependencies
+        run: yarn --immutable --immutable-cache --check-cache
       - name: Run standard
-        run: standard
+        run: yarn lint
   rspec:
     name: RSpec
     runs-on: ubuntu-latest

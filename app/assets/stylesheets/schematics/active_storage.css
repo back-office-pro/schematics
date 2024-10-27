@@ -1,4 +1,4 @@
-.attachment--preview {
+.attachment--preview { /* stylelint-disable-line selector-class-pattern */
   margin: .6em 0;
   text-align: center;
   width: 100%;

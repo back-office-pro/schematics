@@ -75,12 +75,13 @@
   right: auto;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   ul.timeline::before {
     left: 45.5px;
   }
 
   ul.timeline > li > .card {
+    float: right;
     width: calc(100% - 90px);
   }
 
@@ -88,10 +89,6 @@
     left: 15px;
     margin-left: 0;
     top: 16px;
-  }
-
-  ul.timeline > li > .card {
-    float: right;
   }
 
   ul.timeline > li > .card::after {

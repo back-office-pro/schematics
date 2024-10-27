@@ -1,4 +1,7 @@
-@import 'trix';
+.trix-content action-text-attachment .attachment {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
 
 .trix-content .attachment-gallery > action-text-attachment,
 .trix-content .attachment-gallery > .attachment {
@@ -7,17 +10,12 @@
   padding: 0 .5em;
 }
 
-.trix-content .attachment-gallery.attachment-gallery--2 > action-text-attachment,
-.trix-content .attachment-gallery.attachment-gallery--2 > .attachment,
-.trix-content .attachment-gallery.attachment-gallery--4 > action-text-attachment,
-.trix-content .attachment-gallery.attachment-gallery--4 > .attachment {
+.trix-content .attachment-gallery.attachment-gallery--2 > action-text-attachment, /* stylelint-disable-line selector-class-pattern */
+.trix-content .attachment-gallery.attachment-gallery--2 > .attachment, /* stylelint-disable-line selector-class-pattern */
+.trix-content .attachment-gallery.attachment-gallery--4 > action-text-attachment, /* stylelint-disable-line selector-class-pattern */
+.trix-content .attachment-gallery.attachment-gallery--4 > .attachment { /* stylelint-disable-line selector-class-pattern */
   flex-basis: 50%;
   max-width: 50%;
-}
-
-.trix-content action-text-attachment .attachment {
-  max-width: 100% !important;
-  padding: 0 !important;
 }
 
 trix-toolbar {

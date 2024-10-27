@@ -1,5 +1,7 @@
 $flag-icons-path: 'flag-icons/flags';
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+
+@import 'trix';
 @import 'action_text';
 @import 'active_storage';
 @import 'bootstrap';
@@ -11,6 +13,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'rails_bootstrap_forms';
 @import 'timeline';
 @import 'tom_select';
+@import 'swagger-ui-dist/swagger-ui';
+@import 'swagger-ui-themes/themes/3.x/theme-flattop';
+@import 'animate.css/animate';
 @import 'swagger';
 @import 'monaco_editor';
 @import 'avatar/component';
@@ -59,7 +64,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .content {
     flex: 0 0 calc(100% - 6rem);
     max-width: calc(100% - 6rem);
@@ -75,7 +80,7 @@ body {
   padding: 0;
 
   .icon {
-    background: rgba(0, 0 , 0, .15); // scss-lint:disable ColorVariable
+    background: rgb(0 0 0 / 15%);
     border-radius: .25rem;
     display: inline-block;
     padding: .375rem .75rem;
@@ -93,19 +98,19 @@ body {
 
 // Tooltips
 
-@media (min-width: 992px) {
+@media (width > 992px) {
   .responsive-button-tooltip-lg {
     display: none;
   }
 }
 
-@media (min-width: 1200px) {
+@media (width > 1200px) {
   .responsive-button-tooltip-xl {
     display: none;
   }
 }
 
-@media (min-width: 1400px) {
+@media (width > 1400px) {
   .responsive-button-tooltip-xxl {
     display: none;
   }
@@ -131,27 +136,27 @@ a[role="button"].disabled .text {
 }
 
 button[disabled] .icon.d-none,
-button[disabled]:not(:has(.d-lg-inline)):not(:has(.d-xl-inline)):not(:has(.d-xxl-inline)) .text.d-none,
+button[disabled]:not(:has(.d-lg-inline), :has(.d-xl-inline), :has(.d-xxl-inline)) .text.d-none,
 a[role="button"].disabled .icon.d-none,
-a[role="button"].disabled:not(:has(.d-lg-inline)):not(:has(.d-xl-inline)):not(:has(.d-xxl-inline)) .text.d-none {
+a[role="button"].disabled:not(:has(.d-lg-inline), :has(.d-xl-inline), :has(.d-xxl-inline)) .text.d-none {
   display: initial !important;
 }
 
-@media (min-width: 992px) {
+@media (width > 992px) {
   button[disabled]:has(.d-lg-inline) .text.d-none:not(.d-lg-inline),
   a[role="button"].disabled:has(.d-lg-inline) .text.d-none:not(.d-lg-inline) {
     display: initial !important;
   }
 }
 
-@media (min-width: 1200px) {
+@media (width > 1200px) {
   button[disabled]:has(.d-xl-inline) .text.d-none:not(.d-xl-inline),
   a[role="button"].disabled:has(.d-xl-inline) .text.d-none:not(.d-xl-inline) {
     display: initial !important;
   }
 }
 
-@media (min-width: 1400px) {
+@media (width > 1400px) {
   button[disabled]:has(.d-xxl-inline) .text.d-none:not(.d-xxl-inline),
   a[role="button"].disabled:has(.d-xxl-inline) .text.d-none:not(.d-xxl-inline) {
     display: initial !important;
