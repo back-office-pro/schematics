@@ -1,3 +1,5 @@
+scss_files: 'app/**/*.scss'
+
 linters:
   ImportantRule:
     enabled: false

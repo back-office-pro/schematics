@@ -40,7 +40,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Run SCSS lint
-        run: bundle exec scss-lint app
+        run: bundle exec scss-lint
   i18n:
     name: i18n lint
     runs-on: ubuntu-latest
