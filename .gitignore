@@ -9,7 +9,6 @@
 /config/credentials/standalone.key
 /node_modules
 /Gemfile.lock
-/yarn.lock
 /schematics-*.gem
 /vendor
 /tmp
