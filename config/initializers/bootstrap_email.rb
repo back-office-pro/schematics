@@ -3,15 +3,8 @@
 require 'bootstrap-email'
 
 BootstrapEmail.configure do |config|
-  config.sass_email_location = Schematics::Engine.root.join(
-    'app',
-    'assets',
-    'stylesheets',
-    'bootstrap-email',
-    'mailer.scss'
-  )
-  config.sass_load_paths = [
-    Schematics::Engine.root.join('node_modules'),
-    Schematics::Engine.root.join('app', 'assets', 'stylesheets', 'schematics')
-  ]
+  config.sass_email_string = <<~SCSS
+    $primary: #2c3e50;
+    @import 'bootstrap-email';
+  SCSS
 end
