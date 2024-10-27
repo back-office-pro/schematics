@@ -30,7 +30,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Run Slim lint
-        run: bundle exec slim-lint app
+        run: bundle exec slim-lint
   scss_lint:
     name: SCSS lint
     runs-on: ubuntu-latest
