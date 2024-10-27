@@ -6,7 +6,7 @@ class Ranking < Schematics::ApplicationRecord
   delegate :to_sql, :name, to: :entity_field, allow_nil: true, private: true
   scope :accessible_by_role, ::Core::Rankings::AccessibleByRoleQuery
 
-  memoize def resources(ability) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  memoize def resources(ability)
     model_class
       &.preload_all
       &.accessible_by(ability)
