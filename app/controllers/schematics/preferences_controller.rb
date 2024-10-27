@@ -42,7 +42,8 @@ module Schematics
       :sidebar_toggled,
       :theme,
       { metrics: [] },
-      { charts: [] }
+      { charts: [] },
+      { rankings: [] }
     ]
 
     def timeline_preferences = ::Tenant

@@ -1,0 +1,15 @@
+.col-xl-3.col-md-6.cursor-grab data-id=id
+  .card.shadow-sm.animate__animated.animate__zoomIn
+    .card-header.px-1.py-2
+      = __card_heading(icon:, title: @ranking)
+    .card-body.p-0
+      - if resources.empty?
+        = __empty_resource
+      - else
+        table.table.mb-0.table-striped.table-borderless
+          tbody
+            - resources.each.with_index(1) do |resource, rank|
+              tr
+                th.text-center.text-primary = rank
+                td.text-center = __resource_link_to(resource:)
+                td.text-center = resource.public_send(field_name_formatted)

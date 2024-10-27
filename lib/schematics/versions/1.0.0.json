@@ -2190,5 +2190,63 @@
         }
       }
     ]
+  },
+  {
+    "id": "b7b2d632-a6c4-40ba-bae9-0120e1910107",
+    "name": "ranking",
+    "options": {
+      "icon": "ranking_star"
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "roles"
+      }
+    ],
+    "attributes": [
+      {
+        "id": "f12c9ba0-ac15-49a7-9671-27bf7a15758c",
+        "name": "model",
+        "type": "model",
+        "options": {
+          "required": true
+        }
+      },
+      {
+        "id": "4869a534-5e7e-4513-80c8-3860bc3e95d2",
+        "name": "field",
+        "type": "model_field",
+        "options": {
+          "required": true,
+          "depends_on": "model",
+          "type": "numerable_fields"
+        }
+      },
+      {
+        "id": "da6702d2-a082-40e7-bdfa-e45da2acf4f2",
+        "name": "period",
+        "type": "enum",
+        "options": {
+          "values": [
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "year"
+          ]
+        }
+      },
+      {
+        "id": "e44fd390-692e-486a-ac38-a0ff2c19c268",
+        "name": "size",
+        "type": "integer",
+        "options": {
+          "greater_than_or_equal_to": 10,
+          "less_than_or_equal_to": 100,
+          "default": 10
+        }
+      }
+    ]
   }
 ]

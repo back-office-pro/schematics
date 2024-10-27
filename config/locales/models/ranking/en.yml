@@ -1,0 +1,27 @@
+---
+en:
+  activerecord:
+    attributes:
+      ranking:
+        field: Attribute
+        model: Data
+        period: Period
+        roles:
+          one: Role
+          other: Roles
+          zero: No role
+        size: Size
+    enums:
+      ranking:
+        period:
+          day: Day
+          hour: Hour
+          minute: Minute
+          month: Month
+          week: Week
+          year: Year
+    models:
+      ranking:
+        gender: male
+        one: Ranking
+        other: Rankings

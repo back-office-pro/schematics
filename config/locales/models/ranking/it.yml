@@ -1,0 +1,27 @@
+---
+it:
+  activerecord:
+    attributes:
+      ranking:
+        field: Attributo
+        model: Data
+        period: Periodo
+        roles:
+          one: Ruolo
+          other: Ruoli
+          zero: Nessun ruolo
+        size: Dimensione
+    enums:
+      ranking:
+        period:
+          day: Giorno
+          hour: Ora
+          minute: Minuto
+          month: Mese
+          week: Settimana
+          year: Anno
+    models:
+      ranking:
+        gender: female
+        one: Classifica
+        other: Classifiche

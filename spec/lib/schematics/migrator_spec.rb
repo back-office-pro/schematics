@@ -15,6 +15,7 @@ describe Schematics::Migrator do
       comparison
       pdf_template
       data_cleaning
+      ranking
     ]
   end
 

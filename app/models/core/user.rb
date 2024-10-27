@@ -12,6 +12,7 @@ class User < Schematics::ApplicationRecord
   store_accessor :preferences,
                  :charts,
                  :metrics,
+                 :rankings,
                  :sidebar_toggled,
                  :theme,
                  prefix: true
@@ -56,6 +57,8 @@ class User < Schematics::ApplicationRecord
   def preferences_charts = Array(super)
 
   def preferences_metrics = Array(super)
+
+  def preferences_rankings = Array(super)
 
   private
 
