@@ -13,12 +13,6 @@ en:
         size: Size
     enums:
       ranking:
-        aggregate:
-          average: Average
-          count: Count
-          maximum: Maximum
-          minimum: Minimum
-          sum: Sum
         period:
           day: Day
           hour: Hour

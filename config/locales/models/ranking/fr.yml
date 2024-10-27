@@ -13,12 +13,6 @@ fr:
         size: Taille
     enums:
       ranking:
-        aggregate:
-          average: Moyenne
-          count: Total
-          maximum: Maximum
-          minimum: Minimum
-          sum: Somme
         period:
           day: Jour
           hour: Heure

@@ -13,12 +13,6 @@ it:
         size: Dimensione
     enums:
       ranking:
-        aggregate:
-          average: Media
-          count: Totale
-          maximum: Massimo
-          minimum: Minimo
-          sum: Somma
         period:
           day: Giorno
           hour: Ora
