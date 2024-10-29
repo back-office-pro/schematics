@@ -3,6 +3,8 @@
 @import url('/@fortawesome/fontawesome-free/css/brands.css');
 @import url('/@fortawesome/fontawesome-free/css/solid.css');
 @import url('/@fortawesome/fontawesome-free/css/regular.css');
+@import url('/bootstrap/dist/css/bootstrap.css');
+@import url('/tom-select/dist/css/tom-select.bootstrap5.css');
 @import url('/rails_bootstrap_forms.css');
 @import url('/avatar/component.css');
 @import url('/navbar/component.css');

@@ -22,9 +22,8 @@ module Schematics
     def stylesheet_link_tags = Dir
       .glob(ASSETS_DIRECTORY.join('**', '*.css'))
       .map { _1[ASSETS_PATH, 1] }
-      .partition { _1 != 'schematics/application' }
-      .flatten(1)
-      .map { stylesheet_link_tag(_1, media: 'all', 'data-turbo-track': 'reload') }
+      .each_with_object(media: 'all', 'data-turbo-track': 'reload')
+      .map(&method(:stylesheet_link_tag))
       .join
 
     Dir
