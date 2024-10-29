@@ -9,6 +9,7 @@ module Schematics
           ::Import,
           ::Metric,
           ::Chart,
+          ::Ranking,
           ::Configuration,
           ::Role,
           ::APIKey,
