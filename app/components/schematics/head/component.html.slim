@@ -14,6 +14,8 @@ head
   = csp_meta_tag
   = __application_stylesheet_link
   = __favicon
+  - asset_paths.each do |path|
+    = stylesheet_link_tag path, media: 'all', 'data-turbo-track': 'reload'
   = stylesheet_link_tag 'schematics/application', media: 'all', 'data-turbo-track': 'reload'
   = __javascript_importmap
   = javascript_include_tag 'pagy.min', nonce: true
