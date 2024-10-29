@@ -1,0 +1,50 @@
+@import url('bootstrap/dist/css/bootstrap.css');
+@import url('tom-select/dist/css/tom-select.bootstrap5.css');
+
+html {
+  font-size: .75rem; /* $font-size-root */
+}
+
+.form-select {
+  border: 0; /* $form-select-border-width */
+  background-color: var(--bs-tertiary-bg); /* $form-select-bg */
+}
+
+.form-control {
+  border: 0; /* $input-border-width */
+  padding: .5rem; /* $input-padding-y $input-padding-x */
+  background-color: var(--bs-tertiary-bg); /* $input-bg */
+
+  &:focus {
+    box-shadow: none; /* $focus-ring-box-shadow */
+    background-color: var(--bs-tertiary-bg); /* $input-focus-bg */
+  }
+}
+
+.form-floating > label {
+  border: 0; /* $input-border-width */
+}
+
+.form-floating > .form-control-plaintext ~ label::after,
+.form-floating > .form-select ~ label::after,
+.form-floating > .form-control:focus ~ label::after,
+.form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+  background-color: var(--bs-tertiary-bg); /* $input-bg */
+}
+
+.form-check-input:focus {
+  box-shadow: none; /* $focus-ring-box-shadow */
+}
+
+.dropdown-toggle::after {
+  content: none; /* $enable-caret */
+}
+
+.input-group-text {
+  border: 0; /* $input-border-width */
+  padding: .5rem .75rem; /* $input-group-addon-padding-x */
+}
+
+.nav-link:focus-visible {
+  box-shadow: none; /* $focus-ring-box-shadow */
+}
