@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "lint": "./node_modules/.bin/standard",
-    "stylelint": "./node_modules/.bin/stylelint app/**/*.{css,scss}"
+    "stylelint": "./node_modules/.bin/stylelint app/**/*.css"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.6.0",
@@ -28,13 +28,12 @@
   "devDependencies": {
     "standard": "17.1.2",
     "stylelint": "16.10.0",
-    "stylelint-config-standard": "36.0.1",
-    "stylelint-config-standard-scss": "13.1.0"
+    "stylelint-config-standard": "36.0.1"
   },
   "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-standard-scss"
-    ]
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "import-notation": "url"
+    }
   }
 }
