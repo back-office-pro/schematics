@@ -14,6 +14,13 @@ RSpec.describe Configuration do
     expect(BootstrapEmail).to have_received(:clear_sass_cache!)
   end
 
+  it 'updates bootstrap email config after update' do
+    expect { record.tap(&:save!).update!(theme_color: '#ffffff') }
+      .to change(BootstrapEmail.static_config, :sass_email_string)
+      .from("$primary: #2c3e50;\n@import 'bootstrap-email';\n")
+      .to("$primary: #ffffff;\n@import 'bootstrap-email';\n")
+  end
+
   describe '.time_zone_with_fallback' do
     subject { described_class.time_zone_with_fallback }
 
