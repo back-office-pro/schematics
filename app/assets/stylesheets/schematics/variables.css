@@ -1,0 +1,83 @@
+:root {
+  --animate-duration: 300ms;
+  --highlight: #fcf8e3;
+  --bs-secondary: #95a5a6;
+  --bs-secondary-rgb: 149, 165, 166;
+}
+
+.popover {
+  --bs-popover-body-padding-y: 0;
+  --bs-popover-body-padding-x: 0;
+}
+
+.btn {
+  --bs-btn-border-width: 0;
+}
+
+.btn-close {
+  --bs-btn-close-focus-shadow: none;
+}
+
+.btn-secondary {
+  --bs-btn-bg: var(--bs-secondary);
+}
+
+.accordion {
+  --bs-accordion-border-width: 0;
+  --bs-accordion-active-bg: var(--bs-card-cap-bg);
+  --bs-accordion-btn-focus-box-shadow: none;
+}
+
+.offcanvas {
+  --bs-offcanvas-border-width: 0;
+  --bs-offcanvas-box-shadow: var(--bs-box-shadow);
+}
+
+.toast {
+  --bs-toast-border-width: 0rem;
+  --bs-toast-bg: var(--bs-body-bg);
+}
+
+.modal {
+  --bs-modal-content-border-width: 0;
+  --bs-modal-header-border-width: 0;
+  --bs-modal-footer-border-width: 0;
+}
+
+.pagination {
+  --bs-pagination-border-width: 0;
+  --bs-pagination-focus-box-shadow: none;
+}
+
+.list-group {
+  --bs-list-group-border-width: 0;
+}
+
+.alert {
+  --bs-alert-border: 0;
+}
+
+.nav-tabs {
+  --bs-nav-tabs-border-width: 0;
+}
+
+.badge {
+  --bs-badge-padding-y: .25em;
+  --bs-badge-padding-x: .5em;
+}
+
+.card {
+  --bs-card-cap-bg: none;
+  --bs-card-border-width: 0;
+}
+
+.dropdown-menu {
+  --bs-dropdown-border-width: 0;
+  --bs-dropdown-zindex: 1035;
+  --bs-dropdown-link-active-bg: var(--bs-secondary-bg);
+}
+
+.table {
+  --bs-table-hover-bg: var(--bs-secondary-bg);
+  --bs-table-striped-bg: var(--bs-tertiary-bg);
+}
