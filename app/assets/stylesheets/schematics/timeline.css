@@ -22,10 +22,8 @@
 
   .card::after {
     border-bottom: 14px solid transparent;
-    border-left-style: solid;
-    border-left-width: 14px;
-    border-right-style: solid;
-    border-right-width: 0;
+    border-left: 14px solid var(--bs-body-bg);
+    border-right: 0 solid var(--bs-body-bg);
     border-top: 14px solid transparent;
     content: ' ';
     display: inline-block;
