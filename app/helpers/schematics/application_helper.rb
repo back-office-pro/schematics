@@ -2,11 +2,10 @@
 
 module Schematics
   module ApplicationHelper
-    COMPONENTS_PATH = Engine.root.join('app', 'components', 'schematics').freeze
-    COMPONENTS = Dir
-                 .glob(COMPONENTS_PATH.join('**', 'component.rb'))
-                 .map { _1[%r{#{COMPONENTS_PATH}/(.*)/component\.rb}, 1] }
-                 .freeze
+    COMPONENTS_DIRECTORY = Engine.root.join('app', 'components', 'schematics').freeze
+    ASSETS_DIRECTORY = Engine.root.join('app', 'assets', 'stylesheets').freeze
+    COMPONENTS_PATH = %r{#{COMPONENTS_DIRECTORY}/(.*)/component\.rb}
+    ASSETS_PATH = %r{#{ASSETS_DIRECTORY}/(.*)\.\w+}
 
     # :reek:UnusedParameters
     # :reek:LongParameterList
@@ -20,22 +19,33 @@ module Schematics
       )
     end
 
-    COMPONENTS.each do |component|
-      method_name = component.tr('/', '_').prepend('__')
-      define_method(method_name) do |method_or_collection = :new, **kwargs, &block|
-        case method_or_collection
-        when Enumerable
-          render Schematics
-            .const_get(component.camelize)
-            .const_get(:Component)
-            .with_collection(method_or_collection, **kwargs), &block
-        else
-          render Schematics
-            .const_get(component.camelize)
-            .const_get(:Component)
-            .public_send(method_or_collection, **kwargs), &block
+    def stylesheet_link_tags = Dir
+      .glob(ASSETS_DIRECTORY.join('**', '*.css'))
+      .map { _1[ASSETS_PATH, 1] }
+      .partition { _1 != 'schematics/application' }
+      .flatten(1)
+      .map { stylesheet_link_tag(_1, media: 'all', 'data-turbo-track': 'reload') }
+      .join
+
+    Dir
+      .glob(COMPONENTS_DIRECTORY.join('**', 'component.rb'))
+      .map { _1[COMPONENTS_PATH, 1] }
+      .each do |component|
+        method_name = component.tr('/', '_').prepend('__')
+        define_method(method_name) do |method_or_collection = :new, **kwargs, &block|
+          case method_or_collection
+          when Enumerable
+            render Schematics
+              .const_get(component.camelize)
+              .const_get(:Component)
+              .with_collection(method_or_collection, **kwargs), &block
+          else
+            render Schematics
+              .const_get(component.camelize)
+              .const_get(:Component)
+              .public_send(method_or_collection, **kwargs), &block
+          end
         end
       end
-    end
   end
 end
