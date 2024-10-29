@@ -1,3 +1,7 @@
+@import url('swagger-ui-dist/swagger-ui.css');
+@import url('swagger-ui-themes/themes/3.x/theme-flattop.css');
+@import url('animate.css/animate.css');
+
 .swagger-ui {
   .scheme-container {
     background: transparent;
