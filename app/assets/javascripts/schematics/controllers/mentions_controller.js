@@ -81,16 +81,22 @@ export default class extends ApplicationController {
         {
           trigger: '@',
           lookup: 'full_name',
-          values: this.debounce(this.#fetchUsers)
+          values: this.debounce(this.#fetchUsers),
+          containerClass: 'tribute-container list-group list-group-striped shadow-sm',
+          itemClass: 'list-group-item list-group-item-action p-2 border-0 text-start text-truncate'
         },
         {
           trigger: '#',
           lookup: ({ _metadata }) => _metadata?.descriptor,
-          values: this.debounce(this.#search)
+          values: this.debounce(this.#search),
+          containerClass: 'tribute-container list-group list-group-striped shadow-sm',
+          itemClass: 'list-group-item list-group-item-action p-2 border-0 text-start text-truncate'
         },
         {
           trigger: ':',
-          values: this.debounce(this.#fetchEmojis)
+          values: this.debounce(this.#fetchEmojis),
+          containerClass: 'tribute-container list-group list-group-striped shadow-sm',
+          itemClass: 'list-group-item list-group-item-action p-2 border-0 text-start text-truncate'
         }
       ]
     }

@@ -36,6 +36,8 @@ export default class extends ApplicationController {
     return {
       trigger: '$',
       values: (_, callback) => callback(this.collection),
+      containerClass: 'tribute-container list-group list-group-striped shadow-sm',
+      itemClass: 'list-group-item list-group-item-action p-2 border-0 text-start text-truncate',
       menuItemLimit: 5,
       noMatchTemplate: () => null
     }
