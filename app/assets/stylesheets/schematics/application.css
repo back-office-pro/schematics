@@ -1,25 +1,25 @@
-@import url('flag-icons/css/flag-icons.css');
-@import url('@fortawesome/fontawesome-free/css/fontawesome.css');
-@import url('@fortawesome/fontawesome-free/css/brands.css');
-@import url('@fortawesome/fontawesome-free/css/solid.css');
-@import url('@fortawesome/fontawesome-free/css/regular.css');
-@import url('rails_bootstrap_forms.css');
-@import url('avatar/component.css');
-@import url('navbar/component.css');
-@import url('footer/component.css');
-@import url('sidebar/component.css');
-@import url('navbar/notification_center/component.css');
-@import url('navbar/message_center/component.css');
-@import url('navbar/task_center/component.css');
-@import url('navbar/meeting_center/component.css');
-@import url('navbar/online_users_center/component.css');
-@import url('viewer/calendar/component.css');
-@import url('viewer/kanban/component.css');
-@import url('viewer/grid/carousel/component.css');
-@import url('edit_in_place/component.css');
-@import url('placeholder/component.css');
-@import url('schema_editor/button/add_dropdown/component.css');
-@import url('metric/trend/component.css');
+@import url('/flag-icons/css/flag-icons.css');
+@import url('/@fortawesome/fontawesome-free/css/fontawesome.css');
+@import url('/@fortawesome/fontawesome-free/css/brands.css');
+@import url('/@fortawesome/fontawesome-free/css/solid.css');
+@import url('/@fortawesome/fontawesome-free/css/regular.css');
+@import url('/rails_bootstrap_forms.css');
+@import url('/avatar/component.css');
+@import url('/navbar/component.css');
+@import url('/footer/component.css');
+@import url('/sidebar/component.css');
+@import url('/navbar/notification_center/component.css');
+@import url('/navbar/message_center/component.css');
+@import url('/navbar/task_center/component.css');
+@import url('/navbar/meeting_center/component.css');
+@import url('/navbar/online_users_center/component.css');
+@import url('/viewer/calendar/component.css');
+@import url('/viewer/kanban/component.css');
+@import url('/viewer/grid/carousel/component.css');
+@import url('/edit_in_place/component.css');
+@import url('/placeholder/component.css');
+@import url('/schema_editor/button/add_dropdown/component.css');
+@import url('/metric/trend/component.css');
 
 /* Layout */
 

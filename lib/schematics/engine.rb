@@ -43,6 +43,7 @@ require 'pagy'
 require 'paper_trail'
 require 'paranoia'
 require 'phonelib'
+require 'propshaft'
 require 'puma'
 require 'rack/cors'
 require 'rails'
@@ -65,7 +66,6 @@ require 'slim'
 require 'solid_cable'
 require 'solid_cache'
 require 'solid_queue'
-require 'sprockets/railtie'
 require 'stimulus-rails'
 require 'terser'
 require 'turbo-rails'
@@ -136,7 +136,6 @@ module Schematics
     config.assets.paths << ::Pagy.root.join('javascripts')
     config.assets.paths << root.join('app', 'components', 'schematics')
     config.assets.paths << root.join('node_modules')
-    config.assets.precompile += %w[manifest.js schematics_manifest.js]
 
     # Importmap
     config.importmap.paths << root.join('config', 'importmap.rb')
@@ -167,14 +166,6 @@ module Schematics
     config.after_initialize do
       config.active_storage.queues.purge = :cleanups
       config.active_storage.track_variants = false
-    end
-
-    # Sprockets monkey-patch
-    config.before_configuration do
-      Sprockets::Railtie
-        .instance
-        .initializers
-        .reject! { _1.name == :set_default_precompile }
     end
   end
 end

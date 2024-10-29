@@ -9,6 +9,9 @@ Rails.application.configure do
   config.eager_load = false
   config.server_timing = true
 
+  # File Watcher
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
   # Public File Server
   config.public_file_server.enabled = true
   config.public_file_server.headers = { 'cache-control' => "public, max-age=#{2.days.to_i}" } # rubocop:disable Style/StringHashKeys

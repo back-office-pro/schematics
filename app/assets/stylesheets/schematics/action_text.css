@@ -1,4 +1,4 @@
-@import url('trix.css');
+@import url('/trix.css');
 
 .trix-content action-text-attachment .attachment {
   max-width: 100% !important;
