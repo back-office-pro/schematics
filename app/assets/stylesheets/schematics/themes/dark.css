@@ -1,0 +1,24 @@
+[data-bs-theme="dark"] {
+  .navbar-nav {
+    .nav-link.switch-theme.dark {
+      display: none;
+    }
+  }
+
+  a:not(.nav-link, .text-danger),
+  .btn-link,
+  .text-primary {
+    color: var(--bs-white) !important;
+  }
+
+  svg,
+  iframe.google-map,
+  pre,
+  .monaco-editor {
+    filter: invert(90%);
+  }
+
+  .swagger-ui .dialog-ux .modal-ux {
+    background-color: var(--bs-dark);
+  }
+}

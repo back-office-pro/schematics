@@ -1,0 +1,7 @@
+[data-bs-theme="light"] {
+  .navbar-nav {
+    .nav-link.switch-theme.light {
+      display: none;
+    }
+  }
+}
