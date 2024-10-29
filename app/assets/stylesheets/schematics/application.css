@@ -1,48 +1,27 @@
-$flag-icons-path: 'flag-icons/flags';
-$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import url('flag-icons/css/flag-icons.css');
+@import url('@fortawesome/fontawesome-free/css/fontawesome.css');
+@import url('@fortawesome/fontawesome-free/css/brands.css');
+@import url('@fortawesome/fontawesome-free/css/solid.css');
+@import url('@fortawesome/fontawesome-free/css/regular.css');
+@import url('rails_bootstrap_forms.css');
+@import url('avatar/component.css');
+@import url('navbar/component.css');
+@import url('footer/component.css');
+@import url('sidebar/component.css');
+@import url('navbar/notification_center/component.css');
+@import url('navbar/message_center/component.css');
+@import url('navbar/task_center/component.css');
+@import url('navbar/meeting_center/component.css');
+@import url('navbar/online_users_center/component.css');
+@import url('viewer/calendar/component.css');
+@import url('viewer/kanban/component.css');
+@import url('viewer/grid/carousel/component.css');
+@import url('edit_in_place/component.css');
+@import url('placeholder/component.css');
+@import url('schema_editor/button/add_dropdown/component.css');
+@import url('metric/trend/component.css');
 
-@import 'trix';
-@import 'action_text';
-@import 'active_storage';
-@import 'bootstrap';
-@import 'flag-icons/sass/flag-icons';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import 'rails_bootstrap_forms';
-@import 'timeline';
-@import 'tom_select';
-@import 'swagger-ui-dist/swagger-ui';
-@import 'swagger-ui-themes/themes/3.x/theme-flattop';
-@import 'animate.css/animate';
-@import 'swagger';
-@import 'monaco_editor';
-@import 'avatar/component';
-@import 'navbar/component';
-@import 'footer/component';
-@import 'sidebar/component';
-@import 'navbar/notification_center/component';
-@import 'navbar/message_center/component';
-@import 'navbar/task_center/component';
-@import 'navbar/meeting_center/component';
-@import 'navbar/online_users_center/component';
-@import 'viewer/calendar/component';
-@import 'viewer/kanban/component';
-@import 'viewer/grid/carousel/component';
-@import 'edit_in_place/component';
-@import 'placeholder/component';
-@import 'schema_editor/button/add_dropdown/component';
-@import 'metric/trend/component';
-
-// Variables
-
-:root {
-  --animate-duration: 300ms;
-  --highlight: #fcf8e3;
-}
-
-// Layout
+/* Layout */
 
 html,
 body {
@@ -71,7 +50,7 @@ body {
   }
 }
 
-// Buttons
+/* Buttons */
 
 .btn-icon-split {
   align-items: stretch;
@@ -96,7 +75,7 @@ body {
   background: transparent !important;
 }
 
-// Tooltips
+/* Tooltips */
 
 @media (width > 992px) {
   .responsive-button-tooltip-lg {
@@ -116,7 +95,7 @@ body {
   }
 }
 
-// Forms
+/* Forms */
 
 input[type='search']::-webkit-search-decoration:hover,
 input[type='search']::-webkit-search-cancel-button:hover {
@@ -167,25 +146,38 @@ form label.required::after {
   content: ' *';
 }
 
-// Progress bars
+.form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 30px var(--bs-tertiary-bg) inset;
+  -webkit-text-fill-color: var(--bs-body-color);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* List groups */
+
+.list-group.list-group-striped li:nth-of-type(even) {
+  background-color: var(--bs-tertiary-bg);
+}
+
+/* Progress bars */
 
 .progress {
   height: 1.5rem;
 }
 
-// Pagy
-
-.pagy-bootstrap.nav .pagination {
-  margin-bottom: 0;
-}
-
-// SVG responsiveness
+/* SVG responsiveness */
 
 svg {
   max-width: 100%;
 }
 
-// Utils
+/* Utils */
 
 .w-0 {
   width: 0;
@@ -201,4 +193,10 @@ svg {
 
 .cursor-grab {
   cursor: grab;
+}
+
+/* Overrides */
+
+.fixed-top {
+  left: initial;
 }
