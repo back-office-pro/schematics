@@ -6,10 +6,25 @@
   padding-top: 0;
 }
 
+.ts-dropdown,
+.ts-dropdown.form-control,
+.ts-dropdown.form-select {
+  border-width: 0;
+  box-shadow: var(--bs-box-shadow-sm);
+
+  div:nth-of-type(even) {
+    background-color: var(--bs-tertiary-bg);
+  }
+}
+
 .ts-dropdown .optgroup-header {
   font-size: inherit;
 }
 
 .ts-dropdown .optgroup::before {
   content: none;
+}
+
+.focus .ts-control {
+  box-shadow: none;
 }
