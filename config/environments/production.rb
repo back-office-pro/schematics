@@ -60,6 +60,7 @@ Rails.application.configure do
 
   # Active Record
   config.active_record.dump_schema_after_migration = false
+  config.active_record.attributes_for_inspect = %i[id]
 
   # Logger
   config.log_level = :info
