@@ -88,7 +88,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mobility-ransack', '1.2.2'
   spec.add_dependency 'nokogiri', '1.16.7'
   spec.add_dependency 'octokit', '9.2.0'
-  spec.add_dependency 'oj', '3.16.6'
+  spec.add_dependency 'oj', '3.16.7'
   spec.add_dependency 'olive_branch', '4.0.1'
   spec.add_dependency 'omniauth', '2.1.2'
   spec.add_dependency 'omniauth-google-oauth2', '1.2.0'
@@ -137,7 +137,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '2.0.11'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
-  spec.add_dependency 'view_component', '3.19.0'
+  spec.add_dependency 'view_component', '3.20.0'
   spec.add_dependency 'webmock', '3.24.0'
   spec.add_dependency 'zero-rails_openapi', '2.2.0'
 end
