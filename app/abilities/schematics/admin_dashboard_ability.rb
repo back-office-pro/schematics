@@ -11,6 +11,7 @@ module Schematics
       ::Translation,
       ::Chart,
       ::Metric,
+      ::Ranking,
       ::User,
       ::UserGroup,
       ::Role,
