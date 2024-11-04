@@ -66,7 +66,7 @@ class Chart < Schematics::ApplicationRecord
   def to_s
     return I18n.t('errors.virtuals.name', name: model) unless model_class
 
-    [ytitle, xtitle, period_title].compact.join(' ')
+    [ytitle, (I18n.t('by') if xtitle), xtitle&.downcase, period_title].compact.join(' ')
   end
 
   def type = :"#{kind}_chart"
@@ -75,7 +75,7 @@ class Chart < Schematics::ApplicationRecord
     return unless model_class
     return unless entity_x_field
 
-    [I18n.t('by'), model_class.human_attribute_name(entity_x_field.name).downcase].join(' ')
+    model_class.human_attribute_name(entity_x_field.name)
   end
 
   def ytitle = title_for(entity_y_field)
