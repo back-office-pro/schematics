@@ -6,7 +6,7 @@ class Configuration < Schematics::ApplicationRecord
   attribute :available_locales, default: -> { Rails.configuration.i18n.available_locales.map(&:to_s) } # rubocop:disable Layout/LineLength
   attribute :locale, default: -> { Rails.configuration.i18n.default_locale }
 
-  after_update_commit :update_bootstrap_email_config!, if: :theme_color_previously_changed?
+  after_update_commit :update_bootstrap_email_config!
 
   class << self
     LOCALE_TO_TIME_ZONE = { en: 'UTC', fr: 'Paris', it: 'Rome' }.freeze
@@ -27,6 +27,8 @@ class Configuration < Schematics::ApplicationRecord
   private
 
   def update_bootstrap_email_config!
+    return unless theme_color_previously_changed?
+
     BootstrapEmail.clear_sass_cache!
     BootstrapEmail.static_config.sass_email_string = <<~SCSS
       $primary: #{theme_color};

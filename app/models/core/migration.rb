@@ -20,7 +20,7 @@ class Migration < Schematics::ApplicationRecord
            to: :migrator,
            prefix: true
 
-  after_save_commit :prompt_data, if: :prompt_previously_changed?
+  after_save_commit :prompt_data
 
   class << self
     delegate :version, :data, to: :current, prefix: true, allow_nil: true
@@ -87,7 +87,7 @@ class Migration < Schematics::ApplicationRecord
   private
 
   def prompt_data
-    Schematics::GenerateSchemaJob.perform_later(self)
+    Schematics::GenerateSchemaJob.perform_later(self) if prompt_previously_changed?
   end
 
   def quota_entities_cannot_be_exceeded
