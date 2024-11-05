@@ -1,6 +1,6 @@
 ---
-schematics/data_cleaning_job:
-  class: Schematics::DataCleaningJob
+schematics/clean_data_job:
+  class: Schematics::CleanDataJob
   schedule: every hour
 schematics/generate_backup_job:
   class: Schematics::GenerateBackupJob

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::DataCleaningJob do
+RSpec.describe Schematics::CleanDataJob do
   include_context 'with import'
 
   let(:permissions) { [Permission.create!(action: 'index', model: 'User')] }

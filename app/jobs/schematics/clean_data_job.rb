@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class DataCleaningJob < ApplicationJob
+  class CleanDataJob < ApplicationJob
     include Quietable
     queue_as :cleanups
 
