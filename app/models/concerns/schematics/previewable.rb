@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_save_commit :generate_link_previews, if: :changed_link_preview_urls?
+      after_save_commit :generate_link_previews
     end
 
     def changed_link_preview_urls = self
@@ -17,10 +17,6 @@ module Schematics
       .filter_map(&method(:public_send))
 
     protected
-
-    def changed_link_preview_urls?
-      changed_link_preview_urls.any?
-    end
 
     def generate_link_previews = ::ActiveJob.perform_all_later(
       changed_link_preview_urls.map(&GenerateLinkPreviewJob.method(:new))

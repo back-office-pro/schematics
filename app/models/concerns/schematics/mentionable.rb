@@ -5,7 +5,7 @@ module Schematics
     extend ActiveSupport::Concern
 
     included do
-      after_save_commit :notify_mentions, if: :rich_text_mentions?
+      after_save_commit :notify_mentions
     end
 
     def rich_text_mentions = self
@@ -21,10 +21,6 @@ module Schematics
       .uniq
 
     protected
-
-    def rich_text_mentions?
-      rich_text_mentions.any?
-    end
 
     def notify_mentions = ::ActiveJob.perform_all_later(
       rich_text_mentions.map { NotifyJob.new(self, 'mention', _1) }
