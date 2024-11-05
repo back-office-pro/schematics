@@ -1,5 +1,5 @@
 = bootstrap_form_with model:, scope:, url: do |form|
-  = form.email_field :email, prepend: fa_icon(:envelope)
+  = form.email_field :email, autocomplete: 'username', prepend: fa_icon(:envelope)
   = __resource_form_fields_digest(form:, value:)
   = form.check_box :remember_me, switch: true
   = __button_confirm
