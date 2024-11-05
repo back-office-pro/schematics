@@ -8,6 +8,8 @@ module Schematics
       around_action :switch_localization
     end
 
+    private
+
     def switch_localization(&block)
       ::I18n.with_locale(current_user.locale) do
         ::Time.use_zone(current_user.time_zone) do

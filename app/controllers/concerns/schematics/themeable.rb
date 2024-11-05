@@ -8,6 +8,8 @@ module Schematics
       after_action :set_color_scheme_headers
     end
 
+    private
+
     def set_color_scheme_headers
       response.headers['Critical-CH'] = 'Sec-CH-Prefers-Color-Scheme'
       response.headers['Accept-CH'] = 'Sec-CH-Prefers-Color-Scheme'

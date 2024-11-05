@@ -8,6 +8,8 @@ module Schematics
       after_action :assign_api_core_version
     end
 
+    private
+
     def assign_api_core_version
       response.headers['x-api-core-version'] = VERSION
     end
