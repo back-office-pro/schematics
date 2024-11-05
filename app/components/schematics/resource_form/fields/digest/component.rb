@@ -12,7 +12,7 @@ module Schematics
           option :icon, default: -> { :key }
           option :required, default: -> { true }
           option :confirm, default: -> { false }
-          option :autocomplete, default: -> { true }
+          option :autocomplete, default: -> { 'current-password' }
 
           def data = { action: 'click->password#toggle' }
 
@@ -32,10 +32,6 @@ module Schematics
             return field.required? if field
 
             required
-          end
-
-          def autocomplete
-            'new-password' unless super
           end
 
           def eye_icons
