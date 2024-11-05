@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class WebhookJob < ApplicationJob
+  class TriggerWebhookJob < ApplicationJob
     include Quietable
     queue_as :webhooks
 

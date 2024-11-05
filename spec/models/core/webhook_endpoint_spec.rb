@@ -20,9 +20,9 @@ RSpec.describe WebhookEndpoint do
 
     before { record.save! }
 
-    it 'enqueues a webhook job' do
+    it 'enqueues a trigger webhook job' do
       expect { broadcast_all }
-        .to have_enqueued_job(Schematics::WebhookJob)
+        .to have_enqueued_job(Schematics::TriggerWebhookJob)
         .exactly(:once)
         .with(WebhookRequest)
         .on_queue('webhooks')

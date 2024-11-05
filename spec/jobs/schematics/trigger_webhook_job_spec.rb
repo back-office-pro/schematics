@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::WebhookJob do
+RSpec.describe Schematics::TriggerWebhookJob do
   let(:event) { Permission.create!(model: 'User', action: 'create') }
   let(:webhook_request) { WebhookRequest.create!(event:, webhook_endpoint:) }
   let(:webhook_endpoint) do

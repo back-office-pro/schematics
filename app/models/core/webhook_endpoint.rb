@@ -10,7 +10,7 @@ class WebhookEndpoint < Schematics::ApplicationRecord
       ActiveJob.perform_all_later(
         subscribed(event)
           .map { WebhookRequest.create!(webhook_endpoint: _1, event:, payload:) }
-          .map(&Schematics::WebhookJob.method(:new))
+          .map(&Schematics::TriggerWebhookJob.method(:new))
       )
     end
   end

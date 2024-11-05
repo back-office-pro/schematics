@@ -26,9 +26,9 @@ RSpec.describe Schematics::Version do
     is_expected.to include(:event, :id, :created_at, :item, :user, :object_changes)
   end
 
-  it 'enqueues a webhook job after create' do
+  it 'enqueues a trigger webhook job after create' do
     expect { version.save! }
-      .to have_enqueued_job(Schematics::WebhookJob)
+      .to have_enqueued_job(Schematics::TriggerWebhookJob)
       .exactly(:once)
       .with(WebhookRequest)
       .on_queue('webhooks')
