@@ -19,14 +19,14 @@ module Schematics
 
         protected
 
-        def action = :index
-
         def model_class = self
           .class
           .module_parent_name
           .demodulize
           .singularize
           .constantize
+
+        def action = :index
       end
     end
   end

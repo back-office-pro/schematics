@@ -34,14 +34,14 @@ module Schematics
 
     private
 
+    def calendar_start_date = params
+      .dig(filter_key, start_date_attribute_name, :gte)
+      &.in_time_zone
+
     def filter_key = Ransack.options[:search_key]
 
     def calendar_end_date = params
       .dig(filter_key, end_date_attribute_name, :lte)
-      &.in_time_zone
-
-    def calendar_start_date = params
-      .dig(filter_key, start_date_attribute_name, :gte)
       &.in_time_zone
   end
 end

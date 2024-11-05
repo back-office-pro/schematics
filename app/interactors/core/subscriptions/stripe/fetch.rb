@@ -57,9 +57,10 @@ module Core
           metadata: product_metadata
         }.compact
 
-        def subscription = customer
-          &.subscriptions
-          &.find { %w[active trialing].include?(_1.status) }
+        def customer_locale = customer
+          &.preferred_locales
+          &.first
+          &.slice(0, 2)
 
         def subscription_state
           return ::Subscription::STATE_STATE_INACTIVE unless subscription_id
@@ -68,19 +69,18 @@ module Core
           ::Subscription::STATE_STATE_ACTIVE
         end
 
-        def product_id = subscription
-          &.plan
-          &.product
-
         def product_metadata = product
           &.metadata
           &.to_h
           &.transform_values(&:to_i)
 
-        def customer_locale = customer
-          &.preferred_locales
-          &.first
-          &.slice(0, 2)
+        def subscription = customer
+          &.subscriptions
+          &.find { %w[active trialing].include?(_1.status) }
+
+        def product_id = subscription
+          &.plan
+          &.product
 
         def log_data = logger
           .tagged('Stripe')

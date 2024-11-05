@@ -82,7 +82,7 @@ class Chart < Schematics::ApplicationRecord
 
   private
 
-  def entity_x_field = find_entity_field(x_field)
-
   def entity_y_field = find_entity_field(y_field)
+
+  def entity_x_field = find_entity_field(x_field)
 end

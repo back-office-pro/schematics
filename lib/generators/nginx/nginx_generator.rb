@@ -30,13 +30,13 @@ class NginxGenerator < Rails::Generators::Base
     behavior == :invoke
   end
 
-  def destroying?
-    behavior == :revoke
-  end
-
   def nginx_path = Pathname.new('/etc/nginx')
 
   def sites_available_path = nginx_path.join('sites-available', Tenant.subdomain)
 
   def sites_enabled_path = nginx_path.join('sites-enabled', Tenant.subdomain)
+
+  def destroying?
+    behavior == :revoke
+  end
 end

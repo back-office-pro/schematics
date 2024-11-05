@@ -113,29 +113,11 @@ module Schematics
 
       protected
 
-      def association_to_str
-        if polymorphic?
-          <<~RUBY
-            belongs_to :#{name},
-                       -> { with_deleted },
-                       foreign_key: '#{column_name}',
-                       inverse_of: :#{inverse_association.name},
-                       optional: #{!required?},
-                       polymorphic: true,
-                       autosave: true
-          RUBY
-        else
-          <<~RUBY
-            belongs_to :#{name},
-                       -> { with_deleted },
-                       class_name: '#{class_name}',
-                       foreign_key: '#{column_name}',
-                       inverse_of: :#{inverse_association.name},
-                       optional: #{!required?},
-                       autosave: true
-          RUBY
-        end
-      end
+      def cannot_be_circular = inverse_entity
+        .association_attributes
+        .excluding(self)
+        .reject(&:polymorphic?)
+        .each(&method(:find_circular_association_loop))
 
       def scope_to_str
         if polymorphic?
@@ -162,11 +144,29 @@ module Schematics
           end.join
       end
 
-      def cannot_be_circular = inverse_entity
-        .association_attributes
-        .excluding(self)
-        .reject(&:polymorphic?)
-        .each(&method(:find_circular_association_loop))
+      def association_to_str
+        if polymorphic?
+          <<~RUBY
+            belongs_to :#{name},
+                       -> { with_deleted },
+                       foreign_key: '#{column_name}',
+                       inverse_of: :#{inverse_association.name},
+                       optional: #{!required?},
+                       polymorphic: true,
+                       autosave: true
+          RUBY
+        else
+          <<~RUBY
+            belongs_to :#{name},
+                       -> { with_deleted },
+                       class_name: '#{class_name}',
+                       foreign_key: '#{column_name}',
+                       inverse_of: :#{inverse_association.name},
+                       optional: #{!required?},
+                       autosave: true
+          RUBY
+        end
+      end
 
       def find_circular_association_loop(parent)
         parent.inverse_entity.association_attributes.reject(&:polymorphic?).each do |child|

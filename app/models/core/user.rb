@@ -62,10 +62,6 @@ class User < Schematics::ApplicationRecord
 
   private
 
-  def deliver_new_account_mailer = Schematics::UserMailer
-    .new_account(self)
-    .deliver_later
-
   def secure_password_challenge
     return unless password_challenge
     return unless password_digest_was
@@ -73,4 +69,8 @@ class User < Schematics::ApplicationRecord
 
     errors.add(:password_challenge)
   end
+
+  def deliver_new_account_mailer = Schematics::UserMailer
+    .new_account(self)
+    .deliver_later
 end

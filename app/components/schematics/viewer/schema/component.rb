@@ -21,6 +21,14 @@ module Schematics
 
         private
 
+        def add_association_edges
+          entities.each do |entity|
+            entity.association_attributes.each do |association|
+              graph.add_edges(association.entity.name, association.inverse_entity.name)
+            end
+          end
+        end
+
         def entities = schema
           .entities
           .reject(&:core?)
@@ -34,14 +42,6 @@ module Schematics
           graph.node[:fillcolor] = 'gray97'
           graph.edge[:fontname] = 'Helvetica, Arial, sans-serif'
           graph.edge[:fontsize] = 10
-        end
-
-        def add_association_edges
-          entities.each do |entity|
-            entity.association_attributes.each do |association|
-              graph.add_edges(association.entity.name, association.inverse_entity.name)
-            end
-          end
         end
 
         def add_habtm_edges

@@ -256,20 +256,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
   private
 
-  def generating?
-    behavior == :invoke
-  end
-
-  def destroying?
-    behavior == :revoke
-  end
-
-  def source_paths
-    super.unshift File.expand_path('templates', __dir__)
-  end
-
-  def env = (app_path == 'spec/demo' ? 'development' : 'production').inquiry
-
   def default_options = {
     database: 'postgresql',
     skip_test: true,
@@ -284,15 +270,11 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     skip_brakeman: true
   }
 
-  def db_username = app_name.underscore
-
-  def db_password
-    @db_password ||= SecureRandom.base58
-  end
-
   def container? = options[:container]
 
-  def root_path = File.expand_path('../../..', __dir__)
+  def generating?
+    behavior == :invoke
+  end
 
   def pg_exec(query)
     ::PG
@@ -300,8 +282,10 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
       .exec(query)
   end
 
-  def drop_database
-    `cd #{app_path} && RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
+  def db_username = app_name.underscore
+
+  def db_password
+    @db_password ||= SecureRandom.base58
   end
 
   def destroy_github_repo
@@ -309,6 +293,8 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
     `cd #{app_path} && RAILS_ENV=#{env} rails destroy repository`
   end
+
+  def env = (app_path == 'spec/demo' ? 'development' : 'production').inquiry
 
   def destroy_systemd_service
     return if container?
@@ -323,4 +309,18 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
 
     `cd #{app_path} && RAILS_ENV=#{env} rails destroy nginx`
   end
+
+  def drop_database
+    `cd #{app_path} && RAILS_ENV=#{env} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop`
+  end
+
+  def destroying?
+    behavior == :revoke
+  end
+
+  def source_paths
+    super.unshift File.expand_path('templates', __dir__)
+  end
+
+  def root_path = File.expand_path('../../..', __dir__)
 end

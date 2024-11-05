@@ -29,15 +29,15 @@ module Schematics
 
     private
 
-    def model_class = ::User
-
-    def permitted_params = %i[email password password_confirmation]
-
     def set_user
       # TODO: use find_by_password_reset_token!(params[:token]) when upgrading to Rails 8
       @user = model_class.with_role.find_by_token_for(:new_account, params[:token]) ||
               model_class.with_role.find_by_token_for!(:password_reset, params[:token])
     end
+
+    def model_class = ::User
+
+    def permitted_params = %i[email password password_confirmation]
 
     def index_path = new_password_reset_path
   end

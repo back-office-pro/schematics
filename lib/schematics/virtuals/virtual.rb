@@ -80,6 +80,10 @@ module Schematics
 
       protected
 
+      def tokens_cannot_have_assignment
+        errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
+      end
+
       def method_body = tokens
         .map(&:value)
         .join
@@ -94,10 +98,6 @@ module Schematics
         .grep(Tokens::Variable)
         .reject(&:with_references?)
         .map(&:raw_value)
-
-      def tokens_cannot_have_assignment
-        errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
-      end
 
       memoize def tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
 

@@ -60,15 +60,15 @@ module Schematics
 
       protected
 
+      def scope_to_str = <<~RUBY
+        scope :with_#{name}, -> { includes(#{preload}) }
+      RUBY
+
       def association_to_str = <<~RUBY.chomp
         #{type} :#{name},
                 -> { with_deleted },
                 class_name: '#{class_name}',
                 foreign_key: '#{column_name}'
-      RUBY
-
-      def scope_to_str = <<~RUBY
-        scope :with_#{name}, -> { includes(#{preload}) }
       RUBY
 
       def spec_interpolations = super.merge(name:)

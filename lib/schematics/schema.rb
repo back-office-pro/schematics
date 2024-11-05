@@ -98,14 +98,6 @@ module Schematics
       .select(&:inverse_entity)
       .each { _1.inverse_entity.associations << _1.inverse_association }
 
-    def add_inverse_polymorphic_associations
-      entities.each do |entity|
-        entity
-          .associations
-          .push(*polymorphic_associations.map(&:inverse_association))
-      end
-    end
-
     def add_has_many_through_associations
       entities.each do |entity|
         entity.has_many_associations.each do |parent|
@@ -136,6 +128,14 @@ module Schematics
           .reject(&:polymorphic?)
           .select(&:inverse_entity)
           .each(&method(:find_has_one_through_associations).curry.call(entity))
+      end
+    end
+
+    def add_inverse_polymorphic_associations
+      entities.each do |entity|
+        entity
+          .associations
+          .push(*polymorphic_associations.map(&:inverse_association))
       end
     end
 

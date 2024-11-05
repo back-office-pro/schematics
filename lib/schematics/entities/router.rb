@@ -26,49 +26,20 @@ module Schematics
 
       private
 
-      def routes = actions
-        .excluding(:archive)
-        .tap { _1.push(:new) if can?(:create) }
-        .tap { _1.push(:edit) if can?(:update) }
-
-      def resource = name
-        .split('/')
-        .last
+      def namespace_nesting(source)
+        namespaces.reduce(source) do |code, namespace|
+          <<~RUBY
+            namespace :#{namespace} do
+            #{code.indent(2).chomp}
+            end
+          RUBY
+        end
+      end
 
       def namespaces = name
         .split('/')
         .tap(&:pop)
         .reverse
-
-      def route_alias = class_name
-        .demodulize
-        .underscore
-
-      def nested_resource_routes = [
-        import_routes,
-        comparison_routes,
-        bulk_actions_routes,
-        autocompletions_routes,
-        comment_routes,
-        emailing_routes
-      ].compact.join
-
-      def resource_routes = [
-        delete_route,
-        archive_routes,
-        duplicate_route,
-        events.map(&method(:event_route))
-      ].compact.join
-
-      def resolver
-        return unless @entity in Singleton
-
-        <<~RUBY
-          resolve '#{class_name}' do |resource, options|
-            [:#{resource}, options]
-          end
-        RUBY
-      end
 
       def resource_routes_definition
         case @entity
@@ -87,42 +58,21 @@ module Schematics
         end
       end
 
-      def nested_resource_routes_definition
-        case @entity
-        when Singleton
-          <<~RUBY
-            resource :#{resource}, only: [], model_name: '#{class_name}' do
-            #{nested_resource_routes.indent(2).chomp}
-            end
-          RUBY
-        when Entity
-          <<~RUBY
-            resources :#{resource.pluralize}, only: [], model_name: '#{class_name}' do
-            #{nested_resource_routes.indent(2).chomp}
-            end
-          RUBY
-        end
-      end
+      def resource = name
+        .split('/')
+        .last
 
-      def namespace_nesting(source)
-        namespaces.reduce(source) do |code, namespace|
-          <<~RUBY
-            namespace :#{namespace} do
-            #{code.indent(2).chomp}
-            end
-          RUBY
-        end
-      end
+      def routes = actions
+        .excluding(:archive)
+        .tap { _1.push(:new) if can?(:create) }
+        .tap { _1.push(:edit) if can?(:update) }
 
-      def scope_nesting(source)
-        namespaces.reduce(source) do |code, namespace|
-          <<~RUBY
-            scope path: :#{namespace}, as: :#{namespace} do
-            #{code.indent(2).chomp}
-            end
-          RUBY
-        end
-      end
+      def resource_routes = [
+        delete_route,
+        archive_routes,
+        duplicate_route,
+        events.map(&method(:event_route))
+      ].compact.join
 
       def delete_route
         return unless can?(:destroy)
@@ -149,11 +99,41 @@ module Schematics
         RUBY
       end
 
-      def event_route(event)
-        <<~RUBY
-          patch '#{event.state_machine_name}/#{event.name}', action: :trigger, event: '#{event.suffixed_name}', on: :member
-        RUBY
+      def scope_nesting(source)
+        namespaces.reduce(source) do |code, namespace|
+          <<~RUBY
+            scope path: :#{namespace}, as: :#{namespace} do
+            #{code.indent(2).chomp}
+            end
+          RUBY
+        end
       end
+
+      def nested_resource_routes_definition
+        case @entity
+        when Singleton
+          <<~RUBY
+            resource :#{resource}, only: [], model_name: '#{class_name}' do
+            #{nested_resource_routes.indent(2).chomp}
+            end
+          RUBY
+        when Entity
+          <<~RUBY
+            resources :#{resource.pluralize}, only: [], model_name: '#{class_name}' do
+            #{nested_resource_routes.indent(2).chomp}
+            end
+          RUBY
+        end
+      end
+
+      def nested_resource_routes = [
+        import_routes,
+        comparison_routes,
+        bulk_actions_routes,
+        autocompletions_routes,
+        comment_routes,
+        emailing_routes
+      ].compact.join
 
       def import_routes
         return unless can?(:create)
@@ -164,6 +144,10 @@ module Schematics
           end
         RUBY
       end
+
+      def route_alias = class_name
+        .demodulize
+        .underscore
 
       def comparison_routes
         return unless can?(:index)
@@ -195,6 +179,14 @@ module Schematics
         RUBY
       end
 
+      def comment_routes
+        return unless can?(:show)
+
+        <<~RUBY
+          resources :comments, only: %i[new create]
+        RUBY
+      end
+
       def emailing_routes
         return unless can?(:show)
 
@@ -203,11 +195,19 @@ module Schematics
         RUBY
       end
 
-      def comment_routes
-        return unless can?(:show)
+      def resolver
+        return unless @entity in Singleton
 
         <<~RUBY
-          resources :comments, only: %i[new create]
+          resolve '#{class_name}' do |resource, options|
+            [:#{resource}, options]
+          end
+        RUBY
+      end
+
+      def event_route(event)
+        <<~RUBY
+          patch '#{event.state_machine_name}/#{event.name}', action: :trigger, event: '#{event.suffixed_name}', on: :member
         RUBY
       end
     end

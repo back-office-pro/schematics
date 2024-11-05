@@ -54,28 +54,28 @@ class PermissionsGenerator < Rails::Generators::NamedBase
 
   private
 
-  def entity = Tenant
-    .schema
-    .find_entity_by_name(name.underscore)
-
-  def model = entity.class_name
-
-  def old_model = options[:rename]
-
   def generating?
     behavior == :invoke && !old_model
   end
+
+  def old_model = options[:rename]
+
+  def entity = Tenant
+    .schema
+    .find_entity_by_name(name.underscore)
 
   def destroying?
     behavior == :revoke
   end
 
-  def renaming?
-    behavior == :invoke && old_model
-  end
+  def model = entity.class_name
 
   def schema_model_attributes = Tenant
     .schema
     .entities
     .flat_map(&:model_attributes)
+
+  def renaming?
+    behavior == :invoke && old_model
+  end
 end

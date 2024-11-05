@@ -38,7 +38,16 @@ module Schematics
 
       protected
 
-      def margin_size = 2
+      def icon
+        case resource
+        when Class
+          resource.entity.icon
+        when String
+          resource.safe_constantize&.entity&.icon || :question
+        else
+          resource.class.entity.icon
+        end
+      end
 
       def icon_css_classes = [
         'fa-fw',
@@ -46,14 +55,7 @@ module Schematics
         "me-#{margin_size}"
       ]
 
-      def ability
-        case resource
-        when Class, String
-          :index
-        else
-          :show
-        end
-      end
+      def margin_size = 2
 
       def human_name
         case resource
@@ -66,14 +68,12 @@ module Schematics
         end
       end
 
-      def icon
+      def ability
         case resource
-        when Class
-          resource.entity.icon
-        when String
-          resource.safe_constantize&.entity&.icon || :question
+        when Class, String
+          :index
         else
-          resource.class.entity.icon
+          :show
         end
       end
     end

@@ -35,10 +35,6 @@ module Schematics
 
     private
 
-    def model_class = Version
-
-    def index_path = versions_path
-
     def set_version
       @version = model_class
                  .with_user
@@ -46,5 +42,9 @@ module Schematics
                  .load_async
                  .find_by_decoded_uuid!(params[:id])
     end
+
+    def model_class = Version
+
+    def index_path = versions_path
   end
 end

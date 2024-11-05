@@ -36,15 +36,19 @@ class TranslationGenerator < Rails::Generators::NamedBase
 
   private
 
+  def generating?
+    behavior == :invoke && !old_name
+  end
+
   def old_name = options[:rename]
+
+  def translate(text, locale:)
+    Core::Translations::Translate.call(text:, locale:).value
+  end
 
   def value = name
     .split('.')
     .last
-
-  def generating?
-    behavior == :invoke && !old_name
-  end
 
   def destroying?
     behavior == :revoke
@@ -52,9 +56,5 @@ class TranslationGenerator < Rails::Generators::NamedBase
 
   def renaming?
     behavior == :invoke && old_name
-  end
-
-  def translate(text, locale:)
-    Core::Translations::Translate.call(text:, locale:).value
   end
 end

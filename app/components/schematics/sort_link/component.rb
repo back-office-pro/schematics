@@ -35,12 +35,12 @@ module Schematics
         sorted_params&.include?(name)
       end
 
-      def desc?
-        sorted_params&.include?("-#{name}")
+      def sorted_params
+        params[:sort]&.split(',')
       end
 
-      def new_param?
-        !asc? && !desc?
+      def desc?
+        sorted_params&.include?("-#{name}")
       end
 
       def new_sorted_params
@@ -60,8 +60,8 @@ module Schematics
         end
       end
 
-      def sorted_params
-        params[:sort]&.split(',')
+      def new_param?
+        !asc? && !desc?
       end
     end
   end

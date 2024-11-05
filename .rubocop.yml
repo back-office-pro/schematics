@@ -212,8 +212,6 @@ Performance/MapMethodChain:
 Capybara/ClickLinkOrButtonStyle:
   EnforcedStyle: strict
 # rubocop-obsession
-Obsession/MethodOrder:
-  Enabled: false
 Obsession/Rails/ValidationMethodName:
   Enabled: false
 Obsession/Rails/MigrationBelongsTo:

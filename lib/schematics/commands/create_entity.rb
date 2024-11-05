@@ -26,6 +26,12 @@ module Schematics
 
       private
 
+      def scaffold_controller_generator
+        return if core?
+
+        Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
+      end
+
       def scaffold_generator
         return if core?
 
@@ -34,11 +40,6 @@ module Schematics
           ['--skip-resource-route', '--skip-migration']
         )
       end
-
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["create_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=uuid']
-      )
 
       def feature_generator
         return if core?
@@ -58,6 +59,11 @@ module Schematics
         PermissionsGenerator.new([name])
       end
 
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        ["create_#{table_name.pluralize}", *migratable_attributes],
+        ['--timestamps=true', '--primary_key_type=uuid']
+      )
+
       def create_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(
           [
@@ -66,12 +72,6 @@ module Schematics
             "#{association.inverse_entity.table_name.pluralize}:uniq"
           ]
         )
-      end
-
-      def scaffold_controller_generator
-        return if core?
-
-        Rails::Generators::ScaffoldControllerGenerator.new([name], ['--skip-resource-route'])
       end
     end
   end

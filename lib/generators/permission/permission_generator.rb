@@ -31,19 +31,19 @@ class PermissionGenerator < Rails::Generators::NamedBase
 
   private
 
+  def generating?
+    behavior == :invoke && !old_action
+  end
+
+  def old_action = options[:rename]
+
+  def model = entity.class_name
+
   def entity = Tenant
     .schema
     .find_entity_by_name(name.underscore)
 
-  def model = entity.class_name
-
   def action = options[:action]
-
-  def old_action = options[:rename]
-
-  def generating?
-    behavior == :invoke && !old_action
-  end
 
   def destroying?
     behavior == :revoke

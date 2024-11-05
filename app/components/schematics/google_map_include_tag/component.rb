@@ -11,15 +11,15 @@ module Schematics
 
       private
 
-      def query = { key: gcloud_api_key_with_fallback, loading:, libraries:, callback: }.to_param
-
       def host = 'maps.googleapis.com'
 
       def path = '/maps/api/js'
 
-      def libraries = 'places'
+      def query = { key: gcloud_api_key_with_fallback, loading:, libraries:, callback: }.to_param
 
       def loading = 'async'
+
+      def libraries = 'places'
 
       def callback = 'Function.prototype'
     end

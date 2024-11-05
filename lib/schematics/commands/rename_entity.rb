@@ -32,29 +32,6 @@ module Schematics
 
       private
 
-      def feature_generator(behavior: :invoke)
-        return if core?
-
-        Rspec::Generators::FeatureGenerator.new([name], [], behavior:)
-      end
-
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        [
-          "rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"
-        ]
-      )
-
-      def old_class_name = old_name.camelize
-
-      def old_name = attribute.name
-
-      def old_table_name = old_name.tr('/', '_')
-
-      def permissions_generator = PermissionsGenerator.new(
-        [name],
-        ["--rename=#{old_class_name}"]
-      )
-
       def scaffold_generator(behavior: :invoke)
         return if core?
 
@@ -65,11 +42,34 @@ module Schematics
         )
       end
 
+      def feature_generator(behavior: :invoke)
+        return if core?
+
+        Rspec::Generators::FeatureGenerator.new([name], [], behavior:)
+      end
+
       def translations_generator
         return if core?
 
         TranslationsGenerator.new([name], ["--rename=#{old_name}"])
       end
+
+      def old_name = attribute.name
+
+      def permissions_generator = PermissionsGenerator.new(
+        [name],
+        ["--rename=#{old_class_name}"]
+      )
+
+      def old_class_name = old_name.camelize
+
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        [
+          "rename_#{old_table_name.pluralize}_to_#{table_name.pluralize}"
+        ]
+      )
+
+      def old_table_name = old_name.tr('/', '_')
 
       # :reek:FeatureEnvy
       def rename_join_table_migration_generator(association)

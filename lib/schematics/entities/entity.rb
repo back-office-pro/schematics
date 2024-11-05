@@ -317,17 +317,17 @@ module Schematics
         has_many_associations + has_many_through_associations + has_and_belongs_to_many_associations
       end
 
-      def search_data_elements = searchable_elements
-        .map(&:search_data)
-        .map(&:squish)
-        .join(",\n  ")
-
       def created_at_attributes = [
         Attributes::Date.new(entity: self, name: 'created_at/day'),
         Attributes::Week.new(entity: self, name: 'created_at/week'),
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
+
+      def search_data_elements = searchable_elements
+        .map(&:search_data)
+        .map(&:squish)
+        .join(",\n  ")
 
       def spec_interpolations = { name: name.pluralize }
     end

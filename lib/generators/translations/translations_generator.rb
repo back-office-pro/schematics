@@ -230,14 +230,18 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
   private
 
+  def generating?
+    behavior == :invoke && !old_name
+  end
+
+  def old_name = options[:rename]
+
   def entity = Tenant
     .schema
     .find_entity_by_name(name.underscore)
 
-  def old_name = options[:rename]
-
-  def generating?
-    behavior == :invoke && !old_name
+  def translate(text, locale:, key: :value)
+    Core::Translations::Translate.call(text:, locale:).public_send(key)
   end
 
   def destroying?
@@ -246,9 +250,5 @@ class TranslationsGenerator < Rails::Generators::NamedBase # rubocop:disable Met
 
   def renaming?
     behavior == :invoke && old_name
-  end
-
-  def translate(text, locale:, key: :value)
-    Core::Translations::Translate.call(text:, locale:).public_send(key)
   end
 end

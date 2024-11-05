@@ -21,6 +21,16 @@ module Schematics
 
       private
 
+      def scaffold_generator
+        return if core?
+
+        Rails::Generators::ScaffoldGenerator.new(
+          [name, *migratable_attributes],
+          ['--skip-resource-route', '--skip-migration'],
+          behavior: :revoke
+        )
+      end
+
       def feature_generator
         return if core?
 
@@ -33,24 +43,14 @@ module Schematics
         TranslationsGenerator.new([name], [], behavior: :revoke)
       end
 
-      def migration_generator = Rails::Generators::MigrationGenerator.new(
-        ["drop_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=uuid']
-      )
-
       def permissions_generator
         PermissionsGenerator.new([name], [], behavior: :revoke)
       end
 
-      def scaffold_generator
-        return if core?
-
-        Rails::Generators::ScaffoldGenerator.new(
-          [name, *migratable_attributes],
-          ['--skip-resource-route', '--skip-migration'],
-          behavior: :revoke
-        )
-      end
+      def migration_generator = Rails::Generators::MigrationGenerator.new(
+        ["drop_#{table_name.pluralize}", *migratable_attributes],
+        ['--timestamps=true', '--primary_key_type=uuid']
+      )
 
       def drop_join_table_migration_generator(association)
         Rails::Generators::MigrationGenerator.new(

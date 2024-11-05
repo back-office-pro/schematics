@@ -3,6 +3,7 @@
 module Schematics
   module Viewer
     module Calendar
+      # :reek:DataClump
       class Component < Viewer::Component
         delegate :start_date_attribute_name,
                  :end_date_attribute_name,
@@ -40,8 +41,6 @@ module Schematics
 
         private
 
-        def filter_key = Ransack.options[:search_key]
-
         def alert_border_css_classes_for(resource, date)
           return %w[rounded-0] if siblings_resource_for?(resource, date)
           return %w[rounded-end me-2] if previous_resource_for?(resource, date)
@@ -50,24 +49,13 @@ module Schematics
           %w[rounded]
         end
 
-        def end_date = end_of_month_date
-          .end_of_week
-          .to_date
-
-        def end_of_month_date
-          (calendar_start_date || resources.maximum(start_date_attribute_name) || ::Date.current)
-            .end_of_month
-        end
-
-        def month_range = start_of_month_date..end_of_month_date
-
-        def next_resource_for?(resource, date)
-          resources_for(date.tomorrow).include?(resource)
-        end
-
         def siblings_resource_for?(resource, date)
           resources_for(date.yesterday).include?(resource) &&
             resources_for(date.tomorrow).include?(resource)
+        end
+
+        def next_resource_for?(resource, date)
+          resources_for(date.tomorrow).include?(resource)
         end
 
         def start_date = start_of_month_date
@@ -82,6 +70,19 @@ module Schematics
         def calendar_start_date = params
           .dig(filter_key, start_date_attribute_name, :gte)
           &.to_date
+
+        def filter_key = Ransack.options[:search_key]
+
+        def end_date = end_of_month_date
+          .end_of_week
+          .to_date
+
+        def end_of_month_date
+          (calendar_start_date || resources.maximum(start_date_attribute_name) || ::Date.current)
+            .end_of_month
+        end
+
+        def month_range = start_of_month_date..end_of_month_date
       end
     end
   end

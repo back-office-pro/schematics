@@ -37,6 +37,12 @@ module Core
           &.dig(key)
       end
 
+      def attributes_translations
+        ::I18n
+          .t(model.underscore.to_sym, scope: [i18n_scope, :attributes])
+          .transform_values { _1.try(:fetch, :other) || _1 }
+      end
+
       def transform_value(key, value) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         return unless value
 
@@ -65,16 +71,6 @@ module Core
         end
       end
 
-      def attributes_translations
-        ::I18n
-          .t(model.underscore.to_sym, scope: [i18n_scope, :attributes])
-          .transform_values { _1.try(:fetch, :other) || _1 }
-      end
-
-      def enums_translations
-        ::I18n.t(model.underscore.to_sym, scope: [i18n_scope, :enums])
-      end
-
       def association_value(field, value)
         case field.descriptor.field
         when Schematics::Behaviours::Translatable
@@ -89,6 +85,10 @@ module Core
             .eager_load(field.descriptor.joins)
             .find_by("#{field.descriptor.to_sql} = ?", value)
         end
+      end
+
+      def enums_translations
+        ::I18n.t(model.underscore.to_sym, scope: [i18n_scope, :enums])
       end
     end
   end

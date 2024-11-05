@@ -25,13 +25,13 @@ module OpenApi
 
       private
 
-      def formatter = ActionDispatch::Routing::ConsoleFormatter::Sheet.new
-
       def rails_routes = ::Rails
         .application
         .routes
         .routes
         .reject(&method(:localized?))
+
+      def formatter = ActionDispatch::Routing::ConsoleFormatter::Sheet.new
 
       def schematics_routes = ::Schematics::Engine
         .routes

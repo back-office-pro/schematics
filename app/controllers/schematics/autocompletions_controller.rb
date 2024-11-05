@@ -19,10 +19,6 @@ module Schematics
 
     private
 
-    def autocompletion_params = params
-      .require(:autocompletion)
-      .permit(:query)
-
     def authorize_create!
       return if can?(:autocomplete, parent_model_class)
 
@@ -36,5 +32,9 @@ module Schematics
         autocompletion_params[:query]
       )
     end
+
+    def autocompletion_params = params
+      .require(:autocompletion)
+      .permit(:query)
   end
 end

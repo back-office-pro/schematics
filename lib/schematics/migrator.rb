@@ -74,35 +74,15 @@ module Schematics
 
     private
 
-    def change_attribute_uniqueness_command(entity, current_attribute, new_attribute)
-      return if current_attribute.unique? == new_attribute.unique?
-
-      Commands::ChangeAttributeUniqueness.new(entity:, attribute: new_attribute)
-    end
-
-    def change_attribute_command(entity, current_attribute, new_attribute)
-      return if current_attribute.database_type == new_attribute.database_type
-
-      Commands::ChangeAttribute.new(entity:, attribute: new_attribute, target: current_attribute)
-    end
-
-    def rename_attribute_command(entity, current_attribute, new_attribute)
-      return if current_attribute.name == new_attribute.name
-
-      Commands::RenameAttribute.new(entity:, attribute: current_attribute, target: new_attribute)
-    end
-
     def rename_entity_command(entity, other_entity, target)
       return if entity.name == other_entity.name
 
       Commands::RenameEntity.new(entity:, attribute: other_entity, target:)
     end
 
-    def remove_attribute_commands(entity, new_entity)
-      entity
-        .attributes
-        .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
-        .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute:) }
+    def add_permission_commands(entity, current_entity)
+      add_action_permission_commands(entity, current_entity) +
+        add_event_permission_commands(entity, current_entity)
     end
 
     def add_action_permission_commands(entity, current_entity)
@@ -110,31 +90,6 @@ module Schematics
         .actions
         .difference(current_entity.actions)
         .map { |attribute| Commands::AddPermission.new(entity:, attribute:) }
-    end
-
-    def remove_action_permission_commands(entity, new_entity)
-      entity
-        .actions
-        .difference(new_entity.actions)
-        .map { |attribute| Commands::RemovePermission.new(entity:, attribute:) }
-    end
-
-    def rename_permission_command(entity, current_event, new_event)
-      return unless current_event
-      return if current_event.name == new_event.name
-
-      Commands::RenamePermission.new(
-        entity:,
-        attribute: current_event.name,
-        target: new_event.name
-      )
-    end
-
-    def remove_event_permission_commands(entity, new_entity)
-      entity
-        .events
-        .reject { |event| new_entity.events.find { _1.id == event.id } }
-        .map { |event| Commands::RemovePermission.new(entity:, attribute: event.name) }
     end
 
     def add_event_permission_commands(entity, current_entity)
@@ -156,14 +111,15 @@ module Schematics
         end
     end
 
-    def add_permission_commands(entity, current_entity)
-      add_action_permission_commands(entity, current_entity) +
-        add_event_permission_commands(entity, current_entity)
-    end
+    def rename_permission_command(entity, current_event, new_event)
+      return unless current_event
+      return if current_event.name == new_event.name
 
-    def remove_permission_commands(entity, new_entity)
-      remove_action_permission_commands(entity, new_entity) +
-        remove_event_permission_commands(entity, new_entity)
+      Commands::RenamePermission.new(
+        entity:,
+        attribute: current_event.name,
+        target: new_event.name
+      )
     end
 
     def add_translation_commands(entity, current_entity)
@@ -196,15 +152,6 @@ module Schematics
       Commands::RenameTranslation.new(entity:, attribute: current_item, target: new_item)
     end
 
-    def remove_translation_commands(entity, new_entity)
-      %i[virtuals events enum_values].flat_map do |items|
-        entity
-          .public_send(items)
-          .reject { |item| new_entity.public_send(items).find { _1.id == item.id } }
-          .map { |attribute| Commands::RemoveTranslation.new(entity:, attribute:) }
-      end
-    end
-
     def add_association_commands(entity, current_entity)
       associations = current_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
       entity
@@ -212,15 +159,6 @@ module Schematics
         .reject(&:hidden?)
         .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
         .map { |attribute| Commands::AddAssociation.new(entity:, attribute:) }
-    end
-
-    def remove_association_commands(entity, new_entity)
-      associations = new_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
-      entity
-        .has_and_belongs_to_many_associations
-        .reject(&:hidden?)
-        .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
-        .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
     end
 
     def add_attribute_commands(entity, current_entity)
@@ -236,6 +174,68 @@ module Schematics
             change_attribute_uniqueness_command(entity, current_attribute, attribute)
           ]
         end
+    end
+
+    def rename_attribute_command(entity, current_attribute, new_attribute)
+      return if current_attribute.name == new_attribute.name
+
+      Commands::RenameAttribute.new(entity:, attribute: current_attribute, target: new_attribute)
+    end
+
+    def change_attribute_command(entity, current_attribute, new_attribute)
+      return if current_attribute.database_type == new_attribute.database_type
+
+      Commands::ChangeAttribute.new(entity:, attribute: new_attribute, target: current_attribute)
+    end
+
+    def change_attribute_uniqueness_command(entity, current_attribute, new_attribute)
+      return if current_attribute.unique? == new_attribute.unique?
+
+      Commands::ChangeAttributeUniqueness.new(entity:, attribute: new_attribute)
+    end
+
+    def remove_permission_commands(entity, new_entity)
+      remove_action_permission_commands(entity, new_entity) +
+        remove_event_permission_commands(entity, new_entity)
+    end
+
+    def remove_action_permission_commands(entity, new_entity)
+      entity
+        .actions
+        .difference(new_entity.actions)
+        .map { |attribute| Commands::RemovePermission.new(entity:, attribute:) }
+    end
+
+    def remove_event_permission_commands(entity, new_entity)
+      entity
+        .events
+        .reject { |event| new_entity.events.find { _1.id == event.id } }
+        .map { |event| Commands::RemovePermission.new(entity:, attribute: event.name) }
+    end
+
+    def remove_attribute_commands(entity, new_entity)
+      entity
+        .attributes
+        .reject { |attribute| new_entity.attributes.find { _1.id == attribute.id } }
+        .map { |attribute| Commands::RemoveAttribute.new(entity:, attribute:) }
+    end
+
+    def remove_translation_commands(entity, new_entity)
+      %i[virtuals events enum_values].flat_map do |items|
+        entity
+          .public_send(items)
+          .reject { |item| new_entity.public_send(items).find { _1.id == item.id } }
+          .map { |attribute| Commands::RemoveTranslation.new(entity:, attribute:) }
+      end
+    end
+
+    def remove_association_commands(entity, new_entity)
+      associations = new_entity.has_and_belongs_to_many_associations.reject(&:hidden?)
+      entity
+        .has_and_belongs_to_many_associations
+        .reject(&:hidden?)
+        .reject { |association| associations.find { _1.association_type == association.association_type } } # rubocop:disable Layout/LineLength
+        .map { |attribute| Commands::RemoveAssociation.new(entity:, attribute:) }
     end
   end
 end

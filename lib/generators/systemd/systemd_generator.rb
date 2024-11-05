@@ -32,17 +32,17 @@ class SystemdGenerator < Rails::Generators::Base
     behavior == :invoke
   end
 
-  def destroying?
-    behavior == :revoke
-  end
-
   def systemd_path = Pathname.new('/etc/systemd')
 
   def service_path = systemd_path.join('system', service_filename)
 
-  def socket_path = systemd_path.join('system', socket_filename)
-
   def service_filename = "puma-#{Tenant.subdomain}.service"
 
+  def socket_path = systemd_path.join('system', socket_filename)
+
   def socket_filename = "puma-#{Tenant.subdomain}.socket"
+
+  def destroying?
+    behavior == :revoke
+  end
 end

@@ -25,8 +25,6 @@ class Ranking < Schematics::ApplicationRecord
 
   private
 
-  def entity_field = find_entity_field(field)
-
   def title
     return unless model_class
 
@@ -37,4 +35,6 @@ class Ranking < Schematics::ApplicationRecord
       period_title
     ].compact.join(' ')
   end
+
+  def entity_field = find_entity_field(field)
 end

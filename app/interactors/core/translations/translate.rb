@@ -20,20 +20,20 @@ module Core
 
       private
 
-      def scope = %i[i18n inflections gender]
-
       def gender
         return :f if female?
 
         :m
       end
 
-      def female_pronoun = t(:female_pronoun, scope:, locale:)
-
       def female? = context
         .value
         .downcase
         .start_with?(female_pronoun)
+
+      def female_pronoun = t(:female_pronoun, scope:, locale:)
+
+      def scope = %i[i18n inflections gender]
     end
   end
 end

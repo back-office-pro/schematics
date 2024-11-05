@@ -20,8 +20,6 @@ module Schematics
 
     private
 
-    def model_class = ::BlogPost
-
     def set_resource
       @resource = model_class
                   .preload_all
@@ -30,6 +28,8 @@ module Schematics
                   .load_async
                   .finder(params[:slug])
     end
+
+    def model_class = ::BlogPost
 
     def resource_path = blog_index_path
 

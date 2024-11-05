@@ -21,21 +21,21 @@ module Core
 
       private
 
-      def file = Backups::Create
-        .call(tables:)
-        .file
-
-      def join_tables = migrator_clean_commands
-        .grep(Schematics::Commands::RemoveAssociation)
-        .map(&:attribute)
-        .map(&:join_table)
-
       def tables = migrator_clean_commands
         .grep(Schematics::Commands::DestroyEntity)
         .map(&:entity)
         .map(&:table_name)
         .map(&:pluralize)
         .concat(join_tables)
+
+      def join_tables = migrator_clean_commands
+        .grep(Schematics::Commands::RemoveAssociation)
+        .map(&:attribute)
+        .map(&:join_table)
+
+      def file = Backups::Create
+        .call(tables:)
+        .file
     end
   end
 end

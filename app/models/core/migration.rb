@@ -86,10 +86,6 @@ class Migration < Schematics::ApplicationRecord
 
   private
 
-  def prompt_data
-    Schematics::GenerateSchemaJob.perform_later(self) if prompt_previously_changed?
-  end
-
   def quota_entities_cannot_be_exceeded
     return unless data
     return if data_size <= quota_entities
@@ -101,6 +97,10 @@ class Migration < Schematics::ApplicationRecord
     .entities
     .reject(&:core?) # rubocop:disable Performance/Count
     .size
+
+  def prompt_data
+    Schematics::GenerateSchemaJob.perform_later(self) if prompt_previously_changed?
+  end
 
   def previously_migrated_schema = self
     .class

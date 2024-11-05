@@ -22,15 +22,6 @@ module I18n
 
       private
 
-      # :reek:NilCheck
-      def count_to_key(count)
-        return '' unless count
-        return '.zero' if count.zero?
-        return '.one' if count == 1
-
-        '.other' if count > 1
-      end
-
       def fetch(locale, key)
         Rails.cache.fetch("translations/#{locale}/#{key}/value") do
           format_lookup ::Translation.lookup(locale, key), key
@@ -46,6 +37,15 @@ module I18n
         translations
           .transform_keys { _1.delete_prefix("#{key}.") }
           .flatten_to_nested
+      end
+
+      # :reek:NilCheck
+      def count_to_key(count)
+        return '' unless count
+        return '.zero' if count.zero?
+        return '.one' if count == 1
+
+        '.other' if count > 1
       end
     end
   end

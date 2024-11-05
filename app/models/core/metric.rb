@@ -37,19 +37,19 @@ class Metric < Schematics::ApplicationRecord
 
   private
 
-  def trend_range
-    2.public_send(period || :weeks).ago..1.public_send(period || :week).ago
-  end
-
-  def entity_field = find_entity_field(field)
-
   def title
     return unless model_class
 
     [title_for(entity_field), period_title].compact.join(' ')
   end
 
+  def entity_field = find_entity_field(field)
+
   def comparator_sign
     ActiveModel::Validations::Comparability::COMPARE_CHECKS[comparator.to_sym]
+  end
+
+  def trend_range
+    2.public_send(period || :weeks).ago..1.public_send(period || :week).ago
   end
 end

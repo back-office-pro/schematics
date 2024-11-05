@@ -44,18 +44,18 @@ module Rails
 
         private
 
+        def schema_attribute
+          @schema_attribute ||= ::Tenant
+                                .schema
+                                .find_attribute_by_prefixed_name(@type.to_s)
+        end
+
         def inject_index_type
           "using: :#{schema_attribute.database_index_type}" if schema_attribute
         end
 
         def inject_index_where
           "where: 'deleted_at IS NULL'" unless index_name in Array
-        end
-
-        def schema_attribute
-          @schema_attribute ||= ::Tenant
-                                .schema
-                                .find_attribute_by_prefixed_name(@type.to_s)
         end
       end
     end

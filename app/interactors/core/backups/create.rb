@@ -29,6 +29,14 @@ module Core
         Array(tables).map { "-t #{_1}" }
       end
 
+      def key = File.join(
+        'backups',
+        Time.current.strftime('%Y_%m_%d_%H_%M_%S_%L'),
+        filename
+      )
+
+      def filename = 'db.dump'
+
       def content_type = 'application/octet-stream'
 
       def file(content)
@@ -37,14 +45,6 @@ module Core
           .tap { _1.write(content) }
           .tap(&:rewind)
       end
-
-      def filename = 'db.dump'
-
-      def key = File.join(
-        'backups',
-        Time.current.strftime('%Y_%m_%d_%H_%M_%S_%L'),
-        filename
-      )
     end
   end
 end

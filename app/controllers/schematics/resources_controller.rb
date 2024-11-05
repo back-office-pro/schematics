@@ -122,20 +122,6 @@ module Schematics
 
     protected
 
-    def resource_path = main_app.polymorphic_path(@resource)
-
-    def index_path
-      return main_app.polymorphic_path(model_class) if can?(:index, model_class)
-
-      schematics.root_path
-    end
-
-    def set_breadcrumb
-      return unless can?(:index, model_class)
-
-      breadcrumb t('titles.schematics.resources.index', human_name_plural:), index_path
-    end
-
     def set_resource
       @resource = model_class
                   .preload_all
@@ -161,6 +147,20 @@ module Schematics
     def set_draft
       @draft = current_user.find_or_create_draft!(model_class.to_s, @resource&.id)
     end
+
+    def set_breadcrumb
+      return unless can?(:index, model_class)
+
+      breadcrumb t('titles.schematics.resources.index', human_name_plural:), index_path
+    end
+
+    def index_path
+      return main_app.polymorphic_path(model_class) if can?(:index, model_class)
+
+      schematics.root_path
+    end
+
+    def resource_path = main_app.polymorphic_path(@resource)
 
     def flash_interpolation_options = { human_name:, gender: }
   end

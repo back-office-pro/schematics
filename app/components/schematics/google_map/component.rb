@@ -12,11 +12,11 @@ module Schematics
 
       private
 
-      def query = { q: address, key: gcloud_api_key_with_fallback, zoom: }.to_param
-
       def host = 'www.google.com'
 
       def path = '/maps/embed/v1/place'
+
+      def query = { q: address, key: gcloud_api_key_with_fallback, zoom: }.to_param
 
       def address = CGI.escape(super || ' ')
 

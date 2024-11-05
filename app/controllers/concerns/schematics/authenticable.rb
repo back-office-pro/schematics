@@ -20,6 +20,8 @@ module Schematics
 
     def auth_token = http_token || cookies.permanent.encrypted[:auth_token]
 
+    def http_token = authenticate_with_http_token(&Session.method(:decode_auth_token))
+
     def api_key = request.headers['x-api-key']
 
     def authenticate_user!
@@ -45,17 +47,15 @@ module Schematics
         Guest::Session.new(request:)
     end
 
-    def current_user
-      @current_user ||= current_session.user
-    end
-
-    def http_token = authenticate_with_http_token(&Session.method(:decode_auth_token))
-
     def store_location
       return unless request.get? || request.head?
       return unless request.local?
 
       session[:return_to] = request.original_url
+    end
+
+    def current_user
+      @current_user ||= current_session.user
     end
 
     def touch_session!(&)

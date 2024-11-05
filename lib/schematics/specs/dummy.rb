@@ -19,6 +19,12 @@ module Schematics
 
       private
 
+      def filename = filename_array.join
+
+      def filename_array = ['dummy', ".#{@extension}"]
+
+      def content_type = ::Mime[@extension].to_s
+
       memoize def file = Tempfile
         .new(filename_array)
         .tap { _1.write(content_type) }
@@ -29,12 +35,6 @@ module Schematics
       memoize def base64_encoded = Base64.encode64(read)
 
       def data = ['data:', content_type, ';base64,', base64_encoded].join
-
-      def filename_array = ['dummy', ".#{@extension}"]
-
-      def filename = filename_array.join
-
-      def content_type = ::Mime[@extension].to_s
     end
   end
 end
