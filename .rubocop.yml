@@ -1,5 +1,6 @@
 require:
   - rubocop-capybara
+  - rubocop-obsession
   - rubocop-performance
   - rubocop-rails
   - rubocop-rake
@@ -210,3 +211,10 @@ Performance/MapMethodChain:
 # rubocop-capybara
 Capybara/ClickLinkOrButtonStyle:
   EnforcedStyle: strict
+# rubocop-obsession
+Obsession/MethodOrder:
+  Enabled: false
+Obsession/Rails/ValidationMethodName:
+  Enabled: false
+Obsession/Rails/MigrationBelongsTo:
+  Enabled: false

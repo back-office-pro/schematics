@@ -36,7 +36,7 @@ class Session < Schematics::ApplicationRecord
     sudo_at&.after?(ACTIVE_DELAY.ago)
   end
 
-  def sudo!
+  def sudo! # rubocop:disable Obsession/Rails/PrivateCallback
     update!(sudo_at: Time.current)
   end
 end

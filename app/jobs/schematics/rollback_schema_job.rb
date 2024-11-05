@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  class RollbackSchemaJob < ApplicationJob
+  class RollbackSchemaJob < ApplicationJob # rubocop:disable Obsession/Rails/ServiceName
     include Quietable
     queue_as :migrations
 
