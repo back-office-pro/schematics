@@ -7,9 +7,7 @@ module Schematics
 
       # :reek:ControlParameter
       def parse_sort_params(params)
-        params
-          &.split(',')
-          &.map { |param| param.start_with?('-') ? "#{param[1..]} desc" : "#{param} asc" } ||
+        params&.map { _1.start_with?('-') ? "#{_1[1..]} desc" : "#{_1} asc" } ||
           "#{implicit_order_column} desc"
       end
     end

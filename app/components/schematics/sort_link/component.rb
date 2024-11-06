@@ -36,7 +36,7 @@ module Schematics
       end
 
       def sorted_params
-        params[:sort]&.split(',')
+        params.extract_value(:sort, delimiter: ',')
       end
 
       def desc?
