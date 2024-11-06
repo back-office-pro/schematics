@@ -13,7 +13,7 @@ RSpec.describe Schematics::Guest::User do
   it { is_expected.not_to be_otp_enabled }
 
   its(:id) { is_expected.to be_nil }
-  its(:user_groups) { is_expected.to be_empty }
+  its(:teams) { is_expected.to be_empty }
   its(:preferences) { is_expected.to be_empty }
   its(:preferences_theme) { is_expected.to be_nil }
   its(:locale) { is_expected.to eq('en') }

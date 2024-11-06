@@ -6,7 +6,7 @@ module Core
       def call(auth_token, id)
         with_slugs
           .with_user_avatar
-          .with_user_user_groups_name
+          .with_user_teams_name
           .with_user_role_permissions
           .with_user_role_name
           .with_user_drafts

@@ -11,8 +11,8 @@ one:
           <td>{{ last_name }}</td>
           <td>{{ role.name }}</td>
           <td>
-            {% for user_group in user_groups %}
-              {{ user_group.name }}
+            {% for team in teams %}
+              {{ team.name }}
             {% endfor %}
           </td>
         </tr>

@@ -70,13 +70,13 @@ RSpec.shared_examples 'an interpolable template' do
     context 'when content has an association iteration' do
       let(:content) do
         <<~LIQUID
-          {% for user_group in user_groups -%}
-            {{ user_group.name }}
+          {% for team in teams -%}
+            {{ team.name }}
           {%- endfor %}
         LIQUID
       end
 
-      it { is_expected.to eq('My Group 2My Group 1') }
+      it { is_expected.to eq('My Team 2My Team 1') }
     end
 
     context 'when content has an unknown variable' do
@@ -127,8 +127,8 @@ RSpec.shared_examples 'an interpolable template' do
     context 'when content has an association iteration' do
       let(:content) do
         <<~LIQUID
-          {% for user_group in user_groups -%}
-            {{ user_group.name }}
+          {% for team in teams -%}
+            {{ team.name }}
           {%- endfor %}
         LIQUID
       end

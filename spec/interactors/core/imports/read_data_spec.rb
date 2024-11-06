@@ -17,7 +17,7 @@ RSpec.describe Core::Imports::ReadData do
           locale: :en,
           password: 'Azerty1234?!',
           time_zone: 'UTC',
-          user_groups:,
+          teams:,
           role:
         },
         2 => {
@@ -27,7 +27,7 @@ RSpec.describe Core::Imports::ReadData do
           locale: :fr,
           password: 'Azerty1234?!',
           time_zone: 'Paris',
-          user_groups:,
+          teams:,
           role:
         }
       }

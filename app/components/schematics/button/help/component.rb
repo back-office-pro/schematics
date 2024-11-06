@@ -13,7 +13,7 @@ module Schematics
           ::Configuration,
           ::Role,
           ::APIKey,
-          ::UserGroup,
+          ::Team,
           ::WebhookEndpoint,
           ::PDFTemplate,
           ::EmailTemplate,

@@ -12,11 +12,11 @@ en:
         deadline: Deadline
         late: Late
         state: State
+        teams:
+          one: Team
+          other: Teams
+          zero: No team
         title: Title
-        user_groups:
-          one: User group
-          other: User groups
-          zero: No user group
     enums:
       task:
         state:

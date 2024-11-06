@@ -12,10 +12,10 @@ RSpec.describe Schematics::JSONSerializer do
 
     context 'when template is show' do
       let(:options) { { template: 'show' } }
-      let(:expected_user_groups) do
+      let(:expected_teams) do
         [
-          { 'id' => be_a(String), 'name' => 'My Group 2' },
-          { 'id' => be_a(String), 'name' => 'My Group 1' }
+          { 'id' => be_a(String), 'name' => 'My Team 2' },
+          { 'id' => be_a(String), 'name' => 'My Team 1' }
         ]
       end
 
@@ -28,7 +28,7 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('full_name' => 'DOE John') }
       it { is_expected.to include('created_at' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
-      it { is_expected.to include('user_groups' => expected_user_groups) }
+      it { is_expected.to include('teams' => expected_teams) }
       it { is_expected.to include('sent_messages') }
       it { is_expected.to include('imports') }
       it { is_expected.to include('searches') }
@@ -50,7 +50,7 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('full_name' => 'DOE John') }
       it { is_expected.to include('created_at' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
-      it { is_expected.not_to include('user_groups') }
+      it { is_expected.not_to include('teams') }
       it { is_expected.not_to include('sent_messages') }
       it { is_expected.not_to include('imports') }
       it { is_expected.not_to include('searches') }
@@ -89,7 +89,7 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('full_name' => 'DOE John') }
       it { is_expected.to include('created_at' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => { 'id' => be_a(String), 'name' => 'Manager' }) }
-      it { is_expected.not_to include('user_groups') }
+      it { is_expected.not_to include('teams') }
       it { is_expected.not_to include('sent_messages') }
       it { is_expected.not_to include('imports') }
       it { is_expected.not_to include('searches') }
@@ -109,17 +109,17 @@ RSpec.describe Schematics::JSONSerializer do
           'name' => 'Manager'
         }
       end
-      let(:expected_user_groups) do
+      let(:expected_teams) do
         [
           {
             'created_at' => be_a(String),
             'id' => be_a(String),
-            'name' => 'My Group 2'
+            'name' => 'My Team 2'
           },
           {
             'created_at' => be_a(String),
             'id' => be_a(String),
-            'name' => 'My Group 1'
+            'name' => 'My Team 1'
           }
         ]
       end
@@ -133,7 +133,7 @@ RSpec.describe Schematics::JSONSerializer do
       it { is_expected.to include('full_name' => 'DOE John') }
       it { is_expected.to include('created_at' => be_a(ActiveSupport::TimeWithZone)) }
       it { is_expected.to include('role' => expected_role) }
-      it { is_expected.to include('user_groups' => expected_user_groups) }
+      it { is_expected.to include('teams' => expected_teams) }
       it { is_expected.to include('sent_messages') }
       it { is_expected.to include('imports') }
       it { is_expected.to include('searches') }

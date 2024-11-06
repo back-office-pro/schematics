@@ -9,7 +9,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "user_groups"
+        "name": "teams"
       }
     ],
     "virtuals": [
@@ -139,7 +139,7 @@
   },
   {
     "id": "6357fbc1-7cbe-4aef-9fd7-27a7ce65fbe9",
-    "name": "user_group",
+    "name": "team",
     "options": {
       "icon": "people_group",
       "descriptor": "name"
@@ -1180,7 +1180,7 @@
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "user_groups"
+        "name": "teams"
       }
     ],
     "attributes": [
@@ -1292,7 +1292,7 @@
       },
       {
         "type": "has_and_belongs_to_many",
-        "name": "user_groups"
+        "name": "teams"
       }
     ],
     "attributes": [

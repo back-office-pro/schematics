@@ -7,7 +7,7 @@ class Session < Schematics::ApplicationRecord
   scope :active, ::Core::Sessions::ActiveQuery
   scope :authorized_by, ::Core::Sessions::AuthorizedByQuery
   scope :with_user_slugs, -> { includes(user: :slugs) }
-  scope :with_user_user_groups_name, -> { includes(user: { user_groups: :string_translations }) }
+  scope :with_user_teams_name, -> { includes(user: { teams: :string_translations }) }
   scope :with_user_role_permissions, -> { includes(user: { role: :permissions }) }
   scope :with_user_role_name, -> { includes(user: { role: :string_translations }) }
 

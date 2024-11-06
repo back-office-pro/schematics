@@ -39,7 +39,7 @@ height:
   whodunnit: <%= User.first.id %>
 nine:
   event: create
-  item: one (UserGroup)
+  item: one (Team)
   whodunnit: <%= User.first.id %>
 ten:
   event: create

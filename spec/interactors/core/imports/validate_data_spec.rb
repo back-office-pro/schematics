@@ -18,7 +18,7 @@ RSpec.describe Core::Imports::ValidateData do
             locale: :en,
             password: 'Azerty1234?!',
             time_zone: 'UTC',
-            user_groups:,
+            teams:,
             role:
           },
           2 => {
@@ -28,7 +28,7 @@ RSpec.describe Core::Imports::ValidateData do
             locale: :fr,
             password: 'Azerty1234?!',
             time_zone: 'Paris',
-            user_groups:,
+            teams:,
             role:
           }
         }
@@ -77,7 +77,7 @@ RSpec.describe Core::Imports::ValidateData do
             locale: :en,
             password: 'Azerty1234?!',
             time_zone: 'UTC',
-            user_groups:,
+            teams:,
             role:
           },
           2 => {
@@ -87,7 +87,7 @@ RSpec.describe Core::Imports::ValidateData do
             locale: :fr,
             password: 'Azerty1234?!',
             time_zone: 'Paris',
-            user_groups:,
+            teams:,
             role:
           }
         }

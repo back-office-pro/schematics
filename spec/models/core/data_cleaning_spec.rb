@@ -10,7 +10,7 @@ RSpec.describe DataCleaning do
     freeze_time { example.run }
   end
 
-  its(:model_class) { is_expected.to eq(UserGroup) }
+  its(:model_class) { is_expected.to eq(Team) }
   its(:query_method) { is_expected.to eq(:destroy!) }
   its(:query_field) { is_expected.to eq(:deadline) }
   its(:query_range) { is_expected.to eq(..1.hour.ago) }

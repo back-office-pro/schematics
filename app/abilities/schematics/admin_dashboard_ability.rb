@@ -13,7 +13,7 @@ module Schematics
       ::Metric,
       ::Ranking,
       ::User,
-      ::UserGroup,
+      ::Team,
       ::Role,
       ::Documentation,
       ::WebhookRequest,

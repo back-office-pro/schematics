@@ -70,7 +70,7 @@ describe Schematics::Attributes::BelongsTo do
       scope :with_user, -> { includes([{:user=>:string_translations}]) }
       scope :with_user_avatar, -> { includes({:user=>[{:avatar_attachment=>[{:blob=>:variant_records}]}]}) }
       scope :with_user_role, -> { includes({:user=>[{:role=>:string_translations}]}) }
-      scope :with_user_user_groups, -> { includes({:user=>[:user_groups]}) }
+      scope :with_user_teams, -> { includes({:user=>[:teams]}) }
       scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
       scope :with_user_imports, -> { includes({:user=>[:imports]}) }
       scope :with_user_searches, -> { includes({:user=>[:searches]}) }
@@ -109,7 +109,7 @@ describe Schematics::Attributes::BelongsTo do
         scope :with_user, -> { includes([{:user=>:string_translations}]) }
         scope :with_user_avatar, -> { includes({:user=>[{:avatar_attachment=>[{:blob=>:variant_records}]}]}) }
         scope :with_user_role, -> { includes({:user=>[{:role=>:string_translations}]}) }
-        scope :with_user_user_groups, -> { includes({:user=>[:user_groups]}) }
+        scope :with_user_teams, -> { includes({:user=>[:teams]}) }
         scope :with_user_sent_messages, -> { includes({:user=>[:sent_messages]}) }
         scope :with_user_imports, -> { includes({:user=>[:imports]}) }
         scope :with_user_searches, -> { includes({:user=>[:searches]}) }

@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-RSpec.describe UserGroup do
+RSpec.describe Team do
   include Schematics::Specs::Feature
 end

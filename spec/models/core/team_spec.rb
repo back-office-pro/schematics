@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UserGroup do
+RSpec.describe Team do
   include Schematics::Specs::Model
 end

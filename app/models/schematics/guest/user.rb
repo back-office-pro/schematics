@@ -15,7 +15,7 @@ module Schematics
 
       def id = nil
 
-      def user_groups = ::UserGroup.none
+      def teams = ::Team.none
 
       def preferences = {}
 

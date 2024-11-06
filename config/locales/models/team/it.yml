@@ -1,0 +1,11 @@
+---
+it:
+  activerecord:
+    attributes:
+      team:
+        name: Nome
+    models:
+      team:
+        gender: female
+        one: Squadra
+        other: Squadre

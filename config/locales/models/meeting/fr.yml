@@ -13,12 +13,12 @@ fr:
           zero: Aucun participant
         start_at: Début le
         subject: Sujet
+        teams:
+          one: Equipe
+          other: Equipes
+          zero: Aucune équipe
         to_come: A venir
         url: URL
-        user_groups:
-          one: Groupe d'utilisateurs
-          other: Groupes d'utilisateurs
-          zero: Aucun groupe d'utilisateurs
     models:
       meeting:
         gender: female

@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
-RSpec.describe Schematics::UserGroupAbility do
+RSpec.describe Schematics::TeamAbility do
   subject(:ability) { ability_class.new(user) }
 
   include_context 'with user'
@@ -16,13 +16,13 @@ RSpec.describe Schematics::UserGroupAbility do
       end
     end
   end
-  let(:first_user_group) { UserGroup.create!(name: 'My Group 1') }
-  let(:second_user_group) { UserGroup.create!(name: 'My Group 2') }
+  let(:first_team) { Team.create!(name: 'My Team 1') }
+  let(:second_team) { Team.create!(name: 'My Team 2') }
   let(:other_user) do
     User.create!(
       email: 'jane.doe@nowhere.com',
       role:,
-      user_groups: other_user_groups
+      teams: other_teams
     )
   end
   let(:task) do
@@ -30,7 +30,7 @@ RSpec.describe Schematics::UserGroupAbility do
       title: 'My Task',
       applicant: user,
       assigneds: [user],
-      user_groups: other_user_groups
+      teams: other_teams
     )
   end
   let(:meeting) do
@@ -39,70 +39,70 @@ RSpec.describe Schematics::UserGroupAbility do
       creator: user,
       start_at: Time.current,
       end_at: 1.hour.from_now,
-      user_groups: other_user_groups,
+      teams: other_teams,
       participants: [user]
     )
   end
 
-  before { [first_user_group, second_user_group, other_user, task, meeting] }
+  before { [first_team, second_team, other_user, task, meeting] }
 
-  context 'when user groups are empty' do
-    let(:user_groups) { [] }
-    let(:other_user_groups) { [] }
-
-    it { is_expected.to be_able_to(:read, other_user) }
-    it { is_expected.to be_able_to(:read, task) }
-    it { is_expected.to be_able_to(:read, meeting) }
-  end
-
-  context 'when user groups are identical' do
-    let(:user_groups) { [first_user_group] }
-    let(:other_user_groups) { [first_user_group] }
+  context 'when teams are empty' do
+    let(:teams) { [] }
+    let(:other_teams) { [] }
 
     it { is_expected.to be_able_to(:read, other_user) }
     it { is_expected.to be_able_to(:read, task) }
     it { is_expected.to be_able_to(:read, meeting) }
   end
 
-  context 'when resources have two user groups' do
-    let(:user_groups) { [first_user_group] }
-    let(:other_user_groups) { [first_user_group, second_user_group] }
+  context 'when teams are identical' do
+    let(:teams) { [first_team] }
+    let(:other_teams) { [first_team] }
 
     it { is_expected.to be_able_to(:read, other_user) }
     it { is_expected.to be_able_to(:read, task) }
     it { is_expected.to be_able_to(:read, meeting) }
   end
 
-  context 'when user has two user groups' do
-    let(:user_groups) { [first_user_group, second_user_group] }
-    let(:other_user_groups) { [first_user_group] }
+  context 'when resources have two teams' do
+    let(:teams) { [first_team] }
+    let(:other_teams) { [first_team, second_team] }
 
     it { is_expected.to be_able_to(:read, other_user) }
     it { is_expected.to be_able_to(:read, task) }
     it { is_expected.to be_able_to(:read, meeting) }
   end
 
-  context 'when resources user groups are empty' do
-    let(:user_groups) { [first_user_group] }
-    let(:other_user_groups) { [] }
+  context 'when user has two teams' do
+    let(:teams) { [first_team, second_team] }
+    let(:other_teams) { [first_team] }
 
     it { is_expected.to be_able_to(:read, other_user) }
     it { is_expected.to be_able_to(:read, task) }
     it { is_expected.to be_able_to(:read, meeting) }
   end
 
-  context 'when user user groups are empty' do
-    let(:user_groups) { [] }
-    let(:other_user_groups) { [first_user_group] }
+  context 'when resources teams are empty' do
+    let(:teams) { [first_team] }
+    let(:other_teams) { [] }
+
+    it { is_expected.to be_able_to(:read, other_user) }
+    it { is_expected.to be_able_to(:read, task) }
+    it { is_expected.to be_able_to(:read, meeting) }
+  end
+
+  context 'when user teams are empty' do
+    let(:teams) { [] }
+    let(:other_teams) { [first_team] }
 
     it { is_expected.not_to be_able_to(:read, other_user) }
     it { is_expected.not_to be_able_to(:read, task) }
     it { is_expected.not_to be_able_to(:read, meeting) }
   end
 
-  context 'when user groups are different' do
-    let(:user_groups) { [first_user_group] }
-    let(:other_user_groups) { [second_user_group] }
+  context 'when teams are different' do
+    let(:teams) { [first_team] }
+    let(:other_teams) { [second_team] }
 
     it { is_expected.not_to be_able_to(:read, other_user) }
     it { is_expected.not_to be_able_to(:read, task) }

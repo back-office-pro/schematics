@@ -14,7 +14,7 @@ RSpec.describe Core::Migrations::Migrate do
   let(:rollback_state) { Migration::STATE_STATE_ROLLBACKING }
   let(:root) { Rails.root }
   let(:restart_file) { root.join('tmp/restart.txt') }
-  let(:rollback_user_transaction) { [User, Role, UserGroup].each(&:delete_all) }
+  let(:rollback_user_transaction) { [User, Role, Team].each(&:delete_all) }
   let(:rollback_migration) { Migration.new(data:, version: 2.0, state: rollback_state) }
   let(:rollback_initial_migration) do
     Migration.new(data: initial_data, version: 1.0, state: rollback_state)
@@ -369,7 +369,7 @@ RSpec.describe Core::Migrations::Migrate do
                 type: 'has_and_belongs_to_many'
               },
               {
-                name: 'user_groups',
+                name: 'teams',
                 type: 'has_and_belongs_to_many'
               }
             ],
@@ -398,16 +398,16 @@ RSpec.describe Core::Migrations::Migrate do
           .and change(Documentation, :count).by(1)
           .and change(restart_file, :mtime)
         expect(migration.backup).not_to be_attached
-        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_user_groups_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Prospect.new).to respond_to(:user_groups)
+        expect(Dir[root.join('db/migrate/*_create_join_table_prospects_teams_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Prospect.new).to respond_to(:teams)
         # rollback
         expect { expect(rollback).to be_a_success }
           .to not_change(Permission.with_deleted, :count)
           .and change(Translation.with_deleted, :count).by(-3)
           .and change(Documentation.with_deleted, :count).by(-1)
           .and change(restart_file, :mtime)
-        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_user_groups_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
-        expect(Prospect.new).not_to respond_to(:user_groups)
+        expect(Dir[root.join('db/migrate/*_drop_join_table_prospects_teams_*.rb')]).not_to be_empty
+        expect(Prospect.new).not_to respond_to(:teams)
       end
     end
 

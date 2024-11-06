@@ -48,11 +48,11 @@ fr:
           one: Tâche assignée
           other: Tâches assignées
           zero: Aucune tâche assignée
+        teams:
+          one: Equipe
+          other: Equipes
+          zero: Aucune équipe
         time_zone: Fuseau horaire
-        user_groups:
-          one: Groupe d'utilisateurs
-          other: Groupes d'utilisateurs
-          zero: Aucun groupe d'utilisateurs
     enums:
       user:
         locale:

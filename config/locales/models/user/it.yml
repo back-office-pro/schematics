@@ -48,11 +48,11 @@ it:
           one: Compito assegnato
           other: Compiti assegnati
           zero: Nessun compito assegnato
+        teams:
+          one: Squadra
+          other: Squadre
+          zero: Nessuna squadra
         time_zone: Fuso orario
-        user_groups:
-          one: Gruppo di utenti
-          other: Gruppi di utenti
-          zero: Nessun gruppo di utenti
     enums:
       user:
         locale:

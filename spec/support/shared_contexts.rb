@@ -49,10 +49,10 @@ end
 
 RSpec.shared_context 'with user' do
   let(:preferences) { {} }
-  let(:user_groups) do
+  let(:teams) do
     [
-      UserGroup.create!(name: 'My Group 1'),
-      UserGroup.create!(name: 'My Group 2')
+      Team.create!(name: 'My Team 1'),
+      Team.create!(name: 'My Team 2')
     ]
   end
   let(:role) do
@@ -69,7 +69,7 @@ RSpec.shared_context 'with user' do
       last_name: 'Doe',
       role:,
       preferences:,
-      user_groups:
+      teams:
     )
   end
 end

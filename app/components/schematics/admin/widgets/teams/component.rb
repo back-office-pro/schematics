@@ -3,7 +3,7 @@
 module Schematics
   module Admin
     module Widgets
-      module UserGroups
+      module Teams
         class Component < Widgets::Component
         end
       end

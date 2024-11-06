@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      team:
+        name: Name
+    models:
+      team:
+        gender: female
+        one: Team
+        other: Teams

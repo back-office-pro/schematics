@@ -35,7 +35,7 @@ module Schematics
       includes(
         user: [
           :string_translations,
-          { user_groups: :string_translations },
+          { teams: :string_translations },
           { avatar_attachment: { blob: :variant_records } }
         ]
       )

@@ -30,7 +30,7 @@ module Schematics
       merge DemoAbility.new
       merge SubscriptionAbility.new(user)
       merge SessionAbility.new(user)
-      merge UserGroupAbility.new(user)
+      merge TeamAbility.new(user)
     end
   end
 end

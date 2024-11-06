@@ -13,12 +13,12 @@ en:
           zero: No participant
         start_at: Start at
         subject: Subject
+        teams:
+          one: Team
+          other: Teams
+          zero: No team
         to_come: To come
         url: URL
-        user_groups:
-          one: User group
-          other: User groups
-          zero: No user group
     models:
       meeting:
         gender: male

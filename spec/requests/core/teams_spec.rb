@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UserGroupsController do
+RSpec.describe TeamsController do
   include Schematics::Specs::Request
 end
