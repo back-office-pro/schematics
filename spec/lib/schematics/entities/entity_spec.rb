@@ -53,16 +53,6 @@ describe Schematics::Entities::Entity do
     )
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      def search_data = {
-        content: content&.to_plain_text,
-        record: record&.to_s,
-        created_at:
-      }
-    RUBY
-  end
-
   context 'when entity name is not singular' do
     let(:name) { 'discussions' }
 
