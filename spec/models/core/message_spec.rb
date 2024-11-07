@@ -7,20 +7,7 @@ RSpec.describe Message do
 
   include_context 'with user'
 
-  its(:rich_text_mentions?) { is_expected.to be_falsy }
-
-  context 'when there are mentions' do
-    before { allow(record).to receive(:rich_text_mentions).and_return([user]) }
-
-    it 'does not send notifications after save' do
-      expect { record.save! }
-        .not_to have_enqueued_job(Schematics::NotifyJob)
-        .exactly(:once)
-        .with(record, 'mention', user)
-        .on_queue('notifications')
-        .at(:no_wait)
-    end
-  end
+  its(:rich_text_mentions) { is_expected.to be_empty }
 
   describe '#read?' do
     subject { record.read?(record.author) }

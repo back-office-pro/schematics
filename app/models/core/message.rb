@@ -19,7 +19,5 @@ class Message < Schematics::ApplicationRecord
     paper_trail_versions.exists?(event: 'show', user:)
   end
 
-  protected
-
-  def rich_text_mentions? = false
+  def rich_text_mentions = []
 end
