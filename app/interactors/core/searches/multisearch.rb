@@ -2,28 +2,26 @@
 
 module Core
   module Searches
-    class Searchkick
+    class Multisearch
       include Interactor
       delegate :query, :ability, to: :context, private: true
 
       def call
-        context.suggestions = results.flat_map(&:suggestions).uniq
-        context.typeahead = results.flat_map(&:results)
+        context.suggestions = []
+        context.typeahead = results.map(&:first)
         context.results = results
       end
 
       private
 
-      memoize def results = ::Searchkick
-        .multi_search(searches)
-        .reject(&:empty?)
-
-      def searches = ::Tenant
+      memoize def results = ::Tenant
         .schema
         .entities
         .reject(&:hidden?)
+        .select(&:multisearchable?)
         .filter_map(&:model_class)
         .map { _1.multisearch(query, ability) }
+        .reject(&:empty?)
     end
   end
 end

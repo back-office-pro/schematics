@@ -16,11 +16,6 @@ module Schematics
     include Previewable
     include Attachable
 
-    loadable concerns: [
-      ::Tenant.search_engine.concern,
-      SoftDeletable,
-      Trackable,
-      Sluggable
-    ]
+    loadable concerns: [Searchable, SoftDeletable, Trackable, Sluggable]
   end
 end

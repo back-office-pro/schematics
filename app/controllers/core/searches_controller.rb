@@ -14,9 +14,7 @@ class SearchesController < Schematics::ResourcesController
 
   def set_results
     @results, @suggestions, @typeahead =
-      Tenant
-      .search_engine
-      .multisearch
+      Core::Searches::Multisearch
       .call(query: @resource.query, ability: current_ability)
       .to_h
       .values_at(:results, :suggestions, :typeahead)

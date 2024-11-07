@@ -11,8 +11,6 @@ module Core
       progressable migration: 75
 
       def call
-        return unless ::Tenant.search_engine.indexable?
-
         migrator_new_and_changed_entities
           .filter_map(&:model_class)
           .each(&:reindex_async)

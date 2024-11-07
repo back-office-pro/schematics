@@ -111,7 +111,7 @@ ActiveSupport.on_load(:active_storage_attachment) do
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
-  include Tenant.search_engine.concern
+  include Schematics::Searchable
   prepend ActiveStorage::Override::Blob
 end
 

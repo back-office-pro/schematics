@@ -11,8 +11,6 @@ module Core
       progressable migration: 65
 
       def call
-        return unless ::Tenant.search_engine.indexable?
-
         migrator_old_entities
           .filter_map(&:model_class)
           .map(&:search_index)

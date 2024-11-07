@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Ransackable
+  module Searchable
     extend ActiveSupport::Concern
 
     included do

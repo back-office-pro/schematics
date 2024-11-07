@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
-require 'search_engine/database'
-require 'search_engine/opensearch'
 require 'uri'
 
 # :reek:Attribute
 class Tenant
   class << self
     DEFAULT_PORT = 3000
-    DEFAULT_SEARCH_ENGINE = :Database
     SEMAPHORE = Mutex.new.freeze
 
     def schema
@@ -21,12 +18,6 @@ class Tenant
     def schema=(value)
       SEMAPHORE.synchronize do
         @schema = value
-      end
-    end
-
-    def search_engine
-      SEMAPHORE.synchronize do
-        @search_engine ||= SearchEngine.const_get(search_engine_name).new
       end
     end
 
@@ -120,19 +111,6 @@ class Tenant
         .getvalue(0, 0)
     rescue StandardError
       []
-    end
-
-    def search_engine_name
-      [DEFAULT_SEARCH_ENGINE, :Opensearch].at(
-        ActiveRecord::Base
-          .lease_connection
-          .execute("SELECT metadata -> 'databases' FROM subscriptions")
-          .getvalue(0, 0)
-          .to_i
-          .pred
-      )
-    rescue StandardError
-      DEFAULT_SEARCH_ENGINE
     end
   end
 end

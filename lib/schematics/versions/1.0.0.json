@@ -1628,7 +1628,6 @@
             "api_keys": 2,
             "storage": 1,
             "entities": 10,
-            "databases": 1,
             "support": 0
           }
         }

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Ransackable::ListQuery do
+RSpec.describe Schematics::Searchable::MultisearchQuery do
   subject(:query) { described_class.new(model_class) }
 
   include_context 'with user'
@@ -16,16 +16,16 @@ RSpec.describe Schematics::Ransackable::ListQuery do
   before { other_user }
 
   describe '.call' do
-    subject { query.call(filter_params, ability) }
+    subject { query.call(param, ability) }
 
     context 'when looking for john' do
-      let(:filter_params) { { email_i_cont: 'john' } }
+      let(:param) { 'john' }
 
       it { is_expected.to contain_exactly(user) }
     end
 
     context 'when looking for jane' do
-      let(:filter_params) { { email_i_cont: 'jane' } }
+      let(:param) { 'jane' }
 
       it { is_expected.to contain_exactly(other_user) }
     end

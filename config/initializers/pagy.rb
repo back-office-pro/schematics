@@ -6,7 +6,6 @@ require 'pagy/extras/headers'
 require 'pagy/extras/i18n'
 require 'pagy/extras/limit'
 require 'pagy/extras/overflow'
-require 'pagy/extras/searchkick'
 
 module LocalizePagyCalendar
   def localize(time, opts)

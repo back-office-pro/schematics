@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Schematics::Searchkickable::MultisearchQuery do
+RSpec.describe Schematics::Searchable::ListQuery do
   subject(:query) { described_class.new(model_class) }
 
   include_context 'with user'
@@ -13,21 +13,19 @@ RSpec.describe Schematics::Searchkickable::MultisearchQuery do
   let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
 
-  before { [user, other_user, User.include(Schematics::Searchkickable).tap(&:reindex)] }
-
-  after { User.reload_definitions! }
+  before { other_user }
 
   describe '.call' do
-    subject { query.call(param, ability) }
+    subject { query.call(filter_params, ability) }
 
     context 'when looking for john' do
-      let(:param) { 'john' }
+      let(:filter_params) { { email_i_cont: 'john' } }
 
       it { is_expected.to contain_exactly(user) }
     end
 
     context 'when looking for jane' do
-      let(:param) { 'jane' }
+      let(:filter_params) { { email_i_cont: 'jane' } }
 
       it { is_expected.to contain_exactly(other_user) }
     end

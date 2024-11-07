@@ -1,21 +1,4 @@
 services:
-  opensearch:
-    image: opensearchproject/opensearch:2.9.0
-    container_name: os01
-    environment:
-      - node.name=os01
-      - cluster.initial_master_nodes=os01
-      - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "DISABLE_SECURITY_PLUGIN=true"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    ports:
-      - 9200:9200
-    volumes:
-      - opensearch-data:/usr/share/opensearch/data 
   postgres:
     image: postgres:17
     ports:
@@ -43,17 +26,14 @@ services:
     volumes:
       - storage-data:/app/storage
     depends_on:
-      - opensearch
       - postgres
       - clamav
       - chrome
     environment:
       - PRIMARY_DATABASE_URL=postgres://postgres@postgres
-      - OPENSEARCH_URL=http://opensearch:9200
       - CHROME_URL=http://chrome:3333
       - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
-  opensearch-data:
   postgres-data:
   clamav-data:
   storage-data:

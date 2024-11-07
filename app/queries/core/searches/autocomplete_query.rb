@@ -6,9 +6,7 @@ module Core
       LIMIT = 5
 
       def call(*, ability, query)
-        ::Tenant
-          .search_engine
-          .multisearch
+        Multisearch
           .call(query:, ability:)
           .to_h
           .fetch(:typeahead)
