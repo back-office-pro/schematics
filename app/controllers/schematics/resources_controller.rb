@@ -139,7 +139,6 @@ module Schematics
       @calendar, @pagy, @resources = pagy_calendar(
         @resources,
         month: { format: t('date.formats.month') },
-        pagy: { backend: :pagy },
         active: viewer == :calendar
       )
     end
