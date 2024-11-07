@@ -2,7 +2,7 @@
 
 module SearchEngine
   # :reek:MissingSafeMethod
-  class Postgresql
+  class Database
     def indexable? = false
 
     def concern = Schematics::Ransackable

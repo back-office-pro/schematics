@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/module/delegation'
+require 'search_engine/database'
 require 'search_engine/opensearch'
-require 'search_engine/postgresql'
 require 'uri'
 
 # :reek:Attribute
 class Tenant
   class << self
     DEFAULT_PORT = 3000
-    DEFAULT_SEARCH_ENGINE = :Postgresql
+    DEFAULT_SEARCH_ENGINE = :Database
     SEMAPHORE = Mutex.new.freeze
 
     def schema

@@ -24,7 +24,7 @@ RSpec.describe 'Resources' do
 
   before { [first_api_key, second_api_key] }
 
-  %i[Postgresql Opensearch].each do |search_engine_name|
+  %i[Database Opensearch].each do |search_engine_name|
     describe 'GET #api_keys' do
       let(:do_request) { get(api_keys_path, params:, headers:) }
       let(:search_engine) { SearchEngine.const_get(search_engine_name).new }

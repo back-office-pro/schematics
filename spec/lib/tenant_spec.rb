@@ -19,7 +19,7 @@ describe Tenant do
     it { is_expected.not_to be_ssl }
 
     its(:schema) { is_expected.to be_a(Schematics::Schema) }
-    its(:search_engine) { is_expected.to be_a(SearchEngine::Postgresql) }
+    its(:search_engine) { is_expected.to be_a(SearchEngine::Database) }
     its(:app_name) { is_expected.to eq('demo') }
     its(:subdomain) { is_expected.to eq('demo') }
     its(:domain) { is_expected.to eq('back-office.pro') }
