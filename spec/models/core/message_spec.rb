@@ -9,6 +9,15 @@ RSpec.describe Message do
 
   its(:rich_text_mentions) { is_expected.to be_empty }
 
+  it 'does not send notifications after save' do
+    expect { record.save! }
+      .not_to have_enqueued_job(Schematics::NotifyJob)
+      .exactly(:once)
+      .with(record, 'mention', user)
+      .on_queue('notifications')
+      .at(:no_wait)
+  end
+
   describe '#read?' do
     subject { record.read?(record.author) }
 
