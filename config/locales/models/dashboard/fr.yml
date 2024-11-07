@@ -1,0 +1,11 @@
+---
+fr:
+  activerecord:
+    attributes:
+      dashboard:
+        title: Titre
+    models:
+      dashboard:
+        gender: male
+        one: Tableau de bord
+        other: Tableaux de bord

@@ -1,0 +1,11 @@
+---
+it:
+  activerecord:
+    attributes:
+      dashboard:
+        title: Titolo
+    models:
+      dashboard:
+        gender: male
+        one: Cruscotto
+        other: Cruscotti

@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      dashboard:
+        title: Title
+    models:
+      dashboard:
+        gender: male
+        one: Dashboard
+        other: Dashboards
