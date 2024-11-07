@@ -83,7 +83,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'listen', '3.9.0'
   spec.add_dependency 'lograge', '0.14.0'
   spec.add_dependency 'memery', '1.6.0'
-  spec.add_dependency 'mission_control-jobs', '0.3.3'
+  spec.add_dependency 'mission_control-jobs', '0.4.0'
   spec.add_dependency 'mobility', '1.3.0.rc3'
   spec.add_dependency 'mobility-actiontext', '1.1.1'
   spec.add_dependency 'mobility-ransack', '1.2.2'
