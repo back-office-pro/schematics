@@ -5,6 +5,6 @@ require 'rails'
 describe 'Database config file' do
   it_behaves_like 'an overridden file',
                   :railties,
-                  '/lib/rails/generators/rails/app/templates/config/databases/postgresql.yml.tt',
-                  '79353d10f4525c42119cb51c0507d939ce6477870145bd23c929533666abcb17'
+                  '/lib/rails/generators/rails/app/templates/config/databases/sqlite3.yml.tt',
+                  '124f2e295c379349970f84dfb6b7119672fdf8f5ba80a07304d3bfede21fce4c'
 end
