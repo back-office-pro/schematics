@@ -6,40 +6,24 @@ jobs:
   rspec:
     name: RSpec
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
           ruby-version: 3.3.6
-      - name: Install postgres and dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -yqq install libpq-dev libvips-dev graphviz
+          sudo apt-get -yqq install libvips-dev graphviz
       - name: Setup Database
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
         run: bin/rails db:migrate:reset
       - name: Load fixtures
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
           FIXTURES_PATH: spec/fixtures
           FIXTURES: migrations
@@ -48,7 +32,6 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
         run: bundle exec rspec
   brakeman:
