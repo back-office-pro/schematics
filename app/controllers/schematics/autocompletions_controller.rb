@@ -4,7 +4,7 @@ module Schematics
   # :reek:MissingSafeMethod
   class AutocompletionsController < ApplicationController
     include Nestable
-    include Searchable
+    include Filterable
 
     before_action :authorize_create!, only: :create
     before_action :set_results, only: :create

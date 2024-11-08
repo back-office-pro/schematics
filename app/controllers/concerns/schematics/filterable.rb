@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Schematics
-  module Searchable
+  module Filterable
     extend ActiveSupport::Concern
 
     def log_search!

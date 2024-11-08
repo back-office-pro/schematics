@@ -3,7 +3,7 @@
 module Schematics
   class ResourcesController < ApplicationController # rubocop:disable Metrics/ClassLength
     include Fillable
-    include Searchable
+    include Filterable
     include Calendarable
     include Documentable
     include Viewable
