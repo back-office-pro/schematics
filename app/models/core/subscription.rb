@@ -38,7 +38,7 @@ class Subscription < Schematics::ApplicationRecord
 
     def quota = Data
       .define(:entities, :storage, :users, :api_keys, :support)
-      .new(**metadata.except('databases'))
+      .new(**metadata)
 
     memoize def storage_size = ActiveStorage::Blob
       .with_deleted
