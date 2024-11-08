@@ -63,9 +63,7 @@ module Core
             .find_country_by_any_name(value)
             &.alpha2
         when Schematics::Attributes::Mime
-          Mime::Type
-            .lookup_by_extension(value.downcase)
-            &.__send__(:string)
+          Mime[value.downcase].to_s
         when Schematics::Attributes::Array, Schematics::Attributes::Flag
           value.split(VALUES_SEPARATOR)
         end
