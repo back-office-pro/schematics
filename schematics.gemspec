@@ -97,7 +97,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'omniauth-saml', '2.2.1'
   spec.add_dependency 'opensearch-ruby', '3.4.0'
   spec.add_dependency 'pagy', '9.2.0'
-  spec.add_dependency 'paper_trail', '15.2.0'
+  spec.add_dependency 'paper_trail', '16.0.0'
   spec.add_dependency 'paranoia', '3.0.0'
   spec.add_dependency 'pg', '1.5.9'
   spec.add_dependency 'phonelib', '0.9.3'
@@ -116,7 +116,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rollbar', '3.6.0'
   spec.add_dependency 'rouge', '4.4.0'
   spec.add_dependency 'routes_lazy_routes', '0.4.3' # TODO: remove when upgrading to Rails 8
-  spec.add_dependency 'route_translator', '14.1.2'
+  spec.add_dependency 'route_translator', '14.2.0'
   spec.add_dependency 'rqrcode', '2.2.0'
   spec.add_dependency 'rspec-rails', '7.0.1'
   spec.add_dependency 'ruby-graphviz', '1.2.5'
