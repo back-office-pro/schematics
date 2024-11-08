@@ -5,7 +5,6 @@ class Subscription < Schematics::ApplicationRecord
   GATEWAY = ::Core::Subscriptions::Stripe
 
   attribute :default_locale, default: -> { Rails.configuration.i18n.default_locale }
-  store_accessor :metadata, prefix: true
 
   class << self
     delegate :entities, :users, :api_keys, to: :quota, prefix: true
