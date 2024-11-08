@@ -62,7 +62,7 @@
       type: attachment
       options:
         content_type:
-          - pdf
+          - application/pdf
 - id: <%= SecureRandom.uuid %>
   name: purchase
   attributes:

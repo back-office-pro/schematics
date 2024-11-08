@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'action_view'
+require 'active_support/core_ext/array/conversions'
 require 'active_support/core_ext/enumerable'
 
 module Schematics
@@ -49,7 +50,7 @@ module Schematics
         self.class.human_attribute_name(key, default: ''),
         case value
         when ::Array
-          value.map(&:to_s).map(&:upcase).join(' ')
+          value.to_sentence
         when ::Hash
           human(validators: value)
         when ::Numeric

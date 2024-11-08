@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'action_dispatch/http/mime_type'
 require 'active_support/core_ext/array/access'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/numeric/bytes'
@@ -55,9 +56,9 @@ module Schematics
                                       reject_if: :all_blank
       RUBY
 
-      def extension = options
-        .content_type
-        &.first
+      def extension
+        ::Mime::Type.lookup(options.content_type.first).symbol if options.content_type
+      end
 
       def validators = super
         .rename_keys(presence: :attached)
@@ -73,9 +74,8 @@ module Schematics
             height: options.height
           },
           content_type: options.content_type && {
-            with: options.content_type.map(&:to_sym)
-            # TODO: uncomment it when fixed
-            # spoofing_protection: true
+            with: options.content_type,
+            spoofing_protection: true
           }
         )
 
@@ -117,7 +117,7 @@ module Schematics
           mov: :file_video,
           wmv: :file_video,
           mp4: :file_video
-        }[extension&.to_sym] || :file
+        }[extension] || :file
       end
 
       def image?

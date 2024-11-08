@@ -23,7 +23,7 @@
       type: attachments
       options:
         content_type:
-          - pdf
+          - application/pdf
 - id: <%= SecureRandom.uuid %>
   name: construction_site_movement
   options:

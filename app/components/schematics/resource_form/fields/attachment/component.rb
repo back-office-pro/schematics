@@ -6,11 +6,10 @@ module Schematics
       module Attachment
         class Component < Fields::Component
           delegate :validators, :attributes_param_key, to: :field
-          delegate :content_type, to: :options
           delegate :attached?, to: :value
 
-          def accept = content_type
-            &.map { ".#{_1}" }
+          def accept = options
+            .content_type
             &.join(',')
 
           def help = __attachment_validator(validators.human)

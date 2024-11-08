@@ -4,7 +4,7 @@ describe Schematics::Specs::Dummy do
   subject(:dummy) { described_class.new(extension) }
 
   context 'when extension is pdf' do
-    let(:extension) { 'pdf' }
+    let(:extension) { :pdf }
 
     its(:default) { is_expected.to be_a(Rack::Test::UploadedFile) }
     its('default.content_type') { is_expected.to eq('application/pdf') }
@@ -22,7 +22,7 @@ describe Schematics::Specs::Dummy do
   end
 
   context 'when extension is png' do
-    let(:extension) { 'png' }
+    let(:extension) { :png }
 
     its(:default) { is_expected.to be_a(Rack::Test::UploadedFile) }
     its('default.content_type') { is_expected.to eq('image/png') }

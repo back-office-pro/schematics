@@ -140,10 +140,10 @@ describe Schematics::Attributes::Attachment do
   end
 
   context 'when content_type option is defined' do
-    let(:options) { { content_type: %w[png jpg jpeg] } }
+    let(:options) { { content_type: ['image/png', 'image/jpeg'] } }
 
     it { is_expected.to be_image }
-    its(:extension) { is_expected.to eq('png') }
+    its(:extension) { is_expected.to eq(:png) }
     its(:icon) { is_expected.to eq(:file_image) }
 
     its(:validators) do
@@ -151,16 +151,15 @@ describe Schematics::Attributes::Attachment do
         antivirus: true,
         storage_quota: true,
         content_type: {
-          with: %i[png jpg jpeg]
-          # TODO: uncomment when fixed
-          # spoofing_protection: true
+          with: ['image/png', 'image/jpeg'],
+          spoofing_protection: true
         }
       )
     end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:antivirus=>true, :storage_quota=>true, :content_type=>{:with=>[:png, :jpg, :jpeg]}}
+        validates :avatar, {:antivirus=>true, :storage_quota=>true, :content_type=>{:with=>["image/png", "image/jpeg"], :spoofing_protection=>true}}
       RUBY
     end
   end

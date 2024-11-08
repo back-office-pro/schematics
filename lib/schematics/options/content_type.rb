@@ -12,7 +12,7 @@ module Schematics
 
         def multiple? = true
 
-        def collection = ::Mime::EXTENSION_LOOKUP
+        def collection = ::Mime::LOOKUP
           .keys
           .sort
       end

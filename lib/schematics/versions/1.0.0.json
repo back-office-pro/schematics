@@ -67,9 +67,8 @@
         "type": "attachment",
         "options": {
           "content_type": [
-            "png",
-            "jpeg",
-            "jpg"
+            "image/png",
+            "image/jpeg"
           ],
           "size": 2
         }
@@ -336,9 +335,8 @@
         "options": {
           "cached": true,
           "content_type": [
-            "png",
-            "jpeg",
-            "jpg"
+            "image/png",
+            "image/jpeg"
           ],
           "size": 2,
           "group": "company"
@@ -590,7 +588,7 @@
         "options": {
           "required": true,
           "content_type": [
-            "csv"
+            "text/csv"
           ]
         }
       },
@@ -1114,10 +1112,7 @@
         "name": "backup",
         "type": "attachment",
         "options": {
-          "hidden": true,
-          "content_type": [
-            "binary"
-          ]
+          "hidden": true
         }
       }
     ]
@@ -1665,9 +1660,8 @@
         "type": "attachment",
         "options": {
           "content_type": [
-            "png",
-            "jpeg",
-            "jpg"
+            "image/png",
+            "image/jpeg"
           ],
           "size": 2
         }
@@ -2107,10 +2101,7 @@
         "type": "attachment",
         "options": {
           "hidden": true,
-          "required": true,
-          "content_type": [
-            "binary"
-          ]
+          "required": true
         }
       },
       {
@@ -2182,9 +2173,8 @@
         "options": {
           "readonly": true,
           "content_type": [
-            "png",
-            "jpeg",
-            "jpg"
+            "image/png",
+            "image/jpeg"
           ],
           "size": 2
         }
