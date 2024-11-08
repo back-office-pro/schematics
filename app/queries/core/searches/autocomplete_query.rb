@@ -6,10 +6,9 @@ module Core
       LIMIT = 5
 
       def call(*, ability, query)
-        Multisearch
-          .call(query:, ability:)
-          .to_h
-          .fetch(:typeahead)
+        PgSearch
+          .multisearch(query)
+          .accessible_by(ability)
           .take(LIMIT)
       end
     end

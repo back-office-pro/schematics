@@ -112,6 +112,7 @@ end
 
 ActiveSupport.on_load(:active_storage_blob) do
   include Schematics::Searchable
+  include Schematics::Multisearchable
   prepend ActiveStorage::Override::Blob
 end
 
