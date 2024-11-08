@@ -6,7 +6,6 @@ module Schematics
 
     included do
       scope :autocomplete, AutocompleteQuery.new(self) # rubocop:disable Rails/ScopeArgs
-      scope :multisearch, MultisearchQuery.new(self) # rubocop:disable Rails/ScopeArgs
       scope :list, ListQuery.new(self) # rubocop:disable Rails/ScopeArgs
     end
 

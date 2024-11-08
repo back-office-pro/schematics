@@ -16,6 +16,12 @@ module Schematics
     include Previewable
     include Attachable
 
-    loadable concerns: [Searchable, SoftDeletable, Trackable, Sluggable]
+    loadable concerns: [
+      Searchable,
+      Multisearchable,
+      SoftDeletable,
+      Trackable,
+      Sluggable
+    ]
   end
 end

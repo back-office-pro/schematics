@@ -5,7 +5,7 @@ class SearchesController < Schematics::ResourcesController
   after_action -> { flash.clear }
 
   def show
-    return unless stale?(@typeahead)
+    return unless stale?(@results)
 
     respond_with @results
   end
@@ -13,10 +13,8 @@ class SearchesController < Schematics::ResourcesController
   protected
 
   def set_results
-    @results, @suggestions, @typeahead =
-      Core::Searches::Multisearch
-      .call(query: @resource.query, ability: current_ability)
-      .to_h
-      .values_at(:results, :suggestions, :typeahead)
+    @results = PgSearch
+      .multisearch(@resource.query)
+      .accessible_by(current_ability)
   end
 end

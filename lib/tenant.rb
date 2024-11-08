@@ -63,10 +63,6 @@ class Tenant
 
     def human = app_name.humanize
 
-    def index_name(model_name)
-      [app_name, model_name.plural, Rails.env].join('_')
-    end
-
     def default_url_options = { host:, port: }.compact
 
     def default_mailer_options = { from: "no-reply@#{host}" }

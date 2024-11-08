@@ -54,6 +54,12 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations', env:
   end
 
+  def install_pg_search
+    return unless generating?
+
+    rails_command 'generate pg_search:migration:multisearch', env:
+  end
+
   def create_database
     return if container?
     return unless generating?

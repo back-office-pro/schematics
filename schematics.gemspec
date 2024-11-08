@@ -99,6 +99,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paper_trail', '16.0.0'
   spec.add_dependency 'paranoia', '3.0.0'
   spec.add_dependency 'pg', '1.5.9'
+  spec.add_dependency 'pg_search', '2.3.7'
   spec.add_dependency 'phonelib', '0.9.3'
   spec.add_dependency 'propshaft', '1.1.0'
   spec.add_dependency 'puma', '6.4.3'
