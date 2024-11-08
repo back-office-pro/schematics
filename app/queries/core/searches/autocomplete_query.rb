@@ -9,7 +9,7 @@ module Core
         PgSearch
           .multisearch(query)
           .accessible_by(ability)
-          .take(LIMIT)
+          .limit(LIMIT)
       end
     end
   end
