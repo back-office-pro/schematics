@@ -14,7 +14,7 @@ class SearchesController < Schematics::ResourcesController
 
   def set_results
     @results = PgSearch
-      .multisearch(@resource.query)
-      .accessible_by(current_ability)
+               .multisearch(@resource.query)
+               .accessible_by(current_ability)
   end
 end
