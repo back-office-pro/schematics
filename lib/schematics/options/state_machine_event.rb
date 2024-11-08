@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'action_view'
+require 'active_support/core_ext/array/conversions'
 
 module Schematics
   module Options
