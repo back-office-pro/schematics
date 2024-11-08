@@ -13,10 +13,6 @@ module Schematics
         ransack_alias :#{name}, :#{search_column}
       RUBY
 
-      def search_data = <<~RUBY.squish
-        #{name}:
-      RUBY
-
       def open_api_filter_type
         case open_api_type
         when Hash

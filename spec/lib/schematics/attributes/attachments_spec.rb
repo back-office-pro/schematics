@@ -82,12 +82,6 @@ describe Schematics::Attributes::Attachments do
     )
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      files: files.map(&:filename).map(&:to_s).join(',')
-    RUBY
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_many_base64_attached :files

@@ -37,12 +37,6 @@ module Schematics
 
       def includes = { blob: :variant_records }
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          (#{name}.filename.to_s if #{name}.attached?)
-        RUBY
-
       def search_column = :"#{search_column_association}_filename"
 
       def search_column_association = "#{name}_blob"

@@ -49,7 +49,6 @@ module Schematics
         paranoia_sentinel_value
         really_delete
         rich_text_mentions
-        search_data
         serialized_json
         slug
         slugs

@@ -52,12 +52,6 @@ describe Schematics::Attributes::RichText do
     )
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      summary: summary&.to_plain_text
-    RUBY
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       has_rich_text :summary

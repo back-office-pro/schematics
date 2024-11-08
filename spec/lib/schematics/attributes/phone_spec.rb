@@ -65,12 +65,6 @@ describe Schematics::Attributes::Phone do
     RUBY
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      phone: phone&.to_s
-    RUBY
-  end
-
   context 'when phone is unique' do
     let(:options) { { unique: true } }
 

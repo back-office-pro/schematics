@@ -51,12 +51,6 @@ describe Schematics::Virtuals::Concatenation do
     TEXT
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      full_name: full_name&.to_s
-    RUBY
-  end
-
   its(:search_alias) do
     is_expected.to eq <<~RUBY
       ransacker :full_name do

@@ -11,12 +11,6 @@ module Schematics
 
       def to_sql = "CONCAT(#{super.join(', ')})"
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_s
-        RUBY
-
       def allowed_variables = entity
         .renderable_elements
         .map(&:name)

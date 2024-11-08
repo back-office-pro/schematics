@@ -59,12 +59,6 @@ describe Schematics::Attributes::BelongsTo do
     )
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      user: user&.to_s
-    RUBY
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       scope :with_user, -> { includes([{:user=>:string_translations}]) }

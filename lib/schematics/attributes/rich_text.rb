@@ -24,12 +24,6 @@ module Schematics
         .concat(super)
         .compact
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_plain_text
-        RUBY
-
       def search_column = :"#{search_column_association}_body"
 
       def search_column_association = "rich_text_#{name}"
