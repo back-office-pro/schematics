@@ -6,7 +6,8 @@ module Schematics
 
     included do
       include PgSearch::Model
-      multisearchable against: multisearchable_elements
+      multisearchable against: multisearchable_elements,
+                      using: { tsearch: { any_word: true } }
     end
 
     class_methods do
