@@ -7,7 +7,8 @@ module Schematics
     included do
       include PgSearch::Model
       multisearchable against: multisearchable_elements,
-                      using: { tsearch: { any_word: true } }
+                      using: { tsearch: { prefix: true } },
+                      ignoring: :accents
     end
 
     class_methods do
