@@ -39,9 +39,13 @@
 }
 
 .modal {
-  --bs-modal-content-border-width: 0;
+  --bs-modal-border-width: 0;
   --bs-modal-header-border-width: 0;
   --bs-modal-footer-border-width: 0;
+}
+
+.modal-content {
+  --bs-modal-border-width: 0;
 }
 
 .pagination {
