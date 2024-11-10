@@ -55,6 +55,7 @@ Rails.configuration.to_prepare do
       super
     end
   end
+  PgSearch::Document.establish_connection(:search) unless Rails.env.test?
 end
 
 Rails.configuration.to_prepare do
