@@ -38,8 +38,13 @@ development:
     migrations_paths: db/queue_migrate
 
 test:
-  <<: *postgresql
-  database: <%= Tenant.app_name %>_test
+  primary:
+    <<: *postgresql
+    database: <%= Tenant.app_name %>_test
+  search:
+    <<: *postgresql
+    database: <%= Tenant.app_name %>_test_search
+    migrations_paths: db/search_migrate
 
 production:
   primary:
