@@ -4,4 +4,5 @@ class Search < Schematics::ApplicationRecord
   scope :history, ::Core::Searches::HistoryQuery
   scope :typeahead_history, ::Core::Searches::TypeaheadHistoryQuery
   scope :autocomplete, ::Core::Searches::AutocompleteQuery
+  scope :multisearch, ::Core::Searches::MultisearchQuery
 end

@@ -5,7 +5,7 @@ class SearchesController < Schematics::ResourcesController
   after_action -> { flash.clear }
 
   def show
-    return unless stale?(@results)
+    return unless stale?(@results.flatten)
 
     respond_with @results
   end
@@ -13,8 +13,6 @@ class SearchesController < Schematics::ResourcesController
   protected
 
   def set_results
-    @results = PgSearch
-               .multisearch(@resource.query)
-               .accessible_by(current_ability)
+    @results = model_class.multisearch(@resource.query, current_ability)
   end
 end
