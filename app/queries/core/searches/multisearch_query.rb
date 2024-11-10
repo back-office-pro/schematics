@@ -10,7 +10,7 @@ module Core
           .group_by(&:searchable_type)
           .transform_keys(&:safe_constantize)
           .map { |klass, documents| klass&.where(id: [documents.map(&:searchable_id)]) }
-          .map { _1.accessible_by(ability) }
+          .filter_map { _1.accessible_by(ability) }
           .compact_blank
       end
     end

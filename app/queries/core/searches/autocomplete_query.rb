@@ -9,8 +9,8 @@ module Core
         PgSearch
           .multisearch(query)
           .select(:searchable_id, :searchable_type)
-          .map { _1.searchable_type.safe_constantize.where(id: _1.searchable_id) }
-          .map { _1.accessible_by(ability) }
+          .map { _1.searchable_type.safe_constantize&.where(id: _1.searchable_id) }
+          .filter_map { _1.accessible_by(ability) }
           .compact_blank
           .flatten
           .take(LIMIT)
