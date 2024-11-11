@@ -17,9 +17,9 @@ module Schematics
     include Attachable
 
     loadable concerns: [
-      Searchable,
-      Multisearchable,
       SoftDeletable,
+      Multisearchable,
+      Searchable,
       Trackable,
       Sluggable
     ]

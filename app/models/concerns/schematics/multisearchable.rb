@@ -6,6 +6,7 @@ module Schematics
 
     included do
       include PgSearch::Model
+      after_restore :update_pg_search_document
       multisearchable against: multisearchable_elements,
                       using: { tsearch: { prefix: true, any_word: true } },
                       ignoring: :accents

@@ -54,6 +54,14 @@ RSpec.describe Schematics::Resources::Destroy do
       end
     end
 
+    it 'destroys the pg_search documents' do
+      perform_enqueued_jobs do
+        expect { call }
+          .to change(PgSearch::Document, :count)
+          .by(-2)
+      end
+    end
+
     it 'does not destroy the version to keep it on timeline' do
       expect { call }.not_to change(Schematics::Version, :count)
     end
