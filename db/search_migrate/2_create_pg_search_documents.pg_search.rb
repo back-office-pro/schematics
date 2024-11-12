@@ -7,5 +7,9 @@ class CreatePgSearchDocuments < ActiveRecord::Migration[7.2]
       t.references :searchable, polymorphic: true, index: true, type: :uuid
       t.timestamps null: false
     end
+    add_index :pg_search_documents,
+              %[to_tsvector('simple', unaccent(coalesce(("pg_search_documents"."content")::text, '')))], # rubocop:disable Layout/LineLength
+              using: :gin,
+              name: :index_pg_search_documents_on_content
   end
 end
