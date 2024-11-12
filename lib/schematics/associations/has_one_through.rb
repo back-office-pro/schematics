@@ -14,12 +14,6 @@ module Schematics
 
       def inverse_of = through.name
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_s
-        RUBY
-
       def search_column = :"#{name}_#{descriptor.name}"
 
       protected

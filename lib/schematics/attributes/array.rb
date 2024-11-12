@@ -27,12 +27,6 @@ module Schematics
 
       def search_predicate = :any
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.join(',')
-        RUBY
-
       def format(values)
         values&.join(', ')
       end

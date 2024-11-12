@@ -125,7 +125,6 @@ RSpec.shared_context 'with stripe stubs' do
     {
       users: 1000,
       api_keys: 100,
-      databases: 2,
       storage: 100,
       entities: 100,
       support: 1

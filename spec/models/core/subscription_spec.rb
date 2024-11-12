@@ -11,7 +11,6 @@ RSpec.describe Subscription do
     {
       users: 3,
       api_keys: 2,
-      databases: 1,
       storage: 1,
       entities: 1,
       support: 1
@@ -104,12 +103,6 @@ RSpec.describe Subscription do
     subject { described_class.quota_api_keys }
 
     it { is_expected.to eq(2) }
-  end
-
-  describe '.quota_databases' do
-    subject { described_class.quota_databases }
-
-    it { is_expected.to eq(1) }
   end
 
   describe '.quota_storage' do

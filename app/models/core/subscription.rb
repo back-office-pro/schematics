@@ -5,10 +5,9 @@ class Subscription < Schematics::ApplicationRecord
   GATEWAY = ::Core::Subscriptions::Stripe
 
   attribute :default_locale, default: -> { Rails.configuration.i18n.default_locale }
-  store_accessor :metadata, :databases, prefix: true
 
   class << self
-    delegate :entities, :users, :api_keys, :databases, to: :quota, prefix: true
+    delegate :entities, :users, :api_keys, to: :quota, prefix: true
 
     def quota_storage_will_be_exceeded?(size)
       storage_size + size.bytes >= quota_storage
@@ -37,7 +36,7 @@ class Subscription < Schematics::ApplicationRecord
     private
 
     def quota = Data
-      .define(:entities, :storage, :users, :api_keys, :databases, :support)
+      .define(:entities, :storage, :users, :api_keys, :support)
       .new(**metadata)
 
     memoize def storage_size = ActiveStorage::Blob
@@ -53,9 +52,6 @@ class Subscription < Schematics::ApplicationRecord
   def load!
     PaperTrail.request(enabled: false) do
       update!(GATEWAY::Fetch.call.data)
-      return unless saved_change_to_metadata_databases?
-
-      ::Core::Migrations::Restart.call
     end
   end
 

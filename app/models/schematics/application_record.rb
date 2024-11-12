@@ -17,8 +17,9 @@ module Schematics
     include Attachable
 
     loadable concerns: [
-      ::Tenant.search_engine.concern,
       SoftDeletable,
+      Multisearchable,
+      Searchable,
       Trackable,
       Sluggable
     ]

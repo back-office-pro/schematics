@@ -3,7 +3,7 @@
 module Schematics
   class ResourcesController < ApplicationController # rubocop:disable Metrics/ClassLength
     include Fillable
-    include Searchable
+    include Filterable
     include Calendarable
     include Documentable
     include Viewable
@@ -139,7 +139,6 @@ module Schematics
       @calendar, @pagy, @resources = pagy_calendar(
         @resources,
         month: { format: t('date.formats.month') },
-        pagy: { backend: ::Tenant.search_engine.pagy_backend },
         active: viewer == :calendar
       )
     end

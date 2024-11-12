@@ -5,7 +5,7 @@ class SearchesController < Schematics::ResourcesController
   after_action -> { flash.clear }
 
   def show
-    return unless stale?(@typeahead)
+    return unless stale?(@results.flatten)
 
     respond_with @results
   end
@@ -13,12 +13,6 @@ class SearchesController < Schematics::ResourcesController
   protected
 
   def set_results
-    @results, @suggestions, @typeahead =
-      Tenant
-      .search_engine
-      .multisearch
-      .call(query: @resource.query, ability: current_ability)
-      .to_h
-      .values_at(:results, :suggestions, :typeahead)
+    @results = model_class.multisearch(@resource.query, current_ability)
   end
 end

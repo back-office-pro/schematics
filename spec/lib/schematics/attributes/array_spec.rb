@@ -52,12 +52,6 @@ describe Schematics::Attributes::Array do
     )
   end
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      ids: ids&.join(',')
-    RUBY
-  end
-
   describe '#format' do
     subject { attribute.format(values) }
 

@@ -44,12 +44,6 @@ describe Schematics::Associations::HasOne do
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.entity') }
   its('descriptor.name') { is_expected.to eq('type') }
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      entity: entity&.to_s
-    RUBY
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       scope :with_entity, -> { includes([:entity]) }

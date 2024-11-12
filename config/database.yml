@@ -20,6 +20,10 @@ development:
   primary:
     <<: *postgresql
     database: <%= Tenant.app_name %>_development
+  search:
+    <<: *postgresql
+    database: <%= Tenant.app_name %>_development_search
+    migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3
     database: storage/development_cable.sqlite3
@@ -34,8 +38,13 @@ development:
     migrations_paths: db/queue_migrate
 
 test:
-  <<: *postgresql
-  database: <%= Tenant.app_name %>_test
+  primary:
+    <<: *postgresql
+    database: <%= Tenant.app_name %>_test
+  search:
+    <<: *postgresql
+    database: <%= Tenant.app_name %>_test_search
+    migrations_paths: db/search_migrate
 
 production:
   primary:
@@ -43,6 +52,12 @@ production:
     database: <%= Tenant.app_name %>_production
     username: <%= Tenant.app_name %>
     password: <%= Rails.application.credentials.database_password %>
+  search:
+    <<: *postgresql
+    database: <%= Tenant.app_name %>_production_search
+    username: <%= Tenant.app_name %>
+    password: <%= Rails.application.credentials.database_password %>
+    migrations_paths: db/search_migrate
   cable:
     <<: *sqlite3
     database: storage/production_cable.sqlite3

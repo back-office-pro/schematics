@@ -48,6 +48,12 @@ RSpec.describe Schematics::Resources::Archive do
         .by(-1)
     end
 
+    it 'destroys the pg_search documents' do
+      expect { call }
+        .to change(PgSearch::Document, :count)
+        .by(-2)
+    end
+
     it 'does not archive the version to keep it on timeline' do
       expect { call }.not_to change(Schematics::Version, :count)
     end

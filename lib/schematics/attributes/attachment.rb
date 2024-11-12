@@ -7,7 +7,7 @@ require 'active_support/core_ext/numeric/bytes'
 
 module Schematics
   module Attributes
-    class Attachment < Attribute # rubocop:disable Metrics/ClassLength
+    class Attachment < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
@@ -36,12 +36,6 @@ module Schematics
       def preload = [association_name => [blob: :variant_records]]
 
       def includes = { blob: :variant_records }
-
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          (#{name}.filename.to_s if #{name}.attached?)
-        RUBY
 
       def search_column = :"#{search_column_association}_filename"
 

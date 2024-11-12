@@ -69,12 +69,6 @@ module Schematics
 
       def preload = [name.to_sym => :string_translations]
 
-      def search_data = super
-        .concat(' ')
-        .concat <<~RUBY
-          #{name}&.to_s
-        RUBY
-
       def search_column = :"#{name}_#{descriptor.name}"
 
       def to_str = [scope_to_str, second_level_scopes_to_str, association_to_str]

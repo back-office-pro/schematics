@@ -4,6 +4,6 @@
     .card-header.px-1.py-2
       = __card_heading(icon: :magnifying_glass, title:)
     .card-body.p-3.pt-1
-      = __empty_resource(suggestions: @suggestions)
+      = __empty_resource
 - else
   = __viewer_association(@results, collapsed: false, highlight_text: @resource.query)

@@ -216,12 +216,6 @@ module Schematics
         actions + events.map(&:name)
       end
 
-      def search_data = <<~RUBY
-        def search_data = {
-          #{search_data_elements}
-        }
-      RUBY
-
       def default = model_class.new(
         **non_state_machine_attributes
           .concat(has_and_belongs_to_many_associations.reject(&:hidden?))
@@ -265,17 +259,9 @@ module Schematics
         searchable_elements.map(&:search_alias)
       end
 
-      def multisearchable? = multisearchable_fields.any?
-
-      def multisearch_query = multisearchable_fields
-        .map(&:search_column)
-        .join('_or_')
-        .concat('_i_cont')
-        .to_sym
-
       def model_elements = elements
         .concat(triggers, validators, search_aliases)
-        .push(self, descriptor, search_data)
+        .push(self, descriptor)
 
       def start_date_attribute_name = date_attributes
         .find(&:start_date?)
@@ -323,11 +309,6 @@ module Schematics
         Attributes::Month.new(entity: self, name: 'created_at/month'),
         Attributes::Year.new(entity: self, name: 'created_at/year')
       ]
-
-      def search_data_elements = searchable_elements
-        .map(&:search_data)
-        .map(&:squish)
-        .join(",\n  ")
 
       def spec_interpolations = { name: name.pluralize }
     end

@@ -24,67 +24,57 @@ RSpec.describe 'Resources' do
 
   before { [first_api_key, second_api_key] }
 
-  %i[Database Opensearch].each do |search_engine_name|
-    describe 'GET #api_keys' do
-      let(:do_request) { get(api_keys_path, params:, headers:) }
-      let(:search_engine) { SearchEngine.const_get(search_engine_name).new }
+  describe 'GET #api_keys' do
+    let(:do_request) { get(api_keys_path, params:, headers:) }
 
-      before do
-        allow(Tenant).to receive(:search_engine).and_return(search_engine)
-        APIKey.include(search_engine.concern)
-        APIKey.try(:reindex)
-        do_request
-      end
+    before { do_request }
 
-      after { APIKey.reload_definitions! }
+    context 'when searching first api key' do
+      let(:params) { { filter: { name: 'first' } } }
+      let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
-      context "when searching first api key with #{search_engine_name}" do
-        let(:params) { { filter: { name: 'first' } } }
-        let(:expected_response) { a_hash_including('id' => first_api_key.id) }
+      it { is_expected.to have_http_status(:success) }
+      its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
+    end
 
-        it { is_expected.to have_http_status(:success) }
-        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
-      end
+    context 'when searching second api key' do
+      let(:params) { { filter: { name: 'second' } } }
+      let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
-      context "when searching second api key with #{search_engine_name}" do
-        let(:params) { { filter: { name: 'second' } } }
-        let(:expected_response) { a_hash_including('id' => second_api_key.id) }
+      it { is_expected.to have_http_status(:success) }
+      its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
+    end
 
-        it { is_expected.to have_http_status(:success) }
-        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
-      end
+    context 'when searching active api key' do
+      let(:params) { { filter: { active: true } } }
+      let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
-      context "when searching active api key with #{search_engine_name}" do
-        let(:params) { { filter: { active: true } } }
-        let(:expected_response) { a_hash_including('id' => second_api_key.id) }
+      it { is_expected.to have_http_status(:success) }
+      its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
+    end
 
-        it { is_expected.to have_http_status(:success) }
-        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
-      end
+    context 'when searching not active api key' do
+      let(:params) { { filter: { active: false } } }
+      let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
-      context "when searching not active api key with #{search_engine_name}" do
-        let(:params) { { filter: { active: false } } }
-        let(:expected_response) { a_hash_including('id' => first_api_key.id) }
+      it { is_expected.to have_http_status(:success) }
+      its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
+    end
 
-        it { is_expected.to have_http_status(:success) }
-        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
-      end
+    context 'when searching for not expired api key' do
+      let(:params) { { filter: { expires_at: { gte: Time.current } } } }
+      let(:expected_response) { a_hash_including('id' => second_api_key.id) }
 
-      context "when searching for not expired api key with #{search_engine_name}" do
-        let(:params) { { filter: { expires_at: { gte: Time.current } } } }
-        let(:expected_response) { a_hash_including('id' => second_api_key.id) }
+      it { is_expected.to have_http_status(:success) }
+      its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
+    end
 
-        it { is_expected.to have_http_status(:success) }
-        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
-      end
+    context 'when searching for expired api key' do
+      let(:params) { { filter: { expires_at: { lte: Time.current } } } }
+      let(:expected_response) { a_hash_including('id' => first_api_key.id) }
 
-      context "when searching for expired api key with #{search_engine_name}" do
-        let(:params) { { filter: { expires_at: { lte: Time.current } } } }
-        let(:expected_response) { a_hash_including('id' => first_api_key.id) }
-
-        it { is_expected.to have_http_status(:success) }
-        its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
-      end
+      it { is_expected.to have_http_status(:success) }
+      its(:parsed_body) { is_expected.to contain_exactly(expected_response) }
     end
   end
 end

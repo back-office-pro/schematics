@@ -46,6 +46,12 @@ RSpec.describe Schematics::Resources::Restore do
         .by(1)
     end
 
+    it 'creates the pg_search documents' do
+      expect { call }
+        .to change(PgSearch::Document, :count)
+        .by(2)
+    end
+
     it 'serves the image' do
       call
       expect(ActiveStorage::Blob.service).to exist(image.key)

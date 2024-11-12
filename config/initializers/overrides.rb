@@ -55,6 +55,7 @@ Rails.configuration.to_prepare do
       super
     end
   end
+  PgSearch::Document.establish_connection(:search)
 end
 
 Rails.configuration.to_prepare do
@@ -111,7 +112,8 @@ ActiveSupport.on_load(:active_storage_attachment) do
 end
 
 ActiveSupport.on_load(:active_storage_blob) do
-  include Tenant.search_engine.concern
+  include Schematics::Multisearchable
+  include Schematics::Searchable
   prepend ActiveStorage::Override::Blob
 end
 

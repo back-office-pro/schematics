@@ -58,12 +58,6 @@ describe Schematics::Associations::HasOneThrough do
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.user') }
   its('descriptor.name') { is_expected.to eq('full_name') }
 
-  its(:search_data) do
-    is_expected.to eq <<~RUBY
-      user: user&.to_s
-    RUBY
-  end
-
   its(:to_str) do
     is_expected.to eq <<~RUBY
       scope :with_user, -> { includes([{:user=>:string_translations}]) }

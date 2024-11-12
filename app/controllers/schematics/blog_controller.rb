@@ -2,7 +2,7 @@
 
 module Schematics
   class BlogController < ApplicationController
-    include Searchable
+    include Filterable
     include Redirectable
 
     allow_unauthenticated_access

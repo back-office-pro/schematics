@@ -6,12 +6,13 @@ module Core
       LIMIT = 5
 
       def call(*, ability, query)
-        ::Tenant
-          .search_engine
-          .multisearch
-          .call(query:, ability:)
-          .to_h
-          .fetch(:typeahead)
+        PgSearch
+          .multisearch(query)
+          .select(:searchable_id, :searchable_type)
+          .map { _1.searchable_type.safe_constantize&.preload_all&.where(id: _1.searchable_id) }
+          .filter_map { _1.accessible_by(ability) }
+          .compact_blank
+          .flatten
           .take(LIMIT)
       end
     end
