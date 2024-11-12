@@ -216,3 +216,6 @@ Obsession/Rails/ValidationMethodName:
   Enabled: false
 Obsession/Rails/MigrationBelongsTo:
   Enabled: false
+# rubocop-thread_safety
+ThreadSafety/DirChdir:
+  Enabled: false
