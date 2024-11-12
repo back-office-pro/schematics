@@ -7,7 +7,7 @@ require 'active_support/core_ext/numeric/bytes'
 
 module Schematics
   module Attributes
-    class Attachment < Attribute # rubocop:disable Metrics/ClassLength
+    class Attachment < Attribute
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
