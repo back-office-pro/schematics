@@ -10,7 +10,7 @@ RSpec.describe Core::Searches::MultisearchQuery do
 
   let(:model_class) { User }
   let(:role) { admin_role }
-  let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', first_name: 'Jane', role:) }
+  let(:other_user) { User.create!(email: 'jane.doe@nowhere.com', role:) }
   let(:ability) { Schematics::Ability.new(user) }
 
   before { other_user }
