@@ -7,6 +7,7 @@ RSpec.describe Configuration do
 
   before do
     allow(BootstrapEmail).to receive(:clear_sass_cache!).and_return(nil)
+    BootstrapEmail.static_config.sass_email_string = nil
   end
 
   it 'clears bootstrap email cache after update' do
@@ -17,7 +18,7 @@ RSpec.describe Configuration do
   it 'updates bootstrap email config after update' do
     expect { record.tap(&:save!).update!(theme_color: '#ffffff') }
       .to change(BootstrapEmail.static_config, :sass_email_string)
-      .from("$primary: #2c3e50;\n@import 'bootstrap-email';\n")
+      .from(nil)
       .to("$primary: #ffffff;\n@import 'bootstrap-email';\n")
   end
 
