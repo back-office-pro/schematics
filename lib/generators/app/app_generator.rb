@@ -54,6 +54,13 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     rails_command 'schematics:install:migrations', env:
   end
 
+  def install_search_migrations
+    return unless generating?
+
+    template 'db/functions/immutable_unaccent_v01.sql'
+    rails_command 'schematics:install:migrations DATABASE=search MIGRATIONS_PATH=db/search_migrate', env: # rubocop:disable Layout/LineLength
+  end
+
   def create_database
     return if container?
     return unless generating?
@@ -124,20 +131,6 @@ class AppGenerator < Rails::Generators::AppGenerator # rubocop:disable Metrics/C
     return unless generating?
 
     rails_command 'db:prepare', env:
-  end
-
-  def install_pg_search
-    return unless generating?
-
-    remove_file 'db/search_schema.rb'
-    rails_command 'schematics:install:migrations DATABASE=search MIGRATIONS_PATH=db/search_migrate', env: # rubocop:disable Layout/LineLength
-  end
-
-  def migrate_database_again
-    return if container?
-    return unless generating?
-
-    rails_command 'db:migrate', env:
   end
 
   def load_subscription
