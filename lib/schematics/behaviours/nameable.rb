@@ -55,6 +55,7 @@ module Schematics
         to_param
         to_s
         unstale
+        update_pg_search_document
         version_association_name
         version_class_name
         versions_association_name
