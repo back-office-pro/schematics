@@ -24,7 +24,7 @@ module Schematics
         one_time_password
         paper_trail_version
         password_reset
-        pg_search_documents
+        pg_search_document
         solid_cable_message
         solid_cache_entry
         solid_queue_blocked_execution
