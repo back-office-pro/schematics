@@ -54,6 +54,7 @@ RSpec.describe Core::Migrations::Migrate do
 
   before do
     Tenant.schema = schema
+    FileUtils.touch(restart_file)
     allow(Role).to receive(:admin).and_return(Role.new)
     allow(migration).to receive_messages(previously_migrated_schema: schema)
     allow(rollback_migration).to receive_messages(previously_migrated_schema: schema)
