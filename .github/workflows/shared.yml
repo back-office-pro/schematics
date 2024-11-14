@@ -33,13 +33,15 @@ jobs:
       - name: Setup Database
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
         run: bin/rails db:migrate:reset
       - name: Load fixtures
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
           FIXTURES_PATH: spec/fixtures
           FIXTURES: migrations
@@ -48,7 +50,8 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          SEARCH_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
           SCHEMATICS_MASTER_KEY: ${{ secrets.SCHEMATICS_MASTER_KEY }}
         run: bundle exec rspec
   brakeman:

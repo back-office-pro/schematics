@@ -30,7 +30,8 @@ services:
       - clamav
       - chrome
     environment:
-      - DATABASE_URL=postgres://postgres@postgres
+      - PRIMARY_DATABASE_URL=postgres://postgres@postgres
+      - SEARCH_DATABASE_URL=postgres://postgres@postgres
       - CHROME_URL=http://chrome:3333
       - SCHEMATICS_MASTER_KEY=$SCHEMATICS_MASTER_KEY
 volumes:
