@@ -33,7 +33,7 @@ jobs:
           sudo apt-get -yqq install libpq-dev libvips-dev graphviz
       - name: Install app generator gems
         run: |
-          gem install rails -v 7.2.2
+          gem install rails -v 8.0.0
           gem install pg -v 1.5.9
       - name: Git configuration
         run: |
