@@ -12,6 +12,8 @@ RSpec.describe Core::Searches::AutocompleteQuery do
   let(:role) { admin_role }
   let(:search) { user.first_name }
 
+  before { [user, PgSearch::Multisearch.rebuild(User)] }
+
   describe '.call' do
     subject { query.call(anything, ability, search) }
 
