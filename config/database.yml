@@ -43,7 +43,7 @@ test:
     database: <%= Tenant.app_name %>_test
   search:
     <<: *postgresql
-    database: <%= Tenant.app_name %>_test_search
+    database: <%= Tenant.app_name %>_test
     migrations_paths: db/search_migrate
 
 production:
