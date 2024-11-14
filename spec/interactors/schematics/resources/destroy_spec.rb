@@ -9,7 +9,11 @@ RSpec.describe Schematics::Resources::Destroy do
 
   let(:version) { Schematics::Version.create!(event: 'create', item: resource, user:) }
 
-  before { version }
+  before do
+    version
+    PgSearch::Multisearch.rebuild(ActiveStorage::Blob)
+    PgSearch::Multisearch.rebuild(BlogPost)
+  end
 
   after { clear_enqueued_jobs }
 

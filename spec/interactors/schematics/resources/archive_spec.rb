@@ -7,7 +7,11 @@ RSpec.describe Schematics::Resources::Archive do
 
   let(:version) { Schematics::Version.create!(event: 'create', item: resource, user:) }
 
-  before { version }
+  before do
+    version
+    PgSearch::Multisearch.rebuild(ActiveStorage::Blob)
+    PgSearch::Multisearch.rebuild(BlogPost)
+  end
 
   describe '.call' do
     subject(:call) { described_class.call(resource:) }

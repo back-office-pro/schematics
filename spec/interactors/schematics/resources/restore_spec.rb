@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::Resources::Restore do
+  include ActiveJob::TestHelper
+
   include_context 'with blog post'
 
   before { resource.destroy! }
@@ -47,9 +49,11 @@ RSpec.describe Schematics::Resources::Restore do
     end
 
     it 'creates the pg_search documents' do
-      expect { call }
-        .to change(PgSearch::Document, :count)
-        .by(2)
+      perform_enqueued_jobs do
+        expect { call }
+          .to change(PgSearch::Document, :count)
+          .by(2)
+      end
     end
 
     it 'serves the image' do
