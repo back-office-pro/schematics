@@ -11,6 +11,8 @@ RSpec.describe 'Resources' do
     "col_#{User.entity.id}_#{User.entity.find_field_by_name('email').id}"
   end
 
+  before { user.create_or_update_pg_search_document }
+
   it 'filters by email', :js do # rubocop:disable RSpec/ExampleLength
     visit users_path
     fill_in 'filter[email]', with: user.email

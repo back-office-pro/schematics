@@ -8,6 +8,8 @@ RSpec.describe 'Dashboard' do
 
   let(:role) { admin_role }
 
+  before { user.create_or_update_pg_search_document }
+
   it 'searches for user with typeahead', :js do # rubocop:disable RSpec/ExampleLength
     find('.toast').click_button
     find('i[data-bs-target="#search-bar-modal"]').click
