@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bootstrap-email', '1.5.1'
   spec.add_dependency 'bootstrap_form', '5.4.0'
   spec.add_dependency 'brakeman', '6.2.2'
-  spec.add_dependency 'browser', '6.0.0'
+  spec.add_dependency 'browser', '6.1.0'
   spec.add_dependency 'bundler-audit', '0.9.2'
   spec.add_dependency 'cancancan', '3.6.1'
   spec.add_dependency 'capistrano', '3.19.2'
