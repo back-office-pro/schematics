@@ -6,7 +6,7 @@ Schematics::Engine.routes.draw do
   get 'emojis.json', to: 'emojis#index', as: :emojis
 
   localized do
-    draw :dashboard
+    draw :home
     draw :exceptions
     get 'sudo', to: 'sudos#new', as: :sudo
     get 'admin', to: 'admin#index', as: :admin
