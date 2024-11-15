@@ -25,10 +25,25 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
   Documentation.create!
   Migration.default.save!
   User.create!(email: Subscription.email, password: Tenant.default_password, role: Role.admin)
+  Dashboard.create!(
+    [
+      {
+        title_en: 'Admin dashboard',
+        title_fr: 'Tableau de bord administrateur',
+        title_it: 'Cruscotto amministratore'
+        roles: [Role.admin]
+      },
+      {
+        title_en: 'Dashboard',
+        title_fr: 'Tableau de bord',
+        title_it: 'Cruscotto'
+      }
+    ]
+  )
   Ranking.create!(
     model: 'ActiveStorage::Blob',
     field: 'ActiveStorage::Blob#byte_size',
-    roles: [Role.admin]
+    dashboards: [Dashboard.first]
   )
   Metric.create!(
     [
@@ -41,14 +56,14 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         model: 'User',
         comparator: 'greater_than_or_equal_to',
         threshold: Subscription.quota_users,
-        roles: [Role.admin]
+        dashboards: [Dashboard.first]
       },
       {
         aggregate: 'count',
         model: 'APIKey',
         comparator: 'greater_than_or_equal_to',
         threshold: Subscription.quota_api_keys,
-        roles: [Role.admin]
+        dashboards: [Dashboard.first]
       },
       {
         aggregate: 'sum',
@@ -56,7 +71,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         field: 'ActiveStorage::Blob#byte_size',
         comparator: 'greater_than_or_equal_to',
         threshold: Subscription.quota_storage,
-        roles: [Role.admin]
+        dashboards: [Dashboard.first]
       }
     ]
   )
