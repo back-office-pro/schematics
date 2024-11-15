@@ -9,6 +9,7 @@ module Schematics
       ::Migration,
       ::Session,
       ::Translation,
+      ::Dashboard,
       ::Chart,
       ::Metric,
       ::Ranking,
