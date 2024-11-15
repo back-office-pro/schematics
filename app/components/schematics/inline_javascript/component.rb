@@ -4,7 +4,7 @@ module Schematics
   module InlineJavascript
     class Component < ApplicationComponent
       delegate :credentials, to: Engine, private: true
-      delegate :dashboard_read_notifications_path,
+      delegate :read_notifications_path,
                :preferences_path,
                :emojis_path,
                to: 'Schematics::Engine.routes.url_helpers',
@@ -40,7 +40,7 @@ module Schematics
         autocompletions: t('routes.autocompletions'),
         bulkActions: t('routes.bulk_actions'),
         comparisons: ::Comparison.human_name_plural,
-        dashboardReadNotifications: dashboard_read_notifications_path,
+        readNotifications: read_notifications_path,
         draft: draft_path(id: ':id'),
         emojis: emojis_path,
         preferences: preferences_path,
