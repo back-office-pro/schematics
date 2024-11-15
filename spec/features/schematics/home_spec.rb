@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Dashboard' do
+RSpec.describe 'Home' do
   include_context 'with login'
   include_context 'with admin role'
 
