@@ -4,7 +4,6 @@ class Ranking < Schematics::ApplicationRecord
   include ::Core::Measurable
 
   delegate :to_sql, :name, to: :entity_field, allow_nil: true, private: true
-  scope :accessible_by_role, ::Core::Rankings::AccessibleByRoleQuery
 
   memoize def resources(ability)
     model_class

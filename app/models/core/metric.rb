@@ -4,7 +4,6 @@ class Metric < Schematics::ApplicationRecord
   include ::Core::Measurable
 
   delegate :to_sql, :format, to: :entity_field, allow_nil: true, private: true
-  scope :accessible_by_role, ::Core::Metrics::AccessibleByRoleQuery
 
   def to_s
     title || I18n.t('errors.virtuals.name', name: model)
