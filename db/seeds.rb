@@ -30,7 +30,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
       {
         title_en: 'Admin dashboard',
         title_fr: 'Tableau de bord administrateur',
-        title_it: 'Cruscotto amministratore'
+        title_it: 'Cruscotto amministratore',
         roles: [Role.admin]
       },
       {
