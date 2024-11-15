@@ -1,6 +1,6 @@
 ---
 fr:
   schematics:
-    dashboard:
+    home:
       logout:
         success: Déconnecté !

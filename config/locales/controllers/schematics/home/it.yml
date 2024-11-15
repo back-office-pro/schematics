@@ -1,6 +1,6 @@
 ---
 it:
   schematics:
-    dashboard:
+    home:
       logout:
         success: Disconnesso!

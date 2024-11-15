@@ -1,6 +1,6 @@
 ---
 en:
   schematics:
-    dashboard:
+    home:
       logout:
         success: Logged out!
