@@ -2242,7 +2242,7 @@
     "id": "1b4dc4d0-645d-4c7a-b3fe-d0d5e5cd7844",
     "name": "dashboard",
     "options": {
-      "descriptor": "name",
+      "descriptor": "title",
       "icon": "gauge_high"
     },
     "associations": [
