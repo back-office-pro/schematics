@@ -9,8 +9,8 @@ RSpec.describe Core::Dashboards::AccessibleByRoleQuery do
 
   let(:manager_role) { Role.create!(name: 'Manager', permissions:) }
   let(:first_dashboard) { Dashboard.create!(title: 'Dashboard 1') }
-  let(:second_dashboard) { Dashboard.create!(title: 'Dashboard 2') }
-  let(:third_dashboard) { Dashboard.create!(title: 'Dashboard 3') }
+  let(:second_dashboard) { Dashboard.create!(title: 'Dashboard 2', roles: [admin_role]) }
+  let(:third_dashboard) { Dashboard.create!(title: 'Dashboard 3', roles: [manager_role]) }
 
   before { [first_dashboard, second_dashboard, third_dashboard] }
 
