@@ -5,6 +5,7 @@ module Schematics
     module Tab
       class Component < ApplicationComponent
         delegate :first?, to: :@iteration
+        delegate :icon, :title, to: :@dashboard
         with_collection_parameter :dashboard
 
         def initialize(dashboard:, dashboard_iteration:)
