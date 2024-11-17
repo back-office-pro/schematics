@@ -21,6 +21,8 @@ it:
         not_found: Pagina non trovata
         schema_error: Errore dello schema
         unsupported_browser: Aggiorna il tuo browser
+      home:
+        index: Cruscotto
       message_replies:
         create: Rispondere
         new: Rispondere

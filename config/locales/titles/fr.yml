@@ -21,6 +21,8 @@ fr:
         not_found: Page non trouvée
         schema_error: Erreur schéma
         unsupported_browser: Merci de mettre à jour votre navigateur
+      home:
+        index: Tableau de bord
       message_replies:
         create: Répondre
         new: Répondre
