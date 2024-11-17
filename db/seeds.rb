@@ -34,9 +34,9 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         roles: [Role.admin]
       },
       {
-        title_en: 'Dashboard',
-        title_fr: 'Tableau de bord',
-        title_it: 'Cruscotto'
+        title_en: 'Global dashboard',
+        title_fr: 'Tableau de bord global',
+        title_it: 'Cruscotto globale'
       }
     ]
   )
@@ -84,7 +84,7 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         model: 'APIRequest',
         x_field: 'APIRequest#endpoint',
         y_field: 'APIRequest#response_time',
-        period: 'month',
+        period: 'month'
       },
       {
         kind: 'column',
