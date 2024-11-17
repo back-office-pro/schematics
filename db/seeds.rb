@@ -49,7 +49,8 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
     [
       {
         aggregate: 'count',
-        model: 'Emailing'
+        model: 'Emailing',
+        dashboards: Dashboard.all
       },
       {
         aggregate: 'count',
@@ -83,19 +84,21 @@ PaperTrail.request(enabled: false) do # rubocop:disable Metrics/BlockLength
         model: 'APIRequest',
         x_field: 'APIRequest#endpoint',
         y_field: 'APIRequest#response_time',
-        period: 'month'
+        period: 'month',
       },
       {
         kind: 'column',
         aggregate: 'count',
         model: 'Meeting',
-        x_field: 'Meeting#created_at/month'
+        x_field: 'Meeting#created_at/month',
+        dashboards: Dashboard.all
       },
       {
         kind: 'column',
         aggregate: 'count',
         model: 'Task',
-        x_field: 'Task#created_at/month'
+        x_field: 'Task#created_at/month',
+        dashboards: Dashboard.all
       }
     ]
   )
