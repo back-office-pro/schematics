@@ -10,7 +10,6 @@ class User < Schematics::ApplicationRecord
   attribute :locale, default: -> { ::Configuration.locale }
 
   store_accessor :preferences,
-                 :dashboard,
                  :charts,
                  :metrics,
                  :rankings,
