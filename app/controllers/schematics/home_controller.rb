@@ -2,12 +2,12 @@
 
 module Schematics
   class HomeController < ApplicationController
-    def show # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    def index # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       @dashboards =
         ::Dashboard
           .preload_all
           .accessible_by_role(current_user.role)
-      @dashboard = @dashboards.where(id: current_user.preferences_dashboard) || @dashboards.first
+      @dashboard = @dashboards.find_by(id: current_user.preferences_dashboard) || @dashboards.first
       @metrics =
         @dashboard
           &.metrics

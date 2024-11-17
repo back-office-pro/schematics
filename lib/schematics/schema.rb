@@ -56,7 +56,7 @@ module Schematics
       .select(&:polymorphic?)
 
     def root_route
-      return 'home#show' if valid?
+      return 'home#index' if valid?
 
       'exception#schema_error'
     end
