@@ -2,5 +2,5 @@
 en:
   schematics:
     home:
-      logout:
+      destroy:
         success: Logged out!

@@ -2,5 +2,5 @@
 fr:
   schematics:
     home:
-      logout:
+      destroy:
         success: Déconnecté !
