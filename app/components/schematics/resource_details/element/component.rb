@@ -4,6 +4,8 @@ module Schematics
   module ResourceDetails
     module Element
       class Component < ApplicationComponent
+        delegate :deleted?, to: :resource, private: true
+        delegate :readonly?, to: :element, private: true
         option :resource
         option :element
         option :editable, default: -> { true }
@@ -16,7 +18,8 @@ module Schematics
           editable &&
             can?(:update, resource, element.name.to_sym) &&
             (element in Behaviours::Fillable) &&
-            !element.readonly?
+            !readonly? &&
+            !deleted?
         end
       end
     end
