@@ -10,7 +10,7 @@ RSpec.describe Schematics::BulkActionJob do
 
   describe '#perform_later' do
     it 'queues the job' do
-      expect { described_class.perform_later(user, model_class, ids) }
+      expect { described_class.perform_later(user.id, model_class, ids) }
         .to have_enqueued_job(described_class)
         .exactly(:once)
         .on_queue('cleanups')
@@ -19,7 +19,7 @@ RSpec.describe Schematics::BulkActionJob do
   end
 
   describe '#perform_now' do
-    subject(:perform_now) { described_class.perform_now(user, model_class, ids) }
+    subject(:perform_now) { described_class.perform_now(user.id, model_class, ids) }
 
     it 'archives records' do
       expect { perform_now }.to change(model_class, :count).by(-ids.size)

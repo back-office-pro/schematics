@@ -4,8 +4,8 @@ module Schematics
   class BulkActionJob < ApplicationJob
     queue_as :cleanups
 
-    def perform(user, model_class, ids)
-      PaperTrail.request(whodunnit: user) do
+    def perform(whodunnit, model_class, ids)
+      PaperTrail.request(whodunnit:) do
         model_class
           .preload_all
           .where(id: ids)
