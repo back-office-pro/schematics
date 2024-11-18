@@ -7,7 +7,7 @@ RSpec.describe 'Home' do
 
   let(:accept_header) { 'text/html' }
 
-  describe 'GET #home' do
+  describe 'GET #index' do
     let(:do_request) { get(root_path, headers:) }
 
     before { do_request }
