@@ -31,6 +31,6 @@ export default class extends ApplicationController {
   }
 
   get url () {
-    return `${window.location.pathname}/${routes.bulk_actions}`
+    return `${window.location.pathname}/${routes.bulkActions}`
   }
 }

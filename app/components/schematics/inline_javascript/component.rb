@@ -38,14 +38,14 @@ module Schematics
 
       def routes = {
         autocompletions: t('routes.autocompletions'),
-        bulk_actions: t('routes.bulk_actions'),
+        bulkActions: t('routes.bulk_actions'),
         comparisons: ::Comparison.human_name_plural,
         dashboardReadNotifications: dashboard_read_notifications_path,
         draft: draft_path(id: ':id'),
+        emojis: emojis_path,
         preferences: preferences_path,
         searches: search_autocompletions_path,
-        users: users_path,
-        emojis: emojis_path
+        users: users_path
       }.to_json.html_safe
     end
   end
