@@ -40,11 +40,11 @@ module Schematics
         autocompletions: t('routes.autocompletions'),
         bulkActions: t('routes.bulk_actions'),
         comparisons: ::Comparison.human_name_plural,
-        userNotifications: user_notifications_path,
         draft: draft_path(id: ':id'),
         emojis: emojis_path,
         preferences: preferences_path,
         searches: search_autocompletions_path,
+        userNotifications: user_notifications_path,
         users: users_path
       }.to_json.html_safe
     end
