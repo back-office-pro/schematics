@@ -18,7 +18,9 @@ module Schematics
         active_storage_attachment
         active_storage_blob
         active_storage_variant_record
+        admin
         friendly_id_slug
+        home
         mobility_string_translation
         mobility_text_translation
         one_time_password
@@ -38,6 +40,7 @@ module Schematics
         solid_queue_pause
         solid_queue_process
         sudo
+        user_notification
         version
       ].freeze
 
