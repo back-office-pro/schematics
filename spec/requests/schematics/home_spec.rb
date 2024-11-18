@@ -15,7 +15,7 @@ RSpec.describe 'Home' do
     it { is_expected.to have_http_status(:success) }
   end
 
-  describe 'GET #logout' do
+  describe 'GET #destroy' do
     let(:do_request) { get(logout_path, headers:) }
 
     before { do_request }
