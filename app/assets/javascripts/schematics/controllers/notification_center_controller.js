@@ -9,7 +9,7 @@ export default class extends ApplicationController {
 
   readNotifications () {
     if (this.#hasNotifications()) {
-      this.fetchAPI(routes.readNotifications, 'POST')
+      this.fetchAPI(routes.userNotifications, 'PUT')
       this.badgeTarget.classList.remove('animate__zoomIn')
       this.badgeTarget.classList.add('animate__fadeOut')
       this.iconTarget.classList.remove('animate__animated')
