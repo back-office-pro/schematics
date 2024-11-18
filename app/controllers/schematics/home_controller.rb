@@ -8,13 +8,9 @@ module Schematics
                     .accessible_by_role(current_user.role)
     end
 
-    def logout
+    def destroy
       logout_user!
       redirect_to main_app.login_path, notice: t('.success')
-    end
-
-    def read_notifications
-      current_user.update!(read_notifications_at: ::Time.current)
     end
   end
 end
