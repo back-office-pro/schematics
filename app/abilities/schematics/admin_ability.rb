@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Schematics
-  class AdminDashboardAbility < ApplicationAbility
-    ADMIN_MODEL_CLASSES = [
+  class AdminAbility < ApplicationAbility
+    MODEL_CLASSES = [
       ::APIKey,
       ::APIRequest,
       ::Permission,
@@ -25,12 +25,12 @@ module Schematics
 
     def initialize(ability)
       super
-      return if ADMIN_MODEL_CLASSES.all? { ability.cannot?(:index, _1) } &&
+      return if MODEL_CLASSES.all? { ability.cannot?(:index, _1) } &&
                 ability.cannot?(:cancel, ::Subscription) &&
                 ability.cannot?(:update, ::Configuration) &&
                 ability.cannot?(:show, ::Chart.api)
 
-      can :read, :admin_dashboard
+      can :index, :admin
     end
   end
 end

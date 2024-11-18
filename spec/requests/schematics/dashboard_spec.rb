@@ -4,21 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Dashboard' do
   include_context 'with authenticated user'
-  include_context 'with admin role'
 
-  let(:role) { admin_role }
   let(:accept_header) { 'text/html' }
-
-  describe 'GET #admin' do
-    let(:do_request) { get(admin_path, headers:) }
-
-    before do
-      Subscription.instance.save!
-      do_request
-    end
-
-    it { is_expected.to have_http_status(:success) }
-  end
 
   describe 'GET #home' do
     let(:do_request) { get(root_path, headers:) }

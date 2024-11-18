@@ -35,7 +35,7 @@ li.nav-item.dropdown.d-flex.align-items-center.ps-2.ms-2
     button.dropdown-item data-bs-toggle='modal' data-bs-target='#hotkeys-modal'
       = fa_icon :keyboard, class: 'fa-fw me-3'
       = t('.hotkeys')
-    - if can?(:read, :admin_dashboard)
+    - if can?(:index, :admin)
       = link_to admin_path, class: 'dropdown-item text-danger' do
         = fa_icon :shield_alt, class: 'fa-fw me-3'
         = t('.admin_zone')

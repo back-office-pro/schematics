@@ -8,11 +8,12 @@ fr:
       create: Importer des %{parent_human_name_plural}
       new: Importer des %{parent_human_name_plural}
     schematics:
+      admin:
+        index: Administration
       blog:
         index: Blog
         show: "%{resource}"
       dashboard:
-        admin: Administration
         home: Tableau de bord
       exception:
         internal_server_error: Quelque chose s'est mal passé

@@ -25,7 +25,7 @@ module Schematics
       merge BlogAbility.new
       merge SearchAbility.new
       merge RoleAbility.new
-      merge AdminDashboardAbility.new(self)
+      merge AdminAbility.new(self)
       merge FeatureFlagAbility.new
       merge DemoAbility.new
       merge SubscriptionAbility.new(user)
