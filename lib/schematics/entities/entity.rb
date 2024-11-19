@@ -38,6 +38,7 @@ module Schematics
         solid_queue_pause
         solid_queue_process
         sudo
+        user_notification
         version
       ].freeze
 
