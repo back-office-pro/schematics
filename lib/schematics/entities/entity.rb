@@ -18,9 +18,7 @@ module Schematics
         active_storage_attachment
         active_storage_blob
         active_storage_variant_record
-        admin
         friendly_id_slug
-        home
         mobility_string_translation
         mobility_text_translation
         one_time_password

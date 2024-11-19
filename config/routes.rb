@@ -14,7 +14,6 @@ Schematics::Engine.routes.draw do
     resource :preferences, only: %i[edit update]
     resource :one_time_passwords, only: %i[show edit new update create destroy]
     resource :profile, only: %i[edit update], controller: :profile
-    resource :user_notifications, only: :update
     resources :password_resets, only: %i[new create edit update], param: :token
     resources :sudos, only: :create
     resources :versions, only: %i[index show] do
