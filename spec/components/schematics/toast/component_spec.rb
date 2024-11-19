@@ -20,7 +20,7 @@ RSpec.describe Schematics::Toast::Component, type: :component do
 
   context 'when flash message is an alert' do
     let(:type) { 'alert' }
-    let(:message) { I18n.t('schematics.dashboard.logout.success') }
+    let(:message) { I18n.t('schematics.home.destroy.success') }
     let(:text) { component.translate('.alert') }
 
     it { is_expected.to have_css('.bg-danger') }

@@ -9,7 +9,7 @@ Schematics::Engine.routes.draw do
     draw :exceptions
     get 'sudo', to: 'sudos#new', as: :sudo
     get 'admin', to: 'admin#index', as: :admin
-    get 'logout', to: 'home#destroy', as: :logout
+    delete 'logout', to: 'home#destroy', as: :logout
     resource :user_notifications, only: :update
     resource :preferences, only: %i[edit update]
     resource :one_time_passwords, only: %i[show edit new update create destroy]

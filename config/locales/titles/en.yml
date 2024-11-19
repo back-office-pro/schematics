@@ -13,8 +13,6 @@ en:
       blog:
         index: Blog
         show: "%{resource}"
-      dashboard:
-        home: Dashboard
       exception:
         internal_server_error: Something went wrong
         maintenance_mode: Maintenance in progress
