@@ -7,7 +7,6 @@ export default class extends ApplicationController {
   static get values () {
     return {
       group: { type: String },
-      subgroup: { type: String },
       targets: { type: Array, default: [] }
     }
   }
@@ -17,8 +16,8 @@ export default class extends ApplicationController {
   }
 
   save (sortable) {
-    if (this.groupValue !== '' && this.subgroupValue !== '') {
-      const preferences = { [this.groupValue]: { [this.subgroupValue]: sortable.toArray() } }
+    if (this.groupValue !== '') {
+      const preferences = { [this.groupValue]: sortable.toArray() }
       this.fetchAPI(routes.preferences, 'PUT', { user: { preferences } })
     }
   }
