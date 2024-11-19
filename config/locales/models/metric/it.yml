@@ -5,13 +5,13 @@ it:
       metric:
         aggregate: Aggregato
         comparator: Comparatore
+        dashboards:
+          one: Cruscotto
+          other: Cruscotti
+          zero: Nessun cruscotto
         field: Attributo
         model: Data
         period: Periodo
-        roles:
-          one: Ruolo
-          other: Ruoli
-          zero: Nessun ruolo
         threshold: Soglia di allerta
     enums:
       metric:

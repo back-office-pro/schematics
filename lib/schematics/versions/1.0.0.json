@@ -655,7 +655,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "roles"
+        "name": "dashboards"
       }
     ],
     "attributes": [
@@ -763,7 +763,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "roles"
+        "name": "dashboards"
       }
     ],
     "attributes": [
@@ -2189,7 +2189,7 @@
     "associations": [
       {
         "type": "has_and_belongs_to_many",
-        "name": "roles"
+        "name": "dashboards"
       }
     ],
     "attributes": [
@@ -2234,6 +2234,33 @@
           "greater_than_or_equal_to": 10,
           "less_than_or_equal_to": 100,
           "default": 10
+        }
+      }
+    ]
+  },
+  {
+    "id": "1b4dc4d0-645d-4c7a-b3fe-d0d5e5cd7844",
+    "name": "dashboard",
+    "options": {
+      "descriptor": "title",
+      "icon": "gauge_high"
+    },
+    "associations": [
+      {
+        "type": "has_and_belongs_to_many",
+        "name": "roles"
+      }
+    ],
+    "attributes": [
+      {
+        "id": "88e4b5ca-73fd-43d3-a3ca-c222e3fc1315",
+        "name": "title",
+        "type": "citext",
+        "options": {
+          "unique": true,
+          "required": true,
+          "translated": true,
+          "limit": 50
         }
       }
     ]

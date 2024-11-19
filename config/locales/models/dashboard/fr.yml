@@ -1,0 +1,15 @@
+---
+fr:
+  activerecord:
+    attributes:
+      dashboard:
+        roles:
+          one: Rôle
+          other: Rôles
+          zero: Aucun rôle
+        title: Titre
+    models:
+      dashboard:
+        gender: male
+        one: Tableau de bord
+        other: Tableaux de bord

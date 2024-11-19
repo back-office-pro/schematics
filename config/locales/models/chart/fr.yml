@@ -5,13 +5,13 @@ fr:
       chart:
         aggregate: Agrégat
         color: Couleur
+        dashboards:
+          one: Tableau de bord
+          other: Tableaux de bord
+          zero: Aucun tableau de bord
         kind: Type
         model: Donnée
         period: Période
-        roles:
-          one: Rôle
-          other: Rôles
-          zero: Aucun rôle
         size: Taille
         x_field: Attribut en abscisse
         y_field: Attribut en ordonnée

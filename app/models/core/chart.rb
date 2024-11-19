@@ -3,7 +3,6 @@
 class Chart < Schematics::ApplicationRecord
   include ::Core::Measurable
 
-  scope :accessible_by_role, ::Core::Charts::AccessibleByRoleQuery
   attribute :color, default: -> { ::Configuration.theme_color }
 
   class << self

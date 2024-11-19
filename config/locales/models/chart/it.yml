@@ -5,13 +5,13 @@ it:
       chart:
         aggregate: Aggregato
         color: Colore
+        dashboards:
+          one: Cruscotto
+          other: Cruscotti
+          zero: Nessun cruscotto
         kind: Tipo
         model: Data
         period: Periodo
-        roles:
-          one: Ruolo
-          other: Ruoli
-          zero: Nessun ruolo
         size: Dimensione
         x_field: Attributo sulle ascisse
         y_field: Attributo di ordinata

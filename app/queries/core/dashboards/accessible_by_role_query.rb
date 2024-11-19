@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Core
-  module Charts
+  module Dashboards
     class AccessibleByRoleQuery < Schematics::ApplicationQuery
       def call(role)
         where

@@ -22,7 +22,10 @@ module Schematics
       preferences: timeline_preferences
         .concat(viewer_preferences)
         .concat(viewer_col_preferences)
-        .concat(dashboard_preferences)
+        .concat(dashboard_metrics_preferences)
+        .concat(dashboard_charts_preferences)
+        .concat(dashboard_rankings_preferences)
+        .push(:sidebar_toggled, :theme)
     }
 
     def cast_and_merge_preferences!(params)
@@ -38,13 +41,17 @@ module Schematics
       value
     end
 
-    def dashboard_preferences = [
-      :sidebar_toggled,
-      :theme,
-      { metrics: [] },
-      { charts: [] },
-      { rankings: [] }
-    ]
+    def dashboard_metrics_preferences = ::Dashboard
+      .ids
+      .map { { "dashboard_metrics_#{_1}" => [] } }
+
+    def dashboard_charts_preferences = ::Dashboard
+      .ids
+      .map { { "dashboard_charts_#{_1}" => [] } }
+
+    def dashboard_rankings_preferences = ::Dashboard
+      .ids
+      .map { { "dashboard_rankings_#{_1}" => [] } }
 
     def timeline_preferences = ::Tenant
       .schema

@@ -1,7 +1,5 @@
-.row.g-3 data-controller='sortable' data-sortable-group-value='metrics'
-  = __onboarding
-  = __metric(@metrics)
-.row.g-3.pt-3 data-controller='sortable' data-sortable-group-value='charts'
-  = __chart(@charts)
-.row.g-3.pt-3 data-controller='sortable' data-sortable-group-value='rankings'
-  = __ranking(@rankings)
+- if @dashboards.count > 1
+  .nav.nav-pills.nav-justified.mb-3 role='tablist'
+    = __dashboard_tab(@dashboards)
+.tab-content
+  = __dashboard_panel(@dashboards)

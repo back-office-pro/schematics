@@ -5,13 +5,13 @@ fr:
       metric:
         aggregate: Agrégat
         comparator: Comparateur
+        dashboards:
+          one: Tableau de bord
+          other: Tableaux de bord
+          zero: Aucun tableau de bord
         field: Attribut
         model: Donnée
         period: Période
-        roles:
-          one: Rôle
-          other: Rôles
-          zero: Aucun rôle
         threshold: Seuil d'alerte
     enums:
       metric:

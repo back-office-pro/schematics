@@ -3,13 +3,13 @@ it:
   activerecord:
     attributes:
       ranking:
+        dashboards:
+          one: Cruscotto
+          other: Cruscotti
+          zero: Nessun cruscotto
         field: Attributo
         model: Data
         period: Periodo
-        roles:
-          one: Ruolo
-          other: Ruoli
-          zero: Nessun ruolo
         size: Dimensione
     enums:
       ranking:

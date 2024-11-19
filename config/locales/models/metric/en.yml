@@ -5,13 +5,13 @@ en:
       metric:
         aggregate: Aggregate
         comparator: Comparator
+        dashboards:
+          one: Dashboard
+          other: Dashboards
+          zero: No dashboard
         field: Field
         model: Data
         period: Period
-        roles:
-          one: Role
-          other: Roles
-          zero: No role
         threshold: Alert threshold
     enums:
       metric:

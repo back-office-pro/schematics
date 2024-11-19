@@ -3,13 +3,13 @@ en:
   activerecord:
     attributes:
       ranking:
+        dashboards:
+          one: Dashboard
+          other: Dashboards
+          zero: No dashboard
         field: Attribute
         model: Data
         period: Period
-        roles:
-          one: Role
-          other: Roles
-          zero: No role
         size: Size
     enums:
       ranking:
