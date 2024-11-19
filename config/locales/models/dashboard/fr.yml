@@ -3,6 +3,10 @@ fr:
   activerecord:
     attributes:
       dashboard:
+        roles:
+          one: Rôle
+          other: Rôles
+          zero: Aucun rôle
         title: Titre
     models:
       dashboard:

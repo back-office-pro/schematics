@@ -3,6 +3,10 @@ it:
   activerecord:
     attributes:
       dashboard:
+        roles:
+          one: Ruolo
+          other: Ruoli
+          zero: Nessun ruolo
         title: Titolo
     models:
       dashboard:

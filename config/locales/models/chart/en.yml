@@ -5,13 +5,13 @@ en:
       chart:
         aggregate: Aggregate
         color: Color
+        dashboards:
+          one: Dashboard
+          other: Dashboards
+          zero: No dashboard
         kind: Type
         model: Data
         period: Period
-        roles:
-          one: Role
-          other: Roles
-          zero: No role
         size: Size
         x_field: X-axis attribute
         y_field: Y-axis attribute
