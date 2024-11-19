@@ -13,14 +13,14 @@ en:
       blog:
         index: Blog
         show: "%{resource}"
-      dashboard:
-        home: Dashboard
       exception:
         internal_server_error: Something went wrong
         maintenance_mode: Maintenance in progress
         not_found: Page not found
         schema_error: Schema error
         unsupported_browser: Please update your browser
+      home:
+        index: Dashboard
       message_replies:
         create: Reply
         new: Reply

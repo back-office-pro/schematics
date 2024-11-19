@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Dashboard' do
+RSpec.describe 'Home' do
   include_context 'with authenticated user'
 
   let(:accept_header) { 'text/html' }
 
-  describe 'GET #home' do
+  describe 'GET #index' do
     let(:do_request) { get(root_path, headers:) }
 
     before { do_request }
@@ -15,8 +15,8 @@ RSpec.describe 'Dashboard' do
     it { is_expected.to have_http_status(:success) }
   end
 
-  describe 'GET #logout' do
-    let(:do_request) { get(logout_path, headers:) }
+  describe 'DELETE #destroy' do
+    let(:do_request) { delete(logout_path, headers:) }
 
     before { do_request }
 

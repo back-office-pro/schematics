@@ -6,7 +6,7 @@ describe Schematics::Schema do
   let(:data) { [] }
 
   it { is_expected.to be_valid }
-  its(:root_route) { is_expected.to eq('dashboard#home') }
+  its(:root_route) { is_expected.to eq('home#index') }
 
   describe '#find_entity_by_name' do
     subject { schema.find_entity_by_name('user') }

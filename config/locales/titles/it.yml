@@ -13,14 +13,14 @@ it:
       blog:
         index: Blog
         show: "%{resource}"
-      dashboard:
-        home: Dashboard
       exception:
         internal_server_error: Qualcosa è andato storto
         maintenance_mode: Manutenzione in corso
         not_found: Pagina non trovata
         schema_error: Errore dello schema
         unsupported_browser: Aggiorna il tuo browser
+      home:
+        index: Cruscotto
       message_replies:
         create: Rispondere
         new: Rispondere

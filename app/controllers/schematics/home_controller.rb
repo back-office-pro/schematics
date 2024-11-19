@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Schematics
-  class DashboardController < ApplicationController
-    def home
+  class HomeController < ApplicationController
+    def index
       @charts = ::Chart
                 .with_string_translations
                 .accessible_by_role(current_user.role)
@@ -21,7 +21,7 @@ module Schematics
                   .load_async
     end
 
-    def logout
+    def destroy
       logout_user!
       redirect_to main_app.login_path, notice: t('.success')
     end
