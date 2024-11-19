@@ -10,9 +10,9 @@ class User < Schematics::ApplicationRecord
   attribute :locale, default: -> { ::Configuration.locale }
 
   store_accessor :preferences,
-                 :charts,
-                 :metrics,
-                 :rankings,
+                 :dashboard_charts,
+                 :dashboard_metrics,
+                 :dashboard_rankings,
                  :sidebar_toggled,
                  :theme,
                  prefix: true
@@ -53,12 +53,6 @@ class User < Schematics::ApplicationRecord
       .with_string_translations
       .find_or_create_by!(record_type:, record_id:)
   end
-
-  def preferences_charts = Array(super)
-
-  def preferences_metrics = Array(super)
-
-  def preferences_rankings = Array(super)
 
   private
 

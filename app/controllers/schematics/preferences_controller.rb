@@ -41,9 +41,9 @@ module Schematics
     def dashboard_preferences = [
       :sidebar_toggled,
       :theme,
-      { metrics: [] },
-      { charts: [] },
-      { rankings: [] }
+      { dashboard_metrics: {} },
+      { dashboard_charts: {} },
+      { dashboard_rankings: {} }
     ]
 
     def timeline_preferences = ::Tenant
