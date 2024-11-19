@@ -20,3 +20,4 @@ it:
     restore: restaurare
     sudo: accesso-limitato
     sudos: accessi-limitati
+    user_notifications: notifiche-utente

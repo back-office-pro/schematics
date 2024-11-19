@@ -20,3 +20,4 @@ fr:
     restore: restaurer
     sudo: acces-restreint
     sudos: acces-restreints
+    user_notifications: notifications-utilisateur
