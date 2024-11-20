@@ -18,12 +18,13 @@ module Schematics
                :colors,
                to: :@chart
 
-      def initialize(chart:)
+      def initialize(chart:, id:)
         super
         @chart = chart
+        @dashboard_id = id
       end
 
-      def css_id = "chart-#{id}"
+      def css_id = "#{@dashboard_id}-chart-#{id}"
 
       def empty = t('schematics.application.resource.empty')
 
