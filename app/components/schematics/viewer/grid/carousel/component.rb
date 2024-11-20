@@ -13,7 +13,7 @@ module Schematics
             .map(&:name)
             .flat_map(&resource.method(:public_send))
 
-          def id = "carousel-#{resource.id}"
+          def id = dom_id(resource, 'carousel')
 
           def css_classes(index)
             class_names('carousel-item', 'text-center', active: index.zero?)

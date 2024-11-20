@@ -16,7 +16,9 @@ module Schematics
 
         def css_classes = class_names(active: first?)
 
-        def target = "#dashboard-panel-#{@dashboard.id}"
+        def target
+          dom_id(@dashboard).prepend('#')
+        end
       end
     end
   end

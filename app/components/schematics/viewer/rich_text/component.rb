@@ -14,7 +14,7 @@ module Schematics
           @resource = resource
         end
 
-        memoize def id = "collapse-#{@attribute.id}"
+        def id = dom_id(@attribute)
 
         def render?
           value.present?

@@ -13,7 +13,7 @@ module Schematics
           @iteration = dashboard_iteration
         end
 
-        def id = "dashboard-panel-#{@dashboard.id}"
+        def id = dom_id(@dashboard)
 
         def css_classes = class_names(
           show: first?,
