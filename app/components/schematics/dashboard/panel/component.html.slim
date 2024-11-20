@@ -1,8 +1,8 @@
 .tab-pane.fade role='tabpanel' id=id class=css_classes
-  .row.g-3 data-controller='sortable' data-sortable-group-value="dashboard_metrics_#{@dashboard.id}"
+  .row.g-3 data=data('metrics')
     = __onboarding
     = __metric(metrics)
-  .row.g-3.pt-3 data-controller='sortable' data-sortable-group-value="dashboard_charts_#{@dashboard.id}"
+  .row.g-3.pt-3 data=data('charts')
     = __chart(charts)
-  .row.g-3.pt-3 data-controller='sortable' data-sortable-group-value="dashboard_rankings_#{@dashboard.id}"
+  .row.g-3.pt-3 data=data('rankings')
     = __ranking(rankings)

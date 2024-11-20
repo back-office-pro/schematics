@@ -20,18 +20,28 @@ module Schematics
           active: first?
         )
 
+        def data(group)
+          {
+            controller: 'sortable',
+            'sortable-group-value': "dashboard_#{group}_#{@dashboard.id}"
+          }
+        end
+
         memoize def metrics = @dashboard
           .metrics
+          .with_string_translations
           .then { _1.in_order_of(:id, metric_preferences.concat(_1.ids).uniq) }
           .load_async
 
         memoize def charts = @dashboard
           .charts
+          .with_string_translations
           .then { _1.in_order_of(:id, chart_preferences.concat(_1.ids).uniq) }
           .load_async
 
         memoize def rankings = @dashboard
           .rankings
+          .with_string_translations
           .then { _1.in_order_of(:id, ranking_preferences.concat(_1.ids).uniq) }
           .load_async
 
