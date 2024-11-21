@@ -21,7 +21,9 @@ module Schematics
               .sort
           end
 
-          def label = super.pluralize
+          def label = resource
+            .class
+            .human_attribute_name(name, count: 2)
 
           def control_class
             return %w[form-select] unless inline?
