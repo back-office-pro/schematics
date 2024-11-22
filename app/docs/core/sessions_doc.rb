@@ -17,7 +17,7 @@ module Core
         }
       }
 
-      response 200, 'Success', :json, data: { auth_token: ::String }
+      response 200, 'Success', :json, data: Schematics::AuthToken.open_api_schema
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
     end

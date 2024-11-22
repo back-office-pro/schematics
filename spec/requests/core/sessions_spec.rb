@@ -11,20 +11,27 @@ RSpec.describe SessionsController, except: %i[create destroy] do
     let(:do_request) { post(url, params:, headers:) }
     let(:url) { Rails.application.routes.url_helpers.sessions_path }
     let(:params) { { session: { email:, password:, remember_me: } } }
+    let(:expected_response) do
+      {
+        'token_type' => 'Bearer',
+        'expires_in' => 600,
+        'access_token' => String,
+        'refresh_token' => String
+      }
+    end
 
     context 'when credentials are correct' do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { 'Azerty1234?!' }
       let(:remember_me) { true }
-      let(:auth_token) { Session.last.signed_id }
 
       before { do_request }
 
-      after { cookies.delete(:auth_token) }
+      after { cookies.delete(:access_token) }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(cookies[:auth_token]).not_to be_nil }
-      its(:parsed_body) { is_expected.to eq('auth_token' => auth_token) }
+      it { expect(cookies[:access_token]).not_to be_nil }
+      its(:parsed_body) { is_expected.to match(expected_response) }
     end
 
     context 'when credentials are wrong' do
@@ -35,7 +42,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       before { do_request }
 
       it { is_expected.to have_http_status(:unauthorized) }
-      it { expect(cookies[:auth_token]).to be_nil }
+      it { expect(cookies[:access_token]).to be_nil }
       its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
     end
 
@@ -53,7 +60,6 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       let(:email) { 'john.doe@nowhere.com' }
       let(:password) { nil }
       let(:remember_me) { nil }
-      let(:auth_token) { Session.last.signed_id }
 
       before do
         Rails.application.env_config['omniauth.auth'] = OmniAuth::AuthHash.new(info: { email: })
@@ -63,8 +69,8 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       after { Rails.application.env_config['omniauth.auth'] = nil }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(cookies[:auth_token]).to be_nil }
-      its(:parsed_body) { is_expected.to eq('auth_token' => auth_token) }
+      it { expect(cookies[:access_token]).to be_nil }
+      its(:parsed_body) { is_expected.to match(expected_response) }
     end
 
     context 'when login with a non existing omniauth account' do
@@ -80,7 +86,7 @@ RSpec.describe SessionsController, except: %i[create destroy] do
       after { Rails.application.env_config['omniauth.auth'] = nil }
 
       it { is_expected.to have_http_status(:unauthorized) }
-      it { expect(cookies[:auth_token]).to be_nil }
+      it { expect(cookies[:access_token]).to be_nil }
       its(:body) { is_expected.to eq("HTTP Token: Access denied.\n") }
     end
 
@@ -99,13 +105,12 @@ RSpec.describe SessionsController, except: %i[create destroy] do
           permissions: [Permission.create!(action: 'index', model: 'Import')]
         )
       end
-      let(:other_auth_token) { Session.last.signed_id }
 
       before { [other_user, do_request] }
 
       it { is_expected.to have_http_status(:success) }
-      it { expect(cookies[:auth_token]).to be_nil }
-      its(:parsed_body) { is_expected.to eq('auth_token' => other_auth_token) }
+      it { expect(cookies[:access_token]).to be_nil }
+      its(:parsed_body) { is_expected.to match(expected_response) }
     end
   end
 end

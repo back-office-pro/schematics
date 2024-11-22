@@ -17,11 +17,11 @@ RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
   let(:session) { Session.create!(user:) }
-  let(:auth_token) { session.signed_id }
+  let(:access_token) { session.access_token }
   let(:headers) do
     {
       'Accept' => accept_header,
-      'Authorization' => "Bearer #{auth_token}"
+      'Authorization' => "#{Schematics::AuthToken::TOKEN_TYPE} #{access_token}"
     }
   end
 end

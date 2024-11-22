@@ -6,6 +6,7 @@ module Schematics
 
     allow_unauthenticated_access only: %i[new create]
     before_action :require_sudo!, only: %i[show edit]
+    before_action :no_store, only: %i[show create]
     layout 'schematics/jumbotron', only: %i[new create]
 
     def show
@@ -39,7 +40,7 @@ module Schematics
         if result.success?
           session[:current_session_id] = result.session.id
           format.html { redirect_to return_to_path, notice: t(result.message) }
-          format.json { render json: { auth_token: result.session.signed_id } }
+          format.json { render json: AuthToken.new(result.session) }
         else
           format.html do
             flash.now[:alert] = t(result.message)

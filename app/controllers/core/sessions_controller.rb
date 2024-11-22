@@ -5,6 +5,7 @@ class SessionsController < Schematics::ResourcesController
 
   allow_unauthenticated_access only: %i[new create]
   skip_before_action :set_draft, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
+  before_action :no_store, only: :create
 
   rate_limit to: 5, within: 20.seconds, only: :create
 
@@ -27,7 +28,7 @@ class SessionsController < Schematics::ResourcesController
         else
           session[:current_session_id] = result.session.id
           format.html { redirect_to return_to_path, notice: t(result.message) }
-          format.json { render json: { auth_token: result.session.signed_id } }
+          format.json { render json: Schematics::AuthToken.new(result.session) }
         end
       else
         format.html do
