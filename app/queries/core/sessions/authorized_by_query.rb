@@ -3,7 +3,7 @@
 module Core
   module Sessions
     class AuthorizedByQuery < Schematics::ApplicationQuery
-      def call(auth_token, id)
+      def call(access_token, id)
         with_slugs
           .with_user_avatar
           .with_user_teams_name
@@ -11,7 +11,7 @@ module Core
           .with_user_role_name
           .with_user_drafts
           .with_user_slugs
-          .where(id: auth_token)
+          .where(id: access_token)
           .or(active.where(id:))
           .load_async
       end

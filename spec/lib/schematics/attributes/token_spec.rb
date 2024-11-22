@@ -4,7 +4,7 @@ describe Schematics::Attributes::Token do
   subject(:attribute) { described_class.new(entity:, name:, options:) }
 
   let(:entity) { Schematics::Entities::Entity.new(name: 'entity') }
-  let(:name) { 'auth_token' }
+  let(:name) { 'access_token' }
   let(:options) { {} }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
@@ -25,12 +25,12 @@ describe Schematics::Attributes::Token do
   it { is_expected.to be_unique }
 
   its(:database_type) { is_expected.to eq('string') }
-  its(:column_name) { is_expected.to eq('auth_token') }
+  its(:column_name) { is_expected.to eq('access_token') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
   its(:icon) { is_expected.to eq(:key) }
-  its(:to_spec) { is_expected.to eq('A entity has a **auth token** attribute of type *token*') }
-  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.auth_token') }
+  its(:to_spec) { is_expected.to eq('A entity has a **access token** attribute of type *token*') }
+  its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.access_token') }
 
   its(:validators) do
     is_expected.to eq(uniqueness_with_deleted: { case_sensitive: true, allow_blank: true })
@@ -38,7 +38,7 @@ describe Schematics::Attributes::Token do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :auth_token, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}}
+      validates :access_token, {:uniqueness_with_deleted=>{:case_sensitive=>true, :allow_blank=>true}}
     RUBY
   end
 
@@ -53,8 +53,8 @@ describe Schematics::Attributes::Token do
 
   its(:to_str) do
     is_expected.to eq <<~RUBY
-      encrypts :auth_token, deterministic: true
-      has_secure_token :auth_token, length: 32
+      encrypts :access_token, deterministic: true
+      has_secure_token :access_token, length: 32
     RUBY
   end
 

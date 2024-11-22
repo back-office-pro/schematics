@@ -2,8 +2,8 @@
 one:
   id: f22740e6-7580-4f20-9abc-4def403c2834
   name: Front-end API key
-  auth_token: <%= SecureRandom.uuid %>
+  access_token: <%= SecureRandom.uuid %>
 two:
   id: 7ed2c4db-6dfb-4d7b-94fb-86781f99aa08
   name: Temporary key
-  auth_token: <%= SecureRandom.uuid %>
+  access_token: <%= SecureRandom.uuid %>

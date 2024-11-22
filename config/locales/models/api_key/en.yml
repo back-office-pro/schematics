@@ -3,8 +3,8 @@ en:
   activerecord:
     attributes:
       api_key:
+        access_token: API key
         active: Active
-        auth_token: API key
         expires_at: Expires at
         name: Name
         permissions:

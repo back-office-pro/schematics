@@ -1427,7 +1427,7 @@
       },
       {
         "id": "113664da-9180-44ef-9cce-fc0a1df31520",
-        "name": "auth_token",
+        "name": "access_token",
         "type": "token"
       },
       {

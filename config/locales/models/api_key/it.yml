@@ -3,8 +3,8 @@ it:
   activerecord:
     attributes:
       api_key:
+        access_token: Chiave API
         active: Attiva
-        auth_token: Chiave API
         expires_at: Scade alle
         name: Nome
         permissions:

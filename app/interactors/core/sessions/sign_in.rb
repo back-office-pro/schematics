@@ -13,7 +13,7 @@ module Core
           context.message = '.challenge'
         else
           context.session = session
-          cookies.permanent.encrypted[:auth_token] = cookie if remember_me?
+          cookies.permanent.encrypted[:access_token] = cookie if remember_me?
         end
       end
 
