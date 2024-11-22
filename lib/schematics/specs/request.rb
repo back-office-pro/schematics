@@ -27,7 +27,7 @@ module Schematics
 
         let(:record) { default.tap(&:save!) }
         let(:route_key) { [model_class.model_name.singular_route_key.to_sym] }
-        let(:access_token) { @session.access_token }
+        let(:access_token) { @session.generate_token_for(:access_token) }
         let(:headers) { { 'Authorization' => "Bearer #{access_token}" } } # rubocop:disable Style/StringHashKeys
         let(:api_key_headers) { { 'x-api-key' => @api_key.access_token } } # rubocop:disable Style/StringHashKeys
         let(:host) { RSpec::Rails::FeatureExampleGroup::DEFAULT_HOST }

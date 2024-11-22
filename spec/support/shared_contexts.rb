@@ -17,7 +17,7 @@ RSpec.shared_context 'with authenticated user' do
   include_context 'with unauthenticated user'
 
   let(:session) { Session.create!(user:) }
-  let(:access_token) { session.access_token }
+  let(:access_token) { session.generate_token_for(:access_token) }
   let(:headers) do
     {
       'Accept' => accept_header,

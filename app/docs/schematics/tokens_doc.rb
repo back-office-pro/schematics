@@ -9,7 +9,7 @@ module Schematics
 
       body :json, data: { refresh_token: ::String }
 
-      response 201, 'Success', :json, data: Schematics::AuthToken.open_api_schema
+      response 200, 'Success', :json, data: Schematics::AuthToken.open_api_schema
       response 400, 'Bad Request', :json
       response 401, 'Not Authorized', :json
     end
