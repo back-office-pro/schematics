@@ -13,6 +13,10 @@ class Session < Schematics::ApplicationRecord
 
   after_create_commit :sudo!
 
+  generates_token_for :refresh_token, expires_in: Schematics::AuthToken::REFRESH_TOKEN_DURATION do
+    id
+  end
+
   class << self
     def decode_access_token(token, *)
       signed_id_verifier.verified(token, purpose: combine_signed_id_purposes(:access_token))
@@ -22,19 +26,7 @@ class Session < Schematics::ApplicationRecord
   def access_token
     return unless persisted?
 
-    signed_id(
-      expires_in: Schematics::AuthToken::ACCESS_TOKEN_DURATION,
-      purpose: :access_token
-    )
-  end
-
-  def refresh_token
-    return unless persisted?
-
-    signed_id(
-      expires_in: Schematics::AuthToken::REFRESH_TOKEN_DURATION,
-      purpose: :refresh_token
-    )
+    signed_id(expires_in: Schematics::AuthToken::ACCESS_TOKEN_DURATION, purpose: :access_token)
   end
 
   def login!(user)

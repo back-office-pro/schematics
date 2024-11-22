@@ -15,7 +15,7 @@ module Schematics
       }
     end
 
-    delegate :access_token, :refresh_token, to: :@session, private: true
+    delegate :access_token, :generate_token_for, to: :@session, private: true
 
     def initialize(session)
       @session = session
@@ -25,7 +25,7 @@ module Schematics
       token_type: TOKEN_TYPE,
       expires_in: ACCESS_TOKEN_DURATION.to_i,
       access_token:,
-      refresh_token:
+      refresh_token: generate_token_for(:refresh_token)
     }
   end
 end

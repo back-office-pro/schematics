@@ -20,4 +20,5 @@ fr:
     restore: restaurer
     sudo: acces-restreint
     sudos: acces-restreints
+    tokens: jetons
     user_notifications: notifications-utilisateur

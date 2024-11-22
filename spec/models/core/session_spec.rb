@@ -6,9 +6,7 @@ RSpec.describe Session do
   include Schematics::Specs::Model
 
   it { is_expected.to be_sudo }
-
   its(:access_token) { is_expected.to be_nil }
-  its(:refresh_token) { is_expected.to be_nil }
 
   it 'marks the session as sudo after create' do
     expect { record.save! }.to change(record, :sudo_at)
