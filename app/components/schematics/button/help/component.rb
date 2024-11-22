@@ -18,7 +18,8 @@ module Schematics
           ::WebhookEndpoint,
           ::PDFTemplate,
           ::EmailTemplate,
-          ::DataCleaning
+          ::DataCleaning,
+          ::Session
         ].freeze
 
         delegate :entity, :human_name_plural, to: :model_class, allow_nil: true, private: true
