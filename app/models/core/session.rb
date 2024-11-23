@@ -18,7 +18,7 @@ class Session < Schematics::ApplicationRecord
   end
 
   generates_token_for :refresh_token, expires_in: Schematics::AuthToken::REFRESH_TOKEN_DURATION do
-    id
+    created_at
   end
 
   class << self
