@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-threads_count = ENV.fetch('RAILS_MAX_THREADS', 7)
-threads threads_count, threads_count
+threads ENV.fetch('RAILS_MAX_THREADS', 3)
 
 port ENV.fetch('PORT', Tenant.port) if Rails.env.development?
 

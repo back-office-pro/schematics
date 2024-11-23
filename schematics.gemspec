@@ -103,7 +103,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pg_search', '2.3.7'
   spec.add_dependency 'phonelib', '0.10.1'
   spec.add_dependency 'propshaft', '1.1.0'
-  spec.add_dependency 'puma', '6.4.3'
+  spec.add_dependency 'puma', '6.5.0'
   spec.add_dependency 'pwned', '2.4.1'
   spec.add_dependency 'rack-cors', '2.0.2'
   spec.add_dependency 'rack-mini-profiler', '3.3.1'
