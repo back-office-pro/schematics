@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_record/connection_adapters/abstract/schema_definitions'
 require 'active_record/connection_adapters/sqlite3_adapter'
 require 'active_record/override/connection_adapters/sqlite3_adapter'
 require 'active_record/override/generators/migration_generator'
@@ -21,6 +20,7 @@ require 'rails/generators'
 require 'rails/generators/active_record/migration/migration_generator'
 require 'rails/generators/generated_attribute'
 require 'rails/override/generators/generated_attribute'
+require 'solid_queue/configuration'
 require 'solid_queue/override/configuration'
 
 GeneratedAttribute = Rails::Override::Generators::GeneratedAttribute
