@@ -55,6 +55,19 @@ describe Schematics::Attributes::Boolean do
     end
   end
 
+  context 'when required' do
+    let(:options) { { required: true } }
+
+    it { is_expected.to be_required }
+    its(:validators) { is_expected.to eq(acceptance: true) }
+
+    its('validators.to_str') do
+      is_expected.to eq <<~RUBY
+        validates :toggle, {:acceptance=>true}
+      RUBY
+    end
+  end
+
   describe '#format' do
     subject { attribute.format(value) }
 

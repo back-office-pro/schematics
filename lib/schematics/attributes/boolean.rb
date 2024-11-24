@@ -21,6 +21,10 @@ module Schematics
       def format(value)
         translate(value, default: value.to_s).upcase
       end
+
+      def validators
+        super.rename_keys(presence: :acceptance)
+      end
     end
   end
 end
