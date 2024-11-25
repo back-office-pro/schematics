@@ -5,7 +5,8 @@ module Core
     class LookupQuery < Schematics::ApplicationQuery
       def call(locale, key)
         where(locale:)
-          .where('key ~* ?', "#{key}(\\.|$)")
+          .where(arel_table[:key].matches("#{key}.%"))
+          .or(where(locale:, key:))
           .pluck(:key, :value)
           .to_h
       end

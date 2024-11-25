@@ -34,7 +34,7 @@ RSpec.describe Core::Translations::LookupQuery do
     subject { query.call(locale, key) }
 
     context 'when key does not exist' do
-      let(:key) { 'activerecord.attributes.migration.foo' }
+      let(:key) { 'activerecord.attributes.migration.sta' }
 
       it { is_expected.to be_empty }
     end
