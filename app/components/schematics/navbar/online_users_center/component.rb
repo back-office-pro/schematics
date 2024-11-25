@@ -10,8 +10,8 @@ module Schematics
           .with_user
           .with_user_avatar
           .active
-          .select('DISTINCT ON (user_id) *')
           .order(:user_id, updated_at: :desc)
+          .uniq(&:user)
       end
     end
   end
