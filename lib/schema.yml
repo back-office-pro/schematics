@@ -86,6 +86,15 @@ properties:
         - $ref: '#/$defs/user'
         - $ref: '#/$defs/user_agent'
 $defs:
+  acceptance:
+    type: object
+    additionalProperties: false
+    required:
+      - acceptance
+    properties:
+      acceptance:
+        type: boolean
+        description: Is the attribute must be accepted or not
   aspect_ratio:
     type: object
     additionalProperties: false
@@ -560,6 +569,7 @@ $defs:
         anyOf:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
+          - $ref: '#/$defs/acceptance'
         additionalProperties: false
   byte:
     type: object

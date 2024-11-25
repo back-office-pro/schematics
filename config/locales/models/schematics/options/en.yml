@@ -3,6 +3,7 @@ en:
   activemodel:
     attributes:
       schematics/options/wrapper:
+        acceptance: Acceptance
         actions: Actions
         allow_hidden: Allow hidden
         aspect_ratio: Aspect ratio

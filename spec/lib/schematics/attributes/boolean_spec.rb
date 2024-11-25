@@ -41,7 +41,8 @@ describe Schematics::Attributes::Boolean do
       Schematics::Options::Hidden,
       Schematics::Options::Cached,
       Schematics::Options::Default,
-      Schematics::Options::Readonly
+      Schematics::Options::Readonly,
+      Schematics::Options::Acceptance
     )
   end
 
@@ -55,10 +56,9 @@ describe Schematics::Attributes::Boolean do
     end
   end
 
-  context 'when required' do
-    let(:options) { { required: true } }
+  context 'when boolean must be accepted' do
+    let(:options) { { acceptance: true } }
 
-    it { is_expected.to be_required }
     its(:validators) { is_expected.to eq(acceptance: true) }
 
     its('validators.to_str') do

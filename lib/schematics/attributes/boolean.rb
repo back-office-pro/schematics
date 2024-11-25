@@ -10,6 +10,10 @@ module Schematics
       include Behaviours::Searchable
       include Behaviours::Fillable
 
+      delegate :acceptance, to: :options
+
+      def available_options = super.push(Options::Acceptance)
+
       def default = false
 
       def icon = :toggle_on
@@ -22,9 +26,7 @@ module Schematics
         translate(value, default: value.to_s).upcase
       end
 
-      def validators
-        super.rename_keys(presence: :acceptance)
-      end
+      def validators = super.merge(acceptance:)
     end
   end
 end
