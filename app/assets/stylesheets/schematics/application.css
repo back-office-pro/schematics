@@ -197,6 +197,10 @@ svg {
   cursor: grab;
 }
 
+.bg-pattern-primary {
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%), var(--bs-primary-darken)), url('/schematics/bg-pattern.png') var(--bs-primary);
+}
+
 /* Overrides */
 
 .fixed-top {

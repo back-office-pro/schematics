@@ -7,7 +7,7 @@ module Schematics
 
       def theme_color_darken = theme_color
         .paint
-        .darken(5)
+        .darken(12)
         .to_s
 
       def theme_color_darken_rgb = theme_color_darken
