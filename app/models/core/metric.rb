@@ -23,7 +23,7 @@ class Metric < Schematics::ApplicationRecord
   end
 
   def exceeded?
-    value.public_send(comparator_sign, threshold)
+    value.to_f.public_send(comparator_sign, threshold.to_f)
   end
 
   def trend
