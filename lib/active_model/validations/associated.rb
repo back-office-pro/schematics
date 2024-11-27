@@ -8,7 +8,7 @@ module ActiveModel
       def validate_each(record, attribute, value)
         return if Array(value).reject(&:valid?).none?
 
-        record.errors.add(attribute, :invalid, **options.merge(value:))
+        record.errors.add(attribute, :invalid, **options, value:)
       end
     end
 

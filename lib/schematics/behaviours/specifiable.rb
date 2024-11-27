@@ -7,12 +7,12 @@ module Schematics
         .class
         .human_attribute_name(
           :to_spec,
+          **spec_interpolations.slice(:function, :callback),
           **spec_interpolations
             .compact
             .except(:function, :callback)
             .transform_values(&:humanize)
             .transform_values(&:downcase)
-            .merge(spec_interpolations.slice(:function, :callback))
         )
 
       protected

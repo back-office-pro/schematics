@@ -9,7 +9,7 @@ module Schematics
       include Cacheable
 
       class << self
-        public :new, :allocate # rubocop:disable Style/AccessModifierDeclarations
+        public :new, :allocate
         alias_method :instance, :first_or_initialize
       end
     end

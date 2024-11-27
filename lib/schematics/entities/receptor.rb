@@ -36,7 +36,7 @@ module Schematics
       end
 
       def receptor_respond_to_missing?(method_name, *)
-        *, constant, mod = parse_method_name(method_name)
+        _predicate, constant, mod = parse_method_name(method_name)
         return false unless mod || constant
 
         (Schematics.const_defined?(mod) && Schematics.const_get(mod).const_defined?(constant)) ||

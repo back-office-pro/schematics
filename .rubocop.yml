@@ -93,6 +93,8 @@ Style/UnlessLogicalOperators:
   Enabled: true
 Style/MutableConstant:
   EnforcedStyle: strict
+Style/SafeNavigationChainLength:
+  Max: 5
 Style/Documentation:
   Enabled: false
 Style/HashEachMethods:

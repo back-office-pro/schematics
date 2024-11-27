@@ -35,7 +35,7 @@ module Core
       private
 
       memoize def response
-        Net::HTTP.start(uri.hostname, uri.port, **TIMEOUT_OPTIONS.merge(use_ssl:)) do |http|
+        Net::HTTP.start(uri.hostname, uri.port, **TIMEOUT_OPTIONS, use_ssl:) do |http|
           http.request(
             Net::HTTP
               .const_get(request_method.downcase.camelize)
