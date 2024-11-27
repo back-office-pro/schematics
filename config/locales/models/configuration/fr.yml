@@ -4,7 +4,6 @@ fr:
     attributes:
       configuration:
         available_locales: Langues disponibles
-        blog_feature_flag: Activer le blog
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
         company_logo: Logo de la société

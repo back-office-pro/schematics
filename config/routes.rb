@@ -23,9 +23,5 @@ Schematics::Engine.routes.draw do
     resources :messages, only: [], model_name: 'Message' do
       resources :message_replies, only: %i[new create], path: :replies, as: :replies
     end
-    constraints -> { Configuration.blog_feature_flag } do
-      resources :blog, only: %i[index show], controller: :blog, param: :slug, format: :html
-      resource :sitemap, only: :show, format: :xml, controller: :sitemap
-    end
   end
 end

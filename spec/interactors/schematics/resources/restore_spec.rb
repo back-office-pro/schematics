@@ -5,60 +5,131 @@ require 'rails_helper'
 RSpec.describe Schematics::Resources::Restore do
   include ActiveJob::TestHelper
 
-  include_context 'with blog post'
+  include_context 'with import'
 
-  before { resource.destroy! }
+  let(:team) { Team.create!(name_en: 'Team', name_fr: 'Equipe', name_it: 'Squadra') }
+  let(:message) do
+    Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipients: [user])
+  end
+
+  before { [team, message, import].each(&:destroy!) }
+
+  after { clear_enqueued_jobs }
 
   describe '.call' do
     subject(:call) { described_class.call(resource:) }
 
-    it 'restores the resource' do
-      expect { call }
-        .to change(BlogPost, :count)
-        .by(1)
-    end
+    context 'when restoring the message' do
+      let(:resource) { message }
 
-    it 'restores the string translations' do
-      expect { call }
-        .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
-        .by(5)
-    end
-
-    it 'restores the action texts' do
-      expect { call }
-        .to change(ActionText::RichText, :count)
-        .by(3)
-    end
-
-    it 'restores the friendly_id slugs' do
-      expect { call }
-        .to change(FriendlyId::Slug, :count)
-        .by(2)
-    end
-
-    it 'restores the active storage attachment' do
-      expect { call }
-        .to change(ActiveStorage::Attachment, :count)
-        .by(1)
-    end
-
-    it 'restores the active storage blob' do
-      expect { call }
-        .to change(ActiveStorage::Blob, :count)
-        .by(1)
-    end
-
-    it 'creates the pg_search documents' do
-      perform_enqueued_jobs do
+      it 'restores the message' do
         expect { call }
-          .to change(PgSearch::Document, :count)
-          .by(2)
+          .to change(Message, :count)
+          .by(1)
+      end
+
+      it 'restores the string translation' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
+          .by(1)
+      end
+
+      it 'restores the action text' do
+        expect { call }
+          .to change(ActionText::RichText, :count)
+          .by(1)
+      end
+
+      it 'restores the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug, :count)
+          .by(1)
+      end
+
+      it 'creates the pg_search document' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(PgSearch::Document, :count)
+            .by(1)
+        end
       end
     end
 
-    it 'serves the image' do
-      call
-      expect(ActiveStorage::Blob.service).to exist(image.key)
+    context 'when restoring the team' do
+      let(:resource) { team }
+
+      it 'restores the team' do
+        expect { call }
+          .to change(Team, :count)
+          .by(1)
+      end
+
+      it 'restores the string translations' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
+          .by(5)
+      end
+
+      it 'restores the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug, :count)
+          .by(1)
+      end
+
+      it 'creates the pg_search documents' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(PgSearch::Document, :count)
+            .by(1)
+        end
+      end
+    end
+
+    context 'when restoring the import' do
+      let(:resource) { import }
+
+      it 'restores the import' do
+        expect { call }
+          .to change(Import, :count)
+          .by(1)
+      end
+
+      it 'restores the string translation' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
+          .by(1)
+      end
+
+      it 'restores the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug, :count)
+          .by(1)
+      end
+
+      it 'restores the active storage attachment' do
+        expect { call }
+          .to change(ActiveStorage::Attachment, :count)
+          .by(1)
+      end
+
+      it 'restores the active storage blob' do
+        expect { call }
+          .to change(ActiveStorage::Blob, :count)
+          .by(1)
+      end
+
+      it 'creates the pg_search documents' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(PgSearch::Document, :count)
+            .by(2)
+        end
+      end
+
+      it 'serves the file' do
+        call
+        expect(ActiveStorage::Blob.service).to exist(file.key)
+      end
     end
   end
 end

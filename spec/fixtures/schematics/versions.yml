@@ -11,51 +11,47 @@ two:
   whodunnit: <%= User.first.id %>
 three:
   event: create
-  item: one (BlogPost)
-  whodunnit: <%= User.first.id %>
-four:
-  event: create
   item: one (Import)
   whodunnit: <%= User.first.id %>
-five:
+four:
   event: create
   item_id: a44e9214-c886-4ad4-91df-a55ec049270b
   item_type: Meeting
   whodunnit: <%= User.first.id %>
-six:
+five:
   event: create
   item_id: 1676e074-4c72-4f6c-901d-fb502a351480
   item_type: Message
   whodunnit: <%= User.first.id %>
-seven:
+six:
   event: create
   item_id: b95bae8d-d517-4d0d-99db-afaa549dd5bb
   item_type: Task
   whodunnit: <%= User.first.id %>
-height:
+seven:
   event: create
   item_id: 97110c02-ee32-4ccf-a145-6a0f104afd6e
   item_type: Task
   whodunnit: <%= User.first.id %>
-nine:
+height:
   event: create
   item: one (Team)
   whodunnit: <%= User.first.id %>
-ten:
+nine:
   event: create
   item_id: 118ecf22-30f5-4622-ad8c-a3755be55e6c
   item_type: WebhookEndpoint
   whodunnit: <%= User.first.id %>
-eleven:
+ten:
   event: create
   item_id: 0037f59c-5ab5-422e-8c21-d47f03c9401e
   item_type: WebhookEndpoint
   whodunnit: <%= User.first.id %>
-twelve:
+eleven:
   event: create
   item: one (PDFTemplate)
   whodunnit: <%= User.first.id %>
-thirteen:
+twelve:
   event: create
   item_id: a64a65ea-6378-42bb-b142-e95a8845706e
   item_type: EmailTemplate

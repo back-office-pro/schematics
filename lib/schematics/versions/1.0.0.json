@@ -458,16 +458,6 @@
         }
       },
       {
-        "id": "7a16fb5b-c5a3-4036-9da7-fa9bf19c3fa4",
-        "name": "blog_feature_flag",
-        "type": "boolean",
-        "options": {
-          "cached": true,
-          "default": false,
-          "group": "feature_flag"
-        }
-      },
-      {
         "id": "91e4fa58-a6cb-4954-9a3d-87db6c9714c1",
         "name": "google_sign_in_feature_flag",
         "type": "boolean",
@@ -1630,86 +1620,6 @@
             "entities": 10,
             "support": 0
           }
-        }
-      }
-    ]
-  },
-  {
-    "id": "56bee738-9642-4609-b254-f9b5ed4c93c8",
-    "name": "blog_post",
-    "options": {
-      "descriptor": "title",
-      "icon": "newspaper"
-    },
-    "attributes": [
-      {
-        "id": "7fc78d89-be52-40ef-96aa-09cbef75a1fd",
-        "name": "title",
-        "type": "citext",
-        "options": {
-          "unique": true,
-          "required": true,
-          "translated": true,
-          "limit": 100
-        }
-      },
-      {
-        "id": "32bbaacc-f85f-43a0-a789-91f3e9835312",
-        "name": "image",
-        "type": "attachment",
-        "options": {
-          "content_type": [
-            "image/png",
-            "image/jpeg"
-          ],
-          "size": 2
-        }
-      },
-      {
-        "id": "67b14bb5-87f6-4f0a-96bc-68fd9d7faf08",
-        "name": "content",
-        "type": "rich_text",
-        "options": {
-          "required": true,
-          "translated": true
-        }
-      },
-      {
-        "id": "59d898c8-764d-4afc-b20c-2cd7b3d2fd0e",
-        "name": "state",
-        "type": "state_machine",
-        "options": {
-          "required": true,
-          "default": "draft",
-          "values": [
-            "draft",
-            "published"
-          ],
-          "events": [
-            {
-              "id": "b35420a2-b677-4deb-ba3a-b9055135ed55",
-              "name": "publish",
-              "icon": "arrow_trend_up",
-              "from": "draft",
-              "to": "published"
-            },
-            {
-              "id": "63788727-ebc7-4a03-b0fc-56b997527455",
-              "name": "unpublish",
-              "icon": "arrow_trend_down",
-              "color": "danger",
-              "from": "published",
-              "to": "draft"
-            }
-          ]
-        }
-      },
-      {
-        "id": "a403e012-955b-4b3a-bff1-d90b4315945a",
-        "name": "author",
-        "type": "user",
-        "options": {
-          "required": true
         }
       }
     ]

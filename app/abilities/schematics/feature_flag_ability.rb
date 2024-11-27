@@ -6,7 +6,6 @@ module Schematics
              :comments_feature_flag,
              :tasks_feature_flag,
              :meetings_feature_flag,
-             :blog_feature_flag,
              to: ::Configuration,
              private: true
 
@@ -16,7 +15,6 @@ module Schematics
       cannot :manage, ::Comment unless comments_feature_flag
       cannot :manage, ::Meeting unless meetings_feature_flag
       cannot :manage, ::Task unless tasks_feature_flag
-      cannot :manage, ::BlogPost unless blog_feature_flag
     end
   end
 end

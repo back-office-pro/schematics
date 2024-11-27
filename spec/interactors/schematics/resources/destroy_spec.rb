@@ -5,74 +5,158 @@ require 'rails_helper'
 RSpec.describe Schematics::Resources::Destroy do
   include ActiveJob::TestHelper
 
-  include_context 'with blog post'
+  include_context 'with import'
 
-  let(:version) { Schematics::Version.create!(event: 'create', item: resource, user:) }
+  let(:team) { Team.create!(name_en: 'Team', name_fr: 'Equipe', name_it: 'Squadra') }
+  let(:message) do
+    Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipients: [user])
+  end
+  let(:versions) do
+    Schematics::Version.create!(
+      [
+        { event: 'create', item: import, user: },
+        { event: 'create', item: team, user: },
+        { event: 'create', item: message, user: }
+      ]
+    )
+  end
 
-  before { [version, [resource, image].each(&:create_or_update_pg_search_document)] }
+  before do
+    versions
+    [team, message, import, file].each(&:create_or_update_pg_search_document)
+    allow(ActiveRecord::Base).to receive(:lock_optimistically).and_return(false)
+  end
 
   after { clear_enqueued_jobs }
 
   describe '.call' do
     subject(:call) { described_class.call(resource:) }
 
-    it 'destroys the resource' do
-      expect { call }
-        .to change(BlogPost.with_deleted, :count)
-        .by(-1)
-    end
+    context 'when destroying the message' do
+      let(:resource) { message }
 
-    it 'destroys the string translations' do
-      expect { call }
-        .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation.with_deleted, :count) # rubocop:disable Layout/LineLength
-        .by(-5)
-    end
-
-    it 'destroys the action texts' do
-      expect { call }
-        .to change(ActionText::RichText.with_deleted, :count)
-        .by(-3)
-    end
-
-    it 'destroys the friendly_id slugs' do
-      expect { call }
-        .to change(FriendlyId::Slug.with_deleted, :count)
-        .by(-2)
-    end
-
-    it 'destroys the active storage attachment' do
-      expect { call }
-        .to change(ActiveStorage::Attachment.with_deleted, :count)
-        .by(-1)
-    end
-
-    it 'destroys the active storage blob' do
-      perform_enqueued_jobs do
+      it 'destroys the message' do
         expect { call }
-          .to change(ActiveStorage::Blob.with_deleted, :count)
+          .to change(Message.with_deleted, :count)
           .by(-1)
       end
-    end
 
-    it 'destroys the pg_search documents' do
-      perform_enqueued_jobs do
+      it 'destroys the string translation' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation.with_deleted, :count) # rubocop:disable Layout/LineLength
+          .by(-1)
+      end
+
+      it 'destroys the action text' do
+        expect { call }
+          .to change(ActionText::RichText.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the pg_search document' do
         expect { call }
           .to change(PgSearch::Document, :count)
-          .by(-2)
+          .by(-1)
+      end
+
+      it 'does not destroy the version to keep it on timeline' do
+        expect { call }.not_to change(Schematics::Version, :count)
       end
     end
 
-    it 'does not destroy the version to keep it on timeline' do
-      expect { call }.not_to change(Schematics::Version, :count)
+    context 'when destroying the team' do
+      let(:resource) { team }
+
+      it 'destroys the team' do
+        expect { call }
+          .to change(Team.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the string translations' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation.with_deleted, :count) # rubocop:disable Layout/LineLength
+          .by(-5)
+      end
+
+      it 'destroys the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the pg_search document' do
+        expect { call }
+          .to change(PgSearch::Document, :count)
+          .by(-1)
+      end
+
+      it 'does not destroy the version to keep it on timeline' do
+        expect { call }.not_to change(Schematics::Version, :count)
+      end
     end
 
-    it 'purges the image' do
-      expect { call }
-        .to have_enqueued_job(ActiveStorage::PurgeJob)
-        .exactly(:once)
-        .with(image)
-        .on_queue('cleanups')
-        .at(:no_wait)
+    context 'when destroying the import' do
+      let(:resource) { import }
+
+      it 'destroys the import' do
+        expect { call }
+          .to change(Import.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the string translation' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation.with_deleted, :count) # rubocop:disable Layout/LineLength
+          .by(-1)
+      end
+
+      it 'destroys the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the active storage attachment' do
+        expect { call }
+          .to change(ActiveStorage::Attachment.with_deleted, :count)
+          .by(-1)
+      end
+
+      it 'destroys the active storage blob' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(ActiveStorage::Blob.with_deleted, :count)
+            .by(-1)
+        end
+      end
+
+      it 'destroys the pg_search documents' do
+        perform_enqueued_jobs do
+          expect { call }
+            .to change(PgSearch::Document, :count)
+            .by(-2)
+        end
+      end
+
+      it 'does not destroy the version to keep it on timeline' do
+        expect { call }.not_to change(Schematics::Version, :count)
+      end
+
+      it 'purges the file' do
+        expect { call }
+          .to have_enqueued_job(ActiveStorage::PurgeJob)
+          .exactly(:once)
+          .with(file)
+          .on_queue('cleanups')
+          .at(:no_wait)
+      end
     end
   end
 end

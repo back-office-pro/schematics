@@ -1,9 +1,0 @@
-.d-flex.justify-content-center.text-white.mb-4.pb-4
-  = link_to blog_index_path do
-    = __attachment(:company_logo, icon: BlogPost.entity.icon)
-= __blog_search(field: :title)
-- if @posts.empty?
-  = __empty_resource
-- else
-  = __blog_post_preview(@posts)
-  = __viewer_pagination(pagy: @pagy)

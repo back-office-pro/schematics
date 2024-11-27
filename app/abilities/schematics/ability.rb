@@ -22,7 +22,6 @@ module Schematics
       merge EmailingAbility.new
       merge MigrationAbility.new
       merge ComparisonAbility.new
-      merge BlogAbility.new
       merge SearchAbility.new
       merge RoleAbility.new
       merge AdminAbility.new(self)

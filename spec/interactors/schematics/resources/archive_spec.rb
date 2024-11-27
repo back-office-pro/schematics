@@ -3,68 +3,151 @@
 require 'rails_helper'
 
 RSpec.describe Schematics::Resources::Archive do
-  include_context 'with blog post'
+  include_context 'with import'
 
-  let(:version) { Schematics::Version.create!(event: 'create', item: resource, user:) }
+  let(:team) { Team.create!(name_en: 'Team', name_fr: 'Equipe', name_it: 'Squadra') }
+  let(:message) do
+    Message.create!(subject: 'Foo', content: 'Lorem', author: user, recipients: [user])
+  end
+  let(:versions) do
+    Schematics::Version.create!(
+      [
+        { event: 'create', item: import, user: },
+        { event: 'create', item: team, user: },
+        { event: 'create', item: message, user: }
+      ]
+    )
+  end
 
-  before { [version, [resource, image].each(&:create_or_update_pg_search_document)] }
+  before do
+    versions
+    [team, message, import, file].each(&:create_or_update_pg_search_document)
+  end
 
   describe '.call' do
     subject(:call) { described_class.call(resource:) }
 
-    it 'archives the resource' do
-      expect { call }
-        .to change(BlogPost, :count)
-        .by(-1)
+    context 'when archiving the message' do
+      let(:resource) { message }
+
+      it 'archives the message' do
+        expect { call }
+          .to change(Message, :count)
+          .by(-1)
+      end
+
+      it 'archives the string translation' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
+          .by(-1)
+      end
+
+      it 'archives the action text' do
+        expect { call }
+          .to change(ActionText::RichText, :count)
+          .by(-1)
+      end
+
+      it 'archives the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug, :count)
+          .by(-1)
+      end
+
+      it 'destroys the pg_search document' do
+        expect { call }
+          .to change(PgSearch::Document, :count)
+          .by(-1)
+      end
+
+      it 'does not archive the version to keep it on timeline' do
+        expect { call }.not_to change(Schematics::Version, :count)
+      end
     end
 
-    it 'archives the string translations' do
-      expect { call }
-        .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
-        .by(-5)
+    context 'when archiving the team' do
+      let(:resource) { team }
+
+      it 'archives the team' do
+        expect { call }
+          .to change(Team, :count)
+          .by(-1)
+      end
+
+      it 'archives the string translations' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
+          .by(-5)
+      end
+
+      it 'archives the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug, :count)
+          .by(-1)
+      end
+
+      it 'destroys the pg_search document' do
+        expect { call }
+          .to change(PgSearch::Document, :count)
+          .by(-1)
+      end
+
+      it 'does not archive the version to keep it on timeline' do
+        expect { call }.not_to change(Schematics::Version, :count)
+      end
     end
 
-    it 'archives the action texts' do
-      expect { call }
-        .to change(ActionText::RichText, :count)
-        .by(-3)
-    end
+    context 'when archiving the import' do
+      let(:resource) { import }
 
-    it 'archives the friendly_id slugs' do
-      expect { call }
-        .to change(FriendlyId::Slug, :count)
-        .by(-2)
-    end
+      it 'archives the import' do
+        expect { call }
+          .to change(Import, :count)
+          .by(-1)
+      end
 
-    it 'archives the active storage attachment' do
-      expect { call }
-        .to change(ActiveStorage::Attachment, :count)
-        .by(-1)
-    end
+      it 'archives the string translation' do
+        expect { call }
+          .to change(Mobility::Backends::ActiveRecord::KeyValue::StringTranslation, :count)
+          .by(-1)
+      end
 
-    it 'archives the active storage blob' do
-      expect { call }
-        .to change(ActiveStorage::Blob, :count)
-        .by(-1)
-    end
+      it 'archives the friendly_id slug' do
+        expect { call }
+          .to change(FriendlyId::Slug, :count)
+          .by(-1)
+      end
 
-    it 'destroys the pg_search documents' do
-      expect { call }
-        .to change(PgSearch::Document, :count)
-        .by(-2)
-    end
+      it 'archives the active storage attachment' do
+        expect { call }
+          .to change(ActiveStorage::Attachment, :count)
+          .by(-1)
+      end
 
-    it 'does not archive the version to keep it on timeline' do
-      expect { call }.not_to change(Schematics::Version, :count)
-    end
+      it 'archives the active storage blob' do
+        expect { call }
+          .to change(ActiveStorage::Blob, :count)
+          .by(-1)
+      end
 
-    it 'does not purge the image' do
-      expect { call }
-        .not_to have_enqueued_job(ActiveStorage::PurgeJob)
-        .exactly(:once)
-        .with(image)
-        .on_queue('cleanups')
-        .at(:no_wait)
+      it 'destroys the pg_search documents' do
+        expect { call }
+          .to change(PgSearch::Document, :count)
+          .by(-2)
+      end
+
+      it 'does not archive the version to keep it on timeline' do
+        expect { call }.not_to change(Schematics::Version, :count)
+      end
+
+      it 'does not purge the file' do
+        expect { call }
+          .not_to have_enqueued_job(ActiveStorage::PurgeJob)
+          .exactly(:once)
+          .with(file)
+          .on_queue('cleanups')
+          .at(:no_wait)
+      end
     end
   end
 end

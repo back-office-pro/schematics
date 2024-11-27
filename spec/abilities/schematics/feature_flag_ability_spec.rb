@@ -9,7 +9,7 @@ RSpec.describe Schematics::FeatureFlagAbility do
   let(:ability_class) do
     Class.new(described_class) do
       def initialize
-        can :manage, [Message, Comment, Meeting, Task, BlogPost]
+        can :manage, [Message, Comment, Meeting, Task]
         super
       end
     end
@@ -19,7 +19,6 @@ RSpec.describe Schematics::FeatureFlagAbility do
   it { is_expected.to be_able_to(:manage, Comment) }
   it { is_expected.to be_able_to(:manage, Meeting) }
   it { is_expected.to be_able_to(:manage, Task) }
-  it { is_expected.not_to be_able_to(:manage, BlogPost) }
 
   context 'when messages are disabled' do
     before { Configuration.instance.update!(messages_feature_flag: false) }
@@ -43,11 +42,5 @@ RSpec.describe Schematics::FeatureFlagAbility do
     before { Configuration.instance.update!(meetings_feature_flag: false) }
 
     it { is_expected.not_to be_able_to(:manage, Meeting) }
-  end
-
-  context 'when blog is disabled' do
-    before { Configuration.instance.update!(blog_feature_flag: true) }
-
-    it { is_expected.to be_able_to(:manage, BlogPost) }
   end
 end

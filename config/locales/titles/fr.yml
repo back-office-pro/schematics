@@ -10,9 +10,6 @@ fr:
     schematics:
       admin:
         index: Administration
-      blog:
-        index: Blog
-        show: "%{resource}"
       exception:
         internal_server_error: Quelque chose s'est mal passé
         maintenance_mode: Maintenance en cours

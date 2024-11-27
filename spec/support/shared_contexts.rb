@@ -74,38 +74,6 @@ RSpec.shared_context 'with user' do
   end
 end
 
-RSpec.shared_context 'with blog post' do
-  include_context 'with user'
-
-  let(:resource) do
-    BlogPost.create!(
-      title_en: 'My title',
-      title_fr: 'Mon titre',
-      title_it: 'Il mio titolo',
-      content_en: 'My content',
-      content_fr: 'Mon contenu',
-      content_it: 'Il mio contenuto',
-      image:,
-      author: user
-    )
-  end
-  let(:image) do
-    ActiveStorage::Blob.create_and_upload!(
-      io: file_fixture('logo.png').open,
-      filename: 'logo.png',
-      content_type: Mime[:png].to_s
-    )
-  end
-
-  before do
-    resource.update!(
-      title_en: 'My new title',
-      title_fr: 'Mon nouveau titre',
-      title_it: 'Il mio nuovo titolo'
-    )
-  end
-end
-
 RSpec.shared_context 'with login' do
   include_context 'with user'
 

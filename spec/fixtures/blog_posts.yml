@@ -1,5 +1,0 @@
----
-one:
-  title: There is no one who loves pain itself, who seeks after it and wants to have it
-  state: published
-  author_id: <%= User.first.id %>
