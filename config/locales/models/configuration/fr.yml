@@ -4,6 +4,11 @@ fr:
     attributes:
       configuration:
         available_locales: Langues disponibles
+        aws_access_key_id: ID de la clé d’accès Amazon Web Services
+        aws_region: Région Amazon Web Services
+        aws_secret_access_key: Clé d’accès secrète Amazon Web Services
+        azure_storage_access_key: Clé d’accès au stockage Microsoft Azure
+        azure_storage_account_name: Nom du compte de stockage Microsoft Azure
         comments_feature_flag: Activer les commentaires
         company_address: Adresse de la société
         company_logo: Logo de la société
@@ -11,6 +16,8 @@ fr:
         company_registration_number: Numéro SIRET de la société
         company_website: Site web de la société
         gcloud_api_key: Clé API Google Cloud
+        gcs_private_key: Clé privée Google Cloud Storage
+        gcs_private_key_id: ID de clé privée Google Cloud Storage
         google_sign_in_feature_flag: Activer la connexion avec le compte Google
         locale: Langue
         meetings_feature_flag: Activer les réunions
