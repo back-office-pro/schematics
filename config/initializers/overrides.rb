@@ -8,6 +8,8 @@ require 'active_storage/override/blob'
 require 'active_storage/service/tenant_s3_service'
 require 'active_support/dependencies'
 require 'arel/override/predications'
+require 'bootstrap-email/config'
+require 'bootstrap-email/override/config'
 require 'fx/adapters/postgres'
 require 'fx/override/adapters/postgres'
 require 'onelogin/override/ruby-saml/settings'
@@ -38,6 +40,7 @@ OneLogin::RubySaml::Settings.prepend(OneLogin::Override::RubySaml::Settings)
 Arel::Predications.prepend(Arel::Override::Predications)
 SolidQueue::Configuration.prepend(SolidQueue::Override::Configuration)
 Fx::Adapters::Postgres.prepend(Fx::Override::Adapters::Postgres)
+BootstrapEmail::Config.prepend(BootstrapEmail::Override::Config)
 
 # TODO: remove when upgrading to Rails 8
 ActiveSupport.on_load(:active_record_sqlite3adapter) do
