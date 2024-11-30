@@ -49,15 +49,15 @@ module Schematics
 
         def metric_preferences = current_user
           .preferences
-          .fetch("dashboard_metrics_#{@dashboard.id}", [])
+          .fetch("dashboard_metrics_#{@dashboard.id}", [nil])
 
         def chart_preferences = current_user
           .preferences
-          .fetch("dashboard_charts_#{@dashboard.id}", [])
+          .fetch("dashboard_charts_#{@dashboard.id}", [nil])
 
         def ranking_preferences = current_user
           .preferences
-          .fetch("dashboard_rankings_#{@dashboard.id}", [])
+          .fetch("dashboard_rankings_#{@dashboard.id}", [nil])
       end
     end
   end
