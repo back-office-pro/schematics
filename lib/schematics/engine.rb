@@ -50,6 +50,7 @@ require 'rails'
 require 'rails-i18n'
 require 'ransack'
 require 'ransack-enum'
+# TODO: Enable back when Ratonvirus will be compatible with Rails 8
 # require 'ratonvirus'
 # require 'ratonvirus/clamby'
 require 'responders'

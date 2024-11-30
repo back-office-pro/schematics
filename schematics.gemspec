@@ -113,6 +113,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails-i18n', '8.0.1'
   spec.add_dependency 'ransack', '4.2.1'
   spec.add_dependency 'ransack-enum', '1.0.0'
+  # TODO: Enable back when Ratonvirus will be compatible with Rails 8
   # spec.add_dependency 'ratonvirus', '0.4.3'
   # spec.add_dependency 'ratonvirus-clamby', '0.4.0'
   spec.add_dependency 'responders', '3.1.1'
