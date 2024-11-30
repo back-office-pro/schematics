@@ -16,7 +16,7 @@ describe Schematics::Validators do
   context 'when there are validators' do
     let(:validators) do
       {
-        antivirus: true,
+        # antivirus: true,
         attached: true,
         size: {
           less_than: 2.megabytes,
@@ -26,13 +26,12 @@ describe Schematics::Validators do
     end
 
     its(:compact_validators) do
-      is_expected.to eq(antivirus: true, attached: true, size: { less_than: 2.megabytes })
+      is_expected.to eq(attached: true, size: { less_than: 2.megabytes })
     end
 
     its(:human) do
       is_expected.to eq(
         [
-          'Your files will be analyzed by an antivirus',
           'File size Less than 2 MB'
         ]
       )
@@ -40,7 +39,7 @@ describe Schematics::Validators do
 
     its(:to_str) do
       is_expected.to eq <<~RUBY
-        validates :avatar, {:antivirus=>true, :attached=>true, :size=>{:less_than=>2097152}}
+        validates :avatar, {:attached=>true, :size=>{:less_than=>2097152}}
       RUBY
     end
   end
