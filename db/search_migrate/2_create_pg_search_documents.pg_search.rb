@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreatePgSearchDocuments < ActiveRecord::Migration[7.2]
+class CreatePgSearchDocuments < ActiveRecord::Migration[8.0]
   def change
     create_table :pg_search_documents, id: :uuid do |t|
       t.text :content
