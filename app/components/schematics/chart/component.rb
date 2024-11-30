@@ -4,7 +4,8 @@ module Schematics
   module Chart
     class Component < ApplicationComponent
       with_collection_parameter :chart
-      delegate :icon,
+      delegate :id,
+               :icon,
                :kind,
                :suffix,
                :type,
@@ -23,7 +24,7 @@ module Schematics
         @dashboard_id = id
       end
 
-      def id = dom_id(@chart, @dashboard_id)
+      def css_id = dom_id(@chart, @dashboard_id)
 
       def empty = t('schematics.application.resource.empty')
 
