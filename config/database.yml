@@ -14,6 +14,7 @@ sqlite3: &sqlite3
   <<: *default
   adapter: sqlite3
   timeout: 5000
+  default_transaction_mode: IMMEDIATE
 
 development:
   primary:
