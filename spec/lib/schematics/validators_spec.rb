@@ -16,7 +16,6 @@ describe Schematics::Validators do
   context 'when there are validators' do
     let(:validators) do
       {
-        # antivirus: true,
         attached: true,
         size: {
           less_than: 2.megabytes,
