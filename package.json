@@ -17,7 +17,7 @@
     "file-saver-es": "2.0.5",
     "flag-icons": "7.2.3",
     "pluralize-esm": "9.0.5",
-    "sortablejs": "1.15.4",
+    "sortablejs": "1.15.6",
     "swagger-ui-dist": "5.18.2",
     "swagger-ui-themes": "3.0.1",
     "timeago.js": "4.0.2",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "standard": "17.1.2",
-    "stylelint": "16.10.0",
+    "stylelint": "16.11.0",
     "stylelint-config-standard": "36.0.1"
   },
   "stylelint": {
