@@ -6,9 +6,9 @@ module Schematics
 
     delegate :entity, to: :model_class, private: true
 
-    def resource_params = params
-      .require(entity.name.to_sym)
-      .permit(permitted_params.excluding(disallowed_params))
+    def resource_params
+      params.expect(entity.name.to_sym => permitted_params.excluding(disallowed_params))
+    end
 
     def resource_params_with_defaults
       resource_params.merge(resource_defaults.compact)

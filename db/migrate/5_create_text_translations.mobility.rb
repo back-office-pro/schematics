@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateTextTranslations < ActiveRecord::Migration[7.2]
+class CreateTextTranslations < ActiveRecord::Migration[8.0]
   def change
     create_table :mobility_text_translations, id: :uuid do |t|
       t.string :locale, null: false

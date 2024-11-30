@@ -33,8 +33,8 @@ module Schematics
       )
     end
 
-    def autocompletion_params = params
-      .require(:autocompletion)
-      .permit(:query)
+    def autocompletion_params
+      params.expect(autocompletion: [:query])
+    end
   end
 end

@@ -50,13 +50,13 @@ require 'rails'
 require 'rails-i18n'
 require 'ransack'
 require 'ransack-enum'
-require 'ratonvirus'
-require 'ratonvirus/clamby'
+# TODO: Enable back when Ratonvirus will be compatible with Rails 8
+# require 'ratonvirus'
+# require 'ratonvirus/clamby'
 require 'responders'
 require 'rollbar'
 require 'rouge'
 require 'route_translator'
-require 'routes_lazy_routes' # TODO: remove when upgrading to Rails 8
 require 'rqrcode'
 require 'ruby-graphviz'
 require 'ruby-vips'
@@ -146,7 +146,7 @@ module Schematics
     config.i18n.fallbacks = true
 
     # Solid Cache
-    config.solid_cache.encrypt = false # TODO: enable when upgrading to Rails 8
+    config.solid_cache.encrypt = true
 
     # MissionControl
     config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'

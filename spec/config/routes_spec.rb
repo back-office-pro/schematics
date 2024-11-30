@@ -6,5 +6,5 @@ describe 'Routes config file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/routes.rb.tt',
-                  '8516908a8c6a38534f4a354dbe9f0bccaee7db56b7acd22b2a3662429be35550'
+                  '388e74019b9906322e7cb8be408270e12c80fd80797ea82aaafaa01c59b6bb6d'
 end

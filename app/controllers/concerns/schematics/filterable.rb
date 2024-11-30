@@ -12,8 +12,7 @@ module Schematics
       return {} unless params.key?(filter_key)
 
       params
-        .require(filter_key)
-        .permit(permitted_filters)
+        .expect(filter_key => permitted_filters)
         .to_h
         .compact_blank
         .deep_symbolize_keys

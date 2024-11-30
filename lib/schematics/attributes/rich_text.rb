@@ -37,7 +37,7 @@ module Schematics
           RUBY
         else
           <<~RUBY
-            has_rich_text :#{name}
+            has_rich_text :#{name}, store_if_blank: false
           RUBY
         end
       end

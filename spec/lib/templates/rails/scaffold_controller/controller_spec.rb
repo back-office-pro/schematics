@@ -6,5 +6,5 @@ describe 'Rails Scaffold Controller template' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/scaffold_controller/templates/controller.rb.tt',
-                  'c665ff399163f09ec6cabc6c33b541647030c9c9b69480933864223ddc2e69cc'
+                  'e4c734902d2bd24750df09153743ac14f314528fcf533a4b8a6d19c768d89770'
 end

@@ -30,34 +30,34 @@ module Schematics
         memoize def metrics = @dashboard
           .metrics
           .with_string_translations
-          .then { _1.in_order_of(:id, metric_preferences.concat(_1.ids).uniq) }
+          .in_order_of(:id, metric_preferences, filter: false)
           .load_async
 
         memoize def charts = @dashboard
           .charts
           .with_string_translations
-          .then { _1.in_order_of(:id, chart_preferences.concat(_1.ids).uniq) }
+          .in_order_of(:id, chart_preferences, filter: false)
           .load_async
 
         memoize def rankings = @dashboard
           .rankings
           .with_string_translations
-          .then { _1.in_order_of(:id, ranking_preferences.concat(_1.ids).uniq) }
+          .in_order_of(:id, ranking_preferences, filter: false)
           .load_async
 
         private
 
         def metric_preferences = current_user
           .preferences
-          .fetch("dashboard_metrics_#{@dashboard.id}", [])
+          .fetch("dashboard_metrics_#{@dashboard.id}", [nil])
 
         def chart_preferences = current_user
           .preferences
-          .fetch("dashboard_charts_#{@dashboard.id}", [])
+          .fetch("dashboard_charts_#{@dashboard.id}", [nil])
 
         def ranking_preferences = current_user
           .preferences
-          .fetch("dashboard_rankings_#{@dashboard.id}", [])
+          .fetch("dashboard_rankings_#{@dashboard.id}", [nil])
       end
     end
   end

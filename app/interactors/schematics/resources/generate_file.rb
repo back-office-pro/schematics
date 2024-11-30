@@ -8,9 +8,6 @@ module Schematics
 
       delegate :user, :serializer, :dropdown, :component_method, to: :context, private: true
       delegate :file, :filename, :extension, :content_type, to: :serializer, private: true
-      delegate :eager_load!, to: ::RoutesLazyRoutes, private: true
-
-      before :eager_load! # TODO: remove when upgrading to Rails 8
 
       def call
         ::ActiveStorage::PurgeJob

@@ -66,8 +66,8 @@ Rails.application.configure do
   config.log_level = :info
   config.log_tags = [:request_id]
   config.lograge.enabled = true
-  config.logger = ActiveSupport::Logger
-                  .new($stdout)
-                  .tap  { |logger| logger.formatter = Logger::Formatter.new }
-                  .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
+  config.logger = ActiveSupport::TaggedLogging.logger($stdout)
+
+  # Health check
+  config.silence_healthcheck_path = '/up'
 end

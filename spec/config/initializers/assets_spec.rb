@@ -6,5 +6,5 @@ describe 'Assets initializer file' do
   it_behaves_like 'an overridden file',
                   :railties,
                   '/lib/rails/generators/rails/app/templates/config/initializers/assets.rb.tt',
-                  'd20d91b802c286748b3b9958ba40f5ae65a9338b5f8eed326e4400feb2d9d83d'
+                  'f55d4ce66ec2b48256ff492c99c7105b7cc1726c78789dffdbee2611e193c1a6'
 end
