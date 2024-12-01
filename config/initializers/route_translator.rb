@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RouteTranslator.config do |config|
-  config.available_locales = Schematics::Engine.config.i18n.available_locales
+  i18n = Rails.configuration.i18n
+  config.available_locales = Rails.env.local? ? [i18n.default_locale] : i18n.available_locales
   config.hide_locale = !Rails.env.test?
 end
