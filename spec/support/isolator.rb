@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-# TODO: Enable back when isolator works with Rails 8
-# require 'isolator'
+require 'isolator'
 
-# Isolator.adapters.action_cable.disable!
+ActiveSupport.on_load(:active_job) do
+  Isolator.adapters.active_job.disable!
+end
+ActiveSupport.on_load(:action_cable) do
+  Isolator.adapters.action_cable.disable!
+end
