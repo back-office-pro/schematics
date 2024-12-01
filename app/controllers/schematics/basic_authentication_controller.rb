@@ -4,8 +4,8 @@ module Schematics
   class BasicAuthenticationController < ApplicationController
     allow_unauthenticated_access
     http_basic_authenticate_with(
-      name: Engine.credentials.basic_auth[:username],
-      password: Engine.credentials.basic_auth[:password]
+      name: Engine.credentials.basic_auth.username,
+      password: Engine.credentials.basic_auth.password
     )
   end
 end
