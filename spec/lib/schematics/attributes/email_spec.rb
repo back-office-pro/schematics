@@ -21,7 +21,6 @@ describe Schematics::Attributes::Email do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
 
   its(:database_type) { is_expected.to eq('citext') }
   its(:column_name) { is_expected.to eq('email') }
@@ -60,8 +59,7 @@ describe Schematics::Attributes::Email do
       Schematics::Options::Unique,
       Schematics::Options::Min,
       Schematics::Options::Limit,
-      Schematics::Options::Length,
-      Schematics::Options::Encrypted
+      Schematics::Options::Length
     )
   end
 

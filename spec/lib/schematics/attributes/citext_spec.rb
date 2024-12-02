@@ -23,7 +23,6 @@ describe Schematics::Attributes::Citext do
   it { is_expected.to be_a(Schematics::Behaviours::Preloadable) }
   it { is_expected.to be_a(Schematics::Behaviours::Translatable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
-  it { is_expected.to be_a(Schematics::Behaviours::Encryptable) }
   it { is_expected.not_to be_case_sensitive }
 
   its(:database_type) { is_expected.to eq('citext') }
@@ -61,8 +60,7 @@ describe Schematics::Attributes::Citext do
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length,
-      Schematics::Options::Normalization,
-      Schematics::Options::Encrypted
+      Schematics::Options::Normalization
     )
   end
 
