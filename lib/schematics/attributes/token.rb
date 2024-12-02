@@ -16,7 +16,7 @@ module Schematics
 
       def unique? = true
 
-      def default = SecureRandom.base58
+      def default = SecureRandom.base58(LENGTH)
 
       def icon = :passport
 
