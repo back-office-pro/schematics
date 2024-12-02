@@ -470,83 +470,74 @@
       {
         "id": "b40047e7-e1a0-4a01-86ca-cce4d53f2e53",
         "name": "openai_access_token",
-        "type": "string",
+        "type": "secret",
         "options": {
           "cached": true,
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "b4a2fc76-3ad1-4278-b477-f0f8ecb59a2a",
         "name": "gcloud_api_key",
-        "type": "string",
+        "type": "secret",
         "options": {
           "cached": true,
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "0dc3d06f-5fcc-411b-8919-c85b00cca458",
         "name": "aws_access_key_id",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "27ae95c0-d025-43e9-a0e2-333a327e5dcb",
         "name": "aws_secret_access_key",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "1466a0b4-2885-4dd4-a94b-c88a6fcd03ba",
         "name": "aws_region",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "815c77ce-71c5-4c19-b10a-3fd98ab0671e",
         "name": "azure_storage_account_name",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "ce968bda-5d39-4f90-88df-1e15286d0170",
         "name": "azure_storage_access_key",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "a005b6bf-aa70-4c76-ac56-e728b36ac2c5",
         "name": "gcs_private_key_id",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       },
       {
         "id": "bb00eb3f-096f-4014-aa72-c6068206fe33",
         "name": "gcs_private_key",
-        "type": "string",
+        "type": "secret",
         "options": {
-          "encrypted": true,
           "group": "api_key"
         }
       }

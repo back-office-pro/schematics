@@ -45,6 +45,8 @@
   = __resource_form_fields_attachments(form:, field:)
 - when Schematics::Attributes::Attachment
   = __resource_form_fields_attachment(form:, field:)
+- when Schematics::Attributes::Secret
+  = __resource_form_fields_secret(form:, field:)
 - when Schematics::Attributes::Digest
   = __resource_form_fields_digest(form:, field:, autocomplete: 'new-password')
 - when Schematics::Attributes::Boolean

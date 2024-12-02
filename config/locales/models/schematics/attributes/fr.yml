@@ -42,6 +42,7 @@ fr:
       schematics/attributes/rating: Notation
       schematics/attributes/response_code: Code de réponse
       schematics/attributes/rich_text: Editeur de texte riche
+      schematics/attributes/secret: Clé secrète
       schematics/attributes/state_machine: Machine à état
       schematics/attributes/string: Chaîne de caractères
       schematics/attributes/text: Texte

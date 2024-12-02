@@ -42,6 +42,7 @@ en:
       schematics/attributes/rating: Rating
       schematics/attributes/response_code: Response code
       schematics/attributes/rich_text: Rich text editor
+      schematics/attributes/secret: Secret
       schematics/attributes/state_machine: State machine
       schematics/attributes/string: String
       schematics/attributes/text: Text

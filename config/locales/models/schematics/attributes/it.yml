@@ -42,6 +42,7 @@ it:
       schematics/attributes/rating: Valutazione
       schematics/attributes/response_code: Codice di risposta
       schematics/attributes/rich_text: Rich text editor
+      schematics/attributes/secret: Chiave segreta
       schematics/attributes/state_machine: Macchina a stati
       schematics/attributes/string: Stringa
       schematics/attributes/text: Testo

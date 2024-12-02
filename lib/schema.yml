@@ -76,6 +76,7 @@ properties:
         - $ref: '#/$defs/rating'
         - $ref: '#/$defs/response_code'
         - $ref: '#/$defs/rich_text'
+        - $ref: '#/$defs/secret'
         - $ref: '#/$defs/state_machine'
         - $ref: '#/$defs/string'
         - $ref: '#/$defs/text'
@@ -1215,6 +1216,28 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/translated'
+        additionalProperties: false
+  secret:
+    type: object
+    additionalProperties: false
+    required:
+      - name
+      - type
+      - options
+    properties:
+      type:
+        type: string
+        description: An attribute which represents a secret
+        enum:
+          - secret
+      name:
+        $ref: '#/$defs/name'
+      options:
+        type: object
+        anyOf:
+          - $ref: '#/$defs/required'
+          - $ref: '#/$defs/readonly'
+          - $ref: '#/$defs/normalization'
         additionalProperties: false
   state_machine:
     type: object
