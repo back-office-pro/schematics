@@ -18,7 +18,7 @@ module Schematics
 
       def default = SecureRandom.base58
 
-      def icon = :key
+      def icon = :passport
 
       def to_str = super + <<~RUBY
         has_secure_token :#{name}, length: #{LENGTH}

@@ -28,7 +28,7 @@ describe Schematics::Attributes::Token do
   its(:column_name) { is_expected.to eq('access_token') }
   its(:open_api_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_a(String) }
-  its(:icon) { is_expected.to eq(:key) }
+  its(:icon) { is_expected.to eq(:passport) }
   its(:to_spec) { is_expected.to eq('A entity has a **access token** attribute of type *token*') }
   its(:i18n_key) { is_expected.to eq('activerecord.attributes.entity.access_token') }
 
