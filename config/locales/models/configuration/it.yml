@@ -35,6 +35,39 @@ it:
           en: Inglese
           fr: Francese
           it: Italiano
+        aws_region:
+          af-south-1: Africa (Cape Town)
+          ap-east-1: Asia Pacifico (Hong Kong)
+          ap-northeast-1: Asia Pacifico (Tokyo)
+          ap-northeast-2: Asia Pacifico (Seoul)
+          ap-northeast-3: Asia Pacifico (Osaka-Locale)
+          ap-south-1: Asia Pacifico (Mumbai)
+          ap-south-2: Asia Pacifico (Hyderabad)
+          ap-southeast-1: Asia Pacifico (Singapore)
+          ap-southeast-2: Asia Pacifico (Sydney)
+          ap-southeast-3: Asia Pacifico (Giacarta)
+          ap-southeast-4: Asia Pacifico (Melbourne)
+          ap-southeast-5: Asia Pacifico (Malesia)
+          ca-central-1: Canada (Centrale)
+          ca-west-1: Canada occidentale (Calgary)
+          eu-central-1: Europa (Francoforte)
+          eu-central-2: Europa (Zurigo)
+          eu-north-1: Europa (Stoccolma)
+          eu-south-1: Europa (Milano)
+          eu-south-2: Europa (Spagna)
+          eu-west-1: Europa (Irlanda)
+          eu-west-2: Europa (Londra)
+          eu-west-3: Europa (Parigi)
+          il-central-1: Israele (Tel Aviv)
+          me-central-1: Medio Oriente (UAE)
+          me-south-1: Medio Oriente (Bahrein)
+          sa-east-1: Sud America (São Paulo)
+          us-east-1: Stati Uniti orientali (N. Virginia)
+          us-east-2: Stati Uniti orientali (Ohio)
+          us-gov-east-1: AWS GovCloud (Stati Uniti orientali)
+          us-gov-west-1: AWS GovCloud (Stati Uniti occidentali)
+          us-west-1: Stati Uniti occidentali (California settentrionale)
+          us-west-2: Stati Uniti occidentali (Oregon)
         locale:
           en: Inglese
           fr: Francese
