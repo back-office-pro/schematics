@@ -5,12 +5,12 @@ module Schematics
     extend ActiveSupport::Concern
 
     def interpolate(resource)
-      liquid_template.render(
-        resource.serialized_json(template: 'show', expand: true),
-        { strict_variables: true, strict_filters: true }
-      )
-    rescue Liquid::SyntaxError
-      nil
+      suppress(Liquid::SyntaxError) do
+        liquid_template.render(
+          resource.serialized_json(template: 'show', expand: true),
+          { strict_variables: true, strict_filters: true }
+        )
+      end
     end
 
     # :reek:UncommunicativeVariableName

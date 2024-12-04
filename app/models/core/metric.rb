@@ -10,12 +10,12 @@ class Metric < Schematics::ApplicationRecord
   end
 
   memoize def value(range = period_range)
-    model_class
-      &.preload_all
-      &.where(created_at: range)
-      &.public_send(aggregate.to_sym, to_sql || :all)
-  rescue ActiveRecord::StatementInvalid
-    nil
+    suppress(ActiveRecord::StatementInvalid) do
+      model_class
+        &.preload_all
+        &.where(created_at: range)
+        &.public_send(aggregate.to_sym, to_sql || :all)
+    end
   end
 
   def value_formatted

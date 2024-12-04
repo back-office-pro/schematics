@@ -23,11 +23,11 @@ module I18n
       private
 
       def fetch(locale, key)
-        Rails.cache.fetch("translations/#{locale}/#{key}/value") do
-          format_lookup ::Translation.lookup(locale, key), key
+        suppress(StandardError) do
+          Rails.cache.fetch("translations/#{locale}/#{key}/value") do
+            format_lookup ::Translation.lookup(locale, key), key
+          end
         end
-      rescue StandardError
-        nil
       end
 
       def format_lookup(translations, key)
