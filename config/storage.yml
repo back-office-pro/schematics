@@ -8,7 +8,31 @@ local:
 
 amazon:
   service: TenantS3
-  access_key_id: <%= ENV.fetch('AWS_ACCESS_KEY_ID', Schematics::Engine.credentials.aws.access_key_id) %>
-  secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCES_KEY', Schematics::Engine.credentials.aws.secret_access_key) %>
-  region: <%= ENV.fetch('AWS_REGION', 'us-east-1') %>
+  access_key_id: <%= Schematics::Engine.credentials.aws&.access_key_id %>
+  secret_access_key: <%= Schematics::Engine.credentials.aws&.secret_access_key %>
+  region: us-east-1
   bucket: <%= Tenant.domain %>
+  http_open_timeout: 1
+  http_read_timeout: 1
+
+microsoft:
+  service: AzureBlob
+  storage_account_name:
+  storage_access_key:
+  container: <%= Tenant.domain %>
+
+google:
+  service: GCS
+  project: <%= Tenant.domain %>
+  bucket: <%= Tenant.domain %>
+  credentials:
+    type: service_account
+    project_id:
+    private_key_id:
+    private_key:
+    client_email:
+    client_id:
+    auth_uri: https://accounts.google.com/o/oauth2/auth
+    token_uri: https://accounts.google.com/o/oauth2/token
+    auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+    client_x509_cert_url:
