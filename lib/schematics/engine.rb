@@ -150,6 +150,7 @@ module Schematics
 
     # MissionControl
     config.mission_control.jobs.base_controller_class = 'Schematics::BasicAuthenticationController'
+    config.mission_control.jobs.http_basic_auth_enabled = false
     config.mission_control.jobs.show_console_help = false
 
     # ViewComponent
