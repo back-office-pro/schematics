@@ -13,6 +13,9 @@ module Schematics
       rescue_from ActionController::UnknownFormat, with: :unknown_format
       rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :invalid_token
       rescue_from Schematics::TriggerError, with: :trigger_error
+      rescue_from Aws::S3::Errors::ServiceError, with: :storage_error
+      rescue_from Google::Cloud::Error, with: :storage_error
+      rescue_from AzureBlob::Error, with: :storage_error
     end
 
     def access_denied
@@ -112,6 +115,17 @@ module Schematics
           format.any { redirect_to index_path, alert: exception.to_s }
           format.json do
             render json: { errors: [trigger: [exception.to_s]] }, status: :bad_request
+          end
+        end
+      end
+    end
+
+    def storage_error(exception)
+      switch_localization do
+        respond_to do |format|
+          format.any { redirect_back_or_to schematics.root_path, alert: exception.to_s }
+          format.json do
+            render json: { errors: [storage: [exception.to_s]] }, status: :bad_request
           end
         end
       end
