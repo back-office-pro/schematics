@@ -40,12 +40,24 @@ module Schematics
 
       def data = { controller: 'tooltip' }
 
+      def onerror = <<~JAVASCRIPT.squish
+        this.onerror=null;
+        this.src="#{image_placeholder_path}";
+        this.classList.add('h-25');
+      JAVASCRIPT
+
       def icon
         @replacement.fetch(:icon, :triangle_exclamation)
       end
 
       def size
         @replacement.fetch(:size, '7x')
+      end
+
+      private
+
+      def image_placeholder_path
+        asset_path('@fortawesome/fontawesome-free/svgs/solid/triangle-exclamation.svg')
       end
     end
   end
