@@ -131,7 +131,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'slim', '5.2.1'
   spec.add_dependency 'solid_cable', '3.0.2'
   spec.add_dependency 'solid_cache', '1.0.6'
-  spec.add_dependency 'solid_queue', '1.0.2'
+  spec.add_dependency 'solid_queue', '1.1.0'
   spec.add_dependency 'sqlite3', '2.4.0'
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '13.2.0'
