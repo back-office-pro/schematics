@@ -7,3 +7,9 @@ Rails.configuration.to_prepare do
   Rails.configuration.paths['config/cable'].unshift Schematics::Engine.root.join('config', 'cable.yml') # rubocop:disable Layout/LineLength
   Rails.configuration.paths['config'].unshift Schematics::Engine.root.join('config')
 end
+
+Rails.configuration.after_initialize do
+  suppress(StandardError) do
+    Configuration.instance.update_storage_services!
+  end
+end
