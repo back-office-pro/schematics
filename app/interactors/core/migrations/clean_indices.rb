@@ -10,9 +10,9 @@ module Core
 
       progressable migration: 65
 
-      def call = migrator_old_entities
-        .filter_map(&:class_name)
-        .map { |searchable_type| PgSearch::Document.delete_by(searchable_type:) }
+      def call = PgSearch::Document.delete_by(
+        searchable_type: migrator_old_entities.filter_map(&:class_name)
+      )
     end
   end
 end
