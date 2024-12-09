@@ -7,7 +7,6 @@ fr:
     created_at/week: Semaine
     created_at/year: Année
     id: Identifiant
-  by: par
   date:
     formats:
       long: "%A %d %B %Y à %H:%M"
@@ -59,6 +58,7 @@ fr:
         mv: male_vowel
   line: Ligne %{line}
   of: des
+  per: par
   prompt: Sélectionner @{f:une|m:un|fv:une|mv:un|un(e)} %{attribute_name}
   since: depuis un(e)
   time:

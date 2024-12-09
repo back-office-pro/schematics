@@ -65,7 +65,7 @@ class Chart < Schematics::ApplicationRecord
   def to_s
     return I18n.t('errors.virtuals.name', name: model) unless model_class
 
-    [ytitle, (I18n.t('by') if xtitle), xtitle&.downcase, period_title].compact.join(' ')
+    [ytitle, (I18n.t('per') if xtitle), xtitle&.downcase, period_title].compact.join(' ')
   end
 
   def type = :"#{kind}_chart"

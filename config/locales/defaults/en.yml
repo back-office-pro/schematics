@@ -7,7 +7,6 @@ en:
     created_at/week: Week
     created_at/year: Year
     id: Identifier
-  by: by
   date:
     formats:
       long: "%A %d %B, %Y at %H:%M"
@@ -55,6 +54,7 @@ en:
         mv: male_vowel
   line: Line %{line}
   of: of
+  per: per
   prompt: Select a %{attribute_name}
   since: since one
   time:
