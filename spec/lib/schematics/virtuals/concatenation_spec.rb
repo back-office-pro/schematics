@@ -63,7 +63,7 @@ describe Schematics::Virtuals::Concatenation do
     is_expected.to eq <<~RUBY
       define_attribute_method :full_name
       def full_name
-        "\#{first_name_formatted} \#{profile.last_name_formatted}"
+        "\#{first_name_formatted} \#{profile&.last_name_formatted}"
       rescue StandardError => e
         Virtuals::Errors::StandardError.build(e)
       end

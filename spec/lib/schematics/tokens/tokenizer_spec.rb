@@ -165,7 +165,7 @@ describe Schematics::Tokens::Tokenizer do
       let(:function) { 'ABS($cost)' }
 
       its([0]) { is_expected.to be_a(Schematics::Tokens::Function) }
-      its([0]) { is_expected.to have_attributes(value: 'self.cost.abs') }
+      its([0]) { is_expected.to have_attributes(value: 'self.cost&.abs') }
     end
   end
 end

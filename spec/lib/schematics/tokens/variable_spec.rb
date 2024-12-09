@@ -24,10 +24,10 @@ describe Schematics::Tokens::Variable do
 
     it { is_expected.to be_with_references }
 
-    its(:value) { is_expected.to eq('self.schema.title') }
+    its(:value) { is_expected.to eq('self.schema&.title') }
     its(:raw_value) { is_expected.to eq('title') }
     its(:to_sql) { is_expected.to eq('schemas.title') }
-    its(:to_str) { is_expected.to eq('#{schema.title_formatted}') } # rubocop:disable Lint/InterpolationCheck
+    its(:to_str) { is_expected.to eq('#{schema&.title_formatted}') } # rubocop:disable Lint/InterpolationCheck
   end
 
   describe '#fn_value' do
@@ -38,7 +38,7 @@ describe Schematics::Tokens::Variable do
     context 'when there is no reference' do
       let(:value) { 'type' }
 
-      it { is_expected.to eq('self.type.sum') }
+      it { is_expected.to eq('self.type&.sum') }
     end
 
     context 'when there is some reference' do

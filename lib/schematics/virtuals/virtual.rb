@@ -99,7 +99,13 @@ module Schematics
         .reject(&:with_references?)
         .map(&:raw_value)
 
-      memoize def tokens = Tokens::Tokenizer.tokenize(function, entity.table_name.pluralize)
+      def variable_method = nil
+
+      memoize def tokens = Tokens::Tokenizer.tokenize(
+        function,
+        entity.table_name.pluralize,
+        variable_method
+      )
 
       def spec_interpolations = super.merge(name:, function:)
     end

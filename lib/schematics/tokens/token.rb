@@ -5,9 +5,10 @@ module Schematics
     class Token
       attr_reader :value
 
-      def initialize(value, prefix = nil)
+      def initialize(value, prefix = nil, suffix = nil)
         @value = value
         @prefix = prefix
+        @suffix = suffix
       end
 
       def fn_value(*) = @value

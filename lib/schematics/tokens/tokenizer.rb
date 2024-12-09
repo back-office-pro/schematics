@@ -8,10 +8,10 @@ module Schematics
     module Tokenizer
       module_function
 
-      def tokenize(function, prefix = nil)
+      def tokenize(function, prefix = nil, suffix = nil)
         function.scan(parser).map do |match|
           klass, value = token_classes.zip(match).to_h.compact.first
-          klass.new(value, prefix)
+          klass.new(value, prefix, suffix)
         end
       end
 

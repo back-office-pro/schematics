@@ -13,16 +13,18 @@ module Schematics
 
       def to_sql = [prefix, raw_value].join('.')
 
-      def to_str = "\#{#{@value}_formatted}"
+      def to_str = "\#{#{safe_value}_formatted}"
 
-      def value = "self.#{@value}"
+      def value = ['self', safe_value, @suffix]
+        .compact
+        .join('.')
 
       def raw_value = @value
         .split('.')
         .last
 
       def fn_value(name)
-        return "#{value}.#{name}" unless with_references?
+        return "#{value}&.#{name}" unless with_references?
 
         "#{references.first}.#{FN_METHODS.fetch(name, name)}(&:#{raw_value})"
       end
@@ -40,6 +42,8 @@ module Schematics
 
         references.map(&:pluralize)
       end
+
+      def safe_value = @value.gsub('.', '&.')
     end
   end
 end

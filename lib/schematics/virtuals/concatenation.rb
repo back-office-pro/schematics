@@ -17,10 +17,7 @@ module Schematics
 
       private
 
-      def method_body = tokens
-        .map(&:to_str)
-        .join
-        .to_json
+      def method_body = %("#{tokens.map(&:to_str).join}")
     end
   end
 end

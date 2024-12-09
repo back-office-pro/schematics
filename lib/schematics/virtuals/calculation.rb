@@ -21,6 +21,10 @@ module Schematics
       def allowed_variables = entity
         .numerable_elements
         .map(&:name)
+
+      protected
+
+      def variable_method = :to_f
     end
   end
 end

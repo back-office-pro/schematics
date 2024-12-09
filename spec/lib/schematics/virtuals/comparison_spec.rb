@@ -67,7 +67,7 @@ describe Schematics::Virtuals::Comparison do
     is_expected.to eq <<~RUBY
       define_attribute_method :big_price
       def big_price
-        self.category.vat == 10 && (self.sold_at == nil || Time.current < self.sold_at)
+        self.category&.vat == 10 && (self.sold_at == nil || Time.current < self.sold_at)
       rescue StandardError => e
         Virtuals::Errors::StandardError.build(e)
       end
