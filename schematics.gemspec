@@ -7,7 +7,7 @@ require 'schematics/version'
 Gem::Specification.new do |spec|
   spec.name = 'schematics'
   spec.version = Schematics::VERSION
-  spec.author = 'Maxence De Rous'
+  spec.author = 'Dev & Software EURL'
   spec.email = 'contact@back-office.pro'
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
