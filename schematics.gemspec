@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name = 'schematics'
   spec.version = Schematics::VERSION
   spec.author = 'Maxence De Rous'
-  spec.email = 'maxence.derous@gmail.com'
+  spec.email = 'contact@back-office.pro'
   spec.homepage = 'https://www.back-office.pro'
   spec.summary = 'BackOffice app builder.'
   spec.license = 'Nonstandard'
