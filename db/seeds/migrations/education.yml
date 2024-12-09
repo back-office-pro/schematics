@@ -65,6 +65,15 @@
           - application/pdf
 - id: <%= SecureRandom.uuid %>
   name: purchase
+  options:
+    icon: cart_shopping
+  virtuals:
+    - id: <%= SecureRandom.uuid %>
+      name: income
+      function: $training.price * ((100 - $discount_code.percentage) / 100)
+      options:
+        precision: 2
+        unit: $
   attributes:
     - id: <%= SecureRandom.uuid %>
       name: customer
@@ -81,6 +90,9 @@
       type: belongs_to
 - id: <%= SecureRandom.uuid %>
   name: discount_code
+  options:
+    icon: tag
+    descriptor: value
   attributes:
     - id: <%= SecureRandom.uuid %>
       name: value
@@ -93,5 +105,6 @@
       type: percentage
       options:
         required: true
+        precision: 0
         greater_than: 0
         less_than_or_equal_to: 100
