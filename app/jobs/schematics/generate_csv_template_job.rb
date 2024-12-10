@@ -2,6 +2,7 @@
 
 module Schematics
   class GenerateCSVTemplateJob < ApplicationJob
+    limits_concurrency key: ->(user) { user }
     queue_as :exports
 
     def perform(user, model_class)
