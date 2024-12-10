@@ -37,7 +37,7 @@ module Core
       [
         aggregate_formatted,
         I18n.t('of'),
-        (model_class.human_attribute_name(field.name).pluralize.downcase if field),
+        (model_class.human_attribute_name(field.name).pluralize(I18n.locale).downcase if field),
         (I18n.t('of') if field),
         model_class.human_name_plural
       ].compact.join(' ')

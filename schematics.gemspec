@@ -79,6 +79,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'icalendar', '2.10.3'
   spec.add_dependency 'image_processing', '1.13.0'
   spec.add_dependency 'importmap-rails', '2.0.3'
+  spec.add_dependency 'inflections', '4.1.0'
   spec.add_dependency 'interactor', '3.1.2'
   spec.add_dependency 'isolator', '1.1.0'
   spec.add_dependency 'letter_opener', '1.10.0'
