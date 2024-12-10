@@ -59,7 +59,7 @@ it:
         male_vowel: :@mv
         mv: male_vowel
   line: Linea %{line}
-  of: di
+  of: dei
   per: per
   prompt: Selezionare @{f:una |m:un |fv:un'|mv:un'|un(a) }%{attribute_name}
   since: da un(a)
