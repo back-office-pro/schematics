@@ -2,7 +2,7 @@
 
 module Schematics
   class GenerateCSVJob < ApplicationJob
-    limits_concurrency key: ->(user) { user }
+    limits_concurrency key: ->(user, *) { user }
     queue_as :exports
 
     def perform(user, resources, dropdown)
