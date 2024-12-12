@@ -13,6 +13,8 @@ module Core
 
       def call
         Backups::Restore.call(backup:) if attached?
+      rescue ActiveStorage::FileNotFoundError => e
+        Rollbar.error(e, '[Migration] RestoreBackup error')
       end
     end
   end
