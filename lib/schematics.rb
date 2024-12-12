@@ -15,6 +15,8 @@ require defined?(Rails::Engine) ? 'schematics/engine' : 'debug/prelude'
 Regexp.timeout = 1
 $stdin.timeout = 1
 
+Warning[:deprecated] = true
+
 loader = Zeitwerk::Loader.for_gem
 loader.enable_reloading
 loader.ignore("#{__dir__}/active_model")
