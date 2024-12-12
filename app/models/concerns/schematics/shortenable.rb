@@ -17,7 +17,7 @@ module Schematics
     end
 
     def to_param
-      based_uuid&.encode('UTF-8') || super
+      based_uuid&.encode(::Encoding::UTF_8) || super
     end
   end
 end
