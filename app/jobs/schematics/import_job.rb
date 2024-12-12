@@ -5,6 +5,8 @@ module Schematics
     include Quietable
     queue_as :imports
 
+    discard_on ActiveStorage::FileNotFoundError
+
     def perform(import)
       return unless import.state_pending?
 
