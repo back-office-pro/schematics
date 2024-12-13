@@ -8,6 +8,7 @@ it:
     enums:
       backup:
         state:
+          error: Errore
           ready: Pronto
           restoring: Restaurazione in corso
     events:

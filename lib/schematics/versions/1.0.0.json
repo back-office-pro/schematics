@@ -2111,7 +2111,8 @@
           "default": "ready",
           "values": [
             "ready",
-            "restoring"
+            "restoring",
+            "error"
           ],
           "events": [
             {
