@@ -7,7 +7,7 @@ require 'active_support/core_ext/numeric/bytes'
 
 module Schematics
   module Attributes
-    class Attachment < Attribute
+    class Attachment < Attribute # rubocop:disable Metrics/ClassLength
       include Behaviours::Renderable
       include Behaviours::Searchable
       include Behaviours::Preloadable
@@ -22,6 +22,10 @@ module Schematics
         Options::Height,
         Options::ContentType
       ).excluding(Options::Default)
+
+      def open_api_type = 'file'
+
+      def open_api_filter_type = ::String
 
       def permitted_params = [
         super,
