@@ -11,6 +11,7 @@ module Core
 
       progressable migration: 60
 
+      # :reek:UncommunicativeVariableName
       def call
         Backups::Restore.call(backup:) if attached?
       rescue ActiveStorage::FileNotFoundError => e
