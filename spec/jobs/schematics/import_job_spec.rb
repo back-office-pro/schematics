@@ -54,5 +54,20 @@ RSpec.describe Schematics::ImportJob do
           .to match('Line 1' => String, 'Line 2' => String)
       end
     end
+
+    context 'when there is a file not found error' do
+      before do
+        allow(import.file)
+          .to receive(:download)
+          .and_raise(ActiveStorage::FileNotFoundError)
+      end
+
+      it 'changes import state from pending to error after discard' do
+        expect { perform_now }
+          .to change { import.reload.state }
+          .from('pending')
+          .to('error')
+      end
+    end
   end
 end

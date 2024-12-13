@@ -7,6 +7,12 @@ module Schematics
 
     discard_on ActiveStorage::FileNotFoundError
 
+    after_discard do |job|
+      PaperTrail.request(enabled: false) do
+        job.arguments.first.reload.state_error!
+      end
+    end
+
     def perform(import)
       return unless import.state_pending?
 
