@@ -4,8 +4,9 @@ module Core
   class ImportsDoc < Schematics::ApplicationDoc
     route_base ImportsController.controller_path
 
-    api :create, 'Import resources with a CSV file' do
-      data 'import[file]', ::String, required: true
+    api :create, 'Import resources with JSON data or a CSV file' do
+      data 'import[file]', 'file'
+      data 'import[resources]', [{}]
 
       body :json, data: ::Import.entity.open_api_body
 
