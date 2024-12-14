@@ -8,15 +8,54 @@ RSpec.describe Core::Imports::ImportData do
   describe '.call' do
     subject(:call) { described_class.call(import:) }
 
-    it { is_expected.to be_a_success }
-    its('import.progress') { is_expected.to eq(100) }
+    context 'with a CSV file' do
+      it { is_expected.to be_a_success }
+      its('import.progress') { is_expected.to eq(100) }
 
-    it 'inserts two resources' do
-      expect { call }.to change(import.model_class, :count).by(2)
+      it 'inserts two resources' do
+        expect { call }.to change(import.model_class, :count).by(2)
+      end
+
+      it 'inserts two versions' do
+        expect { call }.to change(Schematics::Version, :count).by(2)
+      end
     end
 
-    it 'inserts two versions' do
-      expect { call }.to change(Schematics::Version, :count).by(2)
+    context 'with JSON data' do
+      let(:file) { nil }
+      let(:resources) do
+        [
+          {
+            email: 'john.doe@somewhere.com',
+            first_name: 'John',
+            last_name: 'Doe',
+            password: 'Azerty1234?!',
+            locale: 'en',
+            role_id: role.id,
+            time_zone: 'UTC'
+          },
+          {
+            email: 'jane.doe@somewhere.com',
+            first_name: 'Jane',
+            last_name: 'Doe',
+            password: 'Azerty1234?!',
+            locale: 'fr',
+            role_id: role.id,
+            time_zone: 'Paris'
+          }
+        ]
+      end
+
+      it { is_expected.to be_a_success }
+      its('import.progress') { is_expected.to eq(100) }
+
+      it 'inserts two resources' do
+        expect { call }.to change(import.model_class, :count).by(2)
+      end
+
+      it 'inserts two versions' do
+        expect { call }.to change(Schematics::Version, :count).by(2)
+      end
     end
   end
 end
