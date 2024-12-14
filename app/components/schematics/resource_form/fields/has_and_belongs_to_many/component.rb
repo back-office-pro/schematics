@@ -33,7 +33,7 @@ module Schematics
 
           protected
 
-          def attribute_name = super.singularize
+          def attribute_name = super.singularize(I18n.locale)
         end
       end
     end

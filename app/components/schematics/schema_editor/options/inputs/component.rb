@@ -22,7 +22,7 @@ module Schematics
           def include_hidden = false
 
           def include_blank(name = attribute_name)
-            t('prompt', attribute_name: name.singularize.downcase)
+            t('prompt', attribute_name: name.downcase.singularize(I18n.locale))
           end
 
           protected
