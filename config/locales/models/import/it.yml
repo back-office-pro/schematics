@@ -8,6 +8,7 @@ it:
         import_errors: Errori
         model: Data
         progress: Progresso
+        resources: Risorse
         state: Stato
     enums:
       import:

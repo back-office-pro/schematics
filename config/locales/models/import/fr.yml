@@ -8,6 +8,7 @@ fr:
         import_errors: Erreurs
         model: Donnée
         progress: Progression
+        resources: Ressources
         state: Etat
     enums:
       import:

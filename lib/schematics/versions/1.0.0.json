@@ -664,10 +664,17 @@
         "name": "file",
         "type": "attachment",
         "options": {
-          "required": true,
           "content_type": [
             "text/csv"
           ]
+        }
+      },
+      {
+        "id": "df8fed52-177e-4b54-98d7-9d3f9796d7ec",
+        "name": "resources",
+        "type": "jsonb",
+        "options": {
+          "default": []
         }
       },
       {
