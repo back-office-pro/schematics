@@ -5,6 +5,7 @@ class ImportsController < Schematics::ResourcesController
 
   skip_authorize_resource only: %i[new create]
   before_action -> { authorize!(:import, parent_model_class) }, only: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
+  helper_method :attributes
 
   def new
     super
@@ -17,6 +18,11 @@ class ImportsController < Schematics::ResourcesController
   end
 
   protected
+
+  def attributes = entity
+    .fillable_elements
+    .grep_v(Schematics::Attributes::Jsonb)
+    .map { |attribute| attribute.tap { _1.options.merge!(required: true) } }
 
   def resource_defaults
     super.merge(model: parent_model_class.to_s)
