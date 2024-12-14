@@ -9,6 +9,12 @@ class Import < Schematics::ApplicationRecord
     model.safe_constantize
   end
 
+  def data
+    return CSV.parse(file.download, headers: true, encoding: 'utf-8') if file.attached?
+
+    resources
+  end
+
   def import_errors
     super&.transform_keys { |line| I18n.t('line', line:) }
   end

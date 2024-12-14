@@ -7,7 +7,7 @@ module Core
       VALUES_SEPARATOR = ';'
 
       delegate :import, to: :context, private: true
-      delegate :model_class, :file, :model, to: :import, private: true
+      delegate :model_class, :data, :model, to: :import, private: true
       delegate :entity, :i18n_scope, to: :model_class, private: true
       delegate :fillable_elements, to: :entity, private: true
 
@@ -15,8 +15,7 @@ module Core
 
       before { context.data = Concurrent::Hash.new }
 
-      def call = ::CSV
-        .parse(file.download, headers: true, encoding: 'utf-8')
+      def call = data
         .each
         .with_index(1) { |row, line| context.data[line] = convert_row(row.to_h.compact) }
 
