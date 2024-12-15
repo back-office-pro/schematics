@@ -9,7 +9,9 @@ module Schematics
 
     after_discard do |job|
       PaperTrail.request(enabled: false) do
-        job.arguments.first.reload.state_error!
+        suppress(ActiveRecord::RecordNotFound) do
+          job.arguments.first.reload.state_error!
+        end
       end
     end
 
