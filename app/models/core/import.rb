@@ -5,6 +5,8 @@ class Import < Schematics::ApplicationRecord
   delegate :locale, to: :author
   after_create_commit :perform_import_job
 
+  validates :resources, presence: true, unless: -> { file.attached? }
+
   def model_class
     model.safe_constantize
   end
