@@ -36,8 +36,8 @@ describe Schematics::Entities::Entity do
   its(:weight) { is_expected.to eq(0) }
   its(:joins) { is_expected.to be_empty }
   its(:to_str) { is_expected.to be_blank }
-  its(:includes) { is_expected.to eq([{ rich_text_content: [embeds_attachments: :blob] }]) }
-  its(:preload) { is_expected.to eq([{ record: :string_translations }]) }
+  its(:includes) { is_expected.to eq([rich_text_content: [embeds_attachments: :blob]]) }
+  its(:preload) { is_expected.to eq([record: :string_translations]) }
   its(:to_spec) { is_expected.to eq('We manage **discussions**') }
 
   its(:available_options) do
