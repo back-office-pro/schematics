@@ -37,16 +37,23 @@ module Schematics
         if values.any?
           if options.default
             <<~RUBY
-              enum :#{name}, #{to_h}, prefix: true, default: #{options.default.to_json}
+              enum :#{name},
+                   #{to_h},
+                   prefix: true,
+                   validate: { allow_blank: #{allow_blank} },
+                   default: #{options.default.to_json}
             RUBY
           else
             <<~RUBY
-              enum :#{name}, #{to_h}, prefix: true
+              enum :#{name},
+                   #{to_h},
+                   prefix: true,
+                   validate: { allow_blank: #{allow_blank} }
             RUBY
           end
         else
           <<~RUBY
-            enum :#{name}, prefix: true
+            enum :#{name}, prefix: true, validate: { allow_blank: #{allow_blank} }
           RUBY
         end
       end
