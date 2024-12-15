@@ -23,5 +23,23 @@ RSpec.describe Schematics::RestoreBackupJob do
     it 'restores the database backup' do
       expect { perform_now }.not_to change(backup, :state)
     end
+
+    context 'when there is a file not found error' do
+      before do
+        allow(ActiveRecord::Base.connection_pool)
+          .to receive(:disconnect!)
+          .and_return(nil)
+        allow(file)
+          .to receive(:open)
+          .and_raise(ActiveStorage::FileNotFoundError)
+      end
+
+      it 'changes backup state from restoring to error after discard' do
+        expect { perform_now }
+          .to change(backup, :state)
+          .from(Backup::STATE_STATE_RESTORING.to_s)
+          .to(Backup::STATE_STATE_ERROR.to_s)
+      end
+    end
   end
 end

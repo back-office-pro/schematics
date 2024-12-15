@@ -7,6 +7,14 @@ module Schematics
 
     discard_on ActiveStorage::FileNotFoundError
 
+    after_discard do |job|
+      PaperTrail.request(enabled: false) do
+        suppress(ActiveRecord::RecordNotFound) do
+          job.arguments.first.reload.state_error!
+        end
+      end
+    end
+
     def perform(backup)
       ::Core::Backups::Restore.call(backup: backup.file, clean: true)
       backup.reload.state_ready!
