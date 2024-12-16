@@ -36,7 +36,7 @@ describe Schematics::Attributes::Country do
   its(:input_name) { is_expected.to eq('user[country]') }
   its(:icon) { is_expected.to eq(:earth_europe) }
   its(:default) { is_expected.to eq('FR') }
-  its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, allow_blank: true) }
+  its(:validators) { is_expected.to eq(inclusion: { in: ['FR'], allow_blank: true }) }
   its(:weight) { is_expected.to eq(1) }
   its(:to_sql) { is_expected.to eq('users.country') }
   its(:to_s) { is_expected.to eq('schema:user_country') }
@@ -62,7 +62,7 @@ describe Schematics::Attributes::Country do
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :country, {:inclusion=>{:in=>["FR"]}, :allow_blank=>true}
+      validates :country, {:inclusion=>{:in=>["FR"], :allow_blank=>true}}
     RUBY
   end
 
@@ -70,11 +70,14 @@ describe Schematics::Attributes::Country do
     let(:options) { { required: true } }
 
     its(:collection) { is_expected.to eq([%w[France FR]]) }
-    its(:validators) { is_expected.to eq(inclusion: { in: ['FR'] }, presence: true) }
+
+    its(:validators) do
+      is_expected.to eq(inclusion: { in: ['FR'], allow_blank: false }, presence: true)
+    end
 
     its('validators.to_str') do
       is_expected.to eq <<~RUBY
-        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"]}}
+        validates :country, {:presence=>true, :inclusion=>{:in=>["FR"], :allow_blank=>false}}
       RUBY
     end
   end

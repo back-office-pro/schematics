@@ -17,10 +17,9 @@ module Schematics
 
       def search_predicate = :in
 
-      def validators = super.merge(
-        inclusion: { in: values },
-        allow_blank:
-      )
+      def validators
+        super.merge inclusion: { in: values, allow_blank: }
+      end
     end
   end
 end

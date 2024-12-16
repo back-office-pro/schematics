@@ -60,12 +60,12 @@ describe Schematics::Attributes::Mime do
   end
 
   its(:validators) do
-    is_expected.to eq(inclusion: { in: ['image/png'] }, allow_blank: true)
+    is_expected.to eq(inclusion: { in: ['image/png'], allow_blank: true })
   end
 
   its('validators.to_str') do
     is_expected.to eq <<~RUBY
-      validates :content_type, {:inclusion=>{:in=>["image/png"]}, :allow_blank=>true}
+      validates :content_type, {:inclusion=>{:in=>["image/png"], :allow_blank=>true}}
     RUBY
   end
 
