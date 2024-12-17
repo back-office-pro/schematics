@@ -37,7 +37,7 @@ describe Schematics::Virtuals::Concatenation do
 
   its(:open_api_schema_type) { is_expected.to eq(String) }
   its(:open_api_query_type) { is_expected.to eq(String) }
-  its(:to_sql) { is_expected.to eq("CONCAT(users.first_name, ' ', profiles.last_name)") }
+  its(:to_sql) { is_expected.to eq("(users.first_name || ' ' || profiles.last_name)") }
   its(:preload) { is_expected.to eq([:profile]) }
   its(:icon) { is_expected.to eq(:align_justify) }
   its(:weight) { is_expected.to eq(1) }
@@ -54,7 +54,7 @@ describe Schematics::Virtuals::Concatenation do
   its(:search_alias) do
     is_expected.to eq <<~RUBY
       ransacker :full_name do
-        Arel.sql("CONCAT(users.first_name, ' ', profiles.last_name)")
+        Arel.sql("(users.first_name || ' ' || profiles.last_name)")
       end
     RUBY
   end

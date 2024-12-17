@@ -9,8 +9,6 @@ module Schematics
 
       def icon = :align_justify
 
-      def to_sql = "CONCAT(#{super.join(', ')})"
-
       def allowed_variables = entity
         .renderable_elements
         .map(&:name)
@@ -18,6 +16,8 @@ module Schematics
       private
 
       def method_body = %("#{tokens.map(&:to_str).join}")
+
+      def to_sql_separator = ' || '
     end
   end
 end

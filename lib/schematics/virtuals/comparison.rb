@@ -19,8 +19,6 @@ module Schematics
 
       def open_api_schema_type = 'boolean'
 
-      def to_sql = "(#{super.join})"
-
       def to_str = super.concat(scopes_to_str)
 
       def allowed_variables = entity

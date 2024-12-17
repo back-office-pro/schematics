@@ -16,8 +16,6 @@ module Schematics
 
       def open_api_schema_type = ::Float
 
-      def to_sql = "(#{super.join})"
-
       def allowed_variables = entity
         .numerable_elements
         .map(&:name)

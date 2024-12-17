@@ -57,9 +57,7 @@ module Schematics
         .uniq
         .map(&:to_sym)
 
-      def to_sql
-        tokens.map(&:to_sql)
-      end
+      def to_sql = "(#{tokens.map(&:to_sql).join(to_sql_separator)})"
 
       def search_alias = <<~RUBY
         ransacker :#{name} do
@@ -83,6 +81,8 @@ module Schematics
       def tokens_cannot_have_assignment
         errors.add(:function, :assignment) if tokens.any?(Tokens::Assignment)
       end
+
+      def to_sql_separator = nil
 
       def method_body = tokens
         .map(&:value)
