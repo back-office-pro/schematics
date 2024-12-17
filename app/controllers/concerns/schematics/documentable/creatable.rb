@@ -10,7 +10,7 @@ module Schematics
         api :create, "Create #{entity.name}" do
           entity.fillable_elements.each do |element|
             data element.input_name,
-                 element.open_api_type,
+                 element.open_api_body_type,
                  default: element.options.default,
                  required: element.required?
           end

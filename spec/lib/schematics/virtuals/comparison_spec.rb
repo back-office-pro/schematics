@@ -34,8 +34,8 @@ describe Schematics::Virtuals::Comparison do
   it { is_expected.to be_a(Schematics::Behaviours::Internationalizable) }
   it { is_expected.to be_valid }
 
-  its(:open_api_type) { is_expected.to eq('boolean') }
-  its(:open_api_filter_type) { is_expected.to eq('boolean') }
+  its(:open_api_schema_type) { is_expected.to eq('boolean') }
+  its(:open_api_query_type) { is_expected.to eq('boolean') }
   its(:preload) { is_expected.to eq([:category]) }
   its(:icon) { is_expected.to eq(:toggle_on) }
   its(:weight) { is_expected.to eq(1) }

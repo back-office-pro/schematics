@@ -7,7 +7,9 @@ module Schematics
     class HasOne < Association
       include Behaviours::Searchable
 
-      def open_api_type = super.first
+      def open_api_schema_type = super.first
+
+      def open_api_query_type = ::String
 
       def search_column = :"#{name}_#{descriptor.name}"
 

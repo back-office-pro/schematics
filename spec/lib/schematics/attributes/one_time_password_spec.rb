@@ -25,7 +25,7 @@ describe Schematics::Attributes::OneTimePassword do
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('otp_secret') }
-  its(:open_api_type) { is_expected.to eq(String) }
+  its(:open_api_schema_type) { is_expected.to eq(String) }
   its(:default) { is_expected.to be_nil }
   its(:validators) { is_expected.to be_empty }
   its(:icon) { is_expected.to eq(:mobile_screen) }

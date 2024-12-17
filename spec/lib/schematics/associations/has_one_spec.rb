@@ -34,8 +34,8 @@ describe Schematics::Associations::HasOne do
   its(:class_name) { is_expected.to eq('Entity') }
   its(:column_name) { is_expected.to eq('schema_id') }
   its(:inverse_of) { is_expected.to eq('schema') }
-  its(:open_api_type) { is_expected.to eq(id!: String) }
-  its(:open_api_filter_type) { is_expected.to eq(String) }
+  its(:open_api_schema_type) { is_expected.to eq(id: String, type: String) }
+  its(:open_api_query_type) { is_expected.to eq(String) }
   its(:weight) { is_expected.to eq(3) }
   its(:search_column) { is_expected.to eq(:entity_type) }
   its(:search_predicate) { is_expected.to eq(:i_cont) }

@@ -13,16 +13,7 @@ module Schematics
         ransack_alias :#{name}, :#{search_column}
       RUBY
 
-      def open_api_filter_type
-        case open_api_type
-        when Hash
-          open_api_type.values.first
-        when Array
-          open_api_type.first
-        else
-          open_api_type
-        end
-      end
+      def open_api_query_type = open_api_schema_type
     end
   end
 end

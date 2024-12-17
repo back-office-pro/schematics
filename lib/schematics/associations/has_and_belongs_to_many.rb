@@ -41,6 +41,8 @@ module Schematics
 
       def source = inverse_of.pluralize
 
+      def open_api_body_type = [::String]
+
       def inverse_entity = schema.find_entity_by_name(association_type)
 
       def association_type = super.singularize

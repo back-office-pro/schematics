@@ -23,7 +23,8 @@ describe Schematics::Attributes::Digest do
 
   its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('password_digest') }
-  its(:open_api_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq(String) }
+  its(:open_api_schema_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('entity[password_digest]') }
   its(:default) { is_expected.to eq('Azerty1234?!') }
   its(:permitted_params) { is_expected.to eq(%i[password password_confirmation]) }

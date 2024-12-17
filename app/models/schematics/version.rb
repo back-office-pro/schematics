@@ -14,7 +14,7 @@ module Schematics
       id: ::String,
       created_at: ::DateTime,
       event: ::String,
-      user: {},
+      user: { id: ::String, full_name: ::String },
       item: {},
       object_changes: {}
     }.freeze

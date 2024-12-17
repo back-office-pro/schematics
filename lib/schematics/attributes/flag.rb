@@ -5,7 +5,9 @@ module Schematics
     class Flag < Enum
       def default = [super]
 
-      def open_api_type = [super]
+      def open_api_schema_type = [super]
+
+      def open_api_query_type = super.first
 
       def permitted_params = { super => [] }
 

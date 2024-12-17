@@ -18,7 +18,7 @@ module Schematics
 
       def icon = :toggle_on
 
-      def open_api_type = 'boolean'
+      def open_api_schema_type = 'boolean'
 
       def search_predicate = :eq
 

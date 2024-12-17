@@ -19,9 +19,16 @@ module Schematics
           .push(:id, :_destroy)
       }
 
+      def open_api_body_type = entity
+        .open_api_body
+        .values
+        .map { _1.merge(id: String, _destroy: 'boolean') }
+
       def input_name = "#{entity.name}[#{attributes_param_key}]"
 
       def default = [entity.default]
+
+      def to_open_api_body = [attributes_param_key, open_api_body_type]
 
       def to_str = super.concat(accepts_nested_attributes_for_to_str)
 

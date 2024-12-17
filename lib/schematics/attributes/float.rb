@@ -23,7 +23,7 @@ module Schematics
 
       def default = super.to_f
 
-      def open_api_type = ::Float
+      def open_api_schema_type = ::Float
     end
   end
 end

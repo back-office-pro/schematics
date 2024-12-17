@@ -27,8 +27,9 @@ describe Schematics::Attributes::Currency do
 
   its(:database_type) { is_expected.to eq('float') }
   its(:column_name) { is_expected.to eq('price') }
-  its(:open_api_type) { is_expected.to eq(Float) }
-  its(:open_api_filter_type) { is_expected.to eq(Float) }
+  its(:open_api_body_type) { is_expected.to eq(Float) }
+  its(:open_api_schema_type) { is_expected.to eq(Float) }
+  its(:open_api_query_type) { is_expected.to eq(Float) }
   its(:input_name) { is_expected.to eq('product[price]') }
   its(:validators) { is_expected.to eq(numericality: { allow_blank: true }) }
   its(:icon) { is_expected.to eq(:money_bill_wave) }

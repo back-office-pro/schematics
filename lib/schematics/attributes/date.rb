@@ -28,7 +28,7 @@ module Schematics
         Options::EndDate
       )
 
-      def open_api_type = ::Date
+      def open_api_schema_type = ::Date
 
       def group_method = :group_by_day
 

@@ -34,7 +34,8 @@ describe Schematics::Associations::HasManyNested do
   its(:type) { is_expected.to eq('has_many') }
   its(:name) { is_expected.to eq('entities') }
   its(:class_name) { is_expected.to eq('Entity') }
-  its(:open_api_type) { is_expected.to eq([{ id!: String }]) }
+  its(:open_api_schema_type) { is_expected.to eq([id: String, type: String]) }
+  its(:open_api_body_type) { is_expected.to eq([id: String, type: String, _destroy: 'boolean']) }
   its(:input_name) { is_expected.to eq('entity[entities_attributes]') }
   its(:weight) { is_expected.to eq(3) }
   its(:to_spec) { is_expected.to eq('A schema has many **entities**') }

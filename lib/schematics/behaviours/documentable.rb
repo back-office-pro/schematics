@@ -3,9 +3,9 @@
 module Schematics
   module Behaviours
     module Documentable
-      def open_api_type = ::String
+      def open_api_schema_type = ::String
 
-      def to_open_api = [name, open_api_type]
+      def to_open_api_schema = [name.to_sym, open_api_schema_type]
     end
   end
 end

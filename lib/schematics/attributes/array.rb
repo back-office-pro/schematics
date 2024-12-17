@@ -19,7 +19,9 @@ module Schematics
 
       def migration_options = super.merge(array: true)
 
-      def open_api_type = [super]
+      def open_api_schema_type = [super]
+
+      def open_api_query_type = super.first
 
       def permitted_params = { super => [] }
 

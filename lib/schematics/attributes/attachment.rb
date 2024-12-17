@@ -23,9 +23,7 @@ module Schematics
         Options::ContentType
       ).excluding(Options::Default)
 
-      def open_api_type = 'file'
-
-      def open_api_filter_type = ::String
+      def open_api_body_type = 'file'
 
       def permitted_params = [
         super,

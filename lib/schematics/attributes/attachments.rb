@@ -16,7 +16,11 @@ module Schematics
 
       def json_default = [super]
 
-      def open_api_type = [super]
+      def open_api_body_type = [super]
+
+      def open_api_schema_type = [super]
+
+      def open_api_query_type = super.first
 
       def permitted_json_params = permitted_params
 

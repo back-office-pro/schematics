@@ -21,8 +21,9 @@ describe Schematics::Attributes::Attachments do
 
   its(:database_type) { is_expected.to eq('attachments') }
   its(:column_name) { is_expected.to eq('files') }
-  its(:open_api_type) { is_expected.to eq(['file']) }
-  its(:open_api_filter_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq(['file']) }
+  its(:open_api_schema_type) { is_expected.to eq([String]) }
+  its(:open_api_query_type) { is_expected.to eq(String) }
   its(:icon) { is_expected.to eq(:file) }
   its(:default) { is_expected.to be_all(Rack::Test::UploadedFile) }
   its(:validators) { is_expected.to eq(storage_quota: true) }

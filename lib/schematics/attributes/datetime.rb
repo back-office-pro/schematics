@@ -7,7 +7,7 @@ module Schematics
         value && localize(value, format: :long)
       end
 
-      def open_api_type = ::DateTime
+      def open_api_schema_type = ::DateTime
     end
   end
 end

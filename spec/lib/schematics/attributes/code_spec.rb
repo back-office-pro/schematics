@@ -31,8 +31,9 @@ describe Schematics::Attributes::Code do
 
   its(:database_type) { is_expected.to eq('text') }
   its(:column_name) { is_expected.to eq('content') }
-  its(:open_api_type) { is_expected.to eq(String) }
-  its(:open_api_filter_type) { is_expected.to eq(String) }
+  its(:open_api_body_type) { is_expected.to eq(String) }
+  its(:open_api_schema_type) { is_expected.to eq(String) }
+  its(:open_api_query_type) { is_expected.to eq(String) }
   its(:input_name) { is_expected.to eq('template[content]') }
   its(:icon) { is_expected.to eq(:code) }
   its(:default) { is_expected.to be_a(String) }
