@@ -27,7 +27,7 @@ module Schematics
       end
 
       def validators
-        super.merge inclusion: { in: values.map(&:to_sym) }
+        super.merge(inclusion: { in: values.map(&:to_sym), allow_blank: }.compact_blank)
       end
     end
   end
