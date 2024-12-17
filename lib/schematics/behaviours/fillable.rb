@@ -21,7 +21,7 @@ module Schematics
 
       def open_api_body_type = open_api_schema_type
 
-      def to_open_api_body = [column_name.to_sym, open_api_body_type]
+      def to_open_api_body = [:"#{column_name}#{'!' if required?}", open_api_body_type]
 
       def to_str
         return super unless options.default
