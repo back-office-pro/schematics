@@ -19,7 +19,7 @@ module Core
 
       def command(file)
         [
-          'pg_restore',
+          'pg_restore', # TODO
           '-v',
           ('-c' if clean),
           '-d',

@@ -18,7 +18,7 @@ module Core
       private
 
       def command = [
-        'pg_dump',
+        'sqlite3', # TODO
         '-Fc',
         ('-a' if table_options.any?),
         table_options,
