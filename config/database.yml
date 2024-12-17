@@ -14,11 +14,13 @@ sqlite3: &sqlite3
   <<: *default
   adapter: sqlite3
   timeout: 30_000
+  extensions:
+    - sqlite_ulid
 
 development:
   primary:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_development
+    <<: *sqlite3
+    database: storage/development.sqlite3
   search:
     <<: *postgresql
     database: <%= Tenant.app_name %>_development_search
@@ -38,8 +40,8 @@ development:
 
 test:
   primary:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_test
+    <<: *sqlite3
+    database: storage/test.sqlite3
   search:
     <<: *postgresql
     database: <%= Tenant.app_name %>_test
@@ -47,10 +49,8 @@ test:
 
 production:
   primary:
-    <<: *postgresql
-    database: <%= Tenant.app_name %>_production
-    username: <%= Tenant.app_name %>
-    password: <%= Rails.application.credentials.database_password %>
+    <<: *sqlite3
+    database: storage/production.sqlite3
   search:
     <<: *postgresql
     database: <%= Tenant.app_name %>_production_search
