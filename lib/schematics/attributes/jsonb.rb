@@ -9,6 +9,8 @@ module Schematics
       include Behaviours::Renderable
       include Behaviours::Encryptable
 
+      def database_type = 'json'
+
       def database_index_type = :gin
 
       def default = {}
