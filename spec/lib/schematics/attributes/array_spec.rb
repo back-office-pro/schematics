@@ -22,7 +22,7 @@ describe Schematics::Attributes::Array do
 
   its(:icon) { is_expected.to eq(:list) }
   its(:database_index_type) { is_expected.to eq(:gin) }
-  its(:database_type) { is_expected.to eq('string') }
+  its(:database_type) { is_expected.to eq('json') }
   its(:column_name) { is_expected.to eq('ids') }
   its(:open_api_body_type) { is_expected.to eq([String]) }
   its(:open_api_schema_type) { is_expected.to eq([String]) }
@@ -35,7 +35,7 @@ describe Schematics::Attributes::Array do
   its(:input_name) { is_expected.to eq('comparison[ids][]') }
   its(:to_sql) { is_expected.to eq('comparisons.ids') }
   its(:to_s) { is_expected.to eq('schema:comparison_ids') }
-  its(:migration_options) { is_expected.to eq(array: true) }
+  its(:migration_options) { is_expected.to be_empty }
   its(:search_column) { is_expected.to eq(:ids) }
   its(:search_predicate) { is_expected.to eq(:any) }
   its(:search_query) { is_expected.to eq(:ids_any) }
