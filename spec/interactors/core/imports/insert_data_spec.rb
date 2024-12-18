@@ -12,6 +12,7 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
+            id: '1pd2jv9zfz9b38m3mhe6pbw5sw',
             email: 'john.doe@somewhere.com',
             first_name: 'John',
             last_name: 'Doe',
@@ -24,6 +25,7 @@ RSpec.describe Core::Imports::InsertData do
             time_zone: 'UTC'
           },
           {
+            id: '6mq63m1z0b8ser84wcg8fqg6as',
             email: 'jane.doe@somewhere.com',
             first_name: 'Jane',
             last_name: 'Doe',
@@ -54,6 +56,7 @@ RSpec.describe Core::Imports::InsertData do
       let(:data) do
         [
           {
+            id: '1pd2jv9zfz9b38m3mhe6pbw5sw',
             email: 'john.doe@somewhere.com',
             first_name: 'John',
             last_name: 'Doe',
@@ -66,6 +69,7 @@ RSpec.describe Core::Imports::InsertData do
             time_zone: 'UTC'
           },
           {
+            id: '6mq63m1z0b8ser84wcg8fqg6as',
             email: 'john.doe@somewhere.com',
             first_name: 'John',
             last_name: 'Doe',

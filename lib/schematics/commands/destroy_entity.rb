@@ -49,7 +49,7 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         ["drop_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=uuid']
+        ['--timestamps=true', '--primary_key_type=string']
       )
 
       def drop_join_table_migration_generator(association)

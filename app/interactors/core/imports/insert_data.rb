@@ -9,7 +9,11 @@ module Core
 
       delegate :import, :data, :fail!, to: :context, private: true
       delegate :model_class, :model, :author, to: :import, private: true
-      delegate :human_attribute_name, :insert_all!, to: :model_class, private: true
+      delegate :human_attribute_name,
+               :insert_all!,
+               :generate_ulid,
+               to: :model_class,
+               private: true
 
       progressable import: 100
 
@@ -30,6 +34,7 @@ module Core
 
       def paper_trail_version(id)
         {
+          id: generate_ulid,
           item_type: model,
           item_id: id,
           event: 'import',

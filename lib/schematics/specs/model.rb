@@ -226,7 +226,7 @@ module Schematics
         end
 
         association_attributes.each do |attribute|
-          it { is_expected.to have_db_column(attribute.column_name.to_sym).of_type(:uuid) }
+          it { is_expected.to have_db_column(attribute.column_name.to_sym).of_type(:string) }
           it do
             is_expected
               .to belong_to(attribute.name.to_sym)

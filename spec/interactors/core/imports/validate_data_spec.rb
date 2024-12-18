@@ -36,6 +36,7 @@ RSpec.describe Core::Imports::ValidateData do
       let(:expected_data) do
         [
           {
+            id: String,
             email: 'john.doe@somewhere.com',
             first_name: 'John',
             last_name: 'DOE',
@@ -48,6 +49,7 @@ RSpec.describe Core::Imports::ValidateData do
             time_zone: 'UTC'
           },
           {
+            id: String,
             email: 'jane.doe@somewhere.com',
             first_name: 'Jane',
             last_name: 'DOE',
@@ -95,6 +97,7 @@ RSpec.describe Core::Imports::ValidateData do
       let(:expected_data) do
         [
           {
+            id: String,
             email: 'john.doe@somewhere.com',
             first_name: 'John',
             last_name: 'DOE',

@@ -14,7 +14,7 @@ module Schematics
         when Behaviours::Migratable
           Rails::Generators::MigrationGenerator.new(
             ["add_#{attribute.name}_to_#{table_name.pluralize}", attribute.to_s],
-            ['--primary_key_type=uuid']
+            ['--primary_key_type=string']
           )
         end
       end

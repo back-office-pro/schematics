@@ -40,7 +40,7 @@ module Schematics
                  .with_user
                  .with_item
                  .load_async
-                 .find_by_decoded_uuid!(params[:id])
+                 .find(params[:id])
     end
 
     def model_class = Version

@@ -10,7 +10,7 @@ module Schematics
     include Loadable
     include Duplicable
     include Serializable
-    include Shortenable
+    include Identifiable
     include Translatable
     include Mentionable
     include Previewable

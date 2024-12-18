@@ -2,13 +2,12 @@
 
 class CreateFriendlyIdSlugs < ActiveRecord::Migration[8.0]
   def change
-    create_table :friendly_id_slugs, id: :uuid do |t|
-      t.string   :slug,           null: false
-      t.uuid     :sluggable_id,   null: false
-      t.string   :sluggable_type, limit: 50
-      t.string   :scope
-      t.string   :locale, null: false
-      t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
+    create_table :friendly_id_slugs do |t|
+      t.string     :slug, null: false
+      t.references :sluggable, polymorphic: true, type: :string, index: false
+      t.string     :scope
+      t.string     :locale, null: false
+      t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }
     end

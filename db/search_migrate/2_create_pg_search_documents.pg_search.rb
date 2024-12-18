@@ -2,9 +2,9 @@
 
 class CreatePgSearchDocuments < ActiveRecord::Migration[8.0]
   def change
-    create_table :pg_search_documents, id: :uuid do |t|
+    create_table :pg_search_documents do |t|
       t.text :content
-      t.references :searchable, polymorphic: true, index: true, type: :uuid
+      t.references :searchable, polymorphic: true, index: true, type: :string
       t.timestamps null: false
     end
     add_index :pg_search_documents,

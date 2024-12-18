@@ -1,13 +1,13 @@
 ---
 one:
-  api_key_id: f22740e6-7580-4f20-9abc-4def403c2834
+  api_key_id: 0n6e06yp8688a9c3xs42d6620c
   ip: 127.0.0.1
   endpoint: /tasks
   request_method: GET
   response_code: 200
   response_time: 100
 two:
-  api_key_id: 7ed2c4db-6dfb-4d7b-94fb-86781f99aa08
+  api_key_id: 4kgcqe53719gqa2xvmgt51mks2
   ip: 127.0.0.1
   endpoint: /users
   request_method: GET

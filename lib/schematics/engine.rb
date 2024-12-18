@@ -7,6 +7,7 @@ require 'active_storage_base64'
 require 'active_storage_validations'
 require 'aws-sdk-s3'
 require 'azure_blob'
+require 'based_uuid'
 require 'bootstrap_form'
 require 'cancancan'
 require 'chartkick'
@@ -97,7 +98,7 @@ module Schematics
 
     # Generators
     config.app_generators do |generator|
-      generator.orm :active_record, primary_key_type: :uuid
+      generator.orm :active_record, primary_key_type: :string
       generator.templates.unshift root.join('lib', 'templates')
       generator.test_framework :rspec
       generator.integration_tool :rspec

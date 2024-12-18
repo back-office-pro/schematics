@@ -2,11 +2,11 @@
 
 class CreateTextTranslations < ActiveRecord::Migration[8.0]
   def change
-    create_table :mobility_text_translations, id: :uuid do |t|
+    create_table :mobility_text_translations do |t|
       t.string :locale, null: false
       t.string :key, null: false
       t.text :value
-      t.references :translatable, polymorphic: true, index: false, type: :uuid
+      t.references :translatable, polymorphic: true, index: false, type: :string
       t.datetime :deleted_at, index: { where: 'deleted_at IS NULL' }
       t.timestamps index: { where: 'deleted_at IS NULL' }
     end

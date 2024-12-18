@@ -45,7 +45,7 @@ module Schematics
         when Entities::Singleton
           instance
         else
-          friendly.find_by_decoded_uuid!(id)
+          friendly.find(id)
         end
       end
 

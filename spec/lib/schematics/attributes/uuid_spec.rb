@@ -43,8 +43,8 @@ describe Schematics::Attributes::Uuid do
   describe '#format' do
     subject { attribute.format(value) }
 
-    let(:value) { 'f44b9276-0b51-45ba-ad48-99704ff83e34' }
+    let(:value) { '22ev1t77qd9ztb67njc6drsf72' }
 
-    it { is_expected.to eq('7m9e97c2th8pxatj4se17zgfhm') }
+    it { is_expected.to eq('22ev1t77qd9ztb67njc6drsf72') }
   end
 end

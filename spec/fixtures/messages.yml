@@ -1,5 +1,5 @@
 ---
 one:
-  id: 1676e074-4c72-4f6c-901d-fb502a351480
+  id: 6thwck7z448v4aqqnhc7eq80n9
   subject: Welcome to BackOffice!
   author_id: <%= User.first.id %>

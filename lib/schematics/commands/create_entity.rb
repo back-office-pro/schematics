@@ -61,7 +61,7 @@ module Schematics
 
       def migration_generator = Rails::Generators::MigrationGenerator.new(
         ["create_#{table_name.pluralize}", *migratable_attributes],
-        ['--timestamps=true', '--primary_key_type=uuid']
+        ['--timestamps=true', '--primary_key_type=string']
       )
 
       def create_join_table_migration_generator(association)

@@ -2,7 +2,7 @@
 
 class CreateActiveStorageTables < ActiveRecord::Migration[8.0]
   def change
-    create_table :active_storage_blobs, id: :uuid do |t|
+    create_table :active_storage_blobs, id: :string do |t|
       t.string   :key,          null: false
       t.string   :filename,     null: false
       t.string   :content_type
@@ -20,10 +20,10 @@ class CreateActiveStorageTables < ActiveRecord::Migration[8.0]
       t.index :byte_size, using: :btree, where: 'deleted_at IS NULL'
     end
 
-    create_table :active_storage_attachments, id: :uuid do |t|
+    create_table :active_storage_attachments, id: :string do |t|
       t.string     :name,   null: false
-      t.references :record, null: false, polymorphic: true, index: false, type: :uuid
-      t.references :blob,   null: false, type: :uuid, index: { where: 'deleted_at IS NULL' }
+      t.references :record, null: false, polymorphic: true, index: false, type: :string
+      t.references :blob,   null: false, type: :string, index: { where: 'deleted_at IS NULL' }
       t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 
       t.timestamps index: { where: 'deleted_at IS NULL' }
@@ -35,8 +35,8 @@ class CreateActiveStorageTables < ActiveRecord::Migration[8.0]
       t.foreign_key :active_storage_blobs, column: :blob_id
     end
 
-    create_table :active_storage_variant_records, id: :uuid do |t|
-      t.belongs_to :blob, null: false, index: false, type: :uuid
+    create_table :active_storage_variant_records, id: :string do |t|
+      t.belongs_to :blob, null: false, index: false, type: :string
       t.string     :variation_digest, null: false
       t.datetime   :deleted_at, index: { where: 'deleted_at IS NULL' }
 

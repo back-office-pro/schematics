@@ -1,4 +1,4 @@
 ---
 one:
-  meeting_id: a44e9214-c886-4ad4-91df-a55ec049270b
+  meeting_id: 6fzrx4fb108zvt0at6nghz09tf
   user_id: <%= User.first.id %>

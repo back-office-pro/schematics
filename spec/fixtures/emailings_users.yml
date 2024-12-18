@@ -1,4 +1,4 @@
 ---
 one:
-  emailing_id: d9f74a4c-98c0-478c-87ed-845ac86243bb
+  emailing_id: 0n4wc3zark8pgsc2e822w0gem5
   user_id: <%= User.first.id %>

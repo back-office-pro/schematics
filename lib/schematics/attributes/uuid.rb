@@ -15,7 +15,7 @@ module Schematics
       def format(value)
         return unless value
 
-        [entity.model_class&.model_name&.human, ::BasedUUID.encode(uuid: value)]
+        [entity.model_class&.model_name&.human, value]
           .compact
           .join(' ')
       end

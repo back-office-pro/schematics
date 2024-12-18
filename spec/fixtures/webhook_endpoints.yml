@@ -1,11 +1,11 @@
 ---
 one:
-  id: 118ecf22-30f5-4622-ad8c-a3755be55e6c
+  id: 0ewctynbrc88a8644hq8mxf4eb
   url: https://jsonplaceholder.typicode.com/todos
   request_method: 1
   secret_key: <%= SecureRandom.uuid %>
 two:
-  id: 0037f59c-5ab5-422e-8c21-d47f03c9401e
+  id: 33bhe8bzmn97msx8qfczsnb2dw
   url: https://www.nonexistingwebsite.com/todos
   request_method: 1
   secret_key: <%= SecureRandom.uuid %>

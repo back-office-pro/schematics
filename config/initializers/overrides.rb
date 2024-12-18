@@ -81,7 +81,7 @@ ActiveSupport.on_load(:active_storage_record) do
 
   include Schematics::Loadable
   include Schematics::Serializable
-  include Schematics::Shortenable
+  include Schematics::Identifiable
   include Schematics::Translatable
 
   loadable concerns: [Schematics::SoftDeletable]
@@ -90,7 +90,7 @@ ActiveSupport.on_load(:active_storage_record) do
   scope :with_slugs, -> { self }
 
   class << self
-    alias_method :finder, :find_by_decoded_uuid!
+    alias_method :finder, :find
 
     def validate_service_configuration(*) = nil
   end
@@ -120,6 +120,7 @@ ActiveSupport.on_load(:action_text_rich_text) do
   require 'mobility/action_text'
 
   include Schematics::SoftDeletable
+  include Schematics::Identifiable
 
   class << self
     def ransackable_attributes(*)
