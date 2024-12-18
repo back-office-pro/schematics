@@ -6,8 +6,8 @@ class CreatePaperTrailVersions < ActiveRecord::Migration[8.0]
       t.references :item, polymorphic: true, type: :string, index: false
       t.string     :event,     null: false
       t.string     :whodunnit, null: false
-      t.jsonb      :object
-      t.jsonb      :object_changes
+      t.json       :object
+      t.json       :object_changes
 
       t.timestamps
     end
