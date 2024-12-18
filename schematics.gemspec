@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.files = Dir['{app,config,db,lib}/**/{*,.*}', 'Capfile', 'package.json']
   spec.executables << 'schematics'
-  spec.add_development_dependency 'debug', '1.9.2'
+  spec.add_development_dependency 'debug', '1.10.0'
   spec.add_development_dependency 'fuubar', '2.5.1'
   spec.add_development_dependency 'i18n-tasks', '1.0.14'
   spec.add_development_dependency 'reek', '6.3.0'
@@ -137,7 +137,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'stimulus-rails', '1.3.4'
   spec.add_dependency 'stripe', '13.2.0'
   spec.add_dependency 'terser', '1.2.4'
-  spec.add_dependency 'test-prof', '1.4.2'
+  spec.add_dependency 'test-prof', '1.4.3'
   spec.add_dependency 'turbo-rails', '2.0.11'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
