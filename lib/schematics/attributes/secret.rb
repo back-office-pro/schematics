@@ -11,6 +11,8 @@ module Schematics
       include Behaviours::Encryptable
       include Behaviours::Normalizable
 
+      def available_options = super.excluding(Options::Encrypted)
+
       def database_type = 'string'
 
       def encrypted? = true

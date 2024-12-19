@@ -78,7 +78,6 @@ describe Schematics::Attributes::StateMachine do
       Schematics::Options::Hidden,
       Schematics::Options::Cached,
       Schematics::Options::Default,
-      Schematics::Options::Readonly,
       Schematics::Options::Values,
       Schematics::Options::Events,
       Schematics::Options::DirectAssignment

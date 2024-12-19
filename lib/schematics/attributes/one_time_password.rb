@@ -6,6 +6,8 @@ module Schematics
       include Behaviours::Migratable
       include Behaviours::Encryptable
 
+      def available_options = super.excluding(Options::Encrypted)
+
       def database_type = 'string'
 
       def encrypted? = true

@@ -8,10 +8,9 @@ module Schematics
       delegate :direct_assignment, to: :options
       validates_associated :events
 
-      def available_options = super.push(
-        Options::Events,
-        Options::DirectAssignment
-      )
+      def available_options = super
+        .excluding(Options::Readonly)
+        .push(Options::Events, Options::DirectAssignment)
 
       def icon = :recycle
 

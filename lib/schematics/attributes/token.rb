@@ -10,6 +10,8 @@ module Schematics
       include Behaviours::Encryptable
       LENGTH = 32
 
+      def available_options = super.excluding(Options::Encrypted)
+
       def database_type = 'string'
 
       def encrypted? = true

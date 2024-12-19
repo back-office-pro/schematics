@@ -46,8 +46,7 @@ describe Schematics::Attributes::Token do
     is_expected.to contain_exactly(
       Schematics::Options::Required,
       Schematics::Options::Hidden,
-      Schematics::Options::Cached,
-      Schematics::Options::Encrypted
+      Schematics::Options::Cached
     )
   end
 

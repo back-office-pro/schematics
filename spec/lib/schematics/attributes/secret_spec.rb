@@ -47,7 +47,6 @@ describe Schematics::Attributes::Secret do
       Schematics::Options::Group,
       Schematics::Options::Default,
       Schematics::Options::Readonly,
-      Schematics::Options::Encrypted,
       Schematics::Options::Normalization
     )
   end
