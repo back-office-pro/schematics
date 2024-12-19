@@ -110,7 +110,6 @@ describe Schematics::Attributes::Code do
         Schematics::Attributes::String,
         Schematics::Attributes::Action,
         Schematics::Attributes::Address,
-        Schematics::Attributes::Citext,
         Schematics::Attributes::Color,
         Schematics::Attributes::Country,
         Schematics::Attributes::Email,

@@ -8,7 +8,7 @@ describe Schematics::Commands::ChangeAttribute do
   let(:entity) { Schematics::Entities::Entity.new(name: 'client') }
   let(:attribute) { Schematics::Attributes::Attribute.build(entity:, type:, name: 'first_name') }
   let(:target) { Schematics::Attributes::String.new(entity:, name: 'first_name') }
-  let(:type) { 'citext' }
+  let(:type) { 'text' }
 
   it { is_expected.to be_a(Schematics::Behaviours::Specifiable) }
 

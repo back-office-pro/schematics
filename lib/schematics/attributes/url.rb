@@ -2,12 +2,17 @@
 
 module Schematics
   module Attributes
-    class Url < Citext
+    # :reek:SubclassedFromCoreClass
+    class Url < String
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
       delegate :schemes, to: :options
 
-      def available_options = super.push(Options::Scheme)
+      def available_options = super
+        .excluding(Options::CaseInsensitive)
+        .push(Options::Scheme)
+
+      def case_insensitive? = true
 
       def default = ::URI
         .const_get(schemes&.first&.upcase || :HTTPS)

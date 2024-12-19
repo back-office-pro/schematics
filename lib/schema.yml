@@ -52,7 +52,6 @@ properties:
         - $ref: '#/$defs/belongs_to'
         - $ref: '#/$defs/boolean'
         - $ref: '#/$defs/byte'
-        - $ref: '#/$defs/citext'
         - $ref: '#/$defs/code'
         - $ref: '#/$defs/color'
         - $ref: '#/$defs/country'
@@ -115,6 +114,15 @@ $defs:
       auto_increment:
         type: boolean
         description: Is the number auto incrementable or not
+  case_insensitive:
+    type: object
+    additionalProperties: false
+    required:
+      - case_insensitive
+    properties:
+      case_insensitive:
+        type: boolean
+        description: Is the string case insensitive or not
   confirm:
     type: object
     additionalProperties: false
@@ -448,6 +456,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'
@@ -601,33 +610,6 @@ $defs:
           - $ref: '#/$defs/precision'
           - $ref: '#/$defs/separator'
         additionalProperties: false
-  citext:
-    type: object
-    additionalProperties: false
-    required:
-      - name
-      - type
-      - options
-    properties:
-      type:
-        type: string
-        description: An attribute which represents a case insensitive text
-        enum:
-          - citext
-      name:
-        $ref: '#/$defs/name'
-      options:
-        type: object
-        anyOf:
-          - $ref: '#/$defs/required'
-          - $ref: '#/$defs/readonly'
-          - $ref: '#/$defs/translated'
-          - $ref: '#/$defs/unique'
-          - $ref: '#/$defs/min'
-          - $ref: '#/$defs/limit'
-          - $ref: '#/$defs/length'
-          - $ref: '#/$defs/normalization'
-        additionalProperties: false
   code:
     type: object
     additionalProperties: false
@@ -675,6 +657,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'
@@ -700,6 +683,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
         additionalProperties: false
   currency:
     type: object
@@ -1018,6 +1002,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'
@@ -1064,6 +1049,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
         additionalProperties: false
   one_time_password:
     type: object
@@ -1135,6 +1121,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'
@@ -1283,6 +1270,7 @@ $defs:
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/translated'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'
@@ -1362,6 +1350,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
         additionalProperties: false
   token:
     type: object
@@ -1452,6 +1441,7 @@ $defs:
           - $ref: '#/$defs/required'
           - $ref: '#/$defs/readonly'
           - $ref: '#/$defs/unique'
+          - $ref: '#/$defs/case_insensitive'
           - $ref: '#/$defs/min'
           - $ref: '#/$defs/limit'
           - $ref: '#/$defs/length'

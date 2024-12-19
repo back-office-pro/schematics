@@ -46,7 +46,7 @@ module Schematics
             it do
               is_expected
                 .to validate_uniqueness_of(attribute.name.to_sym)
-                  .tap { _1.ignoring_case_sensitivity unless attribute.case_sensitive? }
+                  .tap { _1.ignoring_case_sensitivity if attribute.case_insensitive? }
                   .tap { _1.allow_blank unless attribute.required? }
             end
           end

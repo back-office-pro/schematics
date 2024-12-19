@@ -15,7 +15,6 @@ fr:
       schematics/attributes/belongs_to: Association
       schematics/attributes/boolean: Booléen
       schematics/attributes/byte: Octet
-      schematics/attributes/citext: Texte insensible à la casse
       schematics/attributes/code: Editeur de code
       schematics/attributes/color: Couleur
       schematics/attributes/country: Pays

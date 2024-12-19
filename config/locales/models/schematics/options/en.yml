@@ -14,6 +14,7 @@ en:
           square: Square
         auto_increment: Auto increment
         cached: Cached
+        case_insensitive: Case insensitive
         confirm: Confirmation
         content_type: Content type
         core: Core

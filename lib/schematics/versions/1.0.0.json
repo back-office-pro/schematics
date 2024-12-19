@@ -147,11 +147,12 @@
       {
         "id": "9c7dd8d2-cafe-40e3-a968-685525e6f351",
         "name": "name",
-        "type": "citext",
+        "type": "string",
         "options": {
           "unique": true,
           "required": true,
           "translated": true,
+          "case_insensitive": true,
           "limit": 50
         }
       }
@@ -598,11 +599,12 @@
       {
         "id": "bef80aaa-21bf-42a3-aa8a-e70845df914e",
         "name": "name",
-        "type": "citext",
+        "type": "string",
         "options": {
           "unique": true,
           "required": true,
           "translated": true,
+          "case_insensitive": true,
           "limit": 50
         }
       }
@@ -1503,10 +1505,11 @@
       {
         "id": "5344e05a-a819-4c47-a731-c0fb3cfde40c",
         "name": "name",
-        "type": "citext",
+        "type": "string",
         "options": {
           "unique": true,
           "required": true,
+          "case_insensitive": true,
           "limit": 50
         }
       },
@@ -1928,11 +1931,12 @@
       {
         "id": "74e7c6cd-2fac-4158-b611-d3ff3a659fae",
         "name": "subject",
-        "type": "citext",
+        "type": "string",
         "options": {
           "unique": true,
           "required": true,
           "translated": true,
+          "case_insensitive": true,
           "limit": 100
         }
       },
@@ -2261,11 +2265,12 @@
       {
         "id": "88e4b5ca-73fd-43d3-a3ca-c222e3fc1315",
         "name": "title",
-        "type": "citext",
+        "type": "string",
         "options": {
           "unique": true,
           "required": true,
           "translated": true,
+          "case_insensitive": true,
           "limit": 50
         }
       }

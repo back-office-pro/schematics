@@ -43,6 +43,7 @@ describe Schematics::Attributes::Ip do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Unique,
+      Schematics::Options::CaseInsensitive,
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length
@@ -68,7 +69,6 @@ describe Schematics::Attributes::Ip do
         Schematics::Attributes::Text,
         Schematics::Attributes::Action,
         Schematics::Attributes::Address,
-        Schematics::Attributes::Citext,
         Schematics::Attributes::Color,
         Schematics::Attributes::Country,
         Schematics::Attributes::Email,

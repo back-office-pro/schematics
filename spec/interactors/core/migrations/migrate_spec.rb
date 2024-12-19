@@ -526,7 +526,7 @@ RSpec.describe Core::Migrations::Migrate do
               {
                 id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
                 name: 'first_name',
-                type: 'citext'
+                type: 'text'
               }
             ]
           }
@@ -554,7 +554,7 @@ RSpec.describe Core::Migrations::Migrate do
           .and not_change(Translation.with_deleted, :count)
           .and change(Documentation.with_deleted, :count).by(-1)
           .and change(restart_file, :mtime)
-        expect(Dir[root.join('db/migrate/*_change_first_name_column_citext_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
+        expect(Dir[root.join('db/migrate/*_change_first_name_column_text_in_prospects_*.rb')]).not_to be_empty # rubocop:disable Layout/LineLength
       end
     end
 

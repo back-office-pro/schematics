@@ -14,6 +14,7 @@ fr:
           square: Carré
         auto_increment: Auto incrémentation
         cached: En cache
+        case_insensitive: Insensible à la casse
         confirm: Confirmation
         content_type: Type de contenu
         core: Noyau

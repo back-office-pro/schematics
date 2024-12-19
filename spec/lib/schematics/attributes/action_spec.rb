@@ -44,6 +44,7 @@ describe Schematics::Attributes::Action do
       Schematics::Options::Default,
       Schematics::Options::Readonly,
       Schematics::Options::Unique,
+      Schematics::Options::CaseInsensitive,
       Schematics::Options::Min,
       Schematics::Options::Limit,
       Schematics::Options::Length
@@ -67,7 +68,6 @@ describe Schematics::Attributes::Action do
         Schematics::Attributes::String,
         Schematics::Attributes::Text,
         Schematics::Attributes::Address,
-        Schematics::Attributes::Citext,
         Schematics::Attributes::Color,
         Schematics::Attributes::Country,
         Schematics::Attributes::Email,

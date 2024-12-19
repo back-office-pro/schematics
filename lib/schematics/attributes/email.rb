@@ -2,9 +2,14 @@
 
 module Schematics
   module Attributes
-    class Email < Citext
+    # :reek:SubclassedFromCoreClass
+    class Email < String
       include Behaviours::Untranslatable
       include Behaviours::Unnormalizable
+
+      def available_options = super.excluding(Options::CaseInsensitive)
+
+      def case_insensitive? = true
 
       def default = "#{SecureRandom.base58}@#{SecureRandom.base58}.com"
 

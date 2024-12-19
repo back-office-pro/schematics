@@ -338,12 +338,12 @@ describe Schematics::Migrator do
             {
               id: '170ac71c-ffca-4cff-bfaf-bb89afb9b735',
               name: 'first_name',
-              type: 'citext'
+              type: 'text'
             },
             {
               id: 'd46f9336-d17e-4840-bd90-c36c8b44ca6d',
               name: 'last_name',
-              type: 'citext'
+              type: 'text'
             }
           ]
         }
@@ -360,7 +360,7 @@ describe Schematics::Migrator do
       its([0]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::Citext),
+          attribute: kind_of(Schematics::Attributes::Text),
           target: kind_of(Schematics::Attributes::String)
         )
       end
@@ -368,7 +368,7 @@ describe Schematics::Migrator do
       its([1]) do
         is_expected.to have_attributes(
           entity: kind_of(Schematics::Entities::Entity),
-          attribute: kind_of(Schematics::Attributes::Citext),
+          attribute: kind_of(Schematics::Attributes::Text),
           target: kind_of(Schematics::Attributes::String)
         )
       end

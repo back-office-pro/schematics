@@ -21,8 +21,9 @@ describe Schematics::Attributes::Email do
   it { is_expected.to be_a(Schematics::Behaviours::Searchable) }
   it { is_expected.to be_a(Schematics::Behaviours::Fillable) }
   it { is_expected.to be_a(Schematics::Behaviours::Normalizable) }
+  it { is_expected.to be_case_insensitive }
 
-  its(:database_type) { is_expected.to eq('citext') }
+  its(:database_type) { is_expected.to eq('string') }
   its(:column_name) { is_expected.to eq('email') }
   its(:open_api_body_type) { is_expected.to eq(String) }
   its(:open_api_schema_type) { is_expected.to eq(String) }
@@ -132,7 +133,6 @@ describe Schematics::Attributes::Email do
         Schematics::Attributes::Text,
         Schematics::Attributes::Action,
         Schematics::Attributes::Address,
-        Schematics::Attributes::Citext,
         Schematics::Attributes::Color,
         Schematics::Attributes::Country,
         Schematics::Attributes::Ip,
