@@ -83,7 +83,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'interactor', '3.1.2'
   spec.add_dependency 'isolator', '1.1.0'
   spec.add_dependency 'letter_opener', '1.10.0'
-  spec.add_dependency 'liquid', '5.5.1'
+  spec.add_dependency 'liquid', '5.6.0'
   spec.add_dependency 'listen', '3.9.0'
   spec.add_dependency 'lograge', '0.14.0'
   spec.add_dependency 'memery', '1.6.0'
@@ -141,7 +141,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '2.0.11'
   spec.add_dependency 'validate_url', '1.0.15'
   spec.add_dependency 'valid_email', '0.2.1'
-  spec.add_dependency 'view_component', '3.20.0'
+  spec.add_dependency 'view_component', '3.21.0'
   spec.add_dependency 'webmock', '3.24.0'
   spec.add_dependency 'zero-rails_openapi', '2.2.0'
 end
