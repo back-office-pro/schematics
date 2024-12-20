@@ -4,10 +4,7 @@ module Core
   module Backups
     class Create
       include Interactor
-
-      delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
       delegate :create_and_upload!, to: ::ActiveStorage::Blob, private: true
-      delegate :tables, to: :context, private: true
 
       def call
         IO.popen(command) do |io|
@@ -17,16 +14,14 @@ module Core
 
       private
 
-      def command = [
-        'sqlite3', # TODO
-        '-Fc',
-        ('-a' if table_options.any?),
-        table_options,
-        current_database
-      ].flatten.compact.join(' ')
+      def command = %(sqlite3 #{db_path} ".dump #{tables}")
 
-      def table_options
-        Array(tables).map { "-t #{_1}" }
+      def db_path = ::Rails
+        .root
+        .join('storage', "#{Rails.env}.sqlite3")
+
+      def tables
+        Array(context.tables).join(' ')
       end
 
       def key = File.join(

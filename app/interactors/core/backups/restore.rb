@@ -4,8 +4,6 @@ module Core
   module Backups
     class Restore
       include Interactor
-
-      delegate :current_database, to: 'ActiveRecord::Base.lease_connection', private: true
       delegate :disconnect!, to: 'ActiveRecord::Base.connection_pool', private: true
       delegate :backup, :clean, to: :context, private: true
 
@@ -18,15 +16,12 @@ module Core
       private
 
       def command(file)
-        [
-          'pg_restore', # TODO
-          '-v',
-          ('-c' if clean),
-          '-d',
-          current_database,
-          file.path
-        ].compact.join(' ')
+        %(sqlite3 #{db_path} #{clean ? "< #{file.path}" : %(".read #{file.path}")})
       end
+
+      def db_path = ::Rails
+        .root
+        .join('storage', "#{Rails.env}.sqlite3")
     end
   end
 end
